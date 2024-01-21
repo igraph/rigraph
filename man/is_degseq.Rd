@@ -31,8 +31,8 @@ is_degseq(degree(g))
 is_graphical(degree(g))
 }
 \references{
-Z Kiraly, Recognizing graphic degree sequences and generating
-all realizations. TR-2011-11, Egervary Research Group, H-1117, Budapest,
+Z Király, Recognizing graphic degree sequences and generating
+all realizations. TR-2011-11, Egerváry Research Group, H-1117, Budapest,
 Hungary. ISSN 1587-4451 (2012).
 
 B. Cloteaux, Is This for Real? Fast Graphicality Testing, \emph{Comput. Sci. Eng.} 17, 91 (2015).
@@ -46,7 +46,7 @@ Other graphical degree sequences:
 \code{\link{is_graphical}()}
 }
 \author{
-Tamas Nepusz \email{ntamas@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
+Tamás Nepusz \email{ntamas@gmail.com} and Szabolcs Horvát \email{szhorvat@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}

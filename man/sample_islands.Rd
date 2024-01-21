@@ -20,7 +20,7 @@ island.}
 An igraph graph.
 }
 \description{
-Create a number of Erdos-Renyi random graphs with identical parameters, and
+Create a number of Erdős-Rényi random graphs with identical parameters, and
 connect them with the specified number of edges.
 }
 \section{Examples}{

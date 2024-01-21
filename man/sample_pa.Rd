@@ -119,7 +119,7 @@ degree_distribution(g)
 
 }
 \references{
-Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
+Barabási, A.-L. and Albert R. 1999. Emergence of scaling in
 random networks \emph{Science}, 286 509--512.
 
 de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},

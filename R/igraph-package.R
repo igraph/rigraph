@@ -99,7 +99,7 @@ NULL
 #'   probably the best choices.
 #'
 #'   The igraph package includes some classic random graphs like the
-#'   Erdos-Renyi GNP and GNM graphs ([sample_gnp()], [sample_gnm()]) and
+#'   Erdős-Rényi GNP and GNM graphs ([sample_gnp()], [sample_gnm()]) and
 #'   some recent  popular models, like preferential attachment
 #'   ([sample_pa()]) and the small-world model
 #'   ([sample_smallworld()]).

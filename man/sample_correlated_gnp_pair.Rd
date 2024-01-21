@@ -44,7 +44,7 @@ cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 }
 \references{
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
-graph matching for correlated Erdos-Renyi graphs.
+graph matching for correlated Erdős-Rényi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{

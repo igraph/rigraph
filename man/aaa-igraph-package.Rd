@@ -70,7 +70,7 @@ To create graphs from field data, \code{\link[=graph_from_edgelist]{graph_from_e
 probably the best choices.
 
 The igraph package includes some classic random graphs like the
-Erdos-Renyi GNP and GNM graphs (\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_gnm]{sample_gnm()}}) and
+Erdős-Rényi GNP and GNM graphs (\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_gnm]{sample_gnm()}}) and
 some recent  popular models, like preferential attachment
 (\code{\link[=sample_pa]{sample_pa()}}) and the small-world model
 (\code{\link[=sample_smallworld]{sample_smallworld()}}).

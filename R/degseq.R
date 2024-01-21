@@ -68,9 +68,9 @@ is.degree.sequence <- function(out.deg, in.deg = NULL) { # nocov start
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it
 #'   should be `NULL`. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
-#' @author Tamas Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
-#' @references Z Kiraly, Recognizing graphic degree sequences and generating
-#' all realizations. TR-2011-11, Egervary Research Group, H-1117, Budapest,
+#' @author Tamás Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvát \email{szhorvat@gmail.com}
+#' @references Z Király, Recognizing graphic degree sequences and generating
+#' all realizations. TR-2011-11, Egerváry Research Group, H-1117, Budapest,
 #' Hungary. ISSN 1587-4451 (2012).
 #'
 #' B. Cloteaux, Is This for Real? Fast Graphicality Testing, *Comput. Sci. Eng.* 17, 91 (2015).
@@ -111,11 +111,11 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #'   are not. \sQuote{all} means that both loop edges and multiple edges are
 #'   allowed.
 #' @return A logical scalar.
-#' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @author Tamás Nepusz \email{ntamas@@gmail.com}
 #' @references Hakimi SL: On the realizability of a set of integers as degrees
 #' of the vertices of a simple graph. *J SIAM Appl Math* 10:496-506, 1962.
 #'
-#' PL Erdos, I Miklos and Z Toroczkai: A simple Havel-Hakimi type algorithm to
+#' PL Erdős, I Miklós and Z Toroczkai: A simple Havel-Hakimi type algorithm to
 #' realize graphical degree sequences of directed graphs.  *The Electronic
 #' Journal of Combinatorics* 17(1):R66, 2010.
 #' @keywords graphs

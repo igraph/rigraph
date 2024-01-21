@@ -21,8 +21,8 @@ graph (the adjacency matrix being used as a vector).}
 
 \item{p}{A numeric scalar, the probability of an edge between two
 vertices, it must in the open (0,1) interval. The default is the empirical
-edge density of the graph. If you are resampling an Erdos-Renyi graph and
-you know the original edge probability of the Erdos-Renyi model, you should
+edge density of the graph. If you are resampling an Erdős-Rényi graph and
+you know the original edge probability of the Erdős-Rényi model, you should
 supply that explicitly.}
 
 \item{permutation}{A numeric vector, a permutation vector that is
@@ -51,7 +51,7 @@ g2
 }
 \references{
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
-graph matching for correlated Erdos-Renyi graphs.
+graph matching for correlated Erdős-Rényi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{

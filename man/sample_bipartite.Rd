@@ -48,7 +48,7 @@ is ignored for undirected graphs.}
 A bipartite igraph graph.
 }
 \description{
-Generate bipartite graphs using the Erdos-Renyi model
+Generate bipartite graphs using the Erdős-Rényi model
 }
 \details{
 Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and

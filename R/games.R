@@ -459,7 +459,7 @@ aging.prefatt.game <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300, 
 #'   `start.graph`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @references Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
+#' @references Barabási, A.-L. and Albert R. 1999. Emergence of scaling in
 #' random networks *Science*, 286 509--512.
 #'
 #' de Solla Price, D. J. 1965. Networks of Scientific Papers *Science*,
@@ -1604,7 +1604,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
 #' Bipartite random graphs
 #'
-#' Generate bipartite graphs using the Erdos-Renyi model
+#' Generate bipartite graphs using the Erdős-Rényi model
 #'
 #' Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
 #' \eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
@@ -1871,7 +1871,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 
 #' A graph with subgraphs that are each a random graph.
 #'
-#' Create a number of Erdos-Renyi random graphs with identical parameters, and
+#' Create a number of Erdős-Rényi random graphs with identical parameters, and
 #' connect them with the specified number of edges.
 #'
 #' @section Examples:
@@ -2131,8 +2131,8 @@ sample_forestfire <- forest_fire_game_impl
 #'   graph (the adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two
 #'   vertices, it must in the open (0,1) interval. The default is the empirical
-#'   edge density of the graph. If you are resampling an Erdos-Renyi graph and
-#'   you know the original edge probability of the Erdos-Renyi model, you should
+#'   edge density of the graph. If you are resampling an Erdős-Rényi graph and
+#'   you know the original edge probability of the Erdős-Rényi model, you should
 #'   supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
 #'   applied on the vertices of the first graph, to get the second graph.  If
@@ -2143,7 +2143,7 @@ sample_forestfire <- forest_fire_game_impl
 #'   matrix entries is a pair of correlated Bernoulli random variables.
 #'
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
-#' graph matching for correlated Erdos-Renyi graphs.
+#' graph matching for correlated Erdős-Rényi graphs.
 #' <https://arxiv.org/abs/1304.7844>
 #' @family games
 #' @export
@@ -2178,7 +2178,7 @@ sample_correlated_gnp <- correlated_game_impl
 #'   correlated with `corr`.
 #'
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
-#' graph matching for correlated Erdos-Renyi graphs.
+#' graph matching for correlated Erdős-Rényi graphs.
 #' <https://arxiv.org/abs/1304.7844>
 #' @keywords graphs
 #' @family games
