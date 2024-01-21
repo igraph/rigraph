@@ -317,7 +317,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   numeric. If the `sparse` argument is `FALSE`, then character is
 #'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
-#' @param edges Logical scalar, whether to return the edge ids in the matrix.
+#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
 #'   to the matrix. These are only assigned if the `name` vertex attribute
@@ -344,14 +344,14 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
                                 sparse = igraph_opt("sparsematrices")) {
   ensure_igraph(graph)
 
-  if (!missing(edges)) {
-    warning("The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0")
+  if (!missing(edges) && isTRUE(edges)) {
+    lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
-  if (!sparse) {
-    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
-  } else {
+  if (sparse) {
     get.adjacency.sparse(graph, type = type, attr = attr, edges = edges, names = names)
+  } else {
+    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
   }
 }
 

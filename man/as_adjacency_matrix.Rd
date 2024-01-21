@@ -45,7 +45,7 @@ numeric. If the \code{sparse} argument is \code{FALSE}, then character is
 also allowed. The reason for the difference is that the \code{Matrix}
 package does not support character sparse matrices yet.}
 
-\item{edges}{Logical scalar, whether to return the edge ids in the matrix.
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
 For non-existant edges zero is returned.}
 
 \item{names}{Logical constant, whether to assign row and column names
