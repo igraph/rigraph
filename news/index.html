@@ -74,20 +74,11 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-99-99-9000">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-99-99-9000"></a></h3>
-<ul><li><p>Remove <code>R_SEXP_to_hrg</code> use <code>R_SEXP_to_hrg_copy</code> to avoid memory leak (<a href="https://github.com/igraph/rigraph/issues/1075" class="external-link">#1075</a>).</p></li>
-<li><p>Temporarily remove functions with sparse matrices (<a href="https://github.com/igraph/rigraph/issues/1093" class="external-link">#1093</a>).</p></li>
-<li><p>Path to vendor header files (<a href="https://github.com/igraph/rigraph/issues/1089" class="external-link">#1089</a>).</p></li>
-<li><p>Add scalar conversion checks in a few critical places (<a href="https://github.com/igraph/rigraph/issues/1069" class="external-link">#1069</a>).</p></li>
+<ul><li><p>Add scalar conversion checks in a few critical places (<a href="https://github.com/igraph/rigraph/issues/1069" class="external-link">#1069</a>).</p></li>
 <li><p>Check that we receive a scalar when expecting a scalar in C code (<a href="https://github.com/igraph/rigraph/issues/1051" class="external-link">#1051</a>).</p></li>
 <li><p>Check that matrix sizes are in the supported range before passing them to R (<a href="https://github.com/igraph/rigraph/issues/1066" class="external-link">#1066</a>).</p></li>
-<li><p>Local (weighted) transitivity now produces a named vector (<a href="https://github.com/igraph/rigraph/issues/1057" class="external-link">#1057</a>).</p></li>
-<li><p>Fix incorrect usage in <code><a href="../reference/subgraph.html">subgraph.edges()</a></code> example.</p></li>
-<li><p>Remove use of deprecated <code>STR()</code> (<a href="https://github.com/igraph/rigraph/issues/1034" class="external-link">#1034</a>).</p></li>
-<li><p>Stimulus argument dependencies (<a href="https://github.com/igraph/rigraph/issues/1037" class="external-link">#1037</a>).</p></li>
-<li><p>Fix auto-generation and handling of arpack defaults.</p></li>
-<li><p>Double registration of entrypoint removed.</p></li>
-<li><p>Fix some deprecated and incompatible pointers warnings (<a href="https://github.com/igraph/rigraph/issues/1020" class="external-link">#1020</a>).</p></li>
-<li><p>Intersections between edges and rectangle vertices are computed correctly (<a href="https://github.com/igraph/rigraph/issues/1021" class="external-link">#1021</a>).</p></li>
+<li><p><code><a href="../reference/transitivity.html">transitivity()</a></code> now produces a named vector in the local (weighted) case (<a href="https://github.com/igraph/rigraph/issues/1057" class="external-link">#1057</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> correctly computes intersections between edges and rectangle vertices (<a href="https://github.com/igraph/rigraph/issues/1021" class="external-link">#1021</a>).</p></li>
 <li><p>Fix compilation on Windows with spaces in the Rtools path (<a href="https://github.com/igraph/rigraph/issues/1000" class="external-link">#1000</a>).</p></li>
 </ul></div>
 <div class="section level3">
@@ -103,6 +94,7 @@
 <li><p>Move deprecation badge to top of doc pages.</p></li>
 <li><p>Remove usage of <code><a href="../reference/get.adjacency.html">get.adjacency()</a></code> from intro vignettes (<a href="https://github.com/igraph/rigraph/issues/1084" class="external-link">#1084</a>).</p></li>
 <li><p>Fix math formatting in <code><a href="../reference/fit_power_law.html">fit_power_law()</a></code> docs.</p></li>
+<li><p>Fix incorrect usage in <code><a href="../reference/subgraph.html">subgraph.edges()</a></code> example.</p></li>
 <li><p>Clarify that Infomap considers edge directions.</p></li>
 </ul></div>
 <div class="section level3">
