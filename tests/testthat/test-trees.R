@@ -1,6 +1,4 @@
 test_that("is_tree works for non-trees", {
-  skip("Waiting for #935")
-
   g <- make_graph("zachary")
   expect_false(is_tree(g))
   expect_equal(
