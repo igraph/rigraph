@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9028</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.99.99.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,378 +61,75 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.6.0.9028" id="igraph-1609028">igraph 1.6.0.9028<a class="anchor" aria-label="anchor" href="#igraph-1609028"></a></h2>
+<p>This major release brings development in line with the C core at <a href="https://github.com/igraph/igraph" class="external-link uri">https://github.com/igraph/igraph</a>. See <a href="https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md" class="external-link uri">https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”. Version 1.6.0 of the R package used version 0.9.9 of the C core, the changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.</p>
+<p>The change log below is a summary of the changes in the R interface.</p>
+<div class="section level3">
+<h3 id="breaking-changes-1-6-0-9028">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9028"></a></h3>
+<ul><li><p><code>get.edge.ids(multi = TRUE)</code> and <code>as_adjacency_matrix(edges = )</code> are no longer supported (<a href="https://github.com/igraph/rigraph/issues/1101" class="external-link">#1101</a>, <a href="https://github.com/igraph/rigraph/issues/1080" class="external-link">#1080</a>).</p></li>
+<li><p>Remove default value for <code>loops</code> argument of <code><a href="../reference/centr_degree_tmax.html">centr_degree_tmax()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1114" class="external-link">#1114</a>).</p></li>
+<li><p><code><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix()</a></code> no longer supports attributes of type <code>character</code> (<a href="https://github.com/igraph/rigraph/issues/1072" class="external-link">#1072</a>).</p></li>
+<li><p>Remove <code><a href="../reference/isomorphic.html">graph.isomorphic.34()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1065" class="external-link">#1065</a>, <a href="https://github.com/igraph/rigraph/issues/1067" class="external-link">#1067</a>).</p></li>
+<li><p>Remove <code>NA</code> padding for <code>dfs(unreachable = FALSE)$order</code> and <code>$order.out</code> and for <code>bfs(unreachable = FALSE)$order</code>, also for <code>igraph_options(return.vs.es = FALSE)</code> (<a href="https://github.com/igraph/rigraph/issues/1062" class="external-link">#1062</a>, <a href="https://github.com/igraph/rigraph/issues/1124" class="external-link">#1124</a>).</p></li>
+<li><p>Use <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_soft()</a></code> for most deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1024" class="external-link">#1024</a>, <a href="https://github.com/igraph/rigraph/issues/1025" class="external-link">#1025</a>, <a href="https://github.com/igraph/rigraph/issues/1104" class="external-link">#1104</a>).</p></li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-6-0-9028">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9028"></a></h3>
-<ul><li><p><code><a href="../reference/bfs.html">bfs()</a></code> no longer pads <code>order</code> with zeros with <code>igraph_options(return.vs.es = FALSE)</code> (<a href="https://github.com/igraph/rigraph/issues/1124" class="external-link">#1124</a>).</p></li>
-<li><p>Remove <code>R_SEXP_to_hrg</code> use <code>R_SEXP_to_hrg_copy</code> to avoid memory leak (<a href="https://github.com/igraph/rigraph/issues/1075" class="external-link">#1075</a>).</p></li>
+<ul><li><p>Remove <code>R_SEXP_to_hrg</code> use <code>R_SEXP_to_hrg_copy</code> to avoid memory leak (<a href="https://github.com/igraph/rigraph/issues/1075" class="external-link">#1075</a>).</p></li>
+<li><p>Temporarily remove functions with sparse matrices (<a href="https://github.com/igraph/rigraph/issues/1093" class="external-link">#1093</a>).</p></li>
+<li><p>Path to vendor header files (<a href="https://github.com/igraph/rigraph/issues/1089" class="external-link">#1089</a>).</p></li>
+<li><p>Add scalar conversion checks in a few critical places (<a href="https://github.com/igraph/rigraph/issues/1069" class="external-link">#1069</a>).</p></li>
+<li><p>Check that we receive a scalar when expecting a scalar in C code (<a href="https://github.com/igraph/rigraph/issues/1051" class="external-link">#1051</a>).</p></li>
+<li><p>Check that matrix sizes are in the supported range before passing them to R (<a href="https://github.com/igraph/rigraph/issues/1066" class="external-link">#1066</a>).</p></li>
+<li><p>Local (weighted) transitivity now produces a named vector (<a href="https://github.com/igraph/rigraph/issues/1057" class="external-link">#1057</a>).</p></li>
+<li><p>Fix incorrect usage in <code><a href="../reference/subgraph.html">subgraph.edges()</a></code> example.</p></li>
+<li><p>Remove use of deprecated <code>STR()</code> (<a href="https://github.com/igraph/rigraph/issues/1034" class="external-link">#1034</a>).</p></li>
+<li><p>Stimulus argument dependencies (<a href="https://github.com/igraph/rigraph/issues/1037" class="external-link">#1037</a>).</p></li>
+<li><p>Fix auto-generation and handling of arpack defaults.</p></li>
+<li><p>Double registration of entrypoint removed.</p></li>
+<li><p>Fix some deprecated and incompatible pointers warnings (<a href="https://github.com/igraph/rigraph/issues/1020" class="external-link">#1020</a>).</p></li>
+<li><p>Intersections between edges and rectangle vertices are computed correctly (<a href="https://github.com/igraph/rigraph/issues/1021" class="external-link">#1021</a>).</p></li>
+<li><p>Fix compilation on Windows with spaces in the Rtools path (<a href="https://github.com/igraph/rigraph/issues/1000" class="external-link">#1000</a>).</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="features-1-6-0-9028">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9028"></a></h3>
-<ul><li>Breaking change: <code>get.edge.ids(multi = TRUE)</code> is no longer supported (<a href="https://github.com/igraph/rigraph/issues/1101" class="external-link">#1101</a>).</li>
+<ul><li><p>Use 30 bits of R’s RNG (<a href="https://github.com/igraph/rigraph/issues/1079" class="external-link">#1079</a>).</p></li>
+<li><p>Breaking change: Remove <code>NA</code> padding for <code>dfs(unreachable = FALSE)$order</code> and <code>$order.out</code> and for <code>bfs(unreachable = FALSE)$order</code>, also for <code>igraph_options(return.vs.es = FALSE)</code> (<a href="https://github.com/igraph/rigraph/issues/1062" class="external-link">#1062</a>, <a href="https://github.com/igraph/rigraph/issues/1124" class="external-link">#1124</a>).</p></li>
+<li><p>New <code><a href="../reference/k_shortest_paths.html">k_shortest_paths()</a></code> to compute the first k shortest paths between two vertices (<a href="https://github.com/igraph/rigraph/issues/1028" class="external-link">#1028</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="breaking-changes-1-6-0-9028">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9028"></a></h3>
-<ul><li>Breaking change: <code>get.edge.ids(multi = TRUE)</code> is no longer supported (<a href="https://github.com/igraph/rigraph/issues/1101" class="external-link">#1101</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9027" id="igraph-1609027">igraph 1.6.0.9027<a class="anchor" aria-label="anchor" href="#igraph-1609027"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9027">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9027"></a></h3>
-<ul><li>Move deprecation badge to top of doc pages.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9026" id="igraph-1609026">igraph 1.6.0.9026<a class="anchor" aria-label="anchor" href="#igraph-1609026"></a></h2>
-<div class="section level3">
-<h3 id="features-1-6-0-9026">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9026"></a></h3>
-<ul><li>Breaking change: remove default value for ‘loops’ argument of centr_degree_tmax() (<a href="https://github.com/igraph/rigraph/issues/1114" class="external-link">#1114</a>).</li>
+<h3 id="documentation-1-6-0-9028">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9028"></a></h3>
+<ul><li><p>Add GitHub bug report form.</p></li>
+<li><p>New <code><a href="../articles/deprecated-dot-case.html">vignette("deprecated-dot-case")</a></code> that lists deprecated functions and their alternatives (<a href="https://github.com/igraph/rigraph/issues/1013" class="external-link">#1013</a>).</p></li>
+<li><p>Move deprecation badge to top of doc pages.</p></li>
+<li><p>Remove usage of <code><a href="../reference/get.adjacency.html">get.adjacency()</a></code> from intro vignettes (<a href="https://github.com/igraph/rigraph/issues/1084" class="external-link">#1084</a>).</p></li>
+<li><p>Fix math formatting in <code><a href="../reference/fit_power_law.html">fit_power_law()</a></code> docs.</p></li>
+<li><p>Clarify that Infomap considers edge directions.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="continuous-integration-1-6-0-9026">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-6-0-9026"></a></h3>
-<ul><li>Go back to stricter checks (<a href="https://github.com/igraph/rigraph/issues/1012" class="external-link">#1012</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9026">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9026"></a></h3>
-<ul><li>Rm stray alias (<a href="https://github.com/igraph/rigraph/issues/1117" class="external-link">#1117</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9026">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9026"></a></h3>
-<ul><li><p>Use %||% from rlang (<a href="https://github.com/igraph/rigraph/issues/1112" class="external-link">#1112</a>).</p></li>
-<li><p>Breaking change: change R/par.R (<a href="https://github.com/igraph/rigraph/issues/1104" class="external-link">#1104</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-6-0-9026">Testing<a class="anchor" aria-label="anchor" href="#testing-1-6-0-9026"></a></h3>
-<ul><li>Remove top-level code in test-indexing.R (<a href="https://github.com/igraph/rigraph/issues/1085" class="external-link">#1085</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-6-0-9026">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9026"></a></h3>
-<ul><li><p>Breaking change: change R/par.R (<a href="https://github.com/igraph/rigraph/issues/1104" class="external-link">#1104</a>).</p></li>
-<li><p>Breaking change: remove default value for ‘loops’ argument of centr_degree_tmax() (<a href="https://github.com/igraph/rigraph/issues/1114" class="external-link">#1114</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9025" id="igraph-1609025">igraph 1.6.0.9025<a class="anchor" aria-label="anchor" href="#igraph-1609025"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9025">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9025"></a></h3>
-<ul><li><p>Document.</p></li>
-<li><p>Update revdepcheck results.</p></li>
-<li><p>Bump roxygen2 version (<a href="https://github.com/igraph/rigraph/issues/1100" class="external-link">#1100</a>).</p></li>
-<li><p>Remove roxygen2 warnings (<a href="https://github.com/igraph/rigraph/issues/1099" class="external-link">#1099</a>).</p></li>
-<li><p>Use Conventional Commits in upgrade script.</p></li>
-<li><p>Update vendored igraph/C to <a href="mailto:igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe" class="email">igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe</a>.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9025">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9025"></a></h3>
-<ul><li>Add missing param docs (<a href="https://github.com/igraph/rigraph/issues/1005" class="external-link">#1005</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-1-6-0-9025">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-6-0-9025"></a></h3>
-<ul><li>Fixes for Makevars.in for unix (revert accidental file updates) (<a href="https://github.com/igraph/rigraph/issues/1092" class="external-link">#1092</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9024" id="igraph-1609024">igraph 1.6.0.9024<a class="anchor" aria-label="anchor" href="#igraph-1609024"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9024">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9024"></a></h3>
-<ul><li>Temporary remove functions with sparse matrices (<a href="https://github.com/igraph/rigraph/issues/1093" class="external-link">#1093</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9023" id="igraph-1609023">igraph 1.6.0.9023<a class="anchor" aria-label="anchor" href="#igraph-1609023"></a></h2>
-<div class="section level3">
-<h3 id="features-1-6-0-9023">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9023"></a></h3>
-<ul><li>Breaking change: <code><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix()</a></code> no longer supports attributes of type <code>character</code> (<a href="https://github.com/igraph/rigraph/issues/1072" class="external-link">#1072</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-6-0-9023">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9023"></a></h3>
-<ul><li>Breaking change: <code><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix()</a></code> no longer supports attributes of type <code>character</code> (<a href="https://github.com/igraph/rigraph/issues/1072" class="external-link">#1072</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9022" id="igraph-1609022">igraph 1.6.0.9022<a class="anchor" aria-label="anchor" href="#igraph-1609022"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9022">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9022"></a></h3>
-<ul><li>Path to vendor header files (<a href="https://github.com/igraph/rigraph/issues/1089" class="external-link">#1089</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-1-6-0-9022">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9022"></a></h3>
-<ul><li>Use 30 bits of R’s RNG (<a href="https://github.com/igraph/rigraph/issues/1079" class="external-link">#1079</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9022">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9022"></a></h3>
-<ul><li>Reduce warnings from <code>R CMD check</code> (<a href="https://github.com/igraph/rigraph/issues/1087" class="external-link">#1087</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9022">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9022"></a></h3>
-<ul><li>Rm get.adjacency() usage from intro vignettes (<a href="https://github.com/igraph/rigraph/issues/1084" class="external-link">#1084</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9021" id="igraph-1609021">igraph 1.6.0.9021<a class="anchor" aria-label="anchor" href="#igraph-1609021"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9021">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9021"></a></h3>
-<ul><li>Restore <code><a href="../reference/hrg_tree.html">hrg_tree()</a></code> semantics (<a href="https://github.com/igraph/rigraph/issues/1078" class="external-link">#1078</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9020" id="igraph-1609020">igraph 1.6.0.9020<a class="anchor" aria-label="anchor" href="#igraph-1609020"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9020">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9020"></a></h3>
-<ul><li><p>Fix typo in revdepcheck script.</p></li>
-<li><p>Tweak revdepcheck scripts.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9019" id="igraph-1609019">igraph 1.6.0.9019<a class="anchor" aria-label="anchor" href="#igraph-1609019"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9019">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9019"></a></h3>
-<ul><li>Update revdepcheck results.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9018" id="igraph-1609018">igraph 1.6.0.9018<a class="anchor" aria-label="anchor" href="#igraph-1609018"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9018">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9018"></a></h3>
-<ul><li><p>Update revdepcheck results.</p></li>
-<li><p>Exclude bad packages from checks.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9017" id="igraph-1609017">igraph 1.6.0.9017<a class="anchor" aria-label="anchor" href="#igraph-1609017"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9017">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9017"></a></h3>
-<ul><li>Add scalar conversion checks in a few critical places (<a href="https://github.com/igraph/rigraph/issues/1069" class="external-link">#1069</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9017">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9017"></a></h3>
-<ul><li><p>Remove unused vectorlist / matrixlist destructors (<a href="https://github.com/igraph/rigraph/issues/1070" class="external-link">#1070</a>).</p></li>
-<li><p>Breaking change: remove graph.isomorphic.34(), fixes <a href="https://github.com/igraph/rigraph/issues/1065" class="external-link">#1065</a> (<a href="https://github.com/igraph/rigraph/issues/1067" class="external-link">#1067</a>).</p></li>
-<li><p>Use integers for mode enum in cluster_label_prop.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-6-0-9017">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9017"></a></h3>
-<ul><li>Breaking change: remove graph.isomorphic.34(), fixes <a href="https://github.com/igraph/rigraph/issues/1065" class="external-link">#1065</a> (<a href="https://github.com/igraph/rigraph/issues/1067" class="external-link">#1067</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-1-6-0-9017">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-6-0-9017"></a></h3>
-<ul><li>Check that matrix sizes are in the supported range before passing them to R (<a href="https://github.com/igraph/rigraph/issues/1066" class="external-link">#1066</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9016" id="igraph-1609016">igraph 1.6.0.9016<a class="anchor" aria-label="anchor" href="#igraph-1609016"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9016">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9016"></a></h3>
-<ul><li><p>Check that we receive a scalar when expecting a scalar in C code (<a href="https://github.com/igraph/rigraph/issues/1051" class="external-link">#1051</a>).</p></li>
-<li><p>Local (weighted) transitivity now produces a named vector (<a href="https://github.com/igraph/rigraph/issues/1057" class="external-link">#1057</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9016">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9016"></a></h3>
-<ul><li><p>Standardize the handling of some stimulus enum types (<a href="https://github.com/igraph/rigraph/issues/1064" class="external-link">#1064</a>).</p></li>
-<li><p>Improve readability in rinterface.h.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9015" id="igraph-1609015">igraph 1.6.0.9015<a class="anchor" aria-label="anchor" href="#igraph-1609015"></a></h2>
-<div class="section level3">
-<h3 id="features-1-6-0-9015">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9015"></a></h3>
-<ul><li>Breaking change: Remove <code>NA</code> padding for <code>dfs(unreachable = FALSE)$order</code> and <code>$order.out</code> and for <code>bfs(unreachable = FALSE)$order</code> . (<a href="https://github.com/igraph/rigraph/issues/1062" class="external-link">#1062</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9015"></a></h3>
-<ul><li>Revdepcheck and scripts, no new failures.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-6-0-9015">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9015"></a></h3>
-<ul><li>Breaking change: Remove <code>NA</code> padding for <code>dfs(unreachable = FALSE)$order</code> and <code>$order.out</code> and for <code>bfs(unreachable = FALSE)$order</code> . (<a href="https://github.com/igraph/rigraph/issues/1062" class="external-link">#1062</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9014" id="igraph-1609014">igraph 1.6.0.9014<a class="anchor" aria-label="anchor" href="#igraph-1609014"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9014">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9014"></a></h3>
-<ul><li>Fix incorrect usage in subgraph.edges() example.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-1-6-0-9014">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9014"></a></h3>
-<ul><li>New <code><a href="../reference/k_shortest_paths.html">k_shortest_paths()</a></code> to compute the first k shortest paths between two vertices (<a href="https://github.com/igraph/rigraph/issues/1028" class="external-link">#1028</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9014">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9014"></a></h3>
-<ul><li><p>Remove unused types (<a href="https://github.com/igraph/rigraph/issues/1060" class="external-link">#1060</a>).</p></li>
-<li><p>Re-generate docs.</p></li>
-<li><p>Don’t pass attributes to C functions (<a href="https://github.com/igraph/rigraph/issues/1048" class="external-link">#1048</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9014">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9014"></a></h3>
-<ul><li><p>Do not duplicate prototypes, use a common header for rinterface.c / rinterface_extra.c (<a href="https://github.com/igraph/rigraph/issues/1055" class="external-link">#1055</a>).</p></li>
-<li><p>Remove unused stimulus type VERTEXSETLIST_INT (<a href="https://github.com/igraph/rigraph/issues/1049" class="external-link">#1049</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="tests-1-6-0-9014">tests<a class="anchor" aria-label="anchor" href="#tests-1-6-0-9014"></a></h3>
-<ul><li>Test transferring colors in isomorphism functions (<a href="https://github.com/igraph/rigraph/issues/1050" class="external-link">#1050</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-1-6-0-9014">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-6-0-9014"></a></h3>
-<ul><li>Refactor/type-refactorings (<a href="https://github.com/igraph/rigraph/issues/1052" class="external-link">#1052</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9013" id="igraph-1609013">igraph 1.6.0.9013<a class="anchor" aria-label="anchor" href="#igraph-1609013"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9013">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9013"></a></h3>
-<ul><li><p>Remove use of deprecated <code>STR()</code> (<a href="https://github.com/igraph/rigraph/issues/1034" class="external-link">#1034</a>).</p></li>
-<li><p>Stimulus argument dependencies (<a href="https://github.com/igraph/rigraph/issues/1037" class="external-link">#1037</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-1-6-0-9013">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9013"></a></h3>
-<ul><li>Use <code>[]</code> assignment for converting matrices (<a href="https://github.com/igraph/rigraph/issues/1035" class="external-link">#1035</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9013">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9013"></a></h3>
-<ul><li><p>Remove unused includes (<a href="https://github.com/igraph/rigraph/issues/1039" class="external-link">#1039</a>).</p></li>
+<h3 id="internal-1-6-0-9028">Internal<a class="anchor" aria-label="anchor" href="#internal-1-6-0-9028"></a></h3>
+<ul><li><p>Use <code>[]</code> assignment for converting matrices (<a href="https://github.com/igraph/rigraph/issues/1035" class="external-link">#1035</a>).</p></li>
 <li><p>Move towards autogenerating all bindings (<a href="https://github.com/igraph/rigraph/issues/1043" class="external-link">#1043</a>).</p></li>
-<li><p>Avoid deprecated function (<a href="https://github.com/igraph/rigraph/issues/1041" class="external-link">#1041</a>).</p></li>
-<li><p>Use new function in favor of deprecated one (<a href="https://github.com/igraph/rigraph/issues/1038" class="external-link">#1038</a>).</p></li>
-<li><p>Stabilize <code>sources.mk</code> (<a href="https://github.com/igraph/rigraph/issues/1036" class="external-link">#1036</a>).</p></li>
-<li><p>Regenerate parser (<a href="https://github.com/igraph/rigraph/issues/1030" class="external-link">#1030</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9013">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9013"></a></h3>
-<ul><li><p>Clean up some auto-generation code (<a href="https://github.com/igraph/rigraph/issues/1031" class="external-link">#1031</a>).</p></li>
-<li><p>Remove unused parts from code generation (<a href="https://github.com/igraph/rigraph/issues/1032" class="external-link">#1032</a>).</p></li>
+<li><p>Use %||% from rlang (<a href="https://github.com/igraph/rigraph/issues/1112" class="external-link">#1112</a>).</p></li>
 <li><p>Replace loop by <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> when returning vertex and edge sets (<a href="https://github.com/igraph/rigraph/issues/1033" class="external-link">#1033</a>).</p></li>
+<li><p>Do not duplicate prototypes, use a common header for <code>rinterface.c</code> and <code>rinterface_extra.c</code> (<a href="https://github.com/igraph/rigraph/issues/1055" class="external-link">#1055</a>).</p></li>
+<li><p>Clean up some auto-generation code (<a href="https://github.com/igraph/rigraph/issues/1031" class="external-link">#1031</a>), remove unused parts from code generation (<a href="https://github.com/igraph/rigraph/issues/1032" class="external-link">#1032</a>), eliminate the use of some deprecated C functions.</p></li>
+<li><p>Use integers for mode enum in <code><a href="../reference/cluster_label_prop.html">cluster_label_prop()</a></code>.</p></li>
+<li><p>Standardize the handling of some stimulus enum types (<a href="https://github.com/igraph/rigraph/issues/1064" class="external-link">#1064</a>).</p></li>
+<li><p>Remove unused vectorlist / matrixlist destructors (<a href="https://github.com/igraph/rigraph/issues/1070" class="external-link">#1070</a>).</p></li>
+<li><p>Remove unused stimulus type VERTEXSETLIST_INT (<a href="https://github.com/igraph/rigraph/issues/1049" class="external-link">#1049</a>).</p></li>
+<li><p>Remove unused types (<a href="https://github.com/igraph/rigraph/issues/1060" class="external-link">#1060</a>).</p></li>
+<li><p>Fix Stimulus definitions (<a href="https://github.com/igraph/rigraph/issues/997" class="external-link">#997</a>).</p></li>
+<li><p>Avoid deprecated <code>R_igraph_automorphisms()</code> (<a href="https://github.com/igraph/rigraph/issues/999" class="external-link">#999</a>).</p></li>
+<li><p>Use new ARPACK_DEFAULTS symbol from C core for default arpack options.</p></li>
+<li><p>Ignore upstream CITATION file to avoid R CMD check NOTE (<a href="https://github.com/igraph/rigraph/issues/1007" class="external-link">#1007</a>).</p></li>
+<li><p>Add Aviator configuration.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-1-6-0-9028">Testing<a class="anchor" aria-label="anchor" href="#testing-1-6-0-9028"></a></h3>
+<ul><li><p>Remove top-level code in <code>test-indexing.R</code> (<a href="https://github.com/igraph/rigraph/issues/1085" class="external-link">#1085</a>).</p></li>
+<li><p>Test transferring colors in isomorphism functions (<a href="https://github.com/igraph/rigraph/issues/1050" class="external-link">#1050</a>).</p></li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9012" id="igraph-1609012">igraph 1.6.0.9012<a class="anchor" aria-label="anchor" href="#igraph-1609012"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9012">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9012"></a></h3>
-<ul><li>Fix auto-generation and handling of arpack defaults.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9012">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9012"></a></h3>
-<ul><li>Fix math formatting in fit_power_law() docs.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9012">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9012"></a></h3>
-<ul><li>Use new ARPACK_DEFAULTS symbol from C core for default arpack options.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9011" id="igraph-1609011">igraph 1.6.0.9011<a class="anchor" aria-label="anchor" href="#igraph-1609011"></a></h2>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9011">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9011"></a></h3>
-<ul><li><p>Breaking change: Use <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_soft()</a></code> for deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1025" class="external-link">#1025</a>).</p></li>
-<li><p>Breaking change: Use <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_soft()</a></code> for deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1024" class="external-link">#1024</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-6-0-9011">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9011"></a></h3>
-<ul><li><p>Breaking change: Use <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_soft()</a></code> for deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1025" class="external-link">#1025</a>).</p></li>
-<li><p>Breaking change: Use <code><a href="https://lifecycle.r-lib.org/reference/deprecate_soft.html" class="external-link">lifecycle::deprecate_soft()</a></code> for deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1024" class="external-link">#1024</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9010" id="igraph-1609010">igraph 1.6.0.9010<a class="anchor" aria-label="anchor" href="#igraph-1609010"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9010">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9010"></a></h3>
-<ul><li><p>Double registration of entrypoint removed.</p></li>
-<li><p>Fix some deprecated and incompatible pointers warnings (<a href="https://github.com/igraph/rigraph/issues/1020" class="external-link">#1020</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9010"></a></h3>
-<ul><li><p>Update revdepcheck results.</p></li>
-<li><p>Add tools script and template for moving to lifecycle (<a href="https://github.com/igraph/rigraph/issues/1022" class="external-link">#1022</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9010">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9010"></a></h3>
-<ul><li>New <code><a href="../articles/deprecated-dot-case.html">vignette("deprecated-dot-case")</a></code> that lists deprecated functions and their alternatives (<a href="https://github.com/igraph/rigraph/issues/1013" class="external-link">#1013</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9009" id="igraph-1609009">igraph 1.6.0.9009<a class="anchor" aria-label="anchor" href="#igraph-1609009"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9009"></a></h3>
-<ul><li>Intersections between edges and rectangle vertices are computed correctly (<a href="https://github.com/igraph/rigraph/issues/1021" class="external-link">#1021</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9008" id="igraph-1609008">igraph 1.6.0.9008<a class="anchor" aria-label="anchor" href="#igraph-1609008"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9008"></a></h3>
-<ul><li>Add Aviator configuration.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-6-0-9008">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0-9008"></a></h3>
-<ul><li>Clarify that Infomap considers edge directions.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9007" id="igraph-1609007">igraph 1.6.0.9007<a class="anchor" aria-label="anchor" href="#igraph-1609007"></a></h2>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9007">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9007"></a></h3>
-<ul><li><p>Ignore upstream CITATION file to avoid R CMD check NOTE (<a href="https://github.com/igraph/rigraph/issues/1007" class="external-link">#1007</a>).</p></li>
-<li><p>Prepare using lifecycle for deprecations (<a href="https://github.com/igraph/rigraph/issues/1001" class="external-link">#1001</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9006" id="igraph-1609006">igraph 1.6.0.9006<a class="anchor" aria-label="anchor" href="#igraph-1609006"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-6-0-9006">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9006"></a></h3>
-<ul><li>Fix compilation on Windows with spaces in the Rtools path (<a href="https://github.com/igraph/rigraph/issues/1000" class="external-link">#1000</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9006"></a></h3>
-<ul><li>Avoid deprecated <code>R_igraph_automorphisms()</code> (<a href="https://github.com/igraph/rigraph/issues/999" class="external-link">#999</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9005" id="igraph-1609005">igraph 1.6.0.9005<a class="anchor" aria-label="anchor" href="#igraph-1609005"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9005"></a></h3>
-<ul><li><p>Fix Stimulus definitions (<a href="https://github.com/igraph/rigraph/issues/997" class="external-link">#997</a>).</p></li>
-<li><p>Remove duplicate vendored libraries (<a href="https://github.com/igraph/rigraph/issues/996" class="external-link">#996</a>).</p></li>
-<li><p>Remove igraph/C 0.9 (<a href="https://github.com/igraph/rigraph/issues/995" class="external-link">#995</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9004" id="igraph-1609004">igraph 1.6.0.9004<a class="anchor" aria-label="anchor" href="#igraph-1609004"></a></h2>
-<div class="section level3">
-<h3 id="refactoring-1-6-0-9004">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9004"></a></h3>
-<ul><li>Eliminate the use of some deprecated C functions.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9003" id="igraph-1609003">igraph 1.6.0.9003<a class="anchor" aria-label="anchor" href="#igraph-1609003"></a></h2>
-<div class="section level3">
-<h3 id="features-1-6-0-9003">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0-9003"></a></h3>
-<ul><li>Upgrade igraph/C to 0.10 (<a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/Antonov548" class="external-link">@Antonov548</a>, <a href="https://github.com/igraph/rigraph/issues/840" class="external-link">#840</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-6-0-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9003"></a></h3>
-<ul><li>Update check results.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9002" id="igraph-1609002">igraph 1.6.0.9002<a class="anchor" aria-label="anchor" href="#igraph-1609002"></a></h2>
-<ul><li>Merge branch ‘cran-1.6.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9001" id="igraph-1609001">igraph 1.6.0.9001<a class="anchor" aria-label="anchor" href="#igraph-1609001"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-6-0-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-1-6-0-9001"></a></h3>
-<ul><li><p>Add bug report form.</p></li>
-<li><p>Add bug report form.</p></li>
-<li><p>Add bug report form.</p></li>
-<li><p>Add bug report form.</p></li>
-<li><p>Add bug report form.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.6.0.9000" id="igraph-1609000">igraph 1.6.0.9000<a class="anchor" aria-label="anchor" href="#igraph-1609000"></a></h2>
-<ul><li><p>Merge branch ‘cran-1.6.0’.</p></li>
-<li><p>Merge branch ‘main’ into cran-1.6.0.</p></li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.6.0" id="igraph-160">igraph 1.6.0<a class="anchor" aria-label="anchor" href="#igraph-160"></a></h2><p class="text-muted">CRAN release: 2023-12-11</p>
 <div class="section level3">
