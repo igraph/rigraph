@@ -123,7 +123,7 @@ Run `revdepcheck::cloud_details(, "dnet")` for more info
     > sources <- lapply(1:100, function(x) erdos.renyi.game(100*runif(1),
     + 1/10))
     Error in erdos.renyi.game(100 * runif(1), 1/10) : 
-      At rinterface_extra.c:81 : The value 39.007893367670476 is not representable as an integer. Invalid value
+      At rinterface_extra.c:82 : The value 39.007893367670476 is not representable as an integer. Invalid value
     Calls: lapply -> FUN -> erdos.renyi.game
     Execution halted
     ```
@@ -219,7 +219,7 @@ Run `revdepcheck::cloud_details(, "EGAnet")` for more info
     +   plot.EGA = FALSE # no plot for CRAN checks
     + )
     Error in (function (graph, objective_function = c("CPM", "modularity"),  : 
-      At rinterface_extra.c:89 : Expecting a scalar real but received a vector of length 41. Invalid value
+      At rinterface_extra.c:90 : Expecting a scalar real but received a vector of length 41. Invalid value
     Calls: EGA.fit ... <Anonymous> -> do.call -> <Anonymous> -> do.call -> <Anonymous>
     Execution halted
     ```
@@ -922,7 +922,7 @@ Run `revdepcheck::cloud_details(, "rgraph6")` for more info
     
     Quitting from lines 146-157 [unnamed-chunk-8] (rgraph6.Rmd)
     Error: processing vignette 'rgraph6.Rmd' failed with diagnostics:
-    At rinterface_extra.c:77 : Expecting a scalar integer but received a vector of length 10. Invalid value
+    At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 10. Invalid value
     --- failed re-building ‘rgraph6.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -1068,7 +1068,7 @@ Run `revdepcheck::cloud_details(, "VertexSort")` for more info
     >   data("interactions")
     >   vs_kp_net <- vertex.sort(interactions)
     Error in add_vertices(e1, la, attr = e2) : 
-      At rinterface_extra.c:77 : Expecting a scalar integer but received a vector of length 2. Invalid value
+      At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 2. Invalid value
     Calls: vertex.sort -> apply.vertex.sort -> +.igraph -> add_vertices
     Execution halted
     ```
