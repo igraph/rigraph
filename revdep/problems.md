@@ -576,7 +576,7 @@ Run `revdepcheck::cloud_details(, "nbTransmission")` for more info
        4.       └─igraph::as_adjacency_matrix(...)
        5.         └─igraph:::get.adjacency.dense(...)
       
-      [ FAIL 1 | WARN 11 | SKIP 0 | PASS 136 ]
+      [ FAIL 1 | WARN 7 | SKIP 0 | PASS 136 ]
       Error: Test failures
       Execution halted
     ```
@@ -778,15 +778,15 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
       Running ‘test_bicscore.R’
       Running ‘test_causalEffect.R’
     ...
+      > set.seed(37)
+      > rD.10.4 <- withCallingHandlers(
+      +     rDAGall(10, 4) # "low-level warning" -- get it here and test it below
       +     , warning = function(w) {
       +         rDAG.warn <<- conditionMessage(w); invokeRestart("muffleWarning") })
       > ## with a low-level warning:
       > ## IGNORE_RDIFF_BEGIN
       > rDAG.warn
-      [1] "The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0"
-      > ## IGNORE_RDIFF_END
-      > stopifnot(grepl("graph_molloy_.*Cannot shuffle graph", rDAG.warn))
-      Error: grepl("graph_molloy_.*Cannot shuffle graph", rDAG.warn) is not TRUE
+      Error: object 'rDAG.warn' not found
       Execution halted
     ```
 

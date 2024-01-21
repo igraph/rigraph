@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 22 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 30 reverse dependencies (29 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 22 new problems
- * We failed to check 0 packages
+ * We failed to check 6 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -80,3 +80,11 @@ Issues with CRAN packages are summarised below.
 * VertexSort
   checking examples ... ERROR
 
+### Failed to check
+
+* geostan    (NA)
+* Seurat     (NA)
+* streamDAG  (NA)
+* TDA        (NA)
+* TestAnaAPP (NA)
+* treestats  (NA)

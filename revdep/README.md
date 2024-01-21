@@ -1,5 +1,17 @@
 # Revdeps
 
+## Failed to check (7)
+
+|package    |version |error |warning |note |
+|:----------|:-------|:-----|:-------|:----|
+|geostan    |0.5.3   |1     |        |     |
+|HLSM       |?       |      |        |     |
+|Seurat     |?       |      |        |     |
+|streamDAG  |?       |      |        |     |
+|TDA        |1.9     |1     |        |     |
+|TestAnaAPP |0.1.5   |1     |        |     |
+|treestats  |1.0.3   |1     |        |     |
+
 ## New problems (22)
 
 |package           |version |error  |warning |note |
