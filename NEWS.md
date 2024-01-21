@@ -4,9 +4,10 @@
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
 See <https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
-Version 1.6.0 of the R package used version 0.9.9 of the C core, the changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.
+Version 1.6.0 of the R package used version 0.9.9 of the C core.
+The changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.
 
-The change log below is a summary of the changes in the R interface.
+The change log below is a summary of the additional changes in the R interface.
 
 ## Breaking changes
 
