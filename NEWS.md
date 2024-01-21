@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.6.0.9028
+# igraph 1.99.99.9000
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
 See <https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
