@@ -24,33 +24,15 @@ The change log below is a summary of the changes in the R interface.
 
 ## Bug fixes
 
-- Remove `R_SEXP_to_hrg` use `R_SEXP_to_hrg_copy` to avoid memory leak (#1075).
-
-- Temporarily remove functions with sparse matrices (#1093).
-
-- Path to vendor header files (#1089).
-
 - Add scalar conversion checks in a few critical places (#1069).
 
 - Check that we receive a scalar when expecting a scalar in C code (#1051).
 
 - Check that matrix sizes are in the supported range before passing them to R (#1066).
 
-- Local (weighted) transitivity now produces a named vector (#1057).
+- `transitivity()` now produces a named vector in the local (weighted) case (#1057).
 
-- Fix incorrect usage in `subgraph.edges()` example.
-
-- Remove use of deprecated `STR()` (#1034).
-
-- Stimulus argument dependencies (#1037).
-
-- Fix auto-generation and handling of arpack defaults.
-
-- Double registration of entrypoint removed.
-
-- Fix some deprecated and incompatible pointers warnings (#1020).
-
-- Intersections between edges and rectangle vertices are computed correctly (#1021).
+- `plot()` correctly computes intersections between edges and rectangle vertices (#1021).
 
 - Fix compilation on Windows with spaces in the Rtools path (#1000).
 
@@ -73,6 +55,8 @@ The change log below is a summary of the changes in the R interface.
 - Remove usage of `get.adjacency()` from intro vignettes (#1084).
 
 - Fix math formatting in `fit_power_law()` docs.
+
+- Fix incorrect usage in `subgraph.edges()` example.
 
 - Clarify that Infomap considers edge directions.
 
