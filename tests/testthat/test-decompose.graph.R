@@ -43,5 +43,5 @@ test_that("decompose protects correctly", {
   torture <- gctorture2(10001)
   on.exit(gctorture2(torture))
 
-  length(decompose(g))
+  expect_equal(length(decompose(g)), 10001)
 })
