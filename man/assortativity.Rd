@@ -44,10 +44,8 @@ Supply
 measure for directed graphs and the undirected version for undirected
 graphs.}
 
-\item{normalized}{Boolean, whether to compute the normalized assortativity.
-The non-normalized nominal assortativity is identical to modularity.
-The non-normalized value-based assortativity is simply the covariance of the
-values at the two ends of edges.}
+\item{normalized}{Boolean, whether to compute the normalized covariance,
+i.e. Pearson correlation. Supply true here to compute the standard assortativity.}
 
 \item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Deprecated aliases for \code{values} and \code{values.in}, respectively.}
