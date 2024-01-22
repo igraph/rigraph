@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.99.99.9001
+
+## Chore
+
+  - Update vendored igraph/C to igraph/igraph@9de3ecdf0097ba01f6cc5f8ef5a6a58e6cf984a4 (#1130).
+
+  - Update vendored igraph/C to igraph/igraph@fb82a46e36cf9bf4851b6d17a58e4653b8769ad5 (#1129).
+
+  - Groom NEWS intro.
+
+  - Groom "Bug fixes" section in NEWS.
+
+  - Fix NEWS heading.
+
+## Documentation
+
+  - Add some missing diacritics.
+
+## Testing
+
+  - Prevent `decompose()` test from being reported as skipped (#1128).
+
+## tests
+
+  - Unskip all `is_tree()` tests (#1127).
+
+
 # igraph 1.99.99.9000
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
