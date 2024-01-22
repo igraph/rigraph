@@ -61,8 +61,8 @@ A set of edge disjoint paths between two vertices is a set of paths between
 them containing no common edges. The maximum number of edge disjoint paths
 between two vertices is the same as their edge connectivity.
 
-When there are no edges from the source to the target, the number of
-vertex-disjoint paths is the same as the vertex connectivity of
+When there are no direct edges between the source and the target, the number
+of vertex-disjoint paths is the same as the vertex connectivity of
 the two vertices. When some edges are present, each one of them
 contributes one extra path.
 }

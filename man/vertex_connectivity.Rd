@@ -41,11 +41,15 @@ called group cohesion.
 }
 \details{
 The vertex connectivity of two vertices (\code{source} and \code{target}) in
-a directed graph is the minimum number of vertices needed to remove from the
-graph to eliminate all (directed) paths from \code{source} to \code{target}.
+a graph is the minimum number of vertices that must be deleted to
+eliminate all (directed) paths from \code{source} to \code{target}.
 \code{vertex_connectivity()} calculates this quantity if both the
 \code{source} and \code{target} arguments are given and they're not
 \code{NULL}.
+
+The vertex connectivity of a pair is the same as the number
+of different (i.e. node-independent) paths from source to
+target, assuming no direct edges between them.
 
 The vertex connectivity of a graph is the minimum vertex connectivity of all
 (ordered) pairs of vertices in the graph. In other words this is the minimum
