@@ -357,8 +357,8 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' called group cohesion.
 #'
 #' The vertex connectivity of two vertices (`source` and `target`) in
-#' a directed graph is the minimum number of vertices that must be deleted to
-#'  eliminate all paths paths from `source` to `target`.
+#' a graph is the minimum number of vertices that must be deleted to
+#' eliminate all (directed) paths from `source` to `target`.
 #' `vertex_connectivity()` calculates this quantity if both the
 #' `source` and `target` arguments are given and they're not
 #' `NULL`.
