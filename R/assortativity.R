@@ -95,7 +95,7 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #' is not symmetric, so it is possible to assign different values to the
 #' outgoing and the incoming end of the edges.
 #'
-#' `assortativity_degree()` uses vertex degree (minus one) as vertex values
+#' `assortativity_degree()` uses vertex degree as vertex values
 #' and calls `assortativity()`.
 #'
 #' @aliases assortativity
