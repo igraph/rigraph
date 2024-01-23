@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.99.99.9003
+
+## Chore
+
+- Use proper version in cff file.
+
+- Declare system libraries as mandatory.
+
+- Final NEWS.
+
+## Documentation
+
+- Add description for `normalized` argument to `assortativity()` (#1153).
+
+- Improve Edge connectivity docs (#1119).
+
+## Testing
+
+- Add `as_biadjacency_matrix()` tests for named vectors (#1155).
+
+- Split as_biadjacency_matrix() tests (#1154).
+
+
 # igraph 1.99.99.9002
 
 ## Testing
