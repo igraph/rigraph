@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.0.9000
+
+- Merge branch 'cran-2.0.0'.
+
+
 # igraph 2.0.0
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
