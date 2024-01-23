@@ -105,7 +105,7 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty
-#' @param values.in A second value vector to be using for the incoming edges when
+#' @param values.in A second value vector to use for the incoming edges when
 #'   calculating assortativity for a directed graph.
 #'   Supply `NULL` here if
 #'   you want to use the same values for outgoing and incoming edges.
