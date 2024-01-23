@@ -28,7 +28,7 @@ assortativity_degree(graph, directed = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{values.in}{A second value vector to be using for the incoming edges when
+\item{values.in}{A second value vector to use for the incoming edges when
 calculating assortativity for a directed graph.
 Supply \code{NULL} here if
 you want to use the same values for outgoing and incoming edges.
@@ -103,6 +103,9 @@ outgoing and the incoming end of the edges.
 
 \code{assortativity_degree()} uses vertex degree as vertex values
 and calls \code{assortativity()}.
+
+Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
+Thus, self-loops are taken into account twice in undirected graphs.
 }
 \examples{
 
