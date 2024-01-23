@@ -65,7 +65,7 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #'
 #' M.E.J. Newman defined two kinds of assortativity coefficients, the first one
 #' is for categorical labels of vertices. `assortativity_nominal()`
-#' calculates this measure. It is defines as
+#' calculates this measure. It is defined as
 #'
 #' \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
 #' r=(sum(e(i,i), i) - sum(a(i)b(i), i)) / (1 - sum(a(i)b(i), i))}
