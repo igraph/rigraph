@@ -37,9 +37,13 @@
 # igraph 1.99.99.9000
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
-See <https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+See <https://github.com/igraph/rigraph/blob/1bd2bf79/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
+
 Version 1.6.0 of the R package used version 0.9.9 of the C core.
 The changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.
+Changes to the implementation of some functions in the C core may be reflected in functions in the R package.
 
 The change log below is a summary of the additional changes in the R interface.
 
@@ -47,13 +51,15 @@ The change log below is a summary of the additional changes in the R interface.
 
 - `get.edge.ids(multi = TRUE)` and `as_adjacency_matrix(edges = )` are no longer supported (#1101, #1080).
 
+- Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
+
+- `laplacian_matrix(normalized = TRUE)` uses a different normalization method (#1102).
+
 - Remove default value for `loops` argument of `centr_degree_tmax()` (#1114).
 
 - `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
 
 - Remove `graph.isomorphic.34()` (#1065, #1067).
-
-- Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
 
 - Use `lifecycle::deprecate_soft()` for most deprecated functions (#1024, #1025, #1104).
 
