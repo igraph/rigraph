@@ -78,17 +78,17 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #' vertices. `assortativity()` calculates this measure. It is defined as
 #'
 #' \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
-#' sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
+#' sum(jk(e(j,k)-q(j)q(k)), j, k) / \sigma(q)^2}
 #'
 #' for undirected graphs (\eqn{q_i=\sum_j e_{ij}}{q(i)=sum(e(i,j), j)}) and as
 #'
 #' \deqn{r=\frac1{\sigma_o\sigma_i}\sum_{jk}jk(e_{jk}-q_j^o q_k^i)}{
-#' sum(jk(e(j,k)-qout(j)qin(k)), j, k) / sigma(qin) / sigma(qout) }
+#' sum(jk(e(j,k)-qout(j)qin(k)), j, k) / \sigma(qin) / \sigma(qout) }
 #'
 #' for directed ones. Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)},
 #' \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
-#' \eqn{\sigma_q}{sigma(q)}, \eqn{sigma_o}{sigma(qout)} and
-#' \eqn{sigma_i}{sigma(qin)} are the standard deviations of \eqn{q},
+#' \eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and
+#' \eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
 #' \eqn{q^o}{qout} and \eqn{q^i}{qin}, respectively.
 #'
 #' The reason of the difference is that in directed networks the relationship
