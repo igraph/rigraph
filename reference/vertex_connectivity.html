@@ -12,7 +12,7 @@ called group cohesion."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.99.99.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.99.99.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,11 +116,14 @@ thanks Peter.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The vertex connectivity of two vertices (<code>source</code> and <code>target</code>) in
-a directed graph is the minimum number of vertices needed to remove from the
-graph to eliminate all (directed) paths from <code>source</code> to <code>target</code>.
+a graph is the minimum number of vertices that must be deleted to
+eliminate all (directed) paths from <code>source</code> to <code>target</code>.
 <code>vertex_connectivity()</code> calculates this quantity if both the
 <code>source</code> and <code>target</code> arguments are given and they're not
 <code>NULL</code>.</p>
+<p>The vertex connectivity of a pair is the same as the number
+of different (i.e. node-independent) paths from source to
+target, assuming no direct edges between them.</p>
 <p>The vertex connectivity of a graph is the minimum vertex connectivity of all
 (ordered) pairs of vertices in the graph. In other words this is the minimum
 number of vertices needed to remove to make the graph not strongly
