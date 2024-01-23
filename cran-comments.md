@@ -1,5 +1,3 @@
-Resubmission.
-
 igraph 2.0.0
 
 ## R CMD check results
