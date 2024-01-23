@@ -11376,7 +11376,8 @@ SEXP R_igraph_stochastic_imitation(SEXP graph, SEXP vid, SEXP algo, SEXP quantit
 /*-------------------------------------------/
 / igraph_has_attribute_table                 /
 /-------------------------------------------*/
-SEXP R_igraph_has_attribute_table() {
+// FIXME: Change Stimulus to generate (void) instead of ()
+SEXP R_igraph_has_attribute_table(void) {
                                         /* Declarations */
   igraph_bool_t c_result;
   SEXP r_result;
@@ -11479,7 +11480,8 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
 /*-------------------------------------------/
 / igraph_version                             /
 /-------------------------------------------*/
-SEXP R_igraph_version() {
+// FIXME: Change Stimulus to generate (void) instead of ()
+SEXP R_igraph_version(void) {
                                         /* Declarations */
   const char* c_version_string;
   int c_major;
