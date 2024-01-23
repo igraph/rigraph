@@ -70,5 +70,4 @@ Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.0.9000
-SystemRequirements: gmp (optional), libxml2 (optional), glpk (>= 4.57,
-    optional)
+SystemRequirements: gmp, libxml2, glpk (>= 4.57)
