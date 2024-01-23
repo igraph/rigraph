@@ -16,6 +16,7 @@ Authors@R: c(
     person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1416-3412")),
     person("Maëlle", "Salmon", role = "ctb"),
+    person("Michael", "Antonov", role = "ctb"),
     person("Chan Zuckerberg Initiative", role = "fnd")
   )
 Description: Routines for simple graphs and network analysis. It can
