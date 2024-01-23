@@ -116,7 +116,10 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
-#' @param normalized TBD
+#' @param normalized Boolean, whether to compute the normalized assortativity.
+#' The non-normalized nominal assortativity is identical to modularity.
+#' The non-normalized value-based assortativity is simply the covariance of the
+#' values at the two ends of edges.
 #' @param types1,types2
 #'   `r lifecycle::badge("deprecated")`
 #'   Deprecated aliases for `values` and `values.in`, respectively.
