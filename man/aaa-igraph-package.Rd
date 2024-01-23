@@ -193,6 +193,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Maëlle Salmon [contributor]
+  \item Michael Antonov [contributor]
   \item Chan Zuckerberg Initiative [funder]
 }
 
