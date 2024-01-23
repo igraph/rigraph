@@ -1076,7 +1076,7 @@ all_shortest_paths <- function(graph, from,
 #' An algorithm for finding shortest routes from all source nodes to a given
 #' destination in general networks.
 #' Quarterly of Applied Mathematics. 27 (4): 526–530. (1970)
-#' <https://doi.org/10.1090/qam/253822>
+#' \doi{10.1090/qam/253822}
 #' @export
 #' @family structural.properties
 #' @seealso [shortest_paths()], [all_shortest_paths()]
