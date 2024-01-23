@@ -44,8 +44,10 @@ Supply
 measure for directed graphs and the undirected version for undirected
 graphs.}
 
-\item{normalized}{Boolean, whether to compute the normalized covariance,
-i.e. Pearson correlation. Supply true here to compute the standard assortativity.}
+\item{normalized}{Boolean, whether to compute the normalized assortativity.
+The non-normalized nominal assortativity is identical to modularity.
+The non-normalized value-based assortativity is simply the covariance of the
+values at the two ends of edges.}
 
 \item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Deprecated aliases for \code{values} and \code{values.in}, respectively.}
@@ -58,7 +60,7 @@ with \code{\link[=as.integer]{as.integer()}}.}
 A single real number.
 }
 \description{
-The assortativity coefficient is positive is similar vertices (based on some
+The assortativity coefficient is positive if similar vertices (based on some
 external property) tend to connect to each, and negative otherwise.
 }
 \details{
@@ -69,7 +71,7 @@ same labels or similar assigned values.
 
 M.E.J. Newman defined two kinds of assortativity coefficients, the first one
 is for categorical labels of vertices. \code{assortativity_nominal()}
-calculates this measure. It is defines as
+calculates this measure. It is defined as
 
 \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
 r=(sum(e(i,i), i) - sum(a(i)b(i), i)) / (1 - sum(a(i)b(i), i))}
@@ -82,24 +84,24 @@ The second assortativity variant is based on values assigned to the
 vertices. \code{assortativity()} calculates this measure. It is defined as
 
 \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
-sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
+sum(jk(e(j,k)-q(j)q(k)), j, k) / \sigma(q)^2}
 
 for undirected graphs (\eqn{q_i=\sum_j e_{ij}}{q(i)=sum(e(i,j), j)}) and as
 
 \deqn{r=\frac1{\sigma_o\sigma_i}\sum_{jk}jk(e_{jk}-q_j^o q_k^i)}{
-sum(jk(e(j,k)-qout(j)qin(k)), j, k) / sigma(qin) / sigma(qout) }
+sum(jk(e(j,k)-qout(j)qin(k)), j, k) / \sigma(qin) / \sigma(qout) }
 
 for directed ones. Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)},
 \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
-\eqn{\sigma_q}{sigma(q)}, \eqn{sigma_o}{sigma(qout)} and
-\eqn{sigma_i}{sigma(qin)} are the standard deviations of \eqn{q},
+\eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and
+\eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
 \eqn{q^o}{qout} and \eqn{q^i}{qin}, respectively.
 
 The reason of the difference is that in directed networks the relationship
 is not symmetric, so it is possible to assign different values to the
 outgoing and the incoming end of the edges.
 
-\code{assortativity_degree()} uses vertex degree (minus one) as vertex values
+\code{assortativity_degree()} uses vertex degree as vertex values
 and calls \code{assortativity()}.
 }
 \examples{

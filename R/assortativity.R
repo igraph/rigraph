@@ -98,6 +98,9 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #' `assortativity_degree()` uses vertex degree as vertex values
 #' and calls `assortativity()`.
 #'
+#' Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
+#' Thus, self-loops are taken into account twice in undirected graphs.
+#'
 #' @aliases assortativity
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
