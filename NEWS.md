@@ -21,6 +21,8 @@ The change log below is a summary of the additional changes in the R interface.
 
 - `laplacian_matrix(normalized = TRUE)` uses a different normalization method (#1102).
 
+- `fit_power_law()` no longer returns a `KS.p` component.
+
 - Remove default value for `loops` argument of `centr_degree_tmax()` (#1114).
 
 - `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
