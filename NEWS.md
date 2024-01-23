@@ -1,63 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.99.99.9003
-
-## Chore
-
-- Use proper version in cff file.
-
-- Declare system libraries as mandatory.
-
-- Final NEWS.
-
-## Documentation
-
-- Add description for `normalized` argument to `assortativity()` (#1153).
-
-- Improve Edge connectivity docs (#1119).
-
-## Testing
-
-- Add `as_biadjacency_matrix()` tests for named vectors (#1155).
-
-- Split as_biadjacency_matrix() tests (#1154).
-
-
-# igraph 1.99.99.9002
-
-## Testing
-
-  - Use specific skip() function (#1149).
-
-
-# igraph 1.99.99.9001
-
-## Chore
-
-  - Update vendored igraph/C to igraph/igraph@9de3ecdf0097ba01f6cc5f8ef5a6a58e6cf984a4 (#1130).
-
-  - Update vendored igraph/C to igraph/igraph@fb82a46e36cf9bf4851b6d17a58e4653b8769ad5 (#1129).
-
-  - Groom NEWS intro.
-
-  - Groom "Bug fixes" section in NEWS.
-
-  - Fix NEWS heading.
-
-## Documentation
-
-  - Add some missing diacritics.
-
-## Testing
-
-  - Prevent `decompose()` test from being reported as skipped (#1128).
-
-## tests
-
-  - Unskip all `is_tree()` tests (#1127).
-
-
-# igraph 1.99.99.9000
+# igraph 2.0.0
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
 See <https://github.com/igraph/rigraph/blob/1bd2bf79/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
@@ -85,6 +28,9 @@ The change log below is a summary of the additional changes in the R interface.
 - Remove `graph.isomorphic.34()` (#1065, #1067).
 
 - Use `lifecycle::deprecate_soft()` for most deprecated functions (#1024, #1025, #1104).
+
+- The system libraries GLPK, GMP, and libxml2 are now mandatory for compiling from source.
+
 
 ## Bug fixes
 
@@ -124,6 +70,10 @@ The change log below is a summary of the additional changes in the R interface.
 
 - Clarify that Infomap considers edge directions.
 
+- Improve edge connectivity docs (#1119).
+
+- Add some missing diacritics.
+
 ## Internal
 
 - Use `[]` assignment for converting matrices (#1035).
@@ -160,7 +110,7 @@ The change log below is a summary of the additional changes in the R interface.
 
 ## Testing
 
-- Remove top-level code in `test-indexing.R` (#1085).
+- Add `as_biadjacency_matrix()` tests for named vectors (#1154, #1155).
 
 - Test transferring colors in isomorphism functions (#1050).
 

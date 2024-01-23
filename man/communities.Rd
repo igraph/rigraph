@@ -257,9 +257,5 @@ on the same graph.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{community
-print.communities plot.communities
-length.communities
-as.dendrogram.communities as.hclust.communities
-showtrace code.length}
+\concept{Community detection}
 \keyword{graphs}
