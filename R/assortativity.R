@@ -55,7 +55,7 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 
 #' Assortativity coefficient
 #'
-#' The assortativity coefficient is positive is similar vertices (based on some
+#' The assortativity coefficient is positive if similar vertices (based on some
 #' external property) tend to connect to each, and negative otherwise.
 #'
 #' The assortativity coefficient measures the level of homophyly of the graph,
