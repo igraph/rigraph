@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.99.99.9002
+
+## Testing
+
+  - Use specific skip() function (#1149).
+
+
 # igraph 1.99.99.9001
 
 ## Chore
