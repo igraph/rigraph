@@ -185,7 +185,7 @@ extern SEXP R_igraph_get_biadjacency(void *, void *);
 extern SEXP R_igraph_get_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_get_edge(void *, void *);
 extern SEXP R_igraph_get_edgelist(void *, void *);
-extern SEXP R_igraph_get_eids(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_eids(void *, void *, void *, void *);
 extern SEXP R_igraph_get_graph_id(void *);
 extern SEXP R_igraph_get_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_k_shortest_paths(void *, void *, void *, void *, void *, void *);
@@ -195,10 +195,9 @@ extern SEXP R_igraph_get_shortest_path(void *, void *, void *, void *);
 extern SEXP R_igraph_get_shortest_path_bellman_ford(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_shortest_path_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_shortest_paths(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_get_stochastic(void *, void *);
+extern SEXP R_igraph_get_stochastic(void *, void *, void *);
 extern SEXP R_igraph_get_stochastic_sparse(void *, void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_get_subisomorphisms_vf2_callback(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_path(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_getsphere(void *, void *, void *, void *, void *, void *, void *, void *);
@@ -282,8 +281,8 @@ extern SEXP R_igraph_lattice(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_layout_bipartite(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_layout_circle(void *, void *);
 extern SEXP R_igraph_layout_davidson_harel(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_layout_drl(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_layout_drl_3d(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_layout_drl(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_layout_drl_3d(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_layout_fruchterman_reingold(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_layout_fruchterman_reingold_3d(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_layout_gem(void *, void *, void *, void *, void *, void *, void *);
@@ -645,7 +644,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_diameter",                               (DL_FUNC) &R_igraph_get_diameter,                                4},
     {"R_igraph_get_edge",                                   (DL_FUNC) &R_igraph_get_edge,                                    2},
     {"R_igraph_get_edgelist",                               (DL_FUNC) &R_igraph_get_edgelist,                                2},
-    {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    5},
+    {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    4},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},
     {"R_igraph_get_k_shortest_paths",                       (DL_FUNC) &R_igraph_get_k_shortest_paths,                        6},
@@ -655,10 +654,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_shortest_path_bellman_ford",             (DL_FUNC) &R_igraph_get_shortest_path_bellman_ford,              5},
     {"R_igraph_get_shortest_path_dijkstra",                 (DL_FUNC) &R_igraph_get_shortest_path_dijkstra,                  5},
     {"R_igraph_get_shortest_paths",                         (DL_FUNC) &R_igraph_get_shortest_paths,                         10},
-    {"R_igraph_get_stochastic",                             (DL_FUNC) &R_igraph_get_stochastic,                              2},
+    {"R_igraph_get_stochastic",                             (DL_FUNC) &R_igraph_get_stochastic,                              3},
     {"R_igraph_get_stochastic_sparse",                      (DL_FUNC) &R_igraph_get_stochastic_sparse,                       3},
     {"R_igraph_get_subisomorphisms_vf2",                    (DL_FUNC) &R_igraph_get_subisomorphisms_vf2,                     6},
-    {"R_igraph_get_subisomorphisms_vf2_callback",           (DL_FUNC) &R_igraph_get_subisomorphisms_vf2_callback,            7},
     {"R_igraph_get_widest_path",                            (DL_FUNC) &R_igraph_get_widest_path,                             5},
     {"R_igraph_get_widest_paths",                           (DL_FUNC) &R_igraph_get_widest_paths,                            5},
     {"R_igraph_getsphere",                                  (DL_FUNC) &R_igraph_getsphere,                                   8},
@@ -742,8 +740,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_bipartite",                           (DL_FUNC) &R_igraph_layout_bipartite,                            5},
     {"R_igraph_layout_circle",                              (DL_FUNC) &R_igraph_layout_circle,                               2},
     {"R_igraph_layout_davidson_harel",                      (DL_FUNC) &R_igraph_layout_davidson_harel,                      11},
-    {"R_igraph_layout_drl",                                 (DL_FUNC) &R_igraph_layout_drl,                                  6},
-    {"R_igraph_layout_drl_3d",                              (DL_FUNC) &R_igraph_layout_drl_3d,                               6},
+    {"R_igraph_layout_drl",                                 (DL_FUNC) &R_igraph_layout_drl,                                  5},
+    {"R_igraph_layout_drl_3d",                              (DL_FUNC) &R_igraph_layout_drl_3d,                               5},
     {"R_igraph_layout_fruchterman_reingold",                (DL_FUNC) &R_igraph_layout_fruchterman_reingold,                10},
     {"R_igraph_layout_fruchterman_reingold_3d",             (DL_FUNC) &R_igraph_layout_fruchterman_reingold_3d,             11},
     {"R_igraph_layout_gem",                                 (DL_FUNC) &R_igraph_layout_gem,                                  7},

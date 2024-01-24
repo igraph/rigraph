@@ -52,6 +52,7 @@ Community detection
 \code{\link{cluster_walktrap}()},
 \code{\link{compare}()},
 \code{\link{groups}()},
+\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
