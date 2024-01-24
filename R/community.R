@@ -372,7 +372,7 @@ code.length <- function(communities) { # nocov start
 #' [igraph.plotting] on how to change the plot.
 #'
 #' @rdname communities
-#' @family Community detection
+#' @family community
 #' @param communities,x,object A `communities` object, the result of an
 #'   igraph community detection function.
 #' @param graph An igraph graph object, corresponding to `communities`.
