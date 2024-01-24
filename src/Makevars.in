@@ -7,6 +7,7 @@ PKG_FFLAGS=$(F_VISIBILITY)
 PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor @cflags@ \
 	-DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
 	-DPRPACK_IGRAPH_SUPPORT \
+ 	-DHAVE_GFORTRAN=1 \
 	-D_GNU_SOURCE=1
 
 PKG_LIBS = -lxml2 -lz -lglpk -lgmp $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)

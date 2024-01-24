@@ -537,7 +537,7 @@ get.edge.ids <- function(
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_get_eids, graph, as_igraph_vs(graph, vp) - 1,
-    as.logical(directed), as.logical(error), as.logical(multi)
+    as.logical(directed), as.logical(error)
   ) + 1
 }
 

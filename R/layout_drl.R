@@ -125,12 +125,12 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   if (dim == 2) {
     res <- .Call(
       R_igraph_layout_drl, graph, seed, use.seed, options,
-      weights, FALSE
+      weights
     )
   } else {
     res <- .Call(
       R_igraph_layout_drl_3d, graph, seed, use.seed, options,
-      weights, FALSE
+      weights
     )
   }
   res
