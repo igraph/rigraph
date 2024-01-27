@@ -1,5 +1,5 @@
 Package: igraph
-Version: 2.0.0
+Version: 2.0.0.0.0.1
 Date: 2024-01-27
 Title: Network Analysis and Visualization
 Authors@R: c(
