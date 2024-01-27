@@ -1,27 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.0.0.9004
+# igraph 2.0.1
 
 - Add test (#1163).
-
-
-# igraph 2.0.0.9003
-
-  - Internal changes only.
-
-
-# igraph 2.0.0.9002
-
-- Merge branch 'cran-2.0.0'.
-
-
-# igraph 2.0.0.9001
-
-  - Merge branch 'cran-2.0.0'.
-
-
-# igraph 2.0.0.9000
-
+- Internal changes only.
 - Merge branch 'cran-2.0.0'.
 
 
