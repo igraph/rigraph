@@ -1074,11 +1074,14 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   ## Need to create a separate image for every different vertex color
   allcols <- unique(vertex.color)
   images <- lapply(allcols, function(col) {
-    img <- .Call(R_igraph_getsphere,
-      pos = c(0.0, 0.0, 10.0), radius = 7.0,
-      color = col2rgb(col) / 255, bgcolor = c(0, 0, 0),
-      lightpos = list(c(-2, 2, 2)), lightcolor = list(c(1, 1, 1)),
-      width = 100L, height = 100L
+    img <- getsphere(
+      spos = c(0.0, 0.0, 10.0),
+      sradius = 7.0,
+      scolor = col2rgb(col) / 255,
+      lightpos = list(c(-2, 2, 2)),
+      lightcolor = list(c(1, 1, 1)),
+      swidth = 100L,
+      sheight = 100L
     )
     as.raster(img)
   })

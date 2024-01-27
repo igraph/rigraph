@@ -12,6 +12,13 @@ extern "C" SEXP _igraph_igraph_hcass2(SEXP n, SEXP ia, SEXP ib) {
     return cpp11::as_sexp(igraph_hcass2(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ia), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ib)));
   END_CPP11
 }
+// simpleraytracer.cpp
+SEXP getsphere(cpp11::doubles spos, double sradius, cpp11::doubles scolor, cpp11::list lightpos, cpp11::list lightcolor, int swidth, int sheight);
+extern "C" SEXP _igraph_getsphere(SEXP spos, SEXP sradius, SEXP scolor, SEXP lightpos, SEXP lightcolor, SEXP swidth, SEXP sheight) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(getsphere(cpp11::as_cpp<cpp11::decay_t<cpp11::doubles>>(spos), cpp11::as_cpp<cpp11::decay_t<double>>(sradius), cpp11::as_cpp<cpp11::decay_t<cpp11::doubles>>(scolor), cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(lightpos), cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(lightcolor), cpp11::as_cpp<cpp11::decay_t<int>>(swidth), cpp11::as_cpp<cpp11::decay_t<int>>(sheight)));
+  END_CPP11
+}
 
 extern "C" {
 /* .Call calls */
@@ -200,7 +207,6 @@ extern SEXP R_igraph_get_stochastic_sparse(void *, void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_path(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_getsphere(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_girth(void *, void *);
 extern SEXP R_igraph_global_efficiency(void *, void *, void *);
 extern SEXP R_igraph_gomory_hu_tree(void *, void *);
@@ -659,7 +665,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_subisomorphisms_vf2",                    (DL_FUNC) &R_igraph_get_subisomorphisms_vf2,                     6},
     {"R_igraph_get_widest_path",                            (DL_FUNC) &R_igraph_get_widest_path,                             5},
     {"R_igraph_get_widest_paths",                           (DL_FUNC) &R_igraph_get_widest_paths,                            5},
-    {"R_igraph_getsphere",                                  (DL_FUNC) &R_igraph_getsphere,                                   8},
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_global_efficiency",                          (DL_FUNC) &R_igraph_global_efficiency,                           3},
     {"R_igraph_gomory_hu_tree",                             (DL_FUNC) &R_igraph_gomory_hu_tree,                              2},
@@ -927,6 +932,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_write_graph_ncol",                           (DL_FUNC) &R_igraph_write_graph_ncol,                            4},
     {"R_igraph_write_graph_pajek",                          (DL_FUNC) &R_igraph_write_graph_pajek,                           2},
     {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
+    {"_igraph_getsphere",                                   (DL_FUNC) &_igraph_getsphere,                                    7},
     {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
     {"make_lazy",                                           (DL_FUNC) &make_lazy,                                            3},
     {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},
