@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.0.9004
+
+- Add test (#1163).
+
+
 # igraph 2.0.0.9003
 
   - Internal changes only.
