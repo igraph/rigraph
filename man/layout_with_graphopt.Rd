@@ -66,7 +66,7 @@ forces among the vertices and then the physical system is simulated until it
 reaches an equilibrium. (There is no simulated annealing or anything like
 that, so a stable fixed point is not guaranteed.)
 
-See also \url{http://www.schmuhl.org/graphopt/} for the original graphopt.
+See also \url{https://www.schmuhl.org/graphopt/} for the original graphopt.
 }
 \seealso{
 Other graph layouts: 
