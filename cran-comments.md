@@ -9,9 +9,5 @@ igraph 2.0.1
 ## Current CRAN check results
 
 - [x] Checked on 2024-01-27, problems found: https://cran.r-project.org/web/checks/check_results_igraph.html
-- [ ] other_issue: NA
-See: <https://www.stats.ox.ac.uk/pub/bdr/LTO/igraph.out>
-- [ ] other_issue: NA
-See: <https://www.stats.ox.ac.uk/pub/bdr/LTO/igraph.out>
+- [x] LTO warnings: Fixed. See: <https://www.stats.ox.ac.uk/pub/bdr/LTO/igraph.out>
 
-Check results at: https://cran.r-project.org/web/checks/check_results_igraph.html

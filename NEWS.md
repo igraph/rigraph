@@ -2,9 +2,9 @@
 
 # igraph 2.0.1
 
-- Add test (#1163).
-- Internal changes only.
-- Merge branch 'cran-2.0.0'.
+## Bug fixes
+
+- Use cpp11 for simpleraytracer glue to avoid `-Wlto` warnings (#1163).
 
 
 # igraph 2.0.0
