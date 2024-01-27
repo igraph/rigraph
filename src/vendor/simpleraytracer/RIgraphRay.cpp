@@ -37,9 +37,8 @@ using namespace igraph;
 
 extern "C" {
 
-SEXP R_igraph_getsphere(SEXP pos, SEXP radius, SEXP color, SEXP bgcolor,
-			SEXP lightpos, SEXP lightcolor, SEXP width,
-			SEXP height) {
+SEXP R_igraph_getsphere(void* pos, void* radius, void* color, void* bgcolor,
+			 void* lightpos, void* lightcolor, void* width, void* height) {
 
   /* All error checking is done at the R level */
 
