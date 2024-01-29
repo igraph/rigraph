@@ -383,6 +383,10 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
     )
   }
 
+  if (!is.null(attr) && !is.null(weights)) {
+    cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
+  }
+
   if (sparse) {
     get.adjacency.sparse(
       graph,
