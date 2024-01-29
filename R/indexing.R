@@ -157,7 +157,7 @@
 `[.igraph` <- function(x, i, j, ..., from, to,
                        sparse = igraph_opt("sparsematrices"),
                        edges = FALSE, drop = TRUE,
-                       attr = if (is_weighted(x)) "weight" else NULL,
+                       attr = NULL,
                        weights = NULL) {
   ## TODO: make it faster, don't need the whole matrix usually
 
@@ -173,6 +173,12 @@
 
   if (!is.null(attr) && !is.null(weights)) {
     cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
+  }
+
+  if (is.null(weights) && missing(attr)) {
+    if (is_weighted(x)) {
+      weights <- get_weights(x)
+    }
   }
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
