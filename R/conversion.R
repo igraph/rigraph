@@ -245,6 +245,8 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (edges) {
     value <- seq_len(nrow(el))
     use.last.ij <- TRUE
+  } else if (!is.null(weights)) {
+    value <- weights
   } else if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
