@@ -182,11 +182,11 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
     exattr <- edge_attr(graph, attr)
 
     res <- switch(
-      typeof(exattr),
+      mode(exattr),
       logical = matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph)),
-      double = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
+      numeric = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
       cli::cli_abort(
-        "The edge attribute {.val exattr} must be either numeric or logical,
+        "The edge attribute {.val {attr}} must be either numeric or logical,
         not {.obj_type_friendly {exattr}}.",
         call = call
       )
@@ -256,7 +256,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
     value_ok_type <- (is.numeric(value) || is.logical(value))
     if (!value_ok_type) {
       cli::cli_abort(
-        "The edge attribute {.val exattr} must be either numeric or logical,
+        "The edge attribute {.val {attr}} must be either numeric or logical,
         not {.obj_type_friendly {exattr}}.",
         call = call
       )
