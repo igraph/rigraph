@@ -258,25 +258,41 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   }
 
   if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(dims = c(vc, vc), i = el[, 1], j = el[, 2], x = value, use.last.ij = use.last.ij)
+    res <- Matrix::sparseMatrix(
+      dims = c(vc, vc),
+      i = el[, 1],
+      j = el[, 2],
+      x = value,
+      use.last.ij = use.last.ij
+    )
   } else {
     if (type == "upper") {
       ## upper
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmin(el[, 1], el[, 2]),
+        j = pmax(el[, 1], el[, 2]),
+        x = value,
+        use.last.ij = use.last.ij
       )
     } else if (type == "lower") {
       ## lower
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmax(el[, 1], el[, 2]),
-        j = pmin(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmax(el[, 1], el[, 2]),
+        j = pmin(el[, 1], el[, 2]),
+        x = value,
+        use.last.ij = use.last.ij
       )
     } else if (type == "both") {
       ## both
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]), x = value, symmetric = TRUE, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmin(el[, 1], el[, 2]),
+        j = pmax(el[, 1], el[, 2]),
+        x = value,
+        symmetric = TRUE,
+        use.last.ij = use.last.ij
       )
       res <- as(res, "generalMatrix")
     }
