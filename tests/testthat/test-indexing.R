@@ -240,8 +240,6 @@ test_that("[[ queries edges with vertex names", {
   )
 })
 test_that("[ handles from and to properly", {
-  g <- make_test_named_tree()
-
   g <- make_tree(20)
   expect_that(g[from = c(1, 2, 2, 3), to = c(3, 4, 8, 7)], equals(c(1, 1, 0, 1)))
 
