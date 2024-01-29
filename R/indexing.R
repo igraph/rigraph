@@ -209,6 +209,8 @@
       if (any(res != 0)) {
         res[res != 0] <- edge_attr(x, attr, res[res != 0])
       }
+    } else if (!is.null(weights)) {
+      # TODO how to use weights here?!
     } else {
       res <- as.logical(res) + 0
     }
