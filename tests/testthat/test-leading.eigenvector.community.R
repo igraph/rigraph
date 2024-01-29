@@ -1,5 +1,5 @@
 test_that("cluster_leading_eigen works", {
-  set.seed(20230115)
+  withr::local_seed(20230115)
 
   ## Check-test
 

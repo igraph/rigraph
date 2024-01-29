@@ -1,5 +1,5 @@
 test_that("sample_bipartite works", {
-  set.seed(42)
+  withr::local_seed(42)
   g1 <- sample_bipartite(10, 5, type = "gnp", p = .1)
   expect_that(g1$name, equals("Bipartite Gnp random graph"))
   expect_that(vcount(g1), equals(15))

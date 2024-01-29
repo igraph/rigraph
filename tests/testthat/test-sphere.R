@@ -1,5 +1,5 @@
 test_that("Sampling sphere surface works", {
-  set.seed(42)
+  withr::local_seed(42)
   s1 <- sample_sphere_surface(4, 100, positive = FALSE)
   expect_that(colSums(s1^2), equals(rep(1, 100)))
 
@@ -12,7 +12,7 @@ test_that("Sampling sphere surface works", {
 })
 
 test_that("Sampling sphere volume works", {
-  set.seed(42)
+  withr::local_seed(42)
   s1 <- sample_sphere_volume(4, 10000, positive = FALSE)
   expect_true(all(colSums(s1^2) < 1))
 

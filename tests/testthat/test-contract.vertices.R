@@ -1,6 +1,6 @@
 test_that("contract works", {
   local_rng_version("3.5.0")
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_ring(10)
   g$name <- "Ring"

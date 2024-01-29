@@ -16,7 +16,7 @@ test_that("sample_pa works", {
 })
 
 test_that("sample_pa can start from a graph", {
-  set.seed(20231029)
+  withr::local_seed(20231029)
 
   g4 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_empty_graph(5))
   expect_that(ecount(g4), equals(5))

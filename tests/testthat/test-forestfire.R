@@ -1,5 +1,5 @@
 test_that("sample_forestfire() works", {
-  set.seed(20231029)
+  withr::local_seed(20231029)
 
   N <- 5000
   xv <- log(2:N)

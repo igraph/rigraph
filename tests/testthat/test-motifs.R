@@ -1,5 +1,5 @@
 test_that("motif finding works", {
-  set.seed(123)
+  withr::local_seed(123)
 
   b <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
@@ -29,7 +29,7 @@ test_that("motif finding works", {
 
   ######################
 
-  set.seed(123)
+  withr::local_seed(123)
   b <- sample_gnp(10000, 4 / 10000, directed = TRUE)
 
   m <- motifs(b)

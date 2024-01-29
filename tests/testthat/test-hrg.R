@@ -1,5 +1,5 @@
 test_that("Starting from state works (#225)", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   hrg <- fit_hrg(g)
@@ -8,7 +8,7 @@ test_that("Starting from state works (#225)", {
 })
 
 test_that("as.hclust.igraphHRG() works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_graph("zachary")
   hrg <- fit_hrg(g)

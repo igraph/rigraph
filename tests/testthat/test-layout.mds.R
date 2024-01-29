@@ -27,7 +27,7 @@ test_that("`layout_with_mds()` stress test", {
 
   ## A graph with multiple components, just test that it runs
 
-  set.seed(42)
+  withr::local_seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_that(ncol(layout_with_mds(g)), equals(2))
 

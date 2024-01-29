@@ -1,5 +1,5 @@
 test_that("knn works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   ## Some trivial ones
   g <- make_ring(10)

@@ -27,7 +27,7 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 
 test_that("LAD stress test", {
   local_rng_version("3.5.0")
-  set.seed(42)
+  withr::local_seed(42)
   N <- 100
 
   for (i in 1:N) {
@@ -41,7 +41,7 @@ test_that("LAD stress test", {
     expect_true(iso)
   }
 
-  set.seed(42)
+  withr::local_seed(42)
 
   for (i in 1:N) {
     target <- sample_gnp(20, 1 / 20)

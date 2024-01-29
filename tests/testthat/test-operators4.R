@@ -360,7 +360,7 @@ C    5     e    NA   NA    C
 })
 
 test_that("intersection of non-named graphs keeps attributes properly", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)
@@ -383,7 +383,7 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_gnp(10, 1 / 2)
   g2 <- sample_gnp(10, 1 / 2)

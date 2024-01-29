@@ -1,5 +1,5 @@
 test_that("cluster_louvain works", {
-  set.seed(20231029)
+  withr::local_seed(20231029)
 
   g <- make_graph("Zachary")
   mc <- cluster_louvain(g)

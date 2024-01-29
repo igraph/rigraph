@@ -1,5 +1,5 @@
 test_that("components works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   gc <- function(graph) {
     cl <- components(graph)

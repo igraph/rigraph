@@ -1,5 +1,5 @@
 test_that("cluster_fast_greedy works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_graph("Zachary")
   fc <- cluster_fast_greedy(g)
