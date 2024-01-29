@@ -144,8 +144,10 @@
 #' @param sparse Logical scalar, whether to return sparse matrices.
 #' @param edges Logical scalar, whether to return edge ids.
 #' @param drop Ignored.
-#' @param attr If not `NULL`, then it should be the name of an edge
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
+#' If not `NULL`, then it should be the name of an edge
 #'   attribute. This attribute is queried and returned.
+#' @param weights A vector of numeric weights.
 #' @return A scalar or matrix. See details below.
 #'
 #' @family structural queries
@@ -155,11 +157,23 @@
 `[.igraph` <- function(x, i, j, ..., from, to,
                        sparse = igraph_opt("sparsematrices"),
                        edges = FALSE, drop = TRUE,
-                       attr = if (is_weighted(x)) "weight" else NULL) {
+                       attr = if (is_weighted(x)) "weight" else NULL,
+                       weights) {
   ## TODO: make it faster, don't need the whole matrix usually
 
   ################################################################
   ## Argument checks
+  if (!missing(attr)) {
+    lifecycle::deprecate_soft(
+      when = "2.0.1",
+      what = "as_adjacency_matrix(attr = )",
+      details = "Use the weights arguments instead."
+    )
+  }
+
+  if (!is.null(attr) && !is.null(weights)) {
+    cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
+  }
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
     stop("Cannot give 'from'/'to' together with regular indices")
@@ -196,27 +210,27 @@
     res
   } else if (missing(i) && missing(j)) {
     if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)
     } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)
     }
   } else if (missing(j)) {
     if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, , drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[i, , drop = drop]
     } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[i, , drop = drop]
     }
   } else if (missing(i)) {
     if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[, j, drop = drop]
     } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[, j, drop = drop]
     }
   } else {
     if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[i, j, drop = drop]
     } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[i, j, drop = drop]
     }
   }
 }
