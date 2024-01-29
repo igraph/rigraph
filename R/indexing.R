@@ -200,6 +200,17 @@
   }
 
   ## calculations ----
+  arguments <- list(
+    graph = x,
+    sparse = sparse,
+    weights = weights
+  )
+  if (!missing(attr)) {
+    arguments[["attr"]] <- attr
+  }
+  if (!missing(edges)) {
+    arguments[["edges"]] <- edges
+  }
 
   if (!missing(from)) {
     res <- get.edge.ids(x, rbind(from, to), error = FALSE)
@@ -216,29 +227,13 @@
     }
     res
   } else if (missing(i) && missing(j)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)
-    }
+    do.call(as_adjacency_matrix, args = arguments)
   } else if (missing(j)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[i, , drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[i, , drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[i, , drop = drop]
   } else if (missing(i)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[, j, drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[, j, drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[, j, drop = drop]
   } else {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, weights = weights)[i, j, drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges, weights = weights)[i, j, drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[i, j, drop = drop]
   }
 }
 
