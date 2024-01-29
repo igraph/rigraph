@@ -161,8 +161,7 @@
                        weights = NULL) {
   ## TODO: make it faster, don't need the whole matrix usually
 
-  ################################################################
-  ## Argument checks
+  ## Argument checks ----
   if (!missing(attr)) {
     lifecycle::deprecate_soft(
       when = "2.0.1",
@@ -175,7 +174,7 @@
     cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
   }
 
-  if (is.null(weights) && missing(attr)) {
+  if (is.null(weights) && is.null(attr)) {
     if (is_weighted(x)) {
       weights <- get_weights(x)
     }
@@ -200,7 +199,7 @@
     }
   }
 
-  ##################################################################
+  ## calculations ----
 
   if (!missing(from)) {
     res <- get.edge.ids(x, rbind(from, to), error = FALSE)
