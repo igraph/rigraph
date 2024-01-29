@@ -313,7 +313,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   argument is ignored if `edges` is `TRUE`.
 #'
 #'   Note that this works only for certain attribute types. If the `sparse`
-#'   argumen is `TRUE`, then the attribute must be either logical or
+#'   argument is `TRUE`, then the attribute must be either logical or
 #'   numeric. If the `sparse` argument is `FALSE`, then character is
 #'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
