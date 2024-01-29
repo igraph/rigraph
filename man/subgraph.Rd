@@ -82,7 +82,6 @@ Other structural.properties:
 \code{\link{is_matching}()},
 \code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{topo_sort}()},

@@ -74,7 +74,6 @@ Other structural.properties:
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},
