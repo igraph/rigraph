@@ -1486,26 +1486,19 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
 
   exo <- rep(exo, length.out = vcount(graph))
   exo <- matrix(exo, ncol = 1)
-
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
+  if (is.null(weights) && is_weighted(graph)) {
+    weights <- get_weights(graph)
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
-  } else if (any(!is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
+    ## ???
+    weights <- get_weights(graph)
   }
 
-  d <- t(as_adj(graph, attr = attr, sparse = FALSE))
+  if (is.na(weights)) {
+    weights <- NULL
+  }
+
+  d <- t(as_adjacency_matrix(graph, weights = weights, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
