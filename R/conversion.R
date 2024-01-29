@@ -232,7 +232,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
                                  attr = NULL, edges = FALSE, names = TRUE,
-                                 weights = NULL) {
+                                 weights = NULL, call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -248,13 +248,15 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   } else if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("Can't find edge attribute {.var {attr}}.", call = call)
     }
     value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+    value_ok_type <- (is.numeric(value) || is.logical(value))
+    if (!value_ok_type) {
+      cli::cli_abort(
+        "The edge attribute {.val exattr} must be either numeric or logical,
+        not {.obj_type_friendly {exattr}}.",
+        call = call
       )
     }
   } else {
@@ -369,6 +371,14 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
 
   if (!missing(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
+  }
+
+  if (!missing(attr)) {
+    lifecycle::deprecate_soft(
+      when = "2.0.1",
+      what = "as_adjacency_matrix(attr = )",
+      details = "Use the weights arguments instead."
+    )
   }
 
   if (sparse) {
