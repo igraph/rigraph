@@ -155,7 +155,8 @@ get.adjedgelist <- function(graph, mode = c("all", "out", "in", "total"), loops 
 ###################################################################
 
 get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
-                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE) {
+                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE,
+                                call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -176,17 +177,18 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("Can't find edge attribute {.var {attr}}.")
+      cli::cli_abort("Can't find edge attribute {.var {attr}}.", call = call)
     }
     exattr <- edge_attr(graph, attr)
 
     res <- switch(
       typeof(exattr),
       logical = matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph)),
-      numeric = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
+      double = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
       cli::cli_abort(
         "The edge attribute {.val exattr} must be either numeric or logical,
-        not {.obj_type_friendly {exattr}}."
+        not {.obj_type_friendly {exattr}}.",
+        call = call
       )
     )
 
