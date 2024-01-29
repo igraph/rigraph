@@ -196,27 +196,27 @@
     res
   } else if (missing(i) && missing(j)) {
     if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)
+      as_adjacency_matrixacency_matrix(x, sparse = sparse, attr = attr)
     } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)
     }
   } else if (missing(j)) {
     if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, , drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, , drop = drop]
     } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
     }
   } else if (missing(i)) {
     if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr)[, j, drop = drop]
     } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
     }
   } else {
     if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, j, drop = drop]
     } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
+      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
     }
   }
 }
@@ -280,7 +280,7 @@
 #' @export
 `[[.igraph` <- function(x, i, j, from, to, ..., directed = TRUE,
                         edges = FALSE, exact = TRUE) {
-  getfun <- if (edges) as_adj_edge_list else as_adj_list
+  getfun <- if (edges) as_adjacency_matrix_edge_list else as_adjacency_matrix_list
 
   if (!missing(i) && !missing(from)) stop("Cannot give both 'i' and 'from'")
   if (!missing(j) && !missing(to)) stop("Cannot give both 'j' and 'to'")
