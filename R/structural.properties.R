@@ -1850,7 +1850,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #'
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
-#' feedback_arc_set(g, algo = "approx")
+#' feedback_arc_set(g, algo = "approx_eades")
 feedback_arc_set <- feedback_arc_set_impl
 
 #' Girth of a graph
