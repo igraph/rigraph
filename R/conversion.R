@@ -179,16 +179,17 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
       cli::cli_abort("Can't find edge attribute {.var {attr}}.")
     }
     exattr <- edge_attr(graph, attr)
-    if (is.logical(exattr)) {
-      res <- matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph))
-    } else if (is.numeric(exattr)) {
-      res <- matrix(0, nrow = vcount(graph), ncol = vcount(graph))
-    } else {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+
+    res <- switch(
+      typeof(exattr),
+      logical = matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph)),
+      numeric = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
+      cli::cli_abort(
+        "The edge attribute {.val exattr} must be either numeric or logical,
+        not {.obj_type_friendly {exattr}}."
       )
-    }
+    )
+
     if (is_directed(graph)) {
       for (i in seq(length.out = ecount(graph))) {
         e <- ends(graph, i, names = FALSE)
