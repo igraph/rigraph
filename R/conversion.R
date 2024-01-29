@@ -228,7 +228,8 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 }
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
-                                 attr = NULL, edges = FALSE, names = TRUE) {
+                                 attr = NULL, edges = FALSE, names = TRUE,
+                                 weights = NULL) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -321,7 +322,8 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param attr Either `NULL` or a character string giving an edge
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
+#'   Either `NULL` or a character string giving an edge
 #'   attribute name. If `NULL` a traditional adjacency matrix is returned.
 #'   If not `NULL` then the values of the given edge attribute are included
 #'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
@@ -333,6 +335,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   numeric. If the `sparse` argument is `FALSE`, then character is
 #'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
+#' @param weights A vector of numeric weights.
 #' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
@@ -357,7 +360,8 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' @export
 as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
                                 attr = NULL, edges = FALSE, names = TRUE,
-                                sparse = igraph_opt("sparsematrices")) {
+                                sparse = igraph_opt("sparsematrices"),
+                                weights = NULL) {
   ensure_igraph(graph)
 
   if (!missing(edges) && isTRUE(edges)) {
@@ -365,9 +369,22 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 
   if (sparse) {
-    get.adjacency.sparse(graph, type = type, attr = attr, edges = edges, names = names)
+    get.adjacency.sparse(
+      graph,
+      type = type,
+      attr = attr,
+      edges = edges,
+      names = names,
+      weights = weights
+    )
   } else {
-    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
+    get.adjacency.dense(
+      graph,
+      type = type,
+      attr = attr,
+      weights = weights,
+      names = names
+    )
   }
 }
 
