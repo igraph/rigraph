@@ -763,8 +763,9 @@ distances_floyd_warshall_impl <- function(graph, from=V(graph), to=V(graph), wei
   res
 }
 
-voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=c("random", "first", "last")) {
+voronoi_impl <- function(graph, generators, ..., weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=c("random", "first", "last")) {
   # Argument checks
+  check_dots_empty()
   ensure_igraph(graph)
   generators <- as_igraph_vs(graph, generators)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {

@@ -380,6 +380,7 @@ igraph_distances_johnson:
 igraph_distances_floyd_warshall:
 
 igraph_voronoi:
+    FIRST_KW_PARAM: weights
 
 igraph_get_all_simple_paths:
     IGNORE: RR

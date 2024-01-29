@@ -121,7 +121,8 @@ Community detection
 \code{\link{make_clusters}()},
 \code{\link{membership}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
