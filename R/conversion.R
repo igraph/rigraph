@@ -176,7 +176,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("Can't find edge attribute {.var {attr}}.")
     }
     exattr <- edge_attr(graph, attr)
     if (is.logical(exattr)) {
