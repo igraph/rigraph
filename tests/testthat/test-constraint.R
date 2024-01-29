@@ -1,8 +1,15 @@
 test_that("constraint works", {
-  constraint.orig <- function(graph, nodes = V(graph), attr = NULL) {
+  constraint.orig <- function(graph, nodes = V(graph), weighted = FALSE) {
     ensure_igraph(graph)
     idx <- degree(graph) != 0
-    A <- as_adj(graph, attr = attr, sparse = FALSE)
+
+    if (weighted) {
+      weights <- get_weights(graph)
+    } else {
+      weights <- NULL
+    }
+
+    A <- as_adjacency_matrix(graph, weights = weights, sparse = FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
 
@@ -33,6 +40,6 @@ test_that("constraint works", {
   set.seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
-  wc2 <- constraint.orig(karate, attr = "weight")
+  wc2 <- constraint.orig(karate, weighted = TRUE)
   expect_that(wc1, equals(wc2))
 })
