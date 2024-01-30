@@ -28,7 +28,7 @@ assortativity_degree(graph, directed = TRUE)
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{values.in}{A second value vector to be using for the incoming edges when
+\item{values.in}{A second value vector to use for the incoming edges when
 calculating assortativity for a directed graph.
 Supply \code{NULL} here if
 you want to use the same values for outgoing and incoming edges.
@@ -60,7 +60,7 @@ with \code{\link[=as.integer]{as.integer()}}.}
 A single real number.
 }
 \description{
-The assortativity coefficient is positive is similar vertices (based on some
+The assortativity coefficient is positive if similar vertices (based on some
 external property) tend to connect to each, and negative otherwise.
 }
 \details{
@@ -71,7 +71,7 @@ same labels or similar assigned values.
 
 M.E.J. Newman defined two kinds of assortativity coefficients, the first one
 is for categorical labels of vertices. \code{assortativity_nominal()}
-calculates this measure. It is defines as
+calculates this measure. It is defined as
 
 \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
 r=(sum(e(i,i), i) - sum(a(i)b(i), i)) / (1 - sum(a(i)b(i), i))}
@@ -93,16 +93,19 @@ sum(jk(e(j,k)-qout(j)qin(k)), j, k) / sigma(qin) / sigma(qout) }
 
 for directed ones. Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)},
 \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
-\eqn{\sigma_q}{sigma(q)}, \eqn{sigma_o}{sigma(qout)} and
-\eqn{sigma_i}{sigma(qin)} are the standard deviations of \eqn{q},
+\eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and
+\eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
 \eqn{q^o}{qout} and \eqn{q^i}{qin}, respectively.
 
 The reason of the difference is that in directed networks the relationship
 is not symmetric, so it is possible to assign different values to the
 outgoing and the incoming end of the edges.
 
-\code{assortativity_degree()} uses vertex degree (minus one) as vertex values
+\code{assortativity_degree()} uses vertex degree as vertex values
 and calls \code{assortativity()}.
+
+Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
+Thus, self-loops are taken into account twice in undirected graphs.
 }
 \examples{
 
