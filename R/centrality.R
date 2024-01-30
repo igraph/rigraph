@@ -1494,7 +1494,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
     weights <- get_weights(graph)
   }
 
-  if (is.na(weights)) {
+  if (!is.null(weights) && length(weights) == 1 && is.na(weights)) {
     weights <- NULL
   }
 
