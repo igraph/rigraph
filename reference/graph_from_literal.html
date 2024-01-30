@@ -162,18 +162,18 @@ you need to quote them:</p><div class="sourceCode"><pre><code><span>  <span clas
 <span class="r-in"><span>  <span class="va">Cecil</span> <span class="op">-</span> <span class="va">Gordon</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f688df8 UN-- 6 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f3af0ad UN-- 6 6 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f688df8 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f3af0ad (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice--Bob    Alice--Cecil  Bob  --Cecil  Cecil--Daniel Cecil--Eugene</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Cecil--Gordon</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Another undirected graph, ":" notation</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">graph_from_literal</span><span class="op">(</span><span class="va">Alice</span> <span class="op">-</span> <span class="va">Bob</span><span class="op">:</span><span class="va">Cecil</span><span class="op">:</span><span class="va">Daniel</span>, <span class="va">Cecil</span><span class="op">:</span><span class="va">Daniel</span> <span class="op">-</span> <span class="va">Eugene</span><span class="op">:</span><span class="va">Gordon</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2108124 UN-- 6 7 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1980e19 UN-- 6 7 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2108124 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1980e19 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice --Bob    Alice --Cecil  Alice --Daniel Cecil --Eugene Cecil --Gordon</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Daniel--Eugene Daniel--Gordon</span>
 <span class="r-in"><span></span></span>
@@ -183,18 +183,18 @@ you need to quote them:</p><div class="sourceCode"><pre><code><span>  <span clas
 <span class="r-in"><span>  <span class="va">Eugene</span> <span class="op">-</span><span class="op">-</span><span class="op">+</span> <span class="va">Gordon</span><span class="op">:</span><span class="va">Helen</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g3</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cae4140 DN-- 7 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 250edd0 DN-- 7 6 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cae4140 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 250edd0 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice -&gt;Bob    Bob   -&gt;Alice  Bob   -&gt;Cecil  Daniel-&gt;Cecil  Eugene-&gt;Gordon</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Eugene-&gt;Helen </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># A graph with isolate vertices</span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="fu">graph_from_literal</span><span class="op">(</span><span class="va">Alice</span> <span class="op">-</span><span class="op">-</span> <span class="va">Bob</span> <span class="op">-</span><span class="op">-</span> <span class="va">Daniel</span>, <span class="va">Cecil</span><span class="op">:</span><span class="va">Gordon</span>, <span class="va">Helen</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH df37830 UN-- 6 2 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 12136da UN-- 6 2 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from df37830 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 12136da (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice--Bob    Bob  --Daniel</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span><span class="op">$</span><span class="va">name</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Alice"  "Bob"    "Daniel" "Cecil"  "Gordon" "Helen" </span>
@@ -202,17 +202,17 @@ you need to quote them:</p><div class="sourceCode"><pre><code><span>  <span clas
 <span class="r-in"><span><span class="co"># "Arrows" can be arbitrarily long</span></span></span>
 <span class="r-in"><span><span class="va">g5</span> <span class="op">&lt;-</span> <span class="fu">graph_from_literal</span><span class="op">(</span><span class="va">Alice</span> <span class="op">+</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">+</span> <span class="va">Bob</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g5</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH df55b68 DN-- 2 2 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f972a20 DN-- 2 2 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from df55b68 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f972a20 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice-&gt;Bob   Bob  -&gt;Alice</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Special vertex names</span></span></span>
 <span class="r-in"><span><span class="va">g6</span> <span class="op">&lt;-</span> <span class="fu">graph_from_literal</span><span class="op">(</span><span class="st">"+"</span> <span class="op">-</span><span class="op">-</span> <span class="st">"-"</span>, <span class="st">"*"</span> <span class="op">-</span><span class="op">-</span> <span class="st">"/"</span>, <span class="st">"%%"</span> <span class="op">-</span><span class="op">-</span> <span class="st">"%/%"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g6</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 29c7e8e UN-- 6 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3284115 UN-- 6 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 29c7e8e (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3284115 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] + ---   * --/   %%--%/%</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
