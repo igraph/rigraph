@@ -14,7 +14,8 @@
   sparse = igraph_opt("sparsematrices"),
   edges = FALSE,
   drop = TRUE,
-  attr = if (is_weighted(x)) "weight" else NULL
+  attr = NULL,
+  weights = NULL
 )
 }
 \arguments{
@@ -48,8 +49,11 @@ well.}
 
 \item{drop}{Ignored.}
 
-\item{attr}{If not \code{NULL}, then it should be the name of an edge
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead.
+If not \code{NULL}, then it should be the name of an edge
 attribute. This attribute is queried and returned.}
+
+\item{weights}{A vector of numeric weights.}
 }
 \value{
 A scalar or matrix. See details below.
