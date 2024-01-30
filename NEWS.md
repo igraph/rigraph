@@ -37,6 +37,13 @@
 - Merge branch 'cran-2.0.0'.
 
 
+# igraph 2.0.1
+
+## Bug fixes
+
+- Use cpp11 for simpleraytracer glue to avoid `-Wlto` warnings (#1163).
+
+
 # igraph 2.0.0
 
 This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
