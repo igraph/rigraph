@@ -1486,6 +1486,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
 
   exo <- rep(exo, length.out = vcount(graph))
   exo <- matrix(exo, ncol = 1)
+
   if (is.null(weights) && is_weighted(graph)) {
     weights <- get_weights(graph)
   } else if (is.character(weights) && length(weights) == 1) {
@@ -1494,6 +1495,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
     weights <- get_weights(graph)
   }
 
+  # seems weights = NA happens
   if (!is.null(weights) && length(weights) == 1 && is.na(weights)) {
     weights <- NULL
   }
