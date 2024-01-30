@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.0.9006
+
+## Refactoring
+
+  - Remove "compatibility with S" and use of `is.R()` (#1168).
+
+
 # igraph 2.0.0.9005
 
   - Internal changes only.
