@@ -667,7 +667,7 @@ arpack_defaults <- function() {
 #' if (require(Matrix)) {
 #'   set.seed(42)
 #'   g <- sample_gnp(1000, 5 / 1000)
-#'   M <- as_adj(g, sparse = TRUE)
+#'   M <- as_adjacency_matrix(g, sparse = TRUE)
 #'   f2 <- function(x, extra = NULL) {
 #'     cat(".")
 #'     as.vector(M %*% x)
@@ -795,7 +795,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' cor(degree(g), sc)
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
-  A <- as_adj(graph)
+  A <- as_adjacency_matrix(graph)
   if (!diag) {
     diag(A) <- 0
   }
@@ -849,7 +849,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 #'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_adj()] to create a (sparse) adjacency matrix.
+#' @seealso [as_adjacency_matrix()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
 #' @examples
 #'
@@ -858,7 +858,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' spectrum(kite)[c("values", "vectors")]
 #'
 #' ## Double check
-#' eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
+#' eigen(as_adjacency_matrix(kite, sparse = FALSE))$vectors[, 1]
 #'
 #' ## Should be the same as 'eigen_centrality' (but rescaled)
 #' cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
@@ -1309,7 +1309,7 @@ bonpow.dense <- function(graph, nodes = V(graph),
                          rescale = FALSE, tol = 1e-7) {
   ensure_igraph(graph)
 
-  d <- as_adj(graph)
+  d <- as_adjacency_matrix(graph)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1337,7 +1337,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adj(graph, sparse = TRUE)
+  d <- as_adjacency_matrix(graph, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
@@ -1523,25 +1523,20 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
   }
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    ## weights == NULL and there is a "weight" edge attribute
-    attr <- "weight"
-  } else if (is.null(weights)) {
-    ## weights == NULL, but there is no "weight" edge attribute
-    attr <- NULL
+  if (is.null(weights) && is_weighted(graph)) {
+    weights <- get_weights(graph)
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
-  } else if (any(!is.na(weights))) {
-    ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
-    attr <- "weight"
-  } else {
-    ## weights != NULL, but weights == rep(NA, x)
-    attr <- NULL
+    ## ???
+    weights <- get_weights(graph)
   }
 
-  M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
+  # seems weights = NA happens
+  if (!is.null(weights) && length(weights) == 1 && is.na(weights)) {
+    weights <- NULL
+  }
+
+  M <- Matrix::t(as_adjacency_matrix(graph, weights = weights, sparse = TRUE))
 
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))
