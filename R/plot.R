@@ -863,7 +863,7 @@ igraph.Arrows <-
            open = TRUE,
            sh.adj = 0.1,
            sh.lwd = 1,
-           sh.col = if (is.R()) par("fg") else 1,
+           sh.col =  par("fg"),
            sh.lty = 1,
            h.col = sh.col,
            h.col.bo = sh.col,
@@ -875,11 +875,7 @@ igraph.Arrows <-
   {
     cin <- size * par("cin")[2]
     width <- width * (1.2 / 4 / cin)
-    uin <- if (is.R()) {
-      1 / xyinch()
-    } else {
-      par("uin")
-    }
+    uin <- 1 / xyinch()
     x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
     delta <- sqrt(h.lwd) * par("cin")[2] * 0.005 ## has been 0.05
     x.arr <- c(-rev(x), -x)
