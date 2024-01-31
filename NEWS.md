@@ -56,6 +56,13 @@
 - Merge branch 'cran-2.0.0'.
 
 
+# igraph 2.0.1.1
+
+## Bug fixes
+
+- Avoid `is.R()` which is deprecated in R 4.4.0.
+
+
 # igraph 2.0.1
 
 ## Bug fixes
