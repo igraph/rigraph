@@ -8,5 +8,6 @@ test_that("DFS does not pad order", {
   expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
 
   local_igraph_options(return.vs.es = FALSE)
-  expect_equal(as.numeric(bfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
+  expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
+  expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE, order.out = TRUE)$order.out), c(1, 2))
 })
