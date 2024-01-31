@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9000
+
+## Bug fixes
+
+  - HAVE\_GFORTRAN flag for `win` and `ucrt` (#1171).
+
+## Documentation
+
+  - Improve docs of assortativity (#1151).
+
+## Refactoring
+
+  - Add read-only comments for RStudio IDE (#1152).
+
+## Uncategorized
+
+  - Merge branch 'cran-2.0.1'.
+
+
 # igraph 2.0.0.9006
 
 ## Refactoring
