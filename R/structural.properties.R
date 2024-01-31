@@ -2309,6 +2309,9 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     if (order) res$order <- V(graph)[.env$res$order, na_ok = TRUE]
     if (order.out) res$order.out <- V(graph)[.env$res$order.out, na_ok = TRUE]
     if (father) res$father <- create_vs(graph, res$father, na_ok = TRUE)
+  } else {
+    if (order) res$order <- res$order[res$order != 0]
+    if (order.out) res$order.out <- res$order.out[res$order.out != 0]
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
