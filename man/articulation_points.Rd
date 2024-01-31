@@ -26,7 +26,7 @@ Articulation points or cut vertices are vertices whose removal increases the
 number of connected components in a graph. Similarly, bridges or cut-edges
 are edges whose removal increases the number of connected components in a
 graph. If the original graph was connected, then the removal of a single
-articulation point or a single bridge makes it undirected. If a graph
+articulation point or a single bridge makes it disconnected. If a graph
 contains no articulation points, then its vertex connectivity is at least
 two.
 }
