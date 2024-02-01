@@ -41,8 +41,7 @@ SEXP getsphere(
 
   /* All error checking is done at the R level */
 
-  int i;
-  size_t no_lights=lightpos.size();
+  R_xlen_t no_lights=lightpos.size();
   RayTracer* p_ray_tracer;
   Sphere* sphere;
   int nopixels=swidth * sheight;
@@ -52,7 +51,7 @@ SEXP getsphere(
   p_ray_tracer = new RayTracer();
   p_ray_tracer->EyePoint(Point(0,0,0));
 
-  for (i=0; i<no_lights; i++) {
+  for (R_xlen_t i=0; i<no_lights; i++) {
     double *lpos=REAL(VECTOR_ELT(lightpos, i));
     double *lcol=REAL(VECTOR_ELT(lightcolor, i));
     Light *light = new Light(Point(lpos[0], lpos[1], lpos[2]));
