@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,13 +160,6 @@ Rtools4 on Windows are <a href="https://cran.r-project.org/bin/windows/Rtools/" 
 </div>
 </div>
 <div class="section level2">
-<h2 id="fatal-error-glpk-h-no-such-file-or-directory">fatal error: glpk.h: No such file or directory<a class="anchor" aria-label="anchor" href="#fatal-error-glpk-h-no-such-file-or-directory"></a>
-</h2>
-<p>This error occurs only on Windows, when trying to compile igraph from
-sources. Please refer to <a href="#cannot-compile-igraph-from-sources-on-windows-or-macos">the
-previous section</a>.</p>
-</div>
-<div class="section level2">
 <h2 id="cannot-compile-igraph-from-sources-on-linux">Cannot compile igraph from sources on Linux<a class="anchor" aria-label="anchor" href="#cannot-compile-igraph-from-sources-on-linux"></a>
 </h2>
 <p>Since CRAN does not provide binary packages for Linux, Linux users
@@ -174,11 +167,22 @@ usually need to compile igraph from sources. In order to do so, make
 sure that you have all the prerequisites:</p>
 <ul>
 <li>C, C++ and Fortran compilers. On Debian-based distros, use
-<code>sudo apt install build-essential gfortran</code>.</li>
-<li>Development packages for <code>libxml2</code> and <code>glpk</code>.
-On Debian-based distros, use
-<code>sudo apt install libxml2-dev libglpk-dev</code>.</li>
+<code>sudo apt install build-essential gfortran</code>. On Fedora, use
+<code>yum install gcc gcc-c++ gcc-gfortran</code>.</li>
+<li>Development packages for <code>glpk</code>, <code>gmp</code> and
+<code>libxml2</code>. On Debian-based distros, use
+<code>sudo apt install libglpk-dev libgmp-dev libxml2-dev</code>. On
+Fedora, use
+<code>yum install glpk-devel gmp-devel libxml2-devel</code>.</li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="fatal-error-glpk-h-no-such-file-or-directory">fatal error: glpk.h: No such file or directory<a class="anchor" aria-label="anchor" href="#fatal-error-glpk-h-no-such-file-or-directory"></a>
+</h2>
+<p>If you are using Windows or macOS, please refer to <a href="#cannot-compile-igraph-from-sources-on-windows-or-macos">Cannot
+compile igraph from sources on Windows or macOS</a>.</p>
+<p>If you are using Linux, please refer to <a href="#cannot-compile-igraph-from-sources-on-linux">Cannot compile
+igraph from sources on Linux</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="libgfortran-so-4-cannot-open-shared-object-file-no-such-file-or-directory">libgfortran.so.4: cannot open shared object file: No such file or
