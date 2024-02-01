@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9001
+
+## Bug fixes
+
+  - Remove zeros from the `order` and `order.out` components returned by `dfs()` (#1179).
+
+## Chore
+
+  - Update NEWS.
+
+## Uncategorized
+
+  - Merge branch 'cran-2.0.1.1'.
+
+
 # igraph 2.0.1.9000
 
 ## Bug fixes
