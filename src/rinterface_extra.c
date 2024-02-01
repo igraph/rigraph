@@ -4244,7 +4244,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   switch (algo) {
   case 0:                       /* automatic */
     if (negw && mode != IGRAPH_ALL && Rf_xlength(pvids)>100) {
-      distances_johnson(&g, &res, vs, to, pw, mode, negw);
+      IGRAPH_R_CHECK(distances_johnson(&g, &res, vs, to, pw, mode, negw));
     } else if (negw) {
       IGRAPH_R_CHECK(igraph_distances_bellman_ford(&g, &res, vs, to, pw, mode));
     } else {
@@ -4262,7 +4262,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
     IGRAPH_R_CHECK(igraph_distances_bellman_ford(&g, &res, vs, to, pw, mode));
     break;
   case 4:                       /* johnson */
-    distances_johnson(&g, &res, vs, to, pw, mode, negw);
+    IGRAPH_R_CHECK(distances_johnson(&g, &res, vs, to, pw, mode, negw));
     break;
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
