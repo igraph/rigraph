@@ -24,7 +24,8 @@ distances(
   to = V(graph),
   mode = c("all", "out", "in"),
   weights = NULL,
-  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")
+  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
+    "floyd-warshall")
 )
 
 shortest_paths(
@@ -176,8 +177,10 @@ the \code{weight} edge attribute of the graph. The implemented algorithms
 are breadth-first search (\sQuote{\code{unweighted}}), this only works for
 unweighted graphs; the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this
 works for graphs with non-negative edge weights; the Bellman-Ford algorithm
-(\sQuote{\code{bellman-ford}}), and Johnson's algorithm
-(\sQuote{\code{johnson}}). The latter two algorithms work with arbitrary
+(\sQuote{\code{bellman-ford}}); Johnson's algorithm
+(\sQuote{\code{johnson}}); and a faster version of the Floyd-Warshall algorithm
+with expected quadratic running time (\sQuote{\code{floyd-warshall}}). The latter
+three algorithms work with arbitrary
 edge weights, but (naturally) only for graphs that don't have a negative
 cycle. Note that a negative-weight edge in an undirected graph implies
 such a cycle. Johnson's algorithm performs better than the Bellman-Ford

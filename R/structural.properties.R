@@ -677,8 +677,10 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' are breadth-first search (\sQuote{`unweighted`}), this only works for
 #' unweighted graphs; the Dijkstra algorithm (\sQuote{`dijkstra`}), this
 #' works for graphs with non-negative edge weights; the Bellman-Ford algorithm
-#' (\sQuote{`bellman-ford`}), and Johnson's algorithm
-#' (\sQuote{`johnson`}). The latter two algorithms work with arbitrary
+#' (\sQuote{`bellman-ford`}); Johnson's algorithm
+#' (\sQuote{`johnson`}); and a faster version of the Floyd-Warshall algorithm
+#' with expected quadratic running time (\sQuote{`floyd-warshall`}). The latter
+#' three algorithms work with arbitrary
 #' edge weights, but (naturally) only for graphs that don't have a negative
 #' cycle. Note that a negative-weight edge in an undirected graph implies
 #' such a cycle. Johnson's algorithm performs better than the Bellman-Ford
@@ -833,7 +835,7 @@ distances <- function(graph, v = V(graph), to = V(graph),
                       weights = NULL,
                       algorithm = c(
                         "automatic", "unweighted", "dijkstra",
-                        "bellman-ford", "johnson"
+                        "bellman-ford", "johnson", "floyd-warshall"
                       )) {
   ensure_igraph(graph)
 
@@ -858,7 +860,8 @@ distances <- function(graph, v = V(graph), to = V(graph),
     "unweighted" = 1,
     "dijkstra" = 2,
     "bellman-ford" = 3,
-    "johnson" = 4
+    "johnson" = 4,
+    "floyd-warshall" = 5
   )
 
   if (is.null(weights)) {
