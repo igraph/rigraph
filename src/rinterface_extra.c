@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <inttypes.h>
+#include <stdint.h>
 
 #if defined(__SANITIZE_ADDRESS__)
 #  define IGRAPH_SANITIZER_AVAILABLE 1
