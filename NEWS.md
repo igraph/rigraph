@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9003
+
+## Bug fixes
+
+  - Eliminate a compiler warning from simpleraytracer (#1185).
+
+## Features
+
+  - `distances()` now supports the Floyd-Warshall algorithm (#1186).
+
+## Documentation
+
+  - Fix typo in `?articulation_points` (#1191).
+
+
 # igraph 2.0.1.9002
 
 ## Documentation
