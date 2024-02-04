@@ -1,19 +1,19 @@
 #!/bin/sh
 
-# Use pkg-config or xml2-config to get the include directory for libxml-2.0
-xml2_include_dir=""
+# Use pkg-config or xml2-config to get the include directories for libxml-2.0
+xml2_include_paths=""
 if which xml2-config >/dev/null 2>&1; then
-    xml2_include_dir=$(xml2-config --cflags | sed 's/-I\([^ ]*\)/-I"\1"/g')
+    xml2_include_paths=$(xml2-config --cflags | sed 's/-I\([^ ]*\)/-I"\1"/g')
 elif which pkg-config >/dev/null 2>&1; then
-    xml2_include_dir=$(pkg-config --cflags libxml-2.0 | sed 's/-I\([^ ]*\)/-I"\1"/g')
+    xml2_include_paths=$(pkg-config --cflags libxml-2.0 | sed 's/-I\([^ ]*\)/-I"\1"/g')
 else
     echo "Error: Neither xml2-config nor pkg-config is available"
     exit 1
 fi
 
-if [ -n "$xml2_include_dir" ]; then
-    PKG_CFLAGS="$xml2_include_dir"
-    echo "libxml2 include directory: $xml2_include_dir"
+if [ -n "$xml2_include_paths" ]; then
+    PKG_CFLAGS="$xml2_include_paths"
+    echo "libxml2 include directories: $xml2_include_paths"
 else
     echo "Error: libxml2 include directory not found"
     exit 1
