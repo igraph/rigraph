@@ -202,6 +202,11 @@ igraph_realize_degree_sequence:
         OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
 
+igraph_realize_bipartite_degree_sequence:
+    PARAMS: |-
+        OUT GRAPH graph, VECTOR_INT degrees1, VECTOR_INT degrees2,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
+
 igraph_circulant:
     PARAMS: OUT GRAPH graph, INTEGER n, VECTOR_INT shifts, BOOLEAN directed=False
 
@@ -1267,6 +1272,9 @@ igraph_biconnected_components:
 igraph_bridges:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res
     DEPS: res ON graph
+
+igraph_is_biconnected:
+    PARAMS: GRAPH graph, OUT BOOLEAN res
 
 #######################################
 # Cliques
