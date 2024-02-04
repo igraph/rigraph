@@ -2353,6 +2353,7 @@ SEXP R_igraph_voronoi(SEXP graph, SEXP generators, SEXP weights, SEXP mode, SEXP
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_distances);
   R_SEXP_to_vector_int_copy(generators, &c_generators);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_generators);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_tiebreaker = (igraph_voronoi_tiebreaker_t) Rf_asInteger(tiebreaker);
@@ -2367,6 +2368,8 @@ SEXP R_igraph_voronoi(SEXP graph, SEXP generators, SEXP weights, SEXP mode, SEXP
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(distances=R_igraph_vector_to_SEXP(&c_distances));
   igraph_vector_destroy(&c_distances);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_generators);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, membership);
   SET_VECTOR_ELT(r_result, 1, distances);
@@ -7150,6 +7153,7 @@ SEXP R_igraph_similarity_dice_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP loop
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   R_SEXP_to_vector_int_copy(pairs, &c_pairs);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
@@ -7159,6 +7163,8 @@ SEXP R_igraph_similarity_dice_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP loop
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_pairs);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 
@@ -7300,6 +7306,7 @@ SEXP R_igraph_similarity_jaccard_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP l
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   R_SEXP_to_vector_int_copy(pairs, &c_pairs);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
@@ -7309,6 +7316,8 @@ SEXP R_igraph_similarity_jaccard_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP l
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_pairs);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 
@@ -7816,6 +7825,8 @@ SEXP R_igraph_hrg_sample(SEXP hrg) {
   IGRAPH_R_CHECK(igraph_hrg_sample(&c_hrg, &c_sample));
 
                                         /* Convert output */
+  igraph_hrg_destroy(&c_hrg);
+  IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_sample);
   PROTECT(sample=R_igraph_to_SEXP(&c_sample));
   IGRAPH_I_DESTROY(&c_sample);
@@ -7852,6 +7863,8 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
   IGRAPH_R_CHECK(igraph_hrg_sample_many(&c_hrg, &c_samples, c_num_samples));
 
                                         /* Convert output */
+  igraph_hrg_destroy(&c_hrg);
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(samples=R_igraph_graphlist_to_SEXP(&c_samples));
   IGRAPH_FREE(c_samples.stor_begin);
   IGRAPH_FINALLY_CLEAN(1);
@@ -7883,6 +7896,8 @@ SEXP R_igraph_hrg_game(SEXP hrg) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_hrg_destroy(&c_hrg);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -8092,7 +8107,8 @@ SEXP R_igraph_hrg_size(SEXP hrg) {
   c_result=igraph_hrg_size(&c_hrg);
 
                                         /* Convert output */
-
+  igraph_hrg_destroy(&c_hrg);
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(r_result=NEW_NUMERIC(1));
   REAL(r_result)[0]=(double) c_result;
 
@@ -8130,6 +8146,8 @@ SEXP R_igraph_from_hrg_dendrogram(SEXP hrg) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_hrg_destroy(&c_hrg);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(prob=R_igraph_vector_to_SEXP(&c_prob));
   igraph_vector_destroy(&c_prob);
@@ -11406,6 +11424,7 @@ SEXP R_igraph_expand_path_to_pairs(SEXP path) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_vector_int_copy(path, &c_path);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_path);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_expand_path_to_pairs(&c_path));
 
@@ -11460,6 +11479,7 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   R_SEXP_to_igraph(graph, &c_graph);
   c_start = (igraph_integer_t) REAL(start)[0];
   R_SEXP_to_vector_int_copy(edge_path, &c_edge_path);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_path);
   if (0 != igraph_vector_int_init(&c_vertex_path, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -11469,6 +11489,8 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   IGRAPH_R_CHECK(igraph_vertex_path_from_edge_path(&c_graph, c_start, &c_edge_path, &c_vertex_path, c_mode));
 
                                         /* Convert output */
+  igraph_vector_int_destroy(&c_edge_path);
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(vertex_path=R_igraph_vector_int_to_SEXPp1(&c_vertex_path));
   igraph_vector_int_destroy(&c_vertex_path);
   IGRAPH_FINALLY_CLEAN(1);
