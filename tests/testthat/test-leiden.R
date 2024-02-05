@@ -1,5 +1,5 @@
 test_that("cluster_leiden works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_graph("Zachary")
   mc <- cluster_leiden(g, resolution_parameter = 0.06)
@@ -23,7 +23,7 @@ test_that("cluster_leiden works", {
     ))
   )
 
-  set.seed(42)
+  withr::local_seed(42)
   mc <- cluster_leiden(g, "modularity")
 
   expect_that(

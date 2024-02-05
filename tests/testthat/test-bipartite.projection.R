@@ -1,6 +1,6 @@
 test_that("bipartite_projection works", {
   local_rng_version("3.5.0")
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_full_bipartite_graph(10, 5)
   proj <- bipartite_projection(g)
@@ -40,7 +40,7 @@ test_that("bipartite_projection works", {
 })
 
 test_that("bipartite_projection can calculate only one projection", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_bipartite(5, 10, p = .3)
   proj <- bipartite_projection(g)

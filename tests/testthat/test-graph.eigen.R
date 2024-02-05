@@ -1,5 +1,5 @@
 test_that("spectrum works for symmetric matrices", {
-  set.seed(42)
+  withr::local_seed(42)
 
   std <- function(x) {
     x <- zapsmall(x)

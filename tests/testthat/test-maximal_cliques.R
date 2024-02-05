@@ -111,7 +111,7 @@ bk4 <- function(graph, min = 0, max = Inf) {
 #################################################################
 
 test_that("Maximal cliques work", {
-  set.seed(42)
+  withr::local_seed(42)
   G <- sample_gnm(1000, 1000)
   cli <- make_full_graph(10)
   for (i in 1:10) {
@@ -127,7 +127,7 @@ test_that("Maximal cliques work", {
 })
 
 test_that("Maximal cliques work for subsets", {
-  set.seed(42)
+  withr::local_seed(42)
   G <- sample_gnp(100, .5)
 
   cl1 <- mysort(unvs(max_cliques(G, min = 8)))
@@ -140,7 +140,7 @@ test_that("Maximal cliques work for subsets", {
 })
 
 test_that("Counting maximal cliques works", {
-  set.seed(42)
+  withr::local_seed(42)
   G <- sample_gnp(100, .5)
 
   cl1 <- count_max_cliques(G, min = 8)

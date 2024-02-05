@@ -2,7 +2,7 @@
 ## functions run, but not much more
 
 test_that("sample_correlated_gnp works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- erdos.renyi.game(10, .1)
   g2 <- sample_correlated_gnp(g, corr = 1, p = g$p, permutation = NULL)
@@ -14,7 +14,7 @@ test_that("sample_correlated_gnp works", {
 })
 
 test_that("sample_correlated_gnp works when p is not given", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- erdos.renyi.game(10, .1)
   g2 <- sample_correlated_gnp(g, corr = 1)
@@ -26,7 +26,7 @@ test_that("sample_correlated_gnp works when p is not given", {
 })
 
 test_that("sample_correlated_gnp works even for non-ER graphs", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_grg(100, 0.2)
   g2 <- sample_correlated_gnp(g, corr = 1)
@@ -38,7 +38,7 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 })
 
 test_that("sample_correlated_gnp_pair works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   gp <- sample_correlated_gnp_pair(10, corr = .95, p = .1, permutation = NULL)
   expect_true(abs(ecount(gp[[1]]) - ecount(gp[[2]])) < 3)
@@ -47,7 +47,7 @@ test_that("sample_correlated_gnp_pair works", {
 ## Some corner cases
 
 test_that("sample_correlated_gnp corner cases work", {
-  set.seed(42)
+  withr::local_seed(42)
 
   is.full <- function(g) {
     g2 <- make_full_graph(vcount(g), directed = is_directed(g))
@@ -72,7 +72,7 @@ test_that("sample_correlated_gnp corner cases work", {
 })
 
 test_that("permutation works for sample_correlated_gnp", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- erdos.renyi.game(10, .3)
   perm <- sample(vcount(g))

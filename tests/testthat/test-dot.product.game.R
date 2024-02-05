@@ -1,5 +1,5 @@
 test_that("Dot product rng works", {
-  set.seed(42)
+  withr::local_seed(42)
   vecs <- cbind(
     c(0, 1, 1, 1, 0) / 3, c(0, 1, 1, 0, 1) / 3, c(1, 1, 1, 1, 0) / 4,
     c(0, 1, 1, 1, 0)

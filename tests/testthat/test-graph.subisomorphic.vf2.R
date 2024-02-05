@@ -1,5 +1,5 @@
 test_that("graph.subisomorphic.vf2 works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g1 <- sample_gnp(20, 6 / 20)
   g2 <- sample_gnp(20, 6 / 20)

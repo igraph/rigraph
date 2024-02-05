@@ -11,7 +11,7 @@ test_that("print.igraph works", {
   expect_that(summary(g), prints_text("name[ ]*[(]v/c[)]"))
   expect_that(print(g), prints_text("a--b"))
 
-  set.seed(42)
+  withr::local_seed(42)
   E(g)$weight <- sample(ecount(g))
   expect_that(summary(g), prints_text("weight[\n |]*[(]e/n[)]"))
 
@@ -20,7 +20,7 @@ test_that("print.igraph works", {
   expect_that(print(g, v = T), prints_text("vertex attributes"))
   expect_that(print(g, e = T), prints_text("edges [(]vertex names[)] and"))
 
-  set.seed(42)
+  withr::local_seed(42)
   g2 <- sample_gnp(13, p = 0.6, directed = TRUE)
   expect_that(print(g2), prints_text("1 ->"))
 

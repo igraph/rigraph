@@ -1,12 +1,12 @@
 test_that("without_attr", {
-  set.seed(42)
+  withr::local_seed(42)
   g <- sample_gnp(10, 2 / 10) %>%
     delete_graph_attr("name") %>%
     delete_graph_attr("type") %>%
     delete_graph_attr("loops") %>%
     delete_graph_attr("p")
 
-  set.seed(42)
+  withr::local_seed(42)
   g2 <- sample_(gnp(10, 2 / 10), without_attr())
 
   expect_true(identical_graphs(g, g2))

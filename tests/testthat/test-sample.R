@@ -1,5 +1,5 @@
 test_that("Sampling from a Dirichlet distribution works", {
-  set.seed(42)
+  withr::local_seed(42)
   samp <- sample_dirichlet(10000, alpha = c(1, 1, 1))
   expect_that(dim(samp), equals(c(3, 10000)))
   expect_that(colSums(samp), equals(rep(1, 10000)))

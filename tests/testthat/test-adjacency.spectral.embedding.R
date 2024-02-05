@@ -18,7 +18,7 @@ mag_sort <- function(x) {
 }
 
 test_that("Undirected, unweighted case works", {
-  set.seed(42)
+  withr::local_seed(42)
   g <- random.graph.game(10, 15, type = "gnm", directed = FALSE)
 
   no <- 7
@@ -73,7 +73,7 @@ test_that("Undirected, unweighted case works", {
 })
 
 test_that("Undirected, weighted case works", {
-  set.seed(42)
+  withr::local_seed(42)
   g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
@@ -127,7 +127,7 @@ test_that("Undirected, weighted case works", {
 })
 
 test_that("Directed, unweighted case works", {
-  set.seed(42)
+  withr::local_seed(42)
   g <- random.graph.game(10, 20, type = "gnm", directed = TRUE)
 
   no <- 3
@@ -190,7 +190,7 @@ test_that("Directed, unweighted case works", {
 })
 
 test_that("Directed, weighted case works", {
-  set.seed(42)
+  withr::local_seed(42)
   g <- random.graph.game(10, 20, type = "gnm", directed = TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
@@ -248,7 +248,7 @@ test_that("Directed, weighted case works", {
 })
 
 test_that("Issue #50 is resolved", {
-  set.seed(12345)
+  withr::local_seed(12345)
 
   g <- erdos.renyi.game(15, .4)
   w <- -log(runif(ecount(g)))
@@ -261,7 +261,7 @@ test_that("Issue #50 is resolved", {
 })
 
 test_that("Issue #51 is resolved", {
-  set.seed(12345)
+  withr::local_seed(12345)
 
   pref.matrix <- diag(0.2, 2) + 0.2
   block.sizes <- c(800, 800)

@@ -1,5 +1,5 @@
 local_rng_version("3.5.0")
-set.seed(12345)
+withr::local_seed(12345)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p)
@@ -96,7 +96,7 @@ test_that("Neighborhoods work for them", {
   expect_that(digest::digest(s1), equals("995d0b6a952834ff6e534efc2cfb917b"))
 })
 
-set.seed(42)
+withr::local_seed(42)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p, directed = TRUE)
@@ -155,7 +155,7 @@ test_that("Issue 18 is really resolved", {
 })
 
 test_that("Issue 20 is resolved", {
-  set.seed(12345)
+  withr::local_seed(12345)
   g1 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
   g2 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
   ls <- local_scan(g2, g1, k = 1, mode = "all")

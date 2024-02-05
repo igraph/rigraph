@@ -1,5 +1,5 @@
 test_that("dimensionality selection works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   k <- make_graph("zachary")
   ev <- eigen(as_adjacency_matrix(k), only.values = TRUE)$values
