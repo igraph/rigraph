@@ -124,6 +124,11 @@ reference:
   - has_concept("triangles")
   - starts_with("assortativity")
   - spectrum
+- subtitle: Matrices
+- contents:
+  - laplacian_matrix
+  - as_adjacency_matrix
+  - stochastic_matrix
 - subtitle: Chordal graphs
 - contents:
   - has_concept("chordal")
@@ -193,9 +198,6 @@ reference:
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Spectral coarse graining
-- contents:
-  - has_concept("scg")
 - title: Spectral embedding
 - contents:
   - has_concept("embedding")
