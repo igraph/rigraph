@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9004
+
+## Bug fixes
+
+  - Memory leaks when converting data to C (#1196).
+
+
 # igraph 2.0.1.9003
 
 ## Bug fixes
