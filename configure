@@ -3,9 +3,9 @@
 # Use pkg-config or xml2-config to get the include directories for libxml-2.0
 xml2_include_paths=""
 if which xml2-config >/dev/null 2>&1; then
-    xml2_include_paths=$(xml2-config --cflags | sed -r 's/-I([^ ]*)/-I"\1"/g')
+    xml2_include_paths=$(xml2-config --cflags)
 elif which pkg-config >/dev/null 2>&1; then
-    xml2_include_paths=$(pkg-config --cflags libxml-2.0 | sed -r 's/-I([^ ]*)/-I"\1"/g')
+    xml2_include_paths=$(pkg-config --cflags libxml-2.0)
 else
     echo "Error: Neither xml2-config nor pkg-config is available"
     exit 1
