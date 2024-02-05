@@ -35,7 +35,7 @@ __BEGIN_DECLS
  */
 #define IGRAPH_INTEGER_SIZE 64
 
-#define IGRAPH_DEPRECATED_ENUMVAL __attribute__ ((deprecated))
+#define IGRAPH_DEPRECATED_ENUMVAL /* empty */
 
 /**
  * \define IGRAPH_BOOL_TYPE
