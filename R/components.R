@@ -274,6 +274,37 @@ bridges <- bridges_impl
 biconnected_components <- biconnected_components_impl
 
 
+#' Check biconnectedness
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Tests whether a graph is biconnected.
+#'
+#' @details
+#' A graph is biconnected if the removal of any single vertex (and its adjacent
+#' edges) does not disconnect it.
+#'
+#' igraph does not consider single-vertex graphs biconnected.
+#'
+#' Note that some authors do not consider the graph consisting of
+#' two connected vertices as biconnected, however, igraph does.
+#'
+#' @param graph The input graph. Edge directions are ignored.
+#' @return Logical, `TRUE` if the graph is biconnected.
+#' @seealso [articulation_points()], [biconnected_components()],
+#' [is_connected()], [vertex_connectivity()]
+#' @keywords graphs
+#' @examples
+#' is_biconnected(make_graph("bull"))
+#' is_biconnected(make_graph("dodecahedron"))
+#' is_biconnected(make_full_graph(1))
+#' is_biconnected(make_full_graph(2))
+#' @family components
+#' @export
+is_biconnected <- is_biconnected_impl
+
+
 #' @rdname components
 #' @export
 largest_component <- function(graph, mode = c("weak", "strong")) {

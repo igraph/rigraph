@@ -44,7 +44,8 @@ sapply(components, diameter)
 Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
-\code{\link{component_distribution}()}
+\code{\link{component_distribution}()},
+\code{\link{is_biconnected}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
