@@ -699,10 +699,13 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' weighted graphs. The latter only works if the edge weights are non-negative.
 #'
 #' `all_shortest_paths()` calculates *all* shortest paths between
-#' pairs of vertices. More precisely, between the `from` vertex to the
-#' vertices given in `to`. It uses a breadth-first search for unweighted
-#' graphs and Dijkstra's algorithm for weighted ones. The latter only supports
-#' non-negative edge weights.
+#' pairs of vertices, including several shortest paths of the same length.
+#' More precisely, it computerd all shortest path starting at `from`, and
+#' ending at any vertex given in `to`. It uses a breadth-first search for
+#' unweighted graphs and Dijkstra's algorithm for weighted ones. The latter
+#' only supports non-negative edge weights. Caution: in multigraphs, the
+#' result size is exponentially large in the number of vertex pairs with
+#' multiple edges between them.
 #'
 #' `mean_distance()` calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
@@ -774,8 +777,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #'   For `all_shortest_paths()` a list is returned, each list element
 #'   contains a shortest path from `from` to a vertex in `to`. The
-#'   shortest paths to the same vertex are collected into consecutive elements of
-#'   the list.
+#'   shortest paths to the same vertex are collected into consecutive elements
+#'   of the list.
 #'
 #'   For `mean_distance()` a single number is returned if `details=FALSE`,
 #'   or a named list with two entries: `res` is the mean distance as a numeric
@@ -785,8 +788,10 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   `distance_table()` returns a named list with two entries: `res` is
 #'   a numeric vector, the histogram of distances, `unconnected` is a
 #'   numeric scalar, the number of pairs for which the first vertex is not
-#'   reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
-#'   for directed graphs and \eqn{n(n-1)/2} for undirected graphs.
+#'   reachable from the second. In undirected and directed graphs, unorderde
+#'   and ordered pairs are considered, respectively. Therefore the sum of the
+#'   two entries is always \eqn{n(n-1)} for directed graphs and \eqn{n(n-1)/2}
+#'   for undirected graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
