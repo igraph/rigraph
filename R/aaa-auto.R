@@ -215,6 +215,21 @@ realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, allowed.edge.type
   res
 }
 
+realize_bipartite_degree_sequence_impl <- function(degrees1, degrees2, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
+  # Argument checks
+  degrees1 <- as.numeric(degrees1)
+  degrees2 <- as.numeric(degrees2)
+  allowed.edge.types <- switch(igraph.match.arg(allowed.edge.types),
+    "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
+  method <- switch(igraph.match.arg(method), "smallest"=0L, "largest"=1L, "index"=2L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_realize_bipartite_degree_sequence, degrees1, degrees2, allowed.edge.types, method)
+
+  res
+}
+
 circulant_impl <- function(n, shifts, directed=FALSE) {
   # Argument checks
   n <- as.numeric(n)
@@ -970,9 +985,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 
@@ -2257,6 +2270,17 @@ bridges_impl <- function(graph) {
   res
 }
 
+is_biconnected_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_biconnected, graph)
+
+  res
+}
+
 cliques_impl <- function(graph, min=0, max=0) {
   # Argument checks
   ensure_igraph(graph)
@@ -3229,9 +3253,6 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
   res
 }
 
-# get_subisomorphisms_vf2_callback_impl gives LTO warnings
-# wrong number of arguments to  R_igraph_get_subisomorphisms_vf2_callback()
-
 count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
   ensure_igraph(graph1)
@@ -3816,7 +3837,6 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-
 vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
@@ -3835,3 +3855,4 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   }
   res
 }
+
