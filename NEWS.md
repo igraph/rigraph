@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9005
+
+## Chore
+
+  - Update vendored igraph/C to igraph/igraph@8def9e335ae1cbb98150… (#1198).
+
+## Documentation
+
+  - Remove scg related docs (#1167).
+
+## Testing
+
+  - Set seed *locally* (#1166).
+
+
 # igraph 2.0.1.9004
 
 ## Bug fixes
