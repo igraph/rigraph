@@ -76,6 +76,21 @@ CSTRING:
         OUT: |-
             PROTECT(%I% = Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8));
 
+DOUBLE:
+    CTYPE: double
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_REAL(%I%);
+            %C% = REAL(%I%)[0];
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=NEW_NUMERIC(1));
+            REAL(%I%)[0]=%C%;
+
 REAL:
     CTYPE: igraph_real_t
     CALL:
