@@ -287,6 +287,21 @@ eccentricity <- eccentricity_dijkstra_impl
 #' @export
 radius <- radius_dijkstra_impl
 
+#' Central vertices of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' The center of a graph is the set of its vertices with minimal eccentricity.
+#'
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
+#' @return The vertex IDs of the central vertices.
+#' @seealso [eccentricity()], [radius()]
+#' @family paths
+#' @export
+graph_center <- graph_center_dijkstra_impl
+
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.

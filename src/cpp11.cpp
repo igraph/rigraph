@@ -209,7 +209,6 @@ extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_girth(void *, void *);
 extern SEXP R_igraph_global_efficiency(void *, void *, void *);
 extern SEXP R_igraph_gomory_hu_tree(void *, void *);
-extern SEXP R_igraph_graph_center(void *, void *);
 extern SEXP R_igraph_graph_center_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_graph_count(void *, void *);
 extern SEXP R_igraph_graph_power(void *, void *, void *);
@@ -667,7 +666,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_global_efficiency",                          (DL_FUNC) &R_igraph_global_efficiency,                           3},
     {"R_igraph_gomory_hu_tree",                             (DL_FUNC) &R_igraph_gomory_hu_tree,                              2},
-    {"R_igraph_graph_center",                               (DL_FUNC) &R_igraph_graph_center,                                2},
     {"R_igraph_graph_center_dijkstra",                      (DL_FUNC) &R_igraph_graph_center_dijkstra,                       3},
     {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
     {"R_igraph_graph_power",                                (DL_FUNC) &R_igraph_graph_power,                                 3},

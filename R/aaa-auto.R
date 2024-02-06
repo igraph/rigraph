@@ -1773,22 +1773,9 @@ eccentricity_dijkstra_impl <- function(graph, vids=V(graph), ..., weights=NULL, 
   res
 }
 
-graph_center_impl <- function(graph, mode=c("all", "out", "in", "total")) {
+graph_center_dijkstra_impl <- function(graph, ..., weights=NULL, mode=c("all", "out", "in", "total")) {
   # Argument checks
-  ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_graph_center, graph, mode)
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-  res
-}
-
-graph_center_dijkstra_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
-  # Argument checks
+  check_dots_empty()
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight

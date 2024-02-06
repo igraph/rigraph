@@ -615,9 +615,12 @@ igraph_eccentricity:
 igraph_eccentricity_dijkstra:
     PARAM_ORDER: graph, vids, *, weights, ...
 
+# We use igraph_graph_center_dijkstra instead
 igraph_graph_center:
+    IGNORE: RR, RC
 
 igraph_graph_center_dijkstra:
+    FIRST_KW_PARAM: weights
 
 # We use igraph_radius_dijkstra instead
 igraph_radius:
