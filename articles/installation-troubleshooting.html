@@ -175,6 +175,17 @@ sure that you have all the prerequisites:</p>
 Fedora, use
 <code>yum install glpk-devel gmp-devel libxml2-devel</code>.</li>
 </ul>
+<p>If you have an Anaconda environment active, deactivate them
+<em>before</em> compiling igraph. Having conda environments active are
+known to cause a number of issues, both during compilation and later
+during usage.</p>
+<p>Set up your Anaconda installation so no environment is active by
+default. Make sure that Anaconda’s <code>bin</code> directory is
+<em>not</em> present in your <code>PATH</code> environment variable. <a href="https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path" class="external-link">Do
+not add this directory to the path manually. Instead, let Anaconda
+manage it using <code>conda init</code>, as recommended by Anaconda.</a>
+Only Anaconda’s <code>condabin</code>, <em>but not
+<code>bin</code></em>, should be present in the <code>PATH</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="fatal-error-glpk-h-no-such-file-or-directory">fatal error: glpk.h: No such file or directory<a class="anchor" aria-label="anchor" href="#fatal-error-glpk-h-no-such-file-or-directory"></a>
@@ -193,12 +204,13 @@ versions on your machine. Most commonly, one of them comes from an
 active Anaconda environment. Always deactivate all Anaconda environments
 using <code>conda deactivate</code> before installing igraph using
 <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code>.</p>
-<p>Make sure that Anaconda’s <code>bin</code> directory is <em>not</em>
-present in your <code>PATH</code> environment variable. <a href="https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path" class="external-link">Do
+<p>Set up your Anaconda installation so no environment is active by
+default. Make sure that Anaconda’s <code>bin</code> directory is
+<em>not</em> present in your <code>PATH</code> environment variable. <a href="https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path" class="external-link">Do
 not add this directory to the path manually. Instead, let Anaconda
-manage it using <code>conda init</code>.</a> Only Anaconda’s
-<code>condabin</code>, <em>but not <code>bin</code></em>, should be
-present in the <code>PATH</code>.</p>
+manage it using <code>conda init</code>, as recommended by Anaconda.</a>
+Only Anaconda’s <code>condabin</code>, <em>but not
+<code>bin</code></em>, should be present in the <code>PATH</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="libmkl_rt-so-1-cannot-open-shared-object-file-no-such-file-or-directory">libmkl_rt.so.1: cannot open shared object file: No such file or

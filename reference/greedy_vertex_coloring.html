@@ -75,13 +75,16 @@ based on a simple greedy algorithm.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>graph</dt>
-<dd><p>The graph object to color</p></dd>
+<dd><p>The graph object to color.</p></dd>
 
 
 <dt>heuristic</dt>
 <dd><p>The selection heuristic for the next vertex to consider.
-Currently only one heuristic is supported: “colored_neighbors”
-selects the vertex with the largest number of already colored neighbors.</p></dd>
+Possible values are: “colored_neighbors” selects the vertex with the
+largest number of already colored neighbors. “dsatur” selects the
+vertex with the largest number of unique colors in its neighborhood, i.e.
+its "saturation degree"; when there are several maximum saturation degree
+vertices, the one with the most uncolored neighbors will be selected.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -89,18 +92,17 @@ selects the vertex with the largest number of already colored neighbors.</p></dd
     
 
 <p>A numeric vector where item <code>i</code> contains the color index
-associated to vertex <code>i</code></p>
-
-
+associated to vertex <code>i</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The goal of vertex coloring is to assign a "color" (i.e. a positive integer
-index) to each vertex of the graph such that neighboring vertices never have
-the same color. This function solves the problem by considering the vertices
-one by one according to a heuristic, always choosing the smallest color index
-that differs from that of already colored neighbors. The coloring obtained
-this way is not necessarily minimal but it can be calculated in linear time.</p>
+    <p>The goal of vertex coloring is to assign a "color" (represented as a positive
+integer) to each vertex of the graph such that neighboring vertices never
+have the same color. This function solves the problem by considering the
+vertices one by one according to a heuristic, always choosing the smallest
+color that differs from that of already colored neighbors. The coloring
+obtained this way is not necessarily minimum but it can be calculated in
+linear time.</p>
     </div>
 
     <div class="section level2">
