@@ -82,9 +82,13 @@ igraph_create:
 igraph_adjacency:
     IGNORE: RR
 
+# TODO: temporarily disabled
 igraph_sparse_adjacency:
+    IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_sparse_weighted_adjacency:
+    IGNORE: RR, RC
 
 igraph_weighted_adjacency:
     IGNORE: RR
@@ -167,7 +171,9 @@ igraph_generalized_petersen:
 
 igraph_turan:
 
+# TODO: temporarily disabled
 igraph_weighted_sparsemat:
+    IGNORE: RR, RC
 
 #######################################
 # Constructors, games
@@ -748,7 +754,9 @@ igraph_largest_cliques:
 igraph_maximal_cliques:
     IGNORE: RR, RC, RInit
 
+# TODO: temporarily disabled
 igraph_maximal_cliques_subset:
+    IGNORE: RR, RC
 
 igraph_maximal_cliques_callback:
     IGNORE: RR, RC, RInit
@@ -1012,7 +1020,9 @@ igraph_from_hrg_dendrogram:
 igraph_get_adjacency:
     IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_get_adjacency_sparse:
+    IGNORE: RR
 
 igraph_get_edgelist:
     IGNORE: RR, RC
@@ -1047,7 +1057,9 @@ igraph_read_graph_pajek:
 igraph_read_graph_graphml:
     IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_read_graph_dimacs_flow:
+    IGNORE: RR, RC
 
 igraph_read_graph_graphdb:
     IGNORE: RR, RC
@@ -1076,8 +1088,9 @@ igraph_write_graph_graphml:
 igraph_write_graph_pajek:
     IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_write_graph_dimacs_flow:
-    IGNORE: RR
+    IGNORE: RR, RC
     PARAMS: |-
         INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
         VECTOR capacity
@@ -1272,7 +1285,11 @@ igraph_subisomorphic:
 
 igraph_subisomorphic_vf2:
 
+# TODO: temporarily disabled
+# get_subisomorphisms_vf2_callback_impl gives LTO warnings
+# wrong number of arguments to  R_igraph_get_subisomorphisms_vf2_callback()
 igraph_get_subisomorphisms_vf2_callback:
+    IGNORE: RR, RC
 
 igraph_count_subisomorphisms_vf2:
 
@@ -1360,13 +1377,21 @@ igraph_convex_hull:
 
 igraph_dim_select:
 
+# Not needed in R
 igraph_almost_equals:
+    IGNORE: RR, RC
 
+# Not needed in R
 igraph_cmp_epsilon:
+    IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_eigen_matrix:
+    IGNORE: RR, RC
 
+# TODO: temporarily disabled
 igraph_eigen_matrix_symmetric:
+    IGNORE: RR, RC
 
 igraph_solve_lsap:
 
@@ -1455,17 +1480,22 @@ igraph_stochastic_imitation:
 igraph_convergence_degree:
     IGNORE: RR, RC, RInit
 
+# Not needed in R
 igraph_has_attribute_table:
+    IGNORE: RR, RC
 
 #######################################
 # Progress, status handling
 #######################################
 
 igraph_progress:
+    IGNORE: RR, RC
 
 igraph_status:
+    IGNORE: RR, RC
 
 igraph_strerror:
+    IGNORE: RR, RC
 
 #######################################
 # Other functions, documented, graph related
@@ -1486,3 +1516,4 @@ igraph_vertex_path_from_edge_path:
 #######################################
 
 igraph_version:
+    IGNORE: RR, RC
