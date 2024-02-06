@@ -227,6 +227,14 @@ realize_bipartite_degree_sequence_impl <- function(degrees1, degrees2, allowed.e
   # Function call
   res <- .Call(R_igraph_realize_bipartite_degree_sequence, degrees1, degrees2, allowed.edge.types, method)
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Bipartite graph from degree sequence'
+    res$degrees1 <- degrees1
+    res$degrees2 <- degrees2
+    res$allowed.edge.types <- allowed.edge.types
+    res$method <- method
+  }
+
   res
 }
 
