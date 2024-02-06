@@ -728,13 +728,14 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @param mode Character constant, gives whether the shortest paths to or from
 #'   the given vertices should be calculated for directed graphs. If `out`
 #'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, i.e. not directed paths are searched. This
+#'   it will be considered. If `all`, the default, then the graph is treated
+#'   as undirected, i.e. edge directions are not taken into account. This
 #'   argument is ignored for undirected graphs.
 #' @param weights Possibly a numeric vector giving edge weights. If this is
 #'   `NULL` and the graph has a `weight` edge attribute, then the
 #'   attribute is used. If this is `NA` then no weights are used (even if
-#'   the graph has a `weight` attribute).
+#'   the graph has a `weight` attribute). In a weighted graph, the length
+#'   of a path is the sum of the weights of its constituent edges.
 #' @param algorithm Which algorithm to use for the calculation. By default
 #'   igraph tries to select the fastest suitable algorithm. If there are no
 #'   weights, then an unweighted breadth-first search is used, otherwise if all

@@ -145,7 +145,6 @@ extern SEXP R_igraph_dominator_tree(void *, void *, void *);
 extern SEXP R_igraph_dot_product_game(void *, void *);
 extern SEXP R_igraph_dyad_census(void *);
 extern SEXP R_igraph_ecc(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_eccentricity(void *, void *, void *);
 extern SEXP R_igraph_eccentricity_dijkstra(void *, void *, void *, void *);
 extern SEXP R_igraph_ecount(void *);
 extern SEXP R_igraph_edge_betweenness_cutoff(void *, void *, void *, void *);
@@ -361,7 +360,6 @@ extern SEXP R_igraph_power_law_fit(void *, void *, void *);
 extern SEXP R_igraph_preference_game(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_radius(void *, void *);
 extern SEXP R_igraph_radius_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_random_edge_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_random_sample(void *, void *, void *);
@@ -605,7 +603,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_dot_product_game",                           (DL_FUNC) &R_igraph_dot_product_game,                            2},
     {"R_igraph_dyad_census",                                (DL_FUNC) &R_igraph_dyad_census,                                 1},
     {"R_igraph_ecc",                                        (DL_FUNC) &R_igraph_ecc,                                         5},
-    {"R_igraph_eccentricity",                               (DL_FUNC) &R_igraph_eccentricity,                                3},
     {"R_igraph_eccentricity_dijkstra",                      (DL_FUNC) &R_igraph_eccentricity_dijkstra,                       4},
     {"R_igraph_ecount",                                     (DL_FUNC) &R_igraph_ecount,                                      1},
     {"R_igraph_edge_betweenness_cutoff",                    (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                     4},
@@ -821,7 +818,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
     {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
-    {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      2},
     {"R_igraph_radius_dijkstra",                            (DL_FUNC) &R_igraph_radius_dijkstra,                             3},
     {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},

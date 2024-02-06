@@ -242,12 +242,8 @@ max_cardinality <- maximum_cardinality_search_impl
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams distances
+#' @inheritParams rlang::args_dots_empty
 #' @return `eccentricity()` returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
 #' @seealso [radius()] for a related concept,
@@ -259,29 +255,24 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- eccentricity_impl
+eccentricity <- eccentricity_dijkstra_impl
 
 
 #' Radius of a graph
 #'
-#' The eccentricity of a vertex is its shortest path distance from the
-#' farthest other node in the graph. The smallest eccentricity in a graph
-#' is called its radius
+#' The eccentricity of a vertex is its distance from the farthest other node
+#' in the graph. The smallest eccentricity in a graph is called its radius.
 #'
 #' The eccentricity of a vertex is calculated by measuring the shortest
 #' distance from (or to) the vertex, to (or from) all vertices in the
 #' graph, and taking the maximum.
 #'
 #' This implementation ignores vertex pairs that are in different
-#' components.  Isolate vertices have eccentricity zero.
+#' components. Isolated vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
 #' @return A numeric scalar, the radius of the graph.
 #' @seealso [eccentricity()] for the underlying
 #'   calculations, [distances] for general shortest path
@@ -294,7 +285,7 @@ eccentricity <- eccentricity_impl
 #' radius(g)
 #' @family paths
 #' @export
-radius <- radius_impl
+radius <- radius_dijkstra_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,

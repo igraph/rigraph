@@ -608,17 +608,23 @@ igraph_joint_type_distribution:
 
 igraph_contract_vertices:
 
+# We use igraph_eccentricity_dijkstra instead
 igraph_eccentricity:
+    IGNORE: RR, RC
 
 igraph_eccentricity_dijkstra:
+    PARAM_ORDER: graph, vids, *, weights, ...
 
 igraph_graph_center:
 
 igraph_graph_center_dijkstra:
 
+# We use igraph_radius_dijkstra instead
 igraph_radius:
+    IGNORE: RR, RC
 
 igraph_radius_dijkstra:
+    FIRST_KW_PARAM: weights
 
 igraph_pseudo_diameter:
     DEPS: start_vid ON graph

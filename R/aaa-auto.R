@@ -1749,23 +1749,9 @@ contract_vertices_impl <- function(graph, mapping, vertex.attr.comb=igraph_opt("
   res
 }
 
-eccentricity_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total")) {
+eccentricity_dijkstra_impl <- function(graph, vids=V(graph), ..., weights=NULL, mode=c("all", "out", "in", "total")) {
   # Argument checks
-  ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_eccentricity, graph, vids-1, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", vids)
-  }
-  res
-}
-
-eccentricity_dijkstra_impl <- function(graph, weights=NULL, vids=V(graph), mode=c("all", "out", "in", "total")) {
-  # Argument checks
+  check_dots_empty()
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1823,20 +1809,9 @@ graph_center_dijkstra_impl <- function(graph, weights=NULL, mode=c("all", "out",
   res
 }
 
-radius_impl <- function(graph, mode=c("all", "out", "in", "total")) {
+radius_dijkstra_impl <- function(graph, ..., weights=NULL, mode=c("all", "out", "in", "total")) {
   # Argument checks
-  ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_radius, graph, mode)
-
-  res
-}
-
-radius_dijkstra_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
-  # Argument checks
+  check_dots_empty()
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
