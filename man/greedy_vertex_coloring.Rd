@@ -7,27 +7,31 @@
 greedy_vertex_coloring(graph, heuristic = c("colored_neighbors", "dsatur"))
 }
 \arguments{
-\item{graph}{The graph object to color}
+\item{graph}{The graph object to color.}
 
 \item{heuristic}{The selection heuristic for the next vertex to consider.
-Currently only one heuristic is supported: \dQuote{colored_neighbors}
-selects the vertex with the largest number of already colored neighbors.}
+Possible values are: \dQuote{colored_neighbors} selects the vertex with the
+largest number of already colored neighbors. \dQuote{dsatur} selects the
+vertex with the largest number of unique colors in its neighborhood, i.e.
+its "saturation degree"; when there are several maximum saturation degree
+vertices, the one with the most uncolored neighbors will be selected.}
 }
 \value{
 A numeric vector where item \code{i} contains the color index
-associated to vertex \code{i}
+associated to vertex \code{i}.
 }
 \description{
 \code{greedy_vertex_coloring()} finds a coloring for the vertices of a graph
 based on a simple greedy algorithm.
 }
 \details{
-The goal of vertex coloring is to assign a "color" (i.e. a positive integer
-index) to each vertex of the graph such that neighboring vertices never have
-the same color. This function solves the problem by considering the vertices
-one by one according to a heuristic, always choosing the smallest color index
-that differs from that of already colored neighbors. The coloring obtained
-this way is not necessarily minimal but it can be calculated in linear time.
+The goal of vertex coloring is to assign a "color" (represented as a positive
+integer) to each vertex of the graph such that neighboring vertices never
+have the same color. This function solves the problem by considering the
+vertices one by one according to a heuristic, always choosing the smallest
+color that differs from that of already colored neighbors. The coloring
+obtained this way is not necessarily minimum but it can be calculated in
+linear time.
 }
 \examples{
 
