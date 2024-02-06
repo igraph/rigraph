@@ -985,9 +985,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 

@@ -416,8 +416,6 @@ igraph_edge_betweenness_cutoff:
     IGNORE: RR
 
 igraph_edge_betweenness_subset:
-    DEPS: |-
-        eids ON graph, weights ON graph V(graph), res ON graph V(graph), sources ON graph, targets ON graph
 
 igraph_harmonic_centrality:
     IGNORE: RR, RC, RInit
