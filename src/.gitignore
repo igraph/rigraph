@@ -1,5 +1,5 @@
 *.o
 *.so
-/config.h
+/vendor/config.h
 /config.h.in~
 /Makevars

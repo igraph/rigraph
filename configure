@@ -25,3 +25,25 @@ if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars sr
     cp -f src/Makevars.new src/Makevars
 fi
 rm -f src/Makevars.new
+
+cp src/vendor/config.h.in src/vendor/config.h
+
+# Check for the presence of __uint128_t type
+cat > conftest.c <<EOF
+int main() {
+  __uint128_t x;
+  return 0;
+}
+EOF
+
+# Try to compile the test program
+if $(R CMD config CC) -o conftest conftest.c >/dev/null 2>&1; then
+  sed -i 's/@HAVE_UINT128_T@/#define HAVE___UINT128_T 1/' "src/vendor/config.h"
+  echo "Compiler supports __uint128_t"
+else
+  sed -i 's/@HAVE_UINT128_T@/#undef HAVE___UINT128_T/' "src/vendor/config.h"
+  echo "Compiler does not support __uint128_t"
+fi
+
+# Clean up
+rm -f conftest.c conftest
