@@ -709,7 +709,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #' `mean_distance()` calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
-#' directed graphs). It uses a breadth-=first search for unweighted graphs and
+#' directed graphs). It uses a breadth-first search for unweighted graphs and
 #' Dijkstra's algorithm for weighted ones. The latter only supports non-negative
 #' edge weights.
 #'
