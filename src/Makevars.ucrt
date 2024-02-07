@@ -11,6 +11,6 @@ PKG_CPPFLAGS = -I"${LIB_XML}/include/libxml2" -I"${LIB_XML}/include" -DLIBXML_ST
         -D_GNU_SOURCE=1
 
 PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -liconv -lz -lws2_32 -lstdc++ \
-  -lglpk -lgmp $(BLAS_LIBS) $(LAPACK_LIBS) -llzma
+  -lglpk -lgmp $(BLAS_LIBS) $(LAPACK_LIBS) $(FLIBS) -llzma
 
 OBJECTS=${SOURCES}
