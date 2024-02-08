@@ -41,3 +41,37 @@ test_that("automorphism_group works with colored graphs", {
   aut <- aut[order(sapply(aut, "[[", 1))]
   expect_that(aut, equals(list(c(1, 4, 3, 2), c(3, 2, 1, 4))))
 })
+
+test_that("isomorphisms works", {
+  motif <- make_empty_graph(directed = FALSE) +
+    vertices("D1", "D2", type = c("type1", "type1")) +
+    edges("D1", "D2", type = c("type2"))
+  subgraph_isomorphisms(
+    target = motif, pattern = motif, method = "vf2",
+    vertex.color1 = 2:1, vertex.color2 = 1:2
+  )
+})
+
+test_that("isomorphisms() works", {
+  motif <- make_empty_graph(directed = FALSE) +
+    vertices("D1", "D2", type = c("type1", "type1")) +
+    edges("D1", "D2", type = c("type2"))
+  out <- isomorphisms(
+    motif,  motif, method = "vf2",
+    vertex.color1 = 2:1, vertex.color2 = 1:2
+  )
+  expect_length(out, 1)
+  expect_equal(as.numeric(out[[1]]), 2:1)
+})
+
+test_that("subgraph_isomorphisms works", {
+  motif <- make_empty_graph(directed = FALSE) +
+    vertices("D1", "D2", type = c("type1", "type1")) +
+    edges("D1", "D2", type = c("type2"))
+  out <- subgraph_isomorphisms(
+    target = motif, pattern = motif, method = "vf2",
+    vertex.color1 = 2:1, vertex.color2 = 1:2
+  )
+  expect_length(out, 1)
+  expect_equal(as.numeric(out[[1]]), 2:1)
+})
