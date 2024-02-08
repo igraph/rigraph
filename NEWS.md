@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9007
+
+## Documentation
+
+  - Fix typo in `mean_distance()` docs.
+
+
 # igraph 2.0.1.9006
 
 ## Bug fixes
