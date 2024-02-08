@@ -2411,7 +2411,18 @@ components <- function(graph, mode = c("weak", "strong")) {
 is_connected <- is_connected_impl
 
 #' @rdname components
-count_components <- count_components
+#' @export
+count_components <- function(graph, mode = c("weak", "strong")) {
+  ensure_igraph(graph)
+  mode <- igraph.match.arg(mode)
+  mode <- switch(mode,
+    "weak" = 1L,
+    "strong" = 2L
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_no_components, graph, mode)
+}
 
 #' Convert a general graph into a forest
 #'

@@ -98,20 +98,6 @@ articulation.points <- function(graph) { # nocov start
 # Connected components, subgraphs, kinda
 ###################################################################
 
-#' @family components
-#' @export
-count_components <- function(graph, mode = c("weak", "strong")) {
-  ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode,
-    "weak" = 1L,
-    "strong" = 2L
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_components, graph, mode)
-}
-
 #' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
 #'   frequency) is calculated.

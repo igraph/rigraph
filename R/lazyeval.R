@@ -176,16 +176,7 @@ print.lazy <- function(x, ...) {
   cat("  expr: ", code, "\n", sep = "")
   cat("  env:  ", format(x$env), "\n", sep = "")
 }
-make_call <- function(fun, args) {
-  stopifnot(is.call(fun) || is.name(fun))
-  args <- as.lazy_dots(args)
-  expr <- lapply(args, `[[`, "expr")
 
-  lazy_(
-    as.call(c(fun, expr)),
-    common_env(args)
-  )
-}
 common_env <- function(dots) {
   if (!is.list(dots)) stop("dots must be a list", call. = FALSE)
   if (length(dots) == 0) {
