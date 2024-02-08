@@ -166,6 +166,12 @@ igraph_realize_degree_sequence:
         name: Graph from degree sequence
       GATTR-PARAM: out_deg, in_deg, allowed_edge_types, method
 
+igraph_realize_bipartite_degree_sequence:
+    R:
+      GATTR:
+        name: Bipartite graph from degree sequence
+      GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
+
 igraph_circulant:
 
 igraph_generalized_petersen:

@@ -1717,7 +1717,7 @@ graph_from_lcf <- lcf_vector_impl
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
-#' @param method Character, the method for generating the graph; see above.
+#' @param method Character, the method for generating the graph; see below.
 #' @param allowed.edge.types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
 #'   \dQuote{multiple} allows multiple edges but disallows loop.
@@ -1773,6 +1773,62 @@ graph_from_lcf <- lcf_vector_impl
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
 realize_degseq <- realize_degree_sequence_impl
+
+
+#' Creating a bipartite graph from two degree sequences, deterministically
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Constructs a bipartite graph from the degree sequences of its partitions,
+#' if one exists. This function uses a Havel-Hakimi style construction
+#' algorithm.
+#'
+#' @details
+#' The \sQuote{method} argument controls in which order the vertices are
+#' selected during the course of the algorithm.
+#'
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining
+#' degree, from either partition. The result is usually a graph with high
+#' negative degree assortativity. In the undirected case, this method is
+#' guaranteed to generate a connected graph, regardless of whether multi-edges
+#' are allowed, provided that a connected realization exists. This is the
+#' default method.
+#'
+#' The \dQuote{largest} method selects the vertex with the largest remaining
+#' degree. The result is usually a graph with high positive degree
+#' assortativity, and is often disconnected.
+#'
+#' The \dQuote{index} method selects the vertices in order of their index.
+#'
+#' @return The new graph object.
+#' @param degrees1 The degrees of the first partition.
+#' @param degrees2 The degrees of the second partition.
+#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#'   \dQuote{simple} allows simple graphs only (no multiple edges).
+#'   \dQuote{multiple} allows multiple edges.
+#' @param method Character, the method for generating the graph; see below.
+#' @inheritParams rlang::args_dots_empty
+#' @seealso [realize_degseq()] to create a not necessarily bipartite graph.
+#' @export
+#' @keywords graphs
+#' @examples
+#' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
+#' degree(g)
+realize_bipartite_degseq <- function(degrees1, degrees2, ...,
+                                     allowed.edge.types = c("simple", "multiple"),
+                                     method = c("smallest", "largest", "index")) {
+  check_dots_empty()
+  allowed.edge.types <- igraph.match.arg(allowed.edge.types)
+  method <- igraph.match.arg(method)
+  g <- realize_bipartite_degree_sequence_impl(degrees1 = degrees1, degrees2 = degrees2,
+                                              allowed.edge.types = allowed.edge.types,
+                                              method = method)
+  V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
+  g
+}
+
+
 #' @export graph.atlas
 deprecated("graph.atlas", graph_from_atlas)
 #' @export graph.bipartite
