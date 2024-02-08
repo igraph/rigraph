@@ -10,7 +10,8 @@ shortest.paths(
   to = V(graph),
   mode = c("all", "out", "in"),
   weights = NULL,
-  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")
+  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
+    "floyd-warshall")
 )
 }
 \arguments{
