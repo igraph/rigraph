@@ -1880,7 +1880,8 @@ pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TR
   res
 }
 
-pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
+# https://github.com/igraph/igraph/commit/d455f61f4832d5207cb0a0475fb5ddc02409ae76#r138442064
+pseudo_diameter_dijkstra_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
