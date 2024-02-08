@@ -18,6 +18,15 @@ test_that("biconnected_components works", {
   expect_that(sortlist(bc$component_edges), equals(list(11:20, 1:10, 21)))
   expect_that(sortlist(bc$components), equals(list(1:5, c(1, 6), 6:10)))
   expect_that(sort(as.vector(bc$articulation_points)), equals(c(1, 6)))
+
+  expect_equal(sort(names(bc)), c("articulation_points",
+                                  "component_edges",
+                                  "components",
+                                  "no",
+                                  "tree_edges"))
+  expect_equal(class(bc$articulation_points), "igraph.vs")
+  expect_equal(class(bc$components[[1]]), "igraph.vs")
+  expect_equal(class(bc$component_edges[[1]]), "igraph.es")
 })
 
 test_that("is_biconnected works", {
