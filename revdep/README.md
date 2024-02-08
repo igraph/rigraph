@@ -1,41 +1,49 @@
 # Revdeps
 
-## Failed to check (7)
+## Failed to check (4)
 
-|package    |version |error |warning |note |
-|:----------|:-------|:-----|:-------|:----|
-|geostan    |0.5.3   |1     |        |     |
-|HLSM       |?       |      |        |     |
-|Seurat     |?       |      |        |     |
-|streamDAG  |?       |      |        |     |
-|TDA        |1.9     |1     |        |     |
-|TestAnaAPP |0.1.5   |1     |        |     |
-|treestats  |1.0.3   |1     |        |     |
+|package   |version |error |warning |note |
+|:---------|:-------|:-----|:-------|:----|
+|multinma  |?       |      |        |     |
+|rdracor   |?       |      |        |     |
+|Seurat    |?       |      |        |     |
+|streamDAG |?       |      |        |     |
 
-## New problems (22)
+## New problems (33)
 
-|package           |version |error  |warning |note |
-|:-----------------|:-------|:------|:-------|:----|
-|[countland](problems.md#countland)|0.1.1   |__+1__ |        |     |
-|[DiagrammeR](problems.md#diagrammer)|1.0.10  |__+1__ |        |1    |
-|[dnet](problems.md#dnet)|1.1.7   |__+1__ |        |     |
-|[dragon](problems.md#dragon)|1.2.1   |__+1__ |        |2    |
-|[EGAnet](problems.md#eganet)|2.0.3   |__+1__ |        |1    |
-|[ggnetwork](problems.md#ggnetwork)|0.5.12  |__+1__ |        |1    |
-|[inferCSN](problems.md#infercsn)|0.99.9  |__+1__ |        |1    |
-|[intergraph](problems.md#intergraph)|2.0-3   |__+1__ |        |     |
-|[manynet](problems.md#manynet)|0.3.0   |__+1__ |        |2    |
-|[migraph](problems.md#migraph)|1.2.1   |__+1__ |        |     |
-|[molnet](problems.md#molnet)|0.1.0   |__+1__ |        |     |
-|[nat](problems.md#nat)|1.8.23  |__+1__ |        |     |
-|[nbTransmission](problems.md#nbtransmission)|1.1.3   |__+2__ |        |     |
-|[netcom](problems.md#netcom)|2.1.6   |__+2__ |        |1    |
-|[nosoi](problems.md#nosoi)|1.1.0   |__+1__ |        |     |
-|[oddnet](problems.md#oddnet)|0.1.0   |__+1__ |        |     |
-|[pcalg](problems.md#pcalg)|2.7-9   |__+1__ |        |3    |
-|[phyloseqGraphTest](problems.md#phyloseqgraphtest)|0.1.0   |__+2__ |        |2    |
-|[rgraph6](problems.md#rgraph6)|2.0-3   |__+1__ |        |     |
-|[riverconn](problems.md#riverconn)|0.3.28  |__+1__ |        |     |
-|[tidygraph](problems.md#tidygraph)|1.3.0   |__+2__ |        |     |
-|[VertexSort](problems.md#vertexsort)|0.1-1   |__+1__ |        |     |
+|package            |version |error  |warning |note |
+|:------------------|:-------|:------|:-------|:----|
+|[bipartite](problems.md#bipartite)|2.19    |__+1__ |        |1    |
+|[bootnet](problems.md#bootnet)|1.5.6   |__+1__ |        |     |
+|[CARBayes](problems.md#carbayes)|6.1     |__+1__ |        |2    |
+|[Cascade](problems.md#cascade)|2.1     |__+1__ |        |     |
+|[centiserve](problems.md#centiserve)|1.0.0   |__+1__ |        |     |
+|[CePa](problems.md#cepa)|0.8.0   |__+1__ |1       |     |
+|[CINNA](problems.md#cinna)|1.2.2   |__+1__ |        |1    |
+|[DTSEA](problems.md#dtsea)|0.0.3   |__+1__ |        |     |
+|[edmcr](problems.md#edmcr)|0.2.0   |__+1__ |        |     |
+|[gdistance](problems.md#gdistance)|1.6.4   |__+2__ |        |     |
+|[gemtc](problems.md#gemtc)|1.0-2   |__+2__ |        |     |
+|[graphsim](problems.md#graphsim)|1.0.3   |__+1__ |        |     |
+|[handwriter](problems.md#handwriter)|2.0.3   |__+2__ |        |1    |
+|[keyplayer](problems.md#keyplayer)|1.0.4   |__+1__ |        |     |
+|[lconnect](problems.md#lconnect)|0.1.1   |__+1__ |        |1    |
+|[linkprediction](problems.md#linkprediction)|1.0-0   |__+1__ |        |1    |
+|[MBNMAdose](problems.md#mbnmadose)|0.4.2   |__+2__ |        |1    |
+|[MBNMAtime](problems.md#mbnmatime)|0.2.4   |__+2__ |        |     |
+|[MEGENA](problems.md#megena)|1.3.7   |__+1__ |        |1    |
+|[modnets](problems.md#modnets)|0.9.0   |__+1__ |        |-1   |
+|[MTA](problems.md#mta)|0.6.0   |__+2__ |        |     |
+|[nat.templatebrains](problems.md#nattemplatebrains)|1.1     |__+1__ |        |     |
+|[NetSci](problems.md#netsci)|1.0.0   |__+1__ |        |     |
+|[NetworkComparr](problems.md#networkcomparr)|0.0.0.9 |__+1__ |        |     |
+|[Patterns](problems.md#patterns)|1.4     |__+1__ |        |     |
+|[qgraph](problems.md#qgraph)|1.9.8   |__+1__ |        |     |
+|[rags2ridges](problems.md#rags2ridges)|2.2.7   |__+1__ |        |1    |
+|[ResIN](problems.md#resin)|1.1.0   |__+2__ |        |     |
+|[secrlinear](problems.md#secrlinear)|1.2.2   |__+3__ |        |     |
+|[spatialreg](problems.md#spatialreg)|1.3-2   |__+1__ |        |     |
+|[spdep](problems.md#spdep)|1.3-3   |__+1__ |        |1    |
+|[SubpathwayLNCE](problems.md#subpathwaylnce)|1.0     |__+1__ |        |1    |
+|[tnet](problems.md#tnet)|3.0.16  |__+1__ |        |     |
 

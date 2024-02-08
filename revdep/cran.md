@@ -1,90 +1,124 @@
 ## revdepcheck results
 
-We checked 30 reverse dependencies (29 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 818 reverse dependencies (816 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 22 new problems
- * We failed to check 6 packages
+ * We saw 33 new problems
+ * We failed to check 2 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* countland
-  checking tests ... ERROR
-
-* DiagrammeR
-  checking tests ... ERROR
-
-* dnet
+* bipartite
   checking examples ... ERROR
 
-* dragon
-  checking tests ... ERROR
-
-* EGAnet
+* bootnet
   checking examples ... ERROR
 
-* ggnetwork
-  checking tests ... ERROR
-
-* inferCSN
+* CARBayes
   checking examples ... ERROR
 
-* intergraph
-  checking tests ... ERROR
-
-* manynet
-  checking tests ... ERROR
-
-* migraph
+* Cascade
   checking examples ... ERROR
 
-* molnet
+* centiserve
   checking examples ... ERROR
 
-* nat
-  checking tests ... ERROR
+* CePa
+  checking examples ... ERROR
 
-* nbTransmission
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
+* CINNA
+  checking examples ... ERROR
 
-* netcom
+* DTSEA
+  checking examples ... ERROR
+
+* edmcr
+  checking examples ... ERROR
+
+* gdistance
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* nosoi
-  checking re-building of vignette outputs ... ERROR
-
-* oddnet
-  checking examples ... ERROR
-
-* pcalg
-  checking tests ... ERROR
-
-* phyloseqGraphTest
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* rgraph6
-  checking re-building of vignette outputs ... ERROR
-
-* riverconn
-  checking re-building of vignette outputs ... ERROR
-
-* tidygraph
+* gemtc
   checking examples ... ERROR
   checking tests ... ERROR
 
-* VertexSort
+* graphsim
+  checking examples ... ERROR
+
+* handwriter
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* keyplayer
+  checking examples ... ERROR
+
+* lconnect
+  checking examples ... ERROR
+
+* linkprediction
+  checking tests ... ERROR
+
+* MBNMAdose
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* MBNMAtime
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* MEGENA
+  checking re-building of vignette outputs ... ERROR
+
+* modnets
+  checking examples ... ERROR
+
+* MTA
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* nat.templatebrains
+  checking tests ... ERROR
+
+* NetSci
+  checking examples ... ERROR
+
+* NetworkComparr
+  checking examples ... ERROR
+
+* Patterns
+  checking examples ... ERROR
+
+* qgraph
+  checking examples ... ERROR
+
+* rags2ridges
+  checking examples ... ERROR
+
+* ResIN
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* secrlinear
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* spatialreg
+  checking re-building of vignette outputs ... ERROR
+
+* spdep
+  checking examples ... ERROR
+
+* SubpathwayLNCE
+  checking running R code from vignettes ... ERROR
+
+* tnet
   checking examples ... ERROR
 
 ### Failed to check
 
-* geostan    (NA)
-* Seurat     (NA)
-* streamDAG  (NA)
-* TDA        (NA)
-* TestAnaAPP (NA)
-* treestats  (NA)
+* Seurat    (NA)
+* streamDAG (NA)

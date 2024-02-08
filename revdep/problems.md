@@ -1,103 +1,14 @@
-# countland
+# bipartite
 
 <details>
 
-* Version: 0.1.1
-* GitHub: NA
-* Source code: https://github.com/cran/countland
-* Date/Publication: 2022-08-17 06:40:06 UTC
-* Number of recursive dependencies: 199
+* Version: 2.19
+* GitHub: https://github.com/biometry/bipartite
+* Source code: https://github.com/cran/bipartite
+* Date/Publication: 2023-11-30 16:40:02 UTC
+* Number of recursive dependencies: 36
 
-Run `revdepcheck::cloud_details(, "countland")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(countland)
-      > 
-      > test_check("countland")
-      countland object
-      the count matrix has 1000 genes (rows)
-          and 100 cells (columns)
-    ...
-       2.   ├─methods::as(...)
-       3.   │ └─methods:::.class1(object)
-       4.   ├─base::do.call(...)
-       5.   └─base::lapply(...)
-       6.     └─countland (local) FUN(X[[i]], ...)
-       7.       └─base::apply(combX[spectral_cluster$cluster == x, ], 2, sum)
-      
-      [ FAIL 4 | WARN 4 | SKIP 0 | PASS 61 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# DiagrammeR
-
-<details>
-
-* Version: 1.0.10
-* GitHub: https://github.com/rich-iannone/DiagrammeR
-* Source code: https://github.com/cran/DiagrammeR
-* Date/Publication: 2023-05-18 14:30:07 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(DiagrammeR)
-      > 
-      > suppressWarnings(RNGversion("3.5.0"))
-      > test_check("DiagrammeR")
-      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
-      
-    ...
-      1/1 mismatches
-      [1] 107 - 98 == 9
-      ── Failure ('test-count_entities.R:142:3'): counting the number of strongly connected components is possible ──
-      graph %>% count_s_connected_cmpts() not equal to 4.
-      1/1 mismatches
-      [1] 2 - 4 == -2
-      
-      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 1 marked UTF-8 string
-    ```
-
-# dnet
-
-<details>
-
-* Version: 1.1.7
-* GitHub: https://github.com/hfang-bristol/dnet
-* Source code: https://github.com/cran/dnet
-* Date/Publication: 2020-02-20 10:10:07 UTC
-* Number of recursive dependencies: 52
-
-Run `revdepcheck::cloud_details(, "dnet")` for more info
+Run `revdepcheck::cloud_details(, "bipartite")` for more info
 
 </details>
 
@@ -105,95 +16,64 @@ Run `revdepcheck::cloud_details(, "dnet")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘dnet-Ex.R’ failed
+    Running examples in ‘bipartite-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: dNetConfidence
-    > ### Title: Function to append the confidence information from the source
-    > ###   graphs into the target graph
-    > ### Aliases: dNetConfidence
+    > ### Name: closeness_w
+    > ### Title: Closeness centrality in a weighted network
+    > ### Aliases: closeness_w
     > 
     > ### ** Examples
     > 
+    > ## Load sample data
     ...
-    > g <- erdos.renyi.game(100, 1/100)
-    > target <- dNetInduce(g, V(g), knn=0)
+    + c(5,2,2),
+    + c(5,6,1),
+    + c(6,5,1))
     > 
-    > # 2) generate a list source graphs according to the ER model
-    > sources <- lapply(1:100, function(x) erdos.renyi.game(100*runif(1),
-    + 1/10))
-    Error in erdos.renyi.game(100 * runif(1), 1/10) : 
-      At rinterface_extra.c:82 : The value 39.007893367670476 is not representable as an integer. Invalid value
-    Calls: lapply -> FUN -> erdos.renyi.game
+    > ## Run the programme
+    > closeness_w(sampledata)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: closeness_w ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
-# dragon
-
-<details>
-
-* Version: 1.2.1
-* GitHub: https://github.com/sjspielman/dragon
-* Source code: https://github.com/cran/dragon
-* Date/Publication: 2022-04-08 08:42:33 UTC
-* Number of recursive dependencies: 131
-
-Run `revdepcheck::cloud_details(, "dragon")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(dragon)
-      > 
-      > test_check("dragon")
-      Error in `FUN()`:
-      ! In path: "/tmp/workdir/dragon/new/dragon.Rcheck/tests/testthat/setup_test-settings.R"
-      Caused by error in `read.graph.ncol()`:
-    ...
-       10. │                 └─testthat::source_file(path, env = env, chdir = chdir, wrap = wrap)
-       11. │                   ├─base::withCallingHandlers(...)
-       12. │                   └─base::eval(exprs, env)
-       13. │                     └─base::eval(exprs, env)
-       14. │                       └─igraph::read_graph("graph_by_redox.igraph", format = "ncol") at tests/testthat/setup_test-settings.R:8:1
-       15. │                         └─igraph:::read.graph.ncol(file, ...)
-       16. └─base::.handleSimpleError(...)
-       17.   └─testthat (local) h(simpleError(msg, call))
-       18.     └─rlang::abort(...)
-      Execution halted
-    ```
-
 ## In both
 
-*   checking package subdirectories ... NOTE
+*   checking re-building of vignette outputs ... NOTE
     ```
-    Problems with news in ‘NEWS.md’:
-    No news entries found.
+    Error(s) in re-building vignettes:
+    --- re-building ‘Intro2bipartite.Rnw’ using Sweave
+    Loading required package: vegan
+    Loading required package: permute
+    Loading required package: lattice
+    This is vegan 2.6-4
+    Loading required package: sna
+    Loading required package: statnet.common
+    
+    Attaching package: ‘statnet.common’
+    
+    The following objects are masked from ‘package:base’:
+    
+        attr, order
+    
+    Loading required package: network
+    
+    ‘network’ 1.18.2 (2023-12-04), part of the Statnet Project
     ```
 
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘htmltools’
-      All declared Imports should be used.
-    ```
-
-# EGAnet
+# bootnet
 
 <details>
 
-* Version: 2.0.3
-* GitHub: https://github.com/hfgolino/EGAnet
-* Source code: https://github.com/cran/EGAnet
-* Date/Publication: 2023-11-17 17:30:05 UTC
-* Number of recursive dependencies: 190
+* Version: 1.5.6
+* GitHub: NA
+* Source code: https://github.com/cran/bootnet
+* Date/Publication: 2023-10-04 15:10:12 UTC
+* Number of recursive dependencies: 196
 
-Run `revdepcheck::cloud_details(, "EGAnet")` for more info
+Run `revdepcheck::cloud_details(, "bootnet")` for more info
 
 </details>
 
@@ -201,26 +81,67 @@ Run `revdepcheck::cloud_details(, "EGAnet")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘EGAnet-Ex.R’ failed
+    Running examples in ‘bootnet-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: EGA.fit
-    > ### Title: 'EGA' Optimal Model Fit using the Total Entropy Fit Index
-    > ###   ('tefi')
-    > ### Aliases: EGA.fit
+    > ### Name: bootnet
+    > ### Title: Bootstrapped network estimation
+    > ### Aliases: bootnet
     > 
     > ### ** Examples
     > 
+    > # BFI Extraversion data from psychTools package:
     ...
-    +   data = wmt, algorithm = "leiden",
-    +   objective_function = "modularity",
-    +   resolution_parameter = seq.int(0, 2, 0.05),
-    +   # default for modularity
-    +   plot.EGA = FALSE # no plot for CRAN checks
-    + )
-    Error in (function (graph, objective_function = c("CPM", "modularity"),  : 
-      At rinterface_extra.c:90 : Expecting a scalar real but received a vector of length 41. Invalid value
-    Calls: EGA.fit ... <Anonymous> -> do.call -> <Anonymous> -> do.call -> <Anonymous>
+    Warning in EBICglassoCore(S = S, n = n, gamma = gamma, penalize.diagonal = penalize.diagonal,  :
+      A dense regularized network was selected (lambda < 0.1 * lambda.max). Recent work indicates a possible drop in specificity. Interpret the presence of the smallest edges with care. Setting threshold = TRUE will enforce higher specificity, at the cost of sensitivity.
+    > 
+    > # Centrality indices:
+    > library("qgraph")
+    > centralityPlot(Network)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: centralityPlot ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# CARBayes
+
+<details>
+
+* Version: 6.1
+* GitHub: https://github.com/duncanplee/CARBayes
+* Source code: https://github.com/cran/CARBayes
+* Date/Publication: 2023-11-17 11:40:11 UTC
+* Number of recursive dependencies: 139
+
+Run `revdepcheck::cloud_details(, "CARBayes")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘CARBayes-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: S.RAB
+    > ### Title: Fit a spatial generalised linear model with anisotropic basis
+    > ###   functions to data for computationally efficient localised spatial
+    > ###   smoothing, where the parameters are estimated by penalised maximum
+    > ###   likelihood estimation with a ridge regression penalty.
+    > ### Aliases: S.RAB
+    > 
+    ...
+    > V <- rnorm(n=K, mean=phi + 0.4*groups , sd=rep(0.05,K))
+    > 
+    > #### Run the RAB model
+    > mod <- S.RAB(formula=Y~x1+x2, family="binomial", data=NULL, trials=trials, W=W, 
+    +         V=V, nlambda=50, verbose=TRUE)
+    Setting up the model.
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: S.RAB ... shortest.paths -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
@@ -228,619 +149,47 @@ Run `revdepcheck::cloud_details(, "EGAnet")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.2Mb
+      installed size is  5.1Mb
       sub-directories of 1Mb or more:
-        data   3.5Mb
-    ```
-
-# ggnetwork
-
-<details>
-
-* Version: 0.5.12
-* GitHub: https://github.com/briatte/ggnetwork
-* Source code: https://github.com/cran/ggnetwork
-* Date/Publication: 2023-03-06 20:00:02 UTC
-* Number of recursive dependencies: 74
-
-Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(ggnetwork)
-      Loading required package: ggplot2
-      > 
-      > test_check("ggnetwork")
-      [ FAIL 1 | WARN 5 | SKIP 0 | PASS 38 ]
-      
-    ...
-          ▆
-       1. ├─testthat::expect_s3_class(...) at test-ggnetwork.R:35:3
-       2. │ └─testthat::quasi_label(enquo(object), arg = "object")
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. └─ggnetwork::ggnetwork(n, layout = matrix(runif(28), ncol = 2)) at test-ggnetwork.R:36:5
-       5.   └─ggnetwork:::fortify.igraph(x, ...)
-      
-      [ FAIL 1 | WARN 5 | SKIP 0 | PASS 38 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘sna’ ‘utils’
-      All declared Imports should be used.
-    ```
-
-# inferCSN
-
-<details>
-
-* Version: 0.99.9
-* GitHub: https://github.com/mengxu98/inferCSN
-* Source code: https://github.com/cran/inferCSN
-* Date/Publication: 2024-01-10 05:53:10 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "inferCSN")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘inferCSN-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: dynamic.networks
-    > ### Title: Plot of dynamic networks
-    > ### Aliases: dynamic.networks
-    > 
-    > ### ** Examples
-    > 
-    > library(inferCSN)
-    > data("example_matrix")
-    > weight_table <- inferCSN(example_matrix)
-    > g <- dynamic.networks(weight_table, regulators = weight_table[1, 1])
-    Error in fortify.igraph(x, ...) : 
-      layout matrix dimensions do not match network size
-    Calls: dynamic.networks -> ggnetwork -> fortify.igraph
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 35.6Mb
-      sub-directories of 1Mb or more:
-        libs  34.6Mb
-    ```
-
-# intergraph
-
-<details>
-
-* Version: 2.0-3
-* GitHub: https://github.com/mbojan/intergraph
-* Source code: https://github.com/cran/intergraph
-* Date/Publication: 2023-08-20 23:22:33 UTC
-* Number of recursive dependencies: 63
-
-Run `revdepcheck::cloud_details(, "intergraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(intergraph)
-      > 
-      > test_check("intergraph")
-      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-      ── Error ('test-netcompare.R:5:3'): netcompare just works ──────────────────────
-      Error in `eval(expr, envir, enclos)`: object 'r' not found
-      Backtrace:
-          ▆
-       1. └─testthat::expect_snapshot(print(r)) at test-netcompare.R:5:3
-       2.   └─rlang::cnd_signal(state$error)
-      
-      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# manynet
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/snlab-ch/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2023-12-15 19:10:02 UTC
-* Number of recursive dependencies: 140
-
-Run `revdepcheck::cloud_details(, "manynet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      Registered S3 method overwritten by 'manynet':
-        method          from     
-        print.tbl_graph tidygraph
-      > 
-      > test_check("manynet")
-    ...
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-make_create.R:40:3'): tree creation works ────────────────────
-      unname(as_matrix(create_tree(c(2, 2)))) not equal to matrix(c(1, 1, 1, 0), 2, 2).
-      1/4 mismatches
-      [1] 0 - 1 == -1
-      
-      [ FAIL 1 | WARN 13 | SKIP 14 | PASS 329 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 7 marked UTF-8 strings
-    ```
-
-# migraph
-
-<details>
-
-* Version: 1.2.1
-* GitHub: https://github.com/snlab-ch/migraph
-* Source code: https://github.com/cran/migraph
-* Date/Publication: 2023-12-17 22:30:02 UTC
-* Number of recursive dependencies: 115
-
-Run `revdepcheck::cloud_details(, "migraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘migraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: features
-    > ### Title: Measures of network topological features
-    > ### Aliases: features network_core network_richclub network_factions
-    > ###   network_modularity network_smallworld network_scalefree
-    > ###   network_balance
-    > 
-    > ### ** Examples
-    ...
-    [1] -0.458
-    > network_smallworld(ison_brandes)
-    [1] NaN
-    > network_smallworld(ison_southern_women)
-    [1] -1.03
-    > network_scalefree(ison_adolescents)
-    Error in if (out$KS.p < 0.05) cat(paste("Note: Kolgomorov-Smirnov test that data",  : 
-      argument is of length zero
-    Calls: network_scalefree
-    Execution halted
-    ```
-
-# molnet
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/molnet
-* Date/Publication: 2021-08-06 08:30:02 UTC
-* Number of recursive dependencies: 124
-
-Run `revdepcheck::cloud_details(, "molnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘molnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: graph_metrics
-    > ### Title: Analyses metrics of an iGraph object
-    > ### Aliases: graph_metrics
-    > 
-    > ### ** Examples
-    > 
-    > adj_mat <- matrix(rnorm(36),nrow=6)
-    > graph <- igraph::graph_from_adjacency_matrix(adj_mat)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:329 : Edge counts should be non-negative, found -2.2147. Invalid value
-    Calls: <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-# nat
-
-<details>
-
-* Version: 1.8.23
-* GitHub: https://github.com/natverse/nat
-* Source code: https://github.com/cran/nat
-* Date/Publication: 2023-08-25 15:40:02 UTC
-* Number of recursive dependencies: 91
-
-Run `revdepcheck::cloud_details(, "nat")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(nat)
-      Loading required package: rgl
-      Registered S3 method overwritten by 'nat':
-        method             from
-        as.mesh3d.ashape3d rgl 
-      Some nat functions depend on a CMTK installation. See ?cmtk and README.md for details.
-    ...
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. ├─base::subset(n, n_graph_dfs$order, invert = T)
-       5. └─nat:::subset.neuron(n, n_graph_dfs$order, invert = T)
-       6.   └─nat::prune_vertices(x, r, invert = !invert, ...)
-       7.     └─igraph::delete.vertices(g, verticestoprune)
-       8.       └─igraph::delete_vertices(graph = graph, v = v)
-      
-      [ FAIL 1 | WARN 20 | SKIP 5 | PASS 787 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# nbTransmission
-
-<details>
-
-* Version: 1.1.3
-* GitHub: https://github.com/sarahleavitt/nbTransmission
-* Source code: https://github.com/cran/nbTransmission
-* Date/Publication: 2024-01-10 19:53:14 UTC
-* Number of recursive dependencies: 124
-
-Run `revdepcheck::cloud_details(, "nbTransmission")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(nbTransmission)
-      > 
-      > test_check("nbTransmission")
-      
-        |                                                                            
-        |                                                                      |   0%
-    ...
-          ▆
-       1. └─nbTransmission (local) nbHeatmapWrapper(testData, clustMethod = "hc_absolute", cutoff = 0.05) at test_visualizeResults.R:69:3
-       2.   └─nbTransmission::nbHeatmap(...) at test_visualizeResults.R:33:3
-       3.     └─igraph::get.adjacency(net, attr = "cluster", sparse = FALSE)
-       4.       └─igraph::as_adjacency_matrix(...)
-       5.         └─igraph:::get.adjacency.dense(...)
-      
-      [ FAIL 1 | WARN 7 | SKIP 0 | PASS 136 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘nbTransmission-vignette.Rmd’ using rmarkdown
-    
-    Quitting from lines 284-288 [heatmap] (nbTransmission-vignette.Rmd)
-    Error: processing vignette 'nbTransmission-vignette.Rmd' failed with diagnostics:
-    Matrices must be either numeric or logical, and the edge attribute is not
-    --- failed re-building ‘nbTransmission-vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘nbTransmission-vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# netcom
-
-<details>
-
-* Version: 2.1.6
-* GitHub: https://github.com/langendorfr/netcom
-* Source code: https://github.com/cran/netcom
-* Date/Publication: 2022-07-21 17:40:06 UTC
-* Number of recursive dependencies: 104
-
-Run `revdepcheck::cloud_details(, "netcom")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘netcom-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: best_fit_optim
-    > ### Title: Empirical parameterization
-    > ### Aliases: best_fit_optim
-    > 
-    > ### ** Examples
-    > 
-    > # Import netcom
-    ...
-    +          "clustering_coefficient", "page_rank", "communities"
-    +      ), 
-    +      DD_weight = 1, 
-    +      max_norm = FALSE,
-    +      verbose = FALSE
-    + )
-    Error in igraph::transitivity(igraph_graph, type = "weighted") : 
-      At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
-    Calls: best_fit_optim -> compare_Target -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘tutorial.Rmd’ using rmarkdown
-    
-    Quitting from lines 200-215 [Classify networks] (tutorial.Rmd)
-    Error: processing vignette 'tutorial.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
-    --- failed re-building ‘tutorial.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘tutorial.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘ggfortify’ ‘ggplot2’ ‘ggraph’ ‘reshape2’
-      All declared Imports should be used.
-    ```
-
-# nosoi
-
-<details>
-
-* Version: 1.1.0
-* GitHub: https://github.com/slequime/nosoi
-* Source code: https://github.com/cran/nosoi
-* Date/Publication: 2021-08-17 16:20:02 UTC
-* Number of recursive dependencies: 147
-
-Run `revdepcheck::cloud_details(, "nosoi")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘continuous.Rmd’ using rmarkdown
-    --- finished re-building ‘continuous.Rmd’
-    
-    --- re-building ‘discrete.Rmd’ using rmarkdown
-    
-    Quitting from lines 49-83 [setupMatrix] (discrete.Rmd)
-    Error: processing vignette 'discrete.Rmd' failed with diagnostics:
-    layout matrix dimensions do not match network size
-    --- failed re-building ‘discrete.Rmd’
-    ...
-    --- failed re-building ‘nosoi.Rmd’
-    
-    --- re-building ‘output.Rmd’ using rmarkdown
-    --- finished re-building ‘output.Rmd’
-    
-    SUMMARY: processing the following files failed:
-      ‘discrete.Rmd’ ‘nosoi.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# oddnet
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/oddnet
-* Date/Publication: 2022-12-22 20:10:01 UTC
-* Number of recursive dependencies: 85
-
-Run `revdepcheck::cloud_details(, "oddnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘oddnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: tensorsplat
-    > ### Title: Implements Danai Koutra's TensorSplat algorithm
-    > ### Aliases: tensorsplat
-    > 
-    > ### ** Examples
-    > 
-    > # We generate a series of networks and add an anomaly at 50th network.
-    ...
-    > networks <- list()
-    > p.or.m.seq <- rep(0.05, 50)
-    > p.or.m.seq[20] <- 0.2  # anomalous network at 20
-    > for(i in 1:100){
-    +   gr <- igraph::erdos.renyi.game(100, p.or.m = p.or.m.seq[i])
-    +   networks[[i]] <- igraph::as_adjacency_matrix(gr)
-    + }
-    Error in igraph::erdos.renyi.game(100, p.or.m = p.or.m.seq[i]) : 
-      At vendor/cigraph/src/math/safe_intop.c:128 : NaN cannot be converted to an integer. Invalid value
-    Execution halted
-    ```
-
-# pcalg
-
-<details>
-
-* Version: 2.7-9
-* GitHub: NA
-* Source code: https://github.com/cran/pcalg
-* Date/Publication: 2023-09-26 05:40:03 UTC
-* Number of recursive dependencies: 58
-
-Run `revdepcheck::cloud_details(, "pcalg")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test_LINGAM.R’
-      Running ‘test_addBgKnowledge.R’
-      Running ‘test_adjustment.R’
-      Running ‘test_ages.R’
-      Running ‘test_amat2dag.R’
-      Running ‘test_arges.R’
-      Running ‘test_backdoor.R’
-      Comparing ‘test_backdoor.Rout’ to ‘test_backdoor.Rout.save’ ... OK
-      Running ‘test_bicscore.R’
-      Running ‘test_causalEffect.R’
-    ...
-      > set.seed(37)
-      > rD.10.4 <- withCallingHandlers(
-      +     rDAGall(10, 4) # "low-level warning" -- get it here and test it below
-      +     , warning = function(w) {
-      +         rDAG.warn <<- conditionMessage(w); invokeRestart("muffleWarning") })
-      > ## with a low-level warning:
-      > ## IGNORE_RDIFF_BEGIN
-      > rDAG.warn
-      Error: object 'rDAG.warn' not found
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 20.0Mb
-      sub-directories of 1Mb or more:
-        data   2.1Mb
-        libs  14.6Mb
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘combinat’, ‘unifDAG’
+        libs   3.6Mb
     ```
 
 *   checking re-building of vignette outputs ... NOTE
     ```
     Error(s) in re-building vignettes:
-    --- re-building ‘vignette2018.Rnw’ using Sweave
-    Loading required package: Rgraphviz
-    Loading required package: graph
-    Loading required package: BiocGenerics
+    --- re-building ‘CARBayes.Rnw’ using Sweave
+    Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
     
-    Attaching package: 'BiocGenerics'
+    Attaching package: ‘dplyr’
     
-    The following objects are masked from 'package:stats':
+    The following objects are masked from ‘package:stats’:
+    
+        filter, lag
     
     ...
     l.179   \RequirePackage{grfext}\relax
                                          ^^M
     !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building 'vignette2018.Rnw'
+    --- failed re-building ‘CARBayes.Rnw’
     
     SUMMARY: processing the following file failed:
-      'vignette2018.Rnw'
+      ‘CARBayes.Rnw’
     
     Error: Vignette re-building failed.
     Execution halted
     ```
 
-# phyloseqGraphTest
+# Cascade
 
 <details>
 
-* Version: 0.1.0
-* GitHub: https://github.com/jfukuyama/phyloseqGraphTest
-* Source code: https://github.com/cran/phyloseqGraphTest
-* Date/Publication: 2020-02-07 16:30:02 UTC
-* Number of recursive dependencies: 95
+* Version: 2.1
+* GitHub: https://github.com/fbertran/Cascade
+* Source code: https://github.com/cran/Cascade
+* Date/Publication: 2022-11-28 12:30:06 UTC
+* Number of recursive dependencies: 36
 
-Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
+Run `revdepcheck::cloud_details(, "Cascade")` for more info
 
 </details>
 
@@ -848,40 +197,170 @@ Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘phyloseqGraphTest-Ex.R’ failed
+    Running examples in ‘Cascade-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: plot_test_network
-    > ### Title: Plots the graph used for testing
-    > ### Aliases: plot_test_network
+    > ### Name: analyze_network,network-method
+    > ### Title: Analysing the network
+    > ### Aliases: analyze_network,network-method analyze_network
+    > ###   analyze_network-methods
+    > ### Keywords: methods
     > 
     > ### ** Examples
-    > 
-    > library(phyloseq)
-    > data(enterotype)
-    > gt = graph_perm_test(enterotype, sampletype = "SeqTech")
-    > plot_test_network(gt)
-    Error in fortify.igraph(data, ...) : 
-      layout matrix dimensions do not match network size
-    Calls: plot_test_network ... ggplot -> ggplot.default -> fortify -> fortify.igraph
+    ...
+    
+        union
+    
+    Loading required package: survival
+    tnet: Analysis of Weighted, Two-mode, and Longitudinal networks.
+    Type ?tnet for help.
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: analyze_network ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
-*   checking re-building of vignette outputs ... ERROR
+# centiserve
+
+<details>
+
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/centiserve
+* Date/Publication: 2017-07-15 09:34:41 UTC
+* Number of recursive dependencies: 14
+
+Run `revdepcheck::cloud_details(, "centiserve")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘centiserve-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: averagedis
+    > ### Title: Find the average distance of a node
+    > ### Aliases: averagedis
+    > 
+    > ### ** Examples
+    > 
+    > g <- graph(c(1,2,2,3,3,4,4,2), directed=FALSE)
+    > averagedis(g)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: averagedis ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# CePa
+
+<details>
+
+* Version: 0.8.0
+* GitHub: https://github.com/jokergoo/CePa
+* Source code: https://github.com/cran/CePa
+* Date/Publication: 2022-06-11 21:30:06 UTC
+* Number of recursive dependencies: 13
+
+Run `revdepcheck::cloud_details(, "CePa")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘CePa-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: radiality
+    > ### Title: Calculate radiality centrality
+    > ### Aliases: radiality
+    > 
+    > ### ** Examples
+    > 
+    > require(igraph)
+    ...
+        union
+    
+    > pathway = barabasi.game(200)
+    Warning: `barabasi.game()` was deprecated in igraph 2.0.0.
+    ℹ Please use `sample_pa()` instead.
+    > radiality(pathway)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: radiality ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
     ```
     Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘gt_vignette.Rmd’ using rmarkdown
+    --- re-building ‘CePa.Rnw’ using Sweave
+    Error: processing vignette 'CePa.Rnw' failed with diagnostics:
+    Running 'texi2dvi' on 'CePa.tex' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `grfext.sty' not found.
     
-    Quitting from lines 175-176 [unnamed-chunk-5] (gt_vignette.Rmd)
-    Error: processing vignette 'gt_vignette.Rmd' failed with diagnostics:
-    layout matrix dimensions do not match network size
-    --- failed re-building ‘gt_vignette.Rmd’
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
     
-    SUMMARY: processing the following file failed:
-      ‘gt_vignette.Rmd’
+    ...
+    l.179   \RequirePackage{grfext}\relax
+                                         ^^M
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘parsing-PID-pathway-data.Rnw’
+    
+    SUMMARY: processing the following files failed:
+      ‘CePa.Rnw’ ‘analysis-p53.Rnw’ ‘parsing-PID-pathway-data.Rnw’
     
     Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# CINNA
+
+<details>
+
+* Version: 1.2.2
+* GitHub: NA
+* Source code: https://github.com/cran/CINNA
+* Date/Publication: 2023-08-08 16:40:02 UTC
+* Number of recursive dependencies: 149
+
+Run `revdepcheck::cloud_details(, "CINNA")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘CINNA-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: wiener_index_centrality
+    > ### Title: Wiener Index Centrality
+    > ### Aliases: wiener_index_centrality
+    > 
+    > ### ** Examples
+    > 
+    > 
+    ...
+    > data(zachary)
+    > 
+    > wiener_index_centrality(zachary)
+    This graph was created by an old(er) igraph version.
+      Call upgrade_graph() on it to use with the current igraph version
+      For now we convert it on the fly...
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: wiener_index_centrality ... shortest.paths -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
@@ -889,94 +368,22 @@ Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘intergraph’
+    Namespaces in Imports field not imported from:
+      ‘circlize’ ‘utils’
       All declared Imports should be used.
     ```
 
-*   checking LazyData ... NOTE
-    ```
-      'LazyData' is specified without a 'data' directory
-    ```
-
-# rgraph6
+# DTSEA
 
 <details>
 
-* Version: 2.0-3
-* GitHub: https://github.com/mbojan/rgraph6
-* Source code: https://github.com/cran/rgraph6
-* Date/Publication: 2023-12-07 16:50:05 UTC
-* Number of recursive dependencies: 59
-
-Run `revdepcheck::cloud_details(, "rgraph6")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘rgraph6.Rmd’ using rmarkdown
-    
-    Quitting from lines 146-157 [unnamed-chunk-8] (rgraph6.Rmd)
-    Error: processing vignette 'rgraph6.Rmd' failed with diagnostics:
-    At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 10. Invalid value
-    --- failed re-building ‘rgraph6.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘rgraph6.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# riverconn
-
-<details>
-
-* Version: 0.3.28
+* Version: 0.0.3
 * GitHub: NA
-* Source code: https://github.com/cran/riverconn
-* Date/Publication: 2023-05-05 08:20:02 UTC
-* Number of recursive dependencies: 96
+* Source code: https://github.com/cran/DTSEA
+* Date/Publication: 2022-11-06 13:20:02 UTC
+* Number of recursive dependencies: 72
 
-Run `revdepcheck::cloud_details(, "riverconn")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Tutorial.Rmd’ using rmarkdown
-    
-    Quitting from lines 210-221 [plot igraph] (Tutorial.Rmd)
-    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
-    layout matrix dimensions do not match network size
-    --- failed re-building ‘Tutorial.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Tutorial.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# tidygraph
-
-<details>
-
-* Version: 1.3.0
-* GitHub: https://github.com/thomasp85/tidygraph
-* Source code: https://github.com/cran/tidygraph
-* Date/Publication: 2023-12-18 10:30:02 UTC
-* Number of recursive dependencies: 80
-
-Run `revdepcheck::cloud_details(, "tidygraph")` for more info
+Run `revdepcheck::cloud_details(, "DTSEA")` for more info
 
 </details>
 
@@ -984,26 +391,272 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘tidygraph-Ex.R’ failed
+    Running examples in ‘DTSEA-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: random_walk_rank
-    > ### Title: Perform a random walk on the graph and return encounter rank
-    > ### Aliases: random_walk_rank
+    > ### Name: separation
+    > ### Title: A measure of network separation
+    > ### Aliases: separation
     > 
     > ### ** Examples
     > 
-    > graph <- create_notable("zachary")
+    > library(DTSEA)
     ...
-      8. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
-      9. │         └─mask$eval_all_mutate(quo)
-     10. │           └─dplyr (local) eval()
-     11. ├─tidygraph::random_walk_rank(200)
-     12. │ └─igraph::random_walk(graph, root, n, mode)
-     13. │   └─igraph:::random_walk_impl(...)
-     14. └─base::.handleSimpleError(...)
-     15.   └─dplyr (local) h(simpleError(msg, call))
-     16.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
+    +   set_a = c("4", "6", "8", "13"),
+    +   set_b = c("8", "9", "10", "15", "18")
+    + )
+    This graph was created by an old(er) igraph version.
+      Call upgrade_graph() on it to use with the current igraph version
+      For now we convert it on the fly...
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: separation ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# edmcr
+
+<details>
+
+* Version: 0.2.0
+* GitHub: https://github.com/great-northern-diver/edmcr
+* Source code: https://github.com/cran/edmcr
+* Date/Publication: 2021-09-10 10:40:06 UTC
+* Number of recursive dependencies: 46
+
+Run `revdepcheck::cloud_details(, "edmcr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘edmcr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: dpf
+    > ### Title: Dissimilarity Parameterization Formulation
+    > ### Aliases: dpf
+    > 
+    > ### ** Examples
+    > 
+    > set.seed(1337)
+    ...
+    +              4,1,0,5,NA,5,
+    +              3,NA,5,0,1,NA,
+    +              4,5,NA,1,0,5,
+    +              3,NA,5,NA,5,0),byrow=TRUE, nrow=6)
+    > 
+    > edmc(D, method="dpf", d=3, toler=1e-8)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: edmc ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# gdistance
+
+<details>
+
+* Version: 1.6.4
+* GitHub: https://github.com/AgrDataSci/gdistance
+* Source code: https://github.com/cran/gdistance
+* Date/Publication: 2023-06-19 21:20:02 UTC
+* Number of recursive dependencies: 61
+
+Run `revdepcheck::cloud_details(, "gdistance")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘gdistance-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: accCost
+    > ### Title: Accumulated Cost Surface
+    > ### Aliases: accCost accCost,TransitionLayer,RasterLayer-method
+    > ###   accCost,TransitionLayer,Coords-method
+    > ### Keywords: spatial
+    > 
+    > ### ** Examples
+    ...
+    > tr <- geoCorrection(tr)
+    > 
+    > c1 <- c(5.5,1.5)
+    > c2 <- c(1.5,5.5)
+    > 
+    > A <- accCost(tr, c1)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: accCost ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘Overview.Rmd’ using knitr
+    
+    Quitting from lines 262-265 [gdistance-13] (Overview.Rmd)
+    Error: processing vignette 'Overview.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘Overview.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘Overview.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# gemtc
+
+<details>
+
+* Version: 1.0-2
+* GitHub: https://github.com/gertvv/gemtc
+* Source code: https://github.com/cran/gemtc
+* Date/Publication: 2023-06-21 19:00:02 UTC
+* Number of recursive dependencies: 73
+
+Run `revdepcheck::cloud_details(, "gemtc")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘gemtc-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: atrialFibrillation
+    > ### Title: Prevention of stroke in atrial fibrillation patients
+    > ### Aliases: atrialFibrillation
+    > 
+    > ### ** Examples
+    > 
+    > # Build a model similar to Model 4(b) from Cooper et al. (2009):
+    ...
+    +                   classes=classes)
+    > 
+    > model <- mtc.model(atrialFibrillation,
+    +                    type="regression",
+    +                    regressor=regressor,
+    +                    om.scale=10)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: mtc.model ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘test.R’
+    Running the tests in ‘tests/test.R’ failed.
+    Complete output:
+      > library(testthat)
+      > test_check('gemtc', filter="unit")
+      Loading required package: gemtc
+      Loading required package: coda
+      [ FAIL 26 | WARN 4 | SKIP 0 | PASS 286 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+    ...
+        5.         └─gemtc (local) FUN(X[[i]], ...)
+        6.           └─gemtc:::local.center(g, edge)
+        7.             └─igraph::shortest.paths(graph)
+        8.               └─igraph::distances(...)
+        9.                 └─igraph:::igraph.match.arg(algorithm)
+       10.                   └─base::match.arg(arg = arg, choices = choices, several.ok = several.ok)
+      
+      [ FAIL 26 | WARN 4 | SKIP 0 | PASS 286 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# graphsim
+
+<details>
+
+* Version: 1.0.3
+* GitHub: https://github.com/TomKellyGenetics/graphsim
+* Source code: https://github.com/cran/graphsim
+* Date/Publication: 2022-09-12 06:12:54 UTC
+* Number of recursive dependencies: 121
+
+Run `revdepcheck::cloud_details(, "graphsim")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘graphsim-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: generate_expression
+    > ### Title: Generate Simulated Expression
+    > ### Aliases: generate_expression generate_expression_mat
+    > ### Keywords: graph igraph mvtnorm network simulation
+    > 
+    > ### ** Examples
+    > 
+    ...
+    > # correlations
+    > heatmap.2(cor(t(TGFBeta_Smad_data)), scale = "none", trace = "none",
+    +           dendrogram = "none", Rowv = FALSE, Colv = FALSE,
+    +           col = colorpanel(50, "blue", "white", "red"))
+    > # expected correlations (\eqn{\Sigma})
+    > sigma_matrix <- make_sigma_mat_dist_graph(TGFBeta_Smad_graph, cor = 0.75)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: make_sigma_mat_dist_graph ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# handwriter
+
+<details>
+
+* Version: 2.0.3
+* GitHub: https://github.com/CSAFE-ISU/handwriter
+* Source code: https://github.com/cran/handwriter
+* Date/Publication: 2023-12-08 20:20:02 UTC
+* Number of recursive dependencies: 123
+
+Run `revdepcheck::cloud_details(, "handwriter")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘handwriter-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: AddLetterImages
+    > ### Title: Add Letter Images
+    > ### Aliases: AddLetterImages
+    > 
+    > ### ** Examples
+    > 
+    > twoSent_document = list()
+    > twoSent_document$image = twoSent
+    > twoSent_document$thin = thinImage(twoSent_document$image)
+    > twoSent_processList = processHandwriting(twoSent_document$thin, dim(twoSent_document$image))
+    Starting Processing...
+    Getting Nodes...and merging them...
+    Finding direct paths...Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: processHandwriting ... shortest.paths -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
@@ -1017,32 +670,42 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       > #
       > # Where should you do additional test configuration?
       > # Learn more about the roles of various files in:
-      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-      > # * https://testthat.r-lib.org/articles/special-files.html
+      > # * https://r-pkgs.org/tests.html
+      > # * https://testthat.r-lib.org/reference/test_package.html#special-files
     ...
-       12. ├─tidygraph::random_walk_rank(30, 5)
-       13. │ └─igraph::random_walk(graph, root, n, mode)
-       14. │   └─igraph:::random_walk_impl(...)
-       15. └─base::.handleSimpleError(...)
-       16.   └─dplyr (local) h(simpleError(msg, call))
-       17.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
+       1. └─handwriter::processHandwriting(actual$thin, dim(actual$image)) at test-processHandwriting.R:29:3
+       2.   └─handwriter:::AllUniquePaths(adj.m, skel_graph, skel_graph0)
+       3.     └─igraph::shortest.paths(graph0, v = fromNode, to = toNode, weights = E(graph0)$nodeOnlyDist)
+       4.       └─igraph::distances(...)
+       5.         └─igraph:::igraph.match.arg(algorithm)
+       6.           └─base::match.arg(arg = arg, choices = choices, several.ok = several.ok)
       
-      [ FAIL 2 | WARN 21 | SKIP 0 | PASS 430 ]
+      [ FAIL 6 | WARN 6 | SKIP 0 | PASS 85 ]
       Error: Test failures
       Execution halted
     ```
 
-# VertexSort
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 10.0Mb
+      sub-directories of 1Mb or more:
+        data   1.7Mb
+        libs   6.5Mb
+    ```
+
+# keyplayer
 
 <details>
 
-* Version: 0.1-1
+* Version: 1.0.4
 * GitHub: NA
-* Source code: https://github.com/cran/VertexSort
-* Date/Publication: 2017-03-09 08:34:23
-* Number of recursive dependencies: 12
+* Source code: https://github.com/cran/keyplayer
+* Date/Publication: 2023-11-08 08:20:06 UTC
+* Number of recursive dependencies: 20
 
-Run `revdepcheck::cloud_details(, "VertexSort")` for more info
+Run `revdepcheck::cloud_details(, "keyplayer")` for more info
 
 </details>
 
@@ -1050,26 +713,1004 @@ Run `revdepcheck::cloud_details(, "VertexSort")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘VertexSort-Ex.R’ failed
+    Running examples in ‘keyplayer-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: dpr, sdpr, dnpr, idpr, odpr
-    > ### Title: Functions for Network Randomization using different algorithms
-    > ### Aliases: dpr sdpr dnpr idpr odpr
-    > ### Keywords: Graphs Optimization
+    > ### Name: fragment
+    > ### Title: Compute the Fragmentation Centrality Score in a Netwrok
+    > ### Aliases: fragment
+    > 
+    > ### ** Examples
+    > 
+    > # Create a 5x5 weighted and directed adjacency matrix, where edge values
+    ...
+    > # Transform the edge value to distance interpretaion
+    > A <- W
+    > A[W!=0] <- 1/W[W!=0]
+    > 
+    > # List the fragmentation centrality scores for every node
+    > fragment(A)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: fragment ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# lconnect
+
+<details>
+
+* Version: 0.1.1
+* GitHub: https://github.com/FMestre1/lconnect
+* Source code: https://github.com/cran/lconnect
+* Date/Publication: 2021-02-06 16:10:02 UTC
+* Number of recursive dependencies: 22
+
+Run `revdepcheck::cloud_details(, "lconnect")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘lconnect-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: patch_imp
+    > ### Title: Prioritization of patches
+    > ### Aliases: patch_imp
+    > 
+    > ### ** Examples
+    > 
+    > vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
+    > landscape <- upload_land(vec_path, bound_path = NULL,
+    +                         habitat = 1, max_dist = 500)
+    > importance <- patch_imp(landscape, metric = "IIC")
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: patch_imp ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+## In both
+
+*   checking LazyData ... NOTE
+    ```
+      'LazyData' is specified without a 'data' directory
+    ```
+
+# linkprediction
+
+<details>
+
+* Version: 1.0-0
+* GitHub: https://github.com/recon-icm/linkprediction
+* Source code: https://github.com/cran/linkprediction
+* Date/Publication: 2018-10-19 13:40:03 UTC
+* Number of recursive dependencies: 43
+
+Run `revdepcheck::cloud_details(, "linkprediction")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(linkprediction)
+      > 
+      > test_check("linkprediction")
+      [ FAIL 1 | WARN 8 | SKIP 0 | PASS 60 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+    ...
+        6.   ├─base::do.call(method, list(graph = graph, v1 = v1, v2 = v2, ...))
+        7.   └─linkprediction:::similarity_dist(...)
+        8.     └─igraph::shortest.paths(graph, v = v1, to = v2)
+        9.       └─igraph::distances(...)
+       10.         └─igraph:::igraph.match.arg(algorithm)
+       11.           └─base::match.arg(arg = arg, choices = choices, several.ok = several.ok)
+      
+      [ FAIL 1 | WARN 8 | SKIP 0 | PASS 60 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking LazyData ... NOTE
+    ```
+      'LazyData' is specified without a 'data' directory
+    ```
+
+# MBNMAdose
+
+<details>
+
+* Version: 0.4.2
+* GitHub: NA
+* Source code: https://github.com/cran/MBNMAdose
+* Date/Publication: 2023-08-08 13:00:19 UTC
+* Number of recursive dependencies: 118
+
+Run `revdepcheck::cloud_details(, "MBNMAdose")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘MBNMAdose-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: MBNMAdose-package
+    > ### Title: MBNMAdose for dose-response Model-Based Network Meta-Analysis
+    > ### Aliases: MBNMAdose MBNMAdose-package
+    > ### Keywords: internal
     > 
     > ### ** Examples
     > 
     ...
-    >   ## load the VertexSort library
-    >   library(VertexSort)
+    > network <- mbnma.network(triptans)
+    Values for `agent` with dose = 0 have been recoded to `Placebo`
+    agent is being recoded to enforce sequential numbering
     > 
-    >   ## load interactions of the kinase-phosphatase network (kp-net)
-    >   data("interactions")
-    >   vs_kp_net <- vertex.sort(interactions)
-    Error in add_vertices(e1, la, attr = e2) : 
-      At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 2. Invalid value
-    Calls: vertex.sort -> apply.vertex.sort -> +.igraph -> add_vertices
+    > # Generate a network plot at the dose/treatment level
+    > plot(network, level="treatment")
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: plot ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘consistencychecking-3.Rmd’ using rmarkdown
+    Warning in eng_r(options) :
+      Failed to tidy R code in chunk 'unnamed-chunk-1'. Reason:
+    Error : The formatR package is required by the chunk option tidy = TRUE but not installed; tidy = TRUE will be ignored.
+    
+    
+    Quitting from lines 98-102 [unnamed-chunk-1] (consistencychecking-3.Rmd)
+    Error: processing vignette 'consistencychecking-3.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    ...
+    'arg' must be of length 1
+    --- failed re-building ‘runmbnmadose-2.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘consistencychecking-3.Rmd’ ‘dataexploration-1.Rmd’
+      ‘nma_in_mbnmadose.Rmd’ ‘outputs-4.Rmd’ ‘predictions-5.Rmd’
+      ‘runmbnmadose-2.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 6 marked Latin-1 strings
+    ```
+
+# MBNMAtime
+
+<details>
+
+* Version: 0.2.4
+* GitHub: NA
+* Source code: https://github.com/cran/MBNMAtime
+* Date/Publication: 2023-10-14 15:20:02 UTC
+* Number of recursive dependencies: 107
+
+Run `revdepcheck::cloud_details(, "MBNMAtime")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘MBNMAtime-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: inconsistency.loops
+    > ### Title: Identify comparisons in loops that fulfil criteria for
+    > ###   node-splitting
+    > ### Aliases: inconsistency.loops
+    > 
+    > ### ** Examples
+    > 
+    ...
+    > data <- data.frame(studyID=c(1,1,2,2,3,3,4,4,5,5,5),
+    +   treatment=c(1,2,1,3,2,3,3,4,1,2,4)
+    +   )
+    > 
+    > # Identify comparisons informed by direct and indirect evidence
+    > inconsistency.loops(data)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: inconsistency.loops ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘consistencychecking-3.Rmd’ using rmarkdown
+    
+    Quitting from lines 41-45 [unnamed-chunk-1] (consistencychecking-3.Rmd)
+    Error: processing vignette 'consistencychecking-3.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘consistencychecking-3.Rmd’
+    
+    --- re-building ‘dataexploration-1.Rmd’ using rmarkdown
+    
+    ...
+    
+    --- re-building ‘runmbnmatime-2.Rmd’ using rmarkdown
+    --- finished re-building ‘runmbnmatime-2.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘consistencychecking-3.Rmd’ ‘dataexploration-1.Rmd’
+      ‘predictions-5.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# MEGENA
+
+<details>
+
+* Version: 1.3.7
+* GitHub: https://github.com/songw01/MEGENA
+* Source code: https://github.com/cran/MEGENA
+* Date/Publication: 2018-09-10 19:00:03 UTC
+* Number of recursive dependencies: 91
+
+Run `revdepcheck::cloud_details(, "MEGENA")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘MEGENA_pipeline_10062016.Rmd’ using rmarkdown
+    
+    Quitting from lines 77-93 [MCA] (MEGENA_pipeline_10062016.Rmd)
+    Error: processing vignette 'MEGENA_pipeline_10062016.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘MEGENA_pipeline_10062016.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘MEGENA_pipeline_10062016.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.3Mb
+      sub-directories of 1Mb or more:
+        data   1.8Mb
+        libs   3.1Mb
+    ```
+
+# modnets
+
+<details>
+
+* Version: 0.9.0
+* GitHub: https://github.com/tswanson222/modnets
+* Source code: https://github.com/cran/modnets
+* Date/Publication: 2021-10-01 08:20:02 UTC
+* Number of recursive dependencies: 137
+
+Run `revdepcheck::cloud_details(, "modnets")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘modnets-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: CentClust
+    > ### Title: Node centrality, clustering coefficients, and shortest path
+    > ###   lengths
+    > ### Aliases: CentClust centAuto clustAuto
+    > 
+    > ### ** Examples
+    > 
+    ...
+    V1         0.01433650           1
+    V2        -0.01038401           1
+    V3        -0.01317170           1
+    V4         0.05605313           1
+    V5         0.01671756           1
+    > centAuto(x, 'interactions')
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: centAuto ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+## Newly fixed
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.6Mb
+      sub-directories of 1Mb or more:
+        data   3.8Mb
+    ```
+
+# MTA
+
+<details>
+
+* Version: 0.6.0
+* GitHub: https://github.com/riatelab/MTA
+* Source code: https://github.com/cran/MTA
+* Date/Publication: 2023-10-31 10:40:02 UTC
+* Number of recursive dependencies: 52
+
+Run `revdepcheck::cloud_details(, "MTA")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘MTA-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: map_mst
+    > ### Title: Map Multiscalar Typology (3 deviations)
+    > ### Aliases: map_mst
+    > 
+    > ### ** Examples
+    > 
+    > # Load data
+    ...
+    > ept <- st_read(system.file("metroparis.gpkg", package = "MTA"), layer = "ept", quiet = TRUE)
+    > 
+    > # Prerequisites - Compute the 3 deviations
+    > com$gdev <- gdev(x = com, var1 = "INC", var2 = "TH")
+    > com$tdev <- tdev(x = com, var1 = "INC", var2 = "TH", key = "EPT")
+    > com$sdev <- sdev(x = com, var1 = "INC", var2 = "TH", order = 1)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: sdev ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘MTA.Rmd’ using rmarkdown
+    --- finished re-building ‘MTA.Rmd’
+    
+    --- re-building ‘MTA_Scenario.Rmd’ using rmarkdown
+    
+    Quitting from lines 439-473 [localdevrel_plot] (MTA_Scenario.Rmd)
+    Error: processing vignette 'MTA_Scenario.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘MTA_Scenario.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘MTA_Scenario.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# nat.templatebrains
+
+<details>
+
+* Version: 1.1
+* GitHub: https://github.com/natverse/nat.templatebrains
+* Source code: https://github.com/cran/nat.templatebrains
+* Date/Publication: 2023-06-14 08:20:05 UTC
+* Number of recursive dependencies: 100
+
+Run `revdepcheck::cloud_details(, "nat.templatebrains")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘spelling.R’
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(nat.templatebrains)
+      Loading required package: nat
+      Loading required package: rgl
+      Some nat functions depend on a CMTK installation. See ?cmtk and README.md for details.
+      
+    ...
+        5.   └─nat.templatebrains::shortest_bridging_seq(...)
+        6.     └─nat.templatebrains:::find_bridging_path(...)
+        7.       └─igraph::shortest.paths(g, v = sample, to = reference, mode = "out")
+        8.         └─igraph::distances(...)
+        9.           └─igraph:::igraph.match.arg(algorithm)
+       10.             └─base::match.arg(arg = arg, choices = choices, several.ok = several.ok)
+      
+      [ FAIL 1 | WARN 2 | SKIP 3 | PASS 61 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# NetSci
+
+<details>
+
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/NetSci
+* Date/Publication: 2022-07-03 18:00:02 UTC
+* Number of recursive dependencies: 62
+
+Run `revdepcheck::cloud_details(, "NetSci")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘NetSci-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: proximity_average_weighted
+    > ### Title: Proximity from target to source
+    > ### Aliases: proximity_average_weighted
+    > 
+    > ### ** Examples
+    > 
+    > set.seed(666)
+    ...
+    > net = unique(net)
+    > net$weight = runif(nrow(net))
+    > g <- igraph::graph_from_data_frame(net, directed = FALSE )
+    > T = c("G", "A", "D")
+    > S = c("C", "M")
+    > proximity_average_weighted(g, source = S, targets = T)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: proximity_average_weighted ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# NetworkComparr
+
+<details>
+
+* Version: 0.0.0.9
+* GitHub: NA
+* Source code: https://github.com/cran/NetworkComparr
+* Date/Publication: 2023-08-11 08:30:02 UTC
+* Number of recursive dependencies: 161
+
+Run `revdepcheck::cloud_details(, "NetworkComparr")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘NetworkComparr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: CompareEdgelistNetworks
+    > ### Title: Statistical Comparison of Networks based on Edgelists
+    > ### Aliases: CompareEdgelistNetworks CEN
+    > 
+    > ### ** Examples
+    > 
+    > ###Simulate datasets with a dependent sample and directed networks
+    ...
+    +             test.edges=TRUE, edge=list(c(1,3),c(4,2),c(3,2)), p.adjust.methods= "none",
+    +             test.centrality=TRUE, centrality=c("Closeness", "Betweenness"), cen.nodes="all",
+    +             test.bridge.centrality=FALSE, bridge.centrality="all", brg.nodes=c(1,3),
+    +             communities=c("1","1","2","2"), useCommunities="all")
+    
+      |                                                                            
+      |                                                                      |   0%Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: CEN ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# Patterns
+
+<details>
+
+* Version: 1.4
+* GitHub: https://github.com/fbertran/Patterns
+* Source code: https://github.com/cran/Patterns
+* Date/Publication: 2022-12-01 13:10:05 UTC
+* Number of recursive dependencies: 188
+
+Run `revdepcheck::cloud_details(, "Patterns")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘Patterns-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: analyze_network,omics_network-method
+    > ### Title: Analysing the network
+    > ### Aliases: analyze_network,omics_network-method analyze_network
+    > ###   analyze_network-methods
+    > ### Keywords: methods
+    > 
+    > ### ** Examples
+    ...
+    
+        union
+    
+    Loading required package: survival
+    tnet: Analysis of Weighted, Two-mode, and Longitudinal networks.
+    Type ?tnet for help.
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: analyze_network ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# qgraph
+
+<details>
+
+* Version: 1.9.8
+* GitHub: https://github.com/SachaEpskamp/qgraph
+* Source code: https://github.com/cran/qgraph
+* Date/Publication: 2023-11-03 11:00:02 UTC
+* Number of recursive dependencies: 89
+
+Run `revdepcheck::cloud_details(, "qgraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘qgraph-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: centrality
+    > ### Title: Centrality statistics of graphs
+    > ### Aliases: centrality
+    > ### Keywords: graphs
+    > 
+    > ### ** Examples
+    > 
+    > set.seed(1)
+    > adj <- matrix(sample(0:1,10^2,TRUE,prob=c(0.8,0.2)),nrow=10,ncol=10)
+    > Q <- qgraph(adj)
+    > 
+    > centrality(Q)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: centrality ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+# rags2ridges
+
+<details>
+
+* Version: 2.2.7
+* GitHub: https://github.com/CFWP/rags2ridges
+* Source code: https://github.com/cran/rags2ridges
+* Date/Publication: 2023-10-14 14:10:02 UTC
+* Number of recursive dependencies: 103
+
+Run `revdepcheck::cloud_details(, "rags2ridges")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘rags2ridges-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: GGMpathStats
+    > ### Title: Gaussian graphical model node pair path statistics
+    > ### Aliases: GGMpathStats
+    > 
+    > ### ** Examples
+    > 
+    > 
+    ...
+    - Retained elements:  11 
+    - Corresponding to 3.67 % of possible edges 
+     
+    > 
+    > ## Obtain information on mediating and moderating paths between nodes 14 and 23
+    > pathStats <- GGMpathStats(PC0, 14, 23, verbose = TRUE, prune = FALSE)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: GGMpathStats ... shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 10.4Mb
+      sub-directories of 1Mb or more:
+        libs   8.6Mb
+    ```
+
+# ResIN
+
+<details>
+
+* Version: 1.1.0
+* GitHub: https://github.com/pwarncke77/ResIN
+* Source code: https://github.com/cran/ResIN
+* Date/Publication: 2023-06-30 10:10:02 UTC
+* Number of recursive dependencies: 94
+
+Run `revdepcheck::cloud_details(, "ResIN")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘ResIN-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: ResIN
+    > ### Title: ResIN
+    > ### Aliases: ResIN
+    > 
+    > ### ** Examples
+    > 
+    > 
+    ...
+    > ## Load the 12-item simulated Likert-type ResIN toy dataset
+    > data(lik_data)
+    > library(ggplot2)
+    > 
+    > # Apply the ResIN function to toy Likert data:
+    > output <- ResIN(lik_data, cor_method = "spearman", network_stats = TRUE, cluster = TRUE)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: ResIN ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘ResIN-VIGNETTE.Rmd’ using rmarkdown
+    
+    Quitting from lines 42-46 [run ResIN] (ResIN-VIGNETTE.Rmd)
+    Error: processing vignette 'ResIN-VIGNETTE.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘ResIN-VIGNETTE.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘ResIN-VIGNETTE.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# secrlinear
+
+<details>
+
+* Version: 1.2.2
+* GitHub: https://github.com/MurrayEfford/secrlinear
+* Source code: https://github.com/cran/secrlinear
+* Date/Publication: 2023-10-17 04:20:02 UTC
+* Number of recursive dependencies: 84
+
+Run `revdepcheck::cloud_details(, "secrlinear")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘secrlinear-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: Arvicola
+    > ### Title: Water Vole Capture Dataset
+    > ### Aliases: arvicola
+    > ### Keywords: datasets
+    > 
+    > ### ** Examples
+    > 
+    ...
+    > 
+    > ## for speed, pre-compute distance matrix
+    > userd <- networkdistance (traps(arvicola), glymemask, glymemask)
+    This graph was created by an old(er) igraph version.
+      Call upgrade_graph() on it to use with the current igraph version
+      For now we convert it on the fly...
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: networkdistance ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > 
+      > # to run manually
+      > # test_dir("/Density secr 4.5/secrlinear/tests")
+      > 
+      > test_check("secrlinear")
+      Loading required package: secrlinear
+    ...
+       1. └─secrlinear::networkdistance(trps, mask, mask) at test-secrlinear.R:34:5
+       2.   ├─base::t(...)
+       3.   └─igraph::shortest.paths(gr, weights = NULL, v = matchedxy2, to = uniquematchedxy1)
+       4.     └─igraph::distances(...)
+       5.       └─igraph:::igraph.match.arg(algorithm)
+       6.         └─base::match.arg(arg = arg, choices = choices, several.ok = several.ok)
+      
+      [ FAIL 1 | WARN 3 | SKIP 0 | PASS 6 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘secrlinear-vignette.Rmd’ using rmarkdown
+    
+    Quitting from lines 91-100 [fit1] (secrlinear-vignette.Rmd)
+    Error: processing vignette 'secrlinear-vignette.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    --- failed re-building ‘secrlinear-vignette.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘secrlinear-vignette.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# spatialreg
+
+<details>
+
+* Version: 1.3-2
+* GitHub: https://github.com/r-spatial/spatialreg
+* Source code: https://github.com/cran/spatialreg
+* Date/Publication: 2024-02-06 13:30:02 UTC
+* Number of recursive dependencies: 113
+
+Run `revdepcheck::cloud_details(, "spatialreg")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘SpatialFiltering.Rmd’ using rmarkdown
+    --- finished re-building ‘SpatialFiltering.Rmd’
+    
+    --- re-building ‘nb_igraph.Rmd’ using rmarkdown
+    
+    Quitting from lines 286-291 [unnamed-chunk-26] (nb_igraph.Rmd)
+    Error: processing vignette 'nb_igraph.Rmd' failed with diagnostics:
+    'arg' must be of length 1
+    ...
+    --- failed re-building ‘nb_igraph.Rmd’
+    
+    --- re-building ‘sids_models.Rmd’ using rmarkdown
+    --- finished re-building ‘sids_models.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘nb_igraph.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# spdep
+
+<details>
+
+* Version: 1.3-3
+* GitHub: https://github.com/r-spatial/spdep
+* Source code: https://github.com/cran/spdep
+* Date/Publication: 2024-02-07 12:20:02 UTC
+* Number of recursive dependencies: 115
+
+Run `revdepcheck::cloud_details(, "spdep")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘spdep-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: nblag
+    > ### Title: Higher order neighbours lists
+    > ### Aliases: nblag nblag_cumul
+    > ### Keywords: spatial
+    > 
+    > ### ** Examples
+    > 
+    ...
+    + for (i in seq(along=lmat)) mat = mat + i*lmat[[i]]
+    + G2 <- shortest.paths(G)
+    + print(all.equal(G2, mat, check.attributes=FALSE))
+    + }
+    Warning: `shortest.paths()` was deprecated in igraph 2.0.0.
+    ℹ Please use `distances()` instead.
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: shortest.paths -> distances -> igraph.match.arg -> match.arg
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.6Mb
+      sub-directories of 1Mb or more:
+        doc   5.3Mb
+        etc   1.4Mb
+    ```
+
+# SubpathwayLNCE
+
+<details>
+
+* Version: 1.0
+* GitHub: NA
+* Source code: https://github.com/cran/SubpathwayLNCE
+* Date/Publication: 2016-01-19 08:17:59
+* Number of recursive dependencies: 16
+
+Run `revdepcheck::cloud_details(, "SubpathwayLNCE")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking running R code from vignettes ... ERROR
+    ```
+    Errors in running code in vignettes:
+    when running code in ‘SubpathwayLNCE.Rnw’
+      ...
+    > interUMGraph <- getInteGraphList(g2[42:45], LncGenePairs)
+    
+    > geneLnc <- GetExampleData(exampleData = "geneLnc")
+    
+    > sub <- getLocSubGraphLnc(geneLnc, interUMGraph, type = "gene_lncRNA", 
+    +     n = 1, s = 8)
+    
+      When sourcing ‘SubpathwayLNCE.R’:
+    Error: 'arg' must be of length 1
+    Execution halted
+    
+      ‘SubpathwayLNCE.Rnw’... failed
+    ```
+
+## In both
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘SubpathwayLNCE.Rnw’ using Sweave
+    Loading required package: igraph
+    
+    Attaching package: ‘igraph’
+    
+    The following objects are masked from ‘package:stats’:
+    
+        decompose, spectrum
+    
+    ...
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    
+    --- failed re-building ‘SubpathwayLNCE.Rnw’
+    
+    SUMMARY: processing the following file failed:
+      ‘SubpathwayLNCE.Rnw’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# tnet
+
+<details>
+
+* Version: 3.0.16
+* GitHub: NA
+* Source code: https://github.com/cran/tnet
+* Date/Publication: 2020-02-24 18:00:02 UTC
+* Number of recursive dependencies: 11
+
+Run `revdepcheck::cloud_details(, "tnet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘tnet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: closeness_w
+    > ### Title: Closeness centrality in a weighted network
+    > ### Aliases: closeness_w
+    > 
+    > ### ** Examples
+    > 
+    > ## Load sample data
+    ...
+    + c(5,2,2),
+    + c(5,6,1),
+    + c(6,5,1))
+    > 
+    > ## Run the programme
+    > closeness_w(sampledata)
+    Error in match.arg(arg = arg, choices = choices, several.ok = several.ok) : 
+      'arg' must be of length 1
+    Calls: closeness_w ... <Anonymous> -> distances -> igraph.match.arg -> match.arg
     Execution halted
     ```
 
