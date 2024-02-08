@@ -11,7 +11,10 @@
 #######################################
 
 igraph_empty:
-    IGNORE: RR
+
+# Not needed in R, we use igraph_emtpy() instead
+igraph_empty_attrs:
+    IGNORE: RR, RC
 
 igraph_add_edges:
     IGNORE: RR, RC, RInit
@@ -48,8 +51,6 @@ igraph_edge:
 
 igraph_edges:
     IGNORE: RR, RC
-
-igraph_empty_attrs:
 
 igraph_get_eid:
     IGNORE: RR, RC, RInit
