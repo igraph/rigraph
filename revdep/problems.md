@@ -692,7 +692,7 @@ Run `revdepcheck::cloud_details(, "handwriter")` for more info
       installed size is 10.0Mb
       sub-directories of 1Mb or more:
         data   1.7Mb
-        libs   6.5Mb
+        libs   6.6Mb
     ```
 
 # keyplayer
@@ -1052,7 +1052,7 @@ Run `revdepcheck::cloud_details(, "modnets")` for more info
     Execution halted
     ```
 
-## Newly fixed
+## In both
 
 *   checking installed package size ... NOTE
     ```

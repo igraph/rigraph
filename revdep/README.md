@@ -1,14 +1,5 @@
 # Revdeps
 
-## Failed to check (4)
-
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|multinma  |?       |      |        |     |
-|rdracor   |?       |      |        |     |
-|Seurat    |?       |      |        |     |
-|streamDAG |?       |      |        |     |
-
 ## New problems (33)
 
 |package            |version |error  |warning |note |
@@ -32,7 +23,7 @@
 |[MBNMAdose](problems.md#mbnmadose)|0.4.2   |__+2__ |        |1    |
 |[MBNMAtime](problems.md#mbnmatime)|0.2.4   |__+2__ |        |     |
 |[MEGENA](problems.md#megena)|1.3.7   |__+1__ |        |1    |
-|[modnets](problems.md#modnets)|0.9.0   |__+1__ |        |-1   |
+|[modnets](problems.md#modnets)|0.9.0   |__+1__ |        |1    |
 |[MTA](problems.md#mta)|0.6.0   |__+2__ |        |     |
 |[nat.templatebrains](problems.md#nattemplatebrains)|1.1     |__+1__ |        |     |
 |[NetSci](problems.md#netsci)|1.0.0   |__+1__ |        |     |

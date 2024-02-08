@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 818 reverse dependencies (816 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 33 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 33 new problems
- * We failed to check 2 packages
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -118,7 +118,3 @@ Issues with CRAN packages are summarised below.
 * tnet
   checking examples ... ERROR
 
-### Failed to check
-
-* Seurat    (NA)
-* streamDAG (NA)
