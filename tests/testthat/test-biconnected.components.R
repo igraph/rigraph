@@ -24,9 +24,9 @@ test_that("biconnected_components works", {
                                   "components",
                                   "no",
                                   "tree_edges"))
-  expect_equal(class(bc$articulation_points), "igraph.vs")
-  expect_equal(class(bc$components[[1]]), "igraph.vs")
-  expect_equal(class(bc$component_edges[[1]]), "igraph.es")
+  expect_s3_class(bc$articulation_points, "igraph.vs")
+  expect_s3_class(bc$components[[1]], "igraph.vs")
+  expect_s3_class(bc$component_edges[[1]], "igraph.es")
 })
 
 test_that("is_biconnected works", {
