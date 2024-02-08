@@ -86,6 +86,8 @@ topological.sort <- function(graph, mode = c("out", "all", "in")) { # nocov star
 #' @export
 shortest.paths <- function(graph, v = V(graph), to = V(graph), mode = c("all", "out", "in"), weights = NULL, algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "shortest.paths()", "distances()")
+  algorithm <- igraph.match.arg(algorithm)
+  mode <- igraph.match.arg(mode)
   distances(graph = graph, v = v, to = to, mode = mode, weights = weights, algorithm = algorithm)
 } # nocov end
 
