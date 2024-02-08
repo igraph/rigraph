@@ -1471,6 +1471,9 @@
     <loc>https://r.igraph.org/reference/read_graph.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/realize_bipartite_degseq.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/realize_degseq.html</loc>
   </url>
   <url>
