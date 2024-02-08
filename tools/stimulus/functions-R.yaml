@@ -728,7 +728,6 @@ igraph_decompose:
 igraph_articulation_points:
 
 igraph_biconnected_components:
-    IGNORE: RR
 
 igraph_bridges:
 

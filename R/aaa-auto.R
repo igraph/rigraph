@@ -2235,6 +2235,28 @@ articulation_points_impl <- function(graph) {
   res
 }
 
+biconnected_components_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_biconnected_components, graph)
+  if (igraph_opt("return.vs.es")) {
+    res$tree.edges <- lapply(res$tree.edges, unsafe_create_es, graph = graph, es = E(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$component.edges <- lapply(res$component.edges, unsafe_create_es, graph = graph, es = E(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$articulation.points <- create_vs(graph, res$articulation.points)
+  }
+  res
+}
+
 bridges_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
