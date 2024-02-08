@@ -271,8 +271,31 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
-biconnected_components <- biconnected_components_impl
+biconnected_components <- function(graph) {
+  # Function call
+  res <- biconnected_components_impl(graph)
 
+  # TODO: Clean up after fixing "." / "_" problem.
+  # See https://github.com/igraph/rigraph/issues/1203
+
+  if (igraph_opt("return.vs.es")) {
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree.edges <- NULL
+  }
+
+  if (igraph_opt("return.vs.es")) {
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component.edges <- NULL
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$articulation_points <- create_vs(graph, res$articulation_points)
+    res$articulation.points <- NULL
+  }
+  res
+}
 
 #' Check biconnectedness
 #'
