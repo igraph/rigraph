@@ -59,6 +59,33 @@ SEXP R_igraph_empty(SEXP n, SEXP directed) {
 }
 
 /*-------------------------------------------/
+/ igraph_add_edges                           /
+/-------------------------------------------*/
+SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_edges;
+
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph_copy(graph, &c_graph);
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  R_SEXP_to_vector_int_copy(edges, &c_edges);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_add_edges(&c_graph, &c_edges, 0));
+
+                                        /* Convert output */
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_copy                                /
 /-------------------------------------------*/
 SEXP R_igraph_copy(SEXP from) {

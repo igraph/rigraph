@@ -147,7 +147,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 
   edges.orig <- ecount(graph)
   on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(R_igraph_add_edges, graph, as_igraph_vs(graph, edges) - 1)
+  graph <- .Call(R_igraph_add_edges_manual, graph, as_igraph_vs(graph, edges) - 1)
   edges.new <- ecount(graph)
 
   if (edges.new - edges.orig != 0) {

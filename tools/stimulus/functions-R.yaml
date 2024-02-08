@@ -11,10 +11,8 @@
 #######################################
 
 igraph_empty:
-    IGNORE: RR
 
 igraph_add_edges:
-    IGNORE: RR, RC, RInit
 
 igraph_add_vertices:
     IGNORE: RR, RC, RInit
