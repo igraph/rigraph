@@ -4308,23 +4308,23 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   igraph_integer_t n;
   igraph_real_t power=REAL(ppower)[0];
   igraph_integer_t m=Rf_isNull(pm) ? 0 : (igraph_integer_t) REAL(pm)[0];
-  igraph_vector_int_t outseq, *myoutseq=0;
+  igraph_vector_int_t outseq, *myoutseq = NULL;
   igraph_bool_t outpref=LOGICAL(poutpref)[0];
   igraph_real_t A=REAL(pA)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_barabasi_algorithm_t algo = (igraph_barabasi_algorithm_t) Rf_asInteger(palgo);
-  igraph_t start, *ppstart=0;
+  igraph_t start, *ppstart = NULL;
+  igraph_bool_t have_outseq = !Rf_isNull(poutseq);
   SEXP result;
 
   R_check_int_scalar(pn);
   n = (igraph_integer_t) REAL(pn)[0];
 
-  if (!Rf_isNull(poutseq)) {
+  if (have_outseq) {
     R_SEXP_to_vector_int_copy(poutseq, &outseq);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&outseq, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &outseq);
+    myoutseq = &outseq;
   }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &outseq);
 
   if (!Rf_isNull(pstart)) {
     R_SEXP_to_igraph(pstart, &start);
@@ -4333,8 +4333,11 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
 
   IGRAPH_R_CHECK(igraph_barabasi_game(&g, n, power, m, myoutseq, outpref, A, directed, algo, ppstart));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_vector_int_destroy(&outseq);
-  IGRAPH_FINALLY_CLEAN(1);
+
+  if (have_outseq) {
+    igraph_vector_int_destroy(&outseq);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
