@@ -19,3 +19,20 @@ test_that("biconnected_components works", {
   expect_that(sortlist(bc$components), equals(list(1:5, c(1, 6), 6:10)))
   expect_that(sort(as.vector(bc$articulation_points)), equals(c(1, 6)))
 })
+
+test_that("is_biconnected works", {
+  g <- make_full_graph(0)
+  expect_false(is_biconnected(g))
+
+  g <- make_full_graph(1)
+  expect_false(is_biconnected(g))
+
+  g <- make_full_graph(2)
+  expect_true(is_biconnected(g))
+
+  g <- make_full_graph(3)
+  expect_true(is_biconnected(g))
+
+  g <- make_graph(c(1,2, 2,3, 3,1, 1,4, 4,4))
+  expect_false(is_biconnected(g))
+})
