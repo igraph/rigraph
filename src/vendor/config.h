@@ -17,7 +17,9 @@
 
 /* #undef HAVE__UMUL128 */
 /* #undef HAVE___UMULH */
-#define HAVE___UINT128_T 1
+#if defined(__GNUC__) && defined(__SIZEOF_INT128__)
+#  define HAVE___UINT128_T 1
+#endif
 
 #define HAVE_GLPK 1
 #define HAVE_LIBXML 1
