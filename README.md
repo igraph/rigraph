@@ -29,10 +29,10 @@ options(
 install.packages('igraph')
 ```
 
-or Github, with the `devtools` package:
+or Github, with the [pak package](https://pak.r-lib.org/):
 
 ```r
-devtools::install_github("igraph/rigraph")
+pak::pak("igraph/rigraph")
 ```
 
 When compiling from sources, make sure that you have C, C++ and Fortran
