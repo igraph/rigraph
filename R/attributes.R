@@ -164,7 +164,7 @@ is.named <- function(graph) { # nocov start
   is_named(graph = graph)
 } # nocov end
 
-#' Create a bipartite graph
+#' Checks whether the graph has a vertex attribute called `type`
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -1003,7 +1003,11 @@ is_weighted <- function(graph) {
   "weight" %in% edge_attr_names(graph)
 }
 
-#' @rdname make_bipartite_graph
+#' @title Checks whether the graph has a vertex attribute called `type`.
+#' @description It does not check whether the graph is bipartite in the
+#'  mathematical sense.  Use [bipartite_mapping()] for that.
+#' @family bipartite
+#' @param graph The input graph
 #' @export
 is_bipartite <- function(graph) {
   ensure_igraph(graph)

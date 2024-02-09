@@ -2,12 +2,12 @@
 % Please edit documentation in R/attributes.R
 \name{is.bipartite}
 \alias{is.bipartite}
-\title{Create a bipartite graph}
+\title{Checks whether the graph has a vertex attribute called \code{type}}
 \usage{
 is.bipartite(graph)
 }
 \arguments{
-\item{graph}{The input graph.}
+\item{graph}{The input graph}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
