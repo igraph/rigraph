@@ -1880,8 +1880,7 @@ pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TR
   res
 }
 
-# https://github.com/igraph/igraph/commit/d455f61f4832d5207cb0a0475fb5ddc02409ae76#r138442064
-pseudo_diameter_dijkstra_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
+pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -3862,6 +3861,18 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
   }
+  res
+}
+
+version_impl <- function() {
+  # Argument checks
+
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_version, )
+
+
   res
 }
 
