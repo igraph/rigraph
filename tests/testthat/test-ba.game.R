@@ -1,4 +1,4 @@
-test_that("sample_pa works", {
+test_that("sample_pa() works", {
   g <- sample_pa(100, m = 2)
   expect_that(ecount(g), equals(197))
   expect_that(vcount(g), equals(100))
@@ -13,6 +13,12 @@ test_that("sample_pa works", {
   expect_that(ecount(g3), equals(198))
   expect_that(vcount(g3), equals(100))
   expect_false(is_simple(g3))
+
+  g4 <- sample_pa(3, out.seq = 0:2, directed = FALSE)
+  expect_equal(degree(g4), rep(2, 3))
+
+  g5 <- sample_pa(3, out.dist = 0:2, directed = FALSE)
+  expect_equal(degree(g5), rep(2, 3))
 })
 
 test_that("sample_pa can start from a graph", {
