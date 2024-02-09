@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,9 +101,9 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'igraph'</span><span class="op">)</span></span></code></pre></div>
-<p>or Github, with the <code>devtools</code> package:</p>
+<p>or Github, with the <a href="https://pak.r-lib.org/" class="external-link">pak package</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"igraph/rigraph"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"igraph/rigraph"</span><span class="op">)</span></span></code></pre></div>
 <p>When compiling from sources, make sure that you have C, C++ and Fortran compilers, as well as development packages for <code>glpk</code>, <code>gmp</code> and <code>libxml2</code>. On Debian/Ubuntu, use <code>apt install libglpk-dev libgmp-dev libxml2-dev</code>. On Fedora, use <code>yum install glpk-devel gmp-devel libxml2-devel</code>.</p>
 <p>For installation from source on Windows, you need to have <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> installed. For versions R &gt;= 4.0 you can install the dependencies using:</p>
 <pre><code>pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-gmp mingw-w64-{i686,x86_64}-libxml2</code></pre>
