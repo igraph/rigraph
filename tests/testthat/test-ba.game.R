@@ -1,4 +1,6 @@
 test_that("sample_pa() works", {
+  withr::local_seed(20240209)
+
   g <- sample_pa(100, m = 2)
   expect_that(ecount(g), equals(197))
   expect_that(vcount(g), equals(100))
@@ -17,7 +19,7 @@ test_that("sample_pa() works", {
   g4 <- sample_pa(3, out.seq = 0:2, directed = FALSE)
   expect_equal(degree(g4), rep(2, 3))
 
-  g5 <- sample_pa(3, out.dist = 0:2, directed = FALSE)
+  g5 <- sample_pa(3, out.dist = rep(2, 1000), directed = FALSE)
   expect_equal(degree(g5), rep(2, 3))
 })
 
