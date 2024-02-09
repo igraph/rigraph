@@ -1,5 +1,42 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9008
+
+## Bug fixes
+
+  - `shortest.paths()` no longer fails (#1222).
+
+  - Avoid duplicate objects (#1223).
+
+  - `isomorphisms()` and `subgraph_isomorphisims(method = "vf2")` work again, regression introduced in 2.0.0 (#1219).
+
+  - `biconnected_components()` now returns edge and vertex sequences again (#1213).
+
+  - `configure` manage libxml multiple include paths (#1197).
+
+  - Link Fortran runtime on Windows as needed by arpack. (#1215).
+
+## Features
+
+  - `realize_bipartite_degseq()` creates a bipartite graph from two degree sequences (#1212).
+
+  - `is_biconnected()` checks if a graph is biconnected (#1204).
+
+## Chore
+
+  - Update stimulus to 0.21.4 (#1210).
+
+  - `config.h` defines `HAVE___UINT128_T` (#1216).
+
+## Refactoring
+
+  - Make\_empty\_graph() is now fully auto-generated (#1068).
+
+## Testing
+
+  - Add tests for `isomorphisms()` and `subgraph_isomorphisms()` (#1225).
+
+
 # igraph 2.0.1.9007
 
 ## Documentation
