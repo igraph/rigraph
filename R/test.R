@@ -95,7 +95,7 @@ igraph_test <- function() {
 #' igraph_version()
 #'
 igraph_version <- function() {
-  unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
+  packageVersion("igraph")
 }
 
 checkpkg <- function(package_file, args = character()) {
