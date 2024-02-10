@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9009
+
+## Bug fixes
+
+  - `sample_pa()` respects the `out.seq` and `out.dist` arguments again, regression introduced in igraph 2.0.0 (#1226).
+
+## Documentation
+
+  - Recommend {pak} instead of {remotes} (#1228).
+
+
 # igraph 2.0.1.9008
 
 ## Bug fixes
