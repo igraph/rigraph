@@ -27,7 +27,8 @@
 /* #undef INTERNAL_BLAS */
 /* #undef INTERNAL_LAPACK */
 /* #undef INTERNAL_ARPACK */
-/* #undef INTERNAL_GMP */
+
+#define INTERNAL_GMP 1
 
 #define IGRAPH_F77_SAVE
 #define IGRAPH_THREAD_LOCAL
