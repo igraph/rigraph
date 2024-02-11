@@ -144,8 +144,10 @@
 #' @param sparse Logical scalar, whether to return sparse matrices.
 #' @param edges Logical scalar, whether to return edge ids.
 #' @param drop Ignored.
-#' @param attr If not `NULL`, then it should be the name of an edge
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
+#' If not `NULL`, then it should be the name of an edge
 #'   attribute. This attribute is queried and returned.
+#' @param weights A vector of numeric weights.
 #' @return A scalar or matrix. See details below.
 #'
 #' @family structural queries
@@ -155,11 +157,28 @@
 `[.igraph` <- function(x, i, j, ..., from, to,
                        sparse = igraph_opt("sparsematrices"),
                        edges = FALSE, drop = TRUE,
-                       attr = if (is_weighted(x)) "weight" else NULL) {
+                       attr = NULL,
+                       weights = NULL) {
   ## TODO: make it faster, don't need the whole matrix usually
 
-  ################################################################
-  ## Argument checks
+  ## Argument checks ----
+  if (!missing(attr)) {
+    lifecycle::deprecate_soft(
+      when = "2.0.1",
+      what = "as_adjacency_matrix(attr = )",
+      details = "Use the weights arguments instead."
+    )
+  }
+
+  if (!is.null(attr) && !is.null(weights)) {
+    cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
+  }
+
+  if (is.null(weights) && is.null(attr)) {
+    if (is_weighted(x)) {
+      weights <- get_weights(x)
+    }
+  }
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
     stop("Cannot give 'from'/'to' together with regular indices")
@@ -180,7 +199,18 @@
     }
   }
 
-  ##################################################################
+  ## calculations ----
+  arguments <- list(
+    graph = x,
+    sparse = sparse,
+    weights = weights
+  )
+  if (!missing(attr)) {
+    arguments[["attr"]] <- attr
+  }
+  if (!missing(edges)) {
+    arguments[["edges"]] <- edges
+  }
 
   if (!missing(from)) {
     res <- get.edge.ids(x, rbind(from, to), error = FALSE)
@@ -190,34 +220,20 @@
       if (any(res != 0)) {
         res[res != 0] <- edge_attr(x, attr, res[res != 0])
       }
+    } else if (!is.null(weights)) {
+      # TODO how to use weights here?!
     } else {
       res <- as.logical(res) + 0
     }
     res
   } else if (missing(i) && missing(j)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)
-    }
+    do.call(as_adjacency_matrix, args = arguments)
   } else if (missing(j)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, , drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[i, , drop = drop]
   } else if (missing(i)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[, j, drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[, j, drop = drop]
   } else {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, j, drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
-    }
+    do.call(as_adjacency_matrix, args = arguments)[i, j, drop = drop]
   }
 }
 

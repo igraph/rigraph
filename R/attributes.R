@@ -1003,6 +1003,16 @@ is_weighted <- function(graph) {
   "weight" %in% edge_attr_names(graph)
 }
 
+get_weights <- function(graph, call = rlang::caller_env()) {
+  if (!is_weighted(graph)) {
+    cli::cli_abort(
+      "The graph must have weights",
+      call = call
+    )
+  }
+  edge_attr(graph, "weight")
+}
+
 #' @rdname make_bipartite_graph
 #' @export
 is_bipartite <- function(graph) {

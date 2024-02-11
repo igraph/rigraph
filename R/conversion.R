@@ -155,7 +155,8 @@ get.adjedgelist <- function(graph, mode = c("all", "out", "in", "total"), loops 
 ###################################################################
 
 get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
-                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE) {
+                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE,
+                                call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -176,19 +177,21 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("Can't find edge attribute {.var {attr}}.", call = call)
     }
     exattr <- edge_attr(graph, attr)
-    if (is.logical(exattr)) {
-      res <- matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph))
-    } else if (is.numeric(exattr)) {
-      res <- matrix(0, nrow = vcount(graph), ncol = vcount(graph))
-    } else {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+
+    res <- switch(
+      mode(exattr),
+      logical = matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph)),
+      numeric = matrix(0, nrow = vcount(graph), ncol = vcount(graph)),
+      cli::cli_abort(
+        "The edge attribute {.val {attr}} must be either numeric or logical,
+        not {.obj_type_friendly {exattr}}.",
+        call = call
       )
-    }
+    )
+
     if (is_directed(graph)) {
       for (i in seq(length.out = ecount(graph))) {
         e <- ends(graph, i, names = FALSE)
@@ -228,7 +231,8 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 }
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
-                                 attr = NULL, edges = FALSE, names = TRUE) {
+                                 attr = NULL, edges = FALSE, names = TRUE,
+                                 weights = NULL, call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -241,16 +245,20 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (edges) {
     value <- seq_len(nrow(el))
     use.last.ij <- TRUE
+  } else if (!is.null(weights)) {
+    value <- weights
   } else if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("Can't find edge attribute {.var {attr}}.", call = call)
     }
     value <- edge_attr(graph, name = attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+    value_ok_type <- (is.numeric(value) || is.logical(value))
+    if (!value_ok_type) {
+      cli::cli_abort(
+        "The edge attribute {.val {attr}} must be either numeric or logical,
+        not {.obj_type_friendly {exattr}}.",
+        call = call
       )
     }
   } else {
@@ -258,25 +266,41 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   }
 
   if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(dims = c(vc, vc), i = el[, 1], j = el[, 2], x = value, use.last.ij = use.last.ij)
+    res <- Matrix::sparseMatrix(
+      dims = c(vc, vc),
+      i = el[, 1],
+      j = el[, 2],
+      x = value,
+      use.last.ij = use.last.ij
+    )
   } else {
     if (type == "upper") {
       ## upper
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmin(el[, 1], el[, 2]),
+        j = pmax(el[, 1], el[, 2]),
+        x = value,
+        use.last.ij = use.last.ij
       )
     } else if (type == "lower") {
       ## lower
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmax(el[, 1], el[, 2]),
-        j = pmin(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmax(el[, 1], el[, 2]),
+        j = pmin(el[, 1], el[, 2]),
+        x = value,
+        use.last.ij = use.last.ij
       )
     } else if (type == "both") {
       ## both
       res <- Matrix::sparseMatrix(
-        dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-        j = pmax(el[, 1], el[, 2]), x = value, symmetric = TRUE, use.last.ij = use.last.ij
+        dims = c(vc, vc),
+        i = pmin(el[, 1], el[, 2]),
+        j = pmax(el[, 1], el[, 2]),
+        x = value,
+        symmetric = TRUE,
+        use.last.ij = use.last.ij
       )
       res <- as(res, "generalMatrix")
     }
@@ -305,7 +329,8 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   right triangle of the matrix is used, `lower`: the lower left triangle
 #'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param attr Either `NULL` or a character string giving an edge
+#' @param attr `r lifecycle::badge("deprecated")` Use `weights` instead.
+#'   Either `NULL` or a character string giving an edge
 #'   attribute name. If `NULL` a traditional adjacency matrix is returned.
 #'   If not `NULL` then the values of the given edge attribute are included
 #'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
@@ -313,10 +338,11 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   argument is ignored if `edges` is `TRUE`.
 #'
 #'   Note that this works only for certain attribute types. If the `sparse`
-#'   argumen is `TRUE`, then the attribute must be either logical or
+#'   argument is `TRUE`, then the attribute must be either logical or
 #'   numeric. If the `sparse` argument is `FALSE`, then character is
 #'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
+#' @param weights A vector of numeric weights.
 #' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
@@ -341,17 +367,43 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' @export
 as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
                                 attr = NULL, edges = FALSE, names = TRUE,
-                                sparse = igraph_opt("sparsematrices")) {
+                                sparse = igraph_opt("sparsematrices"),
+                                weights = NULL) {
   ensure_igraph(graph)
 
   if (!missing(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
+  if (!missing(attr)) {
+    lifecycle::deprecate_soft(
+      when = "2.0.1",
+      what = "as_adjacency_matrix(attr = )",
+      details = "Use the weights arguments instead."
+    )
+  }
+
+  if (!is.null(attr) && !is.null(weights)) {
+    cli::cli_abort("Can't provide both {.arg attr} and {.arg weights} arguments.")
+  }
+
   if (sparse) {
-    get.adjacency.sparse(graph, type = type, attr = attr, edges = edges, names = names)
+    get.adjacency.sparse(
+      graph,
+      type = type,
+      attr = attr,
+      edges = edges,
+      names = names,
+      weights = weights
+    )
   } else {
-    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
+    get.adjacency.dense(
+      graph,
+      type = type,
+      attr = attr,
+      weights = weights,
+      names = names
+    )
   }
 }
 

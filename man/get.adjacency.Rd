@@ -22,7 +22,8 @@ right triangle of the matrix is used, \code{lower}: the lower left triangle
 of the matrix is used. \code{both}: the whole matrix is used, a symmetric
 matrix is returned.}
 
-\item{attr}{Either \code{NULL} or a character string giving an edge
+\item{attr}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{weights} instead.
+Either \code{NULL} or a character string giving an edge
 attribute name. If \code{NULL} a traditional adjacency matrix is returned.
 If not \code{NULL} then the values of the given edge attribute are included
 in the adjacency matrix. If the graph has multiple edges, the edge attribute
@@ -30,7 +31,7 @@ of an arbitrarily chosen edge (for the multiple edges) is included. This
 argument is ignored if \code{edges} is \code{TRUE}.
 
 Note that this works only for certain attribute types. If the \code{sparse}
-argumen is \code{TRUE}, then the attribute must be either logical or
+argument is \code{TRUE}, then the attribute must be either logical or
 numeric. If the \code{sparse} argument is \code{FALSE}, then character is
 also allowed. The reason for the difference is that the \code{Matrix}
 package does not support character sparse matrices yet.}

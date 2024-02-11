@@ -184,7 +184,7 @@ eigen(laplacian_matrix(make_star(10, mode = "undirected")))
 if (require(Matrix)) {
   set.seed(42)
   g <- sample_gnp(1000, 5 / 1000)
-  M <- as_adj(g, sparse = TRUE)
+  M <- as_adjacency_matrix(g, sparse = TRUE)
   f2 <- function(x, extra = NULL) {
     cat(".")
     as.vector(M \%*\% x)

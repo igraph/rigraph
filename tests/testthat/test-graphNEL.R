@@ -22,8 +22,8 @@ test_that("graphNEL conversion works", {
   expect_true(graph.isomorphic(g, g2))
   expect_that(V(g)$name, equals(V(g2)$name))
 
-  A <- as_adj(g, attr = "weight", sparse = FALSE)
-  A2 <- as_adj(g2, attr = "weight", sparse = FALSE)
+  A <- as_adjacency_matrix(g, weights = get_weights(g), sparse = FALSE)
+  A2 <- as_adjacency_matrix(g2, weights = get_weights(g2), sparse = FALSE)
   expect_that(A, equals(A))
   expect_that(g$name, equals(g2$name))
 })
