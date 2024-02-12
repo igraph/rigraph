@@ -247,8 +247,8 @@ To demonstrate the use of attributes, let us create a simple social network:
 
 ```{r}
 g <- make_graph(
-  ~ Alice - Bob:Claire:Frank, Claire - Alice:Dennis:Frank:Esther,
-  George - Dennis:Frank, Dennis - Esther
+  ~ Alice - Boris:Himari:Moshe, Himari - Alice:Nang:Moshe:Samira,
+  Ibrahim - Nang:Moshe, Nang - Samira
 )
 ```
 
@@ -265,8 +265,8 @@ summary(g)
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
-  ~ Alice - Bob:Claire:Frank, Claire - Alice:Dennis:Frank:Esther,
-  George - Dennis:Frank, Dennis - Esther
+  ~ Alice - Boris:Himari:Moshe, Himari - Alice:Nang:Moshe:Samira,
+  Ibrahim - Nang:Moshe, Nang - Samira
 ) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
   set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) %>%
@@ -292,7 +292,7 @@ graph_attr(g, "date")
 To retrieve attributes, you can also use `graph_attr()`, `vertex_attr()`, and `edge_attr()`. To find the ID of a vertex you can use the function `match()`:
 
 ```{r echo = TRUE}
-match(c("George"), V(g)$name)
+match(c("Ibrahim"), V(g)$name)
 ```
 
 To assign attributes to a subset of vertices or edges, you can use:
@@ -334,7 +334,7 @@ degree(g, v = c(3, 4, 5))
 Most functions that accept vertex IDs also accept vertex _names_ (the values of the `name` vertex attribute) as long as the names are unique:
 
 ```{r echo = TRUE}
-degree(g, v = c("Carmina", "Frank", "Dennis"))
+degree(g, v = c("Carmina", "Moshe", "Nang"))
 ```
 
 It also works for single vertices:
@@ -453,7 +453,7 @@ E(g)[.from("Carmina")]
 
 Using `.to()` filters edge sequences based on the target vertices. This is different from `.from()` if the graph is directed, while it gives the same answer for undirected graphs. Using `.inc()` selects only those edges that are incident on a single vertex or at least one of the vertices, irrespective of the edge directions.
 
-The `%--%` operator can be used to select edges between specific groups of vertices, ignoring edge directions in directed graphs. For instance, the following expression selects all the edges between Carmina (vertex index 3), Dennis (vertex index 5) and Esther (vertex index 6):
+The `%--%` operator can be used to select edges between specific groups of vertices, ignoring edge directions in directed graphs. For instance, the following expression selects all the edges between Carmina (vertex index 3), Nang (vertex index 5) and Samira (vertex index 6):
 
 ```{r echo = TRUE}
 E(g)[3:5 %--% 5:6]
@@ -487,7 +487,7 @@ The adjacency matrix is another way to represent a graph. In an adjacency matrix
 as_adjacency_matrix(g)
 ```
 
-For example, Carmina (`1, 0, 0, 1, 1, 1, 0`) is directly connected to Alejandra (who has vertex index 1), Frank (index 4), Dennis (index 5) and Esther (index 6), but not to Bruno (index 2) or to George (index 7).
+For example, Carmina (`1, 0, 0, 1, 1, 1, 0`) is directly connected to Alejandra (who has vertex index 1), Moshe (index 4), Nang (index 5) and Samira (index 6), but not to Bruno (index 2) or to Ibrahim (index 7).
 
 ## Layouts and plotting
 

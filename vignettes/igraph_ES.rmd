@@ -255,10 +255,10 @@ Para demostrar el uso de los atributos, creemos una red social sencilla:
 
 ```{r}
 g <- make_graph(
-  ~ Alice-Bob:Claire:Frank,
-  Claire-Alice:Dennis:Frank:Esther,
-  George-Dennis:Frank, 
-  Dennis-Esther
+  ~ Alice-Boris:Himari:Moshe,
+  Himari-Alice:Nang:Moshe:Samira,
+  Ibrahim-Nang:Moshe, 
+  Nang-Samira
 )
 ```
 
@@ -275,10 +275,10 @@ summary(g)
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
-  ~ Alice-Bob:Claire:Frank, 
-  Claire-Alice:Dennis:Frank:Esther,
-  George-Dennis:Frank, 
-  Dennis-Esther
+  ~ Alice-Boris:Himari:Moshe, 
+  Himari-Alice:Nang:Moshe:Samira,
+  Ibrahim-Nang:Moshe, 
+  Nang-Samira
 ) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
   set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) %>%
@@ -304,7 +304,7 @@ graph_attr(g, "date")
 Para recuperar atributos, también puedes utilizar `graph_attr()`, `vertex_attr()` y `edge_attr()`. Para encontrar el ID de un vértice puedes utilizar la función `match()`:
 
 ```{r echo = TRUE}
-match(c("George"), V(g)$name)
+match(c("Ibrahim"), V(g)$name)
 ```
 
 Para asignar atributos a un subconjunto de vértices o aristas, puedes utilizar:
@@ -346,7 +346,7 @@ degree(g, v = c(3,4,5))
 La mayoría de las funciones que aceptan los IDs de los vértices también aceptan los "nombres" de los vértices (es decir, los valores del atributo `name` del vértice) siempre que los nombres sean únicos:
 
 ```{r echo = TRUE}
-degree(g, v = c("Carmina", "Frank", "Dennis"))
+degree(g, v = c("Carmina", "Moshe", "Nang"))
 ```
 
 También funciona para vértices individuales:
@@ -465,7 +465,7 @@ E(g)[.from("Carmina")]
 
 Al usar `.to()`, se filtran la serie de aristas en función de los vértices de destino o diana. Esto es diferente de `.from()` si el grafo es dirigido, mientras que da la misma respuesta para grafos no dirigidos. Con `.inc()` sólo se seleccionan las aristas que inciden en un único vértice o en al menos uno de los vértices, independientemente de la dirección de las aristas.
 
-La expresión `%--%` es un operador especial que puede utilizarse para seleccionar todas las aristas entre dos conjuntos de vértices. Ignora las direcciones de las aristas en los grafos dirigidos. Por ejemplo, la siguiente expresión selecciona todas las aristas entre Carmina (su ID de vértice es el 3), Dennis (su ID de vértice es el 5) y Esther (su ID de vértice es el 6):
+La expresión `%--%` es un operador especial que puede utilizarse para seleccionar todas las aristas entre dos conjuntos de vértices. Ignora las direcciones de las aristas en los grafos dirigidos. Por ejemplo, la siguiente expresión selecciona todas las aristas entre Carmina (su ID de vértice es el 3), Nang (su ID de vértice es el 5) y Samira (su ID de vértice es el 6):
 
 ```{r echo = TRUE}
 E(g) [ 3:5 %--% 5:6 ]
@@ -499,7 +499,7 @@ Una matriz de adyacencia es otra manera de representar un grafo. En la matriz de
 as_adjacency_matrix(g)
 ```
 
-Por ejemplo, Carmina (`1, 0, 0, 1, 1, 1, 0`) está directamente conectada con Alejandra (que tiene el índice 1), Frank (índice 4), Dennis (índice 5), Esther (índice 6) y , pero no con Bruno (índice 2) ni con George (índice 7).
+Por ejemplo, Carmina (`1, 0, 0, 1, 1, 1, 0`) está directamente conectada con Alejandra (que tiene el índice 1), Moshe (índice 4), Nang (índice 5), Samira (índice 6) y , pero no con Bruno (índice 2) ni con Ibrahim (índice 7).
 
 ## Diseños y graficación
 
