@@ -1079,22 +1079,23 @@ path <- function(...) {
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
-    wn <- which(names(e2) == "")
-    if (length(wn) == 1) {
-      names(e2)[wn] <- "name"
+    unnamed_elements_indices <- which(!rlang::have_name(e2))
+    if (length(unnamed_elements_indices) == 1) {
+      e2 <- rlang::set_names(e2[unnamed_elements_indices], "name")
     } else if (is.null(names(e2))) {
       ## No names at all, everything is a vertex name
       e2 <- list(name = unlist(e2, recursive = FALSE))
-    } else if (length(wn) == 0) {
+    } else if (length(unnamed_elements_indices) == 0) {
       ## If there are no non-named arguments, we are fine
     } else {
       ## Otherwise, all unnamed arguments are collected and used as
       ## vertex names
-      nn <- unlist(e2[wn], recursive = FALSE)
-      e2 <- c(list(name = nn), e2[names(e2) != ""])
+      nn <- unlist(e2[unnamed_elements_indices], recursive = FALSE)
+      e2 <- c(list(name = nn), e2[rlang::have_name(e2)])
     }
-    la <- unique(sapply(e2, length))
-    res <- add_vertices(e1, la, attr = e2)
+    # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
+    vertices_number <- length(unnamed_elements_indices)
+    res <- add_vertices(e1, nv = vertices_number, attr = e2)
   } else if ("igraph.path" %in% class(e2)) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
