@@ -3872,7 +3872,6 @@ version_impl <- function() {
   # Function call
   res <- .Call(R_igraph_version, )
 
-
   res
 }
 
