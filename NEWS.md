@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9010
+
+## Bug fixes
+
+  - Do not rely on `which` program during configuration (#1232).
+
+## Chore
+
+  - Remove unused patch files (#1234).
+
+## Refactoring
+
+  - Always use bundled mini-gmp (#1233).
+
+
 # igraph 2.0.1.9009
 
 ## Bug fixes
