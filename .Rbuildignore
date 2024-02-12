@@ -49,3 +49,4 @@
 ^\.ccache$
 ^\.aviator/config\.yml$
 ^src/vendor/cigraph/CITATION\.cff$
+^R/stimulus\.R$
