@@ -1094,7 +1094,7 @@ path <- function(...) {
       e2 <- c(list(name = nn), e2[rlang::have_name(e2)])
     }
     # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
-    vertices_number <- length(unnamed_elements_indices)
+    vertices_number <- length(e2[["name"]])
     res <- add_vertices(e1, nv = vertices_number, attr = e2)
   } else if ("igraph.path" %in% class(e2)) {
     ## Adding edges along a path, possibly with attributes
