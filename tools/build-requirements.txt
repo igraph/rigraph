@@ -3,4 +3,4 @@
 # environment to detect when to re-create the virtualenv so the hash
 # needs to change whenever a package is updated.
 
-git+https://github.com/igraph/stimulus@0.21.4#egg=stimulus
+git+https://github.com/igraph/stimulus@2a273aaa6cf31470c4af30077aece3015c3e4f7f#egg=stimulus
