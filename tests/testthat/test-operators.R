@@ -91,3 +91,17 @@ test_that("t() is aliased to edge reversal for graphs", {
   expect_that(vcount(t(g)), equals(vcount(g)))
   expect_that(as_edgelist(t(g)), equals(as_edgelist(g)[, c(2, 1)]))
 })
+
+test_that("vertices() works", {
+  g <- make_empty_graph(1)
+
+  g_all_unnamed <-  g + vertices("a", "b")
+  expect_s3_class(V(g_all_unnamed), "igraph.vs")
+  expect_identical(V(g_all_unnamed)$name, c( NA, "a", "b"))
+
+  g_mix_named_unnamed <- g + vertices("a", "b", foo = 5)
+  expect_s3_class(V(g_mix_named_unnamed), "igraph.vs")
+  expect_true(is.na(V(g_mix_named_unnamed)$name[1]))
+  expect_identical(unname(V(g_mix_named_unnamed)$name[2:3]), c("a", "b"))
+  expect_equal(V(g_mix_named_unnamed)$foo, c( NA, 5, 5))
+})
