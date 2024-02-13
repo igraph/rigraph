@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,9 +156,9 @@ directed graph: that is to say to create the same graph as above:</p>
 <p>We can print the graph to get a summary of its nodes and edges:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH b069aba UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH f6fa771 UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span>
-<span><span class="co">## + edges from b069aba (vertex names):</span></span>
+<span><span class="co">## + edges from f6fa771 (vertex names):</span></span>
 <span><span class="co">## [1] 1--2 1--5</span></span></code></pre>
 <p>This means: <strong>U</strong>ndirected <strong>N</strong>amed graph
 with <strong>10</strong> vertices and <strong>2</strong> edges, with the
@@ -170,7 +170,7 @@ edges, which is convenient for large graphs with millions of edges:</p>
 <hr>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH b069aba UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH f6fa771 UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span></code></pre>
 <p>The same function <code><a href="../reference/make_graph.html">make_graph()</a></code> can create some notable
 graphs by just specifying their name. For example you can create the
@@ -251,9 +251,9 @@ provides a mechanism for chaining commands with the operator
 <span>  <span class="fu"><a href="../reference/add_vertices.html">add_vertices</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_edges.html">add_edges</a></span><span class="op">(</span>edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">39</span>, <span class="fl">39</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">38</span>, <span class="fl">40</span>, <span class="fl">37</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH e706457 U--- 40 86 -- Zachary</span></span>
+<pre><code><span><span class="co">## IGRAPH e0cfda3 U--- 40 86 -- Zachary</span></span>
 <span><span class="co">## + attr: name (g/c)</span></span>
-<span><span class="co">## + edges from e706457:</span></span>
+<span><span class="co">## + edges from e0cfda3:</span></span>
 <span><span class="co">##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12</span></span>
 <span><span class="co">## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14</span></span>
 <span><span class="co">## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10</span></span>
@@ -345,7 +345,7 @@ graph each single time, for instance <code><a href="../reference/make_tree.html"
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">127</span>, <span class="fl">2</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 4b5820a U--- 5 3 -- Ring graph</span></span>
+<pre><code><span><span class="co">## IGRAPH c34568d U--- 5 3 -- Ring graph</span></span>
 <span><span class="co">## + attr: name (g/c), mutual (g/l), circular (g/l)</span></span></code></pre>
 <p>This generates a regular tree graph with 127 vertices, each vertex
 having two children. No matter how many times you call
@@ -362,7 +362,7 @@ they produce a different graph each time. For instance
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_grg.html">sample_grg</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">graph1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH a8da6b4 U--- 100 488 -- Geometric random graph</span></span>
+<pre><code><span><span class="co">## IGRAPH bb724d2 U--- 100 498 -- Geometric random graph</span></span>
 <span><span class="co">## + attr: name (g/c), radius (g/n), torus (g/l)</span></span></code></pre>
 <p>This generates a geometric random graph: <em>n</em> points are chosen
 randomly and uniformly inside the unit square and pairs of points closer
@@ -402,8 +402,8 @@ attributes.</p>
 network:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_graph.html">make_graph</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span> <span class="va">Alice</span> <span class="op">-</span> <span class="va">Bob</span><span class="op">:</span><span class="va">Claire</span><span class="op">:</span><span class="va">Frank</span>, <span class="va">Claire</span> <span class="op">-</span> <span class="va">Alice</span><span class="op">:</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span><span class="op">:</span><span class="va">Esther</span>,</span>
-<span>  <span class="va">George</span> <span class="op">-</span> <span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span>, <span class="va">Dennis</span> <span class="op">-</span> <span class="va">Esther</span></span>
+<span>  <span class="op">~</span> <span class="va">Alice</span> <span class="op">-</span> <span class="va">Boris</span><span class="op">:</span><span class="va">Himari</span><span class="op">:</span><span class="va">Moshe</span>, <span class="va">Himari</span> <span class="op">-</span> <span class="va">Alice</span><span class="op">:</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span><span class="op">:</span><span class="va">Samira</span>,</span>
+<span>  <span class="va">Ibrahim</span> <span class="op">-</span> <span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span>, <span class="va">Nang</span> <span class="op">-</span> <span class="va">Samira</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Each vertex represents a person, so we want to store ages, genders
 and types of connection between two people (<code>is_formal()</code>
@@ -417,7 +417,7 @@ and just as readable as <code><a href="../reference/graph_attr.html">graph_attr(
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">is_formal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH cf1945d UN-- 7 9 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH 94ad936 UN-- 7 9 -- </span></span>
 <span><span class="co">## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)</span></span></code></pre>
 <p><code><a href="../reference/V.html">V()</a></code> and <code><a href="../reference/E.html">E()</a></code> are the standard way to obtain
 a sequence of all vertices and edges, respectively. This assigns an
@@ -427,8 +427,8 @@ generate our social network is with the use of
 operator <code>%\&gt;%</code>:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_graph.html">make_graph</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span> <span class="va">Alice</span> <span class="op">-</span> <span class="va">Bob</span><span class="op">:</span><span class="va">Claire</span><span class="op">:</span><span class="va">Frank</span>, <span class="va">Claire</span> <span class="op">-</span> <span class="va">Alice</span><span class="op">:</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span><span class="op">:</span><span class="va">Esther</span>,</span>
-<span>  <span class="va">George</span> <span class="op">-</span> <span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span>, <span class="va">Dennis</span> <span class="op">-</span> <span class="va">Esther</span></span>
+<span>  <span class="op">~</span> <span class="va">Alice</span> <span class="op">-</span> <span class="va">Boris</span><span class="op">:</span><span class="va">Himari</span><span class="op">:</span><span class="va">Moshe</span>, <span class="va">Himari</span> <span class="op">-</span> <span class="va">Alice</span><span class="op">:</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span><span class="op">:</span><span class="va">Samira</span>,</span>
+<span>  <span class="va">Ibrahim</span> <span class="op">-</span> <span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span>, <span class="va">Nang</span> <span class="op">-</span> <span class="va">Samira</span></span>
 <span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"age"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">31</span>, <span class="fl">18</span>, <span class="fl">23</span>, <span class="fl">47</span>, <span class="fl">22</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"gender"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -454,15 +454,15 @@ to set attributes, for instance to add a date to the graph:</p>
 <code><a href="../reference/vertex_attr.html">vertex_attr()</a></code>, and <code><a href="../reference/edge_attr.html">edge_attr()</a></code>. To find the ID
 of a vertex you can use the function <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code>:</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"George"</span><span class="op">)</span>, <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ibrahim"</span><span class="op">)</span>, <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 7</span></span></code></pre>
 <p>To assign attributes to a subset of vertices or edges, you can
 use:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Alejandra"</span>, <span class="st">"Bruno"</span>, <span class="st">"Carmina"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 7/7 vertices, named, from cf1945d:</span></span>
-<span><span class="co">## [1] Alejandra Bruno     Carmina   Frank     Dennis    Esther    George</span></span></code></pre>
+<pre><code><span><span class="co">## + 7/7 vertices, named, from 94ad936:</span></span>
+<span><span class="co">## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim</span></span></code></pre>
 <p>To delete attributes:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/delete_vertex_attr.html">delete_vertex_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"gender"</span><span class="op">)</span></span>
@@ -490,7 +490,7 @@ adjacent to it. In case of directed networks, we can also define
 syntax:</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Alejandra     Bruno   Carmina     Frank    Dennis    Esther    George </span></span>
+<pre><code><span><span class="co">## Alejandra     Bruno   Carmina     Moshe      Nang    Samira   Ibrahim </span></span>
 <span><span class="co">##         3         1         4         3         3         2         2</span></span></code></pre>
 <p>If the graph was directed, we would have been able to calculate the
 in- and out-degrees separately using <code>degree(mode = "in")</code>
@@ -499,18 +499,18 @@ ID or a list of vertex IDs to <code><a href="../reference/degree.html">degree()<
 calculate the degrees for only a subset of vertices:</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## George </span></span>
-<span><span class="co">##      2</span></span></code></pre>
+<pre><code><span><span class="co">## Ibrahim </span></span>
+<span><span class="co">##       2</span></span></code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Carmina   Frank  Dennis </span></span>
+<pre><code><span><span class="co">## Carmina   Moshe    Nang </span></span>
 <span><span class="co">##       4       3       3</span></span></code></pre>
 <p>Most functions that accept vertex IDs also accept vertex
 <em>names</em> (the values of the <code>name</code> vertex attribute) as
 long as the names are unique:</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Carmina"</span>, <span class="st">"Frank"</span>, <span class="st">"Dennis"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Carmina   Frank  Dennis </span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Carmina"</span>, <span class="st">"Moshe"</span>, <span class="st">"Nang"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Carmina   Moshe    Nang </span></span>
 <span><span class="co">##       4       3       3</span></span></code></pre>
 <p>It also works for single vertices:</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
@@ -573,12 +573,12 @@ indices:</p>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">]</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/10 vertices, from 7749812:</span></span>
+<pre><code><span><span class="co">## + 3/10 vertices, from 2b42887:</span></span>
 <span><span class="co">## [1] 2 3 7</span></span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="va">seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span> <span class="co"># filtering an existing vertex set</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 2/10 vertices, from 7749812:</span></span>
+<pre><code><span><span class="co">## + 2/10 vertices, from 2b42887:</span></span>
 <span><span class="co">## [1] 2 7</span></span></code></pre>
 <p>Selecting a vertex that does not exist results in an error:</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
@@ -592,7 +592,7 @@ graph. For instance, the following command gives you the names of the
 individuals younger than 30 years in our social network:</p>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Frank"     "Esther"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Moshe"     "Samira"</span></span></code></pre>
 <p>Of course, <code>&lt;</code> is not the only boolean operator that
 can be used for this. Other possibilities include the following:</p>
 <table class="table">
@@ -660,7 +660,7 @@ of vertices in a network sense:</p>
 <pre><code><span><span class="co">## [1] "A"  "A+" "C"</span></span></code></pre>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Frank"     "Dennis"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Moshe"     "Nang"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="selecting-edges">Selecting edges<a class="anchor" aria-label="anchor" href="#selecting-edges"></a>
@@ -674,13 +674,13 @@ based on the source vertices of the edges. For instance, to select all
 the edges originating from Carmina (who has vertex index 3):</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu">.from</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from cf1945d (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Carmina Carmina  --Frank   Carmina  --Dennis  Carmina  --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 4/9 edges from 94ad936 (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Of course it also works with vertex names:</p>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu">.from</span><span class="op">(</span><span class="st">"Carmina"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from cf1945d (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Carmina Carmina  --Frank   Carmina  --Dennis  Carmina  --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 4/9 edges from 94ad936 (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Using <code>.to()</code> filters edge sequences based on the target
 vertices. This is different from <code>.from()</code> if the graph is
 directed, while it gives the same answer for undirected graphs. Using
@@ -690,12 +690,12 @@ directions.</p>
 <p>The <code>%--%</code> operator can be used to select edges between
 specific groups of vertices, ignoring edge directions in directed
 graphs. For instance, the following expression selects all the edges
-between Carmina (vertex index 3), Dennis (vertex index 5) and Esther
+between Carmina (vertex index 3), Nang (vertex index 5) and Samira
 (vertex index 6):</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/9 edges from cf1945d (vertex names):</span></span>
-<span><span class="co">## [1] Carmina--Dennis Carmina--Esther Dennis --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 3/9 edges from 94ad936 (vertex names):</span></span>
+<span><span class="co">## [1] Carmina--Nang   Carmina--Samira Nang   --Samira</span></span></code></pre>
 <p>To make the <code>%--%</code> operator work with names, you can build
 string vectors containing the names and then use these vectors as
 operands. For instance, to select all the edges that connect men to
@@ -706,16 +706,16 @@ we deleted earlier:</p>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">men</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">men</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Bruno"  "Frank"  "Dennis" "George"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Bruno"   "Moshe"   "Nang"    "Ibrahim"</span></span></code></pre>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">women</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"f"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">women</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Esther"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Samira"</span></span></code></pre>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">men</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="va">women</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 5/9 edges from cf1945d (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Bruno  Alejandra--Frank  Carmina  --Frank  Carmina  --Dennis</span></span>
-<span><span class="co">## [5] Dennis   --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 5/9 edges from 94ad936 (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  </span></span>
+<span><span class="co">## [5] Nang     --Samira</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -729,17 +729,17 @@ is:</p>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 7 x 7 sparse Matrix of class "dgCMatrix"</span></span>
-<span><span class="co">##           Alejandra Bruno Carmina Frank Dennis Esther George</span></span>
-<span><span class="co">## Alejandra         .     1       1     1      .      .      .</span></span>
-<span><span class="co">## Bruno             1     .       .     .      .      .      .</span></span>
-<span><span class="co">## Carmina           1     .       .     1      1      1      .</span></span>
-<span><span class="co">## Frank             1     .       1     .      .      .      1</span></span>
-<span><span class="co">## Dennis            .     .       1     .      .      1      1</span></span>
-<span><span class="co">## Esther            .     .       1     .      1      .      .</span></span>
-<span><span class="co">## George            .     .       .     1      1      .      .</span></span></code></pre>
+<span><span class="co">##           Alejandra Bruno Carmina Moshe Nang Samira Ibrahim</span></span>
+<span><span class="co">## Alejandra         .     1       1     1    .      .       .</span></span>
+<span><span class="co">## Bruno             1     .       .     .    .      .       .</span></span>
+<span><span class="co">## Carmina           1     .       .     1    1      1       .</span></span>
+<span><span class="co">## Moshe             1     .       1     .    .      .       1</span></span>
+<span><span class="co">## Nang              .     .       1     .    .      1       1</span></span>
+<span><span class="co">## Samira            .     .       1     .    1      .       .</span></span>
+<span><span class="co">## Ibrahim           .     .       .     1    1      .       .</span></span></code></pre>
 <p>For example, Carmina (<code>1, 0, 0, 1, 1, 1, 0</code>) is directly
-connected to Alejandra (who has vertex index 1), Frank (index 4), Dennis
-(index 5) and Esther (index 6), but not to Bruno (index 2) or to George
+connected to Alejandra (who has vertex index 1), Moshe (index 4), Nang
+(index 5) and Samira (index 6), but not to Bruno (index 2) or to Ibrahim
 (index 7).</p>
 </div>
 <div class="section level2">
@@ -1215,7 +1215,7 @@ above is the following:</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] igraph_2.0.1.9010</span></span>
+<span><span class="co">## [1] igraph_2.0.1.9011</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] vctrs_0.6.5       cli_3.6.2         knitr_1.45        rlang_1.1.3      </span></span>

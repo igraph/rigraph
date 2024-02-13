@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,9 +160,9 @@ crear el mismo grafo que antes:</p>
 aristas:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 3b778b5 UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH ef7fd3d UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span>
-<span><span class="co">## + edges from 3b778b5 (vertex names):</span></span>
+<span><span class="co">## + edges from ef7fd3d (vertex names):</span></span>
 <span><span class="co">## [1] 1--2 1--5</span></span></code></pre>
 <p>Esto significa: grafo no dirigido (<strong>U</strong>ndirected) con
 <strong>10</strong> vértices y <strong>2</strong> aristas, que se
@@ -174,7 +174,7 @@ lo cual es conveniente para grafos grandes con millones de aristas:</p>
 <hr>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 3b778b5 UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH ef7fd3d UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span></code></pre>
 <p>También <code><a href="../reference/make_graph.html">make_graph()</a></code> puede crear algunos grafos
 destacados con sólo especificar su nombre. Por ejemplo, puedes generar
@@ -261,9 +261,9 @@ que proporciona un mecanismo para encadenar comandos con el operador
 <span>  <span class="fu"><a href="../reference/add_vertices.html">add_vertices</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_edges.html">add_edges</a></span><span class="op">(</span>edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">39</span>, <span class="fl">39</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">38</span>, <span class="fl">40</span>, <span class="fl">37</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH d618ee6 U--- 40 86 -- Zachary</span></span>
+<pre><code><span><span class="co">## IGRAPH fc3f5e3 U--- 40 86 -- Zachary</span></span>
 <span><span class="co">## + attr: name (g/c)</span></span>
-<span><span class="co">## + edges from d618ee6:</span></span>
+<span><span class="co">## + edges from fc3f5e3:</span></span>
 <span><span class="co">##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12</span></span>
 <span><span class="co">## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14</span></span>
 <span><span class="co">## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10</span></span>
@@ -359,7 +359,7 @@ ejemplo <code><a href="../reference/make_tree.html">make_tree()</a></code>:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">127</span>, <span class="fl">2</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 7946c7b U--- 5 3 -- Ring graph</span></span>
+<pre><code><span><span class="co">## IGRAPH 184098f U--- 5 3 -- Ring graph</span></span>
 <span><span class="co">## + attr: name (g/c), mutual (g/l), circular (g/l)</span></span></code></pre>
 <p>Esto genera un grafo regular en forma de árbol con 127 vértices, cada
 vértice con dos hijos. No importa cuántas veces llames a
@@ -376,7 +376,7 @@ producen un grafo diferente cada vez; por ejemplo,
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_grg.html">sample_grg</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">graph1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 81a7d65 U--- 100 503 -- Geometric random graph</span></span>
+<pre><code><span><span class="co">## IGRAPH 0c1369c U--- 100 540 -- Geometric random graph</span></span>
 <span><span class="co">## + attr: name (g/c), radius (g/n), torus (g/l)</span></span></code></pre>
 <p>Esto genera un grafo geométrico aleatorio: Se eligen <em>n</em>
 puntos de forma aleatoria y uniforme dentro del espacio métrico, y los
@@ -417,10 +417,10 @@ espacio de nombres en R para almacenar y recuperar estos atributos.</p>
 sencilla:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_graph.html">make_graph</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span> <span class="va">Alice</span><span class="op">-</span><span class="va">Bob</span><span class="op">:</span><span class="va">Claire</span><span class="op">:</span><span class="va">Frank</span>,</span>
-<span>  <span class="va">Claire</span><span class="op">-</span><span class="va">Alice</span><span class="op">:</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span><span class="op">:</span><span class="va">Esther</span>,</span>
-<span>  <span class="va">George</span><span class="op">-</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span>, </span>
-<span>  <span class="va">Dennis</span><span class="op">-</span><span class="va">Esther</span></span>
+<span>  <span class="op">~</span> <span class="va">Alice</span><span class="op">-</span><span class="va">Boris</span><span class="op">:</span><span class="va">Himari</span><span class="op">:</span><span class="va">Moshe</span>,</span>
+<span>  <span class="va">Himari</span><span class="op">-</span><span class="va">Alice</span><span class="op">:</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span><span class="op">:</span><span class="va">Samira</span>,</span>
+<span>  <span class="va">Ibrahim</span><span class="op">-</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span>, </span>
+<span>  <span class="va">Nang</span><span class="op">-</span><span class="va">Samira</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Cada vértice representa a una persona, por lo que queremos almacenar
 sus edades, géneros y el tipo de conexión entre dos personas
@@ -434,7 +434,7 @@ grafo. Es más corto y tan legible como <code><a href="../reference/graph_attr.h
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">is_formal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 1e49903 UN-- 7 9 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH e95f49c UN-- 7 9 -- </span></span>
 <span><span class="co">## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)</span></span></code></pre>
 <p><code>V</code> y <code>E</code> son la forma estándar de obtener una
 secuencia de todos los vértices y aristas respectivamente. Esto asigna
@@ -444,10 +444,10 @@ de generar nuestra red social es con el uso de
 operador <code>%\&gt;%</code>:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_graph.html">make_graph</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span> <span class="va">Alice</span><span class="op">-</span><span class="va">Bob</span><span class="op">:</span><span class="va">Claire</span><span class="op">:</span><span class="va">Frank</span>, </span>
-<span>  <span class="va">Claire</span><span class="op">-</span><span class="va">Alice</span><span class="op">:</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span><span class="op">:</span><span class="va">Esther</span>,</span>
-<span>  <span class="va">George</span><span class="op">-</span><span class="va">Dennis</span><span class="op">:</span><span class="va">Frank</span>, </span>
-<span>  <span class="va">Dennis</span><span class="op">-</span><span class="va">Esther</span></span>
+<span>  <span class="op">~</span> <span class="va">Alice</span><span class="op">-</span><span class="va">Boris</span><span class="op">:</span><span class="va">Himari</span><span class="op">:</span><span class="va">Moshe</span>, </span>
+<span>  <span class="va">Himari</span><span class="op">-</span><span class="va">Alice</span><span class="op">:</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span><span class="op">:</span><span class="va">Samira</span>,</span>
+<span>  <span class="va">Ibrahim</span><span class="op">-</span><span class="va">Nang</span><span class="op">:</span><span class="va">Moshe</span>, </span>
+<span>  <span class="va">Nang</span><span class="op">-</span><span class="va">Samira</span></span>
 <span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"age"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">31</span>, <span class="fl">18</span>, <span class="fl">23</span>, <span class="fl">47</span>, <span class="fl">22</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"gender"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -475,15 +475,15 @@ establecer atributos, por ejemplo, para añadir una fecha al grafo:</p>
 <code><a href="../reference/edge_attr.html">edge_attr()</a></code>. Para encontrar el ID de un vértice puedes
 utilizar la función <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code>:</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"George"</span><span class="op">)</span>, <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ibrahim"</span><span class="op">)</span>, <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 7</span></span></code></pre>
 <p>Para asignar atributos a un subconjunto de vértices o aristas, puedes
 utilizar:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Alejandra"</span>, <span class="st">"Bruno"</span>, <span class="st">"Carmina"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 7/7 vertices, named, from 1e49903:</span></span>
-<span><span class="co">## [1] Alejandra Bruno     Carmina   Frank     Dennis    Esther    George</span></span></code></pre>
+<pre><code><span><span class="co">## + 7/7 vertices, named, from e95f49c:</span></span>
+<span><span class="co">## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim</span></span></code></pre>
 <p>Para eliminar atributos:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/delete_vertex_attr.html">delete_vertex_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"gender"</span><span class="op">)</span></span>
@@ -511,7 +511,7 @@ número de aristas que se originan en el vértice). igraph es capaz de
 calcularlos todos utilizando una sintaxis sencilla:</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Alejandra     Bruno   Carmina     Frank    Dennis    Esther    George </span></span>
+<pre><code><span><span class="co">## Alejandra     Bruno   Carmina     Moshe      Nang    Samira   Ibrahim </span></span>
 <span><span class="co">##         3         1         4         3         3         2         2</span></span></code></pre>
 <p>Si el grafo fuera dirigido, podríamos calcular los grados de entrada
 y salida por separado utilizando <code>degree(mode = "in")</code> y
@@ -520,19 +520,19 @@ un vértice o una lista de IDs de los vértices a <code><a href="../reference/de
 quieres calcular los grados sólo para un subconjunto de vértices:</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## George </span></span>
-<span><span class="co">##      2</span></span></code></pre>
+<pre><code><span><span class="co">## Ibrahim </span></span>
+<span><span class="co">##       2</span></span></code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Carmina   Frank  Dennis </span></span>
+<pre><code><span><span class="co">## Carmina   Moshe    Nang </span></span>
 <span><span class="co">##       4       3       3</span></span></code></pre>
 <p>La mayoría de las funciones que aceptan los IDs de los vértices
 también aceptan los “nombres” de los vértices (es decir, los valores del
 atributo <code>name</code> del vértice) siempre que los nombres sean
 únicos:</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Carmina"</span>, <span class="st">"Frank"</span>, <span class="st">"Dennis"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Carmina   Frank  Dennis </span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Carmina"</span>, <span class="st">"Moshe"</span>, <span class="st">"Nang"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Carmina   Moshe    Nang </span></span>
 <span><span class="co">##       4       3       3</span></span></code></pre>
 <p>También funciona para vértices individuales:</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
@@ -597,12 +597,12 @@ impares, utilizando la función <code><a href="../reference/V.html">V()</a></cod
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">]</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/10 vertices, from 66fa8b0:</span></span>
+<pre><code><span><span class="co">## + 3/10 vertices, from 31032a2:</span></span>
 <span><span class="co">## [1] 2 3 7</span></span></code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="va">seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span>    <span class="co"># filtrar un conjunto de vértices existente</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 2/10 vertices, from 66fa8b0:</span></span>
+<pre><code><span><span class="co">## + 2/10 vertices, from 31032a2:</span></span>
 <span><span class="co">## [1] 2 7</span></span></code></pre>
 <p>Al seleccionar un vértice que no existe se produce un error:</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
@@ -617,7 +617,7 @@ aristas de un grafo. Por ejemplo, el siguiente comando nos da los
 nombres de los individuos menores de 30 años de nuestra red social:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Frank"     "Esther"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Moshe"     "Samira"</span></span></code></pre>
 <p>Por supuesto, <code>&lt;</code> no es el único operador booleano que
 puede utilizarse para esto. Otras posibilidades son las siguientes:</p>
 <table class="table">
@@ -681,7 +681,7 @@ función de igraph que calcula los grados de los vértices de una red:</p>
 <pre><code><span><span class="co">## [1] "A"  "A+" "C"</span></span></code></pre>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Frank"     "Dennis"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Moshe"     "Nang"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="selección-de-aristas">Selección de aristas<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-de-aristas"></a>
@@ -696,13 +696,13 @@ todas las aristas procedentes de Carmina (cuyo ID de vértice es el
 3):</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu">.from</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from 1e49903 (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Carmina Carmina  --Frank   Carmina  --Dennis  Carmina  --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 4/9 edges from e95f49c (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Por supuesto, también funciona con nombres de vértices:</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu">.from</span><span class="op">(</span><span class="st">"Carmina"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from 1e49903 (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Carmina Carmina  --Frank   Carmina  --Dennis  Carmina  --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 4/9 edges from e95f49c (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Al usar <code>.to()</code>, se filtran la serie de aristas en función
 de los vértices de destino o diana. Esto es diferente de
 <code>.from()</code> si el grafo es dirigido, mientras que da la misma
@@ -714,12 +714,12 @@ aristas.</p>
 utilizarse para seleccionar todas las aristas entre dos conjuntos de
 vértices. Ignora las direcciones de las aristas en los grafos dirigidos.
 Por ejemplo, la siguiente expresión selecciona todas las aristas entre
-Carmina (su ID de vértice es el 3), Dennis (su ID de vértice es el 5) y
-Esther (su ID de vértice es el 6):</p>
+Carmina (su ID de vértice es el 3), Nang (su ID de vértice es el 5) y
+Samira (su ID de vértice es el 6):</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">[</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span> <span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/9 edges from 1e49903 (vertex names):</span></span>
-<span><span class="co">## [1] Carmina--Dennis Carmina--Esther Dennis --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 3/9 edges from e95f49c (vertex names):</span></span>
+<span><span class="co">## [1] Carmina--Nang   Carmina--Samira Nang   --Samira</span></span></code></pre>
 <p>Para que el operador <code>%--%</code> funcione con nombres, puedes
 construir vectores de caracteres que contengan los nombres y luego
 utilizar estos vectores como operandos. Por ejemplo, para seleccionar
@@ -731,16 +731,16 @@ hemos eliminado anteriormente:</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">men</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">men</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Bruno"  "Frank"  "Dennis" "George"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Bruno"   "Moshe"   "Nang"    "Ibrahim"</span></span></code></pre>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">women</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"f"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">women</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Esther"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Samira"</span></span></code></pre>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">men</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="va">women</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 5/9 edges from 1e49903 (vertex names):</span></span>
-<span><span class="co">## [1] Alejandra--Bruno  Alejandra--Frank  Carmina  --Frank  Carmina  --Dennis</span></span>
-<span><span class="co">## [5] Dennis   --Esther</span></span></code></pre>
+<pre><code><span><span class="co">## + 5/9 edges from e95f49c (vertex names):</span></span>
+<span><span class="co">## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  </span></span>
+<span><span class="co">## [5] Nang     --Samira</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -754,18 +754,18 @@ adyacencia del grafo de nuestra red social imaginaria es:</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 7 x 7 sparse Matrix of class "dgCMatrix"</span></span>
-<span><span class="co">##           Alejandra Bruno Carmina Frank Dennis Esther George</span></span>
-<span><span class="co">## Alejandra         .     1       1     1      .      .      .</span></span>
-<span><span class="co">## Bruno             1     .       .     .      .      .      .</span></span>
-<span><span class="co">## Carmina           1     .       .     1      1      1      .</span></span>
-<span><span class="co">## Frank             1     .       1     .      .      .      1</span></span>
-<span><span class="co">## Dennis            .     .       1     .      .      1      1</span></span>
-<span><span class="co">## Esther            .     .       1     .      1      .      .</span></span>
-<span><span class="co">## George            .     .       .     1      1      .      .</span></span></code></pre>
+<span><span class="co">##           Alejandra Bruno Carmina Moshe Nang Samira Ibrahim</span></span>
+<span><span class="co">## Alejandra         .     1       1     1    .      .       .</span></span>
+<span><span class="co">## Bruno             1     .       .     .    .      .       .</span></span>
+<span><span class="co">## Carmina           1     .       .     1    1      1       .</span></span>
+<span><span class="co">## Moshe             1     .       1     .    .      .       1</span></span>
+<span><span class="co">## Nang              .     .       1     .    .      1       1</span></span>
+<span><span class="co">## Samira            .     .       1     .    1      .       .</span></span>
+<span><span class="co">## Ibrahim           .     .       .     1    1      .       .</span></span></code></pre>
 <p>Por ejemplo, Carmina (<code>1, 0, 0, 1, 1, 1, 0</code>) está
-directamente conectada con Alejandra (que tiene el índice 1), Frank
-(índice 4), Dennis (índice 5), Esther (índice 6) y , pero no con Bruno
-(índice 2) ni con George (índice 7).</p>
+directamente conectada con Alejandra (que tiene el índice 1), Moshe
+(índice 4), Nang (índice 5), Samira (índice 6) y , pero no con Bruno
+(índice 2) ni con Ibrahim (índice 7).</p>
 </div>
 <div class="section level2">
 <h2 id="diseños-y-graficación">Diseños y graficación<a class="anchor" aria-label="anchor" href="#dise%C3%B1os-y-graficaci%C3%B3n"></a>
@@ -1263,7 +1263,7 @@ código anterior es la siguiente:</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] igraph_2.0.1.9010</span></span>
+<span><span class="co">## [1] igraph_2.0.1.9011</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] vctrs_0.6.5       cli_3.6.2         knitr_1.45        rlang_1.1.3      </span></span>
