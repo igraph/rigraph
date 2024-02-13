@@ -93,23 +93,42 @@ test_that("t() is aliased to edge reversal for graphs", {
 })
 
 test_that("vertices() works", {
-  g <- make_empty_graph(1)
-
-  g_all_unnamed <-  g + vertices("a", "b")
+  g_all_unnamed <-  make_empty_graph(1) + vertices("a", "b")
   expect_s3_class(V(g_all_unnamed), "igraph.vs")
-  expect_identical(V(g_all_unnamed)$name, c( NA, "a", "b"))
+  expect_identical(V(g_all_unnamed)$name, c(NA, "a", "b"))
 
-  g_mix_named_unnamed <- g + vertices("a", "b", foo = 5)
+  g_mix_named_unnamed <- make_empty_graph(1) + vertices("a", "b", foo = 5)
   expect_s3_class(V(g_mix_named_unnamed), "igraph.vs")
   expect_true(is.na(V(g_mix_named_unnamed)$name[1]))
-  expect_identical(unname(V(g_mix_named_unnamed)$name[2:3]), c("a", "b"))
-  expect_equal(V(g_mix_named_unnamed)$foo, c( NA, 5, 5))
+  expect_identical(V(g_mix_named_unnamed)$name[-1], c("a", "b"))
+  expect_equal(V(g_mix_named_unnamed)$foo, c(NA, 5, 5))
 
-  g_mix_bigger_attribute <- g + vertices("a", "b", foo = 5:6)
+  g_mix_bigger_attribute <- make_empty_graph(1) + vertices("a", "b", "c", foo = 5:7, bar = 8)
   expect_s3_class(V(g_mix_bigger_attribute), "igraph.vs")
-  expect_true(is.na(V(g_mix_bigger_attribute)$name[1]))
-  expect_identical(unname(V(g_mix_bigger_attribute)$name[2:3]), c("a", "b"))
-  expect_equal(V(g_mix_bigger_attribute)$foo, c( NA, 5, 6))
+  expect_identical(V(g_mix_bigger_attribute)$name, c(NA, "a", "b", "c"))
+  expect_equal(V(g_mix_bigger_attribute)$foo, c(NA, 5, 6, 7))
+  expect_equal(V(g_mix_bigger_attribute)$bar, c(NA, 8, 8, 8))
 
-  expect_snapshot_error(g + vertices("a", "b", foo = 5:7))
+  g_one_unnamed <- make_empty_graph(1) + vertices(letters)
+  expect_s3_class(V(g_one_unnamed), "igraph.vs")
+  expect_identical(V(g_one_unnamed)$name, c(NA, letters))
+
+  g_all_named <- make_empty_graph(1) + vertices(foo = 5:7)
+  expect_s3_class(V(g_all_named), "igraph.vs")
+  expect_null(V(g_all_named)$name)
+  expect_identical(V(g_all_named)$foo, c(NA, 5:7))
+
+  g_all_named_empty <- make_empty_graph(1) + vertices(foo = numeric())
+  expect_s3_class(V(g_all_named_empty), "igraph.vs")
+  expect_null(V(g_all_named_empty)$name)
+  expect_identical(V(g_all_named_empty)$foo, NA_real_)
+
+  g_none <- make_empty_graph(1) + vertices()
+  expect_s3_class(V(g_none), "igraph.vs")
+  expect_null(V(g_none)$name)
+
+  expect_snapshot_error(make_empty_graph(1) + vertices("a", "b", foo = 5:7))
+
+  # Undefined,
+  # make_empty_graph(1) + vertices("a", "b", name = "c")
 })
