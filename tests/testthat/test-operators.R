@@ -104,4 +104,12 @@ test_that("vertices() works", {
   expect_true(is.na(V(g_mix_named_unnamed)$name[1]))
   expect_identical(unname(V(g_mix_named_unnamed)$name[2:3]), c("a", "b"))
   expect_equal(V(g_mix_named_unnamed)$foo, c( NA, 5, 5))
+
+  g_mix_bigger_attribute <- g + vertices("a", "b", foo = 5:6)
+  expect_s3_class(V(g_mix_bigger_attribute), "igraph.vs")
+  expect_true(is.na(V(g_mix_bigger_attribute)$name[1]))
+  expect_identical(unname(V(g_mix_bigger_attribute)$name[2:3]), c("a", "b"))
+  expect_equal(V(g_mix_bigger_attribute)$foo, c( NA, 5, 6))
+
+  expect_snapshot_error(g + vertices("a", "b", foo = 5:7))
 })
