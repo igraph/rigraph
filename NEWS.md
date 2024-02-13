@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9011
+
+## Chore
+
+  - Update C core and regenerate interfaces (#1237).
+
+## Documentation
+
+  - Formatting tweaks in introductory vignettes (#1243).
+
+## Refactoring
+
+  - Remove empty string in configure (#1235).
+
+
 # igraph 2.0.1.9010
 
 ## Bug fixes
