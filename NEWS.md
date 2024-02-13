@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.1.9012
+
+## Bug fixes
+
+- `g + vertices(1, 2, foo = 3)` works again, regression introduced in igraph 2.0.0 (#1247).
+
+## Documentation
+
+- Use more culturally diverse names in intro vignettes (#1246).
+
+## Uncategorized
+
+- Update build-requirements.txt (#1236).
+
+
 # igraph 2.0.1.9011
 
 ## Chore
