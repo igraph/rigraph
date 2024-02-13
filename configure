@@ -20,7 +20,15 @@ else
     exit 1
 fi
 
-OBJECTS='${SOURCES}'
+if [ -n "$libxml2_libs" ]; then
+    PKG_LIBS="$PKG_LIBS $libxml2_libs"
+    echo "libxml2 library link flags: $libxml2_libs"
+else
+    echo "Error: libxml2 library link flags not found"
+    exit 1
+fi
+
+OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
 
 if echo '#include <glpk.h>' | $(R CMD config CC) -E $CPPFLAGS - > /dev/null 2>&1; then
   echo "Using installed GLPK"
