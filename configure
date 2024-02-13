@@ -13,23 +13,26 @@ else
 fi
 
 if [ -n "$libxml2_cflags" ]; then
-    PKG_CFLAGS="$libxml2_cflags"
+    PKG_CFLAGS="$PKG_CFLAGS $libxml2_cflags"
     echo "libxml2 include directories: $libxml2_cflags"
 else
     echo "Error: libxml2 include directory not found"
     exit 1
 fi
 
-if [ -n "$libxml2_libs" ]; then
-    PKG_LIBS="$libxml2_libs"
-    echo "libxml2 library link flags: $libxml2_libs"
+OBJECTS='${SOURCES}'
+
+if echo '#include <glpk.h>' | $(R CMD config CC) -E $CPPFLAGS - > /dev/null 2>&1; then
+  echo "Using installed GLPK"
+  PKG_LIBS="$PKG_LIBS -lglpk"
 else
-    echo "Error: libxml2 library link flags not found"
-    exit 1
+  echo "Using vendored GLPK"
+  PKG_CFLAGS="$PKG_CFLAGS -Ivendor/cigraph/vendor/glpk -Ivendor/cigraph/vendor/glpk/env -Ivendor/cigraph/vendor/glpk/minisat -Ivendor/cigraph/vendor/glpk/misc -Ivendor/cigraph/vendor/glpk/draft -Ivendor/cigraph/vendor/glpk/npp -Ivendor/cigraph/vendor/glpk/api -Ivendor/cigraph/vendor/glpk/mpl -Ivendor/cigraph/vendor/glpk/bflib -Ivendor/cigraph/vendor/glpk/amd -Ivendor/cigraph/vendor/glpk/simplex -Ivendor/cigraph/vendor/glpk/colamd"
+  OBJECTS=${OBJECTS}' ${GLPKSOURCES}'
 fi
 
 echo "# Generated from Makevars.in, do not edit by hand" > src/Makevars.new
-sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in >> src/Makevars.new
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" -e "s|@objects@|${OBJECTS}|" src/Makevars.in >> src/Makevars.new
 if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars src/Makevars.new); then
     cp -f src/Makevars.new src/Makevars
 fi
