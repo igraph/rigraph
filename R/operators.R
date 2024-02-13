@@ -1079,39 +1079,34 @@ path <- function(...) {
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
-    wn <- which(names(e2) == "")
-    if (length(wn) == 1) {
-      names(e2)[wn] <- "name"
-    } else if (is.null(names(e2))) {
-      ## No names at all, everything is a vertex name
-      e2 <- list(name = unlist(e2, recursive = FALSE))
-    } else if (length(wn) == 0) {
-      ## If there are no non-named arguments, we are fine
-    } else {
-      ## Otherwise, all unnamed arguments are collected and used as
-      ## vertex names
-      nn <- unlist(e2[wn], recursive = FALSE)
-      e2 <- c(list(name = nn), e2[names(e2) != ""])
-    }
-    la <- unique(sapply(e2, length))
-    res <- add_vertices(e1, la, attr = e2)
+    named <- rlang::have_name(e2)
+    unnamed_indices <- which(!named)
+
+    nn <- unlist(e2[unnamed_indices], recursive = FALSE)
+    e2 <- c(
+      if (!is.null(nn)) list(name = unname(nn)),
+      e2[named]
+    )
+
+    # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
+    res <- add_vertices(e1, nv = vctrs::vec_size_common(!!!e2), attr = e2)
   } else if ("igraph.path" %in% class(e2)) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
-      toadd <- unlist(e2, recursive = FALSE)
+      to_add <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2) == ""])
+      to_add <- unlist(e2[names(e2) == ""])
       attr <- e2[names(e2) != ""]
     }
-    toadd <- as_igraph_vs(e1, toadd)
-    lt <- length(toadd)
+    to_add <- as_igraph_vs(e1, to_add)
+    lt <- length(to_add)
     if (lt > 2) {
-      toadd <- c(toadd[1], rep(toadd[2:(lt - 1)], each = 2), toadd[lt])
-      res <- add_edges(e1, toadd, attr = attr)
+      to_add <- c(to_add[1], rep(to_add[2:(lt - 1)], each = 2), to_add[lt])
+      res <- add_edges(e1, to_add, attr = attr)
     } else if (lt == 2) {
-      res <- add_edges(e1, toadd, attr = attr)
+      res <- add_edges(e1, to_add, attr = attr)
     } else {
       res <- e1
     }

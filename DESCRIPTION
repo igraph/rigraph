@@ -40,7 +40,8 @@ Imports:
     pkgconfig (>= 2.0.0),
     rlang,
     stats,
-    utils
+    utils,
+    vctrs
 Suggests:
     ape (>= 5.7-0.1),
     callr,
