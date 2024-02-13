@@ -1094,19 +1094,19 @@ path <- function(...) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
-      toadd <- unlist(e2, recursive = FALSE)
+      to_add <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2) == ""])
+      to_add <- unlist(e2[names(e2) == ""])
       attr <- e2[names(e2) != ""]
     }
-    toadd <- as_igraph_vs(e1, toadd)
-    lt <- length(toadd)
+    to_add <- as_igraph_vs(e1, to_add)
+    lt <- length(to_add)
     if (lt > 2) {
-      toadd <- c(toadd[1], rep(toadd[2:(lt - 1)], each = 2), toadd[lt])
-      res <- add_edges(e1, toadd, attr = attr)
+      to_add <- c(to_add[1], rep(to_add[2:(lt - 1)], each = 2), to_add[lt])
+      res <- add_edges(e1, to_add, attr = attr)
     } else if (lt == 2) {
-      res <- add_edges(e1, toadd, attr = attr)
+      res <- add_edges(e1, to_add, attr = attr)
     } else {
       res <- e1
     }
