@@ -1,4 +1,5 @@
 include sources.mk
+include vendor/cigraph/vendor/mini-gmp/sources-mini-gmp.mk
 
 LIB_XML ?= $(R_TOOLS_SOFT)
 GLPK_HOME ?= $(R_TOOLS_SOFT)
@@ -13,4 +14,4 @@ PKG_CPPFLAGS = -I"${LIB_XML}/include/libxml2" -I"${LIB_XML}/include" -DLIBXML_ST
 PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -liconv -lz -lws2_32 -lstdc++ \
   -lglpk $(BLAS_LIBS) $(LAPACK_LIBS) $(FLIBS) -llzma
 
-OBJECTS=${SOURCES}
+OBJECTS=${SOURCES} ${MINIGMPSOURCES}
