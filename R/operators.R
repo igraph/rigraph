@@ -1079,7 +1079,7 @@ path <- function(...) {
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
-    unnamed_elements_indices <- which(!rlang::have_name(e2))
+    unnamed_elements_indices <- which(names(e2) == "")
     if (length(unnamed_elements_indices) == 1) {
       e2 <- rlang::set_names(e2[unnamed_elements_indices], "name")
     } else if (is.null(names(e2))) {
