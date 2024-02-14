@@ -1,4 +1,4 @@
-igraph 2.0.1
+igraph 2.0.2
 
 ## R CMD check results
 
@@ -8,6 +8,5 @@ igraph 2.0.1
 
 ## Current CRAN check results
 
-- [x] Checked on 2024-01-27, problems found: https://cran.r-project.org/web/checks/check_results_igraph.html
-- [x] LTO warnings: Fixed. See: <https://www.stats.ox.ac.uk/pub/bdr/LTO/igraph.out>
-
+- [x] Checked on 2024-02-13, problems found: https://cran.r-project.org/web/checks/check_results_igraph.html
+- [x] WARN: r-oldrel-windows-x86_64: gcc bug.
