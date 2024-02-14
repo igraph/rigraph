@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,227 +60,78 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9012" id="igraph-2019012">igraph 2.0.1.9012<a class="anchor" aria-label="anchor" href="#igraph-2019012"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.0.1.9013" id="igraph-2019013">igraph 2.0.1.9013<a class="anchor" aria-label="anchor" href="#igraph-2019013"></a></h2>
+<ul><li>Internal changes only.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.2" id="igraph-202">igraph 2.0.2<a class="anchor" aria-label="anchor" href="#igraph-202"></a></h2>
+<p>See <a href="https://github.com/igraph/rigraph/blob/f3fa58b/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/f3fa58b/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog of the bundled C core, and <a href="https://github.com/igraph/rigraph/compare/1bd2bf79..f3fa58b#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84" class="external-link uri">https://github.com/igraph/rigraph/compare/1bd2bf79..f3fa58b#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84</a> for the changes since the igraph 2.0.1. (A permanent link to the most recent changelog of the C core used in the R package is <a href="https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md</a>.)</p>
 <div class="section level3">
-<h3 id="bug-fixes-2-0-1-9012">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9012"></a></h3>
+<h3 id="bug-fixes-2-0-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-2"></a></h3>
 <ul><li>
 <code>g + vertices(1, 2, foo = 3)</code> works again, regression introduced in igraph 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1247" class="external-link">#1247</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9012">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9012"></a></h3>
-<ul><li>Use more culturally diverse names in intro vignettes (<a href="https://github.com/igraph/rigraph/issues/1246" class="external-link">#1246</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-1-9012">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-1-9012"></a></h3>
-<ul><li>Update build-requirements.txt (<a href="https://github.com/igraph/rigraph/issues/1236" class="external-link">#1236</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9011" id="igraph-2019011">igraph 2.0.1.9011<a class="anchor" aria-label="anchor" href="#igraph-2019011"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-1-9011">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-1-9011"></a></h3>
-<ul><li>Update C core and regenerate interfaces (<a href="https://github.com/igraph/rigraph/issues/1237" class="external-link">#1237</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9011">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9011"></a></h3>
-<ul><li>Formatting tweaks in introductory vignettes (<a href="https://github.com/igraph/rigraph/issues/1243" class="external-link">#1243</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-1-9011">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-1-9011"></a></h3>
-<ul><li>Remove empty string in configure (<a href="https://github.com/igraph/rigraph/issues/1235" class="external-link">#1235</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9010" id="igraph-2019010">igraph 2.0.1.9010<a class="anchor" aria-label="anchor" href="#igraph-2019010"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9010">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9010"></a></h3>
-<ul><li>Do not rely on <code>which</code> program during configuration (<a href="https://github.com/igraph/rigraph/issues/1232" class="external-link">#1232</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-1-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-1-9010"></a></h3>
-<ul><li>Remove unused patch files (<a href="https://github.com/igraph/rigraph/issues/1234" class="external-link">#1234</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-1-9010">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-1-9010"></a></h3>
-<ul><li>Always use bundled mini-gmp (<a href="https://github.com/igraph/rigraph/issues/1233" class="external-link">#1233</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9009" id="igraph-2019009">igraph 2.0.1.9009<a class="anchor" aria-label="anchor" href="#igraph-2019009"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9009"></a></h3>
-<ul><li>
+<li>
 <code><a href="../reference/sample_pa.html">sample_pa()</a></code> respects the <code>out.seq</code> and <code>out.dist</code> arguments again, regression introduced in igraph 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1226" class="external-link">#1226</a>).</li>
+<li>
+<code><a href="../reference/isomorphisms.html">isomorphisms()</a></code> and <code>subgraph_isomorphisims(method = "vf2")</code> work again, regression introduced in 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1219" class="external-link">#1219</a>).</li>
+<li>
+<code><a href="../reference/biconnected_components.html">biconnected_components()</a></code> now returns edge and vertex sequences again, regression introduced in 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1213" class="external-link">#1213</a>).</li>
+<li>Remove zeros from the <code>order</code> and <code>order.out</code> components returned by <code><a href="../reference/dfs.html">dfs()</a></code>, regression introduced in 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1179" class="external-link">#1179</a>).</li>
+<li>Memory leaks when converting data to C (<a href="https://github.com/igraph/rigraph/issues/1196" class="external-link">#1196</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-2-0-1-9009">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9009"></a></h3>
-<ul><li>Recommend {pak} instead of {remotes} (<a href="https://github.com/igraph/rigraph/issues/1228" class="external-link">#1228</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9008" id="igraph-2019008">igraph 2.0.1.9008<a class="anchor" aria-label="anchor" href="#igraph-2019008"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9008">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9008"></a></h3>
-<ul><li><p><code><a href="../reference/shortest.paths.html">shortest.paths()</a></code> no longer fails (<a href="https://github.com/igraph/rigraph/issues/1222" class="external-link">#1222</a>).</p></li>
-<li><p>Avoid duplicate objects (<a href="https://github.com/igraph/rigraph/issues/1223" class="external-link">#1223</a>).</p></li>
-<li><p><code><a href="../reference/isomorphisms.html">isomorphisms()</a></code> and <code>subgraph_isomorphisims(method = "vf2")</code> work again, regression introduced in 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/1219" class="external-link">#1219</a>).</p></li>
-<li><p><code><a href="../reference/biconnected_components.html">biconnected_components()</a></code> now returns edge and vertex sequences again (<a href="https://github.com/igraph/rigraph/issues/1213" class="external-link">#1213</a>).</p></li>
-<li><p><code>configure</code> manage libxml multiple include paths (<a href="https://github.com/igraph/rigraph/issues/1197" class="external-link">#1197</a>).</p></li>
-<li><p>Link Fortran runtime on Windows as needed by arpack. (<a href="https://github.com/igraph/rigraph/issues/1215" class="external-link">#1215</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-1-9008">Features<a class="anchor" aria-label="anchor" href="#features-2-0-1-9008"></a></h3>
-<ul><li><p><code><a href="../reference/realize_bipartite_degseq.html">realize_bipartite_degseq()</a></code> creates a bipartite graph from two degree sequences (<a href="https://github.com/igraph/rigraph/issues/1212" class="external-link">#1212</a>).</p></li>
-<li><p><code><a href="../reference/is_biconnected.html">is_biconnected()</a></code> checks if a graph is biconnected (<a href="https://github.com/igraph/rigraph/issues/1204" class="external-link">#1204</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-1-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-1-9008"></a></h3>
-<ul><li><p>Update stimulus to 0.21.4 (<a href="https://github.com/igraph/rigraph/issues/1210" class="external-link">#1210</a>).</p></li>
-<li><p><code>config.h</code> defines <code>HAVE___UINT128_T</code> (<a href="https://github.com/igraph/rigraph/issues/1216" class="external-link">#1216</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-1-9008">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-1-9008"></a></h3>
-<ul><li>Make_empty_graph() is now fully auto-generated (<a href="https://github.com/igraph/rigraph/issues/1068" class="external-link">#1068</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-1-9008">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-1-9008"></a></h3>
-<ul><li>Add tests for <code><a href="../reference/isomorphisms.html">isomorphisms()</a></code> and <code><a href="../reference/subgraph_isomorphisms.html">subgraph_isomorphisms()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1225" class="external-link">#1225</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9007" id="igraph-2019007">igraph 2.0.1.9007<a class="anchor" aria-label="anchor" href="#igraph-2019007"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9007">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9007"></a></h3>
-<ul><li>Fix typo in <code><a href="../reference/distances.html">mean_distance()</a></code> docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9006" id="igraph-2019006">igraph 2.0.1.9006<a class="anchor" aria-label="anchor" href="#igraph-2019006"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9006">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9006"></a></h3>
-<ul><li>Workaround for deprecated enum values not being supported with old GCC (<a href="https://github.com/igraph/rigraph/issues/1205" class="external-link">#1205</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9006">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9006"></a></h3>
-<ul><li><p>Update troubleshooting document, emphasize issues with Anaconda environments (<a href="https://github.com/igraph/rigraph/issues/1209" class="external-link">#1209</a>).</p></li>
-<li><p>Improved docs for shortest path functions (<a href="https://github.com/igraph/rigraph/issues/1201" class="external-link">#1201</a>).</p></li>
-<li><p>Document <code>"dsatur"</code> heuristic for <code><a href="../reference/greedy_vertex_coloring.html">greedy_vertex_coloring()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1206" class="external-link">#1206</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-1-9006">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-1-9006"></a></h3>
-<ul><li>Eliminate manual edits from autogenerated files (<a href="https://github.com/igraph/rigraph/issues/1207" class="external-link">#1207</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9005" id="igraph-2019005">igraph 2.0.1.9005<a class="anchor" aria-label="anchor" href="#igraph-2019005"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-1-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-1-9005"></a></h3>
-<ul><li>Update vendored igraph/C to <a href="mailto:igraph/igraph@8def9e335ae1cbb98150" class="email">igraph/igraph@8def9e335ae1cbb98150</a>… (<a href="https://github.com/igraph/rigraph/issues/1198" class="external-link">#1198</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9005">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9005"></a></h3>
-<ul><li>Remove scg related docs (<a href="https://github.com/igraph/rigraph/issues/1167" class="external-link">#1167</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-1-9005">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-1-9005"></a></h3>
-<ul><li>Set seed <em>locally</em> (<a href="https://github.com/igraph/rigraph/issues/1166" class="external-link">#1166</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9004" id="igraph-2019004">igraph 2.0.1.9004<a class="anchor" aria-label="anchor" href="#igraph-2019004"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9004"></a></h3>
-<ul><li>Memory leaks when converting data to C (<a href="https://github.com/igraph/rigraph/issues/1196" class="external-link">#1196</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9003" id="igraph-2019003">igraph 2.0.1.9003<a class="anchor" aria-label="anchor" href="#igraph-2019003"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9003">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9003"></a></h3>
-<ul><li>Eliminate a compiler warning from simpleraytracer (<a href="https://github.com/igraph/rigraph/issues/1185" class="external-link">#1185</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-1-9003">Features<a class="anchor" aria-label="anchor" href="#features-2-0-1-9003"></a></h3>
+<h3 id="features-2-0-2">Features<a class="anchor" aria-label="anchor" href="#features-2-0-2"></a></h3>
 <ul><li>
+<code><a href="../reference/realize_bipartite_degseq.html">realize_bipartite_degseq()</a></code> creates a bipartite graph from two degree sequences (<a href="https://github.com/igraph/rigraph/issues/1212" class="external-link">#1212</a>).</li>
+<li>
+<code><a href="../reference/is_biconnected.html">is_biconnected()</a></code> checks if a graph is biconnected (<a href="https://github.com/igraph/rigraph/issues/1204" class="external-link">#1204</a>).</li>
+<li>
 <code><a href="../reference/distances.html">distances()</a></code> now supports the Floyd-Warshall algorithm (<a href="https://github.com/igraph/rigraph/issues/1186" class="external-link">#1186</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-2-0-1-9003">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9003"></a></h3>
-<ul><li>Fix typo in <code><a href="../reference/articulation_points.html">?articulation_points</a></code> (<a href="https://github.com/igraph/rigraph/issues/1191" class="external-link">#1191</a>).</li>
+<h3 id="documentation-2-0-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-2"></a></h3>
+<ul><li>Use more culturally diverse names in intro vignettes (<a href="https://github.com/igraph/rigraph/issues/1246" class="external-link">#1246</a>).</li>
+<li>Formatting tweaks in introductory vignettes (<a href="https://github.com/igraph/rigraph/issues/1243" class="external-link">#1243</a>).</li>
+<li>Recommend {pak} instead of {remotes} (<a href="https://github.com/igraph/rigraph/issues/1228" class="external-link">#1228</a>).</li>
+<li>Fix typo in <code><a href="../reference/distances.html">mean_distance()</a></code> docs.</li>
+<li>Update troubleshooting document, emphasize issues with Anaconda environments (<a href="https://github.com/igraph/rigraph/issues/1209" class="external-link">#1209</a>).</li>
+<li>Improved docs for shortest path functions (<a href="https://github.com/igraph/rigraph/issues/1201" class="external-link">#1201</a>).</li>
+<li>Document <code>"dsatur"</code> heuristic for <code><a href="../reference/greedy_vertex_coloring.html">greedy_vertex_coloring()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1206" class="external-link">#1206</a>).</li>
+<li>Remove scg related docs (<a href="https://github.com/igraph/rigraph/issues/1167" class="external-link">#1167</a>).</li>
+<li>Fix typo in <code><a href="../reference/articulation_points.html">?articulation_points</a></code> (<a href="https://github.com/igraph/rigraph/issues/1191" class="external-link">#1191</a>).</li>
+<li>Improve installation and troubleshooting instructions (<a href="https://github.com/igraph/rigraph/issues/1184" class="external-link">#1184</a>).</li>
+<li>Improve docs of assortativity (<a href="https://github.com/igraph/rigraph/issues/1151" class="external-link">#1151</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-0-2">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-2"></a></h3>
+<ul><li>Add tests for <code><a href="../reference/isomorphisms.html">isomorphisms()</a></code> and <code><a href="../reference/subgraph_isomorphisms.html">subgraph_isomorphisms()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1225" class="external-link">#1225</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="packaging-2-0-2">Packaging<a class="anchor" aria-label="anchor" href="#packaging-2-0-2"></a></h3>
+<ul><li>Always use bundled mini-gmp (<a href="https://github.com/igraph/rigraph/issues/1233" class="external-link">#1233</a>).</li>
+<li>
+<code>config.h</code> defines <code>HAVE___UINT128_T</code> (<a href="https://github.com/igraph/rigraph/issues/1216" class="external-link">#1216</a>).</li>
+<li>Do not rely on <code>which</code> program during configuration (<a href="https://github.com/igraph/rigraph/issues/1232" class="external-link">#1232</a>).</li>
+<li>
+<code>configure</code> manage libxml multiple include paths (<a href="https://github.com/igraph/rigraph/issues/1197" class="external-link">#1197</a>).</li>
+<li>Remove empty string in <code>configure</code> (<a href="https://github.com/igraph/rigraph/issues/1235" class="external-link">#1235</a>).</li>
+<li>Link Fortran runtime on Windows as needed by arpack. (<a href="https://github.com/igraph/rigraph/issues/1215" class="external-link">#1215</a>).</li>
+<li>Workaround for deprecated enum values not being supported with old GCC (<a href="https://github.com/igraph/rigraph/issues/1205" class="external-link">#1205</a>).</li>
+<li>
+<code>HAVE_GFORTRAN</code> flag for <code>win</code> and <code>ucrt</code> (<a href="https://github.com/igraph/rigraph/issues/1171" class="external-link">#1171</a>).</li>
+<li>
+<code><a href="../reference/make_empty_graph.html">make_empty_graph()</a></code> is now fully auto-generated (<a href="https://github.com/igraph/rigraph/issues/1068" class="external-link">#1068</a>).</li>
+<li>Eliminate manual edits from autogenerated files (<a href="https://github.com/igraph/rigraph/issues/1207" class="external-link">#1207</a>).</li>
+<li>Add read-only comments for RStudio IDE (<a href="https://github.com/igraph/rigraph/issues/1152" class="external-link">#1152</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-2-0-2">Internal<a class="anchor" aria-label="anchor" href="#internal-2-0-2"></a></h3>
+<ul><li>Remove unused patch files (<a href="https://github.com/igraph/rigraph/issues/1234" class="external-link">#1234</a>).</li>
+<li>Update stimulus to 0.21.4 (<a href="https://github.com/igraph/rigraph/issues/1210" class="external-link">#1210</a>).</li>
+<li>Avoid duplicate objects (<a href="https://github.com/igraph/rigraph/issues/1223" class="external-link">#1223</a>).</li>
+<li>Eliminate a compiler warning from simpleraytracer (<a href="https://github.com/igraph/rigraph/issues/1185" class="external-link">#1185</a>).</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9002" id="igraph-2019002">igraph 2.0.1.9002<a class="anchor" aria-label="anchor" href="#igraph-2019002"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9002">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9002"></a></h3>
-<ul><li>Improve installation and troubleshooting instructions (<a href="https://github.com/igraph/rigraph/issues/1184" class="external-link">#1184</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9001" id="igraph-2019001">igraph 2.0.1.9001<a class="anchor" aria-label="anchor" href="#igraph-2019001"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9001">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9001"></a></h3>
-<ul><li>Remove zeros from the <code>order</code> and <code>order.out</code> components returned by <code><a href="../reference/dfs.html">dfs()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1179" class="external-link">#1179</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-1-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-1-9001"></a></h3>
-<ul><li>Update NEWS.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-1-9001">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-1-9001"></a></h3>
-<ul><li>Merge branch ‘cran-2.0.1.1’.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.1.9000" id="igraph-2019000">igraph 2.0.1.9000<a class="anchor" aria-label="anchor" href="#igraph-2019000"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-1-9000">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-1-9000"></a></h3>
-<ul><li>HAVE_GFORTRAN flag for <code>win</code> and <code>ucrt</code> (<a href="https://github.com/igraph/rigraph/issues/1171" class="external-link">#1171</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-1-9000">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-1-9000"></a></h3>
-<ul><li>Improve docs of assortativity (<a href="https://github.com/igraph/rigraph/issues/1151" class="external-link">#1151</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-1-9000">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-1-9000"></a></h3>
-<ul><li>Add read-only comments for RStudio IDE (<a href="https://github.com/igraph/rigraph/issues/1152" class="external-link">#1152</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-1-9000">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-1-9000"></a></h3>
-<ul><li>Merge branch ‘cran-2.0.1’.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9006" id="igraph-2009006">igraph 2.0.0.9006<a class="anchor" aria-label="anchor" href="#igraph-2009006"></a></h2>
-<div class="section level3">
-<h3 id="refactoring-2-0-0-9006">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-0-9006"></a></h3>
-<ul><li>Remove “compatibility with S” and use of <code><a href="https://rdrr.io/r/base/isR.html" class="external-link">is.R()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1168" class="external-link">#1168</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9005" id="igraph-2009005">igraph 2.0.0.9005<a class="anchor" aria-label="anchor" href="#igraph-2009005"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9004" id="igraph-2009004">igraph 2.0.0.9004<a class="anchor" aria-label="anchor" href="#igraph-2009004"></a></h2>
-<ul><li>Add test (<a href="https://github.com/igraph/rigraph/issues/1163" class="external-link">#1163</a>).</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9003" id="igraph-2009003">igraph 2.0.0.9003<a class="anchor" aria-label="anchor" href="#igraph-2009003"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9002" id="igraph-2009002">igraph 2.0.0.9002<a class="anchor" aria-label="anchor" href="#igraph-2009002"></a></h2>
-<ul><li>Merge branch ‘cran-2.0.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9001" id="igraph-2009001">igraph 2.0.0.9001<a class="anchor" aria-label="anchor" href="#igraph-2009001"></a></h2>
-<ul><li>Merge branch ‘cran-2.0.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.0.9000" id="igraph-2009000">igraph 2.0.0.9000<a class="anchor" aria-label="anchor" href="#igraph-2009000"></a></h2>
-<ul><li>Merge branch ‘cran-2.0.0’.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.1.1" id="igraph-2011">igraph 2.0.1.1<a class="anchor" aria-label="anchor" href="#igraph-2011"></a></h2><p class="text-muted">CRAN release: 2024-01-30</p>
 <div class="section level3">
