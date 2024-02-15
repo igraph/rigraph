@@ -2794,7 +2794,7 @@ igraph_t *R_igraph_get_pointer(SEXP graph) {
     if (Rf_xlength(graph) == 11) {
       Rf_error("This graph was created by igraph < 0.2.\n  Upgrading this format is not supported, sorry.");
     }
-    Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
+    Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
