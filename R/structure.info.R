@@ -43,8 +43,7 @@ are.connected <- function(graph, v1, v2) { # nocov start
 #' @param graph The graph.
 #' @param v1 The first vertex, tail in directed graphs.
 #' @param v2 The second vertex, head in directed graphs.
-#' @return A logical scalar, `TRUE` is a `(v1, v2)` exists in the
-#'   graph.
+#' @return A logical scalar, `TRUE` if edge `(v1, v2)` exists in the graph.
 #'
 #' @family structural queries
 #'
