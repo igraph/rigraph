@@ -405,8 +405,13 @@ igraph_sample_dirichlet:
 # Basic query functions
 #######################################
 
+igraph_are_adjacent:
+    PARAMS: GRAPH graph, VERTEX v1, VERTEX v2, OUT BOOLEAN res
+    DEPS: v1 ON graph, v2 ON graph
+
 igraph_are_connected:
     PARAMS: GRAPH graph, VERTEX v1, VERTEX v2, OUT BOOLEAN res
+    DEPS: v1 ON graph, v2 ON graph
 
 #######################################
 # Structural properties
@@ -1611,7 +1616,7 @@ igraph_community_walktrap:
 
 igraph_community_edge_betweenness:
     PARAMS: |-
-        GRAPH graph, OUT VECTOR_INT result, OPTIONAL OUT VECTOR edge_betweenness,
+        GRAPH graph, OUT VECTOR_INT removed_edges, OPTIONAL OUT VECTOR edge_betweenness,
         OPTIONAL OUT MATRIX_INT merges, OPTIONAL OUT INDEX_VECTOR bridges,
         OPTIONAL OUT VECTOR modularity, OPTIONAL OUT VECTOR_INT membership,
         BOOLEAN directed=True, OPTIONAL EDGEWEIGHTS weights=NULL
