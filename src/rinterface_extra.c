@@ -4771,23 +4771,6 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   return result;
 }
 
-SEXP R_igraph_are_connected(SEXP graph, SEXP pv1, SEXP pv2) {
-
-  igraph_t g;
-  igraph_integer_t v1=(igraph_integer_t) REAL(pv1)[0];
-  igraph_integer_t v2=(igraph_integer_t) REAL(pv2)[0];
-  igraph_bool_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  PROTECT(result=NEW_LOGICAL(1));
-  IGRAPH_R_CHECK(igraph_are_connected(&g, v1, v2, &res));
-  LOGICAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
 
   igraph_t g;

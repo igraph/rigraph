@@ -37,7 +37,7 @@ extern SEXP R_igraph_adjlist(void *, void *, void *);
 extern SEXP R_igraph_all_minimal_st_separators(void *);
 extern SEXP R_igraph_all_st_cuts(void *, void *, void *);
 extern SEXP R_igraph_all_st_mincuts(void *, void *, void *, void *);
-extern SEXP R_igraph_are_connected(void *, void *, void *);
+extern SEXP R_igraph_are_adjacent(void *, void *, void *);
 extern SEXP R_igraph_arpack(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_arpack_unpack_complex(void *, void *, void *);
 extern SEXP R_igraph_articulation_points(void *);
@@ -496,7 +496,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
     {"R_igraph_all_st_cuts",                                (DL_FUNC) &R_igraph_all_st_cuts,                                 3},
     {"R_igraph_all_st_mincuts",                             (DL_FUNC) &R_igraph_all_st_mincuts,                              4},
-    {"R_igraph_are_connected",                              (DL_FUNC) &R_igraph_are_connected,                               3},
+    {"R_igraph_are_adjacent",                               (DL_FUNC) &R_igraph_are_adjacent,                                3},
     {"R_igraph_arpack",                                     (DL_FUNC) &R_igraph_arpack,                                      5},
     {"R_igraph_arpack_unpack_complex",                      (DL_FUNC) &R_igraph_arpack_unpack_complex,                       3},
     {"R_igraph_articulation_points",                        (DL_FUNC) &R_igraph_articulation_points,                         1},
