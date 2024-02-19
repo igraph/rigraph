@@ -1553,9 +1553,6 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' vertex names; in this case, `types` must be a named vector that specifies
 #' the type for each vertex name that occurs in `edges`.
 #'
-#' `is_bipartite()` checks whether the graph is bipartite or not. It just
-#' checks whether the graph has a vertex attribute called `type`.
-#'
 #' @aliases graph.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
@@ -1568,7 +1565,6 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @param directed Whether to create a directed graph, boolean constant. Note
 #'   that by default undirected graphs are created, as this is more common for
 #'   bipartite graphs.
-#' @param graph The input graph.
 #' @return `make_bipartite_graph()` returns a bipartite igraph graph. In other
 #'   words, an igraph graph that has a vertex attribute named `type`.
 #'
