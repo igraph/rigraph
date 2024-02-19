@@ -927,7 +927,7 @@ widest_path_widths_floyd_warshall_impl <- function(graph, from=V(graph), to=V(gr
   res
 }
 
-spanner_impl <- function(graph, stretch, weights) {
+spanner_impl <- function(graph, stretch, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   stretch <- as.numeric(stretch)
@@ -1880,7 +1880,7 @@ pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TR
   res
 }
 
-pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
+pseudo_diameter_dijkstra_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {

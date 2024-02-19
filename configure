@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # Use xml2-config or pkg-config to get the include directories for libxml-2.0
-libxml2_cflags=""
 if xml2-config --version >/dev/null 2>&1; then
     libxml2_cflags=$(xml2-config --cflags)
     libxml2_libs=$(xml2-config --libs)

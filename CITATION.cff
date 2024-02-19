@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.0.1.9009
+version: 2.0.2
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
@@ -86,7 +86,7 @@ references:
   - family-names: Müller
     given-names: Kirill
   year: '2024'
-  notes: R package version 2.0.1.9009
+  notes: R package version 2.0.2
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -239,6 +239,23 @@ references:
   year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+- type: software
+  title: vctrs
+  abstract: 'vctrs: Vector Helpers'
+  notes: Imports
+  url: https://vctrs.r-lib.org/
+  repository: https://CRAN.R-project.org/package=vctrs
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  year: '2024'
 - type: software
   title: ape
   abstract: 'ape: Analyses of Phylogenetics and Evolution'

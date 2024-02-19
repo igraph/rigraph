@@ -2725,7 +2725,7 @@ SEXP R_igraph_spanner(SEXP graph, SEXP stretch, SEXP weights) {
   c_stretch = REAL(stretch)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_spanner(&c_graph, &c_spanner, c_stretch, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_spanner(&c_graph, &c_spanner, c_stretch, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights))));
 
                                         /* Convert output */
   PROTECT(spanner=R_igraph_vector_int_to_SEXPp1(&c_spanner));
