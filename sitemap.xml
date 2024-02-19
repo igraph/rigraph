@@ -1051,6 +1051,9 @@
     <loc>https://r.igraph.org/reference/is_biconnected.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/is_bipartite.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/is_chordal.html</loc>
   </url>
   <url>
