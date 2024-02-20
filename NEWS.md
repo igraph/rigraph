@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9002
+
+## Documentation
+
+  - Split is\_bipartite() manual page from other manual page (#1230).
+
+
 # igraph 2.0.2.9001
 
 ## Continuous integration
