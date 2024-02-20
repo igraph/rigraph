@@ -14,8 +14,7 @@ are_adjacent(graph, v1, v2)
 \item{v2}{The second vertex, head in directed graphs.}
 }
 \value{
-A logical scalar, \code{TRUE} is a \verb{(v1, v2)} exists in the
-graph.
+A logical scalar, \code{TRUE} if edge \verb{(v1, v2)} exists in the graph.
 }
 \description{
 The order of the vertices only matters in directed graphs,

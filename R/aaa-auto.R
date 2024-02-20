@@ -533,6 +533,25 @@ sample_dirichlet_impl <- function(n, alpha) {
   res
 }
 
+are_adjacent_impl <- function(graph, v1, v2) {
+  # Argument checks
+  ensure_igraph(graph)
+  v1 <- as_igraph_vs(graph, v1)
+  if (length(v1) == 0) {
+    stop("No vertex was specified")
+  }
+  v2 <- as_igraph_vs(graph, v2)
+  if (length(v2) == 0) {
+    stop("No vertex was specified")
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_are_adjacent, graph, v1-1, v2-1)
+
+  res
+}
+
 distances_impl <- function(graph, from=V(graph), to=V(graph), mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)

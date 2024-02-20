@@ -4,8 +4,25 @@
 
 ### Fixed
 
- - `igraph_is_forest()` determined that a graph is not a directed forest, and the `roots` output parameter was set to `NULL`, it would incorrectly cache that the graph is also not an undirected forest.
+ - Fixed a corruption of the "finally" stack in `igraph_write_graph_gml()` for certain invalid GML files.
+ - Fixed a memory leak in `igraph_write_graph_lgl()` when vertex names were present but edge weights were not.
+ - Fixed the handling of duplicate edge IDs in `igraph_subgraph_from_edges()`.
+ - Fixed conversion of sparse matrices to dense with `igraph_sparsemat_as_matrix()` when sparse matrix object did not make use of its full allocated capacity.
+
+### Other
+
+ - Documentation improvements.
+
+## [0.10.10] - 2024-02-13
+
+### Fixed
+
+ - When `igraph_is_forest()` determined that a graph is not a directed forest, and the `roots` output parameter was set to `NULL`, it would incorrectly cache that the graph is also not an undirected forest.
  - `igraph_spanner()` now correctly ignores edge directions, and no longer crashes on directed graphs.
+
+### Deprecated
+
+ - `igraph_are_connected()` is renamed to `igraph_are_adjacent()`; the old name is kept available until at least igraph 1.0.
 
 ### Other
 
@@ -1278,7 +1295,8 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
-[master]: https://github.com/igraph/igraph/compare/0.10.9..master
+[master]: https://github.com/igraph/igraph/compare/0.10.10..master
+[0.10.10]: https://github.com/igraph/igraph/compare/0.10.9..0.10.10
 [0.10.9]: https://github.com/igraph/igraph/compare/0.10.8..0.10.9
 [0.10.8]: https://github.com/igraph/igraph/compare/0.10.7..0.10.8
 [0.10.7]: https://github.com/igraph/igraph/compare/0.10.6..0.10.7

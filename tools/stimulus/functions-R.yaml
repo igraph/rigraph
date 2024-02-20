@@ -316,6 +316,7 @@ igraph_sample_dirichlet:
 # Basic query functions
 #######################################
 
+# Deprecated in C core
 igraph_are_connected:
     IGNORE: RR, RC
 
