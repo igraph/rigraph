@@ -1522,4 +1522,3 @@ igraph_vertex_path_from_edge_path:
 #######################################
 
 igraph_version:
-    IGNORE: RR, RC
