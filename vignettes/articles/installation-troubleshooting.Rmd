@@ -49,7 +49,7 @@ If you decide to try to compile from sources anyway, basic requirements are list
 Since CRAN does not provide binary packages for Linux, Linux users usually need to compile igraph from sources. In order to do so, make sure that you have all the prerequisites:
 
  - C, C++ and Fortran compilers. On Debian-based distros, use `sudo apt install build-essential gfortran`. On Fedora, use `yum install gcc gcc-c++ gcc-gfortran`.
- - Development packages for `glpk`, `gmp` and `libxml2`. On Debian-based distros, use `sudo apt install libglpk-dev libgmp-dev libxml2-dev`. On Fedora, use `yum install glpk-devel gmp-devel libxml2-devel`.
+ - Development packages for `glpk` and `libxml2`. On Debian-based distros, use `sudo apt install libglpk-dev libxml2-dev`. On Fedora, use `yum install glpk-devel libxml2-devel`.
 
 If you have an Anaconda environment active, deactivate them _before_ compiling igraph. Having conda environments active are known to cause a number of issues, both during compilation and later during usage.
 
