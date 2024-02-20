@@ -1825,6 +1825,9 @@
     <loc>https://r.igraph.org/reference/vertex_connectivity.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/voronoi_cells.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/walktrap.community.html</loc>
   </url>
   <url>
