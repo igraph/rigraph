@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9003
+
+## Features
+
+  - New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
+
+## Documentation
+
+  - Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
+
+  - GMP is no longer a dependency (#1256).
+
+## Refactoring
+
+  - Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
+
+
 # igraph 2.0.2.9002
 
 ## Documentation
