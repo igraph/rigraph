@@ -57,9 +57,9 @@ Suggests:
     testthat,
     vdiffr,
     withr
-LinkingTo: 
+LinkingTo:
     cpp11 (>= 0.4.7)
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
@@ -71,4 +71,4 @@ Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-SystemRequirements: libxml2, glpk (>= 4.57, optional)
+SystemRequirements: libxml2, glpk (>= 4.57)
