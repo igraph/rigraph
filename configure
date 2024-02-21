@@ -30,7 +30,7 @@ fi
 
 OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
 
-if echo '#include <glpk.h>' | $(R CMD config CC) -E $CPPFLAGS - > /dev/null 2>&1; then
+if echo '#include <glpk.h>' | `"${R_HOME}/bin/R" CMD config CC` -E $CPPFLAGS - > /dev/null 2>&1; then
   echo "Using installed GLPK"
   PKG_LIBS="$PKG_LIBS -lglpk"
 else
