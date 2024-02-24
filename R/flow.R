@@ -883,9 +883,6 @@ max_flow <- maxflow_impl
 #' separator. A vertex set is a vertex separator if its removal results a
 #' disconnected graph.
 #'
-#' In the special case of a fully connected graph with \eqn{n} vertices, each
-#' set of \eqn{n-1} vertices is considered to be a vertex separator.
-#'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex ids of the candidate
@@ -904,10 +901,7 @@ is_separator <- is_separator_impl
 #'
 #' `is_min_separator()` decides whether the supplied vertex set is a minimal
 #' vertex separator. A minimal vertex separator is a vertex separator, such
-#' that none of its subsets is a vertex separator.
-#'
-#' In the special case of a fully connected graph with \eqn{n} vertices, each
-#' set of \eqn{n-1} vertices is considered to be a vertex separator.
+#' that none of its proper subsets are a vertex separator.
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
