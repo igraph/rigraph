@@ -25,9 +25,6 @@ Check whether a given set of vertices is a vertex separator.
 \code{is_separator()} decides whether the supplied vertex set is a vertex
 separator. A vertex set is a vertex separator if its removal results a
 disconnected graph.
-
-In the special case of a fully connected graph with \eqn{n} vertices, each
-set of \eqn{n-1} vertices is considered to be a vertex separator.
 }
 \seealso{
 Other flow: 
