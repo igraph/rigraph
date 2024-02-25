@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9004
+
+## Documentation
+
+  - Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
+
+
 # igraph 2.0.2.9003
 
 ## Features
