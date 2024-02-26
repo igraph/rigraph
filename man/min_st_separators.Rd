@@ -27,6 +27,28 @@ graph.
 A \eqn{(s,t)} vertex separator is minimal if none of its proper subsets is
 an \eqn{(s,t)} vertex separator for the same \eqn{s} and \eqn{t}.
 }
+\section{Note}{
+
+Note that \eqn{1, 3} is returned despite its subset \eqn{1} being a separator
+as well. This is because \eqn{1, 3} is minimal with respect to separating
+vertices 2 and 4.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
+min_st_separators(g)
+#> [[1]]
+#> + 1/5 vertex, named, from 5568ea3:
+#> [1] 1
+#> 
+#> [[2]]
+#> + 2/5 vertices, named, from 5568ea3:
+#> [1] 2 4
+#> 
+#> [[3]]
+#> + 2/5 vertices, named, from 5568ea3:
+#> [1] 1 3
+}\if{html}{\out{</div>}}
+}
+
 \examples{
 
 ring <- make_ring(4)
@@ -34,12 +56,6 @@ min_st_separators(ring)
 
 chvatal <- make_graph("chvatal")
 min_st_separators(chvatal)
-
-# Note that {1, 3} is returned despite its subset {1} being a separator
-# as well. This is because {1, 3} is minimal with respect to separating
-# vertices 2 and 4.
-g <- make_graph(~ 0-1-2-3-4-1)
-min_st_separators(g)
 }
 \references{
 Anne Berry, Jean-Paul Bordat and Olivier Cogis: Generating All

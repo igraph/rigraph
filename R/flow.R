@@ -812,12 +812,14 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
-#'
-#' # Note that {1, 3} is returned despite its subset {1} being a separator
-#' # as well. This is because {1, 3} is minimal with respect to separating
-#' # vertices 2 and 4.
+#' @section Note:
+#' Note that \eqn{1, 3} is returned despite its subset \eqn{1} being a separator
+#' as well. This is because \eqn{1, 3} is minimal with respect to separating
+#' vertices 2 and 4.
+#' ```{r}
 #' g <- make_graph(~ 0-1-2-3-4-1)
 #' min_st_separators(g)
+#' ```
 #' @family flow
 min_st_separators <- all_minimal_st_separators_impl
 
