@@ -873,7 +873,6 @@ edge <- function(...) {
   structure(list(...), class = "igraph.edge")
 }
 
-#' @family functions for manipulating graph structure
 #' @export
 #' @rdname edge
 edges <- edge
@@ -910,7 +909,6 @@ vertex <- function(...) {
   structure(list(...), class = "igraph.vertex")
 }
 
-#' @family functions for manipulating graph structure
 #' @export
 #' @rdname vertex
 vertices <- vertex
@@ -1236,7 +1234,6 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 
 #' @rdname rep.igraph
 #' @method * igraph
-#' @family functions for manipulating graph structure
 #' @export
 `*.igraph` <- function(x, n) {
   if (!is_igraph(x) && is_igraph(n)) {
@@ -1275,6 +1272,5 @@ reverse_edges <- reverse_edges_impl
 #' @rdname reverse_edges
 #' @param x The input graph.
 #' @method t igraph
-#' @family functions for manipulating graph structure
 #' @export
 t.igraph <- function(x) reverse_edges(x)

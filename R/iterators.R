@@ -1122,7 +1122,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #'
 #' @export
-#' @family vertex and edge sequences
 #' @examples
 #' # color edges of the largest component
 #' largest_comp <- function(graph) {
