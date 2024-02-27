@@ -550,7 +550,6 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
 #' @rdname sample_pa
 #' @param ... Passed to `sample_pa()`.
-#' @family games
 #' @export
 pa <- function(...) constructor_spec(sample_pa, ...)
 
