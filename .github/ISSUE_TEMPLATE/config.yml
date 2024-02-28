@@ -1,7 +1,7 @@
 contact_links:
   - name: Installation problems?
     url: https://igraph.discourse.group/
-    about: Check the instructions carefully at https://r.igraph.org/ before asking
+    about: Check the instructions carefully at [https://r.igraph.org/](https://r.igraph.org/) before asking
   - name: igraph support
     url: https://igraph.discourse.group/
     about: Ask and answer questions about igraph
