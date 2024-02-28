@@ -34,4 +34,5 @@ body:
       label: System information
       description: >
         Enter all relevant information about your system (operating system, R version, where you obtained R from, etc.), including the output of `sessionInfo()`.
+    validations:
       required: false
