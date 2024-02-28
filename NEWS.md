@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9005
+
+## Documentation
+
+- Add code finding duplicate seealso, and use it (#1270).
+
+- Rm duplicate seealso from sample_pa.Rd (#1268).
+
+## Uncategorized
+
+- Source files for vendored libraries (#1156).
+
+
 # igraph 2.0.2.9004
 
 ## Documentation
