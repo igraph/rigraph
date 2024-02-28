@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,9 +80,9 @@
 <div class="section level3">
 <h3 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a></h3>
 <p>When building from source on Windows, you need to have <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> installed. Additionally, the two system requirements of <code>glpk</code> and <code>libxml2</code> are not optional, but hard requirements. For version R &gt;= 4.0 you can install these two from an RTools terminal using</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pacman</span> <span class="at">-Sy</span> mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-glpk mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-libxml2</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">pacman</span> <span class="at">-Sy</span> mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-glpk mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-libxml2</span></code></pre></div>
 <p>To update the files stored redundantly, run</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> igraph</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">make</span> igraph</span></code></pre></div>
 <p>. This is done automatically on CI/CD, in some cases changes are committed directly to the branch that is being tested.</p>
 </div>
 </div>
