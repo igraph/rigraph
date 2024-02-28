@@ -8,8 +8,8 @@ body:
 
   - type: textarea
     attributes:
-      label: What happens?
-      description: A short, clear and concise description of what the bug is.
+      label: What happens, and what did you expect instead?
+      description: A clear and concise description of the bug.
     validations:
       required: true
 
