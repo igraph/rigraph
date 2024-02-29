@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9006
+
+## Chore
+
+- Improve bug report template.
+
+- Attempt adding link to issue template chooser.
+
+- Fix bug report template.
+
+- Update bug report template.
+
+- Update issue template.
+
+- Typo in installation troubleshooting.
+
+
 # igraph 2.0.2.9005
 
 ## Documentation
