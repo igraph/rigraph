@@ -65,3 +65,15 @@ test_that("basic plot test, spheres", {
     }
   )
 })
+
+test_that("rgplot() works", {
+  # https://stackoverflow.com/a/46320771/5489251
+  withr::local_envvar(RGL_USE_NULL = TRUE)
+  withr::local_seed(42)
+
+  el <- cbind(sample(1:5), sample(1:5))
+  g <- graph_from_edgelist(el)
+
+  expect_silent(rglplot(g))
+  expect_silent(rglplot(g, edge.label = letters[1:ecount(g)]))
+})
