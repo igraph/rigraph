@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
-# define YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
+#ifndef YY_IGRAPH_PAJEK_YY_SRC_VENDOR_IO_PAJEK_PARSER_H_INCLUDED
+# define YY_IGRAPH_PAJEK_YY_SRC_VENDOR_IO_PAJEK_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -119,7 +119,7 @@ union YYSTYPE
   } string;
   char *dynstr;
 
-#line 123 "yy.tab.h"
+#line 123 "src/vendor/io/pajek-parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -147,4 +147,4 @@ struct YYLTYPE
 int igraph_pajek_yyparse (igraph_i_pajek_parsedata_t* context);
 
 
-#endif /* !YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED  */
+#endif /* !YY_IGRAPH_PAJEK_YY_SRC_VENDOR_IO_PAJEK_PARSER_H_INCLUDED  */

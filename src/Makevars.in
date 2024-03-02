@@ -6,7 +6,7 @@ PKG_CFLAGS=$(C_VISIBILITY)
 PKG_CXXFLAGS=$(CXX_VISIBILITY)
 PKG_FFLAGS=$(F_VISIBILITY)
 
-PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor @cflags@ \
+PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers @cflags@ \
     -DNDEBUG -DNTIMER -DNPRINT -DIGRAPH_THREAD_LOCAL= \
     -DPRPACK_IGRAPH_SUPPORT \
     -DHAVE_GFORTRAN=1 \
