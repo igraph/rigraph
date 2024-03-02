@@ -1,6 +1,6 @@
 include sources.mk
-include vendor/cigraph/vendor/glpk/sources-glpk.mk
-include vendor/cigraph/vendor/mini-gmp/sources-mini-gmp.mk
+include sources-glpk.mk
+include sources-mini-gmp.mk
 
 PKG_CFLAGS=$(C_VISIBILITY)
 PKG_CXXFLAGS=$(CXX_VISIBILITY)

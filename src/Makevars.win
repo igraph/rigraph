@@ -1,5 +1,5 @@
 include sources.mk
-include vendor/cigraph/vendor/mini-gmp/sources-mini-gmp.mk
+include sources-mini-gmp.mk
 
 LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
