@@ -27,13 +27,13 @@ PARSER := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
 PARSER1 := $(patsubst src/%.l, src/%.c, $(PARSER))
 PARSER2 := $(patsubst src/%.y, src/%.c, $(PARSER1))
 
-YACC=bison -b yy -d
-LEX=flex
+DOCKER=docker run --rm -ti --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
+YACC=$(DOCKER) bison -b yy -d
+LEX=$(DOCKER) flex
 
 %.c: %.y
-	$(YACC) $<
-	mv -f yy.tab.c src/vendor/io/$(notdir $@)
-	mv -f yy.tab.h src/vendor/io/parsers/$(basename $(notdir $@)).h
+	$(YACC) $< -o src/vendor/io/$(notdir $@)
+	mv -f src/vendor/io/$(basename $(notdir $@)).h src/vendor/io/parsers/$(basename $(notdir $@)).h
 
 %.c: %.l
 	$(LEX) -o src/vendor/io/$(notdir $@) --header-file=src/vendor/io/parsers/$(basename $(notdir $@)).h $<

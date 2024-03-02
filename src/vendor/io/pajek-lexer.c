@@ -898,7 +898,7 @@ static const flex_int32_t yy_rule_can_match_eol[58] =
 #line 899 "src/vendor/io/pajek-lexer.c"
 #define YY_NO_INPUT 1
 /* Any use of {newline} below must use yy_set_bol(true) in order to mark the character
-   following a single \r as the first on a new line, and allow the ^ pattern to match. 
+   following a single \r as the first on a new line, and allow the ^ pattern to match.
    This pattern must match single newlines only, in order to follow Pajek's "no newline
    after *Vertices" convention. */
 /* Anything except non-printable (00-1F), space (20), del (7F), '"' and '*'. */

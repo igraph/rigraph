@@ -28,9 +28,9 @@ def generate_sources(path, name, variable, ignore = [], extensions = ('.c', '.cc
                     continue
                 sources.append(os.path.join(root[4:], filename[:filename.rfind('.')] + '.o'))
 
-    text = f"{variable}=" + ' '.join(sources) + '\n'
+    text = f"{variable}=" + ' '.join(sorted(sources)) + '\n'
 
-    with open_utf8(os.path.join('src' + path, f'{name}.mk'), 'w') as f:
+    with open_utf8(os.path.join('src', f'{name}.mk'), 'w') as f:
         f.write(text)
 
 generate_sources('/', 'sources', 'SOURCES', ignore_folders)
