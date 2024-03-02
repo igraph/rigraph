@@ -64,9 +64,6 @@ src/vendor/igraph_threading.h: $(top_srcdir)/include/igraph_threading.h.in
 	mkdir -p src
 	sed 's/#cmakedefine01 IGRAPH_THREAD_SAFE/#define IGRAPH_THREAD_SAFE 0/g' $< >$@
 
-src/vendor/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
-	cp $< $@
-
 # Create sources.mk
 
 src/sources.mk:
