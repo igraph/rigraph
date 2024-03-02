@@ -550,7 +550,6 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
 #' @rdname sample_pa
 #' @param ... Passed to `sample_pa()`.
-#' @family games
 #' @export
 pa <- function(...) constructor_spec(sample_pa, ...)
 
@@ -612,7 +611,6 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
 #' @rdname sample_gnp
 #' @param ... Passed to `sample_gnp()`.
-#' @family games
 #' @export
 gnp <- function(...) constructor_spec(sample_gnp, ...)
 
@@ -668,7 +666,6 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
 #' @rdname sample_gnm
 #' @param ... Passed to `sample_gnm()`.
-#' @family games
 #' @export
 gnm <- function(...) constructor_spec(sample_gnm, ...)
 
@@ -863,7 +860,6 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 #' @param deterministic  Whether the construction should be deterministic
 #' @param ... Passed to `realize_degseq()` if \sQuote{deterministic} is true,
 #'   or to `sample_degseq()` otherwise.
-#' @family games
 #' @export
 degseq <- function(..., deterministic = FALSE) {
   constructor_spec(
@@ -914,7 +910,6 @@ sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
 
 #' @rdname sample_growing
 #' @param ... Passed to `sample_growing()`.
-#' @family games
 #' @export
 growing <- function(...) constructor_spec(sample_growing, ...)
 
@@ -1113,7 +1108,6 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 
 #' @rdname sample_pa_age
 #' @param ... Passed to `sample_pa_age()`.
-#' @family games
 #' @export
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 
@@ -1264,7 +1258,6 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 
 #' @rdname sample_grg
 #' @param ... Passed to `sample_grg()`.
-#' @family games
 #' @export
 grg <- function(...) constructor_spec(sample_grg, ...)
 
@@ -1490,7 +1483,6 @@ sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
 
 #' @rdname sample_smallworld
 #' @param ... Passed to `sample_smallworld()`.
-#' @family games
 #' @export
 smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 
@@ -1697,7 +1689,6 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
-#' @family games
 #' @export
 bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 

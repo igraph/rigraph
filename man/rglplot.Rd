@@ -41,9 +41,6 @@ version, \code{\link[=tkplot]{tkplot()}} for interactive graph drawing in 2D.
 
 Other plot: 
 \code{\link{plot.igraph}()}
-
-Other plot: 
-\code{\link{plot.igraph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

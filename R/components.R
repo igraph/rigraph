@@ -216,7 +216,6 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
-#' @family components
 #' @export
 bridges <- bridges_impl
 

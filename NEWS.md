@@ -1,5 +1,42 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9006
+
+## Chore
+
+- Improve bug report template.
+
+- Attempt adding link to issue template chooser.
+
+- Fix bug report template.
+
+- Update bug report template.
+
+- Update issue template.
+
+- Typo in installation troubleshooting.
+
+
+# igraph 2.0.2.9005
+
+## Documentation
+
+- Add code finding duplicate seealso, and use it (#1270).
+
+- Rm duplicate seealso from sample_pa.Rd (#1268).
+
+## Uncategorized
+
+- Source files for vendored libraries (#1156).
+
+
+# igraph 2.0.2.9004
+
+## Documentation
+
+  - Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
+
+
 # igraph 2.0.2.9003
 
 ## Features

@@ -522,7 +522,6 @@ plot.igraph <- function(x,
 #' @family plot
 #' @export
 #' @keywords graphs
-#' @family plot
 #' @export
 #' @examples
 #'
