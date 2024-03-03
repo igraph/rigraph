@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9007
+
+## Bug fixes
+
+  - Fix `rglplot(edge_label = )` (#1267).
+
+## Chore
+
+  - Fix drift after code generation (#1278).
+
+  - Move `.mk` files to root to fix vendoring (#1275).
+
+  - Ignore `CRAN-SUBMISSION`.
+
+
 # igraph 2.0.2.9006
 
 ## Chore
