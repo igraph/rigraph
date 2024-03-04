@@ -5,7 +5,7 @@
 [![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph?branch=main)
 <!-- badges: end -->
 
-# R/igraph
+# R/igraph <a href="https://r.igraph.org/"><img src="man/figures/logo.png" align="right" height="120" alt="igraph website" /></a>
 
 R/igraph is an R package of the igraph network analysis library.
 
