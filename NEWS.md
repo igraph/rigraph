@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9008
+
+## Chore
+
+  - Model vendoring after duckdb (#1276).
+
+
 # igraph 2.0.2.9007
 
 ## Bug fixes
