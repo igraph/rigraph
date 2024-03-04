@@ -256,3 +256,8 @@ authors:
     href: "https://github.com/GroteGnoom"
   Kirill Müller:
     href: "https://krlmlr.info/"
+
+home:
+  links:
+  - text: Discussion forum
+    href: https://igraph.discourse.group/
