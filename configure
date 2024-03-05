@@ -22,7 +22,7 @@ if [ -n "$libxml2_libs" ]; then
     PKG_LIBS="$PKG_LIBS $libxml2_libs"
     echo "libxml2 library link flags: $libxml2_libs"
 else
-    echo "Warning: libxml2 library link flags not found"
+    echo "Warning: libxml2 library link flags not found."
 fi
 
 OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
