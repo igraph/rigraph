@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9009
+
+## Documentation
+
+  - Add link to discussion forum (#1279).
+
+  - Add logo (#1280).
+
+
 # igraph 2.0.2.9008
 
 ## Chore
