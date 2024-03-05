@@ -8,7 +8,7 @@ elif pkg-config --version >/dev/null 2>&1; then
     libxml2_cflags=$(pkg-config --cflags libxml-2.0)
     libxml2_libs=$(pkg-config --libs --static libxml-2.0)
 else
-    echo "Warning: libxml not found. Neither xml2-config nor pkg-config is available"
+    echo "Warning: libxml2 not found. Neither xml2-config nor pkg-config is available."
 fi
 
 if [ -n "$libxml2_cflags" ]; then
