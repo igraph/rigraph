@@ -783,15 +783,15 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 
 #' Minimum size vertex separators
 #'
-#' List all vertex sets that are minimal (s,t) separators for some s and t, in
-#' an undirected graph.
+#' List all vertex sets that are minimal \eqn{(s,t)} separators for some
+#' \eqn{s} and \eqn{t}, in an undirected graph.
 #'
 #' A \eqn{(s,t)} vertex separator is a set of vertices, such that after their
 #' removal from the graph, there is no path between \eqn{s} and \eqn{t} in the
 #' graph.
 #'
-#' A \eqn{(s,t)} vertex separator is minimal if none of its subsets is an
-#' \eqn{(s,t)} vertex separator.
+#' A \eqn{(s,t)} vertex separator is minimal if none of its proper subsets is
+#' an \eqn{(s,t)} vertex separator for the same \eqn{s} and \eqn{t}.
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
@@ -812,6 +812,22 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
+#' # https://github.com/r-lib/roxygen2/issues/1092
+#' @section Note:
+#' Note that the code below returns `{1, 3}` despite its subset `{1}` being a
+#' separator as well. This is because `{1, 3}` is minimal with respect to
+#' separating vertices 2 and 4.
+#'
+#' ```{r, eval=FALSE}
+#' g <- make_graph(~ 0-1-2-3-4-1)
+#' min_st_separators(g)
+#' ```
+#'
+#' ```{r, echo=FALSE}
+#' local_igraph_options(print.id = FALSE)
+#' g <- make_graph(~ 0-1-2-3-4-1)
+#' min_st_separators(g)
+#' ```
 #' @family flow
 min_st_separators <- all_minimal_st_separators_impl
 
