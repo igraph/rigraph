@@ -9,7 +9,8 @@ PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/includ
     -DNDEBUG -DNTIMER -DNPRINT -DIGRAPH_THREAD_LOCAL= \
     -DPRPACK_IGRAPH_SUPPORT \
     -DHAVE_GFORTRAN=1 \
-    -D_GNU_SOURCE=1
+    -D_GNU_SOURCE=1 \
+    -DHAVE_LIBXML
 
 PKG_LIBS = -lxml2 -lz -lstdc++ \
   -lglpk $(BLAS_LIBS) $(LAPACK_LIBS)

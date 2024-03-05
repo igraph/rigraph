@@ -8,24 +8,21 @@ elif pkg-config --version >/dev/null 2>&1; then
     libxml2_cflags=$(pkg-config --cflags libxml-2.0)
     libxml2_libs=$(pkg-config --libs --static libxml-2.0)
 else
-    echo "Error: Neither xml2-config nor pkg-config is available"
-    exit 1
+    echo "Warning: libxml not found. Neither xml2-config nor pkg-config is available"
 fi
 
 if [ -n "$libxml2_cflags" ]; then
-    PKG_CFLAGS="$PKG_CFLAGS $libxml2_cflags"
+    PKG_CFLAGS="$PKG_CFLAGS $libxml2_cflags -DHAVE_LIBXML"
     echo "libxml2 include directories: $libxml2_cflags"
 else
-    echo "Error: libxml2 include directory not found"
-    exit 1
+    echo "Warning: libxml2 include directory not found"
 fi
 
 if [ -n "$libxml2_libs" ]; then
     PKG_LIBS="$PKG_LIBS $libxml2_libs"
     echo "libxml2 library link flags: $libxml2_libs"
 else
-    echo "Error: libxml2 library link flags not found"
-    exit 1
+    echo "Warning: libxml2 library link flags not found"
 fi
 
 OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
