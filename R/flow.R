@@ -812,12 +812,18 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
+#' # https://github.com/r-lib/roxygen2/issues/1092
 #' @section Note:
 #' Note that the code below returns `{1, 3}` despite its subset `{1}` being a
 #' separator as well. This is because `{1, 3}` is minimal with respect to
 #' separating vertices 2 and 4.
-#' ```{r}
-#' # option to not show IDs, but you as an user don't need it
+#'
+#' ```{r, eval=FALSE}
+#' g <- make_graph(~ 0-1-2-3-4-1)
+#' min_st_separators(g)
+#' ```
+#'
+#' ```{r, echo=FALSE}
 #' local_igraph_options(print.id = FALSE)
 #' g <- make_graph(~ 0-1-2-3-4-1)
 #' min_st_separators(g)

@@ -33,11 +33,11 @@ Note that the code below returns \verb{\{1, 3\}} despite its subset \code{{1}} b
 separator as well. This is because \verb{\{1, 3\}} is minimal with respect to
 separating vertices 2 and 4.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# option to not show IDs, but you as an user don't need it
-local_igraph_options(print.id = FALSE)
-g <- make_graph(~ 0-1-2-3-4-1)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
 min_st_separators(g)
-#> [[1]]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [[1]]
 #> + 1/5 vertex, named:
 #> [1] 1
 #> 
@@ -58,6 +58,7 @@ min_st_separators(ring)
 
 chvatal <- make_graph("chvatal")
 min_st_separators(chvatal)
+# https://github.com/r-lib/roxygen2/issues/1092
 }
 \references{
 Anne Berry, Jean-Paul Bordat and Olivier Cogis: Generating All
