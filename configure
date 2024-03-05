@@ -15,7 +15,7 @@ if [ -n "$libxml2_cflags" ]; then
     PKG_CFLAGS="$PKG_CFLAGS $libxml2_cflags -DHAVE_LIBXML"
     echo "libxml2 include directories: $libxml2_cflags"
 else
-    echo "Warning: libxml2 include directory not found"
+    echo "Warning: libxml2 include directory not found."
 fi
 
 if [ -n "$libxml2_libs" ]; then
