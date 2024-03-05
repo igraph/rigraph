@@ -9,6 +9,7 @@ elif pkg-config --version >/dev/null 2>&1; then
     libxml2_libs=$(pkg-config --libs --static libxml-2.0)
 else
     echo "Warning: libxml2 not found. Neither xml2-config nor pkg-config is available."
+    libxml_unavilable=true
 fi
 
 if [ -n "$libxml2_cflags" ]; then
@@ -16,6 +17,7 @@ if [ -n "$libxml2_cflags" ]; then
     echo "libxml2 include directories: $libxml2_cflags"
 else
     echo "Warning: libxml2 include directory not found."
+    libxml_unavilable=true
 fi
 
 if [ -n "$libxml2_libs" ]; then
@@ -23,6 +25,11 @@ if [ -n "$libxml2_libs" ]; then
     echo "libxml2 library link flags: $libxml2_libs"
 else
     echo "Warning: libxml2 library link flags not found."
+    libxml_unavilable=true
+fi
+
+if [ "$libxml_unavilable" = true ]; then
+    echo "GraphML import will not be available."
 fi
 
 OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
