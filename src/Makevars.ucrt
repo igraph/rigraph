@@ -9,7 +9,8 @@ PKG_CPPFLAGS = -I"${LIB_XML}/include/libxml2" -I"${LIB_XML}/include" -DLIBXML_ST
     -DNDEBUG -DNTIMER -DNPRINT -DIGRAPH_THREAD_LOCAL= \
     -DPRPACK_IGRAPH_SUPPORT \
     -DHAVE_GFORTRAN=1 \
-    -D_GNU_SOURCE=1
+    -D_GNU_SOURCE=1 \
+    -DHAVE_LIBXML
 
 PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -liconv -lz -lws2_32 -lstdc++ \
   -lglpk $(BLAS_LIBS) $(LAPACK_LIBS) $(FLIBS) -llzma
