@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9010
+
+## Documentation
+
+  - Improve `min_st_separators()` documentation (#1264).
+
+
 # igraph 2.0.2.9009
 
 ## Documentation
