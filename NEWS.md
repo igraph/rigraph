@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9011
+
+## Chore
+
+  - Make libxml optional (#1282).
+
+
 # igraph 2.0.2.9010
 
 ## Documentation
