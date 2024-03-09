@@ -3794,13 +3794,10 @@ SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
   SEXP result;
 
   R_SEXP_to_vector_int_copy(edges, &v);
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &v);
   R_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_FINALLY(igraph_destroy, &g);
   IGRAPH_R_CHECK(igraph_add_edges(&g, &v, 0));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_vector_int_destroy(&v);
-  IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_I_DESTROY(&g);
   IGRAPH_FINALLY_CLEAN(1);
 
