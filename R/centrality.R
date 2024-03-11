@@ -1029,7 +1029,7 @@ eigen_centrality <- function(graph,
 #' strength(g, mode = "out")
 #' strength(g, mode = "in")
 #'
-#' # No weights, a warning is given
+#' # No weights
 #' g <- make_ring(10)
 #' strength(g)
 #' @family centrality
