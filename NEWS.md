@@ -1,152 +1,59 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.0.2.9013
+# igraph 2.0.3
 
-## Continuous integration
+## Bug fixes
 
-- `CITATION.cff` contains only the first three version components.
+- Fix `rglplot(edge_label = )` (#1267).
 
+## Features
 
-# igraph 2.0.2.9012
+- New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
 
 ## Chore
 
 - Update revdepchecks.
+- Make libxml optional (#1282).
+- Model vendoring after duckdb (#1276).
+- Fix drift after code generation (#1278).
+- Move `.mk` files to root to fix vendoring (#1275).
+- Ignore `CRAN-SUBMISSION`.
+- Improve bug report template.
+- Attempt adding link to issue template chooser.
+- Fix bug report template.
+- Update bug report template.
+- Update issue template.
+- Typo in installation troubleshooting.
 
 ## Continuous integration
 
+- `CITATION.cff` contains only the first three version components.
 - Run examples with sanitizer (#1288).
+- Add scheduled builds.
 
 ## Documentation
 
 - Remove misleading comment about warning given as no warning is given (#1294).
+- Improve `min_st_separators()` documentation (#1264).
+- Add link to discussion forum (#1279).
+- Add logo (#1280).
+- Add code finding duplicate seealso, and use it (#1270).
+- Rm duplicate seealso from sample_pa.Rd (#1268).
+- Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
+- Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
+- GMP is no longer a dependency (#1256).
+- Split is_bipartite() manual page from other manual page (#1230).
 
 ## Refactoring
 
 - Replace use of deprecated barabasi.game() with sample_pa() (#1291).
-
-
-# igraph 2.0.2.9011
-
-## Chore
-
-  - Make libxml optional (#1282).
-
-
-# igraph 2.0.2.9010
-
-## Documentation
-
-  - Improve `min_st_separators()` documentation (#1264).
-
-
-# igraph 2.0.2.9009
-
-## Documentation
-
-  - Add link to discussion forum (#1279).
-
-  - Add logo (#1280).
-
-
-# igraph 2.0.2.9008
-
-## Chore
-
-  - Model vendoring after duckdb (#1276).
-
-
-# igraph 2.0.2.9007
-
-## Bug fixes
-
-  - Fix `rglplot(edge_label = )` (#1267).
-
-## Chore
-
-  - Fix drift after code generation (#1278).
-
-  - Move `.mk` files to root to fix vendoring (#1275).
-
-  - Ignore `CRAN-SUBMISSION`.
-
-
-# igraph 2.0.2.9006
-
-## Chore
-
-- Improve bug report template.
-
-- Attempt adding link to issue template chooser.
-
-- Fix bug report template.
-
-- Update bug report template.
-
-- Update issue template.
-
-- Typo in installation troubleshooting.
-
-
-# igraph 2.0.2.9005
-
-## Documentation
-
-- Add code finding duplicate seealso, and use it (#1270).
-
-- Rm duplicate seealso from sample_pa.Rd (#1268).
+- Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
 
 ## Uncategorized
 
 - Source files for vendored libraries (#1156).
-
-
-# igraph 2.0.2.9004
-
-## Documentation
-
-  - Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
-
-
-# igraph 2.0.2.9003
-
-## Features
-
-  - New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
-
-## Documentation
-
-  - Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
-
-  - GMP is no longer a dependency (#1256).
-
-## Refactoring
-
-  - Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
-
-
-# igraph 2.0.2.9002
-
-## Documentation
-
-  - Split is\_bipartite() manual page from other manual page (#1230).
-
-
-# igraph 2.0.2.9001
-
-## Continuous integration
-
-  - Add scheduled builds.
-
-
-# igraph 2.0.2.9000
-
-  - Merge branch 'cran-2.0.2'.
-
-
-# igraph 2.0.1.9013
-
-  - Internal changes only.
+- Merge branch 'cran-2.0.2'.
+- Internal changes only.
 
 
 # igraph 2.0.2
