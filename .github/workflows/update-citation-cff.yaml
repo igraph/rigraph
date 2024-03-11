@@ -43,8 +43,13 @@ jobs:
           # Customize with your own code
           # See https://docs.ropensci.org/cffr/articles/cffr.html
 
+          version <- desc::desc_get_version()
+          components <- unclass(version)[[1]]
+          length(components) <- 3
+          patch_version <- paste(components, collapse = ".")
+
           # Write your own keys
-          mykeys <- list()
+          mykeys <- list(version = patch_version)
 
           # Create your CITATION.cff file
           cff_write(keys = mykeys)

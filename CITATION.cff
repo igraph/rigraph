@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.0.2.9012
+version: 2.0.2
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
