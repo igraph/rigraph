@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9012
+
+## Chore
+
+- Update revdepchecks.
+
+## Continuous integration
+
+- Run examples with sanitizer (#1288).
+
+## Documentation
+
+- Remove misleading comment about warning given as no warning is given (#1294).
+
+## Refactoring
+
+- Replace use of deprecated barabasi.game() with sample_pa() (#1291).
+
+
 # igraph 2.0.2.9011
 
 ## Chore
