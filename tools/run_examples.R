@@ -8,7 +8,7 @@ rd_files <- list.files("./man", pattern = "\\.Rd$", full.names = TRUE)
 exfile <- tempfile()
 
 for (rd_file in rd_files) {
-  tools::Rd2ex(rd_file, out = exfile)
+  tools::Rd2ex(rd_file, out = exfile, commentDontrun = FALSE)
 
   if (!file.exists(exfile)) {
     next
