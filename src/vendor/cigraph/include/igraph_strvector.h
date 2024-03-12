@@ -37,9 +37,9 @@ __BEGIN_DECLS
 
 typedef struct s_igraph_strvector {
     /* Empty strings "" are represented using NULL. */
-    char **stor_begin;
-    char **stor_end;
-    char **end;
+    const char **stor_begin;
+    const char **stor_end;
+    const char **end;
 } igraph_strvector_t;
 
 /**
@@ -87,6 +87,9 @@ IGRAPH_EXPORT igraph_error_t igraph_strvector_append(
     igraph_strvector_t *to, const igraph_strvector_t *from);
 IGRAPH_EXPORT igraph_error_t igraph_strvector_merge(
     igraph_strvector_t *to, igraph_strvector_t *from);
+IGRAPH_EXPORT void igraph_strvector_swap(igraph_strvector_t *v1, igraph_strvector_t *v2);
+IGRAPH_EXPORT igraph_error_t igraph_strvector_update(
+    igraph_strvector_t *to, const igraph_strvector_t *from);
 IGRAPH_EXPORT igraph_error_t igraph_strvector_resize(
     igraph_strvector_t* v, igraph_integer_t newsize);
 IGRAPH_EXPORT igraph_error_t igraph_strvector_push_back(igraph_strvector_t *v,

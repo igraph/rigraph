@@ -95,11 +95,16 @@ static igraph_error_t igraph_i_create_start_vectors(
  * Time complexity: O(|V|) for a graph with
  * |V| vertices (and no edges).
  */
-igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_integer_t n, igraph_bool_t directed, void *attr) {
+igraph_error_t igraph_empty_attrs(
+    igraph_t *graph, igraph_integer_t n, igraph_bool_t directed,
+    const igraph_attribute_record_list_t *attr
+) {
 
     if (n < 0) {
         IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
     }
+
+    memset(graph, 0, sizeof(igraph_t));
 
     graph->n = 0;
     graph->directed = directed;
@@ -121,7 +126,6 @@ igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_integer_t n, igraph_bo
     VECTOR(graph->is)[0] = 0;
 
     /* init attributes */
-    graph->attr = 0;
     IGRAPH_CHECK(igraph_i_attribute_init(graph, attr));
 
     /* add the vertices */
@@ -148,8 +152,7 @@ igraph_error_t igraph_empty_attrs(igraph_t *graph, igraph_integer_t n, igraph_bo
  * Time complexity: operating system specific.
  */
 void igraph_destroy(igraph_t *graph) {
-
-    IGRAPH_I_ATTRIBUTE_DESTROY(graph);
+    igraph_i_attribute_destroy(graph);
 
     igraph_i_property_cache_destroy(graph->cache);
     IGRAPH_FREE(graph->cache);
@@ -189,6 +192,8 @@ void igraph_destroy(igraph_t *graph) {
  */
 
 igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
+    memset(to, 0, sizeof(igraph_t));
+
     to->n = from->n;
     to->directed = from->directed;
     IGRAPH_CHECK(igraph_vector_int_init_copy(&to->from, &from->from));
@@ -210,7 +215,7 @@ igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
     IGRAPH_CHECK(igraph_i_property_cache_copy(to->cache, from->cache));
     IGRAPH_FINALLY(igraph_i_property_cache_destroy, to->cache);
 
-    IGRAPH_I_ATTRIBUTE_COPY(to, from, true, true, true); /* does IGRAPH_CHECK */
+    IGRAPH_CHECK(igraph_i_attribute_copy(to, from, true, true, true));
 
     IGRAPH_FINALLY_CLEAN(8);
     return IGRAPH_SUCCESS;
@@ -245,8 +250,10 @@ igraph_error_t igraph_copy(igraph_t *to, const igraph_t *from) {
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edges,
-                     void *attr) {
+igraph_error_t igraph_add_edges(
+    igraph_t *graph, const igraph_vector_int_t *edges,
+    const igraph_attribute_record_list_t *attr
+) {
     igraph_integer_t no_of_edges = igraph_vector_int_size(&graph->from);
     igraph_integer_t edges_to_add = igraph_vector_int_size(edges) / 2;
     igraph_integer_t new_no_of_edges;
@@ -378,7 +385,9 @@ igraph_error_t igraph_add_edges(igraph_t *graph, const igraph_vector_int_t *edge
  *
  * \example examples/simple/creation.c
  */
-igraph_error_t igraph_add_vertices(igraph_t *graph, igraph_integer_t nv, void *attr) {
+igraph_error_t igraph_add_vertices(
+    igraph_t *graph, igraph_integer_t nv, const igraph_attribute_record_list_t *attr
+) {
     igraph_integer_t ec = igraph_ecount(graph);
     igraph_integer_t vc = igraph_vcount(graph);
     igraph_integer_t new_vc;
@@ -605,7 +614,7 @@ igraph_error_t igraph_delete_edges(igraph_t *graph, igraph_es_t edges) {
 
 /**
  * \ingroup interface
- * \function igraph_delete_vertices_idx
+ * \function igraph_delete_vertices_map
  * \brief Removes some vertices (with all their edges) from the graph.
  *
  * </para><para>
@@ -620,12 +629,10 @@ igraph_error_t igraph_delete_edges(igraph_t *graph, igraph_es_t edges) {
  * \param graph The graph to work on.
  * \param vertices The IDs of the vertices to remove, in a vector. The vector
  *     may contain the same ID more than once.
- * \param idx An optional pointer to a vector that provides the mapping from
+ * \param map An optional pointer to a vector that provides the mapping from
  *     the vertex IDs \em before the removal to the vertex IDs \em after
- *     the removal, \em plus one. Zero is used to represent vertices that were
- *     removed during the operation. You can supply \c NULL here if you are not
- *     interested.
- * \param invidx An optional pointer to a vector that provides the mapping from
+ *     the removal. You can supply \c NULL here if you are not interested.
+ * \param invmap An optional pointer to a vector that provides the mapping from
  *     the vertex IDs \em after the removal to the vertex IDs \em before
  *     the removal. You can supply \c NULL here if you are not interested.
  * \return Error code:
@@ -633,12 +640,10 @@ igraph_error_t igraph_delete_edges(igraph_t *graph, igraph_es_t edges) {
  *
  * Time complexity: O(|V|+|E|), |V| and |E| are the number of vertices and
  * edges in the original graph.
- *
- * \example examples/simple/igraph_delete_vertices.c
  */
-igraph_error_t igraph_delete_vertices_idx(
-    igraph_t *graph, const igraph_vs_t vertices, igraph_vector_int_t *idx,
-    igraph_vector_int_t *invidx
+igraph_error_t igraph_delete_vertices_map(
+    igraph_t *graph, const igraph_vs_t vertices, igraph_vector_int_t *map,
+    igraph_vector_int_t *invmap
 ) {
     igraph_integer_t no_of_edges = igraph_ecount(graph);
     igraph_integer_t no_of_nodes = igraph_vcount(graph);
@@ -649,10 +654,10 @@ igraph_error_t igraph_delete_vertices_idx(
     igraph_integer_t i, j;
     igraph_integer_t remaining_vertices, remaining_edges;
 
-    if (idx) {
-        my_vertex_recoding = idx;
-        IGRAPH_CHECK(igraph_vector_int_resize(idx, no_of_nodes));
-        igraph_vector_int_null(idx);
+    if (map) {
+        my_vertex_recoding = map;
+        IGRAPH_CHECK(igraph_vector_int_resize(map, no_of_nodes));
+        igraph_vector_int_null(map);
     } else {
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vertex_recoding, no_of_nodes);
     }
@@ -673,24 +678,25 @@ igraph_error_t igraph_delete_vertices_idx(
     /* create vertex recoding vector */
     for (remaining_vertices = 0, i = 0; i < no_of_nodes; i++) {
         if (VECTOR(*my_vertex_recoding)[i] == 0) {
-            VECTOR(*my_vertex_recoding)[i] = remaining_vertices + 1;
+            VECTOR(*my_vertex_recoding)[i] = remaining_vertices;
             remaining_vertices++;
         } else {
-            VECTOR(*my_vertex_recoding)[i] = 0;
+            VECTOR(*my_vertex_recoding)[i] = -1;
         }
     }
     /* create edge recoding vector */
     for (remaining_edges = 0, i = 0; i < no_of_edges; i++) {
         igraph_integer_t from = VECTOR(graph->from)[i];
         igraph_integer_t to = VECTOR(graph->to)[i];
-        if (VECTOR(*my_vertex_recoding)[from] != 0 &&
-            VECTOR(*my_vertex_recoding)[to  ] != 0) {
+        if (VECTOR(*my_vertex_recoding)[from] >= 0 &&
+            VECTOR(*my_vertex_recoding)[to  ] >= 0) {
             VECTOR(edge_recoding)[i] = remaining_edges + 1;
             remaining_edges++;
         }
     }
 
     /* start creating the graph */
+    memset(&newgraph, 0, sizeof(igraph_t));
     newgraph.n = remaining_vertices;
     newgraph.directed = graph->directed;
 
@@ -707,8 +713,8 @@ igraph_error_t igraph_delete_vertices_idx(
         if (VECTOR(edge_recoding)[i] > 0) {
             igraph_integer_t from = VECTOR(graph->from)[i];
             igraph_integer_t to = VECTOR(graph->to  )[i];
-            VECTOR(newgraph.from)[j] = VECTOR(*my_vertex_recoding)[from] - 1;
-            VECTOR(newgraph.to  )[j] = VECTOR(*my_vertex_recoding)[to] - 1;
+            VECTOR(newgraph.from)[j] = VECTOR(*my_vertex_recoding)[from];
+            VECTOR(newgraph.to  )[j] = VECTOR(*my_vertex_recoding)[to];
             j++;
         }
     }
@@ -731,8 +737,9 @@ igraph_error_t igraph_delete_vertices_idx(
     IGRAPH_FINALLY(igraph_i_property_cache_destroy, newgraph.cache);
 
     /* attributes */
-    IGRAPH_I_ATTRIBUTE_COPY(&newgraph, graph,
-                            /*graph=*/ 1, /*vertex=*/0, /*edge=*/0);
+    IGRAPH_CHECK(igraph_i_attribute_copy(
+        &newgraph, graph, /* graph= */ true, /* vertex= */ false, /* edge= */ false
+    ));
 
     /* at this point igraph_destroy can take over the responsibility of
      * deallocating the graph */
@@ -744,13 +751,11 @@ igraph_error_t igraph_delete_vertices_idx(
         IGRAPH_VECTOR_INT_INIT_FINALLY(&iidx, remaining_vertices);
         for (i = 0; i < no_of_nodes; i++) {
             igraph_integer_t jj = VECTOR(*my_vertex_recoding)[i];
-            if (jj != 0) {
-                VECTOR(iidx)[ jj - 1 ] = i;
+            if (jj >= 0) {
+                VECTOR(iidx)[ jj ] = i;
             }
         }
-        IGRAPH_CHECK(igraph_i_attribute_permute_vertices(graph,
-                     &newgraph,
-                     &iidx));
+        IGRAPH_CHECK(igraph_i_attribute_permute_vertices(graph, &newgraph, &iidx));
         IGRAPH_CHECK(igraph_vector_int_resize(&iidx, remaining_edges));
         for (i = 0; i < no_of_edges; i++) {
             igraph_integer_t jj = VECTOR(edge_recoding)[i];
@@ -770,18 +775,17 @@ igraph_error_t igraph_delete_vertices_idx(
 
     IGRAPH_FINALLY_CLEAN(3);
 
-    /* TODO: this is duplicate */
-    if (invidx) {
-        IGRAPH_CHECK(igraph_vector_int_resize(invidx, remaining_vertices));
+    if (invmap) {
+        IGRAPH_CHECK(igraph_vector_int_resize(invmap, remaining_vertices));
         for (i = 0; i < no_of_nodes; i++) {
             igraph_integer_t newid = VECTOR(*my_vertex_recoding)[i];
-            if (newid != 0) {
-                VECTOR(*invidx)[newid - 1] = i;
+            if (newid >= 0) {
+                VECTOR(*invmap)[newid] = i;
             }
         }
     }
 
-    if (!idx) {
+    if (!map) {
         igraph_vector_int_destroy(my_vertex_recoding);
         IGRAPH_FINALLY_CLEAN(1);
     }
