@@ -802,35 +802,39 @@ random.graph.game <- erdos.renyi.game
 #' @examples
 #'
 #' ## The simple generator
-#' g <- sample_degseq(rep(2, 100))
-#' degree(g)
-#' is_simple(g) # sometimes TRUE, but can be FALSE
-#' g2 <- sample_degseq(1:10, 10:1)
-#' degree(g2, mode = "out")
-#' degree(g2, mode = "in")
+#' undirected_graph <- sample_degseq(rep(2, 100))
+#' degree(undirected_graph)
+#' is_simple(undirected_graph) # sometimes TRUE, but can be FALSE
+#'
+#'
+#' directed_graph <- sample_degseq(1:10, 10:1)
+#' degree(directed_graph, mode = "out")
+#' degree(directed_graph, mode = "in")
 #'
 #' ## The vl generator
-#' g3 <- sample_degseq(rep(2, 100), method = "vl")
-#' degree(g3)
-#' is_simple(g3) # always TRUE
+#' vl_graph <- sample_degseq(rep(2, 100), method = "vl")
+#' degree(vl_graph)
+#' is_simple(vl_graph) # always TRUE
 #'
 #' ## Exponential degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
-#' degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
-#' if (sum(degs) %% 2 != 0) {
-#'   degs[1] <- degs[1] + 1
+#' exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+#' is_exponential_degrees_sum_odd <- (sum(exponential_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' g4 <- sample_degseq(degs, method = "vl")
-#' all(degree(g4) == degs)
+#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' all(degree(exp_vl_graph) == exponential_degrees)
 #'
 #' ## Power-law degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
-#' degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
-#' if (sum(degs) %% 2 != 0) {
-#'   degs[1] <- degs[1] + 1
+#' powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+#' is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 #' }
-#' g5 <- sample_degseq(degs, method = "vl")
-#' all(degree(g5) == degs)
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 sample_degseq <- function(out.deg, in.deg = NULL,
                           method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
   method <- igraph.match.arg(method)
