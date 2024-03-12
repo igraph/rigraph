@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9014
+
+  - Internal changes only.
+
+
 # igraph 2.0.2.9013
 
 ## Continuous integration
