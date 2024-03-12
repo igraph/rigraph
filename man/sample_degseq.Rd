@@ -87,8 +87,22 @@ degree(vl_graph)
 is_simple(vl_graph) # always TRUE
 
 ## Exponential degree distribution
-## Note, that we correct the degree sequence if its sum is odd
-exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+## We fix the seed as there's no guarantee
+##  that randomly picked integers will form a graphical degree sequence
+## (i.e. that there's a graph with these degrees)
+## withr::with_seed(42, {
+## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+## })
+exponential_degrees <- c(
+  5L, 6L, 1L, 4L, 3L, 2L, 3L, 1L, 3L, 3L, 2L, 3L, 6L, 1L, 2L,
+  6L, 8L, 1L, 2L, 2L, 5L, 1L, 10L, 6L, 1L, 2L, 1L, 5L, 2L, 4L,
+  3L, 4L, 1L, 3L, 1L, 4L, 1L, 1L, 5L, 2L, 1L, 2L, 1L, 8L, 2L, 7L,
+  5L, 3L, 8L, 2L, 1L, 1L, 2L, 4L, 1L, 3L, 3L, 1L, 1L, 2L, 3L, 9L,
+  3L, 2L, 4L, 1L, 1L, 4L, 3L, 1L, 1L, 1L, 1L, 2L, 1L, 3L, 1L, 1L,
+  2L, 1L, 2L, 1L, 1L, 3L, 3L, 2L, 1L, 1L, 1L, 1L, 3L, 1L, 1L, 6L,
+  6L, 3L, 1L, 2L, 3L, 2L
+)
+## Note, that we'd have to correct the degree sequence if its sum is odd
 is_exponential_degrees_sum_odd <- (sum(exponential_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   exponential_degrees[1] <- exponential_degrees[1] + 1
@@ -96,15 +110,73 @@ if (is_exponential_degrees_sum_odd) {
 exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
 all(degree(exp_vl_graph) == exponential_degrees)
 
+## An example that does not work
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+## withr::with_seed(11, {
+## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+## })
+exponential_degrees <- c(
+  1L, 1L, 2L, 1L, 1L, 7L, 1L, 1L, 5L, 1L, 1L, 2L, 5L, 4L, 3L,
+  2L, 2L, 1L, 1L, 2L, 1L, 3L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 2L,
+  1L, 2L, 1L, 4L, 3L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 3L, 1L, 4L, 3L,
+  1L, 2L, 4L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 4L, 1L, 2L, 1L, 3L, 1L,
+  2L, 3L, 1L, 1L, 2L, 1L, 2L, 3L, 2L, 2L, 1L, 6L, 2L, 1L, 1L, 1L,
+  1L, 1L, 2L, 2L, 1L, 4L, 2L, 1L, 3L, 4L, 1L, 1L, 3L, 1L, 2L, 4L,
+  1L, 3L, 1L, 2L, 1L
+)
+## Note, that we'd have to correct the degree sequence if its sum is odd
+is_exponential_degrees_sum_odd <- (sum(exponential_degrees) \%\% 2 != 0)
+if (is_exponential_degrees_sum_odd) {
+  exponential_degrees[1] <- exponential_degrees[1] + 1
+}
+exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+\dontshow{\}) # examplesIf}
 ## Power-law degree distribution
+## We fix the seed as there's no guarantee
+##  that randomly picked integers will form a graphical degree sequence
+## (i.e. that there's a graph with these degrees)
+## withr::with_seed(1, {
+##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+## })
+powerlaw_degrees <- c(
+  1L, 1L, 1L, 6L, 1L, 6L, 10L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 3L,
+  1L, 2L, 43L, 1L, 3L, 9L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 4L, 1L,
+  1L, 1L, 1L, 1L, 3L, 2L, 3L, 1L, 2L, 1L, 3L, 2L, 3L, 1L, 1L, 3L,
+  1L, 1L, 2L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 7L, 1L,
+  1L, 1L, 2L, 1L, 1L, 3L, 1L, 5L, 1L, 4L, 1L, 1L, 1L, 5L, 4L, 1L,
+  3L, 13L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L,
+  5L, 3L, 3L, 1L, 1L, 3L, 1L
+)
 ## Note, that we correct the degree sequence if its sum is odd
-powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) \%\% 2 != 0)
 if (is_exponential_degrees_sum_odd) {
   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 }
 powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
 all(degree(powerlaw_vl_graph) == powerlaw_degrees)
+
+## An example that does not work
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+## withr::with_seed(2, {
+##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+## })
+powerlaw_degrees <- c(
+  1L, 2L, 1L, 1L, 10L, 10L, 1L, 4L, 1L, 1L, 1L, 1L, 2L, 1L, 1L,
+  4L, 21L, 1L, 1L, 1L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 14L, 1L,
+  1L, 1L, 3L, 4L, 1L, 2L, 4L, 1L, 2L, 1L, 25L, 1L, 1L, 1L, 10L,
+  3L, 19L, 1L, 1L, 3L, 1L, 1L, 2L, 8L, 1L, 3L, 3L, 36L, 2L, 2L,
+  3L, 5L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L,
+  1L, 4L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 4L, 18L, 1L, 2L, 1L, 21L,
+  1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L
+)
+## Note, that we correct the degree sequence if its sum is odd
+is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) \%\% 2 != 0)
+if (is_exponential_degrees_sum_odd) {
+  powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
+}
+powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+all(degree(powerlaw_vl_graph) == powerlaw_degrees)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
