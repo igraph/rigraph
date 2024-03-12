@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2.9015</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,39 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.2.9015" id="igraph-2029015">igraph 2.0.2.9015<a class="anchor" aria-label="anchor" href="#igraph-2029015"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-0-2-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-2-9015"></a></h3>
+<ul><li><p>Install lock workflow to lock stale discussions after one year (<a href="https://github.com/igraph/rigraph/issues/1304" class="external-link">#1304</a>).</p></li>
+<li><p>Work around <a href="https://github.com/igraph/igraph/pull/2527" class="external-link uri">https://github.com/igraph/igraph/pull/2527</a>.</p></li>
+<li><p>Update revdepcheck results.</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9" class="email">igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9</a>.</p></li>
+<li><p>Trigger update of <code>src/sources.mk</code>.</p></li>
+<li><p>Add generated C file.</p></li>
+<li><p>Make Docker optional.</p></li>
+<li><p>Remove stale rules.</p></li>
+<li><p>Generate all R files.</p></li>
+<li><p>Avoid <code>-ti</code> in <code>docker run</code> to allow running on CI/CD.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-0-2-9015">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-2-9015"></a></h3>
+<ul><li><p>Avoid running vendoring PR for PRs.</p></li>
+<li><p>Don’t check package size.</p></li>
+<li><p>Clean.</p></li>
+<li><p>Clean working directory.</p></li>
+<li><p>Vendor after installing.</p></li>
+<li><p>Add missing packages.</p></li>
+<li><p>Include actions used elsewhere.</p></li>
+<li><p>Automate vendoring.</p></li>
+<li><p>Really use only three version components.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-0-2-9015">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-2-9015"></a></h3>
+<ul><li><p>Make <code><a href="https://rdrr.io/r/grDevices/x11.html" class="external-link">x11()</a></code> usage in example happen only in interactive sessions (<a href="https://github.com/igraph/rigraph/issues/1301" class="external-link">#1301</a>).</p></li>
+<li><p>Tweaks from attempted CRAN release.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.2.9014" id="igraph-2029014">igraph 2.0.2.9014<a class="anchor" aria-label="anchor" href="#igraph-2029014"></a></h2>
 <ul><li>Internal changes only.</li>
