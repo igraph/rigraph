@@ -36,10 +36,6 @@ jobs:
 
       - uses: ./.github/workflows/git-identity
 
-      - run: |
-          tools/update-cigraph.sh .git/igraph
-          rm -rf .git/igraph
-
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
@@ -53,6 +49,10 @@ jobs:
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - run: |
+          tools/update-cigraph.sh .git/igraph
+          rm -rf .git/igraph
 
       - uses: ./.github/workflows/check
         with:
