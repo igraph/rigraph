@@ -2,79 +2,44 @@
 
 # igraph 2.0.3
 
+See <https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md> for a complete changelog of the bundled C core, and <https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84> for the changes since the igraph 2.0.1.
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
+
+## Features
+
+- GMP is no longer a dependency (#1256), libxml2 (#1282) and glpk are optional.
+- Update vendored sources to igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9.
+- New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
+
 ## Bug fixes
 
 - Fix `rglplot(edge_label = )` (#1267).
 
-## Features
-
-- New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
-
-## Chore
-
-- Install lock workflow to lock stale discussions after one year (#1304).
-- Work around https://github.com/igraph/igraph/pull/2527.
-- Update revdepcheck results.
-- Update vendored sources to igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9.
-- Trigger update of `src/sources.mk`.
-- Add generated C file.
-- Make Docker optional.
-- Remove stale rules.
-- Generate all R files.
-- Avoid `-ti` in `docker run` to allow running on CI/CD.
-- Update revdepchecks.
-- Make libxml2 optional (#1282).
-- Model vendoring after duckdb (#1276).
-- Fix drift after code generation (#1278).
-- Move `.mk` files to root to fix vendoring (#1275).
-- Ignore `CRAN-SUBMISSION`.
-- Improve bug report template.
-- Attempt adding link to issue template chooser.
-- Fix bug report template.
-- Update bug report template.
-- Update issue template.
-- Typo in installation troubleshooting.
-
 ## Continuous integration
 
-- Avoid running vendoring PR for PRs.
-- Don't check package size.
-- Clean.
-- Clean working directory.
-- Vendor after installing.
-- Add missing packages.
-- Include actions used elsewhere.
-- Automate vendoring.
-- Really use only three version components.
-- `CITATION.cff` contains only the first three version components.
 - Run examples with sanitizer (#1288).
 - Add scheduled builds.
 
 ## Documentation
 
 - Make `x11()` usage in example happen only in interactive sessions (#1301).
-- Tweaks from attempted CRAN release.
 - Remove misleading comment about warning given as no warning is given (#1294).
 - Improve `min_st_separators()` documentation (#1264).
-- Add link to discussion forum (#1279).
-- Add logo (#1280).
-- Add code finding duplicate seealso, and use it (#1270).
-- Rm duplicate seealso from sample_pa.Rd (#1268).
+- Add link to discussion forum (#1279) and logo (#1280).
+- Add code finding duplicate `@seealso`, and use it (#1270).
+- Remove duplicate `@seealso` from `?sample_pa` (#1268).
 - Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
 - Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
-- GMP is no longer a dependency (#1256).
-- Split is_bipartite() manual page from other manual page (#1230).
+- Split `is_bipartite()` manual page from other manual page (#1230).
+- Improve bug report template.
+- `CITATION.cff` contains only the first three version components.
+- Install lock workflow to lock stale discussions after one year (#1304).
 
-## Refactoring
+## Internal
 
-- Replace use of deprecated barabasi.game() with sample_pa() (#1291).
+- Replace use of deprecated `barabasi.game()` with `sample_pa()` (#1291).
 - Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
-
-## Uncategorized
-
-- Internal changes only.
-- Source files for vendored libraries (#1156).
-- Merge branch 'cran-2.0.2'.
 
 
 # igraph 2.0.2
