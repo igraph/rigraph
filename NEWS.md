@@ -35,7 +35,7 @@
 
 ## Chore
 
-  - Make libxml optional (#1282).
+  - Make libxml2 optional (#1282).
 
 
 # igraph 2.0.2.9010

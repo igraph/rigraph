@@ -65,8 +65,6 @@ graphopt uses physical analogies for defining attracting and repelling
 forces among the vertices and then the physical system is simulated until it
 reaches an equilibrium. (There is no simulated annealing or anything like
 that, so a stable fixed point is not guaranteed.)
-
-See also \url{https://www.schmuhl.org/graphopt/} for the original graphopt.
 }
 \seealso{
 Other graph layouts: 
