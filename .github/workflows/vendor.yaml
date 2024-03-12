@@ -51,6 +51,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - run: |
+          git clean -fdx
           tools/update-cigraph.sh .git/igraph
           rm -rf .git/igraph
 
