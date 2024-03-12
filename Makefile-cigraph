@@ -4,6 +4,7 @@
 PYTHON ?= python3
 PYVENV ?= .venv
 STIMULUS ?= $(PYVENV)/bin/stimulus
+DOCKER ?= docker run --rm --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
 
 all: pre_build
 
@@ -27,7 +28,6 @@ PARSER := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
 PARSER1 := $(patsubst src/%.l, src/%.c, $(PARSER))
 PARSER2 := $(patsubst src/%.y, src/%.c, $(PARSER1))
 
-DOCKER=docker run --rm --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
 YACC=$(DOCKER) bison -b yy -d
 LEX=$(DOCKER) flex
 
