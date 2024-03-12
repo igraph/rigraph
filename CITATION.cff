@@ -86,7 +86,7 @@ references:
   - family-names: Müller
     given-names: Kirill
   year: '2024'
-  notes: R package version 2.0.2.9013
+  notes: R package version 2.0.2.9014
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
