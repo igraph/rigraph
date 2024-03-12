@@ -27,7 +27,7 @@ PARSER := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
 PARSER1 := $(patsubst src/%.l, src/%.c, $(PARSER))
 PARSER2 := $(patsubst src/%.y, src/%.c, $(PARSER1))
 
-DOCKER=docker run --rm -ti --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
+DOCKER=docker run --rm --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
 YACC=$(DOCKER) bison -b yy -d
 LEX=$(DOCKER) flex
 
