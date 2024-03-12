@@ -1,5 +1,56 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.2.9015
+
+## Chore
+
+- Install lock workflow to lock stale discussions after one year (#1304).
+
+- Work around https://github.com/igraph/igraph/pull/2527.
+
+- Update revdepcheck results.
+
+- Update vendored sources to igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9.
+
+- Trigger update of `src/sources.mk`.
+
+- Add generated C file.
+
+- Make Docker optional.
+
+- Remove stale rules.
+
+- Generate all R files.
+
+- Avoid `-ti` in `docker run` to allow running on CI/CD.
+
+## Continuous integration
+
+- Avoid running vendoring PR for PRs.
+
+- Don't check package size.
+
+- Clean.
+
+- Clean working directory.
+
+- Vendor after installing.
+
+- Add missing packages.
+
+- Include actions used elsewhere.
+
+- Automate vendoring.
+
+- Really use only three version components.
+
+## Documentation
+
+- Make `x11()` usage in example happen only in interactive sessions (#1301).
+
+- Tweaks from attempted CRAN release.
+
+
 # igraph 2.0.2.9014
 
   - Internal changes only.
