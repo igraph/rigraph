@@ -43,18 +43,19 @@ jobs:
           # Customize with your own code
           # See https://docs.ropensci.org/cffr/articles/cffr.html
 
-          version <- desc::desc_get_version()
-          components <- unclass(version)[[1]]
-          length(components) <- 3
-          patch_version <- paste(components, collapse = ".")
-
           # Write your own keys
-          mykeys <- list(version = patch_version)
+          mykeys <- list()
 
           # Create your CITATION.cff file
           cff_write(keys = mykeys)
 
         shell: Rscript {0}
+
+      - name: Use three-component version numbers
+        # Can't easily use keys in cffr above because need to update reference[[1]]$notes
+        run: |
+          sed -r -i '' 's/([0-9]+[.][0-9]+[.][0-9]+)[.]9[0-9][0-9][0-9]/\1/' CITATION.cff
+        shell: bash
 
       - name: Commit results
         run: |
