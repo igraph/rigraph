@@ -43,7 +43,6 @@ if [ $(git status --porcelain -- src/vendor | wc -l) -le 0 ]; then
   exit 0
 fi
 
-# https://github.com/igraph/rigraph/issues/1261
 make -f Makefile-cigraph
 
 R -q -e 'cpp11::cpp_register()'
