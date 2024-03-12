@@ -48,7 +48,7 @@ make -f Makefile-cigraph
 
 R -q -e 'cpp11::cpp_register()'
 
-git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp
+git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp src/rinterface.c
 
 (
   echo "chore: Update vendored sources to igraph/igraph@$commit"
