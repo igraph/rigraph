@@ -166,7 +166,7 @@ src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 	cat object_files >> $@
 
 pre_build: venv patches $(RSRC) \
-	$(CGEN) $(RAY2) $(ARPACK2) $(UUID2) \
+	$(CGEN) $(RGEN) $(RAY2) $(ARPACK2) $(UUID2) \
 	$(PARSER2)
 
 clean:
