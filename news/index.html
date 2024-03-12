@@ -61,80 +61,42 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.3" id="igraph-203">igraph 2.0.3<a class="anchor" aria-label="anchor" href="#igraph-203"></a></h2>
+<p>See <a href="https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog of the bundled C core, and <a href="https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84" class="external-link uri">https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84</a> for the changes since the igraph 2.0.1. (A permanent link to the most recent changelog of the C core used in the R package is <a href="https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md</a>.)</p>
+<div class="section level3">
+<h3 id="features-2-0-3">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3"></a></h3>
+<ul><li>GMP is no longer a dependency (<a href="https://github.com/igraph/rigraph/issues/1256" class="external-link">#1256</a>), libxml2 (<a href="https://github.com/igraph/rigraph/issues/1282" class="external-link">#1282</a>) and glpk are optional.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9" class="email">igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9</a>.</li>
+<li>New <code><a href="../reference/voronoi_cells.html">voronoi_cells()</a></code> to compute the Voronoi partitioning of a graph (<a href="https://github.com/igraph/rigraph/issues/1173" class="external-link">#1173</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-2-0-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3"></a></h3>
 <ul><li>Fix <code>rglplot(edge_label = )</code> (<a href="https://github.com/igraph/rigraph/issues/1267" class="external-link">#1267</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="features-2-0-3">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3"></a></h3>
-<ul><li>New <code><a href="../reference/voronoi_cells.html">voronoi_cells()</a></code> to compute the Voronoi partitioning of a graph (<a href="https://github.com/igraph/rigraph/issues/1173" class="external-link">#1173</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-3">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3"></a></h3>
-<ul><li>Install lock workflow to lock stale discussions after one year (<a href="https://github.com/igraph/rigraph/issues/1304" class="external-link">#1304</a>).</li>
-<li>Work around <a href="https://github.com/igraph/igraph/pull/2527" class="external-link uri">https://github.com/igraph/igraph/pull/2527</a>.</li>
-<li>Update revdepcheck results.</li>
-<li>Update vendored sources to <a href="mailto:igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9" class="email">igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9</a>.</li>
-<li>Trigger update of <code>src/sources.mk</code>.</li>
-<li>Add generated C file.</li>
-<li>Make Docker optional.</li>
-<li>Remove stale rules.</li>
-<li>Generate all R files.</li>
-<li>Avoid <code>-ti</code> in <code>docker run</code> to allow running on CI/CD.</li>
-<li>Update revdepchecks.</li>
-<li>Make libxml2 optional (<a href="https://github.com/igraph/rigraph/issues/1282" class="external-link">#1282</a>).</li>
-<li>Model vendoring after duckdb (<a href="https://github.com/igraph/rigraph/issues/1276" class="external-link">#1276</a>).</li>
-<li>Fix drift after code generation (<a href="https://github.com/igraph/rigraph/issues/1278" class="external-link">#1278</a>).</li>
-<li>Move <code>.mk</code> files to root to fix vendoring (<a href="https://github.com/igraph/rigraph/issues/1275" class="external-link">#1275</a>).</li>
-<li>Ignore <code>CRAN-SUBMISSION</code>.</li>
-<li>Improve bug report template.</li>
-<li>Attempt adding link to issue template chooser.</li>
-<li>Fix bug report template.</li>
-<li>Update bug report template.</li>
-<li>Update issue template.</li>
-<li>Typo in installation troubleshooting.</li>
-</ul></div>
-<div class="section level3">
 <h3 id="continuous-integration-2-0-3">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3"></a></h3>
-<ul><li>Avoid running vendoring PR for PRs.</li>
-<li>Don’t check package size.</li>
-<li>Clean.</li>
-<li>Clean working directory.</li>
-<li>Vendor after installing.</li>
-<li>Add missing packages.</li>
-<li>Include actions used elsewhere.</li>
-<li>Automate vendoring.</li>
-<li>Really use only three version components.</li>
-<li>
-<code>CITATION.cff</code> contains only the first three version components.</li>
-<li>Run examples with sanitizer (<a href="https://github.com/igraph/rigraph/issues/1288" class="external-link">#1288</a>).</li>
+<ul><li>Run examples with sanitizer (<a href="https://github.com/igraph/rigraph/issues/1288" class="external-link">#1288</a>).</li>
 <li>Add scheduled builds.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-2-0-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3"></a></h3>
 <ul><li>Make <code><a href="https://rdrr.io/r/grDevices/x11.html" class="external-link">x11()</a></code> usage in example happen only in interactive sessions (<a href="https://github.com/igraph/rigraph/issues/1301" class="external-link">#1301</a>).</li>
-<li>Tweaks from attempted CRAN release.</li>
 <li>Remove misleading comment about warning given as no warning is given (<a href="https://github.com/igraph/rigraph/issues/1294" class="external-link">#1294</a>).</li>
 <li>Improve <code><a href="../reference/min_st_separators.html">min_st_separators()</a></code> documentation (<a href="https://github.com/igraph/rigraph/issues/1264" class="external-link">#1264</a>).</li>
-<li>Add link to discussion forum (<a href="https://github.com/igraph/rigraph/issues/1279" class="external-link">#1279</a>).</li>
-<li>Add logo (<a href="https://github.com/igraph/rigraph/issues/1280" class="external-link">#1280</a>).</li>
-<li>Add code finding duplicate seealso, and use it (<a href="https://github.com/igraph/rigraph/issues/1270" class="external-link">#1270</a>).</li>
-<li>Rm duplicate seealso from sample_pa.Rd (<a href="https://github.com/igraph/rigraph/issues/1268" class="external-link">#1268</a>).</li>
+<li>Add link to discussion forum (<a href="https://github.com/igraph/rigraph/issues/1279" class="external-link">#1279</a>) and logo (<a href="https://github.com/igraph/rigraph/issues/1280" class="external-link">#1280</a>).</li>
+<li>Add code finding duplicate <code>@seealso</code>, and use it (<a href="https://github.com/igraph/rigraph/issues/1270" class="external-link">#1270</a>).</li>
+<li>Remove duplicate <code>@seealso</code> from <code><a href="../reference/sample_pa.html">?sample_pa</a></code> (<a href="https://github.com/igraph/rigraph/issues/1268" class="external-link">#1268</a>).</li>
 <li>Remove incorrect claim about handling of complete graphs by <code><a href="../reference/is_separator.html">is_separator()</a></code> and <code><a href="../reference/is_min_separator.html">is_min_separator()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1263" class="external-link">#1263</a>).</li>
 <li>Fix error messages mentioning to mention <code><a href="../reference/upgrade_graph.html">upgrade_graph()</a></code> instead of the nonexisting <code>upgrade_version()</code> (<a href="https://github.com/igraph/rigraph/issues/1252" class="external-link">#1252</a>).</li>
-<li>GMP is no longer a dependency (<a href="https://github.com/igraph/rigraph/issues/1256" class="external-link">#1256</a>).</li>
-<li>Split is_bipartite() manual page from other manual page (<a href="https://github.com/igraph/rigraph/issues/1230" class="external-link">#1230</a>).</li>
+<li>Split <code><a href="../reference/is_bipartite.html">is_bipartite()</a></code> manual page from other manual page (<a href="https://github.com/igraph/rigraph/issues/1230" class="external-link">#1230</a>).</li>
+<li>Improve bug report template.</li>
+<li>
+<code>CITATION.cff</code> contains only the first three version components.</li>
+<li>Install lock workflow to lock stale discussions after one year (<a href="https://github.com/igraph/rigraph/issues/1304" class="external-link">#1304</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="refactoring-2-0-3">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3"></a></h3>
-<ul><li>Replace use of deprecated barabasi.game() with sample_pa() (<a href="https://github.com/igraph/rigraph/issues/1291" class="external-link">#1291</a>).</li>
+<h3 id="internal-2-0-3">Internal<a class="anchor" aria-label="anchor" href="#internal-2-0-3"></a></h3>
+<ul><li>Replace use of deprecated <code><a href="../reference/barabasi.game.html">barabasi.game()</a></code> with <code><a href="../reference/sample_pa.html">sample_pa()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1291" class="external-link">#1291</a>).</li>
 <li>Auto-generate <code><a href="../reference/are_adjacent.html">are_adjacent()</a></code>, avoid deprecated <code>igraph_are_connected()</code> C function (<a href="https://github.com/igraph/rigraph/issues/1254" class="external-link">#1254</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3"></a></h3>
-<ul><li>Internal changes only.</li>
-<li>Source files for vendored libraries (<a href="https://github.com/igraph/rigraph/issues/1156" class="external-link">#1156</a>).</li>
-<li>Merge branch ‘cran-2.0.2’.</li>
 </ul></div>
 </div>
     <div class="section level2">
