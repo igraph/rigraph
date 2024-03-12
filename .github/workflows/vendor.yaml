@@ -49,7 +49,7 @@ jobs:
           install-r: false
           cache-version: vendor
           needs: check
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, cpp11, decor
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
