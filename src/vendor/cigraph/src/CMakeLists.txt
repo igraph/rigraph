@@ -231,6 +231,7 @@ add_library(
   operators/difference.c
   operators/disjoint_union.c
   operators/intersection.c
+  operators/join.c
   operators/misc_internal.c
   operators/permute.c
   operators/reverse.c
@@ -258,6 +259,7 @@ add_library(
   paths/widest_paths.c
 
   properties/basic_properties.c
+  properties/complete.c
   properties/constraint.c
   properties/convergence_degree.c
   properties/dag.c

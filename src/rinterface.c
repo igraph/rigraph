@@ -8798,6 +8798,34 @@ SEXP R_igraph_list_triangles(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_join                                /
+/-------------------------------------------*/
+SEXP R_igraph_join(SEXP left, SEXP right) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_t c_left;
+  igraph_t c_right;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(left, &c_left);
+  R_SEXP_to_igraph(right, &c_right);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_join(&c_res, &c_left, &c_right));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_induced_subgraph_map                /
 /-------------------------------------------*/
 SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
@@ -11114,6 +11142,30 @@ SEXP R_igraph_tree_from_parent_vector(SEXP parents, SEXP type) {
   igraph_vector_int_destroy(&c_parents);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_complete                         /
+/-------------------------------------------*/
+SEXP R_igraph_is_complete(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_complete(&c_graph, &c_res));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);
