@@ -43,15 +43,16 @@ if [ $(git status --porcelain -- src/vendor | wc -l) -le 0 ]; then
   exit 0
 fi
 
-# https://github.com/igraph/rigraph/issues/1261
-make -f Makefile-cigraph -B
+make -f Makefile-cigraph
 
 R -q -e 'cpp11::cpp_register()'
 
-git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp
+git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp src/rinterface.c
 
 (
   echo "chore: Update vendored sources to igraph/igraph@$commit"
   echo
   git -C "$duckdir" log --first-parent --format="%s" ${base}..${commit} | sed -r 's%(#[0-9]+)%igraph/igraph\1%g'
 ) | git commit --file /dev/stdin
+
+git cherry-pick b6f576d25dc2c02dfeb2979716ef4809e4404c99 --no-edit

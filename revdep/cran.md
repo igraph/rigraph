@@ -1,7 +1,21 @@
 ## revdepcheck results
 
-We checked 33 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 827 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 0 packages
+ * We saw 1 new problems
+ * We failed to check 4 packages
 
+Issues with CRAN packages are summarised below.
+
+### New problems
+(This reports the first line of each new failure)
+
+* qdap
+  checking installed package size ... NOTE
+
+### Failed to check
+
+* multinma  (NA)
+* Seurat    (NA)
+* skynet    (NA)
+* streamDAG (NA)

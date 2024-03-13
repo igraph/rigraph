@@ -1421,7 +1421,7 @@ tkigraph <- function() {
       type = "boolean", default = "TRUE"
     )
   )
-  g <- barabasi.game(n = read$n, m = read$m, directed = read$directed)
+  g <- sample_pa(n = read$n, m = read$m, directed = read$directed)
   g <- set_graph_attr(g, "name", "Scale-free random graph")
   .tkigraph.add.graph(g)
 }

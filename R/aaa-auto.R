@@ -2835,6 +2835,18 @@ list_triangles_impl <- function(graph) {
   res
 }
 
+join_impl <- function(left, right) {
+  # Argument checks
+  ensure_igraph(left)
+  ensure_igraph(right)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_join, left, right)
+
+  res
+}
+
 induced_subgraph_map_impl <- function(graph, vids, impl) {
   # Argument checks
   ensure_igraph(graph)
@@ -3740,6 +3752,17 @@ tree_from_parent_vector_impl <- function(parents, type=c("out", "in", "undirecte
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_tree_from_parent_vector, parents, type)
+
+  res
+}
+
+is_complete_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_complete, graph)
 
   res
 }

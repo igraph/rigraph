@@ -51,6 +51,12 @@ jobs:
 
         shell: Rscript {0}
 
+      - name: Use three-component version numbers
+        # Can't easily use keys in cffr above because need to update reference[[1]]$notes
+        run: |
+          sed -r -i '' 's/([0-9]+[.][0-9]+[.][0-9]+)[.]9[0-9][0-9][0-9]/\1/' CITATION.cff
+        shell: bash
+
       - name: Commit results
         run: |
           git config --local user.name "github-actions[bot]"
