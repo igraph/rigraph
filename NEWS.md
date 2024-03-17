@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9002
+
+## Chore
+
+- Work around https://github.com/igraph/igraph/pull/2527.
+
+- Apply patch after vendoring.
+
+- Update vendored sources to igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472.
+
+
 # igraph 2.0.3.9001
 
 - Internal changes only.
