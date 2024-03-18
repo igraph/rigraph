@@ -48,3 +48,20 @@ test_that("eccentricity() works -- lifecycle", {
 
 })
 
+test_that("graph_center() works", {
+  withr::local_seed(42)
+  g <- make_tree(100, 7)
+  expect_equal(as.numeric(graph_center(g)), c(1, 2))
+  expect_equal(as.numeric(graph_center(g, mode = "in")), 1)
+  expect_equal(as.numeric(graph_center(g, mode = "out")), 16:100)
+
+})
+
+test_that("graph_center() works -- weights", {
+  g <- make_ring(10)
+  expect_equal(as.numeric(graph_center(g)), 1:10)
+
+  E(g)$weight <- seq_len(ecount(g))
+  expect_equal(as.numeric(graph_center(g)), 7)
+})
+
