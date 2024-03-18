@@ -1311,15 +1311,16 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #'
 #' pf <- matrix(c(1, 0, 0, 1), nrow = 2)
 #' g <- sample_pref(20, 2, pref.matrix = pf)
-#' \dontrun{
+#' @examplesIf rlang::is_installed("tcltk")
+#' # example code
+#'
 #' tkplot(g, layout = layout_with_fr)
-#' }
+#' @examples
 #'
 #' pf <- matrix(c(0, 1, 0, 0), nrow = 2)
 #' g <- sample_asym_pref(20, 2, pref.matrix = pf)
-#' \dontrun{
+#' @examplesIf rlang::is_installed("tcltk")
 #' tkplot(g, layout = layout_in_circle)
-#' }
 #'
 sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         fixed.sizes = FALSE,
