@@ -285,7 +285,30 @@ eccentricity <- eccentricity_dijkstra_impl
 #' radius(g)
 #' @family paths
 #' @export
-radius <- radius_dijkstra_impl
+radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+  if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.0.2",
+      "radius(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+}
 
 #' Central vertices of a graph
 #'
