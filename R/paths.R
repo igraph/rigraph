@@ -255,7 +255,30 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- eccentricity_dijkstra_impl
+eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+    if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.0.2",
+      "eccentricity(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+}
 
 
 #' Radius of a graph
