@@ -204,7 +204,7 @@ In addition to `make_empty_graph()`, `make_graph()`, and `make_graph_from_litera
 
 ```{r echo = TRUE}
 graph1 <- make_tree(127, 2, mode = "undirected")
-summary(g)
+summary(graph1)
 ```
 
 This generates a regular tree graph with 127 vertices, each vertex having two children. No matter how many times you call `make_tree()`, the generated graph will always be the same if you use the same parameters:
