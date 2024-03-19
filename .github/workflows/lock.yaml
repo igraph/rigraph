@@ -4,6 +4,7 @@ permissions:
   pull-requests: write
   discussions: write
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *"
 
