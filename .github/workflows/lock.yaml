@@ -17,7 +17,7 @@ jobs:
           github-token: ${{ github.token }}
           issue-inactive-days: "365"
           issue-lock-reason: ""
-          issue-lock-comment: >
+          issue-comment: >
             This old thread has been automatically locked. If you think you have
             found something related to this, please open a new issue and link to this
             old issue if necessary.
