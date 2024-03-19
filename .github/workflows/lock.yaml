@@ -1,5 +1,8 @@
 name: "Lock threads"
-
+permissions:
+  issues: write
+  pull-requests: write
+  discussions: write
 on:
   schedule:
     - cron: "0 0 * * *"
