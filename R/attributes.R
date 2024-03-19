@@ -338,16 +338,12 @@ set_graph_attr <- function(graph, name, value) {
 
   # Code that accesses g$layout can stay for now, revisit in 2029.
   if (name == "layout" && is.matrix(value)) {
-    if (ncol(value) == 2) {
-      lifecycle::deprecate_stop("2.0.3", "set_graph_attr(layout = 'matrix(...)')", details = "Using a matrix for the `layout` attribute is deprecated. Use vertex attributes `x` and `y` instead.")
-      value <- list(x = value[, 1], y = value[, 2])
-    } else if (ncol(value) == 3) {
-      lifecycle::deprecate_stop("2.0.3", "set_graph_attr(layout = 'matrix(...)')", details = "Using a matrix for the `layout` attribute is deprecated. Use vertex attributes `x`, `y` and `z` instead.")
-      value <- list(x = value[, 1], y = value[, 2], z = value[, 3])
-    } else {
-      lifecycle::deprecate_stop("2.0.3", "set_graph_attr(layout = 'matrix(...)')", details = "Using a matrix for the `layout` attribute is defunct. Use vertex attributes `x`, `y` and `z` instead.")
-    }
-
+    lifecycle::deprecate_stop(
+      "2.0.3",
+      "set_graph_attr(layout = 'matrix(...)')",
+      "set_vertex_attr(layout = )",
+      details = "Using a matrix for the `layout` attribute is deprecated. Set the vertex attribute `layout` instead."
+    )
     return(set_vertex_attr(graph, name, value))
   }
 
@@ -401,6 +397,8 @@ vertex_attr <- function(graph, name, index = V(graph)) {
     } else {
       vertex.attributes(graph, index = index)
     }
+  } else if (name == "layout") {
+    ...
   } else {
     myattr <-
       .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
@@ -479,6 +477,24 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   if (is.null(value)) {
     return(graph)
   }
+
+  if (name == "layout") {
+    if (ncol(value) == 2) {
+      value <- list(x = value[, 1], y = value[, 2])
+    } else if (ncol(value) == 3) {
+      value <- list(x = value[, 1], y = value[, 2], z = value[, 3])
+    } else {
+      lifecycle::deprecate_stop("2.0.3", "set_graph_attr(layout = 'matrix(...)')", details = "Using a matrix for the `layout` attribute is defunct. Use vertex attributes `x`, `y` and `z` instead.")
+    }
+
+    iwalk(value, function(x, name) {
+      set_vertex_attr(graph, name, value = x, index = index, check = check)
+    })
+
+    return(graph)
+  }
+
+
 
   # https://github.com/igraph/rigraph/issues/807
   # Checks if any of those classes is inherited from
