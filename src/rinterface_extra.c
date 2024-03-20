@@ -354,21 +354,21 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
     SET_VECTOR_ELT(gal, i, R_NilValue);
     switch (rec->type) {
     case IGRAPH_ATTRIBUTE_NUMERIC:
-      vec=(igraph_vector_t*) rec->value;
+      vec=(igraph_vector_t*) rec->value.as_vector;
       if (igraph_vector_size(vec) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_NUMERIC(1));
         REAL(VECTOR_ELT(gal, i))[0]=VECTOR(*vec)[0];
       }
       break;
     case IGRAPH_ATTRIBUTE_BOOLEAN:
-      log=(igraph_vector_bool_t*) rec->value;
+      log=(igraph_vector_bool_t*) rec->value.as_vector_bool;
       if (igraph_vector_bool_size(log) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_LOGICAL(1));
         LOGICAL(VECTOR_ELT(gal, i))[0]=VECTOR(*log)[0];
       }
       break;
     case IGRAPH_ATTRIBUTE_STRING:
-      strvec=(igraph_strvector_t*) rec->value;
+      strvec=(igraph_strvector_t*) rec->value.as_strvector;
       if (igraph_strvector_size(strvec) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_CHARACTER(1));
         SET_STRING_ELT(VECTOR_ELT(gal,i), 0, Rf_mkChar(igraph_strvector_get(strvec, 0)));
@@ -433,13 +433,13 @@ SEXP R_igraph_attribute_add_vertices_append1(igraph_vector_ptr_t *nattr,
 
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
-    len = igraph_vector_size(tmprec->value);
+    len = igraph_vector_size(tmprec->value.as_vector);
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    len = igraph_vector_bool_size(tmprec->value);
+    len = igraph_vector_bool_size(tmprec->value.as_vector_bool);
     break;
   case IGRAPH_ATTRIBUTE_STRING:
-    len = igraph_strvector_size(tmprec->value);
+    len = igraph_strvector_size(tmprec->value.as_strvector);
     break;
   case IGRAPH_ATTRIBUTE_OBJECT:
     igraph_error("R objects not implemented yet", __FILE__, __LINE__,
@@ -462,13 +462,13 @@ SEXP R_igraph_attribute_add_vertices_append1(igraph_vector_ptr_t *nattr,
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
     PROTECT(app=NEW_NUMERIC(nv));
-    igraph_vector_copy_to(tmprec->value, REAL(app));
+    igraph_vector_copy_to(tmprec->value.as_vector, REAL(app));
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value.as_vector_bool));
     break;
   default: /* IGRAPH_ATTRIBUTE_STRING */
-    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value.as_strvector));
     break;
   }
 
@@ -768,13 +768,13 @@ SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, igraph_int
 
   switch(tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
-    len = igraph_vector_size(tmprec->value);
+    len = igraph_vector_size(tmprec->value.as_vector);
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    len = igraph_vector_bool_size(tmprec->value);
+    len = igraph_vector_bool_size(tmprec->value.as_vector_bool);
     break;
   case IGRAPH_ATTRIBUTE_STRING:
-    len = igraph_strvector_size(tmprec->value);
+    len = igraph_strvector_size(tmprec->value.as_strvector);
     break;
   case IGRAPH_ATTRIBUTE_OBJECT:
     igraph_error("R objects not implemented yet", __FILE__, __LINE__,
@@ -797,13 +797,13 @@ SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, igraph_int
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
     PROTECT(app=NEW_NUMERIC(ne));
-    igraph_vector_copy_to(tmprec->value, REAL(app));
+    igraph_vector_copy_to(tmprec->value.as_vector, REAL(app));
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value.as_vector_bool));
     break;
   default: /* IGRAPH_ATTRIBUTE_STRING */
-    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value.as_strvector));
     break;
   }
 
@@ -1836,7 +1836,7 @@ igraph_error_t R_igraph_attribute_combine_vertices(const igraph_t *graph,
 
   /* Create the TODO list first */
   PROTECT(names=GET_NAMES(val)); px++;
-  TODO=igraph_Calloc(valno, igraph_integer_t);
+  TODO=IGRAPH_CALLOC(valno, igraph_integer_t);
   if (!TODO) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
@@ -2010,7 +2010,7 @@ igraph_error_t R_igraph_attribute_combine_edges(const igraph_t *graph,
                  IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_free, TODO);
-  funcs=igraph_Calloc(ealno, igraph_function_pointer_t);
+  funcs=IGRAPH_CALLOC(ealno, igraph_function_pointer_t);
   if (!funcs) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
@@ -4209,10 +4209,10 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   }
   /* We simulate mode=IN by swapping to/from and transposing the result matrix. */
   if (mode == IGRAPH_IN) {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights, mode));
     IGRAPH_CHECK(igraph_matrix_transpose(res));
   } else {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights, mode));
   }
   return IGRAPH_SUCCESS;
 }

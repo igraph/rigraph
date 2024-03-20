@@ -30,8 +30,6 @@ igraph_delete_edges:
 igraph_delete_vertices:
     IGNORE: RR, RC
 
-igraph_delete_vertices_idx:
-
 igraph_vcount:
 
 igraph_ecount:
@@ -424,8 +422,6 @@ igraph_edge_betweenness:
 igraph_edge_betweenness_cutoff:
     IGNORE: RR
 
-igraph_edge_betweenness_subset:
-
 igraph_harmonic_centrality:
     IGNORE: RR, RC, RInit
     # This is handled by igraph_harmonic_centrality_cutoff
@@ -561,6 +557,13 @@ igraph_hub_and_authority_scores:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
+
+igraph_edge_betweenness_subset:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: eids ON graph, weights ON graph, res ON graph V(graph), sources ON graph, targets ON graph
 
 igraph_unfold_tree:
     IGNORE: RR

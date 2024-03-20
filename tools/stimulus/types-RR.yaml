@@ -32,7 +32,7 @@ VECTOR:
         AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
     INCONV: '%I% <- as.numeric(%I%)'
 
-VERTEX_QTY:
+VERTEX_QTYS:
     OUTCONV:
         OUT: |-
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
@@ -156,7 +156,7 @@ EDGE_SELECTOR:
               %I% <- create_es(%I1%, %I%)
             }
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$weight
@@ -167,7 +167,7 @@ EDGEWEIGHTS:
           %I% <- NULL
         }
 
-VERTEXWEIGHTS:
+VERTEX_WEIGHTS:
     INCONV: |-
         if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
           %I% <- V(%I1%)$weight
@@ -178,7 +178,7 @@ VERTEXWEIGHTS:
           %I% <- NULL
         }
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$capacity
@@ -198,7 +198,7 @@ BIPARTITE_TYPES:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     INCONV: |-
         if (missing(%I%)) {
           if ("color" %in% vertex_attr_names(%I1%)) {
@@ -217,7 +217,7 @@ VERTEX_COLOR:
               names(%I%) <- vertex_attr(%I1%, "name")
             }
 
-EDGE_COLOR:
+EDGE_COLORS:
     INCONV: |-
         if (missing(%I%)) {
           if ("color" %in% edge_attr_names(%I1%)) {
@@ -245,14 +245,14 @@ ISOCOMPAT_FUNC:
     CALL: {}
     HEADER: ~
 
-VERTEXSET_LIST:
+VERTEX_INDICES_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
               %I% <- lapply(%I%, unsafe_create_vs, graph = %I1%, verts = V(%I1%))
             }
 
-EDGESET_LIST:
+EDGE_INDICES_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -263,7 +263,7 @@ EDGESET_LIST:
     CALL: {}
     HEADER: ~
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     DEFAULT:
         ARPACK_DEFAULTS: arpack_defaults()
     INCONV:
