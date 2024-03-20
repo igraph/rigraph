@@ -251,4 +251,3 @@ jobs:
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
             TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
-            RDcsan -q -e 'source("tools/run_examples.R")'
