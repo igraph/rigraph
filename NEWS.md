@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9003
+
+## Continuous integration
+
+- Update lock.yaml.
+
+- Update lock.yaml (#1309).
+
+
 # igraph 2.0.3.9002
 
 ## Chore
