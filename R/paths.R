@@ -258,7 +258,7 @@ max_cardinality <- maximum_cardinality_search_impl
 eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
     if (...length() > 0) {
     lifecycle::deprecate_soft(
-      "2.0.2",
+      "2.1.0",
       "eccentricity(... =)",
       details = "The arguments `weights` and `mode` must be named."
     )
