@@ -32,6 +32,20 @@ The vertex IDs of the central vertices.
 
 The center of a graph is the set of its vertices with minimal eccentricity.
 }
+\examples{
+tree <- make_tree(100, 7)
+graph_center(tree)
+graph_center(tree, mode = "in")
+graph_center(tree, mode = "out")
+
+# Without and with weights
+ring <- make_ring(10)
+graph_center(g))
+# Add weights
+E(g)$weight <- seq_len(ecount(g))
+graph_center(g)
+
+}
 \seealso{
 \code{\link[=eccentricity]{eccentricity()}}, \code{\link[=radius]{radius()}}
 

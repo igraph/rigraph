@@ -345,6 +345,19 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
 #' @return The vertex IDs of the central vertices.
 #' @seealso [eccentricity()], [radius()]
 #' @family paths
+#' @examples
+#' tree <- make_tree(100, 7)
+#' graph_center(tree)
+#' graph_center(tree, mode = "in")
+#' graph_center(tree, mode = "out")
+#'
+#' # Without and with weights
+#' ring <- make_ring(10)
+#' graph_center(g))
+#' # Add weights
+#' E(g)$weight <- seq_len(ecount(g))
+#' graph_center(g)
+#'
 #' @export
 graph_center <- graph_center_dijkstra_impl
 
