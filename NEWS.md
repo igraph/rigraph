@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9005
+
+## Documentation
+
+- Update `igraph.Rmd`, fix manual page typo (#1313).
+
+
 # igraph 2.0.3.9004
 
 ## Continuous integration
