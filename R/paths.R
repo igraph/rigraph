@@ -311,7 +311,7 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
 radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
-      "2.0.2",
+      "2.1.0",
       "radius(... =)",
       details = "The arguments `weights` and `mode` must be named."
     )
