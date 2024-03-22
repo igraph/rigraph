@@ -1377,8 +1377,6 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' reaches an equilibrium. (There is no simulated annealing or anything like
 #' that, so a stable fixed point is not guaranteed.)
 #'
-#' See also <https://www.schmuhl.org/graphopt/> for the original graphopt.
-#'
 #' @param graph The input graph.
 #' @param start If given, then it should be a matrix with two columns and one
 #'   line for each vertex. This matrix will be used as starting positions for the

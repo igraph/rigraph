@@ -86,7 +86,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

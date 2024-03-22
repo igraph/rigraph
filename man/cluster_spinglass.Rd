@@ -163,7 +163,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Jorg Reichardt for the original code and Gabor Csardi

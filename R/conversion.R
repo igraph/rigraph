@@ -459,12 +459,14 @@ as_edgelist <- function(graph, names = TRUE) {
 #' E(g3)$weight <- seq_len(ecount(g3))
 #' ug3 <- as.undirected(g3)
 #' print(ug3, e = TRUE)
-#' \dontrun{
+
+#' @examplesIf rlang::is_interactive()
 #' x11(width = 10, height = 5)
 #' layout(rbind(1:2))
 #' plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
 #' plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
-#' }
+
+#' @examples
 #'
 #' g4 <- make_graph(c(
 #'   1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 4,
@@ -641,8 +643,7 @@ as_adj_edge_list <- function(graph,
 #' [as_adj()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph.adjlist()] for other
 #' graph representations.
-#' @examples
-#' \dontrun{
+#' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
@@ -656,7 +657,6 @@ as_adj_edge_list <- function(graph,
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
-#' }
 #' @family conversion
 #' @export
 graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
@@ -732,9 +732,9 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' [as_adj()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph.adjlist()] for
 #' other graph representations.
-#' @examples
+#'
+#' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
-#' \dontrun{
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' GNEL <- as_graphnel(g)
@@ -747,7 +747,6 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
-#' }
 #' @family conversion
 #' @export
 as_graphnel <- function(graph) {

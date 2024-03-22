@@ -39,6 +39,7 @@ reference:
 - contents:
   - starts_with("make_")
   - realize_degseq
+  - realize_bipartite_degseq
   - has_concept("deterministic constructors")
   - graph_
   - graph_from_lcf
@@ -255,3 +256,8 @@ authors:
     href: "https://github.com/GroteGnoom"
   Kirill Müller:
     href: "https://krlmlr.info/"
+
+home:
+  links:
+  - text: Discussion forum
+    href: https://igraph.discourse.group/

@@ -116,7 +116,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 
 #define scanner context->scanner
 
-#line 120 "yy.tab.c"
+#line 120 "src/vendor/io/ncol-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -139,7 +139,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 #  endif
 # endif
 
-#include "io/parsers/ncol-parser.h"
+#include "ncol-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1504,7 +1504,7 @@ yyreduce:
                            {
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
        }
-#line 1508 "yy.tab.c"
+#line 1508 "src/vendor/io/ncol-parser.c"
     break;
 
   case 6: /* edge: endpoints weight "end of line"  */
@@ -1513,7 +1513,7 @@ yyreduce:
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
            context->has_weights = true;
        }
-#line 1517 "yy.tab.c"
+#line 1517 "src/vendor/io/ncol-parser.c"
     break;
 
   case 7: /* endpoints: edgeid edgeid  */
@@ -1522,7 +1522,7 @@ yyreduce:
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[0].edgenum)));
 }
-#line 1526 "yy.tab.c"
+#line 1526 "src/vendor/io/ncol-parser.c"
     break;
 
   case 8: /* edgeid: "alphanumeric"  */
@@ -1536,7 +1536,7 @@ yyreduce:
   ));
   (yyval.edgenum) = trie_id;
 }
-#line 1540 "yy.tab.c"
+#line 1540 "src/vendor/io/ncol-parser.c"
     break;
 
   case 9: /* weight: "alphanumeric"  */
@@ -1548,11 +1548,11 @@ yyreduce:
                                         &val));
     (yyval.weightnum)=val;
 }
-#line 1552 "yy.tab.c"
+#line 1552 "src/vendor/io/ncol-parser.c"
     break;
 
 
-#line 1556 "yy.tab.c"
+#line 1556 "src/vendor/io/ncol-parser.c"
 
       default: break;
     }

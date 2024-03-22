@@ -155,7 +155,7 @@ static igraph_error_t deconflict_attrname(char **attrname);
 #define scanner context->scanner
 
 
-#line 159 "yy.tab.c"
+#line 159 "src/vendor/io/pajek-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -178,7 +178,7 @@ static igraph_error_t deconflict_attrname(char **attrname);
 #  endif
 # endif
 
-#include "io/parsers/pajek-parser.h"
+#include "pajek-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1488,7 +1488,7 @@ yydestruct (const char *yymsg,
     case YYSYMBOL_parname: /* parname  */
 #line 133 "src/vendor/cigraph/src/io/pajek-parser.y"
             { free(((*yyvaluep).dynstr)); }
-#line 1492 "yy.tab.c"
+#line 1492 "src/vendor/io/pajek-parser.c"
         break;
 
       default:
@@ -1803,7 +1803,7 @@ yyreduce:
   }
   YYACCEPT; /* stop parsing even if there is more data in the file. */
  }
-#line 1807 "yy.tab.c"
+#line 1807 "src/vendor/io/pajek-parser.c"
     break;
 
   case 8: /* verticeshead: "*Vertices line" integer  */
@@ -1818,7 +1818,7 @@ yyreduce:
     IGRAPH_YY_ERRORF("Vertex count too large in Pajek file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->vcount);
   }
             }
-#line 1822 "yy.tab.c"
+#line 1822 "src/vendor/io/pajek-parser.c"
     break;
 
   case 9: /* verticeshead: "*Vertices line" integer integer  */
@@ -1840,19 +1840,19 @@ yyreduce:
   }
   IGRAPH_YY_CHECK(add_bipartite_type(context));
 }
-#line 1844 "yy.tab.c"
+#line 1844 "src/vendor/io/pajek-parser.c"
     break;
 
   case 13: /* $@1: %empty  */
 #line 236 "src/vendor/cigraph/src/io/pajek-parser.y"
                    { context->actvertex=(yyvsp[0].intnum); }
-#line 1850 "yy.tab.c"
+#line 1850 "src/vendor/io/pajek-parser.c"
     break;
 
   case 14: /* vertexline: vertex $@1 vertexid vertexcoords shape vertparams "end of line"  */
 #line 236 "src/vendor/cigraph/src/io/pajek-parser.y"
                                                                                              { }
-#line 1856 "yy.tab.c"
+#line 1856 "src/vendor/io/pajek-parser.c"
     break;
 
   case 15: /* vertex: integer  */
@@ -1867,7 +1867,7 @@ yyreduce:
   }
   (yyval.intnum) = v;
 }
-#line 1871 "yy.tab.c"
+#line 1871 "src/vendor/io/pajek-parser.c"
     break;
 
   case 16: /* vertexid: word  */
@@ -1876,7 +1876,7 @@ yyreduce:
   IGRAPH_YY_CHECK(add_string_vertex_attribute("id", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
   IGRAPH_YY_CHECK(add_string_vertex_attribute("name", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
 }
-#line 1880 "yy.tab.c"
+#line 1880 "src/vendor/io/pajek-parser.c"
     break;
 
   case 18: /* vertexcoords: number number  */
@@ -1885,7 +1885,7 @@ yyreduce:
   IGRAPH_YY_CHECK(add_numeric_vertex_attribute("x", (yyvsp[-1].realnum), context));
   IGRAPH_YY_CHECK(add_numeric_vertex_attribute("y", (yyvsp[0].realnum), context));
             }
-#line 1889 "yy.tab.c"
+#line 1889 "src/vendor/io/pajek-parser.c"
     break;
 
   case 19: /* vertexcoords: number number number  */
@@ -1895,7 +1895,7 @@ yyreduce:
   IGRAPH_YY_CHECK(add_numeric_vertex_attribute("y", (yyvsp[-1].realnum), context));
   IGRAPH_YY_CHECK(add_numeric_vertex_attribute("z", (yyvsp[0].realnum), context));
             }
-#line 1899 "yy.tab.c"
+#line 1899 "src/vendor/io/pajek-parser.c"
     break;
 
   case 21: /* shape: word  */
@@ -1903,7 +1903,7 @@ yyreduce:
                           {
   IGRAPH_YY_CHECK(add_string_vertex_attribute("shape", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
 }
-#line 1907 "yy.tab.c"
+#line 1907 "src/vendor/io/pajek-parser.c"
     break;
 
   case 25: /* vertparam: VP_X_FACT number  */
@@ -1911,7 +1911,7 @@ yyreduce:
                         {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("xfact", (yyvsp[0].realnum), context));
        }
-#line 1915 "yy.tab.c"
+#line 1915 "src/vendor/io/pajek-parser.c"
     break;
 
   case 26: /* vertparam: VP_Y_FACT number  */
@@ -1919,7 +1919,7 @@ yyreduce:
                         {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("yfact", (yyvsp[0].realnum), context));
        }
-#line 1923 "yy.tab.c"
+#line 1923 "src/vendor/io/pajek-parser.c"
     break;
 
   case 27: /* vertparam: VP_LR number  */
@@ -1927,7 +1927,7 @@ yyreduce:
                     {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldist", (yyvsp[0].realnum), context));
      }
-#line 1931 "yy.tab.c"
+#line 1931 "src/vendor/io/pajek-parser.c"
     break;
 
   case 28: /* vertparam: VP_LPHI number  */
@@ -1935,7 +1935,7 @@ yyreduce:
                       {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldegree2", (yyvsp[0].realnum), context));
      }
-#line 1939 "yy.tab.c"
+#line 1939 "src/vendor/io/pajek-parser.c"
     break;
 
   case 29: /* vertparam: VP_BW number  */
@@ -1943,7 +1943,7 @@ yyreduce:
                     {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("framewidth", (yyvsp[0].realnum), context));
      }
-#line 1947 "yy.tab.c"
+#line 1947 "src/vendor/io/pajek-parser.c"
     break;
 
   case 30: /* vertparam: VP_FOS number  */
@@ -1951,7 +1951,7 @@ yyreduce:
                      {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("fontsize", (yyvsp[0].realnum), context));
      }
-#line 1955 "yy.tab.c"
+#line 1955 "src/vendor/io/pajek-parser.c"
     break;
 
   case 31: /* vertparam: VP_PHI number  */
@@ -1959,7 +1959,7 @@ yyreduce:
                      {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("rotation", (yyvsp[0].realnum), context));
      }
-#line 1963 "yy.tab.c"
+#line 1963 "src/vendor/io/pajek-parser.c"
     break;
 
   case 32: /* vertparam: VP_R number  */
@@ -1967,7 +1967,7 @@ yyreduce:
                    {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("radius", (yyvsp[0].realnum), context));
      }
-#line 1971 "yy.tab.c"
+#line 1971 "src/vendor/io/pajek-parser.c"
     break;
 
   case 33: /* vertparam: VP_Q number  */
@@ -1975,7 +1975,7 @@ yyreduce:
                    {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("diamondratio", (yyvsp[0].realnum), context));
      }
-#line 1979 "yy.tab.c"
+#line 1979 "src/vendor/io/pajek-parser.c"
     break;
 
   case 34: /* vertparam: VP_LA number  */
@@ -1983,7 +1983,7 @@ yyreduce:
                     {
          IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldegree", (yyvsp[0].realnum), context));
      }
-#line 1987 "yy.tab.c"
+#line 1987 "src/vendor/io/pajek-parser.c"
     break;
 
   case 35: /* vpword: VP_FONT parstrval  */
@@ -1991,7 +1991,7 @@ yyreduce:
                           {
          IGRAPH_YY_CHECK(add_string_vertex_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 1995 "yy.tab.c"
+#line 1995 "src/vendor/io/pajek-parser.c"
     break;
 
   case 36: /* vpword: VP_URL parstrval  */
@@ -1999,7 +1999,7 @@ yyreduce:
                         {
          IGRAPH_YY_CHECK(add_string_vertex_attribute("url", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2003 "yy.tab.c"
+#line 2003 "src/vendor/io/pajek-parser.c"
     break;
 
   case 37: /* vpword: VP_IC parstrval  */
@@ -2007,7 +2007,7 @@ yyreduce:
                        {
          IGRAPH_YY_CHECK(add_string_vertex_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2011 "yy.tab.c"
+#line 2011 "src/vendor/io/pajek-parser.c"
     break;
 
   case 38: /* vpword: VP_BC parstrval  */
@@ -2015,7 +2015,7 @@ yyreduce:
                        {
          IGRAPH_YY_CHECK(add_string_vertex_attribute("framecolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2019 "yy.tab.c"
+#line 2019 "src/vendor/io/pajek-parser.c"
     break;
 
   case 39: /* vpword: VP_LC parstrval  */
@@ -2023,7 +2023,7 @@ yyreduce:
                        {
          IGRAPH_YY_CHECK(add_string_vertex_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2027 "yy.tab.c"
+#line 2027 "src/vendor/io/pajek-parser.c"
     break;
 
   case 40: /* vpword: parname parstrval  */
@@ -2041,25 +2041,25 @@ yyreduce:
          IGRAPH_FREE((yyvsp[-1].dynstr));
          IGRAPH_FINALLY_CLEAN(1);
      }
-#line 2045 "yy.tab.c"
+#line 2045 "src/vendor/io/pajek-parser.c"
     break;
 
   case 47: /* arcs: "*Arcs line" "end of line" arcsdefs  */
 #line 338 "src/vendor/cigraph/src/io/pajek-parser.y"
                                          { context->directed=true; }
-#line 2051 "yy.tab.c"
+#line 2051 "src/vendor/io/pajek-parser.c"
     break;
 
   case 48: /* arcs: "*Arcs line" number "end of line" arcsdefs  */
 #line 339 "src/vendor/cigraph/src/io/pajek-parser.y"
                                          { context->directed=true; }
-#line 2057 "yy.tab.c"
+#line 2057 "src/vendor/io/pajek-parser.c"
     break;
 
   case 51: /* $@2: %empty  */
 #line 343 "src/vendor/cigraph/src/io/pajek-parser.y"
                         { context->actedge++; }
-#line 2063 "yy.tab.c"
+#line 2063 "src/vendor/io/pajek-parser.c"
     break;
 
   case 52: /* arcsline: vertex vertex $@2 weight edgeparams "end of line"  */
@@ -2067,25 +2067,25 @@ yyreduce:
                                                                            {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-5].intnum)-1));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-4].intnum)-1)); }
-#line 2071 "yy.tab.c"
+#line 2071 "src/vendor/io/pajek-parser.c"
     break;
 
   case 53: /* edges: "*Edges line" "end of line" edgesdefs  */
 #line 348 "src/vendor/cigraph/src/io/pajek-parser.y"
                                      { context->directed=0; }
-#line 2077 "yy.tab.c"
+#line 2077 "src/vendor/io/pajek-parser.c"
     break;
 
   case 54: /* edges: "*Edges line" number "end of line" edgesdefs  */
 #line 349 "src/vendor/cigraph/src/io/pajek-parser.y"
                                             { context->directed=0; }
-#line 2083 "yy.tab.c"
+#line 2083 "src/vendor/io/pajek-parser.c"
     break;
 
   case 57: /* $@3: %empty  */
 #line 353 "src/vendor/cigraph/src/io/pajek-parser.y"
                          { context->actedge++; }
-#line 2089 "yy.tab.c"
+#line 2089 "src/vendor/io/pajek-parser.c"
     break;
 
   case 58: /* edgesline: vertex vertex $@3 weight edgeparams "end of line"  */
@@ -2093,7 +2093,7 @@ yyreduce:
                                                                            {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-5].intnum)-1));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-4].intnum)-1)); }
-#line 2097 "yy.tab.c"
+#line 2097 "src/vendor/io/pajek-parser.c"
     break;
 
   case 60: /* weight: number  */
@@ -2101,7 +2101,7 @@ yyreduce:
                              {
   IGRAPH_YY_CHECK(add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
 }
-#line 2105 "yy.tab.c"
+#line 2105 "src/vendor/io/pajek-parser.c"
     break;
 
   case 64: /* edgeparam: EP_S number  */
@@ -2109,7 +2109,7 @@ yyreduce:
                  {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context));
    }
-#line 2113 "yy.tab.c"
+#line 2113 "src/vendor/io/pajek-parser.c"
     break;
 
   case 65: /* edgeparam: EP_W number  */
@@ -2117,7 +2117,7 @@ yyreduce:
                  {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("edgewidth", (yyvsp[0].realnum), context));
    }
-#line 2121 "yy.tab.c"
+#line 2121 "src/vendor/io/pajek-parser.c"
     break;
 
   case 66: /* edgeparam: EP_H1 number  */
@@ -2125,7 +2125,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("hook1", (yyvsp[0].realnum), context));
    }
-#line 2129 "yy.tab.c"
+#line 2129 "src/vendor/io/pajek-parser.c"
     break;
 
   case 67: /* edgeparam: EP_H2 number  */
@@ -2133,7 +2133,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("hook2", (yyvsp[0].realnum), context));
    }
-#line 2137 "yy.tab.c"
+#line 2137 "src/vendor/io/pajek-parser.c"
     break;
 
   case 68: /* edgeparam: EP_A1 number  */
@@ -2141,7 +2141,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("angle1", (yyvsp[0].realnum), context));
    }
-#line 2145 "yy.tab.c"
+#line 2145 "src/vendor/io/pajek-parser.c"
     break;
 
   case 69: /* edgeparam: EP_A2 number  */
@@ -2149,7 +2149,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("angle2", (yyvsp[0].realnum), context));
    }
-#line 2153 "yy.tab.c"
+#line 2153 "src/vendor/io/pajek-parser.c"
     break;
 
   case 70: /* edgeparam: EP_K1 number  */
@@ -2157,7 +2157,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("velocity1", (yyvsp[0].realnum), context));
    }
-#line 2161 "yy.tab.c"
+#line 2161 "src/vendor/io/pajek-parser.c"
     break;
 
   case 71: /* edgeparam: EP_K2 number  */
@@ -2165,7 +2165,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("velocity2", (yyvsp[0].realnum), context));
    }
-#line 2169 "yy.tab.c"
+#line 2169 "src/vendor/io/pajek-parser.c"
     break;
 
   case 72: /* edgeparam: EP_AP number  */
@@ -2173,7 +2173,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("arrowpos", (yyvsp[0].realnum), context));
    }
-#line 2177 "yy.tab.c"
+#line 2177 "src/vendor/io/pajek-parser.c"
     break;
 
   case 73: /* edgeparam: EP_LP number  */
@@ -2181,7 +2181,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelpos", (yyvsp[0].realnum), context));
    }
-#line 2185 "yy.tab.c"
+#line 2185 "src/vendor/io/pajek-parser.c"
     break;
 
   case 74: /* edgeparam: EP_LR number  */
@@ -2189,7 +2189,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelangle", (yyvsp[0].realnum), context));
    }
-#line 2193 "yy.tab.c"
+#line 2193 "src/vendor/io/pajek-parser.c"
     break;
 
   case 75: /* edgeparam: EP_LPHI number  */
@@ -2197,7 +2197,7 @@ yyreduce:
                     {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelangle2", (yyvsp[0].realnum), context));
    }
-#line 2201 "yy.tab.c"
+#line 2201 "src/vendor/io/pajek-parser.c"
     break;
 
   case 76: /* edgeparam: EP_LA number  */
@@ -2205,7 +2205,7 @@ yyreduce:
                   {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("labeldegree", (yyvsp[0].realnum), context));
    }
-#line 2209 "yy.tab.c"
+#line 2209 "src/vendor/io/pajek-parser.c"
     break;
 
   case 77: /* edgeparam: EP_FOS number  */
@@ -2213,7 +2213,7 @@ yyreduce:
                    {
        IGRAPH_YY_CHECK(add_numeric_edge_attribute("fontsize", (yyvsp[0].realnum), context));
    }
-#line 2217 "yy.tab.c"
+#line 2217 "src/vendor/io/pajek-parser.c"
     break;
 
   case 78: /* epword: EP_A parstrval  */
@@ -2221,7 +2221,7 @@ yyreduce:
                        {
       IGRAPH_YY_CHECK(add_string_edge_attribute("arrowtype", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2225 "yy.tab.c"
+#line 2225 "src/vendor/io/pajek-parser.c"
     break;
 
   case 79: /* epword: EP_P parstrval  */
@@ -2229,7 +2229,7 @@ yyreduce:
                      {
       IGRAPH_YY_CHECK(add_string_edge_attribute("linepattern", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2233 "yy.tab.c"
+#line 2233 "src/vendor/io/pajek-parser.c"
     break;
 
   case 80: /* epword: EP_L parstrval  */
@@ -2237,7 +2237,7 @@ yyreduce:
                      {
       IGRAPH_YY_CHECK(add_string_edge_attribute("label", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2241 "yy.tab.c"
+#line 2241 "src/vendor/io/pajek-parser.c"
     break;
 
   case 81: /* epword: EP_LC parstrval  */
@@ -2245,7 +2245,7 @@ yyreduce:
                       {
       IGRAPH_YY_CHECK(add_string_edge_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2249 "yy.tab.c"
+#line 2249 "src/vendor/io/pajek-parser.c"
     break;
 
   case 82: /* epword: EP_C parstrval  */
@@ -2253,7 +2253,7 @@ yyreduce:
                      {
       IGRAPH_YY_CHECK(add_string_edge_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2257 "yy.tab.c"
+#line 2257 "src/vendor/io/pajek-parser.c"
     break;
 
   case 83: /* epword: EP_FONT parstrval  */
@@ -2261,7 +2261,7 @@ yyreduce:
                         {
       IGRAPH_YY_CHECK(add_string_edge_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2265 "yy.tab.c"
+#line 2265 "src/vendor/io/pajek-parser.c"
     break;
 
   case 84: /* epword: parname parstrval  */
@@ -2279,19 +2279,19 @@ yyreduce:
         IGRAPH_FREE((yyvsp[-1].dynstr));
         IGRAPH_FINALLY_CLEAN(1);
      }
-#line 2283 "yy.tab.c"
+#line 2283 "src/vendor/io/pajek-parser.c"
     break;
 
   case 85: /* arcslist: "*Arcslist line" "end of line" arcslistlines  */
 #line 443 "src/vendor/cigraph/src/io/pajek-parser.y"
                                              { context->directed=true; }
-#line 2289 "yy.tab.c"
+#line 2289 "src/vendor/io/pajek-parser.c"
     break;
 
   case 91: /* arclistfrom: integer  */
 #line 451 "src/vendor/cigraph/src/io/pajek-parser.y"
                      { context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2295 "yy.tab.c"
+#line 2295 "src/vendor/io/pajek-parser.c"
     break;
 
   case 92: /* arclistto: integer  */
@@ -2300,19 +2300,19 @@ yyreduce:
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, labs((yyvsp[0].intnum))-1));
 }
-#line 2304 "yy.tab.c"
+#line 2304 "src/vendor/io/pajek-parser.c"
     break;
 
   case 93: /* edgeslist: "*Edgeslist line" "end of line" edgelistlines  */
 #line 458 "src/vendor/cigraph/src/io/pajek-parser.y"
                                                { context->directed=0; }
-#line 2310 "yy.tab.c"
+#line 2310 "src/vendor/io/pajek-parser.c"
     break;
 
   case 99: /* edgelistfrom: integer  */
 #line 466 "src/vendor/cigraph/src/io/pajek-parser.y"
                       { context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2316 "yy.tab.c"
+#line 2316 "src/vendor/io/pajek-parser.c"
     break;
 
   case 100: /* edgelistto: integer  */
@@ -2321,7 +2321,7 @@ yyreduce:
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, labs((yyvsp[0].intnum))-1));
 }
-#line 2325 "yy.tab.c"
+#line 2325 "src/vendor/io/pajek-parser.c"
     break;
 
   case 102: /* matrixline: "*Matrix line"  */
@@ -2330,13 +2330,13 @@ yyreduce:
                          context->actto=0;
                          context->directed=(context->vcount2==0);
                        }
-#line 2334 "yy.tab.c"
+#line 2334 "src/vendor/io/pajek-parser.c"
     break;
 
   case 105: /* adjmatrixline: adjmatrixnumbers "end of line"  */
 #line 484 "src/vendor/cigraph/src/io/pajek-parser.y"
                                         { context->actfrom++; context->actto=0; }
-#line 2340 "yy.tab.c"
+#line 2340 "src/vendor/io/pajek-parser.c"
     break;
 
   case 108: /* adjmatrixentry: number  */
@@ -2358,7 +2358,7 @@ yyreduce:
   }
   context->actto++;
 }
-#line 2362 "yy.tab.c"
+#line 2362 "src/vendor/io/pajek-parser.c"
     break;
 
   case 109: /* integer: "number"  */
@@ -2370,7 +2370,7 @@ yyreduce:
                                          &val));
   (yyval.intnum)=val;
 }
-#line 2374 "yy.tab.c"
+#line 2374 "src/vendor/io/pajek-parser.c"
     break;
 
   case 110: /* number: "number"  */
@@ -2382,7 +2382,7 @@ yyreduce:
                                       &val));
   (yyval.realnum)=val;
 }
-#line 2386 "yy.tab.c"
+#line 2386 "src/vendor/io/pajek-parser.c"
     break;
 
   case 111: /* parname: word  */
@@ -2390,38 +2390,38 @@ yyreduce:
               {
   IGRAPH_YY_CHECK(make_dynstr((yyvsp[0].string).str, (yyvsp[0].string).len, &(yyval.dynstr)));
 }
-#line 2394 "yy.tab.c"
+#line 2394 "src/vendor/io/pajek-parser.c"
     break;
 
   case 112: /* parstrval: word  */
 #line 528 "src/vendor/cigraph/src/io/pajek-parser.y"
                 { (yyval.string)=(yyvsp[0].string); }
-#line 2400 "yy.tab.c"
+#line 2400 "src/vendor/io/pajek-parser.c"
     break;
 
   case 113: /* word: "word"  */
 #line 530 "src/vendor/cigraph/src/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2407 "yy.tab.c"
+#line 2407 "src/vendor/io/pajek-parser.c"
     break;
 
   case 114: /* word: "number"  */
 #line 532 "src/vendor/cigraph/src/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2414 "yy.tab.c"
+#line 2414 "src/vendor/io/pajek-parser.c"
     break;
 
   case 115: /* word: "quoted string"  */
 #line 534 "src/vendor/cigraph/src/io/pajek-parser.y"
              { (yyval.string).str=igraph_pajek_yyget_text(scanner)+1;
                (yyval.string).len=igraph_pajek_yyget_leng(scanner)-2; }
-#line 2421 "yy.tab.c"
+#line 2421 "src/vendor/io/pajek-parser.c"
     break;
 
 
-#line 2425 "yy.tab.c"
+#line 2425 "src/vendor/io/pajek-parser.c"
 
       default: break;
     }

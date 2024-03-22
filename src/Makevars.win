@@ -1,16 +1,18 @@
 include sources.mk
+include sources-mini-gmp.mk
 
 LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
 LIB_GMP ?= $(MINGW_PREFIX)
 
-PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
-	-DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
-	-DPRPACK_IGRAPH_SUPPORT \
-	-DHAVE_GFORTRAN=1 \
-	-D_GNU_SOURCE=1
+PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers -Ivendor/mini-gmp \
+    -DNDEBUG -DNTIMER -DNPRINT -DIGRAPH_THREAD_LOCAL= \
+    -DPRPACK_IGRAPH_SUPPORT \
+    -DHAVE_GFORTRAN=1 \
+    -D_GNU_SOURCE=1 \
+    -DHAVE_LIBXML
 
 PKG_LIBS = -lxml2 -lz -lstdc++ \
-  -lglpk -lgmp $(BLAS_LIBS) $(LAPACK_LIBS)
+  -lglpk $(BLAS_LIBS) $(LAPACK_LIBS)
 
-OBJECTS=${SOURCES}
+OBJECTS=${SOURCES} ${MINIGMPSOURCES}

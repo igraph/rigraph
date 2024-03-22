@@ -49,12 +49,8 @@ bridges(g)
 Connected components
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
-\code{\link{decompose}()}
-
-Connected components
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{decompose}()}
+\code{\link{decompose}()},
+\code{\link{is_biconnected}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

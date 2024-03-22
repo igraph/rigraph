@@ -86,6 +86,8 @@ topological.sort <- function(graph, mode = c("out", "all", "in")) { # nocov star
 #' @export
 shortest.paths <- function(graph, v = V(graph), to = V(graph), mode = c("all", "out", "in"), weights = NULL, algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "shortest.paths()", "distances()")
+  algorithm <- igraph.match.arg(algorithm)
+  mode <- igraph.match.arg(mode)
   distances(graph = graph, v = v, to = to, mode = mode, weights = weights, algorithm = algorithm)
 } # nocov end
 
@@ -709,7 +711,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #' `mean_distance()` calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
-#' directed graphs). It uses a breadth-=first search for unweighted graphs and
+#' directed graphs). It uses a breadth-first search for unweighted graphs and
 #' Dijkstra's algorithm for weighted ones. The latter only supports non-negative
 #' edge weights.
 #'
@@ -2412,7 +2414,18 @@ components <- function(graph, mode = c("weak", "strong")) {
 is_connected <- is_connected_impl
 
 #' @rdname components
-count_components <- count_components
+#' @export
+count_components <- function(graph, mode = c("weak", "strong")) {
+  ensure_igraph(graph)
+  mode <- igraph.match.arg(mode)
+  mode <- switch(mode,
+    "weak" = 1L,
+    "strong" = 2L
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_no_components, graph, mode)
+}
 
 #' Convert a general graph into a forest
 #'

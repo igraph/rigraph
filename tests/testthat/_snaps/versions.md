@@ -22,7 +22,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 # we can't upgrade from 0.5 to 1.5.0, on the fly
 
@@ -31,7 +31,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 # we can't upgrade from 0.6 to 1.5.0, on the fly
 
@@ -40,7 +40,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 # we can upgrade from 1.0.0 to 1.5.0, on the fly
 
@@ -81,7 +81,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 ---
 
@@ -90,7 +90,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 ---
 
@@ -99,7 +99,7 @@
     Condition
       Error in `warn_version()`:
       ! This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+        Call upgrade_graph() before using igraph functions on that object.
 
 ---
 

@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# CITATION file created with {cffr} R package, v1.0.0
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.0.1.9005
+version: 2.0.3
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
@@ -86,7 +86,7 @@ references:
   - family-names: Müller
     given-names: Kirill
   year: '2024'
-  notes: R package version 2.0.1.9005
+  notes: R package version 2.0.3
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -95,22 +95,20 @@ references:
   notes: Depends
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
   version: '>= 3.5.0'
 - type: software
   title: cli
@@ -129,22 +127,20 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: lifecycle
   abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
@@ -223,22 +219,37 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: vctrs
+  abstract: 'vctrs: Vector Helpers'
+  notes: Imports
+  url: https://vctrs.r-lib.org/
+  repository: https://CRAN.R-project.org/package=vctrs
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  year: '2024'
 - type: software
   title: ape
   abstract: 'ape: Analyses of Phylogenetics and Evolution'
@@ -329,8 +340,9 @@ references:
   - family-names: Strimmer
     given-names: Korbinian
     orcid: https://orcid.org/0000-0001-7917-2056
-  - family-names: de Vienne
+  - family-names: Vienne
     given-names: Damien
+    name-particle: de
     orcid: https://orcid.org/0000-0001-9532-5251
   year: '2024'
   version: '>= 5.7-0.1'
@@ -410,8 +422,9 @@ references:
     given-names: Radford
   - family-names: Bell
     given-names: Kendon
-  - family-names: de Queljoe
+  - family-names: Queljoe
     given-names: Matthew
+    name-particle: de
   - family-names: Suruceanu
     given-names: Ion
   - family-names: Denney
@@ -544,22 +557,20 @@ references:
   notes: Suggests
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: tcltk
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Suggests
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'

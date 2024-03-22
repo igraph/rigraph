@@ -17,15 +17,17 @@
 
 /* #undef HAVE__UMUL128 */
 /* #undef HAVE___UMULH */
-#define HAVE___UINT128_T 1
+#if defined(__GNUC__) && defined(__SIZEOF_INT128__)
+#  define HAVE___UINT128_T 1
+#endif
 
 #define HAVE_GLPK 1
-#define HAVE_LIBXML 1
 
 /* #undef INTERNAL_BLAS */
 /* #undef INTERNAL_LAPACK */
-/* #undef INTERNAL_ARPACK */
-/* #undef INTERNAL_GMP */
+
+#define INTERNAL_ARPACK 1
+#define INTERNAL_GMP 1
 
 #define IGRAPH_F77_SAVE
 #define IGRAPH_THREAD_LOCAL

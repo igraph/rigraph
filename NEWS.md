@@ -1,118 +1,150 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.0.1.9005
-
-## Chore
-
-  - Update vendored igraph/C to igraph/igraph@8def9e335ae1cbb98150… (#1198).
+# igraph 2.0.3.9005
 
 ## Documentation
 
-  - Remove scg related docs (#1167).
-
-## Testing
-
-  - Set seed *locally* (#1166).
+- Update `igraph.Rmd`, fix manual page typo (#1313).
 
 
-# igraph 2.0.1.9004
+# igraph 2.0.3.9004
 
-## Bug fixes
+## Continuous integration
 
-  - Memory leaks when converting data to C (#1196).
+- Remove running examples in sanitizer (#1314).
 
 
-# igraph 2.0.1.9003
+# igraph 2.0.3.9003
 
-## Bug fixes
+## Continuous integration
 
-  - Eliminate a compiler warning from simpleraytracer (#1185).
+- Update lock.yaml.
+
+- Update lock.yaml (#1309).
+
+
+# igraph 2.0.3.9002
+
+## Chore
+
+- Work around https://github.com/igraph/igraph/pull/2527.
+
+- Apply patch after vendoring.
+
+- Update vendored sources to igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472.
+
+
+# igraph 2.0.3.9001
+
+- Internal changes only.
+
+
+# igraph 2.0.3.9000
+
+- Merge branch 'cran-2.0.3'.
+
+
+# igraph 2.0.3
+
+See <https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md> for a complete changelog of the bundled C core, and <https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84> for the changes since the igraph 2.0.1.
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
 
 ## Features
 
-  - `distances()` now supports the Floyd-Warshall algorithm (#1186).
-
-## Documentation
-
-  - Fix typo in `?articulation_points` (#1191).
-
-
-# igraph 2.0.1.9002
-
-## Documentation
-
-  - Improve installation and troubleshooting instructions (#1184).
-
-
-# igraph 2.0.1.9001
+- GMP is no longer a dependency (#1256), libxml2 (#1282) and glpk are optional.
+- Update vendored sources to igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9.
+- New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
 
 ## Bug fixes
 
-  - Remove zeros from the `order` and `order.out` components returned by `dfs()` (#1179).
+- Fix `rglplot(edge_label = )` (#1267).
 
-## Chore
+## Continuous integration
 
-  - Update NEWS.
-
-## Uncategorized
-
-  - Merge branch 'cran-2.0.1.1'.
-
-
-# igraph 2.0.1.9000
-
-## Bug fixes
-
-  - HAVE\_GFORTRAN flag for `win` and `ucrt` (#1171).
+- Run examples with sanitizer (#1288).
+- Add scheduled builds.
 
 ## Documentation
 
-  - Improve docs of assortativity (#1151).
+- Make `x11()` usage in example happen only in interactive sessions (#1301).
+- Remove misleading comment about warning given as no warning is given (#1294).
+- Improve `min_st_separators()` documentation (#1264).
+- Add link to discussion forum (#1279) and logo (#1280).
+- Add code finding duplicate `@seealso`, and use it (#1270).
+- Remove duplicate `@seealso` from `?sample_pa` (#1268).
+- Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
+- Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
+- Split `is_bipartite()` manual page from other manual page (#1230).
+- Improve bug report template.
+- `CITATION.cff` contains only the first three version components.
+- Install lock workflow to lock stale discussions after one year (#1304).
 
-## Refactoring
+## Internal
 
-  - Add read-only comments for RStudio IDE (#1152).
-
-## Uncategorized
-
-  - Merge branch 'cran-2.0.1'.
-
-
-# igraph 2.0.0.9006
-
-## Refactoring
-
-  - Remove "compatibility with S" and use of `is.R()` (#1168).
-
-
-# igraph 2.0.0.9005
-
-  - Internal changes only.
+- Replace use of deprecated `barabasi.game()` with `sample_pa()` (#1291).
+- Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
 
 
-# igraph 2.0.0.9004
+# igraph 2.0.2
 
-- Add test (#1163).
+See <https://github.com/igraph/rigraph/blob/f3fa58b/src/vendor/cigraph/CHANGELOG.md> for a complete changelog of the bundled C core, and <https://github.com/igraph/rigraph/compare/1bd2bf79..f3fa58b#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84> for the changes since the igraph 2.0.1.
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
 
+## Bug fixes
 
-# igraph 2.0.0.9003
+- `g + vertices(1, 2, foo = 3)` works again, regression introduced in igraph 2.0.0 (#1247).
+- `sample_pa()` respects the `out.seq` and `out.dist` arguments again, regression introduced in igraph 2.0.0 (#1226).
+- `isomorphisms()` and `subgraph_isomorphisims(method = "vf2")` work again, regression introduced in 2.0.0 (#1219).
+- `biconnected_components()` now returns edge and vertex sequences again, regression introduced in 2.0.0 (#1213).
+- Remove zeros from the `order` and `order.out` components returned by `dfs()`, regression introduced in 2.0.0 (#1179).
+- Memory leaks when converting data to C (#1196).
 
-  - Internal changes only.
+## Features
 
+- `realize_bipartite_degseq()` creates a bipartite graph from two degree sequences (#1212).
+- `is_biconnected()` checks if a graph is biconnected (#1204).
+- `distances()` now supports the Floyd-Warshall algorithm (#1186).
 
-# igraph 2.0.0.9002
+## Documentation
 
-- Merge branch 'cran-2.0.0'.
+- Use more culturally diverse names in intro vignettes (#1246).
+- Formatting tweaks in introductory vignettes (#1243).
+- Recommend {pak} instead of {remotes} (#1228).
+- Fix typo in `mean_distance()` docs.
+- Update troubleshooting document, emphasize issues with Anaconda environments (#1209).
+- Improved docs for shortest path functions (#1201).
+- Document `"dsatur"` heuristic for `greedy_vertex_coloring()` (#1206).
+- Remove scg related docs (#1167).
+- Fix typo in `?articulation_points` (#1191).
+- Improve installation and troubleshooting instructions (#1184).
+- Improve docs of assortativity (#1151).
 
+## Testing
 
-# igraph 2.0.0.9001
+- Add tests for `isomorphisms()` and `subgraph_isomorphisms()` (#1225).
 
-  - Merge branch 'cran-2.0.0'.
+## Packaging
 
+- Always use bundled mini-gmp (#1233).
+- `config.h` defines `HAVE___UINT128_T` (#1216).
+- Do not rely on `which` program during configuration (#1232).
+- `configure` manage libxml multiple include paths (#1197).
+- Remove empty string in `configure` (#1235).
+- Link Fortran runtime on Windows as needed by arpack. (#1215).
+- Workaround for deprecated enum values not being supported with old GCC (#1205).
+- `HAVE_GFORTRAN` flag for `win` and `ucrt` (#1171).
+- `make_empty_graph()` is now fully auto-generated (#1068).
+- Eliminate manual edits from autogenerated files (#1207).
+- Add read-only comments for RStudio IDE (#1152).
 
-# igraph 2.0.0.9000
+## Internal
 
-- Merge branch 'cran-2.0.0'.
+- Remove unused patch files (#1234).
+- Update stimulus to 0.21.4 (#1210).
+- Avoid duplicate objects (#1223).
+- Eliminate a compiler warning from simpleraytracer (#1185).
 
 
 # igraph 2.0.1.1

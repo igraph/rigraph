@@ -163,37 +163,6 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
-/ igraph_empty_attrs                         /
-/-------------------------------------------*/
-SEXP R_igraph_empty_attrs(SEXP n, SEXP directed) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_integer_t c_n;
-  igraph_bool_t c_directed;
-
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  IGRAPH_R_CHECK_INT(n);
-  c_n = (igraph_integer_t) REAL(n)[0];
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_empty_attrs(&c_graph, c_n, c_directed, 0));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_get_all_eids_between                /
 /-------------------------------------------*/
 SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed) {
@@ -1644,6 +1613,34 @@ SEXP R_igraph_sample_dirichlet(SEXP n, SEXP alpha) {
 }
 
 /*-------------------------------------------/
+/ igraph_are_adjacent                        /
+/-------------------------------------------*/
+SEXP R_igraph_are_adjacent(SEXP graph, SEXP v1, SEXP v2) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_v1;
+  igraph_integer_t c_v2;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_v1 = (igraph_integer_t) REAL(v1)[0];
+  c_v2 = (igraph_integer_t) REAL(v2)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_are_adjacent(&c_graph, c_v1, c_v2, &c_res));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_closeness                           /
 /-------------------------------------------*/
 SEXP R_igraph_closeness(SEXP graph, SEXP vids, SEXP mode, SEXP weights, SEXP normalized) {
@@ -2756,7 +2753,7 @@ SEXP R_igraph_spanner(SEXP graph, SEXP stretch, SEXP weights) {
   c_stretch = REAL(stretch)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_spanner(&c_graph, &c_spanner, c_stretch, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_spanner(&c_graph, &c_spanner, c_stretch, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights))));
 
                                         /* Convert output */
   PROTECT(spanner=R_igraph_vector_int_to_SEXPp1(&c_spanner));
@@ -8708,6 +8705,34 @@ SEXP R_igraph_list_triangles(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_join                                /
+/-------------------------------------------*/
+SEXP R_igraph_join(SEXP left, SEXP right) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_t c_left;
+  igraph_t c_right;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(left, &c_left);
+  R_SEXP_to_igraph(right, &c_right);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_join(&c_res, &c_left, &c_right));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_induced_subgraph_map                /
 /-------------------------------------------*/
 SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
@@ -11024,6 +11049,30 @@ SEXP R_igraph_tree_from_parent_vector(SEXP parents, SEXP type) {
   igraph_vector_int_destroy(&c_parents);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_complete                         /
+/-------------------------------------------*/
+SEXP R_igraph_is_complete(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_complete(&c_graph, &c_res));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);

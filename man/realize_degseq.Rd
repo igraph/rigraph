@@ -27,7 +27,7 @@ should be even. For directed graphs its sum should be the same as the sum of
 unimplemented). \dQuote{all} allows all types of edges. The default is
 \dQuote{simple}.}
 
-\item{method}{Character, the method for generating the graph; see above.}
+\item{method}{Character, the method for generating the graph; see below.}
 }
 \value{
 The new graph object.

@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_IGRAPH_LGL_YY_YY_TAB_H_INCLUDED
-# define YY_IGRAPH_LGL_YY_YY_TAB_H_INCLUDED
+#ifndef YY_IGRAPH_LGL_YY_SRC_VENDOR_IO_LGL_PARSER_H_INCLUDED
+# define YY_IGRAPH_LGL_YY_SRC_VENDOR_IO_LGL_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -71,7 +71,7 @@ union YYSTYPE
   igraph_integer_t edgenum;
   igraph_real_t weightnum;
 
-#line 75 "yy.tab.h"
+#line 75 "src/vendor/io/lgl-parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -99,4 +99,4 @@ struct YYLTYPE
 int igraph_lgl_yyparse (igraph_i_lgl_parsedata_t* context);
 
 
-#endif /* !YY_IGRAPH_LGL_YY_YY_TAB_H_INCLUDED  */
+#endif /* !YY_IGRAPH_LGL_YY_SRC_VENDOR_IO_LGL_PARSER_H_INCLUDED  */

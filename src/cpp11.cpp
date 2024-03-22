@@ -37,7 +37,7 @@ extern SEXP R_igraph_adjlist(void *, void *, void *);
 extern SEXP R_igraph_all_minimal_st_separators(void *);
 extern SEXP R_igraph_all_st_cuts(void *, void *, void *);
 extern SEXP R_igraph_all_st_mincuts(void *, void *, void *, void *);
-extern SEXP R_igraph_are_connected(void *, void *, void *);
+extern SEXP R_igraph_are_adjacent(void *, void *, void *);
 extern SEXP R_igraph_arpack(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_arpack_unpack_complex(void *, void *, void *);
 extern SEXP R_igraph_articulation_points(void *);
@@ -155,7 +155,6 @@ extern SEXP R_igraph_edges(void *, void *);
 extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
-extern SEXP R_igraph_empty_attrs(void *, void *);
 extern SEXP R_igraph_erdos_renyi_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_es_adj(void *, void *, void *, void *);
 extern SEXP R_igraph_es_pairs(void *, void *, void *);
@@ -248,6 +247,7 @@ extern SEXP R_igraph_is_acyclic(void *);
 extern SEXP R_igraph_is_biconnected(void *);
 extern SEXP R_igraph_is_bipartite(void *);
 extern SEXP R_igraph_is_chordal(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_is_complete(void *);
 extern SEXP R_igraph_is_connected(void *, void *);
 extern SEXP R_igraph_is_dag(void *);
 extern SEXP R_igraph_is_directed(void *);
@@ -270,6 +270,7 @@ extern SEXP R_igraph_isoclass_subgraph(void *, void *);
 extern SEXP R_igraph_isomorphic(void *, void *);
 extern SEXP R_igraph_isomorphic_bliss(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_isomorphic_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_join(void *, void *);
 extern SEXP R_igraph_joint_degree_distribution(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_joint_degree_matrix(void *, void *, void *, void *);
 extern SEXP R_igraph_joint_type_distribution(void *, void *, void *, void *, void *, void *);
@@ -494,7 +495,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
     {"R_igraph_all_st_cuts",                                (DL_FUNC) &R_igraph_all_st_cuts,                                 3},
     {"R_igraph_all_st_mincuts",                             (DL_FUNC) &R_igraph_all_st_mincuts,                              4},
-    {"R_igraph_are_connected",                              (DL_FUNC) &R_igraph_are_connected,                               3},
+    {"R_igraph_are_adjacent",                               (DL_FUNC) &R_igraph_are_adjacent,                                3},
     {"R_igraph_arpack",                                     (DL_FUNC) &R_igraph_arpack,                                      5},
     {"R_igraph_arpack_unpack_complex",                      (DL_FUNC) &R_igraph_arpack_unpack_complex,                       3},
     {"R_igraph_articulation_points",                        (DL_FUNC) &R_igraph_articulation_points,                         1},
@@ -612,7 +613,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
-    {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 2},
     {"R_igraph_erdos_renyi_game",                           (DL_FUNC) &R_igraph_erdos_renyi_game,                            5},
     {"R_igraph_es_adj",                                     (DL_FUNC) &R_igraph_es_adj,                                      4},
     {"R_igraph_es_pairs",                                   (DL_FUNC) &R_igraph_es_pairs,                                    3},
@@ -705,6 +705,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_biconnected",                             (DL_FUNC) &R_igraph_is_biconnected,                              1},
     {"R_igraph_is_bipartite",                               (DL_FUNC) &R_igraph_is_bipartite,                                1},
     {"R_igraph_is_chordal",                                 (DL_FUNC) &R_igraph_is_chordal,                                  5},
+    {"R_igraph_is_complete",                                (DL_FUNC) &R_igraph_is_complete,                                 1},
     {"R_igraph_is_connected",                               (DL_FUNC) &R_igraph_is_connected,                                2},
     {"R_igraph_is_dag",                                     (DL_FUNC) &R_igraph_is_dag,                                      1},
     {"R_igraph_is_directed",                                (DL_FUNC) &R_igraph_is_directed,                                 1},
@@ -727,6 +728,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_isomorphic",                                 (DL_FUNC) &R_igraph_isomorphic,                                  2},
     {"R_igraph_isomorphic_bliss",                           (DL_FUNC) &R_igraph_isomorphic_bliss,                            5},
     {"R_igraph_isomorphic_vf2",                             (DL_FUNC) &R_igraph_isomorphic_vf2,                              6},
+    {"R_igraph_join",                                       (DL_FUNC) &R_igraph_join,                                        2},
     {"R_igraph_joint_degree_distribution",                  (DL_FUNC) &R_igraph_joint_degree_distribution,                   8},
     {"R_igraph_joint_degree_matrix",                        (DL_FUNC) &R_igraph_joint_degree_matrix,                         4},
     {"R_igraph_joint_type_distribution",                    (DL_FUNC) &R_igraph_joint_type_distribution,                     6},

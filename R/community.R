@@ -2782,3 +2782,44 @@ communities <- groups.communities
 #' @export
 #' @family functions for manipulating graph structure
 contract <- contract_vertices_impl
+
+
+#' Voronoi partitioning of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function partitions the vertices of a graph based on a set of generator
+#' vertices. Each vertex is assigned to the generator vertex from (or to) which
+#' it is closest.
+#'
+#' [groups()] may be used on the output of this function.
+#'
+#' @param graph The graph to partition into Voronoi cells.
+#' @param generators The generator vertices of the Voronoi cells.
+#' @param mode Character string. In directed graphs, whether to compute
+#'   distances from generator vertices to other vertices (`"out"`), to
+#'   generator vertices from other vertices (`"in"`), or ignore edge
+#'   directions entirely (`"all"`). Ignored in undirected graphs.
+#' @param tiebreaker Character string that specifies what to do when a vertex
+#'   is at the same distance from multiple generators. `"random"` assigns
+#'   a minimal-distance generator randomly, `"first"` takes the first one,
+#'   and `"last"` takes the last one.
+#' @inheritParams distances
+#' @inheritParams rlang::args_dots_empty
+#' @return A named list with two components:
+#'   \item{membership}{numeric vector giving the cluster id to which each vertex
+#'   belongs.}
+#'   \item{distances}{numeric vector giving the distance of each vertex from its
+#'   generator}
+#' @seealso [distances()]
+#' @examples
+#'
+#' g <- make_lattice(c(10,10))
+#' clu <- voronoi_cells(g, c(25, 43, 67))
+#' groups(clu)
+#' plot(g, vertex.color=clu$membership)
+#'
+#' @export
+#' @family community
+voronoi_cells <- voronoi_impl

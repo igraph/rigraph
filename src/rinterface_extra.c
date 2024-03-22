@@ -2794,7 +2794,7 @@ igraph_t *R_igraph_get_pointer(SEXP graph) {
     if (Rf_xlength(graph) == 11) {
       Rf_error("This graph was created by igraph < 0.2.\n  Upgrading this format is not supported, sorry.");
     }
-    Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
+    Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_graph() before using igraph functions on that object.");
   }
 
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
@@ -4308,23 +4308,23 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   igraph_integer_t n;
   igraph_real_t power=REAL(ppower)[0];
   igraph_integer_t m=Rf_isNull(pm) ? 0 : (igraph_integer_t) REAL(pm)[0];
-  igraph_vector_int_t outseq, *myoutseq=0;
+  igraph_vector_int_t outseq, *myoutseq = NULL;
   igraph_bool_t outpref=LOGICAL(poutpref)[0];
   igraph_real_t A=REAL(pA)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_barabasi_algorithm_t algo = (igraph_barabasi_algorithm_t) Rf_asInteger(palgo);
-  igraph_t start, *ppstart=0;
+  igraph_t start, *ppstart = NULL;
+  igraph_bool_t have_outseq = !Rf_isNull(poutseq);
   SEXP result;
 
   R_check_int_scalar(pn);
   n = (igraph_integer_t) REAL(pn)[0];
 
-  if (!Rf_isNull(poutseq)) {
+  if (have_outseq) {
     R_SEXP_to_vector_int_copy(poutseq, &outseq);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&outseq, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &outseq);
+    myoutseq = &outseq;
   }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &outseq);
 
   if (!Rf_isNull(pstart)) {
     R_SEXP_to_igraph(pstart, &start);
@@ -4333,8 +4333,11 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
 
   IGRAPH_R_CHECK(igraph_barabasi_game(&g, n, power, m, myoutseq, outpref, A, directed, algo, ppstart));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_vector_int_destroy(&outseq);
-  IGRAPH_FINALLY_CLEAN(1);
+
+  if (have_outseq) {
+    igraph_vector_int_destroy(&outseq);
+    IGRAPH_FINALLY_CLEAN(1);
+  }
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -4765,23 +4768,6 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   SET_NAMES(result, names);
 
   UNPROTECT(2);
-  return result;
-}
-
-SEXP R_igraph_are_connected(SEXP graph, SEXP pv1, SEXP pv2) {
-
-  igraph_t g;
-  igraph_integer_t v1=(igraph_integer_t) REAL(pv1)[0];
-  igraph_integer_t v2=(igraph_integer_t) REAL(pv2)[0];
-  igraph_bool_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  PROTECT(result=NEW_LOGICAL(1));
-  IGRAPH_R_CHECK(igraph_are_connected(&g, v1, v2, &res));
-  LOGICAL(result)[0]=res;
-
-  UNPROTECT(1);
   return result;
 }
 

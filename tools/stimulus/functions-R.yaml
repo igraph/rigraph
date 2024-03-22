@@ -11,7 +11,10 @@
 #######################################
 
 igraph_empty:
-    IGNORE: RR
+
+# Not needed in R, we use igraph_emtpy() instead
+igraph_empty_attrs:
+    IGNORE: RR, RC
 
 igraph_add_edges:
     IGNORE: RR, RC, RInit
@@ -48,8 +51,6 @@ igraph_edge:
 
 igraph_edges:
     IGNORE: RR, RC
-
-igraph_empty_attrs:
 
 igraph_get_eid:
     IGNORE: RR, RC, RInit
@@ -164,6 +165,12 @@ igraph_realize_degree_sequence:
       GATTR:
         name: Graph from degree sequence
       GATTR-PARAM: out_deg, in_deg, allowed_edge_types, method
+
+igraph_realize_bipartite_degree_sequence:
+    R:
+      GATTR:
+        name: Bipartite graph from degree sequence
+      GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
 
 igraph_circulant:
 
@@ -309,6 +316,7 @@ igraph_sample_dirichlet:
 # Basic query functions
 #######################################
 
+# Deprecated in C core
 igraph_are_connected:
     IGNORE: RR, RC
 
@@ -373,6 +381,7 @@ igraph_distances_johnson:
 igraph_distances_floyd_warshall:
 
 igraph_voronoi:
+    FIRST_KW_PARAM: weights
 
 igraph_get_all_simple_paths:
     IGNORE: RR

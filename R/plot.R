@@ -522,7 +522,6 @@ plot.igraph <- function(x,
 #' @family plot
 #' @export
 #' @keywords graphs
-#' @family plot
 #' @export
 #' @examples
 #'
@@ -839,7 +838,7 @@ rglplot.igraph <- function(x, ...) {
     y0 <- layout[, 2][el[, 1]]
     y1 <- layout[, 2][el[, 2]]
     z0 <- layout[, 3][el[, 1]]
-    z1 <- layout[, 4][el[, 2]]
+    z1 <- layout[, 3][el[, 2]]
     rgl::text3d((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, edge.labels,
       col = label.color
     )

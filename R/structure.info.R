@@ -43,8 +43,7 @@ are.connected <- function(graph, v1, v2) { # nocov start
 #' @param graph The graph.
 #' @param v1 The first vertex, tail in directed graphs.
 #' @param v2 The second vertex, head in directed graphs.
-#' @return A logical scalar, `TRUE` is a `(v1, v2)` exists in the
-#'   graph.
+#' @return A logical scalar, `TRUE` if edge `(v1, v2)` exists in the graph.
 #'
 #' @family structural queries
 #'
@@ -59,12 +58,4 @@ are.connected <- function(graph, v1, v2) { # nocov start
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
-are_adjacent <- function(graph, v1, v2) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_are_connected, graph, as_igraph_vs(graph, v1) - 1,
-    as_igraph_vs(graph, v2) - 1
-  )
-}
+are_adjacent <- are_adjacent_impl

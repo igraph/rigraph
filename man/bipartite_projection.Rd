@@ -92,7 +92,8 @@ print(proj2[[2]], g = TRUE, e = TRUE)
 \seealso{
 Bipartite graphs
 \code{\link{bipartite_mapping}()},
-\code{\link{is_bipartite}()}
+\code{\link{is_bipartite}()},
+\code{\link{make_bipartite_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

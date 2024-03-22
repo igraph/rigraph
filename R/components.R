@@ -98,20 +98,6 @@ articulation.points <- function(graph) { # nocov start
 # Connected components, subgraphs, kinda
 ###################################################################
 
-#' @family components
-#' @export
-count_components <- function(graph, mode = c("weak", "strong")) {
-  ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode,
-    "weak" = 1L,
-    "strong" = 2L
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_components, graph, mode)
-}
-
 #' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
 #'   frequency) is calculated.
@@ -230,7 +216,6 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
-#' @family components
 #' @export
 bridges <- bridges_impl
 
@@ -271,7 +256,61 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
-biconnected_components <- biconnected_components_impl
+biconnected_components <- function(graph) {
+  # Function call
+  res <- biconnected_components_impl(graph)
+
+  # TODO: Clean up after fixing "." / "_" problem.
+  # See https://github.com/igraph/rigraph/issues/1203
+
+  if (igraph_opt("return.vs.es")) {
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree.edges <- NULL
+  }
+
+  if (igraph_opt("return.vs.es")) {
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component.edges <- NULL
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$articulation_points <- create_vs(graph, res$articulation_points)
+    res$articulation.points <- NULL
+  }
+  res
+}
+
+#' Check biconnectedness
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Tests whether a graph is biconnected.
+#'
+#' @details
+#' A graph is biconnected if the removal of any single vertex (and its adjacent
+#' edges) does not disconnect it.
+#'
+#' igraph does not consider single-vertex graphs biconnected.
+#'
+#' Note that some authors do not consider the graph consisting of
+#' two connected vertices as biconnected, however, igraph does.
+#'
+#' @param graph The input graph. Edge directions are ignored.
+#' @return Logical, `TRUE` if the graph is biconnected.
+#' @seealso [articulation_points()], [biconnected_components()],
+#' [is_connected()], [vertex_connectivity()]
+#' @keywords graphs
+#' @examples
+#' is_biconnected(make_graph("bull"))
+#' is_biconnected(make_graph("dodecahedron"))
+#' is_biconnected(make_full_graph(1))
+#' is_biconnected(make_full_graph(2))
+#' @family components
+#' @export
+is_biconnected <- is_biconnected_impl
 
 
 #' @rdname components
