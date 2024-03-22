@@ -25,8 +25,8 @@ vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 will be used for this purpose.
 }
 \examples{
+\dontshow{if (rlang::is_installed("graph")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ## Undirected
-\dontrun{
 g <- make_ring(10)
 V(g)$name <- letters[1:10]
 GNEL <- as_graphnel(g)
@@ -39,7 +39,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=graph_from_graphnel]{graph_from_graphnel()}} for the other direction,

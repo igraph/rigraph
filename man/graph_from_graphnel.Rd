@@ -39,7 +39,7 @@ attributes of the multiple edges are lost: they are all replaced by the
 attributes of the first of the multiple edges.
 }
 \examples{
-\dontrun{
+\dontshow{if (rlang::is_installed("graph")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ## Undirected
 g <- make_ring(10)
 V(g)$name <- letters[1:10]
@@ -53,7 +53,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=as_graphnel]{as_graphnel()}} for the other direction,
