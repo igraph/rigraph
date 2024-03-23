@@ -109,7 +109,7 @@ extern int igraph_pajek_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 116 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 122 "src/vendor/cigraph/src/io/pajek-parser.y"
 
   igraph_integer_t intnum;
   igraph_real_t    realnum;

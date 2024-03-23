@@ -565,34 +565,6 @@ exit:
     return IGRAPH_SUCCESS;
 }
 
-/**
- * \function igraph_decompose_destroy
- * \brief Frees the contents of a pointer vector holding graphs.
- *
- * This function destroys and frees all <type>igraph_t</type>
- * objects held in \p complist. However, it does not destroy
- * \p complist itself. Use \ref igraph_vector_ptr_destroy() to destroy
- * \p complist.
- *
- * \param complist The list of graphs to destroy.
- *
- * Time complexity: O(n), n is the number of items.
- *
- * \deprecated 0.10.0
- */
-
-void igraph_decompose_destroy(igraph_vector_ptr_t *complist) {
-    igraph_integer_t i, n;
-
-    n = igraph_vector_ptr_size(complist);
-    for (i = 0; i < n; i++) {
-        if (VECTOR(*complist)[i] != 0) {
-            igraph_destroy(VECTOR(*complist)[i]);
-            IGRAPH_FREE(VECTOR(*complist)[i]);
-        }
-    }
-}
-
 static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
                                    igraph_graph_list_t *components,
                                    igraph_integer_t maxcompno, igraph_integer_t minelements);
@@ -677,6 +649,7 @@ static igraph_error_t igraph_i_decompose_weak(const igraph_t *graph,
     IGRAPH_VECTOR_INT_INIT_FINALLY(&verts, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids_old2new, no_of_nodes);
+    igraph_vector_int_fill(&vids_old2new, -1);
 
     /* vids_old2new would have been created internally in igraph_induced_subgraph(),
        but it is slow if the graph is large and consists of many small components,
@@ -784,6 +757,8 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
     /* The result */
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids_old2new, no_of_nodes);
+    igraph_vector_int_fill(&vids_old2new, -1);
+
     IGRAPH_VECTOR_INT_INIT_FINALLY(&verts, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&next_nei, no_of_nodes);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&out, 0);
@@ -1256,8 +1231,6 @@ igraph_error_t igraph_biconnected_components(const igraph_t *graph,
 /**
  * \function igraph_is_biconnected
  * \brief Checks whether a graph is biconnected.
- *
- * \experimental
  *
  * A graph is biconnected if the removal of any single vertex (and
  * its incident edges) does not disconnect it.
