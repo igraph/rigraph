@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9006
+
+## Documentation
+
+- Fix `sample_degseq()` example (#1297).
+
+- Fix `graph_from_adjacency_matrix()` examples to avoid warnings (#1302).
+
+- Replace `\dontrun{}` with `@examplesIf` (#1307).
+
+## Testing
+
+- Add skip condition for `rglplot` test (#1306).
+
+
 # igraph 2.0.3.9005
 
 ## Documentation
