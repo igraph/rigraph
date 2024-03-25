@@ -353,10 +353,10 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
 #'
 #' # Without and with weights
 #' ring <- make_ring(10)
-#' graph_center(g)
+#' graph_center(ring)
 #' # Add weights
-#' E(g)$weight <- seq_len(ecount(g))
-#' graph_center(g)
+#' E(ring)$weight <- seq_len(ecount(ring))
+#' graph_center(ring)
 #'
 #' @export
 graph_center <- graph_center_dijkstra_impl
