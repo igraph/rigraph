@@ -242,12 +242,8 @@ max_cardinality <- maximum_cardinality_search_impl
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams distances
+#' @inheritParams rlang::args_dots_empty
 #' @return `eccentricity()` returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
 #' @seealso [radius()] for a related concept,
@@ -259,29 +255,47 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- eccentricity_impl
+eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+    if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "eccentricity(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+}
 
 
 #' Radius of a graph
 #'
-#' The eccentricity of a vertex is its shortest path distance from the
-#' farthest other node in the graph. The smallest eccentricity in a graph
-#' is called its radius
+#' The eccentricity of a vertex is its distance from the farthest other node
+#' in the graph. The smallest eccentricity in a graph is called its radius.
 #'
 #' The eccentricity of a vertex is calculated by measuring the shortest
 #' distance from (or to) the vertex, to (or from) all vertices in the
 #' graph, and taking the maximum.
 #'
 #' This implementation ignores vertex pairs that are in different
-#' components.  Isolate vertices have eccentricity zero.
+#' components. Isolated vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
 #' @return A numeric scalar, the radius of the graph.
 #' @seealso [eccentricity()] for the underlying
 #'   calculations, [distances] for general shortest path
@@ -294,7 +308,58 @@ eccentricity <- eccentricity_impl
 #' radius(g)
 #' @family paths
 #' @export
-radius <- radius_impl
+radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+  if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "radius(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+}
+
+#' Central vertices of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' The center of a graph is the set of its vertices with minimal eccentricity.
+#'
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
+#' @return The vertex IDs of the central vertices.
+#' @seealso [eccentricity()], [radius()]
+#' @family paths
+#' @examples
+#' tree <- make_tree(100, 7)
+#' graph_center(tree)
+#' graph_center(tree, mode = "in")
+#' graph_center(tree, mode = "out")
+#'
+#' # Without and with weights
+#' ring <- make_ring(10)
+#' graph_center(ring)
+#' # Add weights
+#' E(ring)$weight <- seq_len(ecount(ring))
+#' graph_center(ring)
+#'
+#' @export
+graph_center <- graph_center_dijkstra_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,

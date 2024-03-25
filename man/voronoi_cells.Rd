@@ -23,7 +23,8 @@ voronoi_cells(
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
 attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute).}
+the graph has a \code{weight} attribute). In a weighted graph, the length
+of a path is the sum of the weights of its constituent edges.}
 
 \item{mode}{Character string. In directed graphs, whether to compute
 distances from generator vertices to other vertices (\code{"out"}), to
