@@ -277,11 +277,12 @@ get.edge.attribute <- function(graph, name, index = E(graph)) { # nocov start
 #' graph_attr(g, "name")
 graph_attr <- function(graph, name) {
   ensure_igraph(graph)
+
   if (missing(name)) {
-    graph.attributes(graph)
-  } else {
-    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
+    return(graph.attributes(graph))
   }
+
+  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
 }
 
 
