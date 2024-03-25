@@ -40,7 +40,7 @@ graph_center(tree, mode = "out")
 
 # Without and with weights
 ring <- make_ring(10)
-graph_center(g))
+graph_center(g)
 # Add weights
 E(g)$weight <- seq_len(ecount(g))
 graph_center(g)
