@@ -337,12 +337,14 @@ set_graph_attr <- function(graph, name, value) {
   ensure_igraph(graph)
 
   # Code that accesses g$layout can stay for now, revisit in 2029.
+  # https://github.com/igraph/rigraph/issues/775
   if (name == "layout" && is.matrix(value)) {
     lifecycle::deprecate_stop(
-      "2.0.3",
+      "2.1.0",
       "set_graph_attr(layout = 'matrix(...)')",
       "set_vertex_attr(layout = )",
-      details = "Using a matrix for the `layout` attribute is deprecated. Set the vertex attribute `layout` instead."
+      details = "Using a matrix for the `layout` attribute is deprecated.
+      Set the vertex attribute `layout` instead."
     )
     return(set_vertex_attr(graph, name, value))
   }
