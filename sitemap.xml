@@ -760,6 +760,9 @@
     <loc>https://r.igraph.org/reference/graph_attr_names.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graph_center.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/graph_from_adj_list.html</loc>
   </url>
   <url>
