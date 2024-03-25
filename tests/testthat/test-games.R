@@ -8,6 +8,45 @@ test_that("sample_degseq() works -- simple generator", {
   expect_equal(degree(directed_graph, mode = "in"), 10:1)
 })
 
+test_that("sample_degseq() works -- sample_gnp()", {
+  erdos_renyi <- sample_gnp(1000, 1 / 1000)
+  new_graph <- sample_degseq(degree(erdos_renyi), method = "simple")
+  expect_that(degree(new_graph), equals(degree(erdos_renyi)))
+
+  directed_erdos_renyi <- sample_gnp(1000, 2 / 1000, directed = TRUE)
+  new_directed_graph <- sample_degseq(
+    degree(directed_erdos_renyi, mode = "out"),
+    degree(directed_erdos_renyi, mode = "in"),
+    method = "simple"
+  )
+  expect_equal(
+    degree(new_directed_graph, mode = "out"),
+    degree(directed_erdos_renyi, mode = "out")
+  )
+  expect_equal(
+    degree(new_directed_graph, mode = "in"),
+    degree(directed_erdos_renyi, mode = "in")
+  )
+})
+
+test_that("sample_degseq() works -- simple generator, connected", {
+  gc <- function(graph) {
+    clu <- components(graph)
+    induced_subgraph(graph, which(clu$membership == which.max(clu$csize)))
+  }
+
+  original_graph <- gc(sample_gnp(1000, 2 / 1000))
+
+  simple_graph <- sample_degseq(degree(original_graph), method = "simple")
+  expect_equal(degree(simple_graph), degree(original_graph))
+
+  vl_graph <- sample_degseq(degree(simple_graph), method = "vl")
+  expect_equal(degree(vl_graph), degree(original_graph))
+  expect_true(is_connected(vl_graph))
+  expect_true(is_simple(vl_graph))
+
+})
+
 test_that("sample_degseq() works -- vl generator", {
   degrees <- rep(2, 100)
   vl_graph <- sample_degseq(degrees, method = "vl")
