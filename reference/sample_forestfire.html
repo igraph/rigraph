@@ -12,7 +12,7 @@ spreads by igniting trees close by."><meta property="og:image" content="https://
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9007</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -179,14 +179,20 @@ model.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fire</span> <span class="op">&lt;-</span> <span class="fu">sample_forestfire</span><span class="op">(</span><span class="fl">50</span>, fw.prob <span class="op">=</span> <span class="fl">0.37</span>, bw.factor <span class="op">=</span> <span class="fl">0.32</span> <span class="op">/</span> <span class="fl">0.37</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fire</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="sample_forestfire-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_forestfire</span><span class="op">(</span><span class="fl">10000</span>, fw.prob <span class="op">=</span> <span class="fl">0.37</span>, bw.factor <span class="op">=</span> <span class="fl">0.32</span> <span class="op">/</span> <span class="fl">0.37</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dd1</span> <span class="op">&lt;-</span> <span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span>, mode <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dd2</span> <span class="op">&lt;-</span> <span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># The forest fire model produces graphs with a heavy tail degree distribution.</span></span></span>
+<span class="r-in"><span><span class="co"># Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>along.with <span class="op">=</span> <span class="va">dd1</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">dd1</span>, log <span class="op">=</span> <span class="st">"xy"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 x value &lt;= 0 omitted from logarithmic plot</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>593 y values &lt;= 0 omitted from logarithmic plot</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>579 y values &lt;= 0 omitted from logarithmic plot</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>along.with <span class="op">=</span> <span class="va">dd2</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, <span class="va">dd2</span>, col <span class="op">=</span> <span class="fl">2</span>, pch <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="sample_forestfire-1.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="sample_forestfire-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
