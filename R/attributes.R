@@ -380,20 +380,18 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   ensure_igraph(graph)
   if (missing(name)) {
     if (missing(index)) {
-      vertex.attributes(graph)
-    } else {
-      vertex.attributes(graph, index = index)
+      return(vertex.attributes(graph))
     }
-  } else {
-    myattr <-
-      .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (is_complete_iterator(index)) {
-      myattr
-    } else {
-      index <- as_igraph_vs(graph, index)
-      myattr[index]
-    }
+    return(vertex.attributes(graph, index = index))
   }
+  myattr <-
+    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
+  if (is_complete_iterator(index)) {
+    return(myattr)
+  }
+  index <- as_igraph_vs(graph, index)
+  myattr[index]
+
 }
 
 #' Set one or more vertex attributes
