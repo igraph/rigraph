@@ -470,7 +470,6 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   if (!missing(index) && check) {
     index <- as_igraph_vs(graph, index)
   }
-  name <- as.character(name)
 
   vattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
