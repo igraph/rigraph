@@ -349,10 +349,7 @@ graph.attributes <- function(graph) {
 #' @export
 "graph.attributes<-" <- function(graph, value) {
   ensure_igraph(graph)
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
 }
@@ -535,10 +532,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 "vertex.attributes<-" <- function(graph, index = V(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of vertices")
   }
@@ -744,10 +739,8 @@ edge.attributes <- function(graph, index = E(graph)) {
 "edge.attributes<-" <- function(graph, index = E(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of edges")
   }
@@ -1188,4 +1181,21 @@ NULL
 #' @export
 `$<-.igraph` <- function(x, name, value) {
   set_graph_attr(x, name, value)
+}
+
+assert_named_list <- function(value) {
+  error_msg <- "{.arg value} must be a named list with unique names"
+
+  if (!is.list(value)) {
+    rlang::abort(error_msg)
+  }
+
+  if (length(value) == 0) {
+    return()
+  }
+
+  if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
+
+    rlang::abort(error_msg)
+  }
 }
