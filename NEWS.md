@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9007
+
+## Features
+
+- Weight support for `eccentricity()` and `radius()` (@krlmlr, #1211).
+
+## Refactoring
+
+- Early return() in graph_attr() (#1320).
+
+
 # igraph 2.0.3.9006
 
 ## Documentation
