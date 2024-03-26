@@ -1,10 +1,6 @@
 test_that("edge_connectivity works", {
-  gc <- function(graph) {
-    clu <- components(graph)
-    induced_subgraph(graph, which(clu$membership == which.max(clu$csize)))
-  }
 
-  g <- gc(sample_gnp(30, 8 / 30))
+  g <- largest_component(sample_gnp(30, 8 / 30))
   ec <- edge_connectivity(g)
   ecST <- Inf
   for (j in 1:(vcount(g) - 1)) {
@@ -15,9 +11,11 @@ test_that("edge_connectivity works", {
       }
     }
   }
-  expect_that(ec, equals(ecST))
+  expect_equal(ec, ecST)
 
-  ####
+})
+
+test_that("edge_connectivity works -- names", {
 
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
@@ -35,7 +33,7 @@ test_that("edge_connectivity works", {
   ec1 <- edge_connectivity(kite, source = "Heather", target = "Andre")
   ec2 <- edge_connectivity(kite, source = "Garth", target = "Andre")
   ec3 <- edge_connectivity(kite, source = "Garth", target = "Ike")
-  expect_that(ec1, equals(2))
-  expect_that(ec2, equals(4))
-  expect_that(ec3, equals(1))
+  expect_equal(ec1, 2)
+  expect_equal(ec2, 4)
+  expect_equal(ec3, 1)
 })
