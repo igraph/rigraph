@@ -1304,12 +1304,12 @@ harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
 
-bonpow.dense <- function(graph, nodes = V(graph),
-                         loops = FALSE, exponent = 1,
+bonpow.dense <- function(graph, nodes = V(graph), loops = FALSE,
+                         exponent = 1, weights = NULL,
                          rescale = FALSE, tol = 1e-7) {
   ensure_igraph(graph)
 
-  d <- as_adj(graph)
+  d <- as_adj(graph, attr = weights)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1328,7 +1328,8 @@ bonpow.dense <- function(graph, nodes = V(graph),
 }
 
 bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
-                          exponent = 1, rescale = FALSE, tol = 1e-07) {
+                          exponent = 1, weights = NULL,
+                          rescale = FALSE, tol = 1e-07) {
   ## remove loops if requested
   if (!loops) {
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
@@ -1337,13 +1338,13 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adj(graph, sparse = TRUE)
+  d <- as_adj(graph, attr = weights, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
 
   ## solve it
-  ev <- Matrix::solve(id - exponent * d, degree(graph, mode = "out"), tol = tol)
+  ev <- Matrix::solve(id - exponent * d, strength(graph, mode = "out"), tol = tol)
 
   if (rescale) {
     ev <- ev / sum(ev)
@@ -1408,6 +1409,13 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #'   loops.  `loops` is `FALSE` by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality
 #'   score; can be negative
+#' @param weights A numerical vector or `NULL`. This argument can be used
+#'   to give edge weights for calculating the weighted eigenvector centrality of
+#'   vertices. If this is `NULL` and the graph has a `weight` edge
+#'   attribute then that is used. If `weights` is a numerical vector then it is
+#'   used, even if the graph has a `weight` edge attribute. If this is
+#'   `NA`, then no edge weights are used (even if the graph has a
+#'   `weight` edge attribute).
 #' @param rescale if true, centrality scores are rescaled such that they sum to
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
@@ -1463,13 +1471,21 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' }
 #'
 power_centrality <- function(graph, nodes = V(graph),
-                             loops = FALSE, exponent = 1,
+                             loops = FALSE, exponent = 1, weights = NULL,
                              rescale = FALSE, tol = 1e-7, sparse = TRUE) {
   nodes <- as_igraph_vs(graph, nodes)
+
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- "weight"
+  }
+  if (any(is.na(weights))) {
+    weights <- NULL
+  }
+
   if (sparse) {
-    res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.sparse(graph, nodes, loops, exponent, weights, rescale, tol)
   } else {
-    res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.dense(graph, nodes, loops, exponent, weights, rescale, tol)
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

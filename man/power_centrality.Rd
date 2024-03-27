@@ -9,6 +9,7 @@ power_centrality(
   nodes = V(graph),
   loops = FALSE,
   exponent = 1,
+  weights = NULL,
   rescale = FALSE,
   tol = 1e-07,
   sparse = TRUE
@@ -26,6 +27,14 @@ loops.  \code{loops} is \code{FALSE} by default.}
 
 \item{exponent}{exponent (decay rate) for the Bonacich power centrality
 score; can be negative}
+
+\item{weights}{A numerical vector or \code{NULL}. This argument can be used
+to give edge weights for calculating the weighted eigenvector centrality of
+vertices. If this is \code{NULL} and the graph has a \code{weight} edge
+attribute then that is used. If \code{weights} is a numerical vector then it is
+used, even if the graph has a \code{weight} edge attribute. If this is
+\code{NA}, then no edge weights are used (even if the graph has a
+\code{weight} edge attribute).}
 
 \item{rescale}{if true, centrality scores are rescaled such that they sum to
 1.}
