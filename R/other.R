@@ -175,18 +175,6 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   return(types)
 }
 
-igraph.match.arg <- function(arg, choices, several.ok = FALSE) {
-  if (missing(choices)) {
-    formal.args <- formals(sys.function(sys.parent()))
-    choices <- eval(formal.args[[deparse(substitute(arg))]])
-  }
-
-  arg <- tolower(arg)
-  choices <- tolower(choices)
-
-  match.arg(arg = arg, choices = choices, several.ok = several.ok)
-}
-
 igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
