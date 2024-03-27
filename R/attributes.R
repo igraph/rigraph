@@ -517,12 +517,16 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
+  index_length_not_vertices_number <- (length(index) != vcount(graph))
+  some_index_not_vertices <- (any(index != V(graph)))
+
   if (!missing(index) &&
-    (length(index) != vcount(graph) || any(index != V(graph)))) {
+    (index_length_not_vertices_number || some_index_not_vertices)) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
     }
   }
+
   res
 }
 
