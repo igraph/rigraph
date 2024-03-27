@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9008
+
+## Refactoring
+
+- Less if else in vertex_attr() (#1324).
+
+- Add assert_named_list() helper to assert the value is a named list with no duplicate names (#1322).
+
+## Testing
+
+- Use largest_component() and expect_equal() in test files (#1323).
+
+## Uncategorized
+
+- Sample_forestfire() tests and example 🔥 (#1318).
+
+
 # igraph 2.0.3.9007
 
 ## Features
