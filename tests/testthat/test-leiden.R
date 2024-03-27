@@ -2,7 +2,7 @@ test_that("cluster_leiden works", {
   withr::local_seed(42)
 
   g <- make_graph("Zachary")
-  mc <- cluster_leiden(g, resolution_parameter = 0.06)
+  mc <- cluster_leiden(g, resolution = 0.06)
 
   expect_that(
     as.vector(membership(mc)),
