@@ -35,23 +35,10 @@ do_call <- function(f, ..., .args = list(), .env = parent.frame()) {
 }
 
 add_class <- function(x, class) {
-  if (!is(x, class)) {
-    class(x) <- c(class, class(x))
+  if (!inherits(x, class)) {
+    class(x) <- c(class(x), class)
   }
   x
-}
-
-`%||%` <- function (lhs, rhs) {
-  lres <- withVisible(eval(lhs, envir = parent.frame()))
-  if (is.null(lres$value)) {
-    eval(rhs, envir = parent.frame())
-  } else {
-    if (lres$visible) {
-      lres$value
-    } else {
-      invisible(lres$value)
-    }
-  }
 }
 
 `%&&%` <- function(lhs, rhs) {
@@ -73,7 +60,7 @@ grab_args <- function() {
   envir <- parent.frame()
   func <- sys.function(-1)
   call <- sys.call(-1)
-  dots <- match.call(func, call, expand.dots=FALSE)$...
+  dots <- match.call(func, call, expand.dots = FALSE)$...
   c(as.list(envir), dots)
 }
 
@@ -84,7 +71,7 @@ capitalize <- function(x) {
 }
 
 address <- function(x) {
-  .Call(C_R_igraph_address, x)
+  .Call(R_igraph_address, x)
 }
 
 `%+%` <- function(x, y) {
@@ -95,5 +82,14 @@ address <- function(x) {
 chr <- as.character
 
 drop_null <- function(x) {
-  x [!sapply(x, is.null)]
+  x[!sapply(x, is.null)]
+}
+
+# from https://github.com/r-lib/pkgdown/blob/c354aa7e5ea1f9936692494c28c89e5bdd31fc68/R/utils.R#L109
+modify_list <- function(x, y) {
+  if (is.null(y)) {
+    return(x)
+  }
+
+  utils::modifyList(x, y)
 }

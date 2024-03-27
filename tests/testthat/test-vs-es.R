@@ -1,8 +1,4 @@
-
-context("Vertex and edge sequences")
-
 test_that("we can create vertex/edge seqs", {
-
   g <- make_ring(10)
   V(g) %&&% expect_true(TRUE)
   E(g) %&&% expect_true(TRUE)
@@ -14,11 +10,9 @@ test_that("we can create vertex/edge seqs", {
   g <- make_ring(10)
   E(g)$name <- LETTERS[1:10]
   E(g) %&&% expect_true(TRUE)
-
 })
 
 test_that("vs/es keeps names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -38,18 +32,15 @@ test_that("vs/es keeps names", {
 })
 
 test_that("vs/es refers to the graph", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
 
   expect_identical(get_vs_graph(vs), g)
   expect_identical(get_es_graph(es), g)
-
 })
 
 test_that("vs/es refers to the original graph", {
-
   g <- g2 <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -58,11 +49,9 @@ test_that("vs/es refers to the original graph", {
 
   expect_identical(get_vs_graph(vs), g2)
   expect_identical(get_es_graph(es), g2)
-
 })
 
 test_that("vs/es references are weak", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -72,18 +61,16 @@ test_that("vs/es references are weak", {
 
   expect_null(get_vs_graph(vs))
   expect_null(get_es_graph(es))
-  
 })
 
 test_that("save/load breaks references", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
 
   tmp <- tempfile()
   on.exit(try(unlink(tmp)))
-  
+
   save(vs, es, file = tmp)
   rm(vs, es)
   gc()
@@ -91,35 +78,19 @@ test_that("save/load breaks references", {
   load(tmp)
   expect_null(get_vs_graph(vs))
   expect_null(get_es_graph(es))
-
-})
-
-test_that("we can use vs/es with broken refs", {
-
-  g <- make_ring(10)
-  vs <- V(g)
-  es <- E(g)
-
-  rm(g)
-  gc()
-
-  g2 <- make_ring(10)
-  ## TODO
-  
 })
 
 test_that("vs/es keeps names after graph is deleted", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
 
   E(g)$name <- LETTERS[1:10]
   es <- E(g)
-  
+
   rm(g)
   gc()
-  
+
   expect_equal(names(vs), letters[1:10])
 
   vs2 <- vs[4:7]
@@ -132,7 +103,6 @@ test_that("vs/es keeps names after graph is deleted", {
 })
 
 test_that("both edge and vertex names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   E(g)$name <- LETTERS[1:10]
@@ -141,7 +111,7 @@ test_that("both edge and vertex names", {
   expect_equal(as.vector(es), 1:10)
   expect_equal(names(es), LETTERS[1:10])
   el <- as_edgelist(g)
-  expect_equal(attr(es, "vnames"), paste(el[,1], el[,2], sep = "|"))
+  expect_equal(attr(es, "vnames"), paste(el[, 1], el[, 2], sep = "|"))
 
   x1 <- es[LETTERS[4:7]]
   x2 <- E(g)[4:7]
@@ -149,131 +119,84 @@ test_that("both edge and vertex names", {
   expect_equal(names(x1), names(x2))
   expect_equal(attr(x1, "vnames"), attr(x2, "vnames"))
 
-  y1 <- es[c('a|b', 'd|e')]
-  y2 <- E(g)[c(1,4)]
+  y1 <- es[c("a|b", "d|e")]
+  y2 <- E(g)[c(1, 4)]
   expect_equal(as.vector(y1), as.vector(y2))
   expect_equal(names(y1), names(y2))
   expect_equal(attr(y1, "vnames"), attr(y2, "vnames"))
-
 })
 
 test_that("printing connected vs/es works", {
+  local_igraph_options(print.id = FALSE)
 
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, from ", sid,
-           ":\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid,
-           ":\n [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10")
-  )
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+  })
 
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
+  expect_snapshot({
+    es[numeric()]
+  })
+})
 
-  expect_output(print(vs2), fixed = TRUE,
-                paste0("+ 5/10 vertices, from ", sid, ":\n[1] 1 2 3 4 5"))
-  expect_output(print(es2), fixed = TRUE,
-                paste0("+ 5/10 edges from ", sid,
-                       ":\n[1] 1--2 2--3 3--4 4--5 5--6"))
+test_that("printing named connected vs/es works", {
+  local_igraph_options(print.id = FALSE)
 
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, from ", sid, ":"))
-  expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, ":"))
-
+  g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, named, from ", sid,
-           ":\n [1] a b c d e f g h i j")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid, " (vertex names):\n",
-           " [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j")
-  )
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+  })
 
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
-
-  expect_output(
-    print(vs2), fixed = TRUE,
-    paste0("+ 5/10 vertices, named, from ", sid, ":\n[1] a b c d e")
-  )
-  expect_output(
-    print(es2), fixed = TRUE,
-    paste0("+ 5/10 edges from ", sid, " (vertex names):\n",
-           "[1] a--b b--c c--d d--e e--f")
-  )
-
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, named, from ", sid, ":"))
-  expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, " (vertex names):"))
+  expect_snapshot({
+    es[numeric()]
+  })
 })
 
 test_that("printing unconnected vs/es works", {
+  local_igraph_options(print.id = FALSE)
 
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
+  expect_snapshot({
+    vs
+    es
+  })
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, named, from ", sid,
-           " (deleted):\n [1] a b c d e f g h i j")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j")
-  )
-  
+  expect_snapshot({
+    vs
+    es
+  })
 })
 
 test_that("unconnected vs/es can be reused with the same graph", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)[1:5]
@@ -295,15 +218,27 @@ test_that("unconnected vs/es can be reused with the same graph", {
 })
 
 test_that("indexing without arguments", {
-
   g <- make_ring(10)
 
   x <- V(g)[]
-  expect_equal(V(g), x)
+  expect_equal(ignore_attr = TRUE, V(g), x)
 
   x2 <- V(g)[[]]
-  v <- V(g)
-  attr(v, "single") <- TRUE
+  v <- set_single_index(V(g))
 
-  expect_equal(v, x2)
+  expect_equal(ignore_attr = TRUE, v, x2)
+})
+
+test_that("vertex indexes are stored as raw numbers", {
+  g <- make_ring(3, directed = TRUE)
+  V(g)$id <- V(g)
+  expect_identical(V(g)$id, as.numeric(1:3))
+  expect_error(induced_subgraph(g, 1), NA)
+})
+
+test_that("edge indexes are stored as raw numbers", {
+  g <- make_ring(3, directed = TRUE)
+  E(g)$id <- E(g)
+  expect_identical(E(g)$id, as.numeric(1:3))
+  expect_error(induced_subgraph(g, 1:2), NA)
 })

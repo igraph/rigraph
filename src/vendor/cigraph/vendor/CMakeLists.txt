@@ -1,0 +1,7 @@
+add_subdirectory(cs)
+add_subdirectory(f2c)
+add_subdirectory(glpk)
+add_subdirectory(lapack)
+add_subdirectory(mini-gmp)
+add_subdirectory(pcg)
+add_subdirectory(plfit)

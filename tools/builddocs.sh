@@ -2,15 +2,19 @@
 
 tempdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 trap "rm -rf ${tempdir}" EXIT
-rsync -avq --exclude=cigraph --exclude=.git --exclude revdep . ${tempdir}/
+rsync -avq \
+    --exclude=cigraph \
+    --exclude=.git \
+    --exclude=revdep \
+    --exclude=.venv \
+    . ${tempdir}/
 
 (
     cd ${tempdir}
     rm -rf src
-    Rscript -e 'roxygen2::update_collate(".")'
-    Rscript -e 'library(devtools) ; document()'
+    Rscript -e 'devtools::document()'
 )
 
-cp ${tempdir}/DESCRIPTION .
+cp doc/*.Rd man/
 cp ${tempdir}/NAMESPACE .
-cp ${tempdir}/man/* man/
+cp -r ${tempdir}/man/* man/

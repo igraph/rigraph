@@ -1,0 +1,16 @@
+# See https://docs.codecov.io/docs/codecov-yaml for documentation
+
+codecov:
+  require_ci_to_pass: yes
+
+comment: false
+
+coverage:
+  precision: 2
+  round: down
+  range: "50...100"
+  status:
+    project:
+      default:
+        threshold: 0.1%
+    patch: off

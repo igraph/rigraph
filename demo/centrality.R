@@ -2,23 +2,27 @@
 pause <- function() {}
 
 ### Traditional approaches: degree, closeness, betweenness
-g <- graph_from_literal(Andre----Beverly:Diane:Fernando:Carol,
-               Beverly--Andre:Diane:Garth:Ed,
-               Carol----Andre:Diane:Fernando,
-               Diane----Andre:Carol:Fernando:Garth:Ed:Beverly,
-               Ed-------Beverly:Diane:Garth,
-               Fernando-Carol:Andre:Diane:Garth:Heather,
-               Garth----Ed:Beverly:Diane:Fernando:Heather,
-               Heather--Fernando:Garth:Ike,
-               Ike------Heather:Jane,
-               Jane-----Ike )
+g <- graph_from_literal(
+  Andre ---- Beverly:Diane:Fernando:Carol,
+  Beverly -- Andre:Diane:Garth:Ed,
+  Carol ---- Andre:Diane:Fernando,
+  Diane ---- Andre:Carol:Fernando:Garth:Ed:Beverly,
+  Ed ------- Beverly:Diane:Garth,
+  Fernando - Carol:Andre:Diane:Garth:Heather,
+  Garth ---- Ed:Beverly:Diane:Fernando:Heather,
+  Heather -- Fernando:Garth:Ike,
+  Ike ------ Heather:Jane,
+  Jane ----- Ike
+)
 
 pause()
 
 ### Hand-drawn coordinates
-coords <- c(5,5,119,256,119,256,120,340,478,
-            622,116,330,231,116,5,330,451,231,231,231)
-coords <- matrix(coords, nc=2)
+coords <- c(
+  5, 5, 119, 256, 119, 256, 120, 340, 478,
+  622, 116, 330, 231, 116, 5, 330, 451, 231, 231, 231
+)
+coords <- matrix(coords, ncol = 2)
 
 pause()
 
@@ -30,16 +34,18 @@ pause()
 
 ### Take a look at it
 plotG <- function(g) {
-  plot(g, asp=FALSE, vertex.label.color="blue", vertex.label.cex=1.5,
-       vertex.label.font=2, vertex.size=25, vertex.color="white",
-       vertex.frame.color="white", edge.color="black")
+  plot(g,
+    asp = FALSE, vertex.label.color = "blue", vertex.label.cex = 1.5,
+    vertex.label.font = 2, vertex.size = 25, vertex.color = "white",
+    vertex.frame.color = "white", edge.color = "black"
+  )
 }
 plotG(g)
 
 pause()
 
 ### Add degree centrality to labels
-V(g)$label <- paste(sep="\n", V(g)$name, degree(g))
+V(g)$label <- paste(sep = "\n", V(g)$name, degree(g))
 
 pause()
 
@@ -49,44 +55,46 @@ plotG(g)
 pause()
 
 ### Betweenness
-V(g)$label <- paste(sep="\n", V(g)$name, round(betweenness(g), 2))
+V(g)$label <- paste(sep = "\n", V(g)$name, round(betweenness(g), 2))
 plotG(g)
 
 pause()
 
 ### Closeness
-V(g)$label <- paste(sep="\n", V(g)$name, round(closeness(g), 2))
+V(g)$label <- paste(sep = "\n", V(g)$name, round(closeness(g), 2))
 plotG(g)
 
 pause()
 
 ### Eigenvector centrality
-V(g)$label <- paste(sep="\n", V(g)$name, round(eigen_centrality(g)$vector, 2))
+V(g)$label <- paste(sep = "\n", V(g)$name, round(eigen_centrality(g)$vector, 2))
 plotG(g)
 
 pause()
 
 ### PageRank
-V(g)$label <- paste(sep="\n", V(g)$name, round(page_rank(g)$vector, 2))
+V(g)$label <- paste(sep = "\n", V(g)$name, round(page_rank(g)$vector, 2))
 plotG(g)
 
 pause()
 
 ### Correlation between centrality measures
 karate <- make_graph("Zachary")
-cent <- list(`Degree`=degree(g),
-             `Closeness`=closeness(g),
-             `Betweenness`=betweenness(g),
-             `Eigenvector`=eigen_centrality(g)$vector,
-             `PageRank`=page_rank(g)$vector)
+cent <- list(
+  `Degree` = degree(g),
+  `Closeness` = closeness(g),
+  `Betweenness` = betweenness(g),
+  `Eigenvector` = eigen_centrality(g)$vector,
+  `PageRank` = page_rank(g)$vector
+)
 
 pause()
 
 ### Pairs plot
-pairs(cent, lower.panel=function(x,y) {
+pairs(cent, lower.panel = function(x, y) {
   usr <- par("usr")
-  text(mean(usr[1:2]), mean(usr[3:4]), round(cor(x,y), 3), cex=2, col="blue")
-} )
+  text(mean(usr[1:2]), mean(usr[3:4]), round(cor(x, y), 3), cex = 2, col = "blue")
+})
 
 pause()
 
@@ -94,7 +102,7 @@ pause()
 ## ##  You will need internet connection for this to work
 ## vertices <- read.csv("http://jhfowler.ucsd.edu/data/judicial.csv")
 ## edges <- read.table("http://jhfowler.ucsd.edu/data/allcites.txt")
-## jg <- graph.data.frame(edges, vertices=vertices, dir=TRUE)
+## jg <- graph.data.frame(edges, vertices=vertices, directed=TRUE)
 
 ## pause()
 

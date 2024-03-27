@@ -22,24 +22,139 @@
 ##
 ## -----------------------------------------------------------------
 
-#' Make a new graph
+#' Takes an argument list and extracts the constructor specification and
+#' constructor modifiers from it.
 #'
-#' This is is generic function for creating graphs.
+#' This is a helper function for the common parts of `make_()` and
+#' `sample_()`.
+#'
+#' @param ... Parameters to extract from
+#' @param .operation Human-readable description of the operation that this
+#'   helper is a part of
+#' @param .variant Constructor variant; must be one of \sQuote{make},
+#'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
+#'   specification has deterministic and random variants.
+#' @family constructor modifiers
+#' @return A named list with three items: \sQuote{cons} for the constructor
+#'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
+#'   remaining, unparsed arguments.
+#' @noRd
+.extract_constructor_and_modifiers <- function(..., .operation, .variant) {
+  args <- list(...)
+  cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
+  if (sum(cidx) == 0) {
+    stop("Don't know how to ", .operation, ", nothing given")
+  }
+  if (sum(cidx) > 1) {
+    stop("Don't know how to ", .operation, ", multiple constructors given")
+  }
+  cons <- args[cidx][[1]]
+  args <- args[!cidx]
+
+  ## Modifiers
+  wmods <- vapply(args, inherits, TRUE, what = "igraph_constructor_modifier")
+  mods <- args[wmods]
+  args <- args[!wmods]
+
+  ## Resolve the actual function in the specifier if it has multiple variants
+  if (!is.function(cons$fun)) {
+    variants <- names(cons$fun)
+    ## 'graph' can fall back to 'make' and vice versa if one is present but
+    ## not the other
+    if (!(.variant %in% variants)) {
+      if (.variant == "graph" && "make" %in% variants) {
+        .variant <- "make"
+      } else if (.variant == "make" && "graph" %in% variants) {
+        .variant <- "graph"
+      }
+    }
+    if (.variant %in% variants) {
+      cons$fun <- cons$fun[[.variant]]
+    } else {
+      stop("Don't know how to ", .operation, ", unknown constructor")
+    }
+  }
+
+  list(cons = cons, mods = mods, args = args)
+}
+
+#'   Applies a set of constructor modifiers to an already constructed graph.
+#'
+#'   This is a helper function for the common parts of `make_()` and
+#'   `sample_()`.
+#'
+#' @param graph The graph to apply the modifiers to
+#' @param mods The modifiers to apply
+#' @family constructor modifiers
+#' @return The modified graph
+#' @noRd
+.apply_modifiers <- function(graph, mods) {
+  for (m in mods) {
+    if (m$id == "without_attr") {
+      ## TODO: speed this up
+      ga <- graph_attr_names(graph)
+      va <- vertex_attr_names(graph)
+      ea <- edge_attr_names(graph)
+      for (g in ga) graph <- delete_graph_attr(graph, g)
+      for (v in va) graph <- delete_vertex_attr(graph, v)
+      for (e in ea) graph <- delete_edge_attr(graph, e)
+    } else if (m$id == "without_loops") {
+      graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
+    } else if (m$id == "without_multiples") {
+      graph <- simplify(graph, remove.loops = FALSE, remove.multiple = TRUE)
+    } else if (m$id == "simplified") {
+      graph <- simplify(graph)
+    } else if (m$id == "with_vertex_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(!is.null(n))
+        graph <- set_vertex_attr(graph, n, value = v)
+      }
+    } else if (m$id == "with_edge_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(!is.null(n))
+        graph <- set_edge_attr(graph, n, value = v)
+      }
+    } else if (m$id == "with_graph_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(!is.null(n))
+        graph <- set_graph_attr(graph, n, value = v)
+      }
+    }
+  }
+
+  graph
+}
+
+#'   Make a new graph
+#'
+#'   This is a generic function for creating graphs.
 #'
 #' @details
-#' \code{make_} is a generic function for creating graphs.
-#' For every graph constructor in igraph that has a \code{make_} prefix,
+#' `make_()` is a generic function for creating graphs.
+#' For every graph constructor in igraph that has a `make_` prefix,
 #' there is a corresponding function without the prefix: e.g.
-#' for \code{\link{make_ring}} there is also \code{\link{ring}}, etc.
+#' for [make_ring()] there is also [ring()], etc.
 #'
 #' The same is true for the random graph samplers, i.e. for each
-#' constructor with a \code{sample_} prefix, there is a corresponding
+#' constructor with a `sample_` prefix, there is a corresponding
 #' function without that prefix.
 #'
-#' These shorter forms can be used together with \code{make_}.
+#' These shorter forms can be used together with `make_()`.
 #' The advantage of this form is that the user can specify constructor
 #' modifiers which work with all constructors. E.g. the
-#' \code{link{with_vertex_}} modifier adds vertex attributes
+#' [with_vertex_()] modifier adds vertex attributes
 #' to the newly created graphs.
 #'
 #' See the examples and the various constructor modifiers below.
@@ -56,86 +171,16 @@
 #' r2 <- make_(ring(10), with_vertex_(color = "red", name = LETTERS[1:10]))
 #' l2 <- make_(lattice(c(3, 3, 3)), with_edge_(weight = 2))
 #'
-#' ran <- sample_(degseq(c(3,3,3,3,3,3), method = "simple"), simplified())
+#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "simple"), simplified())
 #' degree(ran)
 #' is_simple(ran)
-
 make_ <- function(...) {
-
   me <- attr(sys.function(), "name") %||% "construct"
-  args <- list(...)
-  cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
-  if (sum(cidx) == 0) {
-    stop("Don't know how to ", me, ", nothing given")
-  }
-  if (sum(cidx) > 1) {
-    stop("Don't know how to ", me, ", multiple constructors given")
-  }
-  cons <- args[ cidx][[1]]
-  args <- args[!cidx]
-
-  ## Modifiers
-  wmods <- vapply(args, inherits, TRUE, what = "igraph_constructor_modifier")
-  mods <- args[wmods]
-  args <- args[!wmods]
-
-  args2 <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
-
-  res <- do_call(cons$fun, args2, args)
-
-  for (m in mods) {
-    if (m$id == "without_attr") {
-      ## TODO: speed this up
-      ga <- graph_attr_names(res)
-      va <- vertex_attr_names(res)
-      ea <- edge_attr_names(res)
-      for (g in ga) res <- delete_graph_attr(res, g)
-      for (v in va) res <- delete_vertex_attr(res, v)
-      for (e in ea) res <- delete_edge_attr(res, e)
-
-    } else if (m$id == "without_loops") {
-      res <- simplify(res, remove.loops = TRUE, remove.multiple = FALSE)
-
-    } else if (m$id == "without_multiples") {
-      res <- simplify(res, remove.loops = FALSE, remove.multiple = TRUE)
-
-    } else if (m$id == "simplified") {
-      res <- simplify(res)
-
-    } else if (m$id == "with_vertex_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_vertex_attr(res, n, value = v)
-      }
-
-    } else if (m$id == "with_edge_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_edge_attr(res, n, value = v)
-      }
-
-    } else if (m$id == "with_graph_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_graph_attr(res, n, value = v)
-      }
-
-    }
-  }
-
-  res
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
 }
 
 #' Sample from a random graph model
@@ -150,8 +195,10 @@ make_ <- function(...) {
 #' @export
 #' @examples
 #' pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
-#' blocky <- sample_(sbm(n = 20, pref.matrix = pref_matrix,
-#'   block.sizes = c(10, 10)))
+#' blocky <- sample_(sbm(
+#'   n = 20, pref.matrix = pref_matrix,
+#'   block.sizes = c(10, 10)
+#' ))
 #'
 #' blocky2 <- pref_matrix %>%
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
@@ -159,8 +206,15 @@ make_ <- function(...) {
 #' ## Arguments are passed on from sample_ to sample_sbm
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
-
-sample_ <- make_
+#' @family games
+sample_ <- function(...) {
+  me <- attr(sys.function(), "name") %||% "construct"
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
+}
 
 #' Convert object to a graph
 #'
@@ -174,10 +228,16 @@ sample_ <- make_
 #' @export
 #' @examples
 #' ## These are equivalent
-#' graph_(cbind(1:5,2:6), from_edgelist(directed = FALSE))
-#' graph_(cbind(1:5,2:6), from_edgelist(), directed = FALSE)
-
-graph_ <- make_
+#' graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
+#' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
+graph_ <- function(...) {
+  me <- attr(sys.function(), "name") %||% "construct"
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
+}
 
 attr(make_, "name") <- "make_"
 attr(sample_, "name") <- "sample_"
@@ -217,7 +277,6 @@ constructor_modifier <- function(...) {
 #'
 #' g2 <- make_(ring(10), without_attr())
 #' g2
-
 without_attr <- function() {
   constructor_modifier(
     id = "without_attr"
@@ -234,7 +293,6 @@ without_attr <- function() {
 #' # An artificial example
 #' make_(full_graph(5, loops = TRUE))
 #' make_(full_graph(5, loops = TRUE), without_loops())
-
 without_loops <- function() {
   constructor_modifier(
     id = "without_loops"
@@ -250,7 +308,6 @@ without_loops <- function() {
 #' @examples
 #' sample_(pa(10, m = 3, algorithm = "bag"))
 #' sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
-
 without_multiples <- function() {
   constructor_modifier(
     id = "without_multiples"
@@ -266,7 +323,6 @@ without_multiples <- function() {
 #' @examples
 #' sample_(pa(10, m = 3, algorithm = "bag"))
 #' sample_(pa(10, m = 3, algorithm = "bag"), simplified())
-
 simplified <- function() {
   constructor_modifier(
     id = "simplified"
@@ -282,15 +338,16 @@ simplified <- function() {
 #'
 #' @export
 #' @examples
-#' make_(ring(10),
+#' make_(
+#'   ring(10),
 #'   with_vertex_(
 #'     color = "#7fcdbb",
 #'     frame.color = "#7fcdbb",
-#'     name = LETTERS[1:10])) %>%
+#'     name = LETTERS[1:10]
+#'   )
+#' ) %>%
 #'   plot()
-
 with_vertex_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -308,14 +365,15 @@ with_vertex_ <- function(...) {
 #'
 #' @export
 #' @examples
-#' make_(ring(10),
+#' make_(
+#'   ring(10),
 #'   with_edge_(
 #'     color = "red",
-#'     weight = rep(1:2, 5))) %>%
+#'     weight = rep(1:2, 5)
+#'   )
+#' ) %>%
 #'   plot()
-
 with_edge_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -334,9 +392,7 @@ with_edge_ <- function(...) {
 #' @export
 #' @examples
 #' make_(ring(10), with_graph_(name = "10-ring"))
-
 with_graph_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -353,12 +409,12 @@ with_graph_ <- function(...) {
 #'
 #' @section Notable graphs:
 #'
-#' \code{make_graph} can create some notable graphs. The name of the
-#' graph (case insensitive), a character scalar must be suppliced as
-#' the \code{edges} argument, and other arguments are ignored. (A warning
+#' `make_graph()` can create some notable graphs. The name of the
+#' graph (case insensitive), a character scalar must be supplied as
+#' the `edges` argument, and other arguments are ignored. (A warning
 #' is given is they are specified.)
 #'
-#' \code{make_graph} knows the following graphs: \describe{
+#' `make_graph()` knows the following graphs: \describe{
 #'   \item{Bull}{The bull graph, 5 vertices, 5 edges, resembles to the head
 #'     of a bull if drawn properly.}
 #'   \item{Chvatal}{This is the smallest triangle-free graph that is
@@ -378,7 +434,7 @@ with_graph_ <- function(...) {
 #'     and not vertex transitive.}
 #'   \item{Franklin}{This is a graph whose embedding
 #'     to the Klein bottle can be colored with six colors, it is a counterexample
-#'     to the neccessity of the Heawood conjecture on a Klein bottle. It has 12
+#'     to the necessity of the Heawood conjecture on a Klein bottle. It has 12
 #'     vertices and 18 edges.}
 #'   \item{Frucht}{The Frucht Graph is the smallest
 #'     cubical graph whose automorphism group consists only of the identity
@@ -423,19 +479,19 @@ with_graph_ <- function(...) {
 #'   \item{Octahedral, Octahedron}{Platonic solid
 #'     with 6 vertices and 12 edges.}
 #'   \item{Petersen}{A 3-regular graph with 10
-#'     vertices and 15 edges. It is the smallest hypohamiltonian graph, ie. it is
+#'     vertices and 15 edges. It is the smallest hypohamiltonian graph, i.e. it is
 #'     non-hamiltonian but removing any single vertex from it makes it
 #'     Hamiltonian.}
-#'   \item{Robertson}{The unique (4,5)-cage graph, ie. a 4-regular
+#'   \item{Robertson}{The unique (4,5)-cage graph, i.e. a 4-regular
 #'    graph of girth 5. It has 19 vertices and 38 edges.}
 #'   \item{Smallestcyclicgroup}{A smallest nontrivial graph whose automorphism
 #'     group is cyclic. It has 9 vertices and 15 edges.}
 #'   \item{Tetrahedral,
 #'     Tetrahedron}{Platonic solid with 4 vertices and 6 edges.}
 #'   \item{Thomassen}{The smallest hypotraceable graph, on 34 vertices and 52
-#'     edges. A hypotracable graph does not contain a Hamiltonian path but after
+#'     edges. A hypotraceable graph does not contain a Hamiltonian path but after
 #'     removing any single vertex from it the remainder always contains a
-#'     Hamiltonian path. A graph containing a Hamiltonian path is called tracable.}
+#'     Hamiltonian path. A graph containing a Hamiltonian path is called traceable.}
 #'   \item{Tutte}{Tait's Hamiltonian graph conjecture states that every
 #'     3-connected 3-regular planar graph is Hamiltonian.  This graph is a
 #'     counterexample. It has 46 vertices and 69 edges.}
@@ -462,50 +518,51 @@ with_graph_ <- function(...) {
 #'   insensitive.
 #'
 #'   Starting from igraph 0.8.0, you can also include literals here,
-#'   via igraph's formula notation (see \code{\link{graph_from_literal}}).
+#'   via igraph's formula notation (see [graph_from_literal()]).
 #'   In this case, the first term of the formula has to start with
-#'   a \sQuote{\code{~}} character, just like regular formulae in R.
+#'   a \sQuote{`~`} character, just like regular formulae in R.
 #'   See examples below.
-#' @param ... For \code{make_graph}: extra arguments for the case when the
-#'   graph is given via a literal, see \code{\link{graph_from_literal}}.
-#'   For \code{directed_graph} and \code{undirected_graph}:
-#'   Passed to \code{make_directed_graph} or \code{make_undirected_graph}.
+#' @param ... For `make_graph()`: extra arguments for the case when the
+#'   graph is given via a literal, see [graph_from_literal()].
+#'   For `directed_graph()` and `undirected_graph()`:
+#'   Passed to `make_directed_graph()` or `make_undirected_graph()`.
 #' @param n The number of vertices in the graph. This argument is
-#'   ignored (with a warning) if \code{edges} are symbolic vertex names. It
-#'   is also ignored if there is a bigger vertex id in \code{edges}. This
+#'   ignored (with a warning) if `edges` are symbolic vertex names. It
+#'   is also ignored if there is a bigger vertex id in `edges`. This
 #'   means that for this function it is safe to supply zero here if the
 #'   vertex with the largest id is not an isolate.
 #' @param isolates Character vector, names of isolate vertices,
 #'   for symbolic edge lists. It is ignored for numeric edge lists.
 #' @param directed Whether to create a directed graph.
-#' @param dir It is the same as \code{directed}, for compatibility.
+#' @param dir It is the same as `directed`, for compatibility.
 #'   Do not give both of them.
 #' @param simplify For graph literals, whether to simplify the graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
 #' make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
 #'
-#' solids <- list(make_graph("Tetrahedron"),
-#'                make_graph("Cubical"),
-#'                make_graph("Octahedron"),
-#'                make_graph("Dodecahedron"),
-#'                make_graph("Icosahedron"))
+#' solids <- list(
+#'   make_graph("Tetrahedron"),
+#'   make_graph("Cubical"),
+#'   make_graph("Octahedron"),
+#'   make_graph("Dodecahedron"),
+#'   make_graph("Icosahedron")
+#' )
 #'
-#' graph <- make_graph( ~ A-B-C-D-A, E-A:B:C:D,
-#'                       F-G-H-I-F, J-F:G:H:I,
-#'                       K-L-M-N-K, O-K:L:M:N,
-#'                       P-Q-R-S-P, T-P:Q:R:S,
-#'                       B-F, E-J, C-I, L-T, O-T, M-S,
-#'                       C-P, C-L, I-L, I-P)
-
-
+#' graph <- make_graph(
+#'   ~ A - B - C - D - A, E - A:B:C:D,
+#'   F - G - H - I - F, J - F:G:H:I,
+#'   K - L - M - N - K, O - K:L:M:N,
+#'   P - Q - R - S - P, T - P:Q:R:S,
+#'   B - F, E - J, C - I, L - T, O - T, M - S,
+#'   C - P, C - L, I - L, I - P
+#' )
 make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
                        directed = TRUE, dir = directed, simplify = TRUE) {
-
   if (inherits(edges, "formula")) {
     if (!missing(n)) stop("'n' should not be given for graph literals")
     if (!missing(isolates)) {
@@ -518,11 +575,9 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     mf <- as.list(match.call())[-1]
     mf[[1]] <- mf[[1]][[2]]
     graph_from_literal_i(mf)
-
   } else {
-
     if (!missing(simplify)) {
-      stop("'simplify' should not be given for graph literals")
+      stop("'simplify' should only be used for graph literals")
     }
 
     if (!missing(dir) && !missing(directed)) {
@@ -548,17 +603,21 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
       ## NULL and empty logical vector is allowed for compatibility
     } else if (is.numeric(edges) || is.null(edges) ||
-               (is.logical(edges) && length(edges) == 0)) {
-
+      (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
         warning("'isolates' ignored for numeric edge list")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit( .Call(C_R_igraph_finalizer) )
-        .Call(C_R_igraph_create, as.numeric(edges)-1, as.numeric(n),
-              as.logical(directed))
+        on.exit(.Call(R_igraph_finalizer))
+        if (missing(n) && (is.null(edges) || length(edges) == 0)) {
+          n <- 0
+        }
+        .Call(
+          R_igraph_create, as.numeric(edges) - 1, as.numeric(n),
+          as.logical(directed)
+        )
       }
 
       args <- list(edges, ...)
@@ -566,7 +625,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!missing(directed)) args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
-
     } else if (is.character(edges)) {
       if (!missing(n)) {
         warning("'n' is ignored for edge list with vertex names")
@@ -580,7 +638,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
         res <- res + vertices(isolates)
       }
       res
-
     } else {
       stop("'edges' must be numeric or character")
     }
@@ -588,11 +645,10 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 }
 
 make_famous_graph <- function(name) {
-
   name <- gsub("\\s", "_", name)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_famous, as.character(name))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_famous, as.character(name))
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
   }
@@ -601,7 +657,6 @@ make_famous_graph <- function(name) {
 
 #' @rdname make_graph
 #' @export
-
 make_directed_graph <- function(edges, n = max(edges)) {
   if (missing(n)) {
     make_graph(edges, directed = TRUE)
@@ -612,7 +667,6 @@ make_directed_graph <- function(edges, n = max(edges)) {
 
 #' @rdname make_graph
 #' @export
-
 make_undirected_graph <- function(edges, n = max(edges)) {
   if (missing(n)) {
     make_graph(edges, directed = FALSE)
@@ -623,12 +677,10 @@ make_undirected_graph <- function(edges, n = max(edges)) {
 
 #' @rdname make_graph
 #' @export
-
 directed_graph <- function(...) constructor_spec(make_directed_graph, ...)
 
 #' @rdname make_graph
 #' @export
-
 undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -641,28 +693,16 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-
-make_empty_graph <- function(n=0, directed=TRUE) {
-  # Argument checks
-  n <- as.integer(n)
-  directed <- as.logical(directed)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_empty, n, directed)
-
-  res
-}
+make_empty_graph <- empty_impl
 
 #' @rdname make_empty_graph
-#' @param ... Passed to \code{make_graph_empty}.
+#' @param ... Passed to `make_graph_empty`.
 #' @export
-
 empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -674,17 +714,17 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' quickly, it works for both directed and undirected graphs.
 #'
 #' @details
-#' \code{graph_from_literal} is very handy for creating small graphs quickly.
+#' `graph_from_literal()` is very handy for creating small graphs quickly.
 #' You need to supply one or more R expressions giving the structure of
 #' the graph. The expressions consist of vertex names and edge
-#' operators. An edge operator is a sequence of \sQuote{\code{-}} and
-#' \sQuote{\code{+}} characters, the former is for the edges and the
+#' operators. An edge operator is a sequence of \sQuote{`-`} and
+#' \sQuote{`+`} characters, the former is for the edges and the
 #' latter is used for arrow heads. The edges can be arbitrarily long,
-#' ie. you may use as many \sQuote{\code{-}} characters to \dQuote{draw}
+#' i.e. you may use as many \sQuote{`-`} characters to \dQuote{draw}
 #' them as you like.
 #'
-#' If all edge operators consist of only \sQuote{\code{-}} characters
-#' then the graph will be undirected, whereas a single \sQuote{\code{+}}
+#' If all edge operators consist of only \sQuote{`-`} characters
+#' then the graph will be undirected, whereas a single \sQuote{`+`}
 #' character implies a directed graph.
 #'
 #' Let us see some simple examples. Without arguments the function
@@ -707,7 +747,7 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' \preformatted{  graph_from_literal( A--B, C--D, E--F, G--H, I, J, K )
 #' }
 #'
-#' The \sQuote{\code{:}} operator can be used to define vertex sets. If
+#' The \sQuote{`:`} operator can be used to define vertex sets. If
 #' an edge operator connects two vertex sets then every vertex from the
 #' first set will be connected to every vertex in the second set. The
 #' following form creates a full graph, including loop edges:
@@ -715,19 +755,19 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' }
 #'
 #' In directed graphs, edges will be created only if the edge operator
-#' includes a arrow head (\sQuote{+}) \emph{at the end} of the edge:
+#' includes a arrow head (\sQuote{+}) *at the end* of the edge:
 #' \preformatted{  graph_from_literal( A -+ B -+ C )
 #'   graph_from_literal( A +- B -+ C )
 #'   graph_from_literal( A +- B -- C )
 #' }
-#' Thus in the third example no edge is created between vertices \code{B}
-#' and \code{C}.
+#' Thus in the third example no edge is created between vertices `B`
+#' and `C`.
 #'
 #' Mutual edges can be also created with a simple edge operator:
 #' \preformatted{  graph_from_literal( A +-+ B +---+ C ++ D + E)
 #' }
 #' Note again that the length of the edge operators is arbitrary,
-#' \sQuote{\code{+}}, \sQuote{\code{++}} and \sQuote{\code{+-----+}} have
+#' \sQuote{`+`}, \sQuote{`++`} and \sQuote{`+-----+`} have
 #' exactly the same meaning.
 #'
 #' If the vertex names include spaces or other special characters then
@@ -740,57 +780,62 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' See more examples below.
 #'
 #' @aliases graph.formula
-#' @param ... For \code{graph_from_literal} the formulae giving the
-#'   structure of the graph, see details below. For \code{from_literal}
-#'   all arguments are passed to \code{graph_from_literal}.
-#' @param simplify Logical scalar, whether to call \code{\link{simplify}}
+#' @param ... For `graph_from_literal()` the formulae giving the
+#'   structure of the graph, see details below. For `from_literal()`
+#'   all arguments are passed to `graph_from_literal()`.
+#' @param simplify Logical scalar, whether to call [simplify()]
 #'   on the created graph. By default the graph is simplified, loop and
 #'   multiple edges are removed.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' # A simple undirected graph
-#' g <- graph_from_literal( Alice-Bob-Cecil-Alice, Daniel-Cecil-Eugene,
-#'                      Cecil-Gordon )
+#' g <- graph_from_literal(
+#'   Alice - Bob - Cecil - Alice,
+#'   Daniel - Cecil - Eugene,
+#'   Cecil - Gordon
+#' )
 #' g
 #'
 #' # Another undirected graph, ":" notation
-#' g2 <- graph_from_literal( Alice-Bob:Cecil:Daniel, Cecil:Daniel-Eugene:Gordon )
+#' g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 #' g2
 #'
 #' # A directed graph
-#' g3 <- graph_from_literal( Alice +-+ Bob --+ Cecil +-- Daniel,
-#'                      Eugene --+ Gordon:Helen )
+#' g3 <- graph_from_literal(
+#'   Alice +-+ Bob --+ Cecil +-- Daniel,
+#'   Eugene --+ Gordon:Helen
+#' )
 #' g3
 #'
 #' # A graph with isolate vertices
-#' g4 <- graph_from_literal( Alice -- Bob -- Daniel, Cecil:Gordon, Helen )
+#' g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 #' g4
 #' V(g4)$name
 #'
 #' # "Arrows" can be arbitrarily long
-#' g5 <- graph_from_literal( Alice +---------+ Bob )
+#' g5 <- graph_from_literal(Alice +---------+ Bob)
 #' g5
 #'
 #' # Special vertex names
-#' g6 <- graph_from_literal( "+" -- "-", "*" -- "/", "%%" -- "%/%" )
+#' g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 #' g6
 #'
-
-graph_from_literal <- function(..., simplify=TRUE) {
+graph_from_literal <- function(..., simplify = TRUE) {
   mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
 }
 
 graph_from_literal_i <- function(mf) {
-
   ## In case 'simplify' is given
   simplify <- TRUE
-  if ('simplify' %in% names(mf)) {
-    w <- which(names(mf)=='simplify')
-    if (length(w) > 1) { stop("'simplify' specified multiple times") }
+  if ("simplify" %in% names(mf)) {
+    w <- which(names(mf) == "simplify")
+    if (length(w) > 1) {
+      stop("'simplify' specified multiple times")
+    }
     simplify <- eval(mf[[w]])
     mf <- mf[-w]
   }
@@ -798,9 +843,9 @@ graph_from_literal_i <- function(mf) {
   ## Operators first
   f <- function(x) {
     if (is.call(x)) {
-      return (list(as.character(x[[1]]), lapply(x[-1], f)))
+      return(list(as.character(x[[1]]), lapply(x[-1], f)))
     } else {
-      return (NULL)
+      return(NULL)
     }
   }
   ops <- unlist(lapply(mf, f))
@@ -814,27 +859,29 @@ graph_from_literal_i <- function(mf) {
 
   f <- function(x) {
     if (is.call(x)) {
-      if (length(x)==3) {
-        return( list(f(x[[2]]), op=as.character(x[[1]]), f(x[[3]])) )
+      if (length(x) == 3) {
+        return(list(f(x[[2]]), op = as.character(x[[1]]), f(x[[3]])))
       } else {
-        return( list(op=as.character(x[[1]]), f(x[[2]])) )
+        return(list(op = as.character(x[[1]]), f(x[[2]])))
       }
     } else {
-      return( c(sym=as.character(x)) )
+      return(c(sym = as.character(x)))
     }
   }
 
   ret <- lapply(mf, function(x) unlist(f(x)))
 
-  v <- unique(unlist(lapply(ret, function(x) { x[ names(x)=="sym" ] })))
+  v <- unique(unlist(lapply(ret, function(x) {
+    x[names(x) == "sym"]
+  })))
 
   ## Merge symbols for ":"
   ret <- lapply(ret, function(x) {
     res <- list()
-    for (i in seq(along=x)) {
-      if (x[i]==":" && names(x)[i]=="op") {
+    for (i in seq(along.with = x)) {
+      if (x[i] == ":" && names(x)[i] == "op") {
         ## SKIP
-      } else if (i>1 && x[i-1]==":" && names(x)[i-1]=="op") {
+      } else if (i > 1 && x[i - 1] == ":" && names(x)[i - 1] == "op") {
         res[[length(res)]] <- c(res[[length(res)]], unname(x[i]))
       } else {
         res <- c(res, x[i])
@@ -845,24 +892,24 @@ graph_from_literal_i <- function(mf) {
 
   ## Ok, create the edges
   edges <- numeric()
-  for (i in seq(along=ret)) {
+  for (i in seq(along.with = ret)) {
     prev.sym <- character()
     lhead <- rhead <- character()
-    for (j in seq(along=ret[[i]])) {
+    for (j in seq(along.with = ret[[i]])) {
       act <- ret[[i]][[j]]
-      if (names(ret[[i]])[j]=="op") {
-        if (length(lhead)==0) {
+      if (names(ret[[i]])[j] == "op") {
+        if (length(lhead) == 0) {
           lhead <- rhead <- act
         } else {
           rhead <- act
         }
-      } else if (names(ret[[i]])[j]=="sym") {
+      } else if (names(ret[[i]])[j] == "sym") {
         for (ps in prev.sym) {
           for (ps2 in act) {
-            if (lhead=="+") {
+            if (lhead == "+") {
               edges <- c(edges, unname(c(ps2, ps)))
             }
-            if (!directed || rhead=="+") {
+            if (!directed || rhead == "+") {
               edges <- c(edges, unname(c(ps, ps2)))
             }
           }
@@ -873,55 +920,64 @@ graph_from_literal_i <- function(mf) {
     }
   }
 
-  ids <- seq(along=v)
+  ids <- seq(along.with = v)
   names(ids) <- v
-  res <- graph( unname(ids[edges]), n=length(v), directed=directed)
+  res <- make_graph(unname(ids[edges]), n = length(v), directed = directed)
   if (simplify) res <- simplify(res)
-  res <- set_vertex_attr(res, "name", value=v)
+  res <- set_vertex_attr(res, "name", value = v)
   res
 }
 
 #' @rdname graph_from_literal
 #' @export
-
-from_literal <- function(...)
+from_literal <- function(...) {
   constructor_spec(graph_from_literal, ..., .lazy = TRUE)
+}
 
 ## -----------------------------------------------------------------
 
 #' Create a star graph, a tree with n vertices and n - 1 leaves
 #'
-#' \code{star} creates a star graph, in this every single vertex is
+#' `star()` creates a star graph, in this every single vertex is
 #' connected to the center vertex and nobody else.
 #'
 #' @aliases graph.star
 #' @concept Star graph
 #' @param n Number of vertices.
 #' @param mode It defines the direction of the
-#'   edges, \code{in}: the edges point \emph{to} the center, \code{out}:
-#'   the edges point \emph{from} the center, \code{mutual}: a directed
-#'   star is created with mutual edges, \code{undirected}: the edges
+#'   edges, `in`: the edges point *to* the center, `out`:
+#'   the edges point *from* the center, `mutual`: a directed
+#'   star is created with mutual edges, `undirected`: the edges
 #'   are undirected.
 #' @param center ID of the center vertex.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_star(10, mode = "out")
 #' make_star(5, mode = "undirected")
-
-make_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
-                   center=1 ) {
-
+make_star <- function(n, mode = c("in", "out", "mutual", "undirected"),
+                      center = 1) {
   mode <- igraph.match.arg(mode)
-  mode1 <- switch(mode, "out"=0, "in"=1, "undirected"=2, "mutual"=3)
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2,
+    "mutual" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_star, as.numeric(n), as.numeric(mode1),
-               as.numeric(center)-1)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_star, as.numeric(n), as.numeric(mode1),
+    as.numeric(center) - 1
+  )
   if (igraph_opt("add.params")) {
-    res$name <- switch(mode, "in"="In-star", "out"="Out-star", "Star")
+    res$name <- switch(mode,
+      "in" = "In-star",
+      "out" = "Out-star",
+      "Star"
+    )
     res$mode <- mode
     res$center <- center
   }
@@ -929,9 +985,8 @@ make_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
 }
 
 #' @rdname make_star
-#' @param ... Passed to \code{make_star}.
+#' @param ... Passed to `make_star()`.
 #' @export
-
 star <- function(...) constructor_spec(make_star, ...)
 
 ## -----------------------------------------------------------------
@@ -945,16 +1000,17 @@ star <- function(...) constructor_spec(make_star, ...)
 #' @param loops Whether to add self-loops to the graph.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
-
-make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_full, as.numeric(n), as.logical(directed),
-               as.logical(loops))
+make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_full, as.numeric(n), as.logical(directed),
+    as.logical(loops)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
     res$loops <- loops
@@ -963,20 +1019,19 @@ make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
 }
 
 #' @rdname make_full_graph
-#' @param ... Passed to \code{make_full_graph}.
+#' @param ... Passed to `make_full_graph()`.
 #' @export
-
 full_graph <- function(...) constructor_spec(make_full_graph, ...)
 
 ## -----------------------------------------------------------------
 
 #' Create a lattice graph
 #'
-#' \code{make_lattice} is a flexible function, it can create lattices of
-#' arbitrary dimensions, periodic or unperiodic ones. It has two
-#' forms. In the first form you only supply \code{dimvector}, but not
-#' \code{length} and \code{dim}. In the second form you omit
-#' \code{dimvector} and supply \code{length} and \code{dim}.
+#' `make_lattice()` is a flexible function, it can create lattices of
+#' arbitrary dimensions, periodic or aperiodic ones. It has two
+#' forms. In the first form you only supply `dimvector`, but not
+#' `length` and `dim`. In the second form you omit
+#' `dimvector` and supply `length` and `dim`.
 #'
 #' @aliases graph.lattice
 #' @concept Lattice
@@ -988,30 +1043,35 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @param nei The distance within which (inclusive) the neighbors on the
 #'   lattice will be connected. This parameter is not used right now.
 #' @param directed Whether to create a directed lattice.
-#' @param mutual Logical, if \code{TRUE} directed lattices will be
+#' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
-#' @param circular Logical, if \code{TRUE} the lattice or ring will be
+#' @param circular Logical, if `TRUE` the lattice or ring will be
 #'   circular.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
-
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
-                          nei = 1, directed = FALSE, mutual = FALSE,
-                          circular=FALSE) {
+                         nei = 1, directed = FALSE, mutual = FALSE,
+                         circular = FALSE) {
+  if (is.numeric(length) && length != floor(length)) {
+    warning("length was rounded to the nearest integer")
+    length <- round(length)
+  }
 
   if (is.null(dimvector)) {
     dimvector <- rep(length, dim)
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-               as.logical(directed), as.logical(mutual),
-               as.logical(circular))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
+    as.logical(directed), as.logical(mutual),
+    as.logical(circular)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
@@ -1023,9 +1083,8 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 }
 
 #' @rdname make_lattice
-#' @param ... Passed to \code{make_lattice}.
+#' @param ... Passed to `make_lattice()`.
 #' @export
-
 lattice <- function(...) constructor_spec(make_lattice, ...)
 
 ## -----------------------------------------------------------------
@@ -1033,9 +1092,9 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
-#' of \code{\link{make_lattice}}.
+#' of [make_lattice()].
 #'
-#' @aliases make_ring graph.ring
+#' @aliases graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -1045,16 +1104,17 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #'   vertex has one child.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-
-make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_ring, as.numeric(n), as.logical(directed),
-               as.logical(mutual), as.logical(circular))
+make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_ring, as.numeric(n), as.logical(directed),
+    as.logical(mutual), as.logical(circular)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
     res$mutual <- mutual
@@ -1064,16 +1124,16 @@ make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
 }
 
 #' @rdname make_ring
-#' @param ... Passed to \code{make_ring}.
+#' @param ... Passed to `make_ring()`.
 #' @export
-
 ring <- function(...) constructor_spec(make_ring, ...)
 
 ## -----------------------------------------------------------------
 
 #' Create tree graphs
 #'
-#' Create a regular tree graph.
+#' Create a k-ary tree graph, where almost all vertices other than the leaves
+#' have the same number of children.
 #'
 #' @aliases graph.tree
 #' @concept Trees.
@@ -1081,26 +1141,30 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' @param children Integer scalar, the number of children of a vertex
 #'   (except for leafs)
 #' @param mode Defines the direction of the
-#'   edges. \code{out} indicates that the edges point from the parent to
-#'   the children, \code{in} indicates that they point from the children
-#'   to their parents, while \code{undirected} creates an undirected
+#'   edges. `out` indicates that the edges point from the parent to
+#'   the children, `in` indicates that they point from the children
+#'   to their parents, while `undirected` creates an undirected
 #'   graph.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
-
-make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
-
+make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph.match.arg(mode)
-  mode1 <- switch(mode, "out"=0, "in"=1, "undirected"=2);
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_tree, as.numeric(n), as.numeric(children),
-               as.numeric(mode1))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_kary_tree, as.numeric(n), as.numeric(children),
+    as.numeric(mode1)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
     res$children <- children
@@ -1109,17 +1173,76 @@ make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
   res
 }
 
-#' @rdname make_tree
-#' @param ... Passed to \code{make_tree}.
+#' Sample trees randomly and uniformly
+#'
+#' `sample_tree()` generates a random with a given number of nodes uniform
+#' at random from the set of labelled trees.
+#'
+#' In other words, the function generates each possible labelled tree with the
+#' given number of nodes with the same probability.
+#'
+#' @param n The number of nodes in the tree
+#' @param directed Whether to create a directed tree. The edges of the tree are
+#'   oriented away from the root.
+#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
+#'   samples Prüfer sequences uniformly and then converts the sampled sequence to
+#'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
+#'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
+#'   algorithm). The default is \sQuote{lerw}. Note that the method based on
+#'   Prüfer sequences does not support directed trees at the moment.
+#' @return A graph object.
+#'
+#' @family games
+#' @keywords graphs
+#' @examples
+#'
+#' g <- sample_tree(100, method = "lerw")
+#'
 #' @export
+sample_tree <- tree_game_impl
 
-tree <- function(...) constructor_spec(make_tree, ...)
+#' @rdname make_tree
+#' @param ... Passed to `make_tree()` or `sample_tree()`.
+#' @export
+tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tree), ...)
+
+
+## -----------------------------------------------------------------
+
+#' Create an undirected tree graph from its Prüfer sequence
+#'
+#' `make_from_prufer()` creates an undirected tree graph from its Prüfer
+#' sequence.
+#'
+#' The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
+#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
+#' find a vertex with degree one, remove it from the tree and add the label of
+#' the vertex that it was connected to to the sequence. Repeat until there are
+#' only two vertices in the remaining graph.
+#'
+#' @param prufer The Prüfer sequence to convert into a graph
+#' @return A graph object.
+#'
+#' @seealso [to_prufer()] to convert a graph into its Prüfer sequence
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_tree(13, 3)
+#' to_prufer(g)
+#' @family trees
+#' @export
+make_from_prufer <- from_prufer_impl
+
+#' @rdname make_from_prufer
+#' @param ... Passed to `make_from_prufer()`
+#' @export
+from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 
 ## -----------------------------------------------------------------
 
 #' Create a graph from the Graph Atlas
 #'
-#' \code{graph_from_atlas} creates graphs from the book
+#' `graph_from_atlas()` creates graphs from the book
 #' \sQuote{An Atlas of Graphs} by
 #' Roland C. Read and Robin J. Wilson. The atlas contains all undirected
 #' graphs with up to seven vertices, numbered from 0 up to 1252. The
@@ -1139,18 +1262,15 @@ tree <- function(...) constructor_spec(make_tree, ...)
 #' @param n The id of the graph to create.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' ## Some randomly picked graphs from the atlas
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
-
-
 graph_from_atlas <- function(n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_atlas, as.numeric(n))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_atlas, as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
     res$n <- n
@@ -1159,24 +1279,23 @@ graph_from_atlas <- function(n) {
 }
 
 #' @rdname graph_from_atlas
-#' @param ... Passed to \code{graph_from_atlas}.
+#' @param ... Passed to `graph_from_atlas()`.
 #' @export
-
 atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 
 ## -----------------------------------------------------------------
 
 #' Create an extended chordal ring graph
 #'
-#' \code{make_chordal_ring} creates an extended chordal ring.
+#' `make_chordal_ring()` creates an extended chordal ring.
 #' An extended chordal ring is regular graph, each node has the same
 #' degree. It can be obtained from a simple ring by adding some extra
 #' edges specified by a matrix. Let p denote the number of columns in
-#' the \sQuote{\code{W}} matrix. The extra edges of vertex \code{i}
-#' are added according to column \code{i mod p} in
-#' \sQuote{\code{W}}. The number of extra edges is the number
-#' of rows in \sQuote{\code{W}}: for each row \code{j} an edge
-#' \code{i->i+w[ij]} is added if \code{i+w[ij]} is less than the number
+#' the \sQuote{`W`} matrix. The extra edges of vertex `i`
+#' are added according to column `i mod p` in
+#' \sQuote{`W`}. The number of extra edges is the number
+#' of rows in \sQuote{`W`}: for each row `j` an edge
+#' `i->i+w[ij]` is added if `i+w[ij]` is less than the number
 #' of total nodes. See also Kotsis, G: Interconnection Topologies for
 #' Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 #'
@@ -1187,17 +1306,19 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' @param directed Logical scalar, whether or not to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
-#' chord <- make_chordal_ring(15,
-#'     matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
-
-make_chordal_ring <- function(n, w, directed=FALSE) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_extended_chordal_ring, as.integer(n),
-               as.matrix(w), as.logical(directed))
+#' chord <- make_chordal_ring(
+#'   15,
+#'   matrix(c(3, 12, 4, 7, 8, 11), nr = 2)
+#' )
+make_chordal_ring <- function(n, w, directed = FALSE) {
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_extended_chordal_ring, as.numeric(n),
+    as.matrix(w), as.logical(directed)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Extended chordal ring"
     res$w <- w
@@ -1206,9 +1327,8 @@ make_chordal_ring <- function(n, w, directed=FALSE) {
 }
 
 #' @rdname make_chordal_ring
-#' @param ... Passed to \code{make_chordal_ring}.
+#' @param ... Passed to `make_chordal_ring()`.
 #' @export
-
 chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
 ## -----------------------------------------------------------------
@@ -1217,14 +1337,14 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #'
 #' This function calculates the line graph of another graph.
 #'
-#' The line graph \code{L(G)} of a \code{G} undirected graph is defined as
-#' follows. \code{L(G)} has one vertex for each edge in \code{G} and two
-#' vertices in \code{L(G)} are connected by an edge if their corresponding
+#' The line graph `L(G)` of a `G` undirected graph is defined as
+#' follows. `L(G)` has one vertex for each edge in `G` and two
+#' vertices in `L(G)` are connected by an edge if their corresponding
 #' edges share an end point.
 #'
-#' The line graph \code{L(G)} of a \code{G} directed graph is slightly
-#' different, \code{L(G)} has one vertex for each edge in \code{G} and two
-#' vertices in \code{L(G)} are connected by a directed edge if the target of
+#' The line graph `L(G)` of a `G` directed graph is slightly
+#' different, `L(G)` has one vertex for each edge in `G` and two
+#' vertices in `L(G)` are connected by a directed edge if the target of
 #' the first vertex's corresponding edge is the same as the source of the
 #' second vertex's corresponding edge.
 #'
@@ -1237,19 +1357,17 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' @examples
 #'
 #' # generate the first De-Bruijn graphs
-#' g <- make_full_graph(2, directed=TRUE, loops=TRUE)
+#' g <- make_full_graph(2, directed = TRUE, loops = TRUE)
 #' make_line_graph(g)
 #' make_line_graph(make_line_graph(g))
 #' make_line_graph(make_line_graph(make_line_graph(g)))
 #'
+#' @export
 make_line_graph <- function(graph) {
+  ensure_igraph(graph)
 
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_line_graph, graph)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_linegraph, graph)
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
@@ -1257,9 +1375,8 @@ make_line_graph <- function(graph) {
 }
 
 #' @rdname make_line_graph
-#' @param ... Passed to \code{make_line_graph}.
+#' @param ... Passed to `make_line_graph()`.
 #' @export
-
 line_graph <- function(...) constructor_spec(make_line_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1269,38 +1386,36 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' De Bruijn graphs are labeled graphs representing the overlap of strings.
 #'
 #' A de Bruijn graph represents relationships between strings. An alphabet of
-#' \code{m} letters are used and strings of length \code{n} are considered.  A
+#' `m` letters are used and strings of length `n` are considered.  A
 #' vertex corresponds to every possible string and there is a directed edge
-#' from vertex \code{v} to vertex \code{w} if the string of \code{v} can be
-#' transformed into the string of \code{w} by removing its first letter and
+#' from vertex `v` to vertex `w` if the string of `v` can be
+#' transformed into the string of `w` by removing its first letter and
 #' appending a letter to it.
 #'
-#' Please note that the graph will have \code{m} to the power \code{n} vertices
+#' Please note that the graph will have `m` to the power `n` vertices
 #' and even more edges, so probably you don't want to supply too big numbers
-#' for \code{m} and \code{n}.
+#' for `m` and `n`.
 #'
 #' De Bruijn graphs have some interesting properties, please see another
-#' source, eg. Wikipedia for details.
+#' source, e.g. Wikipedia for details.
 #'
 #' @aliases graph.de.bruijn
 #' @param m Integer scalar, the size of the alphabet. See details below.
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>
-#' @seealso \code{\link{make_kautz_graph}}, \code{\link{make_line_graph}}
+#' @seealso [make_kautz_graph()], [make_line_graph()]
 #' @keywords graphs
 #' @export
 #' @examples
 #'
 #' # de Bruijn graphs can be created recursively by line graphs as well
-#' g <- make_de_bruijn_graph(2,1)
-#' make_de_bruijn_graph(2,2)
+#' g <- make_de_bruijn_graph(2, 1)
+#' make_de_bruijn_graph(2, 2)
 #' make_line_graph(g)
-
 make_de_bruijn_graph <- function(m, n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
     res$m <- m
@@ -1310,9 +1425,8 @@ make_de_bruijn_graph <- function(m, n) {
 }
 
 #' @rdname make_de_bruijn_graph
-#' @param ... Passed to \code{make_de_bruijn_graph}.
+#' @param ... Passed to `make_de_bruijn_graph()`.
 #' @export
-
 de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1322,13 +1436,13 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' Kautz graphs are labeled graphs representing the overlap of strings.
 #'
 #' A Kautz graph is a labeled graph, vertices are labeled by strings of length
-#' \code{n+1} above an alphabet with \code{m+1} letters, with the restriction
+#' `n+1` above an alphabet with `m+1` letters, with the restriction
 #' that every two consecutive letters in the string must be different. There is
-#' a directed edge from a vertex \code{v} to another vertex \code{w} if it is
-#' possible to transform the string of \code{v} into the string of \code{w} by
+#' a directed edge from a vertex `v` to another vertex `w` if it is
+#' possible to transform the string of `v` into the string of `w` by
 #' removing the first letter and appending a letter to it.
 #'
-#' Kautz graphs have some interesting properties, see eg. Wikipedia for
+#' Kautz graphs have some interesting properties, see e.g. Wikipedia for
 #' details.
 #'
 #' @aliases graph.kautz
@@ -1337,18 +1451,17 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>, the first version in R was
 #' written by Vincent Matossian.
-#' @seealso \code{\link{make_de_bruijn_graph}}, \code{\link{make_line_graph}}
+#' @seealso [make_de_bruijn_graph()], [make_line_graph()]
 #' @keywords graphs
 #' @export
 #' @examples
 #'
-#' make_line_graph(make_kautz_graph(2,1))
-#' make_kautz_graph(2,2)
+#' make_line_graph(make_kautz_graph(2, 1))
+#' make_kautz_graph(2, 2)
 #'
 make_kautz_graph <- function(m, n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_kautz, as.numeric(m), as.numeric(n))
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
     res$m <- m
@@ -1358,9 +1471,8 @@ make_kautz_graph <- function(m, n) {
 }
 
 #' @rdname make_kautz_graph
-#' @param ... Passed to \code{make_kautz_graph}.
+#' @param ... Passed to `make_kautz_graph()`.
 #' @export
-
 kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1370,53 +1482,57 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' Bipartite graphs are also called two-mode by some. This function creates a
 #' bipartite graph in which every possible edge is present.
 #'
-#' Bipartite graphs have a \sQuote{\code{type}} vertex attribute in igraph,
-#' this is boolean and \code{FALSE} for the vertices of the first kind and
-#' \code{TRUE} for vertices of the second kind.
+#' Bipartite graphs have a \sQuote{`type`} vertex attribute in igraph,
+#' this is boolean and `FALSE` for the vertices of the first kind and
+#' `TRUE` for vertices of the second kind.
 #'
 #' @aliases graph.full.bipartite
 #' @param n1 The number of vertices of the first kind.
 #' @param n2 The number of vertices of the second kind.
 #' @param directed Logical scalar, whether the graphs is directed.
 #' @param mode Scalar giving the kind of edges to create for directed graphs.
-#' If this is \sQuote{\code{out}} then all vertices of the first kind are
-#' connected to the others; \sQuote{\code{in}} specifies the opposite
-#' direction; \sQuote{\code{all}} creates mutual edges. This argument is
-#' ignored for undirected graphs.x
-#' @return An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
+#'   If this is \sQuote{`out`} then all vertices of the first kind are
+#'   connected to the others; \sQuote{`in`} specifies the opposite
+#'   direction; \sQuote{`all`} creates mutual edges. This argument is
+#'   ignored for undirected graphs.x
+#' @return An igraph graph, with the \sQuote{`type`} vertex attribute set.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{make_full_graph}} for creating one-mode full graphs
+#' @seealso [make_full_graph()] for creating one-mode full graphs
 #' @keywords graphs
 #' @examples
 #'
 #' g <- make_full_bipartite_graph(2, 3)
-#' g2 <- make_full_bipartite_graph(2, 3, dir=TRUE)
-#' g3 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="in")
-#' g4 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="all")
+#' g2 <- make_full_bipartite_graph(2, 3, directed = TRUE)
+#' g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
+#' g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 #'
-make_full_bipartite_graph <- function(n1, n2, directed=FALSE,
-                       mode=c("all", "out", "in")) {
-
-  n1 <- as.integer(n1)
-  n2 <- as.integer(n2)
+#' @export
+make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
+                                      mode = c("all", "out", "in")) {
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
   directed <- as.logical(directed)
-  mode1 <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  mode1 <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
     res$n1 <- n1
     res$n2 <- n2
     res$mode <- mode
   }
-  set_vertex_attr(res$graph, "type", value=res$types)
+  set_vertex_attr(res$graph, "type", value = res$types)
 }
 
 #' @rdname make_full_bipartite_graph
-#' @param ... Passed to \code{make_full_bipartite_graph}.
+#' @param ... Passed to `make_full_bipartite_graph()`.
 #' @export
-
 full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1426,123 +1542,322 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' A bipartite graph has two kinds of vertices and connections are only allowed
 #' between different kinds.
 #'
-#' Bipartite graphs have a \code{type} vertex attribute in igraph, this is
-#' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
+#' Bipartite graphs have a `type` vertex attribute in igraph, this is
+#' boolean and `FALSE` for the vertices of the first kind and `TRUE`
 #' for vertices of the second kind.
 #'
-#' \code{make_bipartite_graph} basically does three things. First it checks tha
-#' \code{edges} vector against the vertex \code{types}. Then it creates a graph
-#' using the \code{edges} vector and finally it adds the \code{types} vector as
-#' a vertex attribute called \code{type}.
+#' `make_bipartite_graph()` basically does three things. First it checks the
+#' `edges` vector against the vertex `types`. Then it creates a graph
+#' using the `edges` vector and finally it adds the `types` vector as
+#' a vertex attribute called `type`. `edges` may contain strings as
+#' vertex names; in this case, `types` must be a named vector that specifies
+#' the type for each vertex name that occurs in `edges`.
 #'
-#' \code{is_bipartite} checks whether the graph is bipartite or not. It just
-#' checks whether the graph has a vertex attribute called \code{type}.
-#'
-#' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
+#' @aliases graph.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
-#' boolean. The length of the vector gives the number of vertices in the graph.
+#'   boolean. The length of the vector gives the number of vertices in the graph.
+#'   When the vector is a named vector, the names will be attached to the graph
+#'   as the `name` vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
-#' regular \code{\link{graph}} function. It is checked that the edges indeed
-#' connect vertices of different kind, accoding to the supplied \code{types}
-#' vector.
+#'   regular [graph()] function. It is checked that the edges indeed
+#'   connect vertices of different kind, according to the supplied `types`
+#'   vector. The vector may be a string vector if `types` is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
-#' that by default undirected graphs are created, as this is more common for
-#' bipartite graphs.
-#' @param graph The input graph.
-#' @return \code{make_bipartite_graph} returns a bipartite igraph graph. In other
-#' words, an igraph graph that has a vertex attribute named \code{type}.
+#'   that by default undirected graphs are created, as this is more common for
+#'   bipartite graphs.
+#' @return `make_bipartite_graph()` returns a bipartite igraph graph. In other
+#'   words, an igraph graph that has a vertex attribute named `type`.
 #'
-#' \code{is_bipartite} returns a logical scalar.
+#'   `is_bipartite()` returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph}} to create one-mode networks
+#' @seealso [graph()] to create one-mode networks
 #' @keywords graphs
+#' @family bipartite
 #' @examples
 #'
-#' g <- make_bipartite_graph( rep(0:1,length=10), c(1:10))
-#' print(g, v=TRUE)
+#' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
+#' print(g, v = TRUE)
 #'
-make_bipartite_graph <- function(types, edges, directed=FALSE) {
+#' @export
+make_bipartite_graph <- function(types, edges, directed = FALSE) {
+  vertex.names <- names(types)
+
+  if (is.character(edges)) {
+    if (is.null(vertex.names)) {
+      stop("`types` vector must be named when the edge vector contains strings")
+    }
+    edges <- match(edges, vertex.names)
+    if (any(is.na(edges))) {
+      stop("edge vector contains a vertex name that is not found in `types`")
+    }
+  }
 
   types <- as.logical(types)
-  edges <- as.numeric(edges)-1
+  edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_create_bipartite, types, edges, directed)
-  set_vertex_attr(res, "type", value=types)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_create_bipartite, types, edges, directed)
+  res <- set_vertex_attr(res, "type", value = types)
+
+  if (!is.null(vertex.names)) {
+    res <- set_vertex_attr(res, "name", value = vertex.names)
+  }
+
+  res
 }
 
 #' @rdname make_bipartite_graph
-#' @param ... Passed to \code{make_bipartite_graph}.
+#' @param ... Passed to `make_bipartite_graph()`.
 #' @export
-
 bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
 
 #' Create a complete (full) citation graph
 #'
-#' \code{make_full_citation_graph} creates a full citation graph. This is a
-#' directed graph, where every \code{i->j} edge is present if and only if
-#' \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
+#' `make_full_citation_graph()` creates a full citation graph. This is a
+#' directed graph, where every `i->j` edge is present if and only if
+#' \eqn{j<i}. If `directed=FALSE` then the graph is just a full graph.
 #'
 #' @aliases graph.full.citation
 #' @param n The number of vertices.
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' print_all(make_full_citation_graph(10))
-
-make_full_citation_graph <- function(n, directed=TRUE) {
+make_full_citation_graph <- function(n, directed = TRUE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_full_citation, n, directed)
+  res <- .Call(R_igraph_full_citation, n, directed)
 
-  res <- set_graph_attr(res, 'name', 'Full citation graph')
+  res <- set_graph_attr(res, "name", "Full citation graph")
   res
 }
 
 #' @rdname make_full_citation_graph
-#' @param ... Passed to \code{make_full_citation_graph}.
+#' @param ... Passed to `make_full_citation_graph()`.
 #' @export
-
 full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, ...)
 
 ## -----------------------------------------------------------------
 
 #' Creating a graph from LCF notation
-#' 
+#'
 #' LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
 #' 3-regular Hamiltonian graphs. It constists of three parameters, the number
 #' of vertices in the graph, a list of shifts giving additional edges to a
 #' cycle backbone and another integer giving how many times the shifts should
-#' be performed. See \url{http://mathworld.wolfram.com/LCFNotation.html} for
+#' be performed. See <http://mathworld.wolfram.com/LCFNotation.html> for
 #' details.
-#' 
-#' 
+#'
+#'
 #' @aliases graph.lcf graph_from_lcf
 #' @param n Integer, the number of vertices in the graph.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph}} can create arbitrary graphs, see also the other
+#' @seealso [graph()] can create arbitrary graphs, see also the other
 #' functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # This is the Franklin graph:
-#' g1 <- graph_from_lcf(12, c(5,-5), 6)
+#' g1 <- graph_from_lcf(12, c(5, -5), 6)
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @include auto.R
+graph_from_lcf <- lcf_vector_impl
 
-graph_from_lcf <- graph_from_lcf
+## -----------------------------------------------------------------
+
+#' Creating a graph from a given degree sequence, deterministically
+#'
+#' It is often useful to create a graph with given vertex degrees. This function
+#' creates such a graph in a deterministic manner.
+#'
+#' Simple undirected graphs are constructed using the Havel-Hakimi algorithm
+#' (undirected case), or the analogous Kleitman-Wang algorithm (directed case).
+#' These algorithms work by choosing an arbitrary vertex and connecting all its
+#' stubs to other vertices. This step is repeated until all degrees have been
+#' connected up.
+#'
+#' The \sQuote{method} argument controls in which order the vertices are
+#' selected during the course of the algorithm.
+#'
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining
+#' degree. The result is usually a graph with high negative degree assortativity.
+#' In the undirected case, this method is guaranteed to generate a connected
+#' graph, regardless of whether multi-edges are allowed, provided that a
+#' connected realization exists. See Horvát and Modes (2021) for details.
+#' In the directed case it tends to generate weakly connected graphs, but this
+#' is not guaranteed. This is the default method.
+#'
+#' The \dQuote{largest} method selects the vertex with the largest remaining
+#' degree. The result is usually a graph with high positive degree assortativity,
+#' and is often disconnected.
+#'
+#' The \dQuote{index} method selects the vertices in order of their index.
+#'
+#' @param out.deg Numeric vector, the sequence of degrees (for undirected
+#'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
+#'   should be even. For directed graphs its sum should be the same as the sum of
+#'   `in.deg`.
+#' @param in.deg For directed graph, the in-degree sequence. By default this is
+#'   `NULL` and an undirected graph is created.
+#' @param method Character, the method for generating the graph; see below.
+#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
+#'   \dQuote{multiple} allows multiple edges but disallows loop.
+#'   \dQuote{loops} allows loop edges but disallows multiple edges (currently
+#'   unimplemented). \dQuote{all} allows all types of edges. The default is
+#'   \dQuote{simple}.
+#' @return The new graph object.
+#' @seealso [sample_degseq()] for a randomized variant that samples
+#' from graphs with the given degree sequence.
+#' @references V. Havel,
+#' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
+#' Časopis pro pěstování matematiky 80, 477-480 (1955).
+#' https://eudml.org/doc/19050
+#'
+#' S. L. Hakimi,
+#' On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
+#' Journal of the SIAM 10, 3 (1962).
+#' \doi{10.1137/0111010}
+#'
+#' D. J. Kleitman and D. L. Wang,
+#' Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
+#' Discrete Mathematics 6, 1 (1973).
+#' \doi{10.1016/0012-365X(73)90037-X}
+#'
+#' Sz. Horvát and C. D. Modes,
+#' Connectedness matters: construction and exact random sampling of connected networks (2021).
+#' \doi{10.1088/2632-072X/abced5}
+#' @export
+#' @keywords graphs
+#' @examples
+#'
+#' g <- realize_degseq(rep(2, 100))
+#' degree(g)
+#' is_simple(g)
+#'
+#' ## Exponential degree distribution, with high positive assortativity.
+#' ## Loop and multiple edges are explicitly allowed.
+#' ## Note that we correct the degree sequence if its sum is odd.
+#' degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
+#' g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
+#' all(degree(g4) == degs)
+#'
+#' ## Power-law degree distribution, no loops allowed but multiple edges
+#' ## are okay.
+#' ## Note that we correct the degree sequence if its sum is odd.
+#' degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
+#' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
+#' all(degree(g5) == degs)
+realize_degseq <- realize_degree_sequence_impl
+
+
+#' Creating a bipartite graph from two degree sequences, deterministically
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Constructs a bipartite graph from the degree sequences of its partitions,
+#' if one exists. This function uses a Havel-Hakimi style construction
+#' algorithm.
+#'
+#' @details
+#' The \sQuote{method} argument controls in which order the vertices are
+#' selected during the course of the algorithm.
+#'
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining
+#' degree, from either partition. The result is usually a graph with high
+#' negative degree assortativity. In the undirected case, this method is
+#' guaranteed to generate a connected graph, regardless of whether multi-edges
+#' are allowed, provided that a connected realization exists. This is the
+#' default method.
+#'
+#' The \dQuote{largest} method selects the vertex with the largest remaining
+#' degree. The result is usually a graph with high positive degree
+#' assortativity, and is often disconnected.
+#'
+#' The \dQuote{index} method selects the vertices in order of their index.
+#'
+#' @return The new graph object.
+#' @param degrees1 The degrees of the first partition.
+#' @param degrees2 The degrees of the second partition.
+#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#'   \dQuote{simple} allows simple graphs only (no multiple edges).
+#'   \dQuote{multiple} allows multiple edges.
+#' @param method Character, the method for generating the graph; see below.
+#' @inheritParams rlang::args_dots_empty
+#' @seealso [realize_degseq()] to create a not necessarily bipartite graph.
+#' @export
+#' @keywords graphs
+#' @examples
+#' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
+#' degree(g)
+realize_bipartite_degseq <- function(degrees1, degrees2, ...,
+                                     allowed.edge.types = c("simple", "multiple"),
+                                     method = c("smallest", "largest", "index")) {
+  check_dots_empty()
+  allowed.edge.types <- igraph.match.arg(allowed.edge.types)
+  method <- igraph.match.arg(method)
+  g <- realize_bipartite_degree_sequence_impl(degrees1 = degrees1, degrees2 = degrees2,
+                                              allowed.edge.types = allowed.edge.types,
+                                              method = method)
+  V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
+  g
+}
+
+
+#' @export graph.atlas
+deprecated("graph.atlas", graph_from_atlas)
+#' @export graph.bipartite
+deprecated("graph.bipartite", make_bipartite_graph)
+#' @export graph.de.bruijn
+deprecated("graph.de.bruijn", make_de_bruijn_graph)
+#' @export graph.empty
+deprecated("graph.empty", make_empty_graph)
+#' @export graph.extended.chordal.ring
+deprecated("graph.extended.chordal.ring", make_chordal_ring)
+#' @export graph.formula
+deprecated("graph.formula", graph_from_literal)
+#' @export graph.full
+deprecated("graph.full", make_full_graph)
+#' @export graph.full.bipartite
+deprecated("graph.full.bipartite", make_full_bipartite_graph)
+#' @export graph.full.citation
+deprecated("graph.full.citation", make_full_citation_graph)
+#' @export graph.kautz
+deprecated("graph.kautz", make_kautz_graph)
+#' @export graph.lattice
+deprecated("graph.lattice", make_lattice)
+#' @export graph.lcf
+deprecated("graph.lcf", graph_from_lcf)
+#' @export graph.star
+deprecated("graph.star", make_star)
+#' @export graph.tree
+deprecated("graph.tree", make_tree)
+#' @export graph.ring
+deprecated("graph.ring", make_ring)
+#' @export line.graph
+deprecated("line.graph", make_line_graph)
+#' @export graph.famous
+deprecated("graph.famous", make_graph)
+#' @export graph
+deprecated("graph", make_graph)

@@ -1,0 +1,39 @@
+{
+    "title": "igraph for R: R interface of the igraph library for graph theory and network analysis",
+    "upload_type": "software",
+    "keywords": [
+        "graph theory",
+        "network analysis",
+        "igraph",
+        "R"
+    ],
+    "creators": [
+        {
+            "name": "Csárdi, Gábor",
+            "orcid": "0000-0001-7098-9676"
+        },
+        {
+            "name": "Nepusz, Tamás",
+            "orcid": "0000-0002-1451-338X"
+        },
+        {
+            "name": "Müller, Kirill",
+            "orcid": "0000-0002-1416-3412"
+        },
+        {
+            "name": "Horvát, Szabolcs",
+            "orcid": "0000-0002-3100-523X"
+        },
+        {
+            "name": "Traag, Vincent",
+            "orcid": "0000-0003-3170-3879"
+        },
+        {
+            "name": "Zanini, Fabio",
+            "orcid": "0000-0001-7097-8539"
+        },
+        {
+            "name": "Noom, Daniel"
+        }
+    ]
+}

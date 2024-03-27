@@ -1,7 +1,157 @@
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.setcoords()` was renamed to `tk_set_coords()` to create a more
+#' consistent API.
+#' @inheritParams tk_set_coords
+#' @keywords internal
+#' @export
+tkplot.setcoords <- function(tkp.id, coords) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.setcoords()", "tk_set_coords()")
+  tk_set_coords(tkp.id = tkp.id, coords = coords)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.rotate()` was renamed to `tk_rotate()` to create a more
+#' consistent API.
+#' @inheritParams tk_rotate
+#' @keywords internal
+#' @export
+tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.rotate()", "tk_rotate()")
+  tk_rotate(tkp.id = tkp.id, degree = degree, rad = rad)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.reshape()` was renamed to `tk_reshape()` to create a more
+#' consistent API.
+#' @inheritParams tk_reshape
+#' @keywords internal
+#' @export
+tkplot.reshape <- function(tkp.id, newlayout, ..., params) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.reshape()", "tk_reshape()")
+  tk_reshape(tkp.id = tkp.id, newlayout = newlayout, params = params, ...)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.off()` was renamed to `tk_off()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+tkplot.off <- function() { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.off()", "tk_off()")
+  tk_off()
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.getcoords()` was renamed to `tk_coords()` to create a more
+#' consistent API.
+#' @inheritParams tk_coords
+#' @keywords internal
+#' @export
+tkplot.getcoords <- function(tkp.id, norm = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.getcoords()", "tk_coords()")
+  tk_coords(tkp.id = tkp.id, norm = norm)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.fit.to.screen()` was renamed to `tk_fit()` to create a more
+#' consistent API.
+#' @inheritParams tk_fit
+#' @keywords internal
+#' @export
+tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.fit.to.screen()", "tk_fit()")
+  tk_fit(tkp.id = tkp.id, width = width, height = height)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.export.postscript()` was renamed to `tk_postscript()` to create a more
+#' consistent API.
+#' @inheritParams tk_postscript
+#' @keywords internal
+#' @export
+tkplot.export.postscript <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.export.postscript()", "tk_postscript()")
+  tk_postscript(tkp.id = tkp.id)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.close()` was renamed to `tk_close()` to create a more
+#' consistent API.
+#' @inheritParams tk_close
+#' @keywords internal
+#' @export
+tkplot.close <- function(tkp.id, window.close = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.close()", "tk_close()")
+  tk_close(tkp.id = tkp.id, window.close = window.close)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.center()` was renamed to `tk_center()` to create a more
+#' consistent API.
+#' @inheritParams tk_center
+#' @keywords internal
+#' @export
+tkplot.center <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.center()", "tk_center()")
+  tk_center(tkp.id = tkp.id)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.canvas()` was renamed to `tk_canvas()` to create a more
+#' consistent API.
+#' @inheritParams tk_canvas
+#' @keywords internal
+#' @export
+tkplot.canvas <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.canvas()", "tk_canvas()")
+  tk_canvas(tkp.id = tkp.id)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,15 +161,13 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
 #   02110-1301 USA
 #
 ###################################################################
-
-#' @include layout.R
 
 ###################################################################
 # Internal variables
@@ -36,154 +184,159 @@ assign(".next", 1, .tkplot.env)
 
 
 #' Interactive plotting of graphs
-#' 
-#' \code{tkplot} and its companion functions serve as an interactive graph
+#'
+#' `tkplot()` and its companion functions serve as an interactive graph
 #' drawing facility. Not all parameters of the plot can be changed
-#' interactively right now though, eg. the colors of vertices, edges, and also
+#' interactively right now though, e.g. the colors of vertices, edges, and also
 #' others have to be pre-defined.
-#' 
-#' \code{tkplot} is an interactive graph drawing facility. It is not very well
+#'
+#' `tkplot()` is an interactive graph drawing facility. It is not very well
 #' developed at this stage, but it should be still useful.
-#' 
+#'
 #' It's handling should be quite straightforward most of the time, here are
 #' some remarks and hints.
-#' 
+#'
 #' There are different popup menus, activated by the right mouse button, for
 #' vertices and edges. Both operate on the current selection if the vertex/edge
 #' under the cursor is part of the selection and operate on the vertex/edge
 #' under the cursor if it is not.
-#' 
+#'
 #' One selection can be active at a time, either a vertex or an edge selection.
-#' A vertex/edge can be added to a selection by holding the \code{control} key
+#' A vertex/edge can be added to a selection by holding the `control` key
 #' while clicking on it with the left mouse button. Doing this again deselect
 #' the vertex/edge.
-#' 
-#' Selections can be made also from the \code{Select} menu. The `Select some
-#' vertices' dialog allows to give an expression for the vertices to be
+#'
+#' Selections can be made also from the "Select" menu. The "Select some
+#' vertices" dialog allows to give an expression for the vertices to be
 #' selected: this can be a list of numeric R expessions separated by commas,
-#' like `\code{1,2:10,12,14,15}' for example. Similarly in the `Select some
-#' edges' dialog two such lists can be given and all edges connecting a vertex
+#' like `1,2:10,12,14,15` for example. Similarly in the "Select some
+#' edges" dialog two such lists can be given and all edges connecting a vertex
 #' in the first list to one in the second list will be selected.
-#' 
+#'
 #' In the color dialog a color name like 'orange' or RGB notation can also be
 #' used.
-#' 
-#' The \code{tkplot} command creates a new Tk window with the graphical
-#' representation of \code{graph}. The command returns an integer number, the
+#'
+#' The `tkplot()` command creates a new Tk window with the graphical
+#' representation of `graph`. The command returns an integer number, the
 #' tkplot id. The other commands utilize this id to be able to query or
 #' manipulate the plot.
-#' 
-#' \code{tk_close} closes the Tk plot with id \code{tkp.id}.
-#' 
-#' \code{tk_off} closes all Tk plots.
-#' 
-#' \code{tk_fit} fits the plot to the given rectange
-#' (\code{width} and \code{height}), if some of these are \code{NULL} the
-#' actual phisical width od height of the plot window is used.
-#' 
-#' \code{tk_reshape} applies a new layout to the plot, its optional
-#' parameters will be collected to a list analogous to \code{layout.par}.
-#' 
-#' \code{tk_postscript} creates a dialog window for saving the plot
+#'
+#' `tk_close()` closes the Tk plot with id `tkp.id`.
+#'
+#' `tk_off()` closes all Tk plots.
+#'
+#' `tk_fit()` fits the plot to the given rectangle
+#' (`width` and `height`), if some of these are `NULL` the
+#' actual physical width od height of the plot window is used.
+#'
+#' `tk_reshape()` applies a new layout to the plot, its optional
+#' parameters will be collected to a list analogous to `layout.par`.
+#'
+#' `tk_postscript()` creates a dialog window for saving the plot
 #' in postscript format.
-#' 
-#' \code{tk_canvas} returns the Tk canvas object that belongs to a graph
-#' plot. The canvas can be directly manipulated then, eg. labels can be added,
-#' it could be saved to a file programatically, etc. See an example below.
-#' 
-#' \code{tk_coords} returns the coordinates of the vertices in a matrix.
+#'
+#' `tk_canvas()` returns the Tk canvas object that belongs to a graph
+#' plot. The canvas can be directly manipulated then, e.g. labels can be added,
+#' it could be saved to a file programmatically, etc. See an example below.
+#'
+#' `tk_coords()` returns the coordinates of the vertices in a matrix.
 #' Each row corresponds to one vertex.
-#' 
-#' \code{tk_set_coords} sets the coordinates of the vertices. A two-column
+#'
+#' `tk_set_coords()` sets the coordinates of the vertices. A two-column
 #' matrix specifies the new positions, with each row corresponding to a single
 #' vertex.
-#' 
-#' \code{tk_center} shifts the figure to the center of its plot window.
-#' 
-#' \code{tk_rotate} rotates the figure, its parameter can be given either
+#'
+#' `tk_center()` shifts the figure to the center of its plot window.
+#'
+#' `tk_rotate()` rotates the figure, its parameter can be given either
 #' in degrees or in radians.
-#' 
-#' @aliases tkplot tkplot.close tkplot.off tkplot.fit.to.screen tkplot.reshape
-#' tkplot.export.postscript tkplot.canvas tkplot.getcoords tkplot.setcoords
-#' tkplot.center tkplot.rotate tk_canvas tk_center tk_close tk_postscript
-#' tk_fit tk_coords tk_off tk_reshape tk_rotate tk_set_coords
-#' @param graph The \code{graph} to plot.
+#'
+#' tkplot.center tkplot.rotate
+#' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
 #' @param tkp.id The id of the tkplot window to close/reshape/etc.
 #' @param window.close Leave this on the default value.
 #' @param width The width of the rectangle for generating new coordinates.
 #' @param height The height of the rectangle for generating new coordinates.
-#' @param newlayout The new layout, see the \code{layout} parameter of tkplot.
+#' @param newlayout The new layout, see the `layout` parameter of tkplot.
 #' @param norm Logical, should we norm the coordinates.
 #' @param coords Two-column numeric matrix, the new coordinates of the
-#' vertices, in absolute coordinates.
+#'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
-#' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
-#' the complete list.
-#' @return \code{tkplot} returns an integer, the id of the plot, this can be
-#' used to manipulate it from the command line.
-#' 
-#' \code{tk_canvas} retuns \code{tkwin} object, the Tk canvas.
-#' 
-#' \code{tk_coords} returns a matrix with the coordinates.
-#' 
-#' \code{tk_close}, \code{tk_off}, \code{tk_fit},
-#' \code{tk_reshape}, \code{tk_postscript}, \code{tk_center}
-#' and \code{tk_rotate} return \code{NULL} invisibly.
+#' @param \dots Additional plotting parameters. See [igraph.plotting] for
+#'   the complete list.
+#' @return `tkplot()` returns an integer, the id of the plot, this can be
+#'   used to manipulate it from the command line.
+#'
+#'   `tk_canvas()` returns `tkwin` object, the Tk canvas.
+#'
+#'   `tk_coords()` returns a matrix with the coordinates.
+#'
+#'   `tk_close()`, `tk_off()`, `tk_fit()`,
+#'   `tk_reshape()`, `tk_postscript()`, `tk_center()`
+#'   and `tk_rotate()` return `NULL` invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{plot.igraph}}, \code{\link{layout}}
+#' @seealso [plot.igraph()], [layout()]
+#' @family tkplot
 #' @export
 #' @keywords graphs
 #' @section Examples:
 #' \preformatted{
 #' g <- make_ring(10)
 #' tkplot(g)
-#' 
-#' ## Saving a tkplot() to a file programatically
+#'
+#' ## Saving a tkplot() to a file programmatically
 #' g <- make_star(10, center=10) %u% make_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
 #' lay <- layout_nicely(g)
-#' 
+#'
 #' id <- tkplot(g, layout=lay)
 #' canvas <- tk_canvas(id)
 #' tcltk::tkpostscript(canvas, file="/tmp/output.eps")
 #' tk_close(id)
-#' 
+#'
 #' ## Setting the coordinates and adding a title label
 #' g <- make_ring(10)
 #' id <- tkplot(make_ring(10), canvas.width=450, canvas.height=500)
-#' 
+#'
 #' canvas <- tk_canvas(id)
 #' padding <- 20
 #' coords <- norm_coords(layout_in_circle(g), 0+padding, 450-padding,
 #'                       50+padding, 500-padding)
 #' tk_set_coords(id, coords)
-#' 
+#'
 #' width <- as.numeric(tkcget(canvas, "-width"))
 #' height <- as.numeric(tkcget(canvas, "-height"))
 #' tkcreate(canvas, "text", width/2, 25, text="My title",
 #'          justify="center", font=tcltk::tkfont.create(family="helvetica",
 #'          size=20,weight="bold"))
 #' }
-#' 
-tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
+#'
+tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
+  ensure_igraph(graph)
 
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  
   # Libraries
   requireNamespace("tcltk", quietly = TRUE) ||
     stop("tcl/tk library not available")
 
-  # Visual parameters
   params <- i.parse.plot.params(graph, list(...))
+
+  # Use the palette specified by the user (if any)
+  palette <- params("plot", "palette")
+  if (!is.null(palette)) {
+    old_palette <- palette(palette)
+    on.exit(palette(old_palette), add = TRUE)
+  }
+
+  # Visual parameters
   labels <- params("vertex", "label")
   label.color <- .tkplot.convert.color(params("vertex", "label.color"))
-  label.font <- .tkplot.convert.font(params("vertex", "label.font"),
-                                     params("vertex", "label.family"),
-                                     params("vertex", "label.cex"))
+  label.font <- .tkplot.convert.font(
+    params("vertex", "label.font"),
+    params("vertex", "label.family"),
+    params("vertex", "label.cex")
+  )
   label.degree <- params("vertex", "label.degree")
   label.dist <- params("vertex", "label.dist")
   vertex.color <- .tkplot.convert.color(params("vertex", "color"))
@@ -202,162 +355,209 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   edge.lty <- params("edge", "lty")
   loop.angle <- params("edge", "loop.angle")
   arrow.mode <- params("edge", "arrow.mode")
-  edge.label.font <- .tkplot.convert.font(params("edge", "label.font"),
-                                          params("edge", "label.family"),
-                                          params("edge", "label.cex"))
+  edge.label.font <- .tkplot.convert.font(
+    params("edge", "label.font"),
+    params("edge", "label.family"),
+    params("edge", "label.cex")
+  )
   edge.label.color <- params("edge", "label.color")
-  arrow.size  <- params("edge", "arrow.size")[1]
+  arrow.size <- params("edge", "arrow.size")[1]
   curved <- params("edge", "curved")
-  curved <- rep(curved, length=ecount(graph))
-  
+  curved <- rep(curved, length.out = ecount(graph))
+
   layout <- unname(params("plot", "layout"))
-  layout[,2] <- -layout[,2]
+  layout[, 2] <- -layout[, 2]
   margin <- params("plot", "margin")
-  margin <- rep(margin, length=4)
+  margin <- rep(margin, length.out = 4)
 
   # the new style parameters can't do this yet
-  arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)
-  
+  arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
+
   # Edge line type
   edge.lty <- i.tkplot.get.edge.lty(edge.lty)
 
   # Create window & canvas
-  top <- tcltk::tktoplevel(background="lightgrey")
-  canvas <- tcltk::tkcanvas(top, relief="raised",
-                     width=canvas.width, height=canvas.height,
-                     borderwidth=2)
-  tcltk::tkpack(canvas, fill="both", expand=1)
+  top <- tcltk::tktoplevel(background = "lightgrey")
+  canvas <- tcltk::tkcanvas(top,
+    relief = "raised",
+    width = canvas.width, height = canvas.height,
+    borderwidth = 2
+  )
+  tcltk::tkpack(canvas, fill = "both", expand = 1)
 
   # Create parameters
-  vertex.params <- sdf(vertex.color=vertex.color,
-                       vertex.size=vertex.size,
-                       label.font=label.font,
-                       NROW=vcount(graph))
-                       
-  params <- list(vertex.params=vertex.params,
-                 edge.color=edge.color, label.color=label.color,
-                 labels.state=1, edge.width=edge.width,
-                 padding=margin*300+max(vertex.size)+5,
-                 grid=0, label.degree=label.degree,
-                 label.dist=label.dist, edge.labels=edge.labels,
-                 vertex.frame.color=vertex.frame.color,
-                 loop.angle=loop.angle, edge.lty=edge.lty, arrow.mode=arrow.mode,
-                 edge.label.font=edge.label.font,
-                 edge.label.color=edge.label.color, arrow.size=arrow.size,
-                 curved=curved)
+  vertex.params <- sdf(
+    vertex.color = vertex.color,
+    vertex.size = vertex.size,
+    label.font = label.font,
+    NROW = vcount(graph)
+  )
+
+  params <- list(
+    vertex.params = vertex.params,
+    edge.color = edge.color, label.color = label.color,
+    labels.state = 1, edge.width = edge.width,
+    padding = margin * 300 + max(vertex.size) + 5,
+    grid = 0, label.degree = label.degree,
+    label.dist = label.dist, edge.labels = edge.labels,
+    vertex.frame.color = vertex.frame.color,
+    loop.angle = loop.angle, edge.lty = edge.lty, arrow.mode = arrow.mode,
+    edge.label.font = edge.label.font,
+    edge.label.color = edge.label.color, arrow.size = arrow.size,
+    curved = curved
+  )
 
   # The popup menu
   popup.menu <- tcltk::tkmenu(canvas)
-  tcltk::tkadd(popup.menu, "command", label="Fit to screen", command=function() {
-    tk_fit(tkp.id)})  
+  tcltk::tkadd(popup.menu, "command", label = "Fit to screen", command = function() {
+    tk_fit(tkp.id)
+  })
 
   # Different popup menu for vertices
   vertex.popup.menu <- tcltk::tkmenu(canvas)
-  tcltk::tkadd(vertex.popup.menu, "command", label="Vertex color",
-        command=function() {
-          tkp <- .tkplot.get(tkp.id)
-          vids <- .tkplot.get.selected.vertices(tkp.id)
-          if (length(vids)==0) return(FALSE)
-          
-          initialcolor <- tkp$params$vertex.params[vids[1], "vertex.color"]
-          color <- .tkplot.select.color(initialcolor)
-          if (color=="") return(FALSE) # Cancel
-          
-          .tkplot.update.vertex.color(tkp.id, vids, color)
-        })
-  tcltk::tkadd(vertex.popup.menu, "command", label="Vertex size",
-        command=function() {
-          tkp <- .tkplot.get(tkp.id)
-          vids <- .tkplot.get.selected.vertices(tkp.id)
-          if (length(vids)==0) return(FALSE)
+  tcltk::tkadd(vertex.popup.menu, "command",
+    label = "Vertex color",
+    command = function() {
+      tkp <- .tkplot.get(tkp.id)
+      vids <- .tkplot.get.selected.vertices(tkp.id)
+      if (length(vids) == 0) {
+        return(FALSE)
+      }
 
-          initialsize <- tkp$params$vertex.params[1, "vertex.size"]
-          size <- .tkplot.select.number("Vertex size", initialsize, 1, 20)
-          if (is.na(size)) return(FALSE)
+      initialcolor <- tkp$params$vertex.params[vids[1], "vertex.color"]
+      color <- .tkplot.select.color(initialcolor)
+      if (color == "") {
+        return(FALSE)
+      } # Cancel
 
-          .tkplot.update.vertex.size(tkp.id, vids, size)
-        })
-  
+      .tkplot.update.vertex.color(tkp.id, vids, color)
+    }
+  )
+  tcltk::tkadd(vertex.popup.menu, "command",
+    label = "Vertex size",
+    command = function() {
+      tkp <- .tkplot.get(tkp.id)
+      vids <- .tkplot.get.selected.vertices(tkp.id)
+      if (length(vids) == 0) {
+        return(FALSE)
+      }
+
+      initialsize <- tkp$params$vertex.params[1, "vertex.size"]
+      size <- .tkplot.select.number("Vertex size", initialsize, 1, 20)
+      if (is.na(size)) {
+        return(FALSE)
+      }
+
+      .tkplot.update.vertex.size(tkp.id, vids, size)
+    }
+  )
+
   # Different popup menu for edges
   edge.popup.menu <- tcltk::tkmenu(canvas)
-  tcltk::tkadd(edge.popup.menu, "command", label="Edge color",
-        command=function() {
-          tkp <- .tkplot.get(tkp.id)
-          eids <- .tkplot.get.selected.edges(tkp.id)
-          if (length(eids)==0) return(FALSE)
-          
-          initialcolor <- ifelse(length(tkp$params$edge.color)>1,
-                                 tkp$params$edge.color[eids[1]],
-                                 tkp$params$edge.color)
-          color <- .tkplot.select.color(initialcolor)
-          if (color=="") return(FALSE) # Cancel
+  tcltk::tkadd(edge.popup.menu, "command",
+    label = "Edge color",
+    command = function() {
+      tkp <- .tkplot.get(tkp.id)
+      eids <- .tkplot.get.selected.edges(tkp.id)
+      if (length(eids) == 0) {
+        return(FALSE)
+      }
 
-          .tkplot.update.edge.color(tkp.id, eids, color)          
-        })
-  tcltk::tkadd(edge.popup.menu, "command", label="Edge width",
-        command=function() {
-          tkp <- .tkplot.get(tkp.id)
-          eids <- .tkplot.get.selected.edges(tkp.id)
-          if (length(eids)==0) return(FALSE)
-          
-          initialwidth <- ifelse(length(tkp$params$edge.width)>1,
-                                 tkp$params$edge.width[eids[1]],
-                                 tkp$params$edge.width)
-          width <- .tkplot.select.number("Edge width", initialwidth, 1, 10)
-          if (is.na(width)) return(FALSE) # Cancel
+      initialcolor <- ifelse(length(tkp$params$edge.color) > 1,
+        tkp$params$edge.color[eids[1]],
+        tkp$params$edge.color
+      )
+      color <- .tkplot.select.color(initialcolor)
+      if (color == "") {
+        return(FALSE)
+      } # Cancel
 
-          .tkplot.update.edge.width(tkp.id, eids, width)
-        })
-          
-  
+      .tkplot.update.edge.color(tkp.id, eids, color)
+    }
+  )
+  tcltk::tkadd(edge.popup.menu, "command",
+    label = "Edge width",
+    command = function() {
+      tkp <- .tkplot.get(tkp.id)
+      eids <- .tkplot.get.selected.edges(tkp.id)
+      if (length(eids) == 0) {
+        return(FALSE)
+      }
+
+      initialwidth <- ifelse(length(tkp$params$edge.width) > 1,
+        tkp$params$edge.width[eids[1]],
+        tkp$params$edge.width
+      )
+      width <- .tkplot.select.number("Edge width", initialwidth, 1, 10)
+      if (is.na(width)) {
+        return(FALSE)
+      } # Cancel
+
+      .tkplot.update.edge.width(tkp.id, eids, width)
+    }
+  )
+
+
   # Create plot object
-  tkp <- list(top=top, canvas=canvas, graph=graph, coords=layout,
-              labels=labels, params=params, popup.menu=popup.menu,
-              vertex.popup.menu=vertex.popup.menu,
-              edge.popup.menu=edge.popup.menu)
+  tkp <- list(
+    top = top, canvas = canvas, graph = graph, coords = layout,
+    labels = labels, params = params, popup.menu = popup.menu,
+    vertex.popup.menu = vertex.popup.menu,
+    edge.popup.menu = edge.popup.menu
+  )
   tkp.id <- .tkplot.new(tkp)
   tcltk::tktitle(top) <- paste("Graph plot", as.character(tkp.id))
 
   # The main pull-down menu
   main.menu <- tcltk::tkmenu(top)
-  tcltk::tkadd(main.menu, "command", label="Close", command=function() {
-    tk_close(tkp.id, TRUE)})
+  tcltk::tkadd(main.menu, "command", label = "Close", command = function() {
+    tk_close(tkp.id, TRUE)
+  })
   select.menu <- .tkplot.select.menu(tkp.id, main.menu)
-  tcltk::tkadd(main.menu, "cascade", label="Select", menu=select.menu)  
+  tcltk::tkadd(main.menu, "cascade", label = "Select", menu = select.menu)
   layout.menu <- .tkplot.layout.menu(tkp.id, main.menu)
-  tcltk::tkadd(main.menu, "cascade", label="Layout", menu=layout.menu)
+  tcltk::tkadd(main.menu, "cascade", label = "Layout", menu = layout.menu)
   view.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(main.menu, "cascade", label="View", menu=view.menu)
-  tcltk::tkadd(view.menu, "command", label="Fit to screen", command=function() {
-    tk_fit(tkp.id)})
-  tcltk::tkadd(view.menu, "command", label="Center on screen", command=function() {
-    tk_center(tkp.id)})
+  tcltk::tkadd(main.menu, "cascade", label = "View", menu = view.menu)
+  tcltk::tkadd(view.menu, "command", label = "Fit to screen", command = function() {
+    tk_fit(tkp.id)
+  })
+  tcltk::tkadd(view.menu, "command", label = "Center on screen", command = function() {
+    tk_center(tkp.id)
+  })
   tcltk::tkadd(view.menu, "separator")
   view.menu.labels <- tcltk::tclVar(1)
   view.menu.grid <- tcltk::tclVar(0)
-  tcltk::tkadd(view.menu, "checkbutton", label="Labels",
-        variable=view.menu.labels, command=function() {
-          .tkplot.toggle.labels(tkp.id)})
-# grid canvas object not implemented in tcltk (?) :(
-#   tcltk::tkadd(view.menu, "checkbutton", label="Grid",
-#         variable=view.menu.grid, command=function() {
-#           .tkplot.toggle.grid(tkp.id)})
+  tcltk::tkadd(view.menu, "checkbutton",
+    label = "Labels",
+    variable = view.menu.labels, command = function() {
+      .tkplot.toggle.labels(tkp.id)
+    }
+  )
+  # grid canvas object not implemented in tcltk (?) :(
+  #   tcltk::tkadd(view.menu, "checkbutton", label="Grid",
+  #         variable=view.menu.grid, command=function() {
+  #           .tkplot.toggle.grid(tkp.id)})
   tcltk::tkadd(view.menu, "separator")
   rotate.menu <- tcltk::tkmenu(view.menu)
-  tcltk::tkadd(view.menu, "cascade", label="Rotate", menu=rotate.menu)
-  sapply(c(-90,-45,-15,-5,-1,1,5,15,45,90),
-         function(deg) {
-           tcltk::tkadd(rotate.menu, "command",
-                 label=paste(deg, "degree"), command=function() {
-                   tk_rotate(tkp.id, degree=deg)
-                 })
-         })
+  tcltk::tkadd(view.menu, "cascade", label = "Rotate", menu = rotate.menu)
+  sapply(
+    c(-90, -45, -15, -5, -1, 1, 5, 15, 45, 90),
+    function(deg) {
+      tcltk::tkadd(rotate.menu, "command",
+        label = paste(deg, "degree"), command = function() {
+          tk_rotate(tkp.id, degree = deg)
+        }
+      )
+    }
+  )
   export.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(main.menu, "cascade", label="Export", menu=export.menu)
-  tcltk::tkadd(export.menu, "command", label="Postscript", command=function() {
-    tk_postscript(tkp.id)})
+  tcltk::tkadd(main.menu, "cascade", label = "Export", menu = export.menu)
+  tcltk::tkadd(export.menu, "command", label = "Postscript", command = function() {
+    tk_postscript(tkp.id)
+  })
   tcltk::tkconfigure(top, "-menu", main.menu)
-  
+
   # plot it
   .tkplot.create.edges(tkp.id)
   .tkplot.create.vertices(tkp.id)
@@ -367,18 +567,18 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   # Kill myself if window was closed
   tcltk::tkbind(top, "<Destroy>", function() tk_close(tkp.id, FALSE))
 
-###################################################################
-# The callbacks for interactive editing
-###################################################################  
+  ###################################################################
+  # The callbacks for interactive editing
+  ###################################################################
 
   tcltk::tkitembind(canvas, "vertex||label||edge", "<1>", function(x, y) {
     tkp <- .tkplot.get(tkp.id)
     canvas <- .tkplot.get(tkp.id, "canvas")
     .tkplot.deselect.all(tkp.id)
     .tkplot.select.current(tkp.id)
-#     tcltk::tkitemraise(canvas, "current")
+    #     tcltk::tkitemraise(canvas, "current")
   })
-  tcltk::tkitembind(canvas, "vertex||label||edge", "<Control-1>", function(x,y) {
+  tcltk::tkitembind(canvas, "vertex||label||edge", "<Control-1>", function(x, y) {
     canvas <- .tkplot.get(tkp.id, "canvas")
     curtags <- as.character(tcltk::tkgettags(canvas, "current"))
     seltags <- as.character(tcltk::tkgettags(canvas, "selected"))
@@ -396,8 +596,10 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
       }
     } else if ("label" %in% curtags && "vertex" %in% seltags) {
       vtag <- curtags[pmatch("v-", curtags)]
-      tkid <- as.numeric(tcltk::tkfind(canvas, "withtag",
-                                paste(sep="", "vertex&&", vtag)))
+      tkid <- as.numeric(tcltk::tkfind(
+        canvas, "withtag",
+        paste(sep = "", "vertex&&", vtag)
+      ))
       vtags <- as.character(tcltk::tkgettags(canvas, tkid))
       if ("selected" %in% vtags) {
         .tkplot.deselect.vertex(tkp.id, tkid)
@@ -416,14 +618,16 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   tcltk::tkitembind(canvas, "vertex||edge||label", "<Alt-1>", function(x, y) {
     canvas <- .tkplot.get(tkp.id, "canvas")
     tcltk::tkitemraise(canvas, "current")
-  })  
+  })
   tcltk::tkbind(canvas, "<3>", function(x, y) {
     canvas <- .tkplot.get(tkp.id, "canvas")
     tags <- as.character(tcltk::tkgettags(canvas, "current"))
     if ("label" %in% tags) {
-      vtag <- tags[ pmatch("v-", tags) ]
-      vid <- as.character(tcltk::tkfind(canvas, "withtag",
-                                 paste(sep="", "vertex&&", vtag)))
+      vtag <- tags[pmatch("v-", tags)]
+      vid <- as.character(tcltk::tkfind(
+        canvas, "withtag",
+        paste(sep = "", "vertex&&", vtag)
+      ))
       tags <- as.character(tcltk::tkgettags(canvas, vid))
     }
     if ("selected" %in% tags) {
@@ -446,49 +650,70 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
     y <- as.integer(y) + as.integer(tcltk::tkwinfo("rooty", canvas))
     tcltk::.Tcl(paste("tk_popup", tcltk::.Tcl.args(menu, x, y)))
   })
-  if (tkp$params$label.dist==0) tobind <- "vertex||label"
-  else tobind <- "vertex"
+  if (tkp$params$label.dist == 0) {
+    tobind <- "vertex||label"
+  } else {
+    tobind <- "vertex"
+  }
   tcltk::tkitembind(canvas, tobind, "<B1-Motion>", function(x, y) {
     tkp <- .tkplot.get(tkp.id)
     x <- as.numeric(x)
     y <- as.numeric(y)
     width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
     height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
-    if (x < 10) { x <- 10 }
-    if (x > width-10) { x <- width-10 }
-    if (y < 10) { y <- 10 }
-    if (y > height-10) { y <- height-10 }
-    
-                                        # get the id
+    if (x < 10) {
+      x <- 10
+    }
+    if (x > width - 10) {
+      x <- width - 10
+    }
+    if (y < 10) {
+      y <- 10
+    }
+    if (y > height - 10) {
+      y <- height - 10
+    }
+
+    # get the id
     tags <- as.character(tcltk::tkgettags(tkp$canvas, "selected"))
     id <- as.numeric(strsplit(tags[pmatch("v-", tags)],
-                              "-", fixed=TRUE)[[1]][2])
-    if (is.na(id)) { return() }
-                                        # move the vertex
+      "-",
+      fixed = TRUE
+    )[[1]][2])
+    if (is.na(id)) {
+      return()
+    }
+    # move the vertex
     .tkplot.set.vertex.coords(tkp.id, id, x, y)
     .tkplot.update.vertex(tkp.id, id, x, y)
   })
-  if (tkp$params$label.dist!=0) {
-    tcltk::tkitembind(canvas, "label", "<B1-Motion>", function(x,y) {
+  if (tkp$params$label.dist != 0) {
+    tcltk::tkitembind(canvas, "label", "<B1-Motion>", function(x, y) {
       tkp <- .tkplot.get(tkp.id)
       x <- as.numeric(x)
       y <- as.numeric(y)
-                                        # get the id
+      # get the id
       tags <- as.character(tcltk::tkgettags(tkp$canvas, "selected"))
       id <- as.numeric(strsplit(tags[pmatch("v-", tags)],
-                                "-", fixed=TRUE)[[1]][2])
-      if (is.na(id)) { return() }
-      phi <- pi+atan2(tkp$coords[id,2]-y, tkp$coords[id,1]-x)
+        "-",
+        fixed = TRUE
+      )[[1]][2])
+      if (is.na(id)) {
+        return()
+      }
+      phi <- pi + atan2(tkp$coords[id, 2] - y, tkp$coords[id, 1] - x)
       .tkplot.set.label.degree(tkp.id, id, phi)
-      .tkplot.update.label(tkp.id, id, tkp$coords[id,1], tkp$coords[id,2])
+      .tkplot.update.label(tkp.id, id, tkp$coords[id, 1], tkp$coords[id, 2])
     })
   }
-  
+
   # We don't need these any more, they are stored in the environment
-  rm(tkp, params, layout, vertex.color, edge.color, top, canvas,
-     main.menu, layout.menu, view.menu, export.menu, label.font, label.degree,
-     vertex.frame.color, vertex.params)
-  
+  rm(
+    tkp, params, layout, vertex.color, edge.color, top, canvas,
+    main.menu, layout.menu, view.menu, export.menu, label.font, label.degree,
+    vertex.frame.color, vertex.params
+  )
+
   tkp.id
 }
 
@@ -497,129 +722,152 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 ###################################################################
 
 .tkplot.addlayout <- function(name, layout.data) {
-  if (!exists(".layouts", envir=.tkplot.env)) {
+  if (!exists(".layouts", envir = .tkplot.env)) {
     assign(".layouts", list(), .tkplot.env)
   }
 
   assign("tmp", layout.data, .tkplot.env)
-  cmd <- paste(sep="", ".layouts[[\"", name, "\"]]", " <- tmp")
-  eval(parse(text=cmd), .tkplot.env)
-  rm("tmp", envir=.tkplot.env)
+  cmd <- paste(sep = "", ".layouts[[\"", name, "\"]]", " <- tmp")
+  eval(parse(text = cmd), .tkplot.env)
+  rm("tmp", envir = .tkplot.env)
 }
 
 .tkplot.getlayout <- function(name) {
-  cmd <- paste(sep="", ".layouts[[\"", name, "\"]]")
-  eval(parse(text=cmd), .tkplot.env)
+  cmd <- paste(sep = "", ".layouts[[\"", name, "\"]]")
+  eval(parse(text = cmd), .tkplot.env)
 }
 
 .tkplot.layouts.newdefaults <- function(name, defaults) {
   assign("tmp", defaults, .tkplot.env)
-  for (i in seq(along=defaults)) {
-    cmd <- paste(sep="", '.layouts[["', name, '"]]$params[[', i,
-                 ']]$default <- tmp[[', i, ']]')
-    eval(parse(text=cmd), .tkplot.env)
+  for (i in seq(along.with = defaults)) {
+    cmd <- paste(
+      sep = "", '.layouts[["', name, '"]]$params[[', i,
+      "]]$default <- tmp[[", i, "]]"
+    )
+    eval(parse(text = cmd), .tkplot.env)
   }
 }
 
 .tkplot.getlayoutlist <- function() {
-  eval(parse(text="names(.layouts)"), .tkplot.env)
+  eval(parse(text = "names(.layouts)"), .tkplot.env)
 }
 
 .tkplot.getlayoutname <- function(name) {
-  cmd <- paste(sep="", '.layouts[["', name, '"]]$name')
-  eval(parse(text=cmd), .tkplot.env)
+  cmd <- paste(sep = "", '.layouts[["', name, '"]]$name')
+  eval(parse(text = cmd), .tkplot.env)
 }
 
-.tkplot.addlayout("random",
-                  list(name="Random", f=layout_randomly, params=list()))
-.tkplot.addlayout("circle",
-                  list(name="Circle", f=layout_in_circle, params=list()))
-.tkplot.addlayout("fruchterman.reingold",
-                  list(name="Fruchterman-Reingold",
-                       f=layout_with_fr,
-                       params=list(
-                         niter=list(name="Number of iterations",
-                           type="numeric",
-                           default=500),
-                         start.temp=list(name="Start temperature",
-                           type="expression",
-                           default=expression(sqrt(vcount(.tkplot.g)))))
-                       )
-                  )
-.tkplot.addlayout("kamada.kawai",
-                  list(name="Kamada-Kawai",
-                       f=layout_with_kk,
-                       params=list(
-                         maxiter=list(name="Maximum number of iterations",
-                           type="expression",
-                           default=expression(50 * vcount(.tkplot.g))),
-                         kkconst=list(name="Vertex attraction constant",
-                           type="expression",
-                           default=expression(vcount(.tkplot.g))))
-                       )
-                  )
-.tkplot.addlayout("reingold.tilford",
-                  list(names="Reingold-Tilford",
-                       f=layout_as_tree,
-                       params=list(
-                         root=list(name="Root vertex",
-                           type="numeric",
-                           default=1)
-                         )
-                       )
-                  )
-                       
+.tkplot.addlayout(
+  "random",
+  list(name = "Random", f = layout_randomly, params = list())
+)
+.tkplot.addlayout(
+  "circle",
+  list(name = "Circle", f = layout_in_circle, params = list())
+)
+.tkplot.addlayout(
+  "fruchterman.reingold",
+  list(
+    name = "Fruchterman-Reingold",
+    f = layout_with_fr,
+    params = list(
+      niter = list(
+        name = "Number of iterations",
+        type = "numeric",
+        default = 500
+      ),
+      start.temp = list(
+        name = "Start temperature",
+        type = "expression",
+        default = expression(sqrt(vcount(.tkplot.g)))
+      )
+    )
+  )
+)
+.tkplot.addlayout(
+  "kamada.kawai",
+  list(
+    name = "Kamada-Kawai",
+    f = layout_with_kk,
+    params = list(
+      maxiter = list(
+        name = "Maximum number of iterations",
+        type = "expression",
+        default = expression(50 * vcount(.tkplot.g))
+      ),
+      kkconst = list(
+        name = "Vertex attraction constant",
+        type = "expression",
+        default = expression(vcount(.tkplot.g))
+      )
+    )
+  )
+)
+.tkplot.addlayout(
+  "reingold.tilford",
+  list(
+    names = "Reingold-Tilford",
+    f = layout_as_tree,
+    params = list(
+      root = list(
+        name = "Root vertex",
+        type = "numeric",
+        default = 1
+      )
+    )
+  )
+)
+
 ###################################################################
 # Other public functions, misc.
 ###################################################################
 
 #' @rdname tkplot
 #' @export
-
-tk_close <- function(tkp.id, window.close=TRUE) {
+tk_close <- function(tkp.id, window.close = TRUE) {
   if (window.close) {
-    cmd <- paste(sep="", "tkp.", tkp.id, "$top")
-    top <- eval(parse(text=cmd), .tkplot.env)
+    cmd <- paste(sep = "", "tkp.", tkp.id, "$top")
+    top <- eval(parse(text = cmd), .tkplot.env)
     tcltk::tkbind(top, "<Destroy>", "")
     tcltk::tkdestroy(top)
   }
-  cmd <- paste(sep="", "tkp.", tkp.id)
-  rm(list=cmd, envir=.tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id)
+  rm(list = cmd, envir = .tkplot.env)
   invisible(NULL)
 }
 
 #' @rdname tkplot
 #' @export
-
 tk_off <- function() {
-  eapply(.tkplot.env, function(tkp) { tcltk::tkdestroy(tkp$top) })
-  rm(list=ls(.tkplot.env), envir=.tkplot.env)
+  eapply(.tkplot.env, function(tkp) {
+    tcltk::tkdestroy(tkp$top)
+  })
+  rm(list = ls(.tkplot.env), envir = .tkplot.env)
   invisible(NULL)
 }
 
 #' @rdname tkplot
 #' @export
-
-tk_fit <- function(tkp.id, width=NULL, height=NULL) {
+tk_fit <- function(tkp.id, width = NULL, height = NULL) {
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
-    width  <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
+    width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   }
   if (is.null(height)) {
     height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
   }
   coords <- .tkplot.get(tkp.id, "coords")
   # Shift to zero
-  coords[,1] <- coords[,1]-min(coords[,1])
-  coords[,2] <- coords[,2]-min(coords[,2])
+  coords[, 1] <- coords[, 1] - min(coords[, 1])
+  coords[, 2] <- coords[, 2] - min(coords[, 2])
   # Scale
-  coords[,1] <- coords[,1] / max(coords[,1]) *
-    (width-(tkp$params$padding[2]+tkp$params$padding[4]))
-  coords[,2] <- coords[,2] / max(coords[,2]) *
-    (height-(tkp$params$padding[1]+tkp$params$padding[3]))
+  coords[, 1] <- coords[, 1] / max(coords[, 1]) *
+    (width - (tkp$params$padding[2] + tkp$params$padding[4]))
+  coords[, 2] <- coords[, 2] / max(coords[, 2]) *
+    (height - (tkp$params$padding[1] + tkp$params$padding[3]))
   # Padding
-  coords[,1] <- coords[,1]+tkp$params$padding[2]
-  coords[,2] <- coords[,2]+tkp$params$padding[3]
+  coords[, 1] <- coords[, 1] + tkp$params$padding[2]
+  coords[, 2] <- coords[, 2] + tkp$params$padding[3]
   # Store
   .tkplot.set(tkp.id, "coords", coords)
   # Update
@@ -629,36 +877,34 @@ tk_fit <- function(tkp.id, width=NULL, height=NULL) {
 
 #' @rdname tkplot
 #' @export
-
 tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
-  width  <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
+  width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
   coords <- .tkplot.get(tkp.id, "coords")
-  canvas.center.x <- width/2
-  canvas.center.y <- height/2
+  canvas.center.x <- width / 2
+  canvas.center.y <- height / 2
   coords <- .tkplot.get(tkp.id, "coords")
-  r1 <- range(coords[,1])
-  r2 <- range(coords[,2])
-  coords.center.x <- (r1[1]+r1[2])/2
-  coords.center.y <- (r2[1]+r2[2])/2
+  r1 <- range(coords[, 1])
+  r2 <- range(coords[, 2])
+  coords.center.x <- (r1[1] + r1[2]) / 2
+  coords.center.y <- (r2[1] + r2[2]) / 2
   # Shift to center
-  coords[,1] <- coords[,1]+canvas.center.x-coords.center.x
-  coords[,2] <- coords[,2]+canvas.center.y-coords.center.y
+  coords[, 1] <- coords[, 1] + canvas.center.x - coords.center.x
+  coords[, 2] <- coords[, 2] + canvas.center.y - coords.center.y
   # Store
   .tkplot.set(tkp.id, "coords", coords)
   # Update
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
 }
-  
+
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
 #' @export
-
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
-  new_coords <- do_call(newlayout, .args=c(list(tkp$graph), list(...), params))
+  new_coords <- do_call(newlayout, .args = c(list(tkp$graph), list(...), params))
   .tkplot.set(tkp.id, "coords", new_coords)
   tk_fit(tkp.id)
   .tkplot.update.vertices(tkp.id)
@@ -667,40 +913,38 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
 
 #' @rdname tkplot
 #' @export
-
 tk_postscript <- function(tkp.id) {
-
   tkp <- .tkplot.get(tkp.id)
 
-  filename <- tcltk::tkgetSaveFile(initialfile="Rplots.eps",
-                            defaultextension="eps",
-                            title="Export graph to PostScript file")
-  tcltk::tkpostscript(tkp$canvas, file=filename)
+  filename <- tcltk::tkgetSaveFile(
+    initialfile = "Rplots.eps",
+    defaultextension = "eps",
+    title = "Export graph to PostScript file"
+  )
+  tcltk::tkpostscript(tkp$canvas, file = filename)
   invisible(NULL)
 }
 
 #' @rdname tkplot
 #' @export
-
-tk_coords <- function(tkp.id, norm=FALSE) {
+tk_coords <- function(tkp.id, norm = FALSE) {
   coords <- .tkplot.get(tkp.id, "coords")
-  coords[,2] <- max(coords[,2]) - coords[,2]
+  coords[, 2] <- max(coords[, 2]) - coords[, 2]
   if (norm) {
     # Shift
-    coords[,1] <- coords[,1]-min(coords[,1])
-    coords[,2] <- coords[,2]-min(coords[,2])
+    coords[, 1] <- coords[, 1] - min(coords[, 1])
+    coords[, 2] <- coords[, 2] - min(coords[, 2])
     # Scale
-    coords[,1] <- coords[,1] / max(coords[,1])-0.5
-    coords[,2] <- coords[,2] / max(coords[,2])-0.5
+    coords[, 1] <- coords[, 1] / max(coords[, 1]) - 0.5
+    coords[, 2] <- coords[, 2] / max(coords[, 2]) - 0.5
   }
   coords
 }
 
 #' @rdname tkplot
 #' @export
-
 tk_set_coords <- function(tkp.id, coords) {
-  stopifnot(is.matrix(coords), ncol(coords)==2)
+  stopifnot(is.matrix(coords), ncol(coords) == 2)
   .tkplot.set(tkp.id, "coords", coords)
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
@@ -708,25 +952,24 @@ tk_set_coords <- function(tkp.id, coords) {
 
 #' @rdname tkplot
 #' @export
-
-tk_rotate <- function(tkp.id, degree=NULL, rad=NULL) {
+tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   coords <- .tkplot.get(tkp.id, "coords")
 
   if (is.null(degree) && is.null(rad)) {
-    rad <- pi/2
+    rad <- pi / 2
   } else if (is.null(rad) && !is.null(degree)) {
-    rad <- degree/180*pi
+    rad <- degree / 180 * pi
   }
-  
-  center <- c(mean(range(coords[,1])), mean(range(coords[,2])))
-  phi <- atan2(coords[,2]-center[2], coords[,1]-center[1])
-  r   <- sqrt((coords[,1]-center[1])**2 + (coords[,2]-center[2])**2)
+
+  center <- c(mean(range(coords[, 1])), mean(range(coords[, 2])))
+  phi <- atan2(coords[, 2] - center[2], coords[, 1] - center[1])
+  r <- sqrt((coords[, 1] - center[1])**2 + (coords[, 2] - center[2])**2)
 
   phi <- phi + rad
 
-  coords[,1] <- r * cos(phi)
-  coords[,2] <- r * sin(phi)
-  
+  coords[, 1] <- r * cos(phi)
+  coords[, 2] <- r * sin(phi)
+
   .tkplot.set(tkp.id, "coords", coords)
   tk_center(tkp.id)
   invisible(NULL)
@@ -734,7 +977,6 @@ tk_rotate <- function(tkp.id, degree=NULL, rad=NULL) {
 
 #' @rdname tkplot
 #' @export
-
 tk_canvas <- function(tkp.id) {
   .tkplot.get(tkp.id)$canvas
 }
@@ -745,104 +987,112 @@ tk_canvas <- function(tkp.id) {
 
 .tkplot.new <- function(tkp) {
   id <- get(".next", .tkplot.env)
-  assign(".next", id+1, .tkplot.env)
+  assign(".next", id + 1, .tkplot.env)
   assign("tmp", tkp, .tkplot.env)
-  cmd <- paste("tkp.", id, "<- tmp", sep="")
-  eval(parse(text=cmd), .tkplot.env)
-  rm("tmp", envir=.tkplot.env)
+  cmd <- paste("tkp.", id, "<- tmp", sep = "")
+  eval(parse(text = cmd), .tkplot.env)
+  rm("tmp", envir = .tkplot.env)
   id
 }
 
-.tkplot.get <- function(tkp.id, what=NULL) {
+.tkplot.get <- function(tkp.id, what = NULL) {
   if (is.null(what)) {
-    get(paste("tkp.", tkp.id, sep=""), .tkplot.env)
+    get(paste("tkp.", tkp.id, sep = ""), .tkplot.env)
   } else {
-    cmd <- paste("tkp.", tkp.id, "$", what, sep="")
-    eval(parse(text=cmd), .tkplot.env)
+    cmd <- paste("tkp.", tkp.id, "$", what, sep = "")
+    eval(parse(text = cmd), .tkplot.env)
   }
 }
 
 .tkplot.set <- function(tkp.id, what, value) {
   assign("tmp", value, .tkplot.env)
-  cmd <- paste(sep="", "tkp.", tkp.id, "$", what, "<-tmp")
-  eval(parse(text=cmd), .tkplot.env)
-  rm("tmp", envir=.tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id, "$", what, "<-tmp")
+  eval(parse(text = cmd), .tkplot.env)
+  rm("tmp", envir = .tkplot.env)
   TRUE
 }
 
 .tkplot.set.params <- function(tkp.id, what, value) {
   assign("tmp", value, .tkplot.env)
-  cmd <- paste(sep="", "tkp.", tkp.id, "$params$", what, "<-tmp")
-  eval(parse(text=cmd), .tkplot.env)
-  rm("tmp", envir=.tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id, "$params$", what, "<-tmp")
+  eval(parse(text = cmd), .tkplot.env)
+  rm("tmp", envir = .tkplot.env)
   TRUE
 }
 
 .tkplot.set.vertex.coords <- function(tkp.id, id, x, y) {
-  cmd <- paste(sep="", "tkp.", tkp.id, "$coords[",id,",]<-c(",x,",",y,")")
-  eval(parse(text=cmd), .tkplot.env)
+  cmd <- paste(sep = "", "tkp.", tkp.id, "$coords[", id, ",]<-c(", x, ",", y, ")")
+  eval(parse(text = cmd), .tkplot.env)
   TRUE
 }
 
 .tkplot.set.label.degree <- function(tkp.id, id, phi) {
   tkp <- .tkplot.get(tkp.id)
-  
-  if (length(tkp$params$label.degree)==1) {
-    label.degree <- rep(tkp$params$label.degree, times=vcount(tkp$graph))
+
+  if (length(tkp$params$label.degree) == 1) {
+    label.degree <- rep(tkp$params$label.degree, times = vcount(tkp$graph))
     label.degree[id] <- phi
     assign("tmp", label.degree, .tkplot.env)
-    cmd <- paste(sep="", "tkp.", tkp.id, "$params$label.degree <- tmp")
-    eval(parse(text=cmd), .tkplot.env)
-    rm("tmp", envir=.tkplot.env)
+    cmd <- paste(sep = "", "tkp.", tkp.id, "$params$label.degree <- tmp")
+    eval(parse(text = cmd), .tkplot.env)
+    rm("tmp", envir = .tkplot.env)
   } else {
-    cmd <- paste(sep="", "tkp.", tkp.id, "$params$label.degree[", id,
-                 "] <- ", phi)
-    eval(parse(text=cmd), .tkplot.env)
+    cmd <- paste(
+      sep = "", "tkp.", tkp.id, "$params$label.degree[", id,
+      "] <- ", phi
+    )
+    eval(parse(text = cmd), .tkplot.env)
   }
   TRUE
-}   
+}
 
 ###################################################################
 # Internal functions, creating and updating canvas objects
 ###################################################################
 
 # Creates a new vertex tk object
-.tkplot.create.vertex <- function(tkp.id, id, label, x=0, y=0) {
+.tkplot.create.vertex <- function(tkp.id, id, label, x = 0, y = 0) {
   tkp <- .tkplot.get(tkp.id)
   vertex.size <- tkp$params$vertex.params[id, "vertex.size"]
   vertex.color <- tkp$params$vertex.params[id, "vertex.color"]
-  vertex.frame.color <- ifelse(length(tkp$params$vertex.frame.color)>1,
-                               tkp$params$vertex.frame.color[id],
-                               tkp$params$vertex.frame.color)
-  item <- tcltk::tkcreate(tkp$canvas, "oval", x-vertex.size, y-vertex.size,
-                   x+vertex.size, y+vertex.size, width=1,
-                   outline=vertex.frame.color,  fill=vertex.color)
+  vertex.frame.color <- ifelse(length(tkp$params$vertex.frame.color) > 1,
+    tkp$params$vertex.frame.color[id],
+    tkp$params$vertex.frame.color
+  )
+  item <- tcltk::tkcreate(tkp$canvas, "oval", x - vertex.size, y - vertex.size,
+    x + vertex.size, y + vertex.size,
+    width = 1,
+    outline = vertex.frame.color, fill = vertex.color
+  )
   tcltk::tkaddtag(tkp$canvas, "vertex", "withtag", item)
-  tcltk::tkaddtag(tkp$canvas, paste("v-", id, sep=""), "withtag", item)
+  tcltk::tkaddtag(tkp$canvas, paste("v-", id, sep = ""), "withtag", item)
   if (!is.na(label)) {
-    label.degree <- ifelse(length(tkp$params$label.degree)>1,
-                           tkp$params$label.degree[id],
-                           tkp$params$label.degree)
-    label.color <- if (length(tkp$params$label.color)>1) {
+    label.degree <- ifelse(length(tkp$params$label.degree) > 1,
+      tkp$params$label.degree[id],
+      tkp$params$label.degree
+    )
+    label.color <- if (length(tkp$params$label.color) > 1) {
       tkp$params$label.color[id]
     } else {
       tkp$params$label.color
     }
     label.dist <- tkp$params$label.dist
-    label.x <- x+label.dist*cos(label.degree)*
-      (vertex.size+6+4*(ceiling(log10(id))))
-    label.y <- y+label.dist*sin(label.degree)*
-      (vertex.size+6+4*(ceiling(log10(id))))
-    if (label.dist==0)
-      { afill <- label.color }
-    else
-      { afill <- "red" }
+    label.x <- x + label.dist * cos(label.degree) *
+      (vertex.size + 6 + 4 * (ceiling(log10(id))))
+    label.y <- y + label.dist * sin(label.degree) *
+      (vertex.size + 6 + 4 * (ceiling(log10(id))))
+    if (label.dist == 0) {
+      afill <- label.color
+    } else {
+      afill <- "red"
+    }
     litem <- tcltk::tkcreate(tkp$canvas, "text", label.x, label.y,
-                      text=as.character(label), state="normal",
-                      fill=label.color, activefill=afill,
-                      font=tkp$params$vertex.params[id, "label.font"])
+      text = as.character(label), state = "normal",
+      fill = label.color, activefill = afill,
+      font = tkp$params$vertex.params[id, "label.font"]
+    )
     tcltk::tkaddtag(tkp$canvas, "label", "withtag", litem)
-    tcltk::tkaddtag(tkp$canvas, paste("v-", id, sep=""), "withtag", litem)
+    tcltk::tkaddtag(tkp$canvas, paste("v-", id, sep = ""), "withtag", litem)
   }
   item
 }
@@ -855,44 +1105,55 @@ tk_canvas <- function(tkp.id) {
   # Labels
   labels <- i.get.labels(tkp$graph, tkp$labels)
 
-  mapply(function(v, l, x, y) .tkplot.create.vertex(tkp.id, v, l, x, y),
-         1:n, labels, tkp$coords[,1], tkp$coords[,2])
+  mapply(
+    function(v, l, x, y) .tkplot.create.vertex(tkp.id, v, l, x, y),
+    1:n, labels, tkp$coords[, 1], tkp$coords[, 2]
+  )
 }
 
 .tkplot.update.label <- function(tkp.id, id, x, y) {
   tkp <- .tkplot.get(tkp.id)
   vertex.size <- tkp$params$vertex.params[id, "vertex.size"]
-  label.degree <- ifelse(length(tkp$params$label.degree)>1,
-                         tkp$params$label.degree[id],
-                         tkp$params$label.degree)
+  label.degree <- ifelse(length(tkp$params$label.degree) > 1,
+    tkp$params$label.degree[id],
+    tkp$params$label.degree
+  )
   label.dist <- tkp$params$label.dist
-  label.x <- x+label.dist*cos(label.degree)*
-    (vertex.size+6+4*(ceiling(log10(id))))
-  label.y <- y+label.dist*sin(label.degree)*
-    (vertex.size+6+4*(ceiling(log10(id))))
-  tcltk::tkcoords(tkp$canvas, paste("label&&v-", id, sep=""),
-           label.x, label.y)
+  label.x <- x + label.dist * cos(label.degree) *
+    (vertex.size + 6 + 4 * (ceiling(log10(id))))
+  label.y <- y + label.dist * sin(label.degree) *
+    (vertex.size + 6 + 4 * (ceiling(log10(id))))
+  tcltk::tkcoords(
+    tkp$canvas, paste("label&&v-", id, sep = ""),
+    label.x, label.y
+  )
 }
 
 .tkplot.update.vertex <- function(tkp.id, id, x, y) {
   tkp <- .tkplot.get(tkp.id)
   vertex.size <- tkp$params$vertex.params[id, "vertex.size"]
   # Vertex
-  tcltk::tkcoords(tkp$canvas, paste("vertex&&v-", id, sep=""),
-           x-vertex.size, y-vertex.size,
-           x+vertex.size, y+vertex.size)
+  tcltk::tkcoords(
+    tkp$canvas, paste("vertex&&v-", id, sep = ""),
+    x - vertex.size, y - vertex.size,
+    x + vertex.size, y + vertex.size
+  )
   # Label
   .tkplot.update.label(tkp.id, id, x, y)
-  
+
   # Edges
-  edge.from.ids <- as.numeric(tcltk::tkfind(tkp$canvas, "withtag",
-                                     paste("from-", id, sep="")))
-  edge.to.ids <- as.numeric(tcltk::tkfind(tkp$canvas, "withtag",
-                                   paste("to-", id, sep="")))
-  for (i in seq(along=edge.from.ids)) {
+  edge.from.ids <- as.numeric(tcltk::tkfind(
+    tkp$canvas, "withtag",
+    paste("from-", id, sep = "")
+  ))
+  edge.to.ids <- as.numeric(tcltk::tkfind(
+    tkp$canvas, "withtag",
+    paste("to-", id, sep = "")
+  ))
+  for (i in seq(along.with = edge.from.ids)) {
     .tkplot.update.edge(tkp.id, edge.from.ids[i])
   }
-  for (i in seq(along=edge.to.ids)) {
+  for (i in seq(along.with = edge.to.ids)) {
     .tkplot.update.edge(tkp.id, edge.to.ids[i])
   }
 }
@@ -900,85 +1161,102 @@ tk_canvas <- function(tkp.id) {
 .tkplot.update.vertices <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   n <- vcount(tkp$graph)
-  mapply(function(v, x, y) .tkplot.update.vertex(tkp.id, v, x, y), 1:n,
-         tkp$coords[,1], tkp$coords[,2])
+  mapply(
+    function(v, x, y) .tkplot.update.vertex(tkp.id, v, x, y), 1:n,
+    tkp$coords[, 1], tkp$coords[, 2]
+  )
 }
 
 # Creates tk object for edge 'id'
 .tkplot.create.edge <- function(tkp.id, from, to, id) {
-  tkp <- .tkplot.get(tkp.id)  
-  from.c <- tkp$coords[from,]
-  to.c   <- tkp$coords[to,]
-  edge.color <- ifelse(length(tkp$params$edge.color)>1,
-                       tkp$params$edge.color[id],
-                       tkp$params$edge.color)
-  edge.width <- ifelse(length(tkp$params$edge.width)>1,
-                       tkp$params$edge.width[id],
-                       tkp$params$edge.width)
-  edge.lty <- ifelse(length(tkp$params$edge.lty)>1,
-                       tkp$params$edge.lty[[id]],
-                       tkp$params$edge.lty)
-  arrow.mode <- ifelse(length(tkp$params$arrow.mode)>1,
-                       tkp$params$arrow.mode[[id]],
-                       tkp$params$arrow.mode)
+  tkp <- .tkplot.get(tkp.id)
+  from.c <- tkp$coords[from, ]
+  to.c <- tkp$coords[to, ]
+  edge.color <- ifelse(length(tkp$params$edge.color) > 1,
+    tkp$params$edge.color[id],
+    tkp$params$edge.color
+  )
+  edge.width <- ifelse(length(tkp$params$edge.width) > 1,
+    tkp$params$edge.width[id],
+    tkp$params$edge.width
+  )
+  edge.lty <- ifelse(length(tkp$params$edge.lty) > 1,
+    tkp$params$edge.lty[[id]],
+    tkp$params$edge.lty
+  )
+  arrow.mode <- ifelse(length(tkp$params$arrow.mode) > 1,
+    tkp$params$arrow.mode[[id]],
+    tkp$params$arrow.mode
+  )
   arrow.size <- tkp$params$arrow.size
   curved <- tkp$params$curved[[id]]
-  arrow <- c("none", "first", "last", "both")[arrow.mode+1]
-  
+  arrow <- c("none", "first", "last", "both")[arrow.mode + 1]
+
   if (from != to) {
     ## non-loop edge
     if (is.logical(curved)) curved <- curved * 0.5
     if (curved != 0) {
       smooth <- TRUE
-      midx <- (from.c[1]+to.c[1])/2
-      midy <- (from.c[2]+to.c[2])/2        
-      spx <- midx - curved * 1/2 * (from.c[2]-to.c[2])
-      spy <- midy + curved * 1/2 * (from.c[1]-to.c[1])
+      midx <- (from.c[1] + to.c[1]) / 2
+      midy <- (from.c[2] + to.c[2]) / 2
+      spx <- midx - curved * 1 / 2 * (from.c[2] - to.c[2])
+      spy <- midy + curved * 1 / 2 * (from.c[1] - to.c[1])
       coords <- c(from.c[1], from.c[2], spx, spy, to.c[1], to.c[2])
     } else {
       smooth <- FALSE
       coords <- c(from.c[1], from.c[2], to.c[1], to.c[2])
     }
     args <- c(list(tkp$canvas, "line"),
-              coords, 
-              list(width=edge.width, activewidth=2*edge.width,
-                   arrow=arrow, arrowshape=arrow.size * c(10, 10, 5),
-                   fill=edge.color, activefill="red", dash=edge.lty,
-                   tags=c("edge", paste(sep="", "edge-", id),
-                     paste(sep="", "from-", from),
-                     paste(sep="", "to-", to))), smooth=smooth)
+      coords,
+      list(
+        width = edge.width, activewidth = 2 * edge.width,
+        arrow = arrow, arrowshape = arrow.size * c(10, 10, 5),
+        fill = edge.color, activefill = "red", dash = edge.lty,
+        tags = c(
+          "edge", paste(sep = "", "edge-", id),
+          paste(sep = "", "from-", from),
+          paste(sep = "", "to-", to)
+        )
+      ),
+      smooth = smooth
+    )
     do.call(tcltk::tkcreate, args)
   } else {
     ## loop edge
     ## the coordinates are not correct but we will call update anyway...
     tcltk::tkcreate(tkp$canvas, "line", from.c[1], from.c[2],
-             from.c[1]+20, from.c[1]-10, from.c[2]+30, from.c[2],
-             from.c[1]+20, from.c[1]+10, from.c[1], from.c[2],
-             width=edge.width, activewidth=2*edge.width,
-             arrow=arrow, arrowshape=arrow.size * c(10,10,5), dash=edge.lty,
-             fill=edge.color, activefill="red", smooth=TRUE,
-             tags=c("edge", "loop", paste(sep="", "edge-", id),
-               paste(sep="", "from-", from),
-               paste(sep="", "to-", to)))
-    
+      from.c[1] + 20, from.c[1] - 10, from.c[2] + 30, from.c[2],
+      from.c[1] + 20, from.c[1] + 10, from.c[1], from.c[2],
+      width = edge.width, activewidth = 2 * edge.width,
+      arrow = arrow, arrowshape = arrow.size * c(10, 10, 5), dash = edge.lty,
+      fill = edge.color, activefill = "red", smooth = TRUE,
+      tags = c(
+        "edge", "loop", paste(sep = "", "edge-", id),
+        paste(sep = "", "from-", from),
+        paste(sep = "", "to-", to)
+      )
+    )
   }
 
-  edge.label <- ifelse(length(tkp$params$edge.labels)>1,
-                       tkp$params$edge.labels[id],
-                       tkp$params$edge.labels)
+  edge.label <- ifelse(length(tkp$params$edge.labels) > 1,
+    tkp$params$edge.labels[id],
+    tkp$params$edge.labels
+  )
   if (!is.na(edge.label)) {
-    label.color <- ifelse(length(tkp$params$edge.label.color)>1,
-                          tkp$params$edge.label.color[id],
-                          tkp$params$edge.label.color)
+    label.color <- ifelse(length(tkp$params$edge.label.color) > 1,
+      tkp$params$edge.label.color[id],
+      tkp$params$edge.label.color
+    )
     ## not correct for loop edges but we will update anyway...
-    label.x <- (to.c[1]+from.c[1])/2
-    label.y <- (to.c[2]+from.c[2])/2
+    label.x <- (to.c[1] + from.c[1]) / 2
+    label.y <- (to.c[2] + from.c[2]) / 2
     litem <- tcltk::tkcreate(tkp$canvas, "text", label.x, label.y,
-                      text=as.character(edge.label), state="normal",
-                      fill=label.color,
-                      font=tkp$params$edge.label.font)
+      text = as.character(edge.label), state = "normal",
+      fill = label.color,
+      font = tkp$params$edge.label.font
+    )
     tcltk::tkaddtag(tkp$canvas, "label", "withtag", litem)
-    tcltk::tkaddtag(tkp$canvas, paste(sep="", "edge-", id), "withtag", litem)
+    tcltk::tkaddtag(tkp$canvas, paste(sep = "", "edge-", id), "withtag", litem)
   }
 }
 
@@ -986,98 +1264,113 @@ tk_canvas <- function(tkp.id) {
 .tkplot.create.edges <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   n <- ecount(tkp$graph)
-  edgematrix <- as_edgelist(tkp$graph, names=FALSE)
-  mapply(function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
-         edgematrix[,1],
-         edgematrix[,2], 1:nrow(edgematrix))
+  edgematrix <- as_edgelist(tkp$graph, names = FALSE)
+  mapply(
+    function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
+    edgematrix[, 1],
+    edgematrix[, 2], 1:nrow(edgematrix)
+  )
 }
 
 # Update an edge with given itemid (not edge id!)
 .tkplot.update.edge <- function(tkp.id, itemid) {
   tkp <- .tkplot.get(tkp.id)
   tags <- as.character(tcltk::tkgettags(tkp$canvas, itemid))
-  from <- as.numeric(substring(grep("from-", tags, value=TRUE, fixed=TRUE),6))
-  to <- as.numeric(substring(grep("to-", tags, value=TRUE, fixed=TRUE),4))
-  from.c <- tkp$coords[from,]
-  to.c <- tkp$coords[to,]
+  from <- as.numeric(substring(grep("from-", tags, value = TRUE, fixed = TRUE), 6))
+  to <- as.numeric(substring(grep("to-", tags, value = TRUE, fixed = TRUE), 4))
+  from.c <- tkp$coords[from, ]
+  to.c <- tkp$coords[to, ]
 
-  edgeid <- as.numeric(substring(tags[ pmatch("edge-", tags) ], 6))
+  edgeid <- as.numeric(substring(tags[pmatch("edge-", tags)], 6))
 
   if (from != to) {
-    phi <- atan2(to.c[2]-from.c[2], to.c[1]-from.c[1])
-    r <- sqrt( (to.c[1]-from.c[1])^2 + (to.c[2]-from.c[2])^2 )
+    phi <- atan2(to.c[2] - from.c[2], to.c[1] - from.c[1])
+    r <- sqrt((to.c[1] - from.c[1])^2 + (to.c[2] - from.c[2])^2)
     vertex.size <- tkp$params$vertex.params[to, "vertex.size"]
     vertex.size2 <- tkp$params$vertex.params[from, "vertex.size"]
     curved <- tkp$params$curved[[edgeid]]
-    to.c[1] <- from.c[1] + (r-vertex.size)*cos(phi)
-    to.c[2] <- from.c[2] + (r-vertex.size)*sin(phi)
-    from.c[1] <- from.c[1] + vertex.size2*cos(phi)
-    from.c[2] <- from.c[2] + vertex.size2*sin(phi)
+    to.c[1] <- from.c[1] + (r - vertex.size) * cos(phi)
+    to.c[2] <- from.c[2] + (r - vertex.size) * sin(phi)
+    from.c[1] <- from.c[1] + vertex.size2 * cos(phi)
+    from.c[2] <- from.c[2] + vertex.size2 * sin(phi)
     if (is.logical(curved)) curved <- curved * 0.5
     if (curved == 0) {
       tcltk::tkcoords(tkp$canvas, itemid, from.c[1], from.c[2], to.c[1], to.c[2])
     } else {
-      midx <- (from.c[1]+to.c[1])/2
-      midy <- (from.c[2]+to.c[2])/2        
-      spx <- midx - curved * 1/2 * (from.c[2]-to.c[2])
-      spy <- midy + curved * 1/2 * (from.c[1]-to.c[1])
-      tcltk::tkcoords(tkp$canvas, itemid, from.c[1], from.c[2], spx, spy,
-               to.c[1], to.c[2])
+      midx <- (from.c[1] + to.c[1]) / 2
+      midy <- (from.c[2] + to.c[2]) / 2
+      spx <- midx - curved * 1 / 2 * (from.c[2] - to.c[2])
+      spy <- midy + curved * 1 / 2 * (from.c[1] - to.c[1])
+      tcltk::tkcoords(
+        tkp$canvas, itemid, from.c[1], from.c[2], spx, spy,
+        to.c[1], to.c[2]
+      )
     }
   } else {
     vertex.size <- tkp$params$vertex.params[to, "vertex.size"]
-    loop.angle <- ifelse(length(tkp$param$loop.angle)>1,
-                         tkp$params$loop.angle[edgeid],
-                         tkp$params$loop.angle)
-    xx <- from.c[1] + cos(loop.angle/180*pi)*vertex.size
-    yy <- from.c[2] + sin(loop.angle/180*pi)*vertex.size
-    cc <- matrix(c(xx,yy, xx+20,yy-10, xx+30,yy, xx+20,yy+10, xx,yy),
-                 ncol=2, byrow=TRUE)
+    loop.angle <- ifelse(length(tkp$param$loop.angle) > 1,
+      tkp$params$loop.angle[edgeid],
+      tkp$params$loop.angle
+    )
+    xx <- from.c[1] + cos(loop.angle / 180 * pi) * vertex.size
+    yy <- from.c[2] + sin(loop.angle / 180 * pi) * vertex.size
+    cc <- matrix(c(xx, yy, xx + 20, yy - 10, xx + 30, yy, xx + 20, yy + 10, xx, yy),
+      ncol = 2, byrow = TRUE
+    )
 
-    phi <- atan2(cc[,2]-yy, cc[,1]-xx)
-    r <- sqrt((cc[,1]-xx)**2 + (cc[,2]-yy)**2)
-    phi <- phi+loop.angle/180*pi
-    cc[,1] <- xx+r*cos(phi)
-    cc[,2] <- yy+r*sin(phi)
-    tcltk::tkcoords(tkp$canvas, itemid, cc[1,1], cc[1,2], cc[2,1], cc[2,2],
-             cc[3,1], cc[3,2], cc[4,1], cc[4,2], cc[5,1]+0.001, cc[5,2]+0.001)
+    phi <- atan2(cc[, 2] - yy, cc[, 1] - xx)
+    r <- sqrt((cc[, 1] - xx)**2 + (cc[, 2] - yy)**2)
+    phi <- phi + loop.angle / 180 * pi
+    cc[, 1] <- xx + r * cos(phi)
+    cc[, 2] <- yy + r * sin(phi)
+    tcltk::tkcoords(
+      tkp$canvas, itemid, cc[1, 1], cc[1, 2], cc[2, 1], cc[2, 2],
+      cc[3, 1], cc[3, 2], cc[4, 1], cc[4, 2], cc[5, 1] + 0.001, cc[5, 2] + 0.001
+    )
   }
 
-  edge.label <- ifelse(length(tkp$params$edge.labels)>1,
-                       tkp$params$edge.labels[edgeid],
-                       tkp$params$edge.labels)
+  edge.label <- ifelse(length(tkp$params$edge.labels) > 1,
+    tkp$params$edge.labels[edgeid],
+    tkp$params$edge.labels
+  )
   if (!is.na(edge.label)) {
     if (from != to) {
-      label.x <- (to.c[1]+from.c[1])/2
-      label.y <- (to.c[2]+from.c[2])/2
+      label.x <- (to.c[1] + from.c[1]) / 2
+      label.y <- (to.c[2] + from.c[2]) / 2
     } else {
       ## loops
-      label.x <- xx+cos(loop.angle/180*pi)*30
-      label.y <- yy+sin(loop.angle/180*pi)*30
+      label.x <- xx + cos(loop.angle / 180 * pi) * 30
+      label.y <- yy + sin(loop.angle / 180 * pi) * 30
     }
-    litem <- as.numeric(tcltk::tkfind(tkp$canvas, "withtag",
-                               paste(sep="", "label&&edge-", edgeid)))
+    litem <- as.numeric(tcltk::tkfind(
+      tkp$canvas, "withtag",
+      paste(sep = "", "label&&edge-", edgeid)
+    ))
     tcltk::tkcoords(tkp$canvas, litem, label.x, label.y)
   }
 }
 
 .tkplot.toggle.labels <- function(tkp.id) {
-  .tkplot.set.params(tkp.id, "labels.state",
-                    1 - .tkplot.get(tkp.id, "params")$labels.state)
+  .tkplot.set.params(
+    tkp.id, "labels.state",
+    1 - .tkplot.get(tkp.id, "params")$labels.state
+  )
   tkp <- .tkplot.get(tkp.id)
-  state <- ifelse(tkp$params$labels.state==1, "normal", "hidden")
-  tcltk::tkitemconfigure(tkp$canvas, "label", "-state", state)  
+  state <- ifelse(tkp$params$labels.state == 1, "normal", "hidden")
+  tcltk::tkitemconfigure(tkp$canvas, "label", "-state", state)
 }
 
 .tkplot.toggle.grid <- function(tkp.id) {
-  .tkplot.set.params(tkp.id, "grid",
-                    1 - .tkplot.get(tkp.id, "params")$grid)
+  .tkplot.set.params(
+    tkp.id, "grid",
+    1 - .tkplot.get(tkp.id, "params")$grid
+  )
   tkp <- .tkplot.get(tkp.id)
-  state <- ifelse(tkp$params$grid==1, "normal", "hidden")
-  if (state=="hidden") {
+  state <- ifelse(tkp$params$grid == 1, "normal", "hidden")
+  if (state == "hidden") {
     tcltk::tkdelete(tkp$canvas, "grid")
   } else {
-    tcltk::tkcreate(tkp$canvas, "grid", 0, 0, 10, 10, tags=c("grid"))
+    tcltk::tkcreate(tkp$canvas, "grid", 0, 0, 10, 10, tags = c("grid"))
   }
 }
 
@@ -1092,15 +1385,15 @@ tk_canvas <- function(tkp.id) {
 .tkplot.update.edge.color <- function(tkp.id, eids, newcolor) {
   tkp <- .tkplot.get(tkp.id)
   colors <- tkp$params$edge.color
-  if (length(colors)==1 && length(eids)==ecount(tkp$graph)) {
+  if (length(colors) == 1 && length(eids) == ecount(tkp$graph)) {
     ## Uniform color -> uniform color
     .tkplot.set(tkp.id, "params$edge.color", newcolor)
-  } else if (length(colors)==1) {
+  } else if (length(colors) == 1) {
     ## Uniform color -> nonuniform color
     colors <- rep(colors, ecount(tkp$graph))
     colors[eids] <- newcolor
     .tkplot.set(tkp.id, "params$edge.color", colors)
-  } else if (length(eids)==ecount(tkp$graph)) {
+  } else if (length(eids) == ecount(tkp$graph)) {
     ## Non-uniform -> uniform
     .tkplot.set(tkp.id, "params$edge.color", newcolor)
   } else {
@@ -1115,15 +1408,15 @@ tk_canvas <- function(tkp.id) {
 .tkplot.update.edge.width <- function(tkp.id, eids, newwidth) {
   tkp <- .tkplot.get(tkp.id)
   widths <- tkp$params$edge.width
-  if (length(widths)==1 && length(eids)==ecount(tkp$graph)) {
+  if (length(widths) == 1 && length(eids) == ecount(tkp$graph)) {
     ## Uniform width -> uniform width
     .tkplot.set(tkp.id, "params$edge.width", newwidth)
-  } else if (length(widths)==1) {
+  } else if (length(widths) == 1) {
     ## Uniform width -> nonuniform width
     widths <- rep(widths, ecount(tkp$graph))
     widths[eids] <- newwidth
     .tkplot.set(tkp.id, "params$edge.width", widths)
-  } else if (length(eids)==ecount(tkp$graph)) {
+  } else if (length(eids) == ecount(tkp$graph)) {
     ## Non-uniform -> uniform
     .tkplot.set(tkp.id, "params$edge.width", newwidth)
   } else {
@@ -1134,7 +1427,7 @@ tk_canvas <- function(tkp.id) {
 
   tcltk::tkitemconfigure(tkp$canvas, "selected&&edge", "-width", newwidth)
 }
-  
+
 
 .tkplot.update.vertex.size <- function(tkp.id, vids, newsize) {
   tkp <- .tkplot.get(tkp.id)
@@ -1142,14 +1435,16 @@ tk_canvas <- function(tkp.id) {
   vparams[vids, "vertex.size"] <- newsize
   .tkplot.set(tkp.id, "params$vertex.params", vparams)
   sapply(vids, function(id) {
-    .tkplot.update.vertex(tkp.id, id, tkp$coords[id,1], tkp$coords[id,2])
+    .tkplot.update.vertex(tkp.id, id, tkp$coords[id, 1], tkp$coords[id, 2])
   })
 }
 
 .tkplot.get.numeric.vector <- function(...) {
   labels <- list(...)
-  if (length(labels)==0) return(FALSE)
-  
+  if (length(labels) == 0) {
+    return(FALSE)
+  }
+
   answers <- as.list(rep("", length(labels)))
   dialog <- tcltk::tktoplevel()
   vars <- lapply(answers, tcltk::tclVar)
@@ -1160,31 +1455,34 @@ tk_canvas <- function(tkp.id) {
     retval <<- lapply(vars, tcltk::tclvalue)
     tcltk::tkdestroy(dialog)
   }
-  
-  OK.but <- tcltk::tkbutton(dialog, text="   OK   ", command=OnOK)
-  for (i in seq(along=labels)) {
-    tcltk::tkgrid(tcltk::tklabel(dialog, text=labels[[i]]))
-    tmp <- tcltk::tkentry(dialog, width="40",textvariable=vars[[i]])
+
+  OK.but <- tcltk::tkbutton(dialog, text = "   OK   ", command = OnOK)
+  for (i in seq(along.with = labels)) {
+    tcltk::tkgrid(tcltk::tklabel(dialog, text = labels[[i]]))
+    tmp <- tcltk::tkentry(dialog, width = "40", textvariable = vars[[i]])
     tcltk::tkgrid(tmp)
     tcltk::tkbind(tmp, "<Return>", OnOK)
   }
   tcltk::tkgrid(OK.but)
   tcltk::tkwait.window(dialog)
 
-  retval <- lapply(retval, function(v)
-                   { eval(parse(text=paste("c(", v, ")"))) })
-  return (retval)
+  retval <- lapply(retval, function(v) {
+    eval(parse(text = paste("c(", v, ")")))
+  })
+  return(retval)
 }
 
-.tkplot.select.number <- function(label, initial, low=1, high=100) {
+.tkplot.select.number <- function(label, initial, low = 1, high = 100) {
   dialog <- tcltk::tktoplevel()
   SliderValue <- tcltk::tclVar(as.character(initial))
-  SliderValueLabel <- tcltk::tklabel(dialog,text=as.character(tcltk::tclvalue(SliderValue)))
-  tcltk::tkgrid(tcltk::tklabel(dialog,text=label), SliderValueLabel)
-  tcltk::tkconfigure(SliderValueLabel, textvariable=SliderValue)
-  slider <- tcltk::tkscale(dialog, from=high, to=low,
-                    showvalue=F, variable=SliderValue,
-                    resolution=1, orient="horizontal")  
+  SliderValueLabel <- tcltk::tklabel(dialog, text = as.character(tcltk::tclvalue(SliderValue)))
+  tcltk::tkgrid(tcltk::tklabel(dialog, text = label), SliderValueLabel)
+  tcltk::tkconfigure(SliderValueLabel, textvariable = SliderValue)
+  slider <- tcltk::tkscale(dialog,
+    from = high, to = low,
+    showvalue = F, variable = SliderValue,
+    resolution = 1, orient = "horizontal"
+  )
   OnOK <- function() {
     SliderValue <<- as.numeric(tcltk::tclvalue(SliderValue))
     tcltk::tkdestroy(dialog)
@@ -1193,15 +1491,15 @@ tk_canvas <- function(tkp.id) {
     SliderValue <<- NA
     tcltk::tkdestroy(dialog)
   }
-  OK.but <- tcltk::tkbutton(dialog, text="   OK   ", command=OnOK)
-  cancel.but <- tcltk::tkbutton(dialog, text=" Cancel ", command=OnCancel)
+  OK.but <- tcltk::tkbutton(dialog, text = "   OK   ", command = OnOK)
+  cancel.but <- tcltk::tkbutton(dialog, text = " Cancel ", command = OnCancel)
   tcltk::tkgrid(slider)
   tcltk::tkgrid(OK.but, cancel.but)
-  
+
   tcltk::tkwait.window(dialog)
   return(SliderValue)
 }
-  
+
 ###################################################################
 # Internal functions, vertex and edge selection
 ###################################################################
@@ -1226,8 +1524,10 @@ tk_canvas <- function(tkp.id) {
   canvas <- .tkplot.get(tkp.id, "canvas")
   vids <- unique(vids)
   for (i in vids) {
-    tkid <- as.numeric(tcltk::tkfind(canvas, "withtag",
-                              paste(sep="", "vertex&&v-", i)))
+    tkid <- as.numeric(tcltk::tkfind(
+      canvas, "withtag",
+      paste(sep = "", "vertex&&v-", i)
+    ))
     .tkplot.select.vertex(tkp.id, tkid)
   }
 }
@@ -1242,13 +1542,17 @@ tk_canvas <- function(tkp.id) {
 
 .tkplot.select.some.edges <- function(tkp.id, from, to) {
   canvas <- .tkplot.get(tkp.id, "canvas")
-  fromtags <- sapply(from, function(i) { paste(sep="", "from-", i) })
-  totags <- sapply(from, function(i) { paste(sep="", "to-", i) })
+  fromtags <- sapply(from, function(i) {
+    paste(sep = "", "from-", i)
+  })
+  totags <- sapply(from, function(i) {
+    paste(sep = "", "to-", i)
+  })
   edges <- as.numeric(tcltk::tkfind(canvas, "withtag", "edge"))
   for (i in edges) {
     tags <- as.character(tcltk::tkgettags(canvas, i))
-    ftag <- tags[ pmatch("from-", tags) ]
-    ttag <- tags[ pmatch("to-", tags) ]
+    ftag <- tags[pmatch("from-", tags)]
+    ttag <- tags[pmatch("to-", tags)]
     if (ftag %in% fromtags && ttag %in% totags) {
       .tkplot.select.edge(tkp.id, i)
     }
@@ -1258,8 +1562,10 @@ tk_canvas <- function(tkp.id) {
 .tkplot.select.vertex <- function(tkp.id, tkid) {
   canvas <- .tkplot.get(tkp.id, "canvas")
   tcltk::tkaddtag(canvas, "selected", "withtag", tkid)
-  tcltk::tkitemconfigure(canvas, tkid, "-outline", "red",
-                  "-width", 2)
+  tcltk::tkitemconfigure(
+    canvas, tkid, "-outline", "red",
+    "-width", 2
+  )
 }
 
 .tkplot.select.edge <- function(tkp.id, tkid) {
@@ -1271,7 +1577,7 @@ tk_canvas <- function(tkp.id) {
 .tkplot.select.label <- function(tkp.id, tkid) {
   canvas <- .tkplot.get(tkp.id, "canvas")
   tcltk::tkaddtag(canvas, "selected", "withtag", tkid)
-}  
+}
 
 .tkplot.deselect.vertex <- function(tkp.id, tkid) {
   canvas <- .tkplot.get(tkp.id, "canvas")
@@ -1279,11 +1585,14 @@ tk_canvas <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   tags <- as.character(tcltk::tkgettags(canvas, tkid))
   id <- as.numeric(substring(tags[pmatch("v-", tags)], 3))
-  vertex.frame.color <- ifelse(length(tkp$params$vertex.frame.color)>1,
-                               tkp$params$vertex.frame.color[id],
-                               tkp$params$vertex.frame.color)  
-  tcltk::tkitemconfigure(canvas, tkid, "-outline", vertex.frame.color,
-                  "-width", 1)
+  vertex.frame.color <- ifelse(length(tkp$params$vertex.frame.color) > 1,
+    tkp$params$vertex.frame.color[id],
+    tkp$params$vertex.frame.color
+  )
+  tcltk::tkitemconfigure(
+    canvas, tkid, "-outline", vertex.frame.color,
+    "-width", 1
+  )
 }
 
 .tkplot.deselect.edge <- function(tkp.id, tkid) {
@@ -1292,9 +1601,10 @@ tk_canvas <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   tags <- as.character(tcltk::tkgettags(canvas, tkid))
   id <- as.numeric(substring(tags[pmatch("edge-", tags)], 6))
-  edge.lty <- ifelse(length(tkp$params$edge.lty)>1,
-                     tkp$params$edge.lty[[id]],
-                     tkp$params$edge.lty)
+  edge.lty <- ifelse(length(tkp$params$edge.lty) > 1,
+    tkp$params$edge.lty[[id]],
+    tkp$params$edge.lty
+  )
   tcltk::tkitemconfigure(canvas, tkid, "-dash", edge.lty)
 }
 
@@ -1326,13 +1636,15 @@ tk_canvas <- function(tkp.id) {
     tkp <- .tkplot.get(tkp.id)
     if (tkp$params$label.dist == 0) {
       id <- tags[pmatch("v-", tags)]
-      tkid <- as.character(tcltk::tkfind(canvas, "withtag",
-                                  paste(sep="", "vertex&&", id)))
+      tkid <- as.character(tcltk::tkfind(
+        canvas, "withtag",
+        paste(sep = "", "vertex&&", id)
+      ))
       .tkplot.select.vertex(tkp.id, tkid)
     } else {
       .tkplot.select.label(tkp.id, tkid)
     }
-  } 
+  }
 }
 
 .tkplot.deselect.this <- function(tkp.id, tkid) {
@@ -1346,8 +1658,10 @@ tk_canvas <- function(tkp.id) {
     tkp <- .tkplot.get(tkp.id)
     if (tkp$params$label.dist == 0) {
       id <- tags[pmatch("v-", tags)]
-      tkid <- as.character(tcltk::tkfind(canvas, "withtag",
-                                  paste(sep="", "vertex&&", id)))
+      tkid <- as.character(tcltk::tkfind(
+        canvas, "withtag",
+        paste(sep = "", "vertex&&", id)
+      ))
       .tkplot.deselect.vertex(tkp.id, tkid)
     } else {
       .tkplot.deselect.label(tkp.id, tkid)
@@ -1361,8 +1675,9 @@ tk_canvas <- function(tkp.id) {
 
   ids <- sapply(tkids, function(tkid) {
     tags <- as.character(tcltk::tkgettags(canvas, tkid))
-    id <- as.numeric(substring(tags [pmatch("v-", tags)], 3))
-    id})
+    id <- as.numeric(substring(tags[pmatch("v-", tags)], 3))
+    id
+  })
 
   ids
 }
@@ -1373,8 +1688,9 @@ tk_canvas <- function(tkp.id) {
 
   ids <- sapply(tkids, function(tkid) {
     tags <- as.character(tcltk::tkgettags(canvas, tkid))
-    id <- as.numeric(substring(tags [pmatch("edge-", tags)], 6))
-    id})
+    id <- as.numeric(substring(tags[pmatch("edge-", tags)], 6))
+    id
+  })
 
   ids
 }
@@ -1386,44 +1702,60 @@ tk_canvas <- function(tkp.id) {
 .tkplot.select.menu <- function(tkp.id, main.menu) {
   select.menu <- tcltk::tkmenu(main.menu)
 
-  tcltk::tkadd(select.menu, "command", label="Select all vertices",
-        command=function() {
-          .tkplot.deselect.all(tkp.id)
-          .tkplot.select.all.vertices(tkp.id)
-        })
-  tcltk::tkadd(select.menu, "command", label="Select all edges",
-        command=function() {
-          .tkplot.deselect.all(tkp.id)
-          .tkplot.select.all.edges(tkp.id)
-        })
-  tcltk::tkadd(select.menu, "command", label="Select some vertices...",
-        command=function() {
-          vids <- .tkplot.get.numeric.vector("Select vertices")
-          .tkplot.select.some.vertices(tkp.id, vids[[1]])
-        })
-  tcltk::tkadd(select.menu, "command", label="Select some edges...",
-        command=function() {
-          fromto <- .tkplot.get.numeric.vector("Select edges from vertices",
-                                               "to vertices")
-          .tkplot.select.some.edges(tkp.id, fromto[[1]], fromto[[2]])
-        })
+  tcltk::tkadd(select.menu, "command",
+    label = "Select all vertices",
+    command = function() {
+      .tkplot.deselect.all(tkp.id)
+      .tkplot.select.all.vertices(tkp.id)
+    }
+  )
+  tcltk::tkadd(select.menu, "command",
+    label = "Select all edges",
+    command = function() {
+      .tkplot.deselect.all(tkp.id)
+      .tkplot.select.all.edges(tkp.id)
+    }
+  )
+  tcltk::tkadd(select.menu, "command",
+    label = "Select some vertices...",
+    command = function() {
+      vids <- .tkplot.get.numeric.vector("Select vertices")
+      .tkplot.select.some.vertices(tkp.id, vids[[1]])
+    }
+  )
+  tcltk::tkadd(select.menu, "command",
+    label = "Select some edges...",
+    command = function() {
+      fromto <- .tkplot.get.numeric.vector(
+        "Select edges from vertices",
+        "to vertices"
+      )
+      .tkplot.select.some.edges(tkp.id, fromto[[1]], fromto[[2]])
+    }
+  )
   tcltk::tkadd(select.menu, "separator")
-  tcltk::tkadd(select.menu, "command", label="Deselect everything",
-        command=function() { .tkplot.deselect.all(tkp.id) })
+  tcltk::tkadd(select.menu, "command",
+    label = "Deselect everything",
+    command = function() {
+      .tkplot.deselect.all(tkp.id)
+    }
+  )
 
   select.menu
 }
 
 .tkplot.layout.menu <- function(tkp.id, main.menu) {
   layout.menu <- tcltk::tkmenu(main.menu)
-  
+
   sapply(.tkplot.getlayoutlist(), function(n) {
-    tcltk::tkadd(layout.menu, "command", label=.tkplot.getlayoutname(n),
-          command=function() {
-            .tkplot.layout.dialog(tkp.id, n)
-          })
+    tcltk::tkadd(layout.menu, "command",
+      label = .tkplot.getlayoutname(n),
+      command = function() {
+        .tkplot.layout.dialog(tkp.id, n)
+      }
+    )
   })
-  
+
   layout.menu
 }
 
@@ -1431,105 +1763,131 @@ tk_canvas <- function(tkp.id) {
   layout <- .tkplot.getlayout(layout.name)
 
   # No parameters
-  if (length(layout$params)==0) {
-    return(tk_reshape(tkp.id, layout$f, params=list()))
+  if (length(layout$params) == 0) {
+    return(tk_reshape(tkp.id, layout$f, params = list()))
   }
-  
+
   submit <- function() {
-    realparams <- params <- vector(mode="list", length(layout$params))
+    realparams <- params <- vector(mode = "list", length(layout$params))
     names(realparams) <- names(params) <- names(layout$params)
-    for (i in seq(along=layout$params)) {
+    for (i in seq(along.with = layout$params)) {
       realparams[[i]] <-
         params[[i]] <- switch(layout$params[[i]]$type,
-                              "numeric"=as.numeric(tcltk::tkget(values[[i]])),
-                              "character"=as.character(tcltk::tkget(values[[i]])),
-                              "logical"=as.logical(tcltk::tclvalue(values[[i]])),
-                              "choice"=as.character(tcltk::tclvalue(values[[i]])),
-                              "initial"=as.logical(tcltk::tclvalue(values[[i]])),
-                              "expression"=as.numeric(tcltk::tkget(values[[i]]))
-                              )
-      if (layout$params[[i]]$type=="initial" &&
-          params[[i]]) {
-        realparams[[i]] <- tk_coords(tkp.id, norm=TRUE)
+          "numeric" = as.numeric(tcltk::tkget(values[[i]])),
+          "character" = as.character(tcltk::tkget(values[[i]])),
+          "logical" = as.logical(tcltk::tclvalue(values[[i]])),
+          "choice" = as.character(tcltk::tclvalue(values[[i]])),
+          "initial" = as.logical(tcltk::tclvalue(values[[i]])),
+          "expression" = as.numeric(tcltk::tkget(values[[i]]))
+        )
+      if (layout$params[[i]]$type == "initial" &&
+        params[[i]]) {
+        realparams[[i]] <- tk_coords(tkp.id, norm = TRUE)
       }
     }
     if (as.logical(tcltk::tclvalue(save.default))) {
       .tkplot.layouts.newdefaults(layout.name, params)
     }
     tcltk::tkdestroy(dialog)
-    tk_reshape(tkp.id, layout$f, params=realparams)
+    tk_reshape(tkp.id, layout$f, params = realparams)
   }
-  
+
   dialog <- tcltk::tktoplevel(.tkplot.get(tkp.id, "top"))
-  
+
   tcltk::tkwm.title(dialog, paste("Layout parameters for graph plot", tkp.id))
   tcltk::tkwm.transient(dialog, .tkplot.get(tkp.id, "top"))
 
-  tcltk::tkgrid(tcltk::tklabel(dialog, text=paste(layout$name, "layout"),
-                 font=tcltk::tkfont.create(family="helvetica",size=20,weight="bold")),
-         row=0, column=0, columnspan=2, padx=10, pady=10)
-                 
+  tcltk::tkgrid(
+    tcltk::tklabel(dialog,
+      text = paste(layout$name, "layout"),
+      font = tcltk::tkfont.create(family = "helvetica", size = 20, weight = "bold")
+    ),
+    row = 0, column = 0, columnspan = 2, padx = 10, pady = 10
+  )
+
   row <- 1
   values <- list()
-  for (i in seq(along=layout$params)) {
-    
-    tcltk::tkgrid(tcltk::tklabel(dialog, text=paste(sep="", layout$params[[i]]$name, ":")),
-                   row=row, column=0, sticky="ne", padx=5, pady=5)
-    
+  for (i in seq(along.with = layout$params)) {
+    tcltk::tkgrid(tcltk::tklabel(dialog, text = paste(sep = "", layout$params[[i]]$name, ":")),
+      row = row, column = 0, sticky = "ne", padx = 5, pady = 5
+    )
+
     if (layout$params[[i]]$type %in% c("numeric", "character")) {
       values[[i]] <- tcltk::tkentry(dialog)
       tcltk::tkinsert(values[[i]], 0, as.character(layout$params[[i]]$default))
-      tcltk::tkgrid(values[[i]], row=row, column=1, sticky="nw", padx=5, pady=5)
-    } else if (layout$params[[i]]$type=="logical") {
+      tcltk::tkgrid(values[[i]], row = row, column = 1, sticky = "nw", padx = 5, pady = 5)
+    } else if (layout$params[[i]]$type == "logical") {
       values[[i]] <- tcltk::tclVar(as.character(layout$params[[i]]$default))
-      tmp <- tcltk::tkcheckbutton(dialog, onvalue="TRUE", offvalue="FALSE",
-                           variable=values[[i]])
-      tcltk::tkgrid(tmp, row=row, column=1, sticky="nw", padx=5, pady=5)
-    } else if (layout$params[[i]]$type=="choice") {
+      tmp <- tcltk::tkcheckbutton(dialog,
+        onvalue = "TRUE", offvalue = "FALSE",
+        variable = values[[i]]
+      )
+      tcltk::tkgrid(tmp, row = row, column = 1, sticky = "nw", padx = 5, pady = 5)
+    } else if (layout$params[[i]]$type == "choice") {
       tmp.frame <- tcltk::tkframe(dialog)
-      tcltk::tkgrid(tmp.frame, row=row, column=1, sticky="nw", padx=5, pady=5)
+      tcltk::tkgrid(tmp.frame, row = row, column = 1, sticky = "nw", padx = 5, pady = 5)
       values[[i]] <- tcltk::tclVar(layout$params[[i]]$default)
       for (j in 1:length(layout$params[[i]]$values)) {
-        tmp <- tcltk::tkradiobutton(tmp.frame, variable=values[[i]],
-                             value=layout$params[[i]]$values[j],
-                             text=layout$params[[i]]$values[j])
-        tcltk::tkpack(tmp, anchor="nw")
+        tmp <- tcltk::tkradiobutton(tmp.frame,
+          variable = values[[i]],
+          value = layout$params[[i]]$values[j],
+          text = layout$params[[i]]$values[j]
+        )
+        tcltk::tkpack(tmp, anchor = "nw")
       }
-    } else if (layout$params[[i]]$type=="initial") {
+    } else if (layout$params[[i]]$type == "initial") {
       values[[i]] <- tcltk::tclVar(as.character(layout$params[[i]]$default))
-      tcltk::tkgrid(tcltk::tkcheckbutton(dialog, onvalue="TRUE", offvalue="FALSE",
-                           variable=values[[i]]),
-             row=row, column=1, sticky="nw", padx=5, pady=5)
-    } else if (layout$param[[i]]$type=="expression") {
+      tcltk::tkgrid(
+        tcltk::tkcheckbutton(dialog,
+          onvalue = "TRUE", offvalue = "FALSE",
+          variable = values[[i]]
+        ),
+        row = row, column = 1, sticky = "nw", padx = 5, pady = 5
+      )
+    } else if (layout$param[[i]]$type == "expression") {
       values[[i]] <- tcltk::tkentry(dialog)
       .tkplot.g <- .tkplot.get(tkp.id, "graph")
       tcltk::tkinsert(values[[i]], 0, as.character(eval(layout$params[[i]]$default)))
-      tcltk::tkgrid(values[[i]], row=row, column=1, sticky="nw", padx=5, pady=5)
-    }      
+      tcltk::tkgrid(values[[i]], row = row, column = 1, sticky = "nw", padx = 5, pady = 5)
+    }
 
     row <- row + 1
-    
   } # for along layout$params
 
-  tcltk::tkgrid(tcltk::tklabel(dialog, text="Set these as defaults"), sticky="ne",
-         row=row, column=0, padx=5, pady=5)
+  tcltk::tkgrid(tcltk::tklabel(dialog, text = "Set these as defaults"),
+    sticky = "ne",
+    row = row, column = 0, padx = 5, pady = 5
+  )
   save.default <- tcltk::tclVar("FALSE")
-  tcltk::tkgrid(tcltk::tkcheckbutton(dialog, onvalue="TRUE", offvalue="FALSE",
-                       variable=save.default, text=""), row=row,
-         column=1, sticky="nw", padx=5, pady=5)
+  tcltk::tkgrid(
+    tcltk::tkcheckbutton(dialog,
+      onvalue = "TRUE", offvalue = "FALSE",
+      variable = save.default, text = ""
+    ),
+    row = row,
+    column = 1, sticky = "nw", padx = 5, pady = 5
+  )
   row <- row + 1
-  
-  tcltk::tkgrid(tcltk::tkbutton(dialog, text="OK", command=submit), row=row, column=0)
-  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Cancel",
-                  command=function() { tcltk::tkdestroy(dialog); invisible(TRUE) }),
-         row=row, column=1)
+
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text = "OK", command = submit), row = row, column = 0)
+  tcltk::tkgrid(
+    tcltk::tkbutton(dialog,
+      text = "Cancel",
+      command = function() {
+        tcltk::tkdestroy(dialog)
+        invisible(TRUE)
+      }
+    ),
+    row = row, column = 1
+  )
 }
 
 .tkplot.select.color <- function(initialcolor) {
-  
-  color <- tcltk::tclvalue(tcltk::tcl("tk_chooseColor", initialcolor=initialcolor,
-                        title="Choose a color"))
-  return(color);
+  color <- tcltk::tclvalue(tcltk::tcl("tk_chooseColor",
+    initialcolor = initialcolor,
+    title = "Choose a color"
+  ))
+  return(color)
 }
 
 ###################################################################
@@ -1537,18 +1895,17 @@ tk_canvas <- function(tkp.id) {
 ###################################################################
 
 #' @importFrom grDevices palette
-
 .tkplot.convert.color <- function(col) {
   if (is.numeric(col)) {
     ## convert numeric color based on current palette
     p <- palette()
     col <- col %% length(p)
-    col[col==0] <- length(p)
+    col[col == 0] <- length(p)
     col <- palette()[col]
-  } else if (is.character(col) && any(substr(col,1,1)=="#" & nchar(col)==9)) {
+  } else if (is.character(col) && any(substr(col, 1, 1) == "#" & nchar(col) == 9)) {
     ## drop alpha channel, tcltk doesn't support it
-    idx <- substr(col,1,1)=="#" & nchar(col)==9
-    col[idx] <- substr(col[idx],1,7)
+    idx <- substr(col, 1, 1) == "#" & nchar(col) == 9
+    col[idx] <- substr(col[idx], 1, 7)
   }
 
   ## replace NA's with ""
@@ -1566,21 +1923,21 @@ tk_canvas <- function(tkp.id) {
     ## we create a font from familiy, font & cex
     font <- as.numeric(font)
     family <- as.character(family)
-    cex <- as.numeric(cex)    
+    cex <- as.numeric(cex)
 
     ## multiple sizes
     if (length(cex) > 1) {
-      return(sapply(cex, .tkplot.convert.font, font=font, family=family))
+      return(sapply(cex, .tkplot.convert.font, font = font, family = family))
     }
-    
+
     ## set slant & weight
-    if (font==2) {
+    if (font == 2) {
       slant <- "roman"
       weight <- "bold"
-    } else if (font==3) {
+    } else if (font == 3) {
       slant <- "italic"
       weight <- "normal"
-    } else if (font==4) {
+    } else if (font == 4) {
       slant <- "italic"
       weight <- "bold"
     } else {
@@ -1589,37 +1946,42 @@ tk_canvas <- function(tkp.id) {
     }
 
     ## set tkfamily
-    if (family=="symbol" || font==5) {
+    if (family == "symbol" || font == 5) {
       tkfamily <- "symbol"
-    } else if (family=="serif") {
+    } else if (family == "serif") {
       tkfamily <- "Times"
-    } else if (family=="sans") {
+    } else if (family == "sans") {
       tkfamily <- "Helvetica"
-    } else if (family=="mono") {
+    } else if (family == "mono") {
       tkfamily <- "Courier"
     } else {
       ## pass the family and see what happens
       tkfamily <- family
     }
-    
-    newfont <- tcltk::tkfont.create(family=tkfamily, slant=slant, weight=weight,
-                             size=as.integer(12*cex))
+
+    newfont <- tcltk::tkfont.create(
+      family = tkfamily, slant = slant, weight = weight,
+      size = as.integer(12 * cex)
+    )
     as.character(newfont)
   }
 }
 
 i.tkplot.get.edge.lty <- function(edge.lty) {
-
   if (is.numeric(edge.lty)) {
-    lty <- c( " ", "", "-", ".", "-.", "--", "--.")
+    lty <- c(" ", "", "-", ".", "-.", "--", "--.")
     edge.lty <- lty[edge.lty %% 7 + 1]
   } else if (is.character(edge.lty)) {
-    wh <- edge.lty %in% c("blank", "solid", "dashed", "dotted", "dotdash",
-                          "longdash", "twodash")
-    lty <- c( " ", "", "-", ".", "-.", "--", "--.")
-    names(lty) <- c("blank", "solid", "dashed", "dotted", "dotdash",
-                    "longdash", "twodash")
-    edge.lty[wh] <- lty[ edge.lty[wh] ]
+    wh <- edge.lty %in% c(
+      "blank", "solid", "dashed", "dotted", "dotdash",
+      "longdash", "twodash"
+    )
+    lty <- c(" ", "", "-", ".", "-.", "--", "--.")
+    names(lty) <- c(
+      "blank", "solid", "dashed", "dotted", "dotdash",
+      "longdash", "twodash"
+    )
+    edge.lty[wh] <- lty[edge.lty[wh]]
   }
   edge.lty
 }

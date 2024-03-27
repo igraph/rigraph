@@ -3,51 +3,97 @@
 on:
   push:
     branches:
-      - dev
-      - cran
+      - main
+      - fix/*
   pull_request:
     branches:
-      - dev
-      - cran
+      - main
+      - fix/*
+  schedule:
+    - cron: '0 2 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
 
 name: R-CMD-check
 
 jobs:
   build_src_package:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     name: Build source R package
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      _R_CHECK_FORCE_SUGGESTS_: false   # graph package is unavailable
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true
           fetch-depth: 0
 
-      - uses: r-lib/actions/setup-r@v1
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.0.1'
+          install-r: false
 
-      - name: Cache R packages
+      - name: apt update
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
+
+      - name: Cache Python virtualenv
         uses: actions/cache@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: R-source-${{ runner.os }}
+          path: .venv
+          key: Python-venv-jammy-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
-      - name: Install necessary dependencies
-        run: |
-          sudo apt install libcurl4-openssl-dev
-          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
-        shell: bash
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          needs: build
+          pak-version: devel
 
       - name: Create R source package
         run: |
-          make
+          make igraph
+        shell: bash
+
+      - name: Commit changes
+        if: ${{ env.GITHUB_ACTOR == env.GITHUB_REPOSITORY_OWNER }}
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git fetch
+            if [ -n "${GITHUB_HEAD_REF}" ]; then
+              git add .
+              git stash save
+              git switch ${GITHUB_HEAD_REF}
+              git stash pop
+            fi
+            git add .
+            git commit -m "Automated changes"
+            git push
+          fi
+        shell: bash
+
+      - name: Package validation
+        if: ${{ env.GITHUB_ACTOR != env.GITHUB_REPOSITORY_OWNER }}
+        run: |
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git diff --cached
+            /bin/false
+          fi
+        shell: bash
+
+      - name: Smoke test
+        run: |
+          make test
         shell: bash
 
       - name: Upload R source package
@@ -70,126 +116,138 @@ jobs:
         config:
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest,   r: 'release'}
-          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'release',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'devel',    rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'oldrel-1', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'oldrel-2', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'oldrel-3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'oldrel-4', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RGL_USE_NULL: true  # Ensure that rgl functions correctly on macOS
       MAKEFLAGS: -j2
+      _R_CHECK_PKG_SIZES_: FALSE
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
+          fetch-depth: 0
 
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
-
-      - uses: r-lib/actions/setup-r@v1
+      - name: Install ccache
+        uses: hendrikmuhs/ccache-action@v1.2.10
         with:
-          r-version: ${{ matrix.config.r }}
+          max-size: 10G
+          verbose: 1
+          save: false
+          restore: false
 
-      - uses: r-lib/actions/setup-pandoc@v1
-
-      - name: Install remotes package
-        run: install.packages('remotes')
-        shell: Rscript {0}
-
-      - name: Query dependencies
-        run: |
-          dir.create('../.github/')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "../.github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "../.github/R-version")
-        shell: Rscript {0}
-        working-directory: igraph
-
-      - name: Cache R packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
-      - name: Install system dependencies (Linux)
+      - name: apt update
         if: runner.os == 'Linux'
         run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
-        working-directory: igraph
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
 
-      - name: Install system dependencies (macOS)
+      - name: apt update
         if: runner.os == 'macOS'
-        run: brew install libxml2 glpk gmp automake
-
-      - name: Install system dependencies (Windows)
-        if: runner.os == 'Windows'
         run: |
-          pacman -Sy --noconfirm mingw-w64-i686-glpk mingw-w64-i686-libxml2 mingw-w64-i686-gmp mingw-w64-x86_64-glpk mingw-w64-x86_64-libxml2 mingw-w64-x86_64-gmp
+          brew install glpk
+        shell: bash
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("rcmdcheck")
-        shell: Rscript {0}
-        working-directory: igraph
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-        working-directory: igraph
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: igraph/check
+          r-version: ${{ matrix.config.r }}
+          rtools-version: 42
+          update-rtools: true
 
-  # temporary attempt at a automatically deploying the source code to the master branch
-  deploy_src:
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+
+      - name: Check R package
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          error-on: '"note"'
+
+  coverage:
     runs-on: ubuntu-20.04
 
-    name: Deploy source R package to master branch
+    needs: build_src_package
 
-    if: success() && github.ref == 'refs/heads/dev'
-    needs: R-CMD-check
+    name: Coverage
+
+    env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAKEFLAGS: -j2
 
     steps:
-
-      - name: Checkout master branch
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
-          ref: master
+          fetch-depth: 0
 
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - name: apt update
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          name: rigraph
+          needs: coverage
+          pak-version: devel
 
-      - name: Extract source package
+      - name: Run coverage
         run: |
-          tar -xvf igraph*.tar.gz --strip-components=1
-          rm *.tar.gz
+          line_exclusions <- fs::dir_ls(c("src/vendor"), type = "file", recurse = TRUE)
+          cov <- covr::package_coverage(
+            type = c("tests", "examples"),
+            line_exclusions = as.list(names(line_exclusions)),
+            quiet = FALSE
+          )
+          covr::codecov(coverage = cov, quiet = FALSE)
+        shell: Rscript {0}
 
-      - name: Push to master branch
+  sanitizer:
+    runs-on: ubuntu-22.04
+
+    needs: build_src_package
+
+    name: Sanitizer
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: apt update
         run: |
-          # Setup the username and email.
-          git config user.name "GH actions bot"
-          git config user.email "<>"
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
 
-          # Stage files, commit and push
-          git add .
-          git commit -m "${{ github.event.head_commit.message }} [Triggered by ${{ github.event.after }}]"
-          git push origin master
+      - name: run sanitizer
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/krlmlr/rigraph-san:main
+          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
+          run: |
+            set -e
+            printenv
+            cd rigraph
+            RDcsan CMD INSTALL . --no-byte-compile
+            TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'

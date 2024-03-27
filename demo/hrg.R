@@ -1,9 +1,9 @@
 
 pause <- function() {}
 
-### Download the Zachary Karate Club network from Nexus
+### Construct the Zachary Karate Club network
 
-karate <- nexus.get("karate")
+karate <- make_graph("zachary")
 karate
 
 pause()
@@ -25,7 +25,7 @@ pause()
 
 ### The fitted model, more details
 
-print(hrg, level=5)
+print(hrg, level = 5)
 
 pause()
 
@@ -33,7 +33,7 @@ pause()
 
 ihrg <- as.igraph(hrg)
 ihrg$layout <- layout.reingold.tilford
-plot(ihrg, vertex.size=10, edge.arrow.size=0.2)
+plot(ihrg, vertex.size = 10, edge.arrow.size = 0.2)
 
 pause()
 
@@ -43,10 +43,12 @@ vn <- sub("Actor ", "", V(ihrg)$name)
 colbar <- rainbow(length(optcom))
 vc <- ifelse(is.na(V(ihrg)$prob), colbar[V(karate)$comm], "darkblue")
 V(ihrg)$label <- ifelse(is.na(V(ihrg)$prob), vn, round(V(ihrg)$prob, 2))
-par(mar=c(0,0,3,0))
-plot(ihrg, vertex.size=10, edge.arrow.size=0.2,
-     vertex.shape="none", vertex.label.color=vc,
-     main="Hierarchical network model of the Karate Club")
+par(mar = c(0, 0, 3, 0))
+plot(ihrg,
+  vertex.size = 10, edge.arrow.size = 0.2,
+  vertex.shape = "none", vertex.label.color = vc,
+  main = "Hierarchical network model of the Karate Club"
+)
 
 pause()
 
@@ -62,7 +64,7 @@ g1 <- make_full_graph(5)
 g2 <- make_ring(5)
 
 g <- g1 + g2
-g <- g + edge(1, vcount(g1)+1)
+g <- g + edge(1, vcount(g1) + 1)
 
 plot(g)
 
@@ -93,13 +95,12 @@ pause()
 
 E(g)$color <- "grey"
 lay <- layout_nicely(g)
-g2 <- add_edges(g, t(pred$edges[1:5,]), color="red")
-plot(g2, layout=lay)
+g2 <- add_edges(g, t(pred$edges[1:5, ]), color = "red")
+plot(g2, layout = lay)
 
 pause()
 
 ### Add four more predicted edges, colored orange
 
-g3 <- add_edges(g2, t(pred$edges[6:9,]), color="orange")
-plot(g3, layout=lay)
-
+g3 <- add_edges(g2, t(pred$edges[6:9, ]), color = "orange")
+plot(g3, layout = lay)

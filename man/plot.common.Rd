@@ -138,6 +138,11 @@
 
       By default it is \dQuote{black}.
     }
+    \item{frame.width}{The width of the frame of the vertices.
+
+      The default value is 1.
+
+    }
     \item{shape}{The shape of the vertex, currently
       \dQuote{\code{circle}}, \dQuote{\code{square}},
       \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},

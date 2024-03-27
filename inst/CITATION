@@ -1,15 +1,47 @@
-citHeader("To cite 'igraph' in publications use:")
-
-citEntry(entry="article",
-	 title="The igraph software package for complex network research",
-         author=personList(as.person("Gabor Csardi"),
-			   as.person("Tamas Nepusz")),
-	 journal="InterJournal",
+bibentry(bibtype="Article",
+         header="To cite 'igraph' in publications use:",
+         title="The igraph software package for complex network research",
+         author=c(as.person("Gabor Csardi"), as.person("Tamas Nepusz")),
+         journal="InterJournal",
          volume="Complex Systems",
          pages="1695",
-         year="2006",
-         url="http://igraph.org",
-         textVersion=paste("Csardi G, Nepusz T: The igraph software package for ",
-                           "complex network research, InterJournal, ",
-                           "Complex Systems 1695. 2006. ",
-                           "http://igraph.org", sep=""))
+         year=2006,
+         url="https://igraph.org")
+
+note <- sprintf("R package version %s", meta$Version)
+# https://github.com/cran/lidR/blob/f0dae39007c9d174f6e1962ff236fd8826f1501d/inst/CITATION#L21
+year <- format(Sys.Date(), "%Y")
+authors <- meta$`Authors@R`
+authors <- utils:::.read_authors_at_R_field(authors)
+authors <- Filter(function(e) {
+  !(is.null(e$given) && is.null(e$family)) && !is.na(match("aut", e$role))
+}, authors)
+authors <- format(authors, include = c("given", "family"))
+
+# Step 1: Get text citation and replace there the abb.
+entry_for_txt <- format(bibentry(
+  bibtype = "Manual",
+  title = "{igraph}: Network Analysis and Visualization in R",
+  author = authors,
+  year = year,
+  note = note,
+  doi = "10.5281/zenodo.7682609",
+  url = "https://CRAN.R-project.org/package=igraph"
+), style = "text")
+
+txt <- gsub("Horvát S", "Horvát Sz", entry_for_txt)
+
+# FIXME: \relax brings CRAN trouble
+# aut_new <- sub("Szabolcs", "{\\\\relax Sz}abolcs", authors)
+aut_new <- authors
+
+bibentry(
+  bibtype = "Manual",
+  title = "{igraph}: Network Analysis and Visualization in R",
+  author = aut_new,
+  year = year,
+  note = note,
+  doi = "10.5281/zenodo.7682609",
+  url = "https://CRAN.R-project.org/package=igraph",
+  textVersion = txt
+)

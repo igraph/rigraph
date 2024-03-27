@@ -1,0 +1,656 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v1.0.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "igraph" in publications use:'
+type: software
+license: GPL-2.0-or-later
+title: 'igraph: Network Analysis and Visualization'
+version: 2.0.3
+abstract: Routines for simple graphs and network analysis. It can handle large graphs
+  very well and provides functions for generating random and regular graphs, graph
+  visualization, centrality methods and much more.
+authors:
+- family-names: Csárdi
+  given-names: Gábor
+  email: csardi.gabor@gmail.com
+  orcid: https://orcid.org/0000-0001-7098-9676
+- family-names: Nepusz
+  given-names: Tamás
+  email: ntamas@gmail.com
+  orcid: https://orcid.org/0000-0002-1451-338X
+- family-names: Traag
+  given-names: Vincent
+  orcid: https://orcid.org/0000-0003-3170-3879
+- family-names: Horvát
+  given-names: Szabolcs
+  email: szhorvat@gmail.com
+  orcid: https://orcid.org/0000-0002-3100-523X
+- family-names: Zanini
+  given-names: Fabio
+  email: fabio.zanini@unsw.edu.au
+  orcid: https://orcid.org/0000-0001-7097-8539
+- family-names: Noom
+  given-names: Daniel
+- family-names: Müller
+  given-names: Kirill
+  email: kirill@cynkra.com
+  orcid: https://orcid.org/0000-0002-1416-3412
+preferred-citation:
+  type: article
+  title: The igraph software package for complex network research
+  authors:
+  - family-names: Csardi
+    given-names: Gabor
+  - family-names: Nepusz
+    given-names: Tamas
+  journal: InterJournal
+  volume: Complex Systems
+  year: '2006'
+  url: https://igraph.org
+  start: '1695'
+repository: https://CRAN.R-project.org/package=igraph
+repository-code: https://github.com/igraph/rigraph
+url: https://r.igraph.org/
+contact:
+- family-names: Müller
+  given-names: Kirill
+  email: kirill@cynkra.com
+  orcid: https://orcid.org/0000-0002-1416-3412
+keywords:
+- complex-networks
+- graph-algorithms
+- graph-theory
+- mathematics
+- network-analysis
+- network-graph
+- r
+references:
+- type: manual
+  title: 'igraph: Network Analysis and Visualization in R'
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+  - family-names: Nepusz
+    given-names: Tamás
+  - family-names: Traag
+    given-names: Vincent
+  - family-names: Horvát
+    given-names: Szabolcs
+  - family-names: Zanini
+    given-names: Fabio
+  - family-names: Noom
+    given-names: Daniel
+  - family-names: Müller
+    given-names: Kirill
+  year: '2024'
+  notes: R package version 2.0.3
+  doi: 10.5281/zenodo.7682609
+  url: https://CRAN.R-project.org/package=igraph
+- type: software
+  title: methods
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 3.5.0'
+- type: software
+  title: cli
+  abstract: 'cli: Helpers for Developing Command Line Interfaces'
+  notes: Imports
+  url: https://cli.r-lib.org
+  repository: https://CRAN.R-project.org/package=cli
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+    email: csardi.gabor@gmail.com
+  year: '2024'
+- type: software
+  title: graphics
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: grDevices
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2024'
+- type: software
+  title: magrittr
+  abstract: 'magrittr: A Forward-Pipe Operator for R'
+  notes: Imports
+  url: https://magrittr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=magrittr
+  authors:
+  - family-names: Bache
+    given-names: Stefan Milton
+    email: stefan@stefanbache.dk
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2024'
+- type: software
+  title: Matrix
+  abstract: 'Matrix: Sparse and Dense Matrix Classes and Methods'
+  notes: Imports
+  url: https://R-forge.R-project.org/tracker/?atid=294&group_id=61
+  repository: https://CRAN.R-project.org/package=Matrix
+  authors:
+  - family-names: Bates
+    given-names: Douglas
+    orcid: https://orcid.org/0000-0001-8316-9503
+  - family-names: Maechler
+    given-names: Martin
+    email: mmaechler+Matrix@gmail.com
+    orcid: https://orcid.org/0000-0002-8685-9910
+  - family-names: Jagan
+    given-names: Mikael
+    orcid: https://orcid.org/0000-0002-3542-2938
+  year: '2024'
+- type: software
+  title: pkgconfig
+  abstract: 'pkgconfig: Private Configuration for ''R'' Packages'
+  notes: Imports
+  url: https://github.com/r-lib/pkgconfig#readme
+  repository: https://CRAN.R-project.org/package=pkgconfig
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+  year: '2024'
+  version: '>= 2.0.0'
+- type: software
+  title: rlang
+  abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
+  notes: Imports
+  url: https://rlang.r-lib.org
+  repository: https://CRAN.R-project.org/package=rlang
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: vctrs
+  abstract: 'vctrs: Vector Helpers'
+  notes: Imports
+  url: https://vctrs.r-lib.org/
+  repository: https://CRAN.R-project.org/package=vctrs
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+  year: '2024'
+- type: software
+  title: ape
+  abstract: 'ape: Analyses of Phylogenetics and Evolution'
+  notes: Suggests
+  url: http://ape-package.ird.fr/
+  repository: https://CRAN.R-project.org/package=ape
+  authors:
+  - family-names: Paradis
+    given-names: Emmanuel
+    email: Emmanuel.Paradis@ird.fr
+    orcid: https://orcid.org/0000-0003-3092-2199
+  - family-names: Blomberg
+    given-names: Simon
+    orcid: https://orcid.org/0000-0003-1062-0839
+  - family-names: Bolker
+    given-names: Ben
+    orcid: https://orcid.org/0000-0002-2127-0443
+  - family-names: Brown
+    given-names: Joseph
+    orcid: https://orcid.org/0000-0002-3835-8062
+  - family-names: Claramunt
+    given-names: Santiago
+    orcid: https://orcid.org/0000-0002-8926-5974
+  - family-names: Claude
+    given-names: Julien
+    orcid: https://orcid.org/0000-0002-9267-1228
+  - family-names: Cuong
+    given-names: Hoa Sien
+  - family-names: Desper
+    given-names: Richard
+  - family-names: Didier
+    given-names: Gilles
+    orcid: https://orcid.org/0000-0003-0596-9112
+  - family-names: Durand
+    given-names: Benoit
+  - family-names: Dutheil
+    given-names: Julien
+    orcid: https://orcid.org/0000-0001-7753-4121
+  - family-names: Ewing
+    given-names: RJ
+  - family-names: Gascuel
+    given-names: Olivier
+  - family-names: Guillerme
+    given-names: Thomas
+    orcid: https://orcid.org/0000-0003-4325-1275
+  - family-names: Heibl
+    given-names: Christoph
+    orcid: https://orcid.org/0000-0002-7655-3299
+  - family-names: Ives
+    given-names: Anthony
+    orcid: https://orcid.org/0000-0001-9375-9523
+  - family-names: Jones
+    given-names: Bradley
+    orcid: https://orcid.org/0000-0003-4498-1069
+  - family-names: Krah
+    given-names: Franz
+    orcid: https://orcid.org/0000-0001-7866-7508
+  - family-names: Lawson
+    given-names: Daniel
+    orcid: https://orcid.org/0000-0002-5311-6213
+  - family-names: Lefort
+    given-names: Vincent
+  - family-names: Legendre
+    given-names: Pierre
+    orcid: https://orcid.org/0000-0002-3838-3305
+  - family-names: Lemon
+    given-names: Jim
+  - family-names: Louvel
+    given-names: Guillaume
+    orcid: https://orcid.org/0000-0002-7745-0785
+  - family-names: Marcon
+    given-names: Eric
+    orcid: https://orcid.org/0000-0002-5249-321X
+  - family-names: McCloskey
+    given-names: Rosemary
+    orcid: https://orcid.org/0000-0002-9772-8553
+  - family-names: Nylander
+    given-names: Johan
+  - family-names: Opgen-Rhein
+    given-names: Rainer
+  - family-names: Popescu
+    given-names: Andrei-Alin
+  - family-names: Royer-Carenzi
+    given-names: Manuela
+  - family-names: Schliep
+    given-names: Klaus
+    orcid: https://orcid.org/0000-0003-2941-0161
+  - family-names: Strimmer
+    given-names: Korbinian
+    orcid: https://orcid.org/0000-0001-7917-2056
+  - family-names: Vienne
+    given-names: Damien
+    name-particle: de
+    orcid: https://orcid.org/0000-0001-9532-5251
+  year: '2024'
+  version: '>= 5.7-0.1'
+- type: software
+  title: callr
+  abstract: 'callr: Call R from R'
+  notes: Suggests
+  url: https://callr.r-lib.org
+  repository: https://CRAN.R-project.org/package=callr
+  authors:
+  - family-names: Csárdi
+    given-names: Gábor
+    email: csardi.gabor@gmail.com
+    orcid: https://orcid.org/0000-0001-7098-9676
+  - family-names: Chang
+    given-names: Winston
+  year: '2024'
+- type: software
+  title: decor
+  abstract: 'decor: Retrieve Code Decorations'
+  notes: Suggests
+  url: https://github.com/r-lib/decor
+  repository: https://CRAN.R-project.org/package=decor
+  authors:
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Hester
+    given-names: Jim
+    orcid: https://orcid.org/0000-0002-2739-7082
+  year: '2024'
+- type: software
+  title: digest
+  abstract: 'digest: Create Compact Hash Digests of R Objects'
+  notes: Suggests
+  url: https://dirk.eddelbuettel.com/code/digest.html
+  repository: https://CRAN.R-project.org/package=digest
+  authors:
+  - family-names: Lucas
+    given-names: Dirk Eddelbuettel with contributions by Antoine
+    email: edd@debian.org
+  - family-names: Tuszynski
+    given-names: Jarek
+  - family-names: Bengtsson
+    given-names: Henrik
+  - family-names: Urbanek
+    given-names: Simon
+  - family-names: Frasca
+    given-names: Mario
+  - family-names: Lewis
+    given-names: Bryan
+  - family-names: Stokely
+    given-names: Murray
+  - family-names: Muehleisen
+    given-names: Hannes
+  - family-names: Murdoch
+    given-names: Duncan
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Wu
+    given-names: Wush
+  - family-names: Kou
+    given-names: Qiang
+  - family-names: Onkelinx
+    given-names: Thierry
+  - family-names: Lang
+    given-names: Michel
+  - family-names: Simko
+    given-names: Viliam
+  - family-names: Hornik
+    given-names: Kurt
+  - family-names: Neal
+    given-names: Radford
+  - family-names: Bell
+    given-names: Kendon
+  - family-names: Queljoe
+    given-names: Matthew
+    name-particle: de
+  - family-names: Suruceanu
+    given-names: Ion
+  - family-names: Denney
+    given-names: Bill
+  - family-names: Schumacher
+    given-names: Dirk
+  - family-names: Chang
+    given-names: Winston
+  - family-names: Attali
+    given-names: Dean
+  - family-names: Chirico.
+    given-names: Michael
+  year: '2024'
+- type: software
+  title: graph
+  abstract: 'graph: graph: A package to handle graph data structures'
+  notes: Suggests
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Gentleman
+    given-names: R
+  - family-names: Whalen
+    given-names: Elizabeth
+  - family-names: Huber
+    given-names: W
+  - family-names: Falcon
+    given-names: S
+  year: '2024'
+  doi: 10.18129/B9.bioc.graph
+- type: software
+  title: igraphdata
+  abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'
+  notes: Suggests
+  url: http://igraph.org
+  repository: https://CRAN.R-project.org/package=igraphdata
+  authors:
+  - family-names: Csardi
+    given-names: Gabor
+    email: csardi.gabor@gmail.com
+  year: '2024'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2024'
+- type: software
+  title: rgl
+  abstract: 'rgl: 3D Visualization Using OpenGL'
+  notes: Suggests
+  url: https://dmurdoch.github.io/rgl/
+  repository: https://CRAN.R-project.org/package=rgl
+  authors:
+  - family-names: Murdoch
+    given-names: Duncan
+    email: murdoch.duncan@gmail.com
+  - family-names: Adler
+    given-names: Daniel
+    email: dadler@dyncall.org
+  year: '2024'
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2024'
+- type: software
+  title: scales
+  abstract: 'scales: Scale Functions for Visualization'
+  notes: Suggests
+  url: https://scales.r-lib.org
+  repository: https://CRAN.R-project.org/package=scales
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Seidel
+    given-names: Dana
+  year: '2024'
+- type: software
+  title: stats4
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Suggests
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: tcltk
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Suggests
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+- type: software
+  title: vdiffr
+  abstract: 'vdiffr: Visual Regression Testing and Graphical Diffing'
+  notes: Suggests
+  url: https://vdiffr.r-lib.org/
+  repository: https://CRAN.R-project.org/package=vdiffr
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Luciani
+    given-names: T Jake
+    email: jake@apache.org
+  - family-names: Decorde
+    given-names: Matthieu
+    email: matthieu.decorde@ens-lyon.fr
+  - family-names: Lise
+    given-names: Vaudor
+    email: lise.vaudor@ens-lyon.fr
+  year: '2024'
+- type: software
+  title: withr
+  abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
+  notes: Suggests
+  url: https://withr.r-lib.org
+  repository: https://CRAN.R-project.org/package=withr
+  authors:
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Müller
+    given-names: Kirill
+    email: krlmlr+r@mailbox.org
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevinushey@gmail.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Chang
+    given-names: Winston
+  year: '2024'
+- type: software
+  title: cpp11
+  abstract: 'cpp11: A C++11 Interface for R''s C Interface'
+  notes: LinkingTo
+  url: https://cpp11.r-lib.org
+  repository: https://CRAN.R-project.org/package=cpp11
+  authors:
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
+  - family-names: Hester
+    given-names: Jim
+    orcid: https://orcid.org/0000-0002-2739-7082
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  year: '2024'
+  version: '>= 0.4.7'
+identifiers:
+- type: url
+  value: https://igraph.org/
+- type: url
+  value: https://igraph.discourse.group/

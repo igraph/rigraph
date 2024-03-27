@@ -1,0 +1,263 @@
+url: https://r.igraph.org/
+
+template:
+  bootstrap: 5
+
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - news
+    - articles
+    right: github
+  components:
+    intro:
+      text: Get started
+      menu:
+      - text: Intro
+        href: articles/igraph.html
+      - text: Intro (Español)
+        href: articles/igraph_ES.html
+    articles:
+      text: Articles
+      menu:
+      - text: Installation FAQs
+        href: articles/installation-troubleshooting.html
+      - text: -------
+      - text: "All articles"
+        href: articles/index.html
+
+
+reference:
+- title: igraph options
+- contents:
+  - has_concept("igraph options")
+- title: Construction
+- subtitle: Deterministic constructors
+- contents:
+  - starts_with("make_")
+  - realize_degseq
+  - realize_bipartite_degseq
+  - has_concept("deterministic constructors")
+  - graph_
+  - graph_from_lcf
+  - as_data_frame
+- subtitle: "Stochastic constructors (random graph models)"
+- contents:
+  - has_concept("games")
+- subtitle: Constructor modifiers
+- contents:
+  - has_concept("constructor modifiers")
+- subtitle: Convert to igraph
+- contents:
+  - as.igraph
+- subtitle: Adjacency matrices
+- contents:
+  - has_concept("adjacency")
+- title: Visualization
+- contents:
+  - has_concept("graph layouts")
+  - has_concept("layout modifiers")
+  - has_concept("layout_drl")
+  - has_concept("palettes")
+  - has_concept("plot")
+  - igraph.plotting
+  - plot_dendrogram.igraphHRG
+  - plot_dendrogram
+  - has_concept("plot.common")
+  - has_concept("plot.shapes")
+  - vertex.shape.pie
+- subtitle: Graph coloring
+- contents:
+  - has_concept("coloring")
+# The following are mostly about programming rather than analysis
+- title: Functions for manipulating graphs
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- subtitle: Rewiring functions
+- contents:
+  - has_concept("rewiring functions")
+- title: Vertex, edge and graph attributes
+- contents:
+  - has_concept("attributes")
+- title: Vertex and edge sequences
+- contents:
+  - has_concept("vertex and edge sequences")
+  - has_concept("vertex and edge sequence operations")
+- title: Utilities
+- subtitle: Graph ID, comparison, name, weight
+- contents:
+  - graph_id
+  - identical_graphs
+  - is_igraph
+  - is_named
+  - is_weighted
+  - is_chordal
+- subtitle: Conversion
+- contents:
+  - has_concept("conversion")
+- subtitle: Env and data
+- contents:
+  - has_concept("env-and-data")
+- subtitle: Printing
+- contents:
+  - head_print
+  - indent_print
+  - has_concept("print")
+  - has_concept("printer callbacks")
+- subtitle: Latent position vector samplers
+- contents:
+  - has_concept("latent position vector samplers")
+- subtitle: Miscellaneous
+- contents:
+  - convex_hull
+  - running_mean
+  - sample_seq
+  - fit_power_law
+# [[[ network analysis start
+- title: Structural properties
+- contents:
+  - has_concept("structural.properties")
+  - has_concept("cocitation")
+  - has_concept("cohesive.blocks")
+  - has_concept("triangles")
+  - starts_with("assortativity")
+  - spectrum
+- subtitle: Matrices
+- contents:
+  - laplacian_matrix
+  - as_adjacency_matrix
+  - stochastic_matrix
+- subtitle: Chordal graphs
+- contents:
+  - has_concept("chordal")
+- subtitle: Triangles and transitivity
+- contents:
+  - matches("triangles")
+  - matches("transitivity")
+- subtitle: Paths
+- contents:
+  - has_concept("paths")
+- subtitle: Bipartite graphs
+- contents:
+  - has_concept("bipartite")
+  - has_concept("biadjacency")
+- subtitle: Efficiency
+- contents:
+  - has_concept("efficiency")
+- subtitle: Similarity
+- contents:
+  - has_concept("similarity")
+- subtitle: Trees
+- contents:
+  - has_concept("trees")
+  - make_from_prufer
+  - has_concept("minimum.spanning.tree")
+- subtitle: Structural queries
+- contents:
+  - has_concept("structural queries")
+- subtitle: ARPACK eigenvector calculation
+- contents:
+  - has_concept("arpack")
+- subtitle: Centrality measures
+- contents:
+  - has_concept("centrality")
+- subtitle: Centralization
+- contents:
+  - has_concept("centralization related")
+- subtitle: Scan statistics
+- contents:
+  - has_concept("scan statistics")
+- title: Graph motifs and subgraphs
+- contents:
+  - has_concept("graph motifs")
+  - triad_census
+- title: Graph isomorphism
+- contents:
+  - has_concept("graph isomorphism")
+  - simplify_and_colorize
+  - has_concept("graph automorphism")
+  - permute
+- title: Graph matching
+- contents:
+  - has_concept("sgm")
+- title: Maximum flow and connectivity
+- contents:
+  - has_concept("flow")
+- title: Cliques
+- contents:
+  - has_concept("cliques")
+  - has_concept("glet")
+- title: Community detection
+- contents:
+  - has_concept("community")
+- title: Graph cycles
+- contents:
+  - has_concept("cycles")
+- title: Connected components
+- contents:
+  - has_concept("components")
+- title: Spectral embedding
+- contents:
+  - has_concept("embedding")
+  - embed_laplacian_matrix
+- title: Hierarchical random graphs
+- contents:
+  - has_concept("hierarchical random graph functions")
+# network analysis end, we keep these sections together ]]]
+# the following two are also "scientific functions" (not "programming functions"),
+# but they do not compute a result for a graph, like in the previous sections
+- title: Graphical degree sequences
+- contents:
+  - has_concept("graphical degree sequences")
+- title: Processes on graphs
+- contents:
+  - has_concept("processes")
+  - has_concept("random_walk")
+# -----
+- title: Demo
+- contents:
+  - has_concept("demo")
+- title: I/O read/write files
+- contents:
+  - has_concept("foreign")
+- title: Interactive functions
+- contents:
+  - has_concept("socnet")
+  - has_concept("tkplot")
+  - has_concept("console")
+- title: Versions
+- contents:
+  - has_concept("versions")
+- title: internal
+  contents:
+  - igraph-package
+  - has_concept("test")
+  - layout.reingold.tilford
+  - layout.fruchterman.reingold.grid
+  - layout.spring
+  - layout.svd
+  - "%>%"
+
+authors:
+  Gábor Csárdi:
+    href: "https://github.com/gaborcsardi"
+  Tamás Nepusz:
+    href: "https://github.com/ntamas"
+  Vincent Traag:
+    href: "https://www.traag.net/"
+  Szabolcs Horvát:
+    href: "http://szhorvat.net/"
+  Fabio Zanini:
+    href: "https://fabilab.org/pages/people.html"
+  Daniel Noom:
+    href: "https://github.com/GroteGnoom"
+  Kirill Müller:
+    href: "https://krlmlr.info/"
+
+home:
+  links:
+  - text: Discussion forum
+    href: https://igraph.discourse.group/

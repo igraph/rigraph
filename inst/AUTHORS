@@ -43,6 +43,7 @@ Tom Gregorovic		Multilevel community detection
 M.Grigoriadis		GLPK
 Oscar Gustafsson	GLPK
 Kurt Hornik		LSAP
+Szabolcs Horvat		igraph C core library
 Paul Hsieh		pstdint.h
 Ross Ihaka		Some random number generators (not used in R)
 Tommi Junttila		BLISS graph isomorphism library
@@ -71,6 +72,7 @@ Tamas Nepusz		Most of igraph
 Esmond Ng 		Sparse matrix column ordering
 Kevin O'Neill		Maximal independent vertex sets
 Takuji Nishimura	GSL random number generators (not used in R)
+Daniel Noom		igraph C core library
 Jim Orlin		GLPK
 Patric Ostergard	GLPK
 Elliot Paquette		psumtree data type
@@ -90,7 +92,7 @@ Christine Solnon	LAD graph isomorphism library
 Danny Sorensen		ARPACK
 James Theiler		GSL random number generators (not used in R)
 Samuel Thiriot		Interconnected islands graph generator
-Vincent A. Traag	spinglass community detection
+Vincent A. Traag	igraph C core library
 Magnus Torfason		R operators that work by name
 Theodore Y. Ts'o        libuuid
 Minh Van Nguyen		Microscopic update rules
@@ -104,6 +106,7 @@ Hadley Wickham          lazyeval
 Garrett A. Wollman	qsort
 B.N. Wylie 		DrL layout generator
 Chao Yang		ARPACK
+Fabio Zanini		igraph C core library
 
 Institutional copyright owners:
 -------------------------------

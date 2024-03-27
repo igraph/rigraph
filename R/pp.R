@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2014  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -21,5 +21,5 @@
 ###################################################################
 
 get.all.simple.paths.pp <- function(vect) {
-  .Call(C_R_igraph_get_all_simple_paths_pp, vect)
+  .Call(R_igraph_get_all_simple_paths_pp, vect)
 }

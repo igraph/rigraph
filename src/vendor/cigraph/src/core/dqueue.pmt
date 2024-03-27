@@ -1,0 +1,443 @@
+/* -*- mode: C -*-  */
+/*
+   IGraph library.
+   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   334 Harvard street, Cambridge, MA 02139 USA
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+   02110-1301 USA
+
+*/
+
+#include "igraph_memory.h"
+#include "igraph_error.h"
+
+#include <string.h>         /* memcpy & co. */
+#include <stdlib.h>
+
+/* Notes on the internal representation of dqueue:
+ *
+ * 'stor_begin' points at the beginning of the allocated storage.
+ * 'stor_end' points one past the allocated storage.
+ *
+ * 'begin' points at the first element of the queue contents.
+ * 'end' points one past the last element.
+ *
+ * The queue elements are stored "cyclically" within the allocated
+ * buffer, and arithmetic on 'begin' and 'end' is done modulo
+ * 'size = stor_end - stor_begin'. Thus the smallest valid value of
+ * 'begin' and 'end' is 'stor_begin'. Their largest valid value is
+ * 'stor_end - 1'.
+ *
+ * This means that 'begin == end' would be true both when the queue
+ * is full and when it is empty. To distinguish between these
+ * two situations, 'end' is set to NULL when the queue is empty.
+ */
+
+/**
+ * \section igraph_dqueue
+ * <para>
+ * This is the classic data type of the double ended queue. Most of
+ * the time it is used if a First-In-First-Out (FIFO) behavior is
+ * needed. See the operations below.
+ * </para>
+ *
+ * <para>
+ * \example examples/simple/dqueue.c
+ * </para>
+ */
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_init
+ * \brief Initialize a double ended queue (deque).
+ *
+ * The queue will be always empty.
+ *
+ * \param q Pointer to an uninitialized deque.
+ * \param capacity How many elements to allocate memory for.
+ * \return Error code.
+ *
+ * Time complexity: O(\p capacity).
+ */
+
+igraph_error_t FUNCTION(igraph_dqueue, init)(TYPE(igraph_dqueue)* q, igraph_integer_t capacity) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(capacity >= 0);
+
+    if (capacity == 0) capacity = 1;
+
+    q->stor_begin = IGRAPH_CALLOC(capacity, BASE);
+    IGRAPH_CHECK_OOM(q->stor_begin, "Cannot initialize dqueue.");
+    q->stor_end = q->stor_begin + capacity;
+    q->begin = q->stor_begin;
+    q->end = NULL;
+
+    return IGRAPH_SUCCESS;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_destroy
+ * \brief Destroy a double ended queue.
+ *
+ * \param q The queue to destroy.
+ *
+ * Time complexity: O(1).
+ */
+
+void FUNCTION(igraph_dqueue, destroy)(TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_FREE(q->stor_begin); /* sets to NULL */
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_empty
+ * \brief Decide whether the queue is empty.
+ *
+ * \param q The queue.
+ * \return Boolean, true if \p q contains at least one element,
+ *   false otherwise.
+ *
+ * Time complexity: O(1).
+ */
+
+igraph_bool_t FUNCTION(igraph_dqueue, empty)(const TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    return q->end == NULL;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_clear
+ * \brief Remove all elements from the queue.
+ *
+ * \param q The queue.
+ *
+ * Time complexity: O(1).
+ */
+
+void FUNCTION(igraph_dqueue, clear)(TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    q->begin = q->stor_begin;
+    q->end = NULL;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_full
+ * \brief Check whether the queue is full.
+ *
+ * If a queue is full the next \ref igraph_dqueue_push() operation will allocate
+ * more memory.
+ *
+ * \param q The queue.
+ * \return \c true if \p q is full, \c false otherwise.
+ *
+ * Time complecity: O(1).
+ */
+
+igraph_bool_t FUNCTION(igraph_dqueue, full)(TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    return q->begin == q->end;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_size
+ * \brief Number of elements in the queue.
+ *
+ * \param q The queue.
+ * \return Integer, the number of elements currently in the queue.
+ *
+ * Time complexity: O(1).
+ */
+
+igraph_integer_t FUNCTION(igraph_dqueue, size)(const TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    if (q->end == NULL) {
+        return 0;
+    } else if (q->begin < q->end) {
+        return q->end - q->begin;
+    } else {
+        return q->stor_end - q->begin + q->end - q->stor_begin;
+    }
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_head
+ * \brief Head of the queue.
+ *
+ * The queue must contain at least one element.
+ *
+ * \param q The queue.
+ * \return The first element in the queue.
+ *
+ * Time complexity: O(1).
+ */
+
+BASE FUNCTION(igraph_dqueue, head)(const TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    IGRAPH_ASSERT(q->stor_end != NULL); /* queue is not empty */
+    return *(q->begin);
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_back
+ * \brief Tail of the queue.
+ *
+ * The queue must contain at least one element.
+ *
+ * \param q The queue.
+ * \return The last element in the queue.
+ *
+ * Time complexity: O(1).
+ */
+
+BASE FUNCTION(igraph_dqueue, back)(const TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    IGRAPH_ASSERT(q->stor_end != NULL); /* queue is not empty */
+    if (q->end == q->stor_begin) {
+        return *(q->stor_end - 1);
+    }
+    return *(q->end - 1);
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_pop
+ * \brief Remove the head.
+ *
+ * Removes and returns the first element in the queue. The queue must
+ * be non-empty.
+ *
+ * \param q The input queue.
+ * \return The first element in the queue.
+ *
+ * Time complexity: O(1).
+ */
+
+BASE FUNCTION(igraph_dqueue, pop)(TYPE(igraph_dqueue)* q) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    IGRAPH_ASSERT(q->stor_end != NULL); /* queue is not empty */
+    BASE tmp = *(q->begin);
+    (q->begin)++;
+    if (q->begin == q->stor_end) {
+        q->begin = q->stor_begin;
+    }
+    if (q->begin == q->end) {
+        q->end = NULL;
+    }
+
+    return tmp;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_pop_back
+ * \brief Removes the tail.
+ *
+ * Removes and returns the last element in the queue. The queue must
+ * be non-empty.
+ *
+ * \param q The queue.
+ * \return The last element in the queue.
+ *
+ * Time complexity: O(1).
+ */
+
+BASE FUNCTION(igraph_dqueue, pop_back)(TYPE(igraph_dqueue)* q) {
+    BASE tmp;
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    IGRAPH_ASSERT(q->stor_end != NULL); /* queue is not empty */
+    if (q->end != q->stor_begin) {
+        tmp = *((q->end) - 1);
+        q->end = (q->end) - 1;
+    } else {
+        tmp = *((q->stor_end) - 1);
+        q->end = (q->stor_end) - 1;
+    }
+    if (q->begin == q->end) {
+        q->end = NULL;
+    }
+
+    return tmp;
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_push
+ * \brief Appends an element.
+ *
+ * Append an element to the end of the queue.
+ *
+ * \param q The queue.
+ * \param elem The element to append.
+ * \return Error code.
+ *
+ * Time complexity: O(1) if no memory allocation is needed, O(n), the
+ * number of elements in the queue otherwise. But note that by
+ * allocating always twice as much memory as the current size of the
+ * queue we ensure that n push operations can always be done in at
+ * most O(n) time. (Assuming memory allocation is at most linear.)
+ */
+
+igraph_error_t FUNCTION(igraph_dqueue, push)(TYPE(igraph_dqueue)* q, BASE elem) {
+    IGRAPH_ASSERT(q != NULL);
+    IGRAPH_ASSERT(q->stor_begin != NULL);
+    if (q->begin != q->end) {
+        /* not full */
+        if (q->end == NULL) {
+            q->end = q->begin;
+        }
+        *(q->end) = elem;
+        (q->end)++;
+        if (q->end == q->stor_end) {
+            q->end = q->stor_begin;
+        }
+    } else {
+        /* full, allocate more storage */
+
+        BASE *bigger = NULL, *old = q->stor_begin;
+        igraph_integer_t old_size = q->stor_end - q->stor_begin;
+        igraph_integer_t new_capacity = old_size < IGRAPH_INTEGER_MAX/2 ? old_size * 2 : IGRAPH_INTEGER_MAX;
+
+        if (old_size == IGRAPH_INTEGER_MAX) {
+            IGRAPH_ERROR("Cannot push to dqueue, already at maximum size.", IGRAPH_EOVERFLOW);
+        }
+        if (new_capacity == 0) {
+            new_capacity = 1;
+        }
+
+        bigger = IGRAPH_CALLOC(new_capacity, BASE);
+        IGRAPH_CHECK_OOM(bigger, "Cannot push to dqueue.");
+
+        if (q->stor_end - q->begin > 0) {
+            memcpy(bigger, q->begin,
+                   (size_t)(q->stor_end - q->begin) * sizeof(BASE));
+        }
+        if (q->end - q->stor_begin > 0) {
+            memcpy(bigger + (q->stor_end - q->begin), q->stor_begin,
+                   (size_t)(q->end - q->stor_begin) * sizeof(BASE));
+        }
+
+        q->end        = bigger + old_size;
+        q->stor_end   = bigger + new_capacity;
+        q->stor_begin = bigger;
+        q->begin      = bigger;
+
+        *(q->end) = elem;
+        (q->end)++;
+        if (q->end == q->stor_end) {
+            q->end = q->stor_begin;
+        }
+
+        IGRAPH_FREE(old);
+    }
+
+    return IGRAPH_SUCCESS;
+}
+
+#if defined (OUT_FORMAT)
+
+#ifndef USING_R
+igraph_error_t FUNCTION(igraph_dqueue, print)(const TYPE(igraph_dqueue)* q) {
+    return FUNCTION(igraph_dqueue, fprint)(q, stdout);
+}
+#endif
+
+igraph_error_t FUNCTION(igraph_dqueue, fprint)(const TYPE(igraph_dqueue)* q, FILE *file) {
+    if (q->end != NULL) {
+        /* There is one element at least */
+        BASE *p = q->begin;
+        fprintf(file, OUT_FORMAT, *p);
+        p++;
+        if (q->end > q->begin) {
+            /* Q is in one piece */
+            while (p != q->end) {
+                fprintf(file, " " OUT_FORMAT, *p);
+                p++;
+            }
+        } else {
+            /* Q is in two pieces */
+            while (p != q->stor_end) {
+                fprintf(file, " " OUT_FORMAT, *p);
+                p++;
+            }
+            p = q->stor_begin;
+            while (p != q->end) {
+                fprintf(file, " " OUT_FORMAT, *p);
+                p++;
+            }
+        }
+    }
+
+    fprintf(file, "\n");
+
+    return IGRAPH_SUCCESS;
+}
+
+#endif
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_get
+ * \brief Access an element in a queue.
+ *
+ * \param q The queue.
+ * \param idx The index of the element within the queue.
+ * \return The desired element.
+ *
+ * Time complexity: O(1).
+ */
+
+BASE FUNCTION(igraph_dqueue, get)(const TYPE(igraph_dqueue) *q, igraph_integer_t idx) {
+    IGRAPH_ASSERT(idx >= 0);
+    IGRAPH_ASSERT(idx < FUNCTION(igraph_dqueue, size)(q));
+    if ((q->begin + idx < q->end) ||
+        (q->begin >= q->end && q->begin + idx < q->stor_end)) {
+        return q->begin[idx];
+    } else if (q->begin >= q->end && q->stor_begin + idx < q->end) {
+        idx = idx - (q->stor_end - q->begin);
+        return q->stor_begin[idx];
+    } else {
+        /* The assertions at the top make it impossible to reach here,
+           but omitting this branch would cause compiler warnings. */
+        IGRAPH_FATAL("Out of bounds access in dqueue.");
+    }
+}
+
+/**
+ * \ingroup dqueue
+ * \function igraph_dqueue_e
+ * \brief Access an element in a queue (deprecated alias).
+ *
+ * \deprecated-by igraph_dqueue_get 0.10.2
+ */
+
+BASE FUNCTION(igraph_dqueue, e)(const TYPE(igraph_dqueue) *q, igraph_integer_t idx) {
+    return FUNCTION(igraph_dqueue, get)(q, idx);
+}
