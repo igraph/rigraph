@@ -809,10 +809,7 @@ vertex_attr_names <- function(graph) {
 
   res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (is.null(res)) {
-    res <- character()
-  }
-  res
+  res %||% character()
 }
 
 #' List names of edge attributes
@@ -831,10 +828,7 @@ vertex_attr_names <- function(graph) {
 edge_attr_names <- function(graph) {
   ensure_igraph(graph)
   res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-  if (is.null(res)) {
-    res <- character()
-  }
-  res
+  res %||% character()
 }
 
 #' Delete a graph attribute
