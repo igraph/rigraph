@@ -171,6 +171,11 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Check build tools
+        run: |
+          pkgbuild::check_build_tools(debug = TRUE)
+        shell: Rscript {0}
+
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
         with:
