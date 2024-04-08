@@ -6,5 +6,5 @@ test_that("unfold_tree works", {
     1, 2, 1, 3, 2, 8, 2, 5, 3, 6,
     3, 9, 2, 7, 1, 4
   ))))
-  expect_that(g2$vertex_index, equals(c(1, 2, 3, 4, 5, 6, 7, 4, 7)))
+  expect_equal(g2$vertex_index, c(1, 2, 3, 4, 5, 6, 7, 4, 7))
 })
