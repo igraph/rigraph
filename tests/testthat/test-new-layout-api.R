@@ -1,4 +1,3 @@
-
 test_that("two step layouting works", {
   g <- make_ring(10)
   l1 <- layout_as_star(g)
