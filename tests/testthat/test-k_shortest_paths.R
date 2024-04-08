@@ -10,7 +10,7 @@ test_that("k_shortest_paths works", {
 })
 
 test_that("k_shortest_paths works with weights", {
-  g <- make_graph(c(1,2, 1,3, 3,2))
+  g <- make_graph(c(1, 2, 1, 3, 3, 2))
   E(g)$weight <- c(5, 2, 1)
   res <- k_shortest_paths(g, 1, 2, k = 3)
   expect_length(res$vpaths, 2)
