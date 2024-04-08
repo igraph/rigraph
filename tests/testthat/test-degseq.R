@@ -1,26 +1,25 @@
 test_that("realize_degseq works", {
-
   g <- largest_component(sample_gnp(1000, 2 / 1000))
 
   nG <- realize_degseq(degree(g))
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
   expect_true(is_connected(nG))
   expect_true(is_simple(nG))
 
   nG <- realize_degseq(degree(g), method = "smallest")
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
   expect_true(is_simple(nG))
 
   nG <- realize_degseq(degree(g), method = "index", allowed.edge.types = "all")
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
 
   #####
 
   g2 <- sample_gnp(1000, 2 / 1000, directed = TRUE)
 
   nG <- realize_degseq(degree(g2, mode = "out"), degree(g2, mode = "in"))
-  expect_that(degree(nG, mode = "out"), equals(degree(g2, mode = "out")))
-  expect_that(degree(nG, mode = "in"), equals(degree(g2, mode = "in")))
+  expect_equal(degree(nG, mode = "out"), degree(g2, mode = "out"))
+  expect_equal(degree(nG, mode = "in"), degree(g2, mode = "in"))
   expect_true(is_simple(nG))
 })
 
@@ -29,8 +28,8 @@ test_that("realize_degseq supports the make_(...) syntax", {
   g1 <- make_(degseq(degs, deterministic = T))
   g2 <- make_(degseq(degs, deterministic = T))
 
-  expect_that(degree(g1), equals(degs))
-  expect_that(degree(g2), equals(degs))
+  expect_equal(degree(g1), degs)
+  expect_equal(degree(g2), degs)
 
   expect_true(identical_graphs(g1, g2))
 })
@@ -44,10 +43,10 @@ test_that("sample_degseq works", {
   g <- gc(sample_gnp(1000, 2 / 1000))
 
   nG <- sample_degseq(degree(g), method = "simple")
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
 
   nG <- sample_degseq(degree(g), method = "vl")
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
   expect_true(is_connected(nG))
   expect_true(is_simple(nG))
 
@@ -56,7 +55,7 @@ test_that("sample_degseq works", {
   g <- sample_gnp(1000, 1 / 1000)
 
   nG <- sample_degseq(degree(g), method = "simple")
-  expect_that(degree(nG), equals(degree(g)))
+  expect_equal(degree(nG), degree(g))
 
   g2 <- sample_gnp(1000, 2 / 1000, directed = TRUE)
 
@@ -64,22 +63,22 @@ test_that("sample_degseq works", {
     degree(g, mode = "in"),
     method = "simple"
   )
-  expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
-  expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
+  expect_equal(degree(nG, mode = "out"), degree(g, mode = "out"))
+  expect_equal(degree(nG, mode = "in"), degree(g, mode = "in"))
 
   nG3 <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
     method = "simple.no.multiple"
   )
-  expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
-  expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
+  expect_equal(degree(nG, mode = "out"), degree(g, mode = "out"))
+  expect_equal(degree(nG, mode = "in"), degree(g, mode = "in"))
 
   nG4 <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
     method = "simple.no.multiple.uniform"
   )
-  expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
-  expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
+  expect_equal(degree(nG, mode = "out"), degree(g, mode = "out"))
+  expect_equal(degree(nG, mode = "in"), degree(g, mode = "in"))
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {
@@ -87,8 +86,8 @@ test_that("sample_degseq supports the sample_(...) syntax", {
   g1 <- sample_(degseq(degs))
   g2 <- sample_(degseq(degs))
 
-  expect_that(degree(g1), equals(degs))
-  expect_that(degree(g2), equals(degs))
+  expect_equal(degree(g1), degs)
+  expect_equal(degree(g2), degs)
 
   expect_false(identical_graphs(g1, g2))
 })
