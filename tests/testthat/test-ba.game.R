@@ -2,18 +2,18 @@ test_that("sample_pa() works", {
   withr::local_seed(20240209)
 
   g <- sample_pa(100, m = 2)
-  expect_that(ecount(g), equals(197))
-  expect_that(vcount(g), equals(100))
+  expect_equal(ecount(g), 197)
+  expect_equal(vcount(g), 100)
   expect_true(is_simple(g))
 
   g2 <- sample_pa(100, m = 2, algorithm = "psumtree-multiple")
-  expect_that(ecount(g2), equals(198))
-  expect_that(vcount(g2), equals(100))
+  expect_equal(ecount(g2), 198)
+  expect_equal(vcount(g2), 100)
   expect_false(is_simple(g2))
 
   g3 <- sample_pa(100, m = 2, algorithm = "bag")
-  expect_that(ecount(g3), equals(198))
-  expect_that(vcount(g3), equals(100))
+  expect_equal(ecount(g3), 198)
+  expect_equal(vcount(g3), 100)
   expect_false(is_simple(g3))
 
   g4 <- sample_pa(3, out.seq = 0:2, directed = FALSE)
@@ -27,8 +27,8 @@ test_that("sample_pa can start from a graph", {
   withr::local_seed(20231029)
 
   g4 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_empty_graph(5))
-  expect_that(ecount(g4), equals(5))
-  expect_that(vcount(g4), equals(10))
+  expect_equal(ecount(g4), 5)
+  expect_equal(vcount(g4), 10)
   #  0    1    2    3    4
   # 24  809 3904 4240 1023
   is_degree_zero <- (degree(g4) == 0)
@@ -49,13 +49,13 @@ test_that("sample_pa can start from a graph", {
     m = 3, algorithm = "psumtree-multiple",
     start.graph = make_empty_graph(5)
   )
-  expect_that(degree(g7, mode = "out"), equals(c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3)))
+  expect_equal(degree(g7, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
   g8 <- sample_pa(10,
     m = 3, algorithm = "psumtree-multiple",
     start.graph = make_star(5)
   )
-  expect_that(degree(g8, mode = "out"), equals(c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3)))
+  expect_equal(degree(g8, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_true(graph.isomorphic(induced_subgraph(g8, 1:5), make_star(5)))
 
   g9 <- sample_pa(10,
@@ -65,10 +65,10 @@ test_that("sample_pa can start from a graph", {
   expect_true(graph.isomorphic(g9, make_star(10)))
 
   g10 <- sample_pa(10, m = 3, start.graph = make_empty_graph(5))
-  expect_that(degree(g10, mode = "out"), equals(c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3)))
+  expect_equal(degree(g10, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
   g11 <- sample_pa(10, m = 3, start.graph = make_star(5))
-  expect_that(degree(g11, mode = "out"), equals(c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3)))
+  expect_equal(degree(g11, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_true(graph.isomorphic(induced_subgraph(g11, 1:5), make_star(5)))
 
   g12 <- sample_pa(10, m = 3, start.graph = make_star(10))
