@@ -13,9 +13,9 @@ test_that("add_edges adds attributes", {
   g3 <- add_edges(g, (edges <- c(1, 5, 2, 6, 3, 10, 4, 5)),
     attr = list(weight = (weights <- c(1, 2, 1, -1)))
   )
-  expect_that(ecount(g3), equals(length(edges) / 2))
-  expect_that(get.edge.ids(g3, edges), equals(seq_len(length(edges) / 2)))
-  expect_that(E(g3)$weight, equals(weights))
+  expect_equal(ecount(g3), length(edges) / 2)
+  expect_equal(get.edge.ids(g3, edges), seq_len(length(edges) / 2))
+  expect_equal(E(g3)$weight, weights)
 })
 
 test_that("add_edges unknown attributes to NA", {
@@ -33,7 +33,7 @@ test_that("add_edges appends attributes properly", {
   g5 <- add_edges(g3, (edges2 <- c(10, 9, 10, 10, 1, 1)),
     attr = list(weight = (weights2 <- c(100, 100, 100)))
   )
-  expect_that(E(g5)$weight, equals(c(weights1, weights2)))
+  expect_equal(E(g5)$weight, c(weights1, weights2))
 })
 
 test_that("add_edges signals error for zero vertex ids", {
