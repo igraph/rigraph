@@ -4,8 +4,8 @@ test_that("assigning and querying attributes work", {
   E(ring)$weight <- seq_len(ecount(ring))
 
   ## Query attributes
-  expect_that(V(ring)$name, equals(LETTERS[seq_len(vcount(ring))]))
-  expect_that(E(ring)$weight, equals(seq_len(ecount(ring))))
+  expect_equal(V(ring)$name, LETTERS[seq_len(vcount(ring))])
+  expect_equal(E(ring)$weight, seq_len(ecount(ring)))
 })
 
 test_that("brackering works", {
@@ -24,15 +24,15 @@ test_that("brackering works", {
   )
   graph2 <- set_graph_attr(g, name = "name", "foobar")
 
-  expect_that(
+  expect_equal(
     vertex_attr(g, name = "weight"),
-    equals(1:4)
+    1:4
   )
-  expect_that(
+  expect_equal(
     edge_attr(g, name = "weight"),
-    equals(1:3)
+    1:3
   )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 test_that("brackering works with a function", {
@@ -54,15 +54,15 @@ test_that("brackering works with a function", {
   }
 
   g2 <- run.test(g)
-  expect_that(
+  expect_equal(
     vertex_attr(g, name = "weight"),
-    equals(1:4)
+    1:4
   )
-  expect_that(
+  expect_equal(
     edge_attr(g, name = "weight"),
-    equals(1:3)
+    1:3
   )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 test_that("brackering works with shortcuts", {
@@ -78,15 +78,15 @@ test_that("brackering works with shortcuts", {
   }
 
   g2 <- run.test(g)
-  expect_that(
+  expect_equal(
     vertex_attr(g, name = "weight"),
-    equals(1:4)
+    1:4
   )
-  expect_that(
+  expect_equal(
     edge_attr(g, name = "weight"),
-    equals(1:3)
+    1:3
   )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 ## TODO: subsetting
@@ -357,5 +357,4 @@ test_that("assert_named_list() works", {
 
   dups <- rlang::set_names(unnamed_list, rep("bla", 10))
   expect_error(assert_named_list(dups), "named list")
-
 })
