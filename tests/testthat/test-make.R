@@ -48,8 +48,8 @@ test_that("error messages are proper", {
 })
 
 test_that("we pass arguments unevaluated", {
-  g0 <- graph_from_literal(A -+ B:C)
-  g1 <- graph_(from_literal(A -+ B:C))
+  g0 <- graph_from_literal(A - +B:C)
+  g1 <- graph_(from_literal(A - +B:C))
   expect_true(identical_graphs(g0, g1))
 })
 
@@ -73,18 +73,18 @@ test_that("graph_from_literal() and undirected explosion", {
 test_that("graph_from_literal() and simple directed graphs", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A -+ B)
-    graph_from_literal(A -+ B -+ C)
-    graph_from_literal(A -+ B -+ C -+ A)
-    graph_from_literal(A -+ B +- C -+ A)
+    graph_from_literal(A - +B)
+    graph_from_literal(A - +B - +C)
+    graph_from_literal(A - +B - +C - +A)
+    graph_from_literal(A - +B + -C - +A)
   })
 })
 
 test_that("graph_from_literal() and directed explosion", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A:B:C -+ D:E, B:D +- C:E)
-    graph_from_literal(A:B:C -+ D:E +- F:G:H -+ I +- J:K:L:M)
+    graph_from_literal(A:B:C - +D:E, B:D + -C:E)
+    graph_from_literal(A:B:C - +D:E + -F:G:H - +I + -J:K:L:M)
   })
 })
 
