@@ -1,5 +1,4 @@
 test_that("edge_connectivity works", {
-
   g <- largest_component(sample_gnp(30, 8 / 30))
   ec <- edge_connectivity(g)
   ecST <- Inf
@@ -12,11 +11,9 @@ test_that("edge_connectivity works", {
     }
   }
   expect_equal(ec, ecST)
-
 })
 
 test_that("edge_connectivity works -- names", {
-
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
