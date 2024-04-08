@@ -20,7 +20,7 @@ test_that("edge_betweenness works", {
     (sum(ebet[ae]) - vcount(kite) + 1) / 2
   })
 
-  expect_that(unname(bet), equals(bet2))
+  expect_equal(unname(bet), bet2)
 
   #### Weighted
 
@@ -33,5 +33,5 @@ test_that("edge_betweenness works", {
     (sum(ebet[ae]) - vcount(kite) + 1) / 2
   })
 
-  expect_that(unname(bet), equals(bet2))
+  expect_equal(unname(bet), bet2)
 })
