@@ -95,7 +95,9 @@ igraph_test <- function() {
 #' igraph_version()
 #'
 igraph_version <- function() {
-  unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
+  # Better than packageVersion("igraph") because it uses the loaded package
+  # and is independent of .libPaths()
+  getNamespaceInfo("igraph", "spec")[["version"]]
 }
 
 checkpkg <- function(package_file, args = character()) {
