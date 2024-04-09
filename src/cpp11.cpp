@@ -23,6 +23,7 @@ extern "C" SEXP _igraph_getsphere(SEXP spos, SEXP sradius, SEXP scolor, SEXP lig
 extern "C" {
 /* .Call calls */
 extern SEXP R_igraph_add_edges(void *, void *);
+extern SEXP R_igraph_add_edges_manual(void *, void *);
 extern SEXP R_igraph_add_env(void *);
 extern SEXP R_igraph_add_myid_to_env(void *);
 extern SEXP R_igraph_add_version_to_env(void *);
@@ -481,6 +482,7 @@ extern SEXP promise_expr_(void *);
 
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
+    {"R_igraph_add_edges_manual",                           (DL_FUNC) &R_igraph_add_edges_manual,                            2},
     {"R_igraph_add_env",                                    (DL_FUNC) &R_igraph_add_env,                                     1},
     {"R_igraph_add_myid_to_env",                            (DL_FUNC) &R_igraph_add_myid_to_env,                             1},
     {"R_igraph_add_version_to_env",                         (DL_FUNC) &R_igraph_add_version_to_env,                          1},

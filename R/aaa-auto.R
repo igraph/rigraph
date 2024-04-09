@@ -13,6 +13,17 @@ empty_impl <- function(n=0, directed=TRUE) {
   res
 }
 
+add_edges_impl <- function(graph, edges) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_add_edges, graph, edges)
+
+  res
+}
+
 copy_impl <- function(from) {
   # Argument checks
   ensure_igraph(from)
