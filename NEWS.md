@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9009
+
+## Continuous integration
+
+- Install R (#1335).
+
+## Refactoring
+
+- Move variables closer to their usage, add explaining variables (#1336).
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+- Explaining variables (#1326).
+
+## Breaking changes
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+
 # igraph 2.0.3.9008
 
 ## Refactoring
