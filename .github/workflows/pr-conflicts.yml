@@ -9,9 +9,10 @@ on:
 
 jobs:
   build:
-    name: potential-conflicts-checker
+    name: Warn potential conflicts
     runs-on: ubuntu-latest
     steps:
-      - uses: cynkra/potential-conflicts-checker-action@0.1.0
+      - uses: actions/checkout@v3
+      - uses: cynkra/conflibot@v1
         with:
-          ghToken: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
