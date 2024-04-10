@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9010
+
+## Features
+
+- Generate all bindings (#1044).
+
+## Chore
+
+- Use and explain `getNamespaceInfo()` (#1339).
+
+## Continuous integration
+
+- Run examples with comment `\dontrun{}` (#1310).
+
+## Refactoring
+
+- Names in `update-cigraph.sh` script (#1287).
+
+
 # igraph 2.0.3.9009
 
 ## Continuous integration
