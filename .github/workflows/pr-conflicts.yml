@@ -1,0 +1,17 @@
+name: Check potential conflicts
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pr-conflicts.yml"
+
+jobs:
+  build:
+    name: potential-conflicts-checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cynkra/potential-conflicts-checker-action@0.1.0
+        with:
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
