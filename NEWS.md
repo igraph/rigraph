@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9011
+
+## Continuous integration
+
+- Use other conflict checker action.
+
+- Add conflicts checker for PRs.
+
+
 # igraph 2.0.3.9010
 
 ## Features
