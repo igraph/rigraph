@@ -3516,7 +3516,7 @@ graph_count_impl <- function(n, directed=FALSE) {
   res
 }
 
-adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=strength(graph, weights=weights)/(vcount(graph)-1), options=RPACK_DEFAULTS) {
+adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=strength(graph, weights=weights)/(vcount(graph)-1), options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   no <- as.numeric(no)

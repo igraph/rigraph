@@ -72,12 +72,15 @@ SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   R_SEXP_to_vector_int_copy(edges, &c_edges);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_add_edges(&c_graph, &c_edges, 0));
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
