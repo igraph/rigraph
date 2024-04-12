@@ -1756,7 +1756,7 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
     res$name <- "Bipartite Gnp random graph"
     res$p <- p
   } else if (type == "gnm") {
-    res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
+    res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode, multiple = FALSE)
     res <- set_vertex_attr(res$graph, "type", value = res$types)
     res$name <- "Bipartite Gnm random graph"
     res$m <- m
