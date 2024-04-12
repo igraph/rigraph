@@ -3787,7 +3787,7 @@ SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
   return newgraph;
 }
 
-SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
+SEXP R_igraph_add_edges_manual(SEXP graph, SEXP edges) {
 
   igraph_vector_int_t v;                    /* do NOT destroy! */
   igraph_t g;

@@ -342,3 +342,20 @@ test_that("edge attributes are destroyed when the graph is destroyed", {
   gc()
   expect_true(finalized)
 })
+
+test_that("assert_named_list() works", {
+  not_list <- 1:10
+  expect_error(assert_named_list(not_list), "named list")
+
+  expect_silent(assert_named_list(list()))
+
+  unnamed_list <- as.list(1:10)
+  expect_error(assert_named_list(unnamed_list), "named list")
+
+  empty_name <- rlang::set_names(unnamed_list, c(as.character(1:9), ""))
+  expect_error(assert_named_list(empty_name), "named list")
+
+  dups <- rlang::set_names(unnamed_list, rep("bla", 10))
+  expect_error(assert_named_list(dups), "named list")
+
+})

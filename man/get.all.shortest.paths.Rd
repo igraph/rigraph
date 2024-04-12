@@ -27,14 +27,15 @@ is not required for \code{shortest_paths()}.}
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
 then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the corresponding
-undirected graph will be used, i.e. not directed paths are searched. This
+it will be considered. If \code{all}, the default, then the graph is treated
+as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
 
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
 attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute).}
+the graph has a \code{weight} attribute). In a weighted graph, the length
+of a path is the sum of the weights of its constituent edges.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

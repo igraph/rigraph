@@ -1,5 +1,109 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9011
+
+## Continuous integration
+
+- Use other conflict checker action.
+
+- Add conflicts checker for PRs.
+
+
+# igraph 2.0.3.9010
+
+## Features
+
+- Generate all bindings (#1044).
+
+## Chore
+
+- Use and explain `getNamespaceInfo()` (#1339).
+
+## Continuous integration
+
+- Run examples with comment `\dontrun{}` (#1310).
+
+## Refactoring
+
+- Names in `update-cigraph.sh` script (#1287).
+
+
+# igraph 2.0.3.9009
+
+## Continuous integration
+
+- Install R (#1335).
+
+## Refactoring
+
+- Move variables closer to their usage, add explaining variables (#1336).
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+- Explaining variables (#1326).
+
+## Breaking changes
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+
+# igraph 2.0.3.9008
+
+## Refactoring
+
+- Less if else in vertex_attr() (#1324).
+
+- Add assert_named_list() helper to assert the value is a named list with no duplicate names (#1322).
+
+## Testing
+
+- Use largest_component() and expect_equal() in test files (#1323).
+
+## Uncategorized
+
+- Sample_forestfire() tests and example 🔥 (#1318).
+
+
+# igraph 2.0.3.9007
+
+## Features
+
+- Weight support for `eccentricity()` and `radius()` (@krlmlr, #1211).
+
+## Refactoring
+
+- Early return() in graph_attr() (#1320).
+
+
+# igraph 2.0.3.9006
+
+## Documentation
+
+- Fix `sample_degseq()` example (#1297).
+
+- Fix `graph_from_adjacency_matrix()` examples to avoid warnings (#1302).
+
+- Replace `\dontrun{}` with `@examplesIf` (#1307).
+
+## Testing
+
+- Add skip condition for `rglplot` test (#1306).
+
+
+# igraph 2.0.3.9005
+
+## Documentation
+
+- Update `igraph.Rmd`, fix manual page typo (#1313).
+
+
+# igraph 2.0.3.9004
+
+## Continuous integration
+
+- Remove running examples in sanitizer (#1314).
+
+
 # igraph 2.0.3.9003
 
 ## Continuous integration

@@ -4,18 +4,32 @@
 \alias{eccentricity}
 \title{Eccentricity of the vertices in a graph}
 \usage{
-eccentricity(graph, vids = V(graph), mode = c("all", "out", "in", "total"))
+eccentricity(
+  graph,
+  vids = V(graph),
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
 \item{vids}{The vertices for which the eccentricity is calculated.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{weights}{Possibly a numeric vector giving edge weights. If this is
+\code{NULL} and the graph has a \code{weight} edge attribute, then the
+attribute is used. If this is \code{NA} then no weights are used (even if
+the graph has a \code{weight} attribute). In a weighted graph, the length
+of a path is the sum of the weights of its constituent edges.}
+
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
 then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the corresponding
-undirected graph will be used, edge directions will be ignored. This
+it will be considered. If \code{all}, the default, then the graph is treated
+as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
 }
 \value{
@@ -50,6 +64,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
+\code{\link{graph_center}()},
 \code{\link{radius}()}
 }
 \concept{paths}

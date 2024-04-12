@@ -802,35 +802,112 @@ random.graph.game <- erdos.renyi.game
 #' @examples
 #'
 #' ## The simple generator
-#' g <- sample_degseq(rep(2, 100))
-#' degree(g)
-#' is_simple(g) # sometimes TRUE, but can be FALSE
-#' g2 <- sample_degseq(1:10, 10:1)
-#' degree(g2, mode = "out")
-#' degree(g2, mode = "in")
+#' undirected_graph <- sample_degseq(rep(2, 100))
+#' degree(undirected_graph)
+#' is_simple(undirected_graph) # sometimes TRUE, but can be FALSE
+#'
+#'
+#' directed_graph <- sample_degseq(1:10, 10:1)
+#' degree(directed_graph, mode = "out")
+#' degree(directed_graph, mode = "in")
 #'
 #' ## The vl generator
-#' g3 <- sample_degseq(rep(2, 100), method = "vl")
-#' degree(g3)
-#' is_simple(g3) # always TRUE
+#' vl_graph <- sample_degseq(rep(2, 100), method = "vl")
+#' degree(vl_graph)
+#' is_simple(vl_graph) # always TRUE
 #'
 #' ## Exponential degree distribution
-#' ## Note, that we correct the degree sequence if its sum is odd
-#' degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
-#' if (sum(degs) %% 2 != 0) {
-#'   degs[1] <- degs[1] + 1
+#' ## We fix the seed as there's no guarantee
+#' ##  that randomly picked integers will form a graphical degree sequence
+#' ## (i.e. that there's a graph with these degrees)
+#' ## withr::with_seed(42, {
+#' ## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+#' ## })
+#' exponential_degrees <- c(
+#'   5L, 6L, 1L, 4L, 3L, 2L, 3L, 1L, 3L, 3L, 2L, 3L, 6L, 1L, 2L,
+#'   6L, 8L, 1L, 2L, 2L, 5L, 1L, 10L, 6L, 1L, 2L, 1L, 5L, 2L, 4L,
+#'   3L, 4L, 1L, 3L, 1L, 4L, 1L, 1L, 5L, 2L, 1L, 2L, 1L, 8L, 2L, 7L,
+#'   5L, 3L, 8L, 2L, 1L, 1L, 2L, 4L, 1L, 3L, 3L, 1L, 1L, 2L, 3L, 9L,
+#'   3L, 2L, 4L, 1L, 1L, 4L, 3L, 1L, 1L, 1L, 1L, 2L, 1L, 3L, 1L, 1L,
+#'   2L, 1L, 2L, 1L, 1L, 3L, 3L, 2L, 1L, 1L, 1L, 1L, 3L, 1L, 1L, 6L,
+#'   6L, 3L, 1L, 2L, 3L, 2L
+#' )
+#' ## Note, that we'd have to correct the degree sequence if its sum is odd
+#' is_exponential_degrees_sum_odd <- (sum(exponential_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' g4 <- sample_degseq(degs, method = "vl")
-#' all(degree(g4) == degs)
+#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' all(degree(exp_vl_graph) == exponential_degrees)
 #'
-#' ## Power-law degree distribution
-#' ## Note, that we correct the degree sequence if its sum is odd
-#' degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
-#' if (sum(degs) %% 2 != 0) {
-#'   degs[1] <- degs[1] + 1
+#' ## An example that does not work
+#' @examplesIf rlang::is_interactive()
+#' ## withr::with_seed(11, {
+#' ## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+#' ## })
+#' exponential_degrees <- c(
+#'   1L, 1L, 2L, 1L, 1L, 7L, 1L, 1L, 5L, 1L, 1L, 2L, 5L, 4L, 3L,
+#'   2L, 2L, 1L, 1L, 2L, 1L, 3L, 1L, 1L, 1L, 2L, 2L, 1L, 1L, 2L, 2L,
+#'   1L, 2L, 1L, 4L, 3L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 3L, 1L, 4L, 3L,
+#'   1L, 2L, 4L, 2L, 2L, 2L, 1L, 1L, 2L, 2L, 4L, 1L, 2L, 1L, 3L, 1L,
+#'   2L, 3L, 1L, 1L, 2L, 1L, 2L, 3L, 2L, 2L, 1L, 6L, 2L, 1L, 1L, 1L,
+#'   1L, 1L, 2L, 2L, 1L, 4L, 2L, 1L, 3L, 4L, 1L, 1L, 3L, 1L, 2L, 4L,
+#'   1L, 3L, 1L, 2L, 1L
+#' )
+#' ## Note, that we'd have to correct the degree sequence if its sum is odd
+#' is_exponential_degrees_sum_odd <- (sum(exponential_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' g5 <- sample_degseq(degs, method = "vl")
-#' all(degree(g5) == degs)
+#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#'
+#' @examples
+#' ## Power-law degree distribution
+#' ## We fix the seed as there's no guarantee
+#' ##  that randomly picked integers will form a graphical degree sequence
+#' ## (i.e. that there's a graph with these degrees)
+#' ## withr::with_seed(1, {
+#' ##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+#' ## })
+#' powerlaw_degrees <- c(
+#'   1L, 1L, 1L, 6L, 1L, 6L, 10L, 2L, 2L, 1L, 1L, 1L, 2L, 1L, 3L,
+#'   1L, 2L, 43L, 1L, 3L, 9L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 4L, 1L,
+#'   1L, 1L, 1L, 1L, 3L, 2L, 3L, 1L, 2L, 1L, 3L, 2L, 3L, 1L, 1L, 3L,
+#'   1L, 1L, 2L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 1L, 7L, 1L,
+#'   1L, 1L, 2L, 1L, 1L, 3L, 1L, 5L, 1L, 4L, 1L, 1L, 1L, 5L, 4L, 1L,
+#'   3L, 13L, 1L, 2L, 1L, 1L, 2L, 1L, 2L, 1L, 1L, 1L, 1L, 1L, 2L,
+#'   5L, 3L, 3L, 1L, 1L, 3L, 1L
+#' )
+#' ## Note, that we correct the degree sequence if its sum is odd
+#' is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
+#' }
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
+#'
+#' ## An example that does not work
+#' @examplesIf rlang::is_interactive()
+#' ## withr::with_seed(2, {
+#' ##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+#' ## })
+#' powerlaw_degrees <- c(
+#'   1L, 2L, 1L, 1L, 10L, 10L, 1L, 4L, 1L, 1L, 1L, 1L, 2L, 1L, 1L,
+#'   4L, 21L, 1L, 1L, 1L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 14L, 1L,
+#'   1L, 1L, 3L, 4L, 1L, 2L, 4L, 1L, 2L, 1L, 25L, 1L, 1L, 1L, 10L,
+#'   3L, 19L, 1L, 1L, 3L, 1L, 1L, 2L, 8L, 1L, 3L, 3L, 36L, 2L, 2L,
+#'   3L, 5L, 2L, 1L, 4L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L,
+#'   1L, 4L, 1L, 1L, 1L, 2L, 1L, 1L, 1L, 4L, 18L, 1L, 2L, 1L, 21L,
+#'   1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L
+#' )
+#' ## Note, that we correct the degree sequence if its sum is odd
+#' is_exponential_degrees_sum_odd <- (sum(powerlaw_degrees) %% 2 != 0)
+#' if (is_exponential_degrees_sum_odd) {
+#'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
+#' }
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
+#'
 sample_degseq <- function(out.deg, in.deg = NULL,
                           method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
   method <- igraph.match.arg(method)
@@ -1311,15 +1388,16 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #'
 #' pf <- matrix(c(1, 0, 0, 1), nrow = 2)
 #' g <- sample_pref(20, 2, pref.matrix = pf)
-#' \dontrun{
+#' @examplesIf rlang::is_installed("tcltk") && rlang::is_interactive()
+#' # example code
+#'
 #' tkplot(g, layout = layout_with_fr)
-#' }
+#' @examples
 #'
 #' pf <- matrix(c(0, 1, 0, 0), nrow = 2)
 #' g <- sample_asym_pref(20, 2, pref.matrix = pf)
-#' \dontrun{
+#' @examplesIf rlang::is_installed("tcltk") && rlang::is_interactive()
 #' tkplot(g, layout = layout_in_circle)
-#' }
 #'
 sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         fixed.sizes = FALSE,
@@ -2100,9 +2178,14 @@ sample_fitness_pl <- static_power_law_game_impl
 #' @export
 #' @examples
 #'
+#' fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+#' plot(fire)
+#'
 #' g <- sample_forestfire(10000, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
 #' dd1 <- degree_distribution(g, mode = "in")
 #' dd2 <- degree_distribution(g, mode = "out")
+#' # The forest fire model produces graphs with a heavy tail degree distribution.
+#' # Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 sample_forestfire <- forest_fire_game_impl

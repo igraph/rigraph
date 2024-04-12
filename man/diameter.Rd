@@ -73,6 +73,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
+\code{\link{graph_center}()},
 \code{\link{radius}()}
 }
 \author{

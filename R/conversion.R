@@ -643,8 +643,7 @@ as_adj_edge_list <- function(graph,
 #' [as_adj()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph.adjlist()] for other
 #' graph representations.
-#' @examples
-#' \dontrun{
+#' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
@@ -658,7 +657,6 @@ as_adj_edge_list <- function(graph,
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
-#' }
 #' @family conversion
 #' @export
 graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
@@ -734,9 +732,9 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' [as_adj()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph.adjlist()] for
 #' other graph representations.
-#' @examples
+#'
+#' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
-#' \dontrun{
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' GNEL <- as_graphnel(g)
@@ -749,7 +747,6 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
-#' }
 #' @family conversion
 #' @export
 as_graphnel <- function(graph) {

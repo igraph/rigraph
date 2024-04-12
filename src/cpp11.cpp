@@ -23,6 +23,7 @@ extern "C" SEXP _igraph_getsphere(SEXP spos, SEXP sradius, SEXP scolor, SEXP lig
 extern "C" {
 /* .Call calls */
 extern SEXP R_igraph_add_edges(void *, void *);
+extern SEXP R_igraph_add_edges_manual(void *, void *);
 extern SEXP R_igraph_add_env(void *);
 extern SEXP R_igraph_add_myid_to_env(void *);
 extern SEXP R_igraph_add_version_to_env(void *);
@@ -47,8 +48,7 @@ extern SEXP R_igraph_assortativity_nominal(void *, void *, void *, void *);
 extern SEXP R_igraph_asymmetric_preference_game(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_atlas(void *);
 extern SEXP R_igraph_authority_score(void *, void *, void *, void *);
-extern SEXP R_igraph_automorphism_group(void *, void *);
-extern SEXP R_igraph_automorphism_group_bliss(void *, void *, void *);
+extern SEXP R_igraph_automorphism_group(void *, void *, void *);
 extern SEXP R_igraph_average_local_efficiency(void *, void *, void *, void *);
 extern SEXP R_igraph_average_path_length_dijkstra(void *, void *, void *, void *);
 extern SEXP R_igraph_avg_nearest_neighbor_degree(void *, void *, void *, void *, void *);
@@ -68,8 +68,7 @@ extern SEXP R_igraph_bipartite_projection(void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_projection_size(void *, void *);
 extern SEXP R_igraph_bridges(void *);
 extern SEXP R_igraph_callaway_traits_game(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_canonical_permutation(void *, void *);
-extern SEXP R_igraph_canonical_permutation_bliss(void *, void *, void *);
+extern SEXP R_igraph_canonical_permutation(void *, void *, void *);
 extern SEXP R_igraph_centralization(void *, void *, void *);
 extern SEXP R_igraph_centralization_betweenness(void *, void *, void *);
 extern SEXP R_igraph_centralization_betweenness_tmax(void *, void *, void *);
@@ -114,8 +113,7 @@ extern SEXP R_igraph_copy_to(void *);
 extern SEXP R_igraph_coreness(void *, void *);
 extern SEXP R_igraph_correlated_game(void *, void *, void *, void *);
 extern SEXP R_igraph_correlated_pair_game(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_count_automorphisms(void *, void *);
-extern SEXP R_igraph_count_automorphisms_bliss(void *, void *, void *);
+extern SEXP R_igraph_count_automorphisms(void *, void *, void *);
 extern SEXP R_igraph_count_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_count_multiple(void *, void *);
 extern SEXP R_igraph_count_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
@@ -128,7 +126,7 @@ extern SEXP R_igraph_degree_correlation_vector(void *, void *, void *, void *, v
 extern SEXP R_igraph_degree_sequence_game(void *, void *, void *);
 extern SEXP R_igraph_delete_edges(void *, void *);
 extern SEXP R_igraph_delete_vertices(void *, void *);
-extern SEXP R_igraph_delete_vertices_map(void *, void *);
+extern SEXP R_igraph_delete_vertices_idx(void *, void *);
 extern SEXP R_igraph_density(void *, void *);
 extern SEXP R_igraph_deterministic_optimal_imitation(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_dfs(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -142,13 +140,12 @@ extern SEXP R_igraph_distances_cutoff(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_distances_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_distances_dijkstra_cutoff(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_distances_floyd_warshall(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_distances_johnson(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_johnson(void *, void *, void *, void *);
 extern SEXP R_igraph_diversity(void *, void *, void *);
 extern SEXP R_igraph_dominator_tree(void *, void *, void *);
 extern SEXP R_igraph_dot_product_game(void *, void *);
 extern SEXP R_igraph_dyad_census(void *);
 extern SEXP R_igraph_ecc(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_eccentricity(void *, void *, void *);
 extern SEXP R_igraph_eccentricity_dijkstra(void *, void *, void *, void *);
 extern SEXP R_igraph_ecount(void *);
 extern SEXP R_igraph_edge_betweenness_cutoff(void *, void *, void *, void *);
@@ -156,7 +153,7 @@ extern SEXP R_igraph_edge_betweenness_subset(void *, void *, void *, void *, voi
 extern SEXP R_igraph_edge_connectivity(void *, void *);
 extern SEXP R_igraph_edge_disjoint_paths(void *, void *, void *);
 extern SEXP R_igraph_edges(void *, void *);
-extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
 extern SEXP R_igraph_erdos_renyi_game(void *, void *, void *, void *, void *);
@@ -212,7 +209,6 @@ extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_girth(void *, void *);
 extern SEXP R_igraph_global_efficiency(void *, void *, void *);
 extern SEXP R_igraph_gomory_hu_tree(void *, void *);
-extern SEXP R_igraph_graph_center(void *, void *);
 extern SEXP R_igraph_graph_center_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_graph_count(void *, void *);
 extern SEXP R_igraph_graph_power(void *, void *, void *);
@@ -365,7 +361,6 @@ extern SEXP R_igraph_power_law_fit(void *, void *, void *);
 extern SEXP R_igraph_preference_game(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_radius(void *, void *);
 extern SEXP R_igraph_radius_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_random_edge_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_random_sample(void *, void *, void *);
@@ -401,11 +396,11 @@ extern SEXP R_igraph_sample_sphere_volume(void *, void *, void *, void *);
 extern SEXP R_igraph_sbm_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_set_verbose(void *);
 extern SEXP R_igraph_shortest_paths(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_similarity_dice(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_dice(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_dice_es(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_dice_pairs(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_inverse_log_weighted(void *, void *, void *);
-extern SEXP R_igraph_similarity_jaccard(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_jaccard(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_jaccard_es(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_jaccard_pairs(void *, void *, void *, void *);
 extern SEXP R_igraph_simple_interconnected_islands_game(void *, void *, void *, void *);
@@ -487,6 +482,7 @@ extern SEXP promise_expr_(void *);
 
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
+    {"R_igraph_add_edges_manual",                           (DL_FUNC) &R_igraph_add_edges_manual,                            2},
     {"R_igraph_add_env",                                    (DL_FUNC) &R_igraph_add_env,                                     1},
     {"R_igraph_add_myid_to_env",                            (DL_FUNC) &R_igraph_add_myid_to_env,                             1},
     {"R_igraph_add_version_to_env",                         (DL_FUNC) &R_igraph_add_version_to_env,                          1},
@@ -612,7 +608,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_dot_product_game",                           (DL_FUNC) &R_igraph_dot_product_game,                            2},
     {"R_igraph_dyad_census",                                (DL_FUNC) &R_igraph_dyad_census,                                 1},
     {"R_igraph_ecc",                                        (DL_FUNC) &R_igraph_ecc,                                         5},
-    {"R_igraph_eccentricity",                               (DL_FUNC) &R_igraph_eccentricity,                                3},
     {"R_igraph_eccentricity_dijkstra",                      (DL_FUNC) &R_igraph_eccentricity_dijkstra,                       4},
     {"R_igraph_ecount",                                     (DL_FUNC) &R_igraph_ecount,                                      1},
     {"R_igraph_edge_betweenness_cutoff",                    (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                     4},
@@ -676,7 +671,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_global_efficiency",                          (DL_FUNC) &R_igraph_global_efficiency,                           3},
     {"R_igraph_gomory_hu_tree",                             (DL_FUNC) &R_igraph_gomory_hu_tree,                              2},
-    {"R_igraph_graph_center",                               (DL_FUNC) &R_igraph_graph_center,                                2},
     {"R_igraph_graph_center_dijkstra",                      (DL_FUNC) &R_igraph_graph_center_dijkstra,                       3},
     {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
     {"R_igraph_graph_power",                                (DL_FUNC) &R_igraph_graph_power,                                 3},
@@ -829,7 +823,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
     {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
-    {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      2},
     {"R_igraph_radius_dijkstra",                            (DL_FUNC) &R_igraph_radius_dijkstra,                             3},
     {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},

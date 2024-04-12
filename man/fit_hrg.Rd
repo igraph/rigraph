@@ -48,11 +48,7 @@ from a given HRG, if this is given in the \code{hrg()} argument and the
 \code{as.hclust()} provided in this package.
 }
 \examples{
-\dontrun{
-## We are not running these examples any more, because they
-## take a long time (~15 seconds) to run and this is against the CRAN
-## repository policy. Copy and paste them by hand to your R prompt if
-## you want to run them.
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 ## A graph with two dense groups
 g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
@@ -66,7 +62,7 @@ consensus_tree(g, hrg = hrg, start = TRUE)
 ## Prediction of missing edges
 g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 predict_edges(g2)
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure

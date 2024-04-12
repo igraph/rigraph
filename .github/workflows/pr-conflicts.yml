@@ -1,0 +1,18 @@
+name: Check potential conflicts
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pr-conflicts.yml"
+
+jobs:
+  build:
+    name: Warn potential conflicts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cynkra/conflibot@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

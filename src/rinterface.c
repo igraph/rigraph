@@ -59,6 +59,33 @@ SEXP R_igraph_empty(SEXP n, SEXP directed) {
 }
 
 /*-------------------------------------------/
+/ igraph_add_edges                           /
+/-------------------------------------------*/
+SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_edges;
+
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph_copy(graph, &c_graph);
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  R_SEXP_to_vector_int_copy(edges, &c_edges);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_add_edges(&c_graph, &c_edges, 0));
+
+                                        /* Convert output */
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_copy                                /
 /-------------------------------------------*/
 SEXP R_igraph_copy(SEXP from) {
@@ -4893,42 +4920,6 @@ SEXP R_igraph_contract_vertices(SEXP graph, SEXP mapping, SEXP vertex_attr_comb)
 }
 
 /*-------------------------------------------/
-/ igraph_eccentricity                        /
-/-------------------------------------------*/
-SEXP R_igraph_eccentricity(SEXP graph, SEXP vids, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_vs_t c_vids;
-  igraph_neimode_t c_mode;
-  SEXP res;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_init(&c_res, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  igraph_vector_int_t c_vids_data;
-  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eccentricity(&c_graph, &c_res, c_vids, c_mode));
-
-                                        /* Convert output */
-  PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
-  igraph_vector_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
-  r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_eccentricity_dijkstra               /
 /-------------------------------------------*/
 SEXP R_igraph_eccentricity_dijkstra(SEXP graph, SEXP weights, SEXP vids, SEXP mode) {
@@ -4967,37 +4958,6 @@ SEXP R_igraph_eccentricity_dijkstra(SEXP graph, SEXP weights, SEXP vids, SEXP mo
 }
 
 /*-------------------------------------------/
-/ igraph_graph_center                        /
-/-------------------------------------------*/
-SEXP R_igraph_graph_center(SEXP graph, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_int_t c_res;
-  igraph_neimode_t c_mode;
-  SEXP res;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_int_init(&c_res, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graph_center(&c_graph, &c_res, c_mode));
-
-                                        /* Convert output */
-  PROTECT(res=R_igraph_vector_int_to_SEXPp1(&c_res));
-  igraph_vector_int_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_graph_center_dijkstra               /
 /-------------------------------------------*/
 SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
@@ -5025,32 +4985,6 @@ SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
   igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_radius                              /
-/-------------------------------------------*/
-SEXP R_igraph_radius(SEXP graph, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_real_t c_radius;
-  igraph_neimode_t c_mode;
-  SEXP radius;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_radius(&c_graph, &c_radius, c_mode));
-
-                                        /* Convert output */
-  PROTECT(radius=NEW_NUMERIC(1));
-  REAL(radius)[0]=c_radius;
-  r_result = radius;
 
   UNPROTECT(1);
   return(r_result);

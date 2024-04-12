@@ -85,16 +85,17 @@ The types of the generated vertices can be retrieved from the
 
 pf <- matrix(c(1, 0, 0, 1), nrow = 2)
 g <- sample_pref(20, 2, pref.matrix = pf)
-\dontrun{
+\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# example code
+
 tkplot(g, layout = layout_with_fr)
-}
+\dontshow{\}) # examplesIf}
 
 pf <- matrix(c(0, 1, 0, 0), nrow = 2)
 g <- sample_asym_pref(20, 2, pref.matrix = pf)
-\dontrun{
+\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 tkplot(g, layout = layout_in_circle)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Random graph models (games)

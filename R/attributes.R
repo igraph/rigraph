@@ -277,11 +277,12 @@ get.edge.attribute <- function(graph, name, index = E(graph)) { # nocov start
 #' graph_attr(g, "name")
 graph_attr <- function(graph, name) {
   ensure_igraph(graph)
+
   if (missing(name)) {
-    graph.attributes(graph)
-  } else {
-    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
+    return(graph.attributes(graph))
   }
+
+  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
 }
 
 
@@ -348,10 +349,7 @@ graph.attributes <- function(graph) {
 #' @export
 "graph.attributes<-" <- function(graph, value) {
   ensure_igraph(graph)
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
 }
@@ -382,20 +380,18 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   ensure_igraph(graph)
   if (missing(name)) {
     if (missing(index)) {
-      vertex.attributes(graph)
-    } else {
-      vertex.attributes(graph, index = index)
+      return(vertex.attributes(graph))
     }
-  } else {
-    myattr <-
-      .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (is_complete_iterator(index)) {
-      myattr
-    } else {
-      index <- as_igraph_vs(graph, index)
-      myattr[index]
-    }
+    return(vertex.attributes(graph, index = index))
   }
+  myattr <-
+    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
+  if (is_complete_iterator(index)) {
+    return(myattr)
+  }
+  index <- as_igraph_vs(graph, index)
+  myattr[index]
+
 }
 
 #' Set one or more vertex attributes
@@ -471,8 +467,6 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     value <- as.numeric(value)
   }
 
-  single <- is_single_index(index)
-  complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
     index <- as_igraph_vs(graph, index)
   }
@@ -480,10 +474,13 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
 
   vattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!complete && !(name %in% names(vattrs))) {
+  complete <- is_complete_iterator(index)
+  name_available <- (name %in% names(vattrs))
+  if (!complete && !name_available) {
     vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
   }
 
+  single <- is_single_index(index)
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -521,12 +518,15 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!missing(index) &&
-    (length(index) != vcount(graph) || any(index != V(graph)))) {
-    for (i in seq_along(res)) {
-      res[[i]] <- res[[i]][index]
+  if (!missing(index)) {
+    index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
+    if  (!index_is_natural_sequence) {
+      for (i in seq_along(res)) {
+        res[[i]] <- res[[i]][index]
+      }
     }
   }
+
   res
 }
 
@@ -534,10 +534,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 "vertex.attributes<-" <- function(graph, index = V(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of vertices")
   }
@@ -743,10 +741,8 @@ edge.attributes <- function(graph, index = E(graph)) {
 "edge.attributes<-" <- function(graph, index = E(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of edges")
   }
@@ -1187,4 +1183,21 @@ NULL
 #' @export
 `$<-.igraph` <- function(x, name, value) {
   set_graph_attr(x, name, value)
+}
+
+assert_named_list <- function(value) {
+  error_msg <- "{.arg value} must be a named list with unique names"
+
+  if (!is.list(value)) {
+    rlang::abort(error_msg)
+  }
+
+  if (length(value) == 0) {
+    return()
+  }
+
+  if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
+
+    rlang::abort(error_msg)
+  }
 }
