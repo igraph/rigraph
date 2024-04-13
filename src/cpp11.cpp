@@ -156,7 +156,7 @@ extern SEXP R_igraph_edge_betweenness_subset(void *, void *, void *, void *, voi
 extern SEXP R_igraph_edge_connectivity(void *, void *);
 extern SEXP R_igraph_edge_disjoint_paths(void *, void *, void *);
 extern SEXP R_igraph_edges(void *, void *);
-extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
 extern SEXP R_igraph_erdos_renyi_game(void *, void *, void *, void *, void *);
@@ -618,7 +618,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edge_connectivity",                          (DL_FUNC) &R_igraph_edge_connectivity,                           2},
     {"R_igraph_edge_disjoint_paths",                        (DL_FUNC) &R_igraph_edge_disjoint_paths,                         3},
     {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
-    {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             5},
+    {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
     {"R_igraph_erdos_renyi_game",                           (DL_FUNC) &R_igraph_erdos_renyi_game,                            5},

@@ -259,7 +259,7 @@ EDGE_INDICES_LIST:
               %I% <- lapply(%I%, unsafe_create_es, graph = %I1%, es = E(%I1%))
             }
 
-'ARPACKSTORAGE':
+'ARPACK_STORAGE':
     CALL: {}
     HEADER: ~
 
