@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{consensus_tree}
 \alias{consensus_tree}
-\alias{hrg.consensus}
 \title{Create a consensus tree from several hierarchical random graph models}
 \usage{
 consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
@@ -44,12 +43,12 @@ first, and then samples starting from the optimum.
 \seealso{
 Other hierarchical random graph functions: 
 \code{\link{fit_hrg}()},
+\code{\link{hrg}()},
 \code{\link{hrg-methods}},
 \code{\link{hrg_tree}()},
-\code{\link{hrg}()},
 \code{\link{predict_edges}()},
-\code{\link{print.igraphHRGConsensus}()},
 \code{\link{print.igraphHRG}()},
+\code{\link{print.igraphHRGConsensus}()},
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}

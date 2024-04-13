@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{subgraph}
 \alias{subgraph}
-\alias{induced.subgraph}
 \alias{subgraph.edges}
 \alias{induced_subgraph}
 \title{Subgraph of a graph}
@@ -62,7 +61,7 @@ functionality of \code{subgraph.edges()}.
 
 g <- make_ring(10)
 g2 <- induced_subgraph(g, 1:7)
-g3 <- subgraph.edges(g, 1:5, 1:5)
+g3 <- subgraph.edges(g, 1:5)
 
 }
 \seealso{
@@ -78,58 +77,11 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{topo_sort}()},

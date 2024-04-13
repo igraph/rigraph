@@ -1,3 +1,228 @@
+
+#' Set vertex attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.vertex.attribute()` was renamed to `set_vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_vertex_attr
+#' @keywords internal
+#' @export
+set.vertex.attribute <- function(graph, name, index = V(graph), value) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "set.vertex.attribute()", "set_vertex_attr()")
+  set_vertex_attr(graph = graph, name = name, index = index, value = value)
+} # nocov end
+
+#' Set a graph attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.graph.attribute()` was renamed to `set_graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_graph_attr
+#' @keywords internal
+#' @export
+set.graph.attribute <- function(graph, name, value) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "set.graph.attribute()", "set_graph_attr()")
+  set_graph_attr(graph = graph, name = name, value = value)
+} # nocov end
+
+#' Set edge attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.edge.attribute()` was renamed to `set_edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_edge_attr
+#' @keywords internal
+#' @export
+set.edge.attribute <- function(graph, name, index = E(graph), value) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "set.edge.attribute()", "set_edge_attr()")
+  set_edge_attr(graph = graph, name = name, index = index, value = value)
+} # nocov end
+
+#' Delete a vertex attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.vertex.attribute()` was renamed to `delete_vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_vertex_attr
+#' @keywords internal
+#' @export
+remove.vertex.attribute <- function(graph, name) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "remove.vertex.attribute()", "delete_vertex_attr()")
+  delete_vertex_attr(graph = graph, name = name)
+} # nocov end
+
+#' Delete a graph attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.graph.attribute()` was renamed to `delete_graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_graph_attr
+#' @keywords internal
+#' @export
+remove.graph.attribute <- function(graph, name) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "remove.graph.attribute()", "delete_graph_attr()")
+  delete_graph_attr(graph = graph, name = name)
+} # nocov end
+
+#' Delete an edge attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.edge.attribute()` was renamed to `delete_edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_edge_attr
+#' @keywords internal
+#' @export
+remove.edge.attribute <- function(graph, name) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "remove.edge.attribute()", "delete_edge_attr()")
+  delete_edge_attr(graph = graph, name = name)
+} # nocov end
+
+#' List names of vertex attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.vertex.attributes()` was renamed to `vertex_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams vertex_attr_names
+#' @keywords internal
+#' @export
+list.vertex.attributes <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "list.vertex.attributes()", "vertex_attr_names()")
+  vertex_attr_names(graph = graph)
+} # nocov end
+
+#' List names of graph attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.graph.attributes()` was renamed to `graph_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams graph_attr_names
+#' @keywords internal
+#' @export
+list.graph.attributes <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "list.graph.attributes()", "graph_attr_names()")
+  graph_attr_names(graph = graph)
+} # nocov end
+
+#' List names of edge attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.edge.attributes()` was renamed to `edge_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams edge_attr_names
+#' @keywords internal
+#' @export
+list.edge.attributes <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "list.edge.attributes()", "edge_attr_names()")
+  edge_attr_names(graph = graph)
+} # nocov end
+
+#' Weighted graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.weighted()` was renamed to `is_weighted()` to create a more
+#' consistent API.
+#' @inheritParams is_weighted
+#' @keywords internal
+#' @export
+is.weighted <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.weighted()", "is_weighted()")
+  is_weighted(graph = graph)
+} # nocov end
+
+#' Named graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.named()` was renamed to `is_named()` to create a more
+#' consistent API.
+#' @inheritParams is_named
+#' @keywords internal
+#' @export
+is.named <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.named()", "is_named()")
+  is_named(graph = graph)
+} # nocov end
+
+#' Checks whether the graph has a vertex attribute called `type`
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.bipartite()` was renamed to `is_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams is_bipartite
+#' @keywords internal
+#' @export
+is.bipartite <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.bipartite()", "is_bipartite()")
+  is_bipartite(graph = graph)
+} # nocov end
+
+#' Query vertex attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.vertex.attribute()` was renamed to `vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams vertex_attr
+#' @keywords internal
+#' @export
+get.vertex.attribute <- function(graph, name, index = V(graph)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "get.vertex.attribute()", "vertex_attr()")
+  vertex_attr(graph = graph, name = name, index = index)
+} # nocov end
+
+#' Graph attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.graph.attribute()` was renamed to `graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams graph_attr
+#' @keywords internal
+#' @export
+get.graph.attribute <- function(graph, name) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "get.graph.attribute()", "graph_attr()")
+  graph_attr(graph = graph, name = name)
+} # nocov end
+
+#' Query edge attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.edge.attribute()` was renamed to `edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams edge_attr
+#' @keywords internal
+#' @export
+get.edge.attribute <- function(graph, name, index = E(graph)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "get.edge.attribute()", "edge_attr()")
+  edge_attr(graph = graph, name = name, index = index)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -42,7 +267,7 @@
 #'   attributes are returned in a list.
 #' @return A list of graph attributes, or a single graph attribute.
 #'
-#' @aliases get.graph.attribute graph.attributes
+#' @aliases graph.attributes
 #' @family attributes
 #'
 #' @export
@@ -52,11 +277,12 @@
 #' graph_attr(g, "name")
 graph_attr <- function(graph, name) {
   ensure_igraph(graph)
+
   if (missing(name)) {
-    graph.attributes(graph)
-  } else {
-    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
+    return(graph.attributes(graph))
   }
+
+  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
 }
 
 
@@ -101,7 +327,6 @@ graph_attr <- function(graph, name) {
 #' @return The graph with the new graph attribute added or set.
 #'
 #' @family attributes
-#' @aliases set.graph.attribute
 #'
 #' @export
 #' @examples
@@ -124,10 +349,7 @@ graph.attributes <- function(graph) {
 #' @export
 "graph.attributes<-" <- function(graph, value) {
   ensure_igraph(graph)
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
 }
@@ -143,7 +365,7 @@ graph.attributes <- function(graph) {
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
 #'
-#' @aliases get.vertex.attribute vertex.attributes
+#' @aliases vertex.attributes
 #' @family attributes
 #'
 #' @export
@@ -158,20 +380,18 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   ensure_igraph(graph)
   if (missing(name)) {
     if (missing(index)) {
-      vertex.attributes(graph)
-    } else {
-      vertex.attributes(graph, index = index)
+      return(vertex.attributes(graph))
     }
-  } else {
-    myattr <-
-      .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (is_complete_iterator(index)) {
-      myattr
-    } else {
-      index <- as_igraph_vs(graph, index)
-      myattr[index]
-    }
+    return(vertex.attributes(graph, index = index))
   }
+  myattr <-
+    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
+  if (is_complete_iterator(index)) {
+    return(myattr)
+  }
+  index <- as_igraph_vs(graph, index)
+  myattr[index]
+
 }
 
 #' Set one or more vertex attributes
@@ -218,7 +438,6 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
 #'
-#' @aliases set.vertex.attribute
 #' @family attributes
 #'
 #' @export
@@ -248,8 +467,6 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     value <- as.numeric(value)
   }
 
-  single <- is_single_index(index)
-  complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
     index <- as_igraph_vs(graph, index)
   }
@@ -257,10 +474,13 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
 
   vattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!complete && !(name %in% names(vattrs))) {
+  complete <- is_complete_iterator(index)
+  name_available <- (name %in% names(vattrs))
+  if (!complete && !name_available) {
     vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
   }
 
+  single <- is_single_index(index)
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -298,12 +518,15 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!missing(index) &&
-    (length(index) != vcount(graph) || any(index != V(graph)))) {
-    for (i in seq_along(res)) {
-      res[[i]] <- res[[i]][index]
+  if (!missing(index)) {
+    index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
+    if  (!index_is_natural_sequence) {
+      for (i in seq_along(res)) {
+        res[[i]] <- res[[i]][index]
+      }
     }
   }
+
   res
 }
 
@@ -311,10 +534,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 "vertex.attributes<-" <- function(graph, index = V(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of vertices")
   }
@@ -353,7 +574,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
 #'
-#' @aliases get.edge.attribute edge.attributes
+#' @aliases edge.attributes
 #' @family attributes
 #'
 #' @export
@@ -428,7 +649,6 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
 #'
-#' @aliases set.edge.attribute
 #' @family attributes
 #'
 #' @export
@@ -521,10 +741,8 @@ edge.attributes <- function(graph, index = E(graph)) {
 "edge.attributes<-" <- function(graph, index = E(graph), value) {
   ensure_igraph(graph)
 
-  if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-    any(names(value) == "") || any(duplicated(names(value)))) {
-    stop("Value must be a named list with unique names")
-  }
+  assert_named_list(value)
+
   if (any(sapply(value, length) != length(index))) {
     stop("Invalid attribute value length, must match number of edges")
   }
@@ -556,7 +774,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' @param graph The graph.
 #' @return Character vector, the names of the graph attributes.
 #'
-#' @aliases list.graph.attributes attributes
+#' @aliases attributes
 #' @family attributes
 #'
 #' @export
@@ -577,7 +795,6 @@ graph_attr_names <- function(graph) {
 #' @param graph The graph.
 #' @return Character vector, the names of the vertex attributes.
 #'
-#' @aliases list.vertex.attributes
 #' @family attributes
 #'
 #' @export
@@ -603,7 +820,6 @@ vertex_attr_names <- function(graph) {
 #' @param graph The graph.
 #' @return Character vector, the names of the edge attributes.
 #'
-#' @aliases list.edge.attributes
 #' @family attributes
 #'
 #' @export
@@ -627,7 +843,6 @@ edge_attr_names <- function(graph) {
 #' @param name Name of the attribute to delete.
 #' @return The graph, with the specified attribute removed.
 #'
-#' @aliases remove.graph.attribute
 #' @family attributes
 #'
 #' @export
@@ -656,7 +871,6 @@ delete_graph_attr <- function(graph, name) {
 #' @param name The name of the vertex attribute to delete.
 #' @return The graph, with the specified vertex attribute removed.
 #'
-#' @aliases remove.vertex.attribute
 #' @family attributes
 #'
 #' @export
@@ -686,7 +900,6 @@ delete_vertex_attr <- function(graph, name) {
 #' @param name The name of the edge attribute to delete.
 #' @return The graph, with the specified edge attribute removed.
 #'
-#' @aliases remove.edge.attribute
 #' @family attributes
 #'
 #' @export
@@ -731,7 +944,6 @@ delete_edge_attr <- function(graph, name) {
 #' igraph, you have to check that for yourself, when assigning the vertex
 #' names.
 #'
-#' @aliases is.named
 #' @param graph The input graph.
 #' @return A logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -769,7 +981,6 @@ is_named <- function(graph) {
 #' vertices, etc. Check the manual pages of the functions working with weighted
 #' graphs for details.
 #'
-#' @aliases is.weighted
 #' @param graph The input graph.
 #' @return A logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -788,8 +999,11 @@ is_weighted <- function(graph) {
   "weight" %in% edge_attr_names(graph)
 }
 
-#' @rdname make_bipartite_graph
+#' @title Checks whether the graph has a vertex attribute called `type`.
+#' @description It does not check whether the graph is bipartite in the
+#'  mathematical sense.  Use [bipartite_mapping()] for that.
 #' @family bipartite
+#' @param graph The input graph
 #' @export
 is_bipartite <- function(graph) {
   ensure_igraph(graph)
@@ -969,4 +1183,21 @@ NULL
 #' @export
 `$<-.igraph` <- function(x, name, value) {
   set_graph_attr(x, name, value)
+}
+
+assert_named_list <- function(value) {
+  error_msg <- "{.arg value} must be a named list with unique names"
+
+  if (!is.list(value)) {
+    rlang::abort(error_msg)
+  }
+
+  if (length(value) == 0) {
+    return()
+  }
+
+  if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
+
+    rlang::abort(error_msg)
+  }
 }

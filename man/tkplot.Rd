@@ -2,26 +2,16 @@
 % Please edit documentation in R/tkplot.R
 \name{tkplot}
 \alias{tkplot}
-\alias{tkplot.close}
-\alias{tkplot.off}
-\alias{tkplot.fit.to.screen}
-\alias{tkplot.reshape}
-\alias{tkplot.export.postscript}
-\alias{tkplot.canvas}
-\alias{tkplot.getcoords}
-\alias{tkplot.setcoords}
-\alias{tkplot.center}
-\alias{tkplot.rotate}
-\alias{tk_canvas}
-\alias{tk_center}
 \alias{tk_close}
-\alias{tk_postscript}
-\alias{tk_fit}
-\alias{tk_coords}
 \alias{tk_off}
+\alias{tk_fit}
+\alias{tk_center}
 \alias{tk_reshape}
-\alias{tk_rotate}
+\alias{tk_postscript}
+\alias{tk_coords}
 \alias{tk_set_coords}
+\alias{tk_rotate}
+\alias{tk_canvas}
 \title{Interactive plotting of graphs}
 \usage{
 tkplot(graph, canvas.width = 450, canvas.height = 450, ...)
@@ -154,6 +144,8 @@ vertex.
 
 \code{tk_rotate()} rotates the figure, its parameter can be given either
 in degrees or in radians.
+
+tkplot.center tkplot.rotate
 }
 \section{Examples}{
 

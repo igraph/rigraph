@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{plot_dendrogram.igraphHRG}
 \alias{plot_dendrogram.igraphHRG}
-\alias{hrg.dendrogram}
 \title{HRG dendrogram plot}
 \usage{
 \method{plot_dendrogram}{igraphHRG}(x, mode = igraph_opt("dend.plot.type"), ...)

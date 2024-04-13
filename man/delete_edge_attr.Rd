@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{delete_edge_attr}
 \alias{delete_edge_attr}
-\alias{remove.edge.attribute}
 \title{Delete an edge attribute}
 \usage{
 delete_edge_attr(graph, name)
@@ -29,20 +28,20 @@ edge_attr_names(g2)
 Vertex, edge and graph attributes
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
+\code{\link{edge_attr}()},
 \code{\link{edge_attr<-}()},
 \code{\link{edge_attr_names}()},
-\code{\link{edge_attr}()},
+\code{\link{graph_attr}()},
 \code{\link{graph_attr<-}()},
 \code{\link{graph_attr_names}()},
-\code{\link{graph_attr}()},
 \code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{set_edge_attr}()},
 \code{\link{set_graph_attr}()},
 \code{\link{set_vertex_attr}()},
+\code{\link{vertex_attr}()},
 \code{\link{vertex_attr<-}()},
-\code{\link{vertex_attr_names}()},
-\code{\link{vertex_attr}()}
+\code{\link{vertex_attr_names}()}
 }
 \concept{attributes}

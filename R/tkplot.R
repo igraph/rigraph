@@ -1,3 +1,153 @@
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.setcoords()` was renamed to `tk_set_coords()` to create a more
+#' consistent API.
+#' @inheritParams tk_set_coords
+#' @keywords internal
+#' @export
+tkplot.setcoords <- function(tkp.id, coords) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.setcoords()", "tk_set_coords()")
+  tk_set_coords(tkp.id = tkp.id, coords = coords)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.rotate()` was renamed to `tk_rotate()` to create a more
+#' consistent API.
+#' @inheritParams tk_rotate
+#' @keywords internal
+#' @export
+tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.rotate()", "tk_rotate()")
+  tk_rotate(tkp.id = tkp.id, degree = degree, rad = rad)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.reshape()` was renamed to `tk_reshape()` to create a more
+#' consistent API.
+#' @inheritParams tk_reshape
+#' @keywords internal
+#' @export
+tkplot.reshape <- function(tkp.id, newlayout, ..., params) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.reshape()", "tk_reshape()")
+  tk_reshape(tkp.id = tkp.id, newlayout = newlayout, params = params, ...)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.off()` was renamed to `tk_off()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+tkplot.off <- function() { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.off()", "tk_off()")
+  tk_off()
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.getcoords()` was renamed to `tk_coords()` to create a more
+#' consistent API.
+#' @inheritParams tk_coords
+#' @keywords internal
+#' @export
+tkplot.getcoords <- function(tkp.id, norm = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.getcoords()", "tk_coords()")
+  tk_coords(tkp.id = tkp.id, norm = norm)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.fit.to.screen()` was renamed to `tk_fit()` to create a more
+#' consistent API.
+#' @inheritParams tk_fit
+#' @keywords internal
+#' @export
+tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.fit.to.screen()", "tk_fit()")
+  tk_fit(tkp.id = tkp.id, width = width, height = height)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.export.postscript()` was renamed to `tk_postscript()` to create a more
+#' consistent API.
+#' @inheritParams tk_postscript
+#' @keywords internal
+#' @export
+tkplot.export.postscript <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.export.postscript()", "tk_postscript()")
+  tk_postscript(tkp.id = tkp.id)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.close()` was renamed to `tk_close()` to create a more
+#' consistent API.
+#' @inheritParams tk_close
+#' @keywords internal
+#' @export
+tkplot.close <- function(tkp.id, window.close = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.close()", "tk_close()")
+  tk_close(tkp.id = tkp.id, window.close = window.close)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.center()` was renamed to `tk_center()` to create a more
+#' consistent API.
+#' @inheritParams tk_center
+#' @keywords internal
+#' @export
+tkplot.center <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.center()", "tk_center()")
+  tk_center(tkp.id = tkp.id)
+} # nocov end
+
+#' Interactive plotting of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `tkplot.canvas()` was renamed to `tk_canvas()` to create a more
+#' consistent API.
+#' @inheritParams tk_canvas
+#' @keywords internal
+#' @export
+tkplot.canvas <- function(tkp.id) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "tkplot.canvas()", "tk_canvas()")
+  tk_canvas(tkp.id = tkp.id)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -101,10 +251,7 @@ assign(".next", 1, .tkplot.env)
 #' `tk_rotate()` rotates the figure, its parameter can be given either
 #' in degrees or in radians.
 #'
-#' @aliases tkplot tkplot.close tkplot.off tkplot.fit.to.screen tkplot.reshape
-#' tkplot.export.postscript tkplot.canvas tkplot.getcoords tkplot.setcoords
-#' tkplot.center tkplot.rotate tk_canvas tk_center tk_close tk_postscript
-#' tk_fit tk_coords tk_off tk_reshape tk_rotate tk_set_coords
+#' tkplot.center tkplot.rotate
 #' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
 #' @param tkp.id The id of the tkplot window to close/reshape/etc.
@@ -670,7 +817,6 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_close <- function(tkp.id, window.close = TRUE) {
   if (window.close) {
@@ -685,7 +831,6 @@ tk_close <- function(tkp.id, window.close = TRUE) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_off <- function() {
   eapply(.tkplot.env, function(tkp) {
@@ -696,7 +841,6 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_fit <- function(tkp.id, width = NULL, height = NULL) {
   tkp <- .tkplot.get(tkp.id)
@@ -726,7 +870,6 @@ tk_fit <- function(tkp.id, width = NULL, height = NULL) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -752,7 +895,6 @@ tk_center <- function(tkp.id) {
 
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
-#' @family tkplot
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
@@ -764,7 +906,6 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_postscript <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -779,7 +920,6 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_coords <- function(tkp.id, norm = FALSE) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -796,7 +936,6 @@ tk_coords <- function(tkp.id, norm = FALSE) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_set_coords <- function(tkp.id, coords) {
   stopifnot(is.matrix(coords), ncol(coords) == 2)
@@ -806,7 +945,6 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -832,7 +970,6 @@ tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_canvas <- function(tkp.id) {
   .tkplot.get(tkp.id)$canvas

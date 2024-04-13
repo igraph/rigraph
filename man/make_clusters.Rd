@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{make_clusters}
 \alias{make_clusters}
-\alias{create.communities}
 \title{Creates a communities object.}
 \usage{
 make_clusters(
@@ -56,6 +55,7 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \concept{community}

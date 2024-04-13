@@ -1,5 +1,5 @@
 local_rng_version("3.5.0")
-set.seed(12345)
+withr::local_seed(12345)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p)
@@ -96,7 +96,7 @@ test_that("Neighborhoods work for them", {
   expect_that(digest::digest(s1), equals("995d0b6a952834ff6e534efc2cfb917b"))
 })
 
-set.seed(42)
+withr::local_seed(42)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p, directed = TRUE)
@@ -144,18 +144,18 @@ test_that("Issue 18 is really resolved", {
 
   g <- make_graph(el)
 
-  sc1 <- sapply(graph.neighborhood(g, order = 1, mode = "all"), ecount)
+  sc1 <- sapply(make_ego_graph(g, order = 1, mode = "all"), ecount)
   sc2 <- local_scan(graph.us = g, mode = "all", k = 1)
   expect_that(sc1, equals(sc2))
 
-  g2 <- induced.subgraph(g, 5:8)
-  sc21 <- sapply(graph.neighborhood(g2, order = 1, mode = "all"), ecount)
+  g2 <- induced_subgraph(g, 5:8)
+  sc21 <- sapply(make_ego_graph(g2, order = 1, mode = "all"), ecount)
   sc22 <- local_scan(graph.us = g2, mode = "all", k = 1)
   expect_that(sc21, equals(sc22))
 })
 
 test_that("Issue 20 is resolved", {
-  set.seed(12345)
+  withr::local_seed(12345)
   g1 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
   g2 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
   ls <- local_scan(g2, g1, k = 1, mode = "all")
@@ -164,8 +164,8 @@ test_that("Issue 20 is resolved", {
 })
 
 test_that("FUN argument works, #32", {
-  r1 <- local_scan(graph.ring(10), k = 1, FUN = "ecount")
-  r2 <- local_scan(graph.ring(10), k = 1, FUN = ecount)
+  r1 <- local_scan(make_ring(10), k = 1, FUN = "ecount")
+  r2 <- local_scan(make_ring(10), k = 1, FUN = ecount)
   expect_that(r1, equals(rep(2, 10)))
   expect_that(r2, equals(rep(2, 10)))
 })

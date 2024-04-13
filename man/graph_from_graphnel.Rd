@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{graph_from_graphnel}
 \alias{graph_from_graphnel}
-\alias{igraph.from.graphNEL}
 \title{Convert graphNEL objects from the graph package to igraph}
 \usage{
 graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)
@@ -40,7 +39,7 @@ attributes of the multiple edges are lost: they are all replaced by the
 attributes of the first of the multiple edges.
 }
 \examples{
-\dontrun{
+\dontshow{if (rlang::is_installed("graph")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 ## Undirected
 g <- make_ring(10)
 V(g)$name <- letters[1:10]
@@ -54,7 +53,7 @@ V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
 g4
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=as_graphnel]{as_graphnel()}} for the other direction,
@@ -67,10 +66,10 @@ Other conversion:
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_adjacency_matrix}()},
+\code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},
 \code{\link{graph_from_adj_list}()}
 }

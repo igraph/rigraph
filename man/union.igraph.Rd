@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{union.igraph}
 \alias{union.igraph}
-\alias{graph.union}
 \alias{\%u\%}
 \title{Union of graphs}
 \usage{
@@ -66,13 +65,13 @@ Other functions for manipulating graph structure:
 \code{\link{contract}()},
 \code{\link{delete_edges}()},
 \code{\link{delete_vertices}()},
-\code{\link{difference.igraph}()},
 \code{\link{difference}()},
+\code{\link{difference.igraph}()},
 \code{\link{disjoint_union}()},
 \code{\link{edge}()},
 \code{\link{igraph-minus}},
-\code{\link{intersection.igraph}()},
 \code{\link{intersection}()},
+\code{\link{intersection.igraph}()},
 \code{\link{path}()},
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},

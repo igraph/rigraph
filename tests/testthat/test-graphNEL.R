@@ -1,7 +1,7 @@
 test_that("graphNEL conversion works", {
-  if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
+  skip_if_not_installed("graph")
 
-  library(graph, warn.conflicts = FALSE)
+  suppressPackageStartupMessages(library(graph, warn.conflicts = FALSE))
 
   g <- sample_gnp(100, 5 / 100)
   N <- as_graphnel(g)
@@ -26,14 +26,10 @@ test_that("graphNEL conversion works", {
   A2 <- as_adj(g2, attr = "weight", sparse = FALSE)
   expect_that(A, equals(A))
   expect_that(g$name, equals(g2$name))
-
-  suppressWarnings(unloadNamespace("graph"))
 })
 
 test_that("graphNEL does not duplicate loop edges", {
-  if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
-
-  library(graph, warn.conflicts = FALSE)
+  skip_if_not_installed("graph")
 
   mat <- matrix(c(1, 0.5, 0.5, 0), nrow = 2)
   dimnames(mat) <- list(c("A", "B"), c("A", "B"))
@@ -42,6 +38,4 @@ test_that("graphNEL does not duplicate loop edges", {
 
   grNEL <- as_graphnel(igr)
   expect_that(graph::edgeL(grNEL)$A$edges, equals(c(1, 2)))
-
-  suppressWarnings(unloadNamespace("graph"))
 })

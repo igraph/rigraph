@@ -1,6 +1,36 @@
 
 #' Graphlet decomposition of a graph
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graphlets.project()` was renamed to `graphlet_proj()` to create a more
+#' consistent API.
+#' @inheritParams graphlet_proj
+#' @keywords internal
+#' @export
+graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu = rep(1, length(cliques))) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
+  graphlet_proj(graph = graph, weights = weights, cliques = cliques, niter = niter, Mu = Mu)
+} # nocov end
+
+#' Graphlet decomposition of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graphlets.candidate.basis()` was renamed to `graphlet_basis()` to create a more
+#' consistent API.
+#' @inheritParams graphlet_basis
+#' @keywords internal
+#' @export
+graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graphlets.candidate.basis()", "graphlet_basis()")
+  graphlet_basis(graph = graph, weights = weights)
+} # nocov end
+
+#' Graphlet decomposition of a graph
+#'
 #' Graphlet decomposition models a weighted undirected graph via the union of
 #' potentially overlapping dense social groups.  This is done by a two-step
 #' algorithm. In the first step a candidate set of groups (a candidate basis)
@@ -15,8 +45,6 @@
 #' the algorithm, and they are useful if the user wishes to perform them
 #' individually: `graphlet_basis()` and `graphlet_proj()`.
 #'
-#' @aliases graphlets graphlets.project graphlet_proj graphlet_basis
-#' graphlets.candidate.basis
 #' @param graph The input graph, edge directions are ignored. Only simple graph
 #'   (i.e. graphs without self-loops and multiple edges) are supported.
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
@@ -102,7 +130,6 @@ graphlet_basis <- function(graph, weights = NULL) {
 }
 
 #' @rdname graphlet_basis
-#' @family glet
 #' @export
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
                           Mu = rep(1, length(cliques))) {
@@ -117,7 +144,7 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
     weights <- NULL
   }
   Mu <- as.numeric(Mu)
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -176,5 +203,6 @@ function() {
   fitandplot(g2, gl2)
 }
 
+#' @rdname graphlet_basis
 #' @export
 graphlets <- graphlets_impl

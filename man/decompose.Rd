@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{decompose}
 \alias{decompose}
-\alias{decompose.graph}
 \title{Decompose a graph into components}
 \usage{
 decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)
@@ -45,7 +44,8 @@ sapply(components, diameter)
 Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
-\code{\link{component_distribution}()}
+\code{\link{component_distribution}()},
+\code{\link{is_biconnected}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

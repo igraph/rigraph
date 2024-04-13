@@ -4,7 +4,7 @@
 \alias{get.edge.ids}
 \title{Find the edge ids based on the incident vertices of the edges}
 \usage{
-get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = FALSE)
+get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -20,10 +20,7 @@ directed graphs. This argument is ignored for undirected graphs.}
 found in the graph. If \code{FALSE}, then no error is reported, and zero is
 returned for the non-existant edge(s).}
 
-\item{multi}{Logical scalar, whether to handle multiple edges properly. If
-\code{FALSE}, and a pair of vertices are given twice (or more), then always
-the same edge id is reported back for them. If \code{TRUE}, then the edge
-ids of multiple edges are correctly reported.}
+\item{multi}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \value{
 A numeric vector of edge ids, one for each pair of input vertices.
@@ -52,19 +49,12 @@ E(g)[ei]
 ## non-existant edge
 get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
 
-## multiple edges
-## multi = FALSE, a single edge id is returned,
+## For multiple edges, a single edge id is returned,
 ## as many times as corresponding pairs in the vertex series.
 g <- make_graph(rep(c(1, 2), 5))
-eis <- get.edge.ids(g, c(1, 2, 1, 2), multi = FALSE)
+eis <- get.edge.ids(g, c(1, 2, 1, 2))
 eis
 E(g)[eis]
-
-## multi = TRUE, as many different edges, if any,
-## are returned as pairs in the vertex series.
-eim <- get.edge.ids(g, c(1, 2, 1, 2, 1, 2), multi = TRUE)
-eim
-E(g)[eim]
 
 }
 \seealso{
@@ -77,8 +67,8 @@ Other structural queries:
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident_edges}()},
 \code{\link{incident}()},
+\code{\link{incident_edges}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}

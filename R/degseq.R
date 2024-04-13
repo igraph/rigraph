@@ -1,4 +1,34 @@
 
+#' Is a degree sequence graphical?
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.graphical.degree.sequence()` was renamed to `is_graphical()` to create a more
+#' consistent API.
+#' @inheritParams is_graphical
+#' @keywords internal
+#' @export
+is.graphical.degree.sequence <- function(out.deg, in.deg = NULL, allowed.edge.types = c("simple", "loops", "multi", "all")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.graphical.degree.sequence()", "is_graphical()")
+  is_graphical(out.deg = out.deg, in.deg = in.deg, allowed.edge.types = allowed.edge.types)
+} # nocov end
+
+#' Check if a degree sequence is valid for a multi-graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.degree.sequence()` was renamed to `is_degseq()` to create a more
+#' consistent API.
+#' @inheritParams is_degseq
+#' @keywords internal
+#' @export
+is.degree.sequence <- function(out.deg, in.deg = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.degree.sequence()", "is_degseq()")
+  is_degseq(out.deg = out.deg, in.deg = in.deg)
+} # nocov end
+
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -32,15 +62,15 @@
 #' degree vectors are equal and whether their sums are also equal. These are
 #' known sufficient and necessary conditions for a degree sequence to be valid.
 #'
-#' @aliases is.degree.sequence is_degseq
+#' @aliases is_degseq
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #'   the out-degree sequence for directed graphs.
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it
 #'   should be `NULL`. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
-#' @author Tamas Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
-#' @references Z Kiraly, Recognizing graphic degree sequences and generating
-#' all realizations. TR-2011-11, Egervary Research Group, H-1117, Budapest,
+#' @author Tamás Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvát \email{szhorvat@gmail.com}
+#' @references Z Király, Recognizing graphic degree sequences and generating
+#' all realizations. TR-2011-11, Egerváry Research Group, H-1117, Budapest,
 #' Hungary. ISSN 1587-4451 (2012).
 #'
 #' B. Cloteaux, Is This for Real? Fast Graphicality Testing, *Comput. Sci. Eng.* 17, 91 (2015).
@@ -70,7 +100,6 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' can perform the check also when self-loops, multi-edges, or both are allowed
 #' in the graph.
 #'
-#' @aliases is.graphical.degree.sequence
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #'   the out-degree sequence for directed graphs.
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it
@@ -82,11 +111,11 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #'   are not. \sQuote{all} means that both loop edges and multiple edges are
 #'   allowed.
 #' @return A logical scalar.
-#' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @author Tamás Nepusz \email{ntamas@@gmail.com}
 #' @references Hakimi SL: On the realizability of a set of integers as degrees
 #' of the vertices of a simple graph. *J SIAM Appl Math* 10:496-506, 1962.
 #'
-#' PL Erdos, I Miklos and Z Toroczkai: A simple Havel-Hakimi type algorithm to
+#' PL Erdős, I Miklós and Z Toroczkai: A simple Havel-Hakimi type algorithm to
 #' realize graphical degree sequences of directed graphs.  *The Electronic
 #' Journal of Combinatorics* 17(1):R66, 2010.
 #' @keywords graphs

@@ -1,4 +1,19 @@
 
+#' Find triangles in graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `adjacent.triangles()` was renamed to `count_triangles()` to create a more
+#' consistent API.
+#' @inheritParams count_triangles
+#' @keywords internal
+#' @export
+adjacent.triangles <- function(graph, vids = V(graph)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "adjacent.triangles()", "count_triangles()")
+  count_triangles(graph = graph, vids = vids)
+} # nocov end
+
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -34,7 +49,7 @@
 #'
 #' `count_triangles()` counts how many triangles a vertex is part of.
 #'
-#' @aliases count_triangles adjacent.triangles triangles
+#' @aliases triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a
@@ -73,6 +88,5 @@
 triangles <- list_triangles_impl
 
 #' @export
-#' @family triangles
 #' @rdname count_triangles
 count_triangles <- adjacent_triangles_impl

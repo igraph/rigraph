@@ -1,0 +1,43 @@
+merge_rules:
+  labels:
+    trigger: mergequeue
+    skip_line: mergequeue-priority
+    merge_failed: blocked
+    skip_delete_branch: ''
+  update_latest: true
+  delete_branch: false
+  use_rebase: true
+  publish_status_check: ready
+  status_comment:
+    publish: always
+    open_message: ''
+    queued_message: ''
+    blocked_message: ''
+  enable_comments: true
+  ci_timeout_mins: 0
+  require_all_checks_pass: true
+  require_skip_line_reason: false
+  preconditions:
+    validations: []
+    number_of_approvals: 0
+    required_checks: []
+    use_github_mergeability: true
+    conversation_resolution_required: false
+  merge_mode:
+    type: default
+  auto_update:
+    enabled: true
+    label: 'mergequeue'
+    max_runs_for_update: 0
+  merge_commit:
+    use_title_and_body: false
+  merge_strategy:
+    name: merge
+    override_labels:
+      squash: ''
+      merge: ''
+      rebase: ''
+  base_branches:
+  - main
+scenarios: []
+version: 1.1.0

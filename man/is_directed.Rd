@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{is_directed}
 \alias{is_directed}
-\alias{is.directed}
 \title{Check whether a graph is directed}
 \usage{
 is_directed(graph)
@@ -34,8 +33,8 @@ Other structural queries:
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident_edges}()},
 \code{\link{incident}()},
+\code{\link{incident_edges}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}
 }

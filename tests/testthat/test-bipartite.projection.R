@@ -1,6 +1,6 @@
 test_that("bipartite_projection works", {
   local_rng_version("3.5.0")
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- make_full_bipartite_graph(10, 5)
   proj <- bipartite_projection(g)
@@ -12,7 +12,7 @@ test_that("bipartite_projection works", {
   colnames(M) <- c("Party", "Skiing", "Badminton")
   M[] <- sample(0:1, length(M), replace = TRUE)
   M
-  g2 <- graph_from_incidence_matrix(M)
+  g2 <- graph_from_biadjacency_matrix(M)
   expect_that(as.matrix(g2[1:5, 6:8]), equals(M))
   expect_that(as.matrix(g2[1:5, 1:5]), is_equivalent_to(matrix(0, 5, 5)))
   expect_that(as.matrix(g2[6:8, 6:8]), is_equivalent_to(matrix(0, 3, 3)))
@@ -40,7 +40,7 @@ test_that("bipartite_projection works", {
 })
 
 test_that("bipartite_projection can calculate only one projection", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- sample_bipartite(5, 10, p = .3)
   proj <- bipartite_projection(g)

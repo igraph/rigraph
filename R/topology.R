@@ -1,4 +1,79 @@
 
+#' Permute the vertices of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `permute.vertices()` was renamed to `permute()` to create a more
+#' consistent API.
+#' @inheritParams permute
+#' @keywords internal
+#' @export
+permute.vertices <- function(graph, permutation) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "permute.vertices()", "permute()")
+  permute(graph = graph, permutation = permutation)
+} # nocov end
+
+#' Create a graph from an isomorphism class
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.isocreate()` was renamed to `graph_from_isomorphism_class()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_isomorphism_class
+#' @keywords internal
+#' @export
+graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.isocreate()", "graph_from_isomorphism_class()")
+  graph_from_isomorphism_class(size = size, number = number, directed = directed)
+} # nocov end
+
+#' Number of automorphisms
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.automorphisms()` was renamed to `count_automorphisms()` to create a more
+#' consistent API.
+#' @inheritParams count_automorphisms
+#' @keywords internal
+#' @export
+graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.automorphisms()", "count_automorphisms()")
+  count_automorphisms(graph = graph, colors = colors, sh = sh)
+} # nocov end
+
+#' Canonical permutation of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `canonical.permutation()` was renamed to `canonical_permutation()` to create a more
+#' consistent API.
+#' @inheritParams canonical_permutation
+#' @keywords internal
+#' @export
+canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "canonical.permutation()", "canonical_permutation()")
+  canonical_permutation(graph = graph, colors = colors, sh = sh)
+} # nocov end
+
+#' Number of automorphisms
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `automorphisms()` was renamed to `count_automorphisms()` to create a more
+#' consistent API.
+#' @inheritParams count_automorphisms
+#' @keywords internal
+#' @export
+automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "automorphisms()", "count_automorphisms()")
+  count_automorphisms(graph = graph, colors = colors, sh = sh)
+} # nocov end
+
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -35,7 +110,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1) - 1L
+    vertex.color1 <- as.numeric(vertex.color1) - 1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -45,7 +120,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2) - 1L
+    vertex.color2 <- as.numeric(vertex.color2) - 1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -55,7 +130,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1) - 1L
+    edge.color1 <- as.numeric(edge.color1) - 1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -65,7 +140,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2) - 1L
+    edge.color2 <- as.numeric(edge.color2) - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -93,7 +168,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1) - 1L
+    vertex.color1 <- as.numeric(vertex.color1) - 1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -103,7 +178,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2) - 1L
+    vertex.color2 <- as.numeric(vertex.color2) - 1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -113,7 +188,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1) - 1L
+    edge.color1 <- as.numeric(edge.color1) - 1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -123,7 +198,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2) - 1L
+    edge.color2 <- as.numeric(edge.color2) - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -157,9 +232,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   ensure_igraph(target)
   induced <- as.logical(induced)
   if (time.limit == Inf) {
-    time.limit <- 0L
+    time.limit <- 0
   } else {
-    time.limit <- as.integer(time.limit)
+    time.limit <- as.numeric(time.limit)
   }
   map <- as.logical(map)
   all.maps <- as.logical(all.maps)
@@ -255,7 +330,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' @return Logical scalar, `TRUE` if the graphs are isomorphic.
 #'
 #' @aliases graph.isomorphic graph.isomorphic.34 graph.isomorphic.vf2
-#'   graph.isomorphic.bliss
+#' @aliases   graph.isomorphic.bliss
 #'
 #' @references
 #'  Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -310,7 +385,7 @@ isomorphic <- function(graph1, graph2, method = c(
     .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "direct") {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic_34, graph1, graph2)
+    .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
@@ -318,8 +393,6 @@ isomorphic <- function(graph1, graph2, method = c(
   }
 }
 
-#' @export
-graph.isomorphic.34 <- isomorphic_34_impl
 #' @export
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
@@ -697,7 +770,6 @@ graph.isoclass <- isoclass_impl
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
-#' @aliases graph.isocreate
 #'
 #' @family graph isomorphism
 #' @export
@@ -725,7 +797,6 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' connected non-singleton cell.} } See the paper in references for details
 #' about these.
 #'
-#' @aliases canonical.permutation canonical_permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
@@ -792,7 +863,6 @@ canonical_permutation <- canonical_permutation_impl
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
 #'
-#' @aliases permute.vertices permute
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
 #'   first element is the new id of vertex 1, etc. Every number between one and
@@ -839,7 +909,6 @@ graph.isomorphic <- isomorphic_impl
 #' automorphisms themselves, use [automorphism_group()] to obtain
 #' a compact representation of the automorphism group.
 #'
-#' @aliases graph.automorphisms automorphisms count_automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
@@ -885,7 +954,7 @@ graph.isomorphic <- isomorphic_impl
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-count_automorphisms <- automorphisms_impl
+count_automorphisms <- count_automorphisms_impl
 
 
 #' Generating set of the automorphism group of a graph

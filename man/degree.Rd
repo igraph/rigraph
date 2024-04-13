@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{degree}
 \alias{degree}
-\alias{degree.distribution}
 \alias{degree_distribution}
 \title{Degree and degree distribution of the vertices}
 \usage{
@@ -69,34 +68,11 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

@@ -1,5 +1,5 @@
 test_that("cliques works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   check.clique <- function(graph, vids) {
     s <- induced_subgraph(graph, vids)

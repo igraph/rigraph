@@ -46,8 +46,8 @@ Other vertex and edge sequences:
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-vs-attributes}},
-\code{\link{igraph-vs-indexing2}},
 \code{\link{igraph-vs-indexing}},
+\code{\link{igraph-vs-indexing2}},
 \code{\link{print.igraph.es}()},
 \code{\link{print.igraph.vs}()}
 
@@ -57,8 +57,8 @@ Other vertex and edge sequence operations:
 \code{\link{difference.igraph.es}()},
 \code{\link{difference.igraph.vs}()},
 \code{\link{igraph-es-indexing}},
-\code{\link{igraph-vs-indexing2}},
 \code{\link{igraph-vs-indexing}},
+\code{\link{igraph-vs-indexing2}},
 \code{\link{intersection.igraph.es}()},
 \code{\link{intersection.igraph.vs}()},
 \code{\link{rev.igraph.es}()},

@@ -2,14 +2,17 @@
 % Please edit documentation in R/centrality.R
 \name{hub_score}
 \alias{hub_score}
-\alias{hub.score}
 \alias{authority_score}
-\alias{authority.score}
 \title{Kleinberg's hub and authority centrality scores.}
 \usage{
-hub_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults)
+hub_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults())
 
-authority_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults)
+authority_score(
+  graph,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+)
 }
 \arguments{
 \item{graph}{The input graph.}

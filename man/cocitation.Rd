@@ -6,6 +6,8 @@
 \title{Cocitation coupling}
 \usage{
 cocitation(graph, v = V(graph))
+
+bibcoupling(graph, v = V(graph))
 }
 \arguments{
 \item{graph}{The graph object to analyze}
@@ -42,6 +44,10 @@ g <- make_kautz_graph(2, 3)
 cocitation(g)
 bibcoupling(g)
 
+}
+\seealso{
+Other cocitation: 
+\code{\link{similarity}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

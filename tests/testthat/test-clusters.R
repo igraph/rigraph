@@ -1,13 +1,8 @@
 test_that("components works", {
-  set.seed(42)
-
-  gc <- function(graph) {
-    cl <- components(graph)
-    induced_subgraph(graph, which(cl$membership == which.max(cl$csize)))
-  }
+  withr::local_seed(42)
 
   rg <- function(n) {
-    gc(sample_gnp(n, 1 / n))
+    largest_component(sample_gnp(n, 1 / n))
   }
 
   G <- lapply(1:30, function(x) rg(sample(100, 1)))
@@ -16,9 +11,9 @@ test_that("components works", {
   allg <- disjoint_union(G)
   clu <- components(allg)
 
-  expect_that(as.numeric(table(clu$membership)), equals(clu$csize))
-  expect_that(sort(clu$csize), equals(sort(Gsize)))
-  expect_that(clu$no, equals(length(G)))
+  expect_equal(as.numeric(table(clu$membership)), clu$csize)
+  expect_equal(sort(clu$csize), sort(Gsize))
+  expect_equal(clu$no, length(G))
 })
 
 test_that("components names results", {

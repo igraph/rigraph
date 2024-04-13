@@ -2,13 +2,15 @@
 % Please edit documentation in R/structural.properties.R
 \name{diameter}
 \alias{diameter}
-\alias{get.diameter}
-\alias{farthest.nodes}
-\alias{farthest_vertices}
 \alias{get_diameter}
+\alias{farthest_vertices}
 \title{Diameter of a graph}
 \usage{
 diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+
+get_diameter(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
+
+farthest_vertices(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
@@ -71,6 +73,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
+\code{\link{graph_center}()},
 \code{\link{radius}()}
 }
 \author{

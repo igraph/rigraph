@@ -2,10 +2,8 @@
 % Please edit documentation in R/glet.R
 \name{graphlet_basis}
 \alias{graphlet_basis}
-\alias{graphlets}
-\alias{graphlets.project}
 \alias{graphlet_proj}
-\alias{graphlets.candidate.basis}
+\alias{graphlets}
 \title{Graphlet decomposition of a graph}
 \usage{
 graphlet_basis(graph, weights = NULL)
@@ -17,6 +15,8 @@ graphlet_proj(
   niter = 1000,
   Mu = rep(1, length(cliques))
 )
+
+graphlets(graph, weights = NULL, niter = 1000)
 }
 \arguments{
 \item{graph}{The input graph, edge directions are ignored. Only simple graph

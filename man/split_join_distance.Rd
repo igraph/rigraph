@@ -60,6 +60,7 @@ Community detection
 \code{\link{make_clusters}()},
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()}
+\code{\link{plot_dendrogram}()},
+\code{\link{voronoi_cells}()}
 }
 \concept{community}

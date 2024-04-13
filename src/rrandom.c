@@ -33,8 +33,6 @@
 #include "igraph_vector.h"
 #include "igraph_memory.h"
 
-#include "core/math.h"
-
 #include "config.h"
 #include <math.h>
 #include <string.h>
@@ -46,21 +44,22 @@ double  Rf_rgeom(double);
 double  Rf_rbinom(double, double);
 double  Rf_rgamma(double, double);
 
-static int igraph_rng_R_init(void **state) {
+static igraph_error_t igraph_rng_R_init(void **state) {
     return IGRAPH_SUCCESS;
 }
 
 static void igraph_rng_R_destroy(void *state) {
 }
 
-static int igraph_rng_R_seed(void *state, unsigned long int seed) {
+static igraph_error_t igraph_rng_R_seed(void *state, igraph_uint_t seed) {
     IGRAPH_ERROR("R RNG error, unsupported function called",
                  IGRAPH_EINTERNAL);
     return IGRAPH_SUCCESS;
 }
 
-static unsigned long int igraph_rng_R_get(void *state) {
-    return (unsigned long) (unif_rand() * 0x7FFFFFFFUL);
+static igraph_uint_t igraph_rng_R_get(void *state) {
+    // unif_rand() returns a double in [0, 1)
+    return (unif_rand() * 0x40000000UL);
 }
 
 static igraph_real_t igraph_rng_R_get_real(void *state) {
@@ -75,14 +74,14 @@ static igraph_real_t igraph_rng_R_get_geom(void *state, igraph_real_t p) {
     return Rf_rgeom(p);
 }
 
-static igraph_real_t igraph_rng_R_get_binom(void *state, long int n,
+static igraph_real_t igraph_rng_R_get_binom(void *state, igraph_integer_t n,
                                      igraph_real_t p) {
     return Rf_rbinom(n, p);
 }
 
 static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
     igraph_real_t scale = 1.0 / rate;
-    if (!IGRAPH_FINITE(scale) || scale <= 0.0) {
+    if (!isfinite(scale) || scale <= 0.0) {
         if (scale == 0.0) {
             return 0.0;
         }
@@ -91,19 +90,29 @@ static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
     return scale * exp_rand();
 }
 
+static igraph_real_t igraph_rng_R_get_gamma(void *state, igraph_real_t shape, igraph_real_t scale) {
+    return Rf_rgamma(shape, scale);
+}
+
+static igraph_real_t igraph_rng_R_get_pois(void *state, igraph_real_t rate) {
+    return Rf_rpois(rate);
+}
+
 static igraph_rng_type_t igraph_rng_R_type = {
     /* name= */      "GNU R",
-    /* min=  */      0,
-    /* max=  */      0x7FFFFFFFUL,
+    /* bits = */     30, // tested by test-rng.R, #782
     /* init= */      igraph_rng_R_init,
     /* destroy= */   igraph_rng_R_destroy,
     /* seed= */      igraph_rng_R_seed,
     /* get= */       igraph_rng_R_get,
+    /* get_int= */   NULL,
     /* get_real= */  igraph_rng_R_get_real,
     /* get_norm= */  igraph_rng_R_get_norm,
     /* get_geom= */  igraph_rng_R_get_geom,
     /* get_binom= */ igraph_rng_R_get_binom,
-    /* get_exp= */   igraph_rng_R_get_exp
+    /* get_exp= */   igraph_rng_R_get_exp,
+    /* get_gamma= */ igraph_rng_R_get_gamma,
+    /* get_pois= */  igraph_rng_R_get_pois,
 };
 
 igraph_rng_t igraph_rng_R_instance;

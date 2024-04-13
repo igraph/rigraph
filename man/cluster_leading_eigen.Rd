@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_leading_eigen}
 \alias{cluster_leading_eigen}
-\alias{leading.eigenvector.community}
 \title{Community structure detecting based on the leading eigenvector of the
 community matrix}
 \usage{
@@ -11,7 +10,7 @@ cluster_leading_eigen(
   steps = -1,
   weights = NULL,
   start = NULL,
-  options = arpack_defaults,
+  options = arpack_defaults(),
   callback = NULL,
   extra = NULL,
   env = parent.frame()
@@ -140,7 +139,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

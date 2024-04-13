@@ -2,8 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_pa}
 \alias{sample_pa}
-\alias{barabasi.game}
-\alias{ba.game}
 \alias{pa}
 \title{Generate random graphs using preferential attachment}
 \usage{
@@ -121,24 +119,23 @@ degree_distribution(g)
 
 }
 \references{
-Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
+Barabási, A.-L. and Albert R. 1999. Emergence of scaling in
 random networks \emph{Science}, 286 509--512.
 
 de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
 149 510--515.
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
+\code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
-\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_correlated_gnp}()},
+\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
 \code{\link{sample_fitness}()},
+\code{\link{sample_fitness_pl}()},
 \code{\link{sample_forestfire}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
@@ -153,34 +150,7 @@ Random graph models (games)
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
-
-Random graph models (games)
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
+\code{\link{sample_tree}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

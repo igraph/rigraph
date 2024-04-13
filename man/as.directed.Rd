@@ -77,12 +77,12 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as.undirected(g3)
 print(ug3, e = TRUE)
-\dontrun{
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x11(width = 10, height = 5)
 layout(rbind(1:2))
 plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
 plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
-}
+\dontshow{\}) # examplesIf}
 
 g4 <- make_graph(c(
   1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 4,
@@ -105,22 +105,10 @@ Other conversion:
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_adjacency_matrix}()},
+\code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
-
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},
 \code{\link{graph_from_adj_list}()},
 \code{\link{graph_from_graphnel}()}

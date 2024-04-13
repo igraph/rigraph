@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_edge_betweenness}
 \alias{cluster_edge_betweenness}
-\alias{edge.betweenness.community}
 \title{Community structure detection based on edge betweenness}
 \usage{
 cluster_edge_betweenness(
@@ -128,7 +127,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

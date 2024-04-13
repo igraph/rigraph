@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_star}
 \alias{layout_as_star}
-\alias{layout.star}
 \alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{
@@ -49,6 +48,7 @@ plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_bipartite}()},
 \code{\link{layout_as_tree}()},
 \code{\link{layout_in_circle}()},
@@ -64,7 +64,6 @@ Other graph layouts:
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_mds}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{is_separator}
 \alias{is_separator}
-\alias{is.separator}
 \title{Vertex separators}
 \usage{
 is_separator(graph, candidate)
@@ -17,6 +16,7 @@ separator.}
 \value{
 A logical scalar, whether the supplied vertex set is a (minimal)
 vertex separator or not.
+lists all vertex separator of minimum size.
 }
 \description{
 Check whether a given set of vertices is a vertex separator.
@@ -25,14 +25,8 @@ Check whether a given set of vertices is a vertex separator.
 \code{is_separator()} decides whether the supplied vertex set is a vertex
 separator. A vertex set is a vertex separator if its removal results a
 disconnected graph.
-
-In the special case of a fully connected graph with \eqn{n} vertices, each
-set of \eqn{n-1} vertices is considered to be a vertex separator.
 }
 \seealso{
-\code{\link[=is_min_separator]{is_min_separator()}}, \code{\link[=min_separators]{min_separators()}}
-lists all vertex separator of minimum size.
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

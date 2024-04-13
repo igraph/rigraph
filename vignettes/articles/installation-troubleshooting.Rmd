@@ -44,22 +44,28 @@ If you decide to try to compile from sources anyway, basic requirements are list
     - Instructions to install [Rtools for R4.2.x](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html) and [Rtools for R4.3.x](https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html).
  - Make sure you have the GLPK C library installed. This is not the same as the Rglpk R package. Instructions for installing libraries for Rtools4 on Windows are [here](https://cran.r-project.org/bin/windows/Rtools/)
 
-## fatal error: glpk.h: No such file or directory
-
-This error occurs only on Windows, when trying to compile igraph from sources. Please refer to [the previous section](#cannot-compile-igraph-from-sources-on-windows-or-macos).
-
 ## Cannot compile igraph from sources on Linux
 
 Since CRAN does not provide binary packages for Linux, Linux users usually need to compile igraph from sources. In order to do so, make sure that you have all the prerequisites:
 
- - C, C++ and Fortran compilers. On Debian-based distros, use `sudo apt install build-essential gfortran`.
- - Development packages for `libxml2` and `glpk`. On Debian-based distros, use `sudo apt install libxml2-dev libglpk-dev`.
+ - C, C++ and Fortran compilers. On Debian-based distros, use `sudo apt install build-essential gfortran`. On Fedora, use `yum install gcc gcc-c++ gcc-gfortran`.
+ - Development packages for `glpk` and `libxml2`. On Debian-based distros, use `sudo apt install libglpk-dev libxml2-dev`. On Fedora, use `yum install glpk-devel libxml2-devel`.
+
+If you have an Anaconda environment active, deactivate it _before_ compiling igraph. Having conda environments active are known to cause a number of issues, both during compilation and later during usage.
+
+Set up your Anaconda installation so no environment is active by default. Make sure that Anaconda's `bin` directory is _not_ present in your `PATH` environment variable. [Do not add this directory to the path manually. Instead, let Anaconda manage it using `conda init`, as recommended by Anaconda.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path) Only Anaconda's `condabin`, _but not `bin`_, should be present in the `PATH`.
+
+## fatal error: glpk.h: No such file or directory
+
+If you are using Windows or macOS, please refer to [Cannot compile igraph from sources on Windows or macOS](#cannot-compile-igraph-from-sources-on-windows-or-macos).
+
+If you are using Linux, please refer to [Cannot compile igraph from sources on Linux](#cannot-compile-igraph-from-sources-on-linux).
 
 ## libgfortran.so.4: cannot open shared object file: No such file or directory
 
 This problem occurs when there are multiple incompatible gfortran versions on your machine. Most commonly, one of them comes from an active Anaconda environment. Always deactivate all Anaconda environments using `conda deactivate` before installing igraph using `install.packages()`.
 
-Make sure that Anaconda's `bin` directory is _not_ present in your `PATH` environment variable. [Do not add this directory to the path manually. Instead, let Anaconda manage it using `conda init`.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path) Only Anaconda's `condabin`, _but not `bin`_, should be present in the `PATH`.
+Set up your Anaconda installation so no environment is active by default. Make sure that Anaconda's `bin` directory is _not_ present in your `PATH` environment variable. [Do not add this directory to the path manually. Instead, let Anaconda manage it using `conda init`, as recommended by Anaconda.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path) Only Anaconda's `condabin`, _but not `bin`_, should be present in the `PATH`.
 
 ## libmkl_rt.so.1: cannot open shared object file: No such file or directory
 

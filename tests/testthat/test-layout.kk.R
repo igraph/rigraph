@@ -1,7 +1,7 @@
 test_that("Kamada-Kawai layout generator works", {
   skip_on_cran()
 
-  set.seed(42)
+  withr::local_seed(42)
 
   center_layout <- function(layout) {
     t(t(layout) - colMeans(layout))

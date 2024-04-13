@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{difference.igraph}
 \alias{difference.igraph}
-\alias{graph.difference}
 \alias{\%m\%}
 \title{Difference of graphs}
 \usage{
@@ -75,15 +74,15 @@ Other functions for manipulating graph structure:
 \code{\link{disjoint_union}()},
 \code{\link{edge}()},
 \code{\link{igraph-minus}},
-\code{\link{intersection.igraph}()},
 \code{\link{intersection}()},
+\code{\link{intersection.igraph}()},
 \code{\link{path}()},
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
-\code{\link{union.igraph}()},
 \code{\link{union}()},
+\code{\link{union.igraph}()},
 \code{\link{vertex}()}
 }
 \author{

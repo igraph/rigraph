@@ -29,6 +29,7 @@
 #include "igraph_types.h"
 #include "igraph_vector.h"
 
+#include "core/interruption.h"
 #include "core/math.h"
 #include "math/safe_intop.h"
 #include "random/random_internal.h"
@@ -680,8 +681,13 @@ igraph_real_t igraph_rng_get_unif01(igraph_rng_t *rng) {
          * Then we subtract 1 to arrive at the [0; 1) interval. This is fast
          * but we lose one bit of precision as there are 2^53 possible doubles
          * between 0 and 1. */
-        uint64_t r = (igraph_i_rng_get_random_bits_uint64(rng, 52) & 0xFFFFFFFFFFFFFull) | 0x3FF0000000000000ull;
-        return *(double *)(&r) - 1.0;
+        union {
+            uint64_t as_uint64_t;
+            double as_double;
+        } value;
+        value.as_uint64_t =
+            (igraph_i_rng_get_random_bits_uint64(rng, 52) & 0xFFFFFFFFFFFFFull) | 0x3FF0000000000000ull;
+        return value.as_double - 1.0;
     }
 }
 
@@ -1111,6 +1117,7 @@ igraph_error_t igraph_random_sample_real(igraph_vector_t *res, igraph_real_t l,
     igraph_real_t negalphainv = -13;
     igraph_real_t threshold = -negalphainv * n;
     igraph_real_t S;
+    int iter = 0;
 
     /* getting back some sense of sanity */
     if (l > h) {
@@ -1203,6 +1210,11 @@ igraph_error_t igraph_random_sample_real(igraph_vector_t *res, igraph_real_t l,
         n = -1 + n;   nreal = -1.0 + nreal; ninv = nmin1inv;
         qu1 = -S + qu1; qu1real = negSreal + qu1real;
         threshold = threshold + negalphainv;
+
+        if (++iter >= (1 << 14)) {
+            iter = 0;
+            IGRAPH_ALLOW_INTERRUPTION();
+        }
     }
 
     if (n > 1) {

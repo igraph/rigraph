@@ -1,6 +1,6 @@
 test_that("cluster_walktrap works", {
   g <- make_graph("Zachary")
-  set.seed(42)
+  withr::local_seed(42)
   wc <- cluster_walktrap(g)
 
   expect_that(modularity(g, membership(wc)), equals(modularity(wc)))

@@ -2,7 +2,6 @@
 % Please edit documentation in R/bipartite.R
 \name{bipartite_mapping}
 \alias{bipartite_mapping}
-\alias{bipartite.mapping}
 \title{Decide whether a graph is bipartite}
 \usage{
 bipartite_mapping(graph)
@@ -54,7 +53,8 @@ bipartite_mapping(g3)
 \seealso{
 Bipartite graphs
 \code{\link{bipartite_projection}()},
-\code{\link{is_bipartite}()}
+\code{\link{is_bipartite}()},
+\code{\link{make_bipartite_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

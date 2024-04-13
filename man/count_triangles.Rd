@@ -3,7 +3,6 @@
 \name{triangles}
 \alias{triangles}
 \alias{count_triangles}
-\alias{adjacent.triangles}
 \title{Find triangles in graphs}
 \usage{
 triangles(graph)

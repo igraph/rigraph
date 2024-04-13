@@ -44,19 +44,19 @@ Ahora tienes todas las funciones de `igraph` disponibles.
 
 ## Crear un grafo
 
-`igraph` ofrece muchas formas de crear un grafo. La más sencilla es con la función `make_empty_graph`:
+`igraph` ofrece muchas formas de crear un grafo. La más sencilla es con la función `make_empty_graph()`:
 
 ```{r}
 g <- make_empty_graph()
 ```
 
-La forma más común de crear un grafo es con `make_graph`, que construye un grafo basado en especificar las aristas. Por ejemplo, Para hacer un grafo con 10 nodos (numerados `1` a `10`) y dos aristas que conecten los nodos `1-2` y `1-5`:
+La forma más común de crear un grafo es con `make_graph()`, que construye un grafo basado en especificar las aristas. Por ejemplo, Para hacer un grafo con 10 nodos (numerados `1` a `10`) y dos aristas que conecten los nodos `1-2` y `1-5`:
 
 ```{r}
 g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
 ```
 
-A partir de igraph 0.8.0, también puedes incluir literales mediante la notación de fórmulas de igraph. En este caso, el primer término de la fórmula tiene que empezar con un carácter "\~", como comúnmente se usa en las fórmulas en R. Las expresiones constan de los nombres de los vértices y los operadores de las aristas. El operador de un arista es una secuencia de caracteres "-" y "+", el primero es para indicar propiamente las aristas y el segundo para las puntas de flecha (dirección). Puedes utilizar tantos caracteres '-' como quieras para "dibujarlas". Si todos los operadores de un arista están formados únicamente por caracteres `-`, el grafo será no dirigido, mientras que un único carácter `+` implica un grafo dirigido. Por ejemplo, para crear el mismo grafo que antes:
+A partir de igraph 0.8.0, también puedes incluir literales mediante la notación de fórmulas de igraph. En este caso, el primer término de la fórmula tiene que empezar con un carácter `~`, como comúnmente se usa en las fórmulas en R. Las expresiones constan de los nombres de los vértices y los operadores de las aristas. El operador de un arista es una secuencia de caracteres `-` y `+`, el primero es para indicar propiamente las aristas y el segundo para las puntas de flecha (dirección). Puedes utilizar tantos caracteres `-` como quieras para "dibujarlas". Si todos los operadores de un arista están formados únicamente por caracteres `-`, el grafo será no dirigido, mientras que un único carácter `+` implica un grafo dirigido. Por ejemplo, para crear el mismo grafo que antes:
 
 ```{r echo = TRUE}
 g <- make_graph(~ 1--2, 1--5, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -72,7 +72,7 @@ Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y **2** 
 
 ------------------------------------------------------------------------
 
-**NOTA**: `summary` no enlista las aristas, lo cual es conveniente para grafos grandes con millones de aristas:
+**NOTA**: `summary()` no enlista las aristas, lo cual es conveniente para grafos grandes con millones de aristas:
 
 ------------------------------------------------------------------------
 
@@ -80,13 +80,13 @@ Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y **2** 
 summary(g)
 ```
 
-También `make_graph` puede crear algunos grafos destacados con sólo especificar su nombre. Por ejemplo, puedes generar el grafo que muestra la red social del club de kárate de Zachary, que refleja la amistad entre los 34 miembros del club de una universidad de los Estados Unidos en la década de los 70s:
+También `make_graph()` puede crear algunos grafos destacados con sólo especificar su nombre. Por ejemplo, puedes generar el grafo que muestra la red social del club de kárate de Zachary, que refleja la amistad entre los 34 miembros del club de una universidad de los Estados Unidos en la década de los 70s:
 
 ```{r echo = TRUE}
-g <- make_graph('Zachary')
+g <- make_graph("Zachary")
 ```
 
-Para observar un grafo puedes utilizar `plot`:
+Para observar un grafo puedes utilizar `plot()`:
 
 ```{r}
 plot(g)
@@ -96,7 +96,7 @@ Más adelante en este tutorial se ofrece una descripción detallada de las opcio
 
 ## IDs de vértices y aristas
 
-Los vértices y las aristas tienen un identificador numérico en igraph. Los ID de los vértices son siempre consecutivos y empiezan por 1. Para un grafo con "n" vértices, los ID de los vértices están siempre entre 1 y "n". Si alguna operación cambia el número de vértices en los grafos, por ejemplo, se crea un subgrafo mediante `induced_subgraph`, entonces los vértices se vuelven a enumerar para satisfacer este criterio.
+Los vértices y las aristas tienen un identificador numérico en igraph. Los ID de los vértices son siempre consecutivos y empiezan por 1. Para un grafo con "n" vértices, los ID de los vértices están siempre entre 1 y "n". Si alguna operación cambia el número de vértices en los grafos, por ejemplo, se crea un subgrafo mediante `induced_subgraph()`, entonces los vértices se vuelven a enumerar para satisfacer este criterio.
 
 Lo mismo ocurre con las aristas: los ID de las aristas están siempre entre 1 y "m", el número total de aristas del grafo.
 
@@ -110,13 +110,13 @@ Además de los IDs, a los vértices y aristas se les puede asignar un nombre y o
 
 ## Añadir y borrar vértices y aristas
 
-Sigamos trabajando con el grafo del club de kárate. Para añadir uno o más vértices a un grafo existente, utiliza `add_vertices`:
+Sigamos trabajando con el grafo del club de kárate. Para añadir uno o más vértices a un grafo existente, utiliza `add_vertices()`:
 
 ```{r}
 g <- add_vertices(g, 3)
 ```
 
-Del mismo modo, para añadir aristas puedes utilizar `add_edges`:
+Del mismo modo, para añadir aristas puedes utilizar `add_edges()`:
 
 ```{r}
 g <- add_edges(g, edges = c(1,35, 1,36, 34,37))
@@ -124,38 +124,41 @@ g <- add_edges(g, edges = c(1,35, 1,36, 34,37))
 
 Las aristas se añaden especificando el ID del vértice origen y el vértice destino de cada arista. Con las instrucciones anteriores se añaden tres aristas, una que conecta los vértices `1` y `35`, otra que conecta los vértices `1` y `36` y otra que conecta los vértices `34` y `37`.
 
-Además de las funciones `add_vertices` y `add_edges`, se puede utilizar el operador "+" para añadir vértices o aristas al grafo. La operación que se realice dependerá del tipo de argumento del lado derecho:
+Además de las funciones `add_vertices()` y `add_edges()`, se puede utilizar el operador "+" para añadir vértices o aristas al grafo. La operación que se realice dependerá del tipo de argumento del lado derecho:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- g + edges(c(1,35, 1,36, 34,37))
 ```
 
-Puedes añadir un solo vértice/arista a la vez usando `add_vertex` y `add_edge`.
+Puedes añadir un solo vértice/arista a la vez usando `add_vertex()` y `add_edge()` (singular).
 
-**Advertencia**: Si necesitas añadir múltiples aristas a un grafo, es mucho más eficiente usar `add_edges` una vez que utilizar repetidamente `add_edge` con una nueva arista a la vez. Lo mismo ocurre al eliminar aristas y vértices.
+**Advertencia**: Si necesitas añadir múltiples aristas a un grafo, es mucho más eficiente usar `add_edges()` una vez que utilizar repetidamente `add_edge()` con una nueva arista a la vez. Lo mismo ocurre al eliminar aristas y vértices.
 
 Si intentas añadir aristas a vértices con IDs no válidos (por ejemplo, intentas añadir una arista al vértice `38` cuando el grafo sólo tiene 37 vértices), `igraph` muestra un error:
 
-```{r echo = TRUE, eval = FALSE}
-g <- add_edges(g, edges = c(38,37))
+```{r echo = TRUE, error = TRUE}
+g <- add_edges(g, edges = c(38, 37))
 ```
 
 Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%\>%`:
 
 ```{r echo = TRUE}
-g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>%
-     add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
+g <- g %>% 
+  add_edges(edges = c(1, 34)) %>% 
+  add_vertices(3) %>%
+  add_edges(edges = c(38, 39, 39, 40, 40, 38, 40, 37))
 g
 ```
 
-Ahora tenemos un grafo no dirigido con 40 vértices y 89 aristas. Los IDs de los vértices y aristas son siempre *contiguos*, así que si borras un vértice, todos los vértices subsecuentes se vuelven a enumerar. Cuando se re-numera un vértice, las aristas **no** se vuelven a enumerar, pero sí sus vértices origen y destino. Puedes usar `delete_vertices` y `delete_edges` para realizar estas operaciones. Por ejemplo, para borrar la arista que conecta los vértices `1-34`, obtén su ID y luego bórrala:
+Ahora tenemos un grafo no dirigido con 40 vértices y 89 aristas. Los IDs de los vértices y aristas son siempre *contiguos*, así que si borras un vértice, todos los vértices subsecuentes se vuelven a enumerar. Cuando se re-numera un vértice, las aristas **no** se vuelven a enumerar, pero sí sus vértices origen y destino. Puedes usar `delete_vertices()` y `delete_edges()` para realizar estas operaciones. Por ejemplo, para borrar la arista que conecta los vértices `1-34`, obtén su ID y luego bórrala:
 
 ```{r echo = TRUE}
-get.edge.ids(g, c(1,34))
+edge_id_para_borrar <- get.edge.ids(g, c(1,34))
+edge_id_para_borrar
 ```
 
 ```{r}
-g <- delete_edges(g, 85)
+g <- delete_edges(g, edge_id_para_borrar)
 ```
 
 Por ejemplo, para crear un grafo con forma de anillo y para partirlo:
@@ -165,7 +168,7 @@ g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
 
-El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get.edge.ids`:
+El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get.edge.ids()`:
 
 ```{r echo = TRUE}
 g <- make_ring(5)
@@ -173,16 +176,24 @@ g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 plot(g)
 ```
 
-Veamos otro ejemplo, hagamos un grafo cordal. Recuerda que un grafo es cordal (o triangulado) si cada uno de sus ciclos de cuatro o más nodos tienen una "cuerda", que es una arista que une dos nodos que no son adyacentes en el ciclo. En primer lugar, vamos a crear el grafo inicial utilizando `graph_from_literal`:
+Veamos otro ejemplo, hagamos un grafo cordal. Recuerda que un grafo es cordal (o triangulado) si cada uno de sus ciclos de cuatro o más nodos tienen una "cuerda", que es una arista que une dos nodos que no son adyacentes en el ciclo. En primer lugar, vamos a crear el grafo inicial utilizando `graph_from_literal()`:
 
 ```{r}
-g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
-                         E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
-                         I-A:H)
+g1 <- graph_from_literal(
+  A-B:C:I, 
+  B-A:C:D, 
+  C-A:B:E:H, 
+  D-B:E:F,
+  E-C:D:F:H, 
+  F-D:E:G, 
+  G-F:H, 
+  H-C:E:G:I,
+  I-A:H
+)
 plot(g1)
 ```
 
-En este ejemplo, se ha utilizado el operador ':' para definir conjuntos de vértices. Si el operador de un arista conecta dos conjuntos de vértices, entonces cada vértice del primer conjunto estará conectado a cada vértice del segundo conjunto. A continuación utilizamos `is_chordal` para evaluar si nuestro grafo es cordal y buscar qué aristas faltan para rellenar el grafo:
+En este ejemplo, se ha utilizado el operador `:` para definir conjuntos de vértices. Si el operador de un arista conecta dos conjuntos de vértices, entonces cada vértice del primer conjunto estará conectado a cada vértice del segundo conjunto. A continuación utilizamos `is_chordal()` para evaluar si nuestro grafo es cordal y buscar qué aristas faltan para rellenar el grafo:
 
 ```{r echo = TRUE}
 is_chordal(g1, fillin=TRUE)
@@ -197,24 +208,24 @@ plot(chordal_graph)
 
 ## Construcción de grafos
 
-Además de `make_empty_graph`, `make_graph` y `make_graph_from_literal`, `igraph` incluye muchas otras funciones para construir un grafo. Algunas son *deterministas*, es decir, producen el mismo grafo cada vez, por ejemplo `make_tree`:
+Además de `make_empty_graph()`, `make_graph()` y `make_graph_from_literal()`, `igraph` incluye muchas otras funciones para construir un grafo. Algunas son *deterministas*, es decir, producen el mismo grafo cada vez, por ejemplo `make_tree()`:
 
 ```{r echo = TRUE}
 graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-Esto genera un grafo regular en forma de árbol con 127 vértices, cada vértice con dos hijos. No importa cuántas veces llames a `make_tree`, el grafo generado será siempre el mismo si utilizas los mismos parámetros:
+Esto genera un grafo regular en forma de árbol con 127 vértices, cada vértice con dos hijos. No importa cuántas veces llames a `make_tree()`, el grafo generado será siempre el mismo si utilizas los mismos parámetros:
 
 ```{r}
 graph2 <- make_tree(127, 2, mode = "undirected")
 ```
 
 ```{r echo = TRUE}
-identical_graphs(graph1,graph2)
+identical_graphs(graph1, graph2)
 ```
 
-Otras funciones son *estocásticas*, lo cual quiere decir que producen un grafo diferente cada vez; por ejemplo, `sample_grg`:
+Otras funciones son *estocásticas*, lo cual quiere decir que producen un grafo diferente cada vez; por ejemplo, `sample_grg()`:
 
 ```{r echo = TRUE}
 graph1 <- sample_grg(100, 0.2)
@@ -228,13 +239,13 @@ graph2 <- sample_grg(100, 0.2)
 identical_graphs(graph1, graph2)
 ```
 
-Una forma un poco más relajada de comprobar si los grafos son equivalentes es mediante `isomorphic`. Se dice que dos grafos son isomorfos si tienen el mismo número de componentes (vértices y aristas) y mantienen una correspondencia uno a uno entre vértices y aristas, es decir, están conectados de la misma manera:
+Una forma un poco más relajada de comprobar si los grafos son equivalentes es mediante `isomorphic()`. Se dice que dos grafos son isomorfos si tienen el mismo número de componentes (vértices y aristas) y mantienen una correspondencia uno a uno entre vértices y aristas, es decir, están conectados de la misma manera:
 
 ```{r echo = TRUE}
 isomorphic(graph1, graph2)
 ```
 
-Comprobar el isomorfismo puede llevar un tiempo en el caso de grafos grandes (en este caso, la respuesta puede darse rápidamente comprobando la secuencia de grados de los dos grafos). `identical_graph` es un criterio más estricto que `isomorphic`: los dos grafos deben tener la misma lista de vértices y aristas, exactamente en el mismo orden, con la misma direccionalidad, y los dos grafos también deben tener idénticos atributos de grafo, vértice y arista.
+Comprobar el isomorfismo puede llevar un tiempo en el caso de grafos grandes (en este caso, la respuesta puede darse rápidamente comprobando la secuencia de grados de los dos grafos). `identical_graph()` es un criterio más estricto que `isomorphic()`: los dos grafos deben tener la misma lista de vértices y aristas, exactamente en el mismo orden, con la misma direccionalidad, y los dos grafos también deben tener idénticos atributos de grafo, vértice y arista.
 
 ## Establecer y recuperar atributos
 
@@ -243,11 +254,15 @@ Además de los IDs, los vértices y aristas pueden tener *atributos* como un nom
 Para demostrar el uso de los atributos, creemos una red social sencilla:
 
 ```{r}
-g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther,
-                George-Dennis:Frank, Dennis-Esther)
+g <- make_graph(
+  ~ Alice-Boris:Himari:Moshe,
+  Himari-Alice:Nang:Moshe:Samira,
+  Ibrahim-Nang:Moshe, 
+  Nang-Samira
+)
 ```
 
-Cada vértice representa a una persona, por lo que queremos almacenar sus edades, géneros y el tipo de conexión entre dos personas (`is_formal` se refiere a si una conexión entre una persona y otra es formal o informal, es decir, colegas o amigos). El operador `\$` es un atajo para obtener y establecer atributos de un grafo. Es más corto y tan legible como `graph_attr` y `set_graph_attr`.
+Cada vértice representa a una persona, por lo que queremos almacenar sus edades, géneros y el tipo de conexión entre dos personas (`is_formal()` se refiere a si una conexión entre una persona y otra es formal o informal, es decir, colegas o amigos). El operador `$` es un atajo para obtener y establecer atributos de un grafo. Es más corto y tan legible como `graph_attr()` y `set_graph_attr()`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
@@ -256,11 +271,15 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr` y `set_edge_attr` y el operador `%\>%`:
+`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr()` y `set_edge_attr()` y el operador `%\>%`:
 
 ```{r echo = TRUE, eval=FALSE}
-g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther,
-                George-Dennis:Frank, Dennis-Esther) %>%
+g <- make_graph(
+  ~ Alice-Boris:Himari:Moshe, 
+  Himari-Alice:Nang:Moshe:Samira,
+  Ibrahim-Nang:Moshe, 
+  Nang-Samira
+) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
   set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) %>%
   set_edge_attr("is_formal", value = c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE))
@@ -282,10 +301,10 @@ g$date <- c("2022-02-11")
 graph_attr(g, "date")
 ```
 
-Para recuperar atributos, también puedes utilizar `graph_attr`, `vertex_attr` y `edge_attr`. Para encontrar el ID de un vértice puedes utilizar la función `match`:
+Para recuperar atributos, también puedes utilizar `graph_attr()`, `vertex_attr()` y `edge_attr()`. Para encontrar el ID de un vértice puedes utilizar la función `match()`:
 
 ```{r echo = TRUE}
-match(c("George"), V(g)$name)
+match(c("Ibrahim"), V(g)$name)
 ```
 
 Para asignar atributos a un subconjunto de vértices o aristas, puedes utilizar:
@@ -314,20 +333,20 @@ Probablemente, la propiedad más sencilla en la que se puede pensar es el "grado
 degree(g)
 ```
 
-Si el grafo fuera dirigido, podríamos calcular los grados de entrada y salida por separado utilizando `degree(mode="in")` y `degree(mode="out")`. También puedes pasar un único ID de un vértice o una lista de IDs de los vértices a `degree` si quieres calcular los grados sólo para un subconjunto de vértices:
+Si el grafo fuera dirigido, podríamos calcular los grados de entrada y salida por separado utilizando `degree(mode = "in")` y `degree(mode = "out")`. También puedes pasar un único ID de un vértice o una lista de IDs de los vértices a `degree()` si quieres calcular los grados sólo para un subconjunto de vértices:
 
 ```{r echo = TRUE}
 degree(g, 7)
 ```
 
 ```{r echo = TRUE}
-degree(g, v=c(3,4,5))
+degree(g, v = c(3,4,5))
 ```
 
 La mayoría de las funciones que aceptan los IDs de los vértices también aceptan los "nombres" de los vértices (es decir, los valores del atributo `name` del vértice) siempre que los nombres sean únicos:
 
 ```{r echo = TRUE}
-degree(g, v=c("Carmina", "Frank", "Dennis"))
+degree(g, v = c("Carmina", "Moshe", "Nang"))
 ```
 
 También funciona para vértices individuales:
@@ -344,7 +363,7 @@ De igual manera, se utiliza una sintaxis similar para la mayoría de las propied
 
 ------------------------------------------------------------------------
 
-Además del grado, igraph incluye funciones integradas para calcular muchas otras propiedades de centralidad, como la intermediación de vértices y aristas (`edge_betweenness`) o el PageRank de Google (`page_rank`), por nombrar algunas. Aquí sólo ilustraremos la intermediación de aristas:
+Además del grado, igraph incluye funciones integradas para calcular muchas otras propiedades de centralidad, como la intermediación de vértices y aristas (`edge_betweenness()`) o el PageRank de Google (`page_rank()`), por nombrar algunas. Aquí sólo ilustraremos la intermediación de aristas:
 
 ```{r echo = TRUE}
 edge_betweenness(g)
@@ -361,13 +380,13 @@ as_edgelist(g)[ebs == max(ebs), ]
 
 ### Selección de vértices
 
-Tomando como ejemplo la red social anteriormente creada, te gustaría averiguar quién tiene el mayor grado. Puedes hacerlo con las herramientas presentadas hasta ahora y con la función `which.max`:
+Tomando como ejemplo la red social anteriormente creada, te gustaría averiguar quién tiene el mayor grado. Puedes hacerlo con las herramientas presentadas hasta ahora y con la función `which.max()`:
 
 ```{r echo = TRUE}
 which.max(degree(g))
 ```
 
-Otro ejemplo sería seleccionar sólo los vértices que tienen IDs impares, utilizando la función `V`:
+Otro ejemplo sería seleccionar sólo los vértices que tienen IDs impares, utilizando la función `V()`:
 
 ```{r echo = TRUE}
 graph <- graph.full(n=10)
@@ -389,9 +408,8 @@ seq
 
 Al seleccionar un vértice que no existe se produce un error:
 
-```{r echo = TRUE, eval = FALSE}
+```{r echo = TRUE, error = TRUE}
 seq <- V(graph)[2, 3, 7, "foo", 3.5]
-## Error in simple_vs_index(x, ii, na_ok) : Unknown vertex selected
 ```
 
 Los nombres de los atributos también pueden utilizarse tal cual dentro de los operadores de indexación ("[]") de `V()` y `E()`. Esto puede combinarse con la capacidad de R de utilizar vectores booleanos para indexar y obtener expresiones muy concisas y legibles para recuperar un subconjunto del set de vértices o aristas de un grafo. Por ejemplo, el siguiente comando nos da los nombres de los individuos menores de 30 años de nuestra red social:
@@ -433,7 +451,7 @@ V(g)$name[degree(g) == 3]
 
 Las aristas pueden seleccionarse basándose en atributos, igual que los vértices. Como ya se ha mencionado, la forma estándar de obtener aristas es `E`. Además, existen algunas propiedades estructurales especiales para seleccionar aristas.
 
-El uso de `.from` permite filtrar la serie de aristas desde los vértices de donde proceden. Por ejemplo, para seleccionar todas las aristas procedentes de Carmina (cuyo ID de vértice es el 3):
+El uso de `.from()` permite filtrar la serie de aristas desde los vértices de donde proceden. Por ejemplo, para seleccionar todas las aristas procedentes de Carmina (cuyo ID de vértice es el 3):
 
 ```{r echo = TRUE, warning = FALSE}
 E(g)[.from(3)]
@@ -445,9 +463,9 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-Al usar `.to`, se filtran la serie de aristas en función de los vértices de destino o diana. Esto es diferente de `.from` si el grafo es dirigido, mientras que da la misma respuesta para grafos no dirigidos. Con `.inc` sólo se seleccionan las aristas que inciden en un único vértice o en al menos uno de los vértices, independientemente de la dirección de las aristas.
+Al usar `.to()`, se filtran la serie de aristas en función de los vértices de destino o diana. Esto es diferente de `.from()` si el grafo es dirigido, mientras que da la misma respuesta para grafos no dirigidos. Con `.inc()` sólo se seleccionan las aristas que inciden en un único vértice o en al menos uno de los vértices, independientemente de la dirección de las aristas.
 
-La expresión `%--%` es un operador especial que puede utilizarse para seleccionar todas las aristas entre dos conjuntos de vértices. Ignora las direcciones de las aristas en los grafos dirigidos. Por ejemplo, la siguiente expresión selecciona todas las aristas entre Carmina (su ID de vértice es el 3), Dennis (su ID de vértice es el 5) y Esther (su ID de vértice es el 6):
+La expresión `%--%` es un operador especial que puede utilizarse para seleccionar todas las aristas entre dos conjuntos de vértices. Ignora las direcciones de las aristas en los grafos dirigidos. Por ejemplo, la siguiente expresión selecciona todas las aristas entre Carmina (su ID de vértice es el 3), Nang (su ID de vértice es el 5) y Samira (su ID de vértice es el 6):
 
 ```{r echo = TRUE}
 E(g) [ 3:5 %--% 5:6 ]
@@ -478,10 +496,10 @@ E(g)[men %--% women]
 Una matriz de adyacencia es otra manera de representar un grafo. En la matriz de adyacencia, las filas y columnas están indicadas por los vértices del grafo y los elementos de la matriz indican el número de aristas entre los vértices *i* y *j*. La matriz de adyacencia del grafo de nuestra red social imaginaria es:
 
 ```{r echo = TRUE}
-get.adjacency(g)
+as_adjacency_matrix(g)
 ```
 
-Por ejemplo, Carmina (`1, 0, 0, 1, 1, 1, 0`) está directamente conectada con Alejandra (que tiene el índice 1), Frank (índice 4), Dennis (índice 5), Esther (índice 6) y , pero no con Bruno (índice 2) ni con George (índice 7).
+Por ejemplo, Carmina (`1, 0, 0, 1, 1, 1, 0`) está directamente conectada con Alejandra (que tiene el índice 1), Moshe (índice 4), Nang (índice 5), Samira (índice 6) y , pero no con Bruno (índice 2) ni con Ibrahim (índice 7).
 
 ## Diseños y graficación
 
@@ -532,30 +550,46 @@ Esto debería abrir una nueva ventana mostrando una representación visual de la
 El argumento `layout` también acepta funciones; en este caso, la función será llamada con el grafo como su primer argumento. Esto permite ingresar directamente el nombre de una función de diseño, sin tener que crear una variable de diseño, como en el ejemplo anterior:
 
 ```{r}
-plot(g, layout = layout_with_fr,
-     main = "Red social con el algoritmo de disposición Fruchterman-Reingold")
+plot(
+  g, 
+  layout = layout_with_fr,
+  main = "Red social con el algoritmo de disposición Fruchterman-Reingold"
+)
 ```
 
 Para mejorar el aspecto visual, una adición trivial sería colorear los vértices según el género. También deberíamos intentar colocar los nombres ligeramente fuera de los vértices para mejorar la legibilidad:
 
 ```{r}
 V(g)$color <- ifelse(V(g)$gender == "m", "yellow", "red")
-plot(g, layout = layout, vertex.label.dist = 3.5,
-     main = "Red social - con los géneros como colores")
+plot(
+  g, 
+  layout = layout, 
+  vertex.label.dist = 3.5,
+  main = "Red social - con los géneros como colores"
+)
 ```
 
 También puedes tratar el atributo `gender` como un factor y proporcionar los colores como un argumento a `plot()`, que tiene prioridad sobre el atributo `color` que se asigna de manera estándar a los vértices. Los colores se asignan automáticamente:
 
 ```{r}
-plot(g, layout=layout, vertex.label.dist=3.5, vertex.color=as.factor(V(g)$gender))
+plot(
+  g, 
+  layout = layout, 
+  vertex.label.dist = 3.5, 
+  vertex.color = as.factor(V(g)$gender))
 ```
 
 Como se vio anteriormente, con el argumento `vertex.color` puedes especificar propiedades visuales para `plot` en lugar de usar y/o manipular los atributos de vértices o aristas. El siguiente gráfico muestra las relaciones formales con líneas gruesas y las informales con líneas finas:
 
 ```{r}
-plot(g, layout=layout, vertex.label.dist=3.5, vertex.size=20,
-     vertex.color=ifelse(V(g)$gender == "m", "yellow", "red"),
-     edge.width=ifelse(E(g)$is_formal, 5, 1))
+plot(
+  g,
+  layout = layout,
+  vertex.label.dist = 3.5,
+  vertex.size = 20,
+  vertex.color = ifelse(V(g)$gender == "m", "yellow", "red"),
+  edge.width = ifelse(E(g)$is_formal, 5, 1)
+)
 ```
 
 Este último procedimiento es preferible si quieres modificar la representación visual de tu grafo, pero no quieres hacer modificaciones al grafo mismo.
@@ -603,7 +637,7 @@ Estos parámetros pueden especificarse como argumentos de la función `plot` par
 
 ## igraph y el mundo exterior
 
-Ningún módulo de grafos estaría completo sin algún tipo de funcionalidad de importación/exportación que permita al paquete comunicarse con programas y kits de herramientas externos. igraph no es una excepción: proporciona funciones para leer los formatos de grafos más comunes y para guardar grafos en archivos que obedezcan estas especificaciones de formato. Las funciones principales para leer y escribir de/a un fichero son `read_graph` y `write_graph`, respectivamente. La siguiente tabla resume los formatos que igraph puede leer o escribir:
+Ningún módulo de grafos estaría completo sin algún tipo de funcionalidad de importación/exportación que permita al paquete comunicarse con programas y kits de herramientas externos. igraph no es una excepción: proporciona funciones para leer los formatos de grafos más comunes y para guardar grafos en archivos que obedezcan estas especificaciones de formato. Las funciones principales para leer y escribir de/a un fichero son `read_graph()` y `write_graph()`, respectivamente. La siguiente tabla resume los formatos que igraph puede leer o escribir:
 
 | Formato                                                                     | Nombre corto | Método de lectura                                                                                                                                                                         | Método de escritura                                |
 |-----------------|-----------------|-------------------|-------------------|
@@ -611,7 +645,7 @@ Ningún módulo de grafos estaría completo sin algún tipo de funcionalidad de 
 | Matriz de adyacencia                                                        | `adjacency`  | `graph_from_adjacency_matrix(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper","lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA)` | `as.matrix(graph, "adjacency")`                    |
 | DIMACS                                                                      | `dimacs`     | `read_graph(file, format = c("dimacs"))`                                                                                                                                                  | `write_graph(graph, file, format = c("dimacs"))`   |
 | Edge list                                                                   | `edgelist`   | `read_graph(file, format = c("edgelist"))`                                                                                                                                                | `write_graph(graph, file, format = c("edgelist"))` |
-| [GraphViz](https://www.graphviz.org)                                        | `dot`        | not supported yet                                                                                                                                                                         | `write_graph(graph, file, formati = c("dot"))`     |
+| [GraphViz](https://www.graphviz.org)                                        | `dot`        | not supported yet                                                                                                                                                                         | `write_graph(graph, file, format = c("dot"))`     |
 | GML                                                                         | `gml`        | `read_graph(file, format = c("gml"))`                                                                                                                                                     | `write_graph(graph, file, format = c("gml"))`      |
 | GraphML                                                                     | `graphml`    | `read_graph(file, format = c("graphml"))`                                                                                                                                                 | `write_graph(graph, file, format = c("graphml"))`  |
 | LEDA                                                                        | `leda`       | not supported yet                                                                                                                                                                         | `write_graph(graph, file, format = c("leda"))`     |

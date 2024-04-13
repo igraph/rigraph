@@ -1,3 +1,18 @@
+
+#' Optimal edge curvature when plotting graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `autocurve.edges()` was renamed to `curve_multiple()` to create a more
+#' consistent API.
+#' @inheritParams curve_multiple
+#' @keywords internal
+#' @export
+autocurve.edges <- function(graph, start = 0.5) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "autocurve.edges()", "curve_multiple()")
+  curve_multiple(graph = graph, start = start)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -182,7 +197,6 @@ i.postprocess.layout <- function(maybe_layout) {
 #' `curve_multiple()` calculates the optimal `edge.curved` vector for
 #' plotting a graph with multiple edges, so that all edges are visible.
 #'
-#' @aliases autocurve.edges
 #' @param graph The input graph.
 #' @param start The curvature at the two extreme edges. All edges will have a
 #'   curvature between `-start` and `start`, spaced equally.

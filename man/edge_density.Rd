@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{edge_density}
 \alias{edge_density}
-\alias{graph.density}
 \title{Graph density}
 \usage{
 edge_density(graph, loops = FALSE)
@@ -61,10 +60,11 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

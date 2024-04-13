@@ -5,9 +5,9 @@
 \alias{vcount}
 \title{Order (number of vertices) of a graph}
 \usage{
-gorder(graph)
-
 vcount(graph)
+
+gorder(graph)
 }
 \arguments{
 \item{graph}{The graph}
@@ -33,8 +33,8 @@ Other structural queries:
 \code{\link{get.edge.ids}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident_edges}()},
 \code{\link{incident}()},
+\code{\link{incident_edges}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}

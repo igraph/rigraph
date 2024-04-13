@@ -4,13 +4,8 @@
 \alias{distance_table}
 \alias{mean_distance}
 \alias{distances}
-\alias{shortest.paths}
-\alias{get.shortest.paths}
-\alias{get.all.shortest.paths}
-\alias{average.path.length}
-\alias{path.length.hist}
-\alias{all_shortest_paths}
 \alias{shortest_paths}
+\alias{all_shortest_paths}
 \title{Shortest (directed or undirected) paths between vertices}
 \usage{
 distance_table(graph, directed = TRUE)
@@ -29,7 +24,8 @@ distances(
   to = V(graph),
   mode = c("all", "out", "in"),
   weights = NULL,
-  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")
+  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson",
+    "floyd-warshall")
 )
 
 shortest_paths(
@@ -61,7 +57,8 @@ this argument is ignored for undirected graphs.}
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
 attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute).}
+the graph has a \code{weight} attribute). In a weighted graph, the length
+of a path is the sum of the weights of its constituent edges.}
 
 \item{unconnected}{What to do if the graph is unconnected (not
 strongly connected if directed paths are considered). If TRUE, only
@@ -85,8 +82,8 @@ is not required for \code{shortest_paths()}.}
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
 then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the corresponding
-undirected graph will be used, i.e. not directed paths are searched. This
+it will be considered. If \code{all}, the default, then the graph is treated
+as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
 
 \item{algorithm}{Which algorithm to use for the calculation. By default
@@ -149,8 +146,8 @@ for each vertex, or \code{NULL}, if it was not requested.}
 
 For \code{all_shortest_paths()} a list is returned, each list element
 contains a shortest path from \code{from} to a vertex in \code{to}. The
-shortest paths to the same vertex are collected into consecutive elements of
-the list.
+shortest paths to the same vertex are collected into consecutive elements
+of the list.
 
 For \code{mean_distance()} a single number is returned if \code{details=FALSE},
 or a named list with two entries: \code{res} is the mean distance as a numeric
@@ -160,8 +157,10 @@ also as a numeric scalar.
 \code{distance_table()} returns a named list with two entries: \code{res} is
 a numeric vector, the histogram of distances, \code{unconnected} is a
 numeric scalar, the number of pairs for which the first vertex is not
-reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
-for directed graphs and \eqn{n(n-1)/2} for undirected graphs.
+reachable from the second. In undirected and directed graphs, unorderde
+and ordered pairs are considered, respectively. Therefore the sum of the
+two entries is always \eqn{n(n-1)} for directed graphs and \eqn{n(n-1)/2}
+for undirected graphs.
 }
 \description{
 \code{distances()} calculates the length of all the shortest paths from
@@ -181,8 +180,10 @@ the \code{weight} edge attribute of the graph. The implemented algorithms
 are breadth-first search (\sQuote{\code{unweighted}}), this only works for
 unweighted graphs; the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this
 works for graphs with non-negative edge weights; the Bellman-Ford algorithm
-(\sQuote{\code{bellman-ford}}), and Johnson's algorithm
-(\sQuote{\code{johnson}}). The latter two algorithms work with arbitrary
+(\sQuote{\code{bellman-ford}}); Johnson's algorithm
+(\sQuote{\code{johnson}}); and a faster version of the Floyd-Warshall algorithm
+with expected quadratic running time (\sQuote{\code{floyd-warshall}}). The latter
+three algorithms work with arbitrary
 edge weights, but (naturally) only for graphs that don't have a negative
 cycle. Note that a negative-weight edge in an undirected graph implies
 such a cycle. Johnson's algorithm performs better than the Bellman-Ford
@@ -201,14 +202,17 @@ breadth-first search for unweighted graphs and Dijkstra's algorithm for
 weighted graphs. The latter only works if the edge weights are non-negative.
 
 \code{all_shortest_paths()} calculates \emph{all} shortest paths between
-pairs of vertices. More precisely, between the \code{from} vertex to the
-vertices given in \code{to}. It uses a breadth-first search for unweighted
-graphs and Dijkstra's algorithm for weighted ones. The latter only supports
-non-negative edge weights.
+pairs of vertices, including several shortest paths of the same length.
+More precisely, it computerd all shortest path starting at \code{from}, and
+ending at any vertex given in \code{to}. It uses a breadth-first search for
+unweighted graphs and Dijkstra's algorithm for weighted ones. The latter
+only supports non-negative edge weights. Caution: in multigraphs, the
+result size is exponentially large in the number of vertex pairs with
+multiple edges between them.
 
 \code{mean_distance()} calculates the average path length in a graph, by
 calculating the shortest paths between all pairs of vertices (both ways for
-directed graphs). It uses a breadth-=first search for unweighted graphs and
+directed graphs). It uses a breadth-first search for unweighted graphs and
 Dijkstra's algorithm for weighted ones. The latter only supports non-negative
 edge weights.
 
@@ -259,107 +263,37 @@ West, D.B. (1996). \emph{Introduction to Graph Theory.} Upper
 Saddle River, N.J.: Prentice Hall.
 }
 \seealso{
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_acyclic}()},
+\code{\link{is_dag}()},
+\code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
+\code{\link{knn}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
+
 Other paths: 
 \code{\link{all_simple_paths}()},
 \code{\link{diameter}()},
 \code{\link{eccentricity}()},
+\code{\link{graph_center}()},
 \code{\link{radius}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

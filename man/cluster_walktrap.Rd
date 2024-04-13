@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_walktrap}
 \alias{cluster_walktrap}
-\alias{walktrap.community}
 \title{Community structure via short random walks}
 \usage{
 cluster_walktrap(
@@ -93,7 +92,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Pascal Pons (\url{http://psl.pons.free.fr/}) and Gabor Csardi

@@ -2,8 +2,6 @@
 % Please edit documentation in R/bipartite.R
 \name{bipartite_projection}
 \alias{bipartite_projection}
-\alias{bipartite.projection}
-\alias{bipartite.projection.size}
 \alias{bipartite_projection_size}
 \title{Project a bipartite graph}
 \usage{
@@ -15,6 +13,8 @@ bipartite_projection(
   which = c("both", "true", "false"),
   remove.type = TRUE
 )
+
+bipartite_projection_size(graph, types = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It can be directed, but edge directions are
@@ -82,7 +82,7 @@ rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
 colnames(M) <- c("Party", "Skiing", "Badminton")
 M[] <- sample(0:1, length(M), replace = TRUE)
 M
-g2 <- graph_from_incidence_matrix(M)
+g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
@@ -92,7 +92,8 @@ print(proj2[[2]], g = TRUE, e = TRUE)
 \seealso{
 Bipartite graphs
 \code{\link{bipartite_mapping}()},
-\code{\link{is_bipartite}()}
+\code{\link{is_bipartite}()},
+\code{\link{make_bipartite_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

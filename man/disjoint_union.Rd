@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{disjoint_union}
 \alias{disjoint_union}
-\alias{graph.disjoint.union}
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{
@@ -62,19 +61,19 @@ Other functions for manipulating graph structure:
 \code{\link{contract}()},
 \code{\link{delete_edges}()},
 \code{\link{delete_vertices}()},
-\code{\link{difference.igraph}()},
 \code{\link{difference}()},
+\code{\link{difference.igraph}()},
 \code{\link{edge}()},
 \code{\link{igraph-minus}},
-\code{\link{intersection.igraph}()},
 \code{\link{intersection}()},
+\code{\link{intersection.igraph}()},
 \code{\link{path}()},
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
-\code{\link{union.igraph}()},
 \code{\link{union}()},
+\code{\link{union.igraph}()},
 \code{\link{vertex}()}
 }
 \author{

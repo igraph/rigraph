@@ -1,3 +1,48 @@
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `path.length.hist()` was renamed to `distance_table()` to create a more
+#' consistent API.
+#' @inheritParams distance_table
+#' @keywords internal
+#' @export
+path.length.hist <- function(graph, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
+  distance_table(graph = graph, directed = directed)
+} # nocov end
+
+#' Maximum cardinality search
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximum.cardinality.search()` was renamed to `max_cardinality()` to create a more
+#' consistent API.
+#' @inheritParams max_cardinality
+#' @keywords internal
+#' @export
+maximum.cardinality.search <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "maximum.cardinality.search()", "max_cardinality()")
+  max_cardinality(graph = graph)
+} # nocov end
+
+#' Directed acyclic graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.dag()` was renamed to `is_dag()` to create a more
+#' consistent API.
+#' @inheritParams is_dag
+#' @keywords internal
+#' @export
+is.dag <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
+  is_dag(graph = graph)
+} # nocov end
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -74,7 +119,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   ## Function call
   res <- .Call(
     R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.integer(cutoff), mode
+    as.numeric(cutoff), mode
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -93,7 +138,6 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
-#' @aliases is.dag is_dag
 #' @param graph The input graph. It may be undirected, in which case
 #'   `FALSE` is reported.
 #' @return A logical vector of length one.
@@ -111,6 +155,27 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @export
 is_dag <- is_dag_impl
 
+#' Acyclic graphs
+#'
+#' This function tests whether the given graph is free of cycles.
+#'
+#' This function looks for directed cycles in directed graphs and undirected
+#' cycles in undirected graphs.
+#'
+#' @param graph The input graph.
+#' @return A logical vector of length one.
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' is_acyclic(g)
+#' is_acyclic(as.undirected(g))
+#' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
+#' and directed graphs.
+#' @family cycles
+#' @family structural.properties
+#' @export
+is_acyclic <- is_acyclic_impl
 
 #' Maximum cardinality search
 #'
@@ -124,7 +189,7 @@ is_dag <- is_dag_impl
 #' The algorithm provides a simple basis for deciding whether a graph is
 #' chordal, see References below, and also [is_chordal()].
 #'
-#' @aliases maximum.cardinality.search max_cardinality
+#' @aliases max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The
@@ -177,12 +242,8 @@ max_cardinality <- maximum_cardinality_search_impl
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams distances
+#' @inheritParams rlang::args_dots_empty
 #' @return `eccentricity()` returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
 #' @seealso [radius()] for a related concept,
@@ -194,29 +255,47 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- eccentricity_impl
+eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+    if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "eccentricity(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+}
 
 
 #' Radius of a graph
 #'
-#' The eccentricity of a vertex is its shortest path distance from the
-#' farthest other node in the graph. The smallest eccentricity in a graph
-#' is called its radius
+#' The eccentricity of a vertex is its distance from the farthest other node
+#' in the graph. The smallest eccentricity in a graph is called its radius.
 #'
 #' The eccentricity of a vertex is calculated by measuring the shortest
 #' distance from (or to) the vertex, to (or from) all vertices in the
 #' graph, and taking the maximum.
 #'
 #' This implementation ignores vertex pairs that are in different
-#' components.  Isolate vertices have eccentricity zero.
+#' components. Isolated vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If `out`
-#'   then the shortest paths *from* the vertex, if `in` then *to*
-#'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, edge directions will be ignored. This
-#'   argument is ignored for undirected graphs.
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
 #' @return A numeric scalar, the radius of the graph.
 #' @seealso [eccentricity()] for the underlying
 #'   calculations, [distances] for general shortest path
@@ -229,11 +308,61 @@ eccentricity <- eccentricity_impl
 #' radius(g)
 #' @family paths
 #' @export
-radius <- radius_impl
+radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+  if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "radius(... =)",
+      details = "The arguments `weights` and `mode` must be named."
+    )
+
+    rlang::check_dots_unnamed()
+
+    dots <- list(...)
+
+    if (is.null(weights) && length(dots) > 0) {
+      weights <- dots[[1]]
+      dots <- dots[-1]
+    }
+
+    if (missing(mode) && length(dots) > 0) {
+      mode <- dots[[1]]
+    }
+  }
+
+  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+}
+
+#' Central vertices of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' The center of a graph is the set of its vertices with minimal eccentricity.
+#'
+#' @inheritParams eccentricity
+#' @inheritParams rlang::args_dots_empty
+#' @return The vertex IDs of the central vertices.
+#' @seealso [eccentricity()], [radius()]
+#' @family paths
+#' @examples
+#' tree <- make_tree(100, 7)
+#' graph_center(tree)
+#' graph_center(tree, mode = "in")
+#' graph_center(tree, mode = "out")
+#'
+#' # Without and with weights
+#' ring <- make_ring(10)
+#' graph_center(ring)
+#' # Add weights
+#' E(ring)$weight <- seq_len(ecount(ring))
+#' graph_center(ring)
+#'
+#' @export
+graph_center <- graph_center_dijkstra_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
-#' @family paths
 #' @export
 distance_table <- path_length_hist_impl

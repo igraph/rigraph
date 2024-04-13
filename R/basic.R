@@ -1,3 +1,18 @@
+
+#' Is this object an igraph graph?
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.igraph()` was renamed to `is_igraph()` to create a more
+#' consistent API.
+#' @inheritParams is_igraph
+#' @keywords internal
+#' @export
+is.igraph <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.igraph()", "is_igraph()")
+  is_igraph(graph = graph)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -23,7 +38,6 @@
 
 #' Is this object an igraph graph?
 #'
-#' @aliases is.igraph
 #' @param graph An R object.
 #' @return A logical constant, `TRUE` if argument `graph` is a graph
 #'   object.

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_grid}
 \alias{layout_on_grid}
-\alias{layout.grid}
 \alias{layout.grid.3d}
 \alias{on_grid}
 \title{Simple grid layout}
@@ -50,7 +49,7 @@ g2 <- make_lattice(c(3, 3, 3))
 layout_on_grid(g2, dim = 3)
 
 plot(g, layout = layout_on_grid)
-if (interactive()) {
+if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
   rglplot(g, layout = layout_on_grid(g, dim = 3))
 }
 }
@@ -60,6 +59,7 @@ if (interactive()) {
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_bipartite}()},
 \code{\link{layout_as_star}()},
 \code{\link{layout_as_tree}()},
@@ -75,7 +75,6 @@ Other graph layouts:
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_mds}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

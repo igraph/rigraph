@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{knn}
 \alias{knn}
-\alias{graph.knn}
 \title{Average nearest neighbor degree}
 \usage{
 knn(
@@ -102,9 +101,10 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
-\code{\link{laplacian_matrix}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

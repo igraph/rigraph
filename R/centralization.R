@@ -1,4 +1,139 @@
 
+#' Centralization of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralize.scores()` was renamed to `centralize()` to create a more
+#' consistent API.
+#' @inheritParams centralize
+#' @keywords internal
+#' @export
+centralize.scores <- function(scores, theoretical.max = 0, normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralize.scores()", "centralize()")
+  centralize(scores = scores, theoretical.max = theoretical.max, normalized = normalized)
+} # nocov end
+
+#' Theoretical maximum for betweenness centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.evcent.tmax()` was renamed to `centr_eigen_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_eigen_tmax
+#' @keywords internal
+#' @export
+centralization.evcent.tmax <- function(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.evcent.tmax()", "centr_eigen_tmax()")
+  centr_eigen_tmax(graph = graph, nodes = nodes, directed = directed, scale = scale)
+} # nocov end
+
+#' Centralize a graph according to the eigenvector centrality of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.evcent()` was renamed to `centr_eigen()` to create a more
+#' consistent API.
+#' @inheritParams centr_eigen
+#' @keywords internal
+#' @export
+centralization.evcent <- function(graph, directed = FALSE, scale = TRUE, options = arpack_defaults(), normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.evcent()", "centr_eigen()")
+  centr_eigen(graph = graph, directed = directed, scale = scale, options = options, normalized = normalized)
+} # nocov end
+
+#' Theoretical maximum for degree centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.degree.tmax()` was renamed to `centr_degree_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_degree_tmax
+#' @keywords internal
+#' @export
+centralization.degree.tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "in", "total"), loops = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.degree.tmax()", "centr_degree_tmax()")
+  centr_degree_tmax(graph = graph, nodes = nodes, mode = mode, loops = loops)
+} # nocov end
+
+#' Centralize a graph according to the degrees of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.degree()` was renamed to `centr_degree()` to create a more
+#' consistent API.
+#' @inheritParams centr_degree
+#' @keywords internal
+#' @export
+centralization.degree <- function(graph, mode = c("all", "out", "in", "total"), loops = TRUE, normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.degree()", "centr_degree()")
+  centr_degree(graph = graph, mode = mode, loops = loops, normalized = normalized)
+} # nocov end
+
+#' Theoretical maximum for closeness centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.closeness.tmax()` was renamed to `centr_clo_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_clo_tmax
+#' @keywords internal
+#' @export
+centralization.closeness.tmax <- function(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.closeness.tmax()", "centr_clo_tmax()")
+  centr_clo_tmax(graph = graph, nodes = nodes, mode = mode)
+} # nocov end
+
+#' Centralize a graph according to the closeness of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.closeness()` was renamed to `centr_clo()` to create a more
+#' consistent API.
+#' @inheritParams centr_clo
+#' @keywords internal
+#' @export
+centralization.closeness <- function(graph, mode = c("out", "in", "all", "total"), normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.closeness()", "centr_clo()")
+  centr_clo(graph = graph, mode = mode, normalized = normalized)
+} # nocov end
+
+#' Theoretical maximum for betweenness centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.betweenness.tmax()` was renamed to `centr_betw_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_betw_tmax
+#' @keywords internal
+#' @export
+centralization.betweenness.tmax <- function(graph = NULL, nodes = 0, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.betweenness.tmax()", "centr_betw_tmax()")
+  centr_betw_tmax(graph = graph, nodes = nodes, directed = directed)
+} # nocov end
+
+#' Centralize a graph according to the betweenness of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.betweenness()` was renamed to `centr_betw()` to create a more
+#' consistent API.
+#' @inheritParams centr_betw
+#' @keywords internal
+#' @export
+centralization.betweenness <- function(graph, directed = TRUE, normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "centralization.betweenness()", "centr_betw()")
+  centr_betw(graph = graph, directed = directed, normalized = normalized)
+} # nocov end
+
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -59,7 +194,7 @@ NULL
 #' @return A real scalar, the centralization of the graph from which
 #'   `scores` were derived.
 #'
-#' @aliases centralization centralize.scores
+#' @aliases centralization
 #' @family centralization related
 #'
 #' @export
@@ -107,7 +242,6 @@ centralize <- centralization_impl
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.degree
 #' @family centralization related
 #'
 #' @export
@@ -131,12 +265,10 @@ centr_degree <- centralization_degree_impl
 #' @param mode This is the same as the `mode` argument of
 #'   `degree()`.
 #' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree. Currently the default value is `FALSE`,
-#'   but this argument will be required from igraph 1.4.0.
+#'   calculating the degree.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
-#' @aliases centralization.degree.tmax
 #' @family centralization related
 #'
 #' @export
@@ -147,15 +279,23 @@ centr_degree <- centralization_degree_impl
 #' centr_degree(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
-centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "in", "total"), loops = FALSE) {
-  # Compatibility check with pre-igraph 1.3.0
-  if (missing(loops)) {
-    warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
+centr_degree_tmax <- function(graph = NULL,
+                              nodes = 0,
+                              mode = c("all", "out", "in", "total"),
+                              loops) {
+  if (!lifecycle::is_present(loops)) {
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "centr_degree_tmax(loops = 'must be explicit')",
+      details = "Default value (`FALSE`) will be dropped in next release, add an explicit value for the loops argument."
+    )
+    loops <- FALSE
   }
+
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
@@ -189,7 +329,6 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.betweenness
 #' @family centralization related
 #'
 #' @export
@@ -229,7 +368,6 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.betweenness.tmax
 #' @family centralization related
 #'
 #' @export
@@ -259,7 +397,6 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.closeness
 #' @family centralization related
 #'
 #' @export
@@ -287,7 +424,6 @@ centr_clo <- centralization_closeness_impl
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.closeness.tmax
 #' @family centralization related
 #'
 #' @export
@@ -322,7 +458,6 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #'   \item{theoretical_max}{The same as above, the theoretical maximum
 #'     centralization score for a graph with the same number of vertices.}
 #'
-#' @aliases centralization.evcent
 #' @family centralization related
 #'
 #' @export
@@ -358,7 +493,6 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.evcent.tmax
 #' @family centralization related
 #'
 #' @export

@@ -2,34 +2,55 @@
 % Please edit documentation in R/assortativity.R
 \name{assortativity}
 \alias{assortativity}
-\alias{assortativity.degree}
-\alias{assortativity_degree}
-\alias{assortativity.nominal}
 \alias{assortativity_nominal}
+\alias{assortativity_degree}
 \title{Assortativity coefficient}
 \usage{
-assortativity(graph, types1, types2 = NULL, directed = TRUE)
+assortativity(
+  graph,
+  values,
+  ...,
+  values.in = NULL,
+  directed = TRUE,
+  normalized = TRUE,
+  types1 = NULL,
+  types2 = NULL
+)
 
-assortativity_nominal(graph, types, directed = TRUE)
+assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 assortativity_degree(graph, directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{types1}{The vertex values, these can be arbitrary numeric values.}
+\item{values}{The vertex values, these can be arbitrary numeric values.}
 
-\item{types2}{A second value vector to be using for the incoming edges when
-calculating assortativity for a directed graph.  Supply \code{NULL} here if
-you want to use the same values for outgoing and incoming edges. This
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{values.in}{A second value vector to use for the incoming edges when
+calculating assortativity for a directed graph.
+Supply \code{NULL} here if
+you want to use the same values for outgoing and incoming edges.
+This
 argument is ignored (with a warning) if it is not \code{NULL} and undirected
 assortativity coefficient is being calculated.}
 
 \item{directed}{Logical scalar, whether to consider edge directions for
-directed graphs. This argument is ignored for undirected graphs. Supply
+directed graphs.
+This argument is ignored for undirected graphs.
+Supply
 \code{TRUE} here to do the natural thing, i.e. use directed version of the
 measure for directed graphs and the undirected version for undirected
 graphs.}
+
+\item{normalized}{Boolean, whether to compute the normalized assortativity.
+The non-normalized nominal assortativity is identical to modularity.
+The non-normalized value-based assortativity is simply the covariance of the
+values at the two ends of edges.}
+
+\item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated aliases for \code{values} and \code{values.in}, respectively.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
@@ -39,7 +60,7 @@ with \code{\link[=as.integer]{as.integer()}}.}
 A single real number.
 }
 \description{
-The assortativity coefficient is positive is similar vertices (based on some
+The assortativity coefficient is positive if similar vertices (based on some
 external property) tend to connect to each, and negative otherwise.
 }
 \details{
@@ -50,7 +71,7 @@ same labels or similar assigned values.
 
 M.E.J. Newman defined two kinds of assortativity coefficients, the first one
 is for categorical labels of vertices. \code{assortativity_nominal()}
-calculates this measure. It is defines as
+calculates this measure. It is defined as
 
 \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
 r=(sum(e(i,i), i) - sum(a(i)b(i), i)) / (1 - sum(a(i)b(i), i))}
@@ -72,16 +93,19 @@ sum(jk(e(j,k)-qout(j)qin(k)), j, k) / sigma(qin) / sigma(qout) }
 
 for directed ones. Here \eqn{q_i^o=\sum_j e_{ij}}{qout(i)=sum(e(i,j), j)},
 \eqn{q_i^i=\sum_j e_{ji}}{qin(i)=sum(e(j,i), j)}, moreover,
-\eqn{\sigma_q}{sigma(q)}, \eqn{sigma_o}{sigma(qout)} and
-\eqn{sigma_i}{sigma(qin)} are the standard deviations of \eqn{q},
+\eqn{\sigma_q}{\sigma(q)}, \eqn{\sigma_o}{\sigma(qout)} and
+\eqn{\sigma_i}{\sigma(qin)} are the standard deviations of \eqn{q},
 \eqn{q^o}{qout} and \eqn{q^i}{qin}, respectively.
 
 The reason of the difference is that in directed networks the relationship
 is not symmetric, so it is possible to assign different values to the
 outgoing and the incoming end of the edges.
 
-\code{assortativity_degree()} uses vertex degree (minus one) as vertex values
+\code{assortativity_degree()} uses vertex degree as vertex values
 and calls \code{assortativity()}.
+
+Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
+Thus, self-loops are taken into account twice in undirected graphs.
 }
 \examples{
 

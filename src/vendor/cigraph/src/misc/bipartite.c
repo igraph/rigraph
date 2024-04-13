@@ -636,7 +636,7 @@ igraph_error_t igraph_incidence(
  *   second kind (corresponding to columns); if \c
  *   IGRAPH_IN, then the opposite direction is realized; if \c
  *   IGRAPH_ALL, then mutual edges will be created.
- * \param multiple How to interpret the matrix elements. See details below.
+ * \param multiple How to interpret the matrix elements. See details above.
  * \return Error code.
  *
  * Time complexity: O(n*m), the size of the bipartite adjacency matrix.
@@ -670,7 +670,7 @@ igraph_error_t igraph_biadjacency(
                 igraph_integer_t elem = ceil(MATRIX(*input, i, j));
                 igraph_integer_t from, to;
 
-                if (!elem) {
+                if (elem == 0) {
                     continue;
                 }
 
@@ -910,6 +910,26 @@ igraph_error_t igraph_is_bipartite(const igraph_t *graph,
     igraph_vector_int_t neis;
     igraph_bool_t bi = true;
 
+    /* Shortcut: Graphs with self-loops are not bipartite. */
+    if (igraph_i_property_cache_has(graph, IGRAPH_PROP_HAS_LOOP) &&
+        igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_HAS_LOOP)) {
+        if (*res) {
+            *res = false;
+        }
+        return IGRAPH_SUCCESS;
+    }
+
+    /* Shortcut: If the type vector is not requested, and the graph is a forest
+     * we can immediately return with the result that the graph is bipartite. */
+    if (! types &&
+        igraph_i_property_cache_has(graph, IGRAPH_PROP_IS_FOREST) &&
+        igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_IS_FOREST)) {
+        if (*res) {
+            *res = true;
+        }
+        return IGRAPH_SUCCESS;
+    }
+
     IGRAPH_VECTOR_CHAR_INIT_FINALLY(&seen, no_of_nodes);
     IGRAPH_DQUEUE_INT_INIT_FINALLY(&Q, 100);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
@@ -949,6 +969,12 @@ igraph_error_t igraph_is_bipartite(const igraph_t *graph,
     igraph_vector_int_destroy(&neis);
     igraph_dqueue_int_destroy(&Q);
     IGRAPH_FINALLY_CLEAN(2);
+
+    /* Set the cache: A graph that is not bipartite has
+     * an odd-length cycle, therefore it cannot be a forest. */
+    if (! bi) {
+        igraph_i_property_cache_set_bool_checked(graph, IGRAPH_PROP_IS_FOREST, false);
+    }
 
     if (res) {
         *res = bi;

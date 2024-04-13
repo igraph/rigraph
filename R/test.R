@@ -1,3 +1,33 @@
+
+#' Run package tests
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraphtest()` was renamed to `igraph_test()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraphtest <- function() { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraphtest()", "igraph_test()")
+  igraph_test()
+} # nocov end
+
+#' Query igraph's version string
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.version()` was renamed to `igraph_version()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.version <- function() { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
+  igraph_version()
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2013  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -32,7 +62,6 @@
 #' This function simply calls the `test_dir` function from the
 #' `testthat` package on the test directory.
 #'
-#' @aliases igraphtest
 #' @return Whatever is returned by `test_dir` from the `testthat`
 #'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -54,7 +83,6 @@ igraph_test <- function() {
 #'
 #' The igraph version string is always the same as the version of the R package.
 #'
-#' @aliases igraph.version
 #' @return A character scalar, the igraph version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -67,7 +95,9 @@ igraph_test <- function() {
 #' igraph_version()
 #'
 igraph_version <- function() {
-  unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
+  # Better than packageVersion("igraph") because it uses the loaded package
+  # and is independent of .libPaths()
+  getNamespaceInfo("igraph", "spec")[["version"]]
 }
 
 checkpkg <- function(package_file, args = character()) {

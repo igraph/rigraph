@@ -1,208 +1,454 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.5.1.9016
+# igraph 2.0.3.9011
+
+## Continuous integration
+
+- Use other conflict checker action.
+
+- Add conflicts checker for PRs.
+
+
+# igraph 2.0.3.9010
 
 ## Features
 
-  - Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+- Generate all bindings (#1044).
 
-## Testing
+## Chore
 
-  - Stabilize `cluster_label_prop()` test (#932).
+- Use and explain `getNamespaceInfo()` (#1339).
 
-  - More robust `sample_pa()` test (#927).
+## Continuous integration
 
-  - Make `cluster_louvain()` test bullet-proof.
+- Run examples with comment `\dontrun{}` (#1310).
 
-  - Stabilize SIR test (#936).
+## Refactoring
+
+- Names in `update-cigraph.sh` script (#1287).
+
+
+# igraph 2.0.3.9009
+
+## Continuous integration
+
+- Install R (#1335).
+
+## Refactoring
+
+- Move variables closer to their usage, add explaining variables (#1336).
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+- Explaining variables (#1326).
 
 ## Breaking changes
 
-  - Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
 
 
-# igraph 1.5.1.9015
+# igraph 2.0.3.9008
 
-## Features
+## Refactoring
 
-  - Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
+- Less if else in vertex_attr() (#1324).
 
-  - Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
-
-## Chore
-
-  - Document.
-
-## Documentation
-
-  - Update knnk() docs.
+- Add assert_named_list() helper to assert the value is a named list with no duplicate names (#1322).
 
 ## Testing
 
-  - Stabilize `cluster_louvain()` test (#933).
+- Use largest_component() and expect_equal() in test files (#1323).
 
-  - Stabilize `sample_forestfire()` test (#929).
+## Uncategorized
 
-  - Hard-code graph used in test (#928).
-
-  - Update GML test file (#925).
-
-  - Improve test for sampling from Dirichlet distribution (#923).
-
-  - Omit test that no longer holds with igraph 0.10 (#922).
-
-  - Stabilize test in preparation for upgrade (#920).
-
-  - Stabilize plot test (#919).
-
-## Breaking changes
-
-  - Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
-
-  - Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
+- Sample_forestfire() tests and example 🔥 (#1318).
 
 
-# igraph 1.5.1.9014
-
-## Documentation
-
-  - Render reciprocity docs.
-
-
-# igraph 1.5.1.9013
+# igraph 2.0.3.9007
 
 ## Features
 
-  - Improve symmetry check for adjacency matrices on input (#911).
+- Weight support for `eccentricity()` and `radius()` (@krlmlr, #1211).
+
+## Refactoring
+
+- Early return() in graph_attr() (#1320).
+
+
+# igraph 2.0.3.9006
 
 ## Documentation
 
-  - Fix formul in reciprocity() docs.
+- Fix `sample_degseq()` example (#1297).
 
+- Fix `graph_from_adjacency_matrix()` examples to avoid warnings (#1302).
 
-# igraph 1.5.1.9012
-
-## Features
-
-  - Warn if non-symmetric undirected adjacency matrix (#904).
-
-## Chore
-
-  - Declare CI for sanitizer builds.
-
-  - Update to testthat 3.2.0.
-
-## Documentation
-
-  - Strength() does not give a warning when no weights are given.
+- Replace `\dontrun{}` with `@examplesIf` (#1307).
 
 ## Testing
 
-  - Fix checks.
+- Add skip condition for `rglplot` test (#1306).
 
 
-# igraph 1.5.1.9011
-
-## Chore
-
-  - Added FUNDING.yml.
-
-
-# igraph 1.5.1.9010
-
-## Chore
-
-  - Fix vendoring script.
-
-## vendor
-
-  - Update vendored igraph/C to igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c.
-
-
-# igraph 1.5.1.9009
+# igraph 2.0.3.9005
 
 ## Documentation
 
-  - Update `sample_smallworld()` manual page (#895).
+- Update `igraph.Rmd`, fix manual page typo (#1313).
 
 
-# igraph 1.5.1.9008
+# igraph 2.0.3.9004
 
-## Chore
+## Continuous integration
 
-  - Restore vendored plfit, remove from vendored cigraph for now.
-
-  - Restore vendored cs, remove from vendored cigraph for now.
-
-  - Install ccache on GHA.
+- Remove running examples in sanitizer (#1314).
 
 
-# igraph 1.5.1.9007
+# igraph 2.0.3.9003
 
-## Chore
+## Continuous integration
 
-  - Remove duplicate vendored plfit.
+- Update lock.yaml.
 
-  - Sync vendored parser artifacts for igraph/C 0.10.
-
-  - Remove duplicate vendored cs.
-
-  - Sync vendored igraph/C 0.10.
+- Update lock.yaml (#1309).
 
 
-# igraph 1.5.1.9006
+# igraph 2.0.3.9002
 
 ## Chore
 
-  - Improve troubleshooting info.
+- Work around https://github.com/igraph/igraph/pull/2527.
 
-  - Fix typo in troubleshooting docs.
+- Apply patch after vendoring.
+
+- Update vendored sources to igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472.
 
 
-# igraph 1.5.1.9005
+# igraph 2.0.3.9001
+
+- Internal changes only.
+
+
+# igraph 2.0.3.9000
+
+- Merge branch 'cran-2.0.3'.
+
+
+# igraph 2.0.3
+
+See <https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md> for a complete changelog of the bundled C core, and <https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84> for the changes since the igraph 2.0.1.
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
+
+## Features
+
+- GMP is no longer a dependency (#1256), libxml2 (#1282) and glpk are optional.
+- Update vendored sources to igraph/igraph@857a125069c226f266562b3781b82833fe1d59d9.
+- New `voronoi_cells()` to compute the Voronoi partitioning of a graph (#1173).
+
+## Bug fixes
+
+- Fix `rglplot(edge_label = )` (#1267).
+
+## Continuous integration
+
+- Run examples with sanitizer (#1288).
+- Add scheduled builds.
 
 ## Documentation
 
-  - Improve sir() docs.
+- Make `x11()` usage in example happen only in interactive sessions (#1301).
+- Remove misleading comment about warning given as no warning is given (#1294).
+- Improve `min_st_separators()` documentation (#1264).
+- Add link to discussion forum (#1279) and logo (#1280).
+- Add code finding duplicate `@seealso`, and use it (#1270).
+- Remove duplicate `@seealso` from `?sample_pa` (#1268).
+- Remove incorrect claim about handling of complete graphs by `is_separator()` and `is_min_separator()` (#1263).
+- Fix error messages mentioning to mention `upgrade_graph()` instead of the nonexisting `upgrade_version()` (#1252).
+- Split `is_bipartite()` manual page from other manual page (#1230).
+- Improve bug report template.
+- `CITATION.cff` contains only the first three version components.
+- Install lock workflow to lock stale discussions after one year (#1304).
+
+## Internal
+
+- Replace use of deprecated `barabasi.game()` with `sample_pa()` (#1291).
+- Auto-generate `are_adjacent()`, avoid deprecated `igraph_are_connected()` C function (#1254).
 
 
-# igraph 1.5.1.9004
+# igraph 2.0.2
+
+See <https://github.com/igraph/rigraph/blob/f3fa58b/src/vendor/cigraph/CHANGELOG.md> for a complete changelog of the bundled C core, and <https://github.com/igraph/rigraph/compare/1bd2bf79..f3fa58b#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84> for the changes since the igraph 2.0.1.
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
+
+## Bug fixes
+
+- `g + vertices(1, 2, foo = 3)` works again, regression introduced in igraph 2.0.0 (#1247).
+- `sample_pa()` respects the `out.seq` and `out.dist` arguments again, regression introduced in igraph 2.0.0 (#1226).
+- `isomorphisms()` and `subgraph_isomorphisims(method = "vf2")` work again, regression introduced in 2.0.0 (#1219).
+- `biconnected_components()` now returns edge and vertex sequences again, regression introduced in 2.0.0 (#1213).
+- Remove zeros from the `order` and `order.out` components returned by `dfs()`, regression introduced in 2.0.0 (#1179).
+- Memory leaks when converting data to C (#1196).
+
+## Features
+
+- `realize_bipartite_degseq()` creates a bipartite graph from two degree sequences (#1212).
+- `is_biconnected()` checks if a graph is biconnected (#1204).
+- `distances()` now supports the Floyd-Warshall algorithm (#1186).
 
 ## Documentation
 
-  - Correct documentation for weighted cliques.
+- Use more culturally diverse names in intro vignettes (#1246).
+- Formatting tweaks in introductory vignettes (#1243).
+- Recommend {pak} instead of {remotes} (#1228).
+- Fix typo in `mean_distance()` docs.
+- Update troubleshooting document, emphasize issues with Anaconda environments (#1209).
+- Improved docs for shortest path functions (#1201).
+- Document `"dsatur"` heuristic for `greedy_vertex_coloring()` (#1206).
+- Remove scg related docs (#1167).
+- Fix typo in `?articulation_points` (#1191).
+- Improve installation and troubleshooting instructions (#1184).
+- Improve docs of assortativity (#1151).
+
+## Testing
+
+- Add tests for `isomorphisms()` and `subgraph_isomorphisms()` (#1225).
+
+## Packaging
+
+- Always use bundled mini-gmp (#1233).
+- `config.h` defines `HAVE___UINT128_T` (#1216).
+- Do not rely on `which` program during configuration (#1232).
+- `configure` manage libxml multiple include paths (#1197).
+- Remove empty string in `configure` (#1235).
+- Link Fortran runtime on Windows as needed by arpack. (#1215).
+- Workaround for deprecated enum values not being supported with old GCC (#1205).
+- `HAVE_GFORTRAN` flag for `win` and `ucrt` (#1171).
+- `make_empty_graph()` is now fully auto-generated (#1068).
+- Eliminate manual edits from autogenerated files (#1207).
+- Add read-only comments for RStudio IDE (#1152).
+
+## Internal
+
+- Remove unused patch files (#1234).
+- Update stimulus to 0.21.4 (#1210).
+- Avoid duplicate objects (#1223).
+- Eliminate a compiler warning from simpleraytracer (#1185).
 
 
-# igraph 1.5.1.9003
+# igraph 2.0.1.1
 
-## Documentation
+## Bug fixes
 
-  - Update Erdos-Renyi model docs.
+- Avoid `is.R()` which is deprecated in R 4.4.0.
 
 
-# igraph 1.5.1.9002
+# igraph 2.0.1
 
-## Chore
+## Bug fixes
 
-  - Bump upcoming igraph/C 0.10 sources.
+- Use cpp11 for simpleraytracer glue to avoid `-Wlto` warnings (#1163).
 
-  - Bump upcoming igraph/C 0.10 sources.
 
-  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+# igraph 2.0.0
+
+This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
+See <https://github.com/igraph/rigraph/blob/1bd2bf79/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+(A permanent link to the most recent changelog of the C core used in the R package is
+<https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md>.)
+
+Version 1.6.0 of the R package used version 0.9.9 of the C core.
+The changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.
+Changes to the implementation of some functions in the C core may be reflected in functions in the R package.
+
+The change log below is a summary of the additional changes in the R interface.
 
 ## Breaking changes
 
-  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+- `get.edge.ids(multi = TRUE)` and `as_adjacency_matrix(edges = )` are no longer supported (#1101, #1080).
+
+- Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
+
+- `laplacian_matrix(normalized = TRUE)` uses a different normalization method (#1102).
+
+- `fit_power_law()` no longer returns a `KS.p` component.
+
+- Remove default value for `loops` argument of `centr_degree_tmax()` (#1114).
+
+- `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+
+- Remove `graph.isomorphic.34()` (#1065, #1067).
+
+- Use `lifecycle::deprecate_soft()` for most deprecated functions (#1024, #1025, #1104).
+
+- The system libraries GLPK, GMP, and libxml2 are now mandatory for compiling from source.
 
 
-# igraph 1.5.1.9001
+## Bug fixes
 
-  - Internal changes only.
+- Add scalar conversion checks in a few critical places (#1069).
+
+- Check that we receive a scalar when expecting a scalar in C code (#1051).
+
+- Check that matrix sizes are in the supported range before passing them to R (#1066).
+
+- `transitivity()` now produces a named vector in the local (weighted) case (#1057).
+
+- `plot()` correctly computes intersections between edges and rectangle vertices (#1021).
+
+- Fix compilation on Windows with spaces in the Rtools path (#1000).
+
+## Features
+
+- Use 30 bits of R's RNG (#1079).
+
+- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
+
+- New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
+
+## Documentation
+
+- Add GitHub bug report form.
+
+- New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
+
+- Move deprecation badge to top of doc pages.
+
+- Remove usage of `get.adjacency()` from intro vignettes (#1084).
+
+- Fix math formatting in `fit_power_law()` docs.
+
+- Fix incorrect usage in `subgraph.edges()` example.
+
+- Clarify that Infomap considers edge directions.
+
+- Improve edge connectivity docs (#1119).
+
+- Add some missing diacritics.
+
+## Internal
+
+- Use `[]` assignment for converting matrices (#1035).
+
+- Move towards autogenerating all bindings (#1043).
+
+- Use %\|\|% from rlang (#1112).
+
+- Replace loop by `lapply()` when returning vertex and edge sets (#1033).
+
+- Do not duplicate prototypes, use a common header for `rinterface.c` and `rinterface_extra.c` (#1055).
+
+- Clean up some auto-generation code (#1031), remove unused parts from code generation (#1032), eliminate the use of some deprecated C functions.
+
+- Use integers for mode enum in `cluster_label_prop()`.
+
+- Standardize the handling of some stimulus enum types (#1064).
+
+- Remove unused vectorlist / matrixlist destructors (#1070).
+
+- Remove unused stimulus type VERTEXSETLIST_INT (#1049).
+
+- Remove unused types (#1060).
+
+- Fix Stimulus definitions (#997).
+
+- Avoid deprecated `R_igraph_automorphisms()` (#999).
+
+- Use new ARPACK_DEFAULTS symbol from C core for default arpack options.
+
+- Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
+
+- Add Aviator configuration.
+
+## Testing
+
+- Add `as_biadjacency_matrix()` tests for named vectors (#1154, #1155).
+
+- Test transferring colors in isomorphism functions (#1050).
 
 
-# igraph 1.5.1.9000
+# igraph 1.6.0
 
-- Merge branch 'cran-1.5.1'.
+## Breaking changes
+
+- New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800), with consistent usage checks (#966).
+
+- Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
+
+- `bfs()` with unreachable nodes returns zero instead of `NaN` as `rank` (#956), and negative instead of `NaN` for `dist` (#926).
+
+- `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+
+- `girth()` returns `Inf` for acyclic graphs (#931).
+
+- Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+
+- Remove `scg_eps()`, `scg_group()` and `scg_semi_proj()`, broken and no longer maintained (#946).
+
+## Bug fixes
+
+- Fix `printf()` warning (#975).
+
+- Fix calls to `isSymmetric()` for matrix objects with a class (#965).
+
+- Reduce frequency of interruption checks (#957).
+
+## Features
+
+- Change "incidence matrix" naming to "biadjacency matrix" (#962).
+
+- Add aliases using the neighborhood terminology for all ego functions: (#950).
+
+- Rename arguments to `assortativity(values, values.in)` from `types1` and `types2` (#952).
+
+- Add ellipsis to `cluster_label_prop()` (#954).
+
+- Placeholders for `is_acyclic()` and `is_forest()`, to be implemented in igraph 2.0.0 (#945).
+
+- `is_tree(details = TRUE)` designates the first vertex as root for non-trees (#935).
+
+- `all_shortest_paths()` returns the vertex list in both `res` and `vpaths` components (#930).
+
+- Improve symmetry check for adjacency matrices on input (#911).
+
+- Warn if non-symmetric undirected adjacency matrix (#904).
+
+## Documentation
+
+- Remove duplicate `\seealso{}` (#948).
+
+- Update `knnk()` and `sir()` docs.
+
+- Fix formula in `reciprocity()` docs.
+
+- `strength()` does not give a warning when no weights are given.
+
+- Update `sample_smallworld()` manual page (#895).
+
+- Correct documentation for weighted cliques.
+
+- Update Erdos-Renyi model docs.
+
+## Testing
+
+- Clean up tests (#967).
+
+- Stabilize tests for `cluster_label_prop()` (#932), `sample_pa()` (#927), `cluster_louvain()` (#933), SIR (#936), `sample_forestfire()` (#929).
+
+- Hard-code graph used in test (#928).
+
+- Update GML test file (#925).
+
+- Improve test for sampling from Dirichlet distribution (#923).
+
+- Omit test that no longer holds with igraph 0.10 (#922).
+
+- Stabilize test in preparation for upgrade (#920).
+
+- Stabilize plot test (#919).
+
+- Fix checks.
 
 
 # igraph 1.5.1
@@ -272,7 +518,7 @@ The only supported remedy is to upgrade the igraph package to version 1.5.0 or l
 
 ## Bug fixes
 
-  - Fix error message in `make_graph()` when `simplify = ...` is used with a non-formula (#834).
+- Fix error message in `make_graph()` when `simplify = ...` is used with a non-formula (#834).
 
 ## Testing
 
@@ -309,13 +555,13 @@ The only supported remedy is to upgrade the igraph package to version 1.5.0 or l
 
 ## Internal
 
-  - Fix tests for dev waldo (#779, @hadley).
+- Fix tests for dev waldo (#779, @hadley).
 
-  - Fix linking on Windows: gfortran needs quadmath. (#778).
+- Fix linking on Windows: gfortran needs quadmath. (#778).
 
 ## Documentation
 
-  - Mention limitation of Pajek reader (#776).
+- Mention limitation of Pajek reader (#776).
 
 
 # igraph 1.4.2

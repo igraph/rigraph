@@ -1,3 +1,78 @@
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `no.clusters()` was renamed to `count_components()` to create a more
+#' consistent API.
+#' @inheritParams count_components
+#' @keywords internal
+#' @export
+no.clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "no.clusters()", "count_components()")
+  count_components(graph = graph, mode = mode)
+} # nocov end
+
+#' Decompose a graph into components
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `decompose.graph()` was renamed to `decompose()` to create a more
+#' consistent API.
+#' @inheritParams decompose
+#' @keywords internal
+#' @export
+decompose.graph <- function(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "decompose.graph()", "decompose()")
+  decompose(graph = graph, mode = mode, max.comps = max.comps, min.vertices = min.vertices)
+} # nocov end
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cluster.distribution()` was renamed to `component_distribution()` to create a more
+#' consistent API.
+#' @inheritParams component_distribution
+#' @keywords internal
+#' @export
+cluster.distribution <- function(graph, cumulative = FALSE, mul.size = FALSE, ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "cluster.distribution()", "component_distribution()")
+  component_distribution(graph = graph, cumulative = cumulative, mul.size = mul.size, ...)
+} # nocov end
+
+#' Biconnected components
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `biconnected.components()` was renamed to `biconnected_components()` to create a more
+#' consistent API.
+#' @inheritParams biconnected_components
+#' @keywords internal
+#' @export
+biconnected.components <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "biconnected.components()", "biconnected_components()")
+  biconnected_components(graph = graph)
+} # nocov end
+
+#' Articulation points and bridges of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `articulation.points()` was renamed to `articulation_points()` to create a more
+#' consistent API.
+#' @inheritParams articulation_points
+#' @keywords internal
+#' @export
+articulation.points <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "articulation.points()", "articulation_points()")
+  articulation_points(graph = graph)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -22,20 +97,6 @@
 ###################################################################
 # Connected components, subgraphs, kinda
 ###################################################################
-
-#' @family components
-#' @export
-count_components <- function(graph, mode = c("weak", "strong")) {
-  ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode,
-    "weak" = 1,
-    "strong" = 2
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_clusters, graph, as.numeric(mode))
-}
 
 #' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
@@ -70,7 +131,6 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'
 #' Creates a separate graph for each connected component of a graph.
 #'
-#' @aliases decompose.graph
 #' @param graph The original graph.
 #' @param mode Character constant giving the type of the components, wither
 #'   `weak` for weakly connected components or `strong` for strongly
@@ -102,8 +162,8 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "weak" = 1,
-    "strong" = 2
+    "weak" = 1L,
+    "strong" = 2L
   )
 
   if (is.na(max.comps)) {
@@ -126,12 +186,11 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #' number of connected components in a graph. Similarly, bridges or cut-edges
 #' are edges whose removal increases the number of connected components in a
 #' graph. If the original graph was connected, then the removal of a single
-#' articulation point or a single bridge makes it undirected. If a graph
+#' articulation point or a single bridge makes it disconnected. If a graph
 #' contains no articulation points, then its vertex connectivity is at least
 # " two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
 #'
-#' @aliases articulation.points articulation_points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return For `articulation_points()`, a numeric vector giving the vertex
@@ -157,7 +216,6 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
-#' @family components
 #' @export
 bridges <- bridges_impl
 
@@ -175,7 +233,6 @@ bridges <- bridges_impl
 #' that this is not true for vertices: the same vertex can be part of many
 #' biconnected components.
 #'
-#' @aliases biconnected.components biconnected_components
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return A named list with three components: \item{no}{Numeric scalar, an
@@ -199,17 +256,70 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
-biconnected_components <- biconnected_components_impl
+biconnected_components <- function(graph) {
+  # Function call
+  res <- biconnected_components_impl(graph)
+
+  # TODO: Clean up after fixing "." / "_" problem.
+  # See https://github.com/igraph/rigraph/issues/1203
+
+  if (igraph_opt("return.vs.es")) {
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree.edges <- NULL
+  }
+
+  if (igraph_opt("return.vs.es")) {
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component.edges <- NULL
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$articulation_points <- create_vs(graph, res$articulation_points)
+    res$articulation.points <- NULL
+  }
+  res
+}
+
+#' Check biconnectedness
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Tests whether a graph is biconnected.
+#'
+#' @details
+#' A graph is biconnected if the removal of any single vertex (and its adjacent
+#' edges) does not disconnect it.
+#'
+#' igraph does not consider single-vertex graphs biconnected.
+#'
+#' Note that some authors do not consider the graph consisting of
+#' two connected vertices as biconnected, however, igraph does.
+#'
+#' @param graph The input graph. Edge directions are ignored.
+#' @return Logical, `TRUE` if the graph is biconnected.
+#' @seealso [articulation_points()], [biconnected_components()],
+#' [is_connected()], [vertex_connectivity()]
+#' @keywords graphs
+#' @examples
+#' is_biconnected(make_graph("bull"))
+#' is_biconnected(make_graph("dodecahedron"))
+#' is_biconnected(make_full_graph(1))
+#' is_biconnected(make_full_graph(2))
+#' @family components
+#' @export
+is_biconnected <- is_biconnected_impl
 
 
 #' @rdname components
-#' @family components
 #' @export
 largest_component <- function(graph, mode = c("weak", "strong")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  
+
   comps <- components(graph, mode = mode)
 
   lcc_id <- which.max(comps$csize)

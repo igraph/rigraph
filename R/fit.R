@@ -1,3 +1,18 @@
+
+#' Fitting a power-law distribution function to discrete data
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `power.law.fit()` was renamed to `fit_power_law()` to create a more
+#' consistent API.
+#' @inheritParams fit_power_law
+#' @keywords internal
+#' @export
+power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, implementation = c("plfit", "R.mle"), ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "power.law.fit()", "fit_power_law()")
+  fit_power_law(x = x, xmin = xmin, start = start, force.continuous = force.continuous, implementation = implementation, ...)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -33,30 +48,29 @@
 #' This function fits a power-law distribution to a vector containing samples
 #' from a distribution (that is assumed to follow a power-law of course). In a
 #' power-law distribution, it is generally assumed that \eqn{P(X=x)} is
-#' proportional to \eqn{x^{-alpha}}{x^-alpha}, where \eqn{x} is a positive
+#' proportional to \eqn{x^{-\alpha}}{x^-alpha}, where \eqn{x} is a positive
 #' number and \eqn{\alpha}{alpha} is greater than 1. In many real-world cases,
 #' the power-law behaviour kicks in only above a threshold value
-#' \eqn{x_{min}}{xmin}. The goal of this function is to determine
-#' \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
-#' \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
+#' \eqn{x_\text{min}}{xmin}. The goal of this function is to determine
+#' \eqn{\alpha}{alpha} if \eqn{x_\text{min}}{xmin} is given, or to determine
+#' \eqn{x_\text{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
 #' `fit_power_law()` provides two maximum likelihood implementations.  If
 #' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
 #' optimization (see [mle][stats4::mle]) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
 #' optimization method and/or its parameters.  This implementation can
-#' *not* to fit the \eqn{x_{min}}{xmin} argument, so use the
+#' *not* to fit the \eqn{x_\text{min}}{xmin} argument, so use the
 #' \sQuote{`plfit`} implementation if you want to do that.
 #'
 #' The \sQuote{`plfit`} implementation also uses the maximum likelihood
-#' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_{min}}{xmin};
-#' When \eqn{x_{min}}{xmin} is not given in advance, the algorithm will attempt
+#' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
+#' When \eqn{x_\text{min}}{xmin} is not given in advance, the algorithm will attempt
 #' to find itsoptimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
 #' test between the fitted distribution and the original sample is the largest.
 #' The function uses the method of Clauset, Shalizi and Newman to calculate the
 #' parameters of the fitted distribution. See references below for the details.
 #'
-#' @aliases power.law.fit
 #' @param x The data to fit, a numeric vector. For implementation
 #'   \sQuote{`R.mle`} the data must be integer values. For the
 #'   \sQuote{`plfit`} implementation non-integer values might be present and

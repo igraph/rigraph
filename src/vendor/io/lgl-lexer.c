@@ -601,10 +601,10 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[14] =
+static const flex_int16_t yy_accept[16] =
     {   0,
-        0,    0,    7,    4,    2,    3,    3,    1,    5,    4,
-        2,    3,    0
+        0,    0,    0,    0,    7,    5,    1,    4,    4,    3,
+        2,    1,    4,    3,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -612,66 +612,66 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    4,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    5,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    2,    5,    5,    6,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
 
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    1,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
 
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    5,    5,    5,
+        5,    5,    5,    5,    5
     } ;
 
 static const YY_CHAR yy_meta[7] =
     {   0,
-        1,    2,    3,    4,    5,    5
+        1,    2,    3,    4,    5,    1
     } ;
 
-static const flex_int16_t yy_base[18] =
+static const flex_int16_t yy_base[20] =
     {   0,
-        0,    0,   11,    0,    0,    0,    0,   12,   12,    0,
-        0,   12,   12,    9,    7,    4,    4
+        0,    0,    0,    0,   11,   12,    0,    0,    0,    0,
+       12,    0,   12,    0,   12,    8,    5,    5,    2
     } ;
 
-static const flex_int16_t yy_def[18] =
+static const flex_int16_t yy_def[20] =
     {   0,
-       13,    1,   13,   14,   15,   16,   17,   13,   13,   14,
-       15,   13,    0,   13,   13,   13,   13
+       15,    1,    1,    1,   15,   15,   16,   17,   18,   19,
+       15,   16,   15,   19,    0,   15,   15,   15,   15
     } ;
 
 static const flex_int16_t yy_nxt[19] =
     {   0,
-        4,    5,    6,    7,    8,    9,   12,   12,   11,   10,
-       13,    3,   13,   13,   13,   13,   13,   13
+        6,    7,    8,    9,   10,   11,   14,   13,   13,   12,
+       15,    5,   15,   15,   15,   15,   15,   15
     } ;
 
 static const flex_int16_t yy_chk[19] =
     {   0,
-        1,    1,    1,    1,    1,    1,   17,   16,   15,   14,
-        3,   13,   13,   13,   13,   13,   13,   13
+        1,    1,    1,    1,    1,    1,   19,   18,   17,   16,
+        5,   15,   15,   15,   15,   15,   15,   15
     } ;
 
 /* Table of booleans, true if rule could match eol. */
 static const flex_int32_t yy_rule_can_match_eol[7] =
     {   0,
-0, 0, 1, 0, 0, 0,     };
+0, 0, 0, 1, 0, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -743,9 +743,12 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 #endif
 #line 745 "src/vendor/io/lgl-lexer.c"
 #define YY_NO_INPUT 1
-#line 747 "src/vendor/io/lgl-lexer.c"
+/* Anything except non-printable (00-1F), space (20), del (7F) and # */
+
+#line 749 "src/vendor/io/lgl-lexer.c"
 
 #define INITIAL 0
+#define LINE 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -1025,12 +1028,12 @@ YY_DECL
 		}
 
 	{
-#line 76 "src/vendor/cigraph/src/io/lgl-lexer.l"
-
-
 #line 79 "src/vendor/cigraph/src/io/lgl-lexer.l"
- /* --------------------------------------------------hashmark------*/
-#line 1034 "src/vendor/io/lgl-lexer.c"
+
+
+#line 82 "src/vendor/cigraph/src/io/lgl-lexer.l"
+ /* ------------------------------------------------whitespace------*/
+#line 1037 "src/vendor/io/lgl-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1057,7 +1060,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 14 )
+				if ( yy_current_state >= 16 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1101,49 +1104,44 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 80 "src/vendor/cigraph/src/io/lgl-lexer.l"
-{ return HASH; }
+#line 83 "src/vendor/cigraph/src/io/lgl-lexer.l"
+{ /* skip space */ }
 	YY_BREAK
-/* ------------------------------------------------whitespace------*/
+/* --------------------------------------------------hashmark------*/
 case 2:
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/lgl-lexer.l"
-{ }
-	YY_BREAK
-/* ---------------------------------------------------newline------*/
-case 3:
-/* rule 3 can match eol */
-YY_RULE_SETUP
 #line 86 "src/vendor/cigraph/src/io/lgl-lexer.l"
-{ return NEWLINE; }
+{ BEGIN(LINE); return HASH; }
 	YY_BREAK
 /* ----------------------------------------------alphanumeric------*/
-case 4:
+case 3:
 YY_RULE_SETUP
 #line 89 "src/vendor/cigraph/src/io/lgl-lexer.l"
-{ return ALNUM; }
+{ BEGIN(LINE); return ALNUM; }
 	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 91 "src/vendor/cigraph/src/io/lgl-lexer.l"
-{ if (yyextra->eof) {
-                       yyterminate();
-                    } else {
-                       yyextra->eof=1;
-                       return NEWLINE;
-                    }
-                  }
+/* ---------------------------------------------------newline------*/
+case 4:
+/* rule 4 can match eol */
+#line 93 "src/vendor/cigraph/src/io/lgl-lexer.l"
+YY_RULE_SETUP
+case YY_STATE_EOF(LINE):
+#line 93 "src/vendor/cigraph/src/io/lgl-lexer.l"
+{ BEGIN(INITIAL); return NEWLINE; }
 	YY_BREAK
+/* ---------------------------------------------anything else------*/
 case 5:
 YY_RULE_SETUP
-#line 99 "src/vendor/cigraph/src/io/lgl-lexer.l"
+#line 96 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { return ERROR; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 101 "src/vendor/cigraph/src/io/lgl-lexer.l"
+#line 98 "src/vendor/cigraph/src/io/lgl-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1147 "src/vendor/io/lgl-lexer.c"
+#line 1143 "src/vendor/io/lgl-lexer.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1431,7 +1429,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 	for ( yy_cp = yyg->yytext_ptr + YY_MORE_ADJ; yy_cp < yyg->yy_c_buf_p; ++yy_cp )
 		{
-		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 6);
+		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
 		if ( yy_accept[yy_current_state] )
 			{
 			yyg->yy_last_accepting_state = yy_current_state;
@@ -1440,7 +1438,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 14 )
+			if ( yy_current_state >= 16 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1460,7 +1458,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner; /* This var may be unused depending upon options. */
 	char *yy_cp = yyg->yy_c_buf_p;
 
-	YY_CHAR yy_c = 6;
+	YY_CHAR yy_c = 1;
 	if ( yy_accept[yy_current_state] )
 		{
 		yyg->yy_last_accepting_state = yy_current_state;
@@ -1469,11 +1467,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 14 )
+		if ( yy_current_state >= 16 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 13);
+	yy_is_jam = (yy_current_state == 15);
 
 	(void)yyg;
 	return yy_is_jam ? 0 : yy_current_state;
@@ -2302,6 +2300,6 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 101 "src/vendor/cigraph/src/io/lgl-lexer.l"
+#line 98 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
 

@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_IGRAPH_NCOL_YY_YY_TAB_H_INCLUDED
-# define YY_IGRAPH_NCOL_YY_YY_TAB_H_INCLUDED
+#ifndef YY_IGRAPH_NCOL_YY_SRC_VENDOR_IO_NCOL_PARSER_H_INCLUDED
+# define YY_IGRAPH_NCOL_YY_SRC_VENDOR_IO_NCOL_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -70,7 +70,7 @@ union YYSTYPE
   igraph_integer_t edgenum;
   igraph_real_t weightnum;
 
-#line 74 "yy.tab.h"
+#line 74 "src/vendor/io/ncol-parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -98,4 +98,4 @@ struct YYLTYPE
 int igraph_ncol_yyparse (igraph_i_ncol_parsedata_t* context);
 
 
-#endif /* !YY_IGRAPH_NCOL_YY_YY_TAB_H_INCLUDED  */
+#endif /* !YY_IGRAPH_NCOL_YY_SRC_VENDOR_IO_NCOL_PARSER_H_INCLUDED  */

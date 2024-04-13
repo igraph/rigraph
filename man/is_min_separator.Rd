@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{is_min_separator}
 \alias{is_min_separator}
-\alias{is.minimal.separator}
 \title{Minimal vertex separators}
 \usage{
 is_min_separator(graph, candidate)
@@ -24,10 +23,7 @@ Check whether a given set of vertices is a minimal vertex separator.
 \details{
 \code{is_min_separator()} decides whether the supplied vertex set is a minimal
 vertex separator. A minimal vertex separator is a vertex separator, such
-that none of its subsets is a vertex separator.
-
-In the special case of a fully connected graph with \eqn{n} vertices, each
-set of \eqn{n-1} vertices is considered to be a vertex separator.
+that none of its proper subsets are a vertex separator.
 }
 \examples{
 # The graph from the Moody-White paper
@@ -60,9 +56,6 @@ check.sep(mw5)
 
 }
 \seealso{
-\code{\link[=min_separators]{min_separators()}} lists all vertex separator of minimum
-size.
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

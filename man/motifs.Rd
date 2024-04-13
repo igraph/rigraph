@@ -2,7 +2,6 @@
 % Please edit documentation in R/motifs.R
 \name{motifs}
 \alias{motifs}
-\alias{graph.motifs}
 \title{Graph motifs}
 \usage{
 motifs(graph, size = 3, cut.prob = rep(0, size))

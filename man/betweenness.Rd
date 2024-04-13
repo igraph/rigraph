@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{betweenness}
 \alias{betweenness}
-\alias{edge.betweenness}
 \alias{betweenness.estimate}
 \alias{edge.betweenness.estimate}
 \alias{edge_betweenness}
@@ -109,19 +108,6 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 }
 \seealso{
 \code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
-
-Centrality measures
-\code{\link{alpha_centrality}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
 
 Centrality measures
 \code{\link{alpha_centrality}()},

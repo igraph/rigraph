@@ -1,7 +1,11 @@
 test_that("is_tree works for non-trees", {
   g <- make_graph("zachary")
   expect_false(is_tree(g))
-  expect_equal(ignore_attr = TRUE, is_tree(g, details = TRUE), list(res = FALSE, root = V(g)[numeric(0)]))
+  expect_equal(
+    ignore_attr = TRUE,
+    is_tree(g, details = TRUE),
+    list(res = FALSE, root = V(g)[1])
+  )
 
   g <- sample_pa(15, m = 3)
   expect_false(is_tree(g))
@@ -47,6 +51,22 @@ test_that("the null graph is not a tree", {
 
 test_that("a graph with a single vertex and no edges is tree", {
   expect_true(is_tree(make_empty_graph(1)))
+})
+
+test_that("is_forest takes edge directions into account correctly", {
+  g <- make_graph(c(1,2, 2,3, 2,4, 5,4), n = 6, directed = TRUE)
+
+  expect_true(is_forest(g, mode = "all"))
+  expect_false(is_forest(g, mode = "out"))
+  expect_false(is_forest(g, mode = "in"))
+})
+
+test_that("the null graph is a forest", {
+  expect_true(is_forest(make_empty_graph(0)))
+})
+
+test_that("a graph with a single vertex and no edges is a forest", {
+  expect_true(is_forest(make_empty_graph(1)))
 })
 
 test_that("to_prufer and make_from_prufer works for trees", {

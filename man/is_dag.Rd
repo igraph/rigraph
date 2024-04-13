@@ -2,7 +2,6 @@
 % Please edit documentation in R/paths.R
 \name{is_dag}
 \alias{is_dag}
-\alias{is.dag}
 \title{Directed acyclic graphs}
 \usage{
 is_dag(graph)
@@ -33,7 +32,8 @@ is_dag(g2)
 Graph cycles
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
-\code{\link{has_eulerian_path}()}
+\code{\link{has_eulerian_path}()},
+\code{\link{is_acyclic}()}
 
 Other structural.properties: 
 \code{\link{bfs}()},
@@ -47,9 +47,10 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

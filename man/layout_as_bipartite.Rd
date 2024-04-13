@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_bipartite}
 \alias{layout_as_bipartite}
-\alias{layout.bipartite}
 \alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{
@@ -47,7 +46,7 @@ edge crossings, using the Sugiyama algorithm (see
 \examples{
 # Random bipartite graph
 inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)
-g <- graph_from_incidence_matrix(inc)
+g <- graph_from_biadjacency_matrix(inc)
 plot(g,
   layout = layout_as_bipartite,
   vertex.color = c("green", "cyan")[V(g)$type + 1]
@@ -64,6 +63,7 @@ g \%>\%
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_star}()},
 \code{\link{layout_as_tree}()},
 \code{\link{layout_in_circle}()},
@@ -79,7 +79,6 @@ Other graph layouts:
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_mds}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

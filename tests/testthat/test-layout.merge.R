@@ -1,5 +1,5 @@
 test_that("merge_coords works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   g <- list(make_ring(10), make_ring(5))
   l <- lapply(g, layout_with_mds)

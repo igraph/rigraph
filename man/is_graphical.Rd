@@ -2,7 +2,6 @@
 % Please edit documentation in R/degseq.R
 \name{is_graphical}
 \alias{is_graphical}
-\alias{is.graphical.degree.sequence}
 \title{Is a degree sequence graphical?}
 \usage{
 is_graphical(
@@ -46,7 +45,7 @@ is_graphical(degree(g))
 Hakimi SL: On the realizability of a set of integers as degrees
 of the vertices of a simple graph. \emph{J SIAM Appl Math} 10:496-506, 1962.
 
-PL Erdos, I Miklos and Z Toroczkai: A simple Havel-Hakimi type algorithm to
+PL Erdős, I Miklós and Z Toroczkai: A simple Havel-Hakimi type algorithm to
 realize graphical degree sequences of directed graphs.  \emph{The Electronic
 Journal of Combinatorics} 17(1):R66, 2010.
 }
@@ -55,7 +54,7 @@ Other graphical degree sequences:
 \code{\link{is_degseq}()}
 }
 \author{
-Tamas Nepusz \email{ntamas@gmail.com}
+Tamás Nepusz \email{ntamas@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}

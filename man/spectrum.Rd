@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{spectrum}
 \alias{spectrum}
-\alias{graph.eigen}
 \alias{igraph.eigen.default}
 \title{Eigenvalues and eigenvectors of the adjacency matrix of a graph}
 \usage{
@@ -10,7 +9,7 @@ spectrum(
   graph,
   algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"),
   which = list(),
-  options = arpack_defaults
+  options = arpack_defaults()
 )
 }
 \arguments{

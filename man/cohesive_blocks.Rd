@@ -2,24 +2,19 @@
 % Please edit documentation in R/cohesive.blocks.R
 \name{cohesive_blocks}
 \alias{cohesive_blocks}
-\alias{cohesive.blocks}
 \alias{cohesiveBlocks}
 \alias{blocks}
-\alias{graphs_from_cohesive_blocks}
-\alias{blockGraphs}
 \alias{hierarchy}
 \alias{parent}
-\alias{plotHierarchy}
 \alias{export_pajek}
-\alias{maxcohesion}
 \alias{plot.cohesiveBlocks}
 \alias{summary.cohesiveBlocks}
 \alias{length.cohesiveBlocks}
 \alias{print.cohesiveBlocks}
+\alias{graphs_from_cohesive_blocks}
+\alias{cohesion.cohesiveBlocks}
 \alias{plot_hierarchy}
 \alias{max_cohesion}
-\alias{exportPajek}
-\alias{cohesion.cohesiveBlocks}
 \title{Calculate Cohesive Blocks}
 \usage{
 cohesive_blocks(graph, labels = TRUE)

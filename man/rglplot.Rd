@@ -30,7 +30,7 @@ arguments.
 
 g <- make_lattice(c(5, 5, 5))
 coords <- layout_with_fr(g, dim = 3)
-if (interactive()) {
+if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
   rglplot(g, layout = coords)
 }
 
@@ -38,9 +38,6 @@ if (interactive()) {
 \seealso{
 \link{igraph.plotting}, \code{\link[=plot.igraph]{plot.igraph()}} for the 2D
 version, \code{\link[=tkplot]{tkplot()}} for interactive graph drawing in 2D.
-
-Other plot: 
-\code{\link{plot.igraph}()}
 
 Other plot: 
 \code{\link{plot.igraph}()}

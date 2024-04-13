@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{hrg}
 \alias{hrg}
-\alias{hrg.create}
 \title{Create a hierarchical random graph from an igraph graph}
 \usage{
 hrg(graph, prob)
@@ -29,8 +28,8 @@ Other hierarchical random graph functions:
 \code{\link{hrg-methods}},
 \code{\link{hrg_tree}()},
 \code{\link{predict_edges}()},
-\code{\link{print.igraphHRGConsensus}()},
 \code{\link{print.igraphHRG}()},
+\code{\link{print.igraphHRGConsensus}()},
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/demo.R
 \name{igraph_demo}
 \alias{igraph_demo}
-\alias{igraphdemo}
 \title{Run igraph demos, step by step}
 \usage{
 igraph_demo(which)
@@ -29,7 +28,7 @@ The \code{tcltk} package is needed for \code{igraph_demo()}.
 \examples{
 
 igraph_demo()
-if (interactive()) {
+if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
   igraph_demo("centrality")
 }
 

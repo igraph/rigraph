@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_k_regular}
 \alias{sample_k_regular}
-\alias{k.regular.game}
 \title{Create a random regular graph}
 \usage{
 sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)
@@ -50,13 +49,14 @@ sequence.
 
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
+\code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
-\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_correlated_gnp}()},
+\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
 \code{\link{sample_fitness}()},
+\code{\link{sample_fitness_pl}()},
 \code{\link{sample_forestfire}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
@@ -65,14 +65,13 @@ Random graph models (games)
 \code{\link{sample_hierarchical_sbm}()},
 \code{\link{sample_islands}()},
 \code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
 \code{\link{sample_pa}()},
+\code{\link{sample_pa_age}()},
 \code{\link{sample_pref}()},
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
+\code{\link{sample_tree}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

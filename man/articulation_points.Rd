@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{articulation_points}
 \alias{articulation_points}
-\alias{articulation.points}
 \alias{bridges}
 \title{Articulation points and bridges of a graph}
 \usage{
@@ -27,7 +26,7 @@ Articulation points or cut vertices are vertices whose removal increases the
 number of connected components in a graph. Similarly, bridges or cut-edges
 are edges whose removal increases the number of connected components in a
 graph. If the original graph was connected, then the removal of a single
-articulation point or a single bridge makes it undirected. If a graph
+articulation point or a single bridge makes it disconnected. If a graph
 contains no articulation points, then its vertex connectivity is at least
 two.
 }
@@ -50,12 +49,8 @@ bridges(g)
 Connected components
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
-\code{\link{decompose}()}
-
-Connected components
-\code{\link{biconnected_components}()},
-\code{\link{component_distribution}()},
-\code{\link{decompose}()}
+\code{\link{decompose}()},
+\code{\link{is_biconnected}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{plot_dendrogram}
 \alias{plot_dendrogram}
-\alias{dendPlot}
 \alias{plot_dendrogram.communities}
 \title{Community structure dendrogram plots}
 \usage{
@@ -119,27 +118,8 @@ Community detection
 \code{\link{make_clusters}()},
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
-\code{\link{split_join_distance}()}
-
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

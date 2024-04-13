@@ -1,6 +1,21 @@
 
 #' The DrL graph layout generator
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.drl()` was renamed to `layout_with_drl()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_drl
+#' @keywords internal
+#' @export
+layout.drl <- function(graph, use.seed = FALSE, seed = matrix(runif(vcount(graph) * 2), ncol = 2), options = drl_defaults$default, weights = NULL, dim = 2) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "layout.drl()", "layout_with_drl()")
+  layout_with_drl(graph = graph, use.seed = use.seed, seed = seed, options = options, weights = weights, dim = dim)
+} # nocov end
+
+#' The DrL graph layout generator
+#'
 #' DrL is a force-directed graph layout toolbox focused on real-world
 #' large-scale graphs, developed by Shawn Martin and colleagues at Sandia
 #' National Laboratories.
@@ -42,8 +57,8 @@
 #' `drl_defaults$coarsest`, `drl_defaults$refine` and
 #' `drl_defaults$final`.  }
 #'
-#' @aliases layout.drl drl_defaults igraph.drl.coarsen
-#'  igraph.drl.coarsest igraph.drl.default igraph.drl.final
+#' @aliases drl_defaults igraph.drl.coarsen
+#' @aliases  igraph.drl.coarsest igraph.drl.default igraph.drl.final
 #'  igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
@@ -95,9 +110,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   use.seed <- as.logical(use.seed)
   seed <- as.matrix(seed)
 
-  options.tmp <- drl_defaults$default
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+  options <- modify_list(drl_defaults$default, options)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -112,12 +125,12 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   if (dim == 2) {
     res <- .Call(
       R_igraph_layout_drl, graph, seed, use.seed, options,
-      weights, FALSE
+      weights
     )
   } else {
     res <- .Call(
       R_igraph_layout_drl_3d, graph, seed, use.seed, options,
-      weights, FALSE
+      weights
     )
   }
   res

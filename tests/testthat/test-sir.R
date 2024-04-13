@@ -1,5 +1,5 @@
 test_that("SIR works", {
-  set.seed(20231029)
+  withr::local_seed(20231029)
 
   g <- sample_gnm(50, 50)
   res <- sir(g, beta = 5, gamma = 1, no.sim = 10)

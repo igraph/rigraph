@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_degree}
 \alias{centr_degree}
-\alias{centralization.degree}
 \title{Centralize a graph according to the degrees of vertices}
 \usage{
 centr_degree(
@@ -46,13 +45,13 @@ centr_eigen(g, directed = FALSE)$centralization
 }
 \seealso{
 Other centralization related: 
-\code{\link{centr_betw_tmax}()},
 \code{\link{centr_betw}()},
-\code{\link{centr_clo_tmax}()},
+\code{\link{centr_betw_tmax}()},
 \code{\link{centr_clo}()},
+\code{\link{centr_clo_tmax}()},
 \code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen_tmax}()},
 \code{\link{centr_eigen}()},
+\code{\link{centr_eigen_tmax}()},
 \code{\link{centralize}()}
 }
 \concept{centralization related}

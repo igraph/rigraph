@@ -54,7 +54,7 @@ __BEGIN_DECLS
 #if defined(__GNUC__)
 /* Compilers that support the GNU C syntax. Use __noreturn__ instead of 'noreturn' as the latter is a macro in C11. */
 #define IGRAPH_FUNCATTR_NORETURN __attribute__((__noreturn__))
-#define IGRAPH_FUNCATTR_PRINTFLIKE(string, first) __attribute__((format(printf, string, first)))
+#define IGRAPH_FUNCATTR_PRINTFLIKE(string, first) __attribute__((__format__(printf, string, first)))
 #elif defined(_MSC_VER)
 /* Compilers that support the MSVC syntax. */
 #define IGRAPH_FUNCATTR_NORETURN __declspec(noreturn)
@@ -62,6 +62,16 @@ __BEGIN_DECLS
 #else
 #define IGRAPH_FUNCATTR_NORETURN
 #define IGRAPH_FUNCATTR_PRINTFLIKE(string, first)
+#endif
+
+/* IGRAPH_PREPROCESSOR_WARNING(reason) is a macro that evaluates to nothing
+ * but triggers a preprocessor warning with the given message, if the compiler
+ * supports this functionality.
+ */
+#if defined(__GNUC__)
+#define IGRAPH_PREPROCESSOR_WARNING(reason) _Pragma(IGRAPH_I_STRINGIFY(GCC warning reason))
+#else
+#define IGRAPH_PREPROCESSOR_WARNING(reason) /* empty */
 #endif
 
 /**
@@ -784,9 +794,7 @@ IGRAPH_EXPORT int IGRAPH_FINALLY_STACK_SIZE(void);
 #define IGRAPH_CHECK_CALLBACK(expr, code) \
     do { \
         igraph_error_t igraph_i_ret = (expr); \
-        if (code) { \
-            *(code) = igraph_i_ret; \
-        } \
+        *(code) = igraph_i_ret; \
         if (IGRAPH_UNLIKELY(igraph_i_ret != IGRAPH_SUCCESS && igraph_i_ret != IGRAPH_STOP)) { \
             IGRAPH_ERROR("", igraph_i_ret); \
         } \

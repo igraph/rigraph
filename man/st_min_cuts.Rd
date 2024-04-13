@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{st_min_cuts}
 \alias{st_min_cuts}
-\alias{stMincuts}
 \title{List all minimum \eqn{(s,t)}-cuts of a graph}
 \usage{
 st_min_cuts(graph, source, target, capacity = NULL)
@@ -60,8 +59,6 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-\code{\link[=st_cuts]{st_cuts()}}, \code{\link[=min_separators]{min_separators()}}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

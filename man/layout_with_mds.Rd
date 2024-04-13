@@ -2,11 +2,10 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_mds}
 \alias{layout_with_mds}
-\alias{layout.mds}
 \alias{with_mds}
 \title{Graph layout by multidimensional scaling}
 \usage{
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults)
+layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 
 with_mds(...)
 }
@@ -65,6 +64,7 @@ Scaling}.  Second edition. Chapman and Hall.
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_bipartite}()},
 \code{\link{layout_as_star}()},
 \code{\link{layout_as_tree}()},
@@ -80,7 +80,6 @@ Other graph layouts:
 \code{\link{layout_with_kk}()},
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

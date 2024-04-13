@@ -10,7 +10,7 @@ hrg_tree(hrg)
 \item{hrg}{A hierarchical random graph model.}
 }
 \value{
-An igraph graph.
+An igraph graph with a vertex attribute called \code{"probability"}.
 }
 \description{
 \code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
@@ -20,11 +20,11 @@ random graph model.
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
 \code{\link{fit_hrg}()},
-\code{\link{hrg-methods}},
 \code{\link{hrg}()},
+\code{\link{hrg-methods}},
 \code{\link{predict_edges}()},
-\code{\link{print.igraphHRGConsensus}()},
 \code{\link{print.igraphHRG}()},
+\code{\link{print.igraphHRGConsensus}()},
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}

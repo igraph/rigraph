@@ -1,4 +1,19 @@
 
+#' Are two vertices adjacent?
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `are.connected()` was renamed to `are_adjacent()` to create a more
+#' consistent API.
+#' @inheritParams are_adjacent
+#' @keywords internal
+#' @export
+are.connected <- function(graph, v1, v2) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "are.connected()", "are_adjacent()")
+  are_adjacent(graph = graph, v1 = v1, v2 = v2)
+} # nocov end
+
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -25,12 +40,10 @@
 #' The order of the vertices only matters in directed graphs,
 #' where the existence of a directed `(v1, v2)` edge is queried.
 #'
-#' @aliases are.connected
 #' @param graph The graph.
 #' @param v1 The first vertex, tail in directed graphs.
 #' @param v2 The second vertex, head in directed graphs.
-#' @return A logical scalar, `TRUE` is a `(v1, v2)` exists in the
-#'   graph.
+#' @return A logical scalar, `TRUE` if edge `(v1, v2)` exists in the graph.
 #'
 #' @family structural queries
 #'
@@ -45,12 +58,4 @@
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
-are_adjacent <- function(graph, v1, v2) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_are_connected, graph, as_igraph_vs(graph, v1) - 1,
-    as_igraph_vs(graph, v2) - 1
-  )
-}
+are_adjacent <- are_adjacent_impl

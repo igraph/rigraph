@@ -1,3 +1,78 @@
+
+#' Check whether a graph is directed
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.directed()` was renamed to `is_directed()` to create a more
+#' consistent API.
+#' @inheritParams is_directed
+#' @keywords internal
+#' @export
+is.directed <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "is.directed()", "is_directed()")
+  is_directed(graph = graph)
+} # nocov end
+
+#' Delete vertices from a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `delete.vertices()` was renamed to `delete_vertices()` to create a more
+#' consistent API.
+#' @inheritParams delete_vertices
+#' @keywords internal
+#' @export
+delete.vertices <- function(graph, v) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "delete.vertices()", "delete_vertices()")
+  delete_vertices(graph = graph, v = v)
+} # nocov end
+
+#' Delete edges from a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `delete.edges()` was renamed to `delete_edges()` to create a more
+#' consistent API.
+#' @inheritParams delete_edges
+#' @keywords internal
+#' @export
+delete.edges <- function(graph, edges) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "delete.edges()", "delete_edges()")
+  delete_edges(graph = graph, edges = edges)
+} # nocov end
+
+#' Add vertices to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertices()` was renamed to `add_vertices()` to create a more
+#' consistent API.
+#' @inheritParams add_vertices
+#' @keywords internal
+#' @export
+add.vertices <- function(graph, nv, ..., attr = list()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "add.vertices()", "add_vertices()")
+  add_vertices(graph = graph, nv = nv, attr = attr, ...)
+} # nocov end
+
+#' Add edges to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.edges()` was renamed to `add_edges()` to create a more
+#' consistent API.
+#' @inheritParams add_edges
+#' @keywords internal
+#' @export
+add.edges <- function(graph, edges, ..., attr = list()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "add.edges()", "add_edges()")
+  add_edges(graph = graph, edges = edges, attr = attr, ...)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -46,7 +121,6 @@
 #'
 #' @export
 #'
-#' @aliases add.edges
 #' @family functions for manipulating graph structure
 #'
 #' @examples
@@ -73,7 +147,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 
   edges.orig <- ecount(graph)
   on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(R_igraph_add_edges, graph, as_igraph_vs(graph, edges) - 1)
+  graph <- .Call(R_igraph_add_edges_manual, graph, as_igraph_vs(graph, edges) - 1)
   edges.new <- ecount(graph)
 
   if (edges.new - edges.orig != 0) {
@@ -108,7 +182,6 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #'   below.
 #' @return The graph, with the vertices (and attributes) added.
 #'
-#' @aliases add.vertices
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -165,7 +238,6 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #'   `|`
 #' @return The graph, with the edges removed.
 #'
-#' @aliases delete.edges
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -194,7 +266,6 @@ delete_edges <- function(graph, edges) {
 #' @param v The vertices to remove, a vertex sequence.
 #' @return The graph, with the vertices removed.
 #'
-#' @aliases delete.vertices
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -226,7 +297,6 @@ delete_vertices <- function(graph, v) {
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
 #'
-#' @aliases ecount
 #' @family structural queries
 #'
 #' @export
@@ -339,7 +409,6 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' @param graph The input graph
 #' @return Logical scalar, whether the graph is directed.
 #'
-#' @aliases is.directed
 #' @family structural queries
 #'
 #' @export
@@ -421,10 +490,8 @@ get.edges <- function(graph, es) {
 #' @param error Logical scalar, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
-#' @param multi Logical scalar, whether to handle multiple edges properly. If
-#'   `FALSE`, and a pair of vertices are given twice (or more), then always
-#'   the same edge id is reported back for them. If `TRUE`, then the edge
-#'   ids of multiple edges are correctly reported.
+#' @param multi
+#'   `r lifecycle::badge("deprecated")`
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
 #'   zero is reported. (If the `error` argument is `FALSE`.)
@@ -441,27 +508,36 @@ get.edges <- function(graph, es) {
 #' ## non-existant edge
 #' get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
 #'
-#' ## multiple edges
-#' ## multi = FALSE, a single edge id is returned,
+#' ## For multiple edges, a single edge id is returned,
 #' ## as many times as corresponding pairs in the vertex series.
 #' g <- make_graph(rep(c(1, 2), 5))
-#' eis <- get.edge.ids(g, c(1, 2, 1, 2), multi = FALSE)
+#' eis <- get.edge.ids(g, c(1, 2, 1, 2))
 #' eis
 #' E(g)[eis]
 #'
-#' ## multi = TRUE, as many different edges, if any,
-#' ## are returned as pairs in the vertex series.
-#' eim <- get.edge.ids(g, c(1, 2, 1, 2, 1, 2), multi = TRUE)
-#' eim
-#' E(g)[eim]
-#'
-get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALSE) {
+get.edge.ids <- function(
+    graph,
+    vp,
+    directed = TRUE,
+    error = FALSE,
+    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
+    # after igraph:::deprecated() is removed
+    multi = NULL) {
   ensure_igraph(graph)
+
+  # FIXME: Change to lifecycle::is_present() when using deprecated
+  if (!is.null(multi)) {
+    if (isTRUE(multi)) {
+      lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
+    }
+
+    lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_get_eids, graph, as_igraph_vs(graph, vp) - 1,
-    as.logical(directed), as.logical(error), as.logical(multi)
+    as.logical(directed), as.logical(error)
   ) + 1
 }
 
@@ -473,18 +549,21 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
 #'
-#' @aliases vcount
 #' @family structural queries
 #'
 #' @export
+#' @name gorder
 #' @examples
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
-gorder <- vcount_impl
-#' @rdname gorder
+vcount <- function(graph) {
+  as.numeric(vcount_impl(graph))
+}
+
 #' @export
-vcount <- vcount_impl
+#' @rdname gorder
+gorder <- vcount
 
 #' Adjacent vertices of multiple vertices in a graph
 #'

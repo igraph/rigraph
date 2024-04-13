@@ -2,10 +2,6 @@
 % Please edit documentation in R/cliques.R
 \name{weighted_cliques}
 \alias{weighted_cliques}
-\alias{largest_weighted_cliques}
-\alias{max_weighted_cliques}
-\alias{count_max_weighted_cliques}
-\alias{weighted_clique_num}
 \title{Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph}
 \usage{
 weighted_cliques(
@@ -69,8 +65,6 @@ largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-\code{\link[=ivs]{ivs()}}
-
 Other cliques: 
 \code{\link{cliques}()},
 \code{\link{ivs}()}

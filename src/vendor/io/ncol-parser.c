@@ -116,7 +116,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 
 #define scanner context->scanner
 
-#line 120 "yy.tab.c"
+#line 120 "src/vendor/io/ncol-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -139,7 +139,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 #  endif
 # endif
 
-#include "io/parsers/ncol-parser.h"
+#include "ncol-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -153,8 +153,9 @@ enum yysymbol_kind_t
   YYSYMBOL_YYACCEPT = 6,                   /* $accept  */
   YYSYMBOL_input = 7,                      /* input  */
   YYSYMBOL_edge = 8,                       /* edge  */
-  YYSYMBOL_edgeid = 9,                     /* edgeid  */
-  YYSYMBOL_weight = 10                     /* weight  */
+  YYSYMBOL_endpoints = 9,                  /* endpoints  */
+  YYSYMBOL_edgeid = 10,                    /* edgeid  */
+  YYSYMBOL_weight = 11                     /* weight  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -485,16 +486,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   10
+#define YYLAST   7
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  6
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  5
+#define YYNNTS  6
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  9
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  12
+#define YYNSTATES  13
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   260
@@ -544,7 +545,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    92,    92,    93,    94,    97,   102,   110,   120
+       0,    92,    92,    93,    94,    97,   100,   106,   111,   121
 };
 #endif
 
@@ -561,8 +562,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "\"alphanumeric\"",
-  "\"end of line\"", "ERROR", "$accept", "input", "edge", "edgeid",
-  "weight", YY_NULLPTR
+  "\"end of line\"", "ERROR", "$accept", "input", "edge", "endpoints",
+  "edgeid", "weight", YY_NULLPTR
 };
 
 static const char *
@@ -586,8 +587,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,     0,    -3,    -3,    -3,    -3,     2,    -2,    -3,    -3,
-       3,    -3
+      -3,     0,    -3,    -3,    -3,    -3,    -2,     2,    -3,    -3,
+       3,    -3,    -3
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -595,20 +596,20 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       2,     0,     1,     7,     3,     4,     0,     0,     8,     5,
-       0,     6
+       2,     0,     1,     8,     3,     4,     0,     0,     9,     5,
+       0,     7,     6
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -3,    -3,    -3,     4,    -3
+      -3,    -3,    -3,    -3,    -1,    -3
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     5,     6,    10
+       0,     1,     5,     6,     7,    10
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -616,34 +617,32 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       2,     8,     9,     3,     4,     3,     0,    11,     0,     0,
-       7
+       2,     8,     9,     3,     4,     3,    11,    12
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,     3,     4,     3,     4,     3,    -1,     4,    -1,    -1,
-       6
+       0,     3,     4,     3,     4,     3,     7,     4
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     7,     0,     3,     4,     8,     9,     9,     3,     4,
-      10,     4
+       0,     7,     0,     3,     4,     8,     9,    10,     3,     4,
+      11,    10,     4
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     6,     7,     7,     7,     8,     8,     9,    10
+       0,     6,     7,     7,     7,     8,     8,     9,    10,    11
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     0,     2,     2,     3,     4,     1,     1
+       0,     2,     0,     2,     2,     2,     3,     2,     1,     1
 };
 
 
@@ -1500,29 +1499,34 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 5: /* edge: edgeid edgeid "end of line"  */
+  case 5: /* edge: endpoints "end of line"  */
 #line 97 "src/vendor/cigraph/src/io/ncol-parser.y"
-                                      {
-           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
-           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
+                           {
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
        }
-#line 1511 "yy.tab.c"
+#line 1508 "src/vendor/io/ncol-parser.c"
     break;
 
-  case 6: /* edge: edgeid edgeid weight "end of line"  */
-#line 102 "src/vendor/cigraph/src/io/ncol-parser.y"
-                                      {
-           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-3].edgenum)));
-           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
+  case 6: /* edge: endpoints weight "end of line"  */
+#line 100 "src/vendor/cigraph/src/io/ncol-parser.y"
+                                  {
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
-           context->has_weights = 1;
+           context->has_weights = true;
        }
-#line 1522 "yy.tab.c"
+#line 1517 "src/vendor/io/ncol-parser.c"
     break;
 
-  case 7: /* edgeid: "alphanumeric"  */
-#line 110 "src/vendor/cigraph/src/io/ncol-parser.y"
+  case 7: /* endpoints: edgeid edgeid  */
+#line 106 "src/vendor/cigraph/src/io/ncol-parser.y"
+                           {
+  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
+  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[0].edgenum)));
+}
+#line 1526 "src/vendor/io/ncol-parser.c"
+    break;
+
+  case 8: /* edgeid: "alphanumeric"  */
+#line 111 "src/vendor/cigraph/src/io/ncol-parser.y"
                 {
   igraph_integer_t trie_id;
   IGRAPH_YY_CHECK(igraph_trie_get_len(context->trie,
@@ -1532,11 +1536,11 @@ yyreduce:
   ));
   (yyval.edgenum) = trie_id;
 }
-#line 1536 "yy.tab.c"
+#line 1540 "src/vendor/io/ncol-parser.c"
     break;
 
-  case 8: /* weight: "alphanumeric"  */
-#line 120 "src/vendor/cigraph/src/io/ncol-parser.y"
+  case 9: /* weight: "alphanumeric"  */
+#line 121 "src/vendor/cigraph/src/io/ncol-parser.y"
                 {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_ncol_yyget_text(scanner),
@@ -1544,11 +1548,11 @@ yyreduce:
                                         &val));
     (yyval.weightnum)=val;
 }
-#line 1548 "yy.tab.c"
+#line 1552 "src/vendor/io/ncol-parser.c"
     break;
 
 
-#line 1552 "yy.tab.c"
+#line 1556 "src/vendor/io/ncol-parser.c"
 
       default: break;
     }
@@ -1777,7 +1781,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 128 "src/vendor/cigraph/src/io/ncol-parser.y"
+#line 129 "src/vendor/cigraph/src/io/ncol-parser.y"
 
 
 int igraph_ncol_yyerror(YYLTYPE* locp,

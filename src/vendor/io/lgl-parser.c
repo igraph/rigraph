@@ -115,7 +115,7 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
 
 #define scanner context->scanner
 
-#line 119 "yy.tab.c"
+#line 119 "src/vendor/io/lgl-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -138,7 +138,7 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
 #  endif
 # endif
 
-#include "io/parsers/lgl-parser.h"
+#include "lgl-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1509,7 +1509,7 @@ yyreduce:
   case 6: /* vertexdef: "#" edgeid "end of line"  */
 #line 99 "src/vendor/cigraph/src/io/lgl-parser.y"
                                       { context->actvertex=(yyvsp[-1].edgenum); }
-#line 1513 "yy.tab.c"
+#line 1513 "src/vendor/io/lgl-parser.c"
     break;
 
   case 9: /* edge: edgeid "end of line"  */
@@ -1519,7 +1519,7 @@ yyreduce:
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
              IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0));
            }
-#line 1523 "yy.tab.c"
+#line 1523 "src/vendor/io/lgl-parser.c"
     break;
 
   case 10: /* edge: edgeid weight "end of line"  */
@@ -1530,7 +1530,7 @@ yyreduce:
              IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
              context->has_weights = 1;
            }
-#line 1534 "yy.tab.c"
+#line 1534 "src/vendor/io/lgl-parser.c"
     break;
 
   case 11: /* edgeid: "alphanumeric"  */
@@ -1544,7 +1544,7 @@ yyreduce:
   ));
   (yyval.edgenum) = trie_id;
 }
-#line 1548 "yy.tab.c"
+#line 1548 "src/vendor/io/lgl-parser.c"
     break;
 
   case 12: /* weight: "alphanumeric"  */
@@ -1556,11 +1556,11 @@ yyreduce:
                                         &val));
     (yyval.weightnum)=val;
 }
-#line 1560 "yy.tab.c"
+#line 1560 "src/vendor/io/lgl-parser.c"
     break;
 
 
-#line 1564 "yy.tab.c"
+#line 1564 "src/vendor/io/lgl-parser.c"
 
       default: break;
     }
@@ -1799,4 +1799,3 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
            locp->first_line, s);
   return 0;
 }
-

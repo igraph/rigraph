@@ -5,7 +5,7 @@
 [![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph?branch=main)
 <!-- badges: end -->
 
-# R/igraph
+# R/igraph <a href="https://r.igraph.org/"><img src="man/figures/logo.png" align="right" height="120" alt="igraph website" /></a>
 
 R/igraph is an R package of the igraph network analysis library.
 
@@ -29,23 +29,28 @@ options(
 install.packages('igraph')
 ```
 
-or Github, with the `devtools` package:
+or Github, with the [pak package](https://pak.r-lib.org/):
 
 ```r
-devtools::install_github("igraph/rigraph")
+pak::pak("igraph/rigraph")
 ```
+
+When compiling from sources, make sure that you have C, C++ and Fortran
+compilers, as well as development packages for `glpk` and `libxml2`.
+On Debian/Ubuntu, use `apt install libglpk-dev libxml2-dev`.
+On Fedora, use `yum install glpk-devel libxml2-devel`.
 
 For installation from source on Windows, you need to have
 [RTools](https://cran.r-project.org/bin/windows/Rtools/) installed.
-Additionally, the three system requirements of `glpk`, `libxml2` and `gmp` are
-not optional, but hard requirements. For versions R >= 4.0 you can install these
-using
+For versions R >= 4.0 you can install the dependencies using:
 
 ```
-pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
+pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2
 ```
 
-See the package wiki for more information on [installation troubleshooting](https://r.igraph.org/articles/installation-troubleshooting).
+## Installation troubleshooting
+
+See the [Installation FAQ](https://r.igraph.org/articles/installation-troubleshooting).
 
 ## Documentation
 

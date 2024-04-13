@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{sample_hrg}
 \alias{sample_hrg}
-\alias{hrg.game}
 \title{Sample from a hierarchical random graph model}
 \usage{
 sample_hrg(hrg)
@@ -21,11 +20,11 @@ model.
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
 \code{\link{fit_hrg}()},
+\code{\link{hrg}()},
 \code{\link{hrg-methods}},
 \code{\link{hrg_tree}()},
-\code{\link{hrg}()},
 \code{\link{predict_edges}()},
-\code{\link{print.igraphHRGConsensus}()},
-\code{\link{print.igraphHRG}()}
+\code{\link{print.igraphHRG}()},
+\code{\link{print.igraphHRGConsensus}()}
 }
 \concept{hierarchical random graph functions}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_forestfire}
 \alias{sample_forestfire}
-\alias{forest.fire.game}
 \title{Forest Fire Network Model}
 \usage{
 sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
@@ -56,9 +55,14 @@ implementation is based on this.
 }
 \examples{
 
+fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
+plot(fire)
+
 g <- sample_forestfire(10000, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
 dd1 <- degree_distribution(g, mode = "in")
 dd2 <- degree_distribution(g, mode = "out")
+# The forest fire model produces graphs with a heavy tail degree distribution.
+# Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 }
@@ -74,13 +78,14 @@ model.
 
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
+\code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
-\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_correlated_gnp}()},
+\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
 \code{\link{sample_fitness}()},
+\code{\link{sample_fitness_pl}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
 \code{\link{sample_grg}()},
@@ -89,14 +94,13 @@ Random graph models (games)
 \code{\link{sample_islands}()},
 \code{\link{sample_k_regular}()},
 \code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
 \code{\link{sample_pa}()},
+\code{\link{sample_pa_age}()},
 \code{\link{sample_pref}()},
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
+\code{\link{sample_tree}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

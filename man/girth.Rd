@@ -62,10 +62,11 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},
@@ -78,6 +79,7 @@ Other structural.properties:
 Graph cycles
 \code{\link{feedback_arc_set}()},
 \code{\link{has_eulerian_path}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()}
 }
 \author{

@@ -1,3 +1,18 @@
+
+#' Minimum spanning tree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `minimum.spanning.tree()` was renamed to `mst()` to create a more
+#' consistent API.
+#' @inheritParams mst
+#' @keywords internal
+#' @export
+minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
+  mst(graph = graph, weights = weights, algorithm = algorithm, ...)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -33,7 +48,6 @@
 #'
 #' If the graph is not connected a minimum spanning forest is returned.
 #'
-#' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
 #' @param weights Numeric vector giving the weights of the edges in the
 #'   graph. The order is determined by the edge ids. This is ignored if the

@@ -1,5 +1,5 @@
 test_that("spectrum works for symmetric matrices", {
-  set.seed(42)
+  withr::local_seed(42)
 
   std <- function(x) {
     x <- zapsmall(x)
@@ -22,4 +22,9 @@ test_that("spectrum works for symmetric matrices", {
   e2 <- spectrum(g, which = list(howmany = 4, pos = "SA"))
   expect_that(e0$values[50:47], equals(e2$values))
   expect_that(std(e0$vectors[, 50:47]), equals(std(e2$vectors)))
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_warning(
+    e3 <- spectrum(g, which = list(howmany = 4, pos = "SA"), options = arpack_defaults)
+  )
 })

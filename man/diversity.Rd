@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{diversity}
 \alias{diversity}
-\alias{graph.diversity}
 \title{Graph diversity}
 \usage{
 diversity(graph, weights = NULL, vids = V(graph))

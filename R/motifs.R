@@ -1,4 +1,79 @@
 
+#' Triad census, subgraphs with three vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `triad.census()` was renamed to `triad_census()` to create a more
+#' consistent API.
+#' @inheritParams triad_census
+#' @keywords internal
+#' @export
+triad.census <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "triad.census()", "triad_census()")
+  triad_census(graph = graph)
+} # nocov end
+
+#' Graph motifs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs.no()` was renamed to `count_motifs()` to create a more
+#' consistent API.
+#' @inheritParams count_motifs
+#' @keywords internal
+#' @export
+graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.motifs.no()", "count_motifs()")
+  count_motifs(graph = graph, size = size, cut.prob = cut.prob)
+} # nocov end
+
+#' Graph motifs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs.est()` was renamed to `sample_motifs()` to create a more
+#' consistent API.
+#' @inheritParams sample_motifs
+#' @keywords internal
+#' @export
+graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
+  sample_motifs(graph = graph, size = size, cut.prob = cut.prob, sample.size = sample.size, sample = sample)
+} # nocov end
+
+#' Graph motifs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs()` was renamed to `motifs()` to create a more
+#' consistent API.
+#' @inheritParams motifs
+#' @keywords internal
+#' @export
+graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
+  motifs(graph = graph, size = size, cut.prob = cut.prob)
+} # nocov end
+
+#' Dyad census of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dyad.census()` was renamed to `dyad_census()` to create a more
+#' consistent API.
+#' @inheritParams dyad_census
+#' @keywords internal
+#' @export
+dyad.census <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "dyad.census()", "dyad_census()")
+  dyad_census(graph = graph)
+} # nocov end
+
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -30,7 +105,6 @@
 #' the motifs is defined by their isomorphism class, see
 #' [isomorphism_class()].
 #'
-#' @aliases graph.motifs
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
 #'   directed graphs and sizes 3-6 in undirected graphs.
@@ -63,7 +137,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_motifs_randesu, graph, as.integer(size),
+    R_igraph_motifs_randesu, graph, as.numeric(size),
     as.numeric(cut.prob)
   )
   res[is.nan(res)] <- NA
@@ -78,7 +152,6 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' `count_motifs()` calculates the total number of motifs of a given
 #' size in graph.
 #'
-#' @aliases graph.motifs.no
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif.
 #' @param cut.prob Numeric vector giving the probabilities that the search
@@ -107,7 +180,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_no, graph, as.integer(size),
+    R_igraph_motifs_randesu_no, graph, as.numeric(size),
     as.numeric(cut.prob)
   )
 }
@@ -120,7 +193,6 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' `sample_motifs()` estimates the total number of motifs of a given
 #' size in a graph based on a sample.
 #'
-#' @aliases graph.motifs.est
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently size 3 and 4 are supported
 #'   in directed graphs and sizes 3-6 in undirected graphs.
@@ -156,8 +228,8 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_estimate, graph, as.integer(size),
-    as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample)
+    R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
+    as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
   )
 }
 
@@ -169,7 +241,6 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' non-existent.
 #'
 #'
-#' @aliases dyad.census dyad_census
 #' @param graph The input graph. A warning is given if it is not directed.
 #' @return A named numeric vector with three elements: \item{mut}{The number of
 #'   pairs with mutual connections.} \item{asym}{The number of pairs with
@@ -220,7 +291,6 @@ dyad_census <- function(graph) {
 #' This functions uses the RANDESU motif finder algorithm to find and count the
 #' subgraphs, see [motifs()].
 #'
-#' @aliases triad.census triad_census
 #' @param graph The input graph, it should be directed. An undirected graph
 #'   results a warning, and undefined results.
 #' @return A numeric vector, the subgraph counts, in the order given in the

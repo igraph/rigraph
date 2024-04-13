@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_bipartite}
 \alias{sample_bipartite}
-\alias{bipartite.random.game}
 \alias{bipartite}
 \title{Bipartite random graphs}
 \usage{
@@ -49,7 +48,7 @@ is ignored for undirected graphs.}
 A bipartite igraph graph.
 }
 \description{
-Generate bipartite graphs using the Erdos-Renyi model
+Generate bipartite graphs using the Erdős-Rényi model
 }
 \details{
 Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
@@ -74,16 +73,15 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} for the unipartite version.
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
-\code{\link{sample_correlated_gnp_pair}()},
+\code{\link{sample_}()},
 \code{\link{sample_correlated_gnp}()},
+\code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
 \code{\link{sample_fitness}()},
+\code{\link{sample_fitness_pl}()},
 \code{\link{sample_forestfire}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
@@ -93,40 +91,13 @@ Random graph models (games)
 \code{\link{sample_islands}()},
 \code{\link{sample_k_regular}()},
 \code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
 \code{\link{sample_pa}()},
+\code{\link{sample_pa_age}()},
 \code{\link{sample_pref}()},
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
-
-Random graph models (games)
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_correlated_gnp_pair}()},
-\code{\link{sample_correlated_gnp}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_fitness_pl}()},
-\code{\link{sample_fitness}()},
-\code{\link{sample_forestfire}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()},
-\code{\link{sample_tree}()},
-\code{\link{sample_}()}
+\code{\link{sample_tree}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

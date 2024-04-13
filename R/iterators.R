@@ -331,7 +331,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   if ("name" %in% edge_attr_names(graph)) {
     names(res) <- edge_attr(graph)$name[res]
   }
-  if (is.named(graph)) {
+  if (is_named(graph)) {
     el <- ends(graph, es = res)
     attr(res, "vnames") <- paste(el[, 1], el[, 2], sep = "|")
   }
@@ -1122,7 +1122,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #'
 #' @export
-#' @family vertex and edge sequences
 #' @examples
 #' # color edges of the largest component
 #' largest_comp <- function(graph) {

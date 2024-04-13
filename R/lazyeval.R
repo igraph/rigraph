@@ -1,9 +1,15 @@
 as.lazy <- function(x, env = baseenv()) UseMethod("as.lazy")
+#' @exportS3Method NULL
 as.lazy.lazy <- function(x, env = baseenv()) x
+#' @exportS3Method NULL
 as.lazy.formula <- function(x, env = baseenv()) lazy_(x[[2]], environment(x))
+#' @exportS3Method NULL
 as.lazy.character <- function(x, env = baseenv()) lazy_(parse(text = x)[[1]], env)
+#' @exportS3Method NULL
 as.lazy.call <- function(x, env = baseenv()) lazy_(x, env)
+#' @exportS3Method NULL
 as.lazy.name <- function(x, env = baseenv()) lazy_(x, env)
+#' @exportS3Method NULL
 as.lazy.numeric <- function(x, env = baseenv()) {
   if (length(x) > 1) {
     warning("Truncating vector to length 1", call. = FALSE)
@@ -13,23 +19,28 @@ as.lazy.numeric <- function(x, env = baseenv()) {
 }
 as.lazy.logical <- as.lazy.numeric
 as.lazy_dots <- function(x, env) UseMethod("as.lazy_dots")
+#' @exportS3Method NULL
 as.lazy_dots.NULL <- function(x, env = baseenv()) {
   structure(list(), class = "lazy_dots")
 }
 as.lazy_dots.list <- function(x, env = baseenv()) {
   structure(lapply(x, as.lazy, env = env), class = "lazy_dots")
 }
+#' @exportS3Method NULL
 as.lazy_dots.name <- function(x, env = baseenv()) {
   structure(list(as.lazy(x, env)), class = "lazy_dots")
 }
 as.lazy_dots.formula <- as.lazy_dots.name
 as.lazy_dots.call <- as.lazy_dots.name
+#' @exportS3Method NULL
 as.lazy_dots.lazy <- function(x, env = baseenv()) {
   structure(list(x), class = "lazy_dots")
 }
+#' @exportS3Method NULL
 as.lazy_dots.character <- function(x, env = baseenv()) {
   structure(lapply(x, as.lazy, env = env), class = "lazy_dots")
 }
+#' @exportS3Method NULL
 as.lazy_dots.lazy_dots <- function(x, env = baseenv()) {
   x
 }
@@ -62,28 +73,33 @@ lazy_eval <- function(x, data = NULL) {
 interp <- function(`_obj`, ..., .values) {
   UseMethod("interp")
 }
+#' @exportS3Method NULL
 interp.call <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
   substitute_(`_obj`, values)
 }
+#' @exportS3Method NULL
 interp.name <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
   substitute_(`_obj`, values)
 }
+#' @exportS3Method NULL
 interp.formula <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
   `_obj`[[2]] <- substitute_(`_obj`[[2]], values)
   `_obj`
 }
+#' @exportS3Method NULL
 interp.lazy <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
   `_obj`$expr <- substitute_(`_obj`$expr, values)
   `_obj`
 }
+#' @exportS3Method NULL
 interp.character <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
@@ -121,18 +137,22 @@ lazy_dots <- function(..., .follow_symbols = FALSE) {
   .Call(make_lazy_dots, environment(), .follow_symbols)
 }
 is.lazy_dots <- function(x) inherits(x, "lazy_dots")
+#' @exportS3Method NULL
 `[.lazy_dots` <- function(x, i) {
   structure(NextMethod(), class = "lazy_dots")
 }
+#' @exportS3Method NULL
 `$<-.lazy_dots` <- function(x, i, value) {
   value <- as.lazy(value, parent.frame())
   x[[i]] <- value
   x
 }
+#' @exportS3Method NULL
 `[<-.lazy_dots` <- function(x, i, value) {
   value <- lapply(value, as.lazy, env = parent.frame())
   NextMethod()
 }
+#' @exportS3Method NULL
 c.lazy_dots <- function(..., recursive = FALSE) {
   structure(NextMethod(), class = "lazy_dots")
 }
@@ -145,6 +165,7 @@ lazy <- function(expr, env = parent.frame(), .follow_symbols = TRUE) {
   .Call(make_lazy, quote(expr), environment(), .follow_symbols)
 }
 is.lazy <- function(x) inherits(x, "lazy")
+#' @exportS3Method NULL
 print.lazy <- function(x, ...) {
   code <- deparse(x$expr)
   if (length(code) > 1) {
@@ -155,16 +176,7 @@ print.lazy <- function(x, ...) {
   cat("  expr: ", code, "\n", sep = "")
   cat("  env:  ", format(x$env), "\n", sep = "")
 }
-make_call <- function(fun, args) {
-  stopifnot(is.call(fun) || is.name(fun))
-  args <- as.lazy_dots(args)
-  expr <- lapply(args, `[[`, "expr")
 
-  lazy_(
-    as.call(c(fun, expr)),
-    common_env(args)
-  )
-}
 common_env <- function(dots) {
   if (!is.list(dots)) stop("dots must be a list", call. = FALSE)
   if (length(dots) == 0) {
@@ -242,6 +254,7 @@ promise_expr <- function(prom) {
 promise_env <- function(prom) {
   .Call(promise_env_, prom)
 }
+#' @exportS3Method NULL
 as.lazy.promise <- function(x, ...) {
   lazy_(promise_expr(x), promise_env(x))
 }

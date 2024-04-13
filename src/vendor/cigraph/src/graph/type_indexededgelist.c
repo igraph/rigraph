@@ -1224,6 +1224,15 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
         IGRAPH_ERROR("Invalid mode for degree calculation.", IGRAPH_EINVMODE);
     }
 
+    if (! loops) {
+        /* If the graph is known not to have loops, we can use the faster
+         * loops == true code path, which has O(1) complexity instead of of O(d). */
+        if (igraph_i_property_cache_has(graph, IGRAPH_PROP_HAS_LOOP) &&
+            !igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_HAS_LOOP)) {
+            loops = true;
+        }
+    }
+
     nodes_to_calc = IGRAPH_VIT_SIZE(vit);
     if (!igraph_is_directed(graph)) {
         mode = IGRAPH_ALL;
@@ -1352,20 +1361,23 @@ igraph_error_t igraph_degree(const igraph_t *graph, igraph_vector_int_t *res,
 
 /**
  * \function igraph_get_eid
- * \brief Get the edge ID from the end points of an edge.
+ * \brief Get the edge ID from the endpoints of an edge.
  *
  * For undirected graphs \c from and \c to are exchangeable.
  *
  * \param graph The graph object.
  * \param eid Pointer to an integer, the edge ID will be stored here.
+ *        If \p error is false and no edge was found, <code>-1</code>
+ *        will be returned.
  * \param from The starting point of the edge.
  * \param to The end point of the edge.
  * \param directed Logical constant, whether to search for directed
  *        edges in a directed graph. Ignored for undirected graphs.
  * \param error Logical scalar, whether to report an error if the edge
- *        was not found. If it is false, then -1 will be assigned to \p eid.
- *        Note that invalid vertex IDs in input arguments (\p from or \p to)
- *        always return an error code.
+ *        was not found. If it is false, then <code>-1</code> will be
+ *        assigned to \p eid. Note that invalid vertex IDs in input
+ *        arguments (\p from or \p to) always trigger an error,
+ *        regardless of this setting.
  * \return Error code.
  * \sa \ref igraph_edge() for the opposite operation, \ref igraph_get_all_eids_between()
  *     to retrieve all edge IDs between a pair of vertices.

@@ -1,3 +1,18 @@
+
+#' Run igraph demos, step by step
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraphdemo()` was renamed to `igraph_demo()` to create a more
+#' consistent API.
+#' @inheritParams igraph_demo
+#' @keywords internal
+#' @export
+igraphdemo <- function(which) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraphdemo()", "igraph_demo()")
+  igraph_demo(which = which)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -33,7 +48,6 @@
 #'
 #' The `tcltk` package is needed for `igraph_demo()`.
 #'
-#' @aliases igraphdemo
 #' @param which If not given, then the names of the available demos are listed.
 #'   Otherwise it should be either a filename or the name of an igraph demo.
 #' @return Returns `NULL`, invisibly.
@@ -45,7 +59,7 @@
 #' @examples
 #'
 #' igraph_demo()
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
 #'   igraph_demo("centrality")
 #' }
 #'

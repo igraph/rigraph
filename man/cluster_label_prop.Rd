@@ -2,13 +2,22 @@
 % Please edit documentation in R/community.R
 \name{cluster_label_prop}
 \alias{cluster_label_prop}
-\alias{label.propagation.community}
 \title{Finding communities based on propagating labels}
 \usage{
-cluster_label_prop(graph, weights = NULL, initial = NULL, fixed = NULL)
+cluster_label_prop(
+  graph,
+  weights = NULL,
+  ...,
+  mode = c("out", "in", "all"),
+  initial = NULL,
+  fixed = NULL
+)
 }
 \arguments{
-\item{graph}{The input graph, should be undirected to make sense.}
+\item{graph}{The input graph. Note that the algorithm wsa originally
+defined for undirected graphs. You are advised to set \sQuote{mode} to
+\code{all} if you pass a directed graph here to treat it as
+undirected.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -17,6 +26,14 @@ cluster_label_prop(graph, weights = NULL, initial = NULL, fixed = NULL)
 weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{mode}{Logical, whether to consider edge directions for the label propagation,
+and if so, in which direction the labels should propagate. Ignored for undirected graphs.
+"all" means to ignore edge directions (even in directed graphs).
+"out" means to propagate labels along the natural direction of the edges.
+"in" means to propagate labels backwards (i.e. from head to tail).}
 
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an
@@ -88,7 +105,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} for the C implementation,

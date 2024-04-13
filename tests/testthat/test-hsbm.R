@@ -1,5 +1,5 @@
 test_that("HSBM works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   C <- matrix(c(
     1, 1 / 2, 0,
@@ -10,28 +10,28 @@ test_that("HSBM works", {
   g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 0)
   expect_that(ecount(g), equals(172))
   expect_that(vcount(g), equals(100))
-  expect_false(is.directed(g))
+  expect_false(is_directed(g))
 
-  set.seed(42)
+  withr::local_seed(42)
 
   g2 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1)
   expect_that(ecount(g2), equals(ecount(g) + 10 * 9 * (90 + 10) / 2))
   expect_that(vcount(g2), equals(100))
-  expect_true(is.simple(g2))
+  expect_true(is_simple(g2))
 
-  set.seed(42)
+  withr::local_seed(42)
 
   g3 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1e-15)
   expect_that(ecount(g3), equals(ecount(g)))
   expect_that(vcount(g3), equals(100))
-  expect_true(is.simple(g3))
+  expect_true(is_simple(g3))
 
-  set.seed(42)
+  withr::local_seed(42)
 
   g4 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 - 1e-15)
   expect_that(ecount(g4), equals(ecount(g2)))
   expect_that(vcount(g4), equals(100))
-  expect_true(is.simple(g4))
+  expect_true(is_simple(g4))
 })
 
 test_that("HSBM with 1 cluster per block works", {
@@ -51,18 +51,18 @@ test_that("HSBM with list arguments works", {
   m <- 10
   rho <- c(3, 3, 4) / 10
 
-  set.seed(42)
+  withr::local_seed(42)
   g <- sample_hierarchical_sbm(b * m, m, rho = rho, C = C, p = 0)
 
-  set.seed(42)
+  withr::local_seed(42)
   g2 <- sample_hierarchical_sbm(b * m, rep(m, b), rho = rho, C = C, p = 0)
   expect_that(g[], equals(g2[]))
 
-  set.seed(42)
+  withr::local_seed(42)
   g3 <- sample_hierarchical_sbm(b * m, m, rho = replicate(b, rho, simplify = FALSE), C = C, p = 0)
   expect_that(g[], equals(g3[]))
 
-  set.seed(42)
+  withr::local_seed(42)
   g4 <- sample_hierarchical_sbm(b * m, m, rho = rho, C = replicate(b, C, simplify = FALSE), p = 0)
   expect_that(g[], equals(g4[]))
 
@@ -88,9 +88,9 @@ test_that("HSBM with list arguments works", {
     m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
     C = list(C1, C2, C3, C4), p = 1
   )
-  expect_true(is.simple(gg1))
+  expect_true(is_simple(gg1))
 
-  set.seed(42)
+  withr::local_seed(42)
   gg11 <- sample_hierarchical_sbm(21,
     m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
     C = list(C1, C2, C3, C4), p = 1 - 1e-10
@@ -109,7 +109,7 @@ test_that("HSBM with list arguments works", {
     m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
     C = list(C1, C2, C3, C4), p = 0
   )
-  expect_true(is.simple(gg2))
+  expect_true(is_simple(gg2))
 
   gg22 <- sample_hierarchical_sbm(21,
     m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),

@@ -4,7 +4,6 @@
 \alias{modularity.igraph}
 \alias{modularity}
 \alias{modularity_matrix}
-\alias{mod.matrix}
 \title{Modularity of a community structure of a graph}
 \usage{
 \method{modularity}{igraph}(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...)
@@ -122,27 +121,8 @@ Community detection
 \code{\link{make_clusters}()},
 \code{\link{membership}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
-
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

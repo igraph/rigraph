@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_gem}
 \alias{layout_with_gem}
-\alias{layout.gem}
 \alias{with_gem}
 \title{The GEM layout algorithm}
 \usage{
@@ -70,6 +69,7 @@ LNCS 894, pp. 388-403, 1995.
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_bipartite}()},
 \code{\link{layout_as_star}()},
 \code{\link{layout_as_tree}()},
@@ -85,7 +85,6 @@ Other graph layouts:
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_mds}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

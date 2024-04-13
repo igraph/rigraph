@@ -457,6 +457,7 @@ void yyfree ( void * , yyscan_t yyscanner );
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
+#define LINE 1
 
 #endif
 
@@ -728,9 +729,9 @@ extern int yylex \
 #undef yyTABLES_NAME
 #endif
 
-#line 99 "src/vendor/cigraph/src/io/ncol-lexer.l"
+#line 95 "src/vendor/cigraph/src/io/ncol-lexer.l"
 
 
-#line 735 "src/vendor/io/parsers/ncol-lexer.h"
+#line 736 "src/vendor/io/parsers/ncol-lexer.h"
 #undef igraph_ncol_yyIN_HEADER
 #endif /* igraph_ncol_yyHEADER_H */

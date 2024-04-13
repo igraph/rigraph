@@ -30,7 +30,7 @@ test_that("constraint works", {
   c2 <- constraint.orig(karate)
   expect_that(c1, equals(c2))
 
-  set.seed(42)
+  withr::local_seed(42)
   E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
   wc2 <- constraint.orig(karate, attr = "weight")

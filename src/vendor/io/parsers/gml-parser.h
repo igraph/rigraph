@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_IGRAPH_GML_YY_YY_TAB_H_INCLUDED
-# define YY_IGRAPH_GML_YY_YY_TAB_H_INCLUDED
+#ifndef YY_IGRAPH_GML_YY_SRC_VENDOR_IO_GML_PARSER_H_INCLUDED
+# define YY_IGRAPH_GML_YY_SRC_VENDOR_IO_GML_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -68,13 +68,13 @@ extern int igraph_gml_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 94 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 93 "src/vendor/cigraph/src/io/gml-parser.y"
 
    char *str;
    igraph_gml_tree_t *tree;
    igraph_real_t real;
 
-#line 78 "yy.tab.h"
+#line 78 "src/vendor/io/gml-parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -102,4 +102,4 @@ struct YYLTYPE
 int igraph_gml_yyparse (igraph_i_gml_parsedata_t* context);
 
 
-#endif /* !YY_IGRAPH_GML_YY_YY_TAB_H_INCLUDED  */
+#endif /* !YY_IGRAPH_GML_YY_SRC_VENDOR_IO_GML_PARSER_H_INCLUDED  */

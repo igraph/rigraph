@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{topo_sort}
 \alias{topo_sort}
-\alias{topological.sort}
 \title{Topological sorting of vertices in a graph}
 \usage{
 topo_sort(graph, mode = c("out", "all", "in"))
@@ -50,10 +49,11 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

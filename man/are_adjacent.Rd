@@ -2,7 +2,6 @@
 % Please edit documentation in R/structure.info.R
 \name{are_adjacent}
 \alias{are_adjacent}
-\alias{are.connected}
 \title{Are two vertices adjacent?}
 \usage{
 are_adjacent(graph, v1, v2)
@@ -15,8 +14,7 @@ are_adjacent(graph, v1, v2)
 \item{v2}{The second vertex, head in directed graphs.}
 }
 \value{
-A logical scalar, \code{TRUE} is a \verb{(v1, v2)} exists in the
-graph.
+A logical scalar, \code{TRUE} if edge \verb{(v1, v2)} exists in the graph.
 }
 \description{
 The order of the vertices only matters in directed graphs,
@@ -43,8 +41,8 @@ Other structural queries:
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident_edges}()},
 \code{\link{incident}()},
+\code{\link{incident_edges}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}

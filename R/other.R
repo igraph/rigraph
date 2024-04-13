@@ -1,3 +1,48 @@
+
+#' Running mean of a time series
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `running.mean()` was renamed to `running_mean()` to create a more
+#' consistent API.
+#' @inheritParams running_mean
+#' @keywords internal
+#' @export
+running.mean <- function(v, binwidth) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "running.mean()", "running_mean()")
+  running_mean(v = v, binwidth = binwidth)
+} # nocov end
+
+#' Sampling a random integer sequence
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.sample()` was renamed to `sample_seq()` to create a more
+#' consistent API.
+#' @inheritParams sample_seq
+#' @keywords internal
+#' @export
+igraph.sample <- function(low, high, length) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.sample()", "sample_seq()")
+  sample_seq(low = low, high = high, length = length)
+} # nocov end
+
+#' Convex hull of a set of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `convex.hull()` was renamed to `convex_hull()` to create a more
+#' consistent API.
+#' @inheritParams convex_hull
+#' @keywords internal
+#' @export
+convex.hull <- function(data) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "convex.hull()", "convex_hull()")
+  convex_hull(data = data)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -31,7 +76,6 @@
 #' the first `binwidth` elements of `v`, the second element of
 #' `w` is the average of elements `2:(binwidth+1)`, etc.
 #'
-#' @aliases running.mean
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
 #'   i.e. smaller than the length of `v`.
@@ -66,7 +110,6 @@ running_mean <- function(v, binwidth) {
 #' `high-low` is big. It is much faster (but of course less general) than
 #' the builtin `sample` function of R.
 #'
-#' @aliases igraph.sample
 #' @param low The lower limit of the interval (inclusive).
 #' @param high The higher limit of the interval (inclusive).
 #' @param length The length of the sample.
@@ -132,18 +175,6 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   return(types)
 }
 
-igraph.match.arg <- function(arg, choices, several.ok = FALSE) {
-  if (missing(choices)) {
-    formal.args <- formals(sys.function(sys.parent()))
-    choices <- eval(formal.args[[deparse(substitute(arg))]])
-  }
-
-  arg <- tolower(arg)
-  choices <- tolower(choices)
-
-  match.arg(arg = arg, choices = choices, several.ok = several.ok)
-}
-
 igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
@@ -161,7 +192,6 @@ igraph.i.spMatrix <- function(M) {
 #' has the smallest area.
 #'
 #'
-#' @aliases convex.hull convex_hull
 #' @param data The data points, a numeric matrix with two columns.
 #' @return A named list with components: \item{resverts}{The indices of the
 #'   input vertices that constritute the convex hull.} \item{rescoords}{The

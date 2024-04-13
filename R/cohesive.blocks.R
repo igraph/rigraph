@@ -1,3 +1,94 @@
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `exportPajek()` was renamed to `export_pajek()` to create a more
+#' consistent API.
+#' @inheritParams export_pajek
+#' @keywords internal
+#' @export
+exportPajek <- function(blocks, graph, file, project.file = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "exportPajek()", "export_pajek()")
+  export_pajek(blocks = blocks, graph = graph, file = file, project.file = project.file)
+} # nocov end
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `plotHierarchy()` was renamed to `plot_hierarchy()` to create a more
+#' consistent API.
+#' @inheritParams plot_hierarchy
+#' @keywords internal
+#' @export
+plotHierarchy <- function(blocks, layout = layout_as_tree(hierarchy(blocks), root = 1), ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "plotHierarchy()", "plot_hierarchy()")
+  plot_hierarchy(blocks = blocks, layout = layout, ...)
+} # nocov end
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maxcohesion()` was renamed to `max_cohesion()` to create a more
+#' consistent API.
+#' @inheritParams max_cohesion
+#' @keywords internal
+#' @export
+maxcohesion <- function(blocks) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "maxcohesion()", "max_cohesion()")
+  max_cohesion(blocks = blocks)
+} # nocov end
+
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.cohesion()` was renamed to `cohesion()` to create a more
+#' consistent API.
+#' @param x x
+#' @param ... passed to `cohesion()`
+#' @keywords internal
+#' @export
+graph.cohesion <- function(x, ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.cohesion()", "cohesion()")
+  cohesion(x = x, ...)
+} # nocov end
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cohesive.blocks()` was renamed to `cohesive_blocks()` to create a more
+#' consistent API.
+#' @inheritParams cohesive_blocks
+#' @keywords internal
+#' @export
+cohesive.blocks <- function(graph, labels = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "cohesive.blocks()", "cohesive_blocks()")
+  cohesive_blocks(graph = graph, labels = labels)
+} # nocov end
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `blockGraphs()` was renamed to `graphs_from_cohesive_blocks()` to create a more
+#' consistent API.
+#' @inheritParams graphs_from_cohesive_blocks
+#' @keywords internal
+#' @export
+blockGraphs <- function(blocks, graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "blockGraphs()", "graphs_from_cohesive_blocks()")
+  graphs_from_cohesive_blocks(blocks = blocks, graph = graph)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -108,10 +199,9 @@
 #' The generic function [plot()] plots the graph, showing one or more
 #' cohesive blocks in it.
 #'
-#' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
-#' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
+#' @aliases cohesiveBlocks blocks
+#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' plot_hierarchy max_cohesion exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
@@ -273,14 +363,12 @@ length.cohesiveBlocks <- function(x) {
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 blocks <- function(blocks) {
   blocks$blocks
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph = graph)
@@ -294,21 +382,18 @@ cohesion <- function(x, ...) {
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 cohesion.cohesiveBlocks <- function(x, ...) {
   x$cohesion
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 hierarchy <- function(blocks) {
   blocks$blockTree
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 parent <- function(blocks) {
   blocks$parent
@@ -316,7 +401,6 @@ parent <- function(blocks) {
 
 #' @rdname cohesive_blocks
 #' @method print cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 print.cohesiveBlocks <- function(x, ...) {
   cat("Cohesive block structure:\n")
@@ -378,7 +462,6 @@ summary.cohesiveBlocks <- function(object, ...) {
 
 #' @rdname cohesive_blocks
 #' @method plot cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
@@ -394,7 +477,6 @@ plot.cohesiveBlocks <- function(x, y,
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 #' @importFrom graphics plot
 plot_hierarchy <- function(blocks,
@@ -466,7 +548,6 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 export_pajek <- function(blocks, graph, file,
                          project.file = TRUE) {
@@ -485,7 +566,6 @@ export_pajek <- function(blocks, graph, file,
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 max_cohesion <- function(blocks) {
   res <- numeric(blocks$vcount)

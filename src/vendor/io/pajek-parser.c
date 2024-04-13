@@ -116,27 +116,27 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
                          igraph_i_pajek_parsedata_t *context,
                          const char *s);
 
-static igraph_error_t igraph_i_pajek_add_string_vertex_attribute(const char *name,
+static igraph_error_t add_string_vertex_attribute(const char *name,
                                                const char *value,
                                                size_t len,
                                                igraph_i_pajek_parsedata_t *context);
-static igraph_error_t igraph_i_pajek_add_string_edge_attribute(const char *name,
+static igraph_error_t add_string_edge_attribute(const char *name,
                                              const char *value,
                                              size_t len,
                                              igraph_i_pajek_parsedata_t *context);
-static igraph_error_t igraph_i_pajek_add_numeric_vertex_attribute(const char *name,
+static igraph_error_t add_numeric_vertex_attribute(const char *name,
                                                 igraph_real_t value,
                                                 igraph_i_pajek_parsedata_t *context);
-static igraph_error_t igraph_i_pajek_add_numeric_edge_attribute(const char *name,
+static igraph_error_t add_numeric_edge_attribute(const char *name,
                                               igraph_real_t value,
                                               igraph_i_pajek_parsedata_t *context);
-static igraph_error_t igraph_i_pajek_add_numeric_attribute(igraph_trie_t *names,
+static igraph_error_t add_numeric_attribute(igraph_trie_t *names,
                                          igraph_vector_ptr_t *attrs,
                                          igraph_integer_t count,
                                          const char *attrname,
                                          igraph_integer_t vid,
                                          igraph_real_t number);
-static igraph_error_t igraph_i_pajek_add_string_attribute(igraph_trie_t *names,
+static igraph_error_t add_string_attribute(igraph_trie_t *names,
                                         igraph_vector_ptr_t *attrs,
                                         igraph_integer_t count,
                                         const char *attrname,
@@ -144,13 +144,18 @@ static igraph_error_t igraph_i_pajek_add_string_attribute(igraph_trie_t *names,
                                         const char *str,
                                         igraph_integer_t str_len);
 
-static igraph_error_t igraph_i_pajek_add_bipartite_type(igraph_i_pajek_parsedata_t *context);
-static igraph_error_t igraph_i_pajek_check_bipartite(igraph_i_pajek_parsedata_t *context);
+static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context);
+static igraph_error_t check_bipartite(igraph_i_pajek_parsedata_t *context);
+
+static igraph_error_t make_dynstr(const char *src, size_t len, char **res);
+static igraph_bool_t is_standard_vattr(const char *attrname);
+static igraph_bool_t is_standard_eattr(const char *attrname);
+static igraph_error_t deconflict_attrname(char **attrname);
 
 #define scanner context->scanner
 
 
-#line 154 "yy.tab.c"
+#line 159 "src/vendor/io/pajek-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -173,7 +178,7 @@ static igraph_error_t igraph_i_pajek_check_bipartite(igraph_i_pajek_parsedata_t 
 #  endif
 # endif
 
-#include "io/parsers/pajek-parser.h"
+#include "pajek-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -183,119 +188,103 @@ enum yysymbol_kind_t
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
   YYSYMBOL_NEWLINE = 3,                    /* "end of line"  */
   YYSYMBOL_NUM = 4,                        /* "number"  */
-  YYSYMBOL_ALNUM = 5,                      /* ALNUM  */
-  YYSYMBOL_QSTR = 6,                       /* QSTR  */
-  YYSYMBOL_PSTR = 7,                       /* PSTR  */
-  YYSYMBOL_NETWORKLINE = 8,                /* "*network line"  */
-  YYSYMBOL_NET_TITLE = 9,                  /* NET_TITLE  */
-  YYSYMBOL_VERTICESLINE = 10,              /* "*vertices line"  */
-  YYSYMBOL_ARCSLINE = 11,                  /* "*arcs line"  */
-  YYSYMBOL_EDGESLINE = 12,                 /* "*edges line"  */
-  YYSYMBOL_ARCSLISTLINE = 13,              /* "*arcslist line"  */
-  YYSYMBOL_EDGESLISTLINE = 14,             /* "*edgeslist line"  */
-  YYSYMBOL_MATRIXLINE = 15,                /* "*matrix line"  */
-  YYSYMBOL_ERROR = 16,                     /* ERROR  */
-  YYSYMBOL_VP_X_FACT = 17,                 /* VP_X_FACT  */
-  YYSYMBOL_VP_Y_FACT = 18,                 /* VP_Y_FACT  */
-  YYSYMBOL_VP_IC = 19,                     /* VP_IC  */
-  YYSYMBOL_VP_BC = 20,                     /* VP_BC  */
-  YYSYMBOL_VP_LC = 21,                     /* VP_LC  */
-  YYSYMBOL_VP_LR = 22,                     /* VP_LR  */
-  YYSYMBOL_VP_LPHI = 23,                   /* VP_LPHI  */
-  YYSYMBOL_VP_BW = 24,                     /* VP_BW  */
-  YYSYMBOL_VP_FOS = 25,                    /* VP_FOS  */
-  YYSYMBOL_VP_PHI = 26,                    /* VP_PHI  */
-  YYSYMBOL_VP_R = 27,                      /* VP_R  */
-  YYSYMBOL_VP_Q = 28,                      /* VP_Q  */
-  YYSYMBOL_VP_LA = 29,                     /* VP_LA  */
-  YYSYMBOL_VP_FONT = 30,                   /* VP_FONT  */
-  YYSYMBOL_VP_URL = 31,                    /* VP_URL  */
-  YYSYMBOL_VP_SIZE = 32,                   /* VP_SIZE  */
+  YYSYMBOL_ALNUM = 5,                      /* "word"  */
+  YYSYMBOL_QSTR = 6,                       /* "quoted string"  */
+  YYSYMBOL_NETWORKLINE = 7,                /* "*Network line"  */
+  YYSYMBOL_VERTICESLINE = 8,               /* "*Vertices line"  */
+  YYSYMBOL_ARCSLINE = 9,                   /* "*Arcs line"  */
+  YYSYMBOL_EDGESLINE = 10,                 /* "*Edges line"  */
+  YYSYMBOL_ARCSLISTLINE = 11,              /* "*Arcslist line"  */
+  YYSYMBOL_EDGESLISTLINE = 12,             /* "*Edgeslist line"  */
+  YYSYMBOL_MATRIXLINE = 13,                /* "*Matrix line"  */
+  YYSYMBOL_ERROR = 14,                     /* ERROR  */
+  YYSYMBOL_VP_X_FACT = 15,                 /* VP_X_FACT  */
+  YYSYMBOL_VP_Y_FACT = 16,                 /* VP_Y_FACT  */
+  YYSYMBOL_VP_PHI = 17,                    /* VP_PHI  */
+  YYSYMBOL_VP_R = 18,                      /* VP_R  */
+  YYSYMBOL_VP_Q = 19,                      /* VP_Q  */
+  YYSYMBOL_VP_IC = 20,                     /* VP_IC  */
+  YYSYMBOL_VP_BC = 21,                     /* VP_BC  */
+  YYSYMBOL_VP_BW = 22,                     /* VP_BW  */
+  YYSYMBOL_VP_LC = 23,                     /* VP_LC  */
+  YYSYMBOL_VP_LA = 24,                     /* VP_LA  */
+  YYSYMBOL_VP_LR = 25,                     /* VP_LR  */
+  YYSYMBOL_VP_LPHI = 26,                   /* VP_LPHI  */
+  YYSYMBOL_VP_FOS = 27,                    /* VP_FOS  */
+  YYSYMBOL_VP_FONT = 28,                   /* VP_FONT  */
+  YYSYMBOL_VP_URL = 29,                    /* VP_URL  */
+  YYSYMBOL_EP_H1 = 30,                     /* EP_H1  */
+  YYSYMBOL_EP_H2 = 31,                     /* EP_H2  */
+  YYSYMBOL_EP_W = 32,                      /* EP_W  */
   YYSYMBOL_EP_C = 33,                      /* EP_C  */
-  YYSYMBOL_EP_S = 34,                      /* EP_S  */
+  YYSYMBOL_EP_P = 34,                      /* EP_P  */
   YYSYMBOL_EP_A = 35,                      /* EP_A  */
-  YYSYMBOL_EP_W = 36,                      /* EP_W  */
-  YYSYMBOL_EP_H1 = 37,                     /* EP_H1  */
-  YYSYMBOL_EP_H2 = 38,                     /* EP_H2  */
-  YYSYMBOL_EP_A1 = 39,                     /* EP_A1  */
-  YYSYMBOL_EP_A2 = 40,                     /* EP_A2  */
-  YYSYMBOL_EP_K1 = 41,                     /* EP_K1  */
-  YYSYMBOL_EP_K2 = 42,                     /* EP_K2  */
-  YYSYMBOL_EP_AP = 43,                     /* EP_AP  */
-  YYSYMBOL_EP_P = 44,                      /* EP_P  */
-  YYSYMBOL_EP_L = 45,                      /* EP_L  */
-  YYSYMBOL_EP_LP = 46,                     /* EP_LP  */
-  YYSYMBOL_EP_LR = 47,                     /* EP_LR  */
-  YYSYMBOL_EP_LPHI = 48,                   /* EP_LPHI  */
-  YYSYMBOL_EP_LC = 49,                     /* EP_LC  */
-  YYSYMBOL_EP_LA = 50,                     /* EP_LA  */
-  YYSYMBOL_EP_SIZE = 51,                   /* EP_SIZE  */
-  YYSYMBOL_EP_FOS = 52,                    /* EP_FOS  */
-  YYSYMBOL_YYACCEPT = 53,                  /* $accept  */
-  YYSYMBOL_input = 54,                     /* input  */
-  YYSYMBOL_nethead = 55,                   /* nethead  */
-  YYSYMBOL_vertices = 56,                  /* vertices  */
-  YYSYMBOL_verticeshead = 57,              /* verticeshead  */
-  YYSYMBOL_vertdefs = 58,                  /* vertdefs  */
-  YYSYMBOL_vertexline = 59,                /* vertexline  */
-  YYSYMBOL_60_1 = 60,                      /* $@1  */
-  YYSYMBOL_vertex = 61,                    /* vertex  */
-  YYSYMBOL_vertexid = 62,                  /* vertexid  */
-  YYSYMBOL_vertexcoords = 63,              /* vertexcoords  */
-  YYSYMBOL_shape = 64,                     /* shape  */
-  YYSYMBOL_params = 65,                    /* params  */
-  YYSYMBOL_param = 66,                     /* param  */
-  YYSYMBOL_vpword = 67,                    /* vpword  */
-  YYSYMBOL_68_2 = 68,                      /* $@2  */
-  YYSYMBOL_69_3 = 69,                      /* $@3  */
-  YYSYMBOL_70_4 = 70,                      /* $@4  */
-  YYSYMBOL_71_5 = 71,                      /* $@5  */
-  YYSYMBOL_72_6 = 72,                      /* $@6  */
-  YYSYMBOL_vpwordpar = 73,                 /* vpwordpar  */
-  YYSYMBOL_edgeblock = 74,                 /* edgeblock  */
-  YYSYMBOL_arcs = 75,                      /* arcs  */
-  YYSYMBOL_arcsdefs = 76,                  /* arcsdefs  */
-  YYSYMBOL_arcsline = 77,                  /* arcsline  */
-  YYSYMBOL_78_7 = 78,                      /* $@7  */
-  YYSYMBOL_arcfrom = 79,                   /* arcfrom  */
-  YYSYMBOL_arcto = 80,                     /* arcto  */
-  YYSYMBOL_edges = 81,                     /* edges  */
-  YYSYMBOL_edgesdefs = 82,                 /* edgesdefs  */
-  YYSYMBOL_edgesline = 83,                 /* edgesline  */
-  YYSYMBOL_84_8 = 84,                      /* $@8  */
-  YYSYMBOL_edgefrom = 85,                  /* edgefrom  */
-  YYSYMBOL_edgeto = 86,                    /* edgeto  */
-  YYSYMBOL_weight = 87,                    /* weight  */
-  YYSYMBOL_edgeparams = 88,                /* edgeparams  */
-  YYSYMBOL_edgeparam = 89,                 /* edgeparam  */
-  YYSYMBOL_epword = 90,                    /* epword  */
-  YYSYMBOL_91_9 = 91,                      /* $@9  */
-  YYSYMBOL_92_10 = 92,                     /* $@10  */
-  YYSYMBOL_93_11 = 93,                     /* $@11  */
-  YYSYMBOL_94_12 = 94,                     /* $@12  */
-  YYSYMBOL_95_13 = 95,                     /* $@13  */
-  YYSYMBOL_epwordpar = 96,                 /* epwordpar  */
-  YYSYMBOL_arcslist = 97,                  /* arcslist  */
-  YYSYMBOL_arcslistlines = 98,             /* arcslistlines  */
-  YYSYMBOL_arclistline = 99,               /* arclistline  */
-  YYSYMBOL_arctolist = 100,                /* arctolist  */
-  YYSYMBOL_arclistfrom = 101,              /* arclistfrom  */
-  YYSYMBOL_arclistto = 102,                /* arclistto  */
-  YYSYMBOL_edgeslist = 103,                /* edgeslist  */
-  YYSYMBOL_edgelistlines = 104,            /* edgelistlines  */
-  YYSYMBOL_edgelistline = 105,             /* edgelistline  */
-  YYSYMBOL_edgetolist = 106,               /* edgetolist  */
-  YYSYMBOL_edgelistfrom = 107,             /* edgelistfrom  */
-  YYSYMBOL_edgelistto = 108,               /* edgelistto  */
-  YYSYMBOL_adjmatrix = 109,                /* adjmatrix  */
-  YYSYMBOL_matrixline = 110,               /* matrixline  */
-  YYSYMBOL_adjmatrixlines = 111,           /* adjmatrixlines  */
-  YYSYMBOL_adjmatrixline = 112,            /* adjmatrixline  */
-  YYSYMBOL_adjmatrixnumbers = 113,         /* adjmatrixnumbers  */
-  YYSYMBOL_adjmatrixentry = 114,           /* adjmatrixentry  */
-  YYSYMBOL_longint = 115,                  /* longint  */
-  YYSYMBOL_number = 116,                   /* number  */
-  YYSYMBOL_word = 117                      /* word  */
+  YYSYMBOL_EP_S = 36,                      /* EP_S  */
+  YYSYMBOL_EP_A1 = 37,                     /* EP_A1  */
+  YYSYMBOL_EP_K1 = 38,                     /* EP_K1  */
+  YYSYMBOL_EP_A2 = 39,                     /* EP_A2  */
+  YYSYMBOL_EP_K2 = 40,                     /* EP_K2  */
+  YYSYMBOL_EP_AP = 41,                     /* EP_AP  */
+  YYSYMBOL_EP_L = 42,                      /* EP_L  */
+  YYSYMBOL_EP_LP = 43,                     /* EP_LP  */
+  YYSYMBOL_EP_LR = 44,                     /* EP_LR  */
+  YYSYMBOL_EP_LPHI = 45,                   /* EP_LPHI  */
+  YYSYMBOL_EP_LC = 46,                     /* EP_LC  */
+  YYSYMBOL_EP_LA = 47,                     /* EP_LA  */
+  YYSYMBOL_EP_FOS = 48,                    /* EP_FOS  */
+  YYSYMBOL_EP_FONT = 49,                   /* EP_FONT  */
+  YYSYMBOL_YYACCEPT = 50,                  /* $accept  */
+  YYSYMBOL_input = 51,                     /* input  */
+  YYSYMBOL_final_newlines = 52,            /* final_newlines  */
+  YYSYMBOL_nethead = 53,                   /* nethead  */
+  YYSYMBOL_vertices = 54,                  /* vertices  */
+  YYSYMBOL_verticeshead = 55,              /* verticeshead  */
+  YYSYMBOL_vertdefs = 56,                  /* vertdefs  */
+  YYSYMBOL_vertexline = 57,                /* vertexline  */
+  YYSYMBOL_58_1 = 58,                      /* $@1  */
+  YYSYMBOL_vertex = 59,                    /* vertex  */
+  YYSYMBOL_vertexid = 60,                  /* vertexid  */
+  YYSYMBOL_vertexcoords = 61,              /* vertexcoords  */
+  YYSYMBOL_shape = 62,                     /* shape  */
+  YYSYMBOL_vertparams = 63,                /* vertparams  */
+  YYSYMBOL_vertparam = 64,                 /* vertparam  */
+  YYSYMBOL_vpword = 65,                    /* vpword  */
+  YYSYMBOL_edgeblock = 66,                 /* edgeblock  */
+  YYSYMBOL_arcs = 67,                      /* arcs  */
+  YYSYMBOL_arcsdefs = 68,                  /* arcsdefs  */
+  YYSYMBOL_arcsline = 69,                  /* arcsline  */
+  YYSYMBOL_70_2 = 70,                      /* $@2  */
+  YYSYMBOL_edges = 71,                     /* edges  */
+  YYSYMBOL_edgesdefs = 72,                 /* edgesdefs  */
+  YYSYMBOL_edgesline = 73,                 /* edgesline  */
+  YYSYMBOL_74_3 = 74,                      /* $@3  */
+  YYSYMBOL_weight = 75,                    /* weight  */
+  YYSYMBOL_edgeparams = 76,                /* edgeparams  */
+  YYSYMBOL_edgeparam = 77,                 /* edgeparam  */
+  YYSYMBOL_epword = 78,                    /* epword  */
+  YYSYMBOL_arcslist = 79,                  /* arcslist  */
+  YYSYMBOL_arcslistlines = 80,             /* arcslistlines  */
+  YYSYMBOL_arclistline = 81,               /* arclistline  */
+  YYSYMBOL_arctolist = 82,                 /* arctolist  */
+  YYSYMBOL_arclistfrom = 83,               /* arclistfrom  */
+  YYSYMBOL_arclistto = 84,                 /* arclistto  */
+  YYSYMBOL_edgeslist = 85,                 /* edgeslist  */
+  YYSYMBOL_edgelistlines = 86,             /* edgelistlines  */
+  YYSYMBOL_edgelistline = 87,              /* edgelistline  */
+  YYSYMBOL_edgetolist = 88,                /* edgetolist  */
+  YYSYMBOL_edgelistfrom = 89,              /* edgelistfrom  */
+  YYSYMBOL_edgelistto = 90,                /* edgelistto  */
+  YYSYMBOL_adjmatrix = 91,                 /* adjmatrix  */
+  YYSYMBOL_matrixline = 92,                /* matrixline  */
+  YYSYMBOL_adjmatrixlines = 93,            /* adjmatrixlines  */
+  YYSYMBOL_adjmatrixline = 94,             /* adjmatrixline  */
+  YYSYMBOL_adjmatrixnumbers = 95,          /* adjmatrixnumbers  */
+  YYSYMBOL_adjmatrixentry = 96,            /* adjmatrixentry  */
+  YYSYMBOL_integer = 97,                   /* integer  */
+  YYSYMBOL_number = 98,                    /* number  */
+  YYSYMBOL_parname = 99,                   /* parname  */
+  YYSYMBOL_parstrval = 100,                /* parstrval  */
+  YYSYMBOL_word = 101                      /* word  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -624,21 +613,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  6
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   223
+#define YYLAST   215
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  53
+#define YYNTOKENS  50
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  65
+#define YYNNTS  52
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  136
+#define YYNRULES  115
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  207
+#define YYNSTATES  178
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   307
+#define YYMAXUTOK   304
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -682,27 +671,25 @@ static const yytype_int8 yytranslate[] =
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49,    50,    51,    52
+      45,    46,    47,    48,    49
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   187,   187,   191,   191,   191,   193,   195,   205,   223,
-     223,   225,   226,   227,   227,   238,   240,   245,   246,   250,
-     256,   256,   260,   260,   263,   264,   267,   270,   275,   280,
-     285,   288,   291,   294,   297,   300,   303,   306,   309,   314,
-     314,   318,   318,   322,   322,   326,   326,   331,   331,   338,
-     340,   340,   340,   340,   340,   340,   342,   343,   345,   345,
-     347,   348,   348,   360,   362,   364,   365,   367,   367,   369,
-     370,   370,   382,   384,   386,   386,   390,   390,   393,   394,
-     399,   402,   405,   408,   411,   414,   417,   420,   423,   426,
-     429,   432,   435,   438,   441,   446,   446,   450,   450,   454,
-     454,   458,   458,   462,   462,   468,   470,   472,   472,   474,
-     474,   476,   476,   478,   480,   485,   487,   487,   489,   489,
-     491,   491,   493,   495,   502,   504,   509,   509,   511,   513,
-     513,   515,   535,   543,   551,   553,   555
+       0,   188,   188,   199,   199,   201,   201,   203,   205,   215,
+     233,   233,   235,   236,   236,   239,   250,   255,   256,   260,
+     266,   266,   270,   270,   273,   274,   277,   280,   283,   286,
+     289,   292,   295,   298,   301,   306,   309,   312,   315,   318,
+     321,   336,   336,   336,   336,   336,   336,   338,   339,   341,
+     341,   343,   343,   348,   349,   351,   351,   353,   353,   358,
+     358,   362,   362,   365,   366,   369,   372,   375,   378,   381,
+     384,   387,   390,   393,   396,   399,   402,   405,   410,   413,
+     416,   419,   422,   425,   428,   443,   445,   445,   447,   449,
+     449,   451,   453,   458,   460,   460,   462,   464,   464,   466,
+     468,   475,   477,   482,   482,   484,   486,   486,   488,   508,
+     516,   524,   528,   530,   532,   534
 };
 #endif
 
@@ -719,25 +706,24 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "\"end of line\"",
-  "\"number\"", "ALNUM", "QSTR", "PSTR", "\"*network line\"", "NET_TITLE",
-  "\"*vertices line\"", "\"*arcs line\"", "\"*edges line\"",
-  "\"*arcslist line\"", "\"*edgeslist line\"", "\"*matrix line\"", "ERROR",
-  "VP_X_FACT", "VP_Y_FACT", "VP_IC", "VP_BC", "VP_LC", "VP_LR", "VP_LPHI",
-  "VP_BW", "VP_FOS", "VP_PHI", "VP_R", "VP_Q", "VP_LA", "VP_FONT",
-  "VP_URL", "VP_SIZE", "EP_C", "EP_S", "EP_A", "EP_W", "EP_H1", "EP_H2",
-  "EP_A1", "EP_A2", "EP_K1", "EP_K2", "EP_AP", "EP_P", "EP_L", "EP_LP",
-  "EP_LR", "EP_LPHI", "EP_LC", "EP_LA", "EP_SIZE", "EP_FOS", "$accept",
-  "input", "nethead", "vertices", "verticeshead", "vertdefs", "vertexline",
-  "$@1", "vertex", "vertexid", "vertexcoords", "shape", "params", "param",
-  "vpword", "$@2", "$@3", "$@4", "$@5", "$@6", "vpwordpar", "edgeblock",
-  "arcs", "arcsdefs", "arcsline", "$@7", "arcfrom", "arcto", "edges",
-  "edgesdefs", "edgesline", "$@8", "edgefrom", "edgeto", "weight",
-  "edgeparams", "edgeparam", "epword", "$@9", "$@10", "$@11", "$@12",
-  "$@13", "epwordpar", "arcslist", "arcslistlines", "arclistline",
-  "arctolist", "arclistfrom", "arclistto", "edgeslist", "edgelistlines",
-  "edgelistline", "edgetolist", "edgelistfrom", "edgelistto", "adjmatrix",
-  "matrixline", "adjmatrixlines", "adjmatrixline", "adjmatrixnumbers",
-  "adjmatrixentry", "longint", "number", "word", YY_NULLPTR
+  "\"number\"", "\"word\"", "\"quoted string\"", "\"*Network line\"",
+  "\"*Vertices line\"", "\"*Arcs line\"", "\"*Edges line\"",
+  "\"*Arcslist line\"", "\"*Edgeslist line\"", "\"*Matrix line\"", "ERROR",
+  "VP_X_FACT", "VP_Y_FACT", "VP_PHI", "VP_R", "VP_Q", "VP_IC", "VP_BC",
+  "VP_BW", "VP_LC", "VP_LA", "VP_LR", "VP_LPHI", "VP_FOS", "VP_FONT",
+  "VP_URL", "EP_H1", "EP_H2", "EP_W", "EP_C", "EP_P", "EP_A", "EP_S",
+  "EP_A1", "EP_K1", "EP_A2", "EP_K2", "EP_AP", "EP_L", "EP_LP", "EP_LR",
+  "EP_LPHI", "EP_LC", "EP_LA", "EP_FOS", "EP_FONT", "$accept", "input",
+  "final_newlines", "nethead", "vertices", "verticeshead", "vertdefs",
+  "vertexline", "$@1", "vertex", "vertexid", "vertexcoords", "shape",
+  "vertparams", "vertparam", "vpword", "edgeblock", "arcs", "arcsdefs",
+  "arcsline", "$@2", "edges", "edgesdefs", "edgesline", "$@3", "weight",
+  "edgeparams", "edgeparam", "epword", "arcslist", "arcslistlines",
+  "arclistline", "arctolist", "arclistfrom", "arclistto", "edgeslist",
+  "edgelistlines", "edgelistline", "edgetolist", "edgelistfrom",
+  "edgelistto", "adjmatrix", "matrixline", "adjmatrixlines",
+  "adjmatrixline", "adjmatrixnumbers", "adjmatrixentry", "integer",
+  "number", "parname", "parstrval", "word", YY_NULLPTR
 };
 
 static const char *
@@ -747,12 +733,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-168)
+#define YYPACT_NINF (-94)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-130)
+#define YYTABLE_NINF (-1)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -761,201 +747,184 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      -2,     6,     4,    12,  -168,    34,  -168,    35,  -168,    50,
-    -168,  -168,    35,    13,  -168,  -168,    10,    26,    54,    56,
-    -168,  -168,  -168,  -168,  -168,  -168,    57,    28,  -168,  -168,
-      58,  -168,    59,  -168,  -168,  -168,  -168,  -168,    60,  -168,
-      30,  -168,    32,  -168,    39,    41,    45,  -168,    15,  -168,
-    -168,    35,  -168,    30,  -168,  -168,    35,  -168,    32,  -168,
-    -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,    61,    62,
-    -168,  -168,  -168,  -168,    62,  -168,  -168,  -168,  -168,  -168,
-      47,    52,  -168,  -168,    15,    62,    62,    62,  -168,  -168,
-    -168,  -168,  -168,  -168,  -168,  -168,    62,  -168,  -168,  -168,
-     139,  -168,   150,   171,  -168,    62,    62,    62,    62,    62,
-      62,    62,    62,    62,    62,    62,    62,    62,  -168,  -168,
-      62,  -168,  -168,  -168,    62,    62,  -168,    62,    62,    62,
-      62,    62,    62,    62,    62,  -168,  -168,    62,    62,    62,
-    -168,    62,    62,    62,  -168,  -168,  -168,  -168,  -168,    15,
-      62,    15,    62,    15,    62,  -168,  -168,  -168,  -168,  -168,
-    -168,  -168,  -168,    15,    15,  -168,    15,    62,  -168,    15,
-    -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,    15,    15,
-    -168,  -168,  -168,    15,  -168,  -168,  -168,  -168,  -168,    62,
-    -168,    62,  -168,    62,  -168,  -168,  -168,  -168,    62,  -168,
-    -168,  -168,  -168,  -168,  -168,  -168,  -168
+       3,   -94,    21,     0,   -94,    11,   -94,    22,   -94,    11,
+      45,   -94,   -94,    27,     1,    15,    30,    35,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,    40,    11,   -94,   -94,   -94,
+      41,   -94,    43,   -94,   -94,   -94,   -94,    48,   -94,    11,
+     -94,    11,   -94,    11,    11,    55,   -94,     8,    11,   -94,
+      11,    11,   -94,    11,   -94,   -94,   -94,   -94,   -94,   -94,
+     -94,    49,    55,   -94,   -94,   -94,   -94,    55,   -94,   -94,
+     -94,    20,    33,   -94,   -94,     8,    55,    55,    55,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,    55,   -94,   -94,
+     -94,   186,   -94,    92,   139,   -94,    55,    55,    55,    55,
+      55,     8,     8,    55,     8,    55,    55,    55,    55,     8,
+       8,   -94,   -94,     8,   -94,   -94,    55,    55,    55,     8,
+       8,     8,    55,    55,    55,    55,    55,    55,     8,    55,
+      55,    55,     8,    55,    55,     8,   -94,   -94,     8,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
    Performed when YYTABLE does not specify something else to do.  Zero
    means the default is an error.  */
-static const yytype_uint8 yydefact[] =
+static const yytype_int8 yydefact[] =
 {
-       3,     0,     0,     0,     4,     0,     1,     0,    50,     0,
-       5,   132,     7,     2,     9,     8,     0,     0,     0,     0,
-     125,    51,    52,    53,    54,    55,     0,     6,    58,   133,
-       0,    67,     0,   107,   116,   126,    11,    10,    13,    15,
-      56,    58,    65,    67,   106,   115,   124,    12,     0,    60,
-      59,     0,    63,    57,    69,    68,     0,    72,    66,   109,
-     108,   111,   113,   118,   117,   120,   122,   127,     0,   129,
-     131,   135,   134,   136,    17,    16,    61,    64,    70,    73,
-       0,     0,   128,   130,    20,     0,    74,    74,   110,   112,
-     114,   119,   121,   123,    22,    21,    18,    76,    75,    76,
-       0,    19,     0,     0,    14,     0,     0,    43,    45,    47,
-       0,     0,     0,     0,     0,     0,     0,     0,    39,    41,
-       0,    23,    24,    62,   103,     0,    95,     0,     0,     0,
-       0,     0,     0,     0,     0,    97,    99,     0,     0,     0,
-     101,     0,     0,     0,    77,    78,    71,    25,    26,     0,
-       0,     0,     0,     0,     0,    30,    31,    32,    33,    34,
-      35,    36,    37,     0,     0,    38,     0,     0,    80,     0,
-      81,    82,    83,    84,    85,    86,    87,    88,     0,     0,
-      89,    90,    91,     0,    92,    93,    94,    44,    49,     0,
-      46,     0,    48,     0,    40,    42,   104,   105,     0,    96,
-      98,   100,   102,    27,    28,    29,    79
+       5,     6,     0,     0,     1,     0,    41,     0,   109,     8,
+       3,    10,     9,     3,     0,     0,     0,     0,   102,     2,
+      42,    43,    44,    45,    46,     0,     7,     4,    49,   110,
+       0,    55,     0,    86,    94,   103,    11,    13,    15,    47,
+      49,    53,    55,    85,    93,   101,    12,     0,     0,    50,
+      48,     0,    56,    54,    87,    89,    91,    95,    97,    99,
+     104,     0,   106,   108,   114,   113,   115,    17,    16,    51,
+      57,     0,     0,   105,   107,    20,     0,    59,    59,    88,
+      90,    92,    96,    98,   100,    22,    21,    18,    61,    60,
+      61,     0,    19,     0,     0,    14,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    23,    24,     0,   111,    52,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    62,    63,     0,    58,
+      25,    26,    31,    32,    33,    37,   112,    38,    29,    39,
+      34,    27,    28,    30,    35,    36,    40,    66,    67,    65,
+      82,    79,    78,    64,    68,    70,    69,    71,    72,    80,
+      73,    74,    75,    81,    76,    77,    83,    84
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int16 yypgoto[] =
+static const yytype_int8 yypgoto[] =
 {
-    -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,
-    -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,
-    -146,  -168,  -168,    24,  -168,  -168,  -168,  -168,  -168,    25,
-    -168,  -168,  -168,  -168,   -20,   -27,  -168,  -168,  -168,  -168,
-    -168,  -168,  -168,  -167,  -168,  -168,  -168,  -168,  -168,  -168,
-    -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,  -168,
-       5,  -168,    -4,   -16,   -38
+     -94,   -94,    47,   -94,   -94,   -94,   -94,   -94,   -94,   -19,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,    25,   -94,
+     -94,   -94,    19,   -94,   -94,   -12,   -23,   -94,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,   -94,
+     -94,   -94,   -94,   -94,   -94,     9,   -94,    -3,   -14,   -21,
+     -93,   -44
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_uint8 yydefgoto[] =
 {
-       0,     2,     3,     8,     9,    27,    37,    48,    38,    74,
-      84,    94,   100,   121,   122,   163,   164,   149,   151,   153,
-     187,    13,    21,    40,    50,    86,    51,    76,    22,    42,
-      55,    87,    56,    78,    97,   102,   144,   145,   169,   178,
-     179,   183,   166,   196,    23,    44,    60,    80,    61,    89,
-      24,    45,    64,    81,    65,    92,    25,    26,    46,    67,
-      68,    69,    52,    70,   188
+       0,     2,    19,     3,     6,     7,    26,    36,    47,    48,
+      67,    75,    85,    91,   111,   112,    10,    20,    39,    49,
+      77,    21,    41,    52,    78,    88,    93,   136,   137,    22,
+      43,    54,    71,    55,    80,    23,    44,    57,    72,    58,
+      83,    24,    25,    45,    60,    61,    62,    38,    63,   138,
+     145,   146
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int16 yytable[] =
+static const yytype_uint8 yytable[] =
 {
-      30,    32,   199,    12,     6,   190,     1,   192,    15,     4,
-      75,   200,   201,    28,    29,     5,   202,   194,   195,    71,
-      72,    73,     7,    39,    16,    17,    18,    19,    20,    31,
-      29,    36,    11,    49,    11,    54,    11,    10,    57,    11,
-      62,    66,    59,    11,    63,    11,    95,    77,  -129,    29,
-      88,    11,    79,    14,    57,    91,    11,    33,    85,    34,
-      35,    41,    43,    47,    82,    53,    29,    99,    58,    96,
-      98,    98,   103,     0,    83,     0,    90,    93,     0,     0,
-     101,     0,     0,     0,     0,     0,     0,     0,     0,   147,
-     148,   150,   152,   154,   155,   156,   157,   158,   159,   160,
-     161,   162,     0,     0,   165,     0,     0,     0,   167,   168,
-       0,   170,   171,   172,   173,   174,   175,   176,   177,     0,
-       0,   180,   181,   182,     0,   184,   185,   186,   197,     0,
-       0,   197,     0,     0,   189,     0,   191,     0,   193,     0,
-     197,   197,   104,     0,     0,   197,     0,     0,     0,     0,
-       0,   198,     0,   123,     0,     0,   105,   106,   107,   108,
-     109,   110,   111,   112,   113,   114,   115,   116,   117,   118,
-     119,   120,     0,   203,   146,   204,     0,   205,     0,     0,
-       0,     0,   206,   124,   125,   126,   127,   128,   129,   130,
-     131,   132,   133,   134,   135,   136,   137,   138,   139,   140,
-     141,   142,   143,     0,   124,   125,   126,   127,   128,   129,
-     130,   131,   132,   133,   134,   135,   136,   137,   138,   139,
-     140,   141,   142,   143
+      30,    32,     9,    68,    28,    29,    12,    37,     5,   147,
+       1,   149,    64,    65,    66,     8,   154,   155,    31,    29,
+     156,     4,    51,    79,     8,    11,   160,   161,   162,    69,
+      13,    86,    70,    33,    51,   169,    82,     8,    34,   173,
+      56,    59,   176,    35,    40,   177,    42,   114,    13,   114,
+     114,    46,    73,    76,    14,    15,    16,    17,    18,    29,
+      27,    53,    87,    89,    89,    50,    90,    94,    81,    84,
+     113,    74,     0,    92,     0,     0,     0,     0,     0,     0,
+       0,     0,   140,   141,   142,   143,   144,     0,     0,   148,
+       0,   150,   151,   152,   153,   115,    64,    65,    66,     0,
+       0,     0,   157,   158,   159,     0,     0,     0,   163,   164,
+     165,   166,   167,   168,     0,   170,   171,   172,     0,   174,
+     175,     0,   116,   117,   118,   119,   120,   121,   122,   123,
+     124,   125,   126,   127,   128,   129,   130,   131,   132,   133,
+     134,   135,   139,    64,    65,    66,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   116,
+     117,   118,   119,   120,   121,   122,   123,   124,   125,   126,
+     127,   128,   129,   130,   131,   132,   133,   134,   135,    95,
+      64,    65,    66,     0,     0,     0,     0,     0,     0,     0,
+       0,    96,    97,    98,    99,   100,   101,   102,   103,   104,
+     105,   106,   107,   108,   109,   110
 };
 
 static const yytype_int16 yycheck[] =
 {
-      16,    17,   169,     7,     0,   151,     8,   153,    12,     3,
-      48,   178,   179,     3,     4,     9,   183,   163,   164,     4,
-       5,     6,    10,    27,    11,    12,    13,    14,    15,     3,
-       4,     3,     4,     3,     4,     3,     4,     3,    42,     4,
-      44,    45,     3,     4,     3,     4,    84,    51,     3,     4,
-       3,     4,    56,     3,    58,     3,     4,     3,    74,     3,
-       3,     3,     3,     3,     3,    41,     4,    87,    43,    85,
-      86,    87,    99,    -1,    69,    -1,    80,    81,    -1,    -1,
-      96,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   105,
-     106,   107,   108,   109,   110,   111,   112,   113,   114,   115,
-     116,   117,    -1,    -1,   120,    -1,    -1,    -1,   124,   125,
-      -1,   127,   128,   129,   130,   131,   132,   133,   134,    -1,
-      -1,   137,   138,   139,    -1,   141,   142,   143,   166,    -1,
-      -1,   169,    -1,    -1,   150,    -1,   152,    -1,   154,    -1,
-     178,   179,     3,    -1,    -1,   183,    -1,    -1,    -1,    -1,
-      -1,   167,    -1,     3,    -1,    -1,    17,    18,    19,    20,
-      21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      31,    32,    -1,   189,     3,   191,    -1,   193,    -1,    -1,
-      -1,    -1,   198,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
-      50,    51,    52,    -1,    33,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      49,    50,    51,    52
+      14,    15,     5,    47,     3,     4,     9,    26,     8,   102,
+       7,   104,     4,     5,     6,     4,   109,   110,     3,     4,
+     113,     0,    41,     3,     4,     3,   119,   120,   121,    48,
+       3,    75,    51,     3,    53,   128,     3,     4,     3,   132,
+      43,    44,   135,     3,     3,   138,     3,    91,     3,    93,
+      94,     3,     3,    67,     9,    10,    11,    12,    13,     4,
+      13,    42,    76,    77,    78,    40,    78,    90,    71,    72,
+      91,    62,    -1,    87,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    96,    97,    98,    99,   100,    -1,    -1,   103,
+      -1,   105,   106,   107,   108,     3,     4,     5,     6,    -1,
+      -1,    -1,   116,   117,   118,    -1,    -1,    -1,   122,   123,
+     124,   125,   126,   127,    -1,   129,   130,   131,    -1,   133,
+     134,    -1,    30,    31,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
+      48,    49,     3,     4,     5,     6,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    30,
+      31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
+      41,    42,    43,    44,    45,    46,    47,    48,    49,     3,
+       4,     5,     6,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    15,    16,    17,    18,    19,    20,    21,    22,    23,
+      24,    25,    26,    27,    28,    29
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     8,    54,    55,     3,     9,     0,    10,    56,    57,
-       3,     4,   115,    74,     3,   115,    11,    12,    13,    14,
-      15,    75,    81,    97,   103,   109,   110,    58,     3,     4,
-     116,     3,   116,     3,     3,     3,     3,    59,    61,   115,
-      76,     3,    82,     3,    98,   104,   111,     3,    60,     3,
-      77,    79,   115,    76,     3,    83,    85,   115,    82,     3,
-      99,   101,   115,     3,   105,   107,   115,   112,   113,   114,
-     116,     4,     5,     6,    62,   117,    80,   115,    86,   115,
-     100,   106,     3,   113,    63,   116,    78,    84,     3,   102,
-     115,     3,   108,   115,    64,   117,   116,    87,   116,    87,
-      65,   116,    88,    88,     3,    17,    18,    19,    20,    21,
-      22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
-      32,    66,    67,     3,    33,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      49,    50,    51,    52,    89,    90,     3,   116,   116,    70,
-     116,    71,   116,    72,   116,   116,   116,   116,   116,   116,
-     116,   116,   116,    68,    69,   116,    95,   116,   116,    91,
-     116,   116,   116,   116,   116,   116,   116,   116,    92,    93,
-     116,   116,   116,    94,   116,   116,   116,    73,   117,   116,
-      73,   116,    73,   116,    73,    73,    96,   117,   116,    96,
-      96,    96,    96,   116,   116,   116,   116
+       0,     7,    51,    53,     0,     8,    54,    55,     4,    97,
+      66,     3,    97,     3,     9,    10,    11,    12,    13,    52,
+      67,    71,    79,    85,    91,    92,    56,    52,     3,     4,
+      98,     3,    98,     3,     3,     3,    57,    59,    97,    68,
+       3,    72,     3,    80,    86,    93,     3,    58,    59,    69,
+      68,    59,    73,    72,    81,    83,    97,    87,    89,    97,
+      94,    95,    96,    98,     4,     5,     6,    60,   101,    59,
+      59,    82,    88,     3,    95,    61,    98,    70,    74,     3,
+      84,    97,     3,    90,    97,    62,   101,    98,    75,    98,
+      75,    63,    98,    76,    76,     3,    15,    16,    17,    18,
+      19,    20,    21,    22,    23,    24,    25,    26,    27,    28,
+      29,    64,    65,    99,   101,     3,    30,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    45,    46,    47,    48,    49,    77,    78,    99,     3,
+      98,    98,    98,    98,    98,   100,   101,   100,    98,   100,
+      98,    98,    98,    98,   100,   100,   100,    98,    98,    98,
+     100,   100,   100,    98,    98,    98,    98,    98,    98,   100,
+      98,    98,    98,   100,    98,    98,   100,   100
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    53,    54,    55,    55,    55,    56,    57,    57,    58,
-      58,    59,    59,    60,    59,    61,    62,    63,    63,    63,
-      64,    64,    65,    65,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    68,
-      67,    69,    67,    70,    67,    71,    67,    72,    67,    73,
-      74,    74,    74,    74,    74,    74,    75,    75,    76,    76,
-      77,    78,    77,    79,    80,    81,    81,    82,    82,    83,
-      84,    83,    85,    86,    87,    87,    88,    88,    89,    89,
-      89,    89,    89,    89,    89,    89,    89,    89,    89,    89,
-      89,    89,    89,    89,    89,    91,    90,    92,    90,    93,
-      90,    94,    90,    95,    90,    96,    97,    98,    98,    99,
-      99,   100,   100,   101,   102,   103,   104,   104,   105,   105,
-     106,   106,   107,   108,   109,   110,   111,   111,   112,   113,
-     113,   114,   115,   116,   117,   117,   117
+       0,    50,    51,    52,    52,    53,    53,    54,    55,    55,
+      56,    56,    57,    58,    57,    59,    60,    61,    61,    61,
+      62,    62,    63,    63,    64,    64,    64,    64,    64,    64,
+      64,    64,    64,    64,    64,    65,    65,    65,    65,    65,
+      65,    66,    66,    66,    66,    66,    66,    67,    67,    68,
+      68,    70,    69,    71,    71,    72,    72,    74,    73,    75,
+      75,    76,    76,    77,    77,    77,    77,    77,    77,    77,
+      77,    77,    77,    77,    77,    77,    77,    77,    78,    78,
+      78,    78,    78,    78,    78,    79,    80,    80,    81,    82,
+      82,    83,    84,    85,    86,    86,    87,    88,    88,    89,
+      90,    91,    92,    93,    93,    94,    95,    95,    96,    97,
+      98,    99,   100,   101,   101,   101
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     0,     2,     3,     3,     2,     3,     0,
-       2,     1,     2,     0,     7,     1,     1,     0,     2,     3,
-       0,     1,     0,     2,     1,     2,     2,     4,     4,     4,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     0,
-       3,     0,     3,     0,     3,     0,     3,     0,     3,     1,
-       0,     2,     2,     2,     2,     2,     3,     4,     0,     2,
-       1,     0,     6,     1,     1,     3,     4,     0,     2,     1,
-       0,     6,     1,     1,     0,     1,     0,     2,     1,     4,
+       0,     2,     4,     0,     2,     0,     1,     3,     2,     3,
+       0,     2,     2,     0,     7,     1,     1,     0,     2,     3,
+       0,     1,     0,     2,     1,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     0,     3,     0,     3,     0,
-       3,     0,     3,     0,     3,     1,     3,     0,     2,     1,
-       3,     0,     2,     1,     1,     3,     0,     2,     1,     3,
-       0,     2,     1,     1,     3,     1,     0,     2,     2,     0,
-       2,     1,     1,     1,     1,     1,     1
+       2,     0,     2,     2,     2,     2,     2,     3,     4,     0,
+       2,     0,     6,     3,     4,     0,     2,     0,     6,     0,
+       1,     0,     2,     1,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     3,     0,     2,     3,     0,
+       2,     1,     1,     3,     0,     2,     3,     0,     2,     1,
+       1,     3,     1,     0,     2,     2,     0,     2,     1,     1,
+       1,     1,     1,     1,     1,     1
 };
 
 
@@ -1514,7 +1483,17 @@ yydestruct (const char *yymsg,
   YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YY_USE (yykind);
+  switch (yykind)
+    {
+    case YYSYMBOL_parname: /* parname  */
+#line 133 "src/vendor/cigraph/src/io/pajek-parser.y"
+            { free(((*yyvaluep).dynstr)); }
+#line 1492 "src/vendor/io/pajek-parser.c"
+        break;
+
+      default:
+        break;
+    }
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1812,16 +1791,23 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* input: nethead vertices edgeblock  */
-#line 187 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                  {
-  if (context->vcount2 > 0) { igraph_i_pajek_check_bipartite(context); }
+  case 2: /* input: nethead vertices edgeblock final_newlines  */
+#line 188 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                                 {
+  if (context->vcount2 > 0) { check_bipartite(context); }
+  if (! context->eof) {
+    /* In Pajek files, an empty line after *Vertices signifies the end of the network data.
+     * If there is more data after one or more empty lines, we warn the user, as this
+     * may indicate file corruption, for example a stray empty lines before *Edges. */
+    IGRAPH_WARNINGF("Empty line encountered, ignoring rest of file after line %d.", (yylsp[0]).first_line);
+  }
+  YYACCEPT; /* stop parsing even if there is more data in the file. */
  }
-#line 1821 "yy.tab.c"
+#line 1807 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 7: /* verticeshead: "*vertices line" longint  */
-#line 195 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 8: /* verticeshead: "*Vertices line" integer  */
+#line 205 "src/vendor/cigraph/src/io/pajek-parser.y"
                                    {
   context->vcount=(yyvsp[0].intnum);
   context->vcount2=0;
@@ -1832,11 +1818,11 @@ yyreduce:
     IGRAPH_YY_ERRORF("Vertex count too large in Pajek file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->vcount);
   }
             }
-#line 1836 "yy.tab.c"
+#line 1822 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 8: /* verticeshead: "*vertices line" longint longint  */
-#line 205 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 9: /* verticeshead: "*Vertices line" integer integer  */
+#line 215 "src/vendor/cigraph/src/io/pajek-parser.y"
                                            {
   context->vcount=(yyvsp[-1].intnum);
   context->vcount2=(yyvsp[0].intnum);
@@ -1852,628 +1838,519 @@ yyreduce:
   if (context->vcount2 > IGRAPH_PAJEK_MAX_VERTEX_COUNT) {
     IGRAPH_YY_ERRORF("2-mode vertex count too large in Pajek file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->vcount2);
   }
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_bipartite_type(context));
+  IGRAPH_YY_CHECK(add_bipartite_type(context));
 }
-#line 1858 "yy.tab.c"
+#line 1844 "src/vendor/io/pajek-parser.c"
     break;
 
   case 13: /* $@1: %empty  */
-#line 227 "src/vendor/cigraph/src/io/pajek-parser.y"
-                   {
-              context->actvertex=(yyvsp[0].intnum);
-              if (context->actvertex < 1 || context->actvertex > context->vcount) {
-                  IGRAPH_YY_ERRORF(
-                              "Invalid vertex id (%" IGRAPH_PRId ") in Pajek file. "
-                              "The number of vertices is %" IGRAPH_PRId ".",
-                              IGRAPH_EINVAL, context->actvertex, context->vcount);
-              }
-            }
-#line 1872 "yy.tab.c"
+#line 236 "src/vendor/cigraph/src/io/pajek-parser.y"
+                   { context->actvertex=(yyvsp[0].intnum); }
+#line 1850 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 14: /* vertexline: vertex $@1 vertexid vertexcoords shape params "end of line"  */
-#line 235 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                                         { }
-#line 1878 "yy.tab.c"
+  case 14: /* vertexline: vertex $@1 vertexid vertexcoords shape vertparams "end of line"  */
+#line 236 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                                                                             { }
+#line 1856 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 15: /* vertex: longint  */
-#line 238 "src/vendor/cigraph/src/io/pajek-parser.y"
-                { (yyval.intnum)=(yyvsp[0].intnum); context->mode=1; }
-#line 1884 "yy.tab.c"
+  case 15: /* vertex: integer  */
+#line 239 "src/vendor/cigraph/src/io/pajek-parser.y"
+                {
+  igraph_integer_t v = (yyvsp[0].intnum);
+  if (v < 1 || v > context->vcount) {
+      IGRAPH_YY_ERRORF(
+                  "Invalid vertex id (%" IGRAPH_PRId ") in Pajek file. "
+                  "The number of vertices is %" IGRAPH_PRId ".",
+                  IGRAPH_EINVAL, v, context->vcount);
+  }
+  (yyval.intnum) = v;
+}
+#line 1871 "src/vendor/io/pajek-parser.c"
     break;
 
   case 16: /* vertexid: word  */
-#line 240 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 250 "src/vendor/cigraph/src/io/pajek-parser.y"
                {
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("id", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("name", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  IGRAPH_YY_CHECK(add_string_vertex_attribute("id", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  IGRAPH_YY_CHECK(add_string_vertex_attribute("name", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
 }
-#line 1893 "yy.tab.c"
+#line 1880 "src/vendor/io/pajek-parser.c"
     break;
 
   case 18: /* vertexcoords: number number  */
-#line 246 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 256 "src/vendor/cigraph/src/io/pajek-parser.y"
                             {
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-1].realnum), context));
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[0].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_vertex_attribute("x", (yyvsp[-1].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_vertex_attribute("y", (yyvsp[0].realnum), context));
             }
-#line 1902 "yy.tab.c"
+#line 1889 "src/vendor/io/pajek-parser.c"
     break;
 
   case 19: /* vertexcoords: number number number  */
-#line 250 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 260 "src/vendor/cigraph/src/io/pajek-parser.y"
                                    {
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-2].realnum), context));
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[-1].realnum), context));
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("z", (yyvsp[0].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_vertex_attribute("x", (yyvsp[-2].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_vertex_attribute("y", (yyvsp[-1].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_vertex_attribute("z", (yyvsp[0].realnum), context));
             }
-#line 1912 "yy.tab.c"
+#line 1899 "src/vendor/io/pajek-parser.c"
     break;
 
   case 21: /* shape: word  */
-#line 256 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 266 "src/vendor/cigraph/src/io/pajek-parser.y"
                           {
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("shape", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  IGRAPH_YY_CHECK(add_string_vertex_attribute("shape", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
 }
-#line 1920 "yy.tab.c"
+#line 1907 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 25: /* param: VP_X_FACT number  */
-#line 264 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 25: /* vertparam: VP_X_FACT number  */
+#line 274 "src/vendor/cigraph/src/io/pajek-parser.y"
                         {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("xfact", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("xfact", (yyvsp[0].realnum), context));
        }
-#line 1928 "yy.tab.c"
+#line 1915 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 26: /* param: VP_Y_FACT number  */
-#line 267 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 26: /* vertparam: VP_Y_FACT number  */
+#line 277 "src/vendor/cigraph/src/io/pajek-parser.y"
                         {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("yfact", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("yfact", (yyvsp[0].realnum), context));
        }
-#line 1936 "yy.tab.c"
+#line 1923 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 27: /* param: VP_IC number number number  */
-#line 270 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                  { /* RGB color */
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("color-red", (yyvsp[-2].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("color-green", (yyvsp[-1].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("color-blue", (yyvsp[0].realnum), context));
-       }
-#line 1946 "yy.tab.c"
-    break;
-
-  case 28: /* param: VP_BC number number number  */
-#line 275 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                  {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("framecolor-red", (yyvsp[-2].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("framecolor-green", (yyvsp[-1].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("framecolor-blue", (yyvsp[0].realnum), context));
-       }
-#line 1956 "yy.tab.c"
-    break;
-
-  case 29: /* param: VP_LC number number number  */
+  case 27: /* vertparam: VP_LR number  */
 #line 280 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                  {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-red", (yyvsp[-2].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-green", (yyvsp[-1].realnum), context));
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-blue", (yyvsp[0].realnum), context));
-       }
-#line 1966 "yy.tab.c"
-    break;
-
-  case 30: /* param: VP_LR number  */
-#line 285 "src/vendor/cigraph/src/io/pajek-parser.y"
                     {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labeldist", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldist", (yyvsp[0].realnum), context));
      }
-#line 1974 "yy.tab.c"
+#line 1931 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 31: /* param: VP_LPHI number  */
-#line 288 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 28: /* vertparam: VP_LPHI number  */
+#line 283 "src/vendor/cigraph/src/io/pajek-parser.y"
                       {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labeldegree2", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldegree2", (yyvsp[0].realnum), context));
      }
-#line 1982 "yy.tab.c"
+#line 1939 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 32: /* param: VP_BW number  */
-#line 291 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 29: /* vertparam: VP_BW number  */
+#line 286 "src/vendor/cigraph/src/io/pajek-parser.y"
                     {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("framewidth", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("framewidth", (yyvsp[0].realnum), context));
      }
-#line 1990 "yy.tab.c"
+#line 1947 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 33: /* param: VP_FOS number  */
-#line 294 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 30: /* vertparam: VP_FOS number  */
+#line 289 "src/vendor/cigraph/src/io/pajek-parser.y"
                      {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("fontsize", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("fontsize", (yyvsp[0].realnum), context));
      }
-#line 1998 "yy.tab.c"
+#line 1955 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 34: /* param: VP_PHI number  */
-#line 297 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 31: /* vertparam: VP_PHI number  */
+#line 292 "src/vendor/cigraph/src/io/pajek-parser.y"
                      {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("rotation", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("rotation", (yyvsp[0].realnum), context));
      }
-#line 2006 "yy.tab.c"
+#line 1963 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 35: /* param: VP_R number  */
-#line 300 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 32: /* vertparam: VP_R number  */
+#line 295 "src/vendor/cigraph/src/io/pajek-parser.y"
                    {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("radius", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("radius", (yyvsp[0].realnum), context));
      }
-#line 2014 "yy.tab.c"
+#line 1971 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 36: /* param: VP_Q number  */
-#line 303 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 33: /* vertparam: VP_Q number  */
+#line 298 "src/vendor/cigraph/src/io/pajek-parser.y"
                    {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("diamondratio", (yyvsp[0].realnum), context));
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("diamondratio", (yyvsp[0].realnum), context));
      }
-#line 2022 "yy.tab.c"
+#line 1979 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 37: /* param: VP_LA number  */
+  case 34: /* vertparam: VP_LA number  */
+#line 301 "src/vendor/cigraph/src/io/pajek-parser.y"
+                    {
+         IGRAPH_YY_CHECK(add_numeric_vertex_attribute("labeldegree", (yyvsp[0].realnum), context));
+     }
+#line 1987 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 35: /* vpword: VP_FONT parstrval  */
 #line 306 "src/vendor/cigraph/src/io/pajek-parser.y"
-                    {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("labeldegree", (yyvsp[0].realnum), context));
+                          {
+         IGRAPH_YY_CHECK(add_string_vertex_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2030 "yy.tab.c"
+#line 1995 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 38: /* param: VP_SIZE number  */
+  case 36: /* vpword: VP_URL parstrval  */
 #line 309 "src/vendor/cigraph/src/io/pajek-parser.y"
-                      {
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_vertex_attribute("vertexsize", (yyvsp[0].realnum), context));
+                        {
+         IGRAPH_YY_CHECK(add_string_vertex_attribute("url", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2038 "yy.tab.c"
+#line 2003 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 39: /* $@2: %empty  */
-#line 314 "src/vendor/cigraph/src/io/pajek-parser.y"
-                { context->mode=3; }
-#line 2044 "yy.tab.c"
-    break;
-
-  case 40: /* vpword: VP_FONT $@2 vpwordpar  */
-#line 314 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                               {
-         context->mode=1;
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 37: /* vpword: VP_IC parstrval  */
+#line 312 "src/vendor/cigraph/src/io/pajek-parser.y"
+                       {
+         IGRAPH_YY_CHECK(add_string_vertex_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2053 "yy.tab.c"
+#line 2011 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 41: /* $@3: %empty  */
+  case 38: /* vpword: VP_BC parstrval  */
+#line 315 "src/vendor/cigraph/src/io/pajek-parser.y"
+                       {
+         IGRAPH_YY_CHECK(add_string_vertex_attribute("framecolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+     }
+#line 2019 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 39: /* vpword: VP_LC parstrval  */
 #line 318 "src/vendor/cigraph/src/io/pajek-parser.y"
-              { context->mode=3; }
-#line 2059 "yy.tab.c"
-    break;
-
-  case 42: /* vpword: VP_URL $@3 vpwordpar  */
-#line 318 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                             {
-         context->mode=1;
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("url", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+                       {
+         IGRAPH_YY_CHECK(add_string_vertex_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
      }
-#line 2068 "yy.tab.c"
+#line 2027 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 43: /* $@4: %empty  */
-#line 322 "src/vendor/cigraph/src/io/pajek-parser.y"
-             { context->mode=3; }
-#line 2074 "yy.tab.c"
-    break;
-
-  case 44: /* vpword: VP_IC $@4 vpwordpar  */
-#line 322 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                            {
-         context->mode=1;
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 40: /* vpword: parname parstrval  */
+#line 321 "src/vendor/cigraph/src/io/pajek-parser.y"
+                         {
+         IGRAPH_FINALLY(igraph_free, (yyvsp[-1].dynstr));
+         if (is_standard_vattr((yyvsp[-1].dynstr))) {
+          IGRAPH_YY_CHECK(deconflict_attrname(&(yyvsp[-1].dynstr)));
+          /* update address on finally stack */
+          IGRAPH_FINALLY_CLEAN(1);
+          IGRAPH_FINALLY(igraph_free, (yyvsp[-1].dynstr));
+         }
+         IGRAPH_YY_CHECK(add_string_vertex_attribute(
+           (yyvsp[-1].dynstr), (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+         IGRAPH_FREE((yyvsp[-1].dynstr));
+         IGRAPH_FINALLY_CLEAN(1);
      }
-#line 2083 "yy.tab.c"
+#line 2045 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 45: /* $@5: %empty  */
-#line 326 "src/vendor/cigraph/src/io/pajek-parser.y"
-             { context->mode=3; }
-#line 2089 "yy.tab.c"
-    break;
-
-  case 46: /* vpword: VP_BC $@5 vpwordpar  */
-#line 326 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                            {
-         context->mode=1;
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("framecolor",
-                                                    (yyvsp[0].string).str, (yyvsp[0].string).len, context));
-     }
-#line 2099 "yy.tab.c"
-    break;
-
-  case 47: /* $@6: %empty  */
-#line 331 "src/vendor/cigraph/src/io/pajek-parser.y"
-             { context->mode=3; }
-#line 2105 "yy.tab.c"
-    break;
-
-  case 48: /* vpword: VP_LC $@6 vpwordpar  */
-#line 331 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                            {
-         context->mode=1;
-         IGRAPH_YY_CHECK(igraph_i_pajek_add_string_vertex_attribute("labelcolor",
-                                                    (yyvsp[0].string).str, (yyvsp[0].string).len, context));
-     }
-#line 2115 "yy.tab.c"
-    break;
-
-  case 49: /* vpwordpar: word  */
+  case 47: /* arcs: "*Arcs line" "end of line" arcsdefs  */
 #line 338 "src/vendor/cigraph/src/io/pajek-parser.y"
-                { (yyval.string)=(yyvsp[0].string); }
-#line 2121 "yy.tab.c"
+                                         { context->directed=true; }
+#line 2051 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 56: /* arcs: "*arcs line" "end of line" arcsdefs  */
-#line 342 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                         { context->directed=1; }
-#line 2127 "yy.tab.c"
+  case 48: /* arcs: "*Arcs line" number "end of line" arcsdefs  */
+#line 339 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                         { context->directed=true; }
+#line 2057 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 57: /* arcs: "*arcs line" number "end of line" arcsdefs  */
+  case 51: /* $@2: %empty  */
 #line 343 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                         { context->directed=1; }
-#line 2133 "yy.tab.c"
+                        { context->actedge++; }
+#line 2063 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 61: /* $@7: %empty  */
+  case 52: /* arcsline: vertex vertex $@2 weight edgeparams "end of line"  */
+#line 343 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                                                           {
+  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-5].intnum)-1));
+  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-4].intnum)-1)); }
+#line 2071 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 53: /* edges: "*Edges line" "end of line" edgesdefs  */
 #line 348 "src/vendor/cigraph/src/io/pajek-parser.y"
-                        { context->actedge++;
-                          context->mode=2; }
-#line 2140 "yy.tab.c"
-    break;
-
-  case 62: /* arcsline: arcfrom arcto $@7 weight edgeparams "end of line"  */
-#line 349 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                                                        {
-  if ((yyvsp[-5].intnum) < 1) {
-      IGRAPH_YY_ERRORF("Non-positive vertex ID (%" IGRAPH_PRId ") while reading Pajek file.", IGRAPH_EINVAL, (yyvsp[-5].intnum));
-  }
-  if ((yyvsp[-4].intnum) < 1) {
-      IGRAPH_YY_ERRORF("Non-positive vertex ID (%" IGRAPH_PRId ") while reading Pajek file.", IGRAPH_EINVAL, (yyvsp[-4].intnum));
-  }
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-5].intnum)-1));
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-4].intnum)-1)); }
-#line 2154 "yy.tab.c"
-    break;
-
-  case 65: /* edges: "*edges line" "end of line" edgesdefs  */
-#line 364 "src/vendor/cigraph/src/io/pajek-parser.y"
                                      { context->directed=0; }
-#line 2160 "yy.tab.c"
+#line 2077 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 66: /* edges: "*edges line" number "end of line" edgesdefs  */
-#line 365 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 54: /* edges: "*Edges line" number "end of line" edgesdefs  */
+#line 349 "src/vendor/cigraph/src/io/pajek-parser.y"
                                             { context->directed=0; }
-#line 2166 "yy.tab.c"
+#line 2083 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 70: /* $@8: %empty  */
-#line 370 "src/vendor/cigraph/src/io/pajek-parser.y"
-                          { context->actedge++;
-                            context->mode=2; }
-#line 2173 "yy.tab.c"
+  case 57: /* $@3: %empty  */
+#line 353 "src/vendor/cigraph/src/io/pajek-parser.y"
+                         { context->actedge++; }
+#line 2089 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 71: /* edgesline: edgefrom edgeto $@8 weight edgeparams "end of line"  */
-#line 371 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                                                         {
-  if ((yyvsp[-5].intnum) < 1) {
-      IGRAPH_YY_ERRORF("Non-positive vertex ID (%" IGRAPH_PRId ") while reading Pajek file.", IGRAPH_EINVAL, (yyvsp[-5].intnum));
-  }
-  if ((yyvsp[-4].intnum) < 1) {
-      IGRAPH_YY_ERRORF("Non-positive vertex ID (%" IGRAPH_PRId ") while reading Pajek file.", IGRAPH_EINVAL, (yyvsp[-4].intnum));
-  }
+  case 58: /* edgesline: vertex vertex $@3 weight edgeparams "end of line"  */
+#line 353 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                                                           {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-5].intnum)-1));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-4].intnum)-1)); }
-#line 2187 "yy.tab.c"
+#line 2097 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 75: /* weight: number  */
-#line 386 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 60: /* weight: number  */
+#line 358 "src/vendor/cigraph/src/io/pajek-parser.y"
                              {
-  IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
+  IGRAPH_YY_CHECK(add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
 }
-#line 2195 "yy.tab.c"
+#line 2105 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 79: /* edgeparam: EP_C number number number  */
-#line 394 "src/vendor/cigraph/src/io/pajek-parser.y"
-                               {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("color-red", (yyvsp[-2].realnum), context));
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("color-green", (yyvsp[-1].realnum), context));
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("color-blue", (yyvsp[0].realnum), context));
+  case 64: /* edgeparam: EP_S number  */
+#line 366 "src/vendor/cigraph/src/io/pajek-parser.y"
+                 {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context));
    }
-#line 2205 "yy.tab.c"
+#line 2113 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 80: /* edgeparam: EP_S number  */
+  case 65: /* edgeparam: EP_W number  */
+#line 369 "src/vendor/cigraph/src/io/pajek-parser.y"
+                 {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("edgewidth", (yyvsp[0].realnum), context));
+   }
+#line 2121 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 66: /* edgeparam: EP_H1 number  */
+#line 372 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("hook1", (yyvsp[0].realnum), context));
+   }
+#line 2129 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 67: /* edgeparam: EP_H2 number  */
+#line 375 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("hook2", (yyvsp[0].realnum), context));
+   }
+#line 2137 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 68: /* edgeparam: EP_A1 number  */
+#line 378 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("angle1", (yyvsp[0].realnum), context));
+   }
+#line 2145 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 69: /* edgeparam: EP_A2 number  */
+#line 381 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("angle2", (yyvsp[0].realnum), context));
+   }
+#line 2153 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 70: /* edgeparam: EP_K1 number  */
+#line 384 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("velocity1", (yyvsp[0].realnum), context));
+   }
+#line 2161 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 71: /* edgeparam: EP_K2 number  */
+#line 387 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("velocity2", (yyvsp[0].realnum), context));
+   }
+#line 2169 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 72: /* edgeparam: EP_AP number  */
+#line 390 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("arrowpos", (yyvsp[0].realnum), context));
+   }
+#line 2177 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 73: /* edgeparam: EP_LP number  */
+#line 393 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelpos", (yyvsp[0].realnum), context));
+   }
+#line 2185 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 74: /* edgeparam: EP_LR number  */
+#line 396 "src/vendor/cigraph/src/io/pajek-parser.y"
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelangle", (yyvsp[0].realnum), context));
+   }
+#line 2193 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 75: /* edgeparam: EP_LPHI number  */
 #line 399 "src/vendor/cigraph/src/io/pajek-parser.y"
-                 {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context));
+                    {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("labelangle2", (yyvsp[0].realnum), context));
    }
-#line 2213 "yy.tab.c"
+#line 2201 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 81: /* edgeparam: EP_W number  */
+  case 76: /* edgeparam: EP_LA number  */
 #line 402 "src/vendor/cigraph/src/io/pajek-parser.y"
-                 {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("edgewidth", (yyvsp[0].realnum), context));
+                  {
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("labeldegree", (yyvsp[0].realnum), context));
    }
-#line 2221 "yy.tab.c"
+#line 2209 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 82: /* edgeparam: EP_H1 number  */
+  case 77: /* edgeparam: EP_FOS number  */
 #line 405 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("hook1", (yyvsp[0].realnum), context));
-   }
-#line 2229 "yy.tab.c"
-    break;
-
-  case 83: /* edgeparam: EP_H2 number  */
-#line 408 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("hook2", (yyvsp[0].realnum), context));
-   }
-#line 2237 "yy.tab.c"
-    break;
-
-  case 84: /* edgeparam: EP_A1 number  */
-#line 411 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("angle1", (yyvsp[0].realnum), context));
-   }
-#line 2245 "yy.tab.c"
-    break;
-
-  case 85: /* edgeparam: EP_A2 number  */
-#line 414 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("angle2", (yyvsp[0].realnum), context));
-   }
-#line 2253 "yy.tab.c"
-    break;
-
-  case 86: /* edgeparam: EP_K1 number  */
-#line 417 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("velocity1", (yyvsp[0].realnum), context));
-   }
-#line 2261 "yy.tab.c"
-    break;
-
-  case 87: /* edgeparam: EP_K2 number  */
-#line 420 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("velocity2", (yyvsp[0].realnum), context));
-   }
-#line 2269 "yy.tab.c"
-    break;
-
-  case 88: /* edgeparam: EP_AP number  */
-#line 423 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("arrowpos", (yyvsp[0].realnum), context));
-   }
-#line 2277 "yy.tab.c"
-    break;
-
-  case 89: /* edgeparam: EP_LP number  */
-#line 426 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("labelpos", (yyvsp[0].realnum), context));
-   }
-#line 2285 "yy.tab.c"
-    break;
-
-  case 90: /* edgeparam: EP_LR number  */
-#line 429 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("labelangle", (yyvsp[0].realnum), context));
-   }
-#line 2293 "yy.tab.c"
-    break;
-
-  case 91: /* edgeparam: EP_LPHI number  */
-#line 432 "src/vendor/cigraph/src/io/pajek-parser.y"
-                    {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("labelangle2", (yyvsp[0].realnum), context));
-   }
-#line 2301 "yy.tab.c"
-    break;
-
-  case 92: /* edgeparam: EP_LA number  */
-#line 435 "src/vendor/cigraph/src/io/pajek-parser.y"
-                  {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("labeldegree", (yyvsp[0].realnum), context));
-   }
-#line 2309 "yy.tab.c"
-    break;
-
-  case 93: /* edgeparam: EP_SIZE number  */
-#line 438 "src/vendor/cigraph/src/io/pajek-parser.y"
-                    { /* what is this??? */
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context));
-   }
-#line 2317 "yy.tab.c"
-    break;
-
-  case 94: /* edgeparam: EP_FOS number  */
-#line 441 "src/vendor/cigraph/src/io/pajek-parser.y"
                    {
-       IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("fontsize", (yyvsp[0].realnum), context));
+       IGRAPH_YY_CHECK(add_numeric_edge_attribute("fontsize", (yyvsp[0].realnum), context));
    }
-#line 2325 "yy.tab.c"
+#line 2217 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 95: /* $@9: %empty  */
-#line 446 "src/vendor/cigraph/src/io/pajek-parser.y"
-             { context->mode=4; }
-#line 2331 "yy.tab.c"
-    break;
-
-  case 96: /* epword: EP_A $@9 epwordpar  */
-#line 446 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                            {
-      context->mode=2;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_string_edge_attribute("arrowtype", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 78: /* epword: EP_A parstrval  */
+#line 410 "src/vendor/cigraph/src/io/pajek-parser.y"
+                       {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("arrowtype", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2340 "yy.tab.c"
+#line 2225 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 97: /* $@10: %empty  */
-#line 450 "src/vendor/cigraph/src/io/pajek-parser.y"
-           { context->mode=4; }
-#line 2346 "yy.tab.c"
-    break;
-
-  case 98: /* epword: EP_P $@10 epwordpar  */
-#line 450 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                          {
-      context->mode=2;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_string_edge_attribute("linepattern", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 79: /* epword: EP_P parstrval  */
+#line 413 "src/vendor/cigraph/src/io/pajek-parser.y"
+                     {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("linepattern", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2355 "yy.tab.c"
+#line 2233 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 99: /* $@11: %empty  */
-#line 454 "src/vendor/cigraph/src/io/pajek-parser.y"
-           { context->mode=4; }
-#line 2361 "yy.tab.c"
-    break;
-
-  case 100: /* epword: EP_L $@11 epwordpar  */
-#line 454 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                          {
-      context->mode=2;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_string_edge_attribute("label", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 80: /* epword: EP_L parstrval  */
+#line 416 "src/vendor/cigraph/src/io/pajek-parser.y"
+                     {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("label", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2370 "yy.tab.c"
+#line 2241 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 101: /* $@12: %empty  */
-#line 458 "src/vendor/cigraph/src/io/pajek-parser.y"
-            { context->mode=4; }
-#line 2376 "yy.tab.c"
-    break;
-
-  case 102: /* epword: EP_LC $@12 epwordpar  */
-#line 458 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                           {
-      context->mode=2;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_string_edge_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 81: /* epword: EP_LC parstrval  */
+#line 419 "src/vendor/cigraph/src/io/pajek-parser.y"
+                      {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2385 "yy.tab.c"
+#line 2249 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 103: /* $@13: %empty  */
-#line 462 "src/vendor/cigraph/src/io/pajek-parser.y"
-           { context->mode=4; }
-#line 2391 "yy.tab.c"
-    break;
-
-  case 104: /* epword: EP_C $@13 epwordpar  */
-#line 462 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                          {
-      context->mode=2;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_string_edge_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+  case 82: /* epword: EP_C parstrval  */
+#line 422 "src/vendor/cigraph/src/io/pajek-parser.y"
+                     {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
     }
-#line 2400 "yy.tab.c"
+#line 2257 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 105: /* epwordpar: word  */
-#line 468 "src/vendor/cigraph/src/io/pajek-parser.y"
-                { context->mode=2; (yyval.string)=(yyvsp[0].string); }
-#line 2406 "yy.tab.c"
+  case 83: /* epword: EP_FONT parstrval  */
+#line 425 "src/vendor/cigraph/src/io/pajek-parser.y"
+                        {
+      IGRAPH_YY_CHECK(add_string_edge_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+    }
+#line 2265 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 106: /* arcslist: "*arcslist line" "end of line" arcslistlines  */
-#line 470 "src/vendor/cigraph/src/io/pajek-parser.y"
-                                             { context->directed=1; }
-#line 2412 "yy.tab.c"
+  case 84: /* epword: parname parstrval  */
+#line 428 "src/vendor/cigraph/src/io/pajek-parser.y"
+                        {
+        IGRAPH_FINALLY(igraph_free, (yyvsp[-1].dynstr));
+        if (is_standard_eattr((yyvsp[-1].dynstr))) {
+          IGRAPH_YY_CHECK(deconflict_attrname(&(yyvsp[-1].dynstr)));
+          /* update address on finally stack */
+          IGRAPH_FINALLY_CLEAN(1);
+          IGRAPH_FINALLY(igraph_free, (yyvsp[-1].dynstr));
+        }
+        IGRAPH_YY_CHECK(add_string_edge_attribute(
+           (yyvsp[-1].dynstr), (yyvsp[0].string).str, (yyvsp[0].string).len, context));
+        IGRAPH_FREE((yyvsp[-1].dynstr));
+        IGRAPH_FINALLY_CLEAN(1);
+     }
+#line 2283 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 113: /* arclistfrom: longint  */
-#line 478 "src/vendor/cigraph/src/io/pajek-parser.y"
-                     { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2418 "yy.tab.c"
+  case 85: /* arcslist: "*Arcslist line" "end of line" arcslistlines  */
+#line 443 "src/vendor/cigraph/src/io/pajek-parser.y"
+                                             { context->directed=true; }
+#line 2289 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 114: /* arclistto: longint  */
-#line 480 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 91: /* arclistfrom: integer  */
+#line 451 "src/vendor/cigraph/src/io/pajek-parser.y"
+                     { context->actfrom=labs((yyvsp[0].intnum))-1; }
+#line 2295 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 92: /* arclistto: integer  */
+#line 453 "src/vendor/cigraph/src/io/pajek-parser.y"
                    {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, labs((yyvsp[0].intnum))-1));
 }
-#line 2427 "yy.tab.c"
+#line 2304 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 115: /* edgeslist: "*edgeslist line" "end of line" edgelistlines  */
-#line 485 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 93: /* edgeslist: "*Edgeslist line" "end of line" edgelistlines  */
+#line 458 "src/vendor/cigraph/src/io/pajek-parser.y"
                                                { context->directed=0; }
-#line 2433 "yy.tab.c"
+#line 2310 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 122: /* edgelistfrom: longint  */
-#line 493 "src/vendor/cigraph/src/io/pajek-parser.y"
-                      { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2439 "yy.tab.c"
+  case 99: /* edgelistfrom: integer  */
+#line 466 "src/vendor/cigraph/src/io/pajek-parser.y"
+                      { context->actfrom=labs((yyvsp[0].intnum))-1; }
+#line 2316 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 123: /* edgelistto: longint  */
-#line 495 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 100: /* edgelistto: integer  */
+#line 468 "src/vendor/cigraph/src/io/pajek-parser.y"
                     {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, labs((yyvsp[0].intnum))-1));
 }
-#line 2448 "yy.tab.c"
+#line 2325 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 125: /* matrixline: "*matrix line"  */
-#line 504 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 102: /* matrixline: "*Matrix line"  */
+#line 477 "src/vendor/cigraph/src/io/pajek-parser.y"
                        { context->actfrom=0;
                          context->actto=0;
                          context->directed=(context->vcount2==0);
                        }
-#line 2457 "yy.tab.c"
+#line 2334 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 128: /* adjmatrixline: adjmatrixnumbers "end of line"  */
-#line 511 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 105: /* adjmatrixline: adjmatrixnumbers "end of line"  */
+#line 484 "src/vendor/cigraph/src/io/pajek-parser.y"
                                         { context->actfrom++; context->actto=0; }
-#line 2463 "yy.tab.c"
+#line 2340 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 131: /* adjmatrixentry: number  */
-#line 515 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 108: /* adjmatrixentry: number  */
+#line 488 "src/vendor/cigraph/src/io/pajek-parser.y"
                        {
   if ((yyvsp[0].realnum) != 0) {
     if (context->vcount2==0) {
       context->actedge++;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
+      IGRAPH_YY_CHECK(add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
       IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
       IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actto));
     } else if (context->vcount2 + context->actto < context->vcount) {
       context->actedge++;
-      IGRAPH_YY_CHECK(igraph_i_pajek_add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
+      IGRAPH_YY_CHECK(add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context));
       IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actfrom));
       IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector,
                               context->vcount2+context->actto));
@@ -2481,11 +2358,11 @@ yyreduce:
   }
   context->actto++;
 }
-#line 2485 "yy.tab.c"
+#line 2362 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 132: /* longint: "number"  */
-#line 535 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 109: /* integer: "number"  */
+#line 508 "src/vendor/cigraph/src/io/pajek-parser.y"
              {
   igraph_integer_t val;
   IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_pajek_yyget_text(scanner),
@@ -2493,11 +2370,11 @@ yyreduce:
                                          &val));
   (yyval.intnum)=val;
 }
-#line 2497 "yy.tab.c"
+#line 2374 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 133: /* number: "number"  */
-#line 543 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 110: /* number: "number"  */
+#line 516 "src/vendor/cigraph/src/io/pajek-parser.y"
              {
   igraph_real_t val;
   IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_pajek_yyget_text(scanner),
@@ -2505,32 +2382,46 @@ yyreduce:
                                       &val));
   (yyval.realnum)=val;
 }
-#line 2509 "yy.tab.c"
+#line 2386 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 134: /* word: ALNUM  */
-#line 551 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 111: /* parname: word  */
+#line 524 "src/vendor/cigraph/src/io/pajek-parser.y"
+              {
+  IGRAPH_YY_CHECK(make_dynstr((yyvsp[0].string).str, (yyvsp[0].string).len, &(yyval.dynstr)));
+}
+#line 2394 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 112: /* parstrval: word  */
+#line 528 "src/vendor/cigraph/src/io/pajek-parser.y"
+                { (yyval.string)=(yyvsp[0].string); }
+#line 2400 "src/vendor/io/pajek-parser.c"
+    break;
+
+  case 113: /* word: "word"  */
+#line 530 "src/vendor/cigraph/src/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2516 "yy.tab.c"
+#line 2407 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 135: /* word: "number"  */
-#line 553 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 114: /* word: "number"  */
+#line 532 "src/vendor/cigraph/src/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2523 "yy.tab.c"
+#line 2414 "src/vendor/io/pajek-parser.c"
     break;
 
-  case 136: /* word: QSTR  */
-#line 555 "src/vendor/cigraph/src/io/pajek-parser.y"
+  case 115: /* word: "quoted string"  */
+#line 534 "src/vendor/cigraph/src/io/pajek-parser.y"
              { (yyval.string).str=igraph_pajek_yyget_text(scanner)+1;
                (yyval.string).len=igraph_pajek_yyget_leng(scanner)-2; }
-#line 2530 "yy.tab.c"
+#line 2421 "src/vendor/io/pajek-parser.c"
     break;
 
 
-#line 2534 "yy.tab.c"
+#line 2425 "src/vendor/io/pajek-parser.c"
 
       default: break;
     }
@@ -2759,7 +2650,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 558 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 537 "src/vendor/cigraph/src/io/pajek-parser.y"
 
 
 int igraph_pajek_yyerror(YYLTYPE* locp,
@@ -2773,12 +2664,12 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
 
 /* TODO: NA's */
 
-static igraph_error_t igraph_i_pajek_add_numeric_attribute(igraph_trie_t *names,
-                                         igraph_vector_ptr_t *attrs,
-                                         igraph_integer_t count,
-                                         const char *attrname,
-                                         igraph_integer_t vid,
-                                         igraph_real_t number) {
+static igraph_error_t add_numeric_attribute(igraph_trie_t *names,
+                                            igraph_vector_ptr_t *attrs,
+                                            igraph_integer_t count,
+                                            const char *attrname,
+                                            igraph_integer_t elem_id,
+                                            igraph_real_t number) {
   igraph_integer_t attrsize = igraph_trie_size(names);
   igraph_integer_t id;
   igraph_vector_t *na;
@@ -2787,40 +2678,39 @@ static igraph_error_t igraph_i_pajek_add_numeric_attribute(igraph_trie_t *names,
   IGRAPH_CHECK(igraph_trie_get(names, attrname, &id));
   if (id == attrsize) {
     /* add a new attribute */
-    rec=IGRAPH_CALLOC(1, igraph_attribute_record_t);
-    if (! rec) {
-        IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+    rec = IGRAPH_CALLOC(1, igraph_attribute_record_t);
+    CHECK_OOM_RP(rec);
     IGRAPH_FINALLY(igraph_free, rec);
-    na=IGRAPH_CALLOC(1, igraph_vector_t);
-    if (! na) {
-        IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+
+    na = IGRAPH_CALLOC(1, igraph_vector_t);
+    CHECK_OOM_RP(na);
     IGRAPH_FINALLY(igraph_free, na);
     IGRAPH_VECTOR_INIT_FINALLY(na, count);
-    rec->name=strdup(attrname);
-    if (! rec->name) {
-      IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+
+    rec->name = strdup(attrname);
+    CHECK_OOM_RP(rec->name);
     IGRAPH_FINALLY(igraph_free, (void *) rec->name);
-    rec->type=IGRAPH_ATTRIBUTE_NUMERIC;
-    rec->value=na;
+
+    rec->type = IGRAPH_ATTRIBUTE_NUMERIC;
+    rec->value = na;
+
     IGRAPH_CHECK(igraph_vector_ptr_push_back(attrs, rec));
     IGRAPH_FINALLY_CLEAN(4); /* ownership of rec transferred to attrs */
   }
-  rec=VECTOR(*attrs)[id];
-  na=(igraph_vector_t*)rec->value;
-  if (igraph_vector_size(na) == vid) {
+
+  rec = VECTOR(*attrs)[id];
+  na = (igraph_vector_t *) rec->value;
+  if (igraph_vector_size(na) == elem_id) {
     IGRAPH_CHECK(igraph_vector_push_back(na, number));
-  } else if (igraph_vector_size(na) < vid) {
+  } else if (igraph_vector_size(na) < elem_id) {
     igraph_integer_t origsize=igraph_vector_size(na);
-    IGRAPH_CHECK(igraph_vector_resize(na, vid+1));
+    IGRAPH_CHECK(igraph_vector_resize(na, elem_id+1));
     for (;origsize<count; origsize++) {
       VECTOR(*na)[origsize] = IGRAPH_NAN;
     }
-    VECTOR(*na)[vid] = number;
+    VECTOR(*na)[elem_id] = number;
   } else {
-    VECTOR(*na)[vid] = number;
+    VECTOR(*na)[elem_id] = number;
   }
 
   return IGRAPH_SUCCESS;
@@ -2828,105 +2718,124 @@ static igraph_error_t igraph_i_pajek_add_numeric_attribute(igraph_trie_t *names,
 
 /* TODO: NA's */
 
-static igraph_error_t igraph_i_pajek_add_string_attribute(igraph_trie_t *names,
-                                                   igraph_vector_ptr_t *attrs,
-                                                   igraph_integer_t count,
-                                                   const char *attrname,
-                                                   igraph_integer_t vid,
-                                                   const char *str,
-                                                   igraph_integer_t str_len) {
+static igraph_error_t make_dynstr(const char *src, size_t len, char **res) {
+  *res = strndup(src, len);
+  CHECK_OOM_RP(*res);
+  return IGRAPH_SUCCESS;
+}
+
+static igraph_error_t add_string_attribute(igraph_trie_t *names,
+                                           igraph_vector_ptr_t *attrs,
+                                           igraph_integer_t count,
+                                           const char *attrname,
+                                           igraph_integer_t elem_id,
+                                           const char *str,
+                                           igraph_integer_t str_len) {
   igraph_integer_t attrsize=igraph_trie_size(names);
   igraph_integer_t id;
   igraph_strvector_t *na;
   igraph_attribute_record_t *rec;
 
+  if (attrname[0] == '\0') {
+    /* This is relevant only for custom attributes, which are always of string type.
+       No need to add the same check for numerical attributes. */
+    IGRAPH_ERROR("\"\" is not allowed as a parameter name in Pajek files.", IGRAPH_PARSEERROR);
+  }
+
   IGRAPH_CHECK(igraph_trie_get(names, attrname, &id));
   if (id == attrsize) {
+
+#ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+    /* There are 21 standard vertex attributes and 21 standard edge attributes.
+     * We refuse to allow more to reduce memory usage when fuzzing. */
+    if (attrsize > 21) {
+      IGRAPH_ERROR("Too many attributes in Pajek file.", IGRAPH_PARSEERROR);
+    }
+#endif
+
     /* add a new attribute */
-    rec=IGRAPH_CALLOC(1, igraph_attribute_record_t);
-    if (! rec) {
-      IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+    rec = IGRAPH_CALLOC(1, igraph_attribute_record_t);
+    CHECK_OOM_RP(rec);
     IGRAPH_FINALLY(igraph_free, rec);
-    na=IGRAPH_CALLOC(1, igraph_strvector_t);
-    if (! na) {
-      IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+
+    na = IGRAPH_CALLOC(1, igraph_strvector_t);
+    CHECK_OOM_RP(na);
     IGRAPH_FINALLY(igraph_free, na);
     IGRAPH_STRVECTOR_INIT_FINALLY(na, count);
-    rec->name=strdup(attrname);
-    if (! rec->name) {
-      IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-    }
+
+    rec->name = strdup(attrname);
+    CHECK_OOM_RP(rec->name);
     IGRAPH_FINALLY(igraph_free, (char *) rec->name);
-    rec->type=IGRAPH_ATTRIBUTE_STRING;
-    rec->value=na;
+
+    rec->type = IGRAPH_ATTRIBUTE_STRING;
+    rec->value = na;
+
     IGRAPH_CHECK(igraph_vector_ptr_push_back(attrs, rec));
     IGRAPH_FINALLY_CLEAN(4); /* ownership of rec transferred to attrs */
   }
-  rec=VECTOR(*attrs)[id];
-  na=(igraph_strvector_t*)rec->value;
-  if (igraph_strvector_size(na) <= vid) {
-    IGRAPH_CHECK(igraph_strvector_resize(na, vid+1));
+
+  rec = VECTOR(*attrs)[id];
+  na = (igraph_strvector_t *) rec->value;
+  if (igraph_strvector_size(na) <= elem_id) {
+    IGRAPH_CHECK(igraph_strvector_resize(na, elem_id+1));
   }
-  IGRAPH_CHECK(igraph_strvector_set_len(na, vid, str, str_len));
+  IGRAPH_CHECK(igraph_strvector_set_len(na, elem_id, str, str_len));
 
   return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_pajek_add_string_vertex_attribute(const char *name,
-                                               const char *value,
-                                               size_t len,
-                                               igraph_i_pajek_parsedata_t *context) {
+static igraph_error_t add_string_vertex_attribute(const char *name,
+                                                  const char *value,
+                                                  size_t len,
+                                                  igraph_i_pajek_parsedata_t *context) {
 
-
-  return igraph_i_pajek_add_string_attribute(context->vertex_attribute_names,
-                                             context->vertex_attributes,
-                                             context->vcount,
-                                             name, context->actvertex-1,
-                                             value, len);
+  return add_string_attribute(context->vertex_attribute_names,
+                              context->vertex_attributes,
+                              context->vcount,
+                              name, context->actvertex-1,
+                              value, len);
 }
 
-static igraph_error_t igraph_i_pajek_add_string_edge_attribute(const char *name,
-                                             const char *value,
-                                             size_t len,
-                                             igraph_i_pajek_parsedata_t *context) {
-
-  return igraph_i_pajek_add_string_attribute(context->edge_attribute_names,
-                                             context->edge_attributes,
-                                             context->actedge,
-                                             name, context->actedge-1,
-                                             value, len);
-}
-
-static igraph_error_t igraph_i_pajek_add_numeric_vertex_attribute(const char *name,
-                                                igraph_real_t value,
+static igraph_error_t add_string_edge_attribute(const char *name,
+                                                const char *value,
+                                                size_t len,
                                                 igraph_i_pajek_parsedata_t *context) {
 
-  return     igraph_i_pajek_add_numeric_attribute(context->vertex_attribute_names,
-                                                  context->vertex_attributes,
-                                                  context->vcount,
-                                                  name, context->actvertex-1,
-                                                  value);
+  return add_string_attribute(context->edge_attribute_names,
+                              context->edge_attributes,
+                              context->actedge,
+                              name, context->actedge-1,
+                              value, len);
 }
 
-static igraph_error_t igraph_i_pajek_add_numeric_edge_attribute(const char *name,
-                                              igraph_real_t value,
-                                              igraph_i_pajek_parsedata_t *context) {
+static igraph_error_t add_numeric_vertex_attribute(const char *name,
+                                                   igraph_real_t value,
+                                                   igraph_i_pajek_parsedata_t *context) {
 
-  return igraph_i_pajek_add_numeric_attribute(context->edge_attribute_names,
-                                              context->edge_attributes,
-                                              context->actedge,
-                                              name, context->actedge-1,
-                                              value);
+  return add_numeric_attribute(context->vertex_attribute_names,
+                               context->vertex_attributes,
+                               context->vcount,
+                               name, context->actvertex-1,
+                               value);
 }
 
-static igraph_error_t igraph_i_pajek_add_bipartite_type(igraph_i_pajek_parsedata_t *context) {
+static igraph_error_t add_numeric_edge_attribute(const char *name,
+                                                 igraph_real_t value,
+                                                 igraph_i_pajek_parsedata_t *context) {
+
+  return add_numeric_attribute(context->edge_attribute_names,
+                               context->edge_attributes,
+                               context->actedge,
+                               name, context->actedge-1,
+                               value);
+}
+
+static igraph_error_t add_bipartite_type(igraph_i_pajek_parsedata_t *context) {
 
   const char *attrname="type";
   igraph_trie_t *names=context->vertex_attribute_names;
   igraph_vector_ptr_t *attrs=context->vertex_attributes;
-  igraph_integer_t i, n=context->vcount, n1=context->vcount2;
+  igraph_integer_t n=context->vcount, n1=context->vcount2;
   igraph_integer_t attrid, attrsize = igraph_trie_size(names);
   igraph_attribute_record_t *rec;
   igraph_vector_bool_t *na;
@@ -2937,48 +2846,47 @@ static igraph_error_t igraph_i_pajek_add_bipartite_type(igraph_i_pajek_parsedata
   }
 
   IGRAPH_CHECK(igraph_trie_get(names, attrname, &attrid));
+
   /* It should not be possible for the "type" attribute to be already
    * present at this point. */
   IGRAPH_ASSERT(attrid == attrsize);
 
   /* add a new attribute */
-  rec=IGRAPH_CALLOC(1, igraph_attribute_record_t);
-  if (! rec) {
-    IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-  }
+  rec = IGRAPH_CALLOC(1, igraph_attribute_record_t);
+  CHECK_OOM_RP(rec);
   IGRAPH_FINALLY(igraph_free, rec);
-  na=IGRAPH_CALLOC(1, igraph_vector_bool_t);
-  if (! na) {
-    IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-  }
+
+  na = IGRAPH_CALLOC(1, igraph_vector_bool_t);
+  CHECK_OOM_RP(na);
   IGRAPH_FINALLY(igraph_free, na);
   IGRAPH_VECTOR_BOOL_INIT_FINALLY(na, n);
-  rec->name=strdup(attrname);
-  if (! rec->name) {
-    IGRAPH_ERROR("Out of memory while parsing Pajek file.", IGRAPH_ENOMEM);
-  }
+
+  rec->name = strdup(attrname);
+  CHECK_OOM_RP(rec->name);
   IGRAPH_FINALLY(igraph_free, (char *) rec->name);
-  rec->type=IGRAPH_ATTRIBUTE_BOOLEAN;
-  rec->value=na;
+
+  rec->type = IGRAPH_ATTRIBUTE_BOOLEAN;
+  rec->value = na;
+
   IGRAPH_CHECK(igraph_vector_ptr_push_back(attrs, rec));
   IGRAPH_FINALLY_CLEAN(4); /* ownership of 'rec' transferred to 'attrs' */
 
-  for (i=0; i<n1; i++) {
-    VECTOR(*na)[i] = 0;
+  for (igraph_integer_t i=0; i<n1; i++) {
+    VECTOR(*na)[i] = false;
   }
-  for (i=n1; i<n; i++) {
-    VECTOR(*na)[i] = 1;
+  for (igraph_integer_t i=n1; i<n; i++) {
+    VECTOR(*na)[i] = true;
   }
 
   return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_pajek_check_bipartite(igraph_i_pajek_parsedata_t *context) {
+static igraph_error_t check_bipartite(igraph_i_pajek_parsedata_t *context) {
   const igraph_vector_int_t *edges=context->vector;
-  igraph_integer_t i, n1=context->vcount2;
+  igraph_integer_t n1=context->vcount2;
   igraph_integer_t ne=igraph_vector_int_size(edges);
 
-  for (i=0; i<ne; i+=2) {
+  for (igraph_integer_t i=0; i<ne; i+=2) {
     igraph_integer_t v1 = VECTOR(*edges)[i];
     igraph_integer_t v2 = VECTOR(*edges)[i+1];
     if ( (v1 < n1 && v2 < n1) || (v1 > n1 && v2 > n1) ) {
@@ -2986,5 +2894,65 @@ static igraph_error_t igraph_i_pajek_check_bipartite(igraph_i_pajek_parsedata_t 
     }
   }
 
+  return IGRAPH_SUCCESS;
+}
+
+/* Check if attrname is a standard vertex attribute name used by igraph
+   for Pajek data. All of these must be listed here to prevent overwriting
+   standard attributes, or crashes due to incompatible attribute types. */
+static igraph_bool_t is_standard_vattr(const char *attrname) {
+  const char *names[] = {
+    /* vertex names: */
+    "id", /* TODO: remove for 0.11 */ "name",
+    /* other vertex attributes: */
+    "type", "x", "y", "z",
+    /* vertex parameters: */
+    "xfact", "yfact",
+    "labeldist", "labeldegree2", "framewidth",
+    "fontsize", "rotation", "radius",
+    "diamondratio", "labeldegree",
+    "font", "url", "color", "framecolor",
+    "labelcolor"
+  };
+  for (size_t i=0; i < sizeof(names) / sizeof(names[0]); i++) {
+    if (strcmp(attrname, names[i]) == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/* Check if attrname is a standard edge attribute name used by igraph
+   for Pajek data. All of these must be listed here to prevent overwriting
+   standard attributes, or crashes due to incompatible attribute types. */
+static igraph_bool_t is_standard_eattr(const char *attrname) {
+  const char *names[] = {
+    /* other edge attributes: */
+    "weight",
+    /* edge parameters: */
+    "arrowsize", "edgewidth", "hook1", "hook2",
+    "angle1", "angle2", "velocity1", "velocity2",
+    "arrowpos", "labelpos", "labelangle",
+    "labelangle2", "labeldegree", "fontsize", "font",
+    "arrowtype", "linepattern", "label", "labelcolor",
+    "color"
+  };
+  for (size_t i=0; i < sizeof(names) / sizeof(names[0]); i++) {
+    if (strcmp(attrname, names[i]) == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/* Add a _ character at the end of an attribute name to avoid conflict
+ * with standard Pajek attributes. */
+static igraph_error_t deconflict_attrname(char **attrname) {
+  size_t len = strlen(*attrname);
+  char *tmp = IGRAPH_REALLOC(*attrname, len+2, char);
+  CHECK_OOM_RP(tmp);
+  tmp[len] = '_';
+  tmp[len+1] = '\0';
+  *attrname = tmp;
   return IGRAPH_SUCCESS;
 }

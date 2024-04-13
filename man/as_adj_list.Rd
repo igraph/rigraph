@@ -2,9 +2,7 @@
 % Please edit documentation in R/conversion.R
 \name{as_adj_list}
 \alias{as_adj_list}
-\alias{get.adjedgelist}
 \alias{as_adj_edge_list}
-\alias{get.adjlist}
 \title{Adjacency lists}
 \usage{
 as_adj_list(
@@ -71,22 +69,10 @@ Other conversion:
 \code{\link{as.directed}()},
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adjacency_matrix}()},
+\code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
-
-Other conversion: 
-\code{\link{as.directed}()},
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},
 \code{\link{graph_from_adj_list}()},
 \code{\link{graph_from_graphnel}()}

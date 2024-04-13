@@ -1,10 +1,6 @@
 test_that("realize_degseq works", {
-  gc <- function(graph) {
-    clu <- components(graph)
-    induced_subgraph(graph, which(clu$membership == which.max(clu$csize)))
-  }
 
-  g <- gc(sample_gnp(1000, 2 / 1000))
+  g <- largest_component(sample_gnp(1000, 2 / 1000))
 
   nG <- realize_degseq(degree(g))
   expect_that(degree(nG), equals(degree(g)))

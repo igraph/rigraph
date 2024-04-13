@@ -2,16 +2,18 @@
 % Please edit documentation in R/cliques.R
 \name{ivs}
 \alias{ivs}
-\alias{independent.vertex.sets}
-\alias{largest.independent.vertex.sets}
-\alias{maximal.independent.vertex.sets}
-\alias{independence.number}
-\alias{ivs_size}
 \alias{largest_ivs}
 \alias{maximal_ivs}
+\alias{ivs_size}
 \title{Independent vertex sets}
 \usage{
 ivs(graph, min = NULL, max = NULL)
+
+largest_ivs(graph)
+
+maximal_ivs(graph)
+
+ivs_size(graph)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs are considered as undirected,
@@ -50,7 +52,7 @@ sets in the graph. An independent vertex set is maximal if it cannot be
 extended to a larger independent vertex set. The largest independent vertex
 sets are maximal, but the opposite is not always true.
 
-\code{independece.number} calculate the size of the largest independent
+\code{ivs_size()} calculate the size of the largest independent
 vertex set(s).
 
 These functions use the algorithm described by Tsukiyama et al., see
@@ -77,8 +79,6 @@ algorithm for generating all the maximal independent sets. \emph{SIAM J
 Computing}, 6:505--517, 1977.
 }
 \seealso{
-\code{\link[=cliques]{cliques()}}
-
 Other cliques: 
 \code{\link{cliques}()},
 \code{\link{weighted_cliques}()}

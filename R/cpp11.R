@@ -3,3 +3,7 @@
 igraph_hcass2 <- function(n, ia, ib) {
   .Call(`_igraph_igraph_hcass2`, n, ia, ib)
 }
+
+getsphere <- function(spos, sradius, scolor, lightpos, lightcolor, swidth, sheight) {
+  .Call(`_igraph_getsphere`, spos, sradius, scolor, lightpos, lightcolor, swidth, sheight)
+}

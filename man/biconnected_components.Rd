@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{biconnected_components}
 \alias{biconnected_components}
-\alias{biconnected.components}
 \title{Biconnected components}
 \usage{
 biconnected_components(graph)
@@ -49,7 +48,8 @@ bc <- biconnected_components(g)
 Connected components
 \code{\link{articulation_points}()},
 \code{\link{component_distribution}()},
-\code{\link{decompose}()}
+\code{\link{decompose}()},
+\code{\link{is_biconnected}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

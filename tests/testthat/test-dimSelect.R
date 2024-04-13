@@ -1,8 +1,8 @@
 test_that("dimensionality selection works", {
-  set.seed(42)
+  withr::local_seed(42)
 
-  k <- graph.famous("zachary")
-  ev <- eigen(get.adjacency(k), only.values = TRUE)$values
+  k <- make_graph("zachary")
+  ev <- eigen(as_adjacency_matrix(k), only.values = TRUE)$values
   kdim <- dim_select(ev)
   expect_that(kdim, equals(4))
 

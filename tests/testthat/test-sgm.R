@@ -1,6 +1,6 @@
 test_that("SGM works", {
   local_rng_version("3.5.0")
-  set.seed(42)
+  withr::local_seed(42)
 
   vc <- 10
   nos <- 3
@@ -21,7 +21,7 @@ test_that("SGM works", {
   )
 
   ## Slightly bigger
-  set.seed(42)
+  withr::local_seed(42)
 
   vc <- 100
   nos <- 10

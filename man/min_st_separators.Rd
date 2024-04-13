@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{min_st_separators}
 \alias{min_st_separators}
-\alias{minimal.st.separators}
 \title{Minimum size vertex separators}
 \usage{
 min_st_separators(graph)
@@ -17,17 +16,41 @@ A list of numeric vectors. Each vector contains a vertex set
 graph, for some \eqn{s} and \eqn{t}.
 }
 \description{
-List all vertex sets that are minimal (s,t) separators for some s and t, in
-an undirected graph.
+List all vertex sets that are minimal \eqn{(s,t)} separators for some
+\eqn{s} and \eqn{t}, in an undirected graph.
 }
 \details{
 A \eqn{(s,t)} vertex separator is a set of vertices, such that after their
 removal from the graph, there is no path between \eqn{s} and \eqn{t} in the
 graph.
 
-A \eqn{(s,t)} vertex separator is minimal if none of its subsets is an
-\eqn{(s,t)} vertex separator.
+A \eqn{(s,t)} vertex separator is minimal if none of its proper subsets is
+an \eqn{(s,t)} vertex separator for the same \eqn{s} and \eqn{t}.
 }
+\section{Note}{
+
+Note that the code below returns \verb{\{1, 3\}} despite its subset \code{{1}} being a
+separator as well. This is because \verb{\{1, 3\}} is minimal with respect to
+separating vertices 2 and 4.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
+min_st_separators(g)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [[1]]
+#> + 1/5 vertex, named:
+#> [1] 1
+#> 
+#> [[2]]
+#> + 2/5 vertices, named:
+#> [1] 2 4
+#> 
+#> [[3]]
+#> + 2/5 vertices, named:
+#> [1] 1 3
+}\if{html}{\out{</div>}}
+}
+
 \examples{
 
 ring <- make_ring(4)
@@ -35,6 +58,7 @@ min_st_separators(ring)
 
 chvatal <- make_graph("chvatal")
 min_st_separators(chvatal)
+# https://github.com/r-lib/roxygen2/issues/1092
 }
 \references{
 Anne Berry, Jean-Paul Bordat and Olivier Cogis: Generating All

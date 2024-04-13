@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{graph_attr}
 \alias{graph_attr}
-\alias{get.graph.attribute}
 \alias{graph.attributes}
 \title{Graph attributes of a graph}
 \usage{
@@ -30,9 +29,9 @@ Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
+\code{\link{edge_attr}()},
 \code{\link{edge_attr<-}()},
 \code{\link{edge_attr_names}()},
-\code{\link{edge_attr}()},
 \code{\link{graph_attr<-}()},
 \code{\link{graph_attr_names}()},
 \code{\link{igraph-attribute-combination}},
@@ -41,8 +40,8 @@ Vertex, edge and graph attributes
 \code{\link{set_edge_attr}()},
 \code{\link{set_graph_attr}()},
 \code{\link{set_vertex_attr}()},
+\code{\link{vertex_attr}()},
 \code{\link{vertex_attr<-}()},
-\code{\link{vertex_attr_names}()},
-\code{\link{vertex_attr}()}
+\code{\link{vertex_attr_names}()}
 }
 \concept{attributes}

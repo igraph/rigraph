@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{vertex_attr}
 \alias{vertex_attr}
-\alias{get.vertex.attribute}
 \alias{vertex.attributes}
 \title{Query vertex attributes of a graph}
 \usage{
@@ -37,12 +36,12 @@ Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
+\code{\link{edge_attr}()},
 \code{\link{edge_attr<-}()},
 \code{\link{edge_attr_names}()},
-\code{\link{edge_attr}()},
+\code{\link{graph_attr}()},
 \code{\link{graph_attr<-}()},
 \code{\link{graph_attr_names}()},
-\code{\link{graph_attr}()},
 \code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
 \code{\link{igraph-vs-attributes}},

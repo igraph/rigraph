@@ -4,25 +4,32 @@
 \alias{radius}
 \title{Radius of a graph}
 \usage{
-radius(graph, mode = c("all", "out", "in", "total"))
+radius(graph, ..., weights = NULL, mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{weights}{Possibly a numeric vector giving edge weights. If this is
+\code{NULL} and the graph has a \code{weight} edge attribute, then the
+attribute is used. If this is \code{NA} then no weights are used (even if
+the graph has a \code{weight} attribute). In a weighted graph, the length
+of a path is the sum of the weights of its constituent edges.}
+
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
 then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
-it will be considered. If \code{all}, the default, then the corresponding
-undirected graph will be used, edge directions will be ignored. This
+it will be considered. If \code{all}, the default, then the graph is treated
+as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
 }
 \value{
 A numeric scalar, the radius of the graph.
 }
 \description{
-The eccentricity of a vertex is its shortest path distance from the
-farthest other node in the graph. The smallest eccentricity in a graph
-is called its radius
+The eccentricity of a vertex is its distance from the farthest other node
+in the graph. The smallest eccentricity in a graph is called its radius.
 }
 \details{
 The eccentricity of a vertex is calculated by measuring the shortest
@@ -30,7 +37,7 @@ distance from (or to) the vertex, to (or from) all vertices in the
 graph, and taking the maximum.
 
 This implementation ignores vertex pairs that are in different
-components.  Isolate vertices have eccentricity zero.
+components. Isolated vertices have eccentricity zero.
 }
 \examples{
 g <- make_star(10, mode = "undirected")
@@ -50,6 +57,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
-\code{\link{eccentricity}()}
+\code{\link{eccentricity}()},
+\code{\link{graph_center}()}
 }
 \concept{paths}

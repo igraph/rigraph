@@ -30,7 +30,8 @@ used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
 }
 \description{
-Use \code{\link[=betweenness]{betweenness()}} with the \code{cutoff} argument instead.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Use \code{\link[=betweenness]{betweenness()}} with the \code{cutoff} argument instead.
 }
 \keyword{internal}

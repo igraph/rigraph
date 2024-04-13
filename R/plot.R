@@ -511,7 +511,7 @@ plot.igraph <- function(x,
 #' very useful either. See [igraph.plotting] for the possible
 #' arguments.
 #'
-#' @aliases rglplot rglplot.igraph
+#' @aliases rglplot.igraph
 #' @param x The graph to plot.
 #' @param \dots Additional arguments, see [igraph.plotting] for the
 #'   details
@@ -522,13 +522,12 @@ plot.igraph <- function(x,
 #' @family plot
 #' @export
 #' @keywords graphs
-#' @family plot
 #' @export
 #' @examples
 #'
 #' g <- make_lattice(c(5, 5, 5))
 #' coords <- layout_with_fr(g, dim = 3)
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 #'   rglplot(g, layout = coords)
 #' }
 #'
@@ -839,7 +838,7 @@ rglplot.igraph <- function(x, ...) {
     y0 <- layout[, 2][el[, 1]]
     y1 <- layout[, 2][el[, 2]]
     z0 <- layout[, 3][el[, 1]]
-    z1 <- layout[, 4][el[, 2]]
+    z1 <- layout[, 3][el[, 2]]
     rgl::text3d((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, edge.labels,
       col = label.color
     )
@@ -863,7 +862,7 @@ igraph.Arrows <-
            open = TRUE,
            sh.adj = 0.1,
            sh.lwd = 1,
-           sh.col = if (is.R()) par("fg") else 1,
+           sh.col = par("fg"),
            sh.lty = 1,
            h.col = sh.col,
            h.col.bo = sh.col,
@@ -875,11 +874,7 @@ igraph.Arrows <-
   {
     cin <- size * par("cin")[2]
     width <- width * (1.2 / 4 / cin)
-    uin <- if (is.R()) {
-      1 / xyinch()
-    } else {
-      par("uin")
-    }
+    uin <- 1 / xyinch()
     x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
     delta <- sqrt(h.lwd) * par("cin")[2] * 0.005 ## has been 0.05
     x.arr <- c(-rev(x), -x)

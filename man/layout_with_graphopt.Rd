@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_graphopt}
 \alias{layout_with_graphopt}
-\alias{layout.graphopt}
 \alias{with_graphopt}
 \title{The graphopt layout algorithm}
 \usage{
@@ -66,13 +65,12 @@ graphopt uses physical analogies for defining attracting and repelling
 forces among the vertices and then the physical system is simulated until it
 reaches an equilibrium. (There is no simulated annealing or anything like
 that, so a stable fixed point is not guaranteed.)
-
-See also \url{http://www.schmuhl.org/graphopt/} for the original graphopt.
 }
 \seealso{
 Other graph layouts: 
 \code{\link{add_layout_}()},
 \code{\link{component_wise}()},
+\code{\link{layout_}()},
 \code{\link{layout_as_bipartite}()},
 \code{\link{layout_as_star}()},
 \code{\link{layout_as_tree}()},
@@ -88,7 +86,6 @@ Other graph layouts:
 \code{\link{layout_with_lgl}()},
 \code{\link{layout_with_mds}()},
 \code{\link{layout_with_sugiyama}()},
-\code{\link{layout_}()},
 \code{\link{merge_coords}()},
 \code{\link{norm_coords}()},
 \code{\link{normalize}()}

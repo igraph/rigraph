@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_betw_tmax}
 \alias{centr_betw_tmax}
-\alias{centralization.betweenness.tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
 centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
@@ -35,12 +34,12 @@ centr_betw(g, normalized = TRUE)$centralization
 \seealso{
 Other centralization related: 
 \code{\link{centr_betw}()},
-\code{\link{centr_clo_tmax}()},
 \code{\link{centr_clo}()},
-\code{\link{centr_degree_tmax}()},
+\code{\link{centr_clo_tmax}()},
 \code{\link{centr_degree}()},
-\code{\link{centr_eigen_tmax}()},
+\code{\link{centr_degree_tmax}()},
 \code{\link{centr_eigen}()},
+\code{\link{centr_eigen_tmax}()},
 \code{\link{centralize}()}
 }
 \concept{centralization related}

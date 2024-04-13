@@ -1,4 +1,19 @@
 
+#' Create graphs from adjacency matrices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.adjacency()` was renamed to `graph_from_adjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_adjacency_matrix
+#' @keywords internal
+#' @export
+graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.adjacency()", "graph_from_adjacency_matrix()")
+  graph_from_adjacency_matrix(adjmatrix = adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
+} # nocov end
+
 ## ----------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -22,48 +37,49 @@
 ##
 ## -----------------------------------------------------------------
 
-graph.adjacency.dense <- function(adjmatrix, mode, weighted = NULL, diag = TRUE) {
+graph.adjacency.dense <- function(
+    adjmatrix,
+    mode,
+    weighted = NULL,
+    diag = c("once", "twice", "ignore")) {
   mode <- switch(mode,
-    "directed" = 0,
-    "undirected" = 1,
-    "max" = 1,
-    "upper" = 2,
-    "lower" = 3,
-    "min" = 4,
-    "plus" = 5
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
   )
+
+  if (is.logical(diag)) {
+    diag <- ifelse(diag, "once", "ignore")
+  }
+  diag <- igraph.match.arg(diag)
+  diag <- switch(diag,
+    "ignore" = 0L,
+    "twice" = 1L,
+    "once" = 2L
+  )
+
+  if (nrow(adjmatrix) != ncol(adjmatrix)) {
+    stop("Adjacency matrices must be square.")
+  }
 
   mode(adjmatrix) <- "double"
 
-  if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
+  if (isTRUE(weighted)) {
+    weighted <- "weight"
+  } else if (!is.character(weighted)) {
+    weighted <- NULL
+  }
 
-    if (nrow(adjmatrix) != ncol(adjmatrix)) {
-      stop("not a square matrix")
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(
-      R_igraph_weighted_adjacency, adjmatrix,
-      as.numeric(mode), weighted, diag
-    )
+  on.exit(.Call(R_igraph_finalizer))
+  if (is.null(weighted)) {
+    res <- .Call(R_igraph_adjacency, adjmatrix, mode, diag)
   } else {
-    adjmatrix <- as.matrix(adjmatrix)
-    attrs <- attributes(adjmatrix)
-    adjmatrix <- as.numeric(adjmatrix)
-    attributes(adjmatrix) <- attrs
-
-    if (!diag) {
-      diag(adjmatrix) <- 0
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
+    res <- .Call(R_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
   res
@@ -118,9 +134,15 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
   } else if (mode == "max") {
     ## MAXIMUM
     el <- mysummary(adjmatrix)
@@ -165,7 +187,12 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
     rm(adjmatrix)
@@ -176,6 +203,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     ## MINIMUM
     adjmatrix <- sign(adjmatrix) * sign(Matrix::t(adjmatrix)) * adjmatrix
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
     if (!diag) {
       el <- el[el[, 1] != el[, 2], ]
     }
@@ -205,15 +233,20 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
     if (diag) {
       loop <- el[, 1] == el[, 2]
       el[loop, 3] <- el[loop, 3] / 2
     }
     el <- el[el[, 3] != 0, ]
-    rm(adjmatrix)
   }
 
   if (!is.null(weighted)) {
@@ -276,7 +309,6 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
 #' undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
 #' weights.} }
 #'
-#' @aliases graph.adjacency
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
 #'   can be a sparse matrix created with the `Matrix` package.
 #' @param mode Character scalar, specifies how igraph should interpret the
@@ -312,53 +344,107 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
 #' @keywords graphs
 #' @examples
 #'
-#' adjm <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9, 0.1)), ncol = 10)
-#' g1 <- graph_from_adjacency_matrix(adjm)
-#' adjm <- matrix(sample(0:5, 100,
-#'   replace = TRUE,
-#'   prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
-#' ), ncol = 10)
-#' g2 <- graph_from_adjacency_matrix(adjm, weighted = TRUE)
+#' g1 <- sample(
+#'     x = 0:1, size = 100, replace = TRUE,
+#'     prob = c(0.9, 0.1)
+#'   ) %>%
+#'   matrix(ncol = 10) %>%
+#'   graph_from_adjacency_matrix()
+#'
+#' g2 <- sample(
+#'     x = 0:5, size = 100, replace = TRUE,
+#'     prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
+#' ) %>%
+#'   matrix(ncol = 10) %>%
+#'   graph_from_adjacency_matrix(weighted = TRUE)
 #' E(g2)$weight
 #'
 #' ## various modes for weighted graphs, with some tests
-#' nzs <- function(x) sort(x[x != 0])
-#' adjm <- matrix(runif(100), 10)
-#' adjm[adjm < 0.5] <- 0
-#' g3 <- graph_from_adjacency_matrix((adjm + t(adjm)) / 2,
+#' non_zero_sort <- function(x) sort(x[x != 0])
+#' adj_matrix <- matrix(runif(100), 10)
+#' adj_matrix[adj_matrix < 0.5] <- 0
+#' g3 <- graph_from_adjacency_matrix(
+#'   (adj_matrix + t(adj_matrix)) / 2,
 #'   weighted = TRUE,
 #'   mode = "undirected"
 #' )
 #'
-#' g4 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "max")
-#' all(nzs(pmax(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g4)$weight))
+#' g4 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "max"
+#' )
+#' expected_g4_weights <- non_zero_sort(
+#'   pmax(adj_matrix, t(adj_matrix))[upper.tri(adj_matrix, diag = TRUE)]
+#' )
+#' actual_g4_weights <- sort(E(g4)$weight)
+#' all(expected_g4_weights == actual_g4_weights)
 #'
-#' g5 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "min")
-#' all(nzs(pmin(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g5)$weight))
+#' g5 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "min"
+#' )
+#' expected_g5_weights <- non_zero_sort(
+#'   pmin(adj_matrix, t(adj_matrix))[upper.tri(adj_matrix, diag = TRUE)]
+#' )
+#' actual_g5_weights <- sort(E(g5)$weight)
+#' all(expected_g5_weights == actual_g5_weights)
 #'
-#' g6 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "upper")
-#' all(nzs(adjm[upper.tri(adjm)]) == sort(E(g6)$weight))
+#' g6 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "upper"
+#' )
+#' expected_g6_weights <- non_zero_sort(adj_matrix[upper.tri(adj_matrix, diag = TRUE)])
+#' actual_g6_weights <- sort(E(g6)$weight)
+#' all(expected_g6_weights == actual_g6_weights)
 #'
-#' g7 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "lower")
-#' all(nzs(adjm[lower.tri(adjm)]) == sort(E(g7)$weight))
+#' g7 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "lower"
+#' )
+#' expected_g7_weights <- non_zero_sort(adj_matrix[lower.tri(adj_matrix, diag = TRUE)])
+#' actual_g7_weights <- sort(E(g7)$weight)
+#' all(expected_g7_weights == actual_g7_weights)
 #'
-#' g8 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus")
-#' d2 <- function(x) {
+#' g8 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "plus"
+#' )
+#' halve_diag <- function(x) {
 #'   diag(x) <- diag(x) / 2
 #'   x
 #' }
-#' all(nzs((d2(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
+#' expected_g8_weights <- non_zero_sort(
+#'   halve_diag(adj_matrix + t(adj_matrix)
+#' )[lower.tri(adj_matrix, diag = TRUE)])
+#' actual_g8_weights <- sort(E(g8)$weight)
+#' all(expected_g8_weights == actual_g8_weights)
 #'
-#' g9 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus", diag = FALSE)
-#' d0 <- function(x) {
+#' g9 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   mode = "plus",
+#'   diag = FALSE
+#' )
+#' zero_diag <- function(x) {
 #'   diag(x) <- 0
 #' }
-#' all(nzs((d0(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g9)$weight))
+#' expected_g9_weights <- non_zero_sort((zero_diag(adj_matrix + t(adj_matrix)))[lower.tri(adj_matrix)])
+#' actual_g9_weights <- sort(E(g9)$weight)
+#' all(expected_g9_weights == actual_g9_weights)
 #'
 #' ## row/column names
-#' rownames(adjm) <- sample(letters, nrow(adjm))
-#' colnames(adjm) <- seq(ncol(adjm))
-#' g10 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, add.rownames = "code")
+#' rownames(adj_matrix) <- sample(letters, nrow(adj_matrix))
+#' colnames(adj_matrix) <- seq(ncol(adj_matrix))
+#' g10 <- graph_from_adjacency_matrix(
+#'   adj_matrix,
+#'   weighted = TRUE,
+#'   add.rownames = "code"
+#' )
 #' summary(g10)
 #'
 #' @export
@@ -374,7 +460,7 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
     lifecycle::deprecate_soft(
-      "1.5.2",
+      "1.6.0",
       "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
     )
     adjmatrix <- as.matrix(1)
@@ -383,7 +469,7 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
       lifecycle::deprecate_soft(
-        "1.5.2",
+        "1.6.0",
         "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
         details = 'Use mode = "max" to achieve the original behavior.'
       )
@@ -443,6 +529,8 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
     Matrix::isSymmetric(x, tol = 0, tol1 = 0)
+  } else if (is.matrix(x)) {
+    isSymmetric.matrix(x, tol = 0, tol1 = 0)
   } else {
     isSymmetric(x, tol = 0, tol1 = 0)
   }

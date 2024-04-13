@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{as_adjacency_matrix}
 \alias{as_adjacency_matrix}
-\alias{get.adjacency}
 \alias{as_adj}
 \title{Convert a graph to an adjacency matrix}
 \usage{
@@ -46,7 +45,7 @@ numeric. If the \code{sparse} argument is \code{FALSE}, then character is
 also allowed. The reason for the difference is that the \code{Matrix}
 package does not support character sparse matrices yet.}
 
-\item{edges}{Logical scalar, whether to return the edge ids in the matrix.
+\item{edges}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to return the edge ids in the matrix.
 For non-existant edges zero is returned.}
 
 \item{names}{Logical constant, whether to assign row and column names
@@ -87,22 +86,10 @@ Other conversion:
 \code{\link{as.directed}()},
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
+\code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
-
-Other conversion: 
-\code{\link{as.directed}()},
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},
 \code{\link{graph_from_adj_list}()},
 \code{\link{graph_from_graphnel}()}

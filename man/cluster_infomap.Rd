@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_infomap}
 \alias{cluster_infomap}
-\alias{infomap.community}
 \title{Infomap community finding}
 \usage{
 cluster_infomap(
@@ -14,7 +13,7 @@ cluster_infomap(
 )
 }
 \arguments{
-\item{graph}{The input graph.}
+\item{graph}{The input graph. Edge directions will be taken into account.}
 
 \item{e.weights}{If not \code{NULL}, then a numeric vector of edge weights.
 The length must match the number of edges in the graph.  By default the
@@ -41,7 +40,8 @@ please see the \code{\link[=communities]{communities()}} manual page for details
 }
 \description{
 Find community structure that minimizes the expected description length of a
-random walker trajectory
+random walker trajectory. If the graph is directed, edge directions will
+be taken into account.
 }
 \details{
 Please see the details of this method in the references given below.
@@ -86,7 +86,8 @@ Community detection
 \code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
+\code{\link{split_join_distance}()},
+\code{\link{voronoi_cells}()}
 }
 \author{
 Martin Rosvall wrote the original C++ code. This was ported to

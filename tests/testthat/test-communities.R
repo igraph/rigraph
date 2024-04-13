@@ -1,5 +1,5 @@
 test_that("community detection functions work", {
-  set.seed(42)
+  withr::local_seed(42)
 
   F <- list(
     "cluster_edge_betweenness", "cluster_fast_greedy",
@@ -54,7 +54,7 @@ test_that("community detection functions work", {
 })
 
 test_that("creating communities objects works", {
-  set.seed(42)
+  withr::local_seed(42)
 
   karate <- make_graph("Zachary")
 

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout_drl.R
 \name{layout_with_drl}
 \alias{layout_with_drl}
-\alias{layout.drl}
 \alias{drl_defaults}
 \alias{igraph.drl.coarsen}
 \alias{igraph.drl.coarsest}

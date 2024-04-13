@@ -42,7 +42,7 @@ component is a tree).
 
 g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-feedback_arc_set(g, algo = "approx")
+feedback_arc_set(g, algo = "approx_eades")
 }
 \references{
 Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
@@ -61,10 +61,11 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},
@@ -77,6 +78,7 @@ Other structural.properties:
 Graph cycles
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()}
 }
 \concept{cycles}

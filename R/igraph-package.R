@@ -2,9 +2,14 @@
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
 ## usethis namespace: start
+#' @importFrom lifecycle deprecated
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data .env
+#' @importFrom rlang check_dots_empty
+#' @importFrom rlang check_installed
+#' @importFrom rlang inject
 #' @importFrom rlang warn
+#' @importFrom rlang %||%
 ## usethis namespace: end
 NULL
 
@@ -36,7 +41,6 @@ NULL
 #' @name igraph-package
 #' @keywords internal
 #' @aliases igraph-package igraph
-#' @docType package
 #'
 #' @section Introduction:
 #' The main goals of the igraph library is to provide a set of data types
@@ -95,7 +99,7 @@ NULL
 #'   probably the best choices.
 #'
 #'   The igraph package includes some classic random graphs like the
-#'   Erdos-Renyi GNP and GNM graphs ([sample_gnp()], [sample_gnm()]) and
+#'   Erdős-Rényi GNP and GNM graphs ([sample_gnp()], [sample_gnm()]) and
 #'   some recent  popular models, like preferential attachment
 #'   ([sample_pa()]) and the small-world model
 #'   ([sample_smallworld()]).
@@ -180,4 +184,4 @@ NULL
 #'   The igraph homepage is at <https://igraph.org>.
 #'   See especially the documentation section. Join the discussion forum at
 #'   <https://igraph.discourse.group> if you have questions or comments.
-NULL
+"_PACKAGE"

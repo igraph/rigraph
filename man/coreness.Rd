@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{coreness}
 \alias{coreness}
-\alias{graph.coreness}
 \title{K-core decomposition of graphs}
 \usage{
 coreness(graph, mode = c("all", "out", "in"))
@@ -59,10 +58,11 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

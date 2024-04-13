@@ -2,7 +2,6 @@
 % Please edit documentation in R/motifs.R
 \name{count_motifs}
 \alias{count_motifs}
-\alias{graph.motifs.no}
 \title{Graph motifs}
 \usage{
 count_motifs(graph, size = 3, cut.prob = rep(0, size))

@@ -13,7 +13,7 @@ test_that("BFS works from multiple root vertices", {
 
   expect_that(
     as.vector(bfs(g, 1, unreachable = FALSE)$order),
-    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6, rep(NA, 10)))
+    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6))
   )
 
   expect_that(
@@ -31,9 +31,8 @@ test_that("issue 133", {
   g <- graph_from_edgelist(matrix(c(1, 2, 2, 3), ncol = 2, byrow = TRUE))
 
   expect_equal(
-    ignore_attr = TRUE,
-    bfs(g, 1, restricted = c(1, 2), unreachable = FALSE)$order,
-    V(g)[c(1, 2, NA_real_), na_ok = TRUE]
+    as.numeric(bfs(g, 1, restricted = c(1, 2), unreachable = FALSE)$order),
+    c(1, 2)
   )
 })
 
@@ -128,4 +127,12 @@ test_that("snapshot test", {
       dist = TRUE
     )
   })
+})
+
+test_that("BFS does not pad order", {
+  g <- make_star(3)
+  expect_equal(as.numeric(bfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
+
+  local_igraph_options(return.vs.es = FALSE)
+  expect_equal(as.numeric(bfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
 })

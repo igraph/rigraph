@@ -2,16 +2,17 @@
 % Please edit documentation in R/structural.properties.R
 \name{which_mutual}
 \alias{which_mutual}
-\alias{is.mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = E(graph))
+which_mutual(graph, eids = E(graph), loops = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{eids}{Edge sequence, the edges that will be probed. By default is
 includes all edges in the order of their ids.}
+
+\item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }
 \value{
 A logical vector of the same length as the number of edges supplied.
@@ -53,10 +54,11 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
+\code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
 \code{\link{reciprocity}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},

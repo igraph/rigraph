@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{strength}
 \alias{strength}
-\alias{graph.strength}
 \title{Strength or weighted vertex degree}
 \usage{
 strength(
@@ -44,7 +43,7 @@ strength(g)
 strength(g, mode = "out")
 strength(g, mode = "in")
 
-# No weights, a warning is given
+# No weights
 g <- make_ring(10)
 strength(g)
 }

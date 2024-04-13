@@ -9,10 +9,10 @@ test_that("make_graph accepts an empty vector or NULL", {
   g2 <- make_empty_graph(n = 0)
   expect_true(identical_graphs(g, g2))
 
-  g <- make_graph(NULL, n = NULL)
+  g <- make_graph(NULL, n = 0)
   expect_true(identical_graphs(g, g2))
 
-  g <- make_graph(edges = c(), n = NULL)
+  g <- make_graph(edges = c(), n = 0)
   expect_true(identical_graphs(g, g2))
 })
 
