@@ -3725,7 +3725,13 @@ SEXP R_igraph_mybracket2_names(SEXP graph, SEXP pidx1, SEXP pidx2) {
   SEXP result;
   int idx1=INTEGER(pidx1)[0]-1;
   int idx2=INTEGER(pidx2)[0]-1;
-  result=Rf_duplicate(GET_NAMES(VECTOR_ELT(VECTOR_ELT(graph, idx1), idx2)));
+
+  SEXP names = GET_NAMES(VECTOR_ELT(VECTOR_ELT(graph, idx1), idx2));
+  if (Rf_isNull(names)) {
+    result = NEW_CHARACTER(0);
+  } else {
+    result=Rf_duplicate(names);
+  }
   return result;
 }
 
