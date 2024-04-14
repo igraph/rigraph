@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9012
+
+## Continuous integration
+
+- Remove conflict action again.
+
+## Refactoring
+
+- Handle `null` names for `R_igraph_mybracket2_names` (#1342).
+
+
 # igraph 2.0.3.9011
 
 ## Continuous integration
