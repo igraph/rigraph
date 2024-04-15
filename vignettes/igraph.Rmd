@@ -133,7 +133,7 @@ If you try to add edges to vertices with invalid IDs (i.e., you try to add an ed
 g <- add_edges(g, edges = c(38, 37))
 ```
 
-Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package, which provides a mechanism for chaining commands with the operator `%\>%`:
+Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package, which provides a mechanism for chaining commands with the operator `%>%`:
 
 ```{r echo = TRUE}
 g <- g %>%
