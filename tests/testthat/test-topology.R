@@ -1,19 +1,19 @@
 test_that("automorphisms works", {
   g <- make_ring(10)
-  expect_that(count_automorphisms(g)$group_size, equals("20"))
+  expect_that(count_automorphisms(g), equals(20))
 
   g <- make_full_graph(4)
-  expect_that(count_automorphisms(g)$group_size, equals("24"))
+  expect_that(count_automorphisms(g), equals(24))
 })
 
 
 test_that("automorphisms works with colored graphs", {
   g <- make_full_graph(4)
-  expect_that(count_automorphisms(g, colors = c(1, 2, 1, 2))$group_size, equals("4"))
+  expect_that(count_automorphisms(g, colors = c(1, 2, 1, 2)), equals(4))
 
   V(g)$color <- c(1, 2, 1, 2)
-  expect_that(count_automorphisms(g)$group_size, equals("4"))
-  expect_that(count_automorphisms(g, colors = NULL)$group_size, equals("24"))
+  expect_that(count_automorphisms(g), equals(4))
+  expect_that(count_automorphisms(g, colors = NULL), equals(24))
 })
 
 
