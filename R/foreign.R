@@ -296,7 +296,7 @@ read.graph.ncol <- function(file, predef = character(0), names = TRUE,
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_read_graph_ncol, file, as.character(predef),
-    as.logical(names), as.numeric(weights), as.logical(directed)
+    as.logical(names), weights, as.logical(directed)
   )
 }
 
@@ -336,7 +336,7 @@ read.graph.lgl <- function(file, names = TRUE,
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_read_graph_lgl, file,
-    as.logical(names), as.numeric(weights), as.logical(directed)
+    as.logical(names), weights, as.logical(directed)
   )
 }
 
