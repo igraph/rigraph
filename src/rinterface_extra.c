@@ -2283,7 +2283,7 @@ void checkInterruptFn(void *dummy) {
   R_CheckUserInterrupt();
 }
 
-igraph_error_t R_igraph_interrupt_handler(void *data) {
+igraph_bool_t R_igraph_interrupt_handler() {
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
@@ -2299,9 +2299,9 @@ igraph_error_t R_igraph_interrupt_handler(void *data) {
    */
   if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
-    return IGRAPH_INTERRUPTED;
+    return 1;
   }
-  return IGRAPH_SUCCESS;
+  return 0;
 }
 
 igraph_error_t R_igraph_progress_handler(const char *message, double percent,
@@ -6690,8 +6690,8 @@ SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
   igraph_vector_int_t community;
   igraph_real_t cohesion;
   igraph_real_t adhesion;
-  igraph_integer_t inner_links;
-  igraph_integer_t outer_links;
+  igraph_real_t inner_links;
+  igraph_real_t outer_links;
 
   SEXP result, names;
 
