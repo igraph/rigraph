@@ -47,7 +47,6 @@ extern SEXP R_igraph_assortativity_degree(void *, void *);
 extern SEXP R_igraph_assortativity_nominal(void *, void *, void *, void *);
 extern SEXP R_igraph_asymmetric_preference_game(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_atlas(void *);
-extern SEXP R_igraph_authority_score(void *, void *, void *, void *);
 extern SEXP R_igraph_automorphism_group(void *, void *, void *);
 extern SEXP R_igraph_average_local_efficiency(void *, void *, void *, void *);
 extern SEXP R_igraph_average_path_length_dijkstra(void *, void *, void *, void *);
@@ -234,7 +233,6 @@ extern SEXP R_igraph_hrg_size(void *);
 extern SEXP R_igraph_hsbm_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_hsbm_list_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_hub_and_authority_scores(void *, void *, void *, void *);
-extern SEXP R_igraph_hub_score(void *, void *, void *, void *);
 extern SEXP R_igraph_i_levc_arp(void *, void *, void *);
 extern SEXP R_igraph_identical_graphs(void *, void *, void *);
 extern SEXP R_igraph_incident(void *, void *, void *);
@@ -506,7 +504,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_assortativity_nominal",                      (DL_FUNC) &R_igraph_assortativity_nominal,                       4},
     {"R_igraph_asymmetric_preference_game",                 (DL_FUNC) &R_igraph_asymmetric_preference_game,                  6},
     {"R_igraph_atlas",                                      (DL_FUNC) &R_igraph_atlas,                                       1},
-    {"R_igraph_authority_score",                            (DL_FUNC) &R_igraph_authority_score,                             4},
     {"R_igraph_automorphism_group",                         (DL_FUNC) &R_igraph_automorphism_group,                          3},
     {"R_igraph_average_local_efficiency",                   (DL_FUNC) &R_igraph_average_local_efficiency,                    4},
     {"R_igraph_average_path_length_dijkstra",               (DL_FUNC) &R_igraph_average_path_length_dijkstra,                4},
@@ -693,7 +690,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hsbm_game",                                  (DL_FUNC) &R_igraph_hsbm_game,                                   5},
     {"R_igraph_hsbm_list_game",                             (DL_FUNC) &R_igraph_hsbm_list_game,                              5},
     {"R_igraph_hub_and_authority_scores",                   (DL_FUNC) &R_igraph_hub_and_authority_scores,                    4},
-    {"R_igraph_hub_score",                                  (DL_FUNC) &R_igraph_hub_score,                                   4},
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
     {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},

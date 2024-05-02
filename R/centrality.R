@@ -29,21 +29,6 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
   page_rank(graph = graph, algo = algo, vids = vids, directed = directed, damping = damping, personalized = personalized, weights = weights, options = options)
 } # nocov end
 
-#' Kleinberg's hub and authority centrality scores.
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `hub.score()` was renamed to `hub_score()` to create a more
-#' consistent API.
-#' @inheritParams hub_score
-#' @keywords internal
-#' @export
-hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
-  hub_score(graph = graph, scale = scale, weights = weights, options = options)
-} # nocov end
-
 #' Strength or weighted vertex degree
 #'
 #' @description
@@ -132,21 +117,6 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
-} # nocov end
-
-#' Kleinberg's hub and authority centrality scores.
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `authority.score()` was renamed to `authority_score()` to create a more
-#' consistent API.
-#' @inheritParams authority_score
-#' @keywords internal
-#' @export
-authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -1132,42 +1102,11 @@ diversity <- diversity_impl
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
 #' @family centrality
-hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      "hub_score(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
-    )
-    options <- options()
-  }
-
-  hub_score_impl(graph = graph,
+hub_and_authority_scores <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  hub_and_authority_scores_impl(graph = graph,
                  scale = scale,
                  weights = weights,
                  options = options)
-}
-
-#' @rdname hub_score
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
-#' @export
-authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
-    )
-    options <- arpack_defaults()
-  }
-
-  authority_score_impl(graph = graph,
-                       scale = scale,
-                       weights = weights,
-                       options = options)
 }
 
 #' The Page Rank algorithm
