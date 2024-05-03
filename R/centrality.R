@@ -1102,7 +1102,7 @@ diversity <- diversity_impl
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
 #' @family centrality
-hub_and_authority_scores <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+hits_scores <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   hub_and_authority_scores_impl(graph = graph,
                  scale = scale,
                  weights = weights,
