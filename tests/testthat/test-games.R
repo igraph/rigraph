@@ -30,12 +30,8 @@ test_that("sample_degseq() works -- sample_gnp()", {
 })
 
 test_that("sample_degseq() works -- simple generator, connected", {
-  gc <- function(graph) {
-    clu <- components(graph)
-    induced_subgraph(graph, which(clu$membership == which.max(clu$csize)))
-  }
 
-  original_graph <- gc(sample_gnp(1000, 2 / 1000))
+  original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
   simple_graph <- sample_degseq(degree(original_graph), method = "simple")
   expect_equal(degree(simple_graph), degree(original_graph))
