@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9013
+
+## Testing
+
+- Improve sample_degseq() tests (#1315).
+
+
 # igraph 2.0.3.9012
 
 ## Continuous integration
