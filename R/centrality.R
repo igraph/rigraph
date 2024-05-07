@@ -1109,6 +1109,54 @@ hits_scores <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults
                  options = options)
 }
 
+#' @rdname authority_score
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
+#' @export
+authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.3", "authority_score()", "hits_scores()")
+  if (is.function(options)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  scores <- hits_scores(graph = graph,
+                  scale = scale,
+                  weights = weights,
+                  options = options)
+  scores$vector <- scores$authority
+  scores
+}
+
+#' @rdname hub_score
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
+#' @export
+hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  if (is.function(options)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  scores <- hits_scores(graph = graph,
+                  scale = scale,
+                  weights = weights,
+                  options = options)
+  scores$vector <- scores$hub
+  scores
+}
+
 #' The Page Rank algorithm
 #'
 #' Calculates the Google PageRank for the specified vertices.
