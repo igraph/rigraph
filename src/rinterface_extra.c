@@ -4291,28 +4291,6 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   return result;
 }
 
-SEXP R_igraph_lattice(SEXP pdimvector, SEXP pnei, SEXP pdirected,
-                      SEXP pmutual, SEXP pcircular) {
-
-  igraph_t g;
-  igraph_vector_int_t dimvector;
-  igraph_integer_t nei=(igraph_integer_t) REAL(pnei)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t mutual=LOGICAL(pmutual)[0];
-  igraph_bool_t circular=LOGICAL(pcircular)[0];
-  SEXP result;
-
-  R_SEXP_to_vector_int_copy(pdimvector, &dimvector);
-
-  IGRAPH_R_CHECK(igraph_lattice(&g, &dimvector, nei, directed, mutual, circular));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-  igraph_vector_int_destroy(&dimvector);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
                             SEXP poutpref, SEXP pA, SEXP pdirected,
                             SEXP palgo, SEXP pstart) {
