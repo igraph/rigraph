@@ -1,5 +1,5 @@
 test_that("make_lattice works", {
-  g <- make_lattice(dim = 2, length = 3, circular = F)
+  g <- make_lattice(dim = 2, length = 3, periodic = c(F, F))
   g2 <- make_empty_graph(n = 9) + edges(c(
     1, 2,
     1, 4,
@@ -16,7 +16,7 @@ test_that("make_lattice works", {
   ))
   expect_equal(as_edgelist(g), as_edgelist(g2))
 
-  g <- make_lattice(dim = 2, length = 3, circular = T)
+  g <- make_lattice(dim = 2, length = 3, periodic = c(T, T))
   g2 <- make_empty_graph(n = 9) + edges(c(
     1, 2,
     1, 4,
