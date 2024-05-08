@@ -1057,7 +1057,16 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' make_lattice(length = 5, dim = 3)
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
-                         periodic = NULL) {
+                         periodic = FALSE, circular) {
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "make_lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
+  }
+
   if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
     length <- round(length)
@@ -1065,6 +1074,10 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 
   if (is.null(dimvector)) {
     dimvector <- rep(length, dim)
+  }
+
+  if (length(periodic) == 1) {
+    periodic <- rep(periodic, length(dimvector))
   }
 
   on.exit(.Call(R_igraph_finalizer))
