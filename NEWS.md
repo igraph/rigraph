@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9014
+
+## doc
+
+- Improved `cluster_edge_betweenness()` documentation.
+
+
 # igraph 2.0.3.9013
 
 ## Testing
