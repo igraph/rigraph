@@ -1580,8 +1580,9 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #'
 #' `cluster_edge_betweenness()` returns various information collected
 #' through the run of the algorithm. Specifically, `removed.edges` contains
-#' the edges IDs in order of the edges' removal, and `edge.betweenness` contains
-#' the betweenness of each of these at the time of their removal.
+#' the edge IDs in order of the edges' removal; `edge.betweenness` contains
+#' the betweenness of each of these at the time of their removal; and
+#' `bridges` contains the IDs of edges whose removal caused a split.
 #'
 #' @param graph The graph to analyze.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
