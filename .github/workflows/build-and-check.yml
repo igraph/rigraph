@@ -150,6 +150,7 @@ jobs:
       - name: apt update
         if: runner.os == 'macOS'
         run: |
+          brew update
           brew install glpk
         shell: bash
 
