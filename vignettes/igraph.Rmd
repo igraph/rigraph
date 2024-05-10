@@ -252,7 +252,7 @@ g <- make_graph(
 )
 ```
 
-Each vertex represents a person, so we want to store ages, genders and types of connection between two people (`is_formal()` refers to whether a connection between one person or another is formal or informal, respectively colleagues or friends). The `\$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr()` and `set_graph_attr()`.
+Each vertex represents a person, so we want to store ages, genders and types of connection between two people (`is_formal()` refers to whether a connection between one person or another is formal or informal, respectively colleagues or friends). The `$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr()` and `set_graph_attr()`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
@@ -261,7 +261,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V()` and `E()` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr()` and `set_edge_attr()` and the operator `%\>%`:
+`V()` and `E()` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr()` and `set_edge_attr()` and the operator `%>%`:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
