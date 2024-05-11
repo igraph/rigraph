@@ -892,40 +892,40 @@ eigen_defaults <- function() {
   )
 }
 
-#' Find Eigenvector Centrality Scores of Network Positions
+#' Eigenvector centrality of vertices
 #'
 #' `eigen_centrality()` takes a graph (`graph`) and returns the
-#' eigenvector centralities of positions `v` within it
+#' eigenvector centralities of the vertices `v` within it.
 #'
-#' Eigenvector centrality scores correspond to the values of the first
-#' eigenvector of the graph adjacency matrix; these scores may, in turn, be
+#' Eigenvector centrality scores correspond to the values of the principal
+#' eigenvector of the graph's adjacency matrix; these scores may, in turn, be
 #' interpreted as arising from a reciprocal process in which the centrality of
 #' each actor is proportional to the sum of the centralities of those actors to
 #' whom he or she is connected.  In general, vertices with high eigenvector
 #' centralities are those which are connected to many other vertices which are,
-#' in turn, connected to many others (and so on).  (The perceptive may realize
+#' in turn, connected to many others (and so on).  The perceptive may realize
 #' that this implies that the largest values will be obtained by individuals in
 #' large cliques (or high-density substructures).  This is also intelligible
 #' from an algebraic point of view, with the first eigenvector being closely
 #' related to the best rank-1 approximation of the adjacency matrix (a
 #' relationship which is easy to see in the special case of a diagonalizable
 #' symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
-#' decomposition).)
+#' decomposition).
 #'
 #' The adjacency matrix used in the eigenvector centrality calculation assumes
-#' that loop edges are counted *twice*; this is because each loop edge has
-#' *two* endpoints that are both connected to the same vertex, and you
-#' could traverse the loop edge via either endpoint.
+#' that loop edges are counted *twice* in undirected graphs; this is because
+#' each loop edge has *two* endpoints that are both connected to the same vertex,
+#' and you could traverse the loop edge via either endpoint.
 #'
 #' In the directed case, the left eigenvector of the adjacency matrix is
 #' calculated. In other words, the centrality of a vertex is proportional to
 #' the sum of centralities of vertices pointing to it.
 #'
-#' Eigenvector centrality is meaningful only for connected graphs. Graphs that
-#' are not connected should be decomposed into connected components, and the
-#' eigenvector centrality calculated for each separately. This function does
-#' not verify that the graph is connected. If it is not, in the undirected case
-#' the scores of all but one component will be zeros.
+#' Eigenvector centrality is meaningful only for (strongly) connected graphs.
+#' Undirected graphs that are not connected should be decomposed into connected
+#' components, and the eigenvector centrality calculated for each separately.
+#' This function does not verify that the graph is connected. If it is not, in
+#' the undirected case the scores of all but one component will be zeros.
 #'
 #' Also note that the adjacency matrix of a directed acyclic graph or the
 #' adjacency matrix of an empty graph does not possess positive eigenvalues,
