@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9016
+
+## doc
+
+- Improve `eigen_centrality()` documentation.
+
+
 # igraph 2.0.3.9015
 
 ## doc
