@@ -1046,8 +1046,8 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
 #' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
-#'   periodic along each dimension. This parameter may also be `NULL`, which
-#'   implies that the lattice will not be periodic.
+#'   periodic along each dimension. This parameter may also be scalar boolen value which will
+#'   be extended to boolean vector with dimvector length.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
