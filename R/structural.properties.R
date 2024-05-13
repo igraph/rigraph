@@ -2528,6 +2528,16 @@ laplacian_matrix <- function(graph, weights = NULL,
       "make_lattice(normalized = 'provide normalization instead')",
       details = c("`normalized` is now deprecated, use `normalization` instead.")
     )
+    normalized <- as.logical(normalized)
+
+    normalization <- "unnormalized"
+    if (normalized) {
+      if (is_directed(graph)) {
+        normalization <- "left"
+      } else {
+        normalization <- "symmetric"
+      }
+    }
   }
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
