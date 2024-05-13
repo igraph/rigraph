@@ -276,7 +276,6 @@ extern SEXP R_igraph_joint_type_distribution(void *, void *, void *, void *, voi
 extern SEXP R_igraph_k_regular_game(void *, void *, void *, void *);
 extern SEXP R_igraph_kary_tree(void *, void *, void *);
 extern SEXP R_igraph_kautz(void *, void *);
-extern SEXP R_igraph_laplacian(void *, void *, void *, void *);
 extern SEXP R_igraph_laplacian_spectral_embedding(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_largest_cliques(void *);
 extern SEXP R_igraph_largest_independent_vertex_sets(void *);
@@ -732,7 +731,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
     {"R_igraph_kary_tree",                                  (DL_FUNC) &R_igraph_kary_tree,                                   3},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
-    {"R_igraph_laplacian",                                  (DL_FUNC) &R_igraph_laplacian,                                   4},
     {"R_igraph_laplacian_spectral_embedding",               (DL_FUNC) &R_igraph_laplacian_spectral_embedding,                7},
     {"R_igraph_largest_cliques",                            (DL_FUNC) &R_igraph_largest_cliques,                             1},
     {"R_igraph_largest_independent_vertex_sets",            (DL_FUNC) &R_igraph_largest_independent_vertex_sets,             1},

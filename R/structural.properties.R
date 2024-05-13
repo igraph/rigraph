@@ -2487,9 +2487,10 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' is d\[i\], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
 #' between vertices i and j and 0 otherwise.
 #'
-#' A normalized version of the Laplacian Matrix is similar: element (i,j) is 1
-#' if i==j, -1/sqrt(d\[i\] d\[j\]) if i!=j and there is an edge between vertices i
-#' and j and 0 otherwise.
+#' The Laplacian matrix can also be normalized, with several
+#' conventional normalization methods. \dQuote{unnormalized} Unnormalized Laplacian.
+#' \dQuote{symmetric} Symmetric normalized Laplacian. \dQuote{left} Left-stochastic normalized Laplacian.
+#' \dQuote{right} Right-stochastic normalized Laplacian.
 #'
 #' The weighted version of the Laplacian simply works with the weighted degree
 #' instead of the plain degree. I.e. (i,j) is d\[i\], the weighted degree of
@@ -2498,8 +2499,8 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' of the weights of its adjacent edges.
 #'
 #' @param graph The input graph.
-#' @param normalized Whether to calculate the normalized Laplacian. See
-#'   definitions below.
+#' @param normalization The normalization method to use when calculating the
+#'   Laplacian matrix.
 #' @param weights An optional vector giving edge weights for weighted Laplacian
 #'   matrix. If this is `NULL` and the graph has an edge attribute called
 #'   `weight`, then it will be used automatically. Set this to `NA` if
@@ -2515,14 +2516,20 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'
 #' g <- make_ring(10)
 #' laplacian_matrix(g)
-#' laplacian_matrix(g, norm = TRUE)
-#' laplacian_matrix(g, norm = TRUE, sparse = FALSE)
+#' laplacian_matrix(g, normalization = "unnormalized")
+#' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
-laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
-                             sparse = igraph_opt("sparsematrices")) {
+laplacian_matrix <- function(graph, weights = NULL,
+                             sparse = igraph_opt("sparsematrices"), normalization = c("unnormalized", "symmetric", "left", "right"), normalized) {
   # Argument checks
+  if (lifecycle::is_present(normalized)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "make_lattice(normalized = 'provide normalization instead')",
+      details = c("`normalized` is now deprecated, use `normalization` instead.")
+    )
+  }
   ensure_igraph(graph)
-  normalized <- as.logical(normalized)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2535,7 +2542,11 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_laplacian, graph, normalized, weights, sparse)
+  if (sparse) {
+    res <- get_laplacian_sparse_impl(graph, "out", normalization, weights)
+  } else {
+    res <- get_laplacian_impl(graph, "out", normalization, weights)
+  }
   if (sparse) {
     res <- igraph.i.spMatrix(res)
   }

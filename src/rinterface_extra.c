@@ -8147,50 +8147,6 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
   return result;
 }
 
-SEXP R_igraph_laplacian(SEXP graph, SEXP normalized, SEXP weights,
-                        SEXP psparse) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_matrix_t c_res;
-  igraph_sparsemat_t c_sparseres;
-  igraph_bool_t c_normalized;
-  igraph_vector_t c_weights;
-  igraph_bool_t c_sparse=LOGICAL(psparse)[0];
-  SEXP result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!c_sparse) {
-    if (0 != igraph_matrix_init(&c_res, 0, 0)) {
-      igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    }
-    IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  }
-  if (c_sparse) {
-    if (0 != igraph_sparsemat_init(&c_sparseres, 0, 0, 0)) {
-      igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    }
-    IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_sparseres);
-  }
-  c_normalized=LOGICAL(normalized)[0];
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_laplacian(&c_graph, (c_sparse ? 0 : &c_res), (c_sparse ? &c_sparseres : 0), c_normalized, (Rf_isNull(weights) ? 0 : &c_weights)));
-
-                                        /* Convert output */
-  if (!c_sparse) {
-    PROTECT(result=R_igraph_matrix_to_SEXP(&c_res));
-    igraph_matrix_destroy(&c_res);
-    IGRAPH_FINALLY_CLEAN(1);
-  } else {
-    PROTECT(result=R_igraph_sparsemat_to_SEXP(&c_sparseres));
-    igraph_sparsemat_destroy(&c_sparseres);
-    IGRAPH_FINALLY_CLEAN(1);
-  }
-
-  UNPROTECT(1);
-  return(result);
-}
-
 SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
                                 SEXP induced, SEXP time_limit,
                                 SEXP pqmap, SEXP pqall_maps) {
