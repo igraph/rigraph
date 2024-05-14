@@ -645,10 +645,11 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 }
 
 make_famous_graph <- function(name) {
+  assert_character(name)
   name <- gsub("\\s", "_", name)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_famous, as.character(name))
+  res <- .Call(R_igraph_famous, name)
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
   }
