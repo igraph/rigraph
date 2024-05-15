@@ -188,12 +188,6 @@ igraph_weighted_sparsemat:
 igraph_barabasi_game:
     IGNORE: RR, RC
 
-igraph_erdos_renyi_game_gnp:
-    IGNORE: RR, RC, RInit
-
-igraph_erdos_renyi_game_gnm:
-    IGNORE: RR, RC, RInit
-
 igraph_degree_sequence_game:
     IGNORE: RR, RC
 

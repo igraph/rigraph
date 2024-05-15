@@ -286,6 +286,34 @@ turan_impl <- function(n, r) {
   res
 }
 
+erdos_renyi_game_gnp_impl <- function(n, p, directed=FALSE, loops=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  p <- as.numeric(p)
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_erdos_renyi_game_gnp, n, p, directed, loops)
+
+  res
+}
+
+erdos_renyi_game_gnm_impl <- function(n, m, directed=FALSE, loops=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  m <- as.numeric(m)
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_erdos_renyi_game_gnm, n, m, directed, loops)
+
+  res
+}
+
 forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.numeric(nodes)

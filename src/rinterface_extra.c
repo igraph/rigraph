@@ -4848,29 +4848,6 @@ SEXP R_igraph_layout_circle(SEXP graph, SEXP porder) {
   return result;
 }
 
-SEXP R_igraph_erdos_renyi_game(SEXP pn, SEXP ptype,
-                               SEXP pporm, SEXP pdirected, SEXP ploops) {
-
-  igraph_t g;
-  igraph_integer_t n;
-  igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_real_t porm=REAL(pporm)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  R_check_int_scalar(pn);
-  n=(igraph_integer_t) REAL(pn)[0];
-
-  igraph_erdos_renyi_game(&g, (igraph_erdos_renyi_t) type, n, porm, directed,
-                          loops);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
 
   igraph_t g;
