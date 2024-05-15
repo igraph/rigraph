@@ -60,7 +60,6 @@ extern SEXP R_igraph_bfs_simple(void *, void *, void *);
 extern SEXP R_igraph_biadjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_bibcoupling(void *, void *);
 extern SEXP R_igraph_biconnected_components(void *);
-extern SEXP R_igraph_bipartite_game(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_game_gnm(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_game_gnp(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_projection(void *, void *, void *, void *);
@@ -515,7 +514,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_biadjacency",                                (DL_FUNC) &R_igraph_biadjacency,                                 4},
     {"R_igraph_bibcoupling",                                (DL_FUNC) &R_igraph_bibcoupling,                                 2},
     {"R_igraph_biconnected_components",                     (DL_FUNC) &R_igraph_biconnected_components,                      1},
-    {"R_igraph_bipartite_game",                             (DL_FUNC) &R_igraph_bipartite_game,                              7},
     {"R_igraph_bipartite_game_gnm",                         (DL_FUNC) &R_igraph_bipartite_game_gnm,                          5},
     {"R_igraph_bipartite_game_gnp",                         (DL_FUNC) &R_igraph_bipartite_game_gnp,                          5},
     {"R_igraph_bipartite_projection",                       (DL_FUNC) &R_igraph_bipartite_projection,                        4},
