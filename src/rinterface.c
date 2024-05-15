@@ -72,12 +72,15 @@ SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   R_SEXP_to_vector_int_copy(edges, &c_edges);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_add_edges(&c_graph, &c_edges, 0));
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -5728,65 +5731,6 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(types=R_igraph_vector_bool_to_SEXP(&c_types));
-  igraph_vector_bool_destroy(&c_types);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, graph);
-  SET_VECTOR_ELT(r_result, 1, types);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("types"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_bipartite_game                      /
-/-------------------------------------------*/
-SEXP R_igraph_bipartite_game(SEXP type, SEXP n1, SEXP n2, SEXP p, SEXP m, SEXP directed, SEXP mode) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_bool_t c_types;
-  igraph_erdos_renyi_t c_type;
-  igraph_integer_t c_n1;
-  igraph_integer_t c_n2;
-  igraph_real_t c_p;
-  igraph_integer_t c_m;
-  igraph_bool_t c_directed;
-  igraph_neimode_t c_mode;
-  SEXP graph;
-  SEXP types;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  if (0 != igraph_vector_bool_init(&c_types, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  c_type = (igraph_erdos_renyi_t) Rf_asInteger(type);
-  IGRAPH_R_CHECK_INT(n1);
-  c_n1 = (igraph_integer_t) REAL(n1)[0];
-  IGRAPH_R_CHECK_INT(n2);
-  c_n2 = (igraph_integer_t) REAL(n2)[0];
-  IGRAPH_R_CHECK_REAL(p);
-  c_p = REAL(p)[0];
-  IGRAPH_R_CHECK_INT(m);
-  c_m = (igraph_integer_t) REAL(m)[0];
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_bipartite_game(&c_graph, &c_types, c_type, c_n1, c_n2, c_p, c_m, c_directed, c_mode));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

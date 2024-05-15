@@ -541,18 +541,10 @@ igraph_eigenvector_centrality:
     DEPS: weights ON graph, vector ON graph V(graph)
 
 igraph_hub_score:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: weights ON graph, vector ON graph V(graph)
+    IGNORE: RR, RC
 
 igraph_authority_score:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: weights ON graph, vector ON graph V(graph)
+    IGNORE: RR, RC
 
 igraph_hub_and_authority_scores:
     # This is a temporary hack; we need to find a way to handle default values
