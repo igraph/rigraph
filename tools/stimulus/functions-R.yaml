@@ -714,7 +714,7 @@ igraph_bipartite_game_gnm:
     IGNORE: RR
 
 igraph_bipartite_game:
-    DEPS: types ON graph V(graph)
+    IGNORE: RR, RC
 
 
 #######################################

@@ -2105,24 +2105,6 @@ is_bipartite_impl <- function(graph) {
   res
 }
 
-bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c("all", "out", "in", "total")) {
-  # Argument checks
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
-  p <- as.numeric(p)
-  m <- as.numeric(m)
-  directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_bipartite_game, type, n1, n2, p, m, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
 get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=c("unnormalized", "symmetric", "left", "right"), weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
