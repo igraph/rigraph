@@ -5188,46 +5188,6 @@ SEXP R_igraph_random_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, SEXP 
 }
 
 /*-------------------------------------------/
-/ igraph_random_edge_walk                    /
-/-------------------------------------------*/
-SEXP R_igraph_random_edge_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, SEXP steps, SEXP stuck) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_weights;
-  igraph_vector_int_t c_edgewalk;
-  igraph_integer_t c_start;
-  igraph_neimode_t c_mode;
-  igraph_integer_t c_steps;
-  igraph_random_walk_stuck_t c_stuck;
-  SEXP edgewalk;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (0 != igraph_vector_int_init(&c_edgewalk, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edgewalk);
-  c_start = (igraph_integer_t) REAL(start)[0];
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_INT(steps);
-  c_steps = (igraph_integer_t) REAL(steps)[0];
-  c_stuck = (igraph_random_walk_stuck_t) Rf_asInteger(stuck);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_random_edge_walk(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_edgewalk, c_start, c_mode, c_steps, c_stuck));
-
-                                        /* Convert output */
-  PROTECT(edgewalk=R_igraph_vector_int_to_SEXPp1(&c_edgewalk));
-  igraph_vector_int_destroy(&c_edgewalk);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = edgewalk;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_global_efficiency                   /
 /-------------------------------------------*/
 SEXP R_igraph_global_efficiency(SEXP graph, SEXP weights, SEXP directed) {

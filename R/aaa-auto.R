@@ -1933,34 +1933,6 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   res
 }
 
-random_edge_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "in", "all", "total"), stuck=c("return", "error")) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  steps <- as.numeric(steps)
-  stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_random_edge_walk, graph, weights, start-1, mode, steps, stuck)
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
-  }
-  res
-}
-
 global_efficiency_impl <- function(graph, weights=NULL, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)

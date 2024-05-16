@@ -358,7 +358,6 @@ extern SEXP R_igraph_preference_game(void *, void *, void *, void *, void *, voi
 extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_radius_dijkstra(void *, void *, void *);
-extern SEXP R_igraph_random_edge_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_random_sample(void *, void *, void *);
 extern SEXP R_igraph_random_spanning_tree(void *, void *);
 extern SEXP R_igraph_random_walk(void *, void *, void *, void *, void *, void *);
@@ -813,7 +812,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
     {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
     {"R_igraph_radius_dijkstra",                            (DL_FUNC) &R_igraph_radius_dijkstra,                             3},
-    {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},
     {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},
     {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 6},

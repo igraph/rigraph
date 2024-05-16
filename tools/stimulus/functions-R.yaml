@@ -635,7 +635,7 @@ igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
 
 igraph_random_edge_walk:
-    PARAM_ORDER: graph, start, steps, ...
+    IGNORE: RR, RC
 
 igraph_global_efficiency:
 
