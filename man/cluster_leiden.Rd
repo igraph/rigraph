@@ -8,9 +8,10 @@ van Eck & Waltman.}
 cluster_leiden(
   graph,
   objective_function = c("CPM", "modularity"),
+  ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter = deprecated(),
+  resolution_parameter,
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
