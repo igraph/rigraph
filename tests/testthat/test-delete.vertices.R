@@ -5,5 +5,5 @@ test_that("delete_vertices works", {
   expect_equal(V(g2)$name, c("B", "C", "D", "E", "F"))
 
   g3 <- delete_vertices(g, match("A", V(g)$name))
-  expect_true(graph.isomorphic(g2, g3))
+  expect_isomorphic(g2, g3)
 })

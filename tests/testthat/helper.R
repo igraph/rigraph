@@ -25,3 +25,7 @@ expect_that <- function(object, condition, info = NULL, label = NULL) {
     condition(object)
   )
 }
+
+expect_isomorphic <- function(g1, g2) {
+  expect_true(graph.isomorphic(g1, g2))
+}

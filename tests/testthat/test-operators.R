@@ -22,18 +22,18 @@ test_that("operators work", {
 
   ####
 
-  expect_true(graph.isomorphic(difference(gu, g1), g2))
+  expect_isomorphic(difference(gu, g1), g2)
 
   ####
 
-  expect_true(graph.isomorphic(intersection(gu, g2), g2))
+  expect_isomorphic(intersection(gu, g2), g2)
 
-  expect_true(graph.isomorphic(
+  expect_isomorphic(
     intersection(gu, g1,
       keep.all.vertices = FALSE
     ),
     g1
-  ))
+  )
 
   ####
 
