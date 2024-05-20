@@ -4919,104 +4919,23 @@ SEXP R_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
   return result;
 }
 
-SEXP R_igraph_transitivity_undirected(SEXP graph, SEXP pisolates) {
-
-  igraph_t g;
-  igraph_real_t res;
-  SEXP result;
-  igraph_transitivity_mode_t isolates=REAL(pisolates)[0];
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_transitivity_undirected(&g, &res, isolates));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_transitivity_avglocal_undirected(SEXP graph, SEXP pisolates) {
-
-  igraph_t g;
-  igraph_real_t res;
-  SEXP result;
-  igraph_transitivity_mode_t isolates=REAL(pisolates)[0];
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_transitivity_avglocal_undirected(&g, &res, isolates));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_transitivity_local_undirected(SEXP graph, SEXP pvids,
-                                            SEXP pisolates) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_vector_t res;
-  SEXP result;
-  igraph_transitivity_mode_t isolates=REAL(pisolates)[0];
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_vector_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_transitivity_local_undirected(&g, &res, vs, isolates));
-
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_transitivity_barrat(SEXP graph, SEXP pvids,
-                                  SEXP pweights, SEXP pisolates) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_vector_t weights;
-  igraph_vector_t res;
-  SEXP result;
-  igraph_transitivity_mode_t isolates=REAL(pisolates)[0];
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  R_SEXP_to_vector(pweights, &weights);
-  igraph_vector_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_transitivity_barrat(&g, &res, vs, &weights, isolates));
-
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_transitivity_local_undirected_all(SEXP graph, SEXP pisolates) {
+SEXP R_igraph_transitivity_local_undirected_all(SEXP graph, SEXP mode) {
 
   igraph_t g;
   igraph_vector_t res;
   SEXP result;
-  igraph_transitivity_mode_t isolates=REAL(pisolates)[0];
+  igraph_transitivity_mode_t isolates = Rf_asInteger(mode);
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_init(&res, 0);
+  IGRAPH_R_CHECK(igraph_vector_init(&res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &res);
+
   IGRAPH_R_CHECK(igraph_transitivity_local_undirected(&g, &res, igraph_vss_all(), isolates));
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
   igraph_vector_copy_to(&res, REAL(result));
   igraph_vector_destroy(&res);
+  IGRAPH_FINALLY_CLEAN(1);
 
   UNPROTECT(1);
   return result;

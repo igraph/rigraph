@@ -1331,16 +1331,16 @@ transitivity <- function(graph, type = c(
   ensure_igraph(graph)
   type <- igraph.match.arg(type)
   type <- switch(type,
-    "undirected" = 0,
-    "global" = 0,
-    "globalundirected" = 0,
-    "localundirected" = 1,
-    "local" = 1,
-    "average" = 2,
-    "localaverage" = 2,
-    "localaverageundirected" = 2,
-    "barrat" = 3,
-    "weighted" = 3
+    "undirected" = 0L,
+    "global" = 0L,
+    "globalundirected" = 0L,
+    "localundirected" = 1L,
+    "local" = 1L,
+    "average" = 2L,
+    "localaverage" = 2L,
+    "localaverageundirected" = 2L,
+    "barrat" = 3L,
+    "weighted" = 3L
   )
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
