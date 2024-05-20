@@ -1382,6 +1382,42 @@ SEXP R_igraph_forest_fire_game(SEXP nodes, SEXP fw_prob, SEXP bw_factor, SEXP am
 }
 
 /*-------------------------------------------/
+/ igraph_simple_interconnected_islands_game  /
+/-------------------------------------------*/
+SEXP R_igraph_simple_interconnected_islands_game(SEXP islands_n, SEXP islands_size, SEXP islands_pin, SEXP n_inter) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_islands_n;
+  igraph_integer_t c_islands_size;
+  igraph_real_t c_islands_pin;
+  igraph_integer_t c_n_inter;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(islands_n);
+  c_islands_n = (igraph_integer_t) REAL(islands_n)[0];
+  IGRAPH_R_CHECK_INT(islands_size);
+  c_islands_size = (igraph_integer_t) REAL(islands_size)[0];
+  IGRAPH_R_CHECK_REAL(islands_pin);
+  c_islands_pin = REAL(islands_pin)[0];
+  IGRAPH_R_CHECK_INT(n_inter);
+  c_n_inter = (igraph_integer_t) REAL(n_inter)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_simple_interconnected_islands_game(&c_graph, c_islands_n, c_islands_size, c_islands_pin, c_n_inter));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_static_fitness_game                 /
 /-------------------------------------------*/
 SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitness_in, SEXP loops, SEXP multiple) {

@@ -245,7 +245,6 @@ igraph_forest_fire_game:
         GATTR-PARAM: fw_prob, bw_factor, ambs
 
 igraph_simple_interconnected_islands_game:
-    IGNORE: RC
     R:
         GATTR:
           name: Interconnected islands model

@@ -8276,23 +8276,6 @@ SEXP R_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
   return(result);
 }
 
-SEXP R_igraph_simple_interconnected_islands_game(SEXP islands_n, SEXP islands_size, SEXP islands_pin, SEXP n_inter) {
-
-  igraph_t g;
-  igraph_integer_t a=REAL(islands_n)[0];
-  igraph_integer_t b=REAL(islands_size)[0];
-  igraph_real_t c=REAL(islands_pin)[0];
-  igraph_integer_t d=REAL(n_inter)[0];
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_simple_interconnected_islands_game(&g, a, b, c, d));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
                                    SEXP pwhich) {
   /* Declarations */
