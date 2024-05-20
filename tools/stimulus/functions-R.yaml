@@ -122,7 +122,7 @@ igraph_full_citation:
         name: Full citation graph
 
 igraph_atlas:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_extended_chordal_ring:
     IGNORE: RR
@@ -133,13 +133,13 @@ igraph_connect_neighborhood:
 igraph_graph_power:
 
 igraph_linegraph:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_de_bruijn:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_kautz:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_famous:
     IGNORE: RR, RC

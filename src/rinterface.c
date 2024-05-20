@@ -538,6 +538,33 @@ SEXP R_igraph_full_citation(SEXP n, SEXP directed) {
 }
 
 /*-------------------------------------------/
+/ igraph_atlas                               /
+/-------------------------------------------*/
+SEXP R_igraph_atlas(SEXP number) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_number;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(number);
+  c_number = (igraph_integer_t) REAL(number)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_atlas(&c_graph, c_number));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_extended_chordal_ring               /
 /-------------------------------------------*/
 SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
@@ -599,6 +626,92 @@ SEXP R_igraph_graph_power(SEXP graph, SEXP order, SEXP directed) {
   IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_linegraph                           /
+/-------------------------------------------*/
+SEXP R_igraph_linegraph(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_t c_linegraph;
+  SEXP linegraph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_linegraph(&c_graph, &c_linegraph));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_linegraph);
+  PROTECT(linegraph=R_igraph_to_SEXP(&c_linegraph));
+  IGRAPH_I_DESTROY(&c_linegraph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = linegraph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_de_bruijn                           /
+/-------------------------------------------*/
+SEXP R_igraph_de_bruijn(SEXP m, SEXP n) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_m;
+  igraph_integer_t c_n;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_de_bruijn(&c_graph, c_m, c_n));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_kautz                               /
+/-------------------------------------------*/
+SEXP R_igraph_kautz(SEXP m, SEXP n) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_m;
+  igraph_integer_t c_n;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_kautz(&c_graph, c_m, c_n));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);

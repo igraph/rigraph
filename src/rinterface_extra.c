@@ -5487,20 +5487,6 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   return result;
 }
 
-SEXP R_igraph_atlas(SEXP pno) {
-
-  igraph_integer_t no = (igraph_integer_t) REAL(pno)[0];
-  igraph_t g;
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_atlas(&g, no));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_layout_random_3d(SEXP graph) {
 
   igraph_t g;
@@ -7344,50 +7330,6 @@ SEXP R_igraph_girth(SEXP graph, SEXP pcircle) {
   SET_NAMES(result, names);
 
   UNPROTECT(2);
-  return result;
-}
-
-SEXP R_igraph_linegraph(SEXP graph) {
-
-  igraph_t g, lg;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_linegraph(&g, &lg));
-  PROTECT(result=R_igraph_to_SEXP(&lg));
-  IGRAPH_I_DESTROY(&lg);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_de_bruijn(SEXP pm, SEXP pn) {
-
-  igraph_t g;
-  igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_de_bruijn(&g, m, n));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_kautz(SEXP pm, SEXP pn) {
-
-  igraph_t g;
-  igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_kautz(&g, m, n));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
   return result;
 }
 
