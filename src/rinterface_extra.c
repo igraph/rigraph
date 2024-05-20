@@ -7342,8 +7342,10 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
   igraph_vector_int_t membership;
   SEXP result;
 
-  R_SEXP_to_matrix_int(pmerges, &merges);
-  igraph_vector_int_init(&membership, 0);
+  IGRAPH_R_CHECK(R_SEXP_to_matrix_int(pmerges, &merges));
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &merges);
+
+  IGRAPH_R_CHECK(igraph_vector_int_init(&membership, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &membership);
 
   IGRAPH_R_CHECK(igraph_community_to_membership(&merges, vcount, steps, &membership, 0));
@@ -7351,7 +7353,7 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
 
   igraph_matrix_int_destroy(&merges);
   igraph_vector_int_destroy(&membership);
-  IGRAPH_FINALLY_CLEAN(1);
+  IGRAPH_FINALLY_CLEAN(2);
 
   UNPROTECT(1);
   return result;
