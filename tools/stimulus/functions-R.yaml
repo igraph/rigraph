@@ -1117,13 +1117,13 @@ igraph_write_graph_dot:
 #######################################
 
 igraph_motifs_randesu:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_estimate:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_no:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_dyad_census:
 

@@ -8852,6 +8852,113 @@ SEXP R_igraph_to_undirected(SEXP graph, SEXP mode, SEXP edge_attr_comb) {
 }
 
 /*-------------------------------------------/
+/ igraph_motifs_randesu                      /
+/-------------------------------------------*/
+SEXP R_igraph_motifs_randesu(SEXP graph, SEXP size, SEXP cut_prob) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_hist;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+  SEXP hist;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_hist, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_hist);
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  R_SEXP_to_vector(cut_prob, &c_cut_prob);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_motifs_randesu(&c_graph, &c_hist, c_size, &c_cut_prob));
+
+                                        /* Convert output */
+  PROTECT(hist=R_igraph_vector_to_SEXP(&c_hist));
+  igraph_vector_destroy(&c_hist);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = hist;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_motifs_randesu_estimate             /
+/-------------------------------------------*/
+SEXP R_igraph_motifs_randesu_estimate(SEXP graph, SEXP size, SEXP cut_prob, SEXP sample_size, SEXP sample) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_est;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+  igraph_integer_t c_sample_size;
+  igraph_vector_int_t c_sample;
+  SEXP est;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_est=0;
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  R_SEXP_to_vector(cut_prob, &c_cut_prob);
+  IGRAPH_R_CHECK_INT(sample_size);
+  c_sample_size = (igraph_integer_t) REAL(sample_size)[0];
+  if (!Rf_isNull(sample)) {
+    R_SEXP_to_vector_int_copy(sample, &c_sample);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_sample);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_sample, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_sample);
+  }
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_motifs_randesu_estimate(&c_graph, &c_est, c_size, &c_cut_prob, c_sample_size, (Rf_isNull(sample) ? 0 : &c_sample)));
+
+                                        /* Convert output */
+  PROTECT(est=NEW_NUMERIC(1));
+  REAL(est)[0]=(double) c_est;
+  igraph_vector_int_destroy(&c_sample);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = est;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_motifs_randesu_no                   /
+/-------------------------------------------*/
+SEXP R_igraph_motifs_randesu_no(SEXP graph, SEXP size, SEXP cut_prob) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_no;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+  SEXP no;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_no=0;
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  R_SEXP_to_vector(cut_prob, &c_cut_prob);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_motifs_randesu_no(&c_graph, &c_no, c_size, &c_cut_prob));
+
+                                        /* Convert output */
+  PROTECT(no=NEW_NUMERIC(1));
+  REAL(no)[0]=(double) c_no;
+  r_result = no;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_dyad_census                         /
 /-------------------------------------------*/
 SEXP R_igraph_dyad_census(SEXP graph) {
