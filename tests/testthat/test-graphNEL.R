@@ -19,7 +19,7 @@ test_that("graphNEL conversion works", {
 
   N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
-  expect_true(graph.isomorphic(g, g2))
+  expect_isomorphic(g, g2)
   expect_that(V(g)$name, equals(V(g2)$name))
 
   A <- as_adj(g, attr = "weight", sparse = FALSE)

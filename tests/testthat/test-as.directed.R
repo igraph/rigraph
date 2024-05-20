@@ -10,10 +10,10 @@ test_that("as.directed works", {
   expect_that(degree(g), equals(degree(g4)))
   expect_that(degree(g), equals(degree(g5)))
 
-  expect_true(graph.isomorphic(g, as.undirected(g2)))
-  expect_true(graph.isomorphic(g, as.undirected(g3)))
-  expect_true(graph.isomorphic(g, as.undirected(g4)))
-  expect_true(graph.isomorphic(g, as.undirected(g5)))
+  expect_isomorphic(g, as.undirected(g2))
+  expect_isomorphic(g, as.undirected(g3))
+  expect_isomorphic(g, as.undirected(g4))
+  expect_isomorphic(g, as.undirected(g5))
 })
 
 test_that("as.directed keeps attributes", {
