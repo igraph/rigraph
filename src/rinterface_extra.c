@@ -4089,35 +4089,6 @@ SEXP R_igraph_subcomponent(SEXP graph, SEXP pvertex, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_betweenness(SEXP graph, SEXP pvids, SEXP pdirected,
-                          SEXP weights) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_vector_t res;
-  igraph_vector_t v_weights, *pweights=0;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_vector_init(&res, 0);
-  if (!Rf_isNull(weights)) {
-    pweights=&v_weights; R_SEXP_to_vector(weights, &v_weights);
-  }
-  IGRAPH_R_CHECK(igraph_betweenness(&g, &res, vs, directed, pweights));
-
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_running_mean(SEXP pdata, SEXP pbinwidth) {
 
   igraph_vector_t data;
