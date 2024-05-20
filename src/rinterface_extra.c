@@ -4288,32 +4288,6 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   return result;
 }
 
-SEXP R_igraph_recent_degree_game(SEXP pn, SEXP ppower, SEXP pwindow,
-                                 SEXP pm, SEXP poutseq, SEXP poutpref,
-                                 SEXP pzero_appeal,
-                                 SEXP pdirected) {
-  igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  igraph_real_t power=REAL(ppower)[0];
-  igraph_integer_t window=(igraph_integer_t) REAL(pwindow)[0];
-  igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_vector_int_t outseq;
-  igraph_bool_t outpref=LOGICAL(poutpref)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_real_t zero_appeal=REAL(pzero_appeal)[0];
-  SEXP result;
-
-  R_SEXP_to_vector_int_copy(poutseq, &outseq);
-
-  IGRAPH_R_CHECK(igraph_recent_degree_game(&g, n, power, window, m, &outseq, outpref, zero_appeal, directed));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_vector_int_destroy(&outseq);
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
                                           SEXP niter, SEXP start_temp,
                                           SEXP weights,
