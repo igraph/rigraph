@@ -1268,6 +1268,18 @@ reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c("default", "ratio"
   res
 }
 
+density_impl <- function(graph, loops=FALSE) {
+  # Argument checks
+  ensure_igraph(graph)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_density, graph, loops)
+
+  res
+}
+
 mean_degree_impl <- function(graph, loops=TRUE) {
   # Argument checks
   ensure_igraph(graph)

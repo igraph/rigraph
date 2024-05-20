@@ -3830,6 +3830,33 @@ SEXP R_igraph_reciprocity(SEXP graph, SEXP ignore_loops, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_density                             /
+/-------------------------------------------*/
+SEXP R_igraph_density(SEXP graph, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_real_t c_res;
+  igraph_bool_t c_loops;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_density(&c_graph, &c_res, c_loops));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_NUMERIC(1));
+  REAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_mean_degree                         /
 /-------------------------------------------*/
 SEXP R_igraph_mean_degree(SEXP graph, SEXP loops) {

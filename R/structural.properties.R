@@ -1540,12 +1540,7 @@ reciprocity <- reciprocity_impl
 #' edge_density(g, loops = TRUE) # this is right!!!
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
-edge_density <- function(graph, loops = FALSE) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_density, graph, as.logical(loops))
-}
+edge_density <- density_impl
 
 #' @rdname ego
 #' @export

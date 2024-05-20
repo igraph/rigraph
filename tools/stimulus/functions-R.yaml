@@ -481,7 +481,6 @@ igraph_maxdegree:
     IGNORE: RR, RC, RInit
 
 igraph_density:
-    IGNORE: RR, RC
 
 igraph_neighborhood_size:
     IGNORE: RR, RC, RInit
