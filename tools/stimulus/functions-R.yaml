@@ -804,10 +804,10 @@ igraph_independence_number:
 #######################################
 
 igraph_layout_random:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_circle:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_star:
     IGNORE: RR
@@ -837,10 +837,10 @@ igraph_layout_reingold_tilford_circular:
 igraph_roots_for_tree_layout:
 
 igraph_layout_random_3d:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_sphere:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_fruchterman_reingold_3d:
     IGNORE: RR, RC, RInit

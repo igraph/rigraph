@@ -4782,43 +4782,6 @@ SEXP R_igraph_kary_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_layout_random(SEXP graph) {
-
-  igraph_t g;
-  igraph_matrix_t res;
-  SEXP result=R_NilValue;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_matrix_init(&res, 0, 0);
-  IGRAPH_R_CHECK(igraph_layout_random(&g, &res));
-  PROTECT(result=R_igraph_matrix_to_SEXP(&res));
-  igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_layout_circle(SEXP graph, SEXP porder) {
-
-  igraph_t g;
-  igraph_matrix_t res;
-  igraph_vs_t order;
-  igraph_vector_int_t order_data;
-  SEXP result=R_NilValue;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_matrix_init(&res, 0, 0);
-  R_SEXP_to_igraph_vs(porder, &g, &order, &order_data);
-  IGRAPH_R_CHECK(igraph_layout_circle(&g, &res, order));
-  igraph_vector_int_destroy(&order_data);
-  igraph_vs_destroy(&order);
-  PROTECT(result=R_igraph_matrix_to_SEXP(&res));
-  igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
 
   igraph_t g;
@@ -5374,38 +5337,6 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   UNPROTECT(1);
   IGRAPH_FINALLY_CLEAN(1);
 
-  return result;
-}
-
-SEXP R_igraph_layout_random_3d(SEXP graph) {
-
-  igraph_t g;
-  igraph_matrix_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_matrix_init(&res, 0, 0);
-  IGRAPH_R_CHECK(igraph_layout_random_3d(&g, &res));
-  PROTECT(result=R_igraph_matrix_to_SEXP(&res));
-  igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_layout_sphere(SEXP graph) {
-
-  igraph_t g;
-  igraph_matrix_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_matrix_init(&res, 0, 0);
-  IGRAPH_R_CHECK(igraph_layout_sphere(&g, &res));
-  PROTECT(result=R_igraph_matrix_to_SEXP(&res));
-  igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
   return result;
 }
 
