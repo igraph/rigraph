@@ -4153,24 +4153,6 @@ SEXP R_igraph_bibcoupling(SEXP graph, SEXP pvids) {
   return result;
 }
 
-SEXP R_igraph_growing_random_game(SEXP pn, SEXP pm, SEXP pdirected,
-                                  SEXP pcitation) {
-
-  igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_bool_t citation=LOGICAL(pcitation)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_growing_random_game(&g, n, m, directed, citation));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 /* igraph_shortest_paths_johnson() does not have a 'mode' argument in C/igraph 0.9 and 0.10.
  * This function fills in this functionality. It should be removed when C/igraph is updated,
  * to version 0.11 where igraph_distances_johnson() does support 'mode'. */

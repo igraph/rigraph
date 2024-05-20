@@ -192,7 +192,13 @@ igraph_degree_sequence_game:
     IGNORE: RR, RC
 
 igraph_growing_random_game:
-    IGNORE: RR, RC
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, INTEGER m=1, BOOLEAN directed=True,
+        BOOLEAN citation=False
+    R:
+        GATTR:
+          name: Growing random graph
+        GATTR-PARAM: m, citation
 
 igraph_barabasi_aging_game:
     IGNORE: RR, RC
