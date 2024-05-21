@@ -319,7 +319,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
   SEXP result, names, gal;
   int px = 0;
 
-  result=NEW_LIST(4);
+  result=PROTECT(NEW_LIST(4));
   // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
   R_igraph_attribute_add_to_preserve_list(result);
@@ -338,6 +338,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
     SET_VECTOR_ELT(result, i, attr); /* gal, val, eal */
     UNPROTECT(1);
   }
+  UNPROTECT(1);
   graph->attr=result;
 
   /* Add graph attributes */
@@ -525,8 +526,10 @@ void R_igraph_attribute_add_vertices_append(SEXP val, igraph_integer_t nv,
 }
 
 SEXP R_igraph_attribute_add_vertices_dup(SEXP attr) {
-  SEXP newattr=Rf_duplicate(attr);
+  SEXP newattr;
+  PROTECT(newattr=Rf_duplicate(attr));
   R_igraph_attribute_add_to_preserve_list(newattr);
+  UNPROTECT(1);
   return newattr;
 }
 
@@ -667,8 +670,9 @@ igraph_error_t R_igraph_attribute_permute_vertices_same(const igraph_t *graph,
   SEXP ss;
   int px = 0;
 
-  SEXP newattr = Rf_duplicate(attr);
+  SEXP newattr = PROTECT(Rf_duplicate(attr));
   R_igraph_attribute_add_to_preserve_list(newattr);
+  UNPROTECT(1);
   attr=newgraph->attr=newattr;
 
   val=VECTOR_ELT(attr,2);
@@ -754,8 +758,10 @@ igraph_error_t R_igraph_attribute_permute_vertices(const igraph_t *graph,
 }
 
 SEXP R_igraph_attribute_add_edges_dup(SEXP attr) {
-  SEXP newattr=Rf_duplicate(attr);
+  SEXP newattr;
+  PROTECT(newattr=Rf_duplicate(attr));
   R_igraph_attribute_add_to_preserve_list(newattr);
+  UNPROTECT(1);
   return newattr;
 }
 
@@ -977,8 +983,9 @@ igraph_error_t R_igraph_attribute_permute_edges_same(const igraph_t *graph,
   SEXP ss;
   int px = 0;
 
-  SEXP newattr=Rf_duplicate(attr);
+  SEXP newattr=PROTECT(Rf_duplicate(attr));
   R_igraph_attribute_add_to_preserve_list(newattr);
+  UNPROTECT(1);
   attr=newgraph->attr=newattr;
 
   eal=VECTOR_ELT(attr,3);
