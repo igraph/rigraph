@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9017
+
+## Bug fixes
+
+- Comment failing ci (#1357).
+
+## Testing
+
+- Refactoring around `interface.R` (#1366).
+
+## Uncategorized
+
+- Fix `%\>%` typo in vignettes (#1343).
+
+
 # igraph 2.0.3.9016
 
 ## doc
