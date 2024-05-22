@@ -193,8 +193,8 @@ igraph_degree_sequence_game:
 
 igraph_growing_random_game:
     PARAMS: |-
-        OUT GRAPH graph, INTEGER n, INTEGER m=1, BOOLEAN directed=True,
-        BOOLEAN citation=False
+        OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
+        BOOLEAN directed=True, BOOLEAN citation=False
     R:
         GATTR:
           name: Growing random graph

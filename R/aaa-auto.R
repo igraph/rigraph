@@ -326,8 +326,9 @@ erdos_renyi_game_gnm_impl <- function(n, m, directed=FALSE, loops=FALSE) {
   res
 }
 
-growing_random_game_impl <- function(n, m=1, directed=TRUE, citation=FALSE) {
+growing_random_game_impl <- function(n, m=1, ..., directed=TRUE, citation=FALSE) {
   # Argument checks
+  check_dots_empty()
   n <- as.numeric(n)
   m <- as.numeric(m)
   directed <- as.logical(directed)
