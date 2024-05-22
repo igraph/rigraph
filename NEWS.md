@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9018
+
+## Bug fixes
+
+- Fixed potential memory leak in `R_igraph_community_to_membership2()` (#1367).
+
+
 # igraph 2.0.3.9017
 
 ## Bug fixes
