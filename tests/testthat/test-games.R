@@ -108,7 +108,7 @@ test_that("sample_degseq() works -- configuration.simple", {
 })
 
 test_that("sample_degseq() works -- edge.switching.simple", {
-  g <- sample_gnp(1000, 1 / 1000)
+  g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
   simple_switch_graph <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
     method = "edge.switching.simple"
