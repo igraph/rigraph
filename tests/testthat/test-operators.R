@@ -4,20 +4,20 @@ test_that("operators work", {
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
-  expect_that(vcount(gu), equals(11))
-  expect_that(ecount(gu), equals(20))
-  expect_that(
+  expect_equal(vcount(gu), 11)
+  expect_equal(ecount(gu), 20)
+  expect_equal(
     o(rbind(as_edgelist(g1), as_edgelist(g2))),
-    equals(o(as_edgelist(gu)))
+    o(as_edgelist(gu))
   )
 
   gdu <- disjoint_union(g1, g2)
-  expect_that(
+  expect_equal(
     o(as_edgelist(gdu)),
-    equals(o(rbind(
+    o(rbind(
       as_edgelist(g1),
       as_edgelist(g2) + vcount(g1)
-    )))
+    ))
   )
 
   ####
@@ -43,9 +43,9 @@ test_that("operators work", {
   ####
 
   gc <- compose(gu, g1)
-  expect_that(vcount(gc), equals(11))
-  expect_that(ecount(gc), equals(60))
-  expect_that(diameter(gc), equals(2))
+  expect_equal(vcount(gc), 11)
+  expect_equal(ecount(gc), 60)
+  expect_equal(diameter(gc), 2)
 })
 
 test_that("Union of directed named graphs", {
@@ -76,20 +76,20 @@ test_that("edge reversal works", {
   # all edges
   g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
   g2 <- reverse_edges(g)
-  expect_that(vcount(g2), equals(vcount(g)))
-  expect_that(as_edgelist(g2), equals(as_edgelist(g)[, c(2, 1)]))
+  expect_equal(vcount(g2), vcount(g))
+  expect_equal(as_edgelist(g2), as_edgelist(g)[, c(2, 1)])
 
   # graph with isolated vertices
   g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
   g2 <- reverse_edges(g)
-  expect_that(vcount(g2), equals(vcount(g)))
-  expect_that(as_edgelist(g2), equals(as_edgelist(g)[, c(2, 1)]))
+  expect_equal(vcount(g2), vcount(g))
+  expect_equal(as_edgelist(g2), as_edgelist(g)[, c(2, 1)])
 })
 
 test_that("t() is aliased to edge reversal for graphs", {
   g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
-  expect_that(vcount(t(g)), equals(vcount(g)))
-  expect_that(as_edgelist(t(g)), equals(as_edgelist(g)[, c(2, 1)]))
+  expect_equal(vcount(t(g)), vcount(g))
+  expect_equal(as_edgelist(t(g)), as_edgelist(g)[, c(2, 1)])
 })
 
 test_that("vertices() works", {
