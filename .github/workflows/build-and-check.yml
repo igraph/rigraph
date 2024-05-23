@@ -164,7 +164,7 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, graph=?ignore
           needs: check
 
       - name: Check R package
@@ -205,6 +205,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           needs: coverage
+          extra-packages: graph=?ignore
           pak-version: devel
 
       - name: Run coverage
