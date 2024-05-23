@@ -34,7 +34,7 @@ test_that("is_symmetric() works for amat", {
     class = "amat",
     type = "cpdag"
   )
-  expect_false(is_symmetric())
+  expect_false(is_symmetric(asym))
 })
 
 test_that("graph_from_adjacency_matrix() works", {
