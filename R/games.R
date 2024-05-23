@@ -752,7 +752,7 @@ random.graph.game <- erdos.renyi.game
 #' It is often useful to create a graph with given vertex degrees. This function
 #' creates such a graph in a randomized manner.
 #'
-#' The \dQuote{simple} method connects the out-stubs of the edges (undirected
+#' The \dQuote{configuration} method (formerly called "simple") connects the out-stubs of the edges (undirected
 #' graphs) or the out-stubs and in-stubs (directed graphs) together. This way
 #' loop edges and also multiple edges may be generated. This method is not
 #' adequate if one needs to generate simple graphs with a given degree
@@ -760,15 +760,17 @@ random.graph.game <- erdos.renyi.game
 #' sequence is distorted and there is nothing to ensure that the graphs are
 #' sampled uniformly.
 #'
-#' The \dQuote{simple.no.multiple} method is similar to \dQuote{simple}, but
+#' The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple")
+#'  is similar to \dQuote{configuration}, but
 #' tries to avoid multiple and loop edges and restarts the generation from
 #' scratch if it gets stuck. It is not guaranteed to sample uniformly from the
 #' space of all possible graphs with the given sequence, but it is relatively
 #' fast and it will eventually succeed if the provided degree sequence is
 #' graphical, but there is no upper bound on the number of iterations.
 #'
-#' The \dQuote{simple.no.multiple.uniform} method is a variant of
-#' \dQuote{simple.no.multiple} with the added benefit of sampling uniformly
+#' The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform")
+#' is a variant of
+#' \dQuote{fast.heur.simple} with the added benefit of sampling uniformly
 #' from the set of all possible simple graphs with the given degree sequence.
 #' Ensuring uniformity has some performance implications, though.
 #'
@@ -782,15 +784,16 @@ random.graph.game <- erdos.renyi.game
 #' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
 #' undirected, connected simple graphs uniformly.
 #'
+#' The \dQuote{edge.switching.simple} is an MCMC sampler based on
+#' degree-preserving edge switches. It generates simple undirected or directed graphs.
+#'
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
 #'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 #'   should be even. For directed graphs its sum should be the same as the sum of
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
-#' @param method Character, the method for generating the graph. Right now the
-#'   \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
-#'   implemented.
+#' @param method Character, the method for generating the graph. See Details.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso
@@ -909,13 +912,30 @@ random.graph.game <- erdos.renyi.game
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 sample_degseq <- function(out.deg, in.deg = NULL,
-                          method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
+                          method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")) {
   method <- igraph.match.arg(method)
+
+  if (method == "simple") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
+    method <- "configuration"
+  }
+
+  if (method == "simple.no.multiple") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
+    method <- "fast.heur.simple"
+  }
+
+  if (method == "simple.no.multiple.uniform") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
+    method <- "configuration.simple"
+  }
+
   method1 <- switch(method,
-    "simple" = 0,
+    "configuration" = 0,
     "vl" = 1,
-    "simple.no.multiple" = 2,
-    "simple.no.multiple.uniform" = 3
+    "fast.heur.simple" = 2,
+    "configuration.simple" = 3,
+    "edge.switching.simple" = 4 #TODO: check number and see where it comes from
   )
   if (!is.null(in.deg)) {
     in.deg <- as.numeric(in.deg)
