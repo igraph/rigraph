@@ -625,7 +625,7 @@ test_that("graph_from_adjacency_matrix() 2 edge bug is fixed", {
   A <- Matrix::Matrix(0, 10, 10, sparse = TRUE, doDiag = FALSE)
   A[3, 5] <- A[5, 3] <- 1
   g <- graph_from_adjacency_matrix(A, mode = "undirected")
-  expect_that(g[], equals(A))
+  expect_equal(g[], A)
 })
 
 test_that("graph_from_adjacency_matrix() empty graph bug is fixed", {
@@ -639,7 +639,7 @@ test_that("undirected, weighted, sparse constructor", {
   M <- Matrix::Matrix(0, 5, 5, doDiag = FALSE)
   M[1, 2] <- M[2, 1] <- M[3, 4] <- M[4, 3] <- 1
   g <- graph_from_adjacency_matrix(M, mode = "undirected", weighted = TRUE)
-  expect_that(g[], equals(M))
+  expect_equal(g[], M)
 })
 
 test_that("graph_from_adjacency_matrix works for sparse matrices without values", {
@@ -647,7 +647,7 @@ test_that("graph_from_adjacency_matrix works for sparse matrices without values"
   M <- Matrix::sparseMatrix(i = c(1, 3), j = c(3, 4), dims = c(5, 5))
   g <- graph_from_adjacency_matrix(M)
   M <- Matrix::sparseMatrix(i = c(1, 3), j = c(3, 4), dims = c(5, 5), x = 1)
-  expect_that(g[], equals(M))
+  expect_equal(g[], M)
 })
 
 
