@@ -6,64 +6,46 @@ test_that("assigning and querying attributes work", {
   expect_equal(E(ring)$weight, seq_len(ecount(ring)))
 })
 
-test_that("brackering works", {
+test_that("bracketing works (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
+
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
+  graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
+  graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+
   g <- set_graph_attr(g, name = "name", "foo")
-
-  graph2 <- set_vertex_attr(g,
-    name = "weight",
-    value = rep(1, vcount(g))
-  )
-  graph2 <- set_edge_attr(g,
-    name = "weight",
-    value = rep(1, ecount(g))
-  )
   graph2 <- set_graph_attr(g, name = "name", "foobar")
+  expect_equal(graph_attr(g, name = "name"), "foo")
 
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
 })
 
-test_that("brackering works with a function", {
+test_that("bracketing works with a function (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
+
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
   g <- set_graph_attr(g, name = "name", "foo")
 
-  run.test <- function(graph) {
-    graph2 <- set_vertex_attr(graph,
-      name = "weight",
-      value = rep(1, vcount(graph))
-    )
-    graph2 <- set_edge_attr(graph,
-      name = "weight",
-      value = rep(1, ecount(graph))
-    )
-    graph2 <- set_graph_attr(graph, name = "name", "foobar")
+  run.test <- function(g) {
+    graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
+    graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
+    graph2 <- set_graph_attr(g, name = "name", "foobar")
   }
 
   g2 <- run.test(g)
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
-test_that("brackering works with shortcuts", {
+test_that("bracketing works with shortcuts (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
@@ -76,15 +58,9 @@ test_that("brackering works with shortcuts", {
   }
 
   g2 <- run.test(g)
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 ## TODO: subsetting
