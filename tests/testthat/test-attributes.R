@@ -74,13 +74,14 @@ test_that("we can query all attributes at once", {
 
   g$name <- "toy"
   g$layout <- cbind(1:4, 1:4)
+  expect_equal(graph_attr(g), list(name = "toy", layout = cbind(1:4, 1:4)))
+
   V(g)$name <- letters[1:4]
   V(g)$color <- rainbow(4)
+  expect_equal(vertex_attr(g), list(name = letters[1:4], color = rainbow(4)))
+
   E(g)$weight <- 1:3
   E(g)$label <- LETTERS[1:3]
-
-  expect_equal(graph_attr(g), list(name = "toy", layout = cbind(1:4, 1:4)))
-  expect_equal(vertex_attr(g), list(name = letters[1:4], color = rainbow(4)))
   expect_equal(edge_attr(g), list(weight = 1:3, label = LETTERS[1:3]))
 })
 
