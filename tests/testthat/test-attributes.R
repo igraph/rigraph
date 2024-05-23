@@ -1,11 +1,9 @@
 test_that("assigning and querying attributes work", {
-  ## Create a small ring graph, assign attributes
   ring <- graph_from_literal(A - B - C - D - E - F - G - A)
   E(ring)$weight <- seq_len(ecount(ring))
 
-  ## Query attributes
-  expect_that(V(ring)$name, equals(LETTERS[seq_len(vcount(ring))]))
-  expect_that(E(ring)$weight, equals(seq_len(ecount(ring))))
+  expect_equal(V(ring)$name, LETTERS[seq_len(vcount(ring))])
+  expect_equal(E(ring)$weight, seq_len(ecount(ring)))
 })
 
 test_that("brackering works", {
