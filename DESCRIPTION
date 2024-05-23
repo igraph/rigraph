@@ -47,7 +47,6 @@ Suggests:
     callr,
     decor,
     digest,
-    graph,
     igraphdata,
     knitr,
     rgl,
@@ -58,6 +57,8 @@ Suggests:
     testthat,
     vdiffr,
     withr
+Enhances: 
+    graph
 LinkingTo: 
     cpp11 (>= 0.4.7)
 VignetteBuilder: 
