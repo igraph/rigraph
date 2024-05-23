@@ -24,6 +24,8 @@ cluster_leiden(
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
 \sQuote{weight} edge attribute, then that attribute will be used. If

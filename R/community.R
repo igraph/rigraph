@@ -1302,6 +1302,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   If this is not provided, it will be automatically determined on the basis
 #'   of the `objective_function`. Please see the details of this function
 #'   how to interpret the vertex weights.
+#' @inheritParams rlang::args_dots_empty
 #' @return `cluster_leiden()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
 #' @author Vincent Traag
@@ -1346,7 +1347,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft("1.5.0.9006",
+    lifecycle::deprecate_soft("2.0.3",
                               "cluster_leiden(resolution_parameter)",
                               "cluster_leiden(resolution)")
     resolution <- resolution_parameter
