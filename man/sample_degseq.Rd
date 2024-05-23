@@ -8,7 +8,8 @@
 sample_degseq(
   out.deg,
   in.deg = NULL,
-  method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")
+  method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
+    "edge.switching.simple")
 )
 
 degseq(..., deterministic = FALSE)
@@ -22,9 +23,7 @@ should be even. For directed graphs its sum should be the same as the sum of
 \item{in.deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
-\item{method}{Character, the method for generating the graph. Right now the
-\dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
-implemented.}
+\item{method}{Character, the method for generating the graph. See Details.}
 
 \item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
 or to \code{sample_degseq()} otherwise.}
@@ -39,7 +38,7 @@ It is often useful to create a graph with given vertex degrees. This function
 creates such a graph in a randomized manner.
 }
 \details{
-The \dQuote{simple} method connects the out-stubs of the edges (undirected
+The \dQuote{configuration} method (formerly called "simple") connects the out-stubs of the edges (undirected
 graphs) or the out-stubs and in-stubs (directed graphs) together. This way
 loop edges and also multiple edges may be generated. This method is not
 adequate if one needs to generate simple graphs with a given degree
@@ -47,15 +46,17 @@ sequence. The multiple and loop edges can be deleted, but then the degree
 sequence is distorted and there is nothing to ensure that the graphs are
 sampled uniformly.
 
-The \dQuote{simple.no.multiple} method is similar to \dQuote{simple}, but
+The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple")
+is similar to \dQuote{configuration}, but
 tries to avoid multiple and loop edges and restarts the generation from
 scratch if it gets stuck. It is not guaranteed to sample uniformly from the
 space of all possible graphs with the given sequence, but it is relatively
 fast and it will eventually succeed if the provided degree sequence is
 graphical, but there is no upper bound on the number of iterations.
 
-The \dQuote{simple.no.multiple.uniform} method is a variant of
-\dQuote{simple.no.multiple} with the added benefit of sampling uniformly
+The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform")
+is a variant of
+\dQuote{fast.heur.simple} with the added benefit of sampling uniformly
 from the set of all possible simple graphs with the given degree sequence.
 Ensuring uniformity has some performance implications, though.
 
@@ -68,6 +69,9 @@ with the given degree sequence (if this is possible at all). Then some
 rewiring is done to make the graph connected. Finally a Monte-Carlo
 algorithm is used to randomize the graph. The \dQuote{vl} samples from the
 undirected, connected simple graphs uniformly.
+
+The \dQuote{edge.switching.simple} is an MCMC sampler based on
+degree-preserving edge switches. It generates simple undirected or directed graphs.
 }
 \examples{
 
