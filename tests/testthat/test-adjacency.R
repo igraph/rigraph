@@ -657,7 +657,7 @@ test_that("weighted graph_from_adjacency_matrix() works on integer matrices", {
   expect_equal(as.matrix(g[]), data)
 })
 
-test_that("graph_from_adjacency_matrix works", {
+test_that("graph_from_adjacency_matrix() works", {
   M1 <- rbind(
     c(0, 0, 1, 1),
     c(1, 0, 0, 0),
@@ -921,7 +921,7 @@ test_that("graph_from_adjacency_matrix works", {
   )
 })
 
-test_that("graph_from_adjacency_matrix works", {
+test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
   skip_if_not_installed("Matrix")
 
   M1 <- rbind(
@@ -1241,20 +1241,21 @@ test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
   })
 })
 
-test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
+test_that("graph_from_adjacency_matrix() 2 edge bug is fixed", {
   A <- Matrix::Matrix(0, 10, 10, sparse = TRUE, doDiag = FALSE)
   A[3, 5] <- A[5, 3] <- 1
   g <- graph_from_adjacency_matrix(A, mode = "undirected")
   expect_that(g[], equals(A))
 })
 
-test_that("graph_from_adjacency_matrix empty graph bug is fixed", {
+test_that("graph_from_adjacency_matrix() empty graph bug is fixed", {
   A <- Matrix::Matrix(0, 10, 10, sparse = TRUE, doDiag = FALSE)
   g <- graph_from_adjacency_matrix(A, mode = "undirected")
   expect_equal(ignore_attr = TRUE, as.matrix(g[]), as.matrix(A))
 })
 
-test_that("bug #554 is fixed", {
+test_that("undirected, weighted, sparse constructor", {
+  # https://github.com/igraph/igraph/issues/554
   M <- Matrix::Matrix(0, 5, 5, doDiag = FALSE)
   M[1, 2] <- M[2, 1] <- M[3, 4] <- M[4, 3] <- 1
   g <- graph_from_adjacency_matrix(M, mode = "undirected", weighted = TRUE)
@@ -1270,7 +1271,7 @@ test_that("graph_from_adjacency_matrix works for sparse matrices without values"
 })
 
 
-test_that("weighted graph_from_adjacency_matrix works on integer matrices", {
+test_that("weighted graph_from_adjacency_matrix() works on integer matrices", {
   data <- matrix(c(0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0), 4)
   g <- graph_from_adjacency_matrix(data, weighted = TRUE)
   expect_that(as.matrix(g[]), is_equivalent_to(data))
