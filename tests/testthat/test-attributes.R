@@ -1,38 +1,22 @@
 test_that("assigning and querying attributes work", {
-  ## Create a small ring graph, assign attributes
   ring <- graph_from_literal(A - B - C - D - E - F - G - A)
   E(ring)$weight <- seq_len(ecount(ring))
 
-  ## Query attributes
-  expect_that(V(ring)$name, equals(LETTERS[seq_len(vcount(ring))]))
-  expect_that(E(ring)$weight, equals(seq_len(ecount(ring))))
+  expect_equal(V(ring)$name, LETTERS[seq_len(vcount(ring))])
+  expect_equal(E(ring)$weight, seq_len(ecount(ring)))
 })
 
 test_that("brackering works", {
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
+
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+
   g <- set_graph_attr(g, name = "name", "foo")
-
-  graph2 <- set_vertex_attr(g,
-    name = "weight",
-    value = rep(1, vcount(g))
-  )
-  graph2 <- set_edge_attr(g,
-    name = "weight",
-    value = rep(1, ecount(g))
-  )
-  graph2 <- set_graph_attr(g, name = "name", "foobar")
-
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 test_that("brackering works with a function", {
