@@ -1,71 +1,51 @@
 test_that("assigning and querying attributes work", {
-  ## Create a small ring graph, assign attributes
   ring <- graph_from_literal(A - B - C - D - E - F - G - A)
   E(ring)$weight <- seq_len(ecount(ring))
 
-  ## Query attributes
-  expect_that(V(ring)$name, equals(LETTERS[seq_len(vcount(ring))]))
-  expect_that(E(ring)$weight, equals(seq_len(ecount(ring))))
+  expect_equal(V(ring)$name, LETTERS[seq_len(vcount(ring))])
+  expect_equal(E(ring)$weight, seq_len(ecount(ring)))
 })
 
-test_that("brackering works", {
+test_that("bracketing works (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
-  g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
-  g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
-  g <- set_graph_attr(g, name = "name", "foo")
 
-  graph2 <- set_vertex_attr(g,
-    name = "weight",
-    value = rep(1, vcount(g))
-  )
-  graph2 <- set_edge_attr(g,
-    name = "weight",
-    value = rep(1, ecount(g))
-  )
+  g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
+  graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+
+  g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
+  graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+
+  g <- set_graph_attr(g, name = "name", "foo")
   graph2 <- set_graph_attr(g, name = "name", "foobar")
+  expect_equal(graph_attr(g, name = "name"), "foo")
 
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
 })
 
-test_that("brackering works with a function", {
+test_that("bracketing works with a function (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
+
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
   g <- set_graph_attr(g, name = "name", "foo")
 
-  run.test <- function(graph) {
-    graph2 <- set_vertex_attr(graph,
-      name = "weight",
-      value = rep(1, vcount(graph))
-    )
-    graph2 <- set_edge_attr(graph,
-      name = "weight",
-      value = rep(1, ecount(graph))
-    )
-    graph2 <- set_graph_attr(graph, name = "name", "foobar")
+  run.test <- function(g) {
+    graph2 <- set_vertex_attr(g, name = "weight", value = rep(1, vcount(g)))
+    graph2 <- set_edge_attr(g, name = "weight", value = rep(1, ecount(g)))
+    graph2 <- set_graph_attr(g, name = "name", "foobar")
   }
 
   g2 <- run.test(g)
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
-test_that("brackering works with shortcuts", {
+test_that("bracketing works with shortcuts (not changing attribute of similar graphs)", {
+  # https://github.com/igraph/igraph/issues/533
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
@@ -78,15 +58,9 @@ test_that("brackering works with shortcuts", {
   }
 
   g2 <- run.test(g)
-  expect_that(
-    vertex_attr(g, name = "weight"),
-    equals(1:4)
-  )
-  expect_that(
-    edge_attr(g, name = "weight"),
-    equals(1:3)
-  )
-  expect_that(graph_attr(g, name = "name"), equals("foo"))
+  expect_equal(vertex_attr(g, name = "weight"), 1:4)
+  expect_equal(edge_attr(g, name = "weight"), 1:3)
+  expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
 ## TODO: subsetting
@@ -100,13 +74,14 @@ test_that("we can query all attributes at once", {
 
   g$name <- "toy"
   g$layout <- cbind(1:4, 1:4)
+  expect_equal(graph_attr(g), list(name = "toy", layout = cbind(1:4, 1:4)))
+
   V(g)$name <- letters[1:4]
   V(g)$color <- rainbow(4)
+  expect_equal(vertex_attr(g), list(name = letters[1:4], color = rainbow(4)))
+
   E(g)$weight <- 1:3
   E(g)$label <- LETTERS[1:3]
-
-  expect_equal(graph_attr(g), list(name = "toy", layout = cbind(1:4, 1:4)))
-  expect_equal(vertex_attr(g), list(name = letters[1:4], color = rainbow(4)))
   expect_equal(edge_attr(g), list(weight = 1:3, label = LETTERS[1:3]))
 })
 
@@ -114,17 +89,21 @@ test_that("we can query single attributes with the generic functions", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   g$name <- "toy"
-  g$layout <- cbind(1:4, 1:4)
-  V(g)$name <- letters[1:4]
-  V(g)$color <- rainbow(4)
-  E(g)$weight <- 1:3
-  E(g)$label <- LETTERS[1:3]
-
   expect_equal(graph_attr(g, "name"), "toy")
+
+  g$layout <- cbind(1:4, 1:4)
   expect_equal(graph_attr(g, "layout"), cbind(1:4, 1:4))
+
+  V(g)$name <- letters[1:4]
   expect_equal(vertex_attr(g, "name"), letters[1:4])
+
+  V(g)$color <- rainbow(4)
   expect_equal(vertex_attr(g, "color"), rainbow(4))
+
+  E(g)$weight <- 1:3
   expect_equal(edge_attr(g, "weight"), 1:3)
+
+  E(g)$label <- LETTERS[1:3]
   expect_equal(edge_attr(g, "label"), LETTERS[1:3])
 })
 
@@ -132,16 +111,18 @@ test_that("we can query a subset of vertices", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
-  V(g)$color <- as.list(rainbow(4))
-  E(g)$weight <- 1:3
-  E(g)$label <- as.list(LETTERS[1:3])
-
   expect_equal(vertex_attr(g, "name", c(1, 3)), letters[c(1, 3)])
+
+  V(g)$color <- as.list(rainbow(4))
   expect_equal(
     vertex_attr(g, "color", c("a", "c")),
     as.list(rainbow(4))[c(1, 3)]
   )
+
+  E(g)$weight <- 1:3
   expect_equal(edge_attr(g, "weight", 2:3), 2:3)
+
+  E(g)$label <- as.list(LETTERS[1:3])
   expect_equal(edge_attr(g, "label", 2:3), as.list(LETTERS[1:3])[2:3])
 })
 
@@ -167,7 +148,7 @@ test_that("we can set all attributes at once", {
   expect_equal(edge_attr(g2), edge_attr(g))
 })
 
-test_that("we can set all attributes some vertices/edges", {
+test_that("we can set all attributes on some vertices/edges", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
@@ -358,4 +339,18 @@ test_that("assert_named_list() works", {
   dups <- rlang::set_names(unnamed_list, rep("bla", 10))
   expect_error(assert_named_list(dups), "named list")
 
+})
+
+test_that("is_bipartite works", {
+  I <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
+  g <- graph_from_biadjacency_matrix(I)
+  expect_true(bipartite_mapping(g)$res)
+
+  withr::local_seed(42)
+  I <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
+  g <- graph_from_biadjacency_matrix(I)
+  expect_equal(
+    bipartite_mapping(g),
+    list(res = TRUE, type = c(rep(FALSE, 7), rep(TRUE, 5)))
+  )
 })
