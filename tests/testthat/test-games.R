@@ -107,7 +107,7 @@ test_that("sample_degseq() works -- configuration.simple", {
   expect_equal(degree(simple_nmu_graph, mode = "in"), degree(g, mode = "in"))
 })
 
-test_that("sample_degseq() works -- edge.switching.simple", {
+test_that("sample_degseq() works -- edge.switching.simple directed", {
   g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
   simple_switch_graph <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
@@ -115,6 +115,15 @@ test_that("sample_degseq() works -- edge.switching.simple", {
   )
   expect_equal(degree(simple_switch_graph, mode = "out"), degree(g, mode = "out"))
   expect_equal(degree(simple_switch_graph, mode = "in"), degree(g, mode = "in"))
+})
+
+test_that("sample_degseq() works -- edge.switching.simple undirected", {
+  g <- sample_gnp(1000, 1 / 1000, directed = FALSE)
+  simple_switch_graph <- sample_degseq(
+    degree(g, mode = "all"),
+    method = "edge.switching.simple"
+  )
+  expect_equal(degree(simple_switch_graph, mode = "all"), degree(g, mode = "all"))
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {
