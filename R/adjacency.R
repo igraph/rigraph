@@ -528,12 +528,14 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
-    Matrix::isSymmetric(x, tol = 0, tol1 = 0)
-  } else if (is.matrix(x)) {
-    isSymmetric.matrix(x, tol = 0, tol1 = 0)
-  } else {
-    isSymmetric(x, tol = 0, tol1 = 0)
+    return(Matrix::isSymmetric(x, tol = 0, tol1 = 0))
   }
+
+  if (is.matrix(x)) {
+    return(isSymmetric.matrix(x, tol = 0, tol1 = 0))
+  }
+
+  return(isSymmetric(x, tol = 0, tol1 = 0))
 }
 
 #' @rdname graph_from_adjacency_matrix
