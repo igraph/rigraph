@@ -930,12 +930,13 @@ sample_degseq <- function(out.deg, in.deg = NULL,
     method <- "configuration.simple"
   }
 
+  # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94
   method1 <- switch(method,
     "configuration" = 0,
     "vl" = 1,
     "fast.heur.simple" = 2,
     "configuration.simple" = 3,
-    "edge.switching.simple" = 4 #TODO: check number and see where it comes from
+    "edge.switching.simple" = 4
   )
   if (!is.null(in.deg)) {
     in.deg <- as.numeric(in.deg)
