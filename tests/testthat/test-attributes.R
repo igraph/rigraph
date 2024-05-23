@@ -148,7 +148,7 @@ test_that("we can set all attributes at once", {
   expect_equal(edge_attr(g2), edge_attr(g))
 })
 
-test_that("we can set all attributes some vertices/edges", {
+test_that("we can set all attributes on some vertices/edges", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
