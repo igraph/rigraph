@@ -111,16 +111,18 @@ test_that("we can query a subset of vertices", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
-  V(g)$color <- as.list(rainbow(4))
-  E(g)$weight <- 1:3
-  E(g)$label <- as.list(LETTERS[1:3])
-
   expect_equal(vertex_attr(g, "name", c(1, 3)), letters[c(1, 3)])
+
+  V(g)$color <- as.list(rainbow(4))
   expect_equal(
     vertex_attr(g, "color", c("a", "c")),
     as.list(rainbow(4))[c(1, 3)]
   )
+
+  E(g)$weight <- 1:3
   expect_equal(edge_attr(g, "weight", 2:3), 2:3)
+
+  E(g)$label <- as.list(LETTERS[1:3])
   expect_equal(edge_attr(g, "label", 2:3), as.list(LETTERS[1:3])[2:3])
 })
 
