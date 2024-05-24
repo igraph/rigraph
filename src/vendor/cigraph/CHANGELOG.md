@@ -1,5 +1,48 @@
 # igraph C library changelog
 
+## [develop]
+
+### Breaking changes
+
+ - Interruption handlers do not take a `void*` argument any more; this is relevant to maintainers of higher-level interfaces only.
+ - Interruption handlers now return an `igraph_bool_t` instead of an `igraph_error_t`; the returned value must be true if the calculation has to be interrupted and false otherwise.
+ - `igraph_delete_vertices_map()` (formerly called `igraph_delete_vertices_idx()`) and `igraph_induced_subgraph_map()` now use -1 to represent unmapped vertices in the returned forward mapping vector and they do not offset vertex indices by 1 any more. (Note that the inverse map always behaved this way, this change makes the two mappings consistent).
+ - `igraph_distances_johnson()` now takes a mode parameter to determine in which direction paths should be followed.
+ - `igraph_vector_shuffle()` no longer returns an error code.
+ - `igraph_vector_swap()` no longer returns an error code.
+ - `igraph_matrix_swap()` no longer returns an error code.
+ - `igraph_rng_set_default()` now returns a pointer to the previous RNG. Furthermore, this function now only stores a pointer to the `igraph_rng_t` struct passed to it, instead of copying the struct. Thus the `igraph_rng_t` must continue to exist for as long as it is used as the default RNG.
+ - `igraph_similarity_jaccard()` and `igraph_similarity_dice()` now take two sets of vertices to create vertex pairs of, instead of one.
+ - `igraph_read_graph_ncol()` and `igraph_read_graph_lgl()` now uses a default edge weight of 1 instead of 0 for files that do not contain edge weights for at least some of the edges.
+ - `igraph_count_automorphisms()` has been renamed to `igraph_count_automorphisms_bliss()` because it has a BLISS-specific interface. A new `igraph_count_automorphisms()` function was added with a simplified interface that does not depend on BLISS.
+ - `igraph_automorphism_group()` has been renamed to `igraph_automorphism_group_bliss()` because it has a BLISS-specific interface. A new `igraph_automorphism_group()` function was added with a simplified interface that does not depend on BLISS.
+ - `igraph_canonical_permutation()` has been renamed to `igraph_canonical_permutation_bliss()` because it has a BLISS-specific interface. A new `igraph_canonical_permutation()` function was added with a simplified interface that does not depend on BLISS.
+ - The `IGRAPH_EINVEVECTOR` error code was removed; `igraph_create()` and `igraph_add_edges()` that used to return this error code for invalid edge vectors will now return `IGRAPH_EINVAL` instead.
+ - The `IGRAPH_NONSQUARE` error code was removed; functions that used them now return `IGRAPH_EINVAL` instead when encountering a non-square matrix.
+ - The unused `IGRAPH_EDIVZERO` and `IGRAPH_EATTRIBUTES` error codes were removed with no replacement.
+ - A new error code called `IGRAPH_EINVEID` was added for cases when an invalid edge ID was encountered in an edge ID vector.
+
+### Added
+
+ - `igraph_erdos_renyi_game_gnm()` gained a `multiple` Boolean argument to generate Erdős-Rényi graphs with multi-edges
+ - `igraph_bipartite_game_gnm()` gained a `multiple` Boolean argument to generate random bipartite graphs with multi-edges
+
+### Changed
+
+ - The Pajek format reader and writer now map vertex labels to the `name` vertex attribute in igraph. The `id` attribute is no longer used.
+
+### Fixed
+
+ - `igraph_community_spinglass_single()` now uses `igraph_real_t` for its `inner_links` and `outer_links` output parameters, as these return not simply edge counts, but the sum of the weights of some edges.
+
+### Removed
+
+ - Removed `igraph_Calloc()`, `igraph_Realloc()` and `igraph_Free()`. Use `IGRAPH_CALLOC()`, `IGRAPH_REALLOC()` and `IGRAPH_FREE()` instead.
+
+### Deprecated
+
+- `igraph_delete_vertices_idx()` is now deprecated in favour of `igraph_delete_vertices_map()`, which is functionally equivalent but has a name that is consistent with `igraph_induced_subgraph_map()`.
+
 ## [master]
 
 ### Added
@@ -1308,6 +1351,7 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
+[develop]: https://github.com/igraph/igraph/compare/master..develop
 [master]: https://github.com/igraph/igraph/compare/0.10.10..master
 [0.10.10]: https://github.com/igraph/igraph/compare/0.10.9..0.10.10
 [0.10.9]: https://github.com/igraph/igraph/compare/0.10.8..0.10.9

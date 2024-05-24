@@ -231,7 +231,7 @@ VECTOR_INT_LIST:
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXSET_LIST:
+VERTEX_INDICES_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
@@ -252,7 +252,7 @@ VERTEXSET_LIST:
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGESET_LIST:
+EDGE_INDICES_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
@@ -304,7 +304,7 @@ ADJLIST:
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
@@ -321,7 +321,7 @@ EDGEWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXWEIGHTS:
+VERTEX_WEIGHTS:
     CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
@@ -338,7 +338,7 @@ VERTEXWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
@@ -448,7 +448,7 @@ VERTEX_ROOT:
             PROTECT(%I% = NEW_INTEGER(1));
             INTEGER(%I%)[0] = %C% + 1;
 
-VERTEX_QTY:
+VERTEX_QTYS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -587,19 +587,19 @@ ATTRIBUTES:
     CTYPE: ~
     HEADER: {}
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     CALL: '&%C%'
     INCONV:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
         INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
 
-ARPACKSTORAGE:
+ARPACK_STORAGE:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
 
-ARPACKFUNC:
+ARPACK_FUNC:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
@@ -650,7 +650,7 @@ BIPARTITE_TYPES:
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     CALL:
         IN: '(Rf_isNull(%I%) ? 0 : &%C%)'
         OUT: '&%C%'
@@ -677,7 +677,7 @@ VERTEX_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_COLOR:
+EDGE_COLORS:
     CALL:
         IN: '(Rf_isNull(%I%) ? 0 : &%C%)'
         OUT: '&%C%'

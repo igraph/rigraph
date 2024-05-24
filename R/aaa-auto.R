@@ -35,14 +35,14 @@ copy_impl <- function(from) {
   res
 }
 
-delete_vertices_idx_impl <- function(graph, vertices) {
+delete_vertices_map_impl <- function(graph, vertices) {
   # Argument checks
   ensure_igraph(graph)
   vertices <- as_igraph_vs(graph, vertices)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_delete_vertices_idx, graph, vertices-1)
+  res <- .Call(R_igraph_delete_vertices_map, graph, vertices-1)
 
   res
 }
@@ -750,7 +750,7 @@ distances_bellman_ford_impl <- function(graph, from=V(graph), to=V(graph), weigh
   res
 }
 
-distances_johnson_impl <- function(graph, from=V(graph), to=V(graph), weights) {
+distances_johnson_impl <- function(graph, from=V(graph), to=V(graph), weights=NULL, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
@@ -763,10 +763,11 @@ distances_johnson_impl <- function(graph, from=V(graph), to=V(graph), weights) {
   } else {
     weights <- NULL
   }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_distances_johnson, graph, from-1, to-1, weights)
+  res <- .Call(R_igraph_distances_johnson, graph, from-1, to-1, weights, mode)
 
   res
 }
@@ -1024,7 +1025,9 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", )
+  }
   res
 }
 
@@ -2472,16 +2475,17 @@ layout_umap_compute_weights_impl <- function(graph, distances, weights) {
   res
 }
 
-similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_dice_impl <- function(graph, vit.from=V(graph), vit.to=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
+  vit.from <- as_igraph_vs(graph, vit.from)
+  vit.to <- as_igraph_vs(graph, vit.to)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_dice, graph, vids-1, mode, loops)
+  res <- .Call(R_igraph_similarity_dice, graph, vit.from-1, vit.to-1, mode, loops)
 
   res
 }
@@ -2526,16 +2530,17 @@ similarity_inverse_log_weighted_impl <- function(graph, vids=V(graph), mode=c("a
   res
 }
 
-similarity_jaccard_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_jaccard_impl <- function(graph, vit.from=V(graph), vit.to=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids)
+  vit.from <- as_igraph_vs(graph, vit.from)
+  vit.to <- as_igraph_vs(graph, vit.to)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_jaccard, graph, vids-1, mode, loops)
+  res <- .Call(R_igraph_similarity_jaccard, graph, vit.from-1, vit.to-1, mode, loops)
 
   res
 }
@@ -3085,6 +3090,50 @@ isomorphic_impl <- function(graph1, graph2) {
   res
 }
 
+automorphism_group_impl <- function(graph, colors=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (missing(colors)) {
+    if ("color" %in% vertex_attr_names(graph)) {
+      colors <- V(graph)$color
+    } else {
+      colors <- NULL
+    }
+  }
+  if (!is.null(colors)) {
+    colors <- as.numeric(colors)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_automorphism_group, graph, colors)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+count_automorphisms_impl <- function(graph, colors=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (missing(colors)) {
+    if ("color" %in% vertex_attr_names(graph)) {
+      colors <- V(graph)$color
+    } else {
+      colors <- NULL
+    }
+  }
+  if (!is.null(colors)) {
+    colors <- as.numeric(colors)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_count_automorphisms, graph, colors)
+
+  res
+}
+
 isoclass_create_impl <- function(size, number, directed=TRUE) {
   # Argument checks
   size <- as.numeric(size)
@@ -3318,7 +3367,28 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
   res
 }
 
-canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+canonical_permutation_impl <- function(graph, colors=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (missing(colors)) {
+    if ("color" %in% vertex_attr_names(graph)) {
+      colors <- V(graph)$color
+    } else {
+      colors <- NULL
+    }
+  }
+  if (!is.null(colors)) {
+    colors <- as.numeric(colors)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_canonical_permutation, graph, colors)
+
+  res
+}
+
+canonical_permutation_bliss_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3335,7 +3405,7 @@ canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs",
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_canonical_permutation, graph, colors, sh)
+  res <- .Call(R_igraph_canonical_permutation_bliss, graph, colors, sh)
 
   res
 }
@@ -3385,7 +3455,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
   res
 }
 
-count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+count_automorphisms_bliss_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3402,12 +3472,12 @@ count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_count_automorphisms, graph, colors, sh)
+  res <- .Call(R_igraph_count_automorphisms_bliss, graph, colors, sh)
 
   res
 }
 
-automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm"), details=FALSE) {
+automorphism_group_bliss_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm"), details=FALSE) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3424,7 +3494,7 @@ automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "f
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_automorphism_group, graph, colors, sh)
+  res <- .Call(R_igraph_automorphism_group_bliss, graph, colors, sh)
   if (igraph_opt("return.vs.es")) {
     res$generators <- lapply(res$generators, unsafe_create_vs, graph = graph, verts = V(graph))
   }
@@ -3446,7 +3516,7 @@ graph_count_impl <- function(n, directed=FALSE) {
   res
 }
 
-adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=strength(graph, weights=weights)/(vcount(graph)-1), options=arpack_defaults()) {
+adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=strength(graph, weights=weights)/(vcount(graph)-1), options=RPACK_DEFAULTS) {
   # Argument checks
   ensure_igraph(graph)
   no <- as.numeric(no)

@@ -30,6 +30,7 @@ igraph_delete_vertices:
     IGNORE: RR, RC
 
 igraph_delete_vertices_idx:
+    IGNORE: RR, RC
 
 igraph_vcount:
 

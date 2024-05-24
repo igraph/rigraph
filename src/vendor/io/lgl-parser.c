@@ -1517,7 +1517,7 @@ yyreduce:
                                     {
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actvertex));
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
-             IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0));
+             IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 1.0));
            }
 #line 1523 "src/vendor/io/lgl-parser.c"
     break;
