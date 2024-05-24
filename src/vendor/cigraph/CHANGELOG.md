@@ -4,7 +4,57 @@
 
 ### Added
 
- - `igraph_is_complete()` checks there is a connection between all pairs of vertices (experimental function, contributed by Aymeric Agon-Rambosson @aagon in #2510).
+ - `igraph_bitset_fill()` sets all elements of a bitset to the same value.
+ - `igraph_bitset_null()` clears all elements of a bitset.
+ - `igraph_chung_lu_game()` implements the classic Chung-Lu model, as well as a number of its variants (experimental function).
+
+### Fixed
+
+ - Corrected the detection of some MSVC-specific bitset intrinsics during configuration.
+ - `igraph_static_fitness_game()` checks the input more carefully, and avoids an infinite loop in rare edge cases, such as when (almost) all fitness scores are zero.
+
+### Other
+
+ - Documentation improvements.
+ - Reduced the memory usage of several functions by using bitsets instead of boolean vectors.
+
+## [0.10.12] - 2024-05-06
+
+### Added
+
+ - `igraph_transitive_closure()` computes the transitive closure of a graph (experimental function).
+ - `igraph_reachability()` determines which vertices are reachable from each other in a graph (experimental function).
+ - `igraph_count_reachable()` counts how many vertices are reachable from each vertex (experimental function).
+ - Added a bitset data structure, `igraph_bitset_t`, and a set of corresponding functions (experimental functionality).
+
+### Fixed
+
+ - `igraph_community_label_propagation()` is now interruptible.
+ - `igraph_is_bipartite()` would on rare occasions return invalid results when the cache was employed.
+ - `igraph_weighted_adjacency()` correctly passes through NaN values with `IGRAPH_ADJ_MAX`, and correctly recognizes symmetric adjacency matrices containing NaN values with `IGRAPH_ADJ_UNDIRECTED`.
+ - `igraph_read_graph_gml()` can now read GML files that use ids larger than what is representable on 32 bits, provided that igraph was configured with a 64-bit `igraph_integer_t` size.
+ - Fixed a performance issue in `igraph_read_graph_graphml()` with files containing a very large number of entities, such as `&gt;`.
+ - `igraph_read_graph_pajek()` has improved vertex ID validation that better matches that of Pajek's own behavior.
+
+### Changed
+
+ - `igraph_eigenvector_centrality()` no longer issues a warning when the input is directed and weighted. When using this function, keep in mind that eigenvector centrality is well-defined only for (strongly) connected graphs, and edges with a zero weights are effectively treated as absent.
+
+### Deprecated
+
+ - `igraph_transitive_closure_dag()` is deprecated in favour of `igraph_transitive_closure()`
+
+### Other
+
+ - Documentation improvements.
+ - `igraph_strength()` and `igraph_degree(loops=false)` are now faster when calculating values for all vertices (contributed by @gendelpiekel in #2602)
+
+## [0.10.11] - 2024-04-02
+
+### Added
+
+ - `igraph_is_complete()` checks whether there is a connection between all pairs of vertices (experimental function, contributed by Aymeric Agon-Rambosson @aagon in #2510).
+ - `igraph_join()` creates the _join_ of two graphs (experimental function, contributed by Quinn Buratynski @GanzuraTheConsumer in #2508).
 
 ### Fixed
 
@@ -15,15 +65,25 @@
  - `igraph_write_graph_ncol()` and `igraph_write_graph_lgl()` now refuse to write vertex names which would result in an invalid file that cannot be read back in.
  - `igraph_write_graph_gml()` now ignores graph attributes called `edge` or `node` with a warning. Writing these would create an invalid GML file that igraph couldn't read back.
  - `igraph_disjoint_union()` and `igraph_disjoint_union_many()` now check for overflow.
- - `igraph_read_graph_graphml()` now correctly compares attribute values with certain expected values, meaning that prefixes of valid values of `attr.type` are not accepted any more.
+ - `igraph_read_graph_graphml()` now correctly compares attribute values with certain expected values, meaning that prefixes of valid values of `attr.type` are not accepted anymore.
  - Empty IDs are not allowed any more in `<key>` tags of GraphML files as this is a violation of the GraphML specification.
  - `igraph_is_separator()` and `igraph_is_minimal_separator()` now work correctly with disconnected graphs.
  - `igraph_linegraph()` now considers self-loops to be self-adjacent in undirected graphs, bringing consistency with how directed graphs were already handled in previous versions.
+ - `igraph_all_st_mincuts()` now correctly returns all minimum cuts. This also fixes a problem with `igraph_minimum_size_separators()`.
+ - Corrected minor error in `igraph_community_label_propagation()` when adding labels to isolated nodes with some fixed labels present.
+ - `igraph_community_spinglass()` no longer crashes when passing an edgeless graph and an empty weight vector.
+ - `igraph_rewire()` no longer crashes on graphs with more than three vertices but fewer than two edges.
+
+### Changed
+
+ - `igraph_rewire()` on longer throws an error on graphs with fewer than four vertices. These graphs are now returned unchanged, just like other graphs which are the unique realization of their degree sequence.
 
 ### Other
 
+ - Performance: `igraph_is_simple()` now makes more granular use of the cache.
  - Performance: `igraph_degree()` now makes use of the cache when checking for self-loops.
  - The performance of `igraph_is_minimal_separator()` was improved.
+ - `igraph_is_graphical()` now performs graphicality checks for degree sequences of simple directed graphs in linear time, an improvement from the previously used quadratic algorithm (contributed by Arnar Bjarni Arnarson @Tagl in #2537).
  - Documentation improvements.
 
 ## [0.10.10] - 2024-02-13
@@ -1308,7 +1368,9 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
-[master]: https://github.com/igraph/igraph/compare/0.10.10..master
+[master]: https://github.com/igraph/igraph/compare/0.10.12..master
+[0.10.12]: https://github.com/igraph/igraph/compare/0.10.11..0.10.12
+[0.10.11]: https://github.com/igraph/igraph/compare/0.10.10..0.10.11
 [0.10.10]: https://github.com/igraph/igraph/compare/0.10.9..0.10.10
 [0.10.9]: https://github.com/igraph/igraph/compare/0.10.8..0.10.9
 [0.10.8]: https://github.com/igraph/igraph/compare/0.10.7..0.10.8

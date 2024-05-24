@@ -154,8 +154,8 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
  *
  * </para><para>
  * If vector \c h and \c a contain hub and authority scores, then the two
- * scores are related by <code>h = Aa</code> and <code>a = Ah</code>.
- * When the principal eigenvalue of <code>A A^T</code> is dengenerate, there
+ * scores are related by <code>h = Aa</code> and <code>a = A^T h</code>.
+ * When the principal eigenvalue of <code>A A^T</code> is degenerate, there
  * is no unique solution to the hub- and authority-score problem.
  * igraph guarantees that the scores that are returned are matching, i.e. are
  * related by these formulas, even in this situation.
@@ -197,9 +197,7 @@ static igraph_error_t igraph_i_kleinberg_weighted(igraph_real_t *to,
  * Time complexity: depends on the input graph, usually it is O(|V|),
  * the number of vertices.
  *
- * \sa \ref igraph_hub_score(), \ref igraph_authority_score()
- * for the separate calculations,
- * \ref igraph_pagerank(), \ref igraph_personalized_pagerank(),
+ * \sa \ref igraph_pagerank(), \ref igraph_personalized_pagerank();
  * \ref igraph_eigenvector_centrality() for a similar measure intended
  * for undirected graphs.
  */

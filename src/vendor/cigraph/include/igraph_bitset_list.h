@@ -1,8 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2024  The igraph development team
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,23 +20,31 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_BITSET_LIST_H
+#define IGRAPH_BITSET_LIST_H
 
+#include "igraph_bitset.h"
 #include "igraph_decls.h"
+#include "igraph_error.h"
+#include "igraph_types.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "0.10.12-57-gaee31ba76"
-#define IGRAPH_VERSION_MAJOR 0
-#define IGRAPH_VERSION_MINOR 10
-#define IGRAPH_VERSION_PATCH 12
-#define IGRAPH_VERSION_PRERELEASE "57-gaee31ba76"
+/* -------------------------------------------------- */
+/* List of graphs                                     */
+/* -------------------------------------------------- */
 
-IGRAPH_EXPORT void igraph_version(const char **version_string,
-                                  int *major,
-                                  int *minor,
-                                  int *subminor);
+#define BITSET_LIST
+#define BASE_BITSET
+#include "igraph_pmt.h"
+#include "igraph_typed_list_pmt.h"
+#include "igraph_pmt_off.h"
+#undef BASE_BITSET
+#undef BITSET_LIST
+
+#define IGRAPH_BITSET_LIST_INIT_FINALLY(v, size) \
+    do { IGRAPH_CHECK(igraph_bitset_list_init(v, size)); \
+        IGRAPH_FINALLY(igraph_bitset_list_destroy, v); } while (0)
 
 __END_DECLS
 

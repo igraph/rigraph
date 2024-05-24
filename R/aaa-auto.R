@@ -330,6 +330,19 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
   res
 }
 
+chung_lu_game_impl <- function(expected.out.deg, expected.in.deg=NULL, loops=TRUE, variant=ORIGINAL) {
+  # Argument checks
+  expected.out.deg <- as.numeric(expected.out.deg)
+  if (!is.null(expected.in.deg)) expected.in.deg <- as.numeric(expected.in.deg)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_chung_lu_game, expected.out.deg, expected.in.deg, loops, variant)
+
+  res
+}
+
 static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.edges <- as.numeric(no.of.edges)
@@ -1370,9 +1383,7 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eigenvector_centrality, graph, directed, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 
@@ -1393,9 +1404,7 @@ hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defau
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_score, graph, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 
@@ -1416,9 +1425,7 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_authority_score, graph, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 
@@ -1439,12 +1446,7 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))
-  }
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$authority.vector) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 
@@ -2055,6 +2057,17 @@ transitive_closure_dag_impl <- function(graph) {
   res
 }
 
+transitive_closure_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_transitive_closure, graph)
+
+  res
+}
+
 trussness_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
@@ -2278,6 +2291,18 @@ is_biconnected_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_biconnected, graph)
+
+  res
+}
+
+count_reachable_impl <- function(graph, mode) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_count_reachable, graph, mode)
 
   res
 }
@@ -3820,9 +3845,7 @@ moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_moran_process, graph, weights, quantities, strategies, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$quantities) <- vertex_attr(graph, "name", V(graph))
-  }
+
   res
 }
 

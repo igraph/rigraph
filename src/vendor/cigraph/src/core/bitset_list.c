@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2022  The igraph development team
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,24 +21,34 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_bitset_list.h"
 
-#include "igraph_decls.h"
+#include "igraph_error.h"
+#include "igraph_interface.h"
+#include "igraph_types.h"
 
-__BEGIN_DECLS
+#define BITSET_LIST
+#define BASE_BITSET
+#define CUSTOM_INIT_DESTROY
+#include "igraph_pmt.h"
+#include "typed_list.pmt"
+#include "igraph_pmt_off.h"
+#undef CUSTOM_INIT_DESTROY
+#undef BASE_BITSET
+#undef BITSET_LIST
 
-#define IGRAPH_VERSION "0.10.12-57-gaee31ba76"
-#define IGRAPH_VERSION_MAJOR 0
-#define IGRAPH_VERSION_MINOR 10
-#define IGRAPH_VERSION_PATCH 12
-#define IGRAPH_VERSION_PRERELEASE "57-gaee31ba76"
+static igraph_error_t igraph_i_bitset_list_init_item(
+    const igraph_bitset_list_t* list, igraph_bitset_t* item
+) {
+    return igraph_bitset_init(item, 0);
+}
 
-IGRAPH_EXPORT void igraph_version(const char **version_string,
-                                  int *major,
-                                  int *minor,
-                                  int *subminor);
+static igraph_error_t igraph_i_bitset_list_copy_item(
+    igraph_bitset_t* dest, const igraph_bitset_t* source
+) {
+    return igraph_bitset_init_copy(dest, source);
+}
 
-__END_DECLS
-
-#endif
+static void igraph_i_bitset_list_destroy_item(igraph_bitset_t* item) {
+    igraph_bitset_destroy(item);
+}
