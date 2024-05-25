@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9020
+
+## Features
+
+- Rename sample_degseq() method and add the edge.switching.simple method (#1376).
+
+
 # igraph 2.0.3.9019
 
 ## Bug fixes
