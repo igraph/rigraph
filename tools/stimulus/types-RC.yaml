@@ -469,6 +469,27 @@ VERTEX_QTY:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+ALL_VERTEX_QTY:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: R_SEXP_to_vector(%I%, &%C%);
+        INOUT: |-
+            if (0 != R_SEXP_to_vector_copy(%I%, &%C%)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+        OUT: |-
+            if (0 != igraph_vector_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEX_SELECTOR:
     CALL:
         IN: '%C%'

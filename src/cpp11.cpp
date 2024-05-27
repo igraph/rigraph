@@ -78,6 +78,7 @@ extern SEXP R_igraph_centralization_degree(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_degree_tmax(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(void *, void *, void *, void *);
+extern SEXP R_igraph_chung_lu_game(void *, void *, void *, void *);
 extern SEXP R_igraph_circulant(void *, void *, void *);
 extern SEXP R_igraph_cited_type_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_citing_cited_type_game(void *, void *, void *, void *, void *);
@@ -115,7 +116,9 @@ extern SEXP R_igraph_correlated_game(void *, void *, void *, void *);
 extern SEXP R_igraph_correlated_pair_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_count_automorphisms(void *, void *, void *);
 extern SEXP R_igraph_count_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_count_loops(void *);
 extern SEXP R_igraph_count_multiple(void *, void *);
+extern SEXP R_igraph_count_reachable(void *, void *);
 extern SEXP R_igraph_count_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_create(void *, void *, void *);
 extern SEXP R_igraph_create_bipartite(void *, void *, void *);
@@ -331,6 +334,7 @@ extern SEXP R_igraph_maximal_cliques_hist(void *, void *, void *);
 extern SEXP R_igraph_maximal_independent_vertex_sets(void *);
 extern SEXP R_igraph_maximum_bipartite_matching(void *, void *, void *, void *);
 extern SEXP R_igraph_maximum_cardinality_search(void *);
+extern SEXP R_igraph_mean_degree(void *, void *);
 extern SEXP R_igraph_mincut(void *, void *);
 extern SEXP R_igraph_mincut_value(void *, void *);
 extern SEXP R_igraph_minimum_cycle_basis(void *, void *, void *, void *, void *);
@@ -432,6 +436,7 @@ extern SEXP R_igraph_to_directed(void *, void *);
 extern SEXP R_igraph_to_prufer(void *);
 extern SEXP R_igraph_to_undirected(void *, void *, void *);
 extern SEXP R_igraph_topological_sorting(void *, void *);
+extern SEXP R_igraph_transitive_closure(void *);
 extern SEXP R_igraph_transitive_closure_dag(void *);
 extern SEXP R_igraph_transitivity_avglocal_undirected(void *, void *);
 extern SEXP R_igraph_transitivity_barrat(void *, void *, void *, void *);
@@ -537,6 +542,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_centralization_degree_tmax",                 (DL_FUNC) &R_igraph_centralization_degree_tmax,                  4},
     {"R_igraph_centralization_eigenvector_centrality",      (DL_FUNC) &R_igraph_centralization_eigenvector_centrality,       5},
     {"R_igraph_centralization_eigenvector_centrality_tmax", (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,  4},
+    {"R_igraph_chung_lu_game",                              (DL_FUNC) &R_igraph_chung_lu_game,                               4},
     {"R_igraph_circulant",                                  (DL_FUNC) &R_igraph_circulant,                                   3},
     {"R_igraph_cited_type_game",                            (DL_FUNC) &R_igraph_cited_type_game,                             5},
     {"R_igraph_citing_cited_type_game",                     (DL_FUNC) &R_igraph_citing_cited_type_game,                      5},
@@ -574,7 +580,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_correlated_pair_game",                       (DL_FUNC) &R_igraph_correlated_pair_game,                        5},
     {"R_igraph_count_automorphisms",                        (DL_FUNC) &R_igraph_count_automorphisms,                         3},
     {"R_igraph_count_isomorphisms_vf2",                     (DL_FUNC) &R_igraph_count_isomorphisms_vf2,                      6},
+    {"R_igraph_count_loops",                                (DL_FUNC) &R_igraph_count_loops,                                 1},
     {"R_igraph_count_multiple",                             (DL_FUNC) &R_igraph_count_multiple,                              2},
+    {"R_igraph_count_reachable",                            (DL_FUNC) &R_igraph_count_reachable,                             2},
     {"R_igraph_count_subisomorphisms_vf2",                  (DL_FUNC) &R_igraph_count_subisomorphisms_vf2,                   6},
     {"R_igraph_create",                                     (DL_FUNC) &R_igraph_create,                                      3},
     {"R_igraph_create_bipartite",                           (DL_FUNC) &R_igraph_create_bipartite,                            3},
@@ -790,6 +798,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_maximal_independent_vertex_sets",            (DL_FUNC) &R_igraph_maximal_independent_vertex_sets,             1},
     {"R_igraph_maximum_bipartite_matching",                 (DL_FUNC) &R_igraph_maximum_bipartite_matching,                  4},
     {"R_igraph_maximum_cardinality_search",                 (DL_FUNC) &R_igraph_maximum_cardinality_search,                  1},
+    {"R_igraph_mean_degree",                                (DL_FUNC) &R_igraph_mean_degree,                                 2},
     {"R_igraph_mincut",                                     (DL_FUNC) &R_igraph_mincut,                                      2},
     {"R_igraph_mincut_value",                               (DL_FUNC) &R_igraph_mincut_value,                                2},
     {"R_igraph_minimum_cycle_basis",                        (DL_FUNC) &R_igraph_minimum_cycle_basis,                         5},
@@ -891,6 +900,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_to_prufer",                                  (DL_FUNC) &R_igraph_to_prufer,                                   1},
     {"R_igraph_to_undirected",                              (DL_FUNC) &R_igraph_to_undirected,                               3},
     {"R_igraph_topological_sorting",                        (DL_FUNC) &R_igraph_topological_sorting,                         2},
+    {"R_igraph_transitive_closure",                         (DL_FUNC) &R_igraph_transitive_closure,                          1},
     {"R_igraph_transitive_closure_dag",                     (DL_FUNC) &R_igraph_transitive_closure_dag,                      1},
     {"R_igraph_transitivity_avglocal_undirected",           (DL_FUNC) &R_igraph_transitivity_avglocal_undirected,            2},
     {"R_igraph_transitivity_barrat",                        (DL_FUNC) &R_igraph_transitivity_barrat,                         4},

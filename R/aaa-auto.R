@@ -1241,6 +1241,18 @@ reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c("default", "ratio"
   res
 }
 
+mean_degree_impl <- function(graph, loops=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mean_degree, graph, loops)
+
+  res
+}
+
 feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "exact_ip")) {
   # Argument checks
   ensure_igraph(graph)
@@ -1342,6 +1354,17 @@ has_multiple_impl <- function(graph) {
   res
 }
 
+count_loops_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_count_loops, graph)
+
+  res
+}
+
 count_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
@@ -1383,7 +1406,9 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eigenvector_centrality, graph, directed, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1404,7 +1429,9 @@ hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defau
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_score, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1425,7 +1452,9 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_authority_score, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1446,7 +1475,12 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))
+  }
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$authority.vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -3845,7 +3879,9 @@ moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_moran_process, graph, weights, quantities, strategies, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$quantities) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
