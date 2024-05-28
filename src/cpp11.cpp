@@ -78,7 +78,6 @@ extern SEXP R_igraph_centralization_degree(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_degree_tmax(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(void *, void *, void *, void *);
-extern SEXP R_igraph_chung_lu_game(void *, void *, void *, void *);
 extern SEXP R_igraph_circulant(void *, void *, void *);
 extern SEXP R_igraph_cited_type_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_citing_cited_type_game(void *, void *, void *, void *, void *);
@@ -542,7 +541,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_centralization_degree_tmax",                 (DL_FUNC) &R_igraph_centralization_degree_tmax,                  4},
     {"R_igraph_centralization_eigenvector_centrality",      (DL_FUNC) &R_igraph_centralization_eigenvector_centrality,       5},
     {"R_igraph_centralization_eigenvector_centrality_tmax", (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,  4},
-    {"R_igraph_chung_lu_game",                              (DL_FUNC) &R_igraph_chung_lu_game,                               4},
     {"R_igraph_circulant",                                  (DL_FUNC) &R_igraph_circulant,                                   3},
     {"R_igraph_cited_type_game",                            (DL_FUNC) &R_igraph_cited_type_game,                             5},
     {"R_igraph_citing_cited_type_game",                     (DL_FUNC) &R_igraph_citing_cited_type_game,                      5},
