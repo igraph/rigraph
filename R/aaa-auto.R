@@ -330,19 +330,6 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
   res
 }
 
-chung_lu_game_impl <- function(expected.out.deg, expected.in.deg=NULL, loops=TRUE, variant=ORIGINAL) {
-  # Argument checks
-  expected.out.deg <- as.numeric(expected.out.deg)
-  if (!is.null(expected.in.deg)) expected.in.deg <- as.numeric(expected.in.deg)
-  loops <- as.logical(loops)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_chung_lu_game, expected.out.deg, expected.in.deg, loops, variant)
-
-  res
-}
-
 static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.edges <- as.numeric(no.of.edges)

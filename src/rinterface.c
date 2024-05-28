@@ -1167,41 +1167,6 @@ SEXP R_igraph_forest_fire_game(SEXP nodes, SEXP fw_prob, SEXP bw_factor, SEXP am
 }
 
 /*-------------------------------------------/
-/ igraph_chung_lu_game                       /
-/-------------------------------------------*/
-SEXP R_igraph_chung_lu_game(SEXP expected_out_deg, SEXP expected_in_deg, SEXP loops, SEXP variant) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_expected_out_deg;
-  igraph_vector_t c_expected_in_deg;
-  igraph_bool_t c_loops;
-  igraph_chung_lu_t c_variant;
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_vector(expected_out_deg, &c_expected_out_deg);
-  if (!Rf_isNull(expected_in_deg)) {
-    R_SEXP_to_vector(expected_in_deg, &c_expected_in_deg);
-  }
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  c_variant = (igraph_chung_lu_t) Rf_asInteger(variant);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_chung_lu_game(&c_graph, &c_expected_out_deg, (Rf_isNull(expected_in_deg) ? 0 : &c_expected_in_deg), c_loops, c_variant));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_static_fitness_game                 /
 /-------------------------------------------*/
 SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitness_in, SEXP loops, SEXP multiple) {
