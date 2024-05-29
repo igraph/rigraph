@@ -719,12 +719,12 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
 
   on.exit(.Call(R_igraph_finalizer))
   if (type == "gnp") {
-    res <- res <- .Call(
+    res <- .Call(
       R_igraph_erdos_renyi_game_gnp, as.numeric(n),
       as.numeric(p.or.m), as.logical(directed), as.logical(loops)
     )
   } else if (type == "gnm") {
-    res <- res <- .Call(
+    res <- .Call(
       R_igraph_erdos_renyi_game_gnm, as.numeric(n),
       as.numeric(p.or.m), as.logical(directed), as.logical(loops)
     )
