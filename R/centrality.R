@@ -1109,6 +1109,7 @@ hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_def
                  options = options)
 }
 
+#' @title Kleinberg's authority centrality scores.
 #' @rdname authority_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
@@ -1133,6 +1134,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
   scores
 }
 
+#' @title Kleinberg's hub centrality scores.
 #' @rdname hub_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
