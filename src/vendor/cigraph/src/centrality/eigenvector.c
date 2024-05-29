@@ -137,7 +137,8 @@ static igraph_error_t igraph_i_eigenvector_centrality_undirected(const igraph_t 
              * longer guaranteed to be non-negative. */
             negative_weights = true;
             IGRAPH_WARNING("Negative weight in graph. The largest eigenvalue "
-                           "will be selected, but it may not be the largest in magnitude.");
+                           "will be selected, but it may not be the largest in magnitude. "
+                           "Some eigenvector centralities may be negative.");
         }
     }
 
@@ -330,7 +331,10 @@ static igraph_error_t igraph_i_eigenvector_centrality_directed(const igraph_t *g
     options->n = (int) no_of_nodes;
     options->start = 1;
     options->nev = 1;
-    options->ncv = 0;   /* 0 means "automatic" in igraph_arpack_rnsolve */
+    /* Use higher NCV than usual as long directed cycles cause convergence issues.
+     * According to numerical experiments, a cycle graph C_n tends to need about
+     * NCV = n/4 at minimum. */
+    options->ncv = no_of_nodes > 30 ? 30 : no_of_nodes;
     /* LM mode is not OK here because +1 and -1 can be eigenvalues at the
      * same time, e.g.: a -> b -> a, c -> a */
     options->which[0] = 'L' ; options->which[1] = 'R';
