@@ -652,6 +652,7 @@ test_that("graph_from_adjacency_matrix works for sparse matrices without values"
 
 
 test_that("weighted graph_from_adjacency_matrix() works on integer matrices", {
+  skip_if(getRversion() <= "4.1.3")
   data <- matrix(c(0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0), 4)
   g <- graph_from_adjacency_matrix(data, weighted = TRUE)
   expect_equal(as.matrix(g[]), data)
