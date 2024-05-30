@@ -1159,12 +1159,13 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     options <- arpack_defaults()
   }
 
-  scores <- hits_scores(graph = graph,
-                  scale = scale,
-                  weights = weights,
-                  options = options)
-  scores$vector <- scores$authority
-  scores
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$hub_vector <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
 }
 
 #' @title Kleinberg's hub centrality scores.
@@ -1184,12 +1185,13 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
     options <- arpack_defaults()
   }
 
-  scores <- hits_scores(graph = graph,
-                  scale = scale,
-                  weights = weights,
-                  options = options)
-  scores$vector <- scores$hub
-  scores
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$authority_vector <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
 }
 
 #' The Page Rank algorithm
