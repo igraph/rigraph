@@ -1104,7 +1104,7 @@ diversity <- diversity_impl
 #'   random surfer model, an edge with a larger weight is more likely to be
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.In packages, document ... with this standard tag:
+#'   [arpack()] for details.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \item{vector}{The hub or authority scores of the vertices.}

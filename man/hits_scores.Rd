@@ -29,7 +29,7 @@ random surfer model, an edge with a larger weight is more likely to be
 selected by the surfer.}
 
 \item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details.In packages, document ... with this standard tag:}
+\code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
 A named list with members:
