@@ -29,6 +29,36 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
   page_rank(graph = graph, algo = algo, vids = vids, directed = directed, damping = damping, personalized = personalized, weights = weights, options = options)
 } # nocov end
 
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hub.score()` was renamed to `hub_score()` to create a more
+#' consistent API.
+#' @inheritParams hub_score
+#' @keywords internal
+#' @export
+hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  hub_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `authority_score()` to create a more
+#' consistent API.
+#' @inheritParams authority_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
 #' Strength or weighted vertex degree
 #'
 #' @description
