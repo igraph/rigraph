@@ -2501,6 +2501,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' @param graph The input graph.
 #' @param normalization The normalization method to use when calculating the
 #'   Laplacian matrix.
+#' @param normalized Deprecated, use `normalization` instead.
 #' @param weights An optional vector giving edge weights for weighted Laplacian
 #'   matrix. If this is `NULL` and the graph has an edge attribute called
 #'   `weight`, then it will be used automatically. Set this to `NA` if

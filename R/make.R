@@ -1048,6 +1048,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
 #'   periodic along each dimension. This parameter may also be scalar boolen value which will
 #'   be extended to boolean vector with dimvector length.
+#' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors

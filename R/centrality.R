@@ -1143,7 +1143,7 @@ hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_def
 }
 
 #' @title Kleinberg's authority centrality scores.
-#' @rdname authority_score
+#' @rdname hub_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
@@ -1170,6 +1170,16 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 
 #' @title Kleinberg's hub centrality scores.
 #' @rdname hub_score
+#' @param graph The input graph.
+#' @param scale Logical scalar, whether to scale the result to have a maximum
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted
+#'   scores. If the graph has a `weight` edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export

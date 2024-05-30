@@ -108,7 +108,7 @@ Centrality measures
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
+\code{\link{hits_scores}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},
