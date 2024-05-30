@@ -62,29 +62,6 @@ Run `revdepcheck::cloud_details(, "akc")` for more info
     Execution halted
     ```
 
-## In both
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Benchmarking.Rmd’
-      ...
-    +     keyword_merge()
-    
-    > topn_sample <- 100:300
-    
-    > com_detect_fun_list <- ls("package:akc") %>% str_extract("^group.+") %>% 
-    +     na.omit() %>% setdiff(c("group_biconnected_component", "group_compon ..." ... [TRUNCATED] 
-    
-      When sourcing ‘Benchmarking.R’:
-    Error: could not find function "str_extract"
-    Execution halted
-    
-      ‘Benchmarking.Rmd’ using ‘UTF-8’... failed
-      ‘akc_vignette.Rmd’ using ‘UTF-8’... OK
-      ‘tutorial_raw_text.Rmd’ using ‘UTF-8’... OK
-    ```
-
 # archeofrag
 
 <details>
@@ -186,32 +163,13 @@ Run `revdepcheck::cloud_details(, "archeofrag")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘archeofrag-vignette.Rmd’
-      ...
-    
-    > data(LiangAbu)
-    
-    > abu.frag <- make_frag_object(cr = df.cr, fragments = fragments.info)
-    
-    > abu.g <- make_cr_graph(abu.frag)
-    
-      When sourcing ‘archeofrag-vignette.R’:
-    Error: arguments imply differing number of rows: 78, 177
-    Execution halted
-    
-      ‘archeofrag-vignette.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘archeofrag-vignette.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 61-65 [make-empirical-graph] (archeofrag-vignette.Rmd)
+    Quitting from lines 61-65 [make-empirical-graph] (archeofrag-vignette.Rmd)
     Error: processing vignette 'archeofrag-vignette.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 78, 177
     --- failed re-building ‘archeofrag-vignette.Rmd’
@@ -227,10 +185,10 @@ Run `revdepcheck::cloud_details(, "archeofrag")` for more info
 
 <details>
 
-* Version: 1.5-2
+* Version: 1.5.3
 * GitHub: https://github.com/mhahsler/arulesViz
 * Source code: https://github.com/cran/arulesViz
-* Date/Publication: 2023-03-07 16:50:02 UTC
+* Date/Publication: 2024-04-26 09:20:02 UTC
 * Number of recursive dependencies: 125
 
 Run `revdepcheck::cloud_details(, "arulesViz")` for more info
@@ -246,13 +204,14 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     
     > ### Name: associations2igraph
     > ### Title: Convert rules or itemsets into a graph
-    > ### Aliases: saveAsGraph associations2igraph igraph tidygraph
+    > ### Aliases: associations2igraph saveAsGraph graph igraph tidygraph
     > ### Keywords: file
     > 
     > ### ** Examples
     > 
+    > 
     > data("Groceries")
-    > rules <- apriori(Groceries, parameter=list(support = 0.01, confidence = 0.5))
+    > rules <- apriori(Groceries, parameter = list(support = 0.01, confidence = 0.5))
     Apriori
     
     Parameter specification:
@@ -294,10 +253,10 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     
     > g <- associations2igraph(rules)
     > g
-    IGRAPH d334f71 DN-B 27 45 -- 
+    IGRAPH d47395e DN-B 27 45 -- 
     + attr: name (v/c), label (v/c), index (v/n), type (v/n), support
     | (v/n), confidence (v/n), coverage (v/n), lift (v/n), count (v/n)
-    + edges from d334f71 (vertex names):
+    + edges from d47395e (vertex names):
      [1] 27    ->assoc1  30    ->assoc1  23    ->assoc2  26    ->assoc2 
      [5] 23    ->assoc3  55    ->assoc3  30    ->assoc4  31    ->assoc4 
      [9] 23    ->assoc5  31    ->assoc5  16    ->assoc6  23    ->assoc6 
@@ -352,7 +311,7 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     > 
     > # convert the generating itemsets of the rules into a graph with itemsets as edges
     > itemsets <- generatingItemsets(rules)
-    > itemsets 
+    > itemsets
     set of 15 itemsets 
     > g <- associations2igraph(itemsets, associationsAsNodes = FALSE)
     Error in i_set_vertex_attr(graph = graph, name = name, index = index,  : 
@@ -599,26 +558,7 @@ Run `revdepcheck::cloud_details(, "bigergm")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘intro-bigergm.Rmd’
-      ...
-    > model_formula <- toyNet ~ edges + nodematch("x") + 
-    +     nodematch("y") + triangle
-    
-    > hergm_res <- bigergm::hergm(object = model_formula, 
-    +     n_clusters = 4, n_MM_step_max = 100, estimate_parameters = TRUE, 
-    +     clustering_with_f .... [TRUNCATED] 
-    
-      When sourcing ‘intro-bigergm.R’:
-    Error: No such vertex attribute: name
-    Execution halted
-    
-      ‘intro-bigergm.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘intro-bigergm.Rmd’ using rmarkdown
@@ -628,19 +568,19 @@ Run `revdepcheck::cloud_details(, "bigergm")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 17.3Mb
+      installed size is  9.5Mb
       sub-directories of 1Mb or more:
-        libs  16.8Mb
+        libs   9.0Mb
     ```
 
 # bioregion
 
 <details>
 
-* Version: 1.1.0
+* Version: 1.1.1
 * GitHub: https://github.com/bioRgeo/bioregion
 * Source code: https://github.com/cran/bioregion
-* Date/Publication: 2024-03-19 16:30:02 UTC
+* Date/Publication: 2024-04-19 10:02:43 UTC
 * Number of recursive dependencies: 118
 
 Run `revdepcheck::cloud_details(, "bioregion")` for more info
@@ -676,9 +616,8 @@ Run `revdepcheck::cloud_details(, "bioregion")` for more info
     ```
       installed size is  8.6Mb
       sub-directories of 1Mb or more:
-        data   3.6Mb
-        help   2.6Mb
-        libs   1.1Mb
+        data   4.0Mb
+        help   2.7Mb
     ```
 
 # bnviewer
@@ -823,6 +762,15 @@ Run `revdepcheck::cloud_details(, "bnviewer")` for more info
     Namespaces in Imports field not imported from:
       ‘caret’ ‘e1071’
       All declared Imports should be used.
+    ```
+
+*   checking Rd files ... NOTE
+    ```
+    checkRd: (-1) strength.viewer.Rd:148: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) strength.viewer.Rd:149: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) strength.viewer.Rd:150: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) strength.viewer.Rd:151: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) strength.viewer.Rd:152: Lost braces in \itemize; meant \describe ?
     ```
 
 *   checking LazyData ... NOTE
@@ -1038,16 +986,6 @@ Run `revdepcheck::cloud_details(, "causaloptim")` for more info
       [ FAIL 6 | WARN 9 | SKIP 0 | PASS 68 ]
       Error: Test failures
       Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        libs    3.1Mb
-        shiny   1.0Mb
     ```
 
 # cglasso
@@ -1531,32 +1469,13 @@ Run `revdepcheck::cloud_details(, "corrViz")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘corrViz.Rmd’
-      ...
-    > corrHeatmap(mat = cm, display = "lower", reorder = FALSE)
-    
-    > corrNetwork(mat = cm, threshold = 0, layout = "layout_nicely", 
-    +     width = "100%", height = "400px", physics = FALSE)
-    
-    > corrNetwork(mat = cm, threshold = 0.8, physics = TRUE)
-    
-      When sourcing ‘corrViz.R’:
-    Error: Length of new attribute value must be 1 or 8, the number of target vertices, not 11
-    Execution halted
-    
-      ‘corrViz.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘corrViz.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 133-136 [network2] (corrViz.Rmd)
+    Quitting from lines 133-136 [network2] (corrViz.Rmd)
     Error: processing vignette 'corrViz.Rmd' failed with diagnostics:
     Length of new attribute value must be 1 or 8, the number of target vertices, not 11
     --- failed re-building ‘corrViz.Rmd’
@@ -1630,9 +1549,9 @@ Run `revdepcheck::cloud_details(, "cppRouting")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 16.4Mb
+      installed size is 11.6Mb
       sub-directories of 1Mb or more:
-        libs  16.2Mb
+        libs  11.4Mb
     ```
 
 *   checking dependencies in R code ... NOTE
@@ -1662,53 +1581,20 @@ Run `revdepcheck::cloud_details(, "cranly")` for more info
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘cranly.Rmd’
-      ...
-    > attr(cran_db, "timestamp")
-    [1] "2022-08-26 13:43:43 UTC"
-    
-    > package_network <- build_network(cran_db)
-    
-    > package_summaries <- summary(package_network)
-    
-      When sourcing ‘cranly.R’:
-    Error: arguments imply differing number of rows: 18416, 19260
-    Execution halted
-    when running code in ‘dependence_trees.Rmd’
-      ...
-    23   methods         -3
-    24     rlang         -3
-    25       cli         -3
-    
-    > tibble_tree <- build_dependence_tree(package_network, 
-    +     "tibble")
-    
-      When sourcing ‘dependence_trees.R’:
-    Error: arguments imply differing number of rows: 18416, 19260
-    Execution halted
-    
-      ‘cranly.Rmd’ using ‘UTF-8’... failed
-      ‘dependence_trees.Rmd’ using ‘UTF-8’... failed
-      ‘extractors.Rmd’ using ‘UTF-8’... OK
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘cranly.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 63-65 [unnamed-chunk-7] (cranly.Rmd)
+    Quitting from lines 63-65 [unnamed-chunk-7] (cranly.Rmd)
     Error: processing vignette 'cranly.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 18416, 19260
     --- failed re-building ‘cranly.Rmd’
     
     --- re-building ‘dependence_trees.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 61-63 [unnamed-chunk-6] (dependence_trees.Rmd)
+    Quitting from lines 61-63 [unnamed-chunk-6] (dependence_trees.Rmd)
     Error: processing vignette 'dependence_trees.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 18416, 19260
     --- failed re-building ‘dependence_trees.Rmd’
@@ -2179,32 +2065,13 @@ Run `revdepcheck::cloud_details(, "criticalpath")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘criticalpath-introduction.Rmd’
-      ...
-    
-    > sch <- sch_new() %>% sch_add_activity(1, "Task 1", 
-    +     5) %>% sch_add_activity(2, "Task 2", 6) %>% sch_add_activity(3, 
-    +     "Task 3", 8) %>% sc .... [TRUNCATED] 
-    
-      When sourcing ‘criticalpath-introduction.R’:
-    Error: The schedule is invalid!!! To view the problem, execute:
-    
-             `validation <- sch_validate(sch)`
-    Execution halted
-    
-      ‘criticalpath-introduction.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘criticalpath-introduction.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 266-278 [unnamed-chunk-5] (criticalpath-introduction.Rmd)
+    Quitting from lines 266-278 [unnamed-chunk-5] (criticalpath-introduction.Rmd)
     Error: processing vignette 'criticalpath-introduction.Rmd' failed with diagnostics:
     The schedule is invalid!!! To view the problem, execute:
     
@@ -2213,62 +2080,6 @@ Run `revdepcheck::cloud_details(, "criticalpath")` for more info
     
     SUMMARY: processing the following file failed:
       ‘criticalpath-introduction.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# dartR
-
-<details>
-
-* Version: 2.9.7
-* GitHub: NA
-* Source code: https://github.com/cran/dartR
-* Date/Publication: 2023-06-07 10:40:02 UTC
-* Number of recursive dependencies: 286
-
-Run `revdepcheck::cloud_details(, "dartR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.6Mb
-      sub-directories of 1Mb or more:
-        R      3.5Mb
-        data   1.7Mb
-        help   1.6Mb
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘dartRTutorials.Rmd’ using rmarkdown
-    A new version of TeX Live has been released. If you need to install or update any LaTeX packages, you have to upgrade TinyTeX with tinytex::reinstall_tinytex(repository = "illinois").
-    
-    tlmgr: Local TeX Live (2023) is older than remote repository (2024).
-    Cross release updates are only supported with
-      update-tlmgr-latest(.sh/.exe) --update
-    See https://tug.org/texlive/upgrade.html for details.
-    Warning in system2("tlmgr", args, ...) :
-      running command ''tlmgr' search --file --global '/bookmark.sty'' had status 1
-    ! LaTeX Error: File `bookmark.sty' not found.
-    
-    ! Emergency stop.
-    <read *> 
-    
-    Error: processing vignette 'dartRTutorials.Rmd' failed with diagnostics:
-    LaTeX failed to compile /tmp/workdir/dartR/new/dartR.Rcheck/vign_test/dartR/vignettes/dartRTutorials.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See dartRTutorials.log for more info.
-    --- failed re-building ‘dartRTutorials.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘dartRTutorials.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -2290,46 +2101,13 @@ Run `revdepcheck::cloud_details(, "debkeepr")` for more info
 
 ## Newly broken
 
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘debkeepr.Rmd’ using rmarkdown
     ```
 
 ## In both
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘debkeepr.Rmd’
-      ...
-    
-      When sourcing ‘debkeepr.R’:
-    Error: Incompatible `bases`.
-    ℹ `bases` must be compatible to combine <deb_lsd>, <deb_tetra>, or
-      <deb_decimal> vectors.
-    ✖ Cannot combine: `..1` <deb_lsd> vector with `bases` s = 20 and d = 12.
-    ✖ Cannot combine: `..2` <deb_lsd> vector with `bases` s = 30 and d = 18.
-    ℹ Use `deb_convert_bases()` to convert one or more of the vectors to compatible
-      `bases`.
-    Execution halted
-    when running code in ‘ledger.Rmd’
-      ...
-    > ggraph(ledger_graph, layout = "kk") + geom_edge_fan(aes(alpha = val), 
-    +     width = 1, arrow = arrow(length = unit(2, "mm"), type = "closed"), 
-    +   .... [TRUNCATED] 
-    
-      When sourcing ‘ledger.R’:
-    Error: Problem while computing aesthetics.
-    ℹ Error occurred in the 3rd layer.
-    Caused by error:
-    ! object 'name' not found
-    Execution halted
-    
-      ‘debkeepr.Rmd’ using ‘UTF-8’... failed
-      ‘ledger.Rmd’ using ‘UTF-8’... failed
-      ‘transactions.Rmd’ using ‘UTF-8’... OK
-    ```
 
 *   checking data for non-ASCII characters ... NOTE
     ```
@@ -3187,6 +2965,15 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 
 ## In both
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.0Mb
+      sub-directories of 1Mb or more:
+        R             1.5Mb
+        help          1.5Mb
+        htmlwidgets   2.8Mb
+    ```
+
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 1 marked UTF-8 string
@@ -3318,8 +3105,6 @@ Run `revdepcheck::cloud_details(, "dynwrap")` for more info
     Execution halted
     ```
 
-## In both
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
@@ -3329,7 +3114,7 @@ Run `revdepcheck::cloud_details(, "dynwrap")` for more info
       > library(dynwrap)
       > 
       > test_check("dynwrap")
-      [ FAIL 12 | WARN 30 | SKIP 3 | PASS 498 ]
+      [ FAIL 11 | WARN 30 | SKIP 3 | PASS 502 ]
       
       ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
       • On CRAN (1): 'test-method_create_ti_method_container.R:5:1'
@@ -3546,510 +3331,8 @@ Run `revdepcheck::cloud_details(, "dynwrap")` for more info
       Backtrace:
           ▆
        1. └─igraph::graph_from_data_frame(net, directed = TRUE, vertices = 1:4) at test-simplify_igraph_network.R:184:3
-      ── Error ('test-wrap_add_dimred.R:279:3'): Test get_dimred ─────────────────────
-      Error in `(function (A, nv = 5, nu = nv, maxit = 1000, work = nv + 7, reorth = TRUE, 
-          tol = 1e-05, v = NULL, right_only = FALSE, verbose = FALSE, 
-          scale = NULL, center = NULL, shift = NULL, mult = NULL, fastpath = TRUE, 
-          svtol = tol, smallest = FALSE, ...) 
-      {
-          ropts <- options(warn = 1)
-          mflag <- new.env()
-          mflag$flag <- FALSE
-          on.exit(options(ropts))
-          interchange <- FALSE
-          eps <- .Machine$double.eps
-          mcall <- as.list(match.call())
-          random <- eval(mcall[["rng"]])
-          if (is.null(random)) 
-              random <- rnorm
-          maxritz <- eval(mcall[["maxritz"]])
-          if (is.null(maxritz)) 
-              maxritz <- 3
-          eps2 <- eval(mcall[["invariant_subspace_tolerance"]])
-          if (is.null(eps2)) 
-              eps2 <- eps^(4/5)
-          du <- eval(mcall[["du"]])
-          dv <- eval(mcall[["dv"]])
-          ds <- eval(mcall[["ds"]])
-          deflate <- is.null(du) + is.null(ds) + is.null(dv)
-          if (is.logical(scale) && !scale) 
-              scale <- NULL
-          if (is.logical(shift) && !shift) 
-              shift <- NULL
-          if (is.logical(center) && !center) 
-              center <- NULL
-          if (smallest) 
-              fastpath <- FALSE
-          if (any(dim(A) > 2^32 - 1)) 
-              fastpath <- FALSE
-          if (deflate == 3) {
-              deflate <- FALSE
-          }
-          else if (deflate == 0) {
-              deflate <- TRUE
-              warning("The deflation options have been deprecated. Please modify your code to not use them.")
-              if (length(ds) > 1) 
-                  stop("deflation limited to one dimension")
-              if (!is.null(dim(du))) 
-                  du <- du[, 1]
-              if (!is.null(dim(dv))) 
-                  dv <- dv[, 1]
-          }
-          else stop("all three du ds dv parameters must be specified for deflation")
-          if (!is.null(center)) {
-              if (is.logical(center) && center) 
-                  center <- colMeans(A)
-              if (deflate) 
-                  stop("the center parameter can't be specified together with deflation parameters")
-              if (length(center) != ncol(A)) 
-                  stop("center must be a vector of length ncol(A)")
-              if (fastpath && !right_only) 
-                  du <- NULL
-              else du <- 1
-              ds <- 1
-              dv <- center
-              deflate <- TRUE
-          }
-          if ("integer" == typeof(A)) 
-              A <- A + 0
-          iscomplex <- is.complex(A)
-          m <- nrow(A)
-          n <- ncol(A)
-          if (is.null(nu)) 
-              nu <- nv
-          if (!is.null(mult) && deflate) 
-              stop("the mult parameter can't be specified together with deflation parameters")
-          missingmult <- FALSE
-          if (is.null(mult)) {
-              missingmult <- TRUE
-              mult <- `%*%`
-          }
-          k <- max(nu, nv)
-          if (k <= 0) 
-              stop("max(nu, nv) must be positive")
-          if (k > min(m - 1, n - 1)) 
-              stop("max(nu, nv) must be strictly less than min(nrow(A), ncol(A))")
-          if (k >= 0.5 * min(m, n)) {
-              warning("You're computing too large a percentage of total singular values, use a standard svd instead.")
-          }
-          if (work <= 1) 
-              stop("work must be greater than 1")
-          if (tol < 0) 
-              stop("tol must be non-negative")
-          if (maxit <= 0) 
-              stop("maxit must be positive")
-          if (work <= k && !right_only) 
-              work <- k + 1
-          if (work >= min(n, m)) {
-              work <- min(n, m)
-              if (work <= k) {
-                  k <- work - 1
-                  warning("Requested subspace dimension too large! Reduced to ", 
-                      k)
-              }
-          }
-          k_org <- k
-          w_dim <- work
-          if (right_only) {
-              w_dim <- 1
-              fastpath <- FALSE
-          }
-          if (n > m && smallest) {
-              interchange <- TRUE
-              temp <- m
-              m <- n
-              n <- temp
-          }
-          if (verbose) {
-              message("Working dimension size ", work)
-          }
-          if (min(m, n) < 6) {
-              A <- as.matrix(A)
-              if (verbose) 
-                  message("Tiny problem detected, using standard `svd` function.")
-              if (!is.null(scale)) {
-                  A <- sweep(A, 2, scale, "/")
-                  dv <- dv/scale
-              }
-              if (!is.null(shift)) 
-                  A <- A + diag(shift, nrow(A), ncol(A))
-              if (deflate) {
-                  if (is.null(du)) 
-                      du <- rep(1, nrow(A))
-                  A <- A - (ds * du) %*% t(dv)
-              }
-              s <- svd(A)
-              if (smallest) {
-                  return(list(d = tail(s$d, k), u = s$u[, tail(seq(ncol(s$u)), 
-                      k), drop = FALSE], v = s$v[, tail(seq(ncol(s$v), 
-                      k)), drop = FALSE], iter = 0, mprod = 0))
-              }
-              return(list(d = s$d[1:k], u = s$u[, 1:nu, drop = FALSE], 
-                  v = s$v[, 1:nv, drop = FALSE], iter = 0, mprod = 0))
-          }
-          if (deflate) 
-              fastpath <- fastpath && is.null(du)
-          fastpath <- fastpath && (("Matrix" %in% attributes(class(A)) && 
-              ("dgCMatrix" %in% class(A))) || "matrix" %in% class(A))
-          if (fastpath && missingmult && !iscomplex && !right_only) {
-              RESTART <- 0L
-              RV <- RW <- RS <- NULL
-              if (is.null(v)) {
-                  v <- random(n)
-                  if (verbose) 
-                      message("Initializing starting vector v with samples from standard normal distribution.\nUse `set.seed` first for reproducibility.")
-              }
-              else if (is.list(v)) {
-                  if (is.null(v$v) || is.null(v$d) || is.null(v$u)) 
-                      stop("restart requires left and right singular vectors")
-                  if (max(nu, nv) <= min(ncol(v$u), ncol(v$v))) 
-                      return(v)
-                  RESTART <- as.integer(length(v$d))
-                  RND <- random(n)
-                  RND <- orthog(RND, v$v)
-                  RV <- cbind(v$v, RND/norm2(RND))
-                  RW <- v$u
-                  RS <- v$d
-                  v <- NULL
-              }
-              SP <- ifelse(is.matrix(A), 0L, 1L)
-              if (verbose) 
-                  message("irlba: using fast C implementation")
-              SCALE <- NULL
-              SHIFT <- NULL
-              CENTER <- NULL
-              if (!is.null(scale)) {
-                  if (length(scale) != ncol(A)) 
-                      stop("scale length must match number of matrix columns")
-                  SCALE <- as.double(scale)
-              }
-              if (!is.null(shift)) {
-                  if (length(shift) != 1) 
-                      stop("shift length must be 1")
-                  SHIFT <- as.double(shift)
-              }
-              if (deflate) {
-                  if (length(center) != ncol(A)) 
-                      stop("the centering vector length must match the number of matrix columns")
-                  CENTER <- as.double(center)
-              }
-              ans <- .Call(C_IRLB, A, as.integer(k), as.double(v), 
-                  as.integer(work), as.integer(maxit), as.double(tol), 
-                  as.double(eps2), as.integer(SP), as.integer(RESTART), 
-                  RV, RW, RS, SCALE, SHIFT, CENTER, as.double(svtol))
-              if (ans[[6]] == 0 || ans[[6]] == -2) {
-                  names(ans) <- c("d", "u", "v", "iter", "mprod", "err")
-                  ans$u <- matrix(head(ans$u, m * nu), nrow = m, ncol = nu)
-                  ans$v <- matrix(head(ans$v, n * nv), nrow = n, ncol = nv)
-                  if (tol * ans$d[1] < eps) 
-                      warning("convergence criterion below machine epsilon")
-                  if (ans[[6]] == -2) 
-                      warning("did not converge--results might be invalid!; try increasing work or maxit")
-                  return(ans[-6])
-              }
-              errors <- c("invalid dimensions", "didn't converge", 
-                  "out of memory", "starting vector near the null space", 
-                  "linear dependency encountered")
-              erridx <- abs(ans[[6]])
-              if (erridx > 1) 
-                  warning("fast code path error ", errors[erridx], 
-                      "; re-trying with fastpath=FALSE.", immediate. = TRUE)
-          }
-          W <- matrix(0, m, w_dim)
-          F <- matrix(0, n, 1)
-          restart <- FALSE
-          if (is.list(v)) {
-              if (is.null(v$v) || is.null(v$d) || is.null(v$u)) 
-                  stop("restart requires left and right singular vectors")
-              if (max(nu, nv) <= min(ncol(v$u), ncol(v$v))) 
-                  return(v)
-              right_only <- FALSE
-              W[, 1:ncol(v$u)] <- v$u
-              d <- v$d
-              V <- matrix(0, n, work)
-              V[, 1:ncol(v$v)] <- v$v
-              restart <- TRUE
-          }
-          else if (is.null(v)) {
-              V <- matrix(0, n, work)
-              V[, 1] <- random(n)
-          }
-          else {
-              V <- matrix(0, n, work)
-              V[1:length(v)] <- v
-          }
-          B <- NULL
-          Bsz <- NULL
-          eps23 <- eps^(2/3)
-          iter <- 1
-          mprod <- 0
-          R_F <- NULL
-          sqrteps <- sqrt(eps)
-          Smax <- 1
-          Smin <- NULL
-          lastsv <- c()
-          if (restart) {
-              B <- cbind(diag(d), 0)
-              k <- length(d)
-              F <- random(n)
-              F <- orthog(F, V[, 1:k])
-              V[, k + 1] <- F/norm2(F)
-          }
-          if (deflate && is.null(du)) 
-              du <- 1
-          while (iter <= maxit) {
-              j <- 1
-              if (iter == 1 && !restart) {
-                  V[, 1] <- V[, 1]/norm2(V[, 1])
-              }
-              else j <- k + 1
-              j_w <- ifelse(w_dim > 1, j, 1)
-              VJ <- V[, j]
-              if (!is.null(scale)) {
-                  VJ <- VJ/scale
-              }
-              if (interchange) 
-                  avj <- mult(VJ, A)
-              else avj <- mult(A, VJ)
-              W[, j_w] <- as.vector(avj)
-              mprod <- mprod + 1
-              if (!is.null(shift)) {
-                  W[, j_w] <- W[, j_w] + shift * VJ
-              }
-              if (deflate) {
-                  W[, j_w] <- W[, j_w] - ds * drop(cross(dv, VJ)) * 
-                      du
-              }
-              if (iter != 1 && w_dim > 1 && reorth) {
-                  W[, j] <- orthog(W[, j, drop = FALSE], W[, 1:(j - 
-                      1), drop = FALSE])
-              }
-              S <- norm2(W[, j_w, drop = FALSE])
-              if (is.na(S) || S < eps2 && j == 1) 
-                  stop("starting vector near the null space")
-              if (is.na(S) || S < eps2) {
-                  if (verbose) 
-                      message_once("invariant subspace found", flag = mflag)
-                  W[, j_w] <- random(nrow(W))
-                  if (w_dim > 1) 
-                      W[, j] <- orthog(W[, j], W[, 1:(j - 1)])
-                  W[, j_w] <- W[, j_w]/norm2(W[, j_w])
-                  S <- 0
-              }
-              else W[, j_w] <- W[, j_w]/S
-              while (j <= work) {
-                  j_w <- ifelse(w_dim > 1, j, 1)
-                  if (iscomplex) {
-                      if (interchange) 
-                        F <- Conj(t(drop(mult(A, Conj(drop(W[, j_w]))))))
-                      else F <- Conj(t(drop(mult(Conj(drop(W[, j_w])), 
-                        A))))
-                  }
-                  else {
-                      if (interchange) 
-                        F <- t(drop(mult(A, drop(W[, j_w]))))
-                      else F <- t(drop(mult(drop(W[, j_w]), A)))
-                  }
-                  if (!is.null(shift)) 
-                      F <- F + shift * W[, j_w]
-                  if (!is.null(scale)) 
-                      F <- F/scale
-                  if (deflate) {
-                      sub <- sum(W[, j_w]) * dv
-                      if (!is.null(scale)) 
-                        sub <- sub/scale
-                      F <- F - sub
-                  }
-                  mprod <- mprod + 1
-                  F <- drop(F - S * V[, j])
-                  F <- orthog(F, V[, 1:j, drop = FALSE])
-                  if (j + 1 <= work) {
-                      R <- norm2(F)
-                      if (R < eps2) {
-                        if (verbose) 
-                          message_once("invariant subspace found", 
-                            flag = mflag)
-                        F <- matrix(random(dim(V)[1]), dim(V)[1], 1)
-                        F <- orthog(F, V[, 1:j, drop = FALSE])
-                        V[, j + 1] <- F/norm2(F)
-                        R <- 0
-                      }
-                      else V[, j + 1] <- F/R
-                      if (is.null(B)) 
-                        B <- cbind(S, R)
-                      else B <- rbind(cbind(B, 0), c(rep(0, ncol(B) - 
-                        1), S, R))
-                      jp1_w <- ifelse(w_dim > 1, j + 1, 1)
-                      w_old <- W[, j_w]
-                      VJP1 <- V[, j + 1]
-                      if (!is.null(scale)) {
-                        VJP1 <- VJP1/scale
-                      }
-                      if (interchange) 
-                        W[, jp1_w] <- drop(mult(drop(VJP1), A))
-                      else W[, jp1_w] <- drop(mult(A, drop(VJP1)))
-                      mprod <- mprod + 1
-                      if (!is.null(shift)) {
-                        W[, jp1_w] <- W[, jp1_w] + shift * VJP1
-                      }
-                      if (deflate) {
-                        W[, jp1_w] <- W[, jp1_w] - ds * drop(cross(dv, 
-                          VJP1)) * du
-                      }
-                      W[, jp1_w] <- W[, jp1_w] - R * w_old
-                      if (reorth && w_dim > 1) 
-                        W[, j + 1] <- orthog(W[, j + 1], W[, 1:j])
-                      S <- norm2(W[, jp1_w])
-                      if (S < eps2) {
-                        if (verbose) 
-                          message_once("invariant subspace found", 
-                            flag = mflag)
-                        W[, jp1_w] <- random(nrow(W))
-                        if (w_dim > 1) 
-                          W[, j + 1] <- orthog(W[, j + 1], W[, 1:j])
-                        W[, jp1_w] <- W[, jp1_w]/norm2(W[, jp1_w])
-                        S <- 0
-                      }
-                      else W[, jp1_w] <- W[, jp1_w]/S
-                  }
-                  else {
-                      B <- rbind(B, c(rep(0, j - 1), S))
-                  }
-                  j <- j + 1
-              }
-              Bsz <- nrow(B)
-              R_F <- norm2(F)
-              F <- F/R_F
-              Bsvd <- svd(B)
-              if (iter == 1) {
-                  Smax <- Bsvd$d[1]
-                  Smin <- Bsvd$d[Bsz]
-              }
-              else {
-                  Smax <- max(Smax, Bsvd$d[1])
-                  Smin <- min(Smin, Bsvd$d[Bsz])
-              }
-              Smax <- max(eps23, Smax)
-              if (!reorth && Smin/Smax < sqrteps) {
-                  warning("The matrix is ill-conditioned. Basis will be reorthogonalized.")
-                  reorth <- TRUE
-              }
-              if (smallest) {
-                  jj <- seq(ncol(Bsvd$u), 1, by = -1)
-                  Bsvd$u <- Bsvd$u[, jj]
-                  Bsvd$d <- Bsvd$d[jj]
-                  Bsvd$v <- Bsvd$v[, jj]
-              }
-              R <- R_F * Bsvd$u[Bsz, , drop = FALSE]
-              ct <- convtests(Bsz, tol, k_org, Bsvd, abs(R), k, Smax, 
-                  lastsv, svtol, maxritz, work, S)
-              if (verbose) {
-                  message("iter= ", iter, ", mprod= ", mprod, ", sv[", 
-                      k_org, "]=", sprintf("%.2e", Bsvd$d[k_org]), 
-                      ", %change=", sprintf("%.2e", (Bsvd$d[k_org] - 
-                        lastsv[k_org])/Bsvd$d[k_org]), ", k=", ct$k)
-              }
-              lastsv <- Bsvd$d
-              k <- ct$k
-              if (ct$converged) 
-                  break
-              if (iter >= maxit) 
-                  break
-              if (smallest && (Smin/Smax > sqrteps)) {
-                  Bsvd2.d <- Bsvd$d
-                  Bsvd2.d <- diag(Bsvd2.d, nrow = length(Bsvd2.d))
-                  Bsvd2 <- svd(cbind(Bsvd2.d, t(R)))
-                  jj <- seq(ncol(Bsvd2$u), 1, by = -1)
-                  Bsvd2$u <- Bsvd2$u[, jj]
-                  Bsvd2$d <- Bsvd2$d[jj]
-                  Bsvd2$v <- Bsvd2$v[, jj]
-                  Bsvd$d <- Bsvd2$d
-                  Bsvd$u <- Bsvd$u %*% Bsvd2$u
-                  Bsvd$v <- cbind(rbind(Bsvd$v, rep(0, Bsz)), c(rep(0, 
-                      Bsz), 1)) %*% Bsvd2$v
-                  V_B_last <- Bsvd$v[Bsz + 1, 1:k]
-                  s <- R_F * solve(B, cbind(c(rep(0, Bsz - 1), 1)))
-                  Bsvd$v <- Bsvd$v[1:Bsz, , drop = FALSE] + s %*% Bsvd$v[Bsz + 
-                      1, ]
-                  qrv <- qr(cbind(rbind(Bsvd$v[, 1:k], 0), rbind(-s, 
-                      1)))
-                  Bsvd$v <- qr.Q(qrv)
-                  R <- qr.R(qrv)
-                  V[, 1:(k + 1)] <- cbind(V, F) %*% Bsvd$v
-                  UT <- t(R[1:(k + 1), 1:k] + R[, k + 1] %*% rbind(V_B_last))
-                  B <- diag(Bsvd$d[1:k], nrow = k) %*% (UT * upper.tri(UT, 
-                      diag = TRUE))[1:k, 1:(k + 1)]
-              }
-              else {
-                  V[, 1:(k + dim(F)[2])] <- cbind(V[, 1:(dim(Bsvd$v)[1]), 
-                      drop = FALSE] %*% Bsvd$v[, 1:k], F)
-                  B <- cbind(diag(Bsvd$d[1:k], nrow = k), R[1:k])
-              }
-              if (w_dim > 1) {
-                  W[, 1:k] <- W[, 1:(dim(Bsvd$u)[1]), drop = FALSE] %*% 
-                      Bsvd$u[, 1:k]
-              }
-              iter <- iter + 1
-          }
-          if (!ct$converged) 
-              warning("did not converge--results might be invalid!; try increasing maxit or work")
-          d <- Bsvd$d[1:k_org]
-          if (!right_only) {
-              u <- W[, 1:(dim(Bsvd$u)[1]), drop = FALSE] %*% Bsvd$u[, 
-                  1:k_org, drop = FALSE]
-          }
-          v <- V[, 1:(dim(Bsvd$v)[1]), drop = FALSE] %*% Bsvd$v[, 1:k_org, 
-              drop = FALSE]
-          if (smallest) {
-              reverse <- seq(length(d), 1)
-              d <- d[reverse]
-              if (!right_only) 
-                  u <- u[, reverse]
-              v <- v[, reverse]
-          }
-          if (tol * d[1] < eps) 
-              warning("convergence criterion below machine epsilon")
-          if (right_only) 
-              return(list(d = d, v = v[, 1:nv, drop = FALSE], iter = iter, 
-                  mprod = mprod))
-          return(list(d = d, u = u[, 1:nu, drop = FALSE], v = v[, 1:nv, 
-              drop = FALSE], iter = iter, mprod = mprod))
-      })(A = new("dgCMatrix", i = c(0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 
-      2L, 3L, 4L, 5L, 0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 2L, 3L, 4L, 5L, 
-      0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 2L, 3L, 
-      4L, 5L, 0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 2L, 3L, 4L, 5L, 0L, 1L, 
-      2L, 3L, 4L, 5L), p = c(0L, 6L, 12L, 18L, 24L, 30L, 36L, 42L, 
-      48L, 54L, 60L), Dim = c(6L, 10L), Dimnames = list(c("truth", 
-      "universally", "acknowledged", "that", "a", "single"), c("G1", 
-      "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10")), x = c(6.4262647547021, 
-      6.61470984411521, 6.4262647547021, 6.62935662007961, 6.49185309632967, 
-      6.4594316186373, 6.53915881110803, 6.71424551766612, 6.52356195605701, 
-      6.52356195605701, 6.68650052718322, 6.52356195605701, 6.71424551766612, 
-      6.62935662007961, 6.74146698640115, 6.4262647547021, 6.49185309632967, 
-      6.79441586635011, 6.75488750216347, 6.82017896241519, 6.44294349584873, 
-      6.56985560833095, 6.53915881110803, 6.7279204545632, 6.84549005094437, 
-      6.53915881110803, 7.01122725542325, 6.5077946401987, 6.7279204545632, 
-      6.7279204545632, 6.74146698640115, 6.76818432477693, 6.61470984411521, 
-      6.8073549220576, 6.84549005094437, 6.59991284218713, 6.52356195605701, 
-      6.61470984411521, 6.59991284218713, 6.59991284218713, 6.8703647195834, 
-      6.74146698640115, 6.74146698640115, 6.44294349584873, 6.70043971814109, 
-      6.8073549220576, 6.79441586635011, 6.6724253419715, 6.8703647195834, 
-      6.75488750216347, 6.4093909361377, 6.93073733756289, 6.61470984411521, 
-      6.56985560833095, 6.39231742277876, 6.59991284218713, 6.28540221886225, 
-      6.62935662007961, 6.83289001416474, 6.7279204545632), factors = list()), 
-          nv = 2, center = c(G1 = 6.507980114761, G2 = 6.5850984540214, 
-          G3 = 6.63293380692146, G4 = 6.64249080573826, G5 = 6.72658527780013, 
-          G6 = 6.72951982841373, G7 = 6.65832153175517, G8 = 6.6931743884617, 
-          G9 = 6.69165765798227, G10 = 6.57796659543928))`: function 'sexp_as_cholmod_sparse' not provided by package 'Matrix'
-      Backtrace:
-          ▆
-       1. └─dynwrap::get_dimred(wr_withdimred, dimred = dyndimred::dimred_pca) at test-wrap_add_dimred.R:279:3
-       2.   └─dyndimred::dimred(expression)
-       3.     └─irlba::prcomp_irlba(x, n = ndim)
-       4.       ├─base::do.call(irlba, args = args)
-       5.       └─irlba (local) `<fn>`(A = `<dgCMatrx[,10]>`, nv = 2, center = `<dbl>`)
       
-      [ FAIL 12 | WARN 30 | SKIP 3 | PASS 498 ]
+      [ FAIL 11 | WARN 30 | SKIP 3 | PASS 502 ]
       Error: Test failures
       Execution halted
     ```
@@ -4172,11 +3455,11 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       > 
       > test_check("egor")
       5 Egos/ Ego Networks 
-      90 Alters 
-      Min. Netsize 10 
-      Average Netsize 18 
-      Max. Netsize 26 
-      Average Density 0.520252057805534 
+      67 Alters 
+      Min. Netsize 9 
+      Average Netsize 13.4 
+      Max. Netsize 19 
+      Average Density 0.504810141652247 
       
       Ego sampling design:
       Independent Sampling design (with replacement)
@@ -4189,11 +3472,11 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       Alter survey design:
         Maximum nominations: Inf 
       5 Egos/ Ego Networks 
-      90 Alters 
-      Min. Netsize 10 
-      Average Netsize 18 
-      Max. Netsize 26 
-      Average Density 0.520252057805534 
+      67 Alters 
+      Min. Netsize 9 
+      Average Netsize 13.4 
+      Max. Netsize 19 
+      Average Density 0.504810141652247 
       
       Ego sampling design:
       Independent Sampling design (with replacement)
@@ -4206,11 +3489,11 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       Alter survey design:
         Maximum nominations: Inf 
       3 Egos/ Ego Networks 
-      44 Alters 
+      25 Alters 
       Min. Netsize 7 
-      Average Netsize 14.6666666666667 
-      Max. Netsize 19 
-      Average Density 0.505643192949695 
+      Average Netsize 8.33333333333333 
+      Max. Netsize 9 
+      Average Density 0.505291005291005 
       Alter survey design:
         Maximum nominations: Inf 
       32 Egos/ Ego Networks 
@@ -4243,7 +3526,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       Average Density 1.33333333333333 
       Alter survey design:
         Maximum nominations: Inf 
-      Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Filtering out empty alter entries using provided network size values: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: [ FAIL 21 | WARN 330 | SKIP 15 | PASS 188 ]
+      Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Filtering out empty alter entries using provided network size values: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: [ FAIL 22 | WARN 327 | SKIP 15 | PASS 187 ]
       
       ══ Skipped tests (15) ══════════════════════════════════════════════════════════
       • On CRAN (15): 'test-ei.R:3:11', 'test-ei.R:72:13', 'test-ei.R:85:13',
@@ -4320,9 +3603,31 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        22.   └─purrr (local) h(simpleError(msg, call))
        23.     └─cli::cli_abort(...)
        24.       └─rlang::abort(...)
+      ── Failure ('test-clustered_graphs.R:24:5'): Methods are working with partially missing data. ──
+      `clustered_graphs(mpf, "country")` threw an error.
+      Message: Length of new attribute value must be 1 or 16, the number of target vertices, not 20
+      Class:   simpleError/error/condition
+      Backtrace:
+           ▆
+        1. ├─testthat::expect_error(clustered_graphs(mpf, "country"), NA) at test-clustered_graphs.R:24:5
+        2. │ └─testthat:::quasi_capture(...)
+        3. │   ├─testthat (local) .capture(...)
+        4. │   │ └─base::withCallingHandlers(...)
+        5. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
+        6. ├─egor::clustered_graphs(mpf, "country")
+        7. └─egor:::clustered_graphs.egor(mpf, "country")
+        8.   ├─egor::clustered_graphs(...)
+        9.   └─egor:::clustered_graphs.list(...)
+       10.     └─base::mapply(...)
+       11.       └─egor (local) `<fn>`(dots[[1L]][[1L]], dots[[2L]][[1L]])
+       12.         └─igraph::graph.data.frame(d = x, vertices = y, directed = FALSE)
+       13.           └─igraph::graph_from_data_frame(d = d, directed = directed, vertices = vertices)
+       14.             └─igraph::add_vertices(g, length(names), attr = vattrs)
+       15.               └─igraph::set_vertex_attr(graph, nam[[i]], idx, attr)
+       16.                 └─igraph:::i_set_vertex_attr(...)
       ── Failure ('test-clustered_graphs.R:36:5'): Methods work (properly) with NAs in grouping variable. ──
       `clustered_graphs(mpf, "country")` threw an error.
-      Message: Length of new attribute value must be 1 or 21, the number of target vertices, not 18
+      Message: Length of new attribute value must be 1 or 27, the number of target vertices, not 24
       Class:   simpleError/error/condition
       Backtrace:
            ▆
@@ -4344,7 +3649,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        16.                 └─igraph:::i_set_vertex_attr(...)
       ── Error ('test-clustered_graphs.R:39:5'): Methods work (properly) with NAs in grouping variable. ──
       Error in `i_set_vertex_attr(graph = graph, name = name, index = index, 
-          value = value)`: Length of new attribute value must be 1 or 21, the number of target vertices, not 18
+          value = value)`: Length of new attribute value must be 1 or 27, the number of target vertices, not 24
       Backtrace:
            ▆
         1. ├─igraph::V(clustered_graphs(mpf, "country")[[1]]) at test-clustered_graphs.R:39:5
@@ -4374,7 +3679,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
         6. ├─egor::as_igraph(en, include.ego = T, ego.attrs = c("sex", "age")) at test-conversions.R:49:15
         7. └─egor:::as_igraph.nested_egor(...)
         8.   └─base::mapply(...)
-        9.     └─egor (local) `<fn>`(dots[[1L]][[3L]], dots[[2L]][[3L]])
+        9.     └─egor (local) `<fn>`(dots[[1L]][[2L]], dots[[2L]][[2L]])
        10.       └─igraph::graph.data.frame(...)
        11.         └─igraph::graph_from_data_frame(d = d, directed = directed, vertices = vertices)
        12.           └─igraph::add_vertices(g, length(names), attr = vattrs)
@@ -4382,7 +3687,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        14.               └─igraph:::i_set_vertex_attr(...)
       ── Failure ('test-ego_constraint.R:4:3'): ego_constraint works without weight ──
       `ego_constraint(object = e1)` threw an error.
-      Message: Length of new attribute value must be 1 or 8, the number of target vertices, not 9
+      Message: Length of new attribute value must be 1 or 3, the number of target vertices, not 4
       Class:   simpleError/error/condition
       Backtrace:
            ▆
@@ -4397,7 +3702,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
         9.     ├─egor::as_igraph(...)
        10.     └─egor:::as_igraph.nested_egor(...)
        11.       └─base::mapply(...)
-       12.         └─egor (local) `<fn>`(dots[[1L]][[12L]], dots[[2L]][[12L]])
+       12.         └─egor (local) `<fn>`(dots[[1L]][[28L]], dots[[2L]][[28L]])
        13.           └─igraph::graph.data.frame(...)
        14.             └─igraph::graph_from_data_frame(d = d, directed = directed, vertices = vertices)
        15.               └─igraph::add_vertices(g, length(names), attr = vattrs)
@@ -4405,11 +3710,8 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        17.                   └─igraph:::i_set_vertex_attr(...)
       ── Failure ('test-ego_constraint.R:14:3'): ego_constraint works with weight ────
       `ego_constraint(object = e1, weight = "weight")` threw an error.
-      Message: ℹ In index: 1.
-      ℹ With name: 1.
-      Caused by error in `simple_vs_index()`:
-      ! Unknown vertex selected
-      Class:   purrr_error_indexed/rlang_error/error/condition
+      Message: Length of new attribute value must be 1 or 5, the number of target vertices, not 6
+      Class:   simpleError/error/condition
       Backtrace:
            ▆
         1. ├─testthat::expect_error(...) at test-ego_constraint.R:14:3
@@ -4417,25 +3719,18 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
         3. │   ├─testthat (local) .capture(...)
         4. │   │ └─base::withCallingHandlers(...)
         5. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
-        6. ├─egor::ego_constraint(object = e1, weight = "weight")
-        7. │ └─purrr::map_dbl(...)
-        8. │   └─purrr:::map_("double", .x, .f, ..., .progress = .progress)
-        9. │     ├─purrr:::with_indexed_errors(...)
-       10. │     │ └─base::withCallingHandlers(...)
-       11. │     ├─purrr:::call_with_cleanup(...)
-       12. │     └─egor (local) .f(.x[[i]], ...)
-       13. │       ├─igraph::constraint(...)
-       14. │       │ └─igraph:::as_igraph_vs(graph, nodes)
-       15. │       ├─igraph::V(.)[igraph::V(.)$name == "ego"]
-       16. │       └─igraph:::`[.igraph.vs`(igraph::V(.), igraph::V(.)$name == "ego")
-       17. │         └─base::lapply(...)
-       18. │           └─igraph (local) FUN(X[[i]], ...)
-       19. │             └─igraph:::simple_vs_index(x, ii, na_ok)
-       20. │               └─base::stop("Unknown vertex selected")
-       21. └─base::.handleSimpleError(...)
-       22.   └─purrr (local) h(simpleError(msg, call))
-       23.     └─cli::cli_abort(...)
-       24.       └─rlang::abort(...)
+        6. └─egor::ego_constraint(object = e1, weight = "weight")
+        7.   ├─egor::as_igraph(object, include.ego = TRUE, ego.alter.weights = ego.alter.weights)
+        8.   └─egor:::as_igraph.egor(object, include.ego = TRUE, ego.alter.weights = ego.alter.weights)
+        9.     ├─egor::as_igraph(...)
+       10.     └─egor:::as_igraph.nested_egor(...)
+       11.       └─base::mapply(...)
+       12.         └─egor (local) `<fn>`(dots[[1L]][[18L]], dots[[2L]][[18L]])
+       13.           └─igraph::graph.data.frame(...)
+       14.             └─igraph::graph_from_data_frame(d = d, directed = directed, vertices = vertices)
+       15.               └─igraph::add_vertices(g, length(names), attr = vattrs)
+       16.                 └─igraph::set_vertex_attr(graph, nam[[i]], idx, attr)
+       17.                   └─igraph:::i_set_vertex_attr(...)
       ── Error ('test-ego_constraint.R:24:3'): ego_constraint() returns tbl_svy object, when ego_design present ──
       <purrr_error_indexed/rlang_error/error/condition>
       Error in `purrr::map_dbl(graphs, ~igraph::constraint(., weights = if (is.null(weights)) rep(1, 
@@ -4467,7 +3762,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        19.       └─rlang::abort(...)
       ── Failure ('test-plot_egor.R:9:3'): plot plots egor objects ───────────────────
       `{ ... }` threw an error.
-      Message: Length of new attribute value must be 1 or 3, the number of target vertices, not 4
+      Message: Length of new attribute value must be 1 or 4, the number of target vertices, not 5
       Class:   simpleError/error/condition
       Backtrace:
            ▆
@@ -4756,51 +4051,18 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
        19.               └─igraph::set_vertex_attr(graph, nam[[i]], idx, attr)
        20.                 └─igraph:::i_set_vertex_attr(...)
       
-      [ FAIL 21 | WARN 330 | SKIP 15 | PASS 188 ]
+      [ FAIL 22 | WARN 327 | SKIP 15 | PASS 187 ]
       Error: Test failures
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘egor_allbus.Rmd’
-      ...
-    
-    > e_kontakte <- e_kontakte %>% activate(aatie) %>% filter(weight != 
-    +     3) %>% activate(ego)
-    
-    > plot(e_freunde, ego_no = 4, x_dim = 2, y_dim = 1)
-    Warning: Unknown or uninitialised column: `name`.
-    
-      When sourcing ‘egor_allbus.R’:
-    Error: arguments imply differing number of rows: 2, 3
-    Execution halted
-    when running code in ‘using_egor.Rmd’
-      ...
-    Warning: Unknown or uninitialised column: `name`.
-    Warning: Unknown or uninitialised column: `name`.
-    Warning: Unknown or uninitialised column: `name`.
-    Warning: Unknown or uninitialised column: `name`.
-    Warning: Unknown or uninitialised column: `name`.
-    Warning: Unknown or uninitialised column: `name`.
-    
-      When sourcing ‘using_egor.R’:
-    Error: arguments imply differing number of rows: 5, 7
-    Execution halted
-    
-      ‘egor_allbus.Rmd’ using ‘UTF-8’... failed
-      ‘qualtrics.Rmd’ using ‘UTF-8’... OK
-      ‘using_egor.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘egor_allbus.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 179-181 [unnamed-chunk-11] (egor_allbus.Rmd)
+    Quitting from lines 179-181 [unnamed-chunk-11] (egor_allbus.Rmd)
     Error: processing vignette 'egor_allbus.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 2, 3
     --- failed re-building ‘egor_allbus.Rmd’
@@ -4810,7 +4072,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
     
     --- re-building ‘using_egor.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 222-241 [unnamed-chunk-16] (using_egor.Rmd)
+    Quitting from lines 222-241 [unnamed-chunk-16] (using_egor.Rmd)
     Error: processing vignette 'using_egor.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 5, 7
     --- failed re-building ‘using_egor.Rmd’
@@ -4826,10 +4088,10 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
 
 <details>
 
-* Version: 1.1.3
+* Version: 1.1.4
 * GitHub: https://github.com/reconhub/epicontacts
 * Source code: https://github.com/cran/epicontacts
-* Date/Publication: 2023-03-28 13:10:12 UTC
+* Date/Publication: 2024-04-30 11:42:43 UTC
 * Number of recursive dependencies: 84
 
 Run `revdepcheck::cloud_details(, "epicontacts")` for more info
@@ -4891,33 +4153,13 @@ Run `revdepcheck::cloud_details(, "epicontacts")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘epicontacts.Rmd’
-      ...
-    # ℹ 23 more rows
-    
-    
-    > nodes <- c("SK_14", "SK_145")
-    
-    > subset(merskor15, cluster_id = nodes)
-    
-      When sourcing ‘epicontacts.R’:
-    Error: arguments imply differing number of rows: 97, 162
-    Execution halted
-    
-      ‘epicontacts.Rmd’ using ‘UTF-8’... failed
-      ‘epicontacts_class.Rmd’ using ‘UTF-8’... OK
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘epicontacts.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 128-130 [unnamed-chunk-9] (epicontacts.Rmd)
+    Quitting from lines 128-130 [unnamed-chunk-9] (epicontacts.Rmd)
     Error: processing vignette 'epicontacts.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 97, 162
     --- failed re-building ‘epicontacts.Rmd’
@@ -4930,14 +4172,6 @@ Run `revdepcheck::cloud_details(, "epicontacts")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘colorspace’
-      All declared Imports should be used.
     ```
 
 # erah
@@ -5270,33 +4504,33 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
     Execution halted
     ```
 
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Edges.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 40-75 [unnamed-chunk-2] (Edges.Rmd)
+    Quitting from lines 40-75 [unnamed-chunk-2] (Edges.Rmd)
     Error: processing vignette 'Edges.Rmd' failed with diagnostics:
     No such vertex attribute: name
     --- failed re-building ‘Edges.Rmd’
     
     --- re-building ‘Layouts.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 35-45 [unnamed-chunk-2] (Layouts.Rmd)
+    Quitting from lines 35-45 [unnamed-chunk-2] (Layouts.Rmd)
     Error: processing vignette 'Layouts.Rmd' failed with diagnostics:
     No such vertex attribute: name
     --- failed re-building ‘Layouts.Rmd’
     
     --- re-building ‘Nodes.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 27-35 [unnamed-chunk-2] (Nodes.Rmd)
+    Quitting from lines 27-35 [unnamed-chunk-2] (Nodes.Rmd)
     Error: processing vignette 'Nodes.Rmd' failed with diagnostics:
     No such vertex attribute: name
     --- failed re-building ‘Nodes.Rmd’
     
     --- re-building ‘tidygraph.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 67-77 [unnamed-chunk-2] (tidygraph.Rmd)
+    Quitting from lines 67-77 [unnamed-chunk-2] (tidygraph.Rmd)
     Error: processing vignette 'tidygraph.Rmd' failed with diagnostics:
     No such vertex attribute: name
     --- failed re-building ‘tidygraph.Rmd’
@@ -5310,70 +4544,13 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
 
 ## In both
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Edges.Rmd’
-      ...
-    +     path, ...) { .... [TRUNCATED] 
-    
-    > hairball <- mutate(activate(mutate(as_tbl_graph(highschool), 
-    +     year_pop = map_local(mode = "in", .f = function(neighborhood, 
-    +         ...) {
-     .... [TRUNCATED] 
-    
-      When sourcing ‘Edges.R’:
-    Error: No such vertex attribute: name
-    Execution halted
-    when running code in ‘Layouts.Rmd’
-      ...
-        filter
-    
-    
-    > set_graph_style(plot_margin = margin(1, 1, 1, 1))
-    
-    > graph <- as_tbl_graph(highschool)
-    
-      When sourcing ‘Layouts.R’:
-    Error: No such vertex attribute: name
-    Execution halted
-    when running code in ‘Nodes.Rmd’
-      ...
-        filter
-    
-    
-    > set_graph_style(plot_margin = margin(1, 1, 1, 1))
-    
-    > gr <- as_tbl_graph(highschool)
-    
-      When sourcing ‘Nodes.R’:
-    Error: No such vertex attribute: name
-    Execution halted
-    when running code in ‘tidygraph.Rmd’
-      ...
-    
-        filter
-    
-    
-    > graph <- as_tbl_graph(data.frame(from = sample(5, 
-    +     20, TRUE), to = sample(5, 20, TRUE), weight = runif(20)))
-    
-      When sourcing ‘tidygraph.R’:
-    Error: No such vertex attribute: name
-    Execution halted
-    
-      ‘Edges.Rmd’ using ‘UTF-8’... failed
-      ‘Layouts.Rmd’ using ‘UTF-8’... failed
-      ‘Nodes.Rmd’ using ‘UTF-8’... failed
-      ‘tidygraph.Rmd’ using ‘UTF-8’... failed
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.9Mb
+      installed size is  9.1Mb
       sub-directories of 1Mb or more:
+        R      1.5Mb
         doc    3.9Mb
-        libs   4.4Mb
+        libs   2.9Mb
     ```
 
 # grainscape
@@ -5455,7 +4632,7 @@ Run `revdepcheck::cloud_details(, "grainscape")` for more info
        6.         └─igraph:::i_set_vertex_attr(...)
       ── Error ('test-corridor-distance-point.R:22:3'): corridor handles NA values ───
       Error in `i_set_vertex_attr(graph = graph, name = name, index = index, 
-          value = value)`: Length of new attribute value must be 1 or 627, the number of target vertices, not 589
+          value = value)`: Length of new attribute value must be 1 or 652, the number of target vertices, not 612
       Backtrace:
           ▆
        1. ├─grainscape::MPG(cost, cost == 1) at test-corridor-distance-point.R:22:3
@@ -5466,7 +4643,7 @@ Run `revdepcheck::cloud_details(, "grainscape")` for more info
        6.         └─igraph:::i_set_vertex_attr(...)
       ── Error ('test-corridor-distance-point.R:42:3'): distance handles NA values ───
       Error in `i_set_vertex_attr(graph = graph, name = name, index = index, 
-          value = value)`: Length of new attribute value must be 1 or 637, the number of target vertices, not 597
+          value = value)`: Length of new attribute value must be 1 or 655, the number of target vertices, not 609
       Backtrace:
           ▆
        1. ├─grainscape::MPG(cost, cost == 1) at test-corridor-distance-point.R:42:3
@@ -5477,7 +4654,7 @@ Run `revdepcheck::cloud_details(, "grainscape")` for more info
        6.         └─igraph:::i_set_vertex_attr(...)
       ── Error ('test-corridor-distance-point.R:63:3'): point handles NA values ──────
       Error in `i_set_vertex_attr(graph = graph, name = name, index = index, 
-          value = value)`: Length of new attribute value must be 1 or 635, the number of target vertices, not 585
+          value = value)`: Length of new attribute value must be 1 or 626, the number of target vertices, not 589
       Backtrace:
           ▆
        1. ├─grainscape::MPG(cost, cost == 1) at test-corridor-distance-point.R:63:3
@@ -5635,66 +4812,22 @@ Run `revdepcheck::cloud_details(, "grainscape")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘grainscape_vignette.Rmd’
-      ...
-    > ggplot() + geom_raster(data = patchyCost_df, aes(x = x, 
-    +     y = y, fill = value)) + scale_fill_brewer(type = "div", palette = "Paired", 
-    +     gu .... [TRUNCATED] 
-    
-    > patchyMPG <- MPG(patchyCost, patch = (patchyCost == 
-    +     1))
-    
-      When sourcing ‘grainscape_vignette.R’:
-    Error: Length of new attribute value must be 1 or 42, the number of target vertices, not 13
-    Execution halted
-    
-      ‘MPG_algorithm.Rmd’ using ‘UTF-8’... OK
-      ‘grainscape_vignette.Rmd’ using ‘UTF-8’... failed
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        doc    1.5Mb
-        libs   2.5Mb
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
+      ...
     --- re-building ‘MPG_algorithm.Rmd’ using rmarkdown
-    A new version of TeX Live has been released. If you need to install or update any LaTeX packages, you have to upgrade TinyTeX with tinytex::reinstall_tinytex(repository = "illinois").
-    
-    tlmgr: Local TeX Live (2023) is older than remote repository (2024).
-    Cross release updates are only supported with
-      update-tlmgr-latest(.sh/.exe) --update
-    See https://tug.org/texlive/upgrade.html for details.
-    Warning in system2("tlmgr", args, ...) :
-      running command ''tlmgr' search --file --global '/bookmark.sty'' had status 1
-    ! LaTeX Error: File `bookmark.sty' not found.
-    
-    ! Emergency stop.
-    <read *> 
-    
-    Error: processing vignette 'MPG_algorithm.Rmd' failed with diagnostics:
-    LaTeX failed to compile /tmp/workdir/grainscape/new/grainscape.Rcheck/vign_test/grainscape/vignettes/MPG_algorithm.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See MPG_algorithm.log for more info.
-    --- failed re-building ‘MPG_algorithm.Rmd’
+    --- finished re-building ‘MPG_algorithm.Rmd’
     
     --- re-building ‘grainscape_vignette.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 204-205 [model_01_step_02] (grainscape_vignette.Rmd)
+    Quitting from lines 204-205 [model_01_step_02] (grainscape_vignette.Rmd)
     Error: processing vignette 'grainscape_vignette.Rmd' failed with diagnostics:
     Length of new attribute value must be 1 or 42, the number of target vertices, not 13
     --- failed re-building ‘grainscape_vignette.Rmd’
     
-    SUMMARY: processing the following files failed:
-      ‘MPG_algorithm.Rmd’ ‘grainscape_vignette.Rmd’
+    SUMMARY: processing the following file failed:
+      ‘grainscape_vignette.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -5778,32 +4911,13 @@ Run `revdepcheck::cloud_details(, "graphlayouts")` for more info
 
 ## In both
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘graphlayouts.Rmd’
-      ...
-    Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
-      font family 'Arial Narrow' not found in PostScript font database
-    Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
-      font family 'Arial Narrow' not found in PostScript font database
-    Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y,  :
-      font family 'Arial Narrow' not found in PostScript font database
-    
-      When sourcing ‘graphlayouts.R’:
-    Error: invalid font type
-    Execution halted
-    
-      ‘graphlayouts.Rmd’ using ‘UTF-8’... failed
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is 13.9Mb
+      installed size is  9.6Mb
       sub-directories of 1Mb or more:
         doc    1.9Mb
-        help   2.0Mb
-        libs   9.7Mb
+        help   2.1Mb
+        libs   5.3Mb
     ```
 
 *   checking data for non-ASCII characters ... NOTE
@@ -5990,32 +5104,13 @@ Run `revdepcheck::cloud_details(, "intergraph")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘howto.Rmd’
-      ...
-        label 
-    
-    > class(exNetwork)
-    [1] "network"
-    
-    > g <- asIgraph(exNetwork)
-    
-      When sourcing ‘howto.R’:
-    Error: Length of new attribute value must be 1 or 14, the number of target vertices, not 15
-    Execution halted
-    
-      ‘howto.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘howto.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 89-95 [network2igraph] (howto.Rmd)
+    Quitting from lines 89-95 [network2igraph] (howto.Rmd)
     Error: processing vignette 'howto.Rmd' failed with diagnostics:
     Length of new attribute value must be 1 or 14, the number of target vertices, not 15
     --- failed re-building ‘howto.Rmd’
@@ -6180,9 +5275,9 @@ Run `revdepcheck::cloud_details(, "interplex")` for more info
     +   cp_ig <- as_cmplx(ig, index = "id")
     +   print(cp_ig)
     + }
-    IGRAPH 180afb4 D--- 4 4 -- 
+    IGRAPH b5bd4d0 D--- 4 4 -- 
     + attr: id (v/n)
-    + edges from 180afb4:
+    + edges from b5bd4d0:
     [1] 1->2 2->3 1->3 3->4
     [[1]]
     [1] 2
@@ -6515,26 +5610,7 @@ Run `revdepcheck::cloud_details(, "massiveGST")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘vignette.Rmd’
-      ...
-    > plot(ans)
-    
-    > plot(cut_by_significance(ans), top = 30)
-    
-    > plot(cut_by_significance(ans), gene_sets = geneSets, 
-    +     as.network = TRUE)
-    
-      When sourcing ‘vignette.R’:
-    Error: Length of new attribute value must be 1 or 18, the number of target vertices, not 19
-    Execution halted
-    
-      ‘vignette.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘vignette.Rmd’ using rmarkdown
@@ -6556,32 +5632,13 @@ Run `revdepcheck::cloud_details(, "MEGENA")` for more info
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘MEGENA_pipeline_10062016.Rmd’
-      ...
-    Calculating distance metric and similarity...
-    iteration:1
-    - #. tested:1
-    - k=2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
-    - #. of split:4
-    - assess improvements over compactness
-    
-      When sourcing ‘MEGENA_pipeline_10062016.R’:
-    Error: invalid first argument
-    Execution halted
-    
-      ‘MEGENA_pipeline_10062016.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘MEGENA_pipeline_10062016.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 77-93 [MCA] (MEGENA_pipeline_10062016.Rmd)
+    Quitting from lines 77-93 [MCA] (MEGENA_pipeline_10062016.Rmd)
     Error: processing vignette 'MEGENA_pipeline_10062016.Rmd' failed with diagnostics:
     invalid first argument
     --- failed re-building ‘MEGENA_pipeline_10062016.Rmd’
@@ -6591,16 +5648,6 @@ Run `revdepcheck::cloud_details(, "MEGENA")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.3Mb
-      sub-directories of 1Mb or more:
-        data   1.8Mb
-        libs   3.1Mb
     ```
 
 # morph
@@ -6752,32 +5799,13 @@ Run `revdepcheck::cloud_details(, "mstknnclust")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘guide.Rmd’
-      ...
-    Warning in .igraph.graph.union.or.intersection("intersection", ..., byname = byname,  :
-      Some, but not all graphs are named, not using vertex names
-    Warning in .igraph.graph.union.or.intersection("intersection", ..., byname = byname,  :
-      Some, but not all graphs are named, not using vertex names
-    Warning in .igraph.graph.union.or.intersection("intersection", ..., byname = byname,  :
-      Some, but not all graphs are named, not using vertex names
-    
-      When sourcing ‘guide.R’:
-    Error: `d` should contain at least two columns
-    Execution halted
-    
-      ‘guide.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘guide.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 77-79 [unnamed-chunk-4] (guide.Rmd)
+    Quitting from lines 77-79 [unnamed-chunk-4] (guide.Rmd)
     Error: processing vignette 'guide.Rmd' failed with diagnostics:
     `d` should contain at least two columns
     --- failed re-building ‘guide.Rmd’
@@ -6836,9 +5864,19 @@ Run `revdepcheck::cloud_details(, "multinet")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 170.9Mb
+      installed size is 126.0Mb
       sub-directories of 1Mb or more:
-        libs  170.7Mb
+        libs  125.8Mb
+    ```
+
+*   checking Rd files ... NOTE
+    ```
+    checkRd: (-1) LayerMeasures.Rd:24: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) LayerMeasures.Rd:25: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) LayerMeasures.Rd:26: Lost braces in \itemize; meant \describe ?
+    checkRd: (-1) Plot.Rd:38: Lost braces; missing escapes or markup?
+        38 | \item{vertex.shape}{Symbol to use for nodes, corresponding to the parameter {pch} of the R \code{points} function.  This can either
+           |                                                                             ^
     ```
 
 # nda
@@ -6953,41 +5991,6 @@ Run `revdepcheck::cloud_details(, "Neighboot")` for more info
     Execution halted
     ```
 
-# PCGII
-
-<details>
-
-* Version: 1.1.2
-* GitHub: NA
-* Source code: https://github.com/cran/PCGII
-* Date/Publication: 2024-02-02 18:30:05 UTC
-* Number of recursive dependencies: 126
-
-Run `revdepcheck::cloud_details(, "PCGII")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Introduction.Rmd’
-      ...
-    
-    > dim(links)
-    [1] 99  2
-    
-    > my_net <- graph_from_data_frame(d = links, vertices = nodenames, 
-    +     directed = F)
-    
-      When sourcing ‘Introduction.R’:
-    Error: `vertices` must be a data frame or a character vector if given
-    Execution halted
-    
-      ‘Introduction.Rmd’ using ‘UTF-8’... failed
-    ```
-
 # pmd
 
 <details>
@@ -7024,39 +6027,7 @@ Run `revdepcheck::cloud_details(, "pmd")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘globalstd.Rmd’
-      ...
-    > stdcluster2 <- getcluster(std, corcutoff = 0.9)
-    
-    > stdcluster3 <- getcluster(std2, corcutoff = 0.9)
-    
-    > corcluster <- getcorcluster(spmeinvivo)
-    75 retention time cluster found.
-    
-      When sourcing ‘globalstd.R’:
-    Error: no rows to aggregate
-    Execution halted
-    when running code in ‘reactomics.Rmd’
-      ...
-    > net <- graph_from_data_frame(chain$sdac, directed = F)
-    
-    > pal <- grDevices::rainbow(5)
-    
-    > plot(net, vertex.label = round(as.numeric(V(net)$name), 
-    +     2), vertex.size = 5, edge.width = 3, edge.color = pal[as.numeric(as.factor(E(net)$dif .... [TRUNCATED] 
-    
-      When sourcing ‘reactomics.R’:
-    Error: zero-length 'labels' specified
-    Execution halted
-    
-      ‘globalstd.Rmd’ using ‘UTF-8’... failed
-      ‘reactomics.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘globalstd.Rmd’ using rmarkdown
@@ -7066,9 +6037,9 @@ Run `revdepcheck::cloud_details(, "pmd")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is  5.2Mb
       sub-directories of 1Mb or more:
-        data   3.3Mb
+        data   3.5Mb
         doc    1.3Mb
     ```
 
@@ -7112,27 +6083,7 @@ Run `revdepcheck::cloud_details(, "polymapR")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Vignette_polymapR.Rmd’
-      ...
-    There are now 205 individuals leftover in the dataset.
-    
-    > screened_data3 <- screen_for_duplicate_individuals(dosage_matrix = screened_data2, 
-    +     cutoff = 0.95, plot_cor = TRUE)
-    
-    Combining P1 & NA into P1
-    
-      When sourcing ‘Vignette_polymapR.R’:
-    Error: dim(X) must have a positive length
-    Execution halted
-    
-      ‘Vignette_genotype_probabilities.Rmd’ using ‘UTF-8’... OK
-      ‘Vignette_polymapR.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Vignette_genotype_probabilities.Rmd’ using rmarkdown
@@ -7145,10 +6096,10 @@ Run `revdepcheck::cloud_details(, "polymapR")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 20.1Mb
+      installed size is 20.2Mb
       sub-directories of 1Mb or more:
-        R     14.4Mb
-        data   4.6Mb
+        R     12.5Mb
+        data   6.5Mb
     ```
 
 # ptools
@@ -7237,14 +6188,20 @@ Run `revdepcheck::cloud_details(, "ptools")` for more info
       Execution halted
     ```
 
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘spat-feateng.Rmd’ using rmarkdown
+    ```
+
 # RavenR
 
 <details>
 
-* Version: 2.2.0
+* Version: 2.2.2
 * GitHub: https://github.com/rchlumsk/RavenR
 * Source code: https://github.com/cran/RavenR
-* Date/Publication: 2022-10-28 21:02:50 UTC
+* Date/Publication: 2024-05-07 03:30:02 UTC
 * Number of recursive dependencies: 135
 
 Run `revdepcheck::cloud_details(, "RavenR")` for more info
@@ -7275,40 +6232,10 @@ Run `revdepcheck::cloud_details(, "RavenR")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Introduction_to_RavenR.Rmd’
-      ...
-    > rvn_rvi_write_template(template_name = "HMETS", filename = tf, 
-    +     author = "Your Name")
-    [1] TRUE
-    
-    > rvh <- rvn_rvh_read(system.file("extdata", "Nith.rvh", 
-    +     package = "RavenR"))
-    
-      When sourcing ‘Introduction_to_RavenR.R’:
-    Error: Length of new attribute value must be 1 or 43, the number of target vertices, not 4
-    Execution halted
-    
-      ‘Introduction_to_RavenR.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Introduction_to_RavenR.Rmd’ using rmarkdown
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.3Mb
-      sub-directories of 1Mb or more:
-        doc       1.0Mb
-        extdata   1.0Mb
-        libs      2.0Mb
     ```
 
 # rdracor
@@ -7506,32 +6433,13 @@ Run `revdepcheck::cloud_details(, "ReDaMoR")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘ReDaMoR.Rmd’
-      ...
-    
-    > new_model <- df_to_model(list = names(hpo_tables), 
-    +     envir = as.environment(hpo_tables))
-    
-    > new_model %>% auto_layout(lengthMultiplier = 250) %>% 
-    +     plot()
-    
-      When sourcing ‘ReDaMoR.R’:
-    Error: arguments imply differing number of rows: 0, 9
-    Execution halted
-    
-      ‘ReDaMoR.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘ReDaMoR.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 383-390 [unnamed-chunk-12] (ReDaMoR.Rmd)
+    Quitting from lines 383-390 [unnamed-chunk-12] (ReDaMoR.Rmd)
     Error: processing vignette 'ReDaMoR.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 0, 9
     --- failed re-building ‘ReDaMoR.Rmd’
@@ -7574,7 +6482,7 @@ Run `revdepcheck::cloud_details(, "rgexf")` for more info
       test-bugs.r...................    1 tests [0;32mOK[0m 
       test-bugs.r...................    1 tests [0;32mOK[0m 
       test-bugs.r...................    1 tests [0;32mOK[0m 
-      test-bugs.r...................    2 tests [0;32mOK[0m [0;34m0.2s[0m
+      test-bugs.r...................    2 tests [0;32mOK[0m [0;34m0.3s[0m
       [0;36m1ms[0m
       
       test-igraph.r.................    0 tests    
@@ -7591,7 +6499,7 @@ Run `revdepcheck::cloud_details(, "rgexf")` for more info
       test-igraph.r.................    2 tests [0;31m1 fails[0m 
       test-igraph.r.................    2 tests [0;31m1 fails[0m 
       test-igraph.r.................    2 tests [0;31m1 fails[0m 
-      test-igraph.r.................    3 tests [0;31m1 fails[0m [0;36m71ms[0m
+      test-igraph.r.................    3 tests [0;31m1 fails[0m [0;36m97ms[0m
       
       test-rgexf.r..................    0 tests    
       test-rgexf.r..................    0 tests    
@@ -7610,7 +6518,7 @@ Run `revdepcheck::cloud_details(, "rgexf")` for more info
       test-rgexf.r..................    7 tests [0;32mOK[0m 
       test-rgexf.r..................    8 tests [0;32mOK[0m 
       test-rgexf.r..................    9 tests [0;32mOK[0m 
-      test-rgexf.r..................   10 tests [0;32mOK[0m [0;36m74ms[0m
+      test-rgexf.r..................   10 tests [0;32mOK[0m [0;36m96ms[0m
       ----- FAILED[data]: test-igraph.r<21--21>
        call| expect_equal(ne, 0)
        diff| Mean absolute difference: 8
@@ -7671,22 +6579,11 @@ Run `revdepcheck::cloud_details(, "RNewsflow")` for more info
 
 ## In both
 
-*   checking for missing documentation entries ... WARNING
-    ```
-    Warning in .recacheSubclasses(def@className, def, env) :
-      undefined subclass "ndiMatrix" of class "replValueSp"; definition not updated
-    Warning in .recacheSubclasses(def@className, def, env) :
-      undefined subclass "pcorMatrix" of class "replValueSp"; definition not updated
-    All user-level objects in a package should have documentation entries.
-    See chapter ‘Writing R documentation files’ in the ‘Writing R
-    Extensions’ manual.
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.2Mb
+      installed size is  6.6Mb
       sub-directories of 1Mb or more:
-        libs   8.3Mb
+        libs   5.9Mb
     ```
 
 # rsetse
@@ -7775,27 +6672,7 @@ Run `revdepcheck::cloud_details(, "rsetse")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘separate-peels-quintet.Rmd’
-      ...
-    Warning: `set.vertex.attribute()` was deprecated in igraph 2.0.0.
-    ℹ Please use `set_vertex_attr()` instead.
-    Warning: `get.vertex.attribute()` was deprecated in igraph 2.0.0.
-    ℹ Please use `vertex_attr()` instead.
-    
-      When sourcing ‘separate-peels-quintet.R’:
-    Error: ℹ In index: 1.
-    Caused by error in `i_set_vertex_attr()`:
-    ! Length of new attribute value must be 1 or 40, the number of target vertices, not 0
-    Execution halted
-    
-      ‘Categorical-and-continuous-features.Rmd’ using ‘UTF-8’... OK
-      ‘separate-peels-quintet.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Categorical-and-continuous-features.Rmd’ using rmarkdown
@@ -7843,41 +6720,7 @@ Run `revdepcheck::cloud_details(, "rTwig")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘SimpleForest.Rmd’
-      ...
-    > cylinder %>% ggplot(aes(x = growthLength, y = radius, 
-    +     color = branchID)) + geom_point() + facet_wrap(~branchOrder) + 
-    +     labs(title = "Rad ..." ... [TRUNCATED] 
-    
-    > cylinder <- correct_radii(cylinder, twigRad = 4.23)
-    Generating Branch Paths
-    
-      When sourcing ‘SimpleForest.R’:
-    Error: only 0's may be mixed with negative subscripts
-    Execution halted
-    when running code in ‘TreeQSM.Rmd’
-      ...
-    
-    > cylinder <- qsm$cylinder
-    
-    > cylinder <- update_cylinders(cylinder)
-    Updating Cylinder Ordering
-    Calculating Growth Length
-    
-      When sourcing ‘TreeQSM.R’:
-    Error: At vendor/cigraph/src/graph/type_indexededgelist.c:261 : Out-of-range vertex IDs when adding edges. Invalid vertex ID
-    Execution halted
-    
-      ‘Box-Dimension.Rmd’ using ‘UTF-8’... OK
-      ‘SimpleForest.Rmd’ using ‘UTF-8’... failed
-      ‘TreeQSM.Rmd’ using ‘UTF-8’... failed
-      ‘Twigs.Rmd’ using ‘UTF-8’... OK
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Box-Dimension.Rmd’ using rmarkdown
@@ -8163,30 +7006,7 @@ Run `revdepcheck::cloud_details(, "TDApplied")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘HCP_analysis.Rmd’
-      ...
-    
-    > cols_time_since_last_block <- readRDS("cols_time_since_last_block.rds")
-    
-    > plot_vr_graph(g, eps = as.numeric(names(g$graphs)), 
-    +     cols = cols_respiratory, component_of = 20, vertex_labels = F, 
-    +     layout = l, title = .... [TRUNCATED] 
-    
-      When sourcing ‘HCP_analysis.R’:
-    Error: Length of new attribute value must be 1 or 176, the number of target vertices, not 174
-    Execution halted
-    
-      ‘HCP_analysis.Rmd’ using ‘UTF-8’... failed
-      ‘ML_and_Inference.Rmd’ using ‘UTF-8’... OK
-      ‘Speed.Rmd’ using ‘UTF-8’... OK
-      ‘comparing_calcs.Rmd’ using ‘UTF-8’... OK
-      ‘personalized_analyses.Rmd’ using ‘UTF-8’... OK
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘HCP_analysis.Rmd’ using rmarkdown
@@ -8196,10 +7016,10 @@ Run `revdepcheck::cloud_details(, "TDApplied")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.9Mb
+      installed size is 11.5Mb
       sub-directories of 1Mb or more:
-        doc    7.5Mb
-        libs   4.9Mb
+        doc    7.6Mb
+        libs   3.4Mb
     ```
 
 # textrank
@@ -8269,32 +7089,13 @@ Run `revdepcheck::cloud_details(, "textrank")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘textrank.Rmd’
-      ...
-    4           1        data
-    5           1   scientist
-    7           1  analytical
-    8           1   developer
-    
-    > tr <- textrank_sentences(data = sentences, terminology = terminology)
-    
-      When sourcing ‘textrank.R’:
-    Error: arguments imply differing number of rows: 0, 37
-    Execution halted
-    
-      ‘textrank.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘textrank.Rmd’ using rmarkdown
     
-    Quitting from lines  at lines 116-121 [unnamed-chunk-7] (textrank.Rmd)
+    Quitting from lines 116-121 [unnamed-chunk-7] (textrank.Rmd)
     Error: processing vignette 'textrank.Rmd' failed with diagnostics:
     arguments imply differing number of rows: 0, 37
     --- failed re-building ‘textrank.Rmd’
@@ -8505,8 +7306,8 @@ Run `revdepcheck::cloud_details(, "wikkitidy")` for more info
     > 
     > # Build the tree of all albums for the Melbourne band Custard
     > tree <- build_category_tree("Category:Custard_(band)_albums")
-    ⠙ Walking subcategories: 1 done (458/s) | 3ms
-    ⠹ Walking subcategories: 2 done (20/s) | 98ms
+    ⠙ Walking subcategories: 1 done (379/s) | 3ms
+    ⠹ Walking subcategories: 2 done (15/s) | 137ms
     > tree
     $nodes
     # A tibble: 11 × 4

@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 836 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 56 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 56 new problems
- * We failed to check 2 packages
+ * We saw 54 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -16,8 +16,7 @@ Issues with CRAN packages are summarised below.
 * archeofrag
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * arulesViz
   checking examples ... ERROR
@@ -25,8 +24,7 @@ Issues with CRAN packages are summarised below.
 * bigergm
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * bioregion
   checking examples ... ERROR
@@ -43,27 +41,21 @@ Issues with CRAN packages are summarised below.
 
 * corrViz
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * cppRouting
   checking examples ... ERROR
 
 * cranly
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * criticalpath
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* dartR
-  checking installed package size ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * debkeepr
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * DiagrammeR
   checking examples ... ERROR
@@ -74,17 +66,16 @@ Issues with CRAN packages are summarised below.
 
 * dynwrap
   checking examples ... ERROR
+  checking tests ... ERROR
 
 * egor
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * epicontacts
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * erah
   checking tests ... ERROR
@@ -100,12 +91,12 @@ Issues with CRAN packages are summarised below.
 
 * ggraph
   checking examples ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * grainscape
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... ERROR
 
 * graphlayouts
   checking examples ... ERROR
@@ -114,8 +105,7 @@ Issues with CRAN packages are summarised below.
 * intergraph
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * interplex
   checking examples ... ERROR
@@ -129,12 +119,10 @@ Issues with CRAN packages are summarised below.
 
 * massiveGST
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * MEGENA
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * morph
   checking examples ... ERROR
@@ -144,8 +132,7 @@ Issues with CRAN packages are summarised below.
 
 * mstknnclust
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * multinet
   checking examples ... ERROR
@@ -156,35 +143,29 @@ Issues with CRAN packages are summarised below.
 * Neighboot
   checking examples ... ERROR
 
-* PCGII
-  checking running R code from vignettes ... ERROR
-
 * pmd
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * polymapR
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * ptools
   checking examples ... ERROR
   checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
 
 * RavenR
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rdracor
   checking tests ... ERROR
 
 * ReDaMoR
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rgexf
   checking tests ... ERROR
@@ -194,13 +175,11 @@ Issues with CRAN packages are summarised below.
 
 * rsetse
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rTwig
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * skynet
   checking tests ... ERROR
@@ -210,13 +189,11 @@ Issues with CRAN packages are summarised below.
 
 * TDApplied
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * textrank
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * tidygraph
   checking tests ... ERROR
@@ -227,7 +204,3 @@ Issues with CRAN packages are summarised below.
 * wikkitidy
   checking examples ... ERROR
 
-### Failed to check
-
-* multinma  (NA)
-* streamDAG (NA)
