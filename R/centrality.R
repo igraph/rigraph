@@ -1134,9 +1134,9 @@ diversity <- diversity_impl
 #' @family centrality
 hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
   hub_and_authority_scores_impl(graph = graph,
-                 scale = scale,
-                 weights = weights,
-                 options = options)
+    scale = scale,
+    weights = weights,
+    options = options)
 }
 
 #' @title Kleinberg's authority centrality scores.
