@@ -93,6 +93,7 @@ measures of centrality for asymmetric relations'' \emph{Social Networks},
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=power_centrality]{power_centrality()}}
 
 Centrality measures
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},

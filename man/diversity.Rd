@@ -54,6 +54,7 @@ and Economic Development, \emph{Science} \strong{328}, 1029--1031, 2010.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{eigen_centrality}()},

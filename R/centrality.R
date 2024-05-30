@@ -1183,6 +1183,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @family centrality
 #' @export
 hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")

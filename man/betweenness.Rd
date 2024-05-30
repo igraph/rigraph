@@ -111,6 +111,7 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},

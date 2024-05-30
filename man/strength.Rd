@@ -57,6 +57,7 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},

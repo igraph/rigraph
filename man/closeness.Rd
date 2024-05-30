@@ -83,6 +83,7 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
