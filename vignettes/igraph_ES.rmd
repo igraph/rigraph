@@ -140,7 +140,7 @@ Si intentas añadir aristas a vértices con IDs no válidos (por ejemplo, intent
 g <- add_edges(g, edges = c(38, 37))
 ```
 
-Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%\>%`:
+Añadamos más vértices y aristas a nuestro grafo. En `igraph` podemos utilizar el paquete `magrittr`, que proporciona un mecanismo para encadenar comandos con el operador `%>%`:
 
 ```{r echo = TRUE}
 g <- g %>% 
@@ -271,7 +271,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr()` y `set_edge_attr()` y el operador `%\>%`:
+`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. Esto asigna un atributo a *todos* los vértices/aristas a la vez. Otra forma de generar nuestra red social es con el uso de `set_vertex_attr()` y `set_edge_attr()` y el operador `%>%`:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(

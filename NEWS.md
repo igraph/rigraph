@@ -1,5 +1,53 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9020
+
+## Features
+
+- Rename sample_degseq() method and add the edge.switching.simple method (#1376).
+
+
+# igraph 2.0.3.9019
+
+## Bug fixes
+
+- Fix reading of LGL and NCOL files (broken in 2.0.0) (#1347).
+
+## Continuous integration
+
+- Work around installation problems for the graph package (#1374).
+
+## Testing
+
+- Refactor test-assortativity for readability (#1371).
+
+## Uncategorized
+
+- Refactoring around test-attributes.R (#1372).
+
+
+# igraph 2.0.3.9018
+
+## Bug fixes
+
+- Fixed potential memory leak in `R_igraph_community_to_membership2()` (#1367).
+
+
+# igraph 2.0.3.9017
+
+## Bug fixes
+
+- Comment failing ci (#1357).
+
+## Testing
+
+- Refactoring around `interface.R` (#1366).
+
+## Uncategorized
+
+- Fix `%\>%` typo in vignettes (#1343).
+
+
 # igraph 2.0.3.9016
 
 ## doc

@@ -1,6 +1,6 @@
-test_that("sample_degseq() works -- simple generator", {
+test_that("sample_degseq() works -- 'configuration' generator", {
   degrees <- rep(2, 100)
-  undirected_graph <- sample_degseq(degrees)
+  undirected_graph <- sample_degseq(degrees, method = "configuration")
   expect_equal(degree(undirected_graph), degrees)
 
   directed_graph <- sample_degseq(1:10, 10:1)
@@ -10,14 +10,14 @@ test_that("sample_degseq() works -- simple generator", {
 
 test_that("sample_degseq() works -- sample_gnp()", {
   erdos_renyi <- sample_gnp(1000, 1 / 1000)
-  new_graph <- sample_degseq(degree(erdos_renyi), method = "simple")
+  new_graph <- sample_degseq(degree(erdos_renyi), method = "configuration")
   expect_that(degree(new_graph), equals(degree(erdos_renyi)))
 
   directed_erdos_renyi <- sample_gnp(1000, 2 / 1000, directed = TRUE)
   new_directed_graph <- sample_degseq(
     degree(directed_erdos_renyi, mode = "out"),
     degree(directed_erdos_renyi, mode = "in"),
-    method = "simple"
+    method = "configuration"
   )
   expect_equal(
     degree(new_directed_graph, mode = "out"),
@@ -29,11 +29,11 @@ test_that("sample_degseq() works -- sample_gnp()", {
   )
 })
 
-test_that("sample_degseq() works -- simple generator, connected", {
+test_that("sample_degseq() works -- 'configuration' generator, connected", {
 
   original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
-  simple_graph <- sample_degseq(degree(original_graph), method = "simple")
+  simple_graph <- sample_degseq(degree(original_graph), method = "configuration")
   expect_equal(degree(simple_graph), degree(original_graph))
 
   vl_graph <- sample_degseq(degree(simple_graph), method = "vl")
@@ -85,26 +85,45 @@ test_that("sample_degseq() works -- Power-law degree error", {
     transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x))
 })
 
-test_that("sample_degseq() works -- simple.no.multiple", {
+test_that("sample_degseq() works -- fast.heur.simple", {
   g <- sample_gnp(1000, 1 / 1000)
 
   simple_nm_graph <- sample_degseq(
     degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "simple.no.multiple"
+    method = "fast.heur.simple"
   )
   expect_equal(degree(simple_nm_graph, mode = "out"), degree(g, mode = "out"))
   expect_equal(degree(simple_nm_graph, mode = "in"), degree(g, mode = "in"))
 })
 
-test_that("sample_degseq() works -- simple.no.multiple.uniform", {
+test_that("sample_degseq() works -- configuration.simple", {
   g <- sample_gnp(1000, 1 / 1000)
   simple_nmu_graph <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "simple.no.multiple.uniform"
+    method = "configuration.simple"
   )
   expect_equal(degree(simple_nmu_graph, mode = "out"), degree(g, mode = "out"))
   expect_equal(degree(simple_nmu_graph, mode = "in"), degree(g, mode = "in"))
+})
+
+test_that("sample_degseq() works -- edge.switching.simple directed", {
+  g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
+  simple_switch_graph <- sample_degseq(degree(g, mode = "out"),
+    degree(g, mode = "in"),
+    method = "edge.switching.simple"
+  )
+  expect_equal(degree(simple_switch_graph, mode = "out"), degree(g, mode = "out"))
+  expect_equal(degree(simple_switch_graph, mode = "in"), degree(g, mode = "in"))
+})
+
+test_that("sample_degseq() works -- edge.switching.simple undirected", {
+  g <- sample_gnp(1000, 1 / 1000, directed = FALSE)
+  simple_switch_graph <- sample_degseq(
+    degree(g, mode = "all"),
+    method = "edge.switching.simple"
+  )
+  expect_equal(degree(simple_switch_graph, mode = "all"), degree(g, mode = "all"))
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {

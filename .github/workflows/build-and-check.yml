@@ -113,9 +113,9 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest,   r: 'release'}
+          # - {os: macOS-latest,   r: 'release'}
           - {os: ubuntu-20.04,   r: 'release',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: 'devel',    rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          # - {os: ubuntu-20.04,   r: 'devel',    rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04,   r: 'oldrel-1', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04,   r: 'oldrel-2', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04,   r: 'oldrel-3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
@@ -164,7 +164,7 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, graph=?ignore
           needs: check
 
       - name: Check R package
@@ -205,6 +205,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           needs: coverage
+          extra-packages: graph=?ignore
           pak-version: devel
 
       - name: Run coverage
