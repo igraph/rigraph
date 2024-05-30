@@ -5,7 +5,7 @@
 \alias{growing}
 \title{Growing random graph generation}
 \usage{
-sample_growing(n, m = 1, directed = TRUE, citation = FALSE)
+sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
 growing(...)
 }
@@ -14,12 +14,12 @@ growing(...)
 
 \item{m}{Numeric constant, number of edges added in each time step.}
 
+\item{...}{Passed to \code{sample_growing()}.}
+
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in
 each time step the added edges are originating from the new vertex.}
-
-\item{...}{Passed to \code{sample_growing()}.}
 }
 \value{
 A new graph object.
