@@ -40,7 +40,7 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @keywords internal
 #' @export
 hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_score()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
@@ -55,7 +55,7 @@ hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @keywords internal
 #' @export
 authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
+  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_score()")
   authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
