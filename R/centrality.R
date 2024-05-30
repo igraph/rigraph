@@ -1133,6 +1133,9 @@ diversity <- diversity_impl
 #' authority_score(g2)$vector
 #' @family centrality
 hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
+
+  rlang::check_dots_empty()
+
   hub_and_authority_scores_impl(graph = graph,
     scale = scale,
     weights = weights,
