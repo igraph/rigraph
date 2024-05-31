@@ -12,7 +12,7 @@ with some extras."><meta property="og:image" content="https://r.igraph.org/logo.
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9021</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,13 +214,13 @@ examples below.</p>
 <span class="r-in"><span><span class="co"># Special operators for indexing based on graph structure</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, power <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%--%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 58c43d1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 61c19e7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;3 6-&gt;2</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span> <span class="op">%-&gt;%</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from 58c43d1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from 61c19e7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;3</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%&lt;-%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 58c43d1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 61c19e7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;3 6-&gt;2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -----------------------------------------------------------------</span></span></span>
@@ -228,7 +228,7 @@ examples below.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="diameter.html">get_diameter</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span>, path <span class="op">=</span> <span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 14/99 edges from 57bad5b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 14/99 edges from 7582d9c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 57--81 56--57 24--56 18--24 17--18  3--17  2-- 3  2-- 5  5-- 7  7--39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 39--40 40--48 48--83 83--95</span>
 <span class="r-in"><span></span></span>
@@ -237,7 +237,7 @@ examples below.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">3</span> <span class="op">/</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"weight"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">gsize</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 9/23 edges from 496ab17:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 9/23 edges from bf26ab0:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tail head tid hid      weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     4    5   4   5 -0.69555968</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     1    6   1   6 -0.05221438</span>
@@ -254,7 +254,7 @@ examples below.</p>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">.env</span><span class="op">$</span><span class="va">x</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/23 edge from 496ab17:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/23 edge from bf26ab0:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
