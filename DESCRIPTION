@@ -1,5 +1,5 @@
 Package: igraph
-Version: 2.0.3.9021
+Version: 2.0.3.9022
 Title: Network Analysis and Visualization
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
