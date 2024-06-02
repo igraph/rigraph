@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9023
+
+## Continuous integration
+
+- Fix vendoring workflow.
+
+
 # igraph 2.0.3.9022
 
 ## Bug fixes
