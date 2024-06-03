@@ -94,6 +94,18 @@ wheel_impl <- function(n, mode=c("out", "in", "undirected", "mutual"), center=0)
   res
 }
 
+hypercube_impl <- function(n, directed=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_hypercube, n, directed)
+
+  res
+}
+
 square_lattice_impl <- function(dimvector, nei=1, directed=FALSE, mutual=FALSE, periodic=NULL) {
   # Argument checks
   dimvector <- as.numeric(dimvector)
@@ -2328,6 +2340,19 @@ count_reachable_impl <- function(graph, mode) {
   res
 }
 
+is_clique_impl <- function(graph, candidate, directed=FALSE) {
+  # Argument checks
+  ensure_igraph(graph)
+  candidate <- as_igraph_vs(graph, candidate)
+  directed <- as.logical(directed)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_clique, graph, candidate-1, directed)
+
+  res
+}
+
 cliques_impl <- function(graph, min=0, max=0) {
   # Argument checks
   ensure_igraph(graph)
@@ -2453,6 +2478,18 @@ weighted_clique_number_impl <- function(graph, vertex.weights=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_weighted_clique_number, graph, vertex.weights)
+
+  res
+}
+
+is_independent_vertex_set_impl <- function(graph, candidate) {
+  # Argument checks
+  ensure_igraph(graph)
+  candidate <- as_igraph_vs(graph, candidate)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_independent_vertex_set, graph, candidate-1)
 
   res
 }

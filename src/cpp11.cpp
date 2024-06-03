@@ -237,6 +237,7 @@ extern SEXP R_igraph_hsbm_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hsbm_list_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_and_authority_scores(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_score(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_hypercube(SEXP, SEXP);
 extern SEXP R_igraph_i_levc_arp(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_identical_graphs(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_incident(SEXP, SEXP, SEXP);
@@ -250,6 +251,7 @@ extern SEXP R_igraph_is_acyclic(SEXP);
 extern SEXP R_igraph_is_biconnected(SEXP);
 extern SEXP R_igraph_is_bipartite(SEXP);
 extern SEXP R_igraph_is_chordal(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_is_clique(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_is_complete(SEXP);
 extern SEXP R_igraph_is_connected(SEXP, SEXP);
 extern SEXP R_igraph_is_dag(SEXP);
@@ -257,6 +259,7 @@ extern SEXP R_igraph_is_directed(SEXP);
 extern SEXP R_igraph_is_eulerian(SEXP);
 extern SEXP R_igraph_is_forest(SEXP, SEXP);
 extern SEXP R_igraph_is_graphical(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_is_independent_vertex_set(SEXP, SEXP);
 extern SEXP R_igraph_is_loop(SEXP, SEXP);
 extern SEXP R_igraph_is_matching(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_is_maximal_matching(SEXP, SEXP, SEXP);
@@ -700,6 +703,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hsbm_list_game",                             (DL_FUNC) &R_igraph_hsbm_list_game,                              5},
     {"R_igraph_hub_and_authority_scores",                   (DL_FUNC) &R_igraph_hub_and_authority_scores,                    4},
     {"R_igraph_hub_score",                                  (DL_FUNC) &R_igraph_hub_score,                                   4},
+    {"R_igraph_hypercube",                                  (DL_FUNC) &R_igraph_hypercube,                                   2},
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
     {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},
@@ -713,6 +717,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_biconnected",                             (DL_FUNC) &R_igraph_is_biconnected,                              1},
     {"R_igraph_is_bipartite",                               (DL_FUNC) &R_igraph_is_bipartite,                                1},
     {"R_igraph_is_chordal",                                 (DL_FUNC) &R_igraph_is_chordal,                                  5},
+    {"R_igraph_is_clique",                                  (DL_FUNC) &R_igraph_is_clique,                                   3},
     {"R_igraph_is_complete",                                (DL_FUNC) &R_igraph_is_complete,                                 1},
     {"R_igraph_is_connected",                               (DL_FUNC) &R_igraph_is_connected,                                2},
     {"R_igraph_is_dag",                                     (DL_FUNC) &R_igraph_is_dag,                                      1},
@@ -720,6 +725,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_eulerian",                                (DL_FUNC) &R_igraph_is_eulerian,                                 1},
     {"R_igraph_is_forest",                                  (DL_FUNC) &R_igraph_is_forest,                                   2},
     {"R_igraph_is_graphical",                               (DL_FUNC) &R_igraph_is_graphical,                                3},
+    {"R_igraph_is_independent_vertex_set",                  (DL_FUNC) &R_igraph_is_independent_vertex_set,                   2},
     {"R_igraph_is_loop",                                    (DL_FUNC) &R_igraph_is_loop,                                     2},
     {"R_igraph_is_matching",                                (DL_FUNC) &R_igraph_is_matching,                                 3},
     {"R_igraph_is_maximal_matching",                        (DL_FUNC) &R_igraph_is_maximal_matching,                         3},

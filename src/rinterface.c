@@ -338,6 +338,36 @@ SEXP R_igraph_wheel(SEXP n, SEXP mode, SEXP center) {
 }
 
 /*-------------------------------------------/
+/ igraph_hypercube                           /
+/-------------------------------------------*/
+SEXP R_igraph_hypercube(SEXP n, SEXP directed) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_bool_t c_directed;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_hypercube(&c_graph, c_n, c_directed));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_square_lattice                      /
 /-------------------------------------------*/
 SEXP R_igraph_square_lattice(SEXP dimvector, SEXP nei, SEXP directed, SEXP mutual, SEXP periodic) {
@@ -6328,6 +6358,38 @@ SEXP R_igraph_count_reachable(SEXP graph, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_is_clique                           /
+/-------------------------------------------*/
+SEXP R_igraph_is_clique(SEXP graph, SEXP candidate, SEXP directed) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vs_t c_candidate;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  igraph_vector_int_t c_candidate_data;
+  R_SEXP_to_igraph_vs(candidate, &c_graph, &c_candidate, &c_candidate_data);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_clique(&c_graph, c_candidate, c_directed, &c_res));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_candidate_data);
+  igraph_vs_destroy(&c_candidate);
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_cliques                             /
 /-------------------------------------------*/
 SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
@@ -6577,6 +6639,35 @@ SEXP R_igraph_weighted_clique_number(SEXP graph, SEXP vertex_weights) {
                                         /* Convert output */
   PROTECT(res=NEW_NUMERIC(1));
   REAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_independent_vertex_set           /
+/-------------------------------------------*/
+SEXP R_igraph_is_independent_vertex_set(SEXP graph, SEXP candidate) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vs_t c_candidate;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  igraph_vector_int_t c_candidate_data;
+  R_SEXP_to_igraph_vs(candidate, &c_graph, &c_candidate, &c_candidate_data);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_independent_vertex_set(&c_graph, c_candidate, &c_res));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_candidate_data);
+  igraph_vs_destroy(&c_candidate);
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
   r_result = res;
 
   UNPROTECT(1);
