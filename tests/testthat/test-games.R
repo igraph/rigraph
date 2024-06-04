@@ -11,7 +11,7 @@ test_that("sample_degseq() works -- 'configuration' generator", {
 test_that("sample_degseq() works -- sample_gnp()", {
   erdos_renyi <- sample_gnp(1000, 1 / 1000)
   new_graph <- sample_degseq(degree(erdos_renyi), method = "configuration")
-  expect_that(degree(new_graph), equals(degree(erdos_renyi)))
+  expect_equal(degree(new_graph), degree(erdos_renyi))
 
   directed_erdos_renyi <- sample_gnp(1000, 2 / 1000, directed = TRUE)
   new_directed_graph <- sample_degseq(
@@ -30,7 +30,6 @@ test_that("sample_degseq() works -- sample_gnp()", {
 })
 
 test_that("sample_degseq() works -- 'configuration' generator, connected", {
-
   original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
   simple_graph <- sample_degseq(degree(original_graph), method = "configuration")
@@ -40,7 +39,6 @@ test_that("sample_degseq() works -- 'configuration' generator, connected", {
   expect_equal(degree(vl_graph), degree(original_graph))
   expect_true(is_connected(vl_graph))
   expect_true(is_simple(vl_graph))
-
 })
 
 test_that("sample_degseq() works -- vl generator", {
@@ -60,11 +58,13 @@ test_that("sample_degseq() works -- exponential degree ok", {
 test_that("sample_degseq() works -- exponential degree error", {
   withr::local_seed(11)
   exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
-  expect_snapshot({
-    sample_degseq(exponential_degrees, method = "vl")
-  },
+  expect_snapshot(
+    {
+      sample_degseq(exponential_degrees, method = "vl")
+    },
     error = TRUE,
-    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x))
+    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x)
+  )
 })
 
 test_that("sample_degseq() works -- Power-law degree ok", {
@@ -78,11 +78,13 @@ test_that("sample_degseq() works -- Power-law degree error", {
   withr::local_seed(7)
   powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 
- expect_snapshot({
-    sample_degseq(powerlaw_degrees, method = "vl")
-  },
+  expect_snapshot(
+    {
+      sample_degseq(powerlaw_degrees, method = "vl")
+    },
     error = TRUE,
-    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x))
+    transform = function(x) sub("\\:[0-9]+", ":<linenumber>", x)
+  )
 })
 
 test_that("sample_degseq() works -- fast.heur.simple", {
@@ -131,8 +133,8 @@ test_that("sample_degseq supports the sample_(...) syntax", {
   g1 <- sample_(degseq(degs))
   g2 <- sample_(degseq(degs))
 
-  expect_that(degree(g1), equals(degs))
-  expect_that(degree(g2), equals(degs))
+  expect_equal(degree(g1), degs)
+  expect_equal(degree(g2), degs)
 
   expect_false(identical_graphs(g1, g2))
 })
