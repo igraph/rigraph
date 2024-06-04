@@ -3,10 +3,10 @@ test_that("transitivity works", {
   g <- sample_gnp(100, p = 10 / 100)
 
   t1 <- transitivity(g, type = "global")
-  expect_that(t1, equals(0.10483870967741935887))
+  expect_equal(t1, 0.10483870967741935887)
 
   t2 <- transitivity(g, type = "average")
-  expect_that(t2, equals(0.10159943848720931481))
+  expect_equal(t2, 0.10159943848720931481)
 
   t3 <- transitivity(g, type = "local", vids = V(g))
   t33 <- transitivity(g, type = "local")
@@ -17,8 +17,8 @@ test_that("transitivity works", {
     ),
     class = c("summaryDefault", "table")
   )
-  expect_that(summary(t3), equals(est3, tolerance = 0.001))
-  expect_that(summary(t33), equals(est3, tolerance = 0.001))
+  expect_equal(summary(t3), est3, tolerance = 1e-3)
+  expect_equal(summary(t33), est3, tolerance = 1e-3)
 })
 
 test_that("no integer overflow", {
@@ -31,7 +31,7 @@ test_that("no integer overflow", {
 # Check that transitivity() produces named vectors, see #943
 # The four tests below check four existing code paths
 test_that("local transitivity produces named vectors", {
-  g <- make_graph(~ a-b-c-a-d)
+  g <- make_graph(~ a - b - c - a - d)
   E(g)$weight <- 1:4
   t1 <- transitivity(g, type = "local")
   t2 <- transitivity(g, type = "barrat")

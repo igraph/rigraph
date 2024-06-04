@@ -1,7 +1,7 @@
 test_that("adhesion works", {
   g <- make_graph("Zachary")
-  expect_that(adhesion(g), equals(1))
-  expect_that(cohesion(g), equals(1))
+  expect_equal(adhesion(g), 1)
+  expect_equal(cohesion(g), 1)
 
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
@@ -16,8 +16,8 @@ test_that("adhesion works", {
     Jane - Ike
   )
 
-  expect_that(adhesion(kite), equals(1))
-  expect_that(cohesion(kite), equals(1))
+  expect_equal(adhesion(kite), 1)
+  expect_equal(cohesion(kite), 1)
 
   camp <- graph_from_literal(
     Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
@@ -34,6 +34,6 @@ test_that("adhesion works", {
     John - Gery:Russ:Michael
   )
 
-  expect_that(adhesion(camp), equals(2))
-  expect_that(cohesion(camp), equals(2))
+  expect_equal(adhesion(camp), 2)
+  expect_equal(cohesion(camp), 2)
 })

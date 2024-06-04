@@ -7,29 +7,20 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   im <- which_multiple(g)
   cm <- count_multiple(g)
   expect_true(any_multiple(g))
-  expect_that(im, equals(c(
-    FALSE, TRUE, TRUE, FALSE, TRUE, TRUE,
-    FALSE, FALSE, FALSE, FALSE, FALSE, TRUE,
-    FALSE, FALSE, TRUE, FALSE, FALSE, TRUE,
-    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-    FALSE, FALSE, TRUE
-  )))
-  expect_that(cm, equals(c(
-    3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 1, 2, 1, 2,
-    2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2
-  )))
-  expect_that(
+  expect_equal(im, c(FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE))
+  expect_equal(cm, c(3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2))
+  expect_equal(
     count_multiple(simplify(g)),
-    equals(rep(1, ecount(simplify(g))))
+    rep(1, ecount(simplify(g)))
   )
 
 
   ## Direction of the edge is important
   expect_false(any_multiple(make_graph(c(1, 2, 2, 1))))
-  expect_that(which_multiple(make_graph(c(1, 2, 2, 1))), equals(c(FALSE, FALSE)))
-  expect_that(
+  expect_equal(which_multiple(make_graph(c(1, 2, 2, 1))), c(FALSE, FALSE))
+  expect_equal(
     which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE)),
-    equals(c(FALSE, TRUE))
+    c(FALSE, TRUE)
   )
 
   ## Remove multiple edges but keep multiplicity
@@ -42,8 +33,5 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   g <- simplify(g)
   expect_false(any_multiple(g))
   expect_false(any(which_multiple(g)))
-  expect_that(E(g)$weight, equals(c(
-    3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2,
-    1, 1, 1, 1, 1, 1, 1
-  )))
+  expect_equal(E(g)$weight, c(3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1))
 })

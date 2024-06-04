@@ -5,5 +5,5 @@ test_that("articulation_points works", {
 
   ap <- as.vector(articulation_points(g))
   deg <- degree(g)
-  expect_that(sort(which(deg == max(deg))), equals(sort(ap)))
+  expect_equal(sort(which(deg == max(deg))), sort(ap))
 })

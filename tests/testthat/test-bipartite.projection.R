@@ -13,7 +13,7 @@ test_that("bipartite_projection works", {
   M[] <- sample(0:1, length(M), replace = TRUE)
   M
   g2 <- graph_from_biadjacency_matrix(M)
-  expect_that(as.matrix(g2[1:5, 6:8]), equals(M))
+  expect_equal(as.matrix(g2[1:5, 6:8]), M)
   expect_that(as.matrix(g2[1:5, 1:5]), is_equivalent_to(matrix(0, 5, 5)))
   expect_that(as.matrix(g2[6:8, 6:8]), is_equivalent_to(matrix(0, 3, 3)))
 
@@ -21,11 +21,7 @@ test_that("bipartite_projection works", {
   proj2 <- bipartite_projection(g2)
   expect_that(
     as.matrix(proj2[[1]][]),
-    is_equivalent_to(cbind(
-      c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2),
-      c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2),
-      c(2, 2, 0, 2, 0)
-    ))
+    is_equivalent_to(cbind(c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2), c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2), c(2, 2, 0, 2, 0)))
   )
   expect_that(
     as.matrix(proj2[[2]][]),
@@ -33,10 +29,10 @@ test_that("bipartite_projection works", {
   )
 
   bs <- bipartite_projection_size(g2)
-  expect_that(bs$vcount1, equals(vcount(proj2[[1]])))
-  expect_that(bs$ecount1, equals(ecount(proj2[[1]])))
-  expect_that(bs$vcount2, equals(vcount(proj2[[2]])))
-  expect_that(bs$ecount2, equals(ecount(proj2[[2]])))
+  expect_equal(bs$vcount1, vcount(proj2[[1]]))
+  expect_equal(bs$ecount1, ecount(proj2[[1]]))
+  expect_equal(bs$vcount2, vcount(proj2[[2]]))
+  expect_equal(bs$ecount2, ecount(proj2[[2]]))
 })
 
 test_that("bipartite_projection can calculate only one projection", {
@@ -49,10 +45,10 @@ test_that("bipartite_projection can calculate only one projection", {
 
   expect_isomorphic(proj$proj1, proj1)
   expect_isomorphic(proj$proj2, proj2)
-  expect_that(vertex.attributes(proj$proj1), equals(vertex.attributes(proj1)))
-  expect_that(vertex.attributes(proj$proj2), equals(vertex.attributes(proj2)))
-  expect_that(edge_attr(proj$proj1), equals(edge_attr(proj1)))
-  expect_that(edge_attr(proj$proj2), equals(edge_attr(proj2)))
+  expect_equal(vertex.attributes(proj$proj1), vertex.attributes(proj1))
+  expect_equal(vertex.attributes(proj$proj2), vertex.attributes(proj2))
+  expect_equal(edge_attr(proj$proj1), edge_attr(proj1))
+  expect_equal(edge_attr(proj$proj2), edge_attr(proj2))
 })
 
 test_that("bipartite_projection removes 'type' attribute if requested", {
