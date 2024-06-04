@@ -1287,9 +1287,10 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @param resolution_parameter The resolution parameter to use. Higher
+#' @param resolution The resolution parameter to use. Higher
 #'   resolutions lead to more smaller communities, while lower resolutions lead
 #'   to fewer larger communities.
+#' @param resolution_parameter  `r lifecycle::badge("superseded")` Use `resolution` instead.
 #' @param beta Parameter affecting the randomness in the Leiden algorithm.
 #'   This affects only the refinement step of the algorithm.
 #' @param initial_membership If provided, the Leiden algorithm
@@ -1301,6 +1302,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   If this is not provided, it will be automatically determined on the basis
 #'   of the `objective_function`. Please see the details of this function
 #'   how to interpret the vertex weights.
+#' @inheritParams rlang::args_dots_empty
 #' @return `cluster_leiden()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
 #' @author Vincent Traag
@@ -1330,12 +1332,27 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' r <- quantile(strength(g))[2] / (gorder(g) - 1)
 #' # Set seed for sake of reproducibility
 #' set.seed(1)
-#' ldc <- cluster_leiden(g, resolution_parameter = r)
+#' ldc <- cluster_leiden(g, resolution = r)
 #' print(ldc)
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
-                           weights = NULL, resolution_parameter = 1, beta = 0.01,
-                           initial_membership = NULL, n_iterations = 2, vertex_weights = NULL) {
+                           ...,
+                           weights = NULL, resolution = 1,
+    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
+    # after igraph:::deprecated() is removed
+                           resolution_parameter, beta = 0.01,
+                           initial_membership = NULL,
+                           n_iterations = 2, vertex_weights = NULL) {
+
+  check_dots_empty()
+
+  if (lifecycle::is_present(resolution_parameter)) {
+    lifecycle::deprecate_soft("2.0.4",
+                              "cluster_leiden(resolution_parameter)",
+                              "cluster_leiden(resolution)")
+    resolution <- resolution_parameter
+  }
+
   ensure_igraph(graph)
 
   # Parse objective function argument
@@ -1373,7 +1390,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       # Set correct node weights
       vertex_weights <- strength(graph, weights = weights)
       # Also correct resolution parameter
-      resolution_parameter <- resolution_parameter / sum(vertex_weights)
+      resolution <- resolution / sum(vertex_weights)
     }
   }
 
@@ -1382,7 +1399,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (n_iterations > 0) {
     res <- .Call(
       R_igraph_community_leiden, graph, weights,
-      vertex_weights, as.numeric(resolution_parameter),
+      vertex_weights, as.numeric(resolution),
       as.numeric(beta), !is.null(membership), as.numeric(n_iterations),
       membership
     )
@@ -1394,7 +1411,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       prev_quality <- quality
       res <- .Call(
         R_igraph_community_leiden, graph, weights,
-        vertex_weights, as.numeric(resolution_parameter),
+        vertex_weights, as.numeric(resolution),
         as.numeric(beta), !is.null(membership), 1,
         membership
       )
