@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_ring}
 \alias{make_ring}
-\alias{graph.ring}
 \alias{ring}
 \title{Create a ring graph}
 \usage{

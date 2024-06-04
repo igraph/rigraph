@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_bipartite_graph}
 \alias{make_bipartite_graph}
-\alias{graph.bipartite}
 \alias{bipartite_graph}
 \title{Create a bipartite graph}
 \usage{

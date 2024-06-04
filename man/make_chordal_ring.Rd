@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_chordal_ring}
 \alias{make_chordal_ring}
-\alias{graph.extended.chordal.ring}
 \alias{chordal_ring}
 \title{Create an extended chordal ring graph}
 \usage{

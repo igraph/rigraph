@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_kautz_graph}
 \alias{make_kautz_graph}
-\alias{graph.kautz}
 \alias{kautz_graph}
 \title{Kautz graphs}
 \usage{
