@@ -4,5 +4,5 @@ test_that("ivs works", {
   ec <- sapply(seq_along(ivs), function(x) {
     ecount(induced_subgraph(g, ivs[[x]]))
   })
-  expect_that(unique(ec), equals(0))
+  expect_equal(unique(ec), 0)
 })
