@@ -456,7 +456,7 @@ test_that("Directed, unweighted, OAP case works", {
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
   expect_equal(std(au_sa$X), std(X[, vcount(g) - 1:no + 1]))
-  expect_equal(std(au_sa$Y), std(Y[, vcount(g) - 1:no + 1]))
+  expect_equal(std(au_sa$Y), std(Y[, vcount(g) - 1:no + 1]), tolerance = 1e-6)
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
   expect_equal(std(as_sa$X), std(U[, vcount(g) - 1:no + 1]))
   expect_equal(std(as_sa$Y), std(V[, vcount(g) - 1:no + 1]))

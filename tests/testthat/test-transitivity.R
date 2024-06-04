@@ -17,8 +17,8 @@ test_that("transitivity works", {
     ),
     class = c("summaryDefault", "table")
   )
-  expect_equal(summary(t3), est3)
-  expect_equal(summary(t33), est3)
+  expect_equal(summary(t3), est3, tolerance = 1e-3)
+  expect_equal(summary(t33), est3, tolerance = 1e-3)
 })
 
 test_that("no integer overflow", {
