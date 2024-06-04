@@ -72,12 +72,15 @@ SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   R_SEXP_to_vector_int_copy(edges, &c_edges);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_add_edges(&c_graph, &c_edges, 0));
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -112,9 +115,9 @@ SEXP R_igraph_copy(SEXP from) {
 }
 
 /*-------------------------------------------/
-/ igraph_delete_vertices_idx                 /
+/ igraph_delete_vertices_map                 /
 /-------------------------------------------*/
-SEXP R_igraph_delete_vertices_idx(SEXP graph, SEXP vertices) {
+SEXP R_igraph_delete_vertices_map(SEXP graph, SEXP vertices) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vs_t c_vertices;
@@ -138,7 +141,7 @@ SEXP R_igraph_delete_vertices_idx(SEXP graph, SEXP vertices) {
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_invidx);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_delete_vertices_idx(&c_graph, c_vertices, &c_idx, &c_invidx));
+  IGRAPH_R_CHECK(igraph_delete_vertices_map(&c_graph, c_vertices, &c_idx, &c_invidx));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -2305,13 +2308,14 @@ SEXP R_igraph_distances_bellman_ford(SEXP graph, SEXP from, SEXP to, SEXP weight
 /*-------------------------------------------/
 / igraph_distances_johnson                   /
 /-------------------------------------------*/
-SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights) {
+SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
   igraph_vs_t c_from;
   igraph_vs_t c_to;
   igraph_vector_t c_weights;
+  igraph_neimode_t c_mode;
   SEXP res;
 
   SEXP r_result;
@@ -2326,8 +2330,9 @@ SEXP R_igraph_distances_johnson(SEXP graph, SEXP from, SEXP to, SEXP weights) {
   igraph_vector_int_t c_to_data;
   R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_distances_johnson(&c_graph, &c_res, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_distances_johnson(&c_graph, &c_res, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
@@ -5799,7 +5804,7 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
 /*-------------------------------------------/
 / igraph_bipartite_game_gnm                  /
 /-------------------------------------------*/
-SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP mode) {
+SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP mode, SEXP multiple) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
@@ -5808,6 +5813,7 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   igraph_integer_t c_m;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
+  igraph_bool_t c_multiple;
   SEXP graph;
   SEXP types;
 
@@ -5826,8 +5832,10 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode, c_multiple));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -7051,11 +7059,12 @@ SEXP R_igraph_layout_umap_compute_weights(SEXP graph, SEXP distances, SEXP weigh
 /*-------------------------------------------/
 / igraph_similarity_dice                     /
 /-------------------------------------------*/
-SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
+SEXP R_igraph_similarity_dice(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_vs_t c_vids;
+  igraph_vs_t c_vit_from;
+  igraph_vs_t c_vit_to;
   igraph_neimode_t c_mode;
   igraph_bool_t c_loops;
   SEXP res;
@@ -7067,20 +7076,24 @@ SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  igraph_vector_int_t c_vids_data;
-  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  igraph_vector_int_t c_vit_from_data;
+  R_SEXP_to_igraph_vs(vit_from, &c_graph, &c_vit_from, &c_vit_from_data);
+  igraph_vector_int_t c_vit_to_data;
+  R_SEXP_to_igraph_vs(vit_to, &c_graph, &c_vit_to, &c_vit_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vids, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vit_from, c_vit_to, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
+  igraph_vector_int_destroy(&c_vit_from_data);
+  igraph_vs_destroy(&c_vit_from);
+  igraph_vector_int_destroy(&c_vit_to_data);
+  igraph_vs_destroy(&c_vit_to);
   r_result = res;
 
   UNPROTECT(1);
@@ -7204,11 +7217,12 @@ SEXP R_igraph_similarity_inverse_log_weighted(SEXP graph, SEXP vids, SEXP mode) 
 /*-------------------------------------------/
 / igraph_similarity_jaccard                  /
 /-------------------------------------------*/
-SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
+SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_vs_t c_vids;
+  igraph_vs_t c_vit_from;
+  igraph_vs_t c_vit_to;
   igraph_neimode_t c_mode;
   igraph_bool_t c_loops;
   SEXP res;
@@ -7220,20 +7234,24 @@ SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  igraph_vector_int_t c_vids_data;
-  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  igraph_vector_int_t c_vit_from_data;
+  R_SEXP_to_igraph_vs(vit_from, &c_graph, &c_vit_from, &c_vit_from_data);
+  igraph_vector_int_t c_vit_to_data;
+  R_SEXP_to_igraph_vs(vit_to, &c_graph, &c_vit_to, &c_vit_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vids, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vit_from, c_vit_to, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
+  igraph_vector_int_destroy(&c_vit_from_data);
+  igraph_vs_destroy(&c_vit_from);
+  igraph_vector_int_destroy(&c_vit_to_data);
+  igraph_vs_destroy(&c_vit_to);
   r_result = res;
 
   UNPROTECT(1);
@@ -9466,6 +9484,77 @@ SEXP R_igraph_isomorphic(SEXP graph1, SEXP graph2) {
 }
 
 /*-------------------------------------------/
+/ igraph_automorphism_group                  /
+/-------------------------------------------*/
+SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_colors;
+  igraph_vector_int_list_t c_generators;
+  SEXP generators;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(colors)) {
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
+  if (0 != igraph_vector_int_list_init(&c_generators, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_generators);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_automorphism_group(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_generators));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_colors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(generators=R_igraph_vector_int_list_to_SEXPp1(&c_generators));
+  igraph_vector_int_list_destroy(&c_generators);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = generators;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_count_automorphisms                 /
+/-------------------------------------------*/
+SEXP R_igraph_count_automorphisms(SEXP graph, SEXP colors) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_colors;
+  igraph_real_t c_result;
+  SEXP result;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(colors)) {
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_count_automorphisms(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_result));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_colors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(result=NEW_NUMERIC(1));
+  REAL(result)[0]=c_result;
+  r_result = result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_isoclass_subgraph                   /
 /-------------------------------------------*/
 SEXP R_igraph_isoclass_subgraph(SEXP graph, SEXP vids) {
@@ -10013,7 +10102,45 @@ SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_colo
 /*-------------------------------------------/
 / igraph_canonical_permutation               /
 /-------------------------------------------*/
-SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
+SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_colors;
+  igraph_vector_int_t c_labeling;
+  SEXP labeling;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(colors)) {
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
+  if (0 != igraph_vector_int_init(&c_labeling, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_labeling);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_canonical_permutation(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_labeling));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_colors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(labeling=R_igraph_vector_int_to_SEXPp1(&c_labeling));
+  igraph_vector_int_destroy(&c_labeling);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = labeling;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_canonical_permutation_bliss         /
+/-------------------------------------------*/
+SEXP R_igraph_canonical_permutation_bliss(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_colors;
@@ -10038,7 +10165,7 @@ SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_labeling);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_canonical_permutation(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_labeling, c_sh, &c_info));
+  IGRAPH_R_CHECK(igraph_canonical_permutation_bliss(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_labeling, c_sh, &c_info));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -10178,9 +10305,9 @@ SEXP R_igraph_isomorphic_bliss(SEXP graph1, SEXP graph2, SEXP colors1, SEXP colo
 }
 
 /*-------------------------------------------/
-/ igraph_count_automorphisms                 /
+/ igraph_count_automorphisms_bliss           /
 /-------------------------------------------*/
-SEXP R_igraph_count_automorphisms(SEXP graph, SEXP colors, SEXP sh) {
+SEXP R_igraph_count_automorphisms_bliss(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_colors;
@@ -10199,7 +10326,7 @@ SEXP R_igraph_count_automorphisms(SEXP graph, SEXP colors, SEXP sh) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_count_automorphisms(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), c_sh, &c_info));
+  IGRAPH_R_CHECK(igraph_count_automorphisms_bliss(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), c_sh, &c_info));
 
                                         /* Convert output */
   igraph_vector_int_destroy(&c_colors);
@@ -10213,9 +10340,9 @@ SEXP R_igraph_count_automorphisms(SEXP graph, SEXP colors, SEXP sh) {
 }
 
 /*-------------------------------------------/
-/ igraph_automorphism_group                  /
+/ igraph_automorphism_group_bliss            /
 /-------------------------------------------*/
-SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
+SEXP R_igraph_automorphism_group_bliss(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_colors;
@@ -10240,7 +10367,7 @@ SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_generators);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_automorphism_group(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_generators, c_sh, &c_info));
+  IGRAPH_R_CHECK(igraph_automorphism_group_bliss(&c_graph, (Rf_isNull(colors) ? 0 : (Rf_isNull(colors) ? 0 : &c_colors)), &c_generators, c_sh, &c_info));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

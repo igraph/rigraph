@@ -37,7 +37,7 @@
 
 #include "uuid/uuid.h"
 
-#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
+#define IGRAPH_I_DESTROY igraph_i_attribute_destroy
 
 SEXP R_igraph_add_env(SEXP graph);
 

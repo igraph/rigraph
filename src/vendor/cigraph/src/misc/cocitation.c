@@ -297,9 +297,11 @@ static igraph_error_t igraph_i_neisets_intersect(
  * \param graph The graph object to analyze
  * \param res Pointer to a matrix, the result of the calculation will
  *        be stored here. The number of its rows and columns is the same
- *        as the number of vertex IDs in \p vids.
- * \param vids The vertex IDs of the vertices for which the
- *        calculation will be done.
+ *        as the number of vertex IDs in \p vit_from and \p vit_to, respectively.
+ * \param vit_from The vertex IDs of the first set of vertices of the
+ *        pairs for which the calculation will be done.
+ * \param vit_to The vertex IDs of the second set of vertices of the
+ *        pairs for which the calculation will be done.
  * \param mode The type of neighbors to be used for the calculation in
  *        directed graphs. Possible values:
  *        \clist
@@ -333,27 +335,27 @@ static igraph_error_t igraph_i_neisets_intersect(
  * \example examples/simple/igraph_similarity.c
  */
 igraph_error_t igraph_similarity_jaccard(const igraph_t *graph, igraph_matrix_t *res,
-                              const igraph_vs_t vids, igraph_neimode_t mode, igraph_bool_t loops) {
+                              const igraph_vs_t from, const igraph_vs_t to, igraph_neimode_t mode, igraph_bool_t loops) {
     igraph_lazy_adjlist_t al;
-    igraph_vit_t vit, vit2;
+    igraph_vit_t vit_from, vit_to;
     igraph_integer_t i, j;
     igraph_integer_t len_union, len_intersection;
     igraph_vector_int_t *v1, *v2;
     igraph_integer_t k;
 
-    IGRAPH_CHECK(igraph_vit_create(graph, vids, &vit));
-    IGRAPH_FINALLY(igraph_vit_destroy, &vit);
-    IGRAPH_CHECK(igraph_vit_create(graph, vids, &vit2));
-    IGRAPH_FINALLY(igraph_vit_destroy, &vit2);
+    IGRAPH_CHECK(igraph_vit_create(graph, from, &vit_from));
+    IGRAPH_FINALLY(igraph_vit_destroy, &vit_from);
+    IGRAPH_CHECK(igraph_vit_create(graph, to, &vit_to));
+    IGRAPH_FINALLY(igraph_vit_destroy, &vit_to);
 
     IGRAPH_CHECK(igraph_lazy_adjlist_init(graph, &al, mode, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
     IGRAPH_FINALLY(igraph_lazy_adjlist_destroy, &al);
 
-    IGRAPH_CHECK(igraph_matrix_resize(res, IGRAPH_VIT_SIZE(vit), IGRAPH_VIT_SIZE(vit)));
+    IGRAPH_CHECK(igraph_matrix_resize(res, IGRAPH_VIT_SIZE(vit_from), IGRAPH_VIT_SIZE(vit_to)));
 
     if (loops) {
-        for (IGRAPH_VIT_RESET(vit); !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit)) {
-            i = IGRAPH_VIT_GET(vit);
+        for (IGRAPH_VIT_RESET(vit_from); !IGRAPH_VIT_END(vit_from); IGRAPH_VIT_NEXT(vit_from)) {
+            i = IGRAPH_VIT_GET(vit_from);
             v1 = igraph_lazy_adjlist_get(&al, i);
             IGRAPH_CHECK_OOM(v1, "Failed to query neighbors.");
             if (!igraph_vector_int_binsearch(v1, i, &k)) {
@@ -362,18 +364,18 @@ igraph_error_t igraph_similarity_jaccard(const igraph_t *graph, igraph_matrix_t 
         }
     }
 
-    for (IGRAPH_VIT_RESET(vit), i = 0;
-         !IGRAPH_VIT_END(vit); IGRAPH_VIT_NEXT(vit), i++) {
+    for (IGRAPH_VIT_RESET(vit_from), i = 0;
+         !IGRAPH_VIT_END(vit_from); IGRAPH_VIT_NEXT(vit_from), i++) {
         MATRIX(*res, i, i) = 1.0;
-        for (IGRAPH_VIT_RESET(vit2), j = 0;
-             !IGRAPH_VIT_END(vit2); IGRAPH_VIT_NEXT(vit2), j++) {
+        for (IGRAPH_VIT_RESET(vit_to), j = 0;
+             !IGRAPH_VIT_END(vit_to); IGRAPH_VIT_NEXT(vit_to), j++) {
             if (j <= i) {
                 continue;
             }
 
-            v1 = igraph_lazy_adjlist_get(&al, IGRAPH_VIT_GET(vit));
+            v1 = igraph_lazy_adjlist_get(&al, IGRAPH_VIT_GET(vit_from));
             IGRAPH_CHECK_OOM(v1, "Failed to query neighbors.");
-            v2 = igraph_lazy_adjlist_get(&al, IGRAPH_VIT_GET(vit2));
+            v2 = igraph_lazy_adjlist_get(&al, IGRAPH_VIT_GET(vit_to));
             IGRAPH_CHECK_OOM(v2, "Failed to query neighbors.");
 
             IGRAPH_CHECK(igraph_i_neisets_intersect(v1, v2, &len_union, &len_intersection));
@@ -387,8 +389,8 @@ igraph_error_t igraph_similarity_jaccard(const igraph_t *graph, igraph_matrix_t 
     }
 
     igraph_lazy_adjlist_destroy(&al);
-    igraph_vit_destroy(&vit);
-    igraph_vit_destroy(&vit2);
+    igraph_vit_destroy(&vit_from);
+    igraph_vit_destroy(&vit_to);
     IGRAPH_FINALLY_CLEAN(3);
 
     return IGRAPH_SUCCESS;
@@ -593,9 +595,11 @@ igraph_error_t igraph_similarity_jaccard_es(const igraph_t *graph, igraph_vector
  * \param graph The graph object to analyze.
  * \param res Pointer to a matrix, the result of the calculation will
  *        be stored here. The number of its rows and columns is the same
- *        as the number of vertex IDs in \p vids.
- * \param vids The vertex IDs of the vertices for which the
- *        calculation will be done.
+ *        as the number of vertex IDs in \p vit_from and \p vit_to, respectively.
+ * \param vit_from The vertex IDs of the first vertices of the
+ *        pairs for which the calculation will be done.
+ * \param vit_to The vertex IDs of the second vertices of the
+ *        pairs for which the calculation will be done.
  * \param mode The type of neighbors to be used for the calculation in
  *        directed graphs. Possible values:
  *        \clist
@@ -629,10 +633,10 @@ igraph_error_t igraph_similarity_jaccard_es(const igraph_t *graph, igraph_vector
  * \example examples/simple/igraph_similarity.c
  */
 igraph_error_t igraph_similarity_dice(const igraph_t *graph, igraph_matrix_t *res,
-                                      const igraph_vs_t vids,
+                                      const igraph_vs_t vit_from, const igraph_vs_t vit_to,
                                       igraph_neimode_t mode, igraph_bool_t loops) {
 
-    IGRAPH_CHECK(igraph_similarity_jaccard(graph, res, vids, mode, loops));
+    IGRAPH_CHECK(igraph_similarity_jaccard(graph, res, vit_from, vit_to, mode, loops));
 
     igraph_integer_t nr = igraph_matrix_nrow(res);
     igraph_integer_t nc = igraph_matrix_ncol(res);

@@ -315,7 +315,7 @@ void R_igraph_attribute_clean_preserve_list(void) {
   }
 }
 
-igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
+igraph_error_t R_igraph_attribute_init(igraph_t *graph, const igraph_attribute_record_list_t *attr) {
   SEXP result, names, gal;
   int px = 0;
 
@@ -342,12 +342,12 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
   graph->attr=result;
 
   /* Add graph attributes */
-  igraph_integer_t attrno= attr==NULL ? 0 : igraph_vector_ptr_size(attr);
+  igraph_integer_t attrno= attr==NULL ? 0 : igraph_attribute_record_list_size(attr);
   SET_VECTOR_ELT(result, 1, NEW_LIST(attrno));
   gal=VECTOR_ELT(result, 1);
   PROTECT(names=NEW_CHARACTER(attrno)); px++;
   for (igraph_integer_t i=0; i<attrno; i++) {
-    igraph_attribute_record_t *rec=VECTOR(*attr)[i];
+    igraph_attribute_record_t *rec=igraph_attribute_record_list_get_ptr(attr, i);
     igraph_vector_t *vec;
     igraph_vector_bool_t *log;
     igraph_strvector_t *strvec;
@@ -355,21 +355,21 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
     SET_VECTOR_ELT(gal, i, R_NilValue);
     switch (rec->type) {
     case IGRAPH_ATTRIBUTE_NUMERIC:
-      vec=(igraph_vector_t*) rec->value;
+      vec=(igraph_vector_t*) rec->value.as_vector;
       if (igraph_vector_size(vec) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_NUMERIC(1));
         REAL(VECTOR_ELT(gal, i))[0]=VECTOR(*vec)[0];
       }
       break;
     case IGRAPH_ATTRIBUTE_BOOLEAN:
-      log=(igraph_vector_bool_t*) rec->value;
+      log=(igraph_vector_bool_t*) rec->value.as_vector_bool;
       if (igraph_vector_bool_size(log) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_LOGICAL(1));
         LOGICAL(VECTOR_ELT(gal, i))[0]=VECTOR(*log)[0];
       }
       break;
     case IGRAPH_ATTRIBUTE_STRING:
-      strvec=(igraph_strvector_t*) rec->value;
+      strvec=(igraph_strvector_t*) rec->value.as_strvector;
       if (igraph_strvector_size(strvec) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_CHARACTER(1));
         SET_STRING_ELT(VECTOR_ELT(gal,i), 0, Rf_mkChar(igraph_strvector_get(strvec, 0)));
@@ -425,22 +425,22 @@ igraph_error_t R_igraph_attribute_copy(igraph_t *to, const igraph_t *from,
   return 0;
 }
 
-SEXP R_igraph_attribute_add_vertices_append1(igraph_vector_ptr_t *nattr,
+SEXP R_igraph_attribute_add_vertices_append1(const igraph_attribute_record_list_t *nattr,
                                              int j, int nv) {
 
   SEXP app = R_NilValue;
-  igraph_attribute_record_t *tmprec=VECTOR(*nattr)[j-1];
+  igraph_attribute_record_t *tmprec=igraph_attribute_record_list_get_ptr(nattr, j-1);
   igraph_integer_t len = 0;
 
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
-    len = igraph_vector_size(tmprec->value);
+    len = igraph_vector_size(tmprec->value.as_vector);
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    len = igraph_vector_bool_size(tmprec->value);
+    len = igraph_vector_bool_size(tmprec->value.as_vector_bool);
     break;
   case IGRAPH_ATTRIBUTE_STRING:
-    len = igraph_strvector_size(tmprec->value);
+    len = igraph_strvector_size(tmprec->value.as_strvector);
     break;
   case IGRAPH_ATTRIBUTE_OBJECT:
     igraph_error("R objects not implemented yet", __FILE__, __LINE__,
@@ -463,13 +463,13 @@ SEXP R_igraph_attribute_add_vertices_append1(igraph_vector_ptr_t *nattr,
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
     PROTECT(app=NEW_NUMERIC(nv));
-    igraph_vector_copy_to(tmprec->value, REAL(app));
+    igraph_vector_copy_to(tmprec->value.as_vector, REAL(app));
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value.as_vector_bool));
     break;
   default: /* IGRAPH_ATTRIBUTE_STRING */
-    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value.as_strvector));
     break;
   }
 
@@ -478,7 +478,7 @@ SEXP R_igraph_attribute_add_vertices_append1(igraph_vector_ptr_t *nattr,
 }
 
 void R_igraph_attribute_add_vertices_append(SEXP val, igraph_integer_t nv,
-                                            igraph_vector_ptr_t *nattr) {
+                                            const igraph_attribute_record_list_t *nattr) {
   SEXP names;
   igraph_integer_t valno, nattrno;
   SEXP rep = R_NilValue;
@@ -489,7 +489,7 @@ void R_igraph_attribute_add_vertices_append(SEXP val, igraph_integer_t nv,
   if (nattr==NULL) {
     nattrno=0;
   } else {
-    nattrno=igraph_vector_ptr_size(nattr);
+    nattrno=igraph_attribute_record_list_size(nattr);
   }
 
   for (igraph_integer_t i=0; i<valno; i++) {
@@ -498,7 +498,7 @@ void R_igraph_attribute_add_vertices_append(SEXP val, igraph_integer_t nv,
     igraph_bool_t l=0;
     igraph_integer_t j;
     for (j=0; !l && j<nattrno; j++) {
-      igraph_attribute_record_t *tmp=VECTOR(*nattr)[j];
+      igraph_attribute_record_t *tmp=igraph_attribute_record_list_get_ptr(nattr, j);
       l=!strcmp(sexpname, tmp->name);
     }
     if (l) {
@@ -534,7 +534,7 @@ SEXP R_igraph_attribute_add_vertices_dup(SEXP attr) {
 }
 
 igraph_error_t R_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_t nv,
-                                    igraph_vector_ptr_t *nattr) {
+                                    const igraph_attribute_record_list_t *nattr) {
   SEXP attr=graph->attr;
   SEXP val, rep=0, names, newnames;
   igraph_vector_int_t news;
@@ -550,7 +550,7 @@ igraph_error_t R_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_t
   if (nattr==NULL) {
     nattrno=0;
   } else {
-    nattrno=igraph_vector_ptr_size(nattr);
+    nattrno=igraph_attribute_record_list_size(nattr);
   }
   origlen=igraph_vcount(graph)-nv;
 
@@ -559,7 +559,7 @@ igraph_error_t R_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_t
   if (igraph_vector_int_init(&news, 0)) Rf_error("Out of memory");
   IGRAPH_FINALLY(igraph_vector_int_destroy, &news);
   for (igraph_integer_t i=0; i<nattrno; i++) {
-    igraph_attribute_record_t *nattr_entry=VECTOR(*nattr)[i];
+    igraph_attribute_record_t *nattr_entry=igraph_attribute_record_list_get_ptr(nattr, i);
     const char *nname=nattr_entry->name;
     igraph_bool_t l=0;
     for (igraph_integer_t j=0; !l && j<valno; j++) {
@@ -580,7 +580,7 @@ igraph_error_t R_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_t
     SEXP l4 = PROTECT(Rf_lang3(l1, l2, l3));
     PROTECT(rep = Rf_eval(l4, R_GlobalEnv));
     for (igraph_integer_t i=0; i<newattrs; i++) {
-      igraph_attribute_record_t *tmp = VECTOR(*nattr)[VECTOR(news)[i]];
+      igraph_attribute_record_t *tmp = igraph_attribute_record_list_get_ptr(nattr, VECTOR(news)[i]);
       SET_VECTOR_ELT(app, i, rep);
       SET_STRING_ELT(newnames, i, Rf_mkChar(tmp->name));
     }
@@ -765,22 +765,22 @@ SEXP R_igraph_attribute_add_edges_dup(SEXP attr) {
   return newattr;
 }
 
-SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, igraph_integer_t j,
+SEXP R_igraph_attribute_add_edges_append1(const igraph_attribute_record_list_t *nattr, igraph_integer_t j,
                                           igraph_integer_t ne) {
 
   SEXP app = R_NilValue;
-  igraph_attribute_record_t *tmprec=VECTOR(*nattr)[j-1];
+  igraph_attribute_record_t *tmprec=igraph_attribute_record_list_get_ptr(nattr, j-1);
   igraph_integer_t len = 0;
 
   switch(tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
-    len = igraph_vector_size(tmprec->value);
+    len = igraph_vector_size(tmprec->value.as_vector);
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    len = igraph_vector_bool_size(tmprec->value);
+    len = igraph_vector_bool_size(tmprec->value.as_vector_bool);
     break;
   case IGRAPH_ATTRIBUTE_STRING:
-    len = igraph_strvector_size(tmprec->value);
+    len = igraph_strvector_size(tmprec->value.as_strvector);
     break;
   case IGRAPH_ATTRIBUTE_OBJECT:
     igraph_error("R objects not implemented yet", __FILE__, __LINE__,
@@ -803,13 +803,13 @@ SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, igraph_int
   switch (tmprec->type) {
   case IGRAPH_ATTRIBUTE_NUMERIC:
     PROTECT(app=NEW_NUMERIC(ne));
-    igraph_vector_copy_to(tmprec->value, REAL(app));
+    igraph_vector_copy_to(tmprec->value.as_vector, REAL(app));
     break;
   case IGRAPH_ATTRIBUTE_BOOLEAN:
-    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_vector_bool_to_SEXP(tmprec->value.as_vector_bool));
     break;
   default: /* IGRAPH_ATTRIBUTE_STRING */
-    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value));
+    PROTECT(app=R_igraph_strvector_to_SEXP(tmprec->value.as_strvector));
     break;
   }
 
@@ -819,7 +819,7 @@ SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, igraph_int
 
 void R_igraph_attribute_add_edges_append(SEXP eal,
                                          const igraph_vector_int_t *edges,
-                                         igraph_vector_ptr_t *nattr) {
+                                         const igraph_attribute_record_list_t *nattr) {
   SEXP names;
   igraph_integer_t ealno;
   igraph_integer_t ne=igraph_vector_int_size(edges)/2, nattrno;
@@ -831,7 +831,7 @@ void R_igraph_attribute_add_edges_append(SEXP eal,
   if (nattr==NULL) {
     nattrno=0;
   } else {
-    nattrno=igraph_vector_ptr_size(nattr);
+    nattrno=igraph_attribute_record_list_size(nattr);
   }
 
   for (igraph_integer_t i=0; i<ealno; i++) {
@@ -840,7 +840,7 @@ void R_igraph_attribute_add_edges_append(SEXP eal,
     igraph_bool_t l=0;
     igraph_integer_t j;
     for (j=0; !l && j<nattrno; j++) {
-      igraph_attribute_record_t *tmp=VECTOR(*nattr)[j];
+      igraph_attribute_record_t *tmp=igraph_attribute_record_list_get_ptr(nattr, j);
       l=!strcmp(sexpname, tmp->name);
     }
     if (l) {
@@ -868,7 +868,7 @@ void R_igraph_attribute_add_edges_append(SEXP eal,
 }
 
 igraph_error_t R_igraph_attribute_add_edges(igraph_t *graph, const igraph_vector_int_t *edges,
-                                igraph_vector_ptr_t *nattr) {
+                                const igraph_attribute_record_list_t *nattr) {
   SEXP attr=graph->attr;
   SEXP eal, names, newnames;
   igraph_vector_int_t news;
@@ -888,14 +888,14 @@ igraph_error_t R_igraph_attribute_add_edges(igraph_t *graph, const igraph_vector
   if (nattr==NULL) {
     nattrno=0;
   } else {
-    nattrno=igraph_vector_ptr_size(nattr);
+    nattrno=igraph_attribute_record_list_size(nattr);
   }
   origlen=igraph_ecount(graph)-ne;
 
   /* First add the new attributes, if any */
   newattrs=0;
   for (igraph_integer_t i=0; i<nattrno; i++) {
-    igraph_attribute_record_t *nattr_entry=VECTOR(*nattr)[i];
+    igraph_attribute_record_t *nattr_entry=igraph_attribute_record_list_get_ptr(nattr, i);
     const char *nname=nattr_entry->name;
     igraph_bool_t l=0;
     for (igraph_integer_t j=0; !l && j<ealno; j++) {
@@ -917,7 +917,7 @@ igraph_error_t R_igraph_attribute_add_edges(igraph_t *graph, const igraph_vector
     SEXP rep = PROTECT(Rf_eval(l4, R_GlobalEnv));
     for (igraph_integer_t i=0; i<newattrs; i++) {
       igraph_attribute_record_t *tmp=
-        VECTOR(*nattr)[VECTOR(news)[i]];
+        igraph_attribute_record_list_get_ptr(nattr, VECTOR(news)[i]);
       SET_VECTOR_ELT(app, i, rep);
       SET_STRING_ELT(newnames, i, Rf_mkChar(tmp->name));
     }
@@ -1843,7 +1843,7 @@ igraph_error_t R_igraph_attribute_combine_vertices(const igraph_t *graph,
 
   /* Create the TODO list first */
   PROTECT(names=GET_NAMES(val)); px++;
-  TODO=igraph_Calloc(valno, igraph_integer_t);
+  TODO=IGRAPH_CALLOC(valno, igraph_integer_t);
   if (!TODO) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
@@ -2017,7 +2017,7 @@ igraph_error_t R_igraph_attribute_combine_edges(const igraph_t *graph,
                  IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_free, TODO);
-  funcs=igraph_Calloc(ealno, igraph_function_pointer_t);
+  funcs=IGRAPH_CALLOC(ealno, igraph_function_pointer_t);
   if (!funcs) {
     UNPROTECT(px);
     IGRAPH_ERROR("Cannot combine edge attributes",
@@ -2290,7 +2290,7 @@ void checkInterruptFn(void *dummy) {
   R_CheckUserInterrupt();
 }
 
-igraph_error_t R_igraph_interrupt_handler(void *data) {
+igraph_bool_t R_igraph_interrupt_handler() {
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
@@ -2306,9 +2306,9 @@ igraph_error_t R_igraph_interrupt_handler(void *data) {
    */
   if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
-    return IGRAPH_INTERRUPTED;
+    return 1;
   }
-  return IGRAPH_SUCCESS;
+  return 0;
 }
 
 igraph_error_t R_igraph_progress_handler(const char *message, double percent,
@@ -3332,7 +3332,7 @@ void R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
 
 igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
   igraph_integer_t length = Rf_xlength(rval);
-  sv->stor_begin=(char**) R_alloc((size_t) length, sizeof(char*));
+  sv->stor_begin=(const char**) R_alloc((size_t) length, sizeof(char*));
   sv->stor_end=sv->stor_begin+length;
   sv->end=sv->stor_end;
   for (igraph_integer_t i=0; i<igraph_strvector_size(sv); i++) {
@@ -4222,10 +4222,10 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   }
   /* We simulate mode=IN by swapping to/from and transposing the result matrix. */
   if (mode == IGRAPH_IN) {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights, mode));
     IGRAPH_CHECK(igraph_matrix_transpose(res));
   } else {
-    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights, mode));
   }
   return IGRAPH_SUCCESS;
 }
@@ -6704,8 +6704,8 @@ SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
   igraph_vector_int_t community;
   igraph_real_t cohesion;
   igraph_real_t adhesion;
-  igraph_integer_t inner_links;
-  igraph_integer_t outer_links;
+  igraph_real_t inner_links;
+  igraph_real_t outer_links;
 
   SEXP result, names;
 
