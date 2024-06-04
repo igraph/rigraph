@@ -18,7 +18,7 @@ http://arxiv.org/abs/1104.3083)."><meta property="og:image" content="https://r.i
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9023</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9024</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,8 +81,10 @@ http://arxiv.org/abs/1104.3083).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cluster_leiden</span><span class="op">(</span></span>
 <span>  <span class="va">graph</span>,</span>
 <span>  objective_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CPM"</span>, <span class="st">"modularity"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  resolution_parameter <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">resolution_parameter</span>,</span>
 <span>  beta <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  initial_membership <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  n_iterations <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -101,6 +103,10 @@ http://arxiv.org/abs/1104.3083).</p>
 modularity. Must be either <code>"CPM"</code> or <code>"modularity"</code>.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>The weights of the edges. It must be a positive numeric vector,
 <code>NULL</code> or <code>NA</code>. If it is <code>NULL</code> and the input graph has a
@@ -111,10 +117,14 @@ attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.</p></dd>
 
 
-<dt>resolution_parameter</dt>
+<dt>resolution</dt>
 <dd><p>The resolution parameter to use. Higher
 resolutions lead to more smaller communities, while lower resolutions lead
 to fewer larger communities.</p></dd>
+
+
+<dt>resolution_parameter</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="figures/lifecycle-superseded.svg" alt="[Superseded]"></a> Use <code>resolution</code> instead.</p></dd>
 
 
 <dt>beta</dt>
@@ -238,7 +248,7 @@ modularity scores, etc. from the results.</p>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="fu"><a href="strength.html">strength</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="gorder.html">gorder</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Set seed for sake of reproducibility</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ldc</span> <span class="op">&lt;-</span> <span class="fu">cluster_leiden</span><span class="op">(</span><span class="va">g</span>, resolution_parameter <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ldc</span> <span class="op">&lt;-</span> <span class="fu">cluster_leiden</span><span class="op">(</span><span class="va">g</span>, resolution <span class="op">=</span> <span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ldc</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH clustering leiden, groups: 2, mod: NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + groups:</span>
