@@ -1,5 +1,40 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9024
+
+## Continuous integration
+
+- Install rhub.
+
+
+# igraph 2.0.3.9023
+
+## Continuous integration
+
+- Fix vendoring workflow.
+
+
+# igraph 2.0.3.9022
+
+## Bug fixes
+
+- Add missing `PROTECT` (#1382).
+
+
+# igraph 2.0.3.9021
+
+## Testing
+
+- Improve attribute tests (#1381).
+
+
+# igraph 2.0.3.9020
+
+## Features
+
+- Rename sample_degseq() method and add the edge.switching.simple method (#1376).
+
+
 # igraph 2.0.3.9019
 
 ## Bug fixes

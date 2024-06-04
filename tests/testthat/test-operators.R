@@ -1,51 +1,62 @@
-test_that("operators work", {
-  o <- function(x) x[order(x[, 1], x[, 2]), ]
+test_that("union() works", {
+  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
 
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
-  expect_that(vcount(gu), equals(11))
-  expect_that(ecount(gu), equals(20))
-  expect_that(
-    o(rbind(as_edgelist(g1), as_edgelist(g2))),
-    equals(o(as_edgelist(gu)))
-  )
 
+  expect_equal(vcount(gu), 11)
+  expect_equal(ecount(gu), 20)
+  expect_equal(
+    order_by_two_first_columns(rbind(as_edgelist(g1), as_edgelist(g2))),
+    order_by_two_first_columns(as_edgelist(gu))
+  )
+  expect_isomorphic(difference(gu, g1), g2)
+  expect_isomorphic(intersection(gu, g2), g2)
+})
+
+test_that("disjoint_union() works", {
+  order_by_two_first_columns <- function(x) x[order(x[, 1], x[, 2]), ]
+
+  g1 <- make_ring(10)
+  g2 <- make_star(11, center = 11, mode = "undirected")
   gdu <- disjoint_union(g1, g2)
-  expect_that(
-    o(as_edgelist(gdu)),
-    equals(o(rbind(
+  expect_equal(
+    order_by_two_first_columns(as_edgelist(gdu)),
+    order_by_two_first_columns(rbind(
       as_edgelist(g1),
       as_edgelist(g2) + vcount(g1)
-    )))
+    ))
   )
+})
 
-  ####
+test_that("intersection() works", {
 
-  expect_isomorphic(difference(gu, g1), g2)
+  g1 <- make_ring(10)
+  g2 <- make_star(11, center = 11, mode = "undirected")
+  gu <- union(g1, g2)
 
-  ####
+  expect_isomorphic(intersection(gu, g1, keep.all.vertices = FALSE), g1)
+})
 
-  expect_isomorphic(intersection(gu, g2), g2)
-
-  expect_isomorphic(
-    intersection(gu, g1,
-      keep.all.vertices = FALSE
-    ),
-    g1
-  )
-
-  ####
+test_that("complementer() works", {
+  g2 <- make_star(11, center = 11, mode = "undirected")
 
   x <- complementer(complementer(g2))
   expect_true(identical_graphs(x, g2))
 
-  ####
+})
+
+test_that("compose() works", {
+
+  g1 <- make_ring(10)
+  g2 <- make_star(11, center = 11, mode = "undirected")
+  gu <- union(g1, g2)
 
   gc <- compose(gu, g1)
-  expect_that(vcount(gc), equals(11))
-  expect_that(ecount(gc), equals(60))
-  expect_that(diameter(gc), equals(2))
+  expect_equal(vcount(gc), 11)
+  expect_equal(ecount(gc), 60)
+  expect_equal(diameter(gc), 2)
 })
 
 test_that("Union of directed named graphs", {
@@ -62,34 +73,35 @@ test_that("Union of directed named graphs", {
 })
 
 test_that("edge reversal works", {
-  # directed graph
-  g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
-  g2 <- reverse_edges(g, 1:3)
+  directed_graph <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
+  reverse_directed_graph <- reverse_edges(directed_graph, 1:3)
   expected <- make_graph(~ 1 +- 2, 1 +- 3, 1 +- 4, 2 -+ 3, 3 -+ 4)
-  expect_true(isomorphic(g2, expected))
+  expect_true(isomorphic(reverse_directed_graph, expected))
 
-  # undirected graph
-  g <- make_graph(~ 1 -- 2, 1 -- 3, 1 -- 4, 2 -- 3, 3 -- 4)
-  g2 <- reverse_edges(g, 1:3)
-  expect_true(identical_graphs(g, g2))
+  reverse_all_directed_graph <- reverse_edges(directed_graph)
+  expect_equal(vcount(reverse_all_directed_graph), vcount(directed_graph))
+  expect_equal(
+    as_edgelist(reverse_all_directed_graph),
+    as_edgelist(directed_graph)[, c(2, 1)]
+  )
 
-  # all edges
-  g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
-  g2 <- reverse_edges(g)
-  expect_that(vcount(g2), equals(vcount(g)))
-  expect_that(as_edgelist(g2), equals(as_edgelist(g)[, c(2, 1)]))
+  undirected_graph <- make_graph(~ 1 -- 2, 1 -- 3, 1 -- 4, 2 -- 3, 3 -- 4)
+  reverse_undirected_graph <- reverse_edges(undirected_graph, 1:3)
+  expect_true(identical_graphs(undirected_graph, reverse_undirected_graph))
 
-  # graph with isolated vertices
-  g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
-  g2 <- reverse_edges(g)
-  expect_that(vcount(g2), equals(vcount(g)))
-  expect_that(as_edgelist(g2), equals(as_edgelist(g)[, c(2, 1)]))
+  isolated_vertices_g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
+  reverse_isolated_vertices_g <- reverse_edges(isolated_vertices_g)
+  expect_equal(vcount(reverse_isolated_vertices_g), vcount(isolated_vertices_g))
+  expect_equal(
+    as_edgelist(reverse_isolated_vertices_g),
+    as_edgelist(isolated_vertices_g)[, c(2, 1)]
+  )
 })
 
 test_that("t() is aliased to edge reversal for graphs", {
   g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
-  expect_that(vcount(t(g)), equals(vcount(g)))
-  expect_that(as_edgelist(t(g)), equals(as_edgelist(g)[, c(2, 1)]))
+  expect_equal(vcount(t(g)), vcount(g))
+  expect_equal(as_edgelist(t(g)), as_edgelist(g)[, c(2, 1)])
 })
 
 test_that("vertices() works", {
