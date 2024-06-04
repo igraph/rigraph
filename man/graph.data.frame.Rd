@@ -8,15 +8,15 @@ graph.data.frame(d, directed = TRUE, vertices = NULL)
 }
 \arguments{
 \item{d}{A data frame containing a symbolic edge list in the first two
-columns. Additional columns are considered as edge attributes.  Since
+columns, as vertex names or vertex IDs.
 version 0.7 this argument is coerced to a data frame with
-\code{as.data.frame}.}
+\code{\link[=as.data.frame]{as.data.frame()}}.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
 
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
-with \code{as.data.frame}, if not \code{NULL}.}
+with \code{\link[=as.data.frame]{as.data.frame()}}, if not \code{NULL}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

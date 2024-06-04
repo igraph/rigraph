@@ -18,7 +18,7 @@ test_that("shortest_paths works", {
   edges <- as.data.frame(edges)
   edges[[3]] <- as.numeric(as.character(edges[[3]]))
 
-  g <- graph_from_data_frame(as.data.frame(edges))
+  g <- graph_from_data_frame(edges)
 
   all1 <- all_shortest_paths(g, "s", "t", weights = NA)$vpaths
 

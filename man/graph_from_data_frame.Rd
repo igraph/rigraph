@@ -19,22 +19,22 @@ from_data_frame(...)
 edges, or both. The default is \sQuote{edges}.}
 
 \item{d}{A data frame containing a symbolic edge list in the first two
-columns. Additional columns are considered as edge attributes.  Since
+columns, as vertex names or vertex IDs.
 version 0.7 this argument is coerced to a data frame with
-\code{as.data.frame}.}
+\code{\link[=as.data.frame]{as.data.frame()}}.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
 
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
-with \code{as.data.frame}, if not \code{NULL}.}
+with \code{\link[=as.data.frame]{as.data.frame()}}, if not \code{NULL}.}
 
 \item{...}{Passed to \code{graph_from_data_frame()}.}
 }
 \value{
 An igraph graph object for \code{graph_from_data_frame()}, and either a
 data frame or a list of two data frames named \code{edges} and
-\code{vertices} for \code{as.data.frame}.
+\code{vertices} for \code{\link[=as.data.frame]{as.data.frame()}}.
 }
 \description{
 This function creates an igraph graph from one or two data frames containing
