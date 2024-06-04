@@ -1347,7 +1347,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft("2.0.3",
+    lifecycle::deprecate_soft("2.0.4",
                               "cluster_leiden(resolution_parameter)",
                               "cluster_leiden(resolution)")
     resolution <- resolution_parameter
