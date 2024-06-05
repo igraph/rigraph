@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9025
+
+## doc
+
+- Update troubleshooting document.
+
+## Uncategorized
+
+- Expect_equal() instead of expect_that(equals()) (#1391).
+
+- Refactoring around adjacency.R (#1370).
+
+
 # igraph 2.0.3.9024
 
 ## Continuous integration
