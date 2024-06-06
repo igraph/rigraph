@@ -67,6 +67,9 @@ parse_script <- function(path) {
   }
 
   styler::style_file(path)
+  if (! (path %in% gert::git_status()[["file"]])) {
+    return(invisible(TRUE))
+  }
 
   gert::git_add(path)
   gert::git_commit(
