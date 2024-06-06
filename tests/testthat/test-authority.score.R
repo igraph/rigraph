@@ -58,6 +58,11 @@ test_that("`hub_score()` works", {
   expect_equal(s2, s3)
 })
 
+# TODO: Hub and authority scores make little sense for undirected graphs
+# Replace this test. Until then, do not use even-length cycle graphs
+# as their leading eigenvalue for hub/authority scores is degenerate,
+# and any vector with alternating values (a, b, a, b, ...) is a valid
+# solution, not just all-ones.
 test_that("authority scores of a ring are all one", {
   g3 <- make_ring(99)
   expect_equal(authority_score(g3)$vector, rep(1, vcount(g3)))
