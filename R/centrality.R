@@ -1125,13 +1125,11 @@ diversity <- diversity_impl
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
-#' hub_score(g)$vector
-#' authority_score(g)$vector
+#' hits_scores(g)
 #'
 #' ## A ring
 #' g2 <- make_ring(10)
-#' hub_score(g2)$vector
-#' authority_score(g2)$vector
+#' hits_scores(g2)
 #' @family centrality
 hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
