@@ -921,7 +921,14 @@ random.graph.game <- erdos.renyi.game
 #'
 sample_degseq <- function(out.deg, in.deg = NULL,
                           method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")) {
-  method <- igraph.match.arg(method)
+  method <- igraph.match.arg(
+    method,
+    values = c(
+      "configuration", "vl", "fast.heur.simple",
+      "configuration.simple", "edge.switching.simple",
+      "simple", "simple.no.multiple", "simple.no.multiple.uniform" # old names
+    )
+  )
 
   if (method == "simple") {
     lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
