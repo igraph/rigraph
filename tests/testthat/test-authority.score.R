@@ -59,7 +59,7 @@ test_that("`hub_score()` works", {
 })
 
 test_that("authority scores of a ring are all one", {
-  g3 <- make_ring(100)
+  g3 <- make_ring(99)
   expect_equal(authority_score(g3)$vector, rep(1, vcount(g3)))
   expect_equal(hub_score(g3)$vector, rep(1, vcount(g3)))
 })
