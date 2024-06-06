@@ -5,7 +5,7 @@ test_that("cluster_louvain works", {
   mc <- cluster_louvain(g)
 
   expect_true(all(as.vector(membership(mc)) %in% 1:4))
-  expect_that(modularity(g, mc$membership), equals(max(mc$modularity)))
+  expect_equal(modularity(g, mc$membership), max(mc$modularity))
   # 3   4
   # 2 998
   expect_true(length(mc) %in% 3:4)

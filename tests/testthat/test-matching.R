@@ -54,9 +54,9 @@ test_that("max_bipartite_match works", {
   V(g)$type <- 1:vcount(g) > 5
   match <- max_bipartite_match(g)
 
-  expect_that(match$matching_size, equals(5))
-  expect_that(match$matching_weight, equals(5))
-  expect_that(sort(as.vector(match$matching)), equals(sort(V(g)$name)))
+  expect_equal(match$matching_size, 5)
+  expect_equal(match$matching_weight, 5)
+  expect_equal(sort(as.vector(match$matching)), sort(V(g)$name))
 })
 
 test_that("max_bipartite_match handles missing types gracefully", {

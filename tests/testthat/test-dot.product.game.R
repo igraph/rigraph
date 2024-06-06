@@ -10,7 +10,7 @@ test_that("Dot product rng works", {
   expect_that(g[], is_equivalent_to(g0[]))
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  g20 <- graph_from_literal(1:2:3:4, 1 -+ 3, 1 -+ 4, 3 -+ 4, 4 +- 1, 4 +- 3)
+  g20 <- graph_from_literal(1:2:3:4, 1 - +3, 1 - +4, 3 - +4, 4 + -1, 4 + -3)
   expect_that(g[], is_equivalent_to(g20[]))
 
   vecs <- replicate(5, rep(1 / 2, 4))
@@ -22,10 +22,10 @@ test_that("Dot product rng works", {
 
   vecs <- replicate(100, rep(sqrt(1 / 8), 4))
   g <- sample_dot_product(vecs)
-  expect_that(ecount(g), equals(2454))
+  expect_equal(ecount(g), 2454)
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  expect_that(ecount(g2), equals(4938))
+  expect_equal(ecount(g2), 4938)
 })
 
 test_that("Dot product rng gives warnings", {
@@ -38,9 +38,6 @@ test_that("Dot product rng gives warnings", {
   vecs <- cbind(c(1, 1, 1), c(1, 1, 1))
   expect_that(
     g <- sample_dot_product(vecs),
-    gives_warning(paste(
-      sep = "", "Greater than 1 connection probability ",
-      "in dot-product graph"
-    ))
+    gives_warning(paste(sep = "", "Greater than 1 connection probability ", "in dot-product graph"))
   )
 })
