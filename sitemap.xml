@@ -664,10 +664,16 @@
     <loc>https://r.igraph.org/reference/graph.adjlist.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graph.atlas.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/graph.automorphisms.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.bfs.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.bipartite.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.cohesion.html</loc>
@@ -683,6 +689,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.de.bruijn.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.density.html</loc>
@@ -706,7 +715,31 @@
     <loc>https://r.igraph.org/reference/graph.eigen.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graph.empty.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.extended.chordal.ring.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.famous.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.formula.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.full.bipartite.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.full.citation.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.full.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/graph.graphdb.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.incidence.html</loc>
@@ -718,10 +751,19 @@
     <loc>https://r.igraph.org/reference/graph.isocreate.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graph.kautz.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/graph.knn.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.laplacian.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.lattice.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.lcf.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.maxflow.html</loc>
@@ -742,7 +784,16 @@
     <loc>https://r.igraph.org/reference/graph.neighborhood.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graph.ring.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.star.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/graph.strength.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.tree.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph.union.html</loc>
@@ -1238,6 +1289,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/leading.eigenvector.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/line.graph.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/list.edge.attributes.html</loc>
