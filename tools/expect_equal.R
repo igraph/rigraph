@@ -1,3 +1,25 @@
+treat_deprecated <- function(xml, path) {
+  siblings <- xml2::xml_parent(xml) |> xml2::xml_siblings()
+  equal <- siblings[grepl("is\\_equivalent\\_to\\(", xml2::xml_text(siblings))]
+  if (length(equal) == 0) {
+    cli::cli_alert_warning("WARNING AT {path}.")
+    return()
+  }
+  xml2::xml_text(xml) <- "expect_equal"
+  text <- xml2::xml_contents(equal)[[3]] |> xml2::xml_text()
+  xml2::xml_remove(xml2::xml_contents(equal))
+  xml2::xml_text(equal) <- text
+
+  first_line <- xml2::xml_attr(equal, "line1")
+
+  xml2::xml_add_sibling(equal, "expr", line1 = first_line)
+  true_lack <- xml2::xml_siblings(equal)[length(xml2::xml_siblings(equal)) - 1]
+  xml2::xml_add_child(true_lack, "NUM_CONST", "TRUE", line1 = first_line)
+  xml2::xml_add_sibling(equal, "EQ_FORMALS", "=", line1 = first_line)
+  xml2::xml_add_sibling(equal, "SYMBOL_FORMALS", "ignore_attr", line1 = first_line)
+  xml2::xml_add_sibling(equal, "OP-COMMA", ",", line1 = first_line)
+}
+
 parse_script <- function(path) {
 
   cli::cli_alert_info("Refactoring {path}.")
@@ -50,19 +72,6 @@ parse_script <- function(path) {
   gert::git_commit(
     sprintf("refactor: remove deprecated expect_that() from %s", fs::path_file(path))
   )
-}
-
-treat_deprecated <- function(xml, path) {
-  siblings <- xml2::xml_parent(xml) |> xml2::xml_siblings()
-  equal <- siblings[grepl("equals\\(", xml2::xml_text(siblings))]
-  if (length(equal) == 0) {
-    cli::cli_alert_warning("WARNING AT {path}.")
-    return()
-  }
-  xml2::xml_text(xml) <- "expect_equal"
-  text <- xml2::xml_contents(equal)[[3]] |> xml2::xml_text()
-  xml2::xml_remove(xml2::xml_contents(equal))
-  xml2::xml_text(equal) <- text
 }
 
 paths <- fs::dir_ls("tests/testthat", regex = "test-")
