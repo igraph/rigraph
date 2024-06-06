@@ -260,17 +260,12 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
     lifecycle::deprecate_soft(
       "2.1.0",
       "eccentricity(... =)",
-      details = "The arguments `weights` and `mode` must be named."
+      details = "The argument `mode` must be named."
     )
 
     rlang::check_dots_unnamed()
 
     dots <- list(...)
-
-    if (is.null(weights) && length(dots) > 0) {
-      weights <- dots[[1]]
-      dots <- dots[-1]
-    }
 
     if (missing(mode) && length(dots) > 0) {
       mode <- dots[[1]]
@@ -313,17 +308,12 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
     lifecycle::deprecate_soft(
       "2.1.0",
       "radius(... =)",
-      details = "The arguments `weights` and `mode` must be named."
+      details = "The argument `mode` must be named."
     )
 
     rlang::check_dots_unnamed()
 
     dots <- list(...)
-
-    if (is.null(weights) && length(dots) > 0) {
-      weights <- dots[[1]]
-      dots <- dots[-1]
-    }
 
     if (missing(mode) && length(dots) > 0) {
       mode <- dots[[1]]
