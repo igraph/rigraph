@@ -16,24 +16,24 @@ test_that("mean_distance works", {
   }
 
   g <- giant.component(sample_gnp(100, 3 / 100))
-  expect_that(apl(g), equals(mean_distance(g)))
+  expect_equal(apl(g), mean_distance(g))
 
   g <- giant.component(sample_gnp(100, 6 / 100, directed = TRUE), mode = "strong")
-  expect_that(apl(g), equals(mean_distance(g)))
+  expect_equal(apl(g), mean_distance(g))
 
   g <- sample_gnp(100, 2 / 100)
-  expect_that(apl(g), equals(mean_distance(g)))
+  expect_equal(apl(g), mean_distance(g))
 
   g <- sample_gnp(100, 4 / 100, directed = TRUE)
-  expect_that(apl(g), equals(mean_distance(g)))
+  expect_equal(apl(g), mean_distance(g))
 })
 
 test_that("mean_distance works correctly for disconnected graphs", {
   g <- make_full_graph(5) %du% make_full_graph(7)
   md <- mean_distance(g, unconnected = FALSE)
-  expect_that(Inf, equals(md))
+  expect_equal(Inf, md)
   md <- mean_distance(g, unconnected = TRUE)
-  expect_that(1, equals(md))
+  expect_equal(1, md)
 })
 
 test_that("mean_distance can provide details", {
@@ -55,15 +55,15 @@ test_that("mean_distance can provide details", {
 
   g <- giant.component(sample_gnp(100, 3 / 100))
   md <- mean_distance(g, details = TRUE)
-  expect_that(apl(g), equals(md$res))
+  expect_equal(apl(g), md$res)
 
   g <- make_full_graph(5) %du% make_full_graph(7)
   md <- mean_distance(g, details = TRUE, unconnected = TRUE)
-  expect_that(1, equals(md$res))
-  expect_that(70, equals(md$unconnected))
+  expect_equal(1, md$res)
+  expect_equal(70, md$unconnected)
 
   g <- make_full_graph(5) %du% make_full_graph(7)
   md <- mean_distance(g, details = TRUE, unconnected = FALSE)
-  expect_that(Inf, equals(md$res))
-  expect_that(70, equals(md$unconnected))
+  expect_equal(Inf, md$res)
+  expect_equal(70, md$unconnected)
 })

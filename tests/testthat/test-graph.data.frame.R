@@ -27,7 +27,7 @@ test_that("graph_from_data_frame works", {
 
   df <- as_data_frame(g, what = "both")
   expect_that(df$vertices, is_equivalent_to(actors))
-  expect_that(df$edges, equals(relations))
+  expect_equal(df$edges, relations)
 })
 
 test_that("graph_from_data_frame() creates attributes for zero-row data frames (#466)", {

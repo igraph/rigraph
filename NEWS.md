@@ -1,5 +1,39 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9025
+
+## doc
+
+- Update troubleshooting document.
+
+## Uncategorized
+
+- Expect_equal() instead of expect_that(equals()) (#1391).
+
+- Refactoring around adjacency.R (#1370).
+
+
+# igraph 2.0.3.9024
+
+## Continuous integration
+
+- Install rhub.
+
+
+# igraph 2.0.3.9023
+
+## Continuous integration
+
+- Fix vendoring workflow.
+
+
+# igraph 2.0.3.9022
+
+## Bug fixes
+
+- Add missing `PROTECT` (#1382).
+
+
 # igraph 2.0.3.9021
 
 ## Testing

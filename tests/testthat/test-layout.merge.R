@@ -7,8 +7,8 @@ test_that("merge_coords works", {
 
   lm <- merge_coords(g, l)
   expect_true(is.matrix(lm))
-  expect_that(ncol(lm), equals(2))
-  expect_that(nrow(lm), equals(sum(sapply(g, vcount))))
+  expect_equal(ncol(lm), 2)
+  expect_equal(nrow(lm), sum(sapply(g, vcount)))
 
   ##########
 
@@ -16,6 +16,6 @@ test_that("merge_coords works", {
   for (i in 1:10) {
     g <- sample_gnp(100, 2 / 100)
     l <- layout_with_mds(g)
-    expect_that(dim(l), equals(c(vcount(g), 2)))
+    expect_equal(dim(l), c(vcount(g), 2))
   }
 })

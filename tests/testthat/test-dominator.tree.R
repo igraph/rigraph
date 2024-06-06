@@ -1,8 +1,8 @@
 test_that("dominator_tree works", {
   g <- graph_from_literal(
-    R -+ A:B:C, A -+ D, B -+ A:D:E, C -+ F:G, D -+ L,
-    E -+ H, F -+ I, G -+ I:J, H -+ E:K, I -+ K, J -+ I,
-    K -+ I:R, L -+ H
+    R - +A:B:C, A - +D, B - +A:D:E, C - +F:G, D - +L,
+    E - +H, F - +I, G - +I:J, H - +E:K, I - +K, J - +I,
+    K - +I:R, L - +H
   )
   dtree <- dominator_tree(g, root = "R")
 
@@ -12,18 +12,10 @@ test_that("dominator_tree works", {
   names <- c("$root", V(g)$name)
   dtree$dom <- names[ifelse(dtree$dom < 0, 1, dtree$dom + 1)]
   dtree$leftout <- V(g)$name[dtree$leftout]
-  expect_that(dtree$dom, equals(c(
-    "$root", "R", "R", "R", "R", "R", "C", "C",
-    "D", "R", "R", "G", "R"
-  )))
-  expect_that(dtree$leftout, equals(character()))
-  expect_that(
+  expect_equal(dtree$dom, c("$root", "R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R"))
+  expect_equal(dtree$leftout, character())
+  expect_equal(
     as_edgelist(dtree$domtree),
-    equals(structure(c(
-      "R", "R", "R", "R", "R", "C", "C",
-      "D", "R", "R", "G", "R", "A", "B",
-      "C", "D", "E", "F", "G", "L", "H",
-      "I", "J", "K"
-    ), .Dim = c(12L, 2L)))
+    structure(c("R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R", "A", "B", "C", "D", "E", "F", "G", "L", "H", "I", "J", "K"), .Dim = c(12L, 2L))
   )
 })

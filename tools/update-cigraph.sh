@@ -54,5 +54,3 @@ git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp src/rinterface.c
   echo
   git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | sed -r 's%(#[0-9]+)%igraph/igraph\1%g'
 ) | git commit --file /dev/stdin
-
-git cherry-pick b6f576d25dc2c02dfeb2979716ef4809e4404c99 --no-edit
