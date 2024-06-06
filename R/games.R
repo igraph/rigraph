@@ -921,6 +921,9 @@ random.graph.game <- erdos.renyi.game
 #'
 sample_degseq <- function(out.deg, in.deg = NULL,
                           method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")) {
+  if (missing(method)) {
+    method <- method[1]
+  }
   method <- igraph.match.arg(
     method,
     values = c(
