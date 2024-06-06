@@ -362,8 +362,8 @@ test_that("intersection of non-named graphs keeps attributes properly", {
   df2 <- rn(as_data_frame(g2))
   dfi <- rn(as_data_frame(gi))
 
-  expect_that(df[rownames(dfi), ], is_equivalent_to(dfi[, 1:3]))
-  expect_that(df2[rownames(dfi), ], is_equivalent_to(dfi[, c(1, 2, 4)]))
+  expect_equal(df[rownames(dfi), ], dfi[, 1:3], ignore_attr = TRUE)
+  expect_equal(df2[rownames(dfi), ], dfi[, c(1, 2, 4)], ignore_attr = TRUE)
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
@@ -385,8 +385,8 @@ test_that("union of non-named graphs keeps attributes properly", {
   df2 <- rn(as_data_frame(g2))
   dfu <- rn(as_data_frame(gu))
 
-  expect_that(dfu[rownames(df), 1:3], is_equivalent_to(df))
-  expect_that(dfu[rownames(df2), c(1, 2, 4)], is_equivalent_to(df2))
+  expect_equal(dfu[rownames(df), 1:3], df, ignore_attr = TRUE)
+  expect_equal(dfu[rownames(df2), c(1, 2, 4)], df2, ignore_attr = TRUE)
 
   expect_equal(
     dfu[!rownames(dfu) %in% rownames(df), 3],
