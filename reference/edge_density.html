@@ -14,7 +14,7 @@ are present."><meta property="og:image" content="https://r.igraph.org/logo.png">
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9025</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9026</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -143,9 +143,12 @@ to get rid of the multiple and/or loop edges.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_empty_graph.html">make_empty_graph</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, <span class="fl">0.4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">edge_density</span><span class="op">(</span><span class="fu"><a href="make_empty_graph.html">make_empty_graph</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># empty graphs have density 0</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-in"><span><span class="fu">edge_density</span><span class="op">(</span><span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># complete graphs have density 1</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-in"><span><span class="fu">edge_density</span><span class="op">(</span><span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, p <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="co"># density will be close to p</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3921212</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># loop edges</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co"># graph with a self-loop</span></span></span>
