@@ -4,7 +4,7 @@
 \alias{get.edge.ids}
 \title{Find the edge ids based on the incident vertices of the edges}
 \usage{
-get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = NULL)
+get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = deprecated())
 }
 \arguments{
 \item{graph}{The input graph.}
