@@ -545,7 +545,10 @@ igraph_hub_and_authority_scores:
     # for dependencies. The problem is that the VERTEXINDEX type needs two
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
-    DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
+    DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
+    PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
+        OUT REAL value, BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
+        INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_unfold_tree:
     IGNORE: RR

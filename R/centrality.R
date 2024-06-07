@@ -1163,7 +1163,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     scale = scale,
     weights = weights,
     options = options)
-  scores$hub_vector <- NULL
+  scores$hub <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 
@@ -1200,7 +1200,7 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
     scale = scale,
     weights = weights,
     options = options)
-  scores$authority_vector <- NULL
+  scores$authority <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 

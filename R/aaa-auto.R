@@ -1422,10 +1422,10 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))
+    names(res$hub) <- vertex_attr(graph, "name", V(graph))
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$authority.vector) <- vertex_attr(graph, "name", V(graph))
+    names(res$authority) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }

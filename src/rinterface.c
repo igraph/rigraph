@@ -3898,52 +3898,52 @@ SEXP R_igraph_eigenvector_centrality(SEXP graph, SEXP directed, SEXP scale, SEXP
 SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP scale, SEXP weights, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_hub_vector;
-  igraph_vector_t c_authority_vector;
+  igraph_vector_t c_hub;
+  igraph_vector_t c_authority;
   igraph_real_t c_value;
   igraph_bool_t c_scale;
   igraph_vector_t c_weights;
   igraph_arpack_options_t c_options;
-  SEXP hub_vector;
-  SEXP authority_vector;
+  SEXP hub;
+  SEXP authority;
   SEXP value;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_init(&c_hub_vector, 0)) {
+  if (0 != igraph_vector_init(&c_hub, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_hub_vector);
-  if (0 != igraph_vector_init(&c_authority_vector, 0)) {
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_hub);
+  if (0 != igraph_vector_init(&c_authority, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_authority_vector);
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_authority);
   IGRAPH_R_CHECK_BOOL(scale);
   c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   R_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_hub_and_authority_scores(&c_graph, &c_hub_vector, &c_authority_vector, &c_value, c_scale, (Rf_isNull(weights) ? 0 : &c_weights), &c_options));
+  IGRAPH_R_CHECK(igraph_hub_and_authority_scores(&c_graph, &c_hub, &c_authority, &c_value, c_scale, (Rf_isNull(weights) ? 0 : &c_weights), &c_options));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
   PROTECT(r_names=NEW_CHARACTER(4));
-  PROTECT(hub_vector=R_igraph_vector_to_SEXP(&c_hub_vector));
-  igraph_vector_destroy(&c_hub_vector);
+  PROTECT(hub=R_igraph_vector_to_SEXP(&c_hub));
+  igraph_vector_destroy(&c_hub);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(authority_vector=R_igraph_vector_to_SEXP(&c_authority_vector));
-  igraph_vector_destroy(&c_authority_vector);
+  PROTECT(authority=R_igraph_vector_to_SEXP(&c_authority));
+  igraph_vector_destroy(&c_authority);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
   PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
-  SET_VECTOR_ELT(r_result, 0, hub_vector);
-  SET_VECTOR_ELT(r_result, 1, authority_vector);
+  SET_VECTOR_ELT(r_result, 0, hub);
+  SET_VECTOR_ELT(r_result, 1, authority);
   SET_VECTOR_ELT(r_result, 2, value);
   SET_VECTOR_ELT(r_result, 3, options);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("hub_vector"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("authority_vector"));
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("hub"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("authority"));
   SET_STRING_ELT(r_names, 2, Rf_mkChar("value"));
   SET_STRING_ELT(r_names, 3, Rf_mkChar("options"));
   SET_NAMES(r_result, r_names);
