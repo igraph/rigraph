@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9026
+
+## Bug fixes
+
+- `sample_degseq()` works with old method names again (#1393).
+
+## Chore
+
+- Results.
+
+## Refactoring
+
+- Expect_that(is_equivalent()) (#1395).
+
+- Breaking change: change make.R (#1390).
+
+## Breaking changes
+
+- Breaking change: change make.R (#1390).
+
+
 # igraph 2.0.3.9025
 
 ## doc
