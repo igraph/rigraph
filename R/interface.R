@@ -433,7 +433,7 @@ is_directed <- function(graph) {
 #'   numeric vertex ids. By default vertex names are used.
 #' @return A two column matrix of vertex names or vertex ids.
 #'
-#' @aliases get.edges get.edge
+#' @aliases get.edges
 #' @family structural queries
 #'
 #' @export
