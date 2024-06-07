@@ -2,15 +2,12 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_grid}
 \alias{layout_on_grid}
-\alias{layout.grid.3d}
 \alias{on_grid}
 \title{Simple grid layout}
 \usage{
 layout_on_grid(graph, width = 0, height = 0, dim = 2)
 
 on_grid(...)
-
-layout.grid.3d(graph, width = 0, height = 0)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -84,4 +81,3 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{graph layouts}
 \keyword{graphs}
-\keyword{internal}

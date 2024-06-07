@@ -805,7 +805,6 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' other. If you want to change the order of the vertices, then see the
 #' [permute()] function.
 #'
-#' @aliases layout.grid.3d
 #' @param graph The input graph.
 #' @param width The number of vertices in a single row of the grid. If this is
 #'   zero or negative, then for 2d layouts the width of the grid will be the
@@ -861,24 +860,17 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
 
-#' @rdname layout_on_grid
+#' Simple grid layout
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Use [layout_on_grid()].
+#' @inheritParams layout_on_grid
+#' @export
 #' @export
 #' @keywords internal
 layout.grid.3d <- function(graph, width = 0, height = 0) {
-  .Deprecated("layout_on_grid", msg = paste0(
-    "layout.grid.3d is deprecated from\n",
-    "igraph 0.8.0, please use layout_on_grid instead"
-  ))
-  # Argument checks
-  ensure_igraph(graph)
-  width <- as.numeric(width)
-  height <- as.numeric(height)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_layout_grid_3d, graph, width, height)
-
-  res
+  lifecycle::deprecate_stop("2.0.4", "layout.grid.3d()", "layout_on_grid()")
 }
 
 ## ----------------------------------------------------------------
