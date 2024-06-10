@@ -214,10 +214,19 @@ jobs:
           cov <- covr::package_coverage(
             type = c("tests", "examples"),
             line_exclusions = as.list(names(line_exclusions)),
-            quiet = FALSE
-          )
-          covr::codecov(coverage = cov, quiet = FALSE)
+            quiet = FALSE,
+            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+           )
+          covr::to_cobertura(cov)
         shell: Rscript {0}
+
+      - uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: ${{ github.event_name != 'pull_request' && true || false }}
+          file: ./cobertura.xml
+          plugin: noop
+          disable_search: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   sanitizer:
     runs-on: ubuntu-22.04
