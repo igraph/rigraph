@@ -14,18 +14,20 @@ test_that("bipartite_projection works", {
   M
   g2 <- graph_from_biadjacency_matrix(M)
   expect_equal(as.matrix(g2[1:5, 6:8]), M)
-  expect_that(as.matrix(g2[1:5, 1:5]), is_equivalent_to(matrix(0, 5, 5)))
-  expect_that(as.matrix(g2[6:8, 6:8]), is_equivalent_to(matrix(0, 3, 3)))
+  expect_equal(as.matrix(g2[1:5, 1:5]), matrix(0, 5, 5), ignore_attr = TRUE)
+  expect_equal(as.matrix(g2[6:8, 6:8]), matrix(0, 3, 3), ignore_attr = TRUE)
 
   g2$name <- "Event network"
   proj2 <- bipartite_projection(g2)
-  expect_that(
+  expect_equal(
     as.matrix(proj2[[1]][]),
-    is_equivalent_to(cbind(c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2), c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2), c(2, 2, 0, 2, 0)))
+    cbind(c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2), c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2), c(2, 2, 0, 2, 0)),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     as.matrix(proj2[[2]][]),
-    is_equivalent_to(cbind(c(0, 4, 1), c(4, 0, 1), c(1, 1, 0)))
+    cbind(c(0, 4, 1), c(4, 0, 1), c(1, 1, 0)),
+    ignore_attr = TRUE
   )
 
   bs <- bipartite_projection_size(g2)

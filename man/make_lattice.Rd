@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_lattice}
 \alias{make_lattice}
-\alias{graph.lattice}
 \alias{lattice}
 \title{Create a lattice graph}
 \usage{

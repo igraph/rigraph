@@ -104,60 +104,68 @@ test_that("[ indexing works with weighted graphs and symbolic names", {
 test_that("[[ indexing works with adjacent vertices", {
   g <- make_test_named_tree()
 
-  expect_that(g[[1, ]], is_equivalent_to(list(a = V(g)[2:3])))
-  expect_that(g[[, 2]], is_equivalent_to(list(b = V(g)[1])))
-  expect_that(
+  expect_equal(g[[1, ]], list(a = V(g)[2:3]), ignore_attr = TRUE)
+  expect_equal(g[[, 2]], list(b = V(g)[1]), ignore_attr = TRUE)
+  expect_equal(
     g[[, 2, directed = FALSE]],
-    is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
+    list(b = V(g)[c(1, 4, 5)]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[2, directed = FALSE]],
-    is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
+    list(b = V(g)[c(1, 4, 5)]),
+    ignore_attr = TRUE
   )
 
-  expect_that(g[[1:3, ]], is_equivalent_to(list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7])))
-  expect_that(g[[, 1:3]], is_equivalent_to(list(a = V(g)[numeric()], b = V(g)[1], c = V(g)[1])))
+  expect_equal(g[[1:3, ]], list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7]), ignore_attr = TRUE)
+  expect_equal(g[[, 1:3]], list(a = V(g)[numeric()], b = V(g)[1], c = V(g)[1]), ignore_attr = TRUE)
 })
 
 test_that("[[ indexing works with symbolic names", {
   g <- make_test_named_tree()
 
-  expect_that(g[["a", ]], is_equivalent_to(list(a = V(g)[2:3])))
-  expect_that(g[[, "b"]], is_equivalent_to(list(b = V(g)[1])))
-  expect_that(
+  expect_equal(g[["a", ]], list(a = V(g)[2:3]), ignore_attr = TRUE)
+  expect_equal(g[[, "b"]], list(b = V(g)[1]), ignore_attr = TRUE)
+  expect_equal(
     g[[, "b", directed = FALSE]],
-    is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
+    list(b = V(g)[c(1, 4, 5)]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[["b", directed = FALSE]],
-    is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
+    list(b = V(g)[c(1, 4, 5)]),
+    ignore_attr = TRUE
   )
 
-  expect_that(
+  expect_equal(
     g[[letters[1:3], ]],
-    is_equivalent_to(list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7]))
+    list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[, letters[1:3]]],
-    is_equivalent_to(list(a = V(g)[numeric()], b = V(g)[1], c = V(g)[1]))
+    list(a = V(g)[numeric()], b = V(g)[1], c = V(g)[1]),
+    ignore_attr = TRUE
   )
 })
 
 test_that("[[ indexing works with logical vectors", {
   g <- make_test_named_tree()
 
-  expect_that(
+  expect_equal(
     g[[degree(g, mode = "in") == 0, ]],
-    is_equivalent_to(list(a = V(g)[2:3]))
+    list(a = V(g)[2:3]),
+    ignore_attr = TRUE
   )
 })
 
 test_that("[[ indexing works with filtering on both ends", {
   g <- make_test_named_tree()
 
-  expect_that(
+  expect_equal(
     g[[1:10, 1:10]],
-    is_equivalent_to(list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7], d = V(g)[8:9], e = V(g)[10], f = V(g)[numeric()], g = V(g)[numeric()], h = V(g)[numeric()], i = V(g)[numeric()], j = V(g)[numeric()]))
+    list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7], d = V(g)[8:9], e = V(g)[10], f = V(g)[numeric()], g = V(g)[numeric()], h = V(g)[numeric()], i = V(g)[numeric()], j = V(g)[numeric()]),
+    ignore_attr = TRUE
   )
 })
 
@@ -169,60 +177,71 @@ test_that("[[ indexing is consistent with length()", {
 test_that("[[ can query incident edges", {
   g <- make_test_named_tree()
 
-  expect_that(g[[1, , edges = TRUE]], is_equivalent_to(list(a = E(g)[1:2])))
-  expect_that(g[[, 2, edges = TRUE]], is_equivalent_to(list(b = E(g)[1])))
-  expect_that(
+  expect_equal(g[[1, , edges = TRUE]], list(a = E(g)[1:2]), ignore_attr = TRUE)
+  expect_equal(g[[, 2, edges = TRUE]], list(b = E(g)[1]), ignore_attr = TRUE)
+  expect_equal(
     g[[, 2, directed = FALSE, edges = TRUE]],
-    is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
+    list(b = E(g)[c(1, 3, 4)]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[2, directed = FALSE, edges = TRUE]],
-    is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
+    list(b = E(g)[c(1, 3, 4)]),
+    ignore_attr = TRUE
   )
 
-  expect_that(
+  expect_equal(
     g[[1:3, , edges = TRUE]],
-    is_equivalent_to(list(a = E(g)[1:2], b = E(g)[3:4], c = E(g)[5:6]))
+    list(a = E(g)[1:2], b = E(g)[3:4], c = E(g)[5:6]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[, 1:3, edges = TRUE]],
-    is_equivalent_to(list(a = E(g)[numeric()], b = E(g)[1], c = E(g)[2]))
+    list(a = E(g)[numeric()], b = E(g)[1], c = E(g)[2]),
+    ignore_attr = TRUE
   )
 })
 
 test_that("[[ queries edges with vertex names", {
   g <- make_test_named_tree()
 
-  expect_that(
+  expect_equal(
     g[["a", , edges = TRUE]],
-    is_equivalent_to(list(a = E(g)[1:2]))
+    list(a = E(g)[1:2]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[, "b", edges = TRUE]],
-    is_equivalent_to(list(b = E(g)[1]))
+    list(b = E(g)[1]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[, "b", directed = FALSE, edges = TRUE]],
-    is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
+    list(b = E(g)[c(1, 3, 4)]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[["b", directed = FALSE, edges = TRUE]],
-    is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
+    list(b = E(g)[c(1, 3, 4)]),
+    ignore_attr = TRUE
   )
 
-  expect_that(
+  expect_equal(
     g[[letters[1:3], , edges = TRUE]],
-    is_equivalent_to(list(a = E(g)[1:2], b = E(g)[3:4], c = E(g)[5:6]))
+    list(a = E(g)[1:2], b = E(g)[3:4], c = E(g)[5:6]),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     g[[, letters[1:3], edges = TRUE]],
-    is_equivalent_to(list(a = E(g)[numeric()], b = E(g)[1], c = E(g)[2]))
+    list(a = E(g)[numeric()], b = E(g)[1], c = E(g)[2]),
+    ignore_attr = TRUE
   )
 
   ## Filtering on both ends
-  expect_that(
+  expect_equal(
     g[[1:10, 1:10, edges = TRUE]],
-    is_equivalent_to(list(E(g)[1:2], E(g)[3:4], E(g)[5:6], E(g)[7:8], E(g)[9], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()]))
+    list(E(g)[1:2], E(g)[3:4], E(g)[5:6], E(g)[7:8], E(g)[9], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()]),
+    ignore_attr = TRUE
   )
 })
 test_that("[ handles from and to properly", {
