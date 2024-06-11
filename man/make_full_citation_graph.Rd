@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_full_citation_graph}
 \alias{make_full_citation_graph}
-\alias{graph.full.citation}
 \alias{full_citation_graph}
 \title{Create a complete (full) citation graph}
 \usage{

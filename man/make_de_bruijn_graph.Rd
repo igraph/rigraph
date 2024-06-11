@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_de_bruijn_graph}
 \alias{make_de_bruijn_graph}
-\alias{graph.de.bruijn}
 \alias{de_bruijn_graph}
 \title{De Bruijn graphs}
 \usage{

@@ -13,13 +13,13 @@ test_that("`authority_score()` works", {
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g1)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   g2 <- sample_gnp(100, 2 / 100)
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g2)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
@@ -43,13 +43,13 @@ test_that("`hub_score()` works", {
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g1)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   g2 <- sample_gnp(100, 2 / 100)
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g2)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(

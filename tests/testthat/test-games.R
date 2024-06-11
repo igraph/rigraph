@@ -138,3 +138,23 @@ test_that("sample_degseq supports the sample_(...) syntax", {
 
   expect_false(identical_graphs(g1, g2))
 })
+
+test_that("sample_degseq works() -- old method names", {
+
+  withr::local_options("lifecycle_verbosity" = "warning")
+
+  expect_warning(
+    sample_degseq(c(1, 1, 2, 2, 2), method = "simple"),
+    "must be"
+  )
+
+  expect_warning(
+    sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple"),
+    "must be"
+  )
+
+  expect_warning(
+    sample_degseq(c(1, 1, 2, 2, 2), method = "simple.no.multiple.uniform"),
+    "must be"
+  )
+})
