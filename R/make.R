@@ -339,11 +339,20 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
-graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , circular = FALSE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
-     if (is.numeric(length) && length != floor(length)) {
+graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular) { # nocov start
+  lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
+  if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
     length <- round(length)
+  }
+
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "graph.lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
   }
 
   if (is.null(dimvector)) {
@@ -351,11 +360,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-    as.logical(directed), as.logical(mutual),
-    as.logical(circular)
-  )
+  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
