@@ -11,7 +11,8 @@ graph.lattice(
   nei = 1,
   directed = FALSE,
   mutual = FALSE,
-  circular = FALSE
+  periodic = FALSE,
+  circular
 )
 }
 \arguments{
@@ -31,8 +32,11 @@ lattice will be connected. This parameter is not used right now.}
 \item{mutual}{Logical, if \code{TRUE} directed lattices will be
 mutually connected.}
 
-\item{circular}{Logical, if \code{TRUE} the lattice or ring will be
-circular.}
+\item{periodic}{Logical vector, Boolean vector, defines whether the generated lattice is
+periodic along each dimension. This parameter may also be scalar boolen value which will
+be extended to boolean vector with dimvector length.}
+
+\item{circular}{Deprecated, use \code{periodic} instead.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
