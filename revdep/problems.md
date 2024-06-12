@@ -1,14 +1,14 @@
-# degreenet
+# netropy
 
 <details>
 
-* Version: 1.3-5
+* Version: 0.1.0
 * GitHub: NA
-* Source code: https://github.com/cran/degreenet
-* Date/Publication: 2024-02-01 08:00:05 UTC
-* Number of recursive dependencies: 18
+* Source code: https://github.com/cran/netropy
+* Date/Publication: 2022-02-02 08:20:02 UTC
+* Number of recursive dependencies: 85
 
-Run `revdepcheck::cloud_details(, "degreenet")` for more info
+Run `revdepcheck::cloud_details(, "netropy")` for more info
 
 </details>
 
@@ -16,82 +16,91 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘degreenet-Ex.R’ failed
+    Running examples in ‘netropy-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: reedmolloy
-    > ### Title: Generate a undirected network with a given sequence of degrees
-    > ### Aliases: reedmolloy
-    > ### Keywords: models
+    > ### Name: assoc_graph
+    > ### Title: Association Graphs
+    > ### Aliases: assoc_graph
     > 
     > ### ** Examples
     > 
-    > # Now, simulate a Poisson Lognormal distribution over 100
-    > # observations with mean = -1 and s.d. = 1.
+    > library(ggraph)
+    Loading required package: ggplot2
+    > # use internal data set
+    > data(lawdata)
+    > df.att <- lawdata[[4]]
     > 
-    > set.seed(2)
-    > s4 <- simpln(n=100, v=c(-1,1))
-    > table(s4)
-    s4
-     1  2  3  4  5  6 
-    65 18  7  4  4  2 
-    > #
-    > simr <- reedmolloy(s4)
-    Error in reedmolloy(s4) : 
-      The reedmolloy function failed to form a valid network from the passed degree sequence.
+    > # three steps of data editing:
+    > # 1. categorize variables 'years' and 'age' based on
+    > # approximately three equally size groups (values based on cdf)
+    > # 2. make sure all outcomes start from the value 0 (optional)
+    > # 3. remove variable 'senior' as it consists of only unique values (thus redundant)
+    > df.att.ed <- data.frame(
+    +    status   = df.att$status,
+    +    gender   = df.att$gender,
+    +    office   = df.att$office-1,
+    +    years    = ifelse(df.att$years<=3,0,
+    +               ifelse(df.att$years<=13,1,2)),
+    +    age      = ifelse(df.att$age<=35,0,
+    +                 ifelse(df.att$age<=45,1,2)),
+    +    practice = df.att$practice,
+    +    lawschool= df.att$lawschool-1)
+    > 
+    > # association graph based on cutoff 0.15
+    > assoc_graph(df.att.ed, 0.15)
+    Error in igraph::distances(g) : 
+      At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    Calls: assoc_graph ... layout_with_stress -> .layout_with_stress_dim -> <Anonymous>
     Execution halted
     ```
 
-# qgraph
-
-<details>
-
-* Version: 1.9.8
-* GitHub: https://github.com/SachaEpskamp/qgraph
-* Source code: https://github.com/cran/qgraph
-* Date/Publication: 2023-11-03 11:00:02 UTC
-* Number of recursive dependencies: 88
-
-Run `revdepcheck::cloud_details(, "qgraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
+*   checking running R code from vignettes ... ERROR
     ```
-    Running examples in ‘qgraph-Ex.R’ failed
-    The error most likely occurred in:
+    Errors in running code in vignettes:
+    when running code in ‘joint_entropies.Rmd’
+      ...
+    21    0         4        45
     
-    > ### Name: smallworldness
-    > ### Title: Compute the small-worldness index.
-    > ### Aliases: smallworldness
-    > ### Keywords: smallworld transitivity
-    > 
-    > ### ** Examples
-    > 
-    > set.seed(1)
-    > # a regular lattice. Even if the small-worldness is higher than three, the average path length is 
-    > # much higher than that of random networks.
-    > regnet<-igraph::watts.strogatz.game(dim=1, size=1000, nei=10, p=0, loops=FALSE, multiple=FALSE)
-    Warning: `watts.strogatz.game()` was deprecated in igraph 2.0.0.
-    ℹ Please use `sample_smallworld()` instead.
-    > smallworldness(regnet, B=10)
-    Error in `sample_degseq()`:
-    ! `arg` must be one of "configuration", "vl", "fast.heur.simple",
-      "configuration.simple", or "edge.switching.simple", not "simple.no.multiple".
-    Backtrace:
-         ▆
-      1. ├─qgraph::smallworldness(regnet, B = 10)
-      2. │ └─base::lapply(...)
-      3. │   └─qgraph (local) FUN(X[[i]], ...)
-      4. │     └─igraph::degree.sequence.game(deg.dist, method = "simple.no.multiple")
-      5. │       └─igraph::sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
-      6. │         └─igraph:::igraph.match.arg(method)
-      7. │           └─rlang::arg_match(arg = arg, values = values, error_call = error_call)
-      8. │             └─rlang::arg_match0(arg, values, error_arg, error_call = error_call)
-      9. └─rlang:::stop_arg_match(w, values = x, error_arg = y, error_call = z)
-     10.   └─rlang::abort(msg, call = error_call, arg = error_arg)
+    > library(ggraph)
+    Loading required package: ggplot2
+    
+    > assoc_graph(dyad.var, 0.15)
+    
+      When sourcing ‘joint_entropies.R’:
+    Error: At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    Execution halted
+    
+      ‘joint_entropies.Rmd’ using ‘UTF-8’... failed
+      ‘prediction_power.Rmd’ using ‘UTF-8’... OK
+      ‘univariate_bivariate_trivariate.Rmd’ using ‘UTF-8’... OK
+      ‘variable_domains.Rmd’ using ‘UTF-8’... OK
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘joint_entropies.Rmd’ using rmarkdown
+    
+    Quitting from lines 96-98 [assoc_g] (joint_entropies.Rmd)
+    Error: processing vignette 'joint_entropies.Rmd' failed with diagnostics:
+    At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    --- failed re-building ‘joint_entropies.Rmd’
+    
+    --- re-building ‘prediction_power.Rmd’ using rmarkdown
+    --- finished re-building ‘prediction_power.Rmd’
+    
+    --- re-building ‘univariate_bivariate_trivariate.Rmd’ using rmarkdown
+    --- finished re-building ‘univariate_bivariate_trivariate.Rmd’
+    
+    --- re-building ‘variable_domains.Rmd’ using rmarkdown
+    --- finished re-building ‘variable_domains.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘joint_entropies.Rmd’
+    
+    Error: Vignette re-building failed.
     Execution halted
     ```
 
