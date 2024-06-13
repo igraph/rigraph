@@ -18,20 +18,20 @@ Run `revdepcheck::cloud_details(, "CoNI")` for more info
     ```
     Running examples in ‘CoNI-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: NetStats
     > ### Title: Network Statistics
     > ### Aliases: NetStats
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > #Load color nodes table
     > data(MetColorTable)
     > #Assign colors according to "Class" column
     > MetColorTable<-assign_colorsAnnotation(MetColorTable)
     > #Load CoNI results
     > data(CoNIResultsHFDToy)
-    > 
+    >
     > #Generate Network
     > HFDNetwork<-generate_network(ResultsCoNI = CoNIResultsHFDToy,
     +                              colorVertexNetwork = TRUE,
@@ -39,7 +39,7 @@ Run `revdepcheck::cloud_details(, "CoNI")` for more info
     +                              outputDir = "./",
     +                              outputFileName = "HFD",
     +                              saveFiles = FALSE)
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: generate_network ... hub_score -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -50,17 +50,17 @@ Run `revdepcheck::cloud_details(, "CoNI")` for more info
     Errors in running code in vignettes:
     when running code in ‘Full_RunCoNI.Rmd’
       ...
-    > MetaboliteAnnotation <- assign_colorsAnnotation(MetaboliteAnnotation, 
+    > MetaboliteAnnotation <- assign_colorsAnnotation(MetaboliteAnnotation,
     +     col = "Class")
-    
-    > ChowNetwork <- generate_network(ResultsCoNI = CoNIResults_Chow, 
-    +     colorVertexTable = MetaboliteAnnotation, outputDir = "./", 
-    +     outputFileN .... [TRUNCATED] 
-    
+
+    > ChowNetwork <- generate_network(ResultsCoNI = CoNIResults_Chow,
+    +     colorVertexTable = MetaboliteAnnotation, outputDir = "./",
+    +     outputFileN .... [TRUNCATED]
+
       When sourcing ‘Full_RunCoNI.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
-    
+
       ‘Full_RunCoNI.Rmd’ using ‘UTF-8’... failed
     ```
 
@@ -69,15 +69,15 @@ Run `revdepcheck::cloud_details(, "CoNI")` for more info
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘Full_RunCoNI.Rmd’ using rmarkdown
-    
+
     Quitting from lines 133-138 [network_chow] (Full_RunCoNI.Rmd)
     Error: processing vignette 'Full_RunCoNI.Rmd' failed with diagnostics:
     attempt to set an attribute on NULL
     --- failed re-building ‘Full_RunCoNI.Rmd’
-    
+
     SUMMARY: processing the following file failed:
       ‘Full_RunCoNI.Rmd’
-    
+
     Error: Vignette re-building failed.
     Execution halted
     ```
@@ -86,13 +86,13 @@ Run `revdepcheck::cloud_details(, "CoNI")` for more info
 
 <details>
 
-* Version: 1.3-5
+* Version: 0.1.0
 * GitHub: NA
-* Source code: https://github.com/cran/degreenet
-* Date/Publication: 2024-02-01 08:00:05 UTC
-* Number of recursive dependencies: 18
+* Source code: https://github.com/cran/netropy
+* Date/Publication: 2022-02-02 08:20:02 UTC
+* Number of recursive dependencies: 85
 
-Run `revdepcheck::cloud_details(, "degreenet")` for more info
+Run `revdepcheck::cloud_details(, "netropy")` for more info
 
 </details>
 
@@ -100,29 +100,42 @@ Run `revdepcheck::cloud_details(, "degreenet")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘degreenet-Ex.R’ failed
+    Running examples in ‘netropy-Ex.R’ failed
     The error most likely occurred in:
-    
-    > ### Name: reedmolloy
-    > ### Title: Generate a undirected network with a given sequence of degrees
-    > ### Aliases: reedmolloy
-    > ### Keywords: models
-    > 
+
+    > ### Name: assoc_graph
+    > ### Title: Association Graphs
+    > ### Aliases: assoc_graph
+    >
     > ### ** Examples
-    > 
-    > # Now, simulate a Poisson Lognormal distribution over 100
-    > # observations with mean = -1 and s.d. = 1.
-    > 
-    > set.seed(2)
-    > s4 <- simpln(n=100, v=c(-1,1))
-    > table(s4)
-    s4
-     1  2  3  4  5  6 
-    65 18  7  4  4  2 
-    > #
-    > simr <- reedmolloy(s4)
-    Error in reedmolloy(s4) : 
-      The reedmolloy function failed to form a valid network from the passed degree sequence.
+    >
+    > library(ggraph)
+    Loading required package: ggplot2
+    > # use internal data set
+    > data(lawdata)
+    > df.att <- lawdata[[4]]
+    >
+    > # three steps of data editing:
+    > # 1. categorize variables 'years' and 'age' based on
+    > # approximately three equally size groups (values based on cdf)
+    > # 2. make sure all outcomes start from the value 0 (optional)
+    > # 3. remove variable 'senior' as it consists of only unique values (thus redundant)
+    > df.att.ed <- data.frame(
+    +    status   = df.att$status,
+    +    gender   = df.att$gender,
+    +    office   = df.att$office-1,
+    +    years    = ifelse(df.att$years<=3,0,
+    +               ifelse(df.att$years<=13,1,2)),
+    +    age      = ifelse(df.att$age<=35,0,
+    +                 ifelse(df.att$age<=45,1,2)),
+    +    practice = df.att$practice,
+    +    lawschool= df.att$lawschool-1)
+    >
+    > # association graph based on cutoff 0.15
+    > assoc_graph(df.att.ed, 0.15)
+    Error in igraph::distances(g) :
+      At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    Calls: assoc_graph ... layout_with_stress -> .layout_with_stress_dim -> <Anonymous>
     Execution halted
     ```
 
@@ -146,13 +159,13 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
     ```
     Running examples in ‘DiagrammeR-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: get_authority_centrality
     > ### Title: Get the authority scores for all nodes
     > ### Aliases: get_authority_centrality
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > # Create a random graph using the
     > # `add_gnm_graph()` function
     > graph <-
@@ -161,12 +174,12 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
     +     n = 10,
     +     m = 15,
     +     set_seed = 23)
-    > 
+    >
     > # Get the authority centrality scores
     > # for all nodes in the graph
     > graph %>%
     +   get_authority_centrality()
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: %>% ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -184,13 +197,13 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       > # Learn more about the roles of various files in:
       > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
       > # * https://testthat.r-lib.org/articles/special-files.html
-      > 
+      >
       > library(testthat)
       > library(DiagrammeR)
-      > 
+      >
       > test_check("DiagrammeR")
       [ FAIL 1 | WARN 1 | SKIP 24 | PASS 1686 ]
-      
+
       ══ Skipped tests (24) ══════════════════════════════════════════════════════════
       • On CRAN (24): 'test-add_forward_reverse_edges.R:94:3',
         'test-add_graphs.R:41:3', 'test-add_graphs.R:262:3',
@@ -206,7 +219,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
         'test-similarity_measures.R:126:3', 'test-transform_graph.R:138:3',
         'test-transform_graph.R:308:3', 'test-trav_out_until.R:73:3',
         'test-traversals.R:148:3'
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test-get_node_calculations.R:341:3'): Getting authority centrality is possible ──
       Error in `names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))`: attempt to set an attribute on NULL
@@ -216,7 +229,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
        2.   └─igraph::authority_score(graph = ig_graph, weights = weights_attr)
        3.     └─igraph::hits_scores(...)
        4.       └─igraph:::hub_and_authority_scores_impl(...)
-      
+
       [ FAIL 1 | WARN 1 | SKIP 24 | PASS 1686 ]
       Error: Test failures
       Execution halted
@@ -258,13 +271,13 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
     ```
     Running examples in ‘ECoL-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: complexity
     > ### Title: Extract the complexity measures from datasets
     > ### Aliases: complexity complexity.default complexity.formula
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > ## Extract all complexity measures for classification task
     > data(iris)
     > complexity(Species ~ ., iris)
@@ -272,7 +285,7 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
     ℹ Please use `hits_score()` instead.
     ℹ The deprecated feature was likely used in the ECoL package.
       Please report the issue at <https://github.com/lpfgarcia/ECoL/issues>.
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: complexity ... hub_score -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -285,10 +298,10 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
     Complete output:
       > library(testthat)
       > library(ECoL)
-      > 
+      >
       > test_check("ECoL")
       [ FAIL 3 | WARN 3 | SKIP 0 | PASS 96 ]
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test_complexity.R:6:3'): multiclass.result ──────────────────────────
       Error in `names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))`: attempt to set an attribute on NULL
@@ -355,7 +368,7 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
        11.               └─igraph::hub_score(...)
        12.                 └─igraph::hits_scores(...)
        13.                   └─igraph:::hub_and_authority_scores_impl(...)
-      
+
       [ FAIL 3 | WARN 3 | SKIP 0 | PASS 96 ]
       Error: Test failures
       Execution halted
@@ -388,16 +401,16 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
     ```
     Running examples in ‘HospitalNetwork-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: HospiNet
     > ### Title: Class providing the HospiNet object with its methods
     > ### Aliases: HospiNet
     > ### Keywords: data
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > mydbsmall <- create_fake_subjectDB(n_subjects = 100, n_facilities = 10)
-    > 
+    >
     > hn <- hospinet_from_subject_database(
     +   base = checkBase(mydbsmall),
     +   window_threshold = 10,
@@ -408,7 +421,7 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
     Checking for duplicated records...
     Removed 0 duplicates
     Done.
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: hospinet_from_subject_database ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -422,13 +435,13 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
       > library(testthat)
       > library(HospitalNetwork)
       Loading required package: data.table
-      > 
+      >
       > test_check("HospitalNetwork")
       [ FAIL 2 | WARN 1 | SKIP 2 | PASS 55 ]
-      
+
       ══ Skipped tests (2) ═══════════════════════════════════════════════════════════
       • On CRAN (2): 'test-HospiNet.R:19:3', 'test-HospiNet.R:37:3'
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test-HospiNet.R:7:3'): No loop option ───────────────────────────────
       Error in `names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))`: attempt to set an attribute on NULL
@@ -462,7 +475,7 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
        10.         └─igraph::hub_score(x, ...)
        11.           └─igraph::hits_scores(...)
        12.             └─igraph:::hub_and_authority_scores_impl(...)
-      
+
       [ FAIL 2 | WARN 1 | SKIP 2 | PASS 55 ]
       Deleting unused snapshots:
       • HospiNet/clmat100.svg
@@ -480,15 +493,15 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘HospitalNetwork-Workflow.Rmd’ using rmarkdown
-    
+
     Quitting from lines 154-157 [setup2] (HospitalNetwork-Workflow.Rmd)
     Error: processing vignette 'HospitalNetwork-Workflow.Rmd' failed with diagnostics:
     attempt to set an attribute on NULL
     --- failed re-building ‘HospitalNetwork-Workflow.Rmd’
-    
+
     SUMMARY: processing the following file failed:
       ‘HospitalNetwork-Workflow.Rmd’
-    
+
     Error: Vignette re-building failed.
     Execution halted
     ```
@@ -501,16 +514,16 @@ Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
     when running code in ‘HospitalNetwork-Workflow.Rmd’
       ...
     > library(HospitalNetwork)
-    
-    > base = create_fake_subjectDB(n_subjects = 100, n_facilities = 10, 
+
+    > base = create_fake_subjectDB(n_subjects = 100, n_facilities = 10,
     +     with_errors = TRUE)
-    
+
     > checkBase(base)
-    
+
       When sourcing ‘HospitalNetwork-Workflow.R’:
     Error: Column(s) sID, fID, Adate, Ddate provided as argument were not found in the database.
     Execution halted
-    
+
       ‘HospitalNetwork-Workflow.Rmd’ using ‘UTF-8’... failed
     ```
 
@@ -534,17 +547,17 @@ Run `revdepcheck::cloud_details(, "immuneSIM")` for more info
     ```
     Running examples in ‘immuneSIM-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: hub_seqs_exclusion
     > ### Title: Deletes top hub sequences from repertoire, changing the network
     > ###   architecture.
     > ### Aliases: hub_seqs_exclusion
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > repertoire <- list_example_repertoires[["example_repertoire_A"]]
     > rep_excluded_hubs <- hub_seqs_exclusion(repertoire, top_x = 0.005, output_dir = "")
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: hub_seqs_exclusion ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -584,45 +597,45 @@ Run `revdepcheck::cloud_details(, "ITNr")` for more info
     ```
     Running examples in ‘ITNr-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: ITNcentrality
     > ### Title: ITN Centrality
     > ### Aliases: ITNcentrality
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > require(igraph)
     Loading required package: igraph
-    
+
     Attaching package: ‘igraph’
-    
+
     The following objects are masked from ‘package:network’:
-    
+
         %c%, %s%, add.edges, add.vertices, delete.edges, delete.vertices,
         get.edge.attribute, get.edges, get.vertex.attribute, is.bipartite,
         is.directed, list.edge.attributes, list.vertex.attributes,
         set.edge.attribute, set.vertex.attribute
-    
+
     The following objects are masked from ‘package:stats’:
-    
+
         decompose, spectrum
-    
+
     The following object is masked from ‘package:base’:
-    
+
         union
-    
+
     > ##Create random International Trade Network (igraph object)
     > ITN<-erdos.renyi.game(75,0.05,directed = TRUE)
-    > 
+    >
     > ##Add edge weights
     > E(ITN)$weight<-runif(ecount(ITN), 0, 1)
-    > 
+    >
     > ##Add vertex names
     > V(ITN)$name<-1:vcount(ITN)
-    > 
+    >
     > ##Calculate the centrality measures
     > ITNCENT<-ITNcentrality(ITN)
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: ITNcentrality ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -648,22 +661,22 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
     ```
     Running examples in ‘NAIR-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: addNodeNetworkStats
     > ### Title: Compute Node-Level Network Properties
     > ### Aliases: addNodeNetworkStats
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > set.seed(42)
     > toy_data <- simulateToyData()
-    > 
+    >
     > net <-
     +   generateNetworkObjects(
     +     toy_data,
     +     "CloneSeq"
     +   )
-    > 
+    >
     > net$node_data <-
     +   addNodeNetworkStats(
     +     net$node_data,
@@ -671,7 +684,7 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
     +   )
     Warning: `addNodeNetworkStats()` was deprecated in NAIR 1.0.1.
     ℹ Please use `addNodeStats()` instead.
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: addNodeNetworkStats ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -687,10 +700,10 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
       Welcome to NAIR: Network Analysis of Immune Repertoire.
       Get started using `vignette("NAIR")`, or by visiting
       https://mlizhangx.github.io/Network-Analysis-for-Repertoire-Sequencing-/
-      > 
+      >
       > test_check("NAIR")
       [ FAIL 1 | WARN 1 | SKIP 0 | PASS 869 ]
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test_functions.R:21:1'): (code run outside of `test_that()`) ────────
       Error in `names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))`: attempt to set an attribute on NULL
@@ -700,7 +713,7 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
        2.   └─igraph::authority_score(net$igraph, weights = NA)
        3.     └─igraph::hits_scores(...)
        4.       └─igraph:::hub_and_authority_scores_impl(...)
-      
+
       [ FAIL 1 | WARN 1 | SKIP 0 | PASS 869 ]
       Error: Test failures
       Execution halted
@@ -713,27 +726,27 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
       ...
     > nrow(toy_data)
     [1] 200
-    
+
     > net <- buildNet(toy_data, "CloneSeq")
-    
+
     > net <- buildNet(toy_data, "CloneSeq", node_stats = TRUE)
-    
+
       When sourcing ‘buildRepSeqNetwork.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
     when running code in ‘node_properties.Rmd’
       ...
     6 AGGTGGGAATTCG    0.010369470       4076  Sample1
-    
+
     > nrow(toy_data)
     [1] 200
-    
+
     > net <- buildNet(toy_data, "CloneSeq", node_stats = TRUE)
-    
+
       When sourcing ‘node_properties.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
-    
+
       ‘NAIR.Rmd’ using ‘UTF-8’... OK
       ‘buildRepSeqNetwork.Rmd’ using ‘UTF-8’... failed
       ‘cluster_analysis.Rmd’ using ‘UTF-8’... OK
@@ -747,14 +760,14 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
     Error(s) in re-building vignettes:
     --- re-building ‘NAIR.Rmd’ using rmarkdown
     --- finished re-building ‘NAIR.Rmd’
-    
+
     --- re-building ‘buildRepSeqNetwork.Rmd’ using rmarkdown
-    
+
     Quitting from lines 150-151 [unnamed-chunk-9] (buildRepSeqNetwork.Rmd)
     Error: processing vignette 'buildRepSeqNetwork.Rmd' failed with diagnostics:
     attempt to set an attribute on NULL
     --- failed re-building ‘buildRepSeqNetwork.Rmd’
-    
+
     --- re-building ‘cluster_analysis.Rmd’ using rmarkdown
     ```
 
@@ -787,13 +800,13 @@ Run `revdepcheck::cloud_details(, "NetFACS")` for more info
     ```
     Running examples in ‘NetFACS-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: network_summary
     > ### Title: Returns all kinds of network measures for the netfacs network
     > ### Aliases: network_summary network.summary
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > data(emotions_set)
     > angry.face <- netfacs(
     +   data = emotions_set[[1]],
@@ -802,16 +815,16 @@ Run `revdepcheck::cloud_details(, "NetFACS")` for more info
     +   ran.trials = 10,
     +   combination.size = 2
     + )
-    > 
+    >
     > anger.net <- netfacs_network(
     +   netfacs.data = angry.face,
     +   link = "unweighted",
     +   significance = 0.01,
     +   min.count = 1
     + )
-    > 
+    >
     > network_summary(anger.net)
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: network_summary ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -823,16 +836,16 @@ Run `revdepcheck::cloud_details(, "NetFACS")` for more info
     when running code in ‘netfacs_tutorial.Rmd’
       ...
     +     link = "unweighted")
-    
-    > network_plot(all.net, title = "all network with clusters", 
+
+    > network_plot(all.net, title = "all network with clusters",
     +     clusters = TRUE, plot.bubbles = TRUE)
-    
+
     > net.sum <- network_summary(angry.net)
-    
+
       When sourcing ‘netfacs_tutorial.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
-    
+
       ‘netfacs_tutorial.Rmd’ using ‘UTF-8’... failed
     ```
 
@@ -862,24 +875,24 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
     ```
     Running examples in ‘NIMAA-Ex.R’ failed
     The error most likely occurred in:
-    
+
     > ### Name: analyseNetwork
     > ### Title: General properties of the network
     > ### Aliases: analyseNetwork
-    > 
+    >
     > ### ** Examples
-    > 
+    >
     > # generate a toy graph
     > g1 <- igraph::make_graph(c(1, 2, 3, 4, 1, 3), directed = FALSE)
     > igraph::V(g1)$name <- c("n1", "n2", "n3", "n4")
-    > 
+    >
     > # generate random graph according to the Erdos-Renyi model
     > g2 <- igraph::sample_gnm(10, 23)
     > igraph::V(g2)$name <- letters[1:10]
-    > 
+    >
     > # run analyseNetwork
     > analyseNetwork(g1)
-    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) : 
+    Error in names(res$hub.vector) <- vertex_attr(graph, "name", V(graph)) :
       attempt to set an attribute on NULL
     Calls: analyseNetwork ... <Anonymous> -> hits_scores -> hub_and_authority_scores_impl
     Execution halted
@@ -892,23 +905,23 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
     Complete output:
       > library(testthat)
       > library(NIMAA)
-      > 
+      >
       > test_check("NIMAA")
-      binmatnest.temperature 
-                    13.21203 
-      Size of Square: 	 66 rows x  66 columns 
-      Size of Rectangular_row: 	 6 rows x  105 columns 
-      Size of Rectangular_col: 	 99 rows x  2 columns 
-      Size of Rectangular_element_max: 	 59 rows x  79 columns 
-      
-      
+      binmatnest.temperature
+                    13.21203
+      Size of Square: 	 66 rows x  66 columns
+      Size of Rectangular_row: 	 6 rows x  105 columns
+      Size of Rectangular_col: 	 99 rows x  2 columns
+      Size of Rectangular_element_max: 	 59 rows x  79 columns
+
+
       |             | walktrap| louvain| infomap| label_prop| leading_eigen| fast_greedy|
       |:------------|--------:|-------:|-------:|----------:|-------------:|-----------:|
       |modularity   |    0.375|   0.375|   0.375|      0.375|         0.375|       0.375|
       |avg.silwidth |    1.000|   1.000|   1.000|      1.000|         1.000|       1.000|
       |coverage     |    1.000|   1.000|   1.000|      1.000|         1.000|       1.000|
       [ FAIL 1 | WARN 8 | SKIP 0 | PASS 10 ]
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test-analyse-network.R:6:3'): results has three elements ────────────
       Error in `names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))`: attempt to set an attribute on NULL
@@ -921,7 +934,7 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
        5.   └─igraph::hub_score(graph)
        6.     └─igraph::hits_scores(...)
        7.       └─igraph:::hub_and_authority_scores_impl(...)
-      
+
       [ FAIL 1 | WARN 8 | SKIP 0 | PASS 10 ]
       Error: Test failures
       Execution halted
@@ -935,14 +948,14 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
     > knitr::include_graphics("interactiveplot.png")
     [1] "interactiveplot.png"
     attr(,"class")
-    [1] "knit_image_paths" "knit_asis"       
-    
+    [1] "knit_image_paths" "knit_asis"
+
     > analysis_reuslt <- analyseNetwork(bipartGraph)
-    
+
       When sourcing ‘NIMAA-vignette.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
-    
+
       ‘NIMAA-vignette.Rmd’ using ‘UTF-8’... failed
     ```
 
@@ -988,17 +1001,17 @@ Run `revdepcheck::cloud_details(, "pkggraph")` for more info
     Errors in running code in vignettes:
     when running code in ‘vignette_pkggraph.Rmd’
       ...
-    
-    > neighborhood_graph("tidytext", type = "igraph") %>% 
-    +     extract2(1) %>% authority_score() %>% extract2("vector") %>% 
-    +     tibble(package = name .... [TRUNCATED] 
+
+    > neighborhood_graph("tidytext", type = "igraph") %>%
+    +     extract2(1) %>% authority_score() %>% extract2("vector") %>%
+    +     tibble(package = name .... [TRUNCATED]
     Warning: `authority_score()` was deprecated in igraph 2.0.4.
     ℹ Please use `hits_scores()` instead.
-    
+
       When sourcing ‘vignette_pkggraph.R’:
     Error: attempt to set an attribute on NULL
     Execution halted
-    
+
       ‘vignette_pkggraph.Rmd’ using ‘UTF-8’... failed
     ```
 
@@ -1007,15 +1020,15 @@ Run `revdepcheck::cloud_details(, "pkggraph")` for more info
     Error(s) in re-building vignettes:
       ...
     --- re-building ‘vignette_pkggraph.Rmd’ using rmarkdown
-    
+
     Quitting from lines 34-58 [unnamed-chunk-2] (vignette_pkggraph.Rmd)
     Error: processing vignette 'vignette_pkggraph.Rmd' failed with diagnostics:
     attempt to set an attribute on NULL
     --- failed re-building ‘vignette_pkggraph.Rmd’
-    
+
     SUMMARY: processing the following file failed:
       ‘vignette_pkggraph.Rmd’
-    
+
     Error: Vignette re-building failed.
     Execution halted
     ```
@@ -1038,38 +1051,50 @@ Run `revdepcheck::cloud_details(, "qgraph")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘qgraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: smallworldness
-    > ### Title: Compute the small-worldness index.
-    > ### Aliases: smallworldness
-    > ### Keywords: smallworld transitivity
-    > 
-    > ### ** Examples
-    > 
-    > set.seed(1)
-    > # a regular lattice. Even if the small-worldness is higher than three, the average path length is 
-    > # much higher than that of random networks.
-    > regnet<-igraph::watts.strogatz.game(dim=1, size=1000, nei=10, p=0, loops=FALSE, multiple=FALSE)
-    Warning: `watts.strogatz.game()` was deprecated in igraph 2.0.0.
-    ℹ Please use `sample_smallworld()` instead.
-    > smallworldness(regnet, B=10)
-    Error in `sample_degseq()`:
-    ! `arg` must be one of "configuration", "vl", "fast.heur.simple",
-      "configuration.simple", or "edge.switching.simple", not "simple.no.multiple".
-    Backtrace:
-         ▆
-      1. ├─qgraph::smallworldness(regnet, B = 10)
-      2. │ └─base::lapply(...)
-      3. │   └─qgraph (local) FUN(X[[i]], ...)
-      4. │     └─igraph::degree.sequence.game(deg.dist, method = "simple.no.multiple")
-      5. │       └─igraph::sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
-      6. │         └─igraph:::igraph.match.arg(method)
-      7. │           └─rlang::arg_match(arg = arg, values = values, error_call = error_call)
-      8. │             └─rlang::arg_match0(arg, values, error_arg, error_call = error_call)
-      9. └─rlang:::stop_arg_match(w, values = x, error_arg = y, error_call = z)
-     10.   └─rlang::abort(msg, call = error_call, arg = error_arg)
+    Errors in running code in vignettes:
+    when running code in ‘joint_entropies.Rmd’
+      ...
+    21    0         4        45
+
+    > library(ggraph)
+    Loading required package: ggplot2
+
+    > assoc_graph(dyad.var, 0.15)
+
+      When sourcing ‘joint_entropies.R’:
+    Error: At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    Execution halted
+
+      ‘joint_entropies.Rmd’ using ‘UTF-8’... failed
+      ‘prediction_power.Rmd’ using ‘UTF-8’... OK
+      ‘univariate_bivariate_trivariate.Rmd’ using ‘UTF-8’... OK
+      ‘variable_domains.Rmd’ using ‘UTF-8’... OK
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘joint_entropies.Rmd’ using rmarkdown
+
+    Quitting from lines 96-98 [assoc_g] (joint_entropies.Rmd)
+    Error: processing vignette 'joint_entropies.Rmd' failed with diagnostics:
+    At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
+    --- failed re-building ‘joint_entropies.Rmd’
+
+    --- re-building ‘prediction_power.Rmd’ using rmarkdown
+    --- finished re-building ‘prediction_power.Rmd’
+
+    --- re-building ‘univariate_bivariate_trivariate.Rmd’ using rmarkdown
+    --- finished re-building ‘univariate_bivariate_trivariate.Rmd’
+
+    --- re-building ‘variable_domains.Rmd’ using rmarkdown
+    --- finished re-building ‘variable_domains.Rmd’
+
+    SUMMARY: processing the following file failed:
+      ‘joint_entropies.Rmd’
+
+    Error: Vignette re-building failed.
     Execution halted
     ```
 
@@ -1101,21 +1126,21 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       > # Learn more about the roles of various files in:
       > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
       > # * https://testthat.r-lib.org/articles/special-files.html
-      > 
+      >
       > library(testthat)
       > library(tidygraph)
-      
+
       Attaching package: 'tidygraph'
-      
+
       The following object is masked from 'package:testthat':
-      
+
           matches
-      
+
       The following object is masked from 'package:stats':
-      
+
           filter
-      
-      > 
+
+      >
       > test_check("tidygraph")
       Ungrouping `.data`...
       Splitting by nodes
@@ -1137,10 +1162,10 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       Splitting by nodes
       Unfocusing prior to morphing
       [ FAIL 13 | WARN 9 | SKIP 1 | PASS 426 ]
-      
+
       ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
       • On CRAN (1): 'test-random-walk.R:19:3'
-      
+
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Error ('test-graph_measures.R:17:3'): graph measures returns scalars ────────
       Error in `radius_dijkstra_impl(graph, weights = weights, mode = mode)`: At vendor/cigraph/src/paths/distances.c:328 : Weight vector length (1) does not match number of edges (8). Invalid value
@@ -1176,7 +1201,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       environment(.graph_context$free)$private$context has length 1, not length 0.
       ── Failure ('test-tidyr-utils.R:18:1'): graph context is empty after test ──────
       environment(.graph_context$free)$private$context has length 1, not length 0.
-      
+
       [ FAIL 13 | WARN 9 | SKIP 1 | PASS 426 ]
       Error: Test failures
       Execution halted

@@ -60,6 +60,8 @@ Issues with CRAN packages are summarised below.
 
 * qgraph
   checking examples ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
 
 * tidygraph
   checking tests ... ERROR
