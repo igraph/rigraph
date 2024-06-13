@@ -17,6 +17,6 @@ test_that("all.st.cuts works", {
   g3 <- graph_from_literal(s - +a:b - +t, a - +1:2:3:4:5 - +b)
   cc <- st_min_cuts(g3, source = "s", target = "t")
   expect_equal(cc$value, 2)
-  expect_equal(unvs(cc$cuts), list(c(1, 2), c(2, 3), c(1, 9), c(3, 9)))
-  expect_equal(unvs(cc$partition1s), list(1, c(1, 2, 9, 8, 7, 6, 5), c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5)))
+  expect_equal(unvs(cc$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
+  expect_equal(unvs(cc$partition1s), list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5)))
 })
