@@ -113,7 +113,9 @@ extern SEXP R_igraph_correlated_game(void *, void *, void *, void *);
 extern SEXP R_igraph_correlated_pair_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_count_automorphisms(void *, void *, void *);
 extern SEXP R_igraph_count_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_count_loops(void *);
 extern SEXP R_igraph_count_multiple(void *, void *);
+extern SEXP R_igraph_count_reachable(void *, void *);
 extern SEXP R_igraph_count_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_create(void *, void *, void *);
 extern SEXP R_igraph_create_bipartite(void *, void *, void *);
@@ -233,6 +235,7 @@ extern SEXP R_igraph_hrg_size(void *);
 extern SEXP R_igraph_hsbm_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_hsbm_list_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_hub_and_authority_scores(void *, void *, void *, void *);
+extern SEXP R_igraph_hypercube(void *, void *);
 extern SEXP R_igraph_i_levc_arp(void *, void *, void *);
 extern SEXP R_igraph_identical_graphs(void *, void *, void *);
 extern SEXP R_igraph_incident(void *, void *, void *);
@@ -246,6 +249,7 @@ extern SEXP R_igraph_is_acyclic(void *);
 extern SEXP R_igraph_is_biconnected(void *);
 extern SEXP R_igraph_is_bipartite(void *);
 extern SEXP R_igraph_is_chordal(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_is_clique(void *, void *, void *);
 extern SEXP R_igraph_is_complete(void *);
 extern SEXP R_igraph_is_connected(void *, void *);
 extern SEXP R_igraph_is_dag(void *);
@@ -253,6 +257,7 @@ extern SEXP R_igraph_is_directed(void *);
 extern SEXP R_igraph_is_eulerian(void *);
 extern SEXP R_igraph_is_forest(void *, void *);
 extern SEXP R_igraph_is_graphical(void *, void *, void *);
+extern SEXP R_igraph_is_independent_vertex_set(void *, void *);
 extern SEXP R_igraph_is_loop(void *, void *);
 extern SEXP R_igraph_is_matching(void *, void *, void *);
 extern SEXP R_igraph_is_maximal_matching(void *, void *, void *);
@@ -327,6 +332,7 @@ extern SEXP R_igraph_maximal_cliques_hist(void *, void *, void *);
 extern SEXP R_igraph_maximal_independent_vertex_sets(void *);
 extern SEXP R_igraph_maximum_bipartite_matching(void *, void *, void *, void *);
 extern SEXP R_igraph_maximum_cardinality_search(void *);
+extern SEXP R_igraph_mean_degree(void *, void *);
 extern SEXP R_igraph_mincut(void *, void *);
 extern SEXP R_igraph_mincut_value(void *, void *);
 extern SEXP R_igraph_minimum_cycle_basis(void *, void *, void *, void *, void *);
@@ -427,6 +433,7 @@ extern SEXP R_igraph_to_directed(void *, void *);
 extern SEXP R_igraph_to_prufer(void *);
 extern SEXP R_igraph_to_undirected(void *, void *, void *);
 extern SEXP R_igraph_topological_sorting(void *, void *);
+extern SEXP R_igraph_transitive_closure(void *);
 extern SEXP R_igraph_transitive_closure_dag(void *);
 extern SEXP R_igraph_transitivity_avglocal_undirected(void *, void *);
 extern SEXP R_igraph_transitivity_barrat(void *, void *, void *, void *);
@@ -689,6 +696,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hsbm_game",                                  (DL_FUNC) &R_igraph_hsbm_game,                                   5},
     {"R_igraph_hsbm_list_game",                             (DL_FUNC) &R_igraph_hsbm_list_game,                              5},
     {"R_igraph_hub_and_authority_scores",                   (DL_FUNC) &R_igraph_hub_and_authority_scores,                    4},
+    {"R_igraph_hypercube",                                  (DL_FUNC) &R_igraph_hypercube,                                   2},
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
     {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},
