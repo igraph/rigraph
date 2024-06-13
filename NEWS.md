@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9029
+
+## Testing
+
+- Results.
+
+
 # igraph 2.0.3.9028
 
 ## Chore
