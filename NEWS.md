@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9030
+
+## Features
+
+- Update C/igraph (#1378).
+
+
 # igraph 2.0.3.9029
 
 ## Testing
