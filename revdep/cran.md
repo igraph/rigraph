@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 828 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 833 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 13 new problems
+ * We saw 3 new problems
  * We failed to check 25 packages
 
 Issues with CRAN packages are summarised below.
@@ -10,55 +10,10 @@ Issues with CRAN packages are summarised below.
 ### New problems
 (This reports the first line of each new failure)
 
-* CoNI
-  checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* degreenet
+* BCT
   checking examples ... ERROR
 
-* DiagrammeR
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* ECoL
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* HospitalNetwork
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* immuneSIM
-  checking examples ... ERROR
-
-* ITNr
-  checking examples ... ERROR
-
-* NAIR
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* NetFACS
-  checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* NIMAA
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* pkggraph
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
-
-* qgraph
+* netropy
   checking examples ... ERROR
   checking running R code from vignettes ... ERROR
   checking re-building of vignette outputs ... NOTE
@@ -78,11 +33,11 @@ Issues with CRAN packages are summarised below.
 * DIscBIO       (NA)
 * dyngen        (NA)
 * evolqg        (NA)
-* frechet       (NA)
 * manet         (NA)
 * metadat       (NA)
 * MetaNet       (NA)
 * mlmts         (NA)
+* multinma      (NA)
 * netcmc        (NA)
 * NetworkChange (NA)
 * pagoda2       (NA)
