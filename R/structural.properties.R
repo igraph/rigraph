@@ -595,14 +595,17 @@ mean_distance <- average_path_length_dijkstra_impl
 #' @param normalized Logical scalar, whether to normalize the degree.  If
 #'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
-#' @param \dots Additional arguments to pass to `degree()`, e.g. `mode`
-#'   is useful but also `v` and `loops` make sense.
+#' @inheritParams rlang::args_dots_empty
 #' @return For `degree()` a numeric vector of the same length as argument
 #'   `v`.
 #'
 #'   For `degree_distribution()` a numeric vector of the same length as the
 #'   maximum degree plus one. The first element is the relative frequency zero
 #'   degree vertices, the second vertices with degree one, etc.
+#'
+#'   For `max_degree()`, the largest degree in the graph. When no vertices are
+#'   selected, or when the input is the null graph, zero is returned as this
+#'   is the smallest possible degree.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -612,6 +615,7 @@ mean_distance <- average_path_length_dijkstra_impl
 #' g <- make_ring(10)
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
+#' max_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(graph, v = V(graph),
@@ -640,6 +644,10 @@ degree <- function(graph, v = V(graph),
   }
   res
 }
+
+#' @rdname degree
+#' @export
+max_degree <- maxdegree_impl
 
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to

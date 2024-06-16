@@ -325,6 +325,7 @@ extern SEXP R_igraph_local_scan_k_ecount_them(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_local_scan_neighborhood_ecount(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_local_scan_subset_ecount(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_make_weak_ref(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_maxdegree(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maxflow(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_count(SEXP, SEXP, SEXP, SEXP);
@@ -787,6 +788,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_local_scan_neighborhood_ecount",             (DL_FUNC) &R_igraph_local_scan_neighborhood_ecount,              3},
     {"R_igraph_local_scan_subset_ecount",                   (DL_FUNC) &R_igraph_local_scan_subset_ecount,                    3},
     {"R_igraph_make_weak_ref",                              (DL_FUNC) &R_igraph_make_weak_ref,                               3},
+    {"R_igraph_maxdegree",                                  (DL_FUNC) &R_igraph_maxdegree,                                   4},
     {"R_igraph_maxflow",                                    (DL_FUNC) &R_igraph_maxflow,                                     4},
     {"R_igraph_maximal_cliques",                            (DL_FUNC) &R_igraph_maximal_cliques,                             4},
     {"R_igraph_maximal_cliques_count",                      (DL_FUNC) &R_igraph_maximal_cliques_count,                       4},

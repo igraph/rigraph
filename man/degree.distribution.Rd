@@ -12,8 +12,7 @@ degree.distribution(graph, cumulative = FALSE, ...)
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
 
-\item{...}{Additional arguments to pass to \code{degree()}, e.g. \code{mode}
-is useful but also \code{v} and \code{loops} make sense.}
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

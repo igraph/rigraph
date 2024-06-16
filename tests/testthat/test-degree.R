@@ -26,3 +26,14 @@ test_that("degree works", {
     degree(g2, mode = "all", normalized = TRUE)
   )
 })
+
+test_that("max_degree works", {
+  g <- make_graph(c(1,2, 2,2, 2,3), directed = TRUE)
+  expect_equal(max_degree(g), 4)
+  expect_equal(max_degree(g, mode = "out"), 2)
+  expect_equal(max_degree(g, loops = FALSE), 2)
+  expect_equal(max_degree(g, mode = "out", loops = FALSE), 1)
+  expect_equal(max_degree(g, mode = "in", loops = FALSE), 1)
+  expect_equal(max_degree(g, v = c()), 0)
+  expect_equal(max_degree(make_empty_graph()), 0)
+})
