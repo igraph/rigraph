@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9031
+
+## Chore
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+  interface: update chung_lu_game() parameter names
+
+- Update vendored sources to igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5.
+
+
 # igraph 2.0.3.9030
 
 ## Features
