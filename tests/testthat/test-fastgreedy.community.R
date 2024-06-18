@@ -13,15 +13,9 @@ test_that("cluster_fast_greedy works", {
   expect_equal(as.numeric(sizes(fc)), c(8, 17, 9))
 
   d <- as.dendrogram(fc)
-  expect_that(print(d), prints_text("2 branches.*34 members.*height 33"))
-  expect_that(
-    print(d[[1]]),
-    prints_text("2 branches.*17 members.*height 32")
-  )
-  expect_that(
-    print(d[[2]]),
-    prints_text("2 branches.*17 members.*height 30")
-  )
+  expect_output(print(d), "2 branches.*34 members.*height 33")
+  expect_output(print(d[[1]]), "2 branches.*17 members.*height 32")
+  expect_output(print(d[[2]]), "2 branches.*17 members.*height 30")
   m2 <- cut_at(fc, no = 3)
   expect_equal(
     modularity(g, m2),

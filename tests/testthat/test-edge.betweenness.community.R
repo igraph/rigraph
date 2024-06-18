@@ -11,14 +11,14 @@ test_that("cluster_edge_betweenness works", {
   expect_equal(as.numeric(sizes(ebc)), c(10, 6, 5, 12, 1))
 
   d <- as.dendrogram(ebc)
-  expect_that(print(d), prints_text("2 branches.*34 members.*height 33"))
-  expect_that(
+  expect_output(print(d), "2 branches.*34 members.*height 33")
+  expect_output(
     print(d[[1]]),
-    prints_text("2 branches.*15 members.*height 31")
+    "2 branches.*15 members.*height 31"
   )
-  expect_that(
+  expect_output(
     print(d[[2]]),
-    prints_text("2 branches.*19 members.*height 32")
+    "2 branches.*19 members.*height 32"
   )
   m2 <- cut_at(ebc, no = 3)
   expect_equal(
