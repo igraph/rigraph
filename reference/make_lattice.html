@@ -18,7 +18,7 @@ dimvector and supply length and dim."><meta property="og:image" content="https:/
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9030</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9031</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,8 @@ forms. In the first form you only supply <code>dimvector</code>, but not
 <span>  nei <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mutual <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  circular <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  periodic <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">circular</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">lattice</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -121,9 +122,14 @@ lattice will be connected. This parameter is not used right now.</p></dd>
 mutually connected.</p></dd>
 
 
+<dt>periodic</dt>
+<dd><p>Logical vector, Boolean vector, defines whether the generated lattice is
+periodic along each dimension. This parameter may also be scalar boolen value which will
+be extended to boolean vector with dimvector length.</p></dd>
+
+
 <dt>circular</dt>
-<dd><p>Logical, if <code>TRUE</code> the lattice or ring will be
-circular.</p></dd>
+<dd><p>Deprecated, use <code>periodic</code> instead.</p></dd>
 
 
 <dt>...</dt>
@@ -155,10 +161,10 @@ circular.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8b3967b U--- 125 300 -- Lattice graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c168b54 U--- 125 300 -- Lattice graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8b3967b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c168b54:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>
@@ -168,10 +174,10 @@ circular.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span>length <span class="op">=</span> <span class="fl">5</span>, dim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9f112f2 U--- 125 300 -- Lattice graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 583b5b1 U--- 125 300 -- Lattice graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9f112f2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 583b5b1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>
