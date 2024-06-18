@@ -169,7 +169,7 @@ test_that("sample_spanning_tree works for connected graphs", {
   sg <- subgraph.edges(g, edges)
   expect_equal(vcount(sg), 8)
   expect_equal(ecount(sg), 7)
-  expect_that(sg, is_tree)
+  expect_true(is_tree(sg))
 })
 
 test_that("sample_spanning_tree works for disconnected graphs", {
@@ -179,18 +179,18 @@ test_that("sample_spanning_tree works for disconnected graphs", {
   sg <- subgraph.edges(g, edges, delete.vertices = TRUE)
   expect_equal(vcount(sg), 8)
   expect_equal(ecount(sg), 7)
-  expect_that(sg, is_tree)
+  expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g, vid = 9)
   sg <- subgraph.edges(g, edges, delete.vertices = TRUE)
   expect_equal(vcount(sg), 5)
   expect_equal(ecount(sg), 4)
-  expect_that(sg, is_tree)
+  expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g)
   sg <- subgraph.edges(g, edges, delete.vertices = FALSE)
   expect_equal(vcount(sg), 13)
   expect_equal(ecount(sg), 11)
-  expect_that(induced_subgraph(sg, 1:8), is_tree)
-  expect_that(induced_subgraph(sg, 9:13), is_tree)
+  expect_true(is_tree(induced_subgraph(sg, 1:8)))
+  expect_true(is_tree(induced_subgraph(sg, 9:13)))
 })
