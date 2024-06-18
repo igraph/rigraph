@@ -12,15 +12,9 @@ test_that("cluster_walktrap works", {
   expect_equal(sizes(wc), structure(c(9L, 7L, 9L, 4L, 5L), .Dim = 5L, .Dimnames = structure(list(`Community sizes` = c("1", "2", "3", "4", "5")), .Names = "Community sizes"), class = "table"))
 
   d <- as.dendrogram(wc)
-  expect_that(print(d), prints_text("2 branches.*34 members.*height 33"))
-  expect_that(
-    print(d[[1]]),
-    prints_text("2 branches.*20 members.*height 31")
-  )
-  expect_that(
-    print(d[[2]]),
-    prints_text("2 branches.*14 members.*height 32")
-  )
+  expect_output(print(d), "2 branches.*34 members.*height 33")
+  expect_output(print(d[[1]]), "2 branches.*20 members.*height 31")
+  expect_output(print(d[[2]]), "2 branches.*14 members.*height 32")
   m2 <- cut_at(wc, no = 3)
   expect_equal(
     modularity(g, m2),
