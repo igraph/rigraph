@@ -38,7 +38,7 @@ test_that("groups works", {
 
 test_that("is_connected works", {
   g <- make_ring(10)
-  expect_that(g, is_connected)
+  expect_true(is_connected(g))
 
   g <- make_ring(10) + make_full_graph(5)
   expect_false(is_connected(g))
