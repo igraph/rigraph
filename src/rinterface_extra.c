@@ -4291,28 +4291,6 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   return result;
 }
 
-SEXP R_igraph_lattice(SEXP pdimvector, SEXP pnei, SEXP pdirected,
-                      SEXP pmutual, SEXP pcircular) {
-
-  igraph_t g;
-  igraph_vector_int_t dimvector;
-  igraph_integer_t nei=(igraph_integer_t) REAL(pnei)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t mutual=LOGICAL(pmutual)[0];
-  igraph_bool_t circular=LOGICAL(pcircular)[0];
-  SEXP result;
-
-  R_SEXP_to_vector_int_copy(pdimvector, &dimvector);
-
-  IGRAPH_R_CHECK(igraph_lattice(&g, &dimvector, nei, directed, mutual, circular));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-  igraph_vector_int_destroy(&dimvector);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
                             SEXP poutpref, SEXP pA, SEXP pdirected,
                             SEXP palgo, SEXP pstart) {
@@ -4865,29 +4843,6 @@ SEXP R_igraph_layout_circle(SEXP graph, SEXP porder) {
   igraph_vs_destroy(&order);
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_erdos_renyi_game(SEXP pn, SEXP ptype,
-                               SEXP pporm, SEXP pdirected, SEXP ploops) {
-
-  igraph_t g;
-  igraph_integer_t n;
-  igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_real_t porm=REAL(pporm)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  R_check_int_scalar(pn);
-  n=(igraph_integer_t) REAL(pn)[0];
-
-  igraph_erdos_renyi_game(&g, (igraph_erdos_renyi_t) type, n, porm, directed,
-                          loops);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
   return result;
@@ -8167,50 +8122,6 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
 
   UNPROTECT(1);
   return result;
-}
-
-SEXP R_igraph_laplacian(SEXP graph, SEXP normalized, SEXP weights,
-                        SEXP psparse) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_matrix_t c_res;
-  igraph_sparsemat_t c_sparseres;
-  igraph_bool_t c_normalized;
-  igraph_vector_t c_weights;
-  igraph_bool_t c_sparse=LOGICAL(psparse)[0];
-  SEXP result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!c_sparse) {
-    if (0 != igraph_matrix_init(&c_res, 0, 0)) {
-      igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    }
-    IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  }
-  if (c_sparse) {
-    if (0 != igraph_sparsemat_init(&c_sparseres, 0, 0, 0)) {
-      igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    }
-    IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_sparseres);
-  }
-  c_normalized=LOGICAL(normalized)[0];
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_laplacian(&c_graph, (c_sparse ? 0 : &c_res), (c_sparse ? &c_sparseres : 0), c_normalized, (Rf_isNull(weights) ? 0 : &c_weights)));
-
-                                        /* Convert output */
-  if (!c_sparse) {
-    PROTECT(result=R_igraph_matrix_to_SEXP(&c_res));
-    igraph_matrix_destroy(&c_res);
-    IGRAPH_FINALLY_CLEAN(1);
-  } else {
-    PROTECT(result=R_igraph_sparsemat_to_SEXP(&c_sparseres));
-    igraph_sparsemat_destroy(&c_sparseres);
-    IGRAPH_FINALLY_CLEAN(1);
-  }
-
-  UNPROTECT(1);
-  return(result);
 }
 
 SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,

@@ -596,7 +596,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    R_igraph_erdos_renyi_game_gnp, as.numeric(n),
     as.numeric(p), as.logical(directed), as.logical(loops)
   )
 
@@ -651,7 +651,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    R_igraph_erdos_renyi_game_gnm, as.numeric(n),
     as.numeric(m), as.logical(directed), as.logical(loops)
   )
 
@@ -716,16 +716,19 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
-  type1 <- switch(type,
-    "gnp" = 0,
-    "gnm" = 1
-  )
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
-    as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-  )
+  if (type == "gnp") {
+    res <- .Call(
+      R_igraph_erdos_renyi_game_gnp, as.numeric(n),
+      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
+    )
+  } else if (type == "gnm") {
+    res <- .Call(
+      R_igraph_erdos_renyi_game_gnm, as.numeric(n),
+      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
+    )
+  }
 
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)

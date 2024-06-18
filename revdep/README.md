@@ -1,6 +1,6 @@
 # Revdeps
 
-## Failed to check (24)
+## Failed to check (25)
 
 |package       |version |error |warning |note |
 |:-------------|:-------|:-----|:-------|:----|
@@ -18,6 +18,7 @@
 |metadat       |?       |      |        |     |
 |MetaNet       |?       |      |        |     |
 |mlmts         |1.1.1   |1     |        |     |
+|multinma      |0.7.1   |1     |        |     |
 |netcmc        |1.0.2   |1     |        |     |
 |NetworkChange |0.8     |1     |        |     |
 |pagoda2       |?       |      |        |     |
@@ -29,10 +30,11 @@
 |streamDAG     |?       |      |        |     |
 |treefit       |?       |      |        |     |
 
-## New problems (2)
+## New problems (3)
 
 |package   |version |error  |warning |note   |
 |:---------|:-------|:------|:-------|:------|
+|[BCT](problems.md#bct)|1.2     |__+1__ |        |1      |
 |[netropy](problems.md#netropy)|0.1.0   |__+2__ |        |__+1__ |
 |[tidygraph](problems.md#tidygraph)|1.3.1   |__+1__ |        |       |
 

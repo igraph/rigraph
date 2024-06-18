@@ -339,11 +339,20 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
-graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , circular = FALSE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
-     if (is.numeric(length) && length != floor(length)) {
+graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular) { # nocov start
+  lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
+  if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
     length <- round(length)
+  }
+
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "graph.lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
   }
 
   if (is.null(dimvector)) {
@@ -351,11 +360,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-    as.logical(directed), as.logical(mutual),
-    as.logical(circular)
-  )
+  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
@@ -1654,8 +1659,10 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @param directed Whether to create a directed lattice.
 #' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
-#' @param circular Logical, if `TRUE` the lattice or ring will be
-#'   circular.
+#' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
+#'   periodic along each dimension. This parameter may also be scalar boolen value which will
+#'   be extended to boolean vector with dimvector length.
+#' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
@@ -1665,7 +1672,16 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' make_lattice(length = 5, dim = 3)
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
-                         circular = FALSE) {
+                         periodic = FALSE, circular) {
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "make_lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
+  }
+
   if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
     length <- round(length)
@@ -1675,18 +1691,18 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
     dimvector <- rep(length, dim)
   }
 
+  if (length(periodic) == 1) {
+    periodic <- rep(periodic, length(dimvector))
+  }
+
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-    as.logical(directed), as.logical(mutual),
-    as.logical(circular)
-  )
+  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
     res$nei <- nei
     res$mutual <- mutual
-    res$circular <- circular
+    res$circular <- periodic
   }
   res
 }

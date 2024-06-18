@@ -64,4 +64,17 @@ random_walk <- function(
 
 #' @rdname random_walk
 #' @export
-random_edge_walk <- random_edge_walk_impl
+random_edge_walk <- function(
+    graph,
+    start,
+    steps,
+    weights = NULL,
+    mode = c("out", "in", "all", "total"),
+    stuck = c("return", "error")) {
+  mode <- match.arg(mode)
+  stuck <- match.arg(stuck)
+  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  # FIXME: Support returning the full structure
+  out$edges
+}
+

@@ -1,3 +1,48 @@
+# BCT
+
+<details>
+
+* Version: 1.2
+* GitHub: NA
+* Source code: https://github.com/cran/BCT
+* Date/Publication: 2022-05-12 14:00:05 UTC
+* Number of recursive dependencies: 13
+
+Run `revdepcheck::cloud_details(, "BCT")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘BCT-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: draw_models
+    > ### Title: Plot the results of the BCT and kBCT functions
+    > ### Aliases: draw_models
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > # Use the pewee dataset as an example:
+    > q <- BCT(pewee, 5) # maximum depth of 5
+    > 
+    > draw_models(q)
+    Error in igraph::graph.lattice(length(subwords) + 1, directed = TRUE) : 
+      argument "circular" is missing, with no default
+    Calls: draw_models -> show_tree -> <Anonymous>
+    Execution halted
+    ```
+
+## In both
+
+*   checking C++ specification ... NOTE
+    ```
+      Specified C++11: please drop specification unless essential
+    ```
+
 # netropy
 
 <details>
@@ -167,7 +212,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       Subsetting by nodes
       Splitting by nodes
       Unfocusing prior to morphing
-      [ FAIL 13 | WARN 2 | SKIP 1 | PASS 426 ]
+      [ FAIL 13 | WARN 9 | SKIP 1 | PASS 426 ]
       
       ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
       • On CRAN (1): 'test-random-walk.R:19:3'
@@ -208,7 +253,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       ── Failure ('test-tidyr-utils.R:18:1'): graph context is empty after test ──────
       environment(.graph_context$free)$private$context has length 1, not length 0.
       
-      [ FAIL 13 | WARN 2 | SKIP 1 | PASS 426 ]
+      [ FAIL 13 | WARN 9 | SKIP 1 | PASS 426 ]
       Error: Test failures
       Execution halted
     ```

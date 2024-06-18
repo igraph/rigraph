@@ -298,6 +298,34 @@ turan_impl <- function(n, r) {
   res
 }
 
+erdos_renyi_game_gnp_impl <- function(n, p, directed=FALSE, loops=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  p <- as.numeric(p)
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_erdos_renyi_game_gnp, n, p, directed, loops)
+
+  res
+}
+
+erdos_renyi_game_gnm_impl <- function(n, m, directed=FALSE, loops=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  m <- as.numeric(m)
+  directed <- as.logical(directed)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_erdos_renyi_game_gnm, n, m, directed, loops)
+
+  res
+}
+
 forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.numeric(nodes)
@@ -1411,52 +1439,6 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   res
 }
 
-hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  # Argument checks
-  ensure_igraph(graph)
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_hub_score, graph, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
-authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  # Argument checks
-  ensure_igraph(graph)
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_authority_score, graph, scale, weights, options)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$vector) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
 hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
@@ -1475,10 +1457,10 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))
+    names(res$hub) <- vertex_attr(graph, "name", V(graph))
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$authority.vector) <- vertex_attr(graph, "name", V(graph))
+    names(res$authority) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -1986,34 +1968,6 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   res
 }
 
-random_edge_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "in", "all", "total"), stuck=c("return", "error")) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  steps <- as.numeric(steps)
-  stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_random_edge_walk, graph, weights, start-1, mode, steps, stuck)
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
-  }
-  res
-}
-
 global_efficiency_impl <- function(graph, weights=NULL, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)
@@ -2193,24 +2147,6 @@ is_bipartite_impl <- function(graph) {
   res <- .Call(R_igraph_is_bipartite, graph)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$type) <- vertex_attr(graph, "name", V(graph))
-  }
-  res
-}
-
-bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c("all", "out", "in", "total")) {
-  # Argument checks
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
-  p <- as.numeric(p)
-  m <- as.numeric(m)
-  directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_bipartite_game, type, n1, n2, p, m, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
