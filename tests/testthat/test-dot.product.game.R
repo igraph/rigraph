@@ -30,14 +30,14 @@ test_that("Dot product rng works", {
 
 test_that("Dot product rng gives warnings", {
   vecs <- cbind(c(1, 1, 1) / 3, -c(1, 1, 1) / 3)
-  expect_that(
+  expect_warning(
     g <- sample_dot_product(vecs),
-    gives_warning("Negative connection probability in dot-product graph")
+    "Negative connection probability in dot-product graph"
   )
 
   vecs <- cbind(c(1, 1, 1), c(1, 1, 1))
-  expect_that(
+  expect_warning(
     g <- sample_dot_product(vecs),
-    gives_warning(paste(sep = "", "Greater than 1 connection probability ", "in dot-product graph"))
+    paste0("Greater than 1 connection probability ", "in dot-product graph")
   )
 })
