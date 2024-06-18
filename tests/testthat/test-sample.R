@@ -13,20 +13,14 @@ test_that("Sampling from a Dirichlet distribution works", {
   expect_equal(dim(sd0), c(3, 0))
 
   ## Errors
-  expect_that(
+  expect_error(
     sample_dirichlet(-1, alpha = c(1, 1, 1, 1)),
-    throws_error("should be non-negative")
+    "should be non-negative"
   )
-  expect_that(
+  expect_error(
     sample_dirichlet(5, alpha = c(1)),
-    throws_error("must have at least two entries")
+    "must have at least two entries"
   )
-  expect_that(
-    sample_dirichlet(5, alpha = c(0, 1, 1)),
-    throws_error("must be positive")
-  )
-  expect_that(
-    sample_dirichlet(5, alpha = c(1, -1, -1)),
-    throws_error("must be positive")
-  )
+  expect_error(sample_dirichlet(5, alpha = c(0, 1, 1)), "must be positive")
+  expect_error(sample_dirichlet(5, alpha = c(1, -1, -1)), "must be positive")
 })

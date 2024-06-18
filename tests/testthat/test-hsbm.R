@@ -66,9 +66,9 @@ test_that("HSBM with list arguments works", {
   g4 <- sample_hierarchical_sbm(b * m, m, rho = rho, C = replicate(b, C, simplify = FALSE), p = 0)
   expect_equal(g[], g4[])
 
-  expect_that(
+  expect_error(
     sample_hierarchical_sbm(b * m, rep(m, b), rho = list(rho, rho), C = C, p = 0),
-    throws_error("Lengths of `m', `rho' and `C' must match")
+    "Lengths of `m', `rho' and `C' must match"
   )
 
   ###
