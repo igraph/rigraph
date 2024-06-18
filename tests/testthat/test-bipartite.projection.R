@@ -78,13 +78,13 @@ test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
   g <- graph_from_literal(A - 0, B - 1, A - 1, 0 - 1)
   V(g)$type <- V(g)$name %in% LETTERS
 
-  expect_that(
+  expect_error(
     bipartite_projection_size(g),
-    throws_error("Non-bipartite edge found in bipartite projection")
+    "Non-bipartite edge found in bipartite projection"
   )
-  expect_that(
+  expect_error(
     bipartite_projection(g),
-    throws_error("Non-bipartite edge found in bipartite projection")
+    "Non-bipartite edge found in bipartite projection"
   )
 })
 
