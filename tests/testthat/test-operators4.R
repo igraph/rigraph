@@ -42,10 +42,7 @@ test_that("disjoint union gives warning for non-unique vertex names", {
   g2 <- make_ring(5)
   V(g2)$name <- letters[5:9]
 
-  expect_that(
-    disjoint_union(g1, g2),
-    gives_warning("Duplicate vertex names in disjoint union")
-  )
+  expect_warning(disjoint_union(g1, g2), "Duplicate vertex names in disjoint union")
 })
 
 
