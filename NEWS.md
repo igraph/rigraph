@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9032
+
+## Bug fixes
+
+- Put back header files for consumption by Bison (#1406).
+
+## Features
+
+- Remove deprecated functions before 1.0 (#1352).
+
+## Continuous integration
+
+- Try installing {graph} again (#1407).
+
+## Testing
+
+- Stop using throws_error() in test-bipartite.projection.R (#1409).
+
+- Stop using prints_text() in test-bipartite.random.game.R (#1408).
+
+- Stop using is_identical_to() in test-maximal_cliques.R.
+
+- Stop using gives_warning() in test-operators4.R.
+
+- Stop using gives_warning() in test-dot.product.game.R.
+
+- Stop using expect_that() in test-trees.R.
+
+- Remove use of expect_that() in test-clusters.R.
+
+
 # igraph 2.0.3.9031
 
 ## Chore
