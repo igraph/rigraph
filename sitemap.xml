@@ -622,6 +622,9 @@
     <loc>https://r.igraph.org/reference/get.edge.attribute.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/get.edge.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/get.edge.ids.html</loc>
   </url>
   <url>
@@ -1211,6 +1214,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/layout.graphopt.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.grid.3d.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/layout.grid.html</loc>
