@@ -252,14 +252,10 @@ disjoint_union <- function(...) {
       attr[[exattr[a]]] <- vctrs::vec_c(attr[[exattr[a]]], ea[[exattr[a]]])
     }
     for (a in seq_along(noattr)) {
-      attr[[noattr[a]]] <- vctrs::vec_c(attr[[noattr[a]]], rep(NA, ec[i]))
+      attr[[noattr[a]]] <- vctrs::vec_c(attr[[noattr[a]]], vctrs::unspecified(ec[[i]]))
     }
     for (a in seq_along(newattr)) {
-      if (cumec[i] == 0) {
-        attr[[newattr[a]]] <- ea[[newattr[a]]]
-      } else {
-        attr[[newattr[a]]] <- vctrs::vec_c(rep(NA, cumec[i]), ea[[newattr[a]]])
-      }
+      attr[[newattr[a]]] <- vctrs::vec_c(vctrs::unspecified(cumec[[i]]), ea[[newattr[a]]])
     }
   }
   edge.attributes(res) <- attr
