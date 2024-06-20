@@ -326,6 +326,27 @@ erdos_renyi_game_gnm_impl <- function(n, m, directed=FALSE, loops=FALSE) {
   res
 }
 
+growing_random_game_impl <- function(n, m=1, ..., directed=TRUE, citation=FALSE) {
+  # Argument checks
+  check_dots_empty()
+  n <- as.numeric(n)
+  m <- as.numeric(m)
+  directed <- as.logical(directed)
+  citation <- as.logical(citation)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_growing_random_game, n, m, directed, citation)
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Growing random graph'
+    res$m <- m
+    res$citation <- citation
+  }
+
+  res
+}
+
 forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.numeric(nodes)
@@ -1264,6 +1285,18 @@ reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c("default", "ratio"
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_reciprocity, graph, ignore.loops, mode)
+
+  res
+}
+
+density_impl <- function(graph, loops=FALSE) {
+  # Argument checks
+  ensure_igraph(graph)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_density, graph, loops)
 
   res
 }

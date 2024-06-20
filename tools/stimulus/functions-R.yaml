@@ -122,7 +122,7 @@ igraph_full_citation:
         name: Full citation graph
 
 igraph_atlas:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_extended_chordal_ring:
     IGNORE: RR
@@ -133,13 +133,13 @@ igraph_connect_neighborhood:
 igraph_graph_power:
 
 igraph_linegraph:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_de_bruijn:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_kautz:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_famous:
     IGNORE: RR, RC
@@ -192,7 +192,13 @@ igraph_degree_sequence_game:
     IGNORE: RR, RC
 
 igraph_growing_random_game:
-    IGNORE: RR, RC
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
+        BOOLEAN directed=True, BOOLEAN citation=False
+    R:
+        GATTR:
+          name: Growing random graph
+        GATTR-PARAM: m, citation
 
 igraph_barabasi_aging_game:
     IGNORE: RR, RC
@@ -245,7 +251,6 @@ igraph_forest_fire_game:
         GATTR-PARAM: fw_prob, bw_factor, ambs
 
 igraph_simple_interconnected_islands_game:
-    IGNORE: RC
     R:
         GATTR:
           name: Interconnected islands model
@@ -459,16 +464,16 @@ igraph_path_length_hist:
 igraph_simplify:
 
 igraph_transitivity_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_local_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_avglocal_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_barrat:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_ecc:
 
@@ -481,7 +486,6 @@ igraph_maxdegree:
     IGNORE: RR, RC, RInit
 
 igraph_density:
-    IGNORE: RR, RC
 
 igraph_neighborhood_size:
     IGNORE: RR, RC, RInit
@@ -804,10 +808,10 @@ igraph_independence_number:
 #######################################
 
 igraph_layout_random:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_circle:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_star:
     IGNORE: RR
@@ -837,10 +841,10 @@ igraph_layout_reingold_tilford_circular:
 igraph_roots_for_tree_layout:
 
 igraph_layout_random_3d:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_sphere:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_fruchterman_reingold_3d:
     IGNORE: RR, RC, RInit
@@ -1113,13 +1117,13 @@ igraph_write_graph_dot:
 #######################################
 
 igraph_motifs_randesu:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_estimate:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_no:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_dyad_census:
 

@@ -1013,19 +1013,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' g <- sample_growing(500, citation = FALSE)
 #' g2 <- sample_growing(500, citation = TRUE)
 #'
-sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_growing_random_game, as.numeric(n), as.numeric(m),
-    as.logical(directed), as.logical(citation)
-  )
-  if (igraph_opt("add.params")) {
-    res$name <- "Growing random graph"
-    res$m <- m
-    res$citation <- citation
-  }
-  res
-}
+sample_growing <- growing_random_game_impl
 
 #' @rdname sample_growing
 #' @param ... Passed to `sample_growing()`.
