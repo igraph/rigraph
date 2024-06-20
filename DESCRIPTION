@@ -1,5 +1,5 @@
 Package: igraph
-Version: 2.0.3.9008
+Version: 2.0.3.9033
 Title: Network Analysis and Visualization
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
@@ -47,7 +47,6 @@ Suggests:
     callr,
     decor,
     digest,
-    graph,
     igraphdata,
     knitr,
     rgl,
@@ -58,6 +57,8 @@ Suggests:
     testthat,
     vdiffr,
     withr
+Enhances: 
+    graph
 LinkingTo: 
     cpp11 (>= 0.4.7)
 VignetteBuilder: 

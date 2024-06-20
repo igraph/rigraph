@@ -106,6 +106,7 @@
 #include "io/parsers/gml-lexer.h"
 #include "io/parse_utils.h"
 #include "internal/hacks.h" /* strcasecmp & strndup */
+#include "math/safe_intop.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -133,7 +134,7 @@ static igraph_error_t igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_
 #define scanner context->scanner
 
 
-#line 137 "src/vendor/io/gml-parser.c"
+#line 138 "src/vendor/io/gml-parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -566,8 +567,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   121,   121,   123,   124,   125,   127,   129,   131,   135,
-     138,   146
+       0,   122,   122,   124,   125,   126,   128,   130,   132,   136,
+     139,   147
 };
 #endif
 
@@ -1230,27 +1231,27 @@ yydestruct (const char *yymsg,
   switch (yykind)
     {
     case YYSYMBOL_list: /* list  */
-#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 118 "src/vendor/cigraph/src/io/gml-parser.y"
             { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1236 "src/vendor/io/gml-parser.c"
+#line 1237 "src/vendor/io/gml-parser.c"
         break;
 
     case YYSYMBOL_keyvalue: /* keyvalue  */
-#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 118 "src/vendor/cigraph/src/io/gml-parser.y"
             { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1242 "src/vendor/io/gml-parser.c"
+#line 1243 "src/vendor/io/gml-parser.c"
         break;
 
     case YYSYMBOL_key: /* key  */
-#line 116 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
             { free(((*yyvaluep).str)); }
-#line 1248 "src/vendor/io/gml-parser.c"
+#line 1249 "src/vendor/io/gml-parser.c"
         break;
 
     case YYSYMBOL_string: /* string  */
-#line 116 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
             { free(((*yyvaluep).str)); }
-#line 1254 "src/vendor/io/gml-parser.c"
+#line 1255 "src/vendor/io/gml-parser.c"
         break;
 
       default:
@@ -1554,57 +1555,57 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* input: list  */
-#line 121 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 122 "src/vendor/cigraph/src/io/gml-parser.y"
                    { context->tree=(yyvsp[0].tree); }
-#line 1560 "src/vendor/io/gml-parser.c"
+#line 1561 "src/vendor/io/gml-parser.c"
     break;
 
   case 3: /* list: %empty  */
-#line 123 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 124 "src/vendor/cigraph/src/io/gml-parser.y"
                       { IGRAPH_YY_CHECK(igraph_i_gml_make_empty(&(yyval.tree))); }
-#line 1566 "src/vendor/io/gml-parser.c"
+#line 1567 "src/vendor/io/gml-parser.c"
     break;
 
   case 4: /* list: keyvalue  */
-#line 124 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 125 "src/vendor/cigraph/src/io/gml-parser.y"
                       { (yyval.tree)=(yyvsp[0].tree); }
-#line 1572 "src/vendor/io/gml-parser.c"
+#line 1573 "src/vendor/io/gml-parser.c"
     break;
 
   case 5: /* list: list keyvalue  */
-#line 125 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 126 "src/vendor/cigraph/src/io/gml-parser.y"
                       { IGRAPH_YY_CHECK(igraph_i_gml_merge((yyvsp[-1].tree), (yyvsp[0].tree))); (yyval.tree) = (yyvsp[-1].tree); }
-#line 1578 "src/vendor/io/gml-parser.c"
+#line 1579 "src/vendor/io/gml-parser.c"
     break;
 
   case 6: /* keyvalue: key num  */
-#line 128 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 129 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_numeric((yyvsp[-1].str), (yylsp[-1]).first_line, (yyvsp[0].real), &(yyval.tree))); }
-#line 1584 "src/vendor/io/gml-parser.c"
+#line 1585 "src/vendor/io/gml-parser.c"
     break;
 
   case 7: /* keyvalue: key string  */
-#line 130 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 131 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_string((yyvsp[-1].str), (yylsp[-1]).first_line, (yyvsp[0].str), &(yyval.tree))); }
-#line 1590 "src/vendor/io/gml-parser.c"
+#line 1591 "src/vendor/io/gml-parser.c"
     break;
 
   case 8: /* keyvalue: key "[" list "]"  */
-#line 132 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 133 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_list((yyvsp[-3].str), (yylsp[-3]).first_line, (yyvsp[-1].tree), &(yyval.tree))); }
-#line 1596 "src/vendor/io/gml-parser.c"
+#line 1597 "src/vendor/io/gml-parser.c"
     break;
 
   case 9: /* key: "keyword"  */
-#line 135 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 136 "src/vendor/cigraph/src/io/gml-parser.y"
              { IGRAPH_YY_CHECK(igraph_i_gml_get_keyword(igraph_gml_yyget_text(scanner),
                                igraph_gml_yyget_leng(scanner),
                                &(yyval.str))); }
-#line 1604 "src/vendor/io/gml-parser.c"
+#line 1605 "src/vendor/io/gml-parser.c"
     break;
 
   case 10: /* num: "number"  */
-#line 138 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 139 "src/vendor/cigraph/src/io/gml-parser.y"
           {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_gml_yyget_text(scanner),
@@ -1612,19 +1613,19 @@ yyreduce:
                                         &val));
     (yyval.real)=val;
 }
-#line 1616 "src/vendor/io/gml-parser.c"
+#line 1617 "src/vendor/io/gml-parser.c"
     break;
 
   case 11: /* string: "string"  */
-#line 146 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 147 "src/vendor/cigraph/src/io/gml-parser.y"
                { IGRAPH_YY_CHECK(igraph_i_gml_get_string(igraph_gml_yyget_text(scanner),
                                          igraph_gml_yyget_leng(scanner),
                                          &(yyval.str))); }
-#line 1624 "src/vendor/io/gml-parser.c"
+#line 1625 "src/vendor/io/gml-parser.c"
     break;
 
 
-#line 1628 "src/vendor/io/gml-parser.c"
+#line 1629 "src/vendor/io/gml-parser.c"
 
       default: break;
     }
@@ -1853,7 +1854,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 150 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 151 "src/vendor/cigraph/src/io/gml-parser.y"
 
 
 int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context,
@@ -1891,11 +1892,14 @@ static igraph_error_t igraph_i_gml_make_numeric(const char *name,
   }
   IGRAPH_FINALLY(igraph_free, t);
 
-  /* The GML spec only requires support for 32-bit signed integers.
+  /* The GML spec only requires support for 32-bit signed integers,
+   * but igraph tries to support the same range as igraph_integer_t,
+   * so that it can read/write all graphs it can represent.
    * We treat anything out of that range as real. These values end
    * up as igraph_real_t anyway, as igraph does not currently support
    * integer-typed attributes. */
-  if (floor(value) == value && value >= INT32_MIN && value <= INT32_MAX) {
+  igraph_real_t trunc_value = trunc(value);
+  if (value == trunc_value && igraph_i_is_real_representable_as_integer(trunc_value)) {
     IGRAPH_CHECK(igraph_gml_tree_init_integer(t, name, line, value));
   } else {
     IGRAPH_CHECK(igraph_gml_tree_init_real(t, name, line, value));

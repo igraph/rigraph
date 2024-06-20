@@ -39,6 +39,13 @@ VERTEX_QTY:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
+ALL_VERTEX_QTY:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
+
 VECTOR_INT:
     INCONV: '%I% <- as.numeric(%I%)'
 

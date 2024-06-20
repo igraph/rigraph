@@ -2,7 +2,7 @@ test_that("label.propagation.community works", {
   g <- make_graph("Zachary")
   withr::local_seed(20231029)
   lpc <- cluster_label_prop(g)
-  expect_that(lpc$modularity, equals(modularity(g, lpc$membership)))
+  expect_equal(lpc$modularity, modularity(g, lpc$membership))
   #  1   2   3   4   5
   # 29 453 431  84   3
   expect_true(length(lpc) %in% 1:5)

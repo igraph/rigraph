@@ -467,8 +467,6 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     value <- as.numeric(value)
   }
 
-  single <- is_single_index(index)
-  complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
     index <- as_igraph_vs(graph, index)
   }
@@ -476,10 +474,13 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
 
   vattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!complete && !(name %in% names(vattrs))) {
+  complete <- is_complete_iterator(index)
+  name_available <- (name %in% names(vattrs))
+  if (!complete && !name_available) {
     vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
   }
 
+  single <- is_single_index(index)
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -517,12 +518,15 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!missing(index) &&
-    (length(index) != vcount(graph) || any(index != V(graph)))) {
-    for (i in seq_along(res)) {
-      res[[i]] <- res[[i]][index]
+  if (!missing(index)) {
+    index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
+    if  (!index_is_natural_sequence) {
+      for (i in seq_along(res)) {
+        res[[i]] <- res[[i]][index]
+      }
     }
   }
+
   res
 }
 

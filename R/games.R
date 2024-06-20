@@ -596,7 +596,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    R_igraph_erdos_renyi_game_gnp, as.numeric(n),
     as.numeric(p), as.logical(directed), as.logical(loops)
   )
 
@@ -651,7 +651,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    R_igraph_erdos_renyi_game_gnm, as.numeric(n),
     as.numeric(m), as.logical(directed), as.logical(loops)
   )
 
@@ -716,16 +716,19 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
-  type1 <- switch(type,
-    "gnp" = 0,
-    "gnm" = 1
-  )
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
-    as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-  )
+  if (type == "gnp") {
+    res <- .Call(
+      R_igraph_erdos_renyi_game_gnp, as.numeric(n),
+      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
+    )
+  } else if (type == "gnm") {
+    res <- .Call(
+      R_igraph_erdos_renyi_game_gnm, as.numeric(n),
+      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
+    )
+  }
 
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)
@@ -752,35 +755,48 @@ random.graph.game <- erdos.renyi.game
 #' It is often useful to create a graph with given vertex degrees. This function
 #' creates such a graph in a randomized manner.
 #'
-#' The \dQuote{simple} method connects the out-stubs of the edges (undirected
-#' graphs) or the out-stubs and in-stubs (directed graphs) together. This way
-#' loop edges and also multiple edges may be generated. This method is not
-#' adequate if one needs to generate simple graphs with a given degree
-#' sequence. The multiple and loop edges can be deleted, but then the degree
-#' sequence is distorted and there is nothing to ensure that the graphs are
-#' sampled uniformly.
+#' The \dQuote{configuration} method (formerly called "simple") implements the
+#' configuration model. For undirected graphs, it puts all vertex IDs in a bag
+#' such that the multiplicity of a vertex in the bag is the same as its degree.
+#' Then it draws pairs from the bag until the bag becomes empty. This method may
+#'  generate both loop (self) edges and multiple edges. For directed graphs,
+#'  the algorithm is basically the same, but two separate bags are used
+#'  for the in- and out-degrees. Undirected graphs are generated
+#'  with probability proportional to \eqn{(\prod_{i<j} A_{ij} ! \prod_i A_{ii} !!)^{-1}},
+#'  where A denotes the adjacency matrix and !! denotes the double factorial.
+#'  Here A is assumed to have twice the number of self-loops on its diagonal.
+#'  The corresponding expression for directed graphs is \eqn{(\prod_{i,j} A_{ij}!)^{-1}}.
+#'   Thus the probability of all simple graphs
+#'   (which only have 0s and 1s in the adjacency matrix)
+#'   is the same, while that of non-simple ones depends on their edge and
+#'   self-loop multiplicities.
 #'
-#' The \dQuote{simple.no.multiple} method is similar to \dQuote{simple}, but
-#' tries to avoid multiple and loop edges and restarts the generation from
-#' scratch if it gets stuck. It is not guaranteed to sample uniformly from the
-#' space of all possible graphs with the given sequence, but it is relatively
-#' fast and it will eventually succeed if the provided degree sequence is
-#' graphical, but there is no upper bound on the number of iterations.
+#' The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple")
+#' generates simple graphs.
+#' It is similar to \dQuote{configuration} but tries to avoid multiple and
+#' loop edges and restarts the generation from scratch if it gets stuck.
+#' It can generate all simple realizations of a degree sequence,
+#' but it is not guaranteed to sample them uniformly.
+#' This method is relatively fast and it will eventually succeed
+#' if the provided degree sequence is graphical, but there is no upper bound on
+#' the number of iterations.
 #'
-#' The \dQuote{simple.no.multiple.uniform} method is a variant of
-#' \dQuote{simple.no.multiple} with the added benefit of sampling uniformly
-#' from the set of all possible simple graphs with the given degree sequence.
-#' Ensuring uniformity has some performance implications, though.
+#' The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform")
+#' is
+#' identical to \dQuote{configuration}, but if the generated graph is not simple,
+#' it rejects it and re-starts the generation.
+#' It generates all simple graphs with the same probability.
 #'
-#' The \dQuote{vl} method is a more sophisticated generator. The algorithm and
-#' the implementation was done by Fabien Viger and Matthieu Latapy. This
-#' generator always generates undirected, connected simple graphs, it is an
-#' error to pass the `in.deg` argument to it.  The algorithm relies on
-#' first creating an initial (possibly unconnected) simple undirected graph
-#' with the given degree sequence (if this is possible at all). Then some
-#' rewiring is done to make the graph connected. Finally a Monte-Carlo
-#' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-#' undirected, connected simple graphs uniformly.
+#' The \dQuote{vl} method samples undirected connected graphs approximately uniformly.
+#' It is a Monte Carlo method based on degree-preserving edge switches.
+#' This generator should be favoured if undirected and connected graphs are to be
+#'  generated and execution time is not a concern. igraph uses
+#'  the original implementation of Fabien Viger; for the algorithm, see
+#'  <https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html>
+#'  and the paper <https://arxiv.org/abs/cs/0502085>.
+#'
+#' The \dQuote{edge.switching.simple} is an MCMC sampler based on
+#' degree-preserving edge switches. It generates simple undirected or directed graphs.
 #'
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
 #'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
@@ -788,9 +804,7 @@ random.graph.game <- erdos.renyi.game
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
-#' @param method Character, the method for generating the graph. Right now the
-#'   \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
-#'   implemented.
+#' @param method Character, the method for generating the graph. See Details.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso
@@ -909,13 +923,41 @@ random.graph.game <- erdos.renyi.game
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 sample_degseq <- function(out.deg, in.deg = NULL,
-                          method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
-  method <- igraph.match.arg(method)
+                          method = c("configuration", "vl", "fast.heur.simple", "configuration.simple", "edge.switching.simple")) {
+  if (missing(method)) {
+    method <- method[1]
+  }
+  method <- igraph.match.arg(
+    method,
+    values = c(
+      "configuration", "vl", "fast.heur.simple",
+      "configuration.simple", "edge.switching.simple",
+      "simple", "simple.no.multiple", "simple.no.multiple.uniform" # old names
+    )
+  )
+
+  if (method == "simple") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
+    method <- "configuration"
+  }
+
+  if (method == "simple.no.multiple") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
+    method <- "fast.heur.simple"
+  }
+
+  if (method == "simple.no.multiple.uniform") {
+    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
+    method <- "configuration.simple"
+  }
+
+  # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94
   method1 <- switch(method,
-    "simple" = 0,
+    "configuration" = 0,
     "vl" = 1,
-    "simple.no.multiple" = 2,
-    "simple.no.multiple.uniform" = 3
+    "fast.heur.simple" = 2,
+    "configuration.simple" = 3,
+    "edge.switching.simple" = 4
   )
   if (!is.null(in.deg)) {
     in.deg <- as.numeric(in.deg)

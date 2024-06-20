@@ -62,27 +62,25 @@ vector corresponding to the highest possible modularity score.}
 manual page for details.
 }
 \description{
-Many networks consist of modules which are densely connected themselves but
-sparsely connected to other modules.
+Community structure detection based on the betweenness of the edges
+in the network. This method is also known as the Girvan-Newman
+algorithm.
 }
 \details{
-The edge betweenness score of an edge measures the number of shortest paths
-through it, see \code{\link[=edge_betweenness]{edge_betweenness()}} for details. The idea of the
-edge betweenness based community structure detection is that it is likely
-that edges connecting separate modules have high edge betweenness as all the
-shortest paths from one module to another must traverse through them. So if
-we gradually remove the edge with the highest edge betweenness score we will
-get a hierarchical map, a rooted tree, called a dendrogram of the graph. The
-leafs of the tree are the individual vertices and the root of the tree
-represents the whole graph.
+The idea behind this method is that the betweenness of the edges connecting
+two communities is typically high, as many of the shortest paths between
+vertices in separate communities pass through them. The algorithm
+successively removes edges with the highest betweenness, recalculating
+betweenness values after each removal. This way eventually the network splits
+into two components, then one of these components splits again, and so on,
+until all edges are removed. The resulting hierarhical partitioning of the
+vertices can be encoded as a dendrogram.
 
-\code{cluster_edge_betweenness()} performs this algorithm by calculating the
-edge betweenness of the graph, removing the edge with the highest edge
-betweenness score, then recalculating edge betweenness of the edges and
-again removing the one with the highest score, etc.
-
-\code{edge.betweeness.community} returns various information collected
-through the run of the algorithm. See the return value down here.
+\code{cluster_edge_betweenness()} returns various information collected
+through the run of the algorithm. Specifically, \code{removed.edges} contains
+the edge IDs in order of the edges' removal; \code{edge.betweenness} contains
+the betweenness of each of these at the time of their removal; and
+\code{bridges} contains the IDs of edges whose removal caused a split.
 }
 \examples{
 

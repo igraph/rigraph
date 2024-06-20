@@ -13,13 +13,13 @@ test_that("`authority_score()` works", {
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g1)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   g2 <- sample_gnp(100, 2 / 100)
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g2)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
@@ -43,13 +43,13 @@ test_that("`hub_score()` works", {
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g1)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   g2 <- sample_gnp(100, 2 / 100)
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g2)$vector
-  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(
@@ -58,10 +58,15 @@ test_that("`hub_score()` works", {
   expect_equal(s2, s3)
 })
 
+# TODO: Hub and authority scores make little sense for undirected graphs
+# Replace this test. Until then, do not use even-length cycle graphs
+# as their leading eigenvalue for hub/authority scores is degenerate,
+# and any vector with alternating values (a, b, a, b, ...) is a valid
+# solution, not just all-ones.
 test_that("authority scores of a ring are all one", {
-  g3 <- make_ring(100)
-  expect_that(authority_score(g3)$vector, equals(rep(1, vcount(g3))))
-  expect_that(hub_score(g3)$vector, equals(rep(1, vcount(g3))))
+  g3 <- make_ring(99)
+  expect_equal(authority_score(g3)$vector, rep(1, vcount(g3)))
+  expect_equal(hub_score(g3)$vector, rep(1, vcount(g3)))
 })
 
 test_that("authority_score survives stress test", {
@@ -70,11 +75,11 @@ test_that("authority_score survives stress test", {
   withr::local_seed(42)
 
   is.principal <- function(M, lambda) {
-    expect_that(eigen(M)$values[1], equals(lambda))
+    expect_equal(eigen(M)$values[1], lambda)
   }
 
   is.ev <- function(M, v, lambda) {
-    expect_that(as.vector(M %*% v), equals(lambda * v))
+    expect_equal(as.vector(M %*% v), lambda * v)
   }
 
   is.good <- function(M, v, lambda) {

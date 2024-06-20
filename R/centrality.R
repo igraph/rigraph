@@ -40,8 +40,23 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @keywords internal
 #' @export
 hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_score()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `authority_score()` to create a more
+#' consistent API.
+#' @inheritParams authority_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_score()")
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Strength or weighted vertex degree
@@ -132,21 +147,6 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
-} # nocov end
-
-#' Kleinberg's hub and authority centrality scores.
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `authority.score()` was renamed to `authority_score()` to create a more
-#' consistent API.
-#' @inheritParams authority_score
-#' @keywords internal
-#' @export
-authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -892,40 +892,40 @@ eigen_defaults <- function() {
   )
 }
 
-#' Find Eigenvector Centrality Scores of Network Positions
+#' Eigenvector centrality of vertices
 #'
 #' `eigen_centrality()` takes a graph (`graph`) and returns the
-#' eigenvector centralities of positions `v` within it
+#' eigenvector centralities of the vertices `v` within it.
 #'
-#' Eigenvector centrality scores correspond to the values of the first
-#' eigenvector of the graph adjacency matrix; these scores may, in turn, be
+#' Eigenvector centrality scores correspond to the values of the principal
+#' eigenvector of the graph's adjacency matrix; these scores may, in turn, be
 #' interpreted as arising from a reciprocal process in which the centrality of
 #' each actor is proportional to the sum of the centralities of those actors to
 #' whom he or she is connected.  In general, vertices with high eigenvector
 #' centralities are those which are connected to many other vertices which are,
-#' in turn, connected to many others (and so on).  (The perceptive may realize
+#' in turn, connected to many others (and so on).  The perceptive may realize
 #' that this implies that the largest values will be obtained by individuals in
 #' large cliques (or high-density substructures).  This is also intelligible
 #' from an algebraic point of view, with the first eigenvector being closely
 #' related to the best rank-1 approximation of the adjacency matrix (a
 #' relationship which is easy to see in the special case of a diagonalizable
 #' symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
-#' decomposition).)
+#' decomposition).
 #'
 #' The adjacency matrix used in the eigenvector centrality calculation assumes
-#' that loop edges are counted *twice*; this is because each loop edge has
-#' *two* endpoints that are both connected to the same vertex, and you
-#' could traverse the loop edge via either endpoint.
+#' that loop edges are counted *twice* in undirected graphs; this is because
+#' each loop edge has *two* endpoints that are both connected to the same vertex,
+#' and you could traverse the loop edge via either endpoint.
 #'
 #' In the directed case, the left eigenvector of the adjacency matrix is
 #' calculated. In other words, the centrality of a vertex is proportional to
 #' the sum of centralities of vertices pointing to it.
 #'
-#' Eigenvector centrality is meaningful only for connected graphs. Graphs that
-#' are not connected should be decomposed into connected components, and the
-#' eigenvector centrality calculated for each separately. This function does
-#' not verify that the graph is connected. If it is not, in the undirected case
-#' the scores of all but one component will be zeros.
+#' Eigenvector centrality is meaningful only for (strongly) connected graphs.
+#' Undirected graphs that are not connected should be decomposed into connected
+#' components, and the eigenvector centrality calculated for each separately.
+#' This function does not verify that the graph is connected. If it is not, in
+#' the undirected case the scores of all but one component will be zeros.
 #'
 #' Also note that the adjacency matrix of a directed acyclic graph or the
 #' adjacency matrix of an empty graph does not possess positive eigenvalues,
@@ -1105,6 +1105,7 @@ diversity <- diversity_impl
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \item{vector}{The hub or authority scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
@@ -1124,36 +1125,29 @@ diversity <- diversity_impl
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
-#' hub_score(g)$vector
-#' authority_score(g)$vector
+#' hits_scores(g)
 #'
 #' ## A ring
 #' g2 <- make_ring(10)
-#' hub_score(g2)$vector
-#' authority_score(g2)$vector
+#' hits_scores(g2)
 #' @family centrality
-hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      "hub_score(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
-    )
-    options <- options()
-  }
+  rlang::check_dots_empty()
 
-  hub_score_impl(graph = graph,
-                 scale = scale,
-                 weights = weights,
-                 options = options)
+  hub_and_authority_scores_impl(graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
 }
 
+#' @title Kleinberg's authority centrality scores.
 #' @rdname hub_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.4", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1164,10 +1158,50 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     options <- arpack_defaults()
   }
 
-  authority_score_impl(graph = graph,
-                       scale = scale,
-                       weights = weights,
-                       options = options)
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$hub <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
+}
+
+#' @title Kleinberg's hub centrality scores.
+#' @rdname hub_score
+#' @param graph The input graph.
+#' @param scale Logical scalar, whether to scale the result to have a maximum
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted
+#'   scores. If the graph has a `weight` edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
+#' @family centrality
+#' @export
+hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  if (is.function(options)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$authority <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
 }
 
 #' The Page Rank algorithm

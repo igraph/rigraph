@@ -3,10 +3,10 @@ test_that("min_cut works", {
   E(g2)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g2, value.only = FALSE)
 
-  expect_that(mc$value, equals(1))
-  expect_that(as.vector(mc$cut), equals(2))
-  expect_that(as.vector(mc$partition1), equals(2))
-  expect_that(as.vector(mc$partition2), equals(c(1, 3:6)))
+  expect_equal(mc$value, 1)
+  expect_equal(as.vector(mc$cut), 2)
+  expect_equal(as.vector(mc$partition1), 2)
+  expect_equal(as.vector(mc$partition2), c(1, 3:6))
 })
 
 test_that("s-t min_cut works", {
@@ -14,8 +14,8 @@ test_that("s-t min_cut works", {
   E(g2)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g2, source = 2, target = 4, value.only = FALSE)
 
-  expect_that(mc$value, equals(1))
-  expect_that(as.vector(mc$cut), equals(2))
-  expect_that(as.vector(mc$partition1), equals(2))
-  expect_that(as.vector(mc$partition2), equals(c(1, 3:6)))
+  expect_equal(mc$value, 1)
+  expect_equal(as.vector(mc$cut), 2)
+  expect_equal(as.vector(mc$partition1), 2)
+  expect_equal(as.vector(mc$partition2), c(1, 3:6))
 })

@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v1.0.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "igraph" in publications use:'
@@ -254,7 +254,7 @@ references:
   title: ape
   abstract: 'ape: Analyses of Phylogenetics and Evolution'
   notes: Suggests
-  url: http://ape-package.ird.fr/
+  url: https://github.com/emmanuelparadis/ape
   repository: https://CRAN.R-project.org/package=ape
   authors:
   - family-names: Paradis
@@ -439,22 +439,6 @@ references:
     given-names: Michael
   year: '2024'
 - type: software
-  title: graph
-  abstract: 'graph: graph: A package to handle graph data structures'
-  notes: Suggests
-  repository: https://bioconductor.org/
-  authors:
-  - family-names: Gentleman
-    given-names: R
-  - family-names: Whalen
-    given-names: Elizabeth
-  - family-names: Huber
-    given-names: W
-  - family-names: Falcon
-    given-names: S
-  year: '2024'
-  doi: 10.18129/B9.bioc.graph
-- type: software
   title: igraphdata
   abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'
   notes: Suggests
@@ -631,6 +615,25 @@ references:
     given-names: Winston
   year: '2024'
 - type: software
+  title: graph
+  abstract: 'graph: graph: A package to handle graph data structures'
+  notes: Enhances
+  repository: https://bioconductor.org/
+  authors:
+  - family-names: Gentleman
+    given-names: R
+  - family-names: Whalen
+    given-names: Elizabeth
+  - family-names: Huber
+    given-names: W
+  - family-names: Falcon
+    given-names: S
+  - family-names: Gentry
+    given-names: Jeff
+  - family-names: Shannon
+    given-names: Paul
+  year: '2024'
+- type: software
   title: cpp11
   abstract: 'cpp11: A C++11 Interface for R''s C Interface'
   notes: LinkingTo
@@ -654,3 +657,4 @@ identifiers:
   value: https://igraph.org/
 - type: url
   value: https://igraph.discourse.group/
+

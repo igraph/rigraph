@@ -32,6 +32,7 @@ YACC=$(DOCKER) bison -b yy -d
 LEX=$(DOCKER) flex
 
 %.c: %.y
+	mv -f src/vendor/io/parsers/$(basename $(notdir $@)).h src/vendor/io/$(basename $(notdir $@)).h
 	$(YACC) $< -o src/vendor/io/$(notdir $@)
 	mv -f src/vendor/io/$(basename $(notdir $@)).h src/vendor/io/parsers/$(basename $(notdir $@)).h
 

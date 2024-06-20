@@ -4,8 +4,8 @@ test_that("bipartite_projection works", {
 
   g <- make_full_bipartite_graph(10, 5)
   proj <- bipartite_projection(g)
-  expect_true(graph.isomorphic(proj[[1]], make_full_graph(10)))
-  expect_true(graph.isomorphic(proj[[2]], make_full_graph(5)))
+  expect_isomorphic(proj[[1]], make_full_graph(10))
+  expect_isomorphic(proj[[2]], make_full_graph(5))
 
   M <- matrix(0, nrow = 5, ncol = 3)
   rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
@@ -13,30 +13,28 @@ test_that("bipartite_projection works", {
   M[] <- sample(0:1, length(M), replace = TRUE)
   M
   g2 <- graph_from_biadjacency_matrix(M)
-  expect_that(as.matrix(g2[1:5, 6:8]), equals(M))
-  expect_that(as.matrix(g2[1:5, 1:5]), is_equivalent_to(matrix(0, 5, 5)))
-  expect_that(as.matrix(g2[6:8, 6:8]), is_equivalent_to(matrix(0, 3, 3)))
+  expect_equal(as.matrix(g2[1:5, 6:8]), M)
+  expect_equal(as.matrix(g2[1:5, 1:5]), matrix(0, 5, 5), ignore_attr = TRUE)
+  expect_equal(as.matrix(g2[6:8, 6:8]), matrix(0, 3, 3), ignore_attr = TRUE)
 
   g2$name <- "Event network"
   proj2 <- bipartite_projection(g2)
-  expect_that(
+  expect_equal(
     as.matrix(proj2[[1]][]),
-    is_equivalent_to(cbind(
-      c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2),
-      c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2),
-      c(2, 2, 0, 2, 0)
-    ))
+    cbind(c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2), c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2), c(2, 2, 0, 2, 0)),
+    ignore_attr = TRUE
   )
-  expect_that(
+  expect_equal(
     as.matrix(proj2[[2]][]),
-    is_equivalent_to(cbind(c(0, 4, 1), c(4, 0, 1), c(1, 1, 0)))
+    cbind(c(0, 4, 1), c(4, 0, 1), c(1, 1, 0)),
+    ignore_attr = TRUE
   )
 
   bs <- bipartite_projection_size(g2)
-  expect_that(bs$vcount1, equals(vcount(proj2[[1]])))
-  expect_that(bs$ecount1, equals(ecount(proj2[[1]])))
-  expect_that(bs$vcount2, equals(vcount(proj2[[2]])))
-  expect_that(bs$ecount2, equals(ecount(proj2[[2]])))
+  expect_equal(bs$vcount1, vcount(proj2[[1]]))
+  expect_equal(bs$ecount1, ecount(proj2[[1]]))
+  expect_equal(bs$vcount2, vcount(proj2[[2]]))
+  expect_equal(bs$ecount2, ecount(proj2[[2]]))
 })
 
 test_that("bipartite_projection can calculate only one projection", {
@@ -47,12 +45,12 @@ test_that("bipartite_projection can calculate only one projection", {
   proj1 <- bipartite_projection(g, which = "false")
   proj2 <- bipartite_projection(g, which = "true")
 
-  expect_true(graph.isomorphic(proj$proj1, proj1))
-  expect_true(graph.isomorphic(proj$proj2, proj2))
-  expect_that(vertex.attributes(proj$proj1), equals(vertex.attributes(proj1)))
-  expect_that(vertex.attributes(proj$proj2), equals(vertex.attributes(proj2)))
-  expect_that(edge_attr(proj$proj1), equals(edge_attr(proj1)))
-  expect_that(edge_attr(proj$proj2), equals(edge_attr(proj2)))
+  expect_isomorphic(proj$proj1, proj1)
+  expect_isomorphic(proj$proj2, proj2)
+  expect_equal(vertex.attributes(proj$proj1), vertex.attributes(proj1))
+  expect_equal(vertex.attributes(proj$proj2), vertex.attributes(proj2))
+  expect_equal(edge_attr(proj$proj1), edge_attr(proj1))
+  expect_equal(edge_attr(proj$proj2), edge_attr(proj2))
 })
 
 test_that("bipartite_projection removes 'type' attribute if requested", {
@@ -80,13 +78,13 @@ test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
   g <- graph_from_literal(A - 0, B - 1, A - 1, 0 - 1)
   V(g)$type <- V(g)$name %in% LETTERS
 
-  expect_that(
+  expect_error(
     bipartite_projection_size(g),
-    throws_error("Non-bipartite edge found in bipartite projection")
+    "Non-bipartite edge found in bipartite projection"
   )
-  expect_that(
+  expect_error(
     bipartite_projection(g),
-    throws_error("Non-bipartite edge found in bipartite projection")
+    "Non-bipartite edge found in bipartite projection"
   )
 })
 

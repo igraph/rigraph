@@ -13,11 +13,11 @@ test_that("SGM works", {
     iteration = 20
   )
 
-  expect_that(c(1:nos, P$corr[, 2]), equals(randperm))
-  expect_that(apply(P$P != 0, 1, which), equals(randperm))
-  expect_that(
+  expect_equal(c(1:nos, P$corr[, 2]), randperm)
+  expect_equal(apply(P$P != 0, 1, which), randperm)
+  expect_equal(
     apply(P$D != 0, 1, which),
-    equals(randperm[(nos + 1):vc] - nos)
+    randperm[(nos + 1):vc] - nos
   )
 
   ## Slightly bigger
@@ -35,11 +35,11 @@ test_that("SGM works", {
     iteration = 20
   )
 
-  expect_that(P$corr[, 2], equals(perm[(nos + 1):vc]))
-  expect_that(apply(P$P != 0, 1, which), equals(perm))
-  expect_that(
+  expect_equal(P$corr[, 2], perm[(nos + 1):vc])
+  expect_equal(apply(P$P != 0, 1, which), perm)
+  expect_equal(
     apply(P$D != 0, 1, which),
-    equals(perm[(nos + 1):vc] - nos)
+    perm[(nos + 1):vc] - nos
   )
 })
 

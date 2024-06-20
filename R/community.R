@@ -1287,9 +1287,10 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @param resolution_parameter The resolution parameter to use. Higher
+#' @param resolution The resolution parameter to use. Higher
 #'   resolutions lead to more smaller communities, while lower resolutions lead
 #'   to fewer larger communities.
+#' @param resolution_parameter  `r lifecycle::badge("superseded")` Use `resolution` instead.
 #' @param beta Parameter affecting the randomness in the Leiden algorithm.
 #'   This affects only the refinement step of the algorithm.
 #' @param initial_membership If provided, the Leiden algorithm
@@ -1301,6 +1302,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   If this is not provided, it will be automatically determined on the basis
 #'   of the `objective_function`. Please see the details of this function
 #'   how to interpret the vertex weights.
+#' @inheritParams rlang::args_dots_empty
 #' @return `cluster_leiden()` returns a [communities()]
 #'   object, please see the [communities()] manual page for details.
 #' @author Vincent Traag
@@ -1330,12 +1332,27 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' r <- quantile(strength(g))[2] / (gorder(g) - 1)
 #' # Set seed for sake of reproducibility
 #' set.seed(1)
-#' ldc <- cluster_leiden(g, resolution_parameter = r)
+#' ldc <- cluster_leiden(g, resolution = r)
 #' print(ldc)
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
-                           weights = NULL, resolution_parameter = 1, beta = 0.01,
-                           initial_membership = NULL, n_iterations = 2, vertex_weights = NULL) {
+                           ...,
+                           weights = NULL, resolution = 1,
+    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
+    # after igraph:::deprecated() is removed
+                           resolution_parameter, beta = 0.01,
+                           initial_membership = NULL,
+                           n_iterations = 2, vertex_weights = NULL) {
+
+  check_dots_empty()
+
+  if (lifecycle::is_present(resolution_parameter)) {
+    lifecycle::deprecate_soft("2.0.4",
+                              "cluster_leiden(resolution_parameter)",
+                              "cluster_leiden(resolution)")
+    resolution <- resolution_parameter
+  }
+
   ensure_igraph(graph)
 
   # Parse objective function argument
@@ -1373,7 +1390,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       # Set correct node weights
       vertex_weights <- strength(graph, weights = weights)
       # Also correct resolution parameter
-      resolution_parameter <- resolution_parameter / sum(vertex_weights)
+      resolution <- resolution / sum(vertex_weights)
     }
   }
 
@@ -1382,7 +1399,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (n_iterations > 0) {
     res <- .Call(
       R_igraph_community_leiden, graph, weights,
-      vertex_weights, as.numeric(resolution_parameter),
+      vertex_weights, as.numeric(resolution),
       as.numeric(beta), !is.null(membership), as.numeric(n_iterations),
       membership
     )
@@ -1394,7 +1411,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       prev_quality <- quality
       res <- .Call(
         R_igraph_community_leiden, graph, weights,
-        vertex_weights, as.numeric(resolution_parameter),
+        vertex_weights, as.numeric(resolution),
         as.numeric(beta), !is.null(membership), 1,
         membership
       )
@@ -1565,26 +1582,24 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 
 #' Community structure detection based on edge betweenness
 #'
-#' Many networks consist of modules which are densely connected themselves but
-#' sparsely connected to other modules.
+#' Community structure detection based on the betweenness of the edges
+#' in the network. This method is also known as the Girvan-Newman
+#' algorithm.
 #'
-#' The edge betweenness score of an edge measures the number of shortest paths
-#' through it, see [edge_betweenness()] for details. The idea of the
-#' edge betweenness based community structure detection is that it is likely
-#' that edges connecting separate modules have high edge betweenness as all the
-#' shortest paths from one module to another must traverse through them. So if
-#' we gradually remove the edge with the highest edge betweenness score we will
-#' get a hierarchical map, a rooted tree, called a dendrogram of the graph. The
-#' leafs of the tree are the individual vertices and the root of the tree
-#' represents the whole graph.
+#' The idea behind this method is that the betweenness of the edges connecting
+#' two communities is typically high, as many of the shortest paths between
+#' vertices in separate communities pass through them. The algorithm
+#' successively removes edges with the highest betweenness, recalculating
+#' betweenness values after each removal. This way eventually the network splits
+#' into two components, then one of these components splits again, and so on,
+#' until all edges are removed. The resulting hierarhical partitioning of the
+#' vertices can be encoded as a dendrogram.
 #'
-#' `cluster_edge_betweenness()` performs this algorithm by calculating the
-#' edge betweenness of the graph, removing the edge with the highest edge
-#' betweenness score, then recalculating edge betweenness of the edges and
-#' again removing the one with the highest score, etc.
-#'
-#' `edge.betweeness.community` returns various information collected
-#' through the run of the algorithm. See the return value down here.
+#' `cluster_edge_betweenness()` returns various information collected
+#' through the run of the algorithm. Specifically, `removed.edges` contains
+#' the edge IDs in order of the edges' removal; `edge.betweenness` contains
+#' the betweenness of each of these at the time of their removal; and
+#' `bridges` contains the IDs of edges whose removal caused a split.
 #'
 #' @param graph The graph to analyze.
 #' @param weights The weights of the edges. It must be a positive numeric vector,

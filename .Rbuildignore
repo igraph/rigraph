@@ -49,4 +49,4 @@
 ^\.ccache$
 ^\.aviator/config\.yml$
 ^src/vendor/cigraph/CITATION\.cff$
-
+^R/revdep\.R$

@@ -14,8 +14,7 @@ graph.laplacian(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{normalized}{Whether to calculate the normalized Laplacian. See
-definitions below.}
+\item{normalized}{Deprecated, use \code{normalization} instead.}
 
 \item{weights}{An optional vector giving edge weights for weighted Laplacian
 matrix. If this is \code{NULL} and the graph has an edge attribute called

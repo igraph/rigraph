@@ -6,16 +6,14 @@
 \usage{
 laplacian_matrix(
   graph,
-  normalized = FALSE,
   weights = NULL,
-  sparse = igraph_opt("sparsematrices")
+  sparse = igraph_opt("sparsematrices"),
+  normalization = c("unnormalized", "symmetric", "left", "right"),
+  normalized
 )
 }
 \arguments{
 \item{graph}{The input graph.}
-
-\item{normalized}{Whether to calculate the normalized Laplacian. See
-definitions below.}
 
 \item{weights}{An optional vector giving edge weights for weighted Laplacian
 matrix. If this is \code{NULL} and the graph has an edge attribute called
@@ -25,6 +23,11 @@ attribute.}
 
 \item{sparse}{Logical scalar, whether to return the result as a sparse
 matrix. The \code{Matrix} package is required for sparse matrices.}
+
+\item{normalization}{The normalization method to use when calculating the
+Laplacian matrix.}
+
+\item{normalized}{Deprecated, use \code{normalization} instead.}
 }
 \value{
 A numeric matrix.
@@ -38,9 +41,10 @@ of rows and columns as the number of vertices in the graph and element (i,j)
 is d[i], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
 between vertices i and j and 0 otherwise.
 
-A normalized version of the Laplacian Matrix is similar: element (i,j) is 1
-if i==j, -1/sqrt(d[i] d[j]) if i!=j and there is an edge between vertices i
-and j and 0 otherwise.
+The Laplacian matrix can also be normalized, with several
+conventional normalization methods. \dQuote{unnormalized} Unnormalized Laplacian.
+\dQuote{symmetric} Symmetric normalized Laplacian. \dQuote{left} Left-stochastic normalized Laplacian.
+\dQuote{right} Right-stochastic normalized Laplacian.
 
 The weighted version of the Laplacian simply works with the weighted degree
 instead of the plain degree. I.e. (i,j) is d[i], the weighted degree of
@@ -52,8 +56,8 @@ of the weights of its adjacent edges.
 
 g <- make_ring(10)
 laplacian_matrix(g)
-laplacian_matrix(g, norm = TRUE)
-laplacian_matrix(g, norm = TRUE, sparse = FALSE)
+laplacian_matrix(g, normalization = "unnormalized")
+laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 
 }
 \author{

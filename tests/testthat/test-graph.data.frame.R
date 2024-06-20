@@ -26,8 +26,8 @@ test_that("graph_from_data_frame works", {
   g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
 
   df <- as_data_frame(g, what = "both")
-  expect_that(df$vertices, is_equivalent_to(actors))
-  expect_that(df$edges, equals(relations))
+  expect_equal(df$vertices, actors, ignore_attr = TRUE)
+  expect_equal(df$edges, relations)
 })
 
 test_that("graph_from_data_frame() creates attributes for zero-row data frames (#466)", {
@@ -42,7 +42,7 @@ test_that("graph_from_data_frame works on matrices", {
   g <- graph_from_data_frame(el)
   g <- delete_vertex_attr(g, "name")
   el2 <- as_data_frame(g)
-  expect_that(as.data.frame(el), is_equivalent_to(el2))
+  expect_equal(as.data.frame(el), el2, ignore_attr = TRUE)
 })
 
 test_that("as_long_data_frame() works correctly with and without names", {

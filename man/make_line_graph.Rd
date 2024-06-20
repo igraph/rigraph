@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_line_graph}
 \alias{make_line_graph}
-\alias{line.graph}
 \alias{line_graph}
 \title{Line graph of a graph}
 \usage{

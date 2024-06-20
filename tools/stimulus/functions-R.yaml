@@ -17,7 +17,6 @@ igraph_empty_attrs:
     IGNORE: RR, RC
 
 igraph_add_edges:
-    IGNORE: RR, RC, RInit
 
 igraph_add_vertices:
     IGNORE: RR, RC, RInit
@@ -188,12 +187,6 @@ igraph_weighted_sparsemat:
 
 igraph_barabasi_game:
     IGNORE: RR, RC
-
-igraph_erdos_renyi_game_gnp:
-    IGNORE: RR, RC, RInit
-
-igraph_erdos_renyi_game_gnm:
-    IGNORE: RR, RC, RInit
 
 igraph_degree_sequence_game:
     IGNORE: RR, RC
@@ -534,6 +527,9 @@ igraph_is_perfect:
 igraph_add_edge:
     IGNORE: RR, RC, RInit
 
+igraph_chung_lu_game:
+    IGNORE: RR, RC
+
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two
@@ -542,25 +538,20 @@ igraph_eigenvector_centrality:
     DEPS: weights ON graph, vector ON graph V(graph)
 
 igraph_hub_score:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: weights ON graph, vector ON graph V(graph)
+    IGNORE: RR, RC
 
 igraph_authority_score:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: weights ON graph, vector ON graph V(graph)
+    IGNORE: RR, RC
 
 igraph_hub_and_authority_scores:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
-    DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
+    DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
+    PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
+        OUT REAL value, BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
+        INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_unfold_tree:
     IGNORE: RR
@@ -650,7 +641,7 @@ igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
 
 igraph_random_edge_walk:
-    PARAM_ORDER: graph, start, steps, ...
+    IGNORE: RR, RC
 
 igraph_global_efficiency:
 
@@ -715,7 +706,7 @@ igraph_bipartite_game_gnm:
     IGNORE: RR
 
 igraph_bipartite_game:
-    DEPS: types ON graph V(graph)
+    IGNORE: RR, RC
 
 
 #######################################

@@ -4,7 +4,7 @@ test_that("Starting from state works (#225)", {
   g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
   hrg <- fit_hrg(g)
   hrg2 <- fit_hrg(g, hrg = hrg, start = TRUE, steps = 1)
-  expect_that(hrg2, is_equivalent_to(hrg))
+  expect_equal(hrg2, hrg, ignore_attr = TRUE)
 })
 
 test_that("as.hclust.igraphHRG() works", {

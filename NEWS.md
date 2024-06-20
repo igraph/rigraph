@@ -1,5 +1,287 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9033
+
+## Chore
+
+- Update vendored sources to igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966.
+
+  chore: update changelog
+  refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+## Testing
+
+- Remove expect_that() definition (#1412).
+
+
+# igraph 2.0.3.9032
+
+## Bug fixes
+
+- Put back header files for consumption by Bison (#1406).
+
+## Features
+
+- Remove deprecated functions before 1.0 (#1352).
+
+## Continuous integration
+
+- Try installing {graph} again (#1407).
+
+## Testing
+
+- Stop using throws_error() in test-bipartite.projection.R (#1409).
+
+- Stop using prints_text() in test-bipartite.random.game.R (#1408).
+
+- Stop using is_identical_to() in test-maximal_cliques.R.
+
+- Stop using gives_warning() in test-operators4.R.
+
+- Stop using gives_warning() in test-dot.product.game.R.
+
+- Stop using expect_that() in test-trees.R.
+
+- Remove use of expect_that() in test-clusters.R.
+
+
+# igraph 2.0.3.9031
+
+## Chore
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+  interface: update chung_lu_game() parameter names
+
+- Update vendored sources to igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5.
+
+
+# igraph 2.0.3.9030
+
+## Features
+
+- Update C/igraph (#1378).
+
+
+# igraph 2.0.3.9029
+
+## Testing
+
+- Results.
+
+
+# igraph 2.0.3.9028
+
+## Chore
+
+- Infrastructure to review revdepcheck results (#1402).
+
+
+# igraph 2.0.3.9027
+
+## doc
+
+- Make `edge_density()` examples relevant.
+
+
+# igraph 2.0.3.9026
+
+## Bug fixes
+
+- `sample_degseq()` works with old method names again (#1393).
+
+## Chore
+
+- Results.
+
+## Refactoring
+
+- Expect_that(is_equivalent()) (#1395).
+
+- Breaking change: change make.R (#1390).
+
+## Breaking changes
+
+- Breaking change: change make.R (#1390).
+
+
+# igraph 2.0.3.9025
+
+## doc
+
+- Update troubleshooting document.
+
+## Uncategorized
+
+- Expect_equal() instead of expect_that(equals()) (#1391).
+
+- Refactoring around adjacency.R (#1370).
+
+
+# igraph 2.0.3.9024
+
+## Continuous integration
+
+- Install rhub.
+
+
+# igraph 2.0.3.9023
+
+## Continuous integration
+
+- Fix vendoring workflow.
+
+
+# igraph 2.0.3.9022
+
+## Bug fixes
+
+- Add missing `PROTECT` (#1382).
+
+
+# igraph 2.0.3.9021
+
+## Testing
+
+- Improve attribute tests (#1381).
+
+
+# igraph 2.0.3.9020
+
+## Features
+
+- Rename sample_degseq() method and add the edge.switching.simple method (#1376).
+
+
+# igraph 2.0.3.9019
+
+## Bug fixes
+
+- Fix reading of LGL and NCOL files (broken in 2.0.0) (#1347).
+
+## Continuous integration
+
+- Work around installation problems for the graph package (#1374).
+
+## Testing
+
+- Refactor test-assortativity for readability (#1371).
+
+## Uncategorized
+
+- Refactoring around test-attributes.R (#1372).
+
+
+# igraph 2.0.3.9018
+
+## Bug fixes
+
+- Fixed potential memory leak in `R_igraph_community_to_membership2()` (#1367).
+
+
+# igraph 2.0.3.9017
+
+## Bug fixes
+
+- Comment failing ci (#1357).
+
+## Testing
+
+- Refactoring around `interface.R` (#1366).
+
+## Uncategorized
+
+- Fix `%\>%` typo in vignettes (#1343).
+
+
+# igraph 2.0.3.9016
+
+## doc
+
+- Improve `eigen_centrality()` documentation.
+
+
+# igraph 2.0.3.9015
+
+## doc
+
+- Further improved `cluster_edge_betweenness()` documentation.
+
+
+# igraph 2.0.3.9014
+
+## doc
+
+- Improved `cluster_edge_betweenness()` documentation.
+
+
+# igraph 2.0.3.9013
+
+## Testing
+
+- Improve sample_degseq() tests (#1315).
+
+
+# igraph 2.0.3.9012
+
+## Continuous integration
+
+- Remove conflict action again.
+
+## Refactoring
+
+- Handle `null` names for `R_igraph_mybracket2_names` (#1342).
+
+
+# igraph 2.0.3.9011
+
+## Continuous integration
+
+- Use other conflict checker action.
+
+- Add conflicts checker for PRs.
+
+
+# igraph 2.0.3.9010
+
+## Features
+
+- Generate all bindings (#1044).
+
+## Chore
+
+- Use and explain `getNamespaceInfo()` (#1339).
+
+## Continuous integration
+
+- Run examples with comment `\dontrun{}` (#1310).
+
+## Refactoring
+
+- Names in `update-cigraph.sh` script (#1287).
+
+
+# igraph 2.0.3.9009
+
+## Continuous integration
+
+- Install R (#1335).
+
+## Refactoring
+
+- Move variables closer to their usage, add explaining variables (#1336).
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+- Explaining variables (#1326).
+
+## Breaking changes
+
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+
 # igraph 2.0.3.9008
 
 ## Refactoring
