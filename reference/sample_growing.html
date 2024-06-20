@@ -66,7 +66,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_growing</span><span class="op">(</span><span class="va">n</span>, m <span class="op">=</span> <span class="fl">1</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, citation <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_growing</span><span class="op">(</span><span class="va">n</span>, m <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, citation <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">growing</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -81,6 +81,10 @@
 <dd><p>Numeric constant, number of edges added in each time step.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>Passed to <code>sample_growing()</code>.</p></dd>
+
+
 <dt>directed</dt>
 <dd><p>Logical, whether to create a directed graph.</p></dd>
 
@@ -88,10 +92,6 @@
 <dt>citation</dt>
 <dd><p>Logical. If <code>TRUE</code> a citation graph is created, i.e. in
 each time step the added edges are originating from the new vertex.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>Passed to <code>sample_growing()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
