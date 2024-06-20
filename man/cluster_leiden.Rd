@@ -11,7 +11,7 @@ cluster_leiden(
   ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter,
+  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,

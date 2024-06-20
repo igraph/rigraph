@@ -1338,9 +1338,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            ...,
                            weights = NULL, resolution = 1,
-    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
-    # after igraph:::deprecated() is removed
-                           resolution_parameter, beta = 0.01,
+                           resolution_parameter = deprecated(), beta = 0.01,
                            initial_membership = NULL,
                            n_iterations = 2, vertex_weights = NULL) {
 
