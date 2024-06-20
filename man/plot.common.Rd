@@ -178,8 +178,8 @@
 
       For \code{\link{tkplot}} some
       conversion is performed. If this parameter is the name of an
-      exixting Tk font, then that font is used and the \code{label.font}
-      and \code{label.cex} parameters are ignored complerely. If it is
+      existing Tk font, then that font is used and the \code{label.font}
+      and \code{label.cex} parameters are ignored completely. If it is
       one of the base families (serif, sans, mono) then Times,
       Helvetica or Courier fonts are used, there are guaranteed to exist
       on all systems. For the \sQuote{symbol} base family we used the
@@ -235,7 +235,7 @@
     }
     \item{label.degree}{
       It defines the position of the vertex labels, relative to the
-      center of the vertices. It is interpreted as an angle in radian,
+      center of the vertices. It is interpreted as an angle in radians,
       zero means \sQuote{to the right}, and \sQuote{\code{pi}} means to
       the left, up is \code{-pi/2} and down is \code{pi/2}.
 
@@ -325,7 +325,7 @@
       edge bends clockwise, positive values the opposite. \code{TRUE}
       means curvature 0.5, \code{FALSE} means curvature zero.
 
-      By default the vector specifying the curvatire is calculated via a
+      By default the vector specifying the curvature is calculated via a
       call to the \code{\link{curve_multiple}} function. This function makes
       sure that multiple edges are curved and are all visible. This
       parameter is ignored for loop edges. 
@@ -357,13 +357,13 @@
       to its direction. This is not very surprising, it is the expected
       behavior.
     }
-    \item{loop.angle}{Gives the angle in radian for plotting loop
+    \item{loop.angle}{Gives the angle in radians for plotting loop
       edges. See the \code{label.dist} vertex parameter to see how this
       is interpreted.
 
       The default value is 0.
     }    
-    \item{loop.angle2}{Gives the second angle in radian for plotting
+    \item{loop.angle2}{Gives the second angle in radians for plotting
       loop edges. This is only used in 3D, \code{loop.angle} is enough
       in 2D.
 
@@ -393,7 +393,7 @@
       or three columns. For the 2D plots the third column is ignored.
 
       The default value is \code{layout_nicely}, a smart function that
-      chooses a layouter based on the graph.}
+      chooses a layout based on the graph.}
     \item{margin}{The amount of empty space below, over, at the left and
       right of the plot, it is a numeric vector of length four. Usually
       values between 0 and 0.5 are meaningful, but negative values are
