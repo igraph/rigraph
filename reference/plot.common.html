@@ -232,8 +232,8 @@
       <code><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></code> as argument <code>family</code>.</p>
 <p>For <code><a href="tkplot.html">tkplot</a></code> some
       conversion is performed. If this parameter is the name of an
-      exixting Tk font, then that font is used and the <code>label.font</code>
-      and <code>label.cex</code> parameters are ignored complerely. If it is
+      existing Tk font, then that font is used and the <code>label.font</code>
+      and <code>label.cex</code> parameters are ignored completely. If it is
       one of the base families (serif, sans, mono) then Times,
       Helvetica or Courier fonts are used, there are guaranteed to exist
       on all systems. For the ‘symbol’ base family we used the
@@ -281,7 +281,7 @@
 
     <dt>label.degree</dt>
 <dd><p>It defines the position of the vertex labels, relative to the
-      center of the vertices. It is interpreted as an angle in radian,
+      center of the vertices. It is interpreted as an angle in radians,
       zero means ‘to the right’, and ‘<code>pi</code>’ means to
       the left, up is <code>-pi/2</code> and down is <code>pi/2</code>.</p>
 <p>The default value is <code>-pi/4</code>.</p></dd>
@@ -376,7 +376,7 @@
       zero curvature means straight edges, negative values means the
       edge bends clockwise, positive values the opposite. <code>TRUE</code>
       means curvature 0.5, <code>FALSE</code> means curvature zero.</p>
-<p>By default the vector specifying the curvatire is calculated via a
+<p>By default the vector specifying the curvature is calculated via a
       call to the <code><a href="curve_multiple.html">curve_multiple</a></code> function. This function makes
       sure that multiple edges are curved and are all visible. This
       parameter is ignored for loop edges.</p>      
@@ -407,13 +407,13 @@
       behavior.</p></dd>
 
     <dt>loop.angle</dt>
-<dd><p>Gives the angle in radian for plotting loop
+<dd><p>Gives the angle in radians for plotting loop
       edges. See the <code>label.dist</code> vertex parameter to see how this
       is interpreted.</p>
 <p>The default value is 0.</p></dd>
     
     <dt>loop.angle2</dt>
-<dd><p>Gives the second angle in radian for plotting
+<dd><p>Gives the second angle in radians for plotting
       loop edges. This is only used in 3D, <code>loop.angle</code> is enough
       in 2D.</p>
 <p>The default value is 0.</p></dd>
@@ -435,7 +435,7 @@
       actual coordinates. The function should return a matrix with two
       or three columns. For the 2D plots the third column is ignored.</p>
 <p>The default value is <code>layout_nicely</code>, a smart function that
-      chooses a layouter based on the graph.</p></dd>
+      chooses a layout based on the graph.</p></dd>
 
     <dt>margin</dt>
 <dd><p>The amount of empty space below, over, at the left and
