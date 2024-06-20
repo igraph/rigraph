@@ -1,5 +1,21 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9033
+
+## Chore
+
+- Update vendored sources to igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966.
+
+  chore: update changelog
+  refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+## Testing
+
+- Remove expect_that() definition (#1412).
+
+
 # igraph 2.0.3.9032
 
 ## Bug fixes
