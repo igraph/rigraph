@@ -774,8 +774,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
 #'
-#' @param graph The input graph, it should be undirected, but the
-#'   implementation does not check this currently.
+#' @param graph The input graph. It will be treated as undirected.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
@@ -795,11 +794,17 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' cor(degree(g), sc)
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
-  A <- as_adj(graph)
+  # We take the lower-triangular part of the adjacency matrix only,
+  # and set symmetric = TRUE in the eigen() call below, which indicates
+  # that only the lower-triangular part should be considered. This
+  # effectively ignores edge directions in directed graphs, and speeds
+  # up the calculation slightly, since eigen() no longer needs to check
+  # for symmetry.
+  A <- as_adj(graph, type = "lower")
   if (!diag) {
     diag(A) <- 0
   }
-  eig <- eigen(A)
+  eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")

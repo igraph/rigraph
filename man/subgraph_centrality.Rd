@@ -7,8 +7,7 @@
 subgraph_centrality(graph, diag = FALSE)
 }
 \arguments{
-\item{graph}{The input graph, it should be undirected, but the
-implementation does not check this currently.}
+\item{graph}{The input graph. It will be treated as undirected.}
 
 \item{diag}{Boolean scalar, whether to include the diagonal of the adjacency
 matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
