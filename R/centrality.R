@@ -794,15 +794,13 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' cor(degree(g), sc)
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
-  # We take the lower-triangular part of the adjacency matrix only,
-  # and set symmetric = TRUE in the eigen() call below, which indicates
-  # that only the lower-triangular part should be considered. This
-  # effectively ignores edge directions in directed graphs, and speeds
-  # up the calculation slightly, since eigen() no longer needs to check
-  # for symmetry.
-  A <- as_adj(graph, type = "lower")
+  A <- as_adj(graph)
   if (!diag) {
     diag(A) <- 0
+  }
+  # Ignore edge directions in directed graphs
+  if (is_directed(graph)) {
+    A <- A + Matrix::t(A)
   }
   eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
