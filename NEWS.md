@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9034
+
+## Chore
+
+- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
+
+## Documentation
+
+- Fix typos in `?plot.common` (@gvegayon) (#1413).
+
+## Refactoring
+
+- Use lifecycle in R/iterators.R (#1399).
+
+- Use `lifecycle::deprecated()` now that we can (#1397).
+
+## Breaking changes
+
+- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
+
+## Uncategorized
+
+- More auto-generation (#1368).
+
+
 # igraph 2.0.3.9033
 
 ## Chore
