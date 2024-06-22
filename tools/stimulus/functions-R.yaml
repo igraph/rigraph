@@ -532,7 +532,10 @@ igraph_add_edge:
     IGNORE: RR, RC, RInit
 
 igraph_chung_lu_game:
-    IGNORE: RR, RC
+    R:
+      GATTR:
+        name: Chung-Lu model
+      GATTR-PARAM: variant
 
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
