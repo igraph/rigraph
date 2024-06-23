@@ -1,5 +1,15 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9035
+
+## Chore
+
+- Update vendored sources to igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593.
+
+  fuzzer: use libxml2 2.13.1
+  refactor: name CHUNG_LU_GRG to CHUNG_LU_MAXENT (no release has been issued with the GRG naming so far)
+
+
 # igraph 2.0.3.9034
 
 ## Chore
