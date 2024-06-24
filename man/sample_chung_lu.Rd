@@ -13,7 +13,13 @@ sample_chung_lu(
   variant = c("original", "maxent", "nr")
 )
 
-chung_lu(...)
+chung_lu(
+  out.weights,
+  in.weights = NULL,
+  ...,
+  loops = TRUE,
+  variant = c("original", "maxent", "nr")
+)
 }
 \arguments{
 \item{out.weights}{A vector of non-negative vertex weights (or out-weights).
@@ -24,7 +30,7 @@ In sparse graphs, these will be approximately equal to the expected
 the expected in-degrees in sparse graphs. May be set to \code{NULL}, in
 which case undirected graphs are generated.}
 
-\item{...}{Passed to \code{sample_chung_lu()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{loops}{Logical, whether to allow the creation of self-loops. Since
 vertex pairs are connected independently, setting this to \code{FALSE} is

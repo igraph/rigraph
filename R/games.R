@@ -2125,6 +2125,7 @@ sample_k_regular <- k_regular_game_impl
 #'   graphs. Random Structures & Algorithms, 42, 480-508.
 #'   \doi{10.1002/rsa.20450}
 #'
+#' @inheritParams rlang::args_dots_empty
 #' @param out.weights A vector of non-negative vertex weights (or out-weights).
 #'   In sparse graphs, these will be approximately equal to the expected
 #'   (out-)degrees.
@@ -2169,9 +2170,24 @@ sample_k_regular <- k_regular_game_impl
 sample_chung_lu <- chung_lu_game_impl
 
 #' @rdname sample_chung_lu
-#' @param ... Passed to `sample_chung_lu()`.
 #' @export
-chung_lu <- function(...) constructor_spec(sample_chung_lu, ...)
+chung_lu <- function(
+    out.weights,
+    in.weights = NULL,
+    ...,
+    loops = TRUE,
+    variant = c("original", "maxent", "nr")
+) {
+  variant <- rlang::arg_match(variant)
+  constructor_spec(
+    sample_chung_lu,
+    out.weights,
+    in.weights,
+    ...,
+    loops = loops,
+    variant = variant
+  )
+}
 
 
 #' Random graphs from vertex fitness scores
