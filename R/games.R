@@ -2034,10 +2034,14 @@ sample_k_regular <- k_regular_game_impl
 
 #' Random graph with given expected degrees
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' The Chung-Lu model is useful for generating random graphs with fixed expected
 #' degrees. This function implements both the original model of Chung and Lu, as
 #' well as some additional variants with useful properties.
 #'
+#' @details
 #' In the original Chung-Lu model, each pair of vertices \eqn{i} and \eqn{j} is
 #' connected with independent probability
 #' \deqn{p_{ij} = \frac{w_i w_j}{S},}{p_ij = w_i w_j / S,}

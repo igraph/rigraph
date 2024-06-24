@@ -52,6 +52,8 @@ formulations are available:
 An igraph graph.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 The Chung-Lu model is useful for generating random graphs with fixed expected
 degrees. This function implements both the original model of Chung and Lu, as
 well as some additional variants with useful properties.
