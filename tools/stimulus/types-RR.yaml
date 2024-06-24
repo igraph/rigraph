@@ -484,3 +484,8 @@ OPTIMALITY:
         MINIMUM: c("minimum", "maximum")
         MAXIMUM: c("maximum", "minimum")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'
+
+CHUNG_LU_VARIANT:
+    DEFAULT:
+        ORIGINAL: c("original", "maxent", "nr")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "original"=0L, "maxent"=1L, "nr"=2L)'

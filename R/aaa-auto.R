@@ -391,6 +391,26 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
   res
 }
 
+chung_lu_game_impl <- function(out.weights, in.weights=NULL, ..., loops=TRUE, variant=c("original", "maxent", "nr")) {
+  # Argument checks
+  check_dots_empty()
+  out.weights <- as.numeric(out.weights)
+  if (!is.null(in.weights)) in.weights <- as.numeric(in.weights)
+  loops <- as.logical(loops)
+  variant <- switch(igraph.match.arg(variant), "original"=0L, "maxent"=1L, "nr"=2L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_chung_lu_game, out.weights, in.weights, loops, variant)
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Chung-Lu model'
+    res$variant <- variant
+  }
+
+  res
+}
+
 static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.edges <- as.numeric(no.of.edges)

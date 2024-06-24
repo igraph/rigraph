@@ -2032,6 +2032,164 @@ sample_islands <- simple_interconnected_islands_game_impl
 sample_k_regular <- k_regular_game_impl
 
 
+#' Random graph with given expected degrees
+#'
+#' The Chung-Lu model is useful for generating random graphs with fixed expected
+#' degrees. This function implements both the original model of Chung and Lu, as
+#' well as some additional variants with useful properties.
+#'
+#' In the original Chung-Lu model, each pair of vertices \eqn{i} and \eqn{j} is
+#' connected with independent probability
+#' \deqn{p_{ij} = \frac{w_i w_j}{S},}{p_ij = w_i w_j / S,}
+#' where \eqn{w_i} is a weight associated with vertex \eqn{i} and
+#' \deqn{S = \sum_k w_k}{S = sum_k w_k}
+#' is the sum of weights. In the directed variant, vertices have both
+#' out-weights, \eqn{w^\text{out}}{w^out}, and in-weights,
+#' \eqn{w^\text{in}}{w^in}, with equal sums,
+#' \deqn{S = \sum_k w^\text{out}_k = \sum_k w^\text{in}_k.}{S = sum_k w^out_k = sum_k w^in_k.}
+#' The connection probability between \eqn{i} and \eqn{j} is
+#' \deqn{p_{ij} = \frac{w^\text{out}_i w^\text{in}_j.}{S}}{p_ij = w^out_i w^in_j / S.}
+#'
+#' This model is commonly used to create random graphs with a fixed
+#' \emph{expected} degree sequence. The expected degree of vertex \eqn{i} is
+#' approximately equal to the weight \eqn{w_i}. Specifically, if the graph is
+#' directed and self-loops are allowed, then the expected out- and in-degrees
+#' are precisely \eqn{w^\text{out}}{w^out} and \eqn{w^\text{in}}{w^in}. If
+#' self-loops are disallowed, then the expected out- and in-degrees are
+#' \eqn{\frac{w^\text{out} (S - w^\text{in})}{S}}{w^out (S - w^in) / S}
+#' and
+#' \eqn{\frac{w^\text{in} (S - w^\text{out})}{S}}{w^in (S - w^out) / S},
+#' respectively. If the graph is undirected, then the expected degrees with and
+#' without self-loops are
+#' \eqn{\frac{w (S + w)}{S}}{w (S + w) / S}
+#' and
+#' \eqn{\frac{w (S - w)}{S}}{w (S - w) / S},
+#' respectively.
+#'
+#' A limitation of the original Chung-Lu model is that when some of the weights
+#' are large, the formula for \eqn{p_{ij}}{p_ij} yields values larger than 1.
+#' Chung
+#' and Lu's original paper excludes the use of such weights. When
+#' \eqn{p_{ij} > 1}{p_ij > 1}, this function simply issues a warning and creates
+#' a connection between \eqn{i} and \eqn{j}. However, in this case the expected
+#' degrees will no longer relate to the weights in the manner stated above. Thus,
+#' the original Chung-Lu model cannot produce certain (large) expected degrees.
+#'
+#' To overcome this limitation, this function implements additional variants of
+#' the model, with modified expressions for the connection probability
+#' \eqn{p_{ij}}{p_ij} between vertices \eqn{i} and \eqn{j}. Let
+#' \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, or
+#' \eqn{q_{ij} = \frac{w^\text{out}_i w^\text{in}_j}{S}}{q_ij = w^out_i w^in_j / S}
+#' in the directed case. All model variants become equivalent in the limit of sparse
+#' graphs where \eqn{q_{ij}} approaches zero. In the original Chung-Lu model,
+#' selectable by setting \code{variant} to \dQuote{original}, \eqn{p_{ij} =
+#' \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}. The \dQuote{maxent} variant,
+#' sometimes referred to as the generalized random graph, uses \eqn{p_{ij} =
+#' \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}, and is equivalent to a
+#' maximum entropy model (i.e., exponential random graph model) with a
+#' constraint on expected degrees;
+#' see Park and Newman (2004), Section B, setting \eqn{\exp(-\Theta_{ij}) =
+#' \frac{w_i w_j}{S}}{exp(-Theta_ij) = w_i w_j / S}. This model is also discussed
+#' by Britton, Deijfen, and Martin-Löf (2006). By virtue of being a
+#' degree-constrained maximum entropy model, it generates graphs with the same
+#' degree sequence with the same probability. A third variant can be requested
+#' with \dQuote{nr}, and uses \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 -
+#' exp(-q_ij)}. This is the underlying simple graph of a multigraph model
+#' introduced by Norros and Reittu (2006). For a discussion of these three model
+#' variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as
+#' Van Der Hofstad (2013).
+#'
+#' @references Chung, F., and Lu, L. (2002). Connected components in a random
+#'   graph with given degree sequences. Annals of Combinatorics, 6, 125-145.
+#'   \doi{10.1007/PL00012580}
+#'
+#'   Miller, J. C., and Hagberg, A. (2011). Efficient Generation of Networks
+#'   with Given Expected Degrees. \doi{10.1007/978-3-642-21286-4_10}
+#'
+#'   Park, J., and Newman, M. E. J. (2004). Statistical mechanics of networks.
+#'   Physical Review E, 70, 066117. \doi{10.1103/PhysRevE.70.066117}
+#'
+#'   Britton, T., Deijfen, M., and Martin-Löf, A. (2006). Generating Simple
+#'   Random Graphs with Prescribed Degree Distribution. Journal of Statistical
+#'   Physics, 124, 1377-1397. \doi{10.1007/s10955-006-9168-x}
+#'
+#'   Norros, I., and Reittu, H. (2006). On a conditionally Poissonian graph
+#'   process. Advances in Applied Probability, 38, 59-75.
+#'   \doi{10.1239/aap/1143936140}
+#'
+#'   Bollobás, B., Janson, S., and Riordan, O. (2007). The phase transition in
+#'   inhomogeneous random graphs. Random Structures & Algorithms, 31, 3-122.
+#'   \doi{10.1002/rsa.20168}
+#'
+#'   Van Der Hofstad, R. (2013). Critical behavior in inhomogeneous random
+#'   graphs. Random Structures & Algorithms, 42, 480-508.
+#'   \doi{10.1002/rsa.20450}
+#'
+#' @inheritParams rlang::args_dots_empty
+#' @param out.weights A vector of non-negative vertex weights (or out-weights).
+#'   In sparse graphs, these will be approximately equal to the expected
+#'   (out-)degrees.
+#' @param in.weights A vector of non-negative in-weights, approximately equal to
+#'   the expected in-degrees in sparse graphs. May be set to \code{NULL}, in
+#'   which case undirected graphs are generated.
+#' @param loops Logical, whether to allow the creation of self-loops. Since
+#'   vertex pairs are connected independently, setting this to \code{FALSE} is
+#'   equivalent to simply discarding self-loops from an existing loopy Chung-Lu
+#'   graph.
+#' @param variant The model variant to sample from, with different definitions
+#'   of the connection probability between vertices \eqn{i} and \eqn{j}. Given
+#'   \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, the following
+#'   formulations are available:
+#'   \describe{
+#'     \item{\dQuote{original}}{the original Chung-Lu model, \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.}
+#'     \item{\dQuote{maxent}}{maximum entropy model with fixed expected degrees,
+#'       \eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.}
+#'     \item{\dQuote{nr}}{Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.}
+#'   }
+#' @return An igraph graph.
+#' @seealso [sample_fitness()] implements a similar model with a sharp
+#'   constraint on the number of edges. [sample_degseq()] samples random graphs
+#'   with sharply specified degrees. [sample_gnp()] creates random graphs with a
+#'   fixed connection probability \eqn{p} between all vertex pairs.
+#'
+#' @family games
+#' @examples
+#'
+#' g <- sample_chung_lu(c(3, 3, 2, 2, 2, 1, 1))
+#'
+#' rowMeans(replicate(
+#'   100,
+#'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2)), mode = "out")
+#' ))
+#'
+#' rowMeans(replicate(
+#'   100,
+#'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+#' ))
+#' @export
+sample_chung_lu <- chung_lu_game_impl
+
+#' @rdname sample_chung_lu
+#' @export
+chung_lu <- function(
+    out.weights,
+    in.weights = NULL,
+    ...,
+    loops = TRUE,
+    variant = c("original", "maxent", "nr")
+) {
+  variant <- rlang::arg_match(variant)
+  constructor_spec(
+    sample_chung_lu,
+    out.weights,
+    in.weights,
+    ...,
+    loops = loops,
+    variant = variant
+  )
+}
+
+
 #' Random graphs from vertex fitness scores
 #'
 #' This function generates a non-growing random graph with edge probabilities
