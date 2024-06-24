@@ -16,7 +16,7 @@ probability that an old vertex is cited depends on its in-degree
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9036</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -224,6 +224,7 @@ the vertex itself except if <code>out.pref</code> is set to <code>TRUE</code>.</
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="sample_bipartite.html">sample_bipartite</a>()</code>,
+<code><a href="sample_chung_lu.html">sample_chung_lu</a>()</code>,
 <code><a href="sample_correlated_gnp.html">sample_correlated_gnp</a>()</code>,
 <code><a href="sample_correlated_gnp_pair.html">sample_correlated_gnp_pair</a>()</code>,
 <code><a href="sample_degseq.html">sample_degseq</a>()</code>,
@@ -259,9 +260,9 @@ the vertex itself except if <code>out.pref</code> is set to <code>TRUE</code>.</
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu">sample_pa_age</span><span class="op">(</span><span class="fl">10000</span>, pa.exp <span class="op">=</span> <span class="fl">1</span>, aging.exp <span class="op">=</span> <span class="op">-</span><span class="fl">3</span>, aging.bin <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g1</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 185</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 25</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11</span>
 </code></pre></div>

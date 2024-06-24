@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9034</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9036</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,6 +127,7 @@ and evaluation. <em>Social Networks</em>, 14, 5--61.</p>
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="sample_bipartite.html">sample_bipartite</a>()</code>,
+<code><a href="sample_chung_lu.html">sample_chung_lu</a>()</code>,
 <code><a href="sample_correlated_gnp.html">sample_correlated_gnp</a>()</code>,
 <code><a href="sample_correlated_gnp_pair.html">sample_correlated_gnp_pair</a>()</code>,
 <code><a href="sample_degseq.html">sample_degseq</a>()</code>,
@@ -161,17 +162,17 @@ and evaluation. <em>Social Networks</em>, 14, 5--61.</p>
 <span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.001</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.05</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_sbm</span><span class="op">(</span><span class="fl">1000</span>, pref.matrix <span class="op">=</span> <span class="va">pm</span>, block.sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ce137d7 U--- 1000 16933 -- Stochastic block model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 02ecc69 U--- 1000 16907 -- Stochastic block model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ce137d7:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2-- 3  2-- 7  6-- 7  4-- 8  4-- 9  4--10  4--11  7--11 10--11  7--12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  1--13  8--13  9--14 11--14  8--16 11--16  3--17  4--17 12--17  7--18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 14--18 15--18 15--19 18--19  5--20  7--20  9--20 17--20  1--21  5--21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 11--21 17--21  1--22  5--22  6--22  3--23  7--23 15--23 16--23  4--25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41]  6--25  9--25 18--25 19--25 22--25 20--26 21--26 24--26 21--27 24--27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51]  1--28 14--28 18--28 19--28 21--28 22--28 24--28  6--29 21--29  3--30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61]  6--30  8--30 13--30 13--31 29--32  1--33  8--33 15--33 20--33 21--33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [71]  3--34  5--34 10--34 17--34 18--34  1--35 24--35 28--35  9--36 13--36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 02ecc69:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  3--10  1--11  3--13 12--14 14--16  4--17 10--17 15--17  4--18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  5--18 16--18 10--19 14--19 17--19 16--20 19--20 16--21 15--22  7--23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  9--24  4--25 20--25 22--25  7--26  9--26 10--26  6--27 12--27 13--27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 14--27 25--27 14--28 15--28 23--28 27--28  6--29 22--29 28--30  2--31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41]  7--31 15--31 19--31 23--31 25--31 26--31 15--32 24--32 25--32 11--33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 28--33  6--34 11--34 13--34 25--34 29--34 21--35 32--35  5--36 13--36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 21--36 26--36 32--36 33--36  3--37  5--37 11--37 13--37 18--37 28--37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 33--37 15--38 21--38 25--38 26--38 35--38  3--39  6--39 19--39 24--39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>

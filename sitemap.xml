@@ -1588,6 +1588,9 @@
     <loc>https://r.igraph.org/reference/sample_bipartite.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/sample_chung_lu.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/sample_correlated_gnp.html</loc>
   </url>
   <url>
