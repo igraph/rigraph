@@ -2055,12 +2055,12 @@ sample_k_regular <- k_regular_game_impl
 #' approximately equal to the weight \eqn{w_i}. Specifically, if the graph is
 #' directed and self-loops are allowed, then the expected out- and in-degrees
 #' are precisely \eqn{w^\text{out}}{w^out} and \eqn{w^\text{in}}{w^in}. If
-#' self-loops are disallowed, then the expected out- and in-degrees are 
-#' \eqn{\frac{w^\text{out} (S - w^\text{in})}{S}}{w^out (S - w^in) / S} 
-#' and 
+#' self-loops are disallowed, then the expected out- and in-degrees are
+#' \eqn{\frac{w^\text{out} (S - w^\text{in})}{S}}{w^out (S - w^in) / S}
+#' and
 #' \eqn{\frac{w^\text{in} (S - w^\text{out})}{S}}{w^in (S - w^out) / S},
 #' respectively. If the graph is undirected, then the expected degrees with and
-#' without self-loops are 
+#' without self-loops are
 #' \eqn{\frac{w (S + w)}{S}}{w (S + w) / S}
 #' and
 #' \eqn{\frac{w (S - w)}{S}}{w (S - w) / S},
@@ -2069,7 +2069,7 @@ sample_k_regular <- k_regular_game_impl
 #' A limitation of the original Chung-Lu model is that when some of the weights
 #' are large, the formula for \eqn{p_{ij}}{p_ij} yields values larger than 1.
 #' Chung
-#' and Lu's original paper excludes the use of such weights. When 
+#' and Lu's original paper excludes the use of such weights. When
 #' \eqn{p_{ij} > 1}{p_ij > 1}, this function simply issues a warning and creates
 #' a connection between \eqn{i} and \eqn{j}. However, in this case the expected
 #' degrees will no longer relate to the weights in the manner stated above. Thus,
