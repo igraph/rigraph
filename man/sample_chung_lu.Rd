@@ -8,6 +8,7 @@
 sample_chung_lu(
   out.weights,
   in.weights = NULL,
+  ...,
   loops = TRUE,
   variant = c("original", "maxent", "nr")
 )
@@ -22,6 +23,8 @@ In sparse graphs, these will be approximately equal to the expected
 \item{in.weights}{A vector of non-negative in-weights, approximately equal to
 the expected in-degrees in sparse graphs. May be set to \code{NULL}, in
 which case undirected graphs are generated.}
+
+\item{...}{Passed to \code{sample_chung_lu()}.}
 
 \item{loops}{Logical, whether to allow the creation of self-loops. Since
 vertex pairs are connected independently, setting this to \code{FALSE} is
@@ -38,8 +41,6 @@ formulations are available:
 \eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.}
 \item{\dQuote{nr}}{Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.}
 }}
-
-\item{...}{Passed to \code{sample_chung_lu()}.}
 }
 \value{
 An igraph graph.

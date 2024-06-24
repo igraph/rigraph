@@ -391,8 +391,9 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
   res
 }
 
-chung_lu_game_impl <- function(out.weights, in.weights=NULL, loops=TRUE, variant=c("original", "maxent", "nr")) {
+chung_lu_game_impl <- function(out.weights, in.weights=NULL, ..., loops=TRUE, variant=c("original", "maxent", "nr")) {
   # Argument checks
+  check_dots_empty()
   out.weights <- as.numeric(out.weights)
   if (!is.null(in.weights)) in.weights <- as.numeric(in.weights)
   loops <- as.logical(loops)

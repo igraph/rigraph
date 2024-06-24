@@ -532,6 +532,9 @@ igraph_add_edge:
     IGNORE: RR, RC, RInit
 
 igraph_chung_lu_game:
+    PARAMS: |-
+        OUT GRAPH graph, VECTOR out_weights, OPTIONAL VECTOR in_weights, *,
+        BOOLEAN loops=True, CHUNG_LU_VARIANT variant=ORIGINAL
     R:
       GATTR:
         name: Chung-Lu model
