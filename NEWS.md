@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9037
+
+## Features
+
+- `sample_chung_lu()` (#1416).
+
+## doc
+
+- Mark `sample_chung_lu()` as experimental.
+
+
 # igraph 2.0.3.9036
 
 ## Chore
