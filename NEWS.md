@@ -1,5 +1,17 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9041
+
+## Chore
+
+- Update vendored sources to igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972.
+
+  fix: fix crash during interruption in DrL
+  chore: add PR template
+
+- Update vendored sources to igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78.
+
+
 # igraph 2.0.3.9040
 
 ## Chore
