@@ -802,6 +802,8 @@ subgraph_centrality <- function(graph, diag = FALSE) {
   if (is_directed(graph)) {
     A <- A + Matrix::t(A)
   }
+  # This calls lapack and creates a dense matrix, but accepts the sparse matrix A
+  # We can choose to convert A to a dense matrix right away, but it doesn't matter
   eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
