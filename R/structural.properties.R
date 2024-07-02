@@ -2491,9 +2491,8 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' between vertices i and j and 0 otherwise.
 #'
 #' The Laplacian matrix can also be normalized, with several
-#' conventional normalization methods. \dQuote{unnormalized} Unnormalized Laplacian.
-#' \dQuote{symmetric} Symmetric normalized Laplacian. \dQuote{left} Left-stochastic normalized Laplacian.
-#' \dQuote{right} Right-stochastic normalized Laplacian.
+#' conventional normalization methods.
+#' See the "Normalization methods" section on this page.
 #'
 #' The weighted version of the Laplacian simply works with the weighted degree
 #' instead of the plain degree. I.e. (i,j) is d\[i\], the weighted degree of
@@ -2503,7 +2502,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'
 #' @param graph The input graph.
 #' @param normalization The normalization method to use when calculating the
-#'   Laplacian matrix.
+#'   Laplacian matrix. See the "Normalization methods" section on this page.
 #' @param normalized Deprecated, use `normalization` instead.
 #' @param weights An optional vector giving edge weights for weighted Laplacian
 #'   matrix. If this is `NULL` and the graph has an edge attribute called
@@ -2516,6 +2515,17 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
+#' @section Normalization methods:
+#'
+#' The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix
+#' \eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
+#'
+#' - "unnormalized": Unnormalized Laplacian, \eqn{L = D - A}.
+#' - "symmetric": Symmetrically normalized Laplacian,
+#' \eqn{L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}}{L = I - D^(-1/2) A D^(-1/2)}.
+#' - "left": Left-stochastic normalized Laplacian, \eqn{{L = I - D^{-1} A}}{L = I - D^-1 A}.
+#' - "rigth": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
+#'
 #' @examples
 #'
 #' g <- make_ring(10)
