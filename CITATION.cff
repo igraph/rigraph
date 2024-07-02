@@ -633,6 +633,7 @@ references:
   - family-names: Shannon
     given-names: Paul
   year: '2024'
+  doi: 10.18129/B9.bioc.graph
 - type: software
   title: cpp11
   abstract: 'cpp11: A C++11 Interface for R''s C Interface'
