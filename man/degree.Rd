@@ -2,6 +2,7 @@
 % Please edit documentation in R/structural.properties.R
 \name{degree}
 \alias{degree}
+\alias{max_degree}
 \alias{degree_distribution}
 \title{Degree and degree distribution of the vertices}
 \usage{
@@ -11,6 +12,14 @@ degree(
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
+)
+
+max_degree(
+  graph,
+  ...,
+  v = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE
 )
 
 degree_distribution(graph, cumulative = FALSE, ...)
@@ -30,11 +39,10 @@ this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.}
 \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 number of vertices in the graph.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
-
-\item{\dots}{Additional arguments to pass to \code{degree()}, e.g. \code{mode}
-is useful but also \code{v} and \code{loops} make sense.}
 }
 \value{
 For \code{degree()} a numeric vector of the same length as argument
@@ -43,6 +51,10 @@ For \code{degree()} a numeric vector of the same length as argument
 For \code{degree_distribution()} a numeric vector of the same length as the
 maximum degree plus one. The first element is the relative frequency zero
 degree vertices, the second vertices with degree one, etc.
+
+For \code{max_degree()}, the largest degree in the graph. When no vertices are
+selected, or when the input is the null graph, zero is returned as this
+is the smallest possible degree.
 }
 \description{
 The degree of a vertex is its most basic structural property, the number of
@@ -53,6 +65,7 @@ its adjacent edges.
 g <- make_ring(10)
 degree(g)
 g2 <- sample_gnp(1000, 10 / 1000)
+max_degree(g)
 degree_distribution(g2)
 
 }

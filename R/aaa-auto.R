@@ -1309,6 +1309,21 @@ reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c("default", "ratio"
   res
 }
 
+maxdegree_impl <- function(graph, ..., v=V(graph), mode=c("all", "out", "in", "total"), loops=TRUE) {
+  # Argument checks
+  check_dots_empty()
+  ensure_igraph(graph)
+  v <- as_igraph_vs(graph, v)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_maxdegree, graph, v-1, mode, loops)
+
+  res
+}
+
 density_impl <- function(graph, loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)

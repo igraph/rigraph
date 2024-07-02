@@ -483,7 +483,9 @@ igraph_constraint:
     IGNORE: RR, RC
 
 igraph_maxdegree:
-    IGNORE: RR, RC, RInit
+    PARAM_ORDER: graph, *, vids, ...
+    PARAM_NAMES:
+        vids: v
 
 igraph_density:
 
