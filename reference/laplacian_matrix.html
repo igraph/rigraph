@@ -96,7 +96,7 @@ matrix. The <code>Matrix</code> package is required for sparse matrices.</p></dd
 
 <dt>normalization</dt>
 <dd><p>The normalization method to use when calculating the
-Laplacian matrix.</p></dd>
+Laplacian matrix. See the "Normalization methods" section on this page.</p></dd>
 
 
 <dt>normalized</dt>
@@ -116,15 +116,26 @@ of rows and columns as the number of vertices in the graph and element (i,j)
 is d[i], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
 between vertices i and j and 0 otherwise.</p>
 <p>The Laplacian matrix can also be normalized, with several
-conventional normalization methods. “unnormalized” Unnormalized Laplacian.
-“symmetric” Symmetric normalized Laplacian. “left” Left-stochastic normalized Laplacian.
-“right” Right-stochastic normalized Laplacian.</p>
+conventional normalization methods.
+See the "Normalization methods" section on this page.</p>
 <p>The weighted version of the Laplacian simply works with the weighted degree
 instead of the plain degree. I.e. (i,j) is d[i], the weighted degree of
 vertex i if if i==j, -w if i!=j and there is an edge between vertices i and
 j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
 of the weights of its adjacent edges.</p>
     </div>
+    <div class="section level2">
+    <h2 id="normalization-methods">Normalization methods<a class="anchor" aria-label="anchor" href="#normalization-methods"></a></h2>
+    
+
+
+<p>The Laplacian matrix \(L\) is defined in terms of the adjacency matrix
+\(A\) and a diagonal matrix \(D\) containing the degrees as follows:</p><ul><li><p>"unnormalized": Unnormalized Laplacian, \(L = D - A\).</p></li>
+<li><p>"symmetric": Symmetrically normalized Laplacian,
+\(L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}\).</p></li>
+<li><p>"left": Left-stochastic normalized Laplacian, \({L = I - D^{-1} A}\).</p></li>
+<li><p>"rigth": Right-stochastic normalized Laplacian, \(L = I - A D^{-1}\).</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
