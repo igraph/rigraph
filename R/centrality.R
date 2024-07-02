@@ -1439,6 +1439,15 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' theory motivates use of this measure, you should be very careful to choose a
 #' decay parameter on a non-ad hoc basis.
 #'
+#' For directed networks, the Bonacich power measure can be understood as
+#' similar to status in the network where higher status nodes have more edges
+#' that point from them to others with status. Node A's centrality depends
+#' on the centrality of all the nodes that A points toward, and their centrality
+#' depends on the nodes they point toward, etc. Note, this means that a node
+#' with an out-degree of 0 will have a Bonacich power centrality of 0 as they
+#' do not point towards anyone. When using this with directed network it
+#' is important to think about the edge direction and what it represents.
+#'
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
@@ -1458,9 +1467,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when I get a better algorithm.  `power_centrality()` will not symmetrize your
-#' data before extracting eigenvectors; don't send this routine asymmetric
-#' matrices unless you really mean to do so.
+#' fixed when we get a better algorithm.
 #' @author Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
