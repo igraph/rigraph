@@ -766,16 +766,15 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' Subgraph centrality of a vertex measures the number of subgraphs a vertex
 #' participates in, weighting them according to their size.
 #'
-#' The subgraph centrality of a vertex is defined as the number of closed loops
-#' originating at the vertex, where longer loops are exponentially
-#' downweighted.
+#' The subgraph centrality of a vertex is defined as the number of closed walks
+#' originating at the vertex, where longer walks are downweighted by the
+#' factorial of their length.
 #'
 #' Currently the calculation is performed by explicitly calculating all
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
 #'
-#' @param graph The input graph, it should be undirected, but the
-#'   implementation does not check this currently.
+#' @param graph The input graph. It will be treated as undirected.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
@@ -799,7 +798,13 @@ subgraph_centrality <- function(graph, diag = FALSE) {
   if (!diag) {
     diag(A) <- 0
   }
-  eig <- eigen(A)
+  # Ignore edge directions in directed graphs
+  if (is_directed(graph)) {
+    A <- A + Matrix::t(A)
+  }
+  # This calls lapack and creates a dense matrix, but accepts the sparse matrix A
+  # We can choose to convert A to a dense matrix right away, but it doesn't matter
+  eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
