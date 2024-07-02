@@ -77,6 +77,14 @@ its adjacent edges.</p>
 <span>  normalized <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">max_degree</span><span class="op">(</span></span>
+<span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
+<span>  loops <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">degree_distribution</span><span class="op">(</span><span class="va">graph</span>, cumulative <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -106,14 +114,13 @@ this argument is ignored. “all” is a synonym of “total”.</p></dd>
 number of vertices in the graph.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt>cumulative</dt>
 <dd><p>Logical; whether the cumulative degree distribution is to
 be calculated.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>Additional arguments to pass to <code>degree()</code>, e.g. <code>mode</code>
-is useful but also <code>v</code> and <code>loops</code> make sense.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -127,6 +134,11 @@ is useful but also <code>v</code> and <code>loops</code> make sense.</p></dd>
 <p>For <code>degree_distribution()</code> a numeric vector of the same length as the
 maximum degree plus one. The first element is the relative frequency zero
 degree vertices, the second vertices with degree one, etc.</p>
+
+
+<p>For <code>max_degree()</code>, the largest degree in the graph. When no vertices are
+selected, or when the input is the null graph, zero is returned as this
+is the smallest possible degree.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -167,6 +179,8 @@ degree vertices, the second vertices with degree one, etc.</p>
 <span class="r-in"><span><span class="fu">degree</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2 2 2 2 2 2 2 2 2 2</span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">10</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">max_degree</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span><span class="fu">degree_distribution</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.001 0.000 0.002 0.005 0.026 0.038 0.058 0.101 0.118 0.117 0.118 0.113</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.098 0.081 0.057 0.027 0.019 0.010 0.004 0.004 0.000 0.002 0.001</span>
