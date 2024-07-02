@@ -25,7 +25,7 @@ attribute.}
 matrix. The \code{Matrix} package is required for sparse matrices.}
 
 \item{normalization}{The normalization method to use when calculating the
-Laplacian matrix.}
+Laplacian matrix. See the "Normalization methods" section on this page.}
 
 \item{normalized}{Deprecated, use \code{normalization} instead.}
 }
@@ -42,9 +42,8 @@ is d[i], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
 between vertices i and j and 0 otherwise.
 
 The Laplacian matrix can also be normalized, with several
-conventional normalization methods. \dQuote{unnormalized} Unnormalized Laplacian.
-\dQuote{symmetric} Symmetric normalized Laplacian. \dQuote{left} Left-stochastic normalized Laplacian.
-\dQuote{right} Right-stochastic normalized Laplacian.
+conventional normalization methods.
+See the "Normalization methods" section on this page.
 
 The weighted version of the Laplacian simply works with the weighted degree
 instead of the plain degree. I.e. (i,j) is d[i], the weighted degree of
@@ -52,6 +51,20 @@ vertex i if if i==j, -w if i!=j and there is an edge between vertices i and
 j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
 of the weights of its adjacent edges.
 }
+\section{Normalization methods}{
+
+
+The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix
+\eqn{A} and a diagonal matrix \eqn{D} containing the degrees as follows:
+\itemize{
+\item "unnormalized": Unnormalized Laplacian, \eqn{L = D - A}.
+\item "symmetric": Symmetrically normalized Laplacian,
+\eqn{L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}}{L = I - D^(-1/2) A D^(-1/2)}.
+\item "left": Left-stochastic normalized Laplacian, \eqn{{L = I - D^{-1} A}}{L = I - D^-1 A}.
+\item "rigth": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
+}
+}
+
 \examples{
 
 g <- make_ring(10)
