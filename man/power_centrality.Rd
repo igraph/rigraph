@@ -99,7 +99,7 @@ This function was ported (i.e. copied) from the SNA package.
 \section{Warning }{
  Singular adjacency matrices cause no end of headaches for
 this algorithm; thus, the routine may fail in certain cases.  This will be
-fixed when I get a better algorithm.
+fixed when we get a better algorithm.
 }
 
 \examples{
