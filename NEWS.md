@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9043
+
+## Bug fixes
+
+- `subgraph_centrality()` now ignores edge directions (#1414).
+
+- Remove unintended type conversions when using `disjoint_union()` (#1375).
+
+## Features
+
+- `max_degree()` (#1403).
+
+## Documentation
+
+- Improve documentation of normalization methods for laplacian_matrix() (#1420).
+
+## Testing
+
+- Rename test file to align with script structure.info.R (#1421).
+
+## Uncategorized
+
+- Update centrality.R (#1418).
+
+
 # igraph 2.0.3.9042
 
 ## Chore
