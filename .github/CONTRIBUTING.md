@@ -42,3 +42,9 @@ See the tidyverse guide on [how to create a great issue](https://code-review.tid
 We strive to align script and test names. 
 This is still a work-in-progress but the goal is to have code from `R/name.R` tested in `tests/testthat/test-name.R`.
 This allows easy toggling between the two files thanks to `usethis::use_test()` and `usethis::use_r()`.
+
+## Code of Conduct
+
+Please note that the igraph project is released with a
+[Contributor Code of Conduct](https://igraph.org/code-of-conduct.html). By contributing to this
+project you agree to abide by its terms.
