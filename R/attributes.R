@@ -519,7 +519,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
   if (!missing(index)) {
-    index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
+    index_is_natural_sequence <- (length(index) == vcount(graph) &&
+        identical(index, seq(1, vcount(graph))))
     if  (!index_is_natural_sequence) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
@@ -530,34 +531,34 @@ vertex.attributes <- function(graph, index = V(graph)) {
   res
 }
 
+set_value_at <- function(value, idx, length_out) {
+  out <- value[NULL]
+  length(out) <- length_out
+  out[idx] <- value
+  unname(out)
+}
+
 #' @export
 "vertex.attributes<-" <- function(graph, index = V(graph), value) {
   ensure_igraph(graph)
 
   assert_named_list(value)
 
-  if (any(sapply(value, length) != length(index))) {
+  if (!all(lengths(value) == length(index))) {
     stop("Invalid attribute value length, must match number of vertices")
   }
 
   if (!missing(index)) {
     index <- as_igraph_vs(graph, index)
 
-    if (any(duplicated(index)) || any(is.na(index))) {
+    if (anyDuplicated(index) || anyNA(index)) {
       stop("Invalid vertices in index")
     }
   }
 
-  if (!missing(index) &&
-    (length(index) != vcount(graph) || any(index != V(graph)))) {
-    vs <- V(graph)
-    for (i in seq_along(value)) {
-      tmp <- value[[i]]
-      length(tmp) <- 0
-      length(tmp) <- length(vs)
-      tmp[index] <- value[[i]]
-      value[[i]] <- tmp
-    }
+  index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
+  if (!missing(index) && !index_is_natural_sequence) {
+    value <- map(value, set_value_at, idx = index, length_out = length(V(graph)))
   }
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, value)
