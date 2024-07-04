@@ -37,3 +37,8 @@ See the tidyverse guide on [how to create a great issue](https://code-review.tid
 *  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. 
    Contributions with test cases included are easier to accept.  
 
+### Test files
+
+We strive to align script and test names. 
+This is still a work-in-progress but the goal is to have code from `R/name.R` tested in `tests/testthat/test-name.R`.
+This allows easy toggling between the two files thanks to `usethis::use_test()` and `usethis::use_r()`.
