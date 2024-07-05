@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9044
+
+## Bug fixes
+
+- Fix compatibility layer for `eccentricity()` and `radius()` (#1394).
+
+## Documentation
+
+- Add slightly tweaked boilerplate CONTRIBUTING.md (#1423).
+
+## Refactoring
+
+- Use 'better' logic for updating vertex attributes (#1330).
+
+
 # igraph 2.0.3.9043
 
 ## Bug fixes
