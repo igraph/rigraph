@@ -14,5 +14,5 @@ test_that("canonical_permutation works", {
   el1 <- el1[order(el1[, 1], el1[, 2]), ]
   el2 <- el2[order(el2[, 1], el2[, 2]), ]
 
-  expect_that(el1, equals(el2))
+  expect_equal(el1, el2)
 })

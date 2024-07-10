@@ -10,20 +10,19 @@ test_that("biconnected_components works", {
   }
 
   bc <- biconnected_components(g)
-  expect_that(bc$no, equals(3))
-  expect_that(sortlist(bc$tree_edges), equals(list(
-    c(11, 15, 18, 20),
-    c(1, 5, 8, 10), 21
-  )))
-  expect_that(sortlist(bc$component_edges), equals(list(11:20, 1:10, 21)))
-  expect_that(sortlist(bc$components), equals(list(1:5, c(1, 6), 6:10)))
-  expect_that(sort(as.vector(bc$articulation_points)), equals(c(1, 6)))
+  expect_equal(bc$no, 3)
+  expect_equal(sortlist(bc$tree_edges), list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21))
+  expect_equal(sortlist(bc$component_edges), list(11:20, 1:10, 21))
+  expect_equal(sortlist(bc$components), list(1:5, c(1, 6), 6:10))
+  expect_equal(sort(as.vector(bc$articulation_points)), c(1, 6))
 
-  expect_equal(sort(names(bc)), c("articulation_points",
-                                  "component_edges",
-                                  "components",
-                                  "no",
-                                  "tree_edges"))
+  expect_equal(sort(names(bc)), c(
+    "articulation_points",
+    "component_edges",
+    "components",
+    "no",
+    "tree_edges"
+  ))
   expect_s3_class(bc$articulation_points, "igraph.vs")
   expect_s3_class(bc$components[[1]], "igraph.vs")
   expect_s3_class(bc$component_edges[[1]], "igraph.es")
@@ -42,20 +41,19 @@ test_that("biconnected_components works without igraph.vs.es", {
   }
 
   bc <- biconnected_components(g)
-  expect_that(bc$no, equals(3))
-  expect_that(sortlist(bc$tree_edges), equals(list(
-    c(11, 15, 18, 20),
-    c(1, 5, 8, 10), 21
-  )))
-  expect_that(sortlist(bc$component_edges), equals(list(11:20, 1:10, 21)))
-  expect_that(sortlist(bc$components), equals(list(1:5, c(1, 6), 6:10)))
-  expect_that(sort(bc$articulation_points), equals(c(1, 6)))
+  expect_equal(bc$no, 3)
+  expect_equal(sortlist(bc$tree_edges), list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21))
+  expect_equal(sortlist(bc$component_edges), list(11:20, 1:10, 21))
+  expect_equal(sortlist(bc$components), list(1:5, c(1, 6), 6:10))
+  expect_equal(sort(bc$articulation_points), c(1, 6))
 
-  expect_equal(sort(names(bc)), c("articulation_points",
-                                  "component_edges",
-                                  "components",
-                                  "no",
-                                  "tree_edges"))
+  expect_equal(sort(names(bc)), c(
+    "articulation_points",
+    "component_edges",
+    "components",
+    "no",
+    "tree_edges"
+  ))
 })
 
 test_that("is_biconnected works", {
@@ -71,6 +69,6 @@ test_that("is_biconnected works", {
   g <- make_full_graph(3)
   expect_true(is_biconnected(g))
 
-  g <- make_graph(c(1,2, 2,3, 3,1, 1,4, 4,4))
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 1, 4, 4, 4))
   expect_false(is_biconnected(g))
 })

@@ -13,17 +13,13 @@ test_that("closeness works", {
   )
 
   clo <- closeness(kite) * (vcount(kite) - 1)
-  expect_that(
+  expect_equal(
     round(sort(clo, decreasing = TRUE), 3),
-    equals(c(
-      Fernando = 0.643, Garth = 0.643, Diane = 0.600,
-      Heather = 0.600, Andre = 0.529, Beverly = 0.529,
-      Carol = 0.500, Ed = 0.500, Ike = 0.429, Jane = 0.310
-    ))
+    c(Fernando = 0.643, Garth = 0.643, Diane = 0.600, Heather = 0.600, Andre = 0.529, Beverly = 0.529, Carol = 0.500, Ed = 0.500, Ike = 0.429, Jane = 0.310)
   )
 
   clo2 <- closeness(kite, normalized = TRUE)
-  expect_that(clo, equals(clo2))
+  expect_equal(clo, clo2)
 })
 
 ## TODO: weighted closeness
@@ -44,7 +40,7 @@ test_that("closeness centralization works", {
 
   c1 <- closeness(kite, normalized = TRUE)
   c2 <- centr_clo(kite)
-  expect_that(unname(c1), equals(c2$res))
-  expect_that(c2$centralization, equals(0.270374931581828))
-  expect_that(c2$theoretical_max, equals(4.23529411764706))
+  expect_equal(unname(c1), c2$res)
+  expect_equal(c2$centralization, 0.270374931581828)
+  expect_equal(c2$theoretical_max, 4.23529411764706)
 })

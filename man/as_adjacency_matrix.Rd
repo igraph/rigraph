@@ -9,7 +9,7 @@ as_adjacency_matrix(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,
-  edges = FALSE,
+  edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
 )
@@ -18,7 +18,7 @@ as_adj(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,
-  edges = FALSE,
+  edges = deprecated(),
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
 )

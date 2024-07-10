@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_star}
 \alias{make_star}
-\alias{graph.star}
 \alias{star}
 \title{Create a star graph, a tree with n vertices and n - 1 leaves}
 \usage{

@@ -38,10 +38,10 @@ test_that("Undirected, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_la$D, equals(ss$values[1:no]))
-  expect_that(au_la$D, equals(ss$values[1:no]))
-  expect_that(std(as_la$X), equals(std(U[, 1:no])))
-  expect_that(std(au_la$X), equals(X[, 1:no]))
+  expect_equal(as_la$D, ss$values[1:no])
+  expect_equal(au_la$D, ss$values[1:no])
+  expect_equal(std(as_la$X), std(U[, 1:no]))
+  expect_equal(std(au_la$X), X[, 1:no])
 
   au_lm <- embed_adjacency_matrix(g,
     no = no, which = "lm",
@@ -52,10 +52,10 @@ test_that("Undirected, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_lm$D, equals(mag_sort(ss$values)[1:no]))
-  expect_that(au_lm$D, equals(mag_sort(ss$values)[1:no]))
-  expect_that(std(as_lm$X), equals(std(U[, mag_order(ss$values)][, 1:no])))
-  expect_that(std(au_lm$X), equals(X[, mag_order(ss$values)][, 1:no]))
+  expect_equal(as_lm$D, mag_sort(ss$values)[1:no])
+  expect_equal(au_lm$D, mag_sort(ss$values)[1:no])
+  expect_equal(std(as_lm$X), std(U[, mag_order(ss$values)][, 1:no]))
+  expect_equal(std(au_lm$X), X[, mag_order(ss$values)][, 1:no])
 
   au_sa <- embed_adjacency_matrix(g,
     no = no, which = "sa",
@@ -66,10 +66,10 @@ test_that("Undirected, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_sa$D, equals(ss$values[vcount(g) - 1:no + 1]))
-  expect_that(au_sa$D, equals(ss$values[vcount(g) - 1:no + 1]))
-  expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
-  expect_that(std(au_sa$X), equals(X[, vcount(g) - 1:no + 1]))
+  expect_equal(as_sa$D, ss$values[vcount(g) - 1:no + 1])
+  expect_equal(au_sa$D, ss$values[vcount(g) - 1:no + 1])
+  expect_equal(std(as_sa$X), std(U[, vcount(g) - 1:no + 1]))
+  expect_equal(std(au_sa$X), X[, vcount(g) - 1:no + 1])
 })
 
 test_that("Undirected, weighted case works", {
@@ -94,10 +94,10 @@ test_that("Undirected, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_la$D, equals(ss$values[1:no]))
-  expect_that(std(as_la$X), equals(std(U[, 1:no])))
-  expect_that(au_la$D, equals(ss$values[1:no]))
-  expect_that(std(au_la$X), equals(X[, 1:no]))
+  expect_equal(as_la$D, ss$values[1:no])
+  expect_equal(std(as_la$X), std(U[, 1:no]))
+  expect_equal(au_la$D, ss$values[1:no])
+  expect_equal(std(au_la$X), X[, 1:no])
 
   au_lm <- embed_adjacency_matrix(g,
     no = no, which = "lm",
@@ -108,10 +108,10 @@ test_that("Undirected, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_lm$D, equals(mag_sort(ss$values)[1:no]))
-  expect_that(au_lm$D, equals(mag_sort(ss$values)[1:no]))
-  expect_that(std(as_lm$X), equals(std(U[, mag_order(ss$values)][, 1:no])))
-  expect_that(std(au_lm$X), equals(X[, mag_order(ss$values)][, 1:no]))
+  expect_equal(as_lm$D, mag_sort(ss$values)[1:no])
+  expect_equal(au_lm$D, mag_sort(ss$values)[1:no])
+  expect_equal(std(as_lm$X), std(U[, mag_order(ss$values)][, 1:no]))
+  expect_equal(std(au_lm$X), X[, mag_order(ss$values)][, 1:no])
 
   au_sa <- embed_adjacency_matrix(g,
     no = no, which = "sa",
@@ -122,8 +122,8 @@ test_that("Undirected, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
-  expect_that(std(au_sa$X), equals(X[, vcount(g) - 1:no + 1]))
+  expect_equal(std(as_sa$X), std(U[, vcount(g) - 1:no + 1]))
+  expect_equal(std(au_sa$X), X[, vcount(g) - 1:no + 1])
 })
 
 test_that("Directed, unweighted case works", {
@@ -149,12 +149,12 @@ test_that("Directed, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_la$D, equals(ss$d[1:no]))
-  expect_that(au_la$D, equals(ss$d[1:no]))
-  expect_that(std(as_la$X), equals(std(U[, 1:no])))
-  expect_that(std(as_la$Y), equals(std(V[, 1:no])))
-  expect_that(std(au_la$X), equals(X[, 1:no]))
-  expect_that(std(au_la$Y), equals(Y[, 1:no]))
+  expect_equal(as_la$D, ss$d[1:no])
+  expect_equal(au_la$D, ss$d[1:no])
+  expect_equal(std(as_la$X), std(U[, 1:no]))
+  expect_equal(std(as_la$Y), std(V[, 1:no]))
+  expect_equal(std(au_la$X), X[, 1:no])
+  expect_equal(std(au_la$Y), Y[, 1:no])
 
   au_lm <- embed_adjacency_matrix(g,
     no = no, which = "lm",
@@ -165,12 +165,12 @@ test_that("Directed, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_lm$D, equals(ss$d[1:no]))
-  expect_that(au_lm$D, equals(ss$d[1:no]))
-  expect_that(std(as_lm$X), equals(std(U[, 1:no])))
-  expect_that(std(as_lm$Y), equals(std(V[, 1:no])))
-  expect_that(std(au_lm$X), equals(X[, 1:no]))
-  expect_that(std(au_lm$Y), equals(Y[, 1:no]))
+  expect_equal(as_lm$D, ss$d[1:no])
+  expect_equal(au_lm$D, ss$d[1:no])
+  expect_equal(std(as_lm$X), std(U[, 1:no]))
+  expect_equal(std(as_lm$Y), std(V[, 1:no]))
+  expect_equal(std(au_lm$X), X[, 1:no])
+  expect_equal(std(au_lm$Y), Y[, 1:no])
 
   au_sa <- embed_adjacency_matrix(g,
     no = no, which = "sa",
@@ -181,12 +181,12 @@ test_that("Directed, unweighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(as_sa$D, equals(ss$d[vcount(g) - 1:no + 1]))
-  expect_that(au_sa$D, equals(ss$d[vcount(g) - 1:no + 1]))
-  expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
-  expect_that(std(as_sa$Y), equals(std(V[, vcount(g) - 1:no + 1])))
-  expect_that(std(au_sa$X), equals(X[, vcount(g) - 1:no + 1]))
-  expect_that(std(au_sa$Y), equals(Y[, vcount(g) - 1:no + 1]))
+  expect_equal(as_sa$D, ss$d[vcount(g) - 1:no + 1])
+  expect_equal(au_sa$D, ss$d[vcount(g) - 1:no + 1])
+  expect_equal(std(as_sa$X), std(U[, vcount(g) - 1:no + 1]))
+  expect_equal(std(as_sa$Y), std(V[, vcount(g) - 1:no + 1]))
+  expect_equal(std(au_sa$X), X[, vcount(g) - 1:no + 1])
+  expect_equal(std(au_sa$Y), Y[, vcount(g) - 1:no + 1])
 })
 
 test_that("Directed, weighted case works", {
@@ -213,10 +213,10 @@ test_that("Directed, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(std(as_la$X), equals(std(U[, 1:no])))
-  expect_that(std(as_la$Y), equals(std(V[, 1:no])))
-  expect_that(std(au_la$X), equals(X[, 1:no]))
-  expect_that(std(au_la$Y), equals(Y[, 1:no]))
+  expect_equal(std(as_la$X), std(U[, 1:no]))
+  expect_equal(std(as_la$Y), std(V[, 1:no]))
+  expect_equal(std(au_la$X), X[, 1:no])
+  expect_equal(std(au_la$Y), Y[, 1:no])
 
   au_lm <- embed_adjacency_matrix(g,
     no = no, which = "lm",
@@ -227,10 +227,10 @@ test_that("Directed, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(std(as_lm$X), equals(std(U[, 1:no])))
-  expect_that(std(as_lm$Y), equals(std(V[, 1:no])))
-  expect_that(std(au_lm$X), equals(X[, 1:no]))
-  expect_that(std(au_lm$Y), equals(Y[, 1:no]))
+  expect_equal(std(as_lm$X), std(U[, 1:no]))
+  expect_equal(std(as_lm$Y), std(V[, 1:no]))
+  expect_equal(std(au_lm$X), X[, 1:no])
+  expect_equal(std(au_lm$Y), Y[, 1:no])
 
   au_sa <- embed_adjacency_matrix(g,
     no = no, which = "sa",
@@ -241,10 +241,10 @@ test_that("Directed, weighted case works", {
     cvec = degree(g) / 2, scaled = FALSE
   )
 
-  expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
-  expect_that(std(as_sa$Y), equals(std(V[, vcount(g) - 1:no + 1])))
-  expect_that(std(au_sa$X), equals(X[, vcount(g) - 1:no + 1]))
-  expect_that(std(au_sa$Y), equals(Y[, vcount(g) - 1:no + 1]))
+  expect_equal(std(as_sa$X), std(U[, vcount(g) - 1:no + 1]))
+  expect_equal(std(as_sa$Y), std(V[, vcount(g) - 1:no + 1]))
+  expect_equal(std(au_sa$X), X[, vcount(g) - 1:no + 1])
+  expect_equal(std(au_sa$Y), Y[, vcount(g) - 1:no + 1])
 })
 
 test_that("Issue #50 is resolved", {
@@ -257,7 +257,7 @@ test_that("Issue #50 is resolved", {
   E(g)$weight <- w
   X2 <- embed_adjacency_matrix(g, 2)
 
-  expect_that(X1$D, equals(X2$D))
+  expect_equal(X1$D, X2$D)
 })
 
 test_that("Issue #51 is resolved", {
@@ -270,6 +270,6 @@ test_that("Issue #51 is resolved", {
 
   for (i in 1:25) {
     ase <- embed_adjacency_matrix(g, 2)
-    expect_that(mean(ase$X %*% t(ase$Y)), equals(0.299981018354173))
+    expect_equal(mean(ase$X %*% t(ase$Y)), 0.299981018354173)
   }
 })

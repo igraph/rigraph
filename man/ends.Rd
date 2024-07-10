@@ -3,7 +3,6 @@
 \name{ends}
 \alias{ends}
 \alias{get.edges}
-\alias{get.edge}
 \title{Incident vertices of some graph edges}
 \usage{
 ends(graph, es, names = TRUE)

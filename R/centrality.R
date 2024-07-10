@@ -40,8 +40,23 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @keywords internal
 #' @export
 hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_score()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `authority_score()` to create a more
+#' consistent API.
+#' @inheritParams authority_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_score()")
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Strength or weighted vertex degree
@@ -132,21 +147,6 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
-} # nocov end
-
-#' Kleinberg's hub and authority centrality scores.
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `authority.score()` was renamed to `authority_score()` to create a more
-#' consistent API.
-#' @inheritParams authority_score
-#' @keywords internal
-#' @export
-authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -766,16 +766,15 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' Subgraph centrality of a vertex measures the number of subgraphs a vertex
 #' participates in, weighting them according to their size.
 #'
-#' The subgraph centrality of a vertex is defined as the number of closed loops
-#' originating at the vertex, where longer loops are exponentially
-#' downweighted.
+#' The subgraph centrality of a vertex is defined as the number of closed walks
+#' originating at the vertex, where longer walks are downweighted by the
+#' factorial of their length.
 #'
 #' Currently the calculation is performed by explicitly calculating all
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
 #'
-#' @param graph The input graph, it should be undirected, but the
-#'   implementation does not check this currently.
+#' @param graph The input graph. It will be treated as undirected.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
@@ -799,7 +798,13 @@ subgraph_centrality <- function(graph, diag = FALSE) {
   if (!diag) {
     diag(A) <- 0
   }
-  eig <- eigen(A)
+  # Ignore edge directions in directed graphs
+  if (is_directed(graph)) {
+    A <- A + Matrix::t(A)
+  }
+  # This calls lapack and creates a dense matrix, but accepts the sparse matrix A
+  # We can choose to convert A to a dense matrix right away, but it doesn't matter
+  eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
@@ -1105,6 +1110,7 @@ diversity <- diversity_impl
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \item{vector}{The hub or authority scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
@@ -1124,36 +1130,29 @@ diversity <- diversity_impl
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
-#' hub_score(g)$vector
-#' authority_score(g)$vector
+#' hits_scores(g)
 #'
 #' ## A ring
 #' g2 <- make_ring(10)
-#' hub_score(g2)$vector
-#' authority_score(g2)$vector
+#' hits_scores(g2)
 #' @family centrality
-hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      "hub_score(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
-    )
-    options <- options()
-  }
+  rlang::check_dots_empty()
 
-  hub_score_impl(graph = graph,
-                 scale = scale,
-                 weights = weights,
-                 options = options)
+  hub_and_authority_scores_impl(graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
 }
 
+#' @title Kleinberg's authority centrality scores.
 #' @rdname hub_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.4", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1164,10 +1163,50 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     options <- arpack_defaults()
   }
 
-  authority_score_impl(graph = graph,
-                       scale = scale,
-                       weights = weights,
-                       options = options)
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$hub <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
+}
+
+#' @title Kleinberg's hub centrality scores.
+#' @rdname hub_score
+#' @param graph The input graph.
+#' @param scale Logical scalar, whether to scale the result to have a maximum
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted
+#'   scores. If the graph has a `weight` edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
+#' @family centrality
+#' @export
+hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  if (is.function(options)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options)
+  scores$authority <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
 }
 
 #' The Page Rank algorithm
@@ -1400,6 +1439,15 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' theory motivates use of this measure, you should be very careful to choose a
 #' decay parameter on a non-ad hoc basis.
 #'
+#' For directed networks, the Bonacich power measure can be understood as
+#' similar to status in the network where higher status nodes have more edges
+#' that point from them to others with status. Node A's centrality depends
+#' on the centrality of all the nodes that A points toward, and their centrality
+#' depends on the nodes they point toward, etc. Note, this means that a node
+#' with an out-degree of 0 will have a Bonacich power centrality of 0 as they
+#' do not point towards anyone. When using this with directed network it
+#' is important to think about the edge direction and what it represents.
+#'
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
@@ -1419,9 +1467,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when I get a better algorithm.  `power_centrality()` will not symmetrize your
-#' data before extracting eigenvectors; don't send this routine asymmetric
-#' matrices unless you really mean to do so.
+#' fixed when we get a better algorithm.
 #' @author Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}

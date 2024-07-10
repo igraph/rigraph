@@ -13,7 +13,7 @@ test_that("make_bipartite_graph works", {
   g2 <- make_bipartite_graph(seq_len(nrow(I) + ncol(I)) > nrow(I), edges)
   I2 <- as_biadjacency_matrix(g2)
 
-  expect_that(I2, is_equivalent_to(I))
+  expect_equal(I2, I, ignore_attr = TRUE)
 })
 
 test_that("make_bipartite_graph works with vertex names", {
@@ -22,8 +22,8 @@ test_that("make_bipartite_graph works with vertex names", {
   edges <- c("A", "B", "C", "D", "E", "F", "A", "D", "D", "E", "B", "C", "C", "F")
   g <- make_bipartite_graph(types, edges)
 
-  expect_that(V(g)$name, is_equivalent_to(c("A", "B", "C", "D", "E", "F")))
-  expect_that(V(g)$type, is_equivalent_to(c(FALSE, TRUE, FALSE, TRUE, FALSE, TRUE)))
+  expect_equal(V(g)$name, c("A", "B", "C", "D", "E", "F"), ignore_attr = TRUE)
+  expect_equal(V(g)$type, c(FALSE, TRUE, FALSE, TRUE, FALSE, TRUE), ignore_attr = TRUE)
 
   expect_error(make_bipartite_graph(types, c(edges, "Q")), "edge vector contains a vertex name that is not found")
 })

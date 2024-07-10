@@ -1,13 +1,13 @@
 test_that("Sampling sphere surface works", {
   withr::local_seed(42)
   s1 <- sample_sphere_surface(4, 100, positive = FALSE)
-  expect_that(colSums(s1^2), equals(rep(1, 100)))
+  expect_equal(colSums(s1^2), rep(1, 100))
 
   s2 <- sample_sphere_surface(3, 100, radius = 2, positive = FALSE)
-  expect_that(sqrt(colSums(s2^2)), equals(rep(2, 100)))
+  expect_equal(sqrt(colSums(s2^2)), rep(2, 100))
 
   s3 <- sample_sphere_surface(2, 100, radius = 1 / 2, positive = TRUE)
-  expect_that(sqrt(colSums(s3^2)), equals(rep(1 / 2, 100)))
+  expect_equal(sqrt(colSums(s3^2)), rep(1 / 2, 100))
   expect_true(all(s3 >= 0))
 })
 

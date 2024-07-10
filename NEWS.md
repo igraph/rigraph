@@ -1,5 +1,272 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9044
+
+## Bug fixes
+
+- Fix compatibility layer for `eccentricity()` and `radius()` (#1394).
+
+## Documentation
+
+- Add slightly tweaked boilerplate CONTRIBUTING.md (#1423).
+
+## Refactoring
+
+- Use 'better' logic for updating vertex attributes (#1330).
+
+
+# igraph 2.0.3.9043
+
+## Bug fixes
+
+- `subgraph_centrality()` now ignores edge directions (#1414).
+
+- Remove unintended type conversions when using `disjoint_union()` (#1375).
+
+## Features
+
+- `max_degree()` (#1403).
+
+## Documentation
+
+- Improve documentation of normalization methods for laplacian_matrix() (#1420).
+
+## Testing
+
+- Rename test file to align with script structure.info.R (#1421).
+
+## Uncategorized
+
+- Update centrality.R (#1418).
+
+
+# igraph 2.0.3.9042
+
+## Chore
+
+- Update vendored sources to igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8.
+
+
+# igraph 2.0.3.9041
+
+## Chore
+
+- Update vendored sources to igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972.
+
+  fix: fix crash during interruption in DrL
+  chore: add PR template
+
+- Update vendored sources to igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78.
+
+
+# igraph 2.0.3.9040
+
+## Chore
+
+- Update vendored sources to igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322.
+
+
+# igraph 2.0.3.9039
+
+## Chore
+
+- Update vendored sources to igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7.
+
+
+# igraph 2.0.3.9038
+
+## Chore
+
+- Update vendored sources to igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0.
+
+
+# igraph 2.0.3.9037
+
+## Features
+
+- `sample_chung_lu()` (#1416).
+
+## doc
+
+- Mark `sample_chung_lu()` as experimental.
+
+
+# igraph 2.0.3.9036
+
+## Chore
+
+- Update vendored sources to igraph/igraph@59899fbda04c28af73309851320495ed72542094.
+
+
+# igraph 2.0.3.9035
+
+## Chore
+
+- Update vendored sources to igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593.
+
+  fuzzer: use libxml2 2.13.1
+  refactor: name CHUNG_LU_GRG to CHUNG_LU_MAXENT (no release has been issued with the GRG naming so far)
+
+
+# igraph 2.0.3.9034
+
+## Chore
+
+- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
+
+## Documentation
+
+- Fix typos in `?plot.common` (@gvegayon) (#1413).
+
+## Refactoring
+
+- Use lifecycle in R/iterators.R (#1399).
+
+- Use `lifecycle::deprecated()` now that we can (#1397).
+
+## Breaking changes
+
+- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
+
+## Uncategorized
+
+- More auto-generation (#1368).
+
+
+# igraph 2.0.3.9033
+
+## Chore
+
+- Update vendored sources to igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966.
+
+  chore: update changelog
+  refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+## Testing
+
+- Remove expect_that() definition (#1412).
+
+
+# igraph 2.0.3.9032
+
+## Bug fixes
+
+- Put back header files for consumption by Bison (#1406).
+
+## Features
+
+- Remove deprecated functions before 1.0 (#1352).
+
+## Continuous integration
+
+- Try installing {graph} again (#1407).
+
+## Testing
+
+- Stop using throws_error() in test-bipartite.projection.R (#1409).
+
+- Stop using prints_text() in test-bipartite.random.game.R (#1408).
+
+- Stop using is_identical_to() in test-maximal_cliques.R.
+
+- Stop using gives_warning() in test-operators4.R.
+
+- Stop using gives_warning() in test-dot.product.game.R.
+
+- Stop using expect_that() in test-trees.R.
+
+- Remove use of expect_that() in test-clusters.R.
+
+
+# igraph 2.0.3.9031
+
+## Chore
+
+- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
+
+  interface: update chung_lu_game() parameter names
+
+- Update vendored sources to igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5.
+
+
+# igraph 2.0.3.9030
+
+## Features
+
+- Update C/igraph (#1378).
+
+
+# igraph 2.0.3.9029
+
+## Testing
+
+- Results.
+
+
+# igraph 2.0.3.9028
+
+## Chore
+
+- Infrastructure to review revdepcheck results (#1402).
+
+
+# igraph 2.0.3.9027
+
+## doc
+
+- Make `edge_density()` examples relevant.
+
+
+# igraph 2.0.3.9026
+
+## Bug fixes
+
+- `sample_degseq()` works with old method names again (#1393).
+
+## Chore
+
+- Results.
+
+## Refactoring
+
+- Expect_that(is_equivalent()) (#1395).
+
+- Breaking change: change make.R (#1390).
+
+## Breaking changes
+
+- Breaking change: change make.R (#1390).
+
+
+# igraph 2.0.3.9025
+
+## doc
+
+- Update troubleshooting document.
+
+## Uncategorized
+
+- Expect_equal() instead of expect_that(equals()) (#1391).
+
+- Refactoring around adjacency.R (#1370).
+
+
+# igraph 2.0.3.9024
+
+## Continuous integration
+
+- Install rhub.
+
+
+# igraph 2.0.3.9023
+
+## Continuous integration
+
+- Fix vendoring workflow.
+
+
 # igraph 2.0.3.9022
 
 ## Bug fixes

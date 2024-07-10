@@ -16,12 +16,12 @@ test_that("spectrum works for symmetric matrices", {
   e0 <- eigen(as_adj(g, sparse = FALSE))
 
   e1 <- spectrum(g, which = list(howmany = 4, pos = "LA"))
-  expect_that(e0$values[1:4], equals(e1$values))
-  expect_that(std(e0$vectors[, 1:4]), equals(std(e1$vectors)))
+  expect_equal(e0$values[1:4], e1$values)
+  expect_equal(std(e0$vectors[, 1:4]), std(e1$vectors))
 
   e2 <- spectrum(g, which = list(howmany = 4, pos = "SA"))
-  expect_that(e0$values[50:47], equals(e2$values))
-  expect_that(std(e0$vectors[, 50:47]), equals(std(e2$vectors)))
+  expect_equal(e0$values[50:47], e2$values)
+  expect_equal(std(e0$vectors[, 50:47]), std(e2$vectors))
 
   rlang::local_options(lifecycle_verbosity = "warning")
   expect_warning(

@@ -30,6 +30,20 @@ test_that("disjoint_union() works", {
   )
 })
 
+test_that("disjoint_union() does not convert types", {
+  # https://github.com/igraph/rigraph/issues/761
+
+  g1 <- make_graph(~ A - -B)
+  g2 <- make_graph(~ D - -E)
+
+  g1 <- set_edge_attr(g1, "date", value = as.POSIXct(c("2021-01-01 01:01:01")))
+  g2 <- set_edge_attr(g2, "date", value = as.POSIXct(c("2021-03-03 03:03:03")))
+
+  u <- disjoint_union(g1, g2)
+
+  expect_s3_class(E(u)$date, c("POSIXct", "POSIXt"))
+})
+
 test_that("intersection() works", {
 
   g1 <- make_ring(10)

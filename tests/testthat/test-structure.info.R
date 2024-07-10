@@ -1,4 +1,4 @@
-test_that("are_adjacent works", {
+test_that("are_adjacent() works", {
   g <- graph_from_literal(A - B - C, B - D)
   expect_true(are_adjacent(g, "A", "B"))
   expect_true(are_adjacent(g, "B", "A"))

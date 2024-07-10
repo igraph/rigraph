@@ -14,21 +14,11 @@ test_that("betweenness works for kite graph", {
   nf <- (vcount(kite) - 1) * (vcount(kite) - 2) / 2
   bet <- structure(betweenness(kite) / nf, names = V(kite)$name)
   bet <- round(sort(bet, decreasing = TRUE), 3)
-  expect_that(bet, equals(structure(
-    c(
-      0.389, 0.231, 0.231, 0.222, 0.102,
-      0.023, 0.023, 0.000, 0.000, 0.000
-    ),
-    names = c(
-      "Heather", "Fernando",
-      "Garth", "Ike", "Diane", "Andre",
-      "Beverly", "Carol", "Ed", "Jane"
-    )
-  )))
+  expect_equal(bet, structure(c(0.389, 0.231, 0.231, 0.222, 0.102, 0.023, 0.023, 0.000, 0.000, 0.000), names = c("Heather", "Fernando", "Garth", "Ike", "Diane", "Andre", "Beverly", "Carol", "Ed", "Jane")))
 
   bet2 <- structure(betweenness(kite, normalized = TRUE), names = V(kite)$name)
   bet2 <- round(sort(bet2, decreasing = TRUE), 3)
-  expect_that(bet2, equals(bet))
+  expect_equal(bet2, bet)
 })
 
 test_that("weighted betweenness works", {
@@ -55,22 +45,22 @@ test_that("weighted betweenness works", {
   )
 
   bet <- betweenness(nontriv)
-  expect_that(bet, equals(nontrivRes))
+  expect_equal(bet, nontrivRes)
 })
 
 test_that("normalization works well", {
-  g1 <- graph_from_literal(0 +-+ 1 +-+ 2)
+  g1 <- graph_from_literal(0 + -+1 + -+2)
 
   b11 <- betweenness(g1, normalized = TRUE, directed = FALSE)
-  expect_that(b11, equals(c("0" = 0, "1" = 1, "2" = 0)))
+  expect_equal(b11, c("0" = 0, "1" = 1, "2" = 0))
 
   b12 <- betweenness(g1, normalized = TRUE, directed = TRUE)
-  expect_that(b12, equals(c("0" = 0, "1" = 1, "2" = 0)))
+  expect_equal(b12, c("0" = 0, "1" = 1, "2" = 0))
 
-  g2 <- graph_from_literal(0 --- 1 --- 2)
+  g2 <- graph_from_literal(0 - --1 - --2)
 
   b2 <- betweenness(g2, normalized = TRUE)
-  expect_that(b2, equals(c("0" = 0, "1" = 1, "2" = 0)))
+  expect_equal(b2, c("0" = 0, "1" = 1, "2" = 0))
 })
 
 test_that("shortest paths are compared with tolerance when calculating betweenness", {
@@ -94,5 +84,5 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
   g <- graph_from_data_frame(edges, directed = FALSE)
   result <- betweenness(g, weights = edges.dists)
 
-  expect_that(result[1:5], equals(c("1" = 0, "2" = 44, "3" = 71, "4" = 36.5, "6" = 44)))
+  expect_equal(result[1:5], c("1" = 0, "2" = 44, "3" = 71, "4" = 36.5, "6" = 44))
 })

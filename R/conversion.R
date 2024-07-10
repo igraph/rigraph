@@ -228,7 +228,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 }
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
-                                 attr = NULL, edges = FALSE, names = TRUE) {
+                                 attr = NULL, names = TRUE) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -238,10 +238,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   el <- as_edgelist(graph, names = FALSE)
   use.last.ij <- FALSE
 
-  if (edges) {
-    value <- seq_len(nrow(el))
-    use.last.ij <- TRUE
-  } else if (!is.null(attr)) {
+  if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
       stop("no such edge attribute")
@@ -340,16 +337,16 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' @family conversion
 #' @export
 as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
-                                attr = NULL, edges = FALSE, names = TRUE,
+                                attr = NULL, edges = deprecated(), names = TRUE,
                                 sparse = igraph_opt("sparsematrices")) {
   ensure_igraph(graph)
 
-  if (!missing(edges) && isTRUE(edges)) {
+  if (lifecycle::is_present(edges) && isTRUE(edges)) {
     lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
   }
 
   if (sparse) {
-    get.adjacency.sparse(graph, type = type, attr = attr, edges = edges, names = names)
+    get.adjacency.sparse(graph, type = type, attr = attr, names = names)
   } else {
     get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
   }

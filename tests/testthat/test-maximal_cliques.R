@@ -123,7 +123,7 @@ test_that("Maximal cliques work", {
   cl1 <- mysort(bk4(G, min = 3))
   cl2 <- mysort(unvs(max_cliques(G, min = 3)))
 
-  expect_that(cl1, is_identical_to(cl2))
+  expect_identical(cl1, cl2)
 })
 
 test_that("Maximal cliques work for subsets", {
@@ -136,7 +136,7 @@ test_that("Maximal cliques work for subsets", {
   c2 <- unvs(max_cliques(G, min = 8, subset = 14:100))
   cl2 <- mysort(c(c1, c2))
 
-  expect_that(cl1, is_identical_to(cl2))
+  expect_identical(cl1, cl2)
 })
 
 test_that("Counting maximal cliques works", {
@@ -149,5 +149,5 @@ test_that("Counting maximal cliques works", {
   c2 <- count_max_cliques(G, min = 8, subset = 14:100)
   cl2 <- c1 + c2
 
-  expect_that(cl1, is_identical_to(cl2))
+  expect_identical(cl1, cl2)
 })

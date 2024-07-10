@@ -20,12 +20,6 @@ local_rng_version <- function(version, .local_envir = parent.frame()) {
   orig
 }
 
-expect_that <- function(object, condition, info = NULL, label = NULL) {
-  suppressWarnings(
-    condition(object)
-  )
-}
-
 expect_isomorphic <- function(g1, g2) {
   expect_true(graph.isomorphic(g1, g2))
 }

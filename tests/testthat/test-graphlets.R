@@ -9,17 +9,17 @@ test_that("Graphlets work for some simple graphs", {
   E(g)$weight <- 1
   gl <- graphlet_basis(g)
 
-  expect_that(names(gl), equals(c("cliques", "thresholds")))
-  expect_that(length(gl$cliques), equals(1))
-  expect_that(sort(gl$cliques[[1]]), equals(1:vcount(g)))
-  expect_that(gl$thresholds, equals(1))
+  expect_equal(names(gl), c("cliques", "thresholds"))
+  expect_equal(length(gl$cliques), 1)
+  expect_equal(sort(gl$cliques[[1]]), 1:vcount(g))
+  expect_equal(gl$thresholds, 1)
 
   g2 <- make_full_graph(5)
   E(g2)$weight <- 1
   E(g2)[1 %--% 2]$weight <- 2
   gl2 <- sortgl(graphlet_basis(g2))
 
-  expect_that(gl2, equals(list(cliques = list(1:2, 1:5), thresholds = c(2, 1))))
+  expect_equal(gl2, list(cliques = list(1:2, 1:5), thresholds = c(2, 1)))
 })
 
 test_that("Graphlets filtering works", {
@@ -32,8 +32,8 @@ test_that("Graphlets filtering works", {
   g <- graph_from_data_frame(gt, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
   gl <- sortgl(graphlet_basis(g))
 
-  expect_that(gl$cliques, equals(list(1:3, 2:5)))
-  expect_that(gl$thresholds, equals(c(8, 5)))
+  expect_equal(gl$cliques, list(1:3, 2:5))
+  expect_equal(gl$thresholds, c(8, 5))
 })
 
 ## Naive version of graphlets
@@ -88,7 +88,7 @@ test_that("Graphlets work for a bigger graph", {
   glo <- sort(sapply(unvs(gl$cliques), paste, collapse = "-"))
   gl2o <- sort(sapply(gl2, paste, collapse = "-"))
 
-  expect_that(glo, equals(gl2o))
+  expect_equal(glo, gl2o)
 })
 
 graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
@@ -168,5 +168,5 @@ test_that("Graphlet projection works", {
   glp2 <- graphlets.project.old(g, cliques = gl$cliques, iter = 1000)
 
   glp$cliques <- unvs(glp$cliques)
-  expect_that(glp, equals(glp2))
+  expect_equal(glp, glp2)
 })

@@ -14,12 +14,12 @@ test_that("`layout_with_mds()` works", {
   }
 
   out1 <- layout_with_mds(g)
-  expect_that(out1, equals(mymds(g)))
+  expect_equal(out1, mymds(g))
 
   rlang::local_options(lifecycle_verbosity = "warning")
 
   expect_warning(out2 <- layout_with_mds(g, options = arpack_defaults))
-  expect_that(out2, equals(out1))
+  expect_equal(out2, out1)
 })
 
 test_that("`layout_with_mds()` stress test", {
@@ -29,13 +29,13 @@ test_that("`layout_with_mds()` stress test", {
 
   withr::local_seed(42)
   g <- make_ring(10) + make_ring(3)
-  expect_that(ncol(layout_with_mds(g)), equals(2))
+  expect_equal(ncol(layout_with_mds(g)), 2)
 
   ## Small stress test
 
   for (i in 1:10) {
     g <- sample_gnp(100, 2 / 100)
     l <- layout_with_mds(g)
-    expect_that(ncol(l), equals(2))
+    expect_equal(ncol(l), 2)
   }
 })

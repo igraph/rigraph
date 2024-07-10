@@ -39,6 +39,13 @@ VERTEX_QTY:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
+ALL_VERTEX_QTY:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
+
 VECTOR_INT:
     INCONV: '%I% <- as.numeric(%I%)'
 
@@ -477,3 +484,8 @@ OPTIMALITY:
         MINIMUM: c("minimum", "maximum")
         MAXIMUM: c("maximum", "minimum")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'
+
+CHUNG_LU_VARIANT:
+    DEFAULT:
+        ORIGINAL: c("original", "maxent", "nr")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "original"=0L, "maxent"=1L, "nr"=2L)'

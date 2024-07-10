@@ -7,40 +7,37 @@ test_that("Dot product rng works", {
 
   g <- sample_dot_product(vecs)
   g0 <- graph_from_literal(1:2:3 - 4)
-  expect_that(g[], is_equivalent_to(g0[]))
+  expect_equal(as.matrix(g[]), as.matrix(g0[]), ignore_attr = TRUE)
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  g20 <- graph_from_literal(1:2:3:4, 1 -+ 3, 1 -+ 4, 3 -+ 4, 4 +- 1, 4 +- 3)
-  expect_that(g[], is_equivalent_to(g20[]))
+  g20 <- graph_from_literal(1:2:3:4, 1 - +3, 1 - +4, 3 - +4, 4 + -1, 4 + -3)
+  expect_true(all.equal(g20[], g[], check.attributes=FALSE))
 
   vecs <- replicate(5, rep(1 / 2, 4))
   g <- sample_dot_product(vecs)
-  expect_that(g[], is_equivalent_to(make_full_graph(5)[]))
+  expect_equal(g[], make_full_graph(5)[], ignore_attr = TRUE)
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  expect_that(g2[], is_equivalent_to(make_full_graph(5, directed = TRUE)[]))
+  expect_equal(g2[], make_full_graph(5, directed = TRUE)[], ignore_attr = TRUE)
 
   vecs <- replicate(100, rep(sqrt(1 / 8), 4))
   g <- sample_dot_product(vecs)
-  expect_that(ecount(g), equals(2454))
+  expect_equal(ecount(g), 2454)
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  expect_that(ecount(g2), equals(4938))
+  expect_equal(ecount(g2), 4938)
 })
 
 test_that("Dot product rng gives warnings", {
   vecs <- cbind(c(1, 1, 1) / 3, -c(1, 1, 1) / 3)
-  expect_that(
+  expect_warning(
     g <- sample_dot_product(vecs),
-    gives_warning("Negative connection probability in dot-product graph")
+    "Negative connection probability in dot-product graph"
   )
 
   vecs <- cbind(c(1, 1, 1), c(1, 1, 1))
-  expect_that(
+  expect_warning(
     g <- sample_dot_product(vecs),
-    gives_warning(paste(
-      sep = "", "Greater than 1 connection probability ",
-      "in dot-product graph"
-    ))
+    paste0("Greater than 1 connection probability ", "in dot-product graph")
   )
 })

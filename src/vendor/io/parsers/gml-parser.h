@@ -68,7 +68,7 @@ extern int igraph_gml_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 93 "src/vendor/cigraph/src/io/gml-parser.y"
+#line 94 "src/vendor/cigraph/src/io/gml-parser.y"
 
    char *str;
    igraph_gml_tree_t *tree;

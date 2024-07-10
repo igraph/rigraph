@@ -12,18 +12,7 @@ test_that("eigen_centrality works", {
     Jane - Ike
   )
   evc <- round(eigen_centrality(kite)$vector, 3)
-  expect_that(evc, equals(structure(
-    c(
-      0.732, 0.732, 0.594, 1, 0.827,
-      0.594, 0.827, 0.407, 0.1, 0.023
-    ),
-    .Names =
-      c(
-        "Andre", "Beverly", "Carol", "Diane",
-        "Fernando", "Ed", "Garth", "Heather", "Ike",
-        "Jane"
-      )
-  )))
+  expect_equal(evc, structure(c(0.732, 0.732, 0.594, 1, 0.827, 0.594, 0.827, 0.407, 0.1, 0.023), .Names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")))
 
 
   ## Eigenvector-centrality, small stress-test

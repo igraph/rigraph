@@ -249,13 +249,13 @@ disjoint_union <- function(...) {
     noattr <- setdiff(names(attr), names(ea)) # existint and missing
     newattr <- setdiff(names(ea), names(attr)) # new
     for (a in seq_along(exattr)) {
-      attr[[exattr[a]]] <- c(attr[[exattr[a]]], ea[[exattr[a]]])
+      attr[[exattr[a]]] <- vctrs::vec_c(attr[[exattr[a]]], ea[[exattr[a]]])
     }
     for (a in seq_along(noattr)) {
-      attr[[noattr[a]]] <- c(attr[[noattr[a]]], rep(NA, ec[i]))
+      attr[[noattr[a]]] <- vctrs::vec_c(attr[[noattr[a]]], vctrs::unspecified(ec[[i]]))
     }
     for (a in seq_along(newattr)) {
-      attr[[newattr[a]]] <- c(rep(NA, cumec[i]), ea[[newattr[a]]])
+      attr[[newattr[a]]] <- vctrs::vec_c(vctrs::unspecified(cumec[[i]]), ea[[newattr[a]]])
     }
   }
   edge.attributes(res) <- attr

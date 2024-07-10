@@ -3,38 +3,38 @@ test_that("print.igraph works", {
   options(width = 76)
 
   g <- make_ring(5)
-  expect_that(summary(g), prints_text("attr:.* name[ ]*[(]g/c[)]"))
-  expect_that(print(g), prints_text("attr:.* name[ ]*[(]g/c[)]"))
-  expect_that(print(g), prints_text("1--2"))
+  expect_output(summary(g), "attr:.* name[ ]*[(]g/c[)]")
+  expect_output(print(g), "attr:.* name[ ]*[(]g/c[)]")
+  expect_output(print(g), "1--2")
 
   V(g)$name <- letters[1:vcount(g)]
-  expect_that(summary(g), prints_text("name[ ]*[(]v/c[)]"))
-  expect_that(print(g), prints_text("a--b"))
+  expect_output(summary(g), "name[ ]*[(]v/c[)]")
+  expect_output(print(g), "a--b")
 
   withr::local_seed(42)
   E(g)$weight <- sample(ecount(g))
-  expect_that(summary(g), prints_text("weight[\n |]*[(]e/n[)]"))
+  expect_output(summary(g), "weight[\n |]*[(]e/n[)]")
 
   g$name <- "A ring"
-  expect_that(summary(g), prints_text("A ring"))
-  expect_that(print(g, v = T), prints_text("vertex attributes"))
-  expect_that(print(g, e = T), prints_text("edges [(]vertex names[)] and"))
+  expect_output(summary(g), "A ring")
+  expect_output(print(g, v = T), "vertex attributes")
+  expect_output(print(g, e = T), "edges [(]vertex names[)] and")
 
   withr::local_seed(42)
   g2 <- sample_gnp(13, p = 0.6, directed = TRUE)
-  expect_that(print(g2), prints_text("1 ->"))
+  expect_output(print(g2), "1 ->")
 
   g3 <- sample_gnp(20, p = 0.8)
-  expect_that(print(g3), prints_text("1 --"))
+  expect_output(print(g3), "1 --")
 
   g4 <- make_star(100)
-  expect_that(print(g4), prints_text("2->1"))
+  expect_output(print(g4), "2->1")
 
   g5 <- make_star(100, mode = "out")
-  expect_that(print(g5), prints_text("1->"))
+  expect_output(print(g5), "1->")
 
   g6 <- sample_pa(100, m = 6, directed = FALSE)
-  expect_that(print(g6), prints_text("     "))
+  expect_output(print(g6), "     ")
 
   kite <- make_empty_graph(directed = FALSE) + LETTERS[1:10]
   kite <- kite + edges(
@@ -43,7 +43,7 @@ test_that("print.igraph works", {
     "D", "E", "D", "F", "D", "G", "E", "G",
     "F", "G", "F", "H", "G", "H", "H", "I", "I", "J"
   )
-  expect_that(print(kite), prints_text("A -- "))
+  expect_output(print(kite), "A -- ")
 })
 
 test_that("print.igraph.es uses vertex names", {

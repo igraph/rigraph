@@ -14,29 +14,26 @@ test_that("disjoint union works for named graphs", {
 
   g <- disjoint_union(g1, g2)
 
-  expect_that(
+  expect_equal(
     sort(graph_attr_names(g)),
-    equals(c(
-      "circular_1", "circular_2", "foo", "mutual_1",
-      "mutual_2", "name_1", "name_2"
-    ))
+    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
   )
-  expect_that(
+  expect_equal(
     sort(vertex_attr_names(g)),
-    equals(c("a1", "a2", "name"))
+    c("a1", "a2", "name")
   )
-  expect_that(
+  expect_equal(
     sort(edge_attr_names(g)),
-    equals(c("b1", "b2", "weight"))
+    c("b1", "b2", "weight")
   )
 
-  expect_that(V(g)$name, equals(letters[1:20]))
-  expect_that(V(g)$a1, equals(c(1:10, rep(NA, 10))))
-  expect_that(V(g)$a2, equals(c(rep(NA, 10), 11:20)))
+  expect_equal(V(g)$name, letters[1:20])
+  expect_equal(V(g)$a1, c(1:10, rep(NA, 10)))
+  expect_equal(V(g)$a2, c(rep(NA, 10), 11:20))
 
-  expect_that(E(g)$weight, equals(c(1:10, 10:1)))
-  expect_that(E(g)$b1, equals(c(1:10, rep(NA, 10))))
-  expect_that(E(g)$b2, equals(c(rep(NA, 10), 11:20)))
+  expect_equal(E(g)$weight, c(1:10, 10:1))
+  expect_equal(E(g)$b1, c(1:10, rep(NA, 10)))
+  expect_equal(E(g)$b2, c(rep(NA, 10), 11:20))
 })
 
 test_that("disjoint union gives warning for non-unique vertex names", {
@@ -45,10 +42,7 @@ test_that("disjoint union gives warning for non-unique vertex names", {
   g2 <- make_ring(5)
   V(g2)$name <- letters[5:9]
 
-  expect_that(
-    disjoint_union(g1, g2),
-    gives_warning("Duplicate vertex names in disjoint union")
-  )
+  expect_warning(disjoint_union(g1, g2), "Duplicate vertex names in disjoint union")
 })
 
 
@@ -67,20 +61,17 @@ test_that("union of unnamed graphs works", {
 
   g <- union.igraph(g1, g2)
 
-  expect_that(
+  expect_equal(
     sort(graph_attr_names(g)),
-    equals(c(
-      "circular_1", "circular_2", "foo", "mutual_1",
-      "mutual_2", "name_1", "name_2"
-    ))
+    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
   )
-  expect_that(
+  expect_equal(
     sort(vertex_attr_names(g)),
-    equals(c("a1", "a2"))
+    c("a1", "a2")
   )
-  expect_that(
+  expect_equal(
     sort(edge_attr_names(g)),
-    equals(c("b1", "b2", "weight_1", "weight_2"))
+    c("b1", "b2", "weight_1", "weight_2")
   )
 
   df1 <- as_data_frame(g)
@@ -90,7 +81,7 @@ test_that("union of unnamed graphs works", {
   )
   rownames(df1) <- seq_len(nrow(df1))
   colnames(df2) <- c("from", "to", "weight_1", "b1", "weight_2", "b2")
-  expect_that(df1, equals(df2))
+  expect_equal(df1, df2)
 })
 
 test_that("union of named graphs works", {
@@ -111,20 +102,17 @@ test_that("union of named graphs works", {
 
   g <- union.igraph(g1, g2)
 
-  expect_that(
+  expect_equal(
     sort(graph_attr_names(g)),
-    equals(c(
-      "circular_1", "circular_2", "foo",
-      "mutual_1", "mutual_2", "name_1", "name_2"
-    ))
+    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
   )
-  expect_that(
+  expect_equal(
     sort(vertex_attr_names(g)),
-    equals(c("a1", "a2", "name"))
+    c("a1", "a2", "name")
   )
-  expect_that(
+  expect_equal(
     sort(edge_attr_names(g)),
-    equals(c("b1", "b2", "weight_1", "weight_2"))
+    c("b1", "b2", "weight_1", "weight_2")
   )
 
   df1 <- as_data_frame(g, what = "both")
@@ -145,7 +133,7 @@ k NA 21    k
 l NA 22    l
 m NA 23    m
 "))
-  expect_that(df1$vertices, equals(g.v))
+  expect_equal(df1$vertices, g.v)
 
   g.e <- read.table(stringsAsFactors = FALSE, textConnection("
    from to weight_1 weight_2   b1   b2
@@ -165,7 +153,7 @@ m NA 23    m
 14    a  b        1       13    a    k
 "))
   rownames(df1$edges) <- rownames(df1$edges)
-  expect_that(df1$edges, equals(g.e))
+  expect_equal(df1$edges, g.e)
 })
 
 test_that("intersection of named graphs works", {
@@ -186,20 +174,17 @@ test_that("intersection of named graphs works", {
 
   g <- intersection(g1, g2, keep.all.vertices = FALSE)
 
-  expect_that(
+  expect_equal(
     sort(graph_attr_names(g)),
-    equals(c(
-      "circular_1", "circular_2", "foo", "mutual_1",
-      "mutual_2", "name_1", "name_2"
-    ))
+    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
   )
-  expect_that(
+  expect_equal(
     sort(vertex_attr_names(g)),
-    equals(c("a1", "a2", "name"))
+    c("a1", "a2", "name")
   )
-  expect_that(
+  expect_equal(
     sort(edge_attr_names(g)),
-    equals(c("b1", "b2", "weight_1", "weight_2"))
+    c("b1", "b2", "weight_1", "weight_2")
   )
 
   df1 <- as_data_frame(g, what = "both")
@@ -217,7 +202,7 @@ test_that("intersection of named graphs works", {
 9    a  b        1       13  a  k
 "))
   rownames(df1$edges) <- rownames(df1$edges)
-  expect_that(df1$edges, equals(g.e))
+  expect_equal(df1$edges, g.e)
 
   g.v <- read.table(stringsAsFactors = FALSE, textConnection("
   a1 a2 name
@@ -232,14 +217,14 @@ h  8 18    h
 i  9 19    i
 j 10 20    j
 "))
-  expect_that(df1$vertices, equals(g.v))
+  expect_equal(df1$vertices, g.v)
 
   gg <- intersection(g1, g2, keep.all.vertices = TRUE)
 
   df2 <- as_data_frame(gg, what = "both")
 
   rownames(df2$edges) <- rownames(df2$edges)
-  expect_that(df2$edges, equals(g.e))
+  expect_equal(df2$edges, g.e)
 
   gg.v <- read.table(stringsAsFactors = FALSE, textConnection("
   a1 a2 name
@@ -257,7 +242,7 @@ k NA 21    k
 l NA 22    l
 m NA 23    m
 "))
-  expect_that(df2$vertices, equals(gg.v))
+  expect_equal(df2$vertices, gg.v)
 })
 
 test_that("difference of named graphs works", {
@@ -295,18 +280,14 @@ test_that("difference of named graphs works", {
 ")
   )
   rownames(df1$edges) <- rownames(df1$edges)
-  expect_that(df1$edges, equals(t1.e))
+  expect_equal(df1$edges, t1.e)
 
-  expect_that(df1$vertices, equals(data.frame(
-    row.names = letters[1:11],
-    name = letters[1:11],
-    stringsAsFactors = FALSE
-  )))
+  expect_equal(df1$vertices, data.frame(row.names = letters[1:11], name = letters[1:11], stringsAsFactors = FALSE))
 
   gg <- sg - g
 
-  expect_that(ecount(gg), equals(0))
-  expect_that(V(gg)$name, equals(letters[c(1:3, 11)]))
+  expect_equal(ecount(gg), 0)
+  expect_equal(V(gg)$name, letters[c(1:3, 11)])
 })
 
 test_that("compose works for named graphs", {
@@ -334,7 +315,7 @@ D    3     c    NA   NA    D
 E    4     d     c    3    E
 C    5     e    NA   NA    C
 "))
-  expect_that(df$vertices, equals(df.v))
+  expect_equal(df$vertices, df.v)
 
   df.e <- read.table(stringsAsFactors = FALSE, textConnection("
    from to bar1 foo_1 foo_2 bar2
@@ -356,7 +337,7 @@ C    5     e    NA   NA    C
 16    A  C    5     e     a    1
 "))
   rownames(df$edges) <- rownames(df$edges)
-  expect_that(df$edges, equals(df.e))
+  expect_equal(df$edges, df.e)
 })
 
 test_that("intersection of non-named graphs keeps attributes properly", {
@@ -378,8 +359,8 @@ test_that("intersection of non-named graphs keeps attributes properly", {
   df2 <- rn(as_data_frame(g2))
   dfi <- rn(as_data_frame(gi))
 
-  expect_that(df[rownames(dfi), ], is_equivalent_to(dfi[, 1:3]))
-  expect_that(df2[rownames(dfi), ], is_equivalent_to(dfi[, c(1, 2, 4)]))
+  expect_equal(df[rownames(dfi), ], dfi[, 1:3], ignore_attr = TRUE)
+  expect_equal(df2[rownames(dfi), ], dfi[, c(1, 2, 4)], ignore_attr = TRUE)
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
@@ -401,15 +382,15 @@ test_that("union of non-named graphs keeps attributes properly", {
   df2 <- rn(as_data_frame(g2))
   dfu <- rn(as_data_frame(gu))
 
-  expect_that(dfu[rownames(df), 1:3], is_equivalent_to(df))
-  expect_that(dfu[rownames(df2), c(1, 2, 4)], is_equivalent_to(df2))
+  expect_equal(dfu[rownames(df), 1:3], df, ignore_attr = TRUE)
+  expect_equal(dfu[rownames(df2), c(1, 2, 4)], df2, ignore_attr = TRUE)
 
-  expect_that(
+  expect_equal(
     dfu[!rownames(dfu) %in% rownames(df), 3],
-    equals(rep(NA_real_, ecount(gu) - ecount(g)))
+    rep(NA_real_, ecount(gu) - ecount(g))
   )
-  expect_that(
+  expect_equal(
     dfu[!rownames(dfu) %in% rownames(df2), 4],
-    equals(rep(NA_real_, ecount(gu) - ecount(g2)))
+    rep(NA_real_, ecount(gu) - ecount(g2))
   )
 })

@@ -30,9 +30,9 @@ results for such graphs.
 }
 \examples{
 
-g1 <- make_empty_graph(n = 10)
-g2 <- make_full_graph(n = 10)
-g3 <- sample_gnp(n = 10, 0.4)
+edge_density(make_empty_graph(n = 10)) # empty graphs have density 0
+edge_density(make_full_graph(n = 10)) # complete graphs have density 1
+edge_density(sample_gnp(n = 100, p = 0.4)) # density will be close to p
 
 # loop edges
 g <- make_graph(c(1, 2, 2, 2, 2, 3)) # graph with a self-loop

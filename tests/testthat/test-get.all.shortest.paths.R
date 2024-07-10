@@ -28,22 +28,22 @@ test_that("all_shortest_paths works", {
 
   sp1 <- all_shortest_paths(g, "s", "t", weights = NA)
 
-  expect_that(
+  expect_equal(
     sortlist(sp1$vpaths),
-    equals(list(c(1, 2, 7), c(1, 3, 7)))
+    list(c(1, 2, 7), c(1, 3, 7))
   )
-  expect_that(
+  expect_equal(
     sp1$nrgeo,
-    equals(c(1, 1, 1, 1, 1, 1, 2))
+    c(1, 1, 1, 1, 1, 1, 2)
   )
 
   sp2 <- all_shortest_paths(g, "s", "t")
 
-  expect_that(
+  expect_equal(
     sortlist(sp2$vpaths),
-    equals(list(c(1, 2, 3, 4, 7), c(1, 2, 7), c(1, 3, 7)))
+    list(c(1, 2, 3, 4, 7), c(1, 2, 7), c(1, 3, 7))
   )
-  expect_that(sp2$nrgeo, equals(c(1, 1, 2, 1, 1, 1, 3)))
+  expect_equal(sp2$nrgeo, c(1, 1, 2, 1, 1, 1, 3))
 
   ## TODO
 
