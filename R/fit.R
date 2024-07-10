@@ -198,7 +198,7 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   alpha
 }
 
-power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
+power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
@@ -206,7 +206,7 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_power_law_fit, data, xmin, force.continuous)
+  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value)
 
   res
 }

@@ -357,7 +357,7 @@ extern SEXP R_igraph_path_length_hist(void *, void *);
 extern SEXP R_igraph_permute_vertices(void *, void *);
 extern SEXP R_igraph_personalized_pagerank(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_personalized_pagerank_vs(void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_power_law_fit(void *, void *, void *);
+extern SEXP R_igraph_power_law_fit_new(void *, void *, void *, void *);
 extern SEXP R_igraph_preference_game(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
@@ -816,7 +816,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_permute_vertices",                           (DL_FUNC) &R_igraph_permute_vertices,                            2},
     {"R_igraph_personalized_pagerank",                      (DL_FUNC) &R_igraph_personalized_pagerank,                       8},
     {"R_igraph_personalized_pagerank_vs",                   (DL_FUNC) &R_igraph_personalized_pagerank_vs,                    8},
-    {"R_igraph_power_law_fit",                              (DL_FUNC) &R_igraph_power_law_fit,                               3},
+    {"R_igraph_power_law_fit_new",                          (DL_FUNC) &R_igraph_power_law_fit_new,                           4},
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
     {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
