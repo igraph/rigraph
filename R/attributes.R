@@ -520,7 +520,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   if (!missing(index)) {
     index_is_natural_sequence <- (length(index) == vcount(graph) &&
-        identical(index, seq(1, vcount(graph))))
+        identical(index, V(graph)))
     if  (!index_is_natural_sequence) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
