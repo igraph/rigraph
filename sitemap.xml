@@ -1,1941 +1,649 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://r.igraph.org/404.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/AUTHORS-list.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/articles/igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/articles/igraph_ES.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/articles/installation-troubleshooting.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/cran-comments.template.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/E.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/V.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/aaa-igraph-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add.edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add.vertex.shape.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add.vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add_layout_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/add_vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/adjacent.triangles.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/adjacent_vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/aging.ba.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/aging.barabasi.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/aging.prefatt.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/all_simple_paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/alpha.centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/alpha_centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/are.connected.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/are_adjacent.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/arpack.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/articulation.points.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/articulation_points.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as.directed.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as.matrix.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_adj_list.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_adjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_biadjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_edgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_graphnel.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_ids.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_incidence_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_long_data_frame.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_membership.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/as_phylo.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/assortativity.degree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/assortativity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/assortativity.nominal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/asymmetric.preference.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/authority.score.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/autocurve.edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/automorphism_group.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/automorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/average.path.length.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/ba.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/barabasi.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bfs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/biconnected.components.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/biconnected_components.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite.mapping.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite.projection.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite.projection.size.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite.random.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite_mapping.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bipartite_projection.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/blockGraphs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/bonpow.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/c.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/c.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/callaway.traits.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/canonical.permutation.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/canonical_permutation.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/categorical_pal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_betw.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_betw_tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_clo.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_clo_tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_degree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_degree_tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_eigen.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centr_eigen_tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.betweenness.tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.closeness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.closeness.tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.degree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.degree.tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.evcent.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralization.evcent.tmax.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralize.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/centralize.scores.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cited.type.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/citing.cited.type.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/clique.number.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cliques.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/closeness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster.distribution.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_edge_betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_fast_greedy.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_fluid_communities.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_infomap.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_label_prop.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_leading_eigen.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_leiden.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_louvain.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_optimal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_spinglass.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cluster_walktrap.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/clusters.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cocitation.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/code.length.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cohesive.blocks.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cohesive_blocks.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/communities.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/compare.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/complementer.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/component_wise.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/components.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/compose.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/connect.neighborhood.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/consensus_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/console.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/constraint.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/contract.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/contract.vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/convex.hull.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/convex_hull.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/coreness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count.multiple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count_automorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count_isomorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count_motifs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count_subgraph_isomorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/count_triangles.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/create.communities.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/curve_multiple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/cutat.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/decompose.graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/decompose.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/degree.distribution.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/degree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/degree.sequence.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete.edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete.vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete_edge_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete_graph_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete_vertex_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/delete_vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dendPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dfs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/diameter.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/difference.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/difference.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/difference.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/difference.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dim_select.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/disjoint_union.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/distances.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/diverging_pal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/diversity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dominator.tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dominator_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dot-data.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dyad.census.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/dyad_census.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/each_edge.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/eccentricity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge.betweenness.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge.betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge.connectivity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge.disjoint.paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge_attr-set.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge_attr_names.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge_connectivity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/edge_density.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/ego.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/eigen_centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/embed_adjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/embed_laplacian_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/ends.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/erdos.renyi.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/establishment.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/estimate_betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/estimate_closeness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/estimate_edge_betweenness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/evcent.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/exportPajek.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/farthest.nodes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/fastgreedy.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/feedback_arc_set.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/fit_hrg.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/fit_power_law.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/forest.fire.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/from_incidence_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.adjacency.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.adjedgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.adjlist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.all.shortest.paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.diameter.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.edge.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.edge.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.edge.ids.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.edgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.graph.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.incidence.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.shortest.paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.stochastic.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/get.vertex.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/getIgraphOpt.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/girth.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/global_efficiency.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/gorder.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.adhesion.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.adjacency.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.adjlist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.atlas.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.automorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.bfs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.cohesion.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.complementer.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.compose.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.coreness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.de.bruijn.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.density.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.dfs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.difference.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.disjoint.union.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.diversity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.edgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.eigen.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.empty.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.extended.chordal.ring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.famous.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.formula.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.full.bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.full.citation.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.full.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.graphdb.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.incidence.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.intersection.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.isocreate.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.kautz.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.knn.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.laplacian.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.lattice.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.lcf.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.maxflow.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.mincut.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.motifs.est.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.motifs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.motifs.no.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.neighborhood.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.ring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.star.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.strength.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph.union.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_attr-set.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_attr_names.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_center.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_adj_list.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_adjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_atlas.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_biadjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_data_frame.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_edgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_graphdb.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_graphnel.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_incidence_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_isomorphism_class.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_lcf.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_from_literal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_id.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graph_version.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graphlet_basis.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graphlets.candidate.basis.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/graphlets.project.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/greedy_vertex_coloring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/grg.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/groups.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/growing.random.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/gsize.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/handle_vertex_type_arg.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/harmonic_centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/has.multiple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/has_eulerian_path.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/head_of.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/head_print.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hits_scores.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg-methods.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.consensus.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.create.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.dendrogram.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.fit.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg.predict.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hrg_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hub.score.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/hub_score.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/identical_graphs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-attribute-combination.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-dollar.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-es-attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-es-indexing.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-es-indexing2.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-minus.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-vs-attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-vs-indexing.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph-vs-indexing2.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.console.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.from.graphNEL.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.options.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.sample.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.shape.noclip.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.shape.noplot.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.to.graphNEL.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph.version.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph_demo.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph_options.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph_test.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraph_version.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraphdemo.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/igraphtest.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/incident.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/incident_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/indent_print.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/independence.number.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/independent.vertex.sets.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/induced.subgraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/infomap.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/interconnected.islands.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/intersection.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/intersection.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/intersection.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.chordal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.connected.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.dag.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.degree.sequence.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.directed.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.graphical.degree.sequence.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.hierarchical.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.loop.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.matching.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.maximal.matching.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.minimal.separator.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.multiple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.mutual.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.named.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.separator.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.simple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is.weighted.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_acyclic.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_biconnected.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_chordal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_dag.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_degseq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_directed.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_forest.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_graphical.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_min_separator.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_named.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_printer_callback.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_separator.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/is_weighted.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/isomorphic.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/isomorphism_class.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/isomorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/ivs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/k.regular.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/k_shortest_paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/keeping_degseq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/knn.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/label.propagation.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/laplacian_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/largest.cliques.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/largest.independent.vertex.sets.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/lastcit.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.auto.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.davidson.harel.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.drl.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.fruchterman.reingold.grid.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.gem.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.graphopt.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.grid.3d.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.grid.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.mds.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.merge.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.norm.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.spring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.star.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.sugiyama.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout.svd.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_as_bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_as_star.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_as_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_in_circle.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_nicely.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_on_grid.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_on_sphere.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_randomly.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_dh.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_drl.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_fr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_gem.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_graphopt.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_kk.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_lgl.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_mds.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/layout_with_sugiyama.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/leading.eigenvector.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/line.graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/list.edge.attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/list.graph.attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/list.vertex.attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/local_scan.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_bipartite_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_chordal_ring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_clusters.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_de_bruijn_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_empty_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_from_prufer.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_full_bipartite_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_full_citation_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_full_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_kautz_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_lattice.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_line_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_ring.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_star.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/make_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/match_vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/matching.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/max_cardinality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/max_flow.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maxcohesion.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maximal.cliques.count.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maximal.cliques.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maximal.independent.vertex.sets.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maximum.bipartite.matching.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/maximum.cardinality.search.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/merge_coords.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/min_cut.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/min_separators.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/min_st_separators.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/minimal.st.separators.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/minimum.size.separators.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/minimum.spanning.tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/mod.matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/modularity.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/motifs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/mst.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/multilevel.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/neighborhood.size.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/neighbors.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/no.clusters.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/norm_coords.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/normalize.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/optimal.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/page.rank.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/page_rank.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/path.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/path.length.hist.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/permute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/permute.vertices.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/piecewise.layout.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plot.common.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plot.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plot.sir.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plotHierarchy.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plot_dendrogram.communities.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plot_dendrogram.igraphHRG.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/plus-.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/power.law.fit.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/power_centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/predict_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/preference.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/print.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/print.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/print.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/print.igraphHRG.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/print.igraphHRGConsensus.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/printer_callback.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/r_pal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/radius.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/random_walk.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/read.graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/read_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/realize_bipartite_degseq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/realize_degseq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/reciprocity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/remove.edge.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/remove.graph.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/remove.vertex.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/rep.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/rev.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/rev.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/reverse_edges.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/rewire.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/rglplot.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/running.mean.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/running_mean.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_bipartite.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_chung_lu.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_correlated_gnp.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_correlated_gnp_pair.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_degseq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_dirichlet.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_dot_product.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_fitness.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_fitness_pl.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_forestfire.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_gnm.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_gnp.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_grg.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_growing.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_hierarchical_sbm.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_hrg.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_islands.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_k_regular.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_last_cit.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_motifs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_pa.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_pa_age.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_pref.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_sbm.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_seq.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_smallworld.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_spanning_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_sphere_surface.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_sphere_volume.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_traits_callaway.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sample_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sbm.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/scan_stat.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sequential_pal.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set.edge.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set.graph.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set.vertex.attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set_edge_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set_graph_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/set_vertex_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/shortest.paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/showtrace.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/similarity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/simplified.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/simplify.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sir.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/spectrum.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/spinglass.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/split_join_distance.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/stCuts.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/stMincuts.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/st_cuts.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/st_min_cuts.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/static.fitness.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/static.power.law.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/stochastic_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/strength.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sub-.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/sub-sub-.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subcomponent.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subgraph.centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subgraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subgraph_centrality.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subgraph_isomorphic.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/subgraph_isomorphisms.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tail_of.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkigraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.canvas.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.center.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.close.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.export.postscript.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.fit.to.screen.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.getcoords.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.off.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.reshape.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.rotate.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/tkplot.setcoords.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/to_prufer.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/topo_sort.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/topological.sort.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/transitivity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/triad.census.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/triad_census.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/unfold.tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/unfold_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/union.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/union.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/union.igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/union.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/unique.igraph.es.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/unique.igraph.vs.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/upgrade_graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex.connectivity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex.disjoint.paths.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex.shape.pie.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex.shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex_attr-set.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex_attr_names.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/vertex_connectivity.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/voronoi_cells.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/walktrap.community.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/watts.strogatz.game.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/weighted_cliques.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/which_multiple.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/which_mutual.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/with_edge_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/with_graph_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/with_igraph_opt.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/with_vertex_.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/without_attr.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/without_loops.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/without_multiples.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/write.graph.html</loc>
-  </url>
-  <url>
-    <loc>https://r.igraph.org/reference/write_graph.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://r.igraph.org/404.html</loc></url>
+<url><loc>https://r.igraph.org/AUTHORS-list.html</loc></url>
+<url><loc>https://r.igraph.org/CONTRIBUTING.html</loc></url>
+<url><loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc></url>
+<url><loc>https://r.igraph.org/articles/igraph.html</loc></url>
+<url><loc>https://r.igraph.org/articles/igraph_ES.html</loc></url>
+<url><loc>https://r.igraph.org/articles/index.html</loc></url>
+<url><loc>https://r.igraph.org/articles/installation-troubleshooting.html</loc></url>
+<url><loc>https://r.igraph.org/authors.html</loc></url>
+<url><loc>https://r.igraph.org/cran-comments.template.html</loc></url>
+<url><loc>https://r.igraph.org/index.html</loc></url>
+<url><loc>https://r.igraph.org/news/index.html</loc></url>
+<url><loc>https://r.igraph.org/reference/E.html</loc></url>
+<url><loc>https://r.igraph.org/reference/V.html</loc></url>
+<url><loc>https://r.igraph.org/reference/aaa-igraph-package.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add.edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add.vertex.shape.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add.vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add_edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add_layout_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/add_vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/adjacent.triangles.html</loc></url>
+<url><loc>https://r.igraph.org/reference/adjacent_vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/aging.ba.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/aging.barabasi.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/aging.prefatt.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/all_simple_paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/alpha.centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/alpha_centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/are.connected.html</loc></url>
+<url><loc>https://r.igraph.org/reference/are_adjacent.html</loc></url>
+<url><loc>https://r.igraph.org/reference/arpack.html</loc></url>
+<url><loc>https://r.igraph.org/reference/articulation.points.html</loc></url>
+<url><loc>https://r.igraph.org/reference/articulation_points.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as.directed.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as.matrix.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_adj_list.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_adjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_biadjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_edgelist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_graphnel.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_ids.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_incidence_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_long_data_frame.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_membership.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_phylo.html</loc></url>
+<url><loc>https://r.igraph.org/reference/assortativity.degree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/assortativity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/assortativity.nominal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/asymmetric.preference.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/authority.score.html</loc></url>
+<url><loc>https://r.igraph.org/reference/autocurve.edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/automorphism_group.html</loc></url>
+<url><loc>https://r.igraph.org/reference/automorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/average.path.length.html</loc></url>
+<url><loc>https://r.igraph.org/reference/ba.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/barabasi.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bfs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/biconnected.components.html</loc></url>
+<url><loc>https://r.igraph.org/reference/biconnected_components.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite.mapping.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite.projection.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite.projection.size.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite.random.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite_mapping.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bipartite_projection.html</loc></url>
+<url><loc>https://r.igraph.org/reference/blockGraphs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/bonpow.html</loc></url>
+<url><loc>https://r.igraph.org/reference/c.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/c.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/callaway.traits.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/canonical.permutation.html</loc></url>
+<url><loc>https://r.igraph.org/reference/canonical_permutation.html</loc></url>
+<url><loc>https://r.igraph.org/reference/categorical_pal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_betw.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_betw_tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_clo.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_clo_tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_degree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_degree_tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_eigen.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centr_eigen_tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.betweenness.tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.closeness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.closeness.tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.degree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.degree.tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.evcent.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralization.evcent.tmax.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralize.html</loc></url>
+<url><loc>https://r.igraph.org/reference/centralize.scores.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cited.type.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/citing.cited.type.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/clique.number.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cliques.html</loc></url>
+<url><loc>https://r.igraph.org/reference/closeness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster.distribution.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_edge_betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_fast_greedy.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_fluid_communities.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_infomap.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_label_prop.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_leading_eigen.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_leiden.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_louvain.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_optimal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_spinglass.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cluster_walktrap.html</loc></url>
+<url><loc>https://r.igraph.org/reference/clusters.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cocitation.html</loc></url>
+<url><loc>https://r.igraph.org/reference/code.length.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cohesive.blocks.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cohesive_blocks.html</loc></url>
+<url><loc>https://r.igraph.org/reference/communities.html</loc></url>
+<url><loc>https://r.igraph.org/reference/compare.html</loc></url>
+<url><loc>https://r.igraph.org/reference/complementer.html</loc></url>
+<url><loc>https://r.igraph.org/reference/component_wise.html</loc></url>
+<url><loc>https://r.igraph.org/reference/components.html</loc></url>
+<url><loc>https://r.igraph.org/reference/compose.html</loc></url>
+<url><loc>https://r.igraph.org/reference/connect.neighborhood.html</loc></url>
+<url><loc>https://r.igraph.org/reference/consensus_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/console.html</loc></url>
+<url><loc>https://r.igraph.org/reference/constraint.html</loc></url>
+<url><loc>https://r.igraph.org/reference/contract.html</loc></url>
+<url><loc>https://r.igraph.org/reference/contract.vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/convex.hull.html</loc></url>
+<url><loc>https://r.igraph.org/reference/convex_hull.html</loc></url>
+<url><loc>https://r.igraph.org/reference/coreness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count.multiple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_automorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_isomorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_motifs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_subgraph_isomorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_triangles.html</loc></url>
+<url><loc>https://r.igraph.org/reference/create.communities.html</loc></url>
+<url><loc>https://r.igraph.org/reference/curve_multiple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/cutat.html</loc></url>
+<url><loc>https://r.igraph.org/reference/decompose.graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/decompose.html</loc></url>
+<url><loc>https://r.igraph.org/reference/degree.distribution.html</loc></url>
+<url><loc>https://r.igraph.org/reference/degree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/degree.sequence.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete.edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete.vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete_edge_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete_edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete_graph_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete_vertex_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/delete_vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dendPlot.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dfs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/diameter.html</loc></url>
+<url><loc>https://r.igraph.org/reference/difference.html</loc></url>
+<url><loc>https://r.igraph.org/reference/difference.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/difference.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/difference.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dim_select.html</loc></url>
+<url><loc>https://r.igraph.org/reference/disjoint_union.html</loc></url>
+<url><loc>https://r.igraph.org/reference/distances.html</loc></url>
+<url><loc>https://r.igraph.org/reference/diverging_pal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/diversity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dominator.tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dominator_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dot-data.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dyad.census.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dyad_census.html</loc></url>
+<url><loc>https://r.igraph.org/reference/each_edge.html</loc></url>
+<url><loc>https://r.igraph.org/reference/eccentricity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge.betweenness.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge.betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge.connectivity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge.disjoint.paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge_attr-set.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge_attr_names.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge_connectivity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/edge_density.html</loc></url>
+<url><loc>https://r.igraph.org/reference/ego.html</loc></url>
+<url><loc>https://r.igraph.org/reference/eigen_centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/embed_adjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/embed_laplacian_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/ends.html</loc></url>
+<url><loc>https://r.igraph.org/reference/erdos.renyi.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/establishment.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/estimate_betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/estimate_closeness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/estimate_edge_betweenness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/evcent.html</loc></url>
+<url><loc>https://r.igraph.org/reference/exportPajek.html</loc></url>
+<url><loc>https://r.igraph.org/reference/farthest.nodes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/fastgreedy.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/feedback_arc_set.html</loc></url>
+<url><loc>https://r.igraph.org/reference/fit_hrg.html</loc></url>
+<url><loc>https://r.igraph.org/reference/fit_power_law.html</loc></url>
+<url><loc>https://r.igraph.org/reference/forest.fire.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/from_incidence_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.adjacency.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.adjedgelist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.adjlist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.all.shortest.paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.data.frame.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.diameter.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.edge.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.edge.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.edge.ids.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.edgelist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.graph.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.incidence.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.shortest.paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.stochastic.html</loc></url>
+<url><loc>https://r.igraph.org/reference/get.vertex.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/getIgraphOpt.html</loc></url>
+<url><loc>https://r.igraph.org/reference/girth.html</loc></url>
+<url><loc>https://r.igraph.org/reference/global_efficiency.html</loc></url>
+<url><loc>https://r.igraph.org/reference/gorder.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.adhesion.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.adjacency.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.adjlist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.atlas.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.automorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.bfs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.cohesion.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.complementer.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.compose.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.coreness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.data.frame.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.de.bruijn.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.density.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.dfs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.difference.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.disjoint.union.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.diversity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.edgelist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.eigen.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.empty.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.extended.chordal.ring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.famous.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.formula.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.full.bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.full.citation.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.full.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.graphdb.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.incidence.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.intersection.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.isocreate.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.kautz.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.knn.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.laplacian.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.lattice.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.lcf.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.maxflow.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.mincut.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.motifs.est.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.motifs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.motifs.no.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.neighborhood.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.ring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.star.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.strength.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph.union.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_attr-set.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_attr_names.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_center.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_adj_list.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_adjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_atlas.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_biadjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_data_frame.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_edgelist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_graphdb.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_graphnel.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_incidence_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_isomorphism_class.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_lcf.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_from_literal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_id.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graph_version.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graphlet_basis.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graphlets.candidate.basis.html</loc></url>
+<url><loc>https://r.igraph.org/reference/graphlets.project.html</loc></url>
+<url><loc>https://r.igraph.org/reference/greedy_vertex_coloring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/grg.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/groups.html</loc></url>
+<url><loc>https://r.igraph.org/reference/growing.random.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/gsize.html</loc></url>
+<url><loc>https://r.igraph.org/reference/handle_vertex_type_arg.html</loc></url>
+<url><loc>https://r.igraph.org/reference/harmonic_centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/has.multiple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/has_eulerian_path.html</loc></url>
+<url><loc>https://r.igraph.org/reference/head_of.html</loc></url>
+<url><loc>https://r.igraph.org/reference/head_print.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hits_scores.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg-methods.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.consensus.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.create.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.dendrogram.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.fit.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg.predict.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hrg_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hub.score.html</loc></url>
+<url><loc>https://r.igraph.org/reference/hub_score.html</loc></url>
+<url><loc>https://r.igraph.org/reference/identical_graphs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-attribute-combination.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-dollar.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-es-attributes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-es-indexing.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-es-indexing2.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-minus.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-vs-attributes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-vs-indexing.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph-vs-indexing2.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.console.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.from.graphNEL.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.options.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.sample.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.shape.noclip.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.shape.noplot.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.to.graphNEL.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph.version.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_demo.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_options.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_test.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraph_version.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraphdemo.html</loc></url>
+<url><loc>https://r.igraph.org/reference/igraphtest.html</loc></url>
+<url><loc>https://r.igraph.org/reference/incident.html</loc></url>
+<url><loc>https://r.igraph.org/reference/incident_edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/indent_print.html</loc></url>
+<url><loc>https://r.igraph.org/reference/independence.number.html</loc></url>
+<url><loc>https://r.igraph.org/reference/independent.vertex.sets.html</loc></url>
+<url><loc>https://r.igraph.org/reference/index.html</loc></url>
+<url><loc>https://r.igraph.org/reference/induced.subgraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/infomap.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/interconnected.islands.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/intersection.html</loc></url>
+<url><loc>https://r.igraph.org/reference/intersection.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/intersection.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.chordal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.connected.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.dag.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.degree.sequence.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.directed.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.graphical.degree.sequence.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.hierarchical.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.loop.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.matching.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.maximal.matching.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.minimal.separator.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.multiple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.mutual.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.named.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.separator.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.simple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is.weighted.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_acyclic.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_biconnected.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_chordal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_dag.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_degseq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_directed.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_forest.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_graphical.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_min_separator.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_named.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_printer_callback.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_separator.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/is_weighted.html</loc></url>
+<url><loc>https://r.igraph.org/reference/isomorphic.html</loc></url>
+<url><loc>https://r.igraph.org/reference/isomorphism_class.html</loc></url>
+<url><loc>https://r.igraph.org/reference/isomorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/ivs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/k.regular.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/k_shortest_paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/keeping_degseq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/knn.html</loc></url>
+<url><loc>https://r.igraph.org/reference/label.propagation.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/laplacian_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/largest.cliques.html</loc></url>
+<url><loc>https://r.igraph.org/reference/largest.independent.vertex.sets.html</loc></url>
+<url><loc>https://r.igraph.org/reference/lastcit.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.auto.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.davidson.harel.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.deprecated.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.drl.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.fruchterman.reingold.grid.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.gem.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.graphopt.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.grid.3d.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.grid.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.mds.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.merge.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.norm.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.spring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.star.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.sugiyama.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout.svd.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_as_bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_as_star.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_as_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_in_circle.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_nicely.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_on_grid.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_on_sphere.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_randomly.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_dh.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_drl.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_fr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_gem.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_graphopt.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_kk.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_lgl.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_mds.html</loc></url>
+<url><loc>https://r.igraph.org/reference/layout_with_sugiyama.html</loc></url>
+<url><loc>https://r.igraph.org/reference/leading.eigenvector.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/line.graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/list.edge.attributes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/list.graph.attributes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/list.vertex.attributes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/local_scan.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_bipartite_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_chordal_ring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_clusters.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_de_bruijn_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_empty_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_from_prufer.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_full_bipartite_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_full_citation_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_full_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_kautz_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_lattice.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_line_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_ring.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_star.html</loc></url>
+<url><loc>https://r.igraph.org/reference/make_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/match_vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/matching.html</loc></url>
+<url><loc>https://r.igraph.org/reference/max_cardinality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/max_flow.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maxcohesion.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maximal.cliques.count.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maximal.cliques.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maximal.independent.vertex.sets.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maximum.bipartite.matching.html</loc></url>
+<url><loc>https://r.igraph.org/reference/maximum.cardinality.search.html</loc></url>
+<url><loc>https://r.igraph.org/reference/merge_coords.html</loc></url>
+<url><loc>https://r.igraph.org/reference/min_cut.html</loc></url>
+<url><loc>https://r.igraph.org/reference/min_separators.html</loc></url>
+<url><loc>https://r.igraph.org/reference/min_st_separators.html</loc></url>
+<url><loc>https://r.igraph.org/reference/minimal.st.separators.html</loc></url>
+<url><loc>https://r.igraph.org/reference/minimum.size.separators.html</loc></url>
+<url><loc>https://r.igraph.org/reference/minimum.spanning.tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/mod.matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/modularity.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/motifs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/mst.html</loc></url>
+<url><loc>https://r.igraph.org/reference/multilevel.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/neighborhood.size.html</loc></url>
+<url><loc>https://r.igraph.org/reference/neighbors.html</loc></url>
+<url><loc>https://r.igraph.org/reference/no.clusters.html</loc></url>
+<url><loc>https://r.igraph.org/reference/norm_coords.html</loc></url>
+<url><loc>https://r.igraph.org/reference/normalize.html</loc></url>
+<url><loc>https://r.igraph.org/reference/optimal.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/page.rank.html</loc></url>
+<url><loc>https://r.igraph.org/reference/page_rank.html</loc></url>
+<url><loc>https://r.igraph.org/reference/path.html</loc></url>
+<url><loc>https://r.igraph.org/reference/path.length.hist.html</loc></url>
+<url><loc>https://r.igraph.org/reference/permute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/permute.vertices.html</loc></url>
+<url><loc>https://r.igraph.org/reference/piecewise.layout.html</loc></url>
+<url><loc>https://r.igraph.org/reference/pipe.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plot.common.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plot.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plot.sir.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plotHierarchy.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plot_dendrogram.communities.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plot_dendrogram.igraphHRG.html</loc></url>
+<url><loc>https://r.igraph.org/reference/plus-.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/power.law.fit.html</loc></url>
+<url><loc>https://r.igraph.org/reference/power_centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/predict_edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/preference.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/print.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/print.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/print.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/print.igraphHRG.html</loc></url>
+<url><loc>https://r.igraph.org/reference/print.igraphHRGConsensus.html</loc></url>
+<url><loc>https://r.igraph.org/reference/printer_callback.html</loc></url>
+<url><loc>https://r.igraph.org/reference/r_pal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/radius.html</loc></url>
+<url><loc>https://r.igraph.org/reference/random_walk.html</loc></url>
+<url><loc>https://r.igraph.org/reference/read.graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/read_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/realize_bipartite_degseq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/realize_degseq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/reciprocity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/remove.edge.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/remove.graph.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/remove.vertex.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/rep.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/rev.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/rev.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/reverse_edges.html</loc></url>
+<url><loc>https://r.igraph.org/reference/rewire.html</loc></url>
+<url><loc>https://r.igraph.org/reference/rglplot.html</loc></url>
+<url><loc>https://r.igraph.org/reference/running.mean.html</loc></url>
+<url><loc>https://r.igraph.org/reference/running_mean.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_bipartite.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_chung_lu.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_correlated_gnp.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_correlated_gnp_pair.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_degseq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_dirichlet.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_dot_product.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_fitness.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_fitness_pl.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_forestfire.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_gnm.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_gnp.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_grg.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_growing.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_hierarchical_sbm.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_hrg.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_islands.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_k_regular.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_last_cit.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_motifs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_pa.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_pa_age.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_pref.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_sbm.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_seq.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_smallworld.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_spanning_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_sphere_surface.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_sphere_volume.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_traits_callaway.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sample_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sbm.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/scan_stat.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sequential_pal.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set.edge.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set.graph.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set.vertex.attribute.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set_edge_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set_graph_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set_vertex_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/shapes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/shortest.paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/showtrace.html</loc></url>
+<url><loc>https://r.igraph.org/reference/similarity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/simplified.html</loc></url>
+<url><loc>https://r.igraph.org/reference/simplify.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sir.html</loc></url>
+<url><loc>https://r.igraph.org/reference/spectrum.html</loc></url>
+<url><loc>https://r.igraph.org/reference/spinglass.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/split_join_distance.html</loc></url>
+<url><loc>https://r.igraph.org/reference/stCuts.html</loc></url>
+<url><loc>https://r.igraph.org/reference/stMincuts.html</loc></url>
+<url><loc>https://r.igraph.org/reference/st_cuts.html</loc></url>
+<url><loc>https://r.igraph.org/reference/st_min_cuts.html</loc></url>
+<url><loc>https://r.igraph.org/reference/static.fitness.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/static.power.law.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/stochastic_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/strength.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sub-.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/sub-sub-.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subcomponent.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subgraph.centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subgraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subgraph_centrality.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subgraph_isomorphic.html</loc></url>
+<url><loc>https://r.igraph.org/reference/subgraph_isomorphisms.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tail_of.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkigraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.canvas.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.center.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.close.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.export.postscript.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.fit.to.screen.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.getcoords.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.off.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.reshape.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.rotate.html</loc></url>
+<url><loc>https://r.igraph.org/reference/tkplot.setcoords.html</loc></url>
+<url><loc>https://r.igraph.org/reference/to_prufer.html</loc></url>
+<url><loc>https://r.igraph.org/reference/topo_sort.html</loc></url>
+<url><loc>https://r.igraph.org/reference/topological.sort.html</loc></url>
+<url><loc>https://r.igraph.org/reference/transitivity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/triad.census.html</loc></url>
+<url><loc>https://r.igraph.org/reference/triad_census.html</loc></url>
+<url><loc>https://r.igraph.org/reference/unfold.tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/unfold_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/union.html</loc></url>
+<url><loc>https://r.igraph.org/reference/union.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/union.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/union.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/unique.igraph.es.html</loc></url>
+<url><loc>https://r.igraph.org/reference/unique.igraph.vs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/upgrade_graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex.connectivity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex.disjoint.paths.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex.shape.pie.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex.shapes.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex_attr-set.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex_attr_names.html</loc></url>
+<url><loc>https://r.igraph.org/reference/vertex_connectivity.html</loc></url>
+<url><loc>https://r.igraph.org/reference/voronoi_cells.html</loc></url>
+<url><loc>https://r.igraph.org/reference/walktrap.community.html</loc></url>
+<url><loc>https://r.igraph.org/reference/watts.strogatz.game.html</loc></url>
+<url><loc>https://r.igraph.org/reference/weighted_cliques.html</loc></url>
+<url><loc>https://r.igraph.org/reference/which_multiple.html</loc></url>
+<url><loc>https://r.igraph.org/reference/which_mutual.html</loc></url>
+<url><loc>https://r.igraph.org/reference/with_edge_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/with_graph_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/with_igraph_opt.html</loc></url>
+<url><loc>https://r.igraph.org/reference/with_vertex_.html</loc></url>
+<url><loc>https://r.igraph.org/reference/without_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/without_loops.html</loc></url>
+<url><loc>https://r.igraph.org/reference/without_multiples.html</loc></url>
+<url><loc>https://r.igraph.org/reference/write.graph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/write_graph.html</loc></url>
 </urlset>
+
