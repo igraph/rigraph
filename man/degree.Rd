@@ -65,7 +65,7 @@ its adjacent edges.
 g <- make_ring(10)
 degree(g)
 g2 <- sample_gnp(1000, 10 / 1000)
-max_degree(g)
+max_degree(g2)
 degree_distribution(g2)
 
 }
