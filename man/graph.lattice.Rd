@@ -12,7 +12,7 @@ graph.lattice(
   directed = FALSE,
   mutual = FALSE,
   periodic = FALSE,
-  circular
+  circular = deprecated()
 )
 }
 \arguments{

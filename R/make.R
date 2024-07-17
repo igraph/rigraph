@@ -339,7 +339,7 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
-graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular) { # nocov start
+graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular = deprecated()) { # nocov start
   lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
@@ -1672,7 +1672,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' make_lattice(length = 5, dim = 3)
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
-                         periodic = FALSE, circular) {
+                         periodic = FALSE, circular = deprecated()) {
   if (lifecycle::is_present(circular)) {
     lifecycle::deprecate_soft(
       "2.0.3",

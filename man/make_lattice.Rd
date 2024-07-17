@@ -13,7 +13,7 @@ make_lattice(
   directed = FALSE,
   mutual = FALSE,
   periodic = FALSE,
-  circular
+  circular = deprecated()
 )
 
 lattice(...)
