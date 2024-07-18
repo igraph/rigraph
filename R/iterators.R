@@ -153,6 +153,40 @@ set_complete_iterator <- function(x, value = TRUE) {
   x
 }
 
+inside_square_error <- function(fn_name, call = rlang::caller_env()) {
+  cli::cli_abort(c(
+    "{.fun {fn_name}} must only be used inside index or vertex sequences like {.code E(g)[]} or {.code V(g)[]}.",
+    i = "See {.help [{.fun [.igraph.es}](igraph::`[.igraph.es`)} or {.help [{.fun [.igraph.vs}](igraph::`[.igraph.vs`)}."
+  ), call = call)
+}
+
+
+#' Helpers within vertex/index sequences
+#'
+#' Functions to be used only with `[.igraph.es` and `[.igraph.vs`
+#'
+#' @keywords internal
+#' @rdname inside-square-error
+#' @return An error
+#' @export
+#'
+.nei <- function() inside_square_error(".nei")
+#' @rdname inside-square-error
+#' @export
+.innei <- function() inside_square_error(".innei")
+#' @rdname inside-square-error
+#' @export
+.outnei <- function() inside_square_error(".outnei")
+#' @rdname inside-square-error
+#' @export
+.inc <- function() inside_square_error(".inc")
+#' @rdname inside-square-error
+#' @export
+.from <- function() inside_square_error(".from")
+#' @rdname inside-square-error
+#' @export
+.to <- function() inside_square_error(".to")
+
 #' Vertices of a graph
 #'
 #' Create a vertex sequence (vs) containing all vertices of a graph.
