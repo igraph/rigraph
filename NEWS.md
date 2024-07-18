@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9046
+
+## Bug fixes
+
+- Use deprecated() as default value for 'circular' argument (#1431).
+
+
 # igraph 2.0.3.9045
 
 ## Chore
