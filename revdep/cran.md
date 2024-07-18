@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 842 reverse dependencies (841 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 851 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 6 new problems
- * We failed to check 22 packages
+ * We saw 5 new problems
+ * We failed to check 4 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -15,8 +15,7 @@ Issues with CRAN packages are summarised below.
 
 * netropy
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rmcfs
   checking tests ... ERROR
@@ -27,30 +26,9 @@ Issues with CRAN packages are summarised below.
 * skynet
   checking tests ... ERROR
 
-* tidygraph
-  checking tests ... ERROR
-
 ### Failed to check
 
-* Canek                 (NA)
-* CARBayes              (NA)
-* ClustAssess           (NA)
-* clustree              (NA)
-* ConnectednessApproach (NA)
-* conos                 (NA)
-* countland             (NA)
-* datapack              (NA)
-* DIscBIO               (NA)
-* dyngen                (NA)
-* easybgm               (NA)
-* erah                  (NA)
-* evolqg                (NA)
-* frechet               (NA)
-* manet                 (NA)
-* multinma              (NA)
-* netcmc                (NA)
-* NetworkChange         (NA)
-* scDiffCom             (NA)
-* SignacX               (NA)
-* streamDAG             (NA)
-* treefit               (NA)
+* checked   (NA)
+* datapack  (NA)
+* multinma  (NA)
+* streamDAG (NA)
