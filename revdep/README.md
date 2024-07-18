@@ -1,14 +1,5 @@
 # Revdeps
 
-## Failed to check (4)
-
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|checked   |0.1.0   |1     |        |     |
-|datapack  |1.4.1   |1     |        |     |
-|multinma  |0.7.1   |1     |        |     |
-|streamDAG |?       |      |        |     |
-
 ## New problems (5)
 
 |package   |version |error  |warning |note |

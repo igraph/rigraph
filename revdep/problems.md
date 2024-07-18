@@ -30,9 +30,8 @@ Run `revdepcheck::cloud_details(, "BCT")` for more info
     > q <- BCT(pewee, 5) # maximum depth of 5
     > 
     > draw_models(q)
-    Error in igraph::graph.lattice(length(subwords) + 1, directed = TRUE) : 
-      argument "circular" is missing, with no default
-    Calls: draw_models -> show_tree -> <Anonymous>
+    Error in getval(w, name) : argument "newval" is missing, with no default
+    Calls: draw_models ... .igraph.graph.union.or.intersection -> rename.attr.if.needed -> getval
     Execution halted
     ```
 
@@ -282,7 +281,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:39 UTC 2024
+      Start time: Thu Jul 18 09:10:57 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -291,12 +290,12 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [===========================>                                          ]  40% Time: 00:00 ETA: --:--    
       [==================================>                                   ]  50% Time: 00:00 ETA: --:--    
       [=========================================>                            ]  60% Time: 00:00 ETA: --:--    
-      [================================================>                     ]  70% Time: 00:01 ETA: --:--    
-      [=======================================================>              ]  80% Time: 00:01 ETA: --:--    
-      [==============================================================>       ]  90% Time: 00:01 ETA: --:--    
-      [=====================================================================>]  100% Time: 00:01 ETA: --:--    
+      [================================================>                     ]  70% Time: 00:00 ETA: --:--    
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
+      [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:01               
-      1000 trees built within 1.2 s.
+      1000 trees built within 1.0 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 80.46%
@@ -306,7 +305,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Cutoff RI (based on k-means clustering) = 0.3971068
       Cutoff RI (based on mean cutoff value) = 0.0451185
       Important attributes (based on mean cutoff value) = 6
-      *** MCFS-ID Processing is done. Time: 1.4 s. ***
+      *** MCFS-ID Processing is done. Time: 1.1 s. ***
       
       Reading results...
       Done.
@@ -372,7 +371,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:40 UTC 2024
+      Start time: Thu Jul 18 09:10:58 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -386,7 +385,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.597 s.
+      1000 trees built within 0.481 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 49.63%
@@ -410,7 +409,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:41 UTC 2024
+      Start time: Thu Jul 18 09:10:59 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -424,15 +423,15 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.517 s.
+      1000 trees built within 0.352 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 50.95%
-      WeightedAccuracy = 32.20%
+      Accuracy = 50.93%
+      WeightedAccuracy = 32.25%
       
-      Cutoff RI (based on linear regression angle) = 0.0085379
-      Cutoff RI (based on k-means clustering) = 0.0165305
-      Cutoff RI (based on mean cutoff value) = 0.0085379
+      Cutoff RI (based on linear regression angle) = 0.0085784
+      Cutoff RI (based on k-means clustering) = 0.0165298
+      Cutoff RI (based on mean cutoff value) = 0.0085784
       Important attributes (based on mean cutoff value) = 6
       
       ***************************************************
@@ -448,7 +447,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:42 UTC 2024
+      Start time: Thu Jul 18 09:10:59 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -462,15 +461,15 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.46 s.
+      1000 trees built within 0.425 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 50.74%
       WeightedAccuracy = 33.26%
       
-      Cutoff RI (based on linear regression angle) = 0.0136976
-      Cutoff RI (based on k-means clustering) = 0.0196922
-      Cutoff RI (based on mean cutoff value) = 0.0136976
+      Cutoff RI (based on linear regression angle) = 0.0138890
+      Cutoff RI (based on k-means clustering) = 0.0206007
+      Cutoff RI (based on mean cutoff value) = 0.0138890
       Important attributes (based on mean cutoff value) = 6
       
       **************************
@@ -485,7 +484,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:42 UTC 2024
+      Start time: Thu Jul 18 09:11:00 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -499,29 +498,29 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.444 s.
+      1000 trees built within 0.317 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 81.93%
-      WeightedAccuracy = 71.54%
+      Accuracy = 82.05%
+      WeightedAccuracy = 71.88%
       
-      Cutoff RI (based on linear regression angle) = 0.0234060
-      Cutoff RI (based on k-means clustering) = 0.4045025
-      Cutoff RI (based on mean cutoff value) = 0.0234060
+      Cutoff RI (based on linear regression angle) = 0.0249342
+      Cutoff RI (based on k-means clustering) = 0.4032865
+      Cutoff RI (based on mean cutoff value) = 0.0249342
       Important attributes (based on mean cutoff value) = 6
       *** Calculation of cutoff RI (based on permutations) ***
-      Max RI (raw data) = 0.73927444
-      Max RI (after permutations) = [0.026800117, 0.026741829, 0.03118671]
-      Anderson-Darling normality test p-value = 0.0629105
-      Confidence Interval: 0.0219093 ; 0.0345764
-      Cutoff RI (based on permutations) = 0.0345764
+      Max RI (raw data) = 0.75569206
+      Max RI (after permutations) = [0.026800117, 0.025955085, 0.03071283]
+      Anderson-Darling normality test p-value = 0.2157031
+      Confidence Interval: 0.0215170 ; 0.0341283
+      Cutoff RI (based on permutations) = 0.0341283
       Important attributes (based on permutations) = 6
       *** Calculation of cutoff ID ***
-      Anderson-Darling normality test p-value = 0.0933912
-      Confidence Interval: 5.4416832 ; 7.3008240
-      Cutoff ID (based on permutations)  = 7.3008240
+      Anderson-Darling normality test p-value = 0.2467775
+      Confidence Interval: 5.9950792 ; 7.6353525
+      Cutoff ID (based on permutations)  = 7.6353525
       *** Final Important attributes (based on permutations) = 6
-      *** MCFS-ID Processing is done. Time: 2.1 s. ***
+      *** MCFS-ID Processing is done. Time: 1.6 s. ***
       
       Reading results...
       Done.
@@ -530,136 +529,136 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       
       Top 6 features:
        position attribute        RI
-              1        A2 0.7392744
-              2        A1 0.7040163
-              3        B1 0.4270796
-              4        B2 0.4045025
-              5        C1 0.2748785
-              6        C2 0.2224798
+              1        A2 0.7556921
+              2        A1 0.6967780
+              3        B2 0.4196845
+              4        B1 0.4032865
+              5        C1 0.2791012
+              6        C2 0.2322030
       
       #################################
       Cutoff values:
               method      minRI size    minID
-       criticalAngle 0.02340608    7       NA
-              kmeans 0.40450251    4       NA
-        permutations 0.03457643    6 7.300824
-                mean 0.02340608    6       NA
+       criticalAngle 0.02493421    7       NA
+              kmeans 0.40328652    4       NA
+        permutations 0.03412831    6 7.635353
+                mean 0.02493421    6       NA
       
       #################################
       Confusion matrix obtained on randomly selected (st) datasets:
       Confusion Matrix:
       
             A    B    C
-      A 13588  366  186
-      B  1352 5395  323
-      C  1416  918 1706
+      A 13578  362  200
+      B  1364 5389  317
+      C  1403  884 1753
       
       TPR (sensitivity/recall):
       
            TPR
-      1 96.1 %
-      2 76.3 %
-      3 42.2 %
+      1   96 %
+      2 76.2 %
+      3 43.4 %
       
-      Accuracy: 81.9 %
-      wAccuracy: 71.5 %
+      Accuracy: 82.1 %
+      wAccuracy: 71.9 %
       
       #################################
       MCFS-ID execution time: 2 secs
                method      minRI size    minID
-      1 criticalAngle 0.02340608    7       NA
-      2        kmeans 0.40450251    4       NA
-      3  permutations 0.03457643    6 7.300824
-      4          mean 0.02340608    6       NA
+      1 criticalAngle 0.02493421    7       NA
+      2        kmeans 0.40328652    4       NA
+      3  permutations 0.03412831    6 7.635353
+      4          mean 0.02493421    6       NA
       [1] 6
          projection distance commonPart mAvg beta1
       1          30    0.625          1    0     0
-      2          40    0.500          1    0     0
-      3          50    0.750          1    0     0
-      4          60    0.625          1    0     0
-      5          70    0.500          1    0     0
-      6          80    0.250          1    0     0
-      7          90    0.500          1    0     0
-      8         100    0.250          1    0     0
-      9         110    0.500          1    0     0
-      10        120    0.375          1    0     0
-      11        130    0.125          1    0     0
-      12        140    0.125          1    0     0
-      13        150    0.000          1    0     0
-      14        160    0.000          1    0     0
-      15        170    0.125          1    0     0
+      2          40    0.750          1    0     0
+      3          50    0.500          1    0     0
+      4          60    0.750          1    0     0
+      5          70    0.750          1    0     0
+      6          80    0.375          1    0     0
+      7          90    0.125          1    0     0
+      8         100    0.375          1    0     0
+      9         110    0.125          1    0     0
+      10        120    0.000          1    0     0
+      11        130    0.250          1    0     0
+      12        140    0.250          1    0     0
+      13        150    0.125          1    0     0
+      14        160    0.250          1    0     0
+      15        170    0.000          1    0     0
       16        180    0.000          1    0     0
-      17        190    0.250          1    0     0
+      17        190    0.125          1    0     0
       18        200    0.250          1    0     0
          position attribute projections classifiers     nodes          RI
-      12        1        A2          59  0.90508470 0.9050847 0.739274440
-      11        2        A1          54  0.84444445 0.8444445 0.704016270
-      13        3        B1          54  0.89629630 0.8962963 0.427079650
-      14        4        B2          60  0.86333334 0.8633333 0.404502500
-      15        5        C1          51  0.86274510 0.8627451 0.274878470
-      16        6        C2          39  0.73846155 0.7384616 0.222479780
-      2         7        X2          45  0.36888888 0.5911111 0.023406085
-      8         8        X8          46  0.32173914 0.5173913 0.020704733
-      3         9        X3          40  0.20500000 0.4050000 0.011209553
-      5        10        X5          58  0.24482758 0.3275862 0.010157373
-      7        11        X7          52  0.20769231 0.2653846 0.010091832
-      10       12       X10          59  0.20677966 0.3864407 0.010027862
-      9        13        X9          35  0.14857143 0.2514286 0.007577793
-      1        14        X1          61  0.18032786 0.2688525 0.007436590
-      6        15        X6          50  0.17200000 0.2520000 0.006043765
-      4        16        X4          45  0.08888889 0.1288889 0.003236524
+      12        1        A2          62  0.91290325 0.9129033 0.755692060
+      11        2        A1          48  0.84166664 0.8416666 0.696778000
+      14        3        B2          59  0.86101690 0.8610169 0.419684530
+      13        4        B1          57  0.88771930 0.8877193 0.403286520
+      15        5        C1          53  0.86037740 0.8603774 0.279101220
+      16        6        C2          40  0.75500000 0.7550000 0.232203050
+      2         7        X2          48  0.38333333 0.6000000 0.024934206
+      8         8        X8          46  0.35652173 0.5478261 0.024855249
+      3         9        X3          40  0.21000000 0.4150000 0.012116533
+      7        10        X7          47  0.21702127 0.2851064 0.010706335
+      10       11       X10          58  0.21034482 0.3793103 0.010647866
+      5        12        X5          57  0.21052632 0.2842105 0.009043122
+      9        13        X9          35  0.15428571 0.2571429 0.007862807
+      1        14        X1          57  0.18596491 0.2701754 0.007755438
+      6        15        X6          54  0.18888889 0.2666667 0.006814953
+      4        16        X4          47  0.09361702 0.1276596 0.003441651
          position edge_a edge_b     weight
-      1         1     A2     B1 21.0645540
-      2         2     A1     B2 16.8582150
-      3         3     B1     C2 16.0082470
-      4         4     B1     C1 14.6665200
-      5         5     A1     C2 10.5145660
-      6         6     A1     C1  9.9006460
+      1         1     A2     B1 25.3522010
+      2         2     B1     C2 14.5552830
+      3         3     B1     C1 13.6161410
+      4         4     A1     B2 11.5978510
+      5         5     A1     C2 10.8978290
+      6         6     A2     C1  9.9805440
       7         7     A2     B2  9.0048310
-      8         8     A2     C1  8.7795830
-      9         9     B2     C1  8.5823240
-      10       10     A1     B1  5.9749546
-      11       11     A2     C2  5.4840190
-      12       12     B2     C2  4.2234870
-      13       13     C1     X8  3.3031993
-      14       14     B2     X2  3.1769930
-      15       15    X10     X5  3.1326427
+      8         8     B2     C1  8.5823240
+      9         9     A1     B1  7.3013086
+      10       10     A1     C1  7.1974344
+      11       11     B2     C2  6.4786950
+      12       12     C1     X8  5.7917280
+      13       13     A2     C2  5.4840190
+      14       14     B1     X2  3.3558383
+      15       15     B2     X2  3.1769930
       16       16     B2     A2  2.8444445
-      17       17     B1     X2  2.3783865
-      18       18     X3     X5  2.2166020
-      19       19     C2     X8  2.0978599
-      20       20     X8     X1  1.7968506
+      17       17     X3     X5  2.2166020
+      18       18     C2     X8  2.0978600
+      19       19     A2     X2  1.9983566
+      20       20     B2    X10  1.7701454
       21       21     X2     X7  1.7524443
-      22       22     X5     X7  1.6569053
-      23       23     A2     X2  1.6558274
-      24       24     X1    X10  1.6187991
-      25       25     X6     X3  1.5199531
-      26       26     B2     X1  1.5082688
-      27       27     B1     X7  1.4785967
-      28       28    X10     X1  1.4690706
+      22       22     B2     X1  1.6774335
+      23       23     X8     X1  1.6554034
+      24       24     B1     X7  1.6185875
+      25       25    X10     X7  1.6069815
+      26       26    X10     X6  1.5277632
+      27       27     X1    X10  1.5185722
+      28       28     X8    X10  1.4838791
       29       29     X2     X5  1.4619606
-      30       30     X5     X3  1.4528582
-      31       31    X10     X9  1.4481974
+      30       30    X10     X5  1.4578505
+      31       31     X5     X3  1.4528583
       32       32     B1     X1  1.4239199
-      33       33     C1     X7  1.4212025
-      34       34    X10     X6  1.4188985
-      35       35     X8    X10  1.4081683
-      36       36     B2    X10  1.3209305
-      37       37     C1     X2  1.3117471
-      38       38     X2     X9  1.3068573
-      39       39    X10     X3  1.2095273
-      40       40     X5    X10  1.2058706
-      41       41    X10     X7  1.2030488
-      42       42     X2     X3  1.1794013
-      43       43     B2     X5  1.1487597
-      44       44     X7    X10  1.1431442
-      45       45     X3     X6  1.0868700
-      46       46     B1     X5  1.0511171
-      47       47     B1    X10  1.0388901
-      48       48     X2     X4  1.0143764
-      49       49     X1     X9  0.9942785
-      50       50     X1     X7  0.9924656
-      Selected 6 nodes and 18 edges.
+      33       33     X5     X7  1.3917996
+      34       34     X2     X9  1.3689568
+      35       35     C1     X2  1.3621721
+      36       36     X2     X3  1.3203249
+      37       37     X6     X3  1.3187371
+      38       38     X7    X10  1.2841835
+      39       39    X10     X9  1.2303705
+      40       40    X10     X3  1.2095273
+      41       41     X1     X7  1.1508476
+      42       42     X3     X6  1.0868700
+      43       43     B1     X3  1.0831480
+      44       44     B2     X5  1.0708183
+      45       45     X2     X4  1.0487859
+      46       46     C1     X3  1.0222663
+      47       47     X1     X9  0.9942785
+      48       48     C1     X7  0.9647899
+      49       49     X7     X1  0.9580313
+      50       50     X9     X5  0.9557424
+      Selected 6 nodes and 17 edges.
                  X1         X2         X3          X4         X5         X6        X7
       1  0.98902563 0.23116906 0.78483548 0.821803022 0.71088721 0.58821497 0.7953894
       2  0.61944825 0.35058203 0.15437349 0.901695312 0.94776216 0.16505500 0.2390703
@@ -722,7 +721,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:44 UTC 2024
+      Start time: Thu Jul 18 09:11:01 UTC 2024
       Running: 2 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -736,17 +735,17 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.358 s.
+      1000 trees built within 0.28 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 79.73%
-      WeightedAccuracy = 69.47%
+      Accuracy = 78.90%
+      WeightedAccuracy = 68.28%
       
-      Cutoff RI (based on linear regression angle) = 0.0195553
-      Cutoff RI (based on k-means clustering) = 0.4411757
-      Cutoff RI (based on mean cutoff value) = 0.0195553
+      Cutoff RI (based on linear regression angle) = 0.0200903
+      Cutoff RI (based on k-means clustering) = 0.4499447
+      Cutoff RI (based on mean cutoff value) = 0.0200903
       Important attributes (based on mean cutoff value) = 6
-      *** MCFS-ID Processing is done. Time: 0.368 s. ***
+      *** MCFS-ID Processing is done. Time: 0.287 s. ***
       
       Reading results...
       Done.
@@ -811,19 +810,19 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       MCFS-ID param: ID-Graph is ON
       MCFS-ID param: finalCV is ON
       Starting MCFS-ID Procedure: projectionSize(m) = 10, projections(s) = 212, splits(t) = 5
-      Start time: Tue Jul 16 09:14:45 UTC 2024
+      Start time: Thu Jul 18 09:11:02 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [=====>                                                                ]  9% Time: 00:01 ETA: --:--    
+      [=====>                                                                ]  9% Time: 00:00 ETA: --:--    
       [============>                                                         ]  19% Time: 00:01 ETA: --:--    
-      [======================>                                               ]  33% Time: 00:02 ETA: 00:06    
-      [================================>                                     ]  47% Time: 00:02 ETA: 00:05    
-      [======================================>                               ]  57% Time: 00:03 ETA: 00:03    
-      [================================================>                     ]  71% Time: 00:03 ETA: 00:03    
-      [==========================================================>           ]  85% Time: 00:04 ETA: 00:04    
-      [====================================================================> ]  99% Time: 00:04 ETA: 00:04    
-      [=====================================================================>]  100% Time: 00:05               
-      1060 trees built within 5.2 s.
+      [======================>                                               ]  33% Time: 00:01 ETA: --:--    
+      [================================>                                     ]  47% Time: 00:02 ETA: 00:04    
+      [======================================>                               ]  57% Time: 00:02 ETA: 00:02    
+      [================================================>                     ]  71% Time: 00:02 ETA: 00:02    
+      [==========================================================>           ]  85% Time: 00:03 ETA: 00:03    
+      [====================================================================> ]  99% Time: 00:03 ETA: 00:03    
+      [=====================================================================>]  100% Time: 00:03               
+      1060 trees built within 3.6 s.
       
       Prediction Summary on a Random Subsample (st):
       pearson: mean = 0.19714685679046492 median = 0.0 stdev = 0.3785735601222462 
@@ -844,7 +843,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Evaluating model performance using 10 fold CV. Model: m5
       Evaluating model performance using 10 fold CV. Model: m5
       Evaluating model performance using 10 fold CV. Model: m5
-      *** MCFS-ID Processing is done. Time: 5.5 s. ***
+      *** MCFS-ID Processing is done. Time: 3.9 s. ***
       
       Reading results...
       Done.
@@ -909,7 +908,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:50 UTC 2024
+      Start time: Thu Jul 18 09:11:06 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -919,11 +918,11 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==================================>                                   ]  50% Time: 00:00 ETA: --:--    
       [=========================================>                            ]  60% Time: 00:00 ETA: --:--    
       [================================================>                     ]  70% Time: 00:00 ETA: --:--    
-      [=======================================================>              ]  80% Time: 00:01 ETA: --:--    
-      [==============================================================>       ]  90% Time: 00:01 ETA: --:--    
-      [=====================================================================>]  100% Time: 00:01 ETA: --:--    
-      [=====================================================================>]  100% Time: 00:01               
-      1000 trees built within 1.1 s.
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
+      [=====================================================================>]  100% Time: 00:00 ETA: --:--    
+      [=====================================================================>]  100% Time: 00:00               
+      1000 trees built within 0.829 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 50.94%
@@ -947,7 +946,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:51 UTC 2024
+      Start time: Thu Jul 18 09:11:06 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -961,7 +960,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.4 s.
+      1000 trees built within 0.384 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 51.68%
@@ -985,7 +984,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:52 UTC 2024
+      Start time: Thu Jul 18 09:11:07 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -999,7 +998,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.421 s.
+      1000 trees built within 0.344 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 50.35%
@@ -1023,7 +1022,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 200, splits(t) = 5
-      Start time: Tue Jul 16 09:14:52 UTC 2024
+      Start time: Thu Jul 18 09:11:07 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [======>                                                               ]  10% Time: 00:00 ETA: --:--    
@@ -1037,7 +1036,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [==============================================================>       ]  90% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      1000 trees built within 0.303 s.
+      1000 trees built within 0.247 s.
       
       Prediction Summary on a Random Subsample (st):
       Accuracy = 79.01%
@@ -1068,7 +1067,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
-      *** MCFS-ID Processing is done. Time: 8.2 s. ***
+      *** MCFS-ID Processing is done. Time: 6.6 s. ***
       
       Reading results...
       Done.
@@ -1110,29 +1109,29 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
-      Start time: Tue Jul 16 09:14:59 UTC 2024
+      Start time: Thu Jul 18 09:11:13 UTC 2024
       Running: 6 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
       [==========>                                                           ]  16% Time: 00:00 ETA: --:--    
       [===================>                                                  ]  29% Time: 00:01 ETA: --:--    
       [===========================>                                          ]  41% Time: 00:01 ETA: --:--    
-      [==================================>                                   ]  51% Time: 00:02 ETA: 00:02    
-      [=========================================>                            ]  61% Time: 00:02 ETA: 00:02    
+      [==================================>                                   ]  51% Time: 00:01 ETA: --:--    
+      [=========================================>                            ]  61% Time: 00:01 ETA: --:--    
       [==================================================>                   ]  73% Time: 00:02 ETA: 00:02    
       [========================================================>             ]  83% Time: 00:02 ETA: 00:02    
-      [=================================================================>    ]  96% Time: 00:03 ETA: 00:03    
+      [=================================================================>    ]  96% Time: 00:02 ETA: 00:02    
       [=====================================================================>]  100% Time: 00:03               
-      1570 trees built within 3.6 s.
+      1570 trees built within 3.0 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 42.51%
-      WeightedAccuracy = 33.55%
+      Accuracy = 42.61%
+      WeightedAccuracy = 33.71%
       
-      Cutoff RI (based on linear regression angle) = 0.0330893
-      Cutoff RI (based on k-means clustering) = 0.0167340
-      Cutoff RI (based on mean cutoff value) = 0.0213250
-      Important attributes (based on mean cutoff value) = 51
+      Cutoff RI (based on linear regression angle) = 0.0327596
+      Cutoff RI (based on k-means clustering) = 0.0167396
+      Cutoff RI (based on mean cutoff value) = 0.0214019
+      Important attributes (based on mean cutoff value) = 50
       
       ***************************************************
       *** MCFS-ID Cutoff Permutation Experiment #2/3 ***
@@ -1147,80 +1146,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
-      Start time: Tue Jul 16 09:15:03 UTC 2024
-      Running: 6 threads...
-      [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
-      [==========>                                                           ]  16% Time: 00:00 ETA: --:--    
-      [===================>                                                  ]  29% Time: 00:01 ETA: --:--    
-      [===========================>                                          ]  41% Time: 00:01 ETA: --:--    
-      [==================================>                                   ]  51% Time: 00:01 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:01 ETA: --:--    
-      [==================================================>                   ]  73% Time: 00:01 ETA: --:--    
-      [========================================================>             ]  83% Time: 00:02 ETA: 00:02    
-      [=================================================================>    ]  96% Time: 00:02 ETA: 00:02    
-      [=====================================================================>]  100% Time: 00:03               
-      1570 trees built within 3.0 s.
-      
-      Prediction Summary on a Random Subsample (st):
-      Accuracy = 42.86%
-      WeightedAccuracy = 33.67%
-      
-      Cutoff RI (based on linear regression angle) = 0.0349667
-      Cutoff RI (based on k-means clustering) = 0.0138617
-      Cutoff RI (based on mean cutoff value) = 0.0182492
-      Important attributes (based on mean cutoff value) = 72
-      
-      ***************************************************
-      *** MCFS-ID Cutoff Permutation Experiment #3/3 ***
-      ***************************************************
-      Loading header: 'input.adh'...
-      Loading data: 'input.csv'...
-      70 objects and 1007 attributes to load... Done
-      Pearson's correlation of shuffled decision: -0.1199
-      Nominal target detected - using J48 model
-      MCFS-ID param: ID-Graph is ON
-      MCFS-ID param: balance classes is AUTO
-      Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
-      Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
-      Start time: Tue Jul 16 09:15:06 UTC 2024
-      Running: 6 threads...
-      [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
-      [==========>                                                           ]  16% Time: 00:00 ETA: --:--    
-      [===================>                                                  ]  29% Time: 00:00 ETA: --:--    
-      [===========================>                                          ]  41% Time: 00:01 ETA: --:--    
-      [==================================>                                   ]  51% Time: 00:01 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:01 ETA: --:--    
-      [==================================================>                   ]  73% Time: 00:01 ETA: --:--    
-      [========================================================>             ]  83% Time: 00:01 ETA: --:--    
-      [=================================================================>    ]  96% Time: 00:02 ETA: 00:02    
-      [=====================================================================>]  100% Time: 00:02               
-      1570 trees built within 2.5 s.
-      
-      Prediction Summary on a Random Subsample (st):
-      Accuracy = 42.00%
-      WeightedAccuracy = 32.97%
-      
-      Cutoff RI (based on linear regression angle) = 0.0261111
-      Cutoff RI (based on k-means clustering) = 0.0139619
-      Cutoff RI (based on mean cutoff value) = 0.0183483
-      Important attributes (based on mean cutoff value) = 65
-      
-      **************************
-      *** MCFS-ID Experiment ***
-      **************************
-      Loading header: 'input.adh'...
-      Loading data: 'input.csv'...
-      70 objects and 1007 attributes to load... Done
-      Nominal target detected - using J48 model
-      MCFS-ID param: ID-Graph is ON
-      MCFS-ID param: balance classes is AUTO
-      Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
-      Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
-      Start time: Tue Jul 16 09:15:09 UTC 2024
+      Start time: Thu Jul 18 09:11:16 UTC 2024
       Running: 6 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
@@ -1236,26 +1162,99 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       1570 trees built within 2.3 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 47.08%
-      WeightedAccuracy = 38.10%
+      Accuracy = 42.88%
+      WeightedAccuracy = 33.73%
       
-      Cutoff RI (based on linear regression angle) = 0.0306562
-      Cutoff RI (based on k-means clustering) = 0.3289397
-      Cutoff RI (based on mean cutoff value) = 0.0394012
+      Cutoff RI (based on linear regression angle) = 0.0349667
+      Cutoff RI (based on k-means clustering) = 0.0140571
+      Cutoff RI (based on mean cutoff value) = 0.0185226
+      Important attributes (based on mean cutoff value) = 70
+      
+      ***************************************************
+      *** MCFS-ID Cutoff Permutation Experiment #3/3 ***
+      ***************************************************
+      Loading header: 'input.adh'...
+      Loading data: 'input.csv'...
+      70 objects and 1007 attributes to load... Done
+      Pearson's correlation of shuffled decision: -0.1199
+      Nominal target detected - using J48 model
+      MCFS-ID param: ID-Graph is ON
+      MCFS-ID param: balance classes is AUTO
+      Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
+      Calculation of DecisionValuesTable...
+      Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
+      Start time: Thu Jul 18 09:11:18 UTC 2024
+      Running: 6 threads...
+      [                                                                      ]  0% Time: 00:00 ETA: --:--    
+      [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
+      [==========>                                                           ]  16% Time: 00:00 ETA: --:--    
+      [===================>                                                  ]  29% Time: 00:00 ETA: --:--    
+      [===========================>                                          ]  41% Time: 00:00 ETA: --:--    
+      [==================================>                                   ]  51% Time: 00:01 ETA: --:--    
+      [=========================================>                            ]  61% Time: 00:01 ETA: --:--    
+      [==================================================>                   ]  73% Time: 00:01 ETA: --:--    
+      [========================================================>             ]  83% Time: 00:01 ETA: --:--    
+      [=================================================================>    ]  96% Time: 00:01 ETA: --:--    
+      [=====================================================================>]  100% Time: 00:02               
+      1570 trees built within 2.2 s.
+      
+      Prediction Summary on a Random Subsample (st):
+      Accuracy = 41.99%
+      WeightedAccuracy = 33.01%
+      
+      Cutoff RI (based on linear regression angle) = 0.0270371
+      Cutoff RI (based on k-means clustering) = 0.0130469
+      Cutoff RI (based on mean cutoff value) = 0.0169665
+      Important attributes (based on mean cutoff value) = 78
+      
+      **************************
+      *** MCFS-ID Experiment ***
+      **************************
+      Loading header: 'input.adh'...
+      Loading data: 'input.csv'...
+      70 objects and 1007 attributes to load... Done
+      Nominal target detected - using J48 model
+      MCFS-ID param: ID-Graph is ON
+      MCFS-ID param: balance classes is AUTO
+      Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
+      Calculation of DecisionValuesTable...
+      Starting MCFS-ID Procedure: projectionSize(m) = 32, projections(s) = 314, splits(t) = 5
+      Start time: Thu Jul 18 09:11:21 UTC 2024
+      Running: 6 threads...
+      [                                                                      ]  0% Time: 00:00 ETA: --:--    
+      [===>                                                                  ]  6% Time: 00:00 ETA: --:--    
+      [==========>                                                           ]  16% Time: 00:00 ETA: --:--    
+      [===================>                                                  ]  29% Time: 00:00 ETA: --:--    
+      [===========================>                                          ]  41% Time: 00:00 ETA: --:--    
+      [==================================>                                   ]  51% Time: 00:00 ETA: --:--    
+      [=========================================>                            ]  61% Time: 00:01 ETA: --:--    
+      [==================================================>                   ]  73% Time: 00:01 ETA: --:--    
+      [========================================================>             ]  83% Time: 00:01 ETA: --:--    
+      [=================================================================>    ]  96% Time: 00:01 ETA: --:--    
+      [=====================================================================>]  100% Time: 00:01               
+      1570 trees built within 1.9 s.
+      
+      Prediction Summary on a Random Subsample (st):
+      Accuracy = 47.16%
+      WeightedAccuracy = 38.15%
+      
+      Cutoff RI (based on linear regression angle) = 0.0288587
+      Cutoff RI (based on k-means clustering) = 0.3288324
+      Cutoff RI (based on mean cutoff value) = 0.0389880
       Important attributes (based on mean cutoff value) = 14
       *** Calculation of cutoff RI (based on permutations) ***
-      Max RI (raw data) = 0.669697
-      Max RI (after permutations) = [0.06497993, 0.06777546, 0.060535252]
-      Anderson-Darling normality test p-value = 0.5489277
-      Confidence Interval: 0.0553599 ; 0.0735004
-      Cutoff RI (based on permutations) = 0.0735004
+      Max RI (raw data) = 0.6696969
+      Max RI (after permutations) = [0.06497993, 0.057736687, 0.059140034]
+      Anderson-Darling normality test p-value = 0.2396656
+      Confidence Interval: 0.0510763 ; 0.0701614
+      Cutoff RI (based on permutations) = 0.0701614
       Important attributes (based on permutations) = 6
       *** Calculation of cutoff ID ***
       Anderson-Darling normality test p-value = 0.1113444
       Confidence Interval: 0.2776522 ; 2.4266361
       Cutoff ID (based on permutations)  = 2.4266361
       *** Final Important attributes (based on permutations) = 6
-      *** MCFS-ID Processing is done. Time: 12.1 s. ***
+      *** MCFS-ID Processing is done. Time: 10.1 s. ***
       
       Reading results...
       Done.
@@ -1322,7 +1321,7 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Data size: attributes: 118 objects: 70
       Calculation of DecisionValuesTable...
       Starting MCFS-ID Procedure: projectionSize(m) = 10, projections(s) = 530, splits(t) = 5
-      Start time: Tue Jul 16 09:15:11 UTC 2024
+      Start time: Thu Jul 18 09:11:23 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
       [=>                                                                    ]  4% Time: 00:00 ETA: --:--    
@@ -1331,23 +1330,23 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       [========================>                                             ]  36% Time: 00:00 ETA: --:--    
       [================================>                                     ]  47% Time: 00:00 ETA: --:--    
       [======================================>                               ]  57% Time: 00:00 ETA: --:--    
-      [==============================================>                       ]  68% Time: 00:01 ETA: --:--    
-      [======================================================>               ]  79% Time: 00:01 ETA: --:--    
+      [==============================================>                       ]  68% Time: 00:00 ETA: --:--    
+      [======================================================>               ]  79% Time: 00:00 ETA: --:--    
       [=============================================================>        ]  89% Time: 00:01 ETA: --:--    
       [=====================================================================>]  100% Time: 00:01 ETA: --:--    
       [=====================================================================>]  100% Time: 00:01               
-      2650 trees built within 1.5 s.
+      2650 trees built within 1.1 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 56.21%
-      WeightedAccuracy = 45.57%
+      Accuracy = 56.02%
+      WeightedAccuracy = 45.49%
       
-      Cutoff RI (based on linear regression angle) = 0.0219317
-      Cutoff RI (based on k-means clustering) = 0.4893118
-      Cutoff RI (based on contrast attributes) = 0.0281803
-      Cutoff RI (based on mean cutoff value) = 0.0281803
-      Important attributes (based on mean cutoff value) = 12
-      *** MCFS-ID Processing is done. Time: 1.6 s. ***
+      Cutoff RI (based on linear regression angle) = 0.0224505
+      Cutoff RI (based on k-means clustering) = 0.4918377
+      Cutoff RI (based on contrast attributes) = 0.0253349
+      Cutoff RI (based on mean cutoff value) = 0.0253349
+      Important attributes (based on mean cutoff value) = 13
+      *** MCFS-ID Processing is done. Time: 1.1 s. ***
       
       ***************************************************
       *** Running Phase II - Final MCFS-ID filtering  ***
@@ -1355,152 +1354,152 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       *** MCFS-ID Cutoff Permutation Experiment #1/3 ***
       ***************************************************
       Loading data: 'input.adx'...
-      70 objects and 14 attributes to load... Done
+      70 objects and 15 attributes to load... Done
       Pearson's correlation of shuffled decision: -0.1307
       Nominal target detected - using J48 model
       MCFS-ID param: ID-Graph is ON
       MCFS-ID param: balance classes is AUTO
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 163, splits(t) = 5
-      Start time: Tue Jul 16 09:15:13 UTC 2024
+      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 175, splits(t) = 5
+      Start time: Thu Jul 18 09:11:24 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [=======>                                                              ]  12% Time: 00:00 ETA: --:--    
-      [================>                                                     ]  25% Time: 00:00 ETA: --:--    
-      [========================>                                             ]  37% Time: 00:00 ETA: --:--    
-      [=================================>                                    ]  49% Time: 00:00 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:00 ETA: --:--    
-      [==================================================>                   ]  74% Time: 00:00 ETA: --:--    
-      [===========================================================>          ]  86% Time: 00:00 ETA: --:--    
-      [===================================================================>  ]  98% Time: 00:00 ETA: --:--    
+      [=======>                                                              ]  11% Time: 00:00 ETA: --:--    
+      [===============>                                                      ]  23% Time: 00:00 ETA: --:--    
+      [=======================>                                              ]  34% Time: 00:00 ETA: --:--    
+      [===============================>                                      ]  46% Time: 00:00 ETA: --:--    
+      [=======================================>                              ]  57% Time: 00:00 ETA: --:--    
+      [===============================================>                      ]  69% Time: 00:00 ETA: --:--    
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [===============================================================>      ]  91% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      815 trees built within 0.216 s.
+      875 trees built within 0.162 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 49.23%
-      WeightedAccuracy = 32.22%
+      Accuracy = 49.85%
+      WeightedAccuracy = 32.44%
       
-      Cutoff RI (based on linear regression angle) = 0.0153040
-      Cutoff RI (based on k-means clustering) = 0.0194927
-      Cutoff RI (based on mean cutoff value) = 0.0153040
-      Important attributes (based on mean cutoff value) = 4
+      Cutoff RI (based on linear regression angle) = 0.0155160
+      Cutoff RI (based on k-means clustering) = 0.0155160
+      Cutoff RI (based on mean cutoff value) = 0.0116263
+      Important attributes (based on mean cutoff value) = 5
       
       ***************************************************
       *** MCFS-ID Cutoff Permutation Experiment #2/3 ***
       ***************************************************
       Loading data: 'input.adx'...
-      70 objects and 14 attributes to load... Done
+      70 objects and 15 attributes to load... Done
       Pearson's correlation of shuffled decision: -0.0230
       Nominal target detected - using J48 model
       MCFS-ID param: ID-Graph is ON
       MCFS-ID param: balance classes is AUTO
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 163, splits(t) = 5
-      Start time: Tue Jul 16 09:15:13 UTC 2024
+      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 175, splits(t) = 5
+      Start time: Thu Jul 18 09:11:24 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [=======>                                                              ]  12% Time: 00:00 ETA: --:--    
-      [================>                                                     ]  25% Time: 00:00 ETA: --:--    
-      [========================>                                             ]  37% Time: 00:00 ETA: --:--    
-      [=================================>                                    ]  49% Time: 00:00 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:00 ETA: --:--    
-      [==================================================>                   ]  74% Time: 00:00 ETA: --:--    
-      [===========================================================>          ]  86% Time: 00:00 ETA: --:--    
-      [===================================================================>  ]  98% Time: 00:00 ETA: --:--    
+      [=======>                                                              ]  11% Time: 00:00 ETA: --:--    
+      [===============>                                                      ]  23% Time: 00:00 ETA: --:--    
+      [=======================>                                              ]  34% Time: 00:00 ETA: --:--    
+      [===============================>                                      ]  46% Time: 00:00 ETA: --:--    
+      [=======================================>                              ]  57% Time: 00:00 ETA: --:--    
+      [===============================================>                      ]  69% Time: 00:00 ETA: --:--    
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [===============================================================>      ]  91% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      815 trees built within 0.208 s.
+      875 trees built within 0.239 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 51.03%
-      WeightedAccuracy = 32.44%
+      Accuracy = 50.57%
+      WeightedAccuracy = 32.59%
       
-      Cutoff RI (based on linear regression angle) = 0.0128436
-      Cutoff RI (based on k-means clustering) = 0.0128436
-      Cutoff RI (based on mean cutoff value) = 0.0110325
-      Important attributes (based on mean cutoff value) = 6
+      Cutoff RI (based on linear regression angle) = 0.0152615
+      Cutoff RI (based on k-means clustering) = 0.0134873
+      Cutoff RI (based on mean cutoff value) = 0.0134873
+      Important attributes (based on mean cutoff value) = 7
       
       ***************************************************
       *** MCFS-ID Cutoff Permutation Experiment #3/3 ***
       ***************************************************
       Loading data: 'input.adx'...
-      70 objects and 14 attributes to load... Done
+      70 objects and 15 attributes to load... Done
       Pearson's correlation of shuffled decision: 0.1923
       Nominal target detected - using J48 model
       MCFS-ID param: ID-Graph is ON
       MCFS-ID param: balance classes is AUTO
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 163, splits(t) = 5
-      Start time: Tue Jul 16 09:15:13 UTC 2024
+      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 175, splits(t) = 5
+      Start time: Thu Jul 18 09:11:24 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [=======>                                                              ]  12% Time: 00:00 ETA: --:--    
-      [================>                                                     ]  25% Time: 00:00 ETA: --:--    
-      [========================>                                             ]  37% Time: 00:00 ETA: --:--    
-      [=================================>                                    ]  49% Time: 00:00 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:00 ETA: --:--    
-      [==================================================>                   ]  74% Time: 00:00 ETA: --:--    
-      [===========================================================>          ]  86% Time: 00:00 ETA: --:--    
-      [===================================================================>  ]  98% Time: 00:00 ETA: --:--    
+      [=======>                                                              ]  11% Time: 00:00 ETA: --:--    
+      [===============>                                                      ]  23% Time: 00:00 ETA: --:--    
+      [=======================>                                              ]  34% Time: 00:00 ETA: --:--    
+      [===============================>                                      ]  46% Time: 00:00 ETA: --:--    
+      [=======================================>                              ]  57% Time: 00:00 ETA: --:--    
+      [===============================================>                      ]  69% Time: 00:00 ETA: --:--    
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [===============================================================>      ]  91% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      815 trees built within 0.196 s.
+      875 trees built within 0.164 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 50.71%
-      WeightedAccuracy = 32.03%
+      Accuracy = 50.89%
+      WeightedAccuracy = 32.12%
       
-      Cutoff RI (based on linear regression angle) = 0.0125293
-      Cutoff RI (based on k-means clustering) = 0.0115673
-      Cutoff RI (based on mean cutoff value) = 0.0085509
-      Important attributes (based on mean cutoff value) = 5
+      Cutoff RI (based on linear regression angle) = 0.0125553
+      Cutoff RI (based on k-means clustering) = 0.0086137
+      Cutoff RI (based on mean cutoff value) = 0.0098696
+      Important attributes (based on mean cutoff value) = 6
       
       **************************
       *** MCFS-ID Experiment ***
       **************************
       Loading data: 'input.adx'...
-      70 objects and 14 attributes to load... Done
+      70 objects and 15 attributes to load... Done
       Nominal target detected - using J48 model
       MCFS-ID param: ID-Graph is ON
       MCFS-ID param: finalCV is ON
       MCFS-ID param: balance classes is AUTO
       Classes = ["A", "B", "C"], Sizes = [40, 20, 10], classSizeRatio = 0.25, balanceValue = 1.0
       Calculation of DecisionValuesTable...
-      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 163, splits(t) = 5
-      Start time: Tue Jul 16 09:15:13 UTC 2024
+      Starting MCFS-ID Procedure: projectionSize(m) = 4, projections(s) = 175, splits(t) = 5
+      Start time: Thu Jul 18 09:11:25 UTC 2024
       Running: 1 threads...
       [                                                                      ]  0% Time: 00:00 ETA: --:--    
-      [=======>                                                              ]  12% Time: 00:00 ETA: --:--    
-      [================>                                                     ]  25% Time: 00:00 ETA: --:--    
-      [========================>                                             ]  37% Time: 00:00 ETA: --:--    
-      [=================================>                                    ]  49% Time: 00:00 ETA: --:--    
-      [=========================================>                            ]  61% Time: 00:00 ETA: --:--    
-      [==================================================>                   ]  74% Time: 00:00 ETA: --:--    
-      [===========================================================>          ]  86% Time: 00:00 ETA: --:--    
-      [===================================================================>  ]  98% Time: 00:00 ETA: --:--    
+      [=======>                                                              ]  11% Time: 00:00 ETA: --:--    
+      [===============>                                                      ]  23% Time: 00:00 ETA: --:--    
+      [=======================>                                              ]  34% Time: 00:00 ETA: --:--    
+      [===============================>                                      ]  46% Time: 00:00 ETA: --:--    
+      [=======================================>                              ]  57% Time: 00:00 ETA: --:--    
+      [===============================================>                      ]  69% Time: 00:00 ETA: --:--    
+      [=======================================================>              ]  80% Time: 00:00 ETA: --:--    
+      [===============================================================>      ]  91% Time: 00:00 ETA: --:--    
       [=====================================================================>]  100% Time: 00:00               
-      815 trees built within 0.166 s.
+      875 trees built within 0.188 s.
       
       Prediction Summary on a Random Subsample (st):
-      Accuracy = 82.39%
-      WeightedAccuracy = 74.09%
+      Accuracy = 83.77%
+      WeightedAccuracy = 76.18%
       
-      Cutoff RI (based on linear regression angle) = 0.2592728
-      Cutoff RI (based on k-means clustering) = 0.4229455
-      Cutoff RI (based on mean cutoff value) = 0.2592728
+      Cutoff RI (based on linear regression angle) = 0.2454500
+      Cutoff RI (based on k-means clustering) = 0.4110613
+      Cutoff RI (based on mean cutoff value) = 0.2454500
       Important attributes (based on mean cutoff value) = 5
       *** Calculation of cutoff RI (based on permutations) ***
-      Max RI (raw data) = 0.77131754
-      Max RI (after permutations) = [0.02577373, 0.021513695, 0.01663337]
-      Anderson-Darling normality test p-value = 0.6225436
-      Confidence Interval: 0.0099452 ; 0.0326685
-      Cutoff RI (based on permutations) = 0.0326685
+      Max RI (raw data) = 0.7629547
+      Max RI (after permutations) = [0.023562135, 0.022775238, 0.013791701]
+      Anderson-Darling normality test p-value = 0.1076272
+      Confidence Interval: 0.0065589 ; 0.0335271
+      Cutoff RI (based on permutations) = 0.0335271
       Important attributes (based on permutations) = 7
       *** Calculation of cutoff ID ***
-      Anderson-Darling normality test p-value = 0.2650149
-      Confidence Interval: 3.9472926 ; 11.8180793
-      Cutoff ID (based on permutations)  = 11.8180793
+      Anderson-Darling normality test p-value = 0.5356377
+      Confidence Interval: 2.6019662 ; 11.1905529
+      Cutoff ID (based on permutations)  = 11.1905529
       *** Final Important attributes (based on permutations) = 7
       
       *** Running CV experiment on input data limited to the top [2, 4, 5, 7, 9, 11, 14] attributes ***
@@ -1510,7 +1509,8 @@ Run `revdepcheck::cloud_details(, "rmcfs")` for more info
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
       Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
-      *** MCFS-ID Processing is done. Time: 5.4 s. ***
+      Evaluating model performance using 10 fold CV. Model: j48, rf, nb, svm, knn, logistic, ripper
+      *** MCFS-ID Processing is done. Time: 5.0 s. ***
       
       Reading results...
       Done.
@@ -1888,7 +1888,11 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
         some categorical probabilities add up to more than 1, normalizing to add to 1
       3: In rcat.b1(n = n, probs = probs) :
         some categorical probabilities add up to more than 1, normalizing to add to 1
-      4: In (W == 0) * catprob.W0 :
+      4: In rcat.b1(n = n, probs = probs) :
+        some categorical probabilities add up to more than 1, normalizing to add to 1
+      5: In rcat.b1(n = n, probs = probs) :
+        some categorical probabilities add up to more than 1, normalizing to add to 1
+      6: In (W == 0) * catprob.W0 :
         longer object length is not a multiple of shorter object length
       Error in set.DAG(D) : 
       ...attempt to simulate data from DAG failed...
@@ -1973,7 +1977,7 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       NAdarkbluenone100.50
       using the following edge attributes: 
       black0.210.60.5
-      Timing stopped at: 0.077 0 0.077
+      Timing stopped at: 0.063 0 0.063
       Error : `from()` was deprecated in igraph 2.0.4 and is now defunct.
       ℹ Please use `.from()` instead.
        done successfully.
@@ -2404,13 +2408,13 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       simulating observed dataset from the DAG object
       simulating observed dataset from the DAG object
          user  system elapsed 
-        0.197   0.000   0.197 
+         0.17    0.00    0.17 
       simulating observed dataset from the DAG object
          user  system elapsed 
-        0.213   0.000   0.213 
+        0.185   0.000   0.186 
       simulating observed dataset from the DAG object
          user  system elapsed 
-        0.233   0.000   0.232 
+        0.204   0.000   0.205 
       Error in X_dat_th0[[2]] : subscript out of bounds
       In addition: There were 11 warnings (use warnings() to see them)
       some outcome nodes have EFU=TRUE, applying Last Time Point Carry Forward function: doLTCF()
@@ -2766,12 +2770,24 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       [1] 2
       [1] "NetInd_k"
            [,1] [,2]
-      [1,]    4   NA
-      [2,]   NA   NA
+      [1,]   NA   NA
+      [2,]    4   NA
       [3,]   NA   NA
       [4,]   NA   NA
-      [5,]    9   10
-      [6,]   NA   NA
+      [5,]    6    8
+      [6,]    2   10
+      existing node Net.sample was modified
+      simulating network with ER model using m: 10
+      [1] "automatic Kmax: "
+      [1] 3
+      [1] "NetInd_k"
+           [,1] [,2] [,3]
+      [1,]    2   NA   NA
+      [2,]   NA   NA   NA
+      [3,]    9   NA   NA
+      [4,]   NA   NA   NA
+      [5,]    7   NA   NA
+      [6,]   NA   NA   NA
       existing node Net.sample was modified
       simulating network with ER model using m: 10
       [1] "automatic Kmax: "
@@ -2779,22 +2795,10 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       [1] "NetInd_k"
            [,1] [,2] [,3]
       [1,]   NA   NA   NA
-      [2,]    5   NA   NA
-      [3,]   NA   NA   NA
-      [4,]    5    8   10
-      [5,]    6   NA   NA
-      [6,]    5    8   NA
-      existing node Net.sample was modified
-      simulating network with ER model using m: 10
-      [1] "automatic Kmax: "
-      [1] 3
-      [1] "NetInd_k"
-           [,1] [,2] [,3]
-      [1,]   NA   NA   NA
-      [2,]    4   10   NA
-      [3,]   NA   NA   NA
-      [4,]    1   NA   NA
-      [5,]   NA   NA   NA
+      [2,]   NA   NA   NA
+      [3,]    4    5   NA
+      [4,]   NA   NA   NA
+      [5,]    2    6    7
       [6,]   NA   NA   NA
       simulating network with ER model using m: 10
       [1] "automatic Kmax: "
@@ -2802,11 +2806,11 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       [1] "NetInd_k"
            [,1] [,2] [,3]
       [1,]   NA   NA   NA
-      [2,]    1    6   NA
-      [3,]   NA   NA   NA
-      [4,]   NA   NA   NA
-      [5,]    2    8    9
-      [6,]    8    9   NA
+      [2,]    8   NA   NA
+      [3,]    6   NA   NA
+      [4,]    5    6    8
+      [5,]    1   NA   NA
+      [6,]   NA   NA   NA
       simulating network with ER model using m: 500000
       [1] "automatic Kmax: "
       [1] 551
@@ -3393,7 +3397,7 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       
       ------------------- UNIT TEST SUMMARY ---------------------
       
-      RUNIT TEST PROTOCOL -- Tue Jul 16 09:11:41 2024 
+      RUNIT TEST PROTOCOL -- Thu Jul 18 09:11:53 2024 
       *********************************************** 
       Number of test functions: 28 
       Number of errors: 1 
