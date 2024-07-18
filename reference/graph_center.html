@@ -101,13 +101,13 @@ argument is ignored for undirected graphs.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">graph_center</span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/100 vertices, from 6440205:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/100 vertices, from cf99901:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2</span>
 <span class="r-in"><span><span class="fu">graph_center</span><span class="op">(</span><span class="va">tree</span>, mode <span class="op">=</span> <span class="st">"in"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from 6440205:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from cf99901:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu">graph_center</span><span class="op">(</span><span class="va">tree</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 85/100 vertices, from 6440205:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 85/100 vertices, from cf99901:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [20]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [39]  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72</span>
@@ -117,12 +117,12 @@ argument is ignored for undirected graphs.</p></dd>
 <span class="r-in"><span><span class="co"># Without and with weights</span></span></span>
 <span class="r-in"><span><span class="va">ring</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">graph_center</span><span class="op">(</span><span class="va">ring</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 2775fd8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 5d5353a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  3  4  5  6  7  8  9 10</span>
 <span class="r-in"><span><span class="co"># Add weights</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">ring</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">ring</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">graph_center</span><span class="op">(</span><span class="va">ring</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 2775fd8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 5d5353a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
