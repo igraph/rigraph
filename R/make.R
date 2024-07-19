@@ -355,8 +355,17 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
     periodic <- circular
   }
 
+  if (is.numeric(length) && length != floor(length)) {
+    warning("length was rounded to the nearest integer")
+    length <- round(length)
+  }
+
   if (is.null(dimvector)) {
     dimvector <- rep(length, dim)
+  }
+
+  if (length(periodic) == 1) {
+    periodic <- rep(periodic, length(dimvector))
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -366,7 +375,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
     res$dimvector <- dimvector
     res$nei <- nei
     res$mutual <- mutual
-    res$circular <- circular
+    res$circular <- periodic
   }
   res
 } # nocov end
