@@ -27,4 +27,7 @@ An error
 \description{
 Functions to be used only with \verb{[.igraph.es} and \verb{[.igraph.vs}
 }
+\details{
+See \code{\link[igraph]{[.igraph.vs}} and \code{\link[igraph]{[.igraph.es}}.
+}
 \keyword{internal}

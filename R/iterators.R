@@ -165,6 +165,11 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #'
 #' Functions to be used only with `[.igraph.es` and `[.igraph.vs`
 #'
+#' @details
+#'
+#' See \code{\link[igraph]{[.igraph.vs}} and \code{\link[igraph]{[.igraph.es}}.
+#'
+#'
 #' @keywords internal
 #' @rdname inside-square-error
 #' @return An error
