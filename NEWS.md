@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9047
+
+## Chore
+
+- Rerun revdepcheck.
+
+- Update revdepcheck results.
+
+
 # igraph 2.0.3.9046
 
 ## Bug fixes
