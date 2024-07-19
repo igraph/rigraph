@@ -155,7 +155,7 @@ get.adjedgelist <- function(graph, mode = c("all", "out", "in", "total"), loops 
 ###################################################################
 
 get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
-                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE) {
+                                attr = NULL, weights = NULL, loops = c("once", "twice", "ignore"), names = TRUE) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -165,13 +165,23 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
     "both" = 2
   )
 
+  if (is.logical(loops)) {
+    loops <- ifelse(loops, "once", "ignore")
+  }
+  loops <- igraph.match.arg(loops)
+  loops <- switch(loops,
+    "ignore" = 0L,
+    "twice" = 1L,
+    "once" = 2L
+  )
+
   if (!is.null(weights)) weights <- as.numeric(weights)
 
   if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
       R_igraph_get_adjacency, graph, as.numeric(type), weights,
-      as.logical(loops)
+      loops
     )
   } else {
     attr <- as.character(attr)
@@ -348,7 +358,7 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   if (sparse) {
     get.adjacency.sparse(graph, type = type, attr = attr, names = names)
   } else {
-    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
+    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names, loops = "once")
   }
 }
 

@@ -4796,7 +4796,7 @@ SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) 
   igraph_t g;
   igraph_matrix_t res;
   igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_loops_t loops = (igraph_loops_t) INTEGER(ploops)[0];
   igraph_vector_t weights;
   SEXP result;
 
