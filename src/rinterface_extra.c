@@ -8331,7 +8331,7 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP pvalue)
+SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue)
 {
   igraph_vector_t c_data;
   igraph_plfit_result_t c_res;
