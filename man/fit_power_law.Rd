@@ -9,7 +9,7 @@ fit_power_law(
   xmin = NULL,
   start = 2,
   force.continuous = FALSE,
-  implementation = c("plfit", "R.mle"),
+  implementation = c("plfit", "R.mle", "plfit.p"),
   ...
 )
 }
@@ -49,17 +49,19 @@ Depends on the \code{implementation} argument. If it is
 be used to calculate confidence intervals and log-likelihood. See
 \code{\link[stats4:mle-class]{stats4::mle-class()}} for details.
 
-If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
-named list with entries: \item{continuous}{Logical scalar, whether the
+If \code{implementation} is \sQuote{\code{plfit}} or \sQuote{\code{plfit.p}}, then the result is a
+named list with entries:
+\item{continuous}{Logical scalar, whether the
 fitted power-law distribution was continuous or discrete.}
-\item{alpha}{Numeric scalar, the exponent of the fitted power-law
-distribution.} \item{xmin}{Numeric scalar, the minimum value from which the
+\item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
+\item{xmin}{Numeric scalar, the minimum value from which the
 power-law distribution was fitted. In other words, only the values larger
-than \code{xmin} were used from the input vector.} \item{logLik}{Numeric
-scalar, the log-likelihood of the fitted parameters.} \item{KS.stat}{Numeric
-scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
-fitted distribution with the input vector. Smaller scores denote better
-fit.} \item{KS.p}{Numeric scalar, the p-value of the Kolmogorov-Smirnov
+than \code{xmin} were used from the input vector.}
+\item{logLik}{Numeric scalar, the log-likelihood of the fitted parameters.}
+\item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+that compares the fitted distribution with the input vector.
+Smaller scores denote better fit.}
+\item{KS.p}{Only for \code{plfit.p}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}

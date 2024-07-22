@@ -99,17 +99,19 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'   be used to calculate confidence intervals and log-likelihood. See
 #'   [stats4::mle-class()] for details.
 #'
-#'   If `implementation` is \sQuote{`plfit`}, then the result is a
-#'   named list with entries: \item{continuous}{Logical scalar, whether the
+#'   If `implementation` is \sQuote{`plfit`} or \sQuote{`plfit.p`}, then the result is a
+#'   named list with entries:
+#'   \item{continuous}{Logical scalar, whether the
 #'   fitted power-law distribution was continuous or discrete.}
-#'   \item{alpha}{Numeric scalar, the exponent of the fitted power-law
-#'   distribution.} \item{xmin}{Numeric scalar, the minimum value from which the
+#'   \item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
+#'   \item{xmin}{Numeric scalar, the minimum value from which the
 #'   power-law distribution was fitted. In other words, only the values larger
-#'   than `xmin` were used from the input vector.} \item{logLik}{Numeric
-#'   scalar, the log-likelihood of the fitted parameters.} \item{KS.stat}{Numeric
-#'   scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
-#'   fitted distribution with the input vector. Smaller scores denote better
-#'   fit.} \item{KS.p}{Numeric scalar, the p-value of the Kolmogorov-Smirnov
+#'   than `xmin` were used from the input vector.}
+#'   \item{logLik}{Numeric scalar, the log-likelihood of the fitted parameters.}
+#'   \item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+#'   that compares the fitted distribution with the input vector.
+#'   Smaller scores denote better fit.}
+#'   \item{KS.p}{Only for `plfit.p`. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 #'   test. Small p-values (less than 0.05) indicate that the test rejected the
 #'   hypothesis that the original data could have been drawn from the fitted
 #'   power-law distribution.}
@@ -137,15 +139,25 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #' fit1$logLik
 #' stats4::logLik(fit2)
 #'
-fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
-                          implementation = c("plfit", "R.mle"), ...) {
+fit_power_law <- function(
+    x,
+    xmin = NULL,
+    start = 2,
+    force.continuous = FALSE,
+    implementation = c("plfit", "R.mle", "plfit.p"),
+    ...) {
   implementation <- igraph.match.arg(implementation)
 
   if (implementation == "r.mle") {
     power.law.fit.old(x, xmin, start, ...)
-  } else if (implementation == "plfit") {
+  } else if (implementation %in% c("plfit", "plfit.p")) {
     if (is.null(xmin)) xmin <- -1
-    power.law.fit.new(x, xmin = xmin, force.continuous = force.continuous)
+    power.law.fit.new(
+      x,
+      xmin = xmin,
+      force.continuous = force.continuous,
+      p.value = (implementation == "plfit.p")
+    )
   }
 }
 
@@ -186,7 +198,7 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   alpha
 }
 
-power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
+power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
@@ -194,7 +206,7 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_power_law_fit, data, xmin, force.continuous)
+  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value)
 
   res
 }
