@@ -807,7 +807,13 @@ make_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -840,7 +846,13 @@ sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -863,7 +875,13 @@ graph_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -876,7 +894,7 @@ constructor_spec <- function(fun, ..., .lazy = FALSE) {
   structure(
     list(
       fun = fun,
-      args = lazy_dots(...),
+      args = rlang::enquos(...),
       lazy = .lazy
     ),
     class = "igraph_constructor_spec"
