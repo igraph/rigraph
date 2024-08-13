@@ -1,4 +1,5 @@
 test_that("`authority_score()` works", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -21,14 +22,16 @@ test_that("`authority_score()` works", {
   s2 <- authority_score(g2)$vector
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
-  rlang::local_options(lifecycle_verbosity = "warning")
-  expect_warning(
-    s3 <- authority_score(g2, options = arpack_defaults)$vector
-  )
+  rlang::with_options(lifecycle_verbosity = "warning", {
+    expect_snapshot(
+      s3 <- authority_score(g2, options = arpack_defaults)$vector
+    )
+  })
   expect_equal(s2, s3)
 })
 
 test_that("`hub_score()` works", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
   mscale <- function(x) {
     if (sd(x) != 0) {
       x <- scale(x)
@@ -51,10 +54,11 @@ test_that("`hub_score()` works", {
   s2 <- hub_score(g2)$vector
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
-  rlang::local_options(lifecycle_verbosity = "warning")
-  expect_warning(
-    s3 <- hub_score(g2, options = arpack_defaults)$vector
-  )
+  rlang::with_options(lifecycle_verbosity = "warning", {
+    expect_snapshot(
+      s3 <- hub_score(g2, options = arpack_defaults)$vector
+    )
+  })
   expect_equal(s2, s3)
 })
 
@@ -64,9 +68,10 @@ test_that("`hub_score()` works", {
 # and any vector with alternating values (a, b, a, b, ...) is a valid
 # solution, not just all-ones.
 test_that("authority scores of a ring are all one", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
   g3 <- make_ring(99)
-  expect_equal(authority_score(g3)$vector, rep(1, vcount(g3)))
-  expect_equal(hub_score(g3)$vector, rep(1, vcount(g3)))
+  expect_equal(hits_scores(g3)$authority, rep(1, vcount(g3)))
+  expect_equal(hits_scores(g3)$hub, rep(1, vcount(g3)))
 })
 
 test_that("authority_score survives stress test", {
@@ -89,15 +94,66 @@ test_that("authority_score survives stress test", {
 
   for (i in 1:100) {
     G <- sample_gnm(10, sample(1:20, 1))
-    as <- authority_score(G)
+    as <- hits_scores(G)
     M <- as_adj(G, sparse = FALSE)
-    is.good(t(M) %*% M, as$vector, as$value)
+    is.good(t(M) %*% M, as$authority, as$value)
   }
 
   for (i in 1:100) {
     G <- sample_gnm(10, sample(1:20, 1))
-    hs <- hub_score(G)
+    hs <- hits_scores(G)
     M <- as_adj(G, sparse = FALSE)
-    is.good(M %*% t(M), hs$vector, hs$value)
+    is.good(M %*% t(M), hs$hub, hs$value)
   }
 })
+
+test_that("`hits_score()` works -- authority", {
+  mscale <- function(x) {
+    if (sd(x) != 0) {
+      x <- scale(x)
+    }
+    if (x[1] < 0) {
+      x <- -x
+    }
+    x
+  }
+
+  g1 <- sample_pa(100, m = 10)
+  A <- as_adj(g1, sparse = FALSE)
+  s1 <- eigen(t(A) %*% A)$vectors[, 1]
+  s2 <- hits_scores(g1)$authority
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
+
+  g2 <- sample_gnp(100, 2 / 100)
+  A <- as_adj(g2, sparse = FALSE)
+  s1 <- eigen(t(A) %*% A)$vectors[, 1]
+  s2 <- hits_scores(g2)$authority
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
+
+})
+
+test_that("`hits_scores()` works -- hub", {
+  mscale <- function(x) {
+    if (sd(x) != 0) {
+      x <- scale(x)
+    }
+    if (x[1] < 0) {
+      x <- -x
+    }
+    x
+  }
+
+  g1 <- sample_pa(100, m = 10)
+  A <- as_adj(g1, sparse = FALSE)
+  s1 <- eigen(A %*% t(A))$vectors[, 1]
+  s2 <- hits_scores(g1)$hub
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
+
+  g2 <- sample_gnp(100, 2 / 100)
+  A <- as_adj(g2, sparse = FALSE)
+  s1 <- eigen(A %*% t(A))$vectors[, 1]
+  s2 <-  hits_scores(g2)$hub
+  expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
+
+})
+

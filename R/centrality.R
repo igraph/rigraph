@@ -1112,7 +1112,8 @@ diversity <- diversity_impl
 #'   [arpack()] for details.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
-#'   \item{vector}{The hub or authority scores of the vertices.}
+#'   \item{hub}{The hub score of the vertices.}
+#'   \item{authority}{The authority score of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
