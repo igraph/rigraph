@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9046</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9047</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,14 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.3.9047" id="igraph-2039047">igraph 2.0.3.9047<a class="anchor" aria-label="anchor" href="#igraph-2039047"></a></h2>
+<div class="section level3">
+<h3 id="chore-2-0-3-9047">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9047"></a></h3>
+<ul><li><p>Rerun revdepcheck.</p></li>
+<li><p>Update revdepcheck results.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.3.9046" id="igraph-2039046">igraph 2.0.3.9046<a class="anchor" aria-label="anchor" href="#igraph-2039046"></a></h2>
 <div class="section level3">
@@ -1267,7 +1275,7 @@ Error in is_directed(object) :
 <li>Check membership vector in <code><a href="../reference/modularity.igraph.html">modularity()</a></code>.</li>
 <li>Rename <code><a href="../reference/print.igraph.html">str.igraph()</a></code> to <code><a href="../reference/print.igraph.html">print_all()</a></code>.</li>
 <li>Use the igraph version in exported graphs, instead of <a href="https://github.com/VERSION" class="external-link">@VERSION</a>@ <a href="https://github.com/igraph/rigraph/issues/75" class="external-link">#75</a>.</li>
-<li>Functions that can be used inside a <code><a href="../reference/V.html">V()</a></code> or <code><a href="../reference/E.html">E()</a></code> indexing now begin with a dot. Old names are deprecated. New names: <code>.nei()</code>, <code>.innei()</code>, <code>.outnei()</code>, <code>.inc()</code>, <code>.from()</code>, <code>.to()</code>. <a href="https://github.com/igraph/rigraph/issues/22" class="external-link">#22</a></li>
+<li>Functions that can be used inside a <code><a href="../reference/V.html">V()</a></code> or <code><a href="../reference/E.html">E()</a></code> indexing now begin with a dot. Old names are deprecated. New names: <code><a href="../reference/inside-square-error.html">.nei()</a></code>, <code><a href="../reference/inside-square-error.html">.innei()</a></code>, <code><a href="../reference/inside-square-error.html">.outnei()</a></code>, <code><a href="../reference/inside-square-error.html">.inc()</a></code>, <code><a href="../reference/inside-square-error.html">.from()</a></code>, <code><a href="../reference/inside-square-error.html">.to()</a></code>. <a href="https://github.com/igraph/rigraph/issues/22" class="external-link">#22</a></li>
 <li>Fix packages that convert graphs to <a href="graph::graphNEL" class="uri">graph::graphNEL</a>: they don’t need to attach ‘graph’ manually any more.</li>
 <li>Fix a bugs in <code>layout_with_dh</code>, <code>layout_with_gem</code> and <code>layout_with_sugiyama</code>. They crashed in some cases.</li>
 </ul></div>
