@@ -645,12 +645,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       args,
       data = c(
         attrs,
-        .nei = .nei, nei = nei,
-        .innei = .innei, innei = innei,
-        .outnei = .outnei, outnei = outnei,
-        .inc = .inc, inc = inc, adj = adj,
-        .from = .from, from = from,
-        .to = .to, to = to,
+        .nei = .nei,
+        .innei = .innei,
+        .outnei = .outnei,
+        .inc = .inc,
+        .from = .from,
+        .to = .to,
         .env = env,
         .data = list(attrs)
       )
