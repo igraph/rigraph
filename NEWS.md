@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9048
+
+## Bug fixes
+
+- Align the body of `graph.lattice()` with its replacement `make_lattice()` (#1439).
+
+## Features
+
+- Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436).
+
+## Refactoring
+
+- Remove lazyeval usage from R/make.R (#1441).
+
+## Testing
+
+- Add test for hits_scores() directly (#1444).
+
+
 # igraph 2.0.3.9047
 
 ## Chore
