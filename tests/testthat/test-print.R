@@ -1,6 +1,6 @@
-test_that("print.igraph works", {
+test_that("print.igraph() works", {
   local_igraph_options(print.full = TRUE)
-  options(width = 76)
+  withr::local_options(width = 76)
 
   g <- make_ring(5)
   expect_output(summary(g), "attr:.* name[ ]*[(]g/c[)]")
@@ -11,8 +11,7 @@ test_that("print.igraph works", {
   expect_output(summary(g), "name[ ]*[(]v/c[)]")
   expect_output(print(g), "a--b")
 
-  withr::local_seed(42)
-  E(g)$weight <- sample(ecount(g))
+  withr::with_seed(42, {E(g)$weight <- sample(ecount(g))})
   expect_output(summary(g), "weight[\n |]*[(]e/n[)]")
 
   g$name <- "A ring"
@@ -20,20 +19,19 @@ test_that("print.igraph works", {
   expect_output(print(g, v = T), "vertex attributes")
   expect_output(print(g, e = T), "edges [(]vertex names[)] and")
 
-  withr::local_seed(42)
-  g2 <- sample_gnp(13, p = 0.6, directed = TRUE)
+  withr::with_seed(42, {g2 <- sample_gnp(13, p = 0.6, directed = TRUE)})
   expect_output(print(g2), "1 ->")
 
-  g3 <- sample_gnp(20, p = 0.8)
+  withr::with_seed(42, {g3 <- sample_gnp(20, p = 0.8)})
   expect_output(print(g3), "1 --")
 
-  g4 <- make_star(100)
+  withr::with_seed(42, {g4 <- make_star(100)})
   expect_output(print(g4), "2->1")
 
-  g5 <- make_star(100, mode = "out")
+  withr::with_seed(42, {g5 <- make_star(100, mode = "out")})
   expect_output(print(g5), "1->")
 
-  g6 <- sample_pa(100, m = 6, directed = FALSE)
+  withr::with_seed(42, {g6 <- sample_pa(100, m = 6, directed = FALSE)})
   expect_output(print(g6), "     ")
 
   kite <- make_empty_graph(directed = FALSE) + LETTERS[1:10]
@@ -46,7 +44,7 @@ test_that("print.igraph works", {
   expect_output(print(kite), "A -- ")
 })
 
-test_that("print.igraph.es uses vertex names", {
+test_that("print.igraph.es() uses vertex names", {
   local_igraph_options(print.id = FALSE)
 
   g <- make_directed_graph(c("A", "B"))

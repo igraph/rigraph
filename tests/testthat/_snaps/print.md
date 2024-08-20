@@ -1,4 +1,4 @@
-# print.igraph.es uses vertex names
+# print.igraph.es() uses vertex names
 
     Code
       E(g)
