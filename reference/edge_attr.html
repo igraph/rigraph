@@ -21,14 +21,16 @@
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -101,10 +103,10 @@ edge attributes if <code>name</code> is missing.</p>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"weight"</span>, value <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"color"</span>, value <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1a47d6e U-W- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 685b7b9 U-W- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n), color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1a47d6e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 685b7b9:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, edge.width <span class="op">=</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="edge_attr-1.png" alt="" width="700" height="433"></span>

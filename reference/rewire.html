@@ -21,14 +21,16 @@
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -82,7 +84,7 @@ see details below.</p></dd>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="va">layout_in_circle</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="rewire-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">rewire</span><span class="op">(</span><span class="va">g</span>, with <span class="op">=</span> <span class="fu"><a href="keeping_degseq.html">keeping_degseq</a></span><span class="op">(</span>niter <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 46d39a3 U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6a1b2b1 U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
@@ -91,7 +93,7 @@ see details below.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 46d39a3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6a1b2b1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 6-- 8 2-- 6 7--10 3-- 7 4-- 8 1-- 5 2-- 9 3-- 9 1-- 4 5--10</span>
 </code></pre></div>
     </div>

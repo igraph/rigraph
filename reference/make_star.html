@@ -23,14 +23,16 @@ connected to the center vertex and nobody else."><meta property="og:image" conte
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -102,14 +104,14 @@ are undirected.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_star</span><span class="op">(</span><span class="fl">10</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8244f4b D--- 10 9 -- Out-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 81d4d71 D--- 10 9 -- Out-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8244f4b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 81d4d71:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt; 2 1-&gt; 3 1-&gt; 4 1-&gt; 5 1-&gt; 6 1-&gt; 7 1-&gt; 8 1-&gt; 9 1-&gt;10</span>
 <span class="r-in"><span><span class="fu">make_star</span><span class="op">(</span><span class="fl">5</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d1ce8f1 U--- 5 4 -- Star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0ab52ec U--- 5 4 -- Star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d1ce8f1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0ab52ec:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 1--3 1--4 1--5</span>
 </code></pre></div>
     </div>

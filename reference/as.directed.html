@@ -25,14 +25,16 @@ undirected."><meta property="og:image" content="https://r.igraph.org/logo.png"><
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -157,16 +159,16 @@ a graph.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as.directed</span><span class="op">(</span><span class="va">g</span>, <span class="st">"mutual"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c6b5faa D--- 10 20 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 490eb95 D--- 10 20 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c6b5faa:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 490eb95:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 2  2-&gt; 3  3-&gt; 4  4-&gt; 5  5-&gt; 6  6-&gt; 7  7-&gt; 8  8-&gt; 9  9-&gt;10  1-&gt;10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  2-&gt; 1  3-&gt; 2  4-&gt; 3  5-&gt; 4  6-&gt; 5  7-&gt; 6  8-&gt; 7  9-&gt; 8 10-&gt; 9 10-&gt; 1</span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as.undirected</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 66999e2 U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH be0c303 U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 66999e2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from be0c303:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Combining edge attributes</span></span></span>
@@ -174,9 +176,9 @@ a graph.</p>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ug3</span> <span class="op">&lt;-</span> <span class="fu">as.undirected</span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ug3</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 129dfbc U-W- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH edd6159 U-W- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 129dfbc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from edd6159:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 1--10 9--10</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># rlang::is_interactive()</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/x11.html" class="external-link">x11</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
@@ -196,9 +198,9 @@ a graph.</p>
 <span class="r-in"><span>  edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">length</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ug4</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH eceda46 U-W- 10 7 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 63b3611 U-W- 10 7 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from eceda46:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 63b3611:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  6-- 7  7-- 8  8-- 9  8-- 9  9-- 9 10--10 10--10</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

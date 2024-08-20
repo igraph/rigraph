@@ -29,14 +29,16 @@ dimvector and supply length and dim."><meta property="og:image" content="https:/
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -142,10 +144,10 @@ be extended to boolean vector with dimvector length.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f3107ca U--- 125 300 -- Lattice graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2649b98 U--- 125 300 -- Lattice graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f3107ca:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2649b98:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>
@@ -155,10 +157,10 @@ be extended to boolean vector with dimvector length.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span><span class="fu">make_lattice</span><span class="op">(</span>length <span class="op">=</span> <span class="fl">5</span>, dim <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 37762e7 U--- 125 300 -- Lattice graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6826279 U--- 125 300 -- Lattice graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 37762e7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6826279:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16</span>

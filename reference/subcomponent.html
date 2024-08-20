@@ -23,14 +23,16 @@ vertices from which a given vertex is reachable via a directed path."><meta prop
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -120,13 +122,13 @@ undirected graphs.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">200</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"in"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from a72edfe:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b1aefdd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"out"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from a72edfe:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b1aefdd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from a72edfe:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b1aefdd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 </code></pre></div>
     </div>

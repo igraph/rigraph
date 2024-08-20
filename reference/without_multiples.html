@@ -21,14 +21,16 @@
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -64,18 +66,18 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="sample_.html">sample_</a></span><span class="op">(</span><span class="fu"><a href="sample_pa.html">pa</a></span><span class="op">(</span><span class="fl">10</span>, m <span class="op">=</span> <span class="fl">3</span>, algorithm <span class="op">=</span> <span class="st">"bag"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2053ce0 D--- 10 27 -- Barabasi graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 934e0fa D--- 10 27 -- Barabasi graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2053ce0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 934e0fa:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2-&gt;1  2-&gt;1  2-&gt;1  3-&gt;2  3-&gt;2  3-&gt;1  4-&gt;1  4-&gt;3  4-&gt;1  5-&gt;3  5-&gt;1  5-&gt;3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13]  6-&gt;1  6-&gt;3  6-&gt;1  7-&gt;1  7-&gt;3  7-&gt;3  8-&gt;1  8-&gt;1  8-&gt;3  9-&gt;1  9-&gt;3  9-&gt;1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] 10-&gt;1 10-&gt;1 10-&gt;2</span>
 <span class="r-in"><span><span class="fu"><a href="sample_.html">sample_</a></span><span class="op">(</span><span class="fu"><a href="sample_pa.html">pa</a></span><span class="op">(</span><span class="fl">10</span>, m <span class="op">=</span> <span class="fl">3</span>, algorithm <span class="op">=</span> <span class="st">"bag"</span><span class="op">)</span>, <span class="fu">without_multiples</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ae96919 D--- 10 16 -- Barabasi graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b21cd7f D--- 10 16 -- Barabasi graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), power (g/n), m (g/n), zero.appeal (g/n), algorithm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ae96919:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b21cd7f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2-&gt;1  3-&gt;1  4-&gt;1  4-&gt;2  4-&gt;3  5-&gt;1  5-&gt;2  6-&gt;3  7-&gt;1  7-&gt;3  8-&gt;1  8-&gt;6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13]  9-&gt;1  9-&gt;2  9-&gt;8 10-&gt;1</span>
 </code></pre></div>

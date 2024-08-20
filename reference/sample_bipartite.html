@@ -21,14 +21,16 @@
     <li><a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../articles/index.html">All articles</a></li>
   </ul></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/igraph/rigraph/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -157,15 +159,15 @@ uniformly choose \(m\) edges to realize.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## empty graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ea80a95 U--B 15 0 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f341674 U--B 15 0 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ea80a95:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f341674:</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## full graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH da20439 U--B 15 50 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH adb8e56 U--B 15 50 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from da20439:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from adb8e56:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15</span>
@@ -174,16 +176,16 @@ uniformly choose \(m\) edges to realize.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## random bipartite graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 08db6be U--B 15 5 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 7dacdc8 U--B 15 5 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 08db6be:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 7dacdc8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7--11 4--12 8--12 5--13 7--15</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## directed bipartite graph, G(n,m)</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, type <span class="op">=</span> <span class="st">"Gnm"</span>, m <span class="op">=</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0ff812a D--B 15 20 -- Bipartite Gnm random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH db6515c D--B 15 20 -- Bipartite Gnm random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0ff812a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from db6515c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  5-&gt;11  6-&gt;11  7-&gt;11  9-&gt;11  4-&gt;12  5-&gt;12  8-&gt;12  4-&gt;13  9-&gt;14  8-&gt;15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 11-&gt; 2 13-&gt; 2 15-&gt; 2 13-&gt; 3 13-&gt; 5 12-&gt; 6 15-&gt; 6 14-&gt; 8 14-&gt;10 15-&gt;10</span>
 <span class="r-in"><span></span></span>
