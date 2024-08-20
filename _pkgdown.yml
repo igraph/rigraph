@@ -5,13 +5,10 @@ template:
 
 
 navbar:
+navbar:
   structure:
-    left:
-    - intro
-    - reference
-    - news
-    - articles
-    right: github
+    left:  [intro, reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
   components:
     intro:
       text: Get started
