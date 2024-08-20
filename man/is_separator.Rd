@@ -2,7 +2,7 @@
 % Please edit documentation in R/flow.R
 \name{is_separator}
 \alias{is_separator}
-\title{Vertex separators}
+\title{Check whether removing this set of vertices would disconnect the graph.}
 \usage{
 is_separator(graph, candidate)
 }
@@ -19,12 +19,20 @@ vertex separator or not.
 lists all vertex separator of minimum size.
 }
 \description{
-Check whether a given set of vertices is a vertex separator.
+\code{is_separator()} determines whether the supplied vertex set is a vertex
+separator:
+A vertex set \eqn{S} is a separator if there are vertices \eqn{u} and \eqn{v}
+in the graph such that all paths between \eqn{u} and \eqn{v} pass
+through some vertices in \eqn{S}.
 }
-\details{
-\code{is_separator()} decides whether the supplied vertex set is a vertex
-separator. A vertex set is a vertex separator if its removal results a
-disconnected graph.
+\examples{
+ring <- make_ring(4)
+min_st_separators(ring)
+is_separator(ring, 1)
+is_separator(ring, c(1, 3))
+is_separator(ring, c(2, 4))
+is_separator(ring, c(2, 3))
+
 }
 \seealso{
 Other flow: 
