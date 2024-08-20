@@ -3,8 +3,6 @@ url: https://r.igraph.org/
 template:
   bootstrap: 5
 
-
-navbar:
 navbar:
   structure:
     left:  [intro, reference, articles, tutorials, news]
