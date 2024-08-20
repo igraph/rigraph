@@ -118,9 +118,6 @@ graphlet_basis <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  ## Drop all attributes, we don't want to deal with them
-  graph <- reduce(graph_attr_names(graph), delete_graph_attr, .init = graph)
-
   on.exit(.Call(R_igraph_finalizer))
   ## Function call
   res <- .Call(R_igraph_graphlets_candidate_basis, graph, weights)
