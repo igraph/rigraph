@@ -512,8 +512,9 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #'   thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @references Douglas R. White and Frank Harary: The cohesiveness of blocks in
-#' social networks: node connectivity and conditional density, TODO: citation
+#' @references Douglas R. White and Frank Harary (2001): The cohesiveness of blocks in
+#' social networks: node connectivity and conditional density,
+#' Sociological Methodology, vol. 31, 2001, pp. 305–59.
 #' @family flow
 #' @export
 #' @keywords graphs
