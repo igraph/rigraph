@@ -266,7 +266,6 @@ layout_ <- function(graph, layout, ...) {
   if (anyDuplicated(ids)) stop("Duplicate modifiers")
   names(modifiers) <- ids
 
-  ## TODO: better, generic mechanism for modifiers
   if ("component_wise" %in% ids) {
     graph$id <- seq(vcount(graph))
     comps <- decompose(graph)
