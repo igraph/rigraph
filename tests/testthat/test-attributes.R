@@ -63,8 +63,6 @@ test_that("bracketing works with shortcuts (not changing attribute of similar gr
   expect_equal(graph_attr(g, name = "name"), "foo")
 })
 
-## TODO: subsetting
-
 test_that("we can query all attributes at once", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
