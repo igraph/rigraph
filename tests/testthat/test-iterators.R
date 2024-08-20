@@ -7,7 +7,15 @@ test_that("iterators work", {
   expect_equal(sort(E(ring)[weight < 4]$weight), 1:3)
   expect_equal(V(ring)[c("A", "C")]$name, c("A", "C"))
 
-  ## TODO: %--%, %->%, other special functions
+  withr::with_seed(42, {
+    g <- sample_pa(100, power = 0.3)
+  })
+
+  expect_equal(as.numeric(E(g)[1:3 %--% 2:6]), 1:4)
+  expect_equal(as.numeric(E(g)[1:5 %->% 1:6]), 1:4)
+  expect_length(as.numeric(E(g)[1:2 %->% 5:6]), 0)
+  expect_equal(as.numeric(E(g)[1:3 %<-% 30:60]), c(36, 38, 44, 56))
+  expect_equal(as.numeric(E(g)[1:3 %<-% 5:6]), 4)
 })
 
 test_that("complex attributes work", {
