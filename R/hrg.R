@@ -253,6 +253,14 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     split occurred in the generated network samples, for each internal
 #'     vertices. The order is the same as in the `parents` vector.}
 #' @family hierarchical random graph functions
+#' @examples
+#' ## A graph with two dense groups
+#' g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
+#' hrg <- fit_hrg(g)
+#' hrg
+#'
+#' ## The consensus tree for it
+#' consensus_tree(g, hrg = hrg, start = TRUE)
 #' @export
 consensus_tree <- hrg_consensus_impl
 
