@@ -44,9 +44,4 @@ test_that("all_shortest_paths works", {
     list(c(1, 2, 3, 4, 7), c(1, 2, 7), c(1, 3, 7))
   )
   expect_equal(sp2$nrgeo, c(1, 1, 2, 1, 1, 1, 3))
-
-  ## TODO
-
-  ## E(g)$weight <- E(g)$weight - 1
-  ## all_shortest_paths(g, "s", "t")
 })
