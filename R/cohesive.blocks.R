@@ -279,7 +279,7 @@ blockGraphs <- function(blocks, graph) { # nocov start
 #' @seealso [cohesion()]
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:
 #' A hierarchical concept of social groups. *American Sociological
-#' Review*, 68(1):103--127, Feb 2003.
+#' Review*, 68(1):103--127, Feb 2003, \doi{10.2307/3088904}.
 #' @family cohesive.blocks
 #' @export
 #' @keywords graphs
