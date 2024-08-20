@@ -96,8 +96,9 @@ adhesion(g)
 
 }
 \references{
-Douglas R. White and Frank Harary: The cohesiveness of blocks in
-social networks: node connectivity and conditional density, TODO: citation
+Douglas R. White and Frank Harary (2001): The cohesiveness of blocks in
+social networks: node connectivity and conditional density,
+Sociological Methodology, vol. 31, 2001, pp. 305–59.
 }
 \seealso{
 Other flow: 
