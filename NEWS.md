@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9049
+
+## Chore
+
+- Fix TODO related to missing citation (#1450).
+
+## Documentation
+
+- Fix navbar configuration (#1451).
+
+- Add DOI to citation.
+
+  https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032
+
+  cc @szhorvat
+
+## Testing
+
+- Remove non actionable comment (#1469).
+
+- Remove TODO as several tests use the index argument (#1457).
+
+- Add tests for special subsetting functions (#1456).
+
+- Improve HITS test (#1449).
+
+
 # igraph 2.0.3.9048
 
 ## Bug fixes
