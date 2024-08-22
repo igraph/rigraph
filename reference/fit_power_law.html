@@ -54,7 +54,7 @@
 <span>  xmin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  start <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  force.continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plfit"</span>, <span class="st">"R.mle"</span><span class="op">)</span>,</span>
+<span>  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plfit"</span>, <span class="st">"R.mle"</span>, <span class="st">"plfit.p"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -110,29 +110,30 @@ implementation.</p></dd>
 ‘<code>R.mle</code>’, then an object with class ‘<code>mle</code>’. It can
 be used to calculate confidence intervals and log-likelihood. See
 <code><a href="https://rdrr.io/r/stats4/mle-class.html" class="external-link">stats4::mle-class()</a></code> for details.</p>
-<p>If <code>implementation</code> is ‘<code>plfit</code>’, then the result is a
+<p>If <code>implementation</code> is ‘<code>plfit</code>’ or ‘<code>plfit.p</code>’, then the result is a
 named list with entries:</p>
 <dl><dt>continuous</dt>
 <dd><p>Logical scalar, whether the
 fitted power-law distribution was continuous or discrete.</p></dd>
 
 <dt>alpha</dt>
-<dd><p>Numeric scalar, the exponent of the fitted power-law
-distribution.</p></dd>
- <dt>xmin</dt>
+<dd><p>Numeric scalar, the exponent of the fitted power-law distribution.</p></dd>
+
+<dt>xmin</dt>
 <dd><p>Numeric scalar, the minimum value from which the
 power-law distribution was fitted. In other words, only the values larger
 than <code>xmin</code> were used from the input vector.</p></dd>
- <dt>logLik</dt>
-<dd><p>Numeric
-scalar, the log-likelihood of the fitted parameters.</p></dd>
- <dt>KS.stat</dt>
-<dd><p>Numeric
-scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
-fitted distribution with the input vector. Smaller scores denote better
-fit.</p></dd>
- <dt>KS.p</dt>
-<dd><p>Numeric scalar, the p-value of the Kolmogorov-Smirnov
+
+<dt>logLik</dt>
+<dd><p>Numeric scalar, the log-likelihood of the fitted parameters.</p></dd>
+
+<dt>KS.stat</dt>
+<dd><p>Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+that compares the fitted distribution with the input vector.
+Smaller scores denote better fit.</p></dd>
+
+<dt>KS.p</dt>
+<dd><p>Only for <code>plfit.p</code>. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.</p></dd>
