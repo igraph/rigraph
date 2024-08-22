@@ -517,7 +517,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' V(g)[.env$x]
 #'
 `[.igraph.vs` <- function(x, ..., na_ok = FALSE) {
-  args <- lazy_dots(..., .follow_symbols = FALSE)
+  args <- rlang::enquos(..., .ignore_empty = "all")
 
   ## If indexing has no argument at all, then we still get one,
   ## but it is "empty", a name that is  ""
@@ -525,22 +525,24 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ## Special case, no argument (but we might get an artificial
   ## empty one
   if (length(args) < 1 ||
-    (length(args) == 1 && inherits(args[[1]]$expr, "name") &&
-      as.character(args[[1]]$expr) == "")) {
+    (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name") &&
+      as.character(rlang::quo_get_expr(args[[1]])) == "")) {
     return(x)
   }
 
   ## Special case: single numeric argument
-  if (length(args) == 1 && inherits(args[[1]]$expr, "numeric")) {
-    res <- simple_vs_index(x, args[[1]]$expr, na_ok)
+  first_arg_is_numericish <- inherits(rlang::quo_get_expr(args[[1]]), "numeric") ||
+    inherits(rlang::quo_get_expr(args[[1]]), "integer")
+  if (length(args) == 1 && first_arg_is_numericish) {
+    res <- simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok)
     return(add_vses_graph_ref(res, get_vs_graph(x)))
   }
 
   ## Special case: single symbol argument, no such attribute
-  if (length(args) == 1 && inherits(args[[1]]$expr, "name")) {
+  if (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name")) {
     graph <- get_vs_graph(x)
-    if (!(as.character(args[[1]]$expr) %in% vertex_attr_names(graph))) {
-      res <- simple_vs_index(x, lazy_eval(args[[1]]), na_ok)
+    if (!(as.character(rlang::quo_get_expr(args[[1]])) %in% vertex_attr_names(graph))) {
+      res <- simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok)
       return(add_vses_graph_ref(res, graph))
     }
   }
@@ -634,15 +636,21 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   graph <- get_vs_graph(x)
 
   if (is.null(graph)) {
-    res <- lapply(lazy_eval(args), simple_vs_index, x = x, na_ok = na_ok)
+    res <- lapply(
+      lapply(args, rlang::eval_tidy),
+      simple_vs_index,
+      x = x,
+      na_ok = na_ok
+    )
   } else {
     attrs <- vertex_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lazy_eval(
+    res <- lapply(
       args,
+      rlang::eval_tidy,
       data = c(
         attrs,
         .nei = .nei, nei = nei,
@@ -887,14 +895,14 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' E(g)[.env$x]
 #'
 `[.igraph.es` <- function(x, ...) {
-  args <- lazy_dots(..., .follow_symbols = TRUE)
+  args <- rlang::enquos(..., .ignore_empty = "all")
 
   ## If indexing has no argument at all, then we still get one,
   ## but it is "empty", a name that is ""
 
   if (length(args) < 1 ||
-    (length(args) == 1 && inherits(args[[1]]$expr, "name") &&
-      as.character(args[[1]]$expr) == "")) {
+    (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name") &&
+      !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))) {
     return(x)
   }
 
@@ -941,15 +949,16 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   graph <- get_es_graph(x)
 
   if (is.null(graph)) {
-    res <- lapply(lazy_eval(args), simple_es_index, x = x)
+    res <- lapply(lapply(args, rlang::eval_tidy), simple_es_index, x = x)
   } else {
     attrs <- edge_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lazy_eval(
+    res <- lapply(
       args,
+      rlang::eval_tidy,
       data = c(
         attrs,
         .inc = .inc, inc = inc, adj = adj,
