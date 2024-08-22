@@ -8349,6 +8349,7 @@ SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEX
   IGRAPH_R_CHECK_BOOL(compute_pvalue);
   c_compute_pvalue = LOGICAL(compute_pvalue)[0];
 
+  # Can't use the generated `R_igraph_power_law_fit()` because we need `c_res` to compute the p-value
   IGRAPH_R_CHECK(igraph_power_law_fit(&c_data, &c_res, c_xmin, c_force_continuous));
 
   if (c_compute_pvalue) {
