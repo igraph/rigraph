@@ -335,8 +335,10 @@ igraph_closeness_cutoff:
     IGNORE: RR
 
 igraph_distances:
+    IGNORE: RR, RC
 
 igraph_distances_cutoff:
+    IGNORE: RR, RC
 
 igraph_get_shortest_path:
 
@@ -357,8 +359,10 @@ igraph_get_all_shortest_paths:
         edges: epaths
 
 igraph_distances_dijkstra:
+    IGNORE: RR, RC
 
 igraph_distances_dijkstra_cutoff:
+    IGNORE: RR, RC
 
 igraph_get_shortest_paths_dijkstra:
     IGNORE: RR, RC, RInit
@@ -373,10 +377,13 @@ igraph_get_all_shortest_paths_dijkstra:
         edges: epaths
 
 igraph_distances_bellman_ford:
+    IGNORE: RR, RC
 
 igraph_distances_johnson:
+    IGNORE: RR, RC
 
 igraph_distances_floyd_warshall:
+    IGNORE: RR, RC
 
 igraph_voronoi:
     FIRST_KW_PARAM: weights

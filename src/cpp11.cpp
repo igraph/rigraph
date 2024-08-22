@@ -135,13 +135,6 @@ extern SEXP R_igraph_diameter(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_difference(SEXP, SEXP);
 extern SEXP R_igraph_dim_select(SEXP);
 extern SEXP R_igraph_disjoint_union(SEXP);
-extern SEXP R_igraph_distances(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_bellman_ford(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_dijkstra(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_dijkstra_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_floyd_warshall(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_distances_johnson(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_diversity(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dominator_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dot_product_game(SEXP, SEXP);
@@ -594,13 +587,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_difference",                                 (DL_FUNC) &R_igraph_difference,                                  2},
     {"R_igraph_dim_select",                                 (DL_FUNC) &R_igraph_dim_select,                                  1},
     {"R_igraph_disjoint_union",                             (DL_FUNC) &R_igraph_disjoint_union,                              1},
-    {"R_igraph_distances",                                  (DL_FUNC) &R_igraph_distances,                                   4},
-    {"R_igraph_distances_bellman_ford",                     (DL_FUNC) &R_igraph_distances_bellman_ford,                      5},
-    {"R_igraph_distances_cutoff",                           (DL_FUNC) &R_igraph_distances_cutoff,                            5},
-    {"R_igraph_distances_dijkstra",                         (DL_FUNC) &R_igraph_distances_dijkstra,                          5},
-    {"R_igraph_distances_dijkstra_cutoff",                  (DL_FUNC) &R_igraph_distances_dijkstra_cutoff,                   6},
-    {"R_igraph_distances_floyd_warshall",                   (DL_FUNC) &R_igraph_distances_floyd_warshall,                    6},
-    {"R_igraph_distances_johnson",                          (DL_FUNC) &R_igraph_distances_johnson,                           4},
     {"R_igraph_diversity",                                  (DL_FUNC) &R_igraph_diversity,                                   3},
     {"R_igraph_dominator_tree",                             (DL_FUNC) &R_igraph_dominator_tree,                              3},
     {"R_igraph_dot_product_game",                           (DL_FUNC) &R_igraph_dot_product_game,                            2},
