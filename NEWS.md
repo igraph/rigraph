@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9050
+
+## Features
+
+- Support `fit_power_law(implementation = "plfit.p")` to compute the P-value (#1386).
+
+## Refactoring
+
+- Drop attributes in a more straightforward fashion in `graphlet_basis()` (#1452).
+
+
 # igraph 2.0.3.9049
 
 ## Chore
