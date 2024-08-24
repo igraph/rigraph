@@ -510,6 +510,9 @@ igraph_topological_sorting:
 
 igraph_feedback_arc_set:
 
+igraph_feedback_vertex_set:
+    IGNORE: RR, RC
+
 igraph_is_loop:
     PARAM_NAMES:
         es: eids
@@ -1420,6 +1423,12 @@ igraph_eigen_matrix_symmetric:
     IGNORE: RR, RC
 
 igraph_solve_lsap:
+
+#######################################
+# Finding cycles
+#######################################
+
+igraph_find_cycle:
 
 #######################################
 # Eulerian functions
