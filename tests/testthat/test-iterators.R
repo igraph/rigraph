@@ -18,6 +18,13 @@ test_that("iterators work", {
   expect_equal(as.numeric(E(g)[1:3 %<-% 5:6]), 4)
 })
 
+test_that("subsetting returns the whole if no argument", {
+  g <- make_ring(10)
+  expect_length(V(g)[,], 10)
+  expect_length(V(g)[, na_ok = FALSE], 10)
+  expect_length(E(g)[,], 10)
+})
+
 test_that("complex attributes work", {
   g <- make_ring(10)
   foo <- lapply(1:vcount(g), seq, from = 1)
