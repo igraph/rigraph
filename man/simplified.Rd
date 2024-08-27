@@ -16,6 +16,7 @@ sample_(pa(10, m = 3, algorithm = "bag"), simplified())
 \seealso{
 Constructor modifiers (and related functions)
 \code{\link{make_}()},
+\code{\link{sample_}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},
 \code{\link{with_vertex_}()},

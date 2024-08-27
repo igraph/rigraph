@@ -72,7 +72,8 @@ Random graph models (games)
 \code{\link{sample_traits_callaway}()},
 \code{\link{sample_tree}()}
 
-Other constructor modifiers: 
+Constructor modifiers (and related functions)
+\code{\link{make_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},

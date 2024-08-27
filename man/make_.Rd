@@ -57,6 +57,7 @@ Other deterministic constructors:
 \code{\link{make_tree}()}
 
 Constructor modifiers (and related functions)
+\code{\link{sample_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},
