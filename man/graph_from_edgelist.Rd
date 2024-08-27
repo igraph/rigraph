@@ -38,6 +38,7 @@ graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
