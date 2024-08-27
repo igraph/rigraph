@@ -220,7 +220,6 @@ reference:
   - has_concept("foreign")
 - title: Interactive functions
 - contents:
-  - has_concept("socnet")
   - has_concept("tkplot")
   - has_concept("console")
 - title: Versions

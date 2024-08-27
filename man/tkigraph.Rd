@@ -6,3 +6,4 @@
 \description{
 Find tkigraph at \url{https://github.com/igraph/tkigraph}.
 }
+\keyword{internal}
