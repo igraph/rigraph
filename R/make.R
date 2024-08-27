@@ -823,7 +823,23 @@ make_ <- function(...) {
 #' Generic function for sampling from network models.
 #'
 #' @details
-#' TODO
+#' `sample_()` is a generic function for creating graphs.
+#' For every graph constructor in igraph that has a `sample_` prefix,
+#' there is a corresponding function without the prefix: e.g.
+#' for [sample_pa()] there is also [pa()], etc.
+#'
+#' The same is true for the deterministic graph samplers, i.e. for each
+#' constructor with a `make_` prefix, there is a corresponding
+#' function without that prefix.
+#'
+#' These shorter forms can be used together with `sample_()`.
+#' The advantage of this form is that the user can specify constructor
+#' modifiers which work with all constructors. E.g. the
+#' [with_vertex_()] modifier adds vertex attributes
+#' to the newly created graphs.
+#'
+#' See the examples and the various constructor modifiers below.
+#'
 #'
 #' @param ... Parameters, see details below.
 #'
@@ -842,6 +858,7 @@ make_ <- function(...) {
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 #' @family games
+#' @family constructor modifiers
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")

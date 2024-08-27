@@ -16,6 +16,7 @@ make_(full_graph(5, loops = TRUE), without_loops())
 }
 \seealso{
 Other constructor modifiers: 
+\code{\link{sample_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},

@@ -24,6 +24,7 @@ make_(
 }
 \seealso{
 Other constructor modifiers: 
+\code{\link{sample_}()},
 \code{\link{simplified}()},
 \code{\link{with_graph_}()},
 \code{\link{with_vertex_}()},

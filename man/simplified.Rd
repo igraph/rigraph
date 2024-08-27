@@ -15,6 +15,7 @@ sample_(pa(10, m = 3, algorithm = "bag"), simplified())
 }
 \seealso{
 Other constructor modifiers: 
+\code{\link{sample_}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},
 \code{\link{with_vertex_}()},
