@@ -12,6 +12,7 @@ list(
     foreign = "Foreign format readers",
     games = "Random graph models (games)",
     scg = "Spectral Coarse Graining",
-    sgm = "Graph matching"
+    sgm = "Graph matching",
+    `constructor modifiers` = "Constructor modifiers (and related functions)"
     )
 )
