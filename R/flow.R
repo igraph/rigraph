@@ -892,13 +892,13 @@ min_st_separators <- all_minimal_st_separators_impl
 max_flow <- maxflow_impl
 
 
-#' Vertex separators
+#' Check whether removing this set of vertices would disconnect the graph.
 #'
-#' Check whether a given set of vertices is a vertex separator.
-#'
-#' `is_separator()` decides whether the supplied vertex set is a vertex
-#' separator. A vertex set is a vertex separator if its removal results a
-#' disconnected graph.
+#' `is_separator()` determines whether the supplied vertex set is a vertex
+#' separator:
+#' A vertex set \eqn{S} is a separator if there are vertices \eqn{u} and \eqn{v}
+#' in the graph such that all paths between \eqn{u} and \eqn{v} pass
+#' through some vertices in \eqn{S}.
 #'
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
@@ -908,6 +908,14 @@ max_flow <- maxflow_impl
 #'   vertex separator or not.
 #'   lists all vertex separator of minimum size.
 #' @family flow
+#' @examples
+#' ring <- make_ring(4)
+#' min_st_separators(ring)
+#' is_separator(ring, 1)
+#' is_separator(ring, c(1, 3))
+#' is_separator(ring, c(2, 4))
+#' is_separator(ring, c(2, 3))
+#'
 #' @export
 is_separator <- is_separator_impl
 
