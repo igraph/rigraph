@@ -358,11 +358,35 @@ shape_noplot <- function(coords, v = NULL, params) {
 add_shape <- function(shape, clip = shape_noclip,
                       plot = shape_noplot,
                       parameters = list()) {
-  ## TODO
-  ## checkScalarString(shape)
-  ## checkFunction(clip)
-  ## checkFunction(plot)
-  ## checkList(parameters, named=TRUE)
+
+  if (!is.character(shape) || length(shape) != 1) {
+    cli::cli_abort(c(
+      "{.arg shape} must be a character of length 1.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (!rlang::is_missing(clip) && !inherits(clip, "function")) {
+    cli::cli_abort(c(
+      "{.arg clip} must be a function.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (!rlang::is_missing(plot) && !inherits(plot, "function")) {
+    cli::cli_abort(c(
+      "{.arg plot} must be a function.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
+
+  if (length(parameters) > 0 && (
+    !inherits(parameters, "list") || !rlang::is_named(parameters))) {
+    cli::cli_abort(c(
+      "{.arg parameters} must be a named list.",
+      i = "See {.help add_shape} for details."
+    ))
+  }
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph.options, parameters)
