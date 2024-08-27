@@ -10,16 +10,33 @@ test_that("`authority_score()` works", {
     x
   }
 
-  g1 <- sample_pa(100, m = 10)
+  g1 <- make_graph(
+    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
+    directed = TRUE)
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g1)$vector
+  expect_equal(
+    s2,
+    c(0.519632767970952, 0.0191587307007462, 0.327572049088003,
+      0.238728053455971, 0.449690304629051, 1, 0.0966933781044594,
+      0.204851318050036, 0.0191587307007462, 0.653243552177761)
+  )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
-  g2 <- sample_gnp(100, 2 / 100)
+  g2 <- make_graph(
+    c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
+    directed = TRUE
+  )
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g2)$vector
+  expect_equal(
+    s2,
+    c(0.763521118433368, 1, 0.546200349457202,
+      0.918985947228995, 0.28462967654657)
+  )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::with_options(lifecycle_verbosity = "warning", {
@@ -42,16 +59,33 @@ test_that("`hub_score()` works", {
     x
   }
 
-  g1 <- sample_pa(100, m = 10)
+  g1 <- make_graph(
+    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
+    directed = TRUE)
   A <- as_adj(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g1)$vector
+  expect_equal(
+    s2,
+    c(0.755296579522977, 0.198139015063149, 0.198139015063149,
+      0.0514804231207635, 0.550445261472941, 0.124905139108053,
+      1, 0.0910284037021176, 0.381305851509012, 0.208339295395331)
+  )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
-  g2 <- sample_gnp(100, 2 / 100)
+  g2 <- make_graph(
+    c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
+    directed = TRUE
+  )
   A <- as_adj(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g2)$vector
+  expect_equal(
+    s2,
+    c(1, 0.763521118433368, 0.546200349457203,
+      0.28462967654657, 0.918985947228995)
+  )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
   rlang::with_options(lifecycle_verbosity = "warning", {
@@ -60,18 +94,6 @@ test_that("`hub_score()` works", {
     )
   })
   expect_equal(s2, s3)
-})
-
-# TODO: Hub and authority scores make little sense for undirected graphs
-# Replace this test. Until then, do not use even-length cycle graphs
-# as their leading eigenvalue for hub/authority scores is degenerate,
-# and any vector with alternating values (a, b, a, b, ...) is a valid
-# solution, not just all-ones.
-test_that("authority scores of a ring are all one", {
-  rlang::local_options(lifecycle_verbosity = "quiet")
-  g3 <- make_ring(99)
-  expect_equal(hits_scores(g3)$authority, rep(1, vcount(g3)))
-  expect_equal(hits_scores(g3)$hub, rep(1, vcount(g3)))
 })
 
 test_that("authority_score survives stress test", {
