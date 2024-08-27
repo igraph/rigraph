@@ -479,10 +479,6 @@ extern SEXP R_igraph_write_graph_lgl(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_write_graph_ncol(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_write_graph_pajek(SEXP, SEXP);
 extern SEXP UUID_gen(SEXP);
-extern SEXP make_lazy(SEXP, SEXP, SEXP);
-extern SEXP make_lazy_dots(SEXP, SEXP);
-extern SEXP promise_env_(SEXP);
-extern SEXP promise_expr_(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
@@ -944,10 +940,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
     {"_igraph_getsphere",                                   (DL_FUNC) &_igraph_getsphere,                                    7},
     {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
-    {"make_lazy",                                           (DL_FUNC) &make_lazy,                                            3},
-    {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},
-    {"promise_env_",                                        (DL_FUNC) &promise_env_,                                         1},
-    {"promise_expr_",                                       (DL_FUNC) &promise_expr_,                                        1},
     {NULL, NULL, 0}
 };
 }
