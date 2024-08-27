@@ -24,8 +24,8 @@ make_(
   plot()
 }
 \seealso{
-Other constructor modifiers: 
-\code{\link{sample_}()},
+Constructor modifiers (and related functions)
+\code{\link{make_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},

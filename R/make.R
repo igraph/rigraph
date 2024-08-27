@@ -790,8 +790,6 @@ graph.atlas <- function(n) { # nocov start
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @seealso simplified with_edge_ with_graph_ with_vertex_
-#'   without_loops without_multiples
 #' @export
 #' @examples
 #' r <- make_(ring(10))
@@ -803,6 +801,8 @@ graph.atlas <- function(n) { # nocov start
 #' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "configuration"), simplified())
 #' degree(ran)
 #' is_simple(ran)
+#' @family deterministic constructors
+#' @family constructor modifiers
 make_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")

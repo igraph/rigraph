@@ -17,8 +17,8 @@ g2 <- make_(ring(10), without_attr())
 g2
 }
 \seealso{
-Other constructor modifiers: 
-\code{\link{sample_}()},
+Constructor modifiers (and related functions)
+\code{\link{make_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},
