@@ -526,7 +526,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ## empty one
   if (length(args) < 1 ||
     (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name") &&
-      as.character(rlang::quo_get_expr(args[[1]])) == "")) {
+      !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))) {
     return(x)
   }
 
