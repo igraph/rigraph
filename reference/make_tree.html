@@ -41,7 +41,7 @@ have the same number of children."><meta property="og:image" content="https://r.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create tree graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-todo/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_tree.Rd</code></div>
     </div>
 
@@ -92,6 +92,7 @@ graph.</p></dd>
 <code><a href="graph_from_atlas.html">graph_from_atlas</a>()</code>,
 <code><a href="graph_from_edgelist.html">graph_from_edgelist</a>()</code>,
 <code><a href="graph_from_literal.html">graph_from_literal</a>()</code>,
+<code><a href="make_.html">make_</a>()</code>,
 <code><a href="make_chordal_ring.html">make_chordal_ring</a>()</code>,
 <code><a href="make_empty_graph.html">make_empty_graph</a>()</code>,
 <code><a href="make_full_citation_graph.html">make_full_citation_graph</a>()</code>,
@@ -105,14 +106,14 @@ graph.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1b1b45e D--- 10 9 -- Tree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6079e79 D--- 10 9 -- Tree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), children (g/n), mode (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1b1b45e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6079e79:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt; 2 1-&gt; 3 2-&gt; 4 2-&gt; 5 3-&gt; 6 3-&gt; 7 4-&gt; 8 4-&gt; 9 5-&gt;10</span>
 <span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f1f0005 U--- 10 9 -- Tree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1f92344 U--- 10 9 -- Tree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), children (g/n), mode (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f1f0005:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1f92344:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10</span>
 </code></pre></div>
     </div>

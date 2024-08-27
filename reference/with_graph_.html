@@ -39,7 +39,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Constructor modifier to add graph attributes</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-todo/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>with_graph_.Rd</code></div>
     </div>
 
@@ -62,8 +62,8 @@
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other constructor modifiers:
-<code><a href="sample_.html">sample_</a>()</code>,
+    <div class="dont-index"><p>Constructor modifiers (and related functions)
+<code><a href="make_.html">make_</a>()</code>,
 <code><a href="simplified.html">simplified</a>()</code>,
 <code><a href="with_edge_.html">with_edge_</a>()</code>,
 <code><a href="with_vertex_.html">with_vertex_</a>()</code>,
@@ -75,9 +75,9 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="make_.html">make_</a></span><span class="op">(</span><span class="fu"><a href="make_ring.html">ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="fu">with_graph_</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"10-ring"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b7369ba U--- 10 10 -- 10-ring</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b8124e5 U--- 10 10 -- 10-ring</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b7369ba:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b8124e5:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 </code></pre></div>
     </div>
