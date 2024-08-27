@@ -39,7 +39,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Set all or some graph attributes</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs-todo/R/attributes.R" class="external-link"><code>R/attributes.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/attributes.R" class="external-link"><code>R/attributes.R</code></a></small>
       <div class="d-none name"><code>graph_attr-set.Rd</code></div>
     </div>
 
@@ -101,9 +101,9 @@ are set as attributes.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="va">A</span> <span class="op">-</span> <span class="va">B</span><span class="op">:</span><span class="va">C</span><span class="op">:</span><span class="va">D</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"name"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"4-star"</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 44cda1f UN-- 4 3 -- 4-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0a2569a UN-- 4 3 -- 4-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 44cda1f (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0a2569a (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A--B A--C A--D</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
