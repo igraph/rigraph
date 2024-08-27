@@ -56,6 +56,7 @@
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Constructor modifiers (and related functions)
 <code><a href="make_.html">make_</a>()</code>,
+<code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="simplified.html">simplified</a>()</code>,
 <code><a href="with_edge_.html">with_edge_</a>()</code>,
 <code><a href="with_graph_.html">with_graph_</a>()</code>,
@@ -68,14 +69,14 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># An artificial example</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="make_.html">make_</a></span><span class="op">(</span><span class="fu"><a href="make_full_graph.html">full_graph</a></span><span class="op">(</span><span class="fl">5</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 018af25 U--- 5 15 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5623bb4 U--- 5 15 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 018af25:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5623bb4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--1 1--2 1--3 1--4 1--5 2--2 2--3 2--4 2--5 3--3 3--4 3--5 4--4 4--5 5--5</span>
 <span class="r-in"><span><span class="fu"><a href="make_.html">make_</a></span><span class="op">(</span><span class="fu"><a href="make_full_graph.html">full_graph</a></span><span class="op">(</span><span class="fl">5</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu">without_loops</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ece27e0 U--- 5 10 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6d37c2a U--- 5 10 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ece27e0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6d37c2a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5</span>
 </code></pre></div>
     </div>
