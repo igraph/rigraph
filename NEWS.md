@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9051
+
+## Documentation
+
+- Improve the manual page of sample\_() (#1477).
+
+- Improve cross-links from make\_() manual page (#1476).
+
+- Update is_separator() documentation based on C docs (#1467).
+
+## Refactoring
+
+- Remove lazyeval usage in `[.igraph.vs` (#1445).
+
+## Testing
+
+- Improve hits tests (#1458).
+
+- Slightly refactor test.print.R for readability (#1463).
+
+
 # igraph 2.0.3.9050
 
 ## Features
