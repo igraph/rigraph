@@ -167,6 +167,10 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
+    lifecycle::deprecate_soft(
+      "2.0.4", "get.adjacency.dense(loops = 'must be a character')",
+      details = sprintf("Converting to get.adjacency.dense (loops = '%s')", loops)
+    )
   }
   loops <- igraph.match.arg(loops)
   loops <- switch(loops,
