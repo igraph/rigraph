@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9052
+
+## Bug fixes
+
+- Fix includig diagonal elements in dense adjacency matrices (#1437).
+
+
 # igraph 2.0.3.9051
 
 ## Documentation
