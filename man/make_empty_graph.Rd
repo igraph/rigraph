@@ -43,3 +43,8 @@ Other deterministic constructors:
 }
 \concept{Empty graph.}
 \concept{deterministic constructors}
+\section{Related C docs}{
+\itemize{
+\href{https://igraph.org/c/doc/igraph-Basic.html#igraph_empty}{empty}}
+}
+

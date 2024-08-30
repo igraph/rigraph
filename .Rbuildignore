@@ -50,3 +50,4 @@
 ^\.aviator/config\.yml$
 ^src/vendor/cigraph/CITATION\.cff$
 ^R/revdep\.R$
+^data-raw$

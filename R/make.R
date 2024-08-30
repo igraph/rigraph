@@ -1364,6 +1364,7 @@ make_empty_graph <- empty_impl
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
+#' @cdocs empty
 #' @export
 empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 
@@ -1929,11 +1930,14 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
+#' @cdocs igraph_atlas
+#' @cdocs igraph_chordal
 #' @export
 #' @examples
 #' ## Some randomly picked graphs from the atlas
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
+
 graph_from_atlas <- function(n) {
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_atlas, as.numeric(n))

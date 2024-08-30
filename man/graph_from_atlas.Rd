@@ -55,3 +55,13 @@ Other deterministic constructors:
 }
 \concept{Graph Atlas.}
 \concept{deterministic constructors}
+\section{Related C docs}{
+\itemize{
+\href{https://igraph.org/c/doc/igraph-Generators.html#igraph_atlas}{igraph_atlas}}
+}
+
+\section{Related C docs}{
+\itemize{
+\href{https://igraph.org/c/doc/igraph-Generators.html#igraph_atlas}{igraph_chordal}}
+}
+
