@@ -1365,6 +1365,7 @@ make_empty_graph <- empty_impl
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
 #' @cdocs empty
+#' @cdocs moche
 #' @export
 empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 
@@ -1931,7 +1932,7 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #'
 #' @family deterministic constructors
 #' @cdocs igraph_atlas
-#' @cdocs igraph_chordal
+#' @cdocs igraph_empty
 #' @export
 #' @examples
 #' ## Some randomly picked graphs from the atlas

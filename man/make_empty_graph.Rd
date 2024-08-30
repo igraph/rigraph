@@ -45,6 +45,6 @@ Other deterministic constructors:
 \concept{deterministic constructors}
 \section{Related C docs}{
 \itemize{
-\href{https://igraph.org/c/doc/igraph-Basic.html#igraph_empty}{empty}}
+\item \href{https://igraph.org/c/doc/igraph-Basic.html#igraph_empty}{igraph_empty}}
 }
 

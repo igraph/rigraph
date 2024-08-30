@@ -57,11 +57,7 @@ Other deterministic constructors:
 \concept{deterministic constructors}
 \section{Related C docs}{
 \itemize{
-\href{https://igraph.org/c/doc/igraph-Generators.html#igraph_atlas}{igraph_atlas}}
-}
-
-\section{Related C docs}{
-\itemize{
-\href{https://igraph.org/c/doc/igraph-Generators.html#igraph_atlas}{igraph_chordal}}
+\item \href{https://igraph.org/c/doc/igraph-Generators.html#igraph_atlas}{igraph_atlas}
+\item \href{https://igraph.org/c/doc/igraph-Basic.html#igraph_empty}{igraph_empty}}
 }
 

@@ -14,19 +14,39 @@ roxy_tag_rd.roxy_tag_cdocs <- function(x, base_path, env) {
 
 #' @export
 format.rd_section_cdocs <- function(x, ...) {
-  # TODO: error if there's no url
-  # we can use igraph_ or not
-  url <- clinks$url[clinks$method %in% c(x$value, sprintf("igraph_%s", x$value))]
-
   paste0(
     "\\section{Related C docs}{\n",
     "\\itemize{\n",
-    sprintf("\\href{%s}{%s}", url, x$value),
+  present_cdocs_link(x[["value"]]),
     "}\n",
     "}\n"
   )
 }
 
+present_cdocs_link <- function(value) {
+
+  format_cdocs_single_link <- function(x, clinks) {
+  # we can use igraph_ or not
+    df <- clinks[clinks$method %in% c(x, sprintf("igraph_%s", x)),]
+    if (nrow(df) == 0) {
+      cli::cli_warn("Can't find C entry for {x}!")
+    }
+    sprintf("\\item \\href{%s}{%s}", df$url, df$method)
+  }
+
+  strings <- map_chr(value, format_cdocs_single_link, clinks = clinks)
+
+  paste(strings, collapse = "\n")
+}
+
+#' @export
+merge.rd_section_cdocs <- function(x, y, ...) {
+  stopifnot(identical(class(x), class(y)))
+
+  dedup <- unique(c(x$value, y$value))
+
+ format.rd_section_cdocs(x = list(value = dedup))
+}
 
 #' @export
 cdocs_roclet <- function() {
