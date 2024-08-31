@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9053
+
+## Chore
+
+- Add some argument checking to `add_shape()` (#1478).
+
+## Testing
+
+- Remove useless snapshot (#1481).
+
+
 # igraph 2.0.3.9052
 
 ## Bug fixes
