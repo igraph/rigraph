@@ -9,6 +9,13 @@ type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
 version: 2.0.3
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.igraph
+- type: url
+  value: https://igraph.org/
+- type: url
+  value: https://igraph.discourse.group/
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
@@ -121,6 +128,7 @@ references:
     given-names: Gábor
     email: csardi.gabor@gmail.com
   year: '2024'
+  doi: 10.32614/CRAN.package.cli
 - type: software
   title: graphics
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -156,6 +164,7 @@ references:
     email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
   year: '2024'
+  doi: 10.32614/CRAN.package.lifecycle
 - type: software
   title: magrittr
   abstract: 'magrittr: A Forward-Pipe Operator for R'
@@ -170,6 +179,7 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2024'
+  doi: 10.32614/CRAN.package.magrittr
 - type: software
   title: Matrix
   abstract: 'Matrix: Sparse and Dense Matrix Classes and Methods'
@@ -188,6 +198,7 @@ references:
     given-names: Mikael
     orcid: https://orcid.org/0000-0002-3542-2938
   year: '2024'
+  doi: 10.32614/CRAN.package.Matrix
 - type: software
   title: pkgconfig
   abstract: 'pkgconfig: Private Configuration for ''R'' Packages'
@@ -198,6 +209,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
   year: '2024'
+  doi: 10.32614/CRAN.package.pkgconfig
   version: '>= 2.0.0'
 - type: software
   title: rlang
@@ -213,6 +225,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.rlang
 - type: software
   title: stats
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -250,6 +263,7 @@ references:
     given-names: Davis
     email: davis@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.vctrs
 - type: software
   title: ape
   abstract: 'ape: Analyses of Phylogenetics and Evolution'
@@ -345,6 +359,7 @@ references:
     name-particle: de
     orcid: https://orcid.org/0000-0001-9532-5251
   year: '2024'
+  doi: 10.32614/CRAN.package.ape
   version: '>= 5.7-0.1'
 - type: software
   title: callr
@@ -360,6 +375,7 @@ references:
   - family-names: Chang
     given-names: Winston
   year: '2024'
+  doi: 10.32614/CRAN.package.callr
 - type: software
   title: decor
   abstract: 'decor: Retrieve Code Decorations'
@@ -378,6 +394,7 @@ references:
     given-names: Jim
     orcid: https://orcid.org/0000-0002-2739-7082
   year: '2024'
+  doi: 10.32614/CRAN.package.decor
 - type: software
   title: digest
   abstract: 'digest: Create Compact Hash Digests of R Objects'
@@ -385,59 +402,12 @@ references:
   url: https://dirk.eddelbuettel.com/code/digest.html
   repository: https://CRAN.R-project.org/package=digest
   authors:
-  - family-names: Lucas
-    given-names: Dirk Eddelbuettel with contributions by Antoine
-    email: edd@debian.org
-  - family-names: Tuszynski
-    given-names: Jarek
-  - family-names: Bengtsson
-    given-names: Henrik
-  - family-names: Urbanek
-    given-names: Simon
-  - family-names: Frasca
-    given-names: Mario
-  - family-names: Lewis
-    given-names: Bryan
-  - family-names: Stokely
-    given-names: Murray
-  - family-names: Muehleisen
-    given-names: Hannes
-  - family-names: Murdoch
-    given-names: Duncan
-  - family-names: Hester
-    given-names: Jim
-  - family-names: Wu
-    given-names: Wush
-  - family-names: Kou
-    given-names: Qiang
-  - family-names: Onkelinx
-    given-names: Thierry
-  - family-names: Lang
-    given-names: Michel
-  - family-names: Simko
-    given-names: Viliam
-  - family-names: Hornik
-    given-names: Kurt
-  - family-names: Neal
-    given-names: Radford
-  - family-names: Bell
-    given-names: Kendon
-  - family-names: Queljoe
-    given-names: Matthew
-    name-particle: de
-  - family-names: Suruceanu
-    given-names: Ion
-  - family-names: Denney
-    given-names: Bill
-  - family-names: Schumacher
+  - family-names: Eddelbuettel
     given-names: Dirk
-  - family-names: Chang
-    given-names: Winston
-  - family-names: Attali
-    given-names: Dean
-  - family-names: Chirico.
-    given-names: Michael
+    email: edd@debian.org
+    orcid: https://orcid.org/0000-0001-6419-907X
   year: '2024'
+  doi: 10.32614/CRAN.package.digest
 - type: software
   title: igraphdata
   abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'
@@ -449,6 +419,7 @@ references:
     given-names: Gabor
     email: csardi.gabor@gmail.com
   year: '2024'
+  doi: 10.32614/CRAN.package.igraphdata
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -461,6 +432,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2024'
+  doi: 10.32614/CRAN.package.knitr
 - type: software
   title: rgl
   abstract: 'rgl: 3D Visualization Using OpenGL'
@@ -475,6 +447,7 @@ references:
     given-names: Daniel
     email: dadler@dyncall.org
   year: '2024'
+  doi: 10.32614/CRAN.package.rgl
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -518,6 +491,7 @@ references:
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2024'
+  doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: scales
   abstract: 'scales: Scale Functions for Visualization'
@@ -535,6 +509,7 @@ references:
   - family-names: Seidel
     given-names: Dana
   year: '2024'
+  doi: 10.32614/CRAN.package.scales
 - type: software
   title: stats4
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -566,6 +541,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.testthat
 - type: software
   title: vdiffr
   abstract: 'vdiffr: Visual Regression Testing and Graphical Diffing'
@@ -590,6 +566,7 @@ references:
     given-names: Vaudor
     email: lise.vaudor@ens-lyon.fr
   year: '2024'
+  doi: 10.32614/CRAN.package.vdiffr
 - type: software
   title: withr
   abstract: 'withr: Run Code ''With'' Temporarily Modified Global State'
@@ -614,6 +591,7 @@ references:
   - family-names: Chang
     given-names: Winston
   year: '2024'
+  doi: 10.32614/CRAN.package.withr
 - type: software
   title: graph
   abstract: 'graph: graph: A package to handle graph data structures'
@@ -652,10 +630,6 @@ references:
     given-names: Romain
     orcid: https://orcid.org/0000-0002-2444-4226
   year: '2024'
+  doi: 10.32614/CRAN.package.cpp11
   version: '>= 0.4.7'
-identifiers:
-- type: url
-  value: https://igraph.org/
-- type: url
-  value: https://igraph.discourse.group/
 
