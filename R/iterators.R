@@ -172,25 +172,26 @@ inside_square_error <- function(fn_name, call = rlang::caller_env()) {
 #'
 #' @keywords internal
 #' @rdname inside-square-error
+#' @param ... Not used, here for compatibility.
 #' @return An error
 #' @export
 #'
-.nei <- function() inside_square_error(".nei")
+.nei <- function(...) inside_square_error(".nei")
 #' @rdname inside-square-error
 #' @export
-.innei <- function() inside_square_error(".innei")
+.innei <- function(...) inside_square_error(".innei")
 #' @rdname inside-square-error
 #' @export
-.outnei <- function() inside_square_error(".outnei")
+.outnei <- function(...) inside_square_error(".outnei")
 #' @rdname inside-square-error
 #' @export
-.inc <- function() inside_square_error(".inc")
+.inc <- function(...) inside_square_error(".inc")
 #' @rdname inside-square-error
 #' @export
-.from <- function() inside_square_error(".from")
+.from <- function(...) inside_square_error(".from")
 #' @rdname inside-square-error
 #' @export
-.to <- function() inside_square_error(".to")
+.to <- function(...) inside_square_error(".to")
 
 #' Vertices of a graph
 #'
