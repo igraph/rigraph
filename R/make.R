@@ -1357,7 +1357,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #'
 #' @family deterministic constructors
 #' @export
-#' @cdocs empty
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
