@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9054
+
+## Bug fixes
+
+- Add ellipsis to dummy functions `.nei()` and others (#1487).
+
+## Features
+
+- Breaking change: remove tkigraph from {igraph} proper (#1474).
+
+## Chore
+
+- Results for revdepcheck (#1488).
+
+## Documentation
+
+- Add a custom roxygen2 cdocs tag (#1484).
+
+## Breaking changes
+
+- Breaking change: remove tkigraph from {igraph} proper (#1474).
+
+
 # igraph 2.0.3.9053
 
 ## Chore
