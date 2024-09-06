@@ -631,5 +631,5 @@ references:
     orcid: https://orcid.org/0000-0002-2444-4226
   year: '2024'
   doi: 10.32614/CRAN.package.cpp11
-  version: '>= 0.4.7'
+  version: '>= 0.5.0'
 
