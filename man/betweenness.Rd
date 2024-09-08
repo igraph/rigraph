@@ -41,13 +41,13 @@ so they are interpreted as distances.}
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
 or unordered vertex pairs in directed and undirected graphs, respectively.
 In an undirected graph,
-\deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),}
+\deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2 B / ((n-1)(n-2)),}
 where
 \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and
 \eqn{n} is the number of vertices in the graph. Note that the same
 normalization factor is used even when setting a \code{cutoff} on the considered
 shortest path lengths, even though the number of vertex pairs reachable
-from each other may be less than \eqn{(n-1)(n-2)}.}
+from each other may be less than \eqn{(n-1)(n-2)/2}.}
 
 \item{cutoff}{The maximum shortest path length to consider when calculating
 betweenness. If negative, then there is no such limit.}
