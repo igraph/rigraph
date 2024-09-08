@@ -18,8 +18,8 @@ centralization.evcent.tmax(
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths
-for calculating betweenness.}
+\item{directed}{logical scalar, whether to consider edge directions
+during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{Whether to rescale the eigenvector centrality scores,
 such that the maximum score is one.}

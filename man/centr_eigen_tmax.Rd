@@ -2,7 +2,7 @@
 % Please edit documentation in R/centralization.R
 \name{centr_eigen_tmax}
 \alias{centr_eigen_tmax}
-\title{Theoretical maximum for betweenness centralization}
+\title{Theoretical maximum for eigenvector centralization}
 \usage{
 centr_eigen_tmax(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE)
 }
@@ -13,16 +13,16 @@ centr_eigen_tmax(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE)
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths
-for calculating betweenness.}
+\item{directed}{logical scalar, whether to consider edge directions
+during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{Whether to rescale the eigenvector centrality scores,
 such that the maximum score is one.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
-betweenness centrality score for graphs with given order and other
-parameters.
+eigenvector centrality score for graphs with given vertex count and
+other parameters.
 }
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
