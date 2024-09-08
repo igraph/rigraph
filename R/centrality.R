@@ -255,9 +255,15 @@ betweenness.estimate <- estimate_betweenness
 #'   scores. If `TRUE`, then the results are normalized by the number of ordered
 #'   or unordered vertex pairs in directed and undirected graphs, respectively.
 #'   In an undirected graph,
-#'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
-#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
-#'   is the number of vertices in the graph.
+#'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),}
+#'   where
+#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and
+#'   \eqn{n} is the number of vertices in the graph. Note that the same
+#'   normalization factor is used even when setting a `cutoff` on the considered
+#'   shortest path lengths, even though the number of vertex pairs reachable
+#'   from each other may be less than \eqn{(n-1)(n-2)}.
+#' @param cutoff The maximum shortest path length to consider when calculating
+#'   betweenness. If negative, then there is no such limit.
 #' @return A numeric vector with the betweenness score for each vertex in
 #'   `v` for `betweenness()`.
 #'
@@ -270,9 +276,11 @@ betweenness.estimate <- estimate_betweenness
 #' @seealso [closeness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
+#' \doi{10.1016/0378-8733(78)90021-7}
 #'
 #' Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. *Journal
 #' of Mathematical Sociology* 25(2):163-177, 2001.
+#' \doi{10.1080/0022250X.2001.9990249}
 #' @family centrality
 #' @export
 #' @keywords graphs
@@ -282,8 +290,6 @@ betweenness.estimate <- estimate_betweenness
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
-#' @param cutoff The maximum path length to consider when calculating the
-#'   betweenness. If zero or negative then there is no such limit.
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)
