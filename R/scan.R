@@ -261,7 +261,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
           if (!is.function(FUN)) {
             FUN <- getFunction(FUN, where = environment())
           }
-          FUN(induced.subgraph(graph.them, vei), ...)
+          FUN(induced_subgraph(graph.them, vei), ...)
         })
       }
     }
