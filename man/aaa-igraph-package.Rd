@@ -61,7 +61,7 @@ deterministic and stochastic; stochastic graph constructors are called
 To create small graphs with a given structure probably the
 \code{\link[=graph_from_literal]{graph_from_literal()}} function is easiest. It uses R's formula
 interface, its manual page contains many examples. Another option is
-\code{\link[=graph]{graph()}}, which takes numeric vertex ids directly.
+\code{\link[=make_graph]{make_graph()}}, which takes numeric vertex ids directly.
 \code{\link[=graph_from_atlas]{graph_from_atlas()}} creates graph from the Graph Atlas,
 \code{\link[=make_graph]{make_graph()}} can create some special graphs.
 

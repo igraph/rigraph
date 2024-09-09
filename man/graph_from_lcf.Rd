@@ -32,7 +32,7 @@ g2 <- make_graph("Franklin")
 isomorphic(g1, g2)
 }
 \seealso{
-\code{\link[=graph]{graph()}} can create arbitrary graphs, see also the other
+\code{\link[=make_graph]{make_graph()}} can create arbitrary graphs, see also the other
 functions on the its manual page for creating special graphs.
 }
 \author{

@@ -16,7 +16,7 @@ When the vector is a named vector, the names will be attached to the graph
 as the \code{name} vertex attribute.}
 
 \item{edges}{A vector giving the edges of the graph, the same way as for the
-regular \code{\link[=graph]{graph()}} function. It is checked that the edges indeed
+regular \code{\link[=make_graph]{make_graph()}} function. It is checked that the edges indeed
 connect vertices of different kind, according to the supplied \code{types}
 vector. The vector may be a string vector if \code{types} is a named vector.}
 
@@ -55,7 +55,7 @@ print(g, v = TRUE)
 
 }
 \seealso{
-\code{\link[=graph]{graph()}} to create one-mode networks
+\code{\link[=make_graph]{make_graph()}} to create one-mode networks
 
 Bipartite graphs
 \code{\link{bipartite_mapping}()},
