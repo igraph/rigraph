@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9056
+
+## doc
+
+- Further clarifications for betweenness().
+  ref #1489
+
+- Clarify how betweenness with cutoff is normalized.
+  ref #1489
+
+- Fix centr_eigen_tmax() docs.
+
+
 # igraph 2.0.3.9055
 
 ## Chore
