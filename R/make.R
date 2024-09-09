@@ -903,10 +903,6 @@ graph_ <- function(...) {
   .apply_modifiers(res, extracted$mods)
 }
 
-attr(make_, "name") <- "make_"
-attr(sample_, "name") <- "sample_"
-attr(graph_, "name") <- "graph_"
-
 constructor_spec <- function(fun, ..., .lazy = FALSE) {
   structure(
     list(
