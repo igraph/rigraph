@@ -2369,7 +2369,7 @@ sample_fitness_pl <- static_power_law_game_impl
 #' <http://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
 #' implementation is based on this.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [barabasi.game()] for the basic preferential attachment
+#' @seealso [barabasi_game()] for the basic preferential attachment
 #' model.
 #' @references Jure Leskovec, Jon Kleinberg and Christos Faloutsos. Graphs over
 #' time: densification laws, shrinking diameters and possible explanations.
