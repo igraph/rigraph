@@ -307,6 +307,7 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
 #' radius(g)
 #' @family paths
 #' @export
+#' @cdocs igraph_radius_dijkstra
 radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
