@@ -2850,4 +2850,5 @@ which_mutual <- is_mutual_impl
 #' knn(g5)
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_avg_nearest_neighbor_degree
 knn <- avg_nearest_neighbor_degree_impl
