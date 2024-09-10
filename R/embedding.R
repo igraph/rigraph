@@ -232,6 +232,7 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
+#' @cdocs igraph_laplacian_spectral_embedding
 embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 
 
