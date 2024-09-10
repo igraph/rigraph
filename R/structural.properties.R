@@ -1511,6 +1511,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' reciprocity(g)
 #'
+#' @cdocs igraph_reciprocity
 reciprocity <- reciprocity_impl
 
 
