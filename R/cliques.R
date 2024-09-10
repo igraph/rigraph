@@ -304,6 +304,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_clique_number
 clique_num <- clique_number_impl
 
 
