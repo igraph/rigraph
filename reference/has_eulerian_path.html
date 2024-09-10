@@ -13,7 +13,7 @@ an error otherwise."><meta property="og:image" content="https://r.igraph.org/log
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9056</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9057</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,6 +110,10 @@ with its edge and vertex sequence, or throws an error if no such cycle exists.</
 <code><a href="is_acyclic.html">is_acyclic</a>()</code>,
 <code><a href="is_dag.html">is_dag</a>()</code></p></div>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian" class="external-link"><code>igraph_is_eulerian()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path" class="external-link"><code>igraph_eulerian_path()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle" class="external-link"><code>igraph_eulerian_cycle()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -120,11 +124,11 @@ with its edge and vertex sequence, or throws an error if no such cycle exists.</
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="fu">eulerian_path</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $epath</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 edges from 47fdc2f (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 edges from 8d0c840 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 11/6 vertices, named, from 47fdc2f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 11/6 vertices, named, from 8d0c840:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A B C D B F A E D F E</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

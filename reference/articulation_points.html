@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9056</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9057</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,6 +94,10 @@ two.</p>
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Structural.html#igraph_articulation_points" class="external-link"><code>igraph_articulation_points()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Structural.html#igraph_bridges" class="external-link"><code>igraph_bridges()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -102,12 +106,12 @@ two.</p>
 <span class="r-in"><span><span class="va">clu</span> <span class="op">&lt;-</span> <span class="fu"><a href="components.html">components</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="add_edges.html">add_edges</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">clu</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/match.html" class="external-link">match</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">clu</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">articulation_points</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 0e3d4f0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from c9eae07:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="st">"krackhardt_kite"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">bridges</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 edges from d3876f2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 edges from 6075be6:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9--10 8-- 9</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
