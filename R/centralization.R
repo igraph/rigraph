@@ -380,6 +380,7 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
+#' @cdocs igraph_centralization_betweenness_tmax
 centr_betw_tmax <- centralization_betweenness_tmax_impl
 
 #' Centralize a graph according to the closeness of vertices
