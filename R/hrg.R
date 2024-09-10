@@ -305,6 +305,7 @@ hrg_tree <- function(hrg) {
 #'
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_hrg_game
 sample_hrg <- hrg_game_impl
 
 #' Predict edges based on a hierarchical random graph model
