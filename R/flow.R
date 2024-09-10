@@ -970,6 +970,7 @@ is_separator <- is_separator_impl
 #'
 #' @family flow
 #' @export
+#' @cdocs igraph_is_minimal_separator
 is_min_separator <- is_minimal_separator_impl
 
 
