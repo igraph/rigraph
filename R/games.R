@@ -1996,6 +1996,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @keywords graphs
 #' @family games
 #' @export
+#' @cdocs igraph_simple_interconnected_islands_game
 sample_islands <- simple_interconnected_islands_game_impl
 
 
