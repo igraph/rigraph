@@ -1102,6 +1102,7 @@ all_shortest_paths <- function(graph, from,
 #' @family structural.properties
 #' @seealso [shortest_paths()], [all_shortest_paths()]
 #' @keywords graphs
+#' @cdocs igraph_get_k_shortest_paths
 k_shortest_paths <- get_k_shortest_paths_impl
 
 #' In- or out- component of a vertex
