@@ -93,6 +93,7 @@ simplify <- simplify_impl
 
 #' @export
 #' @rdname simplify
+#' @cdocs igraph_is_simple
 is_simple <- is_simple_impl
 
 #' @export
