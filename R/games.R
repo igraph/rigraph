@@ -1013,6 +1013,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' g <- sample_growing(500, citation = FALSE)
 #' g2 <- sample_growing(500, citation = TRUE)
 #'
+#' @cdocs igraph_growing_random_game
 sample_growing <- growing_random_game_impl
 
 #' @rdname sample_growing
