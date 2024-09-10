@@ -509,4 +509,5 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
+#' @cdocs igraph_centralization_eigenvector_centrality_tmax
 centr_eigen_tmax <- centralization_eigenvector_centrality_tmax_impl
