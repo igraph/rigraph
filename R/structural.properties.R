@@ -1984,6 +1984,7 @@ girth <- function(graph, circle = TRUE) {
 which_multiple <- is_multiple_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_has_multiple
 any_multiple <- has_multiple_impl
 #' @rdname which_multiple
 #' @export
