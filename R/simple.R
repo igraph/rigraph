@@ -88,6 +88,7 @@ is.simple <- function(graph) { # nocov start
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
+#' @cdocs igraph_simplify
 simplify <- simplify_impl
 
 #' @export
