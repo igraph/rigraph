@@ -209,4 +209,5 @@ assortativity_nominal <- assortativity_nominal_impl
 
 #' @rdname assortativity
 #' @export
+#' @cdocs igraph_assortativity_degree
 assortativity_degree <- assortativity_degree_impl
