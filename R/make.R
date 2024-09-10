@@ -1361,6 +1361,7 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
+#' @cdocs igraph_empty
 make_empty_graph <- empty_impl
 
 #' @rdname make_empty_graph
