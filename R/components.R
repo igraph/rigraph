@@ -313,6 +313,7 @@ biconnected_components <- function(graph) {
 #' is_biconnected(make_full_graph(2))
 #' @family components
 #' @export
+#' @cdocs igraph_is_biconnected
 is_biconnected <- is_biconnected_impl
 
 
