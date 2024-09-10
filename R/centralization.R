@@ -480,6 +480,7 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
+#' @cdocs igraph_centralization_eigenvector_centrality
 centr_eigen <- centralization_eigenvector_centrality_impl
 
 #' Theoretical maximum for eigenvector centralization
