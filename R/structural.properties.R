@@ -1996,6 +1996,7 @@ count_multiple <- count_multiple_impl
 which_loop <- is_loop_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_has_loop
 any_loop <- has_loop_impl
 
 
