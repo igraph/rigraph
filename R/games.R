@@ -2178,6 +2178,7 @@ sample_k_regular <- k_regular_game_impl
 #'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
 #' ))
 #' @export
+#' @cdocs igraph_chung_lu_game
 sample_chung_lu <- chung_lu_game_impl
 
 #' @rdname sample_chung_lu
