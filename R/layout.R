@@ -1598,9 +1598,18 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
 #'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
+#' The Kamada-Kawai layout algorithm
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.kamada.kawai()` was renamed to `layout_with_kk()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.kamada.kawai <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.kamada.kawai()", "layout_with_kk()")
   do_call(layout_with_kk, .args = c(list(...), params))
 }
 
