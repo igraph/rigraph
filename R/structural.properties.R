@@ -576,6 +576,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
 
 #' @export
 #' @rdname distances
+#' @cdocs igraph_average_path_length_dijkstra
 mean_distance <- average_path_length_dijkstra_impl
 
 
