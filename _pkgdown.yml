@@ -229,10 +229,6 @@ reference:
   contents:
   - igraph-package
   - has_concept("test")
-  - layout.reingold.tilford
-  - layout.fruchterman.reingold.grid
-  - layout.spring
-  - layout.svd
   - "%>%"
 
 authors:

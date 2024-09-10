@@ -15,5 +15,8 @@ layout.spring(graph, ...)
 Layout coordinates, a two column matrix.
 }
 \description{
-Now it calls the Fruchterman-Reingold layout, with a warning.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Now it calls the Fruchterman-Reingold layout \code{\link[=layout_with_fr]{layout_with_fr()}}.
 }
+\keyword{internal}

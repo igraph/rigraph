@@ -634,9 +634,19 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
+
+#' The Reingold-Tilford graph layout algorithm
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.reingold.tilford()` was renamed to `layout_as_tree()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.reingold.tilford <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.reingold.tilford()", "layout_as_tree()")
   do_call(layout_as_tree, .args = c(list(...), params))
 }
 
@@ -686,9 +696,18 @@ layout_in_circle <- function(graph, order = V(graph)) {
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
+#' Graph layout with vertices on a circle
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.circle()` was renamed to `layout_in_circle()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.circle <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
 }
 
@@ -907,9 +926,18 @@ layout_on_sphere <- function(graph) {
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
+#' Graph layout with vertices on the surface of a sphere
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.sphere()` was renamed to `layout_on_sphere()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.sphere <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.sphere()", "layout_on_sphere()")
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
@@ -951,15 +979,18 @@ layout_randomly <- function(graph, dim = 2) {
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
-#' Deprecated layout functions
+#' Randomly place vertices on a plane or in 3d space
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Please use the new names, see [layout_()].
-#'
+#' `layout.random()` was renamed to `layout_randomly()` to create a more
+#' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.random <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.random()", "layout_randomly()")
   do_call(layout_randomly, .args = c(list(...), params))
 }
 
@@ -1269,9 +1300,18 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
 #' @export
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
+#' The Fruchterman-Reingold layout algorithm
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.fruchterman.reingold()` was renamed to `layout_with_fr()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.fruchterman.reingold <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.fruchterman.reingold()", "layout_with_fr()")
   do_call(layout_with_fr, .args = c(list(...), params))
 }
 
@@ -1558,9 +1598,18 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
 #'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
+#' The Kamada-Kawai layout algorithm
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.kamada.kawai()` was renamed to `layout_with_kk()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.kamada.kawai <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.kamada.kawai()", "layout_with_kk()")
   do_call(layout_with_kk, .args = c(list(...), params))
 }
 
@@ -1620,9 +1669,18 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
 #' @export
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
+#' Large Graph Layout
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.lgl()` was renamed to `layout_with_lgl()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.lgl <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.lgl()", "layout_with_lgl()")
   do_call(layout_with_lgl, .args = c(list(...), params))
 }
 
@@ -2175,46 +2233,60 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 }
 
 #' Spring layout, this was removed from igraph
+
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' Now it calls the Fruchterman-Reingold layout [layout_with_fr()].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
 #' @export
+#' @keywords internal
 layout.spring <- function(graph, ...) {
-  warning("Spring layout was removed, we use Fruchterman-Reingold instead.")
+  lifecycle::deprecate_warn("2.0.4", "layout.spring()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
 #' SVD layout, this was removed from igraph
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Now it calls the Fruchterman-Reingold layout [`layout_with_fr()`].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
+#' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
+  lifecycle::deprecate_warn("2.0.4", "layout.svd()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
 #' Grid Fruchterman-Reingold layout, this was removed from igraph
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#'
+#' Now it calls the Fruchterman-Reingold layout [`layout_with_fr()`].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
+#' @keywords internal
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
-  warning(
-    "Grid Fruchterman-Reingold layout was removed,\n",
-    "we use Fruchterman-Reingold instead."
+  lifecycle::deprecate_warn(
+    "2.0.4",
+    "layout.fruchterman.reingold.grid()",
+    "layout_with_fr()"
   )
   layout_with_fr(graph)
 }
