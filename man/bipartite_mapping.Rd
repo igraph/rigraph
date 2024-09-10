@@ -61,3 +61,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{bipartite}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_is_bipartite}{\code{igraph_is_bipartite()}}.}
+

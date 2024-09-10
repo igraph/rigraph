@@ -238,4 +238,5 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' bipartite_mapping(g3)
 #' @family bipartite
 #' @export
+#' @cdocs igraph_is_bipartite
 bipartite_mapping <- is_bipartite_impl
