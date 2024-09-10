@@ -176,6 +176,7 @@ is_dag <- is_dag_impl
 #' @family cycles
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_acyclic
 is_acyclic <- is_acyclic_impl
 
 #' Maximum cardinality search
