@@ -1351,6 +1351,7 @@ page_rank <- personalized_pagerank_impl
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
+#' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
