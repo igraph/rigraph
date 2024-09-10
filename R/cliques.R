@@ -210,6 +210,7 @@ cliques <- cliques_impl
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_largest_cliques
 largest_cliques <- largest_cliques_impl
 
 #' @rdname cliques
