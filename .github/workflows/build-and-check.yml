@@ -95,7 +95,7 @@ jobs:
         shell: bash
 
       - name: Upload R source package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: rigraph
           path: igraph_*.tar.gz
