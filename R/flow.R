@@ -699,6 +699,7 @@ st_cuts <- all_st_cuts_impl
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
 #' @export
+#' @cdocs igraph_all_st_mincuts
 st_min_cuts <- all_st_mincuts_impl
 
 
