@@ -832,6 +832,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' min_st_separators(g)
 #' ```
 #' @family flow
+#' @cdocs igraph_all_minimal_st_separators
 min_st_separators <- all_minimal_st_separators_impl
 
 
