@@ -100,3 +100,5 @@ Other embedding:
 }
 \concept{embedding}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_adjacency_spectral_embedding}{\code{igraph_adjacency_spectral_embedding()}}.}
+

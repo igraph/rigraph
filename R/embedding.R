@@ -90,6 +90,7 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
+#' @cdocs igraph_adjacency_spectral_embedding
 embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 
 
