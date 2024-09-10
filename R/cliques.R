@@ -361,6 +361,7 @@ clique_num <- clique_number_impl
 weighted_cliques <- weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_largest_weighted_cliques
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
 #' @rdname cliques
