@@ -636,6 +636,7 @@ count_subgraph_isomorphisms <- function(pattern, target,
 }
 
 #' @export
+#' @cdocs igraph_count_subisomorphisms_vf2
 graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
