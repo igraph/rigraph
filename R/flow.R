@@ -892,6 +892,7 @@ min_st_separators <- all_minimal_st_separators_impl
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #' @family flow
 #' @export
+#' @cdocs igraph_maxflow
 max_flow <- maxflow_impl
 
 
