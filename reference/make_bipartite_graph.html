@@ -70,7 +70,7 @@ as the <code>name</code> vertex attribute.</p></dd>
 
 <dt id="arg-edges">edges<a class="anchor" aria-label="anchor" href="#arg-edges"></a></dt>
 <dd><p>A vector giving the edges of the graph, the same way as for the
-regular <code><a href="graph.html">graph()</a></code> function. It is checked that the edges indeed
+regular <code><a href="make_graph.html">make_graph()</a></code> function. It is checked that the edges indeed
 connect vertices of different kind, according to the supplied <code>types</code>
 vector. The vector may be a string vector if <code>types</code> is a named vector.</p></dd>
 
@@ -105,7 +105,7 @@ the type for each vertex name that occurs in <code>edges</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="graph.html">graph()</a></code> to create one-mode networks</p>
+    <div class="dont-index"><p><code><a href="make_graph.html">make_graph()</a></code> to create one-mode networks</p>
 <p>Bipartite graphs
 <code><a href="bipartite_mapping.html">bipartite_mapping</a>()</code>,
 <code><a href="bipartite_projection.html">bipartite_projection</a>()</code>,
@@ -121,9 +121,9 @@ the type for each vertex name that occurs in <code>edges</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_bipartite_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c8419c4 U--B 10 5 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c1da733 U--B 10 5 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c8419c4:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c1da733:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
