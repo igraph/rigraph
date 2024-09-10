@@ -258,6 +258,7 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
+#' @cdocs igraph_biconnected_components
 biconnected_components <- function(graph) {
   # Function call
   res <- biconnected_components_impl(graph)
