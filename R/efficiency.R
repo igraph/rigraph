@@ -72,6 +72,7 @@ global_efficiency <- global_efficiency_impl
 
 #' @rdname global_efficiency
 #' @export
+#' @cdocs igraph_local_efficiency
 local_efficiency <- local_efficiency_impl
 
 #' @rdname global_efficiency
