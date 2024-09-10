@@ -1,19 +1,3 @@
-
-#' Run package tests
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `igraphtest()` was renamed to `igraph_test()` to create a more
-#' consistent API.
-#'
-#' @keywords internal
-#' @export
-igraphtest <- function() { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraphtest()", "igraph_test()")
-  igraph_test()
-} # nocov end
-
 #' Query igraph's version string
 #'
 #' @description
@@ -49,32 +33,6 @@ igraph.version <- function() { # nocov start
 #
 ###################################################################
 
-
-
-#' Run package tests
-#'
-#' Runs all package tests.
-#'
-#' The `testthat` package is needed to run all tests. The location tests
-#' themselves can be extracted from the package via `system.file("tests",
-#' package="igraph")`.
-#'
-#' This function simply calls the `test_dir` function from the
-#' `testthat` package on the test directory.
-#'
-#' @return Whatever is returned by `test_dir` from the `testthat`
-#'   package.
-#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @keywords graphs
-#' @family test
-#' @export
-igraph_test <- function() {
-  do.call(require, list("testthat"))
-  tdir <- system.file("tests", package = "igraph")
-  do.call("test_dir", list(tdir))
-}
-
-
 # R_igraph_vers -----------------------------------------------------------------------
 
 #' Query igraph's version string
@@ -86,7 +44,7 @@ igraph_test <- function() {
 #' @return A character scalar, the igraph version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
-#' @family test
+#' @keywords internal
 #' @export
 #' @examples
 #'
@@ -98,10 +56,4 @@ igraph_version <- function() {
   # Better than packageVersion("igraph") because it uses the loaded package
   # and is independent of .libPaths()
   getNamespaceInfo("igraph", "spec")[["version"]]
-}
-
-checkpkg <- function(package_file, args = character()) {
-  package_file <- as.character(package_file)
-  args <- as.character(args)
-  do.call(":::", list("tools", ".check_packages"))(c(package_file, args))
 }

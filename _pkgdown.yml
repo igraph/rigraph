@@ -228,7 +228,6 @@ reference:
 - title: internal
   contents:
   - igraph-package
-  - has_concept("test")
   - "%>%"
 
 authors:
