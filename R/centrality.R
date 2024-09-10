@@ -987,6 +987,7 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(graph,
                              directed = FALSE,
                              scale = TRUE,
