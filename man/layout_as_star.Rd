@@ -41,7 +41,7 @@ layout_as_star(g)
 layout_(g, as_star())
 }
 \seealso{
-\code{\link[=layout]{layout()}} and \code{\link[=layout.drl]{layout.drl()}} for other layout
+\code{\link[=layout]{layout()}} and \code{\link[=layout_with_drl]{layout_with_drl()}} for other layout
 algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
 plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
 

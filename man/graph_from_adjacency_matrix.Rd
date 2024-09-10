@@ -208,7 +208,7 @@ summary(g10)
 
 }
 \seealso{
-\code{\link[=graph]{graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
+\code{\link[=make_graph]{make_graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
 create graphs.
 }
 \author{

@@ -2224,7 +2224,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'   When the vector is a named vector, the names will be attached to the graph
 #'   as the `name` vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
-#'   regular [graph()] function. It is checked that the edges indeed
+#'   regular [make_graph()] function. It is checked that the edges indeed
 #'   connect vertices of different kind, according to the supplied `types`
 #'   vector. The vector may be a string vector if `types` is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
@@ -2235,7 +2235,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'
 #'   `is_bipartite()` returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph()] to create one-mode networks
+#' @seealso [make_graph()] to create one-mode networks
 #' @keywords graphs
 #' @family bipartite
 #' @examples
@@ -2329,7 +2329,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' @param repeats Integer constant, how many times to repeat the shifts.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph()] can create arbitrary graphs, see also the other
+#' @seealso [make_graph()] can create arbitrary graphs, see also the other
 #' functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples

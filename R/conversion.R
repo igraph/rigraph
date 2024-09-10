@@ -653,7 +653,7 @@ as_adj_edge_list <- function(graph,
 #' @return `graph_from_graphnel()` returns an igraph graph object.
 #' @seealso [as_graphnel()] for the other direction,
 #' [as_adj()], [graph_from_adjacency_matrix()],
-#' [as_adj_list()] and [graph.adjlist()] for other
+#' [as_adj_list()] and [graph_from_adj_list()] for other
 #' graph representations.
 #' @examplesIf rlang::is_installed("graph")
 #' ## Undirected
@@ -742,7 +742,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' @return `as_graphnel()` returns a graphNEL graph object.
 #' @seealso [graph_from_graphnel()] for the other direction,
 #' [as_adj()], [graph_from_adjacency_matrix()],
-#' [as_adj_list()] and [graph.adjlist()] for
+#' [as_adj_list()] and [graph_from_adj_list()] for
 #' other graph representations.
 #'
 #' @examplesIf rlang::is_installed("graph")

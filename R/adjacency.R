@@ -113,7 +113,7 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #'   former is ignored.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph()] and [graph_from_literal()] for other ways to
+#' @seealso [make_graph()] and [graph_from_literal()] for other ways to
 #' create graphs.
 #' @keywords graphs
 #' @examples

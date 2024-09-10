@@ -44,7 +44,7 @@ g4
 \seealso{
 \code{\link[=graph_from_graphnel]{graph_from_graphnel()}} for the other direction,
 \code{\link[=as_adj]{as_adj()}}, \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}},
-\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph.adjlist]{graph.adjlist()}} for
+\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph_from_adj_list]{graph_from_adj_list()}} for
 other graph representations.
 
 Other conversion: 
