@@ -1041,4 +1041,5 @@ is_min_separator <- is_minimal_separator_impl
 #'   John - Gery:Russ:Michael
 #' )
 #' min_separators(camp)
+#' @cdocs igraph_minimum_size_separators
 min_separators <- minimum_size_separators_impl
