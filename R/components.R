@@ -218,6 +218,7 @@ articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
 #' @export
+#' @cdocs igraph_bridges
 bridges <- bridges_impl
 
 
