@@ -1716,6 +1716,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
+#' @cdocs igraph_square_lattice
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
                          periodic = FALSE, circular = deprecated()) {
