@@ -2468,4 +2468,5 @@ sample_correlated_gnp <- correlated_game_impl
 #' )
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
+#' @cdocs igraph_correlated_pair_game
 sample_correlated_gnp_pair <- correlated_pair_game_impl
