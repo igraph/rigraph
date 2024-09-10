@@ -286,6 +286,7 @@ hrg <- hrg_create_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_from_hrg_dendrogram
 hrg_tree <- function(hrg) {
   out <- from_hrg_dendrogram_impl(hrg)
 
