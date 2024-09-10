@@ -2430,6 +2430,7 @@ sample_forestfire <- forest_fire_game_impl
 #' cor(as.vector(g[]), as.vector(g2[]))
 #' g
 #' g2
+#' @cdocs igraph_correlated_game
 sample_correlated_gnp <- correlated_game_impl
 
 
