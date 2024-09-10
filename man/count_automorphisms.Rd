@@ -84,3 +84,5 @@ and this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{igraph_count_automorphisms()}}.}
+
