@@ -227,6 +227,7 @@ is_acyclic <- is_acyclic_impl
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
+#' @cdocs igraph_maximum_cardinality_search
 max_cardinality <- maximum_cardinality_search_impl
 
 
