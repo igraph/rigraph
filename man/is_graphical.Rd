@@ -58,3 +58,5 @@ Tamás Nepusz \email{ntamas@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{igraph_is_graphical()}}.}
+
