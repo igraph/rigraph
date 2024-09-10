@@ -1835,6 +1835,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' g
 #' @family games
 #' @export
+#' @cdocs igraph_sbm_game
 sample_sbm <- sbm_game_impl
 
 #' @rdname sample_sbm
