@@ -2777,6 +2777,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_mutual
 which_mutual <- is_mutual_impl
 
 
