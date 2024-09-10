@@ -696,8 +696,16 @@ layout_in_circle <- function(graph, order = V(graph)) {
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
+#' Graph layout with vertices on a circle
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.circle()` was renamed to `layout_in_circle()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.circle <- function(..., params = list()) {
   lifecycle::deprecate_soft("2.0.4", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
