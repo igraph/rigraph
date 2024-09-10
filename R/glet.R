@@ -201,4 +201,5 @@ function() {
 
 #' @rdname graphlet_basis
 #' @export
+#' @cdocs igraph_graphlets
 graphlets <- graphlets_impl
