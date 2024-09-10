@@ -272,6 +272,7 @@ consensus_tree <- hrg_consensus_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_hrg_create
 hrg <- hrg_create_impl
 
 
