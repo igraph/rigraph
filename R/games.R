@@ -1885,6 +1885,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' @family games
 #' @export
 #' @cdocs igraph_hsbm_game
+#' @cdocs igraph_hsbm_list_game
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   mlen <- length(m)
   rholen <- if (is.list(rho)) length(rho) else 1
