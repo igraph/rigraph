@@ -85,6 +85,7 @@ adjacent.triangles <- function(graph, vids = V(graph)) { # nocov start
 #' @family triangles
 #' @export
 #' @rdname count_triangles
+#' @cdocs igraph_list_triangles
 triangles <- list_triangles_impl
 
 #' @export
