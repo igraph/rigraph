@@ -68,6 +68,7 @@ has_eulerian_path <- function(graph) {
 
 #' @rdname has_eulerian_path
 #' @export
+#' @cdocs igraph_is_eulerian
 has_eulerian_cycle <- function(graph) {
   is_eulerian_impl(graph)$has_cycle
 }
