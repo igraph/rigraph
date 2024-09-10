@@ -254,6 +254,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     vertices. The order is the same as in the `parents` vector.}
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_hrg_consensus
 consensus_tree <- hrg_consensus_impl
 
 
