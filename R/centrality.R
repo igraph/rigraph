@@ -1146,6 +1146,7 @@ diversity <- diversity_impl
 #' g2 <- make_ring(10)
 #' hits_scores(g2)
 #' @family centrality
+#' @cdocs igraph_hub_and_authority_scores
 hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
   rlang::check_dots_empty()
