@@ -1869,6 +1869,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
+#' @cdocs igraph_tree_game
 sample_tree <- tree_game_impl
 
 #' @rdname make_tree
