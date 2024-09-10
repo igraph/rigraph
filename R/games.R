@@ -2035,6 +2035,7 @@ sample_islands <- simple_interconnected_islands_game_impl
 #' sapply(k10, plot, vertex.label = NA)
 #' @family games
 #' @export
+#' @cdocs igraph_k_regular_game
 sample_k_regular <- k_regular_game_impl
 
 

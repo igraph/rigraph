@@ -79,3 +79,5 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game}{\code{igraph_k_regular_game()}}.}
+
