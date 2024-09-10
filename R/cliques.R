@@ -365,6 +365,7 @@ weighted_cliques <- weighted_cliques_impl
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_weighted_clique_number
 weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
