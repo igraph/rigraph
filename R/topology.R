@@ -560,6 +560,7 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 }
 
 #' @export
+#' @cdocs igraph_count_isomorphisms_vf2
 graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
