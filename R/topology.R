@@ -856,6 +856,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' all(el1 == el2)
 #' @family graph isomorphism
 #' @export
+#' @cdocs igraph_canonical_permutation
 canonical_permutation <- canonical_permutation_impl
 
 
