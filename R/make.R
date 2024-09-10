@@ -1902,6 +1902,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #' to_prufer(g)
 #' @family trees
 #' @export
+#' @cdocs igraph_from_prufer
 make_from_prufer <- from_prufer_impl
 
 #' @rdname make_from_prufer
