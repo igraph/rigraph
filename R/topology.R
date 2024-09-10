@@ -759,6 +759,7 @@ isomorphism_class <- function(graph, v) {
 }
 
 #' @export
+#' @cdocs igraph_isoclass
 graph.isoclass <- isoclass_impl
 
 #' Create a graph from an isomorphism class
