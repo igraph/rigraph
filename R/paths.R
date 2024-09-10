@@ -354,6 +354,7 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
 #' graph_center(ring)
 #'
 #' @export
+#' @cdocs igraph_graph_center_dijkstra
 graph_center <- graph_center_dijkstra_impl
 
 #' @rdname distances
