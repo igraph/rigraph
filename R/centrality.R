@@ -1303,6 +1303,7 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
+#' @cdocs igraph_personalized_pagerank
 page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
