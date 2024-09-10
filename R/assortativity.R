@@ -204,6 +204,7 @@ assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) 
 #'   with [as.integer()].
 #' @rdname assortativity
 #' @export
+#' @cdocs igraph_assortativity_nominal
 assortativity_nominal <- assortativity_nominal_impl
 
 #' @rdname assortativity
