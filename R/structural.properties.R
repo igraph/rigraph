@@ -1988,6 +1988,7 @@ which_multiple <- is_multiple_impl
 any_multiple <- has_multiple_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_count_multiple
 count_multiple <- count_multiple_impl
 #' @rdname which_multiple
 #' @export
