@@ -2545,6 +2545,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' laplacian_matrix(g, normalization = "unnormalized")
 #' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
+#' @cdocs igraph_get_laplacian_sparse
 laplacian_matrix <- function(graph, weights = NULL,
                              sparse = igraph_opt("sparsematrices"), normalization = c("unnormalized", "symmetric", "left", "right"), normalized) {
   # Argument checks
