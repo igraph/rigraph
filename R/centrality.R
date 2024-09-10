@@ -1090,6 +1090,7 @@ strength <- strength_impl
 #' diversity(g3)
 #' @family centrality
 #' @export
+#' @cdocs igraph_diversity
 diversity <- diversity_impl
 
 
