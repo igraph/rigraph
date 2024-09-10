@@ -438,6 +438,7 @@ centr_clo <- centralization_closeness_impl
 #' centr_clo(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
+#' @cdocs igraph_centralization_closeness_tmax
 centr_clo_tmax <- centralization_closeness_tmax_impl
 
 #' Centralize a graph according to the eigenvector centrality of vertices
