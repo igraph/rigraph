@@ -902,6 +902,7 @@ canonical_permutation <- canonical_permutation_impl
 permute <- permute_vertices_impl
 
 #' @export
+#' @cdocs igraph_isomorphic
 graph.isomorphic <- isomorphic_impl
 
 #' Number of automorphisms
