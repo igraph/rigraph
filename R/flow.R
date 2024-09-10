@@ -921,6 +921,7 @@ max_flow <- maxflow_impl
 #' is_separator(ring, c(2, 3))
 #'
 #' @export
+#' @cdocs igraph_is_separator
 is_separator <- is_separator_impl
 
 
