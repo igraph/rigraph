@@ -634,9 +634,19 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
+
+#' The Reingold-Tilford graph layout algorithm
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.reingold.tilford()` was renamed to `layout_as_tree()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.reingold.tilford <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.reingold.tilford()", "layout_as_tree()")
   do_call(layout_as_tree, .args = c(list(...), params))
 }
 
@@ -689,6 +699,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @export
 #' @rdname layout.deprecated
 layout.circle <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
 }
 
