@@ -400,6 +400,7 @@ graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @cdocs igraph_isomorphic_vf2
 graph.isomorphic.vf2 <- isomorphic_vf2_impl
 #' @export
+#' @cdocs igraph_subisomorphic_vf2
 graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
 
 #' @export
