@@ -554,6 +554,7 @@ get.edge.ids <- function(
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
+#' @cdocs igraph_vcount
 vcount <- function(graph) {
   as.numeric(vcount_impl(graph))
 }

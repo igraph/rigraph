@@ -339,6 +339,7 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
+#' @cdocs igraph_square_lattice
 graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular = deprecated()) { # nocov start
   lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
@@ -1357,10 +1358,10 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #'
 #' @family deterministic constructors
 #' @export
-#' @cdocs empty
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
+#' @cdocs igraph_empty
 make_empty_graph <- empty_impl
 
 #' @rdname make_empty_graph
@@ -1715,6 +1716,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
+#' @cdocs igraph_square_lattice
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
                          periodic = FALSE, circular = deprecated()) {
@@ -1867,6 +1869,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
+#' @cdocs igraph_tree_game
 sample_tree <- tree_game_impl
 
 #' @rdname make_tree
@@ -1899,6 +1902,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #' to_prufer(g)
 #' @family trees
 #' @export
+#' @cdocs igraph_from_prufer
 make_from_prufer <- from_prufer_impl
 
 #' @rdname make_from_prufer
@@ -2335,6 +2339,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
+#' @cdocs igraph_lcf_vector
 graph_from_lcf <- lcf_vector_impl
 
 ## -----------------------------------------------------------------
@@ -2428,6 +2433,7 @@ graph_from_lcf <- lcf_vector_impl
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
+#' @cdocs igraph_realize_degree_sequence
 realize_degseq <- realize_degree_sequence_impl
 
 
@@ -2471,6 +2477,7 @@ realize_degseq <- realize_degree_sequence_impl
 #' @examples
 #' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 #' degree(g)
+#' @cdocs igraph_realize_bipartite_degree_sequence
 realize_bipartite_degseq <- function(degrees1, degrees2, ...,
                                      allowed.edge.types = c("simple", "multiple"),
                                      method = c("smallest", "largest", "index")) {

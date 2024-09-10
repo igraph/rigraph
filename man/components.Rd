@@ -123,3 +123,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \concept{components}
 \concept{structural.properties}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected}{\code{igraph_is_connected()}}.}
+

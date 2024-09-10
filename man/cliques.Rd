@@ -125,3 +125,5 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{igraph_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{igraph_largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{igraph_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{igraph_largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{igraph_weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{igraph_maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{igraph_clique_size_hist()}}.}
+

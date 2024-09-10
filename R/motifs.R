@@ -262,6 +262,7 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' dyad_census(g)
 #' @family graph motifs
 #' @export
+#' @cdocs igraph_dyad_census
 dyad_census <- function(graph) {
   if (!is_directed(graph)) {
     warn("`dyad_census()` requires a directed graph.")
@@ -309,4 +310,5 @@ dyad_census <- function(graph) {
 #' triad_census(g)
 #' @family motifs
 #' @export
+#' @cdocs igraph_triad_census
 triad_census <- triad_census_impl

@@ -123,3 +123,5 @@ manual page.
 }
 \concept{centrality}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eigenvector_centrality}{\code{igraph_eigenvector_centrality()}}.}
+

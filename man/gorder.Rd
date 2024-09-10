@@ -40,3 +40,5 @@ Other structural queries:
 \code{\link{tail_of}()}
 }
 \concept{structural queries}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{igraph_vcount()}}.}
+

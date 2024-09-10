@@ -987,6 +987,7 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(graph,
                              directed = FALSE,
                              scale = TRUE,
@@ -1045,6 +1046,7 @@ eigen_centrality <- function(graph,
 #' strength(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_strength
 strength <- strength_impl
 
 
@@ -1088,6 +1090,7 @@ strength <- strength_impl
 #' diversity(g3)
 #' @family centrality
 #' @export
+#' @cdocs igraph_diversity
 diversity <- diversity_impl
 
 
@@ -1143,6 +1146,7 @@ diversity <- diversity_impl
 #' g2 <- make_ring(10)
 #' hits_scores(g2)
 #' @family centrality
+#' @cdocs igraph_hub_and_authority_scores
 hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
   rlang::check_dots_empty()
@@ -1299,6 +1303,7 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
+#' @cdocs igraph_personalized_pagerank
 page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
@@ -1346,6 +1351,7 @@ page_rank <- personalized_pagerank_impl
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
+#' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 

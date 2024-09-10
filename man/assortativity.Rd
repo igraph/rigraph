@@ -126,3 +126,5 @@ M. E. J. Newman: Assortative mixing in networks, \emph{Phys. Rev. Lett.} 89,
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity}{\code{igraph_assortativity()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{igraph_assortativity_nominal()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{igraph_assortativity_degree()}}.}
+

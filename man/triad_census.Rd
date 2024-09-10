@@ -54,3 +54,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{motifs}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_triad_census}{\code{igraph_triad_census()}}.}
+

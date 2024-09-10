@@ -491,6 +491,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' )
 #' print(ug4, e = TRUE)
 #'
+#' @cdocs igraph_to_directed
 as.directed <- to_directed_impl
 
 #' @rdname as.directed
@@ -1107,6 +1108,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' which_multiple(g3)
 #' @family conversion
 #' @export
+#' @cdocs igraph_adjlist
 graph_from_adj_list <- adjlist_impl
 
 

@@ -61,3 +61,5 @@ Other paths:
 \code{\link{graph_center}()}
 }
 \concept{paths}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_radius_dijkstra}{\code{igraph_radius_dijkstra()}}.}
+

@@ -65,3 +65,5 @@ Graph cycles
 }
 \concept{cycles}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian}{\code{igraph_is_eulerian()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path}{\code{igraph_eulerian_path()}}, \href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle}{\code{igraph_eulerian_cycle()}}.}
+

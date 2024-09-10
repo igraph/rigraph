@@ -43,8 +43,5 @@ Other deterministic constructors:
 }
 \concept{Empty graph.}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{
-\itemize{
-\item \href{https://igraph.org/c/doc/igraph-Basic.html#igraph_empty}{igraph_empty}}
-}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{igraph_empty()}}.}
 

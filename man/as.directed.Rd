@@ -118,3 +118,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{conversion}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_directed}{\code{igraph_to_directed()}}.}
+

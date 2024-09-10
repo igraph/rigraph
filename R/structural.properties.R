@@ -576,6 +576,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
 
 #' @export
 #' @rdname distances
+#' @cdocs igraph_average_path_length_dijkstra
 mean_distance <- average_path_length_dijkstra_impl
 
 
@@ -647,6 +648,7 @@ degree <- function(graph, v = V(graph),
 
 #' @rdname degree
 #' @export
+#' @cdocs igraph_maxdegree
 max_degree <- maxdegree_impl
 
 #' @rdname degree
@@ -1100,6 +1102,7 @@ all_shortest_paths <- function(graph, from,
 #' @family structural.properties
 #' @seealso [shortest_paths()], [all_shortest_paths()]
 #' @keywords graphs
+#' @cdocs igraph_get_k_shortest_paths
 k_shortest_paths <- get_k_shortest_paths_impl
 
 #' In- or out- component of a vertex
@@ -1508,6 +1511,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' reciprocity(g)
 #'
+#' @cdocs igraph_reciprocity
 reciprocity <- reciprocity_impl
 
 
@@ -1548,6 +1552,7 @@ reciprocity <- reciprocity_impl
 #' edge_density(g, loops = TRUE) # this is right!!!
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
+#' @cdocs igraph_density
 edge_density <- density_impl
 
 #' @rdname ego
@@ -1854,6 +1859,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo = "approx_eades")
+#' @cdocs igraph_feedback_arc_set
 feedback_arc_set <- feedback_arc_set_impl
 
 #' Girth of a graph
@@ -1974,18 +1980,23 @@ girth <- function(graph, circle = TRUE) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
+#' @cdocs igraph_is_multiple
 which_multiple <- is_multiple_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_has_multiple
 any_multiple <- has_multiple_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_count_multiple
 count_multiple <- count_multiple_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_is_loop
 which_loop <- is_loop_impl
 #' @rdname which_multiple
 #' @export
+#' @cdocs igraph_has_loop
 any_loop <- has_loop_impl
 
 
@@ -2414,6 +2425,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 
 #' @rdname components
 #' @export
+#' @cdocs igraph_is_connected
 is_connected <- is_connected_impl
 
 #' @rdname components
@@ -2533,6 +2545,8 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' laplacian_matrix(g, normalization = "unnormalized")
 #' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
+#' @cdocs igraph_get_laplacian_sparse
+#' @cdocs igraph_get_laplacian
 laplacian_matrix <- function(graph, weights = NULL,
                              sparse = igraph_opt("sparsematrices"), normalization = c("unnormalized", "symmetric", "left", "right"), normalized) {
   # Argument checks
@@ -2763,6 +2777,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_mutual
 which_mutual <- is_mutual_impl
 
 
@@ -2835,4 +2850,5 @@ which_mutual <- is_mutual_impl
 #' knn(g5)
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_avg_nearest_neighbor_degree
 knn <- avg_nearest_neighbor_degree_impl

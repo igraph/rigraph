@@ -205,10 +205,12 @@ clique.number <- function(graph) { # nocov start
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
+#' @cdocs igraph_cliques
 cliques <- cliques_impl
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_largest_cliques
 largest_cliques <- largest_cliques_impl
 
 #' @rdname cliques
@@ -302,6 +304,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_clique_number
 clique_num <- clique_number_impl
 
 
@@ -354,12 +357,15 @@ clique_num <- clique_number_impl
 #' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
+#' @cdocs igraph_weighted_cliques
 weighted_cliques <- weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_largest_weighted_cliques
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_weighted_clique_number
 weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
@@ -491,6 +497,8 @@ ivs_size <- function(graph) {
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_maximal_cliques_hist
+#' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(graph, min, max)

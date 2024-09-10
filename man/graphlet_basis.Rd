@@ -103,3 +103,5 @@ for (i in 1:length(gl$cliques)) {
 }
 }
 \concept{glet}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets}{\code{igraph_graphlets()}}.}
+

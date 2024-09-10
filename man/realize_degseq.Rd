@@ -111,3 +111,5 @@ Connectedness matters: construction and exact random sampling of connected netwo
 from graphs with the given degree sequence.
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_degree_sequence}{\code{igraph_realize_degree_sequence()}}.}
+

@@ -105,3 +105,5 @@ Tommi Junttila for BLISS, Gabor Csardi
 }
 \concept{graph isomorphism}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{igraph_canonical_permutation()}}.}
+

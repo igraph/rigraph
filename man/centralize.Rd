@@ -84,3 +84,5 @@ Other centralization related:
 \code{\link{centr_eigen_tmax}()}
 }
 \concept{centralization related}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization}{\code{igraph_centralization()}}.}
+

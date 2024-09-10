@@ -84,3 +84,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{flow}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_all_minimal_st_separators}{\code{igraph_all_minimal_st_separators()}}.}
+

@@ -63,3 +63,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{triangles}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_list_triangles}{\code{igraph_list_triangles()}}, \href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_adjacent_triangles}{\code{igraph_adjacent_triangles()}}.}
+

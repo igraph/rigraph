@@ -213,10 +213,12 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #'
 #' @family components
 #' @export
+#' @cdocs igraph_articulation_points
 articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
 #' @export
+#' @cdocs igraph_bridges
 bridges <- bridges_impl
 
 
@@ -256,6 +258,7 @@ bridges <- bridges_impl
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
+#' @cdocs igraph_biconnected_components
 biconnected_components <- function(graph) {
   # Function call
   res <- biconnected_components_impl(graph)
@@ -310,6 +313,7 @@ biconnected_components <- function(graph) {
 #' is_biconnected(make_full_graph(2))
 #' @family components
 #' @export
+#' @cdocs igraph_is_biconnected
 is_biconnected <- is_biconnected_impl
 
 

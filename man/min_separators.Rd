@@ -92,3 +92,5 @@ Other flow:
 \code{\link{vertex_connectivity}()}
 }
 \concept{flow}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_minimum_size_separators}{\code{igraph_minimum_size_separators()}}.}
+

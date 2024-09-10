@@ -115,3 +115,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_multiple}{\code{igraph_is_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple}{\code{igraph_has_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_multiple}{\code{igraph_count_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop}{\code{igraph_is_loop()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop}{\code{igraph_has_loop()}}.}
+

@@ -1013,6 +1013,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' g <- sample_growing(500, citation = FALSE)
 #' g2 <- sample_growing(500, citation = TRUE)
 #'
+#' @cdocs igraph_growing_random_game
 sample_growing <- growing_random_game_impl
 
 #' @rdname sample_growing
@@ -1834,6 +1835,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' g
 #' @family games
 #' @export
+#' @cdocs igraph_sbm_game
 sample_sbm <- sbm_game_impl
 
 #' @rdname sample_sbm
@@ -1882,6 +1884,8 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' }
 #' @family games
 #' @export
+#' @cdocs igraph_hsbm_game
+#' @cdocs igraph_hsbm_list_game
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   mlen <- length(m)
   rholen <- if (is.list(rho)) length(rho) else 1
@@ -1960,6 +1964,7 @@ hierarchical_sbm <- function(...) {
 #' g2
 #' @family games
 #' @export
+#' @cdocs igraph_dot_product_game
 sample_dot_product <- dot_product_game_impl
 
 #' @rdname sample_dot_product
@@ -1991,6 +1996,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @keywords graphs
 #' @family games
 #' @export
+#' @cdocs igraph_simple_interconnected_islands_game
 sample_islands <- simple_interconnected_islands_game_impl
 
 
@@ -2029,6 +2035,7 @@ sample_islands <- simple_interconnected_islands_game_impl
 #' sapply(k10, plot, vertex.label = NA)
 #' @family games
 #' @export
+#' @cdocs igraph_k_regular_game
 sample_k_regular <- k_regular_game_impl
 
 
@@ -2171,6 +2178,7 @@ sample_k_regular <- k_regular_game_impl
 #'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
 #' ))
 #' @export
+#' @cdocs igraph_chung_lu_game
 sample_chung_lu <- chung_lu_game_impl
 
 #' @rdname sample_chung_lu
@@ -2252,6 +2260,7 @@ chung_lu <- function(
 #' g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
+#' @cdocs igraph_static_fitness_game
 sample_fitness <- static_fitness_game_impl
 
 
@@ -2318,6 +2327,7 @@ sample_fitness <- static_fitness_game_impl
 #'
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
+#' @cdocs igraph_static_power_law_game
 sample_fitness_pl <- static_power_law_game_impl
 
 
@@ -2380,6 +2390,7 @@ sample_fitness_pl <- static_power_law_game_impl
 #' # Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
+#' @cdocs igraph_forest_fire_game
 sample_forestfire <- forest_fire_game_impl
 
 
@@ -2419,6 +2430,7 @@ sample_forestfire <- forest_fire_game_impl
 #' cor(as.vector(g[]), as.vector(g2[]))
 #' g
 #' g2
+#' @cdocs igraph_correlated_game
 sample_correlated_gnp <- correlated_game_impl
 
 
@@ -2456,4 +2468,5 @@ sample_correlated_gnp <- correlated_game_impl
 #' )
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
+#' @cdocs igraph_correlated_pair_game
 sample_correlated_gnp_pair <- correlated_pair_game_impl

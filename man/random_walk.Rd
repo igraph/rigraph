@@ -81,3 +81,5 @@ cor(table(w), ec)
 cor(table(w), pg)
 }
 \concept{random_walk}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Visitors.html#igraph_random_walk}{\code{igraph_random_walk()}}.}
+

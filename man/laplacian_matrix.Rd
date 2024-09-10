@@ -77,3 +77,5 @@ laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian_sparse}{\code{igraph_get_laplacian_sparse()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian}{\code{igraph_get_laplacian()}}.}
+

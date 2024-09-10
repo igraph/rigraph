@@ -78,3 +78,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{functions for manipulating graph structure}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices}{\code{igraph_permute_vertices()}}.}
+

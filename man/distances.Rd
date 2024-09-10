@@ -301,3 +301,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \concept{paths}
 \concept{structural.properties}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist}{\code{igraph_path_length_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{igraph_average_path_length_dijkstra()}}.}
+
