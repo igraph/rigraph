@@ -2327,6 +2327,7 @@ sample_fitness <- static_fitness_game_impl
 #'
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
+#' @cdocs igraph_static_power_law_game
 sample_fitness_pl <- static_power_law_game_impl
 
 
