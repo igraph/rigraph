@@ -55,3 +55,5 @@ Other centralization related:
 \code{\link{centralize}()}
 }
 \concept{centralization related}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_degree}{\code{igraph_centralization_degree()}}.}
+

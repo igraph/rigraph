@@ -254,6 +254,7 @@ centralize <- centralization_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
+#' @cdocs igraph_centralization_degree
 centr_degree <- centralization_degree_impl
 
 #' Theoretical maximum for degree centralization
