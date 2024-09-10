@@ -48,6 +48,7 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
+#' @cdocs igraph_random_walk
 random_walk <- function(
     graph,
     start,
