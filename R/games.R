@@ -1964,6 +1964,7 @@ hierarchical_sbm <- function(...) {
 #' g2
 #' @family games
 #' @export
+#' @cdocs igraph_dot_product_game
 sample_dot_product <- dot_product_game_impl
 
 #' @rdname sample_dot_product
