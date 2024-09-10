@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9057
+
+## Documentation
+
+- Document how to run document().
+
+  thx @szhorvat
+
+
 # igraph 2.0.3.9056
 
 ## doc
