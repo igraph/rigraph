@@ -2477,6 +2477,7 @@ realize_degseq <- realize_degree_sequence_impl
 #' @examples
 #' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 #' degree(g)
+#' @cdocs igraph_realize_bipartite_degree_sequence
 realize_bipartite_degseq <- function(degrees1, degrees2, ...,
                                      allowed.edge.types = c("simple", "multiple"),
                                      method = c("smallest", "largest", "index")) {
