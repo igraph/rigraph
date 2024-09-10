@@ -83,3 +83,5 @@ Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group}{\code{igraph_automorphism_group()}}.}
+

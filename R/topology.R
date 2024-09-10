@@ -1024,4 +1024,5 @@ count_automorphisms <- count_automorphisms_impl
 #' automorphism_group(g)
 #' @family graph automorphism
 #' @export
+#' @cdocs igraph_automorphism_group
 automorphism_group <- automorphism_group_impl
