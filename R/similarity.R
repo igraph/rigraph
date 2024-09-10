@@ -77,4 +77,5 @@ similarity.jaccard <- similarity_jaccard_impl
 #' @cdocs igraph_similarity_dice
 similarity.dice <- similarity_dice_impl
 #' @export
+#' @cdocs igraph_similarity_inverse_log_weighted
 similarity.invlogweighted <- similarity_inverse_log_weighted_impl
