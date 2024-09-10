@@ -75,6 +75,7 @@ has_eulerian_cycle <- function(graph) {
 
 #' @rdname has_eulerian_path
 #' @export
+#' @cdocs igraph_eulerian_path
 eulerian_path <- eulerian_path_impl
 
 #' @rdname has_eulerian_path
