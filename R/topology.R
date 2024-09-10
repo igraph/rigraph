@@ -898,6 +898,7 @@ canonical_permutation <- canonical_permutation_impl
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
+#' @cdocs igraph_permute_vertices
 permute <- permute_vertices_impl
 
 #' @export
