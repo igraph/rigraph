@@ -2836,4 +2836,5 @@ contract <- contract_vertices_impl
 #'
 #' @export
 #' @family community
+#' @cdocs igraph_voronoi
 voronoi_cells <- voronoi_impl

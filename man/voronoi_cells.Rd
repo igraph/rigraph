@@ -85,3 +85,5 @@ Community detection
 \code{\link{split_join_distance}()}
 }
 \concept{community}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_voronoi}{\code{igraph_voronoi()}}.}
+
