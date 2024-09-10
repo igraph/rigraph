@@ -926,9 +926,18 @@ layout_on_sphere <- function(graph) {
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
+#' Graph layout with vertices on the surface of a sphere
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.sphere()` was renamed to `layout_on_sphere()` to create a more
+#' consistent API.
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.sphere <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.sphere()", "layout_on_sphere()")
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
