@@ -221,6 +221,7 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
+#' @cdocs igraph_centralization
 centralize <- centralization_impl
 
 #' Centralize a graph according to the degrees of vertices
