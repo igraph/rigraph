@@ -2252,31 +2252,41 @@ layout.spring <- function(graph, ...) {
 
 #' SVD layout, this was removed from igraph
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Now it calls the Fruchterman-Reingold layout [`layout_with_fr()`].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
+#' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
+  lifecycle::deprecate_warn("2.0.4", "layout.svd()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
 #' Grid Fruchterman-Reingold layout, this was removed from igraph
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#'
+#' Now it calls the Fruchterman-Reingold layout [`layout_with_fr()`].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
+#' @keywords internal
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
-  warning(
-    "Grid Fruchterman-Reingold layout was removed,\n",
-    "we use Fruchterman-Reingold instead."
+  lifecycle::deprecate_warn(
+    "2.0.4",
+    "layout.fruchterman.reingold.grid()",
+    "layout_with_fr()"
   )
   layout_with_fr(graph)
 }
