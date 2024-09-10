@@ -339,6 +339,7 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @inheritParams make_lattice
 #' @keywords internal
 #' @export
+#' @cdocs igraph_square_lattice
 graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular = deprecated()) { # nocov start
   lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
