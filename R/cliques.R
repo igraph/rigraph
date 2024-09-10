@@ -497,6 +497,7 @@ ivs_size <- function(graph) {
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_maximal_cliques_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(graph, min, max)
