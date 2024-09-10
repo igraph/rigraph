@@ -152,6 +152,7 @@ embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 #'
 #' @family embedding
 #' @export
+#' @cdocs igraph_dim_select
 dim_select <- dim_select_impl
 
 
