@@ -41,3 +41,5 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer}{\code{igraph_to_prufer()}}.}
+

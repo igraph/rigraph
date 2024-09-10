@@ -108,6 +108,7 @@ is_forest <- is_forest_impl
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_to_prufer
 to_prufer <- to_prufer_impl
 
 #' Samples from the spanning trees of a graph randomly and uniformly
