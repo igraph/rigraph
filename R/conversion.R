@@ -491,6 +491,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' )
 #' print(ug4, e = TRUE)
 #'
+#' @cdocs igraph_to_directed
 as.directed <- to_directed_impl
 
 #' @rdname as.directed
