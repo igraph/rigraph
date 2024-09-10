@@ -779,6 +779,7 @@ graph.isoclass <- isoclass_impl
 #'
 #' @family graph isomorphism
 #' @export
+#' @cdocs igraph_isoclass_create
 graph_from_isomorphism_class <- isoclass_create_impl
 
 
