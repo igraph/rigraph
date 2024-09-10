@@ -2425,6 +2425,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 
 #' @rdname components
 #' @export
+#' @cdocs igraph_is_connected
 is_connected <- is_connected_impl
 
 #' @rdname components
