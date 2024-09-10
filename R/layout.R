@@ -979,15 +979,18 @@ layout_randomly <- function(graph, dim = 2) {
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
-#' Deprecated layout functions
+#' Randomly place vertices on a plane or in 3d space
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Please use the new names, see [layout_()].
-#'
+#' `layout.random()` was renamed to `layout_randomly()` to create a more
+#' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
+#' @keywords internal
 #' @export
-#' @rdname layout.deprecated
 layout.random <- function(..., params = list()) {
+  lifecycle::deprecate_soft("2.0.4", "layout.random()", "layout_randomly()")
   do_call(layout_randomly, .args = c(list(...), params))
 }
 
