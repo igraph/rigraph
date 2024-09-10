@@ -153,6 +153,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @family cycles
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_dag
 is_dag <- is_dag_impl
 
 #' Acyclic graphs
