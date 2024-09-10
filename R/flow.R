@@ -649,6 +649,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
 #' @export
+#' @cdocs igraph_all_st_cuts
 st_cuts <- all_st_cuts_impl
 
 
