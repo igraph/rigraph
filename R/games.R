@@ -2390,6 +2390,7 @@ sample_fitness_pl <- static_power_law_game_impl
 #' # Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
+#' @cdocs igraph_forest_fire_game
 sample_forestfire <- forest_fire_game_impl
 
 
