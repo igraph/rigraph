@@ -65,6 +65,7 @@ random_walk <- function(
 
 #' @rdname random_walk
 #' @export
+#' @cdocs igraph_random_walk
 random_edge_walk <- function(
     graph,
     start,
