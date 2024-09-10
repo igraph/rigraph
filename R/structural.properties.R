@@ -648,6 +648,7 @@ degree <- function(graph, v = V(graph),
 
 #' @rdname degree
 #' @export
+#' @cdocs igraph_maxdegree
 max_degree <- maxdegree_impl
 
 #' @rdname degree
