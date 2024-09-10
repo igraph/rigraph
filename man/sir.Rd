@@ -119,3 +119,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
 }
 \concept{processes}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Spatial-Games.html#igraph_sir}{\code{igraph_sir()}}.}
+
