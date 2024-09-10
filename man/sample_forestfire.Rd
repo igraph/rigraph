@@ -73,7 +73,7 @@ time: densification laws, shrinking diameters and possible explanations.
 conference on Knowledge discovery in data mining}, 177--187, 2005.
 }
 \seealso{
-\code{\link[=barabasi_game]{barabasi_game()}} for the basic preferential attachment
+\code{\link[=sample_pa]{sample_pa()}} for the basic preferential attachment
 model.
 
 Random graph models (games)

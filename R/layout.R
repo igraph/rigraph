@@ -502,7 +502,7 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [layout()] and [layout_drl()] for other layout
+#' @seealso [layout()] and [layout_with_drl()] for other layout
 #' algorithms, [plot.igraph()] and [tkplot()] on how to
 #' plot graphs and [star()] on how to create ring graphs.
 #' @keywords graphs
