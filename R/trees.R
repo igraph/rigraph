@@ -81,6 +81,7 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_is_forest
 is_forest <- is_forest_impl
 
 #' Convert a tree graph to its Prüfer sequence
