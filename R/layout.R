@@ -2233,16 +2233,20 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 }
 
 #' Spring layout, this was removed from igraph
+
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#' Now it calls the Fruchterman-Reingold layout [layout_with_fr()].
 #'
 #' @param graph Input graph.
 #' @param ... Extra arguments are ignored.
 #' @return Layout coordinates, a two column matrix.
 #'
 #' @export
+#' @keywords internal
 layout.spring <- function(graph, ...) {
-  warning("Spring layout was removed, we use Fruchterman-Reingold instead.")
+  lifecycle::deprecate_warn("2.0.4", "layout.spring()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
