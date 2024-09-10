@@ -2433,6 +2433,7 @@ graph_from_lcf <- lcf_vector_impl
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
+#' @cdocs igraph_realize_degree_sequence
 realize_degseq <- realize_degree_sequence_impl
 
 
