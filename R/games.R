@@ -2260,6 +2260,7 @@ chung_lu <- function(
 #' g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
+#' @cdocs igraph_static_fitness_game
 sample_fitness <- static_fitness_game_impl
 
 
