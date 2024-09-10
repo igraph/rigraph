@@ -1980,6 +1980,7 @@ girth <- function(graph, circle = TRUE) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
+#' @cdocs igraph_is_multiple
 which_multiple <- is_multiple_impl
 #' @rdname which_multiple
 #' @export
