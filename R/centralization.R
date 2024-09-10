@@ -411,6 +411,7 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
+#' @cdocs igraph_centralization_closeness
 centr_clo <- centralization_closeness_impl
 
 #' Theoretical maximum for closeness centralization
