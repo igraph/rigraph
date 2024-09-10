@@ -39,3 +39,5 @@ functions on the its manual page for creating special graphs.
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_lcf_vector}{\code{igraph_lcf_vector()}}.}
+
