@@ -1046,6 +1046,7 @@ eigen_centrality <- function(graph,
 #' strength(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_strength
 strength <- strength_impl
 
 
