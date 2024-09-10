@@ -361,4 +361,5 @@ graph_center <- graph_center_dijkstra_impl
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
+#' @cdocs igraph_path_length_hist
 distance_table <- path_length_hist_impl
