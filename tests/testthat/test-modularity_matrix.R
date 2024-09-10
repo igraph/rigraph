@@ -15,8 +15,7 @@ test_that("modularity_matrix works", {
 
 test_that("modularity_matrix still accepts a membership argument for compatibility", {
   kar <- make_graph("zachary")
-  expect_warning(
-    modularity_matrix(kar, membership = rep(1, vcount(kar))),
-    "membership argument is deprecated"
+  expect_snapshot(
+    x <- modularity_matrix(kar, membership = rep(1, vcount(kar)))
   )
 })
