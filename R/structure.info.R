@@ -58,4 +58,5 @@ are.connected <- function(graph, v1, v2) { # nocov start
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
+#' @cdocs igraph_are_adjacent
 are_adjacent <- are_adjacent_impl
