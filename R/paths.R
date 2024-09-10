@@ -258,6 +258,7 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
+#' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
     if (...length() > 0) {
     lifecycle::deprecate_soft(
