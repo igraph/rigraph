@@ -205,6 +205,7 @@ clique.number <- function(graph) { # nocov start
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
+#' @cdocs igraph_cliques
 cliques <- cliques_impl
 
 #' @rdname cliques
