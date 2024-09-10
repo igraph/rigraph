@@ -397,6 +397,7 @@ isomorphic <- function(graph1, graph2, method = c(
 #' @cdocs igraph_isomorphic_bliss
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
+#' @cdocs igraph_isomorphic_vf2
 graph.isomorphic.vf2 <- isomorphic_vf2_impl
 #' @export
 graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
