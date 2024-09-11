@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9058
+
+## Chore
+
+- Remove useless igraph_test() and igraphtest() functions as we … (#1501).
+
+- Use lifecycle for deprecation of membership argument of modula… (#1498).
+
+- Properly deprecate some functions in layout.R (#1500).
+
+- Remove references to deprecated functions (#1497).
+
+## Documentation
+
+- Add more cdocs tags (#1491).
+
+
 # igraph 2.0.3.9057
 
 ## Documentation
