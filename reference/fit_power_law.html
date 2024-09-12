@@ -152,7 +152,7 @@ the power-law behaviour kicks in only above a threshold value
 \(x_\text{min}\) and the corresponding value of \(\alpha\).</p>
 <p><code>fit_power_law()</code> provides two maximum likelihood implementations.  If
 the <code>implementation</code> argument is ‘<code>R.mle</code>’, then the BFGS
-optimization (see <a href="https://rdrr.io/r/stats4/mle.html" class="external-link">mle</a>) algorithm is applied.  The additional
+optimization (see <code><a href="https://rdrr.io/r/stats4/mle.html" class="external-link">stats4::mle()</a></code>) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
 <em>not</em> to fit the \(x_\text{min}\) argument, so use the
@@ -160,10 +160,14 @@ optimization method and/or its parameters.  This implementation can
 <p>The ‘<code>plfit</code>’ implementation also uses the maximum likelihood
 principle to determine \(\alpha\) for a given \(x_\text{min}\);
 When \(x_\text{min}\) is not given in advance, the algorithm will attempt
-to find itsoptimal value for which the \(p\)-value of a Kolmogorov-Smirnov
+to find its optimal value for which the \(p\)-value of a Kolmogorov-Smirnov
 test between the fitted distribution and the original sample is the largest.
 The function uses the method of Clauset, Shalizi and Newman to calculate the
 parameters of the fitted distribution. See references below for the details.</p>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>Pass ‘<code>plfit.p</code>’ instead of ‘<code>plfit</code>’ as the <code>implementation</code>
+argument to include the p-value in the output.
+This is not returned by default because the computation may be slow.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
