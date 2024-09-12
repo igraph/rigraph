@@ -11,7 +11,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9057</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9058</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,8 +63,8 @@ consistent API.</p>
 
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>The input graph. It can also be <code>NULL</code>, if
-<code>nodes</code> is given.</p></dd>
+<dd><p>The input graph. It can also be <code>NULL</code> if
+<code>nodes</code> and <code>directed</code> are both given.</p></dd>
 
 
 <dt id="arg-nodes">nodes<a class="anchor" aria-label="anchor" href="#arg-nodes"></a></dt>
@@ -73,8 +73,9 @@ given.</p></dd>
 
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
-<dd><p>logical scalar, whether to use directed shortest paths
-for calculating betweenness.</p></dd>
+<dd><p>Logical scalar, whether to use directed shortest paths
+for calculating betweenness. Ignored if an undirected graph was
+given.</p></dd>
 
 </dl></div>
 
