@@ -890,6 +890,14 @@ sample_ <- function(...) {
 #' graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 graph_ <- function(...) {
+  lifecycle::deprecate_soft(
+    "2.0.4",
+    "graph_()",
+    details = c(
+      "Please use constructors directly, for instance graph_from_edgelist().",
+      "graph_() will be removed in a future version of igraph."
+    )
+  )
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
   cons <- extracted$cons
