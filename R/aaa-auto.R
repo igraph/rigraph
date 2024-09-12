@@ -3571,7 +3571,7 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   }
   which <- switch(igraph.match.arg(which), "lm"=0L, "la"=2L, "sa"=3L)
   type <- switch(igraph.match.arg(type),
-    "default"=if (is.directed(graph)) 3L else 0L,
+    "default"=if (is_directed(graph)) 3L else 0L,
     "da"=0L, "d-a"=0L, "idad"=1L, "i-dad"=1L, "dad"=2L,
     "oap"=3L)
   scaled <- as.logical(scaled)
