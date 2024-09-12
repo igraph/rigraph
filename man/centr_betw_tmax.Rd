@@ -7,14 +7,15 @@
 centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL}, if
-\code{nodes} is given.}
+\item{graph}{The input graph. It can also be \code{NULL} if
+\code{nodes} and \code{directed} are both given.}
 
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths
-for calculating betweenness.}
+\item{directed}{Logical scalar, whether to use directed shortest paths
+for calculating betweenness. Ignored if an undirected graph was
+given.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph

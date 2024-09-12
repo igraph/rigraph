@@ -11,14 +11,14 @@ centralization.closeness.tmax(
 )
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL}, if
+\item{graph}{The input graph. It can also be \code{NULL} if
 \code{nodes} is given.}
 
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{closeness()}.}
+\code{closeness()}. Ignored if an undirected graph is given.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

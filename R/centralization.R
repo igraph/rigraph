@@ -261,11 +261,10 @@ centr_degree <- centralization_degree_impl
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes`, `mode` and `loops` are all given.
+#' @param graph The input graph. It can also be `NULL` if `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is given.
-#' @param mode This is the same as the `mode` argument of
-#'   `degree()`.
+#' @param mode This is the same as the `mode` argument of `degree()`. Ignored
+#'   if `graph` is given and the graph is undirected.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
@@ -360,12 +359,13 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes` is given.
+#' @param graph The input graph. It can also be `NULL` if
+#'   `nodes` and `directed` are both given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed logical scalar, whether to use directed shortest paths
-#'   for calculating betweenness.
+#' @param directed Logical scalar, whether to use directed shortest paths
+#'   for calculating betweenness. Ignored if an undirected graph was
+#'   given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
@@ -418,12 +418,12 @@ centr_clo <- centralization_closeness_impl
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
+#' @param graph The input graph. It can also be `NULL` if
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
 #' @param mode This is the same as the `mode` argument of
-#'   `closeness()`.
+#'   `closeness()`. Ignored if an undirected graph is given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
