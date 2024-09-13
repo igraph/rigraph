@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9059
+
+## Chore
+
+- Replace `is.directed()` with `is_directed()` in stimulus YAML (#1494).
+
+- Soft-deprecate `graph_()` (#1493).
+
+## Documentation
+
+- Expand on `fit_power_law(implementation = "plfit.p")` (#1503).
+
+## doc
+
+- Improve centralization docs.
+
+
 # igraph 2.0.3.9058
 
 ## Chore
