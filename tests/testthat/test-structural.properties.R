@@ -313,3 +313,119 @@ test_that("distances() works", {
   expect_equal(ma, mfw)
 })
 
+
+
+test_that("all_shortest_paths() works", {
+  edges <- matrix(
+    c(
+      "s", "a", 2,
+      "s", "b", 4,
+      "a", "t", 4,
+      "b", "t", 2,
+      "a", "1", 1,
+      "a", "2", 1,
+      "a", "3", 2,
+      "1", "b", 1,
+      "2", "b", 2,
+      "3", "b", 1
+    ),
+    byrow = TRUE, ncol = 3,
+    dimnames = list(NULL, c("from", "to", "weight"))
+  )
+  edges <- as.data.frame(edges)
+  edges[[3]] <- as.numeric(as.character(edges[[3]]))
+
+  g <- graph_from_data_frame(as.data.frame(edges))
+
+  sortlist <- function(list) {
+    list <- lapply(list, sort)
+    list <- lapply(list, as.vector)
+    list[order(sapply(list, paste, collapse = "!"))]
+  }
+
+  sp1 <- all_shortest_paths(g, "s", "t", weights = NA)
+
+  expect_equal(
+    sortlist(sp1$vpaths),
+    list(c(1, 2, 7), c(1, 3, 7))
+  )
+  expect_equal(
+    sp1$nrgeo,
+    c(1, 1, 1, 1, 1, 1, 2)
+  )
+
+  sp2 <- all_shortest_paths(g, "s", "t")
+
+  expect_equal(
+    sortlist(sp2$vpaths),
+    list(c(1, 2, 3, 4, 7), c(1, 2, 7), c(1, 3, 7))
+  )
+  expect_equal(sp2$nrgeo, c(1, 1, 2, 1, 1, 1, 3))
+})
+
+test_that("shortest_paths() works", {
+  edges <- matrix(
+    c(
+      "s", "a", 2,
+      "s", "b", 4,
+      "a", "t", 4,
+      "b", "t", 2,
+      "a", "1", 1,
+      "a", "2", 1,
+      "a", "3", 2,
+      "1", "b", 1,
+      "2", "b", 2,
+      "3", "b", 1
+    ),
+    byrow = TRUE, ncol = 3,
+    dimnames = list(NULL, c("from", "to", "weight"))
+  )
+  edges <- as.data.frame(edges)
+  edges[[3]] <- as.numeric(as.character(edges[[3]]))
+
+  g <- graph_from_data_frame(as.data.frame(edges))
+
+  all1 <- all_shortest_paths(g, "s", "t", weights = NA)$vpaths
+
+  s1 <- shortest_paths(g, "s", "t", weights = NA)
+
+  expect_true(s1$vpath %in% all1)
+})
+
+test_that("shortest_paths() can handle negative weights", {
+  g <- make_tree(7)
+  E(g)$weight <- -1
+  sps <- shortest_paths(g, 2)$vpath
+
+  expect_true(length(sps) == 7)
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[1]]), integer(0))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[2]]), c(2))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[3]]), integer(0))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[4]]), c(2, 4))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[5]]), c(2, 5))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[6]]), integer(0))
+  expect_equal(ignore_attr = TRUE, as.vector(sps[[7]]), integer(0))
+})
+
+test_that("k_shortest_paths() works", {
+  g <- make_ring(5)
+  res <- k_shortest_paths(g, 1, 2, k = 3)
+  expect_length(res$vpaths, 2)
+  expect_length(res$epaths, 2)
+  expect_equal(as.numeric(res$vpaths[[1]]), c(1, 2))
+  expect_equal(as.numeric(res$epaths[[1]]), c(1))
+  expect_equal(as.numeric(res$vpaths[[2]]), c(1, 5, 4, 3, 2))
+  expect_equal(as.numeric(res$epaths[[2]]), c(5, 4, 3, 2))
+})
+
+test_that("k_shortest_paths() works with weights", {
+  g <- make_graph(c(1,2, 1,3, 3,2))
+  E(g)$weight <- c(5, 2, 1)
+  res <- k_shortest_paths(g, 1, 2, k = 3)
+  expect_length(res$vpaths, 2)
+  expect_length(res$epaths, 2)
+  expect_equal(as.numeric(res$vpaths[[1]]), c(1, 3, 2))
+  expect_equal(as.numeric(res$epaths[[1]]), c(2, 3))
+  expect_equal(as.numeric(res$vpaths[[2]]), c(1, 2))
+  expect_equal(as.numeric(res$epaths[[2]]), c(1))
+})
