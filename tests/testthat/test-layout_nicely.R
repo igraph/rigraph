@@ -7,5 +7,5 @@ test_that("layout_nicely() works with negative weights", {
 test_that("layout_nicely() does not recurse into itself", {
   g <- make_graph("petersen")
   g$layout <- layout_nicely
-  expect_warning(layout_nicely(g), regexp = NA) # should not recurse infinitely
+  expect_silent(layout_nicely(g)) # should not recurse infinitely
 })
