@@ -1,6 +1,4 @@
 test_that("`layout_with_mds()` works", {
-  ## A tree
-
   g <- make_tree(10, 2, "undirected")
 
   mymds <- function(g) {
@@ -22,11 +20,7 @@ test_that("`layout_with_mds()` works", {
   expect_equal(out2, out1)
 })
 
-test_that("`layout_with_mds()` stress test", {
-  ## plot(g, layout=ll)
-
-  ## A graph with multiple components, just test that it runs
-
+test_that("`layout_with_mds()` stress test, graph with multiple components", {
   withr::local_seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_equal(ncol(layout_with_mds(g)), 2)
