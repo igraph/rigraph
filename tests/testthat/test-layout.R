@@ -3,15 +3,32 @@ test_that("layout_with_fr() works", {
 
   withr::with_seed(42, {
     g <- make_ring(10)
-  l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
+    l <- layout_with_fr(g, niter = 50, start.temp = sqrt(10) / 10)
   })
   expect_equal(sum(l), 4.57228, tolerance = 0.1)
 
   withr::with_seed(42, {
     g <- make_star(30)
-  l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
+    l <- layout_with_fr(g, niter = 500, dim = 3, start.temp = 20)
   })
   expect_equal(sum(l), -170.9312, tolerance = 0.1)
+})
+
+test_that("layout_with_fr() deprecated argument", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+  g <- make_ring(10)
+  expect_snapshot(
+    l <- layout_with_fr(
+      g,
+      niter = 50,
+      start.temp = sqrt(10) / 10,
+      coolexp = 1,
+      maxdelta = 1,
+      area = 1,
+      repulserad = 1
+    )
+  )
+
 })
 
 test_that("layout_nicely() works with negative weights", {
@@ -184,6 +201,22 @@ test_that("Kamada-Kawai layout generator works", {
   g <- make_star(30)
   l <- layout_with_kk(g, maxiter = 5000, dim = 3)
   expect_true(looks_circular(l[-1,], check_dists = FALSE, eps = 1e-2))
+})
+
+test_that("layout_with_kk() deprecated arguments", {
+  g <- make_ring(10)
+  expect_snapshot(
+    l <- layout_with_kk(
+      g,
+      maxiter = 50,
+      coords = layout_in_circle(g),
+      niter = 1,
+      sigma = 1,
+      initemp = 1,
+      coolexp = 1
+    )
+  )
+
 })
 
 test_that("layout_with_sugiyama() does not demote matrices to vectors in res$layout.dummy", {

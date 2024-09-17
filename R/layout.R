@@ -1189,8 +1189,9 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   \sQuote{z} coordinates.
 #' @param maxz Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{z} coordinates.
-#' @param coolexp,maxdelta,area,repulserad These arguments are not supported
-#'   from igraph version 0.8.0 and are ignored (with a warning).
+#' @param coolexp,maxdelta,area,repulserad `r lifecycle::badge("deprecated")` These
+#'  arguments are not supported from igraph version 0.8.0 and are ignored
+#'  (with a warning).
 #' @param maxiter A deprecated synonym of `niter`, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #'   vertex, according to the ids of the vertex ids.
@@ -1229,7 +1230,9 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
                            grid = c("auto", "grid", "nogrid"), weights = NULL,
                            minx = NULL, maxx = NULL, miny = NULL, maxy = NULL,
                            minz = NULL, maxz = NULL,
-                           coolexp, maxdelta, area, repulserad, maxiter) {
+                           coolexp = deprecated(), maxdelta = deprecated(),
+                           area = deprecated(), repulserad = deprecated(),
+                           maxiter = deprecated()) {
   # Argument checks
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
@@ -1265,17 +1268,17 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   if (!is.null(maxy)) maxy <- as.numeric(maxy)
   if (!is.null(minz)) minz <- as.numeric(minz)
   if (!is.null(maxz)) maxz <- as.numeric(maxz)
-  if (!missing(coolexp)) {
-    warning("Argument `coolexp' is deprecated and has no effect")
+  if (lifecycle::is_present(coolexp)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(coolexp = )")
   }
-  if (!missing(maxdelta)) {
-    warning("Argument `maxdelta' is deprecated and has no effect")
+  if (lifecycle::is_present(maxdelta)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(maxdelta = )")
   }
-  if (!missing(area)) {
-    warning("Argument `area' is deprecated and has no effect")
+  if (lifecycle::is_present(area)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(area = )")
   }
-  if (!missing(repulserad)) {
-    warning("Argument `repulserad' is deprecated and has no effect")
+  if (lifecycle::is_present(repulserad)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(repulserad = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1503,8 +1506,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   \sQuote{z} coordinates.
 #' @param maxz Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{z} coordinates.
-#' @param niter,sigma,initemp,coolexp These arguments are not supported from
-#'   igraph version 0.8.0 and are ignored (with a warning).
+#' @param niter,sigma,initemp,coolexp `r lifecycle::badge("deprecated")` These
+#' arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).
 #' @param start Deprecated synonym for `coords`, for compatibility.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
 #'   many rows as the number of vertices, the x, y and potentially z coordinates
@@ -1528,7 +1531,11 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
                            epsilon = 0.0, kkconst = max(vcount(graph), 1),
                            weights = NULL, minx = NULL, maxx = NULL,
                            miny = NULL, maxy = NULL, minz = NULL, maxz = NULL,
-                           niter, sigma, initemp, coolexp, start) {
+                           niter = deprecated(),
+                           sigma = deprecated(),
+                           initemp = deprecated(),
+                           coolexp = deprecated(),
+                           start = deprecated()) {
   # Argument checks
   if (!missing(coords) && !missing(start)) {
     stop("Both `coords' and `start' are given, give only one of them.")
@@ -1560,17 +1567,17 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   if (!is.null(minz)) minz <- as.numeric(minz)
   if (!is.null(maxz)) maxz <- as.numeric(maxz)
 
-  if (!missing(niter)) {
-    warning("Argument `niter' is deprecated and has no effect")
+  if (lifecycle::is_present(niter)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(niter = )")
   }
-  if (!missing(sigma)) {
-    warning("Argument `sigma' is deprecated and has no effect")
+  if (lifecycle::is_present(sigma)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(sigma = )")
   }
-  if (!missing(initemp)) {
-    warning("Argument `initemp' is deprecated and has no effect")
+  if (lifecycle::is_present(initemp)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(initemp = )")
   }
-  if (!missing(coolexp)) {
-    warning("Argument `coolexp' is deprecated and has no effect")
+  if (lifecycle::is_present(coolexp)) {
+    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(coolexp = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
