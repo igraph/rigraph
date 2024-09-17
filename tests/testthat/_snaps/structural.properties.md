@@ -1,3 +1,22 @@
+# bfs() deprecated argument
+
+    Code
+      d <- dfs(g, root = 2, unreachable = FALSE, neimode = "out")
+    Condition
+      Warning:
+      The `neimode` argument of `dfs()` is deprecated as of igraph 1.3.0.
+      i Please use the `mode` argument instead.
+
+---
+
+    Code
+      b <- bfs(g, root = 2, neimode = "out", unreachable = FALSE, order = TRUE, rank = TRUE,
+        father = TRUE, pred = TRUE, succ = TRUE, dist = TRUE)
+    Condition
+      Warning:
+      The `neimode` argument of `bfs()` is deprecated as of igraph 1.3.0.
+      i Please use the `mode` argument instead.
+
 # bfs() works
 
     Code

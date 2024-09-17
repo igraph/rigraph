@@ -12,6 +12,19 @@ test_that("dfs() does not pad order", {
   expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE, order.out = TRUE)$order.out), c(1, 2))
 })
 
+test_that("bfs() deprecated argument", {
+  g <- make_star(3)
+
+  expect_snapshot({
+    d <- dfs(
+      g,
+      root = 2,
+      unreachable = FALSE,
+      neimode = "out"
+   )
+  })
+})
+
 test_that("degree() works", {
   g <- sample_gnp(100, 1 / 100)
   d <- degree(g)
@@ -172,6 +185,25 @@ test_that("bfs() works", {
       g,
       root = 2,
       mode = "out",
+      unreachable = FALSE,
+      order = TRUE,
+      rank = TRUE,
+      father = TRUE,
+      pred = TRUE,
+      succ = TRUE,
+      dist = TRUE
+    )
+  })
+})
+
+test_that("bfs() deprecated argument", {
+  g <- graph_from_literal(a - +b - +c, z - +a, d)
+
+  expect_snapshot({
+    b <- bfs(
+      g,
+      root = 2,
+      neimode = "out",
       unreachable = FALSE,
       order = TRUE,
       rank = TRUE,

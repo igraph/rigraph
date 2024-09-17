@@ -2049,8 +2049,8 @@ any_loop <- has_loop_impl
 #'   is called whenever a vertex is visited. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
-#' @param neimode This argument is deprecated from igraph 1.3.0; use
-#'   `mode` instead.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
+#'  from igraph 1.3.0; use `mode` instead.
 #' @return A named list with the following entries:
 #'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
@@ -2120,11 +2120,15 @@ bfs <- function(
     callback = NULL,
     extra = NULL,
     rho = parent.frame(),
-    neimode) {
+    neimode = deprecated()) {
   ensure_igraph(graph)
 
-  if (!missing(neimode)) {
-    warning("Argument `neimode' is deprecated; use `mode' instead")
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_warn(
+      "1.3.0",
+      "bfs(neimode)",
+      "bfs(mode)"
+    )
     if (missing(mode)) {
       mode <- neimode
     }
@@ -2236,7 +2240,7 @@ bfs <- function(
 #'   algorithm. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
-#' @param neimode This argument is deprecated from igraph 1.3.0; use
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
@@ -2292,10 +2296,14 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 unreachable = TRUE,
                 order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE,
                 in.callback = NULL, out.callback = NULL, extra = NULL,
-                rho = parent.frame(), neimode) {
+                rho = parent.frame(), neimode = deprecated()) {
   ensure_igraph(graph)
-  if (!missing(neimode)) {
-    warning("Argument `neimode' is deprecated; use `mode' instead")
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_warn(
+      "1.3.0",
+      "dfs(neimode)",
+      "dfs(mode)"
+    )
     if (missing(mode)) {
       mode <- neimode
     }
