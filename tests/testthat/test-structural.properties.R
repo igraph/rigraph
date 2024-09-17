@@ -741,3 +741,10 @@ test_that("girth() works", {
   expect_equal(gi$girth, 100)
   expect_equal(sort(diff(as.vector(gi$circle))), c(-99, rep(1, 98)))
 })
+
+test_that("coreness() works", {
+  g <- make_ring(10)
+  g <- add_edges(g, c(1, 2, 2, 3, 1, 3))
+  gc <- coreness(g)
+  expect_equal(gc, c(3, 3, 3, 2, 2, 2, 2, 2, 2, 2))
+})
