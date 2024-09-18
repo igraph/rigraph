@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9059</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9060</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
 <div class="section level3">
 <h3 id="pull-request-process">Pull request process<a class="anchor" aria-label="anchor" href="#pull-request-process"></a></h3>
 <ul><li><p>Fork the package and clone onto your computer. If you haven’t done this before, you can use <code>usethis::create_from_github("igraph/rigraph", fork = TRUE)</code>.</p></li>
-<li><p>Install all development dependencies with <code><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak::pak()</a></code>, and then make sure the package passes R CMD check by running <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code>. If R CMD check doesn’t pass cleanly, it’s a good idea to ask for help before continuing.</p></li>
+<li><p>Install all development dependencies with <code><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak::pak()</a></code>, and then make sure the package passes R CMD check by running <code>devtools::check()</code>. If R CMD check doesn’t pass cleanly, it’s a good idea to ask for help before continuing.</p></li>
 <li><p>Create a Git branch for your pull request (PR). You can use <a href="https://usethis.r-lib.org/articles/pr-functions.html" class="external-link">usethis</a>, GitHub Desktop, etc.</p></li>
 <li><p>Make your changes, commit to git, and then create a PR. The title of your PR should briefly describe the change. The body of your PR should contain <code>Fixes #issue-number</code>.</p></li>
 </ul></div>
@@ -67,7 +67,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="test-files">Test files<a class="anchor" aria-label="anchor" href="#test-files"></a></h3>
-<p>We strive to align script and test names. This is still a work-in-progress but the goal is to have code from <code>R/name.R</code> tested in <code>tests/testthat/test-name.R</code>. This allows easy toggling between the two files thanks to <code><a href="https://usethis.r-lib.org/reference/use_r.html" class="external-link">usethis::use_test()</a></code> and <code><a href="https://usethis.r-lib.org/reference/use_r.html" class="external-link">usethis::use_r()</a></code>.</p>
+<p>We strive to align script and test names. This is still a work-in-progress but the goal is to have code from <code>R/name.R</code> tested in <code>tests/testthat/test-name.R</code>. This allows easy toggling between the two files thanks to <code>usethis::use_test()</code> and <code>usethis::use_r()</code>.</p>
 </div>
 </div>
 <div class="section level2">
