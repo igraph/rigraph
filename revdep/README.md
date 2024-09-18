@@ -1,6 +1,6 @@
 # Revdeps
 
-## Failed to check (33)
+## Failed to check (34)
 
 |package               |version |error |warning |note |
 |:---------------------|:-------|:-----|:-------|:----|
@@ -29,6 +29,7 @@
 |ohun                  |?       |      |        |     |
 |pagoda2               |?       |      |        |     |
 |PathwaySpace          |?       |      |        |     |
+|pcvr                  |1.0.0   |1     |        |     |
 |piecewiseSEM          |?       |      |        |     |
 |RGraphSpace           |?       |      |        |     |
 |rTwig                 |1.1.0   |1     |        |     |
@@ -38,15 +39,13 @@
 |SubtypeDrug           |?       |      |        |     |
 |topologyGSA           |?       |      |        |     |
 
-## New problems (7)
+## New problems (5)
 
-|package   |version |error  |warning |note   |
-|:---------|:-------|:------|:-------|:------|
-|[isotracer](problems.md#isotracer)|1.1.6   |__+1__ |1       |3      |
-|[manynet](problems.md#manynet)|1.0.5   |__+1__ |        |2      |
-|[MetaNet](problems.md#metanet)|0.1.2   |__+1__ |        |       |
-|[netropy](problems.md#netropy)|0.1.0   |__+2__ |        |__+1__ |
-|[R6causal](problems.md#r6causal)|0.8.3   |       |__+1__  |       |
-|[simcausal](problems.md#simcausal)|0.5.6   |__+1__ |        |1      |
-|[skynet](problems.md#skynet)|1.4.3   |__+1__ |        |1      |
+|package   |version |error  |warning  |note |
+|:---------|:-------|:------|:--------|:----|
+|[CePa](problems.md#cepa)|0.8.0   |       |1 __+1__ |     |
+|[manynet](problems.md#manynet)|1.0.5   |__+1__ |         |2    |
+|[MetaNet](problems.md#metanet)|0.1.2   |__+1__ |         |     |
+|[simcausal](problems.md#simcausal)|0.5.6   |__+1__ |         |1    |
+|[skynet](problems.md#skynet)|1.4.3   |__+1__ |         |1    |
 

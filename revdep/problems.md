@@ -1,72 +1,55 @@
-# isotracer
+# CePa
 
 <details>
 
-* Version: 1.1.6
-* GitHub: NA
-* Source code: https://github.com/cran/isotracer
-* Date/Publication: 2024-05-15 08:50:07 UTC
-* Number of recursive dependencies: 127
+* Version: 0.8.0
+* GitHub: https://github.com/jokergoo/CePa
+* Source code: https://github.com/cran/CePa
+* Date/Publication: 2022-06-11 21:30:06 UTC
+* Number of recursive dependencies: 14
 
-Run `revdepcheck::cloud_details(, "isotracer")` for more info
+Run `revdepcheck::cloud_details(, "CePa")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking Rd cross-references ... WARNING
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(isotracer)
-      To automatically run isotracer in parallel on a multicore CPU, you can call:
-        options(mc.cores = parallel::detectCores())
-      
-      
-      Attaching package: 'isotracer'
-    ...
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-steady-states-flows-pred.R:481:5'): Predictions for open network, single unit, one steady, one split ──
-      all(x[["from"]] - x[["to"]] < 1e-13) is not TRUE
-      
-      `actual`:   FALSE
-      `expected`: TRUE 
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 582 ]
-      Error: Test failures
-      Execution halted
+    Missing link or links in documentation object 'cepa.Rd':
+      ‘[igraph:igraph_test]{igraphtest}’
+    
+    Missing link or links in documentation object 'cepa.ora.Rd':
+      ‘[igraph:igraph_test]{igraphtest}’
+    
+    See section 'Cross-references' in the 'Writing R Extensions' manual.
     ```
 
 ## In both
 
-*   checking whether package ‘isotracer’ can be installed ... WARNING
+*   checking re-building of vignette outputs ... WARNING
     ```
-    Found the following significant warnings:
-      Warning: namespace ‘lubridate’ is not available and has been replaced
-    See ‘/tmp/workdir/isotracer/new/isotracer.Rcheck/00install.out’ for details.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 95.1Mb
-      sub-directories of 1Mb or more:
-        R      1.5Mb
-        data   4.0Mb
-        doc    2.3Mb
-        libs  86.8Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rstantools’
-      All declared Imports should be used.
-    ```
-
-*   checking for GNU extensions in Makefiles ... NOTE
-    ```
-    GNU make is a SystemRequirements.
+    Error(s) in re-building vignettes:
+    --- re-building ‘CePa.Rnw’ using Sweave
+    Error: processing vignette 'CePa.Rnw' failed with diagnostics:
+    Running 'texi2dvi' on 'CePa.tex' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `grfext.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    
+    ...
+    l.179   \RequirePackage{grfext}\relax
+                                         ^^M
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘parsing-PID-pathway-data.Rnw’
+    
+    SUMMARY: processing the following files failed:
+      ‘CePa.Rnw’ ‘analysis-p53.Rnw’ ‘parsing-PID-pathway-data.Rnw’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 # manynet
@@ -77,7 +60,7 @@ Run `revdepcheck::cloud_details(, "isotracer")` for more info
 * GitHub: https://github.com/stocnet/manynet
 * Source code: https://github.com/cran/manynet
 * Date/Publication: 2024-08-30 04:50:02 UTC
-* Number of recursive dependencies: 152
+* Number of recursive dependencies: 147
 
 Run `revdepcheck::cloud_details(, "manynet")` for more info
 
@@ -161,121 +144,6 @@ Run `revdepcheck::cloud_details(, "MetaNet")` for more info
      15. │                 └─rlang (local) FUN(X[[i]], ...)
      16. └─rlang::abort(message = message)
     Execution halted
-    ```
-
-# netropy
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/netropy
-* Date/Publication: 2022-02-02 08:20:02 UTC
-* Number of recursive dependencies: 85
-
-Run `revdepcheck::cloud_details(, "netropy")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘netropy-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: assoc_graph
-    > ### Title: Association Graphs
-    > ### Aliases: assoc_graph
-    > 
-    > ### ** Examples
-    > 
-    > library(ggraph)
-    ...
-    +                 ifelse(df.att$age<=45,1,2)),
-    +    practice = df.att$practice,
-    +    lawschool= df.att$lawschool-1)
-    > 
-    > # association graph based on cutoff 0.15
-    > assoc_graph(df.att.ed, 0.15)
-    Error in igraph::distances(g) : 
-      At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
-    Calls: assoc_graph ... layout_with_stress -> .layout_with_stress_dim -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘joint_entropies.Rmd’
-      ...
-    21    0         4        45
-    
-    > library(ggraph)
-    Loading required package: ggplot2
-    
-    > assoc_graph(dyad.var, 0.15)
-    
-      When sourcing ‘joint_entropies.R’:
-    Error: At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
-    Execution halted
-    
-      ‘joint_entropies.Rmd’ using ‘UTF-8’... failed
-      ‘prediction_power.Rmd’ using ‘UTF-8’... OK
-      ‘univariate_bivariate_trivariate.Rmd’ using ‘UTF-8’... OK
-      ‘variable_domains.Rmd’ using ‘UTF-8’... OK
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘joint_entropies.Rmd’ using rmarkdown
-    
-    Quitting from lines 96-98 [assoc_g] (joint_entropies.Rmd)
-    Error: processing vignette 'joint_entropies.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/paths/dijkstra.c:128 : Weights must not contain NaN values. Invalid value
-    --- failed re-building ‘joint_entropies.Rmd’
-    
-    --- re-building ‘prediction_power.Rmd’ using rmarkdown
-    ...
-    --- finished re-building ‘univariate_bivariate_trivariate.Rmd’
-    
-    --- re-building ‘variable_domains.Rmd’ using rmarkdown
-    --- finished re-building ‘variable_domains.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘joint_entropies.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# R6causal
-
-<details>
-
-* Version: 0.8.3
-* GitHub: NA
-* Source code: https://github.com/cran/R6causal
-* Date/Publication: 2024-03-14 16:10:02 UTC
-* Number of recursive dependencies: 99
-
-Run `revdepcheck::cloud_details(, "R6causal")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘R6causal’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Note: possible error in '.to(l[i])': unused argument (l[i]) 
-      Note: possible error in '.from(l[i])': unused argument (l[i]) 
-    See ‘/tmp/workdir/R6causal/new/R6causal.Rcheck/00install.out’ for details.
-    Information on the location(s) of code generating the ‘Note’s can be
-    obtained by re-running with environment variable R_KEEP_PKG_SOURCE set
-    to ‘yes’.
     ```
 
 # simcausal
