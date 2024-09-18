@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9060
+
+## Testing
+
+- Refactor test-layout.fr.R for simplicity and readability (#1504).
+
+
 # igraph 2.0.3.9059
 
 ## Chore
