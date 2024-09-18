@@ -1649,6 +1649,76 @@ Run `revdepcheck::cloud_details(, "PathwaySpace")` for more info
 
 
 ```
+# pcvr
+
+<details>
+
+* Version: 1.0.0
+* GitHub: https://github.com/danforthcenter/pcvr
+* Source code: https://github.com/cran/pcvr
+* Date/Publication: 2024-09-05 17:30:02 UTC
+* Number of recursive dependencies: 189
+
+Run `revdepcheck::cloud_details(, "pcvr")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘pcvr’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/pcvr/new/pcvr.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘pcvr’ ...
+** package ‘pcvr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Warning in check_dep_version() :
+  ABI version mismatch: 
+lme4 was built with Matrix ABI version 1
+Current Matrix ABI version is 0
+Please re-install lme4 from source or restore original ‘Matrix’ package
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  namespace ‘Matrix’ 1.5-4.1 is already loaded, but >= 1.6.0 is required
+Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
+Execution halted
+ERROR: lazy loading failed for package ‘pcvr’
+* removing ‘/tmp/workdir/pcvr/new/pcvr.Rcheck/pcvr’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘pcvr’ ...
+** package ‘pcvr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Warning in check_dep_version() :
+  ABI version mismatch: 
+lme4 was built with Matrix ABI version 1
+Current Matrix ABI version is 0
+Please re-install lme4 from source or restore original ‘Matrix’ package
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  namespace ‘Matrix’ 1.5-4.1 is already loaded, but >= 1.6.0 is required
+Calls: <Anonymous> ... namespaceImportFrom -> asNamespace -> loadNamespace
+Execution halted
+ERROR: lazy loading failed for package ‘pcvr’
+* removing ‘/tmp/workdir/pcvr/old/pcvr.Rcheck/pcvr’
+
+
+```
 # piecewiseSEM
 
 <details>
