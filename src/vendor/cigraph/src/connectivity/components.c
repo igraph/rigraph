@@ -84,7 +84,7 @@ igraph_error_t igraph_clusters(const igraph_t *graph, igraph_vector_int_t *membe
  *    \cli IGRAPH_WEAK
  *       Compute weakly connected components, i.e. ignore edge directions.
  *    \cli IGRAPH_STRONG
- *       Compute strongly connnected components, i.e. considr edge directions.
+ *       Compute strongly connnected components, i.e. consider edge directions.
  *    \endclist
  *    This parameter is ignored for undirected graphs.
  * \return Error code.
@@ -621,11 +621,11 @@ static igraph_error_t igraph_i_decompose_strong(const igraph_t *graph,
  * \param maxcompno The maximum number of components to return. The
  *    first \p maxcompno components will be returned (which hold at
  *    least \p minelements vertices, see the next parameter), the
- *    others will be ignored. Supply -1 here if you don't want to limit
- *    the number of components.
+ *    others will be ignored. Supply <code>-1</code> here if you don't
+ *    want to limit the number of components.
  * \param minelements The minimum number of vertices a component
  *    should contain in order to place it in the \p components
- *    vector. Eg. supply 2 here to ignore isolated vertices.
+ *    vector. For example, supplying 2 here ignored isolated vertices.
  * \return Error code, \c IGRAPH_ENOMEM if there is not enough memory
  *   to perform the operation.
  *

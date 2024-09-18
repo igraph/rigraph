@@ -33,66 +33,6 @@ Run `revdepcheck::cloud_details(, "bnlearn")` for more info
 
 
 ```
-# bsub
-
-<details>
-
-* Version: 1.1.0
-* GitHub: https://github.com/jokergoo/bsub
-* Source code: https://github.com/cran/bsub
-* Date/Publication: 2021-07-01 15:50:10 UTC
-* Number of recursive dependencies: 79
-
-Run `revdepcheck::cloud_details(, "bsub")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘bsub’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/bsub/new/bsub.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘bsub’ ...
-** package ‘bsub’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘rjson’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘bsub’
-* removing ‘/tmp/workdir/bsub/new/bsub.Rcheck/bsub’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘bsub’ ...
-** package ‘bsub’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘rjson’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘bsub’
-* removing ‘/tmp/workdir/bsub/old/bsub.Rcheck/bsub’
-
-
-```
 # CARBayes
 
 <details>
@@ -165,158 +105,6 @@ ERROR: lazy loading failed for package ‘CARBayes’
 
 
 ```
-# chemodiv
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/hpetren/chemodiv
-* Source code: https://github.com/cran/chemodiv
-* Date/Publication: 2023-08-17 17:52:33 UTC
-* Number of recursive dependencies: 170
-
-Run `revdepcheck::cloud_details(, "chemodiv")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/chemodiv/new/chemodiv.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘chemodiv/DESCRIPTION’ ... OK
-...
-* this is package ‘chemodiv’ version ‘0.3.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'fmcsR', 'ChemmineR'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/chemodiv/old/chemodiv.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘chemodiv/DESCRIPTION’ ... OK
-...
-* this is package ‘chemodiv’ version ‘0.3.0’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Packages required but not available: 'fmcsR', 'ChemmineR'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# CNVScope
-
-<details>
-
-* Version: 3.7.2
-* GitHub: https://github.com/jamesdalg/CNVScope
-* Source code: https://github.com/cran/CNVScope
-* Date/Publication: 2022-03-30 23:40:08 UTC
-* Number of recursive dependencies: 206
-
-Run `revdepcheck::cloud_details(, "CNVScope")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/CNVScope/new/CNVScope.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘CNVScope/DESCRIPTION’ ... OK
-...
-Packages required but not available: 'GenomicInteractions', 'rtracklayer'
-
-Packages suggested but not available for checking:
-  'ComplexHeatmap', 'HiCseg', 'GenomicFeatures',
-  'BSgenome.Hsapiens.UCSC.hg19'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/CNVScope/old/CNVScope.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘CNVScope/DESCRIPTION’ ... OK
-...
-Packages required but not available: 'GenomicInteractions', 'rtracklayer'
-
-Packages suggested but not available for checking:
-  'ComplexHeatmap', 'HiCseg', 'GenomicFeatures',
-  'BSgenome.Hsapiens.UCSC.hg19'
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
 # ConnectednessApproach
 
 <details>
@@ -379,158 +167,6 @@ ERROR: lazy loading failed for package ‘ConnectednessApproach’
 
 
 ```
-# conos
-
-<details>
-
-* Version: 1.5.2
-* GitHub: https://github.com/kharchenkolab/conos
-* Source code: https://github.com/cran/conos
-* Date/Publication: 2024-02-26 19:30:05 UTC
-* Number of recursive dependencies: 240
-
-Run `revdepcheck::cloud_details(, "conos")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/conos/new/conos.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘conos/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ComplexHeatmap’
-
-Package suggested but not available for checking: ‘pagoda2’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/conos/old/conos.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘conos/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ComplexHeatmap’
-
-Package suggested but not available for checking: ‘pagoda2’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# crosstalkr
-
-<details>
-
-* Version: 1.0.5
-* GitHub: NA
-* Source code: https://github.com/cran/crosstalkr
-* Date/Publication: 2024-05-17 11:40:09 UTC
-* Number of recursive dependencies: 164
-
-Run `revdepcheck::cloud_details(, "crosstalkr")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/crosstalkr/new/crosstalkr.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘crosstalkr/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ensembldb’
-
-Package suggested but not available for checking: ‘EnsDb.Hsapiens.v86’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/crosstalkr/old/crosstalkr.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘crosstalkr/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ensembldb’
-
-Package suggested but not available for checking: ‘EnsDb.Hsapiens.v86’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
 # datapack
 
 <details>
@@ -590,158 +226,6 @@ Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.
 Execution halted
 ERROR: lazy loading failed for package ‘datapack’
 * removing ‘/tmp/workdir/datapack/old/datapack.Rcheck/datapack’
-
-
-```
-# DrugSim2DR
-
-<details>
-
-* Version: 0.1.1
-* GitHub: NA
-* Source code: https://github.com/cran/DrugSim2DR
-* Date/Publication: 2023-08-10 04:50:02 UTC
-* Number of recursive dependencies: 89
-
-Run `revdepcheck::cloud_details(, "DrugSim2DR")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/DrugSim2DR/new/DrugSim2DR.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘DrugSim2DR/DESCRIPTION’ ... OK
-...
-* this is package ‘DrugSim2DR’ version ‘0.1.1’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/DrugSim2DR/old/DrugSim2DR.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘DrugSim2DR/DESCRIPTION’ ... OK
-...
-* this is package ‘DrugSim2DR’ version ‘0.1.1’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# DRviaSPCN
-
-<details>
-
-* Version: 0.1.4
-* GitHub: NA
-* Source code: https://github.com/cran/DRviaSPCN
-* Date/Publication: 2024-01-13 05:00:02 UTC
-* Number of recursive dependencies: 180
-
-Run `revdepcheck::cloud_details(, "DRviaSPCN")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/DRviaSPCN/new/DRviaSPCN.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘DRviaSPCN/DESCRIPTION’ ... OK
-...
-* this is package ‘DRviaSPCN’ version ‘0.1.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/DRviaSPCN/old/DRviaSPCN.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘DRviaSPCN/DESCRIPTION’ ... OK
-...
-* this is package ‘DRviaSPCN’ version ‘0.1.4’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
 
 
 ```
@@ -1013,82 +497,6 @@ ERROR: lazy loading failed for package ‘frechet’
 
 
 ```
-# GALLO
-
-<details>
-
-* Version: 1.5
-* GitHub: NA
-* Source code: https://github.com/cran/GALLO
-* Date/Publication: 2024-06-04 15:30:20 UTC
-* Number of recursive dependencies: 142
-
-Run `revdepcheck::cloud_details(, "GALLO")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/GALLO/new/GALLO.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘GALLO/DESCRIPTION’ ... OK
-...
-* this is package ‘GALLO’ version ‘1.5’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘rtracklayer’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/GALLO/old/GALLO.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘GALLO/DESCRIPTION’ ... OK
-...
-* this is package ‘GALLO’ version ‘1.5’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘rtracklayer’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
 # kstMatrix
 
 <details>
@@ -1252,10 +660,10 @@ ERROR: lazy loading failed for package ‘mlmts’
 
 <details>
 
-* Version: 0.7.1
+* Version: 0.7.2
 * GitHub: https://github.com/dmphillippo/multinma
 * Source code: https://github.com/cran/multinma
-* Date/Publication: 2024-06-11 12:20:06 UTC
+* Date/Publication: 2024-09-16 12:20:02 UTC
 * Number of recursive dependencies: 152
 
 Run `revdepcheck::cloud_details(, "multinma")` for more info
@@ -1462,158 +870,6 @@ ERROR: lazy loading failed for package ‘NetworkChange’
 
 
 ```
-# ohun
-
-<details>
-
-* Version: 1.0.2
-* GitHub: https://github.com/ropensci/ohun
-* Source code: https://github.com/cran/ohun
-* Date/Publication: 2024-08-19 18:40:02 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "ohun")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/ohun/new/ohun.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘ohun/DESCRIPTION’ ... OK
-...
-* this is package ‘ohun’ version ‘1.0.2’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘warbleR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/ohun/old/ohun.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘ohun/DESCRIPTION’ ... OK
-...
-* this is package ‘ohun’ version ‘1.0.2’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘warbleR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# pagoda2
-
-<details>
-
-* Version: 1.0.12
-* GitHub: https://github.com/kharchenkolab/pagoda2
-* Source code: https://github.com/cran/pagoda2
-* Date/Publication: 2024-02-27 00:50:02 UTC
-* Number of recursive dependencies: 162
-
-Run `revdepcheck::cloud_details(, "pagoda2")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/pagoda2/new/pagoda2.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘pagoda2/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘rjson’
-
-Package suggested but not available for checking: ‘scde’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/pagoda2/old/pagoda2.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘pagoda2/DESCRIPTION’ ... OK
-...
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘rjson’
-
-Package suggested but not available for checking: ‘scde’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
 # PathwaySpace
 
 <details>
@@ -1789,6 +1045,82 @@ Run `revdepcheck::cloud_details(, "RGraphSpace")` for more info
 
 
 ```
+# robber
+
+<details>
+
+* Version: 0.2.4
+* GitHub: https://github.com/Chabert-Liddell/robber
+* Source code: https://github.com/cran/robber
+* Date/Publication: 2024-02-07 13:50:02 UTC
+* Number of recursive dependencies: 144
+
+Run `revdepcheck::cloud_details(, "robber")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/robber/new/robber.Rcheck’
+* using R version 4.3.1 (2023-06-16)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* R was compiled by
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+* running under: Ubuntu 22.04.4 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘robber/DESCRIPTION’ ... OK
+...
+* checking tests ... OK
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... OK
+  ‘topological-analysis.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/robber/old/robber.Rcheck’
+* using R version 4.3.1 (2023-06-16)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* R was compiled by
+    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+* running under: Ubuntu 22.04.4 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘robber/DESCRIPTION’ ... OK
+...
+* checking tests ... OK
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... OK
+  ‘topological-analysis.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
+
+```
 # rTwig
 
 <details>
@@ -1881,141 +1213,67 @@ Run `revdepcheck::cloud_details(, "Seurat")` for more info
 
 </details>
 
-## Error before installation
+## In both
+
+*   checking whether package ‘Seurat’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/Seurat/new/Seurat.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
 
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/Seurat/new/Seurat.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘Seurat/DESCRIPTION’ ... OK
+* installing *source* package ‘Seurat’ ...
+** package ‘Seurat’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+using C++17
+g++ -std=gnu++17 -I"/opt/R/4.3.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.3.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppEigen/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppProgress/include' -I/usr/local/include    -fpic  -g -O2  -c ModularityOptimizer.cpp -o ModularityOptimizer.o
+g++ -std=gnu++17 -I"/opt/R/4.3.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.3.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppEigen/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppProgress/include' -I/usr/local/include    -fpic  -g -O2  -c RModularityOptimizer.cpp -o RModularityOptimizer.o
+In file included from /opt/R/4.3.1/lib/R/site-library/RcppEigen/include/Eigen/Core:205,
 ...
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘Seurat’ can be installed ... ERROR
-Installation failed.
-See ‘/tmp/workdir/Seurat/new/Seurat.Rcheck/00install.out’ for details.
-* DONE
-Status: 1 ERROR, 1 NOTE
-
-
-
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘SeuratObject’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ namespace ‘Matrix’ 1.5-4.1 is being loaded, but >= 1.6.4 is required
+Execution halted
+ERROR: lazy loading failed for package ‘Seurat’
+* removing ‘/tmp/workdir/Seurat/new/Seurat.Rcheck/Seurat’
 
 
 ```
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/Seurat/old/Seurat.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘Seurat/DESCRIPTION’ ... OK
+* installing *source* package ‘Seurat’ ...
+** package ‘Seurat’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’
+using C++17
+g++ -std=gnu++17 -I"/opt/R/4.3.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.3.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppEigen/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppProgress/include' -I/usr/local/include    -fpic  -g -O2  -c ModularityOptimizer.cpp -o ModularityOptimizer.o
+g++ -std=gnu++17 -I"/opt/R/4.3.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.3.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppEigen/include' -I'/opt/R/4.3.1/lib/R/site-library/RcppProgress/include' -I/usr/local/include    -fpic  -g -O2  -c RModularityOptimizer.cpp -o RModularityOptimizer.o
+In file included from /opt/R/4.3.1/lib/R/site-library/RcppEigen/include/Eigen/Core:205,
 ...
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... OK
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘Seurat’ can be installed ... ERROR
-Installation failed.
-See ‘/tmp/workdir/Seurat/old/Seurat.Rcheck/00install.out’ for details.
-* DONE
-Status: 1 ERROR, 1 NOTE
-
-
-
-
-
-```
-# speakeasyR
-
-<details>
-
-* Version: 0.1.3
-* GitHub: https://github.com/SpeakEasy-2/speakeasyR
-* Source code: https://github.com/cran/speakeasyR
-* Date/Publication: 2024-08-20 09:40:06 UTC
-* Number of recursive dependencies: 138
-
-Run `revdepcheck::cloud_details(, "speakeasyR")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/speakeasyR/new/speakeasyR.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘speakeasyR/DESCRIPTION’ ... OK
-...
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... OK
-  ‘speakeasyR.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/speakeasyR/old/speakeasyR.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘speakeasyR/DESCRIPTION’ ... OK
-...
-* checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... OK
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... OK
-  ‘speakeasyR.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
-
-
-
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘SeuratObject’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ namespace ‘Matrix’ 1.5-4.1 is being loaded, but >= 1.6.4 is required
+Execution halted
+ERROR: lazy loading failed for package ‘Seurat’
+* removing ‘/tmp/workdir/Seurat/old/Seurat.Rcheck/Seurat’
 
 
 ```
@@ -2080,154 +1338,6 @@ Status: 1 ERROR
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
 Package required but not available: ‘asbio’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# SubtypeDrug
-
-<details>
-
-* Version: 0.1.9
-* GitHub: https://github.com/hanjunwei-lab/SubtypeDrug
-* Source code: https://github.com/cran/SubtypeDrug
-* Date/Publication: 2024-04-17 06:40:02 UTC
-* Number of recursive dependencies: 153
-
-Run `revdepcheck::cloud_details(, "SubtypeDrug")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/SubtypeDrug/new/SubtypeDrug.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘SubtypeDrug/DESCRIPTION’ ... OK
-...
-* this is package ‘SubtypeDrug’ version ‘0.1.9’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/SubtypeDrug/old/SubtypeDrug.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘SubtypeDrug/DESCRIPTION’ ... OK
-...
-* this is package ‘SubtypeDrug’ version ‘0.1.9’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ChemmineR’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-# topologyGSA
-
-<details>
-
-* Version: 1.5.0
-* GitHub: NA
-* Source code: https://github.com/cran/topologyGSA
-* Date/Publication: 2023-09-25 18:20:02 UTC
-* Number of recursive dependencies: 86
-
-Run `revdepcheck::cloud_details(, "topologyGSA")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/topologyGSA/new/topologyGSA.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘topologyGSA/DESCRIPTION’ ... OK
-* this is package ‘topologyGSA’ version ‘1.5.0’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘qpgraph’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/topologyGSA/old/topologyGSA.Rcheck’
-* using R version 4.3.1 (2023-06-16)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* R was compiled by
-    gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-    GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘topologyGSA/DESCRIPTION’ ... OK
-* this is package ‘topologyGSA’ version ‘1.5.0’
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘qpgraph’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.

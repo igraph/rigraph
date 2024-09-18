@@ -52,59 +52,6 @@ Run `revdepcheck::cloud_details(, "CePa")` for more info
     Execution halted
     ```
 
-# manynet
-
-<details>
-
-* Version: 1.0.5
-* GitHub: https://github.com/stocnet/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2024-08-30 04:50:02 UTC
-* Number of recursive dependencies: 147
-
-Run `revdepcheck::cloud_details(, "manynet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘manynet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: make_generate
-    > ### Title: Making networks with a stochastic element
-    > ### Aliases: make_generate generate_random generate_configuration
-    > ###   generate_smallworld generate_scalefree generate_utilities
-    > ###   generate_fire generate_islands generate_citations
-    > ###   generate_permutation
-    > 
-    ...
-    3     3     4
-    4     3     5
-    5     4     6
-    6     6     7
-    # ℹ 3 more rows
-    > generate_islands(10)
-    Error in igraph::sample_islands(islands.n = islands, islands.size = c(table(cut(seq.int(n),  : 
-      At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 2. Invalid value
-    Calls: generate_islands -> <Anonymous>
-    Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 7 marked UTF-8 strings
-    ```
-
 # MetaNet
 
 <details>
