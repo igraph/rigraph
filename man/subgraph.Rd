@@ -2,7 +2,7 @@
 % Please edit documentation in R/structural.properties.R
 \name{subgraph}
 \alias{subgraph}
-\alias{subgraph.edges}
+\alias{subgraph_from_edges}
 \alias{induced_subgraph}
 \title{Subgraph of a graph}
 \usage{
@@ -14,7 +14,7 @@ induced_subgraph(
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 )
 
-subgraph.edges(graph, eids, delete.vertices = TRUE)
+subgraph_from_edges(graph, eids, delete.vertices = TRUE)
 }
 \arguments{
 \item{graph}{The original graph.}
@@ -48,20 +48,20 @@ vertices and all the edges among them.
 in a graph. This means that exactly the specified vertices and all the edges
 between them will be kept in the result graph.
 
-\code{subgraph.edges()} calculates the subgraph of a graph. For this function
+\code{subgraph_from_edges()} calculates the subgraph of a graph. For this function
 one can specify the vertices and edges to keep. This function will be
 renamed to \code{subgraph()} in the next major version of igraph.
 
 The \code{subgraph()} function currently does the same as \code{induced_subgraph()}
 (assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
 is deprecated. In the next major version, \code{subgraph()} will overtake the
-functionality of \code{subgraph.edges()}.
+functionality of \code{subgraph_from_edges()}.
 }
 \examples{
 
 g <- make_ring(10)
 g2 <- induced_subgraph(g, 1:7)
-g3 <- subgraph.edges(g, 1:5)
+g3 <- subgraph_from_edges(g, 1:5)
 
 }
 \seealso{

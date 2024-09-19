@@ -1161,16 +1161,16 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' in a graph. This means that exactly the specified vertices and all the edges
 #' between them will be kept in the result graph.
 #'
-#' `subgraph.edges()` calculates the subgraph of a graph. For this function
+#' `subgraph_from_edges()` calculates the subgraph of a graph. For this function
 #' one can specify the vertices and edges to keep. This function will be
 #' renamed to `subgraph()` in the next major version of igraph.
 #'
 #' The `subgraph()` function currently does the same as `induced_subgraph()`
 #' (assuming \sQuote{`auto`} as the `impl` argument), but this behaviour
 #' is deprecated. In the next major version, `subgraph()` will overtake the
-#' functionality of `subgraph.edges()`.
+#' functionality of `subgraph_from_edges()`.
 #'
-#' @aliases subgraph.edges
+#' @aliases subgraph_from_edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1181,7 +1181,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #'
 #' g <- make_ring(10)
 #' g2 <- induced_subgraph(g, 1:7)
-#' g3 <- subgraph.edges(g, 1:5)
+#' g3 <- subgraph_from_edges(g, 1:5)
 #'
 subgraph <- function(graph, vids) {
   induced_subgraph(graph, vids)
@@ -1221,7 +1221,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
 #' @export
-subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
+subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
@@ -1233,6 +1233,22 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
   res
 }
+
+#' Subgraph of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `subgraph.edges()` was renamed to `subgraph_from_edges()` to create a more
+#' consistent API.
+#' @inheritParams subgraph_from_edges
+#' @keywords internal
+#' @export
+subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.4", "subgraph.edges()", "subgraph_from_edges()")
+  subgraph_from_edges(graph = graph, eids = eids, delete.vertices = delete.vertices)
+} # nocov end
+
 
 #' Transitivity of a graph
 #'
