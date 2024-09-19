@@ -63,7 +63,7 @@ LinkingTo:
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
     knitr
-Config/Needs/build: roxygen2, devtools, irlba, pkgconfig, igraph/igraph.r2cdocs
+Config/Needs/build: roxygen2, devtools, irlba, pkgconfig, igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
 Config/Needs/website: readr
 Config/testthat/edition: 3
@@ -71,7 +71,6 @@ Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace",
-    "igraph.r2cdocs::cdocs_roclet"), packages = "igraph.r2cdocs")
+Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "igraph.r2cdocs::cdocs_roclet", "devtag::dev_roclet"), packages = "igraph.r2cdocs")
 RoxygenNote: 7.3.2
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)

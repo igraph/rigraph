@@ -18,6 +18,8 @@ g2
 }
 \seealso{
 Constructor modifiers (and related functions)
+\code{\link{.apply_modifiers}()},
+\code{\link{.extract_constructor_and_modifiers}()},
 \code{\link{make_}()},
 \code{\link{sample_}()},
 \code{\link{simplified}()},

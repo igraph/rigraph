@@ -73,6 +73,8 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 
 Constructor modifiers (and related functions)
+\code{\link{.apply_modifiers}()},
+\code{\link{.extract_constructor_and_modifiers}()},
 \code{\link{make_}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},

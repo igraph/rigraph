@@ -17,6 +17,8 @@ make_(ring(10), with_graph_(name = "10-ring"))
 }
 \seealso{
 Constructor modifiers (and related functions)
+\code{\link{.apply_modifiers}()},
+\code{\link{.extract_constructor_and_modifiers}()},
 \code{\link{make_}()},
 \code{\link{sample_}()},
 \code{\link{simplified}()},

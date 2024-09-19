@@ -668,7 +668,7 @@ graph.atlas <- function(n) { # nocov start
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
-#' @noRd
+#' @dev
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -717,7 +717,7 @@ graph.atlas <- function(n) { # nocov start
 #' @param mods The modifiers to apply
 #' @family constructor modifiers
 #' @return The modified graph
-#' @noRd
+#' @dev
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
