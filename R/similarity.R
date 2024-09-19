@@ -44,7 +44,7 @@
 #' @keywords graphs
 #' @family similarity
 #' @family cocitation
-#' @cdocs igraph_similarity_jaccard igraph_similarity_dice
+#' @cdocs igraph_similarity_jaccard igraph_similarity_dice igraph_similarity_inverse_log_weighted
 #' @export
 #' @examples
 #'
@@ -128,6 +128,30 @@ similarity.dice <- function(graph,
     details = 'similarity(method = "dice")'
   )
 }
+
+#' Similarity measures of two vertices (inverse log-weighted)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Please use [`similarity()`] with `method = "invlogweighted"` instead.
+#' @inheritParams similarity
+#' @keywords internal
 #' @export
-#' @cdocs igraph_similarity_inverse_log_weighted
-similarity.invlogweighted <- similarity_inverse_log_weighted_impl
+similarity.invlogweighted <- function(graph,
+                               vids = V(graph),
+                               mode = c("all", "out", "in", "total")) {
+  similarity(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    method = "invlogweighted"
+  )
+
+  lifecycle::deprecate_soft(
+    "2.0.4",
+    "similarity.invlogweighted()",
+    'similarity(method)',
+    details = 'similarity(method = "invlogweighted")'
+  )
+}
