@@ -19,7 +19,7 @@ mag_sort <- function(x) {
 
 test_that("Undirected, unweighted case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 15, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 15, directed = FALSE)
 
   no <- 7
   A <- g[]
@@ -74,7 +74,7 @@ test_that("Undirected, unweighted case works", {
 
 test_that("Undirected, weighted case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   no <- 3
@@ -128,7 +128,7 @@ test_that("Undirected, weighted case works", {
 
 test_that("Directed, unweighted case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = TRUE)
+  g <- sample_gnm(10, 20, directed = TRUE)
 
   no <- 3
   A <- g[]
@@ -191,7 +191,7 @@ test_that("Directed, unweighted case works", {
 
 test_that("Directed, weighted case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = TRUE)
+  g <- sample_gnm(10, 20, directed = TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   no <- 3
@@ -250,7 +250,7 @@ test_that("Directed, weighted case works", {
 test_that("Issue #50 is resolved", {
   withr::local_seed(12345)
 
-  g <- erdos.renyi.game(15, .4)
+  g <- sample_gnp(15, .4)
   w <- -log(runif(ecount(g)))
   X1 <- embed_adjacency_matrix(g, 2, weights = w)
 
