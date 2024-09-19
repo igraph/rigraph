@@ -2,8 +2,6 @@
 % Please edit documentation in R/similarity.R
 \name{similarity}
 \alias{similarity}
-\alias{similarity.jaccard}
-\alias{similarity.dice}
 \alias{similarity.invlogweighted}
 \title{Similarity measures of two vertices}
 \usage{
@@ -81,3 +79,5 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \concept{cocitation}
 \concept{similarity}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_jaccard}{\code{igraph_similarity_jaccard()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_dice}{\code{igraph_similarity_dice()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_inverse_log_weighted}{\code{igraph_similarity_inverse_log_weighted()}}.}
+
