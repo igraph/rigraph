@@ -32,3 +32,4 @@ Constructor modifiers (and related functions)
 \code{\link{without_multiples}()}
 }
 \concept{constructor modifiers}
+\keyword{internal}
