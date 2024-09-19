@@ -25,7 +25,7 @@
 #' Eytan Adar: Friends and neighbors on the Web. Social Networks,
 #' 25(3):211-230, 2003.
 #'
-#' @aliases similarity.jaccard similarity.dice similarity.invlogweighted
+#' @aliases similarity.dice similarity.invlogweighted
 #' @param graph The input graph.
 #' @param vids The vertex ids for which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,
@@ -44,6 +44,7 @@
 #' @keywords graphs
 #' @family similarity
 #' @family cocitation
+#' @cdocs igraph_similarity_jaccard
 #' @export
 #' @examples
 #'
@@ -62,17 +63,42 @@ similarity <- function(graph, vids = V(graph),
                        )) {
   method <- igraph.match.arg(method)
   if (method == "jaccard") {
-    similarity.jaccard(graph, vids, mode, loops)
+    similarity_jaccard_impl(graph, vids, mode, loops)
   } else if (method == "dice") {
-    similarity.dice(graph, vids, mode, loops)
+    similarity_dice_impl(graph, vids, mode, loops)
   } else if (method == "invlogweighted") {
-    similarity.invlogweighted(graph, vids, mode)
+    similarity_inverse_log_weighted_impl(graph, vids, mode)
   }
 }
 
+#' Similarity measures of two vertices (Jaccard)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Please use [`similarity()`] with `method = "jaccard"` instead.
+#' @inheritParams similarity
+#' @keywords internal
 #' @export
-#' @cdocs igraph_similarity_jaccard
-similarity.jaccard <- similarity_jaccard_impl
+similarity.jaccard <- function(graph,
+                               vids = V(graph),
+                               mode = c("all", "out", "in", "total"),
+                               loops = FALSE) {
+  similarity(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    loops = loops,
+    method = "jaccard"
+  )
+
+  lifecycle::deprecate_soft(
+    "2.0.4",
+    "similarity.jaccard()",
+    'similarity(method)',
+    details = 'similarity(method = "jaccard")'
+  )
+}
 #' @export
 #' @cdocs igraph_similarity_dice
 similarity.dice <- similarity_dice_impl
