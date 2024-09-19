@@ -19,7 +19,7 @@ mag_sort <- function(x) {
 
 test_that("Undirected, unweighted, D-A case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
   A <- as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix") - g[]
@@ -81,7 +81,7 @@ test_that("Undirected, unweighted, D-A case works", {
 
 test_that("Undirected, unweighted, DAD case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
   D12 <- diag(1 / sqrt(degree(g)))
@@ -144,7 +144,7 @@ test_that("Undirected, unweighted, DAD case works", {
 
 test_that("Undirected, unweighted, I-DAD case works", {
   withr::local_seed(42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
   D12 <- diag(1 / sqrt(degree(g)))
@@ -207,7 +207,7 @@ test_that("Undirected, unweighted, I-DAD case works", {
 
 test_that("Undirected, weighted, D-A case works", {
   withr::local_seed(42 * 42)
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   no <- 3
@@ -271,7 +271,7 @@ test_that("Undirected, weighted, D-A case works", {
 test_that("Undirected, unweighted, DAD case works", {
   withr::local_seed(42)
 
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
   D12 <- diag(1 / sqrt(degree(g)))
@@ -335,7 +335,7 @@ test_that("Undirected, unweighted, DAD case works", {
 test_that("Undirected, unweighted, I-DAD case works", {
   withr::local_seed(42)
 
-  g <- random.graph.game(10, 20, type = "gnm", directed = FALSE)
+  g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
   D12 <- diag(1 / sqrt(degree(g)))
@@ -399,7 +399,7 @@ test_that("Undirected, unweighted, I-DAD case works", {
 test_that("Directed, unweighted, OAP case works", {
   withr::local_seed(42 * 42)
 
-  g <- random.graph.game(10, 30, type = "gnm", directed = TRUE)
+  g <- sample_gnm(10, 30, directed = TRUE)
 
   no <- 3
   O12 <- diag(1 / sqrt(degree(g, mode = "out")))
@@ -465,7 +465,7 @@ test_that("Directed, unweighted, OAP case works", {
 test_that("Directed, weighted case works", {
   withr::local_seed(42 * 42)
 
-  g <- random.graph.game(10, 30, type = "gnm", directed = TRUE)
+  g <- sample_gnm(10, 30, directed = TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   no <- 3
