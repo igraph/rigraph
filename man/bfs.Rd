@@ -19,7 +19,7 @@ bfs(
   callback = NULL,
   extra = NULL,
   rho = parent.frame(),
-  neimode
+  neimode = deprecated()
 )
 }
 \arguments{
@@ -64,8 +64,8 @@ is called whenever a vertex is visited. See details below.}
 
 \item{rho}{The environment in which the callback function is evaluated.}
 
-\item{neimode}{This argument is deprecated from igraph 1.3.0; use
-\code{mode} instead.}
+\item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated
+from igraph 1.3.0; use \code{mode} instead.}
 }
 \value{
 A named list with the following entries:
