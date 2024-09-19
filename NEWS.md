@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9061
+
+## Chore
+
+- Update vendored sources to igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118 (#1470).
+
+- Results from revdepcheck (#1506).
+
+
 # igraph 2.0.3.9060
 
 ## Testing
