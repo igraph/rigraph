@@ -4,7 +4,7 @@
 test_that("sample_correlated_gnp works", {
   withr::local_seed(42)
 
-  g <- erdos.renyi.game(10, .1)
+  g <- sample_gnp(10, .1)
   g2 <- sample_correlated_gnp(g, corr = 1, p = g$p, permutation = NULL)
   expect_equal(g[], g2[])
 
@@ -16,7 +16,7 @@ test_that("sample_correlated_gnp works", {
 test_that("sample_correlated_gnp works when p is not given", {
   withr::local_seed(42)
 
-  g <- erdos.renyi.game(10, .1)
+  g <- sample_gnp(10, .1)
   g2 <- sample_correlated_gnp(g, corr = 1)
   expect_equal(g[], g2[])
 
@@ -54,7 +54,7 @@ test_that("sample_correlated_gnp corner cases work", {
     graph.isomorphic(g, g2)
   }
 
-  g <- erdos.renyi.game(10, .3)
+  g <- sample_gnp(10, .3)
   g2 <- sample_correlated_gnp(g, corr = 0.000001, p = .99999999)
   expect_true(is.full(g2))
 
@@ -62,7 +62,7 @@ test_that("sample_correlated_gnp corner cases work", {
   expect_equal(ecount(g3), 0)
   expect_equal(vcount(g3), 10)
 
-  gg <- erdos.renyi.game(10, .3, directed = TRUE)
+  gg <- sample_gnp(10, .3, directed = TRUE)
   gg2 <- sample_correlated_gnp(gg, corr = 0.000001, p = .99999999)
   expect_true(is.full(gg2))
 
@@ -74,13 +74,13 @@ test_that("sample_correlated_gnp corner cases work", {
 test_that("permutation works for sample_correlated_gnp", {
   withr::local_seed(42)
 
-  g <- erdos.renyi.game(10, .3)
+  g <- sample_gnp(10, .3)
   perm <- sample(vcount(g))
   g2 <- sample_correlated_gnp(g, corr = .99999, p = .3, permutation = perm)
   g <- permute(g, perm)
   expect_equal(g[], g2[])
 
-  g <- erdos.renyi.game(10, .3)
+  g <- sample_gnp(10, .3)
   perm <- sample(vcount(g))
   g2 <- sample_correlated_gnp(g, corr = 1, p = .3, permutation = perm)
   g <- permute(g, perm)
