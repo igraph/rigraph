@@ -1,13 +1,13 @@
-test_that("as.undirected keeps attributes", {
+test_that("as_undirected() keeps attributes", {
   g <- graph_from_literal(A + -+B, A - -+C, C + -+D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
-  g2 <- as.undirected(g, mode = "collapse")
+  g2 <- as_undirected(g, mode = "collapse")
   df2 <- as_data_frame(g2)
-  g3 <- as.undirected(g, mode = "each")
+  g3 <- as_undirected(g, mode = "each")
   df3 <- as_data_frame(g3)
-  g4 <- as.undirected(g, mode = "mutual")
+  g4 <- as_undirected(g, mode = "mutual")
   df4 <- as_data_frame(g4)
 
   expect_equal(g2$name, g$name)

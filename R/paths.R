@@ -170,7 +170,7 @@ is_dag <- is_dag_impl
 #'
 #' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
 #' is_acyclic(g)
-#' is_acyclic(as.undirected(g))
+#' is_acyclic(as_undirected(g))
 #' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
 #' and directed graphs.
 #' @family cycles

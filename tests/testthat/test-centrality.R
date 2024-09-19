@@ -19,6 +19,6 @@ test_that("subgraph_centrality() ignored edge directions", {
   g <- sample_gnm(10, 20, directed = TRUE)
   expect_equal(
     subgraph_centrality((g)),
-    subgraph_centrality(as.undirected(g, mode = "each"))
+    subgraph_centrality(as_undirected(g, mode = "each"))
   )
 })
