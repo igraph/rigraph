@@ -664,11 +664,10 @@ graph.atlas <- function(n) { # nocov start
 #' @param .variant Constructor variant; must be one of \sQuote{make},
 #'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
 #'   specification has deterministic and random variants.
-#' @family constructor modifiers
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
-#' @noRd
+#' @dev
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -715,9 +714,8 @@ graph.atlas <- function(n) { # nocov start
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
-#' @family constructor modifiers
 #' @return The modified graph
-#' @noRd
+#' @dev
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
