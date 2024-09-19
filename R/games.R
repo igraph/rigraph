@@ -710,33 +710,13 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
 
-  on.exit(.Call(R_igraph_finalizer))
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnp, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
   } else if (type == "gnm") {
     lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnm()")
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnm, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
   }
-
-  if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
-    res$type <- type
-    res$loops <- loops
-    if (type == "gnp") {
-      res$p <- p.or.m
-    }
-    if (type == "gnm") {
-      res$m <- p.or.m
-    }
-  }
-  res
 }
 
 #' @family games
@@ -745,33 +725,13 @@ random.graph.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
 
-  on.exit(.Call(R_igraph_finalizer))
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnp, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
   } else if (type == "gnm") {
     lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnm()")
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnm, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
   }
-
-  if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
-    res$type <- type
-    res$loops <- loops
-    if (type == "gnp") {
-      res$p <- p.or.m
-    }
-    if (type == "gnm") {
-      res$m <- p.or.m
-    }
-  }
-  res
 }
 ## -----------------------------------------------------------------
 
