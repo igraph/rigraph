@@ -165,7 +165,9 @@
 <url><loc>https://r.igraph.org/reference/diversity.html</loc></url>
 <url><loc>https://r.igraph.org/reference/dominator.tree.html</loc></url>
 <url><loc>https://r.igraph.org/reference/dominator_tree.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dot-apply_modifiers.html</loc></url>
 <url><loc>https://r.igraph.org/reference/dot-data.html</loc></url>
+<url><loc>https://r.igraph.org/reference/dot-extract_constructor_and_modifiers.html</loc></url>
 <url><loc>https://r.igraph.org/reference/dyad.census.html</loc></url>
 <url><loc>https://r.igraph.org/reference/dyad_census.html</loc></url>
 <url><loc>https://r.igraph.org/reference/each_edge.html</loc></url>
