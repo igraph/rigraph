@@ -1453,7 +1453,7 @@ as_igraph_es <- function(graph, e) {
       if (!"name" %in% vertex_attr_names(graph)) {
         vp <- as.numeric(vp)
       }
-      res[Pairs] <- get.edge.ids(graph, vp)
+      res[Pairs] <- get_edge_ids(graph, vp)
     }
 
     ## Based on edge ids/names

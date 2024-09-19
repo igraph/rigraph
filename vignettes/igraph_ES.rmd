@@ -153,7 +153,7 @@ g
 Ahora tenemos un grafo no dirigido con 40 vértices y 89 aristas. Los IDs de los vértices y aristas son siempre *contiguos*, así que si borras un vértice, todos los vértices subsecuentes se vuelven a enumerar. Cuando se re-numera un vértice, las aristas **no** se vuelven a enumerar, pero sí sus vértices origen y destino. Puedes usar `delete_vertices()` y `delete_edges()` para realizar estas operaciones. Por ejemplo, para borrar la arista que conecta los vértices `1-34`, obtén su ID y luego bórrala:
 
 ```{r echo = TRUE}
-edge_id_para_borrar <- get.edge.ids(g, c(1,34))
+edge_id_para_borrar <- get_edge_ids(g, c(1,34))
 edge_id_para_borrar
 ```
 
@@ -168,11 +168,11 @@ g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
 
-El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get.edge.ids()`:
+El ejemplo anterior muestra que también puedes referirte a las aristas indicando los IDs de los vértices origen y destino, conectados por el símbolo `|`. En el ejemplo, `"10|1"` significa la arista que conecta el vértice `10` con el vértice `1`. Por supuesto, también puedes usar los IDs de las aristas directamente, o recuperarlos con la función `get_edge_ids()`:
 
 ```{r echo = TRUE}
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
+g <- delete_edges(g, get_edge_ids(g, c(1,5, 4,5)))
 plot(g)
 ```
 
