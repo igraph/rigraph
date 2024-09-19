@@ -183,7 +183,7 @@
   ##################################################################
 
   if (!missing(from)) {
-    res <- get.edge.ids(x, rbind(from, to), error = FALSE)
+    res <- get_edge_ids(x, rbind(from, to), error = FALSE)
     if (edges) {
       ## nop
     } else if (!is.null(attr)) {

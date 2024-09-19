@@ -251,7 +251,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g
 #'
 #' g <- make_ring(5)
-#' g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+#' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
@@ -490,8 +490,6 @@ get.edges <- function(graph, es) {
 #' @param error Logical scalar, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
-#' @param multi
-#'   `r lifecycle::badge("deprecated")`
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
 #'   zero is reported. (If the `error` argument is `FALSE`.)
@@ -502,34 +500,24 @@ get.edges <- function(graph, es) {
 #' @examples
 #'
 #' g <- make_ring(10)
-#' ei <- get.edge.ids(g, c(1, 2, 4, 5))
+#' ei <- get_edge_ids(g, c(1, 2, 4, 5))
 #' E(g)[ei]
 #'
 #' ## non-existant edge
-#' get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
+#' get_edge_ids(g, c(2, 1, 1, 4, 5, 4))
 #'
 #' ## For multiple edges, a single edge id is returned,
 #' ## as many times as corresponding pairs in the vertex series.
 #' g <- make_graph(rep(c(1, 2), 5))
-#' eis <- get.edge.ids(g, c(1, 2, 1, 2))
+#' eis <- get_edge_ids(g, c(1, 2, 1, 2))
 #' eis
 #' E(g)[eis]
 #'
-get.edge.ids <- function(
-                        graph,
-                        vp,
-                        directed = TRUE,
-                        error = FALSE,
-                        multi = deprecated()) {
+get_edge_ids <- function(graph,
+                         vp,
+                         directed = TRUE,
+                         error = FALSE) {
   ensure_igraph(graph)
-
-  if (lifecycle::is_present(multi)) {
-    if (isTRUE(multi)) {
-      lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
-    }
-
-    lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -538,6 +526,34 @@ get.edge.ids <- function(
   ) + 1
 }
 
+#' Find the edge ids based on the incident vertices of the edges
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.edge.ids()` was renamed to `get_edge_ids()` to create a more
+#' consistent API.
+#' @inheritParams get_edge_ids
+#' @param multi
+#'   `r lifecycle::badge("deprecated")`
+#' @keywords internal
+#' @export
+get.edge.ids <- function(graph,
+                         vp,
+                         directed = TRUE,
+                         error = FALSE,
+                         multi = deprecated()) {
+
+  if (lifecycle::is_present(multi)) {
+    if (isTRUE(multi)) {
+      lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
+    }
+
+    lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
+  }
+  lifecycle::deprecate_soft("2.0.4", "get.edge.ids()", "get_edge_ids()")
+  get_edge_ids(graph = graph, vp = vp, directed = directed, error = error)
+}
 
 #' Order (number of vertices) of a graph
 #'

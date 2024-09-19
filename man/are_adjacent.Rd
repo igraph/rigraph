@@ -37,7 +37,7 @@ Other structural queries:
 \code{\link{[[.igraph}()},
 \code{\link{adjacent_vertices}()},
 \code{\link{ends}()},
-\code{\link{get.edge.ids}()},
+\code{\link{get_edge_ids}()},
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},

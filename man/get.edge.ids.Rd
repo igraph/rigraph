@@ -22,58 +22,10 @@ returned for the non-existant edge(s).}
 
 \item{multi}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
-\value{
-A numeric vector of edge ids, one for each pair of input vertices.
-If there is no edge in the input graph for a given pair of vertices, then
-zero is reported. (If the \code{error} argument is \code{FALSE}.)
-}
 \description{
-Find the edges in an igraph graph that have the specified end points. This
-function handles multi-graph (graphs with multiple edges) and can consider
-or ignore the edge directions in directed graphs.
-}
-\details{
-igraph vertex ids are natural numbers, starting from one, up to the number
-of vertices in the graph. Similarly, edges are also numbered from one, up to
-the number of edges.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-This function allows finding the edges of the graph, via their incident
-vertices.
+\code{get.edge.ids()} was renamed to \code{get_edge_ids()} to create a more
+consistent API.
 }
-\examples{
-
-g <- make_ring(10)
-ei <- get.edge.ids(g, c(1, 2, 4, 5))
-E(g)[ei]
-
-## non-existant edge
-get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
-
-## For multiple edges, a single edge id is returned,
-## as many times as corresponding pairs in the vertex series.
-g <- make_graph(rep(c(1, 2), 5))
-eis <- get.edge.ids(g, c(1, 2, 1, 2))
-eis
-E(g)[eis]
-
-}
-\seealso{
-Other structural queries: 
-\code{\link{[.igraph}()},
-\code{\link{[[.igraph}()},
-\code{\link{adjacent_vertices}()},
-\code{\link{are_adjacent}()},
-\code{\link{ends}()},
-\code{\link{gorder}()},
-\code{\link{gsize}()},
-\code{\link{head_of}()},
-\code{\link{incident}()},
-\code{\link{incident_edges}()},
-\code{\link{is_directed}()},
-\code{\link{neighbors}()},
-\code{\link{tail_of}()}
-}
-\author{
-Gabor Csardi \email{csardi.gabor@gmail.com}
-}
-\concept{structural queries}
+\keyword{internal}
