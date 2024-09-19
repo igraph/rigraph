@@ -26,18 +26,4 @@ remaining, unparsed arguments.
 This is a helper function for the common parts of \code{make_()} and
 \code{sample_()}.
 }
-\seealso{
-Constructor modifiers (and related functions)
-\code{\link{.apply_modifiers}()},
-\code{\link{make_}()},
-\code{\link{sample_}()},
-\code{\link{simplified}()},
-\code{\link{with_edge_}()},
-\code{\link{with_graph_}()},
-\code{\link{with_vertex_}()},
-\code{\link{without_attr}()},
-\code{\link{without_loops}()},
-\code{\link{without_multiples}()}
-}
-\concept{constructor modifiers}
 \keyword{internal}
