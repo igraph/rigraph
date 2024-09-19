@@ -25,7 +25,7 @@
 #' Eytan Adar: Friends and neighbors on the Web. Social Networks,
 #' 25(3):211-230, 2003.
 #'
-#' @aliases similarity.dice similarity.invlogweighted
+#' @aliases similarity.invlogweighted
 #' @param graph The input graph.
 #' @param vids The vertex ids for which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,
@@ -44,7 +44,7 @@
 #' @keywords graphs
 #' @family similarity
 #' @family cocitation
-#' @cdocs igraph_similarity_jaccard
+#' @cdocs igraph_similarity_jaccard igraph_similarity_dice
 #' @export
 #' @examples
 #'
@@ -99,9 +99,35 @@ similarity.jaccard <- function(graph,
     details = 'similarity(method = "jaccard")'
   )
 }
+
+#' Similarity measures of two vertices (Dice)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Please use [`similarity()`] with `method = "dice"` instead.
+#' @inheritParams similarity
+#' @keywords internal
 #' @export
-#' @cdocs igraph_similarity_dice
-similarity.dice <- similarity_dice_impl
+similarity.dice <- function(graph,
+                               vids = V(graph),
+                               mode = c("all", "out", "in", "total"),
+                               loops = FALSE) {
+  similarity(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    loops = loops,
+    method = "dice"
+  )
+
+  lifecycle::deprecate_soft(
+    "2.0.4",
+    "similarity.dice()",
+    'similarity(method)',
+    details = 'similarity(method = "dice")'
+  )
+}
 #' @export
 #' @cdocs igraph_similarity_inverse_log_weighted
 similarity.invlogweighted <- similarity_inverse_log_weighted_impl
