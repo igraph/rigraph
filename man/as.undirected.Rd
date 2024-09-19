@@ -4,7 +4,7 @@
 \alias{as.undirected}
 \title{Convert between undirected and unundirected graphs}
 \usage{
-as.undirected(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
+as.undirected(graph, mode = c("collapse", "each", "mutual"))
 }
 \arguments{
 \item{graph}{The graph to convert.}

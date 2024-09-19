@@ -97,7 +97,7 @@ There are five pre-defined parameter settings as well, these are called
 }
 \examples{
 
-g <- as.undirected(sample_pa(100, m = 1))
+g <- as_undirected(sample_pa(100, m = 1))
 l <- layout_with_drl(g, options = list(simmer.attraction = 0))
 plot(g, layout = l, vertex.size = 3, vertex.label = NA)
 
