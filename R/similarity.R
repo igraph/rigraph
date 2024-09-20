@@ -25,7 +25,6 @@
 #' Eytan Adar: Friends and neighbors on the Web. Social Networks,
 #' 25(3):211-230, 2003.
 #'
-#' @aliases similarity.invlogweighted
 #' @param graph The input graph.
 #' @param vids The vertex ids for which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,

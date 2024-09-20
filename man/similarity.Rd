@@ -2,7 +2,6 @@
 % Please edit documentation in R/similarity.R
 \name{similarity}
 \alias{similarity}
-\alias{similarity.invlogweighted}
 \title{Similarity measures of two vertices}
 \usage{
 similarity(
