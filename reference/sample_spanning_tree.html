@@ -76,11 +76,11 @@ component of the graph.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An edge sequence containing the edges of the spanning tree. Use
-<code><a href="subgraph.html">subgraph.edges()</a></code> to extract the corresponding subgraph.</p>
+<code><a href="subgraph.html">subgraph_from_edges()</a></code> to extract the corresponding subgraph.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="subgraph.html">subgraph.edges()</a></code> to extract the tree itself</p>
+    <div class="dont-index"><p><code><a href="subgraph.html">subgraph_from_edges()</a></code> to extract the tree itself</p>
 <p>Other trees:
 <code><a href="is_forest.html">is_forest</a>()</code>,
 <code><a href="is_tree.html">is_tree</a>()</code>,
@@ -97,7 +97,7 @@ component of the graph.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="disjoint_union.html">%du%</a></span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu">sample_spanning_tree</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="subgraph.html">subgraph.edges</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">edges</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu"><a href="subgraph.html">subgraph_from_edges</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">edges</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

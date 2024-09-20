@@ -60,7 +60,7 @@ vertices and all the edges among them.</p>
 <span>  impl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"copy_and_delete"</span>, <span class="st">"create_from_scratch"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">subgraph.edges</span><span class="op">(</span><span class="va">graph</span>, <span class="va">eids</span>, delete.vertices <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">subgraph_from_edges</span><span class="op">(</span><span class="va">graph</span>, <span class="va">eids</span>, delete.vertices <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -105,13 +105,13 @@ not have any adjacent edges in <code>eids</code>.</p></dd>
     <p><code>induced_subgraph()</code> calculates the induced subgraph of a set of vertices
 in a graph. This means that exactly the specified vertices and all the edges
 between them will be kept in the result graph.</p>
-<p><code>subgraph.edges()</code> calculates the subgraph of a graph. For this function
+<p><code>subgraph_from_edges()</code> calculates the subgraph of a graph. For this function
 one can specify the vertices and edges to keep. This function will be
 renamed to <code>subgraph()</code> in the next major version of igraph.</p>
 <p>The <code>subgraph()</code> function currently does the same as <code>induced_subgraph()</code>
 (assuming ‘<code>auto</code>’ as the <code>impl</code> argument), but this behaviour
 is deprecated. In the next major version, <code>subgraph()</code> will overtake the
-functionality of <code>subgraph.edges()</code>.</p>
+functionality of <code>subgraph_from_edges()</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -150,7 +150,7 @@ functionality of <code>subgraph.edges()</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">induced_subgraph</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu">subgraph.edges</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="fu">subgraph_from_edges</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
