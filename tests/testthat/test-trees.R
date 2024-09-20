@@ -78,13 +78,13 @@ test_that("to_prufer and make_from_prufer works for trees", {
   g <- make_tree(13, 3, mode = "out")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
-  g3 <- as.undirected(g)
+  g3 <- as_undirected(g)
   expect_true(isomorphic(g2, g3))
 
   g <- make_tree(13, 3, mode = "in")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
-  g3 <- as.undirected(g)
+  g3 <- as_undirected(g)
   expect_true(isomorphic(g2, g3))
 })
 

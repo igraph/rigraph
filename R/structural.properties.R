@@ -1275,7 +1275,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
 #'
 #' The `barrat` type of transitivity does not work for graphs with
 #' multiple and/or loop edges. If you want to calculate it for a directed
-#' graph, call [as.undirected()] with the `collapse` mode first.
+#' graph, call [as_undirected()] with the `collapse` mode first.
 #'
 #' @param graph The graph to analyze.
 #' @param type The type of the transitivity to calculate. Possible values:
