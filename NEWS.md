@@ -1,5 +1,34 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9062
+
+## Features
+
+- Create get_edge_ids() as new name for get.edge.ids() (#1510).
+
+## Chore
+
+- Formally deprecate `similarity.<something>()` functions (#1515).
+
+- Update vendored sources to igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a.
+
+## Documentation
+
+- Use {devtag} for internal function docs (#1507).
+
+## doc
+
+- Improve sample_gnp() examples.
+
+## lifecycle
+
+- `erdos.renyi.game()` and `random.graph.game()` soft deprecation (#1509).
+
+## Uncategorized
+
+- Lifecycle and tests in structural.properties (#1505).
+
+
 # igraph 2.0.3.9061
 
 ## Chore
