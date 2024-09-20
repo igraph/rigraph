@@ -36,9 +36,11 @@
 <url><loc>https://r.igraph.org/reference/as.directed.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as.igraph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as.matrix.igraph.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as.undirected.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_adj_list.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_adjacency_matrix.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_biadjacency_matrix.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_directed.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_edgelist.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_graphnel.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_ids.html</loc></url>

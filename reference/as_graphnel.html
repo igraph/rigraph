@@ -85,12 +85,12 @@ will be used for this purpose.</p>
 <code><a href="as_adj_list.html">as_adj_list()</a></code> and <code><a href="graph_from_adj_list.html">graph_from_adj_list()</a></code> for
 other graph representations.</p>
 <p>Other conversion:
-<code><a href="as.directed.html">as.directed</a>()</code>,
 <code><a href="as.matrix.igraph.html">as.matrix.igraph</a>()</code>,
 <code><a href="as_adj_list.html">as_adj_list</a>()</code>,
 <code><a href="as_adjacency_matrix.html">as_adjacency_matrix</a>()</code>,
 <code><a href="as_biadjacency_matrix.html">as_biadjacency_matrix</a>()</code>,
 <code><a href="graph_from_data_frame.html">as_data_frame</a>()</code>,
+<code><a href="as_directed.html">as_directed</a>()</code>,
 <code><a href="as_edgelist.html">as_edgelist</a>()</code>,
 <code><a href="as_long_data_frame.html">as_long_data_frame</a>()</code>,
 <code><a href="graph_from_adj_list.html">graph_from_adj_list</a>()</code>,
@@ -105,10 +105,10 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 179c58b UNW- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d5bcac0 UNW- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 179c58b (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d5bcac0 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Directed</span></span></span>
@@ -117,9 +117,9 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL2</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 51ec35a DNW- 10 9 -- In-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 230b46b DNW- 10 9 -- In-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 51ec35a (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 230b46b (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] b-&gt;a c-&gt;a d-&gt;a e-&gt;a f-&gt;a g-&gt;a h-&gt;a i-&gt;a j-&gt;a</span>
 </code></pre></div>
     </div>
