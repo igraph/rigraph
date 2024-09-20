@@ -125,15 +125,15 @@ to_prufer <- to_prufer_impl
 #'   given vertex will be processed, and the result will be a spanning tree of the
 #'   component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#'   [subgraph.edges()] to extract the corresponding subgraph.
+#'   [subgraph_from_edges()] to extract the corresponding subgraph.
 #'
 #' @keywords graph
-#' @seealso [subgraph.edges()] to extract the tree itself
+#' @seealso [subgraph_from_edges()] to extract the tree itself
 #' @examples
 #'
 #' g <- make_full_graph(10) %du% make_full_graph(5)
 #' edges <- sample_spanning_tree(g)
-#' forest <- subgraph.edges(g, edges)
+#' forest <- subgraph_from_edges(g, edges)
 #'
 #' @family trees
 #' @export
