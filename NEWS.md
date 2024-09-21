@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9063
+
+## Chore
+
+- Update vendored sources to igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703 (#1517).
+
+- Start renaming as.directed() and as.undirected() to `as_di… (`\#1513\`{=html}).
+
+- Start deprecate `graph.edges()` to `graph_from_edges()` (#1512).
+
+- Make `.igraph.progress()` and `.igraph.status()` more internal (#1516).
+
+## Documentation
+
+- Remove stray alias.
+
+
 # igraph 2.0.3.9062
 
 ## Features
