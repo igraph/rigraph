@@ -59,7 +59,7 @@ graphs</p>
 <span></span>
 <span><span class="fu">largest_ivs</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">maximal_ivs</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
+<span><span class="fu">max_ivs</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ivs_size</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -87,7 +87,7 @@ vertex sets to find. <code>NULL</code> means no limit.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>ivs()</code>,
 <code>largest_ivs()</code> and
-<code>maximal_ivs()</code> return a list containing numeric
+<code>max_ivs()</code> return a list containing numeric
 vertex ids, each list element is an independent vertex set.</p>
 <p><code>ivs_size()</code> returns an integer constant.</p>
     </div>
@@ -99,7 +99,7 @@ arguments.</p>
 <p><code>largest_ivs()</code> finds the largest independent vertex
 sets in the graph. An independent vertex set is largest if there is no
 independent vertex set with more vertices.</p>
-<p><code>maximal_ivs()</code> finds the maximal independent vertex
+<p><code>max_ivs()</code> finds the maximal independent vertex
 sets in the graph. An independent vertex set is maximal if it cannot be
 extended to a larger independent vertex set. The largest independent vertex
 sets are maximal, but the opposite is not always true.</p>
@@ -140,85 +140,85 @@ page.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
 <span class="r-in"><span><span class="fu">ivs</span><span class="op">(</span><span class="va">g</span>, min <span class="op">=</span> <span class="fu">ivs_size</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 37 55 56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 55 56 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 56 69 74</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13 16 37 40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 32 45 61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 22 55 56 64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 23 69 75 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">largest_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 32 45 61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 37 55 56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 55 56 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 56 69 74</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 22 55 56 64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 23 69 75 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 712b860:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from d0bc24d:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13 16 37 40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># Empty graph</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu">largest_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f31191f U--- 4 0 -- Erdos-Renyi (gnp) graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 83b1c7e U--- 4 0 -- Erdos-Renyi (gnp) graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f31191f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 83b1c7e:</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu">maximal_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu">max_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 326</span>
 </code></pre></div>
     </div>
