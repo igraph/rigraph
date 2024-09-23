@@ -5,6 +5,7 @@
 \alias{largest_ivs}
 \alias{max_ivs}
 \alias{ivs_size}
+\alias{independence_number}
 \title{Independent vertex sets}
 \usage{
 ivs(graph, min = NULL, max = NULL)
@@ -14,6 +15,8 @@ largest_ivs(graph)
 max_ivs(graph)
 
 ivs_size(graph)
+
+independence_number(graph)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs are considered as undirected,
@@ -54,6 +57,8 @@ sets are maximal, but the opposite is not always true.
 
 \code{ivs_size()} calculate the size of the largest independent
 vertex set(s).
+
+\code{independence_number()} is an alias for \code{ivs_size()}.
 
 These functions use the algorithm described by Tsukiyama et al., see
 reference below.
