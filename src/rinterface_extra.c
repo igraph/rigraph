@@ -7273,7 +7273,7 @@ igraph_error_t R_igraph_bfshandler(const igraph_t *graph,
 
 SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
                   SEXP punreachable, SEXP prestricted,
-                  SEXP porder, SEXP prank, SEXP pfather,
+                  SEXP porder, SEXP prank, SEXP pparent,
                   SEXP ppred, SEXP psucc, SEXP pdist,
                   SEXP pcallback, SEXP pextra, SEXP prho) {
 
@@ -7285,8 +7285,8 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
   igraph_vector_int_t restricted;
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
-  igraph_vector_int_t order, rank, father, pred, succ, dist;
-  igraph_vector_int_t *p_order=0, *p_rank=0, *p_father=0, *p_pred=0,
+  igraph_vector_int_t order, rank, parent, pred, succ, dist;
+  igraph_vector_int_t *p_order=0, *p_rank=0, *p_parent=0, *p_pred=0,
     *p_succ=0, *p_dist=0;
   igraph_bfshandler_t *callback=0;
   R_igraph_i_bfs_data_t cb_data, *p_cb_data=0;
@@ -7314,9 +7314,9 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
     igraph_vector_int_init(&rank, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &rank);
     p_rank=&rank;
   }
-  if (LOGICAL(pfather)[0]) {
-    igraph_vector_int_init(&father, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &father);
-    p_father=&father;
+  if (LOGICAL(pparent)[0]) {
+    igraph_vector_int_init(&parent, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &parent);
+    p_parent=&parent;
   }
   if (LOGICAL(ppred)[0]) {
     igraph_vector_int_init(&pred, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &pred);
@@ -7340,7 +7340,7 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
     p_cb_data = &cb_data;
   }
 
-  IGRAPH_R_CHECK(igraph_bfs(&g, root, Rf_isNull(proots) ? 0 : &roots, mode, unreachable, Rf_isNull(prestricted) ? 0 : &restricted, p_order, p_rank, p_father, p_pred, p_succ, p_dist, (igraph_bfshandler_t*) callback, p_cb_data));
+  IGRAPH_R_CHECK(igraph_bfs(&g, root, Rf_isNull(proots) ? 0 : &roots, mode, unreachable, Rf_isNull(prestricted) ? 0 : &restricted, p_order, p_rank, p_parent, p_pred, p_succ, p_dist, (igraph_bfshandler_t*) callback, p_cb_data));
 
   PROTECT(result=NEW_LIST(8));
   PROTECT(names=NEW_CHARACTER(8));
@@ -7363,8 +7363,8 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
   SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP_d(p_order));
   SET_STRING_ELT(names, 3, Rf_mkChar("rank"));
   SET_VECTOR_ELT(result, 3, R_igraph_0orvector_int_to_SEXP_d(p_rank));
-  SET_STRING_ELT(names, 4, Rf_mkChar("father"));
-  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_father));
+  SET_STRING_ELT(names, 4, Rf_mkChar("parent"));
+  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_parent));
   SET_STRING_ELT(names, 5, Rf_mkChar("pred"));
   SET_VECTOR_ELT(result, 5, R_igraph_0orvector_int_to_SEXP_d(p_pred));
   SET_STRING_ELT(names, 6, Rf_mkChar("succ"));
@@ -7384,7 +7384,7 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
   if (p_dist) { igraph_vector_int_destroy(p_dist); IGRAPH_FINALLY_CLEAN(1); p_dist = 0; }
   if (p_succ) { igraph_vector_int_destroy(p_succ); IGRAPH_FINALLY_CLEAN(1); p_succ = 0; }
   if (p_pred) { igraph_vector_int_destroy(p_pred); IGRAPH_FINALLY_CLEAN(1); p_pred = 0; }
-  if (p_father) { igraph_vector_int_destroy(p_father); IGRAPH_FINALLY_CLEAN(1); p_father = 0; }
+  if (p_parent) { igraph_vector_int_destroy(p_parent); IGRAPH_FINALLY_CLEAN(1); p_parent = 0; }
   if (p_rank) { igraph_vector_int_destroy(p_rank); IGRAPH_FINALLY_CLEAN(1); p_rank = 0; }
   if (p_order) { igraph_vector_int_destroy(p_order); IGRAPH_FINALLY_CLEAN(1); p_order = 0; }
 
@@ -7440,7 +7440,7 @@ igraph_error_t R_igraph_dfshandler_out(const igraph_t *graph,
 }
 
 SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
-                  SEXP porder, SEXP porder_out, SEXP pfather, SEXP pdist,
+                  SEXP porder, SEXP porder_out, SEXP pparent, SEXP pdist,
                   SEXP pin_callback, SEXP pout_callback,
                   SEXP pextra, SEXP prho) {
 
@@ -7450,8 +7450,8 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
   igraph_integer_t root=(igraph_integer_t) REAL(proot)[0];
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
-  igraph_vector_int_t order, order_out, father, dist;
-  igraph_vector_int_t *p_order=0, *p_order_out=0, *p_father=0, *p_dist=0;
+  igraph_vector_int_t order, order_out, parent, dist;
+  igraph_vector_int_t *p_order=0, *p_order_out=0, *p_parent=0, *p_dist=0;
   igraph_dfshandler_t *in_callback=0, *out_callback=0;
   R_igraph_i_dfs_data_t cb_data, *p_cb_data=0;
 
@@ -7463,8 +7463,8 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
   if (LOGICAL(porder_out)[0]) {
     igraph_vector_int_init(&order_out, 0); p_order_out=&order_out;
   }
-  if (LOGICAL(pfather)[0]) {
-    igraph_vector_int_init(&father, 0); p_father=&father;
+  if (LOGICAL(pparent)[0]) {
+    igraph_vector_int_init(&parent, 0); p_parent=&parent;
   }
   if (LOGICAL(pdist)[0]) {
     igraph_vector_int_init(&dist, 0); p_dist=&dist;
@@ -7485,7 +7485,7 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
     out_callback=R_igraph_dfshandler_out;
   }
 
-  IGRAPH_R_CHECK(igraph_dfs(&g, root, mode, unreachable, p_order, p_order_out, p_father, p_dist, (igraph_dfshandler_t*) in_callback, (igraph_dfshandler_t*) out_callback, p_cb_data));
+  IGRAPH_R_CHECK(igraph_dfs(&g, root, mode, unreachable, p_order, p_order_out, p_parent, p_dist, (igraph_dfshandler_t*) in_callback, (igraph_dfshandler_t*) out_callback, p_cb_data));
 
   PROTECT(result=NEW_LIST(6));
   PROTECT(names=NEW_CHARACTER(6));
@@ -7508,8 +7508,8 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
   SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP_d(p_order));
   SET_STRING_ELT(names, 3, Rf_mkChar("order.out"));
   SET_VECTOR_ELT(result, 3, R_igraph_0orvector_int_to_SEXP_d(p_order_out));
-  SET_STRING_ELT(names, 4, Rf_mkChar("father"));
-  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_father));
+  SET_STRING_ELT(names, 4, Rf_mkChar("parent"));
+  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_parent));
   SET_STRING_ELT(names, 5, Rf_mkChar("dist"));
   SET_VECTOR_ELT(result, 5, R_igraph_0orvector_int_to_SEXP_d(p_dist));
 
