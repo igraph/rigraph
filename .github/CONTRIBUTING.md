@@ -43,6 +43,10 @@ See the tidyverse guide on [how to create a great issue](https://code-review.tid
 
 *  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. 
    Please add test cases for the change you are proposing, or ask us for help.
+   
+### Naming conventions
+
+* Use `max` for maximal and `largest` for maximum.
 
 ### Test files
 
