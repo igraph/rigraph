@@ -63,7 +63,7 @@ as_adj_edge_list(g)
 
 }
 \seealso{
-\code{\link[=as_edgelist]{as_edgelist()}}, \code{\link[=as_adj]{as_adj()}}
+\code{\link[=as_edgelist]{as_edgelist()}}, \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}
 
 Other conversion: 
 \code{\link{as.matrix.igraph}()},

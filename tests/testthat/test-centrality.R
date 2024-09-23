@@ -2,14 +2,14 @@ test_that("subgraph_centrality() works", {
   frucht_graph <- make_graph("Frucht")
   expect_equal(
     subgraph_centrality(frucht_graph),
-    Matrix::diag(Matrix::expm(as_adj(frucht_graph, sparse = FALSE))),
+    Matrix::diag(Matrix::expm(as_adjacency_matrix(frucht_graph, sparse = FALSE))),
     tolerance = 1e-10
   )
 
   grotzsch_graph <- make_graph("Grotzsch")
   expect_equal(
     subgraph_centrality(grotzsch_graph),
-    Matrix::diag(Matrix::expm(as_adj(grotzsch_graph, sparse = FALSE))),
+    Matrix::diag(Matrix::expm(as_adjacency_matrix(grotzsch_graph, sparse = FALSE))),
     tolerance = 1e-10
   )
 })

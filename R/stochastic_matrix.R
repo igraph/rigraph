@@ -54,7 +54,7 @@ get.stochastic <- function(graph, column.wise = FALSE, sparse = igraph_opt("spar
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_adj()]
+#' @seealso [as_adjacency_matrix()]
 #' @export
 #' @keywords graphs
 #' @examples

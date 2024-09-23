@@ -14,7 +14,7 @@ test_that("`authority_score()` works", {
     c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
       7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
     directed = TRUE)
-  A <- as_adj(g1, sparse = FALSE)
+  A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g1)$vector
   expect_equal(
@@ -29,7 +29,7 @@ test_that("`authority_score()` works", {
     c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
     directed = TRUE
   )
-  A <- as_adj(g2, sparse = FALSE)
+  A <- as_adjacency_matrix(g2, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g2)$vector
   expect_equal(
@@ -63,7 +63,7 @@ test_that("`hub_score()` works", {
     c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
       7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
     directed = TRUE)
-  A <- as_adj(g1, sparse = FALSE)
+  A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g1)$vector
   expect_equal(
@@ -78,7 +78,7 @@ test_that("`hub_score()` works", {
     c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
     directed = TRUE
   )
-  A <- as_adj(g2, sparse = FALSE)
+  A <- as_adjacency_matrix(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g2)$vector
   expect_equal(
@@ -117,14 +117,14 @@ test_that("authority_score survives stress test", {
   for (i in 1:100) {
     G <- sample_gnm(10, sample(1:20, 1))
     as <- hits_scores(G)
-    M <- as_adj(G, sparse = FALSE)
+    M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(t(M) %*% M, as$authority, as$value)
   }
 
   for (i in 1:100) {
     G <- sample_gnm(10, sample(1:20, 1))
     hs <- hits_scores(G)
-    M <- as_adj(G, sparse = FALSE)
+    M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(M %*% t(M), hs$hub, hs$value)
   }
 })
@@ -144,7 +144,7 @@ test_that("`hits_score()` works -- authority", {
     c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
       7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
     directed = TRUE)
-  A <- as_adj(g1, sparse = FALSE)
+  A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- hits_scores(g1)$authority
   expect_equal(
@@ -159,7 +159,7 @@ test_that("`hits_score()` works -- authority", {
     c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
     directed = TRUE
   )
-  A <- as_adj(g2, sparse = FALSE)
+  A <- as_adjacency_matrix(g2, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- hits_scores(g2)$authority
   expect_equal(
@@ -186,7 +186,7 @@ test_that("`hits_scores()` works -- hub", {
     c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
       7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
     directed = TRUE)
-  A <- as_adj(g1, sparse = FALSE)
+  A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hits_scores(g1)$hub
   expect_equal(
@@ -201,7 +201,7 @@ test_that("`hits_scores()` works -- hub", {
     c(1, 2, 1, 4, 2, 3, 2, 4, 3, 1, 3, 5, 4, 3, 5, 1, 5, 2),
     directed = TRUE
   )
-  A <- as_adj(g2, sparse = FALSE)
+  A <- as_adjacency_matrix(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <-  hits_scores(g2)$hub
   expect_equal(
