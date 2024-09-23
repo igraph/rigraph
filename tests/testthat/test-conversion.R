@@ -76,7 +76,7 @@ test_that("as_adjacency_matrix() works -- sparse", {
   g <- sample_gnp(10, 2 / 10)
   basic_adj_matrix <- as_adjacency_matrix(g)
   expected_matrix <- new(
-    "dgCMatrix" |>
+    "dgCMatrix" %>%
       structure(package = "Matrix"),
     i = c(
       8L, 2L, 3L, 6L, 1L, 3L, 4L, 5L, 7L, 1L, 2L, 2L, 6L, 2L, 6L, 7L, 9L, 1L, 4L,
@@ -108,7 +108,7 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 
   lower_adj_matrix <- as_adjacency_matrix(g, type = "lower")
   lower_expected_matrix <- new(
-    "dgCMatrix" |>
+    "dgCMatrix" %>%
       structure(package = "Matrix"),
     i = c(8L, 2L, 3L, 6L, 3L, 4L, 5L, 7L, 6L, 6L, 7L, 9L, 7L, 9L),
     p = c(0L, 1L, 4L, 8L, 8L, 9L, 12L, 14L, 14L, 14L, 14L),
@@ -121,7 +121,7 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 
   upper_adj_matrix <- as_adjacency_matrix(g, type = "upper")
   upper_expected_matrix <- new(
-    "dgCMatrix" |>
+    "dgCMatrix" %>%
       structure(package = "Matrix"),
     i = c(1L, 1L, 2L, 2L, 2L, 1L, 4L, 5L, 2L, 5L, 6L, 0L, 5L, 6L),
     p = c(0L, 0L, 0L, 1L, 3L, 4L, 5L, 8L, 11L, 12L, 14L),
@@ -149,7 +149,7 @@ test_that("as_adjacency_matrix() works -- sparse directed", {
   expect_equal(
     adj_matrix,
     new(
-      "dgCMatrix" |>
+      "dgCMatrix" %>%
         structure(package = "Matrix"),
       i = c(9L, 0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L),
       p = 0:10,
@@ -245,7 +245,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
 
   upper_adj_matrix <- as_adjacency_matrix(g, type = "upper")
   upper_expected_matrix <- new(
-    "dgCMatrix" |>
+    "dgCMatrix" %>%
       structure(package = "Matrix"),
     i = c(1L, 1L, 2L, 2L, 2L, 1L, 4L, 5L, 2L, 5L, 6L, 0L, 5L, 6L),
     p = c(0L, 0L, 0L, 1L, 3L, 4L, 5L, 8L, 11L, 12L, 14L),
