@@ -390,6 +390,8 @@ weighted_clique_num <- weighted_clique_number_impl
 #' `ivs_size()` calculate the size of the largest independent
 #' vertex set(s).
 #'
+#' `independence_number()` is an alias for `ivs_size()`.
+#'
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
 #'
@@ -509,6 +511,10 @@ ivs_size <- function(graph) {
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_independence_number, graph)
 }
+
+#' @rdname ivs
+#' @export
+independence_number <- ivs_size
 
 #' @rdname cliques
 #' @export
