@@ -952,9 +952,8 @@ eigen_defaults <- function() {
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
+#' @param scale `lifecycle::badge("deprecated")` Normalization will always take
+#' place.
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted eigenvector centrality of
 #'   vertices. If this is `NULL` and the graph has a `weight` edge
@@ -990,7 +989,7 @@ eigen_defaults <- function() {
 #' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(graph,
                              directed = FALSE,
-                             scale = TRUE,
+                             scale = deprecated(),
                              weights = NULL,
                              options = arpack_defaults()) {
 
@@ -1003,9 +1002,21 @@ eigen_centrality <- function(graph,
     options <- options()
   }
 
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.0.4",
+      "eigen_centrality(scale)",
+      details = "eigen_centrality() will always behave as if scale=TRUE were used."
+    )
+    if (!scale) {
+      cli::cli_abort(c("{.arg scale} cannot be {.code FALSE}",
+        i = "Normalization is always performed"))
+    }
+  }
+
   eigenvector_centrality_impl(graph = graph,
                               directed = directed,
-                              scale = scale,
+                              scale = TRUE,
                               weights = weights,
                               options = options)
 }

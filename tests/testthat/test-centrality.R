@@ -23,7 +23,7 @@ test_that("subgraph_centrality() ignored edge directions", {
   )
 })
 
-test_that("eigen_centrality works", {
+test_that("eigen_centrality() works", {
   kite <- graph_from_literal(
     Andre - Beverly:Carol:Diane:Fernando,
     Beverly - Andre:Diane:Ed:Garth,
@@ -59,6 +59,12 @@ test_that("eigen_centrality works", {
     ev <- eigen_centrality(G)
     expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
   }
+})
+
+test_that("eigen_centrality() deprecated scale argument", {
+  g <- make_ring(10, directed = FALSE)
+  expect_snapshot(eigen_centrality(g, scale = TRUE))
+  expect_snapshot(eigen_centrality(g, scale = FALSE), error = TRUE)
 })
 
 test_that("betweenness works for kite graph", {
