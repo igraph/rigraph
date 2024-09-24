@@ -3,8 +3,8 @@
     Code
       d <- dfs(g, root = 2, unreachable = FALSE, neimode = "out")
     Condition
-      Warning:
-      The `neimode` argument of `dfs()` is deprecated as of igraph 1.3.0.
+      Error:
+      ! The `neimode` argument of `dfs()` was deprecated in igraph 1.3.0 and is now defunct.
       i Please use the `mode` argument instead.
 
 ---
@@ -13,8 +13,8 @@
       b <- bfs(g, root = 2, neimode = "out", unreachable = FALSE, order = TRUE, rank = TRUE,
         father = TRUE, pred = TRUE, succ = TRUE, dist = TRUE)
     Condition
-      Warning:
-      The `neimode` argument of `bfs()` is deprecated as of igraph 1.3.0.
+      Error:
+      ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and is now defunct.
       i Please use the `mode` argument instead.
 
 # bfs() works
