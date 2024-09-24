@@ -81,11 +81,8 @@
     Code
       eigen_centrality(g, scale = FALSE)
     Condition
-      Warning:
-      The `scale` argument of `eigen_centrality()` is deprecated as of igraph 2.0.4.
-      i eigen_centrality() will always behave as if scale=TRUE were used.
-      Error in `eigen_centrality()`:
-      ! `scale` cannot be `FALSE`
+      Error:
+      ! The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.0.4.
       i Normalization is always performed
 
 # `authority_score()` works

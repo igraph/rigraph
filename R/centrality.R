@@ -1003,14 +1003,17 @@ eigen_centrality <- function(graph,
   }
 
   if (lifecycle::is_present(scale)) {
+    if (scale) {
     lifecycle::deprecate_soft(
       "2.0.4",
       "eigen_centrality(scale)",
       details = "eigen_centrality() will always behave as if scale=TRUE were used."
     )
-    if (!scale) {
-      cli::cli_abort(c("{.arg scale} cannot be {.code FALSE}",
-        i = "Normalization is always performed"))
+    } else {
+      lifecycle::deprecate_stop(
+      "2.0.4",
+      "eigen_centrality(scale = 'always as if TRUE')",
+      details =  "Normalization is always performed")
     }
   }
 
