@@ -366,10 +366,30 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 }
 
+#' Convert a graph to an adjacency matrix
+#'
+#' `r lifecycle::badge("deprecated")`
+#' We plan to remove `as_adj()` in favor of the more explicitly named
+#' `as_adjacency_matrix()` so please use `as_adjacency_matrix()` instead.
+#'
 #' @export
-#' @rdname as_adjacency_matrix
-as_adj <- as_adjacency_matrix
+#' @inheritParams as_adjacency_matrix
+#' @keywords internal
+as_adj <- function(graph, type = c("both", "upper", "lower"),
+                   attr = NULL, edges = deprecated(), names = TRUE,
+                   sparse = igraph_opt("sparsematrices")) {
 
+  lifecycle::deprecate_soft("2.0.4", "as_adj()", "as_adjacency_matrix()")
+
+  as_adjacency_matrix(
+    graph = graph,
+    type = type,
+    attr = attr,
+    edges = edges,
+    names = names,
+    sparse = sparse
+  )
+}
 #' Convert a graph to an edge list
 #'
 #' Sometimes it is useful to work with a standard representation of a
@@ -549,7 +569,7 @@ as_undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' vectors of the adjacency lists are coerced to `igraph.vs`, this can be
 #' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_edgelist()], [as_adj()]
+#' @seealso [as_edgelist()], [as_adjacency_matrix()]
 #' @family conversion
 #' @export
 #' @keywords graphs
@@ -652,7 +672,7 @@ as_adj_edge_list <- function(graph,
 #'   whenever possible, before adding them to the igraph graph.
 #' @return `graph_from_graphnel()` returns an igraph graph object.
 #' @seealso [as_graphnel()] for the other direction,
-#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph_from_adj_list()] for other
 #' graph representations.
 #' @examplesIf rlang::is_installed("graph")
@@ -741,7 +761,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' @param graph An igraph graph object.
 #' @return `as_graphnel()` returns a graphNEL graph object.
 #' @seealso [graph_from_graphnel()] for the other direction,
-#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph_from_adj_list()] for
 #' other graph representations.
 #'

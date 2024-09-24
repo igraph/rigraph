@@ -514,7 +514,7 @@ test_that("constraint() works", {
   constraint.orig <- function(graph, nodes = V(graph), attr = NULL) {
     ensure_igraph(graph)
     idx <- degree(graph) != 0
-    A <- as_adj(graph, attr = attr, sparse = FALSE)
+    A <- as_adjacency_matrix(graph, attr = attr, sparse = FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
 

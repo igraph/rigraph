@@ -72,7 +72,7 @@ if (require(Matrix)) {
 } else {
   myimage <- image
 }
-A <- as_adj(G)
+A <- as_adjacency_matrix(G)
 myimage(A)
 
 pause()
