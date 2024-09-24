@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9064
+
+## Features
+
+- Add `independence_number()` as an alias of ivs_size (#1522).
+
+## Chore
+
+- Add `max_ivs()` alias for `maximal_ivs()`, for consistency (#1521).
+
+## Testing
+
+- Put snaps where they belong.
+
+
 # igraph 2.0.3.9063
 
 ## Chore
