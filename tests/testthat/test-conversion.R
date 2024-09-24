@@ -231,28 +231,27 @@ test_that("as_adjacency_matrix() works -- dense directed", {
 test_that("as_adjacency_matrix() works -- dense + not both", {
   withr::local_seed(42)
   g <- sample_gnp(10, 2 / 10)
+  E(g)$attribute <- runif(ecount(g))
 
-  lower_adj_matrix <- as_adjacency_matrix(g, type = "lower", sparse = FALSE)
-  lower_expected_matrix <- matrix(
-    rep(
-      c(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
-      c(8L, 1L, 3L, 2L, 2L, 1L, 6L, 3L, 1L, 1L, 18L, 1L, 9L, 2L, 1L, 1L, 7L, 1L, 1L, 1L, 30L)
-    ),
-    nrow = 10L,
-    ncol = 10L
+  lower_adj_matrix <- as_adjacency_matrix(
+    g,
+    type = "lower",
+    sparse = FALSE,
+    attr = "attribute"
   )
-  expect_equal(lower_adj_matrix, lower_expected_matrix)
 
-  upper_adj_matrix <- as_adjacency_matrix(g, type = "upper")
-  upper_expected_matrix <- new(
-    "dgCMatrix" %>%
-      structure(package = "Matrix"),
-    i = c(1L, 1L, 2L, 2L, 2L, 1L, 4L, 5L, 2L, 5L, 6L, 0L, 5L, 6L),
-    p = c(0L, 0L, 0L, 1L, 3L, 4L, 5L, 8L, 11L, 12L, 14L),
-    Dim = c(10L, 10L),
-    Dimnames = list(NULL, NULL),
-    x = rep(1, 14L),
-    factors = list()
+  expect_true(inherits(lower_adj_matrix, "matrix"))
+  expect_equal(lower_adj_matrix[3, 2], 0.9575766)
+  expect_equal(sum(lower_adj_matrix), 7.83583, tolerance = 1e-4)
+
+  upper_adj_matrix  <- as_adjacency_matrix(
+    g,
+    type = "upper",
+    sparse = FALSE,
+    attr = "attribute"
   )
-  expect_equal(upper_adj_matrix, upper_expected_matrix)
+
+  expect_true(inherits(upper_adj_matrix, "matrix"))
+  expect_equal(upper_adj_matrix[2, 3], 0.9575766)
+  expect_equal(sum(upper_adj_matrix), 7.83583, tolerance = 1e-4)
 })
