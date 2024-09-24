@@ -37,6 +37,7 @@
 <url><loc>https://r.igraph.org/reference/as.igraph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as.matrix.igraph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as.undirected.html</loc></url>
+<url><loc>https://r.igraph.org/reference/as_adj.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_adj_list.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_adjacency_matrix.html</loc></url>
 <url><loc>https://r.igraph.org/reference/as_biadjacency_matrix.html</loc></url>
