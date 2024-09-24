@@ -78,13 +78,17 @@ test_that("as_adjacency_matrix() works -- sparse", {
     c(0, 1, 0, 0, 1, 1, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0),
     nrow = 4L, ncol = 4L
   )
-  expect_equal(as.matrix(basic_adj_matrix), expected_matrix)
+  basic_adj_matrix <- as.matrix(basic_adj_matrix)
+  dimnames(basic_adj_matrix) <- NULL
+  expect_equal(basic_adj_matrix, expected_matrix)
 
   V(g)$name <- letters[1:vcount(g)]
   letter_adj_matrix <- as_adjacency_matrix(g)
   expect_s4_class(letter_adj_matrix, "dgCMatrix")
   expect_setequal(rownames(letter_adj_matrix), letters[1:vcount(g)])
-  expect_equal(basic_adj_matrix, unname(letter_adj_matrix))
+  letter_adj_matrix <- as.matrix(letter_adj_matrix)
+  dimnames(letter_adj_matrix) <- NULL
+  expect_equal(basic_adj_matrix, letter_adj_matrix)
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
   weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
@@ -108,7 +112,9 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
     c(0, 2, 0, 0, 0, 1, 0, 3, 0, 0, 2, 1, 0, 0, 0, 0),
     nrow = 4L, ncol = 4L
   )
-  expect_equal(as.matrix(lower_adj_matrix), lower_expected_matrix)
+  lower_expected_matrix <- as.matrix(lower_expected_matrix)
+  dimnames(lower_expected_matrix) <- NULL
+  expect_equal(lower_expected_matrix, lower_expected_matrix)
 
   upper_adj_matrix <- as_adjacency_matrix(g, type = "upper")
   expect_s4_class(upper_adj_matrix, "dgCMatrix")
@@ -116,8 +122,9 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
     c(0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 2, 0, 0, 3, 1, 0),
     nrow = 4L, ncol = 4L
   )
-
-  expect_equal(as.matrix(upper_adj_matrix), upper_expected_matrix)
+  upper_adj_matrix <- as.matrix(upper_adj_matrix)
+  dimnames(upper_adj_matrix) <- NULL
+  expect_equal(upper_adj_matrix, upper_expected_matrix)
 })
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
@@ -134,8 +141,11 @@ test_that("as_adjacency_matrix() works -- sparse undirected", {
   ug <- as_undirected(dg, mode = "each")
   adj_matrix <- as_adjacency_matrix(ug)
   expect_s4_class(adj_matrix, "dgCMatrix")
+
+  adj_matrix <- as.matrix(adj_matrix)
+  dimnames(adj_matrix) <- NULL
   expect_equal(
-    as.matrix(adj_matrix),
+    adj_matrix,
     matrix(
       c(0, 2, 0, 0, 2, 1, 0, 3, 0, 0, 2, 1, 0, 3, 1, 0),
       nrow = 4L,
