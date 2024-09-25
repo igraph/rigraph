@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.0.3.9065
+
+## Bug fixes
+
+- Refer to correct function in deprecation message.
+
+## Chore
+
+- Start deprecation of `as_adj()` alias of `as_adjacency_matrix()` (#1524).
+
+- Update vendored sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
+
+
 # igraph 2.0.3.9064
 
 ## Features
