@@ -646,7 +646,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @keywords internal
 #' @export
 layout.reingold.tilford <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.reingold.tilford()", "layout_as_tree()")
+  lifecycle::deprecate_soft("2.1.0", "layout.reingold.tilford()", "layout_as_tree()")
   do_call(layout_as_tree, .args = c(list(...), params))
 }
 
@@ -707,7 +707,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @keywords internal
 #' @export
 layout.circle <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.circle()", "layout_in_circle()")
+  lifecycle::deprecate_soft("2.1.0", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
 }
 
@@ -889,7 +889,7 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 #' @export
 #' @keywords internal
 layout.grid.3d <- function(graph, width = 0, height = 0) {
-  lifecycle::deprecate_stop("2.0.4", "layout.grid.3d()", "layout_on_grid()")
+  lifecycle::deprecate_stop("2.1.0", "layout.grid.3d()", "layout_on_grid()")
 }
 
 ## ----------------------------------------------------------------
@@ -937,7 +937,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @keywords internal
 #' @export
 layout.sphere <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.sphere()", "layout_on_sphere()")
+  lifecycle::deprecate_soft("2.1.0", "layout.sphere()", "layout_on_sphere()")
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
@@ -990,7 +990,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @keywords internal
 #' @export
 layout.random <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.random()", "layout_randomly()")
+  lifecycle::deprecate_soft("2.1.0", "layout.random()", "layout_randomly()")
   do_call(layout_randomly, .args = c(list(...), params))
 }
 
@@ -1314,7 +1314,7 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.fruchterman.reingold()", "layout_with_fr()")
+  lifecycle::deprecate_soft("2.1.0", "layout.fruchterman.reingold()", "layout_with_fr()")
   do_call(layout_with_fr, .args = c(list(...), params))
 }
 
@@ -1616,7 +1616,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @keywords internal
 #' @export
 layout.kamada.kawai <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.kamada.kawai()", "layout_with_kk()")
+  lifecycle::deprecate_soft("2.1.0", "layout.kamada.kawai()", "layout_with_kk()")
   do_call(layout_with_kk, .args = c(list(...), params))
 }
 
@@ -1687,7 +1687,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @keywords internal
 #' @export
 layout.lgl <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.0.4", "layout.lgl()", "layout_with_lgl()")
+  lifecycle::deprecate_soft("2.1.0", "layout.lgl()", "layout_with_lgl()")
   do_call(layout_with_lgl, .args = c(list(...), params))
 }
 
@@ -2253,7 +2253,7 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 #' @export
 #' @keywords internal
 layout.spring <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.0.4", "layout.spring()", "layout_with_fr()")
+  lifecycle::deprecate_warn("2.1.0", "layout.spring()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
@@ -2271,7 +2271,7 @@ layout.spring <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.0.4", "layout.svd()", "layout_with_fr()")
+  lifecycle::deprecate_warn("2.1.0", "layout.svd()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
@@ -2291,7 +2291,7 @@ layout.svd <- function(graph, ...) {
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
   lifecycle::deprecate_warn(
-    "2.0.4",
+    "2.1.0",
     "layout.fruchterman.reingold.grid()",
     "layout_with_fr()"
   )

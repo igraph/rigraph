@@ -168,7 +168,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
     lifecycle::deprecate_soft(
-      "2.0.4", "get.adjacency.dense(loops = 'must be a character')",
+      "2.1.0", "get.adjacency.dense(loops = 'must be a character')",
       details = sprintf("Converting to get.adjacency.dense (loops = '%s')", loops)
     )
   }
@@ -379,7 +379,7 @@ as_adj <- function(graph, type = c("both", "upper", "lower"),
                    attr = NULL, edges = deprecated(), names = TRUE,
                    sparse = igraph_opt("sparsematrices")) {
 
-  lifecycle::deprecate_soft("2.0.4", "as_adj()", "as_adjacency_matrix()")
+  lifecycle::deprecate_soft("2.1.0", "as_adj()", "as_adjacency_matrix()")
 
   as_adjacency_matrix(
     graph = graph,
@@ -1239,7 +1239,7 @@ as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
 #' @keywords internal
 #' @export
 as.directed <- function(graph, mode = c("mutual", "arbitrary", "random", "acyclic")) {
-  lifecycle::deprecate_soft("2.0.4", "as.directed()", "as_directed()")
+  lifecycle::deprecate_soft("2.1.0", "as.directed()", "as_directed()")
   as_directed(graph, mode = mode)
 }
 
@@ -1254,6 +1254,6 @@ as.directed <- function(graph, mode = c("mutual", "arbitrary", "random", "acycli
 #' @keywords internal
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual")) {
-  lifecycle::deprecate_soft("2.0.4", "as.undirected()", "as_undirected()")
+  lifecycle::deprecate_soft("2.1.0", "as.undirected()", "as_undirected()")
   as_undirected(graph = graph, mode = mode)
 }

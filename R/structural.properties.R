@@ -1245,7 +1245,7 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @keywords internal
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.4", "subgraph.edges()", "subgraph_from_edges()")
+  lifecycle::deprecate_soft("2.1.0", "subgraph.edges()", "subgraph_from_edges()")
   subgraph_from_edges(graph = graph, eids = eids, delete.vertices = delete.vertices)
 } # nocov end
 

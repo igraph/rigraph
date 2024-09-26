@@ -927,17 +927,17 @@ sample_degseq <- function(out.deg, in.deg = NULL,
   )
 
   if (method == "simple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration instead of simple')")
     method <- "configuration"
   }
 
   if (method == "simple.no.multiple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
     method <- "fast.heur.simple"
   }
 
   if (method == "simple.no.multiple.uniform") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
     method <- "configuration.simple"
   }
 

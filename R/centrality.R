@@ -1163,7 +1163,7 @@ hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_def
 #'   [arpack()] for details.
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  lifecycle::deprecate_soft("2.0.4", "authority_score()", "hits_scores()")
+  lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",

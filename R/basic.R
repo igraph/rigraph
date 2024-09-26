@@ -67,7 +67,7 @@ is_igraph <- function(graph) {
 #' @export
 #' @keywords internal
 get.edge <- function(graph, id) {
-  lifecycle::deprecate_stop("2.0.4", "get.edge()", "ends()")
+  lifecycle::deprecate_stop("2.1.0", "get.edge()", "ends()")
 }
 
 
