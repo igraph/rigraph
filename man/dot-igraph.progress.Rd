@@ -12,4 +12,3 @@
 \description{
 igraph progress
 }
-\keyword{internal}
