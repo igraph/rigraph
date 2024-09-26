@@ -157,7 +157,7 @@ fit_power_law <- function(
   if (implementation == "r.mle") {
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation %in% c("plfit", "plfit.p")) {
-    if (is.null(xmin)) xmin <- -1
+    xmin <- xmin %||% -1
     power.law.fit.new(
       x,
       xmin = xmin,
@@ -175,9 +175,7 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
     stop("vector should be at least of length two")
   }
 
-  if (is.null(xmin)) {
-    xmin <- min(x)
-  }
+  xmin <- xmin %||% min(x)
 
   n <- length(x)
   x <- x[x >= xmin]
