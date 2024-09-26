@@ -178,12 +178,8 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
   quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
   ns <- length(sir)
-  if (is.null(xlim)) {
-    xlim <- c(0, max(sapply(sir, function(x) max(x$times))))
-  }
-  if (is.null(ylim)) {
-    ylim <- c(0, max(sapply(sir, function(x) max(x[[comp]]))))
-  }
+  xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))
+  ylim <- ylim %||% c(0, max(sapply(sir, function(x) max(x[[comp]]))))
 
   ## Generate the plot, first with individual curves, and then
   ## adding median and quantile curves.
