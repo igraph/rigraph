@@ -952,8 +952,8 @@ eigen_defaults <- function() {
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
-#' @param scale `lifecycle::badge("deprecated")` Normalization will always take
-#' place.
+#' @param scale `lifecycle::badge("deprecated")` The result is always scaled to have
+#' a maximum score of one.
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted eigenvector centrality of
 #'   vertices. If this is `NULL` and the graph has a `weight` edge
