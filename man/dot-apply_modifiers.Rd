@@ -18,4 +18,3 @@ The modified graph
 This is a helper function for the common parts of \code{make_()} and
 \code{sample_()}.
 }
-\keyword{internal}

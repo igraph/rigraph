@@ -9,4 +9,3 @@
 \description{
 igraph status
 }
-\keyword{internal}

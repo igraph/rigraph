@@ -92,7 +92,7 @@ similarity.jaccard <- function(graph,
   )
 
   lifecycle::deprecate_soft(
-    "2.0.4",
+    "2.1.0",
     "similarity.jaccard()",
     'similarity(method)',
     details = 'similarity(method = "jaccard")'
@@ -121,7 +121,7 @@ similarity.dice <- function(graph,
   )
 
   lifecycle::deprecate_soft(
-    "2.0.4",
+    "2.1.0",
     "similarity.dice()",
     'similarity(method)',
     details = 'similarity(method = "dice")'
@@ -148,7 +148,7 @@ similarity.invlogweighted <- function(graph,
   )
 
   lifecycle::deprecate_soft(
-    "2.0.4",
+    "2.1.0",
     "similarity.invlogweighted()",
     'similarity(method)',
     details = 'similarity(method = "invlogweighted")'
