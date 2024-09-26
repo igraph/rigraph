@@ -64,7 +64,7 @@ test_that("eigen_centrality() works", {
 test_that("eigen_centrality() deprecated scale argument", {
   g <- make_ring(10, directed = FALSE)
   expect_snapshot(eigen_centrality(g, scale = TRUE))
-  expect_snapshot(eigen_centrality(g, scale = FALSE), error = TRUE)
+  expect_snapshot(eigen_centrality(g, scale = FALSE))
 })
 
 test_that("betweenness works for kite graph", {
