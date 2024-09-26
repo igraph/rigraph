@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3.9064</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,754 +39,215 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9064" id="igraph-2039064">igraph 2.0.3.9064<a class="anchor" aria-label="anchor" href="#igraph-2039064"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.0" id="igraph-210">igraph 2.1.0<a class="anchor" aria-label="anchor" href="#igraph-210"></a></h2>
 <div class="section level3">
-<h3 id="features-2-0-3-9064">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9064"></a></h3>
-<ul><li>Add <code><a href="../reference/ivs.html">independence_number()</a></code> as an alias of ivs_size (<a href="https://github.com/igraph/rigraph/issues/1522" class="external-link">#1522</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-3-9064">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9064"></a></h3>
-<ul><li>Add <code><a href="../reference/ivs.html">max_ivs()</a></code> alias for <code><a href="../reference/maximal_ivs.html">maximal_ivs()</a></code>, for consistency (<a href="https://github.com/igraph/rigraph/issues/1521" class="external-link">#1521</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9064">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9064"></a></h3>
-<ul><li>Put snaps where they belong.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9063" id="igraph-2039063">igraph 2.0.3.9063<a class="anchor" aria-label="anchor" href="#igraph-2039063"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9063">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9063"></a></h3>
-<ul><li><p>Update vendored sources to <a href="mailto:igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703" class="email">igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703</a> (<a href="https://github.com/igraph/rigraph/issues/1517" class="external-link">#1517</a>).</p></li>
-<li><p>Start renaming as.directed() and as.undirected() to <code>as_di… (</code>#1513`{=html}).</p></li>
-<li><p>Start deprecate <code>graph.edges()</code> to <code>graph_from_edges()</code> (<a href="https://github.com/igraph/rigraph/issues/1512" class="external-link">#1512</a>).</p></li>
-<li><p>Make <code><a href="../reference/dot-igraph.progress.html">.igraph.progress()</a></code> and <code><a href="../reference/dot-igraph.status.html">.igraph.status()</a></code> more internal (<a href="https://github.com/igraph/rigraph/issues/1516" class="external-link">#1516</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9063">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9063"></a></h3>
-<ul><li>Remove stray alias.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9062" id="igraph-2039062">igraph 2.0.3.9062<a class="anchor" aria-label="anchor" href="#igraph-2039062"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9062">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9062"></a></h3>
-<ul><li>Create get_edge_ids() as new name for get.edge.ids() (<a href="https://github.com/igraph/rigraph/issues/1510" class="external-link">#1510</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-3-9062">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9062"></a></h3>
-<ul><li><p>Formally deprecate <code>similarity.&lt;something&gt;()</code> functions (<a href="https://github.com/igraph/rigraph/issues/1515" class="external-link">#1515</a>).</p></li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a" class="email">igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a</a>.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9062">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9062"></a></h3>
-<ul><li>Use {devtag} for internal function docs (<a href="https://github.com/igraph/rigraph/issues/1507" class="external-link">#1507</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="doc-2-0-3-9062">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9062"></a></h3>
+<h3 id="doc-2-1-0">doc<a class="anchor" aria-label="anchor" href="#doc-2-1-0"></a></h3>
 <ul><li>Improve sample_gnp() examples.</li>
+<li>Improve centralization docs.</li>
+<li>Further clarifications for betweenness(). ref <a href="https://github.com/igraph/rigraph/issues/1489" class="external-link">#1489</a></li>
+<li>Clarify how betweenness with cutoff is normalized.</li>
+<li>Fix centr_eigen_tmax() docs.</li>
+<li>Mark <code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> as experimental.</li>
+<li>Make <code><a href="../reference/edge_density.html">edge_density()</a></code> examples relevant.</li>
+<li>Update troubleshooting document.</li>
+<li>Improve <code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> documentation.</li>
+<li>Further improved <code><a href="../reference/cluster_edge_betweenness.html">cluster_edge_betweenness()</a></code> documentation.</li>
+<li>Improved <code><a href="../reference/cluster_edge_betweenness.html">cluster_edge_betweenness()</a></code> documentation.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="lifecycle-2-0-3-9062">lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-2-0-3-9062"></a></h3>
+<h3 id="lifecycle-2-1-0">lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-2-1-0"></a></h3>
 <ul><li>
 <code><a href="../reference/erdos.renyi.game.html">erdos.renyi.game()</a></code> and <code><a href="../reference/erdos.renyi.game.html">random.graph.game()</a></code> soft deprecation (<a href="https://github.com/igraph/rigraph/issues/1509" class="external-link">#1509</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="uncategorized-2-0-3-9062">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9062"></a></h3>
-<ul><li>Lifecycle and tests in structural.properties (<a href="https://github.com/igraph/rigraph/issues/1505" class="external-link">#1505</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9061" id="igraph-2039061">igraph 2.0.3.9061<a class="anchor" aria-label="anchor" href="#igraph-2039061"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9061">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9061"></a></h3>
-<ul><li><p>Update vendored sources to <a href="mailto:igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118" class="email">igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118</a> (<a href="https://github.com/igraph/rigraph/issues/1470" class="external-link">#1470</a>).</p></li>
-<li><p>Results from revdepcheck (<a href="https://github.com/igraph/rigraph/issues/1506" class="external-link">#1506</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9060" id="igraph-2039060">igraph 2.0.3.9060<a class="anchor" aria-label="anchor" href="#igraph-2039060"></a></h2>
-<div class="section level3">
-<h3 id="testing-2-0-3-9060">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9060"></a></h3>
-<ul><li>Refactor test-layout.fr.R for simplicity and readability (<a href="https://github.com/igraph/rigraph/issues/1504" class="external-link">#1504</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9059" id="igraph-2039059">igraph 2.0.3.9059<a class="anchor" aria-label="anchor" href="#igraph-2039059"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9059">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9059"></a></h3>
-<ul><li><p>Replace <code><a href="../reference/is.directed.html">is.directed()</a></code> with <code><a href="../reference/is_directed.html">is_directed()</a></code> in stimulus YAML (<a href="https://github.com/igraph/rigraph/issues/1494" class="external-link">#1494</a>).</p></li>
-<li><p>Soft-deprecate <code><a href="../reference/graph_.html">graph_()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1493" class="external-link">#1493</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9059">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9059"></a></h3>
-<ul><li>Expand on <code>fit_power_law(implementation = "plfit.p")</code> (<a href="https://github.com/igraph/rigraph/issues/1503" class="external-link">#1503</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="doc-2-0-3-9059">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9059"></a></h3>
-<ul><li>Improve centralization docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9058" id="igraph-2039058">igraph 2.0.3.9058<a class="anchor" aria-label="anchor" href="#igraph-2039058"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9058">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9058"></a></h3>
-<ul><li><p>Remove useless igraph_test() and igraphtest() functions as we … (<a href="https://github.com/igraph/rigraph/issues/1501" class="external-link">#1501</a>).</p></li>
-<li><p>Use lifecycle for deprecation of membership argument of modula… (<a href="https://github.com/igraph/rigraph/issues/1498" class="external-link">#1498</a>).</p></li>
-<li><p>Properly deprecate some functions in layout.R (<a href="https://github.com/igraph/rigraph/issues/1500" class="external-link">#1500</a>).</p></li>
-<li><p>Remove references to deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1497" class="external-link">#1497</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9058">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9058"></a></h3>
-<ul><li>Add more cdocs tags (<a href="https://github.com/igraph/rigraph/issues/1491" class="external-link">#1491</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9057" id="igraph-2039057">igraph 2.0.3.9057<a class="anchor" aria-label="anchor" href="#igraph-2039057"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9057">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9057"></a></h3>
-<ul><li>
-<p>Document how to run document().</p>
-<p>thx <a href="https://github.com/szhorvat" class="external-link">@szhorvat</a></p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9056" id="igraph-2039056">igraph 2.0.3.9056<a class="anchor" aria-label="anchor" href="#igraph-2039056"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9056">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9056"></a></h3>
-<ul><li><p>Further clarifications for betweenness(). ref <a href="https://github.com/igraph/rigraph/issues/1489" class="external-link">#1489</a></p></li>
-<li><p>Clarify how betweenness with cutoff is normalized. ref <a href="https://github.com/igraph/rigraph/issues/1489" class="external-link">#1489</a></p></li>
-<li><p>Fix centr_eigen_tmax() docs.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9055" id="igraph-2039055">igraph 2.0.3.9055<a class="anchor" aria-label="anchor" href="#igraph-2039055"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9055">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9055"></a></h3>
-<ul><li>Increase cpp11 minimal version (<a href="https://github.com/igraph/rigraph/issues/1490" class="external-link">#1490</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9054" id="igraph-2039054">igraph 2.0.3.9054<a class="anchor" aria-label="anchor" href="#igraph-2039054"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9054">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9054"></a></h3>
-<ul><li>Add ellipsis to dummy functions <code><a href="../reference/inside-square-error.html">.nei()</a></code> and others (<a href="https://github.com/igraph/rigraph/issues/1487" class="external-link">#1487</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-3-9054">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9054"></a></h3>
+<h3 id="breaking-changes-2-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-1-0"></a></h3>
 <ul><li>Breaking change: remove tkigraph from {igraph} proper (<a href="https://github.com/igraph/rigraph/issues/1474" class="external-link">#1474</a>).</li>
+<li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
+<li>Breaking change: change make.R (<a href="https://github.com/igraph/rigraph/issues/1390" class="external-link">#1390</a>).</li>
+<li>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-2-0-3-9054">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9054"></a></h3>
-<ul><li>Results for revdepcheck (<a href="https://github.com/igraph/rigraph/issues/1488" class="external-link">#1488</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9054">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9054"></a></h3>
-<ul><li>Add a custom roxygen2 cdocs tag (<a href="https://github.com/igraph/rigraph/issues/1484" class="external-link">#1484</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-2-0-3-9054">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-0-3-9054"></a></h3>
-<ul><li>Breaking change: remove tkigraph from {igraph} proper (<a href="https://github.com/igraph/rigraph/issues/1474" class="external-link">#1474</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9053" id="igraph-2039053">igraph 2.0.3.9053<a class="anchor" aria-label="anchor" href="#igraph-2039053"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9053">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9053"></a></h3>
-<ul><li>Add some argument checking to <code><a href="../reference/shapes.html">add_shape()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1478" class="external-link">#1478</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9053">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9053"></a></h3>
-<ul><li>Remove useless snapshot (<a href="https://github.com/igraph/rigraph/issues/1481" class="external-link">#1481</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9052" id="igraph-2039052">igraph 2.0.3.9052<a class="anchor" aria-label="anchor" href="#igraph-2039052"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9052">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9052"></a></h3>
-<ul><li>Fix includig diagonal elements in dense adjacency matrices (<a href="https://github.com/igraph/rigraph/issues/1437" class="external-link">#1437</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9051" id="igraph-2039051">igraph 2.0.3.9051<a class="anchor" aria-label="anchor" href="#igraph-2039051"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9051">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9051"></a></h3>
-<ul><li><p>Improve the manual page of sample_() (<a href="https://github.com/igraph/rigraph/issues/1477" class="external-link">#1477</a>).</p></li>
-<li><p>Improve cross-links from make_() manual page (<a href="https://github.com/igraph/rigraph/issues/1476" class="external-link">#1476</a>).</p></li>
-<li><p>Update is_separator() documentation based on C docs (<a href="https://github.com/igraph/rigraph/issues/1467" class="external-link">#1467</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9051">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9051"></a></h3>
-<ul><li>Remove lazyeval usage in <code>[.igraph.vs</code> (<a href="https://github.com/igraph/rigraph/issues/1445" class="external-link">#1445</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9051">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9051"></a></h3>
-<ul><li><p>Improve hits tests (<a href="https://github.com/igraph/rigraph/issues/1458" class="external-link">#1458</a>).</p></li>
-<li><p>Slightly refactor test.print.R for readability (<a href="https://github.com/igraph/rigraph/issues/1463" class="external-link">#1463</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9050" id="igraph-2039050">igraph 2.0.3.9050<a class="anchor" aria-label="anchor" href="#igraph-2039050"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9050">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9050"></a></h3>
-<ul><li>Support <code>fit_power_law(implementation = "plfit.p")</code> to compute the P-value (<a href="https://github.com/igraph/rigraph/issues/1386" class="external-link">#1386</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9050">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9050"></a></h3>
-<ul><li>Drop attributes in a more straightforward fashion in <code><a href="../reference/graphlet_basis.html">graphlet_basis()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1452" class="external-link">#1452</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9049" id="igraph-2039049">igraph 2.0.3.9049<a class="anchor" aria-label="anchor" href="#igraph-2039049"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9049">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9049"></a></h3>
-<ul><li>Fix TODO related to missing citation (<a href="https://github.com/igraph/rigraph/issues/1450" class="external-link">#1450</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9049">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9049"></a></h3>
-<ul><li><p>Fix navbar configuration (<a href="https://github.com/igraph/rigraph/issues/1451" class="external-link">#1451</a>).</p></li>
+<h3 id="bug-fixes-2-1-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-0"></a></h3>
+<ul><li>Refer to correct function in deprecation message.</li>
+<li>Add ellipsis to dummy functions <code><a href="../reference/inside-square-error.html">.nei()</a></code> and others (<a href="https://github.com/igraph/rigraph/issues/1487" class="external-link">#1487</a>).</li>
+<li>Fix includig diagonal elements in dense adjacency matrices (<a href="https://github.com/igraph/rigraph/issues/1437" class="external-link">#1437</a>).</li>
+<li>Align the body of <code><a href="../reference/graph.lattice.html">graph.lattice()</a></code> with its replacement <code><a href="../reference/make_lattice.html">make_lattice()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1439" class="external-link">#1439</a>).</li>
+<li>Use deprecated() as default value for ‘circular’ argument (<a href="https://github.com/igraph/rigraph/issues/1431" class="external-link">#1431</a>).</li>
+<li>Fix compatibility layer for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1394" class="external-link">#1394</a>).</li>
 <li>
-<p>Add DOI to citation.</p>
-<p><a href="https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032" class="external-link uri">https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032</a></p>
-<p>cc <a href="https://github.com/szhorvat" class="external-link">@szhorvat</a></p>
-</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9049">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9049"></a></h3>
-<ul><li><p>Remove non actionable comment (<a href="https://github.com/igraph/rigraph/issues/1469" class="external-link">#1469</a>).</p></li>
-<li><p>Remove TODO as several tests use the index argument (<a href="https://github.com/igraph/rigraph/issues/1457" class="external-link">#1457</a>).</p></li>
-<li><p>Add tests for special subsetting functions (<a href="https://github.com/igraph/rigraph/issues/1456" class="external-link">#1456</a>).</p></li>
-<li><p>Improve HITS test (<a href="https://github.com/igraph/rigraph/issues/1449" class="external-link">#1449</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9048" id="igraph-2039048">igraph 2.0.3.9048<a class="anchor" aria-label="anchor" href="#igraph-2039048"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9048">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9048"></a></h3>
-<ul><li>Align the body of <code><a href="../reference/graph.lattice.html">graph.lattice()</a></code> with its replacement <code><a href="../reference/make_lattice.html">make_lattice()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1439" class="external-link">#1439</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-3-9048">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9048"></a></h3>
-<ul><li>Export <code><a href="../reference/inside-square-error.html">.from()</a></code> etc. with behavior similar to <code>dplyr::across()</code> (<a href="https://github.com/igraph/rigraph/issues/1436" class="external-link">#1436</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9048">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9048"></a></h3>
-<ul><li>Remove lazyeval usage from R/make.R (<a href="https://github.com/igraph/rigraph/issues/1441" class="external-link">#1441</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9048">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9048"></a></h3>
-<ul><li>Add test for hits_scores() directly (<a href="https://github.com/igraph/rigraph/issues/1444" class="external-link">#1444</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9047" id="igraph-2039047">igraph 2.0.3.9047<a class="anchor" aria-label="anchor" href="#igraph-2039047"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9047">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9047"></a></h3>
-<ul><li><p>Rerun revdepcheck.</p></li>
-<li><p>Update revdepcheck results.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9046" id="igraph-2039046">igraph 2.0.3.9046<a class="anchor" aria-label="anchor" href="#igraph-2039046"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9046">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9046"></a></h3>
-<ul><li>Use deprecated() as default value for ‘circular’ argument (<a href="https://github.com/igraph/rigraph/issues/1431" class="external-link">#1431</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9045" id="igraph-2039045">igraph 2.0.3.9045<a class="anchor" aria-label="anchor" href="#igraph-2039045"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9045">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9045"></a></h3>
-<ul><li>Update revdepcheck results.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9044" id="igraph-2039044">igraph 2.0.3.9044<a class="anchor" aria-label="anchor" href="#igraph-2039044"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9044">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9044"></a></h3>
-<ul><li>Fix compatibility layer for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1394" class="external-link">#1394</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9044">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9044"></a></h3>
-<ul><li>Add slightly tweaked boilerplate CONTRIBUTING.md (<a href="https://github.com/igraph/rigraph/issues/1423" class="external-link">#1423</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9044">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9044"></a></h3>
-<ul><li>Use ‘better’ logic for updating vertex attributes (<a href="https://github.com/igraph/rigraph/issues/1330" class="external-link">#1330</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9043" id="igraph-2039043">igraph 2.0.3.9043<a class="anchor" aria-label="anchor" href="#igraph-2039043"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9043">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9043"></a></h3>
-<ul><li><p><code><a href="../reference/subgraph_centrality.html">subgraph_centrality()</a></code> now ignores edge directions (<a href="https://github.com/igraph/rigraph/issues/1414" class="external-link">#1414</a>).</p></li>
-<li><p>Remove unintended type conversions when using <code><a href="../reference/disjoint_union.html">disjoint_union()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1375" class="external-link">#1375</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-3-9043">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9043"></a></h3>
-<ul><li>
-<code><a href="../reference/degree.html">max_degree()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1403" class="external-link">#1403</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9043">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9043"></a></h3>
-<ul><li>Improve documentation of normalization methods for laplacian_matrix() (<a href="https://github.com/igraph/rigraph/issues/1420" class="external-link">#1420</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9043">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9043"></a></h3>
-<ul><li>Rename test file to align with script structure.info.R (<a href="https://github.com/igraph/rigraph/issues/1421" class="external-link">#1421</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9043">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9043"></a></h3>
-<ul><li>Update centrality.R (<a href="https://github.com/igraph/rigraph/issues/1418" class="external-link">#1418</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9042" id="igraph-2039042">igraph 2.0.3.9042<a class="anchor" aria-label="anchor" href="#igraph-2039042"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9042">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9042"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8" class="email">igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9041" id="igraph-2039041">igraph 2.0.3.9041<a class="anchor" aria-label="anchor" href="#igraph-2039041"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9041">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9041"></a></h3>
-<ul><li>
-<p>Update vendored sources to <a href="mailto:igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972" class="email">igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972</a>.</p>
-<p>fix: fix crash during interruption in DrL chore: add PR template</p>
-</li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78" class="email">igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78</a>.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9040" id="igraph-2039040">igraph 2.0.3.9040<a class="anchor" aria-label="anchor" href="#igraph-2039040"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9040">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9040"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322" class="email">igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9039" id="igraph-2039039">igraph 2.0.3.9039<a class="anchor" aria-label="anchor" href="#igraph-2039039"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9039">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9039"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7" class="email">igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9038" id="igraph-2039038">igraph 2.0.3.9038<a class="anchor" aria-label="anchor" href="#igraph-2039038"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9038">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9038"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0" class="email">igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9037" id="igraph-2039037">igraph 2.0.3.9037<a class="anchor" aria-label="anchor" href="#igraph-2039037"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9037">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9037"></a></h3>
-<ul><li>
-<code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1416" class="external-link">#1416</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="doc-2-0-3-9037">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9037"></a></h3>
-<ul><li>Mark <code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> as experimental.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9036" id="igraph-2039036">igraph 2.0.3.9036<a class="anchor" aria-label="anchor" href="#igraph-2039036"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9036">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9036"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@59899fbda04c28af73309851320495ed72542094" class="email">igraph/igraph@59899fbda04c28af73309851320495ed72542094</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9035" id="igraph-2039035">igraph 2.0.3.9035<a class="anchor" aria-label="anchor" href="#igraph-2039035"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9035">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9035"></a></h3>
-<ul><li>
-<p>Update vendored sources to <a href="mailto:igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593" class="email">igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593</a>.</p>
-<p>fuzzer: use libxml2 2.13.1 refactor: name CHUNG_LU_GRG to CHUNG_LU_MAXENT (no release has been issued with the GRG naming so far)</p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9034" id="igraph-2039034">igraph 2.0.3.9034<a class="anchor" aria-label="anchor" href="#igraph-2039034"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9034">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9034"></a></h3>
-<ul><li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9034">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9034"></a></h3>
-<ul><li>Fix typos in <code>?plot.common</code> (<a href="https://github.com/gvegayon" class="external-link">@gvegayon</a>) (<a href="https://github.com/igraph/rigraph/issues/1413" class="external-link">#1413</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9034">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9034"></a></h3>
-<ul><li><p>Use lifecycle in R/iterators.R (<a href="https://github.com/igraph/rigraph/issues/1399" class="external-link">#1399</a>).</p></li>
-<li><p>Use <code><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">lifecycle::deprecated()</a></code> now that we can (<a href="https://github.com/igraph/rigraph/issues/1397" class="external-link">#1397</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-2-0-3-9034">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-0-3-9034"></a></h3>
-<ul><li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9034">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9034"></a></h3>
-<ul><li>More auto-generation (<a href="https://github.com/igraph/rigraph/issues/1368" class="external-link">#1368</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9033" id="igraph-2039033">igraph 2.0.3.9033<a class="anchor" aria-label="anchor" href="#igraph-2039033"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9033">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9033"></a></h3>
-<ul><li>
-<p>Update vendored sources to <a href="mailto:igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966" class="email">igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966</a>.</p>
-<p>chore: update changelog refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree</p>
-</li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc" class="email">igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc</a>.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9033">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9033"></a></h3>
-<ul><li>Remove expect_that() definition (<a href="https://github.com/igraph/rigraph/issues/1412" class="external-link">#1412</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9032" id="igraph-2039032">igraph 2.0.3.9032<a class="anchor" aria-label="anchor" href="#igraph-2039032"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9032">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9032"></a></h3>
-<ul><li>Put back header files for consumption by Bison (<a href="https://github.com/igraph/rigraph/issues/1406" class="external-link">#1406</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-0-3-9032">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9032"></a></h3>
-<ul><li>Remove deprecated functions before 1.0 (<a href="https://github.com/igraph/rigraph/issues/1352" class="external-link">#1352</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9032">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9032"></a></h3>
-<ul><li>Try installing {graph} again (<a href="https://github.com/igraph/rigraph/issues/1407" class="external-link">#1407</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9032">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9032"></a></h3>
-<ul><li><p>Stop using throws_error() in test-bipartite.projection.R (<a href="https://github.com/igraph/rigraph/issues/1409" class="external-link">#1409</a>).</p></li>
-<li><p>Stop using prints_text() in test-bipartite.random.game.R (<a href="https://github.com/igraph/rigraph/issues/1408" class="external-link">#1408</a>).</p></li>
-<li><p>Stop using is_identical_to() in test-maximal_cliques.R.</p></li>
-<li><p>Stop using gives_warning() in test-operators4.R.</p></li>
-<li><p>Stop using gives_warning() in test-dot.product.game.R.</p></li>
-<li><p>Stop using expect_that() in test-trees.R.</p></li>
-<li><p>Remove use of expect_that() in test-clusters.R.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9031" id="igraph-2039031">igraph 2.0.3.9031<a class="anchor" aria-label="anchor" href="#igraph-2039031"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9031">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9031"></a></h3>
-<ul><li>
-<p>Update vendored sources to <a href="mailto:igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc" class="email">igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc</a>.</p>
-<p>interface: update chung_lu_game() parameter names</p>
-</li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5" class="email">igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5</a>.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9030" id="igraph-2039030">igraph 2.0.3.9030<a class="anchor" aria-label="anchor" href="#igraph-2039030"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9030">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9030"></a></h3>
-<ul><li>Update C/igraph (<a href="https://github.com/igraph/rigraph/issues/1378" class="external-link">#1378</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9029" id="igraph-2039029">igraph 2.0.3.9029<a class="anchor" aria-label="anchor" href="#igraph-2039029"></a></h2>
-<div class="section level3">
-<h3 id="testing-2-0-3-9029">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9029"></a></h3>
-<ul><li>Results.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9028" id="igraph-2039028">igraph 2.0.3.9028<a class="anchor" aria-label="anchor" href="#igraph-2039028"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9028">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9028"></a></h3>
-<ul><li>Infrastructure to review revdepcheck results (<a href="https://github.com/igraph/rigraph/issues/1402" class="external-link">#1402</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9027" id="igraph-2039027">igraph 2.0.3.9027<a class="anchor" aria-label="anchor" href="#igraph-2039027"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9027">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9027"></a></h3>
-<ul><li>Make <code><a href="../reference/edge_density.html">edge_density()</a></code> examples relevant.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9026" id="igraph-2039026">igraph 2.0.3.9026<a class="anchor" aria-label="anchor" href="#igraph-2039026"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9026">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9026"></a></h3>
-<ul><li>
+<code><a href="../reference/subgraph_centrality.html">subgraph_centrality()</a></code> now ignores edge directions (<a href="https://github.com/igraph/rigraph/issues/1414" class="external-link">#1414</a>).</li>
+<li>Remove unintended type conversions when using <code><a href="../reference/disjoint_union.html">disjoint_union()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1375" class="external-link">#1375</a>).</li>
+<li>Put back header files for consumption by Bison (<a href="https://github.com/igraph/rigraph/issues/1406" class="external-link">#1406</a>).</li>
+<li>
 <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> works with old method names again (<a href="https://github.com/igraph/rigraph/issues/1393" class="external-link">#1393</a>).</li>
+<li>Add missing <code>PROTECT</code> (<a href="https://github.com/igraph/rigraph/issues/1382" class="external-link">#1382</a>).</li>
+<li>Fix reading of LGL and NCOL files (broken in 2.0.0) (<a href="https://github.com/igraph/rigraph/issues/1347" class="external-link">#1347</a>).</li>
+<li>Fixed potential memory leak in <code>R_igraph_community_to_membership2()</code> (<a href="https://github.com/igraph/rigraph/issues/1367" class="external-link">#1367</a>).</li>
+<li>Comment failing ci (<a href="https://github.com/igraph/rigraph/issues/1357" class="external-link">#1357</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-2-0-3-9026">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9026"></a></h3>
-<ul><li>Results.</li>
+<h3 id="features-2-1-0">Features<a class="anchor" aria-label="anchor" href="#features-2-1-0"></a></h3>
+<ul><li>Add <code><a href="../reference/ivs.html">independence_number()</a></code> as an alias of ivs_size (<a href="https://github.com/igraph/rigraph/issues/1522" class="external-link">#1522</a>).</li>
+<li>Create get_edge_ids() as new name for get.edge.ids() (<a href="https://github.com/igraph/rigraph/issues/1510" class="external-link">#1510</a>).</li>
+<li>Breaking change: remove tkigraph from {igraph} proper (<a href="https://github.com/igraph/rigraph/issues/1474" class="external-link">#1474</a>).</li>
+<li>Support <code>fit_power_law(implementation = "plfit.p")</code> to compute the P-value (<a href="https://github.com/igraph/rigraph/issues/1386" class="external-link">#1386</a>).</li>
+<li>Export <code><a href="../reference/inside-square-error.html">.from()</a></code> etc. with behavior similar to <code>dplyr::across()</code> (<a href="https://github.com/igraph/rigraph/issues/1436" class="external-link">#1436</a>).</li>
+<li>
+<code><a href="../reference/degree.html">max_degree()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1403" class="external-link">#1403</a>).</li>
+<li>
+<code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1416" class="external-link">#1416</a>).</li>
+<li>Remove deprecated functions before 1.0 (<a href="https://github.com/igraph/rigraph/issues/1352" class="external-link">#1352</a>).</li>
+<li>Update C/igraph (<a href="https://github.com/igraph/rigraph/issues/1378" class="external-link">#1378</a>).</li>
+<li>Rename sample_degseq() method and add the edge.switching.simple method (<a href="https://github.com/igraph/rigraph/issues/1376" class="external-link">#1376</a>).</li>
+<li>Generate all bindings (<a href="https://github.com/igraph/rigraph/issues/1044" class="external-link">#1044</a>).</li>
+<li>Weight support for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/igraph/rigraph/issues/1211" class="external-link">#1211</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="refactoring-2-0-3-9026">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9026"></a></h3>
-<ul><li><p>Expect_that(is_equivalent()) (<a href="https://github.com/igraph/rigraph/issues/1395" class="external-link">#1395</a>).</p></li>
-<li><p>Breaking change: change make.R (<a href="https://github.com/igraph/rigraph/issues/1390" class="external-link">#1390</a>).</p></li>
+<h3 id="chore-2-1-0">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0"></a></h3>
+<ul><li>Start deprecation of <code><a href="../reference/as_adj.html">as_adj()</a></code> alias of <code><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1524" class="external-link">#1524</a>).</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1" class="email">igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1</a>.</li>
+<li>Add <code><a href="../reference/ivs.html">max_ivs()</a></code> alias for <code><a href="../reference/maximal_ivs.html">maximal_ivs()</a></code>, for consistency (<a href="https://github.com/igraph/rigraph/issues/1521" class="external-link">#1521</a>).</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703" class="email">igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703</a> (<a href="https://github.com/igraph/rigraph/issues/1517" class="external-link">#1517</a>).</li>
+<li>Start renaming as.directed() and as.undirected() to <code>as_di… (</code>#1513`{=html}).</li>
+<li>Start deprecate <code>graph.edges()</code> to <code>graph_from_edges()</code> (<a href="https://github.com/igraph/rigraph/issues/1512" class="external-link">#1512</a>).</li>
+<li>Make <code><a href="../reference/dot-igraph.progress.html">.igraph.progress()</a></code> and <code><a href="../reference/dot-igraph.status.html">.igraph.status()</a></code> more internal (<a href="https://github.com/igraph/rigraph/issues/1516" class="external-link">#1516</a>).</li>
+<li>Formally deprecate <code>similarity.&lt;something&gt;()</code> functions (<a href="https://github.com/igraph/rigraph/issues/1515" class="external-link">#1515</a>).</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a" class="email">igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118" class="email">igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118</a> (<a href="https://github.com/igraph/rigraph/issues/1470" class="external-link">#1470</a>).</li>
+<li>Results from revdepcheck (<a href="https://github.com/igraph/rigraph/issues/1506" class="external-link">#1506</a>).</li>
+<li>Replace <code><a href="../reference/is.directed.html">is.directed()</a></code> with <code><a href="../reference/is_directed.html">is_directed()</a></code> in stimulus YAML (<a href="https://github.com/igraph/rigraph/issues/1494" class="external-link">#1494</a>).</li>
+<li>Soft-deprecate <code><a href="../reference/graph_.html">graph_()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1493" class="external-link">#1493</a>).</li>
+<li>Remove useless igraph_test() and igraphtest() functions as we … (<a href="https://github.com/igraph/rigraph/issues/1501" class="external-link">#1501</a>).</li>
+<li>Use lifecycle for deprecation of membership argument of modula… (<a href="https://github.com/igraph/rigraph/issues/1498" class="external-link">#1498</a>).</li>
+<li>Properly deprecate some functions in layout.R (<a href="https://github.com/igraph/rigraph/issues/1500" class="external-link">#1500</a>).</li>
+<li>Remove references to deprecated functions (<a href="https://github.com/igraph/rigraph/issues/1497" class="external-link">#1497</a>).</li>
+<li>Increase cpp11 minimal version (<a href="https://github.com/igraph/rigraph/issues/1490" class="external-link">#1490</a>).</li>
+<li>Results for revdepcheck (<a href="https://github.com/igraph/rigraph/issues/1488" class="external-link">#1488</a>).</li>
+<li>Add some argument checking to <code><a href="../reference/shapes.html">add_shape()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1478" class="external-link">#1478</a>).</li>
+<li>Fix TODO related to missing citation (<a href="https://github.com/igraph/rigraph/issues/1450" class="external-link">#1450</a>).</li>
+<li>Rerun revdepcheck.</li>
+<li>Update revdepcheck results.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8" class="email">igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972" class="email">igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972</a>. fix: fix crash during interruption in DrL chore: add PR template</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78" class="email">igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322" class="email">igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7" class="email">igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0" class="email">igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@59899fbda04c28af73309851320495ed72542094" class="email">igraph/igraph@59899fbda04c28af73309851320495ed72542094</a>.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593" class="email">igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593</a>. fuzzer: use libxml2 2.13.1 refactor: name CHUNG_LU_GRG to CHUNG_LU_MAXENT (no release has been issued with the GRG naming so far)</li>
+<li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966" class="email">igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966</a>. chore: update changelog refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc" class="email">igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc</a>. interface: update chung_lu_game() parameter names</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5" class="email">igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5</a>.</li>
+<li>Infrastructure to review revdepcheck results (<a href="https://github.com/igraph/rigraph/issues/1402" class="external-link">#1402</a>).</li>
+<li>Results.</li>
+<li>Use and explain <code><a href="https://rdrr.io/r/base/ns-internal.html" class="external-link">getNamespaceInfo()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1339" class="external-link">#1339</a>).</li>
+<li>Work around <a href="https://github.com/igraph/igraph/pull/2527" class="external-link uri">https://github.com/igraph/igraph/pull/2527</a>.</li>
+<li>Apply patch after vendoring.</li>
+<li>Update vendored sources to <a href="mailto:igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472" class="email">igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472</a>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="breaking-changes-2-0-3-9026">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-0-3-9026"></a></h3>
-<ul><li>Breaking change: change make.R (<a href="https://github.com/igraph/rigraph/issues/1390" class="external-link">#1390</a>).</li>
+<h3 id="continuous-integration-2-1-0">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-0"></a></h3>
+<ul><li>Try installing {graph} again (<a href="https://github.com/igraph/rigraph/issues/1407" class="external-link">#1407</a>).</li>
+<li>Install rhub.</li>
+<li>Fix vendoring workflow.</li>
+<li>Work around installation problems for the graph package (<a href="https://github.com/igraph/rigraph/issues/1374" class="external-link">#1374</a>).</li>
+<li>Remove conflict action again.</li>
+<li>Use other conflict checker action.</li>
+<li>Add conflicts checker for PRs.</li>
+<li>Run examples with comment <code>\dontrun{}</code> (<a href="https://github.com/igraph/rigraph/issues/1310" class="external-link">#1310</a>).</li>
+<li>Install R (<a href="https://github.com/igraph/rigraph/issues/1335" class="external-link">#1335</a>).</li>
+<li>Remove running examples in sanitizer (<a href="https://github.com/igraph/rigraph/issues/1314" class="external-link">#1314</a>).</li>
+<li>Update lock.yaml.</li>
+<li>Update lock.yaml (<a href="https://github.com/igraph/rigraph/issues/1309" class="external-link">#1309</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-1-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-0"></a></h3>
+<ul><li>Remove stray alias.</li>
+<li>Use {devtag} for internal function docs (<a href="https://github.com/igraph/rigraph/issues/1507" class="external-link">#1507</a>).</li>
+<li>Expand on <code>fit_power_law(implementation = "plfit.p")</code> (<a href="https://github.com/igraph/rigraph/issues/1503" class="external-link">#1503</a>).</li>
+<li>Add more cdocs tags (<a href="https://github.com/igraph/rigraph/issues/1491" class="external-link">#1491</a>).</li>
+<li>Document how to run document(). thx <a href="https://github.com/szhorvat" class="external-link">@szhorvat</a></li>
+<li>Add a custom roxygen2 cdocs tag (<a href="https://github.com/igraph/rigraph/issues/1484" class="external-link">#1484</a>).</li>
+<li>Improve the manual page of sample_() (<a href="https://github.com/igraph/rigraph/issues/1477" class="external-link">#1477</a>).</li>
+<li>Improve cross-links from make_() manual page (<a href="https://github.com/igraph/rigraph/issues/1476" class="external-link">#1476</a>).</li>
+<li>Update is_separator() documentation based on C docs (<a href="https://github.com/igraph/rigraph/issues/1467" class="external-link">#1467</a>).</li>
+<li>Fix navbar configuration (<a href="https://github.com/igraph/rigraph/issues/1451" class="external-link">#1451</a>).</li>
+<li>Add DOI to citation. <a href="https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032" class="external-link uri">https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032</a> cc <a href="https://github.com/szhorvat" class="external-link">@szhorvat</a></li>
+<li>Add slightly tweaked boilerplate CONTRIBUTING.md (<a href="https://github.com/igraph/rigraph/issues/1423" class="external-link">#1423</a>).</li>
+<li>Improve documentation of normalization methods for laplacian_matrix() (<a href="https://github.com/igraph/rigraph/issues/1420" class="external-link">#1420</a>).</li>
+<li>Fix typos in <code>?plot.common</code> (<a href="https://github.com/gvegayon" class="external-link">@gvegayon</a>) (<a href="https://github.com/igraph/rigraph/issues/1413" class="external-link">#1413</a>).</li>
+<li>Fix <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> example (<a href="https://github.com/igraph/rigraph/issues/1297" class="external-link">#1297</a>).</li>
+<li>Fix <code><a href="../reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix()</a></code> examples to avoid warnings (<a href="https://github.com/igraph/rigraph/issues/1302" class="external-link">#1302</a>).</li>
+<li>Replace <code>\dontrun{}</code> with <code>@examplesIf</code> (<a href="https://github.com/igraph/rigraph/issues/1307" class="external-link">#1307</a>).</li>
+<li>Update <code>igraph.Rmd</code>, fix manual page typo (<a href="https://github.com/igraph/rigraph/issues/1313" class="external-link">#1313</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-2-1-0">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-1-0"></a></h3>
+<ul><li>Remove lazyeval usage in <code>[.igraph.vs</code> (<a href="https://github.com/igraph/rigraph/issues/1445" class="external-link">#1445</a>).</li>
+<li>Drop attributes in a more straightforward fashion in <code><a href="../reference/graphlet_basis.html">graphlet_basis()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1452" class="external-link">#1452</a>).</li>
+<li>Remove lazyeval usage from R/make.R (<a href="https://github.com/igraph/rigraph/issues/1441" class="external-link">#1441</a>).</li>
+<li>Use ‘better’ logic for updating vertex attributes (<a href="https://github.com/igraph/rigraph/issues/1330" class="external-link">#1330</a>).</li>
+<li>Use lifecycle in R/iterators.R (<a href="https://github.com/igraph/rigraph/issues/1399" class="external-link">#1399</a>).</li>
+<li>Use <code><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">lifecycle::deprecated()</a></code> now that we can (<a href="https://github.com/igraph/rigraph/issues/1397" class="external-link">#1397</a>).</li>
+<li>Expect_that(is_equivalent()) (<a href="https://github.com/igraph/rigraph/issues/1395" class="external-link">#1395</a>).</li>
+<li>Breaking change: change make.R (<a href="https://github.com/igraph/rigraph/issues/1390" class="external-link">#1390</a>).</li>
+<li>Handle <code>null</code> names for <code>R_igraph_mybracket2_names</code> (<a href="https://github.com/igraph/rigraph/issues/1342" class="external-link">#1342</a>).</li>
+<li>Names in <code>update-cigraph.sh</code> script (<a href="https://github.com/igraph/rigraph/issues/1287" class="external-link">#1287</a>).</li>
+<li>Move variables closer to their usage, add explaining variables (<a href="https://github.com/igraph/rigraph/issues/1336" class="external-link">#1336</a>).</li>
+<li>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</li>
+<li>Explaining variables (<a href="https://github.com/igraph/rigraph/issues/1326" class="external-link">#1326</a>).</li>
+<li>Less if else in vertex_attr() (<a href="https://github.com/igraph/rigraph/issues/1324" class="external-link">#1324</a>).</li>
+<li>Add assert_named_list() helper to assert the value is a named list with no duplicate names (<a href="https://github.com/igraph/rigraph/issues/1322" class="external-link">#1322</a>).</li>
+<li>Early return() in graph_attr() (<a href="https://github.com/igraph/rigraph/issues/1320" class="external-link">#1320</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-1-0">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-0"></a></h3>
+<ul><li>Put snaps where they belong.</li>
+<li>Refactor test-layout.fr.R for simplicity and readability (<a href="https://github.com/igraph/rigraph/issues/1504" class="external-link">#1504</a>).</li>
+<li>Remove useless snapshot (<a href="https://github.com/igraph/rigraph/issues/1481" class="external-link">#1481</a>).</li>
+<li>Improve hits tests (<a href="https://github.com/igraph/rigraph/issues/1458" class="external-link">#1458</a>).</li>
+<li>Slightly refactor test.print.R for readability (<a href="https://github.com/igraph/rigraph/issues/1463" class="external-link">#1463</a>).</li>
+<li>Remove non actionable comment (<a href="https://github.com/igraph/rigraph/issues/1469" class="external-link">#1469</a>).</li>
+<li>Remove TODO as several tests use the index argument (<a href="https://github.com/igraph/rigraph/issues/1457" class="external-link">#1457</a>).</li>
+<li>Add tests for special subsetting functions (<a href="https://github.com/igraph/rigraph/issues/1456" class="external-link">#1456</a>).</li>
+<li>Improve HITS test (<a href="https://github.com/igraph/rigraph/issues/1449" class="external-link">#1449</a>).</li>
+<li>Add test for hits_scores() directly (<a href="https://github.com/igraph/rigraph/issues/1444" class="external-link">#1444</a>).</li>
+<li>Rename test file to align with script structure.info.R (<a href="https://github.com/igraph/rigraph/issues/1421" class="external-link">#1421</a>).</li>
+<li>Remove expect_that() definition (<a href="https://github.com/igraph/rigraph/issues/1412" class="external-link">#1412</a>).</li>
+<li>Stop using throws_error() in test-bipartite.projection.R (<a href="https://github.com/igraph/rigraph/issues/1409" class="external-link">#1409</a>).</li>
+<li>Stop using prints_text() in test-bipartite.random.game.R (<a href="https://github.com/igraph/rigraph/issues/1408" class="external-link">#1408</a>).</li>
+<li>Stop using is_identical_to() in test-maximal_cliques.R.</li>
+<li>Stop using gives_warning() in test-operators4.R.</li>
+<li>Stop using gives_warning() in test-dot.product.game.R.</li>
+<li>Stop using expect_that() in test-trees.R.</li>
+<li>Remove use of expect_that() in test-clusters.R.</li>
+<li>Results.</li>
+<li>Improve attribute tests (<a href="https://github.com/igraph/rigraph/issues/1381" class="external-link">#1381</a>).</li>
+<li>Refactor test-assortativity for readability (<a href="https://github.com/igraph/rigraph/issues/1371" class="external-link">#1371</a>).</li>
+<li>Refactoring around <code>interface.R</code> (<a href="https://github.com/igraph/rigraph/issues/1366" class="external-link">#1366</a>).</li>
+<li>Improve sample_degseq() tests (<a href="https://github.com/igraph/rigraph/issues/1315" class="external-link">#1315</a>).</li>
+<li>Use largest_component() and expect_equal() in test files (<a href="https://github.com/igraph/rigraph/issues/1323" class="external-link">#1323</a>).</li>
+<li>Add skip condition for <code>rglplot</code> test (<a href="https://github.com/igraph/rigraph/issues/1306" class="external-link">#1306</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-2-1-0">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-1-0"></a></h3>
+<ul><li>Lifecycle and tests in structural.properties (<a href="https://github.com/igraph/rigraph/issues/1505" class="external-link">#1505</a>).</li>
+<li>Update centrality.R (<a href="https://github.com/igraph/rigraph/issues/1418" class="external-link">#1418</a>).</li>
+<li>More auto-generation (<a href="https://github.com/igraph/rigraph/issues/1368" class="external-link">#1368</a>).</li>
+<li>Expect_equal() instead of expect_that(equals()) (<a href="https://github.com/igraph/rigraph/issues/1391" class="external-link">#1391</a>).</li>
+<li>Refactoring around adjacency.R (<a href="https://github.com/igraph/rigraph/issues/1370" class="external-link">#1370</a>).</li>
+<li>Refactoring around test-attributes.R (<a href="https://github.com/igraph/rigraph/issues/1372" class="external-link">#1372</a>).</li>
+<li>Fix <code>%\&gt;%</code> typo in vignettes (<a href="https://github.com/igraph/rigraph/issues/1343" class="external-link">#1343</a>).</li>
+<li>Sample_forestfire() tests and example 🔥 (<a href="https://github.com/igraph/rigraph/issues/1318" class="external-link">#1318</a>).</li>
+<li>Internal changes only.</li>
+<li>Merge branch ‘cran-2.0.3’.</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9025" id="igraph-2039025">igraph 2.0.3.9025<a class="anchor" aria-label="anchor" href="#igraph-2039025"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9025">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9025"></a></h3>
-<ul><li>Update troubleshooting document.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9025">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9025"></a></h3>
-<ul><li><p>Expect_equal() instead of expect_that(equals()) (<a href="https://github.com/igraph/rigraph/issues/1391" class="external-link">#1391</a>).</p></li>
-<li><p>Refactoring around adjacency.R (<a href="https://github.com/igraph/rigraph/issues/1370" class="external-link">#1370</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9024" id="igraph-2039024">igraph 2.0.3.9024<a class="anchor" aria-label="anchor" href="#igraph-2039024"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9024">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9024"></a></h3>
-<ul><li>Install rhub.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9023" id="igraph-2039023">igraph 2.0.3.9023<a class="anchor" aria-label="anchor" href="#igraph-2039023"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9023">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9023"></a></h3>
-<ul><li>Fix vendoring workflow.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9022" id="igraph-2039022">igraph 2.0.3.9022<a class="anchor" aria-label="anchor" href="#igraph-2039022"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9022">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9022"></a></h3>
-<ul><li>Add missing <code>PROTECT</code> (<a href="https://github.com/igraph/rigraph/issues/1382" class="external-link">#1382</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9021" id="igraph-2039021">igraph 2.0.3.9021<a class="anchor" aria-label="anchor" href="#igraph-2039021"></a></h2>
-<div class="section level3">
-<h3 id="testing-2-0-3-9021">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9021"></a></h3>
-<ul><li>Improve attribute tests (<a href="https://github.com/igraph/rigraph/issues/1381" class="external-link">#1381</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9020" id="igraph-2039020">igraph 2.0.3.9020<a class="anchor" aria-label="anchor" href="#igraph-2039020"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9020">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9020"></a></h3>
-<ul><li>Rename sample_degseq() method and add the edge.switching.simple method (<a href="https://github.com/igraph/rigraph/issues/1376" class="external-link">#1376</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9019" id="igraph-2039019">igraph 2.0.3.9019<a class="anchor" aria-label="anchor" href="#igraph-2039019"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9019">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9019"></a></h3>
-<ul><li>Fix reading of LGL and NCOL files (broken in 2.0.0) (<a href="https://github.com/igraph/rigraph/issues/1347" class="external-link">#1347</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9019">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9019"></a></h3>
-<ul><li>Work around installation problems for the graph package (<a href="https://github.com/igraph/rigraph/issues/1374" class="external-link">#1374</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9019">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9019"></a></h3>
-<ul><li>Refactor test-assortativity for readability (<a href="https://github.com/igraph/rigraph/issues/1371" class="external-link">#1371</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9019">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9019"></a></h3>
-<ul><li>Refactoring around test-attributes.R (<a href="https://github.com/igraph/rigraph/issues/1372" class="external-link">#1372</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9018" id="igraph-2039018">igraph 2.0.3.9018<a class="anchor" aria-label="anchor" href="#igraph-2039018"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9018">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9018"></a></h3>
-<ul><li>Fixed potential memory leak in <code>R_igraph_community_to_membership2()</code> (<a href="https://github.com/igraph/rigraph/issues/1367" class="external-link">#1367</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9017" id="igraph-2039017">igraph 2.0.3.9017<a class="anchor" aria-label="anchor" href="#igraph-2039017"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-0-3-9017">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-0-3-9017"></a></h3>
-<ul><li>Comment failing ci (<a href="https://github.com/igraph/rigraph/issues/1357" class="external-link">#1357</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9017">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9017"></a></h3>
-<ul><li>Refactoring around <code>interface.R</code> (<a href="https://github.com/igraph/rigraph/issues/1366" class="external-link">#1366</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9017">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9017"></a></h3>
-<ul><li>Fix <code>%\&gt;%</code> typo in vignettes (<a href="https://github.com/igraph/rigraph/issues/1343" class="external-link">#1343</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9016" id="igraph-2039016">igraph 2.0.3.9016<a class="anchor" aria-label="anchor" href="#igraph-2039016"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9016">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9016"></a></h3>
-<ul><li>Improve <code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> documentation.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9015" id="igraph-2039015">igraph 2.0.3.9015<a class="anchor" aria-label="anchor" href="#igraph-2039015"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9015">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9015"></a></h3>
-<ul><li>Further improved <code><a href="../reference/cluster_edge_betweenness.html">cluster_edge_betweenness()</a></code> documentation.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9014" id="igraph-2039014">igraph 2.0.3.9014<a class="anchor" aria-label="anchor" href="#igraph-2039014"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-0-3-9014">doc<a class="anchor" aria-label="anchor" href="#doc-2-0-3-9014"></a></h3>
-<ul><li>Improved <code><a href="../reference/cluster_edge_betweenness.html">cluster_edge_betweenness()</a></code> documentation.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9013" id="igraph-2039013">igraph 2.0.3.9013<a class="anchor" aria-label="anchor" href="#igraph-2039013"></a></h2>
-<div class="section level3">
-<h3 id="testing-2-0-3-9013">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9013"></a></h3>
-<ul><li>Improve sample_degseq() tests (<a href="https://github.com/igraph/rigraph/issues/1315" class="external-link">#1315</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9012" id="igraph-2039012">igraph 2.0.3.9012<a class="anchor" aria-label="anchor" href="#igraph-2039012"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9012">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9012"></a></h3>
-<ul><li>Remove conflict action again.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9012">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9012"></a></h3>
-<ul><li>Handle <code>null</code> names for <code>R_igraph_mybracket2_names</code> (<a href="https://github.com/igraph/rigraph/issues/1342" class="external-link">#1342</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9011" id="igraph-2039011">igraph 2.0.3.9011<a class="anchor" aria-label="anchor" href="#igraph-2039011"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9011">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9011"></a></h3>
-<ul><li><p>Use other conflict checker action.</p></li>
-<li><p>Add conflicts checker for PRs.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9010" id="igraph-2039010">igraph 2.0.3.9010<a class="anchor" aria-label="anchor" href="#igraph-2039010"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9010">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9010"></a></h3>
-<ul><li>Generate all bindings (<a href="https://github.com/igraph/rigraph/issues/1044" class="external-link">#1044</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-0-3-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9010"></a></h3>
-<ul><li>Use and explain <code><a href="https://rdrr.io/r/base/ns-internal.html" class="external-link">getNamespaceInfo()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1339" class="external-link">#1339</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9010">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9010"></a></h3>
-<ul><li>Run examples with comment <code>\dontrun{}</code> (<a href="https://github.com/igraph/rigraph/issues/1310" class="external-link">#1310</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9010">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9010"></a></h3>
-<ul><li>Names in <code>update-cigraph.sh</code> script (<a href="https://github.com/igraph/rigraph/issues/1287" class="external-link">#1287</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9009" id="igraph-2039009">igraph 2.0.3.9009<a class="anchor" aria-label="anchor" href="#igraph-2039009"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9009">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9009"></a></h3>
-<ul><li>Install R (<a href="https://github.com/igraph/rigraph/issues/1335" class="external-link">#1335</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9009">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9009"></a></h3>
-<ul><li><p>Move variables closer to their usage, add explaining variables (<a href="https://github.com/igraph/rigraph/issues/1336" class="external-link">#1336</a>).</p></li>
-<li><p>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</p></li>
-<li><p>Explaining variables (<a href="https://github.com/igraph/rigraph/issues/1326" class="external-link">#1326</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-2-0-3-9009">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-0-3-9009"></a></h3>
-<ul><li>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9008" id="igraph-2039008">igraph 2.0.3.9008<a class="anchor" aria-label="anchor" href="#igraph-2039008"></a></h2>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9008">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9008"></a></h3>
-<ul><li><p>Less if else in vertex_attr() (<a href="https://github.com/igraph/rigraph/issues/1324" class="external-link">#1324</a>).</p></li>
-<li><p>Add assert_named_list() helper to assert the value is a named list with no duplicate names (<a href="https://github.com/igraph/rigraph/issues/1322" class="external-link">#1322</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9008">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9008"></a></h3>
-<ul><li>Use largest_component() and expect_equal() in test files (<a href="https://github.com/igraph/rigraph/issues/1323" class="external-link">#1323</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-2-0-3-9008">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-0-3-9008"></a></h3>
-<ul><li>Sample_forestfire() tests and example 🔥 (<a href="https://github.com/igraph/rigraph/issues/1318" class="external-link">#1318</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9007" id="igraph-2039007">igraph 2.0.3.9007<a class="anchor" aria-label="anchor" href="#igraph-2039007"></a></h2>
-<div class="section level3">
-<h3 id="features-2-0-3-9007">Features<a class="anchor" aria-label="anchor" href="#features-2-0-3-9007"></a></h3>
-<ul><li>Weight support for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/igraph/rigraph/issues/1211" class="external-link">#1211</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-2-0-3-9007">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-2-0-3-9007"></a></h3>
-<ul><li>Early return() in graph_attr() (<a href="https://github.com/igraph/rigraph/issues/1320" class="external-link">#1320</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9006" id="igraph-2039006">igraph 2.0.3.9006<a class="anchor" aria-label="anchor" href="#igraph-2039006"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9006">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9006"></a></h3>
-<ul><li><p>Fix <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> example (<a href="https://github.com/igraph/rigraph/issues/1297" class="external-link">#1297</a>).</p></li>
-<li><p>Fix <code><a href="../reference/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix()</a></code> examples to avoid warnings (<a href="https://github.com/igraph/rigraph/issues/1302" class="external-link">#1302</a>).</p></li>
-<li><p>Replace <code>\dontrun{}</code> with <code>@examplesIf</code> (<a href="https://github.com/igraph/rigraph/issues/1307" class="external-link">#1307</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-0-3-9006">Testing<a class="anchor" aria-label="anchor" href="#testing-2-0-3-9006"></a></h3>
-<ul><li>Add skip condition for <code>rglplot</code> test (<a href="https://github.com/igraph/rigraph/issues/1306" class="external-link">#1306</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9005" id="igraph-2039005">igraph 2.0.3.9005<a class="anchor" aria-label="anchor" href="#igraph-2039005"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-0-3-9005">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-0-3-9005"></a></h3>
-<ul><li>Update <code>igraph.Rmd</code>, fix manual page typo (<a href="https://github.com/igraph/rigraph/issues/1313" class="external-link">#1313</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9004" id="igraph-2039004">igraph 2.0.3.9004<a class="anchor" aria-label="anchor" href="#igraph-2039004"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9004">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9004"></a></h3>
-<ul><li>Remove running examples in sanitizer (<a href="https://github.com/igraph/rigraph/issues/1314" class="external-link">#1314</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9003" id="igraph-2039003">igraph 2.0.3.9003<a class="anchor" aria-label="anchor" href="#igraph-2039003"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-0-3-9003">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-0-3-9003"></a></h3>
-<ul><li><p>Update lock.yaml.</p></li>
-<li><p>Update lock.yaml (<a href="https://github.com/igraph/rigraph/issues/1309" class="external-link">#1309</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9002" id="igraph-2039002">igraph 2.0.3.9002<a class="anchor" aria-label="anchor" href="#igraph-2039002"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-0-3-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-2-0-3-9002"></a></h3>
-<ul><li><p>Work around <a href="https://github.com/igraph/igraph/pull/2527" class="external-link uri">https://github.com/igraph/igraph/pull/2527</a>.</p></li>
-<li><p>Apply patch after vendoring.</p></li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472" class="email">igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472</a>.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9001" id="igraph-2039001">igraph 2.0.3.9001<a class="anchor" aria-label="anchor" href="#igraph-2039001"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.3.9000" id="igraph-2039000">igraph 2.0.3.9000<a class="anchor" aria-label="anchor" href="#igraph-2039000"></a></h2>
-<ul><li>Merge branch ‘cran-2.0.3’.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.3" id="igraph-203">igraph 2.0.3<a class="anchor" aria-label="anchor" href="#igraph-203"></a></h2><p class="text-muted">CRAN release: 2024-03-13</p>
 <p>See <a href="https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/3299d31/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog of the bundled C core, and <a href="https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84" class="external-link uri">https://github.com/igraph/rigraph/compare/f3fa58b..3299d31#diff-aeb78e0159780a9b26daabaf6f95f450b0cfec7161fc735f27ad69145a57dc84</a> for the changes since the igraph 2.0.1. (A permanent link to the most recent changelog of the C core used in the R package is <a href="https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/main/src/vendor/cigraph/CHANGELOG.md</a>.)</p>
