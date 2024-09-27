@@ -62,7 +62,7 @@ c     %------------------%
 c     | Scalar Arguments |
 c     %------------------%
 c
-      character*2 which
+      character  which*2
       logical    apply
       integer    n
 c
