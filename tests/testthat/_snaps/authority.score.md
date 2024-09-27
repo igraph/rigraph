@@ -4,7 +4,7 @@
       s3 <- authority_score(g2, options = arpack_defaults)$vector
     Condition
       Warning:
-      `authority_score()` was deprecated in igraph 2.0.4.
+      `authority_score()` was deprecated in igraph 2.1.0.
       i Please use `hits_scores()` instead.
       Warning:
       arpack_defaults was deprecated in igraph 1.6.0.

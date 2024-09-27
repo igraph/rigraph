@@ -4,7 +4,7 @@
       subgraph.edges(g, edges, delete.vertices = FALSE)
     Condition
       Warning:
-      `subgraph.edges()` was deprecated in igraph 2.0.4.
+      `subgraph.edges()` was deprecated in igraph 2.1.0.
       i Please use `subgraph_from_edges()` instead.
     Output
       IGRAPH U--- 13 11 -- 
