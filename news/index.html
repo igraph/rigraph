@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,60 +39,41 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9002" id="igraph-2109002">igraph 2.1.0.9002<a class="anchor" aria-label="anchor" href="#igraph-2109002"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9001" id="igraph-2109001">igraph 2.1.0.9001<a class="anchor" aria-label="anchor" href="#igraph-2109001"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.0’ (<a href="https://github.com/igraph/rigraph/issues/1532" class="external-link">#1532</a>).</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9000" id="igraph-2109000">igraph 2.1.0.9000<a class="anchor" aria-label="anchor" href="#igraph-2109000"></a></h2>
-<ul><li><p>Merge branch ‘cran-2.1.0’.</p></li>
-<li><p>Merge branch ‘main’ into cran-2.1.0.</p></li>
-</ul></div>
-    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0" id="igraph-210">igraph 2.1.0<a class="anchor" aria-label="anchor" href="#igraph-210"></a></h2>
-<p>See <a href="https://github.com/igraph/rigraph/blob/d2e0f4eb567dfc505227c346a015bef574c4ccd1/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/d2e0f4eb567dfc505227c346a015bef574c4ccd1/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”.</p>
+<p>See <a href="https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”.</p>
 <div class="section level3">
 <h3 id="features-2-1-0">Features<a class="anchor" aria-label="anchor" href="#features-2-1-0"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1" class="email">igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1</a>.</li>
-<li>Add <code><a href="../reference/ivs.html">independence_number()</a></code> as an alias of ivs_size (<a href="https://github.com/igraph/rigraph/issues/1522" class="external-link">#1522</a>).</li>
+<ul><li>Update vendored C/igraph sources to <a href="mailto:igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1" class="email">igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1</a>.</li>
+<li>Add <code><a href="../reference/ivs.html">independence_number()</a></code> as an alias of <code><a href="../reference/ivs.html">ivs_size()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1522" class="external-link">#1522</a>).</li>
 <li>Add <code><a href="../reference/get_edge_ids.html">get_edge_ids()</a></code> as an alias of <code><a href="../reference/get.edge.ids.html">get.edge.ids()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1510" class="external-link">#1510</a>).</li>
 <li>Support <code>fit_power_law(implementation = "plfit.p")</code> to compute the P-value (<a href="https://github.com/igraph/rigraph/issues/1386" class="external-link">#1386</a>).</li>
 <li>Export <code><a href="../reference/inside-square-error.html">.from()</a></code> etc. with behavior similar to <code>dplyr::across()</code> (<a href="https://github.com/igraph/rigraph/issues/1436" class="external-link">#1436</a>).</li>
-<li>Add <code><a href="../reference/degree.html">max_degree()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1403" class="external-link">#1403</a>) and <code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1416" class="external-link">#1416</a>).</li>
-<li>Remove functions deprecated before 1.0 (<a href="https://github.com/igraph/rigraph/issues/1352" class="external-link">#1352</a>).</li>
-<li>Update C/igraph (<a href="https://github.com/igraph/rigraph/issues/1378" class="external-link">#1378</a>).</li>
-<li>Rename <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> method and add the <code>"edge.switching.simple"</code> method (<a href="https://github.com/igraph/rigraph/issues/1376" class="external-link">#1376</a>).</li>
-<li>Weight support for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/igraph/rigraph/issues/1211" class="external-link">#1211</a>).</li>
+<li>Add <code><a href="../reference/degree.html">max_degree()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1403" class="external-link">#1403</a>).</li>
+<li>Add experimental <code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1416" class="external-link">#1416</a>).</li>
+<li>Rename methods available for <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> and add the <code>"edge.switching.simple"</code> method (<a href="https://github.com/igraph/rigraph/issues/1376" class="external-link">#1376</a>).</li>
+<li>Weight support for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1211" class="external-link">#1211</a>).</li>
 <li>Add some argument checking to <code><a href="../reference/shapes.html">add_shape()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1478" class="external-link">#1478</a>).</li>
+<li>Remove functions deprecated before 1.0 (<a href="https://github.com/igraph/rigraph/issues/1352" class="external-link">#1352</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="breaking-changes-2-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-1-0"></a></h3>
 <ul><li>Breaking change: remove tkigraph from {igraph} proper (<a href="https://github.com/igraph/rigraph/issues/1474" class="external-link">#1474</a>).</li>
 <li>Breaking change: Hard-deprecate <code><a href="../reference/get.edge.html">get.edge()</a></code> and <code><a href="../reference/layout.grid.3d.html">layout.grid.3d()</a></code> which have been deprecated for 10 years (<a href="https://github.com/igraph/rigraph/issues/1398" class="external-link">#1398</a>).</li>
-<li>Breaking change: change make.R (<a href="https://github.com/igraph/rigraph/issues/1390" class="external-link">#1390</a>).</li>
 <li>Breaking change: use <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code> in <code>igraph.match.arg()</code> (<a href="https://github.com/igraph/rigraph/issues/1165" class="external-link">#1165</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-2-1-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-0"></a></h3>
-<ul><li>Refer to correct function in deprecation message.</li>
-<li>Add ellipsis to dummy functions <code><a href="../reference/inside-square-error.html">.nei()</a></code> and others (<a href="https://github.com/igraph/rigraph/issues/1487" class="external-link">#1487</a>).</li>
+<ul><li>Add ellipsis to dummy functions <code><a href="../reference/inside-square-error.html">.nei()</a></code> and others (<a href="https://github.com/igraph/rigraph/issues/1487" class="external-link">#1487</a>).</li>
 <li>Fix includig diagonal elements in dense adjacency matrices (<a href="https://github.com/igraph/rigraph/issues/1437" class="external-link">#1437</a>).</li>
 <li>Align the body of <code><a href="../reference/graph.lattice.html">graph.lattice()</a></code> with its replacement <code><a href="../reference/make_lattice.html">make_lattice()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1439" class="external-link">#1439</a>).</li>
 <li>Use <code>deprecated()</code> as default value for <code>circular</code> argument to <code><a href="../reference/make_lattice.html">make_lattice()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1431" class="external-link">#1431</a>).</li>
-<li>Fix compatibility layer for <code><a href="../reference/eccentricity.html">eccentricity()</a></code> and <code><a href="../reference/radius.html">radius()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1394" class="external-link">#1394</a>).</li>
 <li>
 <code><a href="../reference/subgraph_centrality.html">subgraph_centrality()</a></code> now ignores edge directions (<a href="https://github.com/igraph/rigraph/issues/1414" class="external-link">#1414</a>).</li>
 <li>Remove unintended type conversions when using <code><a href="../reference/disjoint_union.html">disjoint_union()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1375" class="external-link">#1375</a>).</li>
-<li>Put back header files for consumption by Bison (<a href="https://github.com/igraph/rigraph/issues/1406" class="external-link">#1406</a>).</li>
-<li>
-<code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> works with old method names again (<a href="https://github.com/igraph/rigraph/issues/1393" class="external-link">#1393</a>).</li>
 <li>Add missing <code>PROTECT()</code> (<a href="https://github.com/igraph/rigraph/issues/1382" class="external-link">#1382</a>).</li>
 <li>Fix reading of LGL and NCOL files (broken in 2.0.0) (<a href="https://github.com/igraph/rigraph/issues/1347" class="external-link">#1347</a>).</li>
 <li>Fixed potential memory leak in <code>R_igraph_community_to_membership2()</code> (<a href="https://github.com/igraph/rigraph/issues/1367" class="external-link">#1367</a>).</li>
@@ -105,7 +86,7 @@
 <li>Update <code><a href="../reference/is_separator.html">is_separator()</a></code> documentation based on C docs (<a href="https://github.com/igraph/rigraph/issues/1467" class="external-link">#1467</a>).</li>
 <li>Fix navbar configuration (<a href="https://github.com/igraph/rigraph/issues/1451" class="external-link">#1451</a>).</li>
 <li>Add DOI to citation (<a href="https://github.com/igraph/rigraph/issues/1450" class="external-link">#1450</a>).</li>
-<li>Add slightly tweaked boilerplate CONTRIBUTING.md (<a href="https://github.com/igraph/rigraph/issues/1423" class="external-link">#1423</a>).</li>
+<li>Add slightly tweaked boilerplate <code>CONTRIBUTING.md</code> (<a href="https://github.com/igraph/rigraph/issues/1423" class="external-link">#1423</a>).</li>
 <li>Improve documentation of normalization methods for laplacian_matrix() (<a href="https://github.com/igraph/rigraph/issues/1420" class="external-link">#1420</a>).</li>
 <li>Fix typos in <code>?plot.common</code> (<a href="https://github.com/gvegayon" class="external-link">@gvegayon</a>) (<a href="https://github.com/igraph/rigraph/issues/1413" class="external-link">#1413</a>).</li>
 <li>Fix <code><a href="../reference/sample_degseq.html">sample_degseq()</a></code> example (<a href="https://github.com/igraph/rigraph/issues/1297" class="external-link">#1297</a>).</li>
@@ -116,7 +97,6 @@
 <li>Further clarifications for <code><a href="../reference/betweenness.html">betweenness()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1489" class="external-link">#1489</a>).</li>
 <li>Clarify how betweenness with cutoff is normalized.</li>
 <li>Fix <code><a href="../reference/centr_eigen_tmax.html">centr_eigen_tmax()</a></code> docs.</li>
-<li>Mark <code><a href="../reference/sample_chung_lu.html">sample_chung_lu()</a></code> as experimental.</li>
 <li>Make <code><a href="../reference/edge_density.html">edge_density()</a></code> examples relevant.</li>
 <li>Update troubleshooting document.</li>
 <li>Improve <code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> documentation.</li>
