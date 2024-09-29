@@ -2,41 +2,36 @@
 
 # igraph 2.1.0
 
-See <https://github.com/igraph/rigraph/blob/d2e0f4eb567dfc505227c346a015bef574c4ccd1/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
 ## Features
 
-- Update vendored sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
-- Add `independence_number()` as an alias of ivs_size (#1522).
+- Update vendored C/igraph sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
+- Add `independence_number()` as an alias of `ivs_size()` (#1522).
 - Add `get_edge_ids()` as an alias of `get.edge.ids()` (#1510).
 - Support `fit_power_law(implementation = "plfit.p")` to compute the P-value (#1386).
 - Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436).
-- Add `max_degree()` (#1403) and `sample_chung_lu()` (#1416).
-- Remove functions deprecated before 1.0 (#1352).
-- Update C/igraph (#1378).
-- Rename `sample_degseq()` method and add the `"edge.switching.simple"` method (#1376).
-- Weight support for `eccentricity()` and `radius()` (@krlmlr, #1211).
+- Add `max_degree()` (#1403).
+- Add experimental `sample_chung_lu()` (#1416).
+- Rename methods available for `sample_degseq()` and add the `"edge.switching.simple"` method (#1376).
+- Weight support for `eccentricity()` and `radius()` (#1211).
 - Add some argument checking to `add_shape()` (#1478).
+- Remove functions deprecated before 1.0 (#1352).
 
 ## Breaking changes
 
 - Breaking change: remove tkigraph from {igraph} proper (#1474).
 - Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
-- Breaking change: change make.R (#1390).
 - Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
 
 ## Bug fixes
 
-- Refer to correct function in deprecation message.
 - Add ellipsis to dummy functions `.nei()` and others (#1487).
 - Fix includig diagonal elements in dense adjacency matrices (#1437).
 - Align the body of `graph.lattice()` with its replacement `make_lattice()` (#1439).
 - Use `deprecated()` as default value for `circular` argument to `make_lattice()` (#1431).
-- Fix compatibility layer for `eccentricity()` and `radius()` (#1394).
 - `subgraph_centrality()` now ignores edge directions (#1414).
 - Remove unintended type conversions when using `disjoint_union()` (#1375).
-- Put back header files for consumption by Bison (#1406).
-- `sample_degseq()` works with old method names again (#1393).
 - Add missing `PROTECT()` (#1382).
 - Fix reading of LGL and NCOL files (broken in 2.0.0) (#1347).
 - Fixed potential memory leak in `R_igraph_community_to_membership2()` (#1367).
@@ -49,7 +44,7 @@ See <https://github.com/igraph/rigraph/blob/d2e0f4eb567dfc505227c346a015bef574c4
 - Update `is_separator()` documentation based on C docs (#1467).
 - Fix navbar configuration (#1451).
 - Add DOI to citation (#1450).
-- Add slightly tweaked boilerplate CONTRIBUTING.md (#1423).
+- Add slightly tweaked boilerplate `CONTRIBUTING.md` (#1423).
 - Improve documentation of normalization methods for laplacian_matrix() (#1420).
 - Fix typos in `?plot.common` (@gvegayon) (#1413).
 - Fix `sample_degseq()` example (#1297).
@@ -60,7 +55,6 @@ See <https://github.com/igraph/rigraph/blob/d2e0f4eb567dfc505227c346a015bef574c4
 - Further clarifications for `betweenness()` (#1489).
 - Clarify how betweenness with cutoff is normalized.
 - Fix `centr_eigen_tmax()` docs.
-- Mark `sample_chung_lu()` as experimental.
 - Make `edge_density()` examples relevant.
 - Update troubleshooting document.
 - Improve `eigen_centrality()` documentation.
