@@ -5,7 +5,7 @@ mysort <- function(x) {
   x[order(xl, xc)]
 }
 
-unvs <- function(x) lapply(x, as.vector)
+
 
 bk4 <- function(graph, min = 0, max = Inf) {
   Gamma <- function(v) {

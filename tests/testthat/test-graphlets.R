@@ -38,8 +38,6 @@ test_that("Graphlets filtering works", {
 
 ## Naive version of graphlets
 
-unvs <- function(x) lapply(x, as.vector)
-
 threshold.net <- function(graph, level) {
   N <- vcount(graph)
   graph.t <- delete_edges(graph, which(E(graph)$weight < level))
