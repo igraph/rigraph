@@ -326,3 +326,41 @@ test_that("betweenness() -- shortest paths are compared with tolerance when calc
 
   expect_equal(result[1:5], c("1" = 0, "2" = 44, "3" = 71, "4" = 36.5, "6" = 44))
 })
+
+test_that("edge_betweenness() works", {
+  kite <- graph_from_literal(
+    Andre - Beverly:Carol:Diane:Fernando,
+    Beverly - Andre:Diane:Ed:Garth,
+    Carol - Andre:Diane:Fernando,
+    Diane - Andre:Beverly:Carol:Ed:Fernando:Garth,
+    Ed - Beverly:Diane:Garth,
+    Fernando - Andre:Carol:Diane:Garth:Heather,
+    Garth - Beverly:Diane:Ed:Fernando:Heather,
+    Heather - Fernando:Garth:Ike,
+    Ike - Heather:Jane,
+    Jane - Ike
+  )
+
+  bet <- betweenness(kite)
+  ebet <- edge_betweenness(kite)
+
+  bet2 <- sapply(1:vcount(kite), function(x) {
+    ae <- E(kite)[.inc(x)]
+    (sum(ebet[ae]) - vcount(kite) + 1) / 2
+  })
+
+  expect_equal(unname(bet), bet2)
+
+  #### Weighted
+
+  E(kite)$weight <- sample(1:10, ecount(kite), replace = TRUE)
+
+  bet <- betweenness(kite)
+  ebet <- edge_betweenness(kite)
+  bet2 <- sapply(1:vcount(kite), function(x) {
+    ae <- E(kite)[.inc(x)]
+    (sum(ebet[ae]) - vcount(kite) + 1) / 2
+  })
+
+  expect_equal(unname(bet), bet2)
+})
