@@ -1253,7 +1253,9 @@ as.directed <- function(graph, mode = c("mutual", "arbitrary", "random", "acycli
 #' @inheritParams as_undirected
 #' @keywords internal
 #' @export
-as.undirected <- function(graph, mode = c("collapse", "each", "mutual")) {
+as.undirected <- function(graph,
+                          mode = c("collapse", "each", "mutual"),
+                          edge.attr.comb = igraph_opt("edge.attr.comb")) {
   lifecycle::deprecate_soft("2.1.0", "as.undirected()", "as_undirected()")
-  as_undirected(graph = graph, mode = mode)
+  as_undirected(graph = graph, mode = mode, edge.attr.comb = edge.attr.comb)
 }
