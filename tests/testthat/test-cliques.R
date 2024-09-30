@@ -1,4 +1,4 @@
-test_that("cliques works", {
+test_that("cliques() works", {
   withr::local_seed(42)
 
   check.clique <- function(graph, vids) {
@@ -20,7 +20,7 @@ test_that("cliques works", {
   expect_true(all(sapply(max_cliques(g), check.clique, graph = g)))
 })
 
-test_that("clique_size_counts works", {
+test_that("clique_size_counts() works", {
   g <- make_full_graph(5) %du% make_full_graph(3)
 
   expect_equal(clique_size_counts(g), c(8, 13, 11, 5, 1))
