@@ -45,12 +45,6 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
   el[, 2] <- el[, 2] + n1
 
   if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
 
     if (!directed || mode == 1) {
       ## nothing do to
@@ -92,12 +86,6 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
 graph.incidence.dense <- function(incidence, directed, mode, multiple,
                                   weighted) {
   if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
 
     n1 <- nrow(incidence)
     n2 <- ncol(incidence)
@@ -227,6 +215,24 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
     "total" = 3
   )
   multiple <- as.logical(multiple)
+
+  if (!is.null(weighted)) {
+    if (is.logical(weighted) && weighted) {
+      weighted <- "weight"
+    }
+    if (is.logical(weighted) && !weighted) {
+      cli::cli_abort(c(
+        "{.arg weighted} can't be {.code FALSE}.",
+        i = "See {.help graph_from_biadjacency_matrix}'s manual page."
+      ))
+    }
+    if (!is.character(weighted)) {
+      cli::cli_abort(c(
+        "{.arg weighted} can't be {.obj_type_friendly {weighted}}.",
+        i = "See {.help graph_from_biadjacency_matrix}'s manual page."
+      ))
+    }
+  }
 
   if (inherits(incidence, "Matrix")) {
     res <- graph.incidence.sparse(incidence,

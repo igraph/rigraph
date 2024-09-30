@@ -139,3 +139,16 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   expect_length(E(total_g), 14)
   expect_equal(as_adj_list(total_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7))
 })
+
+test_that("graph_from_biadjacency_matrix() errors well", {
+  inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
+  colnames(inc) <- letters[1:5]
+  rownames(inc) <- LETTERS[1:3]
+
+  expect_snapshot(error= TRUE, {
+    (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
+  })
+  expect_snapshot(error = TRUE, {
+    (g <- graph_from_biadjacency_matrix(inc, weight = 42))
+  })
+})

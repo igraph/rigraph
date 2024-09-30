@@ -48,3 +48,21 @@
       + edges (vertex names):
        [1] B--b C--b A--c C--c C--c A--d A--d A--e B--e C--e
 
+# graph_from_biadjacency_matrix() errors well
+
+    Code
+      (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
+    Condition
+      Error in `graph_from_biadjacency_matrix()`:
+      ! `weighted` can't be `FALSE`.
+      i See `?graph_from_biadjacency_matrix()`'s manual page.
+
+---
+
+    Code
+      (g <- graph_from_biadjacency_matrix(inc, weight = 42))
+    Condition
+      Error in `graph_from_biadjacency_matrix()`:
+      ! `weighted` can't be a number.
+      i See `?graph_from_biadjacency_matrix()`'s manual page.
+
