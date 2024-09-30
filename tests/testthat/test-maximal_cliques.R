@@ -1,13 +1,21 @@
-mysort <- function(x) {
+test_that("max_cliques() work", {
+  withr::local_seed(42)
+  G <- sample_gnm(1000, 1000)
+  cli <- make_full_graph(10)
+  for (i in 1:10) {
+    G <- permute(G, sample(vcount(G)))
+    G <- G %u% cli
+  }
+  G <- simplify(G)
+
+  mysort <- function(x) {
   xl <- sapply(x, length)
   x <- lapply(x, sort)
   xc <- sapply(x, paste, collapse = "-")
   x[order(xl, xc)]
 }
 
-
-
-bk4 <- function(graph, min = 0, max = Inf) {
+  bk4 <- function(graph, min = 0, max = Inf) {
   Gamma <- function(v) {
     neighbors(graph, v)
   }
@@ -108,27 +116,22 @@ bk4 <- function(graph, min = 0, max = Inf) {
   lapply(res, as.integer)
 }
 
-#################################################################
-
-test_that("Maximal cliques work", {
-  withr::local_seed(42)
-  G <- sample_gnm(1000, 1000)
-  cli <- make_full_graph(10)
-  for (i in 1:10) {
-    G <- permute(G, sample(vcount(G)))
-    G <- G %u% cli
-  }
-  G <- simplify(G)
-
   cl1 <- mysort(bk4(G, min = 3))
   cl2 <- mysort(unvs(max_cliques(G, min = 3)))
 
   expect_identical(cl1, cl2)
 })
 
-test_that("Maximal cliques work for subsets", {
+test_that("max_cliques() work for subsets", {
   withr::local_seed(42)
   G <- sample_gnp(100, .5)
+
+  mysort <- function(x) {
+  xl <- sapply(x, length)
+  x <- lapply(x, sort)
+  xc <- sapply(x, paste, collapse = "-")
+  x[order(xl, xc)]
+}
 
   cl1 <- mysort(unvs(max_cliques(G, min = 8)))
 
@@ -139,7 +142,7 @@ test_that("Maximal cliques work for subsets", {
   expect_identical(cl1, cl2)
 })
 
-test_that("Counting maximal cliques works", {
+test_that("count_max_cliques works", {
   withr::local_seed(42)
   G <- sample_gnp(100, .5)
 
