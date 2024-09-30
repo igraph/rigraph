@@ -88,30 +88,46 @@
 
 See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
-## Features
+## Lifecycle 
 
-- Update vendored C/igraph sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
-- Add `independence_number()` as an alias of `ivs_size()` (#1522).
-- Add `get_edge_ids()` as an alias of `get.edge.ids()` (#1510).
-- Support `fit_power_law(implementation = "plfit.p")` to compute the P-value (#1386).
-- Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436).
-- Add `max_degree()` (#1403).
-- Add experimental `sample_chung_lu()` (#1416).
-- Rename methods available for `sample_degseq()` and add the `"edge.switching.simple"` method (#1376).
-- Weight support for `eccentricity()` and `radius()` (#1211).
-- Add some argument checking to `add_shape()` (#1478).
-- Remove functions deprecated before 1.0 (#1352).
-
-## Breaking changes
+### Breaking changes
 
 - Breaking change: remove tkigraph from {igraph} proper (#1474).
 - Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
 - Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
 
+### In-progress deprecations
+
+We are working towards a more consistent interface, especially as regards function naming: ultimately we want the igraph functions to use snake case.
+Please update your scripts and codebases as soon as you can.
+
+- Add `independence_number()` as an alias of `ivs_size()` (#1522).
+- Add `get_edge_ids()` as an alias of `get.edge.ids()` (#1510).
+- Increase the deprecation signal to a warning for `hub.score()` and `authority.score()` both replaced by `hits_scores()` (#1352).
+- Soft-deprecate `erdos.renyi.game()` and `random.graph.game()` (#1509).
+
+## Features
+
+### C library
+
+- Update vendored C/igraph sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
+
+### New functionality
+
+- Support `fit_power_law(implementation = "plfit.p")` to compute the P-value (#1386).
+- Add `max_degree()` (#1403).
+- Add experimental `sample_chung_lu()` (#1416).
+- Rename methods available for `sample_degseq()` and add the `"edge.switching.simple"` method (#1376).
+- Weight support for `eccentricity()` and `radius()` (#1211).
+- Add some argument checking to `add_shape()` (#1478).
+
+### More informative errors
+
+- Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436): functions like `.from()` are meant to be used inside `[` but now if an user misuses them, the error is more informative.
+
 ## Bug fixes
 
-- Add ellipsis to dummy functions `.nei()` and others (#1487).
-- Fix includig diagonal elements in dense adjacency matrices (#1437).
+- Fix including diagonal elements in dense adjacency matrices (#1437).
 - Align the body of `graph.lattice()` with its replacement `make_lattice()` (#1439).
 - Use `deprecated()` as default value for `circular` argument to `make_lattice()` (#1431).
 - `subgraph_centrality()` now ignores edge directions (#1414).
@@ -122,13 +138,10 @@ See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b92
 
 ## Documentation
 
-- Use {devtag} for internal function docs (#1507).
 - Improve the manual page of `sample_()` (#1477).
 - Improve cross-links from `make_()` manual page (#1476).
 - Update `is_separator()` documentation based on C docs (#1467).
-- Fix navbar configuration (#1451).
 - Add DOI to citation (#1450).
-- Add slightly tweaked boilerplate `CONTRIBUTING.md` (#1423).
 - Improve documentation of normalization methods for laplacian_matrix() (#1420).
 - Fix typos in `?plot.common` (@gvegayon) (#1413).
 - Fix `sample_degseq()` example (#1297).
@@ -140,13 +153,16 @@ See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b92
 - Clarify how betweenness with cutoff is normalized.
 - Fix `centr_eigen_tmax()` docs.
 - Make `edge_density()` examples relevant.
-- Update troubleshooting document.
 - Improve `eigen_centrality()` documentation.
-- Further improved `cluster_edge_betweenness()` documentation.
 - Improved `cluster_edge_betweenness()` documentation.
-- Make `.igraph.progress()` and `.igraph.status()` more internal (#1516).
 - `sample_forestfire()` tests and example (#1318).
-- Soft-deprecate `erdos.renyi.game()` and `random.graph.game()` (#1509).
+
+### Developer-facing docs
+
+- Add slightly tweaked boilerplate `CONTRIBUTING.md` (#1423).
+- Update troubleshooting document.
+- Use {devtag} for internal function docs (#1507).
+- Make `.igraph.progress()` and `.igraph.status()` more internal (#1516).
 
 
 # igraph 2.0.3
