@@ -338,3 +338,20 @@ test_that("as_graphnel() does not duplicate loop edges", {
   grNEL <- as_graphnel(igr)
   expect_equal(graph::edgeL(grNEL)$A$edges, c(1, 2))
 })
+
+
+test_that("as_long_data_frame() works correctly with and without names", {
+  expect_snapshot({
+    ring <- make_ring(3)
+    as_long_data_frame(ring)
+
+    V(ring)$name <- letters[1:3]
+    as_long_data_frame(ring)
+
+    V(ring)$score <- LETTERS[1:3]
+    as_long_data_frame(ring)
+
+    E(ring)$info <- 3:1
+    as_long_data_frame(ring)
+  })
+})
