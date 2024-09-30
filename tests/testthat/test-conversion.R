@@ -378,6 +378,23 @@ test_that("as_biadjacency_matrix() works -- dense named", {
   expect_identical(colnames(I2), c("h", "i", "j", "k", "l"))
 })
 
+test_that("as_biadjacency_matrix() works -- dense + attribute", {
+  withr::local_seed(42)
+  I <- matrix(sample(0:1, 9, replace = TRUE, prob = c(3, 1)), ncol = 3)
+  g <- graph_from_biadjacency_matrix(I)
+  E(g)$something <- letters[1:ecount(g)]
+
+  I2 <- as_biadjacency_matrix(g, attr = "something")
+  expect_equal(
+    unname(I2),
+    matrix(
+      c("a", "c", "0", "b", "0", "0", "0", "0", "0"),
+      nrow = 3L,
+      ncol = 3L
+    )
+  )
+})
+
 test_that("as_biadjacency_matrix() works -- sparse", {
   I <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(I)
