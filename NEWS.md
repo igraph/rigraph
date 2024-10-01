@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.0.9004
+
+## Documentation
+
+- Use mathjax for now (#1538).
+
+## Testing
+
+- Fold test-bonpow into test-centrality.
+
+- Fold `closeness()`'s tests into test-centrality.
+
+- Fold `edge_betweenness()`'s tests into test-centrality.
+
+- Fold `betweenness()`'s tests into test-centrality.R.
+
+- Fold `hits_scores()`'s tests into test-centrality.
+
+- Add tests for as_adjacency_matrix() in test-conversion (#1519).
+
+
 # igraph 2.1.0.9003
 
 - Merge branch 'cran-2.1.0'.
