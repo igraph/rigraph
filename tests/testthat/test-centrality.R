@@ -450,3 +450,42 @@ test_that("power_centrality() works", {
     list(c(-1.72, 1.53, -0.57), c(-0.55, 2.03, -0.18), c(0.44, 2.05, 0.15), c(1.01, 1.91, 0.34), c(1.33, 1.78, 0.44), c(1.52, 1.67, 0.51), c(1.65, 1.59, 0.55), c(1.74, 1.53, 0.58), c(1.80, 1.48, 0.60))
   )
 })
+
+test_that("eigen_centrality works", {
+  kite <- graph_from_literal(
+    Andre - Beverly:Carol:Diane:Fernando,
+    Beverly - Andre:Diane:Ed:Garth,
+    Carol - Andre:Diane:Fernando,
+    Diane - Andre:Beverly:Carol:Ed:Fernando:Garth,
+    Ed - Beverly:Diane:Garth,
+    Fernando - Andre:Carol:Diane:Garth:Heather,
+    Garth - Beverly:Diane:Ed:Fernando:Heather,
+    Heather - Fernando:Garth:Ike,
+    Ike - Heather:Jane,
+    Jane - Ike
+  )
+  evc <- round(eigen_centrality(kite)$vector, 3)
+  expect_equal(evc, structure(c(0.732, 0.732, 0.594, 1, 0.827, 0.594, 0.827, 0.407, 0.1, 0.023), .Names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")))
+
+
+  ## Eigenvector-centrality, small stress-test
+
+  is.principal <- function(M, lambda, eps = 1e-12) {
+    abs(eigen(M)$values[1] - lambda) < eps
+  }
+
+  is.ev <- function(M, v, lambda, eps = 1e-12) {
+    max(abs(M %*% v - lambda * v)) < eps
+  }
+
+  is.good <- function(M, v, lambda, eps = 1e-12) {
+    is.principal(M, lambda, eps) && is.ev(M, v, lambda, eps)
+  }
+
+  for (i in 1:1000) {
+    G <- sample_gnm(10, sample(1:20, 1))
+    ev <- eigen_centrality(G)
+    expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
+  }
+})
+
