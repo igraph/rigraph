@@ -227,6 +227,32 @@ test_that("ivs() works", {
   expect_equal(unique(ec), 0)
 })
 
+test_that("ivs() works, cliques of complement",  {
+  # 2385298846 https://github.com/igraph/rigraph/pull/1541#issuecomment-2385298846
+  # that the independent vertex sets of G are
+  # the same as the cliques of the complement of G (and vice versa)
+  g <- sample_gnp(50, 0.8)
+  ivs <- ivs(g, min = ivs_size(g)) %>% lapply(as.numeric)
+  complement <- complementer(g)
+  cliques <- cliques(complement, min = ivs_size(g)) %>% lapply(as.numeric)
+
+  expect_equal(length(ivs), length(cliques))
+
+  ivs_with_equivalent <- map_lgl(
+    ivs,
+    function(element, cliques) any(map_lgl(cliques, function(x) identical(x, element))),
+    cliques = cliques
+  )
+  expect_equal(sum(ivs_with_equivalent), length(ivs))
+
+  cliques_with_equivalent <- map_lgl(
+    cliques,
+    function(element, ivs) any(map_lgl(ivs, function(x) identical(x, element))),
+    ivs = ivs
+  )
+  expect_equal(sum(cliques_with_equivalent), length(cliques))
+})
+
 test_that("largest_cliques() works", {
   adj <- matrix(1, nrow = 11, ncol = 11) - diag(11)
   g <- graph_from_adjacency_matrix(adj)
