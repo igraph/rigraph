@@ -1,5 +1,4 @@
 test_that("all.st.cuts works", {
-  unvs <- function(x) lapply(x, as.vector)
 
   g <- graph_from_literal(a - +b - +c - +d - +e)
   cc <- st_cuts(g, source = "a", target = "e")
