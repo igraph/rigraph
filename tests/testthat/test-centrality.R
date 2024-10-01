@@ -690,3 +690,8 @@ test_that("arpack works for non-symmetric matrices", {
 
 # TODO: further tests for typically hard cases
 
+test_that("eigen_centrality() deprecated scale argument", {
+  g <- make_ring(10, directed = FALSE)
+  expect_snapshot(eigen_centrality(g, scale = TRUE))
+  expect_snapshot(eigen_centrality(g, scale = FALSE))
+})
