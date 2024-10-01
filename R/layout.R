@@ -2253,7 +2253,7 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 #' @export
 #' @keywords internal
 layout.spring <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.spring()", "layout_with_fr()")
+  lifecycle::deprecate_stop("2.1.0", "layout.spring()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
@@ -2271,7 +2271,7 @@ layout.spring <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.svd()", "layout_with_fr()")
+  lifecycle::deprecate_stop("2.1.0", "layout.svd()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
