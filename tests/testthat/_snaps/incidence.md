@@ -18,6 +18,16 @@
       + edges (vertex names):
       [1] A--c A--d B--b B--c B--e C--b C--d
 
+# graph_from_biadjacency_matrix() works -- dense + multiple
+
+    Code
+      (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE))
+    Output
+      IGRAPH UN-B 8 10 -- 
+      + attr: type (v/l), name (v/c)
+      + edges (vertex names):
+       [1] A--c A--d A--d A--e B--b B--e C--b C--c C--c C--e
+
 # graph_from_biadjacency_matrix() works -- sparse
 
     Code

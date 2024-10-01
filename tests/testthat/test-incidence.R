@@ -13,6 +13,20 @@ test_that("graph_from_biadjacency_matrix() works -- dense", {
   expect_true(is_weighted(weighted_g))
 })
 
+
+test_that("graph_from_biadjacency_matrix() works -- dense + multiple", {
+  local_igraph_options(print.id = FALSE)
+  withr::local_seed(42)
+
+  inc <- matrix(sample(0:2, 15, repl = TRUE), 3, 5)
+  colnames(inc) <- letters[1:5]
+  rownames(inc) <- LETTERS[1:3]
+
+  expect_snapshot((g <- graph_from_biadjacency_matrix(inc, multiple = TRUE)))
+  expect_false(is_weighted(g))
+})
+
+
 test_that("graph_from_biadjacency_matrix() works - dense, modes", {
   local_igraph_options(print.id = FALSE)
   withr::local_seed(42)
