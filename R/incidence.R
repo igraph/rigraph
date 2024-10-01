@@ -218,6 +218,13 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
 
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
+
+      if (multiple) {
+        cli::cli_abort(c(
+          "{.arg multiple} and {.arg weighted} cannot be both {.code TRUE}.",
+          "igraph either interprets numbers larger than 1 as weights or as multiplicities, but it cannot be both."
+        ))
+      }
       weighted <- "weight"
     }
     if (is.logical(weighted) && !weighted) {

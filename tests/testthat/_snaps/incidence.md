@@ -76,3 +76,12 @@
       ! `weighted` can't be a number.
       i See `?graph_from_biadjacency_matrix()`'s manual page.
 
+---
+
+    Code
+      (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
+    Condition
+      Error in `graph_from_biadjacency_matrix()`:
+      ! `multiple` and `weighted` cannot be both `TRUE`.
+      igraph either interprets numbers larger than 1 as weights or as multiplicities, but it cannot be both.
+

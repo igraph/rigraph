@@ -165,4 +165,7 @@ test_that("graph_from_biadjacency_matrix() errors well", {
   expect_snapshot(error = TRUE, {
     (g <- graph_from_biadjacency_matrix(inc, weight = 42))
   })
+  expect_snapshot(error = TRUE, {
+    (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
+  })
 })
