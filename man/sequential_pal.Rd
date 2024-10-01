@@ -23,6 +23,7 @@ centrality measure, or some ordinal vertex covariate, like the age of
 people, or their seniority level.
 }
 \examples{
+\dontshow{if (rlang::is_installed("igraphdata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(igraphdata)
 data(karate)
 karate <- karate \%>\%
@@ -31,6 +32,7 @@ karate <- karate \%>\%
 
 V(karate)$color <- scales::dscale(degree(karate) \%>\% cut(5), sequential_pal)
 plot(karate)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other palettes: 

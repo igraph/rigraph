@@ -1,6 +1,7 @@
 url: https://r.igraph.org/
 
 template:
+  math-rendering: mathjax
   bootstrap: 5
 
 navbar:
@@ -228,7 +229,6 @@ reference:
 - title: internal
   contents:
   - igraph-package
-  - has_concept("test")
   - "%>%"
 
 authors:

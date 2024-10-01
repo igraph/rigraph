@@ -28,7 +28,7 @@
       DOUBLE PRECISION   SX( * )
 *     ..
 *     .. Local Scalars ..
-      CHARACTER*80       LINE
+      CHARACTER          LINE*80
       INTEGER            I, K1, K2, LLL, NDIGIT
 *     ..
 *     .. Intrinsic Functions ..

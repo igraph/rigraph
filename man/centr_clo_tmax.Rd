@@ -7,14 +7,14 @@
 centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 }
 \arguments{
-\item{graph}{The input graph. It can also be \code{NULL}, if
+\item{graph}{The input graph. It can also be \code{NULL} if
 \code{nodes} is given.}
 
 \item{nodes}{The number of vertices. This is ignored if the graph is
 given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{closeness()}.}
+\code{closeness()}. Ignored if an undirected graph is given.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph

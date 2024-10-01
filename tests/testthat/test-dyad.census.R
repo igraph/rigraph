@@ -21,7 +21,7 @@ test_that("dyad_census works with celegansneural", {
   expect_equal(dc, list(mut = 197, asym = 1951, null = 41808))
   expect_equal(sum(which_mutual(ce)), dc$mut * 2)
   expect_equal(
-    ecount(as.undirected(ce, mode = "collapse")) - dc$mut,
+    ecount(as_undirected(ce, mode = "collapse")) - dc$mut,
     dc$asym
   )
   expect_equal(sum(unlist(dc)), vcount(ce) * (vcount(ce) - 1) / 2)

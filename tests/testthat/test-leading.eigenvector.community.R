@@ -50,7 +50,7 @@ test_that("cluster_leading_eigen works", {
   }
 
   g <- make_graph("Zachary")
-  A <- as_adj(g, sparse = FALSE)
+  A <- as_adjacency_matrix(g, sparse = FALSE)
   ec <- ecount(g)
   deg <- degree(g)
   lc <- cluster_leading_eigen(g, callback = f)

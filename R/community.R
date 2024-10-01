@@ -707,12 +707,12 @@ modularity.communities <- function(x, ...) {
 
 #' @rdname modularity.igraph
 #' @export
-modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
+modularity_matrix <- function(graph, membership = lifecycle::deprecated(), weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
   ensure_igraph(graph)
 
   if (!missing(membership)) {
-    warning("The membership argument is deprecated; modularity_matrix does not need it")
+    lifecycle::deprecate_warn("2.1.0", "modularity_matrix(membership = 'is no longer used')")
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1345,7 +1345,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft("2.0.4",
+    lifecycle::deprecate_soft("2.1.0",
                               "cluster_leiden(resolution_parameter)",
                               "cluster_leiden(resolution)")
     resolution <- resolution_parameter

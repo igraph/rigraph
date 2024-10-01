@@ -40,7 +40,7 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @keywords internal
 #' @export
 hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_score()")
+  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_scores()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
@@ -55,7 +55,7 @@ hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @keywords internal
 #' @export
 authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_score()")
+  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_scores()")
   authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
@@ -673,7 +673,7 @@ arpack_defaults <- function() {
 #' if (require(Matrix)) {
 #'   set.seed(42)
 #'   g <- sample_gnp(1000, 5 / 1000)
-#'   M <- as_adj(g, sparse = TRUE)
+#'   M <- as_adjacency_matrix(g, sparse = TRUE)
 #'   f2 <- function(x, extra = NULL) {
 #'     cat(".")
 #'     as.vector(M %*% x)
@@ -800,7 +800,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' cor(degree(g), sc)
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
-  A <- as_adj(graph)
+  A <- as_adjacency_matrix(graph)
   if (!diag) {
     diag(A) <- 0
   }
@@ -860,7 +860,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 #'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_adj()] to create a (sparse) adjacency matrix.
+#' @seealso [as_adjacency_matrix()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
 #' @examples
 #'
@@ -869,7 +869,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' spectrum(kite)[c("values", "vectors")]
 #'
 #' ## Double check
-#' eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
+#' eigen(as_adjacency_matrix(kite, sparse = FALSE))$vectors[, 1]
 #'
 #' ## Should be the same as 'eigen_centrality' (but rescaled)
 #' cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
@@ -1163,7 +1163,7 @@ hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_def
 #'   [arpack()] for details.
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  lifecycle::deprecate_soft("2.0.4", "authority_score()", "hits_scores()")
+  lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1361,7 +1361,7 @@ bonpow.dense <- function(graph, nodes = V(graph),
                          rescale = FALSE, tol = 1e-7) {
   ensure_igraph(graph)
 
-  d <- as_adj(graph)
+  d <- as_adjacency_matrix(graph)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1389,7 +1389,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adj(graph, sparse = TRUE)
+  d <- as_adjacency_matrix(graph, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
@@ -1564,7 +1564,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
     attr <- NULL
   }
 
-  d <- t(as_adj(graph, attr = attr, sparse = FALSE))
+  d <- t(as_adjacency_matrix(graph, attr = attr, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
@@ -1605,7 +1605,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
     attr <- NULL
   }
 
-  M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
+  M <- Matrix::t(as_adjacency_matrix(graph, attr = attr, sparse = TRUE))
 
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))

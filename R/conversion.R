@@ -168,7 +168,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
     lifecycle::deprecate_soft(
-      "2.0.4", "get.adjacency.dense(loops = 'must be a character')",
+      "2.1.0", "get.adjacency.dense(loops = 'must be a character')",
       details = sprintf("Converting to get.adjacency.dense (loops = '%s')", loops)
     )
   }
@@ -366,10 +366,30 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 }
 
+#' Convert a graph to an adjacency matrix
+#'
+#' `r lifecycle::badge("deprecated")`
+#' We plan to remove `as_adj()` in favor of the more explicitly named
+#' `as_adjacency_matrix()` so please use `as_adjacency_matrix()` instead.
+#'
 #' @export
-#' @rdname as_adjacency_matrix
-as_adj <- as_adjacency_matrix
+#' @inheritParams as_adjacency_matrix
+#' @keywords internal
+as_adj <- function(graph, type = c("both", "upper", "lower"),
+                   attr = NULL, edges = deprecated(), names = TRUE,
+                   sparse = igraph_opt("sparsematrices")) {
 
+  lifecycle::deprecate_soft("2.1.0", "as_adj()", "as_adjacency_matrix()")
+
+  as_adjacency_matrix(
+    graph = graph,
+    type = type,
+    attr = attr,
+    edges = edges,
+    names = names,
+    sparse = sparse
+  )
+}
 #' Convert a graph to an edge list
 #'
 #' Sometimes it is useful to work with a standard representation of a
@@ -412,11 +432,11 @@ as_edgelist <- function(graph, names = TRUE) {
 
 #' Convert between directed and undirected graphs
 #'
-#' `as.directed()` converts an undirected graph to directed,
-#' `as.undirected()` does the opposite, it converts a directed graph to
+#' `as_directed()` converts an undirected graph to directed,
+#' `as_undirected()` does the opposite, it converts a directed graph to
 #' undirected.
 #'
-#' Conversion algorithms for `as.directed()`: \describe{
+#' Conversion algorithms for `as_directed()`: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
 #' arbitrarily directed edge is created for each undirected edge, but the
 #' direction of the edge is deterministic (i.e. it always points the same
@@ -435,7 +455,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' graph contained loop edges.}
 #' }
 #'
-#' Conversion algorithms for `as.undirected()`: \describe{
+#' Conversion algorithms for `as_undirected()`: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
 #' is created for each directed one, this version might create graphs with
 #' multiple edges.} \item{"collapse"}{One undirected edge will be created
@@ -445,11 +465,11 @@ as_edgelist <- function(graph, names = TRUE) {
 #' edges are ignored. This mode might create multiple edges if there are more
 #' than one mutual edge pairs between the same pair of vertices.  } }
 #'
-#' @aliases as.directed as.undirected
+#' @aliases as_directed as_undirected
 #' @param graph The graph to convert.
 #' @param mode Character constant, defines the conversion algorithm. For
-#'   `as.directed()` it can be `mutual` or `arbitrary`. For
-#'   `as.undirected()` it can be `each`, `collapse` or
+#'   `as_directed()` it can be `mutual` or `arbitrary`. For
+#'   `as_undirected()` it can be `each`, `collapse` or
 #'   `mutual`. See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -461,14 +481,14 @@ as_edgelist <- function(graph, names = TRUE) {
 #' @examples
 #'
 #' g <- make_ring(10)
-#' as.directed(g, "mutual")
+#' as_directed(g, "mutual")
 #' g2 <- make_star(10)
-#' as.undirected(g)
+#' as_undirected(g)
 #'
 #' # Combining edge attributes
 #' g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 #' E(g3)$weight <- seq_len(ecount(g3))
-#' ug3 <- as.undirected(g3)
+#' ug3 <- as_undirected(g3)
 #' print(ug3, e = TRUE)
 
 #' @examplesIf rlang::is_interactive()
@@ -485,23 +505,23 @@ as_edgelist <- function(graph, names = TRUE) {
 #'   9, 8, 9, 8, 9, 9, 10, 10, 10, 10
 #' ))
 #' E(g4)$weight <- seq_len(ecount(g4))
-#' ug4 <- as.undirected(g4,
+#' ug4 <- as_undirected(g4,
 #'   mode = "mutual",
 #'   edge.attr.comb = list(weight = length)
 #' )
 #' print(ug4, e = TRUE)
 #'
 #' @cdocs igraph_to_directed
-as.directed <- to_directed_impl
+as_directed <- to_directed_impl
 
-#' @rdname as.directed
+#' @rdname as_directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
 #'   this.
 #' @export
-as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
+as_undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
@@ -549,7 +569,7 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' vectors of the adjacency lists are coerced to `igraph.vs`, this can be
 #' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_edgelist()], [as_adj()]
+#' @seealso [as_edgelist()], [as_adjacency_matrix()]
 #' @family conversion
 #' @export
 #' @keywords graphs
@@ -652,7 +672,7 @@ as_adj_edge_list <- function(graph,
 #'   whenever possible, before adding them to the igraph graph.
 #' @return `graph_from_graphnel()` returns an igraph graph object.
 #' @seealso [as_graphnel()] for the other direction,
-#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph_from_adj_list()] for other
 #' graph representations.
 #' @examplesIf rlang::is_installed("graph")
@@ -741,7 +761,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' @param graph An igraph graph object.
 #' @return `as_graphnel()` returns a graphNEL graph object.
 #' @seealso [graph_from_graphnel()] for the other direction,
-#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adjacency_matrix()], [graph_from_adjacency_matrix()],
 #' [as_adj_list()] and [graph_from_adj_list()] for
 #' other graph representations.
 #'
@@ -1206,4 +1226,34 @@ as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
     adjacency = as_adjacency_matrix(graph = x, ...),
     edgelist = as_edgelist(graph = x, ...)
   )
+}
+
+#' Convert between directed and undirected graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `as.directed()` was renamed to `as_directed()` to create a more
+#' consistent API.
+#' @inheritParams as_directed
+#' @keywords internal
+#' @export
+as.directed <- function(graph, mode = c("mutual", "arbitrary", "random", "acyclic")) {
+  lifecycle::deprecate_soft("2.1.0", "as.directed()", "as_directed()")
+  as_directed(graph, mode = mode)
+}
+
+#' Convert between undirected and unundirected graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `as.undirected()` was renamed to `as_undirected()` to create a more
+#' consistent API.
+#' @inheritParams as_undirected
+#' @keywords internal
+#' @export
+as.undirected <- function(graph, mode = c("collapse", "each", "mutual")) {
+  lifecycle::deprecate_soft("2.1.0", "as.undirected()", "as_undirected()")
+  as_undirected(graph = graph, mode = mode)
 }

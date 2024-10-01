@@ -57,7 +57,7 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'
 #' `fit_power_law()` provides two maximum likelihood implementations.  If
 #' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
-#' optimization (see [mle][stats4::mle]) algorithm is applied.  The additional
+#' optimization (see [stats4::mle()]) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
 #' optimization method and/or its parameters.  This implementation can
 #' *not* to fit the \eqn{x_\text{min}}{xmin} argument, so use the
@@ -66,10 +66,16 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #' The \sQuote{`plfit`} implementation also uses the maximum likelihood
 #' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
 #' When \eqn{x_\text{min}}{xmin} is not given in advance, the algorithm will attempt
-#' to find itsoptimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
+#' to find its optimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
 #' test between the fitted distribution and the original sample is the largest.
 #' The function uses the method of Clauset, Shalizi and Newman to calculate the
 #' parameters of the fitted distribution. See references below for the details.
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Pass \sQuote{`plfit.p`} instead of \sQuote{`plfit`} as the `implementation`
+#' argument to include the p-value in the output.
+#' This is not returned by default because the computation may be slow.
 #'
 #' @param x The data to fit, a numeric vector. For implementation
 #'   \sQuote{`R.mle`} the data must be integer values. For the
@@ -151,7 +157,7 @@ fit_power_law <- function(
   if (implementation == "r.mle") {
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation %in% c("plfit", "plfit.p")) {
-    if (is.null(xmin)) xmin <- -1
+    xmin <- xmin %||% -1
     power.law.fit.new(
       x,
       xmin = xmin,
@@ -169,9 +175,7 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
     stop("vector should be at least of length two")
   }
 
-  if (is.null(xmin)) {
-    xmin <- min(x)
-  }
+  xmin <- xmin %||% min(x)
 
   n <- length(x)
   x <- x[x >= xmin]

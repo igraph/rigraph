@@ -40,8 +40,13 @@ graph is directed or undirected and whether self-loops are allowed.
 }
 \examples{
 
-g <- sample_gnp(1000, 1 / 1000)
+# Random graph with expected mean degree of 2
+g <- sample_gnp(1000, 2 / 1000)
+mean(degree(g))
 degree_distribution(g)
+
+# Pick a simple graph on 6 vertices uniformly at random
+plot(sample_gnp(6, 0.5))
 }
 \references{
 Erdős, P. and Rényi, A., On random graphs, \emph{Publicationes

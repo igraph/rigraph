@@ -78,13 +78,13 @@ test_that("to_prufer and make_from_prufer works for trees", {
   g <- make_tree(13, 3, mode = "out")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
-  g3 <- as.undirected(g)
+  g3 <- as_undirected(g)
   expect_true(isomorphic(g2, g3))
 
   g <- make_tree(13, 3, mode = "in")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
-  g3 <- as.undirected(g)
+  g3 <- as_undirected(g)
   expect_true(isomorphic(g2, g3))
 })
 
@@ -166,7 +166,7 @@ test_that("sample_spanning_tree works for connected graphs", {
   edges <- sample_spanning_tree(g)
   expect_equal(length(edges), 7)
 
-  sg <- subgraph.edges(g, edges)
+  sg <- subgraph_from_edges(g, edges)
   expect_equal(vcount(sg), 8)
   expect_equal(ecount(sg), 7)
   expect_true(is_tree(sg))
@@ -176,21 +176,30 @@ test_that("sample_spanning_tree works for disconnected graphs", {
   g <- make_full_graph(8) %du% make_full_graph(5)
 
   edges <- sample_spanning_tree(g, vid = 8)
-  sg <- subgraph.edges(g, edges, delete.vertices = TRUE)
+  sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
   expect_equal(vcount(sg), 8)
   expect_equal(ecount(sg), 7)
   expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g, vid = 9)
-  sg <- subgraph.edges(g, edges, delete.vertices = TRUE)
+  sg <- subgraph_from_edges(g, edges, delete.vertices = TRUE)
   expect_equal(vcount(sg), 5)
   expect_equal(ecount(sg), 4)
   expect_true(is_tree(sg))
 
   edges <- sample_spanning_tree(g)
-  sg <- subgraph.edges(g, edges, delete.vertices = FALSE)
+  sg <- subgraph_from_edges(g, edges, delete.vertices = FALSE)
   expect_equal(vcount(sg), 13)
   expect_equal(ecount(sg), 11)
   expect_true(is_tree(induced_subgraph(sg, 1:8)))
   expect_true(is_tree(induced_subgraph(sg, 9:13)))
+})
+
+test_that("subgraph.edges deprecation", {
+  local_igraph_options(print.id = FALSE)
+  withr::local_seed(42)
+
+  g <- make_full_graph(8) %du% make_full_graph(5)
+  edges <- sample_spanning_tree(g)
+  expect_snapshot(subgraph.edges(g, edges, delete.vertices = FALSE))
 })

@@ -82,7 +82,7 @@ the power-law behaviour kicks in only above a threshold value
 
 \code{fit_power_law()} provides two maximum likelihood implementations.  If
 the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
-optimization (see \link[stats4:mle]{mle}) algorithm is applied.  The additional
+optimization (see \code{\link[stats4:mle]{stats4::mle()}}) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
 \emph{not} to fit the \eqn{x_\text{min}}{xmin} argument, so use the
@@ -91,10 +91,16 @@ optimization method and/or its parameters.  This implementation can
 The \sQuote{\code{plfit}} implementation also uses the maximum likelihood
 principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
 When \eqn{x_\text{min}}{xmin} is not given in advance, the algorithm will attempt
-to find itsoptimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
+to find its optimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
 test between the fitted distribution and the original sample is the largest.
 The function uses the method of Clauset, Shalizi and Newman to calculate the
 parameters of the fitted distribution. See references below for the details.
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Pass \sQuote{\code{plfit.p}} instead of \sQuote{\code{plfit}} as the \code{implementation}
+argument to include the p-value in the output.
+This is not returned by default because the computation may be slow.
 }
 \examples{
 

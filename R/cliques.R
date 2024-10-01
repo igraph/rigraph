@@ -4,14 +4,14 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.independent.vertex.sets()` was renamed to `maximal_ivs()` to create a more
+#' `maximal.independent.vertex.sets()` was renamed to `max_ivs()` to create a more
 #' consistent API.
-#' @inheritParams maximal_ivs
+#' @inheritParams max_ivs
 #' @keywords internal
 #' @export
 maximal.independent.vertex.sets <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "maximal_ivs()")
-  maximal_ivs(graph = graph)
+  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "max_ivs()")
+  max_ivs(graph = graph)
 } # nocov end
 
 #' Functions to find cliques, i.e. complete subgraphs in a graph
@@ -382,13 +382,15 @@ weighted_clique_num <- weighted_clique_number_impl
 #' sets in the graph. An independent vertex set is largest if there is no
 #' independent vertex set with more vertices.
 #'
-#' `maximal_ivs()` finds the maximal independent vertex
+#' `max_ivs()` finds the maximal independent vertex
 #' sets in the graph. An independent vertex set is maximal if it cannot be
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
 #'
 #' `ivs_size()` calculate the size of the largest independent
 #' vertex set(s).
+#'
+#' `independence_number()` is an alias for `ivs_size()`.
 #'
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
@@ -401,7 +403,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #'   vertex sets to find. `NULL` means no limit.
 #' @return `ivs()`,
 #'   `largest_ivs()` and
-#'   `maximal_ivs()` return a list containing numeric
+#'   `max_ivs()` return a list containing numeric
 #'   vertex ids, each list element is an independent vertex set.
 #'
 #'   `ivs_size()` returns an integer constant.
@@ -428,7 +430,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #' # Empty graph
 #' induced_subgraph(g, largest_ivs(g)[[1]])
 #'
-#' length(maximal_ivs(g))
+#' length(max_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
   ensure_igraph(graph)
 
@@ -472,7 +474,7 @@ largest_ivs <- function(graph) {
 
 #' @rdname ivs
 #' @export
-maximal_ivs <- function(graph) {
+max_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -486,6 +488,21 @@ maximal_ivs <- function(graph) {
   res
 }
 
+#' Maximal independent vertex sets in the graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximal_ivs()` was renamed to `max_ivs()` to create a more
+#' consistent API.
+#' @export
+#' @inheritParams max_ivs
+#' @keywords internal
+maximal_ivs <- function(graph) {
+  lifecycle::deprecate_soft("2.1.0", "maximal_ivs()", "max_ivs()")
+  max_ivs(graph)
+}
+
 #' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
@@ -494,6 +511,10 @@ ivs_size <- function(graph) {
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_independence_number, graph)
 }
+
+#' @rdname ivs
+#' @export
+independence_number <- ivs_size
 
 #' @rdname cliques
 #' @export

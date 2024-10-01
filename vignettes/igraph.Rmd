@@ -146,7 +146,7 @@ g
 We now have an undirected graph with 40 vertices and 86 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will be. Use `delete_vertices()` and `delete_edges()` to perform these operations. For instance, to delete the edge connecting vertices `1-34`, get its ID and then delete it:
 
 ```{r echo = TRUE}
-edge_id_to_delete <- get.edge.ids(g, c(1, 34))
+edge_id_to_delete <- get_edge_ids(g, c(1, 34))
 edge_id_to_delete
 ```
 
@@ -161,11 +161,11 @@ g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
 
-The example above shows that you can also refer to edges with strings containing the IDs of the source and target vertices, connected by a pipe symbol `|`. `"10|1"` in the above example means the edge that connects vertex 10 to vertex 1. Of course you can also use the edge IDs directly, or retrieve them with the `get.edge.ids()` function:
+The example above shows that you can also refer to edges with strings containing the IDs of the source and target vertices, connected by a pipe symbol `|`. `"10|1"` in the above example means the edge that connects vertex 10 to vertex 1. Of course you can also use the edge IDs directly, or retrieve them with the `get_edge_ids()` function:
 
 ```{r echo = TRUE}
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 plot(g)
 ```
 

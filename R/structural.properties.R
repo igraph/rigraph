@@ -1161,16 +1161,16 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' in a graph. This means that exactly the specified vertices and all the edges
 #' between them will be kept in the result graph.
 #'
-#' `subgraph.edges()` calculates the subgraph of a graph. For this function
+#' `subgraph_from_edges()` calculates the subgraph of a graph. For this function
 #' one can specify the vertices and edges to keep. This function will be
 #' renamed to `subgraph()` in the next major version of igraph.
 #'
 #' The `subgraph()` function currently does the same as `induced_subgraph()`
 #' (assuming \sQuote{`auto`} as the `impl` argument), but this behaviour
 #' is deprecated. In the next major version, `subgraph()` will overtake the
-#' functionality of `subgraph.edges()`.
+#' functionality of `subgraph_from_edges()`.
 #'
-#' @aliases subgraph.edges
+#' @aliases subgraph_from_edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1181,7 +1181,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #'
 #' g <- make_ring(10)
 #' g2 <- induced_subgraph(g, 1:7)
-#' g3 <- subgraph.edges(g, 1:5)
+#' g3 <- subgraph_from_edges(g, 1:5)
 #'
 subgraph <- function(graph, vids) {
   induced_subgraph(graph, vids)
@@ -1221,7 +1221,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
 #' @export
-subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
+subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
@@ -1233,6 +1233,22 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
   res
 }
+
+#' Subgraph of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `subgraph.edges()` was renamed to `subgraph_from_edges()` to create a more
+#' consistent API.
+#' @inheritParams subgraph_from_edges
+#' @keywords internal
+#' @export
+subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "subgraph.edges()", "subgraph_from_edges()")
+  subgraph_from_edges(graph = graph, eids = eids, delete.vertices = delete.vertices)
+} # nocov end
+
 
 #' Transitivity of a graph
 #'
@@ -1259,7 +1275,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'
 #' The `barrat` type of transitivity does not work for graphs with
 #' multiple and/or loop edges. If you want to calculate it for a directed
-#' graph, call [as.undirected()] with the `collapse` mode first.
+#' graph, call [as_undirected()] with the `collapse` mode first.
 #'
 #' @param graph The graph to analyze.
 #' @param type The type of the transitivity to calculate. Possible values:
@@ -2049,8 +2065,8 @@ any_loop <- has_loop_impl
 #'   is called whenever a vertex is visited. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
-#' @param neimode This argument is deprecated from igraph 1.3.0; use
-#'   `mode` instead.
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
+#'  from igraph 1.3.0; use `mode` instead.
 #' @return A named list with the following entries:
 #'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
@@ -2120,11 +2136,15 @@ bfs <- function(
     callback = NULL,
     extra = NULL,
     rho = parent.frame(),
-    neimode) {
+    neimode = deprecated()) {
   ensure_igraph(graph)
 
-  if (!missing(neimode)) {
-    warning("Argument `neimode' is deprecated; use `mode' instead")
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_warn(
+      "1.3.0",
+      "bfs(neimode)",
+      "bfs(mode)"
+    )
     if (missing(mode)) {
       mode <- neimode
     }
@@ -2236,7 +2256,7 @@ bfs <- function(
 #'   algorithm. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
-#' @param neimode This argument is deprecated from igraph 1.3.0; use
+#' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
@@ -2292,10 +2312,14 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 unreachable = TRUE,
                 order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE,
                 in.callback = NULL, out.callback = NULL, extra = NULL,
-                rho = parent.frame(), neimode) {
+                rho = parent.frame(), neimode = deprecated()) {
   ensure_igraph(graph)
-  if (!missing(neimode)) {
-    warning("Argument `neimode' is deprecated; use `mode' instead")
+  if (lifecycle::is_present(neimode)) {
+    lifecycle::deprecate_warn(
+      "1.3.0",
+      "dfs(neimode)",
+      "dfs(mode)"
+    )
     if (missing(mode)) {
       mode <- neimode
     }

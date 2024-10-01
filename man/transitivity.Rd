@@ -85,7 +85,7 @@ the edge weights are the same.
 
 The \code{barrat} type of transitivity does not work for graphs with
 multiple and/or loop edges. If you want to calculate it for a directed
-graph, call \code{\link[=as.undirected]{as.undirected()}} with the \code{collapse} mode first.
+graph, call \code{\link[=as_undirected]{as_undirected()}} with the \code{collapse} mode first.
 }
 \examples{
 

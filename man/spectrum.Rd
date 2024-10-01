@@ -65,7 +65,7 @@ kite <- make_graph("Krackhardt_kite")
 spectrum(kite)[c("values", "vectors")]
 
 ## Double check
-eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
+eigen(as_adjacency_matrix(kite, sparse = FALSE))$vectors[, 1]
 
 ## Should be the same as 'eigen_centrality' (but rescaled)
 cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
@@ -75,7 +75,7 @@ spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 
 }
 \seealso{
-\code{\link[=as_adj]{as_adj()}} to create a (sparse) adjacency matrix.
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} to create a (sparse) adjacency matrix.
 
 Centrality measures
 \code{\link{alpha_centrality}()},

@@ -2,19 +2,9 @@
 % Please edit documentation in R/conversion.R
 \name{as_adjacency_matrix}
 \alias{as_adjacency_matrix}
-\alias{as_adj}
 \title{Convert a graph to an adjacency matrix}
 \usage{
 as_adjacency_matrix(
-  graph,
-  type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
-  names = TRUE,
-  sparse = igraph_opt("sparsematrices")
-)
-
-as_adj(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,
@@ -83,11 +73,11 @@ as_adjacency_matrix(g, attr = "weight")
 \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
 
 Other conversion: 
-\code{\link{as.directed}()},
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
+\code{\link{as_directed}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
 \code{\link{as_long_data_frame}()},

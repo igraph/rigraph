@@ -30,7 +30,7 @@ g <- make_ring(10) \%>\%
 g
 
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 g
 }
 \seealso{

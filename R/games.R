@@ -585,8 +585,13 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(1000, 1 / 1000)
+#' # Random graph with expected mean degree of 2
+#' g <- sample_gnp(1000, 2 / 1000)
+#' mean(degree(g))
 #' degree_distribution(g)
+#'
+#' # Pick a simple graph on 6 vertices uniformly at random
+#' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
   type1 <- switch(type,
@@ -673,22 +678,15 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 
 #' Generate random graphs according to the Erdős-Rényi model
 #'
-#' Simple random graph model, specifying the edge count either precisely
-#' (\eqn{G(n,m)} model) or on average through a connection probability
-#' (\eqn{G(n,p)} model).
-#'
-#' In \eqn{G(n,m)} graphs, there are precisely `m` edges.
-#'
-#' In \eqn{G(n,p)} graphs, all vertex pairs are connected with the same
-#' probability `p`.
-#'
-#' `random.graph.game()` is an alias to this function.
-#'
-#' @section Deprecated:
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
 #' Since igraph version 0.8.0, both `erdos.renyi.game()` and
 #' `random.graph.game()` are deprecated, and [sample_gnp()] and
 #' [sample_gnm()] should be used instead. See these for more details.
+#'
+#' `random.graph.game()` is an (also deprecated) alias to this function.
+#'
 #'
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
@@ -717,37 +715,29 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
 
-  on.exit(.Call(R_igraph_finalizer))
   if (type == "gnp") {
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnp, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
+    sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
   } else if (type == "gnm") {
-    res <- .Call(
-      R_igraph_erdos_renyi_game_gnm, as.numeric(n),
-      as.numeric(p.or.m), as.logical(directed), as.logical(loops)
-    )
+    lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnm()")
+    sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
   }
-
-  if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
-    res$type <- type
-    res$loops <- loops
-    if (type == "gnp") {
-      res$p <- p.or.m
-    }
-    if (type == "gnm") {
-      res$m <- p.or.m
-    }
-  }
-  res
 }
 
 #' @family games
 #' @export
-random.graph.game <- erdos.renyi.game
+random.graph.game <- function(n, p.or.m, type = c("gnp", "gnm"),
+                             directed = FALSE, loops = FALSE) {
+  type <- igraph.match.arg(type)
 
+  if (type == "gnp") {
+    lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
+    sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
+  } else if (type == "gnm") {
+    lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnm()")
+    sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
+  }
+}
 ## -----------------------------------------------------------------
 
 #' Generate random graphs with a given degree sequence
@@ -937,17 +927,17 @@ sample_degseq <- function(out.deg, in.deg = NULL,
   )
 
   if (method == "simple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration instead of simple')")
     method <- "configuration"
   }
 
   if (method == "simple.no.multiple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
     method <- "fast.heur.simple"
   }
 
   if (method == "simple.no.multiple.uniform") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
     method <- "configuration.simple"
   }
 

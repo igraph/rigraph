@@ -64,7 +64,7 @@ test_that("undirected, alpha centrality works, #653", {
   ac2 <- alpha_centrality(g, sparse = FALSE)
   expect_equal(ac1, ac2)
 
-  g2 <- as.directed(g, mode = "mutual")
+  g2 <- as_directed(g, mode = "mutual")
   ac3 <- alpha_centrality(g, sparse = FALSE)
   expect_equal(ac1, ac3)
 })

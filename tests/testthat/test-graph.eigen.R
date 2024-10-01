@@ -13,7 +13,7 @@ test_that("spectrum works for symmetric matrices", {
   }
 
   g <- sample_gnp(50, 5 / 50)
-  e0 <- eigen(as_adj(g, sparse = FALSE))
+  e0 <- eigen(as_adjacency_matrix(g, sparse = FALSE))
 
   e1 <- spectrum(g, which = list(howmany = 4, pos = "LA"))
   expect_equal(e0$values[1:4], e1$values)

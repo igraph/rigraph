@@ -4,7 +4,7 @@ test_that("add_edges keeps edge id order", {
   g2 <- add_edges(g, edges)
 
   expect_equal(ecount(g2), length(edges) / 2)
-  expect_equal(get.edge.ids(g2, edges), seq_len(length(edges) / 2))
+  expect_equal(get_edge_ids(g2, edges), seq_len(length(edges) / 2))
 })
 
 test_that("add_edges adds attributes", {
@@ -14,7 +14,7 @@ test_that("add_edges adds attributes", {
   g3 <- add_edges(g, edges, attr = list(weight = weights))
 
   expect_equal(ecount(g3), (length(edges) / 2))
-  expect_equal(get.edge.ids(g3, edges), seq_len(length(edges) / 2))
+  expect_equal(get_edge_ids(g3, edges), seq_len(length(edges) / 2))
   expect_equal(E(g3)$weight, weights)
 })
 
@@ -116,4 +116,10 @@ test_that("ends works", {
   edges <- unlist(lapply(seq_len(ecount(g)), ends, graph = g))
   g2 <- make_graph(edges, dir = FALSE, n = vcount(g))
   expect_isomorphic(g, g2)
+})
+
+test_that("get.edge.ids() deprecation", {
+  g <- make_empty_graph(10)
+  expect_snapshot(get.edge.ids(g, 1:2))
+  expect_snapshot(get.edge.ids(g, 1:2, multi = TRUE), error = TRUE)
 })

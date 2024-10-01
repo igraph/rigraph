@@ -3,17 +3,20 @@
 \name{ivs}
 \alias{ivs}
 \alias{largest_ivs}
-\alias{maximal_ivs}
+\alias{max_ivs}
 \alias{ivs_size}
+\alias{independence_number}
 \title{Independent vertex sets}
 \usage{
 ivs(graph, min = NULL, max = NULL)
 
 largest_ivs(graph)
 
-maximal_ivs(graph)
+max_ivs(graph)
 
 ivs_size(graph)
+
+independence_number(graph)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs are considered as undirected,
@@ -28,7 +31,7 @@ vertex sets to find. \code{NULL} means no limit.}
 \value{
 \code{ivs()},
 \code{largest_ivs()} and
-\code{maximal_ivs()} return a list containing numeric
+\code{max_ivs()} return a list containing numeric
 vertex ids, each list element is an independent vertex set.
 
 \code{ivs_size()} returns an integer constant.
@@ -47,13 +50,15 @@ arguments.
 sets in the graph. An independent vertex set is largest if there is no
 independent vertex set with more vertices.
 
-\code{maximal_ivs()} finds the maximal independent vertex
+\code{max_ivs()} finds the maximal independent vertex
 sets in the graph. An independent vertex set is maximal if it cannot be
 extended to a larger independent vertex set. The largest independent vertex
 sets are maximal, but the opposite is not always true.
 
 \code{ivs_size()} calculate the size of the largest independent
 vertex set(s).
+
+\code{independence_number()} is an alias for \code{ivs_size()}.
 
 These functions use the algorithm described by Tsukiyama et al., see
 reference below.
@@ -71,7 +76,7 @@ largest_ivs(g)
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
 
-length(maximal_ivs(g))
+length(max_ivs(g))
 }
 \references{
 S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new

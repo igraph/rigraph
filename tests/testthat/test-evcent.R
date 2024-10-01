@@ -32,6 +32,6 @@ test_that("eigen_centrality works", {
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
     ev <- eigen_centrality(G)
-    expect_true(is.good(as_adj(G, sparse = FALSE), ev$vector, ev$value))
+    expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
   }
 })
