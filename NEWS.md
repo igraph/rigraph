@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.0.9005
+
+## Testing
+
+- Add tests for `graph_from_biadjacency_matrix()` (#1520).
+
+- Test-cliques (#1541).
+
+
 # igraph 2.1.0.9004
 
 ## Documentation
