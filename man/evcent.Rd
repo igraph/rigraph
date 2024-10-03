@@ -18,7 +18,7 @@ evcent(
 \item{directed}{Logical scalar, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
-\item{scale}{\code{lifecycle::badge("deprecated")} Normalization will always take
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
 place.}
 
 \item{weights}{A numerical vector or \code{NULL}. This argument can be used
