@@ -1003,7 +1003,7 @@ eigen_centrality <- function(graph,
   }
 
   if (lifecycle::is_present(scale)) {
-    if (scale) {
+    if (isTRUE(scale)) {
       lifecycle::deprecate_soft(
         "2.1.1",
         "eigen_centrality(scale)",
