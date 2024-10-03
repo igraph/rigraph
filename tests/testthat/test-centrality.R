@@ -450,3 +450,248 @@ test_that("power_centrality() works", {
     list(c(-1.72, 1.53, -0.57), c(-0.55, 2.03, -0.18), c(0.44, 2.05, 0.15), c(1.01, 1.91, 0.34), c(1.33, 1.78, 0.44), c(1.52, 1.67, 0.51), c(1.65, 1.59, 0.55), c(1.74, 1.53, 0.58), c(1.80, 1.48, 0.60))
   )
 })
+
+test_that("eigen_centrality() works", {
+  kite <- graph_from_literal(
+    Andre - Beverly:Carol:Diane:Fernando,
+    Beverly - Andre:Diane:Ed:Garth,
+    Carol - Andre:Diane:Fernando,
+    Diane - Andre:Beverly:Carol:Ed:Fernando:Garth,
+    Ed - Beverly:Diane:Garth,
+    Fernando - Andre:Carol:Diane:Garth:Heather,
+    Garth - Beverly:Diane:Ed:Fernando:Heather,
+    Heather - Fernando:Garth:Ike,
+    Ike - Heather:Jane,
+    Jane - Ike
+  )
+  evc <- round(eigen_centrality(kite)$vector, 3)
+  expect_equal(evc, structure(c(0.732, 0.732, 0.594, 1, 0.827, 0.594, 0.827, 0.407, 0.1, 0.023), .Names = c("Andre", "Beverly", "Carol", "Diane", "Fernando", "Ed", "Garth", "Heather", "Ike", "Jane")))
+
+
+  ## Eigenvector-centrality, small stress-test
+
+  is.principal <- function(M, lambda, eps = 1e-12) {
+    abs(eigen(M)$values[1] - lambda) < eps
+  }
+
+  is.ev <- function(M, v, lambda, eps = 1e-12) {
+    max(abs(M %*% v - lambda * v)) < eps
+  }
+
+  is.good <- function(M, v, lambda, eps = 1e-12) {
+    is.principal(M, lambda, eps) && is.ev(M, v, lambda, eps)
+  }
+
+  for (i in 1:1000) {
+    G <- sample_gnm(10, sample(1:20, 1))
+    ev <- eigen_centrality(G)
+    expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
+  }
+})
+
+test_that("dense alpha_centrality() works", {
+  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+  ac1 <- alpha_centrality(g.1, sparse = FALSE)
+  expect_equal(ac1, c(1, 1, 3, 4, 5))
+
+  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+  ac2 <- alpha_centrality(g.2, sparse = FALSE)
+  expect_equal(ac2, c(5, 1, 1, 1, 1))
+
+  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
+  ac3 <- alpha_centrality(g.3, alpha = 0.5, sparse = FALSE)
+  expect_equal(ac3, c(76, 68, 64, 62, 30) / 30)
+})
+
+test_that("sparse alpha_centrality() works", {
+  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+  ac1 <- alpha_centrality(g.1, sparse = TRUE)
+  expect_equal(ac1, c(1, 1, 3, 4, 5))
+
+  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+  ac2 <- alpha_centrality(g.2, sparse = TRUE)
+  expect_equal(ac2, c(5, 1, 1, 1, 1))
+
+  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
+  ac3 <- alpha_centrality(g.3, alpha = 0.5, sparse = TRUE)
+  expect_equal(ac3, c(76, 68, 64, 62, 30) / 30)
+})
+
+##############################
+## weighted version
+
+test_that("weighted dense alpha_centrality() works", {
+  star <- make_star(10)
+  E(star)$weight <- sample(ecount(star))
+
+  ac1 <- alpha_centrality(star, sparse = FALSE)
+  expect_equal(ac1, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  ac2 <- alpha_centrality(star, weights = "weight", sparse = FALSE)
+  expect_equal(ac2, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  ac3 <- alpha_centrality(star, weights = NA, sparse = FALSE)
+  expect_equal(ac3, c(vcount(star), 1, 1, 1, 1, 1, 1, 1, 1, 1))
+})
+
+test_that("weighted sparse alpha_centrality() works", {
+  star <- make_star(10)
+  E(star)$weight <- sample(ecount(star))
+
+  ac1 <- alpha_centrality(star, sparse = TRUE)
+  expect_equal(ac1, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  ac2 <- alpha_centrality(star, weights = "weight", sparse = TRUE)
+  expect_equal(ac2, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  ac3 <- alpha_centrality(star, weights = NA, sparse = TRUE)
+  expect_equal(ac3, c(vcount(star), 1, 1, 1, 1, 1, 1, 1, 1, 1))
+})
+
+test_that("undirected alpha_centrality() works, #653", {
+  g <- make_ring(10)
+
+  ac1 <- alpha_centrality(g, sparse = TRUE)
+  ac2 <- alpha_centrality(g, sparse = FALSE)
+  expect_equal(ac1, ac2)
+
+  g2 <- as_directed(g, mode = "mutual")
+  ac3 <- alpha_centrality(g, sparse = FALSE)
+  expect_equal(ac1, ac3)
+})
+
+test_that("spectrum() works for symmetric matrices", {
+  withr::local_seed(42)
+
+  std <- function(x) {
+    x <- zapsmall(x)
+    apply(x, 2, function(col) {
+      if (any(col < 0) && col[which(col != 0)[1]] < 0) {
+        -col
+      } else {
+        col
+      }
+    })
+  }
+
+  g <- sample_gnp(50, 5 / 50)
+  e0 <- eigen(as_adjacency_matrix(g, sparse = FALSE))
+
+  e1 <- spectrum(g, which = list(howmany = 4, pos = "LA"))
+  expect_equal(e0$values[1:4], e1$values)
+  expect_equal(std(e0$vectors[, 1:4]), std(e1$vectors))
+
+  e2 <- spectrum(g, which = list(howmany = 4, pos = "SA"))
+  expect_equal(e0$values[50:47], e2$values)
+  expect_equal(std(e0$vectors[, 50:47]), std(e2$vectors))
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_warning(
+    e3 <- spectrum(g, which = list(howmany = 4, pos = "SA"), options = arpack_defaults)
+  )
+})
+
+test_that("arpack lifecycle warning", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  f <- function(x, extra = NULL) x
+  expect_warning(
+    res <- arpack(f, options = function() list(n = 10, nev = 2, ncv = 4), sym = TRUE)
+  )
+  expect_equal(res$values, c(1, 1))
+})
+
+test_that("arpack works for identity matrix", {
+  f <- function(x, extra = NULL) x
+  res <- arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
+  expect_equal(res$values, c(1, 1))
+})
+
+test_that("arpack works on the Laplacian of a star", {
+  f <- function(x, extra = NULL) {
+    y <- x
+    y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
+    for (i in 2:length(x)) {
+      y[i] <- x[i] - x[1]
+    }
+    y
+  }
+
+  r1 <- arpack(f, options = list(n = 10, nev = 1, ncv = 3), sym = TRUE)
+  r2 <- eigen(laplacian_matrix(make_star(10, mode = "undirected")))
+
+  correctSign <- function(x) {
+    if (x[1] < 0) {
+      -x
+    } else {
+      x
+    }
+  }
+  expect_equal(r1$values, r2$values[1])
+  expect_equal(correctSign(r1$vectors), correctSign(r2$vectors[, 1]))
+})
+
+####
+# Complex case
+
+test_that("arpack works for non-symmetric matrices", {
+  A <- structure(
+    c(
+      -6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8,
+      -7, 10, 0, 0, 1, 1, 10, 0, 8, -4, -4, -5, 8, 9, -6, 9, 3, 8,
+      6, -1, 9, -9, -6, -3, -1, -7, 8, -4, -4, 10, 0, 5, -2, 0, 7,
+      10, 1, 4, -8, 3, 5, 3, -7, -9, 10, -1, -4, -7, -1, 7, 5, -5,
+      1, -4, 9, -2, 10, 1, -7, 7, 6, 7, -3, 0, 9, -5, -8, 1, -3,
+      -3, -8, -7, -8, 10, 8, 7, 0, 6, -7, -8, 10, 10, 1, 0, -2, 6
+    ),
+    .Dim = c(10L, 10L)
+  )
+
+  f <- function(x, extra = NULL) A %*% x
+  res <- arpack(f, options = list(n = 10, nev = 3, ncv = 7, which = "LM"), sym = FALSE)
+  ## This is needed because they might return a different complex conjugate
+  expect_equal(abs(res$values / eigen(A)$values[1:3]), c(1, 1, 1))
+  expect_equal(
+    (res$values[1] * res$vectors[, 1]) / (A %*% res$vectors[, 1]),
+    cbind(rep(1 + 0i, nrow(A)))
+  )
+  expect_equal(
+    (res$values[2] * res$vectors[, 2]) / (A %*% res$vectors[, 2]),
+    cbind(rep(1 + 0i, nrow(A)))
+  )
+  expect_equal(
+    abs((res$values[3] * res$vectors[, 3]) / (A %*% res$vectors[, 3])),
+    cbind(rep(1, nrow(A)))
+  )
+
+  f <- function(x, extra = NULL) A %*% x
+  res <- arpack(f, options = list(n = 10, nev = 4, ncv = 9, which = "LM"), sym = FALSE)
+  ## This is needed because they might return a different complex conjugate
+  expect_equal(abs(res$values / eigen(A)$values[1:4]), rep(1, 4))
+  expect_equal(
+    (res$values[1] * res$vectors[, 1]) / (A %*% res$vectors[, 1]),
+    cbind(rep(1 + 0i, nrow(A)))
+  )
+  expect_equal(
+    (res$values[2] * res$vectors[, 2]) / (A %*% res$vectors[, 2]),
+    cbind(rep(1 + 0i, nrow(A)))
+  )
+  expect_equal(
+    abs((res$values[3] * res$vectors[, 3]) / (A %*% res$vectors[, 3])),
+    cbind(rep(1, nrow(A)))
+  )
+  expect_equal(
+    abs((res$values[4] * res$vectors[, 4]) / (A %*% res$vectors[, 4])),
+    cbind(rep(1, nrow(A)))
+  )
+})
+
+####
+
+# TODO: further tests for typically hard cases
+
+test_that("eigen_centrality() deprecated scale argument", {
+  g <- make_ring(10, directed = FALSE)
+  expect_snapshot(eigen_centrality(g, scale = TRUE))
+  expect_snapshot(eigen_centrality(g, scale = FALSE))
+})
