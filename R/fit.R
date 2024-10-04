@@ -94,6 +94,11 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'   sample vector contains integer values only (by chance). If this argument is
 #'   false, igraph will assume a continuous distribution if at least one sample
 #'   is non-integer and assume a discrete distribution otherwise.
+#' @param p.precision The desired precision of the p-value calculation. The
+#'   precision ultimately depends on the number of resampling attempts. The
+#'   number of resampling trials is determined by 0.25 divided by the square
+#'   of the required precision. For instance, a required precision of 0.01
+#'   means that 2500 samples will be drawn.
 #' @param implementation Character scalar. Which implementation to use. See
 #'   details below.
 #' @param \dots Additional arguments, passed to the maximum likelihood
@@ -150,6 +155,7 @@ fit_power_law <- function(
     xmin = NULL,
     start = 2,
     force.continuous = FALSE,
+    p.precision = 0.01,
     implementation = c("plfit", "R.mle", "plfit.p"),
     ...) {
   implementation <- igraph.match.arg(implementation)
@@ -162,7 +168,8 @@ fit_power_law <- function(
       x,
       xmin = xmin,
       force.continuous = force.continuous,
-      p.value = (implementation == "plfit.p")
+      p.value = (implementation == "plfit.p"),
+      p.precision = p.precision
     )
   }
 }
@@ -202,7 +209,7 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   alpha
 }
 
-power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE) {
+power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE, p.precision = 0.01) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
@@ -210,7 +217,7 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value)
+  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value, p.precision)
 
   res
 }

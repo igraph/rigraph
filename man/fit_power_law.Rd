@@ -9,6 +9,7 @@ fit_power_law(
   xmin = NULL,
   start = 2,
   force.continuous = FALSE,
+  p.precision = 0.01,
   implementation = c("plfit", "R.mle", "plfit.p"),
   ...
 )
@@ -34,6 +35,12 @@ distribution for the \sQuote{\code{plfit}} implementation, even if the
 sample vector contains integer values only (by chance). If this argument is
 false, igraph will assume a continuous distribution if at least one sample
 is non-integer and assume a discrete distribution otherwise.}
+
+\item{p.precision}{The desired precision of the p-value calculation. The
+precision ultimately depends on the number of resampling attempts. The
+number of resampling trials is determined by 0.25 divided by the square
+of the required precision. For instance, a required precision of 0.01
+means that 2500 samples will be drawn.}
 
 \item{implementation}{Character scalar. Which implementation to use. See
 details below.}
