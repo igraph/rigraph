@@ -8331,11 +8331,11 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue)
+SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue, SEXP precision)
 {
   igraph_vector_t c_data;
   igraph_plfit_result_t c_res;
-  igraph_real_t c_xmin;
+  igraph_real_t c_xmin, c_precision;
   igraph_bool_t c_force_continuous, c_compute_pvalue;
   SEXP result, names;
 
@@ -8348,13 +8348,15 @@ SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEX
   c_force_continuous = LOGICAL(force_continuous)[0];
   IGRAPH_R_CHECK_BOOL(compute_pvalue);
   c_compute_pvalue = LOGICAL(compute_pvalue)[0];
+  IGRAPH_R_CHECK_REAL(precision);
+  c_precision = REAL(precision)[0];
 
   // Can't use the generated `R_igraph_power_law_fit()` because we need `c_res` to compute the p-value
   IGRAPH_R_CHECK(igraph_power_law_fit(&c_data, &c_res, c_xmin, c_force_continuous));
 
   if (c_compute_pvalue) {
     igraph_real_t p;
-    igraph_plfit_result_calculate_p_value(&c_res, &p, 0.001);
+    IGRAPH_R_CHECK(igraph_plfit_result_calculate_p_value(&c_res, &p, c_precision));
 
     PROTECT(result=NEW_LIST(6));
     PROTECT(names=NEW_CHARACTER(6));
