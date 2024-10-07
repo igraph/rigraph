@@ -53,6 +53,15 @@
 <h2 id="bigger-changes">Bigger changes<a class="anchor" aria-label="anchor" href="#bigger-changes"></a></h2>
 <p>If you want to make a bigger change, it’s a good idea to first file an issue and make sure someone from the team agrees that it’s needed. If you’ve found a bug, please file an issue that illustrates the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex" class="external-link">reprex</a> (this will also help you write a unit test, if needed). See the tidyverse guide on <a href="https://code-review.tidyverse.org/issues/" class="external-link">how to create a great issue</a> for more advice.</p>
 <div class="section level3">
+<h3 id="dependencies-installation">Dependencies installation<a class="anchor" aria-label="anchor" href="#dependencies-installation"></a></h3>
+<p>To install all dependencies of igraph, including dependencies needed for development, call, from the root of the rigraph Git repository:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># All Imports and Suggests dependencies</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># Then install packages like roxygen2 add-ons</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span>dependencies <span class="op">=</span> <span class="st">"Config/Needs/build"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="pull-request-process">Pull request process<a class="anchor" aria-label="anchor" href="#pull-request-process"></a></h3>
 <ul><li><p>Fork the package and clone onto your computer. If you haven’t done this before, you can use <code>usethis::create_from_github("igraph/rigraph", fork = TRUE)</code>.</p></li>
 <li><p>Install all development dependencies with <code><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak::pak()</a></code>, and then make sure the package passes R CMD check by running <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code>. If R CMD check doesn’t pass cleanly, it’s a good idea to ask for help before continuing.</p></li>
@@ -62,7 +71,7 @@
 <div class="section level3">
 <h3 id="code-style">Code style<a class="anchor" aria-label="anchor" href="#code-style"></a></h3>
 <ul><li><p>New code should follow the tidyverse <a href="https://style.tidyverse.org" class="external-link">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler" class="external-link">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.</p></li>
-<li><p>We use <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html" class="external-link">Markdown syntax</a>, for documentation.</p></li>
+<li><p>We use <a href="https://cran.r-project.org/package=roxygen2" class="external-link">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html" class="external-link">Markdown syntax</a>, for documentation. We aspire to document internal functions using <a href="https://github.com/moodymudskipper/devtag" class="external-link">devtag</a> (not all of them are thus documented yet).</p></li>
 <li><p>We use <a href="https://cran.r-project.org/package=testthat" class="external-link">testthat</a> for unit tests. Please add test cases for the change you are proposing, or ask us for help.</p></li>
 </ul></div>
 <div class="section level3">
