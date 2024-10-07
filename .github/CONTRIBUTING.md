@@ -17,6 +17,17 @@ please file an issue that illustrates the bug with a minimal [reprex](https://ww
 (this will also help you write a unit test, if needed).
 See the tidyverse guide on [how to create a great issue](https://code-review.tidyverse.org/issues/) for more advice.
 
+### Dependencies installation
+
+To install all dependencies of igraph, including dependencies needed for development, call, from the root of the rigraph Git repository:
+
+```r
+# All Imports and Suggests dependencies
+pak::pak()
+# Then install packages like roxygen2 add-ons
+pak::pak(dependencies = "Config/Needs/build")
+```
+
 ### Pull request process
 
 *   Fork the package and clone onto your computer. 
@@ -39,7 +50,8 @@ See the tidyverse guide on [how to create a great issue](https://code-review.tid
 
 *  We use [roxygen2](https://cran.r-project.org/package=roxygen2), 
    with [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html), 
-   for documentation.  
+   for documentation. 
+   We aspire to document internal functions using [devtag](https://github.com/moodymudskipper/devtag) (not all of them are thus documented yet).
 
 *  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. 
    Please add test cases for the change you are proposing, or ask us for help.
