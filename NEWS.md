@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.0.9007
+
+## Bug fixes
+
+- Put deprecation message at the beginning not the end of the similarity functions (#1549).
+
+## Chore
+
+- Document {devtag} in contributing guide (#1547).
+
+
 # igraph 2.1.0.9006
 
 ## lifecycle
