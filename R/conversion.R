@@ -187,6 +187,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
       loops
     )
   } else {
+    # faster than a specialized implementation
     res <- as.matrix(get.adjacency.sparse(graph, type = type, attr = attr, names = names))
   }
 
