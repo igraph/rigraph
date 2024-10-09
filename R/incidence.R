@@ -44,11 +44,11 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
   el[, 2] <- el[, 2] + n1
 
   if (!is.null(weighted)) {
-    if (!directed || mode == 1) {
+    if (!directed || mode == "out") {
       ## nothing do to
-    } else if (mode == 2) {
+    } else if (mode == "in") {
       el[, 1:2] <- el[, c(2, 1)]
-    } else if (mode == 3) {
+    } else if (mode %in% c("all", "total")) {
       reversed_el <- el[, c(2, 1, 3)]
       names(reversed_el) <- names(el)
       el <- rbind(el, reversed_el)
@@ -66,11 +66,11 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
       el[, 3] <- el[, 3] != 0
     }
 
-    if (!directed || mode == 1) {
+    if (!directed || mode == "out") {
       ## nothing do to
-    } else if (mode == 2) {
+    } else if (mode == "in") {
       el[, 1:2] <- el[, c(2, 1)]
-    } else if (mode == 3) {
+    } else if (mode %in% c("all", "total")) {
       el <- rbind(el, el[, c(2, 1, 3)])
     }
 
@@ -96,11 +96,11 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     # move from separate row/col indexing to 1..n1+n2 indexing
     el[, 2] <- el[, 2] + n1
 
-    if (!directed || mode == 1) {
+    if (!directed || mode == "out") {
       ## nothing do to
-    } else if (mode == 2) {
+    } else if (mode == "in") {
       el[, 1:2] <- el[, c(2, 1)]
-    } else if (mode == 3) {
+    } else if (mode %in% c("all", "total")) {
       reversed_el <- el[, c(2, 1, 3)]
       names(reversed_el) <- names(el)
       el <- rbind(el, reversed_el)
@@ -115,6 +115,12 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     mode(incidence) <- "double"
     on.exit(.Call(R_igraph_finalizer))
     ## Function call
+    mode <- switch(mode,
+      "out" = 1,
+      "in" = 2,
+      "all" = 3,
+      "total" = 3
+    )
     res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
     res <- set_vertex_attr(res$graph, "type", value = res$types)
   }
@@ -191,12 +197,8 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
                                           add.names = NULL) {
   # Argument checks
   directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph.match.arg(mode)
+
   multiple <- as.logical(multiple)
 
   if (!is.null(weighted)) {
