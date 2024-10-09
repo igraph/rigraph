@@ -44,7 +44,6 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
   el[, 2] <- el[, 2] + n1
 
   if (!is.null(weighted)) {
-
     if (!directed || mode == 1) {
       ## nothing do to
     } else if (mode == 2) {
@@ -85,13 +84,16 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
 graph.incidence.dense <- function(incidence, directed, mode, multiple,
                                   weighted) {
   if (!is.null(weighted)) {
-
     n1 <- nrow(incidence)
     n2 <- ncol(incidence)
 
+    # create an edgelist from the nonzero entries of the
+    # incidence matrix
     idx <- which(incidence != 0, arr.ind = TRUE)
+    # add the value of the matrix. So a row is [s,t,incidence[s,t]]
     el <- cbind(idx, incidence[idx])
 
+    # move from separate row/col indexing to 1..n1+n2 indexing
     el[, 2] <- el[, 2] + n1
 
     if (!directed || mode == 1) {
@@ -199,7 +201,6 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
 
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
-
       if (multiple) {
         cli::cli_abort(c(
           "{.arg multiple} and {.arg weighted} cannot be both {.code TRUE}.",
