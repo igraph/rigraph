@@ -2140,14 +2140,11 @@ bfs <- function(
   ensure_igraph(graph)
 
   if (lifecycle::is_present(neimode)) {
-    lifecycle::deprecate_warn(
+    lifecycle::deprecate_stop(
       "1.3.0",
       "bfs(neimode)",
       "bfs(mode)"
     )
-    if (missing(mode)) {
-      mode <- neimode
-    }
   }
 
   if (length(root) == 1) {
@@ -2315,14 +2312,11 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 rho = parent.frame(), neimode = deprecated()) {
   ensure_igraph(graph)
   if (lifecycle::is_present(neimode)) {
-    lifecycle::deprecate_warn(
+    lifecycle::deprecate_stop(
       "1.3.0",
       "dfs(neimode)",
       "dfs(mode)"
     )
-    if (missing(mode)) {
-      mode <- neimode
-    }
   }
 
   root <- as_igraph_vs(graph, root) - 1
