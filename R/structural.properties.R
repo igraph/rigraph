@@ -293,12 +293,13 @@ graph.knn <- function(graph, vids = V(graph), mode = c("all", "out", "in", "tota
 #'
 #' `graph.dfs()` was renamed to `dfs()` to create a more
 #' consistent API.
+#' @param father Logical scalar, whether to return the father of the vertices.
 #' @inheritParams dfs
 #' @keywords internal
 #' @export
 graph.dfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreachable = TRUE, order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE, in.callback = NULL, out.callback = NULL, extra = NULL, rho = parent.frame(), neimode) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.dfs()", "dfs()")
-  dfs(graph = graph, root = root, mode = mode, unreachable = unreachable, order = order, order.out = order.out, father = father, dist = dist, in.callback = in.callback, out.callback = out.callback, extra = extra, rho = rho, neimode = neimode)
+  dfs(graph = graph, root = root, mode = mode, unreachable = unreachable, order = order, order.out = order.out, parent = father, dist = dist, in.callback = in.callback, out.callback = out.callback, extra = extra, rho = rho, neimode = neimode)
 } # nocov end
 
 #' Graph density
@@ -339,11 +340,12 @@ graph.coreness <- function(graph, mode = c("all", "out", "in")) { # nocov start
 #' `graph.bfs()` was renamed to `bfs()` to create a more
 #' consistent API.
 #' @inheritParams bfs
+#' @param father Logical scalar, whether to return the father of the vertices.
 #' @keywords internal
 #' @export
 graph.bfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreachable = TRUE, restricted = NULL, order = TRUE, rank = FALSE, father = FALSE, pred = FALSE, succ = FALSE, dist = FALSE, callback = NULL, extra = NULL, rho = parent.frame(), neimode) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.bfs()", "bfs()")
-  bfs(graph = graph, root = root, mode = mode, unreachable = unreachable, restricted = restricted, order = order, rank = rank, father = father, pred = pred, succ = succ, dist = dist, callback = callback, extra = extra, rho = rho, neimode = neimode)
+  bfs(graph = graph, root = root, mode = mode, unreachable = unreachable, restricted = restricted, order = order, rank = rank, parent = father, pred = pred, succ = succ, dist = dist, callback = callback, extra = extra, rho = rho, neimode = neimode)
 } # nocov end
 
 #' Diameter of a graph
@@ -2054,7 +2056,8 @@ any_loop <- has_loop_impl
 #'   given vertices.
 #' @param order Logical scalar, whether to return the ordering of the vertices.
 #' @param rank Logical scalar, whether to return the rank of the vertices.
-#' @param father Logical scalar, whether to return the father of the vertices.
+#' @param father `r lifecycle::badge("deprecated")` Use `parent` instead.
+#' @param parent Logical scalar, whether to return the parent of the vertices.
 #' @param pred Logical scalar, whether to return the predecessors of the
 #'   vertices.
 #' @param succ Logical scalar, whether to return the successors of the
@@ -2076,8 +2079,9 @@ any_loop <- has_loop_impl
 #'   \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
 #'   \item{rank}{Numeric vector. The rank for each vertex, zero for unreachable vertices.}
-#'   \item{father}{Numeric
-#'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
+#'   \item{parent}{Numeric
+#'   vector. The parent of each vertex, i.e. the vertex it was discovered from.}
+#'   \item{father}{Like parent, kept for compatibility for now.}
 #'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
 #'   or 0 if there was no such vertex.}
 #'   \item{succ}{Numeric vector. The next
@@ -2087,7 +2091,7 @@ any_loop <- has_loop_impl
 #'   root of the search tree. Unreachable vertices have a negative distance
 #'   as of igraph 1.6.0, this used to be `NaN`.}
 #'
-#'   Note that `order`, `rank`, `father`, `pred`, `succ`
+#'   Note that `order`, `rank`, `parent`, `pred`, `succ`
 #'   and `dist` might be `NULL` if their corresponding argument is
 #'   `FALSE`, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2100,7 +2104,7 @@ any_loop <- has_loop_impl
 #' ## Two rings
 #' bfs(make_ring(10) %du% make_ring(10),
 #'   root = 1, "out",
-#'   order = TRUE, rank = TRUE, father = TRUE, pred = TRUE,
+#'   order = TRUE, rank = TRUE, parent = TRUE, pred = TRUE,
 #'   succ = TRUE, dist = TRUE
 #' )
 #'
@@ -2129,14 +2133,15 @@ bfs <- function(
     restricted = NULL,
     order = TRUE,
     rank = FALSE,
-    father = FALSE,
+    parent = FALSE,
     pred = FALSE,
     succ = FALSE,
     dist = FALSE,
     callback = NULL,
     extra = NULL,
     rho = parent.frame(),
-    neimode = deprecated()) {
+    neimode = deprecated(),
+    father = deprecated()) {
   ensure_igraph(graph)
 
   if (lifecycle::is_present(neimode)) {
@@ -2147,6 +2152,13 @@ bfs <- function(
     )
     if (missing(mode)) {
       mode <- neimode
+    }
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_warn("2.0.4", "bfs(father)", "bfs(parent)")
+    if (missing(parent)) {
+      parent <- father
     }
   }
 
@@ -2175,7 +2187,7 @@ bfs <- function(
   res <- .Call(
     R_igraph_bfs, graph, root, roots, mode, unreachable,
     restricted,
-    as.logical(order), as.logical(rank), as.logical(father),
+    as.logical(order), as.logical(rank), as.logical(parent),
     as.logical(pred), as.logical(succ), as.logical(dist),
     callback, extra, rho
   )
@@ -2185,13 +2197,13 @@ bfs <- function(
 
   if (order) res$order <- res$order + 1
   if (rank) res$rank <- res$rank + 1
-  if (father) res$father <- res$father + 1
+  if (parent) res$parent <- res$parent + 1
   if (pred) res$pred <- res$pred + 1
   if (succ) res$succ <- res$succ + 1
 
   if (igraph_opt("return.vs.es")) {
     if (order) res$order <- V(graph)[.env$res$order, na_ok = TRUE]
-    if (father) res$father <- create_vs(graph, res$father, na_ok = TRUE)
+    if (parent) res$parent <- create_vs(graph, res$parent, na_ok = TRUE)
     if (pred) res$pred <- create_vs(graph, res$pred, na_ok = TRUE)
     if (succ) res$succ <- create_vs(graph, res$succ, na_ok = TRUE)
   } else {
@@ -2200,7 +2212,7 @@ bfs <- function(
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     if (rank) names(res$rank) <- V(graph)$name
-    if (father) names(res$father) <- V(graph)$name
+    if (parent) names(res$parent) <- V(graph)$name
     if (pred) names(res$pred) <- V(graph)$name
     if (succ) names(res$succ) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
@@ -2213,6 +2225,9 @@ bfs <- function(
   if (dist) {
     res$dist[is.nan(res$dist)] <- -3
   }
+
+  # Remove this later?
+  res$father <- res$parent
 
   res
 }
@@ -2246,7 +2261,8 @@ bfs <- function(
 #'   vertices.
 #' @param order.out Logical scalar, whether to return the ordering based on
 #'   leaving the subtree of the vertex.
-#' @param father Logical scalar, whether to return the father of the vertices.
+#' @param father `r lifecycle::badge("deprecated")`, use `parent` instead.
+#' @param parent Logical scalar, whether to return the parent of the vertices.
 #' @param dist Logical scalar, whether to return the distance from the root of
 #'   the search tree.
 #' @param in.callback If not `NULL`, then it must be callback function.
@@ -2265,11 +2281,13 @@ bfs <- function(
 #'   irrespectively of the supplied value.} \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
 #'   \item{order.out}{Numeric vector, the vertex ids, in the order of the
-#'   completion of their subtree.} \item{father}{Numeric vector. The father of
-#'   each vertex, i.e. the vertex it was discovered from.} \item{dist}{Numeric
+#'   completion of their subtree.} \item{parent}{Numeric vector. The parent of
+#'   each vertex, i.e. the vertex it was discovered from.}
+#'  \item{father}{Like parent, kept for compatibility for now.}
+#'   \item{dist}{Numeric
 #'   vector, for each vertex its distance from the root of the search tree.}
 #'
-#'   Note that `order`, `order.out`, `father`, and `dist`
+#'   Note that `order`, `order.out`, `parent`, and `dist`
 #'   might be `NULL` if their corresponding argument is `FALSE`, i.e.
 #'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2310,9 +2328,11 @@ bfs <- function(
 #'
 dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 unreachable = TRUE,
-                order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE,
+                order = TRUE, order.out = FALSE,
+                parent = FALSE, dist = FALSE,
                 in.callback = NULL, out.callback = NULL, extra = NULL,
-                rho = parent.frame(), neimode = deprecated()) {
+                rho = parent.frame(), neimode = deprecated(),
+                father = deprecated()) {
   ensure_igraph(graph)
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_warn(
@@ -2322,6 +2342,13 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     )
     if (missing(mode)) {
       mode <- neimode
+    }
+  }
+
+  if (lifecycle::is_present(father)) {
+    lifecycle::deprecate_warn("2.0.4", "dfs(father)", "dfs(parent)")
+    if (missing(parent)) {
+      parent <- father
     }
   }
 
@@ -2343,7 +2370,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_dfs, graph, root, mode, unreachable,
-    as.logical(order), as.logical(order.out), as.logical(father),
+    as.logical(order), as.logical(order.out), as.logical(parent),
     as.logical(dist), in.callback, out.callback, extra, rho
   )
 
@@ -2352,21 +2379,24 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 
   if (order) res$order <- res$order + 1
   if (order.out) res$order.out <- res$order.out + 1
-  if (father) res$father <- res$father + 1
+  if (parent) res$parent <- res$parent + 1
 
   if (igraph_opt("return.vs.es")) {
     if (order) res$order <- V(graph)[.env$res$order, na_ok = TRUE]
     if (order.out) res$order.out <- V(graph)[.env$res$order.out, na_ok = TRUE]
-    if (father) res$father <- create_vs(graph, res$father, na_ok = TRUE)
+    if (parent) res$parent <- create_vs(graph, res$parent, na_ok = TRUE)
   } else {
     if (order) res$order <- res$order[res$order != 0]
     if (order.out) res$order.out <- res$order.out[res$order.out != 0]
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    if (father) names(res$father) <- V(graph)$name
+    if (parent) names(res$parent) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
   }
+
+  # Remove this later?
+  res$father <- res$parent
 
   res
 }
