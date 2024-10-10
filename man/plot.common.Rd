@@ -95,16 +95,21 @@
       are scaled in order have about the same size of vertices for a
       given value for all three plotting commands. It does not need to
       be an integer number.
-
-      The default value is 15. This is big enough to place short labels
-      on vertices.}
+      
+      The scaling is made according to \code{relative.size} (see
+      below), so the sizes of smallest and largest vertices are equal to
+      \code{relative.size[1]} and \code{relative.size[2]} as a percentage
+      of the x-axis of the plotting region.
+      
+      The default value is 15.
+    }
     \item{size2}{The \dQuote{other} size of the vertex, for some vertex
       shapes. For the various rectangle shapes this gives the height of
       the vertices, whereas \code{size} gives the width. It is ignored
       by shapes for which the size can be specified with a single
-      number.
-
-      The default is 15.
+      number. Like \code{size}, is rescaled and is relative to the x-axis.
+      
+      The default value is 15.
     }
     \item{color}{The fill color of the vertex. If it is numeric then
       the current palette is used, see
@@ -245,7 +250,15 @@
       vertex parameter discussed earlier for the possible values.
 
       The default value is \code{black}.
-    }    
+    }
+    \item{relative.size}{
+      The relative size of the smallest and largest vertices as percentage of
+      the plotting region. When all vertices have the same size, then by default
+      the relative size observed in the plot will be equal to
+      \code{relative.size[2]}.
+      
+      The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
+    }
   }
 
   Edge parameters require to add the \sQuote{\code{edge.}} prefix when
@@ -483,5 +496,20 @@ plot(make_tree(50, 3), vertex.size=3, vertex.label=NA)
 tkplot(make_tree(50, 2, mode="undirected"), vertex.size=10,
 vertex.color="green")
 }
+
+# plot using vertex.relative.size
+igraph_options(plot.layout=layout_nicely)
+set.seed(312)
+g <- barabasi.game(10)
+
+oldpar <- par(no.readonly=TRUE)
+par(mfrow=c(2,2))
+set.seed(1);plot(g, main="Default")
+set.seed(1);plot(g, vertex.size=degree(g), main="size=degree")
+set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.05,.1),
+                main="size=degree,relative.size=c(.05,.1)")
+set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.025,.2),
+                main="size=degree,relative.size=c(.025,.2)")
+par(oldpar)
 }
 \keyword{graphs}
