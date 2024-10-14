@@ -11,7 +11,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,11 @@ consistent API.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as.undirected</span><span class="op">(</span><span class="va">graph</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collapse"</span>, <span class="st">"each"</span>, <span class="st">"mutual"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">as.undirected</span><span class="op">(</span></span>
+<span>  <span class="va">graph</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"collapse"</span>, <span class="st">"each"</span>, <span class="st">"mutual"</span><span class="op">)</span>,</span>
+<span>  edge.attr.comb <span class="op">=</span> <span class="fu"><a href="igraph_options.html">igraph_opt</a></span><span class="op">(</span><span class="st">"edge.attr.comb"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,6 +75,14 @@ consistent API.</p>
 <code><a href="as_directed.html">as_directed()</a></code> it can be <code>mutual</code> or <code>arbitrary</code>. For
 <code><a href="as_directed.html">as_undirected()</a></code> it can be <code>each</code>, <code>collapse</code> or
 <code>mutual</code>. See details below.</p></dd>
+
+
+<dt id="arg-edge-attr-comb">edge.attr.comb<a class="anchor" aria-label="anchor" href="#arg-edge-attr-comb"></a></dt>
+<dd><p>Specifies what to do with edge attributes, if
+<code>mode="collapse"</code> or <code>mode="mutual"</code>.  In these cases many edges
+might be mapped to a single one in the new graph, and their attributes are
+combined. Please see <code><a href="igraph-attribute-combination.html">attribute.combination()</a></code> for details on
+this.</p></dd>
 
 </dl></div>
 
