@@ -988,7 +988,7 @@ cut_at <- function(communities, no, steps) {
   if (!missing(steps)) {
     mm <- merges(communities)
     if (steps > nrow(mm)) {
-      warning("Cannot make that many steps")
+      cli::cli_warn("Cannot make that many steps.")
       steps <- nrow(mm)
     }
     community.to.membership2(mm, communities$vcount, steps)
@@ -996,7 +996,7 @@ cut_at <- function(communities, no, steps) {
     mm <- merges(communities)
     noc <- communities$vcount - nrow(mm) # final number of communities
     if (no < noc) {
-      warning("Cannot have that few communities")
+      cli::cli_warn("Cannot have that few communities.")
       no <- noc
     }
     steps <- communities$vcount - no
@@ -1381,7 +1381,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (!is.null(vertex_weights) && !any(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
     if (objective_function == 1) { # Using modularity
-      warning("Providing node weights contradicts using modularity")
+      cli::cli_warn("Providing node weights contradicts using modularity.")
     }
   } else {
     if (objective_function == 1) { # Using modularity
