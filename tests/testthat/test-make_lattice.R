@@ -41,7 +41,7 @@ test_that("make_lattice works", {
 })
 
 test_that("make_lattice prints a warning for fractional length)", {
-  expect_warning(make_lattice(dim = 2, length = sqrt(2000)), "length was rounded")
+  expect_warning(make_lattice(dim = 2, length = sqrt(2000)), "`length` was rounded")
 
   suppressWarnings(g <- make_lattice(dim = 2, length = sqrt(2000)))
   g2 <- make_lattice(dim = 2, length = 45)

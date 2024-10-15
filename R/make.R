@@ -35,15 +35,15 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -54,7 +54,7 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -75,7 +75,7 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -128,15 +128,15 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -147,7 +147,7 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -168,7 +168,7 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -343,7 +343,7 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular = deprecated()) { # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
@@ -357,7 +357,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
   }
 
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
@@ -1257,15 +1257,15 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -1276,7 +1276,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -1297,7 +1297,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -1736,7 +1736,7 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
   }
 
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
