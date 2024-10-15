@@ -120,8 +120,8 @@ desired placement. Vertices that are not included here will be placed at
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">karate_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="cluster_optimal.html">cluster_optimal</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This graph was created by an old(er) igraph version.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Call upgrade_graph() on it to use with the current igraph version</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   For now we convert it on the fly...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Call `igraph::upgrade_graph()` on it to use with the current igraph version.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> For now we convert it on the fly...</span>
 <span class="r-in"><span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu">layout_in_circle</span><span class="op">(</span><span class="va">karate</span>,</span></span>
 <span class="r-in"><span>  order <span class="op">=</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="fu"><a href="communities.html">membership</a></span><span class="op">(</span><span class="va">karate_groups</span><span class="op">)</span><span class="op">)</span></span></span>
