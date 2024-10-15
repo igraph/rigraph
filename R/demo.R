@@ -134,7 +134,7 @@ igraph_demo <- function(which) {
     ch <- grep("^[ ]*###", demolines)
     ch <- c(ch, length(demolines) + 1)
     if (length(ch) == 1) {
-      warning("Demo source file does not contain chunks")
+      cli::cli_warn("Demo source file does not contain chunks.")
     } else {
       demolines <- demolines[ch[1]:length(demolines)]
       ch <- grep("^[ ]*###", demolines)
