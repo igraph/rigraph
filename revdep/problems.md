@@ -1,55 +1,62 @@
-# CePa
+# manynet
 
 <details>
 
-* Version: 0.8.0
-* GitHub: https://github.com/jokergoo/CePa
-* Source code: https://github.com/cran/CePa
-* Date/Publication: 2022-06-11 21:30:06 UTC
-* Number of recursive dependencies: 14
+* Version: 1.2.6
+* GitHub: https://github.com/stocnet/manynet
+* Source code: https://github.com/cran/manynet
+* Date/Publication: 2024-10-05 16:40:01 UTC
+* Number of recursive dependencies: 146
 
-Run `revdepcheck::cloud_details(, "CePa")` for more info
+Run `revdepcheck::cloud_details(, "manynet")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking Rd cross-references ... WARNING
+*   checking tests ... ERROR
     ```
-    Missing link or links in documentation object 'cepa.Rd':
-      ‘[igraph:igraph_test]{igraphtest}’
-    
-    Missing link or links in documentation object 'cepa.ora.Rd':
-      ‘[igraph:igraph_test]{igraphtest}’
-    
-    See section 'Cross-references' in the 'Writing R Extensions' manual.
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(manynet)
+      > 
+      > test_check("manynet")
+      Starting 2 test processes
+      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
+      
+    ...
+      `expected`: 0.2 0.1 0.1
+      ── Failure ('test-measure_centrality.R:79:3'): two mode eigenvector centrality calculated correctly ──
+      top3(node_eigenvector(test_igr, normalized = TRUE)) (`actual`) not equal to c(0.4505, 0.4248, 0.5) (`expected`).
+      
+        `actual`: 1.3 1.2 1.4
+      `expected`: 0.5 0.4 0.5
+      
+      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
+      Error: Test failures
+      Execution halted
     ```
 
 ## In both
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking package dependencies ... NOTE
     ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘CePa.Rnw’ using Sweave
-    Error: processing vignette 'CePa.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'CePa.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `grfext.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
-    ...
-    l.179   \RequirePackage{grfext}\relax
-                                         ^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘parsing-PID-pathway-data.Rnw’
-    
-    SUMMARY: processing the following files failed:
-      ‘CePa.Rnw’ ‘analysis-p53.Rnw’ ‘parsing-PID-pathway-data.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
+    Package which this enhances but not available for checking: ‘Rgraphviz’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        R           1.5Mb
+        tutorials   1.8Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 7 marked UTF-8 strings
     ```
 
 # MetaNet
@@ -122,21 +129,21 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       +     ## --- Setup ---
       + 
     ...
-      In addition: Warning messages:
-      1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
+      ℹ Please use `as_directed()` instead. 
       2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
         RNGkind: Marsaglia-Multicarry has poor statistical properties
+      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
       4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+        RNGkind: Marsaglia-Multicarry has poor statistical properties
+      5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
         RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
       Execution halted
     ```
 
 ## In both
 
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... WARNING
     ```
     Error(s) in re-building vignettes:
       ...
@@ -186,18 +193,18 @@ Run `revdepcheck::cloud_details(, "skynet")` for more info
       > library(skynet)
       > 
       > test_check("skynet")
-      [ FAIL 1 | WARN 24 | SKIP 4 | PASS 69 ]
+      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
       
       ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
     ...
        14. │   └─base::lapply(...)
        15. │     └─rlang (local) FUN(X[[i]], ...)
        16. └─igraph (local) from(V(x)[y])
-       17.   └─lifecycle::deprecate_stop("2.0.4", "from()", ".from()")
+       17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
        18.     └─lifecycle:::deprecate_stop0(msg)
        19.       └─rlang::cnd_signal(...)
       
-      [ FAIL 1 | WARN 24 | SKIP 4 | PASS 69 ]
+      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
       Error: Test failures
       Execution halted
     ```
@@ -208,5 +215,55 @@ Run `revdepcheck::cloud_details(, "skynet")` for more info
     ```
     Namespace in Imports field not imported from: ‘maps’
       All declared Imports should be used.
+    ```
+
+# SpaDES.core
+
+<details>
+
+* Version: 2.1.0
+* GitHub: https://github.com/PredictiveEcology/SpaDES.core
+* Source code: https://github.com/cran/SpaDES.core
+* Date/Publication: 2024-06-02 11:02:47 UTC
+* Number of recursive dependencies: 136
+
+Run `revdepcheck::cloud_details(, "SpaDES.core")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘test-all.R’
+    Running the tests in ‘tests/test-all.R’ failed.
+    Complete output:
+      > library(testthat)
+      > aa <- options(spades.debug = FALSE)
+      > options("spades.temp.debug" = aa)
+      > if (FALSE) {
+      +   ff <- list()
+      +   runTestsWithTimings("ff")
+      + }
+    ...
+      Backtrace:
+          ▆
+       1. └─SpaDES.core::saveSimList(mySim, filename = tmpfile[2]) at test-save.R:208:3
+       2.   └─SpaDES.core:::archiveWrite(filename, relFns, verbose)
+       3.     └─archive::archive_write_files(...)
+       4.       └─archive:::assert(...)
+      
+      [ FAIL 1 | WARN 0 | SKIP 29 | PASS 532 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  9.3Mb
+      sub-directories of 1Mb or more:
+        R   7.5Mb
     ```
 
