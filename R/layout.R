@@ -789,7 +789,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
       if ("weight" %in% edge_attr_names(graph)) {
         weights <- E(graph)$weight
         if (any(weights <= 0, na.rm = TRUE)) {
-          warning("Non-positive edge weight found, ignoring all weights during graph layout.")
+          cli::cli_warn("Non-positive edge weight found, ignoring all weights during graph layout.")
           args$weights <- NA
         }
       }
