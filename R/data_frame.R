@@ -165,11 +165,11 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
 
   ## Handle if some elements are 'NA'
   if (any(is.na(d[, 1:2]))) {
-    warning("In `d' `NA' elements were replaced with string \"NA\"")
+    cli::cli_warn("In {.code d}, {.code NA} elements were replaced with string {.str NA}.")
     d[, 1:2][is.na(d[, 1:2])] <- "NA"
   }
   if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
-    warning("In `vertices[,1]' `NA' elements were replaced with string \"NA\"")
+    cli::cli_warn("In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}.")
     vertices[, 1][is.na(vertices[, 1])] <- "NA"
   }
 
