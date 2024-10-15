@@ -59,7 +59,7 @@ categorical_pal <- function(n) {
     "#D55E00", "#CC79A7", "#999999"
   )
 
-  if (n > length(x)) warning("Cannot make ", n, " categorical colors")
+  if (n > length(x)) cli::cli_warn("Cannot make {n} categorical colors.")
 
   n <- min(n, length(x))
 
@@ -115,7 +115,7 @@ sequential_pal <- function(n) {
     )
   )
 
-  if (n > length(x)) warning("Cannot make ", n, " sequential colors")
+  if (n > length(x)) cli::cli_warn("Cannot make {n} sequential colors.")
 
   n <- min(n, length(x))
 
@@ -191,7 +191,7 @@ diverging_pal <- function(n) {
     )
   )
 
-  if (n > length(x)) warning("Cannot make ", n, " divergent colors")
+  if (n > length(x)) cli::cli_warn("Cannot make {n} divergent colors.")
 
   n <- min(n, length(x))
 
@@ -213,7 +213,7 @@ diverging_pal <- function(n) {
 #' @importFrom grDevices palette
 r_pal <- function(n) {
   x <- palette()
-  if (n > length(x)) warning("Cannot make ", n, " divergent colors")
+  if (n > length(x)) cli::cli_warn("Cannot make {n} divergent colors.")
   n <- min(n, length(x))
   if (n == 0) character() else x[[n]]
 }
