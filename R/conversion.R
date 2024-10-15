@@ -819,7 +819,7 @@ as_graphnel <- function(graph) {
 
   g.n <- graph_attr_names(graph)
   if ("directed" %in% g.n) {
-    warning("Cannot add graph attribute `directed'")
+    cli::cli_warn("Cannot add graph attribute {.str directed}.")
     g.n <- g.n[g.n != "directed"]
   }
   for (n in g.n) {
