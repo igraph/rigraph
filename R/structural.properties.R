@@ -896,7 +896,7 @@ distances <- function(graph, v = V(graph), to = V(graph),
 
   if (!is.null(weights) && algorithm == 1) {
     weights <- NULL
-    warning("Unweighted algorithm chosen, weights ignored")
+    cli::cli_warn("Unweighted algorithm chosen, {.arg weights} ignored.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -976,7 +976,7 @@ shortest_paths <- function(graph, from, to = V(graph),
 
   if (!is.null(weights) && algorithm == 1) {
     weights <- NULL
-    warning("Unweighted algorithm chosen, weights ignored")
+    cli::cli_warn("Unweighted algorithm chosen, {.arg weights} ignored.")
   }
 
   to <- as_igraph_vs(graph, to) - 1
