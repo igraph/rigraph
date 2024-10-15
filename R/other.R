@@ -162,7 +162,7 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
-      warning("vertex types converted to logical")
+      cli::cli_warn("vertex types converted to logical.")
     }
     types <- as.logical(types)
     if (any(is.na(types))) {

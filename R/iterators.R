@@ -1494,10 +1494,10 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (length(graph_id) != 1) {
-    warning(
-      "Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions"
-    )
+    cli::cli_warn(c(
+      "Combining vertex/edge sequences from different graphs.",
+      x = "This will not work in future igraph versions."
+    ))
   }
 
   graphs <- args %>%
@@ -1509,9 +1509,9 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (check_graph && length(addresses) >= 2) {
-    warning(
-      "Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions"
+    cli::cli_warn(
+      "Combining vertex/edge sequences from different graphs",
+      x = "This will not work in future igraph versions."
     )
   }
 

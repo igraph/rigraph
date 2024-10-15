@@ -264,7 +264,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
     }
   } else if (!is.na(add.names)) {
     if (is.null(rownames(incidence)) || is.null(colnames(incidence))) {
-      warning("Cannot add row- and column names, at least one of them is missing")
+      cli::cli_warn("Cannot add row- and column names, at least one of them is missing.")
       add.names <- NA
     }
   }

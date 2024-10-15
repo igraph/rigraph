@@ -154,7 +154,7 @@ bipartite_projection <- function(graph, types = NULL,
     "true" = 2L
   )
   if (which != "both" && probe1 != -1) {
-    warning("`probe1' ignored if only one projection is requested")
+    cli::cli_warn("{.arg probe1} ignored if only one projection is requested.")
   }
 
   on.exit(.Call(R_igraph_finalizer))

@@ -1028,7 +1028,7 @@ igraph.i.attribute.combination <- function(comb) {
     names(comb) <- rep("", length(comb))
   }
   if (any(duplicated(names(comb)))) {
-    warning("Some attributes are duplicated")
+    cli::cli_warn("Some attributes are duplicated")
   }
   comb <- lapply(comb, function(x) {
     if (!is.character(x)) {

@@ -266,7 +266,7 @@ graph_from_adjacency_matrix <- function(adjmatrix,
     }
   } else if (!is.na(add.colnames)) {
     if (is.null(colnames(adjmatrix))) {
-      warning("No column names to add")
+      cli::cli_warn("No column names to add")
       add.colnames <- NA
     }
   }
@@ -279,14 +279,14 @@ graph_from_adjacency_matrix <- function(adjmatrix,
     }
   } else if (!is.na(add.rownames)) {
     if (is.null(rownames(adjmatrix))) {
-      warning("No row names to add")
+      cli::cli_warn("No row names to add")
       add.rownames <- NA
     }
   }
 
   if (!is.na(add.rownames) && !is.na(add.colnames) &&
     add.rownames == add.colnames) {
-    warning("Same attribute for columns and rows, row names are ignored")
+    cli::cli_warn("Same attribute for columns and rows, row names are ignored")
     add.rownames <- NA
   }
 

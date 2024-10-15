@@ -719,7 +719,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
 
   if (sym && complex) {
     complex <- FALSE
-    warning("Symmetric matrix, setting `complex' to FALSE")
+    cli::cli_warn("Symmetric matrix, setting {.arg complex} to {.code FALSE}.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -742,7 +742,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
   } else {
     if (is.matrix(res$values)) {
       if (!all(res$values[, 2] == 0)) {
-        warning("Dropping imaginary parts of eigenvalues")
+        cli::cli_warn("Dropping imaginary parts of eigenvalues.")
       }
       res$values <- res$values[, 1]
     }
