@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 10 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 7 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 4 new problems
- * We failed to check 4 packages
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -26,5 +26,4 @@ Issues with CRAN packages are summarised below.
 
 * bnlearn   (NA)
 * datapack  (NA)
-* multinma  (NA)
 * streamDAG (NA)

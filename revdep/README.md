@@ -1,12 +1,11 @@
 # Revdeps
 
-## Failed to check (4)
+## Failed to check (3)
 
 |package   |version |error |warning |note |
 |:---------|:-------|:-----|:-------|:----|
 |bnlearn   |5.0.1   |1     |        |     |
 |datapack  |1.4.1   |1     |        |     |
-|multinma  |0.7.2   |1     |        |     |
 |streamDAG |?       |      |        |     |
 
 ## New problems (4)
