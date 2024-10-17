@@ -9,8 +9,9 @@ fit_power_law(
   xmin = NULL,
   start = 2,
   force.continuous = FALSE,
-  p.precision = 0.01,
-  implementation = c("plfit", "R.mle", "plfit.p"),
+  implementation = c("plfit", "R.mle"),
+  p.value = FALSE,
+  p.precision = NULL,
   ...
 )
 }
@@ -36,14 +37,14 @@ sample vector contains integer values only (by chance). If this argument is
 false, igraph will assume a continuous distribution if at least one sample
 is non-integer and assume a discrete distribution otherwise.}
 
+\item{implementation}{Character scalar. Which implementation to use. See
+details below.}
+
 \item{p.precision}{The desired precision of the p-value calculation. The
 precision ultimately depends on the number of resampling attempts. The
 number of resampling trials is determined by 0.25 divided by the square
 of the required precision. For instance, a required precision of 0.01
 means that 2500 samples will be drawn.}
-
-\item{implementation}{Character scalar. Which implementation to use. See
-details below.}
 
 \item{\dots}{Additional arguments, passed to the maximum likelihood
 optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
@@ -56,7 +57,7 @@ Depends on the \code{implementation} argument. If it is
 be used to calculate confidence intervals and log-likelihood. See
 \code{\link[stats4:mle-class]{stats4::mle-class()}} for details.
 
-If \code{implementation} is \sQuote{\code{plfit}} or \sQuote{\code{plfit.p}}, then the result is a
+If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
 named list with entries:
 \item{continuous}{Logical scalar, whether the
 fitted power-law distribution was continuous or discrete.}
@@ -68,7 +69,7 @@ than \code{xmin} were used from the input vector.}
 \item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
 that compares the fitted distribution with the input vector.
 Smaller scores denote better fit.}
-\item{KS.p}{Only for \code{plfit.p}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
+\item{KS.p}{Only for \code{p.value = TRUE}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}
@@ -105,8 +106,7 @@ parameters of the fitted distribution. See references below for the details.
 
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Pass \sQuote{\code{plfit.p}} instead of \sQuote{\code{plfit}} as the \code{implementation}
-argument to include the p-value in the output.
+Pass \code{p.value = TRUE} to include the p-value in the output.
 This is not returned by default because the computation may be slow.
 }
 \examples{
