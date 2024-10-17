@@ -54,7 +54,9 @@
 <span>  xmin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  start <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  force.continuous <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plfit"</span>, <span class="st">"R.mle"</span>, <span class="st">"plfit.p"</span><span class="op">)</span>,</span>
+<span>  implementation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plfit"</span>, <span class="st">"R.mle"</span><span class="op">)</span>,</span>
+<span>  p.value <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  p.precision <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,6 +99,20 @@ is non-integer and assume a discrete distribution otherwise.</p></dd>
 details below.</p></dd>
 
 
+<dt id="arg-p-value">p.value<a class="anchor" aria-label="anchor" href="#arg-p-value"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>Set to <code>TRUE</code> to compute the p-value with <code>implementation = "plfit"</code>.</p></dd>
+
+
+<dt id="arg-p-precision">p.precision<a class="anchor" aria-label="anchor" href="#arg-p-precision"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
+<p>The desired precision of the p-value calculation. The
+precision ultimately depends on the number of resampling attempts. The
+number of resampling trials is determined by 0.25 divided by the square
+of the required precision. For instance, a required precision of 0.01
+means that 2500 samples will be drawn.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments, passed to the maximum likelihood
 optimizing function, <code><a href="https://rdrr.io/r/stats4/mle.html" class="external-link">stats4::mle()</a></code>, if the ‘<code>R.mle</code>’
@@ -110,7 +126,7 @@ implementation.</p></dd>
 ‘<code>R.mle</code>’, then an object with class ‘<code>mle</code>’. It can
 be used to calculate confidence intervals and log-likelihood. See
 <code><a href="https://rdrr.io/r/stats4/mle-class.html" class="external-link">stats4::mle-class()</a></code> for details.</p>
-<p>If <code>implementation</code> is ‘<code>plfit</code>’ or ‘<code>plfit.p</code>’, then the result is a
+<p>If <code>implementation</code> is ‘<code>plfit</code>’, then the result is a
 named list with entries:</p>
 <dl><dt>continuous</dt>
 <dd><p>Logical scalar, whether the
@@ -133,7 +149,7 @@ that compares the fitted distribution with the input vector.
 Smaller scores denote better fit.</p></dd>
 
 <dt>KS.p</dt>
-<dd><p>Only for <code>plfit.p</code>. Numeric scalar, the p-value of the Kolmogorov-Smirnov
+<dd><p>Only for <code>p.value = TRUE</code>. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.</p></dd>
@@ -165,8 +181,7 @@ test between the fitted distribution and the original sample is the largest.
 The function uses the method of Clauset, Shalizi and Newman to calculate the
 parameters of the fitted distribution. See references below for the details.</p>
 <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a></p>
-<p>Pass ‘<code>plfit.p</code>’ instead of ‘<code>plfit</code>’ as the <code>implementation</code>
-argument to include the p-value in the output.
+<p>Pass <code>p.value = TRUE</code> to include the p-value in the output.
 This is not returned by default because the computation may be slow.</p>
     </div>
     <div class="section level2">
