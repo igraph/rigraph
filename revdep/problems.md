@@ -59,47 +59,6 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       Note: found 7 marked UTF-8 strings
     ```
 
-# MetaNet
-
-<details>
-
-* Version: 0.1.2
-* GitHub: https://github.com/Asa12138/MetaNet
-* Source code: https://github.com/cran/MetaNet
-* Date/Publication: 2024-03-25 20:40:07 UTC
-* Number of recursive dependencies: 151
-
-Run `revdepcheck::cloud_details(, "MetaNet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘MetaNet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: anno_vertex
-    > ### Title: Use data.frame to annotate vertexes of metanet
-    > ### Aliases: anno_vertex anno_node
-    > 
-    > ### ** Examples
-    > 
-    > data("c_net")
-    ...
-      8. │           └─igraph (local) x("width", no = can_max)
-      9. │             ├─igraph::ends(x, edges[seq_len(no)], names = names)
-     10. │             │ ├─igraph:::as_igraph_es(graph, na.omit(es))
-     11. │             │ └─stats::na.omit(es)
-     12. │             ├─edges[seq_len(no)]
-     13. │             └─igraph:::`[.igraph.es`(edges, seq_len(no))
-     14. │               └─base::lapply(...)
-     15. │                 └─rlang (local) FUN(X[[i]], ...)
-     16. └─rlang::abort(message = message)
-    Execution halted
-    ```
-
 # simcausal
 
 <details>
@@ -197,7 +156,7 @@ Run `revdepcheck::cloud_details(, "skynet")` for more info
       
       ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
     ...
-       14. │   └─base::lapply(...)
+       14. │   └─base::lapply(args, rlang::eval_tidy, data = data_mask)
        15. │     └─rlang (local) FUN(X[[i]], ...)
        16. └─igraph (local) from(V(x)[y])
        17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
