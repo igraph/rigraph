@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.0.9010
+
+## Bug fixes
+
+- Preserve `as.undirected()` signature thanks to @jhollway (#1536).
+
+## Features
+
+- More {cli} (#1553).
+
+## Chore
+
+- Results of downstream checks.
+
+## Documentation
+
+- Update allcontributors table (#1552).
+
+- Groom NEWS file (#1537).
+
+## Testing
+
+- Deprecated graph\_() (#1554).
+
+
 # igraph 2.1.0.9009
 
 ## Chore
