@@ -93,7 +93,12 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'   sample vector contains integer values only (by chance). If this argument is
 #'   false, igraph will assume a continuous distribution if at least one sample
 #'   is non-integer and assume a discrete distribution otherwise.
-#' @param p.precision The desired precision of the p-value calculation. The
+#' @param p.value `r lifecycle::badge("experimental")`
+#'
+#'   Set to `TRUE` to compute the p-value with `implementation = "plfit"`.
+#' @param p.precision `r lifecycle::badge("experimental")`
+#'
+#'   The desired precision of the p-value calculation. The
 #'   precision ultimately depends on the number of resampling attempts. The
 #'   number of resampling trials is determined by 0.25 divided by the square
 #'   of the required precision. For instance, a required precision of 0.01

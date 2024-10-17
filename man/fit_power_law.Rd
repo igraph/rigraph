@@ -40,7 +40,13 @@ is non-integer and assume a discrete distribution otherwise.}
 \item{implementation}{Character scalar. Which implementation to use. See
 details below.}
 
-\item{p.precision}{The desired precision of the p-value calculation. The
+\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Set to \code{TRUE} to compute the p-value with \code{implementation = "plfit"}.}
+
+\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+The desired precision of the p-value calculation. The
 precision ultimately depends on the number of resampling attempts. The
 number of resampling trials is determined by 0.25 divided by the square
 of the required precision. For instance, a required precision of 0.01
