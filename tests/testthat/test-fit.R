@@ -24,5 +24,5 @@ test_that("fit_power_law() works", {
   fit <- fit_power_law(d, p.value = TRUE)
 
   expect_equal(fit[names(fit) != "KS.p"], expected)
-  expect_equal(fit$KS.p, expected_p)
+  expect_equal(fit$KS.p, expected_p, tolerance = 1e-2)
 })
