@@ -11,6 +11,8 @@ failures <- gsub("^# ", "", grep("^# ", readLines("revdep/failures.md"), value =
 
 broken <- c(problems, failed, failures)
 
+print(broken)
+
 revdepcheck::cloud_check(tarball = last, revdep_packages = broken, r_version = "4.4.0")
 revdepcheck::cloud_status()
 revdepcheck::cloud_report()
