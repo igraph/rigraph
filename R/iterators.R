@@ -649,21 +649,28 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lapply(
-      args,
-      rlang::eval_tidy,
-      data = c(
-        attrs,
-        .nei = .nei, nei = nei,
-        .innei = .innei, innei = innei,
-        .outnei = .outnei, outnei = outnei,
-        .inc = .inc, inc = inc, adj = adj,
-        .from = .from, from = from,
-        .to = .to, to = to,
-        .env = env,
-        .data = list(attrs)
-      )
-    )
+
+    # Functions (only visible if called or if no duplicate)
+    top <- rlang::new_environment(list(
+      .nei = .nei, nei = nei,
+      .innei = .innei, innei = innei,
+      .outnei = .outnei, outnei = outnei,
+      .inc = .inc, inc = inc, adj = adj,
+      .from = .from, from = from,
+      .to = .to, to = to,
+      .data = list(attrs)
+    ))
+
+    # Data objects (visible by default)
+    bottom <- rlang::new_environment(parent = top, c(
+      attrs,
+      .env = env,
+      .data = list(attrs)
+    ))
+
+    data_mask <- rlang::new_data_mask(bottom, top)
+
+    res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
     res <- lapply(res, function(ii) {
       if (is.null(ii)) {
@@ -957,22 +964,28 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lapply(
-      args,
-      rlang::eval_tidy,
-      data = c(
-        attrs,
-        .inc = .inc, inc = inc, adj = adj,
-        .from = .from, from = from,
-        .to = .to, to = to,
-        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
-        .igraph.graph = list(graph),
-        `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
-        .env = env,
-        .data = list(attrs)
-      )
-    )
+
+    # Functions (only visible if called or if no duplicate)
+    top <- rlang::new_environment(list(
+      .inc = .inc, inc = inc, adj = adj,
+      .from = .from, from = from,
+      .to = .to, to = to,
+      `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`
+    ))
+
+    # Data objects (visible by default)
+    bottom <- rlang::new_environment(parent = top, c(
+      attrs,
+      .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+      .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
+      .igraph.graph = list(graph),
+      .env = env,
+      .data = list(attrs)
+    ))
+
+    data_mask <- rlang::new_data_mask(bottom, top)
+
+    res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
     res <- lapply(res, function(ii) {
       if (is.null(ii)) {
