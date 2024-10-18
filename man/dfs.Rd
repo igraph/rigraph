@@ -11,13 +11,14 @@ dfs(
   unreachable = TRUE,
   order = TRUE,
   order.out = FALSE,
-  father = FALSE,
+  parent = FALSE,
   dist = FALSE,
   in.callback = NULL,
   out.callback = NULL,
   extra = NULL,
   rho = parent.frame(),
-  neimode = deprecated()
+  neimode = deprecated(),
+  father = deprecated()
 )
 }
 \arguments{
@@ -41,7 +42,7 @@ vertices.}
 \item{order.out}{Logical scalar, whether to return the ordering based on
 leaving the subtree of the vertex.}
 
-\item{father}{Logical scalar, whether to return the father of the vertices.}
+\item{parent}{Logical scalar, whether to return the parent of the vertices.}
 
 \item{dist}{Logical scalar, whether to return the distance from the root of
 the search tree.}
@@ -59,6 +60,8 @@ algorithm. See details below.}
 
 \item{neimode}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is deprecated from igraph 1.3.0; use
 \code{mode} instead.}
+
+\item{father}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}, use \code{parent} instead.}
 }
 \value{
 A named list with the following entries: \item{root}{Numeric scalar.
@@ -68,11 +71,13 @@ call. Note that for undirected graphs this is always \sQuote{all},
 irrespectively of the supplied value.} \item{order}{Numeric vector. The
 vertex ids, in the order in which they were visited by the search.}
 \item{order.out}{Numeric vector, the vertex ids, in the order of the
-completion of their subtree.} \item{father}{Numeric vector. The father of
-each vertex, i.e. the vertex it was discovered from.} \item{dist}{Numeric
+completion of their subtree.} \item{parent}{Numeric vector. The parent of
+each vertex, i.e. the vertex it was discovered from.}
+\item{father}{Like parent, kept for compatibility for now.}
+\item{dist}{Numeric
 vector, for each vertex its distance from the root of the search tree.}
 
-Note that \code{order}, \code{order.out}, \code{father}, and \code{dist}
+Note that \code{order}, \code{order.out}, \code{parent}, and \code{dist}
 might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
 if their calculation is not requested.
 }
