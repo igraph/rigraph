@@ -282,7 +282,9 @@ graph_attr <- function(graph, name) {
     return(graph.attributes(graph))
   }
 
-  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
+  assert_character(name)
+
+  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[name]]
 }
 
 
@@ -384,8 +386,10 @@ vertex_attr <- function(graph, name, index = V(graph)) {
     }
     return(vertex.attributes(graph, index = index))
   }
+
+  assert_character(name)
   myattr <-
-    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
+    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[name]]
   if (is_complete_iterator(index)) {
     return(myattr)
   }
@@ -456,6 +460,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 
 i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE) {
   ensure_igraph(graph)
+  assert_character(name)
 
   if (is.null(value)) {
     return(graph)
@@ -470,7 +475,6 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   if (!missing(index) && check) {
     index <- as_igraph_vs(graph, index)
   }
-  name <- as.character(name)
 
   vattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
@@ -595,7 +599,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
       edge.attributes(graph, index = index)
     }
   } else {
-    name <- as.character(name)
+    assert_character(name)
     myattr <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)[[name]]
     if (is_complete_iterator(index)) {
       myattr
@@ -668,6 +672,7 @@ set_edge_attr <- function(graph, name, index = E(graph), value) {
 
 i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) {
   ensure_igraph(graph)
+  assert_character(name)
 
   if (is.null(value)) {
     return(graph)
@@ -681,7 +686,7 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
 
   complete <- is_complete_iterator(index)
   single <- is_single_index(index)
-  name <- as.character(name)
+
   if (!missing(index) && check) {
     index <- as_igraph_es(graph, index)
   }
@@ -854,8 +859,8 @@ edge_attr_names <- function(graph) {
 #' graph_attr_names(g2)
 delete_graph_attr <- function(graph, name) {
   ensure_igraph(graph)
+  assert_character(name)
 
-  name <- as.character(name)
   if (!name %in% graph_attr_names(graph)) {
     stop("No such graph attribute: ", name)
   }
@@ -883,8 +888,8 @@ delete_graph_attr <- function(graph, name) {
 #' vertex_attr_names(g2)
 delete_vertex_attr <- function(graph, name) {
   ensure_igraph(graph)
+  assert_character(name)
 
-  name <- as.character(name)
   if (!name %in% vertex_attr_names(graph)) {
     stop("No such vertex attribute: ", name)
   }
@@ -912,8 +917,8 @@ delete_vertex_attr <- function(graph, name) {
 #' edge_attr_names(g2)
 delete_edge_attr <- function(graph, name) {
   ensure_igraph(graph)
+  assert_character(name)
 
-  name <- as.character(name)
   if (!name %in% edge_attr_names(graph)) {
     stop("No such edge attribute: ", name)
   }
