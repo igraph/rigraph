@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,135 +39,35 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9012" id="igraph-2109012">igraph 2.1.0.9012<a class="anchor" aria-label="anchor" href="#igraph-2109012"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.1" id="igraph-211">igraph 2.1.1<a class="anchor" aria-label="anchor" href="#igraph-211"></a></h2>
+<p>See <a href="https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”.</p>
 <div class="section level3">
-<h3 id="chore-2-1-0-9012">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9012"></a></h3>
-<ul><li>Results good now.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9011" id="igraph-2109011">igraph 2.1.0.9011<a class="anchor" aria-label="anchor" href="#igraph-2109011"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-1-0-9011">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-0-9011"></a></h3>
-<ul><li>Account for functions in iterators (<a href="https://github.com/igraph/rigraph/issues/1557" class="external-link">#1557</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-1-0-9011">Features<a class="anchor" aria-label="anchor" href="#features-2-1-0-9011"></a></h3>
+<h3 id="features-2-1-1">Features<a class="anchor" aria-label="anchor" href="#features-2-1-1"></a></h3>
 <ul><li>Add <code>p.value</code> and <code>p.precision</code> arguments to <code><a href="../reference/fit_power_law.html">fit_power_law()</a></code> to control the computation of the p-value (<a href="https://github.com/igraph/rigraph/issues/1546" class="external-link">#1546</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-2-1-0-9011">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9011"></a></h3>
-<ul><li><p>Results.</p></li>
-<li><p>Tweak revdepcheck code.</p></li>
-<li><p>Results and tweaks.</p></li>
-<li><p>Update vendored sources to <a href="mailto:igraph/igraph@31c4e6ffcd3592cda70f559a9c53ddbddee67f3e" class="email">igraph/igraph@31c4e6ffcd3592cda70f559a9c53ddbddee67f3e</a>.</p></li>
+<h3 id="bug-fixes-2-1-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-1"></a></h3>
+<ul><li>Preserve <code><a href="../reference/as.undirected.html">as.undirected()</a></code> signature thanks to <a href="https://github.com/jhollway" class="external-link">@jhollway</a>, regression introduced in igraph 2.1.0 (<a href="https://github.com/igraph/rigraph/issues/1536" class="external-link">#1536</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="uncategorized-2-1-0-9011">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-1-0-9011"></a></h3>
-<ul><li>Prepare for libxml2 depending on bcrypt, use pkg-config. (<a href="https://github.com/igraph/rigraph/issues/1556" class="external-link">#1556</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9010" id="igraph-2109010">igraph 2.1.0.9010<a class="anchor" aria-label="anchor" href="#igraph-2109010"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-1-0-9010">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-0-9010"></a></h3>
-<ul><li>Preserve <code><a href="../reference/as.undirected.html">as.undirected()</a></code> signature thanks to <a href="https://github.com/jhollway" class="external-link">@jhollway</a> (<a href="https://github.com/igraph/rigraph/issues/1536" class="external-link">#1536</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="features-2-1-0-9010">Features<a class="anchor" aria-label="anchor" href="#features-2-1-0-9010"></a></h3>
-<ul><li>More {cli} (<a href="https://github.com/igraph/rigraph/issues/1553" class="external-link">#1553</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-1-0-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9010"></a></h3>
-<ul><li>Results of downstream checks.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-2-1-0-9010">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-0-9010"></a></h3>
-<ul><li><p>Update allcontributors table (<a href="https://github.com/igraph/rigraph/issues/1552" class="external-link">#1552</a>).</p></li>
-<li><p>Groom NEWS file (<a href="https://github.com/igraph/rigraph/issues/1537" class="external-link">#1537</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-2-1-0-9010">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-0-9010"></a></h3>
-<ul><li>Deprecated graph_() (<a href="https://github.com/igraph/rigraph/issues/1554" class="external-link">#1554</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9009" id="igraph-2109009">igraph 2.1.0.9009<a class="anchor" aria-label="anchor" href="#igraph-2109009"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-1-0-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9009"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@f8d4760f41f0d270faa04b84ddbe888655451da6" class="email">igraph/igraph@f8d4760f41f0d270faa04b84ddbe888655451da6</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9008" id="igraph-2109008">igraph 2.1.0.9008<a class="anchor" aria-label="anchor" href="#igraph-2109008"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-1-0-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9008"></a></h3>
-<ul><li>Update vendored sources to <a href="mailto:igraph/igraph@a9ca8a74eb8cfeefe7e46193f7f524b2039fe20e" class="email">igraph/igraph@a9ca8a74eb8cfeefe7e46193f7f524b2039fe20e</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9007" id="igraph-2109007">igraph 2.1.0.9007<a class="anchor" aria-label="anchor" href="#igraph-2109007"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-1-0-9007">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-0-9007"></a></h3>
-<ul><li>Put deprecation message at the beginning not the end of the similarity functions (<a href="https://github.com/igraph/rigraph/issues/1549" class="external-link">#1549</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-1-0-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-0-9007"></a></h3>
-<ul><li>Document {devtag} in contributing guide (<a href="https://github.com/igraph/rigraph/issues/1547" class="external-link">#1547</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9006" id="igraph-2109006">igraph 2.1.0.9006<a class="anchor" aria-label="anchor" href="#igraph-2109006"></a></h2>
-<div class="section level3">
-<h3 id="lifecycle-2-1-0-9006">lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-2-1-0-9006"></a></h3>
+<h3 id="lifecycle-2-1-1">Lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle-2-1-1"></a></h3>
 <ul><li>Deprecate <code>eigen_centrality(scale = )</code> (<a href="https://github.com/igraph/rigraph/issues/1543" class="external-link">#1543</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9005" id="igraph-2109005">igraph 2.1.0.9005<a class="anchor" aria-label="anchor" href="#igraph-2109005"></a></h2>
-<div class="section level3">
-<h3 id="testing-2-1-0-9005">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-0-9005"></a></h3>
-<ul><li><p>Add tests for <code><a href="../reference/graph_from_biadjacency_matrix.html">graph_from_biadjacency_matrix()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1520" class="external-link">#1520</a>).</p></li>
-<li><p>Test-cliques (<a href="https://github.com/igraph/rigraph/issues/1541" class="external-link">#1541</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9004" id="igraph-2109004">igraph 2.1.0.9004<a class="anchor" aria-label="anchor" href="#igraph-2109004"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-1-0-9004">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-0-9004"></a></h3>
-<ul><li>Use mathjax for now (<a href="https://github.com/igraph/rigraph/issues/1538" class="external-link">#1538</a>).</li>
+<li>Put deprecation message at the beginning not the end of the similarity functions (<a href="https://github.com/igraph/rigraph/issues/1549" class="external-link">#1549</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="testing-2-1-0-9004">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-0-9004"></a></h3>
-<ul><li><p>Fold test-bonpow into test-centrality.</p></li>
-<li><p>Fold <code><a href="../reference/closeness.html">closeness()</a></code>’s tests into test-centrality.</p></li>
-<li><p>Fold <code><a href="../reference/betweenness.html">edge_betweenness()</a></code>’s tests into test-centrality.</p></li>
-<li><p>Fold <code><a href="../reference/betweenness.html">betweenness()</a></code>’s tests into test-centrality.R.</p></li>
-<li><p>Fold <code><a href="../reference/hits_scores.html">hits_scores()</a></code>’s tests into test-centrality.</p></li>
-<li><p>Add tests for as_adjacency_matrix() in test-conversion (<a href="https://github.com/igraph/rigraph/issues/1519" class="external-link">#1519</a>).</p></li>
+<h3 id="documentation-2-1-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-1"></a></h3>
+<ul><li>Update allcontributors table (<a href="https://github.com/igraph/rigraph/issues/1552" class="external-link">#1552</a>).</li>
+<li>Use mathjax for now (<a href="https://github.com/igraph/rigraph/issues/1538" class="external-link">#1538</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-2-1-1">Internal<a class="anchor" aria-label="anchor" href="#internal-2-1-1"></a></h3>
+<ul><li>Prepare for libxml2 depending on bcrypt, use pkg-config (<a href="https://github.com/igraph/rigraph/issues/1556" class="external-link">#1556</a>, <a href="https://github.com/kalibera" class="external-link">@kalibera</a>).</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9003" id="igraph-2109003">igraph 2.1.0.9003<a class="anchor" aria-label="anchor" href="#igraph-2109003"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9002" id="igraph-2109002">igraph 2.1.0.9002<a class="anchor" aria-label="anchor" href="#igraph-2109002"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9001" id="igraph-2109001">igraph 2.1.0.9001<a class="anchor" aria-label="anchor" href="#igraph-2109001"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.0’ (<a href="https://github.com/igraph/rigraph/issues/1532" class="external-link">#1532</a>).</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.0.9000" id="igraph-2109000">igraph 2.1.0.9000<a class="anchor" aria-label="anchor" href="#igraph-2109000"></a></h2>
-<ul><li><p>Merge branch ‘cran-2.1.0’.</p></li>
-<li><p>Merge branch ‘main’ into cran-2.1.0.</p></li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.0" id="igraph-210">igraph 2.1.0<a class="anchor" aria-label="anchor" href="#igraph-210"></a></h2>
 <p>See <a href="https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”.</p>
