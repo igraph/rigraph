@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.0.9011
+
+## Bug fixes
+
+- Account for functions in iterators (#1557).
+
+## Features
+
+- Add `p.value` and `p.precision` arguments to `fit_power_law()` to control the computation of the p-value (#1546).
+
+## Chore
+
+- Results.
+
+- Tweak revdepcheck code.
+
+- Results and tweaks.
+
+- Update vendored sources to igraph/igraph@31c4e6ffcd3592cda70f559a9c53ddbddee67f3e.
+
+## Uncategorized
+
+- Prepare for libxml2 depending on bcrypt, use pkg-config. (#1556).
+
+
 # igraph 2.1.0.9010
 
 ## Bug fixes
