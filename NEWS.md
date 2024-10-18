@@ -1,144 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.0.9012
+# igraph 2.1.1
 
-## Chore
-
-- Results good now.
-
-
-# igraph 2.1.0.9011
-
-## Bug fixes
-
-- Account for functions in iterators (#1557).
+See <https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
 ## Features
 
 - Add `p.value` and `p.precision` arguments to `fit_power_law()` to control the computation of the p-value (#1546).
 
-## Chore
-
-- Results.
-
-- Tweak revdepcheck code.
-
-- Results and tweaks.
-
-- Update vendored sources to igraph/igraph@31c4e6ffcd3592cda70f559a9c53ddbddee67f3e.
-
-## Uncategorized
-
-- Prepare for libxml2 depending on bcrypt, use pkg-config. (#1556).
-
-
-# igraph 2.1.0.9010
-
 ## Bug fixes
 
-- Preserve `as.undirected()` signature thanks to @jhollway (#1536).
+- Preserve `as.undirected()` signature thanks to @jhollway, regression introduced in igraph 2.1.0 (#1536).
 
-## Features
+## Lifecycle
 
-- More {cli} (#1553).
-
-## Chore
-
-- Results of downstream checks.
+- Deprecate `eigen_centrality(scale = )` (#1543).
+- Put deprecation message at the beginning not the end of the similarity functions (#1549).
 
 ## Documentation
 
 - Update allcontributors table (#1552).
-
-- Groom NEWS file (#1537).
-
-## Testing
-
-- Deprecated graph\_() (#1554).
-
-
-# igraph 2.1.0.9009
-
-## Chore
-
-- Update vendored sources to igraph/igraph@f8d4760f41f0d270faa04b84ddbe888655451da6.
-
-
-# igraph 2.1.0.9008
-
-## Chore
-
-- Update vendored sources to igraph/igraph@a9ca8a74eb8cfeefe7e46193f7f524b2039fe20e.
-
-
-# igraph 2.1.0.9007
-
-## Bug fixes
-
-- Put deprecation message at the beginning not the end of the similarity functions (#1549).
-
-## Chore
-
-- Document {devtag} in contributing guide (#1547).
-
-
-# igraph 2.1.0.9006
-
-## lifecycle
-
-- Deprecate `eigen_centrality(scale = )` (#1543).
-
-
-# igraph 2.1.0.9005
-
-## Testing
-
-- Add tests for `graph_from_biadjacency_matrix()` (#1520).
-
-- Test-cliques (#1541).
-
-
-# igraph 2.1.0.9004
-
-## Documentation
-
 - Use mathjax for now (#1538).
 
-## Testing
+## Internal
 
-- Fold test-bonpow into test-centrality.
-
-- Fold `closeness()`'s tests into test-centrality.
-
-- Fold `edge_betweenness()`'s tests into test-centrality.
-
-- Fold `betweenness()`'s tests into test-centrality.R.
-
-- Fold `hits_scores()`'s tests into test-centrality.
-
-- Add tests for as_adjacency_matrix() in test-conversion (#1519).
-
-
-# igraph 2.1.0.9003
-
-- Merge branch 'cran-2.1.0'.
-
-
-# igraph 2.1.0.9002
-
-- Merge branch 'cran-2.1.0'.
-
-
-# igraph 2.1.0.9001
-
-- Merge branch 'cran-2.1.0' (#1532).
-
-
-# igraph 2.1.0.9000
-
-- Merge branch 'cran-2.1.0'.
-
-- Merge branch 'main' into cran-2.1.0.
+- Prepare for libxml2 depending on bcrypt, use pkg-config (#1556, @kalibera).
 
 
 # igraph 2.1.0
