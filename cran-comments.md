@@ -36,7 +36,7 @@ See: <https://www.stats.ox.ac.uk/pub/bdr/gcc/igraph.out>
 See: <https://www.stats.ox.ac.uk/pub/bdr/noSuggests/igraph.out>
      
      Fixed.
-- [ ] other_issue: NA
+- [x] other_issue: NA
 See: <https://raw.githubusercontent.com/kalibera/cran-checks/master/rchk/results/igraph.out>
      
      Fixed.
