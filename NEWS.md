@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9000
+
+- Merge branch 'cran-2.1.1'.
+
+
 # igraph 2.1.1
 
 See <https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
