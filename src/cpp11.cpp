@@ -163,6 +163,7 @@ extern SEXP R_igraph_extended_chordal_ring(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_famous(SEXP);
 extern SEXP R_igraph_farthest_points(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_feedback_arc_set(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_feedback_vertex_set(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_finalizer(void);
 extern SEXP R_igraph_find_cycle(SEXP, SEXP);
 extern SEXP R_igraph_forest_fire_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -616,6 +617,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_famous",                                     (DL_FUNC) &R_igraph_famous,                                      1},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
     {"R_igraph_feedback_arc_set",                           (DL_FUNC) &R_igraph_feedback_arc_set,                            3},
+    {"R_igraph_feedback_vertex_set",                        (DL_FUNC) &R_igraph_feedback_vertex_set,                         3},
     {"R_igraph_finalizer",                                  (DL_FUNC) &R_igraph_finalizer,                                   0},
     {"R_igraph_find_cycle",                                 (DL_FUNC) &R_igraph_find_cycle,                                  2},
     {"R_igraph_forest_fire_game",                           (DL_FUNC) &R_igraph_forest_fire_game,                            5},

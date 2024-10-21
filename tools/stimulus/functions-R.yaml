@@ -511,7 +511,6 @@ igraph_topological_sorting:
 igraph_feedback_arc_set:
 
 igraph_feedback_vertex_set:
-    IGNORE: RR, RC
 
 igraph_is_loop:
     PARAM_NAMES:

@@ -458,6 +458,12 @@ FAS_ALGORITHM:
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)
 
+FVS_ALGORITHM:
+    DEFAULT:
+        EXACT_IP: c("exact_ip")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L)
+
 WHEEL_MODE:
     DEFAULT:
         OUT: c("out", "in", "undirected", "mutual")

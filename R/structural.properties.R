@@ -1878,6 +1878,37 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' @cdocs igraph_feedback_arc_set
 feedback_arc_set <- feedback_arc_set_impl
 
+#' Finding a feedback vertex set in a graph
+#'
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#'
+#' A feedback vertex set of a graph is a subset of vertices whose removal breaks
+#' all cycles in the graph. Finding a _minimum_ feedback vertex set is an
+#' NP-complete problem, both on directed and undirected graphs.
+#'
+#' @param graph The input graph
+#' @param weights Potential vertex weights. If the graph has a vertex
+#'   attribute called \sQuote{`weight`}, and this argument is
+#'   `NULL`, then the vertex attribute is used automatically. The goal of
+#'   the feedback vertex set problem is to find a feedback vertex set with
+#'   the smallest total weight.
+#' @param algo Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
+#'   which solves the feedback vertex set problem with an exact integer
+#'   programming approach, is the only option.
+#' @return A vertex sequence (by default, but see the `return.vs.es` option
+#'   of [igraph_options()]) containing the feedback vertex set.
+#' @keywords graphs
+#' @family structural.properties
+#' @family cycles
+#' @export
+#' @examples
+#'
+#' g <- make_lattice(c(3,3))
+#' feedback_vertex_set(g)
+#' @cdocs igraph_feedback_vertex_set
+feedback_vertex_set <- feedback_vertex_set_impl
+
 #' Girth of a graph
 #'
 #' The girth of a graph is the length of the shortest circle in it.
