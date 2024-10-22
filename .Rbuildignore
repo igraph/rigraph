@@ -50,10 +50,10 @@
 ^\.aviator/config\.yml$
 ^src/vendor/cigraph/CITATION\.cff$
 ^R/revdep\.R$
+^compile_commands\.json$
+^\.cache$
 ^man/dot-igraph.progress\.Rd$
 ^man/dot-igraph.status\.Rd$
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
-^compile_commands\.json$
-^\.cache$
