@@ -11,7 +11,7 @@ the igraph and the graphNEL objects."><meta property="og:image" content="https:/
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@ the igraph and the graphNEL objects."><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Convert igraph graphs to graphNEL objects from the graph package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/v2.1.1/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
       <div class="d-none name"><code>as_graphnel.Rd</code></div>
     </div>
 
@@ -105,10 +105,10 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0bd5223 UNW- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fec6c11 UNW- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0bd5223 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fec6c11 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Directed</span></span></span>
@@ -117,9 +117,9 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL2</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 15299e4 DNW- 10 9 -- In-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 06e5ac6 DNW- 10 9 -- In-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 15299e4 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 06e5ac6 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] b-&gt;a c-&gt;a d-&gt;a e-&gt;a f-&gt;a g-&gt;a h-&gt;a i-&gt;a j-&gt;a</span>
 </code></pre></div>
     </div>
