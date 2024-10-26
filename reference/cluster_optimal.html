@@ -9,7 +9,7 @@ maximizing the modularity measure over all possible partitions."><meta property=
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,13 +60,12 @@ maximizing the modularity measure over all possible partitions.</p>
 
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>The input graph. Edge directions are ignored for directed
-graphs.</p></dd>
+<dd><p>The input graph. It may be undirected or directed.</p></dd>
 
 
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
-<dd><p>The weights of the edges. It must be a positive numeric vector,
-<code>NULL</code> or <code>NA</code>. If it is <code>NULL</code> and the input graph has a
+<dd><p>The weights of the edges. It must be a positive numeric
+vector, <code>NULL</code> or <code>NA</code>. If it is <code>NULL</code> and the input graph has a
 ‘weight’ edge attribute, then that attribute will be used. If
 <code>NULL</code> and no such attribute is present, then the edges will have equal
 weights. Set this to <code>NA</code> if the graph was a ‘weight’ edge
