@@ -2192,10 +2192,9 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' print(modularity(fc))
 #' }
 #'
-#' @param graph The input graph. Edge directions are ignored for directed
-#'   graphs.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
+#' @param graph The input graph. It may be undirected or directed.
+#' @param weights The weights of the edges. It must be a positive numeric
+#'   vector, `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
 #'   `NULL` and no such attribute is present, then the edges will have equal
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
