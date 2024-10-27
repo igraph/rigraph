@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9002
+
+## doc
+
+- `cluster_optimal()` does support directed graphs.
+
+
 # igraph 2.1.1.9001
 
 ## Chore
