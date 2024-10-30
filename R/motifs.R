@@ -229,7 +229,7 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-    as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
+    as.numeric(cut.prob), as.numeric(sample.size), sample
   )
 }
 
