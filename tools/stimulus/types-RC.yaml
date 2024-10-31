@@ -22,9 +22,7 @@ GRAPH_LIST:
     CTYPE: igraph_graph_list_t
     INCONV:
         OUT: |-
-            if (0 != igraph_graph_list_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_graph_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -117,9 +115,7 @@ INDEX_VECTOR:
             R_SEXP_to_vector_int_copy(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -136,14 +132,10 @@ VECTOR:
     INCONV:
         IN: R_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_vector_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_vector_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -157,14 +149,10 @@ VECTOR_BOOL:
     INCONV:
         IN: R_SEXP_to_vector_bool(%I%, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_vector_bool_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_vector_bool_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_bool_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -180,9 +168,7 @@ VECTOR_INT:
             R_SEXP_to_vector_int_copy(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -205,9 +191,7 @@ VECTOR_LIST:
     INCONV:
         IN: R_igraph_SEXP_to_vector_list(%I%, &%C%);
         OUT: |-
-            if (0 != igraph_vector_list_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -221,9 +205,7 @@ VECTOR_INT_LIST:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_igraph_SEXP_to_vector_int_list(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_int_list_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -239,9 +221,7 @@ VERTEXSET_LIST:
             R_igraph_SEXP_to_vector_int_list(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_list_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -258,9 +238,7 @@ EDGESET_LIST:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_igraph_SEXP_to_vector_int_list(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_int_list_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -280,9 +258,7 @@ EDGE_SELECTOR:
             igraph_vector_int_t %C%_data;
             R_SEXP_to_igraph_es(%I%, &%C1%, &%C%, &%C%_data);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -298,9 +274,7 @@ ADJLIST:
     CTYPE: igraph_adjlist_t
     INCONV:
         IN: |-
-            if (0 != R_SEXP_to_igraph_adjlist(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_igraph_adjlist(%I%, &%C%));
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
@@ -310,9 +284,7 @@ EDGEWEIGHTS:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -327,9 +299,7 @@ VERTEXWEIGHTS:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -344,9 +314,7 @@ EDGE_CAPACITY:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -361,14 +329,10 @@ MATRIX:
     INCONV:
         IN: R_SEXP_to_matrix(%I%, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_igraph_matrix_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_igraph_matrix_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_matrix_init(&%C%, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_matrix_init(&%C%, 0, 0));
             IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -384,14 +348,10 @@ MATRIX_INT:
             R_SEXP_to_matrix_int(%I%, &%C%);
             IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_igraph_matrix_int_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_igraph_matrix_int_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_matrix_int_init(&%C%, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_matrix_int_init(&%C%, 0, 0));
             IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -400,22 +360,6 @@ MATRIX_INT:
         OUT: |-
             PROTECT(%I%=R_igraph_matrix_int_to_SEXP(&%C%));
             igraph_matrix_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-ARRAY3:
-    CALL: '&%C%'
-    CTYPE: igraph_array3_t
-    INCONV:
-        IN: R_igraph_SEXP_to_array3(%I%, &%C%);
-        OUT: |-
-            if (0 != igraph_array3_init(&%C%, 0, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_array3_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_array3_to_SEXP(&%C%));
-            igraph_array3_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEX:
@@ -454,14 +398,10 @@ VERTEX_QTY:
     INCONV:
         IN: R_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_vector_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_vector_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -475,14 +415,10 @@ ALL_VERTEX_QTY:
     INCONV:
         IN: R_SEXP_to_vector(%I%, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_vector_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_vector_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -502,9 +438,7 @@ VERTEX_SELECTOR:
             igraph_vector_int_t %C%_data;
             R_SEXP_to_igraph_vs(%I%, &%C1%, &%C%, &%C%_data);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -523,9 +457,7 @@ VERTEX_INDICES:
             R_SEXP_to_vector_int_copy(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -565,9 +497,7 @@ VERTEX_INDEX_PAIRS:
             R_SEXP_to_vector_int_copy(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -586,9 +516,7 @@ EDGE_INDICES:
             R_SEXP_to_vector_int_copy(%I%, &%C%);
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -664,9 +592,7 @@ VECTOR_STR:
     INCONV:
         IN: R_igraph_SEXP_to_strvector(%I%, &%C%);
         OUT: |-
-            if (0 != igraph_strvector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_strvector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_strvector_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -682,9 +608,7 @@ BIPARTITE_TYPES:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_bool(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_vector_bool_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -706,9 +630,7 @@ VERTEX_COLOR:
             }
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -733,9 +655,7 @@ EDGE_COLOR:
             }
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_vector_int_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(graph_vector_int_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -774,19 +694,13 @@ HRG:
     CALL: '&%C%'
     INCONV:
         IN: |-
-            if (0 != R_SEXP_to_hrg_copy(%I%, &%C%)) {
-              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_hrg_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
         INOUT: |-
-            if (0 != R_SEXP_to_hrg_copy(%I%, &%C%)) {
-              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(R_SEXP_to_hrg_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
         OUT: |-
-            if (0 != igraph_hrg_init(&%C%, 0)) {
-              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_hrg_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
     OUTCONV:
         IN: |-
@@ -807,9 +721,7 @@ SPARSEMAT:
     INCONV:
         IN: R_SEXP_to_sparsemat(%I%, &%C%);
         OUT: |-
-            if (0 != igraph_sparsemat_init(&%C%, 0, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
         OUT: |-
@@ -834,9 +746,7 @@ SPARSEMAT_OR_0:
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_sparsemat(%I%, &%C%); }
         OUT: |-
-            if (0 != igraph_sparsemat_init(&%C%, 0, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_sparsemat_init(&%C%, 0, 0, 0));
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -852,20 +762,14 @@ VECTOR_COMPLEX:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_complex(%I%, &%C%); }
         INOUT: |-
             if (!Rf_isNull(%I%)) {
-              if (0 != R_SEXP_to_vector_complex_copy(%I%, &%C%)) {
-                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-              }
+              IGRAPH_R_CHECK(R_SEXP_to_vector_complex_copy(%I%, &%C%));
             } else {
-              if (0 != igraph_vector_complex_init(&%C%, 0)) {
-                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-              }
+              IGRAPH_R_CHECK(igraph_vector_complex_init(&%C%, 0));
             }
             IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
             %I%=NEW_NUMERIC(0);
         OUT: |-
-            if (0 != igraph_vector_complex_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_complex_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -881,20 +785,14 @@ MATRIX_COMPLEX:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_matrix_complex(%I%, &%C%); }
         INOUT: |-
             if (!Rf_isNull(%I%)) {
-              if (0 != R_SEXP_to_matrix_complex_copy(%I%, &%C%)) {
-                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-              }
+              IGRAPH_R_CHECK(R_SEXP_to_matrix_complex_copy(%I%, &%C%));
             } else {
-              if (0 != igraph_matrix_complex_init(&%C%, 0, 0)) {
-                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-              }
+              IGRAPH_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
             }
             IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
             %I%=NEW_NUMERIC(0);
         OUT: |-
-            if (0 != igraph_matrix_complex_init(&%C%, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_matrix_complex_init(&%C%, 0, 0));
             IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
@@ -928,9 +826,7 @@ SIR_LIST:
     CTYPE: igraph_vector_ptr_t
     INCONV:
         OUT: |-
-            if (0 != igraph_vector_ptr_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
+            IGRAPH_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
             IGRAPH_FINALLY(R_igraph_sirlist_destroy, &%C%);
     OUTCONV:
         OUT: |-
