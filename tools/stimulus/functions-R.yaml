@@ -158,7 +158,7 @@ igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
-        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL,
+        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
     R:
       GATTR:
@@ -572,7 +572,7 @@ igraph_hub_and_authority_scores:
     # in the argument list.
     DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
+        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_unfold_tree:
