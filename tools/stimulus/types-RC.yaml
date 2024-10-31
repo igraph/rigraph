@@ -203,7 +203,7 @@ VECTOR_INT_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_igraph_SEXP_to_vector_int_list(%I%, &%C%); }
+        IN: if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
