@@ -8,7 +8,7 @@ sample_motifs(
   graph,
   size = 3,
   cut.prob = rep(0, size),
-  sample.size = vcount(graph)/10,
+  sample.size = ceiling(vcount(graph)/10),
   sample = NULL
 )
 }
