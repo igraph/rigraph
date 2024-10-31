@@ -280,10 +280,10 @@ ADJLIST:
         IN: igraph_adjlist_destroy(&%C%);
 
 EDGEWEIGHTS:
-    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
+    CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
+        IN: R_SEXP_to_vector(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
@@ -295,10 +295,10 @@ EDGEWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEXWEIGHTS:
-    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
+    CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
+        IN: R_SEXP_to_vector(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
@@ -310,10 +310,10 @@ VERTEXWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_CAPACITY:
-    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
+    CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
+        IN: R_SEXP_to_vector(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
@@ -582,11 +582,11 @@ VECTOR_STR:
 
 BIPARTITE_TYPES:
     CALL:
-        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
+        IN: '&%C%'
         OUT: '&%C%'
     CTYPE: igraph_vector_bool_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_bool(%I%, &%C%); }
+        IN: R_SEXP_to_vector_bool(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
@@ -598,7 +598,7 @@ BIPARTITE_TYPES:
 
 VERTEX_COLOR:
     CALL:
-        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
+        IN: '&%C%'
         OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
@@ -623,7 +623,7 @@ VERTEX_COLOR:
 
 EDGE_COLOR:
     CALL:
-        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
+        IN: '&%C%'
         OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
