@@ -165,7 +165,7 @@ VECTOR_INT:
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: |-
-            R_SEXP_to_vector_int_copy(%I%, &%C%);
+            IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
@@ -218,7 +218,7 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            R_igraph_SEXP_to_vector_int_list(%I%, &%C%);
+            IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
@@ -236,7 +236,8 @@ EDGESET_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_igraph_SEXP_to_vector_int_list(%I%, &%C%); }
+        IN: |-
+            if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
@@ -256,7 +257,7 @@ EDGE_SELECTOR:
     INCONV:
         IN: |-
             igraph_vector_int_t %C%_data;
-            R_SEXP_to_igraph_es(%I%, &%C1%, &%C%, &%C%_data);
+            IGRAPH_R_CHECK(R_SEXP_to_igraph_es(%I%, &%C1%, &%C%, &%C%_data));
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
@@ -279,7 +280,7 @@ ADJLIST:
         IN: igraph_adjlist_destroy(&%C%);
 
 EDGEWEIGHTS:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
@@ -294,7 +295,7 @@ EDGEWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEXWEIGHTS:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
@@ -309,7 +310,7 @@ VERTEXWEIGHTS:
             IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_CAPACITY:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
@@ -581,7 +582,7 @@ VECTOR_STR:
 
 BIPARTITE_TYPES:
     CALL:
-        IN: '(Rf_isNull(%I%) ? 0 : &%C%)'
+        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
         OUT: '&%C%'
     CTYPE: igraph_vector_bool_t
     INCONV:
@@ -597,13 +598,13 @@ BIPARTITE_TYPES:
 
 VERTEX_COLOR:
     CALL:
-        IN: '(Rf_isNull(%I%) ? 0 : &%C%)'
+        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
         OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-              R_SEXP_to_vector_int_copy(%I%, &%C%);
+              IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(%I%, &%C%));
             } else {
               IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
@@ -622,13 +623,13 @@ VERTEX_COLOR:
 
 EDGE_COLOR:
     CALL:
-        IN: '(Rf_isNull(%I%) ? 0 : &%C%)'
+        IN: '(Rf_isNull(%I%) ? NULL : &%C%)'
         OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-              R_SEXP_to_vector_int_copy(%I%, &%C%);
+              IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(%I%, &%C%));
             } else {
               IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
@@ -720,7 +721,7 @@ SPARSEMATPTR:
             igraph_sparsemat_destroy(&%C%);
 
 SPARSEMAT_OR_0:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_sparsemat_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_sparsemat(%I%, &%C%); }
@@ -735,7 +736,7 @@ SPARSEMAT_OR_0:
             IGRAPH_FINALLY_CLEAN(1);
 
 VECTOR_COMPLEX:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_vector_complex_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_complex(%I%, &%C%); }
@@ -758,7 +759,7 @@ VECTOR_COMPLEX:
             IGRAPH_FINALLY_CLEAN(1);
 
 MATRIX_COMPLEX:
-    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CALL: '(Rf_isNull(%I%) ? NULL : &%C%)'
     CTYPE: igraph_matrix_complex_t
     INCONV:
         IN: if (!Rf_isNull(%I%)) { R_SEXP_to_matrix_complex(%I%, &%C%); }
@@ -823,7 +824,7 @@ PAGERANKOPT:
             R_SEXP_to_igraph_arpack_options(%I%, &%C%1);
             %C% = &%C%1;
           } else {
-            %C% = 0;
+            %C% = NULL;
           }
     OUTCONV:
         INOUT: |-
