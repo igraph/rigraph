@@ -3098,7 +3098,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
   res
 }
 
-count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1, edge.color2) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3214,7 +3214,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
   res
 }
 
-count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
