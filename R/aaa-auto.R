@@ -2027,7 +2027,7 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   res
 }
 
-bipartite_projection_size_impl <- function(graph, types) {
+bipartite_projection_size_impl <- function(graph, types=NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
