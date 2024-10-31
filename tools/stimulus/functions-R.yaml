@@ -718,7 +718,9 @@ igraph_biadjacency:
 
 igraph_get_biadjacency:
 
+# Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
+    PARAMS: GRAPH graph, OUT BOOLEAN res, OPTIONAL OUT BIPARTITE_TYPES type
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
