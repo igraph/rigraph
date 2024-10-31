@@ -793,7 +793,7 @@ get_k_shortest_paths_impl <- function(graph, from, to, ..., k, weights=NULL, mod
   res
 }
 
-get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "in", "all", "total")) {
+get_widest_path_impl <- function(graph, from, to, weights, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
@@ -826,7 +826,7 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   res
 }
 
-get_widest_paths_impl <- function(graph, from, to=V(graph), weights=NULL, mode=c("out", "in", "all", "total")) {
+get_widest_paths_impl <- function(graph, from, to=V(graph), weights, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
