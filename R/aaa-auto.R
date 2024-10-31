@@ -1710,7 +1710,7 @@ joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.typ
     weights <- NULL
   }
   from.types <- as.numeric(from.types)-1
-  to.types <- as.numeric(to.types)-1
+  if (!is.null(to.types)) to.types <- as.numeric(to.types)-1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -2027,7 +2027,7 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   res
 }
 
-bipartite_projection_size_impl <- function(graph, types=NULL) {
+bipartite_projection_size_impl <- function(graph, types) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
@@ -2055,7 +2055,7 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   res
 }
 
-get_biadjacency_impl <- function(graph, types=NULL) {
+get_biadjacency_impl <- function(graph, types) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
