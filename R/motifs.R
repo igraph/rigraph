@@ -216,7 +216,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
-                          sample.size = vcount(graph) / 10, sample = NULL) {
+                          sample.size = ceiling(vcount(graph) / 10), sample = NULL) {
   ensure_igraph(graph)
   cut.prob <- as.numeric(cut.prob)
   if (length(cut.prob) != size) {
@@ -226,10 +226,14 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
     )
   }
 
+  if (!is.null(sample)) {
+    sample <- as_igraph_vs(graph, sample) - 1
+  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-    as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
+    as.numeric(cut.prob), as.numeric(sample.size), sample
   )
 }
 
