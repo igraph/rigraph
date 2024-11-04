@@ -31,6 +31,7 @@ and directed graphs.
 
 Graph cycles
 \code{\link{feedback_arc_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_dag}()}
