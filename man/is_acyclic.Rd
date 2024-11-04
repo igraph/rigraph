@@ -17,7 +17,7 @@ This function tests whether the given graph is free of cycles.
 }
 \details{
 This function looks for directed cycles in directed graphs and undirected
-cycles in undirected graphs.
+cycles in undirected graphs. Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
 }
 \examples{
 
