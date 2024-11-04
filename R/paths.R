@@ -160,7 +160,7 @@ is_dag <- is_dag_impl
 #' This function tests whether the given graph is free of cycles.
 #'
 #' This function looks for directed cycles in directed graphs and undirected
-#' cycles in undirected graphs.
+#' cycles in undirected graphs. Use [find_cycle()] to return a specific cycle.
 #'
 #' @param graph The input graph.
 #' @return A logical vector of length one.
