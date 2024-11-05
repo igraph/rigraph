@@ -11012,34 +11012,6 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP max_cycle_length) {
 }
 
 /*-------------------------------------------/
-/ igraph_simple_cycles_callback              /
-/-------------------------------------------*/
-SEXP R_igraph_simple_cycles_callback(SEXP graph, SEXP mode, SEXP max_cycle_length, SEXP cycle_handler) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_neimode_t c_mode;
-  igraph_integer_t c_max_cycle_length;
-  igraph_cycle_handler_t c_cycle_handler;
-
-  igraph_error_t c_result;
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_INT(max_cycle_length);
-  c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_simple_cycles_callback(&c_graph, c_mode, c_max_cycle_length, c_cycle_handler, 0));
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_is_eulerian                         /
 /-------------------------------------------*/
 SEXP R_igraph_is_eulerian(SEXP graph) {
