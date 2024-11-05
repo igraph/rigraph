@@ -402,7 +402,6 @@ extern SEXP R_igraph_similarity_jaccard(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_jaccard_es(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_jaccard_pairs(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simple_cycles(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_simple_cycles_callback(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simple_interconnected_islands_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify_and_colorize(SEXP);
@@ -858,7 +857,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_similarity_jaccard_es",                      (DL_FUNC) &R_igraph_similarity_jaccard_es,                       4},
     {"R_igraph_similarity_jaccard_pairs",                   (DL_FUNC) &R_igraph_similarity_jaccard_pairs,                    4},
     {"R_igraph_simple_cycles",                              (DL_FUNC) &R_igraph_simple_cycles,                               3},
-    {"R_igraph_simple_cycles_callback",                     (DL_FUNC) &R_igraph_simple_cycles_callback,                      4},
     {"R_igraph_simple_interconnected_islands_game",         (DL_FUNC) &R_igraph_simple_interconnected_islands_game,          4},
     {"R_igraph_simplify",                                   (DL_FUNC) &R_igraph_simplify,                                    4},
     {"R_igraph_simplify_and_colorize",                      (DL_FUNC) &R_igraph_simplify_and_colorize,                       1},

@@ -3598,20 +3598,6 @@ simple_cycles_impl <- function(graph, mode=c("out", "in", "all", "total"), max.c
   res
 }
 
-simple_cycles_callback_impl <- function(graph, mode=c("out", "in", "all", "total"), max.cycle.length=-1, cycle.handler) {
-  # Argument checks
-  ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  max.cycle.length <- as.numeric(max.cycle.length)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_simple_cycles_callback, graph, mode, max.cycle.length, cycle.handler)
-
-
-  res
-}
-
 is_eulerian_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
