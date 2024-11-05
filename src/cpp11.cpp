@@ -190,6 +190,7 @@ extern SEXP R_igraph_get_edgelist(SEXP, SEXP);
 extern SEXP R_igraph_get_eids(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_graph_id(SEXP);
 extern SEXP R_igraph_get_isomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_isomorphisms_vf2_callback(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_k_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian_sparse(SEXP, SEXP, SEXP, SEXP);
@@ -400,6 +401,8 @@ extern SEXP R_igraph_similarity_inverse_log_weighted(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_jaccard(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_jaccard_es(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_jaccard_pairs(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_simple_cycles(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_simple_cycles_callback(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simple_interconnected_islands_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify_and_colorize(SEXP);
@@ -643,6 +646,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    4},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},
+    {"R_igraph_get_isomorphisms_vf2_callback",              (DL_FUNC) &R_igraph_get_isomorphisms_vf2_callback,               7},
     {"R_igraph_get_k_shortest_paths",                       (DL_FUNC) &R_igraph_get_k_shortest_paths,                        6},
     {"R_igraph_get_laplacian",                              (DL_FUNC) &R_igraph_get_laplacian,                               4},
     {"R_igraph_get_laplacian_sparse",                       (DL_FUNC) &R_igraph_get_laplacian_sparse,                        4},
@@ -853,6 +857,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_similarity_jaccard",                         (DL_FUNC) &R_igraph_similarity_jaccard,                          4},
     {"R_igraph_similarity_jaccard_es",                      (DL_FUNC) &R_igraph_similarity_jaccard_es,                       4},
     {"R_igraph_similarity_jaccard_pairs",                   (DL_FUNC) &R_igraph_similarity_jaccard_pairs,                    4},
+    {"R_igraph_simple_cycles",                              (DL_FUNC) &R_igraph_simple_cycles,                               3},
+    {"R_igraph_simple_cycles_callback",                     (DL_FUNC) &R_igraph_simple_cycles_callback,                      4},
     {"R_igraph_simple_interconnected_islands_game",         (DL_FUNC) &R_igraph_simple_interconnected_islands_game,          4},
     {"R_igraph_simplify",                                   (DL_FUNC) &R_igraph_simplify,                                    4},
     {"R_igraph_simplify_and_colorize",                      (DL_FUNC) &R_igraph_simplify_and_colorize,                       1},

@@ -3098,6 +3098,58 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
   res
 }
 
+get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL, ishohandler.fn) {
+  # Argument checks
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
+  if (missing(vertex.color1)) {
+    if ("color" %in% vertex_attr_names(graph1)) {
+      vertex.color1 <- V(graph1)$color
+    } else {
+      vertex.color1 <- NULL
+    }
+  }
+  if (!is.null(vertex.color1)) {
+    vertex.color1 <- as.numeric(vertex.color1)-1
+  }
+  if (missing(vertex.color2)) {
+    if ("color" %in% vertex_attr_names(graph2)) {
+      vertex.color2 <- V(graph2)$color
+    } else {
+      vertex.color2 <- NULL
+    }
+  }
+  if (!is.null(vertex.color2)) {
+    vertex.color2 <- as.numeric(vertex.color2)-1
+  }
+  if (missing(edge.color1)) {
+    if ("color" %in% edge_attr_names(graph1)) {
+      edge.color1 <- E(graph1)$color
+    } else {
+      edge.color1 <- NULL
+    }
+  }
+  if (!is.null(edge.color1)) {
+    edge.color1 <- as.numeric(edge.color1)-1
+  }
+  if (missing(edge.color2)) {
+    if ("color" %in% edge_attr_names(graph2)) {
+      edge.color2 <- E(graph2)$color
+    } else {
+      edge.color2 <- NULL
+    }
+  }
+  if (!is.null(edge.color2)) {
+    edge.color2 <- as.numeric(edge.color2)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_get_isomorphisms_vf2_callback, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
+
+  res
+}
+
 count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL) {
   # Argument checks
   ensure_igraph(graph1)
@@ -3511,7 +3563,7 @@ solve_lsap_impl <- function(c, n) {
   res
 }
 
-find_cycle_impl <- function(graph, mode) {
+find_cycle_impl <- function(graph, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
@@ -3525,6 +3577,38 @@ find_cycle_impl <- function(graph, mode) {
   if (igraph_opt("return.vs.es")) {
     res$edges <- create_es(graph, res$edges)
   }
+  res
+}
+
+simple_cycles_impl <- function(graph, mode=c("out", "in", "all", "total"), max.cycle.length=-1) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  max.cycle.length <- as.numeric(max.cycle.length)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_simple_cycles, graph, mode, max.cycle.length)
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
+  }
+  res
+}
+
+simple_cycles_callback_impl <- function(graph, mode=c("out", "in", "all", "total"), max.cycle.length=-1, cycle.handler) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  max.cycle.length <- as.numeric(max.cycle.length)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_simple_cycles_callback, graph, mode, max.cycle.length, cycle.handler)
+
+
   res
 }
 
@@ -3571,7 +3655,7 @@ eulerian_cycle_impl <- function(graph) {
   res
 }
 
-fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL) {
+fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff=-1, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
@@ -3597,7 +3681,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL)
   res
 }
 
-minimum_cycle_basis_impl <- function(graph, bfs.cutoff, complete, use.cycle.order, weights=NULL) {
+minimum_cycle_basis_impl <- function(graph, bfs.cutoff=-1, complete=TRUE, use.cycle.order=TRUE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   bfs.cutoff <- as.numeric(bfs.cutoff)
