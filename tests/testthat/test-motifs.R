@@ -51,12 +51,12 @@ test_that("sample_motifs works", {
   g <- make_graph(~ A-B-C-A-D-E-F-D-C-F)
   n <- vcount(g)
 
-  mc <- sample_motifs(g)
-  expect_true(0 <= mc && mc <= n*(n-1)*(n-2) / 6)
+  motif_count <- sample_motifs(g)
+  expect_true(0 <= motif_count && motif_count <= n*(n-1)*(n-2) / 6)
 
-  mc <- sample_motifs(g, sample = c("C", "D", "E", "F"))
-  expect_true(0 <= mc && mc <= n*(n-1)*(n-2) / 6)
+  motif_count_letters <- sample_motifs(g, sample = c("C", "D", "E", "F"))
+  expect_true(0 <= motif_count_letters && motif_count_letters <= n*(n-1)*(n-2) / 6)
 
-  mc <- sample_motifs(g, sample = V(g))
-  expect_true(0 <= mc && mc <= n*(n-1)*(n-2) / 6)
+  motif_count_all <- sample_motifs(g, sample = V(g))
+  expect_true(0 <= motif_count_all && motif_count_all <= n*(n-1)*(n-2) / 6)
 })
