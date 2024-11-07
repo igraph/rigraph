@@ -11,7 +11,7 @@ consistent API."><meta property="og:image" content="https://r.igraph.org/logo.pn
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,8 @@ of the motif (the <code>size</code> argument). By default no cuts are made.</p><
 
 <dt id="arg-sample-size">sample.size<a class="anchor" aria-label="anchor" href="#arg-sample-size"></a></dt>
 <dd><p>The number of vertices to use as a starting point for
-finding motifs. Only used if the <code>sample</code> argument is <code>NULL</code>.</p></dd>
+finding motifs. Only used if the <code>sample</code> argument is <code>NULL</code>.
+The default is <code>ceiling(vcount(graph) / 10)</code> .</p></dd>
 
 
 <dt id="arg-sample">sample<a class="anchor" aria-label="anchor" href="#arg-sample"></a></dt>
