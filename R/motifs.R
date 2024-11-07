@@ -24,7 +24,7 @@ triad.census <- function(graph) { # nocov start
 #' @inheritParams count_motifs
 #' @keywords internal
 #' @export
-graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
+graph.motifs.no <- function(graph, size = 3, cut.prob = NULL) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs.no()", "count_motifs()")
   count_motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
@@ -39,7 +39,7 @@ graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov 
 #' @inheritParams sample_motifs
 #' @keywords internal
 #' @export
-graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
+graph.motifs.est <- function(graph, size = 3, cut.prob = NULL, sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
   sample_motifs(graph = graph, size = size, cut.prob = cut.prob, sample.size = sample.size, sample = sample)
 } # nocov end
@@ -54,7 +54,7 @@ graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.si
 #' @inheritParams motifs
 #' @keywords internal
 #' @export
-graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
+graph.motifs <- function(graph, size = 3, cut.prob = NULL) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
   motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
@@ -110,7 +110,7 @@ dyad.census <- function(graph) { # nocov start
 #'   directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the `size` argument). By default no cuts are made.
+#'   of the motif (the `size` argument). If `NULL`, the default, no cuts are made.
 #' @return `motifs()` returns a numeric vector, the number of occurrences of
 #'   each motif in the graph. The motifs are ordered by their isomorphism
 #'   classes. Note that for unconnected subgraphs, which are not considered to be
@@ -125,10 +125,10 @@ dyad.census <- function(graph) { # nocov start
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
+motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
+  if (!is.null(cut.prob) && length(cut.prob) != size) {
   cut.prob <- as.numeric(cut.prob)
-  if (length(cut.prob) != size) {
     cut.prob <- c(
       cut.prob[-length(cut.prob)],
       rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
@@ -136,10 +136,17 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_motifs_randesu, graph, as.numeric(size),
-    as.numeric(cut.prob)
-  )
+  if (is.null(cut.prob)) {
+    res <- .Call(
+      R_igraph_motifs_randesu, graph, as.numeric(size),
+      NULL
+    )
+  } else {
+    res <- .Call(
+      R_igraph_motifs_randesu, graph, as.numeric(size),
+      as.numeric(cut.prob)
+    )
+  }
   res[is.nan(res)] <- NA
   res
 }
@@ -156,7 +163,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @param size The size of the motif.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the `size` argument). By default no cuts are made.
+#'   of the motif (the `size` argument). If `NULL`, the default, no cuts are made.
 #' @return `count_motifs()` returns  a numeric scalar.
 #' @seealso [isomorphism_class()]
 #'
@@ -168,10 +175,10 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
+count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
+  if (!is.null(cut.prob) && length(cut.prob) != size) {
   cut.prob <- as.numeric(cut.prob)
-  if (length(cut.prob) != size) {
     cut.prob <- c(
       cut.prob[-length(cut.prob)],
       rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
@@ -179,10 +186,17 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_no, graph, as.numeric(size),
-    as.numeric(cut.prob)
-  )
+  if (is.null(cut.prob)) {
+    .Call(
+      R_igraph_motifs_randesu_no, graph, as.numeric(size),
+      NULL
+    )
+  } else {
+    .Call(
+      R_igraph_motifs_randesu_no, graph, as.numeric(size),
+      as.numeric(cut.prob)
+    )
+  }
 }
 
 #' Graph motifs
@@ -198,7 +212,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #'   in directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the `size` argument). By default no cuts are made.
+#'   of the motif (the `size` argument). If `NULL`, the default, no cuts are made.
 #' @param sample.size The number of vertices to use as a starting point for
 #'   finding motifs. Only used if the `sample` argument is `NULL`.
 #' @param sample If not `NULL` then it specifies the vertices to use as a
@@ -215,11 +229,11 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
+sample_motifs <- function(graph, size = 3, cut.prob = NULL,
                           sample.size = vcount(graph) / 10, sample = NULL) {
   ensure_igraph(graph)
+  if (!is.null(cut.prob) && length(cut.prob) != size) {
   cut.prob <- as.numeric(cut.prob)
-  if (length(cut.prob) != size) {
     cut.prob <- c(
       cut.prob[-length(cut.prob)],
       rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
@@ -227,10 +241,18 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-    as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
-  )
+  if (is.null(cut.prob)) {
+    .Call(
+      R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
+      cut.prob, as.numeric(sample.size), as.numeric(sample)
+    )
+  } else {
+    .Call(
+      R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
+      as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
+    )
+
+  }
 }
 
 
