@@ -3580,15 +3580,16 @@ find_cycle_impl <- function(graph, mode=c("out", "in", "all", "total")) {
   res
 }
 
-simple_cycles_impl <- function(graph, mode=c("out", "in", "all", "total"), max.cycle.length=-1) {
+simple_cycles_impl <- function(graph, mode=c("out", "in", "all", "total"), min.cycle.length=-1, max.cycle.length=-1) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  min.cycle.length <- as.numeric(min.cycle.length)
   max.cycle.length <- as.numeric(max.cycle.length)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_simple_cycles, graph, mode, max.cycle.length)
+  res <- .Call(R_igraph_simple_cycles, graph, mode, min.cycle.length, max.cycle.length)
   if (igraph_opt("return.vs.es")) {
     res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
   }
