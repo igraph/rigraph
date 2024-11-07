@@ -74,6 +74,7 @@ test_that("basic plot test, spheres", {
 
 test_that("rglplot() works", {
   skip_if_not_installed("rgl")
+  skip_if(basename(commandArgs())[[1]] == "RDcsan")
 
   # https://stackoverflow.com/a/46320771/5489251
   withr::local_envvar(RGL_USE_NULL = TRUE)
