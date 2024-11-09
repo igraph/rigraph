@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9005
+
+## Chore
+
+- Configure the RStudio IDE to use the extra roclets (#1575).
+
+## Continuous integration
+
+- Work around rgl sanitizer failure (#1578).
+
+
 # igraph 2.1.1.9004
 
 ## Bug fixes
