@@ -253,6 +253,7 @@ jobs:
           run: |
             set -e
             printenv
+            RDcsan -e 'pak::pak("dmurdoch/rgl@issue439")'
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
             TESTTHAT_PARALLEL=false CI=true IGRAPH_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
