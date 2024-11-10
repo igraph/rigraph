@@ -253,6 +253,8 @@ jobs:
           run: |
             set -e
             printenv
+            # Memory leaks with rgl 1.3.12, https://github.com/dmurdoch/rgl/issues/439
+            RDcsan -e 'pak::pak("dmurdoch/rgl")'
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
-            TESTTHAT_PARALLEL=false CI=true IGRAPH_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
+            TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
