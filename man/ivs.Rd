@@ -6,6 +6,7 @@
 \alias{max_ivs}
 \alias{ivs_size}
 \alias{independence_number}
+\alias{is_ivs}
 \title{Independent vertex sets}
 \usage{
 ivs(graph, min = NULL, max = NULL)
@@ -17,16 +18,19 @@ max_ivs(graph)
 ivs_size(graph)
 
 independence_number(graph)
+
+is_ivs(graph, candidate)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs are considered as undirected,
-loop edges and multiple edges are ignored.}
+\item{graph}{The input graph.}
 
 \item{min}{Numeric constant, limit for the minimum size of the independent
 vertex sets to find. \code{NULL} means no limit.}
 
 \item{max}{Numeric constant, limit for the maximum size of the independent
 vertex sets to find. \code{NULL} means no limit.}
+
+\item{candidate}{The vertex set to test for being an independent set.}
 }
 \value{
 \code{ivs()},
@@ -35,6 +39,9 @@ vertex sets to find. \code{NULL} means no limit.}
 vertex ids, each list element is an independent vertex set.
 
 \code{ivs_size()} returns an integer constant.
+
+\code{is_ivs()} returns \code{TRUE} if the candidate vertex set forms an
+independent set.
 }
 \description{
 A vertex set is called independent if there no edges between any two
@@ -62,6 +69,8 @@ vertex set(s).
 
 These functions use the algorithm described by Tsukiyama et al., see
 reference below.
+
+\code{is_ivs()} tests if no pairs within a vertex set are connected.
 }
 \examples{
 
@@ -97,3 +106,5 @@ page.
 }
 \concept{cliques}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{igraph_is_independent_vertex_set()}}.}
+

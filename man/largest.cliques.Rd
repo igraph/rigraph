@@ -7,8 +7,7 @@
 largest.cliques(graph)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs will be considered as
-undirected ones, multiple edges and loops are ignored.}
+\item{graph}{The input graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
