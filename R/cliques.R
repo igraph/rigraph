@@ -526,3 +526,26 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
     clique_size_hist_impl(graph, min, max)
   }
 }
+
+#' Is this a complete graph?
+#'
+#' A graph is considered complete if there is an edge between all distinct
+#' directed pairs of vertices. igraph considers both the singleton graph
+#' and the null graph complete.
+#'
+#' @param graph The input graph.
+#' @return True if the graph is complete.
+#' @family cliques
+#' @keywords graphs
+#' @seealso [make_full_graph()]
+#' @export
+#' @cdocs igraph_is_complete
+#' @examples
+#'
+#' g <- make_full_graph(6, directed = TRUE)
+#' is_complete(g)
+#' g <- delete_edges(g, 1)
+#' is_complete(g)
+#' g <- as_undirected(g)
+#' is_complete(g)
+is_complete <- is_complete_impl
