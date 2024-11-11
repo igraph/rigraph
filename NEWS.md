@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9006
+
+## Continuous integration
+
+- Install rgl from GitHub for Sanitizer runs (#1579).
+
+
 # igraph 2.1.1.9005
 
 ## Chore
