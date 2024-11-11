@@ -116,6 +116,7 @@ in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
 Other cliques: 
+\code{\link{is_complete}()},
 \code{\link{ivs}()},
 \code{\link{weighted_cliques}()}
 }

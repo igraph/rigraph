@@ -86,6 +86,7 @@ Computing}, 6:505--517, 1977.
 \seealso{
 Other cliques: 
 \code{\link{cliques}()},
+\code{\link{is_complete}()},
 \code{\link{weighted_cliques}()}
 }
 \author{
