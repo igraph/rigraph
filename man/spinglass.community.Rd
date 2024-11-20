@@ -20,8 +20,7 @@ spinglass.community(
 )
 }
 \arguments{
-\item{graph}{The input graph, can be directed but the direction of the edges
-is neglected.}
+\item{graph}{The input graph. Edge directions are ignored in directed graphs.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
