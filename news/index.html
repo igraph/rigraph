@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9900</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,72 +39,23 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.1.9900/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9007" id="igraph-2119007">igraph 2.1.1.9007<a class="anchor" aria-label="anchor" href="#igraph-2119007"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.1.9900" id="igraph-2119900">igraph 2.1.1.9900<a class="anchor" aria-label="anchor" href="#igraph-2119900"></a></h2>
 <div class="section level3">
-<h3 id="continuous-integration-2-1-1-9007">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-1-9007"></a></h3>
-<ul><li>Remove Aviator.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="doc-2-1-1-9007">doc<a class="anchor" aria-label="anchor" href="#doc-2-1-1-9007"></a></h3>
+<h3 id="documentation-2-1-1-9900">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-1-9900"></a></h3>
 <ul><li><p>Clarify what type of graph each community detection function supports.</p></li>
 <li><p>Improve <code>read_graph</code> and <code>write_graph</code> documentation.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9006" id="igraph-2119006">igraph 2.1.1.9006<a class="anchor" aria-label="anchor" href="#igraph-2119006"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-1-1-9006">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-1-9006"></a></h3>
-<ul><li>Install rgl from GitHub for Sanitizer runs (<a href="https://github.com/igraph/rigraph/issues/1579" class="external-link">#1579</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9005" id="igraph-2119005">igraph 2.1.1.9005<a class="anchor" aria-label="anchor" href="#igraph-2119005"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-1-1-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-1-9005"></a></h3>
-<ul><li>Configure the RStudio IDE to use the extra roclets (<a href="https://github.com/igraph/rigraph/issues/1575" class="external-link">#1575</a>).</li>
+<li><p>Improve <code><a href="../reference/all_simple_paths.html">all_simple_paths()</a></code> documentation.</p></li>
+<li><p><code><a href="../reference/cluster_optimal.html">cluster_optimal()</a></code> does support directed graphs.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="continuous-integration-2-1-1-9005">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-1-9005"></a></h3>
-<ul><li>Work around rgl sanitizer failure (<a href="https://github.com/igraph/rigraph/issues/1578" class="external-link">#1578</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9004" id="igraph-2119004">igraph 2.1.1.9004<a class="anchor" aria-label="anchor" href="#igraph-2119004"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-2-1-1-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-1-9004"></a></h3>
+<h3 id="bug-fixes-2-1-1-9900">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-1-9900"></a></h3>
 <ul><li>Fix the incorrect handling of the <code>sample</code> parameter in <code><a href="../reference/sample_motifs.html">sample_motifs()</a></code> and ensure that the default <code>sample.size</code> is integer (<a href="https://github.com/igraph/rigraph/issues/1568" class="external-link">#1568</a>).</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9003" id="igraph-2119003">igraph 2.1.1.9003<a class="anchor" aria-label="anchor" href="#igraph-2119003"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-1-1-9003">doc<a class="anchor" aria-label="anchor" href="#doc-2-1-1-9003"></a></h3>
-<ul><li>Improve <code><a href="../reference/all_simple_paths.html">all_simple_paths()</a></code> documentation.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9002" id="igraph-2119002">igraph 2.1.1.9002<a class="anchor" aria-label="anchor" href="#igraph-2119002"></a></h2>
-<div class="section level3">
-<h3 id="doc-2-1-1-9002">doc<a class="anchor" aria-label="anchor" href="#doc-2-1-1-9002"></a></h3>
-<ul><li>
-<code><a href="../reference/cluster_optimal.html">cluster_optimal()</a></code> does support directed graphs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9001" id="igraph-2119001">igraph 2.1.1.9001<a class="anchor" aria-label="anchor" href="#igraph-2119001"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-1-1-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-1-9001"></a></h3>
-<ul><li>Update .Rbuildignore.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.1.9000" id="igraph-2119000">igraph 2.1.1.9000<a class="anchor" aria-label="anchor" href="#igraph-2119000"></a></h2>
-<ul><li>Merge branch ‘cran-2.1.1’.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.1" id="igraph-211">igraph 2.1.1<a class="anchor" aria-label="anchor" href="#igraph-211"></a></h2><p class="text-muted">CRAN release: 2024-10-19</p>
 <p>See <a href="https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md" class="external-link uri">https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md</a> for a complete changelog, in particular the section “Breaking changes”.</p>
