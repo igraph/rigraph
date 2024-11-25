@@ -24,7 +24,7 @@ Use this palette, if you have such a quantity to mark with vertex
 colors.
 }
 \examples{
-\dontshow{if (rlang::is_installed("igraphdata")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}
 library(igraphdata)
 data(foodwebs)
 fw <- foodwebs[[1]] \%>\%
