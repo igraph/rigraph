@@ -1,67 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.1.9007
+# igraph 2.1.1.9900
 
-## Continuous integration
-
-- Remove Aviator.
-
-## doc
+## Documentation
 
 - Clarify what type of graph each community detection function supports.
 
 - Improve `read_graph` and `write_graph` documentation.
 
+- Improve `all_simple_paths()` documentation.
 
-# igraph 2.1.1.9006
-
-## Continuous integration
-
-- Install rgl from GitHub for Sanitizer runs (#1579).
-
-
-# igraph 2.1.1.9005
-
-## Chore
-
-- Configure the RStudio IDE to use the extra roclets (#1575).
-
-## Continuous integration
-
-- Work around rgl sanitizer failure (#1578).
-
-
-# igraph 2.1.1.9004
+- `cluster_optimal()` does support directed graphs.
 
 ## Bug fixes
 
 - Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
-
-
-# igraph 2.1.1.9003
-
-## doc
-
-- Improve `all_simple_paths()` documentation.
-
-
-# igraph 2.1.1.9002
-
-## doc
-
-- `cluster_optimal()` does support directed graphs.
-
-
-# igraph 2.1.1.9001
-
-## Chore
-
-- Update .Rbuildignore.
-
-
-# igraph 2.1.1.9000
-
-- Merge branch 'cran-2.1.1'.
 
 
 # igraph 2.1.1
