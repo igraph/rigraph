@@ -77,7 +77,7 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 x11(width = 10, height = 5)
 layout(rbind(1:2))
 plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
