@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
-pkgdown_sha: ~
+pkgdown: 2.1.1.9000
+pkgdown_sha: 66e7df5ba8dca4edbf4ad09cb7fd7e348e15a87d
 articles:
   articles/deprecated-dot-case: deprecated-dot-case.html
   igraph_ES: igraph_ES.html
   igraph: igraph.html
   articles/installation-troubleshooting: installation-troubleshooting.html
-last_built: 2024-11-25T17:50Z
+last_built: 2024-11-25T20:19Z
 urls:
   reference: https://r.igraph.org/reference
   article: https://r.igraph.org/articles
