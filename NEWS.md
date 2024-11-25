@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9007
+
+## Continuous integration
+
+- Remove Aviator.
+
+## doc
+
+- Clarify what type of graph each community detection function supports.
+
+- Improve `read_graph` and `write_graph` documentation.
+
+
 # igraph 2.1.1.9006
 
 ## Continuous integration
