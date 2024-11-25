@@ -253,7 +253,7 @@ SEXP R_igraph_get_attr_mode(SEXP graph, SEXP pwhich) {
 
 igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
   igraph_integer_t n = Rf_xlength(input);
-  SEXP names = PROTECT(GET_NAMES(input));
+  SEXP names = GET_NAMES(input);
 
   IGRAPH_CHECK(igraph_attribute_combination_init(comb));
   IGRAPH_FINALLY(igraph_attribute_combination_destroy, comb);
@@ -283,7 +283,6 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
   }
 
   IGRAPH_FINALLY_CLEAN(1);
-  UNPROTECT(1);
   return IGRAPH_SUCCESS;
 }
 
@@ -343,7 +342,8 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
 
   /* Add graph attributes */
   igraph_integer_t attrno= attr==NULL ? 0 : igraph_vector_ptr_size(attr);
-  SET_VECTOR_ELT(result, 1, NEW_LIST(attrno));
+  SET_VECTOR_ELT(result, 1, PROTECT(NEW_LIST(attrno)));
+  UNPROTECT(1);
   gal=VECTOR_ELT(result, 1);
   PROTECT(names=NEW_CHARACTER(attrno)); px++;
   for (igraph_integer_t i=0; i<attrno; i++) {
