@@ -22,8 +22,6 @@ jobs:
   coverage:
     runs-on: ubuntu-20.04
 
-    needs: build_src_package
-
     name: Coverage
 
     env:
@@ -76,8 +74,6 @@ jobs:
 
   sanitizer:
     runs-on: ubuntu-22.04
-
-    needs: build_src_package
 
     name: Sanitizer
 
