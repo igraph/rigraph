@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9901
+
+## Continuous integration
+
+- Sync workflows (#1589).
+
+
 # igraph 2.1.1.9900
 
 ## Documentation
