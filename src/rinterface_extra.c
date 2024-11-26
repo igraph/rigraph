@@ -319,7 +319,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
   int px = 0;
 
   result=PROTECT(NEW_LIST(4));
-  // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
+  // The "preserve list" Will be cleared with the next invocation of an igraph function.
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
   R_igraph_attribute_add_to_preserve_list(result);
 
