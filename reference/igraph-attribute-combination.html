@@ -177,33 +177,33 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## new attribute is the sum of the old ones</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a832d0d D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 70aaa25 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a832d0d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 70aaa25:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## collect attributes into a string</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1a4ef20 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dc66cab D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1a4ef20:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dc66cab:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## concatenate them into a vector, this creates a complex</span></span></span>
 <span class="r-in"><span><span class="co">## attribute</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"concat"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dfac373 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dd81b1e D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/x)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dfac373:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dd81b1e:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## both attributes are collected into strings</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 623fdfb D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c57bc84 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c), name (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 623fdfb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c57bc84:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## harmonic average of weights, names are dropped</span></span></span>
@@ -211,9 +211,9 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">x</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"ignore"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c2a178a D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 965a597 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c2a178a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 965a597:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 </code></pre></div>
     </div>
