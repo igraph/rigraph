@@ -20,7 +20,7 @@ to.}
 
 \item{format}{Character string giving the file format. Right now
 \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-\code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
+\code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented. As of igraph 0.4
 this argument is case insensitive.}
 
 \item{...}{Other, format specific arguments, see below.}

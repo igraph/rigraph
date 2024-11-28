@@ -44,3 +44,19 @@ test_that("motif finding works", {
 
   expect_equal(m5 / m, c(NA, NA, 0.439985332979302, NA, 0.440288166730411, 0.346938775510204, 0.44159753136382, 0.452054794520548, NaN, 0.323076923076923, NaN, 0.347826086956522, NaN, NaN, NaN, NaN))
 })
+
+test_that("sample_motifs works", {
+  withr::local_seed(20041103)
+
+  g <- make_graph(~ A-B-C-A-D-E-F-D-C-F)
+  n <- vcount(g)
+
+  motif_count <- sample_motifs(g)
+  expect_true(0 <= motif_count && motif_count <= n*(n-1)*(n-2) / 6)
+
+  motif_count_letters <- sample_motifs(g, sample = c("C", "D", "E", "F"))
+  expect_true(0 <= motif_count_letters && motif_count_letters <= n*(n-1)*(n-2) / 6)
+
+  motif_count_all <- sample_motifs(g, sample = V(g))
+  expect_true(0 <= motif_count_all && motif_count_all <= n*(n-1)*(n-2) / 6)
+})

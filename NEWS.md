@@ -1,29 +1,55 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.1.9003
+# igraph 2.1.1.9903
 
-## doc
+## Continuous integration
+
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9902
+
+## Continuous integration
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9901
+
+## Continuous integration
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9900
+
+## Documentation
+
+- Clarify what type of graph each community detection function supports.
+
+- Improve `?read_graph` and `?write_graph` documentation.
 
 - Improve `all_simple_paths()` documentation.
 
-
-# igraph 2.1.1.9002
-
-## doc
-
 - `cluster_optimal()` does support directed graphs.
 
+## Bug fixes
 
-# igraph 2.1.1.9001
-
-## Chore
-
-- Update .Rbuildignore.
-
-
-# igraph 2.1.1.9000
-
-- Merge branch 'cran-2.1.1'.
+- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
 
 
 # igraph 2.1.1
