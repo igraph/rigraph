@@ -1,772 +1,163 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.0.3.9063
+# igraph 2.1.1.9903
 
-## Chore
+## Continuous integration
 
-- Update vendored sources to igraph/igraph@1f153e9ca1b7e03ae4387d2500b4ccf4d3bc2703 (#1517).
+- Import from actions-sync, check carefully (#1600).
 
-- Start renaming as.directed() and as.undirected() to `as_di… (`\#1513\`{=html}).
+- Remove covr, handled elsewhere.
 
-- Start deprecate `graph.edges()` to `graph_from_edges()` (#1512).
+- Fix extra workflow.
 
-- Make `.igraph.progress()` and `.igraph.status()` more internal (#1516).
+- Remove noise.
 
-## Documentation
-
-- Remove stray alias.
+- Sync workflows (#1589).
 
 
-# igraph 2.0.3.9062
+# igraph 2.1.1.9902
 
-## Features
+## Continuous integration
 
-- Create get_edge_ids() as new name for get.edge.ids() (#1510).
+- Remove covr, handled elsewhere.
 
-## Chore
+- Fix extra workflow.
 
-- Formally deprecate `similarity.<something>()` functions (#1515).
+- Remove noise.
 
-- Update vendored sources to igraph/igraph@fd54b8d8ef23ab80713baf89d1f3e655bad3352a.
-
-## Documentation
-
-- Use {devtag} for internal function docs (#1507).
-
-## doc
-
-- Improve sample_gnp() examples.
-
-## lifecycle
-
-- `erdos.renyi.game()` and `random.graph.game()` soft deprecation (#1509).
-
-## Uncategorized
-
-- Lifecycle and tests in structural.properties (#1505).
+- Sync workflows (#1589).
 
 
-# igraph 2.0.3.9061
+# igraph 2.1.1.9901
 
-## Chore
+## Continuous integration
 
-- Update vendored sources to igraph/igraph@03760a09cc7195dfaad3a1e60cff1632aa6a6118 (#1470).
-
-- Results from revdepcheck (#1506).
+- Sync workflows (#1589).
 
 
-# igraph 2.0.3.9060
-
-## Testing
-
-- Refactor test-layout.fr.R for simplicity and readability (#1504).
-
-
-# igraph 2.0.3.9059
-
-## Chore
-
-- Replace `is.directed()` with `is_directed()` in stimulus YAML (#1494).
-
-- Soft-deprecate `graph_()` (#1493).
+# igraph 2.1.1.9900
 
 ## Documentation
 
-- Expand on `fit_power_law(implementation = "plfit.p")` (#1503).
+- Clarify what type of graph each community detection function supports.
 
-## doc
+- Improve `?read_graph` and `?write_graph` documentation.
 
-- Improve centralization docs.
+- Improve `all_simple_paths()` documentation.
 
-
-# igraph 2.0.3.9058
-
-## Chore
-
-- Remove useless igraph_test() and igraphtest() functions as we … (#1501).
-
-- Use lifecycle for deprecation of membership argument of modula… (#1498).
-
-- Properly deprecate some functions in layout.R (#1500).
-
-- Remove references to deprecated functions (#1497).
-
-## Documentation
-
-- Add more cdocs tags (#1491).
-
-
-# igraph 2.0.3.9057
-
-## Documentation
-
-- Document how to run document().
-
-  thx @szhorvat
-
-
-# igraph 2.0.3.9056
-
-## doc
-
-- Further clarifications for betweenness().
-  ref #1489
-
-- Clarify how betweenness with cutoff is normalized.
-  ref #1489
-
-- Fix centr_eigen_tmax() docs.
-
-
-# igraph 2.0.3.9055
-
-## Chore
-
-- Increase cpp11 minimal version (#1490).
-
-
-# igraph 2.0.3.9054
+- `cluster_optimal()` does support directed graphs.
 
 ## Bug fixes
 
-- Add ellipsis to dummy functions `.nei()` and others (#1487).
+- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
+
+
+# igraph 2.1.1
+
+See <https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356eced903/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
 ## Features
 
-- Breaking change: remove tkigraph from {igraph} proper (#1474).
-
-## Chore
-
-- Results for revdepcheck (#1488).
-
-## Documentation
-
-- Add a custom roxygen2 cdocs tag (#1484).
-
-## Breaking changes
-
-- Breaking change: remove tkigraph from {igraph} proper (#1474).
-
-
-# igraph 2.0.3.9053
-
-## Chore
-
-- Add some argument checking to `add_shape()` (#1478).
-
-## Testing
-
-- Remove useless snapshot (#1481).
-
-
-# igraph 2.0.3.9052
+- Add `p.value` and `p.precision` arguments to `fit_power_law()` to control the computation of the p-value (#1546).
 
 ## Bug fixes
 
-- Fix includig diagonal elements in dense adjacency matrices (#1437).
+- Preserve `as.undirected()` signature thanks to @jhollway, regression introduced in igraph 2.1.0 (#1536).
 
+## Lifecycle
 
-# igraph 2.0.3.9051
+- Deprecate `eigen_centrality(scale = )` (#1543).
+- Put deprecation message at the beginning not the end of the similarity functions (#1549).
 
 ## Documentation
 
-- Improve the manual page of sample\_() (#1477).
+- Update allcontributors table (#1552).
+- Use mathjax for now (#1538).
 
-- Improve cross-links from make\_() manual page (#1476).
+## Internal
 
-- Update is_separator() documentation based on C docs (#1467).
-
-## Refactoring
-
-- Remove lazyeval usage in `[.igraph.vs` (#1445).
-
-## Testing
-
-- Improve hits tests (#1458).
-
-- Slightly refactor test.print.R for readability (#1463).
+- Prepare for libxml2 depending on bcrypt, use pkg-config (#1556, @kalibera).
 
 
-# igraph 2.0.3.9050
+# igraph 2.1.0
+
+See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+
+## Lifecycle 
+
+### Breaking changes
+
+- Breaking change: remove tkigraph from {igraph} proper (#1474).
+- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
+- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+
+### In-progress deprecations
+
+We are working towards a more consistent interface, especially as regards function naming: ultimately we want the igraph functions to use snake case.
+Please update your scripts and codebases as soon as you can.
+
+- Add `independence_number()` as an alias of `ivs_size()` (#1522).
+- Add `get_edge_ids()` as an alias of `get.edge.ids()` (#1510).
+- Increase the deprecation signal to a warning for `hub.score()` and `authority.score()` both replaced by `hits_scores()` (#1352).
+- Soft-deprecate `erdos.renyi.game()` and `random.graph.game()` (#1509).
 
 ## Features
+
+### C library
+
+- Update vendored C/igraph sources to igraph/igraph@d2e0f4eb567dfc505227c346a015bef574c4ccd1.
+
+### New functionality
 
 - Support `fit_power_law(implementation = "plfit.p")` to compute the P-value (#1386).
+- Add `max_degree()` (#1403).
+- Add experimental `sample_chung_lu()` (#1416).
+- Rename methods available for `sample_degseq()` and add the `"edge.switching.simple"` method (#1376).
+- Weight support for `eccentricity()` and `radius()` (#1211).
+- Add some argument checking to `add_shape()` (#1478).
 
-## Refactoring
+### More informative errors
 
-- Drop attributes in a more straightforward fashion in `graphlet_basis()` (#1452).
-
-
-# igraph 2.0.3.9049
-
-## Chore
-
-- Fix TODO related to missing citation (#1450).
-
-## Documentation
-
-- Fix navbar configuration (#1451).
-
-- Add DOI to citation.
-
-  https://github.com/igraph/rigraph/pull/1450#issuecomment-2298455032
-
-  cc @szhorvat
-
-## Testing
-
-- Remove non actionable comment (#1469).
-
-- Remove TODO as several tests use the index argument (#1457).
-
-- Add tests for special subsetting functions (#1456).
-
-- Improve HITS test (#1449).
-
-
-# igraph 2.0.3.9048
+- Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436): functions like `.from()` are meant to be used inside `[` but now if an user misuses them, the error is more informative.
 
 ## Bug fixes
 
+- Fix including diagonal elements in dense adjacency matrices (#1437).
 - Align the body of `graph.lattice()` with its replacement `make_lattice()` (#1439).
-
-## Features
-
-- Export `.from()` etc. with behavior similar to `dplyr::across()` (#1436).
-
-## Refactoring
-
-- Remove lazyeval usage from R/make.R (#1441).
-
-## Testing
-
-- Add test for hits_scores() directly (#1444).
-
-
-# igraph 2.0.3.9047
-
-## Chore
-
-- Rerun revdepcheck.
-
-- Update revdepcheck results.
-
-
-# igraph 2.0.3.9046
-
-## Bug fixes
-
-- Use deprecated() as default value for 'circular' argument (#1431).
-
-
-# igraph 2.0.3.9045
-
-## Chore
-
-- Update revdepcheck results.
-
-
-# igraph 2.0.3.9044
-
-## Bug fixes
-
-- Fix compatibility layer for `eccentricity()` and `radius()` (#1394).
-
-## Documentation
-
-- Add slightly tweaked boilerplate CONTRIBUTING.md (#1423).
-
-## Refactoring
-
-- Use 'better' logic for updating vertex attributes (#1330).
-
-
-# igraph 2.0.3.9043
-
-## Bug fixes
-
+- Use `deprecated()` as default value for `circular` argument to `make_lattice()` (#1431).
 - `subgraph_centrality()` now ignores edge directions (#1414).
-
 - Remove unintended type conversions when using `disjoint_union()` (#1375).
-
-## Features
-
-- `max_degree()` (#1403).
-
-## Documentation
-
-- Improve documentation of normalization methods for laplacian_matrix() (#1420).
-
-## Testing
-
-- Rename test file to align with script structure.info.R (#1421).
-
-## Uncategorized
-
-- Update centrality.R (#1418).
-
-
-# igraph 2.0.3.9042
-
-## Chore
-
-- Update vendored sources to igraph/igraph@766238c85a16ebd896d788567c1f61fec3ac7bc8.
-
-
-# igraph 2.0.3.9041
-
-## Chore
-
-- Update vendored sources to igraph/igraph@1be914d61efdd29dec6143715da7b79fabbf9972.
-
-  fix: fix crash during interruption in DrL
-  chore: add PR template
-
-- Update vendored sources to igraph/igraph@ce9ddfc85dde94d9da5f8de4318fe82662c4ac78.
-
-
-# igraph 2.0.3.9040
-
-## Chore
-
-- Update vendored sources to igraph/igraph@5b41a2523628d77f46fea3792d0e0eec63887322.
-
-
-# igraph 2.0.3.9039
-
-## Chore
-
-- Update vendored sources to igraph/igraph@171e442c844092c2a6fecf18f3aadad68336e1e7.
-
-
-# igraph 2.0.3.9038
-
-## Chore
-
-- Update vendored sources to igraph/igraph@a8c458defd736ca61f1d3c63e3ac3da95d4466d0.
-
-
-# igraph 2.0.3.9037
-
-## Features
-
-- `sample_chung_lu()` (#1416).
-
-## doc
-
-- Mark `sample_chung_lu()` as experimental.
-
-
-# igraph 2.0.3.9036
-
-## Chore
-
-- Update vendored sources to igraph/igraph@59899fbda04c28af73309851320495ed72542094.
-
-
-# igraph 2.0.3.9035
-
-## Chore
-
-- Update vendored sources to igraph/igraph@d3f470a2fb2a3e24501931f64b3a06df63a82593.
-
-  fuzzer: use libxml2 2.13.1
-  refactor: name CHUNG_LU_GRG to CHUNG_LU_MAXENT (no release has been issued with the GRG naming so far)
-
-
-# igraph 2.0.3.9034
-
-## Chore
-
-- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
-
-## Documentation
-
-- Fix typos in `?plot.common` (@gvegayon) (#1413).
-
-## Refactoring
-
-- Use lifecycle in R/iterators.R (#1399).
-
-- Use `lifecycle::deprecated()` now that we can (#1397).
-
-## Breaking changes
-
-- Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
-
-## Uncategorized
-
-- More auto-generation (#1368).
-
-
-# igraph 2.0.3.9033
-
-## Chore
-
-- Update vendored sources to igraph/igraph@4128607307c7da9d7fb8a45222afde347860f966.
-
-  chore: update changelog
-  refactor: spanning tree is not needed for LGL a BFS already computes a spanning tree
-
-- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
-
-## Testing
-
-- Remove expect_that() definition (#1412).
-
-
-# igraph 2.0.3.9032
-
-## Bug fixes
-
-- Put back header files for consumption by Bison (#1406).
-
-## Features
-
-- Remove deprecated functions before 1.0 (#1352).
-
-## Continuous integration
-
-- Try installing {graph} again (#1407).
-
-## Testing
-
-- Stop using throws_error() in test-bipartite.projection.R (#1409).
-
-- Stop using prints_text() in test-bipartite.random.game.R (#1408).
-
-- Stop using is_identical_to() in test-maximal_cliques.R.
-
-- Stop using gives_warning() in test-operators4.R.
-
-- Stop using gives_warning() in test-dot.product.game.R.
-
-- Stop using expect_that() in test-trees.R.
-
-- Remove use of expect_that() in test-clusters.R.
-
-
-# igraph 2.0.3.9031
-
-## Chore
-
-- Update vendored sources to igraph/igraph@06856ab6cc5fcf2e3affc51f15ceac88f5a60efc.
-
-  interface: update chung_lu_game() parameter names
-
-- Update vendored sources to igraph/igraph@914fc245d0100892112aa6e62f4fbc8430fcbea5.
-
-
-# igraph 2.0.3.9030
-
-## Features
-
-- Update C/igraph (#1378).
-
-
-# igraph 2.0.3.9029
-
-## Testing
-
-- Results.
-
-
-# igraph 2.0.3.9028
-
-## Chore
-
-- Infrastructure to review revdepcheck results (#1402).
-
-
-# igraph 2.0.3.9027
-
-## doc
-
-- Make `edge_density()` examples relevant.
-
-
-# igraph 2.0.3.9026
-
-## Bug fixes
-
-- `sample_degseq()` works with old method names again (#1393).
-
-## Chore
-
-- Results.
-
-## Refactoring
-
-- Expect_that(is_equivalent()) (#1395).
-
-- Breaking change: change make.R (#1390).
-
-## Breaking changes
-
-- Breaking change: change make.R (#1390).
-
-
-# igraph 2.0.3.9025
-
-## doc
-
-- Update troubleshooting document.
-
-## Uncategorized
-
-- Expect_equal() instead of expect_that(equals()) (#1391).
-
-- Refactoring around adjacency.R (#1370).
-
-
-# igraph 2.0.3.9024
-
-## Continuous integration
-
-- Install rhub.
-
-
-# igraph 2.0.3.9023
-
-## Continuous integration
-
-- Fix vendoring workflow.
-
-
-# igraph 2.0.3.9022
-
-## Bug fixes
-
-- Add missing `PROTECT` (#1382).
-
-
-# igraph 2.0.3.9021
-
-## Testing
-
-- Improve attribute tests (#1381).
-
-
-# igraph 2.0.3.9020
-
-## Features
-
-- Rename sample_degseq() method and add the edge.switching.simple method (#1376).
-
-
-# igraph 2.0.3.9019
-
-## Bug fixes
-
+- Add missing `PROTECT()` (#1382).
 - Fix reading of LGL and NCOL files (broken in 2.0.0) (#1347).
-
-## Continuous integration
-
-- Work around installation problems for the graph package (#1374).
-
-## Testing
-
-- Refactor test-assortativity for readability (#1371).
-
-## Uncategorized
-
-- Refactoring around test-attributes.R (#1372).
-
-
-# igraph 2.0.3.9018
-
-## Bug fixes
-
 - Fixed potential memory leak in `R_igraph_community_to_membership2()` (#1367).
 
-
-# igraph 2.0.3.9017
-
-## Bug fixes
-
-- Comment failing ci (#1357).
-
-## Testing
-
-- Refactoring around `interface.R` (#1366).
-
-## Uncategorized
-
-- Fix `%\>%` typo in vignettes (#1343).
-
-
-# igraph 2.0.3.9016
-
-## doc
-
-- Improve `eigen_centrality()` documentation.
-
-
-# igraph 2.0.3.9015
-
-## doc
-
-- Further improved `cluster_edge_betweenness()` documentation.
-
-
-# igraph 2.0.3.9014
-
-## doc
-
-- Improved `cluster_edge_betweenness()` documentation.
-
-
-# igraph 2.0.3.9013
-
-## Testing
-
-- Improve sample_degseq() tests (#1315).
-
-
-# igraph 2.0.3.9012
-
-## Continuous integration
-
-- Remove conflict action again.
-
-## Refactoring
-
-- Handle `null` names for `R_igraph_mybracket2_names` (#1342).
-
-
-# igraph 2.0.3.9011
-
-## Continuous integration
-
-- Use other conflict checker action.
-
-- Add conflicts checker for PRs.
-
-
-# igraph 2.0.3.9010
-
-## Features
-
-- Generate all bindings (#1044).
-
-## Chore
-
-- Use and explain `getNamespaceInfo()` (#1339).
-
-## Continuous integration
-
-- Run examples with comment `\dontrun{}` (#1310).
-
-## Refactoring
-
-- Names in `update-cigraph.sh` script (#1287).
-
-
-# igraph 2.0.3.9009
-
-## Continuous integration
-
-- Install R (#1335).
-
-## Refactoring
-
-- Move variables closer to their usage, add explaining variables (#1336).
-
-- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
-
-- Explaining variables (#1326).
-
-## Breaking changes
-
-- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
-
-
-# igraph 2.0.3.9008
-
-## Refactoring
-
-- Less if else in vertex_attr() (#1324).
-
-- Add assert_named_list() helper to assert the value is a named list with no duplicate names (#1322).
-
-## Testing
-
-- Use largest_component() and expect_equal() in test files (#1323).
-
-## Uncategorized
-
-- Sample_forestfire() tests and example 🔥 (#1318).
-
-
-# igraph 2.0.3.9007
-
-## Features
-
-- Weight support for `eccentricity()` and `radius()` (@krlmlr, #1211).
-
-## Refactoring
-
-- Early return() in graph_attr() (#1320).
-
-
-# igraph 2.0.3.9006
-
 ## Documentation
 
+- Improve the manual page of `sample_()` (#1477).
+- Improve cross-links from `make_()` manual page (#1476).
+- Update `is_separator()` documentation based on C docs (#1467).
+- Add DOI to citation (#1450).
+- Improve documentation of normalization methods for laplacian_matrix() (#1420).
+- Fix typos in `?plot.common` (@gvegayon) (#1413).
 - Fix `sample_degseq()` example (#1297).
-
 - Fix `graph_from_adjacency_matrix()` examples to avoid warnings (#1302).
-
 - Replace `\dontrun{}` with `@examplesIf` (#1307).
+- Improve `sample_gnp()` examples.
+- Improve centralization docs.
+- Further clarifications for `betweenness()` (#1489).
+- Clarify how betweenness with cutoff is normalized.
+- Fix `centr_eigen_tmax()` docs.
+- Make `edge_density()` examples relevant.
+- Improve `eigen_centrality()` documentation.
+- Improved `cluster_edge_betweenness()` documentation.
+- `sample_forestfire()` tests and example (#1318).
 
-## Testing
+### Developer-facing docs
 
-- Add skip condition for `rglplot` test (#1306).
-
-
-# igraph 2.0.3.9005
-
-## Documentation
-
-- Update `igraph.Rmd`, fix manual page typo (#1313).
-
-
-# igraph 2.0.3.9004
-
-## Continuous integration
-
-- Remove running examples in sanitizer (#1314).
-
-
-# igraph 2.0.3.9003
-
-## Continuous integration
-
-- Update lock.yaml.
-
-- Update lock.yaml (#1309).
-
-
-# igraph 2.0.3.9002
-
-## Chore
-
-- Work around https://github.com/igraph/igraph/pull/2527.
-
-- Apply patch after vendoring.
-
-- Update vendored sources to igraph/igraph@68522c3fbac0bdc375611cd711251223c2e76472.
-
-
-# igraph 2.0.3.9001
-
-- Internal changes only.
-
-
-# igraph 2.0.3.9000
-
-- Merge branch 'cran-2.0.3'.
+- Add slightly tweaked boilerplate `CONTRIBUTING.md` (#1423).
+- Update troubleshooting document.
+- Use {devtag} for internal function docs (#1507).
+- Make `.igraph.progress()` and `.igraph.status()` more internal (#1516).
 
 
 # igraph 2.0.3

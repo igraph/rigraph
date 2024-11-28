@@ -485,15 +485,15 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
   # Checks
   if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
-    warning("if `out.seq' is given `m' and `out.dist' should be NULL")
+    cli::cli_warn("if {.arg out.seq} is given {.arg m} and {.arg out.dist} should be {.code NULL}.")
     m <- out.dist <- NULL
   }
   if (is.null(out.seq) && !is.null(out.dist) && !is.null(m)) {
-    warning("if `out.dist' is given `m' will be ignored")
+    cli::cli_warn("if {.arg out.dist} is given {.arg m} will be ignored.")
     m <- NULL
   }
   if (!is.null(m) && m == 0) {
-    warning("`m' is zero, graph will be empty")
+    cli::cli_warn("{.arg m} is zero, graph will be empty.")
   }
 
   if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
@@ -927,17 +927,17 @@ sample_degseq <- function(out.deg, in.deg = NULL,
   )
 
   if (method == "simple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration instead of simple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration instead of simple')")
     method <- "configuration"
   }
 
   if (method == "simple.no.multiple") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')")
     method <- "fast.heur.simple"
   }
 
   if (method == "simple.no.multiple.uniform") {
-    lifecycle::deprecate_warn("2.0.4", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')")
     method <- "configuration.simple"
   }
 
@@ -1116,11 +1116,11 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
                           time.window = NULL) {
   # Checks
   if (!is.null(out.seq) && (!is.null(m) || !is.null(out.dist))) {
-    warning("if `out.seq' is given `m' and `out.dist' should be NULL")
+    cli::cli_warn("if {.arg out.seq} is given {.arg m} and {.arg out.dist} should be {.code NULL}.")
     m <- out.dist <- NULL
   }
   if (is.null(out.seq) && !is.null(out.dist) && !is.null(m)) {
-    warning("if `out.dist' is given `m' will be ignored")
+    cli::cli_warn("if {.arg out.dist} is given {.arg m} will be ignored.")
     m <- NULL
   }
   if (!is.null(out.seq) && length(out.seq) != n) {
@@ -1136,13 +1136,13 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
     stop("time window size should be positive")
   }
   if (!is.null(m) && m == 0) {
-    warning("`m' is zero, graph will be empty")
+    cli::cli_warn("{.arg m} is zero, graph will be empty.")
   }
   if (aging.exp > 0) {
-    warning("aging exponent is positive")
+    cli::cli_warn("Aging exponent {.arg aging.exp} is positive.")
   }
   if (zero.deg.appeal <= 0) {
-    warning("initial attractiveness is not positive")
+    cli::cli_warn("Initial attractiveness {.arg zero.deg.appeal} is not positive.")
   }
 
   if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
@@ -1761,13 +1761,13 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
     stop("Connection probability `p' is not given for Gnp graph")
   }
   if (type == "gnp" && !missing(m)) {
-    warning("Number of edges `m' is ignored for Gnp graph")
+    cli::cli_warn("Number of edges {.arg m} is ignored for Gnp graph.")
   }
   if (type == "gnm" && missing(m)) {
     stop("Number of edges `m' is not given for Gnm graph")
   }
   if (type == "gnm" && !missing(p)) {
-    warning("Connection probability `p' is ignored for Gnp graph")
+    cli::cli_warn("Connection probability {.arg p} is ignored for Gnp graph.")
   }
 
   on.exit(.Call(R_igraph_finalizer))

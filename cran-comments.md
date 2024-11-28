@@ -1,12 +1,5 @@
-igraph 2.0.3
+igraph 2.1.1.9900
 
-## R CMD check results
+## Cran Repository Policy
 
-- [x] Checked locally, R 4.3.2
-- [x] Checked on CI system, R 4.3.3
-- [x] Checked on win-builder, R devel
-
-## Current CRAN check results
-
-- [x] Checked on 2024-03-12, problems found: https://cran.r-project.org/web/checks/check_results_igraph.html
-- [x] WARN: r-oldrel-windows-x86_64: gcc bug.
+- [x] Reviewed CRP last edited 2024-08-27.

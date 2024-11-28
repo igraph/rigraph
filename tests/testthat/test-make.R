@@ -10,6 +10,7 @@ test_that("make_ works, order of arguments does not matter", {
 })
 
 test_that("sample_, graph_ also work", {
+   rlang::local_options(lifecycle_verbosity = "quiet")
   g0 <- make_undirected_graph(1:10)
   g1 <- sample_(undirected_graph(1:10))
   g2 <- sample_(undirected_graph(), 1:10)
@@ -29,6 +30,7 @@ test_that("sample_, graph_ also work", {
 })
 
 test_that("error messages are proper", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
   expect_error(make_(), "Don't know how to make_")
   expect_error(make_(1:10), "Don't know how to make_")
 
@@ -48,6 +50,7 @@ test_that("error messages are proper", {
 })
 
 test_that("we pass arguments unevaluated", {
+  rlang::local_options(lifecycle_verbosity = "quiet")
   g0 <- graph_from_literal(A -+ B:C)
   g1 <- graph_(from_literal(A -+ B:C))
   expect_true(identical_graphs(g0, g1))

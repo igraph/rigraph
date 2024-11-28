@@ -104,7 +104,7 @@ c     %------------------%
 c     | Scalar Arguments |
 c     %------------------%
 c
-      character*2 which
+      character  which*2
       integer    ishift, kev, np
 c
 c     %-----------------%

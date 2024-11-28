@@ -55,5 +55,5 @@ test_that("a make_graph bug is fixed", {
 
 test_that("make_empty_graph gives an error for invalid arguments", {
   expect_error(make_empty_graph(NULL))
-  expect_error(make_empty_graph("spam"))
+  expect_warning(expect_error(make_empty_graph("spam")))
 })

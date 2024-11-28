@@ -26,7 +26,8 @@ then \emph{to} it will be considered. If \code{all}, the default, then
 the corresponding undirected graph will be used, i.e. not directed paths
 are searched. This argument is ignored for undirected graphs.}
 
-\item{cutoff}{Maximum length of path that is considered. If negative, paths of all lengths are considered.}
+\item{cutoff}{Maximum length of the paths that are considered. If negative,
+no cutoff is used.}
 }
 \value{
 A list of integer vectors, each integer vector is a path from
@@ -34,16 +35,15 @@ the source vertex to one of the target vertices. A path is given by its
 vertex ids.
 }
 \description{
-This function lists are simple paths from one source vertex to another
-vertex or vertices. A path is simple if the vertices it visits are not
-visited more than once.
+This function lists all simple paths from one source vertex to another
+vertex or vertices. A path is simple if contains no repeated vertices.
 }
 \details{
 Note that potentially there are exponentially many paths between two
 vertices of a graph, and you may run out of memory when using this
 function, if your graph is lattice-like.
 
-This function currently ignored multiple and loop edges.
+This function ignores multiple and loop edges.
 }
 \examples{
 

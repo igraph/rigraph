@@ -17,4 +17,6 @@ igraph.Rcheck/
 inst/doc
 cran
 /CRAN-SUBMISSION
-docs
+/docs
+/compile_commands.json
+/.cache

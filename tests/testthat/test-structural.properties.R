@@ -515,7 +515,7 @@ test_that("constraint() works", {
   constraint.orig <- function(graph, nodes = V(graph), attr = NULL) {
     ensure_igraph(graph)
     idx <- degree(graph) != 0
-    A <- as_adj(graph, attr = attr, sparse = FALSE)
+    A <- as_adjacency_matrix(graph, attr = attr, sparse = FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
 
@@ -591,8 +591,6 @@ test_that("mindist works", {
   expect_equal(ego_size(g, order = 2, mindist = 0), rep(5, 10))
   expect_equal(ego_size(g, order = 2, mindist = 1), rep(4, 10))
   expect_equal(ego_size(g, order = 2, mindist = 2), rep(2, 10))
-
-  unvs <- function(x) lapply(x, as.vector)
 
   n0 <- unvs(ego(g, order = 2, 5:6, mindist = 0))
   n1 <- unvs(ego(g, order = 2, 5:6, mindist = 1))

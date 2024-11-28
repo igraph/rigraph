@@ -570,19 +570,19 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   nei <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "nei()", ".nei()")
+    lifecycle::deprecate_stop("2.1.0", "nei()", ".nei()")
   }
   .innei <- function(v, mode = c("in", "all", "out", "total")) {
     .nei(v, mode = mode[1])
   }
   innei <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "innei()", ".innei()")
+    lifecycle::deprecate_stop("2.1.0", "innei()", ".innei()")
   }
   .outnei <- function(v, mode = c("out", "all", "in", "total")) {
     .nei(v, mode = mode[1])
   }
   outnei <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "outnei()", ".outnei()")
+    lifecycle::deprecate_stop("2.1.0", "outnei()", ".outnei()")
   }
   .inc <- function(e) {
     ## TRUE iff the vertex (in the vs) is incident
@@ -598,10 +598,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   inc <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "inc()", ".inc()")
+    lifecycle::deprecate_stop("2.1.0", "inc()", ".inc()")
   }
   adj <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "adj()", ".inc()")
+    lifecycle::deprecate_stop("2.1.0", "adj()", ".inc()")
   }
   .from <- function(e) {
     ## TRUE iff the vertex is the source of at least one edge in e
@@ -616,7 +616,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "from()", ".from()")
+    lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
   }
   .to <- function(e) {
     ## TRUE iff the vertex is the target of at least one edge in e
@@ -631,7 +631,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "to()", ".to()")
+    lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
   }
 
   graph <- get_vs_graph(x)
@@ -649,21 +649,28 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lapply(
-      args,
-      rlang::eval_tidy,
-      data = c(
-        attrs,
-        .nei = .nei, nei = nei,
-        .innei = .innei, innei = innei,
-        .outnei = .outnei, outnei = outnei,
-        .inc = .inc, inc = inc, adj = adj,
-        .from = .from, from = from,
-        .to = .to, to = to,
-        .env = env,
-        .data = list(attrs)
-      )
-    )
+
+    # Functions (only visible if called or if no duplicate)
+    top <- rlang::new_environment(list(
+      .nei = .nei, nei = nei,
+      .innei = .innei, innei = innei,
+      .outnei = .outnei, outnei = outnei,
+      .inc = .inc, inc = inc, adj = adj,
+      .from = .from, from = from,
+      .to = .to, to = to,
+      .data = list(attrs)
+    ))
+
+    # Data objects (visible by default)
+    bottom <- rlang::new_environment(parent = top, c(
+      attrs,
+      .env = env,
+      .data = list(attrs)
+    ))
+
+    data_mask <- rlang::new_data_mask(bottom, top)
+
+    res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
     res <- lapply(res, function(ii) {
       if (is.null(ii)) {
@@ -917,10 +924,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   adj <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "adj()", ".inc()")
+    lifecycle::deprecate_stop("2.1.0", "adj()", ".inc()")
   }
   inc <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "inc()", ".inc()")
+    lifecycle::deprecate_stop("2.1.0", "inc()", ".inc()")
   }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
@@ -932,7 +939,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "from()", ".from()")
+    lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
   }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
@@ -944,7 +951,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    lifecycle::deprecate_stop("2.0.4", "to()", ".to()")
+    lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
   }
 
   graph <- get_es_graph(x)
@@ -957,22 +964,28 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
     env <- parent.frame()
-    res <- lapply(
-      args,
-      rlang::eval_tidy,
-      data = c(
-        attrs,
-        .inc = .inc, inc = inc, adj = adj,
-        .from = .from, from = from,
-        .to = .to, to = to,
-        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
-        .igraph.graph = list(graph),
-        `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
-        .env = env,
-        .data = list(attrs)
-      )
-    )
+
+    # Functions (only visible if called or if no duplicate)
+    top <- rlang::new_environment(list(
+      .inc = .inc, inc = inc, adj = adj,
+      .from = .from, from = from,
+      .to = .to, to = to,
+      `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`
+    ))
+
+    # Data objects (visible by default)
+    bottom <- rlang::new_environment(parent = top, c(
+      attrs,
+      .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+      .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
+      .igraph.graph = list(graph),
+      .env = env,
+      .data = list(attrs)
+    ))
+
+    data_mask <- rlang::new_data_mask(bottom, top)
+
+    res <- lapply(args, rlang::eval_tidy, data = data_mask)
 
     res <- lapply(res, function(ii) {
       if (is.null(ii)) {
@@ -1494,10 +1507,10 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (length(graph_id) != 1) {
-    warning(
-      "Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions"
-    )
+    cli::cli_warn(c(
+      "Combining vertex/edge sequences from different graphs.",
+      x = "This will not work in future igraph versions."
+    ))
   }
 
   graphs <- args %>%
@@ -1509,9 +1522,9 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (check_graph && length(addresses) >= 2) {
-    warning(
-      "Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions"
+    cli::cli_warn(
+      "Combining vertex/edge sequences from different graphs",
+      x = "This will not work in future igraph versions."
     )
   }
 

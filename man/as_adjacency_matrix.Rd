@@ -2,19 +2,9 @@
 % Please edit documentation in R/conversion.R
 \name{as_adjacency_matrix}
 \alias{as_adjacency_matrix}
-\alias{as_adj}
 \title{Convert a graph to an adjacency matrix}
 \usage{
 as_adjacency_matrix(
-  graph,
-  type = c("both", "upper", "lower"),
-  attr = NULL,
-  edges = deprecated(),
-  names = TRUE,
-  sparse = igraph_opt("sparsematrices")
-)
-
-as_adj(
   graph,
   type = c("both", "upper", "lower"),
   attr = NULL,

@@ -18,9 +18,8 @@ evcent(
 \item{directed}{Logical scalar, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
-\item{scale}{Logical scalar, whether to scale the result to have a maximum
-score of one. If no scaling is used then the result vector has unit length
-in the Euclidean norm.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
+place.}
 
 \item{weights}{A numerical vector or \code{NULL}. This argument can be used
 to give edge weights for calculating the weighted eigenvector centrality of

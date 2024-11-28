@@ -69,3 +69,189 @@ test_that("as_undirected() keeps attributes", {
   expect_equal(df3[order(df3[, 1], df3[, 2]), ]$weight, c(1, 3, 2, 4, 5))
   expect_equal(df4[order(df4[, 1], df4[, 2]), ]$weight, c(4, 9))
 })
+
+test_that("as_adjacency_matrix() works -- sparse", {
+  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  basic_adj_matrix <- as_adjacency_matrix(g)
+  expect_s4_class(basic_adj_matrix, "dgCMatrix")
+  expected_matrix <- matrix(
+    c(0, 1, 0, 0, 1, 1, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0),
+    nrow = 4L, ncol = 4L
+  )
+  basic_adj_matrix <- as.matrix(basic_adj_matrix)
+  dimnames(basic_adj_matrix) <- NULL
+  expect_equal(basic_adj_matrix, expected_matrix)
+
+  V(g)$name <- letters[1:vcount(g)]
+  letter_adj_matrix <- as_adjacency_matrix(g)
+  expect_s4_class(letter_adj_matrix, "dgCMatrix")
+  expect_setequal(rownames(letter_adj_matrix), letters[1:vcount(g)])
+  letter_adj_matrix <- as.matrix(letter_adj_matrix)
+  dimnames(letter_adj_matrix) <- NULL
+  expect_equal(basic_adj_matrix, letter_adj_matrix)
+
+  E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
+  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
+  expect_s4_class(weight_adj_matrix, "dgCMatrix")
+  expect_equal(as.matrix(weight_adj_matrix),
+    matrix(
+      c(0, 3.4, 0, 0, 1.2, 2.7, 0, 13.7, 0, 0, 11.6, 0, 0, 0, 0.1, 0),
+      nrow = 4L,
+      ncol = 4L,
+      dimnames = list(c("a", "b", "c", "d"), c("a", "b", "c", "d"))
+    ))
+})
+
+test_that("as_adjacency_matrix() works -- sparse + not both", {
+  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- as_undirected(dg, mode = "each")
+
+  lower_adj_matrix <- as_adjacency_matrix(g, type = "lower")
+  expect_s4_class(lower_adj_matrix, "dgCMatrix")
+  lower_expected_matrix <- matrix(
+    c(0, 2, 0, 0, 0, 1, 0, 3, 0, 0, 2, 1, 0, 0, 0, 0),
+    nrow = 4L, ncol = 4L
+  )
+  lower_expected_matrix <- as.matrix(lower_expected_matrix)
+  dimnames(lower_expected_matrix) <- NULL
+  expect_equal(lower_expected_matrix, lower_expected_matrix)
+
+  upper_adj_matrix <- as_adjacency_matrix(g, type = "upper")
+  expect_s4_class(upper_adj_matrix, "dgCMatrix")
+  upper_expected_matrix <- matrix(
+    c(0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 2, 0, 0, 3, 1, 0),
+    nrow = 4L, ncol = 4L
+  )
+  upper_adj_matrix <- as.matrix(upper_adj_matrix)
+  dimnames(upper_adj_matrix) <- NULL
+  expect_equal(upper_adj_matrix, upper_expected_matrix)
+})
+
+test_that("as_adjacency_matrix() errors well -- sparse", {
+  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
+
+  E(g)$bla <- letters[1:ecount(g)]
+  expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
+
+})
+
+test_that("as_adjacency_matrix() works -- sparse undirected", {
+  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  ug <- as_undirected(dg, mode = "each")
+  adj_matrix <- as_adjacency_matrix(ug)
+  expect_s4_class(adj_matrix, "dgCMatrix")
+
+  adj_matrix <- as.matrix(adj_matrix)
+  dimnames(adj_matrix) <- NULL
+  expect_equal(
+    adj_matrix,
+    matrix(
+      c(0, 2, 0, 0, 2, 1, 0, 3, 0, 0, 2, 1, 0, 3, 1, 0),
+      nrow = 4L,
+      ncol = 4L
+    )
+  )
+})
+
+test_that("as_adjacency_matrix() works -- dense", {
+  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+
+  basic_adj_matrix <- as_adjacency_matrix(g, sparse = FALSE)
+  expected_matrix <- matrix(
+    c(0, 1, 0, 0, 1, 1, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0),
+    nrow = 4L, ncol = 4L
+  )
+  expect_equal(basic_adj_matrix, expected_matrix)
+
+  V(g)$name <- letters[1:vcount(g)]
+  letter_adj_matrix <- as_adjacency_matrix(g, sparse = FALSE)
+  expect_true(inherits(letter_adj_matrix, "matrix"))
+  expect_setequal(rownames(letter_adj_matrix), letters[1:vcount(g)])
+  expect_equal(basic_adj_matrix, unname(letter_adj_matrix))
+
+  E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
+  weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  expect_equal(
+    weight_adj_matrix,
+    matrix(
+      c(0, 3.4, 0, 0, 1.2, 2.7, 0, 4.3, 0, 0, 6, 0, 0, 0, 0.1, 0),
+      nrow = 4L,
+      ncol = 4L,
+      dimnames = list(c("a", "b", "c", "d"), c("a", "b", "c", "d"))
+    )
+  )
+})
+
+test_that("as_adjacency_matrix() errors well -- dense", {
+  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
+
+  E(g)$bla <- letters[1:ecount(g)]
+  expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
+
+})
+
+
+test_that("as_adjacency_matrix() works -- dense undirected", {
+  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  ug <- as_undirected(dg, mode = "each")
+  # no different treatment than undirected if no attribute?!
+  adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE)
+  expect_equal(
+    adj_matrix,
+    matrix(
+      c(0, 2, 0, 0, 2, 1, 0, 3, 0, 0, 2, 1, 0, 3, 1, 0),
+      nrow = 4L, ncol = 4L
+    )
+  )
+
+  E(ug)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
+  weight_adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE, attr = "weight")
+  expect_equal(
+    weight_adj_matrix,
+    matrix(
+      c(0, 3.4, 0, 0, 3.4, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 4.3, 0.1, 0),
+      nrow = 4L,
+      ncol = 4L
+    )
+  )
+})
+
+test_that("as_adjacency_matrix() works -- dense + not both", {
+  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- as_undirected(dg, mode = "each")
+  E(g)$attribute <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
+
+  lower_adj_matrix <- as_adjacency_matrix(
+    g,
+    type = "lower",
+    sparse = FALSE,
+    attr = "attribute"
+  )
+
+  expect_equal(
+    lower_adj_matrix,
+    matrix(
+      c(0, 3.4, 0, 0, 0, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 0, 0, 0),
+      nrow = 4L,
+      ncol = 4L
+    )
+  )
+
+  upper_adj_matrix  <- as_adjacency_matrix(
+    g,
+    type = "upper",
+    sparse = FALSE,
+    attr = "attribute"
+  )
+
+  expect_equal(
+    upper_adj_matrix,
+    matrix(
+      c(0, 0, 0, 0, 3.4, 2.7, 0, 0, 0, 0, 6, 0, 0, 4.3, 0.1, 0),
+      nrow = 4L,
+      ncol = 4L
+    )
+  )
+})

@@ -236,7 +236,7 @@ disjoint_union <- function(...) {
   vertex.attributes(res) <- attr
 
   if ("name" %in% names(attr) && any(duplicated(attr$name))) {
-    warning("Duplicate vertex names in disjoint union")
+    cli::cli_warn("Duplicate vertex names in disjoint union.")
   }
 
   ## Edge attributes
@@ -283,7 +283,7 @@ disjoint_union <- function(...) {
   if (byname == "auto") {
     byname <- all(sapply(graphs, is_named))
     if (nonamed != 0 && nonamed != length(graphs)) {
-      warning("Some, but not all graphs are named, not using vertex names")
+      cli::cli_warn("Some, but not all graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != length(graphs)) {
     stop("Some graphs are not named")
@@ -619,7 +619,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
-      warning("One, but not both graphs are named, not using vertex names")
+      cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
     stop("Some graphs are not named")
@@ -768,7 +768,7 @@ compose <- function(g1, g2, byname = "auto") {
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
-      warning("One, but not both graphs are named, not using vertex names")
+      cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
     stop("Some graphs are not named")

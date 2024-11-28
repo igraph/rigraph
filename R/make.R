@@ -10,7 +10,7 @@
 #' @keywords internal
 #' @export
 graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph()", "make_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph()", "make_graph()")
      if (inherits(edges, "formula")) {
     if (!missing(n)) stop("'n' should not be given for graph literals")
     if (!missing(isolates)) {
@@ -35,15 +35,15 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -54,7 +54,7 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -75,7 +75,7 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -103,7 +103,7 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
 #' @keywords internal
 #' @export
 graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.famous()", "make_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.famous()", "make_graph()")
      if (inherits(edges, "formula")) {
     if (!missing(n)) stop("'n' should not be given for graph literals")
     if (!missing(isolates)) {
@@ -128,15 +128,15 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -147,7 +147,7 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -168,7 +168,7 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -196,7 +196,7 @@ graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , direct
 #' @keywords internal
 #' @export
 line.graph <- function(graph) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "line.graph()", "make_line_graph()")
+   lifecycle::deprecate_soft("2.1.0", "line.graph()", "make_line_graph()")
      ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -218,7 +218,7 @@ line.graph <- function(graph) { # nocov start
 #' @keywords internal
 #' @export
 graph.ring <- function(n , directed = FALSE , mutual = FALSE , circular = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.ring()", "make_ring()")
+   lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_ring, as.numeric(n), as.logical(directed),
@@ -243,7 +243,7 @@ graph.ring <- function(n , directed = FALSE , mutual = FALSE , circular = TRUE) 
 #' @keywords internal
 #' @export
 graph.tree <- function(n , children = 2 , mode = c("out","in","undirected")) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.tree()", "make_tree()")
+   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
      mode <- igraph.match.arg(mode)
   mode1 <- switch(mode,
     "out" = 0,
@@ -275,7 +275,7 @@ graph.tree <- function(n , children = 2 , mode = c("out","in","undirected")) { #
 #' @keywords internal
 #' @export
 graph.star <- function(n , mode = c("in","out","mutual","undirected") , center = 1) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.star()", "make_star()")
+   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
      mode <- igraph.match.arg(mode)
   mode1 <- switch(mode,
     "out" = 0,
@@ -312,7 +312,7 @@ graph.star <- function(n , mode = c("in","out","mutual","undirected") , center =
 #' @keywords internal
 #' @export
 graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.lcf()", "graph_from_lcf()")
+   lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
      # Argument checks
   n <- as.numeric(n)
   shifts <- as.numeric(shifts)
@@ -341,9 +341,9 @@ graph.lcf <- function(n , shifts , repeats = 1) { # nocov start
 #' @export
 #' @cdocs igraph_square_lattice
 graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , periodic = FALSE, circular = deprecated()) { # nocov start
-  lifecycle::deprecate_soft("2.0.4", "graph.lattice()", "make_lattice()")
+  lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
@@ -357,7 +357,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
   }
 
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
@@ -392,7 +392,7 @@ graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 
 #' @keywords internal
 #' @export
 graph.kautz <- function(m , n) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.kautz()", "make_kautz_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.kautz()", "make_kautz_graph()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
@@ -414,7 +414,7 @@ graph.kautz <- function(m , n) { # nocov start
 #' @keywords internal
 #' @export
 graph.full.citation <- function(n , directed = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.full.citation()", "make_full_citation_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.full.citation()", "make_full_citation_graph()")
      # Argument checks
   n <- as.numeric(n)
   directed <- as.logical(directed)
@@ -438,7 +438,7 @@ graph.full.citation <- function(n , directed = TRUE) { # nocov start
 #' @keywords internal
 #' @export
 graph.full.bipartite <- function(n1 , n2 , directed = FALSE , mode = c("all","out","in")) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.full.bipartite()", "make_full_bipartite_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.full.bipartite()", "make_full_bipartite_graph()")
      n1 <- as.numeric(n1)
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
@@ -471,7 +471,7 @@ graph.full.bipartite <- function(n1 , n2 , directed = FALSE , mode = c("all","ou
 #' @keywords internal
 #' @export
 graph.full <- function(n , directed = FALSE , loops = FALSE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.full()", "make_full_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_full, as.numeric(n), as.logical(directed),
@@ -495,7 +495,7 @@ graph.full <- function(n , directed = FALSE , loops = FALSE) { # nocov start
 #' @keywords internal
 #' @export
 graph.formula <- function(... , simplify = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.formula()", "graph_from_literal()")
+   lifecycle::deprecate_soft("2.1.0", "graph.formula()", "graph_from_literal()")
      mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
 } # nocov end
@@ -511,7 +511,7 @@ graph.formula <- function(... , simplify = TRUE) { # nocov start
 #' @keywords internal
 #' @export
 graph.extended.chordal.ring <- function(n , w , directed = FALSE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.extended.chordal.ring()", "make_chordal_ring()")
+   lifecycle::deprecate_soft("2.1.0", "graph.extended.chordal.ring()", "make_chordal_ring()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_extended_chordal_ring, as.numeric(n),
@@ -535,7 +535,7 @@ graph.extended.chordal.ring <- function(n , w , directed = FALSE) { # nocov star
 #' @keywords internal
 #' @export
 graph.empty <- function(n = 0 , directed = TRUE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.empty()", "make_empty_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.empty()", "make_empty_graph()")
      # Argument checks
   n <- as.numeric(n)
   directed <- as.logical(directed)
@@ -558,7 +558,7 @@ graph.empty <- function(n = 0 , directed = TRUE) { # nocov start
 #' @keywords internal
 #' @export
 graph.de.bruijn <- function(m , n) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.de.bruijn()", "make_de_bruijn_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.de.bruijn()", "make_de_bruijn_graph()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
@@ -580,7 +580,7 @@ graph.de.bruijn <- function(m , n) { # nocov start
 #' @keywords internal
 #' @export
 graph.bipartite <- function(types , edges , directed = FALSE) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.bipartite()", "make_bipartite_graph()")
+   lifecycle::deprecate_soft("2.1.0", "graph.bipartite()", "make_bipartite_graph()")
      vertex.names <- names(types)
 
   if (is.character(edges)) {
@@ -619,7 +619,7 @@ graph.bipartite <- function(types , edges , directed = FALSE) { # nocov start
 #' @keywords internal
 #' @export
 graph.atlas <- function(n) { # nocov start
-   lifecycle::deprecate_soft("2.0.4", "graph.atlas()", "graph_from_atlas()")
+   lifecycle::deprecate_soft("2.1.0", "graph.atlas()", "graph_from_atlas()")
      on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_atlas, as.numeric(n))
   if (igraph_opt("add.params")) {
@@ -889,7 +889,7 @@ sample_ <- function(...) {
 #' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 graph_ <- function(...) {
   lifecycle::deprecate_soft(
-    "2.0.4",
+    "2.1.0",
     "graph_()",
     details = c(
       "Please use constructors directly, for instance graph_from_edgelist().",
@@ -1257,15 +1257,15 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -1276,7 +1276,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -1297,7 +1297,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
       if (length(list(...))) stop("Extra arguments in make_graph")
 
@@ -1736,7 +1736,7 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
   }
 
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 

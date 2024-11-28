@@ -1,5 +1,7 @@
 
 test_that("Edges stop at outside of rectangle node", {
+  skip_if_not_installed("vdiffr")
+
   rectangle_edges <- function() {
     g <- make_graph(c(1,2, 1,4, 2,1, 2,5, 2,3, 4,1, 5,2, 3,2))
     layout <- cbind(c(-2.01, -1.16, -1.24, -2.74, -0.13),
@@ -11,5 +13,6 @@ test_that("Edges stop at outside of rectangle node", {
        layout = layout
        )
   }
+
   vdiffr::expect_doppelganger("rectangle-edges", rectangle_edges)
 })

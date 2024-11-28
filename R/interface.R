@@ -551,7 +551,7 @@ get.edge.ids <- function(graph,
 
     lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
   }
-  lifecycle::deprecate_soft("2.0.4", "get.edge.ids()", "get_edge_ids()")
+  lifecycle::deprecate_soft("2.1.0", "get.edge.ids()", "get_edge_ids()")
   get_edge_ids(graph = graph, vp = vp, directed = directed, error = error)
 }
 

@@ -23,7 +23,8 @@ graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument). By default no cuts are made.}
 
 \item{sample.size}{The number of vertices to use as a starting point for
-finding motifs. Only used if the \code{sample} argument is \code{NULL}.}
+finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+The default is \code{ceiling(vcount(graph) / 10)} .}
 
 \item{sample}{If not \code{NULL} then it specifies the vertices to use as a
 starting point for finding motifs.}

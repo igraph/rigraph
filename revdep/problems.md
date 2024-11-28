@@ -1,96 +1,62 @@
-# CePa
+# manynet
 
 <details>
 
-* Version: 0.8.0
-* GitHub: https://github.com/jokergoo/CePa
-* Source code: https://github.com/cran/CePa
-* Date/Publication: 2022-06-11 21:30:06 UTC
-* Number of recursive dependencies: 14
+* Version: 1.2.6
+* GitHub: https://github.com/stocnet/manynet
+* Source code: https://github.com/cran/manynet
+* Date/Publication: 2024-10-05 16:40:01 UTC
+* Number of recursive dependencies: 146
 
-Run `revdepcheck::cloud_details(, "CePa")` for more info
+Run `revdepcheck::cloud_details(, "manynet")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking Rd cross-references ... WARNING
+*   checking tests ... ERROR
     ```
-    Missing link or links in documentation object 'cepa.Rd':
-      ‘[igraph:igraph_test]{igraphtest}’
-    
-    Missing link or links in documentation object 'cepa.ora.Rd':
-      ‘[igraph:igraph_test]{igraphtest}’
-    
-    See section 'Cross-references' in the 'Writing R Extensions' manual.
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(manynet)
+      > 
+      > test_check("manynet")
+      Starting 2 test processes
+      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
+      
+    ...
+      `expected`: 0.2 0.1 0.1
+      ── Failure ('test-measure_centrality.R:79:3'): two mode eigenvector centrality calculated correctly ──
+      top3(node_eigenvector(test_igr, normalized = TRUE)) (`actual`) not equal to c(0.4505, 0.4248, 0.5) (`expected`).
+      
+        `actual`: 1.3 1.2 1.4
+      `expected`: 0.5 0.4 0.5
+      
+      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
+      Error: Test failures
+      Execution halted
     ```
 
 ## In both
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking package dependencies ... NOTE
     ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘CePa.Rnw’ using Sweave
-    Error: processing vignette 'CePa.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'CePa.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `grfext.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
-    ...
-    l.179   \RequirePackage{grfext}\relax
-                                         ^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘parsing-PID-pathway-data.Rnw’
-    
-    SUMMARY: processing the following files failed:
-      ‘CePa.Rnw’ ‘analysis-p53.Rnw’ ‘parsing-PID-pathway-data.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
+    Package which this enhances but not available for checking: ‘Rgraphviz’
     ```
 
-# MetaNet
-
-<details>
-
-* Version: 0.1.2
-* GitHub: https://github.com/Asa12138/MetaNet
-* Source code: https://github.com/cran/MetaNet
-* Date/Publication: 2024-03-25 20:40:07 UTC
-* Number of recursive dependencies: 151
-
-Run `revdepcheck::cloud_details(, "MetaNet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
+*   checking installed package size ... NOTE
     ```
-    Running examples in ‘MetaNet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: anno_vertex
-    > ### Title: Use data.frame to annotate vertexes of metanet
-    > ### Aliases: anno_vertex anno_node
-    > 
-    > ### ** Examples
-    > 
-    > data("c_net")
-    ...
-      8. │           └─igraph (local) x("width", no = can_max)
-      9. │             ├─igraph::ends(x, edges[seq_len(no)], names = names)
-     10. │             │ ├─igraph:::as_igraph_es(graph, na.omit(es))
-     11. │             │ └─stats::na.omit(es)
-     12. │             ├─edges[seq_len(no)]
-     13. │             └─igraph:::`[.igraph.es`(edges, seq_len(no))
-     14. │               └─base::lapply(...)
-     15. │                 └─rlang (local) FUN(X[[i]], ...)
-     16. └─rlang::abort(message = message)
-    Execution halted
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        R           1.5Mb
+        tutorials   1.8Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 7 marked UTF-8 strings
     ```
 
 # simcausal
@@ -122,21 +88,21 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       +     ## --- Setup ---
       + 
     ...
-      In addition: Warning messages:
-      1: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
+      ℹ Please use `as_directed()` instead. 
       2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
         RNGkind: Marsaglia-Multicarry has poor statistical properties
+      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
       4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
+        RNGkind: Marsaglia-Multicarry has poor statistical properties
+      5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
         RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
       Execution halted
     ```
 
 ## In both
 
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... WARNING
     ```
     Error(s) in re-building vignettes:
       ...
@@ -186,18 +152,18 @@ Run `revdepcheck::cloud_details(, "skynet")` for more info
       > library(skynet)
       > 
       > test_check("skynet")
-      [ FAIL 1 | WARN 24 | SKIP 4 | PASS 69 ]
+      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
       
       ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
     ...
-       14. │   └─base::lapply(...)
+       14. │   └─base::lapply(args, rlang::eval_tidy, data = data_mask)
        15. │     └─rlang (local) FUN(X[[i]], ...)
        16. └─igraph (local) from(V(x)[y])
-       17.   └─lifecycle::deprecate_stop("2.0.4", "from()", ".from()")
+       17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
        18.     └─lifecycle:::deprecate_stop0(msg)
        19.       └─rlang::cnd_signal(...)
       
-      [ FAIL 1 | WARN 24 | SKIP 4 | PASS 69 ]
+      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
       Error: Test failures
       Execution halted
     ```

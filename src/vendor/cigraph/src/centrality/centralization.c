@@ -32,7 +32,7 @@
  *
  * For a centrality score defined on the vertices of a graph, it is
  * possible to define a graph level centralization index, by
- * calculating the sum of the deviation from the maximum centrality
+ * calculating the sum of the deviations from the maximum centrality
  * score. Consequently, the higher the centralization index of the
  * graph, the more centralized the structure is.
  *
@@ -43,15 +43,22 @@
  * of the most centralized structure with the same number of vertices.
  *
  * </para><para>
- * For most centrality indices the most centralized
- * structure is the star graph, a single center connected to all other
- * nodes in the network. There are some variation depending on whether
- * the graph is directed or not, whether loop edges are allowed, etc.
+ * For most centrality indices, the most centralized structure is the
+ * star graph, a single center connected to all other nodes in the network.
+ * There is some variation depending on whether the graph is directed or not,
+ * whether loop edges are allowed, etc.
  *
  * </para><para>
  * This function simply calculates the graph level index, if the node
  * level scores and the theoretical maximum are given. It is called by
- * all the measure-specific centralization functions.
+ * all the measure-specific centralization functions. It uses the calculation
+ *
+ * </para><para>
+ * <code>C = sum_v ((max_u c_u) - c_v)</code>
+ *
+ * </para><para>
+ * where \c c are the centrality scores passed in \p scores. If \p normalized
+ * is \c true, then <code>C/theoretical_max</code> is returned.
  *
  * \param scores A vector containing the node-level centrality scores.
  * \param theoretical_max The graph level centrality score of the most
@@ -216,6 +223,15 @@ igraph_error_t igraph_centralization_degree_tmax(const igraph_t *graph,
     if (graph) {
         directed = igraph_is_directed(graph);
         nodes = igraph_vcount(graph);
+    } else {
+        if (nodes < 0) {
+            IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
+        }
+    }
+
+    if (nodes == 0) {
+        *res = IGRAPH_NAN;
+        return IGRAPH_SUCCESS;
     }
 
     real_nodes = nodes;    /* implicit cast to igraph_real_t */
@@ -363,6 +379,15 @@ igraph_error_t igraph_centralization_betweenness_tmax(const igraph_t *graph,
     if (graph) {
         directed = directed && igraph_is_directed(graph);
         nodes = igraph_vcount(graph);
+    } else {
+        if (nodes < 0) {
+            IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
+        }
+    }
+
+    if (nodes == 0) {
+        *res = IGRAPH_NAN;
+        return IGRAPH_SUCCESS;
     }
 
     real_nodes = nodes;    /* implicit cast to igraph_real_t */
@@ -497,6 +522,15 @@ igraph_error_t igraph_centralization_closeness_tmax(const igraph_t *graph,
         if (!igraph_is_directed(graph)) {
             mode = IGRAPH_ALL;
         }
+    } else {
+        if (nodes < 0) {
+            IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
+        }
+    }
+
+    if (nodes == 0) {
+        *res = IGRAPH_NAN;
+        return IGRAPH_SUCCESS;
     }
 
     real_nodes = nodes;    /* implicit cast to igraph_real_t */
@@ -524,12 +558,12 @@ igraph_error_t igraph_centralization_closeness_tmax(const igraph_t *graph,
  * a natural scale. As with any eigenvector, their interpretation is
  * invariant to scaling by a constant factor. However, due to how
  * graph-level \em centralization is defined, its value depends on the
- * specific scale/normalization used for vertex-level scores. This is
- * true even when the graph-level centralization itself is normalized
- * by its theoretical maximum value. This function makes the specific
- * choice of scaling vertex-level centrality scores by their maximum
- * (i.e. it uses the ∞-norm). Other normalization choices, such as the
- * 1-norm or 2-norm are not currently implemented.
+ * specific scale/normalization used for vertex-level scores. Which of
+ * two graphs will have a higher eigenvector \em centralization depends
+ * on the choice of normalization for centralities. This function makes
+ * the specific choice of scaling vertex-level centrality scores by their
+ * maximum (i.e. it uses the ∞-norm). Other normalization choices, such
+ * as the 1-norm or 2-norm are not currently implemented.
  *
  * \param graph The input graph.
  * \param vector A vector if you need the node-level eigenvector
@@ -637,20 +671,25 @@ igraph_error_t igraph_centralization_eigenvector_centrality(
  * arguments are considered.
  *
  * </para><para>
- * The most centralized directed structure is the in-star. The most
- * centralized undirected structure is the graph with a single edge.
+ * The most centralized directed structure is assumed to bethe in-star.
+ * The most centralized undirected structure is assumed to be the graph
+ * with a single edge. igraph continues to implement these choices for
+ * historical reason. Keep in mind that neither of these two structures
+ * is connected, which makes their use debatable in the context of
+ * eigenvector centrality calculations. Eigenvector centrality is not
+ * uniquely defined for disconnected structures.
  *
  * </para><para>
  * Note that vertex-level eigenvector centrality scores do not have
  * a natural scale. As with any eigenvector, their interpretation is
  * invariant to scaling by a constant factor. However, due to how
  * graph-level \em centralization is defined, its value depends on the
- * specific scale/normalization used for vertex-level scores. This is
- * true even when the graph-level centralization itself is normalized
- * by its theoretical maximum value. This function makes the specific
- * choice of scaling vertex-level centrality scores by their maximum
- * (i.e. it uses the ∞-norm). Other normalization choices, such as the
- * 1-norm or 2-norm are not currently implemented.
+ * specific scale/normalization used for vertex-level scores. Moreover,
+ * which of two graphs will have a higher eigenvector \em centralization
+ * also depends on the choice of normalization for centralities. This
+ * function makes the specific choice of scaling vertex-level centrality
+ * scores by their maximum (i.e. it uses the ∞-norm). Other normalization
+ * choices, such as the 1-norm or 2-norm are not currently implemented.
  *
  * \param graph A graph object or a null pointer, see the description
  *     above.
@@ -690,6 +729,20 @@ igraph_error_t igraph_centralization_eigenvector_centrality_tmax(
     if (graph) {
         nodes = igraph_vcount(graph);
         directed = directed && igraph_is_directed(graph);
+    } else {
+        if (nodes < 0) {
+            IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
+        }
+    }
+
+    if (nodes == 0) {
+        *res = IGRAPH_NAN;
+        return IGRAPH_SUCCESS;
+    }
+
+    if (nodes == 1) {
+        *res = 0;
+        return IGRAPH_SUCCESS;
     }
 
     if (directed) {

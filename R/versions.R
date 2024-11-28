@@ -135,11 +135,11 @@ warn_version <- function(graph) {
   }
 
   if (pkg_graph_version > their_version) {
-    message(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version\n",
-      "  For now we convert it on the fly..."
-    )
+    cli::cli_inform(c(
+      "This graph was created by an old(er) igraph version.",
+      i = "Call {.fun igraph::upgrade_graph} on it to use with the current igraph version.",
+      "For now we convert it on the fly..."
+    ))
 
     # In-place upgrade:
     # - The igraph element in the igraph_t_idx_env component will be added
