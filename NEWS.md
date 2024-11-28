@@ -41,7 +41,7 @@
 
 - Clarify what type of graph each community detection function supports.
 
-- Improve `read_graph` and `write_graph` documentation.
+- Improve `?read_graph` and `?write_graph` documentation.
 
 - Improve `all_simple_paths()` documentation.
 
