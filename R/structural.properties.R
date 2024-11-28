@@ -2152,8 +2152,8 @@ bfs <- function(
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_warn(
       "1.3.0",
-      "bfs(neimode)",
-      "bfs(mode)"
+      "bfs(neimode = )",
+      "bfs(mode = )"
     )
     if (missing(mode)) {
       mode <- neimode
@@ -2161,7 +2161,7 @@ bfs <- function(
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.1.2", "bfs(father)", "bfs(parent)")
+    lifecycle::deprecate_warn("2.1.2", "bfs(father = )", "bfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
@@ -2347,8 +2347,8 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_warn(
       "1.3.0",
-      "dfs(neimode)",
-      "dfs(mode)"
+      "dfs(neimode = )",
+      "dfs(mode = )"
     )
     if (missing(mode)) {
       mode <- neimode
@@ -2356,7 +2356,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.1.2", "dfs(father)", "dfs(parent)")
+    lifecycle::deprecate_warn("2.1.2", "dfs(father = )", "dfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
