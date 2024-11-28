@@ -8,6 +8,7 @@ bfs(
   graph,
   root,
   mode = c("out", "in", "all", "total"),
+  ...,
   unreachable = TRUE,
   restricted = NULL,
   order = TRUE,
@@ -33,6 +34,8 @@ vertices to start the search from.}
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 ignores edge directions completely. \sQuote{total} is a synonym for
 \sQuote{all}. This argument is ignored for undirected graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{unreachable}{Logical scalar, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If

@@ -2070,6 +2070,7 @@ any_loop <- has_loop_impl
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated
 #'  from igraph 1.3.0; use `mode` instead.
+#' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
 #'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
@@ -2129,6 +2130,7 @@ bfs <- function(
     graph,
     root,
     mode = c("out", "in", "all", "total"),
+    ...,
     unreachable = TRUE,
     restricted = NULL,
     order = TRUE,
@@ -2142,6 +2144,9 @@ bfs <- function(
     rho = parent.frame(),
     neimode = deprecated(),
     father = deprecated()) {
+
+  rlang::check_dots_empty()
+
   ensure_igraph(graph)
 
   if (lifecycle::is_present(neimode)) {
@@ -2274,6 +2279,7 @@ bfs <- function(
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
+#' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
 #'   \item{neimode}{Character scalar. The `mode` argument of the function
@@ -2327,12 +2333,16 @@ bfs <- function(
 #' )
 #'
 dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
+                ...,
                 unreachable = TRUE,
                 order = TRUE, order.out = FALSE,
                 parent = FALSE, dist = FALSE,
                 in.callback = NULL, out.callback = NULL, extra = NULL,
                 rho = parent.frame(), neimode = deprecated(),
                 father = deprecated()) {
+
+  rlang::check_dots_empty()
+
   ensure_igraph(graph)
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_warn(
