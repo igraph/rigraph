@@ -2161,7 +2161,7 @@ bfs <- function(
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.0.4", "bfs(father)", "bfs(parent)")
+    lifecycle::deprecate_warn("2.1.2", "bfs(father)", "bfs(parent)")
     if (missing(parent)) {
       parent <- father
     }
@@ -2231,7 +2231,7 @@ bfs <- function(
     res$dist[is.nan(res$dist)] <- -3
   }
 
-  # Remove this later?
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
   res$father <- res$parent
 
   res
@@ -2356,7 +2356,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.0.4", "dfs(father)", "dfs(parent)")
+    lifecycle::deprecate_warn("2.1.2", "dfs(father)", "dfs(parent)")
     if (missing(parent)) {
       parent <- father
     }
@@ -2405,7 +2405,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     if (dist) names(res$dist) <- V(graph)$name
   }
 
-  # Remove this later?
+  # Remove this later? https://github.com/igraph/rigraph/issues/1576
   res$father <- res$parent
 
   res

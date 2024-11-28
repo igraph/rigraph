@@ -7,7 +7,7 @@
       The `neimode` argument of `dfs()` is deprecated as of igraph 1.3.0.
       i Please use the `mode` argument instead.
       Warning:
-      The `father` argument of `dfs()` is deprecated as of igraph 2.0.4.
+      The `father` argument of `dfs()` is deprecated as of igraph 2.1.2.
       i Please use the `parent` argument instead.
 
 # bfs() works
@@ -69,6 +69,6 @@
       The `neimode` argument of `bfs()` is deprecated as of igraph 1.3.0.
       i Please use the `mode` argument instead.
       Warning:
-      The `father` argument of `bfs()` is deprecated as of igraph 2.0.4.
+      The `father` argument of `bfs()` is deprecated as of igraph 2.1.2.
       i Please use the `parent` argument instead.
 
