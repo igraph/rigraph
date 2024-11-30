@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9905
+
+## Continuous integration
+
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+## Documentation
+
+- Tweak NEWS \[ci skip\].
+
+
 # igraph 2.1.1.9904
 
 ## Continuous integration
