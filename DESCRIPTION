@@ -49,7 +49,7 @@ Suggests:
     digest,
     igraphdata,
     knitr,
-    rgl,
+    rgl (>= 1.3.14),
     rmarkdown,
     scales,
     stats4,
