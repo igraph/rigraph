@@ -8,8 +8,9 @@ runs:
         echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
       shell: bash
 
-    - name: Install GLPK on macOS
+    - name: Install and use GLPK on macOS
       if: runner.os == 'macOS'
       run: |
         brew install glpk
+        echo -e 'CPPFLAGS = -I/opt/homebrew/include\nLDFLAGS = -L/opt/homebrew/lib' | tee ~/.R/Makevars
       shell: bash
