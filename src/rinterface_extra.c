@@ -342,8 +342,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
 
   /* Add graph attributes */
   igraph_integer_t attrno= attr==NULL ? 0 : igraph_vector_ptr_size(attr);
-  SET_VECTOR_ELT(result, 1, PROTECT(NEW_LIST(attrno)));
-  UNPROTECT(1);
+  SET_VECTOR_ELT(result, 1, NEW_LIST(attrno));
   gal=VECTOR_ELT(result, 1);
   PROTECT(names=NEW_CHARACTER(attrno)); px++;
   for (igraph_integer_t i=0; i<attrno; i++) {
