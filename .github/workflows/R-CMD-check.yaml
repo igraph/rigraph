@@ -108,13 +108,14 @@ jobs:
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
           extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
 
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      # Must come after the custom after-install workflow
       - name: Install package
         run: |
           _R_SHLIB_STRIP_=true R CMD INSTALL .
         shell: bash
-
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - id: versions-matrix
         # Only run for pull requests if the base repo is different from the head repo, not for workflow_dispatch if not requested, always run for other events
