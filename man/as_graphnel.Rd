@@ -25,7 +25,7 @@ vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 will be used for this purpose.
 }
 \examples{
-\dontshow{if (rlang::is_installed("graph")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("graph")) withAutoprint(\{ # examplesIf}
 ## Undirected
 g <- make_ring(10)
 V(g)$name <- letters[1:10]

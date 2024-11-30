@@ -1,54 +1,93 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.1.9006
+# igraph 2.1.1.9905
 
 ## Continuous integration
 
-- Install rgl from GitHub for Sanitizer runs (#1579).
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+## Documentation
+
+- Tweak NEWS \[ci skip\].
 
 
-# igraph 2.1.1.9005
-
-## Chore
-
-- Configure the RStudio IDE to use the extra roclets (#1575).
+# igraph 2.1.1.9904
 
 ## Continuous integration
 
-- Work around rgl sanitizer failure (#1578).
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+## Documentation
+
+- Tweak NEWS \[ci skip\].
 
 
-# igraph 2.1.1.9004
+# igraph 2.1.1.9903
+
+## Continuous integration
+
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9902
+
+## Continuous integration
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9901
+
+## Continuous integration
+
+- Sync workflows (#1589).
+
+
+# igraph 2.1.1.9900
+
+## Documentation
+
+- Clarify what type of graph each community detection function supports.
+
+- Improve `?read_graph` and `?write_graph` documentation.
+
+- Improve `all_simple_paths()` documentation.
+
+- `cluster_optimal()` does support directed graphs.
 
 ## Bug fixes
 
 - Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
-
-
-# igraph 2.1.1.9003
-
-## doc
-
-- Improve `all_simple_paths()` documentation.
-
-
-# igraph 2.1.1.9002
-
-## doc
-
-- `cluster_optimal()` does support directed graphs.
-
-
-# igraph 2.1.1.9001
-
-## Chore
-
-- Update .Rbuildignore.
-
-
-# igraph 2.1.1.9000
-
-- Merge branch 'cran-2.1.1'.
 
 
 # igraph 2.1.1

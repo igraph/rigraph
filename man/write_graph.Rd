@@ -20,23 +20,42 @@ to.}
 
 \item{format}{Character string giving the file format. Right now
 \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-\code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
+\code{lgl}, \code{ncol}, \code{leda} and \code{dimacs} are implemented. As of igraph 0.4
 this argument is case insensitive.}
 
 \item{\dots}{Other, format specific arguments, see below.}
 }
 \value{
-A NULL, invisibly.
+A `NULL``, invisibly.
 }
 \description{
 \code{write_graph()} is a general function for exporting graphs to foreign
-file formats, however not many formats are implemented right now.
+file formats. The recommended formats for data exchange are GraphML and GML.
 }
 \section{Edge list format}{
  The \code{edgelist} format is a simple text file,
-with one edge in a line, the two vertex ids separated by a space character.
+with one edge per line, the two zero-based numerical vertex IDs separated
+by a space character. Note that vertices are indexed starting with zero.
 The file is sorted by the first and the second column. This format has no
 additional arguments.
+}
+
+\section{NCOL format}{
+ This format is a plain text edge list in which vertices
+are referred to by name rather than numerical ID. Edge weights may be
+optionally written. Additional parameters:
+\describe{
+\item{names}{The name of a vertex attribute to take vertex names from or
+\code{NULL} to use zero-based numerical IDs.}
+\item{weights}{The name of an edge attribute to take edge weights from or
+\code{NULL} to omit edge weights.}
+}
+}
+
+\section{Pajek format}{
+ The \code{pajek} format is provided for interoperability
+with the Pajek software only. Since the format does not have a formal
+specification, it is not recommended for general data exchange or archival.
 }
 
 \examples{
@@ -66,3 +85,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{foreign}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dimacs_flow}{\code{igraph_write_graph_dimacs_flow()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot}{\code{igraph_write_graph_dot()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{igraph_write_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml}{\code{igraph_write_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml}{\code{igraph_write_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda}{\code{igraph_write_graph_leda()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_lgl}{\code{igraph_write_graph_lgl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_ncol}{\code{igraph_write_graph_ncol()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek}{\code{igraph_write_graph_pajek()}}.}
+

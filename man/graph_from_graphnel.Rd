@@ -39,7 +39,7 @@ attributes of the multiple edges are lost: they are all replaced by the
 attributes of the first of the multiple edges.
 }
 \examples{
-\dontshow{if (rlang::is_installed("graph")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("graph")) withAutoprint(\{ # examplesIf}
 ## Undirected
 g <- make_ring(10)
 V(g)$name <- letters[1:10]

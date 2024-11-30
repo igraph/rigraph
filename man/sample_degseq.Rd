@@ -123,7 +123,7 @@ exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
 all(degree(exp_vl_graph) == exponential_degrees)
 
 ## An example that does not work
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 ## withr::with_seed(11, {
 ## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
 ## })
@@ -168,7 +168,7 @@ powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
 all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 
 ## An example that does not work
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 ## withr::with_seed(2, {
 ##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 ## })
