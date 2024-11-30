@@ -82,7 +82,7 @@ categorical_pal <- function(n) {
 #'
 #' @family palettes
 #' @export
-#' @examplesIf rlang::is_installed("igraphdata")
+#' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
 #' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
@@ -139,7 +139,7 @@ sequential_pal <- function(n) {
 #'
 #' @family palettes
 #' @export
-#' @examplesIf rlang::is_installed("igraphdata")
+#' @examplesIf rlang::is_installed(c("igraphdata", "scales"))
 #' library(igraphdata)
 #' data(foodwebs)
 #' fw <- foodwebs[[1]] %>%
