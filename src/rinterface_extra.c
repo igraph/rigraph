@@ -253,7 +253,6 @@ SEXP R_igraph_get_attr_mode(SEXP graph, SEXP pwhich) {
 
 igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
   igraph_integer_t n = Rf_xlength(input);
-  SEXP names = PROTECT(GET_NAMES(input));
 
   IGRAPH_CHECK(igraph_attribute_combination_init(comb));
   IGRAPH_FINALLY(igraph_attribute_combination_destroy, comb);
@@ -264,10 +263,10 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
     igraph_function_pointer_t func;
 
     /* Name */
-    if (!Rf_isNull(names)) {
-      name = CHAR(STRING_ELT(names, i));
+    if (!Rf_isNull(GET_NAMES(input))) {
+      name = CHAR(STRING_ELT(GET_NAMES(input), i));
     }
-    if (Rf_isNull(names) || strlen(name) == 0) {
+    if (name && strlen(name) == 0) {
       name = NULL;
     }
 
@@ -283,13 +282,12 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
   }
 
   IGRAPH_FINALLY_CLEAN(1);
-  UNPROTECT(1);
   return IGRAPH_SUCCESS;
 }
 
 static SEXP R_igraph_attribute_preserve_list;
 
-void R_igraph_attribute_add_to_preserve_list(SEXP attr) {
+SEXP R_igraph_attribute_add_to_preserve_list(SEXP attr) {
   if (!R_igraph_attribute_preserve_list) {
     // We don't care about freeing this, typically this is just a single node
     R_igraph_attribute_preserve_list = Rf_cons(R_NilValue, R_NilValue);
@@ -299,6 +297,7 @@ void R_igraph_attribute_add_to_preserve_list(SEXP attr) {
   // Create a new node, add it to the head of the list.
   SEXP node = Rf_cons(attr, CDR(R_igraph_attribute_preserve_list));
   SETCDR(R_igraph_attribute_preserve_list, node);
+  return attr;
 }
 
 void R_igraph_attribute_clean_preserve_list(void) {
@@ -320,9 +319,10 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
   int px = 0;
 
   result=PROTECT(NEW_LIST(4));
-  // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
+  // The "preserve list" will be cleared with the next invocation of an igraph function.
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
-  R_igraph_attribute_add_to_preserve_list(result);
+  result = R_igraph_attribute_add_to_preserve_list(result);
+  UNPROTECT(1);
 
   /* Add dummy vector for compatibility with CRAN versions */
   SEXP dummy = NEW_NUMERIC(3);
@@ -338,7 +338,6 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
     SET_VECTOR_ELT(result, i, attr); /* gal, val, eal */
     UNPROTECT(1);
   }
-  UNPROTECT(1);
   graph->attr=result;
 
   /* Add graph attributes */
