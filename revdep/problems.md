@@ -1,178 +1,169 @@
-# manynet
+# pomdp
 
 <details>
 
-* Version: 1.2.6
-* GitHub: https://github.com/stocnet/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2024-10-05 16:40:01 UTC
-* Number of recursive dependencies: 146
+* Version: 1.2.3
+* GitHub: https://github.com/mhahsler/pomdp
+* Source code: https://github.com/cran/pomdp
+* Date/Publication: 2024-05-05 21:10:06 UTC
+* Number of recursive dependencies: 70
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
+Run `revdepcheck::cloud_details(, "pomdp")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      > 
-      > test_check("manynet")
-      Starting 2 test processes
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      
-    ...
-      `expected`: 0.2 0.1 0.1
-      ── Failure ('test-measure_centrality.R:79:3'): two mode eigenvector centrality calculated correctly ──
-      top3(node_eigenvector(test_igr, normalized = TRUE)) (`actual`) not equal to c(0.4505, 0.4248, 0.5) (`expected`).
-      
-        `actual`: 1.3 1.2 1.4
-      `expected`: 0.5 0.4 0.5
-      
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R           1.5Mb
-        tutorials   1.8Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 7 marked UTF-8 strings
-    ```
-
-# simcausal
-
-<details>
-
-* Version: 0.5.6
-* GitHub: https://github.com/osofr/simcausal
-* Source code: https://github.com/cran/simcausal
-* Date/Publication: 2022-10-28 11:52:27 UTC
-* Number of recursive dependencies: 83
-
-Run `revdepcheck::cloud_details(, "simcausal")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Complete output:
-      > ## unit tests will not be done if RUnit is not available
-      > # setwd("..")
-      > # getwd()
-      > # library(RUnit)
-      > if(require("RUnit", quietly=TRUE)) {
-      +     ## --- Setup ---
-      + 
-    ...
-      ℹ Please use `as_directed()` instead. 
-      2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      Execution halted
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘simcausal_vignette.Rnw’ using knitr
-    Error: processing vignette 'simcausal_vignette.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'simcausal_vignette.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `colortbl.sty' not found.
+    Running examples in ‘pomdp-Ex.R’ failed
+    The error most likely occurred in:
     
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.55 \RequirePackage
-                        [T1]{fontenc}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘simcausal_vignette.Rnw’
+    > ### Name: RussianTiger
+    > ### Title: Russian Tiger Problem POMDP Specification
+    > ### Aliases: RussianTiger
+    > ### Keywords: datasets
+    > 
+    > ### ** Examples
+    > 
+    > data("RussianTiger")
+    > RussianTiger
+    POMDP, list - Russian Tiger Problem
+      Discount factor: 1
+      Horizon: Inf epochs
+      Size: 3 states / 4 actions / 3 obs.
+      Start: 0.5, 0.5, 0
+      Solved: FALSE
     
-    SUMMARY: processing the following file failed:
-      ‘simcausal_vignette.Rnw’
+      List components: ‘name’, ‘discount’, ‘horizon’, ‘states’, ‘actions’,
+        ‘observations’, ‘transition_prob’, ‘observation_prob’, ‘reward’,
+        ‘start’, ‘terminal_values’, ‘info’
+    > 
+    > # states, actions, and observations
+    > RussianTiger$states  
+    [1] "tiger-left"  "tiger-right" "done"       
+    > RussianTiger$actions 
+    [1] "listen"     "open-left"  "open-right" "nothing"   
+    > RussianTiger$observations
+    [1] "tiger-left"  "tiger-right" "done"       
+    > 
+    > # reward (-Inf indicates unavailable actions)
+    > RussianTiger$reward
+          action start.state end.state observation value
+    1     listen        <NA>      <NA>        <NA>    -1
+    2    nothing        <NA>      <NA>        <NA>  -Inf
+    3       <NA>        done      <NA>        <NA>  -Inf
+    4    nothing        done      <NA>        <NA>     0
+    5  open-left  tiger-left      <NA>        <NA> -1000
+    6 open-right tiger-right      <NA>        <NA> -1000
+    7  open-left tiger-right      <NA>        <NA>    10
+    8 open-right  tiger-left      <NA>        <NA>    10
+    > 
+    > sapply(RussianTiger$states, FUN = function(s) actions(RussianTiger, s))
+    $`tiger-left`
+    [1] "listen"     "open-left"  "open-right"
     
-    Error: Vignette re-building failed.
+    $`tiger-right`
+    [1] "listen"     "open-left"  "open-right"
+    
+    $done
+    [1] "nothing"
+    
+    > 
+    > plot_transition_graph(RussianTiger, vertex.size = 30, edge.arrow.size = .3, margin = .5)
+    > 
+    > # absorbing states
+    > absorbing_states(RussianTiger)
+     tiger-left tiger-right        done 
+          FALSE       FALSE        TRUE 
+    > 
+    > # solve the problem.
+    > sol <- solve_POMDP(RussianTiger)
+    > policy(sol)
+         tiger-left  tiger-right      done     action
+    1  -1000.000000    10.000000  -2000.00  open-left
+    2   -176.217714     8.567046 -15695.15     listen
+    3    -29.667899     7.113638 -25560.42     listen
+    4     -2.629696     5.544325 -31493.06     listen
+    5      0.000000     0.000000      0.00    nothing
+    6      3.318222     3.318222 -33493.06     listen
+    7      5.544325    -2.629696 -31493.06     listen
+    8      7.113638   -29.667899 -25560.42     listen
+    9      8.567046  -176.217714 -15695.15     listen
+    10    10.000000 -1000.000000  -2000.00 open-right
+    > plot_policy_graph(sol)
+    Error in `igraph::dfs()`:
+    ! `...` must be empty.
+    ✖ Problematic argument:
+    • unreach = FALSE
+    Backtrace:
+         ▆
+      1. └─pomdp::plot_policy_graph(sol)
+      2.   └─pomdp:::.plot.igraph(...)
+      3.     └─pomdp::policy_graph(...)
+      4.       └─pomdp:::.policy_graph(...)
+      5.         ├─igraph::delete_vertices(...)
+      6.         │ └─igraph:::as_igraph_vs(graph, v)
+      7.         ├─base::setdiff(...)
+      8.         │ └─base::as.vector(y)
+      9.         └─igraph::dfs(policy_graph, root = initial_pg_node, unreach = FALSE)
+     10.           └─rlang::check_dots_empty()
+     11.             └─rlang:::action_dots(...)
+     12.               ├─base (local) try_dots(...)
+     13.               └─rlang (local) action(...)
     Execution halted
     ```
 
-# skynet
-
-<details>
-
-* Version: 1.4.3
-* GitHub: https://github.com/ropensci/skynet
-* Source code: https://github.com/cran/skynet
-* Date/Publication: 2022-06-17 13:00:02 UTC
-* Number of recursive dependencies: 98
-
-Run `revdepcheck::cloud_details(, "skynet")` for more info
-
-</details>
-
-## Newly broken
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
     Running the tests in ‘tests/testthat.R’ failed.
     Complete output:
-      > library(testthat)
-      > library(skynet)
+      > library("testthat")
+      > library("pomdp")
       > 
-      > test_check("skynet")
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
+      > test_check("pomdp")
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 104 ]
       
-      ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
-    ...
-       14. │   └─base::lapply(args, rlang::eval_tidy, data = data_mask)
-       15. │     └─rlang (local) FUN(X[[i]], ...)
-       16. └─igraph (local) from(V(x)[y])
-       17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
-       18.     └─lifecycle:::deprecate_stop0(msg)
-       19.       └─rlang::cnd_signal(...)
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Error ('test-solve_POMDP.R:9:1'): (code run outside of `test_that()`) ───────
+      <rlib_error_dots_nonempty/rlib_error_dots/rlang_error/error/condition>
+      Error in `igraph::dfs(policy_graph, root = initial_pg_node, unreach = FALSE)`: `...` must be empty.
+      ✖ Problematic argument:
+      • unreach = FALSE
+      Backtrace:
+           ▆
+        1. └─pomdp::plot_policy_graph(sol) at test-solve_POMDP.R:9:1
+        2.   └─pomdp:::.plot.igraph(...)
+        3.     └─pomdp::policy_graph(...)
+        4.       └─pomdp:::.policy_graph(...)
+        5.         ├─igraph::delete_vertices(...)
+        6.         │ └─igraph:::as_igraph_vs(graph, v)
+        7.         ├─base::setdiff(...)
+        8.         │ └─base::as.vector(y)
+        9.         └─igraph::dfs(policy_graph, root = initial_pg_node, unreach = FALSE)
+       10.           └─rlang::check_dots_empty()
+       11.             └─rlang:::action_dots(...)
+       12.               ├─base (local) try_dots(...)
+       13.               └─rlang (local) action(...)
       
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 104 ]
       Error: Test failures
       Execution halted
     ```
 
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘gridworlds.Rmd’ using rmarkdown
+    ```
+
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking installed package size ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘maps’
-      All declared Imports should be used.
+      installed size is  7.3Mb
+      sub-directories of 1Mb or more:
+        libs   5.7Mb
     ```
 
