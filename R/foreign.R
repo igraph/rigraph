@@ -151,6 +151,9 @@ write.graph.fromraw <- function(buffer, file) {
 #' @keywords graphs
 #' @family foreign
 #' @export
+#' @cdocs igraph_read_graph_dimacs_flow igraph_read_graph_dl igraph_read_graph_edgelist
+#' @cdocs igraph_read_graph_gml igraph_read_graph_graphdb igraph_read_graph_graphml
+#' @cdocs igraph_read_graph_lgl igraph_read_graph_ncol igraph_read_graph_pajek
 read_graph <- function(file, format = c(
                          "edgelist", "pajek", "ncol", "lgl",
                          "graphml", "dimacs", "graphdb", "gml", "dl"
@@ -184,21 +187,34 @@ read_graph <- function(file, format = c(
 #' Writing the graph to a file in some format
 #'
 #' `write_graph()` is a general function for exporting graphs to foreign
-#' file formats, however not many formats are implemented right now.
+#' file formats. The recommended formats for data exchange are GraphML and GML.
 #'
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
 #'   to.
 #' @param format Character string giving the file format. Right now
 #'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
-#'   `lgl`, `ncol` and `dimacs` are implemented. As of igraph 0.4
+#'   `lgl`, `ncol`, `leda` and `dimacs` are implemented. As of igraph 0.4
 #'   this argument is case insensitive.
 #' @param \dots Other, format specific arguments, see below.
-#' @return A NULL, invisibly.
+#' @return A `NULL``, invisibly.
 #' @section Edge list format: The `edgelist` format is a simple text file,
-#' with one edge in a line, the two vertex ids separated by a space character.
+#' with one edge per line, the two zero-based numerical vertex IDs separated
+#' by a space character. Note that vertices are indexed starting with zero.
 #' The file is sorted by the first and the second column. This format has no
 #' additional arguments.
+#' @section NCOL format: This format is a plain text edge list in which vertices
+#' are referred to by name rather than numerical ID. Edge weights may be
+#' optionally written. Additional parameters:
+#' \describe{
+#' \item{names}{The name of a vertex attribute to take vertex names from or
+#' `NULL` to use zero-based numerical IDs.}
+#' \item{weights}{The name of an edge attribute to take edge weights from or
+#' `NULL` to omit edge weights.}
+#' }
+#' @section Pajek format: The `pajek` format is provided for interoperability
+#' with the Pajek software only. Since the format does not have a formal
+#' specification, it is not recommended for general data exchange or archival.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [read_graph()]
 #' @references Adai AT, Date SV, Wieland S, Marcotte EM. LGL: creating a map of
@@ -207,6 +223,9 @@ read_graph <- function(file, format = c(
 #' @family foreign
 #' @export
 #' @keywords graphs
+#' @cdocs igraph_write_graph_dimacs_flow igraph_write_graph_dot igraph_write_graph_edgelist
+#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda 
+#' @cdocs igraph_write_graph_lgl igraph_write_graph_ncol igraph_write_graph_pajek
 #' @examples
 #'
 #' g <- make_ring(10)

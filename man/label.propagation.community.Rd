@@ -14,7 +14,7 @@ label.propagation.community(
 )
 }
 \arguments{
-\item{graph}{The input graph. Note that the algorithm wsa originally
+\item{graph}{The input graph. Note that the algorithm was originally
 defined for undirected graphs. You are advised to set \sQuote{mode} to
 \code{all} if you pass a directed graph here to treat it as
 undirected.}

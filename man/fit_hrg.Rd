@@ -48,7 +48,7 @@ from a given HRG, if this is given in the \code{hrg()} argument and the
 \code{as.hclust()} provided in this package.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 
 ## A graph with two dense groups
 g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)

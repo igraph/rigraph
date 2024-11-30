@@ -47,7 +47,7 @@ argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 first.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 
 ## A graph with two dense groups
 g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
