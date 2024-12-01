@@ -1,5 +1,40 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9906
+
+## Bug fixes
+
+- `adjacent_vertices()` and `incident_edges()` are now correct if the `"return.vs.es"` option is `FALSE` (@stibu81, #1605, #1606).
+
+- Fix protection errors reported by rchk (#1592).
+
+## Continuous integration
+
+- Change `Makevars` only after installation of R.
+
+- Use GLPK on macOS.
+
+- Add required rgl version (#1584).
+
+- Install GLPK on macOS.
+
+- Bring back extra workflow.
+
+- Import from actions-sync, check carefully (#1600).
+
+- Remove covr, handled elsewhere.
+
+- Fix extra workflow.
+
+- Remove noise.
+
+- Sync workflows (#1589).
+
+## Documentation
+
+- Tweak NEWS \[ci skip\].
+
+
 # igraph 2.1.1.9905
 
 ## Continuous integration
