@@ -1,13 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.1.9907
-
-## Chore
-
-- Build-ignore rchk artifacts.
-
-
-# igraph 2.1.1.9906
+# igraph 2.1.2
 
 ## Bug fixes
 
@@ -15,107 +8,7 @@
 
 - Fix protection errors reported by rchk (#1592).
 
-## Continuous integration
-
-- Change `Makevars` only after installation of R.
-
-- Use GLPK on macOS.
-
-- Add required rgl version (#1584).
-
-- Install GLPK on macOS.
-
-- Bring back extra workflow.
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-## Documentation
-
-- Tweak NEWS \[ci skip\].
-
-
-# igraph 2.1.1.9905
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-## Documentation
-
-- Tweak NEWS \[ci skip\].
-
-
-# igraph 2.1.1.9904
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-## Documentation
-
-- Tweak NEWS \[ci skip\].
-
-
-# igraph 2.1.1.9903
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9902
-
-## Continuous integration
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9901
-
-## Continuous integration
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9900
+- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
 
 ## Documentation
 
@@ -127,9 +20,9 @@
 
 - `cluster_optimal()` does support directed graphs.
 
-## Bug fixes
+## Testing
 
-- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
+- Test handling of `"return.vs.es"` in several functions (@stibu81, #1610).
 
 
 # igraph 2.1.1
