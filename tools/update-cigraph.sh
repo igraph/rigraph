@@ -21,36 +21,56 @@ if [ -n "$(git -C "$upstream_dir" status --porcelain)" ]; then
   echo "Warning: working directory $upstream_dir not clean"
 fi
 
+vendor_dir=src/vendor/cigraph
+repo_org=igraph
+repo_name=igraph
+
 commit=$(git -C "$upstream_dir" rev-parse HEAD)
-echo "Importing commit $commit"
 
-base=$(git log -n 1 --format="%s" -- src/vendor/cigraph | sed -r 's#^.*igraph/igraph@(.*)$|^.*$#\1#')
+base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}'.'${repo_name}'@([0-9a-f]+)$/{s//\1/;p;}' | head -n 1)
 
-rm -rf src/vendor/cigraph
-mkdir -p src/vendor/cigraph
+message=
 
-git clone "$upstream_dir" src/vendor/cigraph
+for commit in $commit; do
+  echo "Importing commit $commit"
 
-cmake -Ssrc/vendor/cigraph -Bsrc/vendor/cigraph/build
+  rm -rf ${vendor_dir}
+  mkdir -p ${vendor_dir}
 
-mv src/vendor/cigraph/build/include/igraph_version.h src/vendor/
+  git clone "$upstream_dir" ${vendor_dir}
 
-rm -rf src/vendor/cigraph/.git src/vendor/cigraph/.github src/vendor/cigraph/doc src/vendor/cigraph/examples src/vendor/cigraph/fuzzing src/vendor/cigraph/tests src/vendor/cigraph/tools src/vendor/cigraph/build
+  cmake -S${vendor_dir} -B${vendor_dir}/build
 
-if [ $(git status --porcelain -- src/vendor | wc -l) -le 0 ]; then
+  mv ${vendor_dir}/build/include/igraph_version.h src/vendor/
+
+  rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
+
+  make -f Makefile-cigraph
+
+  R -q -e 'cpp11::cpp_register()'
+
+  # Always vendor tags
+  if [ $(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -) -eq 0 ]; then
+    message="chore: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
+    break
+  fi
+
+  if [ $(git status --porcelain -- ${vendor_dir} | wc -l) -gt 1 ]; then
+    message="chore: Update vendored sources to ${repo_org}/${repo_name}@$commit"
+    break
+  fi
+done
+
+if [ "$message" = "" ]; then
   echo "No changes."
-  git checkout -- src/vendor
+  git checkout -- ${vendor_dir}
   exit 0
 fi
 
-make -f Makefile-cigraph
-
-R -q -e 'cpp11::cpp_register()'
-
-git add src/vendor src/*.mk R/aaa-auto.R src/cpp11.cpp src/rinterface.c
+git add .
 
 (
-  echo "chore: Update vendored sources to igraph/igraph@$commit"
+  echo "$message"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | sed -r 's%(#[0-9]+)%igraph/igraph\1%g'
+  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%${repo_org}/${repo_name}\1%g'
 ) | git commit --file /dev/stdin
