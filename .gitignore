@@ -20,6 +20,4 @@ cran
 /docs
 /compile_commands.json
 /.cache
-build/
-libs/
-libsonly/
+/rchk
