@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9905</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9906</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,31 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.1.1.9906" id="igraph-2119906">igraph 2.1.1.9906<a class="anchor" aria-label="anchor" href="#igraph-2119906"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-1-1-9906">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-1-9906"></a></h3>
+<ul><li><p><code><a href="../reference/adjacent_vertices.html">adjacent_vertices()</a></code> and <code><a href="../reference/incident_edges.html">incident_edges()</a></code> are now correct if the <code>"return.vs.es"</code> option is <code>FALSE</code> (<a href="https://github.com/stibu81" class="external-link">@stibu81</a>, <a href="https://github.com/igraph/rigraph/issues/1605" class="external-link">#1605</a>, <a href="https://github.com/igraph/rigraph/issues/1606" class="external-link">#1606</a>).</p></li>
+<li><p>Fix protection errors reported by rchk (<a href="https://github.com/igraph/rigraph/issues/1592" class="external-link">#1592</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-1-1-9906">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-1-9906"></a></h3>
+<ul><li><p>Change <code>Makevars</code> only after installation of R.</p></li>
+<li><p>Use GLPK on macOS.</p></li>
+<li><p>Add required rgl version (<a href="https://github.com/igraph/rigraph/issues/1584" class="external-link">#1584</a>).</p></li>
+<li><p>Install GLPK on macOS.</p></li>
+<li><p>Bring back extra workflow.</p></li>
+<li><p>Import from actions-sync, check carefully (<a href="https://github.com/igraph/rigraph/issues/1600" class="external-link">#1600</a>).</p></li>
+<li><p>Remove covr, handled elsewhere.</p></li>
+<li><p>Fix extra workflow.</p></li>
+<li><p>Remove noise.</p></li>
+<li><p>Sync workflows (<a href="https://github.com/igraph/rigraph/issues/1589" class="external-link">#1589</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-1-1-9906">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-1-9906"></a></h3>
+<ul><li>Tweak NEWS [ci skip].</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.1.9905" id="igraph-2119905">igraph 2.1.1.9905<a class="anchor" aria-label="anchor" href="#igraph-2119905"></a></h2>
 <div class="section level3">
