@@ -78,17 +78,78 @@ test_that("delete_vertices works", {
 test_that("neighbors works", {
   g <- sample_gnp(100, 20 / 100)
   al <- as_adj_list(g, mode = "all")
+  expect_s3_class(neighbors(g, v = 1, mode = "out"), "igraph.vs")
+  for (i in seq_along(al)) {
+    n <- neighbors(g, v = i, mode = "out")
+    expect_setequal(sort(n), al[[i]])
+  }
+
+  # test with return.vs.es = FALSE
+  on.exit(try(igraph_options(old)), add = TRUE)
+  old <- igraph_options(return.vs.es = FALSE)
+
+  al <- as_adj_list(g, mode = "all")
+  expect_s3_class(neighbors(g, v = 1, mode = "out"), NA)
   for (i in seq_along(al)) {
     n <- neighbors(g, v = i, mode = "out")
     expect_setequal(sort(n), al[[i]])
   }
 })
 
+
 test_that("neighbors prints an error for an empty input vector", {
   g <- make_tree(10)
   expect_error(neighbors(g, numeric()), "No vertex was specified")
 })
 
+
+test_that("adjacent_vertices works", {
+  g <- sample_gnp(100, 20 / 100)
+  al <- as_adj_list(g, mode = "all")
+  test_vertices <- c(1, 7, 38, 75, 99)
+  adj_vertices <- adjacent_vertices(g, v = test_vertices)
+  expect_s3_class(adj_vertices[[1]], "igraph.vs")
+  for (i in seq_along(test_vertices)) {
+    expect_setequal(adj_vertices[[i]], al[[test_vertices[i]]])
+  }
+
+  # test with return.vs.es = FALSE
+  on.exit(try(igraph_options(old)), add = TRUE)
+  old <- igraph_options(return.vs.es = FALSE)
+
+  al <- as_adj_list(g, mode = "all")
+  test_vertices <- c(1, 7, 38, 75, 99)
+  adj_vertices <- adjacent_vertices(g, v = test_vertices)
+  expect_s3_class(adj_vertices[[1]], NA)
+  for (i in seq_along(test_vertices)) {
+    expect_setequal(adj_vertices[[i]], al[[test_vertices[i]]])
+  }
+
+})
+
+
+test_that("incident_edges works", {
+  g <- sample_gnp(100, 20 / 100)
+  el <- as_adj_edge_list(g, mode = "all")
+  test_vertices <- c(1, 7, 38, 75, 99)
+  inc_edges <- incident_edges(g, v = test_vertices)
+  expect_s3_class(inc_edges[[1]], "igraph.es")
+  for (i in seq_along(test_vertices)) {
+    expect_setequal(inc_edges[[i]], el[[test_vertices[i]]])
+  }
+
+  # test with return.vs.es = FALSE
+  on.exit(try(igraph_options(old)), add = TRUE)
+  old <- igraph_options(return.vs.es = FALSE)
+
+  el <- as_adj_edge_list(g, mode = "all")
+  test_vertices <- c(1, 7, 38, 75, 99)
+  inc_edges <- incident_edges(g, v = test_vertices)
+  expect_s3_class(inc_edges[[1]], NA)
+  for (i in seq_along(test_vertices)) {
+    expect_setequal(inc_edges[[i]], el[[test_vertices[i]]])
+  }
+})
 
 test_that("delete_edges works", {
   g <- graph_from_literal(A:B:C - D:E:F, D - E - F)

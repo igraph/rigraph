@@ -1,6 +1,7 @@
 test_that("as_adj_list works", {
   g <- sample_gnp(50, 2 / 50)
   al <- as_adj_list(g)
+  expect_s3_class(al[[1]], "igraph.vs")
   g2 <- graph_from_adj_list(al, mode = "all")
   expect_isomorphic(g, g2)
   expect_true(graph.isomorphic.vf2(g, g2,
@@ -11,6 +12,7 @@ test_that("as_adj_list works", {
   ####
 
   el <- as_adj_edge_list(g)
+  expect_s3_class(el[[1]], "igraph.es")
   for (i in 1:vcount(g)) {
     a <- E(g)[.inc(i)]
     expect_equal(length(a), length(el[[i]]), ignore_attr = TRUE)
@@ -40,6 +42,7 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
 
   g <- sample_gnp(50, 2 / 50)
   al <- as_adj_list(g)
+  expect_s3_class(al[[1]], NA)
   g2 <- graph_from_adj_list(al, mode = "all")
   expect_isomorphic(g, g2)
   expect_true(graph.isomorphic.vf2(g, g2,
