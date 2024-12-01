@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.1.9907
+
+## Chore
+
+- Build-ignore rchk artifacts.
+
+
 # igraph 2.1.1.9906
 
 ## Bug fixes
