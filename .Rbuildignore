@@ -56,6 +56,4 @@
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
-^build$
-^libs$
-^libsonly$
+^rchk$
