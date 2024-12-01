@@ -10,35 +10,7 @@
 
 - Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
 
-## Chore
-
-- Build-ignore rchk artifacts.
-
-## Continuous integration
-
-- Change `Makevars` only after installation of R.
-
-- Use GLPK on macOS.
-
-- Add required rgl version (#1584).
-
-- Install GLPK on macOS.
-
-- Bring back extra workflow.
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
 ## Documentation
-
-- Tweak NEWS \[ci skip\].
 
 - Clarify what type of graph each community detection function supports.
 
@@ -47,6 +19,10 @@
 - Improve `all_simple_paths()` documentation.
 
 - `cluster_optimal()` does support directed graphs.
+
+## Testing
+
+- Test handling of `"return.vs.es"` in several functions (@stibu81, #1610).
 
 
 # igraph 2.1.1
