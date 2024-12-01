@@ -58,3 +58,4 @@
 ^man/handle_vertex_type_arg\.Rd$
 ^build$
 ^libs$
+^libsonly$
