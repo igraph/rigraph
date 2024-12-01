@@ -654,9 +654,9 @@ incident_edges <- function(graph, v,
   on.exit(.Call(R_igraph_finalizer))
 
   res <- .Call(R_igraph_incident_edges, graph, vv, mode)
+  res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, `+`, 1)
     res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
   }
 
