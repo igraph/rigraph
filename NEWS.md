@@ -1,19 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.1.9907
-
-## Chore
-
-- Build-ignore rchk artifacts.
-
-
-# igraph 2.1.1.9906
+# igraph 2.1.2
 
 ## Bug fixes
 
 - `adjacent_vertices()` and `incident_edges()` are now correct if the `"return.vs.es"` option is `FALSE` (@stibu81, #1605, #1606).
 
 - Fix protection errors reported by rchk (#1592).
+
+- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
+
+## Chore
+
+- Build-ignore rchk artifacts.
 
 ## Continuous integration
 
@@ -41,84 +40,6 @@
 
 - Tweak NEWS \[ci skip\].
 
-
-# igraph 2.1.1.9905
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-## Documentation
-
-- Tweak NEWS \[ci skip\].
-
-
-# igraph 2.1.1.9904
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-## Documentation
-
-- Tweak NEWS \[ci skip\].
-
-
-# igraph 2.1.1.9903
-
-## Continuous integration
-
-- Import from actions-sync, check carefully (#1600).
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9902
-
-## Continuous integration
-
-- Remove covr, handled elsewhere.
-
-- Fix extra workflow.
-
-- Remove noise.
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9901
-
-## Continuous integration
-
-- Sync workflows (#1589).
-
-
-# igraph 2.1.1.9900
-
-## Documentation
-
 - Clarify what type of graph each community detection function supports.
 
 - Improve `?read_graph` and `?write_graph` documentation.
@@ -126,10 +47,6 @@
 - Improve `all_simple_paths()` documentation.
 
 - `cluster_optimal()` does support directed graphs.
-
-## Bug fixes
-
-- Fix the incorrect handling of the `sample` parameter in `sample_motifs()` and ensure that the default `sample.size` is integer (#1568).
 
 
 # igraph 2.1.1
