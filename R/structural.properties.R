@@ -2304,9 +2304,13 @@ bfs <- function(
 #' @examples
 #'
 #' ## A graph with two separate trees
-#' dfs(make_tree(10) %du% make_tree(10),
-#'   root = 1, "out",
-#'   TRUE, TRUE, TRUE, TRUE
+#' dfs(
+#'   graph = make_tree(10) %du% make_tree(10),
+#'   root = 1, mode = "out",
+#'   unreachable = TRUE,
+#'   order = TRUE,
+#'   order.out = TRUE,
+#'   parent = TRUE
 #' )
 #'
 #' ## How to use a callback
@@ -2318,8 +2322,9 @@ bfs <- function(
 #'   cat("out:", paste(collapse = ", ", data), "\n")
 #'   FALSE
 #' }
-#' tmp <- dfs(make_tree(10),
-#'   root = 1, "out",
+#' tmp <- dfs(
+#'   graph = make_tree(10),
+#'   root = 1, mode = "out",
 #'   in.callback = f.in, out.callback = f.out
 #' )
 #'
@@ -2327,7 +2332,8 @@ bfs <- function(
 #' f.out <- function(graph, data, extra) {
 #'   data["vid"] == 1
 #' }
-#' tmp <- dfs(make_tree(10) %du% make_tree(10),
+#' tmp <- dfs(
+#'   graph = make_tree(10) %du% make_tree(10),
 #'   root = 1,
 #'   out.callback = f.out
 #' )
