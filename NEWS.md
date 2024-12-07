@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9000
+
+## Continuous integration
+
+- Use larger retry count for lock-threads workflow (#1615).
+
+
 # igraph 2.1.2
 
 ## Bug fixes
