@@ -1,0 +1,114 @@
+---
+title: "Improving igraph interface: current deprecations"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+To provide a more consistent interface, part of igraph functions or arguments are slowly but consistently being deprecated.
+You can follow along the current level of deprecations in the table below.
+
+Please update your codebases as soon as you can, be they packages or scripts.
+To do that, run your code in a session where you installed the latest igraph version, possibly even the development version that you can install from R-universe:
+
+```r
+options(
+  repos = c(
+    igraph = 'https://igraph.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'
+  )
+)
+install.packages('igraph')
+```
+
+And pay attention to any message emitted through the lifecycle package.
+
+
+Thank you for your cooperation!
+Direct any question to us in the [igraph issue tracker](https://github.com/igraph/rigraph/issues).
+
+
+```{r, echo=FALSE}
+clean_arg <- function(arg) {
+  arg <- sub("^'", "", arg)
+  arg <- sub("'$", "", arg)
+  arg <- sub('^"', '', arg)
+  arg <- sub('"$', '', arg)
+  arg
+}
+
+link_new <- function(new) {
+  # downlit can't link something like "igraph::assortativity(values =)"
+  new_str <- sub("\\(.*", "", new)
+  url <- downlit::autolink_url(sprintf("igraph::%s", new_str))
+  if (is.na(url)) {
+    new
+  } else {
+    sprintf('<a href="%s">%s</a>', url, new)
+  }
+}
+
+parse_lifecycle_call <- function(symbol_function_call) {
+  level <- sub("deprecate_", "", xml2::xml_text(symbol_function_call))
+  level <- switch(
+    level,
+    soft = "1 -- soft",
+    warn = "2 -- warn",
+    stop = "3 -- stop"
+  )
+  
+  args <- purrr::keep(
+    xml2::xml_siblings(xml2::xml_parent(symbol_function_call)),
+    \(x) xml2::xml_name(x) == "expr"
+  )
+  version <- xml2::xml_text(args[[1]])
+  old <- xml2::xml_text(args[[2]])
+  new <- if (length(args) > 2) xml2::xml_text(args[[3]]) else ""
+  
+  new_text <- link_new(clean_arg(new))
+  
+  if (!grepl("<a", new_text)) {
+    old_text <- link_new(clean_arg(old))
+  } else {
+    old_text <- clean_arg(old)
+  }
+  
+  tibble::tibble(
+    level = level,
+    version = clean_arg(version),
+    old = old_text,
+    new  = new_text
+  )
+}
+parse_script <- function(path) {
+  lifecycle_calls <- path |>
+    parse(keep.source = TRUE) |>
+    xmlparsedata::xml_parse_data(pretty = TRUE) |>
+    xml2::read_xml() |>
+    xml2::xml_find_all(
+    ".//SYMBOL_FUNCTION_CALL[contains(text(), 'deprecate_')]"
+  ) 
+  
+  if (length(lifecycle_calls) == 0) return(NULL)
+  
+  lifecycle_calls_info <-  purrr::map(lifecycle_calls, parse_lifecycle_call)
+
+  do.call(rbind, lifecycle_calls_info)
+}
+
+scripts <- fs::dir_ls(here::here("R"), glob = "*.R")
+
+table <- do.call(
+  rbind,
+  purrr::map(scripts, parse_script), 
+  args = list(make.row.names = FALSE)
+)
+
+knitr::table(table)
+
+```
