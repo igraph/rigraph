@@ -4,15 +4,14 @@
 
 |package   |version |error |warning |note |
 |:---------|:-------|:-----|:-------|:----|
-|bnlearn   |5.0.1   |1     |        |     |
 |datapack  |1.4.1   |1     |        |     |
+|multinma  |0.7.2   |1     |        |     |
 |streamDAG |?       |      |        |     |
 
-## New problems (3)
+## New problems (2)
 
-|package   |version |error  |warning |note |
-|:---------|:-------|:------|:-------|:----|
-|[manynet](problems.md#manynet)|1.2.6   |__+1__ |        |3    |
-|[simcausal](problems.md#simcausal)|0.5.6   |__+1__ |1       |     |
-|[skynet](problems.md#skynet)|1.4.3   |__+1__ |        |1    |
+|package  |version |error  |warning |note |
+|:--------|:-------|:------|:-------|:----|
+|[ssifs](problems.md#ssifs)|1.0.2   |__+2__ |        |     |
+|[tilemaps](problems.md#tilemaps)|0.2.0   |__+2__ |        |1    |
 
