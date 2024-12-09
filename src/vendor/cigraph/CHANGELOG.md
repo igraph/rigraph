@@ -2,6 +2,8 @@
 
 ## [master]
 
+## [0.10.15]
+
 ### Added
 
  - `igraph_bitset_update()` copies the contents of one bitset into another (experimental function).
@@ -12,6 +14,7 @@
  - `igraph_strvector_swap_elements()` swaps two strings in an `igraph_strvector_t`.
  - `igraph_find_cycle()` finds a single cycle in a graph, if it exists (experimental function).
  - `igraph_feedback_vertex_set()` finds a minimum feedback vertex set in a directed or undirected graph (experimental function).
+ - `igraph_simple_cycles()` and `igraph_simple_cycles_callback()` find all simple cycles in a graph, optionally with an upper bound on the cycle length (experimental functions). Many thanks to Tim Bernhard @GenieTim for contributing this functionality in #2181.
 
 ### Changed
 
@@ -36,6 +39,8 @@
  - `igraph_centralization_degree_tmax()`, `igraph_centralization_betweenness_tmax()`, `igraph_centralization_closeness_tmax()`, and `igraph_centralization_eigenvector_centrality_tmax()` now validate their `nodes` parameter.
  - `igraph_centralization_degree_tmax()`, `igraph_centralization_betweenness_tmax()`, `igraph_centralization_closeness_tmax()`, and `igraph_centralization_eigenvector_centrality_tmax()` now return NaN for zero-vertex graphs. Previously they would return invalid values.
  - `igraph_centralization_eigenvector_centrality_tmax()` now returns 0 for the undirected singleton graph. Previous it would return an invalid value.
+ - `igraph_motifs_randesu_estimate()` now validates the sample size.
+ - `igraph_bipartite_projection_size()` now validates the bipartite `types` vector.
 
 ### Deprecated
 
@@ -1442,7 +1447,8 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
-[master]: https://github.com/igraph/igraph/compare/0.10.13..master
+[master]: https://github.com/igraph/igraph/compare/0.10.15..master
+[0.10.15]: https://github.com/igraph/igraph/compare/0.10.13..0.10.15
 [0.10.13]: https://github.com/igraph/igraph/compare/0.10.12..0.10.13
 [0.10.12]: https://github.com/igraph/igraph/compare/0.10.11..0.10.12
 [0.10.11]: https://github.com/igraph/igraph/compare/0.10.10..0.10.11
