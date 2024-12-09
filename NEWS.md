@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9002
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#1619).
+
+
 # igraph 2.1.2.9001
 
 ## Continuous integration
