@@ -6,8 +6,8 @@ test_that("graphNEL conversion works", {
   g <- sample_gnp(100, 5 / 100)
   N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
-  gi <- graph.isomorphic.vf2(g, g2)
-  expect_true(gi$iso)
+  gi <- isomorphic(g, g2, method = "vf2")
+  expect_true(gi)
   expect_equal(gi$map12, 1:vcount(g))
   expect_equal(gi$map21, 1:vcount(g))
 
