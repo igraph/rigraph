@@ -1269,16 +1269,16 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   if (!is.null(minz)) minz <- as.numeric(minz)
   if (!is.null(maxz)) maxz <- as.numeric(maxz)
   if (lifecycle::is_present(coolexp)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(coolexp = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(coolexp = )")
   }
   if (lifecycle::is_present(maxdelta)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(maxdelta = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(maxdelta = )")
   }
   if (lifecycle::is_present(area)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(area = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(area = )")
   }
   if (lifecycle::is_present(repulserad)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_fr(repulserad = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(repulserad = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1568,16 +1568,16 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   if (!is.null(maxz)) maxz <- as.numeric(maxz)
 
   if (lifecycle::is_present(niter)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(niter = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(niter = )")
   }
   if (lifecycle::is_present(sigma)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(sigma = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(sigma = )")
   }
   if (lifecycle::is_present(initemp)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(initemp = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(initemp = )")
   }
   if (lifecycle::is_present(coolexp)) {
-    lifecycle::deprecate_warn("0.8.0", "layout_with_kk(coolexp = )")
+    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(coolexp = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
