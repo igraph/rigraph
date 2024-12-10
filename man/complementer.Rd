@@ -37,7 +37,7 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-graph.isomorphic(gu, make_full_graph(vcount(g)))
+isomorphic(gu, make_full_graph(vcount(g)))
 
 }
 \seealso{

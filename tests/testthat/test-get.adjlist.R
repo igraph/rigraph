@@ -4,10 +4,11 @@ test_that("as_adj_list works", {
   expect_s3_class(al[[1]], "igraph.vs")
   g2 <- graph_from_adj_list(al, mode = "all")
   expect_isomorphic(g, g2)
-  expect_true(graph.isomorphic.vf2(g, g2,
+  expect_true(isomorphic(g, g2,
+    method = "vf2",
     vertex.color1 = 1:vcount(g),
     vertex.color2 = 1:vcount(g2)
-  )$iso)
+  ))
 
   ####
 
@@ -45,10 +46,11 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   expect_s3_class(al[[1]], NA)
   g2 <- graph_from_adj_list(al, mode = "all")
   expect_isomorphic(g, g2)
-  expect_true(graph.isomorphic.vf2(g, g2,
+  expect_true(isomorphic(g, g2,
+    method = "vf2",
     vertex.color1 = 1:vcount(g),
     vertex.color2 = 1:vcount(g2)
-  )$iso)
+  ))
 
   ####
 

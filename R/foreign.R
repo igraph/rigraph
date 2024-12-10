@@ -224,7 +224,7 @@ read_graph <- function(file, format = c(
 #' @export
 #' @keywords graphs
 #' @cdocs igraph_write_graph_dimacs_flow igraph_write_graph_dot igraph_write_graph_edgelist
-#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda 
+#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda
 #' @cdocs igraph_write_graph_lgl igraph_write_graph_ncol igraph_write_graph_pajek
 #' @examples
 #'
@@ -566,7 +566,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [read_graph()], [graph.isomorphic.vf2()]
+#' @seealso [read_graph()], [isomorphic()]
 #' @references M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 #' of graphs and its use for benchmarking graph isomorphism algorithms,
 #' *Pattern Recognition Letters*, Volume 24, Issue 8 (May 2003)
@@ -579,7 +579,7 @@ write.graph.dot <- function(graph, file, ...) {
 #'   which=10, compressed=TRUE)
 #' g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
 #'   which=10, compressed=TRUE)
-#' graph.isomorphic.vf2(g, g2)	\% should be TRUE
+#' isomorphic(g, g2, method = "vf2")	\% should be TRUE
 #' g3 <- graph_from_graphdb(url=paste(sep="/",
 #'                               "http://cneurocvs.rmki.kfki.hu",
 #'                               "graphdb/gzip/iso/bvg/b06m",
