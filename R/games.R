@@ -1763,8 +1763,6 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #'
 #' @param n1 Integer scalar, the number of bottom vertices.
 #' @param n2 Integer scalar, the number of top vertices.
-#' @param type Character scalar, the type of the graph, \sQuote{gnp} creates a
-#'   \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
 #' @param directed Logical scalar, whether to create a directed graph. See also
@@ -1776,6 +1774,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #'   mutual edges. If this argument is \sQuote{all}, then each edge direction is
 #'   considered independently and mutual edges might be generated. This argument
 #'   is ignored for undirected graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @examples
 #'
 #' ## empty graph

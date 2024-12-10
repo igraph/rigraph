@@ -30,6 +30,8 @@ sample_bipartite_gnp(
 
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical scalar, whether to create a directed graph. See also
 the \code{mode} argument.}
 
@@ -42,9 +44,6 @@ considered independently and mutual edges might be generated. This argument
 is ignored for undirected graphs.}
 
 \item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs.}
-
-\item{type}{Character scalar, the type of the graph, \sQuote{gnp} creates a
-\eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.}
 }
 \description{
 Generate bipartite graphs using the Erdős-Rényi model
