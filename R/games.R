@@ -1789,6 +1789,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' ## directed bipartite graph, G(n,m)
 #' sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
 #'
+#' @family games
 #' @export
 sample_bipartite_gnm <- function(n1, n2, m,
                                 ...,
