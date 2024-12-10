@@ -265,7 +265,10 @@ callaway.traits.game <- function(nodes, types, edge.per.step = 1, type.dist = re
 #' @keywords internal
 #' @export
 bipartite.random.game <- function(n1, n2, type = c("gnp", "gnm"), p, m, directed = FALSE, mode = c("out", "in", "all")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bipartite.random.game()", "sample_bipartite()")
+  lifecycle::deprecate_warn(
+    "2.0.0", "bipartite.random.game()",
+    details = "Use sample_bipartite_gnp() or sample_bipartite_gnm()"
+  )
   sample_bipartite(n1 = n1, n2 = n2, type = type, p = p, m = m, directed = directed, mode = mode)
 } # nocov end
 
@@ -1695,13 +1698,8 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
 #' Bipartite random graphs
 #'
-#' Generate bipartite graphs using the Erdős-Rényi model
-#'
-#' Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
-#' \eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
-#' In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
-#' with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
-#' uniformly choose \eqn{m} edges to realize.
+#' `r lifecycle::badge("deprecated")` Generate bipartite graphs using the Erdős-Rényi model.
+#' Use [`sample_bipartite_gnm()`] and [`sample_bipartite_gnp()`] instead.
 #'
 #' @param n1 Integer scalar, the number of bottom vertices.
 #' @param n2 Integer scalar, the number of top vertices.
@@ -1725,65 +1723,26 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' @family games
 #' @export
 #' @keywords graphs
-#' @examples
-#'
-#' ## empty graph
-#' sample_bipartite(10, 5, p = 0)
-#'
-#' ## full graph
-#' sample_bipartite(10, 5, p = 1)
-#'
-#' ## random bipartite graph
-#' sample_bipartite(10, 5, p = .1)
-#'
-#' ## directed bipartite graph, G(n,m)
-#' sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
-#'
 sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
                              directed = FALSE, mode = c("out", "in", "all")) {
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
+
   type <- igraph.match.arg(type)
-  if (!missing(p)) {
-    p <- as.numeric(p)
-  }
-  if (!missing(m)) {
-    m <- as.numeric(m)
-  }
-  directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
-  )
 
-  if (type == "gnp" && missing(p)) {
-    stop("Connection probability `p' is not given for Gnp graph")
-  }
-  if (type == "gnp" && !missing(m)) {
-    cli::cli_warn("Number of edges {.arg m} is ignored for Gnp graph.")
-  }
-  if (type == "gnm" && missing(m)) {
-    stop("Number of edges `m' is not given for Gnm graph")
-  }
-  if (type == "gnm" && !missing(p)) {
-    cli::cli_warn("Connection probability {.arg p} is ignored for Gnp graph.")
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
   if (type == "gnp") {
-    res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
-    res <- set_vertex_attr(res$graph, "type", value = res$types)
-    res$name <- "Bipartite Gnp random graph"
-    res$p <- p
+    lifecycle::deprecate_soft(
+      "2.1.3",
+      "sample_bipartite()",
+      "sample_gnp()"
+    )
+    sample_bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
   } else if (type == "gnm") {
-    res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
-    res <- set_vertex_attr(res$graph, "type", value = res$types)
-    res$name <- "Bipartite Gnm random graph"
-    res$m <- m
+    lifecycle::deprecate_soft(
+      "2.1.3",
+      "sample_bipartite()",
+      "sample_gnm()"
+    )
+    sample_bipartite_gnm(n1, n2, m, directed = directed, mode = mode)
   }
-
-  res
 }
 
 #' @rdname sample_bipartite
@@ -1791,6 +1750,107 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 #' @export
 bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
+#' Bipartite random graphs
+#'
+#' Generate bipartite graphs using the Erdős-Rényi model
+#'
+#' Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
+#' \eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
+#' In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
+#' with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
+#' uniformly choose \eqn{m} edges to realize.
+#'
+#'
+#' @param n1 Integer scalar, the number of bottom vertices.
+#' @param n2 Integer scalar, the number of top vertices.
+#' @param type Character scalar, the type of the graph, \sQuote{gnp} creates a
+#'   \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
+#' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
+#' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
+#' @param directed Logical scalar, whether to create a directed graph. See also
+#'   the `mode` argument.
+#' @param mode Character scalar, specifies how to direct the edges in directed
+#'   graphs. If it is \sQuote{out}, then directed edges point from bottom
+#'   vertices to top vertices. If it is \sQuote{in}, edges point from top
+#'   vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
+#'   mutual edges. If this argument is \sQuote{all}, then each edge direction is
+#'   considered independently and mutual edges might be generated. This argument
+#'   is ignored for undirected graphs.
+#' @examples
+#'
+#' ## empty graph
+#' sample_bipartite_gnp(10, 5, p = 0)
+#'
+#' ## full graph
+#' sample_bipartite_gnp(10, 5, p = 1)
+#'
+#' ## random bipartite graph
+#' sample_bipartite_gnp(10, 5, p = .1)
+#'
+#' ## directed bipartite graph, G(n,m)
+#' sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
+#'
+#' @export
+sample_bipartite_gnm <- function(n1, n2, m,
+                                ...,
+                                directed = FALSE,
+                                mode = c("out", "in", "all")) {
+  check_dots_empty()
+
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
+
+  m <- as.numeric(m)
+
+  directed <- as.logical(directed)
+
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+
+  res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
+  res <- set_vertex_attr(res$graph, "type", value = res$types)
+  res$name <- "Bipartite Gnm random graph"
+  res$m <- m
+
+  res
+
+}
+#' @rdname sample_bipartite_gnm
+#' @export
+sample_bipartite_gnp <- function(n1, n2, p,
+                                ...,
+                                directed = FALSE,
+                                mode = c("out", "in", "all")) {
+  check_dots_empty()
+
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
+
+  p <- as.numeric(p)
+
+  directed <- as.logical(directed)
+
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+
+  res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
+  res <- set_vertex_attr(res$graph, "type", value = res$types)
+  res$name <- "Bipartite Gnp random graph"
+  res$p <- p
+
+  res
+
+}
 
 #' Sample stochastic block model
 #'

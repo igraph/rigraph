@@ -48,29 +48,8 @@ is ignored for undirected graphs.}
 A bipartite igraph graph.
 }
 \description{
-Generate bipartite graphs using the Erdős-Rényi model
-}
-\details{
-Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
-\eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
-In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
-with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
-uniformly choose \eqn{m} edges to realize.
-}
-\examples{
-
-## empty graph
-sample_bipartite(10, 5, p = 0)
-
-## full graph
-sample_bipartite(10, 5, p = 1)
-
-## random bipartite graph
-sample_bipartite(10, 5, p = .1)
-
-## directed bipartite graph, G(n,m)
-sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
-
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Generate bipartite graphs using the Erdős-Rényi model.
+Use \code{\link[=sample_bipartite_gnm]{sample_bipartite_gnm()}} and \code{\link[=sample_bipartite_gnp]{sample_bipartite_gnp()}} instead.
 }
 \seealso{
 Random graph models (games)
