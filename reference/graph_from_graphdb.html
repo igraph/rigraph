@@ -9,7 +9,7 @@ of graph isomorphism testing algothitms."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,7 @@ g &lt;- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
   which=10, compressed=TRUE)
 g2 &lt;- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
   which=10, compressed=TRUE)
-graph.isomorphic.vf2(g, g2)	% should be TRUE
+isomorphic(g, g2, method = "vf2")	% should be TRUE
 g3 &lt;- graph_from_graphdb(url=paste(sep="/",
                               "http://cneurocvs.rmki.kfki.hu",
                               "graphdb/gzip/iso/bvg/b06m",
@@ -161,7 +161,7 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="read_graph.html">read_graph()</a></code>, <code><a href="isomorphic.html">graph.isomorphic.vf2()</a></code></p>
+    <div class="dont-index"><p><code><a href="read_graph.html">read_graph()</a></code>, <code><a href="isomorphic.html">isomorphic()</a></code></p>
 <p>Foreign format readers
 <code><a href="read_graph.html">read_graph</a>()</code>,
 <code><a href="write_graph.html">write_graph</a>()</code></p></div>
