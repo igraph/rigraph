@@ -53,6 +53,7 @@ and evaluation. \emph{Social Networks}, 14, 5--61.
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

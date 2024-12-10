@@ -40,7 +40,7 @@ test_that("bipartite_projection works", {
 test_that("bipartite_projection can calculate only one projection", {
   withr::local_seed(42)
 
-  g <- sample_bipartite(5, 10, p = .3)
+  g <- sample_bipartite_gnp(5, 10, p = .3)
   proj <- bipartite_projection(g)
   proj1 <- bipartite_projection(g, which = "false")
   proj2 <- bipartite_projection(g, which = "true")
