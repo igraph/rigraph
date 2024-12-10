@@ -78,7 +78,7 @@ g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
   which=10, compressed=TRUE)
 g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
   which=10, compressed=TRUE)
-graph.isomorphic.vf2(g, g2)	\% should be TRUE
+isomorphic(g, g2, method = "vf2")	\% should be TRUE
 g3 <- graph_from_graphdb(url=paste(sep="/",
                               "http://cneurocvs.rmki.kfki.hu",
                               "graphdb/gzip/iso/bvg/b06m",
@@ -92,7 +92,7 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
 \emph{Pattern Recognition Letters}, Volume 24, Issue 8 (May 2003)
 }
 \seealso{
-\code{\link[=read_graph]{read_graph()}}, \code{\link[=graph.isomorphic.vf2]{graph.isomorphic.vf2()}}
+\code{\link[=read_graph]{read_graph()}}, \code{\link[=isomorphic]{isomorphic()}}
 
 Foreign format readers
 \code{\link{read_graph}()},
