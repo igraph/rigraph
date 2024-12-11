@@ -127,3 +127,7 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
 void R_check_int_scalar(SEXP value);
 void R_check_real_scalar(SEXP value);
 void R_check_bool_scalar(SEXP value);
+
+igraph_integer_t R_get_int_scalar(SEXP sexp, int index);
+igraph_real_t R_get_real_scalar(SEXP sexp, int index);
+igraph_bool_t R_get_bool_scalar(SEXP sexp, int index);
