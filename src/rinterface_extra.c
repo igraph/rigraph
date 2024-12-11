@@ -99,6 +99,11 @@ void R_check_bool_scalar(SEXP value)
   }
 }
 
+void igraph_vector_int_destroy_pv(void* pv_ptr)
+{
+  igraph_vector_int_destroy((igraph_vector_int_t*) pv_ptr);
+}
+
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
     PROTECT(s);
