@@ -120,6 +120,18 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
         else if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
     } while (0)
 
+// This is a variant of IGRAPH_FINALLY that satisfies UBSAN checks.
+#define IGRAPH_FINALLY_PV(func, ptr) \
+    do { \
+        /* the following branch makes the compiler check the compatibility of \
+         * func and ptr to detect cases when we are accidentally invoking an \
+         * incorrect destructor function with the pointer */ \
+        if (0) { func(ptr); } \
+        IGRAPH_FINALLY_REAL((func##_pv), (ptr)); \
+    } while (0)
+
+void igraph_vector_int_destroy_pv(void* pv_ptr);
+
 #define IGRAPH_R_CHECK_INT(v) R_check_int_scalar(v)
 #define IGRAPH_R_CHECK_REAL(v) R_check_real_scalar(v)
 #define IGRAPH_R_CHECK_BOOL(v) R_check_bool_scalar(v)
