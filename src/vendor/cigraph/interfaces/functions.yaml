@@ -2524,7 +2524,7 @@ igraph_eulerian_path:
     DEPS: edge_res ON graph, vertex_res ON graph
 
 igraph_eulerian_cycle:
-    PARAMS: GRAPH graph, OPTIONAL OUT EDGE_INDICES edge_res, OPTIONAL OUT VERTEX_INDICES vertex_res
+    PARAMS: GRAPH graph, OPTIONAL OUT EDGE_INDICES edge_res, OPTIONAL OUT VERTEX_INDICES_PV vertex_res
     DEPS: edge_res ON graph, vertex_res ON graph
 
 #######################################
