@@ -7,8 +7,7 @@
 independence.number(graph)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs are considered as undirected,
-loop edges and multiple edges are ignored.}
+\item{graph}{The input graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
