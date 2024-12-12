@@ -5,7 +5,7 @@
     Condition
       Warning:
       `sample_bipartite()` was deprecated in igraph 2.1.3.
-      i Please use `sample_gnp()` instead.
+      i Please use `sample_bipartite_gnp()` instead.
 
 ---
 
@@ -14,5 +14,5 @@
     Condition
       Warning:
       `sample_bipartite()` was deprecated in igraph 2.1.3.
-      i Please use `sample_gnm()` instead.
+      i Please use `sample_bipartite_gnm()` instead.
 
