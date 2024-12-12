@@ -1748,7 +1748,33 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
 #' @export
-bipartite <- function(...) constructor_spec(sample_bipartite, ...)
+bipartite <- function(...) {
+  if (type == "gnp") {
+    lifecycle::deprecate_soft(
+      "2.1.3",
+      "bipartite()",
+      "bipartite_gnp()"
+    )
+    bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
+  } else if (type == "gnm") {
+    lifecycle::deprecate_soft(
+      "2.1.3",
+      "bipartite()",
+      "bipartite_gnm()"
+    )
+    bipartite_gnm(n1, n2, m, directed = directed, mode = mode)
+  }
+
+}
+#' @rdname sample_bipartite_gnm
+#' @param ... Passed to `sample_bipartite_gnm()`.
+#' @export
+bipartite_gnm <- function(...) constructor_spec(sample_bipartite_gnm, ...)
+
+#' @rdname sample_bipartite_gnp
+#' @param ... Passed to `sample_bipartite_gnp()`.
+#' @export
+bipartite_gnp <- function(...) constructor_spec(sample_bipartite_gnp, ...)
 
 #' Bipartite random graphs
 #'
