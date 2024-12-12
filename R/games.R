@@ -1732,14 +1732,14 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
     lifecycle::deprecate_soft(
       "2.1.3",
       "sample_bipartite()",
-      "sample_gnp()"
+      "sample_bipartite_gnp()"
     )
     sample_bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
   } else if (type == "gnm") {
     lifecycle::deprecate_soft(
       "2.1.3",
       "sample_bipartite()",
-      "sample_gnm()"
+      "sample_bipartite_gnm()"
     )
     sample_bipartite_gnm(n1, n2, m, directed = directed, mode = mode)
   }
