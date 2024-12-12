@@ -500,7 +500,8 @@ centr_eigen <- function(graph,
     graph = graph,
     directed = directed,
     options = options,
-    normalized = normalized
+    normalized = normalized,
+    scale = TRUE
   )
 }
 
@@ -548,6 +549,7 @@ centr_eigen_tmax <- function(graph = NULL,
   centralization_eigenvector_centrality_tmax_impl(
     graph = graph,
     nodes = nodes,
-    directed = directed
+    directed = directed,
+    scale = TRUE
   )
 }
