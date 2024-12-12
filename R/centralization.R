@@ -534,7 +534,7 @@ centr_eigen <- function(graph,
 centr_eigen_tmax <- function(graph = NULL,
                              nodes = 0,
                              directed = FALSE,
-                               scale = deprecated()) {
+                             scale = deprecated()) {
 
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
