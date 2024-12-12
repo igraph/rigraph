@@ -1766,6 +1766,7 @@ bipartite <- function(...) {
   }
 
 }
+
 #' @rdname sample_bipartite_gnm
 #' @param ... Passed to `sample_bipartite_gnm()`.
 #' @export

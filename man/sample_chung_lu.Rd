@@ -168,10 +168,10 @@ with sharply specified degrees. \code{\link[=sample_gnp]{sample_gnp()}} creates 
 fixed connection probability \eqn{p} between all vertex pairs.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
-\code{\link{sample_bipartite_gnm}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
