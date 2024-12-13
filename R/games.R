@@ -1755,14 +1755,14 @@ bipartite <- function(...) {
       "bipartite()",
       "bipartite_gnp()"
     )
-    bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
+    bipartite_gnp(...)
   } else if (type == "gnm") {
     lifecycle::deprecate_soft(
       "2.1.3",
       "bipartite()",
       "bipartite_gnm()"
     )
-    bipartite_gnm(n1, n2, m, directed = directed, mode = mode)
+    bipartite_gnm(...)
   }
 
 }
