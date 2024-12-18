@@ -685,7 +685,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' gc <- complementer(g)
 #' gu <- union(g, gc)
 #' gu
-#' graph.isomorphic(gu, make_full_graph(vcount(g)))
+#' isomorphic(gu, make_full_graph(vcount(g)))
 #'
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
