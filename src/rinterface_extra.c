@@ -107,7 +107,7 @@ igraph_integer_t R_get_int_scalar(SEXP sexp, R_xlen_t index)
   return (igraph_integer_t)REAL(sexp)[index];
 }
 
-igraph_real_t R_get_real_scalar(SEXP sexp, int index)
+igraph_real_t R_get_real_scalar(SEXP sexp, R_xlen_t index)
 {
   if (Rf_length(sexp) < index + 1)
     igraph_errorf("Wrong index. Attempt to get element with index %" PRIuPTR " from vector of length %" PRIuPTR ".",
@@ -115,7 +115,7 @@ igraph_real_t R_get_real_scalar(SEXP sexp, int index)
   return (igraph_real_t)REAL(sexp)[index];
 }
 
-igraph_bool_t R_get_bool_scalar(SEXP sexp, int index)
+igraph_bool_t R_get_bool_scalar(SEXP sexp, R_xlen_t index)
 {
   if (Rf_length(sexp) < index + 1)
     igraph_errorf("Wrong index. Attempt to get element with index %" PRIuPTR " from vector of length %" PRIuPTR ".",
