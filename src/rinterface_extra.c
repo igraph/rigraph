@@ -99,7 +99,7 @@ void R_check_bool_scalar(SEXP value)
   }
 }
 
-igraph_integer_t R_get_int_scalar(SEXP sexp, int index)
+igraph_integer_t R_get_int_scalar(SEXP sexp, R_xlen_t index)
 {
   if (Rf_length(sexp) < index + 1)
     igraph_errorf("Wrong index. Attempt to get element with index %" PRIuPTR " from vector of length %" PRIuPTR ".",
