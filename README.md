@@ -56,6 +56,12 @@ See the [Installation FAQ](https://r.igraph.org/articles/installation-troublesho
 
 See the [igraph package's website](https://r.igraph.org/) for the complete manual.
 
+A good entry point is the "Get started" vignette, in [English](https://r.igraph.org/articles/igraph.html) or [Spanish](https://r.igraph.org/articles/igraph_ES.html).
+
+For an overview of igraph's functionality see the [reference index](https://r.igraph.org/reference/index.html).
+It includes [experimental functions](https://r.igraph.org/reference/index.html#experimental-functions) on which we especially welcome feedback 
+(but feedback on any function is appreciated)!
+
 ## Contributions
 
 Please read our
