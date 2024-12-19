@@ -21,8 +21,8 @@ given.}
 \item{directed}{logical scalar, whether to consider edge directions
 during the calculation. Ignored in undirected graphs.}
 
-\item{scale}{Whether to rescale the eigenvector centrality scores,
-such that the maximum score is one.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
+eigenvector centralization requires normalized eigenvector centrality scores.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
