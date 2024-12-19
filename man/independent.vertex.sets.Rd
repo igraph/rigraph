@@ -7,8 +7,7 @@
 independent.vertex.sets(graph, min = NULL, max = NULL)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs are considered as undirected,
-loop edges and multiple edges are ignored.}
+\item{graph}{The input graph.}
 
 \item{min}{Numeric constant, limit for the minimum size of the independent
 vertex sets to find. \code{NULL} means no limit.}

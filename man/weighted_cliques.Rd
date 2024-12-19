@@ -67,6 +67,7 @@ weighted_clique_num(g)
 \seealso{
 Other cliques: 
 \code{\link{cliques}()},
+\code{\link{is_complete}()},
 \code{\link{ivs}()}
 }
 \author{
