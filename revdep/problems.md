@@ -1,178 +1,157 @@
-# manynet
+# ssifs
 
 <details>
 
-* Version: 1.2.6
-* GitHub: https://github.com/stocnet/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2024-10-05 16:40:01 UTC
-* Number of recursive dependencies: 146
+* Version: 1.0.2
+* GitHub: https://github.com/georgiosseitidis/ssifs
+* Source code: https://github.com/cran/ssifs
+* Date/Publication: 2023-05-12 09:00:03 UTC
+* Number of recursive dependencies: 94
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
+Run `revdepcheck::cloud_details(, "ssifs")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      > 
-      > test_check("manynet")
-      Starting 2 test processes
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      
-    ...
-      `expected`: 0.2 0.1 0.1
-      ── Failure ('test-measure_centrality.R:79:3'): two mode eigenvector centrality calculated correctly ──
-      top3(node_eigenvector(test_igr, normalized = TRUE)) (`actual`) not equal to c(0.4505, 0.4248, 0.5) (`expected`).
-      
-        `actual`: 1.3 1.2 1.4
-      `expected`: 0.5 0.4 0.5
-      
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R           1.5Mb
-        tutorials   1.8Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 7 marked UTF-8 strings
-    ```
-
-# simcausal
-
-<details>
-
-* Version: 0.5.6
-* GitHub: https://github.com/osofr/simcausal
-* Source code: https://github.com/cran/simcausal
-* Date/Publication: 2022-10-28 11:52:27 UTC
-* Number of recursive dependencies: 83
-
-Run `revdepcheck::cloud_details(, "simcausal")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Complete output:
-      > ## unit tests will not be done if RUnit is not available
-      > # setwd("..")
-      > # getwd()
-      > # library(RUnit)
-      > if(require("RUnit", quietly=TRUE)) {
-      +     ## --- Setup ---
-      + 
-    ...
-      ℹ Please use `as_directed()` instead. 
-      2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      Execution halted
+    Running examples in ‘ssifs-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: Alcohol
+    > ### Title: Stochastic Search Inconsistency Factor Selection of brief
+    > ###   alcohol interventions.
+    > ### Aliases: Alcohol
+    > 
+    > ### ** Examples
+    > 
+    > data(Alcohol)
+    > 
+    > TE <- Alcohol$TE
+    > seTE <- Alcohol$seTE
+    > studlab <- Alcohol$studyid
+    > treat1 <- Alcohol$treat2
+    > treat2 <- Alcohol$treat1
+    > 
+    > # Stochastic Search Inconsistency Factor Selection using as reference treatment AO-CT and the
+    > # design-by-treatment method for the specification of the Z matrix.
+    > 
+    > m <- ssifs(TE, seTE, treat1, treat2, studlab, ref = "AO-CT",
+    + M = 1000, B = 100, M_pilot = 1000, B_pilot = 100)
+    Error:
+    ! The `neimode` argument of `dfs()` was deprecated in igraph 1.3.0 and
+      is now defunct.
+    ℹ Please use the `mode` argument instead.
+    Backtrace:
+         ▆
+      1. └─ssifs::ssifs(...)
+      2.   └─ssifs:::connet(data)
+      3.     └─ssifs:::subnet(data)
+      4.       ├─base::suppressWarnings(RevEcoR::KosarajuSCC(t))
+      5.       │ └─base::withCallingHandlers(...)
+      6.       └─RevEcoR::KosarajuSCC(t)
+      7.         └─igraph::graph.dfs(g, root = Source.node, neimode = "out", unreachable = FALSE)
+      8.           └─igraph::dfs(...)
+      9.             └─lifecycle::deprecate_stop("1.3.0", "dfs(neimode)", "dfs(mode)")
+     10.               └─lifecycle:::deprecate_stop0(msg)
+     11.                 └─rlang::cnd_signal(...)
+    Execution halted
     ```
 
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
-    --- re-building ‘simcausal_vignette.Rnw’ using knitr
-    Error: processing vignette 'simcausal_vignette.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'simcausal_vignette.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `colortbl.sty' not found.
+    --- re-building ‘An_introduction_to_ssifs.Rmd’ using rmarkdown
     
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.55 \RequirePackage
-                        [T1]{fontenc}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘simcausal_vignette.Rnw’
+    Quitting from lines 133-135 [unnamed-chunk-4] (An_introduction_to_ssifs.Rmd)
+    Error: processing vignette 'An_introduction_to_ssifs.Rmd' failed with diagnostics:
+    The `neimode` argument of `dfs()` was deprecated in igraph 1.3.0 and is
+    now defunct.
+    ℹ Please use the `mode` argument instead.
+    --- failed re-building ‘An_introduction_to_ssifs.Rmd’
     
     SUMMARY: processing the following file failed:
-      ‘simcausal_vignette.Rnw’
+      ‘An_introduction_to_ssifs.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
     ```
 
-# skynet
+# tilemaps
 
 <details>
 
-* Version: 1.4.3
-* GitHub: https://github.com/ropensci/skynet
-* Source code: https://github.com/cran/skynet
-* Date/Publication: 2022-06-17 13:00:02 UTC
-* Number of recursive dependencies: 98
+* Version: 0.2.0
+* GitHub: https://github.com/kaerosen/tilemaps
+* Source code: https://github.com/cran/tilemaps
+* Date/Publication: 2020-07-10 04:20:02 UTC
+* Number of recursive dependencies: 72
 
-Run `revdepcheck::cloud_details(, "skynet")` for more info
+Run `revdepcheck::cloud_details(, "tilemaps")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(skynet)
-      > 
-      > test_check("skynet")
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
-      
-      ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
-    ...
-       14. │   └─base::lapply(args, rlang::eval_tidy, data = data_mask)
-       15. │     └─rlang (local) FUN(X[[i]], ...)
-       16. └─igraph (local) from(V(x)[y])
-       17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
-       18.     └─lifecycle:::deprecate_stop0(msg)
-       19.       └─rlang::cnd_signal(...)
-      
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
-      Error: Test failures
-      Execution halted
+    Running examples in ‘tilemaps-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: create_island
+    > ### Title: Create a Tile for an Island
+    > ### Aliases: create_island
+    > 
+    > ### ** Examples
+    > 
+    > library(sf)
+    Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
+    > northeast <- governors[c(6,7,17,18,19,27,28,30,36,37,43),]
+    > tile_map <- generate_map(northeast$geometry, square = FALSE)
+    Error:
+    ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and
+      is now defunct.
+    ℹ Please use the `mode` argument instead.
+    Backtrace:
+        ▆
+     1. └─tilemaps::generate_map(northeast$geometry, square = FALSE)
+     2.   └─igraph::bfs(neighbor_graph, 1, neimode = "all", unreachable = FALSE)
+     3.     └─lifecycle::deprecate_stop("1.3.0", "bfs(neimode)", "bfs(mode)")
+     4.       └─lifecycle:::deprecate_stop0(msg)
+     5.         └─rlang::cnd_signal(...)
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘tilemaps.Rmd’ using rmarkdown
+    
+    Quitting from lines 33-41 [unnamed-chunk-2] (tilemaps.Rmd)
+    Error: processing vignette 'tilemaps.Rmd' failed with diagnostics:
+    ℹ In argument: `tile_map = generate_map(geometry, square = FALSE,
+      flat_topped = TRUE)`.
+    Caused by error:
+    ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and
+      is now defunct.
+    ℹ Please use the `mode` argument instead.
+    --- failed re-building ‘tilemaps.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘tilemaps.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘maps’
+    Namespace in Imports field not imported from: ‘lwgeom’
       All declared Imports should be used.
     ```
 
