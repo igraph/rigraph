@@ -11272,7 +11272,7 @@ SEXP R_igraph_eulerian_cycle(SEXP graph) {
   if (0 != igraph_vector_int_init(&c_vertex_res, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_res);
+  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &c_vertex_res);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_eulerian_cycle(&c_graph, &c_edge_res, &c_vertex_res));
 
