@@ -9,7 +9,7 @@ disjoint vertex sets."><meta property="og:image" content="https://r.igraph.org/l
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,10 +79,11 @@ disjoint vertex sets.</p>
 Thus first the vertices in the second, third, etc. graphs are relabeled to
 have completely disjoint graphs. Then a simple union is created. This
 function can also be used via the <code>%du%</code> operator.</p>
-<p><code>graph.disjont.union</code> handles graph, vertex and edge attributes.  In
-particular, it merges vertex and edge attributes using the basic <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>
+<p><code>disjoint_union()</code> handles graph, vertex and edge attributes.  In
+particular, it merges vertex and edge attributes using the <code><a href="https://vctrs.r-lib.org/reference/vec_c.html" class="external-link">vctrs::vec_c()</a></code>
 function. For graphs that lack some vertex/edge attribute, the corresponding
-values in the new graph are set to <code>NA</code>. Graph attributes are simply
+values in the new graph are set to a missing value (<code>NA</code> for scalar attributes,
+<code>NULL</code> for list attributes). Graph attributes are simply
 copied to the result. If this would result a name clash, then they are
 renamed by adding suffixes: _1, _2, etc.</p>
 <p>Note that if both graphs have vertex names (i.e. a <code>name</code> vertex
@@ -132,10 +133,10 @@ undirected.</p>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g1</span> <span class="op">%du%</span> <span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8f1a28d UN-- 20 19 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 515449a UN-- 20 19 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mode (g/c), center (g/n), mutual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8f1a28d (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 515449a (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a--b a--c a--d a--e a--f a--g a--h a--i a--j k--l l--m m--n n--o o--p p--q</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] q--r r--s s--t k--t</span>
 </code></pre></div>

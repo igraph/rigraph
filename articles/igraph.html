@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,9 +145,9 @@ directed graph: that is to say to create the same graph as above:</p>
 <p>We can print the graph to get a summary of its nodes and edges:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 418d15b UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH 86b00c5 UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span>
-<span><span class="co">## + edges from 418d15b (vertex names):</span></span>
+<span><span class="co">## + edges from 86b00c5 (vertex names):</span></span>
 <span><span class="co">## [1] 1--2 1--5</span></span></code></pre>
 <p>This means: <strong>U</strong>ndirected <strong>N</strong>amed graph
 with <strong>10</strong> vertices and <strong>2</strong> edges, with the
@@ -159,7 +159,7 @@ edges, which is convenient for large graphs with millions of edges:</p>
 <hr>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 418d15b UN-- 10 2 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH 86b00c5 UN-- 10 2 -- </span></span>
 <span><span class="co">## + attr: name (v/c)</span></span></code></pre>
 <p>The same function <code><a href="../reference/make_graph.html">make_graph()</a></code> can create some notable
 graphs by just specifying their name. For example you can create the
@@ -240,9 +240,9 @@ provides a mechanism for chaining commands with the operator
 <span>  <span class="fu"><a href="../reference/add_vertices.html">add_vertices</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/add_edges.html">add_edges</a></span><span class="op">(</span>edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">39</span>, <span class="fl">39</span>, <span class="fl">40</span>, <span class="fl">40</span>, <span class="fl">38</span>, <span class="fl">40</span>, <span class="fl">37</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 8440cf2 U--- 40 86 -- Zachary</span></span>
+<pre><code><span><span class="co">## IGRAPH 6bf373b U--- 40 86 -- Zachary</span></span>
 <span><span class="co">## + attr: name (g/c)</span></span>
-<span><span class="co">## + edges from 8440cf2:</span></span>
+<span><span class="co">## + edges from 6bf373b:</span></span>
 <span><span class="co">##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12</span></span>
 <span><span class="co">## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14</span></span>
 <span><span class="co">## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10</span></span>
@@ -334,7 +334,7 @@ graph each single time, for instance <code><a href="../reference/make_tree.html"
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_tree.html">make_tree</a></span><span class="op">(</span><span class="fl">127</span>, <span class="fl">2</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">graph1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 4bd172b U--- 127 126 -- Tree</span></span>
+<pre><code><span><span class="co">## IGRAPH bff894b U--- 127 126 -- Tree</span></span>
 <span><span class="co">## + attr: name (g/c), children (g/n), mode (g/c)</span></span></code></pre>
 <p>This generates a regular tree graph with 127 vertices, each vertex
 having two children. No matter how many times you call
@@ -351,7 +351,7 @@ they produce a different graph each time. For instance
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_grg.html">sample_grg</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">graph1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH fda2420 U--- 100 524 -- Geometric random graph</span></span>
+<pre><code><span><span class="co">## IGRAPH 85b5713 U--- 100 524 -- Geometric random graph</span></span>
 <span><span class="co">## + attr: name (g/c), radius (g/n), torus (g/l)</span></span></code></pre>
 <p>This generates a geometric random graph: <em>n</em> points are chosen
 randomly and uniformly inside the unit square and pairs of points closer
@@ -406,7 +406,7 @@ and just as readable as <code><a href="../reference/graph_attr.html">graph_attr(
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">is_formal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 8b23770 UN-- 7 9 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH cf8ef58 UN-- 7 9 -- </span></span>
 <span><span class="co">## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)</span></span></code></pre>
 <p><code><a href="../reference/V.html">V()</a></code> and <code><a href="../reference/E.html">E()</a></code> are the standard way to obtain
 a sequence of all vertices and edges, respectively. This assigns an
@@ -450,7 +450,7 @@ use:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Alejandra"</span>, <span class="st">"Bruno"</span>, <span class="st">"Carmina"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 7/7 vertices, named, from 8b23770:</span></span>
+<pre><code><span><span class="co">## + 7/7 vertices, named, from cf8ef58:</span></span>
 <span><span class="co">## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim</span></span></code></pre>
 <p>To delete attributes:</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -554,29 +554,31 @@ the <code><a href="https://rdrr.io/r/base/which.min.html" class="external-link">
 IDs but not even ones, using the <code><a href="../reference/V.html">V()</a></code> function:</p>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/graph.full.html">graph.full</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">##   object 'type_sum.accel' not found</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: `graph.full()` was deprecated in igraph 2.1.0.</span></span>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `make_full_graph()` instead.</span></span>
 <span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
 <span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">only_odd_vertices</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">2</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">only_odd_vertices</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 5</span></span></code></pre>
 <p>Of course, it is possible to select vertices or edges by positional
 indices:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">]</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/10 vertices, from d6073d6:</span></span>
+<pre><code><span><span class="co">## + 3/10 vertices, from c779da8:</span></span>
 <span><span class="co">## [1] 2 3 7</span></span></code></pre>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="va">seq</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">]</span> <span class="co"># filtering an existing vertex set</span></span>
 <span><span class="va">seq</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 2/10 vertices, from d6073d6:</span></span>
+<pre><code><span><span class="co">## + 2/10 vertices, from c779da8:</span></span>
 <span><span class="co">## [1] 2 7</span></span></code></pre>
 <p>Selecting a vertex that does not exist results in an error:</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="st">"foo"</span>, <span class="fl">3.5</span><span class="op">]</span></span>
 <span><span class="co">## Error in simple_vs_index(x, ii, na_ok) : Unknown vertex selected</span></span></code></pre></div>
 <p>Attribute names can also be used as-is within the indexing brackets
@@ -585,7 +587,7 @@ ability to use Boolean vectors for indexing to obtain very concise and
 readable expressions to retrieve a subset of the vertex or edge set of a
 graph. For instance, the following command gives you the names of the
 individuals younger than 30 years in our social network:</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">30</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Moshe"     "Samira"</span></span></code></pre>
 <p>Of course, <code>&lt;</code> is not the only boolean operator that
@@ -641,7 +643,7 @@ to</em>
 </table>
 <p>You can also create a “not in” operator from <code>%in%</code> using
 the <code><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Negate()</a></code> function:</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">`%notin%`</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Negate</a></span><span class="op">(</span><span class="va">`%in%`</span><span class="op">)</span></span></code></pre></div>
 <p>If an attribute has the same name as an <code>igraph</code> function,
 you should be careful as the syntax can become a little confusing. For
@@ -649,11 +651,11 @@ instance, if there is an attribute named <code>degree</code> that
 represents the grades of an exam for each person, that should not be
 confused with the <code>igraph</code> function that computes the degrees
 of vertices in a network sense:</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">degree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B+"</span>, <span class="st">"A+"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">degree</span><span class="op">[</span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "A"  "A+" "C"</span></span></code></pre>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">[</span><span class="fu"><a href="../reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">==</span> <span class="fl">3</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Alejandra" "Moshe"     "Nang"</span></span></code></pre>
 </div>
@@ -667,14 +669,14 @@ edges.</p>
 <p>Using <code><a href="../reference/inside-square-error.html">.from()</a></code> allows you to filter the edge sequence
 based on the source vertices of the edges. For instance, to select all
 the edges originating from Carmina (who has vertex index 3):</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="../reference/inside-square-error.html">.from</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from 8b23770 (vertex names):</span></span>
+<pre><code><span><span class="co">## + 4/9 edges from cf8ef58 (vertex names):</span></span>
 <span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Of course it also works with vertex names:</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="../reference/inside-square-error.html">.from</a></span><span class="op">(</span><span class="st">"Carmina"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 4/9 edges from 8b23770 (vertex names):</span></span>
+<pre><code><span><span class="co">## + 4/9 edges from cf8ef58 (vertex names):</span></span>
 <span><span class="co">## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira</span></span></code></pre>
 <p>Using <code><a href="../reference/inside-square-error.html">.to()</a></code> filters edge sequences based on the target
 vertices. This is different from <code><a href="../reference/inside-square-error.html">.from()</a></code> if the graph is
@@ -687,28 +689,28 @@ specific groups of vertices, ignoring edge directions in directed
 graphs. For instance, the following expression selects all the edges
 between Carmina (vertex index 3), Nang (vertex index 5) and Samira
 (vertex index 6):</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 3/9 edges from 8b23770 (vertex names):</span></span>
+<pre><code><span><span class="co">## + 3/9 edges from cf8ef58 (vertex names):</span></span>
 <span><span class="co">## [1] Carmina--Nang   Carmina--Samira Nang   --Samira</span></span></code></pre>
 <p>To make the <code>%--%</code> operator work with names, you can build
 string vectors containing the names and then use these vectors as
 operands. For instance, to select all the edges that connect men to
 women, we can do the following after re-adding the gender attribute that
 we deleted earlier:</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"m"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">men</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">men</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Bruno"   "Moshe"   "Nang"    "Ibrahim"</span></span></code></pre>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">women</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"f"</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">women</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Alejandra" "Carmina"   "Samira"</span></span></code></pre>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">men</span> <span class="op"><a href="../reference/igraph-es-indexing.html">%--%</a></span> <span class="va">women</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## + 5/9 edges from 8b23770 (vertex names):</span></span>
+<pre><code><span><span class="co">## + 5/9 edges from cf8ef58 (vertex names):</span></span>
 <span><span class="co">## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  </span></span>
 <span><span class="co">## [5] Nang     --Samira</span></span></code></pre>
 </div>
@@ -721,7 +723,7 @@ adjacency matrix, rows and columns are labeled by graph vertices, and
 the elements of the matrix indicate the number of edges between vertices
 <em>i</em> and <em>j</em>. The adjacency matrix for the example graph
 is:</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 7 x 7 sparse Matrix of class "dgCMatrix"</span></span>
 <span><span class="co">##           Alejandra Bruno Carmina Moshe Nang Samira Ibrahim</span></span>
@@ -811,12 +813,12 @@ argument. They will return a matrix with two columns and as many rows as
 the number of vertices in the graph; each row will correspond to the
 position of a single vertex, ordered by vertex IDs. Some algorithms have
 a 3D variant; in this case they return 3 columns instead of 2.</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layout_with_kk.html">layout_with_kk</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <p>Some layout algorithms take additional arguments; for instance, when
 laying out a graph as a tree, it might make sense to specify which
 vertex is to be placed at the root of the layout:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layout_as_tree.html">layout_as_tree</a></span><span class="op">(</span><span class="va">g</span>, root <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -824,9 +826,9 @@ vertex is to be placed at the root of the layout:</p>
 </h3>
 <p>We can plot our imaginary social network with the Kamada-Kawai layout
 algorithm as follows:</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layout_with_kk.html">layout_with_kk</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layout_with_kk.html">layout_with_kk</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, layout <span class="op">=</span> <span class="va">layout</span>, main <span class="op">=</span> <span class="st">"Social network with the Kamada-Kawai layout algorithm"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="igraph_files/figure-html/unnamed-chunk-63-1.png" width="576"></p>
 <p>This should open a new window showing a visual representation of the
@@ -836,7 +838,7 @@ your machine since the layout is not deterministic.</p>
 case, the function will be called with the graph as its first argument.
 This makes it possible to just pass the name of a layout function
 directly, without creating a layout variable:</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">g</span>,</span>
 <span>  layout <span class="op">=</span> <span class="va">layout_with_fr</span>,</span>
@@ -846,7 +848,7 @@ directly, without creating a layout variable:</p>
 <p>To improve the visuals, a trivial addition would be to color the
 vertices according to the gender. We should also try to place the labels
 slightly outside the vertices to improve readability:</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">color</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">g</span>,</span>
@@ -858,14 +860,14 @@ slightly outside the vertices to improve readability:</p>
 provide the colors with an argument to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, which takes
 precedence over the <code>color</code> vertex attribute. Colors will be
 assigned automatically to levels of a factor:</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, layout <span class="op">=</span> <span class="va">layout</span>, vertex.label.dist <span class="op">=</span> <span class="fl">3.5</span>, vertex.color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="igraph_files/figure-html/unnamed-chunk-66-1.png" width="576"></p>
 <p>As seen above with the <code>vertex.color</code> argument, you can
 specify visual properties as arguments to <code>plot</code> instead of
 using vertex or edge attributes. The following plot shows the formal
 ties with thick lines while informal ones with thin lines:</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>,</span>
 <span>  layout <span class="op">=</span> <span class="va">layout</span>, vertex.label.dist <span class="op">=</span> <span class="fl">3.5</span>, vertex.size <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  vertex.color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="../reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"m"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
@@ -1187,7 +1189,7 @@ developers rather than users.</p>
 </h2>
 <p>For the sake of reproducibility, the session information for the code
 above is the following:</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
@@ -1210,19 +1212,18 @@ above is the following:</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] igraph_2.1.2.9003</span></span>
+<span><span class="co">## [1] igraph_2.1.2.9004</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] crayon_1.5.3       vctrs_0.6.5        cli_3.6.3          knitr_1.49        </span></span>
 <span><span class="co">##  [5] rlang_1.1.4        xfun_0.49          textshaping_0.4.1  jsonlite_1.8.9    </span></span>
 <span><span class="co">##  [9] glue_1.8.0         htmltools_0.5.8.1  ragg_1.3.3         sass_0.4.9        </span></span>
-<span><span class="co">## [13] fansi_1.0.6        rmarkdown_2.29     grid_4.4.2         evaluate_1.0.1    </span></span>
-<span><span class="co">## [17] jquerylib_0.1.4    fastmap_1.2.0      yaml_2.3.10        lifecycle_1.0.4   </span></span>
-<span><span class="co">## [21] compiler_4.4.2     fs_1.6.5           htmlwidgets_1.6.4  pkgconfig_2.0.3   </span></span>
-<span><span class="co">## [25] lattice_0.22-6     systemfonts_1.1.0  digest_0.6.37      R6_2.5.1          </span></span>
-<span><span class="co">## [29] utf8_1.2.4         pillar_1.9.0       magrittr_2.0.3     Matrix_1.7-1      </span></span>
-<span><span class="co">## [33] bslib_0.8.0        tools_4.4.2        pkgdown_2.1.1.9000 cachem_1.1.0      </span></span>
-<span><span class="co">## [37] desc_1.4.3</span></span></code></pre>
+<span><span class="co">## [13] rmarkdown_2.29     grid_4.4.2         evaluate_1.0.1     jquerylib_0.1.4   </span></span>
+<span><span class="co">## [17] fastmap_1.2.0      yaml_2.3.10        lifecycle_1.0.4    compiler_4.4.2    </span></span>
+<span><span class="co">## [21] fs_1.6.5           htmlwidgets_1.6.4  pkgconfig_2.0.3    lattice_0.22-6    </span></span>
+<span><span class="co">## [25] systemfonts_1.1.0  digest_0.6.37      R6_2.5.1           pillar_1.10.0     </span></span>
+<span><span class="co">## [29] magrittr_2.0.3     Matrix_1.7-1       bslib_0.8.0        tools_4.4.2       </span></span>
+<span><span class="co">## [33] pkgdown_2.1.1.9000 cachem_1.1.0       desc_1.4.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
