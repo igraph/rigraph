@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9005
+
+## Documentation
+
+- Make documentation of `disjoint_union()` consistent with behavior (#1587, #1641).
+
+
 # igraph 2.1.2.9004
 
 ## Documentation
