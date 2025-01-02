@@ -39,11 +39,10 @@ jobs:
           # Run workflow for each commit where the status of the rcc workflow isn't "pending" or "success"
           for commit in $commits; do
             echo $commit
-            gh api repos/{owner}/{repo}/commits/${commit}/statuses
-            # Get status of the workflow with the name "rcc"
-            status=$(gh api repos/{owner}/{repo}/commits/${commit}/status | jq -r '.state')
+            # Get first status of the workflow with the name "rcc"
+            status=$(gh api repos/{owner}/{repo}/commits/${commit}/statuses | jq -r '.[] | select(.context == "rcc") | .state' | head -n 1)
             echo $status
-            if [[ $status != "pending" && $status != "success" ]]; then
+            if [[ "$status" != "pending" && "$status" != "success" ]]; then
               echo "Running rcc for commit $commit"
               gh workflow run rcc.yaml -f ref=$commit
             fi
