@@ -128,6 +128,6 @@ void R_check_int_scalar(SEXP value);
 void R_check_real_scalar(SEXP value);
 void R_check_bool_scalar(SEXP value);
 
-igraph_integer_t R_get_int_scalar(SEXP sexp, R_xlen_t index);
-igraph_real_t R_get_real_scalar(SEXP sexp, R_xlen_t index);
-igraph_bool_t R_get_bool_scalar(SEXP sexp, R_xlen_t index);
+igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res);
+igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
+igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
