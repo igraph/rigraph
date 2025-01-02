@@ -1,4 +1,6 @@
 #!/bin/bash
+# https://unix.stackexchange.com/a/654932/19205
+# Using bash for -o pipefail
 
 set -e
 set -x
@@ -6,10 +8,22 @@ set -o pipefail
 
 cd `dirname $0`
 
+project=igraph
+vendor_dir=src/vendor/cigraph
+repo_org=${project}
+repo_name=${project}
+
+
 if [ -z "$1" ]; then
-  upstream_dir=../../igraph
+  upstream_basedir=../${project}
 else
-  upstream_dir="$1"
+  upstream_basedir="$1"
+fi
+
+upstream_dir=.git/${project}
+
+if [ "$upstream_basedir" != "$upstream_dir" ]; then
+  git clone "$upstream_basedir" "$upstream_dir"
 fi
 
 if [ -n "$(git status --porcelain)" ]; then
@@ -21,17 +35,14 @@ if [ -n "$(git -C "$upstream_dir" status --porcelain)" ]; then
   echo "Warning: working directory $upstream_dir not clean"
 fi
 
-vendor_dir=src/vendor/cigraph
-repo_org=igraph
-repo_name=igraph
+original=$(git -C "$upstream_dir" rev-parse --verify HEAD)
 
-commit=$(git -C "$upstream_dir" rev-parse HEAD)
-
-base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}'.'${repo_name}'@([0-9a-f]+)$/{s//\1/;p;}' | head -n 1)
+base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
 
 message=
+is_tag=
 
-for commit in $commit; do
+for commit in $original; do
   echo "Importing commit $commit"
 
   rm -rf ${vendor_dir}
@@ -51,12 +62,13 @@ for commit in $commit; do
 
   # Always vendor tags
   if [ $(git -C "$upstream_dir" describe --tags "$commit" | grep -c -- -) -eq 0 ]; then
-    message="chore: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
+    message="vendor: Update vendored sources (tag $(git -C "$upstream_dir" describe --tags "$commit")) to ${repo_org}/${repo_name}@$commit"
+    is_tag=true
     break
   fi
 
   if [ $(git status --porcelain -- ${vendor_dir} | wc -l) -gt 1 ]; then
-    message="chore: Update vendored sources to ${repo_org}/${repo_name}@$commit"
+    message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
     break
   fi
 done
@@ -64,6 +76,7 @@ done
 if [ "$message" = "" ]; then
   echo "No changes."
   git checkout -- ${vendor_dir}
+  rm -rf "$upstream_dir"
   exit 0
 fi
 
@@ -72,5 +85,7 @@ git add .
 (
   echo "$message"
   echo
-  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%${repo_org}/${repo_name}\1%g'
+  git -C "$upstream_dir" log --first-parent --format="%s" ${base}..${commit} | tee /dev/stderr | sed -r 's%(#[0-9]+)%'${repo_org}/${repo_name}'\1%g'
 ) | git commit --file /dev/stdin
+
+rm -rf "$upstream_dir"
