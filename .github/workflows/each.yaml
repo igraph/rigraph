@@ -33,7 +33,7 @@ jobs:
           # Get name of main branch of repository
           # origin/HEAD isn't known here
           main=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
-          commits=$(git log --pretty=format:"%H" origin/${main}.. --)
+          commits=$(git log --reverse --pretty=format:"%H" origin/${main}.. --)
           echo $commits
 
           # Run workflow for each commit where the status isn't "pending" or "success"
