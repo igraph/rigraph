@@ -2027,10 +2027,10 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   res
 }
 
-bipartite_projection_size_impl <- function(graph, types=NULL) {
+bipartite_projection_size_impl <- function(graph, types) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(types)) types <- handle_vertex_type_arg(types, graph)
+  types <- handle_vertex_type_arg(types, graph)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2055,10 +2055,10 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   res
 }
 
-get_biadjacency_impl <- function(graph, types=NULL) {
+get_biadjacency_impl <- function(graph, types) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(types)) types <- handle_vertex_type_arg(types, graph)
+  types <- handle_vertex_type_arg(types, graph)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
