@@ -15,7 +15,7 @@ repo_name=${project}
 
 
 if [ -z "$1" ]; then
-  upstream_basedir=../${project}
+  upstream_basedir=../../${project}
 else
   upstream_basedir="$1"
 fi
