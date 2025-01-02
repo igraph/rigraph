@@ -36,11 +36,12 @@ jobs:
           commits=$(git log --reverse --pretty=format:"%H" origin/${main}.. --)
           echo $commits
 
-          # Run workflow for each commit where the status isn't "pending" or "success"
+          # Run workflow for each commit where the status of the rcc workflow isn't "pending" or "success"
           for commit in $commits; do
             echo $commit
-            gh api repos/${GITHUB_REPOSITORY}/commits/${commit}/status
-            status=$(gh api repos/${GITHUB_REPOSITORY}/commits/${commit}/status | jq -r '.state')
+            gh api repos/{owner}/{repo}/commits/${commit}/statuses
+            # Get status of the workflow with the name "rcc"
+            status=$(gh api repos/{owner}/{repo}/commits/${commit}/status | jq -r '.state')
             echo $status
             if [[ $status != "pending" && $status != "success" ]]; then
               echo "Running rcc for commit $commit"
