@@ -3511,7 +3511,7 @@ solve_lsap_impl <- function(c, n) {
   res
 }
 
-find_cycle_impl <- function(graph, mode) {
+find_cycle_impl <- function(graph, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
