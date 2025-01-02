@@ -83,19 +83,6 @@ if [ "$message" = "" ]; then
   exit 0
 fi
 
-our_tag=$(git describe --tags --abbrev=0 | sed -r 's/-[0-9]$//')
-upstream_tag=$(git -C "$upstream_dir" describe --tags --abbrev=0)
-
-echo "Our tag: $our_tag"
-echo "Upstream tag: $upstream_tag"
-
-if [ -z "${is_tag}" -a "${our_tag#$upstream_tag}" == "$our_tag" ]; then
-  echo "Not vendoring because our tag $our_tag does not start with upstream tag $upstream_tag"
-  git checkout -- ${vendor_base_dir}
-  rm -rf "$upstream_dir"
-  exit 0
-fi
-
 git add .
 
 (
