@@ -38,7 +38,10 @@ jobs:
 
           # Run workflow for each commit where the status isn't "pending" or "success"
           for commit in $commits; do
+            echo $commit
+            gh api repos/${GITHUB_REPOSITORY}/commits/${commit}/status
             status=$(gh api repos/${GITHUB_REPOSITORY}/commits/${commit}/status | jq -r '.state')
+            echo $status
             if [[ $status != "pending" && $status != "success" ]]; then
               echo "Running rcc for commit $commit"
               gh workflow run rcc.yaml -f ref=$commit
