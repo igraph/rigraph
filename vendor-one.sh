@@ -9,7 +9,8 @@ set -o pipefail
 cd `dirname $0`
 
 project=igraph
-vendor_dir=src/vendor/cigraph
+vendor_base_dir=src/vendor
+vendor_dir=${vendor_base_dir}/cigraph
 repo_org=${project}
 repo_name=${project}
 
@@ -69,7 +70,7 @@ for commit in $original; do
     break
   fi
 
-  if [ $(git status --porcelain -- ${vendor_dir} | wc -l) -gt 1 ]; then
+  if [ $(git status --porcelain -- ${vendor_base_dir} | wc -l) -gt 1 ]; then
     message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
     break
   fi
@@ -77,7 +78,7 @@ done
 
 if [ "$message" = "" ]; then
   echo "No changes."
-  git checkout -- ${vendor_dir}
+  git checkout -- ${vendor_base_dir}
   rm -rf "$upstream_dir"
   exit 0
 fi
@@ -90,7 +91,7 @@ echo "Upstream tag: $upstream_tag"
 
 if [ -z "${is_tag}" -a "${our_tag#$upstream_tag}" == "$our_tag" ]; then
   echo "Not vendoring because our tag $our_tag does not start with upstream tag $upstream_tag"
-  git checkout -- ${vendor_dir}
+  git checkout -- ${vendor_base_dir}
   rm -rf "$upstream_dir"
   exit 0
 fi

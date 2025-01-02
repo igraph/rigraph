@@ -9,7 +9,8 @@ set -o pipefail
 cd `dirname $0`
 
 project=igraph
-vendor_dir=src/vendor/cigraph
+vendor_base_dir=src/vendor
+vendor_dir=${vendor_base_dir}/cigraph
 repo_org=${project}
 repo_name=${project}
 
@@ -35,9 +36,9 @@ if [ -n "$(git -C "$upstream_dir" status --porcelain)" ]; then
   echo "Warning: working directory $upstream_dir not clean"
 fi
 
-original=$(git -C "$upstream_dir" rev-parse --verify HEAD)
-
 base=$(git log -n 3 --format="%s" -- ${vendor_dir} | tee /dev/stderr | sed -nr '/^.*'${repo_org}.${repo_name}'@([0-9a-f]+)( .*)?$/{s//\1/;p;}' | head -n 1)
+
+original=$(git -C "$upstream_dir" rev-parse --verify HEAD)
 
 message=
 is_tag=
@@ -67,7 +68,7 @@ for commit in $original; do
     break
   fi
 
-  if [ $(git status --porcelain -- ${vendor_dir} | wc -l) -gt 1 ]; then
+  if [ $(git status --porcelain -- ${vendor_base_dir} | wc -l) -gt 1 ]; then
     message="vendor: Update vendored sources to ${repo_org}/${repo_name}@$commit"
     break
   fi
@@ -75,7 +76,7 @@ done
 
 if [ "$message" = "" ]; then
   echo "No changes."
-  git checkout -- ${vendor_dir}
+  git checkout -- ${vendor_base_dir}
   rm -rf "$upstream_dir"
   exit 0
 fi
