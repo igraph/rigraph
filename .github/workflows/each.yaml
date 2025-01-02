@@ -27,12 +27,21 @@ jobs:
           fetch-depth: 0
 
       - name: Enumerate all commits from the repository's main branch
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git remote -v
-          git fetch --all
           # Get name of main branch of repository
           # origin/HEAD isn't known here
           main=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
           commits=$(git log --pretty=format:"%H" origin/${main}.. --)
           echo $commits
+
+          # Run workflow for each commit where the status isn't "pending" or "success"
+          for commit in $commits; do
+            status=$(gh api repos/${GITHUB_REPOSITORY}/commits/${commit}/status | jq -r '.state')
+            if [[ $status != "pending" && $status != "success" ]]; then
+              echo "Running rcc for commit $commit"
+              gh workflow run rcc.yaml -f ref=$commit
+            fi
+          done
         shell: bash
