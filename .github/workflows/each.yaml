@@ -44,7 +44,7 @@ jobs:
             echo $status
             if [[ "$status" != "pending" && "$status" != "success" ]]; then
               echo "Running rcc for commit $commit"
-              gh workflow run rcc -f ref=$commit
+              gh workflow run rcc -f ref=$commit -r ${{ github.ref }}
             fi
           done
         shell: bash
