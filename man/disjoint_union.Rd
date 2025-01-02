@@ -27,10 +27,11 @@ Thus first the vertices in the second, third, etc. graphs are relabeled to
 have completely disjoint graphs. Then a simple union is created. This
 function can also be used via the \verb{\%du\%} operator.
 
-\code{graph.disjont.union} handles graph, vertex and edge attributes.  In
-particular, it merges vertex and edge attributes using the basic \code{c()}
+\code{disjoint_union()} handles graph, vertex and edge attributes.  In
+particular, it merges vertex and edge attributes using the \code{\link[vctrs:vec_c]{vctrs::vec_c()}}
 function. For graphs that lack some vertex/edge attribute, the corresponding
-values in the new graph are set to \code{NA}. Graph attributes are simply
+values in the new graph are set to a missing value (\code{NA} for scalar attributes,
+\code{NULL} for list attributes). Graph attributes are simply
 copied to the result. If this would result a name clash, then they are
 renamed by adding suffixes: _1, _2, etc.
 
