@@ -5,10 +5,10 @@ on:
     branches:
       - each-*
 
-name: rcc
+name: each-rcc
 
 jobs:
-  rcc-smoke:
+  each-rcc:
     runs-on: ubuntu-24.04
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
