@@ -573,18 +573,6 @@ write.graph.dot <- function(graph, file, ...) {
 #' @family foreign
 #' @export
 #' @keywords graphs
-#' @section Examples:
-#' \preformatted{
-#' g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
-#'   which=10, compressed=TRUE)
-#' g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
-#'   which=10, compressed=TRUE)
-#' isomorphic(g, g2, method = "vf2")	\% should be TRUE
-#' g3 <- graph_from_graphdb(url=paste(sep="/",
-#'                               "http://cneurocvs.rmki.kfki.hu",
-#'                               "graphdb/gzip/iso/bvg/b06m",
-#'                               "iso_b06m_m200.A09.gz"))
-#' }
 graph_from_graphdb <- function(url = NULL,
                                prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
                                base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
