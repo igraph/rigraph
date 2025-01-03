@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9006
+
+## Features
+
+- Use safe accessor to vector elements (#1633).
+
+## Chore
+
+- Sync vendor script with duckdb (#1645).
+
+## Continuous integration
+
+- Add workflow to check each commit (#1644).
+
+
 # igraph 2.1.2.9005
 
 ## Documentation
