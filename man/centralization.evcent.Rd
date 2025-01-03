@@ -18,8 +18,8 @@ centralization.evcent(
 \item{directed}{logical scalar, whether to use directed shortest paths for
 calculating eigenvector centrality.}
 
-\item{scale}{Whether to rescale the eigenvector centrality scores, such that
-the maximum score is one.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
+eigenvector centralization requires normalized eigenvector centrality scores.}
 
 \item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options
 for the ARPACK eigensolver.}
