@@ -2381,7 +2381,7 @@ SEXP R_igraph_get_all_shortest_paths_dijkstra(SEXP graph, SEXP from, SEXP to, SE
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_all_shortest_paths_dijkstra(&c_graph, &c_vertices, &c_edges, &c_nrgeo, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode));
+  IGRAPH_R_CHECK(igraph_get_all_shortest_paths_dijkstra(&c_graph, &c_vertices, &c_edges, &c_nrgeo, c_from, c_to, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_mode));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
