@@ -11172,6 +11172,56 @@ SEXP R_igraph_find_cycle(SEXP graph, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_simple_cycles                       /
+/-------------------------------------------*/
+SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP max_cycle_length) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_list_t c_vertices;
+  igraph_vector_int_list_t c_edges;
+  igraph_neimode_t c_mode;
+  igraph_integer_t c_max_cycle_length;
+  SEXP vertices;
+  SEXP edges;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_int_list_init(&c_vertices, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_vertices);
+  if (0 != igraph_vector_int_list_init(&c_edges, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_edges);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_INT(max_cycle_length);
+  c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_max_cycle_length));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(vertices=R_igraph_vector_int_list_to_SEXPp1(&c_vertices));
+  igraph_vector_int_list_destroy(&c_vertices);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edges=R_igraph_vector_int_list_to_SEXPp1(&c_edges));
+  igraph_vector_int_list_destroy(&c_edges);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, vertices);
+  SET_VECTOR_ELT(r_result, 1, edges);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("vertices"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("edges"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_is_eulerian                         /
 /-------------------------------------------*/
 SEXP R_igraph_is_eulerian(SEXP graph) {
