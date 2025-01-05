@@ -3589,7 +3589,7 @@ eulerian_cycle_impl <- function(graph) {
   res
 }
 
-fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL) {
+fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff=-1, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
@@ -3615,7 +3615,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL)
   res
 }
 
-minimum_cycle_basis_impl <- function(graph, bfs.cutoff, complete, use.cycle.order, weights=NULL) {
+minimum_cycle_basis_impl <- function(graph, bfs.cutoff=-1, complete=TRUE, use.cycle.order=TRUE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   bfs.cutoff <- as.numeric(bfs.cutoff)
