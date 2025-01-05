@@ -11270,12 +11270,13 @@ SEXP R_igraph_find_cycle(SEXP graph, SEXP mode) {
 /*-------------------------------------------/
 / igraph_simple_cycles                       /
 /-------------------------------------------*/
-SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP max_cycle_length) {
+SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_vertices;
   igraph_vector_int_list_t c_edges;
   igraph_neimode_t c_mode;
+  igraph_integer_t c_min_cycle_length;
   igraph_integer_t c_max_cycle_length;
   SEXP vertices;
   SEXP edges;
@@ -11292,10 +11293,12 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP max_cycle_length) {
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_edges);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_INT(min_cycle_length);
+  c_min_cycle_length = (igraph_integer_t) REAL(min_cycle_length)[0];
   IGRAPH_R_CHECK_INT(max_cycle_length);
   c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_max_cycle_length));
+  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_min_cycle_length, c_max_cycle_length));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
