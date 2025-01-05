@@ -130,6 +130,7 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
         IGRAPH_FINALLY_REAL((func##_pv), (ptr)); \
     } while (0)
 
+// These functions are never meant to be called directly, only through IGRAPH_FINALLY_PV.
 void igraph_destroy_pv(void *pv_ptr);
 void igraph_matrix_destroy_pv(void *pv_ptr);
 void igraph_vector_destroy_pv(void *pv_ptr);
