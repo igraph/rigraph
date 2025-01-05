@@ -5832,7 +5832,7 @@ SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types) {
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_col_ids);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_biadjacency(&c_graph, (Rf_isNull(types) ? 0 : (Rf_isNull(types) ? 0 : &c_types)), &c_res, &c_row_ids, &c_col_ids));
+  IGRAPH_R_CHECK(igraph_get_biadjacency(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_res, &c_row_ids, &c_col_ids));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -7131,7 +7131,7 @@ SEXP R_igraph_layout_bipartite(SEXP graph, SEXP types, SEXP hgap, SEXP vgap, SEX
   IGRAPH_R_CHECK_INT(maxiter);
   c_maxiter = (igraph_integer_t) REAL(maxiter)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_layout_bipartite(&c_graph, (Rf_isNull(types) ? 0 : (Rf_isNull(types) ? 0 : &c_types)), &c_res, c_hgap, c_vgap, c_maxiter));
+  IGRAPH_R_CHECK(igraph_layout_bipartite(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_res, c_hgap, c_vgap, c_maxiter));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
@@ -10860,7 +10860,7 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   IGRAPH_R_CHECK_REAL(eps);
   c_eps = REAL(eps)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximum_bipartite_matching(&c_graph, (Rf_isNull(types) ? 0 : (Rf_isNull(types) ? 0 : &c_types)), &c_matching_size, &c_matching_weight, &c_matching, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_eps));
+  IGRAPH_R_CHECK(igraph_maximum_bipartite_matching(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_matching_size, &c_matching_weight, &c_matching, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_eps));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
