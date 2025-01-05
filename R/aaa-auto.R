@@ -1710,7 +1710,7 @@ joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.typ
     weights <- NULL
   }
   from.types <- as.numeric(from.types)-1
-  to.types <- as.numeric(to.types)-1
+  if (!is.null(to.types)) to.types <- as.numeric(to.types)-1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -2058,7 +2058,7 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
 get_biadjacency_impl <- function(graph, types=NULL) {
   # Argument checks
   ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
+  if (!is.null(types)) types <- handle_vertex_type_arg(types, graph)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
