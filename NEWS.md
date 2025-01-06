@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9007
+
+## Features
+
+- Use `_pv` destroy functions to satisfy ASAN checks (#1630).
+
+
 # igraph 2.1.2.9006
 
 ## Features
