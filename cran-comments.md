@@ -1,4 +1,4 @@
-igraph 2.1.2
+igraph 2.1.2.9900
 
 ## Cran Repository Policy
 
