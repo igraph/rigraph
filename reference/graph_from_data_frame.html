@@ -9,7 +9,7 @@ the (symbolic) edge list and edge/vertex attributes."><meta property="og:image" 
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9900</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@ the (symbolic) edge list and edge/vertex attributes."><meta property="og:image" 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Creating igraph graphs from data frames or vice-versa</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/main/R/data_frame.R" class="external-link"><code>R/data_frame.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.2.9900/R/conversion.R" class="external-link"><code>R/conversion.R</code></a>, <a href="https://github.com/igraph/rigraph/blob/cran-2.1.2.9900/R/data_frame.R" class="external-link"><code>R/data_frame.R</code></a></small>
       <div class="d-none name"><code>graph_from_data_frame.Rd</code></div>
     </div>
 
@@ -194,10 +194,10 @@ from files.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">graph_from_data_frame</span><span class="op">(</span><span class="va">relations</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, vertices <span class="op">=</span> <span class="va">actors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span>, e <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 54ab91d DN-- 5 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ea0390c DN-- 5 6 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), age (v/n), gender (v/c), same.dept (e/l),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | friendship (e/n), advice (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 54ab91d (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ea0390c (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Bob      -&gt;Alice Cecil    -&gt;Bob   Cecil    -&gt;Alice David    -&gt;Alice</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] David    -&gt;Bob   Esmeralda-&gt;Alice</span>
 <span class="r-in"><span></span></span>
