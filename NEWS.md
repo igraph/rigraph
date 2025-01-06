@@ -10,19 +10,7 @@
 
 ## Chore
 
-- Sync vendor script with duckdb (#1645).
-
 - Replace `graph.isomorphic()` with `isomorphic()` (#1583, #1623).
-
-## Continuous integration
-
-- Add workflow to check each commit (#1644).
-
-- Avoid failure in fledge workflow if no changes (#1619).
-
-- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#1617).
-
-- Use larger retry count for lock-threads workflow (#1615).
 
 ## Documentation
 
