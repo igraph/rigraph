@@ -137,23 +137,6 @@ its old version at
 for the actual format of a graph database file and other information.</p>
     </div>
     <div class="section level2">
-    <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-
-
-<div class="sourceCode"><pre><code>
-g &lt;- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
-  which=10, compressed=TRUE)
-g2 &lt;- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
-  which=10, compressed=TRUE)
-isomorphic(g, g2, method = "vf2")	% should be TRUE
-g3 &lt;- graph_from_graphdb(url=paste(sep="/",
-                              "http://cneurocvs.rmki.kfki.hu",
-                              "graphdb/gzip/iso/bvg/b06m",
-                              "iso_b06m_m200.A09.gz"))
-</code></pre></div>
-
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 of graphs and its use for benchmarking graph isomorphism algorithms,
