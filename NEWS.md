@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.2.9008
+
+## Chore
+
+- Downstream check.
+
+## Documentation
+
+- Convert `plot.common.Rd` to roxygen2 (#1424, #1636).
+
+- Remove broken example from `graph_from_graphdb()` manual page (#1622, #1637).
+
+- Document argument for NCOL format in `read_graph()` (#1621).
+
+
 # igraph 2.1.2.9007
 
 ## Features
