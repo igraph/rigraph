@@ -97,7 +97,9 @@ each file format, below.</p>
     </div>
     <div class="section level2">
     <h2 id="edge-list-format">Edge list format<a class="anchor" aria-label="anchor" href="#edge-list-format"></a></h2>
-    <p>This format is a simple text file with numeric
+
+
+<p>This format is a simple text file with numeric
 vertex IDs defining the edges. There is no need to have newline characters
 between the edges, a simple space will also do. Vertex IDs contained in
 the file are assumed to start at zero.</p>
@@ -113,11 +115,46 @@ default value is <code>TRUE</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="pajek-format">Pajek format<a class="anchor" aria-label="anchor" href="#pajek-format"></a></h2>
-    <p>Currently igraph only supports Pajek network
+
+
+<p>Currently igraph only supports Pajek network
 files, with a <code>.net</code> extension, but not Pajek project files with
 a <code>.paj</code> extension. Only network data is supported; permutations,
 hierarchies, clusters and vectors are not.</p>
     </div>
+    <div class="section level2">
+    <h2 id="ncol-format">NCOL format<a class="anchor" aria-label="anchor" href="#ncol-format"></a></h2>
+
+
+<p>Additional arguments:</p><dl><dt>predef</dt>
+<dd><p>Names of the vertices in the file.
+If <code>character(0)</code> (the default) is given here
+then vertex IDs will be assigned to vertex names in the order of
+their appearance in the .ncol file.
+If it is not <code>character(0)</code> and some unknown vertex names are found
+in the .ncol file then new vertex ids will be assigned to them.</p></dd>
+
+<dt>names</dt>
+<dd><p>Logical value, if <code>TRUE</code> (the default)
+the symbolic names of the vertices will be added to the graph
+as a vertex attribute called “name”.</p></dd>
+
+<dt>weights</dt>
+<dd><p>Whether to add the weights of the edges to the graph
+as an edge attribute called “weight”.
+<code>"yes"</code> adds the weights (even if they are not present in the file,
+in this case they are assumed to be zero).
+<code>"no"</code> does not add any edge attribute.
+<code>"auto"</code> (the default) adds the attribute if and only
+if there is at least one explicit edge weight in the input file.</p></dd>
+
+<dt>directed</dt>
+<dd><p>Whether to create a directed graph (default: <code>FALSE</code>).
+As this format was originally used only for undirected graphs
+there is no information in the file about the directedness of the graph.</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="write_graph.html">write_graph()</a></code></p>
