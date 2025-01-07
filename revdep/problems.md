@@ -23,26 +23,26 @@ Run `revdepcheck::cloud_details(, "grainscape")` for more info
       > test_check("grainscape")
       Loading required package: grainscape
       Writing layer `nodes' to data source 
-        `/tmp/RtmpXCxrvv/tiny_goc_thresh2' using driver `ESRI Shapefile'
+        `/tmp/RtmpXa81Of/tiny_goc_thresh2' using driver `ESRI Shapefile'
       Writing 28 features with 5 fields and geometry type Point.
       Writing layer `linksCentroid' to data source 
-        `/tmp/RtmpXCxrvv/tiny_goc_thresh2' using driver `ESRI Shapefile'
+        `/tmp/RtmpXa81Of/tiny_goc_thresh2' using driver `ESRI Shapefile'
       Writing 59 features with 15 fields and geometry type Line String.
       Writing layer `nodes' to data source 
-        `/tmp/RtmpXCxrvv/tiny_mpg' using driver `ESRI Shapefile'
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
       Writing 43 features with 4 fields and geometry type Point.
       Writing layer `linksCentroid' to data source 
-        `/tmp/RtmpXCxrvv/tiny_mpg' using driver `ESRI Shapefile'
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
       Writing 93 features with 12 fields and geometry type Line String.
       Writing layer `linksPerim' to data source 
-        `/tmp/RtmpXCxrvv/tiny_mpg' using driver `ESRI Shapefile'
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
       Writing 93 features with 8 fields and geometry type Line String.
-      IGRAPH 513b1e8 UN-- 43 89 -- 
+      IGRAPH 3753ef2 UN-- 43 89 -- 
       + attr: name (v/c), patchId (v/n), patchArea (v/n), patchEdgeArea
       | (v/n), coreArea (v/n), centroidX (v/n), centroidY (v/n), linkId
       | (e/n), lcpPerimWeight (e/n), startPerimX (e/n), startPerimY (e/n),
       | endPerimX (e/n), endPerimY (e/n)
-      + edges from 513b1e8 (vertex names):
+      + edges from 3753ef2 (vertex names):
        [1] 62 --74  30 --41  30 --40  7  --22  5  --7   80 --86  73 --78  29 --31 
        [9] 19 --29  67 --85  41 --48  40 --41  37 --41  8  --28  9  --12  12 --14 
       [17] 30 --48  8  --9   48 --54  95 --103 62 --64  5  --22  32 --37  74 --84 
@@ -114,53 +114,5 @@ Run `revdepcheck::cloud_details(, "multilaterals")` for more info
       At rinterface_extra.c:138 : Wrong index. Attempt to get element with index 0 from vector of length 0. Invalid value
     Calls: multilateral -> multicomp -> <Anonymous>
     Execution halted
-    ```
-
-# pcvr
-
-<details>
-
-* Version: 1.1.1.0
-* GitHub: https://github.com/danforthcenter/pcvr
-* Source code: https://github.com/cran/pcvr
-* Date/Publication: 2024-11-06 20:50:02 UTC
-* Number of recursive dependencies: 189
-
-Run `revdepcheck::cloud_details(, "pcvr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.0Mb
-      sub-directories of 1Mb or more:
-        R     1.5Mb
-        doc   3.0Mb
-    ```
-
-# sdm
-
-<details>
-
-* Version: 1.2-46
-* GitHub: NA
-* Source code: https://github.com/cran/sdm
-* Date/Publication: 2024-07-17 05:00:02 UTC
-* Number of recursive dependencies: 41
-
-Run `revdepcheck::cloud_details(, "sdm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        R          3.5Mb
-        external   1.2Mb
     ```
 

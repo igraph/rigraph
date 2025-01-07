@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2124 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 13 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 4 new problems
- * We failed to check 7 packages
+ * We saw 2 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -16,18 +16,13 @@ Issues with CRAN packages are summarised below.
 * multilaterals
   checking examples ... ERROR
 
-* pcvr
-  checking installed package size ... NOTE
-
-* sdm
-  checking installed package size ... NOTE
-
 ### Failed to check
 
 * bnlearn         (NA)
 * dataone         (NA)
 * datapack        (NA)
 * FAIRmaterials   (NA)
+* multinma        (NA)
 * randomForestSRC (NA)
 * streamDAG       (NA)
 * TDA             (NA)
