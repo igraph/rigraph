@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.2.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,84 +39,36 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.3/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9008" id="igraph-2129008">igraph 2.1.2.9008<a class="anchor" aria-label="anchor" href="#igraph-2129008"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.1.3" id="igraph-213">igraph 2.1.3<a class="anchor" aria-label="anchor" href="#igraph-213"></a></h2>
 <div class="section level3">
-<h3 id="chore-2-1-2-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-2-9008"></a></h3>
-<ul><li>Downstream check.</li>
+<h3 id="features-2-1-3">Features<a class="anchor" aria-label="anchor" href="#features-2-1-3"></a></h3>
+<ul><li><p>Use <code>_pv</code> destroy functions to satisfy ASAN checks (<a href="https://github.com/igraph/rigraph/issues/1630" class="external-link">#1630</a>).</p></li>
+<li><p>Use safe accessor to vector elements (<a href="https://github.com/igraph/rigraph/issues/1633" class="external-link">#1633</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-2-1-2-9008">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-2-9008"></a></h3>
+<h3 id="chore-2-1-3">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-3"></a></h3>
+<ul><li><p>Downstream check.</p></li>
+<li><p>Sync vendor script with duckdb (<a href="https://github.com/igraph/rigraph/issues/1645" class="external-link">#1645</a>).</p></li>
+<li><p>Replace <code><a href="../reference/isomorphic.html">graph.isomorphic()</a></code> with <code><a href="../reference/isomorphic.html">isomorphic()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1583" class="external-link">#1583</a>, <a href="https://github.com/igraph/rigraph/issues/1623" class="external-link">#1623</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-1-3">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-3"></a></h3>
+<ul><li><p>Add workflow to check each commit (<a href="https://github.com/igraph/rigraph/issues/1644" class="external-link">#1644</a>).</p></li>
+<li><p>Avoid failure in fledge workflow if no changes (<a href="https://github.com/igraph/rigraph/issues/1619" class="external-link">#1619</a>).</p></li>
+<li><p>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/igraph/rigraph/issues/1617" class="external-link">#1617</a>).</p></li>
+<li><p>Use larger retry count for lock-threads workflow (<a href="https://github.com/igraph/rigraph/issues/1615" class="external-link">#1615</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-1-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-3"></a></h3>
 <ul><li><p>Convert <code>plot.common.Rd</code> to roxygen2 (<a href="https://github.com/igraph/rigraph/issues/1424" class="external-link">#1424</a>, <a href="https://github.com/igraph/rigraph/issues/1636" class="external-link">#1636</a>).</p></li>
 <li><p>Remove broken example from <code><a href="../reference/graph_from_graphdb.html">graph_from_graphdb()</a></code> manual page (<a href="https://github.com/igraph/rigraph/issues/1622" class="external-link">#1622</a>, <a href="https://github.com/igraph/rigraph/issues/1637" class="external-link">#1637</a>).</p></li>
 <li><p>Document argument for NCOL format in <code><a href="../reference/read_graph.html">read_graph()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1621" class="external-link">#1621</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9007" id="igraph-2129007">igraph 2.1.2.9007<a class="anchor" aria-label="anchor" href="#igraph-2129007"></a></h2>
-<div class="section level3">
-<h3 id="features-2-1-2-9007">Features<a class="anchor" aria-label="anchor" href="#features-2-1-2-9007"></a></h3>
-<ul><li>Use <code>_pv</code> destroy functions to satisfy ASAN checks (<a href="https://github.com/igraph/rigraph/issues/1630" class="external-link">#1630</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9006" id="igraph-2129006">igraph 2.1.2.9006<a class="anchor" aria-label="anchor" href="#igraph-2129006"></a></h2>
-<div class="section level3">
-<h3 id="features-2-1-2-9006">Features<a class="anchor" aria-label="anchor" href="#features-2-1-2-9006"></a></h3>
-<ul><li>Use safe accessor to vector elements (<a href="https://github.com/igraph/rigraph/issues/1633" class="external-link">#1633</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-2-1-2-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-2-9006"></a></h3>
-<ul><li>Sync vendor script with duckdb (<a href="https://github.com/igraph/rigraph/issues/1645" class="external-link">#1645</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-2-1-2-9006">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-2-9006"></a></h3>
-<ul><li>Add workflow to check each commit (<a href="https://github.com/igraph/rigraph/issues/1644" class="external-link">#1644</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9005" id="igraph-2129005">igraph 2.1.2.9005<a class="anchor" aria-label="anchor" href="#igraph-2129005"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-1-2-9005">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-2-9005"></a></h3>
-<ul><li>Make documentation of <code><a href="../reference/disjoint_union.html">disjoint_union()</a></code> consistent with behavior (<a href="https://github.com/igraph/rigraph/issues/1587" class="external-link">#1587</a>, <a href="https://github.com/igraph/rigraph/issues/1641" class="external-link">#1641</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9004" id="igraph-2129004">igraph 2.1.2.9004<a class="anchor" aria-label="anchor" href="#igraph-2129004"></a></h2>
-<div class="section level3">
-<h3 id="documentation-2-1-2-9004">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-2-9004"></a></h3>
-<ul><li>Add central note about experimental functions (<a href="https://github.com/igraph/rigraph/issues/1624" class="external-link">#1624</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9003" id="igraph-2129003">igraph 2.1.2.9003<a class="anchor" aria-label="anchor" href="#igraph-2129003"></a></h2>
-<div class="section level3">
-<h3 id="chore-2-1-2-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-2-9003"></a></h3>
-<ul><li>Replace <code><a href="../reference/isomorphic.html">graph.isomorphic()</a></code> with <code><a href="../reference/isomorphic.html">isomorphic()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1583" class="external-link">#1583</a>, <a href="https://github.com/igraph/rigraph/issues/1623" class="external-link">#1623</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9002" id="igraph-2129002">igraph 2.1.2.9002<a class="anchor" aria-label="anchor" href="#igraph-2129002"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-1-2-9002">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-2-9002"></a></h3>
-<ul><li>Avoid failure in fledge workflow if no changes (<a href="https://github.com/igraph/rigraph/issues/1619" class="external-link">#1619</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9001" id="igraph-2129001">igraph 2.1.2.9001<a class="anchor" aria-label="anchor" href="#igraph-2129001"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-1-2-9001">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-2-9001"></a></h3>
-<ul><li>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/igraph/rigraph/issues/1617" class="external-link">#1617</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.1.2.9000" id="igraph-2129000">igraph 2.1.2.9000<a class="anchor" aria-label="anchor" href="#igraph-2129000"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-2-1-2-9000">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-2-9000"></a></h3>
-<ul><li>Use larger retry count for lock-threads workflow (<a href="https://github.com/igraph/rigraph/issues/1615" class="external-link">#1615</a>).</li>
+<li><p>Make documentation of <code><a href="../reference/disjoint_union.html">disjoint_union()</a></code> consistent with behavior (<a href="https://github.com/igraph/rigraph/issues/1587" class="external-link">#1587</a>, <a href="https://github.com/igraph/rigraph/issues/1641" class="external-link">#1641</a>).</p></li>
+<li><p>Add central note about experimental functions (<a href="https://github.com/igraph/rigraph/issues/1624" class="external-link">#1624</a>).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
