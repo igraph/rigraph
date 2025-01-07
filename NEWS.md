@@ -1,10 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.2.9008
+# igraph 2.1.3
+
+## Features
+
+- Use `_pv` destroy functions to satisfy ASAN checks (#1630).
+
+- Use safe accessor to vector elements (#1633).
 
 ## Chore
 
-- Downstream check.
+- Replace `graph.isomorphic()` with `isomorphic()` (#1583, #1623).
 
 ## Documentation
 
@@ -14,69 +20,9 @@
 
 - Document argument for NCOL format in `read_graph()` (#1621).
 
-
-# igraph 2.1.2.9007
-
-## Features
-
-- Use `_pv` destroy functions to satisfy ASAN checks (#1630).
-
-
-# igraph 2.1.2.9006
-
-## Features
-
-- Use safe accessor to vector elements (#1633).
-
-## Chore
-
-- Sync vendor script with duckdb (#1645).
-
-## Continuous integration
-
-- Add workflow to check each commit (#1644).
-
-
-# igraph 2.1.2.9005
-
-## Documentation
-
 - Make documentation of `disjoint_union()` consistent with behavior (#1587, #1641).
 
-
-# igraph 2.1.2.9004
-
-## Documentation
-
 - Add central note about experimental functions (#1624).
-
-
-# igraph 2.1.2.9003
-
-## Chore
-
-- Replace `graph.isomorphic()` with `isomorphic()` (#1583, #1623).
-
-
-# igraph 2.1.2.9002
-
-## Continuous integration
-
-- Avoid failure in fledge workflow if no changes (#1619).
-
-
-# igraph 2.1.2.9001
-
-## Continuous integration
-
-- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#1617).
-
-
-# igraph 2.1.2.9000
-
-## Continuous integration
-
-- Use larger retry count for lock-threads workflow (#1615).
 
 
 # igraph 2.1.2
