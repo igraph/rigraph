@@ -76,6 +76,7 @@ Other structural.properties:
 \code{\link{which_mutual}()}
 
 Graph cycles
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()},
