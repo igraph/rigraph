@@ -57,6 +57,16 @@ for commit in $original; do
 
   rm -rf ${vendor_dir}/.git ${vendor_dir}/.github ${vendor_dir}/doc ${vendor_dir}/examples ${vendor_dir}/fuzzing ${vendor_dir}/tests ${vendor_dir}/tools ${vendor_dir}/build
 
+  if [ -d "patch" ]; then
+    for f in patch/*.patch; do
+      if patch -i $f -p1 --forward --dry-run; then
+        patch -i $f -p1 --forward --no-backup-if-mismatch
+      else
+        echo "Patch $f does not apply"
+      fi
+    done
+  fi
+
   make -f Makefile-cigraph
 
   R -q -e 'cpp11::cpp_register()'
