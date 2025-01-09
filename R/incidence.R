@@ -90,6 +90,8 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     # create an edgelist from the nonzero entries of the
     # incidence matrix
     idx <- which(incidence != 0, arr.ind = TRUE)
+    # convert to row-first order
+    idx <- idx[order(idx[, 1], idx[, 2]), ]
     # add the value of the matrix. So a row is [s,t,incidence[s,t]]
     el <- cbind(idx, incidence[idx])
 
