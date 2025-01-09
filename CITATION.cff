@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 2.1.1
+version: 2.1.3
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.igraph
@@ -92,8 +92,8 @@ references:
     given-names: Daniel
   - family-names: Müller
     given-names: Kirill
-  year: '2024'
-  notes: R package version 2.1.1
+  year: '2025'
+  notes: R package version 2.1.3
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -105,7 +105,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
@@ -115,7 +115,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
   version: '>= 3.5.0'
 - type: software
   title: cli
@@ -127,7 +127,7 @@ references:
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.cli
 - type: software
   title: graphics
@@ -138,7 +138,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: grDevices
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -148,7 +148,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: lifecycle
   abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
@@ -163,7 +163,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.lifecycle
 - type: software
   title: magrittr
@@ -178,7 +178,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.magrittr
 - type: software
   title: Matrix
@@ -197,7 +197,7 @@ references:
   - family-names: Jagan
     given-names: Mikael
     orcid: https://orcid.org/0000-0002-3542-2938
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.Matrix
 - type: software
   title: pkgconfig
@@ -208,7 +208,7 @@ references:
   authors:
   - family-names: Csárdi
     given-names: Gábor
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.pkgconfig
   version: '>= 2.0.0'
 - type: software
@@ -224,7 +224,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rlang
 - type: software
   title: stats
@@ -235,7 +235,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -245,7 +245,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: vctrs
   abstract: 'vctrs: Vector Helpers'
@@ -262,7 +262,7 @@ references:
   - family-names: Vaughan
     given-names: Davis
     email: davis@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.vctrs
 - type: software
   title: ape
@@ -334,6 +334,8 @@ references:
   - family-names: Louvel
     given-names: Guillaume
     orcid: https://orcid.org/0000-0002-7745-0785
+  - family-names: Marotta
+    given-names: Federico
   - family-names: Marcon
     given-names: Eric
     orcid: https://orcid.org/0000-0002-5249-321X
@@ -358,7 +360,7 @@ references:
     given-names: Damien
     name-particle: de
     orcid: https://orcid.org/0000-0001-9532-5251
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.ape
   version: '>= 5.7-0.1'
 - type: software
@@ -374,7 +376,7 @@ references:
     orcid: https://orcid.org/0000-0001-7098-9676
   - family-names: Chang
     given-names: Winston
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.callr
 - type: software
   title: decor
@@ -393,7 +395,7 @@ references:
   - family-names: Hester
     given-names: Jim
     orcid: https://orcid.org/0000-0002-2739-7082
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.decor
 - type: software
   title: digest
@@ -406,7 +408,7 @@ references:
     given-names: Dirk
     email: edd@debian.org
     orcid: https://orcid.org/0000-0001-6419-907X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.digest
 - type: software
   title: igraphdata
@@ -418,7 +420,7 @@ references:
   - family-names: Csardi
     given-names: Gabor
     email: csardi.gabor@gmail.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.igraphdata
 - type: software
   title: knitr
@@ -431,7 +433,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.knitr
 - type: software
   title: rgl
@@ -446,8 +448,9 @@ references:
   - family-names: Adler
     given-names: Daniel
     email: dadler@dyncall.org
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rgl
+  version: '>= 1.3.14'
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -490,7 +493,7 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: scales
@@ -508,7 +511,7 @@ references:
     orcid: https://orcid.org/0000-0002-5147-4711
   - family-names: Seidel
     given-names: Dana
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.scales
 - type: software
   title: stats4
@@ -519,7 +522,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: tcltk
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -529,7 +532,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -540,7 +543,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.testthat
 - type: software
   title: vdiffr
@@ -565,7 +568,7 @@ references:
   - family-names: Lise
     given-names: Vaudor
     email: lise.vaudor@ens-lyon.fr
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.vdiffr
 - type: software
   title: withr
@@ -590,7 +593,7 @@ references:
     email: hadley@posit.co
   - family-names: Chang
     given-names: Winston
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.withr
 - type: software
   title: graph
@@ -610,7 +613,7 @@ references:
     given-names: Jeff
   - family-names: Shannon
     given-names: Paul
-  year: '2024'
+  year: '2025'
   doi: 10.18129/B9.bioc.graph
 - type: software
   title: cpp11
@@ -629,7 +632,7 @@ references:
   - family-names: François
     given-names: Romain
     orcid: https://orcid.org/0000-0002-2444-4226
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.cpp11
   version: '>= 0.5.0'
 

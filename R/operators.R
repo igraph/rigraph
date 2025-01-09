@@ -172,10 +172,11 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' have completely disjoint graphs. Then a simple union is created. This
 #' function can also be used via the `%du%` operator.
 #'
-#' `graph.disjont.union` handles graph, vertex and edge attributes.  In
-#' particular, it merges vertex and edge attributes using the basic `c()`
+#' `disjoint_union()` handles graph, vertex and edge attributes.  In
+#' particular, it merges vertex and edge attributes using the [vctrs::vec_c()]
 #' function. For graphs that lack some vertex/edge attribute, the corresponding
-#' values in the new graph are set to `NA`. Graph attributes are simply
+#' values in the new graph are set to a missing value (`NA` for scalar attributes,
+#' `NULL` for list attributes). Graph attributes are simply
 #' copied to the result. If this would result a name clash, then they are
 #' renamed by adding suffixes: _1, _2, etc.
 #'
@@ -685,7 +686,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' gc <- complementer(g)
 #' gu <- union(g, gc)
 #' gu
-#' graph.isomorphic(gu, make_full_graph(vcount(g)))
+#' isomorphic(gu, make_full_graph(vcount(g)))
 #'
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)

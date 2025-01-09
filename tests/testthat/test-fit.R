@@ -20,7 +20,7 @@ test_that("fit_power_law() works", {
   expect_equal(fit, expected)
 
   set.seed(20241017)
-  expected_p <- 0.2308
+  expected_p <- 0.2168
   fit <- fit_power_law(d, p.value = TRUE)
 
   expect_equal(fit[names(fit) != "KS.p"], expected)

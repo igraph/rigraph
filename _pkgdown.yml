@@ -226,6 +226,9 @@ reference:
 - title: Versions
 - contents:
   - has_concept("versions")
+- title: Experimental functions
+  contents:
+  - has_lifecycle("experimental")
 - title: internal
   contents:
   - igraph-package

@@ -50,13 +50,13 @@ create again an igraph graph by calling \code{graph_from_adj_list()}.
 g <- make_ring(10, directed = TRUE)
 al <- as_adj_list(g, mode = "out")
 g2 <- graph_from_adj_list(al)
-graph.isomorphic(g, g2)
+isomorphic(g, g2)
 
 ## Undirected
 g <- make_ring(10)
 al <- as_adj_list(g)
 g2 <- graph_from_adj_list(al, mode = "all")
-graph.isomorphic(g, g2)
+isomorphic(g, g2)
 ecount(g2)
 g3 <- graph_from_adj_list(al, mode = "all", duplicate = FALSE)
 ecount(g3)

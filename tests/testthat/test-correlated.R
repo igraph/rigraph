@@ -51,7 +51,7 @@ test_that("sample_correlated_gnp corner cases work", {
 
   is.full <- function(g) {
     g2 <- make_full_graph(vcount(g), directed = is_directed(g))
-    graph.isomorphic(g, g2)
+    isomorphic(g, g2)
   }
 
   g <- sample_gnp(10, .3)
