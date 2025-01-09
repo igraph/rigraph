@@ -2746,33 +2746,6 @@ SEXP R_igraph_0ormatrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
   return result;
 }
 
-SEXP R_igraph_array3_to_SEXP(const igraph_array3_t *a) {
-  SEXP result, dim;
-
-  PROTECT(result=NEW_NUMERIC(igraph_array3_size(a)));
-  igraph_vector_copy_to(&a->data, REAL(result));
-  PROTECT(dim=NEW_INTEGER(3));
-  /* TODO check that row, column and slice counts fit in an int */
-  INTEGER(dim)[0]=(int) igraph_array3_n(a, 1);
-  INTEGER(dim)[1]=(int) igraph_array3_n(a, 2);
-  INTEGER(dim)[2]=(int) igraph_array3_n(a, 3);
-  SET_DIM(result, dim);
-
-  UNPROTECT(2);
-  return result;
-}
-
-SEXP R_igraph_0orarray3_to_SEXP(const igraph_array3_t *a) {
-  SEXP result;
-  if (a) {
-    PROTECT(result=R_igraph_array3_to_SEXP(a));
-  } else {
-    PROTECT(result=R_NilValue);
-  }
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m) {
   SEXP result;;
   const char *str;
@@ -3494,24 +3467,6 @@ igraph_error_t R_SEXP_to_matrix_complex_copy(SEXP pakl, igraph_matrix_complex_t 
                                                 Rf_xlength(pakl)));
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
   akl->ncol=INTEGER(GET_DIM(pakl))[1];
-  return IGRAPH_SUCCESS;
-}
-
-void R_igraph_SEXP_to_array3(SEXP rval, igraph_array3_t *a) {
-  R_SEXP_to_vector(rval, &a->data);
-  a->n1=INTEGER(GET_DIM(rval))[0];
-  a->n2=INTEGER(GET_DIM(rval))[1];
-  a->n3=INTEGER(GET_DIM(rval))[2];
-  a->n1n2=(a->n1) * (a->n2);
-}
-
-igraph_error_t R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
-  IGRAPH_CHECK(igraph_vector_init_array(&a->data, REAL(rval), Rf_xlength(rval)));
-  a->n1=INTEGER(GET_DIM(rval))[0];
-  a->n2=INTEGER(GET_DIM(rval))[1];
-  a->n3=INTEGER(GET_DIM(rval))[2];
-  a->n1n2=(a->n1) * (a->n2);
-
   return IGRAPH_SUCCESS;
 }
 
