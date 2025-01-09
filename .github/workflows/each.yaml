@@ -1,0 +1,50 @@
+# Helper workflow to trigger rcc for each commit on a branch
+
+on:
+  push:
+    branches:
+      - each-*
+
+name: each-rcc
+
+jobs:
+  each-rcc:
+    runs-on: ubuntu-24.04
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
+      versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
+      dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
+
+    name: "Trigger rcc workflow for each commit"
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+
+      - name: Enumerate all commits from the repository's main branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Get name of main branch of repository
+          # origin/HEAD isn't known here
+          main=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+          commits=$(git log --reverse --pretty=format:"%H" origin/${main}.. --)
+          echo $commits
+
+          # Run workflow for each commit where the status of the rcc workflow isn't "pending" or "success"
+          for commit in $commits; do
+            echo $commit
+            # Get first status of the workflow with the name "rcc"
+            status=$(gh api repos/{owner}/{repo}/commits/${commit}/statuses | jq -r '.[] | select(.context == "rcc") | .state' | head -n 1)
+            echo $status
+            if [[ "$status" != "pending" && "$status" != "success" ]]; then
+              echo "Running rcc for commit $commit"
+              gh workflow run rcc -f ref=$commit -r ${{ github.ref }}
+            fi
+          done
+        shell: bash

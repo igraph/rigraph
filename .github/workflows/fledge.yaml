@@ -46,6 +46,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          fetch-tags: true
 
       - name: Configure Git identity
         run: |
@@ -103,10 +104,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -x
-          gh pr create --base main --head fledge --fill-first
-          gh workflow run rcc -f ref=$(git rev-parse HEAD)
-          gh pr merge --squash --auto
+          set -ex
+          if [ -n "$(git diff main --numstat)" ]; then
+            gh pr create --base main --head fledge --fill-first
+            gh workflow run rcc -f ref=$(git rev-parse HEAD)
+            gh pr merge --squash --auto
+          else
+            echo "No changes."
+          fi
         shell: bash
 
       - name: Check release

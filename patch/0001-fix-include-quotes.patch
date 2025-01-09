@@ -1,0 +1,25 @@
+From c6ff0ba179c304572cf0bc285201aebb963f89ae Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Wed, 8 Jan 2025 05:21:39 +0100
+Subject: [PATCH] fix include quotes
+
+---
+ src/vendor/cigraph/vendor/plfit/lbfgs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/vendor/plfit/lbfgs.c b/src/vendor/cigraph/vendor/plfit/lbfgs.c
+index 6472a9aa26..c1b7fac28f 100644
+--- a/src/vendor/cigraph/vendor/plfit/lbfgs.c
++++ b/src/vendor/cigraph/vendor/plfit/lbfgs.c
+@@ -70,7 +70,7 @@ licence.
+ #include <stdlib.h>
+ #include <math.h>
+ 
+-#include <lbfgs.h>
++#include "lbfgs.h"
+ 
+ #ifdef  _MSC_VER
+ #define inline  __inline
+-- 
+2.47.1
+

@@ -1,75 +1,14 @@
-# manynet
+# grainscape
 
 <details>
 
-* Version: 1.2.6
-* GitHub: https://github.com/stocnet/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2024-10-05 16:40:01 UTC
-* Number of recursive dependencies: 146
+* Version: 0.4.4
+* GitHub: https://github.com/achubaty/grainscape
+* Source code: https://github.com/cran/grainscape
+* Date/Publication: 2023-04-20 08:40:02 UTC
+* Number of recursive dependencies: 95
 
-Run `revdepcheck::cloud_details(, "manynet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      > 
-      > test_check("manynet")
-      Starting 2 test processes
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      
-    ...
-      `expected`: 0.2 0.1 0.1
-      ── Failure ('test-measure_centrality.R:79:3'): two mode eigenvector centrality calculated correctly ──
-      top3(node_eigenvector(test_igr, normalized = TRUE)) (`actual`) not equal to c(0.4505, 0.4248, 0.5) (`expected`).
-      
-        `actual`: 1.3 1.2 1.4
-      `expected`: 0.5 0.4 0.5
-      
-      [ FAIL 7 | WARN 18643 | SKIP 21 | PASS 558 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R           1.5Mb
-        tutorials   1.8Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 7 marked UTF-8 strings
-    ```
-
-# simcausal
-
-<details>
-
-* Version: 0.5.6
-* GitHub: https://github.com/osofr/simcausal
-* Source code: https://github.com/cran/simcausal
-* Date/Publication: 2022-10-28 11:52:27 UTC
-* Number of recursive dependencies: 83
-
-Run `revdepcheck::cloud_details(, "simcausal")` for more info
+Run `revdepcheck::cloud_details(, "grainscape")` for more info
 
 </details>
 
@@ -80,99 +19,100 @@ Run `revdepcheck::cloud_details(, "simcausal")` for more info
       Running ‘test-all.R’
     Running the tests in ‘tests/test-all.R’ failed.
     Complete output:
-      > ## unit tests will not be done if RUnit is not available
-      > # setwd("..")
-      > # getwd()
-      > # library(RUnit)
-      > if(require("RUnit", quietly=TRUE)) {
-      +     ## --- Setup ---
-      + 
-    ...
-      ℹ Please use `as_directed()` instead. 
-      2: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      3: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
-      4: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: Marsaglia-Multicarry has poor statistical properties
-      5: In RNGkind(kind = testSuite$rngKind, normal.kind = testSuite$rngNormalKind) :
-        RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry
+      > library(testthat)
+      > test_check("grainscape")
+      Loading required package: grainscape
+      Writing layer `nodes' to data source 
+        `/tmp/RtmpXa81Of/tiny_goc_thresh2' using driver `ESRI Shapefile'
+      Writing 28 features with 5 fields and geometry type Point.
+      Writing layer `linksCentroid' to data source 
+        `/tmp/RtmpXa81Of/tiny_goc_thresh2' using driver `ESRI Shapefile'
+      Writing 59 features with 15 fields and geometry type Line String.
+      Writing layer `nodes' to data source 
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
+      Writing 43 features with 4 fields and geometry type Point.
+      Writing layer `linksCentroid' to data source 
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
+      Writing 93 features with 12 fields and geometry type Line String.
+      Writing layer `linksPerim' to data source 
+        `/tmp/RtmpXa81Of/tiny_mpg' using driver `ESRI Shapefile'
+      Writing 93 features with 8 fields and geometry type Line String.
+      IGRAPH 3753ef2 UN-- 43 89 -- 
+      + attr: name (v/c), patchId (v/n), patchArea (v/n), patchEdgeArea
+      | (v/n), coreArea (v/n), centroidX (v/n), centroidY (v/n), linkId
+      | (e/n), lcpPerimWeight (e/n), startPerimX (e/n), startPerimY (e/n),
+      | endPerimX (e/n), endPerimY (e/n)
+      + edges from 3753ef2 (vertex names):
+       [1] 62 --74  30 --41  30 --40  7  --22  5  --7   80 --86  73 --78  29 --31 
+       [9] 19 --29  67 --85  41 --48  40 --41  37 --41  8  --28  9  --12  12 --14 
+      [17] 30 --48  8  --9   48 --54  95 --103 62 --64  5  --22  32 --37  74 --84 
+      [25] 55 --56  5  --32  9  --28  68 --80  14 --19  30 --54  5  --37  54 --55 
+      [33] 64 --74  86 --100 100--107 41 --50  56 --76  56 --61  103--105 9  --14 
+      + ... omitted several edges
+      [ FAIL 1 | WARN 2 | SKIP 0 | PASS 81 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Error ('test-corridor-distance-point.R:31:3'): corridor handles NA values ───
+      Error in `shortest_paths(x@th[[whichThresh]]$goc, which(V(x@th[[whichThresh]]$goc)$polygonId == 
+          na.omit(startEndPolygons[1])), which(V(x@th[[whichThresh]]$goc)$polygonId == 
+          na.omit(startEndPolygons[2])), weights = V(x@th[[whichThresh]]$goc)$meanWeight)`: At rinterface_extra.c:138 : Wrong index. Attempt to get element with index 0 from vector of length 0. Invalid value
+      Backtrace:
+          ▆
+       1. ├─testthat::expect_warning(...) at test-corridor-distance-point.R:31:3
+       2. │ └─testthat:::quasi_capture(...)
+       3. │   ├─testthat (local) .capture(...)
+       4. │   │ └─base::withCallingHandlers(...)
+       5. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
+       6. ├─grainscape::corridor(goc, whichThresh = 2, coordSomeNA)
+       7. └─grainscape::corridor(goc, whichThresh = 2, coordSomeNA)
+       8.   └─grainscape (local) .local(x, ...)
+       9.     └─igraph::shortest_paths(...)
+      
+      [ FAIL 1 | WARN 2 | SKIP 0 | PASS 81 ]
+      Error: Test failures
       Execution halted
     ```
 
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘simcausal_vignette.Rnw’ using knitr
-    Error: processing vignette 'simcausal_vignette.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'simcausal_vignette.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `colortbl.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.55 \RequirePackage
-                        [T1]{fontenc}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘simcausal_vignette.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘simcausal_vignette.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# skynet
+# multilaterals
 
 <details>
 
-* Version: 1.4.3
-* GitHub: https://github.com/ropensci/skynet
-* Source code: https://github.com/cran/skynet
-* Date/Publication: 2022-06-17 13:00:02 UTC
-* Number of recursive dependencies: 98
+* Version: 1.0
+* GitHub: NA
+* Source code: https://github.com/cran/multilaterals
+* Date/Publication: 2017-09-07 15:23:58 UTC
+* Number of recursive dependencies: 15
 
-Run `revdepcheck::cloud_details(, "skynet")` for more info
+Run `revdepcheck::cloud_details(, "multilaterals")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking examples ... ERROR
     ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(skynet)
-      > 
-      > test_check("skynet")
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
-      
-      ══ Skipped tests (4) ═══════════════════════════════════════════════════════════
-    ...
-       14. │   └─base::lapply(args, rlang::eval_tidy, data = data_mask)
-       15. │     └─rlang (local) FUN(X[[i]], ...)
-       16. └─igraph (local) from(V(x)[y])
-       17.   └─lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
-       18.     └─lifecycle:::deprecate_stop0(msg)
-       19.       └─rlang::cnd_signal(...)
-      
-      [ FAIL 1 | WARN 25 | SKIP 4 | PASS 69 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘maps’
-      All declared Imports should be used.
+    Running examples in ‘multilaterals-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: multilaterals
+    > ### Title: Transitive Index Numbers for Cross-Sections and Panel Data
+    > ### Aliases: multilaterals-package multilaterals
+    > ### Keywords: package
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > data('multil_data')
+    > 
+    > ## From 'An introduction to Efficiency and
+    > ##  Productivity Analysis' (Coelli et al., 2005), page 124-126.
+    > inputIndx = multilateral(data.x=billy_inp_q,data.y=billy_inp_p,var.agg='year',
+    +  idx='fisher',PAR=FALSE,transitivity='eks',bench=2000,period=NULL )
+    > outputIndx = multilateral(data.x=billy_out_q,data.y=billy_out_p, var.agg='year',
+    +  PAR=FALSE,transitivity='mst',bench=2000,period=NULL )
+    Error in igraph::shortest_paths(ig, from = startNode, to = endNode) : 
+      At rinterface_extra.c:138 : Wrong index. Attempt to get element with index 0 from vector of length 0. Invalid value
+    Calls: multilateral -> multicomp -> <Anonymous>
+    Execution halted
     ```
 

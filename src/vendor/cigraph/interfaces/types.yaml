@@ -157,6 +157,13 @@ VERTEX_INDICES:
     CTYPE: igraph_vector_int_t
     FLAGS: BY_REF
 
+# Temporary, for https://github.com/igraph/rigraph/pull/1630
+# We should call the `_PV` versions for all types in the future.
+VERTEX_INDICES_PV:
+    # An integer vector containing vertex indices.
+    CTYPE: igraph_vector_int_t
+    FLAGS: BY_REF
+
 VERTEX_INDEX_PAIRS:
     # An integer vector containing pairs of vertex indices, in a flattened
     # representation
@@ -532,9 +539,14 @@ ARPACKFUNC:
     CTYPE: igraph_arpack_function_t
 
 CLIQUE_FUNC:
-    # Callback function for igraph_cliques_callback(). called with every clique
+    # Callback function for igraph_cliques_callback(). Called with every clique
     # that was found by the function.
     CTYPE: igraph_clique_handler_t
+
+CYCLE_FUNC:
+    # Callback function for igraph_simple_cycles_callback(). Called with every
+    # cycle that was found by the function.
+    CTYPE: igraph_cycle_handler_t
 
 BFS_FUNC:
     # Callback function for igraph_bfs(). Called with every vertex that was

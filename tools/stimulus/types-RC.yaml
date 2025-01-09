@@ -536,6 +536,27 @@ VERTEX_INDICES:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+VERTEX_INDICES_PV:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
+    INCONV:
+        IN: |-
+            R_SEXP_to_vector_int_copy(%I%, &%C%);
+            IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &%C%);
+        OUT: |-
+            if (0 != igraph_vector_int_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEX_INDEX_PAIRS:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t

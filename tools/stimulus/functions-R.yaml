@@ -701,7 +701,15 @@ igraph_dfs:
 # Bipartite graphs
 #######################################
 
+# Hack: add NULL default on 'types' parameter. Even though this parameter is not
+# optional in the C core, it must be optional in R so that weights can be
+# automatically taken from the 'type' edge attribute.
 igraph_bipartite_projection_size:
+    PARAMS: |-
+        GRAPH graph, BIPARTITE_TYPES types=NULL,
+        OUT INTEGER vcount1, OUT INTEGER ecount1,
+        OUT INTEGER vcount2, OUT INTEGER ecount2
+    DEPS: types ON graph
 
 #######################################
 # Bipartite graphs
@@ -718,7 +726,9 @@ igraph_biadjacency:
 
 igraph_get_biadjacency:
 
+# Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
+    PARAMS: GRAPH graph, OUT BOOLEAN res, OPTIONAL OUT BIPARTITE_TYPES type
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
@@ -1429,6 +1439,11 @@ igraph_solve_lsap:
 #######################################
 
 igraph_find_cycle:
+
+igraph_simple_cycles:
+
+igraph_simple_cycles_callback:
+    IGNORE: RR, RC
 
 #######################################
 # Eulerian functions
