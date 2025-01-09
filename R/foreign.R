@@ -132,7 +132,8 @@ write.graph.fromraw <- function(buffer, file) {
 #'   insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
-#' @section Edge list format: This format is a simple text file with numeric
+#' @section Edge list format:
+#' This format is a simple text file with numeric
 #' vertex IDs defining the edges. There is no need to have newline characters
 #' between the edges, a simple space will also do. Vertex IDs contained in
 #' the file are assumed to start at zero.
@@ -142,10 +143,33 @@ write.graph.fromraw <- function(buffer, file) {
 #' then it is ignored; so it is safe to set it to zero (the default).}
 #' \item{directed}{Logical scalar, whether to create a directed graph. The
 #' default value is `TRUE`.} }
-#' @section Pajek format: Currently igraph only supports Pajek network
+#' @section Pajek format:
+#' Currently igraph only supports Pajek network
 #' files, with a `.net` extension, but not Pajek project files with
 #' a `.paj` extension. Only network data is supported; permutations,
 #' hierarchies, clusters and vectors are not.
+#' @section NCOL format:
+#' Additional arguments: \describe{
+#' \item{predef}{Names of the vertices in the file.
+#' If `character(0)` (the default) is given here
+#' then vertex IDs will be assigned to vertex names in the order of
+#' their appearance in the .ncol file.
+#' If it is not `character(0)` and some unknown vertex names are found
+#' in the .ncol file then new vertex ids will be assigned to them. }
+#' \item{names}{Logical value, if `TRUE` (the default)
+#' the symbolic names of the vertices will be added to the graph
+#' as a vertex attribute called “name”. }
+#' \item{weights}{Whether to add the weights of the edges to the graph
+#' as an edge attribute called “weight”.
+#' `"yes"` adds the weights (even if they are not present in the file,
+#' in this case they are assumed to be zero).
+#' `"no"` does not add any edge attribute.
+#' `"auto"` (the default) adds the attribute if and only
+#' if there is at least one explicit edge weight in the input file. }
+#' \item{directed}{Whether to create a directed graph (default: `FALSE`).
+#' As this format was originally used only for undirected graphs
+#' there is no information in the file about the directedness of the graph.}
+#' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [write_graph()]
 #' @keywords graphs
@@ -224,7 +248,7 @@ read_graph <- function(file, format = c(
 #' @export
 #' @keywords graphs
 #' @cdocs igraph_write_graph_dimacs_flow igraph_write_graph_dot igraph_write_graph_edgelist
-#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda 
+#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda
 #' @cdocs igraph_write_graph_lgl igraph_write_graph_ncol igraph_write_graph_pajek
 #' @examples
 #'
@@ -566,25 +590,13 @@ write.graph.dot <- function(graph, file, ...) {
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [read_graph()], [graph.isomorphic.vf2()]
+#' @seealso [read_graph()], [isomorphic()]
 #' @references M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 #' of graphs and its use for benchmarking graph isomorphism algorithms,
 #' *Pattern Recognition Letters*, Volume 24, Issue 8 (May 2003)
 #' @family foreign
 #' @export
 #' @keywords graphs
-#' @section Examples:
-#' \preformatted{
-#' g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
-#'   which=10, compressed=TRUE)
-#' g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
-#'   which=10, compressed=TRUE)
-#' graph.isomorphic.vf2(g, g2)	\% should be TRUE
-#' g3 <- graph_from_graphdb(url=paste(sep="/",
-#'                               "http://cneurocvs.rmki.kfki.hu",
-#'                               "graphdb/gzip/iso/bvg/b06m",
-#'                               "iso_b06m_m200.A09.gz"))
-#' }
 graph_from_graphdb <- function(url = NULL,
                                prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
                                base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",

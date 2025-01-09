@@ -17,7 +17,7 @@ test_that("layout_with_fr() works", {
 test_that("layout_with_fr() deprecated argument", {
   rlang::local_options(lifecycle_verbosity = "warning")
   g <- make_ring(10)
-  expect_snapshot(
+  expect_snapshot(error = TRUE, {
     l <- layout_with_fr(
       g,
       niter = 50,
@@ -27,7 +27,7 @@ test_that("layout_with_fr() deprecated argument", {
       area = 1,
       repulserad = 1
     )
-  )
+  })
 
 })
 
@@ -205,7 +205,7 @@ test_that("Kamada-Kawai layout generator works", {
 
 test_that("layout_with_kk() deprecated arguments", {
   g <- make_ring(10)
-  expect_snapshot(
+  expect_snapshot(error = TRUE, {
     l <- layout_with_kk(
       g,
       maxiter = 50,
@@ -215,7 +215,7 @@ test_that("layout_with_kk() deprecated arguments", {
       initemp = 1,
       coolexp = 1
     )
-  )
+  })
 
 })
 
