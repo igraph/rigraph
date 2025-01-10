@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.3.9002
+
+## Chore
+
+- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
+
+- Adapt handling of optional parameters to interface definition changes in the C core (#1567).
+
+- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
+
+## Breaking changes
+
+- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
+
+- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
+
+
 # igraph 2.1.3.9001
 
 ## Bug fixes
