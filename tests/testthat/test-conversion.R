@@ -71,7 +71,7 @@ test_that("as_undirected() keeps attributes", {
 })
 
 test_that("as_adjacency_matrix() works -- sparse", {
-  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   basic_adj_matrix <- as_adjacency_matrix(g)
   expect_s4_class(basic_adj_matrix, "dgCMatrix")
   expected_matrix <- matrix(
@@ -93,17 +93,19 @@ test_that("as_adjacency_matrix() works -- sparse", {
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
   weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
   expect_s4_class(weight_adj_matrix, "dgCMatrix")
-  expect_equal(as.matrix(weight_adj_matrix),
+  expect_equal(
+    as.matrix(weight_adj_matrix),
     matrix(
       c(0, 3.4, 0, 0, 1.2, 2.7, 0, 13.7, 0, 0, 11.6, 0, 0, 0, 0.1, 0),
       nrow = 4L,
       ncol = 4L,
       dimnames = list(c("a", "b", "c", "d"), c("a", "b", "c", "d"))
-    ))
+    )
+  )
 })
 
 test_that("as_adjacency_matrix() works -- sparse + not both", {
-  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   g <- as_undirected(dg, mode = "each")
 
   lower_adj_matrix <- as_adjacency_matrix(g, type = "lower")
@@ -128,16 +130,15 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
 })
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
-  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
 
   E(g)$bla <- letters[1:ecount(g)]
   expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
-
 })
 
 test_that("as_adjacency_matrix() works -- sparse undirected", {
-  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   ug <- as_undirected(dg, mode = "each")
   adj_matrix <- as_adjacency_matrix(ug)
   expect_s4_class(adj_matrix, "dgCMatrix")
@@ -155,7 +156,7 @@ test_that("as_adjacency_matrix() works -- sparse undirected", {
 })
 
 test_that("as_adjacency_matrix() works -- dense", {
-  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
 
   basic_adj_matrix <- as_adjacency_matrix(g, sparse = FALSE)
   expected_matrix <- matrix(
@@ -175,7 +176,11 @@ test_that("as_adjacency_matrix() works -- dense", {
   expect_equal(
     weight_adj_matrix,
     matrix(
-      c(0, 3.4, 0, 0, 1.2, 2.7, 0, 4.3, 0, 0, 6, 0, 0, 0, 0.1, 0),
+      c(0, 3.4, 0, 0, 1.2, 2.7, 0, 13.7, 0, 0, 11.6, 0, 0, 0, 0.1, 0),
+      # below is wrong test result due to a bug (#1551). Weights of ties
+      # between the same node pair should be aggregated and not only the last
+      # weight should be considered. The above is consistent with the sparse case
+      # c(0, 3.4, 0, 0, 1.2, 2.7, 0, 4.3, 0, 0, 6, 0, 0, 0, 0.1, 0),
       nrow = 4L,
       ncol = 4L,
       dimnames = list(c("a", "b", "c", "d"), c("a", "b", "c", "d"))
@@ -184,17 +189,16 @@ test_that("as_adjacency_matrix() works -- dense", {
 })
 
 test_that("as_adjacency_matrix() errors well -- dense", {
-  g <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
 
   E(g)$bla <- letters[1:ecount(g)]
   expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
-
 })
 
 
 test_that("as_adjacency_matrix() works -- dense undirected", {
-  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   ug <- as_undirected(dg, mode = "each")
   # no different treatment than undirected if no attribute?!
   adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE)
@@ -211,7 +215,11 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
   expect_equal(
     weight_adj_matrix,
     matrix(
-      c(0, 3.4, 0, 0, 3.4, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 4.3, 0.1, 0),
+      c(0, 4.6, 0, 0, 4.6, 2.7, 0, 13.7, 0, 0, 11.6, 0.1, 0, 13.7, 0.1, 0),
+      # below is wrong test result due to a bug (#1551). Weights of ties
+      # between the same node pair should be aggregated and not only the last
+      # weight should be considered. The above is consistent with the sparse case
+      # c(0, 3.4, 0, 0, 3.4, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 4.3, 0.1, 0),
       nrow = 4L,
       ncol = 4L
     )
@@ -219,7 +227,7 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
 })
 
 test_that("as_adjacency_matrix() works -- dense + not both", {
-  dg <- make_graph(c(1,2, 2,1, 2,2, 3,3, 3,3, 3,4, 4,2, 4,2, 4,2), directed = TRUE)
+  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
   g <- as_undirected(dg, mode = "each")
   E(g)$attribute <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
 
@@ -233,13 +241,17 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
   expect_equal(
     lower_adj_matrix,
     matrix(
-      c(0, 3.4, 0, 0, 0, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 0, 0, 0),
+      c(0, 4.6, 0, 0, 0, 2.7, 0, 13.7, 0, 0, 11.6, 0.1, 0, 0, 0, 0),
+      # below is wrong test result due to a bug (#1551). Weights of ties
+      # between the same node pair should be aggregated and not only the last
+      # weight should be considered. The above is consistent with the sparse case
+      # c(0, 3.4, 0, 0, 0, 2.7, 0, 4.3, 0, 0, 6, 0.1, 0, 0, 0, 0),
       nrow = 4L,
       ncol = 4L
     )
   )
 
-  upper_adj_matrix  <- as_adjacency_matrix(
+  upper_adj_matrix <- as_adjacency_matrix(
     g,
     type = "upper",
     sparse = FALSE,
@@ -249,7 +261,11 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
   expect_equal(
     upper_adj_matrix,
     matrix(
-      c(0, 0, 0, 0, 3.4, 2.7, 0, 0, 0, 0, 6, 0, 0, 4.3, 0.1, 0),
+      c(0, 0, 0, 0, 4.6, 2.7, 0, 0, 0, 0, 11.6, 0, 0, 13.7, 0.1, 0),
+      # below is wrong test result due to a bug (#1551). Weights of ties
+      # between the same node pair should be aggregated and not only the last
+      # weight should be considered. The above is consistent with the sparse case
+      # c(0, 0, 0, 0, 3.4, 2.7, 0, 0, 0, 0, 6, 0, 0, 4.3, 0.1, 0),
       nrow = 4L,
       ncol = 4L
     )
