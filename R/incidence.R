@@ -35,50 +35,51 @@ graph.incidence <- function(incidence, directed = FALSE, mode = c("all", "out", 
 ##   02110-1301 USA
 ##
 ## -----------------------------------------------------------------
+
 # Helper function to process sparse matrices
 process.sparse <- function(incidence, num_rows) {
-  edge_list <- igraph:::mysummary(incidence) # TODO: remove mysummary?
-  edge_list[, 2] <- edge_list[, 2] + num_rows
-  as.matrix(edge_list)
+  el <- mysummary(incidence)
+  el[, 2] <- el[, 2] + num_rows
+  as.matrix(el)
 }
 
 # Helper function to process dense matrices
 process.dense <- function(incidence, num_rows) {
-  nonzero_indices <- which(incidence != 0, arr.ind = TRUE)
-  nonzero_indices <- nonzero_indices[order(nonzero_indices[, 1], nonzero_indices[, 2]), , drop = FALSE]
-  edge_list <- cbind(nonzero_indices, incidence[nonzero_indices])
-  edge_list[, 2] <- edge_list[, 2] + num_rows
-  edge_list
+  nz_ids <- which(incidence != 0, arr.ind = TRUE)
+  nz_ids <- nz_ids[order(nz_ids[, 1], nz_ids[, 2]), , drop = FALSE]
+  el <- cbind(nz_ids, incidence[nz_ids])
+  el[, 2] <- el[, 2] + num_rows
+  el
 }
 
-adjust.directionality <- function(edge_list, mode, directed) {
+adjust.directionality <- function(el, mode, directed) {
   if (!directed || mode == "out") {
     # No adjustment needed
-    return(edge_list)
+    return(el)
   } else if (mode == "in") {
     # Reverse the edges
-    edge_list[, 1:2] <- edge_list[, c(2, 1)]
+    el[, 1:2] <- el[, c(2, 1)]
   } else if (mode %in% c("all", "total")) {
     # Add reversed edges
-    reversed_edges <- edge_list[, c(2, 1, 3)]
-    edge_list <- rbind(edge_list, reversed_edges)
+    reversed_edges <- el[, c(2, 1, 3)]
+    el <- rbind(el, reversed_edges)
   }
-  edge_list
+  el
 }
 
-graph.incidence <- function(incidence, directed = FALSE, mode = "out",
-                            multiple = FALSE, weighted = NULL) {
+graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
+                                  multiple = FALSE, weighted = NULL) {
   num_rows <- nrow(incidence)
   num_cols <- ncol(incidence)
 
   if (inherits(incidence, "Matrix")) {
     # General Sparse matrix processing
-    edge_list <- process.sparse(incidence, num_rows)
+    el <- process.sparse(incidence, num_rows)
   } else if (!is.null(weighted)) {
     # Dense weighted matrix processing
-    edge_list <- process.dense(incidence, num_rows)
+    el <- process.dense(incidence, num_rows)
   } else {
-    # Dense unweighted matrix (potentially with multiple edges
+    # Dense unweighted matrix (potentially with multiple edges)
     mode_num <- switch(mode,
       "out" = 1,
       "in" = 2,
@@ -91,17 +92,18 @@ graph.incidence <- function(incidence, directed = FALSE, mode = "out",
   }
 
   # Adjust edgelist for directionality and mode
-  edge_list <- adjust.directionality(edge_list, mode, directed)
+  el <- adjust.directionality(el, mode, directed)
 
   # Handle weights or replicate rows for multiple edges
   if (!is.null(weighted)) {
     res <- make_empty_graph(n = num_rows + num_cols, directed = directed)
-    weight_attr <- list(edge_list[, 3])
+    weight_attr <- list(el[, 3])
     names(weight_attr) <- weighted
-    res <- add_edges(res, edges = t(edge_list[, 1:2]), attr = weight_attr)
+    res <- add_edges(res, edges = t(el[, 1:2]), attr = weight_attr)
   } else {
-    edge_list <- edge_list[rep(seq_len(nrow(edge_list)), times = edge_list[, 3]), 1:2]
-    res <- make_graph(n = num_rows + num_cols, c(t(edge_list)), directed = directed)
+    # create multiple edges according to the third column
+    el <- el[rep(seq_len(nrow(el)), times = el[, 3]), 1:2]
+    res <- make_graph(n = num_rows + num_cols, c(t(el)), directed = directed)
   }
 
   # Set vertex attributes and return
@@ -206,7 +208,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
     }
   }
 
-  res <- graph.incidence(incidence,
+  res <- graph.incidence.build(incidence,
     directed = directed,
     mode = mode, multiple = multiple,
     weighted = weighted
