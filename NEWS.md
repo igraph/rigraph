@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.3.9003
+
+- Refactor: removed `for` loops from `get.incidence.dense()` (#1483) (#1655).
+
+
 # igraph 2.1.3.9002
 
 ## Chore
