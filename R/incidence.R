@@ -36,14 +36,14 @@ graph.incidence <- function(incidence, directed = FALSE, mode = c("all", "out", 
 ##
 ## -----------------------------------------------------------------
 
-# Helper function to process sparse matrices
+# Helper function to process sparse matrices (matrix to edgelist)
 process.sparse <- function(incidence, num_rows) {
   el <- mysummary(incidence)
   el[, 2] <- el[, 2] + num_rows
   as.matrix(el)
 }
 
-# Helper function to process dense matrices
+# Helper function to process dense matrices (matrix to edgelist)
 process.dense <- function(incidence, num_rows) {
   nz_ids <- which(incidence != 0, arr.ind = TRUE)
   nz_ids <- nz_ids[order(nz_ids[, 1], nz_ids[, 2]), , drop = FALSE]
@@ -52,6 +52,7 @@ process.dense <- function(incidence, num_rows) {
   el
 }
 
+# adjust edgelist according to directionality of edges
 adjust.directionality <- function(el, mode, directed) {
   if (!directed || mode == "out") {
     # No adjustment needed
@@ -79,6 +80,9 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
     # Dense weighted matrix processing
     el <- process.dense(incidence, num_rows)
   } else {
+    mode(incidence) <- "double"
+    on.exit(.Call(R_igraph_finalizer))
+
     # Dense unweighted matrix (potentially with multiple edges)
     mode_num <- switch(mode,
       "out" = 1,
@@ -86,7 +90,6 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
       "all" = 3,
       "total" = 3
     )
-    incidence <- incidence * 1.0 # TODO: check why integer fails below
     res <- .Call(R_igraph_biadjacency, incidence, directed, mode_num, multiple)
     return(set_vertex_attr(res$graph, "type", value = res$types))
   }
