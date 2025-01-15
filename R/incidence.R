@@ -46,7 +46,6 @@ process.sparse <- function(incidence, num_rows) {
 # Helper function to process dense matrices (matrix to edgelist)
 process.dense <- function(incidence, num_rows) {
   nz_ids <- which(incidence != 0, arr.ind = TRUE)
-  nz_ids <- nz_ids[order(nz_ids[, 1], nz_ids[, 2]), , drop = FALSE]
   el <- cbind(nz_ids, incidence[nz_ids])
   el[, 2] <- el[, 2] + num_rows
   el
