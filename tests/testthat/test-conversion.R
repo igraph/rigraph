@@ -202,6 +202,7 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
   ug <- as_undirected(dg, mode = "each")
   # no different treatment than undirected if no attribute?!
   adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE)
+  dimnames(adj_matrix) <- NULL
   expect_equal(
     adj_matrix,
     matrix(
@@ -212,6 +213,7 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
 
   E(ug)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
   weight_adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE, attr = "weight")
+  dimnames(weight_adj_matrix) <- NULL
   expect_equal(
     weight_adj_matrix,
     matrix(
@@ -237,6 +239,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     sparse = FALSE,
     attr = "attribute"
   )
+  dimnames(lower_adj_matrix) <- NULL
 
   expect_equal(
     lower_adj_matrix,
@@ -257,7 +260,7 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     sparse = FALSE,
     attr = "attribute"
   )
-
+  dimnames(upper_adj_matrix) <- NULL
   expect_equal(
     upper_adj_matrix,
     matrix(
