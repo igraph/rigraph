@@ -62,17 +62,11 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
   num_rows <- nrow(incidence)
   num_cols <- ncol(incidence)
 
-  if (inherits(incidence, "Matrix")) {
-    # General Sparse matrix processing
-    el <- process.sparse(incidence, num_rows)
-  } else if (!is.null(weighted)) {
-    # Dense weighted matrix processing (convert to sparse matrix first)
-    el <- process.sparse(as(incidence, "dgCMatrix"), num_rows)
-  } else {
+  # Handle dense unweighted matrices first
+  if (!inherits(incidence, "Matrix") && is.null(weighted)) {
     mode(incidence) <- "double"
     on.exit(.Call(R_igraph_finalizer))
 
-    # Dense unweighted matrix (potentially with multiple edges)
     mode_num <- switch(mode,
       "out" = 1,
       "in" = 2,
@@ -83,24 +77,32 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
     return(set_vertex_attr(res$graph, "type", value = res$types))
   }
 
+  # Convert to sparse matrix if not already sparse
+  if (!inherits(incidence, "Matrix")) {
+    incidence <- as(incidence, "dgCMatrix")
+  }
+
+  # Process sparse matrix to edgelist
+  el <- process.sparse(incidence, num_rows)
   # Adjust edgelist for directionality and mode
   el <- adjust.directionality(el, mode, directed)
 
-  # Handle weights or replicate rows for multiple edges
+  # Construct the graph object from processed edgelist
   if (!is.null(weighted)) {
+    # Handle weighted edges
     res <- make_empty_graph(n = num_rows + num_cols, directed = directed)
     weight_attr <- list(el[, 3])
     names(weight_attr) <- weighted
     res <- add_edges(res, edges = t(el[, 1:2]), attr = weight_attr)
   } else {
-    # create multiple edges according to the third column
+    # Handle unweighted edges, replicating rows for multiple edges
     el <- el[rep(seq_len(nrow(el)), times = el[, 3]), 1:2]
     res <- make_graph(n = num_rows + num_cols, c(t(el)), directed = directed)
   }
 
-  # Set vertex attributes and return
   set_vertex_attr(res, "type", value = c(rep(FALSE, num_rows), rep(TRUE, num_cols)))
 }
+
 
 
 
