@@ -49,15 +49,15 @@ adjust.directionality <- function(el, mode, directed) {
   if (!directed || mode == "out") {
     # No adjustment needed
     return(el)
-  } else if (mode == "in") {
-    # Reverse the edges
-    el[, 1:2] <- el[, c(2, 1)]
-  } else if (mode %in% c("all", "total")) {
-    # Add reversed edges
-    reversed_edges <- el[, c(2, 1, 3)]
-    el <- rbind(el, reversed_edges)
   }
-  el
+  reversed_edges <- el[, c(2, 1, 3)]
+  if (mode == "in") {
+    return(reversed_edges)
+  }
+  if (mode %in% c("all", "total")) {
+    # Add reversed edges
+    rbind(el, reversed_edges)
+  }
 }
 
 graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
