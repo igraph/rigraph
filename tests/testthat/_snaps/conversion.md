@@ -25,7 +25,7 @@
     Code
       as_adjacency_matrix(g, attr = "bla")
     Condition
-      Error in `get.adjacency.sparse()`:
+      Error:
       ! no such edge attribute
 
 ---
@@ -33,7 +33,7 @@
     Code
       as_adjacency_matrix(g, attr = "bla")
     Condition
-      Error in `get.adjacency.sparse()`:
+      Error:
       ! Matrices must be either numeric or logical, and the edge attribute is not
 
 # as_adjacency_matrix() errors well -- dense
@@ -41,7 +41,7 @@
     Code
       as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
     Condition
-      Error in `get.adjacency.sparse()`:
+      Error:
       ! no such edge attribute
 
 ---
@@ -49,6 +49,6 @@
     Code
       as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
     Condition
-      Error in `get.adjacency.sparse()`:
+      Error:
       ! Matrices must be either numeric or logical, and the edge attribute is not
 

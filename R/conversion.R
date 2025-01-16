@@ -211,13 +211,14 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      stop("no such edge attribute", call. = FALSE)
     }
     value <- edge_attr(graph, name = attr)
     if (!is.numeric(value) && !is.logical(value)) {
       stop(
         "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+        "and the edge attribute is not",
+        call. = FALSE
       )
     }
   } else {
@@ -334,7 +335,6 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
 as_adj <- function(graph, type = c("both", "upper", "lower"),
                    attr = NULL, edges = deprecated(), names = TRUE,
                    sparse = igraph_opt("sparsematrices")) {
-
   lifecycle::deprecate_soft("2.1.0", "as_adj()", "as_adjacency_matrix()")
 
   as_adjacency_matrix(
@@ -834,7 +834,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      stop("no such edge attribute", call. = FALSE)
     }
 
     vc <- vcount(graph)
@@ -871,12 +871,12 @@ get.incidence.dense <- function(graph, types, names, attr) {
 get.incidence.sparse <- function(graph, types, names, attr) {
   vc <- vcount(graph)
   if (length(types) != vc) {
-    stop("Invalid types vector")
+    stop("Invalid types vector", call. = FALSE)
   }
 
   el <- as_edgelist(graph, names = FALSE)
   if (any(types[el[, 1]] == types[el[, 2]])) {
-    stop("Invalid types vector, not a bipartite graph")
+    stop("Invalid types vector, not a bipartite graph", call. = FALSE)
   }
 
   n1 <- sum(!types)
@@ -896,7 +896,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      stop("no such edge attribute", call. = FALSE)
     }
     value <- edge_attr(graph, name = attr)
   } else {
