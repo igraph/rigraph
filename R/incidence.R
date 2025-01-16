@@ -39,16 +39,9 @@ graph.incidence <- function(incidence, directed = FALSE, mode = c("all", "out", 
 # Helper function to process sparse matrices (matrix to edgelist)
 process.sparse <- function(incidence, num_rows) {
   el <- mysummary(incidence)
+  # adjust indices for second column to create a second mode
   el[, 2] <- el[, 2] + num_rows
   as.matrix(el)
-}
-
-# Helper function to process dense matrices (matrix to edgelist)
-process.dense <- function(incidence, num_rows) {
-  nz_ids <- which(incidence != 0, arr.ind = TRUE)
-  el <- cbind(nz_ids, incidence[nz_ids])
-  el[, 2] <- el[, 2] + num_rows
-  el
 }
 
 # adjust edgelist according to directionality of edges
@@ -76,8 +69,8 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
     # General Sparse matrix processing
     el <- process.sparse(incidence, num_rows)
   } else if (!is.null(weighted)) {
-    # Dense weighted matrix processing
-    el <- process.dense(incidence, num_rows)
+    # Dense weighted matrix processing (convert to sparse matrix first)
+    el <- process.sparse(as(incidence, "dgCMatrix"), num_rows)
   } else {
     mode(incidence) <- "double"
     on.exit(.Call(R_igraph_finalizer))
