@@ -54,10 +54,7 @@ adjust.directionality <- function(el, mode, directed) {
   if (mode == "in") {
     return(reversed_edges)
   }
-  if (mode %in% c("all", "total")) {
-    # Add reversed edges
-    rbind(el, reversed_edges)
-  }
+  rbind(el, reversed_edges)
 }
 
 graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
