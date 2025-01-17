@@ -1,4 +1,3 @@
-
 ## IGraph library.
 ## Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 ## 334 Harvard street, Cambridge, MA 02139 USA
@@ -54,6 +53,139 @@
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
 
+get_partial_adjacency <- function(x, indices, mode, attr = NULL, sparse = TRUE) {
+  all_vertices <- seq_len(vcount(x))
+
+  n_row <- if (mode == "out") {
+    length(indices)
+  } else {
+    length(all_vertices)
+  }
+  n_col <- if (mode == "out") {
+    length(all_vertices)
+  } else {
+    length(indices)
+  }
+
+  adj <- adjacent_vertices(x, indices, mode = mode)
+
+  main_indices <- rep(seq_along(adj), sapply(adj, length))
+  other_indices <- unlist(adj)
+
+  el <- if (mode == "out") {
+    cbind(main_indices, other_indices)
+  } else {
+    cbind(other_indices, main_indices)
+  }
+
+  values <- if (is.null(attr)) {
+    1
+  } else {
+    main_vertices <- rep(indices, sapply(adj, length))
+    if (mode == "out") {
+      eids <- get_edge_ids(x, c(rbind(main_vertices, other_indices)))
+    } else {
+      eids <- get_edge_ids(x, c(rbind(other_indices, main_vertices)))
+    }
+    edge_attr(x, attr, eids[eids != 0])
+  }
+
+  if (sparse) {
+    res <- Matrix::sparseMatrix(
+      i = el[, 1],
+      j = el[, 2],
+      x = values,
+      dims = c(n_row, n_col)
+    )
+  } else {
+    res <- matrix(0, nrow = n_row, ncol = n_col)
+    res[el] <- values
+  }
+  if ("name" %in% vertex_attr_names(x)) {
+    main_names <- vertex_attr(x, "name", indices)
+    other_names <- vertex_attr(x, "name")
+    if (mode == "out") {
+      rownames(res) <- main_names
+      colnames(res) <- other_names
+    } else {
+      rownames(res) <- other_names
+      colnames(res) <- main_names
+    }
+  }
+  res
+}
+
+get_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
+  unique_i <- unique(i)
+  unique_j <- unique(j)
+
+  i_map <- match(i, unique_i)
+  j_map <- match(j, unique_j)
+
+  n_row <- length(unique_i)
+  n_col <- length(unique_j)
+
+  # Create edge list for the unique i, j pairs
+  el <- expand.grid(unique_i, unique_j)
+
+  # check which edges exist
+  eids <- get_edge_ids(x, c(rbind(el[, 1], el[, 2])))
+
+  row_indices <- el[eids != 0, 1]
+  col_indices <- el[eids != 0, 2]
+  eids <- eids[eids != 0]
+
+  values <- if (is.null(attr)) {
+    1
+  } else {
+    edge_attr(x, attr, eids)
+  }
+
+  if (sparse) {
+    unique_res <- Matrix::sparseMatrix(
+      i = match(row_indices, unique_i),
+      j = match(col_indices, unique_j),
+      x = values,
+      dims = c(n_row, n_col)
+    )
+  } else {
+    unique_res <- matrix(0, nrow = n_row, ncol = n_col)
+    unique_res[cbind(match(row_indices, unique_i), match(col_indices, unique_j))] <- values
+  }
+
+  # Expand the unique result to match duplicated i and j
+  if (sparse) {
+    res <- unique_res[i_map, j_map, drop = TRUE]
+  } else {
+    res <- unique_res[i_map, j_map]
+  }
+
+  if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
+    rownames(res) <- vertex_attr(x, "name", i)
+    colnames(res) <- vertex_attr(x, "name", j)
+  }
+
+
+  res
+}
+
+clean_indices <- function(x, indices) {
+  if (is.character(indices)) {
+    return(match(indices, V(x)$name))
+  }
+  if (is.logical(indices)) {
+    if (length(indices) != vcount(x)) {
+      indices <- which(rep(indices, length.out = vcount(x)))
+    } else {
+      indices <- which(indices)
+    }
+    return(indices)
+  }
+  if (all(indices < 0)) {
+    return(seq_len(vcount(x))[indices])
+  }
+  indices
+}
 
 #' Query and manipulate a graph as it were an adjacency matrix
 #'
@@ -156,8 +288,6 @@
                        sparse = igraph_opt("sparsematrices"),
                        edges = FALSE, drop = TRUE,
                        attr = if (is_weighted(x)) "weight" else NULL) {
-  ## TODO: make it faster, don't need the whole matrix usually
-
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
@@ -193,31 +323,26 @@
     } else {
       res <- as.logical(res) + 0
     }
-    res
-  } else if (missing(i) && missing(j)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)
-    }
-  } else if (missing(j)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, , drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
-    }
+    return(res)
+  }
+
+  # convert logical, character or negative i/j to proper vertex ids
+  if (!missing(i)) {
+    i <- clean_indices(x, i)
+  }
+  if (!missing(j)) {
+    j <- clean_indices(x, j)
+  }
+
+  if (missing(i) && missing(j)) {
+    return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
+  }
+  if (missing(j)) {
+    get_partial_adjacency(x, indices = i, mode = "out", attr = attr, sparse = sparse)
   } else if (missing(i)) {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[, j, drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
-    }
+    get_partial_adjacency(x, indices = j, mode = "in", attr = attr, sparse = sparse)
   } else {
-    if (missing(edges)) {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr)[i, j, drop = drop]
-    } else {
-      as_adjacency_matrix(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
-    }
+    get_submatrix(x, i, j, attr = attr, sparse = sparse)
   }
 }
 
