@@ -335,8 +335,6 @@ length.igraph <- function(x) {
 `[<-.igraph` <- function(x, i, j, ..., from, to,
                          attr = if (is_weighted(x)) "weight" else NULL,
                          value) {
-  ## TODO: rewrite this in C to make it faster
-
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
@@ -407,23 +405,15 @@ length.igraph <- function(x) {
     i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
     j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
-      ## Existing edges, and their endpoints
-      exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)
-      exv <- lapply(x[[i, j, ...]], as.vector)
-      toadd <- unlist(lapply(seq_along(exv), function(idx) {
-        to <- setdiff(j, exv[[idx]])
-        if (length(to != 0)) {
-          rbind(i[idx], setdiff(j, exv[[idx]]))
-        } else {
-          numeric()
-        }
-      }))
-      ## Do the changes
+      edge_pairs <- expand.grid(i, j)
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      toadd <- c(rbind(edge_pairs[edge_ids == 0, 1], edge_pairs[edge_ids == 0, 2]))
+
       if (is.null(attr)) {
         x <- add_edges(x, toadd)
       } else {
         x <- add_edges(x, toadd, attr = structure(list(value), names = attr))
-        toupdate <- unlist(exe)
+        toupdate <- edge_ids[edge_ids != 0]
         x <- set_edge_attr(x, attr, toupdate, value)
       }
     }
