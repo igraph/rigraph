@@ -169,24 +169,6 @@ get_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
   res
 }
 
-clean_indices <- function(x, indices) {
-  if (is.character(indices)) {
-    return(match(indices, V(x)$name))
-  }
-  if (is.logical(indices)) {
-    if (length(indices) != vcount(x)) {
-      indices <- which(rep(indices, length.out = vcount(x)))
-    } else {
-      indices <- which(indices)
-    }
-    return(indices)
-  }
-  if (all(indices < 0)) {
-    return(seq_len(vcount(x))[indices])
-  }
-  indices
-}
-
 #' Query and manipulate a graph as it were an adjacency matrix
 #'
 #' @details
@@ -328,10 +310,10 @@ clean_indices <- function(x, indices) {
 
   # convert logical, character or negative i/j to proper vertex ids
   if (!missing(i)) {
-    i <- clean_indices(x, i)
+    i <- as_igraph_vs(x, i)
   }
   if (!missing(j)) {
-    j <- clean_indices(x, j)
+    j <- as_igraph_vs(x, j)
   }
 
   if (missing(i) && missing(j)) {
