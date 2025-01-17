@@ -373,16 +373,16 @@ length.igraph <- function(x) {
       (is.logical(value) && !value) ||
       (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
-      todel <- x[from = from, to = to, ..., edges = TRUE]
+      todel <- get_edge_ids(x, c(rbind(from, to)))
       x <- delete_edges(x, todel)
     } else {
       ## Addition or update of an attribute (or both)
-      ids <- x[from = from, to = to, ..., edges = TRUE]
+      ids <- get_edge_ids(x, c(rbind(from, to)))
       if (any(ids == 0)) {
         x <- add_edges(x, rbind(from[ids == 0], to[ids == 0]))
       }
       if (!is.null(attr)) {
-        ids <- x[from = from, to = to, ..., edges = TRUE]
+        ids <- get_edge_ids(x, c(rbind(from, to)))
         x <- set_edge_attr(x, attr, ids, value = value)
       }
     }
@@ -391,13 +391,15 @@ length.igraph <- function(x) {
     (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
-      todel <- unlist(x[[, , ..., edges = TRUE]])
+      todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(x[[i, , ..., edges = TRUE]])
+      todel <- unlist(incident(x, v = i, mode = "out"))
     } else if (missing(i)) {
-      todel <- unlist(x[[, j, ..., edges = TRUE]])
+      todel <- unlist(incident(x, v = j, mode = "in"))
     } else {
-      todel <- unlist(x[[i, j, ..., edges = TRUE]])
+      edge_pairs <- expand.grid(i, j)
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      todel <- edge_ids[edge_ids != 0]
     }
     x <- delete_edges(x, todel)
   } else {
