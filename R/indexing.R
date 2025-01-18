@@ -53,111 +53,53 @@
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
 
-get_partial_adjacency <- function(x, indices, mode, attr = NULL, sparse = TRUE) {
-  all_vertices <- seq_len(vcount(x))
+get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse = TRUE) {
+  # If i or j is NULL, assume all nodes
+  if (is.null(i)) i <- seq_len(vcount(x))
+  if (is.null(j)) j <- seq_len(vcount(x))
 
-  n_row <- if (mode == "out") {
-    length(indices)
-  } else {
-    length(all_vertices)
-  }
-  n_col <- if (mode == "out") {
-    length(all_vertices)
-  } else {
-    length(indices)
-  }
-
-  adj <- adjacent_vertices(x, indices, mode = mode)
-
-  main_indices <- rep(seq_along(adj), sapply(adj, length))
-  other_indices <- unlist(adj)
-
-  el <- if (mode == "out") {
-    cbind(main_indices, other_indices)
-  } else {
-    cbind(other_indices, main_indices)
-  }
-
-  values <- if (is.null(attr)) {
-    1
-  } else {
-    main_vertices <- rep(indices, sapply(adj, length))
-    if (mode == "out") {
-      eids <- get_edge_ids(x, c(rbind(main_vertices, other_indices)))
-    } else {
-      eids <- get_edge_ids(x, c(rbind(other_indices, main_vertices)))
-    }
-    edge_attr(x, attr, eids[eids != 0])
-  }
-
-  if (sparse) {
-    res <- Matrix::sparseMatrix(
-      i = el[, 1],
-      j = el[, 2],
-      x = values,
-      dims = c(n_row, n_col)
-    )
-  } else {
-    res <- matrix(0, nrow = n_row, ncol = n_col)
-    res[el] <- values
-  }
-  if ("name" %in% vertex_attr_names(x)) {
-    main_names <- vertex_attr(x, "name", indices)
-    other_names <- vertex_attr(x, "name")
-    if (mode == "out") {
-      rownames(res) <- main_names
-      colnames(res) <- other_names
-    } else {
-      rownames(res) <- other_names
-      colnames(res) <- main_names
-    }
-  }
-  res
-}
-
-get_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
+  # Handle duplicates
   unique_i <- unique(i)
   unique_j <- unique(j)
 
+  # Create mapping between to unique values
   i_map <- match(i, unique_i)
   j_map <- match(j, unique_j)
 
-  n_row <- length(unique_i)
-  n_col <- length(unique_j)
+  adj <- adjacent_vertices(x, unique_i, mode = "out")
 
-  # Create edge list for the unique i, j pairs
-  el <- expand.grid(unique_i, unique_j)
+  edge_list <- cbind(rep(unique_i, sapply(adj, length)), unlist(adj))
+  edge_list <- edge_list[edge_list[, 2] %in% unique_j, , drop = FALSE]
 
-  # check which edges exist
-  eids <- get_edge_ids(x, c(rbind(el[, 1], el[, 2])))
-
-  row_indices <- el[eids != 0, 1]
-  col_indices <- el[eids != 0, 2]
-  eids <- eids[eids != 0]
+  row_indices <- edge_list[, 1]
+  col_indices <- edge_list[, 2]
 
   values <- if (is.null(attr)) {
     1
   } else {
-    edge_attr(x, attr, eids)
+    # get edge ids to locate edge attribute values
+    valid_edges <- get_edge_ids(x, c(t(edge_list)))
+    edge_attr(x, attr, valid_edges)
   }
 
+  # Construct sparse or dense result matrix
   if (sparse) {
     unique_res <- Matrix::sparseMatrix(
       i = match(row_indices, unique_i),
       j = match(col_indices, unique_j),
       x = values,
-      dims = c(n_row, n_col)
+      dims = c(length(unique_i), length(unique_j))
     )
   } else {
-    unique_res <- matrix(0, nrow = n_row, ncol = n_col)
+    unique_res <- matrix(0, nrow = length(unique_i), ncol = length(unique_j))
     unique_res[cbind(match(row_indices, unique_i), match(col_indices, unique_j))] <- values
   }
 
-  # Expand the unique result to match duplicated i and j
-  if (sparse) {
-    res <- unique_res[i_map, j_map, drop = TRUE]
+  # Expand to handle duplicated entries in i and j
+  res <- if (sparse) {
+    unique_res[i_map, j_map, drop = TRUE]
   } else {
-    res <- unique_res[i_map, j_map]
+    unique_res[i_map, j_map]
   }
 
   if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
@@ -165,9 +107,9 @@ get_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
     colnames(res) <- vertex_attr(x, "name", j)
   }
 
-
-  res
+  return(res)
 }
+
 
 #' Query and manipulate a graph as it were an adjacency matrix
 #'
@@ -320,11 +262,11 @@ get_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
     return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
   }
   if (missing(j)) {
-    get_partial_adjacency(x, indices = i, mode = "out", attr = attr, sparse = sparse)
+    get_adjacency_submatrix(x, i = i, j = NULL, attr = attr, sparse = sparse)
   } else if (missing(i)) {
-    get_partial_adjacency(x, indices = j, mode = "in", attr = attr, sparse = sparse)
+    get_adjacency_submatrix(x, i = NULL, j = j, attr = attr, sparse = sparse)
   } else {
-    get_submatrix(x, i, j, attr = attr, sparse = sparse)
+    get_adjacency_submatrix(x, i = i, j = j, attr = attr, sparse = sparse)
   }
 }
 
