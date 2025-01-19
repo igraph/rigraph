@@ -328,11 +328,27 @@ length.igraph <- function(x) {
   vcount(x)
 }
 
+expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
+  grid <- expand.grid(i = i, j = j)
+  if (!directed) {
+    grid <- unique(data.frame(
+      i = pmin(grid$i, grid$j),
+      j = pmax(grid$i, grid$j)
+    ))
+  }
+  if (!loops) {
+    grid[grid[, 1] != grid[, 2], ]
+  } else {
+    grid
+  }
+}
+
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
 `[<-.igraph` <- function(x, i, j, ..., from, to,
                          attr = if (is_weighted(x)) "weight" else NULL,
+                         loops = FALSE,
                          value) {
   ################################################################
   ## Argument checks
@@ -404,11 +420,15 @@ length.igraph <- function(x) {
     i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
     j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
-      edge_pairs <- expand.grid(i, j)
+      edge_pairs <- expand.grid.unordered(i, j, loops = loops, directed = is_directed(x))
+
       edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
       toadd <- c(rbind(edge_pairs[edge_ids == 0, 1], edge_pairs[edge_ids == 0, 2]))
 
       if (is.null(attr)) {
+        if (value > 1) {
+          warning("value greater than one but graph is not weighted and no attribute was specified. Only unweighted edges are added.", call. = FALSE)
+        }
         x <- add_edges(x, toadd)
       } else {
         x <- add_edges(x, toadd, attr = structure(list(value), names = attr))
