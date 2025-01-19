@@ -1,4 +1,3 @@
-
 ## IGraph library.
 ## Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 ## 334 Harvard street, Cambridge, MA 02139 USA
@@ -391,9 +390,9 @@ length.igraph <- function(x) {
     if (missing(i) && missing(j)) {
       todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(incident(x, v = i, mode = "out"))
+      todel <- unlist(sapply(i, function(id) incident(x, v = id, mode = "out")))
     } else if (missing(i)) {
-      todel <- unlist(incident(x, v = j, mode = "in"))
+      todel <- unlist(sapply(j, function(id) incident(x, v = id, mode = "in")))
     } else {
       edge_pairs <- expand.grid(i, j)
       edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
