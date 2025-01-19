@@ -390,9 +390,9 @@ length.igraph <- function(x) {
     if (missing(i) && missing(j)) {
       todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(sapply(i, function(id) incident(x, v = id, mode = "out")))
+      todel <- unlist(incident_edges(x, v = i, mode = "out"))
     } else if (missing(i)) {
-      todel <- unlist(sapply(j, function(id) incident(x, v = id, mode = "in")))
+      todel <- unlist(incident_edges(x, v = j, mode = "in"))
     } else {
       edge_pairs <- expand.grid(i, j)
       edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
