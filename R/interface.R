@@ -482,8 +482,9 @@ get.edges <- function(graph, es) {
 #' vertices.
 #'
 #' @param graph The input graph.
-#' @param vp The incident vertices, given as vertex ids or symbolic vertex
-#'   names. They are interpreted pairwise, i.e. the first and second are used for
+#' @param vp The incident vertices, given as a two-column data frame, two-column matrix,
+#'   or vector of vertex ids or symbolic vertex names.
+#'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 #'   the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in
 #'   directed graphs. This argument is ignored for undirected graphs.
