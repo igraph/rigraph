@@ -467,7 +467,7 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
-el_to_vec <- function(x) {
+el_to_vec <- function(x, call = caller_env()) {
   if (is.data.frame(x)) {
     c(rbind(x[[1]], x[[2]]))
   } else if (inherits(x, "matrix")) {
