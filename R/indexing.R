@@ -329,18 +329,17 @@ length.igraph <- function(x) {
 }
 
 expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
-  grid <- expand.grid(i = i, j = j)
+  grid <- vctrs::vec_expand_grid(i = i, j = j)
   if (!directed) {
-    grid <- unique(data.frame(
+    grid <- vctrs::vec_unique(data.frame(
       i = pmin(grid$i, grid$j),
       j = pmax(grid$i, grid$j)
     ))
   }
   if (!loops) {
-    grid[grid[, 1] != grid[, 2], ]
-  } else {
-    grid
+    grid <- grid[grid[, 1] != grid[, 2], ]
   }
+  grid
 }
 
 #' @method [<- igraph
@@ -427,7 +426,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
 
       if (is.null(attr)) {
         if (value > 1) {
-          warning("value greater than one but graph is not weighted and no attribute was specified. Only unweighted edges are added.", call. = FALSE)
+          cli::cli_abort("value greater than one but graph is not weighted and no attribute was specified.")
         }
         x <- add_edges(x, toadd)
       } else {
