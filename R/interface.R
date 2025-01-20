@@ -1,4 +1,3 @@
-
 #' Check whether a graph is directed
 #'
 #' @description
@@ -467,7 +466,7 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
-el_to_vec <- function(x, call = caller_env()) {
+el_to_vec <- function(x, call = rlang::caller_env()) {
   if (is.data.frame(x)) {
     c(rbind(x[[1]], x[[2]]))
   } else if (inherits(x, "matrix")) {
@@ -476,7 +475,7 @@ el_to_vec <- function(x, call = caller_env()) {
   } else if (is.vector(x)) {
     x
   } else {
-    cli::cli_abort("only two-column data.frames and matrices, and vectors are allowed for vp")
+    cli::cli_abort("only two-column data.frames and matrices, and vectors are allowed for vp", call = call)
   }
 }
 
@@ -559,7 +558,6 @@ get.edge.ids <- function(graph,
                          directed = TRUE,
                          error = FALSE,
                          multi = deprecated()) {
-
   if (lifecycle::is_present(multi)) {
     if (isTRUE(multi)) {
       lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
