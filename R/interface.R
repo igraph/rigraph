@@ -467,6 +467,19 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
+el_to_vec <- function(x) {
+  if (is.data.frame(x)) {
+    c(rbind(x[[1]], x[[2]]))
+  } else if (inherits(x, "matrix")) {
+    # c(t(x[,1:2])) TODO: decide on deprecation note
+    x
+  } else if (is.vector(x)) {
+    x
+  } else {
+    cli::cli_abort("only two-column data.frames and matrices, and vectors are allowed for vp")
+  }
+}
+
 
 #' Find the edge ids based on the incident vertices of the edges
 #'
@@ -519,6 +532,8 @@ get_edge_ids <- function(graph,
                          directed = TRUE,
                          error = FALSE) {
   ensure_igraph(graph)
+
+  vp <- el_to_vec(vp)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
