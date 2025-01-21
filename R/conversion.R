@@ -188,7 +188,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
     )
   } else {
     # faster than a specialized implementation
-    res <- as.matrix(get.adjacency.sparse(graph, type = type, attr = attr, names = names))
+    res <- as.matrix(get.adjacency.sparse(graph, type = type, attr = attr, names = names, call = rlang::caller_env()))
   }
 
   if (names && "name" %in% vertex_attr_names(graph)) {
@@ -198,7 +198,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 }
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
-                                 attr = NULL, names = TRUE) {
+                                 attr = NULL, names = TRUE, call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -211,14 +211,13 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute", call. = FALSE)
+      cli::cli_abort("no such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
     if (!is.numeric(value) && !is.logical(value)) {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not",
-        call. = FALSE
+      cli::cli_abort(
+        "Matrices must be either numeric or logical, and the edge attribute is not",
+        call = call
       )
     }
   } else {
