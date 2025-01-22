@@ -55,21 +55,28 @@
 
 get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse = TRUE) {
   # If i or j is NULL, assume all nodes
-  if (is.null(i)) i <- seq_len(vcount(x))
-  if (is.null(j)) j <- seq_len(vcount(x))
+  #if not NULL make sure to handle duplicates correctly
+  if (is.null(i)) {
+    i <- i_unique <- i_map <- seq_len(vcount(x))
+  } else {
+    i_unique <- unique(i)
+    i_map <- match(i, i_unique)
+  }
 
-  # Handle duplicates
-  unique_i <- unique(i)
-  unique_j <- unique(j)
+  if (is.null(j)) {
+    j <- j_unique <- j_map <- seq_len(vcount(x))
+  } else {
+    j_unique <- unique(j)
+    j_map <- match(j, j_unique)
+  }
 
-  # Create mapping between to unique values
-  i_map <- match(i, unique_i)
-  j_map <- match(j, unique_j)
+  adj <- adjacent_vertices(x, i_unique, mode = "out")
+  i_degree <- purrr::map_int(adj, length)
 
-  adj <- adjacent_vertices(x, unique_i, mode = "out")
-
-  edge_list <- cbind(rep(unique_i, sapply(adj, length)), unlist(adj))
-  edge_list <- edge_list[edge_list[, 2] %in% unique_j, , drop = FALSE]
+  from_id <- rep(i_unique, i_degree)
+  to_id <- unlist(adj)
+  edge_list <- cbind(from_id, to_id)
+  edge_list <- edge_list[edge_list[, 2] %in% j_unique, , drop = FALSE]
 
   row_indices <- edge_list[, 1]
   col_indices <- edge_list[, 2]
@@ -85,14 +92,16 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
   # Construct sparse or dense result matrix
   if (sparse) {
     unique_res <- Matrix::sparseMatrix(
-      i = match(row_indices, unique_i),
-      j = match(col_indices, unique_j),
+      i = match(row_indices, i_unique),
+      j = match(col_indices, j_unique),
       x = values,
-      dims = c(length(unique_i), length(unique_j))
+      dims = c(length(i_unique), length(j_unique))
     )
   } else {
-    unique_res <- matrix(0, nrow = length(unique_i), ncol = length(unique_j))
-    unique_res[cbind(match(row_indices, unique_i), match(col_indices, unique_j))] <- values
+    unique_res <- matrix(0, nrow = length(i_unique), ncol = length(j_unique))
+    unique_res[
+      cbind(match(row_indices, i_unique), match(col_indices, j_unique))
+    ] <- values
   }
 
   # Expand to handle duplicated entries in i and j
@@ -209,7 +218,7 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
 #' @method [ igraph
 #' @export
 `[.igraph` <- function(x, i, j, ..., from, to,
-                       sparse = igraph_opt("sparsematrices"),
+  sparse = igraph_opt("sparsematrices"),
                        edges = FALSE, drop = TRUE,
                        attr = if (is_weighted(x)) "weight" else NULL) {
   ################################################################
@@ -382,7 +391,7 @@ length.igraph <- function(x) {
 #' @family functions for manipulating graph structure
 #' @export
 `[<-.igraph` <- function(x, i, j, ..., from, to,
-                         attr = if (is_weighted(x)) "weight" else NULL,
+  attr = if (is_weighted(x)) "weight" else NULL,
                          value) {
   ## TODO: rewrite this in C to make it faster
 
@@ -419,7 +428,7 @@ length.igraph <- function(x) {
 
   if (!missing(from)) {
     if (is.null(value) ||
-      (is.logical(value) && !value) ||
+        (is.logical(value) && !value) ||
       (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
       todel <- x[from = from, to = to, ..., edges = TRUE]
@@ -436,7 +445,7 @@ length.igraph <- function(x) {
       }
     }
   } else if (is.null(value) ||
-    (is.logical(value) && !value) ||
+      (is.logical(value) && !value) ||
     (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
@@ -458,12 +467,12 @@ length.igraph <- function(x) {
       exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)
       exv <- lapply(x[[i, j, ...]], as.vector)
       toadd <- unlist(lapply(seq_along(exv), function(idx) {
-        to <- setdiff(j, exv[[idx]])
-        if (length(to != 0)) {
-          rbind(i[idx], setdiff(j, exv[[idx]]))
-        } else {
-          numeric()
-        }
+          to <- setdiff(j, exv[[idx]])
+          if (length(to != 0)) {
+            rbind(i[idx], setdiff(j, exv[[idx]]))
+          } else {
+            numeric()
+          }
       }))
       ## Do the changes
       if (is.null(attr)) {
