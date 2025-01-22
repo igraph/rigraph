@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4
+
+## Testing
+
+- Tweak tests that use the graph package.
+
+
 # igraph 2.1.3
 
 ## Features
