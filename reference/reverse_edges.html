@@ -13,7 +13,7 @@ all edges, this operation is also known as graph transpose."><meta property="og:
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@ all edges, this operation is also known as graph transpose."><meta property="og:
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Reverse edges in a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/cran-2.1.4/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/operators.R" class="external-link"><code>R/operators.R</code></a></small>
       <div class="d-none name"><code>reverse_edges.Rd</code></div>
     </div>
 
@@ -122,9 +122,9 @@ IDs are reversed</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="fl">1</span> <span class="op">-</span><span class="op">+</span> <span class="fl">2</span>, <span class="fl">2</span> <span class="op">-</span><span class="op">+</span> <span class="fl">3</span>, <span class="fl">3</span> <span class="op">-</span><span class="op">+</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">reverse_edges</span><span class="op">(</span><span class="va">g</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c2443ef DN-- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a89fecd DN-- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c2443ef (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a89fecd (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 3-&gt;2 3-&gt;4</span>
 </code></pre></div>
     </div>
