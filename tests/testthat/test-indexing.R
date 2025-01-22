@@ -322,3 +322,21 @@ test_that("[ handles all combinations of i and/or j", {
   expect_equal(canonicalize_matrix(g[, 4:7]), A[, 4:7])
   expect_equal(canonicalize_matrix(g[1:3, 4:7]), A[1:3, 4:7])
 })
+
+test_that("[ handles duplicated i/j well", {
+  A <- matrix(
+    rep(
+      c(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+      c(
+        4L, 1L, 4L, 1L, 2L, 1L, 5L, 2L, 3L, 1L, 10L, 3L, 9L, 1L, 1L, 1L, 3L, 1L, 1L,
+        1L, 1L, 1L, 10L, 1L, 1L, 1L, 1L, 5L, 11L, 1L, 2L, 1L, 5L, 1L, 3L
+      )
+    ),
+    nrow = 10L,
+    ncol = 10L
+  )
+  g <- graph_from_adjacency_matrix(A, "directed")
+  expect_equal(canonicalize_matrix(g[c(1, 2, 2), ]), A[c(1, 2, 2), ])
+  expect_equal(canonicalize_matrix(g[, c(3, 3, 4, 4)]), A[, c(3, 3, 4, 4)])
+  expect_equal(canonicalize_matrix(g[c(1, 2, 2), c(3, 3, 4, 4)]), A[c(1, 2, 2), c(3, 3, 4, 4)])
+})
