@@ -55,7 +55,7 @@
 
 get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse = TRUE) {
   # If i or j is NULL, assume all nodes
-  #if not NULL make sure to handle duplicates correctly
+  # if not NULL make sure to handle duplicates correctly
   if (is.null(i)) {
     i <- i_unique <- i_map <- seq_len(vcount(x))
   } else {
@@ -71,7 +71,7 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
   }
 
   adj <- adjacent_vertices(x, i_unique, mode = "out")
-  i_degree <- purrr::map_int(adj, length)
+  i_degree <- map_int(adj, length)
 
   from_id <- rep(i_unique, i_degree)
   to_id <- unlist(adj)
@@ -218,9 +218,9 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
 #' @method [ igraph
 #' @export
 `[.igraph` <- function(x, i, j, ..., from, to,
-  sparse = igraph_opt("sparsematrices"),
-                       edges = FALSE, drop = TRUE,
-                       attr = if (is_weighted(x)) "weight" else NULL) {
+    sparse = igraph_opt("sparsematrices"),
+    edges = FALSE, drop = TRUE,
+    attr = if (is_weighted(x)) "weight" else NULL) {
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
@@ -391,8 +391,8 @@ length.igraph <- function(x) {
 #' @family functions for manipulating graph structure
 #' @export
 `[<-.igraph` <- function(x, i, j, ..., from, to,
-  attr = if (is_weighted(x)) "weight" else NULL,
-                         value) {
+    attr = if (is_weighted(x)) "weight" else NULL,
+    value) {
   ## TODO: rewrite this in C to make it faster
 
   ################################################################
@@ -428,7 +428,7 @@ length.igraph <- function(x) {
 
   if (!missing(from)) {
     if (is.null(value) ||
-        (is.logical(value) && !value) ||
+      (is.logical(value) && !value) ||
       (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
       todel <- x[from = from, to = to, ..., edges = TRUE]
@@ -445,7 +445,7 @@ length.igraph <- function(x) {
       }
     }
   } else if (is.null(value) ||
-      (is.logical(value) && !value) ||
+    (is.logical(value) && !value) ||
     (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
@@ -467,12 +467,12 @@ length.igraph <- function(x) {
       exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)
       exv <- lapply(x[[i, j, ...]], as.vector)
       toadd <- unlist(lapply(seq_along(exv), function(idx) {
-          to <- setdiff(j, exv[[idx]])
-          if (length(to != 0)) {
-            rbind(i[idx], setdiff(j, exv[[idx]]))
-          } else {
-            numeric()
-          }
+        to <- setdiff(j, exv[[idx]])
+        if (length(to != 0)) {
+          rbind(i[idx], setdiff(j, exv[[idx]]))
+        } else {
+          numeric()
+        }
       }))
       ## Do the changes
       if (is.null(attr)) {
