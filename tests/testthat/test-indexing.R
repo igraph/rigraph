@@ -294,3 +294,31 @@ test_that("[[ handles from and to properly even if the graph has conflicting ver
   expect_true(is_igraph_vs(g[[1:3, 2:6]][[1]]))
   expect_true(is_igraph_vs(g[[from = 1:3, to = 2:6]][[1]]))
 })
+
+test_that("[ handles errors in input parameters well", {
+  g <- make_full_graph(10)
+  expect_error(g[from = 1, to = 1, i = 1, j = 1])
+  expect_error(g[from = 1])
+  expect_error(g[to = 1])
+  expect_error(g[from = NA, to = 2])
+  expect_error(g[from = 1, to = NA])
+  expect_error(g[from = 1, to = c(1, 2)])
+})
+
+test_that("[ handles all combinations of i and/or j", {
+  A <- matrix(
+    rep(
+      c(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+      c(
+        4L, 1L, 4L, 1L, 2L, 1L, 5L, 2L, 3L, 1L, 10L, 3L, 9L, 1L, 1L, 1L, 3L, 1L, 1L,
+        1L, 1L, 1L, 10L, 1L, 1L, 1L, 1L, 5L, 11L, 1L, 2L, 1L, 5L, 1L, 3L
+      )
+    ),
+    nrow = 10L,
+    ncol = 10L
+  )
+  g <- graph_from_adjacency_matrix(A, "directed")
+  expect_equal(canonicalize_matrix(g[1:3, ]), A[1:3, ])
+  expect_equal(canonicalize_matrix(g[, 4:7]), A[, 4:7])
+  expect_equal(canonicalize_matrix(g[1:3, 4:7]), A[1:3, 4:7])
+})
