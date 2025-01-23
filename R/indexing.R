@@ -75,6 +75,7 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
 
   from_id <- rep(i_unique, i_degree)
   to_id <- unlist(adj)
+
   edge_list <- cbind(from_id, to_id)
   edge_list <- edge_list[edge_list[, 2] %in% j_unique, , drop = FALSE]
 
@@ -89,26 +90,19 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
     edge_attr(x, attr, valid_edges)
   }
 
-  # Construct sparse or dense result matrix
-  if (sparse) {
-    unique_res <- Matrix::sparseMatrix(
-      i = match(row_indices, i_unique),
-      j = match(col_indices, j_unique),
-      x = values,
-      dims = c(length(i_unique), length(j_unique))
-    )
-  } else {
-    unique_res <- matrix(0, nrow = length(i_unique), ncol = length(j_unique))
-    unique_res[
-      cbind(match(row_indices, i_unique), match(col_indices, j_unique))
-    ] <- values
-  }
+
+  unique_res <- Matrix::sparseMatrix(
+    i = match(row_indices, i_unique),
+    j = match(col_indices, j_unique),
+    x = values,
+    dims = c(length(i_unique), length(j_unique))
+  )
 
   # Expand to handle duplicated entries in i and j
-  res <- if (sparse) {
-    unique_res[i_map, j_map, drop = TRUE]
-  } else {
-    unique_res[i_map, j_map]
+  res <- unique_res[i_map, j_map, drop = TRUE]
+
+  if (!sparse) {
+    res <- as.matrix(res)
   }
 
   if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
