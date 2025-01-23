@@ -468,10 +468,29 @@ get.edges <- function(graph, es) {
 
 el_to_vec <- function(x, call = rlang::caller_env()) {
   if (is.data.frame(x)) {
-    c(rbind(x[[1]], x[[2]]))
+    if (typeof(x[[1]]) == typeof(x[[2]])) {
+      c(rbind(x[[1]], x[[2]]))
+    } else {
+      cli::cli_abort("The columns of the data.frame are of different type ({typeof(x[[1]])} and {typeof(x[[2]])}) ")
+    }
   } else if (inherits(x, "matrix")) {
-    # c(t(x[,1:2])) TODO: decide on deprecation note
-    x
+    dimx <- dim(x)
+    if (identical(dimx, c(2L, 2L))) {
+      lifecycle::deprecate_stop(
+        "2.1.5",
+        "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
+      )
+    } else if (dimx[1] == 2L) {
+      lifecycle::deprecate_warn(
+        "2.1.5",
+        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"
+      )
+      c(x)
+    } else if (dimx[2] == 2L) {
+      c(t(x))
+    } else {
+      cli::cli_abort("{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed")
+    }
   } else if (is.vector(x)) {
     x
   } else {
@@ -532,7 +551,7 @@ get_edge_ids <- function(graph,
                          error = FALSE) {
   ensure_igraph(graph)
 
-  vp <- el_to_vec(vp)
+  vp <- el_to_vec(vp, call = rlang::caller_env())
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(

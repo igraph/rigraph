@@ -190,10 +190,35 @@ test_that("get_edge_id() works with data frame", {
   expect_equal(get_edge_ids(g, el_df), c(1, 2))
 })
 
-test_that("get_edge_id() errors correctly", {
+test_that("get_edge_id() works with matrices", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), 3, 2, byrow = TRUE)
+  expect_equal(get_edge_ids(g, mat), c(1, 2, 3))
+
+  mat <- matrix(c(1, 2), 1, 2)
+  expect_equal(get_edge_ids(g, mat), 1)
+})
+
+test_that("get_edge_id() errors correctly for wrong vp", {
   g <- make_full_graph(3, directed = FALSE)
   el_g <- make_empty_graph()
-  expect_error(get_edge_ids(g, el_g))
+  expect_snapshot(error = TRUE, {
+    get_edge_ids(g, el_g)
+  })
   expect_error(get_edge_ids(g, NULL))
   expect_error(get_edge_ids(g, NA))
+
+  V(g)$name <- letters[1:3]
+  df <- data.frame(from = c("a", "b"), to = c(1, 2))
+  expect_snapshot(error = TRUE, {
+    get_edge_ids(g, df)
+  })
+})
+
+test_that("get_edge_id() errors correctly for wrong matrices", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 3, 4), 2, 2)
+  lifecycle::expect_defunct(get_edge_ids(g, mat))
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), 2, 3)
+  lifecycle::expect_deprecated(get_edge_ids(g, mat))
 })
