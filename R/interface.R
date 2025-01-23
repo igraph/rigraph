@@ -475,7 +475,7 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
   } else if (is.vector(x)) {
     x
   } else {
-    cli::cli_abort("only two-column data.frames and matrices, and vectors are allowed for vp", call = call)
+    cli::cli_abort("Only two-column data.frames and matrices, and vectors are allowed for {.args vp}", call = call)
   }
 }
 
