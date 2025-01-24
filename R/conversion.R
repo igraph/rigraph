@@ -211,7 +211,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("no such edge attribute", call = call)
+      cli::cli_abort("No such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
     if (!is.numeric(value) && !is.logical(value)) {
@@ -816,7 +816,7 @@ as_graphnel <- function(graph) {
   res
 }
 
-get.incidence.dense <- function(graph, types, names, attr) {
+get.incidence.dense <- function(graph, types, names, attr, call = rlang::caller_env()) {
   if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
     ## Function call
@@ -833,7 +833,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute", call. = FALSE)
+      cli::cli_abort("No such edge attribute", call = call)
     }
 
     vc <- vcount(graph)
@@ -867,15 +867,15 @@ get.incidence.dense <- function(graph, types, names, attr) {
   }
 }
 
-get.incidence.sparse <- function(graph, types, names, attr) {
+get.incidence.sparse <- function(graph, types, names, attr, call = rlang::caller_env()) {
   vc <- vcount(graph)
   if (length(types) != vc) {
-    stop("Invalid types vector", call. = FALSE)
+    cli::cli_abort("Invalid types vector", call = call)
   }
 
   el <- as_edgelist(graph, names = FALSE)
   if (any(types[el[, 1]] == types[el[, 2]])) {
-    stop("Invalid types vector, not a bipartite graph", call. = FALSE)
+    cli::cli_abort("Invalid types vector, not a bipartite graph", call = call)
   }
 
   n1 <- sum(!types)
@@ -895,7 +895,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute", call. = FALSE)
+      cli::cli_abort("No such edge attribute", call = calls)
     }
     value <- edge_attr(graph, name = attr)
   } else {
@@ -968,7 +968,7 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
   sparse <- as.logical(sparse)
 
   if (sparse) {
-    get.incidence.sparse(graph, types = types, names = names, attr = attr)
+    get.incidence.sparse(graph, types = types, names = names, attr = attr, call = rlang::caller_env())
   } else {
     get.incidence.dense(graph, types = types, names = names, attr = attr)
   }

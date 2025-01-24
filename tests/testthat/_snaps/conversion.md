@@ -26,7 +26,7 @@
       as_adjacency_matrix(g, attr = "bla")
     Condition
       Error in `as_adjacency_matrix()`:
-      ! no such edge attribute
+      ! No such edge attribute
 
 ---
 
@@ -42,7 +42,7 @@
       as_adjacency_matrix(g, attr = "bla", sparse = FALSE)
     Condition
       Error in `as_adjacency_matrix()`:
-      ! no such edge attribute
+      ! No such edge attribute
 
 ---
 
