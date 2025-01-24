@@ -842,18 +842,22 @@ get.incidence.dense <- function(graph, types, names, attr, call = rlang::caller_
     res <- matrix(0, n1, n2)
 
     recode <- numeric(vc)
+    # move from 1..n indexing to 1..n1 row indices for type == FALSE
+    # and 1..n2 col indices for type == TRUE
+    # recode holds the mapping [1..n] -> [1..n1,1..n2]
     recode[!types] <- seq_len(n1)
     recode[types] <- seq_len(n2)
 
-    for (i in seq(length.out = ecount(graph))) {
-      eo <- ends(graph, i, names = FALSE)
-      e <- recode[eo]
-      if (!types[eo[1]]) {
-        res[e[1], e[2]] <- edge_attr(graph, attr, i)
-      } else {
-        res[e[2], e[1]] <- edge_attr(graph, attr, i)
-      }
-    }
+    el <- as_edgelist(graph, names = FALSE)
+    idx <- types[el[, 1]]
+    el[] <- recode[el]
+
+    # switch order of source/target such that nodes with
+    # type == FALSE are in el[ ,1]
+    el[idx, ] <- el[idx, 2:1]
+    # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
+    # and we can populate the matrix
+    res[el] <- edge_attr(graph, attr)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res) <- V(graph)$name[which(!types)]

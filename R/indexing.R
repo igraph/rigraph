@@ -1,4 +1,3 @@
-
 ## IGraph library.
 ## Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 ## 334 Harvard street, Cambridge, MA 02139 USA
@@ -329,14 +328,27 @@ length.igraph <- function(x) {
   vcount(x)
 }
 
+expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
+  grid <- vctrs::vec_expand_grid(i = i, j = j)
+  if (!directed) {
+    grid <- vctrs::vec_unique(data.frame(
+      i = pmin(grid$i, grid$j),
+      j = pmax(grid$i, grid$j)
+    ))
+  }
+  if (!loops) {
+    grid <- grid[grid[, 1] != grid[, 2], ]
+  }
+  grid
+}
+
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
 `[<-.igraph` <- function(x, i, j, ..., from, to,
                          attr = if (is_weighted(x)) "weight" else NULL,
+                         loops = FALSE,
                          value) {
-  ## TODO: rewrite this in C to make it faster
-
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
@@ -373,16 +385,16 @@ length.igraph <- function(x) {
       (is.logical(value) && !value) ||
       (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
-      todel <- x[from = from, to = to, ..., edges = TRUE]
+      todel <- get_edge_ids(x, c(rbind(from, to)))
       x <- delete_edges(x, todel)
     } else {
       ## Addition or update of an attribute (or both)
-      ids <- x[from = from, to = to, ..., edges = TRUE]
+      ids <- get_edge_ids(x, c(rbind(from, to)))
       if (any(ids == 0)) {
         x <- add_edges(x, rbind(from[ids == 0], to[ids == 0]))
       }
       if (!is.null(attr)) {
-        ids <- x[from = from, to = to, ..., edges = TRUE]
+        ids <- get_edge_ids(x, c(rbind(from, to)))
         x <- set_edge_attr(x, attr, ids, value = value)
       }
     }
@@ -391,13 +403,15 @@ length.igraph <- function(x) {
     (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
-      todel <- unlist(x[[, , ..., edges = TRUE]])
+      todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(x[[i, , ..., edges = TRUE]])
+      todel <- unlist(incident_edges(x, v = i, mode = "out"))
     } else if (missing(i)) {
-      todel <- unlist(x[[, j, ..., edges = TRUE]])
+      todel <- unlist(incident_edges(x, v = j, mode = "in"))
     } else {
-      todel <- unlist(x[[i, j, ..., edges = TRUE]])
+      edge_pairs <- expand.grid(i, j)
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      todel <- edge_ids[edge_ids != 0]
     }
     x <- delete_edges(x, todel)
   } else {
@@ -405,23 +419,19 @@ length.igraph <- function(x) {
     i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
     j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
-      ## Existing edges, and their endpoints
-      exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)
-      exv <- lapply(x[[i, j, ...]], as.vector)
-      toadd <- unlist(lapply(seq_along(exv), function(idx) {
-        to <- setdiff(j, exv[[idx]])
-        if (length(to != 0)) {
-          rbind(i[idx], setdiff(j, exv[[idx]]))
-        } else {
-          numeric()
-        }
-      }))
-      ## Do the changes
+      edge_pairs <- expand.grid.unordered(i, j, loops = loops, directed = is_directed(x))
+
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      toadd <- c(rbind(edge_pairs[edge_ids == 0, 1], edge_pairs[edge_ids == 0, 2]))
+
       if (is.null(attr)) {
+        if (value > 1) {
+          cli::cli_abort("value greater than one but graph is not weighted and no attribute was specified.")
+        }
         x <- add_edges(x, toadd)
       } else {
         x <- add_edges(x, toadd, attr = structure(list(value), names = attr))
-        toupdate <- unlist(exe)
+        toupdate <- edge_ids[edge_ids != 0]
         x <- set_edge_attr(x, attr, toupdate, value)
       }
     }
