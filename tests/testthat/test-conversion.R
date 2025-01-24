@@ -274,3 +274,26 @@ test_that("as_adjacency_matrix() works -- dense + not both", {
     )
   )
 })
+
+test_that("as_adjacency_matrix() works -- dense + weights", {
+  g <- make_full_graph(5, directed = FALSE)
+  E(g)$weight <- 1:10
+  mat <- matrix(0, 5, 5)
+  mat[lower.tri(mat)] <- 1:10
+  mat <- mat + t(mat)
+  A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
+  expect_equal(A, mat)
+})
+
+test_that("as_biadjacency_matrix() works -- dense + weights", {
+  g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
+  E(g)$weight <- c(2, 4, 6)
+  A <- as_biadjacency_matrix(g, attr = "weight", sparse = FALSE)
+  mat <- matrix(
+    c(2, 4, 0, 0, 0, 6, 0, 0),
+    nrow = 4L,
+    ncol = 2L,
+    dimnames = list(c("1", "3", "5", "6"), c("2", "4"))
+  )
+  expect_equal(A, mat)
+})
