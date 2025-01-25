@@ -899,7 +899,7 @@ get.incidence.sparse <- function(graph, types, names, attr, call = rlang::caller
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = calls)
+      cli::cli_abort("No such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
   } else {
