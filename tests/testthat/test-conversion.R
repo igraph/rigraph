@@ -295,5 +295,5 @@ test_that("as_biadjacency_matrix() works -- dense + weights", {
     ncol = 2L,
     dimnames = list(c("1", "3", "5", "6"), c("2", "4"))
   )
-  expect_equal(canonicalize_matrix(A), mat)
+  expect_equal(canonicalize_matrix(A), canonicalize_matrix(mat))
 })
