@@ -282,7 +282,7 @@ test_that("as_adjacency_matrix() works -- dense + weights", {
   mat[lower.tri(mat)] <- 1:10
   mat <- mat + t(mat)
   A <- as_adjacency_matrix(g, attr = "weight", sparse = FALSE)
-  expect_equal(A, mat)
+  expect_equal(canonicalize_matrix(A), mat)
 })
 
 test_that("as_biadjacency_matrix() works -- dense + weights", {
@@ -295,5 +295,5 @@ test_that("as_biadjacency_matrix() works -- dense + weights", {
     ncol = 2L,
     dimnames = list(c("1", "3", "5", "6"), c("2", "4"))
   )
-  expect_equal(A, mat)
+  expect_equal(canonicalize_matrix(A), mat)
 })
