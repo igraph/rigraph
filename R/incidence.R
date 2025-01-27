@@ -36,16 +36,9 @@ graph.incidence <- function(incidence, directed = FALSE, mode = c("all", "out", 
 ##
 ## -----------------------------------------------------------------
 
-# Helper function to process sparse matrices (matrix to edgelist)
-process.sparse <- function(incidence, num_rows) {
-  el <- mysummary(incidence)
-  # adjust indices for second column to create a second mode
-  el[, 2] <- el[, 2] + num_rows
-  as.matrix(el)
-}
 
 # adjust edgelist according to directionality of edges
-adjust.directionality <- function(el, mode, directed) {
+modify_edgelist <- function(el, mode, directed) {
   if (!directed || mode == "out") {
     # No adjustment needed
     return(el)
@@ -57,7 +50,7 @@ adjust.directionality <- function(el, mode, directed) {
   rbind(el, reversed_edges)
 }
 
-graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
+graph_incidence_build <- function(incidence, directed = FALSE, mode = "out",
                                   multiple = FALSE, weighted = NULL) {
   num_rows <- nrow(incidence)
   num_cols <- ncol(incidence)
@@ -82,10 +75,11 @@ graph.incidence.build <- function(incidence, directed = FALSE, mode = "out",
     incidence <- as(incidence, "dgCMatrix")
   }
 
-  # Process sparse matrix to edgelist
-  el <- process.sparse(incidence, num_rows)
-  # Adjust edgelist for directionality and mode
-  el <- adjust.directionality(el, mode, directed)
+  el <- mysummary(incidence)
+  el[, 2] <- el[, 2] + num_rows
+  el <- as.matrix(el)
+
+  el <- modify_edgelist(el, mode, directed)
 
   # Construct the graph object from processed edgelist
   if (!is.null(weighted)) {
@@ -202,7 +196,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
     }
   }
 
-  res <- graph.incidence.build(incidence,
+  res <- graph_incidence_build(incidence,
     directed = directed,
     mode = mode, multiple = multiple,
     weighted = weighted
