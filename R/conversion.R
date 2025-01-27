@@ -1,4 +1,3 @@
-
 #' Convert igraph graphs to graphNEL objects from the graph package
 #'
 #' @description
@@ -159,11 +158,6 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
-  type <- switch(type,
-    "upper" = 0,
-    "lower" = 1,
-    "both" = 2
-  )
 
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
@@ -183,66 +177,28 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 
   if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
+    type <- switch(type,
+      "upper" = 0,
+      "lower" = 1,
+      "both" = 2
+    )
     res <- .Call(
       R_igraph_get_adjacency, graph, as.numeric(type), weights,
       loops
     )
   } else {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
-    }
-    exattr <- edge_attr(graph, attr)
-    if (is.logical(exattr)) {
-      res <- matrix(FALSE, nrow = vcount(graph), ncol = vcount(graph))
-    } else if (is.numeric(exattr)) {
-      res <- matrix(0, nrow = vcount(graph), ncol = vcount(graph))
-    } else {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
-      )
-    }
-    if (is_directed(graph)) {
-      for (i in seq(length.out = ecount(graph))) {
-        e <- ends(graph, i, names = FALSE)
-        res[e[1], e[2]] <- exattr[i]
-      }
-    } else {
-      if (type == 0) {
-        ## upper
-        for (i in seq(length.out = ecount(graph))) {
-          e <- ends(graph, i, names = FALSE)
-          res[min(e), max(e)] <- exattr[i]
-        }
-      } else if (type == 1) {
-        ## lower
-        for (i in seq(length.out = ecount(graph))) {
-          e <- ends(graph, i, names = FALSE)
-          res[max(e), min(e)] <- exattr[i]
-        }
-      } else if (type == 2) {
-        ## both
-        for (i in seq(length.out = ecount(graph))) {
-          e <- ends(graph, i, names = FALSE)
-          res[e[1], e[2]] <- exattr[i]
-          if (e[1] != e[2]) {
-            res[e[2], e[1]] <- exattr[i]
-          }
-        }
-      }
-    }
+    # faster than a specialized implementation
+    res <- as.matrix(get.adjacency.sparse(graph, type = type, attr = attr, names = names, call = rlang::caller_env()))
   }
 
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
   }
-
   res
 }
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
-                                 attr = NULL, names = TRUE) {
+                                 attr = NULL, names = TRUE, call = rlang::caller_env()) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -255,13 +211,13 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("No such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
     if (!is.numeric(value) && !is.logical(value)) {
-      stop(
-        "Matrices must be either numeric or logical, ",
-        "and the edge attribute is not"
+      cli::cli_abort(
+        "Matrices must be either numeric or logical, and the edge attribute is not",
+        call = call
       )
     }
   } else {
@@ -860,7 +816,7 @@ as_graphnel <- function(graph) {
   res
 }
 
-get.incidence.dense <- function(graph, types, names, attr) {
+get.incidence.dense <- function(graph, types, names, attr, call = rlang::caller_env()) {
   if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
     ## Function call
@@ -877,7 +833,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("No such edge attribute", call = call)
     }
 
     vc <- vcount(graph)
@@ -915,15 +871,15 @@ get.incidence.dense <- function(graph, types, names, attr) {
   }
 }
 
-get.incidence.sparse <- function(graph, types, names, attr) {
+get.incidence.sparse <- function(graph, types, names, attr, call = rlang::caller_env()) {
   vc <- vcount(graph)
   if (length(types) != vc) {
-    stop("Invalid types vector")
+    cli::cli_abort("Invalid types vector", call = call)
   }
 
   el <- as_edgelist(graph, names = FALSE)
   if (any(types[el[, 1]] == types[el[, 2]])) {
-    stop("Invalid types vector, not a bipartite graph")
+    cli::cli_abort("Invalid types vector, not a bipartite graph", call = call)
   }
 
   n1 <- sum(!types)
@@ -943,7 +899,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
   if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
+      cli::cli_abort("No such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
   } else {
@@ -1007,7 +963,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' as_biadjacency_matrix(g)
 #'
 as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
-                                names = TRUE, sparse = FALSE) {
+                                  names = TRUE, sparse = FALSE) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
@@ -1016,7 +972,7 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
   sparse <- as.logical(sparse)
 
   if (sparse) {
-    get.incidence.sparse(graph, types = types, names = names, attr = attr)
+    get.incidence.sparse(graph, types = types, names = names, attr = attr, call = rlang::caller_env())
   } else {
     get.incidence.dense(graph, types = types, names = names, attr = attr)
   }
@@ -1036,8 +992,8 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
 #' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 as_incidence_matrix <- function(...) { # nocov start
-   lifecycle::deprecate_soft("1.6.0", "as_incidence_matrix()", "as_biadjacency_matrix()")
-   as_biadjacency_matrix(...)
+  lifecycle::deprecate_soft("1.6.0", "as_incidence_matrix()", "as_biadjacency_matrix()")
+  as_biadjacency_matrix(...)
 } # nocov end
 #' @rdname graph_from_data_frame
 #' @param x An igraph object.

@@ -1,5 +1,21 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9004
+
+- Refactor: forward `get.adjacency.dense()` to `get.adjacency.sparse()` if attributes are present (#1483) (#1653).
+
+
+# igraph 2.1.4.9003
+
+## Bug fixes
+
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
+
+## Breaking changes
+
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
+
+
 # igraph 2.1.4.9002
 
 ## Bug fixes
