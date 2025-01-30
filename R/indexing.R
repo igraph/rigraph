@@ -69,16 +69,16 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
   from_id <- rep(i, i_degree)
   to_id <- unlist(adj)
 
-  edge_list <- cbind(from_id, to_id)
-  edge_list <- edge_list[edge_list[, 2] %in% j, , drop = FALSE]
+  edge_list <- data.frame(from = as.integer(from_id), to = as.integer(to_id))
+  edge_list <- edge_list[edge_list$to %in% j, ]
 
-  row_indices <- edge_list[, 1]
-  col_indices <- edge_list[, 2]
+  row_indices <- edge_list[[1]]
+  col_indices <- edge_list[[2]]
 
   values <- if (is.null(attr)) {
     1
   } else {
-    valid_edges <- get_edge_ids(x, c(t(edge_list)))
+    valid_edges <- get_edge_ids(x, edge_list)
     edge_attr(x, attr, valid_edges)
   }
 
@@ -230,7 +230,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
   ##################################################################
 
   if (!missing(from)) {
-    res <- get_edge_ids(x, rbind(from, to), error = FALSE)
+    res <- get_edge_ids(x, data.frame(from, to), error = FALSE)
     if (edges) {
       ## nop
     } else if (!is.null(attr)) {
