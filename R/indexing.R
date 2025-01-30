@@ -53,31 +53,24 @@
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
 
-get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse = TRUE) {
+get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
   # If i or j is NULL, assume all nodes
   # if not NULL make sure to handle duplicates correctly
-  if (is.null(i)) {
-    i <- i_unique <- i_map <- seq_len(vcount(x))
-  } else {
-    i_unique <- unique(i)
-    i_map <- match(i, i_unique)
+  if (missing(i)) {
+    i <- seq_len(vcount(x))
+  }
+  if (missing(j)) {
+    j <- seq_len(vcount(x))
   }
 
-  if (is.null(j)) {
-    j <- j_unique <- j_map <- seq_len(vcount(x))
-  } else {
-    j_unique <- unique(j)
-    j_map <- match(j, j_unique)
-  }
-
-  adj <- adjacent_vertices(x, i_unique, mode = "out")
+  adj <- adjacent_vertices(x, i, mode = "out")
   i_degree <- map_int(adj, length)
 
-  from_id <- rep(i_unique, i_degree)
+  from_id <- rep(i, i_degree)
   to_id <- unlist(adj)
 
   edge_list <- cbind(from_id, to_id)
-  edge_list <- edge_list[edge_list[, 2] %in% j_unique, , drop = FALSE]
+  edge_list <- edge_list[edge_list[, 2] %in% j, , drop = FALSE]
 
   row_indices <- edge_list[, 1]
   col_indices <- edge_list[, 2]
@@ -85,21 +78,17 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
   values <- if (is.null(attr)) {
     1
   } else {
-    # get edge ids to locate edge attribute values
     valid_edges <- get_edge_ids(x, c(t(edge_list)))
     edge_attr(x, attr, valid_edges)
   }
 
 
-  unique_res <- Matrix::sparseMatrix(
-    i = match(row_indices, i_unique),
-    j = match(col_indices, j_unique),
+  res <- Matrix::sparseMatrix(
+    i = match(row_indices, i),
+    j = match(col_indices, j),
     x = values,
-    dims = c(length(i_unique), length(j_unique))
+    dims = c(length(i), length(j))
   )
-
-  # Expand to handle duplicated entries in i and j
-  res <- unique_res[i_map, j_map, drop = TRUE]
 
   if (!sparse) {
     res <- as.matrix(res)
@@ -110,7 +99,7 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
     colnames(res) <- vertex_attr(x, "name", j)
   }
 
-  return(res)
+  return(res[, , drop = FALSE])
 }
 
 
@@ -211,7 +200,8 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
 #'
 #' @method [ igraph
 #' @export
-`[.igraph` <- function(x, i, j, ..., from, to,
+`[.igraph` <- function(
+    x, i, j, ..., from, to,
     sparse = igraph_opt("sparsematrices"),
     edges = FALSE, drop = TRUE,
     attr = if (is_weighted(x)) "weight" else NULL) {
@@ -253,24 +243,42 @@ get_adjacency_submatrix <- function(x, i = NULL, j = NULL, attr = NULL, sparse =
     return(res)
   }
 
-  # convert logical, character or negative i/j to proper vertex ids
-  if (!missing(i)) {
-    i <- as_igraph_vs(x, i)
-  }
-  if (!missing(j)) {
-    j <- as_igraph_vs(x, j)
-  }
-
   if (missing(i) && missing(j)) {
     return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
   }
-  if (missing(j)) {
-    get_adjacency_submatrix(x, i = i, j = NULL, attr = attr, sparse = sparse)
-  } else if (missing(i)) {
-    get_adjacency_submatrix(x, i = NULL, j = j, attr = attr, sparse = sparse)
-  } else {
-    get_adjacency_submatrix(x, i = i, j = j, attr = attr, sparse = sparse)
+
+  # convert logical, character or negative i/j to proper vertex ids
+  # also check if any vertex is duplicated and record a mapping
+  i_has_dupes <- FALSE
+  j_has_dupes <- FALSE
+
+  if (!missing(i)) {
+    i <- as_igraph_vs(x, i)
+    if (anyDuplicated(i)) {
+      i_has_dupes <- TRUE
+      i_dupl <- i
+      i <- unique(i)
+      i_map <- match(i_dupl, i)
+    }
   }
+  if (!missing(j)) {
+    j <- as_igraph_vs(x, j)
+    if (anyDuplicated(j)) {
+      j_has_dupes <- TRUE
+      j_dupl <- j
+      j <- unique(j)
+      j_map <- match(j_dupl, j)
+    }
+  }
+
+  sub_adjmat <- get_adjacency_submatrix(x, i = i, j = j, attr = attr, sparse = sparse)
+  if (i_has_dupes) {
+    sub_adjmat <- sub_adjmat[i_map, , drop = FALSE]
+  }
+  if (j_has_dupes) {
+    sub_adjmat <- sub_adjmat[, j_map, drop = FALSE]
+  }
+  sub_adjmat[, , drop = drop]
 }
 
 #' Query and manipulate a graph as it were an adjacency list
