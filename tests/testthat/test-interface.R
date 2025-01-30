@@ -124,7 +124,6 @@ test_that("adjacent_vertices works", {
   for (i in seq_along(test_vertices)) {
     expect_setequal(adj_vertices[[i]], al[[test_vertices[i]]])
   }
-
 })
 
 
@@ -156,18 +155,18 @@ test_that("delete_edges works", {
   g2 <- delete_edges(g, E(g, P = c("D", "E")))
 
   expected_matrix <- matrix(
-      c(
-        0, 0, 0, 1, 1, 1,
-        0, 0, 0, 1, 1, 1,
-        0, 0, 0, 1, 1, 1,
-        1, 1, 1, 0, 0, 0,
-        1, 1, 1, 0, 0, 1,
-        1, 1, 1, 0, 1, 0
-      ),
-      nrow = 6L,
-      ncol = 6L,
-      dimnames = list(c("A", "B", "C", "D", "E", "F"), c("A", "B", "C", "D", "E", "F"))
-    )
+    c(
+      0, 0, 0, 1, 1, 1,
+      0, 0, 0, 1, 1, 1,
+      0, 0, 0, 1, 1, 1,
+      1, 1, 1, 0, 0, 0,
+      1, 1, 1, 0, 0, 1,
+      1, 1, 1, 0, 1, 0
+    ),
+    nrow = 6L,
+    ncol = 6L,
+    dimnames = list(c("A", "B", "C", "D", "E", "F"), c("A", "B", "C", "D", "E", "F"))
+  )
 
   expect_equal(as.matrix(g2[]), expected_matrix)
 })
@@ -183,4 +182,43 @@ test_that("get.edge.ids() deprecation", {
   g <- make_empty_graph(10)
   expect_snapshot(get.edge.ids(g, 1:2))
   expect_snapshot(get.edge.ids(g, 1:2, multi = TRUE), error = TRUE)
+})
+
+test_that("get_edge_id() works with data frame", {
+  g <- make_full_graph(3, directed = FALSE)
+  el_df <- data.frame(from = c(1, 1), to = c(2, 3))
+  expect_equal(get_edge_ids(g, el_df), c(1, 2))
+})
+
+test_that("get_edge_id() works with matrices", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), 3, 2, byrow = TRUE)
+  expect_equal(get_edge_ids(g, mat), c(1, 2, 3))
+
+  mat <- matrix(c(1, 2), 1, 2)
+  expect_equal(get_edge_ids(g, mat), 1)
+})
+
+test_that("get_edge_id() errors correctly for wrong vp", {
+  g <- make_full_graph(3, directed = FALSE)
+  el_g <- make_empty_graph()
+  expect_snapshot(error = TRUE, {
+    get_edge_ids(g, el_g)
+  })
+  expect_error(get_edge_ids(g, NULL))
+  expect_error(get_edge_ids(g, NA))
+
+  V(g)$name <- letters[1:3]
+  df <- data.frame(from = c("a", "b"), to = c(1, 2))
+  expect_snapshot(error = TRUE, {
+    get_edge_ids(g, df)
+  })
+})
+
+test_that("get_edge_id() errors correctly for wrong matrices", {
+  g <- make_full_graph(10)
+  mat <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
+  lifecycle::expect_defunct(get_edge_ids(g, mat))
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2, ncol = 3)
+  lifecycle::expect_deprecated(get_edge_ids(g, mat))
 })

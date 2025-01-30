@@ -1,4 +1,3 @@
-
 #' Check whether a graph is directed
 #'
 #' @description
@@ -467,6 +466,41 @@ get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
 
+el_to_vec <- function(x, call = rlang::caller_env()) {
+  if (is.data.frame(x)) {
+    if (typeof(x[[1]]) == typeof(x[[2]])) {
+      c(rbind(x[[1]], x[[2]]))
+    } else {
+      cli::cli_abort("The columns of the data.frame are of different type ({typeof(x[[1]])} and {typeof(x[[2]])}) ")
+    }
+  } else if (inherits(x, "matrix")) {
+    dimx <- dim(x)
+    nrow <- dimx[[1]]
+    ncol <- dimx[[2]]
+    if (nrow == 2 && ncol == 2) {
+      lifecycle::deprecate_stop(
+        "2.1.5",
+        "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
+      )
+    } else if (nrow == 2) {
+      lifecycle::deprecate_warn(
+        "2.1.5",
+        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
+        details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
+      )
+      c(x)
+    } else if (ncol == 2) {
+      c(t(x))
+    } else {
+      cli::cli_abort("{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed")
+    }
+  } else if (is.vector(x)) {
+    x
+  } else {
+    cli::cli_abort("Only two-column data.frames and matrices, and vectors are allowed for {.args vp}", call = call)
+  }
+}
+
 
 #' Find the edge ids based on the incident vertices of the edges
 #'
@@ -482,8 +516,9 @@ get.edges <- function(graph, es) {
 #' vertices.
 #'
 #' @param graph The input graph.
-#' @param vp The incident vertices, given as vertex ids or symbolic vertex
-#'   names. They are interpreted pairwise, i.e. the first and second are used for
+#' @param vp The incident vertices, given as a two-column data frame, two-column matrix,
+#'   or vector of vertex ids or symbolic vertex names.
+#'   For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 #'   the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in
 #'   directed graphs. This argument is ignored for undirected graphs.
@@ -519,6 +554,8 @@ get_edge_ids <- function(graph,
                          error = FALSE) {
   ensure_igraph(graph)
 
+  vp <- el_to_vec(vp, call = rlang::caller_env())
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_get_eids, graph, as_igraph_vs(graph, vp) - 1,
@@ -543,7 +580,6 @@ get.edge.ids <- function(graph,
                          directed = TRUE,
                          error = FALSE,
                          multi = deprecated()) {
-
   if (lifecycle::is_present(multi)) {
     if (isTRUE(multi)) {
       lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
