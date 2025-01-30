@@ -17,3 +17,19 @@
       Error:
       ! The `multi` argument of `get.edge.ids()` was deprecated in igraph 2.0.0 and is now defunct.
 
+# get_edge_id() errors correctly for wrong vp
+
+    Code
+      get_edge_ids(g, el_g)
+    Condition
+      Error:
+      ! Only two-column data.frames and matrices, and vectors are allowed for vp
+
+---
+
+    Code
+      get_edge_ids(g, df)
+    Condition
+      Error in `el_to_vec()`:
+      ! The columns of the data.frame are of different type (character and double)
+
