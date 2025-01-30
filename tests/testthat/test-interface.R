@@ -217,8 +217,8 @@ test_that("get_edge_id() errors correctly for wrong vp", {
 
 test_that("get_edge_id() errors correctly for wrong matrices", {
   g <- make_full_graph(10)
-  mat <- matrix(c(1, 2, 3, 4), 2, 2)
+  mat <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
   lifecycle::expect_defunct(get_edge_ids(g, mat))
-  mat <- matrix(c(1, 2, 1, 3, 1, 4), 2, 3)
+  mat <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2, ncol = 3)
   lifecycle::expect_deprecated(get_edge_ids(g, mat))
 })

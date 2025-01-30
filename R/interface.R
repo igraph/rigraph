@@ -475,18 +475,21 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     }
   } else if (inherits(x, "matrix")) {
     dimx <- dim(x)
-    if (identical(dimx, c(2L, 2L))) {
+    nrow <- dimx[[1]]
+    ncol <- dimx[[2]]
+    if (nrow == 2 && ncol == 2) {
       lifecycle::deprecate_stop(
         "2.1.5",
         "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
       )
-    } else if (dimx[1] == 2L) {
+    } else if (nrow == 2) {
       lifecycle::deprecate_warn(
         "2.1.5",
-        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')"
+        "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
+        details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
       c(x)
-    } else if (dimx[2] == 2L) {
+    } else if (ncol == 2) {
       c(t(x))
     } else {
       cli::cli_abort("{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed")
