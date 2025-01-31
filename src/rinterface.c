@@ -3684,6 +3684,39 @@ SEXP R_igraph_feedback_arc_set(SEXP graph, SEXP weights, SEXP algo) {
 }
 
 /*-------------------------------------------/
+/ igraph_feedback_vertex_set                 /
+/-------------------------------------------*/
+SEXP R_igraph_feedback_vertex_set(SEXP graph, SEXP weights, SEXP algo) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_result;
+  igraph_vector_t c_weights;
+  igraph_fvs_algorithm_t c_algo;
+  SEXP result;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_int_init(&c_result, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_result);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  c_algo = (igraph_fvs_algorithm_t) Rf_asInteger(algo);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_feedback_vertex_set(&c_graph, &c_result, (Rf_isNull(weights) ? 0 : &c_weights), c_algo));
+
+                                        /* Convert output */
+  PROTECT(result=R_igraph_vector_int_to_SEXPp1(&c_result));
+  igraph_vector_int_destroy(&c_result);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_is_loop                             /
 /-------------------------------------------*/
 SEXP R_igraph_is_loop(SEXP graph, SEXP es) {
