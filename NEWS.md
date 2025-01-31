@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9005
+
+## Features
+
+- `get_edge_ids()` accepts data frames and matrices (#1663).
+
+
 # igraph 2.1.4.9004
 
 - Refactor: forward `get.adjacency.dense()` to `get.adjacency.sparse()` if attributes are present (#1483) (#1653).
