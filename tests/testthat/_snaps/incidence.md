@@ -16,7 +16,7 @@
       IGRAPH UNWB 8 7 -- 
       + attr: type (v/l), name (v/c), weight (e/n)
       + edges (vertex names):
-      [1] A--c A--d B--b B--c B--e C--b C--d
+      [1] B--b C--b A--c B--c A--d C--d B--e
 
 # graph_from_biadjacency_matrix() works -- dense + multiple
 
