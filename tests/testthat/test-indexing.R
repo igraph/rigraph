@@ -1,4 +1,5 @@
 test_that("[ indexing works", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_tree(20)
   ## Are these vertices connected?
   expect_equal(g[1, 2], 1)
@@ -9,6 +10,7 @@ test_that("[ indexing works", {
 })
 
 test_that("[ indexing works with symbolic names", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_named_tree()
 
   expect_equal(g["a", "b"], 1)
@@ -28,6 +30,7 @@ test_that("[ indexing works with symbolic names", {
 })
 
 test_that("[ indexing works with logical vectors", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_named_tree()
 
   lres <- structure(
@@ -70,6 +73,7 @@ test_that("[ indexing works with negative indices", {
 })
 
 test_that("[ indexing works with weighted graphs", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_weighted_tree()
 
   expect_equal(g[1, 2], 2)
