@@ -29,8 +29,8 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: duckdb/duckdb
-          path: .git/duckdb
+          repository: igraph/igraph
+          path: .git/igraph
           fetch-depth: 0
 
       - uses: ./.github/workflows/git-identity
@@ -44,8 +44,8 @@ jobs:
         id: vendor
         run: |
           git pull --rebase
-          ./vendor-one.sh .git/duckdb
-          rm -rf .git/duckdb
+          ./vendor-one.sh .git/igraph
+          rm -rf .git/igraph
           git push --dry-run
           # Check if ahead of upstream branch
           # If yes, set a step output
