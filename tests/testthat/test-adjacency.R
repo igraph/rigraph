@@ -597,7 +597,7 @@ test_that("graph_from_adjacency_matrix() snapshot", {
 })
 
 test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
-  skip_if_not_installed("Matrix")
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
 
   rlang::local_options(lifecycle_verbosity = "warning")
 
