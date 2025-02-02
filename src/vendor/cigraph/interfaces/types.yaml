@@ -157,13 +157,6 @@ VERTEX_INDICES:
     CTYPE: igraph_vector_int_t
     FLAGS: BY_REF
 
-# Temporary, for https://github.com/igraph/rigraph/pull/1630
-# We should call the `_PV` versions for all types in the future.
-VERTEX_INDICES_PV:
-    # An integer vector containing vertex indices.
-    CTYPE: igraph_vector_int_t
-    FLAGS: BY_REF
-
 VERTEX_INDEX_PAIRS:
     # An integer vector containing pairs of vertex indices, in a flattened
     # representation
