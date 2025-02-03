@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9006
+
+## Continuous integration
+
+- Use igraph repo for vendoring.
+
+- Fix vendoring workflow.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@2ab6b87947187a0b046fa3cbb10a30ec370843aa (#1670).
+
+
 # igraph 2.1.4.9005
 
 ## Features
