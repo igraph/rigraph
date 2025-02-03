@@ -9,8 +9,9 @@ get_edge_ids(graph, vp, directed = TRUE, error = FALSE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vp}{The incident vertices, given as vertex ids or symbolic vertex
-names. They are interpreted pairwise, i.e. the first and second are used for
+\item{vp}{The incident vertices, given as a two-column data frame, two-column matrix,
+or vector of vertex ids or symbolic vertex names.
+For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.}
 
 \item{directed}{Logical scalar, whether to consider edge directions in
