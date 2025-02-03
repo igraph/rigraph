@@ -11,7 +11,7 @@ or ignore the edge directions in directed graphs."><meta property="og:image" con
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,8 +67,9 @@ or ignore the edge directions in directed graphs.</p>
 
 
 <dt id="arg-vp">vp<a class="anchor" aria-label="anchor" href="#arg-vp"></a></dt>
-<dd><p>The incident vertices, given as vertex ids or symbolic vertex
-names. They are interpreted pairwise, i.e. the first and second are used for
+<dd><p>The incident vertices, given as a two-column data frame, two-column matrix,
+or vector of vertex ids or symbolic vertex names.
+For a vector, the values are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.</p></dd>
 
 
@@ -125,7 +126,7 @@ vertices.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu">get_edge_ids</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">ei</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from c01927f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 edges from d9db1cd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 4--5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## non-existant edge</span></span></span>
@@ -139,7 +140,7 @@ vertices.</p>
 <span class="r-in"><span><span class="va">eis</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 5</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">eis</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/5 edges from 387cd67:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/5 edges from df38e16:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 1-&gt;2</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
