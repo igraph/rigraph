@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9007
+
+## vendor
+
+- Update vendored sources to igraph/igraph@27624a9b65031aabd3bb976efe944524d9e7dd43 (#1672).
+
+## doc
+
+- Clarify weights use in `layout_with_kk()`.
+
+
 # igraph 2.1.4.9006
 
 ## Continuous integration
