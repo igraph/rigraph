@@ -87,6 +87,7 @@ test_that("[ indexing works with weighted graphs", {
 })
 
 test_that("[ indexing works with weighted graphs and symbolic names", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_weighted_tree()
 
   expect_equal(g["a", "b"], 2)
