@@ -375,6 +375,17 @@ mysummary <- function(x) {
   result
 }
 
+pmax_AtA <- function(A,B) {
+  change <- A < B  
+  A[change] <- B[change]
+  A
+}
+
+pmin_AtA <- function(A, B) {
+  change <- A > B
+  A[change] <- B[change]
+  A
+}
 
 graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE, call = rlang::caller_env()) {
   if (!is.null(weighted)) {
@@ -415,10 +426,10 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     adjmatrix <- adjmatrix + Matrix::t(adjmatrix)
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "max") {
-    adjmatrix <- pmax(adjmatrix, Matrix::t(adjmatrix))
+    adjmatrix <- pmax_AtA(adjmatrix, Matrix::t(adjmatrix))
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "min") {
-    adjmatrix <- pmin(adjmatrix, Matrix::t(adjmatrix))
+    adjmatrix <- pmin_AtA(adjmatrix, Matrix::t(adjmatrix))
     adjmatrix <- Matrix::tril(adjmatrix)
     adjmatrix <- Matrix::drop0(adjmatrix)
   }
