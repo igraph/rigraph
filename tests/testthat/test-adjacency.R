@@ -302,7 +302,7 @@ test_that("graph_from_adjacency_matrix() works", {
 })
 
 test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
-  skip_if_not_installed("Matrix")
+  skip_if_not_installed("Matrix",minimum_version = "1.6.0")
 
   M1 <- rbind(
     c(0, 0, 1, 1),
