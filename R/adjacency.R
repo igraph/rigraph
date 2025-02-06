@@ -375,13 +375,13 @@ mysummary <- function(x) {
   result
 }
 
-pmax_AtA <- function(A,B) {
+pmax_AB <- function(A,B) {
   change <- A < B  
   A[change] <- B[change]
   A
 }
 
-pmin_AtA <- function(A, B) {
+pmin_AB <- function(A, B) {
   change <- A > B
   A[change] <- B[change]
   A
@@ -415,7 +415,10 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
 
   if (mode == "undirected") {
     if (!is.null(weighted) && !Matrix::isSymmetric(adjmatrix)) {
-      stop("Please supply a symmetric matrix if you want to create a weighted graph with mode=UNDIRECTED.")
+      cli::cli_abort(
+        "Please supply a symmetric matrix if you want to create a weighted graph with mode=UNDIRECTED.",
+        call = call
+      )
     }
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "lower") {
@@ -426,16 +429,14 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     adjmatrix <- adjmatrix + Matrix::t(adjmatrix)
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "max") {
-    adjmatrix <- pmax_AtA(adjmatrix, Matrix::t(adjmatrix))
-    adjmatrix <- Matrix::tril(adjmatrix)
+    adjmatrix <- pmax_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
   } else if (mode == "min") {
-    adjmatrix <- pmin_AtA(adjmatrix, Matrix::t(adjmatrix))
-    adjmatrix <- Matrix::tril(adjmatrix)
+    adjmatrix <- pmin_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
     adjmatrix <- Matrix::drop0(adjmatrix)
   }
   el <- mysummary(adjmatrix)
   if (!diag) {
-    el <- el[el[, 1] != el[, 2]]
+    el <- el[el[, 1] != el[, 2], ]
   }
 
   if (!is.null(weighted)) {
