@@ -53,7 +53,7 @@
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
 
-get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
+get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   # If i or j is NULL, assume all nodes
   # if not NULL make sure to handle duplicates correctly
   if (missing(i)) {
@@ -90,16 +90,12 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
     dims = c(length(i), length(j))
   )
 
-  if (!sparse) {
-    res <- as.matrix(res)
-  }
-
   if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
     rownames(res) <- vertex_attr(x, "name", i)
     colnames(res) <- vertex_attr(x, "name", j)
   }
 
-  return(res[, , drop = FALSE])
+  res
 }
 
 
@@ -271,14 +267,20 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL, sparse = TRUE) {
     }
   }
 
-  sub_adjmat <- get_adjacency_submatrix(x, i = i, j = j, attr = attr, sparse = sparse)
+  sub_adjmat <- get_adjacency_submatrix(x, i = i, j = j, attr = attr)
   if (i_has_dupes) {
     sub_adjmat <- sub_adjmat[i_map, , drop = FALSE]
   }
   if (j_has_dupes) {
     sub_adjmat <- sub_adjmat[, j_map, drop = FALSE]
   }
-  sub_adjmat[, , drop = drop]
+
+  if (!sparse) {
+    as.matrix(sub_adjmat[, , drop = drop])
+  } else{
+    sub_adjmat[, , drop = drop]
+  } 
+  
 }
 
 #' Query and manipulate a graph as it were an adjacency list
