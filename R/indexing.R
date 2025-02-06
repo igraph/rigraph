@@ -57,21 +57,31 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   # If i or j is NULL, assume all nodes
   # if not NULL make sure to handle duplicates correctly
   if (missing(i)) {
-    i <- seq_len(vcount(x))
+    i_seq <- seq_len(vcount(x))
+    has_i <- FALSE
+  } else{
+    i_seq <- i
+    has_i <- TRUE
   }
   if (missing(j)) {
-    j <- seq_len(vcount(x))
+    j_seq <- seq_len(vcount(x))
+    has_j <- FALSE
+  } else {
+    j_seq <- j
+    has_j <- TRUE
   }
 
-  adj <- adjacent_vertices(x, i, mode = "out")
+  adj <- adjacent_vertices(x, i_seq, mode = "out")
   i_degree <- map_int(adj, length)
 
-  from_id <- rep(i, i_degree)
+  from_id <- rep(i_seq, i_degree)
   to_id <- unlist(adj)
 
   edge_list <- data.frame(from = as.integer(from_id), to = as.integer(to_id))
-  edge_list <- edge_list[edge_list$to %in% j, ]
-
+  if(has_j){
+    edge_list <- edge_list[edge_list$to %in% j_seq, ]
+  }
+  
   row_indices <- edge_list[[1]]
   col_indices <- edge_list[[2]]
 
@@ -82,17 +92,16 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     edge_attr(x, attr, valid_edges)
   }
 
-
   res <- Matrix::sparseMatrix(
-    i = match(row_indices, i),
-    j = match(col_indices, j),
+    i = if (has_i) match(row_indices, i_seq) else row_indices,
+    j = if (has_j) match(col_indices, j_seq) else col_indices,
     x = values,
-    dims = c(length(i), length(j))
+    dims = c(length(i_seq), length(j_seq))
   )
 
   if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
-    rownames(res) <- vertex_attr(x, "name", i)
-    colnames(res) <- vertex_attr(x, "name", j)
+    rownames(res) <- vertex_attr(x, "name", i_seq)
+    colnames(res) <- vertex_attr(x, "name", j_seq)
   }
 
   res
