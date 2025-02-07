@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9008
+
+## Refactoring
+
+- Enhance readability and performance of graph.adjacency.sparse (@schochastics, #1667).
+
+## Performance
+
+- Faster single bracket querying of a graph (@schochastics, #1465, #1658).
+
+
 # igraph 2.1.4.9007
 
 ## vendor
