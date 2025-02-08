@@ -1,4 +1,3 @@
-
 #' Vertex connectivity
 #'
 #' @description
@@ -287,27 +286,21 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @export
 min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.only = TRUE) {
   ensure_igraph(graph)
-  if (is.null(capacity)) {
-    if ("capacity" %in% edge_attr_names(graph)) {
-      capacity <- E(graph)$capacity
-    }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
   }
-  if (length(source) == 0) {
-    source <- NULL
+
+  if (xor(is.null(source), is.null(target))) {
+    cli::cli_abort("Please give both source and target or neither")
   }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-  if (is.null(source) && !is.null(target) ||
-    is.null(target) && !is.null(source)) {
-    stop("Please give both source and target or neither")
-  }
+
   if (!is.null(capacity)) {
     capacity <- as.numeric(capacity)
   }
 
   value.only <- as.logical(value.only)
   on.exit(.Call(R_igraph_finalizer))
+
   if (is.null(target) && is.null(source)) {
     if (value.only) {
       res <- .Call(R_igraph_mincut_value, graph, capacity)
@@ -430,13 +423,6 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
   ensure_igraph(graph)
 
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-
   if (is.null(source) && is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(R_igraph_vertex_connectivity, graph, as.logical(checks))
@@ -534,13 +520,6 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
   ensure_igraph(graph)
 
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
-
   if (is.null(source) && is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(R_igraph_edge_connectivity, graph, as.logical(checks))
@@ -551,21 +530,14 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
       as_igraph_vs(graph, source) - 1, as_igraph_vs(graph, target) - 1
     )
   } else {
-    stop("either give both source and target or neither")
+    cli::cli_abort("Either give both source and target or neither")
   }
 }
 
 #' @rdname edge_connectivity
 #' @export
-edge_disjoint_paths <- function(graph, source, target) {
+edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
-
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -578,13 +550,6 @@ edge_disjoint_paths <- function(graph, source, target) {
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
-
-  if (length(source) == 0) {
-    source <- NULL
-  }
-  if (length(target) == 0) {
-    target <- NULL
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -638,13 +603,13 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @examples
 #'
 #' # A very simple graph
-#' g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
+#' g <- graph_from_literal(a - +b - +c - +d - +e)
 #' st_cuts(g, source = "a", target = "e")
 #'
 #' # A somewhat more difficult graph
 #' g2 <- graph_from_literal(
-#'   s --+ a:b, a:b --+ t,
-#'   a --+ 1:2:3, 1:2:3 --+ b
+#'   s - -+a:b, a:b - -+t,
+#'   a - -+1:2:3, 1:2:3 - -+b
 #' )
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
@@ -693,8 +658,8 @@ st_cuts <- all_st_cuts_impl
 #'
 #' # A difficult graph, from the Provan-Shier paper
 #' g <- graph_from_literal(
-#'   s --+ a:b, a:b --+ t,
-#'   a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
+#'   s - -+a:b, a:b - -+t,
+#'   a - -+1:2:3:4:5, 1:2:3:4:5 - -+b
 #' )
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
@@ -746,9 +711,9 @@ st_min_cuts <- all_st_mincuts_impl
 #'
 #' ## The example from the paper
 #' g <- graph_from_literal(
-#'   R -+ A:B:C, A -+ D, B -+ A:D:E, C -+ F:G, D -+ L,
-#'   E -+ H, F -+ I, G -+ I:J, H -+ E:K, I -+ K, J -+ I,
-#'   K -+ I:R, L -+ H
+#'   R - +A:B:C, A - +D, B - +A:D:E, C - +F:G, D - +L,
+#'   E - +H, F - +I, G - +I:J, H - +E:K, I - +K, J - +I,
+#'   K - +I:R, L - +H
 #' )
 #' dtree <- dominator_tree(g, root = "R")
 #' layout <- layout_as_tree(dtree$domtree, root = "R")
@@ -758,10 +723,10 @@ st_min_cuts <- all_st_mincuts_impl
 #' @export
 dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # Argument checks
- ensure_igraph(graph)
+  ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
   if (length(root) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort("No vertex was specified")
   }
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
