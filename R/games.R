@@ -1,4 +1,3 @@
-
 #' The Watts-Strogatz small-world model
 #'
 #' @description
@@ -480,7 +479,7 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
                       ),
                       start.graph = NULL) {
   if (!is.null(start.graph) && !is_igraph(start.graph)) {
-    stop("`start.graph' not an `igraph' object")
+    cli::cli_abort("`start.graph' not an `igraph' object")
   }
 
   # Checks
@@ -727,7 +726,7 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
 #' @family games
 #' @export
 random.graph.game <- function(n, p.or.m, type = c("gnp", "gnm"),
-                             directed = FALSE, loops = FALSE) {
+                              directed = FALSE, loops = FALSE) {
   type <- igraph.match.arg(type)
 
   if (type == "gnp") {
@@ -1124,16 +1123,16 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
     m <- NULL
   }
   if (!is.null(out.seq) && length(out.seq) != n) {
-    stop("`out.seq' should be of length `n'")
+    cli::cli_abort("`out.seq' should be of length `n'")
   }
   if (!is.null(out.seq) && min(out.seq) < 0) {
-    stop("negative elements in `out.seq'")
+    cli::cli_abort("negative elements in `out.seq'")
   }
   if (!is.null(m) && m < 0) {
-    stop("`m' is negative")
+    cli::cli_abort("`m' is negative")
   }
   if (!is.null(time.window) && time.window <= 0) {
-    stop("time window size should be positive")
+    cli::cli_abort("time window size should be positive")
   }
   if (!is.null(m) && m == 0) {
     cli::cli_warn("{.arg m} is zero, graph will be empty.")
@@ -1425,7 +1424,7 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         pref.matrix = matrix(1, types, types),
                         directed = FALSE, loops = FALSE) {
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
-    stop("Invalid size for preference matrix")
+    cli::cli_abort("Invalid size for preference matrix")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1460,10 +1459,10 @@ sample_asym_pref <- function(nodes, types,
                              pref.matrix = matrix(1, types, types),
                              loops = FALSE) {
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
-    stop("Invalid size for preference matrix")
+    cli::cli_abort("Invalid size for preference matrix")
   }
   if (nrow(type.dist.matrix) != types || ncol(type.dist.matrix) != types) {
-    stop("Invalid size for type distribution matrix")
+    cli::cli_abort("Invalid size for type distribution matrix")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1758,13 +1757,13 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   )
 
   if (type == "gnp" && missing(p)) {
-    stop("Connection probability `p' is not given for Gnp graph")
+    cli::cli_abort("Connection probability `p' is not given for Gnp graph")
   }
   if (type == "gnp" && !missing(m)) {
     cli::cli_warn("Number of edges {.arg m} is ignored for Gnp graph.")
   }
   if (type == "gnm" && missing(m)) {
-    stop("Number of edges `m' is not given for Gnm graph")
+    cli::cli_abort("Number of edges `m' is not given for Gnm graph")
   }
   if (type == "gnm" && !missing(p)) {
     cli::cli_warn("Connection probability {.arg p} is ignored for Gnp graph.")
@@ -1888,7 +1887,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
-      stop("Lengths of `m', `rho' and `C' must match")
+      cli::cli_abort("Lengths of `m', `rho' and `C' must match")
     }
     m <- rep(m, length.out = commonlen)
     rho <- if (is.list(rho)) {
@@ -2165,7 +2164,7 @@ sample_k_regular <- k_regular_game_impl
 #'
 #' rowMeans(replicate(
 #'   100,
-#'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+#'   degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 #' ))
 #' @export
 #' @cdocs igraph_chung_lu_game
@@ -2178,8 +2177,7 @@ chung_lu <- function(
     in.weights = NULL,
     ...,
     loops = TRUE,
-    variant = c("original", "maxent", "nr")
-) {
+    variant = c("original", "maxent", "nr")) {
   variant <- rlang::arg_match(variant)
   constructor_spec(
     sample_chung_lu,
