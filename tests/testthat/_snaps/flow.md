@@ -1,7 +1,7 @@
 # min_st_separators() works for the note case
 
     Code
-      min_st_separators(g)
+      min_st_separators(g_note)
     Output
       [[1]]
       + 1/5 vertex, named, from something
