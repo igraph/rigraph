@@ -538,7 +538,9 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
 #' @export
 edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
-
+  if (is.null(source) || is.null(target)) {
+    cli::cli_abort("Both source and target must be given")
+  }
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_edge_disjoint_paths, graph,
@@ -550,6 +552,9 @@ edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
+  if (is.null(source) || is.null(target)) {
+    cli::cli_abort("Both source and target must be given")
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(

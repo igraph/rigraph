@@ -149,7 +149,8 @@ test_that("edge_disjoint_paths works", {
 
 test_that("edge_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(edge_disjoint_paths(g_path, source = 1))
+  expect_error(edge_disjoint_paths(g_path, source = 1, target = NULL))
+  expect_error(edge_disjoint_paths(g_path, source = NULL, target = 1))
 })
 
 test_that("vertex_disjoint_paths works", {
