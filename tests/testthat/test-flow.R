@@ -22,7 +22,7 @@ test_that("min_cut works -- value.only=FALSE source/target", {
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = FALSE)
 
-  expect_equal(mc$value, 1)
+  expect_equal(mc$value, 2)
   expect_equal(as.vector(mc$cut), c(2, 5))
   expect_equal(as.vector(mc$partition1), c(1, 2, 6))
   expect_equal(as.vector(mc$partition2), c(3, 4, 5))
