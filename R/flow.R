@@ -433,7 +433,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
       as_igraph_vs(graph, target) - 1
     )
   } else {
-    stop("either give both source and target or neither")
+    cli::cli_abort("Either give both source and target or neither")
   }
 }
 

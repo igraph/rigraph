@@ -65,6 +65,14 @@ test_that("st_cuts works", {
   expect_equal(unvs(all_cuts_star_v9$partition1s), list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5)))
 })
 
+test_that("st_cuts errors work", {
+  g_path <- graph_from_literal(a - +b - +c - +d - +e)
+  expect_error(st_cuts(g_path, source = "a", target = NULL))
+  expect_error(st_cuts(g_path, source = NULL, target = "a"))
+  expect_error(st_min_cuts(g_path, source = "a", target = NULL))
+  expect_error(st_min_cuts(g_path, source = NULL, target = "a"))
+})
+
 test_that("max_flow works", {
   edge_mat <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
   colnames(edge_mat) <- c("from", "to", "capacity")
@@ -86,6 +94,11 @@ test_that("vertex_connectivity works", {
 
   g_ring <- make_ring(5, circular = TRUE)
   expect_equal(vertex_connectivity(g_ring, source = 1, target = 4), 2)
+})
+
+test_that("vertex_connectivity error works", {
+  g_path <- make_ring(5, circular = FALSE)
+  expect_error(vertex_connectivity(g_path, source = 1))
 })
 
 test_that("edge_connectivity works", {
@@ -121,6 +134,51 @@ test_that("edge_connectivity works -- names", {
   expect_equal(ec3, 1)
 })
 
+test_that("edge_connectivity error works", {
+  g_path <- make_ring(5, circular = FALSE)
+  expect_error(edge_connectivity(g_path, source = 1))
+})
+
+test_that("edge_disjoint_paths works", {
+  g_full <- make_full_graph(5)
+  expect_equal(edge_disjoint_paths(g_full, source = 1, target = 2), 4)
+
+  g_path <- make_ring(5, directed = TRUE, circular = FALSE)
+  expect_equal(edge_disjoint_paths(g_path, source = 1, target = 3), 1)
+})
+
+test_that("edge_disjoint_paths error works", {
+  g_path <- make_ring(5, circular = FALSE)
+  expect_error(edge_disjoint_paths(g_path, source = 1))
+})
+
+test_that("vertex_disjoint_paths works", {
+  g_full <- make_full_graph(5)
+  expect_equal(vertex_disjoint_paths(g_full, source = 1, target = 2), 4)
+
+  g_path <- make_ring(5, directed = TRUE, circular = FALSE)
+  expect_equal(vertex_disjoint_paths(g_path, source = 1, target = 3), 1)
+})
+
+test_that("vertex_disjoint_paths error works", {
+  g_path <- make_ring(5, circular = FALSE)
+  expect_error(vertex_disjoint_paths(g_path, source = 1))
+})
+
+test_that("adhesion works", {
+  g_full <- make_full_graph(5)
+  expect_equal(adhesion(g_full), 4)
+
+  g_path <- make_ring(5, directed = TRUE, circular = FALSE)
+  expect_equal(adhesion(g_path), 0)
+})
+
+test_that("vertex_disjoint_paths error works", {
+  g_path <- make_ring(5, circular = FALSE)
+  expect_error(vertex_disjoint_paths(g_path, source = 1))
+})
+
+
 test_that("dominator_tree works", {
   g_tree <- graph_from_edgelist(matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2), directed = TRUE)
   dom_tree_tree <- dominator_tree(g_tree, 1)
@@ -139,6 +197,7 @@ test_that("dominator_tree works", {
 test_that("dominator_tree errors work", {
   g_tree <- graph_from_edgelist(matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2), directed = TRUE)
   expect_error(dominator_tree(g_tree))
+  expect_error(dominator_tree(g_tree, root = NULL))
 })
 
 test_that("dominator_tree works -- legacy", {
