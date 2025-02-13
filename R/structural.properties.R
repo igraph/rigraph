@@ -790,9 +790,9 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 #'   For `all_shortest_paths()` a list is returned:
 #'   \item{vpaths}{This is a list. Each list element
-#'   contains a shortest path from `from` to a vertex in `to`. The
-#'   shortest paths to the same vertex are collected into consecutive elements
-#'   of the list.}
+#'   contains the vertices of a shortest path from `from` to a vertex in `to`.
+#'   The shortest paths to the same vertex are collected
+#'   into consecutive elements of the list.}
 #'   \item{epaths}{This is a list similar to vpaths,
 #'   but the vectors of the list contain the edge ids along the shortest paths,
 #'   instead of the vertex ids.}
