@@ -1,3 +1,46 @@
+# error messages are proper
+
+    Code
+      make_()
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to make_, nothing given
+    Code
+      make_(1:10)
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to make_, nothing given
+    Code
+      graph_()
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to graph_, nothing given
+    Code
+      graph_(1:10)
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to graph_, nothing given
+    Code
+      graph_(directed_graph(), directed_graph())
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to graph_, multiple constructors given
+    Code
+      sample_()
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to sample_, nothing given
+    Code
+      sample_(1:10)
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to sample_, nothing given
+    Code
+      sample_(directed_graph(), directed_graph())
+    Condition
+      Error in `.extract_constructor_and_modifiers()`:
+      ! Don't know how to sample_, multiple constructors given
+
 # graph_from_literal() and simple undirected graphs
 
     Code
