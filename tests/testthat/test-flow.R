@@ -1,4 +1,4 @@
-test_that("min_cut works -- value.only=FALSE", {
+test_that("min_cut() works -- value.only=FALSE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, value.only = FALSE)
@@ -9,7 +9,7 @@ test_that("min_cut works -- value.only=FALSE", {
   expect_equal(as.vector(mc$partition2), c(1, 3:6))
 })
 
-test_that("min_cut works -- value.only=TRUE", {
+test_that("min_cut() works -- value.only=TRUE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, value.only = TRUE)
@@ -17,7 +17,7 @@ test_that("min_cut works -- value.only=TRUE", {
   expect_equal(mc, 1)
 })
 
-test_that("min_cut works -- value.only=FALSE source/target", {
+test_that("min_cut() works -- value.only=FALSE source/target", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = FALSE)
@@ -28,7 +28,7 @@ test_that("min_cut works -- value.only=FALSE source/target", {
   expect_equal(as.vector(mc$partition2), c(3, 4, 5))
 })
 
-test_that("min_cut works -- value.only=TRUE", {
+test_that("min_cut() works -- value.only=TRUE", {
   g_twosquares <- make_graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
   E(g_twosquares)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
   mc <- min_cut(g_twosquares, source = 1, target = 4, value.only = TRUE)
@@ -37,14 +37,14 @@ test_that("min_cut works -- value.only=TRUE", {
 })
 
 
-test_that("min_cut errors work", {
+test_that("min_cut() errors work", {
   g_ring <- make_ring(5, directed = TRUE, circular = TRUE)
   E(g_ring)$capacity <- c(1, 2, 3, 4, 5)
   expect_error(min_cut(g_ring, source = 1))
   expect_error(min_cut(g_ring, target = 1))
 })
 
-test_that("st_cuts works", {
+test_that("st_cuts() works", {
   g_path <- graph_from_literal(a - +b - +c - +d - +e)
   all_cuts_path <- st_cuts(g_path, source = "a", target = "e")
   expect_equal(unvs(all_cuts_path$cuts), list(1, 2, 3, 4))
@@ -80,12 +80,12 @@ test_that("max_flow works", {
   flow <- max_flow(g_ring_acyc, source = "1", target = "2")
   expect_equal(flow$value, 2)
   expect_equal(as.vector(flow$flow), rep(1, 6))
-  expect_equal(sort(as.vector(flow$cut)), c(2, 4))
-  expect_equal(sort(as.vector(flow$partition1)), 1:2)
-  expect_equal(sort(as.vector(flow$partition2)), 3:6)
+  expect_setequal(as.vector(flow$cut), c(2, 4))
+  expect_setequal(as.vector(flow$partition1), 1:2)
+  expect_setequal(as.vector(flow$partition2), 3:6)
 })
 
-test_that("vertex_connectivity works", {
+test_that("vertex_connectivity() works", {
   g_path <- make_ring(5, circular = FALSE)
   expect_equal(vertex_connectivity(g_path), 1)
 
