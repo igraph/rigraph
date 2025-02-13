@@ -1123,7 +1123,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
     m <- NULL
   }
   if (!is.null(out.seq) && length(out.seq) != n) {
-    cli::cli_abort("`out.seq' should be of length `n'")
+    cli::cli_abort("{.arg out.seq} must have length {.val n}, not {.val {length( out.seq)}}.'")
   }
   if (!is.null(out.seq) && min(out.seq) < 0) {
     cli::cli_abort("negative elements in `out.seq'")
