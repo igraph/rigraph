@@ -1126,13 +1126,13 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
     cli::cli_abort("{.arg out.seq} must have length {.val n}, not {.val {length( out.seq)}}.'")
   }
   if (!is.null(out.seq) && min(out.seq) < 0) {
-    cli::cli_abort("negative elements in `out.seq'")
+    cli::cli_abort("{.arg out.seq} must not contain negative elements.")
   }
   if (!is.null(m) && m < 0) {
-    cli::cli_abort("`m' is negative")
+    cli::cli_abort("{.arg m} must be positive or 0.")
   }
   if (!is.null(time.window) && time.window <= 0) {
-    cli::cli_abort("time window size should be positive")
+    cli::cli_abort("{.arg time.window} must be positive.")
   }
   if (!is.null(m) && m == 0) {
     cli::cli_warn("{.arg m} is zero, graph will be empty.")
@@ -1424,7 +1424,10 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         pref.matrix = matrix(1, types, types),
                         directed = FALSE, loops = FALSE) {
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
-    cli::cli_abort("Invalid size for preference matrix")
+    cli::cli_abort(c(
+      "{.arg pref.matrix} must have {.arg types} rows and columns.",
+      i = "See {.fun igraph::sample_pref}'s manual."
+     ))
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1887,7 +1890,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
-      cli::cli_abort("Lengths of `m', `rho' and `C' must match")
+      cli::cli_abort("Lengths of {.arg m}, {.arg rho} and {.arg C} must match.")
     }
     m <- rep(m, length.out = commonlen)
     rho <- if (is.list(rho)) {
