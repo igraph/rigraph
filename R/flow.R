@@ -291,7 +291,10 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
   }
 
   if (xor(is.null(source), is.null(target))) {
-    cli::cli_abort("Please give both source and target or neither")
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
 
   if (!is.null(capacity)) {
@@ -433,7 +436,10 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
       as_igraph_vs(graph, target) - 1
     )
   } else {
-    cli::cli_abort("Either give both source and target or neither")
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
 }
 
@@ -530,7 +536,10 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
       as_igraph_vs(graph, source) - 1, as_igraph_vs(graph, target) - 1
     )
   } else {
-    cli::cli_abort("Either give both source and target or neither")
+    cli::cli_abort(c(
+      "{.arg source} and {.arg target} must not be specified at the same time.",
+      i = "Specify either {.arg source} or {.arg target} or neither."
+    ))
   }
 }
 
@@ -731,7 +740,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
   if (length(root) == 0) {
-    cli::cli_abort("No vertex was specified")
+    cli::cli_abort("{.arg root} must be specified.")
   }
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
