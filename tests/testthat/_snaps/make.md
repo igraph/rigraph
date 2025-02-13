@@ -149,3 +149,11 @@
       + edges (vertex names):
       [1] 1--1 1--2 1--2
 
+# make_empty_graph gives an error for invalid arguments
+
+    Code
+      make_empty_graph(NULL)
+    Condition
+      Error in `make_empty_graph()`:
+      ! At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 0. Invalid value
+
