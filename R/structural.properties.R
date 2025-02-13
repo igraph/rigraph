@@ -796,8 +796,9 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   \item{epaths}{This is a list similar to vpaths,
 #'   but the vectors of the list contain the edge ids along the shortest paths,
 #'   instead of the vertex ids.}
-#'   \item{nrgeo}{Number of geodesics.}
-#'   \item{res}{}
+#'   \item{nrgeo}{A vector in which each element is the number of shortest paths
+#'   (geodesics) from `from` to the corresponding vertex in `to`.}
+#'   \item{res}{Deprecated}
 #'
 #'   For `mean_distance()` a single number is returned if `details=FALSE`,
 #'   or a named list with two entries: `res` is the mean distance as a numeric
