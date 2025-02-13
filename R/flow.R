@@ -738,10 +738,12 @@ st_min_cuts <- all_st_mincuts_impl
 dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
-  root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
+
+  if (missing(root) || is.null(root)) {
     cli::cli_abort("{.arg root} must be specified.")
   }
+  root <- as_igraph_vs(graph, root)
+
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,

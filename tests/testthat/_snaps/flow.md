@@ -86,7 +86,7 @@
       dominator_tree(g_tree)
     Condition
       Error in `dominator_tree()`:
-      ! argument "root" is missing, with no default
+      ! `root` must be specified.
 
 ---
 
