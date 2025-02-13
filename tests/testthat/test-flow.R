@@ -52,10 +52,21 @@ test_that("st_cuts() works", {
 
   g_star_v7 <- graph_from_literal(s - +a:b - +t, a - +1:2:3 - +b)
   all_cuts_star_v7 <- st_cuts(g_star_v7, source = "s", target = "t")
-  expect_equal(unvs(all_cuts_star_v7$cuts), list(c(1, 2), c(1, 7), c(2, 3, 4, 5, 6), c(2, 3, 4, 5, 10), c(2, 3, 4, 6, 9), c(2, 3, 4, 9, 10), c(2, 3, 5, 6, 8), c(2, 3, 5, 8, 10), c(2, 3, 6, 8, 9), c(2, 3, 8, 9, 10), c(3, 7)))
+  expect_equal(
+    unvs(all_cuts_star_v7$cuts),
+    list(
+      c(1, 2), c(1, 7), c(2, 3, 4, 5, 6), c(2, 3, 4, 5, 10),
+      c(2, 3, 4, 6, 9), c(2, 3, 4, 9, 10), c(2, 3, 5, 6, 8),
+      c(2, 3, 5, 8, 10), c(2, 3, 6, 8, 9), c(2, 3, 8, 9, 10), c(3, 7)
+    )
+  )
   expect_equal(
     unvs(all_cuts_star_v7$partition1s),
-    list(1, c(1, 3), c(1, 2), c(1, 2, 7), c(1, 2, 6), c(1, 2, 6, 7), c(1, 2, 5), c(1, 2, 5, 7), c(1, 2, 5, 6), c(1, 2, 5, 6, 7), c(1, 2, 5, 6, 7, 3))
+    list(
+      1, c(1, 3), c(1, 2), c(1, 2, 7), c(1, 2, 6),
+      c(1, 2, 6, 7), c(1, 2, 5), c(1, 2, 5, 7),
+      c(1, 2, 5, 6), c(1, 2, 5, 6, 7), c(1, 2, 5, 6, 7, 3)
+    )
   )
 
   g_star_v9 <- graph_from_literal(s - +a:b - +t, a - +1:2:3:4:5 - +b)
@@ -67,10 +78,11 @@ test_that("st_cuts() works", {
 
 test_that("st_cuts errors work", {
   g_path <- graph_from_literal(a - +b - +c - +d - +e)
-  expect_error(st_cuts(g_path, source = "a", target = NULL))
-  expect_error(st_cuts(g_path, source = NULL, target = "a"))
-  expect_error(st_min_cuts(g_path, source = "a", target = NULL))
-  expect_error(st_min_cuts(g_path, source = NULL, target = "a"))
+
+  expect_snapshot(st_cuts(g_path, source = "a", target = NULL), error = TRUE)
+  expect_snapshot(st_cuts(g_path, source = NULL, target = "a"), error = TRUE)
+  expect_snapshot(st_min_cuts(g_path, source = "a", target = NULL), error = TRUE)
+  expect_snapshot(st_min_cuts(g_path, source = NULL, target = "a"), error = TRUE)
 })
 
 test_that("max_flow works", {
@@ -98,7 +110,7 @@ test_that("vertex_connectivity() works", {
 
 test_that("vertex_connectivity error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(vertex_connectivity(g_path, source = 1))
+  expect_snapshot(vertex_connectivity(g_path, source = 1), error = TRUE)
 })
 
 test_that("edge_connectivity works", {
@@ -136,7 +148,7 @@ test_that("edge_connectivity works -- names", {
 
 test_that("edge_connectivity error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(edge_connectivity(g_path, source = 1))
+  expect_snapshot(edge_connectivity(g_path, source = 1), error = TRUE)
 })
 
 test_that("edge_disjoint_paths works", {
@@ -149,8 +161,8 @@ test_that("edge_disjoint_paths works", {
 
 test_that("edge_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(edge_disjoint_paths(g_path, source = 1, target = NULL))
-  expect_error(edge_disjoint_paths(g_path, source = NULL, target = 1))
+  expect_snapshot(edge_disjoint_paths(g_path, source = 1, target = NULL), error = TRUE)
+  expect_snapshot(edge_disjoint_paths(g_path, source = NULL, target = 1), error = TRUE)
 })
 
 test_that("vertex_disjoint_paths works", {
@@ -163,7 +175,7 @@ test_that("vertex_disjoint_paths works", {
 
 test_that("vertex_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(vertex_disjoint_paths(g_path, source = 1))
+  expect_snapshot(vertex_disjoint_paths(g_path, source = 1), error = TRUE)
 })
 
 test_that("adhesion works", {
@@ -176,7 +188,7 @@ test_that("adhesion works", {
 
 test_that("vertex_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_error(vertex_disjoint_paths(g_path, source = 1))
+  expect_snapshot(vertex_disjoint_paths(g_path, source = 1), error = TRUE)
 })
 
 
@@ -197,8 +209,8 @@ test_that("dominator_tree works", {
 
 test_that("dominator_tree errors work", {
   g_tree <- graph_from_edgelist(matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2), directed = TRUE)
-  expect_error(dominator_tree(g_tree))
-  expect_error(dominator_tree(g_tree, root = NULL))
+  expect_snapshot(dominator_tree(g_tree), error = TRUE)
+  expect_snapshot(dominator_tree(g_tree, root = NULL), error = TRUE)
 })
 
 test_that("dominator_tree works -- legacy", {
