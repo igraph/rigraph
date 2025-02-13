@@ -1491,9 +1491,9 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #'   Typical (and default) value is the number of vertices.
-#' @param weights Edge weights, larger values will result longer edges.
-#'   Note that this is opposite to [layout_with_fr()]. Weights must
-#'   be positive.
+#' @param weights Edge weights, larger values will result in longer edges.
+#'   Note that this is the opposite of [layout_with_fr()], which produces
+#'   shorter edges for larger weights. Weights must be positive.
 #' @param minx If not `NULL`, then it must be a numeric vector that gives
 #'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #'   of the vector must match the number of vertices in the graph.

@@ -1,15 +1,13 @@
 test_that("graphNEL conversion works", {
   skip_if_not_installed("graph")
 
-  suppressPackageStartupMessages(library(graph, warn.conflicts = FALSE))
+  set.seed(20250122)
 
   g <- sample_gnp(100, 5 / 100)
   N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
   gi <- isomorphic(g, g2, method = "vf2")
   expect_true(gi)
-  expect_equal(gi$map12, 1:vcount(g))
-  expect_equal(gi$map21, 1:vcount(g))
 
   ## Attributes
 
