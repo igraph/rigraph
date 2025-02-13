@@ -479,7 +479,7 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
                       ),
                       start.graph = NULL) {
   if (!is.null(start.graph) && !is_igraph(start.graph)) {
-    cli::cli_abort("`start.graph' not an `igraph' object")
+    cli::cli_abort("{.arg start.graph} must be an {.cls igraph} object, not {.obj_type_friendly {start.graph}}.")
   }
 
   # Checks
