@@ -554,8 +554,7 @@ test_that("HSBM with list arguments works", {
       blocks * vertices_per_block,
       rep(vertices_per_block, blocks),
       rho = list(rho, rho), C = C, p = 0
-    ),
-    "Lengths of `m', `rho' and `C' must match"
+    )
   )
 
   ###

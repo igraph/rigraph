@@ -1427,7 +1427,7 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
     cli::cli_abort(c(
       "{.arg pref.matrix} must have {.arg types} rows and columns.",
       i = "See {.fun igraph::sample_pref}'s manual."
-     ))
+    ))
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1462,10 +1462,16 @@ sample_asym_pref <- function(nodes, types,
                              pref.matrix = matrix(1, types, types),
                              loops = FALSE) {
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
-    cli::cli_abort("Invalid size for preference matrix")
+    cli::cli_abort(c(
+      "{.arg pref.matrix} must have {.arg types} rows and columns.",
+      i = "See {.fun igraph::sample_asym_pref}'s manual."
+    ))
   }
   if (nrow(type.dist.matrix) != types || ncol(type.dist.matrix) != types) {
-    cli::cli_abort("Invalid size for type distribution matrix")
+    cli::cli_abort(c(
+      "{.arg type.dist.matrix} must have {.arg types} rows and columns.",
+      i = "See {.fun igraph::sample_asym_pref}'s manual."
+    ))
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1760,16 +1766,16 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   )
 
   if (type == "gnp" && missing(p)) {
-    cli::cli_abort("Connection probability `p' is not given for Gnp graph")
+    cli::cli_abort("Connection probability {.arg p} must be given for Gnp graph")
   }
   if (type == "gnp" && !missing(m)) {
     cli::cli_warn("Number of edges {.arg m} is ignored for Gnp graph.")
   }
   if (type == "gnm" && missing(m)) {
-    cli::cli_abort("Number of edges `m' is not given for Gnm graph")
+    cli::cli_abort("Number of edges {.arg m} must be given for Gnm graph")
   }
   if (type == "gnm" && !missing(p)) {
-    cli::cli_warn("Connection probability {.arg p} is ignored for Gnp graph.")
+    cli::cli_warn("Connection probability {.arg p} is ignored for Gnm graph.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
