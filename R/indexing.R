@@ -59,7 +59,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   if (missing(i)) {
     i_seq <- seq_len(vcount(x))
     has_i <- FALSE
-  } else{
+  } else {
     i_seq <- i
     has_i <- TRUE
   }
@@ -78,10 +78,10 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   to_id <- unlist(adj)
 
   edge_list <- data.frame(from = as.integer(from_id), to = as.integer(to_id))
-  if(has_j){
+  if (has_j) {
     edge_list <- edge_list[edge_list$to %in% j_seq, ]
   }
-  
+
   row_indices <- edge_list[[1]]
   col_indices <- edge_list[[2]]
 
@@ -214,21 +214,21 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
-    stop("Cannot give 'from'/'to' together with regular indices")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
     (missing(from) && !missing(to))) {
-    stop("Cannot give 'from'/'to' without the other")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (!missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
-      stop("'from' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
     if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
-      stop("'to' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {
-      stop("'from' and 'to' must have the same length")
+      cli::cli_abort("{.arg from} and {.arg to} must have the same length")
     }
   }
 
@@ -237,7 +237,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   if (!missing(from)) {
     res <- get_edge_ids(x, data.frame(from, to), error = FALSE)
     if (edges) {
-      ## nop
+
     } else if (!is.null(attr)) {
       if (any(res != 0)) {
         res[res != 0] <- edge_attr(x, attr, res[res != 0])
@@ -286,10 +286,9 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
 
   if (!sparse) {
     as.matrix(sub_adjmat[, , drop = drop])
-  } else{
+  } else {
     sub_adjmat[, , drop = drop]
-  } 
-  
+  }
 }
 
 #' Query and manipulate a graph as it were an adjacency list
@@ -353,8 +352,8 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
                         edges = FALSE, exact = TRUE) {
   getfun <- if (edges) as_adj_edge_list else as_adj_list
 
-  if (!missing(i) && !missing(from)) stop("Cannot give both 'i' and 'from'")
-  if (!missing(j) && !missing(to)) stop("Cannot give both 'j' and 'to'")
+  if (!missing(i) && !missing(from)) cli::cli_abort("Cannot use both {.arg i} and {.arg from}")
+  if (!missing(j) && !missing(to)) cli::cli_abort("Cannot use both {.arg j} and {.arg to}")
   if (missing(i) && !missing(from)) i <- from
   if (missing(j) && !missing(to)) j <- to
 
@@ -425,28 +424,28 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
-    stop("Cannot give 'from'/'to' together with regular indices")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
     (missing(from) && !missing(to))) {
-    stop("Cannot give 'from'/'to' without the other")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (is.null(attr) &&
     (!is.null(value) && !is.numeric(value) && !is.logical(value))) {
-    stop("New value should be NULL, numeric or logical")
+    cli::cli_abort("New value should be NULL, numeric or logical")
   }
   if (is.null(attr) && !is.null(value) && length(value) != 1) {
-    stop("Logical or numeric value must be of length 1")
+    cli::cli_abort("Logical or numeric value must be of length 1")
   }
   if (!missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
-      stop("'from' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
     if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
-      stop("'to' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {
-      stop("'from' and 'to' must have the same length")
+      cli::cli_abort("{.arg from} and {.arg to} must have the same length")
     }
   }
 
@@ -498,7 +497,7 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
 
       if (is.null(attr)) {
         if (value > 1) {
-          cli::cli_abort("value greater than one but graph is not weighted and no attribute was specified.")
+          cli::cli_abort("{.arg value} greater than one but graph is not weighted and {.arg attr} was not specified.")
         }
         x <- add_edges(x, toadd)
       } else {
