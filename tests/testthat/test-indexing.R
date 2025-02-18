@@ -623,3 +623,57 @@ test_that("Weighted indexing does not remove edges", {
   g[from = el[, 1], to = el[, 2], attr = "sim"] <- rep(1:0, length.out = ecount(g))
   expect_equal(E(g)$sim, rep(1:0, 5))
 })
+
+test_that("indexing a vs twice works", {
+  edges <- data.frame(
+    stringsAsFactors = TRUE,
+    from = c("BOS", "JFK", "DEN", "BOS", "JFK", "DEN"),
+    to = c("JFK", "DEN", "ABQ", "JFK", "DEN", "ABQ"),
+    carrier = c("foo", "foo", "foo", "bar", "bar", "bar")
+  )
+
+  vertices <- data.frame(
+    stringsAsFactors = TRUE,
+    id = c("BOS", "JFK", "DEN", "ABQ"),
+    state = c("MA", "NY", "CO", "NM")
+  )
+
+  g <- graph_from_data_frame(edges, vertices = vertices)
+
+  x <- V(g)[3:4][state == "NM"]
+
+  expect_equal(ignore_attr = TRUE, x, V(g)["ABQ"])
+})
+
+test_that("indexing an es twice works", {
+  edges <- data.frame(
+    stringsAsFactors = TRUE,
+    from = c("BOS", "JFK", "DEN", "BOS", "JFK", "DEN"),
+    to = c("JFK", "DEN", "ABQ", "JFK", "DEN", "ABQ"),
+    carrier = c("foo", "foo", "foo", "bar", "bar", "bar")
+  )
+
+  g <- graph_from_data_frame(edges)
+
+  x <- E(g)["BOS" %->% "JFK"][carrier == "foo"]
+
+  expect_equal(ignore_attr = TRUE, x, E(g)[carrier == "foo" & .from("BOS") & .to("JFK")])
+})
+
+
+test_that("deprecated indexing functions are indeed deprecated", {
+  g <- make_ring(10)
+
+  expect_error(V(g)[nei(1)], "was deprecated")
+  expect_error(V(g)[innei(1)], "was deprecated")
+  expect_error(V(g)[outnei(1)], "was deprecated")
+  expect_error(V(g)[inc(1)], "was deprecated")
+  expect_error(V(g)[adj(1)], "was deprecated")
+  expect_error(V(g)[from(1)], "was deprecated")
+  expect_error(V(g)[to(1)], "was deprecated")
+
+  expect_error(E(g)[adj(1)], "was deprecated")
+  expect_error(E(g)[inc(1)], "was deprecated")
+  expect_error(E(g)[from(1)], "was deprecated")
+  expect_error(E(g)[to(1)], "was deprecated")
+})
