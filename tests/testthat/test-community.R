@@ -430,3 +430,14 @@ test_that("cluster_walktrap works", {
     karate_walktrap$modularity[length(karate_walktrap$modularity) - 2]
   )
 })
+
+test_that("split_join_distance works", {
+  random_sjd <- unname(split_join_distance(rep(1:2, each = 17), rep(1, 34)))
+  expect_equal(random_sjd, c(0, 17))
+
+  karate <- make_graph("Zachary")
+  karate_split1 <- make_clusters(karate, rep(1:2, each = 17))
+  karate_split2 <- make_clusters(karate, rep(1, 34))
+  com_sjd <- unname(split_join_distance(karate_split1, karate_split2))
+  expect_equal(com_sjd, c(0, 17))
+})
