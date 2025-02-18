@@ -341,5 +341,40 @@ test_that("make_kautz_graph works", {
 
   el <- as_edgelist(kautz)
   el <- el[order(el[, 1], el[, 2]), ]
-  expect_equal(el, structure(c(1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6, 7, 8, 17, 18, 19, 20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), .Dim = c(48L, 2L)))
+  expect_equal(el, structure(
+    c(
+      1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6,
+      7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
+      12, 13, 13, 14, 14, 15, 15, 16, 16, 17,
+      17, 18, 18, 19, 19, 20, 20, 21, 21, 22,
+      22, 23, 23, 24, 24, 9, 10, 11, 12, 13,
+      14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+      24, 1, 2, 3, 4, 5, 6, 7, 8, 17, 18, 19,
+      20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6, 7,
+      8, 9, 10, 11, 12, 13, 14, 15, 16
+    ),
+    .Dim = c(48L, 2L)
+  ))
+})
+
+test_that("make_graph for notable graphs is case insensitive", {
+  levi <- make_graph("Levi")
+  Levi <- make_graph("levi")
+  expect_true(identical_graphs(levi, Levi))
+})
+
+test_that("spaces are replaced in make_graph for notable graphs", {
+  Kite <- make_graph("Krackhardt_Kite")
+  kite <- make_graph("Krackhardt kite")
+  expect_true(identical_graphs(Kite, kite))
+})
+
+test_that("warnings are given for extra arguments in make_graph for notables", {
+  Levi <- make_graph("Levi")
+  expect_warning(Levi1 <- make_graph("Levi", n = 10))
+  expect_warning(Levi2 <- make_graph("Levi", isolates = "foo"))
+  expect_warning(Levi3 <- make_graph("Levi", directed = FALSE))
+  expect_true(identical_graphs(Levi, Levi1))
+  expect_true(identical_graphs(Levi, Levi2))
+  expect_true(identical_graphs(Levi, Levi3))
 })
