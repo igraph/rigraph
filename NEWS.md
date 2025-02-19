@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9011
+
+## Testing
+
+- Merged and refactored flow.R tests (@schochastics, #1675).
+
+- Merged and refactored games.R tests (@schochastics, #1682).
+
+## Uncategorized
+
+- Refactor: consolidate graph.incidence.\* (#1483) (#1654).
+
+
 # igraph 2.1.4.9010
 
 ## vendor
