@@ -136,17 +136,14 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  if (is.null(cut.prob)) {
-    res <- .Call(
-      R_igraph_motifs_randesu, graph, as.numeric(size),
-      NULL
-    )
-  } else {
-    res <- .Call(
-      R_igraph_motifs_randesu, graph, as.numeric(size),
-      as.numeric(cut.prob)
-    )
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
   }
+  res <- .Call(
+    R_igraph_motifs_randesu, graph, as.numeric(size),
+    cut.prob
+  )
+
   res[is.nan(res)] <- NA
   res
 }
@@ -186,17 +183,14 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  if (is.null(cut.prob)) {
-    .Call(
-      R_igraph_motifs_randesu_no, graph, as.numeric(size),
-      NULL
-    )
-  } else {
-    .Call(
-      R_igraph_motifs_randesu_no, graph, as.numeric(size),
-      as.numeric(cut.prob)
-    )
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
   }
+  .Call(
+    R_igraph_motifs_randesu_no, graph, as.numeric(size),
+    cut.prob
+  )
+
 }
 
 #' Graph motifs
@@ -256,18 +250,14 @@ sample_motifs <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  if (is.null(cut.prob)) {
-    .Call(
-      R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-      cut.prob, as.numeric(sample.size), as.numeric(sample)
-    )
-  } else {
-    .Call(
-      R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-      as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
-    )
-
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
   }
+  .Call(
+    R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
+    cut.prob, as.numeric(sample.size), as.numeric(sample)
+  )
+
 }
 
 
