@@ -319,9 +319,7 @@ is_biconnected <- is_biconnected_impl
 #' @rdname components
 #' @export
 largest_component <- function(graph, mode = c("weak", "strong")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   comps <- components(graph, mode = mode)
 
