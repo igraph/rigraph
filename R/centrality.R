@@ -1,4 +1,3 @@
-
 #' Find subgraph centrality scores of network positions
 #'
 #' @description
@@ -358,7 +357,7 @@ edge_betweenness <- function(graph, e = E(graph),
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
-    lifecycle::deprecate_soft(
+  lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
@@ -473,7 +472,6 @@ closeness <- function(graph, vids = V(graph),
 #' @keywords internal
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
-
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_closeness()",
@@ -686,7 +684,6 @@ arpack_defaults <- function() {
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -878,7 +875,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
+spectrum <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which = list(), options = arpack_defaults()) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -889,9 +886,10 @@ spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto",
   }
 
   eigen_adjacency_impl(graph,
-                       algorithm = algorithm,
-                       which = which,
-                       options = options)
+    algorithm = algorithm,
+    which = which,
+    options = options
+  )
 }
 
 eigen_defaults <- function() {
@@ -991,7 +989,6 @@ eigen_centrality <- function(graph,
                              scale = deprecated(),
                              weights = NULL,
                              options = arpack_defaults()) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1012,15 +1009,18 @@ eigen_centrality <- function(graph,
       lifecycle::deprecate_warn(
         "2.1.1",
         "eigen_centrality(scale = 'always as if TRUE')",
-        details =  "Normalization is always performed")
+        details = "Normalization is always performed"
+      )
     }
   }
 
-  eigenvector_centrality_impl(graph = graph,
-                              directed = directed,
-                              scale = TRUE,
-                              weights = weights,
-                              options = options)
+  eigenvector_centrality_impl(
+    graph = graph,
+    directed = directed,
+    scale = TRUE,
+    weights = weights,
+    options = options
+  )
 }
 
 #' Strength or weighted vertex degree
@@ -1160,14 +1160,15 @@ diversity <- diversity_impl
 #' hits_scores(g2)
 #' @family centrality
 #' @cdocs igraph_hub_and_authority_scores
-hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_defaults()) {
-
+hits_scores <- function(graph, ..., scale = TRUE, weights = NULL, options = arpack_defaults()) {
   rlang::check_dots_empty()
 
-  hub_and_authority_scores_impl(graph = graph,
+  hub_and_authority_scores_impl(
+    graph = graph,
     scale = scale,
     weights = weights,
-    options = options)
+    options = options
+  )
 }
 
 #' @title Kleinberg's authority centrality scores.
@@ -1175,7 +1176,7 @@ hits_scores <- function(graph, ..., scale=TRUE, weights=NULL, options=arpack_def
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
-authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+authority_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
   lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
@@ -1191,7 +1192,8 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     graph = graph,
     scale = scale,
     weights = weights,
-    options = options)
+    options = options
+  )
   scores$hub <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }
@@ -1212,7 +1214,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #'   [arpack()] for details.
 #' @family centrality
 #' @export
-hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+hub_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
   lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
@@ -1228,7 +1230,8 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
     graph = graph,
     scale = scale,
     weights = weights,
-    options = options)
+    options = options
+  )
   scores$authority <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }

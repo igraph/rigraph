@@ -18,7 +18,7 @@ test_that("Listing triangles works", {
 
   g7 <- make_ring(3, directed = FALSE)
   g8 <- make_ring(3, directed = TRUE)
-  g9 <- graph_from_literal(A - +B:C, B - +C)
+  g9 <- graph_from_literal(A -+ B:C, B -+ C)
   expect_equal(sort(triangles(g7)), 1:3)
   expect_equal(sort(triangles(g8)), 1:3)
   expect_equal(sort(triangles(g9)), 1:3)

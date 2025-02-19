@@ -28,7 +28,6 @@ test_that("layout_with_fr() deprecated argument", {
       repulserad = 1
     )
   })
-
 })
 
 test_that("layout_nicely() works with negative weights", {
@@ -191,7 +190,7 @@ test_that("Kamada-Kawai layout generator works", {
 
   g <- make_star(12)
   l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
-  expect_true(looks_circular(l[-1,]))
+  expect_true(looks_circular(l[-1, ]))
 
   g <- make_ring(10)
   E(g)$weight <- rep(1:2, length.out = ecount(g))
@@ -200,7 +199,7 @@ test_that("Kamada-Kawai layout generator works", {
 
   g <- make_star(30)
   l <- layout_with_kk(g, maxiter = 5000, dim = 3)
-  expect_true(looks_circular(l[-1,], check_dists = FALSE, eps = 1e-2))
+  expect_true(looks_circular(l[-1, ], check_dists = FALSE, eps = 1e-2))
 })
 
 test_that("layout_with_kk() deprecated arguments", {
@@ -216,11 +215,10 @@ test_that("layout_with_kk() deprecated arguments", {
       coolexp = 1
     )
   })
-
 })
 
 test_that("layout_with_sugiyama() does not demote matrices to vectors in res$layout.dummy", {
-  ex <- graph_from_literal(A - +B:C, B - +C:D)
+  ex <- graph_from_literal(A -+ B:C, B -+ C:D)
   layex <- layout_with_sugiyama(ex, layers = NULL)
   expect_equal(nrow(layex$layout.dummy), 1)
 })

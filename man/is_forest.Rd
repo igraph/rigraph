@@ -40,7 +40,7 @@ to be a forest.
 }
 \examples{
 
-g <- make_tree(3) + make_tree(5,3)
+g <- make_tree(3) + make_tree(5, 3)
 is_forest(g)
 is_forest(g, details = TRUE)
 

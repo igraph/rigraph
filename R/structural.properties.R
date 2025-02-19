@@ -1,4 +1,3 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description

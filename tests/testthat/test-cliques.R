@@ -72,112 +72,112 @@ test_that("max_cliques() work", {
   G <- simplify(G)
 
   mysort <- function(x) {
-  xl <- sapply(x, length)
-  x <- lapply(x, sort)
-  xc <- sapply(x, paste, collapse = "-")
-  x[order(xl, xc)]
-}
+    xl <- sapply(x, length)
+    x <- lapply(x, sort)
+    xc <- sapply(x, paste, collapse = "-")
+    x[order(xl, xc)]
+  }
 
   bk4 <- function(graph, min = 0, max = Inf) {
-  Gamma <- function(v) {
-    neighbors(graph, v)
-  }
+    Gamma <- function(v) {
+      neighbors(graph, v)
+    }
 
-  bkpivot <- function(PX, R) {
-    P <- if (PX$PE >= PX$PS) {
-      PX$PX[PX$PS:PX$PE]
-    } else {
-      numeric()
-    }
-    X <- if (PX$XE >= PX$XS) {
-      PX$PX[PX$XS:PX$XE]
-    } else {
-      numeric()
-    }
-    if (length(P) == 0 && length(X) == 0) {
-      if (length(R) >= min && length(R) <= max) {
-        list(R)
+    bkpivot <- function(PX, R) {
+      P <- if (PX$PE >= PX$PS) {
+        PX$PX[PX$PS:PX$PE]
       } else {
-        list()
+        numeric()
       }
-    } else if (length(P) != 0) {
-      psize <- sapply(c(P, X), function(u) {
-        length(intersect(P, Gamma(u)))
-      })
-      u <- c(P, X)[which.max(psize)]
-
-      pres <- list()
-      for (v in setdiff(P, Gamma(u))) {
-        p0 <- if (PX$PS > 1) {
-          PX$PX[1:(PX$PS - 1)]
-        } else {
-          numeric()
-        }
-        p1 <- setdiff(P, Gamma(v))
-        p2 <- intersect(P, Gamma(v))
-        x1 <- intersect(X, Gamma(v))
-        x2 <- setdiff(X, Gamma(v))
-        x0 <- if (PX$XE < length(PX$PX)) {
-          PX$PX[(PX$XE + 1):length(PX$PX)]
-        } else {
-          numeric()
-        }
-
-        newPX <- list(
-          PX = c(p0, p1, p2, x1, x2, x0),
-          PS = length(p0) + length(p1) + 1,
-          PE = length(p0) + length(p1) + length(p2),
-          XS = length(p0) + length(p1) + length(p2) + 1,
-          XE = length(p0) + length(p1) + length(p2) + length(x1)
-        )
-
-        pres <- c(pres, bkpivot(newPX, c(R, v)))
-
-        vpos <- which(PX$PX == v)
-        tmp <- PX$PX[PX$PE]
-        PX$PX[PX$PE] <- v
-        PX$PX[vpos] <- tmp
-        PX$PE <- PX$PE - 1
-        PX$XS <- PX$XS - 1
-        P <- if (PX$PE >= PX$PS) {
-          PX$PX[PX$PS:PX$PE]
-        } else {
-          numeric()
-        }
-        X <- if (PX$XE >= PX$XS) {
-          PX$PX[PX$XS:PX$XE]
-        } else {
-          numeric()
-        }
-        if (any(duplicated(PX$PX))) {
-          stop("foo2")
-        }
+      X <- if (PX$XE >= PX$XS) {
+        PX$PX[PX$XS:PX$XE]
+      } else {
+        numeric()
       }
-      pres
-    }
-  }
+      if (length(P) == 0 && length(X) == 0) {
+        if (length(R) >= min && length(R) <= max) {
+          list(R)
+        } else {
+          list()
+        }
+      } else if (length(P) != 0) {
+        psize <- sapply(c(P, X), function(u) {
+          length(intersect(P, Gamma(u)))
+        })
+        u <- c(P, X)[which.max(psize)]
 
-  res <- list()
-  cord <- order(coreness(graph))
-  for (v in seq_along(cord)) {
-    if (v != length(cord)) {
-      P <- intersect(Gamma(cord[v]), cord[(v + 1):length(cord)])
-    } else {
-      P <- numeric()
+        pres <- list()
+        for (v in setdiff(P, Gamma(u))) {
+          p0 <- if (PX$PS > 1) {
+            PX$PX[1:(PX$PS - 1)]
+          } else {
+            numeric()
+          }
+          p1 <- setdiff(P, Gamma(v))
+          p2 <- intersect(P, Gamma(v))
+          x1 <- intersect(X, Gamma(v))
+          x2 <- setdiff(X, Gamma(v))
+          x0 <- if (PX$XE < length(PX$PX)) {
+            PX$PX[(PX$XE + 1):length(PX$PX)]
+          } else {
+            numeric()
+          }
+
+          newPX <- list(
+            PX = c(p0, p1, p2, x1, x2, x0),
+            PS = length(p0) + length(p1) + 1,
+            PE = length(p0) + length(p1) + length(p2),
+            XS = length(p0) + length(p1) + length(p2) + 1,
+            XE = length(p0) + length(p1) + length(p2) + length(x1)
+          )
+
+          pres <- c(pres, bkpivot(newPX, c(R, v)))
+
+          vpos <- which(PX$PX == v)
+          tmp <- PX$PX[PX$PE]
+          PX$PX[PX$PE] <- v
+          PX$PX[vpos] <- tmp
+          PX$PE <- PX$PE - 1
+          PX$XS <- PX$XS - 1
+          P <- if (PX$PE >= PX$PS) {
+            PX$PX[PX$PS:PX$PE]
+          } else {
+            numeric()
+          }
+          X <- if (PX$XE >= PX$XS) {
+            PX$PX[PX$XS:PX$XE]
+          } else {
+            numeric()
+          }
+          if (any(duplicated(PX$PX))) {
+            stop("foo2")
+          }
+        }
+        pres
+      }
     }
-    if (v != 1) {
-      X <- intersect(Gamma(cord[v]), cord[1:(v - 1)])
-    } else {
-      X <- numeric()
+
+    res <- list()
+    cord <- order(coreness(graph))
+    for (v in seq_along(cord)) {
+      if (v != length(cord)) {
+        P <- intersect(Gamma(cord[v]), cord[(v + 1):length(cord)])
+      } else {
+        P <- numeric()
+      }
+      if (v != 1) {
+        X <- intersect(Gamma(cord[v]), cord[1:(v - 1)])
+      } else {
+        X <- numeric()
+      }
+      PX <- list(
+        PX = c(P, X), PS = 1, PE = length(P),
+        XS = length(P) + 1, XE = length(P) + length(X)
+      )
+      res <- c(res, bkpivot(PX, cord[v]))
     }
-    PX <- list(
-      PX = c(P, X), PS = 1, PE = length(P),
-      XS = length(P) + 1, XE = length(P) + length(X)
-    )
-    res <- c(res, bkpivot(PX, cord[v]))
+    lapply(res, as.integer)
   }
-  lapply(res, as.integer)
-}
 
   cl1 <- mysort(bk4(G, min = 3))
   cl2 <- mysort(unvs(max_cliques(G, min = 3)))
@@ -190,11 +190,11 @@ test_that("max_cliques() work for subsets", {
   G <- sample_gnp(100, .5)
 
   mysort <- function(x) {
-  xl <- sapply(x, length)
-  x <- lapply(x, sort)
-  xc <- sapply(x, paste, collapse = "-")
-  x[order(xl, xc)]
-}
+    xl <- sapply(x, length)
+    x <- lapply(x, sort)
+    xc <- sapply(x, paste, collapse = "-")
+    x[order(xl, xc)]
+  }
 
   cl1 <- mysort(unvs(max_cliques(G, min = 8)))
 
@@ -227,7 +227,7 @@ test_that("ivs() works", {
   expect_equal(unique(ec), 0)
 })
 
-test_that("ivs() works, cliques of complement",  {
+test_that("ivs() works, cliques of complement", {
   # 2385298846 https://github.com/igraph/rigraph/pull/1541#issuecomment-2385298846
   # that the independent vertex sets of G are
   # the same as the cliques of the complement of G (and vice versa)

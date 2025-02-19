@@ -1,4 +1,3 @@
-
 #' Set vertex attributes
 #'
 #' @description
@@ -391,7 +390,6 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   }
   index <- as_igraph_vs(graph, index)
   myattr[index]
-
 }
 
 #' Set one or more vertex attributes
@@ -520,8 +518,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   if (!missing(index)) {
     index_is_natural_sequence <- (length(index) == vcount(graph) &&
-        identical(index, seq(1, vcount(graph))))
-    if  (!index_is_natural_sequence) {
+      identical(index, seq(1, vcount(graph))))
+    if (!index_is_natural_sequence) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -1198,7 +1196,6 @@ assert_named_list <- function(value) {
   }
 
   if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
-
     rlang::abort(error_msg)
   }
 }

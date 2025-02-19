@@ -1,4 +1,3 @@
-
 #' Are two vertices adjacent?
 #'
 #' @description

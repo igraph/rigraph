@@ -617,13 +617,13 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @examples
 #'
 #' # A very simple graph
-#' g <- graph_from_literal(a - +b - +c - +d - +e)
+#' g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 #' st_cuts(g, source = "a", target = "e")
 #'
 #' # A somewhat more difficult graph
 #' g2 <- graph_from_literal(
-#'   s - -+a:b, a:b - -+t,
-#'   a - -+1:2:3, 1:2:3 - -+b
+#'   s --+ a:b, a:b --+ t,
+#'   a --+ 1:2:3, 1:2:3 --+ b
 #' )
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
@@ -672,8 +672,8 @@ st_cuts <- all_st_cuts_impl
 #'
 #' # A difficult graph, from the Provan-Shier paper
 #' g <- graph_from_literal(
-#'   s - -+a:b, a:b - -+t,
-#'   a - -+1:2:3:4:5, 1:2:3:4:5 - -+b
+#'   s --+ a:b, a:b --+ t,
+#'   a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
 #' )
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
@@ -725,9 +725,9 @@ st_min_cuts <- all_st_mincuts_impl
 #'
 #' ## The example from the paper
 #' g <- graph_from_literal(
-#'   R - +A:B:C, A - +D, B - +A:D:E, C - +F:G, D - +L,
-#'   E - +H, F - +I, G - +I:J, H - +E:K, I - +K, J - +I,
-#'   K - +I:R, L - +H
+#'   R -+ A:B:C, A -+ D, B -+ A:D:E, C -+ F:G, D -+ L,
+#'   E -+ H, F -+ I, G -+ I:J, H -+ E:K, I -+ K, J -+ I,
+#'   K -+ I:R, L -+ H
 #' )
 #' dtree <- dominator_tree(g, root = "R")
 #' layout <- layout_as_tree(dtree$domtree, root = "R")

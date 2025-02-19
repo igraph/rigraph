@@ -1,4 +1,3 @@
-
 #' Predict edges based on a hierarchical random graph model
 #'
 #' @description
@@ -1015,4 +1014,3 @@ B-6  p=1  B-2 7
 B-7  p=1  B-5 2
 
 "
-
