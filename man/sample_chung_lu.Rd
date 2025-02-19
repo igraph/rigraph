@@ -131,7 +131,7 @@ rowMeans(replicate(
 
 rowMeans(replicate(
   100,
-  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
 }
 \references{
@@ -168,6 +168,7 @@ with sharply specified degrees. \code{\link[=sample_gnp]{sample_gnp()}} creates 
 fixed connection probability \eqn{p} between all vertex pairs.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},

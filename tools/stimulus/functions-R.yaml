@@ -755,10 +755,10 @@ igraph_is_bipartite:
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
-    IGNORE: RR
+    DEPS: types ON graph V(graph)
 
 igraph_bipartite_game_gnm:
-    IGNORE: RR
+    DEPS: types ON graph V(graph)
 
 igraph_bipartite_game:
     IGNORE: RR, RC
