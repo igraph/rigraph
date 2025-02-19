@@ -232,13 +232,8 @@ test_that("make_graph handles names and isolates", {
 })
 
 test_that("make_graph gives warning for ignored arguments", {
-  expect_warning(
-    make_graph(letters[1:10], n = 10)
-  )
-
-  expect_warning(
-    make_graph(1:10, isolates = 11:12)
-  )
+  expect_warning(make_graph(letters[1:10], n = 10), "ignored for edge list with vertex names")
+  expect_warning(make_graph(1:10, isolates = 11:12), "ignored for numeric edge list")
 })
 
 test_that("compatibility when arguments are not named", {
@@ -253,7 +248,7 @@ test_that("compatibility when arguments are not named", {
 
 test_that("make_empty_graph gives an error for invalid arguments", {
   expect_snapshot(make_empty_graph(NULL), error = TRUE)
-  expect_warning(expect_error(make_empty_graph("spam")))
+  expect_warning(expect_error(make_empty_graph("spam")), "NAs introduced by coercion")
 })
 
 test_that("make_graph_atlas works", {
