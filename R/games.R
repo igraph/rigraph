@@ -1768,6 +1768,7 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   }
 }
 
+utils::globalVariables("type")
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
 #' @export
