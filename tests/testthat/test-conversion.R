@@ -1,18 +1,18 @@
 test_that("as_directed works", {
   gnp_undirected <- sample_gnp(100, 2 / 100)
   gnp_mutual <- as_directed(gnp_undirected, mode = "mutual")
-  expect_equal(degree(gnp_undirected), degree(gnp_directed) / 2)
+  expect_equal(degree(gnp_undirected), degree(gnp_mutual) / 2)
   expect_isomorphic(gnp_undirected, as_undirected(gnp_mutual))
 
-  gnp_arbitrary <- as_directed(g, mode = "arbitrary")
+  gnp_arbitrary <- as_directed(gnp_undirected, mode = "arbitrary")
   expect_equal(degree(gnp_undirected), degree(gnp_arbitrary))
-  expect_isomorphic(g, as_undirected(gnp_arbitrary))
+  expect_isomorphic(gnp_undirected, as_undirected(gnp_arbitrary))
 
-  gnp_random <- as_directed(g, mode = "random")
+  gnp_random <- as_directed(gnp_undirected, mode = "random")
   expect_equal(degree(gnp_undirected), degree(gnp_random))
   expect_isomorphic(gnp_undirected, as_undirected(gnp_random))
 
-  gnp_acyclic <- as_directed(g, mode = "acyclic")
+  gnp_acyclic <- as_directed(gnp_undirected, mode = "acyclic")
   expect_equal(degree(gnp_undirected), degree(gnp_acyclic))
   expect_isomorphic(gnp_undirected, as_undirected(gnp_acyclic))
 })
@@ -89,7 +89,7 @@ test_that("as_adjacency_matrix() works -- sparse", {
   expect_s4_class(letter_adj_matrix, "dgCMatrix")
   expect_setequal(rownames(letter_adj_matrix), letters[1:vcount(g)])
   letter_adj_matrix_dense <- as_unnamed_dense_matrix(letter_adj_matrix)
-  expect_equal(basic_adj_matrix, letter_adj_matrix_dense)
+  expect_equal(basic_adj_matrix_dense, letter_adj_matrix_dense)
 
   E(g)$weight <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
   weight_adj_matrix <- as_adjacency_matrix(g, attr = "weight")
@@ -343,7 +343,7 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   g <- sample_gnp(50, 2 / 50)
   adj_list <- as_adj_list(g)
   expect_s3_class(adj_list[[1]], NA)
-  g2 <- graph_from_adj_list(al, mode = "all")
+  g2 <- graph_from_adj_list(adj_list, mode = "all")
   expect_isomorphic(g, g2)
   expect_true(isomorphic(g, g2,
     method = "vf2",
