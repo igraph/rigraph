@@ -1,4 +1,3 @@
-
 #' Minimum spanning tree
 #'
 #' @description

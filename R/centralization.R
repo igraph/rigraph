@@ -1,4 +1,3 @@
-
 #' Centralization of a graph
 #'
 #' @description

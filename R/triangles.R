@@ -1,4 +1,3 @@
-
 #' Find triangles in graphs
 #'
 #' @description

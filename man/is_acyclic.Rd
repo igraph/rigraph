@@ -21,7 +21,7 @@ cycles in undirected graphs.
 }
 \examples{
 
-g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 is_acyclic(g)
 is_acyclic(as_undirected(g))
 }

@@ -1,4 +1,3 @@
-
 #' Merging graph layouts
 #'
 #' @description
@@ -1740,7 +1739,6 @@ layout.lgl <- function(..., params = list()) {
 #' plot(g, layout = l, vertex.label = NA, vertex.size = 3)
 layout_with_mds <- function(graph, dist = NULL, dim = 2,
                             options = arpack_defaults()) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",

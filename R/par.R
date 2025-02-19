@@ -1,4 +1,3 @@
-
 #' Parameters for the igraph package
 #'
 #' @description

@@ -37,33 +37,39 @@ test_that("count_isomorphisms", {
 test_that("count_isomorphisms_with_colors", {
   expect_equal(
     count_isomorphisms(make_ring(3),
-                       make_ring(3),
-                       edge.color1 = c(2, 2, 2),
-                       edge.color2 = c(2, 2, 2),
-                       vertex.color1 = c(3, 3, 3),
-                       vertex.color2 = c(3, 3, 3),
-                       method = "vf2"),
-    6)
+      make_ring(3),
+      edge.color1 = c(2, 2, 2),
+      edge.color2 = c(2, 2, 2),
+      vertex.color1 = c(3, 3, 3),
+      vertex.color2 = c(3, 3, 3),
+      method = "vf2"
+    ),
+    6
+  )
 
   expect_equal(
     count_isomorphisms(make_ring(3),
-                       make_ring(3),
-                       edge.color1 = c(2, 2, 2),
-                       edge.color2 = c(2, 2, 2),
-                       vertex.color1 = c(1, 2, 3),
-                       vertex.color2 = c(1, 2, 3),
-                       method = "vf2"),
-    1)
+      make_ring(3),
+      edge.color1 = c(2, 2, 2),
+      edge.color2 = c(2, 2, 2),
+      vertex.color1 = c(1, 2, 3),
+      vertex.color2 = c(1, 2, 3),
+      method = "vf2"
+    ),
+    1
+  )
 
   expect_equal(
     count_isomorphisms(make_ring(3),
-                       make_ring(3),
-                       edge.color1 = c(2, 2, 3),
-                       edge.color2 = c(3, 2, 2),
-                       vertex.color1 = c(3, 3, 3),
-                       vertex.color2 = c(3, 3, 3),
-                       method = "vf2"),
-    2)
+      make_ring(3),
+      edge.color1 = c(2, 2, 3),
+      edge.color2 = c(3, 2, 2),
+      vertex.color1 = c(3, 3, 3),
+      vertex.color2 = c(3, 3, 3),
+      method = "vf2"
+    ),
+    2
+  )
 })
 
 test_that("count_subgraph_isomorphisms", {

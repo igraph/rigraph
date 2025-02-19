@@ -1473,22 +1473,22 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #'
 #' # A directed graph
 #' g3 <- graph_from_literal(
-#'   Alice + -+Bob - -+Cecil + --Daniel,
-#'   Eugene - -+Gordon:Helen
+#'   Alice +-+ Bob --+ Cecil +-- Daniel,
+#'   Eugene --+ Gordon:Helen
 #' )
 #' g3
 #'
 #' # A graph with isolate vertices
-#' g4 <- graph_from_literal(Alice - -Bob - -Daniel, Cecil:Gordon, Helen)
+#' g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 #' g4
 #' V(g4)$name
 #'
 #' # "Arrows" can be arbitrarily long
-#' g5 <- graph_from_literal(Alice + ---------+Bob)
+#' g5 <- graph_from_literal(Alice +---------+ Bob)
 #' g5
 #'
 #' # Special vertex names
-#' g6 <- graph_from_literal("+" - -"-", "*" - -"/", "%%" - -"%/%")
+#' g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 #' g6
 #'
 graph_from_literal <- function(..., simplify = TRUE) {

@@ -1,4 +1,3 @@
-
 #' Is this object an igraph graph?
 #'
 #' @description

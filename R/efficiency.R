@@ -1,4 +1,3 @@
-
 #' Efficiency of a graph
 #'
 #' These functions calculate the global or average local efficiency of a network,

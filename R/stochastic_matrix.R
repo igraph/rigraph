@@ -1,4 +1,3 @@
-
 #' Stochastic matrix of a graph
 #'
 #' @description

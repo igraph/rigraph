@@ -21,7 +21,6 @@ test_that("bracketing works (not changing attribute of similar graphs)", {
   g <- set_graph_attr(g, name = "name", "foo")
   graph2 <- set_graph_attr(g, name = "name", "foobar")
   expect_equal(graph_attr(g, name = "name"), "foo")
-
 })
 
 test_that("bracketing works with a function (not changing attribute of similar graphs)", {
@@ -336,7 +335,6 @@ test_that("assert_named_list() works", {
 
   dups <- rlang::set_names(unnamed_list, rep("bla", 10))
   expect_error(assert_named_list(dups), "named list")
-
 })
 
 test_that("is_bipartite works", {

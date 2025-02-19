@@ -1,4 +1,3 @@
-
 #' Running mean of a time series
 #'
 #' @description

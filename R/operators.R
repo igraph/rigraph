@@ -1,4 +1,3 @@
-
 #' Intersection of two or more sets
 #'
 #' @description

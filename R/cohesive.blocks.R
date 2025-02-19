@@ -1,4 +1,3 @@
-
 #' Calculate Cohesive Blocks
 #'
 #' @description
