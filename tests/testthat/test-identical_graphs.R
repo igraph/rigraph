@@ -6,7 +6,7 @@ test_that("identical_graphs works", {
 
   g2 <- make_ring(6)
 
-  expect_false(identical_graphs(g, g2))
+  expect_not_identical_graphs(g, g2)
 })
 
 test_that("identical_graphs considers attributes", {
@@ -17,6 +17,6 @@ test_that("identical_graphs considers attributes", {
 
   g2$m <- 2
 
-  expect_false(identical_graphs(g, g2))
+  expect_not_identical_graphs(g, g2)
   expect_identical_graphs(g, g2, attrs = FALSE)
 })

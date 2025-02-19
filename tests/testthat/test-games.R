@@ -136,7 +136,7 @@ test_that("sample_degseq supports the sample_(...) syntax", {
   expect_equal(degree(g1), degs)
   expect_equal(degree(g2), degs)
 
-  expect_false(identical_graphs(g1, g2))
+  expect_not_identical_graphs(g1, g2)
 })
 
 test_that("sample_degseq works() -- old method names", {

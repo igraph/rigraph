@@ -35,3 +35,7 @@ expect_ecount <- function(graph, expected, ...) {
 expect_identical_graphs <- function(g1, g2, ...) {
   expect_true(identical_graphs(g1, g2, ...))
 }
+
+expect_not_identical_graphs <- function(g1, g2, ...) {
+  expect_false(identical_graphs(g1, g2, ...))
+}

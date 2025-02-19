@@ -137,7 +137,7 @@ test_that("sample_(tree(...)) works", {
   expect_ecount(g2, 199)
   expect_vcount(g2, 200)
   expect_true(is_tree(g2))
-  expect_false(identical_graphs(g, g2))
+  expect_not_identical_graphs(g, g2)
 })
 
 test_that("sample_tree yields a singleton graph for n=1", {
