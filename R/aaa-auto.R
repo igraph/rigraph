@@ -2091,9 +2091,7 @@ bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
-  }
+  res <- set_vertex_attr(res$graph, "type", value = res$types)
   res
 }
 
@@ -2108,9 +2106,8 @@ bipartite_game_gnm_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
-  }
+  res <- set_vertex_attr(res$graph, "type", value = res$types)
+
   res
 }
 
