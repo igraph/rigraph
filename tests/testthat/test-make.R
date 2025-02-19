@@ -198,7 +198,7 @@ test_that("make_lattice prints a warning for fractional length)", {
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
   graph_elist <- make_empty_graph(n = 10) + edges(1:10)
-  expect_identical_graphsgraph_make, graph_elist)
+  expect_identical_graphs(graph_make, graph_elist)
 })
 
 test_that("make_graph accepts an empty vector or NULL", {
