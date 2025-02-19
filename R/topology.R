@@ -1,4 +1,3 @@
-
 #' Permute the vertices of a graph
 #'
 #' @description

@@ -1,4 +1,3 @@
-
 #' Run igraph demos, step by step
 #'
 #' @description

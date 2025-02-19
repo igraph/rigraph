@@ -1,4 +1,3 @@
-
 #' Writing the graph to a file in some format
 #'
 #' @description

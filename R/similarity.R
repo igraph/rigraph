@@ -83,11 +83,10 @@ similarity.jaccard <- function(graph,
                                vids = V(graph),
                                mode = c("all", "out", "in", "total"),
                                loops = FALSE) {
-
   lifecycle::deprecate_soft(
     "2.1.0",
     "similarity.jaccard()",
-    'similarity(method)',
+    "similarity(method)",
     details = 'similarity(method = "jaccard")'
   )
 
@@ -110,14 +109,13 @@ similarity.jaccard <- function(graph,
 #' @keywords internal
 #' @export
 similarity.dice <- function(graph,
-                               vids = V(graph),
-                               mode = c("all", "out", "in", "total"),
-                               loops = FALSE) {
-
+                            vids = V(graph),
+                            mode = c("all", "out", "in", "total"),
+                            loops = FALSE) {
   lifecycle::deprecate_soft(
     "2.1.0",
     "similarity.dice()",
-    'similarity(method)',
+    "similarity(method)",
     details = 'similarity(method = "dice")'
   )
 
@@ -140,13 +138,12 @@ similarity.dice <- function(graph,
 #' @keywords internal
 #' @export
 similarity.invlogweighted <- function(graph,
-                               vids = V(graph),
-                               mode = c("all", "out", "in", "total")) {
-
+                                      vids = V(graph),
+                                      mode = c("all", "out", "in", "total")) {
   lifecycle::deprecate_soft(
     "2.1.0",
     "similarity.invlogweighted()",
-    'similarity(method)',
+    "similarity(method)",
     details = 'similarity(method = "invlogweighted")'
   )
 

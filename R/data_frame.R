@@ -1,4 +1,3 @@
-
 #' Create a graph from an edge list matrix
 #'
 #' @description

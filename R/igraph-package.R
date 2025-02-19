@@ -1,4 +1,3 @@
-
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
 ## usethis namespace: start

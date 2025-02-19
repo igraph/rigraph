@@ -1,4 +1,3 @@
-
 #' Connected components of a graph
 #'
 #' @description
