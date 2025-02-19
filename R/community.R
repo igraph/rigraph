@@ -1,4 +1,3 @@
-
 #' Creates a communities object.
 #'
 #' @description
@@ -469,7 +468,7 @@ membership <- function(communities) {
       which.max(communities$modularity)
     )
   } else {
-    stop("Cannot calculate community membership")
+    cli::cli_abort("Cannot calculate community membership")
   }
   if (igraph_opt("add.vertex.names") && !is.null(communities$names)) {
     names(res) <- communities$names
@@ -681,7 +680,7 @@ modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, dir
   # Argument checks
   ensure_igraph(x)
   if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
-    stop("Membership is not a numerical vector")
+    cli::cli_abort("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
   if (!is.null(weights)) weights <- as.numeric(weights)
@@ -701,7 +700,7 @@ modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
     max(x$modularity)
   } else {
-    stop("Modularity was not calculated")
+    cli::cli_abort("cluster algorithm was run with {.arg modularity = FALSE} and no modularity value was computed.")
   }
 }
 
@@ -761,7 +760,7 @@ merges <- function(communities) {
   if (!is.null(communities$merges)) {
     communities$merges
   } else {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 }
 
@@ -795,10 +794,9 @@ complete.dend <- function(comm, use.modularity) {
   merges <- comm$merges
   if (nrow(merges) < comm$vcount - 1) {
     if (use.modularity) {
-      stop(paste(
-        "`use.modularity' requires a full dendrogram,",
-        "i.e. a connected graph"
-      ))
+      cli::cli_abort(
+        "{.arg use.modularity} requires a full dendrogram, i.e. a connected graph"
+      )
     }
     miss <- seq_len(comm$vcount + nrow(merges))[-as.vector(merges)]
     miss <- c(miss, seq_len(length(miss) - 2) + comm$vcount + nrow(merges))
@@ -819,7 +817,7 @@ complete.dend <- function(comm, use.modularity) {
 as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
                                       ...) {
   if (!is_hierarchical(object)) {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 
   .memberDend <- function(x) {
@@ -848,7 +846,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
   }
   nMerge <- length(oHgt <- object$height)
   if (nMerge != nrow(merges)) {
-    stop("'merge' and 'height' do not fit!")
+    cli::cli_abort("'merge' and 'height' do not fit!")
   }
   hMax <- oHgt[nMerge]
   one <- 1L
@@ -919,7 +917,7 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
 
 as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   if (!is_hierarchical(x)) {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 
   ## If multiple components, then we merge them in arbitrary order
@@ -974,15 +972,15 @@ rlang::on_load(s3_register("ape::as.phylo", "communities"))
 #' @export
 cut_at <- function(communities, no, steps) {
   if (!inherits(communities, "communities")) {
-    stop("Not a community structure")
+    cli::cli_abort("Not a community structure")
   }
   if (!is_hierarchical(communities)) {
-    stop("Not a hierarchical communitity structure")
+    cli::cli_abort("Not a hierarchical communitity structure")
   }
 
   if ((!missing(no) && !missing(steps)) ||
     (missing(no) && missing(steps))) {
-    stop("Please give either `no' or `steps' (but not both)")
+    cli::cli_abort("Please use either {.arg no} or {.arg steps} (but not both)")
   }
 
   if (!missing(steps)) {
@@ -1008,10 +1006,10 @@ cut_at <- function(communities, no, steps) {
 #' @export
 show_trace <- function(communities) {
   if (!inherits(communities, "communities")) {
-    stop("Not a community structure")
+    cli::cli_abort("Not a community structure")
   }
   if (is.null(communities$history)) {
-    stop("History was not recorded")
+    cli::cli_abort("History was not recorded")
   }
 
   res <- character()
@@ -1340,13 +1338,14 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            resolution_parameter = deprecated(), beta = 0.01,
                            initial_membership = NULL,
                            n_iterations = 2, vertex_weights = NULL) {
-
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft("2.1.0",
-                              "cluster_leiden(resolution_parameter)",
-                              "cluster_leiden(resolution)")
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "cluster_leiden(resolution_parameter)",
+      "cluster_leiden(resolution)"
+    )
     resolution <- resolution_parameter
   }
 
@@ -1879,7 +1878,6 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   options = arpack_defaults(),
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -2041,8 +2039,16 @@ cluster_label_prop0 <- function(
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
-  directed <- switch(igraph.match.arg(mode), "out" = TRUE, "in" = TRUE, "all" = FALSE)
-  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
+  directed <- switch(igraph.match.arg(mode),
+    "out" = TRUE,
+    "in" = TRUE,
+    "all" = FALSE
+  )
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2828,10 +2834,10 @@ contract <- contract_vertices_impl
 #' @seealso [distances()]
 #' @examples
 #'
-#' g <- make_lattice(c(10,10))
+#' g <- make_lattice(c(10, 10))
 #' clu <- voronoi_cells(g, c(25, 43, 67))
 #' groups(clu)
-#' plot(g, vertex.color=clu$membership)
+#' plot(g, vertex.color = clu$membership)
 #'
 #' @export
 #' @family community
