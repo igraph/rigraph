@@ -2712,14 +2712,25 @@ triad_census_impl <- function(graph) {
   res
 }
 
-adjacent_triangles_impl <- function(graph, vids=V(graph)) {
+count_adjacent_triangles_impl <- function(graph, vids=V(graph)) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_adjacent_triangles, graph, vids-1)
+  res <- .Call(R_igraph_count_adjacent_triangles, graph, vids-1)
+
+  res
+}
+
+count_triangles_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_count_triangles, graph)
 
   res
 }
@@ -3913,6 +3924,18 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
   }
+  res
+}
+
+adjacent_triangles_impl <- function() {
+  # Argument checks
+
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_adjacent_triangles)
+
+
   res
 }
 
