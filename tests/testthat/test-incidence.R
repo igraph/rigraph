@@ -138,17 +138,17 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
-  out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out", weighted= TRUE)
+  out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out", weighted = TRUE)
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 7)
   expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7))
 
-  in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in", weighted= TRUE)
+  in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in", weighted = TRUE)
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 7)
   expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7))
 
-  mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all", weighted= TRUE)
+  mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all", weighted = TRUE)
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 14)
   expect_equal(as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7))
@@ -159,7 +159,7 @@ test_that("graph_from_biadjacency_matrix() errors well", {
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
-  expect_snapshot(error= TRUE, {
+  expect_snapshot(error = TRUE, {
     (g <- graph_from_biadjacency_matrix(inc, weight = FALSE))
   })
   expect_snapshot(error = TRUE, {

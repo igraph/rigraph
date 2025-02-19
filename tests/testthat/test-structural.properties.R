@@ -21,7 +21,7 @@ test_that("bfs() deprecated argument", {
       root = 2,
       unreachable = FALSE,
       neimode = "out"
-   )
+    )
   })
 })
 
@@ -55,7 +55,7 @@ test_that("degree() works", {
 })
 
 test_that("max_degree() works", {
-  g <- make_graph(c(1,2, 2,2, 2,3), directed = TRUE)
+  g <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
   expect_equal(max_degree(g), 4)
   expect_equal(max_degree(g, mode = "out"), 2)
   expect_equal(max_degree(g, loops = FALSE), 2)
@@ -180,7 +180,7 @@ test_that("bfs() works", {
   local_igraph_options(print.id = FALSE)
 
   expect_snapshot({
-    g <- graph_from_literal(a - +b - +c, z - +a, d)
+    g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(
       g,
       root = 2,
@@ -197,7 +197,7 @@ test_that("bfs() works", {
 })
 
 test_that("bfs() deprecated argument", {
-  g <- graph_from_literal(a - +b - +c, z - +a, d)
+  g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
 
   expect_snapshot(error = TRUE, {
     b <- bfs(
@@ -308,21 +308,25 @@ test_that("farthest_vertices() works", {
 })
 
 test_that("distances() works", {
-  g <- make_graph(c(1, 5, 1, 7, 1, 8, 1, 10, 2, 6,
-                    2, 7, 2, 8, 2, 10, 3, 4, 3, 5,
-                    3, 9, 5, 6, 5, 7, 5, 10, 6, 8,
-                    7, 8, 7, 9, 8, 9, 8, 10, 9, 10),
-                  directed = FALSE)
+  g <- make_graph(
+    c(
+      1, 5, 1, 7, 1, 8, 1, 10, 2, 6,
+      2, 7, 2, 8, 2, 10, 3, 4, 3, 5,
+      3, 9, 5, 6, 5, 7, 5, 10, 6, 8,
+      7, 8, 7, 9, 8, 9, 8, 10, 9, 10
+    ),
+    directed = FALSE
+  )
 
   mu <- distances(g, algorithm = "unweighted")
 
   # unit weights
   E(g)$weight <- rep(1, ecount(g))
 
-  ma  <- distances(g) # automatic
-  md  <- distances(g, algorithm = "dijkstra")
+  ma <- distances(g) # automatic
+  md <- distances(g, algorithm = "dijkstra")
   mbf <- distances(g, algorithm = "bellman-ford")
-  mj  <- distances(g, algorithm = "johnson")
+  mj <- distances(g, algorithm = "johnson")
   mfw <- distances(g, algorithm = "floyd-warshall")
 
   expect_equal(mu, ma)
@@ -333,10 +337,10 @@ test_that("distances() works", {
 
   E(g)$weight <- 0.25 * (1:ecount(g))
 
-  ma  <- distances(g) # automatic
-  md  <- distances(g, algorithm = "dijkstra")
+  ma <- distances(g) # automatic
+  md <- distances(g, algorithm = "dijkstra")
   mbf <- distances(g, algorithm = "bellman-ford")
-  mj  <- distances(g, algorithm = "johnson")
+  mj <- distances(g, algorithm = "johnson")
   mfw <- distances(g, algorithm = "floyd-warshall")
 
   expect_equal(ma, md)
@@ -451,7 +455,7 @@ test_that("k_shortest_paths() works", {
 })
 
 test_that("k_shortest_paths() works with weights", {
-  g <- make_graph(c(1,2, 1,3, 3,2))
+  g <- make_graph(c(1, 2, 1, 3, 3, 2))
   E(g)$weight <- c(5, 2, 1)
   res <- k_shortest_paths(g, 1, 2, k = 3)
   expect_length(res$vpaths, 2)
@@ -729,23 +733,23 @@ test_that("largest component is actually the largest", {
 
 test_that("largest strongly and weakly components are correct", {
   g <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A,
-    C - +D,
+    A -+ B,
+    B -+ C,
+    C -+ A,
+    C -+ D,
     E
   )
 
   strongly <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A
+    A -+ B,
+    B -+ C,
+    C -+ A
   )
   weakly <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A,
-    C - +D
+    A -+ B,
+    B -+ C,
+    C -+ A,
+    C -+ D
   )
 
   expect_true(isomorphic(largest_component(g, "weak"), weakly))

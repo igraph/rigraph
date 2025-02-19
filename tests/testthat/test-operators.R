@@ -33,8 +33,8 @@ test_that("disjoint_union() works", {
 test_that("disjoint_union() does not convert types", {
   # https://github.com/igraph/rigraph/issues/761
 
-  g1 <- make_graph(~ A - -B)
-  g2 <- make_graph(~ D - -E)
+  g1 <- make_graph(~ A -- B)
+  g2 <- make_graph(~ D -- E)
 
   g1 <- set_edge_attr(g1, "date", value = as.POSIXct(c("2021-01-01 01:01:01")))
   g2 <- set_edge_attr(g2, "date", value = as.POSIXct(c("2021-03-03 03:03:03")))
@@ -45,7 +45,6 @@ test_that("disjoint_union() does not convert types", {
 })
 
 test_that("intersection() works", {
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -58,11 +57,9 @@ test_that("complementer() works", {
 
   x <- complementer(complementer(g2))
   expect_true(identical_graphs(x, g2))
-
 })
 
 test_that("compose() works", {
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
@@ -119,7 +116,7 @@ test_that("t() is aliased to edge reversal for graphs", {
 })
 
 test_that("vertices() works", {
-  g_all_unnamed <-  make_empty_graph(1) + vertices("a", "b")
+  g_all_unnamed <- make_empty_graph(1) + vertices("a", "b")
   expect_s3_class(V(g_all_unnamed), "igraph.vs")
   expect_identical(V(g_all_unnamed)$name, c(NA, "a", "b"))
 

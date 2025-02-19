@@ -20,9 +20,9 @@ test_that("iterators work", {
 
 test_that("subsetting returns the whole if no argument", {
   g <- make_ring(10)
-  expect_length(V(g)[,], 10)
+  expect_length(V(g)[, ], 10)
   expect_length(V(g)[, na_ok = FALSE], 10)
-  expect_length(E(g)[,], 10)
+  expect_length(E(g)[, ], 10)
 })
 
 test_that("complex attributes work", {
