@@ -181,7 +181,7 @@ eigen(laplacian_matrix(make_star(10, mode = "undirected")))
 
 ## First three eigenvalues of the adjacency matrix of a graph
 ## We need the 'Matrix' package for this
-if (require(Matrix)) {
+\dontshow{if (rlang::is_installed("Matrix")) withAutoprint(\{ # examplesIf}
   set.seed(42)
   g <- sample_gnp(1000, 5 / 1000)
   M <- as_adjacency_matrix(g, sparse = TRUE)
@@ -193,7 +193,7 @@ if (require(Matrix)) {
     n = vcount(g), nev = 3, ncv = 8,
     which = "LM", maxiter = 2000
   ))
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 D.C. Sorensen, Implicit Application of Polynomial Filters in a

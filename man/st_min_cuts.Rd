@@ -49,8 +49,8 @@ An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 
 # A difficult graph, from the Provan-Shier paper
 g <- graph_from_literal(
-  s --+ a:b, a:b --+ t,
-  a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
+  s - -+a:b, a:b - -+t,
+  a - -+1:2:3:4:5, 1:2:3:4:5 - -+b
 )
 st_min_cuts(g, source = "s", target = "t")
 }
@@ -76,5 +76,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{flow}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts}{\code{igraph_all_st_mincuts()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}.}
 

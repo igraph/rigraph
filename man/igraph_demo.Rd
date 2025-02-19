@@ -28,10 +28,10 @@ The \code{tcltk} package is needed for \code{igraph_demo()}.
 \examples{
 
 igraph_demo()
-if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
-  igraph_demo("centrality")
-}
 
+\dontshow{if (interactive && rlang::is_installed("tcltk")) withAutoprint(\{ # examplesIf}
+igraph_demo("centrality")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=demo]{demo()}}

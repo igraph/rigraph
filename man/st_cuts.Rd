@@ -34,13 +34,13 @@ removing these edges from \eqn{G} there is no directed path from \eqn{s} to
 \examples{
 
 # A very simple graph
-g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
+g <- graph_from_literal(a - +b - +c - +d - +e)
 st_cuts(g, source = "a", target = "e")
 
 # A somewhat more difficult graph
 g2 <- graph_from_literal(
-  s --+ a:b, a:b --+ t,
-  a --+ 1:2:3, 1:2:3 --+ b
+  s - -+a:b, a:b - -+t,
+  a - -+1:2:3, 1:2:3 - -+b
 )
 st_cuts(g2, source = "s", target = "t")
 }
@@ -66,5 +66,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{flow}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_cuts}{\code{igraph_all_st_cuts()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_cuts}{\code{all_st_cuts()}}.}
 
