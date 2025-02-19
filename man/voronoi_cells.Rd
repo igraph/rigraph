@@ -54,10 +54,10 @@ it is closest.
 }
 \examples{
 
-g <- make_lattice(c(10,10))
+g <- make_lattice(c(10, 10))
 clu <- voronoi_cells(g, c(25, 43, 67))
 groups(clu)
-plot(g, vertex.color=clu$membership)
+plot(g, vertex.color = clu$membership)
 
 }
 \seealso{

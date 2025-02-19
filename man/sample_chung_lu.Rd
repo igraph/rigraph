@@ -131,7 +131,7 @@ rowMeans(replicate(
 
 rowMeans(replicate(
   100,
-  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
 }
 \references{
