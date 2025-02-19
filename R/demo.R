@@ -59,7 +59,7 @@ igraphdemo <- function(which) { # nocov start
 #'
 #' igraph_demo()
 #'
-#' @examplesIf interactive && rlang::is_installed("tcltk")
+#' @examplesIf interactive() && rlang::is_installed("tcltk")
 #' igraph_demo("centrality")
 #'
 igraph_demo <- function(which) {
