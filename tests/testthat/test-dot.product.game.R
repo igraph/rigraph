@@ -22,10 +22,10 @@ test_that("Dot product rng works", {
 
   vecs <- replicate(100, rep(sqrt(1 / 8), 4))
   g <- sample_dot_product(vecs)
-  expect_equal(ecount(g), 2454)
+  expect_ecount(g, 2454)
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  expect_equal(ecount(g2), 4938)
+  expect_ecount(g2, 4938)
 })
 
 test_that("Dot product rng gives warnings", {

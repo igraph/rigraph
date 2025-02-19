@@ -6,7 +6,7 @@ test_that("union() works", {
   gu <- union(g1, g2)
 
   expect_vcount(gu, 11)
-  expect_equal(ecount(gu), 20)
+  expect_ecount(gu, 20)
   expect_equal(
     order_by_two_first_columns(rbind(as_edgelist(g1), as_edgelist(g2))),
     order_by_two_first_columns(as_edgelist(gu))
@@ -69,7 +69,7 @@ test_that("compose() works", {
 
   gc <- compose(gu, g1)
   expect_vcount(gc, 11)
-  expect_equal(ecount(gc), 60)
+  expect_ecount(gc, 60)
   expect_equal(diameter(gc), 2)
 })
 
@@ -83,7 +83,7 @@ test_that("Union of directed named graphs", {
   gg <- union.igraph(graphs)
 
   expect_vcount(gg, 5)
-  expect_equal(ecount(gg), 10)
+  expect_ecount(gg, 10)
 })
 
 test_that("edge reversal works", {

@@ -112,7 +112,7 @@ test_that("graph_from_literal(simplify = FALSE)", {
 test_that("empty graph works", {
   empty <- make_empty_graph()
   expect_vcount(empty, 0)
-  expect_equal(ecount(empty), 0)
+  expect_ecount(empty, 0)
 })
 
 test_that("make_star works", {
@@ -243,7 +243,7 @@ test_that("compatibility when arguments are not named", {
   graph_unnamed_args <- make_graph(as.vector(t(elist)), nodes, FALSE)
 
   expect_vcount(graph_unnamed_args, 3)
-  expect_equal(ecount(graph_unnamed_args), 1)
+  expect_ecount(graph_unnamed_args, 1)
 })
 
 test_that("make_empty_graph gives an error for invalid arguments", {
@@ -325,7 +325,7 @@ test_that("make_full_bipartite_graph works", {
 
   full_bip <- make_full_bipartite_graph(5, 5)
   expect_vcount(full_bip, 10)
-  expect_equal(ecount(full_bip), 25)
+  expect_ecount(full_bip, 25)
 })
 
 test_that("make_kautz_graph works", {

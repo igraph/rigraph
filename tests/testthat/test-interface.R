@@ -3,7 +3,7 @@ test_that("add_edges keeps edge id order", {
   edges <- c(1, 2, 2, 3, 3, 4, 1, 6, 1, 7, 9, 10)
   g2 <- add_edges(g, edges)
 
-  expect_equal(ecount(g2), length(edges) / 2)
+  expect_ecount(g2, length(edges) / 2)
   expect_equal(get_edge_ids(g2, edges), seq_len(length(edges) / 2))
 })
 
@@ -13,7 +13,7 @@ test_that("add_edges adds attributes", {
   weights <- c(1, 2, 1, -1)
   g3 <- add_edges(g, edges, attr = list(weight = weights))
 
-  expect_equal(ecount(g3), (length(edges) / 2))
+  expect_ecount(g3, (length(edges) / 2))
   expect_equal(get_edge_ids(g3, edges), seq_len(length(edges) / 2))
   expect_equal(E(g3)$weight, weights)
 })
@@ -50,7 +50,7 @@ test_that("add_vertices works", {
   g2 <- add_vertices(g, nv = nv)
 
   expect_vcount(g2, vcount(g) + nv)
-  expect_equal(ecount(g2), ecount(g))
+  expect_ecount(g2, ecount(g))
   expect_equal(as_edgelist(g2), as_edgelist(g))
 })
 

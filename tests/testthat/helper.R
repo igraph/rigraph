@@ -27,3 +27,7 @@ expect_isomorphic <- function(g1, g2) {
 expect_vcount <- function(graph, expected, ...) {
   expect_equal(object = vcount(graph), expected = expected, ...)
 }
+
+expect_ecount <- function(graph, expected, ...) {
+  expect_equal(object = ecount(graph), expected = expected, ...)
+}

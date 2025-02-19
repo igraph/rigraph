@@ -286,7 +286,7 @@ test_that("difference of named graphs works", {
 
   gg <- sg - g
 
-  expect_equal(ecount(gg), 0)
+  expect_ecount(gg, 0)
   expect_equal(V(gg)$name, letters[c(1:3, 11)])
 })
 
