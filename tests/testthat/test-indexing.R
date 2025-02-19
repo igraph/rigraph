@@ -3,10 +3,22 @@ test_that("[ indexing works", {
   g <- make_tree(20)
 
   expect_equal(g[1, 2], 1)
-  expect_equal(as_unnamed_dense_matrix(g[c(1, 1, 7), c(2, 3, 14)]), vector_to_square_matrix(1, 1, 0, 1, 1, 0, 0, 0, 1))
-  expect_equal(as_unnamed_dense_matrix(g[c(1, 1, 7), c(5, 3, 12)]), vector_to_square_matrix(0, 0, 0, 1, 1, 0, 0, 0, 0))
-  expect_equal(as_unnamed_dense_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]), matrix(1, 4, 4))
-  expect_equal(as_unnamed_dense_matrix(g[c(8, 17), c(17, 8)]), vector_to_square_matrix(1, 0, 0, 0))
+  expect_equal(
+    as_unnamed_dense_matrix(g[c(1, 1, 7), c(2, 3, 14)]),
+    vector_to_square_matrix(1, 1, 0, 1, 1, 0, 0, 0, 1)
+  )
+  expect_equal(
+    as_unnamed_dense_matrix(g[c(1, 1, 7), c(5, 3, 12)]),
+    vector_to_square_matrix(0, 0, 0, 1, 1, 0, 0, 0, 0)
+  )
+  expect_equal(
+    as_unnamed_dense_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]),
+    matrix(1, 4, 4)
+  )
+  expect_equal(
+    as_unnamed_dense_matrix(g[c(8, 17), c(17, 8)]),
+    vector_to_square_matrix(1, 0, 0, 0)
+  )
 })
 
 test_that("[ indexing works with symbolic names", {
@@ -299,9 +311,9 @@ test_that("[ handles from and to properly", {
 test_that("[[ works with from and to", {
   g <- make_tree(20)
 
-  expect_equal(ignore_attr = TRUE, g[[1, ]], g[[from = 1]])
-  expect_equal(ignore_attr = TRUE, g[[, 1]], g[[to = 1]])
-  expect_equal(ignore_attr = TRUE, g[[1:5, 4:10]], g[[from = 1:5, to = 4:10]])
+  expect_equal(g[[1, ]], g[[from = 1]], ignore_attr = TRUE)
+  expect_equal(g[[, 1]], g[[to = 1]], ignore_attr = TRUE)
+  expect_equal(g[[1:5, 4:10]], g[[from = 1:5, to = 4:10]], ignore_attr = TRUE)
 
   expect_error(g[[1, from = 1]], "Cannot use both")
   expect_error(g[[, 2, to = 10]], "Cannot use both")

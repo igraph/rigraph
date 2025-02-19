@@ -237,7 +237,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   if (!missing(from)) {
     res <- get_edge_ids(x, data.frame(from, to), error = FALSE)
     if (edges) {
-
+      ## nop
     } else if (!is.null(attr)) {
       if (any(res != 0)) {
         res[res != 0] <- edge_attr(x, attr, res[res != 0])
