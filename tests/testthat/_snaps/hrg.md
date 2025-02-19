@@ -11,3 +11,19 @@
       method       1     -none- character
       dist.method  1     -none- character
 
+# sample_hrg() checks its argument
+
+    Code
+      sample_hrg(make_ring(10))
+    Condition
+      Error in `sample_hrg()`:
+      ! `hrg` must be a <igraphHRG> object, not an <igraph> object.
+
+# hrg_tree() checks its argument
+
+    Code
+      hrg_tree(make_ring(10))
+    Condition
+      Error in `hrg_tree()`:
+      ! `hrg` must be a <igraphHRG> object, not an <igraph> object.
+
