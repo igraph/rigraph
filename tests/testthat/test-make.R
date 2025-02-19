@@ -1,43 +1,43 @@
 test_that("make_ works, order of arguments does not matter", {
   g0 <- make_undirected_graph(1:10)
   g1 <- make_(undirected_graph(1:10))
-  expect_true(identical_graphs(g0, g1))
+  expect_identical_graphs(g0, g1)
 
   g2 <- make_(undirected_graph(), 1:10)
-  expect_true(identical_graphs(g0, g2))
+  expect_identical_graphs(g0, g2)
 
   g3 <- make_(1:10, undirected_graph())
-  expect_true(identical_graphs(g0, g3))
+  expect_identical_graphs(g0, g3)
 })
 
 test_that("make_ works with n parameter", {
   g0 <- make_undirected_graph(1:10, n = 15)
-  expect_equal(vcount(g0), 15)
+  expect_vcount(g0, 15)
 
   g1 <- make_directed_graph(1:10, n = 15)
-  expect_equal(vcount(g1), 15)
+  expect_vcount(g1, 15)
 })
 
 test_that("sample_, graph_ also work", {
   rlang::local_options(lifecycle_verbosity = "quiet")
   g0 <- make_undirected_graph(1:10)
   g1 <- sample_(undirected_graph(1:10))
-  expect_true(identical_graphs(g0, g1))
+  expect_identical_graphs(g0, g1)
 
   g2 <- sample_(undirected_graph(), 1:10)
-  expect_true(identical_graphs(g0, g2))
+  expect_identical_graphs(g0, g2)
 
   g3 <- sample_(1:10, undirected_graph())
-  expect_true(identical_graphs(g0, g3))
+  expect_identical_graphs(g0, g3)
 
   g4 <- graph_(undirected_graph(1:10))
-  expect_true(identical_graphs(g0, g4))
+  expect_identical_graphs(g0, g4)
 
   g5 <- graph_(undirected_graph(), 1:10)
-  expect_true(identical_graphs(g0, g5))
+  expect_identical_graphs(g0, g5)
 
   g6 <- graph_(1:10, undirected_graph())
-  expect_true(identical_graphs(g0, g6))
+  expect_identical_graphs(g0, g6)
 })
 
 test_that("error messages are proper", {
@@ -63,7 +63,7 @@ test_that("we pass arguments unevaluated", {
   rlang::local_options(lifecycle_verbosity = "quiet")
   g0 <- graph_from_literal(A -+ B:C)
   g1 <- graph_(from_literal(A -+ B:C))
-  expect_true(identical_graphs(g0, g1))
+  expect_identical_graphs(g0, g1)
 })
 
 test_that("graph_from_literal() and simple undirected graphs", {
@@ -111,8 +111,8 @@ test_that("graph_from_literal(simplify = FALSE)", {
 
 test_that("empty graph works", {
   empty <- make_empty_graph()
-  expect_equal(vcount(empty), 0)
-  expect_equal(ecount(empty), 0)
+  expect_vcount(empty, 0)
+  expect_ecount(empty, 0)
 })
 
 test_that("make_star works", {
@@ -192,43 +192,43 @@ test_that("make_lattice prints a warning for fractional length)", {
 
   suppressWarnings(lattice_rounded <- make_lattice(dim = 2, length = sqrt(2000)))
   lattice_integer <- make_lattice(dim = 2, length = 45)
-  expect_true(identical_graphs(lattice_rounded, lattice_integer))
+  expect_identical_graphs(lattice_rounded, lattice_integer)
 })
 
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
   graph_elist <- make_empty_graph(n = 10) + edges(1:10)
-  expect_true(identical_graphs(graph_make, graph_elist))
+  expect_identical_graphs(graph_make, graph_elist)
 })
 
 test_that("make_graph accepts an empty vector or NULL", {
   graph_make <- make_graph(c())
   graph_empty <- make_empty_graph(n = 0)
-  expect_true(identical_graphs(graph_make, graph_empty))
+  expect_identical_graphs(graph_make, graph_empty)
 
   graph_make_null <- make_graph(NULL, n = 0)
-  expect_true(identical_graphs(graph_make_null, graph_empty))
+  expect_identical_graphs(graph_make_null, graph_empty)
 
   graph_make_c <- make_graph(edges = c(), n = 0)
-  expect_true(identical_graphs(graph_make_c, graph_empty))
+  expect_identical_graphs(graph_make_c, graph_empty)
 })
 
 test_that("make_graph works for numeric edges and isolates", {
   graph_make <- make_graph(1:10, n = 20)
   graph_elist <- make_empty_graph(n = 20) + edges(1:10)
-  expect_true(identical_graphs(graph_make, graph_elist))
+  expect_identical_graphs(graph_make, graph_elist)
 })
 
 test_that("make_graph handles names", {
   graph_make_names <- make_graph(letters[1:10])
   graph_elist_names <- make_empty_graph() + vertices(letters[1:10]) + edges(letters[1:10])
-  expect_true(identical_graphs(graph_make_names, graph_elist_names))
+  expect_identical_graphs(graph_make_names, graph_elist_names)
 })
 
 test_that("make_graph handles names and isolates", {
   graph_make_iso <- make_graph(letters[1:10], isolates = letters[11:20])
   graph_elist_iso <- make_empty_graph() + vertices(letters[1:20]) + edges(letters[1:10])
-  expect_true(identical_graphs(graph_make_iso, graph_elist_iso))
+  expect_identical_graphs(graph_make_iso, graph_elist_iso)
 })
 
 test_that("make_graph gives warning for ignored arguments", {
@@ -242,8 +242,8 @@ test_that("compatibility when arguments are not named", {
   nodes <- 3
   graph_unnamed_args <- make_graph(as.vector(t(elist)), nodes, FALSE)
 
-  expect_equal(vcount(graph_unnamed_args), 3)
-  expect_equal(ecount(graph_unnamed_args), 1)
+  expect_vcount(graph_unnamed_args, 3)
+  expect_ecount(graph_unnamed_args, 1)
 })
 
 test_that("make_empty_graph gives an error for invalid arguments", {
@@ -324,8 +324,8 @@ test_that("make_full_bipartite_graph works", {
   expect_isomorphic(full_bip_star, make_star(6, "undirected"))
 
   full_bip <- make_full_bipartite_graph(5, 5)
-  expect_equal(vcount(full_bip), 10)
-  expect_equal(ecount(full_bip), 25)
+  expect_vcount(full_bip, 10)
+  expect_ecount(full_bip, 25)
 })
 
 test_that("make_kautz_graph works", {
@@ -355,13 +355,13 @@ test_that("make_kautz_graph works", {
 test_that("make_graph for notable graphs is case insensitive", {
   levi <- make_graph("Levi")
   Levi <- make_graph("levi")
-  expect_true(identical_graphs(levi, Levi))
+  expect_identical_graphs(levi, Levi)
 })
 
 test_that("spaces are replaced in make_graph for notable graphs", {
   Kite <- make_graph("Krackhardt_Kite")
   kite <- make_graph("Krackhardt kite")
-  expect_true(identical_graphs(Kite, kite))
+  expect_identical_graphs(Kite, kite)
 })
 
 test_that("warnings are given for extra arguments in make_graph for notables", {
@@ -369,7 +369,7 @@ test_that("warnings are given for extra arguments in make_graph for notables", {
   expect_warning(Levi1 <- make_graph("Levi", n = 10))
   expect_warning(Levi2 <- make_graph("Levi", isolates = "foo"))
   expect_warning(Levi3 <- make_graph("Levi", directed = FALSE))
-  expect_true(identical_graphs(Levi, Levi1))
-  expect_true(identical_graphs(Levi, Levi2))
-  expect_true(identical_graphs(Levi, Levi3))
+  expect_identical_graphs(Levi, Levi1)
+  expect_identical_graphs(Levi, Levi2)
+  expect_identical_graphs(Levi, Levi3)
 })

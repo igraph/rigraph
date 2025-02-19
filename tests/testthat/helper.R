@@ -23,3 +23,19 @@ local_rng_version <- function(version, .local_envir = parent.frame()) {
 expect_isomorphic <- function(g1, g2) {
   expect_true(isomorphic(g1, g2))
 }
+
+expect_vcount <- function(graph, expected, ...) {
+  expect_equal(object = vcount(graph), expected = expected, ...)
+}
+
+expect_ecount <- function(graph, expected, ...) {
+  expect_equal(object = ecount(graph), expected = expected, ...)
+}
+
+expect_identical_graphs <- function(g1, g2, ...) {
+  expect_true(identical_graphs(g1, g2, ...))
+}
+
+expect_not_identical_graphs <- function(g1, g2, ...) {
+  expect_false(identical_graphs(g1, g2, ...))
+}

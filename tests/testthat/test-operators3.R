@@ -4,8 +4,8 @@ test_that("infix operators work", {
   E(g)$name <- LETTERS[1:10]
 
   g <- g - c("a", "b")
-  expect_equal(vcount(g), 8)
-  expect_equal(ecount(g), 7)
+  expect_vcount(g, 8)
+  expect_ecount(g, 7)
   expect_isomorphic(g, make_lattice(8))
 
   g <- g - edge("e|f")
