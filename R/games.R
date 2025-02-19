@@ -1727,6 +1727,7 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
                              directed = FALSE, mode = c("out", "in", "all")) {
 
   type <- igraph.match.arg(type)
+  mode <- igraph.match.arg(mode)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft(
@@ -1823,24 +1824,16 @@ sample_bipartite_gnm <- function(n1, n2, m,
                                 directed = FALSE,
                                 mode = c("out", "in", "all")) {
   check_dots_empty()
-
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
-
+  mode <- igraph.match.arg(mode)
   m <- as.numeric(m)
 
-  directed <- as.logical(directed)
-
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
+  res <- bipartite_game_gnm_impl(
+    n1 = n1,
+    n2 = n2,
+    m = m,
+    directed = directed,
+    mode = mode
   )
-
-  on.exit(.Call(R_igraph_finalizer))
-
-  res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
-  res <- set_vertex_attr(res$graph, "type", value = res$types)
   res$name <- "Bipartite Gnm random graph"
   res$m <- m
 
@@ -1854,24 +1847,17 @@ sample_bipartite_gnp <- function(n1, n2, p,
                                 directed = FALSE,
                                 mode = c("out", "in", "all")) {
   check_dots_empty()
-
-  n1 <- as.numeric(n1)
-  n2 <- as.numeric(n2)
-
+  mode <- igraph.match.arg(mode)
   p <- as.numeric(p)
 
-  directed <- as.logical(directed)
-
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
+  res <- bipartite_game_gnp_impl(
+    n1 = n1,
+    n2 = n2,
+    p = p,
+    directed = directed,
+    mode = mode
   )
 
-  on.exit(.Call(R_igraph_finalizer))
-
-  res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
-  res <- set_vertex_attr(res$graph, "type", value = res$types)
   res$name <- "Bipartite Gnp random graph"
   res$p <- p
 
