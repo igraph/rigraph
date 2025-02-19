@@ -649,7 +649,7 @@ as_adj_edge_list <- function(graph,
 graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
                                 unlist.attrs = TRUE) {
   if (!inherits(graphNEL, "graphNEL")) {
-    stop("Not a graphNEL graph")
+    cli::cli_abort("{.arg graphNEL} is {.obj_type_friendly {graphNEL}} and not a graphNEL graph")
   }
 
   al <- lapply(graph::edgeL(graphNEL), "[[", "edges")
@@ -740,7 +740,7 @@ as_graphnel <- function(graph) {
   ensure_igraph(graph)
 
   if (any_multiple(graph)) {
-    stop("multiple edges are not supported in graphNEL graphs")
+    cli::cli_abort("multiple edges are not supported in graphNEL graphs")
   }
 
   if ("name" %in% vertex_attr_names(graph) &&
@@ -1380,7 +1380,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   }
 
   if (ncol(d) < 2) {
-    stop("the data frame should contain at least two columns")
+    cli::cli_abort("{.arg d} should contain at least two columns")
   }
 
   ## Handle if some elements are 'NA'
@@ -1398,14 +1398,14 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
     names2 <- names
     vertices <- as.data.frame(vertices)
     if (ncol(vertices) < 1) {
-      stop("Vertex data frame contains no rows")
+      cli::cli_abort("{.arg vertices} contains no rows")
     }
     names <- as.character(vertices[, 1])
     if (any(duplicated(names))) {
-      stop("Duplicate vertex names")
+      cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
     if (any(!names2 %in% names)) {
-      stop("Some vertex names in edge list are not listed in vertex data frame")
+      cli::cli_abort("Some vertex names in {.arg d} are not listed in {.arg vertices}")
     }
   }
 
@@ -1482,7 +1482,7 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 graph_from_edgelist <- function(el, directed = TRUE) {
   if (!is.matrix(el) || ncol(el) != 2) {
-    stop("graph_from_edgelist expects a matrix with two columns")
+    cli::cli_abort("graph_from_edgelist expects a matrix with two columns")
   }
 
   if (nrow(el) == 0) {
