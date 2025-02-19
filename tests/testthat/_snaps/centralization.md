@@ -23,5 +23,5 @@
     Condition
       Warning:
       The `loops` argument of `centr_degree_tmax()` must be explicit as of igraph 2.0.0.
-      i The default value (currently `FALSE`) will be dropped in the next release, add an explicit value for the loops argument.
+      i The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the loops argument.
 
