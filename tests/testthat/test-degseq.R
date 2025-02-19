@@ -31,5 +31,5 @@ test_that("realize_degseq supports the make_(...) syntax", {
   expect_equal(degree(g1), degs)
   expect_equal(degree(g2), degs)
 
-  expect_true(identical_graphs(g1, g2))
+  expect_identical_graphs(g1, g2)
 })

@@ -663,12 +663,12 @@ test_that("sparse/dense matrices no loops works",{
   A <- diag(1, 5)
   A[1, 2] <- 1
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
-  expect_equal(ecount(g), 1)
+  expect_ecount(g, 1)
   expect_equal(get_edge_ids(g, c(1, 2)), 1)
-  
+
   A <- as(A, "dgCMatrix")
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
-  expect_equal(ecount(g), 1)
+  expect_ecount(g, 1)
   expect_equal(get_edge_ids(g,c(1, 2)), 1)
 
 })
@@ -678,14 +678,14 @@ test_that("sparse/dense matrices multiple works",{
   A <- matrix(0, 5, 5)
   A[1, 2] <- 3
   g <- graph_from_adjacency_matrix(A, diag = FALSE, weighted = FALSE)
-  expect_equal(ecount(g), 3)
+  expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
-  
+
   A <- as(A,"dgCMatrix")
   g <- graph_from_adjacency_matrix(A,diag = FALSE)
-  expect_equal(ecount(g), 3)
+  expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
-  
+
 })
 
 test_that("sparse/dense matrices min/max/plus",{
@@ -695,7 +695,7 @@ test_that("sparse/dense matrices min/max/plus",{
   A[2, 1] <- 2
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "max", weighted = TRUE)
   expect_equal(E(g)$weight[1], 3)
-  
+
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "min", weighted = TRUE)
   expect_equal(E(g)$weight[1], 2)
 
@@ -705,12 +705,12 @@ test_that("sparse/dense matrices min/max/plus",{
   A <- as(A,"dgCMatrix")
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "max", weighted = TRUE)
   expect_equal(E(g)$weight[1], 3)
-  
+
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "min", weighted = TRUE)
   expect_equal(E(g)$weight[1], 2)
 
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "plus", weighted = TRUE)
   expect_equal(E(g)$weight[1], 5)
-  
-  
+
+
 })
