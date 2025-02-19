@@ -57,7 +57,7 @@ test_that("complementer() works", {
   g2 <- make_star(11, center = 11, mode = "undirected")
 
   x <- complementer(complementer(g2))
-  expect_true(identical_graphs(x, g2))
+  expect_identical_graphs(x, g2)
 
 })
 
@@ -101,7 +101,7 @@ test_that("edge reversal works", {
 
   undirected_graph <- make_graph(~ 1 -- 2, 1 -- 3, 1 -- 4, 2 -- 3, 3 -- 4)
   reverse_undirected_graph <- reverse_edges(undirected_graph, 1:3)
-  expect_true(identical_graphs(undirected_graph, reverse_undirected_graph))
+  expect_identical_graphs(undirected_graph, reverse_undirected_graph)
 
   isolated_vertices_g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
   reverse_isolated_vertices_g <- reverse_edges(isolated_vertices_g)

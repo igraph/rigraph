@@ -31,3 +31,7 @@ expect_vcount <- function(graph, expected, ...) {
 expect_ecount <- function(graph, expected, ...) {
   expect_equal(object = ecount(graph), expected = expected, ...)
 }
+
+expect_identical_graphs <- function(g1, g2, ...) {
+  expect_true(identical_graphs(g1, g2, ...))
+}
