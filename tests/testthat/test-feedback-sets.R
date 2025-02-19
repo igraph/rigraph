@@ -20,7 +20,7 @@ test_that("feedback_arc_set works with undirected graphs", {
 
   g <- make_ring(10)
   fas <- feedback_arc_set(g)
-  expect_equal(length(fas), 1)
+  expect_length(fas, 1)
 })
 
 test_that("feedback_vertex_set works", {
