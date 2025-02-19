@@ -700,7 +700,7 @@ modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
     max(x$modularity)
   } else {
-    cli::cli_abort("Modularity was not calculated")
+    cli::cli_abort("cluster algorithm was run with {.arg modularity = FALSE} and no modularity value was computed.")
   }
 }
 

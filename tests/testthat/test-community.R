@@ -6,27 +6,25 @@ test_that("community detection functions work", {
     "cluster_label_prop", "cluster_leading_eigen",
     "cluster_louvain", "cluster_spinglass", "cluster_walktrap"
   )
-  if (has_glpk()) cluster_algos <- c(cluster_algos, list("cluster_optimal"))
+  if (has_glpk()) cluster_algos <- c(cluster_algos, "cluster_optimal")
 
   karate <- make_graph("Zachary")
 
   for (algo in cluster_algos) {
-    cluster_algo <- get(algo)
-    comm <- cluster_algo(karate)
+    karate_clustering <- do.call(algo, list(karate))
 
     expect_equal(
-      modularity(comm),
-      modularity(karate, membership(comm))
+      modularity(karate_clustering),
+      modularity(karate, membership(karate_clustering))
     )
 
-    karate_comunities <- communities(comm)
-    expect_true(all(!duplicated(unlist(karate_comunities))))
-    expect_true(
-      all(
-        unlist(karate_comunities) <= vcount(karate) & unlist(karate_comunities) >= 1
-      )
-    )
-    expect_equal(length(comm), max(membership(comm)))
+    karate_comunities <- communities(karate_clustering)
+    flat_karate_communities <- unlist(karate_comunities)
+    is_vertex_in_several_clusters <- duplicated(flat_karate_communities)
+    expect_false(any(is_vertex_in_several_clusters))
+    is_cluster_id_valid <- flat_karate_communities <= vcount(karate) & flat_karate_communities >= 1
+    expect_true(all(is_cluster_id_valid))
+    expect_length(karate_clustering, max(membership(karate_clustering)))
   }
 
   karate_fgreedy <- cluster_fast_greedy(karate)
@@ -75,7 +73,7 @@ test_that("creating communities objects works", {
     modularity = mod
   )
 
-  expect_equal(as.vector(membership(comm)), membership)
+  expect_equal(membership(comm), membership)
   expect_equal(modularity(comm), mod)
   expect_equal(algorithm(comm), "random")
 })
@@ -120,14 +118,14 @@ test_that("cluster_edge_betweenness works", {
 
   expect_equal(max(karate_ebc$modularity), modularity(karate, karate_ebc$membership))
   expect_equal(
-    as.vector(membership(karate_ebc)),
+    membership(karate_ebc),
     c(
       1, 1, 2, 1, 3, 3, 3, 1, 4, 5, 3,
       1, 1, 1, 4, 4, 3, 1, 4, 1, 4, 1,
       4, 4, 2, 2, 4, 2, 2, 4, 4, 2, 4, 4
     )
   )
-  expect_equal(length(karate_ebc), 5)
+  expect_length(karate_ebc, 5)
   expect_equal(as.numeric(sizes(karate_ebc)), c(10, 6, 5, 12, 1))
 
   karate_dendro <- as.dendrogram(karate_ebc)
@@ -155,14 +153,14 @@ test_that("cluster_fast_greedy works", {
 
   expect_equal(modularity(karate, karate_fc$membership), max(karate_fc$modularity))
   expect_equal(
-    as.vector(membership(karate_fc)),
+    membership(karate_fc),
     c(
       1, 3, 3, 3, 1, 1, 1, 3, 2, 3, 1,
       1, 3, 3, 2, 2, 1, 3, 2, 1, 2, 3,
       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
     )
   )
-  expect_equal(length(karate_fc), 3)
+  expect_length(karate_fc, 3)
   expect_equal(as.numeric(sizes(karate_fc)), c(8, 17, 9))
 
   karate_dendro <- as.dendrogram(karate_fc)
@@ -181,10 +179,9 @@ test_that("label.propagation.community works", {
   withr::local_seed(20231029)
   karate_lpc <- cluster_label_prop(karate)
   expect_equal(karate_lpc$modularity, modularity(karate, karate_lpc$membership))
-  #  1   2   3   4   5
-  # 29 453 431  84   3
-  expect_true(length(karate_lpc) %in% 1:5)
-  expect_true(all(as.vector(membership(karate_lpc)) %in% seq_len(length(karate_lpc))))
+
+  expect_in(length(karate_lpc), 1:5)
+  expect_in(membership(karate_lpc), seq_len(length(karate_lpc)))
   expect_s3_class(sizes(karate_lpc), "table")
   expect_equal(sum(sizes(karate_lpc)), vcount(karate))
   expect_identical(sizes(karate_lpc), table(membership(karate_lpc), dnn = "Community sizes"))
@@ -193,7 +190,7 @@ test_that("label.propagation.community works", {
 test_that("cluster_leading_eigen works", {
   withr::local_seed(20230115)
 
-  f <- function(membership, community, value, vector, multiplier, extra) {
+  check_eigen_value <- function(membership, community, value, vector, multiplier, extra) {
     M <- sapply(1:length(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
@@ -210,18 +207,18 @@ test_that("cluster_leading_eigen works", {
   }
 
   karate <- make_graph("Zachary")
-  karate_lc <- cluster_leading_eigen(karate, callback = f)
+  karate_lc <- cluster_leading_eigen(karate, callback = check_eigen_value)
 
   expect_equal(karate_lc$modularity, modularity(karate, karate_lc$membership))
   expect_equal(
-    as.vector(membership(karate_lc)),
+    membership(karate_lc),
     c(
       1, 3, 3, 3, 1, 1, 1, 3, 2, 2, 1,
       1, 3, 3, 2, 2, 1, 3, 2, 3, 2, 3,
       2, 4, 4, 4, 2, 4, 4, 2, 2, 4, 2, 2
     )
   )
-  expect_equal(length(karate_lc), 4)
+  expect_length(karate_lc, 4)
   expect_equal(
     sizes(karate_lc),
     structure(
@@ -253,9 +250,11 @@ test_that("cluster_leading_eigen works", {
   ec <- ecount(karate)
   deg <- degree(karate)
   karate_lc2 <- cluster_leading_eigen(karate, callback = mod_mat_caller)
-
+})
+test_that("cluster_leading_eigen is deterministic", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
+
   skip_if(getRversion() < "3.6")
 
   for (i in 1:100) {
@@ -263,8 +262,8 @@ test_that("cluster_leading_eigen works", {
     lec1 <- cluster_leading_eigen(g_rand)
     lec2 <- cluster_leading_eigen(g_rand)
     expect_equal(
-      as.vector(membership(lec1)),
-      as.vector(membership(lec2))
+      membership(lec1),
+      membership(lec2)
     )
   }
 })
@@ -276,14 +275,14 @@ test_that("cluster_leiden works", {
   karate_leiden <- cluster_leiden(karate, resolution = 0.06)
 
   expect_equal(
-    as.vector(membership(karate_leiden)),
+    membership(karate_leiden),
     c(
       1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
       1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1,
       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
     )
   )
-  expect_equal(length(karate_leiden), 2)
+  expect_length(karate_leiden, 2)
   expect_equal(
     sizes(karate_leiden),
     structure(
@@ -295,18 +294,17 @@ test_that("cluster_leiden works", {
     )
   )
 
-  withr::local_seed(42)
   karate_leiden_mod <- cluster_leiden(karate, "modularity")
 
   expect_equal(
-    as.vector(membership(karate_leiden_mod)),
+    membership(karate_leiden_mod),
     c(
       1, 1, 1, 1, 2, 2, 2, 1, 3, 3, 2, 1, 1,
       1, 3, 3, 2, 1, 3, 1, 3, 1, 3, 4, 4, 4,
       3, 4, 4, 3, 3, 4, 3, 3
     )
   )
-  expect_equal(length(karate_leiden_mod), 4)
+  expect_length(karate_leiden_mod, 4)
   expect_equal(
     sizes(karate_leiden_mod),
     structure(
@@ -331,10 +329,7 @@ test_that("modularity_matrix works", {
   karate_modmat1 <- modularity_matrix(karate)
   karate_modmat2 <- modularity_matrix(karate, weights = rep(1, ecount(karate)))
 
-  expect_equal(
-    karate_modmat1,
-    karate_modmat2
-  )
+  expect_equal(karate_modmat1, karate_modmat2)
 })
 
 test_that("modularity_matrix still accepts a membership argument for compatibility", {
@@ -350,12 +345,10 @@ test_that("cluster_louvain works", {
   karate <- make_graph("Zachary")
   karate_mc <- cluster_louvain(karate)
 
-  expect_true(all(as.vector(membership(karate_mc)) %in% 1:4))
+  expect_in(membership(karate_mc), 1:4)
   expect_equal(modularity(karate, karate_mc$membership), max(karate_mc$modularity))
-  # 3   4
-  # 2 998
-  expect_true(length(karate_mc) %in% 3:4)
-  expect_true(all(as.vector(membership(karate_mc)) %in% seq_len(length(karate_mc))))
+  expect_in(length(karate_mc), 3:4)
+  expect_in(membership(karate_mc), seq_len(length(karate_mc)))
   expect_s3_class(sizes(karate_mc), "table")
   expect_equal(sum(sizes(karate_mc)), vcount(karate))
   expect_identical(sizes(karate_mc), table(membership(karate_mc), dnn = "Community sizes"))
@@ -368,7 +361,7 @@ test_that("cluster_optimal works", {
   karate_optimal <- cluster_optimal(karate)
 
   expect_equal(
-    as.vector(membership(karate_optimal)),
+    membership(karate_optimal),
     c(
       1, 1, 1, 1, 2, 2, 2, 1, 3, 3, 2,
       1, 1, 1, 3, 3, 2, 1, 3, 1, 3, 1,
@@ -376,7 +369,7 @@ test_that("cluster_optimal works", {
     )
   )
   expect_equal(modularity(karate, karate_optimal$membership), karate_optimal$modularity)
-  expect_equal(length(karate_optimal), 4)
+  expect_length(karate_optimal, 4)
   expect_equal(
     sizes(karate_optimal),
     structure(
@@ -391,9 +384,9 @@ test_that("cluster_optimal works", {
 
 test_that("weighted cluster_optimal works", {
   skip_if_no_glpk()
-
   local_rng_version("3.5.0")
   withr::local_seed(42)
+
   graph_full_ring <- make_full_graph(5) + make_ring(5)
   E(graph_full_ring)$weight <- sample(1:2, ecount(graph_full_ring), replace = TRUE)
 
@@ -402,16 +395,17 @@ test_that("weighted cluster_optimal works", {
 })
 
 test_that("cluster_walktrap works", {
-  karate <- make_graph("Zachary")
   withr::local_seed(42)
+
+  karate <- make_graph("Zachary")
   karate_walktrap <- cluster_walktrap(karate)
 
   expect_equal(modularity(karate, membership(karate_walktrap)), modularity(karate_walktrap))
   expect_equal(
-    as.vector(membership(karate_walktrap)),
+    membership(karate_walktrap),
     c(1, 1, 2, 1, 5, 5, 5, 1, 2, 2, 5, 1, 1, 2, 3, 3, 5, 1, 3, 1, 3, 1, 3, 4, 4, 4, 3, 4, 2, 3, 2, 2, 3, 3)
   )
-  expect_equal(length(karate_walktrap), 5)
+  expect_length(karate_walktrap, 5)
   expect_equal(
     sizes(karate_walktrap),
     structure(c(9L, 7L, 9L, 4L, 5L),
