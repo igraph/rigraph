@@ -1083,8 +1083,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' must be a vertex id, and the same energy function is used to find the
 #' community of the the given vertex. See also the examples below.
 #'
-#' @param graph The input graph, can be directed but the direction of the edges
-#'   is neglected.
+#' @param graph The input graph. Edge directions are ignored in directed graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1277,7 +1276,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' \eqn{\gamma}{gamma} is determined automatically by the
 #' `objective_function` argument.
 #'
-#' @param graph The input graph, only undirected graphs are supported.
+#' @param graph The input graph. It must be undirected.
 #' @param objective_function Whether to use the Constant Potts Model (CPM) or
 #'   modularity. Must be either `"CPM"` or `"modularity"`.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
@@ -1495,7 +1494,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #' algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, https://arxiv.org/abs/physics/0512106
 #'
-#' @param graph The input graph, edge directions are ignored in directed
+#' @param graph The input graph. Edge directions are ignored in directed
 #'   graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
@@ -1706,7 +1705,8 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #' community structure in very large networks,
 #' http://www.arxiv.org/abs/cond-mat/0408187 for the details.
 #'
-#' @param graph The input graph
+#' @param graph The input graph. It must be undirected and must not have
+#'   multi-edges.
 #' @param merges Logical scalar, whether to return the merge matrix.
 #' @param modularity Logical scalar, whether to return a vector containing the
 #'   modularity after each merge.
@@ -1945,7 +1945,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' connected groups of nodes form a consensus on a unique label to form
 #' communities.}
 #'
-#' @param graph The input graph. Note that the algorithm wsa originally
+#' @param graph The input graph. Note that the algorithm was originally
 #'   defined for undirected graphs. You are advised to set \sQuote{mode} to
 #'   `all` if you pass a directed graph here to treat it as
 #'   undirected.
@@ -2084,7 +2084,7 @@ cluster_label_prop0 <- function(
 #'
 #' This function was contributed by Tom Gregorovic.
 #'
-#' @param graph The input graph.
+#' @param graph The input graph. It must be undirected.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If

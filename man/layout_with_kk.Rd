@@ -50,9 +50,9 @@ iterations.}
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.
 Typical (and default) value is the number of vertices.}
 
-\item{weights}{Edge weights, larger values will result longer edges.
-Note that this is opposite to \code{\link[=layout_with_fr]{layout_with_fr()}}. Weights must
-be positive.}
+\item{weights}{Edge weights, larger values will result in longer edges.
+Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces
+shorter edges for larger weights. Weights must be positive.}
 
 \item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
 lower boundaries for the \sQuote{x} coordinates of the vertices. The length

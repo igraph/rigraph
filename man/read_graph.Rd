@@ -44,7 +44,8 @@ the file format (the \code{format} argument). See the details separately for
 each file format, below.
 }
 \section{Edge list format}{
- This format is a simple text file with numeric
+
+This format is a simple text file with numeric
 vertex IDs defining the edges. There is no need to have newline characters
 between the edges, a simple space will also do. Vertex IDs contained in
 the file are assumed to start at zero.
@@ -57,10 +58,36 @@ default value is \code{TRUE}.} }
 }
 
 \section{Pajek format}{
- Currently igraph only supports Pajek network
+
+Currently igraph only supports Pajek network
 files, with a \code{.net} extension, but not Pajek project files with
 a \code{.paj} extension. Only network data is supported; permutations,
 hierarchies, clusters and vectors are not.
+}
+
+\section{NCOL format}{
+
+Additional arguments: \describe{
+\item{predef}{Names of the vertices in the file.
+If \code{character(0)} (the default) is given here
+then vertex IDs will be assigned to vertex names in the order of
+their appearance in the .ncol file.
+If it is not \code{character(0)} and some unknown vertex names are found
+in the .ncol file then new vertex ids will be assigned to them. }
+\item{names}{Logical value, if \code{TRUE} (the default)
+the symbolic names of the vertices will be added to the graph
+as a vertex attribute called “name”. }
+\item{weights}{Whether to add the weights of the edges to the graph
+as an edge attribute called “weight”.
+\code{"yes"} adds the weights (even if they are not present in the file,
+in this case they are assumed to be zero).
+\code{"no"} does not add any edge attribute.
+\code{"auto"} (the default) adds the attribute if and only
+if there is at least one explicit edge weight in the input file. }
+\item{directed}{Whether to create a directed graph (default: \code{FALSE}).
+As this format was originally used only for undirected graphs
+there is no information in the file about the directedness of the graph.}
+}
 }
 
 \seealso{
@@ -75,3 +102,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{foreign}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dimacs_flow}{\code{igraph_read_graph_dimacs_flow()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl}{\code{igraph_read_graph_dl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_edgelist}{\code{igraph_read_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml}{\code{igraph_read_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{igraph_read_graph_graphdb()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml}{\code{igraph_read_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_lgl}{\code{igraph_read_graph_lgl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_ncol}{\code{igraph_read_graph_ncol()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek}{\code{igraph_read_graph_pajek()}}.}
+

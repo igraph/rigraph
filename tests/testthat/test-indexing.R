@@ -1,4 +1,5 @@
 test_that("[ indexing works", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_tree(20)
   ## Are these vertices connected?
   expect_equal(g[1, 2], 1)
@@ -9,6 +10,7 @@ test_that("[ indexing works", {
 })
 
 test_that("[ indexing works with symbolic names", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_named_tree()
 
   expect_equal(g["a", "b"], 1)
@@ -28,6 +30,7 @@ test_that("[ indexing works with symbolic names", {
 })
 
 test_that("[ indexing works with logical vectors", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_named_tree()
 
   lres <- structure(
@@ -70,6 +73,7 @@ test_that("[ indexing works with negative indices", {
 })
 
 test_that("[ indexing works with weighted graphs", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_weighted_tree()
 
   expect_equal(g[1, 2], 2)
@@ -83,6 +87,7 @@ test_that("[ indexing works with weighted graphs", {
 })
 
 test_that("[ indexing works with weighted graphs and symbolic names", {
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   g <- make_test_weighted_tree()
 
   expect_equal(g["a", "b"], 2)
@@ -293,4 +298,50 @@ test_that("[[ handles from and to properly even if the graph has conflicting ver
   V(g)$j <- 200:219
   expect_true(is_igraph_vs(g[[1:3, 2:6]][[1]]))
   expect_true(is_igraph_vs(g[[from = 1:3, to = 2:6]][[1]]))
+})
+
+test_that("[ handles errors in input parameters well", {
+  g <- make_full_graph(10)
+  expect_error(g[from = 1, to = 1, i = 1, j = 1])
+  expect_error(g[from = 1])
+  expect_error(g[to = 1])
+  expect_error(g[from = NA, to = 2])
+  expect_error(g[from = 1, to = NA])
+  expect_error(g[from = 1, to = c(1, 2)])
+})
+
+test_that("[ handles all combinations of i and/or j", {
+  A <- matrix(
+    rep(
+      c(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+      c(
+        4L, 1L, 4L, 1L, 2L, 1L, 5L, 2L, 3L, 1L, 10L, 3L, 9L, 1L, 1L, 1L, 3L, 1L, 1L,
+        1L, 1L, 1L, 10L, 1L, 1L, 1L, 1L, 5L, 11L, 1L, 2L, 1L, 5L, 1L, 3L
+      )
+    ),
+    nrow = 10L,
+    ncol = 10L
+  )
+  g <- graph_from_adjacency_matrix(A, "directed")
+  expect_equal(canonicalize_matrix(g[1:3, ]), A[1:3, ])
+  expect_equal(canonicalize_matrix(g[, 4:7]), A[, 4:7])
+  expect_equal(canonicalize_matrix(g[1:3, 4:7]), A[1:3, 4:7])
+})
+
+test_that("[ handles duplicated i/j well", {
+  A <- matrix(
+    rep(
+      c(0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0),
+      c(
+        4L, 1L, 4L, 1L, 2L, 1L, 5L, 2L, 3L, 1L, 10L, 3L, 9L, 1L, 1L, 1L, 3L, 1L, 1L,
+        1L, 1L, 1L, 10L, 1L, 1L, 1L, 1L, 5L, 11L, 1L, 2L, 1L, 5L, 1L, 3L
+      )
+    ),
+    nrow = 10L,
+    ncol = 10L
+  )
+  g <- graph_from_adjacency_matrix(A, "directed")
+  expect_equal(canonicalize_matrix(g[c(1, 2, 2), ]), A[c(1, 2, 2), ])
+  expect_equal(canonicalize_matrix(g[, c(3, 3, 4, 4)]), A[, c(3, 3, 4, 4)])
+  expect_equal(canonicalize_matrix(g[c(1, 2, 2), c(3, 3, 4, 4)]), A[c(1, 2, 2), c(3, 3, 4, 4)])
 })

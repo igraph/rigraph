@@ -372,7 +372,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 
 #' Closeness centrality of vertices
 #'
-#' Closeness centrality measures how many steps is required to access every other
+#' Closeness centrality measures how many steps are required to access every other
 #' vertex from a given vertex.
 #'
 #' The closeness centrality of a vertex is defined as the inverse of the

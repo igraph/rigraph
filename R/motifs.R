@@ -215,6 +215,7 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #'   of the motif (the `size` argument). If `NULL`, the default, no cuts are made.
 #' @param sample.size The number of vertices to use as a starting point for
 #'   finding motifs. Only used if the `sample` argument is `NULL`.
+#'   The default is `ceiling(vcount(graph) / 10)` .
 #' @param sample If not `NULL` then it specifies the vertices to use as a
 #'   starting point for finding motifs.
 #' @return A numeric scalar, an estimate for the total number of motifs in
@@ -229,8 +230,13 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-sample_motifs <- function(graph, size = 3, cut.prob = NULL,
-                          sample.size = vcount(graph) / 10, sample = NULL) {
+sample_motifs <- function(
+  graph,
+  size = 3,
+  cut.prob = NULL,
+  sample.size = NULL,
+  sample = NULL
+) {
   ensure_igraph(graph)
   if (!is.null(cut.prob) && length(cut.prob) != size) {
   cut.prob <- as.numeric(cut.prob)
@@ -238,6 +244,15 @@ sample_motifs <- function(graph, size = 3, cut.prob = NULL,
       cut.prob[-length(cut.prob)],
       rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
     )
+  }
+
+  if (is.null(sample)) {
+    if (is.null(sample.size)) {
+       sample.size <- ceiling(vcount(graph) / 10)
+    }
+  } else {
+    sample <- as_igraph_vs(graph, sample) - 1
+    sample.size <- 0
   }
 
   on.exit(.Call(R_igraph_finalizer))
