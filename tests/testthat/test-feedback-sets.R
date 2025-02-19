@@ -28,7 +28,7 @@ test_that("feedback_vertex_set works", {
 
   g <- make_lattice(c(3, 3))
   fvs <- feedback_vertex_set(g)
-  expect_equal(length(fvs), 2)
+  expect_length(fvs, 2)
 })
 
 test_that("feedback_vertex_set works with weights", {
