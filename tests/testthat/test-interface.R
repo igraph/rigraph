@@ -49,7 +49,7 @@ test_that("add_vertices works", {
   nv <- 4
   g2 <- add_vertices(g, nv = nv)
 
-  expect_equal(vcount(g2), vcount(g) + nv)
+  expect_vcount(g2, vcount(g) + nv)
   expect_equal(ecount(g2), ecount(g))
   expect_equal(as_edgelist(g2), as_edgelist(g))
 })

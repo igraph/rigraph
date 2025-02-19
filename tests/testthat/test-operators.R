@@ -5,7 +5,7 @@ test_that("union() works", {
   g2 <- make_star(11, center = 11, mode = "undirected")
   gu <- union(g1, g2)
 
-  expect_equal(vcount(gu), 11)
+  expect_vcount(gu, 11)
   expect_equal(ecount(gu), 20)
   expect_equal(
     order_by_two_first_columns(rbind(as_edgelist(g1), as_edgelist(g2))),
@@ -68,7 +68,7 @@ test_that("compose() works", {
   gu <- union(g1, g2)
 
   gc <- compose(gu, g1)
-  expect_equal(vcount(gc), 11)
+  expect_vcount(gc, 11)
   expect_equal(ecount(gc), 60)
   expect_equal(diameter(gc), 2)
 })
@@ -82,7 +82,7 @@ test_that("Union of directed named graphs", {
 
   gg <- union.igraph(graphs)
 
-  expect_equal(vcount(gg), 5)
+  expect_vcount(gg, 5)
   expect_equal(ecount(gg), 10)
 })
 
@@ -93,7 +93,7 @@ test_that("edge reversal works", {
   expect_true(isomorphic(reverse_directed_graph, expected))
 
   reverse_all_directed_graph <- reverse_edges(directed_graph)
-  expect_equal(vcount(reverse_all_directed_graph), vcount(directed_graph))
+  expect_vcount(reverse_all_directed_graph, vcount(directed_graph))
   expect_equal(
     as_edgelist(reverse_all_directed_graph),
     as_edgelist(directed_graph)[, c(2, 1)]
@@ -105,7 +105,7 @@ test_that("edge reversal works", {
 
   isolated_vertices_g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
   reverse_isolated_vertices_g <- reverse_edges(isolated_vertices_g)
-  expect_equal(vcount(reverse_isolated_vertices_g), vcount(isolated_vertices_g))
+  expect_vcount(reverse_isolated_vertices_g, vcount(isolated_vertices_g))
   expect_equal(
     as_edgelist(reverse_isolated_vertices_g),
     as_edgelist(isolated_vertices_g)[, c(2, 1)]
@@ -114,7 +114,7 @@ test_that("edge reversal works", {
 
 test_that("t() is aliased to edge reversal for graphs", {
   g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
-  expect_equal(vcount(t(g)), vcount(g))
+  expect_vcount(t(g), vcount(g))
   expect_equal(as_edgelist(t(g)), as_edgelist(g)[, c(2, 1)])
 })
 

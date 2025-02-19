@@ -253,17 +253,17 @@ test_that("sample_pa() works", {
 
   g_pa <- sample_pa(100, m = 2)
   expect_equal(ecount(g_pa), 197)
-  expect_equal(vcount(g_pa), 100)
+  expect_vcount(g_pa, 100)
   expect_true(is_simple(g_pa))
 
   g_pa2 <- sample_pa(100, m = 2, algorithm = "psumtree-multiple")
   expect_equal(ecount(g_pa2), 198)
-  expect_equal(vcount(g_pa2), 100)
+  expect_vcount(g_pa2, 100)
   expect_false(is_simple(g_pa2))
 
   g_pa3 <- sample_pa(100, m = 2, algorithm = "bag")
   expect_equal(ecount(g_pa3), 198)
-  expect_equal(vcount(g_pa3), 100)
+  expect_vcount(g_pa3, 100)
   expect_false(is_simple(g_pa3))
 
   g_pa4 <- sample_pa(3, out.seq = 0:2, directed = FALSE)
@@ -278,7 +278,7 @@ test_that("sample_pa can start from a graph", {
 
   g_pa1 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_empty_graph(5))
   expect_equal(ecount(g_pa1), 5)
-  expect_equal(vcount(g_pa1), 10)
+  expect_vcount(g_pa1, 10)
 
   is_degree_zero <- (degree(g_pa1) == 0)
   expect_true(sum(is_degree_zero) %in% 0:4)
@@ -329,7 +329,7 @@ test_that("sample_bipartite works -- undirected gnp", {
 
   g_rand_bip <- sample_bipartite(10, 5, type = "gnp", p = .1)
   expect_equal(g_rand_bip$name, "Bipartite Gnp random graph")
-  expect_equal(vcount(g_rand_bip), 15)
+  expect_vcount(g_rand_bip, 15)
   expect_equal(ecount(g_rand_bip), 7)
   expect_true(bipartite_mapping(g_rand_bip)$res)
   expect_false(is_directed(g_rand_bip))
@@ -337,7 +337,7 @@ test_that("sample_bipartite works -- undirected gnp", {
 
 test_that("sample_bipartite works -- directed gnp", {
   g_rand_bip_dir <- sample_bipartite(10, 5, type = "gnp", p = .1, directed = TRUE)
-  expect_equal(vcount(g_rand_bip_dir), 15)
+  expect_vcount(g_rand_bip_dir, 15)
   expect_equal(ecount(g_rand_bip_dir), 6)
   expect_true(bipartite_mapping(g_rand_bip_dir)$res)
   expect_true(is_directed(g_rand_bip_dir))
@@ -349,21 +349,21 @@ test_that("sample_bipartite works -- directed gnp", {
 
 test_that("sample_bipartite works -- undirected gnm", {
   g_rand_bip_gnm <- sample_bipartite(10, 5, type = "gnm", m = 8)
-  expect_equal(vcount(g_rand_bip_gnm), 15)
+  expect_vcount(g_rand_bip_gnm, 15)
   expect_equal(ecount(g_rand_bip_gnm), 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm)$res)
   expect_false(is_directed(g_rand_bip_gnm))
 })
 test_that("sample_bipartite works -- directed gnm", {
   g_rand_bip_gnm_dir <- sample_bipartite(10, 5, type = "gnm", m = 8, directed = TRUE)
-  expect_equal(vcount(g_rand_bip_gnm_dir), 15)
+  expect_vcount(g_rand_bip_gnm_dir, 15)
   expect_equal(ecount(g_rand_bip_gnm_dir), 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_dir)$res)
   expect_true(is_directed(g_rand_bip_gnm_dir))
   expect_output(print_all(g_rand_bip_gnm_dir), "5->12")
 
   g_rand_bip_gnm_in <- sample_bipartite(10, 5, type = "gnm", m = 8, directed = TRUE, mode = "in")
-  expect_equal(vcount(g_rand_bip_gnm_in), 15)
+  expect_vcount(g_rand_bip_gnm_in, 15)
   expect_equal(ecount(g_rand_bip_gnm_in), 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_in)$res)
   expect_true(is_directed(g_rand_bip_gnm_in))
@@ -438,7 +438,7 @@ test_that("sample_correlated_gnp corner cases work", {
 
   cor_gnp_empty <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = 0.0000001)
   expect_equal(ecount(cor_gnp_empty), 0)
-  expect_equal(vcount(cor_gnp_empty), 10)
+  expect_vcount(cor_gnp_empty, 10)
 
   gnp_graph_directed <- sample_gnp(10, .3, directed = TRUE)
   cor_gnp_directed <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = .99999999)
@@ -446,7 +446,7 @@ test_that("sample_correlated_gnp corner cases work", {
 
   cor_gnp_directed_empty <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = 0.0000001)
   expect_equal(ecount(cor_gnp_directed_empty), 0)
-  expect_equal(vcount(cor_gnp_directed_empty), 10)
+  expect_vcount(cor_gnp_directed_empty, 10)
 })
 
 test_that("permutation works for sample_correlated_gnp", {
@@ -475,28 +475,28 @@ test_that("HSBM works", {
 
   g_hsbm1 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 0)
   expect_equal(ecount(g_hsbm1), 172)
-  expect_equal(vcount(g_hsbm1), 100)
+  expect_vcount(g_hsbm1, 100)
   expect_false(is_directed(g_hsbm1))
 
   withr::local_seed(42)
 
   g_hsbm2 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1)
   expect_equal(ecount(g_hsbm2), ecount(g_hsbm1) + 10 * 9 * (90 + 10) / 2)
-  expect_equal(vcount(g_hsbm2), 100)
+  expect_vcount(g_hsbm2, 100)
   expect_true(is_simple(g_hsbm2))
 
   withr::local_seed(42)
 
   g_hsbm3 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1e-15)
   expect_equal(ecount(g_hsbm3), ecount(g_hsbm1))
-  expect_equal(vcount(g_hsbm3), 100)
+  expect_vcount(g_hsbm3, 100)
   expect_true(is_simple(g_hsbm3))
 
   withr::local_seed(42)
 
   g_hsbm4 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 - 1e-15)
   expect_equal(ecount(g_hsbm4), ecount(g_hsbm2))
-  expect_equal(vcount(g_hsbm4), 100)
+  expect_vcount(g_hsbm4, 100)
   expect_true(is_simple(g_hsbm4))
 })
 

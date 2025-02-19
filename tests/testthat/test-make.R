@@ -12,10 +12,10 @@ test_that("make_ works, order of arguments does not matter", {
 
 test_that("make_ works with n parameter", {
   g0 <- make_undirected_graph(1:10, n = 15)
-  expect_equal(vcount(g0), 15)
+  expect_vcount(g0, 15)
 
   g1 <- make_directed_graph(1:10, n = 15)
-  expect_equal(vcount(g1), 15)
+  expect_vcount(g1, 15)
 })
 
 test_that("sample_, graph_ also work", {
@@ -111,7 +111,7 @@ test_that("graph_from_literal(simplify = FALSE)", {
 
 test_that("empty graph works", {
   empty <- make_empty_graph()
-  expect_equal(vcount(empty), 0)
+  expect_vcount(empty, 0)
   expect_equal(ecount(empty), 0)
 })
 
@@ -242,7 +242,7 @@ test_that("compatibility when arguments are not named", {
   nodes <- 3
   graph_unnamed_args <- make_graph(as.vector(t(elist)), nodes, FALSE)
 
-  expect_equal(vcount(graph_unnamed_args), 3)
+  expect_vcount(graph_unnamed_args, 3)
   expect_equal(ecount(graph_unnamed_args), 1)
 })
 
@@ -324,7 +324,7 @@ test_that("make_full_bipartite_graph works", {
   expect_isomorphic(full_bip_star, make_star(6, "undirected"))
 
   full_bip <- make_full_bipartite_graph(5, 5)
-  expect_equal(vcount(full_bip), 10)
+  expect_vcount(full_bip, 10)
   expect_equal(ecount(full_bip), 25)
 })
 
