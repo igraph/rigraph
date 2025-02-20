@@ -292,7 +292,8 @@ plot.igraph <- function(x,
       }
     }
 
-    loop <- function(x0, y0, cx = x0, cy = y0, color, angle = 0, label = NA,
+    loop <- function(x0, y0, cx = x0, cy = y0, color, angle = 0, label = NA, label.color,
+                     label.font, label.family, label.cex,
                      width = 1, arr = 2, lty = 1, arrow.size = arrow.size,
                      arr.w = arr.w, lab.x, lab.y, loopSize = loop.size) {
       rad <- angle
@@ -337,8 +338,8 @@ plot.igraph <- function(x,
         }
 
         text(lx, ly, label,
-          col = edge.label.color, font = edge.label.font,
-          family = edge.label.family, cex = edge.label.cex
+          col = label.color, font = label.font,
+          family = label.family, cex = label.cex
         )
       }
     }
@@ -371,10 +372,28 @@ plot.igraph <- function(x,
     if (length(arrow.size) > 1) {
       asize <- arrow.size[loops.e]
     }
+    lcol <- edge.label.color
+    if (length(lcol) > 1) {
+      lcol <- lcol[loops.e]
+    }
+    lfam <- edge.label.family
+    if (length(lfam) > 1) {
+      lfam <- lfam[loops.e]
+    }
+    lfon <- edge.label.font
+    if (length(lfon) > 1) {
+      lfon <- lfon[loops.e]
+    }
+    lcex <- edge.label.cex
+    if (length(lcex) > 1) {
+      lcex <- lcex[loops.e]
+    }
+
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] - sin(la) * vs
     mapply(loop, xx0, yy0,
-      color = ec, angle = -la, label = loop.labels, lty = lty,
+      color = ec, angle = -la, label = loop.labels,
+      label.color = lcol, label.family = lfam, label.font = lfon, label.cex = lcex, lty = lty,
       width = ew, arr = arr, arrow.size = asize, arr.w = arrow.width,
       lab.x = loop.labx, lab.y = loop.laby
     )
@@ -447,9 +466,27 @@ plot.igraph <- function(x,
     if (!is.null(elab.y)) {
       lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
     }
+
+    ecol <- edge.label.color
+    if (length(ecol) > 1) {
+      ecol <- ecol[nonloops.e]
+    }
+    efam <- edge.label.family
+    if (length(efam) > 1) {
+      efam <- efam[nonloops.e]
+    }
+    efon <- edge.label.font
+    if (length(efon) > 1) {
+      efon <- efon[nonloops.e]
+    }
+    ecex <- edge.label.cex
+    if (length(ecex) > 1) {
+      ecex <- ecex[nonloops.e]
+    }
+
     text(lc.x, lc.y,
-      labels = edge.labels, col = edge.label.color,
-      family = edge.label.family, font = edge.label.font, cex = edge.label.cex
+      labels = edge.labels, col = ecol,
+      family = efam, font = efon, cex = ecex
     )
   }
 
