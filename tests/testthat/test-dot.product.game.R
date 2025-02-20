@@ -24,7 +24,7 @@ test_that("Dot product rng works", {
   expect_ecount(g2, 4941)
 })
 
-test_that("MISSING TITLE", {
+test_that("sample_dot_product generates edges with correct probabilities", {
   withr::local_seed(42)
   latent_features <- cbind(
     c(0, 1, 1, 1, 0) / 3, c(0, 1, 1, 0, 1) / 3, c(1, 1, 1, 1, 0) / 4,
