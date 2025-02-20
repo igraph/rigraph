@@ -668,19 +668,26 @@ arpack_defaults <- function() {
 #'
 #' ## First three eigenvalues of the adjacency matrix of a graph
 #' ## We need the 'Matrix' package for this
-#' if (require(Matrix)) {
-#'   set.seed(42)
-#'   g <- sample_gnp(1000, 5 / 1000)
-#'   M <- as_adjacency_matrix(g, sparse = TRUE)
-#'   f2 <- function(x, extra = NULL) {
-#'     cat(".")
-#'     as.vector(M %*% x)
-#'   }
-#'   baev <- arpack(f2, sym = TRUE, options = list(
-#'     n = vcount(g), nev = 3, ncv = 8,
-#'     which = "LM", maxiter = 2000
-#'   ))
+#' @examplesIf rlang::is_installed("Matrix")
+#' library("Matrix")
+#' set.seed(42)
+#' g <- sample_gnp(1000, 5 / 1000)
+#' M <- as_adjacency_matrix(g, sparse = TRUE)
+#' f2 <- function(x, extra = NULL) {
+#'   cat(".")
+#'   as.vector(M %*% x)
 #' }
+#' baev <- arpack(
+#'   f2,
+#'   sym = TRUE,
+#'   options = list(
+#'     n = vcount(g),
+#'     nev = 3,
+#'     ncv = 8,
+#'     which = "LM",
+#'     maxiter = 2000
+#'   )
+#' )
 #' @family arpack
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),

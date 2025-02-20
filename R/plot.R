@@ -527,9 +527,9 @@ plot.igraph <- function(x,
 #'
 #' g <- make_lattice(c(5, 5, 5))
 #' coords <- layout_with_fr(g, dim = 3)
-#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
-#'   rglplot(g, layout = coords)
-#' }
+#'
+#' @examplesIf interactive() && rlang::is_installed("rgl")
+#' rglplot(g, layout = coords)
 #'
 rglplot <- function(x, ...) {
   UseMethod("rglplot", x)
