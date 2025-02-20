@@ -289,7 +289,7 @@ hrg <- hrg_create_impl
 hrg_tree <- function(hrg) {
 
   if (!inherits(hrg, "igraphHRG")) {
-    cli::cli_abort("{.arg hrg} must be a {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
   }
 
   out <- from_hrg_dendrogram_impl(hrg)
@@ -313,7 +313,7 @@ hrg_tree <- function(hrg) {
 sample_hrg <- function(hrg) {
 
   if (!inherits(hrg, "igraphHRG")) {
-    cli::cli_abort("{.arg hrg} must be a {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
   }
 
   hrg_game_impl(hrg)

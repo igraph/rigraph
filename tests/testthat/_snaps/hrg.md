@@ -17,7 +17,7 @@
       sample_hrg(make_ring(10))
     Condition
       Error in `sample_hrg()`:
-      ! `hrg` must be a <igraphHRG> object, not an <igraph> object.
+      ! `hrg` must be an <igraphHRG> object, not an <igraph> object.
 
 # hrg_tree() checks its argument
 
@@ -25,5 +25,5 @@
       hrg_tree(make_ring(10))
     Condition
       Error in `hrg_tree()`:
-      ! `hrg` must be a <igraphHRG> object, not an <igraph> object.
+      ! `hrg` must be an <igraphHRG> object, not an <igraph> object.
 
