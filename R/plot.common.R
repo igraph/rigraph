@@ -502,13 +502,10 @@ i.parse.plot.params <- function(graph, params) {
       ## we don't have the parameter, check attributes first
       if (type == "vertex" && name %in% vertex_attr_names(graph)) {
         p[[type]][[name]] <- vertex_attr(graph, name)
-        return(ret())
       } else if (type == "edge" && name %in% edge_attr_names(graph)) {
         p[[type]][[name]] <- edge_attr(graph, name)
-        return(ret())
       } else if (type == "plot" && name %in% graph_attr_names(graph)) {
         p[[type]][[name]] <- graph_attr(graph, name)
-        return(ret())
       } else {
         ## no attributes either, check igraph parameters
         n <- paste(sep = "", type, ".", name)
@@ -522,6 +519,12 @@ i.parse.plot.params <- function(graph, params) {
         return(ret())
       }
     }
+    if (any(is.na(p[[type]][[name]]))) {
+      cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
+        }")
+      p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+    }
+    return(ret())
   }
 
   return(func)
