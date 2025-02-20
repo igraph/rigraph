@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9012
+
+## Chore
+
+- Run {styler} (with {igraph.style}) (#1696).
+
+## Documentation
+
+- Add more about igraph.r2cdocs in the contributing guide (#1686, #1697).
+
+## Testing
+
+- Merged and refactored conversion.R tests (@schochastics, #1701).
+
+- Create helpers (#1691, #1695).
+
+- Merged and refactored make.R tests (@schochastics, #1685).
+
+- Merged and refactored community.R tests (@schochastics, #1689).
+
+- Merged and refactored indexing.R tests (@schochastics, #1687).
+
+
 # igraph 2.1.4.9011
 
 ## Testing
