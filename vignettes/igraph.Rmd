@@ -309,7 +309,7 @@ g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
 
-If you want to save a graph in R with all the attributes use the R's standard function `dput()` function and retrieve it later with `dget()`. You can also just save the R workspace and restore it later.
+If you want to save a graph in R with all the attributes use `saveRDS()` (and then `readRDS()` to retrieve it).
 
 ## Structural properties of graphs
 
