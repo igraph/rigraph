@@ -1879,6 +1879,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' g
 #'
 #' @examplesIf rlang::is_installed("Matrix")
+#' library("Matrix")
 #' image(g[])
 #' @family games
 #' @export

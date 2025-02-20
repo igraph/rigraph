@@ -53,6 +53,7 @@ g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
 
 \dontshow{if (rlang::is_installed("Matrix")) withAutoprint(\{ # examplesIf}
+library("Matrix")
 image(g[])
 \dontshow{\}) # examplesIf}
 }
