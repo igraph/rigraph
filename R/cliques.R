@@ -163,6 +163,8 @@ clique.number <- function(graph) { # nocov start
 #' `clique_size_counts()` returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
+#' `is_clique()` tests whether all pairs within a vertex set are connected.
+#'
 #' @inheritParams weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
@@ -204,6 +206,9 @@ clique.number <- function(graph) { # nocov start
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
+#'
+#' # Check that all returned vertex sets are indeed cliques
+#' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
 #' @cdocs igraph_cliques
 cliques <- cliques_impl
 
@@ -394,6 +399,8 @@ weighted_clique_num <- weighted_clique_number_impl
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
 #'
+#' `is_ivs()` tests if no pairs within a vertex set are connected.
+#'
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
@@ -526,3 +533,53 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
     clique_size_hist_impl(graph, min, max)
   }
 }
+
+#' Is this a complete graph?
+#'
+#' A graph is considered complete if there is an edge between all distinct
+#' directed pairs of vertices. igraph considers both the singleton graph
+#' and the null graph complete.
+#'
+#' @param graph The input graph.
+#' @return True if the graph is complete.
+#' @family cliques
+#' @keywords graphs
+#' @seealso [make_full_graph()]
+#' @export
+#' @cdocs igraph_is_complete
+#' @examples
+#'
+#' g <- make_full_graph(6, directed = TRUE)
+#' is_complete(g)
+#' g <- delete_edges(g, 1)
+#' is_complete(g)
+#' g <- as_undirected(g)
+#' is_complete(g)
+is_complete <- is_complete_impl
+
+#' @rdname cliques
+#'
+#' @description
+#' Tests if all pairs within a set of vertices are adjacent, i.e. whether they
+#' form a clique. An empty set and singleton set are considered to be a clique.
+#'
+#' @param graph The input graph.
+#' @param candidate The vertex set to test for being a clique.
+#' @param directed Whether to consider edge directions.
+#' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
+#'   a clique.
+#' @keywords graphs
+#' @export
+#' @cdocs igraph_is_clique
+is_clique <- is_clique_impl
+
+#' @rdname ivs
+#'
+#' @param graph The input graph.
+#' @param candidate The vertex set to test for being an independent set.
+#' @return `is_ivs()` returns `TRUE` if the candidate vertex set forms an
+#'   independent set.
+#' @keywords graphs
+#' @export
+#' @cdocs igraph_is_independent_vertex_set
+is_ivs <- is_independent_vertex_set_impl
