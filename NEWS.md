@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9013
+
+## Features
+
+- Hrg functions check their argument (#1074, #1699).
+
+## Documentation
+
+- Replace instances of `#' if` with `#' @examplesIf` (#1134, #1698).
+
+- Update graph saving rec (#1242, #1700).
+
+## Testing
+
+- Improve test-dot.product.game (#1396, #1705).
+
+
 # igraph 2.1.4.9012
 
 ## Chore
