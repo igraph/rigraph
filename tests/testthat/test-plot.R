@@ -85,3 +85,27 @@ test_that("rglplot() works", {
   expect_silent(rglplot(g))
   expect_silent(rglplot(g, edge.label = letters[1:ecount(g)]))
 })
+
+test_that("label colors are correct when loops are present", {
+  # check that Bug 157 is fixed
+  skip_if_not_installed("vdiffr")
+  g <- make_graph(c(1, 2, 1, 1, 2, 3), directed = FALSE)
+  g$layout <- structure(
+    c(
+      1.17106961533433,
+      1.63885278868168,
+      2.10732892696401,
+      3.91718168529106,
+      2.87660789399794,
+      1.83449260993935
+    ),
+    dim = 3:2
+  )
+  cols <- c("red", "green", "blue")
+  vdiffr::expect_doppelganger(
+    "loop graph",
+    function() {
+      plot(g, edge.color = cols, edge.label.color = cols, edge.label = cols)
+    }
+  )
+})
