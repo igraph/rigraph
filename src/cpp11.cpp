@@ -32,7 +32,6 @@ extern SEXP R_igraph_address(SEXP);
 extern SEXP R_igraph_adhesion(SEXP, SEXP);
 extern SEXP R_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_adjacent_triangles(void);
 extern SEXP R_igraph_adjacent_vertices(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjlist(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_all_minimal_st_separators(SEXP);
@@ -489,7 +488,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_adhesion",                                   (DL_FUNC) &R_igraph_adhesion,                                    2},
     {"R_igraph_adjacency",                                  (DL_FUNC) &R_igraph_adjacency,                                   3},
     {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
-    {"R_igraph_adjacent_triangles",                         (DL_FUNC) &R_igraph_adjacent_triangles,                          0},
     {"R_igraph_adjacent_vertices",                          (DL_FUNC) &R_igraph_adjacent_vertices,                           3},
     {"R_igraph_adjlist",                                    (DL_FUNC) &R_igraph_adjlist,                                     3},
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},

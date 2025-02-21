@@ -11745,23 +11745,3 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   UNPROTECT(1);
   return(r_result);
 }
-
-/*-------------------------------------------/
-/ igraph_adjacent_triangles                  /
-/-------------------------------------------*/
-SEXP R_igraph_adjacent_triangles(void) {
-                                        /* Declarations */
-  igraph_error_t c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_adjacent_triangles());
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}

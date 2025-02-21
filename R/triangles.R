@@ -90,4 +90,4 @@ triangles <- list_triangles_impl
 #' @export
 #' @rdname count_triangles
 #' @cdocs igraph_adjacent_triangles
-count_triangles <- adjacent_triangles_impl
+count_triangles <- count_adjacent_triangles_impl
