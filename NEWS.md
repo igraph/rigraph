@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9014
+
+## Bug fixes
+
+- Duplicated arrowhead drawing (@schochastics, #640, #1709).
+
+- Correct mapping of edge label properties in plots when loops are present (@schochastics, #157, #1706).
+
+- NA attribute values are replaced with default values for plotting (@schochastics, #293, #1707).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@10ef19bc2a61de6c6cfe76e5a068f82b1d29fff1 (#1694).
+
+
 # igraph 2.1.4.9013
 
 ## Features
