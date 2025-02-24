@@ -8,7 +8,7 @@ test_that("isomorphic", {
   g2 <- graph_from_literal(A - B - C)
   expect_not_isomorphic(g, g2)
   expect_not_isomorphic(g, g2, method = "direct")
-  expect_not_isomorphicg, g2, method = "vf2")
+  expect_not_isomorphic(g, g2, method = "vf2")
   expect_not_isomorphic(g, g2, method = "bliss")
 })
 
