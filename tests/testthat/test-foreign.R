@@ -18,7 +18,7 @@ test_that("reading GraphML file works", {
   g <- read_graph(f <- gzfile("zachary.graphml.gz"), format = "graphml")
   g2 <- make_graph("zachary")
 
-  expect_true(isomorphic(g2, g))
+  expect_isomorphic(g2, g)
 })
 
 test_that("reading graph in NCOL format", {

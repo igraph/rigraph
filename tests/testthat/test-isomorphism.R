@@ -1,15 +1,15 @@
 test_that("isomorphic", {
   g <- graph_from_literal(A - B - C - A)
-  expect_true(isomorphic(g, g))
-  expect_true(isomorphic(g, g, method = "direct"))
-  expect_true(isomorphic(g, g, method = "vf2"))
-  expect_true(isomorphic(g, g, method = "bliss"))
+  expect_isomorphic(g, g)
+  expect_isomorphic(g, g, method = "direct")
+  expect_isomorphic(g, g, method = "vf2")
+  expect_isomorphic(g, g, method = "bliss")
 
   g2 <- graph_from_literal(A - B - C)
-  expect_false(isomorphic(g, g2))
-  expect_false(isomorphic(g, g2, method = "direct"))
-  expect_false(isomorphic(g, g2, method = "vf2"))
-  expect_false(isomorphic(g, g2, method = "bliss"))
+  expect_not_isomorphic(g, g2)
+  expect_not_isomorphic(g, g2, method = "direct")
+  expect_not_isomorphicg, g2, method = "vf2")
+  expect_not_isomorphic(g, g2, method = "bliss")
 })
 
 test_that("subgraph_isomorphic", {
