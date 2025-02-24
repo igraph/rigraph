@@ -349,6 +349,9 @@ graph.attributes <- function(graph) {
 "graph.attributes<-" <- function(graph, value) {
   ensure_igraph(graph)
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
 }
@@ -537,6 +540,9 @@ set_value_at <- function(value, idx, length_out) {
   ensure_igraph(graph)
 
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   if (!all(lengths(value) == length(index))) {
     cli::cli_abort("Invalid attribute value length, must match number of vertices.")
@@ -733,6 +739,9 @@ edge.attributes <- function(graph, index = E(graph)) {
   ensure_igraph(graph)
 
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   if (any(sapply(value, length) != length(index))) {
     cli::cli_abort("Invalid attribute value length, must match number of edges")
