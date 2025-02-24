@@ -85,6 +85,7 @@ parse_lifecycle_call <- function(symbol_function_call) {
     new  = new_text
   )
 }
+
 parse_script <- function(path) {
   lifecycle_calls <- path |>
     parse(keep.source = TRUE) |>
@@ -102,13 +103,13 @@ parse_script <- function(path) {
 }
 
 scripts <- fs::dir_ls(here::here("R"), glob = "*.R")
+scripts <- scripts[fs::path_file(scripts) != "zzz.R"]
 
 table <- do.call(
   rbind,
-  purrr::map(scripts, parse_script), 
-  args = list(make.row.names = FALSE)
+  purrr::map(scripts, parse_script)
 )
 
-knitr::table(table)
+knitr::kable(table)
 
 ```
