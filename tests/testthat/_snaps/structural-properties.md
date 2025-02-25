@@ -61,3 +61,14 @@
       [1] "out"
       
 
+# laplacian_matrix() works
+
+    Code
+      laplacian_matrix(Ai, normalization = "unnormalized")
+    Output
+      3 x 3 sparse Matrix of class "dgCMatrix"
+                         
+      [1,]  410 -210 -200
+      [2,] -210  590 -380
+      [3,] -200 -380  580
+
