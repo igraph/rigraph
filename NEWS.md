@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9016
+
+## doc
+
+- Fix typos in `laplacian_matrix` documentation.
+
+
 # igraph 2.1.4.9015
 
 ## Chore
