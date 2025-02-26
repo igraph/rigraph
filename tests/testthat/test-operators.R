@@ -87,7 +87,7 @@ test_that("edge reversal works", {
   directed_graph <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
   reverse_directed_graph <- reverse_edges(directed_graph, 1:3)
   expected <- make_graph(~ 1 +- 2, 1 +- 3, 1 +- 4, 2 -+ 3, 3 -+ 4)
-  expect_true(isomorphic(reverse_directed_graph, expected))
+  expect_isomorphic(reverse_directed_graph, expected)
 
   reverse_all_directed_graph <- reverse_edges(directed_graph)
   expect_vcount(reverse_all_directed_graph, vcount(directed_graph))

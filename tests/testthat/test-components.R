@@ -111,7 +111,7 @@ test_that("largest strongly and weakly components are correct", {
     B - +C,
     C - +A
   )
-  expect_true(isomorphic(largest_component(g, "strong"), strongly))
+  expect_isomorphic(largest_component(g, "strong"), strongly)
 
   weakly <- graph_from_literal(
     A - +B,
@@ -119,13 +119,13 @@ test_that("largest strongly and weakly components are correct", {
     C - +A,
     C - +D
   )
-  expect_true(isomorphic(largest_component(g, "weak"), weakly))
+  expect_isomorphic(largest_component(g, "weak"), weakly)
 })
 
 test_that("the largest component of a null graph is a valid null graph", {
   nullgraph <- make_empty_graph(0)
 
-  expect_true(isomorphic(largest_component(make_empty_graph(0)), nullgraph))
+  expect_isomorphic(largest_component(make_empty_graph(0)), nullgraph)
 })
 
 test_that("articulation_points works", {
