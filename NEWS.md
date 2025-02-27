@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9017
+
+## Features
+
+- Added proper support for adding attributes via data.frames (@schochastics, #1373, #1669, #1716).
+
+
 # igraph 2.1.4.9016
 
 ## doc
