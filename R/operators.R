@@ -277,7 +277,7 @@ disjoint_union <- function(...) {
   }))
   lapply(graphs, ensure_igraph)
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`bynam' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- sum(sapply(graphs, is_named))
   if (byname == "auto") {
@@ -286,7 +286,7 @@ disjoint_union <- function(...) {
       cli::cli_warn("Some, but not all graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != length(graphs)) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   edgemaps <- length(unlist(lapply(graphs, edge_attr_names))) != 0
@@ -613,7 +613,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   ensure_igraph(big)
   ensure_igraph(small)
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`bynam' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- is_named(big) + is_named(small)
   if (byname == "auto") {
@@ -622,7 +622,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
       cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   if (byname) {
@@ -762,7 +762,7 @@ compose <- function(g1, g2, byname = "auto") {
   ensure_igraph(g2)
 
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`byname' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- is_named(g1) + is_named(g2)
   if (byname == "auto") {
@@ -771,7 +771,7 @@ compose <- function(g1, g2, byname = "auto") {
       cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   if (byname) {
@@ -1115,7 +1115,7 @@ path <- function(...) {
     ## Adding named vertices
     res <- add_vertices(e1, length(e2), name = e2)
   } else {
-    stop("Cannot add unknown type to igraph graph")
+    cli::cli_abort("Cannot add {.obj_type_friendly type} to igraph graph.")
   }
   res
 }
@@ -1171,7 +1171,7 @@ path <- function(...) {
 #' @export
 `-.igraph` <- function(e1, e2) {
   if (missing(e2)) {
-    stop("Non-numeric argument to negation operator")
+    cli::cli_abort("Non-numeric argument to negation operator")
   }
   if (is_igraph(e2)) {
     res <- difference(e1, e2)
@@ -1195,7 +1195,7 @@ path <- function(...) {
   } else if (is.numeric(e2) || is.character(e2)) {
     res <- delete_vertices(e1, e2)
   } else {
-    stop("Cannot substract unknown type from igraph graph")
+    cli::cli_abort("Cannot substract {.obj_type_friendly type} from igraph graph.")
   }
   res
 }
@@ -1220,7 +1220,7 @@ path <- function(...) {
 #' @examples
 #' rings <- make_ring(5) * 5
 rep.igraph <- function(x, n, mark = TRUE, ...) {
-  if (n < 0) stop("Number of replications must be positive")
+  if (n < 0) cli::cli_abort("Number of replications must be positive")
 
   res <- do_call(disjoint_union,
     .args =
@@ -1245,7 +1245,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
   if (is.numeric(n) && length(n) == 1) {
     rep.igraph(x, n)
   } else {
-    stop("Cannot multiply igraph graph with this type")
+    cli::cli_abort("Cannot multiply igraph graph with {.obj_type_friendly type}.")
   }
 }
 
@@ -1263,7 +1263,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' @examples
 #'
-#' g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
+#' g <- make_graph(~ 1 - +2, 2 - +3, 3 - +4)
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
