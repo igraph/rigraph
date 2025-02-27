@@ -28,24 +28,24 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 
   if (is.null(names(cols)) || any(names(cols) == "") ||
     any(duplicated(names(cols)))) {
-    stop("Columns must be have (unique) names")
+    cli::cli_abort("Columns must be have (unique) names.")
   }
 
   lens <- sapply(cols, length)
   n1lens <- lens[lens != 1]
 
   if (length(unique(n1lens)) > 1) {
-    stop("Columns must be constants or have the same length")
+    cli::cli_abort("Columns must be constants or have the same length.")
   }
 
   if (length(n1lens) == 0) {
     if (is.null(NROW)) {
-      stop("Cannot determine number of rows")
+      cli::cli_abort("Cannot determine number of rows.")
     }
     attr(cols, "NROW") <- NROW
   } else {
     if (!is.null(NROW) && n1lens[1] != NROW) {
-      stop("NROW does not match column lengths")
+      cli::cli_abort("{.arg NROW} does not match column lengths.")
     }
     attr(cols, "NROW") <- unname(n1lens[1])
   }
@@ -64,10 +64,10 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
 #' @method "[" igraphSDF
 `[.igraphSDF` <- function(x, i, j, ..., drop = TRUE) {
   if (!is.character(j)) {
-    stop("The column index must be character")
+    cli::cli_abort("The column index must be character.")
   }
   if (!missing(i) && !is.numeric(i)) {
-    stop("The row index must be numeric")
+    cli::cli_abort("The row index must be numeric.")
   }
   if (missing(i)) {
     rep(x[[j]], length.out = attr(x, "NROW"))
@@ -83,19 +83,19 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
 #' @method "[<-" igraphSDF
 `[<-.igraphSDF` <- function(x, i, j, value) {
   if (!is.character(j)) {
-    stop("The column index must be character")
+    cli::cli_abort("The column index must be character.")
   }
   if (!missing(i) && !is.numeric(i)) {
-    stop("Row index must be numeric, if given")
+    cli::cli_abort("Row index must be numeric, if given.")
   }
   if (missing(i)) {
     if (length(value) != attr(x, "NROW") && length(value) != 1) {
-      stop("Replacement value has the wrong length")
+      cli::cli_abort("Replacement value has the wrong length.")
     }
     x[[j]] <- value
   } else {
     if (length(value) != length(i) && length(value) != 1) {
-      stop("Replacement value has the wrong length")
+      cli::cli_abort("Replacement value has the wrong length.")
     }
     tmp <- rep(x[[j]], length.out = attr(x, "NROW"))
     tmp[i] <- value

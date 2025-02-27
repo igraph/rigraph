@@ -77,19 +77,19 @@ igraph.pars.set.verbose <- function(verbose) {
     .Call(R_igraph_set_verbose, verbose)
   } else if (is.character(verbose)) {
     if (!verbose %in% c("tk", "tkconsole")) {
-      stop("Unknown 'verbose' value")
+      cli::cli_abort("Unknown {.arg verbose} value.")
     }
     if (verbose %in% c("tk", "tkconsole")) {
       if (!capabilities()[["X11"]]) {
-        stop("X11 not available")
+        cli::cli_abort("X11 not available.")
       }
       if (!requireNamespace("tcltk", quietly = TRUE)) {
-        stop("tcltk package not available")
+        cli::cli_abort("tcltk package not available.")
       }
     }
     .Call(R_igraph_set_verbose, TRUE)
   } else {
-    stop("'verbose' should be a logical or character scalar")
+    cli::cli_abort("{.arg verbose} should be a logical or character scalar.")
   }
   verbose
 }
@@ -209,7 +209,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     switch(mode(arg),
       list = temp <- arg,
       character = return(.igraph.pars[arg]),
-      stop("invalid argument: ", sQuote(arg))
+      cli::cli_abort("invalid argument: {arg}.")
     )
   }
   if (length(temp) == 0) {
@@ -218,7 +218,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
 
   ## Callbacks
   n <- names(temp)
-  if (is.null(n)) stop("options must be given by name")
+  if (is.null(n)) cli::cli_abort("options must be given by name.")
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])

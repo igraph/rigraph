@@ -61,8 +61,8 @@ test_that("error messages are proper", {
 
 test_that("we pass arguments unevaluated", {
   rlang::local_options(lifecycle_verbosity = "quiet")
-  g0 <- graph_from_literal(A -+ B:C)
-  g1 <- graph_(from_literal(A -+ B:C))
+  g0 <- graph_from_literal(A - +B:C)
+  g1 <- graph_(from_literal(A - +B:C))
   expect_identical_graphs(g0, g1)
 })
 
@@ -86,18 +86,18 @@ test_that("graph_from_literal() and undirected explosion", {
 test_that("graph_from_literal() and simple directed graphs", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A -+ B)
-    graph_from_literal(A -+ B -+ C)
-    graph_from_literal(A -+ B -+ C -+ A)
-    graph_from_literal(A -+ B +- C -+ A)
+    graph_from_literal(A - +B)
+    graph_from_literal(A - +B - +C)
+    graph_from_literal(A - +B - +C - +A)
+    graph_from_literal(A - +B + -C - +A)
   })
 })
 
 test_that("graph_from_literal() and directed explosion", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A:B:C -+ D:E, B:D +- C:E)
-    graph_from_literal(A:B:C -+ D:E +- F:G:H -+ I +- J:K:L:M)
+    graph_from_literal(A:B:C - +D:E, B:D + -C:E)
+    graph_from_literal(A:B:C - +D:E + -F:G:H - +I + -J:K:L:M)
   })
 })
 
@@ -372,4 +372,34 @@ test_that("warnings are given for extra arguments in make_graph for notables", {
   expect_identical_graphs(Levi, Levi1)
   expect_identical_graphs(Levi, Levi2)
   expect_identical_graphs(Levi, Levi3)
+})
+
+test_that("graph is not updated if not in LHS", {
+  g <- make_(
+    ring(10),
+    with_vertex_(name = LETTERS[1:10]),
+    with_edge_(weight = 1:10)
+  )
+
+  vs <- V(g)[1:5]
+  vs$name <- letters[1:5]
+  expect_equal(V(g)$name, LETTERS[1:10])
+
+  es <- E(g)
+  es$weight <- 0
+  expect_equal(E(g)$weight, 1:10)
+})
+
+test_that("graph is updated if in LHS", {
+  g <- make_(
+    ring(10),
+    with_vertex_(name = LETTERS[1:10]),
+    with_edge_(weight = 1:10)
+  )
+
+  V(g)[1:5]$name <- letters[1:5]
+  expect_equal(V(g)$name, c(letters[1:5], LETTERS[6:10]))
+
+  E(g)[1:5]$weight <- 0
+  expect_equal(E(g)$weight, c(rep(0, 5), 6:10))
 })

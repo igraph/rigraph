@@ -447,3 +447,36 @@ test_that("groups works", {
 
   expect_equal(gr, structure(list(`1` = letters[1:10], `2` = letters[11:15]), .Dim = 2L, .Dimnames = list(c("1", "2"))))
 })
+
+test_that("voronoi works", {
+  res <- voronoi_cells(make_ring(10), c(1, 6))
+  expect_equal(res$membership, c(0, 0, 0, 1, 1, 1, 1, 1, 0, 0))
+  expect_equal(res$distances, c(0, 1, 2, 2, 1, 0, 1, 2, 2, 1))
+})
+
+test_that("voronoi works with weights", {
+  res <- voronoi_cells(make_ring(10), c(1, 6), weights = 1:10)
+  expect_equal(res$membership, c(0, 0, 0, 0, 1, 1, 1, 1, 0, 0))
+  expect_equal(res$distances, c(0, 1, 3, 6, 5, 0, 6, 13, 19, 10))
+})
+
+test_that("contract works", {
+  local_rng_version("3.5.0")
+  withr::local_seed(42)
+
+  g <- make_ring(10)
+  g$name <- "Ring"
+  V(g)$name <- letters[1:vcount(g)]
+  E(g)$weight <- sample(ecount(g))
+
+  g2 <- contract(g, rep(1:5, each = 2),
+    vertex.attr.comb = toString
+  )
+
+  expect_equal(g2$name, g$name)
+  expect_equal(V(g2)$name, c("a, b", "c, d", "e, f", "g, h", "i, j"))
+  expect_equal(
+    as_unnamed_dense_matrix(g2[]),
+    cbind(c(10, 9, 0, 0, 7), c(9, 3, 6, 0, 0), c(0, 6, 4, 8, 0), c(0, 0, 8, 5, 1), c(7, 0, 0, 1, 2))
+  )
+})
