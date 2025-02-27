@@ -556,11 +556,18 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   }
 
   if (is.character(arrow.mode)) {
-    tmp <- numeric(length(arrow.mode))
-    tmp[arrow.mode %in% c("<", "<-")] <- 1
-    tmp[arrow.mode %in% c(">", "->")] <- 2
-    tmp[arrow.mode %in% c("<>", "<->")] <- 3
-    arrow.mode <- tmp
+    arrow.mode <- map_dbl(
+      arrow.mode,
+      \(x) switch(
+        x,
+        "<"   = 1,
+        "<-"  = 1,
+        ">"   = 2,
+        "->"  = 2,
+        "<>"  = 3,
+        "<->" = 3
+      )
+    )
   }
 
   if (is.null(arrow.mode)) {
