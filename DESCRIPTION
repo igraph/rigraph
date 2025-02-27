@@ -65,7 +65,7 @@ VignetteBuilder:
     knitr
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig, igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
-Config/Needs/website: readr
+Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
