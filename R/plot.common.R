@@ -558,15 +558,16 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   if (is.character(arrow.mode)) {
     arrow.mode <- map_dbl(
       arrow.mode,
-      \(x) switch(
-        x,
-        "<"   = 1,
-        "<-"  = 1,
-        ">"   = 2,
-        "->"  = 2,
-        "<>"  = 3,
-        "<->" = 3
-      )
+      function(x) {
+        switch(x,
+          "<"   = 1,
+          "<-"  = 1,
+          ">"   = 2,
+          "->"  = 2,
+          "<>"  = 3,
+          "<->" = 3
+        )
+      }
     )
   }
 
@@ -1450,12 +1451,14 @@ i.default.values[["plot"]] <- i.plot.default
 #' @examples
 #'
 #' g <- make_ring(10)
-#' values <- lapply(1:10, function(x) sample(1:10,3))
+#' values <- lapply(1:10, function(x) sample(1:10, 3))
 #'
 #' @examplesIf interactive()
-#' plot(g, vertex.shape = "pie", vertex.pie = values,
-#'      vertex.pie.color = list(heat.colors(5)),
-#'      vertex.size = seq(10, 30, length.out = 10), vertex.label = NA)
+#' plot(g,
+#'   vertex.shape = "pie", vertex.pie = values,
+#'   vertex.pie.color = list(heat.colors(5)),
+#'   vertex.size = seq(10, 30, length.out = 10), vertex.label = NA
+#' )
 #' @rdname vertex.shape.pie
 #' @name vertex.shape.pie
 NULL
