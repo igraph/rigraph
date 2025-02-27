@@ -73,26 +73,26 @@ test_that("to_prufer and make_from_prufer works for trees", {
   g <- make_tree(13, 3, mode = "undirected")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
-  expect_true(isomorphic(g, g2))
+  expect_isomorphic(g, g2)
 
   g <- make_tree(13, 3, mode = "out")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
   g3 <- as_undirected(g)
-  expect_true(isomorphic(g2, g3))
+  expect_isomorphic(g2, g3)
 
   g <- make_tree(13, 3, mode = "in")
   seq <- to_prufer(g)
   g2 <- make_from_prufer(seq)
   g3 <- as_undirected(g)
-  expect_true(isomorphic(g2, g3))
+  expect_isomorphic(g2, g3)
 })
 
 test_that("make_(from_prufer(...)) works", {
   g <- make_tree(13, 3, mode = "undirected")
   seq <- to_prufer(g)
   g2 <- make_(from_prufer(seq))
-  expect_true(isomorphic(g, g2))
+  expect_isomorphic(g, g2)
 })
 
 test_that("to_prufer prints an error for non-trees", {
