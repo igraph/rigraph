@@ -492,7 +492,7 @@ is_isomorphic_to <- isomorphic
 #' subgraph_isomorphisms(pattern, target, domains = domains)
 #'
 #' # Directed LAD example
-#' pattern <- make_graph(~ 1:2:3, 1 - +2:3)
+#' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
 subgraph_isomorphic <- function(pattern, target,
