@@ -239,10 +239,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   all.maps <- as.logical(all.maps)
   if (!is.null(domains)) {
     if (!is.list(domains)) {
-      stop("`domains' must be a list of vertex vectors from `target'")
+      cli::cli_abort("{.arg domains} must be a list of vertex vectors from {.arg target}.")
     }
     if (length(domains) != vcount(pattern)) {
-      stop("`domains' length and `pattern' number of vertices must match")
+      cli::cli_abort("{.arg domains} length and {.arg pattern} number of vertices must match.")
     }
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
@@ -492,7 +492,7 @@ is_isomorphic_to <- isomorphic
 #' subgraph_isomorphisms(pattern, target, domains = domains)
 #'
 #' # Directed LAD example
-#' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
+#' pattern <- make_graph(~ 1:2:3, 1 - +2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
 subgraph_isomorphic <- function(pattern, target,
