@@ -5,38 +5,37 @@ sortgl <- function(x) {
 }
 
 test_that("Graphlets work for some simple graphs", {
-  g <- make_full_graph(5)
-  E(g)$weight <- 1
-  gl <- graphlet_basis(g)
+  full <- make_full_graph(5)
+  E(full)$weight <- 1
+  full_glet <- graphlet_basis(full)
 
-  expect_equal(names(gl), c("cliques", "thresholds"))
-  expect_equal(length(gl$cliques), 1)
-  expect_equal(sort(gl$cliques[[1]]), 1:vcount(g))
-  expect_equal(gl$thresholds, 1)
+  expect_equal(names(full_glet), c("cliques", "thresholds"))
+  expect_equal(length(full_glet$cliques), 1)
+  expect_equal(sort(full_glet$cliques[[1]]), 1:vcount(full))
+  expect_equal(full_glet$thresholds, 1)
 
-  g2 <- make_full_graph(5)
-  E(g2)$weight <- 1
-  E(g2)[1 %--% 2]$weight <- 2
-  gl2 <- sortgl(graphlet_basis(g2))
+  E(full)[1 %--% 2]$weight <- 2
+  full_glet2 <- sortgl(graphlet_basis(full))
 
-  expect_equal(gl2, list(cliques = list(1:2, 1:5), thresholds = c(2, 1)))
+  expect_equal(
+    full_glet2,
+    list(cliques = list(1:2, 1:5), thresholds = c(2, 1))
+  )
 })
 
 test_that("Graphlets filtering works", {
-  gt <- data.frame(
+  df <- data.frame(
     from = c("A", "A", "B", "B", "B", "C", "C", "D"),
     to = c("B", "C", "C", "D", "E", "D", "E", "E"),
     weight = c(8, 8, 8, 5, 5, 5, 5, 5)
   )
 
-  g <- graph_from_data_frame(gt, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
-  gl <- sortgl(graphlet_basis(g))
+  g <- graph_from_data_frame(df, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
+  glet <- sortgl(graphlet_basis(g))
 
-  expect_equal(gl$cliques, list(1:3, 2:5))
-  expect_equal(gl$thresholds, c(8, 5))
+  expect_equal(glet$cliques, list(1:3, 2:5))
+  expect_equal(glet$thresholds, c(8, 5))
 })
-
-## Naive version of graphlets
 
 threshold.net <- function(graph, level) {
   N <- vcount(graph)
