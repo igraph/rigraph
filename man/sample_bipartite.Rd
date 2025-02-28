@@ -15,7 +15,7 @@ sample_bipartite(
   mode = c("out", "in", "all")
 )
 
-bipartite(...)
+bipartite(..., type = NULL)
 }
 \arguments{
 \item{n1}{Integer scalar, the number of bottom vertices.}

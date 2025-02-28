@@ -1768,26 +1768,30 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   }
 }
 
-utils::globalVariables("type")
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
 #' @export
 bipartite <- function(..., type = NULL) {
 
-  if (!rlang::is_missing(type) && type == "gnp") {
+  if (is.null(type) || type == "gnp") {
     lifecycle::deprecate_soft(
       "2.1.3",
       "bipartite()",
       "bipartite_gnp()"
     )
     bipartite_gnp(...)
-  } else if (!rlang::is_missing(type) && type == "gnm") {
+  } else if (type == "gnm") {
     lifecycle::deprecate_soft(
       "2.1.3",
       "bipartite()",
       "bipartite_gnm()"
     )
     bipartite_gnm(...)
+  } else {
+    cli::cli_abort(
+      "{.arg type} must be 'gnp' or 'gnm'.",
+      "Use {.fun bipartite_gnp} or {.fun bipartite_gnm}."
+    )
   }
 
 }
