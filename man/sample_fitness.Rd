@@ -79,6 +79,7 @@ distribution in scale-free networks. \emph{Phys Rev Lett} 87(27):278701,
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
