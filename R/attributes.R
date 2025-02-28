@@ -1006,10 +1006,30 @@ is_weighted <- function(graph) {
 #' @param graph The input graph
 #' @export
 is_bipartite <- function(graph) {
-  ensure_igraph(graph)
+  has_type_attr <- "type" %in% vertex_attr_names(graph)
 
-  "type" %in% vertex_attr_names(graph)
+  bipartite_result <- bipartite_mapping(graph)
+
+  if (has_type_attr) {
+    if (!bipartite_result$res) {
+      cli::cli_warn("{.arg graph} has a type attribute but is not actually bipartite.")
+      FALSE
+    } else {
+      if (!all(bipartite_result$type == vertex_attr(graph, "type")) | !all(bipartite_result$type == !vertex_attr(graph, "type"))) {
+        cli::cli_warn("{.arg graph} is bipartite but has a wrong 'type' vertex attribute. You can correct it using:\n  {.code V(graph)$type <- bipartite_mapping(graph)$type}")
+      }
+      TRUE
+    }
+  } else {
+    if (bipartite_result$res) {
+      cli::cli_warn("{.arg graph} is bipartite but has no 'type' vertex attribute. You can add it using:\n  {.code V(graph)$type <- bipartite_mapping(graph)$type}")
+      TRUE
+    } else {
+      FALSE
+    }
+  }
 }
+
 
 #############
 
