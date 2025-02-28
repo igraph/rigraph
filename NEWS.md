@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9018
+
+## Bug fixes
+
+- Use function instead of (x) in arrow.mode (@schochastics, #1722).
+
+## Documentation
+
+- Lifecycle table (#1525).
+
+## Refactoring
+
+- One less tmp use case (#1715).
+
+## Testing
+
+- Merged and refactored orphaned test files (@schochastics, #1724).
+
+- Merged and refactored iterators.R and operators.R tests (@schochastics, #1723).
+
+- Merged and refactored topology.R tests (@schochastics, #1720).
+
+- Merged and refactored embedding.R tests (@schochastics, #1721).
+
+- Merge all tests for foreign.R into one test file (#1713).
+
+
 # igraph 2.1.4.9017
 
 ## Features
