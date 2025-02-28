@@ -1006,6 +1006,8 @@ is_weighted <- function(graph) {
 #' @param graph The input graph
 #' @export
 is_bipartite <- function(graph) {
+  ensure_igraph(graph)
+
   has_type_attr <- "type" %in% vertex_attr_names(graph)
 
   bipartite_result <- bipartite_mapping(graph)
