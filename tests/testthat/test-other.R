@@ -1,3 +1,61 @@
+test_that("convex_hull works", {
+  xy <- cbind(c(0, 1, 2, 3, 4, 0, 1, 2, 3, 1, 2), c(0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2))
+  vp <- convex_hull(xy)
+  expect_equal(vp$resverts, c(1, 6, 10, 11, 5))
+  expect_equal(vp$rescoords, xy[vp$resverts, ])
+})
+
+test_that("convex_hull uses 1-based indexing, #613", {
+  withr::local_seed(45)
+  n <- 10
+  xy <- cbind(runif(n), runif(n))
+  vp <- convex_hull(xy)
+  expect_equal(vp$resverts, c(8, 10, 7, 2, 1))
+})
+
+test_that("can create graphs when igraph is not attached", {
+  g <- callr::r(function() {
+    igraph::make_ring(3, directed = TRUE)
+  })
+  g2 <- make_ring(3, directed = TRUE)
+  expect_identical(
+    unclass(g)[-igraph_t_idx_env],
+    unclass(g2)[-igraph_t_idx_env]
+  )
+})
+
+test_that("running_mean works", {
+  expect_equal(running_mean(1:10, 2), 2:10 - 0.5)
+  expect_snapshot(
+    running_mean(1:3, 4),
+    error = TRUE
+  )
+})
+
+test_that("R help contains guarantee on number of RNG bits", {
+  skip_on_cran()
+
+  # utils:::.getHelpFile
+  get_help_file <- get(".getHelpFile", envir = asNamespace("utils"))
+  text <- capture.output(tools::Rd2txt(get_help_file(help("Random"))))
+
+  expect_true(any(grepl("all give at least 30 varying bits", text, fixed = TRUE)))
+})
+
+test_that("serialization works", {
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(3, directed = TRUE)
+  gs <- unserialize(serialize(g, NULL))
+
+  expect_identical(unclass(g)[-igraph_t_idx_env], unclass(gs)[-igraph_t_idx_env])
+
+  expect_snapshot({
+    g
+    gs
+  })
+})
+
 names <- c(
   "Mr Hi", "Actor 2", "Actor 3", "Actor 4",
   "Actor 5", "Actor 6", "Actor 7", "Actor 8", "Actor 9", "Actor 10",
