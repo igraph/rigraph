@@ -1753,14 +1753,14 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 
   if (type == "gnp") {
     lifecycle::deprecate_soft(
-      "2.1.3",
+      "2.2.0",
       "sample_bipartite()",
       "sample_bipartite_gnp()"
     )
     sample_bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
   } else if (type == "gnm") {
     lifecycle::deprecate_soft(
-      "2.1.3",
+      "2.2.0",
       "sample_bipartite()",
       "sample_bipartite_gnm()"
     )
@@ -1772,7 +1772,7 @@ utils::globalVariables("type")
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
 #' @export
-bipartite <- function(...) {
+bipartite <- function(..., type = NULL) {
 
   if (!rlang::is_missing(type) && type == "gnp") {
     lifecycle::deprecate_soft(
