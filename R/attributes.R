@@ -1015,7 +1015,7 @@ is_bipartite <- function(graph) {
       cli::cli_warn("{.arg graph} has a type attribute but is not actually bipartite.")
       FALSE
     } else {
-      if (!all(bipartite_result$type == vertex_attr(graph, "type")) | !all(bipartite_result$type == !vertex_attr(graph, "type"))) {
+      if (!all(bipartite_result$type == vertex_attr(graph, "type")) & !all(bipartite_result$type == !vertex_attr(graph, "type"))) {
         cli::cli_warn("{.arg graph} is bipartite but has a wrong 'type' vertex attribute. You can correct it using:\n  {.code V(graph)$type <- bipartite_mapping(graph)$type}")
       }
       TRUE
