@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9019
+
+## Testing
+
+- Added tests for untested files (@schochastics, #1728).
+
+- Merged and refactored other.R tests (@schochastics, #1727).
+
+- Merged and refactored structural.properties.R tests (@schochastics, #1726).
+
+
 # igraph 2.1.4.9018
 
 ## Bug fixes
