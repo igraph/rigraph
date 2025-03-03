@@ -440,3 +440,10 @@ test_that("edge indexes are stored as raw numbers", {
   expect_identical(E(g)$id, as.numeric(1:3))
   expect_error(induced_subgraph(g, 1:2), NA)
 })
+
+test_that("logical indices are not recycled", {
+  # https://github.com/igraph/rigraph/issues/848
+  g <- make_ring(5)
+  expect_snapshot(V(g)[c(TRUE, FALSE)], error = TRUE)
+  expect_snapshot(E(g)[c(TRUE, FALSE)], error = TRUE)
+})

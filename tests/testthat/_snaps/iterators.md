@@ -92,3 +92,23 @@
       + 10/? edges (deleted) (vertex names):
        [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j
 
+# logical indices are not recycled
+
+    Code
+      V(g)[c(TRUE, FALSE)]
+    Condition
+      Error in `FUN()`:
+      ! Error: Logical index length does not match the number of vertices. Recycling is not allowed.
+
+---
+
+    Code
+      E(g)[c(TRUE, FALSE)]
+    Output
+      [1]  TRUE FALSE
+      [1] 2
+      [1] 5
+    Condition
+      Error in `FUN()`:
+      ! Error: Logical index length does not match the number of edges. Recycling is not allowed.
+

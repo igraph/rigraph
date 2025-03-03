@@ -676,7 +676,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       if (is.null(ii)) {
         return(NULL)
       }
-      if (is.logical(ii) && length(ii) != length(x)) {
+      if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
         cli::cli_abort("Error: Logical index length does not match the number of vertices. Recycling is not allowed.")
       }
 
@@ -995,7 +995,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       if (is.null(ii)) {
         return(NULL)
       }
-      if (is.logical(ii) && length(ii) != length(x)) {
+      if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
+        print(ii)
+        print(length(ii))
+        print(length(x))
         cli::cli_abort("Error: Logical index length does not match the number of edges. Recycling is not allowed.")
       }
 
