@@ -676,6 +676,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       if (is.null(ii)) {
         return(NULL)
       }
+      if (is.logical(ii) && length(ii) != length(x)) {
+        cli::cli_abort("Error: Logical index length does not match the number of vertices. Recycling is not allowed.")
+      }
+
       ii <- simple_vs_index(x, ii, na_ok)
       attr(ii, "env") <- attr(x, "env")
       attr(ii, "graph") <- attr(x, "graph")
@@ -991,6 +995,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       if (is.null(ii)) {
         return(NULL)
       }
+      if (is.logical(ii) && length(ii) != length(x)) {
+        cli::cli_abort("Error: Logical index length does not match the number of edges. Recycling is not allowed.")
+      }
+
       ii <- simple_es_index(x, ii)
       attr(ii, "env") <- attr(x, "env")
       attr(ii, "graph") <- attr(x, "graph")
