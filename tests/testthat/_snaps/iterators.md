@@ -104,10 +104,6 @@
 
     Code
       E(g)[c(TRUE, FALSE)]
-    Output
-      [1]  TRUE FALSE
-      [1] 2
-      [1] 5
     Condition
       Error in `FUN()`:
       ! Error: Logical index length does not match the number of edges. Recycling is not allowed.
