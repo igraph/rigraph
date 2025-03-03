@@ -996,9 +996,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         return(NULL)
       }
       if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
-        print(ii)
-        print(length(ii))
-        print(length(x))
         cli::cli_abort("Error: Logical index length does not match the number of edges. Recycling is not allowed.")
       }
 
