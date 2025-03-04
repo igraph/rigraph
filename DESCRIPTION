@@ -18,7 +18,7 @@ Authors@R: c(
     person("Michael", "Antonov", role = "ctb"),
     person("Chan Zuckerberg Initiative", role = "fnd",
            comment = c(ROR = "02qenvm24")),
-    person("David", "Schoch", role = "aut",
+    person("David", "Schoch", , "david.schoch@cynkra.com", role = "aut",
            comment = c(ORCID = "0000-0003-2952-4812")),
     person("Maëlle", "Salmon", , "maelle@cynkra.com", role = "aut",
            comment = c(ORCID = "0000-0002-2815-0399"))
@@ -67,7 +67,8 @@ LinkingTo:
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
     knitr
-Config/Needs/build: roxygen2, devtools, irlba, pkgconfig, igraph/igraph.r2cdocs, moodymudskipper/devtag
+Config/Needs/build: roxygen2, devtools, irlba, pkgconfig,
+    igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
 Config/Needs/website: readr
 Config/testthat/edition: 3
@@ -75,6 +76,8 @@ Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace", "igraph.r2cdocs::cdocs_roclet", "devtag::dev_roclet"), packages = "igraph.r2cdocs")
+Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace",
+    "igraph.r2cdocs::cdocs_roclet", "devtag::dev_roclet"), packages =
+    "igraph.r2cdocs")
 RoxygenNote: 7.3.2.9000
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)
