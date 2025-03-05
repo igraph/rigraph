@@ -626,7 +626,10 @@ graph_from_graphdb <- function(
       cli::cli_abort("{prefix} is not a valid prefix. Must be one of {prefixes}.")
     }
     if (!type %in% types) {
-      cli::cli_abort("{type} is not a valid graph type. Must be one of {types}.")
+      cli::cli_abort(c(
+      "{type} is not a valid graph type.",
+      i = "Must be one of {types}."
+    ))
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(
