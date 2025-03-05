@@ -45,5 +45,6 @@
       g <- graph_from_graphdb(nodes = 10, type = "not_existing")
     Condition
       Error in `graph_from_graphdb()`:
-      ! not_existing is not a valid graph type. Must be one of r001, r005, r01, r02, m2D, m2Dr2, m2Dr4, m2Dr6, m3D, m3Dr2, m3Dr4, m3Dr6, m4D, m4Dr2, m4Dr4, m4Dr6, b03, b03m, ..., b09, and b09m.
+      ! not_existing is not a valid graph type.
+      i Must be one of r001, r005, r01, r02, m2D, m2Dr2, m2Dr4, m2Dr6, m3D, m3Dr2, m3Dr4, m3Dr6, m4D, m4Dr2, m4Dr4, m4Dr6, b03, b03m, ..., b09, and b09m.
 
