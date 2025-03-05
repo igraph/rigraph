@@ -548,7 +548,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' Load a graph from the graph database for testing graph isomorphism.
 #'
 #' This function downloads a graph from a database created for the evaluation
-#' of graph isomorphism testing algothitms.
+#' of graph isomorphism testing algorithms.
 #'
 #' `graph_from_graphdb()` reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
