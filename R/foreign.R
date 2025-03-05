@@ -599,7 +599,7 @@ write.graph.dot <- function(graph, file, ...) {
 graph_from_graphdb <- function(
     url = NULL,
     prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
-    base = "https://github.com/schochastics/graphsdb/raw/refs/heads/main",
+    base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
     compressed = TRUE, directed = TRUE) {
   if (is.null(nodes) && is.null(url)) {
     cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
@@ -627,9 +627,9 @@ graph_from_graphdb <- function(
     }
     if (!type %in% types) {
       cli::cli_abort(c(
-      "{type} is not a valid graph type.",
-      i = "Must be one of {types}."
-    ))
+        "{type} is not a valid graph type.",
+        i = "Must be one of {types}."
+      ))
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(
