@@ -2158,7 +2158,7 @@ bfs <- function(
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.1.5", "bfs(father = )", "bfs(parent = )")
+    lifecycle::deprecate_warn("2.2.0", "bfs(father = )", "bfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
