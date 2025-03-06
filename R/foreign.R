@@ -629,12 +629,15 @@ graph_from_graphdb <- function(
     typegroup <- typegroups[which(types == type)]
 
     if (!prefix %in% prefixes) {
-      cli::cli_abort("{prefix} is not a valid prefix. Must be one of {prefixes}.")
+      cli::cli_abort(c(
+        "{.value {prefix}} is not a valid prefix.",
+        i = "Must be one of {.value {prefixes}}."
+      ))
     }
     if (!type %in% types) {
       cli::cli_abort(c(
-        "{type} is not a valid graph type.",
-        i = "Must be one of {types}."
+        "{.value {type}} is not a valid graph type.",
+        i = "Must be one of {.value {types}}."
       ))
     }
     suff <- if (compressed) ".gz" else ""
@@ -651,7 +654,7 @@ graph_from_graphdb <- function(
 
   f <- try(gzcon(file(filename, open = "rb")))
   if (inherits(f, "try-error")) {
-    cli::cli_abort("Cannot open URL:{.arg filename}")
+    cli::cli_abort("Cannot open URL provided in {.arg filename}: {.url {filename}}")
   }
 
   buffer <- read.graph.toraw(f)
