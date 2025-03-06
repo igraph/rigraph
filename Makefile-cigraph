@@ -25,8 +25,8 @@ version_number: force
 
 PARSER := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
 	    grep -E '\.(l|y)$$')
-PARSER1 := $(patsubst src/%.l, src/%.c, $(PARSER))
-PARSER2 := $(patsubst src/%.y, src/%.c, $(PARSER1))
+PARSER1 := $(patsubst src/%.l, src/vendor/%.c, $(PARSER))
+PARSER2 := $(patsubst src/%.y, src/vendor/%.c, $(PARSER1))
 
 YACC=$(DOCKER) bison -b yy -d
 LEX=$(DOCKER) flex
@@ -50,7 +50,7 @@ $(PYVENV)/stamp: tools/build-requirements.txt
 
 # Apply possible patches
 
-patches: $(CORESRC) $(VENDORSRC) $(CINC) $(PARSER2)
+patches: $(PARSER2)
 	-rm -f src/*.orig
 	tools/fix-lexers.sh
 
@@ -142,7 +142,7 @@ R/aaa-auto.R: \
 # Makevars.in, Makevars.win and Makevars.ucrt are only regenerated if
 # the list of object files changes.
 
-OBJECTS := $(shell echo $(CORESRC) $(VENDORSRC) $(ARPACK) $(RAY) $(UUID) | \
+OBJECTS := $(shell echo $(ARPACK) $(RAY) $(UUID) | \
 		tr ' ' '\n' | \
         grep -E '\.(c|cpp|cc|f|l|y)$$' | \
 		sed 's/\.[^\.][^\.]*$$/.o/' | \
