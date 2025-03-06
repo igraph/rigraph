@@ -8657,7 +8657,19 @@ SEXP R_igraph_add_env(SEXP graph) {
     SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
   }
 
-  SEXP env = Rf_allocSExp(ENVSXP);
+  // Get the base namespace
+  SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
+  // Get the new.environment function
+  SEXP new_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("new.environment"))); px++;
+  // Get the emptyenv function
+  SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
+  // Call emptyenv()
+  SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
+  // Create environment with parent = emptyenv()
+  SEXP call = PROTECT(Rf_lang3(new_env_fun, Rf_install("parent"), empty_env)); px++;
+  // Evaluate the call
+  SEXP env = PROTECT(Rf_eval(call, R_GlobalEnv)); px++;
+
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
   uuid_generate(my_id);
