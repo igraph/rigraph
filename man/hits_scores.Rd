@@ -89,5 +89,5 @@ Centrality measures
 \code{\link{subgraph_centrality}()}
 }
 \concept{centrality}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{igraph_hub_and_authority_scores()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{hub_and_authority_scores()}}.}
 

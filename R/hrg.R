@@ -1,4 +1,3 @@
-
 #' Predict edges based on a hierarchical random graph model
 #'
 #' @description
@@ -288,6 +287,11 @@ hrg <- hrg_create_impl
 #' @export
 #' @cdocs igraph_from_hrg_dendrogram
 hrg_tree <- function(hrg) {
+
+  if (!inherits(hrg, "igraphHRG")) {
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+  }
+
   out <- from_hrg_dendrogram_impl(hrg)
 
   g <- out$graph
@@ -306,8 +310,14 @@ hrg_tree <- function(hrg) {
 #' @family hierarchical random graph functions
 #' @export
 #' @cdocs igraph_hrg_game
-sample_hrg <- hrg_game_impl
+sample_hrg <- function(hrg) {
 
+  if (!inherits(hrg, "igraphHRG")) {
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+  }
+
+  hrg_game_impl(hrg)
+}
 #' Predict edges based on a hierarchical random graph model
 #'
 #' `predict_edges()` uses a hierarchical random graph model to predict
@@ -1015,4 +1025,3 @@ B-6  p=1  B-2 7
 B-7  p=1  B-5 2
 
 "
-

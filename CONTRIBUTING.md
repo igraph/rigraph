@@ -154,6 +154,16 @@ pak::pak("igraph/igraph.r2cdocs")
 [roxygen2](https://roxygen2.r-lib.org/), and run `devtools::document()` or `make
 igraph` to update the `.Rd` files.
 
+- Links to C docs are added using the cdocs tag, for instance:
+
+```
+#' @cdocs igraph_assortativity
+```
+
+### Maintaining igraph.r2cdocs
+
+To update the data (when the C docs index has changed after a release) in https://github.com/igraph/igraph.r2cdocs/, run the script that is `data-raw`, commit the csv file and push.
+
 ### Test Cases
 
 Unless you change something trivial, please consider adding test cases.  This is

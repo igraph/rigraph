@@ -36,17 +36,22 @@ test_that("`authority_score()` works", {
   }
 
   g1 <- make_graph(
-    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
-      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
-    directed = TRUE)
+    c(
+      1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7
+    ),
+    directed = TRUE
+  )
   A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- authority_score(g1)$vector
   expect_equal(
     s2,
-    c(0.519632767970952, 0.0191587307007462, 0.327572049088003,
+    c(
+      0.519632767970952, 0.0191587307007462, 0.327572049088003,
       0.238728053455971, 0.449690304629051, 1, 0.0966933781044594,
-      0.204851318050036, 0.0191587307007462, 0.653243552177761)
+      0.204851318050036, 0.0191587307007462, 0.653243552177761
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -59,8 +64,10 @@ test_that("`authority_score()` works", {
   s2 <- authority_score(g2)$vector
   expect_equal(
     s2,
-    c(0.763521118433368, 1, 0.546200349457202,
-      0.918985947228995, 0.28462967654657)
+    c(
+      0.763521118433368, 1, 0.546200349457202,
+      0.918985947228995, 0.28462967654657
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -85,17 +92,22 @@ test_that("`hub_score()` works", {
   }
 
   g1 <- make_graph(
-    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
-      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
-    directed = TRUE)
+    c(
+      1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7
+    ),
+    directed = TRUE
+  )
   A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hub_score(g1)$vector
   expect_equal(
     s2,
-    c(0.755296579522977, 0.198139015063149, 0.198139015063149,
+    c(
+      0.755296579522977, 0.198139015063149, 0.198139015063149,
       0.0514804231207635, 0.550445261472941, 0.124905139108053,
-      1, 0.0910284037021176, 0.381305851509012, 0.208339295395331)
+      1, 0.0910284037021176, 0.381305851509012, 0.208339295395331
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -108,8 +120,10 @@ test_that("`hub_score()` works", {
   s2 <- hub_score(g2)$vector
   expect_equal(
     s2,
-    c(1, 0.763521118433368, 0.546200349457203,
-      0.28462967654657, 0.918985947228995)
+    c(
+      1, 0.763521118433368, 0.546200349457203,
+      0.28462967654657, 0.918985947228995
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -166,17 +180,22 @@ test_that("`hits_score()` works -- authority", {
   }
 
   g1 <- make_graph(
-    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
-      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
-    directed = TRUE)
+    c(
+      1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7
+    ),
+    directed = TRUE
+  )
   A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(t(A) %*% A)$vectors[, 1]
   s2 <- hits_scores(g1)$authority
   expect_equal(
     s2,
-    c(0.519632767970952, 0.0191587307007462, 0.327572049088003,
+    c(
+      0.519632767970952, 0.0191587307007462, 0.327572049088003,
       0.238728053455971, 0.449690304629051, 1, 0.0966933781044594,
-      0.204851318050036, 0.0191587307007462, 0.653243552177761)
+      0.204851318050036, 0.0191587307007462, 0.653243552177761
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -189,11 +208,12 @@ test_that("`hits_score()` works -- authority", {
   s2 <- hits_scores(g2)$authority
   expect_equal(
     s2,
-    c(0.763521118433368, 1, 0.546200349457202,
-      0.918985947228995, 0.28462967654657)
+    c(
+      0.763521118433368, 1, 0.546200349457202,
+      0.918985947228995, 0.28462967654657
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
-
 })
 
 test_that("`hits_scores()` works -- hub", {
@@ -208,17 +228,22 @@ test_that("`hits_scores()` works -- hub", {
   }
 
   g1 <- make_graph(
-    c(1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
-      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7),
-    directed = TRUE)
+    c(
+      1, 3, 1, 6, 1, 10, 2, 1, 3, 1, 4, 2, 4, 7, 4, 9, 5, 4, 5, 6, 5, 8, 6, 3,
+      7, 1, 7, 5, 7, 6, 7, 10, 8, 4, 9, 6, 10, 5, 10, 7
+    ),
+    directed = TRUE
+  )
   A <- as_adjacency_matrix(g1, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
   s2 <- hits_scores(g1)$hub
   expect_equal(
     s2,
-    c(0.755296579522977, 0.198139015063149, 0.198139015063149,
+    c(
+      0.755296579522977, 0.198139015063149, 0.198139015063149,
       0.0514804231207635, 0.550445261472941, 0.124905139108053,
-      1, 0.0910284037021176, 0.381305851509012, 0.208339295395331)
+      1, 0.0910284037021176, 0.381305851509012, 0.208339295395331
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
 
@@ -228,14 +253,15 @@ test_that("`hits_scores()` works -- hub", {
   )
   A <- as_adjacency_matrix(g2, sparse = FALSE)
   s1 <- eigen(A %*% t(A))$vectors[, 1]
-  s2 <-  hits_scores(g2)$hub
+  s2 <- hits_scores(g2)$hub
   expect_equal(
     s2,
-    c(1, 0.763521118433368, 0.546200349457203,
-      0.28462967654657, 0.918985947228995)
+    c(
+      1, 0.763521118433368, 0.546200349457203,
+      0.28462967654657, 0.918985947228995
+    )
   )
   expect_equal(mscale(s1), mscale(s2), ignore_attr = TRUE)
-
 })
 
 test_that("betweenness() works for kite graph", {
@@ -289,7 +315,7 @@ test_that("weighted betweenness() works", {
 })
 
 test_that("betweenness()'s normalization works well", {
-  g1 <- graph_from_literal(0 + -+1 + -+2)
+  g1 <- graph_from_literal(0 +-+ 1 +-+ 2)
 
   b11 <- betweenness(g1, normalized = TRUE, directed = FALSE)
   expect_equal(b11, c("0" = 0, "1" = 1, "2" = 0))
@@ -297,7 +323,7 @@ test_that("betweenness()'s normalization works well", {
   b12 <- betweenness(g1, normalized = TRUE, directed = TRUE)
   expect_equal(b12, c("0" = 0, "1" = 1, "2" = 0))
 
-  g2 <- graph_from_literal(0 - --1 - --2)
+  g2 <- graph_from_literal(0 --- 1 --- 2)
 
   b2 <- betweenness(g2, normalized = TRUE)
   expect_equal(b2, c("0" = 0, "1" = 1, "2" = 0))
@@ -414,7 +440,7 @@ test_that("closeness() centralization works", {
 
 test_that("power_centrality() works", {
   ## Generate some test data from Bonacich, 1987:
-  fig1 <- graph_from_literal(A - +B - +C:D)
+  fig1 <- graph_from_literal(A -+ B -+ C:D)
   fig1.bp <- lapply(seq(0, 0.8, by = 0.2), function(x) {
     round(power_centrality(fig1, exponent = x), 2)
   })

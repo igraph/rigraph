@@ -1,4 +1,3 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description
@@ -168,7 +167,7 @@ is_dag <- is_dag_impl
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 #' is_acyclic(g)
 #' is_acyclic(as_undirected(g))
 #' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
@@ -260,7 +259,7 @@ max_cardinality <- maximum_cardinality_search_impl
 #' @export
 #' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
-    if (...length() > 0) {
+  if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
       "eccentricity(... =)",

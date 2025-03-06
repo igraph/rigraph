@@ -1,4 +1,3 @@
-
 #' Create a printer callback function
 #'
 #' A printer callback function is a function can performs the actual

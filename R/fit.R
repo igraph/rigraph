@@ -1,4 +1,3 @@
-
 #' Fitting a power-law distribution function to discrete data
 #'
 #' @description
@@ -155,15 +154,14 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #' stats4::logLik(fit2)
 #'
 fit_power_law <- function(
-  x,
-  xmin = NULL,
-  start = 2,
-  force.continuous = FALSE,
-  implementation = c("plfit", "R.mle"),
-  p.value = FALSE,
-  p.precision = NULL,
-  ...
-) {
+    x,
+    xmin = NULL,
+    start = 2,
+    force.continuous = FALSE,
+    implementation = c("plfit", "R.mle"),
+    p.value = FALSE,
+    p.precision = NULL,
+    ...) {
   implementation <- igraph.match.arg(implementation)
 
   if (implementation == "r.mle") {

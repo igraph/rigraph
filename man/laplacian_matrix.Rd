@@ -61,7 +61,7 @@ The Laplacian matrix \eqn{L} is defined in terms of the adjacency matrix
 \item "symmetric": Symmetrically normalized Laplacian,
 \eqn{L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}}{L = I - D^(-1/2) A D^(-1/2)}.
 \item "left": Left-stochastic normalized Laplacian, \eqn{{L = I - D^{-1} A}}{L = I - D^-1 A}.
-\item "rigth": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
+\item "right": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
 }
 }
 
@@ -77,5 +77,5 @@ laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian_sparse}{\code{igraph_get_laplacian_sparse()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian}{\code{igraph_get_laplacian()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian}{\code{get_laplacian()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian_sparse}{\code{get_laplacian_sparse()}}.}
 

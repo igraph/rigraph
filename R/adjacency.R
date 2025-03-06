@@ -375,8 +375,8 @@ mysummary <- function(x) {
   result
 }
 
-pmax_AB <- function(A,B) {
-  change <- A < B  
+pmax_AB <- function(A, B) {
+  change <- A < B
   A[change] <- B[change]
   A
 }

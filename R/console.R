@@ -1,4 +1,3 @@
-
 #' The igraph console
 #'
 #' @description

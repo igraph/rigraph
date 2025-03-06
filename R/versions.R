@@ -1,4 +1,3 @@
-
 ## ----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -24,11 +23,11 @@
 
 
 # format versions
-ver_0_1_1 <- 0L   # 0.1.1
-ver_0_4 <- 1L     # 0.4
+ver_0_1_1 <- 0L # 0.1.1
+ver_0_4 <- 1L # 0.4
 ver_0_7_999 <- 2L # 0.7.999
-ver_0_8 <- 3L     # 0.8
-ver_1_5_0 <- 4L   # 1.5.0
+ver_0_8 <- 3L # 0.8
+ver_1_5_0 <- 4L # 1.5.0
 pkg_graph_version <- ver_1_5_0
 
 #' igraph data structure versions

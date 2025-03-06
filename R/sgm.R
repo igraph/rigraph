@@ -1,4 +1,3 @@
-
 solve_LSAP <- function(x, maximum = FALSE) {
   if (!is.matrix(x) || any(x < 0)) {
     stop("x must be a matrix with nonnegative entries.")

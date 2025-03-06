@@ -321,7 +321,7 @@ g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
 
-Si quieres guardar un grafo en R con todos los atributos utiliza la función estándar de R `dput` y recupéralo más tarde con `dget`. También puedes simplemente guardar el espacio de trabajo de R y restaurarlo más tarde.
+Si quieres guardar un grafo en R con todos los atributos utiliza la función `saveRDS()` (y `readRDS()` para recuperarlo más tarde).
 
 ## Propiedades estructurales de los grafos
 

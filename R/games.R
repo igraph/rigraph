@@ -1877,9 +1877,10 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' ), nrow = 3)
 #' g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 #' g
-#' if (require(Matrix)) {
-#'   image(g[])
-#' }
+#'
+#' @examplesIf rlang::is_installed("Matrix")
+#' library("Matrix")
+#' image(g[])
 #' @family games
 #' @export
 #' @cdocs igraph_hsbm_game

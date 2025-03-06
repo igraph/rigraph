@@ -1,4 +1,3 @@
-
 #' Triad census, subgraphs with three vertices
 #'
 #' @description
@@ -224,12 +223,11 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 sample_motifs <- function(
-  graph,
-  size = 3,
-  cut.prob = rep(0, size),
-  sample.size = NULL,
-  sample = NULL
-) {
+    graph,
+    size = 3,
+    cut.prob = rep(0, size),
+    sample.size = NULL,
+    sample = NULL) {
   ensure_igraph(graph)
 
   if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
@@ -243,7 +241,7 @@ sample_motifs <- function(
 
   if (is.null(sample)) {
     if (is.null(sample.size)) {
-       sample.size <- ceiling(vcount(graph) / 10)
+      sample.size <- ceiling(vcount(graph) / 10)
     }
   } else {
     sample <- as_igraph_vs(graph, sample) - 1

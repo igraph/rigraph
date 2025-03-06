@@ -1,4 +1,3 @@
-
 #' Various vertex shapes when plotting igraph graphs
 #'
 #' @description
@@ -358,7 +357,6 @@ shape_noplot <- function(coords, v = NULL, params) {
 add_shape <- function(shape, clip = shape_noclip,
                       plot = shape_noplot,
                       parameters = list()) {
-
   if (!is.character(shape) || length(shape) != 1) {
     cli::cli_abort(c(
       "{.arg shape} must be a character of length 1.",
