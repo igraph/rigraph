@@ -8657,7 +8657,8 @@ SEXP R_igraph_add_env(SEXP graph) {
     SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
   }
 
-  SET_VECTOR_ELT(result, igraph_t_idx_env, Rf_allocSExp(ENVSXP));
+  SEXP env = Rf_allocSExp(ENVSXP);
+  SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
