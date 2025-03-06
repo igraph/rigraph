@@ -62,18 +62,20 @@ root vertex and spread along every edge “simultaneously”.</p>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">root</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  unreachable <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  restricted <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  order <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  rank <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  father <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  parent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pred <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  succ <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  dist <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  callback <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  extra <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  neimode <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
+<span>  neimode <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  father <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -97,6 +99,10 @@ ignores edge directions completely. ‘total’ is a synonym for
 ‘all’. This argument is ignored for undirected graphs.</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt id="arg-unreachable">unreachable<a class="anchor" aria-label="anchor" href="#arg-unreachable"></a></dt>
 <dd><p>Logical scalar, whether the search should visit the
 vertices that are unreachable from the given root vertex (or vertices). If
@@ -118,8 +124,8 @@ given vertices.</p></dd>
 <dd><p>Logical scalar, whether to return the rank of the vertices.</p></dd>
 
 
-<dt id="arg-father">father<a class="anchor" aria-label="anchor" href="#arg-father"></a></dt>
-<dd><p>Logical scalar, whether to return the father of the vertices.</p></dd>
+<dt id="arg-parent">parent<a class="anchor" aria-label="anchor" href="#arg-parent"></a></dt>
+<dd><p>Logical scalar, whether to return the parent of the vertices.</p></dd>
 
 
 <dt id="arg-pred">pred<a class="anchor" aria-label="anchor" href="#arg-pred"></a></dt>
@@ -154,6 +160,10 @@ is called whenever a vertex is visited. See details below.</p></dd>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is deprecated
 from igraph 1.3.0; use <code>mode</code> instead.</p></dd>
 
+
+<dt id="arg-father">father<a class="anchor" aria-label="anchor" href="#arg-father"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use <code>parent</code> instead.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -174,9 +184,12 @@ vertex ids, in the order in which they were visited by the search.</p></dd>
 <dt>rank</dt>
 <dd><p>Numeric vector. The rank for each vertex, zero for unreachable vertices.</p></dd>
 
-<dt>father</dt>
+<dt>parent</dt>
 <dd><p>Numeric
-vector. The father of each vertex, i.e. the vertex it was discovered from.</p></dd>
+vector. The parent of each vertex, i.e. the vertex it was discovered from.</p></dd>
+
+<dt>father</dt>
+<dd><p>Like parent, kept for compatibility for now.</p></dd>
 
 <dt>pred</dt>
 <dd><p>Numeric vector. The previously visited vertex for each vertex,
@@ -193,7 +206,7 @@ root of the search tree. Unreachable vertices have a negative distance
 as of igraph 1.6.0, this used to be <code>NaN</code>.</p></dd>
 
 
-</dl><p>Note that <code>order</code>, <code>rank</code>, <code>father</code>, <code>pred</code>, <code>succ</code>
+</dl><p>Note that <code>order</code>, <code>rank</code>, <code>parent</code>, <code>pred</code>, <code>succ</code>
 and <code>dist</code> might be <code>NULL</code> if their corresponding argument is
 <code>FALSE</code>, i.e. if their calculation is not requested.</p>
     </div>
@@ -258,7 +271,7 @@ use the callback function.</p>
 <span class="r-in"><span><span class="co">## Two rings</span></span></span>
 <span class="r-in"><span><span class="fu">bfs</span><span class="op">(</span><span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="disjoint_union.html">%du%</a></span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  root <span class="op">=</span> <span class="fl">1</span>, <span class="st">"out"</span>,</span></span>
-<span class="r-in"><span>  order <span class="op">=</span> <span class="cn">TRUE</span>, rank <span class="op">=</span> <span class="cn">TRUE</span>, father <span class="op">=</span> <span class="cn">TRUE</span>, pred <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  order <span class="op">=</span> <span class="cn">TRUE</span>, rank <span class="op">=</span> <span class="cn">TRUE</span>, parent <span class="op">=</span> <span class="cn">TRUE</span>, pred <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  succ <span class="op">=</span> <span class="cn">TRUE</span>, dist <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $root</span>
@@ -268,22 +281,22 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 07640b8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 2c31f67:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 07640b8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 2c31f67:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $pred</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 07640b8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 2c31f67:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $succ</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 07640b8:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 2c31f67:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -291,6 +304,10 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $neimode</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 2c31f67:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## How to use a callback</span></span></span>
@@ -356,13 +373,13 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 1a5456f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 96c846c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $pred</span>
@@ -385,7 +402,7 @@ use the callback function.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative.</p>
+  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, David Schoch, Maëlle Salmon.</p>
 </div>
 
 <div class="pkgdown-footer-right">
