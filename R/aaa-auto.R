@@ -1231,6 +1231,28 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   res
 }
 
+feedback_vertex_set_impl <- function(graph, weights=NULL, algo=c("exact_ip")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  algo <- switch(igraph.match.arg(algo), "exact_ip"=0L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_feedback_vertex_set, graph, weights, algo)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
