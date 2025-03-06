@@ -1,4 +1,3 @@
-
 #' Independent vertex sets
 #'
 #' @description

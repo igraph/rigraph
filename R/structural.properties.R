@@ -1,4 +1,3 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description
@@ -2600,7 +2599,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' - "symmetric": Symmetrically normalized Laplacian,
 #' \eqn{L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}}{L = I - D^(-1/2) A D^(-1/2)}.
 #' - "left": Left-stochastic normalized Laplacian, \eqn{{L = I - D^{-1} A}}{L = I - D^-1 A}.
-#' - "rigth": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
+#' - "right": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
 #'
 #' @examples
 #'
@@ -2609,8 +2608,8 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' laplacian_matrix(g, normalization = "unnormalized")
 #' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
-#' @cdocs igraph_get_laplacian_sparse
 #' @cdocs igraph_get_laplacian
+#' @cdocs igraph_get_laplacian_sparse
 laplacian_matrix <- function(graph, weights = NULL,
                              sparse = igraph_opt("sparsematrices"), normalization = c("unnormalized", "symmetric", "left", "right"), normalized) {
   # Argument checks

@@ -30,10 +30,10 @@ arguments.
 
 g <- make_lattice(c(5, 5, 5))
 coords <- layout_with_fr(g, dim = 3)
-if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
-  rglplot(g, layout = coords)
-}
 
+\dontshow{if (interactive() && rlang::is_installed("rgl")) withAutoprint(\{ # examplesIf}
+rglplot(g, layout = coords)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \link{igraph.plotting}, \code{\link[=plot.igraph]{plot.igraph()}} for the 2D

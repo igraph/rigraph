@@ -302,7 +302,7 @@ test_that("graph_from_adjacency_matrix() works", {
 })
 
 test_that("graph_from_adjacency_matrix() works -- dgCMatrix", {
-  skip_if_not_installed("Matrix",minimum_version = "1.6.0")
+  skip_if_not_installed("Matrix", minimum_version = "1.6.0")
 
   M1 <- rbind(
     c(0, 0, 1, 1),
@@ -658,59 +658,57 @@ test_that("weighted graph_from_adjacency_matrix() works on integer matrices", {
   expect_equal(as.matrix(g[]), data)
 })
 
-test_that("sparse/dense matrices no loops works",{
+test_that("sparse/dense matrices no loops works", {
   skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   A <- diag(1, 5)
   A[1, 2] <- 1
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
-  expect_equal(ecount(g), 1)
+  expect_ecount(g, 1)
   expect_equal(get_edge_ids(g, c(1, 2)), 1)
-  
+
   A <- as(A, "dgCMatrix")
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
-  expect_equal(ecount(g), 1)
-  expect_equal(get_edge_ids(g,c(1, 2)), 1)
+  expect_ecount(g, 1)
+  expect_equal(get_edge_ids(g, c(1, 2)), 1)
 
 })
 
-test_that("sparse/dense matrices multiple works",{
+test_that("sparse/dense matrices multiple works", {
   skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   A <- matrix(0, 5, 5)
   A[1, 2] <- 3
   g <- graph_from_adjacency_matrix(A, diag = FALSE, weighted = FALSE)
-  expect_equal(ecount(g), 3)
+  expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
-  
+
   A <- as(A,"dgCMatrix")
-  g <- graph_from_adjacency_matrix(A,diag = FALSE)
-  expect_equal(ecount(g), 3)
+  g <- graph_from_adjacency_matrix(A, diag = FALSE)
+  expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
-  
+
 })
 
-test_that("sparse/dense matrices min/max/plus",{
+test_that("sparse/dense matrices min/max/plus", {
   skip_if_not_installed("Matrix", minimum_version = "1.6.0")
   A <- matrix(0, 5, 5)
   A[1, 2] <- 3
   A[2, 1] <- 2
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "max", weighted = TRUE)
   expect_equal(E(g)$weight[1], 3)
-  
+
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "min", weighted = TRUE)
   expect_equal(E(g)$weight[1], 2)
 
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "plus", weighted = TRUE)
   expect_equal(E(g)$weight[1], 5)
 
-  A <- as(A,"dgCMatrix")
+  A <- as(A, "dgCMatrix")
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "max", weighted = TRUE)
   expect_equal(E(g)$weight[1], 3)
-  
+
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "min", weighted = TRUE)
   expect_equal(E(g)$weight[1], 2)
 
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "plus", weighted = TRUE)
   expect_equal(E(g)$weight[1], 5)
-  
-  
 })

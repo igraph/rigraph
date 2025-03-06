@@ -1,5 +1,132 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9019
+
+## Testing
+
+- Added tests for untested files (@schochastics, #1728).
+
+- Merged and refactored other.R tests (@schochastics, #1727).
+
+- Merged and refactored structural.properties.R tests (@schochastics, #1726).
+
+
+# igraph 2.1.4.9018
+
+## Bug fixes
+
+- Use function instead of (x) in arrow.mode (@schochastics, #1722).
+
+## Documentation
+
+- Lifecycle table (#1525).
+
+## Refactoring
+
+- One less tmp use case (#1715).
+
+## Testing
+
+- Merged and refactored orphaned test files (@schochastics, #1724).
+
+- Merged and refactored iterators.R and operators.R tests (@schochastics, #1723).
+
+- Merged and refactored topology.R tests (@schochastics, #1720).
+
+- Merged and refactored embedding.R tests (@schochastics, #1721).
+
+- Merge all tests for foreign.R into one test file (#1713).
+
+
+# igraph 2.1.4.9017
+
+## Features
+
+- Added proper support for adding attributes via data.frames (@schochastics, #1373, #1669, #1716).
+
+
+# igraph 2.1.4.9016
+
+## doc
+
+- Fix typos in `laplacian_matrix` documentation.
+
+
+# igraph 2.1.4.9015
+
+## Chore
+
+- Run `devtools::document()` (#1710).
+
+
+# igraph 2.1.4.9014
+
+## Bug fixes
+
+- Duplicated arrowhead drawing (@schochastics, #640, #1709).
+
+- Correct mapping of edge label properties in plots when loops are present (@schochastics, #157, #1706).
+
+- NA attribute values are replaced with default values for plotting (@schochastics, #293, #1707).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@10ef19bc2a61de6c6cfe76e5a068f82b1d29fff1 (#1694).
+
+
+# igraph 2.1.4.9013
+
+## Features
+
+- Hrg functions check their argument (#1074, #1699).
+
+## Documentation
+
+- Replace instances of `#' if` with `#' @examplesIf` (#1134, #1698).
+
+- Update graph saving rec (#1242, #1700).
+
+## Testing
+
+- Improve test-dot.product.game (#1396, #1705).
+
+
+# igraph 2.1.4.9012
+
+## Chore
+
+- Run {styler} (with {igraph.style}) (#1696).
+
+## Documentation
+
+- Add more about igraph.r2cdocs in the contributing guide (#1686, #1697).
+
+## Testing
+
+- Merged and refactored conversion.R tests (@schochastics, #1701).
+
+- Create helpers (#1691, #1695).
+
+- Merged and refactored make.R tests (@schochastics, #1685).
+
+- Merged and refactored community.R tests (@schochastics, #1689).
+
+- Merged and refactored indexing.R tests (@schochastics, #1687).
+
+
+# igraph 2.1.4.9011
+
+## Testing
+
+- Merged and refactored flow.R tests (@schochastics, #1675).
+
+- Merged and refactored games.R tests (@schochastics, #1682).
+
+## Uncategorized
+
+- Refactor: consolidate graph.incidence.\* (#1483) (#1654).
+
+
 # igraph 2.1.4.9010
 
 ## vendor

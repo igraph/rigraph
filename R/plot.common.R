@@ -378,7 +378,6 @@
 #' [rglplot()], [igraph_options()]
 #' @keywords graphs
 #' @examples
-#'
 #' \dontrun{
 #'
 #' # plotting a simple ring graph, all default parameters, except the layout
@@ -390,30 +389,34 @@
 #'
 #' # plotting a random graph, set the parameters in the command arguments
 #' g <- barabasi.game(100)
-#' plot(g, layout=layout_with_fr, vertex.size=4,
-#'      vertex.label.dist=0.5, vertex.color="red", edge.arrow.size=0.5)
+#' plot(g,
+#'   layout = layout_with_fr, vertex.size = 4,
+#'   vertex.label.dist = 0.5, vertex.color = "red", edge.arrow.size = 0.5
+#' )
 #'
 #' # plot a random graph, different color for each component
-#' g <- sample_gnp(100, 1/100)
+#' g <- sample_gnp(100, 1 / 100)
 #' comps <- components(g)$membership
-#' colbar <- rainbow(max(comps)+1)
-#' V(g)$color <- colbar[comps+1]
-#' plot(g, layout=layout_with_fr, vertex.size=5, vertex.label=NA)
+#' colbar <- rainbow(max(comps) + 1)
+#' V(g)$color <- colbar[comps + 1]
+#' plot(g, layout = layout_with_fr, vertex.size = 5, vertex.label = NA)
 #'
 #' # plot communities in a graph
 #' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
-#' g <- add_edges(g, c(1,6, 1,11, 6,11))
-#' com <- cluster_spinglass(g, spins=5)
-#' V(g)$color <- com$membership+1
+#' g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+#' com <- cluster_spinglass(g, spins = 5)
+#' V(g)$color <- com$membership + 1
 #' g <- set_graph_attr(g, "layout", layout_with_kk(g))
-#' plot(g, vertex.label.dist=1.5)
+#' plot(g, vertex.label.dist = 1.5)
 #'
 #' # draw a bunch of trees, fix layout
-#' igraph_options(plot.layout=layout_as_tree)
+#' igraph_options(plot.layout = layout_as_tree)
 #' plot(make_tree(20, 2))
-#' plot(make_tree(50, 3), vertex.size=3, vertex.label=NA)
-#' tkplot(make_tree(50, 2, mode="undirected"), vertex.size=10,
-#' vertex.color="green")
+#' plot(make_tree(50, 3), vertex.size = 3, vertex.label = NA)
+#' tkplot(make_tree(50, 2, mode = "undirected"),
+#'   vertex.size = 10,
+#'   vertex.color = "green"
+#' )
 #' }
 #' @name plot.common
 #' @rdname plot.common
@@ -499,13 +502,10 @@ i.parse.plot.params <- function(graph, params) {
       ## we don't have the parameter, check attributes first
       if (type == "vertex" && name %in% vertex_attr_names(graph)) {
         p[[type]][[name]] <- vertex_attr(graph, name)
-        return(ret())
       } else if (type == "edge" && name %in% edge_attr_names(graph)) {
         p[[type]][[name]] <- edge_attr(graph, name)
-        return(ret())
       } else if (type == "plot" && name %in% graph_attr_names(graph)) {
         p[[type]][[name]] <- graph_attr(graph, name)
-        return(ret())
       } else {
         ## no attributes either, check igraph parameters
         n <- paste(sep = "", type, ".", name)
@@ -519,6 +519,12 @@ i.parse.plot.params <- function(graph, params) {
         return(ret())
       }
     }
+    if (any(is.na(p[[type]][[name]]))) {
+      cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
+        }")
+      p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+    }
+    return(ret())
   }
 
   return(func)
@@ -550,11 +556,19 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
   }
 
   if (is.character(arrow.mode)) {
-    tmp <- numeric(length(arrow.mode))
-    tmp[arrow.mode %in% c("<", "<-")] <- 1
-    tmp[arrow.mode %in% c(">", "->")] <- 2
-    tmp[arrow.mode %in% c("<>", "<->")] <- 3
-    arrow.mode <- tmp
+    arrow.mode <- map_dbl(
+      arrow.mode,
+      function(x) {
+        switch(x,
+          "<"   = 1,
+          "<-"  = 1,
+          ">"   = 2,
+          "->"  = 2,
+          "<>"  = 3,
+          "<->" = 3
+        )
+      }
+    )
   }
 
   if (is.null(arrow.mode)) {
@@ -1437,12 +1451,14 @@ i.default.values[["plot"]] <- i.plot.default
 #' @examples
 #'
 #' g <- make_ring(10)
-#' values <- lapply(1:10, function(x) sample(1:10,3))
-#' if (interactive()) {
-#'   plot(g, vertex.shape="pie", vertex.pie=values,
-#'        vertex.pie.color=list(heat.colors(5)),
-#'        vertex.size=seq(10,30,length.out=10), vertex.label=NA)
-#' }
+#' values <- lapply(1:10, function(x) sample(1:10, 3))
+#'
+#' @examplesIf interactive()
+#' plot(g,
+#'   vertex.shape = "pie", vertex.pie = values,
+#'   vertex.pie.color = list(heat.colors(5)),
+#'   vertex.size = seq(10, 30, length.out = 10), vertex.label = NA
+#' )
 #' @rdname vertex.shape.pie
 #' @name vertex.shape.pie
 NULL

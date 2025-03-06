@@ -1,4 +1,3 @@
-
 #' Set vertex attributes
 #'
 #' @description
@@ -350,6 +349,9 @@ graph.attributes <- function(graph) {
 "graph.attributes<-" <- function(graph, value) {
   ensure_igraph(graph)
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
 }
@@ -391,7 +393,6 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   }
   index <- as_igraph_vs(graph, index)
   myattr[index]
-
 }
 
 #' Set one or more vertex attributes
@@ -489,12 +490,8 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     } else if (length(value) == length(index)) {
       value_in <- unname(value)
     } else {
-      stop(
-        "Length of new attribute value must be ",
-        if (length(index) != 1) "1 or ",
-        length(index),
-        ", the number of target vertices, not ",
-        length(value)
+      cli::cli_abort(
+        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target vertices, not {length(value)}."
       )
     }
 
@@ -520,8 +517,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   if (!missing(index)) {
     index_is_natural_sequence <- (length(index) == vcount(graph) &&
-        identical(index, seq(1, vcount(graph))))
-    if  (!index_is_natural_sequence) {
+      identical(index, seq(1, vcount(graph))))
+    if (!index_is_natural_sequence) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -543,16 +540,19 @@ set_value_at <- function(value, idx, length_out) {
   ensure_igraph(graph)
 
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   if (!all(lengths(value) == length(index))) {
-    stop("Invalid attribute value length, must match number of vertices")
+    cli::cli_abort("Invalid attribute value length, must match number of vertices.")
   }
 
   if (!missing(index)) {
     index <- as_igraph_vs(graph, index)
 
     if (anyDuplicated(index) || anyNA(index)) {
-      stop("Invalid vertices in index")
+      cli::cli_abort("{.arg index} contains duplicated vertices or NAs.")
     }
   }
 
@@ -700,12 +700,8 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
     } else if (length(value) == length(index)) {
       value_in <- unname(value)
     } else {
-      stop(
-        "Length of new attribute value must be ",
-        if (length(index) != 1) "1 or ",
-        length(index),
-        ", the number of target edges, not ",
-        length(value)
+      cli::cli_abort(
+        "Length of new attribute value must be {if (length(index) != 1) '1 or '}{length(index)}, the number of target edges, not {length(value)}."
       )
     }
 
@@ -743,15 +739,18 @@ edge.attributes <- function(graph, index = E(graph)) {
   ensure_igraph(graph)
 
   assert_named_list(value)
+  if (inherits(value, "data.frame")) {
+    value <- as.list(value)
+  }
 
   if (any(sapply(value, length) != length(index))) {
-    stop("Invalid attribute value length, must match number of edges")
+    cli::cli_abort("Invalid attribute value length, must match number of edges")
   }
 
   if (!missing(index)) {
     index <- as_igraph_es(graph, index)
     if (any(duplicated(index)) || any(is.na(index))) {
-      stop("Invalid edges in index")
+      cli::cli_abort("{.arg index} contains duplicated edges or NAs.")
     }
   }
 
@@ -857,7 +856,7 @@ delete_graph_attr <- function(graph, name) {
 
   name <- as.character(name)
   if (!name %in% graph_attr_names(graph)) {
-    stop("No such graph attribute: ", name)
+    cli::cli_abort("No graph attribute {.arg {name}} found.")
   }
 
   gattr <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
@@ -886,7 +885,7 @@ delete_vertex_attr <- function(graph, name) {
 
   name <- as.character(name)
   if (!name %in% vertex_attr_names(graph)) {
-    stop("No such vertex attribute: ", name)
+    cli::cli_abort("No vertex attribute {.arg {name}} found.")
   }
 
   vattr <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
@@ -915,7 +914,7 @@ delete_edge_attr <- function(graph, name) {
 
   name <- as.character(name)
   if (!name %in% edge_attr_names(graph)) {
-    stop("No such edge attribute: ", name)
+    cli::cli_abort("No edge attribute {.arg {name}} found.")
   }
 
   eattr <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
@@ -1022,7 +1021,7 @@ igraph.i.attribute.combination <- function(comb) {
   if (any(!sapply(comb, function(x) {
     is.function(x) || (is.character(x) && length(x) == 1)
   }))) {
-    stop("Attribute combination element must be a function or character scalar")
+    cli::cli_abort("Attribute combination element must be a function or character scalar.")
   }
   if (is.null(names(comb))) {
     names(comb) <- rep("", length(comb))
@@ -1043,7 +1042,7 @@ igraph.i.attribute.combination <- function(comb) {
       )
       x <- pmatch(tolower(x), known[, 1])
       if (is.na(x)) {
-        stop("Unknown/unambigous attribute combination specification")
+        cli::cli_abort("Unknown/unambigous attribute combination specification.")
       }
       known[, 2][x]
     }
@@ -1187,10 +1186,8 @@ NULL
 }
 
 assert_named_list <- function(value) {
-  error_msg <- "{.arg value} must be a named list with unique names"
-
   if (!is.list(value)) {
-    rlang::abort(error_msg)
+    cli::cli_abort("{.arg value} must be a named list with unique names")
   }
 
   if (length(value) == 0) {
@@ -1198,7 +1195,6 @@ assert_named_list <- function(value) {
   }
 
   if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
-
-    rlang::abort(error_msg)
+    cli::cli_abort("{.arg value} must be a named list with unique names")
   }
 }

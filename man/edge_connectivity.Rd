@@ -8,7 +8,7 @@
 \usage{
 edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
-edge_disjoint_paths(graph, source, target)
+edge_disjoint_paths(graph, source = NULL, target = NULL)
 
 adhesion(graph, checks = TRUE)
 }

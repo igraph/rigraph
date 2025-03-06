@@ -1,4 +1,3 @@
-
 #' Permute the vertices of a graph
 #'
 #' @description
@@ -240,10 +239,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   all.maps <- as.logical(all.maps)
   if (!is.null(domains)) {
     if (!is.list(domains)) {
-      stop("`domains' must be a list of vertex vectors from `target'")
+      cli::cli_abort("{.arg domains} must be a list of vertex vectors from {.arg target}.")
     }
     if (length(domains) != vcount(pattern)) {
-      stop("`domains' length and `pattern' number of vertices must match")
+      cli::cli_abort("{.arg domains} length and {.arg pattern} number of vertices must match.")
     }
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
