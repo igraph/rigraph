@@ -489,9 +489,9 @@ centr_eigen <- function(graph,
 
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
-      "2.1.3",
+      "2.2.0",
       "centr_eigen(scale = )",
-      details = "The function always behaves as if `scale` were TRUE.
+      details = "The function always behaves as if `scale = TRUE`.
       The argument will be removed in the future."
     )
   }
