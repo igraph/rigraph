@@ -132,10 +132,7 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
   if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
-    cut.prob <- c(
-      cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
-    )
+    cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -178,10 +175,7 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
-    cut.prob <- c(
-      cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
-    )
+    cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -234,10 +228,7 @@ sample_motifs <- function(
   if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
-    cut.prob <- c(
-      cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
-    )
+    cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
   if (is.null(sample)) {
