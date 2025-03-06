@@ -11,7 +11,7 @@ graph_from_graphdb(
   nodes = NULL,
   pair = "A",
   which = 0,
-  base = "https://github.com/schochastics/graphsdb/raw/refs/heads/main",
+  base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
   compressed = TRUE,
   directed = TRUE
 )
