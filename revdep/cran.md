@@ -1,20 +1,19 @@
 ## revdepcheck results
 
-We checked 13 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2118 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 2 new problems
- * We failed to check 8 packages
+ * We saw 1 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* grainscape
-  checking tests ... ERROR
-
-* multilaterals
+* pomdp
   checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
 
 ### Failed to check
 
@@ -25,4 +24,3 @@ Issues with CRAN packages are summarised below.
 * multinma        (NA)
 * randomForestSRC (NA)
 * streamDAG       (NA)
-* TDA             (NA)
