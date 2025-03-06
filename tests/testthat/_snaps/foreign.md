@@ -37,7 +37,8 @@
       g <- graph_from_graphdb(nodes = 10, prefix = "not_existing")
     Condition
       Error in `graph_from_graphdb()`:
-      ! not_existing is not a valid prefix. Must be one of iso, si6, mcs10, mcs30, mcs50, mcs70, and mcs90.
+      ! not_existing is not a valid prefix.
+      i Must be one of iso, si6, mcs10, mcs30, mcs50, mcs70, and mcs90.
 
 ---
 
