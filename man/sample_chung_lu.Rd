@@ -131,7 +131,7 @@ rowMeans(replicate(
 
 rowMeans(replicate(
   100,
-  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode='out')
+  degree(sample_chung_lu(c(1, 3, 2, 1), c(2, 1, 2, 2), variant = "maxent"), mode = "out")
 ))
 }
 \references{
@@ -195,5 +195,5 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 }
 \concept{games}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{igraph_chung_lu_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
 

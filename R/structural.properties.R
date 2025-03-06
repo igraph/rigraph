@@ -1,4 +1,3 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description
@@ -2140,14 +2139,11 @@ bfs <- function(
   ensure_igraph(graph)
 
   if (lifecycle::is_present(neimode)) {
-    lifecycle::deprecate_warn(
+    lifecycle::deprecate_stop(
       "1.3.0",
       "bfs(neimode)",
       "bfs(mode)"
     )
-    if (missing(mode)) {
-      mode <- neimode
-    }
   }
 
   if (length(root) == 1) {
@@ -2315,14 +2311,11 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 rho = parent.frame(), neimode = deprecated()) {
   ensure_igraph(graph)
   if (lifecycle::is_present(neimode)) {
-    lifecycle::deprecate_warn(
+    lifecycle::deprecate_stop(
       "1.3.0",
       "dfs(neimode)",
       "dfs(mode)"
     )
-    if (missing(mode)) {
-      mode <- neimode
-    }
   }
 
   root <- as_igraph_vs(graph, root) - 1
@@ -2560,7 +2553,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' - "symmetric": Symmetrically normalized Laplacian,
 #' \eqn{L = I - D^{-\frac{1}{2}} A D^{-\frac{1}{2}}}{L = I - D^(-1/2) A D^(-1/2)}.
 #' - "left": Left-stochastic normalized Laplacian, \eqn{{L = I - D^{-1} A}}{L = I - D^-1 A}.
-#' - "rigth": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
+#' - "right": Right-stochastic normalized Laplacian, \eqn{L = I - A D^{-1}}{L = I - A D^-1}.
 #'
 #' @examples
 #'
@@ -2569,8 +2562,8 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' laplacian_matrix(g, normalization = "unnormalized")
 #' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
-#' @cdocs igraph_get_laplacian_sparse
 #' @cdocs igraph_get_laplacian
+#' @cdocs igraph_get_laplacian_sparse
 laplacian_matrix <- function(graph, weights = NULL,
                              sparse = igraph_opt("sparsematrices"), normalization = c("unnormalized", "symmetric", "left", "right"), normalized) {
   # Argument checks

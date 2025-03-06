@@ -158,7 +158,7 @@ igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
-        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL,
+        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
     R:
       GATTR:
@@ -400,12 +400,35 @@ igraph_get_k_shortest_paths:
         edge_paths: epaths
 
 igraph_get_widest_path:
+    PARAMS: |-
+        GRAPH graph,
+        OPTIONAL OUT VERTEX_INDICES vertices, OPTIONAL OUT EDGE_INDICES edges,
+        VERTEX from, VERTEX to, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: |-
+        from ON graph, to ON graph, weights ON graph, vertices ON graph, edges ON graph
 
 igraph_get_widest_paths:
+    PARAMS: |-
+        GRAPH graph,
+        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        VERTEX from, VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL,
+        NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
+        OPTIONAL OUT VECTOR_INT inbound_edges
+    DEPS: |-
+        from ON graph, to ON graph, weights ON graph, vertices ON graph,
+        edges ON graph
 
 igraph_widest_path_widths_dijkstra:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
+        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_widest_path_widths_floyd_warshall:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
+        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_spanner:
     DEPS: weights ON graph, spanner ON graph
@@ -572,7 +595,7 @@ igraph_hub_and_authority_scores:
     # in the argument list.
     DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
+        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_unfold_tree:
@@ -701,7 +724,15 @@ igraph_dfs:
 # Bipartite graphs
 #######################################
 
+# Hack: add NULL default on 'types' parameter. Even though this parameter is not
+# optional in the C core, it must be optional in R so that weights can be
+# automatically taken from the 'type' edge attribute.
 igraph_bipartite_projection_size:
+    PARAMS: |-
+        GRAPH graph, BIPARTITE_TYPES types=NULL,
+        OUT INTEGER vcount1, OUT INTEGER ecount1,
+        OUT INTEGER vcount2, OUT INTEGER ecount2
+    DEPS: types ON graph
 
 #######################################
 # Bipartite graphs
@@ -718,7 +749,9 @@ igraph_biadjacency:
 
 igraph_get_biadjacency:
 
+# Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
+    PARAMS: GRAPH graph, OUT BOOLEAN res, OPTIONAL OUT BIPARTITE_TYPES type
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
@@ -1147,7 +1180,7 @@ igraph_dyad_census:
 
 igraph_triad_census:
 
-igraph_adjacent_triangles:
+igraph_count_adjacent_triangles:
 
 igraph_local_scan_0:
     IGNORE: RR
@@ -1429,6 +1462,11 @@ igraph_solve_lsap:
 #######################################
 
 igraph_find_cycle:
+
+igraph_simple_cycles:
+
+igraph_simple_cycles_callback:
+    IGNORE: RR, RC
 
 #######################################
 # Eulerian functions

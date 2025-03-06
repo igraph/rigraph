@@ -1,4 +1,3 @@
-
 #' Random walk on a graph
 #'
 #' `random_walk()` performs a random walk on the graph and returns the
@@ -79,4 +78,3 @@ random_edge_walk <- function(
   # FIXME: Support returning the full structure
   out$edges
 }
-

@@ -5,7 +5,7 @@
 In the shell:
 
 ```sh
-tools/update-cigraph.sh <path-to-cigraph-working-copy>
+vendor.sh <path-to-cigraph-working-copy>
 ```
 
 There is a CI/CD workflow that runs this very frequently.
