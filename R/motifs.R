@@ -23,7 +23,8 @@ triad.census <- function(graph) { # nocov start
 #' @inheritParams count_motifs
 #' @keywords internal
 #' @export
-graph.motifs.no <- function(graph, size = 3, cut.prob = NULL) { # nocov start
+graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs.no()", "count_motifs()")
   count_motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end

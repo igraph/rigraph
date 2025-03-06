@@ -4,7 +4,7 @@
 \alias{graph.motifs.no}
 \title{Graph motifs}
 \usage{
-graph.motifs.no(graph, size = 3, cut.prob = NULL)
+graph.motifs.no(graph, size = 3, cut.prob = rep(0, size))
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
