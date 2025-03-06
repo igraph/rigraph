@@ -24,6 +24,7 @@
 #include "rinterface.h"
 #include "rrandom.h"
 
+#include <Rversion.h>
 #include <R_ext/Visibility.h>
 #include <R_ext/Altrep.h>
 
