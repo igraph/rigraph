@@ -597,10 +597,16 @@ write.graph.dot <- function(graph, file, ...) {
 #' @export
 #' @keywords graphs
 graph_from_graphdb <- function(
-    url = NULL,
-    prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
-    base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
-    compressed = TRUE, directed = TRUE) {
+  url = NULL,
+  prefix = "iso",
+  type = "r001",
+  nodes = NULL,
+  pair = "A",
+  which = 0,
+  base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+  compressed = TRUE,
+  directed = TRUE
+) {
   if (is.null(nodes) && is.null(url)) {
     cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
   }
