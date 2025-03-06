@@ -2356,7 +2356,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.1.5", "dfs(father = )", "dfs(parent = )")
+    lifecycle::deprecate_warn("2.2.0", "dfs(father = )", "dfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
