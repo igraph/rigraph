@@ -539,9 +539,9 @@ centr_eigen_tmax <- function(graph = NULL,
 
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
-      "2.1.3",
+      "2.2.0",
       "centr_eigen_tmax(scale = )",
-      details = "The function always behaves as if `scale` were TRUE.
+      details = "The function always behaves as if `scale = TRUE`.
       The argument will be removed in the future."
     )
   }
