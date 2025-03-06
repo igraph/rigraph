@@ -288,7 +288,7 @@ centr_degree_tmax <- function(graph = NULL,
     lifecycle::deprecate_warn(
       when = "2.0.0",
       what = "centr_degree_tmax(loops = 'must be explicit')",
-      details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the loops argument."
+      details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
     loops <- FALSE
   }
