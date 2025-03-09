@@ -9,7 +9,12 @@ test_that("dfs() does not pad order", {
 
   local_igraph_options(return.vs.es = FALSE)
   expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
-  expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE, order.out = TRUE)$order.out), c(1, 2))
+  expect_equal(
+    as.numeric(
+      dfs(g, root = 2, unreachable = FALSE, order.out = TRUE)$order.out
+    ),
+    c(1, 2)
+  )
 })
 
 test_that("dfs() deprecated arguments", {
@@ -22,7 +27,7 @@ test_that("dfs() deprecated arguments", {
       unreachable = FALSE,
       neimode = "out",
       father = TRUE
-   )
+    )
   })
 })
 
@@ -259,7 +264,8 @@ test_that("diameter() works -- Bug #680538", {
 })
 
 test_that("diameter() correctly handles disconnected graphs", {
-  g <- make_tree(7, 2, mode = "undirected") %du% make_tree(4, 3, mode = "undirected")
+  g <- make_tree(7, 2, mode = "undirected") %du%
+    make_tree(4, 3, mode = "undirected")
   expect_equal(diameter(g, unconnected = TRUE), 4)
   expect_equal(diameter(g, unconnected = FALSE), Inf)
   E(g)$weight <- 2
@@ -313,10 +319,46 @@ test_that("farthest_vertices() works", {
 test_that("distances() works", {
   g <- make_graph(
     c(
-      1, 5, 1, 7, 1, 8, 1, 10, 2, 6,
-      2, 7, 2, 8, 2, 10, 3, 4, 3, 5,
-      3, 9, 5, 6, 5, 7, 5, 10, 6, 8,
-      7, 8, 7, 9, 8, 9, 8, 10, 9, 10
+      1,
+      5,
+      1,
+      7,
+      1,
+      8,
+      1,
+      10,
+      2,
+      6,
+      2,
+      7,
+      2,
+      8,
+      2,
+      10,
+      3,
+      4,
+      3,
+      5,
+      3,
+      9,
+      5,
+      6,
+      5,
+      7,
+      5,
+      10,
+      6,
+      8,
+      7,
+      8,
+      7,
+      9,
+      8,
+      9,
+      8,
+      10,
+      9,
+      10
     ),
     directed = FALSE
   )
@@ -353,22 +395,42 @@ test_that("distances() works", {
 })
 
 
-
 test_that("all_shortest_paths() works", {
   edges <- matrix(
     c(
-      "s", "a", 2,
-      "s", "b", 4,
-      "a", "t", 4,
-      "b", "t", 2,
-      "a", "1", 1,
-      "a", "2", 1,
-      "a", "3", 2,
-      "1", "b", 1,
-      "2", "b", 2,
-      "3", "b", 1
+      "s",
+      "a",
+      2,
+      "s",
+      "b",
+      4,
+      "a",
+      "t",
+      4,
+      "b",
+      "t",
+      2,
+      "a",
+      "1",
+      1,
+      "a",
+      "2",
+      1,
+      "a",
+      "3",
+      2,
+      "1",
+      "b",
+      1,
+      "2",
+      "b",
+      2,
+      "3",
+      "b",
+      1
     ),
-    byrow = TRUE, ncol = 3,
+    byrow = TRUE,
+    ncol = 3,
     dimnames = list(NULL, c("from", "to", "weight"))
   )
   edges <- as.data.frame(edges)
@@ -405,18 +467,39 @@ test_that("all_shortest_paths() works", {
 test_that("shortest_paths() works", {
   edges <- matrix(
     c(
-      "s", "a", 2,
-      "s", "b", 4,
-      "a", "t", 4,
-      "b", "t", 2,
-      "a", "1", 1,
-      "a", "2", 1,
-      "a", "3", 2,
-      "1", "b", 1,
-      "2", "b", 2,
-      "3", "b", 1
+      "s",
+      "a",
+      2,
+      "s",
+      "b",
+      4,
+      "a",
+      "t",
+      4,
+      "b",
+      "t",
+      2,
+      "a",
+      "1",
+      1,
+      "a",
+      "2",
+      1,
+      "a",
+      "3",
+      2,
+      "1",
+      "b",
+      1,
+      "2",
+      "b",
+      2,
+      "3",
+      "b",
+      1
     ),
-    byrow = TRUE, ncol = 3,
+    byrow = TRUE,
+    ncol = 3,
     dimnames = list(NULL, c("from", "to", "weight"))
   )
   edges <- as.data.frame(edges)
@@ -481,10 +564,15 @@ test_that("transitivity() works", {
 
   t3 <- transitivity(g, type = "local", vids = V(g))
   t33 <- transitivity(g, type = "local")
-  est3 <- structure(c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
+  est3 <- structure(
+    c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
     .Names = c(
-      "Min.", "1st Qu.", "Median", "Mean",
-      "3rd Qu.", "Max."
+      "Min.",
+      "1st Qu.",
+      "Median",
+      "Mean",
+      "3rd Qu.",
+      "Max."
     ),
     class = c("summaryDefault", "table")
   )
@@ -637,11 +725,20 @@ test_that("is_matching() works with names", {
   df <- data.frame(x = 1:5, y = letters[1:5])
   g <- graph_from_data_frame(df)
 
-  expect_true(is_matching(g, c("a", "b", "c", "d", "e", "1", "2", "3", "4", "5")))
+  expect_true(is_matching(
+    g,
+    c("a", "b", "c", "d", "e", "1", "2", "3", "4", "5")
+  ))
   expect_true(is_matching(g, c("a", "b", "c", "d", NA, "1", "2", "3", "4", NA)))
 
-  expect_false(is_matching(g, c("1", "2", "3", "4", "5", "a", "b", "c", "d", "e")))
-  expect_false(is_matching(g, c("a", "b", "c", "d", "e", "5", "4", "3", "2", "1")))
+  expect_false(is_matching(
+    g,
+    c("1", "2", "3", "4", "5", "a", "b", "c", "d", "e")
+  ))
+  expect_false(is_matching(
+    g,
+    c("a", "b", "c", "d", "e", "5", "4", "3", "2", "1")
+  ))
   expect_false(is_matching(g, c("a", "b")))
 })
 
@@ -662,11 +759,23 @@ test_that("is_max_matching() works with names", {
   df <- data.frame(x = 1:5, y = letters[1:5])
   g <- graph_from_data_frame(df)
 
-  expect_true(is_max_matching(g, c("a", "b", "c", "d", "e", "1", "2", "3", "4", "5")))
-  expect_false(is_max_matching(g, c("a", "b", "c", "d", NA, "1", "2", "3", "4", NA)))
+  expect_true(is_max_matching(
+    g,
+    c("a", "b", "c", "d", "e", "1", "2", "3", "4", "5")
+  ))
+  expect_false(is_max_matching(
+    g,
+    c("a", "b", "c", "d", NA, "1", "2", "3", "4", NA)
+  ))
 
-  expect_false(is_max_matching(g, c("1", "2", "3", "4", "5", "a", "b", "c", "d", "e")))
-  expect_false(is_max_matching(g, c("a", "b", "c", "d", "e", "5", "4", "3", "2", "1")))
+  expect_false(is_max_matching(
+    g,
+    c("1", "2", "3", "4", "5", "a", "b", "c", "d", "e")
+  ))
+  expect_false(is_max_matching(
+    g,
+    c("a", "b", "c", "d", "e", "5", "4", "3", "2", "1")
+  ))
   expect_false(is_max_matching(g, c("a", "b")))
 })
 
@@ -691,10 +800,27 @@ test_that("unfold_tree() works", {
   g <- make_tree(7, 2)
   g <- add_edges(g, c(2, 7, 1, 4))
   g2 <- unfold_tree(g, roots = 1)
-  expect_isomorphic(g2$tree, make_graph(c(
-    1, 2, 1, 3, 2, 8, 2, 5, 3, 6,
-    3, 9, 2, 7, 1, 4
-  )))
+  expect_isomorphic(
+    g2$tree,
+    make_graph(c(
+      1,
+      2,
+      1,
+      3,
+      2,
+      8,
+      2,
+      5,
+      3,
+      6,
+      3,
+      9,
+      2,
+      7,
+      1,
+      4
+    ))
+  )
   expect_equal(g2$vertex_index, c(1, 2, 3, 4, 5, 6, 7, 4, 7))
 })
 
@@ -754,7 +880,10 @@ test_that("mean_distance works", {
   g <- giant.component(sample_gnp(100, 3 / 100))
   expect_equal(avg_path_length(g), mean_distance(g))
 
-  g <- giant.component(sample_gnp(100, 6 / 100, directed = TRUE), mode = "strong")
+  g <- giant.component(
+    sample_gnp(100, 6 / 100, directed = TRUE),
+    mode = "strong"
+  )
   expect_equal(avg_path_length(g), mean_distance(g))
 
   g <- sample_gnp(100, 2 / 100)
@@ -807,19 +936,136 @@ test_that("mean_distance can provide details", {
 test_that("any_multiple(), count_multiple(), which_multiple() works", {
   # g <- sample_pa(10, m = 3, algorithm = "bag")
   g <- graph_from_edgelist(cbind(
-    c(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10),
-    c(1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 3, 4, 3, 1, 1, 1, 3, 1, 2, 4, 1, 1, 2, 4, 1, 4, 1)
+    c(
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7,
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10
+    ),
+    c(
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      3,
+      4,
+      3,
+      4,
+      3,
+      1,
+      1,
+      1,
+      3,
+      1,
+      2,
+      4,
+      1,
+      1,
+      2,
+      4,
+      1,
+      4,
+      1
+    )
   ))
   im <- which_multiple(g)
   cm <- count_multiple(g)
   expect_true(any_multiple(g))
-  expect_equal(im, c(FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE))
-  expect_equal(cm, c(3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2))
+  expect_equal(
+    im,
+    c(
+      FALSE,
+      TRUE,
+      TRUE,
+      FALSE,
+      TRUE,
+      TRUE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      TRUE,
+      FALSE,
+      FALSE,
+      TRUE,
+      FALSE,
+      FALSE,
+      TRUE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      FALSE,
+      TRUE
+    )
+  )
+  expect_equal(
+    cm,
+    c(
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2
+    )
+  )
   expect_equal(
     count_multiple(simplify(g)),
     rep(1, ecount(simplify(g)))
   )
-
 
   ## Direction of the edge is important
   expect_false(any_multiple(make_graph(c(1, 2, 2, 1))))
@@ -832,14 +1078,73 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   ## Remove multiple edges but keep multiplicity
   # g <- sample_pa(10, m = 3, algorithm = "bag")
   g <- graph_from_edgelist(cbind(
-    c(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10),
-    c(1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 4, 1, 4, 1, 1, 6, 4, 1, 5, 8)
+    c(
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      5,
+      5,
+      5,
+      6,
+      6,
+      6,
+      7,
+      7,
+      7,
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10
+    ),
+    c(
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      4,
+      1,
+      4,
+      1,
+      1,
+      6,
+      4,
+      1,
+      5,
+      8
+    )
   ))
   E(g)$weight <- 1
   g <- simplify(g)
   expect_false(any_multiple(g))
   expect_false(any(which_multiple(g)))
-  expect_equal(E(g)$weight, c(3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1))
+  expect_equal(
+    E(g)$weight,
+    c(3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1)
+  )
 })
 
 test_that("edge_density works", {
@@ -864,7 +1169,10 @@ test_that("knn works", {
   expect_equal(knn(g), list(knn = rep(2, 10), knnk = c(NaN, 2)))
 
   g2 <- make_star(10)
-  expect_equal(knn(g2), list(knn = c(1, rep(9, 9)), knnk = c(9, rep(NaN, 7), 1)))
+  expect_equal(
+    knn(g2),
+    list(knn = c(1, rep(9, 9)), knnk = c(9, rep(NaN, 7), 1))
+  )
 
   ## A scale-free one, try to plot 'knnk'
   g3 <- simplify(sample_pa(1000, m = 5))
@@ -885,11 +1193,62 @@ test_that("knn works", {
   g5 <- make_star(10)
   E(g5)$weight <- seq(ecount(g5))
   r5 <- knn(g5)
-  expect_equal(r5, structure(list(knn = c(1, rep(9, 9)), knnk = c(9, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 1)), .Names = c("knn", "knnk")))
+  expect_equal(
+    r5,
+    structure(
+      list(
+        knn = c(1, rep(9, 9)),
+        knnk = c(9, NaN, NaN, NaN, NaN, NaN, NaN, NaN, 1)
+      ),
+      .Names = c("knn", "knnk")
+    )
+  )
 })
 
 test_that("reciprocity works", {
   g <- make_graph(c(1, 2, 2, 1, 2, 3, 3, 4, 4, 4), directed = TRUE)
   expect_equal(reciprocity(g), 0.5)
   expect_equal(reciprocity(g, ignore.loops = FALSE), 0.6)
+})
+
+test_that("feedback_arc_set works", {
+  skip_if_no_glpk()
+
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 4, 2, 3, 4), directed = TRUE)
+  fas <- feedback_arc_set(g)
+  expect_equal(as.vector(fas), c(2))
+})
+
+test_that("feedback_arc_set works with weights", {
+  skip_if_no_glpk()
+
+  g <- make_ring(4, directed = TRUE)
+  E(g)$weight <- 4:1
+  fas <- feedback_arc_set(g)
+  expect_equal(as.vector(fas), c(4))
+})
+
+test_that("feedback_arc_set works with undirected graphs", {
+  skip_if_no_glpk()
+
+  g <- make_ring(10)
+  fas <- feedback_arc_set(g)
+  expect_length(fas, 1)
+})
+
+test_that("feedback_vertex_set works", {
+  skip_if_no_glpk()
+
+  g <- make_lattice(c(3, 3))
+  fvs <- feedback_vertex_set(g)
+  expect_length(fvs, 2)
+})
+
+test_that("feedback_vertex_set works with weights", {
+  skip_if_no_glpk()
+
+  g <- make_ring(5, directed = TRUE)
+  V(g)$weight <- 5:1
+  fvs <- feedback_vertex_set(g)
+  expect_equal(as.vector(fvs), c(5))
 })

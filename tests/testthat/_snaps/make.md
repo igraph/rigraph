@@ -155,5 +155,5 @@
       make_empty_graph(NULL)
     Condition
       Error in `make_empty_graph()`:
-      ! At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 0. Invalid value
+      ! At rinterface_extra.c:79 : Expecting a scalar integer but received a vector of length 0. Invalid value
 
