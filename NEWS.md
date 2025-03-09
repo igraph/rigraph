@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9020
+
+## Bug fixes
+
+- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (@schochastics, #848, #1731).
+
+## Features
+
+- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
+
+## Chore
+
+- Add include.
+
+- R 4.0 compat.
+
+- Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
+
+- Fix Stimulus (#1737).
+
+- Use `"parent"` instead of `"father"` in `bfs()` and `dfs()` (#880, #1523).
+
+## Documentation
+
+- Welcome Maëlle Salmon and David Schoch as authors (#1733).
+
+
 # igraph 2.1.4.9019
 
 ## Testing
