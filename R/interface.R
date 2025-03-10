@@ -8,7 +8,8 @@
 #' @inheritParams is_directed
 #' @keywords internal
 #' @export
-is.directed <- function(graph) { # nocov start
+is.directed <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.directed()", "is_directed()")
   is_directed(graph = graph)
 } # nocov end
@@ -23,7 +24,8 @@ is.directed <- function(graph) { # nocov start
 #' @inheritParams delete_vertices
 #' @keywords internal
 #' @export
-delete.vertices <- function(graph, v) { # nocov start
+delete.vertices <- function(graph, v) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "delete.vertices()", "delete_vertices()")
   delete_vertices(graph = graph, v = v)
 } # nocov end
@@ -38,7 +40,8 @@ delete.vertices <- function(graph, v) { # nocov start
 #' @inheritParams delete_edges
 #' @keywords internal
 #' @export
-delete.edges <- function(graph, edges) { # nocov start
+delete.edges <- function(graph, edges) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "delete.edges()", "delete_edges()")
   delete_edges(graph = graph, edges = edges)
 } # nocov end
@@ -53,7 +56,8 @@ delete.edges <- function(graph, edges) { # nocov start
 #' @inheritParams add_vertices
 #' @keywords internal
 #' @export
-add.vertices <- function(graph, nv, ..., attr = list()) { # nocov start
+add.vertices <- function(graph, nv, ..., attr = list()) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "add.vertices()", "add_vertices()")
   add_vertices(graph = graph, nv = nv, attr = attr, ...)
 } # nocov end
@@ -68,7 +72,8 @@ add.vertices <- function(graph, nv, ..., attr = list()) { # nocov start
 #' @inheritParams add_edges
 #' @keywords internal
 #' @export
-add.edges <- function(graph, edges, ..., attr = list()) { # nocov start
+add.edges <- function(graph, edges, ..., attr = list()) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "add.edges()", "add_edges()")
   add_edges(graph = graph, edges = edges, attr = attr, ...)
 } # nocov end
@@ -146,7 +151,11 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 
   edges.orig <- ecount(graph)
   on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(R_igraph_add_edges_manual, graph, as_igraph_vs(graph, edges) - 1)
+  graph <- .Call(
+    R_igraph_add_edges_manual,
+    graph,
+    as_igraph_vs(graph, edges) - 1
+  )
   edges.new <- ecount(graph)
 
   if (edges.new - edges.orig != 0) {
@@ -342,12 +351,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
   if (is.character(mode)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   }
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
@@ -382,12 +386,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
   if (is_directed(graph)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   } else {
     mode <- 1
   }
@@ -471,7 +470,9 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     if (typeof(x[[1]]) == typeof(x[[2]])) {
       c(rbind(x[[1]], x[[2]]))
     } else {
-      cli::cli_abort("The columns of the data.frame are of different type ({typeof(x[[1]])} and {typeof(x[[2]])}) ")
+      cli::cli_abort(
+        "The columns of the data.frame are of different type ({typeof(x[[1]])} and {typeof(x[[2]])}) "
+      )
     }
   } else if (inherits(x, "matrix")) {
     dimx <- dim(x)
@@ -492,12 +493,17 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     } else if (ncol == 2) {
       c(t(x))
     } else {
-      cli::cli_abort("{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed")
+      cli::cli_abort(
+        "{.args vp} was supplied as a {dimx[1]} times {dimx[2]} matrix. Only n times 2 matrices are allowed"
+      )
     }
   } else if (is.vector(x)) {
     x
   } else {
-    cli::cli_abort("Only two-column data.frames and matrices, and vectors are allowed for {.args vp}", call = call)
+    cli::cli_abort(
+      "Only two-column data.frames and matrices, and vectors are allowed for {.args vp}",
+      call = call
+    )
   }
 }
 
@@ -548,19 +554,20 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
 #' eis
 #' E(g)[eis]
 #'
-get_edge_ids <- function(graph,
-                         vp,
-                         directed = TRUE,
-                         error = FALSE) {
+get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
   ensure_igraph(graph)
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_get_eids, graph, as_igraph_vs(graph, vp) - 1,
-    as.logical(directed), as.logical(error)
-  ) + 1
+    R_igraph_get_eids,
+    graph,
+    as_igraph_vs(graph, vp) - 1,
+    as.logical(directed),
+    as.logical(error)
+  ) +
+    1
 }
 
 #' Find the edge ids based on the incident vertices of the edges
@@ -575,11 +582,13 @@ get_edge_ids <- function(graph,
 #'   `r lifecycle::badge("deprecated")`
 #' @keywords internal
 #' @export
-get.edge.ids <- function(graph,
-                         vp,
-                         directed = TRUE,
-                         error = FALSE,
-                         multi = deprecated()) {
+get.edge.ids <- function(
+  graph,
+  vp,
+  directed = TRUE,
+  error = FALSE,
+  multi = deprecated()
+) {
   if (lifecycle::is_present(multi)) {
     if (isTRUE(multi)) {
       lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
@@ -632,17 +641,11 @@ gorder <- vcount
 #' @examples
 #' g <- make_graph("Zachary")
 #' adjacent_vertices(g, c(1, 34))
-adjacent_vertices <- function(graph, v,
-                              mode = c("out", "in", "all", "total")) {
+adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
 
   vv <- as_igraph_vs(graph, v) - 1
-  mode <- switch(match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
 
@@ -675,17 +678,11 @@ adjacent_vertices <- function(graph, v,
 #' @examples
 #' g <- make_graph("Zachary")
 #' incident_edges(g, c(1, 34))
-incident_edges <- function(graph, v,
-                           mode = c("out", "in", "all", "total")) {
+incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
 
   vv <- as_igraph_vs(graph, v) - 1
-  mode <- switch(match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
 

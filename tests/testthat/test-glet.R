@@ -30,7 +30,11 @@ test_that("Graphlets filtering works", {
     weight = c(8, 8, 8, 5, 5, 5, 5, 5)
   )
 
-  g <- graph_from_data_frame(df, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
+  g <- graph_from_data_frame(
+    df,
+    directed = FALSE,
+    vertices = data.frame(LETTERS[1:5])
+  )
   glet <- sortgl(graphlet_basis(g))
 
   expect_equal(glet$cliques, list(1:3, 2:5))
@@ -95,8 +99,12 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
-  if (length(iter) != 1 || !is.numeric(iter) ||
-    !is.finite(iter) || iter != as.integer(iter)) {
+  if (
+    length(iter) != 1 ||
+      !is.numeric(iter) ||
+      !is.finite(iter) ||
+      iter != as.integer(iter)
+  ) {
     stop("`iter' must be a non-negative finite integer scalar")
   }
 
@@ -157,7 +165,11 @@ test_that("Graphlet projection works", {
   D1[1:3, 1:3] <- 2
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
-  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode = "undirected", weighted = TRUE)
+  g <- graph_from_adjacency_matrix(
+    D1 + D2 + D3,
+    mode = "undirected",
+    weighted = TRUE
+  )
   g <- simplify(g)
 
   gl <- graphlet_basis(g)

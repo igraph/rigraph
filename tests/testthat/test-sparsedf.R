@@ -54,6 +54,9 @@ test_that("sdf works", {
   sdf2[5:6, "color"] <- "white"
   expect_equal(
     as.data.frame(sdf2),
-    data.frame(id = 1:10, color = c(rep("black", 4), rep("white", 2), rep("black", 4)))
+    data.frame(
+      id = 1:10,
+      color = c(rep("black", 4), rep("white", 2), rep("black", 4))
+    )
   )
 })

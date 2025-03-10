@@ -23,52 +23,83 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
 
   no <- 7
   A <- g[]
-  A <- A + 1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+  A <- A +
+    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
   ss <- eigen(A)
 
   U <- standardize_eigen_signs(ss$vectors)
   X <- standardize_eigen_signs(ss$vectors %*% sqrt(diag(abs(ss$values))))
 
-  au_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_la$D, ss$values[1:no])
   expect_equal(au_la$D, ss$values[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
   expect_equal(standardize_eigen_signs(au_la$X), X[, 1:no])
 
-  au_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_lm$D, sort_by_magnitude(ss$values)[1:no])
   expect_equal(au_lm$D, sort_by_magnitude(ss$values)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no]))
-  expect_equal(standardize_eigen_signs(au_lm$X), X[, order_by_magnitude(ss$values)][, 1:no])
-
-  au_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = TRUE
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no])
   )
-  as_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = FALSE
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    X[, order_by_magnitude(ss$values)][, 1:no]
+  )
+
+  au_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = TRUE
+  )
+  as_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_sa$D, ss$values[vcount(g) - 1:no + 1])
   expect_equal(au_sa$D, ss$values[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
   expect_equal(standardize_eigen_signs(au_sa$X), X[, vcount(g) - 1:no + 1])
 })
 
@@ -79,50 +110,81 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+  A <- A +
+    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
   ss <- eigen(A)
 
   U <- standardize_eigen_signs(ss$vectors)
   X <- standardize_eigen_signs(ss$vectors %*% sqrt(diag(abs(ss$values))))
 
-  au_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_la$D, ss$values[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
   expect_equal(au_la$D, ss$values[1:no])
   expect_equal(standardize_eigen_signs(au_la$X), X[, 1:no])
 
-  au_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_lm$D, sort_by_magnitude(ss$values)[1:no])
   expect_equal(au_lm$D, sort_by_magnitude(ss$values)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no]))
-  expect_equal(standardize_eigen_signs(au_lm$X), X[, order_by_magnitude(ss$values)][, 1:no])
-
-  au_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = TRUE
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(ss$values)][, 1:no])
   )
-  as_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = FALSE
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    X[, order_by_magnitude(ss$values)][, 1:no]
   )
 
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  au_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = TRUE
+  )
+  as_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = FALSE
+  )
+
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
   expect_equal(standardize_eigen_signs(au_sa$X), X[, vcount(g) - 1:no + 1])
 })
 
@@ -132,7 +194,8 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+  A <- A +
+    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
   ss <- svd(A)
 
   U <- standardize_eigen_signs(ss$u)
@@ -140,51 +203,87 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
   X <- standardize_eigen_signs(ss$u %*% sqrt(diag(ss$d)))
   Y <- standardize_eigen_signs(ss$v %*% sqrt(diag(ss$d)))
 
-  au_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_la$D, ss$d[1:no])
   expect_equal(au_la$D, ss$d[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_la$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_la$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
   expect_equal(standardize_eigen_signs(au_la$X), X[, 1:no])
   expect_equal(standardize_eigen_signs(au_la$Y), Y[, 1:no])
 
-  au_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_lm$D, ss$d[1:no])
   expect_equal(au_lm$D, ss$d[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_lm$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_lm$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
   expect_equal(standardize_eigen_signs(au_lm$X), X[, 1:no])
   expect_equal(standardize_eigen_signs(au_lm$Y), Y[, 1:no])
 
-  au_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
   expect_equal(as_sa$D, ss$d[vcount(g) - 1:no + 1])
   expect_equal(au_sa$D, ss$d[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(as_sa$Y), standardize_eigen_signs(V[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_sa$Y),
+    standardize_eigen_signs(V[, vcount(g) - 1:no + 1])
+  )
   expect_equal(standardize_eigen_signs(au_sa$X), X[, vcount(g) - 1:no + 1])
   expect_equal(standardize_eigen_signs(au_sa$Y), Y[, vcount(g) - 1:no + 1])
 })
@@ -196,7 +295,8 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+  A <- A +
+    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
   ss <- svd(A)
 
   U <- standardize_eigen_signs(ss$u)
@@ -204,45 +304,81 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
   X <- standardize_eigen_signs(ss$u %*% sqrt(diag(ss$d)))
   Y <- standardize_eigen_signs(ss$v %*% sqrt(diag(ss$d)))
 
-  au_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_la <- embed_adjacency_matrix(g,
-    no = no, which = "la",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_la <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "la",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_la$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_la$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
   expect_equal(standardize_eigen_signs(au_la$X), X[, 1:no])
   expect_equal(standardize_eigen_signs(au_la$Y), Y[, 1:no])
 
-  au_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_lm <- embed_adjacency_matrix(g,
-    no = no, which = "lm",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_lm <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "lm",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_lm$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_lm$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
   expect_equal(standardize_eigen_signs(au_lm$X), X[, 1:no])
   expect_equal(standardize_eigen_signs(au_lm$Y), Y[, 1:no])
 
-  au_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = TRUE
+  au_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = TRUE
   )
-  as_sa <- embed_adjacency_matrix(g,
-    no = no, which = "sa",
-    cvec = degree(g) / 2, scaled = FALSE
+  as_sa <- embed_adjacency_matrix(
+    g,
+    no = no,
+    which = "sa",
+    cvec = degree(g) / 2,
+    scaled = FALSE
   )
 
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(as_sa$Y), standardize_eigen_signs(V[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_sa$Y),
+    standardize_eigen_signs(V[, vcount(g) - 1:no + 1])
+  )
   expect_equal(standardize_eigen_signs(au_sa$X), X[, vcount(g) - 1:no + 1])
   expect_equal(standardize_eigen_signs(au_sa$Y), Y[, vcount(g) - 1:no + 1])
 })
@@ -279,7 +415,8 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  A <- as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix") - g[]
+  A <- as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix") -
+    g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -289,51 +426,87 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "D-A",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "D-A",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "D-A",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "D-A",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "D-A",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "D-A",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "D-A",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "D-A",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "D-A",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
@@ -352,51 +525,87 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "DAD",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "DAD",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "DAD",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, abs(D[1:no]))
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "DAD",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "DAD",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "DAD",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "DAD",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "DAD",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "DAD",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", {
@@ -415,51 +624,87 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "I-DAD",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "I-DAD",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, abs(D[1:no]))
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "I-DAD",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "I-DAD",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "I-DAD",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "I-DAD",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
@@ -468,7 +713,8 @@ test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
   E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 
   no <- 3
-  A <- as(Matrix::Matrix(diag(strength(g)), doDiag = FALSE), "generalMatrix") - g[]
+  A <- as(Matrix::Matrix(diag(strength(g)), doDiag = FALSE), "generalMatrix") -
+    g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -478,51 +724,84 @@ test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "D-A",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "D-A",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "D-A",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, abs(D[1:no]))
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "D-A",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "D-A",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "D-A",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "D-A",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "D-A",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "D-A",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "D-A",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
   expect_equal(standardize_eigen_signs(au_sa$X), X[, vcount(g) - 1:no + 1])
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
@@ -542,51 +821,87 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "DAD",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "DAD",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "DAD",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, abs(D[1:no]))
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "DAD",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "DAD",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "DAD",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "DAD",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "DAD",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "DAD",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "DAD",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", {
@@ -606,51 +921,87 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
 
   ## LA
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "I-DAD",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "I-DAD",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, abs(D[1:no]))
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
 
   ## LM
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "I-DAD",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "I-DAD",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, order_by_magnitude(D)][, 1:no])
+  )
   expect_equal(as_lm$D, sort_by_magnitude(D)[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, order_by_magnitude(D)][, 1:no])
+  )
 
   ## SA
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "I-DAD",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "I-DAD",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "I-DAD",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "I-DAD",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Directed, unweighted, OAP case works", {
@@ -670,53 +1021,108 @@ test_that("embed_laplacian_matrix -- Directed, unweighted, OAP case works", {
   X <- standardize_eigen_signs(ss$u %*% sqrt(diag(ss$d)))
   Y <- standardize_eigen_signs(ss$v %*% sqrt(diag(ss$d)))
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "OAP",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "OAP",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "OAP",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
-  expect_equal(standardize_eigen_signs(au_la$Y), standardize_eigen_signs(Y[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_la$Y),
+    standardize_eigen_signs(Y[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_la$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_la$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "OAP",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "OAP",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "OAP",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, D[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, 1:no]))
-  expect_equal(standardize_eigen_signs(au_lm$Y), standardize_eigen_signs(Y[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_lm$Y),
+    standardize_eigen_signs(Y[, 1:no])
+  )
   expect_equal(as_lm$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_lm$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_lm$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "OAP",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "OAP",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "OAP",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(au_sa$Y), standardize_eigen_signs(Y[, vcount(g) - 1:no + 1]), tolerance = 1e-6)
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_sa$Y),
+    standardize_eigen_signs(Y[, vcount(g) - 1:no + 1]),
+    tolerance = 1e-6
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(as_sa$Y), standardize_eigen_signs(V[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_sa$Y),
+    standardize_eigen_signs(V[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("embed_laplacian_matrix -- Directed, weighted case works", {
@@ -737,53 +1143,107 @@ test_that("embed_laplacian_matrix -- Directed, weighted case works", {
   X <- standardize_eigen_signs(ss$u %*% sqrt(diag(ss$d)))
   Y <- standardize_eigen_signs(ss$v %*% sqrt(diag(ss$d)))
 
-  au_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "OAP",
+  au_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "OAP",
     scaled = TRUE
   )
-  as_la <- embed_laplacian_matrix(g,
-    no = no, which = "la", type = "OAP",
+  as_la <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "la",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(au_la$X), standardize_eigen_signs(X[, 1:no]))
-  expect_equal(standardize_eigen_signs(au_la$Y), standardize_eigen_signs(Y[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_la$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_la$Y),
+    standardize_eigen_signs(Y[, 1:no])
+  )
   expect_equal(as_la$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_la$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_la$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_la$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_la$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
 
-  au_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "OAP",
+  au_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "OAP",
     scaled = TRUE
   )
-  as_lm <- embed_laplacian_matrix(g,
-    no = no, which = "lm", type = "OAP",
+  as_lm <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "lm",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_lm$D, D[1:no])
-  expect_equal(standardize_eigen_signs(au_lm$X), standardize_eigen_signs(X[, 1:no]))
-  expect_equal(standardize_eigen_signs(au_lm$Y), standardize_eigen_signs(Y[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(au_lm$X),
+    standardize_eigen_signs(X[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_lm$Y),
+    standardize_eigen_signs(Y[, 1:no])
+  )
   expect_equal(as_lm$D, D[1:no])
-  expect_equal(standardize_eigen_signs(as_lm$X), standardize_eigen_signs(U[, 1:no]))
-  expect_equal(standardize_eigen_signs(as_lm$Y), standardize_eigen_signs(V[, 1:no]))
+  expect_equal(
+    standardize_eigen_signs(as_lm$X),
+    standardize_eigen_signs(U[, 1:no])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_lm$Y),
+    standardize_eigen_signs(V[, 1:no])
+  )
 
-  au_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "OAP",
+  au_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "OAP",
     scaled = TRUE
   )
-  as_sa <- embed_laplacian_matrix(g,
-    no = no, which = "sa", type = "OAP",
+  as_sa <- embed_laplacian_matrix(
+    g,
+    no = no,
+    which = "sa",
+    type = "OAP",
     scaled = FALSE
   )
 
   expect_equal(au_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(au_sa$X), standardize_eigen_signs(X[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(au_sa$Y), standardize_eigen_signs(Y[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(au_sa$X),
+    standardize_eigen_signs(X[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(au_sa$Y),
+    standardize_eigen_signs(Y[, vcount(g) - 1:no + 1])
+  )
   expect_equal(as_sa$D, D[vcount(g) - 1:no + 1])
-  expect_equal(standardize_eigen_signs(as_sa$X), standardize_eigen_signs(U[, vcount(g) - 1:no + 1]))
-  expect_equal(standardize_eigen_signs(as_sa$Y), standardize_eigen_signs(V[, vcount(g) - 1:no + 1]))
+  expect_equal(
+    standardize_eigen_signs(as_sa$X),
+    standardize_eigen_signs(U[, vcount(g) - 1:no + 1])
+  )
+  expect_equal(
+    standardize_eigen_signs(as_sa$Y),
+    standardize_eigen_signs(V[, vcount(g) - 1:no + 1])
+  )
 })
 
 test_that("Sampling from a Dirichlet distribution works", {

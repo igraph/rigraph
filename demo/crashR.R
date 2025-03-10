@@ -1,5 +1,5 @@
-
-pause <- function() {}
+pause <- function() {
+}
 
 ### R objects, (real) numbers
 a <- 3
@@ -127,8 +127,16 @@ pause()
 
 ### Factors
 countries <- c(
-  "SUI", "USA", "GBR", "GER", "SUI",
-  "SUI", "GBR", "GER", "FRA", "GER"
+  "SUI",
+  "USA",
+  "GBR",
+  "GER",
+  "SUI",
+  "SUI",
+  "GBR",
+  "GER",
+  "FRA",
+  "GER"
 )
 countries
 fcountries <- factor(countries)

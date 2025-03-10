@@ -1,5 +1,5 @@
-
-pause <- function() {}
+pause <- function() {
+}
 
 ### A modular graph has dense subgraphs
 mod <- make_full_graph(10) %du% make_full_graph(10) %du% make_full_graph(10)
@@ -142,11 +142,15 @@ coords <- layout_with_kk(karate)
 lapply(seq_along(communities), function(x) {
   m <- modularity(communities[[x]])
   par(mar = c(1, 1, 3, 1))
-  plot(communities[[x]], karate,
+  plot(
+    communities[[x]],
+    karate,
     layout = coords,
     main = paste(
-      names(communities)[x], "\n",
-      "Modularity:", round(m, 3)
+      names(communities)[x],
+      "\n",
+      "Modularity:",
+      round(m, 3)
     )
   )
 })
@@ -159,10 +163,13 @@ clique.community <- function(graph, k) {
   edges <- c()
   for (i in seq(along.with = clq)) {
     for (j in seq(along.with = clq)) {
-      if (length(unique(c(
-        clq[[i]],
-        clq[[j]]
-      ))) == k + 1) {
+      if (
+        length(unique(c(
+          clq[[i]],
+          clq[[j]]
+        ))) ==
+          k + 1
+      ) {
         edges <- c(edges, c(i, j))
       }
     }
@@ -195,14 +202,52 @@ pause()
 
 ### Hand-made layout to make it look like the original in the paper
 lay <- c(
-  387.0763, 306.6947, 354.0305, 421.0153, 483.5344, 512.1145,
-  148.6107, 392.4351, 524.6183, 541.5878, 240.6031, 20,
-  65.54962, 228.0992, 61.9771, 152.1832, 334.3817, 371.8931,
-  421.9084, 265.6107, 106.6336, 57.51145, 605, 20, 124.8780,
-  273.6585, 160.2439, 241.9512, 132.1951, 123.6585, 343.1707,
-  465.1220, 317.561, 216.3415, 226.0976, 343.1707, 306.5854,
-  123.6585, 360.2439, 444.3902, 532.1951, 720, 571.2195,
-  639.5122, 505.3659, 644.3902
+  387.0763,
+  306.6947,
+  354.0305,
+  421.0153,
+  483.5344,
+  512.1145,
+  148.6107,
+  392.4351,
+  524.6183,
+  541.5878,
+  240.6031,
+  20,
+  65.54962,
+  228.0992,
+  61.9771,
+  152.1832,
+  334.3817,
+  371.8931,
+  421.9084,
+  265.6107,
+  106.6336,
+  57.51145,
+  605,
+  20,
+  124.8780,
+  273.6585,
+  160.2439,
+  241.9512,
+  132.1951,
+  123.6585,
+  343.1707,
+  465.1220,
+  317.561,
+  216.3415,
+  226.0976,
+  343.1707,
+  306.5854,
+  123.6585,
+  360.2439,
+  444.3902,
+  532.1951,
+  720,
+  571.2195,
+  639.5122,
+  505.3659,
+  644.3902
 )
 lay <- matrix(lay, ncol = 2)
 lay[, 2] <- max(lay[, 2]) - lay[, 2]
