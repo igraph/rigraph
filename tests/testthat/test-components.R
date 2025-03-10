@@ -102,25 +102,25 @@ test_that("largest component is actually the largest", {
 
 test_that("largest strongly and weakly components are correct", {
   g <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A,
-    C - +D,
+    A -+ B,
+    B -+ C,
+    C -+ A,
+    C -+ D,
     E
   )
 
   strongly <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A
+    A -+ B,
+    B -+ C,
+    C -+ A
   )
   expect_isomorphic(largest_component(g, "strong"), strongly)
 
   weakly <- graph_from_literal(
-    A - +B,
-    B - +C,
-    C - +A,
-    C - +D
+    A -+ B,
+    B -+ C,
+    C -+ A,
+    C -+ D
   )
   expect_isomorphic(largest_component(g, "weak"), weakly)
 })

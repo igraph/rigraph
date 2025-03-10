@@ -1319,7 +1319,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' @examples
 #'
-#' g <- make_graph(~ 1 - +2, 2 - +3, 3 - +4)
+#' g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
