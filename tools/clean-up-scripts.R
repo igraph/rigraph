@@ -14,11 +14,20 @@ flag <- function(old) {
 
 exceptions <- c(
   # their names are part of longer function names
-  "ba.game", "barabasi.game", "cited.type.game", "clusters", "evcent",
-  "preference.game", "shortest.paths",
+  "ba.game",
+  "barabasi.game",
+  "cited.type.game",
+  "clusters",
+  "evcent",
+  "preference.game",
+  "shortest.paths",
   # false positives
-  "graph.edgelist", "graph.graphdb", "graph.lattice", "independent.vertex.sets",
+  "graph.edgelist",
+  "graph.graphdb",
+  "graph.lattice",
+  "independent.vertex.sets",
   # tackled elsewhere/enough
-  "is.directed", "graph"
+  "is.directed",
+  "graph"
 )
 purrr::walk(setdiff(deprecated_df$old, exceptions), flag)

@@ -1,5 +1,5 @@
-
-pause <- function() {}
+pause <- function() {
+}
 
 ### Create a star-like graph
 t1 <- graph_from_literal(A - B:C:D:E)
@@ -174,11 +174,17 @@ dim(ws.result)
 pause()
 
 ### Plot it
-plot(rewire.prob, ws.result[1, ] / ws.result[1, 1],
-  log = "x", pch = 22,
-  xlab = "p", ylab = ""
+plot(
+  rewire.prob,
+  ws.result[1, ] / ws.result[1, 1],
+  log = "x",
+  pch = 22,
+  xlab = "p",
+  ylab = ""
 )
 points(rewire.prob, ws.result[2, ] / ws.result[2, 1], pch = 20)
-legend("bottomleft", c(expression(C(p) / C(0)), expression(L(p) / L(0))),
+legend(
+  "bottomleft",
+  c(expression(C(p) / C(0)), expression(L(p) / L(0))),
   pch = c(22, 20)
 )

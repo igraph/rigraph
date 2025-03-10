@@ -156,19 +156,42 @@ test_that("we can set all attributes on some vertices/edges", {
   g2 <- make_graph(c(2, 1, 3, 1, 4, 1, 2, 5, 3, 6))
 
   vertex_attr(g2, index = c(1, 2, 4, 5)) <- vertex_attr(g)
-  expect_equal(vertex_attr(g2), list(name = c(
-    "a", "b", NA_character_,
-    "c", "d", NA_character_
-  ), color = list(
-    rainbow(4)[1], rainbow(4)[2], NULL,
-    rainbow(4)[3], rainbow(4)[4], NULL
-  )))
+  expect_equal(
+    vertex_attr(g2),
+    list(
+      name = c(
+        "a",
+        "b",
+        NA_character_,
+        "c",
+        "d",
+        NA_character_
+      ),
+      color = list(
+        rainbow(4)[1],
+        rainbow(4)[2],
+        NULL,
+        rainbow(4)[3],
+        rainbow(4)[4],
+        NULL
+      )
+    )
+  )
 
   edge_attr(g2, index = c(1, 3, 5)) <- edge_attr(g)
-  expect_equal(edge_attr(g2), list(weight = c(
-    1L, NA_integer_, 2L,
-    NA_integer_, 3L
-  ), label = list("A", NULL, "B", NULL, "C")))
+  expect_equal(
+    edge_attr(g2),
+    list(
+      weight = c(
+        1L,
+        NA_integer_,
+        2L,
+        NA_integer_,
+        3L
+      ),
+      label = list("A", NULL, "B", NULL, "C")
+    )
+  )
 })
 
 test_that("cannot use vs/es from another graph", {
@@ -184,8 +207,14 @@ test_that("cannot use vs/es from another graph", {
 test_that("attribute combinations handle errors correctly", {
   g <- make_graph(c(1, 2, 2, 1))
   E(g)$weight <- c("a", "b")
-  expect_error(as_undirected(g, edge.attr.comb = list(weight = "sum")), "invalid 'type'")
-  expect_error(as_undirected(g, edge.attr.comb = list(weight = sum)), "invalid 'type'")
+  expect_error(
+    as_undirected(g, edge.attr.comb = list(weight = "sum")),
+    "invalid 'type'"
+  )
+  expect_error(
+    as_undirected(g, edge.attr.comb = list(weight = sum)),
+    "invalid 'type'"
+  )
 })
 
 test_that("can change type of attributes", {
@@ -255,12 +284,18 @@ test_that("assert_named_list() works", {
 })
 
 test_that("is_bipartite works", {
-  biadj_mat1 <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
+  biadj_mat1 <- matrix(
+    sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
+    ncol = 5
+  )
   g1 <- graph_from_biadjacency_matrix(biadj_mat1)
   expect_true(bipartite_mapping(g1)$res)
 
   withr::local_seed(42)
-  biadj_mat2 <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
+  biadj_mat2 <- matrix(
+    sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
+    ncol = 5
+  )
   g2 <- graph_from_biadjacency_matrix(biadj_mat2)
   expect_equal(
     bipartite_mapping(g2),

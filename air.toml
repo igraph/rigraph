@@ -1,0 +1,2 @@
+[format]
+skip = ["graph_from_literal", "from_literal"]

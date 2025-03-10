@@ -154,10 +154,13 @@ set_complete_iterator <- function(x, value = TRUE) {
 }
 
 inside_square_error <- function(fn_name, call = rlang::caller_env()) {
-  cli::cli_abort(c(
-    "{.fun {fn_name}} must only be used inside index or vertex sequences like {.code E(g)[]} or {.code V(g)[]}.",
-    i = "See {.help [{.fun [.igraph.es}](igraph::`[.igraph.es`)} or {.help [{.fun [.igraph.vs}](igraph::`[.igraph.vs`)}."
-  ), call = call)
+  cli::cli_abort(
+    c(
+      "{.fun {fn_name}} must only be used inside index or vertex sequences like {.code E(g)[]} or {.code V(g)[]}.",
+      i = "See {.help [{.fun [.igraph.es}](igraph::`[.igraph.es`)} or {.help [{.fun [.igraph.vs}](igraph::`[.igraph.vs`)}."
+    ),
+    call = call
+  )
 }
 
 
@@ -356,15 +359,21 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else if (!is.null(P)) {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_pairs, graph, as_igraph_vs(graph, P) - 1,
+      R_igraph_es_pairs,
+      graph,
+      as_igraph_vs(graph, P) - 1,
       as.logical(directed)
-    ) + 1
+    ) +
+      1
   } else {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_path, graph, as_igraph_vs(graph, path) - 1,
+      R_igraph_es_path,
+      graph,
+      as_igraph_vs(graph, path) - 1,
       as.logical(directed)
-    ) + 1
+    ) +
+      1
   }
 
   if ("name" %in% edge_attr_names(graph)) {
@@ -525,14 +534,20 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   ## Special case, no argument (but we might get an artificial
   ## empty one
-  if (length(args) < 1 ||
-    (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name") &&
-      !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))) {
+  if (
+    length(args) < 1 ||
+      (length(args) == 1 &&
+        inherits(rlang::quo_get_expr(args[[1]]), "name") &&
+        !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))
+  ) {
     return(x)
   }
 
   ## Special case: single numeric argument
-  first_arg_is_numericish <- inherits(rlang::quo_get_expr(args[[1]]), "numeric") ||
+  first_arg_is_numericish <- inherits(
+    rlang::quo_get_expr(args[[1]]),
+    "numeric"
+  ) ||
     inherits(rlang::quo_get_expr(args[[1]]), "integer")
   if (length(args) == 1 && first_arg_is_numericish) {
     res <- simple_vs_index(x, rlang::quo_get_expr(args[[1]]), na_ok)
@@ -542,7 +557,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ## Special case: single symbol argument, no such attribute
   if (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name")) {
     graph <- get_vs_graph(x)
-    if (!(as.character(rlang::quo_get_expr(args[[1]])) %in% vertex_attr_names(graph))) {
+    if (
+      !(as.character(rlang::quo_get_expr(args[[1]])) %in%
+        vertex_attr_names(graph))
+    ) {
       res <- simple_vs_index(x, rlang::eval_tidy(args[[1]]), na_ok)
       return(add_vses_graph_ref(res, graph))
     }
@@ -552,19 +570,17 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the vertex is a neighbor (any type)
     ## of at least one vertex in v
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
     if (is.logical(v)) {
       v <- which(v)
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_nei, graph, x, as_igraph_vs(graph, v) - 1,
+      R_igraph_vs_nei,
+      graph,
+      x,
+      as_igraph_vs(graph, v) - 1,
       as.numeric(mode)
     )
     tmp[as.numeric(x)]
@@ -592,7 +608,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
+      R_igraph_vs_adj,
+      graph,
+      x,
+      as_igraph_es(graph, e) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -610,7 +629,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
+      R_igraph_vs_adj,
+      graph,
+      x,
+      as_igraph_es(graph, e) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -625,7 +647,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
+      R_igraph_vs_adj,
+      graph,
+      x,
+      as_igraph_es(graph, e) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -652,21 +677,31 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
     # Functions (only visible if called or if no duplicate)
     top <- rlang::new_environment(list(
-      .nei = .nei, nei = nei,
-      .innei = .innei, innei = innei,
-      .outnei = .outnei, outnei = outnei,
-      .inc = .inc, inc = inc, adj = adj,
-      .from = .from, from = from,
-      .to = .to, to = to,
+      .nei = .nei,
+      nei = nei,
+      .innei = .innei,
+      innei = innei,
+      .outnei = .outnei,
+      outnei = outnei,
+      .inc = .inc,
+      inc = inc,
+      adj = adj,
+      .from = .from,
+      from = from,
+      .to = .to,
+      to = to,
       .data = list(attrs)
     ))
 
     # Data objects (visible by default)
-    bottom <- rlang::new_environment(parent = top, c(
-      attrs,
-      .env = env,
-      .data = list(attrs)
-    ))
+    bottom <- rlang::new_environment(
+      parent = top,
+      c(
+        attrs,
+        .env = env,
+        .data = list(attrs)
+      )
+    )
 
     data_mask <- rlang::new_data_mask(bottom, top)
 
@@ -677,7 +712,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
         return(NULL)
       }
       if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
-        cli::cli_abort("Error: Logical index length does not match the number of vertices. Recycling is not allowed.")
+        cli::cli_abort(
+          "Error: Logical index length does not match the number of vertices. Recycling is not allowed."
+        )
       }
 
       ii <- simple_vs_index(x, ii, na_ok)
@@ -912,9 +949,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   ## If indexing has no argument at all, then we still get one,
   ## but it is "empty", a name that is ""
 
-  if (length(args) < 1 ||
-    (length(args) == 1 && inherits(rlang::quo_get_expr(args[[1]]), "name") &&
-      !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))) {
+  if (
+    length(args) < 1 ||
+      (length(args) == 1 &&
+        inherits(rlang::quo_get_expr(args[[1]]), "name") &&
+        !nzchar(as.character(rlang::quo_get_expr(args[[1]]))))
+  ) {
     return(x)
   }
 
@@ -922,7 +962,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
+      R_igraph_es_adj,
+      graph,
+      x,
+      as_igraph_vs(graph, v) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -937,7 +980,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
+      R_igraph_es_adj,
+      graph,
+      x,
+      as_igraph_vs(graph, v) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -949,7 +995,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
+      R_igraph_es_adj,
+      graph,
+      x,
+      as_igraph_vs(graph, v) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -971,21 +1020,30 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
     # Functions (only visible if called or if no duplicate)
     top <- rlang::new_environment(list(
-      .inc = .inc, inc = inc, adj = adj,
-      .from = .from, from = from,
-      .to = .to, to = to,
-      `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`
+      .inc = .inc,
+      inc = inc,
+      adj = adj,
+      .from = .from,
+      from = from,
+      .to = .to,
+      to = to,
+      `%--%` = `%--%`,
+      `%->%` = `%->%`,
+      `%<-%` = `%<-%`
     ))
 
     # Data objects (visible by default)
-    bottom <- rlang::new_environment(parent = top, c(
-      attrs,
-      .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
-      .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
-      .igraph.graph = list(graph),
-      .env = env,
-      .data = list(attrs)
-    ))
+    bottom <- rlang::new_environment(
+      parent = top,
+      c(
+        attrs,
+        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
+        .igraph.graph = list(graph),
+        .env = env,
+        .data = list(attrs)
+      )
+    )
 
     data_mask <- rlang::new_data_mask(bottom, top)
 
@@ -996,7 +1054,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         return(NULL)
       }
       if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
-        cli::cli_abort("Error: Logical index length does not match the number of edges. Recycling is not allowed.")
+        cli::cli_abort(
+          "Error: Logical index length does not match the number of edges. Recycling is not allowed."
+        )
       }
 
       ii <- simple_es_index(x, ii)
@@ -1060,8 +1120,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
-  if (!"name" %in% names(attributes(value)) ||
-    !"value" %in% names(attributes(value))) {
+  if (
+    !"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))
+  ) {
     cli::cli_abort("Invalid indexing.")
   }
   if (is.null(get_vs_graph(x))) stop("Graph is unknown.")
@@ -1078,8 +1140,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
-  if (!"name" %in% names(attributes(value)) ||
-    !"value" %in% names(attributes(value))) {
+  if (
+    !"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))
+  ) {
     stop("Invalid indexing.")
   }
   if (is.null(get_es_graph(x))) stop("Graph is unknown.")
@@ -1236,13 +1300,18 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `V<-` <- function(x, value) {
   ensure_igraph(x)
-  if (!"name" %in% names(attributes(value)) ||
-    !"value" %in% names(attributes(value))) {
+  if (
+    !"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))
+  ) {
     cli::cli_abort("invalid indexing")
   }
-  i_set_vertex_attr(x, attr(value, "name"),
+  i_set_vertex_attr(
+    x,
+    attr(value, "name"),
     index = value,
-    value = attr(value, "value"), check = FALSE
+    value = attr(value, "value"),
+    check = FALSE
   )
 }
 
@@ -1255,13 +1324,18 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
   ensure_igraph(x)
-  if (!"name" %in% names(attributes(value)) ||
-    !"value" %in% names(attributes(value))) {
+  if (
+    !"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))
+  ) {
     cli::cli_abort("invalid indexing")
   }
-  i_set_edge_attr(x, attr(value, "name"),
+  i_set_edge_attr(
+    x,
+    attr(value, "name"),
     index = value,
-    value = attr(value, "value"), check = FALSE
+    value = attr(value, "value"),
+    check = FALSE
   )
 }
 
@@ -1306,10 +1380,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   set_vertex_attr("color", value = "red")
 #' V(g4)[[]]
 #' V(g4)[[2:5, 7:8]]
-print.igraph.vs <- function(x,
-                            full = igraph_opt("print.full"),
-                            id = igraph_opt("print.id"),
-                            ...) {
+print.igraph.vs <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_vs_graph(x)
   if (!is.null(graph)) {
     vertices <- V(graph)
@@ -1319,23 +1395,31 @@ print.igraph.vs <- function(x,
   len <- length(x)
   gid <- graph_id(x)
 
-  title <- "+ " %+% chr(len) %+% "/" %+%
+  title <- "+ " %+%
+    chr(len) %+%
+    "/" %+%
     (if (is.null(vertices)) "?" else chr(length(vertices))) %+%
     (if (len == 1) " vertex" else " vertices") %+%
     (if (!is.null(names(vertices))) ", named" else "") %+%
-    (if (isTRUE(id) && !is.na(gid)) paste(", from", substr(gid, 1, 7)) else "") %+%
+    (if (isTRUE(id) && !is.na(gid)) paste(", from", substr(gid, 1, 7)) else
+      "") %+%
     (if (is.null(graph)) " (deleted)" else "") %+%
     ":\n"
   cat(title)
 
-  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph) > 0)) {
+  if (
+    is_single_index(x) &&
+      !is.null(graph) &&
+      length(vertex_attr_names(graph) > 0)
+  ) {
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
-      print(as.data.frame(va,
-        stringsAsFactors =
-          FALSE
-      )[as.vector(x), , drop = FALSE])
+      print(as.data.frame(va, stringsAsFactors = FALSE)[
+        as.vector(x),
+        ,
+        drop = FALSE
+      ])
     } else {
       print(lapply(va, "[", as.vector(x)))
     }
@@ -1354,9 +1438,11 @@ print.igraph.vs <- function(x,
       if (is.logical(full) && full) {
         print(x2, quote = FALSE)
       } else {
-        head_print(x2,
+        head_print(
+          x2,
           omitted_footer = "+ ... omitted several vertices\n",
-          quote = FALSE, max_lines = igraph_opt("auto.print.lines")
+          quote = FALSE,
+          max_lines = igraph_opt("auto.print.lines")
         )
       }
     }
@@ -1408,15 +1494,21 @@ print.igraph.vs <- function(x,
 #' E(g4)
 #' E(g4)[[]]
 #' E(g4)[[1:5]]
-print.igraph.es <- function(x,
-                            full = igraph_opt("print.full"),
-                            id = igraph_opt("print.id"),
-                            ...) {
+print.igraph.es <- function(
+  x,
+  full = igraph_opt("print.full"),
+  id = igraph_opt("print.id"),
+  ...
+) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(
-    x = graph, edges = x, max.lines = ml, names = TRUE,
-    num = TRUE, id = id
+    x = graph,
+    edges = x,
+    max.lines = ml,
+    names = TRUE,
+    num = TRUE,
+    id = id
   )
   invisible(x)
 }
@@ -1424,8 +1516,7 @@ print.igraph.es <- function(x,
 # these are internal
 
 as_igraph_vs <- function(graph, v, na.ok = FALSE) {
-  if (inherits(v, "igraph.vs") && !is.null(graph) &&
-    !warn_version(graph)) {
+  if (inherits(v, "igraph.vs") && !is.null(graph) && !warn_version(graph)) {
     if (get_graph_id(graph) != get_vs_graph_id(v)) {
       cli::cli_abort("Cannot use a vertex sequence from another graph.")
     }
@@ -1452,8 +1543,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
 }
 
 as_igraph_es <- function(graph, e) {
-  if (inherits(e, "igraph.es") && !is.null(graph) &&
-    !warn_version(graph)) {
+  if (inherits(e, "igraph.es") && !is.null(graph) && !warn_version(graph)) {
     if (get_graph_id(graph) != get_es_graph_id(e)) {
       cli::cli_abort("Cannot use an edge sequence from another graph.")
     }
@@ -1545,16 +1635,20 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
 
 
 parse_vs_op_args <- function(...) {
-  parse_op_args(...,
-    what = "a vertex", is_fun = is_igraph_vs,
+  parse_op_args(
+    ...,
+    what = "a vertex",
+    is_fun = is_igraph_vs,
     as_fun = as_igraph_vs
   )
 }
 
 
 parse_es_op_args <- function(...) {
-  parse_op_args(...,
-    what = "an edge", is_fun = is_igraph_es,
+  parse_op_args(
+    ...,
+    what = "an edge",
+    is_fun = is_igraph_es,
     as_fun = as_igraph_es
   )
 }
@@ -1564,8 +1658,10 @@ create_op_result <- function(parsed, result, class, args) {
   result <- add_vses_graph_ref(result, parsed$graph)
   class(result) <- class
   ## c() drops names for zero length vectors. Why???
-  if (!length(result) &&
-    any(sapply(args, function(x) !is.null(names(x))))) {
+  if (
+    !length(result) &&
+      any(sapply(args, function(x) !is.null(names(x))))
+  ) {
     names(result) <- character()
   }
   result

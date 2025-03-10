@@ -8,9 +8,22 @@
 #' @inheritParams graphlet_proj
 #' @keywords internal
 #' @export
-graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu = rep(1, length(cliques))) { # nocov start
+graphlets.project <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
-  graphlet_proj(graph = graph, weights = weights, cliques = cliques, niter = niter, Mu = Mu)
+  graphlet_proj(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    niter = niter,
+    Mu = Mu
+  )
 } # nocov end
 
 #' Graphlet decomposition of a graph
@@ -23,8 +36,13 @@ graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu =
 #' @inheritParams graphlet_basis
 #' @keywords internal
 #' @export
-graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.candidate.basis()", "graphlet_basis()")
+graphlets.candidate.basis <- function(graph, weights = NULL) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graphlets.candidate.basis()",
+    "graphlet_basis()"
+  )
   graphlet_basis(graph = graph, weights = weights)
 } # nocov end
 
@@ -126,8 +144,13 @@ graphlet_basis <- function(graph, weights = NULL) {
 
 #' @rdname graphlet_basis
 #' @export
-graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
-                          Mu = rep(1, length(cliques))) {
+graphlet_proj <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -186,7 +209,11 @@ function() {
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
 
-  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode = "undirected", weighted = TRUE)
+  g <- graph_from_adjacency_matrix(
+    D1 + D2 + D3,
+    mode = "undirected",
+    weighted = TRUE
+  )
   gl <- graphlets(g, iter = 1000)
 
   fitandplot(g, gl)

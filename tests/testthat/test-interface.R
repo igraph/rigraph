@@ -156,16 +156,49 @@ test_that("delete_edges works", {
 
   expected_matrix <- matrix(
     c(
-      0, 0, 0, 1, 1, 1,
-      0, 0, 0, 1, 1, 1,
-      0, 0, 0, 1, 1, 1,
-      1, 1, 1, 0, 0, 0,
-      1, 1, 1, 0, 0, 1,
-      1, 1, 1, 0, 1, 0
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
     ),
     nrow = 6L,
     ncol = 6L,
-    dimnames = list(c("A", "B", "C", "D", "E", "F"), c("A", "B", "C", "D", "E", "F"))
+    dimnames = list(
+      c("A", "B", "C", "D", "E", "F"),
+      c("A", "B", "C", "D", "E", "F")
+    )
   )
 
   expect_equal(as.matrix(g2[]), expected_matrix)

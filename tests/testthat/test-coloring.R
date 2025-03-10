@@ -23,7 +23,14 @@ test_that("greedy_vertex_coloring works on named graphs", {
 })
 
 test_that("simplify_and_colorize works", {
-  g <- make_graph(~ A - B - C - D - E, B - C, B - C, B - C, D - E - E, simplify = FALSE)
+  g <- make_graph(
+    ~ A - B - C - D - E,
+    B - C,
+    B - C,
+    B - C,
+    D - E - E,
+    simplify = FALSE
+  )
   result <- simplify_and_colorize(g)
 
   expect_true(is_simple(result))

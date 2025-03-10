@@ -19,7 +19,7 @@ tibblify_call <- function(deprecated_call) {
   args <- deprecated_call |>
     xml2::xml_parent() |>
     xml2::xml_siblings() |>
-    purrr::keep(~xml2::xml_name(.x) == "expr")
+    purrr::keep(~ xml2::xml_name(.x) == "expr")
   old <- xml2::xml_text(args[[1]])
   new <- xml2::xml_text(args[[2]])
   tibble::tibble(old = gsub('"', '', old), new = new)
@@ -31,17 +31,22 @@ detect_fun <- function(fun_name, lines) {
   file <- withr::local_tempfile()
   brio::write_lines(lines, file)
   xml <- parse_script(file)
-  called_funs <- xml2::xml_find_all(xml, ".//SYMBOL_FUNCTION_CALL") |> xml2::xml_text()
+  called_funs <- xml2::xml_find_all(xml, ".//SYMBOL_FUNCTION_CALL") |>
+    xml2::xml_text()
 
   any(called_funs == fun_name)
-
 }
 
 topics <- pkgdown::as_pkgdown()[["topics"]]
 
 treat_topic <- function(topic, deprecated_df) {
   message(topic)
-  lines <- example(topic, character.only = TRUE, package = "igraph", give.lines = TRUE)
+  lines <- example(
+    topic,
+    character.only = TRUE,
+    package = "igraph",
+    give.lines = TRUE
+  )
 
   no_example <- is.null(lines)
   if (no_example) {
@@ -62,10 +67,13 @@ treat_topic <- function(topic, deprecated_df) {
   }
 
   NULL
-
 }
 
-df <- purrr::map_df(topics[["name"]], treat_topic, deprecated_df = deprecated_df)
+df <- purrr::map_df(
+  topics[["name"]],
+  treat_topic,
+  deprecated_df = deprecated_df
+)
 # Update by hand, document(), R CMD build, re-run script to be sure
 if (nrow(df) > 0) {
   View(df)

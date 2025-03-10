@@ -37,7 +37,11 @@
 #' @family trees
 #' @export
 #' @cdocs igraph_is_tree
-is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALSE) {
+is_tree <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
   out <- is_tree_impl(graph, mode, details)
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
     out$root <- V(graph)[1]

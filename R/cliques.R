@@ -8,8 +8,13 @@
 #' @inheritParams max_ivs
 #' @keywords internal
 #' @export
-maximal.independent.vertex.sets <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "max_ivs()")
+maximal.independent.vertex.sets <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "maximal.independent.vertex.sets()",
+    "max_ivs()"
+  )
   max_ivs(graph = graph)
 } # nocov end
 
@@ -23,8 +28,18 @@ maximal.independent.vertex.sets <- function(graph) { # nocov start
 #' @inheritParams count_max_cliques
 #' @keywords internal
 #' @export
-maximal.cliques.count <- function(graph, min = NULL, max = NULL, subset = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximal.cliques.count()", "count_max_cliques()")
+maximal.cliques.count <- function(
+  graph,
+  min = NULL,
+  max = NULL,
+  subset = NULL
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "maximal.cliques.count()",
+    "count_max_cliques()"
+  )
   count_max_cliques(graph = graph, min = min, max = max, subset = subset)
 } # nocov end
 
@@ -38,7 +53,14 @@ maximal.cliques.count <- function(graph, min = NULL, max = NULL, subset = NULL) 
 #' @inheritParams max_cliques
 #' @keywords internal
 #' @export
-maximal.cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) { # nocov start
+maximal.cliques <- function(
+  graph,
+  min = NULL,
+  max = NULL,
+  subset = NULL,
+  file = NULL
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "maximal.cliques()", "max_cliques()")
   max_cliques(graph = graph, min = min, max = max, subset = subset, file = file)
 } # nocov end
@@ -53,8 +75,13 @@ maximal.cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file =
 #' @inheritParams largest_ivs
 #' @keywords internal
 #' @export
-largest.independent.vertex.sets <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "largest.independent.vertex.sets()", "largest_ivs()")
+largest.independent.vertex.sets <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "largest.independent.vertex.sets()",
+    "largest_ivs()"
+  )
   largest_ivs(graph = graph)
 } # nocov end
 
@@ -68,7 +95,8 @@ largest.independent.vertex.sets <- function(graph) { # nocov start
 #' @inheritParams largest_cliques
 #' @keywords internal
 #' @export
-largest.cliques <- function(graph) { # nocov start
+largest.cliques <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "largest.cliques()", "largest_cliques()")
   largest_cliques(graph = graph)
 } # nocov end
@@ -83,7 +111,8 @@ largest.cliques <- function(graph) { # nocov start
 #' @inheritParams ivs
 #' @keywords internal
 #' @export
-independent.vertex.sets <- function(graph, min = NULL, max = NULL) { # nocov start
+independent.vertex.sets <- function(graph, min = NULL, max = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "independent.vertex.sets()", "ivs()")
   ivs(graph = graph, min = min, max = max)
 } # nocov end
@@ -98,7 +127,8 @@ independent.vertex.sets <- function(graph, min = NULL, max = NULL) { # nocov sta
 #' @inheritParams ivs_size
 #' @keywords internal
 #' @export
-independence.number <- function(graph) { # nocov start
+independence.number <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "independence.number()", "ivs_size()")
   ivs_size(graph = graph)
 } # nocov end
@@ -113,7 +143,8 @@ independence.number <- function(graph) { # nocov start
 #' @inheritParams clique_num
 #' @keywords internal
 #' @export
-clique.number <- function(graph) { # nocov start
+clique.number <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "clique.number()", "clique_num()")
   clique_num(graph = graph)
 } # nocov end
@@ -137,8 +168,6 @@ clique.number <- function(graph) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Functions to find cliques, i.e. complete subgraphs in a graph
 #'
@@ -224,7 +253,13 @@ largest_cliques <- largest_cliques_impl
 #'   in the file, given with the numeric ids of its vertices, separated by
 #'   whitespace.
 #' @export
-max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
+max_cliques <- function(
+  graph,
+  min = NULL,
+  max = NULL,
+  subset = NULL,
+  file = NULL
+) {
   ensure_igraph(graph)
 
   if (is.null(min)) {
@@ -239,9 +274,11 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   }
 
   if (!is.null(file)) {
-    if (!is.character(file) ||
-      length(grep("://", file, fixed = TRUE)) > 0 ||
-      length(grep("~", file, fixed = TRUE)) > 0) {
+    if (
+      !is.character(file) ||
+        length(grep("://", file, fixed = TRUE)) > 0 ||
+        length(grep("~", file, fixed = TRUE)) > 0
+    ) {
       tmpfile <- TRUE
       origfile <- file
       file <- tempfile()
@@ -250,8 +287,12 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
     }
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques_file, graph, subset, file,
-      as.numeric(min), as.numeric(max)
+      R_igraph_maximal_cliques_file,
+      graph,
+      subset,
+      file,
+      as.numeric(min),
+      as.numeric(max)
     )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
@@ -261,8 +302,11 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   } else {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques, graph, subset,
-      as.numeric(min), as.numeric(max)
+      R_igraph_maximal_cliques,
+      graph,
+      subset,
+      as.numeric(min),
+      as.numeric(max)
     )
     res <- lapply(res, function(x) x + 1)
 
@@ -276,8 +320,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 
 #' @rdname cliques
 #' @export
-count_max_cliques <- function(graph, min = NULL, max = NULL,
-                              subset = NULL) {
+count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -443,7 +486,9 @@ ivs <- function(graph, min = NULL, max = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_independent_vertex_sets, graph, as.numeric(min),
+    R_igraph_independent_vertex_sets,
+    graph,
+    as.numeric(min),
     as.numeric(max)
   )
   res <- lapply(res, `+`, 1)

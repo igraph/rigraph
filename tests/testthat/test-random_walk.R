@@ -53,10 +53,18 @@ test_that("directed random_edge_walk works", {
 
   g <- make_ring(10, directed = TRUE)
   w <- random_edge_walk(g, start = 1, steps = 5)
-  expect_equal(ignore_attr = TRUE, w, structure(c(1L, 2L, 3L, 4L, 5L), class = "igraph.es"))
+  expect_equal(
+    ignore_attr = TRUE,
+    w,
+    structure(c(1L, 2L, 3L, 4L, 5L), class = "igraph.es")
+  )
 
   w <- random_edge_walk(g, start = 1, steps = 5, mode = "in")
-  expect_equal(ignore_attr = TRUE, w, structure(c(10L, 9L, 8L, 7L, 6L), class = "igraph.es"))
+  expect_equal(
+    ignore_attr = TRUE,
+    w,
+    structure(c(10L, 9L, 8L, 7L, 6L), class = "igraph.es")
+  )
 
   w <- random_edge_walk(g, start = 1, steps = 10, mode = "all")
   expect_length(w, 10)

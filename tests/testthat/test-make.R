@@ -147,50 +147,90 @@ test_that("make_full_graph works", {
 
 test_that("make_lattice works", {
   lattice_make <- make_lattice(dim = 2, length = 3, periodic = FALSE)
-  lattice_elist <- make_empty_graph(n = 9) + edges(c(
-    1, 2,
-    1, 4,
-    2, 3,
-    2, 5,
-    3, 6,
-    4, 5,
-    4, 7,
-    5, 6,
-    5, 8,
-    6, 9,
-    7, 8,
-    8, 9
-  ))
+  lattice_elist <- make_empty_graph(n = 9) +
+    edges(c(
+      1,
+      2,
+      1,
+      4,
+      2,
+      3,
+      2,
+      5,
+      3,
+      6,
+      4,
+      5,
+      4,
+      7,
+      5,
+      6,
+      5,
+      8,
+      6,
+      9,
+      7,
+      8,
+      8,
+      9
+    ))
   expect_equal(as_edgelist(lattice_make), as_edgelist(lattice_elist))
 
   lattice_make_periodic <- make_lattice(dim = 2, length = 3, periodic = TRUE)
-  lattice_elist_periodic <- make_empty_graph(n = 9) + edges(c(
-    1, 2,
-    1, 4,
-    2, 3,
-    2, 5,
-    1, 3,
-    3, 6,
-    4, 5,
-    4, 7,
-    5, 6,
-    5, 8,
-    4, 6,
-    6, 9,
-    7, 8,
-    1, 7,
-    8, 9,
-    2, 8,
-    7, 9,
-    3, 9
-  ))
-  expect_equal(as_edgelist(lattice_make_periodic), as_edgelist(lattice_elist_periodic))
+  lattice_elist_periodic <- make_empty_graph(n = 9) +
+    edges(c(
+      1,
+      2,
+      1,
+      4,
+      2,
+      3,
+      2,
+      5,
+      1,
+      3,
+      3,
+      6,
+      4,
+      5,
+      4,
+      7,
+      5,
+      6,
+      5,
+      8,
+      4,
+      6,
+      6,
+      9,
+      7,
+      8,
+      1,
+      7,
+      8,
+      9,
+      2,
+      8,
+      7,
+      9,
+      3,
+      9
+    ))
+  expect_equal(
+    as_edgelist(lattice_make_periodic),
+    as_edgelist(lattice_elist_periodic)
+  )
 })
 
 test_that("make_lattice prints a warning for fractional length)", {
-  expect_warning(make_lattice(dim = 2, length = sqrt(2000)), "`length` was rounded")
+  expect_warning(
+    make_lattice(dim = 2, length = sqrt(2000)),
+    "`length` was rounded"
+  )
 
-  suppressWarnings(lattice_rounded <- make_lattice(dim = 2, length = sqrt(2000)))
+  suppressWarnings(
+    lattice_rounded <- make_lattice(dim = 2, length = sqrt(2000))
+  )
   lattice_integer <- make_lattice(dim = 2, length = 45)
   expect_identical_graphs(lattice_rounded, lattice_integer)
 })
@@ -221,19 +261,29 @@ test_that("make_graph works for numeric edges and isolates", {
 
 test_that("make_graph handles names", {
   graph_make_names <- make_graph(letters[1:10])
-  graph_elist_names <- make_empty_graph() + vertices(letters[1:10]) + edges(letters[1:10])
+  graph_elist_names <- make_empty_graph() +
+    vertices(letters[1:10]) +
+    edges(letters[1:10])
   expect_identical_graphs(graph_make_names, graph_elist_names)
 })
 
 test_that("make_graph handles names and isolates", {
   graph_make_iso <- make_graph(letters[1:10], isolates = letters[11:20])
-  graph_elist_iso <- make_empty_graph() + vertices(letters[1:20]) + edges(letters[1:10])
+  graph_elist_iso <- make_empty_graph() +
+    vertices(letters[1:20]) +
+    edges(letters[1:10])
   expect_identical_graphs(graph_make_iso, graph_elist_iso)
 })
 
 test_that("make_graph gives warning for ignored arguments", {
-  expect_warning(make_graph(letters[1:10], n = 10), "ignored for edge list with vertex names")
-  expect_warning(make_graph(1:10, isolates = 11:12), "ignored for numeric edge list")
+  expect_warning(
+    make_graph(letters[1:10], n = 10),
+    "ignored for edge list with vertex names"
+  )
+  expect_warning(
+    make_graph(1:10, isolates = 11:12),
+    "ignored for numeric edge list"
+  )
 })
 
 test_that("compatibility when arguments are not named", {
@@ -248,19 +298,23 @@ test_that("compatibility when arguments are not named", {
 
 test_that("make_empty_graph gives an error for invalid arguments", {
   expect_snapshot(make_empty_graph(NULL), error = TRUE)
-  expect_warning(expect_error(make_empty_graph("spam")), "NAs introduced by coercion")
+  expect_warning(
+    expect_error(make_empty_graph("spam")),
+    "NAs introduced by coercion"
+  )
 })
 
 test_that("make_graph_atlas works", {
   atlas_124 <- graph_from_atlas(124)
-  expect_isomorphic(atlas_124, make_graph(c(1, 2, 2, 3, 3, 4, 4, 5, 1, 5, 1, 3, 2, 6),
-    directed = FALSE
-  ))
+  expect_isomorphic(
+    atlas_124,
+    make_graph(c(1, 2, 2, 3, 3, 4, 4, 5, 1, 5, 1, 3, 2, 6), directed = FALSE)
+  )
   atlas_234 <- graph_from_atlas(234)
-  expect_isomorphic(atlas_234, make_graph(c(1, 6, 2, 6, 3, 6, 4, 6, 5, 6),
-    n = 7,
-    directed = FALSE
-  ))
+  expect_isomorphic(
+    atlas_234,
+    make_graph(c(1, 6, 2, 6, 3, 6, 4, 6, 5, 6), n = 7, directed = FALSE)
+  )
 })
 
 test_that("make_chordal_ring works", {
@@ -282,15 +336,35 @@ test_that("make_de_bruijn_graph works", {
   de_bruijn22 <- make_de_bruijn_graph(2, 2)
   de_bruijn21_line <- make_line_graph(de_bruijn21)
 
-  expect_isomorphic(de_bruijn21_line, make_graph(c(
-    1, 1, 3, 1, 1, 2, 3, 2, 2, 3,
-    4, 3, 2, 4, 4, 4
-  )))
+  expect_isomorphic(
+    de_bruijn21_line,
+    make_graph(c(
+      1,
+      1,
+      3,
+      1,
+      1,
+      2,
+      3,
+      2,
+      2,
+      3,
+      4,
+      3,
+      2,
+      4,
+      4,
+      4
+    ))
+  )
   expect_isomorphic(de_bruijn22, de_bruijn21_line)
 })
 
 test_that("make_bipartite_graph works", {
-  inc_mat_rand <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
+  inc_mat_rand <- matrix(
+    sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
+    ncol = 5
+  )
   bip_from_inc <- graph_from_biadjacency_matrix(inc_mat_rand)
 
   edges <- unlist(sapply(seq_len(nrow(inc_mat_rand)), function(x) {
@@ -301,7 +375,10 @@ test_that("make_bipartite_graph works", {
       numeric()
     }
   }))
-  bip_from_make <- make_bipartite_graph(seq_len(nrow(inc_mat_rand) + ncol(inc_mat_rand)) > nrow(inc_mat_rand), edges)
+  bip_from_make <- make_bipartite_graph(
+    seq_len(nrow(inc_mat_rand) + ncol(inc_mat_rand)) > nrow(inc_mat_rand),
+    edges
+  )
   inc_mat_bip <- as_biadjacency_matrix(bip_from_make)
 
   expect_equal(inc_mat_bip, inc_mat_rand, ignore_attr = TRUE)
@@ -310,13 +387,39 @@ test_that("make_bipartite_graph works", {
 test_that("make_bipartite_graph works with vertex names", {
   types <- c(0, 1, 0, 1, 0, 1)
   names(types) <- LETTERS[1:length(types)]
-  edges <- c("A", "B", "C", "D", "E", "F", "A", "D", "D", "E", "B", "C", "C", "F")
+  edges <- c(
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "A",
+    "D",
+    "D",
+    "E",
+    "B",
+    "C",
+    "C",
+    "F"
+  )
   bip_grap <- make_bipartite_graph(types, edges)
 
-  expect_equal(V(bip_grap)$name, c("A", "B", "C", "D", "E", "F"), ignore_attr = TRUE)
-  expect_equal(V(bip_grap)$type, c(FALSE, TRUE, FALSE, TRUE, FALSE, TRUE), ignore_attr = TRUE)
+  expect_equal(
+    V(bip_grap)$name,
+    c("A", "B", "C", "D", "E", "F"),
+    ignore_attr = TRUE
+  )
+  expect_equal(
+    V(bip_grap)$type,
+    c(FALSE, TRUE, FALSE, TRUE, FALSE, TRUE),
+    ignore_attr = TRUE
+  )
 
-  expect_error(make_bipartite_graph(types, c(edges, "Q")), "edge vector contains a vertex name that is not found")
+  expect_error(
+    make_bipartite_graph(types, c(edges, "Q")),
+    "edge vector contains a vertex name that is not found"
+  )
 })
 
 test_that("make_full_bipartite_graph works", {
@@ -336,20 +439,110 @@ test_that("make_kautz_graph works", {
 
   el <- as_edgelist(kautz)
   el <- el[order(el[, 1], el[, 2]), ]
-  expect_equal(el, structure(
-    c(
-      1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6,
-      7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
-      12, 13, 13, 14, 14, 15, 15, 16, 16, 17,
-      17, 18, 18, 19, 19, 20, 20, 21, 21, 22,
-      22, 23, 23, 24, 24, 9, 10, 11, 12, 13,
-      14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-      24, 1, 2, 3, 4, 5, 6, 7, 8, 17, 18, 19,
-      20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6, 7,
-      8, 9, 10, 11, 12, 13, 14, 15, 16
-    ),
-    .Dim = c(48L, 2L)
-  ))
+  expect_equal(
+    el,
+    structure(
+      c(
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        13,
+        13,
+        14,
+        14,
+        15,
+        15,
+        16,
+        16,
+        17,
+        17,
+        18,
+        18,
+        19,
+        19,
+        20,
+        20,
+        21,
+        21,
+        22,
+        22,
+        23,
+        23,
+        24,
+        24,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ),
+      .Dim = c(48L, 2L)
+    )
+  )
 })
 
 test_that("make_graph for notable graphs is case insensitive", {

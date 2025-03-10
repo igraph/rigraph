@@ -31,7 +31,10 @@ test_that("eulerian_path works", {
   path <- eulerian_path(g)
   path$epath <- as.vector(path$epath)
   path$vpath <- as.vector(path$vpath)
-  expect_equal(path$epath, as.vector(E(g, path = c(1, 2, 3, 4, 2, 6, 1, 5, 4, 6, 5))))
+  expect_equal(
+    path$epath,
+    as.vector(E(g, path = c(1, 2, 3, 4, 2, 6, 1, 5, 4, 6, 5)))
+  )
   expect_equal(path$vpath, c(1, 2, 3, 4, 2, 6, 1, 5, 4, 6, 5))
 
   g <- graph_from_literal(A - B - C - D - A - D - C, B - D, simplify = FALSE)

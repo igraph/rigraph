@@ -26,8 +26,36 @@ test_that("Listing triangles works", {
   g10 <- make_full_graph(5, directed = FALSE)
   g11 <- make_full_graph(5, directed = TRUE)
   r10 <- c(
-    1L, 2L, 5L, 1L, 2L, 3L, 1L, 2L, 4L, 1L, 3L, 5L, 1L, 3L, 4L,
-    1L, 4L, 5L, 2L, 3L, 5L, 2L, 3L, 4L, 2L, 4L, 5L, 3L, 4L, 5L
+    1L,
+    2L,
+    5L,
+    1L,
+    2L,
+    3L,
+    1L,
+    2L,
+    4L,
+    1L,
+    3L,
+    5L,
+    1L,
+    3L,
+    4L,
+    1L,
+    4L,
+    5L,
+    2L,
+    3L,
+    5L,
+    2L,
+    3L,
+    4L,
+    2L,
+    4L,
+    5L,
+    3L,
+    4L,
+    5L
   )
   r11 <- r10
   expect_equal(triangles(g10), r10)

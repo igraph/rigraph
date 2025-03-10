@@ -5,7 +5,10 @@ test_that("components works", {
     largest_component(sample_gnp(n, 1 / n))
   }
 
-  random_lg_list <- lapply(1:30, function(x) random_largest_component(sample(100, 1)))
+  random_lg_list <- lapply(
+    1:30,
+    function(x) random_largest_component(sample(100, 1))
+  )
   lg_size <- sapply(random_lg_list, vcount)
 
   dis_union <- disjoint_union(random_lg_list)
@@ -140,7 +143,10 @@ test_that("articulation_points works", {
 
 test_that("bridges works", {
   kite <- make_graph("krackhardt_kite")
-  expect_equal(sort(as.vector(bridges(kite))), (ecount(kite) - 1):(ecount(kite)))
+  expect_equal(
+    sort(as.vector(bridges(kite))),
+    (ecount(kite) - 1):(ecount(kite))
+  )
 })
 
 test_that("biconnected_components works", {
@@ -156,18 +162,24 @@ test_that("biconnected_components works", {
 
   bc <- biconnected_components(g)
   expect_equal(bc$no, 3)
-  expect_equal(sortlist(bc$tree_edges), list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21))
+  expect_equal(
+    sortlist(bc$tree_edges),
+    list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21)
+  )
   expect_equal(sortlist(bc$component_edges), list(11:20, 1:10, 21))
   expect_equal(sortlist(bc$components), list(1:5, c(1, 6), 6:10))
   expect_equal(sort(as.vector(bc$articulation_points)), c(1, 6))
 
-  expect_equal(sort(names(bc)), c(
-    "articulation_points",
-    "component_edges",
-    "components",
-    "no",
-    "tree_edges"
-  ))
+  expect_equal(
+    sort(names(bc)),
+    c(
+      "articulation_points",
+      "component_edges",
+      "components",
+      "no",
+      "tree_edges"
+    )
+  )
   expect_s3_class(bc$articulation_points, "igraph.vs")
   expect_s3_class(bc$components[[1]], "igraph.vs")
   expect_s3_class(bc$component_edges[[1]], "igraph.es")
@@ -187,18 +199,24 @@ test_that("biconnected_components works without igraph.vs.es", {
 
   bc <- biconnected_components(g)
   expect_equal(bc$no, 3)
-  expect_equal(sortlist(bc$tree_edges), list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21))
+  expect_equal(
+    sortlist(bc$tree_edges),
+    list(c(11, 15, 18, 20), c(1, 5, 8, 10), 21)
+  )
   expect_equal(sortlist(bc$component_edges), list(11:20, 1:10, 21))
   expect_equal(sortlist(bc$components), list(1:5, c(1, 6), 6:10))
   expect_equal(sort(bc$articulation_points), c(1, 6))
 
-  expect_equal(sort(names(bc)), c(
-    "articulation_points",
-    "component_edges",
-    "components",
-    "no",
-    "tree_edges"
-  ))
+  expect_equal(
+    sort(names(bc)),
+    c(
+      "articulation_points",
+      "component_edges",
+      "components",
+      "no",
+      "tree_edges"
+    )
+  )
 })
 
 test_that("is_biconnected works", {

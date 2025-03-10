@@ -43,6 +43,12 @@ test_that("graph_from_graphdb works", {
   skip_on_cran()
   expect_snapshot(g <- graph_from_graphdb(nodes = 1000))
   expect_snapshot(g <- graph_from_graphdb(), error = TRUE)
-  expect_snapshot(g <- graph_from_graphdb(nodes = 10, prefix = "not_existing"), error = TRUE)
-  expect_snapshot(g <- graph_from_graphdb(nodes = 10, type = "not_existing"), error = TRUE)
+  expect_snapshot(
+    g <- graph_from_graphdb(nodes = 10, prefix = "not_existing"),
+    error = TRUE
+  )
+  expect_snapshot(
+    g <- graph_from_graphdb(nodes = 10, type = "not_existing"),
+    error = TRUE
+  )
 })
