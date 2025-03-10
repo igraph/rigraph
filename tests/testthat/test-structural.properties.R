@@ -188,7 +188,7 @@ test_that("bfs() works", {
   local_igraph_options(print.id = FALSE)
 
   expect_snapshot({
-    g <- graph_from_literal(a - +b - +c, z - +a, d)
+    g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(
       g,
       root = 2,
@@ -205,7 +205,7 @@ test_that("bfs() works", {
 })
 
 test_that("bfs() deprecated arguments", {
-  g <- graph_from_literal(a - +b - +c, z - +a, d)
+  g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
 
   expect_snapshot(error = TRUE, {
     b <- bfs(
