@@ -188,13 +188,14 @@ Authors:
   \item Szabolcs Horvát \email{szhorvat@gmail.com} (\href{https://orcid.org/0000-0002-3100-523X}{ORCID})
   \item Fabio Zanini \email{fabio.zanini@unsw.edu.au} (\href{https://orcid.org/0000-0001-7097-8539}{ORCID})
   \item Daniel Noom
+  \item David Schoch \email{david.schoch@cynkra.com} (\href{https://orcid.org/0000-0003-2952-4812}{ORCID})
+  \item Maëlle Salmon \email{maelle@cynkra.com} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Maëlle Salmon [contributor]
   \item Michael Antonov [contributor]
-  \item Chan Zuckerberg Initiative [funder]
+  \item Chan Zuckerberg Initiative (\href{https://ror.org/02qenvm24}{ROR}) [funder]
 }
 
 }
