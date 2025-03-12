@@ -1627,7 +1627,8 @@ neighborhood_size <- ego_size
 #' @aliases neighborhood ego_graph
 #' @aliases connect ego_size ego
 #' @param graph The input graph.
-#' @param order Integer giving the order of the neighborhood.
+#' @param order Integer giving the order of the neighborhood. Negative values
+#'   indicate an infinite order.
 #' @param nodes The vertices for which the calculation is performed.
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
