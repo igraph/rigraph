@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,35 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.1.4.9020" id="igraph-2149020">igraph 2.1.4.9020<a class="anchor" aria-label="anchor" href="#igraph-2149020"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-1-4-9020">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-4-9020"></a></h3>
+<ul><li><p>Changed base location for graph_from_graphdb and added tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1712" class="external-link">#1712</a>, <a href="https://github.com/igraph/rigraph/issues/1732" class="external-link">#1732</a>).</p></li>
+<li><p>Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/848" class="external-link">#848</a>, <a href="https://github.com/igraph/rigraph/issues/1731" class="external-link">#1731</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-1-4-9020">Features<a class="anchor" aria-label="anchor" href="#features-2-1-4-9020"></a></h3>
+<ul><li>
+<code><a href="../reference/feedback_vertex_set.html">feedback_vertex_set()</a></code> finds a minimum feedback vertex set in a graph (<a href="https://github.com/igraph/rigraph/issues/1446" class="external-link">#1446</a>, <a href="https://github.com/igraph/rigraph/issues/1447" class="external-link">#1447</a>, <a href="https://github.com/igraph/rigraph/issues/1560" class="external-link">#1560</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-1-4-9020">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-4-9020"></a></h3>
+<ul><li><p>Add include.</p></li>
+<li><p>R 4.0 compat.</p></li>
+<li><p>Remove <code>Rf_allocSExp()</code> which is no longer in R’s C API (<a href="https://github.com/igraph/rigraph/issues/1735" class="external-link">#1735</a>).</p></li>
+<li><p>Fix Stimulus (<a href="https://github.com/igraph/rigraph/issues/1737" class="external-link">#1737</a>).</p></li>
+<li><p>Use <code>"parent"</code> instead of <code>"father"</code> in <code><a href="../reference/bfs.html">bfs()</a></code> and <code><a href="../reference/dfs.html">dfs()</a></code> (<a href="https://github.com/igraph/rigraph/issues/880" class="external-link">#880</a>, <a href="https://github.com/igraph/rigraph/issues/1523" class="external-link">#1523</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-1-4-9020">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-4-9020"></a></h3>
+<ul><li>Welcome Maëlle Salmon and David Schoch as authors (<a href="https://github.com/igraph/rigraph/issues/1733" class="external-link">#1733</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-1-4-9020">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-4-9020"></a></h3>
+<ul><li>Merged feedback.set tests into structural.properties (<a href="https://github.com/igraph/rigraph/issues/1743" class="external-link">#1743</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.4.9019" id="igraph-2149019">igraph 2.1.4.9019<a class="anchor" aria-label="anchor" href="#igraph-2149019"></a></h2>
 <div class="section level3">
