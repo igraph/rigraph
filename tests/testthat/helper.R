@@ -20,8 +20,12 @@ local_rng_version <- function(version, .local_envir = parent.frame()) {
   orig
 }
 
-expect_isomorphic <- function(g1, g2) {
-  expect_true(isomorphic(g1, g2))
+expect_isomorphic <- function(g1, g2, ...) {
+  expect_true(isomorphic(g1, g2, ...))
+}
+
+expect_not_isomorphic <- function(g1, g2, ...) {
+  expect_false(isomorphic(g1, g2, ...))
 }
 
 expect_vcount <- function(graph, expected, ...) {

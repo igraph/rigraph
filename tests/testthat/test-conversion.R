@@ -53,7 +53,7 @@ test_that("as.undirected() deprecation", {
 })
 
 test_that("as_undirected() keeps attributes", {
-  g <- graph_from_literal(A +-+ B, A --+ C, C +-+ D)
+  g <- graph_from_literal(A + -+B, A - -+C, C + -+D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
@@ -306,11 +306,11 @@ test_that("as_adj_list works", {
   expect_s3_class(adj_list[[1]], "igraph.vs")
   g_same <- graph_from_adj_list(adj_list, mode = "all")
   expect_isomorphic(g, g_same)
-  expect_true(isomorphic(g, g_same,
+  expect_isomorphic(g, g_same,
     method = "vf2",
     vertex.color1 = seq_len(vcount(g)),
     vertex.color2 = seq_len(vcount(g_same))
-  ))
+  )
 
   adj_el_list <- as_adj_edge_list(g)
   expect_s3_class(adj_el_list[[1]], "igraph.es")
@@ -345,11 +345,11 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   expect_s3_class(adj_list[[1]], NA)
   g2 <- graph_from_adj_list(adj_list, mode = "all")
   expect_isomorphic(g, g2)
-  expect_true(isomorphic(g, g2,
+  expect_isomorphic(g, g2,
     method = "vf2",
     vertex.color1 = 1:vcount(g),
     vertex.color2 = 1:vcount(g2)
-  ))
+  )
 
   adj_el_list <- as_adj_edge_list(g)
   for (i in seq_len(vcount(g))) {
@@ -554,4 +554,45 @@ test_that("graph_from_data_frame works on matrices", {
   g <- delete_vertex_attr(g, "name")
   el2 <- as_data_frame(g)
   expect_equal(as.data.frame(el), el2, ignore_attr = TRUE)
+})
+
+test_that("edge names work", {
+  ## named edges
+  local_igraph_options(print.edge.attributes = TRUE)
+  g <- make_ring(10)
+  E(g)$name <- letters[1:ecount(g)]
+  g2 <- delete_edges(g, c("b", "d", "e"))
+  expect_equal(
+    as_edgelist(g2),
+    structure(c(1, 3, 6, 7, 8, 9, 1, 2, 4, 7, 8, 9, 10, 10), .Dim = c(7L, 2L))
+  )
+
+  ## named vertices
+  g <- make_ring(10)
+  V(g)$name <- letters[1:vcount(g)]
+  g3 <- delete_edges(g, c("a|b", "f|g", "c|b"))
+  expect_equal(
+    as_edgelist(g3),
+    structure(c("c", "d", "e", "g", "h", "i", "a", "d", "e", "f", "h", "i", "j", "j"), .Dim = c(7L, 2L))
+  )
+
+
+  ## no names at all, but select edges based on vertices
+  g <- make_ring(10)
+  g4 <- delete_edges(g, c("1|2", "8|7", "1|10"))
+  expect_equal(
+    as_edgelist(g4),
+    structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7, 9, 10), .Dim = c(7L, 2L))
+  )
+
+
+  ## mix edge names and vertex names
+  g <- make_ring(10)
+  V(g)$name <- letters[1:vcount(g)]
+  E(g)$name <- LETTERS[1:ecount(g)]
+  g5 <- delete_edges(g, c("a|b", "F", "j|i"))
+  expect_equal(
+    as_edgelist(g5),
+    structure(c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"), .Dim = c(7L, 2L))
+  )
 })

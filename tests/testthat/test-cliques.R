@@ -1,23 +1,23 @@
 test_that("cliques() works", {
   withr::local_seed(42)
 
-  check.clique <- function(graph, vids) {
+  is_clique <- function(graph, vids) {
     s <- induced_subgraph(graph, vids)
     ecount(s) == vcount(s) * (vcount(s) - 1) / 2
   }
 
-  g <- sample_gnp(100, 0.3)
-  expect_equal(clique_num(g), 6)
+  gnp <- sample_gnp(100, 0.3)
+  expect_equal(clique_num(gnp), 6)
 
-  cl <- sapply(cliques(g, min = 6), check.clique, graph = g)
-  lcl <- sapply(largest_cliques(g), check.clique, graph = g)
+  cl <- sapply(cliques(gnp, min = 6), is_clique, graph = gnp)
+  lcl <- sapply(largest_cliques(gnp), is_clique, graph = gnp)
   expect_equal(cl, lcl)
   expect_equal(cl, rep(TRUE, 17))
   expect_equal(lcl, rep(TRUE, 17))
 
   ## To have a bit less maximal cliques, about 100-200 usually
-  g <- sample_gnp(100, 0.03)
-  expect_true(all(sapply(max_cliques(g), check.clique, graph = g)))
+  gnp100 <- sample_gnp(100, 0.03)
+  expect_true(all(sapply(max_cliques(gnp100), is_clique, graph = gnp100)))
 })
 
 test_that("clique_size_counts() works", {
@@ -38,7 +38,7 @@ test_that("weighted_cliques works", {
   g <- make_graph(~ A - B - C - A - D - E - F - G - H - D - F - H - E - G - D)
   weights <- c(5, 5, 5, 3, 3, 3, 3, 2)
 
-  check.clique <- function(graph, vids, min_weight) {
+  is_clique_weight <- function(graph, vids, min_weight) {
     s <- induced_subgraph(graph, vids)
     ecount(s) == vcount(s) * (vcount(s) - 1) / 2 && sum(V(s)$weight) >= min_weight
   }
@@ -49,27 +49,27 @@ test_that("weighted_cliques works", {
   )
 
   V(g)$weight <- weights
-  cl <- sapply(weighted_cliques(g, min.weight = 9), check.clique, graph = g, min_weight = 9)
+  cl <- sapply(weighted_cliques(g, min.weight = 9), is_clique_weight, graph = g, min_weight = 9)
   expect_equal(cl, rep(TRUE, 14))
 
-  g <- make_graph("zachary")
-  weights <- rep(1, vcount(g))
+  karate <- make_graph("zachary")
+  weights <- rep(1, vcount(karate))
   weights[c(1, 2, 3, 4, 14)] <- 3
-  expect_equal(weighted_clique_num(g, vertex.weights = weights), 15)
+  expect_equal(weighted_clique_num(karate, vertex.weights = weights), 15)
 
-  V(g)$weight <- weights * 2
-  expect_equal(weighted_clique_num(g), 30)
+  V(karate)$weight <- weights * 2
+  expect_equal(weighted_clique_num(karate), 30)
 })
 
 test_that("max_cliques() work", {
   withr::local_seed(42)
-  G <- sample_gnm(1000, 1000)
-  cli <- make_full_graph(10)
+  gnp <- sample_gnm(1000, 1000)
+  full10 <- make_full_graph(10)
   for (i in 1:10) {
-    G <- permute(G, sample(vcount(G)))
-    G <- G %u% cli
+    gnp <- permute(gnp, sample(vcount(gnp)))
+    gnp <- gnp %u% full10
   }
-  G <- simplify(G)
+  gnp <- simplify(gnp)
 
   mysort <- function(x) {
     xl <- sapply(x, length)
@@ -179,15 +179,15 @@ test_that("max_cliques() work", {
     lapply(res, as.integer)
   }
 
-  cl1 <- mysort(bk4(G, min = 3))
-  cl2 <- mysort(unvs(max_cliques(G, min = 3)))
+  cl1 <- mysort(bk4(gnp, min = 3))
+  cl2 <- mysort(unvs(max_cliques(gnp, min = 3)))
 
   expect_identical(cl1, cl2)
 })
 
 test_that("max_cliques() work for subsets", {
   withr::local_seed(42)
-  G <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, .5)
 
   mysort <- function(x) {
     xl <- sapply(x, length)
@@ -196,10 +196,10 @@ test_that("max_cliques() work for subsets", {
     x[order(xl, xc)]
   }
 
-  cl1 <- mysort(unvs(max_cliques(G, min = 8)))
+  cl1 <- mysort(unvs(max_cliques(gnp, min = 8)))
 
-  c1 <- unvs(max_cliques(G, min = 8, subset = 1:13))
-  c2 <- unvs(max_cliques(G, min = 8, subset = 14:100))
+  c1 <- unvs(max_cliques(gnp, min = 8, subset = 1:13))
+  c2 <- unvs(max_cliques(gnp, min = 8, subset = 14:100))
   cl2 <- mysort(c(c1, c2))
 
   expect_identical(cl1, cl2)
@@ -207,34 +207,34 @@ test_that("max_cliques() work for subsets", {
 
 test_that("count_max_cliques works", {
   withr::local_seed(42)
-  G <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, .5)
 
-  cl1 <- count_max_cliques(G, min = 8)
+  cl1 <- count_max_cliques(gnp, min = 8)
 
-  c1 <- count_max_cliques(G, min = 8, subset = 1:13)
-  c2 <- count_max_cliques(G, min = 8, subset = 14:100)
+  c1 <- count_max_cliques(gnp, min = 8, subset = 1:13)
+  c2 <- count_max_cliques(gnp, min = 8, subset = 14:100)
   cl2 <- c1 + c2
 
   expect_identical(cl1, cl2)
 })
 
 test_that("ivs() works", {
-  g <- sample_gnp(50, 0.8)
-  ivs <- ivs(g, min = ivs_size(g))
-  ec <- sapply(seq_along(ivs), function(x) {
-    ecount(induced_subgraph(g, ivs[[x]]))
+  gnp <- sample_gnp(50, 0.8)
+  ivs <- ivs(gnp, min = ivs_size(gnp))
+  edges_iv <- sapply(seq_along(ivs), function(x) {
+    ecount(induced_subgraph(gnp, ivs[[x]]))
   })
-  expect_equal(unique(ec), 0)
+  expect_equal(unique(edges_iv), 0)
 })
 
 test_that("ivs() works, cliques of complement", {
   # 2385298846 https://github.com/igraph/rigraph/pull/1541#issuecomment-2385298846
   # that the independent vertex sets of G are
   # the same as the cliques of the complement of G (and vice versa)
-  g <- sample_gnp(50, 0.8)
-  ivs <- ivs(g, min = ivs_size(g)) %>% lapply(as.numeric)
-  complement <- complementer(g)
-  cliques <- cliques(complement, min = ivs_size(g)) %>% lapply(as.numeric)
+  gnp <- sample_gnp(50, 0.8)
+  ivs <- ivs(gnp, min = ivs_size(gnp)) %>% lapply(as.numeric)
+  complement <- complementer(gnp)
+  cliques <- cliques(complement, min = ivs_size(gnp)) %>% lapply(as.numeric)
 
   expect_equal(length(ivs), length(cliques))
 
@@ -276,5 +276,14 @@ test_that("largest_ivs() works", {
   })
   expect_equal(unique(ec), 0)
 
-  ## TODO: check that they are largest
+  expect_length(ivs(g, min = length(livs[[1]]) + 1), 0)
+})
+
+test_that("largest_cliques works", {
+  g <- sample_gnp(50, 20 / 50)
+  lc <- largest_cliques(g)
+  expect_length(cliques(g, min = length(lc[[1]]) + 1), 0)
+
+  lc_ring <- largest_cliques(make_ring(10))
+  expect_equal(max(sapply(lc_ring, length)), 2)
 })

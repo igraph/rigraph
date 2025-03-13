@@ -273,6 +273,7 @@ Other structural.properties:
 \code{\link{dfs}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
