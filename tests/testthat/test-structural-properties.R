@@ -751,6 +751,24 @@ test_that("coreness() works", {
   expect_equal(gc, c(3, 3, 3, 2, 2, 2, 2, 2, 2, 2))
 })
 
+test_that("laplacian_matrix() works", {
+  skip_if_not_installed("Matrix")
+  library("Matrix")
+  mat <- rbind(
+    c(116, 210, 200),
+    c(210, 386, 380),
+    c(200, 380, 401)
+  )
+
+  Ai <- graph_from_adjacency_matrix(
+    as(mat, "dgCMatrix"),
+    weighted = TRUE,
+    mode = "undirected"
+  )
+
+  expect_snapshot(laplacian_matrix(Ai, normalization = "unnormalized"))
+})
+
 test_that("mean_distance works", {
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
