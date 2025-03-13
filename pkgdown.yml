@@ -7,7 +7,7 @@ articles:
   igraph_ES: igraph_ES.html
   igraph: igraph.html
   articles/installation-troubleshooting: installation-troubleshooting.html
-last_built: 2025-03-13T09:46Z
+last_built: 2025-03-13T09:53Z
 urls:
   reference: https://r.igraph.org/reference
   article: https://r.igraph.org/articles
