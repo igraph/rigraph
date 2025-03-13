@@ -20,7 +20,10 @@ treat_impl <- function(impl) {
   }
 
   function_body <- xml2::xml_children(impl)[[3]]
-  dotcall_calls <- xml2::xml_find_all(function_body, ".//SYMBOL_FUNCTION_CALL[contains(text(), '.Call')]")
+  dotcall_calls <- xml2::xml_find_all(
+    function_body,
+    ".//SYMBOL_FUNCTION_CALL[contains(text(), '.Call')]"
+  )
 
   treat_dotcall_call <- function(dotcall_call) {
     dotcall_call |>
@@ -39,12 +42,22 @@ treat_impl <- function(impl) {
 
 impl_df <- purrr::map_df(impl_kiddos, treat_impl) |>
   tidyr::unnest(rrrigraph)
-impl_df <- impl_df[impl_df$rrrigraph != "R_igraph_finalizer",]
+impl_df <- impl_df[impl_df$rrrigraph != "R_igraph_finalizer", ]
 
 ## Find igraph functions
-igraph_yaml <- yaml::read_yaml(file.path("tools", "stimulus", "functions-R.yaml"))
+igraph_yaml <- yaml::read_yaml(file.path(
+  "tools",
+  "stimulus",
+  "functions-R.yaml"
+))
 igraph_functions <- names(igraph_yaml)
-igraph_yaml2 <- yaml::read_yaml(file.path("src", "vendor", "cigraph", "interfaces", "functions.yaml"))
+igraph_yaml2 <- yaml::read_yaml(file.path(
+  "src",
+  "vendor",
+  "cigraph",
+  "interfaces",
+  "functions.yaml"
+))
 igraph_functions2 <- names(igraph_yaml2)
 # setdiff(igraph_functions2, igraph_functions)
 # ???
@@ -57,7 +70,11 @@ find_igraph <- function(rrr_igraph, igraph_functions) {
   }
 }
 
-impl_df$igraph <- purrr::map_chr(impl_df$rrrigraph, find_igraph, igraph_functions = igraph_functions)
+impl_df$igraph <- purrr::map_chr(
+  impl_df$rrrigraph,
+  find_igraph,
+  igraph_functions = igraph_functions
+)
 
 ## Now find where to add the cdogs tags yay
 r_scripts <- fs::dir_ls("R", glob = "*.R")
@@ -137,11 +154,14 @@ all_funs <- dplyr::left_join(all_funs, clinks, by = "igraph")
 all_funs <- dplyr::filter(all_funs, !is.na(url))
 
 for (i in 1:nrow(all_funs)) {
-  if (all_funs$name[i] %in%  getNamespaceExports("igraph")) {
+  if (all_funs$name[i] %in% getNamespaceExports("igraph")) {
     cli::cli_alert_info(all_funs$impl[i])
     script_lines <- brio::read_lines(all_funs$script[i])
 
-    target_line <- which(startsWith(script_lines, sprintf("%s <- ", all_funs$name[i])))
+    target_line <- which(startsWith(
+      script_lines,
+      sprintf("%s <- ", all_funs$name[i])
+    ))
 
     script_lines <- append(
       script_lines,
@@ -151,10 +171,10 @@ for (i in 1:nrow(all_funs)) {
 
     brio::write_lines(script_lines, all_funs$script[i])
     devtools::document()
-    gert::git_commit_all(sprintf("docs: add cdocs tag for %s", all_funs$name[i]))
+    gert::git_commit_all(sprintf(
+      "docs: add cdocs tag for %s",
+      all_funs$name[i]
+    ))
     gert::git_push()
   }
-
 }
-
-

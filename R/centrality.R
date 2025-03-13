@@ -8,8 +8,13 @@
 #' @inheritParams subgraph_centrality
 #' @keywords internal
 #' @export
-subgraph.centrality <- function(graph, diag = FALSE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "subgraph.centrality()", "subgraph_centrality()")
+subgraph.centrality <- function(graph, diag = FALSE) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "subgraph.centrality()",
+    "subgraph_centrality()"
+  )
   subgraph_centrality(graph = graph, diag = diag)
 } # nocov end
 
@@ -23,9 +28,28 @@ subgraph.centrality <- function(graph, diag = FALSE) { # nocov start
 #' @inheritParams page_rank
 #' @keywords internal
 #' @export
-page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), directed = TRUE, damping = 0.85, personalized = NULL, weights = NULL, options = NULL) { # nocov start
+page.rank <- function(
+  graph,
+  algo = c("prpack", "arpack"),
+  vids = V(graph),
+  directed = TRUE,
+  damping = 0.85,
+  personalized = NULL,
+  weights = NULL,
+  options = NULL
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
-  page_rank(graph = graph, algo = algo, vids = vids, directed = directed, damping = damping, personalized = personalized, weights = weights, options = options)
+  page_rank(
+    graph = graph,
+    algo = algo,
+    vids = vids,
+    directed = directed,
+    damping = damping,
+    personalized = personalized,
+    weights = weights,
+    options = options
+  )
 } # nocov end
 
 #' Kleinberg's hub and authority centrality scores.
@@ -38,7 +62,13 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @inheritParams hub_score
 #' @keywords internal
 #' @export
-hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+hub.score <- function(
+  graph,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
+  # nocov start
   lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_scores()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
@@ -53,9 +83,20 @@ hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @inheritParams authority_score
 #' @keywords internal
 #' @export
-authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+authority.score <- function(
+  graph,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
+  # nocov start
   lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_scores()")
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)
+  authority_score(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options
+  )
 } # nocov end
 
 #' Strength or weighted vertex degree
@@ -68,9 +109,22 @@ authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpac
 #' @inheritParams strength
 #' @keywords internal
 #' @export
-graph.strength <- function(graph, vids = V(graph), mode = c("all", "out", "in", "total"), loops = TRUE, weights = NULL) { # nocov start
+graph.strength <- function(
+  graph,
+  vids = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  weights = NULL
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
-  strength(graph = graph, vids = vids, mode = mode, loops = loops, weights = weights)
+  strength(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    loops = loops,
+    weights = weights
+  )
 } # nocov end
 
 #' Eigenvalues and eigenvectors of the adjacency matrix of a graph
@@ -83,9 +137,27 @@ graph.strength <- function(graph, vids = V(graph), mode = c("all", "out", "in", 
 #' @inheritParams spectrum
 #' @keywords internal
 #' @export
-graph.eigen <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which = list(), options = arpack_defaults()) { # nocov start
+graph.eigen <- function(
+  graph,
+  algorithm = c(
+    "arpack",
+    "auto",
+    "lapack",
+    "comp_auto",
+    "comp_lapack",
+    "comp_arpack"
+  ),
+  which = list(),
+  options = arpack_defaults()
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.eigen()", "spectrum()")
-  spectrum(graph = graph, algorithm = algorithm, which = which, options = options)
+  spectrum(
+    graph = graph,
+    algorithm = algorithm,
+    which = which,
+    options = options
+  )
 } # nocov end
 
 #' Graph diversity
@@ -98,7 +170,8 @@ graph.eigen <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_a
 #' @inheritParams diversity
 #' @keywords internal
 #' @export
-graph.diversity <- function(graph, weights = NULL, vids = V(graph)) { # nocov start
+graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.diversity()", "diversity()")
   diversity(graph = graph, weights = weights, vids = vids)
 } # nocov end
@@ -113,9 +186,22 @@ graph.diversity <- function(graph, weights = NULL, vids = V(graph)) { # nocov st
 #' @inheritParams eigen_centrality
 #' @keywords internal
 #' @export
-evcent <- function(graph, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+evcent <- function(
+  graph,
+  directed = FALSE,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "evcent()", "eigen_centrality()")
-  eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)
+  eigen_centrality(
+    graph = graph,
+    directed = directed,
+    scale = scale,
+    weights = weights,
+    options = options
+  )
 } # nocov end
 
 #' Vertex and edge betweenness centrality
@@ -128,9 +214,22 @@ evcent <- function(graph, directed = FALSE, scale = TRUE, weights = NULL, option
 #' @inheritParams edge_betweenness
 #' @keywords internal
 #' @export
-edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NULL, cutoff = -1) { # nocov start
+edge.betweenness <- function(
+  graph,
+  e = E(graph),
+  directed = TRUE,
+  weights = NULL,
+  cutoff = -1
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "edge.betweenness()", "edge_betweenness()")
-  edge_betweenness(graph = graph, e = e, directed = directed, weights = weights, cutoff = cutoff)
+  edge_betweenness(
+    graph = graph,
+    e = e,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
+  )
 } # nocov end
 
 #' Find Bonacich Power Centrality Scores of Network Positions
@@ -143,9 +242,26 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 #' @inheritParams power_centrality
 #' @keywords internal
 #' @export
-bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
+bonpow <- function(
+  graph,
+  nodes = V(graph),
+  loops = FALSE,
+  exponent = 1,
+  rescale = FALSE,
+  tol = 1e-7,
+  sparse = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
-  power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
+  power_centrality(
+    graph = graph,
+    nodes = nodes,
+    loops = loops,
+    exponent = exponent,
+    rescale = rescale,
+    tol = tol,
+    sparse = sparse
+  )
 } # nocov end
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -158,9 +274,28 @@ bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale
 #' @inheritParams alpha_centrality
 #' @keywords internal
 #' @export
-alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, exo = 1, weights = NULL, tol = 1e-7, sparse = TRUE) { # nocov start
+alpha.centrality <- function(
+  graph,
+  nodes = V(graph),
+  alpha = 1,
+  loops = FALSE,
+  exo = 1,
+  weights = NULL,
+  tol = 1e-7,
+  sparse = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
-  alpha_centrality(graph = graph, nodes = nodes, alpha = alpha, loops = loops, exo = exo, weights = weights, tol = tol, sparse = sparse)
+  alpha_centrality(
+    graph = graph,
+    nodes = nodes,
+    alpha = alpha,
+    loops = loops,
+    exo = exo,
+    weights = weights,
+    tol = tol,
+    sparse = sparse
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -194,7 +329,13 @@ alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, 
 #' @inheritParams betweenness
 #' @keywords internal
 #' @export
-estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
+estimate_betweenness <- function(
+  graph,
+  vids = V(graph),
+  directed = TRUE,
+  cutoff,
+  weights = NULL
+) {
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_betweenness()",
@@ -202,7 +343,13 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
     details = "with the cutoff argument."
   )
 
-  betweenness(graph, v = vids, directed = directed, cutoff = cutoff, weights = weights)
+  betweenness(
+    graph,
+    v = vids,
+    directed = directed,
+    cutoff = cutoff,
+    weights = weights
+  )
 }
 
 #' @export
@@ -289,8 +436,14 @@ betweenness.estimate <- estimate_betweenness
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
-betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
-                        normalized = FALSE, cutoff = -1) {
+betweenness <- function(
+  graph,
+  v = V(graph),
+  directed = TRUE,
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+) {
   ensure_igraph(graph)
 
   v <- as_igraph_vs(graph, v)
@@ -305,7 +458,14 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
   }
   cutoff <- as.numeric(cutoff)
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
+  res <- .Call(
+    R_igraph_betweenness_cutoff,
+    graph,
+    v - 1,
+    directed,
+    weights,
+    cutoff
+  )
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -323,8 +483,13 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
 #' @export
-edge_betweenness <- function(graph, e = E(graph),
-                             directed = TRUE, weights = NULL, cutoff = -1) {
+edge_betweenness <- function(
+  graph,
+  e = E(graph),
+  directed = TRUE,
+  weights = NULL,
+  cutoff = -1
+) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -342,7 +507,13 @@ edge_betweenness <- function(graph, e = E(graph),
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
+  res <- .Call(
+    R_igraph_edge_betweenness_cutoff,
+    graph,
+    directed,
+    weights,
+    cutoff
+  )
   res[as.numeric(e)]
 }
 
@@ -355,15 +526,26 @@ edge_betweenness <- function(graph, e = E(graph),
 #' @inheritParams edge_betweenness
 #' @keywords internal
 #' @export
-estimate_edge_betweenness <- function(graph, e = E(graph),
-                                      directed = TRUE, cutoff, weights = NULL) {
+estimate_edge_betweenness <- function(
+  graph,
+  e = E(graph),
+  directed = TRUE,
+  cutoff,
+  weights = NULL
+) {
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
     details = "with the cutoff argument."
   )
-  edge_betweenness(graph, e, directed = directed, cutoff = cutoff, weights = weights)
+  edge_betweenness(
+    graph,
+    e,
+    directed = directed,
+    cutoff = cutoff,
+    weights = weights
+  )
 }
 
 #' @export
@@ -429,14 +611,20 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' closeness(g2, mode = "out")
 #' closeness(g2, mode = "all")
 #'
-closeness <- function(graph, vids = V(graph),
-                      mode = c("out", "in", "all", "total"), weights = NULL,
-                      normalized = FALSE, cutoff = -1) {
+closeness <- function(
+  graph,
+  vids = V(graph),
+  mode = c("out", "in", "all", "total"),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+) {
   # Argument checks
   ensure_igraph(graph)
 
   vids <- as_igraph_vs(graph, vids)
-  mode <- switch(igraph.match.arg(mode),
+  mode <- switch(
+    igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -455,7 +643,15 @@ closeness <- function(graph, vids = V(graph),
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
+  res <- .Call(
+    R_igraph_closeness_cutoff,
+    graph,
+    vids - 1,
+    mode,
+    weights,
+    normalized,
+    cutoff
+  )$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
@@ -471,7 +667,14 @@ closeness <- function(graph, vids = V(graph),
 #' @inheritParams closeness
 #' @keywords internal
 #' @export
-estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
+estimate_closeness <- function(
+  graph,
+  vids = V(graph),
+  mode = c("out", "in", "all", "total"),
+  cutoff,
+  weights = NULL,
+  normalized = FALSE
+) {
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_closeness()",
@@ -479,7 +682,14 @@ estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "al
     details = "with the cutoff argument."
   )
 
-  closeness(graph, vids, mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
+  closeness(
+    graph,
+    vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
+  )
 }
 
 #' @export
@@ -489,9 +699,20 @@ closeness.estimate <- estimate_closeness
 #' @export
 arpack_defaults <- function() {
   list(
-    bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
-    ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
-    mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
+    bmat = "I",
+    n = 0,
+    which = "XX",
+    nev = 1,
+    tol = 0.0,
+    ncv = 3,
+    ldv = 0,
+    ishift = 1,
+    maxiter = 3000,
+    nb = 1,
+    mode = 1,
+    start = 0,
+    sigma = 0.0,
+    sigmai = 0.0
   )
 }
 
@@ -690,19 +911,29 @@ arpack_defaults <- function() {
 #' )
 #' @family arpack
 #' @export
-arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
-                   env = parent.frame(), complex = !sym) {
+arpack <- function(
+  func,
+  extra = NULL,
+  sym = FALSE,
+  options = arpack_defaults(),
+  env = parent.frame(),
+  complex = !sym
+) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       "arpack(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
+      details = c(
+        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
+      )
     )
     options <- options()
   }
 
-  if (!is.list(options) ||
-    (is.null(names(options)) && length(options) != 0)) {
+  if (
+    !is.list(options) ||
+      (is.null(names(options)) && length(options) != 0)
+  ) {
     stop("options must be a named list")
   }
   if (any(names(options) == "")) {
@@ -713,9 +944,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
   if (any(!names(options) %in% names(defaults))) {
     stop(
       "unkown ARPACK option(s): ",
-      paste(setdiff(names(options), names(defaults)),
-        collapse = ", "
-      )
+      paste(setdiff(names(options), names(defaults)), collapse = ", ")
     )
   }
 
@@ -731,7 +960,8 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
 
   if (complex) {
     rew <- arpack.unpack.complex(
-      res$vectors, res$values,
+      res$vectors,
+      res$values,
       min(res$options$nev, res$options$nconv)
     )
     res$vectors <- rew$vectors
@@ -768,7 +998,6 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
   res
 }
-
 
 
 #' Find subgraph centrality scores of network positions
@@ -883,17 +1112,32 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which = list(), options = arpack_defaults()) {
+spectrum <- function(
+  graph,
+  algorithm = c(
+    "arpack",
+    "auto",
+    "lapack",
+    "comp_auto",
+    "comp_lapack",
+    "comp_arpack"
+  ),
+  which = list(),
+  options = arpack_defaults()
+) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       "spectrum(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
+      details = c(
+        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
+      )
     )
     options <- options()
   }
 
-  eigen_adjacency_impl(graph,
+  eigen_adjacency_impl(
+    graph,
     algorithm = algorithm,
     which = which,
     options = options
@@ -902,8 +1146,13 @@ spectrum <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto
 
 eigen_defaults <- function() {
   list(
-    pos = "LM", howmany = 1L, il = -1L, iu = -1L,
-    vl = -Inf, vu = Inf, vestimate = 0L,
+    pos = "LM",
+    howmany = 1L,
+    il = -1L,
+    iu = -1L,
+    vl = -Inf,
+    vu = Inf,
+    vestimate = 0L,
     balance = "none"
   )
 }
@@ -992,16 +1241,20 @@ eigen_defaults <- function() {
 #' @family centrality
 #' @export
 #' @cdocs igraph_eigenvector_centrality
-eigen_centrality <- function(graph,
-                             directed = FALSE,
-                             scale = deprecated(),
-                             weights = NULL,
-                             options = arpack_defaults()) {
+eigen_centrality <- function(
+  graph,
+  directed = FALSE,
+  scale = deprecated(),
+  weights = NULL,
+  options = arpack_defaults()
+) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       "eigen_centrality(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
+      details = c(
+        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
+      )
     )
     options <- options()
   }
@@ -1168,7 +1421,13 @@ diversity <- diversity_impl
 #' hits_scores(g2)
 #' @family centrality
 #' @cdocs igraph_hub_and_authority_scores
-hits_scores <- function(graph, ..., scale = TRUE, weights = NULL, options = arpack_defaults()) {
+hits_scores <- function(
+  graph,
+  ...,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
   rlang::check_dots_empty()
 
   hub_and_authority_scores_impl(
@@ -1184,14 +1443,21 @@ hits_scores <- function(graph, ..., scale = TRUE, weights = NULL, options = arpa
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
-authority_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
+authority_score <- function(
+  graph,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
   lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      details = c(
+        "So the function arpack_defaults(), not an object called arpack_defaults."
+      )
     )
     options <- arpack_defaults()
   }
@@ -1222,14 +1488,21 @@ authority_score <- function(graph, scale = TRUE, weights = NULL, options = arpac
 #'   [arpack()] for details.
 #' @family centrality
 #' @export
-hub_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
+hub_score <- function(
+  graph,
+  scale = TRUE,
+  weights = NULL,
+  options = arpack_defaults()
+) {
   lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      details = c(
+        "So the function arpack_defaults(), not an object called arpack_defaults."
+      )
     )
     options <- arpack_defaults()
   }
@@ -1379,10 +1652,14 @@ page_rank <- personalized_pagerank_impl
 harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
-
-bonpow.dense <- function(graph, nodes = V(graph),
-                         loops = FALSE, exponent = 1,
-                         rescale = FALSE, tol = 1e-7) {
+bonpow.dense <- function(
+  graph,
+  nodes = V(graph),
+  loops = FALSE,
+  exponent = 1,
+  rescale = FALSE,
+  tol = 1e-7
+) {
   ensure_igraph(graph)
 
   d <- as_adjacency_matrix(graph)
@@ -1403,8 +1680,14 @@ bonpow.dense <- function(graph, nodes = V(graph),
   ev[as.numeric(nodes)]
 }
 
-bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
-                          exponent = 1, rescale = FALSE, tol = 1e-07) {
+bonpow.sparse <- function(
+  graph,
+  nodes = V(graph),
+  loops = FALSE,
+  exponent = 1,
+  rescale = FALSE,
+  tol = 1e-07
+) {
   ## remove loops if requested
   if (!loops) {
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
@@ -1429,7 +1712,6 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 
   ev[as.numeric(nodes)]
 }
-
 
 
 #' Find Bonacich Power Centrality Scores of Network Positions
@@ -1545,9 +1827,15 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #'   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-power_centrality <- function(graph, nodes = V(graph),
-                             loops = FALSE, exponent = 1,
-                             rescale = FALSE, tol = 1e-7, sparse = TRUE) {
+power_centrality <- function(
+  graph,
+  nodes = V(graph),
+  loops = FALSE,
+  exponent = 1,
+  rescale = FALSE,
+  tol = 1e-7,
+  sparse = TRUE
+) {
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
@@ -1562,9 +1850,15 @@ power_centrality <- function(graph, nodes = V(graph),
   res
 }
 
-alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
-                                   loops = FALSE, exo = 1, weights = NULL,
-                                   tol = 1e-7) {
+alpha.centrality.dense <- function(
+  graph,
+  nodes = V(graph),
+  alpha = 1,
+  loops = FALSE,
+  exo = 1,
+  weights = NULL,
+  tol = 1e-7
+) {
   ensure_igraph(graph)
 
   exo <- rep(exo, length.out = vcount(graph))
@@ -1600,9 +1894,15 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
   ev[as.numeric(nodes)]
 }
 
-alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
-                                    loops = FALSE, exo = 1, weights = NULL,
-                                    tol = 1e-7) {
+alpha.centrality.sparse <- function(
+  graph,
+  nodes = V(graph),
+  alpha = 1,
+  loops = FALSE,
+  exo = 1,
+  weights = NULL,
+  tol = 1e-7
+) {
   ensure_igraph(graph)
 
   vc <- vcount(graph)
@@ -1632,7 +1932,12 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
   M <- Matrix::t(as_adjacency_matrix(graph, attr = attr, sparse = TRUE))
 
   ## Create an identity matrix
-  M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))
+  M2 <- Matrix::sparseMatrix(
+    dims = c(vc, vc),
+    i = 1:vc,
+    j = 1:vc,
+    x = rep(1, vc)
+  )
 
   ## exo
   exo <- cbind(rep(exo, length.out = vc))
@@ -1643,7 +1948,6 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 
   r[as.numeric(nodes)]
 }
-
 
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -1708,19 +2012,36 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' alpha_centrality(g.2)
 #' alpha_centrality(g.3, alpha = 0.5)
 #'
-alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
-                             loops = FALSE, exo = 1, weights = NULL,
-                             tol = 1e-7, sparse = TRUE) {
+alpha_centrality <- function(
+  graph,
+  nodes = V(graph),
+  alpha = 1,
+  loops = FALSE,
+  exo = 1,
+  weights = NULL,
+  tol = 1e-7,
+  sparse = TRUE
+) {
   nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- alpha.centrality.sparse(
-      graph, nodes, alpha, loops,
-      exo, weights, tol
+      graph,
+      nodes,
+      alpha,
+      loops,
+      exo,
+      weights,
+      tol
     )
   } else {
     res <- alpha.centrality.dense(
-      graph, nodes, alpha, loops,
-      exo, weights, tol
+      graph,
+      nodes,
+      alpha,
+      loops,
+      exo,
+      weights,
+      tol
     )
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

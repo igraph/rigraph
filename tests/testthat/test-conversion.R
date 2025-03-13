@@ -31,11 +31,17 @@ test_that("as_directed keeps attributes", {
   E(g)$weight <- seq_len(ecount(g))
   g_mutual <- as_directed(g, "mutual")
   df_mutual <- as_data_frame(g_mutual)
-  expect_equal(df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight, c(1, 2, 1, 3, 3, 2))
+  expect_equal(
+    df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
+    c(1, 2, 1, 3, 3, 2)
+  )
 
   g_arbitrary <- as_directed(g, "arbitrary")
   df_arbitrary <- as_data_frame(g_arbitrary)
-  expect_equal(df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight, 1:3)
+  expect_equal(
+    df_arbitrary[order(df_arbitrary[, 1], df_arbitrary[, 2]), ]$weight,
+    1:3
+  )
 })
 
 test_that("as.directed() deprecation", {
@@ -65,21 +71,31 @@ test_that("as_undirected() keeps attributes", {
   g_each <- as_undirected(g, mode = "each")
   df_each <- as_data_frame(g_each)
   expect_equal(g_each$name, g$name)
-  expect_equal(df_each[order(df_each[, 1], df_each[, 2]), ]$weight, c(1, 3, 2, 4, 5))
+  expect_equal(
+    df_each[order(df_each[, 1], df_each[, 2]), ]$weight,
+    c(1, 3, 2, 4, 5)
+  )
 
   g_mutual <- as_undirected(g, mode = "mutual")
   df_mutual <- as_data_frame(g_mutual)
   expect_equal(g_mutual$name, g$name)
-  expect_equal(df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight, c(4, 9))
+  expect_equal(
+    df_mutual[order(df_mutual[, 1], df_mutual[, 2]), ]$weight,
+    c(4, 9)
+  )
 })
 
 test_that("as_adjacency_matrix() works -- sparse", {
-  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  g <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   basic_adj_matrix <- as_adjacency_matrix(g)
   expect_s4_class(basic_adj_matrix, "dgCMatrix")
   expected_matrix <- matrix(
     c(0, 1, 0, 0, 1, 1, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0),
-    nrow = 4L, ncol = 4L
+    nrow = 4L,
+    ncol = 4L
   )
   basic_adj_matrix_dense <- as_unnamed_dense_matrix(basic_adj_matrix)
   expect_equal(basic_adj_matrix_dense, expected_matrix)
@@ -106,14 +122,18 @@ test_that("as_adjacency_matrix() works -- sparse", {
 })
 
 test_that("as_adjacency_matrix() works -- sparse + not both", {
-  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  dg <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   g <- as_undirected(dg, mode = "each")
 
   lower_adj_matrix <- as_adjacency_matrix(g, type = "lower")
   expect_s4_class(lower_adj_matrix, "dgCMatrix")
   lower_expected_matrix <- matrix(
     c(0, 2, 0, 0, 0, 1, 0, 3, 0, 0, 2, 1, 0, 0, 0, 0),
-    nrow = 4L, ncol = 4L
+    nrow = 4L,
+    ncol = 4L
   )
   lower_expected_matrix_dense <- as_unnamed_dense_matrix(lower_expected_matrix)
   expect_equal(lower_expected_matrix, lower_expected_matrix_dense)
@@ -122,14 +142,18 @@ test_that("as_adjacency_matrix() works -- sparse + not both", {
   expect_s4_class(upper_adj_matrix, "dgCMatrix")
   upper_expected_matrix <- matrix(
     c(0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 2, 0, 0, 3, 1, 0),
-    nrow = 4L, ncol = 4L
+    nrow = 4L,
+    ncol = 4L
   )
   upper_adj_matrix_dense <- as_unnamed_dense_matrix(upper_adj_matrix)
   expect_equal(upper_adj_matrix_dense, upper_expected_matrix)
 })
 
 test_that("as_adjacency_matrix() errors well -- sparse", {
-  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  g <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   expect_snapshot(as_adjacency_matrix(g, attr = "bla"), error = TRUE)
 
   E(g)$bla <- letters[1:ecount(g)]
@@ -137,7 +161,10 @@ test_that("as_adjacency_matrix() errors well -- sparse", {
 })
 
 test_that("as_adjacency_matrix() works -- sparse undirected", {
-  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  dg <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   ug <- as_undirected(dg, mode = "each")
   adj_matrix <- as_adjacency_matrix(ug)
   expect_s4_class(adj_matrix, "dgCMatrix")
@@ -155,12 +182,16 @@ test_that("as_adjacency_matrix() works -- sparse undirected", {
 })
 
 test_that("as_adjacency_matrix() works -- dense", {
-  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  g <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
 
   basic_adj_matrix <- as_adjacency_matrix(g, sparse = FALSE)
   expected_matrix <- matrix(
     c(0, 1, 0, 0, 1, 1, 0, 3, 0, 0, 2, 0, 0, 0, 1, 0),
-    nrow = 4L, ncol = 4L
+    nrow = 4L,
+    ncol = 4L
   )
   expect_equal(basic_adj_matrix, expected_matrix)
 
@@ -184,16 +215,28 @@ test_that("as_adjacency_matrix() works -- dense", {
 })
 
 test_that("as_adjacency_matrix() errors well -- dense", {
-  g <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
-  expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
+  g <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
+  expect_snapshot(
+    as_adjacency_matrix(g, attr = "bla", sparse = FALSE),
+    error = TRUE
+  )
 
   E(g)$bla <- letters[1:ecount(g)]
-  expect_snapshot(as_adjacency_matrix(g, attr = "bla", sparse = FALSE), error = TRUE)
+  expect_snapshot(
+    as_adjacency_matrix(g, attr = "bla", sparse = FALSE),
+    error = TRUE
+  )
 })
 
 
 test_that("as_adjacency_matrix() works -- dense undirected", {
-  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  dg <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   ug <- as_undirected(dg, mode = "each")
   adj_matrix <- as_adjacency_matrix(ug, sparse = FALSE)
   dimnames(adj_matrix) <- NULL
@@ -201,7 +244,8 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
     adj_matrix,
     matrix(
       c(0, 2, 0, 0, 2, 1, 0, 3, 0, 0, 2, 1, 0, 3, 1, 0),
-      nrow = 4L, ncol = 4L
+      nrow = 4L,
+      ncol = 4L
     )
   )
 
@@ -219,7 +263,10 @@ test_that("as_adjacency_matrix() works -- dense undirected", {
 })
 
 test_that("as_adjacency_matrix() works -- dense + not both", {
-  dg <- make_graph(c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2), directed = TRUE)
+  dg <- make_graph(
+    c(1, 2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 2, 4, 2, 4, 2),
+    directed = TRUE
+  )
   g <- as_undirected(dg, mode = "each")
   E(g)$attribute <- c(1.2, 3.4, 2.7, 5.6, 6.0, 0.1, 6.1, 3.3, 4.3)
 
@@ -306,7 +353,9 @@ test_that("as_adj_list works", {
   expect_s3_class(adj_list[[1]], "igraph.vs")
   g_same <- graph_from_adj_list(adj_list, mode = "all")
   expect_isomorphic(g, g_same)
-  expect_isomorphic(g, g_same,
+  expect_isomorphic(
+    g,
+    g_same,
     method = "vf2",
     vertex.color1 = seq_len(vcount(g)),
     vertex.color2 = seq_len(vcount(g_same))
@@ -316,23 +365,47 @@ test_that("as_adj_list works", {
   expect_s3_class(adj_el_list[[1]], "igraph.es")
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.inc(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 
   g <- sample_gnp(50, 4 / 50, directed = TRUE)
   adj_el_list_out <- as_adj_edge_list(g, mode = "out")
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.from(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list_out[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list_out[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list_out[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list_out[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 
   adj_el_list_in <- as_adj_edge_list(g, mode = "in")
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.to(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list_in[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list_in[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list_in[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list_in[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 })
 
@@ -345,7 +418,9 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   expect_s3_class(adj_list[[1]], NA)
   g2 <- graph_from_adj_list(adj_list, mode = "all")
   expect_isomorphic(g, g2)
-  expect_isomorphic(g, g2,
+  expect_isomorphic(
+    g,
+    g2,
     method = "vf2",
     vertex.color1 = 1:vcount(g),
     vertex.color2 = 1:vcount(g2)
@@ -354,23 +429,47 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   adj_el_list <- as_adj_edge_list(g)
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.inc(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 
   g <- sample_gnp(50, 4 / 50, directed = TRUE)
   adj_el_list_out <- as_adj_edge_list(g, mode = "out")
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.from(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list_out[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list_out[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list_out[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list_out[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 
   adj_el_list_in <- as_adj_edge_list(g, mode = "in")
   for (i in seq_len(vcount(g))) {
     incident_to_i <- E(g)[.to(i)]
-    expect_equal(length(incident_to_i), length(adj_el_list_in[[i]]), ignore_attr = TRUE)
-    expect_equal(sort(adj_el_list_in[[i]]), sort(incident_to_i), ignore_attr = TRUE)
+    expect_equal(
+      length(incident_to_i),
+      length(adj_el_list_in[[i]]),
+      ignore_attr = TRUE
+    )
+    expect_equal(
+      sort(adj_el_list_in[[i]]),
+      sort(incident_to_i),
+      ignore_attr = TRUE
+    )
   }
 })
 
@@ -514,7 +613,10 @@ test_that("graph_from_data_frame works", {
 
   actors <- data.frame(
     name = c(
-      "Alice", "Bob", "Cecil", "David",
+      "Alice",
+      "Bob",
+      "Cecil",
+      "David",
       "Esmeralda"
     ),
     age = c(48, 33, 45, 34, 21),
@@ -523,15 +625,24 @@ test_that("graph_from_data_frame works", {
   )
   relations <- data.frame(
     from = c(
-      "Bob", "Cecil", "Cecil", "David",
-      "David", "Esmeralda"
+      "Bob",
+      "Cecil",
+      "Cecil",
+      "David",
+      "David",
+      "Esmeralda"
     ),
     to = c(
-      "Alice", "Bob", "Alice", "Alice",
-      "Bob", "Alice"
+      "Alice",
+      "Bob",
+      "Alice",
+      "Alice",
+      "Bob",
+      "Alice"
     ),
     same.dept = c(FALSE, FALSE, TRUE, FALSE, FALSE, TRUE),
-    friendship = c(4, 5, 5, 2, 1, 1), advice = c(4, 5, 5, 4, 2, 3),
+    friendship = c(4, 5, 5, 2, 1, 1),
+    advice = c(4, 5, 5, 4, 2, 3),
     stringsAsFactors = FALSE
   )
   g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
@@ -542,7 +653,12 @@ test_that("graph_from_data_frame works", {
 })
 
 test_that("graph_from_data_frame() creates attributes for zero-row data frames (#466)", {
-  x <- data.frame(from = integer(), to = integer(), foo = integer(), bar = numeric())
+  x <- data.frame(
+    from = integer(),
+    to = integer(),
+    foo = integer(),
+    bar = numeric()
+  )
   g <- graph_from_data_frame(x)
   expect_identical(E(g)$foo, integer())
   expect_identical(E(g)$bar, numeric())
@@ -573,9 +689,11 @@ test_that("edge names work", {
   g3 <- delete_edges(g, c("a|b", "f|g", "c|b"))
   expect_equal(
     as_edgelist(g3),
-    structure(c("c", "d", "e", "g", "h", "i", "a", "d", "e", "f", "h", "i", "j", "j"), .Dim = c(7L, 2L))
+    structure(
+      c("c", "d", "e", "g", "h", "i", "a", "d", "e", "f", "h", "i", "j", "j"),
+      .Dim = c(7L, 2L)
+    )
   )
-
 
   ## no names at all, but select edges based on vertices
   g <- make_ring(10)
@@ -585,7 +703,6 @@ test_that("edge names work", {
     structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7, 9, 10), .Dim = c(7L, 2L))
   )
 
-
   ## mix edge names and vertex names
   g <- make_ring(10)
   V(g)$name <- letters[1:vcount(g)]
@@ -593,6 +710,9 @@ test_that("edge names work", {
   g5 <- delete_edges(g, c("a|b", "F", "j|i"))
   expect_equal(
     as_edgelist(g5),
-    structure(c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"), .Dim = c(7L, 2L))
+    structure(
+      c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"),
+      .Dim = c(7L, 2L)
+    )
   )
 })

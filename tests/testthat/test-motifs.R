@@ -31,18 +31,138 @@ test_that("motifs works", {
   m0 <- motifs(gnp, cut.prob = c(1 / 3, 0, 0))
   m1 <- motifs(gnp, cut.prob = c(0, 1 / 3, 0))
   m2 <- motifs(gnp, cut.prob = c(0, 0, 1 / 3))
-  expect_equal(m0 / m, c(NA, NA, 0.653972107372707, NA, 0.653993015279859, 0.612244897959184, 0.657514670174019, 0.63013698630137, NaN, 0.538461538461538, NaN, 0.565217391304348, NaN, NaN, NaN, NaN))
-  expect_equal(m1 / m, c(NA, NA, 0.669562138856225, NA, 0.66808158454082, 0.73469387755102, 0.670819000404694, 0.657534246575342, NaN, 0.769230769230769, NaN, 0.739130434782609, NaN, NaN, NaN, NaN))
-  expect_equal(m2 / m, c(NA, NA, 0.666451718949538, NA, 0.665291458452201, 0.591836734693878, 0.666683528935654, 0.671232876712329, NaN, 0.753846153846154, NaN, 0.565217391304348, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m0 / m,
+    c(
+      NA,
+      NA,
+      0.653972107372707,
+      NA,
+      0.653993015279859,
+      0.612244897959184,
+      0.657514670174019,
+      0.63013698630137,
+      NaN,
+      0.538461538461538,
+      NaN,
+      0.565217391304348,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
+  expect_equal(
+    m1 / m,
+    c(
+      NA,
+      NA,
+      0.669562138856225,
+      NA,
+      0.66808158454082,
+      0.73469387755102,
+      0.670819000404694,
+      0.657534246575342,
+      NaN,
+      0.769230769230769,
+      NaN,
+      0.739130434782609,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
+  expect_equal(
+    m2 / m,
+    c(
+      NA,
+      NA,
+      0.666451718949538,
+      NA,
+      0.665291458452201,
+      0.591836734693878,
+      0.666683528935654,
+      0.671232876712329,
+      NaN,
+      0.753846153846154,
+      NaN,
+      0.565217391304348,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
 
   m3 <- motifs(gnp, cut.prob = c(0, 1 / 3, 1 / 3))
   m4 <- motifs(gnp, cut.prob = c(1 / 3, 1 / 3, 0))
   m5 <- motifs(gnp, cut.prob = c(1 / 3, 1 / 3, 0))
-  expect_equal(m3 / m, c(NA, NA, 0.445611905574732, NA, 0.442789875290769, 0.448979591836735, 0.444695973290166, 0.424657534246575, NaN, 0.369230769230769, NaN, 0.608695652173913, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m3 / m,
+    c(
+      NA,
+      NA,
+      0.445611905574732,
+      NA,
+      0.442789875290769,
+      0.448979591836735,
+      0.444695973290166,
+      0.424657534246575,
+      NaN,
+      0.369230769230769,
+      NaN,
+      0.608695652173913,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
 
-  expect_equal(m4 / m, c(NA, NA, 0.439251981944392, NA, 0.439284975327761, 0.73469387755102, 0.445088021044112, 0.465753424657534, NaN, 0.630769230769231, NaN, 0.565217391304348, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m4 / m,
+    c(
+      NA,
+      NA,
+      0.439251981944392,
+      NA,
+      0.439284975327761,
+      0.73469387755102,
+      0.445088021044112,
+      0.465753424657534,
+      NaN,
+      0.630769230769231,
+      NaN,
+      0.565217391304348,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
 
-  expect_equal(m5 / m, c(NA, NA, 0.439985332979302, NA, 0.440288166730411, 0.346938775510204, 0.44159753136382, 0.452054794520548, NaN, 0.323076923076923, NaN, 0.347826086956522, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m5 / m,
+    c(
+      NA,
+      NA,
+      0.439985332979302,
+      NA,
+      0.440288166730411,
+      0.346938775510204,
+      0.44159753136382,
+      0.452054794520548,
+      NaN,
+      0.323076923076923,
+      NaN,
+      0.347826086956522,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    )
+  )
 })
 
 test_that("sample_motifs works", {
@@ -55,10 +175,14 @@ test_that("sample_motifs works", {
   expect_true(0 <= motif_count && motif_count <= n * (n - 1) * (n - 2) / 6)
 
   motif_count_letters <- sample_motifs(g, sample = c("C", "D", "E", "F"))
-  expect_true(0 <= motif_count_letters && motif_count_letters <= n * (n - 1) * (n - 2) / 6)
+  expect_true(
+    0 <= motif_count_letters && motif_count_letters <= n * (n - 1) * (n - 2) / 6
+  )
 
   motif_count_all <- sample_motifs(g, sample = V(g))
-  expect_true(0 <= motif_count_all && motif_count_all <= n * (n - 1) * (n - 2) / 6)
+  expect_true(
+    0 <= motif_count_all && motif_count_all <= n * (n - 1) * (n - 2) / 6
+  )
 })
 
 test_that("dyad_census works", {

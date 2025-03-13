@@ -8,9 +8,28 @@
 #' @inheritParams graph_from_adjacency_matrix
 #' @keywords internal
 #' @export
-graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.adjacency()", "graph_from_adjacency_matrix()")
-  graph_from_adjacency_matrix(adjmatrix = adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
+graph.adjacency <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.adjacency()",
+    "graph_from_adjacency_matrix()"
+  )
+  graph_from_adjacency_matrix(
+    adjmatrix = adjmatrix,
+    mode = mode,
+    weighted = weighted,
+    diag = diag,
+    add.colnames = add.colnames,
+    add.rownames = add.rownames
+  )
 } # nocov end
 
 ## ----------------------------------------------------------------
@@ -221,13 +240,22 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #' summary(g10)
 #'
 #' @export
-graph_from_adjacency_matrix <- function(adjmatrix,
-                                        mode = c(
-                                          "directed", "undirected", "max",
-                                          "min", "upper", "lower", "plus"
-                                        ),
-                                        weighted = NULL, diag = TRUE,
-                                        add.colnames = NULL, add.rownames = NA) {
+graph_from_adjacency_matrix <- function(
+  adjmatrix,
+  mode = c(
+    "directed",
+    "undirected",
+    "max",
+    "min",
+    "upper",
+    "lower",
+    "plus"
+  ),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+) {
   mode <- igraph.match.arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
@@ -250,9 +278,19 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   }
 
   if (inherits(adjmatrix, "Matrix")) {
-    res <- graph.adjacency.sparse(adjmatrix, mode = mode, weighted = weighted, diag = diag)
+    res <- graph.adjacency.sparse(
+      adjmatrix,
+      mode = mode,
+      weighted = weighted,
+      diag = diag
+    )
   } else {
-    res <- graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted, diag = diag)
+    res <- graph.adjacency.dense(
+      adjmatrix,
+      mode = mode,
+      weighted = weighted,
+      diag = diag
+    )
   }
 
   ## Add columns and row names as attributes
@@ -282,8 +320,9 @@ graph_from_adjacency_matrix <- function(adjmatrix,
     }
   }
 
-  if (!is.na(add.rownames) && !is.na(add.colnames) &&
-    add.rownames == add.colnames) {
+  if (
+    !is.na(add.rownames) && !is.na(add.colnames) && add.rownames == add.colnames
+  ) {
     cli::cli_warn("Same attribute for columns and rows, row names are ignored")
     add.rownames <- NA
   }
@@ -314,14 +353,17 @@ is_symmetric <- function(x) {
 #' @param ... Passed to `graph_from_adjacency_matrix()`.
 #' @family adjacency
 #' @export
-from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)
+from_adjacency <- function(...)
+  constructor_spec(graph_from_adjacency_matrix, ...)
 
 graph.adjacency.dense <- function(
-    adjmatrix,
+  adjmatrix,
+  mode,
+  weighted = NULL,
+  diag = c("once", "twice", "ignore")
+) {
+  mode <- switch(
     mode,
-    weighted = NULL,
-    diag = c("once", "twice", "ignore")) {
-  mode <- switch(mode,
     "directed" = 0L,
     "undirected" = 1L,
     "upper" = 2L,
@@ -335,11 +377,7 @@ graph.adjacency.dense <- function(
     diag <- ifelse(diag, "once", "ignore")
   }
   diag <- igraph.match.arg(diag)
-  diag <- switch(diag,
-    "ignore" = 0L,
-    "twice" = 1L,
-    "once" = 2L
-  )
+  diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
     stop("Adjacency matrices must be square.")
@@ -387,13 +425,22 @@ pmin_AB <- function(A, B) {
   A
 }
 
-graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE, call = rlang::caller_env()) {
+graph.adjacency.sparse <- function(
+  adjmatrix,
+  mode,
+  weighted = NULL,
+  diag = TRUE,
+  call = rlang::caller_env()
+) {
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
       weighted <- "weight"
     }
     if (!is.character(weighted)) {
-      cli::cli_abort("Invalid value supplied for `weighted' argument, please see docs.", call = call)
+      cli::cli_abort(
+        "Invalid value supplied for `weighted' argument, please see docs.",
+        call = call
+      )
     }
   }
 
@@ -429,9 +476,15 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     adjmatrix <- adjmatrix + Matrix::t(adjmatrix)
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "max") {
-    adjmatrix <- pmax_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
+    adjmatrix <- pmax_AB(
+      Matrix::tril(adjmatrix),
+      Matrix::t(Matrix::triu(adjmatrix))
+    )
   } else if (mode == "min") {
-    adjmatrix <- pmin_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
+    adjmatrix <- pmin_AB(
+      Matrix::tril(adjmatrix),
+      Matrix::t(Matrix::triu(adjmatrix))
+    )
     adjmatrix <- Matrix::drop0(adjmatrix)
   }
   el <- mysummary(adjmatrix)

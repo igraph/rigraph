@@ -8,9 +8,24 @@
 #' @inheritParams fit_power_law
 #' @keywords internal
 #' @export
-power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, implementation = c("plfit", "R.mle"), ...) { # nocov start
+power.law.fit <- function(
+  x,
+  xmin = NULL,
+  start = 2,
+  force.continuous = FALSE,
+  implementation = c("plfit", "R.mle"),
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "power.law.fit()", "fit_power_law()")
-  fit_power_law(x = x, xmin = xmin, start = start, force.continuous = force.continuous, implementation = implementation, ...)
+  fit_power_law(
+    x = x,
+    xmin = xmin,
+    start = start,
+    force.continuous = force.continuous,
+    implementation = implementation,
+    ...
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -37,8 +52,6 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 # Pit a power-law (khmm a Yule really) distribution,
 # this is a common degree distribution in networks
 ###################################################################
-
-
 
 #' Fitting a power-law distribution function to discrete data
 #'
@@ -154,19 +167,22 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #' stats4::logLik(fit2)
 #'
 fit_power_law <- function(
-    x,
-    xmin = NULL,
-    start = 2,
-    force.continuous = FALSE,
-    implementation = c("plfit", "R.mle"),
-    p.value = FALSE,
-    p.precision = NULL,
-    ...) {
+  x,
+  xmin = NULL,
+  start = 2,
+  force.continuous = FALSE,
+  implementation = c("plfit", "R.mle"),
+  p.value = FALSE,
+  p.precision = NULL,
+  ...
+) {
   implementation <- igraph.match.arg(implementation)
 
   if (implementation == "r.mle") {
     if (isTRUE(p.value)) {
-      cli::cli_abort("{.arg p.value} is not supported for {.arg implementation} = {.str R.mle}")
+      cli::cli_abort(
+        "{.arg p.value} is not supported for {.arg implementation} = {.str R.mle}"
+      )
     }
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation == "plfit.p") {
@@ -223,7 +239,13 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   alpha
 }
 
-power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE, p.precision = 0.01) {
+power.law.fit.new <- function(
+  data,
+  xmin = -1,
+  force.continuous = FALSE,
+  p.value = FALSE,
+  p.precision = 0.01
+) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
@@ -231,7 +253,14 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value, p.precision)
+  res <- .Call(
+    R_igraph_power_law_fit_new,
+    data,
+    xmin,
+    force.continuous,
+    p.value,
+    p.precision
+  )
 
   res
 }

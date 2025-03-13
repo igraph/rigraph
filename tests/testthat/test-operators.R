@@ -102,17 +102,25 @@ test_that("compose works for named graphs", {
   g <- compose(g1, g2)
   df <- as_data_frame(g, what = "both")
 
-  df.v <- read.table(stringsAsFactors = FALSE, textConnection("
+  df.v <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
   bar1 foo_1 foo_2 bar2 name
 A    1     a     a    1    A
 B    2     b     b    2    B
 D    3     c    NA   NA    D
 E    4     d     c    3    E
 C    5     e    NA   NA    C
-"))
+"
+    )
+  )
   expect_equal(df$vertices, df.v)
 
-  df.e <- read.table(stringsAsFactors = FALSE, textConnection("
+  df.e <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
    from to bar1 foo_1 foo_2 bar2
 1     A  B    3     c     c    3
 2     A  A    3     c     b    2
@@ -130,7 +138,9 @@ C    5     e    NA   NA    C
 14    B  E    3     c     a    1
 15    E  C    5     e     c    3
 16    A  C    5     e     a    1
-"))
+"
+    )
+  )
   rownames(df$edges) <- rownames(df$edges)
   expect_equal(df$edges, df.e)
 })
@@ -138,7 +148,16 @@ C    5     e    NA   NA    C
 
 test_that("Union of directed named graphs", {
   graphs <- list(
-    make_graph(~ 1:2:3:4:5, 1 - +2, 1 - +3, 2 - +3, 2 - +4, 3 - +4, 1 - +5, 3 - +5),
+    make_graph(
+      ~ 1:2:3:4:5,
+      1 - +2,
+      1 - +3,
+      2 - +3,
+      2 - +4,
+      3 - +4,
+      1 - +5,
+      3 - +5
+    ),
     make_graph(~ 1:2:3:4:5, 2 - +3, 1 - +4, 2 - +4, 3 - +4, 2 - +5, 3 - +5),
     make_graph(~ 1:2:3:4:5, 1 - +2, 1 - +3, 2 - +4, 3 - +4, 1 - +5, 4 - +5)
   )
@@ -192,7 +211,8 @@ test_that("vertices() works", {
   expect_identical(V(g_mix_named_unnamed)$name[-1], c("a", "b"))
   expect_equal(V(g_mix_named_unnamed)$foo, c(NA, 5, 5))
 
-  g_mix_bigger_attribute <- make_empty_graph(1) + vertices("a", "b", "c", foo = 5:7, bar = 8)
+  g_mix_bigger_attribute <- make_empty_graph(1) +
+    vertices("a", "b", "c", foo = 5:7, bar = 8)
   expect_s3_class(V(g_mix_bigger_attribute), "igraph.vs")
   expect_identical(V(g_mix_bigger_attribute)$name, c(NA, "a", "b", "c"))
   expect_equal(V(g_mix_bigger_attribute)$foo, c(NA, 5, 6, 7))
@@ -238,7 +258,10 @@ test_that("infix operators work", {
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   g <- g - path("a", "b")
-  expect_isomorphic(g, graph_from_literal(a, b - c - d - e - f - g - h - i - j - a))
+  expect_isomorphic(
+    g,
+    graph_from_literal(a, b - c - d - e - f - g - h - i - j - a)
+  )
   g <- g + path("a", "b")
   expect_isomorphic(g, make_ring(10))
 
@@ -277,7 +300,15 @@ test_that("disjoint union works for named graphs", {
 
   expect_equal(
     sort(graph_attr_names(g)),
-    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
+    c(
+      "circular_1",
+      "circular_2",
+      "foo",
+      "mutual_1",
+      "mutual_2",
+      "name_1",
+      "name_2"
+    )
   )
   expect_equal(
     sort(vertex_attr_names(g)),
@@ -303,7 +334,10 @@ test_that("disjoint union gives warning for non-unique vertex names", {
   g2 <- make_ring(5)
   V(g2)$name <- letters[5:9]
 
-  expect_warning(disjoint_union(g1, g2), "Duplicate vertex names in disjoint union")
+  expect_warning(
+    disjoint_union(g1, g2),
+    "Duplicate vertex names in disjoint union"
+  )
 })
 
 
@@ -324,7 +358,15 @@ test_that("union of unnamed graphs works", {
 
   expect_equal(
     sort(graph_attr_names(g)),
-    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
+    c(
+      "circular_1",
+      "circular_2",
+      "foo",
+      "mutual_1",
+      "mutual_2",
+      "name_1",
+      "name_2"
+    )
   )
   expect_equal(
     sort(vertex_attr_names(g)),
@@ -337,8 +379,11 @@ test_that("union of unnamed graphs works", {
 
   df1 <- as_data_frame(g)
   df1 <- df1[order(df1$from, df1$to), c(1, 2, 3, 5, 4, 6)]
-  df2 <- merge(as_data_frame(g1), as_data_frame(g2),
-    by = c("from", "to"), all = TRUE
+  df2 <- merge(
+    as_data_frame(g1),
+    as_data_frame(g2),
+    by = c("from", "to"),
+    all = TRUE
   )
   rownames(df1) <- seq_len(nrow(df1))
   colnames(df2) <- c("from", "to", "weight_1", "b1", "weight_2", "b2")
@@ -365,7 +410,15 @@ test_that("union of named graphs works", {
 
   expect_equal(
     sort(graph_attr_names(g)),
-    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
+    c(
+      "circular_1",
+      "circular_2",
+      "foo",
+      "mutual_1",
+      "mutual_2",
+      "name_1",
+      "name_2"
+    )
   )
   expect_equal(
     sort(vertex_attr_names(g)),
@@ -378,7 +431,10 @@ test_that("union of named graphs works", {
 
   df1 <- as_data_frame(g, what = "both")
 
-  g.v <- read.table(stringsAsFactors = FALSE, textConnection("
+  g.v <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
   a1 a2 name
 a  1 11    a
 b  2 12    b
@@ -393,10 +449,15 @@ j 10 20    j
 k NA 21    k
 l NA 22    l
 m NA 23    m
-"))
+"
+    )
+  )
   expect_equal(df1$vertices, g.v)
 
-  g.e <- read.table(stringsAsFactors = FALSE, textConnection("
+  g.e <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
    from to weight_1 weight_2   b1   b2
 1     l  m       NA        2   NA    v
 2     k  l       NA        3   NA    u
@@ -412,7 +473,9 @@ m NA 23    m
 12    a  m       NA        1   NA    w
 13    a  j       10       NA    j   NA
 14    a  b        1       13    a    k
-"))
+"
+    )
+  )
   rownames(df1$edges) <- rownames(df1$edges)
   expect_equal(df1$edges, g.e)
 })
@@ -437,7 +500,15 @@ test_that("intersection of named graphs works", {
 
   expect_equal(
     sort(graph_attr_names(g)),
-    c("circular_1", "circular_2", "foo", "mutual_1", "mutual_2", "name_1", "name_2")
+    c(
+      "circular_1",
+      "circular_2",
+      "foo",
+      "mutual_1",
+      "mutual_2",
+      "name_1",
+      "name_2"
+    )
   )
   expect_equal(
     sort(vertex_attr_names(g)),
@@ -450,7 +521,10 @@ test_that("intersection of named graphs works", {
 
   df1 <- as_data_frame(g, what = "both")
 
-  g.e <- read.table(stringsAsFactors = FALSE, textConnection("
+  g.e <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
   from to weight_1 weight_2 b1 b2
 1    i  j        9        5  i  s
 2    h  i        8        6  h  r
@@ -461,11 +535,16 @@ test_that("intersection of named graphs works", {
 7    c  d        3       11  c  m
 8    b  c        2       12  b  l
 9    a  b        1       13  a  k
-"))
+"
+    )
+  )
   rownames(df1$edges) <- rownames(df1$edges)
   expect_equal(df1$edges, g.e)
 
-  g.v <- read.table(stringsAsFactors = FALSE, textConnection("
+  g.v <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
   a1 a2 name
 a  1 11    a
 b  2 12    b
@@ -477,7 +556,9 @@ g  7 17    g
 h  8 18    h
 i  9 19    i
 j 10 20    j
-"))
+"
+    )
+  )
   expect_equal(df1$vertices, g.v)
 
   gg <- intersection(g1, g2, keep.all.vertices = TRUE)
@@ -487,7 +568,10 @@ j 10 20    j
   rownames(df2$edges) <- rownames(df2$edges)
   expect_equal(df2$edges, g.e)
 
-  gg.v <- read.table(stringsAsFactors = FALSE, textConnection("
+  gg.v <- read.table(
+    stringsAsFactors = FALSE,
+    textConnection(
+      "
   a1 a2 name
 a  1 11    a
 b  2 12    b
@@ -502,7 +586,9 @@ j 10 20    j
 k NA 21    k
 l NA 22    l
 m NA 23    m
-"))
+"
+    )
+  )
   expect_equal(df2$vertices, gg.v)
 })
 
@@ -520,7 +606,8 @@ test_that("difference of named graphs works", {
 
   t1.e <- read.table(
     stringsAsFactors = FALSE,
-    textConnection("
+    textConnection(
+      "
    from to
 1     a  j
 2     b  k
@@ -538,12 +625,20 @@ test_that("difference of named graphs works", {
 14    g  h
 15    h  i
 16    i  j
-")
+"
+    )
   )
   rownames(df1$edges) <- rownames(df1$edges)
   expect_equal(df1$edges, t1.e)
 
-  expect_equal(df1$vertices, data.frame(row.names = letters[1:11], name = letters[1:11], stringsAsFactors = FALSE))
+  expect_equal(
+    df1$vertices,
+    data.frame(
+      row.names = letters[1:11],
+      name = letters[1:11],
+      stringsAsFactors = FALSE
+    )
+  )
 
   gg <- sg - g
 
@@ -690,7 +785,6 @@ test_that("c on detached vs, names", {
   expect_equal(ignore_attr = TRUE, c(vg5, vg5), vg6)
   expect_equal(names(c(vg5, vg5)), names(vg6))
 })
-
 
 
 test_that("union on attached vs", {

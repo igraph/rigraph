@@ -8,7 +8,13 @@
 #' @inheritParams mst
 #' @keywords internal
 #' @export
-minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) { # nocov start
+minimum.spanning.tree <- function(
+  graph,
+  weights = NULL,
+  algorithm = NULL,
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
 } # nocov end
@@ -32,8 +38,6 @@ minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) 
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Minimum spanning tree
 #'
@@ -75,8 +79,7 @@ minimum.spanning.tree <- function(graph, weights = NULL, algorithm = NULL, ...) 
 #' g <- sample_gnp(100, 3 / 100)
 #' g_mst <- mst(g)
 #'
-mst <- function(graph, weights = NULL,
-                algorithm = NULL, ...) {
+mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
   ensure_igraph(graph)
 
   if (is.null(algorithm)) {

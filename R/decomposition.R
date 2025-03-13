@@ -8,9 +8,22 @@
 #' @inheritParams is_chordal
 #' @keywords internal
 #' @export
-is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newgraph = FALSE) { # nocov start
+is.chordal <- function(
+  graph,
+  alpha = NULL,
+  alpham1 = NULL,
+  fillin = FALSE,
+  newgraph = FALSE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.chordal()", "is_chordal()")
-  is_chordal(graph = graph, alpha = alpha, alpham1 = alpham1, fillin = fillin, newgraph = newgraph)
+  is_chordal(
+    graph = graph,
+    alpha = alpha,
+    alpham1 = alpham1,
+    fillin = fillin,
+    newgraph = newgraph
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2008-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -36,8 +49,6 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 ###################################################################
 # Graph decomposition
 ###################################################################
-
-
 
 #' Chordality of a graph
 #'
@@ -98,8 +109,13 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #'
-is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
-                       fillin = FALSE, newgraph = FALSE) {
+is_chordal <- function(
+  graph,
+  alpha = NULL,
+  alpham1 = NULL,
+  fillin = FALSE,
+  newgraph = FALSE
+) {
   ensure_igraph(graph)
   if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1
@@ -111,8 +127,12 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   newgraph <- as.logical(newgraph)
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_is_chordal, graph, alpha, alpham1,
-    fillin, newgraph
+    R_igraph_is_chordal,
+    graph,
+    alpha,
+    alpham1,
+    fillin,
+    newgraph
   )
   if (fillin) {
     res$fillin <- res$fillin + 1

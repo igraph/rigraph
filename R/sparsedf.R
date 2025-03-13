@@ -26,8 +26,11 @@
 sdf <- function(..., row.names = NULL, NROW = NULL) {
   cols <- list(...)
 
-  if (is.null(names(cols)) || any(names(cols) == "") ||
-    any(duplicated(names(cols)))) {
+  if (
+    is.null(names(cols)) ||
+      any(names(cols) == "") ||
+      any(duplicated(names(cols)))
+  ) {
     cli::cli_abort("Columns must be have (unique) names.")
   }
 

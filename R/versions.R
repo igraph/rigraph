@@ -21,7 +21,6 @@
 ##
 ## ----------------------------------------------------------------------
 
-
 # format versions
 ver_0_1_1 <- 0L # 0.1.1
 ver_0_4 <- 1L # 0.4
@@ -93,7 +92,12 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop("Don't know how to downgrade graph from version ", g_ver, " to ", p_ver)
+    stop(
+      "Don't know how to downgrade graph from version ",
+      g_ver,
+      " to ",
+      p_ver
+    )
   }
 
   # g_ver < p_ver
@@ -153,7 +157,9 @@ warn_version <- function(graph) {
     return(TRUE)
   }
 
-  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
+  stop(
+    "This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again."
+  )
 }
 
 oldpredecessors <- function() {
