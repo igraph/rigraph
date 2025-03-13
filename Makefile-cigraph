@@ -25,8 +25,8 @@ version_number: force
 
 PARSER := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
 	    grep -E '\.(l|y)$$')
-PARSER1 := $(patsubst src/%.l, src/vendor/%.c, $(PARSER))
-PARSER2 := $(patsubst src/%.y, src/vendor/%.c, $(PARSER1))
+PARSER1 := $(patsubst src/%.l, src/%.c, $(PARSER))
+PARSER2 := $(patsubst src/%.y, src/%.c, $(PARSER1))
 
 YACC=$(DOCKER) bison -b yy -d
 LEX=$(DOCKER) flex
