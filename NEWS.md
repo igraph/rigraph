@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9021
+
+## Chore
+
+- Fix `Makefile-cigraph` again.
+
+- Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
+
+## Testing
+
+- Rename, add test for `laplacian_matrix()` (#1714).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@662abbdfa467a6436bad650c31a8360787d75379 (#1753).
+
+- Update vendored sources to igraph/igraph@1a7f9b71505c8455afb836628bc133e387154118 (#1752).
+
+- Update vendored sources to igraph/igraph@410fc4089639fde7f2e6b42ce4588bd6af3d78de (#1751).
+
+- Update vendored sources to igraph/igraph@1cbe1ae2abedacb0afde1b367a788580c9810c6c (#1750).
+
+- Update vendored sources to igraph/igraph@5bda8315202ff0647e30da77de0d70c7f25d89bf (#1749).
+
+- Update vendored sources to igraph/igraph@091e2927a6acce4e89db0db37d7db8496a59f117 (#1748).
+
+
 # igraph 2.1.4.9020
 
 ## Bug fixes
