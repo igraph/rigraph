@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9022
+
+## Chore
+
+- Require copyright assignment in PR template (#1747).
+
+
 # igraph 2.1.4.9021
 
 ## Chore
