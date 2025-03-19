@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9024
+
+## Bug fixes
+
+- Integer vectors are validated before transferring them to the C library (#1434, #1582).
+
+
 # igraph 2.1.4.9023
 
 ## vendor
