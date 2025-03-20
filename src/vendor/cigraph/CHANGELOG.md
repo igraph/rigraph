@@ -7,6 +7,14 @@
  - `igraph_count_triangles()` counts undirected triangles in a graph.
  - `igraph_count_adjacent_triangles()` (rename of `igraph_adjacent_triangles()`)
 
+### Changed
+
+ - `igraph_neighborhood_size()`, `igraph_neighborhood()` and `igraph_neighborhood_graphs()` now accept a negative `order` value and interpret it as infinite order. Previously, a negative `order` value was disallowed.
+
+### Fixed
+
+ - `igraph_largest_independent_vertex_sets()` and `igraph_maximal_independent_vertex_sets()` would sometimes return incorrect results for graphs with self-loops. This is now corrected.
+
 ### Deprecated
 
  - The undocumented function `igraph_vector_sumsq()` is deprecated. Use `igraph_blas_dnrm2()` to compute the Euclidean norm of real vectors.

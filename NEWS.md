@@ -1,5 +1,90 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9024
+
+## Bug fixes
+
+- Integer vectors are validated before transferring them to the C library (#1434, #1582).
+
+
+# igraph 2.1.4.9023
+
+## vendor
+
+- Update vendored sources to igraph/igraph@b42d0101d7c2a6d31ac6568aa4b4398d5f619e2e (#1758).
+
+- Update vendored sources to igraph/igraph@627f71a5e0eac5c00f56499fb4457ff4f9ee315d (igraph/igraph#2710, #1757).
+
+- Update vendored sources to igraph/igraph@a7d22863ea48ec7b206ef6a03869ff7817cb8a5b (#1756).
+
+
+# igraph 2.1.4.9022
+
+## Chore
+
+- Require copyright assignment in PR template (#1747).
+
+
+# igraph 2.1.4.9021
+
+## Chore
+
+- Fix `Makefile-cigraph` again.
+
+- Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
+
+## Testing
+
+- Rename, add test for `laplacian_matrix()` (#1714).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@662abbdfa467a6436bad650c31a8360787d75379 (#1753).
+
+- Update vendored sources to igraph/igraph@1a7f9b71505c8455afb836628bc133e387154118 (#1752).
+
+- Update vendored sources to igraph/igraph@410fc4089639fde7f2e6b42ce4588bd6af3d78de (#1751).
+
+- Update vendored sources to igraph/igraph@1cbe1ae2abedacb0afde1b367a788580c9810c6c (#1750).
+
+- Update vendored sources to igraph/igraph@5bda8315202ff0647e30da77de0d70c7f25d89bf (#1749).
+
+- Update vendored sources to igraph/igraph@091e2927a6acce4e89db0db37d7db8496a59f117 (#1748).
+
+
+# igraph 2.1.4.9020
+
+## Bug fixes
+
+- Changed base location for graph_from_graphdb and added tests (@schochastics, #1712, #1732).
+
+- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (@schochastics, #848, #1731).
+
+## Features
+
+- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
+
+## Chore
+
+- Add include.
+
+- R 4.0 compat.
+
+- Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
+
+- Fix Stimulus (#1737).
+
+- Use `"parent"` instead of `"father"` in `bfs()` and `dfs()` (#880, #1523).
+
+## Documentation
+
+- Welcome Maëlle Salmon and David Schoch as authors (#1733).
+
+## Testing
+
+- Merged feedback.set tests into structural.properties (#1743).
+
+
 # igraph 2.1.4.9019
 
 ## Testing

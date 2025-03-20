@@ -3417,7 +3417,10 @@ igraph_error_t R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   double *svv=REAL(sv);
   IGRAPH_CHECK(igraph_vector_int_init(v, n));
   for (igraph_integer_t i = 0; i<n; i++) {
-    VECTOR(*v)[i] = (igraph_integer_t)svv[i];
+    VECTOR(*v)[i] = (igraph_integer_t) svv[i];
+    if (VECTOR(*v)[i] != svv[i]) {
+      IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
+    }
   }
   return IGRAPH_SUCCESS;
 }
