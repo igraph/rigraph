@@ -1,4 +1,3 @@
-
 #' Running mean of a time series
 #'
 #' @description
@@ -92,7 +91,7 @@ running_mean <- function(v, binwidth) {
   v <- as.numeric(v)
   binwidth <- as.numeric(binwidth)
   if (length(v) < binwidth) {
-    stop("Vector too short for this binwidth.")
+    cli::cli_abort("Vector too short for this binwidth.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -128,7 +127,7 @@ running_mean <- function(v, binwidth) {
 #'
 sample_seq <- function(low, high, length) {
   if (length > high - low + 1) {
-    stop("length too big for this interval")
+    cli::cli_abort("length too big for this interval")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -166,11 +165,11 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
     }
     types <- as.logical(types)
     if (any(is.na(types))) {
-      stop("`NA' is not allowed in vertex types")
+      cli::cli_abort("`NA' is not allowed in vertex types")
     }
   }
   if (is.null(types) && required) {
-    stop("Not a bipartite graph, supply `types' argument or add a vertex attribute named `type'")
+    cli::cli_abort("Not a bipartite graph, supply {.arg types} argument or add a vertex attribute named {.arg type}.")
   }
   return(types)
 }

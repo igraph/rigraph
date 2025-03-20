@@ -1,4 +1,3 @@
-
 #' Is a degree sequence graphical?
 #'
 #' @description

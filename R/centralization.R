@@ -1,4 +1,3 @@
-
 #' Centralization of a graph
 #'
 #' @description
@@ -288,7 +287,7 @@ centr_degree_tmax <- function(graph = NULL,
     lifecycle::deprecate_warn(
       when = "2.0.0",
       what = "centr_degree_tmax(loops = 'must be explicit')",
-      details = "Default value (`FALSE`) will be dropped in next release, add an explicit value for the loops argument."
+      details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
     loops <- FALSE
   }
@@ -448,8 +447,8 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
-#' @param scale Whether to rescale the eigenvector centrality scores, such that
-#'   the maximum score is one.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
+#' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
 #' @param normalized Logical scalar. Whether to normalize the graph level
@@ -481,7 +480,29 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
 #' @cdocs igraph_centralization_eigenvector_centrality
-centr_eigen <- centralization_eigenvector_centrality_impl
+centr_eigen <- function(graph,
+                        directed = FALSE,
+                        scale = deprecated(),
+                        options = arpack_defaults(),
+                        normalized = TRUE) {
+
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "centr_eigen(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
+
+  centralization_eigenvector_centrality_impl(
+    graph = graph,
+    directed = directed,
+    options = options,
+    normalized = normalized,
+    scale = TRUE
+  )
+}
 
 #' Theoretical maximum for eigenvector centralization
 #'
@@ -493,8 +514,8 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   given.
 #' @param directed logical scalar, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
-#' @param scale Whether to rescale the eigenvector centrality scores,
-#'   such that the maximum score is one.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
+#' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   eigenvector centrality score for graphs with given vertex count and
 #'   other parameters.
@@ -510,4 +531,24 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
 #' @cdocs igraph_centralization_eigenvector_centrality_tmax
-centr_eigen_tmax <- centralization_eigenvector_centrality_tmax_impl
+centr_eigen_tmax <- function(graph = NULL,
+                             nodes = 0,
+                             directed = FALSE,
+                             scale = deprecated()) {
+
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "centr_eigen_tmax(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
+
+  centralization_eigenvector_centrality_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    directed = directed,
+    scale = TRUE
+  )
+}

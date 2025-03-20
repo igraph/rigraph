@@ -1,4 +1,3 @@
-
 #' Assortativity coefficient
 #'
 #' @description

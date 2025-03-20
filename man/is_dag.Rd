@@ -31,6 +31,7 @@ is_dag(g2)
 \seealso{
 Graph cycles
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()}
@@ -46,6 +47,7 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
 \code{\link{is_matching}()},
@@ -67,5 +69,5 @@ Tamas Nepusz \email{ntamas@gmail.com} for the C code, Gabor Csardi
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{igraph_is_dag()}}.}
 

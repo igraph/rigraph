@@ -21,7 +21,7 @@ cycles in undirected graphs.
 }
 \examples{
 
-g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 is_acyclic(g)
 is_acyclic(as_undirected(g))
 }
@@ -31,6 +31,7 @@ and directed graphs.
 
 Graph cycles
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_dag}()}
@@ -46,6 +47,7 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
@@ -63,5 +65,5 @@ Other structural.properties:
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_acyclic}{\code{is_acyclic()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_acyclic}{\code{igraph_is_acyclic()}}.}
 

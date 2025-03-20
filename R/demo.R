@@ -1,4 +1,3 @@
-
 #' Run igraph demos, step by step
 #'
 #' @description
@@ -59,9 +58,9 @@ igraphdemo <- function(which) { # nocov start
 #' @examples
 #'
 #' igraph_demo()
-#' if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
-#'   igraph_demo("centrality")
-#' }
+#'
+#' @examplesIf interactive() && rlang::is_installed("tcltk")
+#' igraph_demo("centrality")
 #'
 igraph_demo <- function(which) {
   if (missing(which)) {

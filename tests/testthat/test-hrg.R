@@ -16,3 +16,16 @@ test_that("as.hclust.igraphHRG() works", {
     summary(as.hclust(hrg))
   })
 })
+
+test_that("sample_hrg() checks its argument", {
+  expect_snapshot(error = TRUE, {
+    sample_hrg(make_ring(10))
+  })
+})
+
+
+test_that("hrg_tree() checks its argument", {
+  expect_snapshot(error = TRUE, {
+    hrg_tree(make_ring(10))
+  })
+})

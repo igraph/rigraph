@@ -1,4 +1,3 @@
-
 #' Graphlet decomposition of a graph
 #'
 #' @description

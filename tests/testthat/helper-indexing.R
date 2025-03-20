@@ -3,7 +3,7 @@ vector_to_square_matrix <- function(...) {
   matrix(v, nrow = sqrt(length(v)))
 }
 
-canonicalize_matrix <- function(x) {
+as_unnamed_dense_matrix <- function(x) {
   x <- as.matrix(x)
   dimnames(x) <- NULL
   x

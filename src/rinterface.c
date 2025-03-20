@@ -3684,6 +3684,39 @@ SEXP R_igraph_feedback_arc_set(SEXP graph, SEXP weights, SEXP algo) {
 }
 
 /*-------------------------------------------/
+/ igraph_feedback_vertex_set                 /
+/-------------------------------------------*/
+SEXP R_igraph_feedback_vertex_set(SEXP graph, SEXP weights, SEXP algo) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_result;
+  igraph_vector_t c_weights;
+  igraph_fvs_algorithm_t c_algo;
+  SEXP result;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_result, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_result);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_algo = (igraph_fvs_algorithm_t) Rf_asInteger(algo);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_feedback_vertex_set(&c_graph, &c_result, (Rf_isNull(weights) ? 0 : &c_weights), c_algo));
+
+                                        /* Convert output */
+  PROTECT(result=R_igraph_vector_int_to_SEXPp1(&c_result));
+  igraph_vector_int_destroy(&c_result);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_is_loop                             /
 /-------------------------------------------*/
 SEXP R_igraph_is_loop(SEXP graph, SEXP es) {
@@ -8589,9 +8622,9 @@ SEXP R_igraph_triad_census(SEXP graph) {
 }
 
 /*-------------------------------------------/
-/ igraph_adjacent_triangles                  /
+/ igraph_count_adjacent_triangles            /
 /-------------------------------------------*/
-SEXP R_igraph_adjacent_triangles(SEXP graph, SEXP vids) {
+SEXP R_igraph_count_adjacent_triangles(SEXP graph, SEXP vids) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_res;
@@ -8606,7 +8639,7 @@ SEXP R_igraph_adjacent_triangles(SEXP graph, SEXP vids) {
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_adjacent_triangles(&c_graph, &c_res, c_vids));
+  IGRAPH_R_CHECK(igraph_count_adjacent_triangles(&c_graph, &c_res, c_vids));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
@@ -8614,6 +8647,30 @@ SEXP R_igraph_adjacent_triangles(SEXP graph, SEXP vids) {
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_vids_data);
   igraph_vs_destroy(&c_vids);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_count_triangles                     /
+/-------------------------------------------*/
+SEXP R_igraph_count_triangles(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_real_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_count_triangles(&c_graph, &c_res));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_NUMERIC(1));
+  REAL(res)[0]=c_res;
   r_result = res;
 
   UNPROTECT(1);

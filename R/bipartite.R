@@ -1,4 +1,3 @@
-
 #' Project a bipartite graph
 #'
 #' @description

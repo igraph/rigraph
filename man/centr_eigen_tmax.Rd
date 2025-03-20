@@ -4,7 +4,12 @@
 \alias{centr_eigen_tmax}
 \title{Theoretical maximum for eigenvector centralization}
 \usage{
-centr_eigen_tmax(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE)
+centr_eigen_tmax(
+  graph = NULL,
+  nodes = 0,
+  directed = FALSE,
+  scale = deprecated()
+)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL}, if
@@ -16,8 +21,8 @@ given.}
 \item{directed}{logical scalar, whether to consider edge directions
 during the calculation. Ignored in undirected graphs.}
 
-\item{scale}{Whether to rescale the eigenvector centrality scores,
-such that the maximum score is one.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
+eigenvector centralization requires normalized eigenvector centrality scores.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
@@ -46,5 +51,5 @@ Other centralization related:
 \code{\link{centralize}()}
 }
 \concept{centralization related}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax}{\code{centralization_eigenvector_centrality_tmax()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality_tmax}{\code{igraph_centralization_eigenvector_centrality_tmax()}}.}
 

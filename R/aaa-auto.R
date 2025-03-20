@@ -1231,6 +1231,28 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   res
 }
 
+feedback_vertex_set_impl <- function(graph, weights=NULL, algo=c("exact_ip")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  algo <- switch(igraph.match.arg(algo), "exact_ip"=0L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_feedback_vertex_set, graph, weights, algo)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
@@ -2744,14 +2766,25 @@ triad_census_impl <- function(graph) {
   res
 }
 
-adjacent_triangles_impl <- function(graph, vids=V(graph)) {
+count_adjacent_triangles_impl <- function(graph, vids=V(graph)) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_adjacent_triangles, graph, vids-1)
+  res <- .Call(R_igraph_count_adjacent_triangles, graph, vids-1)
+
+  res
+}
+
+count_triangles_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_count_triangles, graph)
 
   res
 }
