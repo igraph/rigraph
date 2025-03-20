@@ -28,7 +28,7 @@ all edges, this operation is also known as graph transpose.
 }
 \examples{
 
-g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
+g <- make_graph(~ 1 - +2, 2 - +3, 3 - +4)
 reverse_edges(g, 2)
 }
 \seealso{
@@ -58,5 +58,5 @@ Other functions for manipulating graph structure:
 \code{\link{vertex}()}
 }
 \concept{functions for manipulating graph structure}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges}{\code{igraph_reverse_edges()}}.}
 

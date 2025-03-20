@@ -67,5 +67,5 @@ Samuel Thiriot
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_simple_interconnected_islands_game}{\code{simple_interconnected_islands_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_simple_interconnected_islands_game}{\code{igraph_simple_interconnected_islands_game()}}.}
 

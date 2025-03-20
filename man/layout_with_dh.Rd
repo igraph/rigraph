@@ -102,7 +102,7 @@ plot(g_5b, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 g_6 <- make_lattice(c(2, 2, 2))
 plot(g_6, layout = layout_with_dh)
 
-g_7 <- graph_from_literal(1:3:5 -- 2:4:6)
+g_7 <- graph_from_literal(1:3:5 - -2:4:6)
 plot(g_7, layout = layout_with_dh, vertex.label = V(g_7)$name)
 
 g_8 <- make_ring(5) + make_ring(10) + make_ring(5) +

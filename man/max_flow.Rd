@@ -84,5 +84,5 @@ Other flow:
 \code{\link{vertex_connectivity}()}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow}{\code{igraph_maxflow()}}.}
 
