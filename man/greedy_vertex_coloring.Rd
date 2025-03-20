@@ -42,5 +42,5 @@ plot(g, vertex.color = col)
 }
 \concept{coloring}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Coloring.html#igraph_vertex_coloring_greedy}{\code{vertex_coloring_greedy()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Coloring.html#igraph_vertex_coloring_greedy}{\code{igraph_vertex_coloring_greedy()}}.}
 

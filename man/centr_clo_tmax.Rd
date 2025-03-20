@@ -43,5 +43,5 @@ Other centralization related:
 \code{\link{centralize}()}
 }
 \concept{centralization related}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_closeness_tmax}{\code{centralization_closeness_tmax()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_closeness_tmax}{\code{igraph_centralization_closeness_tmax()}}.}
 
