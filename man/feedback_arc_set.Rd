@@ -78,6 +78,7 @@ Other structural.properties:
 
 Graph cycles
 \code{\link{feedback_vertex_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()},

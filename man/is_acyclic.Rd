@@ -17,7 +17,7 @@ This function tests whether the given graph is free of cycles.
 }
 \details{
 This function looks for directed cycles in directed graphs and undirected
-cycles in undirected graphs.
+cycles in undirected graphs. Use \code{\link[=find_cycle]{find_cycle()}} to return a specific cycle.
 }
 \examples{
 
@@ -32,6 +32,7 @@ and directed graphs.
 Graph cycles
 \code{\link{feedback_arc_set}()},
 \code{\link{feedback_vertex_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_dag}()}

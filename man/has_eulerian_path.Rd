@@ -60,6 +60,7 @@ try(eulerian_cycle(g))
 Graph cycles
 \code{\link{feedback_arc_set}()},
 \code{\link{feedback_vertex_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
 \code{\link{is_dag}()}
