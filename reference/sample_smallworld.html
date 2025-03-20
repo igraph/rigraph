@@ -133,6 +133,7 @@ simultaneously having short path lengths and high clustering.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="make_lattice.html">make_lattice()</a></code>, <code><a href="rewire.html">rewire()</a></code></p>
 <p>Random graph models (games)
+<code><a href="sample_bipartite_gnm.html">bipartite_gnm</a>()</code>,
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="sample_bipartite.html">sample_bipartite</a>()</code>,
@@ -169,9 +170,9 @@ simultaneously having short path lengths and high clustering.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_smallworld</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">5</span>, <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="distances.html">mean_distance</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.742424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.690707</span>
 <span class="r-in"><span><span class="fu"><a href="transitivity.html">transitivity</a></span><span class="op">(</span><span class="va">g</span>, type <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5107633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5079464</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

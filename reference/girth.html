@@ -128,6 +128,7 @@ computing</em>, 1-10, 1977</p>
 <p>Graph cycles
 <code><a href="feedback_arc_set.html">feedback_arc_set</a>()</code>,
 <code><a href="feedback_vertex_set.html">feedback_vertex_set</a>()</code>,
+<code><a href="find_cycle.html">find_cycle</a>()</code>,
 <code><a href="has_eulerian_path.html">has_eulerian_path</a>()</code>,
 <code><a href="is_acyclic.html">is_acyclic</a>()</code>,
 <code><a href="is_dag.html">is_dag</a>()</code></p></div>
@@ -147,7 +148,7 @@ computing</em>, 1-10, 1977</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Inf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/1000 vertices, from 9ae58d1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/1000 vertices, from 133f9a5:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The worst case running time is for a ring</span></span></span>
@@ -157,7 +158,7 @@ computing</em>, 1-10, 1977</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from 248af07:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from 70e6c94:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  87  88  89  90  91  92  93  94  95  96  97  98  99 100   1   2   3   4</span>
@@ -170,11 +171,11 @@ computing</em>, 1-10, 1977</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">girth</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $girth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $circle</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 12/1000 vertices, from 333d1d3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 903 811 514 822 850 938 125 275 732 518 446 475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/1000 vertices, from 9433ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 819 813 578 477 824 199  53 759 280 787</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

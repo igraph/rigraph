@@ -113,6 +113,7 @@ Mathematicae</em> 6, 290–297 (1959).</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Random graph models (games)
+<code><a href="sample_bipartite_gnm.html">bipartite_gnm</a>()</code>,
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="sample_bipartite.html">sample_bipartite</a>()</code>,
@@ -150,9 +151,9 @@ Mathematicae</em> 6, 290–297 (1959).</p>
 <span class="r-in"><span><span class="co"># Random graph with expected mean degree of 2</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_gnp</span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">2</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.956</span>
 <span class="r-in"><span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.149 0.289 0.269 0.162 0.079 0.042 0.007 0.003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.136 0.276 0.290 0.160 0.089 0.035 0.009 0.005</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Pick a simple graph on 6 vertices uniformly at random</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">sample_gnp</span><span class="op">(</span><span class="fl">6</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></span>

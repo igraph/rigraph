@@ -195,6 +195,7 @@ random networks <em>Science</em>, 286 509–512.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Random graph models (games)
+<code><a href="sample_bipartite_gnm.html">bipartite_gnm</a>()</code>,
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_.html">sample_</a>()</code>,
 <code><a href="sample_bipartite.html">sample_bipartite</a>()</code>,
@@ -231,25 +232,24 @@ random networks <em>Science</em>, 286 509–512.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_pa</span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="degree.html">degree_distribution</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.0000 0.6694 0.1608 0.0706 0.0346 0.0176 0.0130 0.0069 0.0049 0.0034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0032 0.0023 0.0021 0.0015 0.0016 0.0013 0.0007 0.0005 0.0006 0.0002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0003 0.0008 0.0001 0.0002 0.0001 0.0001 0.0002 0.0001 0.0002 0.0005</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0002 0.0001 0.0001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0000 0.0002 0.0000 0.0000 0.0000 0.0002 0.0000 0.0001 0.0001 0.0002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0001 0.0001 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0001 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 0.0000 0.6629 0.1738 0.0691 0.0324 0.0161 0.0112 0.0075 0.0048 0.0042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] 0.0028 0.0021 0.0020 0.0013 0.0010 0.0010 0.0010 0.0005 0.0007 0.0004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] 0.0005 0.0004 0.0001 0.0006 0.0005 0.0001 0.0001 0.0001 0.0002 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] 0.0001 0.0000 0.0002 0.0002 0.0000 0.0000 0.0000 0.0001 0.0000 0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 0.0001 0.0000 0.0001 0.0001 0.0000 0.0000 0.0002 0.0000 0.0001 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] 0.0000 0.0001 0.0000 0.0001 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [91] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111] 0.0000 0.0001 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [121] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [131] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [141] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [151] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [161] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [171] 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
