@@ -168,6 +168,7 @@ with sharply specified degrees. \code{\link[=sample_gnp]{sample_gnp()}} creates 
 fixed connection probability \eqn{p} between all vertex pairs.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
@@ -195,5 +196,5 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 }
 \concept{games}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{igraph_chung_lu_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
 

@@ -46,6 +46,7 @@ blocky3 <- pref_matrix \%>\%
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_chung_lu}()},

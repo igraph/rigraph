@@ -218,6 +218,8 @@ BIPARTITE_TYPES:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
+BIPARTITE_TYPES_UNNAMED:
+
 VERTEX_COLOR:
     INCONV: |-
         if (missing(%I%)) {

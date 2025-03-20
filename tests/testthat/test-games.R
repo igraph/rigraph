@@ -327,7 +327,7 @@ test_that("sample_pa can start from a graph", {
 test_that("sample_bipartite works -- undirected gnp", {
   withr::local_seed(42)
 
-  g_rand_bip <- sample_bipartite(10, 5, type = "gnp", p = .1)
+  g_rand_bip <- sample_bipartite_gnp(10, 5, p = .1)
   expect_equal(g_rand_bip$name, "Bipartite Gnp random graph")
   expect_vcount(g_rand_bip, 15)
   expect_ecount(g_rand_bip, 7)
@@ -336,49 +336,43 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
-  g_rand_bip_dir <- sample_bipartite(10, 5, type = "gnp", p = .1, directed = TRUE)
+  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
   expect_ecount(g_rand_bip_dir, 6)
   expect_true(bipartite_mapping(g_rand_bip_dir)$res)
   expect_true(is_directed(g_rand_bip_dir))
   expect_output(print_all(g_rand_bip_dir), "5->11")
 
-  g_rand_bip_in <- sample_bipartite(10, 5, type = "gnp", p = .1, directed = TRUE, mode = "in")
+  g_rand_bip_in <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE, mode = "in")
   expect_output(print_all(g_rand_bip_in), "11->3")
 })
 
 test_that("sample_bipartite works -- undirected gnm", {
-  g_rand_bip_gnm <- sample_bipartite(10, 5, type = "gnm", m = 8)
+  g_rand_bip_gnm <- sample_bipartite_gnm(10, 5, m = 8)
   expect_vcount(g_rand_bip_gnm, 15)
   expect_ecount(g_rand_bip_gnm, 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm)$res)
   expect_false(is_directed(g_rand_bip_gnm))
 })
 test_that("sample_bipartite works -- directed gnm", {
-  g_rand_bip_gnm_dir <- sample_bipartite(10, 5, type = "gnm", m = 8, directed = TRUE)
+  g_rand_bip_gnm_dir <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE)
   expect_vcount(g_rand_bip_gnm_dir, 15)
   expect_ecount(g_rand_bip_gnm_dir, 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_dir)$res)
   expect_true(is_directed(g_rand_bip_gnm_dir))
   expect_output(print_all(g_rand_bip_gnm_dir), "5->12")
 
-  g_rand_bip_gnm_in <- sample_bipartite(10, 5, type = "gnm", m = 8, directed = TRUE, mode = "in")
+  g_rand_bip_gnm_in <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE, mode = "in")
   expect_vcount(g_rand_bip_gnm_in, 15)
   expect_ecount(g_rand_bip_gnm_in, 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_in)$res)
   expect_true(is_directed(g_rand_bip_gnm_in))
   expect_output(print_all(g_rand_bip_gnm_in), "12->10")
 
-  g_rand_bip_full <- sample_bipartite(10, 5,
-    type = "gnp", p = 0.9999, directed = TRUE,
-    mode = "all"
-  )
+  g_rand_bip_full <- sample_bipartite_gnp(10, 5, p = 0.9999, directed = TRUE, mode = "all")
   expect_ecount(g_rand_bip_full, 100)
 
-  g_rand_bip_edges <- sample_bipartite(10, 5,
-    type = "gnm", m = 99, directed = TRUE,
-    mode = "all"
-  )
+  g_rand_bip_edges <- sample_bipartite_gnm(10, 5, m = 99, directed = TRUE, mode = "all")
   expect_ecount(g_rand_bip_edges, 99)
 })
 

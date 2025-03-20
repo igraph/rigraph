@@ -49,6 +49,7 @@ graph matching for correlated Erdős-Rényi graphs.
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
@@ -77,5 +78,5 @@ Random graph models (games)
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game}{\code{igraph_correlated_pair_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game}{\code{correlated_pair_game()}}.}
 
