@@ -70,5 +70,5 @@ Tamas Nepusz \email{ntamas@gmail.com} for the C code, Gabor Csardi
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{igraph_is_dag()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}.}
 

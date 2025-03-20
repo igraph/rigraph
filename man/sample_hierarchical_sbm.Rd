@@ -90,5 +90,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game}{\code{igraph_hsbm_game()}}, \href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game}{\code{igraph_hsbm_list_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game}{\code{hsbm_game()}}, \href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game}{\code{hsbm_list_game()}}.}
 

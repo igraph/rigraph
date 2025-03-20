@@ -74,5 +74,5 @@ Other deterministic constructors:
 }
 \concept{Lattice}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{igraph_square_lattice()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}.}
 

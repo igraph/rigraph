@@ -73,5 +73,5 @@ Graph cycles
 \concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_vertex_set}{\code{igraph_feedback_vertex_set()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_vertex_set}{\code{feedback_vertex_set()}}.}
 
