@@ -1765,6 +1765,8 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
       "sample_bipartite_gnm()"
     )
     sample_bipartite_gnm(n1, n2, m, directed = directed, mode = mode)
+  } else {
+    cli::cli_abort("Unreachable", .internal = TRUE)
   }
 }
 
