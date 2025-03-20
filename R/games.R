@@ -1864,11 +1864,13 @@ sample_bipartite_gnm <- function(n1, n2, m,
     directed = directed,
     mode = mode
   )
-  res$name <- "Bipartite Gnm random graph"
-  res$m <- m
 
-  res
+  out <- set_vertex_attr(res$graph, "type", value = res$types)
 
+  out$name <- "Bipartite Gnm random graph"
+  out$m <- m
+
+  out
 }
 #' @rdname sample_bipartite_gnm
 #' @export
@@ -1888,11 +1890,12 @@ sample_bipartite_gnp <- function(n1, n2, p,
     mode = mode
   )
 
-  res$name <- "Bipartite Gnp random graph"
-  res$p <- p
+  out <- set_vertex_attr(res$graph, "type", value = res$types)
 
-  res
+  out$name <- "Bipartite Gnp random graph"
+  out$p <- p
 
+  out
 }
 
 

@@ -617,6 +617,20 @@ BIPARTITE_TYPES:
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+BIPARTITE_TYPES_UNNAMED:
+    CALL:
+        OUT: '&%C%'
+    CTYPE: igraph_vector_bool_t
+    INCONV:
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_bool_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            igraph_vector_bool_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEX_COLOR:
     CALL:
         IN: '&%C%'

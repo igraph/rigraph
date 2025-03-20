@@ -2102,7 +2102,6 @@ is_bipartite_impl <- function(graph) {
   res
 }
 
-
 bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "out", "in", "total")) {
   # Argument checks
   n1 <- as.numeric(n1)
@@ -2114,7 +2113,7 @@ bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
-  res <- set_vertex_attr(res$graph, "type", value = res$types)
+
   res
 }
 
@@ -2129,7 +2128,6 @@ bipartite_game_gnm_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
-  res <- set_vertex_attr(res$graph, "type", value = res$types)
 
   res
 }
