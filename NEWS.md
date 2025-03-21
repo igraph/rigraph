@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9025
+
+## Features
+
+- Expose `find_cycle()` (#1471, #1571).
+
+- Split `sample_bipartite()` into two functions for the G(n, m) a… (#630, #1692).
+
+## Chore
+
+- Results from revdepcheck.
+
+- Update generated documentation.
+
+- Install build dependencies.
+
+## Documentation
+
+- Update decription of `order` parameter of `ego()` and related functions (#1746).
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#1738).
+
+
 # igraph 2.1.4.9024
 
 ## Bug fixes
