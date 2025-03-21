@@ -171,10 +171,10 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     
     > g <- associations2igraph(rules)
     > g
-    IGRAPH 2f55f5f DN-B 27 45 -- 
+    IGRAPH ff25a0a DN-B 27 45 -- 
     + attr: name (v/c), label (v/c), index (v/n), type (v/n), support
     | (v/n), confidence (v/n), coverage (v/n), lift (v/n), count (v/n)
-    + edges from 2f55f5f (vertex names):
+    + edges from ff25a0a (vertex names):
      [1] 27    ->assoc1  30    ->assoc1  23    ->assoc2  26    ->assoc2 
      [5] 23    ->assoc3  55    ->assoc3  30    ->assoc4  31    ->assoc4 
      [9] 23    ->assoc5  31    ->assoc5  16    ->assoc6  23    ->assoc6 
@@ -802,7 +802,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       > 
       > test_check("manynet")
       Starting 2 test processes
-      [ FAIL 1 | WARN 0 | SKIP 21 | PASS 561 ]
+      [ FAIL 1 | WARN 404 | SKIP 21 | PASS 561 ]
       
       ══ Skipped tests (21) ══════════════════════════════════════════════════════════
       • On CRAN (21): 'test-manip_as.R:86:3', 'test-manip_split.R:49:3',
@@ -838,7 +838,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
        15.         └─igraph:::graph_incidence_build(...)
        16.           └─methods::as(incidence, "dgCMatrix")
       
-      [ FAIL 1 | WARN 0 | SKIP 21 | PASS 561 ]
+      [ FAIL 1 | WARN 404 | SKIP 21 | PASS 561 ]
       Error: Test failures
       Execution halted
     ```
@@ -1207,7 +1207,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.8s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -1422,7 +1422,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m9.6s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m10.9s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -1624,7 +1624,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.7s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.8s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
@@ -2076,30 +2076,6 @@ Run `revdepcheck::cloud_details(, "simdata")` for more info
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Demo.Rmd’ using rmarkdown
-    ```
-
-# spatialreg
-
-<details>
-
-* Version: 1.3-6
-* GitHub: https://github.com/r-spatial/spatialreg
-* Source code: https://github.com/cran/spatialreg
-* Date/Publication: 2024-12-02 11:50:02 UTC
-* Number of recursive dependencies: 108
-
-Run `revdepcheck::cloud_details(, "spatialreg")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R     1.5Mb
-        doc   3.2Mb
     ```
 
 # ssifs
