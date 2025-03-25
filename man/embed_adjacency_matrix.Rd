@@ -45,14 +45,14 @@ computation algorithm in ARPACK. By default, the list of values is assigned
 the values given by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
-A list containing with entries: \item{X}{Estimated latent positions,
+A list containing with entries: \describe{\item{X}{Estimated latent positions,
 an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
 \item{Y}{\code{NULL} for undirected graphs, the second half of the latent
 positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
 is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
 or the singular values (for directed graphs) calculated by the algorithm.}
 \item{options}{A named list, information about the underlying ARPACK
-computation. See \code{\link[=arpack]{arpack()}} for the details.}
+computation. See \code{\link[=arpack]{arpack()}} for the details.}}
 }
 \description{
 Spectral decomposition of the adjacency matrices of graphs.
