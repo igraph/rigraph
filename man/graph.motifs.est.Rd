@@ -7,7 +7,7 @@
 graph.motifs.est(
   graph,
   size = 3,
-  cut.prob = NULL,
+  cut.prob = rep(0, size),
   sample.size = vcount(graph)/10,
   sample = NULL
 )
@@ -21,7 +21,7 @@ in directed graphs and sizes 3-6 in undirected graphs.}
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
-If \code{NULL}, the default, no cuts are made.}
+If \verb{rep(0, size))}, the default, no cuts are made.}
 
 \item{sample.size}{The number of vertices to use as a starting point for
 finding motifs. Only used if the \code{sample} argument is \code{NULL}.

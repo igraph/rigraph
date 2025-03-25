@@ -36,10 +36,14 @@ graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #'
 #' `graph.motifs.est()` was renamed to `sample_motifs()` to create a more
 #' consistent API.
+#' @param cut.prob Numeric vector giving the probabilities that the search
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the `size` argument).
+#'   If `rep(0, size))`, the default, no cuts are made.
 #' @inheritParams sample_motifs
 #' @keywords internal
 #' @export
-graph.motifs.est <- function(graph, size = 3, cut.prob = NULL, sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
+graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
   sample_motifs(graph = graph, size = size, cut.prob = cut.prob, sample.size = sample.size, sample = sample)
 } # nocov end
@@ -51,10 +55,14 @@ graph.motifs.est <- function(graph, size = 3, cut.prob = NULL, sample.size = vco
 #'
 #' `graph.motifs()` was renamed to `motifs()` to create a more
 #' consistent API.
+#' @param cut.prob Numeric vector giving the probabilities that the search
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the `size` argument).
+#'   If `rep(0, size))`, the default, no cuts are made.
 #' @inheritParams motifs
 #' @keywords internal
 #' @export
-graph.motifs <- function(graph, size = 3, cut.prob = NULL) { # nocov start
+graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
   motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
