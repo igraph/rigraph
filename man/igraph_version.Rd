@@ -4,7 +4,10 @@
 \alias{igraph_version}
 \title{Query igraph's version string}
 \usage{
-igraph_version()
+igraph_version(software = c("R", "C"))
+}
+\arguments{
+\item{software}{Either "R" or "C": version of the R package or of the vendored C library? Defaults to R.}
 }
 \value{
 A character scalar, the igraph version string.
