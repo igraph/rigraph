@@ -1380,7 +1380,8 @@ i.vertex.default <- list(
   pie.angle = 45,
   pie.density = -1,
   pie.lty = 1,
-  raster = .igraph.logo.raster
+  raster = .igraph.logo.raster,
+  relative.size = c(0.01, 0.025)
 )
 
 i.edge.default <- list(
@@ -1419,11 +1420,11 @@ i.default.values <- new.env()
 
 i.default.values[["vertex"]] <- i.vertex.default
 
-i.default.values[["edge"]]   <- i.edge.default
-i.default.values[["plot"]]   <- i.plot.default
+i.default.values[["edge"]] <- i.edge.default
+i.default.values[["plot"]] <- i.plot.default
 
 # Rescale vertex size
-# 
+#
 # Rescale the size of the vertex according to the device dimmensions
 # By default uses x1 and x2.
 #
@@ -1434,14 +1435,14 @@ i.default.values[["plot"]]   <- i.plot.default
 #
 # To use the default values (calling par()), it should be done after calling
 # the device and specifying its dimmensions.
-i.rescale.vertex <- function(size, plot.reg.coords=par("usr")[1:2],
+i.rescale.vertex <- function(size, plot.reg.coords = par("usr")[1:2],
                              minmax.relative.size) {
   # Adjusting
-  ran  <- range(size, na.rm=TRUE)
-  scal <- (plot.reg.coords[2] - plot.reg.coords[1])*minmax.relative.size
-  size <- (size - ran[1] + 1e-15)/(ran[2] - ran[1] + 1e-15)*
+  ran <- range(size, na.rm = TRUE)
+  scal <- (plot.reg.coords[2] - plot.reg.coords[1]) * minmax.relative.size
+  size <- (size - ran[1] + 1e-15) / (ran[2] - ran[1] + 1e-15) *
     (scal[2] - scal[1]) + scal[1]
-  
+
   return(size)
 }
 
