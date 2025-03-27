@@ -13,7 +13,7 @@ make_lattice(
   directed = FALSE,
   mutual = FALSE,
   periodic = FALSE,
-  circular
+  circular = deprecated()
 )
 
 lattice(...)
@@ -62,6 +62,7 @@ Other deterministic constructors:
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
@@ -73,3 +74,5 @@ Other deterministic constructors:
 }
 \concept{Lattice}
 \concept{deterministic constructors}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}.}
+

@@ -134,7 +134,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
     stopifnot(length(neighborhoods) == vcount(graph.us))
   }
   if (!is.null(neighborhoods) && k == 0) {
-    warning("`neighborhoods' ignored for k=0")
+    cli::cli_warn("{.arg neighborhoods} ignored for {.code k=0}.")
     neighborhoods <- NULL
   }
 
@@ -261,7 +261,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
           if (!is.function(FUN)) {
             FUN <- getFunction(FUN, where = environment())
           }
-          FUN(induced.subgraph(graph.them, vei), ...)
+          FUN(induced_subgraph(graph.them, vei), ...)
         })
       }
     }

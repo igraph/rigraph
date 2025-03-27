@@ -10,6 +10,8 @@ fit_power_law(
   start = 2,
   force.continuous = FALSE,
   implementation = c("plfit", "R.mle"),
+  p.value = FALSE,
+  p.precision = NULL,
   ...
 )
 }
@@ -38,6 +40,18 @@ is non-integer and assume a discrete distribution otherwise.}
 \item{implementation}{Character scalar. Which implementation to use. See
 details below.}
 
+\item{p.value}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Set to \code{TRUE} to compute the p-value with \code{implementation = "plfit"}.}
+
+\item{p.precision}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+The desired precision of the p-value calculation. The
+precision ultimately depends on the number of resampling attempts. The
+number of resampling trials is determined by 0.25 divided by the square
+of the required precision. For instance, a required precision of 0.01
+means that 2500 samples will be drawn.}
+
 \item{\dots}{Additional arguments, passed to the maximum likelihood
 optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
 implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
@@ -50,16 +64,18 @@ be used to calculate confidence intervals and log-likelihood. See
 \code{\link[stats4:mle-class]{stats4::mle-class()}} for details.
 
 If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
-named list with entries: \item{continuous}{Logical scalar, whether the
+named list with entries:
+\item{continuous}{Logical scalar, whether the
 fitted power-law distribution was continuous or discrete.}
-\item{alpha}{Numeric scalar, the exponent of the fitted power-law
-distribution.} \item{xmin}{Numeric scalar, the minimum value from which the
+\item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
+\item{xmin}{Numeric scalar, the minimum value from which the
 power-law distribution was fitted. In other words, only the values larger
-than \code{xmin} were used from the input vector.} \item{logLik}{Numeric
-scalar, the log-likelihood of the fitted parameters.} \item{KS.stat}{Numeric
-scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
-fitted distribution with the input vector. Smaller scores denote better
-fit.} \item{KS.p}{Numeric scalar, the p-value of the Kolmogorov-Smirnov
+than \code{xmin} were used from the input vector.}
+\item{logLik}{Numeric scalar, the log-likelihood of the fitted parameters.}
+\item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+that compares the fitted distribution with the input vector.
+Smaller scores denote better fit.}
+\item{KS.p}{Only for \code{p.value = TRUE}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}
@@ -80,7 +96,7 @@ the power-law behaviour kicks in only above a threshold value
 
 \code{fit_power_law()} provides two maximum likelihood implementations.  If
 the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
-optimization (see \link[stats4:mle]{mle}) algorithm is applied.  The additional
+optimization (see \code{\link[stats4:mle]{stats4::mle()}}) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
 \emph{not} to fit the \eqn{x_\text{min}}{xmin} argument, so use the
@@ -89,10 +105,15 @@ optimization method and/or its parameters.  This implementation can
 The \sQuote{\code{plfit}} implementation also uses the maximum likelihood
 principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_\text{min}}{xmin};
 When \eqn{x_\text{min}}{xmin} is not given in advance, the algorithm will attempt
-to find itsoptimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
+to find its optimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
 test between the fitted distribution and the original sample is the largest.
 The function uses the method of Clauset, Shalizi and Newman to calculate the
 parameters of the fitted distribution. See references below for the details.
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Pass \code{p.value = TRUE} to include the p-value in the output.
+This is not returned by default because the computation may be slow.
 }
 \examples{
 

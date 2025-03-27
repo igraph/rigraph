@@ -1,4 +1,3 @@
-
 #' Creates a communities object.
 #'
 #' @description
@@ -469,7 +468,7 @@ membership <- function(communities) {
       which.max(communities$modularity)
     )
   } else {
-    stop("Cannot calculate community membership")
+    cli::cli_abort("Cannot calculate community membership")
   }
   if (igraph_opt("add.vertex.names") && !is.null(communities$names)) {
     names(res) <- communities$names
@@ -681,7 +680,7 @@ modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, dir
   # Argument checks
   ensure_igraph(x)
   if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
-    stop("Membership is not a numerical vector")
+    cli::cli_abort("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
   if (!is.null(weights)) weights <- as.numeric(weights)
@@ -701,18 +700,18 @@ modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
     max(x$modularity)
   } else {
-    stop("Modularity was not calculated")
+    cli::cli_abort("cluster algorithm was run with {.arg modularity = FALSE} and no modularity value was computed.")
   }
 }
 
 #' @rdname modularity.igraph
 #' @export
-modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
+modularity_matrix <- function(graph, membership = lifecycle::deprecated(), weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
   ensure_igraph(graph)
 
   if (!missing(membership)) {
-    warning("The membership argument is deprecated; modularity_matrix does not need it")
+    lifecycle::deprecate_warn("2.1.0", "modularity_matrix(membership = 'is no longer used')")
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -761,7 +760,7 @@ merges <- function(communities) {
   if (!is.null(communities$merges)) {
     communities$merges
   } else {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 }
 
@@ -795,10 +794,9 @@ complete.dend <- function(comm, use.modularity) {
   merges <- comm$merges
   if (nrow(merges) < comm$vcount - 1) {
     if (use.modularity) {
-      stop(paste(
-        "`use.modularity' requires a full dendrogram,",
-        "i.e. a connected graph"
-      ))
+      cli::cli_abort(
+        "{.arg use.modularity} requires a full dendrogram, i.e. a connected graph"
+      )
     }
     miss <- seq_len(comm$vcount + nrow(merges))[-as.vector(merges)]
     miss <- c(miss, seq_len(length(miss) - 2) + comm$vcount + nrow(merges))
@@ -819,7 +817,7 @@ complete.dend <- function(comm, use.modularity) {
 as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
                                       ...) {
   if (!is_hierarchical(object)) {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 
   .memberDend <- function(x) {
@@ -848,7 +846,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
   }
   nMerge <- length(oHgt <- object$height)
   if (nMerge != nrow(merges)) {
-    stop("'merge' and 'height' do not fit!")
+    cli::cli_abort("'merge' and 'height' do not fit!")
   }
   hMax <- oHgt[nMerge]
   one <- 1L
@@ -919,7 +917,7 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
 
 as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   if (!is_hierarchical(x)) {
-    stop("Not a hierarchical community structure")
+    cli::cli_abort("Not a hierarchical community structure")
   }
 
   ## If multiple components, then we merge them in arbitrary order
@@ -974,21 +972,21 @@ rlang::on_load(s3_register("ape::as.phylo", "communities"))
 #' @export
 cut_at <- function(communities, no, steps) {
   if (!inherits(communities, "communities")) {
-    stop("Not a community structure")
+    cli::cli_abort("Not a community structure")
   }
   if (!is_hierarchical(communities)) {
-    stop("Not a hierarchical communitity structure")
+    cli::cli_abort("Not a hierarchical communitity structure")
   }
 
   if ((!missing(no) && !missing(steps)) ||
     (missing(no) && missing(steps))) {
-    stop("Please give either `no' or `steps' (but not both)")
+    cli::cli_abort("Please use either {.arg no} or {.arg steps} (but not both)")
   }
 
   if (!missing(steps)) {
     mm <- merges(communities)
     if (steps > nrow(mm)) {
-      warning("Cannot make that many steps")
+      cli::cli_warn("Cannot make that many steps.")
       steps <- nrow(mm)
     }
     community.to.membership2(mm, communities$vcount, steps)
@@ -996,7 +994,7 @@ cut_at <- function(communities, no, steps) {
     mm <- merges(communities)
     noc <- communities$vcount - nrow(mm) # final number of communities
     if (no < noc) {
-      warning("Cannot have that few communities")
+      cli::cli_warn("Cannot have that few communities.")
       no <- noc
     }
     steps <- communities$vcount - no
@@ -1008,10 +1006,10 @@ cut_at <- function(communities, no, steps) {
 #' @export
 show_trace <- function(communities) {
   if (!inherits(communities, "communities")) {
-    stop("Not a community structure")
+    cli::cli_abort("Not a community structure")
   }
   if (is.null(communities$history)) {
-    stop("History was not recorded")
+    cli::cli_abort("History was not recorded")
   }
 
   res <- character()
@@ -1083,8 +1081,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' must be a vertex id, and the same energy function is used to find the
 #' community of the the given vertex. See also the examples below.
 #'
-#' @param graph The input graph, can be directed but the direction of the edges
-#'   is neglected.
+#' @param graph The input graph. Edge directions are ignored in directed graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1277,7 +1274,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' \eqn{\gamma}{gamma} is determined automatically by the
 #' `objective_function` argument.
 #'
-#' @param graph The input graph, only undirected graphs are supported.
+#' @param graph The input graph. It must be undirected.
 #' @param objective_function Whether to use the Constant Potts Model (CPM) or
 #'   modularity. Must be either `"CPM"` or `"modularity"`.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
@@ -1338,18 +1335,17 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            ...,
                            weights = NULL, resolution = 1,
-    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
-    # after igraph:::deprecated() is removed
-                           resolution_parameter, beta = 0.01,
+                           resolution_parameter = deprecated(), beta = 0.01,
                            initial_membership = NULL,
                            n_iterations = 2, vertex_weights = NULL) {
-
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft("2.0.4",
-                              "cluster_leiden(resolution_parameter)",
-                              "cluster_leiden(resolution)")
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "cluster_leiden(resolution_parameter)",
+      "cluster_leiden(resolution)"
+    )
     resolution <- resolution_parameter
   }
 
@@ -1383,7 +1379,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (!is.null(vertex_weights) && !any(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
     if (objective_function == 1) { # Using modularity
-      warning("Providing node weights contradicts using modularity")
+      cli::cli_warn("Providing node weights contradicts using modularity.")
     }
   } else {
     if (objective_function == 1) { # Using modularity
@@ -1497,7 +1493,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #' algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, https://arxiv.org/abs/physics/0512106
 #'
-#' @param graph The input graph, edge directions are ignored in directed
+#' @param graph The input graph. Edge directions are ignored in directed
 #'   graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
@@ -1708,7 +1704,8 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #' community structure in very large networks,
 #' http://www.arxiv.org/abs/cond-mat/0408187 for the details.
 #'
-#' @param graph The input graph
+#' @param graph The input graph. It must be undirected and must not have
+#'   multi-edges.
 #' @param merges Logical scalar, whether to return the merge matrix.
 #' @param modularity Logical scalar, whether to return a vector containing the
 #'   modularity after each merge.
@@ -1881,7 +1878,6 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   options = arpack_defaults(),
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1947,7 +1943,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' connected groups of nodes form a consensus on a unique label to form
 #' communities.}
 #'
-#' @param graph The input graph. Note that the algorithm wsa originally
+#' @param graph The input graph. Note that the algorithm was originally
 #'   defined for undirected graphs. You are advised to set \sQuote{mode} to
 #'   `all` if you pass a directed graph here to treat it as
 #'   undirected.
@@ -2043,8 +2039,16 @@ cluster_label_prop0 <- function(
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
-  directed <- switch(igraph.match.arg(mode), "out" = TRUE, "in" = TRUE, "all" = FALSE)
-  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
+  directed <- switch(igraph.match.arg(mode),
+    "out" = TRUE,
+    "in" = TRUE,
+    "all" = FALSE
+  )
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2086,7 +2090,7 @@ cluster_label_prop0 <- function(
 #'
 #' This function was contributed by Tom Gregorovic.
 #'
-#' @param graph The input graph.
+#' @param graph The input graph. It must be undirected.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -2194,10 +2198,9 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' print(modularity(fc))
 #' }
 #'
-#' @param graph The input graph. Edge directions are ignored for directed
-#'   graphs.
-#' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
+#' @param graph The input graph. It may be undirected or directed.
+#' @param weights The weights of the edges. It must be a positive numeric
+#'   vector, `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
 #'   `NULL` and no such attribute is present, then the edges will have equal
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
@@ -2796,6 +2799,7 @@ communities <- groups.communities
 #'
 #' @export
 #' @family functions for manipulating graph structure
+#' @cdocs igraph_contract_vertices
 contract <- contract_vertices_impl
 
 
@@ -2830,11 +2834,12 @@ contract <- contract_vertices_impl
 #' @seealso [distances()]
 #' @examples
 #'
-#' g <- make_lattice(c(10,10))
+#' g <- make_lattice(c(10, 10))
 #' clu <- voronoi_cells(g, c(25, 43, 67))
 #' groups(clu)
-#' plot(g, vertex.color=clu$membership)
+#' plot(g, vertex.color = clu$membership)
 #'
 #' @export
 #' @family community
+#' @cdocs igraph_voronoi
 voronoi_cells <- voronoi_impl

@@ -7,8 +7,7 @@
 subgraph_centrality(graph, diag = FALSE)
 }
 \arguments{
-\item{graph}{The input graph, it should be undirected, but the
-implementation does not check this currently.}
+\item{graph}{The input graph. It will be treated as undirected.}
 
 \item{diag}{Boolean scalar, whether to include the diagonal of the adjacency
 matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
@@ -22,9 +21,9 @@ Subgraph centrality of a vertex measures the number of subgraphs a vertex
 participates in, weighting them according to their size.
 }
 \details{
-The subgraph centrality of a vertex is defined as the number of closed loops
-originating at the vertex, where longer loops are exponentially
-downweighted.
+The subgraph centrality of a vertex is defined as the number of closed walks
+originating at the vertex, where longer walks are downweighted by the
+factorial of their length.
 
 Currently the calculation is performed by explicitly calculating all
 eigenvalues and eigenvectors of the adjacency matrix of the graph. This

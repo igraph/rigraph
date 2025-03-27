@@ -33,7 +33,8 @@ selected by the surfer.}
 }
 \value{
 A named list with members:
-\item{vector}{The hub or authority scores of the vertices.}
+\item{hub}{The hub score of the vertices.}
+\item{authority}{The authority score of the vertices.}
 \item{value}{The corresponding eigenvalue of the calculated
 principal eigenvector.}
 \item{options}{Some information about the ARPACK computation, it has
@@ -88,3 +89,5 @@ Centrality measures
 \code{\link{subgraph_centrality}()}
 }
 \concept{centrality}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_hub_and_authority_scores}{\code{hub_and_authority_scores()}}.}
+

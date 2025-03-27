@@ -179,8 +179,13 @@ typedef enum { IGRAPH_BARABASI_BAG = 0,
              } igraph_barabasi_algorithm_t;
 
 typedef enum { IGRAPH_FAS_EXACT_IP = 0,
-               IGRAPH_FAS_APPROX_EADES
+               IGRAPH_FAS_APPROX_EADES,
+               IGRAPH_FAS_EXACT_IP_CG,
+               IGRAPH_FAS_EXACT_IP_TI
              } igraph_fas_algorithm_t;
+
+typedef enum { IGRAPH_FVS_EXACT_IP = 0
+             } igraph_fvs_algorithm_t;
 
 typedef enum { IGRAPH_SUBGRAPH_AUTO = 0,
                IGRAPH_SUBGRAPH_COPY_AND_DELETE,
@@ -207,7 +212,7 @@ typedef enum { IGRAPH_VORONOI_FIRST = 0,
              } igraph_voronoi_tiebreaker_t;
 
 typedef enum { IGRAPH_CHUNG_LU_ORIGINAL = 0,
-               IGRAPH_CHUNG_LU_GRG,
+               IGRAPH_CHUNG_LU_MAXENT,
                IGRAPH_CHUNG_LU_NR
              } igraph_chung_lu_t;
 

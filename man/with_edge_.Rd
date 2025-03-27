@@ -23,7 +23,9 @@ make_(
   plot()
 }
 \seealso{
-Other constructor modifiers: 
+Constructor modifiers (and related functions)
+\code{\link{make_}()},
+\code{\link{sample_}()},
 \code{\link{simplified}()},
 \code{\link{with_graph_}()},
 \code{\link{with_vertex_}()},

@@ -1,4 +1,3 @@
-
 #' Is this object an igraph graph?
 #'
 #' @description
@@ -58,25 +57,16 @@ is_igraph <- function(graph) {
   TRUE
 }
 
+#' Incident vertices of some graph edges
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' Use [ends()].
+#' @inheritParams ends
 #' @export
+#' @keywords internal
 get.edge <- function(graph, id) {
-  .Deprecated("ends", msg = paste(
-    "'get.edge' is deperecated, please use",
-    "'ends' instead."
-  ))
-
-  ensure_igraph(graph)
-
-  id <- as.numeric(id)
-  ec <- ecount(graph)
-
-  if (id < 1 || id > ec) {
-    stop("No such edge")
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_get_edge, graph, as.numeric(id) - 1)
-  res + 1
+  lifecycle::deprecate_stop("2.1.0", "get.edge()", "ends()")
 }
 
 

@@ -85,7 +85,7 @@ The types of the generated vertices can be retrieved from the
 
 pf <- matrix(c(1, 0, 0, 1), nrow = 2)
 g <- sample_pref(20, 2, pref.matrix = pf)
-\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 # example code
 
 tkplot(g, layout = layout_with_fr)
@@ -93,15 +93,17 @@ tkplot(g, layout = layout_with_fr)
 
 pf <- matrix(c(0, 1, 0, 0), nrow = 2)
 g <- sample_asym_pref(20, 2, pref.matrix = pf)
-\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_installed("tcltk") && rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 tkplot(g, layout = layout_in_circle)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},

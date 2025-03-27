@@ -30,7 +30,7 @@ Other structural queries:
 \code{\link{adjacent_vertices}()},
 \code{\link{are_adjacent}()},
 \code{\link{ends}()},
-\code{\link{get.edge.ids}()},
+\code{\link{get_edge_ids}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
 \code{\link{incident}()},
@@ -40,3 +40,5 @@ Other structural queries:
 \code{\link{tail_of}()}
 }
 \concept{structural queries}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}.}
+

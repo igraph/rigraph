@@ -1,4 +1,3 @@
-
 ## ----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -200,7 +199,7 @@
     !is.numeric(vertex_attr(x, "name")) &&
     !is.character(vertex_attr(x, "name")) &&
     !is.logical(vertex_attr(x, "name"))) {
-    warning("Can't print vertex names, complex `name' vertex attribute")
+    cli::cli_warn("Can't print vertex names, complex {.val name} vertex attribute.")
     names <- FALSE
   }
 

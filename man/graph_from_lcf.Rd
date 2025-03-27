@@ -32,10 +32,12 @@ g2 <- make_graph("Franklin")
 isomorphic(g1, g2)
 }
 \seealso{
-\code{\link[=graph]{graph()}} can create arbitrary graphs, see also the other
+\code{\link[=make_graph]{make_graph()}} can create arbitrary graphs, see also the other
 functions on the its manual page for creating special graphs.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_lcf_vector}{\code{lcf_vector()}}.}
+

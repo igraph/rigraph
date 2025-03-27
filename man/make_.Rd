@@ -42,6 +42,29 @@ degree(ran)
 is_simple(ran)
 }
 \seealso{
-simplified with_edge_ with_graph_ with_vertex_
-without_loops without_multiples
+Other deterministic constructors: 
+\code{\link{graph_from_atlas}()},
+\code{\link{graph_from_edgelist}()},
+\code{\link{graph_from_literal}()},
+\code{\link{make_chordal_ring}()},
+\code{\link{make_empty_graph}()},
+\code{\link{make_full_citation_graph}()},
+\code{\link{make_full_graph}()},
+\code{\link{make_graph}()},
+\code{\link{make_lattice}()},
+\code{\link{make_ring}()},
+\code{\link{make_star}()},
+\code{\link{make_tree}()}
+
+Constructor modifiers (and related functions)
+\code{\link{sample_}()},
+\code{\link{simplified}()},
+\code{\link{with_edge_}()},
+\code{\link{with_graph_}()},
+\code{\link{with_vertex_}()},
+\code{\link{without_attr}()},
+\code{\link{without_loops}()},
+\code{\link{without_multiples}()}
 }
+\concept{constructor modifiers}
+\concept{deterministic constructors}

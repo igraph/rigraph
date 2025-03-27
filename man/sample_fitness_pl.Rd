@@ -88,9 +88,11 @@ scale-free networks under the Achlioptas process. \emph{Phys Rev Lett}
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -118,3 +120,5 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game}{\code{static_power_law_game()}}.}
+

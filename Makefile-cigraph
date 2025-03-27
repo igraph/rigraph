@@ -50,7 +50,7 @@ $(PYVENV)/stamp: tools/build-requirements.txt
 
 # Apply possible patches
 
-patches: $(CORESRC) $(VENDORSRC) $(CINC) $(PARSER2)
+patches: $(PARSER2)
 	-rm -f src/*.orig
 	tools/fix-lexers.sh
 
@@ -142,12 +142,12 @@ R/aaa-auto.R: \
 # Makevars.in, Makevars.win and Makevars.ucrt are only regenerated if
 # the list of object files changes.
 
-OBJECTS := $(shell echo $(CORESRC) $(VENDORSRC) $(ARPACK) $(RAY) $(UUID) | \
+OBJECTS := $(shell echo $(ARPACK) $(RAY) $(UUID) | \
 		tr ' ' '\n' | \
         grep -E '\.(c|cpp|cc|f|l|y)$$' | \
 		sed 's/\.[^\.][^\.]*$$/.o/' | \
 		sed 's,^src/,,' \
-		) rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
+		) rinterface.o rinterface_extra.o rrandom.o init.o cpp11.o cpprinterface.o
 
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@

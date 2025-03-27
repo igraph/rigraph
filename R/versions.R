@@ -1,4 +1,3 @@
-
 ## ----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -24,11 +23,11 @@
 
 
 # format versions
-ver_0_1_1 <- 0L   # 0.1.1
-ver_0_4 <- 1L     # 0.4
+ver_0_1_1 <- 0L # 0.1.1
+ver_0_4 <- 1L # 0.4
 ver_0_7_999 <- 2L # 0.7.999
-ver_0_8 <- 3L     # 0.8
-ver_1_5_0 <- 4L   # 1.5.0
+ver_0_8 <- 3L # 0.8
+ver_1_5_0 <- 4L # 1.5.0
 pkg_graph_version <- ver_1_5_0
 
 #' igraph data structure versions
@@ -135,11 +134,11 @@ warn_version <- function(graph) {
   }
 
   if (pkg_graph_version > their_version) {
-    message(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version\n",
-      "  For now we convert it on the fly..."
-    )
+    cli::cli_inform(c(
+      "This graph was created by an old(er) igraph version.",
+      i = "Call {.fun igraph::upgrade_graph} on it to use with the current igraph version.",
+      "For now we convert it on the fly..."
+    ))
 
     # In-place upgrade:
     # - The igraph element in the igraph_t_idx_env component will be added

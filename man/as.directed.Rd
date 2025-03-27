@@ -2,119 +2,22 @@
 % Please edit documentation in R/conversion.R
 \name{as.directed}
 \alias{as.directed}
-\alias{as.undirected}
 \title{Convert between directed and undirected graphs}
 \usage{
 as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
-
-as.undirected(
-  graph,
-  mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
-)
 }
 \arguments{
 \item{graph}{The graph to convert.}
 
 \item{mode}{Character constant, defines the conversion algorithm. For
-\code{as.directed()} it can be \code{mutual} or \code{arbitrary}. For
-\code{as.undirected()} it can be \code{each}, \code{collapse} or
+\code{as_directed()} it can be \code{mutual} or \code{arbitrary}. For
+\code{as_undirected()} it can be \code{each}, \code{collapse} or
 \code{mutual}. See details below.}
-
-\item{edge.attr.comb}{Specifies what to do with edge attributes, if
-\code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
-might be mapped to a single one in the new graph, and their attributes are
-combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
-this.}
-}
-\value{
-A new graph object.
 }
 \description{
-\code{as.directed()} converts an undirected graph to directed,
-\code{as.undirected()} does the opposite, it converts a directed graph to
-undirected.
-}
-\details{
-Conversion algorithms for \code{as.directed()}: \describe{
-\item{"arbitrary"}{The number of edges in the graph stays the same, an
-arbitrarily directed edge is created for each undirected edge, but the
-direction of the edge is deterministic (i.e. it always points the same
-way if you call the function multiple times).}
-\item{"mutual"}{Two directed edges are created for each undirected
-edge, one in each direction.}
-\item{"random"}{The number of edges in the graph stays the same, and
-a randomly directed edge is created for each undirected edge. You
-will get different results if you call the function multiple times
-with the same graph.}
-\item{"acyclic"}{The number of edges in the graph stays the same, and
-a directed edge is created for each undirected edge such that the
-resulting graph is guaranteed to be acyclic. This is achieved by ensuring
-that edges always point from a lower index vertex to a higher index.
-Note that the graph may include cycles of length 1 if the original
-graph contained loop edges.}
-}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Conversion algorithms for \code{as.undirected()}: \describe{
-\item{"each"}{The number of edges remains constant, an undirected edge
-is created for each directed one, this version might create graphs with
-multiple edges.} \item{"collapse"}{One undirected edge will be created
-for each pair of vertices which are connected with at least one directed
-edge, no multiple edges will be created.} \item{"mutual"}{One
-undirected edge will be created for each pair of mutual edges. Non-mutual
-edges are ignored. This mode might create multiple edges if there are more
-than one mutual edge pairs between the same pair of vertices.  } }
+\code{as.directed()} was renamed to \code{as_directed()} to create a more
+consistent API.
 }
-\examples{
-
-g <- make_ring(10)
-as.directed(g, "mutual")
-g2 <- make_star(10)
-as.undirected(g)
-
-# Combining edge attributes
-g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
-E(g3)$weight <- seq_len(ecount(g3))
-ug3 <- as.undirected(g3)
-print(ug3, e = TRUE)
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-x11(width = 10, height = 5)
-layout(rbind(1:2))
-plot(g3, layout = layout_in_circle, edge.label = E(g3)$weight)
-plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
-\dontshow{\}) # examplesIf}
-
-g4 <- make_graph(c(
-  1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 4,
-  6, 7, 7, 6, 7, 8, 7, 8, 8, 7, 8, 9, 8, 9,
-  9, 8, 9, 8, 9, 9, 10, 10, 10, 10
-))
-E(g4)$weight <- seq_len(ecount(g4))
-ug4 <- as.undirected(g4,
-  mode = "mutual",
-  edge.attr.comb = list(weight = length)
-)
-print(ug4, e = TRUE)
-
-}
-\seealso{
-\code{\link[=simplify]{simplify()}} for removing multiple and/or loop edges from
-a graph.
-
-Other conversion: 
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_biadjacency_matrix}()},
-\code{\link{as_data_frame}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
-}
-\author{
-Gabor Csardi \email{csardi.gabor@gmail.com}
-}
-\concept{conversion}
-\keyword{graphs}
+\keyword{internal}

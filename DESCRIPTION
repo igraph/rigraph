@@ -1,6 +1,6 @@
 Package: igraph
-Version: 2.0.3.9033
 Title: Network Analysis and Visualization
+Version: 2.1.4.9028
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
@@ -15,9 +15,13 @@ Authors@R: c(
     person("Daniel", "Noom", role = "aut"),
     person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1416-3412")),
-    person("Maëlle", "Salmon", role = "ctb"),
     person("Michael", "Antonov", role = "ctb"),
-    person("Chan Zuckerberg Initiative", role = "fnd")
+    person("Chan Zuckerberg Initiative", role = "fnd",
+           comment = c(ROR = "02qenvm24")),
+    person("David", "Schoch", , "david.schoch@cynkra.com", role = "aut",
+           comment = c(ORCID = "0000-0003-2952-4812")),
+    person("Maëlle", "Salmon", , "maelle@cynkra.com", role = "aut",
+           comment = c(ORCID = "0000-0002-2815-0399"))
   )
 Description: Routines for simple graphs and network analysis. It can
     handle large graphs very well and provides functions for generating
@@ -49,7 +53,7 @@ Suggests:
     digest,
     igraphdata,
     knitr,
-    rgl,
+    rgl (>= 1.3.14),
     rmarkdown,
     scales,
     stats4,
@@ -60,17 +64,20 @@ Suggests:
 Enhances: 
     graph
 LinkingTo: 
-    cpp11 (>= 0.4.7)
+    cpp11 (>= 0.5.0)
 VignetteBuilder: 
     knitr
-Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
+Config/Needs/build: roxygen2, devtools, irlba, pkgconfig,
+    igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
-Config/Needs/website: readr
+Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace",
+    "igraph.r2cdocs::cdocs_roclet", "devtag::dev_roclet"), packages =
+    "igraph.r2cdocs")
+RoxygenNote: 7.3.2.9000
 SystemRequirements: libxml2 (optional), glpk (>= 4.57, optional)

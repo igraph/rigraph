@@ -1,4 +1,3 @@
-
 #' Permute the vertices of a graph
 #'
 #' @description
@@ -240,10 +239,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   all.maps <- as.logical(all.maps)
   if (!is.null(domains)) {
     if (!is.list(domains)) {
-      stop("`domains' must be a list of vertex vectors from `target'")
+      cli::cli_abort("{.arg domains} must be a list of vertex vectors from {.arg target}.")
     }
     if (length(domains) != vcount(pattern)) {
-      stop("`domains' length and `pattern' number of vertices must match")
+      cli::cli_abort("{.arg domains} length and {.arg pattern} number of vertices must match.")
     }
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
@@ -394,10 +393,13 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
+#' @cdocs igraph_isomorphic_bliss
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
+#' @cdocs igraph_isomorphic_vf2
 graph.isomorphic.vf2 <- isomorphic_vf2_impl
 #' @export
+#' @cdocs igraph_subisomorphic_vf2
 graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
 
 #' @export
@@ -557,6 +559,7 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 }
 
 #' @export
+#' @cdocs igraph_count_isomorphisms_vf2
 graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
@@ -632,6 +635,7 @@ count_subgraph_isomorphisms <- function(pattern, target,
 }
 
 #' @export
+#' @cdocs igraph_count_subisomorphisms_vf2
 graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
@@ -754,6 +758,7 @@ isomorphism_class <- function(graph, v) {
 }
 
 #' @export
+#' @cdocs igraph_isoclass
 graph.isoclass <- isoclass_impl
 
 #' Create a graph from an isomorphism class
@@ -773,6 +778,7 @@ graph.isoclass <- isoclass_impl
 #'
 #' @family graph isomorphism
 #' @export
+#' @cdocs igraph_isoclass_create
 graph_from_isomorphism_class <- isoclass_create_impl
 
 
@@ -822,7 +828,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso [permute()] to apply a permutation to a graph,
-#' [graph.isomorphic()] for deciding graph isomorphism, possibly
+#' [isomorphic()] for deciding graph isomorphism, possibly
 #' based on canonical labels.
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
@@ -849,6 +855,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' all(el1 == el2)
 #' @family graph isomorphism
 #' @export
+#' @cdocs igraph_canonical_permutation
 canonical_permutation <- canonical_permutation_impl
 
 
@@ -876,23 +883,25 @@ canonical_permutation <- canonical_permutation_impl
 #' # Random permutation of a random graph
 #' g <- sample_gnm(20, 50)
 #' g2 <- permute(g, sample(vcount(g)))
-#' graph.isomorphic(g, g2)
+#' isomorphic(g, g2)
 #'
 #' # Permutation keeps all attributes
 #' g$name <- "Random graph, Gnm, 20, 50"
 #' V(g)$name <- letters[1:vcount(g)]
 #' E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 #' g2 <- permute(g, sample(vcount(g)))
-#' graph.isomorphic(g, g2)
+#' isomorphic(g, g2)
 #' g2$name
 #' V(g2)$name
 #' E(g2)$weight
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
+#' @cdocs igraph_permute_vertices
 permute <- permute_vertices_impl
 
 #' @export
+#' @cdocs igraph_isomorphic
 graph.isomorphic <- isomorphic_impl
 
 #' Number of automorphisms
@@ -954,6 +963,7 @@ graph.isomorphic <- isomorphic_impl
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
+#' @cdocs igraph_count_automorphisms
 count_automorphisms <- count_automorphisms_impl
 
 
@@ -1013,4 +1023,5 @@ count_automorphisms <- count_automorphisms_impl
 #' automorphism_group(g)
 #' @family graph automorphism
 #' @export
+#' @cdocs igraph_automorphism_group
 automorphism_group <- automorphism_group_impl

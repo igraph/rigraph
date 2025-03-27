@@ -123,7 +123,7 @@ exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
 all(degree(exp_vl_graph) == exponential_degrees)
 
 ## An example that does not work
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 ## withr::with_seed(11, {
 ## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
 ## })
@@ -168,7 +168,7 @@ powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
 all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 
 ## An example that does not work
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 ## withr::with_seed(2, {
 ##  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
 ## })
@@ -195,9 +195,11 @@ all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 \code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_dot_product}()},

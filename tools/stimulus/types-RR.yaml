@@ -141,6 +141,19 @@ VERTEX_INDICES:
               %I% <- create_vs(%I1%, %I%)
             }
 
+# Temporary, for https://github.com/igraph/rigraph/pull/1630
+# We should call the `_PV` versions for all types in the future.
+VERTEX_INDICES_PV:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: V(%I1%)
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
 EDGE_INDICES:
     CALL: '%I%-1'
     DEFAULT:
@@ -204,6 +217,8 @@ BIPARTITE_TYPES:
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
+
+BIPARTITE_TYPES_UNNAMED:
 
 VERTEX_COLOR:
     INCONV: |-
@@ -411,7 +426,7 @@ LSETYPE:
         Default: c("default", "D-A", "DAD", "I-DAD", "OAP")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%),
-          "default"=if (is.directed(%I1%)) 3L else 0L,
+          "default"=if (is_directed(%I1%)) 3L else 0L,
           "da"=0L, "d-a"=0L, "idad"=1L, "i-dad"=1L, "dad"=2L,
           "oap"=3L)
 
@@ -458,6 +473,12 @@ FAS_ALGORITHM:
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)
 
+FVS_ALGORITHM:
+    DEFAULT:
+        EXACT_IP: c("exact_ip")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L)
+
 WHEEL_MODE:
     DEFAULT:
         OUT: c("out", "in", "undirected", "mutual")
@@ -484,3 +505,8 @@ OPTIMALITY:
         MINIMUM: c("minimum", "maximum")
         MAXIMUM: c("maximum", "minimum")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'
+
+CHUNG_LU_VARIANT:
+    DEFAULT:
+        ORIGINAL: c("original", "maxent", "nr")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "original"=0L, "maxent"=1L, "nr"=2L)'

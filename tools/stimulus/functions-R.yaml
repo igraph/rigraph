@@ -122,7 +122,7 @@ igraph_full_citation:
         name: Full citation graph
 
 igraph_atlas:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_extended_chordal_ring:
     IGNORE: RR
@@ -133,13 +133,13 @@ igraph_connect_neighborhood:
 igraph_graph_power:
 
 igraph_linegraph:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_de_bruijn:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_kautz:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_famous:
     IGNORE: RR, RC
@@ -158,7 +158,7 @@ igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
-        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL,
+        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
     R:
       GATTR:
@@ -192,7 +192,13 @@ igraph_degree_sequence_game:
     IGNORE: RR, RC
 
 igraph_growing_random_game:
-    IGNORE: RR, RC
+    PARAMS: |-
+        OUT GRAPH graph, INTEGER n, INTEGER m=1, *,
+        BOOLEAN directed=True, BOOLEAN citation=False
+    R:
+        GATTR:
+          name: Growing random graph
+        GATTR-PARAM: m, citation
 
 igraph_barabasi_aging_game:
     IGNORE: RR, RC
@@ -245,7 +251,6 @@ igraph_forest_fire_game:
         GATTR-PARAM: fw_prob, bw_factor, ambs
 
 igraph_simple_interconnected_islands_game:
-    IGNORE: RC
     R:
         GATTR:
           name: Interconnected islands model
@@ -330,8 +335,10 @@ igraph_closeness_cutoff:
     IGNORE: RR
 
 igraph_distances:
+    IGNORE: RR, RC
 
 igraph_distances_cutoff:
+    IGNORE: RR, RC
 
 igraph_get_shortest_path:
 
@@ -352,8 +359,10 @@ igraph_get_all_shortest_paths:
         edges: epaths
 
 igraph_distances_dijkstra:
+    IGNORE: RR, RC
 
 igraph_distances_dijkstra_cutoff:
+    IGNORE: RR, RC
 
 igraph_get_shortest_paths_dijkstra:
     IGNORE: RR, RC, RInit
@@ -368,10 +377,13 @@ igraph_get_all_shortest_paths_dijkstra:
         edges: epaths
 
 igraph_distances_bellman_ford:
+    IGNORE: RR, RC
 
 igraph_distances_johnson:
+    IGNORE: RR, RC
 
 igraph_distances_floyd_warshall:
+    IGNORE: RR, RC
 
 igraph_voronoi:
     FIRST_KW_PARAM: weights
@@ -388,12 +400,35 @@ igraph_get_k_shortest_paths:
         edge_paths: epaths
 
 igraph_get_widest_path:
+    PARAMS: |-
+        GRAPH graph,
+        OPTIONAL OUT VERTEX_INDICES vertices, OPTIONAL OUT EDGE_INDICES edges,
+        VERTEX from, VERTEX to, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: |-
+        from ON graph, to ON graph, weights ON graph, vertices ON graph, edges ON graph
 
 igraph_get_widest_paths:
+    PARAMS: |-
+        GRAPH graph,
+        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
+        VERTEX from, VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL,
+        NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
+        OPTIONAL OUT VECTOR_INT inbound_edges
+    DEPS: |-
+        from ON graph, to ON graph, weights ON graph, vertices ON graph,
+        edges ON graph
 
 igraph_widest_path_widths_dijkstra:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
+        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_widest_path_widths_floyd_warshall:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
+        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
+    DEPS: from ON graph, to ON graph, weights ON graph
 
 igraph_spanner:
     DEPS: weights ON graph, spanner ON graph
@@ -459,16 +494,16 @@ igraph_path_length_hist:
 igraph_simplify:
 
 igraph_transitivity_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_local_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_avglocal_undirected:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_transitivity_barrat:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_ecc:
 
@@ -478,10 +513,11 @@ igraph_constraint:
     IGNORE: RR, RC
 
 igraph_maxdegree:
-    IGNORE: RR, RC, RInit
+    PARAM_ORDER: graph, *, vids, ...
+    PARAM_NAMES:
+        vids: v
 
 igraph_density:
-    IGNORE: RR, RC
 
 igraph_neighborhood_size:
     IGNORE: RR, RC, RInit
@@ -496,6 +532,8 @@ igraph_topological_sorting:
     IGNORE: RR, RC
 
 igraph_feedback_arc_set:
+
+igraph_feedback_vertex_set:
 
 igraph_is_loop:
     PARAM_NAMES:
@@ -528,7 +566,13 @@ igraph_add_edge:
     IGNORE: RR, RC, RInit
 
 igraph_chung_lu_game:
-    IGNORE: RR, RC
+    PARAMS: |-
+        OUT GRAPH graph, VECTOR out_weights, OPTIONAL VECTOR in_weights, *,
+        BOOLEAN loops=True, CHUNG_LU_VARIANT variant=ORIGINAL
+    R:
+      GATTR:
+        name: Chung-Lu model
+      GATTR-PARAM: variant
 
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
@@ -550,7 +594,7 @@ igraph_hub_and_authority_scores:
     # in the argument list.
     DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
     PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
+        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
         INOUT ARPACKOPT options=ARPACK_DEFAULTS
 
 igraph_unfold_tree:
@@ -679,7 +723,15 @@ igraph_dfs:
 # Bipartite graphs
 #######################################
 
+# Hack: add NULL default on 'types' parameter. Even though this parameter is not
+# optional in the C core, it must be optional in R so that weights can be
+# automatically taken from the 'type' edge attribute.
 igraph_bipartite_projection_size:
+    PARAMS: |-
+        GRAPH graph, BIPARTITE_TYPES types=NULL,
+        OUT INTEGER vcount1, OUT INTEGER ecount1,
+        OUT INTEGER vcount2, OUT INTEGER ecount2
+    DEPS: types ON graph
 
 #######################################
 # Bipartite graphs
@@ -696,14 +748,22 @@ igraph_biadjacency:
 
 igraph_get_biadjacency:
 
+# Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
+    PARAMS: GRAPH graph, OUT BOOLEAN res, OPTIONAL OUT BIPARTITE_TYPES type
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
-    IGNORE: RR
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
+        INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
+        NEIMODE mode=ALL
 
 igraph_bipartite_game_gnm:
-    IGNORE: RR
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
+        INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
+        NEIMODE mode=ALL
 
 igraph_bipartite_game:
     IGNORE: RR, RC
@@ -804,10 +864,10 @@ igraph_independence_number:
 #######################################
 
 igraph_layout_random:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_circle:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_star:
     IGNORE: RR
@@ -837,10 +897,10 @@ igraph_layout_reingold_tilford_circular:
 igraph_roots_for_tree_layout:
 
 igraph_layout_random_3d:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_sphere:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_layout_fruchterman_reingold_3d:
     IGNORE: RR, RC, RInit
@@ -1113,19 +1173,19 @@ igraph_write_graph_dot:
 #######################################
 
 igraph_motifs_randesu:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_estimate:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_motifs_randesu_no:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_dyad_census:
 
 igraph_triad_census:
 
-igraph_adjacent_triangles:
+igraph_count_adjacent_triangles:
 
 igraph_local_scan_0:
     IGNORE: RR
@@ -1401,6 +1461,17 @@ igraph_eigen_matrix_symmetric:
     IGNORE: RR, RC
 
 igraph_solve_lsap:
+
+#######################################
+# Finding cycles
+#######################################
+
+igraph_find_cycle:
+
+igraph_simple_cycles:
+
+igraph_simple_cycles_callback:
+    IGNORE: RR, RC
 
 #######################################
 # Eulerian functions

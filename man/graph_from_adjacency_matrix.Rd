@@ -104,15 +104,15 @@ weights.} }
 \examples{
 
 g1 <- sample(
-    x = 0:1, size = 100, replace = TRUE,
-    prob = c(0.9, 0.1)
-  ) \%>\%
+  x = 0:1, size = 100, replace = TRUE,
+  prob = c(0.9, 0.1)
+) \%>\%
   matrix(ncol = 10) \%>\%
   graph_from_adjacency_matrix()
 
 g2 <- sample(
-    x = 0:5, size = 100, replace = TRUE,
-    prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
+  x = 0:5, size = 100, replace = TRUE,
+  prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
 ) \%>\%
   matrix(ncol = 10) \%>\%
   graph_from_adjacency_matrix(weighted = TRUE)
@@ -178,8 +178,8 @@ halve_diag <- function(x) {
   x
 }
 expected_g8_weights <- non_zero_sort(
-  halve_diag(adj_matrix + t(adj_matrix)
-)[lower.tri(adj_matrix, diag = TRUE)])
+  halve_diag(adj_matrix + t(adj_matrix))[lower.tri(adj_matrix, diag = TRUE)]
+)
 actual_g8_weights <- sort(E(g8)$weight)
 all(expected_g8_weights == actual_g8_weights)
 
@@ -208,7 +208,7 @@ summary(g10)
 
 }
 \seealso{
-\code{\link[=graph]{graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
+\code{\link[=make_graph]{make_graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
 create graphs.
 }
 \author{

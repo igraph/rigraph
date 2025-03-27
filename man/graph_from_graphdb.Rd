@@ -11,7 +11,7 @@ graph_from_graphdb(
   nodes = NULL,
   pair = "A",
   which = 0,
-  base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
+  base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
   compressed = TRUE,
   directed = TRUE
 )
@@ -52,7 +52,7 @@ A new graph object.
 }
 \description{
 This function downloads a graph from a database created for the evaluation
-of graph isomorphism testing algothitms.
+of graph isomorphism testing algorithms.
 }
 \details{
 \code{graph_from_graphdb()} reads a graph from the graph database from an FTP or
@@ -71,28 +71,13 @@ its old version at
 \url{http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
 for the actual format of a graph database file and other information.
 }
-\section{Examples}{
-
-\preformatted{
-g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
-  which=10, compressed=TRUE)
-g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
-  which=10, compressed=TRUE)
-graph.isomorphic.vf2(g, g2)	\% should be TRUE
-g3 <- graph_from_graphdb(url=paste(sep="/",
-                              "http://cneurocvs.rmki.kfki.hu",
-                              "graphdb/gzip/iso/bvg/b06m",
-                              "iso_b06m_m200.A09.gz"))
-}
-}
-
 \references{
 M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 of graphs and its use for benchmarking graph isomorphism algorithms,
 \emph{Pattern Recognition Letters}, Volume 24, Issue 8 (May 2003)
 }
 \seealso{
-\code{\link[=read_graph]{read_graph()}}, \code{\link[=graph.isomorphic.vf2]{graph.isomorphic.vf2()}}
+\code{\link[=read_graph]{read_graph()}}, \code{\link[=isomorphic]{isomorphic()}}
 
 Foreign format readers
 \code{\link{read_graph}()},

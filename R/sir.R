@@ -1,4 +1,3 @@
-
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -102,4 +101,5 @@
 #' plot(sm)
 #' @family processes
 #' @export
+#' @cdocs igraph_sir
 sir <- sir_impl

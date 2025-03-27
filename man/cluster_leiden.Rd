@@ -11,7 +11,7 @@ cluster_leiden(
   ...,
   weights = NULL,
   resolution = 1,
-  resolution_parameter,
+  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
@@ -19,7 +19,7 @@ cluster_leiden(
 )
 }
 \arguments{
-\item{graph}{The input graph, only undirected graphs are supported.}
+\item{graph}{The input graph. It must be undirected.}
 
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}

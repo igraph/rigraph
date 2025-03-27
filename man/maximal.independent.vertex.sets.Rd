@@ -13,7 +13,7 @@ loop edges and multiple edges are ignored.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximal.independent.vertex.sets()} was renamed to \code{maximal_ivs()} to create a more
+\code{maximal.independent.vertex.sets()} was renamed to \code{max_ivs()} to create a more
 consistent API.
 }
 \keyword{internal}

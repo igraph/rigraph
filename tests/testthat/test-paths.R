@@ -19,8 +19,7 @@ test_that("radius() works -- lifecycle", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(radius(g, NULL, "out"))
-
+  expect_snapshot(radius(g, "out"))
 })
 
 test_that("eccentricity() works", {
@@ -44,8 +43,7 @@ test_that("eccentricity() works -- lifecycle", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_snapshot(eccentricity(g, vids = V(g), NULL, "out"))
-
+  expect_snapshot(eccentricity(g, vids = V(g), "out"))
 })
 
 test_that("graph_center() works", {
@@ -54,7 +52,6 @@ test_that("graph_center() works", {
   expect_equal(as.numeric(graph_center(g)), c(1, 2))
   expect_equal(as.numeric(graph_center(g, mode = "in")), 1)
   expect_equal(as.numeric(graph_center(g, mode = "out")), 16:100)
-
 })
 
 test_that("graph_center() works -- weights", {
@@ -64,4 +61,3 @@ test_that("graph_center() works -- weights", {
   E(g)$weight <- seq_len(ecount(g))
   expect_equal(as.numeric(graph_center(g)), 7)
 })
-

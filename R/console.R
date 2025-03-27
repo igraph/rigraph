@@ -1,4 +1,3 @@
-
 #' The igraph console
 #'
 #' @description
@@ -68,9 +67,9 @@ console <- function() {
 
 .igraph.pb <- NULL
 
-#' @rdname console
+#' igraph progress
 #' @param percent,message,clean Used internally by `.igraph.progress()` and `.igraph.status()`
-#' @export
+#' @dev
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
     if (!is.null(.igraph.pb)) {
@@ -90,8 +89,9 @@ console <- function() {
   }
 }
 
-#' @rdname console
-#' @export
+#' igraph status
+#' @inheritParams .igraph.progress
+#' @dev
 .igraph.status <- function(message) {
   type <- igraph_opt("verbose")
   if (is.logical(type) && type) {

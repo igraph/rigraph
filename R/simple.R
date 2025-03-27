@@ -1,4 +1,3 @@
-
 #' Simple graphs
 #'
 #' @description
@@ -88,10 +87,12 @@ is.simple <- function(graph) { # nocov start
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
+#' @cdocs igraph_simplify
 simplify <- simplify_impl
 
 #' @export
 #' @rdname simplify
+#' @cdocs igraph_is_simple
 is_simple <- is_simple_impl
 
 #' @export

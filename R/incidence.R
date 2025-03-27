@@ -1,4 +1,3 @@
-
 #' Create graphs from a bipartite adjacency matrix
 #'
 #' @description
@@ -37,120 +36,69 @@ graph.incidence <- function(incidence, directed = FALSE, mode = c("all", "out", 
 ##
 ## -----------------------------------------------------------------
 
-graph.incidence.sparse <- function(incidence, directed, mode, multiple,
-                                   weighted) {
-  n1 <- nrow(incidence)
-  n2 <- ncol(incidence)
-  el <- mysummary(incidence)
-  el[, 2] <- el[, 2] + n1
 
-  if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
-
-    if (!directed || mode == 1) {
-      ## nothing do to
-    } else if (mode == 2) {
-      el[, 1:2] <- el[, c(2, 1)]
-    } else if (mode == 3) {
-      reversed_el <- el[, c(2, 1, 3)]
-      names(reversed_el) <- names(el)
-      el <- rbind(el, reversed_el)
-    }
-
-    res <- make_empty_graph(n = n1 + n2, directed = directed)
-    weight <- list(el[, 3])
-    names(weight) <- weighted
-    res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
-  } else {
-    if (multiple) {
-      el[, 3] <- ceiling(el[, 3])
-      el[, 3][el[, 3] < 0] <- 0
-    } else {
-      el[, 3] <- el[, 3] != 0
-    }
-
-    if (!directed || mode == 1) {
-      ## nothing do to
-    } else if (mode == 2) {
-      el[, 1:2] <- el[, c(2, 1)]
-    } else if (mode == 3) {
-      el <- rbind(el, el[, c(2, 1, 3)])
-    }
-
-    edges <- unlist(apply(el, 1, function(x) rep(unname(x[1:2]), x[3])))
-    res <- make_graph(n = n1 + n2, edges, directed = directed)
+# adjust edgelist according to directionality of edges
+modify_edgelist <- function(el, mode, directed) {
+  if (!directed || mode == "out") {
+    # No adjustment needed
+    return(el)
   }
-
-  set_vertex_attr(res, "type", value = c(rep(FALSE, n1), rep(TRUE, n2)))
+  reversed_edges <- el[, c(2, 1, 3)]
+  if (mode == "in") {
+    return(reversed_edges)
+  }
+  rbind(el, reversed_edges)
 }
 
-graph.incidence.dense <- function(incidence, directed, mode, multiple,
-                                  weighted) {
-  if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
+graph_incidence_build <- function(incidence, directed = FALSE, mode = "out",
+                                  multiple = FALSE, weighted = NULL) {
+  num_rows <- nrow(incidence)
+  num_cols <- ncol(incidence)
 
-    n1 <- nrow(incidence)
-    n2 <- ncol(incidence)
-    no.edges <- sum(incidence != 0)
-    if (directed && mode == 3) {
-      no.edges <- no.edges * 2
-    }
-    edges <- numeric(2 * no.edges)
-    weight <- numeric(no.edges)
-    ptr <- 1
-    for (i in seq_len(nrow(incidence))) {
-      for (j in seq_len(ncol(incidence))) {
-        if (incidence[i, j] != 0) {
-          if (!directed || mode == 1) {
-            edges[2 * ptr - 1] <- i
-            edges[2 * ptr] <- n1 + j
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          } else if (mode == 2) {
-            edges[2 * ptr - 1] <- n1 + j
-            edges[2 * ptr] <- i
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          } else if (mode == 3) {
-            edges[2 * ptr - 1] <- i
-            edges[2 * ptr] <- n1 + j
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-            edges[2 * ptr - 1] <- n1 + j
-            edges[2 * ptr] <- i
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          }
-        }
-      }
-    }
-    res <- make_empty_graph(n = n1 + n2, directed = directed)
-    weight <- list(weight)
-    names(weight) <- weighted
-    res <- add_edges(res, edges, attr = weight)
-    res <- set_vertex_attr(res, "type",
-      value = c(rep(FALSE, n1), rep(TRUE, n2))
-    )
-  } else {
+  # Handle dense unweighted matrices first
+  if (!inherits(incidence, "Matrix") && is.null(weighted)) {
     mode(incidence) <- "double"
     on.exit(.Call(R_igraph_finalizer))
-    ## Function call
-    res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
-    res <- set_vertex_attr(res$graph, "type", value = res$types)
+
+    mode_num <- switch(mode,
+      "out" = 1,
+      "in" = 2,
+      "all" = 3,
+      "total" = 3
+    )
+    res <- .Call(R_igraph_biadjacency, incidence, directed, mode_num, multiple)
+    return(set_vertex_attr(res$graph, "type", value = res$types))
   }
 
-  res
+  # Convert to sparse matrix if not already sparse
+  if (!inherits(incidence, "Matrix")) {
+    incidence <- as(incidence, "dgCMatrix")
+  }
+
+  el <- mysummary(incidence)
+  el[, 2] <- el[, 2] + num_rows
+  el <- as.matrix(el)
+
+  el <- modify_edgelist(el, mode, directed)
+
+  # Construct the graph object from processed edgelist
+  if (!is.null(weighted)) {
+    # Handle weighted edges
+    res <- make_empty_graph(n = num_rows + num_cols, directed = directed)
+    weight_attr <- list(el[, 3])
+    names(weight_attr) <- weighted
+    res <- add_edges(res, edges = t(el[, 1:2]), attr = weight_attr)
+  } else {
+    # Handle unweighted edges, replicating rows for multiple edges
+    el <- el[rep(seq_len(nrow(el)), times = el[, 3]), 1:2]
+    res <- make_graph(n = num_rows + num_cols, c(t(el)), directed = directed)
+  }
+
+  set_vertex_attr(res, "type", value = c(rep(FALSE, num_rows), rep(TRUE, num_cols)))
 }
+
+
+
 
 #' Create graphs from a bipartite adjacency matrix
 #'
@@ -215,32 +163,44 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' @family biadjacency
 #' @export
 graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
-                                        mode = c("all", "out", "in", "total"),
-                                        multiple = FALSE, weighted = NULL,
-                                        add.names = NULL) {
+                                          mode = c("all", "out", "in", "total"),
+                                          multiple = FALSE, weighted = NULL,
+                                          add.names = NULL) {
   # Argument checks
   directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph.match.arg(mode)
+
   multiple <- as.logical(multiple)
 
-  if (inherits(incidence, "Matrix")) {
-    res <- graph.incidence.sparse(incidence,
-      directed = directed,
-      mode = mode, multiple = multiple,
-      weighted = weighted
-    )
-  } else {
-    incidence <- as.matrix(incidence)
-    res <- graph.incidence.dense(incidence,
-      directed = directed, mode = mode,
-      multiple = multiple, weighted = weighted
-    )
+  if (!is.null(weighted)) {
+    if (is.logical(weighted) && weighted) {
+      if (multiple) {
+        cli::cli_abort(c(
+          "{.arg multiple} and {.arg weighted} cannot be both {.code TRUE}.",
+          "igraph either interprets numbers larger than 1 as weights or as multiplicities, but it cannot be both."
+        ))
+      }
+      weighted <- "weight"
+    }
+    if (is.logical(weighted) && !weighted) {
+      cli::cli_abort(c(
+        "{.arg weighted} can't be {.code FALSE}.",
+        i = "See {.help graph_from_biadjacency_matrix}'s manual page."
+      ))
+    }
+    if (!is.character(weighted)) {
+      cli::cli_abort(c(
+        "{.arg weighted} can't be {.obj_type_friendly {weighted}}.",
+        i = "See {.help graph_from_biadjacency_matrix}'s manual page."
+      ))
+    }
   }
+
+  res <- graph_incidence_build(incidence,
+    directed = directed,
+    mode = mode, multiple = multiple,
+    weighted = weighted
+  )
 
   ## Add names
   if (is.null(add.names)) {
@@ -251,7 +211,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
     }
   } else if (!is.na(add.names)) {
     if (is.null(rownames(incidence)) || is.null(colnames(incidence))) {
-      warning("Cannot add row- and column names, at least one of them is missing")
+      cli::cli_warn("Cannot add row- and column names, at least one of them is missing.")
       add.names <- NA
     }
   }
@@ -277,8 +237,8 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
 #' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 from_incidence_matrix <- function(...) { # nocov start
-   lifecycle::deprecate_soft("1.6.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
-   graph_from_biadjacency_matrix(...)
+  lifecycle::deprecate_soft("1.6.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
+  graph_from_biadjacency_matrix(...)
 } # nocov end
 #' From incidence matrix
 #'
@@ -295,6 +255,6 @@ from_incidence_matrix <- function(...) { # nocov start
 #' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 graph_from_incidence_matrix <- function(...) { # nocov start
-   lifecycle::deprecate_soft("1.6.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
-   graph_from_biadjacency_matrix(...)
+  lifecycle::deprecate_soft("1.6.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
+  graph_from_biadjacency_matrix(...)
 } # nocov end

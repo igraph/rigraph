@@ -2,9 +2,9 @@ local_rng_version("3.5.0")
 withr::local_seed(12345)
 n <- 10^3
 p <- 0.1
-g <- erdos.renyi.game(n, p)
+g <- sample_gnp(n, p)
 E(g)$weight <- sample(ecount(g))
-gp <- erdos.renyi.game(n, p)
+gp <- sample_gnp(n, p)
 E(gp)$weight <- sample(ecount(gp))
 
 test_that("General scan-stat works, US, scan-0, unweighted", {
@@ -99,9 +99,9 @@ test_that("Neighborhoods work for them", {
 withr::local_seed(42)
 n <- 10^3
 p <- 0.1
-g <- erdos.renyi.game(n, p, directed = TRUE)
+g <- sample_gnp(n, p, directed = TRUE)
 E(g)$weight <- sample(ecount(g))
-gp <- erdos.renyi.game(n, p)
+gp <- sample_gnp(n, p)
 E(gp)$weight <- sample(ecount(gp))
 
 ## US, scan-0, unweighted, directed
@@ -156,8 +156,8 @@ test_that("Issue 18 is really resolved", {
 
 test_that("Issue 20 is resolved", {
   withr::local_seed(12345)
-  g1 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
-  g2 <- erdos.renyi.game(n = 20, p.or.m = 0.1, directed = TRUE)
+  g1 <- sample_gnp(n = 20, p = 0.1, directed = TRUE)
+  g2 <- sample_gnp(n = 20, p = 0.1, directed = TRUE)
   ls <- local_scan(g2, g1, k = 1, mode = "all")
   correct <- c(4, 1, 2, 1, 1, 8, 1, 2, 0, 5, 2, 3, 3, 4, 5, 3, 5, 4, 2, 1)
   expect_equal(ls, correct)

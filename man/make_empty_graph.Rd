@@ -31,6 +31,7 @@ Other deterministic constructors:
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
@@ -42,3 +43,5 @@ Other deterministic constructors:
 }
 \concept{Empty graph.}
 \concept{deterministic constructors}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}.}
+

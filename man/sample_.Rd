@@ -13,7 +13,22 @@ sample_(...)
 Generic function for sampling from network models.
 }
 \details{
-TODO
+\code{sample_()} is a generic function for creating graphs.
+For every graph constructor in igraph that has a \code{sample_} prefix,
+there is a corresponding function without the prefix: e.g.
+for \code{\link[=sample_pa]{sample_pa()}} there is also \code{\link[=pa]{pa()}}, etc.
+
+The same is true for the deterministic graph samplers, i.e. for each
+constructor with a \code{make_} prefix, there is a corresponding
+function without that prefix.
+
+These shorter forms can be used together with \code{sample_()}.
+The advantage of this form is that the user can specify constructor
+modifiers which work with all constructors. E.g. the
+\code{\link[=with_vertex_]{with_vertex_()}} modifier adds vertex attributes
+to the newly created graphs.
+
+See the examples and the various constructor modifiers below.
 }
 \examples{
 pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
@@ -31,8 +46,10 @@ blocky3 <- pref_matrix \%>\%
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -55,5 +72,16 @@ Random graph models (games)
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()},
 \code{\link{sample_tree}()}
+
+Constructor modifiers (and related functions)
+\code{\link{make_}()},
+\code{\link{simplified}()},
+\code{\link{with_edge_}()},
+\code{\link{with_graph_}()},
+\code{\link{with_vertex_}()},
+\code{\link{without_attr}()},
+\code{\link{without_loops}()},
+\code{\link{without_multiples}()}
 }
+\concept{constructor modifiers}
 \concept{games}

@@ -1,4 +1,3 @@
-
 #' Interactive plotting of graphs
 #'
 #' @description

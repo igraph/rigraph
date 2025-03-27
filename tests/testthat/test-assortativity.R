@@ -22,12 +22,12 @@ test_that("assortativity works", {
   expect_equal(assortativity_degree(g), assortativity_igraph)
   expect_equal(assortativity_degree(g), reference_assortativity(g))
 
-  asu <- assortativity_degree(simplify(as.undirected(g, mode = "collapse")))
+  asu <- assortativity_degree(simplify(as_undirected(g, mode = "collapse")))
   expect_equal(asu, -0.16319921031570466807)
 
   p <- read_graph(f <- gzfile("power.gml.gz"), format = "gml")
   expect_equal(assortativity_degree(p), assortativity(p, degree(p)))
-  expect_equal(assortativity_degree(p), reference_assortativity(as.directed(p, mode = "mutual")))
+  expect_equal(assortativity_degree(p), reference_assortativity(as_directed(p, mode = "mutual")))
 })
 
 test_that("nominal assortativity works", {
