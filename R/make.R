@@ -1367,7 +1367,15 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
 #' @cdocs igraph_empty
-make_empty_graph <- empty_impl
+make_empty_graph <- function(n = 0, directed = TRUE) {
+  if (!is.numeric(n)) {
+    cli::cli_abort("{.arg n} must be numeric, not {.obj_type_friendly {n}}.")
+  }
+  if (!is.logical(directed)) {
+    cli::cli_abort("{.arg directed} must be a logical, not {.obj_type_friendly {directed}}.")
+  }
+  empty_impl(n, directed)
+}
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
