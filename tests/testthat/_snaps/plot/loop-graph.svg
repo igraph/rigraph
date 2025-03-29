@@ -25,19 +25,19 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
-<polygon points='197.72,89.79 202.30,87.59 206.69,85.67 210.89,84.01 214.90,82.60 218.72,81.43 222.35,80.49 225.78,79.77 229.03,79.25 232.08,78.92 234.95,78.77 237.62,78.80 240.10,78.98 242.40,79.31 244.50,79.77 246.40,80.35 248.12,81.05 249.65,81.84 250.99,82.73 252.13,83.68 253.09,84.71 253.85,85.78 254.42,86.90 254.81,88.04 255.00,89.21 255.00,90.38 254.81,91.54 254.42,92.69 253.85,93.80 253.09,94.88 252.13,95.90 250.99,96.86 249.65,97.74 248.12,98.54 246.40,99.23 244.50,99.82 242.40,100.28 240.10,100.61 237.62,100.79 234.95,100.81 232.08,100.66 229.03,100.34 225.78,99.82 222.35,99.09 218.72,98.15 214.90,96.98 210.89,95.57 206.69,93.91 202.30,91.99 197.72,89.79 ' style='stroke-width: 0.75; stroke: #00FF00; fill: none;' />
-<text x='255.02' y='91.78' text-anchor='middle' style='font-size: 12.00px; fill: #00FF00; font-family: sans;' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>green</text>
-<line x1='193.52' y1='99.92' x2='364.13' y2='270.53' style='stroke-width: 0.75; stroke: #FF0000;' />
-<line x1='384.39' y1='290.79' x2='555.28' y2='461.68' style='stroke-width: 0.75; stroke: #0000FF;' />
-<text x='250.39' y='161.08' text-anchor='middle' style='font-size: 12.00px; fill: #FF0000; font-family: sans;' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>red</text>
-<text x='441.35' y='352.04' text-anchor='middle' style='font-size: 12.00px; fill: #0000FF; font-family: sans;' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>blue</text>
-<circle cx='183.39' cy='89.79' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
-<circle cx='374.26' cy='280.66' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
-<circle cx='565.41' cy='471.81' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+<polygon points='184.83,75.47 189.76,73.10 194.48,71.04 199.00,69.25 203.31,67.74 207.41,66.48 211.31,65.47 215.01,64.69 218.50,64.13 221.78,63.78 224.86,63.62 227.73,63.65 230.40,63.84 232.86,64.19 235.12,64.69 237.17,65.32 239.02,66.07 240.66,66.92 242.10,67.87 243.33,68.90 244.36,70.00 245.18,71.16 245.79,72.36 246.20,73.59 246.41,74.84 246.41,76.09 246.20,77.35 245.79,78.58 245.18,79.78 244.36,80.93 243.33,82.03 242.10,83.06 240.66,84.01 239.02,84.87 237.17,85.61 235.12,86.24 232.86,86.74 230.40,87.09 227.73,87.29 224.86,87.31 221.78,87.15 218.50,86.80 215.01,86.24 211.31,85.46 207.41,84.45 203.31,83.19 199.00,81.68 194.48,79.90 189.76,77.83 184.83,75.47 ' style='stroke-width: 0.75; stroke: #00FF00; fill: none;' />
+<text x='246.43' y='77.45' text-anchor='middle' style='font-size: 12.00px; fill: #00FF00; font-family: sans;' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>green</text>
+<line x1='180.22' y1='86.62' x2='363.10' y2='269.50' style='stroke-width: 0.75; stroke: #FF0000;' />
+<line x1='385.40' y1='291.80' x2='568.58' y2='474.98' style='stroke-width: 0.75; stroke: #0000FF;' />
+<text x='241.18' y='151.87' text-anchor='middle' style='font-size: 12.00px; fill: #FF0000; font-family: sans;' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>red</text>
+<text x='446.46' y='357.15' text-anchor='middle' style='font-size: 12.00px; fill: #0000FF; font-family: sans;' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>blue</text>
+<circle cx='169.07' cy='75.47' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='374.25' cy='280.65' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='579.73' cy='486.13' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='183.39' y='93.92' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='374.26' y='284.85' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='565.41' y='475.94' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='169.07' y='79.60' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='374.25' y='284.84' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='579.73' y='490.27' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
 </g>
 </svg>
