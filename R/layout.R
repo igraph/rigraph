@@ -1816,13 +1816,13 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'   \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
 #'   keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
 #'   them.
-#' @return A list with the components: \item{layout}{The layout, a two-column
+#' @return A list with the components: \describe{\item{layout}{The layout, a two-column
 #'   matrix, for the original graph vertices.} \item{layout.dummy}{The layout for
 #'   the dummy vertices, a two column matrix.} \item{extd_graph}{The original
 #'   graph, extended with dummy vertices.  The \sQuote{dummy} vertex attribute is
 #'   set on this graph, it is a logical attributes, and it tells you whether the
 #'   vertex is a dummy vertex. The \sQuote{layout} graph attribute is also set,
-#'   and it is the layout matrix for all (original and dummy) vertices.}
+#'   and it is the layout matrix for all (original and dummy) vertices.}}
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man

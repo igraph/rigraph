@@ -474,9 +474,9 @@ average.path.length <- function(graph, weights = NULL, directed = TRUE, unconnec
 #'   used by default.
 #' @return A numeric constant for `diameter()`, a numeric vector for
 #'   `get_diameter()`. `farthest_vertices()` returns a list with two
-#'   entries: \itemize{
-#'   \item `vertices` The two vertices that are the farthest.
-#'   \item `distance` Their distance.
+#'   entries: \describe{
+#'   \item{`vertices`}{The two vertices that are the farthest.}
+#'   \item{`distance`}{Their distance.}
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [distances()]
@@ -795,17 +795,17 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   of the list.
 #'
 #'   For `mean_distance()` a single number is returned if `details=FALSE`,
-#'   or a named list with two entries: `res` is the mean distance as a numeric
-#'   scalar and `unconnected` is the number of unconnected vertex pairs,
-#'   also as a numeric scalar.
+#'   or a named list with two entries: \describe{\item{`res`}{the mean distance as a numeric
+#'   scalar} \item{`unconnected`}{the number of unconnected vertex pairs,
+#'   also as a numeric scalar.}}
 #'
-#'   `distance_table()` returns a named list with two entries: `res` is
-#'   a numeric vector, the histogram of distances, `unconnected` is a
+#'   `distance_table()` returns a named list with two entries: \describe{
+#'   \item{`res`}{a numeric vector, the histogram of distances} \item{`unconnected`}{a
 #'   numeric scalar, the number of pairs for which the first vertex is not
 #'   reachable from the second. In undirected and directed graphs, unorderde
 #'   and ordered pairs are considered, respectively. Therefore the sum of the
 #'   two entries is always \eqn{n(n-1)} for directed graphs and \eqn{n(n-1)/2}
-#'   for undirected graphs.
+#'   for undirected graphs.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
@@ -1092,8 +1092,10 @@ all_shortest_paths <- function(graph, from,
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams shortest_paths
 #' @return A named list with two components is returned:
+#' \describe{
 #' \item{vpaths}{The list of \eqn{k} shortest paths in terms of vertices}
 #' \item{epaths}{The list of \eqn{k} shortest paths in terms of edges}
+#' }
 #' @references Yen, Jin Y.:
 #' An algorithm for finding shortest routes from all source nodes to a given
 #' destination in general networks.
@@ -1927,9 +1929,9 @@ feedback_vertex_set <- feedback_vertex_set_impl
 #' @param graph The input graph. It may be directed, but the algorithm searches
 #'   for undirected circles anyway.
 #' @param circle Logical scalar, whether to return the shortest circle itself.
-#' @return A named list with two components: \item{girth}{Integer constant, the
+#' @return A named list with two components: \describe{\item{girth}{Integer constant, the
 #'   girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
-#'   vector with the vertex ids in the shortest circle.}
+#'   vector with the vertex ids in the shortest circle.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Alon Itai and Michael Rodeh: Finding a minimum circuit in a
 #' graph *Proceedings of the ninth annual ACM symposium on Theory of
@@ -2103,6 +2105,7 @@ any_loop <- has_loop_impl
 #'  from igraph 1.3.0; use `mode` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with the following entries:
+#'   \describe{
 #'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
 #'   \item{neimode}{Character scalar. The `mode` argument of the function
@@ -2122,7 +2125,8 @@ any_loop <- has_loop_impl
 #'   \item{dist}{Numeric vector, for each vertex its distance from the
 #'   root of the search tree. Unreachable vertices have a negative distance
 #'   as of igraph 1.6.0, this used to be `NaN`.}
-#'
+#'   }
+#' 
 #'   Note that `order`, `rank`, `parent`, `pred`, `succ`
 #'   and `dist` might be `NULL` if their corresponding argument is
 #'   `FALSE`, i.e. if their calculation is not requested.
@@ -2308,7 +2312,9 @@ bfs <- function(
 #' @param neimode `r lifecycle::badge("deprecated")` This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
 #' @inheritParams rlang::args_dots_empty
-#' @return A named list with the following entries: \item{root}{Numeric scalar.
+#' @return A named list with the following entries: 
+#'   \describe{
+#'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
 #'   \item{neimode}{Character scalar. The `mode` argument of the function
 #'   call. Note that for undirected graphs this is always \sQuote{all},
@@ -2320,7 +2326,8 @@ bfs <- function(
 #'  \item{father}{Like parent, kept for compatibility for now.}
 #'   \item{dist}{Numeric
 #'   vector, for each vertex its distance from the root of the search tree.}
-#'
+#'   }
+#' 
 #'   Note that `order`, `order.out`, `parent`, and `dist`
 #'   might be `NULL` if their corresponding argument is `FALSE`, i.e.
 #'   if their calculation is not requested.
@@ -2476,9 +2483,11 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' @return For `is_connected()` a logical constant.
 #'
 #'   For `components()` a named list with three components:
+#'   \describe{
 #'   \item{membership}{numeric vector giving the cluster id to which each vertex
 #'   belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
 #'   \item{no}{numeric constant, the number of clusters.}
+#'   }
 #'
 #'   For `count_components()` an integer constant is returned.
 #'
@@ -2554,10 +2563,10 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #'   is ignored for undirected graphs.
 #' @param roots A vector giving the vertices from which the breadth-first
 #'   search is performed. Typically it contains one vertex per component.
-#' @return A list with two components: \item{tree}{The result, an `igraph`
+#' @return A list with two components: \describe{\item{tree}{The result, an `igraph`
 #'   object, a tree or a forest.} \item{vertex_index}{A numeric vector, it gives
 #'   a mapping from the vertices of the new graph to the vertices of the old
-#'   graph.}
+#'   graph.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family structural.properties
 #' @export
@@ -2746,6 +2755,7 @@ laplacian_matrix <- function(graph, weights = NULL,
 #'   scalar.
 #'
 #'   `max_bipartite_match()` returns a list with components:
+#'   \describe{
 #'   \item{matching_size}{The size of the matching, i.e. the number of edges
 #'     connecting the matched vertices.}
 #'   \item{matching_weight}{The weights of the matching, if the graph was
@@ -2754,6 +2764,7 @@ laplacian_matrix <- function(graph, weights = NULL,
 #'   \item{matching}{The matching itself. Numeric vertex id, or vertex
 #'     names if the graph was named. Non-matched vertices are denoted by
 #'     `NA`.}
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @examples
 #' g <- graph_from_literal(a - b - c - d - e - f)
@@ -2913,11 +2924,11 @@ which_mutual <- is_mutual_impl
 #'   normal vertex degree.
 #'   Weights are are used to calculate a weighted degree (also called
 #'   [strength()]) instead of the degree.
-#' @return A list with two members: \item{knn}{A numeric vector giving the
+#' @return A list with two members: \describe{\item{knn}{A numeric vector giving the
 #'   average nearest neighbor degree for all vertices in `vids`.}
 #'   \item{knnk}{A numeric vector, its length is the maximum (total) vertex
 #'   degree in the graph. The first element is the average nearest neighbor
-#'   degree of vertices with degree one, etc.  }
+#'   degree of vertices with degree one, etc.  }}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras,
 #' Alessandro Vespignani: The architecture of complex weighted networks, Proc.

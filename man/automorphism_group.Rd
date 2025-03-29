@@ -36,9 +36,11 @@ BLISS internals in the result.}
 When \code{details} is \code{FALSE}, a list of vertex permutations
 that form a generating set of the automorphism group of the input graph.
 When \code{details} is \code{TRUE}, a named list with two members:
+\describe{
 \item{generators}{Returns the generators themselves} \item{info}{Additional
 information about the BLISS internals. See \code{\link[=count_automorphisms]{count_automorphisms()}} for
 more details.}
+}
 }
 \description{
 Compute the generating set of the automorphism group of a graph.

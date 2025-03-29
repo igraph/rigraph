@@ -65,6 +65,7 @@ be used to calculate confidence intervals and log-likelihood. See
 
 If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
 named list with entries:
+\describe{
 \item{continuous}{Logical scalar, whether the
 fitted power-law distribution was continuous or discrete.}
 \item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
@@ -79,6 +80,7 @@ Smaller scores denote better fit.}
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}
+}
 }
 \description{
 \code{fit_power_law()} fits a power-law distribution to a data set.

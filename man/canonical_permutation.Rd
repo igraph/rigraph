@@ -24,7 +24,7 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 for possible values.}
 }
 \value{
-A list with the following members: \item{labeling}{The canonical
+A list with the following members: \describe{\item{labeling}{The canonical
 permutation which takes the input graph into canonical form. A numeric
 vector, the first element is the new label of vertex 0, the second element
 for vertex 1, etc. } \item{info}{Some information about the BLISS
@@ -36,7 +36,7 @@ computation. A named list with the following members: \describe{
 \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
 of the automorphism group of the input graph, as a string. The string
 representation is necessary because the group size can easily exceed
-values that are exactly representable in floating point.} } }
+values that are exactly representable in floating point.} } }}
 }
 \description{
 The canonical permutation brings every isomorphic graphs into the same

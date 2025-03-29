@@ -812,7 +812,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #'   for possible values.
-#' @return A list with the following members: \item{labeling}{The canonical
+#' @return A list with the following members: \describe{\item{labeling}{The canonical
 #'   permutation which takes the input graph into canonical form. A numeric
 #'   vector, the first element is the new label of vertex 0, the second element
 #'   for vertex 1, etc. } \item{info}{Some information about the BLISS
@@ -824,7 +824,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'   \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
 #'   of the automorphism group of the input graph, as a string. The string
 #'   representation is necessary because the group size can easily exceed
-#'   values that are exactly representable in floating point.} } }
+#'   values that are exactly representable in floating point.} } }}
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso [permute()] to apply a permutation to a graph,
@@ -932,13 +932,13 @@ graph.isomorphic <- isomorphic_impl
 #'   non-singleton cell, \sQuote{`flm`}: first largest maximally
 #'   non-trivially connected non-singleton cell, \sQuote{`fsm`}: first
 #'   smallest maximally non-trivially connected non-singleton cell.
-#' @return A named list with the following members: \item{group_size}{The size
+#' @return A named list with the following members: \describe{\item{group_size}{The size
 #'   of the automorphism group of the input graph, as a string. This number is
 #'   exact if igraph was compiled with the GMP library, and approximate
 #'   otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
 #'   \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
 #'   \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
-#'   canrep updates.} \item{max_level}{Maximum level.}
+#'   canrep updates.} \item{max_level}{Maximum level.}}
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
@@ -1002,9 +1002,11 @@ count_automorphisms <- count_automorphisms_impl
 #' @return When `details` is `FALSE`, a list of vertex permutations
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
+#'   \describe{
 #'   \item{generators}{Returns the generators themselves} \item{info}{Additional
 #'   information about the BLISS internals. See [count_automorphisms()] for
 #'   more details.}
+#'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.

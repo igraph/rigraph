@@ -18,9 +18,9 @@ helper is a part of}
 specification has deterministic and random variants.}
 }
 \value{
-A named list with three items: \sQuote{cons} for the constructor
-function, \sQuote{mods} for the modifiers and \sQuote{args} for the
-remaining, unparsed arguments.
+A named list with three items: \describe{\item{cons}{the constructor
+function}, \item{mods}{the modifiers} \item{args}{the
+remaining, unparsed arguments.}}
 }
 \description{
 This is a helper function for the common parts of \code{make_()} and
