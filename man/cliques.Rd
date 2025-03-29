@@ -9,6 +9,7 @@
 \alias{largest_weighted_cliques}
 \alias{weighted_clique_num}
 \alias{clique_size_counts}
+\alias{is_clique}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
@@ -26,10 +27,11 @@ largest_weighted_cliques(graph, vertex.weights = NULL)
 weighted_clique_num(graph, vertex.weights = NULL)
 
 clique_size_counts(graph, min = 0, max = 0, maximal = FALSE)
+
+is_clique(graph, candidate, directed = FALSE)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs will be considered as
-undirected ones, multiple edges and loops are ignored.}
+\item{graph}{The input graph.}
 
 \item{min}{Numeric constant, lower limit on the size of the cliques to find.
 \code{NULL} means no limit, i.e. it is the same as 0.}
@@ -57,6 +59,10 @@ of the weighted clique finder supports positive integer weights only.}
 
 \item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
 or only the maximal ones (\code{TRUE}).}
+
+\item{candidate}{The vertex set to test for being a clique.}
+
+\item{directed}{Whether to consider edge directions.}
 }
 \value{
 \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
@@ -73,10 +79,16 @@ scalar.
 \code{clique_size_counts()} returns a numeric vector with the clique sizes such that
 the i-th item belongs to cliques of size i. Trailing zeros are currently
 truncated, but this might change in future versions.
+
+\code{is_clique()} returns \code{TRUE} if the candidate vertex set forms
+a clique.
 }
 \description{
 These functions find all, the largest or all the maximal cliques in an
 undirected graph. The size of the largest clique can also be calculated.
+
+Tests if all pairs within a set of vertices are adjacent, i.e. whether they
+form a clique. An empty set and singleton set are considered to be a clique.
 }
 \details{
 \code{cliques()} find all complete subgraphs in the input graph, obeying the
@@ -96,6 +108,8 @@ largest.
 
 \code{clique_size_counts()} returns a numeric vector representing a histogram
 of clique sizes, between the given minimum and maximum clique size.
+
+\code{is_clique()} tests whether all pairs within a vertex set are connected.
 }
 \examples{
 
@@ -108,6 +122,9 @@ largest_cliques(g)
 # To have a bit less maximal cliques, about 100-200 usually
 g <- sample_gnp(100, 0.03)
 max_cliques(g)
+
+# Check that all returned vertex sets are indeed cliques
+all(sapply(max_cliques(g), function (c) is_clique(g, c)))
 }
 \references{
 For maximal cliques the following algorithm is implemented:
@@ -116,6 +133,7 @@ in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
 Other cliques: 
+\code{\link{is_complete}()},
 \code{\link{ivs}()},
 \code{\link{weighted_cliques}()}
 }
@@ -125,5 +143,5 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}.}
 
