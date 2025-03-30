@@ -153,11 +153,10 @@ plot.igraph <- function(x,
 
   ################################################################
   ## create the plot
-  maxv <- 1 / 200 * max(vertex.size)
-
   if (rescale) {
     layout <- norm_coords(layout, -1, 1, -1, 1)
     fact <- (1 - vertex.size.scaling)
+    maxv <- 1 / 200 * max(vertex.size)
 
     xlim <- c(xlim[1] - margin[2] - fact * maxv, xlim[2] + margin[4] + fact * maxv)
     ylim <- c(ylim[1] - margin[1] - fact * maxv, ylim[2] + margin[3] + fact * maxv)
