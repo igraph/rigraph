@@ -82,377 +82,6 @@ function object that will \emph{not} be called again\dots)
 }
 
 \section{The list of parameters}{
-  Vertex parameters first, note that the \sQuote{\code{vertex.}} prefix
-  needs to be added if they are used as an argument or when setting via
-  \code{\link{igraph_options}}. The value of the parameter may be scalar
-  valid for every vertex or a vector with a separate value for each
-  vertex. (Shorter vectors are recycled.)
-  \describe{
-    \item{size}{The size of the vertex, a numeric scalar or vector, in
-      the latter case each vertex sizes may differ. This vertex sizes
-      are scaled in order have about the same size of vertices for a
-      given value for all three plotting commands. It does not need to
-      be an integer number.
-      
-      The scaling is made according to \code{relative.size} (see
-      below), so the sizes of smallest and largest vertices are equal to
-      \code{relative.size[1]} and \code{relative.size[2]} as a percentage
-      of the x-axis of the plotting region.
-      
-      The default value is 15.
-    }
-    \item{size2}{The \dQuote{other} size of the vertex, for some vertex
-      shapes. For the various rectangle shapes this gives the height of
-      the vertices, whereas \code{size} gives the width. It is ignored
-      by shapes for which the size can be specified with a single
-      number. Like \code{size}, is rescaled and is relative to the x-axis.
-      
-      The default value is 15.
-    }
-    \item{color}{The fill color of the vertex. If it is numeric then
-      the current palette is used, see
-      \code{\link[grDevices]{palette}}. If it is a character vector then
-      it may either contain integer values, named colors or RGB
-      specified colors with three or four bytes. All strings starting
-      with \sQuote{\code{#}} are assumed to be RGB color
-      specifications. It is possible to mix named color and RGB
-      colors. Note that \code{\link{tkplot}} ignores the fourth byte
-      (alpha channel) in the RGB color specification.
-
-      For \code{plot.igraph} and integer values, the default igraph
-      palette is used (see the \sQuote{palette} parameter below. Note
-      that this is different from the R palette.
-
-      If you don't want (some) vertices to have any color, supply
-      \code{NA} as the color name.
-      
-      The default value is \dQuote{\code{SkyBlue2}}.
-    }
-    \item{frame.color}{The color of the frame of the vertices, the same
-      formats are allowed as for the fill color.
-
-      If you don't want vertices to have a frame, supply \code{NA} as
-      the color name.
-
-      By default it is \dQuote{black}.
-    }
-    \item{frame.width}{The width of the frame of the vertices.
-
-      The default value is 1.
-
-    }
-    \item{shape}{The shape of the vertex, currently
-      \dQuote{\code{circle}}, \dQuote{\code{square}},
-      \dQuote{\code{csquare}}, \dQuote{\code{rectangle}},
-      \dQuote{\code{crectangle}}, \dQuote{\code{vrectangle}},
-      \dQuote{\code{pie}} (see \link{vertex.shape.pie}),
-      \sQuote{\code{sphere}}, and \dQuote{\code{none}} are supported,
-      and only by the \code{\link{plot.igraph}}
-      command. \dQuote{\code{none}} does not draw the vertices at all,
-      although vertex label are plotted (if given). See
-      \code{\link{shapes}} for details about vertex
-      shapes and \code{\link{vertex.shape.pie}} for using pie charts as
-      vertices.
-
-      The \dQuote{\code{sphere}} vertex shape plots vertices as 3D
-      ray-traced spheres, in the given color and size. This produces a
-      raster image and it is only supported with some graphics
-      devices. On some devices raster transparency is not supported and
-      the spheres do not have a transparent background. See
-      \code{\link{dev.capabilities}} and the \sQuote{\code{rasterImage}}
-      capability to check that your device is supported.
-      
-      By default vertices are drawn as circles.
-    }
-    \item{label}{The vertex labels. They will be converted to
-      character. Specify \code{NA} to omit vertex labels.
-
-      The default vertex labels are the vertex ids.
-    }
-    \item{label.family}{The font family to be used for vertex labels.
-      As different plotting commands can used different fonts, they
-      interpret this parameter different ways. The basic notation is,
-      however, understood by both \code{\link{plot.igraph}} and
-      \code{\link{tkplot}}. \code{\link{rglplot}} does not support fonts
-      at all right now, it ignores this parameter completely.
-
-      For \code{\link{plot.igraph}} this parameter is simply passed to
-      \code{\link[graphics]{text}} as argument \code{family}.
-
-      For \code{\link{tkplot}} some
-      conversion is performed. If this parameter is the name of an
-      existing Tk font, then that font is used and the \code{label.font}
-      and \code{label.cex} parameters are ignored completely. If it is
-      one of the base families (serif, sans, mono) then Times,
-      Helvetica or Courier fonts are used, there are guaranteed to exist
-      on all systems. For the \sQuote{symbol} base family we used the
-      symbol font is available, otherwise the first font which has
-      \sQuote{symbol} in its name. If the parameter is not a name of the
-      base families and it is also not a named Tk font then we pass it
-      to \code{\link[tcltk]{tkfont.create}} and hope the user knows what
-      she is doing. The \code{label.font} and \code{label.cex}
-      parameters are also passed to \code{\link[tcltk]{tkfont.create}}
-      in this case.
-
-      The default value is \sQuote{serif}.
-    }
-    \item{label.font}{The font within the font family to use for the
-      vertex labels. It is interpreted the same way as the the
-      \code{font} graphical parameter: 1 is plain text, 2 is bold face,
-      3 is italic, 4 is bold and italic and 5 specifies the symbol
-      font.
-
-      For \code{\link{plot.igraph}} this parameter is simply passed to
-      \code{\link[graphics]{text}}.
-
-      For \code{\link{tkplot}}, if the \code{label.family} parameter is
-      not the name of a Tk font then this parameter is used to set
-      whether the newly created font should be italic and/or
-      boldface. Otherwise it is ignored.
-
-      For \code{\link{rglplot}} it is ignored.
-
-      The default value is 1.
-    }
-    \item{label.cex}{The font size for vertex labels. It is interpreted
-      as a multiplication factor of some device-dependent base font
-      size.
-
-      For \code{\link{plot.igraph}} it is simply passed to
-      \code{\link[graphics]{text}} as argument \code{cex}.
-
-      For \code{\link{tkplot}} it is multiplied by 12 and then used as
-      the \code{size} argument for \code{\link[tcltk]{tkfont.create}}.
-      The base font is thus 12 for tkplot.
-
-      For \code{\link{rglplot}} it is ignored.
-
-      The default value is 1.
-    }
-    \item{label.dist}{
-      The distance of the label from the center of the vertex. If it is 0
-      then the label is centered on the vertex. If it is 1 then the
-      label is displayed beside the vertex.
-
-      The default value is 0.
-    }
-    \item{label.degree}{
-      It defines the position of the vertex labels, relative to the
-      center of the vertices. It is interpreted as an angle in radians,
-      zero means \sQuote{to the right}, and \sQuote{\code{pi}} means to
-      the left, up is \code{-pi/2} and down is \code{pi/2}.
-
-      The default value is \code{-pi/4}.
-    }
-    \item{label.color}{The color of the labels, see the \code{color}
-      vertex parameter discussed earlier for the possible values.
-
-      The default value is \code{black}.
-    }
-    \item{relative.size}{
-      The relative size of the smallest and largest vertices as percentage of
-      the plotting region. When all vertices have the same size, then by default
-      the relative size observed in the plot will be equal to
-      \code{relative.size[2]}.
-      
-      The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
-    }
-  }
-
-  Edge parameters require to add the \sQuote{\code{edge.}} prefix when
-  used as arguments or set by \code{\link{igraph_options}}. The edge
-  parameters:
-  \describe{
-    \item{color}{The color of the edges, see the \code{color} vertex
-      parameter for the possible values.
-
-      By default this parameter is \code{darkgrey}.
-    }
-    \item{width}{The width of the edges.
-
-      The default value is 1.
-    }
-    \item{arrow.size}{The size of the arrows. Currently this is a
-      constant, so it is the same for every edge. If a vector is
-      submitted then only the first element is used, ie. if this is
-      taken from an edge attribute then only the attribute of the first
-      edge is used for all arrows. This will likely change in the future.
-
-      The default value is 1.
-    }
-    \item{arrow.width}{The width of the arrows. Currently this is a
-      constant, so it is the same for every edge. If a vector is
-      submitted then only the first element is used, ie. if this is
-      taken from an edge attribute then only the attribute of the first
-      edge is used for all arrows. This will likely change in the future.
-
-      This argument is currently only used by \code{\link{plot.igraph}}.
-      
-      The default value is 1, which gives the same width as before
-      this option appeared in igraph.
-    }
-    \item{lty}{The line type for the edges. Almost the same format is
-      accepted as for the standard graphics \code{\link[graphics]{par}},
-      0 and \dQuote{blank} mean no edges, 1 and \dQuote{solid} are for
-      solid lines, the other possible values are: 2 (\dQuote{dashed}),
-      3 (\dQuote{dotted}), 4 (\dQuote{dotdash}), 5 (\dQuote{longdash}),
-      6 (\dQuote{twodash}).
-
-      \code{\link{tkplot}} also accepts standard Tk line type strings,
-      it does not however support \dQuote{blank} lines, instead of type
-      \sQuote{0} type \sQuote{1}, ie. solid lines will be drawn.
-      
-      This argument is ignored for \code{\link{rglplot}}.
-
-      The default value is type 1, a solid line.
-    }
-    \item{label}{The edge labels. They will be converted to
-      character. Specify \code{NA} to omit edge labels.
-
-      Edge labels are omitted by default.}
-    \item{label.family}{Font family of the edge labels. See the vertex
-      parameter with the same name for the details.}
-    \item{label.font}{The font for the edge labels. See the
-      corresponding vertex parameter discussed earlier for details.}
-    \item{label.cex}{The font size for the edge labels, see the
-      corresponding vertex parameter for details.}
-    \item{label.color}{The color of the edge labels, see the
-      \code{color} vertex parameters on how to specify colors. }
-    \item{label.x}{The horizontal coordinates of the edge labels might
-      be given here, explicitly. The \code{NA} elements will be
-      replaced by automatically calculated coordinates. If \code{NULL},
-      then all edge horizontal coordinates are calculated
-      automatically. This parameter is only supported by
-      \code{plot.igraph}.}
-    \item{label.y}{The same as \code{label.x}, but for vertical
-      coordinates.}
-    \item{curved}{Specifies whether to draw curved edges, or not. This
-      can be a logical or a numeric vector or scalar. 
-
-      First the vector is replicated to have the same length as the
-      number of edges in the graph. Then it is interpreted for each edge
-      separately. A numeric value specifies the curvature of the edge;
-      zero curvature means straight edges, negative values means the
-      edge bends clockwise, positive values the opposite. \code{TRUE}
-      means curvature 0.5, \code{FALSE} means curvature zero.
-
-      By default the vector specifying the curvature is calculated via a
-      call to the \code{\link{curve_multiple}} function. This function makes
-      sure that multiple edges are curved and are all visible. This
-      parameter is ignored for loop edges. 
-      
-      The default value is \code{FALSE}.
-      
-      This parameter is currently ignored by \code{\link{rglplot}}.}
-    \item{arrow.mode}{This parameter can be used to specify for which
-      edges should arrows be drawn. If this parameter is given by the
-      user (in either of the three ways) then it specifies which edges
-      will have forward, backward arrows, or both, or no arrows at all.
-      As usual, this parameter can be a vector or a scalar value.
-      It can be an integer or character type. If it is integer then 0
-      means no arrows, 1 means backward arrows, 2 is for forward arrows
-      and 3 for both. If it is a character vector then \dQuote{<} and
-      \dQuote{<-} specify backward, \dQuote{>} and \dQuote{->} forward
-      arrows and \dQuote{<>} and \dQuote{<->} stands for both arrows.
-      All other values mean no arrows, perhaps you should use \dQuote{-}
-      or \dQuote{--} to specify no arrows.
-
-      Hint: this parameter can be used as a \sQuote{cheap} solution for
-      drawing \dQuote{mixed} graphs: graphs in which some edges are
-      directed some are not. If you want do this, then please create a
-      \emph{directed} graph, because as of version 0.4 the vertex pairs
-      in the edge lists can be swapped in undirected graphs.
-
-      By default, no arrows will be drawn for undirected graphs, and for 
-      directed graphs, an arrow will be drawn for each edge, according
-      to its direction. This is not very surprising, it is the expected
-      behavior.
-    }
-    \item{loop.angle}{Gives the angle in radians for plotting loop
-      edges. See the \code{label.dist} vertex parameter to see how this
-      is interpreted.
-
-      The default value is 0.
-    }    
-    \item{loop.angle2}{Gives the second angle in radians for plotting
-      loop edges. This is only used in 3D, \code{loop.angle} is enough
-      in 2D.
-
-      The default value is 0.
-    }
-  }
-
-  Other parameters:
-  \describe{
-    \item{layout}{
-      Either a function or a numeric
-      matrix. It specifies how the vertices will be placed on the plot.
-      
-      If it is a numeric matrix, then the matrix has to have one line for
-      each vertex, specifying its coordinates. The matrix should have at
-      least two columns, for the \code{x} and \code{y} coordinates, and
-      it can also have third column, this will be the \code{z}
-      coordinate for 3D plots and it is ignored for 2D plots.
-
-      If a two column matrix is given for the 3D plotting function
-      \code{\link{rglplot}} then the third column is assumed to be 1 for
-      each vertex.
-
-      If \code{layout} is a function, this function will be called with the
-      \code{graph} as the single parameter to determine the
-      actual coordinates. The function should return a matrix with two
-      or three columns. For the 2D plots the third column is ignored.
-
-      The default value is \code{layout_nicely}, a smart function that
-      chooses a layout based on the graph.}
-    \item{margin}{The amount of empty space below, over, at the left and
-      right of the plot, it is a numeric vector of length four. Usually
-      values between 0 and 0.5 are meaningful, but negative values are
-      also possible, that will make the plot zoom in to a part of the
-      graph. If it is shorter than four then it is recycled.
-
-      \code{\link{rglplot}} does not support this parameter, as it can
-      zoom in and out the graph in a more flexible way.
-      
-      Its default value is 0.
-    }
-    \item{palette}{The color palette to use for vertex color.
-      The default is \code{\link{categorical_pal}}, which is a
-      color-blind friendly categorical palette. See its manual page
-      for details and other palettes. This parameters is only supported
-      by \code{plot}, and not by \code{tkplot} and \code{rglplot}.
-    }
-    \item{rescale}{Logical constant, whether to rescale the coordinates
-      to the [-1,1]x[-1,1](x[-1,1]) interval. This parameter is not
-      implemented for \code{tkplot}.
-
-      Defaults to \code{TRUE}, the layout will be rescaled.
-    }
-    \item{asp}{A numeric constant, it gives the \code{asp} parameter
-      for \code{\link{plot}}, the aspect ratio. Supply 0 here if you
-      don't want to give an aspect ratio. It is ignored by \code{tkplot}
-      and \code{rglplot}.
-
-      Defaults to 1.
-    }
-    \item{frame}{Boolean, whether to plot a frame around the graph. It
-      is ignored by \code{tkplot} and \code{rglplot}.
-
-      Defaults to \code{FALSE}.
-    }
-    \item{main}{Overall title for the main plot. The default is empty if
-      the \code{annotate.plot} igraph option is \code{FALSE}, and the
-      graph's \code{name} attribute otherwise. See the same argument of
-      the base \code{plot} function. Only supported by \code{plot}.}
-    \item{sub}{Subtitle of the main plot, the default is empty. Only
-      supported by \code{plot}.}
-    \item{xlab}{Title for the x axis, the default is empty if the
-      \code{annotate.plot} igraph option is \code{FALSE}, and the number
-      of vertices and edges, if it is \code{TRUE}. Only supported by
-      \code{plot}.}
-    \item{ylab}{Title for the y axis, the default is empty. Only
-      supported by \code{plot}.}
-  }
  Vertex parameters first, note that the
 \sQuote{\code{vertex.}} prefix needs to be added if they are used as an
 argument or when setting via \code{\link[=igraph_options]{igraph_options()}}. The value of the
@@ -463,7 +92,7 @@ latter case each vertex sizes may differ. This vertex sizes are scaled in
 order have about the same size of vertices for a given value for all three
 plotting commands. It does not need to be an integer number.
 The default value is 15. This is big enough to place short labels on
-vertices.}
+vertices. This parameter is ignored if \code{size.scaling} is \code{TRUE}. In that case \code{relative.size} is used instead.}
 \item{size2}{The \dQuote{other} size of the vertex, for some
 vertex shapes. For the various rectangle shapes this gives the height of the
 vertices, whereas \code{size} gives the width. It is ignored by shapes for
@@ -590,6 +219,20 @@ labels, see the \code{color} vertex parameter discussed earlier for the
 possible values.
 
 The default value is \code{black}.  } }
+
+\item{size.scaling}{Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
+If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is. IF TRUE,
+\code{relative.size} is used instead and \code{vertex.size} is ignored.}
+
+\item{relative.size}{
+The relative size of the smallest and largest vertices as percentage of
+the plotting region. When all vertices have the same size, then by default
+the relative size observed in the plot will be equal to
+relative.size\link{2}.
+The default value is \code{c(.01,.025)} (1\\% and 2.5\\% respectively).
+
+Only used if \code{size.scaling} is TRUE`.
+}
 
 Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as
 arguments or set by \code{\link[=igraph_options]{igraph_options()}}. The edge parameters:
@@ -801,21 +444,6 @@ tkplot(make_tree(50, 2, mode = "undirected"),
 \code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}},
 \code{\link[=rglplot]{rglplot()}}, \code{\link[=igraph_options]{igraph_options()}}
 }
-
-# plot using vertex.relative.size
-igraph_options(plot.layout=layout_nicely)
-set.seed(312)
-g <- barabasi.game(10)
-
-oldpar <- par(no.readonly=TRUE)
-par(mfrow=c(2,2))
-set.seed(1);plot(g, main="Default")
-set.seed(1);plot(g, vertex.size=degree(g), main="size=degree")
-set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.05,.1),
-                main="size=degree,relative.size=c(.05,.1)")
-set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.025,.2),
-                main="size=degree,relative.size=c(.025,.2)")
-par(oldpar)
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }

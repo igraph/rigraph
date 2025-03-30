@@ -83,7 +83,7 @@
 #' order have about the same size of vertices for a given value for all three
 #' plotting commands. It does not need to be an integer number.
 #' The default value is 15. This is big enough to place short labels on
-#' vertices.}
+#' vertices. This parameter is ignored if `size.scaling` is `TRUE`. In that case `relative.size` is used instead.}
 #' \item{size2}{The \dQuote{other} size of the vertex, for some
 #' vertex shapes. For the various rectangle shapes this gives the height of the
 #' vertices, whereas `size` gives the width. It is ignored by shapes for
@@ -210,6 +210,20 @@
 #' possible values.
 #'
 #' The default value is `black`.  } }
+#'
+#' \item{size.scaling}{Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
+#' If FALSE, `vertex.size` and `vertex.size2` are used as is. IF TRUE,
+#' `relative.size` is used instead and `vertex.size` is ignored.}
+#'
+#' \item{relative.size}{
+#'      The relative size of the smallest and largest vertices as percentage of
+#'      the plotting region. When all vertices have the same size, then by default
+#'      the relative size observed in the plot will be equal to
+#'      relative.size[2].
+#'      The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
+#'
+#' Only used if `size.scaling` is TRUE`.
+#' }
 #'
 #' Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as
 #' arguments or set by [igraph_options()]. The edge parameters:
@@ -421,6 +435,7 @@
 #' @name plot.common
 #' @rdname plot.common
 NULL
+
 
 #' Optimal edge curvature when plotting graphs
 #'
