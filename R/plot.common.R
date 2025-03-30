@@ -1381,6 +1381,7 @@ i.vertex.default <- list(
   pie.density = -1,
   pie.lty = 1,
   raster = .igraph.logo.raster,
+  size.scaling = FALSE,
   relative.size = c(0.01, 0.025)
 )
 

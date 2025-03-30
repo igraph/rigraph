@@ -101,6 +101,7 @@ plot.igraph <- function(x,
   params <- i.parse.plot.params(graph, list(...))
 
   vertex.size <- params("vertex", "size")
+  vertex.size.scaling <- params("vertex", "size.scaling")
   label.family <- params("vertex", "label.family")
   label.font <- params("vertex", "label.font")
   label.cex <- params("vertex", "label.cex")
@@ -152,15 +153,14 @@ plot.igraph <- function(x,
 
   ################################################################
   ## create the plot
+  maxv <- 1 / 200 * max(vertex.size)
 
   if (rescale) {
-    # norm layout to (-1, 1)
     layout <- norm_coords(layout, -1, 1, -1, 1)
-    # xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
-    # ylim <- c(ylim[1]-margin[1]-maxv, ylim[2]+margin[3]+maxv)
-    xlim <- c(xlim[1]-margin[2], xlim[2]+margin[4])
-    ylim <- c(ylim[1]-margin[1], ylim[2]+margin[3])
+    fact <- (1 - vertex.size.scaling)
 
+    xlim <- c(xlim[1] - margin[2] - fact * maxv, xlim[2] + margin[4] + fact * maxv)
+    ylim <- c(ylim[1] - margin[1] - fact * maxv, ylim[2] + margin[3] + fact * maxv)
   }
   if (!add) {
     plot(0, 0,
@@ -171,38 +171,45 @@ plot.igraph <- function(x,
   }
 
   ################################################################
-  ## Rescaling vertices and updating params 
-  newdots <- list(...)
-  
-  # vertex.size
-  vertex.size <- i.rescale.vertex(vertex.size, minmax.relative.size=
-                                  params("vertex","relative.size"))
-  newdots$vertex.size  <- vertex.size
-  
-  # vertex.size2: Notice that in this case we need to ajust the scale
-  # in two ways: (1) On the relative size of the axes, and (2) on the
-  # relative size of vertex.size/vertex.size2
-  
-  scalefactor <- parusr <- par("usr")
-  scalefactor <- (parusr[2] - parusr[1])/(parusr[4] - parusr[3])
-  if ("vertex.size2" %in% names(newdots)) { # If the user provided -vertex.size2-
-    
-    scalefactor <- scalefactor * (
-      max(params("vertex","size2"), na.rm = TRUE)/max(params("vertex","size"), na.rm = TRUE))
-    
-    newdots$vertex.size2 <- i.rescale.vertex(
-      params("vertex","size2"), 
-      parusr[3:4]*scalefactor,
-      params("vertex","relative.size"))
-  } else { # Otherwise use -vertex.size-
-    newdots$vertex.size2 <- i.rescale.vertex(
-      params("vertex","size"), 
-      parusr[3:4]*scalefactor,
-      params("vertex","relative.size"))
-  }
+  ## Rescaling vertices and updating params
+  if (vertex.size.scaling) {
+    newdots <- list(...)
 
-  params <- i.parse.plot.params(graph, newdots)
-  
+    # vertex.size
+    vertex.size <- i.rescale.vertex(vertex.size,
+      minmax.relative.size =
+        params("vertex", "relative.size")
+    )
+    newdots$vertex.size <- vertex.size
+
+    # vertex.size2: Notice that in this case we need to ajust the scale
+    # in two ways: (1) On the relative size of the axes, and (2) on the
+    # relative size of vertex.size/vertex.size2
+
+    scalefactor <- parusr <- par("usr")
+    scalefactor <- (parusr[2] - parusr[1]) / (parusr[4] - parusr[3])
+    if ("vertex.size2" %in% names(newdots)) { # If the user provided -vertex.size2-
+
+      scalefactor <- scalefactor * (
+        max(params("vertex", "size2"), na.rm = TRUE) / max(params("vertex", "size"), na.rm = TRUE))
+
+      newdots$vertex.size2 <- i.rescale.vertex(
+        params("vertex", "size2"),
+        parusr[3:4] * scalefactor,
+        params("vertex", "relative.size")
+      )
+    } else { # Otherwise use -vertex.size-
+      newdots$vertex.size2 <- i.rescale.vertex(
+        params("vertex", "size"),
+        parusr[3:4] * scalefactor,
+        params("vertex", "relative.size")
+      )
+    }
+
+    params <- i.parse.plot.params(graph, newdots)
+  } else {
+    params <- i.parse.plot.params(graph, list(vertex.size = 1 / 200 * vertex.size))
+  }
   ################################################################
   ## Mark vertex groups
   if (!is.list(mark.groups) && is.numeric(mark.groups)) {
@@ -818,11 +825,17 @@ rglplot.igraph <- function(x, ...) {
   vertex.color <- params("vertex", "color")
 
   vertex.size <- params("vertex", "size")
-  
+  vertex.size.scaling <- params("vertex", "size.scaling")
+
   # Rescaling vertex size
-  vertex.size <- i.rescale.vertex(vertex.size, rgl::par3d("scale")[1:2]*c(-1,1),
-                                  params("vertex","relative.size"))
-  
+  if (vertex.size.scaling) {
+    vertex.size <- i.rescale.vertex(
+      vertex.size, rgl::par3d("scale")[1:2] * c(-1, 1),
+      params("vertex", "relative.size")
+    )
+  } else {
+    vertex.size <- (1 / 200) * params("vertex", "size")
+  }
 
   loop.angle <- params("edge", "loop.angle")
   loop.angle2 <- params("edge", "loop.angle2")
