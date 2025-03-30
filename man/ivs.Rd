@@ -106,5 +106,5 @@ page.
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{igraph_is_independent_vertex_set()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set}{\code{is_independent_vertex_set()}}.}
 
