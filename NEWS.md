@@ -1,5 +1,17 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9030
+
+## Documentation
+
+- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
+  This change was implemented in the C core.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ead8aea0dcecf43755f9a1857d09ce092d6ff9cf (#1785).
+
+
 # igraph 2.1.4.9029
 
 ## vendor
