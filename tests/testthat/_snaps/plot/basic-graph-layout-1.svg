@@ -25,16 +25,16 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
-<polygon points='595.50,486.13 600.43,483.77 605.15,481.70 609.66,479.92 613.97,478.41 618.08,477.15 621.98,476.14 625.67,475.36 629.16,474.80 632.45,474.45 635.52,474.29 638.40,474.31 641.07,474.51 643.53,474.86 645.79,475.36 647.84,475.99 649.69,476.73 651.33,477.59 652.77,478.54 654.00,479.57 655.02,480.67 655.84,481.82 656.46,483.02 656.87,484.25 657.08,485.51 657.08,486.76 656.87,488.01 656.46,489.24 655.84,490.44 655.02,491.60 654.00,492.70 652.77,493.73 651.33,494.68 649.69,495.53 647.84,496.28 645.79,496.91 643.53,497.41 641.07,497.76 638.40,497.95 635.52,497.98 632.45,497.82 629.16,497.47 625.67,496.91 621.98,496.13 618.08,495.12 613.97,493.86 609.66,492.35 605.15,490.56 600.43,488.50 595.50,486.13 ' style='stroke-width: 0.75; stroke: #00FF00; fill: none;' />
-<line x1='568.58' y1='474.98' x2='385.50' y2='291.90' style='stroke-width: 0.75; stroke: #FF0000;' />
-<line x1='363.20' y1='269.60' x2='180.22' y2='86.62' style='stroke-width: 0.75; stroke: #0000FF;' />
-<circle cx='579.73' cy='486.13' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
-<circle cx='374.35' cy='280.75' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
-<circle cx='169.07' cy='75.47' r='15.77' style='stroke-width: 0.75; fill: #E69F00;' />
+<polygon points='3430.52,471.81 3435.11,469.61 3439.50,467.69 3443.70,466.03 3447.71,464.62 3451.53,463.45 3455.15,462.51 3458.59,461.78 3461.84,461.26 3464.89,460.94 3467.76,460.79 3470.43,460.81 3472.91,460.99 3475.20,461.32 3477.30,461.78 3479.21,462.37 3480.93,463.06 3482.46,463.86 3483.79,464.74 3484.94,465.70 3485.89,466.72 3486.66,467.80 3487.23,468.91 3487.61,470.06 3487.80,471.22 3487.80,472.39 3487.61,473.56 3487.23,474.70 3486.66,475.82 3485.89,476.89 3484.94,477.92 3483.79,478.87 3482.46,479.76 3480.93,480.55 3479.21,481.25 3477.30,481.83 3475.20,482.29 3472.91,482.62 3470.43,482.80 3467.76,482.83 3464.89,482.68 3461.84,482.35 3458.59,481.83 3455.15,481.11 3451.53,480.17 3447.71,479.00 3443.70,477.59 3439.50,475.93 3435.11,474.01 3430.52,471.81 ' style='stroke-width: 0.75; stroke: #00FF00; fill: none;' />
+<line x1='555.28' y1='461.68' x2='384.48' y2='290.88' style='stroke-width: 0.75; stroke: #FF0000;' />
+<line x1='364.22' y1='270.62' x2='193.52' y2='99.92' style='stroke-width: 0.75; stroke: #0000FF;' />
+<circle cx='565.41' cy='471.81' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='374.35' cy='280.75' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='183.39' cy='89.79' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='579.73' y='490.26' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='565.41' y='475.94' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='374.35' y='284.94' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='169.07' y='79.60' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='183.39' y='93.93' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
 </g>
 </svg>

@@ -207,7 +207,10 @@ plot.igraph <- function(x,
 
     params <- i.parse.plot.params(graph, newdots)
   } else {
-    params <- i.parse.plot.params(graph, list(vertex.size = 1 / 200 * vertex.size))
+    params <- i.parse.plot.params(
+      graph,
+      list(vertex.size = 1 / 200 * vertex.size, vertex.size2 = 1 / 200 * params("vertex", "size2"))
+    )
   }
   ################################################################
   ## Mark vertex groups
