@@ -218,7 +218,7 @@ The default value is \code{-pi/4}.  }
 labels, see the \code{color} vertex parameter discussed earlier for the
 possible values.
 
-The default value is \code{black}.  } }
+The default value is \code{black}.}
 
 \item{size.scaling}{Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is. IF TRUE,
