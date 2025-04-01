@@ -228,7 +228,7 @@ If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is. IF TRUE,
 The relative size of the smallest and largest vertices as percentage of
 the plotting region. When all vertices have the same size, then by default
 the relative size observed in the plot will be equal to
-relative.size\link{2}.
+`relative.size\link{2}``.
 The default value is \code{c(.01,.025)} (1\\% and 2.5\\% respectively).
 
 Only used if \code{size.scaling} is TRUE`.
