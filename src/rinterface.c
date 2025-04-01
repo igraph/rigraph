@@ -11802,7 +11802,7 @@ SEXP R_igraph_version(void) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
   PROTECT(r_names=NEW_CHARACTER(4));
-  PROTECT(version_string = Rf_mkCharLenCE(c_version_string, strlen(c_version_string), CE_UTF8));
+  PROTECT(version_string = Rf_ScalarString(Rf_mkCharLenCE(c_version_string, strlen(c_version_string), CE_UTF8)));
   PROTECT(major=NEW_INTEGER(1));
   INTEGER(major)[0]=(int) c_major;
   PROTECT(minor=NEW_INTEGER(1));
