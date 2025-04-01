@@ -232,7 +232,7 @@ relative.size\link{2}.
 The default value is \code{c(.01,.025)} (1\\% and 2.5\\% respectively).
 
 Only used if \code{size.scaling} is TRUE`.
-}
+}}
 
 Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as
 arguments or set by \code{\link[=igraph_options]{igraph_options()}}. The edge parameters:
