@@ -92,7 +92,7 @@ latter case each vertex sizes may differ. This vertex sizes are scaled in
 order have about the same size of vertices for a given value for all three
 plotting commands. It does not need to be an integer number.
 The default value is 15. This is big enough to place short labels on
-vertices. This parameter is ignored if \code{size.scaling} is \code{TRUE}. In that case \code{relative.size} is used instead.}
+vertices. If \code{size.scaling} is \code{TRUE}, \code{relative.size} is used to scale the size appropriately.}
 \item{size2}{The \dQuote{other} size of the vertex, for some
 vertex shapes. For the various rectangle shapes this gives the height of the
 vertices, whereas \code{size} gives the width. It is ignored by shapes for
@@ -222,7 +222,7 @@ The default value is \code{black}.}
 
 \item{size.scaling}{Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is. IF TRUE,
-\code{relative.size} is used instead and \code{vertex.size} is ignored.}
+\code{relative.size} is used to scale both appropriately with \code{relative.size}}
 
 \item{relative.size}{
 The relative size of the smallest and largest vertices as percentage of
@@ -438,6 +438,13 @@ tkplot(make_tree(50, 2, mode = "undirected"),
   vertex.size = 10,
   vertex.color = "green"
 )
+
+# use relative scaling instead of absolute
+g <- make_famous_graph("Zachary")
+igraph_options(plot.layout = layout_nicely)
+plot(g, vertex.size = degree(g))
+plot(g, vertex.size = degree(g), size.scaling = TRUE)
+plot(g, vertex.size = degree(g), size.scaling = TRUE, relative.size = c(0.05, 0.1))
 }
 }
 \seealso{
