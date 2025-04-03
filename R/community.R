@@ -550,8 +550,11 @@ print.communities <- function(x, ...) {
 #'   is `TRUE` and the membership vector is available, then it the
 #'   modularity values is calculated automatically.
 #' @return A `communities` object.
-#'
-#'
+#'   \describe{
+#'     \item{membership}{A numeric vector giving the community id for each
+#'       vertex.}
+#'     \item{modularity}{The modularity score of the partition.}
+#'   }
 #' @family community
 #' @export
 make_clusters <- function(graph, membership = NULL, algorithm = NULL,
