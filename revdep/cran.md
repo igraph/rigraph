@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2146 reverse dependencies (2145 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 27 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 24 new problems
- * We failed to check 7 packages
+ * We saw 23 new problems
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -73,9 +73,6 @@ Issues with CRAN packages are summarised below.
 * simdata
   checking re-building of vignette outputs ... ERROR
 
-* spatialreg
-  checking installed package size ... NOTE
-
 * ssifs
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -89,10 +86,6 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* bnlearn         (NA)
-* dataone         (NA)
-* datapack        (NA)
-* FAIRmaterials   (NA)
-* multinma        (NA)
-* randomForestSRC (NA)
-* streamDAG       (NA)
+* bnlearn   (NA)
+* datapack  (NA)
+* streamDAG (NA)

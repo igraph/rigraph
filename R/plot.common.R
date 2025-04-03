@@ -83,7 +83,7 @@
 #' order have about the same size of vertices for a given value for all three
 #' plotting commands. It does not need to be an integer number.
 #' The default value is 15. This is big enough to place short labels on
-#' vertices.}
+#' vertices. If `size.scaling` is `TRUE`, `relative.size` is used to scale the size appropriately.}
 #' \item{size2}{The \dQuote{other} size of the vertex, for some
 #' vertex shapes. For the various rectangle shapes this gives the height of the
 #' vertices, whereas `size` gives the width. It is ignored by shapes for
@@ -209,7 +209,21 @@
 #' labels, see the `color` vertex parameter discussed earlier for the
 #' possible values.
 #'
-#' The default value is `black`.  } }
+#' The default value is `black`.}
+#'
+#' \item{size.scaling}{Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
+#' If FALSE, `vertex.size` and `vertex.size2` are used as is. IF TRUE,
+#' `relative.size` is used to scale both appropriately with `relative.size`}
+#'
+#' \item{relative.size}{
+#'      The relative size of the smallest and largest vertices as percentage of
+#'      the plotting region. When all vertices have the same size, then by default
+#'      the relative size observed in the plot will be equal to
+#'      \code{relative.size[2]}.
+#'      The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
+#'
+#' Only used if `size.scaling` is TRUE`.
+#' }}
 #'
 #' Edge parameters require to add the \sQuote{\code{edge.}} prefix when used as
 #' arguments or set by [igraph_options()]. The edge parameters:
@@ -417,10 +431,18 @@
 #'   vertex.size = 10,
 #'   vertex.color = "green"
 #' )
+#'
+#' # use relative scaling instead of absolute
+#' g <- make_famous_graph("Zachary")
+#' igraph_options(plot.layout = layout_nicely)
+#' plot(g, vertex.size = degree(g))
+#' plot(g, vertex.size = degree(g), size.scaling = TRUE)
+#' plot(g, vertex.size = degree(g), size.scaling = TRUE, relative.size = c(0.05, 0.1))
 #' }
 #' @name plot.common
 #' @rdname plot.common
 NULL
+
 
 #' Optimal edge curvature when plotting graphs
 #'
@@ -1380,7 +1402,9 @@ i.vertex.default <- list(
   pie.angle = 45,
   pie.density = -1,
   pie.lty = 1,
-  raster = .igraph.logo.raster
+  raster = .igraph.logo.raster,
+  size.scaling = FALSE,
+  relative.size = c(0.01, 0.025)
 )
 
 i.edge.default <- list(
@@ -1418,6 +1442,33 @@ i.plot.default <- list(
 i.default.values <- new.env()
 
 i.default.values[["vertex"]] <- i.vertex.default
+
+i.default.values[["edge"]] <- i.edge.default
+i.default.values[["plot"]] <- i.plot.default
+
+# Rescale vertex size
+#
+# Rescale the size of the vertex according to the device dimmensions
+# By default uses x1 and x2.
+#
+# @param size Numeric vector with relative sizes.
+# @param plot.reg.coords Coordinates of the device.
+# @param minmax.relative.size Relative minimum and maximun sizes in terms of
+#  percent of the device scale.
+#
+# To use the default values (calling par()), it should be done after calling
+# the device and specifying its dimmensions.
+i.rescale.vertex <- function(size, plot.reg.coords = par("usr")[1:2],
+                             minmax.relative.size) {
+  # Adjusting
+  ran <- range(size, na.rm = TRUE)
+  scal <- (plot.reg.coords[2] - plot.reg.coords[1]) * minmax.relative.size
+  size <- (size - ran[1] + 1e-15) / (ran[2] - ran[1] + 1e-15) *
+    (scal[2] - scal[1]) + scal[1]
+
+  return(size)
+}
+
 i.default.values[["edge"]] <- i.edge.default
 i.default.values[["plot"]] <- i.plot.default
 

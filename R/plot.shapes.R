@@ -261,7 +261,7 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'   if (length(vertex.color) != 1 && !is.null(v)) {
 #'     vertex.color <- vertex.color[v]
 #'   }
-#'   vertex.size <- 1 / 200 * params("vertex", "size")
+#'   vertex.size <- params("vertex", "size")
 #'   if (length(vertex.size) != 1 && !is.null(v)) {
 #'     vertex.size <- vertex.size[v]
 #'   }
@@ -289,7 +289,7 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #'   if (length(vertex.color) != 1 && !is.null(v)) {
 #'     vertex.color <- vertex.color[v]
 #'   }
-#'   vertex.size <- 1 / 200 * params("vertex", "size")
+#'   vertex.size <- params("vertex", "size")
 #'   if (length(vertex.size) != 1 && !is.null(v)) {
 #'     vertex.size <- vertex.size[v]
 #'   }
@@ -401,7 +401,7 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   if (end == "from") {
     phi <- atan2(coords[, 4] - coords[, 2], coords[, 3] - coords[, 1])
@@ -463,7 +463,8 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
+
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -499,7 +500,7 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   square.shift <- function(x0, y0, x1, y1, vsize) {
     m <- (y0 - y1) / (x0 - x1)
@@ -578,7 +579,8 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
+
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -614,7 +616,7 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   square.shift <- function(x0, y0, x1, y1, vsize) {
     l <- cbind(
@@ -676,8 +678,8 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     m <- (y0 - y1) / (x0 - x1)
@@ -766,12 +768,13 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.frame.width) != 1 && !is.null(v)) {
     vertex.frame.width <- vertex.frame.width[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
   vertex.size <- rep(vertex.size, length.out = nrow(coords))
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size2 <- params("vertex", "size2")
+
   if (length(vertex.size2) != 1 && !is.null(v)) {
     vertex.size2 <- vertex.size2[v]
   }
@@ -807,8 +810,8 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     l <- cbind(
@@ -880,8 +883,8 @@ add_shape <- function(shape, clip = shape_noclip,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
-  vertex.size2 <- 1 / 200 * params("vertex", "size2")
+  vertex.size <- params("vertex", "size")
+  vertex.size2 <- params("vertex", "size2")
 
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     l <- cbind(x1 - vsize, y1, x1 + vsize, y1)
@@ -989,7 +992,7 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     return(coords)
   }
 
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
 
   if (end == "from") {
     phi <- atan2(coords[, 4] - coords[, 2], coords[, 3] - coords[, 1])
@@ -1049,7 +1052,7 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   }
   vertex.color <- getparam("color")
   vertex.frame.color <- getparam("frame.color")
-  vertex.size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
+  vertex.size <- rep(getparam("size"), length = nrow(coords))
   vertex.pie <- getparam("pie")
   vertex.pie.color <- getparam("pie.color")
   vertex.pie.angle <- getparam("pie.angle")
@@ -1090,8 +1093,9 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     }
     p
   }
-  vertex.color <- rep(getparam("color"), length.out = nrow(coords))
-  vertex.size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
+
+  vertex.color <- rep(getparam("color"), length = nrow(coords))
+  vertex.size <- rep(getparam("size"), length = nrow(coords))
 
   ## Need to create a separate image for every different vertex color
   allcols <- unique(vertex.color)
@@ -1131,8 +1135,8 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
     p
   }
 
-  size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
-  size2 <- rep(1 / 200 * getparam("size2"), length.out = nrow(coords))
+  size <- rep(getparam("size"), length = nrow(coords))
+  size2 <- rep(getparam("size2"), length = nrow(coords))
   raster <- getparam("raster")
 
   for (i in seq_len(nrow(coords))) {
