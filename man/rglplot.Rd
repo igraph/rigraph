@@ -31,7 +31,7 @@ arguments.
 g <- make_lattice(c(5, 5, 5))
 coords <- layout_with_fr(g, dim = 3)
 
-\dontshow{if (interactive() && rlang::is_installed("rgl")) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive() && rlang::is_installed("rgl")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 rglplot(g, layout = coords)
 \dontshow{\}) # examplesIf}
 }
