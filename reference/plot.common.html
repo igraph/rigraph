@@ -15,7 +15,7 @@ tkplot and rglplot are discussed in this manual page."><meta property="og:image"
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9029</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9032</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,7 +134,7 @@ latter case each vertex sizes may differ. This vertex sizes are scaled in
 order have about the same size of vertices for a given value for all three
 plotting commands. It does not need to be an integer number.
 The default value is 15. This is big enough to place short labels on
-vertices.</p></dd>
+vertices. If <code>size.scaling</code> is <code>TRUE</code>, <code>relative.size</code> is used to scale the size appropriately.</p></dd>
 
 <dt>size2</dt>
 <dd><p>The “other” size of the vertex, for some
@@ -263,6 +263,21 @@ as an angle in radians, zero means ‘to the right’, and
 labels, see the <code>color</code> vertex parameter discussed earlier for the
 possible values.</p>
 <p>The default value is <code>black</code>.</p></dd>
+
+
+<dt>size.scaling</dt>
+<dd><p>Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
+If FALSE, <code>vertex.size</code> and <code>vertex.size2</code> are used as is. IF TRUE,
+<code>relative.size</code> is used to scale both appropriately with <code>relative.size</code></p></dd>
+
+
+<dt>relative.size</dt>
+<dd><p>The relative size of the smallest and largest vertices as percentage of
+the plotting region. When all vertices have the same size, then by default
+the relative size observed in the plot will be equal to
+<code>relative.size[2]</code>.
+The default value is <code>c(.01,.025)</code> (1\<!-- % and 2.5\\% respectively). --></p>
+<p>Only used if <code>size.scaling</code> is TRUE`.</p></dd>
 
 </dl><p>Edge parameters require to add the ‘<code>edge.</code>’ prefix when used as
 arguments or set by <code><a href="igraph_options.html">igraph_options()</a></code>. The edge parameters:</p><dl><dt>color</dt>
@@ -508,6 +523,13 @@ vertices and edges, if it is <code>TRUE</code>. Only supported by <code>plot</co
 <span class="r-in"><span>  vertex.size <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>  vertex.color <span class="op">=</span> <span class="st">"green"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># use relative scaling instead of absolute</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_famous_graph</span><span class="op">(</span><span class="st">"Zachary"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="igraph_options.html">igraph_options</a></span><span class="op">(</span>plot.layout <span class="op">=</span> <span class="va">layout_nicely</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, vertex.size <span class="op">=</span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, vertex.size <span class="op">=</span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>, size.scaling <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span>, vertex.size <span class="op">=</span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>, size.scaling <span class="op">=</span> <span class="cn">TRUE</span>, relative.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
