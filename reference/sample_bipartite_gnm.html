@@ -161,15 +161,15 @@ uniformly choose \(m\) edges to realize.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## empty graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite_gnp</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1f984c1 U--B 15 0 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 25a85c4 U--B 15 0 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1f984c1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 25a85c4:</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## full graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite_gnp</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 68536ed U--B 15 50 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cb82795 U--B 15 50 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 68536ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cb82795:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15</span>
@@ -178,16 +178,16 @@ uniformly choose \(m\) edges to realize.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## random bipartite graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite_gnp</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 7f3e848 U--B 15 3 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6371bb9 U--B 15 3 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 7f3e848:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6371bb9:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9--12 5--15 7--15</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## directed bipartite graph, G(n,m)</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite_gnm</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, m <span class="op">=</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ff58a5f D--B 15 20 -- Bipartite Gnm random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3939240 D--B 15 20 -- Bipartite Gnm random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ff58a5f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3939240:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  5-&gt;11  6-&gt;11  8-&gt;12  6-&gt;14  7-&gt;14  9-&gt;14 10-&gt;14 12-&gt; 1 13-&gt; 1 14-&gt; 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 13-&gt; 4 15-&gt; 4 13-&gt; 5 15-&gt; 6 11-&gt; 7 11-&gt; 8 15-&gt; 8 13-&gt; 9 13-&gt;10 14-&gt;10</span>
 <span class="r-in"><span></span></span>
