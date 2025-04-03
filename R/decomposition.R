@@ -65,11 +65,15 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 #'   [max_cardinality()], or from `alpha`.
 #' @param fillin Logical scalar, whether to calculate the fill-in edges.
 #' @param newgraph Logical scalar, whether to calculate the triangulated graph.
-#' @return A list with three members: \describe{\item{chordal}{Logical scalar, it is
-#'   `TRUE` iff the input graph is chordal.} \item{fillin}{If requested,
-#'   then a numeric vector giving the fill-in edges. `NULL` otherwise.}
-#'   \item{newgraph}{If requested, then the triangulated graph, an `igraph`
-#'   object. `NULL` otherwise.}}
+#' @return A list with three members:
+#'   \describe{
+#'     \item{chordal}{Logical scalar, it is
+#'       `TRUE` iff the input graph is chordal.}
+#'     \item{fillin}{If requested,
+#'       then a numeric vector giving the fill-in edges. `NULL` otherwise.}
+#'     \item{newgraph}{If requested, then the triangulated graph, an `igraph`
+#'       object. `NULL` otherwise.}
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [max_cardinality()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple

@@ -93,11 +93,13 @@ If the \code{vertex} argument is present, i.e. the second form is used then a
 named list is returned with the following components:
 \describe{
 \item{community}{Numeric vector giving the ids of the vertices in the same
-community as \code{vertex}.} \item{cohesion}{The cohesion score of the
-result, see references.} \item{adhesion}{The adhesion score of the result,
-see references.} \item{inner.links}{The number of edges within the community
-of \code{vertex}.} \item{outer.links}{The number of edges between the
-community of \code{vertex} and the rest of the graph. }
+community as \code{vertex}.}
+\item{cohesion}{The cohesion score of the result, see references.}
+\item{adhesion}{The adhesion score of the result, see references.}
+\item{inner.links}{The number of edges within the community
+of \code{vertex}.}
+\item{outer.links}{The number of edges between the
+community of \code{vertex} and the rest of the graph.}
 }
 }
 \description{

@@ -1037,8 +1037,12 @@ layout.random <- function(..., params = list()) {
 #'   energy function.
 #' @param weight.node.edge.dist Weight for the node-edge distance component of
 #'   the energy function.
-#' @return A two- or three-column matrix, each row giving the coordinates of a
-#'   vertex, according to the ids of the vertex ids.
+#' @return A matrix with two columns, containing the x and y coordinates
+#'   of the vertices:
+#'   \describe{
+#'     \item{x}{The x-coordinate of the vertex.}
+#'     \item{y}{The y-coordinate of the vertex.}
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [layout_with_fr()],
 #' [layout_with_kk()] for other layout algorithms.
@@ -1816,13 +1820,17 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'   \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
 #'   keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
 #'   them.
-#' @return A list with the components: \describe{\item{layout}{The layout, a two-column
-#'   matrix, for the original graph vertices.} \item{layout.dummy}{The layout for
-#'   the dummy vertices, a two column matrix.} \item{extd_graph}{The original
-#'   graph, extended with dummy vertices.  The \sQuote{dummy} vertex attribute is
-#'   set on this graph, it is a logical attributes, and it tells you whether the
-#'   vertex is a dummy vertex. The \sQuote{layout} graph attribute is also set,
-#'   and it is the layout matrix for all (original and dummy) vertices.}}
+#' @return A list with the components:
+#' \describe{
+#'   \item{layout}{The layout, a two-column matrix, for the original graph vertices.}
+#'   \item{layout.dummy}{The layout for the dummy vertices, a two column matrix.}
+#'   \item{extd_graph}{The original graph, extended with dummy vertices.
+#'     The \sQuote{dummy} vertex attribute is set on this graph,
+#'     it is a logical attributes, and it tells you whether the vertex is a dummy vertex.
+#'     The \sQuote{layout} graph attribute is also set,
+#'     and it is the layout matrix for all (original and dummy) vertices.
+#'   }
+#' }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
@@ -2319,40 +2327,39 @@ layout.drl <- function(graph, use.seed = FALSE, seed = matrix(runif(vcount(graph
 #'
 #' This function implements the force-directed DrL layout generator.
 #'
-#' The generator has the following parameters: \describe{ \item{edge.cut}{Edge
-#' cutting is done in the late stages of the algorithm in order to achieve less
-#' dense layouts.  Edges are cut if there is a lot of stress on them (a large
-#' value in the objective function sum). The edge cutting parameter is a value
-#' between 0 and 1 with 0 representing no edge cutting and 1 representing
-#' maximal edge cutting. } \item{init.iterations}{Number of iterations in the
-#' first phase.} \item{init.temperature}{Start temperature, first phase.}
-#' \item{init.attraction}{Attraction, first phase.}
-#' \item{init.damping.mult}{Damping, first phase.}
-#' \item{liquid.iterations}{Number of iterations, liquid phase.}
-#' \item{liquid.temperature}{Start temperature, liquid phase.}
-#' \item{liquid.attraction}{Attraction, liquid phase.}
-#' \item{liquid.damping.mult}{Damping, liquid phase.}
-#' \item{expansion.iterations}{Number of iterations, expansion phase.}
-#' \item{expansion.temperature}{Start temperature, expansion phase.}
-#' \item{expansion.attraction}{Attraction, expansion phase.}
-#' \item{expansion.damping.mult}{Damping, expansion phase.}
-#' \item{cooldown.iterations}{Number of iterations, cooldown phase.}
-#' \item{cooldown.temperature}{Start temperature, cooldown phase.}
-#' \item{cooldown.attraction}{Attraction, cooldown phase.}
-#' \item{cooldown.damping.mult}{Damping, cooldown phase.}
-#' \item{crunch.iterations}{Number of iterations, crunch phase.}
-#' \item{crunch.temperature}{Start temperature, crunch phase.}
-#' \item{crunch.attraction}{Attraction, crunch phase.}
-#' \item{crunch.damping.mult}{Damping, crunch phase.}
-#' \item{simmer.iterations}{Number of iterations, simmer phase.}
-#' \item{simmer.temperature}{Start temperature, simmer phase.}
-#' \item{simmer.attraction}{Attraction, simmer phase.}
-#' \item{simmer.damping.mult}{Damping, simmer phase.}
+#' The generator has the following parameters:
+#' \describe{
+#'   \item{edge.cut}{Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.  Edges are cut if there is a lot of stress on them (a large value in the objective function sum). The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting. }
+#'   \item{init.iterations}{Number of iterations in the first phase.}
+#'   \item{init.temperature}{Start temperature, first phase.}
+#'   \item{init.attraction}{Attraction, first phase.}
+#'   \item{init.damping.mult}{Damping, first phase.}
+#'   \item{liquid.iterations}{Number of iterations, liquid phase.}
+#'   \item{liquid.temperature}{Start temperature, liquid phase.}
+#'   \item{liquid.attraction}{Attraction, liquid phase.}
+#'   \item{liquid.damping.mult}{Damping, liquid phase.}
+#'   \item{expansion.iterations}{Number of iterations, expansion phase.}
+#'   \item{expansion.temperature}{Start temperature, expansion phase.}
+#'   \item{expansion.attraction}{Attraction, expansion phase.}
+#'   \item{expansion.damping.mult}{Damping, expansion phase.}
+#'   \item{cooldown.iterations}{Number of iterations, cooldown phase.}
+#'   \item{cooldown.temperature}{Start temperature, cooldown phase.}
+#'   \item{cooldown.attraction}{Attraction, cooldown phase.}
+#'   \item{cooldown.damping.mult}{Damping, cooldown phase.}
+#'   \item{crunch.iterations}{Number of iterations, crunch phase.}
+#'   \item{crunch.temperature}{Start temperature, crunch phase.}
+#'   \item{crunch.attraction}{Attraction, crunch phase.}
+#'   \item{crunch.damping.mult}{Damping, crunch phase.}
+#'   \item{simmer.iterations}{Number of iterations, simmer phase.}
+#'   \item{simmer.temperature}{Start temperature, simmer phase.}
+#'   \item{simmer.attraction}{Attraction, simmer phase.}
+#'   \item{simmer.damping.mult}{Damping, simmer phase.}
+#' }
 #'
 #' There are five pre-defined parameter settings as well, these are called
 #' `drl_defaults$default`, `drl_defaults$coarsen`,
 #' `drl_defaults$coarsest`, `drl_defaults$refine` and
-#' `drl_defaults$final`.  }
+#' `drl_defaults$final`.
 #'
 #' @aliases drl_defaults igraph.drl.coarsen
 #' @aliases  igraph.drl.coarsest igraph.drl.default igraph.drl.final
