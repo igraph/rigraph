@@ -789,10 +789,19 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
 #'   for each vertex, or `NULL`, if it was not requested.}
 #'
-#'   For `all_shortest_paths()` a list is returned, each list element
-#'   contains a shortest path from `from` to a vertex in `to`. The
-#'   shortest paths to the same vertex are collected into consecutive elements
-#'   of the list.
+#'   For `all_shortest_paths()` a list is returned:
+#'   \describe{
+#'     \item{vpaths}{This is a list. Each list element
+#'     contains the vertices of a shortest path from `from` to a vertex in `to`.
+#'     The shortest paths to the same vertex are collected
+#'     into consecutive elements of the list.}
+#'     \item{epaths}{This is a list similar to vpaths,
+#'     but the vectors of the list contain the edge ids along the shortest paths,
+#'     instead of the vertex ids.}
+#'     \item{nrgeo}{A vector in which each element is the number of shortest paths
+#'     (geodesics) from `from` to the corresponding vertex in `to`.}
+#'     \item{res}{Deprecated}
+#'   }
 #'
 #'   For `mean_distance()` a single number is returned if `details=FALSE`,
 #'   or a named list with two entries: \describe{\item{`res`}{the mean distance as a numeric
