@@ -1,196 +1,3 @@
-# alakazam
-
-<details>
-
-* Version: 1.3.0
-* GitHub: NA
-* Source code: https://github.com/cran/alakazam
-* Date/Publication: 2023-09-30 01:12:40 UTC
-* Number of recursive dependencies: 119
-
-Run `revdepcheck::cloud_details(, "alakazam")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘AminoAcids-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘AminoAcids-Vignette.Rmd’
-    
-    --- re-building ‘Diversity-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘Diversity-Vignette.Rmd’
-    
-    --- re-building ‘Fastq-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘Fastq-Vignette.Rmd’
-    
-    --- re-building ‘Files-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘Files-Vignette.Rmd’
-    
-    --- re-building ‘GeneUsage-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘GeneUsage-Vignette.Rmd’
-    
-    --- re-building ‘Lineage-Vignette.Rmd’ using rmarkdown
-    
-    Quitting from Lineage-Vignette.Rmd:149-165 [unnamed-chunk-7]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <error/rlang_error>
-    Error in `paste0()`:
-    ! cannot coerce type 'closure' to vector of type 'character'
-    ---
-    Backtrace:
-         x
-      1. +-base::plot(...)
-      2. +-base::plot(...)
-      3. +-igraph::plot.igraph(...)
-      4. | \-igraph (local) params("vertex", "label")
-      5. |   \-cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]\n        }")
-      6. |     +-rlang::warn(format_warning(message, .envir = .envir), ...)
-      7. |     | \-rlang:::validate_signal_args(...)
-      8. |     \-cli::format_warning(message, .envir = .envir)
-      9. |       \-cli::cli_fmt(...)
-     10. |         \-cli:::cli__fmt(rec, collapse, strip_newline)
-     11. |           +-base::do.call(app[[msg$type]], msg$args)
-     12. |           \-cli (local) `<fn>`(text = `<named list>`, id = "cli-151-3", class = NULL)
-     13. |             \-cli:::clii_bullets(app, text, id, class)
-     14. |               \-base::lapply(...)
-     15. |                 \-cli (local) FUN(X[[i]], ...)
-     16. |                   \-app$text(text[[i]])
-     17. |                     \-cli:::clii_text(app, text)
-     18. |                       \-app$xtext(text)
-     19. |                         \-cli:::clii__xtext(...)
-     20. |                           \-app$inline(text, .list = .list)
-     21. |                             \-cli:::clii__inline(app, text, .list = .list)
-     22. |                               \-base::lapply(...)
-     23. |                                 \-cli (local) FUN(X[[i]], ...)
-     24. |                                   \-cli:::glue(...)
-     25. \-cli (local) `<fn>`("v7")
-     26.   +-.transformer(expr, .envir) %||% character()
-     27.   \-cli (local) .transformer(expr, .envir)
-     28.     +-cli:::inline_collapse(...)
-     29.     | \-cli::ansi_collapse(...)
-     30.     |   \-cli:::collapse_both_ends(x, sep, sep2, last, trunc, width, ellipsis)
-     31.     \-cli:::inline_generic(app, val, style = style)
-     32.       \-base::paste0(before, x, after)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    Error: processing vignette 'Lineage-Vignette.Rmd' failed with diagnostics:
-    cannot coerce type 'closure' to vector of type 'character'
-    --- failed re-building ‘Lineage-Vignette.Rmd’
-    
-    --- re-building ‘Topology-Vignette.Rmd’ using rmarkdown
-    --- finished re-building ‘Topology-Vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Lineage-Vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) buildPhylipLineage.Rd:61: Lost braces; missing escapes or markup?
-        61 |                                      names with the format {"Inferred1", "Inferred2", ...}.
-           |                                                            ^
-    ```
-
-# arulesViz
-
-<details>
-
-* Version: 1.5.3
-* GitHub: https://github.com/mhahsler/arulesViz
-* Source code: https://github.com/cran/arulesViz
-* Date/Publication: 2024-04-26 09:20:02 UTC
-* Number of recursive dependencies: 124
-
-Run `revdepcheck::cloud_details(, "arulesViz")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘arulesViz-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: associations2igraph
-    > ### Title: Convert rules or itemsets into a graph
-    > ### Aliases: associations2igraph saveAsGraph graph igraph tidygraph
-    > ### Keywords: file
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > data("Groceries")
-    > rules <- apriori(Groceries, parameter = list(support = 0.01, confidence = 0.5))
-    Apriori
-    
-    Parameter specification:
-     confidence minval smax arem  aval originalSupport maxtime support minlen
-            0.5    0.1    1 none FALSE            TRUE       5    0.01      1
-     maxlen target  ext
-         10  rules TRUE
-    
-    Algorithmic control:
-     filter tree heap memopt load sort verbose
-        0.1 TRUE TRUE  FALSE TRUE    2    TRUE
-    
-    Absolute minimum support count: 98 
-    
-    set item appearances ...[0 item(s)] done [0.00s].
-    set transactions ...[169 item(s), 9835 transaction(s)] done [0.00s].
-    sorting and recoding items ... [88 item(s)] done [0.00s].
-    creating transaction tree ... done [0.00s].
-    checking subsets of size 1 2 3 4 done [0.00s].
-    writing ... [15 rule(s)] done [0.00s].
-    creating S4 object  ... done [0.00s].
-    > 
-    > # convert rules into a graph with rules as nodes
-    > library("igraph")
-    
-    Attaching package: ‘igraph’
-    
-    The following object is masked from ‘package:arules’:
-    
-        union
-    
-    The following objects are masked from ‘package:stats’:
-    
-        decompose, spectrum
-    
-    The following object is masked from ‘package:base’:
-    
-        union
-    
-    > g <- associations2igraph(rules)
-    > g
-    IGRAPH ff25a0a DN-B 27 45 -- 
-    + attr: name (v/c), label (v/c), index (v/n), type (v/n), support
-    | (v/n), confidence (v/n), coverage (v/n), lift (v/n), count (v/n)
-    + edges from ff25a0a (vertex names):
-     [1] 27    ->assoc1  30    ->assoc1  23    ->assoc2  26    ->assoc2 
-     [5] 23    ->assoc3  55    ->assoc3  30    ->assoc4  31    ->assoc4 
-     [9] 23    ->assoc5  31    ->assoc5  16    ->assoc6  23    ->assoc6 
-    [13] 14    ->assoc7  20    ->assoc7  15    ->assoc8  20    ->assoc8 
-    [17] 15    ->assoc9  20    ->assoc9  15    ->assoc10 30    ->assoc10
-    [21] 20    ->assoc11 30    ->assoc11 20    ->assoc12 30    ->assoc12
-    [25] 20    ->assoc13 56    ->assoc13 20    ->assoc14 56    ->assoc14
-    + ... omitted several edges
-    > 
-    > plot(g)
-    Error in paste0(before, x, after) : 
-      cannot coerce type 'closure' to vector of type 'character'
-    Calls: plot ... ansi_collapse -> collapse_both_ends -> inline_generic -> paste0
-    Execution halted
-    ```
-
 # ccTensor
 
 <details>
@@ -338,58 +145,6 @@ Run `revdepcheck::cloud_details(, "corpustools")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 438 marked UTF-8 strings
-    ```
-
-# discourseGT
-
-<details>
-
-* Version: 1.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/discourseGT
-* Date/Publication: 2023-07-19 07:20:02 UTC
-* Number of recursive dependencies: 128
-
-Run `revdepcheck::cloud_details(, "discourseGT")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > # This file is part of the standard setup for testthat.
-      > # It is recommended that you do not modify it.
-      > #
-      > # Where should you do additional test configuration?
-      > # Learn more about the roles of various files in:
-      > # * https://r-pkgs.org/tests.html
-      > # * https://testthat.r-lib.org/reference/test_package.html#special-files
-      > 
-      > library(testthat)
-      > library(discourseGT)
-      > 
-      > test_check("discourseGT")
-      [ FAIL 5 | WARN 14 | SKIP 0 | PASS 30 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-basicPlot.R:12:3'): basicPlot works ──────────────────────────
-      `basicPlot(ginp, graph_selection_input = 0)` produced warnings.
-      ── Failure ('test-basicPlot.R:15:3'): basicPlot works ──────────────────────────
-      `basicPlot(ginp, graph_selection_input = 1)` produced warnings.
-      ── Failure ('test-basicPlot.R:18:3'): basicPlot works ──────────────────────────
-      `basicPlot(ginp, graph_selection_input = 2)` produced warnings.
-      ── Failure ('test-basicPlot.R:21:3'): basicPlot works ──────────────────────────
-      `basicPlot(...)` produced warnings.
-      ── Failure ('test-basicPlot.R:27:3'): basicPlot works ──────────────────────────
-      `basicPlot(ginp, graph_selection_input = 0, scaledEdgeLines = FALSE)` produced warnings.
-      
-      [ FAIL 5 | WARN 14 | SKIP 0 | PASS 30 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # dosearch
@@ -643,52 +398,6 @@ Run `revdepcheck::cloud_details(, "GMPro")` for more info
       'LazyData' is specified without a 'data' directory
     ```
 
-# gsbm
-
-<details>
-
-* Version: 0.2.2
-* GitHub: NA
-* Source code: https://github.com/cran/gsbm
-* Date/Publication: 2022-09-20 08:16:14 UTC
-* Number of recursive dependencies: 105
-
-Run `revdepcheck::cloud_details(, "gsbm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘PrimarySchool.Rmd’ using rmarkdown
-    ```
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) crossval.Rd:54: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) crossval.Rd:55: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) crossval.Rd:56: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) crossval.Rd:57: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) crossval.Rd:58: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) crossval.Rd:59: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:57: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:58: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:59: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:60: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:61: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd.Rd:62: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:57: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:58: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:59: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:60: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:61: Lost braces in \itemize; \value handles \item{}{} directly
-    checkRd: (-1) gsbm_mcgd_parallel.Rd:62: Lost braces in \itemize; \value handles \item{}{} directly
-    ```
-
 # incidentally
 
 <details>
@@ -784,7 +493,7 @@ Run `revdepcheck::cloud_details(, "klassR")` for more info
 * GitHub: https://github.com/stocnet/manynet
 * Source code: https://github.com/cran/manynet
 * Date/Publication: 2024-11-05 20:50:02 UTC
-* Number of recursive dependencies: 144
+* Number of recursive dependencies: 145
 
 Run `revdepcheck::cloud_details(, "manynet")` for more info
 
@@ -909,63 +618,6 @@ Run `revdepcheck::cloud_details(, "MetaNet")` for more info
     Execution halted
     ```
 
-# multivariance
-
-<details>
-
-* Version: 2.4.1
-* GitHub: NA
-* Source code: https://github.com/cran/multivariance
-* Date/Publication: 2021-10-06 15:50:05 UTC
-* Number of recursive dependencies: 32
-
-Run `revdepcheck::cloud_details(, "multivariance")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘multivariance-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: clean.graph
-    > ### Title: cleanup dependence structure graph
-    > ### Aliases: clean.graph
-    > 
-    > ### ** Examples
-    > 
-    > N = 200
-    > y = coins(N,2)
-    > x = cbind(y,y,y)
-    > 
-    > ds = dependence.structure(x,structure.type = "clustered")
-    
-        Dependence structure detection
-    
-    data: 'x' with 200 samples of 9 variables
-    structure: clustered
-    detection method: test -- method for p-values: conservative -- significance level: 0.05
-    
-    2-tuples x 36: max. multivariance: 200.000; min. p-value (unadjusted): 0
-    New cluster detected. Not all vertices are in one cluster.
-    2-tuples x 3: max. multivariance:   0.504; min. p-value (unadjusted): 0.477634223802113
-    3-tuples x 1: max. multivariance: 199.392; min. p-value (unadjusted): 0
-    All vertices are in one cluster.
-    
-    total number of tests: 40, groups of tests: 3
-    
-    Same structure for any significance level in (0,1)
-    
-    Conservative estimate of the type I error probability: 0.143
-    > plot(clean.graph(ds$graph))
-    Error in paste0(before, x, after) : 
-      cannot coerce type 'closure' to vector of type 'character'
-    Calls: plot ... ansi_collapse -> collapse_both_ends -> inline_generic -> paste0
-    Execution halted
-    ```
-
 # mwcsr
 
 <details>
@@ -1067,87 +719,6 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
         libs  10.5Mb
     ```
 
-# nett
-
-<details>
-
-* Version: 1.0.0
-* GitHub: https://github.com/aaamini/nett
-* Source code: https://github.com/cran/nett
-* Date/Publication: 2022-11-09 10:50:05 UTC
-* Number of recursive dependencies: 96
-
-Run `revdepcheck::cloud_details(, "nett")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘Community_Detection.Rmd’ using rmarkdown
-    ```
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) spec_clust.Rd:33: Lost braces; missing escapes or markup?
-        33 | A label vector of size n x 1 with elements in {1,2,...,K}
-           |                                               ^
-    ```
-
-# POSetR
-
-<details>
-
-* Version: 1.1.4
-* GitHub: NA
-* Source code: https://github.com/cran/POSetR
-* Date/Publication: 2023-12-04 15:20:15 UTC
-* Number of recursive dependencies: 14
-
-Run `revdepcheck::cloud_details(, "POSetR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘POSetR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: intersection
-    > ### Title: Intersection of two posets
-    > ### Aliases: intersection %it%
-    > 
-    > ### ** Examples
-    > 
-    > dom <- matrix(c(
-    +   "a", "b",
-    +   "c", "b",
-    +   "b", "d"
-    + ), ncol = 2, byrow = TRUE)
-    > p <- poset(x = dom)
-    > plot(p)
-    Error in vapply(.x, .f, .mold, ..., USE.NAMES = FALSE) : 
-      values must be length 1,
-     but FUN(X[[1]]) result is length 0
-    Calls: plot ... i.get.arrow.mode -> map_dbl -> .rlang_purrr_map_mold -> vapply
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 19.3Mb
-      sub-directories of 1Mb or more:
-        libs  19.2Mb
-    ```
-
 # remify
 
 <details>
@@ -1207,7 +778,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.8s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -1422,7 +993,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m10.9s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m11.9s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -1492,7 +1063,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.6s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.7s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -1628,46 +1199,46 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<350--350>
        call| expect_silent(plot(x = out, breaks = NULL, palette = NULL, n_intervals = NULL, 
        call| -->    rev = NULL, actors = NULL, pch.degree = NULL, igraph.edge.color = NULL, 
        call| -->    igraph.vertex.color = NULL))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<351--351>
        call| expect_silent(plot(x = out, pch.degree = -1))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<352--352>
        call| expect_silent(plot(x = out, igraph.edge.color = "#000000000", 
        call| -->    igraph.vertex.color = "#000000000"))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<353--353>
        call| expect_silent(plot(x = out, igraph.edge.color = "magenta", igraph.vertex.color = "cyan4"))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<354--354>
        call| expect_silent(plot(x = out, n_intervals = 5))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<355--355>
        call| expect_silent(plot(x = out, actors = attr(out, "dictionary")$actors$actorName[1:5]))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<362--362>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<363--363>
        call| expect_silent(plot(x = out, n_intervals = 5))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       ----- FAILED[xcpt]: test-remify-methods.R<364--364>
        call| expect_silent(plot(x = out, actors = attr(out, "dictionary")$actors$actorName[1:5]))
        diff| Execution was not silent. A warning was thrown with message
-       diff| 'is.na() applied to non-(list or vector) of type 'closure''
+       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
       Error: 10 out of 254 tests failed
       Execution halted
     ```
@@ -2013,71 +1584,6 @@ Run `revdepcheck::cloud_details(, "SEMID")` for more info
       Execution halted
     ```
 
-# sglasso
-
-<details>
-
-* Version: 1.2.6
-* GitHub: NA
-* Source code: https://github.com/cran/sglasso
-* Date/Publication: 2023-12-03 08:40:02 UTC
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "sglasso")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sglasso-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: gplot.fglasso
-    > ### Title: Plotting Sparse Factorial Dynamic Gaussian Graphical Model
-    > ### Aliases: gplot.fglasso
-    > ### Keywords: models
-    > 
-    > ### ** Examples
-    > 
-    > N <- 50
-    > tp <- 3
-    > p <- 3
-    > X <- matrix(rnorm(N * p * tp), N, tp * p)
-    > S <- crossprod(X) / N
-    > model <- list(lag0 = c(s = "c", n = "ut"), lag1 = c(s = "t", n = "t"))
-    > out.fglasso <- fglasso(S = S, model = model, tp = tp, p = p)
-    > gplot(out.fglasso, rhoid = 50, sub.tp1 = "First graph", 
-    +    sub.tp2 = "Second graph")
-    Error in paste0(before, x, after) : 
-      cannot coerce type 'closure' to vector of type 'character'
-    Calls: gplot ... ansi_collapse -> collapse_both_ends -> inline_generic -> paste0
-    Execution halted
-    ```
-
-# simdata
-
-<details>
-
-* Version: 0.4.1
-* GitHub: https://github.com/matherealize/simdata
-* Source code: https://github.com/cran/simdata
-* Date/Publication: 2024-12-03 23:10:07 UTC
-* Number of recursive dependencies: 92
-
-Run `revdepcheck::cloud_details(, "simdata")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘Demo.Rmd’ using rmarkdown
-    ```
-
 # ssifs
 
 <details>
@@ -2241,75 +1747,5 @@ Run `revdepcheck::cloud_details(, "tilemaps")` for more info
     ```
     Namespace in Imports field not imported from: ‘lwgeom’
       All declared Imports should be used.
-    ```
-
-# wpa
-
-<details>
-
-* Version: 1.9.1
-* GitHub: https://github.com/microsoft/wpa
-* Source code: https://github.com/cran/wpa
-* Date/Publication: 2024-06-06 13:20:02 UTC
-* Number of recursive dependencies: 120
-
-Run `revdepcheck::cloud_details(, "wpa")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘wpa-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: network_p2p
-    > ### Title: Perform network analysis with the person-to-person query
-    > ### Aliases: network_p2p
-    > 
-    > ### ** Examples
-    > 
-    > p2p_df <- p2p_data_sim(dim = 1, size = 100)
-    > 
-    > # default - ggraph visual
-    > network_p2p(data = p2p_df, style = "ggraph")
-    > 
-    > # return vertex table
-    > network_p2p(data = p2p_df, return = "table")
-    # A tibble: 6 × 2
-      Organization     n
-      <chr>        <int>
-    1 Org A           14
-    2 Org B           14
-    3 Org C           15
-    4 Org D           11
-    5 Org E           12
-    6 Org F           34
-    > 
-    > # return vertex table with community detection
-    > network_p2p(data = p2p_df, community = "leiden", return = "table")
-    # A tibble: 100 × 3
-       Organization cluster     n
-       <chr>        <chr>   <int>
-     1 Org A        12          1
-     2 Org A        25          1
-     3 Org A        32          1
-     4 Org A        38          1
-     5 Org A        44          1
-     6 Org A        51          1
-     7 Org A        58          1
-     8 Org A        6           1
-     9 Org A        65          1
-    10 Org A        71          1
-    # ℹ 90 more rows
-    > 
-    > # leiden - igraph style with custom resolution parameters
-    > network_p2p(data = p2p_df, community = "leiden", comm_args = list("resolution" = 0.1))
-    Error in vapply(.x, .f, .mold, ..., USE.NAMES = FALSE) : 
-      values must be length 1,
-     but FUN(X[[1]]) result is length 0
-    Calls: network_p2p ... i.get.arrow.mode -> map_dbl -> .rlang_purrr_map_mold -> vapply
-    Execution halted
     ```
 
