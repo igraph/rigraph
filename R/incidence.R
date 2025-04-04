@@ -72,6 +72,7 @@ graph_incidence_build <- function(incidence, directed = FALSE, mode = "out",
 
   # Convert to sparse matrix if not already sparse
   if (!inherits(incidence, "Matrix")) {
+    requireNamespace("Matrix", quietly = TRUE)
     incidence <- as(incidence, "dgCMatrix")
   }
 
