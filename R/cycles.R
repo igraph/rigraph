@@ -40,7 +40,7 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_lattice(c(3,3))
+#' g <- make_lattice(c(3, 3))
 #' find_cycle(g)
 #'
 #' # Empty results are returned for acyclic graphs
@@ -74,7 +74,7 @@ find_cycle <- find_cycle_impl
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify=F)
+#' g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
 #' simple_cycles(g)
 #' simple_cycles(g, mode = "all") # ignore edge directions
 #' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
@@ -83,10 +83,15 @@ find_cycle <- find_cycle_impl
 #' @cdocs igraph_simple_cycles
 #' @export
 
-simple_cycles <- function(graph, mode=c("out", "in", "all", "total"), min=NULL, max=NULL) {
+simple_cycles <- function(graph, mode = c("out", "in", "all", "total"), min = NULL, max = NULL) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
 
   if (is.null(min)) {
     min <- -1
@@ -96,7 +101,7 @@ simple_cycles <- function(graph, mode=c("out", "in", "all", "total"), min=NULL, 
     max <- -1
   }
 
-  on.exit( .Call(R_igraph_finalizer) )
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(R_igraph_simple_cycles, graph, mode, as.numeric(min), as.numeric(max))
   if (igraph_opt("return.vs.es")) {

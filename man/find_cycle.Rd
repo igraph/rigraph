@@ -30,7 +30,7 @@ a specific cycle.
 }
 \examples{
 
-g <- make_lattice(c(3,3))
+g <- make_lattice(c(3, 3))
 find_cycle(g)
 
 # Empty results are returned for acyclic graphs

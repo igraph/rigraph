@@ -39,7 +39,7 @@ this combinatorial explosion.
 }
 \examples{
 
-g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify=F)
+g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
 simple_cycles(g)
 simple_cycles(g, mode = "all") # ignore edge directions
 simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
