@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9033
+
+## Features
+
+- Add relative size scaling to vertices in plots (@gvegayon, #172).
+
+## Chore
+
+- Render docs.
+
+- Updated results.
+
+## Documentation
+
+- Better describe output of `all_shortest_paths()` (#1029, #1778).
+
+
 # igraph 2.1.4.9032
 
 ## vendor
