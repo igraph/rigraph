@@ -548,7 +548,6 @@ i.parse.plot.params <- function(graph, params) {
         }")
           p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
         } else {
-          cli::cli_warn("{type} attribute {name} contains NAs. Replacing with empty string")
           p[[type]][[name]][is.na(p[[type]][[name]])] <- ""
         }
       }
