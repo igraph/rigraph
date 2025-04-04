@@ -593,7 +593,8 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
           ">"   = 2,
           "->"  = 2,
           "<>"  = 3,
-          "<->" = 3
+          "<->" = 3,
+          0
         )
       }
     )
