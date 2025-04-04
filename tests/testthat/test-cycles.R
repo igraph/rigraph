@@ -12,7 +12,7 @@ test_that("find_cycle() works", {
 })
 
 test_that("simple_cycle() works directed", {
-  g <- graph_from_literal(A - +B - +C - +A - +D - +E + -F - +A, E - +E, A - +F, simplify = FALSE)
+  g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
   all_simple_cycles <- simple_cycles(g)
   expect_length(all_simple_cycles$vertices, 3)
   expect_length(all_simple_cycles$edges, 3)
@@ -27,7 +27,7 @@ test_that("simple_cycle() works directed", {
 })
 
 test_that("simple_cycle() works undirected", {
-  g <- graph_from_literal(A - +B - +C - +A - +D - +E + -F - +A, E - +E, A - +F, simplify = FALSE)
+  g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
   all_simple_cycles <- simple_cycles(g, mode = "all")
   expect_length(all_simple_cycles$vertices, 5)
   expect_length(all_simple_cycles$edges, 5)
