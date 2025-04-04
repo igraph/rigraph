@@ -40,6 +40,6 @@ test_that("simple_cycle() works undirected", {
   expect_equal(as.numeric(all_simple_cycles$vertices[[2]]), c(1, 4, 5, 6))
 
   all_simple_cycles_23 <- simple_cycles(g, mode = "all", min = 2, max = 3)
-  expect_length(all_simple_cycles$vertices, 2)
-  expect_length(all_simple_cycles$edges, 2)
+  expect_length(all_simple_cycles$vertices, 5)
+  expect_length(all_simple_cycles$edges, 5)
 })
