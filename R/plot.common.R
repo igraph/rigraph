@@ -541,10 +541,16 @@ i.parse.plot.params <- function(graph, params) {
         return(ret())
       }
     }
-    if (any(is.na(p[[type]][[name]]))) {
-      cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
+    if (!is.function(p[[type]][[name]])) {
+      if (any(is.na(p[[type]][[name]]))) {
+        if (name != "label") {
+          cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
         }")
-      p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+          p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+        } else {
+          p[[type]][[name]][is.na(p[[type]][[name]])] <- ""
+        }
+      }
     }
     return(ret())
   }
@@ -587,7 +593,8 @@ i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
           ">"   = 2,
           "->"  = 2,
           "<>"  = 3,
-          "<->" = 3
+          "<->" = 3,
+          0
         )
       }
     )
