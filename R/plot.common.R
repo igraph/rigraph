@@ -542,9 +542,14 @@ i.parse.plot.params <- function(graph, params) {
       }
     }
     if (any(is.na(p[[type]][[name]]))) {
-      cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
+      if (name != "label") {
+        cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
         }")
-      p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+        p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]]
+      } else {
+        cli::cli_warn("{type} attribute {name} contains NAs. Replacing with empty string")
+        p[[type]][[name]][is.na(p[[type]][[name]])] <- ""
+      }
     }
     return(ret())
   }
