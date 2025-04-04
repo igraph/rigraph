@@ -51,3 +51,59 @@
 #' @export
 
 find_cycle <- find_cycle_impl
+
+
+#' Finds all simple cycles in a graph.
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function lists all simple cycles in a graph within a range of cycle
+#' lengths. A cycle is called simple if it has no repeated vertices.
+#'
+#' Multi-edges and self-loops are taken into account. Note that typical graphs
+#' have exponentially many cycles and the presence of multi-edges exacerbates
+#' this combinatorial explosion.
+#'
+#' @inheritParams find_cycle
+#' @param min Lower limit on cycle lengths to consider. `NULL` means no limit.
+#' @param max Upper limit on cycle lengths to consider. `NULL` means no limit.
+#' @return A named list, with two entries:
+#' \item{vertices}{The list of cycles in terms of their vertices.}
+#' \item{edges}{The list of cycles in terms of their edges.}
+#' @keywords graphs
+#' @examples
+#'
+#' g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify=F)
+#' simple_cycles(g)
+#' simple_cycles(g, mode = "all") # ignore edge directions
+#' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
+#'
+#' @family cycles
+#' @cdocs igraph_simple_cycles
+#' @export
+
+simple_cycles <- function(graph, mode=c("out", "in", "all", "total"), min=NULL, max=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  if (is.null(min)) {
+    min <- -1
+  }
+
+  if (is.null(max)) {
+    max <- -1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_simple_cycles, graph, mode, as.numeric(min), as.numeric(max))
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
+  }
+  res
+}
