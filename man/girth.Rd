@@ -83,7 +83,8 @@ Graph cycles
 \code{\link{find_cycle}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+\code{\link{is_dag}()},
+\code{\link{simple_cycles}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
