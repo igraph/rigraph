@@ -287,3 +287,41 @@ test_that("largest_cliques works", {
   lc_ring <- largest_cliques(make_ring(10))
   expect_equal(max(sapply(lc_ring, length)), 2)
 })
+
+test_that("is_clique works", {
+  withr::local_seed(42)
+
+  g <- make_full_graph(5)
+  expect_true(is_clique(g, V(g)))
+
+  g <- sample_gnp(15, 0.5)
+  max_cl <- max_cliques(g)
+  all_are_cliques <- all(sapply(max_cl, function(x) is_clique(g, x)))
+  expect_true(all_are_cliques)
+})
+
+test_that("is_ivs works", {
+  withr::local_seed(42)
+
+  g <- make_full_bipartite_graph(5, 5)
+  expect_true(is_ivs(g, V(g)[V(g)$type]))
+
+  g <- sample_gnp(15, 0.5)
+  max_ivs <- max_ivs(g)
+  all_are_ivs <- all(sapply(max_ivs, function(x) is_ivs(g, x)))
+  expect_true(all_are_ivs)
+})
+
+test_that("is_complete works", {
+  g1 <- make_full_graph(5)
+  expect_true(is_complete(g1))
+
+  g2 <- make_full_graph(5, directed = TRUE)
+  expect_true(is_complete(g1))
+
+  g3 <- delete_edges(g2, 1)
+  expect_false(is_complete(g3))
+
+  g4 <- as_undirected(g3)
+  expect_true(is_complete(g4))
+})
