@@ -72,7 +72,7 @@ CSTRING:
             %C% = Rf_translateCharUTF8(%I%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I% = Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8));
+            PROTECT(%I% = Rf_ScalarString(Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8)));
 
 REAL:
     CTYPE: igraph_real_t
