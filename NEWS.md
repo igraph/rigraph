@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9034
+
+## Bug fixes
+
+- Removed redundant inheritParams call (#1802).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Load the Matrix package before coercing to a sparse matrix.
+
+- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
+
+## Chore
+
+- Results from revdepcheck.
+
+## Testing
+
+- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
+
+
 # igraph 2.1.4.9033
 
 ## Features
