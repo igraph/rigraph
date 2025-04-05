@@ -34,15 +34,15 @@ projection.}
 \item{Mu}{Starting weights for the projection.}
 }
 \value{
-\code{graphlets()} returns a list with two members: \item{cliques}{A
+\code{graphlets()} returns a list with two members: \describe{\item{cliques}{A
 list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
-basis.}
+basis.}}
 
-\code{graphlet_basis()} returns a list of two elements: \item{cliques}{A list
+\code{graphlet_basis()} returns a list of two elements: \describe{\item{cliques}{A list
 of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 vector of vertex ids.} \item{thresholds}{The weight thresholds used for
-finding the subgraphs.}
+finding the subgraphs.}}
 
 \code{graphlet_proj()} return a numeric vector, the weights of the graphlet
 basis subgraphs.

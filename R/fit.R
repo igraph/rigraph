@@ -115,6 +115,7 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'
 #'   If `implementation` is \sQuote{`plfit`}, then the result is a
 #'   named list with entries:
+#'   \describe{
 #'   \item{continuous}{Logical scalar, whether the
 #'   fitted power-law distribution was continuous or discrete.}
 #'   \item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
@@ -129,6 +130,7 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'   test. Small p-values (less than 0.05) indicate that the test rejected the
 #'   hypothesis that the original data could have been drawn from the fitted
 #'   power-law distribution.}
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso [stats4::mle()]

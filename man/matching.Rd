@@ -47,6 +47,7 @@ is ignored.}
 scalar.
 
 \code{max_bipartite_match()} returns a list with components:
+\describe{
 \item{matching_size}{The size of the matching, i.e. the number of edges
 connecting the matched vertices.}
 \item{matching_weight}{The weights of the matching, if the graph was
@@ -55,6 +56,7 @@ matching.}
 \item{matching}{The matching itself. Numeric vertex id, or vertex
 names if the graph was named. Non-matched vertices are denoted by
 \code{NA}.}
+}
 }
 \description{
 A matching in a graph means the selection of a set of edges that are

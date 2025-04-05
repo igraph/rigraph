@@ -67,7 +67,9 @@ algorithm. See details below.}
 \item{father}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}, use \code{parent} instead.}
 }
 \value{
-A named list with the following entries: \item{root}{Numeric scalar.
+A named list with the following entries:
+\describe{
+\item{root}{Numeric scalar.
 The root vertex that was used as the starting point of the search.}
 \item{neimode}{Character scalar. The \code{mode} argument of the function
 call. Note that for undirected graphs this is always \sQuote{all},
@@ -79,6 +81,7 @@ each vertex, i.e. the vertex it was discovered from.}
 \item{father}{Like parent, kept for compatibility for now.}
 \item{dist}{Numeric
 vector, for each vertex its distance from the root of the search tree.}
+}
 
 Note that \code{order}, \code{order.out}, \code{parent}, and \code{dist}
 might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
