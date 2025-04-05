@@ -31,6 +31,11 @@ modularity values is calculated automatically.}
 }
 \value{
 A \code{communities} object.
+\describe{
+\item{membership}{A numeric vector giving the community id for each
+vertex.}
+\item{modularity}{The modularity score of the partition.}
+}
 }
 \description{
 This is useful to integrate the results of community finding algorithms

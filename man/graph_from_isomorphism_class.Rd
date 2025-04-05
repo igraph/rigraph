@@ -16,6 +16,12 @@ graph_from_isomorphism_class(size, number, directed = TRUE)
 \value{
 An igraph object, the graph of the given size, directedness
 and isomorphism class.
+
+A list with components:
+\describe{
+\item{topology}{The topology of the graph.}
+\item{details}{Additional details about the topology.}
+}
 }
 \description{
 The isomorphism class is a non-negative integer number.
