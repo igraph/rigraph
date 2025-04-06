@@ -17,7 +17,7 @@ graphs"><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9035</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,9 @@ graphs</p>
 <span></span>
 <span><span class="fu">ivs_size</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">independence_number</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">independence_number</span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">is_ivs</span><span class="op">(</span><span class="va">graph</span>, <span class="va">candidate</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -77,8 +79,7 @@ graphs</p>
 
 
 <dl><dt id="arg-graph">graph<a class="anchor" aria-label="anchor" href="#arg-graph"></a></dt>
-<dd><p>The input graph, directed graphs are considered as undirected,
-loop edges and multiple edges are ignored.</p></dd>
+<dd><p>The input graph.</p></dd>
 
 
 <dt id="arg-min">min<a class="anchor" aria-label="anchor" href="#arg-min"></a></dt>
@@ -90,6 +91,10 @@ vertex sets to find. <code>NULL</code> means no limit.</p></dd>
 <dd><p>Numeric constant, limit for the maximum size of the independent
 vertex sets to find. <code>NULL</code> means no limit.</p></dd>
 
+
+<dt id="arg-candidate">candidate<a class="anchor" aria-label="anchor" href="#arg-candidate"></a></dt>
+<dd><p>The vertex set to test for being an independent set.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,6 +103,8 @@ vertex sets to find. <code>NULL</code> means no limit.</p></dd>
 <code>max_ivs()</code> return a list containing numeric
 vertex ids, each list element is an independent vertex set.</p>
 <p><code>ivs_size()</code> returns an integer constant.</p>
+<p><code>is_ivs()</code> returns <code>TRUE</code> if the candidate vertex set forms an
+independent set.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -116,6 +123,7 @@ vertex set(s).</p>
 <p><code>independence_number()</code> is an alias for <code>ivs_size()</code>.</p>
 <p>These functions use the algorithm described by Tsukiyama et al., see
 reference below.</p>
+<p><code>is_ivs()</code> tests if no pairs within a vertex set are connected.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -127,6 +135,7 @@ Computing</em>, 6:505–517, 1977.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other cliques:
 <code><a href="cliques.html">cliques</a>()</code>,
+<code><a href="is_complete.html">is_complete</a>()</code>,
 <code><a href="weighted_cliques.html">weighted_cliques</a>()</code></p></div>
     </div>
     <div class="section level2">
@@ -135,6 +144,10 @@ Computing</em>, 6:505–517, 1977.</p>
 Graph Library by Keith Briggs (<a href="http://keithbriggs.info/" class="external-link">http://keithbriggs.info/</a>) and Gabor
 Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a> wrote the R interface and this manual
 page.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_independent_vertex_set" class="external-link"><code>is_independent_vertex_set()</code></a>.</p>
     </div>
 
     <div class="section level2">
@@ -149,83 +162,83 @@ page.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
 <span class="r-in"><span><span class="fu">ivs</span><span class="op">(</span><span class="va">g</span>, min <span class="op">=</span> <span class="fu">ivs_size</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 37 55 56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 55 56 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 56 69 74</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13 16 37 40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 32 45 61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 22 55 56 64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 23 69 75 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">largest_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 32 45 61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 37 55 56</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 55 56 69</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  7 56 69 74</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 80</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8 15 73 84</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 22 55 56 64</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 23 69 75 90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from afb4ebb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/100 vertices, from 343369c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13 16 37 40</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># Empty graph</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu">largest_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4b63d10 U--- 4 0 -- Erdos-Renyi (gnp) graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e037e5a U--- 4 0 -- Erdos-Renyi (gnp) graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4b63d10:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e037e5a:</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu">max_ivs</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 326</span>
