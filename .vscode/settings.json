@@ -1,0 +1,6 @@
+{
+  "[r]": {
+    "editor.defaultFormatter": "positron.positron-r",
+    "editor.formatOnType": true
+  },
+}
