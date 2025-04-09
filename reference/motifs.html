@@ -15,7 +15,7 @@ structure.  These functions search a graph for various motifs."><meta property="
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9035</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9037</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@ structure.  These functions search a graph for various motifs.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, cut.prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">size</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">motifs</span><span class="op">(</span><span class="va">graph</span>, size <span class="op">=</span> <span class="fl">3</span>, cut.prob <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -77,7 +77,8 @@ directed graphs and sizes 3-6 in undirected graphs.</p></dd>
 <dt id="arg-cut-prob">cut.prob<a class="anchor" aria-label="anchor" href="#arg-cut-prob"></a></dt>
 <dd><p>Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
-of the motif (the <code>size</code> argument). By default no cuts are made.</p></dd>
+of the motif (the <code>size</code> argument).
+If <code>NULL</code>, the default, no cuts are made.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -111,7 +112,7 @@ the motifs is defined by their isomorphism class, see
 <span class="r-in"><span><span class="fu"><a href="count_motifs.html">count_motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 399</span>
 <span class="r-in"><span><span class="fu"><a href="sample_motifs.html">sample_motifs</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 140</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
