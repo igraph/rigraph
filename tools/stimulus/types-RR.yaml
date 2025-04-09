@@ -218,6 +218,8 @@ BIPARTITE_TYPES:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
+BIPARTITE_TYPES_UNNAMED:
+
 VERTEX_COLOR:
     INCONV: |-
         if (missing(%I%)) {
@@ -470,6 +472,12 @@ FAS_ALGORITHM:
         APPROX_EADES: c("approx_eades", "exact_ip")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)
+
+FVS_ALGORITHM:
+    DEFAULT:
+        EXACT_IP: c("exact_ip")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L)
 
 WHEEL_MODE:
     DEFAULT:

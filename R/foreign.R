@@ -548,7 +548,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' Load a graph from the graph database for testing graph isomorphism.
 #'
 #' This function downloads a graph from a database created for the evaluation
-#' of graph isomorphism testing algothitms.
+#' of graph isomorphism testing algorithms.
 #'
 #' `graph_from_graphdb()` reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
@@ -596,12 +596,19 @@ write.graph.dot <- function(graph, file, ...) {
 #' @family foreign
 #' @export
 #' @keywords graphs
-graph_from_graphdb <- function(url = NULL,
-                               prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
-                               base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
-                               compressed = TRUE, directed = TRUE) {
+graph_from_graphdb <- function(
+  url = NULL,
+  prefix = "iso",
+  type = "r001",
+  nodes = NULL,
+  pair = "A",
+  which = 0,
+  base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+  compressed = TRUE,
+  directed = TRUE
+) {
   if (is.null(nodes) && is.null(url)) {
-    stop("The `nodes' or the `url' argument must be non-null")
+    cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
   }
 
   if (is.null(url)) {
@@ -622,10 +629,16 @@ graph_from_graphdb <- function(url = NULL,
     typegroup <- typegroups[which(types == type)]
 
     if (!prefix %in% prefixes) {
-      stop("Invalid prefix!")
+      cli::cli_abort(c(
+        "{.value {prefix}} is not a valid prefix.",
+        i = "Must be one of {.value {prefixes}}."
+      ))
     }
     if (!type %in% types) {
-      stop("Invalid graph type!")
+      cli::cli_abort(c(
+        "{.value {type}} is not a valid graph type.",
+        i = "Must be one of {.value {types}}."
+      ))
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(
@@ -641,7 +654,7 @@ graph_from_graphdb <- function(url = NULL,
 
   f <- try(gzcon(file(filename, open = "rb")))
   if (inherits(f, "try-error")) {
-    stop(paste("Cannot open URL:", filename))
+    cli::cli_abort("Cannot open URL provided in {.arg filename}: {.url {filename}}")
   }
 
   buffer <- read.graph.toraw(f)

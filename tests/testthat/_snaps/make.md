@@ -155,5 +155,21 @@
       make_empty_graph(NULL)
     Condition
       Error in `make_empty_graph()`:
-      ! At rinterface_extra.c:78 : Expecting a scalar integer but received a vector of length 0. Invalid value
+      ! `n` must be numeric, not NULL.
+
+---
+
+    Code
+      make_empty_graph("spam")
+    Condition
+      Error in `make_empty_graph()`:
+      ! `n` must be numeric, not a string.
+
+---
+
+    Code
+      make_empty_graph(10, "spam")
+    Condition
+      Error in `make_empty_graph()`:
+      ! `directed` must be a logical, not a string.
 

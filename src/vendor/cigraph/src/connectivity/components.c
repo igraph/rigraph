@@ -435,6 +435,9 @@ static igraph_error_t igraph_i_is_connected_weak(const igraph_t *graph, igraph_b
  * \return Error code:
  *        \c IGRAPH_EINVAL: invalid mode argument.
  *
+ * \sa \ref igraph_connected_components() to find the connected components,
+ * \ref igraph_is_biconnected() to check if the graph is 2-vertex-connected.
+ *
  * Time complexity: O(|V|+|E|), the
  * number of vertices
  * plus the number of edges in the graph.
@@ -1583,7 +1586,7 @@ igraph_error_t igraph_bridges(const igraph_t *graph, igraph_vector_int_t *bridge
  * \sa \ref igraph_induced_subgraph() if you want a graph object consisting only
  * a given set of vertices and the edges between them;
  * \ref igraph_reachability() to efficiently compute the reachable set from \em all
- * vertices.
+ * vertices; \ref igraph_neighborhood() to find vertices within a given distance.
  */
 igraph_error_t igraph_subcomponent(
     const igraph_t *graph, igraph_vector_int_t *res, igraph_integer_t vertex,

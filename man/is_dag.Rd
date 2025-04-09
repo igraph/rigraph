@@ -31,6 +31,8 @@ is_dag(g2)
 \seealso{
 Graph cycles
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
+\code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()}
@@ -46,6 +48,7 @@ Other structural.properties:
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
+\code{\link{feedback_vertex_set}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
 \code{\link{is_matching}()},

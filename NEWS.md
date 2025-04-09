@@ -1,5 +1,260 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9037
+
+## vendor
+
+- Update vendored sources to igraph/igraph@09f6f258c4a864654ad1950e053ff2f5c507be54 (#1814).
+
+- Update vendored sources to igraph/igraph@d48a25ba0f6d72e447c6d17d74b667b1f21754fb (#1813).
+
+
+# igraph 2.1.4.9036
+
+## Features
+
+- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@a68d7cafcd0935e6f229437981811e730af4f03f (#1811).
+
+
+# igraph 2.1.4.9035
+
+## vendor
+
+- Update vendored sources to igraph/igraph@01b15eb1f44d36418ea65394710a02887ca16857 (#1808).
+
+- Update vendored sources to igraph/igraph@8d5db4db95e2e80cbe8169bbe66ce64f73df7bd3 (#1807).
+
+- Update vendored sources to igraph/igraph@6c5b349a4b56ebee0003953ee43994d2dd93f189 (#1806).
+
+
+# igraph 2.1.4.9034
+
+## Bug fixes
+
+- Removed redundant inheritParams call (#1802).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Load the Matrix package before coercing to a sparse matrix.
+
+- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
+
+## Chore
+
+- Results from revdepcheck.
+
+## Testing
+
+- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
+
+
+# igraph 2.1.4.9033
+
+## Features
+
+- Add relative size scaling to vertices in plots (@gvegayon, #172).
+
+## Chore
+
+- Render docs.
+
+- Updated results.
+
+## Documentation
+
+- Better describe output of `all_shortest_paths()` (#1029, #1778).
+
+
+# igraph 2.1.4.9032
+
+## vendor
+
+- Update vendored sources to igraph/igraph@0a22a85cb9281ce147b0db7415610e55dee2e332 (#1791).
+
+
+# igraph 2.1.4.9031
+
+## vendor
+
+- Update vendored sources to igraph/igraph@e5de49c7f65708763b70413dbde4ac0eba7ef5b6 (#1789).
+
+- Update vendored sources to igraph/igraph@7d634197abd2bb0bc3317c1216cfb82c3813d1af (#1788).
+
+- Update vendored sources to igraph/igraph@bc19dd7ec62ceb80409513009caefb5412c0dab1 (#1787).
+
+
+# igraph 2.1.4.9030
+
+## Documentation
+
+- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
+  This change was implemented in the C core.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ead8aea0dcecf43755f9a1857d09ce092d6ff9cf (#1785).
+
+
+# igraph 2.1.4.9029
+
+## vendor
+
+- Update vendored sources to igraph/igraph@65cf9a269634047812afbbe966099bb6983ced68 (#1783).
+
+
+# igraph 2.1.4.9028
+
+## vendor
+
+- Update vendored sources to igraph/igraph@fc6860b31887b362e8ddbb07e44e6a12e9cef82d (#1776).
+
+- Update vendored sources to igraph/igraph@dcdad62cbb2e7969fb58429850487a5f0e00c812 (#1775).
+
+- Update vendored sources to igraph/igraph@1636677c821f9dd453049b86e370c0dd6477640b (#1774).
+
+- Update vendored sources to igraph/igraph@6d85a48755d5de8e36fa9d4e53fee891ad0428fa (#1773).
+
+- Update vendored sources to igraph/igraph@fe6bdb78c4a3269b542c6af7a167b9599f08173d (#1772).
+
+- Update vendored sources to igraph/igraph@e5e5374c55164557ba29beee4dbde1a61fa1c50b (igraph/igraph#2473, #1771).
+
+
+# igraph 2.1.4.9027
+
+## vendor
+
+- Update vendored sources to igraph/igraph@910770148045f66ee30bd0c519adaec0e7a7cc31 (igraph/igraph#2473, #1769).
+
+- Update vendored sources to igraph/igraph@10d4fc75f146f5fc8ec17d99ab808c53a3c49dae (#1768).
+
+- Update vendored sources to igraph/igraph@92ec35b3e427734fde7f8ebc9d978ee6fd207c68 (#1767).
+
+
+# igraph 2.1.4.9026
+
+## vendor
+
+- Update vendored sources to igraph/igraph@dd208201b117baecfb1f0de9018e20a6929da865 (#1765).
+
+- Update vendored sources to igraph/igraph@64e4649039ab5b2762068e56fd07ce4b93256767 (#1764).
+
+- Update vendored sources to igraph/igraph@aec39d00ee55245b368421cc3453457ac7ae737e (#1763).
+
+
+# igraph 2.1.4.9025
+
+## Features
+
+- Expose `find_cycle()` (#1471, #1571).
+
+- Split `sample_bipartite()` into two functions for the G(n, m) a… (#630, #1692).
+
+## Chore
+
+- Results from revdepcheck.
+
+- Update generated documentation.
+
+- Install build dependencies.
+
+## Documentation
+
+- Update decription of `order` parameter of `ego()` and related functions (#1746).
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#1738).
+
+
+# igraph 2.1.4.9024
+
+## Bug fixes
+
+- Integer vectors are validated before transferring them to the C library (#1434, #1582).
+
+
+# igraph 2.1.4.9023
+
+## vendor
+
+- Update vendored sources to igraph/igraph@b42d0101d7c2a6d31ac6568aa4b4398d5f619e2e (#1758).
+
+- Update vendored sources to igraph/igraph@627f71a5e0eac5c00f56499fb4457ff4f9ee315d (igraph/igraph#2710, #1757).
+
+- Update vendored sources to igraph/igraph@a7d22863ea48ec7b206ef6a03869ff7817cb8a5b (#1756).
+
+
+# igraph 2.1.4.9022
+
+## Chore
+
+- Require copyright assignment in PR template (#1747).
+
+
+# igraph 2.1.4.9021
+
+## Chore
+
+- Fix `Makefile-cigraph` again.
+
+- Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
+
+## Testing
+
+- Rename, add test for `laplacian_matrix()` (#1714).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@662abbdfa467a6436bad650c31a8360787d75379 (#1753).
+
+- Update vendored sources to igraph/igraph@1a7f9b71505c8455afb836628bc133e387154118 (#1752).
+
+- Update vendored sources to igraph/igraph@410fc4089639fde7f2e6b42ce4588bd6af3d78de (#1751).
+
+- Update vendored sources to igraph/igraph@1cbe1ae2abedacb0afde1b367a788580c9810c6c (#1750).
+
+- Update vendored sources to igraph/igraph@5bda8315202ff0647e30da77de0d70c7f25d89bf (#1749).
+
+- Update vendored sources to igraph/igraph@091e2927a6acce4e89db0db37d7db8496a59f117 (#1748).
+
+
+# igraph 2.1.4.9020
+
+## Bug fixes
+
+- Changed base location for graph_from_graphdb and added tests (@schochastics, #1712, #1732).
+
+- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (@schochastics, #848, #1731).
+
+## Features
+
+- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
+
+## Chore
+
+- Add include.
+
+- R 4.0 compat.
+
+- Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
+
+- Fix Stimulus (#1737).
+
+- Use `"parent"` instead of `"father"` in `bfs()` and `dfs()` (#880, #1523).
+
+## Documentation
+
+- Welcome Maëlle Salmon and David Schoch as authors (#1733).
+
+## Testing
+
+- Merged feedback.set tests into structural.properties (#1743).
+
+
 # igraph 2.1.4.9019
 
 ## Testing

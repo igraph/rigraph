@@ -1231,6 +1231,28 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   res
 }
 
+feedback_vertex_set_impl <- function(graph, weights=NULL, algo=c("exact_ip")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  algo <- switch(igraph.match.arg(algo), "exact_ip"=0L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_feedback_vertex_set, graph, weights, algo)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
@@ -2077,6 +2099,36 @@ is_bipartite_impl <- function(graph) {
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$type) <- vertex_attr(graph, "name", V(graph))
   }
+  res
+}
+
+bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
+  p <- as.numeric(p)
+  directed <- as.logical(directed)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
+
+  res
+}
+
+bipartite_game_gnm_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
+  m <- as.numeric(m)
+  directed <- as.logical(directed)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode)
+
   res
 }
 

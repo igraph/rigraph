@@ -534,7 +534,6 @@ igraph_topological_sorting:
 igraph_feedback_arc_set:
 
 igraph_feedback_vertex_set:
-    IGNORE: RR, RC
 
 igraph_is_loop:
     PARAM_NAMES:
@@ -755,10 +754,16 @@ igraph_is_bipartite:
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
-    IGNORE: RR
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
+        INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
+        NEIMODE mode=ALL
 
 igraph_bipartite_game_gnm:
-    IGNORE: RR
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
+        INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
+        NEIMODE mode=ALL
 
 igraph_bipartite_game:
     IGNORE: RR, RC

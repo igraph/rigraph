@@ -1,22 +1,24 @@
 # Revdeps
 
-## Failed to check (8)
+## Failed to check (3)
 
-|package         |version |error |warning |note |
-|:---------------|:-------|:-----|:-------|:----|
-|bnlearn         |5.0.1   |1     |        |     |
-|dataone         |2.2.2   |1     |        |     |
-|datapack        |1.4.1   |1     |        |     |
-|FAIRmaterials   |0.4.2.1 |1     |        |     |
-|multinma        |0.7.2   |1     |        |     |
-|randomForestSRC |?       |      |        |     |
-|streamDAG       |?       |      |        |     |
-|TDA             |1.9.1   |1     |        |     |
+|package   |version |error |warning |note |
+|:---------|:-------|:-----|:-------|:----|
+|bnlearn   |5.0.2   |1     |        |     |
+|datapack  |1.4.1   |1     |        |     |
+|streamDAG |?       |      |        |     |
 
-## New problems (2)
+## New problems (9)
 
-|package       |version |error  |warning |note |
-|:-------------|:-------|:------|:-------|:----|
-|[grainscape](problems.md#grainscape)|0.4.4   |__+1__ |        |     |
-|[multilaterals](problems.md#multilaterals)|1.0     |__+1__ |        |     |
+|package      |version |error  |warning |note |
+|:------------|:-------|:------|:-------|:----|
+|[corpustools](problems.md#corpustools)|0.5.1   |__+1__ |        |2    |
+|[dosearch](problems.md#dosearch)|1.0.11  |__+1__ |        |1    |
+|[incidentally](problems.md#incidentally)|1.0.2   |__+1__ |        |     |
+|[klassR](problems.md#klassr)|1.0.2   |__+1__ |        |1    |
+|[mwcsr](problems.md#mwcsr)|0.1.9   |__+2__ |        |1    |
+|[remify](problems.md#remify)|3.2.8   |__+1__ |        |1    |
+|[SEMID](problems.md#semid)|0.4.1   |__+2__ |        |     |
+|[ssifs](problems.md#ssifs)|1.0.4   |__+2__ |        |     |
+|[tilemaps](problems.md#tilemaps)|0.2.0   |__+2__ |        |1    |
 

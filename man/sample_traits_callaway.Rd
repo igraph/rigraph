@@ -79,6 +79,7 @@ g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
