@@ -21,7 +21,6 @@
 ##
 ## ----------------------------------------------------------------------
 
-
 # format versions
 ver_0_1_1 <- 0L # 0.1.1
 ver_0_4 <- 1L # 0.4
@@ -93,7 +92,12 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop("Don't know how to downgrade graph from version ", g_ver, " to ", p_ver)
+    stop(
+      "Don't know how to downgrade graph from version ",
+      g_ver,
+      " to ",
+      p_ver
+    )
   }
 
   # g_ver < p_ver
@@ -153,7 +157,9 @@ warn_version <- function(graph) {
     return(TRUE)
   }
 
-  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
+  stop(
+    "This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again."
+  )
 }
 
 oldpredecessors <- function() {
@@ -194,30 +200,12 @@ clear_native_ptr <- function(g) {
 #'
 #' @keywords internal
 #' @export
-igraph.version <- function() { # nocov start
+igraph.version <- function() {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
   igraph_version()
 } # nocov end
-#   IGraph R package
-#   Copyright (C) 2005-2013  Gabor Csardi <csardi.gabor@gmail.com>
-#   334 Harvard street, Cambridge, MA 02139 USA
-#
-#   This program is free software; you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation; either version 2 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program; if not, write to the Free Software
-#   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
-#   02110-1301 USA
-#
-###################################################################
+
 
 # R_igraph_vers -----------------------------------------------------------------------
 
@@ -244,8 +232,8 @@ igraph_version <- function(software = c("R", "C")) {
 
   switch(
     software,
-  # Better than packageVersion("igraph") because it uses the loaded package
-  # and is independent of .libPaths()
+    # Better than packageVersion("igraph") because it uses the loaded package
+    # and is independent of .libPaths()
     R = getNamespaceInfo("igraph", "spec")[["version"]],
     C = c_version()
   )
@@ -253,5 +241,10 @@ igraph_version <- function(software = c("R", "C")) {
 
 c_version <- function() {
   version <- version_impl()
-  sprintf("%s.%s.%s", version[["major"]], version[["minor"]], version[["subminor"]])
+  sprintf(
+    "%s.%s.%s",
+    version[["major"]],
+    version[["minor"]],
+    version[["subminor"]]
+  )
 }
