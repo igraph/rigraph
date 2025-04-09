@@ -55,10 +55,10 @@
 ^vendor\.sh$
 ^vendor-one\.sh$
 ^patch$
+^\.vscode$
+air.toml
 ^man/dot-igraph.progress\.Rd$
 ^man/dot-igraph.status\.Rd$
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
-^\.vscode$
-air.toml
