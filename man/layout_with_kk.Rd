@@ -19,11 +19,11 @@ layout_with_kk(
   maxy = NULL,
   minz = NULL,
   maxz = NULL,
-  niter,
-  sigma,
-  initemp,
-  coolexp,
-  start
+  niter = deprecated(),
+  sigma = deprecated(),
+  initemp = deprecated(),
+  coolexp = deprecated(),
+  start = deprecated()
 )
 
 with_kk(...)
@@ -50,9 +50,9 @@ iterations.}
 \item{kkconst}{Numeric scalar, the Kamada-Kawai vertex attraction constant.
 Typical (and default) value is the number of vertices.}
 
-\item{weights}{Edge weights, larger values will result longer edges.
-Note that this is opposite to \code{\link[=layout_with_fr]{layout_with_fr()}}. Weights must
-be positive.}
+\item{weights}{Edge weights, larger values will result in longer edges.
+Note that this is the opposite of \code{\link[=layout_with_fr]{layout_with_fr()}}, which produces
+shorter edges for larger weights. Weights must be positive.}
 
 \item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
 lower boundaries for the \sQuote{x} coordinates of the vertices. The length
@@ -72,8 +72,8 @@ of the vector must match the number of vertices in the graph.}
 \item{maxz}{Similar to \code{minx}, but gives the upper boundaries of the
 \sQuote{z} coordinates.}
 
-\item{niter, sigma, initemp, coolexp}{These arguments are not supported from
-igraph version 0.8.0 and are ignored (with a warning).}
+\item{niter, sigma, initemp, coolexp}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} These
+arguments are not supported from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{start}{Deprecated synonym for \code{coords}, for compatibility.}
 

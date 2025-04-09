@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{graph_from_atlas}
 \alias{graph_from_atlas}
-\alias{graph.atlas}
 \alias{atlas}
 \title{Create a graph from the Graph Atlas}
 \usage{
@@ -43,6 +42,7 @@ graph_from_atlas(sample(0:1252, 1))
 Other deterministic constructors: 
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},

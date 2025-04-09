@@ -1,4 +1,3 @@
-
 #' Shortest (directed or undirected) paths between vertices
 #'
 #' @description
@@ -68,15 +67,14 @@ is.dag <- function(graph) { # nocov start
 
 #' List all simple paths from one source
 #'
-#' This function lists are simple paths from one source vertex to another
-#' vertex or vertices. A path is simple if the vertices it visits are not
-#' visited more than once.
+#' This function lists all simple paths from one source vertex to another
+#' vertex or vertices. A path is simple if contains no repeated vertices.
 #'
 #' Note that potentially there are exponentially many paths between two
 #' vertices of a graph, and you may run out of memory when using this
 #' function, if your graph is lattice-like.
 #'
-#' This function currently ignored multiple and loop edges.
+#' This function ignores multiple and loop edges.
 #'
 #' @param graph The input graph.
 #' @param from The source vertex.
@@ -87,7 +85,8 @@ is.dag <- function(graph) { # nocov start
 #'   then *to* it will be considered. If `all`, the default, then
 #'   the corresponding undirected graph will be used, i.e. not directed paths
 #'   are searched. This argument is ignored for undirected graphs.
-#' @param cutoff Maximum length of path that is considered. If negative, paths of all lengths are considered.
+#' @param cutoff Maximum length of the paths that are considered. If negative,
+#'   no cutoff is used.
 #' @return A list of integer vectors, each integer vector is a path from
 #'   the source vertex to one of the target vertices. A path is given by its
 #'   vertex ids.
@@ -153,6 +152,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @family cycles
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_dag
 is_dag <- is_dag_impl
 
 #' Acyclic graphs
@@ -160,21 +160,22 @@ is_dag <- is_dag_impl
 #' This function tests whether the given graph is free of cycles.
 #'
 #' This function looks for directed cycles in directed graphs and undirected
-#' cycles in undirected graphs.
+#' cycles in undirected graphs. Use [find_cycle()] to return a specific cycle.
 #'
 #' @param graph The input graph.
 #' @return A logical vector of length one.
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), directed = TRUE)
 #' is_acyclic(g)
-#' is_acyclic(as.undirected(g))
+#' is_acyclic(as_undirected(g))
 #' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
 #' and directed graphs.
 #' @family cycles
 #' @family structural.properties
 #' @export
+#' @cdocs igraph_is_acyclic
 is_acyclic <- is_acyclic_impl
 
 #' Maximum cardinality search
@@ -225,6 +226,7 @@ is_acyclic <- is_acyclic_impl
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
+#' @cdocs igraph_maximum_cardinality_search
 max_cardinality <- maximum_cardinality_search_impl
 
 
@@ -255,22 +257,18 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
+#' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
-    if (...length() > 0) {
+  if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
       "eccentricity(... =)",
-      details = "The arguments `weights` and `mode` must be named."
+      details = "The argument `mode` must be named."
     )
 
     rlang::check_dots_unnamed()
 
     dots <- list(...)
-
-    if (is.null(weights) && length(dots) > 0) {
-      weights <- dots[[1]]
-      dots <- dots[-1]
-    }
 
     if (missing(mode) && length(dots) > 0) {
       mode <- dots[[1]]
@@ -308,22 +306,18 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
 #' radius(g)
 #' @family paths
 #' @export
+#' @cdocs igraph_radius_dijkstra
 radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
       "radius(... =)",
-      details = "The arguments `weights` and `mode` must be named."
+      details = "The argument `mode` must be named."
     )
 
     rlang::check_dots_unnamed()
 
     dots <- list(...)
-
-    if (is.null(weights) && length(dots) > 0) {
-      weights <- dots[[1]]
-      dots <- dots[-1]
-    }
 
     if (missing(mode) && length(dots) > 0) {
       mode <- dots[[1]]
@@ -359,10 +353,12 @@ radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "tot
 #' graph_center(ring)
 #'
 #' @export
+#' @cdocs igraph_graph_center_dijkstra
 graph_center <- graph_center_dijkstra_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
+#' @cdocs igraph_path_length_hist
 distance_table <- path_length_hist_impl

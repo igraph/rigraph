@@ -1,4 +1,3 @@
-
 #' Find subgraph centrality scores of network positions
 #'
 #' @description
@@ -40,8 +39,23 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @keywords internal
 #' @export
 hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  lifecycle::deprecate_warn("2.0.0", "hub.score()", "hits_scores()")
   hub_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `authority_score()` to create a more
+#' consistent API.
+#' @inheritParams authority_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_warn("2.0.0", "authority.score()", "hits_scores()")
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Strength or weighted vertex degree
@@ -132,21 +146,6 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
-} # nocov end
-
-#' Kleinberg's hub and authority centrality scores.
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `authority.score()` was renamed to `authority_score()` to create a more
-#' consistent API.
-#' @inheritParams authority_score
-#' @keywords internal
-#' @export
-authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
-  authority_score(graph = graph, scale = scale, weights = weights, options = options)
 } # nocov end
 
 #' Find Bonacich alpha centrality scores of network positions
@@ -255,9 +254,15 @@ betweenness.estimate <- estimate_betweenness
 #'   scores. If `TRUE`, then the results are normalized by the number of ordered
 #'   or unordered vertex pairs in directed and undirected graphs, respectively.
 #'   In an undirected graph,
-#'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
-#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
-#'   is the number of vertices in the graph.
+#'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2 B / ((n-1)(n-2)),}
+#'   where
+#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and
+#'   \eqn{n} is the number of vertices in the graph. Note that the same
+#'   normalization factor is used even when setting a `cutoff` on the considered
+#'   shortest path lengths, even though the number of vertex pairs reachable
+#'   from each other may be less than \eqn{(n-1)(n-2)/2}.
+#' @param cutoff The maximum shortest path length to consider when calculating
+#'   betweenness. If negative, then there is no such limit.
 #' @return A numeric vector with the betweenness score for each vertex in
 #'   `v` for `betweenness()`.
 #'
@@ -270,9 +275,11 @@ betweenness.estimate <- estimate_betweenness
 #' @seealso [closeness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
+#' \doi{10.1016/0378-8733(78)90021-7}
 #'
 #' Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. *Journal
 #' of Mathematical Sociology* 25(2):163-177, 2001.
+#' \doi{10.1080/0022250X.2001.9990249}
 #' @family centrality
 #' @export
 #' @keywords graphs
@@ -282,8 +289,6 @@ betweenness.estimate <- estimate_betweenness
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
-#' @param cutoff The maximum path length to consider when calculating the
-#'   betweenness. If zero or negative then there is no such limit.
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)
@@ -352,7 +357,7 @@ edge_betweenness <- function(graph, e = E(graph),
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
-    lifecycle::deprecate_soft(
+  lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
@@ -366,7 +371,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 
 #' Closeness centrality of vertices
 #'
-#' Closeness centrality measures how many steps is required to access every other
+#' Closeness centrality measures how many steps are required to access every other
 #' vertex from a given vertex.
 #'
 #' The closeness centrality of a vertex is defined as the inverse of the
@@ -467,7 +472,6 @@ closeness <- function(graph, vids = V(graph),
 #' @keywords internal
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
-
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_closeness()",
@@ -664,24 +668,30 @@ arpack_defaults <- function() {
 #'
 #' ## First three eigenvalues of the adjacency matrix of a graph
 #' ## We need the 'Matrix' package for this
-#' if (require(Matrix)) {
-#'   set.seed(42)
-#'   g <- sample_gnp(1000, 5 / 1000)
-#'   M <- as_adj(g, sparse = TRUE)
-#'   f2 <- function(x, extra = NULL) {
-#'     cat(".")
-#'     as.vector(M %*% x)
-#'   }
-#'   baev <- arpack(f2, sym = TRUE, options = list(
-#'     n = vcount(g), nev = 3, ncv = 8,
-#'     which = "LM", maxiter = 2000
-#'   ))
+#' @examplesIf rlang::is_installed("Matrix")
+#' library("Matrix")
+#' set.seed(42)
+#' g <- sample_gnp(1000, 5 / 1000)
+#' M <- as_adjacency_matrix(g, sparse = TRUE)
+#' f2 <- function(x, extra = NULL) {
+#'   cat(".")
+#'   as.vector(M %*% x)
 #' }
+#' baev <- arpack(
+#'   f2,
+#'   sym = TRUE,
+#'   options = list(
+#'     n = vcount(g),
+#'     nev = 3,
+#'     ncv = 8,
+#'     which = "LM",
+#'     maxiter = 2000
+#'   )
+#' )
 #' @family arpack
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -713,7 +723,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
 
   if (sym && complex) {
     complex <- FALSE
-    warning("Symmetric matrix, setting `complex' to FALSE")
+    cli::cli_warn("Symmetric matrix, setting {.arg complex} to {.code FALSE}.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -736,7 +746,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
   } else {
     if (is.matrix(res$values)) {
       if (!all(res$values[, 2] == 0)) {
-        warning("Dropping imaginary parts of eigenvalues")
+        cli::cli_warn("Dropping imaginary parts of eigenvalues.")
       }
       res$values <- res$values[, 1]
     }
@@ -766,16 +776,15 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' Subgraph centrality of a vertex measures the number of subgraphs a vertex
 #' participates in, weighting them according to their size.
 #'
-#' The subgraph centrality of a vertex is defined as the number of closed loops
-#' originating at the vertex, where longer loops are exponentially
-#' downweighted.
+#' The subgraph centrality of a vertex is defined as the number of closed walks
+#' originating at the vertex, where longer walks are downweighted by the
+#' factorial of their length.
 #'
 #' Currently the calculation is performed by explicitly calculating all
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
 #'
-#' @param graph The input graph, it should be undirected, but the
-#'   implementation does not check this currently.
+#' @param graph The input graph. It will be treated as undirected.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
 #'   matrix in the analysis. Giving `FALSE` here effectively eliminates the
 #'   loops edges from the graph before the calculation.
@@ -795,11 +804,17 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' cor(degree(g), sc)
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
-  A <- as_adj(graph)
+  A <- as_adjacency_matrix(graph)
   if (!diag) {
     diag(A) <- 0
   }
-  eig <- eigen(A)
+  # Ignore edge directions in directed graphs
+  if (is_directed(graph)) {
+    A <- A + Matrix::t(A)
+  }
+  # This calls lapack and creates a dense matrix, but accepts the sparse matrix A
+  # We can choose to convert A to a dense matrix right away, but it doesn't matter
+  eig <- eigen(A, symmetric = TRUE)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
@@ -849,7 +864,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 #'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [as_adj()] to create a (sparse) adjacency matrix.
+#' @seealso [as_adjacency_matrix()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
 #' @examples
 #'
@@ -858,7 +873,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' spectrum(kite)[c("values", "vectors")]
 #'
 #' ## Double check
-#' eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
+#' eigen(as_adjacency_matrix(kite, sparse = FALSE))$vectors[, 1]
 #'
 #' ## Should be the same as 'eigen_centrality' (but rescaled)
 #' cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
@@ -868,7 +883,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
+spectrum <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which = list(), options = arpack_defaults()) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -879,9 +894,10 @@ spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto",
   }
 
   eigen_adjacency_impl(graph,
-                       algorithm = algorithm,
-                       which = which,
-                       options = options)
+    algorithm = algorithm,
+    which = which,
+    options = options
+  )
 }
 
 eigen_defaults <- function() {
@@ -941,9 +957,8 @@ eigen_defaults <- function() {
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
+#' @param scale `r lifecycle::badge("deprecated")` Normalization will always take
+#' place.
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted eigenvector centrality of
 #'   vertices. If this is `NULL` and the graph has a `weight` edge
@@ -976,12 +991,12 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(graph,
                              directed = FALSE,
-                             scale = TRUE,
+                             scale = deprecated(),
                              weights = NULL,
                              options = arpack_defaults()) {
-
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -991,11 +1006,29 @@ eigen_centrality <- function(graph,
     options <- options()
   }
 
-  eigenvector_centrality_impl(graph = graph,
-                              directed = directed,
-                              scale = scale,
-                              weights = weights,
-                              options = options)
+  if (lifecycle::is_present(scale)) {
+    if (isTRUE(scale)) {
+      lifecycle::deprecate_soft(
+        "2.1.1",
+        "eigen_centrality(scale)",
+        details = "eigen_centrality() will always behave as if scale=TRUE were used."
+      )
+    } else {
+      lifecycle::deprecate_warn(
+        "2.1.1",
+        "eigen_centrality(scale = 'always as if TRUE')",
+        details = "Normalization is always performed"
+      )
+    }
+  }
+
+  eigenvector_centrality_impl(
+    graph = graph,
+    directed = directed,
+    scale = TRUE,
+    weights = weights,
+    options = options
+  )
 }
 
 #' Strength or weighted vertex degree
@@ -1034,6 +1067,7 @@ eigen_centrality <- function(graph,
 #' strength(g)
 #' @family centrality
 #' @export
+#' @cdocs igraph_strength
 strength <- strength_impl
 
 
@@ -1077,6 +1111,7 @@ strength <- strength_impl
 #' diversity(g3)
 #' @family centrality
 #' @export
+#' @cdocs igraph_diversity
 diversity <- diversity_impl
 
 
@@ -1105,8 +1140,10 @@ diversity <- diversity_impl
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
-#'   \item{vector}{The hub or authority scores of the vertices.}
+#'   \item{hub}{The hub score of the vertices.}
+#'   \item{authority}{The authority score of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
@@ -1124,36 +1161,31 @@ diversity <- diversity_impl
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
-#' hub_score(g)$vector
-#' authority_score(g)$vector
+#' hits_scores(g)
 #'
 #' ## A ring
 #' g2 <- make_ring(10)
-#' hub_score(g2)$vector
-#' authority_score(g2)$vector
+#' hits_scores(g2)
 #' @family centrality
-hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+#' @cdocs igraph_hub_and_authority_scores
+hits_scores <- function(graph, ..., scale = TRUE, weights = NULL, options = arpack_defaults()) {
+  rlang::check_dots_empty()
 
-  if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
-      "hub_score(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
-    )
-    options <- options()
-  }
-
-  hub_score_impl(graph = graph,
-                 scale = scale,
-                 weights = weights,
-                 options = options)
+  hub_and_authority_scores_impl(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options
+  )
 }
 
+#' @title Kleinberg's authority centrality scores.
 #' @rdname hub_score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
-authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+authority_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
+  lifecycle::deprecate_soft("2.1.0", "authority_score()", "hits_scores()")
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -1164,10 +1196,52 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
     options <- arpack_defaults()
   }
 
-  authority_score_impl(graph = graph,
-                       scale = scale,
-                       weights = weights,
-                       options = options)
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options
+  )
+  scores$hub <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
+}
+
+#' @title Kleinberg's hub centrality scores.
+#' @rdname hub_score
+#' @param graph The input graph.
+#' @param scale Logical scalar, whether to scale the result to have a maximum
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
+#' @param weights Optional positive weight vector for calculating weighted
+#'   scores. If the graph has a `weight` edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
+#' @family centrality
+#' @export
+hub_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) {
+  lifecycle::deprecate_soft("2.0.3", "hub_score()", "hits_scores()")
+  if (is.function(options)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  scores <- hits_scores(
+    graph = graph,
+    scale = scale,
+    weights = weights,
+    options = options
+  )
+  scores$authority <- NULL
+  rlang::set_names(scores, c("vector", "value", "options"))
 }
 
 #' The Page Rank algorithm
@@ -1253,6 +1327,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
+#' @cdocs igraph_personalized_pagerank
 page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
@@ -1300,6 +1375,7 @@ page_rank <- personalized_pagerank_impl
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
+#' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
@@ -1309,7 +1385,7 @@ bonpow.dense <- function(graph, nodes = V(graph),
                          rescale = FALSE, tol = 1e-7) {
   ensure_igraph(graph)
 
-  d <- as_adj(graph)
+  d <- as_adjacency_matrix(graph)
   if (!loops) {
     diag(d) <- 0
   }
@@ -1337,7 +1413,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adj(graph, sparse = TRUE)
+  d <- as_adjacency_matrix(graph, sparse = TRUE)
 
   ## sparse identity matrix
   id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
@@ -1400,6 +1476,15 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' theory motivates use of this measure, you should be very careful to choose a
 #' decay parameter on a non-ad hoc basis.
 #'
+#' For directed networks, the Bonacich power measure can be understood as
+#' similar to status in the network where higher status nodes have more edges
+#' that point from them to others with status. Node A's centrality depends
+#' on the centrality of all the nodes that A points toward, and their centrality
+#' depends on the nodes they point toward, etc. Note, this means that a node
+#' with an out-degree of 0 will have a Bonacich power centrality of 0 as they
+#' do not point towards anyone. When using this with directed network it
+#' is important to think about the edge direction and what it represents.
+#'
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
@@ -1419,9 +1504,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when I get a better algorithm.  `power_centrality()` will not symmetrize your
-#' data before extracting eigenvectors; don't send this routine asymmetric
-#' matrices unless you really mean to do so.
+#' fixed when we get a better algorithm.
 #' @author Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1505,7 +1588,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
     attr <- NULL
   }
 
-  d <- t(as_adj(graph, attr = attr, sparse = FALSE))
+  d <- t(as_adjacency_matrix(graph, attr = attr, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
@@ -1546,7 +1629,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
     attr <- NULL
   }
 
-  M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
+  M <- Matrix::t(as_adjacency_matrix(graph, attr = attr, sparse = TRUE))
 
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))

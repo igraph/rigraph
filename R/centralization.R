@@ -1,4 +1,3 @@
-
 #' Centralization of a graph
 #'
 #' @description
@@ -221,6 +220,7 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
+#' @cdocs igraph_centralization
 centralize <- centralization_impl
 
 #' Centralize a graph according to the degrees of vertices
@@ -253,17 +253,17 @@ centralize <- centralization_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
+#' @cdocs igraph_centralization_degree
 centr_degree <- centralization_degree_impl
 
 #' Theoretical maximum for degree centralization
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes`, `mode` and `loops` are all given.
+#' @param graph The input graph. It can also be `NULL` if `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is given.
-#' @param mode This is the same as the `mode` argument of
-#'   `degree()`.
+#' @param mode This is the same as the `mode` argument of `degree()`. Ignored
+#'   if `graph` is given and the graph is undirected.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
@@ -287,7 +287,7 @@ centr_degree_tmax <- function(graph = NULL,
     lifecycle::deprecate_warn(
       when = "2.0.0",
       what = "centr_degree_tmax(loops = 'must be explicit')",
-      details = "Default value (`FALSE`) will be dropped in next release, add an explicit value for the loops argument."
+      details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
     loops <- FALSE
   }
@@ -358,12 +358,13 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
-#'   `nodes` is given.
+#' @param graph The input graph. It can also be `NULL` if
+#'   `nodes` and `directed` are both given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed logical scalar, whether to use directed shortest paths
-#'   for calculating betweenness.
+#' @param directed Logical scalar, whether to use directed shortest paths
+#'   for calculating betweenness. Ignored if an undirected graph was
+#'   given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
@@ -378,6 +379,7 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
+#' @cdocs igraph_centralization_betweenness_tmax
 centr_betw_tmax <- centralization_betweenness_tmax_impl
 
 #' Centralize a graph according to the closeness of vertices
@@ -408,18 +410,19 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
+#' @cdocs igraph_centralization_closeness
 centr_clo <- centralization_closeness_impl
 
 #' Theoretical maximum for closeness centralization
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be `NULL`, if
+#' @param graph The input graph. It can also be `NULL` if
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
 #' @param mode This is the same as the `mode` argument of
-#'   `closeness()`.
+#'   `closeness()`. Ignored if an undirected graph is given.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
@@ -434,6 +437,7 @@ centr_clo <- centralization_closeness_impl
 #' centr_clo(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
+#' @cdocs igraph_centralization_closeness_tmax
 centr_clo_tmax <- centralization_closeness_tmax_impl
 
 #' Centralize a graph according to the eigenvector centrality of vertices
@@ -443,8 +447,8 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
-#' @param scale Whether to rescale the eigenvector centrality scores, such that
-#'   the maximum score is one.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
+#' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
 #' @param normalized Logical scalar. Whether to normalize the graph level
@@ -475,9 +479,32 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-centr_eigen <- centralization_eigenvector_centrality_impl
+#' @cdocs igraph_centralization_eigenvector_centrality
+centr_eigen <- function(graph,
+                        directed = FALSE,
+                        scale = deprecated(),
+                        options = arpack_defaults(),
+                        normalized = TRUE) {
 
-#' Theoretical maximum for betweenness centralization
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "centr_eigen(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
+
+  centralization_eigenvector_centrality_impl(
+    graph = graph,
+    directed = directed,
+    options = options,
+    normalized = normalized,
+    scale = TRUE
+  )
+}
+
+#' Theoretical maximum for eigenvector centralization
 #'
 #' See [centralize()] for a summary of graph centralization.
 #'
@@ -485,13 +512,13 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param directed logical scalar, whether to use directed shortest paths
-#'   for calculating betweenness.
-#' @param scale Whether to rescale the eigenvector centrality scores,
-#'   such that the maximum score is one.
+#' @param directed logical scalar, whether to consider edge directions
+#'   during the calculation. Ignored in undirected graphs.
+#' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
+#' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
-#'   betweenness centrality score for graphs with given order and other
-#'   parameters.
+#'   eigenvector centrality score for graphs with given vertex count and
+#'   other parameters.
 #'
 #' @family centralization related
 #'
@@ -503,4 +530,25 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
-centr_eigen_tmax <- centralization_eigenvector_centrality_tmax_impl
+#' @cdocs igraph_centralization_eigenvector_centrality_tmax
+centr_eigen_tmax <- function(graph = NULL,
+                             nodes = 0,
+                             directed = FALSE,
+                             scale = deprecated()) {
+
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "centr_eigen_tmax(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
+
+  centralization_eigenvector_centrality_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    directed = directed,
+    scale = TRUE
+  )
+}

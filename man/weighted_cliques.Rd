@@ -67,6 +67,7 @@ weighted_clique_num(g)
 \seealso{
 Other cliques: 
 \code{\link{cliques}()},
+\code{\link{is_complete}()},
 \code{\link{ivs}()}
 }
 \author{
@@ -75,3 +76,5 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_cliques}{\code{weighted_cliques()}}.}
+

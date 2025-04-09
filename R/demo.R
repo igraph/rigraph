@@ -1,4 +1,3 @@
-
 #' Run igraph demos, step by step
 #'
 #' @description
@@ -59,9 +58,9 @@ igraphdemo <- function(which) { # nocov start
 #' @examples
 #'
 #' igraph_demo()
-#' if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
-#'   igraph_demo("centrality")
-#' }
+#'
+#' @examplesIf interactive() && rlang::is_installed("tcltk")
+#' igraph_demo("centrality")
 #'
 igraph_demo <- function(which) {
   if (missing(which)) {
@@ -134,7 +133,7 @@ igraph_demo <- function(which) {
     ch <- grep("^[ ]*###", demolines)
     ch <- c(ch, length(demolines) + 1)
     if (length(ch) == 1) {
-      warning("Demo source file does not contain chunks")
+      cli::cli_warn("Demo source file does not contain chunks.")
     } else {
       demolines <- demolines[ch[1]:length(demolines)]
       ch <- grep("^[ ]*###", demolines)

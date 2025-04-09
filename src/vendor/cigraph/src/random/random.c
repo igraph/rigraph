@@ -275,7 +275,7 @@ igraph_error_t igraph_rng_seed(igraph_rng_t *rng, igraph_uint_t seed) {
  *
  * Time complexity: O(1).
  */
-IGRAPH_EXPORT igraph_integer_t igraph_rng_bits(const igraph_rng_t* rng) {
+igraph_integer_t igraph_rng_bits(const igraph_rng_t* rng) {
     return rng->type->bits;
 }
 
@@ -547,18 +547,45 @@ static igraph_uint_t igraph_i_rng_get_uint_bounded(igraph_rng_t *rng, igraph_uin
 #endif
 }
 
+
+/**
+ * \function igraph_rng_get_bool
+ * \brief Generate a random boolean.
+ *
+ * Use this function only when a single random boolean, i.e. a single bit
+ * is needed at a time. It is not efficient for generating multiple bits.
+ *
+ * \param rng Pointer to the RNG to use for the generation. Use \ref
+ *        igraph_rng_default() here to use the default igraph RNG.
+ * \return The generated bit, as a truth value.
+ */
+
+igraph_bool_t igraph_rng_get_bool(igraph_rng_t *rng) {
+    const igraph_rng_type_t *type = rng->type;
+    const igraph_integer_t rng_bitwidth = igraph_rng_bits(rng);
+    /* Keep the highest bit as RNGs sometimes tend to have lower entropy in
+     * low bits than in high bits.
+     *
+     * Ensure that the return value is stricly 0 or 1 even if igraph_bool_t is
+     * defined to something else than a native bool.
+     */
+    return (type->get(rng->state) >> (rng_bitwidth - 1)) & (igraph_uint_t)1;
+}
+
 /**
  * \function igraph_rng_get_integer
  * \brief Generate an integer random number from an interval.
+ *
+ * Generate uniformly distributed integers from the interval <code>[l, h]</code>.
  *
  * \param rng Pointer to the RNG to use for the generation. Use \ref
  *        igraph_rng_default() here to use the default igraph RNG.
  * \param l Lower limit, inclusive, it can be negative as well.
  * \param h Upper limit, inclusive, it can be negative as well, but it
- *        should be at least <code>l</code>.
+ *        must be at least <code>l</code>.
  * \return The generated random integer.
  *
- * Time complexity: O(log2(h-l) / bits) where bits is the value of
+ * Time complexity: O(log2(h-l+1) / bits) where bits is the value of
  * \ref igraph_rng_bits(rng).
  */
 
@@ -2215,7 +2242,6 @@ igraph_error_t igraph_rng_get_dirichlet(igraph_rng_t *rng,
                              igraph_vector_t *result) {
 
     igraph_integer_t len = igraph_vector_size(alpha);
-    igraph_integer_t j;
     igraph_real_t sum = 0.0;
 
     if (len < 2) {
@@ -2229,17 +2255,13 @@ igraph_error_t igraph_rng_get_dirichlet(igraph_rng_t *rng,
 
     IGRAPH_CHECK(igraph_vector_resize(result, len));
 
-    RNG_BEGIN();
-
-    for (j = 0; j < len; j++) {
-        VECTOR(*result)[j] = igraph_rng_get_gamma(rng, VECTOR(*alpha)[j], 1.0);
-        sum += VECTOR(*result)[j];
+    for (igraph_integer_t i = 0; i < len; i++) {
+        VECTOR(*result)[i] = igraph_rng_get_gamma(rng, VECTOR(*alpha)[i], 1.0);
+        sum += VECTOR(*result)[i];
     }
-    for (j = 0; j < len; j++) {
-        VECTOR(*result)[j] /= sum;
+    for (igraph_integer_t i = 0; i < len; i++) {
+        VECTOR(*result)[i] /= sum;
     }
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 }

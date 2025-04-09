@@ -1,4 +1,3 @@
-
 ## IGraph library.
 ## Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 ## 334 Harvard street, Cambridge, MA 02139 USA
@@ -53,6 +52,60 @@
 #               query an edge attribute
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
+
+get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
+  # If i or j is NULL, assume all nodes
+  # if not NULL make sure to handle duplicates correctly
+  if (missing(i)) {
+    i_seq <- seq_len(vcount(x))
+    has_i <- FALSE
+  } else {
+    i_seq <- i
+    has_i <- TRUE
+  }
+  if (missing(j)) {
+    j_seq <- seq_len(vcount(x))
+    has_j <- FALSE
+  } else {
+    j_seq <- j
+    has_j <- TRUE
+  }
+
+  adj <- adjacent_vertices(x, i_seq, mode = "out")
+  i_degree <- map_int(adj, length)
+
+  from_id <- rep(i_seq, i_degree)
+  to_id <- unlist(adj)
+
+  edge_list <- data.frame(from = as.integer(from_id), to = as.integer(to_id))
+  if (has_j) {
+    edge_list <- edge_list[edge_list$to %in% j_seq, ]
+  }
+
+  row_indices <- edge_list[[1]]
+  col_indices <- edge_list[[2]]
+
+  values <- if (is.null(attr)) {
+    1
+  } else {
+    valid_edges <- get_edge_ids(x, edge_list)
+    edge_attr(x, attr, valid_edges)
+  }
+
+  res <- Matrix::sparseMatrix(
+    i = if (has_i) match(row_indices, i_seq) else row_indices,
+    j = if (has_j) match(col_indices, j_seq) else col_indices,
+    x = values,
+    dims = c(length(i_seq), length(j_seq))
+  )
+
+  if ("name" %in% vertex_attr_names(x) && !is.null(dim(res))) {
+    rownames(res) <- vertex_attr(x, "name", i_seq)
+    colnames(res) <- vertex_attr(x, "name", j_seq)
+  }
+
+  res
+}
 
 
 #' Query and manipulate a graph as it were an adjacency matrix
@@ -152,38 +205,37 @@
 #'
 #' @method [ igraph
 #' @export
-`[.igraph` <- function(x, i, j, ..., from, to,
-                       sparse = igraph_opt("sparsematrices"),
-                       edges = FALSE, drop = TRUE,
-                       attr = if (is_weighted(x)) "weight" else NULL) {
-  ## TODO: make it faster, don't need the whole matrix usually
-
+`[.igraph` <- function(
+    x, i, j, ..., from, to,
+    sparse = igraph_opt("sparsematrices"),
+    edges = FALSE, drop = TRUE,
+    attr = if (is_weighted(x)) "weight" else NULL) {
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
-    stop("Cannot give 'from'/'to' together with regular indices")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
     (missing(from) && !missing(to))) {
-    stop("Cannot give 'from'/'to' without the other")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (!missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
-      stop("'from' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
     if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
-      stop("'to' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {
-      stop("'from' and 'to' must have the same length")
+      cli::cli_abort("{.arg from} and {.arg to} must have the same length")
     }
   }
 
   ##################################################################
 
   if (!missing(from)) {
-    res <- get.edge.ids(x, rbind(from, to), error = FALSE)
+    res <- get_edge_ids(x, data.frame(from, to), error = FALSE)
     if (edges) {
       ## nop
     } else if (!is.null(attr)) {
@@ -193,31 +245,49 @@
     } else {
       res <- as.logical(res) + 0
     }
-    res
-  } else if (missing(i) && missing(j)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)
+    return(res)
+  }
+
+  if (missing(i) && missing(j)) {
+    return(as_adjacency_matrix(x, sparse = sparse, attr = attr))
+  }
+
+  # convert logical, character or negative i/j to proper vertex ids
+  # also check if any vertex is duplicated and record a mapping
+  i_has_dupes <- FALSE
+  j_has_dupes <- FALSE
+
+  if (!missing(i)) {
+    i <- as_igraph_vs(x, i)
+    if (anyDuplicated(i)) {
+      i_has_dupes <- TRUE
+      i_dupl <- i
+      i <- unique(i)
+      i_map <- match(i_dupl, i)
     }
-  } else if (missing(j)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, , drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, , drop = drop]
+  }
+  if (!missing(j)) {
+    j <- as_igraph_vs(x, j)
+    if (anyDuplicated(j)) {
+      j_has_dupes <- TRUE
+      j_dupl <- j
+      j <- unique(j)
+      j_map <- match(j_dupl, j)
     }
-  } else if (missing(i)) {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[, j, drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[, j, drop = drop]
-    }
+  }
+
+  sub_adjmat <- get_adjacency_submatrix(x, i = i, j = j, attr = attr)
+  if (i_has_dupes) {
+    sub_adjmat <- sub_adjmat[i_map, , drop = FALSE]
+  }
+  if (j_has_dupes) {
+    sub_adjmat <- sub_adjmat[, j_map, drop = FALSE]
+  }
+
+  if (!sparse) {
+    as.matrix(sub_adjmat[, , drop = drop])
   } else {
-    if (missing(edges)) {
-      as_adj(x, sparse = sparse, attr = attr)[i, j, drop = drop]
-    } else {
-      as_adj(x, sparse = sparse, attr = attr, edges = edges)[i, j, drop = drop]
-    }
+    sub_adjmat[, , drop = drop]
   }
 }
 
@@ -282,8 +352,8 @@
                         edges = FALSE, exact = TRUE) {
   getfun <- if (edges) as_adj_edge_list else as_adj_list
 
-  if (!missing(i) && !missing(from)) stop("Cannot give both 'i' and 'from'")
-  if (!missing(j) && !missing(to)) stop("Cannot give both 'j' and 'to'")
+  if (!missing(i) && !missing(from)) cli::cli_abort("Cannot use both {.arg i} and {.arg from}")
+  if (!missing(j) && !missing(to)) cli::cli_abort("Cannot use both {.arg j} and {.arg to}")
   if (missing(i) && !missing(from)) i <- from
   if (missing(j) && !missing(to)) j <- to
 
@@ -329,40 +399,53 @@ length.igraph <- function(x) {
   vcount(x)
 }
 
+expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
+  grid <- vctrs::vec_expand_grid(i = i, j = j)
+  if (!directed) {
+    grid <- vctrs::vec_unique(data.frame(
+      i = pmin(grid$i, grid$j),
+      j = pmax(grid$i, grid$j)
+    ))
+  }
+  if (!loops) {
+    grid <- grid[grid[, 1] != grid[, 2], ]
+  }
+  grid
+}
+
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
 `[<-.igraph` <- function(x, i, j, ..., from, to,
                          attr = if (is_weighted(x)) "weight" else NULL,
+                         loops = FALSE,
                          value) {
-  ## TODO: rewrite this in C to make it faster
-
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
     (!missing(i) || !missing(j))) {
-    stop("Cannot give 'from'/'to' together with regular indices")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
     (missing(from) && !missing(to))) {
-    stop("Cannot give 'from'/'to' without the other")
+    cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (is.null(attr) &&
     (!is.null(value) && !is.numeric(value) && !is.logical(value))) {
-    stop("New value should be NULL, numeric or logical")
+    cli::cli_abort("New value should be NULL, numeric or logical")
   }
   if (is.null(attr) && !is.null(value) && length(value) != 1) {
-    stop("Logical or numeric value must be of length 1")
+    cli::cli_abort("Logical or numeric value must be of length 1")
   }
   if (!missing(from)) {
     if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
-      stop("'from' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
     if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
-      stop("'to' must be a numeric or character vector without NAs")
+      cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {
-      stop("'from' and 'to' must have the same length")
+      cli::cli_abort("{.arg from} and {.arg to} must have the same length")
     }
   }
 
@@ -373,16 +456,16 @@ length.igraph <- function(x) {
       (is.logical(value) && !value) ||
       (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
-      todel <- x[from = from, to = to, ..., edges = TRUE]
+      todel <- get_edge_ids(x, c(rbind(from, to)))
       x <- delete_edges(x, todel)
     } else {
       ## Addition or update of an attribute (or both)
-      ids <- x[from = from, to = to, ..., edges = TRUE]
+      ids <- get_edge_ids(x, c(rbind(from, to)))
       if (any(ids == 0)) {
         x <- add_edges(x, rbind(from[ids == 0], to[ids == 0]))
       }
       if (!is.null(attr)) {
-        ids <- x[from = from, to = to, ..., edges = TRUE]
+        ids <- get_edge_ids(x, c(rbind(from, to)))
         x <- set_edge_attr(x, attr, ids, value = value)
       }
     }
@@ -391,13 +474,15 @@ length.igraph <- function(x) {
     (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
-      todel <- unlist(x[[, , ..., edges = TRUE]])
+      todel <- seq_len(ecount(x))
     } else if (missing(j)) {
-      todel <- unlist(x[[i, , ..., edges = TRUE]])
+      todel <- unlist(incident_edges(x, v = i, mode = "out"))
     } else if (missing(i)) {
-      todel <- unlist(x[[, j, ..., edges = TRUE]])
+      todel <- unlist(incident_edges(x, v = j, mode = "in"))
     } else {
-      todel <- unlist(x[[i, j, ..., edges = TRUE]])
+      edge_pairs <- expand.grid(i, j)
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      todel <- edge_ids[edge_ids != 0]
     }
     x <- delete_edges(x, todel)
   } else {
@@ -405,23 +490,19 @@ length.igraph <- function(x) {
     i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
     j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
-      ## Existing edges, and their endpoints
-      exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)
-      exv <- lapply(x[[i, j, ...]], as.vector)
-      toadd <- unlist(lapply(seq_along(exv), function(idx) {
-        to <- setdiff(j, exv[[idx]])
-        if (length(to != 0)) {
-          rbind(i[idx], setdiff(j, exv[[idx]]))
-        } else {
-          numeric()
-        }
-      }))
-      ## Do the changes
+      edge_pairs <- expand.grid.unordered(i, j, loops = loops, directed = is_directed(x))
+
+      edge_ids <- get_edge_ids(x, c(rbind(edge_pairs[, 1], edge_pairs[, 2])))
+      toadd <- c(rbind(edge_pairs[edge_ids == 0, 1], edge_pairs[edge_ids == 0, 2]))
+
       if (is.null(attr)) {
+        if (value > 1) {
+          cli::cli_abort("{.arg value} greater than one but graph is not weighted and {.arg attr} was not specified.")
+        }
         x <- add_edges(x, toadd)
       } else {
         x <- add_edges(x, toadd, attr = structure(list(value), names = attr))
-        toupdate <- unlist(exe)
+        toupdate <- edge_ids[edge_ids != 0]
         x <- set_edge_attr(x, attr, toupdate, value)
       }
     }

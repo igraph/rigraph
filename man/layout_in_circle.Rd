@@ -29,7 +29,7 @@ If you want to order the vertices differently, then permute them using the
 \code{\link[=permute]{permute()}} function.
 }
 \examples{
-\dontshow{if (igraph:::has_glpk()) withAutoprint(\{ # examplesIf}
+\dontshow{if (igraph:::has_glpk() && rlang::is_installed("igraphdata")) withAutoprint(\{ # examplesIf}
 
 ## Place vertices on a circle, order them according to their
 ## community

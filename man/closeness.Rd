@@ -43,7 +43,7 @@ Numeric vector with the closeness values of all the vertices in
 \code{v}.
 }
 \description{
-Closeness centrality measures how many steps is required to access every other
+Closeness centrality measures how many steps are required to access every other
 vertex from a given vertex.
 }
 \details{
@@ -83,11 +83,12 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
+\code{\link{hits_scores}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},

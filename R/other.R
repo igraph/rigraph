@@ -1,4 +1,3 @@
-
 #' Running mean of a time series
 #'
 #' @description
@@ -92,7 +91,7 @@ running_mean <- function(v, binwidth) {
   v <- as.numeric(v)
   binwidth <- as.numeric(binwidth)
   if (length(v) < binwidth) {
-    stop("Vector too short for this binwidth.")
+    cli::cli_abort("Vector too short for this binwidth.")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -128,7 +127,7 @@ running_mean <- function(v, binwidth) {
 #'
 sample_seq <- function(low, high, length) {
   if (length > high - low + 1) {
-    stop("length too big for this interval")
+    cli::cli_abort("length too big for this interval")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -154,7 +153,7 @@ sample_seq <- function(low, high, length) {
 #' @return A logical vector representing the resolved vertex type for each
 #'   vertex in the graph
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @keywords internal
+#' @dev
 #'
 handle_vertex_type_arg <- function(types, graph, required = T) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
@@ -162,15 +161,15 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   }
   if (!is.null(types)) {
     if (!is.logical(types)) {
-      warning("vertex types converted to logical")
+      cli::cli_warn("vertex types converted to logical.")
     }
     types <- as.logical(types)
     if (any(is.na(types))) {
-      stop("`NA' is not allowed in vertex types")
+      cli::cli_abort("`NA' is not allowed in vertex types")
     }
   }
   if (is.null(types) && required) {
-    stop("Not a bipartite graph, supply `types' argument or add a vertex attribute named `type'")
+    cli::cli_abort("Not a bipartite graph, supply {.arg types} argument or add a vertex attribute named {.arg type}.")
   }
   return(types)
 }
@@ -208,4 +207,5 @@ igraph.i.spMatrix <- function(M) {
 #' convex_hull(M)
 #' @family other
 #' @export
+#' @cdocs igraph_convex_hull
 convex_hull <- convex_hull_impl

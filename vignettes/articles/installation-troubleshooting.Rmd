@@ -31,7 +31,7 @@ igraph  1.2.7  1.2.8              TRUE
 Do you want to install from sources the package which needs compilation? (Yes/no/cancel) no
 ```
 
-CRAN provides Windows and macOS binaries only for the last two minor releases of R (e.g. 4.3 and 4.2), but not for older ones (e.g. 4.1). Make sure that you are using one of these supported R versions. Refer to https://r-project.org/ to find out what the latest R version is at the moment.
+CRAN provides Windows and macOS binaries only for the last two minor releases of R (e.g. 4.4 and 4.3), but not for older ones (e.g. 4.2). Make sure that you are using one of these supported R versions. Refer to https://r-project.org/ to find out what the latest R version is at the moment.
 
 Note that the pre-compiled binaries on CRAN are only compatible with the R distribution [provided by CRAN itself](https://www.r-project.org/). If you obtained R from different sources, such as Homebrew or MacPorts on macOS, you will not be able to use these, and the only way to install packages will be to compile them from sources.
 
@@ -39,10 +39,9 @@ Note that the pre-compiled binaries on CRAN are only compatible with the R distr
 
 If you decide to try to compile from sources anyway, basic requirements are listed below. It is assumed that you are comfortable compiling software from sources and resolving basic issues as they arise. Otherwise, please use the binaries.
 
- - Make sure you have a compatible toolchain installed, including a Fortran compiler. On Linux, make sure you have `gfortran` installed. For Windows, you will need Rtools.
-    - Instructions to install [Rtools for R-4.0.0 to R-4.1.3](https://cran.r-project.org/bin/windows/Rtools/rtools40.html), see in particular the "Using pacman" link. You will find a [copyable pacman command for installing all dependencies](https://github.com/igraph/rigraph/#installation).
-    - Instructions to install [Rtools for R4.2.x](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html) and [Rtools for R4.3.x](https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html).
- - Make sure you have the GLPK C library installed. This is not the same as the Rglpk R package. Instructions for installing libraries for Rtools4 on Windows are [here](https://cran.r-project.org/bin/windows/Rtools/)
+ - Make sure you have a compatible toolchain installed, including a Fortran compiler. On macOS, make sure you have Xcode and [`gfortran` from here](https://cran.r-project.org/bin/macosx/tools/). For Windows, you will need Rtools.
+ - On Windows, see the [instructions for installing Rtools for your version of R](https://cran.r-project.org/bin/windows/Rtools/). Check the "Using pacman" link in the [Rtools 4.0 instructions](https://cran.r-project.org/bin/windows/Rtools/rtools40.html). You will find a [copyable pacman command for installing all dependencies](https://github.com/igraph/rigraph/#installation).
+ - On Windows, make sure you have the GLPK C library installed. This is not the same as the Rglpk R package. Instructions for installing libraries for Rtools4 on Windows are [here](https://cran.r-project.org/bin/windows/Rtools/)
 
 ## Cannot compile igraph from sources on Linux
 
@@ -79,5 +78,4 @@ This may happen when a binary version of igraph is installed from https://packag
 
 ## GLPK is not available, Unimplemented function call
 
-This error occurs when calling an igraph function that relies on GLPK, but igraph was compiled without GLPK support. Please refer to ["Cannot compile igraph from sources on Linux"](#cannot-compile-igraph-from-sources-on-linux) for instructions on compiling igraph with GLPK support.
-
+This error occurs when calling an igraph function that relies on GLPK, but igraph was compiled without GLPK support. This cannot happen in igraph 2.0.3 and later. If you are compiling an earlier version, please refer to ["Cannot compile igraph from sources on Linux"](#cannot-compile-igraph-from-sources-on-linux) for instructions on compiling igraph with GLPK support.

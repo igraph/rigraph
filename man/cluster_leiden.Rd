@@ -8,8 +8,10 @@ van Eck & Waltman.}
 cluster_leiden(
   graph,
   objective_function = c("CPM", "modularity"),
+  ...,
   weights = NULL,
-  resolution_parameter = 1,
+  resolution = 1,
+  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
@@ -17,10 +19,12 @@ cluster_leiden(
 )
 }
 \arguments{
-\item{graph}{The input graph, only undirected graphs are supported.}
+\item{graph}{The input graph. It must be undirected.}
 
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
@@ -30,9 +34,11 @@ weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 
-\item{resolution_parameter}{The resolution parameter to use. Higher
+\item{resolution}{The resolution parameter to use. Higher
 resolutions lead to more smaller communities, while lower resolutions lead
 to fewer larger communities.}
+
+\item{resolution_parameter}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}} Use \code{resolution} instead.}
 
 \item{beta}{Parameter affecting the randomness in the Leiden algorithm.
 This affects only the refinement step of the algorithm.}
@@ -105,7 +111,7 @@ g <- make_graph("Zachary")
 r <- quantile(strength(g))[2] / (gorder(g) - 1)
 # Set seed for sake of reproducibility
 set.seed(1)
-ldc <- cluster_leiden(g, resolution_parameter = r)
+ldc <- cluster_leiden(g, resolution = r)
 print(ldc)
 plot(ldc, g)
 }

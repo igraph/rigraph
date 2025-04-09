@@ -24,6 +24,7 @@ Use this palette, if you have such a quantity to mark with vertex
 colors.
 }
 \examples{
+\dontshow{if (rlang::is_installed(c("igraphdata", "scales"))) withAutoprint(\{ # examplesIf}
 library(igraphdata)
 data(foodwebs)
 fw <- foodwebs[[1]] \%>\%
@@ -43,6 +44,7 @@ karate <- karate \%>\%
 
 V(karate)$color <- scales::dscale(degree(karate) \%>\% cut(5), diverging_pal)
 plot(karate)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other palettes: 

@@ -86,7 +86,7 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
 \code{\link[=permute]{permute()}} to apply a permutation to a graph,
-\code{\link[=graph.isomorphic]{graph.isomorphic()}} for deciding graph isomorphism, possibly
+\code{\link[=isomorphic]{isomorphic()}} for deciding graph isomorphism, possibly
 based on canonical labels.
 
 Other graph isomorphism: 
@@ -105,3 +105,5 @@ Tommi Junttila for BLISS, Gabor Csardi
 }
 \concept{graph isomorphism}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_canonical_permutation}{\code{canonical_permutation()}}.}
+

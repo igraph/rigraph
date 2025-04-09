@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_chordal_ring}
 \alias{make_chordal_ring}
-\alias{graph.extended.chordal.ring}
 \alias{chordal_ring}
 \title{Create an extended chordal ring graph}
 \usage{
@@ -47,6 +46,7 @@ Other deterministic constructors:
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},

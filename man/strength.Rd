@@ -57,12 +57,13 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{authority_score}()},
 \code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
+\code{\link{hits_scores}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},
@@ -73,3 +74,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{centrality}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength}{\code{strength()}}.}
+

@@ -1,4 +1,3 @@
-
 #' Chordality of a graph
 #'
 #' @description

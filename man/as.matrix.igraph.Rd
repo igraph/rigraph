@@ -47,11 +47,11 @@ as.matrix(g, "adjacency", sparse = FALSE, attr = "weight")
 }
 \seealso{
 Other conversion: 
-\code{\link{as.directed}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_adjacency_matrix}()},
 \code{\link{as_biadjacency_matrix}()},
 \code{\link{as_data_frame}()},
+\code{\link{as_directed}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
 \code{\link{as_long_data_frame}()},

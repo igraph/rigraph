@@ -1,4 +1,3 @@
-
 #' Intersection of two or more sets
 #'
 #' @description
@@ -172,10 +171,11 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' have completely disjoint graphs. Then a simple union is created. This
 #' function can also be used via the `%du%` operator.
 #'
-#' `graph.disjont.union` handles graph, vertex and edge attributes.  In
-#' particular, it merges vertex and edge attributes using the basic `c()`
+#' `disjoint_union()` handles graph, vertex and edge attributes.  In
+#' particular, it merges vertex and edge attributes using the [vctrs::vec_c()]
 #' function. For graphs that lack some vertex/edge attribute, the corresponding
-#' values in the new graph are set to `NA`. Graph attributes are simply
+#' values in the new graph are set to a missing value (`NA` for scalar attributes,
+#' `NULL` for list attributes). Graph attributes are simply
 #' copied to the result. If this would result a name clash, then they are
 #' renamed by adding suffixes: _1, _2, etc.
 #'
@@ -236,7 +236,7 @@ disjoint_union <- function(...) {
   vertex.attributes(res) <- attr
 
   if ("name" %in% names(attr) && any(duplicated(attr$name))) {
-    warning("Duplicate vertex names in disjoint union")
+    cli::cli_warn("Duplicate vertex names in disjoint union.")
   }
 
   ## Edge attributes
@@ -249,13 +249,13 @@ disjoint_union <- function(...) {
     noattr <- setdiff(names(attr), names(ea)) # existint and missing
     newattr <- setdiff(names(ea), names(attr)) # new
     for (a in seq_along(exattr)) {
-      attr[[exattr[a]]] <- c(attr[[exattr[a]]], ea[[exattr[a]]])
+      attr[[exattr[a]]] <- vctrs::vec_c(attr[[exattr[a]]], ea[[exattr[a]]])
     }
     for (a in seq_along(noattr)) {
-      attr[[noattr[a]]] <- c(attr[[noattr[a]]], rep(NA, ec[i]))
+      attr[[noattr[a]]] <- vctrs::vec_c(attr[[noattr[a]]], vctrs::unspecified(ec[[i]]))
     }
     for (a in seq_along(newattr)) {
-      attr[[newattr[a]]] <- c(rep(NA, cumec[i]), ea[[newattr[a]]])
+      attr[[newattr[a]]] <- vctrs::vec_c(vctrs::unspecified(cumec[[i]]), ea[[newattr[a]]])
     }
   }
   edge.attributes(res) <- attr
@@ -277,16 +277,16 @@ disjoint_union <- function(...) {
   }))
   lapply(graphs, ensure_igraph)
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`bynam' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- sum(sapply(graphs, is_named))
   if (byname == "auto") {
     byname <- all(sapply(graphs, is_named))
     if (nonamed != 0 && nonamed != length(graphs)) {
-      warning("Some, but not all graphs are named, not using vertex names")
+      cli::cli_warn("Some, but not all graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != length(graphs)) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   edgemaps <- length(unlist(lapply(graphs, edge_attr_names))) != 0
@@ -613,16 +613,16 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   ensure_igraph(big)
   ensure_igraph(small)
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`bynam' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- is_named(big) + is_named(small)
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
-      warning("One, but not both graphs are named, not using vertex names")
+      cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   if (byname) {
@@ -685,7 +685,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' gc <- complementer(g)
 #' gu <- union(g, gc)
 #' gu
-#' graph.isomorphic(gu, make_full_graph(vcount(g)))
+#' isomorphic(gu, make_full_graph(vcount(g)))
 #'
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
@@ -762,16 +762,16 @@ compose <- function(g1, g2, byname = "auto") {
   ensure_igraph(g2)
 
   if (byname != "auto" && !is.logical(byname)) {
-    stop("`byname' must be \"auto\", or logical")
+    cli::cli_abort("{.arg bynam} must be \"auto\", or \"logical\".")
   }
   nonamed <- is_named(g1) + is_named(g2)
   if (byname == "auto") {
     byname <- nonamed == 2
     if (nonamed == 1) {
-      warning("One, but not both graphs are named, not using vertex names")
+      cli::cli_warn("One, but not both graphs are named, not using vertex names.")
     }
   } else if (byname && nonamed != 2) {
-    stop("Some graphs are not named")
+    cli::cli_abort("Some graphs are not named.")
   }
 
   if (byname) {
@@ -1115,7 +1115,7 @@ path <- function(...) {
     ## Adding named vertices
     res <- add_vertices(e1, length(e2), name = e2)
   } else {
-    stop("Cannot add unknown type to igraph graph")
+    cli::cli_abort("Cannot add {.obj_type_friendly type} to igraph graph.")
   }
   res
 }
@@ -1171,7 +1171,7 @@ path <- function(...) {
 #' @export
 `-.igraph` <- function(e1, e2) {
   if (missing(e2)) {
-    stop("Non-numeric argument to negation operator")
+    cli::cli_abort("Non-numeric argument to negation operator")
   }
   if (is_igraph(e2)) {
     res <- difference(e1, e2)
@@ -1195,7 +1195,7 @@ path <- function(...) {
   } else if (is.numeric(e2) || is.character(e2)) {
     res <- delete_vertices(e1, e2)
   } else {
-    stop("Cannot substract unknown type from igraph graph")
+    cli::cli_abort("Cannot substract {.obj_type_friendly type} from igraph graph.")
   }
   res
 }
@@ -1220,7 +1220,7 @@ path <- function(...) {
 #' @examples
 #' rings <- make_ring(5) * 5
 rep.igraph <- function(x, n, mark = TRUE, ...) {
-  if (n < 0) stop("Number of replications must be positive")
+  if (n < 0) cli::cli_abort("Number of replications must be positive")
 
   res <- do_call(disjoint_union,
     .args =
@@ -1245,7 +1245,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
   if (is.numeric(n) && length(n) == 1) {
     rep.igraph(x, n)
   } else {
-    stop("Cannot multiply igraph graph with this type")
+    cli::cli_abort("Cannot multiply igraph graph with {.obj_type_friendly type}.")
   }
 }
 
@@ -1263,10 +1263,11 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' @examples
 #'
-#' g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
+#' g <- make_graph(~ 1 - +2, 2 - +3, 3 - +4)
 #' reverse_edges(g, 2)
 #' @family functions for manipulating graph structure
 #' @export
+#' @cdocs igraph_reverse_edges
 reverse_edges <- reverse_edges_impl
 
 #' @rdname reverse_edges

@@ -9,6 +9,11 @@
 #' @importFrom rlang inject
 #' @importFrom rlang warn
 #' @importFrom rlang %||%
+#' @importFrom rlang as_function
+#' @importFrom rlang global_env
+#' @importFrom rlang set_names
+#' @importFrom rlang is_logical
+#' @importFrom rlang is_true
 #' @import rlang
 ## usethis namespace: end
 NULL
@@ -90,7 +95,7 @@ NULL
 #'   To create small graphs with a given structure probably the
 #'   [graph_from_literal()] function is easiest. It uses R's formula
 #'   interface, its manual page contains many examples. Another option is
-#'   [graph()], which takes numeric vertex ids directly.
+#'   [make_graph()], which takes numeric vertex ids directly.
 #'   [graph_from_atlas()] creates graph from the Graph Atlas,
 #'   [make_graph()] can create some special graphs.
 #'

@@ -40,7 +40,7 @@ to be a forest.
 }
 \examples{
 
-g <- make_tree(3) + make_tree(5,3)
+g <- make_tree(3) + make_tree(5, 3)
 is_forest(g)
 is_forest(g, details = TRUE)
 
@@ -54,3 +54,5 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}.}
+

@@ -14,7 +14,7 @@ cluster_walktrap(
 )
 }
 \arguments{
-\item{graph}{The input graph, edge directions are ignored in directed
+\item{graph}{The input graph. Edge directions are ignored in directed
 graphs.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,

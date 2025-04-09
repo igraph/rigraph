@@ -1,4 +1,3 @@
-
 #' Predict edges based on a hierarchical random graph model
 #'
 #' @description
@@ -254,6 +253,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     vertices. The order is the same as in the `parents` vector.}
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_hrg_consensus
 consensus_tree <- hrg_consensus_impl
 
 
@@ -271,6 +271,7 @@ consensus_tree <- hrg_consensus_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_hrg_create
 hrg <- hrg_create_impl
 
 
@@ -284,7 +285,13 @@ hrg <- hrg_create_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
+#' @cdocs igraph_from_hrg_dendrogram
 hrg_tree <- function(hrg) {
+
+  if (!inherits(hrg, "igraphHRG")) {
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+  }
+
   out <- from_hrg_dendrogram_impl(hrg)
 
   g <- out$graph
@@ -302,8 +309,15 @@ hrg_tree <- function(hrg) {
 #'
 #' @family hierarchical random graph functions
 #' @export
-sample_hrg <- hrg_game_impl
+#' @cdocs igraph_hrg_game
+sample_hrg <- function(hrg) {
 
+  if (!inherits(hrg, "igraphHRG")) {
+    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+  }
+
+  hrg_game_impl(hrg)
+}
 #' Predict edges based on a hierarchical random graph model
 #'
 #' `predict_edges()` uses a hierarchical random graph model to predict
@@ -1011,4 +1025,3 @@ B-6  p=1  B-2 7
 B-7  p=1  B-5 2
 
 "
-

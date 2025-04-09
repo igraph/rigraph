@@ -57,9 +57,11 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -87,3 +89,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_dot_product_game}{\code{dot_product_game()}}.}
+

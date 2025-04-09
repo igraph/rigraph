@@ -1,17 +1,16 @@
-
 #' Independent vertex sets
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.independent.vertex.sets()` was renamed to `maximal_ivs()` to create a more
+#' `maximal.independent.vertex.sets()` was renamed to `max_ivs()` to create a more
 #' consistent API.
-#' @inheritParams maximal_ivs
+#' @inheritParams max_ivs
 #' @keywords internal
 #' @export
 maximal.independent.vertex.sets <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "maximal_ivs()")
-  maximal_ivs(graph = graph)
+  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "max_ivs()")
+  max_ivs(graph = graph)
 } # nocov end
 
 #' Functions to find cliques, i.e. complete subgraphs in a graph
@@ -164,6 +163,8 @@ clique.number <- function(graph) { # nocov start
 #' `clique_size_counts()` returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
+#' `is_clique()` tests whether all pairs within a vertex set are connected.
+#'
 #' @inheritParams weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
@@ -205,10 +206,15 @@ clique.number <- function(graph) { # nocov start
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
+#'
+#' # Check that all returned vertex sets are indeed cliques
+#' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
+#' @cdocs igraph_cliques
 cliques <- cliques_impl
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_largest_cliques
 largest_cliques <- largest_cliques_impl
 
 #' @rdname cliques
@@ -302,6 +308,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_clique_number
 clique_num <- clique_number_impl
 
 
@@ -354,12 +361,15 @@ clique_num <- clique_number_impl
 #' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
+#' @cdocs igraph_weighted_cliques
 weighted_cliques <- weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_largest_weighted_cliques
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
 #' @rdname cliques
+#' @cdocs igraph_weighted_clique_number
 weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
@@ -376,7 +386,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #' sets in the graph. An independent vertex set is largest if there is no
 #' independent vertex set with more vertices.
 #'
-#' `maximal_ivs()` finds the maximal independent vertex
+#' `max_ivs()` finds the maximal independent vertex
 #' sets in the graph. An independent vertex set is maximal if it cannot be
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
@@ -384,8 +394,12 @@ weighted_clique_num <- weighted_clique_number_impl
 #' `ivs_size()` calculate the size of the largest independent
 #' vertex set(s).
 #'
+#' `independence_number()` is an alias for `ivs_size()`.
+#'
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
+#'
+#' `is_ivs()` tests if no pairs within a vertex set are connected.
 #'
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
@@ -395,7 +409,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #'   vertex sets to find. `NULL` means no limit.
 #' @return `ivs()`,
 #'   `largest_ivs()` and
-#'   `maximal_ivs()` return a list containing numeric
+#'   `max_ivs()` return a list containing numeric
 #'   vertex ids, each list element is an independent vertex set.
 #'
 #'   `ivs_size()` returns an integer constant.
@@ -422,7 +436,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #' # Empty graph
 #' induced_subgraph(g, largest_ivs(g)[[1]])
 #'
-#' length(maximal_ivs(g))
+#' length(max_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
   ensure_igraph(graph)
 
@@ -466,7 +480,7 @@ largest_ivs <- function(graph) {
 
 #' @rdname ivs
 #' @export
-maximal_ivs <- function(graph) {
+max_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -480,6 +494,21 @@ maximal_ivs <- function(graph) {
   res
 }
 
+#' Maximal independent vertex sets in the graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximal_ivs()` was renamed to `max_ivs()` to create a more
+#' consistent API.
+#' @export
+#' @inheritParams max_ivs
+#' @keywords internal
+maximal_ivs <- function(graph) {
+  lifecycle::deprecate_soft("2.1.0", "maximal_ivs()", "max_ivs()")
+  max_ivs(graph)
+}
+
 #' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
@@ -489,8 +518,14 @@ ivs_size <- function(graph) {
   .Call(R_igraph_independence_number, graph)
 }
 
+#' @rdname ivs
+#' @export
+independence_number <- ivs_size
+
 #' @rdname cliques
 #' @export
+#' @cdocs igraph_maximal_cliques_hist
+#' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(graph, min, max)
@@ -498,3 +533,53 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
     clique_size_hist_impl(graph, min, max)
   }
 }
+
+#' Is this a complete graph?
+#'
+#' A graph is considered complete if there is an edge between all distinct
+#' directed pairs of vertices. igraph considers both the singleton graph
+#' and the null graph complete.
+#'
+#' @param graph The input graph.
+#' @return True if the graph is complete.
+#' @family cliques
+#' @keywords graphs
+#' @seealso [make_full_graph()]
+#' @export
+#' @cdocs igraph_is_complete
+#' @examples
+#'
+#' g <- make_full_graph(6, directed = TRUE)
+#' is_complete(g)
+#' g <- delete_edges(g, 1)
+#' is_complete(g)
+#' g <- as_undirected(g)
+#' is_complete(g)
+is_complete <- is_complete_impl
+
+#' @rdname cliques
+#'
+#' @description
+#' Tests if all pairs within a set of vertices are adjacent, i.e. whether they
+#' form a clique. An empty set and singleton set are considered to be a clique.
+#'
+#' @param graph The input graph.
+#' @param candidate The vertex set to test for being a clique.
+#' @param directed Whether to consider edge directions.
+#' @return `is_clique()` returns `TRUE` if the candidate vertex set forms
+#'   a clique.
+#' @keywords graphs
+#' @export
+#' @cdocs igraph_is_clique
+is_clique <- is_clique_impl
+
+#' @rdname ivs
+#'
+#' @param graph The input graph.
+#' @param candidate The vertex set to test for being an independent set.
+#' @return `is_ivs()` returns `TRUE` if the candidate vertex set forms an
+#'   independent set.
+#' @keywords graphs
+#' @export
+#' @cdocs igraph_is_independent_vertex_set
+is_ivs <- is_independent_vertex_set_impl

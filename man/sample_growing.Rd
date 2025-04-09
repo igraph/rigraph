@@ -5,7 +5,7 @@
 \alias{growing}
 \title{Growing random graph generation}
 \usage{
-sample_growing(n, m = 1, directed = TRUE, citation = FALSE)
+sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
 growing(...)
 }
@@ -14,12 +14,12 @@ growing(...)
 
 \item{m}{Numeric constant, number of edges added in each time step.}
 
+\item{...}{Passed to \code{sample_growing()}.}
+
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in
 each time step the added edges are originating from the new vertex.}
-
-\item{...}{Passed to \code{sample_growing()}.}
 }
 \value{
 A new graph object.
@@ -42,9 +42,11 @@ g2 <- sample_growing(500, citation = TRUE)
 }
 \seealso{
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_degseq}()},
@@ -72,3 +74,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game}{\code{growing_random_game()}}.}
+

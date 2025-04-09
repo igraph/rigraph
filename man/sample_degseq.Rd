@@ -8,7 +8,8 @@
 sample_degseq(
   out.deg,
   in.deg = NULL,
-  method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")
+  method = c("configuration", "vl", "fast.heur.simple", "configuration.simple",
+    "edge.switching.simple")
 )
 
 degseq(..., deterministic = FALSE)
@@ -22,9 +23,7 @@ should be even. For directed graphs its sum should be the same as the sum of
 \item{in.deg}{For directed graph, the in-degree sequence. By default this is
 \code{NULL} and an undirected graph is created.}
 
-\item{method}{Character, the method for generating the graph. Right now the
-\dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
-implemented.}
+\item{method}{Character, the method for generating the graph. See Details.}
 
 \item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
 or to \code{sample_degseq()} otherwise.}
@@ -39,35 +38,48 @@ It is often useful to create a graph with given vertex degrees. This function
 creates such a graph in a randomized manner.
 }
 \details{
-The \dQuote{simple} method connects the out-stubs of the edges (undirected
-graphs) or the out-stubs and in-stubs (directed graphs) together. This way
-loop edges and also multiple edges may be generated. This method is not
-adequate if one needs to generate simple graphs with a given degree
-sequence. The multiple and loop edges can be deleted, but then the degree
-sequence is distorted and there is nothing to ensure that the graphs are
-sampled uniformly.
+The \dQuote{configuration} method (formerly called "simple") implements the
+configuration model. For undirected graphs, it puts all vertex IDs in a bag
+such that the multiplicity of a vertex in the bag is the same as its degree.
+Then it draws pairs from the bag until the bag becomes empty. This method may
+generate both loop (self) edges and multiple edges. For directed graphs,
+the algorithm is basically the same, but two separate bags are used
+for the in- and out-degrees. Undirected graphs are generated
+with probability proportional to \eqn{(\prod_{i<j} A_{ij} ! \prod_i A_{ii} !!)^{-1}},
+where A denotes the adjacency matrix and !! denotes the double factorial.
+Here A is assumed to have twice the number of self-loops on its diagonal.
+The corresponding expression for directed graphs is \eqn{(\prod_{i,j} A_{ij}!)^{-1}}.
+Thus the probability of all simple graphs
+(which only have 0s and 1s in the adjacency matrix)
+is the same, while that of non-simple ones depends on their edge and
+self-loop multiplicities.
 
-The \dQuote{simple.no.multiple} method is similar to \dQuote{simple}, but
-tries to avoid multiple and loop edges and restarts the generation from
-scratch if it gets stuck. It is not guaranteed to sample uniformly from the
-space of all possible graphs with the given sequence, but it is relatively
-fast and it will eventually succeed if the provided degree sequence is
-graphical, but there is no upper bound on the number of iterations.
+The \dQuote{fast.heur.simple} method (formerly called "simple.no.multiple")
+generates simple graphs.
+It is similar to \dQuote{configuration} but tries to avoid multiple and
+loop edges and restarts the generation from scratch if it gets stuck.
+It can generate all simple realizations of a degree sequence,
+but it is not guaranteed to sample them uniformly.
+This method is relatively fast and it will eventually succeed
+if the provided degree sequence is graphical, but there is no upper bound on
+the number of iterations.
 
-The \dQuote{simple.no.multiple.uniform} method is a variant of
-\dQuote{simple.no.multiple} with the added benefit of sampling uniformly
-from the set of all possible simple graphs with the given degree sequence.
-Ensuring uniformity has some performance implications, though.
+The \dQuote{configuration.simple} method (formerly called "simple.no.multiple.uniform")
+is
+identical to \dQuote{configuration}, but if the generated graph is not simple,
+it rejects it and re-starts the generation.
+It generates all simple graphs with the same probability.
 
-The \dQuote{vl} method is a more sophisticated generator. The algorithm and
-the implementation was done by Fabien Viger and Matthieu Latapy. This
-generator always generates undirected, connected simple graphs, it is an
-error to pass the \code{in.deg} argument to it.  The algorithm relies on
-first creating an initial (possibly unconnected) simple undirected graph
-with the given degree sequence (if this is possible at all). Then some
-rewiring is done to make the graph connected. Finally a Monte-Carlo
-algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-undirected, connected simple graphs uniformly.
+The \dQuote{vl} method samples undirected connected graphs approximately uniformly.
+It is a Monte Carlo method based on degree-preserving edge switches.
+This generator should be favoured if undirected and connected graphs are to be
+generated and execution time is not a concern. igraph uses
+the original implementation of Fabien Viger; for the algorithm, see
+\url{https://www-complexnetworks.lip6.fr/~latapy/FV/generation.html}
+and the paper \url{https://arxiv.org/abs/cs/0502085}.
+
+The \dQuote{edge.switching.simple} is an MCMC sampler based on
+degree-preserving edge switches. It generates simple undirected or directed graphs.
 }
 \examples{
 
@@ -183,9 +195,11 @@ all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 \code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
 
 Random graph models (games)
+\code{\link{bipartite_gnm}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_chung_lu}()},
 \code{\link{sample_correlated_gnp}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_dot_product}()},

@@ -19,7 +19,7 @@ component of the graph.}
 }
 \value{
 An edge sequence containing the edges of the spanning tree. Use
-\code{\link[=subgraph.edges]{subgraph.edges()}} to extract the corresponding subgraph.
+\code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the corresponding subgraph.
 }
 \description{
 \code{sample_spanning_tree()} picks a spanning tree of an undirected graph
@@ -29,11 +29,11 @@ randomly and uniformly, using loop-erased random walks.
 
 g <- make_full_graph(10) \%du\% make_full_graph(5)
 edges <- sample_spanning_tree(g)
-forest <- subgraph.edges(g, edges)
+forest <- subgraph_from_edges(g, edges)
 
 }
 \seealso{
-\code{\link[=subgraph.edges]{subgraph.edges()}} to extract the tree itself
+\code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to extract the tree itself
 
 Other trees: 
 \code{\link{is_forest}()},
@@ -43,3 +43,5 @@ Other trees:
 }
 \concept{trees}
 \keyword{graph}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_random_spanning_tree}{\code{random_spanning_tree()}}.}
+

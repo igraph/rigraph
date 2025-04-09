@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{graph_from_literal}
 \alias{graph_from_literal}
-\alias{graph.formula}
 \alias{from_literal}
 \title{Creating (small) graphs via a simple interface}
 \usage{
@@ -130,6 +129,7 @@ g6
 Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},

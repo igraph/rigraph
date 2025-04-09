@@ -7,11 +7,10 @@
 optimal.community(graph, weights = NULL)
 }
 \arguments{
-\item{graph}{The input graph. Edge directions are ignored for directed
-graphs.}
+\item{graph}{The input graph. It may be undirected or directed.}
 
-\item{weights}{The weights of the edges. It must be a positive numeric vector,
-\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\item{weights}{The weights of the edges. It must be a positive numeric
+vector, \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
 \sQuote{weight} edge attribute, then that attribute will be used. If
 \code{NULL} and no such attribute is present, then the edges will have equal
 weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge

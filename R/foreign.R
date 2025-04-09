@@ -1,4 +1,3 @@
-
 #' Writing the graph to a file in some format
 #'
 #' @description
@@ -132,7 +131,8 @@ write.graph.fromraw <- function(buffer, file) {
 #'   insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
-#' @section Edge list format: This format is a simple text file with numeric
+#' @section Edge list format:
+#' This format is a simple text file with numeric
 #' vertex IDs defining the edges. There is no need to have newline characters
 #' between the edges, a simple space will also do. Vertex IDs contained in
 #' the file are assumed to start at zero.
@@ -142,15 +142,41 @@ write.graph.fromraw <- function(buffer, file) {
 #' then it is ignored; so it is safe to set it to zero (the default).}
 #' \item{directed}{Logical scalar, whether to create a directed graph. The
 #' default value is `TRUE`.} }
-#' @section Pajek format: Currently igraph only supports Pajek network
+#' @section Pajek format:
+#' Currently igraph only supports Pajek network
 #' files, with a `.net` extension, but not Pajek project files with
 #' a `.paj` extension. Only network data is supported; permutations,
 #' hierarchies, clusters and vectors are not.
+#' @section NCOL format:
+#' Additional arguments: \describe{
+#' \item{predef}{Names of the vertices in the file.
+#' If `character(0)` (the default) is given here
+#' then vertex IDs will be assigned to vertex names in the order of
+#' their appearance in the .ncol file.
+#' If it is not `character(0)` and some unknown vertex names are found
+#' in the .ncol file then new vertex ids will be assigned to them. }
+#' \item{names}{Logical value, if `TRUE` (the default)
+#' the symbolic names of the vertices will be added to the graph
+#' as a vertex attribute called “name”. }
+#' \item{weights}{Whether to add the weights of the edges to the graph
+#' as an edge attribute called “weight”.
+#' `"yes"` adds the weights (even if they are not present in the file,
+#' in this case they are assumed to be zero).
+#' `"no"` does not add any edge attribute.
+#' `"auto"` (the default) adds the attribute if and only
+#' if there is at least one explicit edge weight in the input file. }
+#' \item{directed}{Whether to create a directed graph (default: `FALSE`).
+#' As this format was originally used only for undirected graphs
+#' there is no information in the file about the directedness of the graph.}
+#' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [write_graph()]
 #' @keywords graphs
 #' @family foreign
 #' @export
+#' @cdocs igraph_read_graph_dimacs_flow igraph_read_graph_dl igraph_read_graph_edgelist
+#' @cdocs igraph_read_graph_gml igraph_read_graph_graphdb igraph_read_graph_graphml
+#' @cdocs igraph_read_graph_lgl igraph_read_graph_ncol igraph_read_graph_pajek
 read_graph <- function(file, format = c(
                          "edgelist", "pajek", "ncol", "lgl",
                          "graphml", "dimacs", "graphdb", "gml", "dl"
@@ -184,21 +210,34 @@ read_graph <- function(file, format = c(
 #' Writing the graph to a file in some format
 #'
 #' `write_graph()` is a general function for exporting graphs to foreign
-#' file formats, however not many formats are implemented right now.
+#' file formats. The recommended formats for data exchange are GraphML and GML.
 #'
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
 #'   to.
 #' @param format Character string giving the file format. Right now
 #'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
-#'   `lgl`, `ncol` and `dimacs` are implemented. As of igraph 0.4
+#'   `lgl`, `ncol`, `leda` and `dimacs` are implemented. As of igraph 0.4
 #'   this argument is case insensitive.
 #' @param \dots Other, format specific arguments, see below.
-#' @return A NULL, invisibly.
+#' @return A `NULL``, invisibly.
 #' @section Edge list format: The `edgelist` format is a simple text file,
-#' with one edge in a line, the two vertex ids separated by a space character.
+#' with one edge per line, the two zero-based numerical vertex IDs separated
+#' by a space character. Note that vertices are indexed starting with zero.
 #' The file is sorted by the first and the second column. This format has no
 #' additional arguments.
+#' @section NCOL format: This format is a plain text edge list in which vertices
+#' are referred to by name rather than numerical ID. Edge weights may be
+#' optionally written. Additional parameters:
+#' \describe{
+#' \item{names}{The name of a vertex attribute to take vertex names from or
+#' `NULL` to use zero-based numerical IDs.}
+#' \item{weights}{The name of an edge attribute to take edge weights from or
+#' `NULL` to omit edge weights.}
+#' }
+#' @section Pajek format: The `pajek` format is provided for interoperability
+#' with the Pajek software only. Since the format does not have a formal
+#' specification, it is not recommended for general data exchange or archival.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [read_graph()]
 #' @references Adai AT, Date SV, Wieland S, Marcotte EM. LGL: creating a map of
@@ -207,6 +246,9 @@ read_graph <- function(file, format = c(
 #' @family foreign
 #' @export
 #' @keywords graphs
+#' @cdocs igraph_write_graph_dimacs_flow igraph_write_graph_dot igraph_write_graph_edgelist
+#' @cdocs igraph_write_graph_gml igraph_write_graph_graphml igraph_write_graph_leda
+#' @cdocs igraph_write_graph_lgl igraph_write_graph_ncol igraph_write_graph_pajek
 #' @examples
 #'
 #' g <- make_ring(10)
@@ -296,7 +338,7 @@ read.graph.ncol <- function(file, predef = character(0), names = TRUE,
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_read_graph_ncol, file, as.character(predef),
-    as.logical(names), as.numeric(weights), as.logical(directed)
+    as.logical(names), weights, as.logical(directed)
   )
 }
 
@@ -336,7 +378,7 @@ read.graph.lgl <- function(file, names = TRUE,
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_read_graph_lgl, file,
-    as.logical(names), as.numeric(weights), as.logical(directed)
+    as.logical(names), weights, as.logical(directed)
   )
 }
 
@@ -506,7 +548,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' Load a graph from the graph database for testing graph isomorphism.
 #'
 #' This function downloads a graph from a database created for the evaluation
-#' of graph isomorphism testing algothitms.
+#' of graph isomorphism testing algorithms.
 #'
 #' `graph_from_graphdb()` reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
@@ -547,31 +589,26 @@ write.graph.dot <- function(graph, file, ...) {
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [read_graph()], [graph.isomorphic.vf2()]
+#' @seealso [read_graph()], [isomorphic()]
 #' @references M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 #' of graphs and its use for benchmarking graph isomorphism algorithms,
 #' *Pattern Recognition Letters*, Volume 24, Issue 8 (May 2003)
 #' @family foreign
 #' @export
 #' @keywords graphs
-#' @section Examples:
-#' \preformatted{
-#' g <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="A",
-#'   which=10, compressed=TRUE)
-#' g2 <- graph_from_graphdb(prefix="iso", type="r001", nodes=20, pair="B",
-#'   which=10, compressed=TRUE)
-#' graph.isomorphic.vf2(g, g2)	\% should be TRUE
-#' g3 <- graph_from_graphdb(url=paste(sep="/",
-#'                               "http://cneurocvs.rmki.kfki.hu",
-#'                               "graphdb/gzip/iso/bvg/b06m",
-#'                               "iso_b06m_m200.A09.gz"))
-#' }
-graph_from_graphdb <- function(url = NULL,
-                               prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
-                               base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
-                               compressed = TRUE, directed = TRUE) {
+graph_from_graphdb <- function(
+  url = NULL,
+  prefix = "iso",
+  type = "r001",
+  nodes = NULL,
+  pair = "A",
+  which = 0,
+  base = "https://github.com/igraph/graphsdb/raw/refs/heads/main",
+  compressed = TRUE,
+  directed = TRUE
+) {
   if (is.null(nodes) && is.null(url)) {
-    stop("The `nodes' or the `url' argument must be non-null")
+    cli::cli_abort("Either {.arg nodes}' or `{.arg url}' must be non-null.")
   }
 
   if (is.null(url)) {
@@ -592,10 +629,16 @@ graph_from_graphdb <- function(url = NULL,
     typegroup <- typegroups[which(types == type)]
 
     if (!prefix %in% prefixes) {
-      stop("Invalid prefix!")
+      cli::cli_abort(c(
+        "{.value {prefix}} is not a valid prefix.",
+        i = "Must be one of {.value {prefixes}}."
+      ))
     }
     if (!type %in% types) {
-      stop("Invalid graph type!")
+      cli::cli_abort(c(
+        "{.value {type}} is not a valid graph type.",
+        i = "Must be one of {.value {types}}."
+      ))
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(
@@ -611,7 +654,7 @@ graph_from_graphdb <- function(url = NULL,
 
   f <- try(gzcon(file(filename, open = "rb")))
   if (inherits(f, "try-error")) {
-    stop(paste("Cannot open URL:", filename))
+    cli::cli_abort("Cannot open URL provided in {.arg filename}: {.url {filename}}")
   }
 
   buffer <- read.graph.toraw(f)

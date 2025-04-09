@@ -1,4 +1,3 @@
-
 #' Assortativity coefficient
 #'
 #' @description
@@ -142,6 +141,7 @@ assortativity.degree <- function(graph, directed = TRUE) { # nocov start
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
+#' @cdocs igraph_assortativity
 assortativity <- function(graph,
                           values,
                           ...,
@@ -203,8 +203,10 @@ assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) 
 #'   with [as.integer()].
 #' @rdname assortativity
 #' @export
+#' @cdocs igraph_assortativity_nominal
 assortativity_nominal <- assortativity_nominal_impl
 
 #' @rdname assortativity
 #' @export
+#' @cdocs igraph_assortativity_degree
 assortativity_degree <- assortativity_degree_impl

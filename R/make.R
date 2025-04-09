@@ -1,3 +1,632 @@
+#' Create an igraph graph from a list of edges, or a notable graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph()` was renamed to `make_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_graph
+#' @keywords internal
+#' @export
+graph <- function(edges, ..., n = max(edges), isolates = NULL, directed = TRUE, dir = directed, simplify = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph()", "make_graph()")
+  if (inherits(edges, "formula")) {
+    if (!missing(n)) cli::cli_abort("{.arg n} should not be given for graph literals")
+    if (!missing(isolates)) {
+      cli::cli_abort("{.arg isolates} should not be given for graph literals")
+    }
+    if (!missing(directed)) {
+      cli::cli_abort("{.arg directed} should not be given for graph literals")
+    }
+
+    mf <- as.list(match.call())[-1]
+    mf[[1]] <- mf[[1]][[2]]
+    graph_from_literal_i(mf)
+  } else {
+    if (!missing(simplify)) {
+      cli::cli_abort("{.arg simplify} should only be used for graph literals")
+    }
+
+    if (!missing(dir) && !missing(directed)) {
+      cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
+    }
+
+    if (!missing(dir) && missing(directed)) directed <- dir
+
+    if (is.character(edges) && length(edges) == 1) {
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
+      if (!missing(isolates)) {
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
+      }
+      if (!missing(directed)) {
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
+      }
+      if (!missing(dir)) {
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph")
+      }
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+
+      make_famous_graph(edges)
+
+      ## NULL and empty logical vector is allowed for compatibility
+    } else if (is.numeric(edges) || is.null(edges) ||
+      (is.logical(edges) && length(edges) == 0)) {
+      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
+      if (!is.null(isolates)) {
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
+      }
+
+      old_graph <- function(edges, n = max(edges), directed = TRUE) {
+        on.exit(.Call(R_igraph_finalizer))
+        if (missing(n) && (is.null(edges) || length(edges) == 0)) {
+          n <- 0
+        }
+        .Call(
+          R_igraph_create, as.numeric(edges) - 1, as.numeric(n),
+          as.logical(directed)
+        )
+      }
+
+      args <- list(edges, ...)
+      if (!missing(n)) args <- c(args, list(n = n))
+      if (!missing(directed)) args <- c(args, list(directed = directed))
+
+      do.call(old_graph, args)
+    } else if (is.character(edges)) {
+      if (!missing(n)) {
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
+      }
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+
+      el <- matrix(edges, ncol = 2, byrow = TRUE)
+      res <- graph_from_edgelist(el, directed = directed)
+      if (!is.null(isolates)) {
+        isolates <- as.character(isolates)
+        res <- res + vertices(isolates)
+      }
+      res
+    } else {
+      cli::cli_abort("{.arg edges} must be numeric or character")
+    }
+  }
+} # nocov end
+
+#' Create an igraph graph from a list of edges, or a notable graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.famous()` was renamed to `make_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_graph
+#' @keywords internal
+#' @export
+graph.famous <- function(edges, ..., n = max(edges), isolates = NULL, directed = TRUE, dir = directed, simplify = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.famous()", "make_graph()")
+  if (inherits(edges, "formula")) {
+    if (!missing(n)) cli::cli_abort("{.arg n} should not be given for graph literals")
+    if (!missing(isolates)) {
+      cli::cli_abort("{.arg isolates} should not be given for graph literals")
+    }
+    if (!missing(directed)) {
+      cli::cli_abort("{.arg directed} should not be given for graph literals")
+    }
+
+    mf <- as.list(match.call())[-1]
+    mf[[1]] <- mf[[1]][[2]]
+    graph_from_literal_i(mf)
+  } else {
+    if (!missing(simplify)) {
+      cli::cli_abort("{.arg simplify} should only be used for graph literals")
+    }
+
+    if (!missing(dir) && !missing(directed)) {
+      cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
+    }
+
+    if (!missing(dir) && missing(directed)) directed <- dir
+
+    if (is.character(edges) && length(edges) == 1) {
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
+      if (!missing(isolates)) {
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
+      }
+      if (!missing(directed)) {
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
+      }
+      if (!missing(dir)) {
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
+      }
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+
+      make_famous_graph(edges)
+
+      ## NULL and empty logical vector is allowed for compatibility
+    } else if (is.numeric(edges) || is.null(edges) ||
+      (is.logical(edges) && length(edges) == 0)) {
+      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
+      if (!is.null(isolates)) {
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
+      }
+
+      old_graph <- function(edges, n = max(edges), directed = TRUE) {
+        on.exit(.Call(R_igraph_finalizer))
+        if (missing(n) && (is.null(edges) || length(edges) == 0)) {
+          n <- 0
+        }
+        .Call(
+          R_igraph_create, as.numeric(edges) - 1, as.numeric(n),
+          as.logical(directed)
+        )
+      }
+
+      args <- list(edges, ...)
+      if (!missing(n)) args <- c(args, list(n = n))
+      if (!missing(directed)) args <- c(args, list(directed = directed))
+
+      do.call(old_graph, args)
+    } else if (is.character(edges)) {
+      if (!missing(n)) {
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
+      }
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+
+      el <- matrix(edges, ncol = 2, byrow = TRUE)
+      res <- graph_from_edgelist(el, directed = directed)
+      if (!is.null(isolates)) {
+        isolates <- as.character(isolates)
+        res <- res + vertices(isolates)
+      }
+      res
+    } else {
+      cli::cli_abort("{.arg edges} must be numeric or character")
+    }
+  }
+} # nocov end
+
+#' Line graph of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `line.graph()` was renamed to `make_line_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_line_graph
+#' @keywords internal
+#' @export
+line.graph <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "line.graph()", "make_line_graph()")
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_linegraph, graph)
+  if (igraph_opt("add.params")) {
+    res$name <- "Line graph"
+  }
+  res
+} # nocov end
+
+#' Create a ring graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.ring()` was renamed to `make_ring()` to create a more
+#' consistent API.
+#' @inheritParams make_ring
+#' @keywords internal
+#' @export
+graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_ring, as.numeric(n), as.logical(directed),
+    as.logical(mutual), as.logical(circular)
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- "Ring graph"
+    res$mutual <- mutual
+    res$circular <- circular
+  }
+  res
+} # nocov end
+
+#' Create tree graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.tree()` was renamed to `make_tree()` to create a more
+#' consistent API.
+#' @inheritParams make_tree
+#' @keywords internal
+#' @export
+graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
+  mode <- igraph.match.arg(mode)
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_kary_tree, as.numeric(n), as.numeric(children),
+    as.numeric(mode1)
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- "Tree"
+    res$children <- children
+    res$mode <- mode
+  }
+  res
+} # nocov end
+
+#' Create a star graph, a tree with n vertices and n - 1 leaves
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.star()` was renamed to `make_star()` to create a more
+#' consistent API.
+#' @inheritParams make_star
+#' @keywords internal
+#' @export
+graph.star <- function(n, mode = c("in", "out", "mutual", "undirected"), center = 1) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
+  mode <- igraph.match.arg(mode)
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2,
+    "mutual" = 3
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_star, as.numeric(n), as.numeric(mode1),
+    as.numeric(center) - 1
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- switch(mode,
+      "in" = "In-star",
+      "out" = "Out-star",
+      "Star"
+    )
+    res$mode <- mode
+    res$center <- center
+  }
+  res
+} # nocov end
+
+#' Creating a graph from LCF notation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.lcf()` was renamed to `graph_from_lcf()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_lcf
+#' @keywords internal
+#' @export
+graph.lcf <- function(n, shifts, repeats = 1) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
+  # Argument checks
+  n <- as.numeric(n)
+  shifts <- as.numeric(shifts)
+  repeats <- as.numeric(repeats)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(R_igraph_lcf_vector, n, shifts, repeats)
+
+  if (igraph_opt("add.params")) {
+    res$name <- "LCF graph"
+  }
+
+  res
+} # nocov end
+
+#' Create a lattice graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.lattice()` was renamed to `make_lattice()` to create a more
+#' consistent API.
+#' @inheritParams make_lattice
+#' @keywords internal
+#' @export
+#' @cdocs igraph_square_lattice
+graph.lattice <- function(dimvector = NULL, length = NULL, dim = NULL, nei = 1, directed = FALSE, mutual = FALSE, periodic = FALSE, circular = deprecated()) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_lattice()")
+  if (is.numeric(length) && length != floor(length)) {
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
+    length <- round(length)
+  }
+
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "graph.lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
+  }
+
+  if (is.numeric(length) && length != floor(length)) {
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
+    length <- round(length)
+  }
+
+  if (is.null(dimvector)) {
+    dimvector <- rep(length, dim)
+  }
+
+  if (length(periodic) == 1) {
+    periodic <- rep(periodic, length(dimvector))
+  }
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
+  if (igraph_opt("add.params")) {
+    res$name <- "Lattice graph"
+    res$dimvector <- dimvector
+    res$nei <- nei
+    res$mutual <- mutual
+    res$circular <- periodic
+  }
+  res
+} # nocov end
+
+#' Kautz graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.kautz()` was renamed to `make_kautz_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_kautz_graph
+#' @keywords internal
+#' @export
+graph.kautz <- function(m, n) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.kautz()", "make_kautz_graph()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
+  if (igraph_opt("add.params")) {
+    res$name <- sprintf("Kautz graph %i-%i", m, n)
+    res$m <- m
+    res$n <- n
+  }
+  res
+} # nocov end
+
+#' Create a complete (full) citation graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full.citation()` was renamed to `make_full_citation_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_citation_graph
+#' @keywords internal
+#' @export
+graph.full.citation <- function(n, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.full.citation()", "make_full_citation_graph()")
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(R_igraph_full_citation, n, directed)
+
+  res <- set_graph_attr(res, "name", "Full citation graph")
+  res
+} # nocov end
+
+#' Create a full bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full.bipartite()` was renamed to `make_full_bipartite_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_bipartite_graph
+#' @keywords internal
+#' @export
+graph.full.bipartite <- function(n1, n2, directed = FALSE, mode = c("all", "out", "in")) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.full.bipartite()", "make_full_bipartite_graph()")
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
+  directed <- as.logical(directed)
+  mode1 <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
+  if (igraph_opt("add.params")) {
+    res$graph$name <- "Full bipartite graph"
+    res$n1 <- n1
+    res$n2 <- n2
+    res$mode <- mode
+  }
+  set_vertex_attr(res$graph, "type", value = res$types)
+} # nocov end
+
+#' Create a full graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full()` was renamed to `make_full_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_graph
+#' @keywords internal
+#' @export
+graph.full <- function(n, directed = FALSE, loops = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_full, as.numeric(n), as.logical(directed),
+    as.logical(loops)
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- "Full graph"
+    res$loops <- loops
+  }
+  res
+} # nocov end
+
+#' Creating (small) graphs via a simple interface
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.formula()` was renamed to `graph_from_literal()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_literal
+#' @keywords internal
+#' @export
+graph.formula <- function(..., simplify = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.formula()", "graph_from_literal()")
+  mf <- as.list(match.call())[-1]
+  graph_from_literal_i(mf)
+} # nocov end
+
+#' Create an extended chordal ring graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.extended.chordal.ring()` was renamed to `make_chordal_ring()` to create a more
+#' consistent API.
+#' @inheritParams make_chordal_ring
+#' @keywords internal
+#' @export
+graph.extended.chordal.ring <- function(n, w, directed = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.extended.chordal.ring()", "make_chordal_ring()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_extended_chordal_ring, as.numeric(n),
+    as.matrix(w), as.logical(directed)
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- "Extended chordal ring"
+    res$w <- w
+  }
+  res
+} # nocov end
+
+#' A graph with no edges
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.empty()` was renamed to `make_empty_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_empty_graph
+#' @keywords internal
+#' @export
+graph.empty <- function(n = 0, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.empty()", "make_empty_graph()")
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(R_igraph_empty, n, directed)
+
+  res
+} # nocov end
+
+#' De Bruijn graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.de.bruijn()` was renamed to `make_de_bruijn_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_de_bruijn_graph
+#' @keywords internal
+#' @export
+graph.de.bruijn <- function(m, n) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.de.bruijn()", "make_de_bruijn_graph()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
+  if (igraph_opt("add.params")) {
+    res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
+    res$m <- m
+    res$n <- n
+  }
+  res
+} # nocov end
+
+#' Create a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.bipartite()` was renamed to `make_bipartite_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_bipartite_graph
+#' @keywords internal
+#' @export
+graph.bipartite <- function(types, edges, directed = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.bipartite()", "make_bipartite_graph()")
+  vertex.names <- names(types)
+
+  if (is.character(edges)) {
+    if (is.null(vertex.names)) {
+      cli::cli_abort("{.arg types} vector must be named when the edge vector contains strings")
+    }
+    edges <- match(edges, vertex.names)
+    if (any(is.na(edges))) {
+      cli::cli_abort("edge vector contains a vertex name that is not found in {.arg types}")
+    }
+  }
+
+  types <- as.logical(types)
+  edges <- as.numeric(edges) - 1
+  directed <- as.logical(directed)
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_create_bipartite, types, edges, directed)
+  res <- set_vertex_attr(res, "type", value = types)
+
+  if (!is.null(vertex.names)) {
+    res <- set_vertex_attr(res, "name", value = vertex.names)
+  }
+
+  res
+} # nocov end
+
+#' Create a graph from the Graph Atlas
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.atlas()` was renamed to `graph_from_atlas()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_atlas
+#' @keywords internal
+#' @export
+graph.atlas <- function(n) { # nocov start
+  lifecycle::deprecate_soft("2.1.0", "graph.atlas()", "graph_from_atlas()")
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_atlas, as.numeric(n))
+  if (igraph_opt("add.params")) {
+    res$name <- sprintf("Graph from the Atlas #%i", n)
+    res$n <- n
+  }
+  res
+} # nocov end
 
 ## ----------------------------------------------------------------
 ##
@@ -34,19 +663,18 @@
 #' @param .variant Constructor variant; must be one of \sQuote{make},
 #'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
 #'   specification has deterministic and random variants.
-#' @family constructor modifiers
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
-#' @noRd
+#' @dev
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
   if (sum(cidx) == 0) {
-    stop("Don't know how to ", .operation, ", nothing given")
+    cli::cli_abort("Don't know how to { .operation }, nothing given")
   }
   if (sum(cidx) > 1) {
-    stop("Don't know how to ", .operation, ", multiple constructors given")
+    cli::cli_abort("Don't know how to { .operation }, multiple constructors given")
   }
   cons <- args[cidx][[1]]
   args <- args[!cidx]
@@ -71,7 +699,7 @@
     if (.variant %in% variants) {
       cons$fun <- cons$fun[[.variant]]
     } else {
-      stop("Don't know how to ", .operation, ", unknown constructor")
+      cli::cli_abort("Don't know how to { .operation }, unknown constructor")
     }
   }
 
@@ -85,9 +713,8 @@
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
-#' @family constructor modifiers
 #' @return The modified graph
-#' @noRd
+#' @dev
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
@@ -161,8 +788,6 @@
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @seealso simplified with_edge_ with_graph_ with_vertex_
-#'   without_loops without_multiples
 #' @export
 #' @examples
 #' r <- make_(ring(10))
@@ -171,14 +796,22 @@
 #' r2 <- make_(ring(10), with_vertex_(color = "red", name = LETTERS[1:10]))
 #' l2 <- make_(lattice(c(3, 3, 3)), with_edge_(weight = 2))
 #'
-#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "simple"), simplified())
+#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "configuration"), simplified())
 #' degree(ran)
 #' is_simple(ran)
+#' @family deterministic constructors
+#' @family constructor modifiers
 make_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -188,7 +821,23 @@ make_ <- function(...) {
 #' Generic function for sampling from network models.
 #'
 #' @details
-#' TODO
+#' `sample_()` is a generic function for creating graphs.
+#' For every graph constructor in igraph that has a `sample_` prefix,
+#' there is a corresponding function without the prefix: e.g.
+#' for [sample_pa()] there is also [pa()], etc.
+#'
+#' The same is true for the deterministic graph samplers, i.e. for each
+#' constructor with a `make_` prefix, there is a corresponding
+#' function without that prefix.
+#'
+#' These shorter forms can be used together with `sample_()`.
+#' The advantage of this form is that the user can specify constructor
+#' modifiers which work with all constructors. E.g. the
+#' [with_vertex_()] modifier adds vertex attributes
+#' to the newly created graphs.
+#'
+#' See the examples and the various constructor modifiers below.
+#'
 #'
 #' @param ... Parameters, see details below.
 #'
@@ -207,11 +856,18 @@ make_ <- function(...) {
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 #' @family games
+#' @family constructor modifiers
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -231,10 +887,24 @@ sample_ <- function(...) {
 #' graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 graph_ <- function(...) {
+  lifecycle::deprecate_soft(
+    "2.1.0",
+    "graph_()",
+    details = c(
+      "Please use constructors directly, for instance graph_from_edgelist().",
+      "graph_() will be removed in a future version of igraph."
+    )
+  )
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
   cons <- extracted$cons
-  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+
+  if (cons$lazy) {
+    cons_args <- lapply(cons$args, rlang::quo_get_expr)
+  } else {
+    cons_args <- lapply(cons$args, rlang::eval_tidy)
+  }
+
   res <- do_call(cons$fun, cons_args, extracted$args)
   .apply_modifiers(res, extracted$mods)
 }
@@ -247,7 +917,7 @@ constructor_spec <- function(fun, ..., .lazy = FALSE) {
   structure(
     list(
       fun = fun,
-      args = lazy_dots(...),
+      args = rlang::enquos(...),
       lazy = .lazy
     ),
     class = "igraph_constructor_spec"
@@ -439,11 +1109,11 @@ with_graph_ <- function(...) {
 #'   \item{Frucht}{The Frucht Graph is the smallest
 #'     cubical graph whose automorphism group consists only of the identity
 #'     element. It has 12 vertices and 18 edges.}
-#'   \item{Grotzsch}{The Groetzsch
+#'   \item{Grotzsch, Groetzsch}{The Grötzsch
 #'     graph is a triangle-free graph with 11 vertices, 20 edges, and chromatic
-#'     number 4. It is named after German mathematician Herbert Groetzsch, and its
+#'     number 4. It is named after German mathematician Herbert Grötzsch, and its
 #'     existence demonstrates that the assumption of planarity is necessary in
-#'     Groetzsch's theorem that every triangle-free planar graph is 3-colorable.}
+#'     Grötzsch's theorem that every triangle-free planar graph is 3-colorable.}
 #'   \item{Heawood}{The Heawood graph is an undirected graph with 14 vertices and
 #'     21 edges. The graph is cubic, and all cycles in the graph have six or more
 #'     edges. Every smaller cubic graph has shorter cycles, so this graph is the
@@ -506,7 +1176,6 @@ with_graph_ <- function(...) {
 #'     groups, Journal of Anthropological Research 33, 452-473 (1977).  } }
 #'
 #' @encoding UTF-8
-#' @aliases graph.famous graph
 #' @param edges A vector defining the edges, the first edge points
 #'   from the first element to the second, the second edge from the third
 #'   to the fourth, etc. For a numeric vector, these are interpreted
@@ -564,12 +1233,12 @@ with_graph_ <- function(...) {
 make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
                        directed = TRUE, dir = directed, simplify = TRUE) {
   if (inherits(edges, "formula")) {
-    if (!missing(n)) stop("'n' should not be given for graph literals")
+    if (!missing(n)) cli::cli_abort("{.arg n} should not be given for graph literals")
     if (!missing(isolates)) {
-      stop("'isolates' should not be given for graph literals")
+      cli::cli_abort("{.arg isolates} should not be given for graph literals")
     }
     if (!missing(directed)) {
-      stop("'directed' should not be given for graph literals")
+      cli::cli_abort("{.arg directed} should not be given for graph literals")
     }
 
     mf <- as.list(match.call())[-1]
@@ -577,27 +1246,27 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     graph_from_literal_i(mf)
   } else {
     if (!missing(simplify)) {
-      stop("'simplify' should only be used for graph literals")
+      cli::cli_abort("{.arg simplify} should only be used for graph literals")
     }
 
     if (!missing(dir) && !missing(directed)) {
-      stop("Only give one of 'dir' and 'directed'")
+      cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
     }
 
     if (!missing(dir) && missing(directed)) directed <- dir
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n)) warning("'n' is ignored for the '", edges, "' graph")
+      if (!missing(n)) cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
       if (!missing(isolates)) {
-        warning("'isolates' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg isolates} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(directed)) {
-        warning("'directed' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg directed} is ignored for the {.str {edges}} graph.")
       }
       if (!missing(dir)) {
-        warning("'dir' is ignored for the '", edges, "' graph")
+        cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
-      if (length(list(...))) stop("Extra arguments in make_graph")
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
 
       make_famous_graph(edges)
 
@@ -606,7 +1275,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
-        warning("'isolates' ignored for numeric edge list")
+        cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
@@ -627,9 +1296,9 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
-        warning("'n' is ignored for edge list with vertex names")
+        cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
-      if (length(list(...))) stop("Extra arguments in make_graph")
+      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
 
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
@@ -639,7 +1308,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       }
       res
     } else {
-      stop("'edges' must be numeric or character")
+      cli::cli_abort("{.arg edges} must be numeric or character")
     }
   }
 }
@@ -688,7 +1357,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 
 #' A graph with no edges
 #'
-#' @aliases graph.empty
 #' @concept Empty graph.
 #' @param n Number of vertices.
 #' @param directed Whether to create a directed graph.
@@ -699,7 +1367,16 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-make_empty_graph <- empty_impl
+#' @cdocs igraph_empty
+make_empty_graph <- function(n = 0, directed = TRUE) {
+  if (!is.numeric(n)) {
+    cli::cli_abort("{.arg n} must be numeric, not {.obj_type_friendly {n}}.")
+  }
+  if (!is.logical(directed)) {
+    cli::cli_abort("{.arg directed} must be a logical, not {.obj_type_friendly {directed}}.")
+  }
+  empty_impl(n, directed)
+}
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
@@ -780,7 +1457,6 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #'
 #' See more examples below.
 #'
-#' @aliases graph.formula
 #' @param ... For `graph_from_literal()` the formulae giving the
 #'   structure of the graph, see details below. For `from_literal()`
 #'   all arguments are passed to `graph_from_literal()`.
@@ -835,7 +1511,7 @@ graph_from_literal_i <- function(mf) {
   if ("simplify" %in% names(mf)) {
     w <- which(names(mf) == "simplify")
     if (length(w) > 1) {
-      stop("'simplify' specified multiple times")
+      cli::cli_abort("{.arg simplify} specified multiple times")
     }
     simplify <- eval(mf[[w]])
     mf <- mf[-w]
@@ -855,7 +1531,7 @@ graph_from_literal_i <- function(mf) {
   } else if (all(ops %in% c("-", "+", ":"))) {
     directed <- TRUE
   } else {
-    stop("Invalid operator in formula")
+    cli::cli_abort("Invalid operator in formula")
   }
 
   f <- function(x) {
@@ -942,7 +1618,6 @@ from_literal <- function(...) {
 #' `star()` creates a star graph, in this every single vertex is
 #' connected to the center vertex and nobody else.
 #'
-#' @aliases graph.star
 #' @concept Star graph
 #' @param n Number of vertices.
 #' @param mode It defines the direction of the
@@ -994,7 +1669,6 @@ star <- function(...) constructor_spec(make_star, ...)
 
 #' Create a full graph
 #'
-#' @aliases graph.full
 #' @concept Full graph
 #' @param n Number of vertices.
 #' @param directed Whether to create a directed graph.
@@ -1034,7 +1708,6 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' `length` and `dim`. In the second form you omit
 #' `dimvector` and supply `length` and `dim`.
 #'
-#' @aliases graph.lattice
 #' @concept Lattice
 #' @param dimvector A vector giving the size of the lattice in each
 #'   dimension.
@@ -1046,8 +1719,10 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @param directed Whether to create a directed lattice.
 #' @param mutual Logical, if `TRUE` directed lattices will be
 #'   mutually connected.
-#' @param circular Logical, if `TRUE` the lattice or ring will be
-#'   circular.
+#' @param periodic Logical vector, Boolean vector, defines whether the generated lattice is
+#'   periodic along each dimension. This parameter may also be scalar boolen value which will
+#'   be extended to boolean vector with dimvector length.
+#' @param circular Deprecated, use `periodic` instead.
 #' @return An igraph graph.
 #'
 #' @family deterministic constructors
@@ -1055,11 +1730,21 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
+#' @cdocs igraph_square_lattice
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                          nei = 1, directed = FALSE, mutual = FALSE,
-                         circular = FALSE) {
+                         periodic = FALSE, circular = deprecated()) {
+  if (lifecycle::is_present(circular)) {
+    lifecycle::deprecate_soft(
+      "2.0.3",
+      "make_lattice(circular = 'use periodic argument instead')",
+      details = c("`circular` is now deprecated, use `periodic` instead.")
+    )
+    periodic <- circular
+  }
+
   if (is.numeric(length) && length != floor(length)) {
-    warning("length was rounded to the nearest integer")
+    cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
@@ -1067,18 +1752,18 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
     dimvector <- rep(length, dim)
   }
 
+  if (length(periodic) == 1) {
+    periodic <- rep(periodic, length(dimvector))
+  }
+
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-    as.logical(directed), as.logical(mutual),
-    as.logical(circular)
-  )
+  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
     res$nei <- nei
     res$mutual <- mutual
-    res$circular <- circular
+    res$circular <- periodic
   }
   res
 }
@@ -1095,7 +1780,6 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' A ring is a one-dimensional lattice and this function is a special case
 #' of [make_lattice()].
 #'
-#' @aliases graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -1136,7 +1820,6 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' Create a k-ary tree graph, where almost all vertices other than the leaves
 #' have the same number of children.
 #'
-#' @aliases graph.tree
 #' @concept Trees.
 #' @param n Number of vertices.
 #' @param children Integer scalar, the number of children of a vertex
@@ -1200,6 +1883,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
+#' @cdocs igraph_tree_game
 sample_tree <- tree_game_impl
 
 #' @rdname make_tree
@@ -1232,6 +1916,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #' to_prufer(g)
 #' @family trees
 #' @export
+#' @cdocs igraph_from_prufer
 make_from_prufer <- from_prufer_impl
 
 #' @rdname make_from_prufer
@@ -1258,7 +1943,6 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #'      automorphisms.
 #' }
 #'
-#' @aliases graph.atlas
 #' @concept Graph Atlas.
 #' @param n The id of the graph to create.
 #' @return An igraph graph.
@@ -1300,7 +1984,6 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' of total nodes. See also Kotsis, G: Interconnection Topologies for
 #' Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 #'
-#' @aliases graph.extended.chordal.ring
 #' @param n The number of vertices.
 #' @param w A matrix which specifies the extended chordal ring. See
 #'   details below.
@@ -1349,7 +2032,6 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' the first vertex's corresponding edge is the same as the source of the
 #' second vertex's corresponding edge.
 #'
-#' @aliases line.graph
 #' @param graph The input graph, it can be directed or undirected.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version of
@@ -1400,7 +2082,6 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' De Bruijn graphs have some interesting properties, please see another
 #' source, e.g. Wikipedia for details.
 #'
-#' @aliases graph.de.bruijn
 #' @param m Integer scalar, the size of the alphabet. See details below.
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
@@ -1446,7 +2127,6 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' Kautz graphs have some interesting properties, see e.g. Wikipedia for
 #' details.
 #'
-#' @aliases graph.kautz
 #' @param m Integer scalar, the size of the alphabet. See details below.
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
@@ -1487,7 +2167,6 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' this is boolean and `FALSE` for the vertices of the first kind and
 #' `TRUE` for vertices of the second kind.
 #'
-#' @aliases graph.full.bipartite
 #' @param n1 The number of vertices of the first kind.
 #' @param n2 The number of vertices of the second kind.
 #' @param directed Logical scalar, whether the graphs is directed.
@@ -1554,13 +2233,12 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' vertex names; in this case, `types` must be a named vector that specifies
 #' the type for each vertex name that occurs in `edges`.
 #'
-#' @aliases graph.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
 #'   When the vector is a named vector, the names will be attached to the graph
 #'   as the `name` vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
-#'   regular [graph()] function. It is checked that the edges indeed
+#'   regular [make_graph()] function. It is checked that the edges indeed
 #'   connect vertices of different kind, according to the supplied `types`
 #'   vector. The vector may be a string vector if `types` is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
@@ -1571,7 +2249,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'
 #'   `is_bipartite()` returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph()] to create one-mode networks
+#' @seealso [make_graph()] to create one-mode networks
 #' @keywords graphs
 #' @family bipartite
 #' @examples
@@ -1585,11 +2263,11 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 
   if (is.character(edges)) {
     if (is.null(vertex.names)) {
-      stop("`types` vector must be named when the edge vector contains strings")
+      cli::cli_abort("{.arg types} vector must be named when the edge vector contains strings")
     }
     edges <- match(edges, vertex.names)
     if (any(is.na(edges))) {
-      stop("edge vector contains a vertex name that is not found in `types`")
+      cli::cli_abort("edge vector contains a vertex name that is not found in {.arg types}")
     }
   }
 
@@ -1621,7 +2299,6 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' directed graph, where every `i->j` edge is present if and only if
 #' \eqn{j<i}. If `directed=FALSE` then the graph is just a full graph.
 #'
-#' @aliases graph.full.citation
 #' @param n The number of vertices.
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
@@ -1660,13 +2337,13 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' details.
 #'
 #'
-#' @aliases graph.lcf graph_from_lcf
+#' @aliases graph_from_lcf
 #' @param n Integer, the number of vertices in the graph.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph()] can create arbitrary graphs, see also the other
+#' @seealso [make_graph()] can create arbitrary graphs, see also the other
 #' functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples
@@ -1676,6 +2353,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
+#' @cdocs igraph_lcf_vector
 graph_from_lcf <- lcf_vector_impl
 
 ## -----------------------------------------------------------------
@@ -1769,6 +2447,7 @@ graph_from_lcf <- lcf_vector_impl
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
+#' @cdocs igraph_realize_degree_sequence
 realize_degseq <- realize_degree_sequence_impl
 
 
@@ -1812,53 +2491,18 @@ realize_degseq <- realize_degree_sequence_impl
 #' @examples
 #' g <- realize_bipartite_degseq(c(3, 3, 2, 1, 1), c(2, 2, 2, 2, 2))
 #' degree(g)
+#' @cdocs igraph_realize_bipartite_degree_sequence
 realize_bipartite_degseq <- function(degrees1, degrees2, ...,
                                      allowed.edge.types = c("simple", "multiple"),
                                      method = c("smallest", "largest", "index")) {
   check_dots_empty()
   allowed.edge.types <- igraph.match.arg(allowed.edge.types)
   method <- igraph.match.arg(method)
-  g <- realize_bipartite_degree_sequence_impl(degrees1 = degrees1, degrees2 = degrees2,
-                                              allowed.edge.types = allowed.edge.types,
-                                              method = method)
+  g <- realize_bipartite_degree_sequence_impl(
+    degrees1 = degrees1, degrees2 = degrees2,
+    allowed.edge.types = allowed.edge.types,
+    method = method
+  )
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g
 }
-
-
-#' @export graph.atlas
-deprecated("graph.atlas", graph_from_atlas)
-#' @export graph.bipartite
-deprecated("graph.bipartite", make_bipartite_graph)
-#' @export graph.de.bruijn
-deprecated("graph.de.bruijn", make_de_bruijn_graph)
-#' @export graph.empty
-deprecated("graph.empty", make_empty_graph)
-#' @export graph.extended.chordal.ring
-deprecated("graph.extended.chordal.ring", make_chordal_ring)
-#' @export graph.formula
-deprecated("graph.formula", graph_from_literal)
-#' @export graph.full
-deprecated("graph.full", make_full_graph)
-#' @export graph.full.bipartite
-deprecated("graph.full.bipartite", make_full_bipartite_graph)
-#' @export graph.full.citation
-deprecated("graph.full.citation", make_full_citation_graph)
-#' @export graph.kautz
-deprecated("graph.kautz", make_kautz_graph)
-#' @export graph.lattice
-deprecated("graph.lattice", make_lattice)
-#' @export graph.lcf
-deprecated("graph.lcf", graph_from_lcf)
-#' @export graph.star
-deprecated("graph.star", make_star)
-#' @export graph.tree
-deprecated("graph.tree", make_tree)
-#' @export graph.ring
-deprecated("graph.ring", make_ring)
-#' @export line.graph
-deprecated("line.graph", make_line_graph)
-#' @export graph.famous
-deprecated("graph.famous", make_graph)
-#' @export graph
-deprecated("graph", make_graph)

@@ -1,4 +1,3 @@
-
 #' Minimum spanning tree
 #'
 #' @description
@@ -93,13 +92,13 @@ mst <- function(graph, weights = NULL,
     .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
-      stop("edges weights must be supplied for Prim's algorithm")
+      cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
     on.exit(.Call(R_igraph_finalizer))
     .Call(R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
   } else {
-    stop("Invalid algorithm")
+    cli::cli_abort("Invalid {.arg algorithm}.")
   }
 }

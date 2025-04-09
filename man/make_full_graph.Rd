@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_full_graph}
 \alias{make_full_graph}
-\alias{graph.full}
 \alias{full_graph}
 \title{Create a full graph}
 \usage{
@@ -34,6 +33,7 @@ Other deterministic constructors:
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
+\code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},

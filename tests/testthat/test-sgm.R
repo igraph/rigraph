@@ -5,7 +5,7 @@ test_that("SGM works", {
   vc <- 10
   nos <- 3
 
-  g1 <- erdos.renyi.game(vc, .5)
+  g1 <- sample_gnp(vc, .5)
   randperm <- c(1:nos, nos + sample(vc - nos))
   g2 <- sample_correlated_gnp(g1, corr = .7, p = g1$p, permutation = randperm)
   P <- match_vertices(g1[], g2[],
@@ -13,11 +13,11 @@ test_that("SGM works", {
     iteration = 20
   )
 
-  expect_that(c(1:nos, P$corr[, 2]), equals(randperm))
-  expect_that(apply(P$P != 0, 1, which), equals(randperm))
-  expect_that(
+  expect_equal(c(1:nos, P$corr[, 2]), randperm)
+  expect_equal(apply(P$P != 0, 1, which), randperm)
+  expect_equal(
     apply(P$D != 0, 1, which),
-    equals(randperm[(nos + 1):vc] - nos)
+    randperm[(nos + 1):vc] - nos
   )
 
   ## Slightly bigger
@@ -26,7 +26,7 @@ test_that("SGM works", {
   vc <- 100
   nos <- 10
 
-  g1 <- erdos.renyi.game(vc, .1)
+  g1 <- sample_gnp(vc, .1)
   perm <- c(1:nos, sample(vc - nos) + nos)
   g2 <- sample_correlated_gnp(g1, corr = 1, p = g1$p, permutation = perm)
 
@@ -35,11 +35,11 @@ test_that("SGM works", {
     iteration = 20
   )
 
-  expect_that(P$corr[, 2], equals(perm[(nos + 1):vc]))
-  expect_that(apply(P$P != 0, 1, which), equals(perm))
-  expect_that(
+  expect_equal(P$corr[, 2], perm[(nos + 1):vc])
+  expect_equal(apply(P$P != 0, 1, which), perm)
+  expect_equal(
     apply(P$D != 0, 1, which),
-    equals(perm[(nos + 1):vc] - nos)
+    perm[(nos + 1):vc] - nos
   )
 })
 

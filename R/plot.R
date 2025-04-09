@@ -99,7 +99,9 @@ plot.igraph <- function(x,
   ################################################################
   ## Visual parameters
   params <- i.parse.plot.params(graph, list(...))
-  vertex.size <- 1 / 200 * params("vertex", "size")
+
+  vertex.size <- params("vertex", "size")
+  vertex.size.scaling <- params("vertex", "size.scaling")
   label.family <- params("vertex", "label.family")
   label.font <- params("vertex", "label.font")
   label.cex <- params("vertex", "label.cex")
@@ -140,6 +142,7 @@ plot.igraph <- function(x,
   ylab <- params("plot", "ylab")
 
   palette <- params("plot", "palette")
+
   if (!is.null(palette)) {
     old_palette <- palette(palette)
     on.exit(palette(old_palette), add = TRUE)
@@ -150,12 +153,13 @@ plot.igraph <- function(x,
 
   ################################################################
   ## create the plot
-  maxv <- max(vertex.size)
-  if (vc > 0 && rescale) {
-    # norm layout to (-1, 1)
+  if (rescale) {
     layout <- norm_coords(layout, -1, 1, -1, 1)
-    xlim <- c(xlim[1] - margin[2] - maxv, xlim[2] + margin[4] + maxv)
-    ylim <- c(ylim[1] - margin[1] - maxv, ylim[2] + margin[3] + maxv)
+    fact <- (1 - vertex.size.scaling)
+    maxv <- 1 / 200 * max(vertex.size)
+
+    xlim <- c(xlim[1] - margin[2] - fact * maxv, xlim[2] + margin[4] + fact * maxv)
+    ylim <- c(ylim[1] - margin[1] - fact * maxv, ylim[2] + margin[3] + fact * maxv)
   }
   if (!add) {
     plot(0, 0,
@@ -165,6 +169,50 @@ plot.igraph <- function(x,
     )
   }
 
+  ################################################################
+  ## Rescaling vertices and updating params
+  if (vertex.size.scaling) {
+    newdots <- list(...)
+
+    # vertex.size
+    vertex.size <- i.rescale.vertex(vertex.size,
+      minmax.relative.size =
+        params("vertex", "relative.size")
+    )
+    newdots$vertex.size <- vertex.size
+
+    # vertex.size2: Notice that in this case we need to ajust the scale
+    # in two ways: (1) On the relative size of the axes, and (2) on the
+    # relative size of vertex.size/vertex.size2
+
+    scalefactor <- parusr <- par("usr")
+    scalefactor <- (parusr[2] - parusr[1]) / (parusr[4] - parusr[3])
+    if ("vertex.size2" %in% names(newdots)) { # If the user provided -vertex.size2-
+
+      scalefactor <- scalefactor * (
+        max(params("vertex", "size2"), na.rm = TRUE) / max(params("vertex", "size"), na.rm = TRUE))
+
+      newdots$vertex.size2 <- i.rescale.vertex(
+        params("vertex", "size2"),
+        parusr[3:4] * scalefactor,
+        params("vertex", "relative.size")
+      )
+    } else { # Otherwise use -vertex.size-
+      newdots$vertex.size2 <- i.rescale.vertex(
+        params("vertex", "size"),
+        parusr[3:4] * scalefactor,
+        params("vertex", "relative.size")
+      )
+    }
+
+    params <- i.parse.plot.params(graph, newdots)
+  } else {
+    params <- i.parse.plot.params(
+      graph,
+      list(vertex.size = 1 / 200 * vertex.size, vertex.size2 = 1 / 200 * params("vertex", "size2"))
+    )
+    vertex.size <- 1 / 200 * vertex.size
+  }
   ################################################################
   ## Mark vertex groups
   if (!is.list(mark.groups) && is.numeric(mark.groups)) {
@@ -292,7 +340,8 @@ plot.igraph <- function(x,
       }
     }
 
-    loop <- function(x0, y0, cx = x0, cy = y0, color, angle = 0, label = NA,
+    loop <- function(x0, y0, cx = x0, cy = y0, color, angle = 0, label = NA, label.color,
+                     label.font, label.family, label.cex,
                      width = 1, arr = 2, lty = 1, arrow.size = arrow.size,
                      arr.w = arr.w, lab.x, lab.y, loopSize = loop.size) {
       rad <- angle
@@ -337,8 +386,8 @@ plot.igraph <- function(x,
         }
 
         text(lx, ly, label,
-          col = edge.label.color, font = edge.label.font,
-          family = edge.label.family, cex = edge.label.cex
+          col = label.color, font = label.font,
+          family = label.family, cex = label.cex
         )
       }
     }
@@ -371,10 +420,28 @@ plot.igraph <- function(x,
     if (length(arrow.size) > 1) {
       asize <- arrow.size[loops.e]
     }
+    lcol <- edge.label.color
+    if (length(lcol) > 1) {
+      lcol <- lcol[loops.e]
+    }
+    lfam <- edge.label.family
+    if (length(lfam) > 1) {
+      lfam <- lfam[loops.e]
+    }
+    lfon <- edge.label.font
+    if (length(lfon) > 1) {
+      lfon <- lfon[loops.e]
+    }
+    lcex <- edge.label.cex
+    if (length(lcex) > 1) {
+      lcex <- lcex[loops.e]
+    }
+
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] - sin(la) * vs
     mapply(loop, xx0, yy0,
-      color = ec, angle = -la, label = loop.labels, lty = lty,
+      color = ec, angle = -la, label = loop.labels,
+      label.color = lcol, label.family = lfam, label.font = lfon, label.cex = lcex, lty = lty,
       width = ew, arr = arr, arrow.size = asize, arr.w = arrow.width,
       lab.x = loop.labx, lab.y = loop.laby
     )
@@ -447,9 +514,27 @@ plot.igraph <- function(x,
     if (!is.null(elab.y)) {
       lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
     }
+
+    ecol <- edge.label.color
+    if (length(ecol) > 1) {
+      ecol <- ecol[nonloops.e]
+    }
+    efam <- edge.label.family
+    if (length(efam) > 1) {
+      efam <- efam[nonloops.e]
+    }
+    efon <- edge.label.font
+    if (length(efon) > 1) {
+      efon <- efon[nonloops.e]
+    }
+    ecex <- edge.label.cex
+    if (length(ecex) > 1) {
+      ecex <- ecex[nonloops.e]
+    }
+
     text(lc.x, lc.y,
-      labels = edge.labels, col = edge.label.color,
-      family = edge.label.family, font = edge.label.font, cex = edge.label.cex
+      labels = edge.labels, col = ecol,
+      family = efam, font = efon, cex = ecex
     )
   }
 
@@ -527,9 +612,9 @@ plot.igraph <- function(x,
 #'
 #' g <- make_lattice(c(5, 5, 5))
 #' coords <- layout_with_fr(g, dim = 3)
-#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
-#'   rglplot(g, layout = coords)
-#' }
+#'
+#' @examplesIf interactive() && rlang::is_installed("rgl")
+#' rglplot(g, layout = coords)
 #'
 rglplot <- function(x, ...) {
   UseMethod("rglplot", x)
@@ -741,7 +826,20 @@ rglplot.igraph <- function(x, ...) {
   label.degree <- params("vertex", "label.degree")
   label.dist <- params("vertex", "label.dist")
   vertex.color <- params("vertex", "color")
-  vertex.size <- (1 / 200) * params("vertex", "size")
+
+  vertex.size <- params("vertex", "size")
+  vertex.size.scaling <- params("vertex", "size.scaling")
+
+  # Rescaling vertex size
+  if (vertex.size.scaling) {
+    vertex.size <- i.rescale.vertex(
+      vertex.size, rgl::par3d("scale")[1:2] * c(-1, 1),
+      params("vertex", "relative.size")
+    )
+  } else {
+    vertex.size <- (1 / 200) * params("vertex", "size")
+  }
+
   loop.angle <- params("edge", "loop.angle")
   loop.angle2 <- params("edge", "loop.angle2")
 
@@ -970,14 +1068,14 @@ igraph.Arrows <-
       p.x2 <- rep(bx2, Rep)
       p.y2 <- rep(by2, Rep)
       ttheta <- rep(theta, Rep) + rep(deg.arr, lx)
-      r.arr <- rep(r.arr, lx)
+      r.arr.rep <- rep(r.arr, lx)
       if (open) {
-        lines((p.x2 + r.arr * cos(ttheta) / uin[1]),
-          (p.y2 + r.arr * sin(ttheta) / uin[2]),
+        lines((p.x2 + r.arr.rep * cos(ttheta) / uin[1]),
+          (p.y2 + r.arr.rep * sin(ttheta) / uin[2]),
           lwd = h.lwd, col = h.col.bo, lty = h.lty
         )
       } else {
-        polygon(p.x2 + r.arr * cos(ttheta) / uin[1], p.y2 + r.arr * sin(ttheta) / uin[2],
+        polygon(p.x2 + r.arr.rep * cos(ttheta) / uin[1], p.y2 + r.arr * sin(ttheta) / uin[2],
           col = h.col, lwd = h.lwd,
           border = h.col.bo, lty = h.lty
         )
@@ -1000,15 +1098,15 @@ igraph.Arrows <-
       p.x2 <- rep(x2, Rep)
       p.y2 <- rep(y2, Rep)
       ttheta <- rep(theta, Rep) + rep(deg.arr, lx)
-      r.arr <- rep(r.arr, lx)
+      r.arr.rep <- rep(r.arr, lx)
 
       if (open) {
-        lines((p.x2 + r.arr * cos(ttheta) / uin[1]),
-          (p.y2 + r.arr * sin(ttheta) / uin[2]),
+        lines((p.x2 + r.arr.rep * cos(ttheta) / uin[1]),
+          (p.y2 + r.arr.rep * sin(ttheta) / uin[2]),
           lwd = h.lwd, col = h.col.bo, lty = h.lty
         )
       } else {
-        polygon(p.x2 + r.arr * cos(ttheta) / uin[1], p.y2 + r.arr * sin(ttheta) / uin[2],
+        polygon(p.x2 + r.arr.rep * cos(ttheta) / uin[1], p.y2 + r.arr.rep * sin(ttheta) / uin[2],
           col = h.col, lwd = h.lwd,
           border = h.col.bo, lty = h.lty
         )

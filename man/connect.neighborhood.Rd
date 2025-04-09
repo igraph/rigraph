@@ -9,7 +9,8 @@ connect.neighborhood(graph, order, mode = c("all", "out", "in", "total"))
 \arguments{
 \item{graph}{The input graph.}
 
-\item{order}{Integer giving the order of the neighborhood.}
+\item{order}{Integer giving the order of the neighborhood. Negative values
+indicate an infinite order.}
 
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the

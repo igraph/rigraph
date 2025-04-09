@@ -133,7 +133,7 @@ If you try to add edges to vertices with invalid IDs (i.e., you try to add an ed
 g <- add_edges(g, edges = c(38, 37))
 ```
 
-Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package, which provides a mechanism for chaining commands with the operator `%\>%`:
+Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package, which provides a mechanism for chaining commands with the operator `%>%`:
 
 ```{r echo = TRUE}
 g <- g %>%
@@ -146,7 +146,7 @@ g
 We now have an undirected graph with 40 vertices and 86 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will be. Use `delete_vertices()` and `delete_edges()` to perform these operations. For instance, to delete the edge connecting vertices `1-34`, get its ID and then delete it:
 
 ```{r echo = TRUE}
-edge_id_to_delete <- get.edge.ids(g, c(1, 34))
+edge_id_to_delete <- get_edge_ids(g, c(1, 34))
 edge_id_to_delete
 ```
 
@@ -161,11 +161,11 @@ g <- make_ring(10) %>% delete_edges("10|1")
 plot(g)
 ```
 
-The example above shows that you can also refer to edges with strings containing the IDs of the source and target vertices, connected by a pipe symbol `|`. `"10|1"` in the above example means the edge that connects vertex 10 to vertex 1. Of course you can also use the edge IDs directly, or retrieve them with the `get.edge.ids()` function:
+The example above shows that you can also refer to edges with strings containing the IDs of the source and target vertices, connected by a pipe symbol `|`. `"10|1"` in the above example means the edge that connects vertex 10 to vertex 1. Of course you can also use the edge IDs directly, or retrieve them with the `get_edge_ids()` function:
 
 ```{r echo = TRUE}
 g <- make_ring(5)
-g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 plot(g)
 ```
 
@@ -252,7 +252,7 @@ g <- make_graph(
 )
 ```
 
-Each vertex represents a person, so we want to store ages, genders and types of connection between two people (`is_formal()` refers to whether a connection between one person or another is formal or informal, respectively colleagues or friends). The `\$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr()` and `set_graph_attr()`.
+Each vertex represents a person, so we want to store ages, genders and types of connection between two people (`is_formal()` refers to whether a connection between one person or another is formal or informal, respectively colleagues or friends). The `$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr()` and `set_graph_attr()`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
@@ -261,7 +261,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V()` and `E()` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr()` and `set_edge_attr()` and the operator `%\>%`:
+`V()` and `E()` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr()` and `set_edge_attr()` and the operator `%>%`:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(
@@ -309,7 +309,7 @@ g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
 
-If you want to save a graph in R with all the attributes use the R's standard function `dput()` function and retrieve it later with `dget()`. You can also just save the R workspace and restore it later.
+If you want to save a graph in R with all the attributes use `saveRDS()` (and then `readRDS()` to retrieve it).
 
 ## Structural properties of graphs
 

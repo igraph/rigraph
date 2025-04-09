@@ -3,14 +3,14 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/vendor.yml"
+      - ".github/workflows/vendor.yaml"
+      - "vendor-one.sh"
   workflow_dispatch:
   schedule:
-    - cron: "* 2 * * *"
+    - cron: "*/5 * * * *"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}
 
 name: vendor
 
@@ -24,6 +24,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/checkout@v4
         with:
@@ -33,30 +35,34 @@ jobs:
 
       - uses: ./.github/workflows/git-identity
 
-      - uses: ./.github/workflows/custom/before-install
-        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
-
       - uses: ./.github/workflows/install
         with:
+          cache-version: rcc-vendor
           token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
-          cache-version: vendor
-          needs: check
-          extra-packages: any::rcmdcheck, cpp11, decor
 
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
-
-      - run: |
-          git checkout -- .
-          git clean -fdx
-          tools/update-cigraph.sh .git/igraph
-          rm -rf .git/igraph
-
-      - uses: ./.github/workflows/check
-        with:
-          results: ${{ runner.os }}-smoke-test
-
-      - if: github.event_name != 'pull_request'
+      - name: Vendor sources
+        id: vendor
         run: |
-          git push -u origin HEAD
+          git pull --rebase
+          ./vendor-one.sh .git/igraph
+          rm -rf .git/igraph
+          git push --dry-run
+          # Check if ahead of upstream branch
+          # If yes, set a step output
+          if [ $(git rev-list HEAD...origin/main --count) -gt 0 ]; then
+            # Avoid set-output, it's deprecated
+            echo "vendor=ok" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create PR
+        if: steps.vendor.outputs.vendor != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -x
+          git checkout -b vendor
+          if git push -u origin HEAD; then
+            gh pr create --fill-first
+            gh workflow run rcc -f ref=vendor
+            gh pr merge --auto --squash
+          fi

@@ -220,7 +220,7 @@ igraph_error_t igraph_assortativity_nominal(const igraph_t *graph,
  * </para><para>
  * M. E. J. Newman: Assortative mixing in networks,
  * Phys. Rev. Lett. 89, 208701 (2002)
- * http://doi.org/10.1103/PhysRevLett.89.208701.
+ * https://doi.org/10.1103/PhysRevLett.89.208701.
  * See equation (4) for performing the calculation in undirected
  * graphs with the degrees as values.
  *
@@ -269,7 +269,8 @@ igraph_error_t igraph_assortativity(const igraph_t *graph,
     directed = directed && igraph_is_directed(graph);
 
     if (!directed && values_in) {
-        IGRAPH_WARNING("Incoming vertex values ignored when calculating undirected assortativity.");
+        IGRAPH_WARNING(
+            "Incoming vertex values are ignored when calculating undirected assortativity.");
     }
 
     if (igraph_vector_size(values) != no_of_nodes) {
@@ -771,7 +772,7 @@ static igraph_error_t mixing_matrix(
  * \param from_mode How to compute the degree of sources? Can be \c IGRAPH_OUT
  *    for out-degree, \c IGRAPH_IN for in-degree, or \c IGRAPH_ALL for total degree.
  *    Ignored in undirected graphs.
- * \param to_mode How to compute the degree of sources? Can be \c IGRAPH_OUT
+ * \param to_mode How to compute the degree of targets? Can be \c IGRAPH_OUT
  *    for out-degree, \c IGRAPH_IN for in-degree, or \c IGRAPH_ALL for total degree.
  *    Ignored in undirected graphs.
  * \param directed_neighbors Whether to consider <code>u -> v</code> connections
@@ -837,7 +838,7 @@ igraph_error_t igraph_joint_degree_distribution(
     case IGRAPH_IN:  deg_from = &deg_in;  break;
     case IGRAPH_ALL: deg_from = &deg_all; break;
     default:
-        IGRAPH_ERROR("Invalid 'from' degree mode.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid 'from' degree mode.", IGRAPH_EINVMODE);
     }
 
     switch (to_mode) {
@@ -845,7 +846,7 @@ igraph_error_t igraph_joint_degree_distribution(
     case IGRAPH_IN:  deg_to = &deg_in;  break;
     case IGRAPH_ALL: deg_to = &deg_all; break;
     default:
-        IGRAPH_ERROR("Invalid 'to' degree mode.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid 'to' degree mode.", IGRAPH_EINVMODE);
     }
 
     IGRAPH_CHECK(mixing_matrix(graph,

@@ -36,6 +36,7 @@
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_is_tree
 is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALSE) {
   out <- is_tree_impl(graph, mode, details)
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
@@ -74,12 +75,13 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_tree(3) + make_tree(5,3)
+#' g <- make_tree(3) + make_tree(5, 3)
 #' is_forest(g)
 #' is_forest(g, details = TRUE)
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_is_forest
 is_forest <- is_forest_impl
 
 #' Convert a tree graph to its Prüfer sequence
@@ -106,6 +108,7 @@ is_forest <- is_forest_impl
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_to_prufer
 to_prufer <- to_prufer_impl
 
 #' Samples from the spanning trees of a graph randomly and uniformly
@@ -122,16 +125,17 @@ to_prufer <- to_prufer_impl
 #'   given vertex will be processed, and the result will be a spanning tree of the
 #'   component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#'   [subgraph.edges()] to extract the corresponding subgraph.
+#'   [subgraph_from_edges()] to extract the corresponding subgraph.
 #'
 #' @keywords graph
-#' @seealso [subgraph.edges()] to extract the tree itself
+#' @seealso [subgraph_from_edges()] to extract the tree itself
 #' @examples
 #'
 #' g <- make_full_graph(10) %du% make_full_graph(5)
 #' edges <- sample_spanning_tree(g)
-#' forest <- subgraph.edges(g, edges)
+#' forest <- subgraph_from_edges(g, edges)
 #'
 #' @family trees
 #' @export
+#' @cdocs igraph_random_spanning_tree
 sample_spanning_tree <- random_spanning_tree_impl
