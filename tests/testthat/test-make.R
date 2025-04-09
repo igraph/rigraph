@@ -248,7 +248,8 @@ test_that("compatibility when arguments are not named", {
 
 test_that("make_empty_graph gives an error for invalid arguments", {
   expect_snapshot(make_empty_graph(NULL), error = TRUE)
-  expect_warning(expect_error(make_empty_graph("spam")), "NAs introduced by coercion")
+  expect_snapshot(make_empty_graph("spam"), error = TRUE)
+  expect_snapshot(make_empty_graph(10, "spam"), error = TRUE)
 })
 
 test_that("make_graph_atlas works", {

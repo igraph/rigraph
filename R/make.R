@@ -1109,11 +1109,11 @@ with_graph_ <- function(...) {
 #'   \item{Frucht}{The Frucht Graph is the smallest
 #'     cubical graph whose automorphism group consists only of the identity
 #'     element. It has 12 vertices and 18 edges.}
-#'   \item{Grotzsch}{The Groetzsch
+#'   \item{Grotzsch, Groetzsch}{The Grötzsch
 #'     graph is a triangle-free graph with 11 vertices, 20 edges, and chromatic
-#'     number 4. It is named after German mathematician Herbert Groetzsch, and its
+#'     number 4. It is named after German mathematician Herbert Grötzsch, and its
 #'     existence demonstrates that the assumption of planarity is necessary in
-#'     Groetzsch's theorem that every triangle-free planar graph is 3-colorable.}
+#'     Grötzsch's theorem that every triangle-free planar graph is 3-colorable.}
 #'   \item{Heawood}{The Heawood graph is an undirected graph with 14 vertices and
 #'     21 edges. The graph is cubic, and all cycles in the graph have six or more
 #'     edges. Every smaller cubic graph has shorter cycles, so this graph is the
@@ -1367,7 +1367,15 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
 #' @cdocs igraph_empty
-make_empty_graph <- empty_impl
+make_empty_graph <- function(n = 0, directed = TRUE) {
+  if (!is.numeric(n)) {
+    cli::cli_abort("{.arg n} must be numeric, not {.obj_type_friendly {n}}.")
+  }
+  if (!is.logical(directed)) {
+    cli::cli_abort("{.arg directed} must be a logical, not {.obj_type_friendly {directed}}.")
+  }
+  empty_impl(n, directed)
+}
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
