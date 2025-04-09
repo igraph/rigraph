@@ -211,40 +211,34 @@ igraph.version <- function() {
 
 #' Query igraph's version string
 #'
-#' Returns the package version.
+#' Returns the R package version,
+#' prints the R package version and C library version.
 #'
-#' The igraph version string is always the same as the version of the R package.
-#'
-#' @param software Either "R" or "C": version of the R package or of the vendored C library? Defaults to R.
-#' @return A character scalar, the igraph version string.
+#'#' @return A character scalar, the igraph version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @keywords internal
 #' @export
 #' @examples
-#'
-#' ## Compare to the package version
-#' packageDescription("igraph")$Version
 #' igraph_version()
 #'
 igraph_version <- function(software = c("R", "C")) {
-  software <- rlang::arg_match(software, c("R", "C"))
+  r_version <- getNamespaceInfo("igraph", "spec")[["version"]]
 
-  switch(
-    software,
-    # Better than packageVersion("igraph") because it uses the loaded package
-    # and is independent of .libPaths()
-    R = getNamespaceInfo("igraph", "spec")[["version"]],
-    C = c_version()
+  version <- structure(
+    r_version,
+    class = c("igraph_version", class(r_version)),
+    c_version = c_version()
   )
+
+  invisible(version)
 }
 
+print.igraph_version <- function(x, ...) {
+  writeLines(paste0("R version: ", x))
+  writeLines(paste0("C version: ", attr(x, "c_version")))
+  invisible(x)
+}
 c_version <- function() {
-  version <- version_impl()
-  sprintf(
-    "%s.%s.%s",
-    version[["major"]],
-    version[["minor"]],
-    version[["subminor"]]
-  )
+  version_impl()[["version_string"]]
 }
