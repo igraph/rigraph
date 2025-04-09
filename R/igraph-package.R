@@ -1,4 +1,3 @@
-
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
 ## usethis namespace: start
@@ -10,6 +9,7 @@
 #' @importFrom rlang inject
 #' @importFrom rlang warn
 #' @importFrom rlang %||%
+#' @import rlang
 ## usethis namespace: end
 NULL
 
