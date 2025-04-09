@@ -6,22 +6,14 @@
 \usage{
 igraph_version(software = c("R", "C"))
 }
-\arguments{
-\item{software}{Either "R" or "C": version of the R package or of the vendored C library? Defaults to R.}
-}
-\value{
-A character scalar, the igraph version string.
-}
 \description{
-Returns the package version.
+Returns the R package version,
+prints the R package version and C library version.
 }
 \details{
-The igraph version string is always the same as the version of the R package.
+#' @return A character scalar, the igraph version string.
 }
 \examples{
-
-## Compare to the package version
-packageDescription("igraph")$Version
 igraph_version()
 
 }
