@@ -3960,3 +3960,14 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   res
 }
 
+version_impl <- function() {
+  # Argument checks
+
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_version)
+
+  res
+}
+

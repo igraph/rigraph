@@ -1747,7 +1747,6 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'
 sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
                              directed = FALSE, mode = c("out", "in", "all")) {
-
   type <- igraph.match.arg(type)
   mode <- igraph.match.arg(mode)
 
@@ -1774,7 +1773,6 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 #' @param ... Passed to `sample_bipartite()`.
 #' @export
 bipartite <- function(..., type = NULL) {
-
   if (is.null(type) || type == "gnp") {
     lifecycle::deprecate_soft(
       "2.1.3",
@@ -1795,7 +1793,6 @@ bipartite <- function(..., type = NULL) {
       "Use {.fun bipartite_gnp} or {.fun bipartite_gnm}."
     )
   }
-
 }
 
 #' @rdname sample_bipartite_gnm
@@ -1832,7 +1829,6 @@ bipartite_gnp <- function(...) constructor_spec(sample_bipartite_gnp, ...)
 #'   mutual edges. If this argument is \sQuote{all}, then each edge direction is
 #'   considered independently and mutual edges might be generated. This argument
 #'   is ignored for undirected graphs.
-#' @inheritParams rlang::args_dots_empty
 #' @examples
 #'
 #' ## empty graph
@@ -1850,9 +1846,9 @@ bipartite_gnp <- function(...) constructor_spec(sample_bipartite_gnp, ...)
 #' @family games
 #' @export
 sample_bipartite_gnm <- function(n1, n2, m,
-                                ...,
-                                directed = FALSE,
-                                mode = c("out", "in", "all")) {
+                                 ...,
+                                 directed = FALSE,
+                                 mode = c("out", "in", "all")) {
   check_dots_empty()
   mode <- igraph.match.arg(mode)
   m <- as.numeric(m)
@@ -1875,9 +1871,9 @@ sample_bipartite_gnm <- function(n1, n2, m,
 #' @rdname sample_bipartite_gnm
 #' @export
 sample_bipartite_gnp <- function(n1, n2, p,
-                                ...,
-                                directed = FALSE,
-                                mode = c("out", "in", "all")) {
+                                 ...,
+                                 directed = FALSE,
+                                 mode = c("out", "in", "all")) {
   check_dots_empty()
   mode <- igraph.match.arg(mode)
   p <- as.numeric(p)

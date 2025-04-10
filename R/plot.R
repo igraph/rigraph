@@ -211,6 +211,7 @@ plot.igraph <- function(x,
       graph,
       list(vertex.size = 1 / 200 * vertex.size, vertex.size2 = 1 / 200 * params("vertex", "size2"))
     )
+    vertex.size <- 1 / 200 * vertex.size
   }
   ################################################################
   ## Mark vertex groups
