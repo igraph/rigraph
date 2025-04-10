@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2136 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 9 new problems
- * We failed to check 3 packages
+ * We saw 12 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -16,15 +16,24 @@ Issues with CRAN packages are summarised below.
 * dosearch
   checking tests ... ERROR
 
+* grec
+  checking installed package size ... NOTE
+
 * incidentally
   checking re-building of vignette outputs ... ERROR
 
 * klassR
   checking examples ... ERROR
 
+* multinet
+  checking examples ... ERROR
+
 * mwcsr
   checking examples ... ERROR
   checking tests ... ERROR
+
+* netdiffuseR
+  checking examples ... ERROR
 
 * remify
   checking tests ... ERROR
@@ -43,6 +52,10 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* bnlearn   (NA)
-* datapack  (NA)
-* streamDAG (NA)
+* bnlearn         (NA)
+* dataone         (NA)
+* datapack        (NA)
+* FAIRmaterials   (NA)
+* multinma        (NA)
+* randomForestSRC (NA)
+* streamDAG       (NA)
