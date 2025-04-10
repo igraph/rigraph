@@ -83,32 +83,14 @@ find_cycle <- find_cycle_impl
 #' @cdocs igraph_simple_cycles
 #' @export
 
-simple_cycles <- function(graph, mode = c("out", "in", "all", "total"), min = NULL, max = NULL) {
+simple_cycles <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  min = NULL,
+  max = NULL
+) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
 
-  if (is.null(min)) {
-    min <- -1
-  }
-
-  if (is.null(max)) {
-    max <- -1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_simple_cycles, graph, mode, as.numeric(min), as.numeric(max))
-  if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-  if (igraph_opt("return.vs.es")) {
-    res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
-  }
-  res
+  simple_cycles_impl(graph, mode, min %||% -1, max %||% -1)
 }

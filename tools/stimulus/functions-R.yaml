@@ -1469,7 +1469,6 @@ igraph_solve_lsap:
 igraph_find_cycle:
 
 igraph_simple_cycles:
-    IGNORE: RR
 
 igraph_simple_cycles_callback:
     IGNORE: RR, RC
