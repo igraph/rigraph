@@ -449,6 +449,7 @@ extern SEXP R_igraph_turan(SEXP, SEXP);
 extern SEXP R_igraph_unfold_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_union(SEXP, SEXP);
 extern SEXP R_igraph_vcount(SEXP);
+extern SEXP R_igraph_version(void);
 extern SEXP R_igraph_vertex_coloring_greedy(SEXP, SEXP);
 extern SEXP R_igraph_vertex_connectivity(SEXP, SEXP);
 extern SEXP R_igraph_vertex_disjoint_paths(SEXP, SEXP, SEXP);
@@ -906,6 +907,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_unfold_tree",                                (DL_FUNC) &R_igraph_unfold_tree,                                 3},
     {"R_igraph_union",                                      (DL_FUNC) &R_igraph_union,                                       2},
     {"R_igraph_vcount",                                     (DL_FUNC) &R_igraph_vcount,                                      1},
+    {"R_igraph_version",                                    (DL_FUNC) &R_igraph_version,                                     0},
     {"R_igraph_vertex_coloring_greedy",                     (DL_FUNC) &R_igraph_vertex_coloring_greedy,                      2},
     {"R_igraph_vertex_connectivity",                        (DL_FUNC) &R_igraph_vertex_connectivity,                         2},
     {"R_igraph_vertex_disjoint_paths",                      (DL_FUNC) &R_igraph_vertex_disjoint_paths,                       3},

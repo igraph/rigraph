@@ -7,8 +7,7 @@
 maximal.cliques.count(graph, min = NULL, max = NULL, subset = NULL)
 }
 \arguments{
-\item{graph}{The input graph, directed graphs will be considered as
-undirected ones, multiple edges and loops are ignored.}
+\item{graph}{The input graph.}
 
 \item{min}{Numeric constant, lower limit on the size of the cliques to find.
 \code{NULL} means no limit, i.e. it is the same as 0.}
