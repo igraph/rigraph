@@ -101,7 +101,8 @@ vertex ids.</p>
 <code><a href="girth.html">girth</a>()</code>,
 <code><a href="has_eulerian_path.html">has_eulerian_path</a>()</code>,
 <code><a href="is_acyclic.html">is_acyclic</a>()</code>,
-<code><a href="is_dag.html">is_dag</a>()</code></p></div>
+<code><a href="is_dag.html">is_dag</a>()</code>,
+<code><a href="simple_cycles.html">simple_cycles</a>()</code></p></div>
     </div>
     <div class="section level2">
     <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
@@ -111,24 +112,24 @@ vertex ids.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_lattice.html">make_lattice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_lattice.html">make_lattice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">find_cycle</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 vertices, from 595dda0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/9 vertices, from a3df3ce:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 6 5 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/12 edges from 595dda0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/12 edges from a3df3ce:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8--9 6--9 5--6 5--8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empty results are returned for acyclic graphs</span></span></span>
 <span class="r-in"><span><span class="fu">find_cycle</span><span class="op">(</span><span class="fu"><a href="sample_tree.html">sample_tree</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vertices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/5 vertices, from add8a94:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/5 vertices, from adb4046:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/4 edges from add8a94:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 0/4 edges from adb4046:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
