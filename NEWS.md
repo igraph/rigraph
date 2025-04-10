@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9038
+
+## Documentation
+
+- Correct the description of the `weights` parameter of `hits_scores()`.
+
+## Refactoring
+
+- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
+
+
 # igraph 2.1.4.9037
 
 ## vendor
