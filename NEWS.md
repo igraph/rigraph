@@ -1,5 +1,115 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9038
+
+## Documentation
+
+- Correct the description of the `weights` parameter of `hits_scores()`.
+
+## Refactoring
+
+- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
+
+
+# igraph 2.1.4.9037
+
+## vendor
+
+- Update vendored sources to igraph/igraph@09f6f258c4a864654ad1950e053ff2f5c507be54 (#1814).
+
+- Update vendored sources to igraph/igraph@d48a25ba0f6d72e447c6d17d74b667b1f21754fb (#1813).
+
+
+# igraph 2.1.4.9036
+
+## Features
+
+- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@a68d7cafcd0935e6f229437981811e730af4f03f (#1811).
+
+
+# igraph 2.1.4.9035
+
+## vendor
+
+- Update vendored sources to igraph/igraph@01b15eb1f44d36418ea65394710a02887ca16857 (#1808).
+
+- Update vendored sources to igraph/igraph@8d5db4db95e2e80cbe8169bbe66ce64f73df7bd3 (#1807).
+
+- Update vendored sources to igraph/igraph@6c5b349a4b56ebee0003953ee43994d2dd93f189 (#1806).
+
+
+# igraph 2.1.4.9034
+
+## Bug fixes
+
+- Removed redundant inheritParams call (#1802).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Load the Matrix package before coercing to a sparse matrix.
+
+- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
+
+## Chore
+
+- Results from revdepcheck.
+
+## Testing
+
+- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
+
+
+# igraph 2.1.4.9033
+
+## Features
+
+- Add relative size scaling to vertices in plots (@gvegayon, #172).
+
+## Chore
+
+- Render docs.
+
+- Updated results.
+
+## Documentation
+
+- Better describe output of `all_shortest_paths()` (#1029, #1778).
+
+
+# igraph 2.1.4.9032
+
+## vendor
+
+- Update vendored sources to igraph/igraph@0a22a85cb9281ce147b0db7415610e55dee2e332 (#1791).
+
+
+# igraph 2.1.4.9031
+
+## vendor
+
+- Update vendored sources to igraph/igraph@e5de49c7f65708763b70413dbde4ac0eba7ef5b6 (#1789).
+
+- Update vendored sources to igraph/igraph@7d634197abd2bb0bc3317c1216cfb82c3813d1af (#1788).
+
+- Update vendored sources to igraph/igraph@bc19dd7ec62ceb80409513009caefb5412c0dab1 (#1787).
+
+
+# igraph 2.1.4.9030
+
+## Documentation
+
+- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
+  This change was implemented in the C core.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ead8aea0dcecf43755f9a1857d09ce092d6ff9cf (#1785).
+
+
 # igraph 2.1.4.9029
 
 ## vendor

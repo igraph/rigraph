@@ -146,7 +146,7 @@ mytriangle <- function(coords, v = NULL, params) {
   if (length(vertex.color) != 1 && !is.null(v)) {
     vertex.color <- vertex.color[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -174,7 +174,7 @@ mystar <- function(coords, v = NULL, params) {
   if (length(vertex.color) != 1 && !is.null(v)) {
     vertex.color <- vertex.color[v]
   }
-  vertex.size <- 1 / 200 * params("vertex", "size")
+  vertex.size <- params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
