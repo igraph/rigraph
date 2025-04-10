@@ -8,8 +8,13 @@
 #' @inheritParams set_vertex_attr
 #' @keywords internal
 #' @export
-set.vertex.attribute <- function(graph, name, index = V(graph), value) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "set.vertex.attribute()", "set_vertex_attr()")
+set.vertex.attribute <- function(graph, name, index = V(graph), value) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "set.vertex.attribute()",
+    "set_vertex_attr()"
+  )
   set_vertex_attr(graph = graph, name = name, index = index, value = value)
 } # nocov end
 
@@ -23,8 +28,13 @@ set.vertex.attribute <- function(graph, name, index = V(graph), value) { # nocov
 #' @inheritParams set_graph_attr
 #' @keywords internal
 #' @export
-set.graph.attribute <- function(graph, name, value) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "set.graph.attribute()", "set_graph_attr()")
+set.graph.attribute <- function(graph, name, value) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "set.graph.attribute()",
+    "set_graph_attr()"
+  )
   set_graph_attr(graph = graph, name = name, value = value)
 } # nocov end
 
@@ -38,7 +48,8 @@ set.graph.attribute <- function(graph, name, value) { # nocov start
 #' @inheritParams set_edge_attr
 #' @keywords internal
 #' @export
-set.edge.attribute <- function(graph, name, index = E(graph), value) { # nocov start
+set.edge.attribute <- function(graph, name, index = E(graph), value) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "set.edge.attribute()", "set_edge_attr()")
   set_edge_attr(graph = graph, name = name, index = index, value = value)
 } # nocov end
@@ -53,8 +64,13 @@ set.edge.attribute <- function(graph, name, index = E(graph), value) { # nocov s
 #' @inheritParams delete_vertex_attr
 #' @keywords internal
 #' @export
-remove.vertex.attribute <- function(graph, name) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "remove.vertex.attribute()", "delete_vertex_attr()")
+remove.vertex.attribute <- function(graph, name) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "remove.vertex.attribute()",
+    "delete_vertex_attr()"
+  )
   delete_vertex_attr(graph = graph, name = name)
 } # nocov end
 
@@ -68,8 +84,13 @@ remove.vertex.attribute <- function(graph, name) { # nocov start
 #' @inheritParams delete_graph_attr
 #' @keywords internal
 #' @export
-remove.graph.attribute <- function(graph, name) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "remove.graph.attribute()", "delete_graph_attr()")
+remove.graph.attribute <- function(graph, name) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "remove.graph.attribute()",
+    "delete_graph_attr()"
+  )
   delete_graph_attr(graph = graph, name = name)
 } # nocov end
 
@@ -83,8 +104,13 @@ remove.graph.attribute <- function(graph, name) { # nocov start
 #' @inheritParams delete_edge_attr
 #' @keywords internal
 #' @export
-remove.edge.attribute <- function(graph, name) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "remove.edge.attribute()", "delete_edge_attr()")
+remove.edge.attribute <- function(graph, name) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "remove.edge.attribute()",
+    "delete_edge_attr()"
+  )
   delete_edge_attr(graph = graph, name = name)
 } # nocov end
 
@@ -98,8 +124,13 @@ remove.edge.attribute <- function(graph, name) { # nocov start
 #' @inheritParams vertex_attr_names
 #' @keywords internal
 #' @export
-list.vertex.attributes <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "list.vertex.attributes()", "vertex_attr_names()")
+list.vertex.attributes <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "list.vertex.attributes()",
+    "vertex_attr_names()"
+  )
   vertex_attr_names(graph = graph)
 } # nocov end
 
@@ -113,8 +144,13 @@ list.vertex.attributes <- function(graph) { # nocov start
 #' @inheritParams graph_attr_names
 #' @keywords internal
 #' @export
-list.graph.attributes <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "list.graph.attributes()", "graph_attr_names()")
+list.graph.attributes <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "list.graph.attributes()",
+    "graph_attr_names()"
+  )
   graph_attr_names(graph = graph)
 } # nocov end
 
@@ -128,8 +164,13 @@ list.graph.attributes <- function(graph) { # nocov start
 #' @inheritParams edge_attr_names
 #' @keywords internal
 #' @export
-list.edge.attributes <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "list.edge.attributes()", "edge_attr_names()")
+list.edge.attributes <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "list.edge.attributes()",
+    "edge_attr_names()"
+  )
   edge_attr_names(graph = graph)
 } # nocov end
 
@@ -143,7 +184,8 @@ list.edge.attributes <- function(graph) { # nocov start
 #' @inheritParams is_weighted
 #' @keywords internal
 #' @export
-is.weighted <- function(graph) { # nocov start
+is.weighted <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.weighted()", "is_weighted()")
   is_weighted(graph = graph)
 } # nocov end
@@ -158,7 +200,8 @@ is.weighted <- function(graph) { # nocov start
 #' @inheritParams is_named
 #' @keywords internal
 #' @export
-is.named <- function(graph) { # nocov start
+is.named <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.named()", "is_named()")
   is_named(graph = graph)
 } # nocov end
@@ -173,7 +216,8 @@ is.named <- function(graph) { # nocov start
 #' @inheritParams is_bipartite
 #' @keywords internal
 #' @export
-is.bipartite <- function(graph) { # nocov start
+is.bipartite <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.bipartite()", "is_bipartite()")
   is_bipartite(graph = graph)
 } # nocov end
@@ -188,7 +232,8 @@ is.bipartite <- function(graph) { # nocov start
 #' @inheritParams vertex_attr
 #' @keywords internal
 #' @export
-get.vertex.attribute <- function(graph, name, index = V(graph)) { # nocov start
+get.vertex.attribute <- function(graph, name, index = V(graph)) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "get.vertex.attribute()", "vertex_attr()")
   vertex_attr(graph = graph, name = name, index = index)
 } # nocov end
@@ -203,7 +248,8 @@ get.vertex.attribute <- function(graph, name, index = V(graph)) { # nocov start
 #' @inheritParams graph_attr
 #' @keywords internal
 #' @export
-get.graph.attribute <- function(graph, name) { # nocov start
+get.graph.attribute <- function(graph, name) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "get.graph.attribute()", "graph_attr()")
   graph_attr(graph = graph, name = name)
 } # nocov end
@@ -218,7 +264,8 @@ get.graph.attribute <- function(graph, name) { # nocov start
 #' @inheritParams edge_attr
 #' @keywords internal
 #' @export
-get.edge.attribute <- function(graph, name, index = E(graph)) { # nocov start
+get.edge.attribute <- function(graph, name, index = E(graph)) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "get.edge.attribute()", "edge_attr()")
   edge_attr(graph = graph, name = name, index = index)
 } # nocov end
@@ -336,13 +383,25 @@ graph_attr <- function(graph, name) {
 set_graph_attr <- function(graph, name, value) {
   ensure_igraph(graph)
 
-  .Call(R_igraph_mybracket3_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, name, value)
+  .Call(
+    R_igraph_mybracket3_set,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_graph,
+    name,
+    value
+  )
 }
 
 #' @export
 graph.attributes <- function(graph) {
   ensure_igraph(graph)
-  .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
+  .Call(
+    R_igraph_mybracket2_copy,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_graph
+  )
 }
 
 #' @export
@@ -353,7 +412,13 @@ graph.attributes <- function(graph) {
     value <- as.list(value)
   }
 
-  .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, value)
+  .Call(
+    R_igraph_mybracket2_set,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_graph,
+    value
+  )
 }
 
 
@@ -502,7 +567,13 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     }
   }
 
-  .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattrs)
+  .Call(
+    R_igraph_mybracket2_set,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_vertex,
+    vattrs
+  )
 }
 
 #' @export
@@ -513,7 +584,12 @@ vertex.attributes <- function(graph, index = V(graph)) {
     index <- as_igraph_vs(graph, index)
   }
 
-  res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
+  res <- .Call(
+    R_igraph_mybracket2_copy,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_vertex
+  )
 
   if (!missing(index)) {
     if (!index_is_natural_sequence(index, graph)) {
@@ -558,7 +634,13 @@ set_value_at <- function(value, idx, length_out) {
     value <- map(value, set_value_at, idx = index, length_out = length(V(graph)))
   }
 
-  .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, value)
+  .Call(
+    R_igraph_mybracket2_set,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_vertex,
+    value
+  )
 }
 
 
@@ -709,7 +791,13 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
     }
   }
 
-  .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattrs)
+  .Call(
+    R_igraph_mybracket2_set,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_edge,
+    eattrs
+  )
 }
 
 #' @export
@@ -720,10 +808,17 @@ edge.attributes <- function(graph, index = E(graph)) {
     index <- as_igraph_es(graph, index)
   }
 
-  res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+  res <- .Call(
+    R_igraph_mybracket2_copy,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_edge
+  )
 
-  if (!missing(index) &&
-    (length(index) != ecount(graph) || any(index != E(graph)))) {
+  if (
+    !missing(index) &&
+      (length(index) != ecount(graph) || any(index != E(graph)))
+  ) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
     }
@@ -751,8 +846,10 @@ edge.attributes <- function(graph, index = E(graph)) {
     }
   }
 
-  if (!missing(index) &&
-    (length(index) != ecount(graph) || any(index != E(graph)))) {
+  if (
+    !missing(index) &&
+      (length(index) != ecount(graph) || any(index != E(graph)))
+  ) {
     es <- E(graph)
     for (i in seq_along(value)) {
       tmp <- value[[i]]
@@ -780,7 +877,12 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' graph_attr_names(g)
 graph_attr_names <- function(graph) {
   ensure_igraph(graph)
-  res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
+  res <- .Call(
+    R_igraph_mybracket2_names,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_graph
+  )
   if (is.null(res)) {
     res <- character()
   }
@@ -804,7 +906,12 @@ graph_attr_names <- function(graph) {
 vertex_attr_names <- function(graph) {
   ensure_igraph(graph)
 
-  res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
+  res <- .Call(
+    R_igraph_mybracket2_names,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_vertex
+  )
 
   if (is.null(res)) {
     res <- character()
@@ -827,7 +934,12 @@ vertex_attr_names <- function(graph) {
 #' plot(g)
 edge_attr_names <- function(graph) {
   ensure_igraph(graph)
-  res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+  res <- .Call(
+    R_igraph_mybracket2_names,
+    graph,
+    igraph_t_idx_attr,
+    igraph_attr_idx_edge
+  )
   if (is.null(res)) {
     res <- character()
   }
@@ -1032,10 +1144,20 @@ igraph.i.attribute.combination <- function(comb) {
     } else {
       known <- data.frame(
         n = c(
-          "ignore", "sum", "prod", "min", "max", "random",
-          "first", "last", "mean", "median", "concat"
+          "ignore",
+          "sum",
+          "prod",
+          "min",
+          "max",
+          "random",
+          "first",
+          "last",
+          "mean",
+          "median",
+          "concat"
         ),
-        i = c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), stringsAsFactors = FALSE
+        i = c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+        stringsAsFactors = FALSE
       )
       x <- pmatch(tolower(x), known[, 1])
       if (is.na(x)) {
