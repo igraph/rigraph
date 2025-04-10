@@ -516,9 +516,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
   if (!missing(index)) {
-    index_is_natural_sequence <- (length(index) == vcount(graph) &&
-      identical(index, seq(1, vcount(graph))))
-    if (!index_is_natural_sequence) {
+    if (!index_is_natural_sequence(index, graph)) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -556,8 +554,7 @@ set_value_at <- function(value, idx, length_out) {
     }
   }
 
-  index_is_natural_sequence <- (length(index) == vcount(graph) && all(index == V(graph)))
-  if (!missing(index) && !index_is_natural_sequence) {
+  if (!missing(index) && !index_is_natural_sequence(index, graph)) {
     value <- map(value, set_value_at, idx = index, length_out = length(V(graph)))
   }
 
@@ -1197,4 +1194,8 @@ assert_named_list <- function(value) {
   if (!rlang::is_named(value) || anyDuplicated(names(value)) > 0) {
     cli::cli_abort("{.arg value} must be a named list with unique names")
   }
+}
+
+index_is_natural_sequence <- function(index, graph) {
+  length(index) == vcount(graph) && all(index == seq_len(vcount(graph)))
 }
