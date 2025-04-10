@@ -234,11 +234,13 @@ igraph_version <- function(software = c("R", "C")) {
   invisible(version)
 }
 
+#' @export
 print.igraph_version <- function(x, ...) {
   writeLines(paste0("R version: ", x))
   writeLines(paste0("C version: ", attr(x, "c_version")))
   invisible(x)
 }
+
 c_version <- function() {
   version_impl()[["version_string"]]
 }
