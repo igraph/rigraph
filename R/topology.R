@@ -774,11 +774,6 @@ graph.isoclass <- isoclass_impl
 #' @param directed Whether to create a directed graph (the default).
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
-#' @return A list with components:
-#'   \describe{
-#'     \item{topology}{The topology of the graph.}
-#'     \item{details}{Additional details about the topology.}
-#'   }
 #'
 #' @family graph isomorphism
 #' @export
