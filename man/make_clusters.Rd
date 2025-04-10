@@ -35,6 +35,8 @@ A \code{communities} object.
 \item{membership}{A numeric vector giving the community id for each
 vertex.}
 \item{modularity}{The modularity score of the partition.}
+\item{algorithm}{If known, the algorithm used to obtain the communities.}
+.    \item{vcount}{Number of vertices in the graph.}
 }
 }
 \description{
