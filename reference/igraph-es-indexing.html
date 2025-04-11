@@ -15,7 +15,7 @@ with some extras."><meta property="og:image" content="https://r.igraph.org/logo.
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9039</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -203,13 +203,13 @@ examples below.</p>
 <span class="r-in"><span><span class="co"># Special operators for indexing based on graph structure</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, power <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%--%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from b8986f9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 1543fb4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span> <span class="op">%-&gt;%</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from b8986f9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from 1543fb4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;2</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%&lt;-%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from b8986f9:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 1543fb4:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;1 4-&gt;1 5-&gt;2 6-&gt;2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -----------------------------------------------------------------</span></span></span>
@@ -217,7 +217,7 @@ examples below.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="diameter.html">get_diameter</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span>, path <span class="op">=</span> <span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 12/99 edges from c96b5be:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 12/99 edges from 632e217:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 50--86 25--50 19--25  9--19  7-- 9  2-- 7  1-- 2  1-- 6  6--14 14--51</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 51--60 60--96</span>
 <span class="r-in"><span></span></span>
@@ -226,7 +226,7 @@ examples below.</p>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">3</span> <span class="op">/</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"weight"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">gsize</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 16/27 edges from fbcd4af:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 16/27 edges from f9008e2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tail head tid hid     weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     2    4   2   4 -0.5666468</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     4    6   4   6 -0.5710605</span>
@@ -250,7 +250,7 @@ examples below.</p>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">.env</span><span class="op">$</span><span class="va">x</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/27 edge from fbcd4af:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/27 edge from f9008e2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3--6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -260,7 +260,7 @@ examples below.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, David Schoch, Maëlle Salmon.</p>
+  <p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative, <a href="https://mr.schochastics.net/" class="external-link">David Schoch</a>, <a href="https://masalmon.eu/" class="external-link">Maëlle Salmon</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
