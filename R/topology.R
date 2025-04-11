@@ -775,7 +775,6 @@ graph.isoclass <- isoclass_impl
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
-#'
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_isoclass_create
