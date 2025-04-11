@@ -40,6 +40,15 @@ argument is given and \code{start} is set to \code{TRUE}, then it starts
 sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
 first, and then samples starting from the optimum.
 }
+\examples{
+## A graph with two dense groups
+g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
+hrg <- fit_hrg(g)
+hrg
+
+## The consensus tree for it
+consensus_tree(g, hrg = hrg, start = TRUE)
+}
 \seealso{
 Other hierarchical random graph functions: 
 \code{\link{fit_hrg}()},
