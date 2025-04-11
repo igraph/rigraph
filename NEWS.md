@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9039
+
+## Bug fixes
+
+- Remove string matrix support from biadjacency matrix functions (#1540, #1542, #1803).
+
+## Features
+
+- `simple_cycles()` lists all simple cycles (#1573, #1580).
+
+- Expose C version (#1208, #1781).
+
+## Chore
+
+- Format with air.
+
+## Documentation
+
+- Fix style (#1819).
+
+## Performance
+
+- Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
+
+
 # igraph 2.1.4.9038
 
 ## Documentation
