@@ -42,7 +42,7 @@ Imports:
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
-    rlang,
+    rlang (>= 1.1.0),
     stats,
     utils,
     vctrs
