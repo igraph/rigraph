@@ -155,21 +155,23 @@ NULL
 #'   MCMC procedure is performed until convergence.
 #' @return `fit_hrg()` returns an `igraphHRG` object. This is a list
 #'   with the following members:
-#'   \item{left}{Vector that contains the left children of the internal
-#'     tree vertices. The first vertex is always the root vertex, so the
-#'     first element of the vector is the left child of the root
-#'     vertex. Internal vertices are denoted with negative numbers, starting
-#'     from -1 and going down, i.e. the root vertex is -1. Leaf vertices
-#'     are denoted by non-negative number, starting from zero and up.}
-#'   \item{right}{Vector that contains the right children of the vertices,
-#'     with the same encoding as the `left` vector.}
-#'   \item{prob}{The connection probabilities attached to the internal
-#'     vertices, the first number belongs to the root vertex (i.e. internal
-#'     vertex -1), the second to internal vertex -2, etc.}
-#'   \item{edges}{The number of edges in the subtree below the given
-#'     internal vertex.}
-#'   \item{vertices}{The number of vertices in the subtree below the
-#'     given internal vertex, including itself.}
+#'   \describe{
+#'     \item{left}{Vector that contains the left children of the internal
+#'       tree vertices. The first vertex is always the root vertex, so the
+#'       first element of the vector is the left child of the root
+#'       vertex. Internal vertices are denoted with negative numbers, starting
+#'       from -1 and going down, i.e. the root vertex is -1. Leaf vertices
+#'       are denoted by non-negative number, starting from zero and up.}
+#'     \item{right}{Vector that contains the right children of the vertices,
+#'       with the same encoding as the `left` vector.}
+#'     \item{prob}{The connection probabilities attached to the internal
+#'       vertices, the first number belongs to the root vertex (i.e. internal
+#'       vertex -1), the second to internal vertex -2, etc.}
+#'     \item{edges}{The number of edges in the subtree below the given
+#'       internal vertex.}
+#'     \item{vertices}{The number of vertices in the subtree below the
+#'       given internal vertex, including itself.}
+#'   }
 #' @references A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure
 #' and the prediction of missing links in networks. *Nature* 453, 98--101
 #' (2008);
@@ -244,13 +246,15 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'   is an `igraphHRGConsensus` object, the second is an
 #'   `igraphHRG` object.  The `igraphHRGConsensus` object has the
 #'   following members:
-#'   \item{parents}{For each vertex, the id of its parent vertex is stored,
-#'     or zero, if the vertex is the root vertex in the tree. The first n
-#'     vertex ids (from 0) refer to the original vertices of the graph, the
-#'     other ids refer to vertex groups.}
-#'   \item{weights}{Numeric vector, counts the number of times a given tree
-#'     split occurred in the generated network samples, for each internal
-#'     vertices. The order is the same as in the `parents` vector.}
+#'   \describe{
+#'     \item{parents}{For each vertex, the id of its parent vertex is stored,
+#'       or zero, if the vertex is the root vertex in the tree. The first n
+#'       vertex ids (from 0) refer to the original vertices of the graph, the
+#'       other ids refer to vertex groups.}
+#'     \item{weights}{Numeric vector, counts the number of times a given tree
+#'       split occurred in the generated network samples, for each internal
+#'       vertices. The order is the same as in the `parents` vector.}
+#'   }
 #' @family hierarchical random graph functions
 #' @export
 #' @cdocs igraph_hrg_consensus
@@ -340,11 +344,13 @@ sample_hrg <- function(hrg) {
 #' @param num.bins Number of bins for the edge probabilities. Give a higher
 #'   number for a more accurate prediction.
 #' @return A list with entries:
-#'   \item{edges}{The predicted edges, in a two-column matrix of vertex
-#'     ids.}
-#'   \item{prob}{Probabilities of these edges, according to the fitted
-#'     model.}
-#'   \item{hrg}{The (supplied or fitted) hierarchical random graph model.}
+#'   \describe{
+#'     \item{edges}{The predicted edges, in a two-column matrix of vertex
+#'       ids.}
+#'     \item{prob}{Probabilities of these edges, according to the fitted
+#'       model.}
+#'     \item{hrg}{The (supplied or fitted) hierarchical random graph model.}
+#'   }
 #'
 #' @references A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure
 #' and the prediction of missing links in networks. *Nature* 453, 98--101

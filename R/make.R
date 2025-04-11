@@ -663,9 +663,9 @@ graph.atlas <- function(n) { # nocov start
 #' @param .variant Constructor variant; must be one of \sQuote{make},
 #'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
 #'   specification has deterministic and random variants.
-#' @return A named list with three items: \sQuote{cons} for the constructor
-#'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
-#'   remaining, unparsed arguments.
+#' @return A named list with three items: \describe{\item{cons}{the constructor
+#'   function}, \item{mods}{the modifiers} \item{args}{the
+#'   remaining, unparsed arguments.}}
 #' @dev
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)

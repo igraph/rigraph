@@ -236,7 +236,7 @@ bridges <- bridges_impl
 #'
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
-#' @return A named list with three components: \item{no}{Numeric scalar, an
+#' @return A named list with three components: \describe{\item{no}{Numeric scalar, an
 #'   integer giving the number of biconnected components in the graph.}
 #'   \item{tree_edges}{The components themselves, a list of numeric vectors. Each
 #'   vector is a set of edge ids giving the edges in a biconnected component.
@@ -244,7 +244,7 @@ bridges <- bridges_impl
 #'   \item{component_edges}{A list of numeric vectors. It gives all edges in the
 #'   components.} \item{components}{A list of numeric vectors, the vertices of
 #'   the components.} \item{articulation_points}{The articulation points of the
-#'   graph. See [articulation_points()].}
+#'   graph. See [articulation_points()].}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [articulation_points()], [components()],
 #' [is_connected()], [vertex_connectivity()]

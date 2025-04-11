@@ -22,12 +22,21 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
-largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
-cell, \sQuote{\code{fm}}: first maximally non-trivially connected
-non-singleton cell, \sQuote{\code{flm}}: first largest maximally
-non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
-smallest maximally non-trivially connected non-singleton cell.}
+are:
+\sQuote{\code{f}}:
+first non-singleton cell,
+\sQuote{\code{fl}}:
+first largest non-singleton cell,
+\sQuote{\code{fs}}:
+first smallest non-singleton cell,
+\sQuote{\code{fm}}:
+first maximally non-trivially connected
+non-singleton cell,
+\sQuote{\code{flm}}:
+first largest maximally
+non-trivially connected non-singleton cell,
+\sQuote{\code{fsm}}:
+first smallest maximally non-trivially connected non-singleton cell.}
 
 \item{details}{Specifies whether to provide additional details about the
 BLISS internals in the result.}
@@ -36,9 +45,13 @@ BLISS internals in the result.}
 When \code{details} is \code{FALSE}, a list of vertex permutations
 that form a generating set of the automorphism group of the input graph.
 When \code{details} is \code{TRUE}, a named list with two members:
-\item{generators}{Returns the generators themselves} \item{info}{Additional
+\describe{
+\item{generators}{Returns the generators themselves}
+\item{info}{Additional
 information about the BLISS internals. See \code{\link[=count_automorphisms]{count_automorphisms()}} for
-more details.}
+more details.
+}
+}
 }
 \description{
 Compute the generating set of the automorphism group of a graph.

@@ -38,10 +38,12 @@ and \code{"last"} takes the last one.}
 }
 \value{
 A named list with two components:
+\describe{
 \item{membership}{numeric vector giving the cluster id to which each vertex
 belongs.}
 \item{distances}{numeric vector giving the distance of each vertex from its
 generator}
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
