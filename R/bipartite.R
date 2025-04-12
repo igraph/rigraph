@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.projection.size()` was renamed to `bipartite_projection_size()` to create a more
+#' `bipartite.projection.size()` was renamed to [`bipartite_projection_size()`] to create a more
 #' consistent API.
 #' @inheritParams bipartite_projection_size
 #' @keywords internal
@@ -18,7 +18,7 @@ bipartite.projection.size <- function(graph, types = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.projection()` was renamed to `bipartite_projection()` to create a more
+#' `bipartite.projection()` was renamed to [`bipartite_projection()`] to create a more
 #' consistent API.
 #' @inheritParams bipartite_projection
 #' @keywords internal
@@ -33,7 +33,7 @@ bipartite.projection <- function(graph, types = NULL, multiplicity = TRUE, probe
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.mapping()` was renamed to `bipartite_mapping()` to create a more
+#' `bipartite.mapping()` was renamed to [`bipartite_mapping()`] to create a more
 #' consistent API.
 #' @inheritParams bipartite_mapping
 #' @keywords internal

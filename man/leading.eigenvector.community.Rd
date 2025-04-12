@@ -46,7 +46,7 @@ the modularity matrix. See details below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{leading.eigenvector.community()} was renamed to \code{cluster_leading_eigen()} to create a more
+\code{leading.eigenvector.community()} was renamed to \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} to create a more
 consistent API.
 }
 \keyword{internal}

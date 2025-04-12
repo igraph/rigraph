@@ -17,7 +17,7 @@ named graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{adjacent.triangles()} was renamed to \code{count_triangles()} to create a more
+\code{adjacent.triangles()} was renamed to \code{\link[=count_triangles]{count_triangles()}} to create a more
 consistent API.
 }
 \keyword{internal}

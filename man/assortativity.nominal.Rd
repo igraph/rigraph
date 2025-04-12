@@ -29,7 +29,7 @@ values at the two ends of edges.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{assortativity.nominal()} was renamed to \code{assortativity_nominal()} to create a more
+\code{assortativity.nominal()} was renamed to \code{\link[=assortativity_nominal]{assortativity_nominal()}} to create a more
 consistent API.
 }
 \keyword{internal}

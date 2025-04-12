@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.directed()` was renamed to `is_directed()` to create a more
+#' `is.directed()` was renamed to [`is_directed()`] to create a more
 #' consistent API.
 #' @inheritParams is_directed
 #' @keywords internal
@@ -18,7 +18,7 @@ is.directed <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `delete.vertices()` was renamed to `delete_vertices()` to create a more
+#' `delete.vertices()` was renamed to [`delete_vertices()`] to create a more
 #' consistent API.
 #' @inheritParams delete_vertices
 #' @keywords internal
@@ -33,7 +33,7 @@ delete.vertices <- function(graph, v) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `delete.edges()` was renamed to `delete_edges()` to create a more
+#' `delete.edges()` was renamed to [`delete_edges()`] to create a more
 #' consistent API.
 #' @inheritParams delete_edges
 #' @keywords internal
@@ -48,7 +48,7 @@ delete.edges <- function(graph, edges) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.vertices()` was renamed to `add_vertices()` to create a more
+#' `add.vertices()` was renamed to [`add_vertices()`] to create a more
 #' consistent API.
 #' @inheritParams add_vertices
 #' @keywords internal
@@ -63,7 +63,7 @@ add.vertices <- function(graph, nv, ..., attr = list()) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.edges()` was renamed to `add_edges()` to create a more
+#' `add.edges()` was renamed to [`add_edges()`] to create a more
 #' consistent API.
 #' @inheritParams add_edges
 #' @keywords internal
@@ -568,7 +568,7 @@ get_edge_ids <- function(graph,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edge.ids()` was renamed to `get_edge_ids()` to create a more
+#' `get.edge.ids()` was renamed to [`get_edge_ids()`] to create a more
 #' consistent API.
 #' @inheritParams get_edge_ids
 #' @param multi

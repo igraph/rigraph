@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.predict()` was renamed to `predict_edges()` to create a more
+#' `hrg.predict()` was renamed to [`predict_edges()`] to create a more
 #' consistent API.
 #' @inheritParams predict_edges
 #' @keywords internal
@@ -18,7 +18,7 @@ hrg.predict <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000, n
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.fit()` was renamed to `fit_hrg()` to create a more
+#' `hrg.fit()` was renamed to [`fit_hrg()`] to create a more
 #' consistent API.
 #' @inheritParams fit_hrg
 #' @keywords internal
@@ -33,7 +33,7 @@ hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.game()` was renamed to `sample_hrg()` to create a more
+#' `hrg.game()` was renamed to [`sample_hrg()`] to create a more
 #' consistent API.
 #' @inheritParams sample_hrg
 #' @keywords internal
@@ -48,7 +48,7 @@ hrg.game <- function(hrg) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.dendrogram()` was renamed to `hrg_tree()` to create a more
+#' `hrg.dendrogram()` was renamed to [`hrg_tree()`] to create a more
 #' consistent API.
 #' @inheritParams hrg_tree
 #' @keywords internal
@@ -63,7 +63,7 @@ hrg.dendrogram <- function(hrg) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.create()` was renamed to `hrg()` to create a more
+#' `hrg.create()` was renamed to [`hrg()`] to create a more
 #' consistent API.
 #' @inheritParams hrg
 #' @keywords internal
@@ -78,7 +78,7 @@ hrg.create <- function(graph, prob) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hrg.consensus()` was renamed to `consensus_tree()` to create a more
+#' `hrg.consensus()` was renamed to [`consensus_tree()`] to create a more
 #' consistent API.
 #' @inheritParams consensus_tree
 #' @keywords internal

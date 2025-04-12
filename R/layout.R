@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `piecewise.layout()` was renamed to `layout_components()` to create a more
+#' `piecewise.layout()` was renamed to [`layout_components()`] to create a more
 #' consistent API.
 #' @inheritParams layout_components
 #' @keywords internal
@@ -18,7 +18,7 @@ piecewise.layout <- function(graph, layout = layout_with_kk, ...) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.sugiyama()` was renamed to `layout_with_sugiyama()` to create a more
+#' `layout.sugiyama()` was renamed to [`layout_with_sugiyama()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_sugiyama
 #' @keywords internal
@@ -33,7 +33,7 @@ layout.sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1, maxiter = 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.star()` was renamed to `layout_as_star()` to create a more
+#' `layout.star()` was renamed to [`layout_as_star()`] to create a more
 #' consistent API.
 #' @inheritParams layout_as_star
 #' @keywords internal
@@ -48,7 +48,7 @@ layout.star <- function(graph, center = V(graph)[1], order = NULL) { # nocov sta
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.norm()` was renamed to `norm_coords()` to create a more
+#' `layout.norm()` was renamed to [`norm_coords()`] to create a more
 #' consistent API.
 #' @inheritParams norm_coords
 #' @keywords internal
@@ -63,7 +63,7 @@ layout.norm <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1, zmin =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.merge()` was renamed to `merge_coords()` to create a more
+#' `layout.merge()` was renamed to [`merge_coords()`] to create a more
 #' consistent API.
 #' @inheritParams merge_coords
 #' @keywords internal
@@ -78,7 +78,7 @@ layout.merge <- function(graphs, layouts, method = "dla") { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.mds()` was renamed to `layout_with_mds()` to create a more
+#' `layout.mds()` was renamed to [`layout_with_mds()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_mds
 #' @keywords internal
@@ -93,7 +93,7 @@ layout.mds <- function(graph, dist = NULL, dim = 2, options = arpack_defaults())
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.grid()` was renamed to `layout_on_grid()` to create a more
+#' `layout.grid()` was renamed to [`layout_on_grid()`] to create a more
 #' consistent API.
 #' @inheritParams layout_on_grid
 #' @keywords internal
@@ -108,7 +108,7 @@ layout.grid <- function(graph, width = 0, height = 0, dim = 2) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.graphopt()` was renamed to `layout_with_graphopt()` to create a more
+#' `layout.graphopt()` was renamed to [`layout_with_graphopt()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_graphopt
 #' @keywords internal
@@ -123,7 +123,7 @@ layout.graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001, ma
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.gem()` was renamed to `layout_with_gem()` to create a more
+#' `layout.gem()` was renamed to [`layout_with_gem()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_gem
 #' @keywords internal
@@ -138,7 +138,7 @@ layout.gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2, tem
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.davidson.harel()` was renamed to `layout_with_dh()` to create a more
+#' `layout.davidson.harel()` was renamed to [`layout_with_dh()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_dh
 #' @keywords internal
@@ -153,7 +153,7 @@ layout.davidson.harel <- function(graph, coords = NULL, maxiter = 10, fineiter =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.bipartite()` was renamed to `layout_as_bipartite()` to create a more
+#' `layout.bipartite()` was renamed to [`layout_as_bipartite()`] to create a more
 #' consistent API.
 #' @inheritParams layout_as_bipartite
 #' @keywords internal
@@ -168,7 +168,7 @@ layout.bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.auto()` was renamed to `layout_nicely()` to create a more
+#' `layout.auto()` was renamed to [`layout_nicely()`] to create a more
 #' consistent API.
 #' @inheritParams layout_nicely
 #' @keywords internal
@@ -638,7 +638,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.reingold.tilford()` was renamed to `layout_as_tree()` to create a more
+#' `layout.reingold.tilford()` was renamed to [`layout_as_tree()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -699,7 +699,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.circle()` was renamed to `layout_in_circle()` to create a more
+#' `layout.circle()` was renamed to [`layout_in_circle()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -929,7 +929,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.sphere()` was renamed to `layout_on_sphere()` to create a more
+#' `layout.sphere()` was renamed to [`layout_on_sphere()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -982,7 +982,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.random()` was renamed to `layout_randomly()` to create a more
+#' `layout.random()` was renamed to [`layout_randomly()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -1306,7 +1306,7 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.fruchterman.reingold()` was renamed to `layout_with_fr()` to create a more
+#' `layout.fruchterman.reingold()` was renamed to [`layout_with_fr()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -1608,7 +1608,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.kamada.kawai()` was renamed to `layout_with_kk()` to create a more
+#' `layout.kamada.kawai()` was renamed to [`layout_with_kk()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -1679,7 +1679,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.lgl()` was renamed to `layout_with_lgl()` to create a more
+#' `layout.lgl()` was renamed to [`layout_with_lgl()`] to create a more
 #' consistent API.
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -2301,7 +2301,7 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `layout.drl()` was renamed to `layout_with_drl()` to create a more
+#' `layout.drl()` was renamed to [`layout_with_drl()`] to create a more
 #' consistent API.
 #' @inheritParams layout_with_drl
 #' @keywords internal

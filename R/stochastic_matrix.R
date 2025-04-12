@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.stochastic()` was renamed to `stochastic_matrix()` to create a more
+#' `get.stochastic()` was renamed to [`stochastic_matrix()`] to create a more
 #' consistent API.
 #' @inheritParams stochastic_matrix
 #' @keywords internal

@@ -16,7 +16,7 @@ vertex ids.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.edgelist()} was renamed to \code{as_edgelist()} to create a more
+\code{get.edgelist()} was renamed to \code{\link[=as_edgelist]{as_edgelist()}} to create a more
 consistent API.
 }
 \keyword{internal}

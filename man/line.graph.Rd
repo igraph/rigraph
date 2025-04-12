@@ -12,7 +12,7 @@ line.graph(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{line.graph()} was renamed to \code{make_line_graph()} to create a more
+\code{line.graph()} was renamed to \code{\link[=make_line_graph]{make_line_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

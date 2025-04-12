@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `create.communities()` was renamed to `make_clusters()` to create a more
+#' `create.communities()` was renamed to [`make_clusters()`] to create a more
 #' consistent API.
 #' @inheritParams make_clusters
 #' @keywords internal
@@ -18,7 +18,7 @@ create.communities <- function(graph, membership = NULL, algorithm = NULL, merge
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `walktrap.community()` was renamed to `cluster_walktrap()` to create a more
+#' `walktrap.community()` was renamed to [`cluster_walktrap()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_walktrap
 #' @keywords internal
@@ -33,7 +33,7 @@ walktrap.community <- function(graph, weights = NULL, steps = 4, merges = TRUE, 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `spinglass.community()` was renamed to `cluster_spinglass()` to create a more
+#' `spinglass.community()` was renamed to [`cluster_spinglass()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_spinglass
 #' @keywords internal
@@ -48,7 +48,7 @@ spinglass.community <- function(graph, weights = NULL, vertex = NULL, spins = 25
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `showtrace()` was renamed to `show_trace()` to create a more
+#' `showtrace()` was renamed to [`show_trace()`] to create a more
 #' consistent API.
 #' @inheritParams show_trace
 #' @keywords internal
@@ -63,7 +63,7 @@ showtrace <- function(communities) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `optimal.community()` was renamed to `cluster_optimal()` to create a more
+#' `optimal.community()` was renamed to [`cluster_optimal()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_optimal
 #' @keywords internal
@@ -78,7 +78,7 @@ optimal.community <- function(graph, weights = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `multilevel.community()` was renamed to `cluster_louvain()` to create a more
+#' `multilevel.community()` was renamed to [`cluster_louvain()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_louvain
 #' @keywords internal
@@ -93,7 +93,7 @@ multilevel.community <- function(graph, weights = NULL, resolution = 1) { # noco
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `mod.matrix()` was renamed to `modularity_matrix()` to create a more
+#' `mod.matrix()` was renamed to [`modularity_matrix()`] to create a more
 #' consistent API.
 #' @inheritParams modularity_matrix
 #' @keywords internal
@@ -108,7 +108,7 @@ mod.matrix <- function(graph, membership, weights = NULL, resolution = 1, direct
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `leading.eigenvector.community()` was renamed to `cluster_leading_eigen()` to create a more
+#' `leading.eigenvector.community()` was renamed to [`cluster_leading_eigen()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_leading_eigen
 #' @keywords internal
@@ -123,7 +123,7 @@ leading.eigenvector.community <- function(graph, steps = -1, weights = NULL, sta
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `label.propagation.community()` was renamed to `cluster_label_prop()` to create a more
+#' `label.propagation.community()` was renamed to [`cluster_label_prop()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_label_prop
 #' @keywords internal
@@ -138,7 +138,7 @@ label.propagation.community <- function(graph, weights = NULL, ..., mode = c("ou
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.hierarchical()` was renamed to `is_hierarchical()` to create a more
+#' `is.hierarchical()` was renamed to [`is_hierarchical()`] to create a more
 #' consistent API.
 #' @inheritParams is_hierarchical
 #' @keywords internal
@@ -153,7 +153,7 @@ is.hierarchical <- function(communities) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `infomap.community()` was renamed to `cluster_infomap()` to create a more
+#' `infomap.community()` was renamed to [`cluster_infomap()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_infomap
 #' @keywords internal
@@ -168,7 +168,7 @@ infomap.community <- function(graph, e.weights = NULL, v.weights = NULL, nb.tria
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `fastgreedy.community()` was renamed to `cluster_fast_greedy()` to create a more
+#' `fastgreedy.community()` was renamed to [`cluster_fast_greedy()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_fast_greedy
 #' @keywords internal
@@ -183,7 +183,7 @@ fastgreedy.community <- function(graph, merges = TRUE, modularity = TRUE, member
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.betweenness.community()` was renamed to `cluster_edge_betweenness()` to create a more
+#' `edge.betweenness.community()` was renamed to [`cluster_edge_betweenness()`] to create a more
 #' consistent API.
 #' @inheritParams cluster_edge_betweenness
 #' @keywords internal
@@ -198,7 +198,7 @@ edge.betweenness.community <- function(graph, weights = NULL, directed = TRUE, e
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `dendPlot()` was renamed to `plot_dendrogram()` to create a more
+#' `dendPlot()` was renamed to [`plot_dendrogram()`] to create a more
 #' consistent API.
 #' @inheritParams plot_dendrogram
 #' @keywords internal
@@ -213,7 +213,7 @@ dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cutat()` was renamed to `cut_at()` to create a more
+#' `cutat()` was renamed to [`cut_at()`] to create a more
 #' consistent API.
 #' @inheritParams cut_at
 #' @keywords internal
@@ -228,7 +228,7 @@ cutat <- function(communities, no, steps) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `contract.vertices()` was renamed to `contract()` to create a more
+#' `contract.vertices()` was renamed to [`contract()`] to create a more
 #' consistent API.
 #' @inheritParams contract
 #' @keywords internal
@@ -243,7 +243,7 @@ contract.vertices <- function(graph, mapping, vertex.attr.comb = igraph_opt("ver
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `code.length()` was renamed to `code_len()` to create a more
+#' `code.length()` was renamed to [`code_len()`] to create a more
 #' consistent API.
 #' @inheritParams code_len
 #' @keywords internal

@@ -15,7 +15,7 @@ curvature between \code{-start} and \code{start}, spaced equally.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{autocurve.edges()} was renamed to \code{curve_multiple()} to create a more
+\code{autocurve.edges()} was renamed to \code{\link[=curve_multiple]{curve_multiple()}} to create a more
 consistent API.
 }
 \keyword{internal}

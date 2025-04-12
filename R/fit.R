@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `power.law.fit()` was renamed to `fit_power_law()` to create a more
+#' `power.law.fit()` was renamed to [`fit_power_law()`] to create a more
 #' consistent API.
 #' @inheritParams fit_power_law
 #' @keywords internal

@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.project()` was renamed to `graphlet_proj()` to create a more
+#' `graphlets.project()` was renamed to [`graphlet_proj()`] to create a more
 #' consistent API.
 #' @inheritParams graphlet_proj
 #' @keywords internal
@@ -18,7 +18,7 @@ graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.candidate.basis()` was renamed to `graphlet_basis()` to create a more
+#' `graphlets.candidate.basis()` was renamed to [`graphlet_basis()`] to create a more
 #' consistent API.
 #' @inheritParams graphlet_basis
 #' @keywords internal

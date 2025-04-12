@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `adjacent.triangles()` was renamed to `count_triangles()` to create a more
+#' `adjacent.triangles()` was renamed to [`count_triangles()`] to create a more
 #' consistent API.
 #' @inheritParams count_triangles
 #' @keywords internal
