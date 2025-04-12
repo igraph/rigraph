@@ -166,29 +166,6 @@ Run `revdepcheck::cloud_details(, "dosearch")` for more info
         libs   5.0Mb
     ```
 
-# grec
-
-<details>
-
-* Version: 1.6.1
-* GitHub: https://github.com/LuisLauM/grec
-* Source code: https://github.com/cran/grec
-* Date/Publication: 2025-01-23 09:30:02 UTC
-* Number of recursive dependencies: 12
-
-Run `revdepcheck::cloud_details(, "grec")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.7Mb
-      sub-directories of 1Mb or more:
-        data   7.5Mb
-    ```
-
 # incidentally
 
 <details>
@@ -605,7 +582,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m3.1s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -820,7 +797,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m12.3s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m12.0s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
