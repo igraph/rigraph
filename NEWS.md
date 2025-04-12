@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9040
+
+## Documentation
+
+- Add author links (#1821).
+
+
 # igraph 2.1.4.9039
 
 ## Bug fixes
