@@ -500,14 +500,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'
 #' # -----------------------------------------------------------------
 #' # The same with vertex names
-#' g <- make_graph(~ A - +B, B - +C:D, D - +B)
+#' g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 #' V(g)[.nei(c("B", "D"))]
 #' V(g)[.nei(c("B", "D"), "in")]
 #' V(g)[.nei(c("B", "D"), "out")]
 #'
 #' # -----------------------------------------------------------------
 #' # Resolving attributes
-#' g <- make_graph(~ A - +B, B - +C:D, D - +B)
+#' g <- make_graph(~ A -+ B, B -+ C:D, D -+ B)
 #' V(g)$color <- c("red", "red", "green", "green")
 #' V(g)[color == "red"]
 #'
