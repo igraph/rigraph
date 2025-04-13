@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9041
+
+## Chore
+
+- Results from main.
+
+- Results from check with new arpack.
+
+## Documentation
+
+- Document return value of `make_clusters()` (#1794).
+
+
 # igraph 2.1.4.9040
 
 ## Documentation
