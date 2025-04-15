@@ -19,6 +19,7 @@ Note that the \code{weight} edge attribute is not used by this function.}
 }
 \value{
 A named list with components:
+\describe{
 \item{value}{A numeric scalar, the value of the maximum flow.}
 \item{flow}{A numeric vector, the flow itself, one entry for each
 edge. For undirected graphs this entry is bit trickier, since for
@@ -43,6 +44,7 @@ was used, \code{nogapnodes} is the total number of gap nodes omitted
 because of the gap heuristics and \code{nobfs} is the number of
 times a global breadth-first-search update was performed to assign
 better height (=distance) values to the vertices.}
+}
 }
 \description{
 In a graph where each edge has a given flow capacity the maximal flow

@@ -46,8 +46,11 @@ the modularity matrix. See details below.}
 }
 \value{
 \code{cluster_leading_eigen()} returns a named list with the
-following members: \item{membership}{The membership vector at the end of the
-algorithm, when no more splits are possible.} \item{merges}{The merges
+following members:
+\describe{
+\item{membership}{The membership vector at the end of the
+algorithm, when no more splits are possible.}
+\item{merges}{The merges
 matrix starting from the state described by the \code{membership} member.
 This is a two-column matrix and each line describes a merge of two
 communities, the first line is the first merge and it creates community
@@ -55,6 +58,7 @@ communities, the first line is the first merge and it creates community
 graph, the second line creates community \code{N+1}, etc.  }
 \item{options}{Information about the underlying ARPACK computation, see
 \code{\link[=arpack]{arpack()}} for details.  }
+}
 }
 \description{
 This function tries to find densely connected subgraphs in a graph by
@@ -84,7 +88,9 @@ community structure.
 \section{Callback functions}{
  The \code{callback} argument can be used to
 supply a function that is called after each eigenvector calculation. The
-following arguments are supplied to this function: \describe{
+following arguments are supplied to this function:
+
+\describe{
 \item{membership}{The actual membership vector, with zero-based indexing.}
 \item{community}{The community that the algorithm just tried to split,
 community numbering starts with zero here.}

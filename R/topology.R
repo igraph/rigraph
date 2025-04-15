@@ -793,13 +793,16 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' See the paper below for the details about BLISS. This and more information
 #' is available at <http://www.tcs.hut.fi/Software/bliss/index.html>.
 #'
-#' The possible values for the `sh` argument are: \describe{
-#' \item{"f"}{First non-singleton cell.} \item{"fl"}{First largest
-#' non-singleton cell.} \item{"fs"}{First smallest non-singleton cell.}
-#' \item{"fm"}{First maximally non-trivially connectec non-singleton
-#' cell.} \item{"flm"}{Largest maximally non-trivially connected
-#' non-singleton cell.} \item{"fsm"}{Smallest maximally non-trivially
-#' connected non-singleton cell.} } See the paper in references for details
+#' The possible values for the `sh` argument are:
+#' \describe{
+#'   \item{"f"}{First non-singleton cell.}
+#'   \item{"fl"}{First largest non-singleton cell.}
+#'   \item{"fs"}{First smallest non-singleton cell.}
+#'   \item{"fm"}{First maximally non-trivially connectec non-singleton cell. }
+#'   \item{"flm"}{Largest maximally non-trivially connected non-singleton cell. }
+#'   \item{"fsm"}{Smallest maximally non-trivially connected non-singleton cell.}
+#' }
+#' See the paper in references for details
 #' about these.
 #'
 #' @param graph The input graph, treated as undirected.
@@ -811,19 +814,29 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #'   for possible values.
-#' @return A list with the following members: \item{labeling}{The canonical
-#'   permutation which takes the input graph into canonical form. A numeric
-#'   vector, the first element is the new label of vertex 0, the second element
-#'   for vertex 1, etc. } \item{info}{Some information about the BLISS
-#'   computation. A named list with the following members: \describe{
-#'   \item{"nof_nodes"}{The number of nodes in the search tree.}
-#'   \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
-#'   \item{"nof_bad_nodes"}{Number of bad nodes.}
-#'   \item{"nof_canupdates"}{Number of canrep updates.}
-#'   \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
-#'   of the automorphism group of the input graph, as a string. The string
-#'   representation is necessary because the group size can easily exceed
-#'   values that are exactly representable in floating point.} } }
+#' @return A list with the following members:
+#'   \describe{
+#'     \item{labeling}{The canonical
+#'       permutation which takes the input graph into canonical form. A numeric
+#'       vector, the first element is the new label of vertex 0, the second element
+#'       for vertex 1, etc.
+#'     }
+#'     \item{info}{Some information about the BLISS
+#'       computation. A named list with the following members:
+#'       \describe{
+#'         \item{"nof_nodes"}{The number of nodes in the search tree.}
+#'         \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
+#'         \item{"nof_bad_nodes"}{Number of bad nodes.}
+#'         \item{"nof_canupdates"}{Number of canrep updates.}
+#'         \item{"max_level"}{Maximum level.}
+#'         \item{"group_size"}{The size
+#'           of the automorphism group of the input graph, as a string. The string
+#'           representation is necessary because the group size can easily exceed
+#'           values that are exactly representable in floating point.
+#'         }
+#'       }
+#'     }
+#'   }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso [permute()] to apply a permutation to a graph,
@@ -925,19 +938,34 @@ graph.isomorphic <- isomorphic_impl
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are: \sQuote{`f`}: first non-singleton cell, \sQuote{`fl`}: first
-#'   largest non-singleton cell, \sQuote{`fs`}: first smallest non-singleton
-#'   cell, \sQuote{`fm`}: first maximally non-trivially connected
-#'   non-singleton cell, \sQuote{`flm`}: first largest maximally
-#'   non-trivially connected non-singleton cell, \sQuote{`fsm`}: first
-#'   smallest maximally non-trivially connected non-singleton cell.
-#' @return A named list with the following members: \item{group_size}{The size
-#'   of the automorphism group of the input graph, as a string. This number is
-#'   exact if igraph was compiled with the GMP library, and approximate
-#'   otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
-#'   \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
-#'   \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
-#'   canrep updates.} \item{max_level}{Maximum level.}
+#'   are:
+#'   \sQuote{`f`}:
+#'     first non-singleton cell,
+#'   \sQuote{`fl`}:
+#'     first largest non-singleton cell,
+#'   \sQuote{`fs`}:
+#'     first smallest non-singleton cell,
+#'   \sQuote{`fm`}:
+#'     first maximally non-trivially connected
+#'     non-singleton cell,
+#'   \sQuote{`flm`}:
+#'     first largest maximally
+#'     non-trivially connected non-singleton cell,
+#'   \sQuote{`fsm`}:
+#'     first smallest maximally non-trivially connected non-singleton cell.
+#' @return A named list with the following members:
+#'   \describe{
+#'     \item{group_size}{The size
+#'       of the automorphism group of the input graph, as a string. This number is
+#'       exact if igraph was compiled with the GMP library, and approximate
+#'       otherwise.
+#'     }
+#'     \item{nof_nodes}{The number of nodes in the search tree.}
+#'     \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
+#'     \item{nof_bad_nodes}{Number of bad nodes.}
+#'     \item{nof_canupdates}{Number of canrep updates.}
+#'     \item{max_level}{Maximum level.}
+#'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
@@ -990,20 +1018,33 @@ count_automorphisms <- count_automorphisms_impl
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are: \sQuote{`f`}: first non-singleton cell, \sQuote{`fl`}: first
-#'   largest non-singleton cell, \sQuote{`fs`}: first smallest non-singleton
-#'   cell, \sQuote{`fm`}: first maximally non-trivially connected
-#'   non-singleton cell, \sQuote{`flm`}: first largest maximally
-#'   non-trivially connected non-singleton cell, \sQuote{`fsm`}: first
-#'   smallest maximally non-trivially connected non-singleton cell.
+#'   are:
+#'   \sQuote{`f`}:
+#'     first non-singleton cell,
+#'   \sQuote{`fl`}:
+#'     first largest non-singleton cell,
+#'   \sQuote{`fs`}:
+#'     first smallest non-singleton cell,
+#'   \sQuote{`fm`}:
+#'     first maximally non-trivially connected
+#'     non-singleton cell,
+#'   \sQuote{`flm`}:
+#'     first largest maximally
+#'     non-trivially connected non-singleton cell,
+#'   \sQuote{`fsm`}:
+#'     first smallest maximally non-trivially connected non-singleton cell.
 #' @param details Specifies whether to provide additional details about the
 #'   BLISS internals in the result.
 #' @return When `details` is `FALSE`, a list of vertex permutations
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
-#'   \item{generators}{Returns the generators themselves} \item{info}{Additional
-#'   information about the BLISS internals. See [count_automorphisms()] for
-#'   more details.}
+#'   \describe{
+#'     \item{generators}{Returns the generators themselves}
+#'     \item{info}{Additional
+#'       information about the BLISS internals. See [count_automorphisms()] for
+#'       more details.
+#'     }
+#'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.

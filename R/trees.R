@@ -22,10 +22,12 @@
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
 #'   list with two entries:
+#'   \describe{
 #'   \item{res}{Logical value that indicates whether the
 #'   graph is a tree.}
 #'   \item{root}{The root vertex of the tree; undefined if
 #'   the graph is not a tree.}
+#'   }
 #'
 #' @keywords graphs
 #' @examples
@@ -68,9 +70,9 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'   or also a possible root (`TRUE`)
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
-#'   list with two entries: \item{res}{Logical value that indicates whether the
+#'   list with two entries: \describe{\item{res}{Logical value that indicates whether the
 #'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
-#'   the graph is not a tree.}
+#'   the graph is not a tree.}}
 #'
 #' @keywords graphs
 #' @examples
