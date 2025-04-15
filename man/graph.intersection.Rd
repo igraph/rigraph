@@ -13,7 +13,7 @@ the function that implements \code{intersection()}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.intersection()} was renamed to \code{intersection()} to create a more
+\code{graph.intersection()} was renamed to \code{\link[=intersection]{intersection()}} to create a more
 consistent API.
 }
 \keyword{internal}

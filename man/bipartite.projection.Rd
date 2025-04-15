@@ -45,7 +45,7 @@ default it will be removed.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.projection()} was renamed to \code{bipartite_projection()} to create a more
+\code{bipartite.projection()} was renamed to \code{\link[=bipartite_projection]{bipartite_projection()}} to create a more
 consistent API.
 }
 \keyword{internal}

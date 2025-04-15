@@ -9,7 +9,7 @@ showtrace(communities)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{showtrace()} was renamed to \code{show_trace()} to create a more
+\code{showtrace()} was renamed to \code{\link[=show_trace]{show_trace()}} to create a more
 consistent API.
 }
 \keyword{internal}

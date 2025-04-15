@@ -17,7 +17,7 @@ layout.merge(graphs, layouts, method = "dla")
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.merge()} was renamed to \code{merge_coords()} to create a more
+\code{layout.merge()} was renamed to \code{\link[=merge_coords]{merge_coords()}} to create a more
 consistent API.
 }
 \keyword{internal}

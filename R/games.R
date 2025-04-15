@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `watts.strogatz.game()` was renamed to `sample_smallworld()` to create a more
+#' `watts.strogatz.game()` was renamed to [`sample_smallworld()`] to create a more
 #' consistent API.
 #' @inheritParams sample_smallworld
 #' @keywords internal
@@ -18,7 +18,7 @@ watts.strogatz.game <- function(dim, size, nei, p, loops = FALSE, multiple = FAL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `static.power.law.game()` was renamed to `sample_fitness_pl()` to create a more
+#' `static.power.law.game()` was renamed to [`sample_fitness_pl()`] to create a more
 #' consistent API.
 #' @inheritParams sample_fitness_pl
 #' @keywords internal
@@ -33,7 +33,7 @@ static.power.law.game <- function(no.of.nodes, no.of.edges, exponent.out, expone
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `static.fitness.game()` was renamed to `sample_fitness()` to create a more
+#' `static.fitness.game()` was renamed to [`sample_fitness()`] to create a more
 #' consistent API.
 #' @inheritParams sample_fitness
 #' @keywords internal
@@ -48,7 +48,7 @@ static.fitness.game <- function(no.of.edges, fitness.out, fitness.in = NULL, loo
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `sbm.game()` was renamed to `sample_sbm()` to create a more
+#' `sbm.game()` was renamed to [`sample_sbm()`] to create a more
 #' consistent API.
 #' @inheritParams sample_sbm
 #' @keywords internal
@@ -63,7 +63,7 @@ sbm.game <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALS
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `preference.game()` was renamed to `sample_pref()` to create a more
+#' `preference.game()` was renamed to [`sample_pref()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pref
 #' @keywords internal
@@ -78,7 +78,7 @@ preference.game <- function(nodes, types, type.dist = rep(1, types), fixed.sizes
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `lastcit.game()` was renamed to `sample_last_cit()` to create a more
+#' `lastcit.game()` was renamed to [`sample_last_cit()`] to create a more
 #' consistent API.
 #' @inheritParams sample_last_cit
 #' @keywords internal
@@ -93,7 +93,7 @@ lastcit.game <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins + 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `k.regular.game()` was renamed to `sample_k_regular()` to create a more
+#' `k.regular.game()` was renamed to [`sample_k_regular()`] to create a more
 #' consistent API.
 #' @inheritParams sample_k_regular
 #' @keywords internal
@@ -108,7 +108,7 @@ k.regular.game <- function(no.of.nodes, k, directed = FALSE, multiple = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `interconnected.islands.game()` was renamed to `sample_islands()` to create a more
+#' `interconnected.islands.game()` was renamed to [`sample_islands()`] to create a more
 #' consistent API.
 #' @inheritParams sample_islands
 #' @keywords internal
@@ -123,7 +123,7 @@ interconnected.islands.game <- function(islands.n, islands.size, islands.pin, n.
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `grg.game()` was renamed to `sample_grg()` to create a more
+#' `grg.game()` was renamed to [`sample_grg()`] to create a more
 #' consistent API.
 #' @inheritParams sample_grg
 #' @keywords internal
@@ -138,7 +138,7 @@ grg.game <- function(nodes, radius, torus = FALSE, coords = FALSE) { # nocov sta
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `growing.random.game()` was renamed to `sample_growing()` to create a more
+#' `growing.random.game()` was renamed to [`sample_growing()`] to create a more
 #' consistent API.
 #' @inheritParams sample_growing
 #' @keywords internal
@@ -153,7 +153,7 @@ growing.random.game <- function(n, m = 1, directed = TRUE, citation = FALSE) { #
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `forest.fire.game()` was renamed to `sample_forestfire()` to create a more
+#' `forest.fire.game()` was renamed to [`sample_forestfire()`] to create a more
 #' consistent API.
 #' @inheritParams sample_forestfire
 #' @keywords internal
@@ -168,7 +168,7 @@ forest.fire.game <- function(nodes, fw.prob, bw.factor = 1, ambs = 1, directed =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `establishment.game()` was renamed to `sample_traits()` to create a more
+#' `establishment.game()` was renamed to [`sample_traits()`] to create a more
 #' consistent API.
 #' @inheritParams sample_traits
 #' @keywords internal
@@ -183,7 +183,7 @@ establishment.game <- function(nodes, types, k = 1, type.dist = rep(1, types), p
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `degree.sequence.game()` was renamed to `sample_degseq()` to create a more
+#' `degree.sequence.game()` was renamed to [`sample_degseq()`] to create a more
 #' consistent API.
 #' @inheritParams sample_degseq
 #' @keywords internal
@@ -198,7 +198,7 @@ degree.sequence.game <- function(out.deg, in.deg = NULL, method = c("simple", "v
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `connect.neighborhood()` was renamed to `connect()` to create a more
+#' `connect.neighborhood()` was renamed to [`connect()`] to create a more
 #' consistent API.
 #' @inheritParams connect
 #' @keywords internal
@@ -213,7 +213,7 @@ connect.neighborhood <- function(graph, order, mode = c("all", "out", "in", "tot
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `citing.cited.type.game()` was renamed to `sample_cit_cit_types()` to create a more
+#' `citing.cited.type.game()` was renamed to [`sample_cit_cit_types()`] to create a more
 #' consistent API.
 #' @inheritParams sample_cit_cit_types
 #' @keywords internal
@@ -228,7 +228,7 @@ citing.cited.type.game <- function(n, edges = 1, types = rep(0, n), pref = matri
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cited.type.game()` was renamed to `sample_cit_types()` to create a more
+#' `cited.type.game()` was renamed to [`sample_cit_types()`] to create a more
 #' consistent API.
 #' @inheritParams sample_cit_types
 #' @keywords internal
@@ -243,7 +243,7 @@ cited.type.game <- function(n, edges = 1, types = rep(0, n), pref = rep(1, lengt
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `callaway.traits.game()` was renamed to `sample_traits_callaway()` to create a more
+#' `callaway.traits.game()` was renamed to [`sample_traits_callaway()`] to create a more
 #' consistent API.
 #' @inheritParams sample_traits_callaway
 #' @keywords internal
@@ -258,7 +258,7 @@ callaway.traits.game <- function(nodes, types, edge.per.step = 1, type.dist = re
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.random.game()` was renamed to `sample_bipartite()` to create a more
+#' `bipartite.random.game()` was renamed to [`sample_bipartite()`] to create a more
 #' consistent API.
 #' @inheritParams sample_bipartite
 #' @keywords internal
@@ -276,7 +276,7 @@ bipartite.random.game <- function(n1, n2, type = c("gnp", "gnm"), p, m, directed
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `barabasi.game()` was renamed to `sample_pa()` to create a more
+#' `barabasi.game()` was renamed to [`sample_pa()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pa
 #' @keywords internal
@@ -291,7 +291,7 @@ barabasi.game <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NUL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `ba.game()` was renamed to `sample_pa()` to create a more
+#' `ba.game()` was renamed to [`sample_pa()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pa
 #' @keywords internal
@@ -306,7 +306,7 @@ ba.game <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL, out
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `asymmetric.preference.game()` was renamed to `sample_asym_pref()` to create a more
+#' `asymmetric.preference.game()` was renamed to [`sample_asym_pref()`] to create a more
 #' consistent API.
 #' @inheritParams sample_asym_pref
 #' @keywords internal
@@ -321,7 +321,7 @@ asymmetric.preference.game <- function(nodes, types, type.dist.matrix = matrix(1
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `aging.barabasi.game()` was renamed to `sample_pa_age()` to create a more
+#' `aging.barabasi.game()` was renamed to [`sample_pa_age()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pa_age
 #' @keywords internal
@@ -336,7 +336,7 @@ aging.barabasi.game <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `aging.ba.game()` was renamed to `sample_pa_age()` to create a more
+#' `aging.ba.game()` was renamed to [`sample_pa_age()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pa_age
 #' @keywords internal
@@ -351,7 +351,7 @@ aging.ba.game <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300, out.d
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `aging.prefatt.game()` was renamed to `sample_pa_age()` to create a more
+#' `aging.prefatt.game()` was renamed to [`sample_pa_age()`] to create a more
 #' consistent API.
 #' @inheritParams sample_pa_age
 #' @keywords internal

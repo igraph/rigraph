@@ -12,7 +12,7 @@ convex.hull(data)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{convex.hull()} was renamed to \code{convex_hull()} to create a more
+\code{convex.hull()} was renamed to \code{\link[=convex_hull]{convex_hull()}} to create a more
 consistent API.
 }
 \keyword{internal}

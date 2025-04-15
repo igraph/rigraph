@@ -87,7 +87,7 @@ is ignored if the \sQuote{orig} implementation is chosen.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{spinglass.community()} was renamed to \code{cluster_spinglass()} to create a more
+\code{spinglass.community()} was renamed to \code{\link[=cluster_spinglass]{cluster_spinglass()}} to create a more
 consistent API.
 }
 \keyword{internal}

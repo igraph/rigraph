@@ -14,7 +14,7 @@ remove.edge.attribute(graph, name)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{remove.edge.attribute()} was renamed to \code{delete_edge_attr()} to create a more
+\code{remove.edge.attribute()} was renamed to \code{\link[=delete_edge_attr]{delete_edge_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

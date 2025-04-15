@@ -16,7 +16,7 @@ are.connected(graph, v1, v2)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{are.connected()} was renamed to \code{are_adjacent()} to create a more
+\code{are.connected()} was renamed to \code{\link[=are_adjacent]{are_adjacent()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -25,7 +25,7 @@ used by default.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.diameter()} was renamed to \code{get_diameter()} to create a more
+\code{get.diameter()} was renamed to \code{\link[=get_diameter]{get_diameter()}} to create a more
 consistent API.
 }
 \keyword{internal}

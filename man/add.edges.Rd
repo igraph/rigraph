@@ -23,7 +23,7 @@ below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{add.edges()} was renamed to \code{add_edges()} to create a more
+\code{add.edges()} was renamed to \code{\link[=add_edges]{add_edges()}} to create a more
 consistent API.
 }
 \keyword{internal}

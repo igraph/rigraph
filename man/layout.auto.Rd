@@ -18,7 +18,7 @@ the real layout function. For \code{nicely()} all argument are passed to
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.auto()} was renamed to \code{layout_nicely()} to create a more
+\code{layout.auto()} was renamed to \code{\link[=layout_nicely]{layout_nicely()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -67,7 +67,7 @@ contain the out degrees of the new vertices only, not the ones in the
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{ba.game()} was renamed to \code{sample_pa()} to create a more
+\code{ba.game()} was renamed to \code{\link[=sample_pa]{sample_pa()}} to create a more
 consistent API.
 }
 \keyword{internal}

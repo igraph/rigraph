@@ -32,7 +32,7 @@ modularity values is calculated automatically.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{create.communities()} was renamed to \code{make_clusters()} to create a more
+\code{create.communities()} was renamed to \code{\link[=make_clusters]{make_clusters()}} to create a more
 consistent API.
 }
 \keyword{internal}

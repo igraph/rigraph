@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralize.scores()` was renamed to `centralize()` to create a more
+#' `centralize.scores()` was renamed to [`centralize()`] to create a more
 #' consistent API.
 #' @inheritParams centralize
 #' @keywords internal
@@ -18,7 +18,7 @@ centralize.scores <- function(scores, theoretical.max = 0, normalized = TRUE) { 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.evcent.tmax()` was renamed to `centr_eigen_tmax()` to create a more
+#' `centralization.evcent.tmax()` was renamed to [`centr_eigen_tmax()`] to create a more
 #' consistent API.
 #' @inheritParams centr_eigen_tmax
 #' @keywords internal
@@ -33,7 +33,7 @@ centralization.evcent.tmax <- function(graph = NULL, nodes = 0, directed = FALSE
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.evcent()` was renamed to `centr_eigen()` to create a more
+#' `centralization.evcent()` was renamed to [`centr_eigen()`] to create a more
 #' consistent API.
 #' @inheritParams centr_eigen
 #' @keywords internal
@@ -48,7 +48,7 @@ centralization.evcent <- function(graph, directed = FALSE, scale = TRUE, options
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.degree.tmax()` was renamed to `centr_degree_tmax()` to create a more
+#' `centralization.degree.tmax()` was renamed to [`centr_degree_tmax()`] to create a more
 #' consistent API.
 #' @inheritParams centr_degree_tmax
 #' @keywords internal
@@ -63,7 +63,7 @@ centralization.degree.tmax <- function(graph = NULL, nodes = 0, mode = c("all", 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.degree()` was renamed to `centr_degree()` to create a more
+#' `centralization.degree()` was renamed to [`centr_degree()`] to create a more
 #' consistent API.
 #' @inheritParams centr_degree
 #' @keywords internal
@@ -78,7 +78,7 @@ centralization.degree <- function(graph, mode = c("all", "out", "in", "total"), 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.closeness.tmax()` was renamed to `centr_clo_tmax()` to create a more
+#' `centralization.closeness.tmax()` was renamed to [`centr_clo_tmax()`] to create a more
 #' consistent API.
 #' @inheritParams centr_clo_tmax
 #' @keywords internal
@@ -93,7 +93,7 @@ centralization.closeness.tmax <- function(graph = NULL, nodes = 0, mode = c("out
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.closeness()` was renamed to `centr_clo()` to create a more
+#' `centralization.closeness()` was renamed to [`centr_clo()`] to create a more
 #' consistent API.
 #' @inheritParams centr_clo
 #' @keywords internal
@@ -108,7 +108,7 @@ centralization.closeness <- function(graph, mode = c("out", "in", "all", "total"
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.betweenness.tmax()` was renamed to `centr_betw_tmax()` to create a more
+#' `centralization.betweenness.tmax()` was renamed to [`centr_betw_tmax()`] to create a more
 #' consistent API.
 #' @inheritParams centr_betw_tmax
 #' @keywords internal
@@ -123,7 +123,7 @@ centralization.betweenness.tmax <- function(graph = NULL, nodes = 0, directed = 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `centralization.betweenness()` was renamed to `centr_betw()` to create a more
+#' `centralization.betweenness()` was renamed to [`centr_betw()`] to create a more
 #' consistent API.
 #' @inheritParams centr_betw
 #' @keywords internal

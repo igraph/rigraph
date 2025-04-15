@@ -12,7 +12,7 @@ independence.number(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{independence.number()} was renamed to \code{ivs_size()} to create a more
+\code{independence.number()} was renamed to \code{\link[=ivs_size]{ivs_size()}} to create a more
 consistent API.
 }
 \keyword{internal}

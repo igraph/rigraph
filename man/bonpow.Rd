@@ -40,7 +40,7 @@ support}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bonpow()} was renamed to \code{power_centrality()} to create a more
+\code{bonpow()} was renamed to \code{\link[=power_centrality]{power_centrality()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -31,7 +31,7 @@ betweenness. If negative, then there is no such limit.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.betweenness()} was renamed to \code{edge_betweenness()} to create a more
+\code{edge.betweenness()} was renamed to \code{\link[=edge_betweenness]{edge_betweenness()}} to create a more
 consistent API.
 }
 \keyword{internal}

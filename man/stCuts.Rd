@@ -16,7 +16,7 @@ stCuts(graph, source, target)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{stCuts()} was renamed to \code{st_cuts()} to create a more
+\code{stCuts()} was renamed to \code{\link[=st_cuts]{st_cuts()}} to create a more
 consistent API.
 }
 \keyword{internal}

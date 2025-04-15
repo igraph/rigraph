@@ -12,7 +12,7 @@ bipartite.mapping(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{bipartite.mapping()} was renamed to \code{bipartite_mapping()} to create a more
+\code{bipartite.mapping()} was renamed to \code{\link[=bipartite_mapping]{bipartite_mapping()}} to create a more
 consistent API.
 }
 \keyword{internal}

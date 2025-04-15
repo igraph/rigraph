@@ -14,7 +14,7 @@ remove.vertex.attribute(graph, name)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{remove.vertex.attribute()} was renamed to \code{delete_vertex_attr()} to create a more
+\code{remove.vertex.attribute()} was renamed to \code{\link[=delete_vertex_attr]{delete_vertex_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

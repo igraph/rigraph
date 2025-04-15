@@ -26,7 +26,7 @@ centrality score by dividing by the theoretical maximum.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.degree()} was renamed to \code{centr_degree()} to create a more
+\code{centralization.degree()} was renamed to \code{\link[=centr_degree]{centr_degree()}} to create a more
 consistent API.
 }
 \keyword{internal}

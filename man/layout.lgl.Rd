@@ -14,7 +14,7 @@ layout.lgl(..., params = list())
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.lgl()} was renamed to \code{layout_with_lgl()} to create a more
+\code{layout.lgl()} was renamed to \code{\link[=layout_with_lgl]{layout_with_lgl()}} to create a more
 consistent API.
 }
 \keyword{internal}

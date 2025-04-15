@@ -13,7 +13,7 @@ Otherwise it should be either a filename or the name of an igraph demo.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraphdemo()} was renamed to \code{igraph_demo()} to create a more
+\code{igraphdemo()} was renamed to \code{\link[=igraph_demo]{igraph_demo()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.graphical.degree.sequence()` was renamed to `is_graphical()` to create a more
+#' `is.graphical.degree.sequence()` was renamed to [`is_graphical()`] to create a more
 #' consistent API.
 #' @inheritParams is_graphical
 #' @keywords internal
@@ -18,7 +18,7 @@ is.graphical.degree.sequence <- function(out.deg, in.deg = NULL, allowed.edge.ty
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.degree.sequence()` was renamed to `is_degseq()` to create a more
+#' `is.degree.sequence()` was renamed to [`is_degseq()`] to create a more
 #' consistent API.
 #' @inheritParams is_degseq
 #' @keywords internal

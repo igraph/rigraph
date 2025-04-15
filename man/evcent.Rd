@@ -39,7 +39,7 @@ weights spread the centrality better.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{evcent()} was renamed to \code{eigen_centrality()} to create a more
+\code{evcent()} was renamed to \code{\link[=eigen_centrality]{eigen_centrality()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -24,7 +24,7 @@ should be even. For directed graphs its sum should be the same as the sum of
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{degree.sequence.game()} was renamed to \code{sample_degseq()} to create a more
+\code{degree.sequence.game()} was renamed to \code{\link[=sample_degseq]{sample_degseq()}} to create a more
 consistent API.
 }
 \keyword{internal}

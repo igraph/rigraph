@@ -13,7 +13,7 @@ ignored, as the algorithm is defined for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximum.cardinality.search()} was renamed to \code{max_cardinality()} to create a more
+\code{maximum.cardinality.search()} was renamed to \code{\link[=max_cardinality]{max_cardinality()}} to create a more
 consistent API.
 }
 \keyword{internal}

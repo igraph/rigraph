@@ -12,7 +12,7 @@ list.edge.attributes(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{list.edge.attributes()} was renamed to \code{edge_attr_names()} to create a more
+\code{list.edge.attributes()} was renamed to \code{\link[=edge_attr_names]{edge_attr_names()}} to create a more
 consistent API.
 }
 \keyword{internal}

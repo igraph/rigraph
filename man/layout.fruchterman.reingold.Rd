@@ -14,7 +14,7 @@ layout.fruchterman.reingold(..., params = list())
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.fruchterman.reingold()} was renamed to \code{layout_with_fr()} to create a more
+\code{layout.fruchterman.reingold()} was renamed to \code{\link[=layout_with_fr]{layout_with_fr()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -15,7 +15,7 @@ edges, or both. The default is \sQuote{edges}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.data.frame()} was renamed to \code{as_data_frame()} to create a more
+\code{get.data.frame()} was renamed to \code{\link[=as_data_frame]{as_data_frame()}} to create a more
 consistent API.
 }
 \keyword{internal}

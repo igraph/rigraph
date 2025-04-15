@@ -63,7 +63,7 @@ algorithm. See details below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.dfs()} was renamed to \code{dfs()} to create a more
+\code{graph.dfs()} was renamed to \code{\link[=dfs]{dfs()}} to create a more
 consistent API.
 }
 \keyword{internal}

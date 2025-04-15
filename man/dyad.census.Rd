@@ -12,7 +12,7 @@ dyad.census(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{dyad.census()} was renamed to \code{dyad_census()} to create a more
+\code{dyad.census()} was renamed to \code{\link[=dyad_census]{dyad_census()}} to create a more
 consistent API.
 }
 \keyword{internal}

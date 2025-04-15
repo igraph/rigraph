@@ -15,7 +15,7 @@ attributes are returned in a list.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.graph.attribute()} was renamed to \code{graph_attr()} to create a more
+\code{get.graph.attribute()} was renamed to \code{\link[=graph_attr]{graph_attr()}} to create a more
 consistent API.
 }
 \keyword{internal}

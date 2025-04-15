@@ -38,7 +38,7 @@ an undirected graph, it must be symmetric.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{preference.game()} was renamed to \code{sample_pref()} to create a more
+\code{preference.game()} was renamed to \code{\link[=sample_pref]{sample_pref()}} to create a more
 consistent API.
 }
 \keyword{internal}

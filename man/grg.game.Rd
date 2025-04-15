@@ -20,7 +20,7 @@ as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{grg.game()} was renamed to \code{sample_grg()} to create a more
+\code{grg.game()} was renamed to \code{\link[=sample_grg]{sample_grg()}} to create a more
 consistent API.
 }
 \keyword{internal}

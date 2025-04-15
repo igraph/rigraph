@@ -17,7 +17,7 @@ containing the IDs or names of the source and target vertices, separated by
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{delete.edges()} was renamed to \code{delete_edges()} to create a more
+\code{delete.edges()} was renamed to \code{\link[=delete_edges]{delete_edges()}} to create a more
 consistent API.
 }
 \keyword{internal}

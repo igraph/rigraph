@@ -20,7 +20,7 @@ edge weight means a stronger connection for this function.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{optimal.community()} was renamed to \code{cluster_optimal()} to create a more
+\code{optimal.community()} was renamed to \code{\link[=cluster_optimal]{cluster_optimal()}} to create a more
 consistent API.
 }
 \keyword{internal}

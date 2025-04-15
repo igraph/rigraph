@@ -57,7 +57,7 @@ implementation is used.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{page.rank()} was renamed to \code{page_rank()} to create a more
+\code{page.rank()} was renamed to \code{\link[=page_rank]{page_rank()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -9,7 +9,7 @@ is.hierarchical(communities)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.hierarchical()} was renamed to \code{is_hierarchical()} to create a more
+\code{is.hierarchical()} was renamed to \code{\link[=is_hierarchical]{is_hierarchical()}} to create a more
 consistent API.
 }
 \keyword{internal}

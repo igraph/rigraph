@@ -33,7 +33,7 @@ argument is ignored for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{neighborhood.size()} was renamed to \code{ego_size()} to create a more
+\code{neighborhood.size()} was renamed to \code{\link[=ego_size]{ego_size()}} to create a more
 consistent API.
 }
 \keyword{internal}

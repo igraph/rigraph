@@ -17,7 +17,7 @@ includes all edges in the order of their ids.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.mutual()} was renamed to \code{which_mutual()} to create a more
+\code{is.mutual()} was renamed to \code{\link[=which_mutual]{which_mutual()}} to create a more
 consistent API.
 }
 \keyword{internal}

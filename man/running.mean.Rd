@@ -15,7 +15,7 @@ i.e. smaller than the length of \code{v}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{running.mean()} was renamed to \code{running_mean()} to create a more
+\code{running.mean()} was renamed to \code{\link[=running_mean]{running_mean()}} to create a more
 consistent API.
 }
 \keyword{internal}

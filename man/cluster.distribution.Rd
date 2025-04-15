@@ -21,7 +21,7 @@ by the cluster sizes.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cluster.distribution()} was renamed to \code{component_distribution()} to create a more
+\code{cluster.distribution()} was renamed to \code{\link[=component_distribution]{component_distribution()}} to create a more
 consistent API.
 }
 \keyword{internal}

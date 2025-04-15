@@ -9,7 +9,7 @@ maxcohesion(blocks)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maxcohesion()} was renamed to \code{max_cohesion()} to create a more
+\code{maxcohesion()} was renamed to \code{\link[=max_cohesion]{max_cohesion()}} to create a more
 consistent API.
 }
 \keyword{internal}

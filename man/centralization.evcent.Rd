@@ -30,7 +30,7 @@ centrality score by dividing by the theoretical maximum.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.evcent()} was renamed to \code{centr_eigen()} to create a more
+\code{centralization.evcent()} was renamed to \code{\link[=centr_eigen]{centr_eigen()}} to create a more
 consistent API.
 }
 \keyword{internal}

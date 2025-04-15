@@ -14,7 +14,7 @@ vertex shapes are returned.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{vertex.shapes()} was renamed to \code{shapes()} to create a more
+\code{vertex.shapes()} was renamed to \code{\link[=shapes]{shapes()}} to create a more
 consistent API.
 }
 \keyword{internal}

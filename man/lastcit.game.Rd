@@ -28,7 +28,7 @@ probabilities for the different vertex types.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{lastcit.game()} was renamed to \code{sample_last_cit()} to create a more
+\code{lastcit.game()} was renamed to \code{\link[=sample_last_cit]{sample_last_cit()}} to create a more
 consistent API.
 }
 \keyword{internal}

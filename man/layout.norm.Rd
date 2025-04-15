@@ -30,7 +30,7 @@ are \code{NULL} then no normalization is performed along this direction.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.norm()} was renamed to \code{norm_coords()} to create a more
+\code{layout.norm()} was renamed to \code{\link[=norm_coords]{norm_coords()}} to create a more
 consistent API.
 }
 \keyword{internal}

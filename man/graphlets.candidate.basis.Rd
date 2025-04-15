@@ -17,7 +17,7 @@ attribute is used.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graphlets.candidate.basis()} was renamed to \code{graphlet_basis()} to create a more
+\code{graphlets.candidate.basis()} was renamed to \code{\link[=graphlet_basis]{graphlet_basis()}} to create a more
 consistent API.
 }
 \keyword{internal}

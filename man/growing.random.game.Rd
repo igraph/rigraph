@@ -19,7 +19,7 @@ each time step the added edges are originating from the new vertex.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{growing.random.game()} was renamed to \code{sample_growing()} to create a more
+\code{growing.random.game()} was renamed to \code{\link[=sample_growing]{sample_growing()}} to create a more
 consistent API.
 }
 \keyword{internal}

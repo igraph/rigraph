@@ -26,7 +26,7 @@ algorithm is chosen, otherwise the unweighted algorithm is used.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{minimum.spanning.tree()} was renamed to \code{mst()} to create a more
+\code{minimum.spanning.tree()} was renamed to \code{\link[=mst]{mst()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -22,7 +22,7 @@ here.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{stMincuts()} was renamed to \code{st_min_cuts()} to create a more
+\code{stMincuts()} was renamed to \code{\link[=st_min_cuts]{st_min_cuts()}} to create a more
 consistent API.
 }
 \keyword{internal}

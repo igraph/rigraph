@@ -12,7 +12,7 @@ is.bipartite(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.bipartite()} was renamed to \code{is_bipartite()} to create a more
+\code{is.bipartite()} was renamed to \code{\link[=is_bipartite]{is_bipartite()}} to create a more
 consistent API.
 }
 \keyword{internal}

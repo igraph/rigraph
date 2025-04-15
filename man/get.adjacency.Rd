@@ -49,7 +49,7 @@ matrices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.adjacency()} was renamed to \code{as_adjacency_matrix()} to create a more
+\code{get.adjacency()} was renamed to \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}
