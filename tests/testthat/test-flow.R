@@ -45,12 +45,12 @@ test_that("min_cut() errors work", {
 })
 
 test_that("st_cuts() works", {
-  g_path <- graph_from_literal(a - +b - +c - +d - +e)
+  g_path <- graph_from_literal(a -+ b -+ c -+ d -+ e)
   all_cuts_path <- st_cuts(g_path, source = "a", target = "e")
   expect_equal(unvs(all_cuts_path$cuts), list(1, 2, 3, 4))
   expect_equal(unvs(all_cuts_path$partition1s), list(1, 1:2, 1:3, 1:4))
 
-  g_star_v7 <- graph_from_literal(s - +a:b - +t, a - +1:2:3 - +b)
+  g_star_v7 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3 -+ b)
   all_cuts_star_v7 <- st_cuts(g_star_v7, source = "s", target = "t")
   expect_equal(
     unvs(all_cuts_star_v7$cuts),
@@ -69,7 +69,7 @@ test_that("st_cuts() works", {
     )
   )
 
-  g_star_v9 <- graph_from_literal(s - +a:b - +t, a - +1:2:3:4:5 - +b)
+  g_star_v9 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3:4:5 -+ b)
   all_cuts_star_v9 <- st_min_cuts(g_star_v9, source = "s", target = "t")
   expect_equal(all_cuts_star_v9$value, 2)
   expect_equal(unvs(all_cuts_star_v9$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
@@ -77,7 +77,7 @@ test_that("st_cuts() works", {
 })
 
 test_that("st_cuts errors work", {
-  g_path <- graph_from_literal(a - +b - +c - +d - +e)
+  g_path <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 
   expect_snapshot(st_cuts(g_path, source = "a", target = NULL), error = TRUE)
   expect_snapshot(st_cuts(g_path, source = NULL, target = "a"), error = TRUE)
@@ -215,9 +215,9 @@ test_that("dominator_tree errors work", {
 
 test_that("dominator_tree works -- legacy", {
   g <- graph_from_literal(
-    R - +A:B:C, A - +D, B - +A:D:E, C - +F:G, D - +L,
-    E - +H, F - +I, G - +I:J, H - +E:K, I - +K, J - +I,
-    K - +I:R, L - +H
+    R -+ A:B:C, A -+ D, B -+ A:D:E, C -+ F:G, D -+ L,
+    E -+ H, F -+ I, G -+ I:J, H -+ E:K, I -+ K, J -+ I,
+    K -+ I:R, L -+ H
   )
   dtree <- dominator_tree(g, root = "R")
   names <- c("$root", V(g)$name)

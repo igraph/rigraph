@@ -11778,3 +11778,48 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   UNPROTECT(1);
   return(r_result);
 }
+
+/*-------------------------------------------/
+/ igraph_version                             /
+/-------------------------------------------*/
+SEXP R_igraph_version(void) {
+                                        /* Declarations */
+  const char* c_version_string;
+  int c_major;
+  int c_minor;
+  int c_subminor;
+  SEXP version_string;
+  SEXP major;
+  SEXP minor;
+  SEXP subminor;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+
+                                        /* Call igraph */
+  igraph_version(&c_version_string, &c_major, &c_minor, &c_subminor);
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(4));
+  PROTECT(r_names=NEW_CHARACTER(4));
+  PROTECT(version_string = Rf_ScalarString(Rf_mkCharLenCE(c_version_string, strlen(c_version_string), CE_UTF8)));
+  PROTECT(major=NEW_INTEGER(1));
+  INTEGER(major)[0]=(int) c_major;
+  PROTECT(minor=NEW_INTEGER(1));
+  INTEGER(minor)[0]=(int) c_minor;
+  PROTECT(subminor=NEW_INTEGER(1));
+  INTEGER(subminor)[0]=(int) c_subminor;
+  SET_VECTOR_ELT(r_result, 0, version_string);
+  SET_VECTOR_ELT(r_result, 1, major);
+  SET_VECTOR_ELT(r_result, 2, minor);
+  SET_VECTOR_ELT(r_result, 3, subminor);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("version_string"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("major"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("minor"));
+  SET_STRING_ELT(r_names, 3, Rf_mkChar("subminor"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(5);
+
+  UNPROTECT(1);
+  return(r_result);
+}

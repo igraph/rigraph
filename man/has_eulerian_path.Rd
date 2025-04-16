@@ -63,7 +63,8 @@ Graph cycles
 \code{\link{find_cycle}()},
 \code{\link{girth}()},
 \code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+\code{\link{is_dag}()},
+\code{\link{simple_cycles}()}
 }
 \concept{cycles}
 \keyword{graphs}
