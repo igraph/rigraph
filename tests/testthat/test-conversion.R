@@ -53,7 +53,7 @@ test_that("as.undirected() deprecation", {
 })
 
 test_that("as_undirected() keeps attributes", {
-  g <- graph_from_literal(A +-+ B, A --+ C, C +-+ D)
+  g <- graph_from_literal(A + -+B, A - -+C, C + -+D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
@@ -595,4 +595,9 @@ test_that("edge names work", {
     as_edgelist(g5),
     structure(c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"), .Dim = c(7L, 2L))
   )
+})
+
+test_that("graph_from_edgelist errors for NAs", {
+  A <- matrix(c(1, 2, NA, 1), 2, 2)
+  expect_snapshot(graph_from_edgelist(A), error = TRUE)
 })

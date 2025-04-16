@@ -87,3 +87,11 @@
       2    2  3    2         b          B       c        C
       3    1  3    1         a          A       c        C
 
+# graph_from_edgelist errors for NAs
+
+    Code
+      graph_from_edgelist(A)
+    Condition
+      Error:
+      ! Cannot create a graph object because the edgelist contains NAs.
+

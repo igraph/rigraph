@@ -670,7 +670,6 @@ test_that("sparse/dense matrices no loops works", {
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
   expect_ecount(g, 1)
   expect_equal(get_edge_ids(g, c(1, 2)), 1)
-
 })
 
 test_that("sparse/dense matrices multiple works", {
@@ -681,11 +680,10 @@ test_that("sparse/dense matrices multiple works", {
   expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
 
-  A <- as(A,"dgCMatrix")
+  A <- as(A, "dgCMatrix")
   g <- graph_from_adjacency_matrix(A, diag = FALSE)
   expect_ecount(g, 3)
   expect_equal(as_edgelist(g), matrix(c(1, 2), 3, 2, byrow = TRUE))
-
 })
 
 test_that("sparse/dense matrices min/max/plus", {
@@ -711,4 +709,9 @@ test_that("sparse/dense matrices min/max/plus", {
 
   g <- graph_from_adjacency_matrix(A, diag = FALSE, mode = "plus", weighted = TRUE)
   expect_equal(E(g)$weight[1], 5)
+})
+
+test_that("graph_from_adjacency_matrix errors for NAs", {
+  A <- matrix(c(1, 1, NA, 1), 2, 2)
+  expect_snapshot(graph_from_adjacency_matrix(A), error = TRUE)
 })

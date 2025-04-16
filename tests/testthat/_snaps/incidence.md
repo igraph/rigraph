@@ -85,3 +85,11 @@
       ! `multiple` and `weighted` cannot be both `TRUE`.
       igraph either interprets numbers larger than 1 as weights or as multiplicities, but it cannot be both.
 
+# graph_from_biadjacency_matrix errors for NAs
+
+    Code
+      graph_from_biadjacency_matrix(A)
+    Condition
+      Error:
+      ! Cannot create a graph object because the biadjacency matrix contains NAs.
+
