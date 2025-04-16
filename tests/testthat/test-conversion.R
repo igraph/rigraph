@@ -596,3 +596,8 @@ test_that("edge names work", {
     structure(c("b", "c", "d", "e", "g", "h", "a", "c", "d", "e", "f", "h", "i", "j"), .Dim = c(7L, 2L))
   )
 })
+
+test_that("graph_from_edgelist errors for NAs", {
+  A <- matrix(c(1, 2, NA, 1), 2, 2)
+  expect_snapshot(graph_from_edgelist(A), error = TRUE)
+})
