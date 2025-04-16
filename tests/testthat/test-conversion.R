@@ -53,7 +53,7 @@ test_that("as.undirected() deprecation", {
 })
 
 test_that("as_undirected() keeps attributes", {
-  g <- graph_from_literal(A + -+B, A - -+C, C + -+D)
+  g <- graph_from_literal(A +-+ B, A --+ C, C +-+ D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
