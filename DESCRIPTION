@@ -67,7 +67,7 @@ LinkingTo:
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
     knitr
-Config/Needs/build: roxygen2, devtools, irlba, pkgconfig,
+Config/Needs/build: r-lib/roxygen2, devtools, irlba, pkgconfig,
     igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2
