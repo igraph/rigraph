@@ -33,7 +33,7 @@ on:
     types:
       - checks_requested
   schedule:
-    - cron: "10 0 * * *"
+    - cron: "10 1 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || github.head_ref || github.sha }}-${{ github.base_ref || '' }}
@@ -44,12 +44,16 @@ name: rcc
 jobs:
   rcc-smoke:
     runs-on: ubuntu-24.04
+
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
       versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
       dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
 
     name: "Smoke test: stock R"
+
+    permissions:
+      contents: write
 
     # Begin custom: services
     # End custom: services
@@ -265,8 +269,14 @@ jobs:
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - uses: ./.github/workflows/check
+        if: ${{ ! matrix.covr }}
         with:
           results: ${{ runner.os }}-r${{ matrix.r }}
+
+      - uses: ./.github/workflows/covr
+        if: ${{ matrix.covr }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
 # The status update is taken care of by R-CMD-check-status.yaml
 
