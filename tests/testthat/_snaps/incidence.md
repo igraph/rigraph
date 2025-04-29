@@ -90,6 +90,6 @@
     Code
       graph_from_biadjacency_matrix(A)
     Condition
-      Error:
+      Error in `graph_from_biadjacency_matrix()`:
       ! Cannot create a graph object because the biadjacency matrix contains NAs.
 
