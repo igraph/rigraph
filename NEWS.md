@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9044
+
+## Chore
+
+- Refer to the dev version of roxygen2 as build dependency (#1832).
+
+## Continuous integration
+
+- Only fail covr builds if token is given (#1848).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1846).
+
+- Correct installation of xml2 (#1842).
+
+- Add xml2 for covr, print testthat results (#1840).
+
+- Sync (#1839).
+
+
 # igraph 2.1.4.9043
 
 ## vendor
