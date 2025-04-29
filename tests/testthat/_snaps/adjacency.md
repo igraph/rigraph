@@ -144,6 +144,6 @@
     Code
       graph_from_adjacency_matrix(A)
     Condition
-      Error:
+      Error in `graph_from_adjacency_matrix()`:
       ! Cannot create a graph object because the adjacency matrix contains NAs.
 
