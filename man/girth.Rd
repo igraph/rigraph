@@ -14,7 +14,7 @@ for undirected circles anyway.}
 }
 \value{
 A named list with two components: \item{girth}{Integer constant, the
-girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
+girth of the graph, or \code{Inf} if the graph is acyclic.} \item{circle}{Numeric
 vector with the vertex ids in the shortest circle.}
 }
 \description{
