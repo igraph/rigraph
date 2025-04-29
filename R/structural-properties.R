@@ -1937,7 +1937,7 @@ feedback_vertex_set <- feedback_vertex_set_impl
 #'   for undirected circles anyway.
 #' @param circle Logical scalar, whether to return the shortest circle itself.
 #' @return A named list with two components: \item{girth}{Integer constant, the
-#'   girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
+#'   girth of the graph, or `Inf` if the graph is acyclic.} \item{circle}{Numeric
 #'   vector with the vertex ids in the shortest circle.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Alon Itai and Michael Rodeh: Finding a minimum circuit in a

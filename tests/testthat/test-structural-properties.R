@@ -753,7 +753,6 @@ test_that("coreness() works", {
 
 test_that("laplacian_matrix() works", {
   skip_if_not_installed("Matrix")
-  library("Matrix")
   mat <- rbind(
     c(116, 210, 200),
     c(210, 386, 380),
