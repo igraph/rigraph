@@ -1,5 +1,81 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9043
+
+## vendor
+
+- Update vendored sources to igraph/igraph@2d6d0abc05ac3cb53872cc3ea86b847a7556198e (#1837).
+
+- Update vendored sources to igraph/igraph@a899e60c8e3992f769e2159aeedf480ad46de337 (#1836).
+
+- Update vendored sources to igraph/igraph@145b35107659f73d85186b6a021dfe4284cf50c7 (#1835).
+
+- Update vendored sources to igraph/igraph@198fe3751b97bb130e724ca847d8aa5f9a58c4dc (#1834).
+
+
+# igraph 2.1.4.9042
+
+## vendor
+
+- Update vendored sources to igraph/igraph@05d18670f356403c1dcca4e48f78710e31b3c9b0 (#1825).
+
+
+# igraph 2.1.4.9041
+
+## Chore
+
+- Results from main.
+
+- Results from check with new arpack.
+
+## Documentation
+
+- Document return value of `make_clusters()` (#1794).
+
+
+# igraph 2.1.4.9040
+
+## Documentation
+
+- Add author links (#1821).
+
+
+# igraph 2.1.4.9039
+
+## Bug fixes
+
+- Remove string matrix support from biadjacency matrix functions (#1540, #1542, #1803).
+
+## Features
+
+- `simple_cycles()` lists all simple cycles (#1573, #1580).
+
+- Expose C version (#1208, #1781).
+
+## Chore
+
+- Format with air.
+
+## Documentation
+
+- Fix style (#1819).
+
+## Performance
+
+- Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
+
+
+# igraph 2.1.4.9038
+
+## Documentation
+
+- Correct the description of the `weights` parameter of `hits_scores()`.
+
+## Refactoring
+
+- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
+
+
 # igraph 2.1.4.9037
 
 ## vendor

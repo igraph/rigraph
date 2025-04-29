@@ -128,5 +128,16 @@ test_that("igraph_version returns a version string", {
     "\\b"
   )
 
-  expect_true(grepl(regex, igraph_version()))
+  expect_match(igraph_version("R"), regex)
+  expect_match(igraph_version(), regex)
+  
+  c_regex <- paste0(
+    "\\b", # word boundary
+    "(?:0|[1-9][0-9]*)\\.", # major
+    "(?:0|[1-9][0-9]*)\\.", # minor
+    "(?:0|[1-9][0-9]*)", # subminor
+    "\\b"
+  )
+
+  expect_match(igraph_version("C"), c_regex)
 })

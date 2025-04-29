@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 17 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 9 new problems
+ * We saw 11 new problems
  * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
@@ -22,9 +22,15 @@ Issues with CRAN packages are summarised below.
 * klassR
   checking examples ... ERROR
 
+* multinet
+  checking examples ... ERROR
+
 * mwcsr
   checking examples ... ERROR
   checking tests ... ERROR
+
+* netdiffuseR
+  checking examples ... ERROR
 
 * remify
   checking tests ... ERROR

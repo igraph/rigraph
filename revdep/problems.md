@@ -253,6 +253,60 @@ Run `revdepcheck::cloud_details(, "klassR")` for more info
       Note: found 1764 marked UTF-8 strings
     ```
 
+# multinet
+
+<details>
+
+* Version: 4.2.2
+* GitHub: NA
+* Source code: https://github.com/cran/multinet
+* Date/Publication: 2025-04-08 07:20:06 UTC
+* Number of recursive dependencies: 13
+
+Run `revdepcheck::cloud_details(, "multinet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘multinet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: multinet.conversion
+    > ### Title: Conversion to a simple or multi graph
+    > ### Aliases: multinet.conversion as.igraph.multinet
+    > ###   as.igraph.Rcpp_RMLNetwork
+    > 
+    > ### ** Examples
+    > 
+    > net <- ml_aucs()
+    > # using the default merge.actors=TRUE we create a multigraph,
+    > # where each actor corresponds to a vertex in the result
+    > multigraph <- as.igraph(net)
+    Error in `make_empty_graph()`:
+    ! `directed` must be a logical, not a number.
+    Backtrace:
+        ▆
+     1. ├─igraph::as.igraph(net)
+     2. └─multinet:::as.igraph.Rcpp_RMLNetwork(net)
+     3.   └─igraph::graph_from_data_frame(vertices = a_df, e_df, directed = dir)
+     4.     └─igraph::make_empty_graph(n = 0, directed = directed)
+     5.       └─cli::cli_abort("{.arg directed} must be a logical, not {.obj_type_friendly {directed}}.")
+     6.         └─rlang::abort(...)
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 137.5Mb
+      sub-directories of 1Mb or more:
+        libs  137.2Mb
+    ```
+
 # mwcsr
 
 <details>
@@ -352,6 +406,121 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
       sub-directories of 1Mb or more:
         java   2.5Mb
         libs  10.5Mb
+    ```
+
+# netdiffuseR
+
+<details>
+
+* Version: 1.22.6
+* GitHub: https://github.com/USCCANA/netdiffuseR
+* Source code: https://github.com/cran/netdiffuseR
+* Date/Publication: 2023-08-30 17:00:10 UTC
+* Number of recursive dependencies: 83
+
+Run `revdepcheck::cloud_details(, "netdiffuseR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘netdiffuseR-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: exposure
+    > ### Title: Ego exposure
+    > ### Aliases: exposure
+    > ### Keywords: univar
+    > 
+    > ### ** Examples
+    > 
+    > # Calculating lagged exposure -----------------------------------------------
+    > 
+    > set.seed(8)
+    > graph <- rdiffnet(20, 4)
+    Warning in (function (graph, p, algorithm = "endpoints", both.ends = FALSE,  :
+      The option -copy.first- is set to TRUE. In this case, the first graph will be treated as a baseline, and thus, networks after T=1 will be replaced with T-1.
+    > 
+    > expo0 <- exposure(graph)
+    > expo1 <- exposure(graph, lags = 1)
+    > 
+    > # These should be equivalent
+    > stopifnot(all(expo0[, -4] == expo1[, -1])) # No stop!
+    > 
+    > 
+    > # Calculating the exposure based on Structural Equivalence ------------------
+    > set.seed(113132)
+    > graph <- rdiffnet(100, 4)
+    Warning in (function (graph, p, algorithm = "endpoints", both.ends = FALSE,  :
+      The option -copy.first- is set to TRUE. In this case, the first graph will be treated as a baseline, and thus, networks after T=1 will be replaced with T-1.
+    > 
+    > SE <- lapply(struct_equiv(graph), "[[", "SE")
+    > SE <- lapply(SE, function(x) {
+    +    x <- 1/x
+    +    x[!is.finite(x)] <- 0
+    +    x
+    + })
+    > 
+    > 
+    > # These three lines are equivalent to:
+    > expo_se2 <- exposure(graph, alt.graph="se", valued=TRUE)
+    > # Notice that we are setting valued=TRUE, but this is not necesary since when
+    > # alt.graph = "se" the function checks this to be setted equal to TRUE
+    > 
+    > # Weighted Exposure using degree --------------------------------------------
+    > eDE <- exposure(graph, attrs=dgr(graph))
+    > 
+    > # Which is equivalent to
+    > graph[["deg"]] <- dgr(graph)
+    > eDE2 <- exposure(graph, attrs="deg")
+    > 
+    > # Comparing using incoming edges -------------------------------------------
+    > eIN <- exposure(graph, outgoing=FALSE)
+    > 
+    > # Structral equivalence for different communities ---------------------------
+    > data(medInnovationsDiffNet)
+    > 
+    > # Only using 4 time slides, this is for convenience
+    > medInnovationsDiffNet <- medInnovationsDiffNet[, , 1:4]
+    > 
+    > # METHOD 1: Using the c.diffnet method:
+    > 
+    > # Creating subsets by city
+    > cities <- unique(medInnovationsDiffNet[["city"]])
+    > 
+    > diffnet <- medInnovationsDiffNet[medInnovationsDiffNet[["city"]] == cities[1]]
+    > diffnet[["expo_se"]] <- exposure(diffnet, alt.graph="se", valued=TRUE)
+    
+     *** caught segfault ***
+    address (nil), cause 'unknown'
+    
+    Traceback:
+     1: .TM.repl.i.mat(as(x, "TsparseMatrix"), i = i, value = value)
+     2: .class1(object)
+     3: as(.TM.repl.i.mat(as(x, "TsparseMatrix"), i = i, value = value),     "CsparseMatrix")
+     4: `[<-`(`*tmp*`, cbind(1:nrow(z_ik), ids[, 2]), value = 0)
+     5: `[<-`(`*tmp*`, cbind(1:nrow(z_ik), ids[, 2]), value = 0)
+     6: euclidean_distance(gdist)
+     7: struct_equiv_new(geod, v)
+     8: struct_equiv.dgCMatrix(methods::as(graph[[i]], "dgCMatrix"),     v, inf.replace, groupvar, ...)
+     9: struct_equiv.list(graph, v, inf.replace, groupvar, ...)
+    10: struct_equiv(graph, groupvar = groupvar, ...)
+    11: lapply(struct_equiv(graph, groupvar = groupvar, ...), "[[", "SE")
+    12: exposure(diffnet, alt.graph = "se", valued = TRUE)
+    An irrecoverable exception occurred. R is aborting now ...
+    Segmentation fault (core dumped)
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 14.0Mb
+      sub-directories of 1Mb or more:
+        doc    2.5Mb
+        libs   9.6Mb
     ```
 
 # remify
@@ -628,7 +797,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m11.9s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m12.0s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    

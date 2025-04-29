@@ -21,7 +21,6 @@
 ##
 ## ----------------------------------------------------------------------
 
-
 # format versions
 ver_0_1_1 <- 0L # 0.1.1
 ver_0_4 <- 1L # 0.4
@@ -93,7 +92,12 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop("Don't know how to downgrade graph from version ", g_ver, " to ", p_ver)
+    stop(
+      "Don't know how to downgrade graph from version ",
+      g_ver,
+      " to ",
+      p_ver
+    )
   }
 
   # g_ver < p_ver
@@ -153,7 +157,9 @@ warn_version <- function(graph) {
     return(TRUE)
   }
 
-  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
+  stop(
+    "This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again."
+  )
 }
 
 oldpredecessors <- function() {
@@ -182,4 +188,59 @@ clear_native_ptr <- function(g) {
   gx <- unclass(g)
   gx[[igraph_t_idx_env]]$igraph <- NULL
   g
+}
+
+#' Query igraph's version string
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.version()` was renamed to `igraph_version()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.version <- function() {
+  # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
+  igraph_version()
+} # nocov end
+
+
+# R_igraph_vers -----------------------------------------------------------------------
+
+#' Query igraph's version string
+#'
+#' Returns the R package version,
+#' prints the R package version and C library version.
+#'
+#'#' @return A character scalar, the igraph version string.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @keywords graphs
+#' @keywords internal
+#' @export
+#' @examples
+#' igraph_version()
+#'
+igraph_version <- function(software = c("R", "C")) {
+  r_version <- getNamespaceInfo("igraph", "spec")[["version"]]
+
+  version <- structure(
+    r_version,
+    class = c("igraph_version", class(r_version)),
+    c_version = c_version()
+  )
+
+  invisible(version)
+}
+
+#' @export
+print.igraph_version <- function(x, ...) {
+  writeLines(paste0("R version: ", x))
+  writeLines(paste0("C version: ", attr(x, "c_version")))
+  invisible(x)
+}
+
+c_version <- function() {
+  version_impl()[["version_string"]]
 }
