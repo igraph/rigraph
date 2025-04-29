@@ -228,7 +228,7 @@ graph_from_adjacency_matrix <- function(adjmatrix,
                                         ),
                                         weighted = NULL, diag = TRUE,
                                         add.colnames = NULL, add.rownames = NA) {
-  ensure_no_na(adjmatrix, "adjacency matrix", call = rlang::caller_env())
+  ensure_no_na(adjmatrix, "adjacency matrix")
   mode <- igraph.match.arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {

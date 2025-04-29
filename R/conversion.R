@@ -1397,7 +1397,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   }
 
   ## Handle if some elements are 'NA'
-  ensure_no_na(d, "edge data frame", call = rlang::caller_env())
+  ensure_no_na(d, "edge data frame")
 
   if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
     cli::cli_warn("In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}.")
@@ -1495,7 +1495,7 @@ graph_from_edgelist <- function(el, directed = TRUE) {
   if (!is.matrix(el) || ncol(el) != 2) {
     cli::cli_abort("graph_from_edgelist expects a matrix with two columns.")
   }
-  ensure_no_na(el, "edgelist", call = rlang::caller_env())
+  ensure_no_na(el, "edgelist")
 
   if (nrow(el) == 0) {
     res <- make_empty_graph(directed = directed)
