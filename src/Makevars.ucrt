@@ -1,5 +1,19 @@
-include sources.mk
+include sources-glue-c.mk
+include sources-glue-cpp.mk
+include sources-igraph.mk
 include sources-mini-gmp.mk
+
+# This is required as a first target if we add additional targets.
+#
+# The symbols.rds file helps troubleshoot issues with forbidden symbols
+# such as abort.
+# Set UserNM=true to speed up compilation during development.
+all: symbols.rds $(SHLIB)
+
+# This file is available only during development.
+# For the tarball, we create an empty file.
+deps.mk:
+	touch -r $$(ls -t *.cpp | head -n 1) "$@"
 
 LIB_XML ?= $(R_TOOLS_SOFT)
 GLPK_HOME ?= $(R_TOOLS_SOFT)
@@ -22,4 +36,4 @@ PKG_CPPFLAGS += -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/inc
 
 PKG_LIBS += $(BLAS_LIBS) $(LAPACK_LIBS) $(FLIBS)
 
-OBJECTS=${SOURCES} ${MINIGMPSOURCES}
+OBJECTS=${IGRAPH_SOURCES} ${GLUE_C_SOURCES} ${GLUE_CPP_SOURCES} ${MINI_GMP_SOURCES}

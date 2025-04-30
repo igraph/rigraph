@@ -17,7 +17,7 @@ ignore_folders = [
 
 def generate_sources(path, name, variable, ignore = [], extensions = ('.c', '.cc', '.cpp', '.f')):
     sources = []
-    for root, dirnames, filenames in sorted(os.walk('src' + path)):
+    for root, _, filenames in sorted(os.walk('src' + path)):
         for filename in filenames:
             if filename.endswith(extensions):
                 ignore_file = False
@@ -33,6 +33,8 @@ def generate_sources(path, name, variable, ignore = [], extensions = ('.c', '.cc
     with open_utf8(os.path.join('src', f'{name}.mk'), 'w') as f:
         f.write(text)
 
-generate_sources('/', 'sources', 'SOURCES', ignore_folders)
-generate_sources('/vendor/cigraph/vendor/glpk', 'sources-glpk', 'GLPKSOURCES', [], ('.c', '.cc', '.cpp'))
-generate_sources('/vendor/cigraph/vendor/mini-gmp', 'sources-mini-gmp', 'MINIGMPSOURCES')
+generate_sources('/', 'sources-glue-c', 'GLUE_C_SOURCES', ['src/vendor'], ('.c'))
+generate_sources('/', 'sources-glue-cpp', 'GLUE_CPP_SOURCES', ['src/vendor'], ('.cc', '.cpp'))
+generate_sources('/vendor', 'sources-igraph', 'IGRAPH_SOURCES', ignore_folders)
+generate_sources('/vendor/cigraph/vendor/glpk', 'sources-glpk', 'GLPK_SOURCES', [], ('.c', '.cc', '.cpp'))
+generate_sources('/vendor/cigraph/vendor/mini-gmp', 'sources-mini-gmp', 'MINI_GMP_SOURCES')

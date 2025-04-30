@@ -1,6 +1,22 @@
-include sources.mk
+include sources-glue-c.mk
+include sources-glue-cpp.mk
+include sources-igraph.mk
 include sources-glpk.mk
 include sources-mini-gmp.mk
+
+# This is required as a first target if we add additional targets.
+#
+# The symbols.rds file helps troubleshoot issues with forbidden symbols
+# such as abort.
+# Set UserNM=true to speed up compilation during development.
+all: symbols.rds $(SHLIB)
+
+# This file is available only during development.
+# For the tarball, we create an empty file.
+deps.mk:
+	touch -r $$(ls -t *.cpp | head -n 1) "$@"
+
+include deps.mk
 
 PKG_CFLAGS=$(C_VISIBILITY)
 PKG_CXXFLAGS=$(CXX_VISIBILITY)

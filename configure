@@ -32,7 +32,8 @@ if [ "$libxml_unavilable" = true ]; then
     echo "GraphML import will not be available."
 fi
 
-OBJECTS='${SOURCES} ${MINIGMPSOURCES}'
+# shellcheck disable=SC2016
+OBJECTS='${IGRAPH_SOURCES} ${GLUE_C_SOURCES} ${GLUE_CPP_SOURCES} ${MINI_GMP_SOURCES}'
 
 if echo '#include <glpk.h>' | `"${R_HOME}/bin/R" CMD config CC` -E `"${R_HOME}/bin/R" CMD config CPPFLAGS` - > /dev/null 2>&1; then
   echo "Using installed GLPK"
@@ -40,7 +41,8 @@ if echo '#include <glpk.h>' | `"${R_HOME}/bin/R" CMD config CC` -E `"${R_HOME}/b
 else
   echo "Using vendored GLPK"
   PKG_CFLAGS="$PKG_CFLAGS -Ivendor/cigraph/vendor/glpk -Ivendor/cigraph/vendor/glpk/env -Ivendor/cigraph/vendor/glpk/minisat -Ivendor/cigraph/vendor/glpk/misc -Ivendor/cigraph/vendor/glpk/draft -Ivendor/cigraph/vendor/glpk/npp -Ivendor/cigraph/vendor/glpk/api -Ivendor/cigraph/vendor/glpk/mpl -Ivendor/cigraph/vendor/glpk/bflib -Ivendor/cigraph/vendor/glpk/amd -Ivendor/cigraph/vendor/glpk/simplex -Ivendor/cigraph/vendor/glpk/colamd"
-  OBJECTS=${OBJECTS}' ${GLPKSOURCES}'
+  # shellcheck disable=SC2016
+  OBJECTS="${OBJECTS}"' ${GLPK_SOURCES}'
 fi
 
 echo "# Generated from Makevars.in, do not edit by hand" > src/Makevars.new

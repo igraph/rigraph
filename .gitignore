@@ -21,3 +21,5 @@ cran
 /compile_commands.json
 /.cache
 /rchk
+/src/*.d
+/src/symbols.rds
