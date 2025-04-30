@@ -174,7 +174,7 @@ clique.number <- function(graph) { # nocov start
 #'   `NULL` means no limit.
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
 #'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class [igraph.vs()][V].
+#'   a clique, i.e. a vertex sequence of class [igraph.vs][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -343,7 +343,7 @@ clique_num <- clique_number_impl
 #'   or only the maximal ones (`TRUE`).
 #' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
-#'   clique, i.e. a vertex sequence of class [igraph.vs()][V].
+#'   clique, i.e. a vertex sequence of class [igraph.vs][V].
 #'
 #'   `weighted_clique_num()` returns an integer scalar.
 #'

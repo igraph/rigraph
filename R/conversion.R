@@ -1174,7 +1174,7 @@ as_long_data_frame <- function(graph) {
 #' [as_adjacency_matrix()] or [as_edgelist()]
 #' depending on the value of `matrix.type`.
 #'
-#' @param x object of class igraph, the network
+#' @param x object of class `igraph`, the network
 #' @param matrix.type character, type of matrix to return, currently "adjacency"
 #'   or "edgelist" are supported
 #' @param \dots other arguments to/from other methods
