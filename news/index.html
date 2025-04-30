@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9043</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9044</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,42 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.1.4.9044" id="igraph-2149044">igraph 2.1.4.9044<a class="anchor" aria-label="anchor" href="#igraph-2149044"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-1-4-9044">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-1-4-9044"></a></h3>
+<ul><li>Added factor support for <code><a href="../reference/graph_from_data_frame.html">graph_from_data_frame()</a></code> (<a href="https://github.com/igraph/rigraph/issues/34" class="external-link">#34</a>, <a href="https://github.com/igraph/rigraph/issues/1829" class="external-link">#1829</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-1-4-9044">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-4-9044"></a></h3>
+<ul><li>Refer to the dev version of roxygen2 as build dependency (<a href="https://github.com/igraph/rigraph/issues/1832" class="external-link">#1832</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-2-1-4-9044">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-2-1-4-9044"></a></h3>
+<ul><li><p>Fix sanitizer.</p></li>
+<li><p>Permissions, better tests for missing suggests, lints (<a href="https://github.com/igraph/rigraph/issues/1851" class="external-link">#1851</a>).</p></li>
+<li><p>Only fail covr builds if token is given (<a href="https://github.com/igraph/rigraph/issues/1848" class="external-link">#1848</a>).</p></li>
+<li><p>Always use <code>_R_CHECK_FORCE_SUGGESTS_=false</code> (<a href="https://github.com/igraph/rigraph/issues/1846" class="external-link">#1846</a>).</p></li>
+<li><p>Correct installation of xml2 (<a href="https://github.com/igraph/rigraph/issues/1842" class="external-link">#1842</a>).</p></li>
+<li><p>Add xml2 for covr, print testthat results (<a href="https://github.com/igraph/rigraph/issues/1840" class="external-link">#1840</a>).</p></li>
+<li><p>Sync (<a href="https://github.com/igraph/rigraph/issues/1839" class="external-link">#1839</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-2-1-4-9044">Documentation<a class="anchor" aria-label="anchor" href="#documentation-2-1-4-9044"></a></h3>
+<ul><li>Clarify that <code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/eqmooring" class="external-link">@eqmooring</a>, <a href="https://github.com/igraph/rigraph/issues/1831" class="external-link">#1831</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-1-4-9044">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-4-9044"></a></h3>
+<ul><li>Don’t <code><a href="https://Matrix.R-forge.R-project.org" class="external-link">library(Matrix)</a></code> in tests (<a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/igraph/rigraph/issues/1833" class="external-link">#1833</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="vendor-2-1-4-9044">vendor<a class="anchor" aria-label="anchor" href="#vendor-2-1-4-9044"></a></h3>
+<ul><li><p>Update vendored sources to <a href="mailto:igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28" class="email">igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28</a> (<a href="https://github.com/igraph/rigraph/issues/1854" class="external-link">#1854</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267" class="email">igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267</a> (<a href="https://github.com/igraph/rigraph/issues/1853" class="external-link">#1853</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760" class="email">igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760</a> (<a href="https://github.com/igraph/rigraph/issues/1852" class="external-link">#1852</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3" class="email">igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3</a> (<a href="https://github.com/igraph/rigraph/issues/1843" class="external-link">#1843</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.4.9043" id="igraph-2149043">igraph 2.1.4.9043<a class="anchor" aria-label="anchor" href="#igraph-2149043"></a></h2>
 <div class="section level3">
