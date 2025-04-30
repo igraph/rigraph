@@ -195,7 +195,7 @@ clear_native_ptr <- function(g) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.version()` was renamed to [`igraph_version()`] to create a more
+#' `igraph.version()` was renamed to [igraph_version()] to create a more
 #' consistent API.
 #'
 #' @keywords internal

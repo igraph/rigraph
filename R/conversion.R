@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.to.graphNEL()` was renamed to [`as_graphnel()`] to create a more
+#' `igraph.to.graphNEL()` was renamed to [as_graphnel()] to create a more
 #' consistent API.
 #' @inheritParams as_graphnel
 #' @keywords internal
@@ -18,7 +18,7 @@ igraph.to.graphNEL <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.from.graphNEL()` was renamed to [`graph_from_graphnel()`] to create a more
+#' `igraph.from.graphNEL()` was renamed to [graph_from_graphnel()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_graphnel
 #' @keywords internal
@@ -33,7 +33,7 @@ igraph.from.graphNEL <- function(graphNEL, name = TRUE, weight = TRUE, unlist.at
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adjlist()` was renamed to [`graph_from_adj_list()`] to create a more
+#' `graph.adjlist()` was renamed to [graph_from_adj_list()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_adj_list
 #' @keywords internal
@@ -48,7 +48,7 @@ graph.adjlist <- function(adjlist, mode = c("out", "in", "all", "total"), duplic
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.incidence()` was renamed to [`as_biadjacency_matrix()`] to create a more
+#' `get.incidence()` was renamed to [as_biadjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams as_biadjacency_matrix
 #' @keywords internal
@@ -63,7 +63,7 @@ get.incidence <- function(graph, types = NULL, attr = NULL, names = TRUE, sparse
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edgelist()` was renamed to [`as_edgelist()`] to create a more
+#' `get.edgelist()` was renamed to [as_edgelist()] to create a more
 #' consistent API.
 #' @inheritParams as_edgelist
 #' @keywords internal
@@ -78,7 +78,7 @@ get.edgelist <- function(graph, names = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.data.frame()` was renamed to [`as_data_frame()`] to create a more
+#' `get.data.frame()` was renamed to [as_data_frame()] to create a more
 #' consistent API.
 #' @inheritParams as_data_frame
 #' @keywords internal
@@ -93,7 +93,7 @@ get.data.frame <- function(x, what = c("edges", "vertices", "both")) { # nocov s
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjacency()` was renamed to [`as_adjacency_matrix()`] to create a more
+#' `get.adjacency()` was renamed to [as_adjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams as_adjacency_matrix
 #' @keywords internal
@@ -108,7 +108,7 @@ get.adjacency <- function(graph, type = c("both", "upper", "lower"), attr = NULL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjlist()` was renamed to [`as_adj_list()`] to create a more
+#' `get.adjlist()` was renamed to [as_adj_list()] to create a more
 #' consistent API.
 #' @inheritParams as_adj_list
 #' @keywords internal
@@ -123,7 +123,7 @@ get.adjlist <- function(graph, mode = c("all", "out", "in", "total"), loops = c(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.adjedgelist()` was renamed to [`as_adj_edge_list()`] to create a more
+#' `get.adjedgelist()` was renamed to [as_adj_edge_list()] to create a more
 #' consistent API.
 #' @inheritParams as_adj_edge_list
 #' @keywords internal
@@ -995,7 +995,7 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as_incidence_matrix()` was renamed to [`as_biadjacency_matrix()`] to create a more
+#' `as_incidence_matrix()` was renamed to [as_biadjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams as_biadjacency_matrix
 #' @keywords internal
@@ -1205,7 +1205,7 @@ as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as.directed()` was renamed to [`as_directed()`] to create a more
+#' `as.directed()` was renamed to [as_directed()] to create a more
 #' consistent API.
 #' @inheritParams as_directed
 #' @keywords internal
@@ -1220,7 +1220,7 @@ as.directed <- function(graph, mode = c("mutual", "arbitrary", "random", "acycli
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `as.undirected()` was renamed to [`as_undirected()`] to create a more
+#' `as.undirected()` was renamed to [as_undirected()] to create a more
 #' consistent API.
 #' @inheritParams as_undirected
 #' @keywords internal
@@ -1237,7 +1237,7 @@ as.undirected <- function(graph,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.edgelist()` was renamed to [`graph_from_edgelist()`] to create a more
+#' `graph.edgelist()` was renamed to [graph_from_edgelist()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_edgelist
 #' @keywords internal
@@ -1252,7 +1252,7 @@ graph.edgelist <- function(el, directed = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.data.frame()` was renamed to [`graph_from_data_frame()`] to create a more
+#' `graph.data.frame()` was renamed to [graph_from_data_frame()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_data_frame
 #' @keywords internal

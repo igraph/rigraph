@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.disjoint.paths()` was renamed to [`vertex_disjoint_paths()`] to create a more
+#' `vertex.disjoint.paths()` was renamed to [vertex_disjoint_paths()] to create a more
 #' consistent API.
 #' @inheritParams vertex_disjoint_paths
 #' @keywords internal
@@ -18,7 +18,7 @@ vertex.disjoint.paths <- function(graph, source = NULL, target = NULL) { # nocov
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.connectivity()` was renamed to [`vertex_connectivity()`] to create a more
+#' `vertex.connectivity()` was renamed to [vertex_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams vertex_connectivity
 #' @keywords internal
@@ -33,7 +33,7 @@ vertex.connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `stMincuts()` was renamed to [`st_min_cuts()`] to create a more
+#' `stMincuts()` was renamed to [st_min_cuts()] to create a more
 #' consistent API.
 #' @inheritParams st_min_cuts
 #' @keywords internal
@@ -48,7 +48,7 @@ stMincuts <- function(graph, source, target, capacity = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `stCuts()` was renamed to [`st_cuts()`] to create a more
+#' `stCuts()` was renamed to [st_cuts()] to create a more
 #' consistent API.
 #' @inheritParams st_cuts
 #' @keywords internal
@@ -63,7 +63,7 @@ stCuts <- function(graph, source, target) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimum.size.separators()` was renamed to [`min_separators()`] to create a more
+#' `minimum.size.separators()` was renamed to [min_separators()] to create a more
 #' consistent API.
 #' @inheritParams min_separators
 #' @keywords internal
@@ -78,7 +78,7 @@ minimum.size.separators <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimal.st.separators()` was renamed to [`min_st_separators()`] to create a more
+#' `minimal.st.separators()` was renamed to [min_st_separators()] to create a more
 #' consistent API.
 #' @inheritParams min_st_separators
 #' @keywords internal
@@ -93,7 +93,7 @@ minimal.st.separators <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.separator()` was renamed to [`is_separator()`] to create a more
+#' `is.separator()` was renamed to [is_separator()] to create a more
 #' consistent API.
 #' @inheritParams is_separator
 #' @keywords internal
@@ -108,7 +108,7 @@ is.separator <- function(graph, candidate) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.minimal.separator()` was renamed to [`is_min_separator()`] to create a more
+#' `is.minimal.separator()` was renamed to [is_min_separator()] to create a more
 #' consistent API.
 #' @inheritParams is_min_separator
 #' @keywords internal
@@ -123,7 +123,7 @@ is.minimal.separator <- function(graph, candidate) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.mincut()` was renamed to [`min_cut()`] to create a more
+#' `graph.mincut()` was renamed to [min_cut()] to create a more
 #' consistent API.
 #' @inheritParams min_cut
 #' @keywords internal
@@ -138,7 +138,7 @@ graph.mincut <- function(graph, source = NULL, target = NULL, capacity = NULL, v
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.maxflow()` was renamed to [`max_flow()`] to create a more
+#' `graph.maxflow()` was renamed to [max_flow()] to create a more
 #' consistent API.
 #' @inheritParams max_flow
 #' @keywords internal
@@ -153,7 +153,7 @@ graph.maxflow <- function(graph, source, target, capacity = NULL) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adhesion()` was renamed to [`adhesion()`] to create a more
+#' `graph.adhesion()` was renamed to [adhesion()] to create a more
 #' consistent API.
 #' @inheritParams adhesion
 #' @keywords internal
@@ -168,7 +168,7 @@ graph.adhesion <- function(graph, checks = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.disjoint.paths()` was renamed to [`edge_connectivity()`] to create a more
+#' `edge.disjoint.paths()` was renamed to [edge_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams edge_connectivity
 #' @keywords internal
@@ -183,7 +183,7 @@ edge.disjoint.paths <- function(graph, source = NULL, target = NULL, checks = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.connectivity()` was renamed to [`edge_connectivity()`] to create a more
+#' `edge.connectivity()` was renamed to [edge_connectivity()] to create a more
 #' consistent API.
 #' @inheritParams edge_connectivity
 #' @keywords internal
@@ -198,7 +198,7 @@ edge.connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `dominator.tree()` was renamed to [`dominator_tree()`] to create a more
+#' `dominator.tree()` was renamed to [dominator_tree()] to create a more
 #' consistent API.
 #' @inheritParams dominator_tree
 #' @keywords internal

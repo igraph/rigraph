@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.independent.vertex.sets()` was renamed to [`max_ivs()`] to create a more
+#' `maximal.independent.vertex.sets()` was renamed to [max_ivs()] to create a more
 #' consistent API.
 #' @inheritParams max_ivs
 #' @keywords internal
@@ -18,7 +18,7 @@ maximal.independent.vertex.sets <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.cliques.count()` was renamed to [`count_max_cliques()`] to create a more
+#' `maximal.cliques.count()` was renamed to [count_max_cliques()] to create a more
 #' consistent API.
 #' @inheritParams count_max_cliques
 #' @keywords internal
@@ -33,7 +33,7 @@ maximal.cliques.count <- function(graph, min = NULL, max = NULL, subset = NULL) 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal.cliques()` was renamed to [`max_cliques()`] to create a more
+#' `maximal.cliques()` was renamed to [max_cliques()] to create a more
 #' consistent API.
 #' @inheritParams max_cliques
 #' @keywords internal
@@ -48,7 +48,7 @@ maximal.cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `largest.independent.vertex.sets()` was renamed to [`largest_ivs()`] to create a more
+#' `largest.independent.vertex.sets()` was renamed to [largest_ivs()] to create a more
 #' consistent API.
 #' @inheritParams largest_ivs
 #' @keywords internal
@@ -63,7 +63,7 @@ largest.independent.vertex.sets <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `largest.cliques()` was renamed to [`largest_cliques()`] to create a more
+#' `largest.cliques()` was renamed to [largest_cliques()] to create a more
 #' consistent API.
 #' @inheritParams largest_cliques
 #' @keywords internal
@@ -78,7 +78,7 @@ largest.cliques <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `independent.vertex.sets()` was renamed to [`ivs()`] to create a more
+#' `independent.vertex.sets()` was renamed to [ivs()] to create a more
 #' consistent API.
 #' @inheritParams ivs
 #' @keywords internal
@@ -93,7 +93,7 @@ independent.vertex.sets <- function(graph, min = NULL, max = NULL) { # nocov sta
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `independence.number()` was renamed to [`ivs_size()`] to create a more
+#' `independence.number()` was renamed to [ivs_size()] to create a more
 #' consistent API.
 #' @inheritParams ivs_size
 #' @keywords internal
@@ -108,7 +108,7 @@ independence.number <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `clique.number()` was renamed to [`clique_num()`] to create a more
+#' `clique.number()` was renamed to [clique_num()] to create a more
 #' consistent API.
 #' @inheritParams clique_num
 #' @keywords internal
@@ -174,7 +174,7 @@ clique.number <- function(graph) { # nocov start
 #'   `NULL` means no limit.
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
 #'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
+#'   a clique, i.e. a vertex sequence of class [igraph.vs()][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -343,7 +343,7 @@ clique_num <- clique_number_impl
 #'   or only the maximal ones (`TRUE`).
 #' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
-#'   clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
+#'   clique, i.e. a vertex sequence of class [igraph.vs()][V].
 #'
 #'   `weighted_clique_num()` returns an integer scalar.
 #'
@@ -499,7 +499,7 @@ max_ivs <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximal_ivs()` was renamed to [`max_ivs()`] to create a more
+#' `maximal_ivs()` was renamed to [max_ivs()] to create a more
 #' consistent API.
 #' @export
 #' @inheritParams max_ivs

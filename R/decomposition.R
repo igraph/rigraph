@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.chordal()` was renamed to [`is_chordal()`] to create a more
+#' `is.chordal()` was renamed to [is_chordal()] to create a more
 #' consistent API.
 #' @inheritParams is_chordal
 #' @keywords internal

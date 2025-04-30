@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.intersection()` was renamed to [`intersection()`] to create a more
+#' `graph.intersection()` was renamed to [intersection()] to create a more
 #' consistent API.
 #' @inheritParams intersection
 #' @keywords internal
@@ -18,7 +18,7 @@ graph.intersection <- function(...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.union()` was renamed to [`union.igraph()`] to create a more
+#' `graph.union()` was renamed to [union.igraph()] to create a more
 #' consistent API.
 #' @inheritParams union.igraph
 #' @keywords internal
@@ -33,7 +33,7 @@ graph.union <- function(..., byname = "auto") { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.difference()` was renamed to [`difference()`] to create a more
+#' `graph.difference()` was renamed to [difference()] to create a more
 #' consistent API.
 #' @inheritParams difference
 #' @keywords internal
@@ -48,7 +48,7 @@ graph.difference <- function(...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.disjoint.union()` was renamed to [`disjoint_union()`] to create a more
+#' `graph.disjoint.union()` was renamed to [disjoint_union()] to create a more
 #' consistent API.
 #' @inheritParams disjoint_union
 #' @keywords internal
@@ -63,7 +63,7 @@ graph.disjoint.union <- function(...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.compose()` was renamed to [`compose()`] to create a more
+#' `graph.compose()` was renamed to [compose()] to create a more
 #' consistent API.
 #' @inheritParams compose
 #' @keywords internal
@@ -78,7 +78,7 @@ graph.compose <- function(g1, g2, byname = "auto") { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.complementer()` was renamed to [`complementer()`] to create a more
+#' `graph.complementer()` was renamed to [complementer()] to create a more
 #' consistent API.
 #' @inheritParams complementer
 #' @keywords internal

@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adjacency()` was renamed to [`graph_from_adjacency_matrix()`] to create a more
+#' `graph.adjacency()` was renamed to [graph_from_adjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_adjacency_matrix
 #' @keywords internal

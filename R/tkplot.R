@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.setcoords()` was renamed to [`tk_set_coords()`] to create a more
+#' `tkplot.setcoords()` was renamed to [tk_set_coords()] to create a more
 #' consistent API.
 #' @inheritParams tk_set_coords
 #' @keywords internal
@@ -18,7 +18,7 @@ tkplot.setcoords <- function(tkp.id, coords) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.rotate()` was renamed to [`tk_rotate()`] to create a more
+#' `tkplot.rotate()` was renamed to [tk_rotate()] to create a more
 #' consistent API.
 #' @inheritParams tk_rotate
 #' @keywords internal
@@ -33,7 +33,7 @@ tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.reshape()` was renamed to [`tk_reshape()`] to create a more
+#' `tkplot.reshape()` was renamed to [tk_reshape()] to create a more
 #' consistent API.
 #' @inheritParams tk_reshape
 #' @keywords internal
@@ -48,7 +48,7 @@ tkplot.reshape <- function(tkp.id, newlayout, ..., params) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.off()` was renamed to [`tk_off()`] to create a more
+#' `tkplot.off()` was renamed to [tk_off()] to create a more
 #' consistent API.
 #'
 #' @keywords internal
@@ -63,7 +63,7 @@ tkplot.off <- function() { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.getcoords()` was renamed to [`tk_coords()`] to create a more
+#' `tkplot.getcoords()` was renamed to [tk_coords()] to create a more
 #' consistent API.
 #' @inheritParams tk_coords
 #' @keywords internal
@@ -78,7 +78,7 @@ tkplot.getcoords <- function(tkp.id, norm = FALSE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.fit.to.screen()` was renamed to [`tk_fit()`] to create a more
+#' `tkplot.fit.to.screen()` was renamed to [tk_fit()] to create a more
 #' consistent API.
 #' @inheritParams tk_fit
 #' @keywords internal
@@ -93,7 +93,7 @@ tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) { # nocov 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.export.postscript()` was renamed to [`tk_postscript()`] to create a more
+#' `tkplot.export.postscript()` was renamed to [tk_postscript()] to create a more
 #' consistent API.
 #' @inheritParams tk_postscript
 #' @keywords internal
@@ -108,7 +108,7 @@ tkplot.export.postscript <- function(tkp.id) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.close()` was renamed to [`tk_close()`] to create a more
+#' `tkplot.close()` was renamed to [tk_close()] to create a more
 #' consistent API.
 #' @inheritParams tk_close
 #' @keywords internal
@@ -123,7 +123,7 @@ tkplot.close <- function(tkp.id, window.close = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.center()` was renamed to [`tk_center()`] to create a more
+#' `tkplot.center()` was renamed to [tk_center()] to create a more
 #' consistent API.
 #' @inheritParams tk_center
 #' @keywords internal
@@ -138,7 +138,7 @@ tkplot.center <- function(tkp.id) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `tkplot.canvas()` was renamed to [`tk_canvas()`] to create a more
+#' `tkplot.canvas()` was renamed to [tk_canvas()] to create a more
 #' consistent API.
 #' @inheritParams tk_canvas
 #' @keywords internal

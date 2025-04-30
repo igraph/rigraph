@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `exportPajek()` was renamed to [`export_pajek()`] to create a more
+#' `exportPajek()` was renamed to [export_pajek()] to create a more
 #' consistent API.
 #' @inheritParams export_pajek
 #' @keywords internal
@@ -18,7 +18,7 @@ exportPajek <- function(blocks, graph, file, project.file = TRUE) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `plotHierarchy()` was renamed to [`plot_hierarchy()`] to create a more
+#' `plotHierarchy()` was renamed to [plot_hierarchy()] to create a more
 #' consistent API.
 #' @inheritParams plot_hierarchy
 #' @keywords internal
@@ -33,7 +33,7 @@ plotHierarchy <- function(blocks, layout = layout_as_tree(hierarchy(blocks), roo
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maxcohesion()` was renamed to [`max_cohesion()`] to create a more
+#' `maxcohesion()` was renamed to [max_cohesion()] to create a more
 #' consistent API.
 #' @inheritParams max_cohesion
 #' @keywords internal
@@ -48,7 +48,7 @@ maxcohesion <- function(blocks) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.cohesion()` was renamed to [`cohesion()`] to create a more
+#' `graph.cohesion()` was renamed to [cohesion()] to create a more
 #' consistent API.
 #' @param x x
 #' @param ... passed to `cohesion()`
@@ -64,7 +64,7 @@ graph.cohesion <- function(x, ...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cohesive.blocks()` was renamed to [`cohesive_blocks()`] to create a more
+#' `cohesive.blocks()` was renamed to [cohesive_blocks()] to create a more
 #' consistent API.
 #' @inheritParams cohesive_blocks
 #' @keywords internal
@@ -79,7 +79,7 @@ cohesive.blocks <- function(graph, labels = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `blockGraphs()` was renamed to [`graphs_from_cohesive_blocks()`] to create a more
+#' `blockGraphs()` was renamed to [graphs_from_cohesive_blocks()] to create a more
 #' consistent API.
 #' @inheritParams graphs_from_cohesive_blocks
 #' @keywords internal

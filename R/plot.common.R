@@ -449,7 +449,7 @@ NULL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `autocurve.edges()` was renamed to [`curve_multiple()`] to create a more
+#' `autocurve.edges()` was renamed to [curve_multiple()] to create a more
 #' consistent API.
 #' @inheritParams curve_multiple
 #' @keywords internal

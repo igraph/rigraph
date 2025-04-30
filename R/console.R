@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.console()` was renamed to [`console()`] to create a more
+#' `igraph.console()` was renamed to [console()] to create a more
 #' consistent API.
 #'
 #' @keywords internal

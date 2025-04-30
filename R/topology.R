@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `permute.vertices()` was renamed to [`permute()`] to create a more
+#' `permute.vertices()` was renamed to [permute()] to create a more
 #' consistent API.
 #' @inheritParams permute
 #' @keywords internal
@@ -18,7 +18,7 @@ permute.vertices <- function(graph, permutation) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.isocreate()` was renamed to [`graph_from_isomorphism_class()`] to create a more
+#' `graph.isocreate()` was renamed to [graph_from_isomorphism_class()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_isomorphism_class
 #' @keywords internal
@@ -33,7 +33,7 @@ graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.automorphisms()` was renamed to [`count_automorphisms()`] to create a more
+#' `graph.automorphisms()` was renamed to [count_automorphisms()] to create a more
 #' consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal
@@ -48,7 +48,7 @@ graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "f
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `canonical.permutation()` was renamed to [`canonical_permutation()`] to create a more
+#' `canonical.permutation()` was renamed to [canonical_permutation()] to create a more
 #' consistent API.
 #' @inheritParams canonical_permutation
 #' @keywords internal
@@ -63,7 +63,7 @@ canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `automorphisms()` was renamed to [`count_automorphisms()`] to create a more
+#' `automorphisms()` was renamed to [count_automorphisms()] to create a more
 #' consistent API.
 #' @inheritParams count_automorphisms
 #' @keywords internal

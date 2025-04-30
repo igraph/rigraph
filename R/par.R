@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.options()` was renamed to [`igraph_options()`] to create a more
+#' `igraph.options()` was renamed to [igraph_options()] to create a more
 #' consistent API.
 #' @inheritParams igraph_options
 #' @keywords internal
@@ -18,7 +18,7 @@ igraph.options <- function(...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `getIgraphOpt()` was renamed to [`igraph_opt()`] to create a more
+#' `getIgraphOpt()` was renamed to [igraph_opt()] to create a more
 #' consistent API.
 #' @inheritParams igraph_opt
 #' @keywords internal

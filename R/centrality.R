@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `subgraph.centrality()` was renamed to [`subgraph_centrality()`] to create a more
+#' `subgraph.centrality()` was renamed to [subgraph_centrality()] to create a more
 #' consistent API.
 #' @inheritParams subgraph_centrality
 #' @keywords internal
@@ -18,7 +18,7 @@ subgraph.centrality <- function(graph, diag = FALSE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `page.rank()` was renamed to [`page_rank()`] to create a more
+#' `page.rank()` was renamed to [page_rank()] to create a more
 #' consistent API.
 #' @inheritParams page_rank
 #' @keywords internal
@@ -33,7 +33,7 @@ page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `hub.score()` was renamed to [`hub_score()`] to create a more
+#' `hub.score()` was renamed to [hub_score()] to create a more
 #' consistent API.
 #' @inheritParams hub_score
 #' @keywords internal
@@ -48,7 +48,7 @@ hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `authority.score()` was renamed to [`authority_score()`] to create a more
+#' `authority.score()` was renamed to [authority_score()] to create a more
 #' consistent API.
 #' @inheritParams authority_score
 #' @keywords internal
@@ -63,7 +63,7 @@ authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpac
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.strength()` was renamed to [`strength()`] to create a more
+#' `graph.strength()` was renamed to [strength()] to create a more
 #' consistent API.
 #' @inheritParams strength
 #' @keywords internal
@@ -78,7 +78,7 @@ graph.strength <- function(graph, vids = V(graph), mode = c("all", "out", "in", 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.eigen()` was renamed to [`spectrum()`] to create a more
+#' `graph.eigen()` was renamed to [spectrum()] to create a more
 #' consistent API.
 #' @inheritParams spectrum
 #' @keywords internal
@@ -93,7 +93,7 @@ graph.eigen <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_a
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.diversity()` was renamed to [`diversity()`] to create a more
+#' `graph.diversity()` was renamed to [diversity()] to create a more
 #' consistent API.
 #' @inheritParams diversity
 #' @keywords internal
@@ -108,7 +108,7 @@ graph.diversity <- function(graph, weights = NULL, vids = V(graph)) { # nocov st
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `evcent()` was renamed to [`eigen_centrality()`] to create a more
+#' `evcent()` was renamed to [eigen_centrality()] to create a more
 #' consistent API.
 #' @inheritParams eigen_centrality
 #' @keywords internal
@@ -123,7 +123,7 @@ evcent <- function(graph, directed = FALSE, scale = TRUE, weights = NULL, option
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `edge.betweenness()` was renamed to [`edge_betweenness()`] to create a more
+#' `edge.betweenness()` was renamed to [edge_betweenness()] to create a more
 #' consistent API.
 #' @inheritParams edge_betweenness
 #' @keywords internal
@@ -138,7 +138,7 @@ edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NUL
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bonpow()` was renamed to [`power_centrality()`] to create a more
+#' `bonpow()` was renamed to [power_centrality()] to create a more
 #' consistent API.
 #' @inheritParams power_centrality
 #' @keywords internal
@@ -153,7 +153,7 @@ bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `alpha.centrality()` was renamed to [`alpha_centrality()`] to create a more
+#' `alpha.centrality()` was renamed to [alpha_centrality()] to create a more
 #' consistent API.
 #' @inheritParams alpha_centrality
 #' @keywords internal
@@ -188,7 +188,7 @@ alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Use [`betweenness()`] with the `cutoff` argument instead.
+#' Use [betweenness()] with the `cutoff` argument instead.
 #' @param vids The vertices for which the vertex betweenness estimation will be
 #'   calculated.
 #' @inheritParams betweenness
@@ -351,7 +351,7 @@ edge_betweenness <- function(graph, e = E(graph),
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Use [`edge_betweenness()`] with the `cutoff` argument instead.
+#' Use [edge_betweenness()] with the `cutoff` argument instead.
 #' @inheritParams edge_betweenness
 #' @keywords internal
 #' @export
@@ -467,7 +467,7 @@ closeness <- function(graph, vids = V(graph),
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Use [`closeness()`] with the `cutoff` argument instead.
+#' Use [closeness()] with the `cutoff` argument instead.
 #' @inheritParams closeness
 #' @keywords internal
 #' @export

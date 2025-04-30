@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.simple()` was renamed to [`is_simple()`] to create a more
+#' `is.simple()` was renamed to [is_simple()] to create a more
 #' consistent API.
 #' @inheritParams is_simple
 #' @keywords internal

@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraphdemo()` was renamed to [`igraph_demo()`] to create a more
+#' `igraphdemo()` was renamed to [igraph_demo()] to create a more
 #' consistent API.
 #' @inheritParams igraph_demo
 #' @keywords internal
