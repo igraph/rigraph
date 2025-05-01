@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9045
+
+## Chore
+
+- Fix `devtools::load_all()` (#1857).
+
+
 # igraph 2.1.4.9044
 
 ## Bug fixes
