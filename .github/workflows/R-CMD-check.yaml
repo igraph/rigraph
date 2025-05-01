@@ -56,6 +56,7 @@ jobs:
       contents: write
       statuses: write
       pull-requests: write
+      actions: write
 
     # Begin custom: services
     # End custom: services
