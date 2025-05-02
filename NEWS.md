@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9046
+
+## Chore
+
+- Auto-update from GitHub Actions (#1861).
+
+- Add deps file to build-ignore.
+
+## Continuous integration
+
+- Allow workflow dispatch.
+
+- Allow PR creation.
+
+
 # igraph 2.1.4.9045
 
 ## Chore
