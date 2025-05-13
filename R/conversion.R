@@ -857,7 +857,14 @@ get.incidence.dense <- function(graph, types, names, attr, call = rlang::caller_
     el[idx, ] <- el[idx, 2:1]
     # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
     # and we can populate the matrix
-    res[el] <- edge_attr(graph, attr)
+    value <- edge_attr(graph, attr)
+    if (!is.numeric(value) && !is.logical(value)) {
+      cli::cli_abort(
+        "Matrices must be either numeric or logical, and the edge attribute is not",
+        call = call
+      )
+    }
+    res[el] <- value
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res) <- V(graph)$name[which(!types)]
@@ -902,6 +909,12 @@ get.incidence.sparse <- function(graph, types, names, attr, call = rlang::caller
       cli::cli_abort("No such edge attribute", call = call)
     }
     value <- edge_attr(graph, name = attr)
+    if (!is.numeric(value) && !is.logical(value)) {
+      cli::cli_abort(
+        "Matrices must be either numeric or logical, and the edge attribute is not",
+        call = call
+      )
+    }
   } else {
     value <- rep(1, nrow(el))
   }
@@ -1418,9 +1431,6 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
     if (ncol(vertices) > 1) {
       for (i in 2:ncol(vertices)) {
         newval <- vertices[, i]
-        if (inherits(newval, "factor")) {
-          newval <- as.character(newval)
-        }
         attrs[[names(vertices)[i]]] <- newval
       }
     }
@@ -1439,9 +1449,6 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   if (ncol(d) > 2) {
     for (i in 3:ncol(d)) {
       newval <- d[, i]
-      if (inherits(newval, "factor")) {
-        newval <- as.character(newval)
-      }
       attrs[[names(d)[i]]] <- newval
     }
   }

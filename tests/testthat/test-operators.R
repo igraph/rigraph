@@ -138,9 +138,9 @@ C    5     e    NA   NA    C
 
 test_that("Union of directed named graphs", {
   graphs <- list(
-    make_graph(~ 1:2:3:4:5, 1 - +2, 1 - +3, 2 - +3, 2 - +4, 3 - +4, 1 - +5, 3 - +5),
-    make_graph(~ 1:2:3:4:5, 2 - +3, 1 - +4, 2 - +4, 3 - +4, 2 - +5, 3 - +5),
-    make_graph(~ 1:2:3:4:5, 1 - +2, 1 - +3, 2 - +4, 3 - +4, 1 - +5, 4 - +5)
+    make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 3, 2 -+ 3, 2 -+ 4, 3 -+ 4, 1 -+ 5, 3 -+ 5),
+    make_graph(~ 1:2:3:4:5, 2 -+ 3, 1 -+ 4, 2 -+ 4, 3 -+ 4, 2 -+ 5, 3 -+ 5),
+    make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 3, 2 -+ 4, 3 -+ 4, 1 -+ 5, 4 -+ 5)
   )
 
   gg <- union.igraph(graphs)
@@ -150,9 +150,9 @@ test_that("Union of directed named graphs", {
 })
 
 test_that("edge reversal works", {
-  directed_graph <- make_graph(~ 1 - +2, 1 - +3, 1 - +4, 2 - +3, 3 - +4)
+  directed_graph <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
   reverse_directed_graph <- reverse_edges(directed_graph, 1:3)
-  expected <- make_graph(~ 1 + -2, 1 + -3, 1 + -4, 2 - +3, 3 - +4)
+  expected <- make_graph(~ 1 +- 2, 1 +- 3, 1 +- 4, 2 -+ 3, 3 -+ 4)
   expect_isomorphic(reverse_directed_graph, expected)
 
   reverse_all_directed_graph <- reverse_edges(directed_graph)
@@ -166,7 +166,7 @@ test_that("edge reversal works", {
   reverse_undirected_graph <- reverse_edges(undirected_graph, 1:3)
   expect_identical_graphs(undirected_graph, reverse_undirected_graph)
 
-  isolated_vertices_g <- make_graph(~ 1:2:3:4:5, 1 - +2, 1 - +4)
+  isolated_vertices_g <- make_graph(~ 1:2:3:4:5, 1 -+ 2, 1 -+ 4)
   reverse_isolated_vertices_g <- reverse_edges(isolated_vertices_g)
   expect_vcount(reverse_isolated_vertices_g, vcount(isolated_vertices_g))
   expect_equal(
@@ -176,7 +176,7 @@ test_that("edge reversal works", {
 })
 
 test_that("t() is aliased to edge reversal for graphs", {
-  g <- make_graph(~ 1 - +2, 1 - +3, 1 - +4, 2 - +3, 3 - +4)
+  g <- make_graph(~ 1 -+ 2, 1 -+ 3, 1 -+ 4, 2 -+ 3, 3 -+ 4)
   expect_vcount(t(g), vcount(g))
   expect_equal(as_edgelist(t(g)), as_edgelist(g)[, c(2, 1)])
 })

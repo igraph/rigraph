@@ -23,10 +23,9 @@ in the Euclidean norm.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 scores. If the graph has a \code{weight} edge attribute, then this is used
-by default.
-This function interprets edge weights as connection strengths. In the
-random surfer model, an edge with a larger weight is more likely to be
-selected by the surfer.}
+by default. Pass \code{NA} to ignore the weight attribute. This function
+interprets edge weights as connection strengths. The weights of parallel
+edges are effectively added up.}
 
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details.}

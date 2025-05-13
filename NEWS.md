@@ -1,5 +1,217 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9046
+
+## Chore
+
+- Auto-update from GitHub Actions (#1861).
+
+- Add deps file to build-ignore.
+
+## Continuous integration
+
+- Allow workflow dispatch.
+
+- Allow PR creation.
+
+
+# igraph 2.1.4.9045
+
+## Chore
+
+- Fix `devtools::load_all()` (#1857).
+
+
+# igraph 2.1.4.9044
+
+## Bug fixes
+
+- Added factor support for `graph_from_data_frame()` (#34, #1829).
+
+## Chore
+
+- Refer to the dev version of roxygen2 as build dependency (#1832).
+
+## Continuous integration
+
+- Fix sanitizer.
+
+- Permissions, better tests for missing suggests, lints (#1851).
+
+- Only fail covr builds if token is given (#1848).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1846).
+
+- Correct installation of xml2 (#1842).
+
+- Add xml2 for covr, print testthat results (#1840).
+
+- Sync (#1839).
+
+## Documentation
+
+- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
+
+## Testing
+
+- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28 (#1854).
+
+- Update vendored sources to igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267 (#1853).
+
+- Update vendored sources to igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760 (#1852).
+
+- Update vendored sources to igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3 (#1843).
+
+
+# igraph 2.1.4.9043
+
+## vendor
+
+- Update vendored sources to igraph/igraph@2d6d0abc05ac3cb53872cc3ea86b847a7556198e (#1837).
+
+- Update vendored sources to igraph/igraph@a899e60c8e3992f769e2159aeedf480ad46de337 (#1836).
+
+- Update vendored sources to igraph/igraph@145b35107659f73d85186b6a021dfe4284cf50c7 (#1835).
+
+- Update vendored sources to igraph/igraph@198fe3751b97bb130e724ca847d8aa5f9a58c4dc (#1834).
+
+
+# igraph 2.1.4.9042
+
+## vendor
+
+- Update vendored sources to igraph/igraph@05d18670f356403c1dcca4e48f78710e31b3c9b0 (#1825).
+
+
+# igraph 2.1.4.9041
+
+## Chore
+
+- Results from main.
+
+- Results from check with new arpack.
+
+## Documentation
+
+- Document return value of `make_clusters()` (#1794).
+
+
+# igraph 2.1.4.9040
+
+## Documentation
+
+- Add author links (#1821).
+
+
+# igraph 2.1.4.9039
+
+## Bug fixes
+
+- Remove string matrix support from biadjacency matrix functions (#1540, #1542, #1803).
+
+## Features
+
+- `simple_cycles()` lists all simple cycles (#1573, #1580).
+
+- Expose C version (#1208, #1781).
+
+## Chore
+
+- Format with air.
+
+## Documentation
+
+- Fix style (#1819).
+
+## Performance
+
+- Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
+
+
+# igraph 2.1.4.9038
+
+## Documentation
+
+- Correct the description of the `weights` parameter of `hits_scores()`.
+
+## Refactoring
+
+- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
+
+
+# igraph 2.1.4.9037
+
+## vendor
+
+- Update vendored sources to igraph/igraph@09f6f258c4a864654ad1950e053ff2f5c507be54 (#1814).
+
+- Update vendored sources to igraph/igraph@d48a25ba0f6d72e447c6d17d74b667b1f21754fb (#1813).
+
+
+# igraph 2.1.4.9036
+
+## Features
+
+- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@a68d7cafcd0935e6f229437981811e730af4f03f (#1811).
+
+
+# igraph 2.1.4.9035
+
+## vendor
+
+- Update vendored sources to igraph/igraph@01b15eb1f44d36418ea65394710a02887ca16857 (#1808).
+
+- Update vendored sources to igraph/igraph@8d5db4db95e2e80cbe8169bbe66ce64f73df7bd3 (#1807).
+
+- Update vendored sources to igraph/igraph@6c5b349a4b56ebee0003953ee43994d2dd93f189 (#1806).
+
+
+# igraph 2.1.4.9034
+
+## Bug fixes
+
+- Removed redundant inheritParams call (#1802).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Load the Matrix package before coercing to a sparse matrix.
+
+- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
+
+## Chore
+
+- Results from revdepcheck.
+
+## Testing
+
+- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
+
+
+# igraph 2.1.4.9033
+
+## Features
+
+- Add relative size scaling to vertices in plots (@gvegayon, #172).
+
+## Chore
+
+- Render docs.
+
+- Updated results.
+
+## Documentation
+
+- Better describe output of `all_shortest_paths()` (#1029, #1778).
+
+
 # igraph 2.1.4.9032
 
 ## vendor

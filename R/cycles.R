@@ -40,7 +40,7 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_lattice(c(3,3))
+#' g <- make_lattice(c(3, 3))
 #' find_cycle(g)
 #'
 #' # Empty results are returned for acyclic graphs
@@ -51,3 +51,46 @@
 #' @export
 
 find_cycle <- find_cycle_impl
+
+
+#' Finds all simple cycles in a graph.
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function lists all simple cycles in a graph within a range of cycle
+#' lengths. A cycle is called simple if it has no repeated vertices.
+#'
+#' Multi-edges and self-loops are taken into account. Note that typical graphs
+#' have exponentially many cycles and the presence of multi-edges exacerbates
+#' this combinatorial explosion.
+#'
+#' @inheritParams find_cycle
+#' @param min Lower limit on cycle lengths to consider. `NULL` means no limit.
+#' @param max Upper limit on cycle lengths to consider. `NULL` means no limit.
+#' @return A named list, with two entries:
+#' \item{vertices}{The list of cycles in terms of their vertices.}
+#' \item{edges}{The list of cycles in terms of their edges.}
+#' @keywords graphs
+#' @examples
+#'
+#' g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A, E -+ E, A -+ F, simplify = FALSE)
+#' simple_cycles(g)
+#' simple_cycles(g, mode = "all") # ignore edge directions
+#' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
+#'
+#' @family cycles
+#' @cdocs igraph_simple_cycles
+#' @export
+
+simple_cycles <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  min = NULL,
+  max = NULL
+) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  simple_cycles_impl(graph, mode, min %||% -1, max %||% -1)
+}

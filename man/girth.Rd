@@ -14,7 +14,7 @@ for undirected circles anyway.}
 }
 \value{
 A named list with two components: \describe{\item{girth}{Integer constant, the
-girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
+girth of the graph, or \code{Inf} if the graph is acyclic.} \item{circle}{Numeric
 vector with the vertex ids in the shortest circle.}}
 }
 \description{
@@ -83,7 +83,8 @@ Graph cycles
 \code{\link{find_cycle}()},
 \code{\link{has_eulerian_path}()},
 \code{\link{is_acyclic}()},
-\code{\link{is_dag}()}
+\code{\link{is_dag}()},
+\code{\link{simple_cycles}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
