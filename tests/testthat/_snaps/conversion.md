@@ -92,6 +92,6 @@
     Code
       graph_from_edgelist(A)
     Condition
-      Error:
+      Error in `graph_from_edgelist()`:
       ! Cannot create a graph object because the edgelist contains NAs.
 

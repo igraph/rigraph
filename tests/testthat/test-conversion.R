@@ -600,6 +600,8 @@ test_that("edge names work", {
 test_that("graph_from_edgelist errors for NAs", {
   A <- matrix(c(1, 2, NA, 1), 2, 2)
   expect_snapshot(graph_from_edgelist(A), error = TRUE)
+})
+
 test_that("graph_from_data_frame works with factors", {
   actors <- data.frame(
     name = c("Alice", "Bob", "Cecil", "David", "Esmeralda"),
