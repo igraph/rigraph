@@ -1,5 +1,79 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9047
+
+## doc
+
+- Refer to current latest version of R in troubleshooting page.
+
+
+# igraph 2.1.4.9046
+
+## Chore
+
+- Auto-update from GitHub Actions (#1861).
+
+- Add deps file to build-ignore.
+
+## Continuous integration
+
+- Allow workflow dispatch.
+
+- Allow PR creation.
+
+
+# igraph 2.1.4.9045
+
+## Chore
+
+- Fix `devtools::load_all()` (#1857).
+
+
+# igraph 2.1.4.9044
+
+## Bug fixes
+
+- Added factor support for `graph_from_data_frame()` (#34, #1829).
+
+## Chore
+
+- Refer to the dev version of roxygen2 as build dependency (#1832).
+
+## Continuous integration
+
+- Fix sanitizer.
+
+- Permissions, better tests for missing suggests, lints (#1851).
+
+- Only fail covr builds if token is given (#1848).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1846).
+
+- Correct installation of xml2 (#1842).
+
+- Add xml2 for covr, print testthat results (#1840).
+
+- Sync (#1839).
+
+## Documentation
+
+- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
+
+## Testing
+
+- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28 (#1854).
+
+- Update vendored sources to igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267 (#1853).
+
+- Update vendored sources to igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760 (#1852).
+
+- Update vendored sources to igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3 (#1843).
+
+
 # igraph 2.1.4.9043
 
 ## vendor
