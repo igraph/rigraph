@@ -46,7 +46,7 @@ implementation.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{power.law.fit()} was renamed to \code{fit_power_law()} to create a more
+\code{power.law.fit()} was renamed to \code{\link[=fit_power_law]{fit_power_law()}} to create a more
 consistent API.
 }
 \keyword{internal}

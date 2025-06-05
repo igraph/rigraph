@@ -18,7 +18,7 @@ vertex sets to find. \code{NULL} means no limit.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{independent.vertex.sets()} was renamed to \code{ivs()} to create a more
+\code{independent.vertex.sets()} was renamed to \code{\link[=ivs]{ivs()}} to create a more
 consistent API.
 }
 \keyword{internal}

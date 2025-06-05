@@ -14,7 +14,7 @@ layout.circle(..., params = list())
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.circle()} was renamed to \code{layout_in_circle()} to create a more
+\code{layout.circle()} was renamed to \code{\link[=layout_in_circle]{layout_in_circle()}} to create a more
 consistent API.
 }
 \keyword{internal}

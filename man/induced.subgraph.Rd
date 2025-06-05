@@ -28,7 +28,7 @@ result graph.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{induced.subgraph()} was renamed to \code{induced_subgraph()} to create a more
+\code{induced.subgraph()} was renamed to \code{\link[=induced_subgraph]{induced_subgraph()}} to create a more
 consistent API.
 }
 \keyword{internal}

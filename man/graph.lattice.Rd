@@ -41,7 +41,7 @@ be extended to boolean vector with dimvector length.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.lattice()} was renamed to \code{make_lattice()} to create a more
+\code{graph.lattice()} was renamed to \code{\link[=make_lattice]{make_lattice()}} to create a more
 consistent API.
 }
 \keyword{internal}

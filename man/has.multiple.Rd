@@ -12,7 +12,7 @@ has.multiple(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{has.multiple()} was renamed to \code{any_multiple()} to create a more
+\code{has.multiple()} was renamed to \code{\link[=any_multiple]{any_multiple()}} to create a more
 consistent API.
 }
 \keyword{internal}

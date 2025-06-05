@@ -18,7 +18,7 @@ nodes from which it receives edges. Nodes with no outgoing edges go first.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{topological.sort()} was renamed to \code{topo_sort()} to create a more
+\code{topological.sort()} was renamed to \code{\link[=topo_sort]{topo_sort()}} to create a more
 consistent API.
 }
 \keyword{internal}

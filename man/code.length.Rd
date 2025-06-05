@@ -9,7 +9,7 @@ code.length(communities)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{code.length()} was renamed to \code{code_len()} to create a more
+\code{code.length()} was renamed to \code{\link[=code_len]{code_len()}} to create a more
 consistent API.
 }
 \keyword{internal}

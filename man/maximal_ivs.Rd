@@ -12,7 +12,7 @@ maximal_ivs(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximal_ivs()} was renamed to \code{max_ivs()} to create a more
+\code{maximal_ivs()} was renamed to \code{\link[=max_ivs]{max_ivs()}} to create a more
 consistent API.
 }
 \keyword{internal}

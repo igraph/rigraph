@@ -7,7 +7,7 @@
 \method{as.matrix}{igraph}(x, matrix.type = c("adjacency", "edgelist"), ...)
 }
 \arguments{
-\item{x}{object of class igraph, the network}
+\item{x}{object of class \code{igraph}, the network}
 
 \item{matrix.type}{character, type of matrix to return, currently "adjacency"
 or "edgelist" are supported}

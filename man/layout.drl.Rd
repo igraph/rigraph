@@ -41,7 +41,7 @@ significantly longer to compute.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.drl()} was renamed to \code{layout_with_drl()} to create a more
+\code{layout.drl()} was renamed to \code{\link[=layout_with_drl]{layout_with_drl()}} to create a more
 consistent API.
 }
 \keyword{internal}

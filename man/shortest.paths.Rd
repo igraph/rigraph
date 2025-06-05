@@ -51,7 +51,7 @@ used, regardless of this argument.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{shortest.paths()} was renamed to \code{distances()} to create a more
+\code{shortest.paths()} was renamed to \code{\link[=distances]{distances()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -75,7 +75,7 @@ similarity <- function(graph, vids = V(graph),
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [`similarity()`] with `method = "jaccard"` instead.
+#' Please use [similarity()] with `method = "jaccard"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export
@@ -104,7 +104,7 @@ similarity.jaccard <- function(graph,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [`similarity()`] with `method = "dice"` instead.
+#' Please use [similarity()] with `method = "dice"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export
@@ -133,7 +133,7 @@ similarity.dice <- function(graph,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' Please use [`similarity()`] with `method = "invlogweighted"` instead.
+#' Please use [similarity()] with `method = "invlogweighted"` instead.
 #' @inheritParams similarity
 #' @keywords internal
 #' @export

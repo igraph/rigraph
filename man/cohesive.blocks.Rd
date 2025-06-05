@@ -22,7 +22,7 @@ cohesive blocks.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{cohesive.blocks()} was renamed to \code{cohesive_blocks()} to create a more
+\code{cohesive.blocks()} was renamed to \code{\link[=cohesive_blocks]{cohesive_blocks()}} to create a more
 consistent API.
 }
 \keyword{internal}

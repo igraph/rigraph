@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `are.connected()` was renamed to `are_adjacent()` to create a more
+#' `are.connected()` was renamed to [are_adjacent()] to create a more
 #' consistent API.
 #' @inheritParams are_adjacent
 #' @keywords internal

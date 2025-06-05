@@ -23,7 +23,7 @@ solving the eigenproblem}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.mds()} was renamed to \code{layout_with_mds()} to create a more
+\code{layout.mds()} was renamed to \code{\link[=layout_with_mds]{layout_with_mds()}} to create a more
 consistent API.
 }
 \keyword{internal}

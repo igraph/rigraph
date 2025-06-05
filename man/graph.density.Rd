@@ -17,7 +17,7 @@ the result will not be meaningful.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.density()} was renamed to \code{edge_density()} to create a more
+\code{graph.density()} was renamed to \code{\link[=edge_density]{edge_density()}} to create a more
 consistent API.
 }
 \keyword{internal}

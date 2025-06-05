@@ -31,7 +31,7 @@ selected by the surfer.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{authority.score()} was renamed to \code{authority_score()} to create a more
+\code{authority.score()} was renamed to \code{\link[=authority_score]{authority_score()}} to create a more
 consistent API.
 }
 \keyword{internal}

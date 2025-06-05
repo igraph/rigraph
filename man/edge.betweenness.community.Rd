@@ -59,7 +59,7 @@ vector corresponding to the highest possible modularity score.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.betweenness.community()} was renamed to \code{cluster_edge_betweenness()} to create a more
+\code{edge.betweenness.community()} was renamed to \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}} to create a more
 consistent API.
 }
 \keyword{internal}

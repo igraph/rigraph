@@ -30,7 +30,7 @@ whitespace.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximal.cliques()} was renamed to \code{max_cliques()} to create a more
+\code{maximal.cliques()} was renamed to \code{\link[=max_cliques]{max_cliques()}} to create a more
 consistent API.
 }
 \keyword{internal}

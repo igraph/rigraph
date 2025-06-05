@@ -22,7 +22,7 @@ centrality score by dividing by the theoretical maximum.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.closeness()} was renamed to \code{centr_clo()} to create a more
+\code{centralization.closeness()} was renamed to \code{\link[=centr_clo]{centr_clo()}} to create a more
 consistent API.
 }
 \keyword{internal}

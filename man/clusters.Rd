@@ -16,7 +16,7 @@ connected components to search. It is ignored for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{clusters()} was renamed to \code{components()} to create a more
+\code{clusters()} was renamed to \code{\link[=components]{components()}} to create a more
 consistent API.
 }
 \keyword{internal}

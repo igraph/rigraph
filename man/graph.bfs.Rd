@@ -70,7 +70,7 @@ from igraph 1.3.0; use \code{mode} instead.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.bfs()} was renamed to \code{bfs()} to create a more
+\code{graph.bfs()} was renamed to \code{\link[=bfs]{bfs()}} to create a more
 consistent API.
 }
 \keyword{internal}

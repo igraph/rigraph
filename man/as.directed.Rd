@@ -17,7 +17,7 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{as.directed()} was renamed to \code{as_directed()} to create a more
+\code{as.directed()} was renamed to \code{\link[=as_directed]{as_directed()}} to create a more
 consistent API.
 }
 \keyword{internal}

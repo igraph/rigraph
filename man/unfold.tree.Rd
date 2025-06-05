@@ -20,7 +20,7 @@ search is performed. Typically it contains one vertex per component.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{unfold.tree()} was renamed to \code{unfold_tree()} to create a more
+\code{unfold.tree()} was renamed to \code{\link[=unfold_tree]{unfold_tree()}} to create a more
 consistent API.
 }
 \keyword{internal}

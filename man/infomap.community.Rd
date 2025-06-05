@@ -37,7 +37,7 @@ of the detected community structure.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{infomap.community()} was renamed to \code{cluster_infomap()} to create a more
+\code{infomap.community()} was renamed to \code{\link[=cluster_infomap]{cluster_infomap()}} to create a more
 consistent API.
 }
 \keyword{internal}

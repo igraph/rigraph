@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `path.length.hist()` was renamed to `distance_table()` to create a more
+#' `path.length.hist()` was renamed to [distance_table()] to create a more
 #' consistent API.
 #' @inheritParams distance_table
 #' @keywords internal
@@ -18,7 +18,7 @@ path.length.hist <- function(graph, directed = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximum.cardinality.search()` was renamed to `max_cardinality()` to create a more
+#' `maximum.cardinality.search()` was renamed to [max_cardinality()] to create a more
 #' consistent API.
 #' @inheritParams max_cardinality
 #' @keywords internal
@@ -33,7 +33,7 @@ maximum.cardinality.search <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.dag()` was renamed to `is_dag()` to create a more
+#' `is.dag()` was renamed to [is_dag()] to create a more
 #' consistent API.
 #' @inheritParams is_dag
 #' @keywords internal

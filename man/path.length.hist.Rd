@@ -15,7 +15,7 @@ this argument is ignored for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{path.length.hist()} was renamed to \code{distance_table()} to create a more
+\code{path.length.hist()} was renamed to \code{\link[=distance_table]{distance_table()}} to create a more
 consistent API.
 }
 \keyword{internal}

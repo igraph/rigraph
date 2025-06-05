@@ -20,7 +20,7 @@ Note that the \code{weight} edge attribute is not used by this function.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.maxflow()} was renamed to \code{max_flow()} to create a more
+\code{graph.maxflow()} was renamed to \code{\link[=max_flow]{max_flow()}} to create a more
 consistent API.
 }
 \keyword{internal}

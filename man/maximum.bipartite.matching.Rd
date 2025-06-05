@@ -35,7 +35,7 @@ is ignored.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximum.bipartite.matching()} was renamed to \code{max_bipartite_match()} to create a more
+\code{maximum.bipartite.matching()} was renamed to \code{\link[=max_bipartite_match]{max_bipartite_match()}} to create a more
 consistent API.
 }
 \keyword{internal}

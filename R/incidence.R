@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.incidence()` was renamed to `graph_from_biadjacency_matrix()` to create a more
+#' `graph.incidence()` was renamed to [graph_from_biadjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal
@@ -228,7 +228,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph_from_incidence_matrix()` was renamed to `graph_from_biadjacency_matrix()` to create a more
+#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal
@@ -246,7 +246,7 @@ from_incidence_matrix <- function(...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph_from_incidence_matrix()` was renamed to `graph_from_biadjacency_matrix()` to create a more
+#' `graph_from_incidence_matrix()` was renamed to [graph_from_biadjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_biadjacency_matrix
 #' @keywords internal

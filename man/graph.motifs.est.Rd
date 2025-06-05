@@ -33,7 +33,7 @@ starting point for finding motifs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.motifs.est()} was renamed to \code{sample_motifs()} to create a more
+\code{graph.motifs.est()} was renamed to \code{\link[=sample_motifs]{sample_motifs()}} to create a more
 consistent API.
 }
 \keyword{internal}

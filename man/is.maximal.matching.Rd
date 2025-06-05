@@ -20,7 +20,7 @@ are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{is.maximal.matching()} was renamed to \code{is_max_matching()} to create a more
+\code{is.maximal.matching()} was renamed to \code{\link[=is_max_matching]{is_max_matching()}} to create a more
 consistent API.
 }
 \keyword{internal}

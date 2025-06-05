@@ -32,7 +32,7 @@ created, you will need the \code{Matrix} package for this.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.incidence()} was renamed to \code{as_biadjacency_matrix()} to create a more
+\code{get.incidence()} was renamed to \code{\link[=as_biadjacency_matrix]{as_biadjacency_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}

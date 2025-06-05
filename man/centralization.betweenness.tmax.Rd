@@ -20,7 +20,7 @@ given.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.betweenness.tmax()} was renamed to \code{centr_betw_tmax()} to create a more
+\code{centralization.betweenness.tmax()} was renamed to \code{\link[=centr_betw_tmax]{centr_betw_tmax()}} to create a more
 consistent API.
 }
 \keyword{internal}

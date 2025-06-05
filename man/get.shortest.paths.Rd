@@ -76,7 +76,7 @@ used, regardless of this argument.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.shortest.paths()} was renamed to \code{shortest_paths()} to create a more
+\code{get.shortest.paths()} was renamed to \code{\link[=shortest_paths]{shortest_paths()}} to create a more
 consistent API.
 }
 \keyword{internal}
