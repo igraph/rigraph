@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9047
+
+## doc
+
+- Refer to current latest version of R in troubleshooting page.
+
+
 # igraph 2.1.4.9046
 
 ## Chore

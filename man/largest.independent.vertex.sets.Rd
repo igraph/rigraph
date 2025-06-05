@@ -12,7 +12,7 @@ largest.independent.vertex.sets(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{largest.independent.vertex.sets()} was renamed to \code{largest_ivs()} to create a more
+\code{largest.independent.vertex.sets()} was renamed to \code{\link[=largest_ivs]{largest_ivs()}} to create a more
 consistent API.
 }
 \keyword{internal}

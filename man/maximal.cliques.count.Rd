@@ -24,7 +24,7 @@ parallelize the finding of maximal cliques.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{maximal.cliques.count()} was renamed to \code{count_max_cliques()} to create a more
+\code{maximal.cliques.count()} was renamed to \code{\link[=count_max_cliques]{count_max_cliques()}} to create a more
 consistent API.
 }
 \keyword{internal}

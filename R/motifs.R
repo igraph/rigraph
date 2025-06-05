@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `triad.census()` was renamed to `triad_census()` to create a more
+#' `triad.census()` was renamed to [triad_census()] to create a more
 #' consistent API.
 #' @inheritParams triad_census
 #' @keywords internal
@@ -18,7 +18,7 @@ triad.census <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.motifs.no()` was renamed to `count_motifs()` to create a more
+#' `graph.motifs.no()` was renamed to [count_motifs()] to create a more
 #' consistent API.
 #' @inheritParams count_motifs
 #' @keywords internal
@@ -34,7 +34,7 @@ graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.motifs.est()` was renamed to `sample_motifs()` to create a more
+#' `graph.motifs.est()` was renamed to [sample_motifs()] to create a more
 #' consistent API.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
@@ -53,7 +53,7 @@ graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.si
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.motifs()` was renamed to `motifs()` to create a more
+#' `graph.motifs()` was renamed to [motifs()] to create a more
 #' consistent API.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
@@ -72,7 +72,7 @@ graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov sta
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `dyad.census()` was renamed to `dyad_census()` to create a more
+#' `dyad.census()` was renamed to [dyad_census()] to create a more
 #' consistent API.
 #' @inheritParams dyad_census
 #' @keywords internal

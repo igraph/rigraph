@@ -14,7 +14,7 @@ graph.full.citation(n, directed = TRUE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.full.citation()} was renamed to \code{make_full_citation_graph()} to create a more
+\code{graph.full.citation()} was renamed to \code{\link[=make_full_citation_graph]{make_full_citation_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

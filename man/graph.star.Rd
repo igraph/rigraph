@@ -20,7 +20,7 @@ are undirected.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.star()} was renamed to \code{make_star()} to create a more
+\code{graph.star()} was renamed to \code{\link[=make_star]{make_star()}} to create a more
 consistent API.
 }
 \keyword{internal}

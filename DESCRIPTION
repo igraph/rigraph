@@ -1,6 +1,6 @@
 Package: igraph
 Title: Network Analysis and Visualization
-Version: 2.1.4.9046
+Version: 2.1.4.9047
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
@@ -42,7 +42,7 @@ Imports:
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
-    rlang,
+    rlang (>= 1.1.0),
     stats,
     utils,
     vctrs

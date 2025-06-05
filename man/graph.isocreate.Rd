@@ -16,7 +16,7 @@ graph.isocreate(size, number, directed = TRUE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.isocreate()} was renamed to \code{graph_from_isomorphism_class()} to create a more
+\code{graph.isocreate()} was renamed to \code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}} to create a more
 consistent API.
 }
 \keyword{internal}

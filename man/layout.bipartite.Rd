@@ -27,7 +27,7 @@ you have too many edge crossings, increase this.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.bipartite()} was renamed to \code{layout_as_bipartite()} to create a more
+\code{layout.bipartite()} was renamed to \code{\link[=layout_as_bipartite]{layout_as_bipartite()}} to create a more
 consistent API.
 }
 \keyword{internal}

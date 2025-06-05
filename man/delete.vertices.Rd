@@ -14,7 +14,7 @@ delete.vertices(graph, v)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{delete.vertices()} was renamed to \code{delete_vertices()} to create a more
+\code{delete.vertices()} was renamed to \code{\link[=delete_vertices]{delete_vertices()}} to create a more
 consistent API.
 }
 \keyword{internal}

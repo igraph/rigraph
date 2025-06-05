@@ -16,7 +16,7 @@ igraph.sample(low, high, length)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.sample()} was renamed to \code{sample_seq()} to create a more
+\code{igraph.sample()} was renamed to \code{\link[=sample_seq]{sample_seq()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -30,7 +30,7 @@ projection.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graphlets.project()} was renamed to \code{graphlet_proj()} to create a more
+\code{graphlets.project()} was renamed to \code{\link[=graphlet_proj]{graphlet_proj()}} to create a more
 consistent API.
 }
 \keyword{internal}

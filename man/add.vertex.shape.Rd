@@ -31,7 +31,7 @@ a prefix \sQuote{\code{plot.}}. See Details below.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{add.vertex.shape()} was renamed to \code{add_shape()} to create a more
+\code{add.vertex.shape()} was renamed to \code{\link[=add_shape]{add_shape()}} to create a more
 consistent API.
 }
 \keyword{internal}

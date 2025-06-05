@@ -12,7 +12,7 @@ graph.atlas(n)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.atlas()} was renamed to \code{graph_from_atlas()} to create a more
+\code{graph.atlas()} was renamed to \code{\link[=graph_from_atlas]{graph_from_atlas()}} to create a more
 consistent API.
 }
 \keyword{internal}
