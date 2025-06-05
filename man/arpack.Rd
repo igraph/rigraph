@@ -42,13 +42,13 @@ have a non-symmetric problem, but you're sure that the results will be real,
 then supply \code{FALSE} here.}
 }
 \value{
-A named list with the following members: \item{values}{Numeric
+A named list with the following members: \describe{\item{values}{Numeric
 vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
 eigenvectors as columns. If \code{complex=TRUE} (the default for
 non-symmetric problems), then the matrix is complex.} \item{options}{A named
 list with the supplied \code{options} and some information about the
 performed calculation, including an ARPACK exit code. See the details above.
-}
+}}
 }
 \description{
 Interface to the ARPACK library for calculating eigenvectors of sparse

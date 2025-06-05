@@ -10,10 +10,10 @@ bipartite_mapping(graph)
 \item{graph}{The input graph.}
 }
 \value{
-A named list with two elements: \item{res}{A logical scalar,
+A named list with two elements: \describe{\item{res}{A logical scalar,
 \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
 possible vertex type mapping, a logical vector. If no such mapping exists,
-then an empty vector.}
+then an empty vector.}}
 }
 \description{
 This function decides whether the vertices of a network can be mapped to two

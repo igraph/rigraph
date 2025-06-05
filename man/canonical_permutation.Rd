@@ -24,19 +24,29 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 for possible values.}
 }
 \value{
-A list with the following members: \item{labeling}{The canonical
+A list with the following members:
+\describe{
+\item{labeling}{The canonical
 permutation which takes the input graph into canonical form. A numeric
 vector, the first element is the new label of vertex 0, the second element
-for vertex 1, etc. } \item{info}{Some information about the BLISS
-computation. A named list with the following members: \describe{
+for vertex 1, etc.
+}
+\item{info}{Some information about the BLISS
+computation. A named list with the following members:
+\describe{
 \item{"nof_nodes"}{The number of nodes in the search tree.}
 \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
 \item{"nof_bad_nodes"}{Number of bad nodes.}
 \item{"nof_canupdates"}{Number of canrep updates.}
-\item{"max_level"}{Maximum level.} \item{"group_size"}{The size
+\item{"max_level"}{Maximum level.}
+\item{"group_size"}{The size
 of the automorphism group of the input graph, as a string. The string
 representation is necessary because the group size can easily exceed
-values that are exactly representable in floating point.} } }
+values that are exactly representable in floating point.
+}
+}
+}
+}
 }
 \description{
 The canonical permutation brings every isomorphic graphs into the same
@@ -50,13 +60,16 @@ graphs have the same canonical form.
 See the paper below for the details about BLISS. This and more information
 is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
 
-The possible values for the \code{sh} argument are: \describe{
-\item{"f"}{First non-singleton cell.} \item{"fl"}{First largest
-non-singleton cell.} \item{"fs"}{First smallest non-singleton cell.}
-\item{"fm"}{First maximally non-trivially connectec non-singleton
-cell.} \item{"flm"}{Largest maximally non-trivially connected
-non-singleton cell.} \item{"fsm"}{Smallest maximally non-trivially
-connected non-singleton cell.} } See the paper in references for details
+The possible values for the \code{sh} argument are:
+\describe{
+\item{"f"}{First non-singleton cell.}
+\item{"fl"}{First largest non-singleton cell.}
+\item{"fs"}{First smallest non-singleton cell.}
+\item{"fm"}{First maximally non-trivially connectec non-singleton cell. }
+\item{"flm"}{Largest maximally non-trivially connected non-singleton cell. }
+\item{"fsm"}{Smallest maximally non-trivially connected non-singleton cell.}
+}
+See the paper in references for details
 about these.
 }
 \examples{

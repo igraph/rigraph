@@ -1308,30 +1308,39 @@ igraph.i.attribute.combination <- function(comb) {
 #' @name igraph-attribute-combination
 #' @aliases attribute.combination
 #' @section Predefined combination functions: The following combination
-#' behaviors are predefined: \describe{ \item{"ignore"}{The attribute is
-#' ignored and dropped.} \item{"sum"}{The sum of the attributes is
-#' calculated. This does not work for character attributes and works for
-#' complex attributes only if they have a `sum` generic defined. (E.g. it
-#' works for sparse matrices from the `Matrix` package, because they have
-#' a `sum` method.)} \item{"prod"}{The product of the attributes is
-#' calculated. This does not work for character attributes and works for
-#' complex attributes only if they have a `prod` function defined.}
-#' \item{"min"}{The minimum of the attributes is calculated and returned.
-#' For character and complex attributes the standard R `min` function is
-#' used.} \item{"max"}{The maximum of the attributes is calculated and
-#' returned. For character and complex attributes the standard R `max`
-#' function is used.} \item{"random"}{Chooses one of the supplied
-#' attribute values, uniformly randomly. For character and complex attributes
-#' this is implemented by calling `sample`.} \item{"first"}{Always
-#' chooses the first attribute value. It is implemented by calling the
-#' `head` function.} \item{"last"}{Always chooses the last attribute
-#' value. It is implemented by calling the `tail` function.}
-#' \item{"mean"}{The mean of the attributes is calculated and returned.
-#' For character and complex attributes this simply calls the `mean`
-#' function.} \item{"median"}{The median of the attributes is selected.
-#' Calls the R `median` function for all attribute types.}
-#' \item{"concat"}{Concatenate the attributes, using the `c`
-#' function. This results almost always a complex attribute.} }
+#' behaviors are predefined: \describe{
+#'   \item{"ignore"}{The attribute is
+#'     ignored and dropped.}
+#'   \item{"sum"}{The sum of the attributes is
+#'     calculated. This does not work for character attributes and works for
+#'     complex attributes only if they have a `sum` generic defined. (E.g. it
+#'     works for sparse matrices from the `Matrix` package, because they have
+#'     a `sum` method.)}
+#'   \item{"prod"}{The product of the attributes is
+#'     calculated. This does not work for character attributes and works for
+#'     complex attributes only if they have a `prod` function defined.}
+#'   \item{"min"}{The minimum of the attributes is calculated and returned.
+#'     For character and complex attributes the standard R `min` function is
+#'     used.}
+#'   \item{"max"}{The maximum of the attributes is calculated and
+#'     returned. For character and complex attributes the standard R `max`
+#'     function is used.}
+#'   \item{"random"}{Chooses one of the supplied
+#'     attribute values, uniformly randomly. For character and complex attributes
+#'     this is implemented by calling `sample`.}
+#'   \item{"first"}{Always
+#'     chooses the first attribute value. It is implemented by calling the
+#'     `head` function.}
+#'   \item{"last"}{Always chooses the last attribute
+#'     value. It is implemented by calling the `tail` function.}
+#'   \item{"mean"}{The mean of the attributes is calculated and returned.
+#'     For character and complex attributes this simply calls the `mean`
+#'     function.}
+#'   \item{"median"}{The median of the attributes is selected.
+#'     Calls the R `median` function for all attribute types.}
+#'   \item{"concat"}{Concatenate the attributes, using the `c`
+#'     function. This results almost always a complex attribute.}
+#' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph_attr()], [vertex_attr()],
 #'   [edge_attr()] on how to use graph/vertex/edge attributes in

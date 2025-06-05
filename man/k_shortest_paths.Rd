@@ -41,8 +41,10 @@ argument is ignored for undirected graphs.}
 }
 \value{
 A named list with two components is returned:
+\describe{
 \item{vpaths}{The list of \eqn{k} shortest paths in terms of vertices}
 \item{epaths}{The list of \eqn{k} shortest paths in terms of edges}
+}
 }
 \description{
 Finds the \eqn{k} shortest paths between the given source and target
