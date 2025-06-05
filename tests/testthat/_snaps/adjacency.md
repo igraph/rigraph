@@ -139,3 +139,11 @@
       IGRAPH U--- 2 0 -- 
       + edges:
 
+# graph_from_adjacency_matrix errors for NAs
+
+    Code
+      graph_from_adjacency_matrix(A)
+    Condition
+      Error in `graph_from_adjacency_matrix()`:
+      ! Cannot create a graph object because the adjacency matrix contains NAs.
+

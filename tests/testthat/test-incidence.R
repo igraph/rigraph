@@ -175,3 +175,8 @@ test_that("graph_from_biadjacency_matrix() errors well", {
     (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
   })
 })
+
+test_that("graph_from_biadjacency_matrix errors for NAs", {
+  A <- matrix(c(1, 1, NA, 1), 2, 2)
+  expect_snapshot(graph_from_biadjacency_matrix(A), error = TRUE)
+})
