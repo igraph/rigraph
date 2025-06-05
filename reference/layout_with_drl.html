@@ -125,16 +125,12 @@ significantly longer to compute.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function implements the force-directed DrL layout generator.</p>
 <p>The generator has the following parameters:</p><dl><dt>edge.cut</dt>
-<dd><p>Edge
-cutting is done in the late stages of the algorithm in order to achieve less
-dense layouts.  Edges are cut if there is a lot of stress on them (a large
-value in the objective function sum). The edge cutting parameter is a value
-between 0 and 1 with 0 representing no edge cutting and 1 representing
-maximal edge cutting.</p></dd>
- <dt>init.iterations</dt>
-<dd><p>Number of iterations in the
-first phase.</p></dd>
- <dt>init.temperature</dt>
+<dd><p>Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.  Edges are cut if there is a lot of stress on them (a large value in the objective function sum). The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.</p></dd>
+
+<dt>init.iterations</dt>
+<dd><p>Number of iterations in the first phase.</p></dd>
+
+<dt>init.temperature</dt>
 <dd><p>Start temperature, first phase.</p></dd>
 
 <dt>init.attraction</dt>
@@ -204,11 +200,11 @@ first phase.</p></dd>
 <dd><p>Damping, simmer phase.</p></dd>
 
 
-There are five pre-defined parameter settings as well, these are called
-drl_defaults$default, drl_defaults$coarsen,
-drl_defaults$coarsest, drl_defaults$refine and
-drl_defaults$final.
-</dl></div>
+</dl><p>There are five pre-defined parameter settings as well, these are called
+<code>drl_defaults$default</code>, <code>drl_defaults$coarsen</code>,
+<code>drl_defaults$coarsest</code>, <code>drl_defaults$refine</code> and
+<code>drl_defaults$final</code>.</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>See the following technical report: Martin, S., Brown, W.M.,

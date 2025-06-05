@@ -89,13 +89,13 @@ for possible values.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with the following members:</p>
-<dl><dt>labeling</dt>
+    <p>A list with the following members:</p><dl><dt>labeling</dt>
 <dd><p>The canonical
 permutation which takes the input graph into canonical form. A numeric
 vector, the first element is the new label of vertex 0, the second element
 for vertex 1, etc.</p></dd>
- <dt>info</dt>
+
+<dt>info</dt>
 <dd><p>Some information about the BLISS
 computation. A named list with the following members:</p><dl><dt>"nof_nodes"</dt>
 <dd><p>The number of nodes in the search tree.</p></dd>
@@ -111,13 +111,16 @@ computation. A named list with the following members:</p><dl><dt>"nof_nodes"</dt
 
 <dt>"max_level"</dt>
 <dd><p>Maximum level.</p></dd>
- <dt>"group_size"</dt>
+
+<dt>"group_size"</dt>
 <dd><p>The size
 of the automorphism group of the input graph, as a string. The string
 representation is necessary because the group size can easily exceed
 values that are exactly representable in floating point.</p></dd>
 
-</dl><p></p></dd>
+
+</dl></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -129,21 +132,22 @@ graphs have the same canonical form.</p>
 is available at <a href="http://www.tcs.hut.fi/Software/bliss/index.html" class="external-link">http://www.tcs.hut.fi/Software/bliss/index.html</a>.</p>
 <p>The possible values for the <code>sh</code> argument are:</p><dl><dt>"f"</dt>
 <dd><p>First non-singleton cell.</p></dd>
- <dt>"fl"</dt>
-<dd><p>First largest
-non-singleton cell.</p></dd>
- <dt>"fs"</dt>
+
+<dt>"fl"</dt>
+<dd><p>First largest non-singleton cell.</p></dd>
+
+<dt>"fs"</dt>
 <dd><p>First smallest non-singleton cell.</p></dd>
 
 <dt>"fm"</dt>
-<dd><p>First maximally non-trivially connectec non-singleton
-cell.</p></dd>
- <dt>"flm"</dt>
-<dd><p>Largest maximally non-trivially connected
-non-singleton cell.</p></dd>
- <dt>"fsm"</dt>
-<dd><p>Smallest maximally non-trivially
-connected non-singleton cell.</p></dd>
+<dd><p>First maximally non-trivially connectec non-singleton cell.</p></dd>
+
+<dt>"flm"</dt>
+<dd><p>Largest maximally non-trivially connected non-singleton cell.</p></dd>
+
+<dt>"fsm"</dt>
+<dd><p>Smallest maximally non-trivially connected non-singleton cell.</p></dd>
+
 
 </dl><p>See the paper in references for details
 about these.</p>

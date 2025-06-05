@@ -93,9 +93,14 @@ used by default.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A numeric constant for <code>diameter()</code>, a numeric vector for
 <code>get_diameter()</code>. <code>farthest_vertices()</code> returns a list with two
-entries:</p><ul><li><p><code>vertices</code> The two vertices that are the farthest.</p></li>
-<li><p><code>distance</code> Their distance.</p></li>
-</ul></div>
+entries:</p><dl><dt><code>vertices</code></dt>
+<dd><p>The two vertices that are the farthest.</p></dd>
+
+<dt><code>distance</code></dt>
+<dd><p>Their distance.</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The diameter is calculated by using a breadth-first search like method.</p>
@@ -137,12 +142,12 @@ connected by the diameter path.</p>
 <span class="r-in"><span><span class="fu">diameter</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 27</span>
 <span class="r-in"><span><span class="fu">get_diameter</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 6dcda53:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from fd677d9:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-in"><span><span class="fu">diameter</span><span class="op">(</span><span class="va">g</span>, weights <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-in"><span><span class="fu">get_diameter</span><span class="op">(</span><span class="va">g</span>, weights <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 6dcda53:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from fd677d9:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -172,22 +172,24 @@ is ignored if the ‘orig’ implementation is chosen.</p></dd>
 used then a <code>cluster_spinglass()</code> returns a
 <code><a href="communities.html">communities()</a></code> object.</p>
 <p>If the <code>vertex</code> argument is present, i.e. the second form is used then a
-named list is returned with the following components:</p>
-<dl><dt>community</dt>
+named list is returned with the following components:</p><dl><dt>community</dt>
 <dd><p>Numeric vector giving the ids of the vertices in the same
 community as <code>vertex</code>.</p></dd>
- <dt>cohesion</dt>
-<dd><p>The cohesion score of the
-result, see references.</p></dd>
- <dt>adhesion</dt>
-<dd><p>The adhesion score of the result,
-see references.</p></dd>
- <dt>inner.links</dt>
+
+<dt>cohesion</dt>
+<dd><p>The cohesion score of the result, see references.</p></dd>
+
+<dt>adhesion</dt>
+<dd><p>The adhesion score of the result, see references.</p></dd>
+
+<dt>inner.links</dt>
 <dd><p>The number of edges within the community
 of <code>vertex</code>.</p></dd>
- <dt>outer.links</dt>
+
+<dt>outer.links</dt>
 <dd><p>The number of edges between the
 community of <code>vertex</code> and the rest of the graph.</p></dd>
+
 
 </dl></div>
     <div class="section level2">

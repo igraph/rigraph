@@ -81,19 +81,21 @@ the original one in the input graph.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with components:</p>
-<dl><dt>dom</dt>
+    <p>A list with components:</p><dl><dt>dom</dt>
 <dd><p>A numeric vector giving the
 immediate dominators for each vertex. For vertices that are unreachable from
 the root, it contains <code>NaN</code>. For the root vertex itself it contains
 minus one.</p></dd>
- <dt>domtree</dt>
+
+<dt>domtree</dt>
 <dd><p>A graph object, the dominator tree. Its vertex
 ids are the as the vertex ids of the input graph. Isolate vertices are the
 ones that are unreachable from the root.</p></dd>
- <dt>leftout</dt>
+
+<dt>leftout</dt>
 <dd><p>A numeric vector
 containing the vertex ids that are unreachable from the root.</p></dd>
+
 
 </dl></div>
     <div class="section level2">

@@ -129,8 +129,7 @@ the values given by <code><a href="arpack.html">arpack_defaults()</a></code>.</p
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list containing with entries:</p>
-<dl><dt>X</dt>
+    <p>A list containing with entries:</p><dl><dt>X</dt>
 <dd><p>Estimated latent positions,
 an <code>n</code> times <code>no</code> matrix, <code>n</code> is the number of vertices.</p></dd>
 
@@ -138,13 +137,15 @@ an <code>n</code> times <code>no</code> matrix, <code>n</code> is the number of 
 <dd><p><code>NULL</code> for undirected graphs, the second half of the latent
 positions for directed graphs, an <code>n</code> times <code>no</code> matrix, <code>n</code>
 is the number of vertices.</p></dd>
- <dt>D</dt>
+
+<dt>D</dt>
 <dd><p>The eigenvalues (for undirected graphs)
 or the singular values (for directed graphs) calculated by the algorithm.</p></dd>
 
 <dt>options</dt>
 <dd><p>A named list, information about the underlying ARPACK
 computation. See <code><a href="arpack.html">arpack()</a></code> for the details.</p></dd>
+
 
 </dl></div>
     <div class="section level2">

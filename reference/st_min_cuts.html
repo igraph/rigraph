@@ -87,20 +87,21 @@ here.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with entries:</p>
-<dl><dt>value</dt>
-<dd><p>Numeric scalar, the size of the
-minimum cut(s).</p></dd>
- <dt>cuts</dt>
-<dd><p>A list of numeric vectors containing edge ids.
-Each vector is a minimum \((s,t)\)-cut.</p></dd>
- <dt>partition1s</dt>
-<dd><p>A list of
-numeric vectors containing vertex ids, they correspond to the edge cuts.
-Each vertex set is a generator of the corresponding cut, i.e. in the graph
+    <p>A list with entries:</p><dl><dt>value</dt>
+<dd><p>Numeric scalar, the size of the minimum cut(s).</p></dd>
+
+<dt>cuts</dt>
+<dd><p>A list of numeric vectors
+containing edge ids. Each vector is a minimum \((s,t)\)-cut.</p></dd>
+
+<dt>partition1s</dt>
+<dd><p>A list of numeric vectors
+containing vertex ids, they correspond to the edge cuts. Each vertex
+set is a generator of the corresponding cut, i.e. in the graph
 \(G=(V,E)\), the vertex set \(X\) and its complementer \(V-X\),
-generates the cut that contains exactly the edges that go from \(X\) to
-\(V-X\).</p></dd>
+generates the cut that contains exactly the edges that go from
+\(X\) to \(V-X\).</p></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -156,29 +157,29 @@ graphs, <em>Algorithmica</em> 15, 351–372, 1996.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from c3a3f70 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from 4508e24 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s-&gt;a s-&gt;b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from c3a3f70 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from 4508e24 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s-&gt;a b-&gt;t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuts[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from c3a3f70 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 edges from 4508e24 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a-&gt;t b-&gt;t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 vertex, named, from c3a3f70:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/9 vertex, named, from 4508e24:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 vertices, named, from c3a3f70:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/9 vertices, named, from 4508e24:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1s[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/9 vertices, named, from c3a3f70:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/9 vertices, named, from 4508e24:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] s b a 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

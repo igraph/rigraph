@@ -123,11 +123,11 @@ the modularity matrix. See details below.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>cluster_leading_eigen()</code> returns a named list with the
-following members:</p>
-<dl><dt>membership</dt>
+following members:</p><dl><dt>membership</dt>
 <dd><p>The membership vector at the end of the
 algorithm, when no more splits are possible.</p></dd>
- <dt>merges</dt>
+
+<dt>merges</dt>
 <dd><p>The merges
 matrix starting from the state described by the <code>membership</code> member.
 This is a two-column matrix and each line describes a merge of two
@@ -138,6 +138,7 @@ graph, the second line creates community <code>N+1</code>, etc.</p></dd>
 <dt>options</dt>
 <dd><p>Information about the underlying ARPACK computation, see
 <code><a href="arpack.html">arpack()</a></code> for details.</p></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -163,7 +164,8 @@ community structure.</p>
     <h2 id="callback-functions">Callback functions<a class="anchor" aria-label="anchor" href="#callback-functions"></a></h2>
     <p>The <code>callback</code> argument can be used to
 supply a function that is called after each eigenvector calculation. The
-following arguments are supplied to this function:</p><dl><dt>membership</dt>
+following arguments are supplied to this function:</p>
+<dl><dt>membership</dt>
 <dd><p>The actual membership vector, with zero-based indexing.</p></dd>
 
 <dt>community</dt>

@@ -82,12 +82,21 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 
 <dt id="arg-sh">sh<a class="anchor" aria-label="anchor" href="#arg-sh"></a></dt>
 <dd><p>The splitting heuristics for the BLISS algorithm. Possible values
-are: ‘<code>f</code>’: first non-singleton cell, ‘<code>fl</code>’: first
-largest non-singleton cell, ‘<code>fs</code>’: first smallest non-singleton
-cell, ‘<code>fm</code>’: first maximally non-trivially connected
-non-singleton cell, ‘<code>flm</code>’: first largest maximally
-non-trivially connected non-singleton cell, ‘<code>fsm</code>’: first
-smallest maximally non-trivially connected non-singleton cell.</p></dd>
+are:
+‘<code>f</code>’:
+first non-singleton cell,
+‘<code>fl</code>’:
+first largest non-singleton cell,
+‘<code>fs</code>’:
+first smallest non-singleton cell,
+‘<code>fm</code>’:
+first maximally non-trivially connected
+non-singleton cell,
+‘<code>flm</code>’:
+first largest maximally
+non-trivially connected non-singleton cell,
+‘<code>fsm</code>’:
+first smallest maximally non-trivially connected non-singleton cell.</p></dd>
 
 
 <dt id="arg-details">details<a class="anchor" aria-label="anchor" href="#arg-details"></a></dt>
@@ -99,13 +108,14 @@ BLISS internals in the result.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>When <code>details</code> is <code>FALSE</code>, a list of vertex permutations
 that form a generating set of the automorphism group of the input graph.
-When <code>details</code> is <code>TRUE</code>, a named list with two members:</p>
-<dl><dt>generators</dt>
+When <code>details</code> is <code>TRUE</code>, a named list with two members:</p><dl><dt>generators</dt>
 <dd><p>Returns the generators themselves</p></dd>
- <dt>info</dt>
+
+<dt>info</dt>
 <dd><p>Additional
 information about the BLISS internals. See <code><a href="count_automorphisms.html">count_automorphisms()</a></code> for
 more details.</p></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -154,11 +164,11 @@ Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> for this man
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">automorphism_group</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 2815320:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 524c1f2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1 10  9  8  7  6  5  4  3  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 2815320:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from 524c1f2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2  3  4  5  6  7  8  9 10  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
