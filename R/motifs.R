@@ -264,10 +264,10 @@ sample_motifs <- function(
 #'
 #'
 #' @param graph The input graph. A warning is given if it is not directed.
-#' @return A named numeric vector with three elements: \item{mut}{The number of
+#' @return A named numeric vector with three elements: \describe{\item{mut}{The number of
 #'   pairs with mutual connections.} \item{asym}{The number of pairs with
 #'   non-mutual connections.} \item{null}{The number of pairs with no connection
-#'   between them.}
+#'   between them.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [triad_census()] for the same classification, but with
 #' triples.

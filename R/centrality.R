@@ -620,13 +620,13 @@ arpack_defaults <- function() {
 #'   only have real eigenvectors/values), but only non-symmetric ones. If you
 #'   have a non-symmetric problem, but you're sure that the results will be real,
 #'   then supply `FALSE` here.
-#' @return A named list with the following members: \item{values}{Numeric
+#' @return A named list with the following members: \describe{\item{values}{Numeric
 #'   vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
 #'   eigenvectors as columns. If `complex=TRUE` (the default for
 #'   non-symmetric problems), then the matrix is complex.} \item{options}{A named
 #'   list with the supplied `options` and some information about the
 #'   performed calculation, including an ARPACK exit code. See the details above.
-#'   }
+#'   }}
 #' @author Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso [eigen_centrality()], [page_rank()],
@@ -859,10 +859,10 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   [arpack_defaults()].
 #' @return Depends on the algorithm used.
 #'
-#'   For `arpack` a list with three entries is returned: \item{options}{See
+#'   For `arpack` a list with three entries is returned: \describe{\item{options}{See
 #'   the return value for `arpack()` for a complete description.}
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
-#'   matrix, with the eigenvectors as columns.}
+#'   matrix, with the eigenvectors as columns.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_adjacency_matrix()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
@@ -972,11 +972,11 @@ eigen_defaults <- function() {
 #'   weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
-#' @return A named list with components: \item{vector}{A vector containing the
+#' @return A named list with components: \describe{\item{vector}{A vector containing the
 #'   centrality scores.} \item{value}{The eigenvalue corresponding to the
 #'   calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
 #'   list, information about the underlying ARPACK computation. See
-#'   [arpack()] for the details.}
+#'   [arpack()] for the details.}}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} and Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
 #' manual page.
@@ -1141,6 +1141,7 @@ diversity <- diversity_impl
 #'   [arpack()] for details.
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
+#'   \describe{
 #'   \item{hub}{The hub score of the vertices.}
 #'   \item{authority}{The authority score of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
@@ -1148,6 +1149,7 @@ diversity <- diversity_impl
 #'   \item{options}{Some information about the ARPACK computation, it has
 #'     the same members as the `options` member returned
 #'     by [arpack()], see that for documentation.}
+#'   }
 #' @seealso [eigen_centrality()] for eigenvector centrality,
 #' [page_rank()] for the Page Rank scores. [arpack()] for
 #' the underlining machinery of the computation.
@@ -1294,14 +1296,14 @@ hub_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details. This argument is ignored if the PRPACK
 #'   implementation is used.
-#' @return A named list with entries: \item{vector}{A
+#' @return A named list with entries: \describe{\item{vector}{A
 #'   numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
 #'   method, the eigenvalue corresponding to the eigenvector with the PageRank scores
 #'   is returned here. It is expected to be exactly one, and can be used to check
 #'   that ARPACK has successfully converged to the expected eingevector. When using
 #'   the PRPACK method, it is always set to 1.0.} \item{options}{Some information
 #'   about the underlying ARPACK calculation. See [arpack()] for details.
-#'   This entry is `NULL` if not the ARPACK implementation was used.}
+#'   This entry is `NULL` if not the ARPACK implementation was used.}}
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}

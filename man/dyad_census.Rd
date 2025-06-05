@@ -10,10 +10,10 @@ dyad_census(graph)
 \item{graph}{The input graph. A warning is given if it is not directed.}
 }
 \value{
-A named numeric vector with three elements: \item{mut}{The number of
+A named numeric vector with three elements: \describe{\item{mut}{The number of
 pairs with mutual connections.} \item{asym}{The number of pairs with
 non-mutual connections.} \item{null}{The number of pairs with no connection
-between them.}
+between them.}}
 }
 \description{
 Classify dyads in a directed graphs. The relationship between each pair of

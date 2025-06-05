@@ -75,6 +75,7 @@ from igraph 1.3.0; use \code{mode} instead.}
 }
 \value{
 A named list with the following entries:
+\describe{
 \item{root}{Numeric scalar.
 The root vertex that was used as the starting point of the search.}
 \item{neimode}{Character scalar. The \code{mode} argument of the function
@@ -94,6 +95,7 @@ vertex.}
 \item{dist}{Numeric vector, for each vertex its distance from the
 root of the search tree. Unreachable vertices have a negative distance
 as of igraph 1.6.0, this used to be \code{NaN}.}
+}
 
 Note that \code{order}, \code{rank}, \code{parent}, \code{pred}, \code{succ}
 and \code{dist} might be \code{NULL} if their corresponding argument is

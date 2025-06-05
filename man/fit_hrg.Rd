@@ -23,6 +23,7 @@ MCMC procedure is performed until convergence.}
 \value{
 \code{fit_hrg()} returns an \code{igraphHRG} object. This is a list
 with the following members:
+\describe{
 \item{left}{Vector that contains the left children of the internal
 tree vertices. The first vertex is always the root vertex, so the
 first element of the vector is the left child of the root
@@ -38,6 +39,7 @@ vertex -1), the second to internal vertex -2, etc.}
 internal vertex.}
 \item{vertices}{The number of vertices in the subtree below the
 given internal vertex, including itself.}
+}
 }
 \description{
 \code{fit_hrg()} fits a HRG to a given graph. It takes the specified
