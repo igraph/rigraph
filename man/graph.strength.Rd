@@ -32,7 +32,7 @@ attribute, then this is used by default. If the graph does not have a
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.strength()} was renamed to \code{strength()} to create a more
+\code{graph.strength()} was renamed to \code{\link[=strength]{strength()}} to create a more
 consistent API.
 }
 \keyword{internal}

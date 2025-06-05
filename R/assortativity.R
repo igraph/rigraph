@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.nominal()` was renamed to `assortativity_nominal()` to create a more
+#' `assortativity.nominal()` was renamed to [assortativity_nominal()] to create a more
 #' consistent API.
 #' @inheritParams assortativity_nominal
 #' @keywords internal
@@ -18,7 +18,7 @@ assortativity.nominal <- function(graph, types, directed = TRUE, normalized = TR
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `assortativity.degree()` was renamed to `assortativity_degree()` to create a more
+#' `assortativity.degree()` was renamed to [assortativity_degree()] to create a more
 #' consistent API.
 #' @inheritParams assortativity_degree
 #' @keywords internal

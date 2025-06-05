@@ -9,7 +9,7 @@ igraph.shape.noclip(coords, el, params, end = c("both", "from", "to"))
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.shape.noclip()} was renamed to \code{shape_noclip()} to create a more
+\code{igraph.shape.noclip()} was renamed to \code{\link[=shape_noclip]{shape_noclip()}} to create a more
 consistent API.
 }
 \keyword{internal}

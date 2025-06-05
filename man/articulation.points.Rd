@@ -13,7 +13,7 @@ it is directed.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{articulation.points()} was renamed to \code{articulation_points()} to create a more
+\code{articulation.points()} was renamed to \code{\link[=articulation_points]{articulation_points()}} to create a more
 consistent API.
 }
 \keyword{internal}

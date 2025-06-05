@@ -17,7 +17,7 @@ function.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{piecewise.layout()} was renamed to \code{layout_components()} to create a more
+\code{piecewise.layout()} was renamed to \code{\link[=layout_components]{layout_components()}} to create a more
 consistent API.
 }
 \keyword{internal}

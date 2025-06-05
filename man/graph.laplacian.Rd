@@ -28,7 +28,7 @@ matrix. The \code{Matrix} package is required for sparse matrices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.laplacian()} was renamed to \code{laplacian_matrix()} to create a more
+\code{graph.laplacian()} was renamed to \code{\link[=laplacian_matrix]{laplacian_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}

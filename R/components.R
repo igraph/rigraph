@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `no.clusters()` was renamed to `count_components()` to create a more
+#' `no.clusters()` was renamed to [count_components()] to create a more
 #' consistent API.
 #' @inheritParams count_components
 #' @keywords internal
@@ -18,7 +18,7 @@ no.clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `decompose.graph()` was renamed to `decompose()` to create a more
+#' `decompose.graph()` was renamed to [decompose()] to create a more
 #' consistent API.
 #' @inheritParams decompose
 #' @keywords internal
@@ -33,7 +33,7 @@ decompose.graph <- function(graph, mode = c("weak", "strong"), max.comps = NA, m
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `cluster.distribution()` was renamed to `component_distribution()` to create a more
+#' `cluster.distribution()` was renamed to [component_distribution()] to create a more
 #' consistent API.
 #' @inheritParams component_distribution
 #' @keywords internal
@@ -48,7 +48,7 @@ cluster.distribution <- function(graph, cumulative = FALSE, mul.size = FALSE, ..
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `biconnected.components()` was renamed to `biconnected_components()` to create a more
+#' `biconnected.components()` was renamed to [biconnected_components()] to create a more
 #' consistent API.
 #' @inheritParams biconnected_components
 #' @keywords internal
@@ -63,7 +63,7 @@ biconnected.components <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `articulation.points()` was renamed to `articulation_points()` to create a more
+#' `articulation.points()` was renamed to [articulation_points()] to create a more
 #' consistent API.
 #' @inheritParams articulation_points
 #' @keywords internal

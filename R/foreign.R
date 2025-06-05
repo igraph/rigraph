@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `write.graph()` was renamed to `write_graph()` to create a more
+#' `write.graph()` was renamed to [write_graph()] to create a more
 #' consistent API.
 #' @inheritParams write_graph
 #' @keywords internal
@@ -18,7 +18,7 @@ write.graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lg
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `read.graph()` was renamed to `read_graph()` to create a more
+#' `read.graph()` was renamed to [read_graph()] to create a more
 #' consistent API.
 #' @inheritParams read_graph
 #' @keywords internal
@@ -33,7 +33,7 @@ read.graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl", "gra
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.graphdb()` was renamed to `graph_from_graphdb()` to create a more
+#' `graph.graphdb()` was renamed to [graph_from_graphdb()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_graphdb
 #' @keywords internal

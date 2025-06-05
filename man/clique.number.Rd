@@ -12,7 +12,7 @@ clique.number(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{clique.number()} was renamed to \code{clique_num()} to create a more
+\code{clique.number()} was renamed to \code{\link[=clique_num]{clique_num()}} to create a more
 consistent API.
 }
 \keyword{internal}

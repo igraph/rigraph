@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `running.mean()` was renamed to `running_mean()` to create a more
+#' `running.mean()` was renamed to [running_mean()] to create a more
 #' consistent API.
 #' @inheritParams running_mean
 #' @keywords internal
@@ -18,7 +18,7 @@ running.mean <- function(v, binwidth) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.sample()` was renamed to `sample_seq()` to create a more
+#' `igraph.sample()` was renamed to [sample_seq()] to create a more
 #' consistent API.
 #' @inheritParams sample_seq
 #' @keywords internal
@@ -33,7 +33,7 @@ igraph.sample <- function(low, high, length) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `convex.hull()` was renamed to `convex_hull()` to create a more
+#' `convex.hull()` was renamed to [convex_hull()] to create a more
 #' consistent API.
 #' @inheritParams convex_hull
 #' @keywords internal

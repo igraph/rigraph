@@ -14,7 +14,7 @@ layout.random(..., params = list())
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.random()} was renamed to \code{layout_randomly()} to create a more
+\code{layout.random()} was renamed to \code{\link[=layout_randomly]{layout_randomly()}} to create a more
 consistent API.
 }
 \keyword{internal}

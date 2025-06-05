@@ -25,7 +25,7 @@ group. The sum of the vector must match the number of vertices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{sbm.game()} was renamed to \code{sample_sbm()} to create a more
+\code{sbm.game()} was renamed to \code{\link[=sample_sbm]{sample_sbm()}} to create a more
 consistent API.
 }
 \keyword{internal}

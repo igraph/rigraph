@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.vertex.attribute()` was renamed to `set_vertex_attr()` to create a more
+#' `set.vertex.attribute()` was renamed to [set_vertex_attr()] to create a more
 #' consistent API.
 #' @inheritParams set_vertex_attr
 #' @keywords internal
@@ -23,7 +23,7 @@ set.vertex.attribute <- function(graph, name, index = V(graph), value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.graph.attribute()` was renamed to `set_graph_attr()` to create a more
+#' `set.graph.attribute()` was renamed to [set_graph_attr()] to create a more
 #' consistent API.
 #' @inheritParams set_graph_attr
 #' @keywords internal
@@ -43,7 +43,7 @@ set.graph.attribute <- function(graph, name, value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `set.edge.attribute()` was renamed to `set_edge_attr()` to create a more
+#' `set.edge.attribute()` was renamed to [set_edge_attr()] to create a more
 #' consistent API.
 #' @inheritParams set_edge_attr
 #' @keywords internal
@@ -59,7 +59,7 @@ set.edge.attribute <- function(graph, name, index = E(graph), value) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.vertex.attribute()` was renamed to `delete_vertex_attr()` to create a more
+#' `remove.vertex.attribute()` was renamed to [delete_vertex_attr()] to create a more
 #' consistent API.
 #' @inheritParams delete_vertex_attr
 #' @keywords internal
@@ -79,7 +79,7 @@ remove.vertex.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.graph.attribute()` was renamed to `delete_graph_attr()` to create a more
+#' `remove.graph.attribute()` was renamed to [delete_graph_attr()] to create a more
 #' consistent API.
 #' @inheritParams delete_graph_attr
 #' @keywords internal
@@ -99,7 +99,7 @@ remove.graph.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `remove.edge.attribute()` was renamed to `delete_edge_attr()` to create a more
+#' `remove.edge.attribute()` was renamed to [delete_edge_attr()] to create a more
 #' consistent API.
 #' @inheritParams delete_edge_attr
 #' @keywords internal
@@ -119,7 +119,7 @@ remove.edge.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.vertex.attributes()` was renamed to `vertex_attr_names()` to create a more
+#' `list.vertex.attributes()` was renamed to [vertex_attr_names()] to create a more
 #' consistent API.
 #' @inheritParams vertex_attr_names
 #' @keywords internal
@@ -139,7 +139,7 @@ list.vertex.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.graph.attributes()` was renamed to `graph_attr_names()` to create a more
+#' `list.graph.attributes()` was renamed to [graph_attr_names()] to create a more
 #' consistent API.
 #' @inheritParams graph_attr_names
 #' @keywords internal
@@ -159,7 +159,7 @@ list.graph.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `list.edge.attributes()` was renamed to `edge_attr_names()` to create a more
+#' `list.edge.attributes()` was renamed to [edge_attr_names()] to create a more
 #' consistent API.
 #' @inheritParams edge_attr_names
 #' @keywords internal
@@ -179,7 +179,7 @@ list.edge.attributes <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.weighted()` was renamed to `is_weighted()` to create a more
+#' `is.weighted()` was renamed to [is_weighted()] to create a more
 #' consistent API.
 #' @inheritParams is_weighted
 #' @keywords internal
@@ -195,7 +195,7 @@ is.weighted <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.named()` was renamed to `is_named()` to create a more
+#' `is.named()` was renamed to [is_named()] to create a more
 #' consistent API.
 #' @inheritParams is_named
 #' @keywords internal
@@ -211,7 +211,7 @@ is.named <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.bipartite()` was renamed to `is_bipartite()` to create a more
+#' `is.bipartite()` was renamed to [is_bipartite()] to create a more
 #' consistent API.
 #' @inheritParams is_bipartite
 #' @keywords internal
@@ -227,7 +227,7 @@ is.bipartite <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.vertex.attribute()` was renamed to `vertex_attr()` to create a more
+#' `get.vertex.attribute()` was renamed to [vertex_attr()] to create a more
 #' consistent API.
 #' @inheritParams vertex_attr
 #' @keywords internal
@@ -243,7 +243,7 @@ get.vertex.attribute <- function(graph, name, index = V(graph)) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.graph.attribute()` was renamed to `graph_attr()` to create a more
+#' `get.graph.attribute()` was renamed to [graph_attr()] to create a more
 #' consistent API.
 #' @inheritParams graph_attr
 #' @keywords internal
@@ -259,7 +259,7 @@ get.graph.attribute <- function(graph, name) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.edge.attribute()` was renamed to `edge_attr()` to create a more
+#' `get.edge.attribute()` was renamed to [edge_attr()] to create a more
 #' consistent API.
 #' @inheritParams edge_attr
 #' @keywords internal

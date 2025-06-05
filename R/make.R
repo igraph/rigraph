@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph()` was renamed to `make_graph()` to create a more
+#' `graph()` was renamed to [make_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_graph
 #' @keywords internal
@@ -116,7 +116,7 @@ graph <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.famous()` was renamed to `make_graph()` to create a more
+#' `graph.famous()` was renamed to [make_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_graph
 #' @keywords internal
@@ -229,7 +229,7 @@ graph.famous <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `line.graph()` was renamed to `make_line_graph()` to create a more
+#' `line.graph()` was renamed to [make_line_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_line_graph
 #' @keywords internal
@@ -252,7 +252,7 @@ line.graph <- function(graph) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.ring()` was renamed to `make_ring()` to create a more
+#' `graph.ring()` was renamed to [make_ring()] to create a more
 #' consistent API.
 #' @inheritParams make_ring
 #' @keywords internal
@@ -281,7 +281,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.tree()` was renamed to `make_tree()` to create a more
+#' `graph.tree()` was renamed to [make_tree()] to create a more
 #' consistent API.
 #' @inheritParams make_tree
 #' @keywords internal
@@ -312,7 +312,7 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.star()` was renamed to `make_star()` to create a more
+#' `graph.star()` was renamed to [make_star()] to create a more
 #' consistent API.
 #' @inheritParams make_star
 #' @keywords internal
@@ -347,7 +347,7 @@ graph.star <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.lcf()` was renamed to `graph_from_lcf()` to create a more
+#' `graph.lcf()` was renamed to [graph_from_lcf()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_lcf
 #' @keywords internal
@@ -376,7 +376,7 @@ graph.lcf <- function(n, shifts, repeats = 1) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.lattice()` was renamed to `make_lattice()` to create a more
+#' `graph.lattice()` was renamed to [make_lattice()] to create a more
 #' consistent API.
 #' @inheritParams make_lattice
 #' @keywords internal
@@ -438,7 +438,7 @@ graph.lattice <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.kautz()` was renamed to `make_kautz_graph()` to create a more
+#' `graph.kautz()` was renamed to [make_kautz_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_kautz_graph
 #' @keywords internal
@@ -461,7 +461,7 @@ graph.kautz <- function(m, n) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full.citation()` was renamed to `make_full_citation_graph()` to create a more
+#' `graph.full.citation()` was renamed to [make_full_citation_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_full_citation_graph
 #' @keywords internal
@@ -490,7 +490,7 @@ graph.full.citation <- function(n, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full.bipartite()` was renamed to `make_full_bipartite_graph()` to create a more
+#' `graph.full.bipartite()` was renamed to [make_full_bipartite_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_full_bipartite_graph
 #' @keywords internal
@@ -534,7 +534,7 @@ graph.full.bipartite <- function(
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.full()` was renamed to `make_full_graph()` to create a more
+#' `graph.full()` was renamed to [make_full_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_full_graph
 #' @keywords internal
@@ -561,7 +561,7 @@ graph.full <- function(n, directed = FALSE, loops = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.formula()` was renamed to `graph_from_literal()` to create a more
+#' `graph.formula()` was renamed to [graph_from_literal()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_literal
 #' @keywords internal
@@ -578,7 +578,7 @@ graph.formula <- function(..., simplify = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.extended.chordal.ring()` was renamed to `make_chordal_ring()` to create a more
+#' `graph.extended.chordal.ring()` was renamed to [make_chordal_ring()] to create a more
 #' consistent API.
 #' @inheritParams make_chordal_ring
 #' @keywords internal
@@ -609,7 +609,7 @@ graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.empty()` was renamed to `make_empty_graph()` to create a more
+#' `graph.empty()` was renamed to [make_empty_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_empty_graph
 #' @keywords internal
@@ -633,7 +633,7 @@ graph.empty <- function(n = 0, directed = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.de.bruijn()` was renamed to `make_de_bruijn_graph()` to create a more
+#' `graph.de.bruijn()` was renamed to [make_de_bruijn_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_de_bruijn_graph
 #' @keywords internal
@@ -660,7 +660,7 @@ graph.de.bruijn <- function(m, n) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.bipartite()` was renamed to `make_bipartite_graph()` to create a more
+#' `graph.bipartite()` was renamed to [make_bipartite_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_bipartite_graph
 #' @keywords internal
@@ -708,7 +708,7 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.atlas()` was renamed to `graph_from_atlas()` to create a more
+#' `graph.atlas()` was renamed to [graph_from_atlas()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_atlas
 #' @keywords internal

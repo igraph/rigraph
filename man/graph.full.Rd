@@ -16,7 +16,7 @@ graph.full(n, directed = FALSE, loops = FALSE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.full()} was renamed to \code{make_full_graph()} to create a more
+\code{graph.full()} was renamed to \code{\link[=make_full_graph]{make_full_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

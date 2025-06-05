@@ -21,7 +21,7 @@ modularity. Ignored for undirected graphs.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{mod.matrix()} was renamed to \code{modularity_matrix()} to create a more
+\code{mod.matrix()} was renamed to \code{\link[=modularity_matrix]{modularity_matrix()}} to create a more
 consistent API.
 }
 \keyword{internal}

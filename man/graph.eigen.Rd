@@ -27,7 +27,7 @@ the corresponding eigenvector is calculated.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.eigen()} was renamed to \code{spectrum()} to create a more
+\code{graph.eigen()} was renamed to \code{\link[=spectrum]{spectrum()}} to create a more
 consistent API.
 }
 \keyword{internal}

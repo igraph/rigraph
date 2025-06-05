@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noplot()` was renamed to `shape_noplot()` to create a more
+#' `igraph.shape.noplot()` was renamed to [shape_noplot()] to create a more
 #' consistent API.
 #' @inheritParams shape_noplot
 #' @keywords internal
@@ -18,7 +18,7 @@ igraph.shape.noplot <- function(coords, v = NULL, params) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.shape.noclip()` was renamed to `shape_noclip()` to create a more
+#' `igraph.shape.noclip()` was renamed to [shape_noclip()] to create a more
 #' consistent API.
 #' @inheritParams shape_noclip
 #' @keywords internal
@@ -33,7 +33,7 @@ igraph.shape.noclip <- function(coords, el, params, end = c("both", "from", "to"
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `vertex.shapes()` was renamed to `shapes()` to create a more
+#' `vertex.shapes()` was renamed to [shapes()] to create a more
 #' consistent API.
 #' @inheritParams shapes
 #' @keywords internal
@@ -48,7 +48,7 @@ vertex.shapes <- function(shape = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `add.vertex.shape()` was renamed to `add_shape()` to create a more
+#' `add.vertex.shape()` was renamed to [add_shape()] to create a more
 #' consistent API.
 #' @inheritParams add_shape
 #' @keywords internal
