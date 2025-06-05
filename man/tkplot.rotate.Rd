@@ -16,7 +16,7 @@ tkplot.rotate(tkp.id, degree = NULL, rad = NULL)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.rotate()} was renamed to \code{tk_rotate()} to create a more
+\code{tkplot.rotate()} was renamed to \code{\link[=tk_rotate]{tk_rotate()}} to create a more
 consistent API.
 }
 \keyword{internal}

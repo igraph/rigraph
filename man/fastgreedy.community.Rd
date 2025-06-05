@@ -36,7 +36,7 @@ edge weight means a stronger connection for this function.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{fastgreedy.community()} was renamed to \code{cluster_fast_greedy()} to create a more
+\code{fastgreedy.community()} was renamed to \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} to create a more
 consistent API.
 }
 \keyword{internal}

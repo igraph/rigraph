@@ -12,7 +12,7 @@ igraph.to.graphNEL(graph)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.to.graphNEL()} was renamed to \code{as_graphnel()} to create a more
+\code{igraph.to.graphNEL()} was renamed to \code{\link[=as_graphnel]{as_graphnel()}} to create a more
 consistent API.
 }
 \keyword{internal}

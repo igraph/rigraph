@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `minimum.spanning.tree()` was renamed to `mst()` to create a more
+#' `minimum.spanning.tree()` was renamed to [mst()] to create a more
 #' consistent API.
 #' @inheritParams mst
 #' @keywords internal

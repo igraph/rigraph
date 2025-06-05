@@ -25,7 +25,7 @@ is not allowed for directed graphs and will be replaced with \code{"once"}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.adjedgelist()} was renamed to \code{as_adj_edge_list()} to create a more
+\code{get.adjedgelist()} was renamed to \code{\link[=as_adj_edge_list]{as_adj_edge_list()}} to create a more
 consistent API.
 }
 \keyword{internal}

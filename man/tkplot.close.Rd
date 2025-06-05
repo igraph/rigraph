@@ -14,7 +14,7 @@ tkplot.close(tkp.id, window.close = TRUE)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.close()} was renamed to \code{tk_close()} to create a more
+\code{tkplot.close()} was renamed to \code{\link[=tk_close]{tk_close()}} to create a more
 consistent API.
 }
 \keyword{internal}

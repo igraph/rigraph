@@ -27,7 +27,7 @@ eigenvector centralization requires normalized eigenvector centrality scores.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{centralization.evcent.tmax()} was renamed to \code{centr_eigen_tmax()} to create a more
+\code{centralization.evcent.tmax()} was renamed to \code{\link[=centr_eigen_tmax]{centr_eigen_tmax()}} to create a more
 consistent API.
 }
 \keyword{internal}

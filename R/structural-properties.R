@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.shortest.paths()` was renamed to `shortest_paths()` to create a more
+#' `get.shortest.paths()` was renamed to [shortest_paths()] to create a more
 #' consistent API.
 #' @inheritParams shortest_paths
 #' @keywords internal
@@ -18,7 +18,7 @@ get.shortest.paths <- function(graph, from, to = V(graph), mode = c("out", "all"
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.all.shortest.paths()` was renamed to `all_shortest_paths()` to create a more
+#' `get.all.shortest.paths()` was renamed to [all_shortest_paths()] to create a more
 #' consistent API.
 #' @inheritParams all_shortest_paths
 #' @keywords internal
@@ -33,7 +33,7 @@ get.all.shortest.paths <- function(graph, from, to = V(graph), mode = c("out", "
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `get.diameter()` was renamed to `get_diameter()` to create a more
+#' `get.diameter()` was renamed to [get_diameter()] to create a more
 #' consistent API.
 #' @inheritParams get_diameter
 #' @keywords internal
@@ -48,7 +48,7 @@ get.diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = N
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `unfold.tree()` was renamed to `unfold_tree()` to create a more
+#' `unfold.tree()` was renamed to [unfold_tree()] to create a more
 #' consistent API.
 #' @inheritParams unfold_tree
 #' @keywords internal
@@ -63,7 +63,7 @@ unfold.tree <- function(graph, mode = c("all", "out", "in", "total"), roots) { #
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `topological.sort()` was renamed to `topo_sort()` to create a more
+#' `topological.sort()` was renamed to [topo_sort()] to create a more
 #' consistent API.
 #' @inheritParams topo_sort
 #' @keywords internal
@@ -78,7 +78,7 @@ topological.sort <- function(graph, mode = c("out", "all", "in")) { # nocov star
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `shortest.paths()` was renamed to `distances()` to create a more
+#' `shortest.paths()` was renamed to [distances()] to create a more
 #' consistent API.
 #' @inheritParams distances
 #' @keywords internal
@@ -95,7 +95,7 @@ shortest.paths <- function(graph, v = V(graph), to = V(graph), mode = c("all", "
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `neighborhood.size()` was renamed to `ego_size()` to create a more
+#' `neighborhood.size()` was renamed to [ego_size()] to create a more
 #' consistent API.
 #' @inheritParams ego_size
 #' @keywords internal
@@ -110,7 +110,7 @@ neighborhood.size <- function(graph, order = 1, nodes = V(graph), mode = c("all"
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `maximum.bipartite.matching()` was renamed to `max_bipartite_match()` to create a more
+#' `maximum.bipartite.matching()` was renamed to [max_bipartite_match()] to create a more
 #' consistent API.
 #' @inheritParams max_bipartite_match
 #' @keywords internal
@@ -125,7 +125,7 @@ maximum.bipartite.matching <- function(graph, types = NULL, weights = NULL, eps 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.mutual()` was renamed to `which_mutual()` to create a more
+#' `is.mutual()` was renamed to [which_mutual()] to create a more
 #' consistent API.
 #' @inheritParams which_mutual
 #' @keywords internal
@@ -140,7 +140,7 @@ is.mutual <- function(graph, eids = E(graph), loops = TRUE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.multiple()` was renamed to `which_multiple()` to create a more
+#' `is.multiple()` was renamed to [which_multiple()] to create a more
 #' consistent API.
 #' @inheritParams which_multiple
 #' @keywords internal
@@ -155,7 +155,7 @@ is.multiple <- function(graph, eids = E(graph)) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.maximal.matching()` was renamed to `is_max_matching()` to create a more
+#' `is.maximal.matching()` was renamed to [is_max_matching()] to create a more
 #' consistent API.
 #' @inheritParams is_max_matching
 #' @keywords internal
@@ -170,7 +170,7 @@ is.maximal.matching <- function(graph, matching, types = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.matching()` was renamed to `is_matching()` to create a more
+#' `is.matching()` was renamed to [is_matching()] to create a more
 #' consistent API.
 #' @inheritParams is_matching
 #' @keywords internal
@@ -185,7 +185,7 @@ is.matching <- function(graph, matching, types = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.loop()` was renamed to `which_loop()` to create a more
+#' `is.loop()` was renamed to [which_loop()] to create a more
 #' consistent API.
 #' @inheritParams which_loop
 #' @keywords internal
@@ -200,7 +200,7 @@ is.loop <- function(graph, eids = E(graph)) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.connected()` was renamed to `is_connected()` to create a more
+#' `is.connected()` was renamed to [is_connected()] to create a more
 #' consistent API.
 #' @inheritParams is_connected
 #' @keywords internal
@@ -215,7 +215,7 @@ is.connected <- function(graph, mode = c("weak", "strong")) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `induced.subgraph()` was renamed to `induced_subgraph()` to create a more
+#' `induced.subgraph()` was renamed to [induced_subgraph()] to create a more
 #' consistent API.
 #' @inheritParams induced_subgraph
 #' @keywords internal
@@ -230,7 +230,7 @@ induced.subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `has.multiple()` was renamed to `any_multiple()` to create a more
+#' `has.multiple()` was renamed to [any_multiple()] to create a more
 #' consistent API.
 #' @inheritParams any_multiple
 #' @keywords internal
@@ -245,7 +245,7 @@ has.multiple <- function(graph) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.neighborhood()` was renamed to `make_ego_graph()` to create a more
+#' `graph.neighborhood()` was renamed to [make_ego_graph()] to create a more
 #' consistent API.
 #' @inheritParams make_ego_graph
 #' @keywords internal
@@ -260,7 +260,7 @@ graph.neighborhood <- function(graph, order = 1, nodes = V(graph), mode = c("all
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.laplacian()` was renamed to `laplacian_matrix()` to create a more
+#' `graph.laplacian()` was renamed to [laplacian_matrix()] to create a more
 #' consistent API.
 #' @inheritParams laplacian_matrix
 #' @keywords internal
@@ -275,7 +275,7 @@ graph.laplacian <- function(graph, normalized = FALSE, weights = NULL, sparse = 
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.knn()` was renamed to `knn()` to create a more
+#' `graph.knn()` was renamed to [knn()] to create a more
 #' consistent API.
 #' @inheritParams knn
 #' @keywords internal
@@ -290,7 +290,7 @@ graph.knn <- function(graph, vids = V(graph), mode = c("all", "out", "in", "tota
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.dfs()` was renamed to `dfs()` to create a more
+#' `graph.dfs()` was renamed to [dfs()] to create a more
 #' consistent API.
 #' @param father Logical scalar, whether to return the father of the vertices.
 #' @inheritParams dfs
@@ -306,7 +306,7 @@ graph.dfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreac
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.density()` was renamed to `edge_density()` to create a more
+#' `graph.density()` was renamed to [edge_density()] to create a more
 #' consistent API.
 #' @inheritParams edge_density
 #' @keywords internal
@@ -321,7 +321,7 @@ graph.density <- function(graph, loops = FALSE) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.coreness()` was renamed to `coreness()` to create a more
+#' `graph.coreness()` was renamed to [coreness()] to create a more
 #' consistent API.
 #' @inheritParams coreness
 #' @keywords internal
@@ -336,7 +336,7 @@ graph.coreness <- function(graph, mode = c("all", "out", "in")) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.bfs()` was renamed to `bfs()` to create a more
+#' `graph.bfs()` was renamed to [bfs()] to create a more
 #' consistent API.
 #' @inheritParams bfs
 #' @param father Logical scalar, whether to return the father of the vertices.
@@ -352,7 +352,7 @@ graph.bfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreac
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `farthest.nodes()` was renamed to `farthest_vertices()` to create a more
+#' `farthest.nodes()` was renamed to [farthest_vertices()] to create a more
 #' consistent API.
 #' @inheritParams farthest_vertices
 #' @keywords internal
@@ -367,7 +367,7 @@ farthest.nodes <- function(graph, directed = TRUE, unconnected = TRUE, weights =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `degree.distribution()` was renamed to `degree_distribution()` to create a more
+#' `degree.distribution()` was renamed to [degree_distribution()] to create a more
 #' consistent API.
 #' @inheritParams degree_distribution
 #' @keywords internal
@@ -382,7 +382,7 @@ degree.distribution <- function(graph, cumulative = FALSE, ...) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `count.multiple()` was renamed to `count_multiple()` to create a more
+#' `count.multiple()` was renamed to [count_multiple()] to create a more
 #' consistent API.
 #' @inheritParams count_multiple
 #' @keywords internal
@@ -397,7 +397,7 @@ count.multiple <- function(graph, eids = E(graph)) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `clusters()` was renamed to `components()` to create a more
+#' `clusters()` was renamed to [components()] to create a more
 #' consistent API.
 #' @inheritParams components
 #' @keywords internal
@@ -412,7 +412,7 @@ clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `average.path.length()` was renamed to `mean_distance()` to create a more
+#' `average.path.length()` was renamed to [mean_distance()] to create a more
 #' consistent API.
 #' @inheritParams mean_distance
 #' @keywords internal
@@ -1249,7 +1249,7 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `subgraph.edges()` was renamed to `subgraph_from_edges()` to create a more
+#' `subgraph.edges()` was renamed to [subgraph_from_edges()] to create a more
 #' consistent API.
 #' @inheritParams subgraph_from_edges
 #' @keywords internal

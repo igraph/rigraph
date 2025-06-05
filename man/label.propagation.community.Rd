@@ -47,7 +47,7 @@ will be ignored. Also note that vertices without labels cannot be fixed.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{label.propagation.community()} was renamed to \code{cluster_label_prop()} to create a more
+\code{label.propagation.community()} was renamed to \code{\link[=cluster_label_prop]{cluster_label_prop()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -55,7 +55,7 @@ Do not give both of them.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.famous()} was renamed to \code{make_graph()} to create a more
+\code{graph.famous()} was renamed to \code{\link[=make_graph]{make_graph()}} to create a more
 consistent API.
 }
 \keyword{internal}

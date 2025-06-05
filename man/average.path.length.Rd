@@ -38,7 +38,7 @@ the result when this parameter is set to \code{TRUE}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{average.path.length()} was renamed to \code{mean_distance()} to create a more
+\code{average.path.length()} was renamed to \code{\link[=mean_distance]{mean_distance()}} to create a more
 consistent API.
 }
 \keyword{internal}

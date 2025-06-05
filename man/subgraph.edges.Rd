@@ -17,7 +17,7 @@ not have any adjacent edges in \code{eids}.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{subgraph.edges()} was renamed to \code{subgraph_from_edges()} to create a more
+\code{subgraph.edges()} was renamed to \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to create a more
 consistent API.
 }
 \keyword{internal}

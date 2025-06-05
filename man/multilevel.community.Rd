@@ -26,7 +26,7 @@ is set to 1.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{multilevel.community()} was renamed to \code{cluster_louvain()} to create a more
+\code{multilevel.community()} was renamed to \code{\link[=cluster_louvain]{cluster_louvain()}} to create a more
 consistent API.
 }
 \keyword{internal}

@@ -16,7 +16,7 @@ whether it is set and setting it separately if not.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{getIgraphOpt()} was renamed to \code{igraph_opt()} to create a more
+\code{getIgraphOpt()} was renamed to \code{\link[=igraph_opt]{igraph_opt()}} to create a more
 consistent API.
 }
 \keyword{internal}
