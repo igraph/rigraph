@@ -54,3 +54,11 @@
       Error in `assert_named_list()`:
       ! `value` must be a named list with unique names
 
+# good error message when not using character
+
+    Code
+      set_graph_attr(ring, 1, 1)
+    Condition
+      Error in `set_graph_attr()`:
+      ! `name` must be a single string, not the number 1.
+
