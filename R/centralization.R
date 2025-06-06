@@ -243,10 +243,11 @@ centralize <- centralization_impl
 #'       The graph level centrality index.
 #'     }
 #'     \item{theoretical_max}{
-#'       The maximum theoretical graph level
-#'       centralization score for a graph with the given number of vertices,
-#'       using the same parameters. If the `normalized` argument was
-#'       `TRUE`, then the result was divided by this number.
+#'       The maximum theoretical graph level centralization score
+#'       for a graph with the given number of vertices,
+#'       using the same parameters.
+#'       If the `normalized` argument was `TRUE`,
+#'       then the result was divided by this number.
 #'     }
 #'   }
 #'
@@ -338,10 +339,11 @@ centr_degree_tmax <- function(graph = NULL,
 #'       The graph level centrality index.
 #'     }
 #'     \item{theoretical_max}{
-#'       The maximum theoretical graph level
-#'       centralization score for a graph with the given number of vertices,
-#'       using the same parameters. If the `normalized` argument was
-#'       `TRUE`, then the result was divided by this number.
+#'       The maximum theoretical graph level centralization score
+#'       for a graph with the given number of vertices,
+#'       using the same parameters.
+#'       If the `normalized` argument was `TRUE`,
+#'       then the result was divided by this number.
 #'     }
 #'   }
 #'
@@ -416,10 +418,11 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #'       The graph level centrality index.
 #'     }
 #'     \item{theoretical_max}{
-#'       The maximum theoretical graph level
-#'       centralization score for a graph with the given number of vertices,
-#'       using the same parameters. If the `normalized` argument was
-#'       `TRUE`, then the result was divided by this number.
+#'       The maximum theoretical graph level centralization score
+#'       for a graph with the given number of vertices,
+#'       using the same parameters.
+#'       If the `normalized` argument was `TRUE`,
+#'       then the result was divided by this number.
 #'     }
 #'   }
 #'
@@ -486,15 +489,14 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #'       The corresponding eigenvalue.
 #'     }
 #'     \item{options}{
-#'       ARPACK options, see the return value of
-#'       [eigen_centrality()] for details.
+#'       ARPACK options, see the return value of [eigen_centrality()] for details.
 #'     }
 #'     \item{centralization}{
 #'       The graph level centrality index.
 #'     }
 #'     \item{theoretical_max}{
-#'       The same as above, the theoretical maximum
-#'       centralization score for a graph with the same number of vertices.
+#'       The same as above, the theoretical maximum centralization score
+#'       for a graph with the same number of vertices.
 #'     }
 #'   }
 #'

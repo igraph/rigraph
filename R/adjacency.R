@@ -53,35 +53,32 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #' `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
-#'       The graph will be
-#'       directed and a matrix element gives the number of edges between two
-#'       vertices.
+#'       The graph will be directed and a matrix element gives
+#'       the number of edges between two vertices.
 #'     }
 #'     \item{"undirected"}{
-#'       This is exactly the same as `max`,
-#'       for convenience. Note that it is *not* checked whether the matrix is
-#'       symmetric.
+#'       This is exactly the same as `max`, for convenience.
+#'       Note that it is *not* checked whether the matrix is symmetric.
 #'     }
 #'     \item{"max"}{
-#'       An undirected graph will be created and
-#'       `max(A(i,j), A(j,i))` gives the number of edges.
+#'       An undirected graph will be created and `max(A(i,j), A(j,i))`
+#'       gives the number of edges.
 #'     }
 #'     \item{"upper"}{
-#'       An undirected graph will be created, only the upper
-#'       right triangle (including the diagonal) is used for the number of edges.
+#'       An undirected graph will be created, only the upper right triangle
+#'       (including the diagonal) is used for the number of edges.
 #'     }
 #'     \item{"lower"}{
-#'       An undirected graph will be created, only the lower
-#'       left triangle (including the diagonal) is used for creating the edges.
+#'       An undirected graph will be created, only the lower left triangle
+#'       (including the diagonal) is used for creating the edges.
 #'     }
 #'     \item{"min"}{
-#'       undirected graph will be created with `min(A(i,j),
-#'       A(j,i))` edges between vertex `i` and `j`.
+#'       An undirected graph will be created with `min(A(i,j), A(j,i))` edges
+#'       between vertex `i` and `j`.
 #'     }
 #'     \item{"plus"}{
-#'
-#'       undirected graph will be created with `A(i,j)+A(j,i)` edges between
-#'       vertex `i` and `j`.
+#'       An undirected graph will be created with `A(i,j)+A(j,i)` edges
+#'       between vertex `i` and `j`.
 #'     }
 #'   }
 #'
@@ -90,37 +87,31 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #' depend on the value of the `mode` argument:
 #'   \describe{
 #'     \item{"directed"}{
-#'       The graph will be directed and a matrix element
-#'       gives the edge weights.
+#'       The graph will be directed and a matrix element gives the edge weights.
 #'     }
 #'     \item{"undirected"}{
-#'       First we check that the
-#'       matrix is symmetric. It is an error if not. Then only the upper triangle is
-#'       used to create a weighted undirected graph.
+#'       First we check that the matrix is symmetric. It is an error if not.
+#'       Then only the upper triangle is used to create a weighted undirected graph.
 #'     }
 #'     \item{"max"}{
-#'       An
-#'       undirected graph will be created and `max(A(i,j), A(j,i))` gives the
-#'       edge weights.
+#'       An undirected graph will be created and `max(A(i,j), A(j,i))`
+#'       gives the edge weights.
 #'     }
 #'     \item{"upper"}{
-#'       An undirected graph will be created,
-#'       only the upper right triangle (including the diagonal) is used (for the edge
-#'       weights).
+#'       An undirected graph will be created, only the upper right triangle
+#'       (including the diagonal) is used (for the edge weights).
 #'     }
 #'     \item{"lower"}{
-#'       An undirected graph will be created, only
-#'       the lower left triangle (including the diagonal) is used for creating the
-#'       edges.
+#'       An undirected graph will be created, only the lower left triangle
+#'       (including the diagonal) is used for creating the edges.
 #'     }
 #'     \item{"min"}{
-#'       An undirected graph will be created,
-#'       `min(A(i,j), A(j,i))` gives the edge weights.
+#'       An undirected graph will be created, `min(A(i,j), A(j,i))`
+#'       gives the edge weights.
 #'     }
 #'     \item{"plus"}{
-#'       An
-#'       undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
-#'       weights.
+#'       An undirected graph will be created, `A(i,j)+A(j,i)`
+#'       gives the edge weights.
 #'     }
 #'   }
 #'

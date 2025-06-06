@@ -552,8 +552,7 @@ print.communities <- function(x, ...) {
 #' @return A `communities` object.
 #'   \describe{
 #'     \item{membership}{
-#'       A numeric vector giving the community id for each
-#'       vertex.
+#'       A numeric vector giving the community id for each vertex.
 #'     }
 #'     \item{modularity}{
 #'       The modularity score of the partition.
@@ -1154,8 +1153,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   named list is returned with the following components:
 #'   \describe{
 #'     \item{community}{
-#'       Numeric vector giving the ids of the vertices in the same
-#'       community as `vertex`.
+#'       Numeric vector giving the ids of the vertices in the same community as `vertex`.
 #'     }
 #'     \item{cohesion}{
 #'       The cohesion score of the result, see references.
@@ -1164,12 +1162,10 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'       The adhesion score of the result, see references.
 #'     }
 #'     \item{inner.links}{
-#'       The number of edges within the community
-#'       of `vertex`.
+#'       The number of edges within the community of `vertex`.
 #'     }
 #'     \item{outer.links}{
-#'       The number of edges between the
-#'       community of `vertex` and the rest of the graph.
+#'       The number of edges between the community of `vertex` and the rest of the graph.
 #'     }
 #'   }
 #' @author Jorg Reichardt for the original code and Gabor Csardi
@@ -1858,19 +1854,20 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'   following members:
 #'   \describe{
 #'     \item{membership}{
-#'       The membership vector at the end of the
-#'       algorithm, when no more splits are possible.
+#'       The membership vector at the end of the algorithm,
+#'       when no more splits are possible.
 #'     }
 #'     \item{merges}{
-#'       The merges
-#'       matrix starting from the state described by the `membership` member.
-#'       This is a two-column matrix and each line describes a merge of two
-#'       communities, the first line is the first merge and it creates community
-#'       \sQuote{`N`}, `N` is the number of initial communities in the
-#'       graph, the second line creates community `N+1`, etc.
+#'       The merges matrix starting from the state
+#'       described by the `membership` member.
+#'       This is a two-column matrix and each line describes a merge of two communities,
+#'       the first line is the first merge and it creates community \sQuote{`N`},
+#'       `N` is the number of initial communities in the graph,
+#'       the second line creates community `N+1`, etc.
 #'     }
-#'     \item{options}{Information about the underlying ARPACK computation, see
-#'       [arpack()] for details.  }
+#'     \item{options}{
+#'       Information about the underlying ARPACK computation, see [arpack()] for details.
+#'     }
 #'   }
 #' @section Callback functions: The `callback` argument can be used to
 #' supply a function that is called after each eigenvector calculation. The
@@ -1881,25 +1878,22 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'       The actual membership vector, with zero-based indexing.
 #'     }
 #'     \item{community}{
-#'       The community that the algorithm just tried to split,
-#'       community numbering starts with zero here.
+#'       The community that the algorithm just tried to split, community numbering starts with zero here.
 #'     }
 #'     \item{value}{
-#'       The eigenvalue belonging to the leading eigenvector the
-#'       algorithm just found.
+#'       The eigenvalue belonging to the leading eigenvector the algorithm just found.
 #'     }
 #'     \item{vector}{
 #'       The leading eigenvector the algorithm just found.
 #'     }
 #'     \item{multiplier}{
-#'       An R function that can be used to multiple the actual
-#'       modularity matrix with an arbitrary vector. Supply the vector as an
-#'       argument to perform this multiplication. This function can be used
-#'       with ARPACK.
+#'       An R function that can be used to multiple the actual modularity matrix
+#'       with an arbitrary vector.
+#'       Supply the vector as an argument to perform this multiplication.
+#'       This function can be used with ARPACK.
 #'     }
 #'     \item{extra}{
-#'       The `extra` argument that was passed to
-#'       `cluster_leading_eigen()`.
+#'       The `extra` argument that was passed to `cluster_leading_eigen()`.
 #'     }
 #'   }
 #'
@@ -2879,12 +2873,10 @@ contract <- contract_vertices_impl
 #' @return A named list with two components:
 #'   \describe{
 #'     \item{membership}{
-#'       numeric vector giving the cluster id to which each vertex
-#'       belongs.
+#'       numeric vector giving the cluster id to which each vertex belongs.
 #'     }
 #'     \item{distances}{
-#'       numeric vector giving the distance of each vertex from its
-#'       generator
+#'       numeric vector giving the distance of each vertex from its generator
 #'     }
 #'   }
 #' @seealso [distances()]
