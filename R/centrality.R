@@ -520,87 +520,184 @@ arpack_defaults <- function() {
 #'
 #' The `options` argument specifies what kind of calculation to perform.
 #' It is a list with the following members, they correspond directly to ARPACK
-#' parameters. On input it has the following fields: \describe{
-#' \item{bmat}{Character constant, possible values: \sQuote{`I`}, standard
-#' eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and \sQuote{`G`},
-#' generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
-#' Currently only \sQuote{`I`} is supported.} \item{n}{Numeric scalar. The
-#' dimension of the eigenproblem. You only need to set this if you call
-#' [arpack()] directly. (I.e. not needed for
-#' [eigen_centrality()], [page_rank()], etc.)}
-#' \item{which}{Specify which eigenvalues/vectors to compute, character
-#' constant with exactly two characters.
+#' parameters. On input it has the following fields:
+#'   \describe{
+#'     \item{bmat}{
+#'       Character constant, possible values:
+#'       \sQuote{`I`}, standard eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and
+#'       \sQuote{`G`}, generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
+#'       Currently only \sQuote{`I`} is supported.
+#'     }
+#'     \item{n}{
+#'       Numeric scalar. The dimension of the eigenproblem.
+#'       You only need to set this if you call [arpack()] directly.
+#'       (I.e. not needed for [eigen_centrality()], [page_rank()], etc.)
+#'     }
+#'     \item{which}{
+#'       Specify which eigenvalues/vectors to compute,
+#'       character constant with exactly two characters.
+#'       Possible values for symmetric input matrices:
+#'         \describe{
+#'           \item{"LA"}{
+#'             Compute `nev` largest (algebraic) eigenvalues.
+#'           }
+#'           \item{"SA"}{
+#'             Compute `nev` smallest (algebraic) eigenvalues.
+#'           }
+#'           \item{"LM"}{
+#'             Compute `nev` largest (in magnitude) eigenvalues.
+#'           }
+#'           \item{"SM"}{
+#'             Compute `nev` smallest (in magnitude) eigenvalues.
+#'           }
+#'           \item{"BE"}{
+#'             Compute `nev` eigenvalues, half from each end of the spectrum.
+#'             When `nev` is odd, compute one more from the high end than from the low end.
+#'           }
+#'         }
 #'
-#' Possible values for symmetric input matrices: \describe{
-#' \item{"LA"}{Compute `nev` largest (algebraic) eigenvalues.}
-#' \item{"SA"}{Compute `nev` smallest (algebraic)
-#' eigenvalues.} \item{"LM"}{Compute `nev` largest (in
-#' magnitude) eigenvalues.} \item{"SM"}{Compute `nev` smallest
-#' (in magnitude) eigenvalues.} \item{"BE"}{Compute `nev`
-#' eigenvalues, half from each end of the spectrum. When `nev` is odd,
-#' compute one more from the high end than from the low end.} }
+#'         Possible values for non-symmetric input matrices:
+#'         \describe{
+#'           \item{"LM"}{
+#'             Compute `nev` eigenvalues of largest magnitude.
+#'           }
+#'           \item{"SM"}{
+#'             Compute `nev` eigenvalues of smallest magnitude.
+#'           }
+#'           \item{"LR"}{
+#'             Compute `nev` eigenvalues of largest real part.
+#'           }
+#'           \item{"SR"}{
+#'             Compute `nev` eigenvalues of smallest real part.
+#'           }
+#'           \item{"LI"}{
+#'             Compute `nev` eigenvalues of largest imaginary part.
+#'           }
+#'           \item{"SI"}{
+#'             Compute `nev` eigenvalues of smallest imaginary part.
+#'           }
+#'         }
 #'
-#' Possible values for non-symmetric input matrices: \describe{
-#' \item{"LM"}{Compute `nev` eigenvalues of largest
-#' magnitude.} \item{"SM"}{Compute `nev` eigenvalues of
-#' smallest magnitude.} \item{"LR"}{Compute `nev` eigenvalues
-#' of largest real part.} \item{"SR"}{Compute `nev`
-#' eigenvalues of smallest real part.} \item{"LI"}{Compute
-#' `nev` eigenvalues of largest imaginary part.}
-#' \item{"SI"}{Compute `nev` eigenvalues of smallest imaginary
-#' part.} }
+#'       This parameter is sometimes overwritten by the various functions,
+#'       e.g. [page_rank()] always sets \sQuote{`LM`}.
+#'     }
+#'     \item{nev}{
+#'       Numeric scalar. The number of eigenvalues to be computed.
+#'     }
+#'     \item{tol}{
+#'       Numeric scalar. Stopping criterion:
+#'       the relative accuracy of the Ritz value is considered acceptable
+#'       if its error is less than `tol` times its estimated value.
+#'       If this is set to zero then machine precision is used.
+#'     }
+#'     \item{ncv}{
+#'       Number of Lanczos vectors to be generated.
+#'     }
+#'     \item{ldv}{
+#'       Numberic scalar. It should be set to zero in the current implementation.
+#'     }
+#'     \item{ishift}{
+#'       Either zero or one.
+#'       If zero then the shifts are provided by the user via reverse communication.
+#'       If one then exact shifts with respect to the reduced tridiagonal matrix \eqn{T}.
+#'       Please always set this to one.
+#'     }
+#'     \item{maxiter}{
+#'       Maximum number of Arnoldi update iterations allowed.
+#'     }
+#'     \item{nb}{
+#'       Blocksize to be used in the recurrence. Please always leave this on the default value, one.
+#'     }
+#'     \item{mode}{
+#'       The type of the eigenproblem to be solved.  Possible values if the input matrix is symmetric:
+#'         \describe{
+#'           \item{1}{
+#'             \eqn{Ax=\lambda x}{A*x=lambda*x}, \eqn{A} is symmetric.
+#'           }
+#'           \item{2}{
+#'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M} is symmetric positive definite.
+#'           }
+#'           \item{3}{
+#'             \eqn{Kx=\lambda Mx}{K*x=lambda*M*x}, \eqn{K} is symmetric, \eqn{M} is symmetric positive semi-definite.
+#'           }
+#'           \item{4}{
+#'             \eqn{Kx=\lambda KGx}{K*x=lambda*KG*x}, \eqn{K} is symmetric positive semi-definite, \eqn{KG} is symmetric indefinite.
+#'           }
+#'           \item{5}{
+#'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M} is symmetric positive semi-definite. (Cayley transformed mode.)
+#'           }
+#'         }
+#'         Please note that only `mode==1` was tested and other values might not work properly.
 #'
-#' This parameter is sometimes overwritten by the various functions, e.g.
-#' [page_rank()] always sets \sQuote{`LM`}.  }
-#' \item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
-#' \item{tol}{Numeric scalar. Stopping criterion: the relative accuracy of the
-#' Ritz value is considered acceptable if its error is less than `tol`
-#' times its estimated value. If this is set to zero then machine precision is
-#' used.} \item{ncv}{Number of Lanczos vectors to be generated.}
-#' \item{ldv}{Numberic scalar. It should be set to zero in the current
-#' implementation.} \item{ishift}{Either zero or one. If zero then the shifts
-#' are provided by the user via reverse communication. If one then exact shifts
-#' with respect to the reduced tridiagonal matrix \eqn{T}.  Please always set
-#' this to one.} \item{maxiter}{Maximum number of Arnoldi update iterations
-#' allowed. } \item{nb}{Blocksize to be used in the recurrence. Please always
-#' leave this on the default value, one.} \item{mode}{The type of the
-#' eigenproblem to be solved.  Possible values if the input matrix is
-#' symmetric: \describe{ \item{1}{\eqn{Ax=\lambda x}{A*x=lambda*x}, \eqn{A} is
-#' symmetric.} \item{2}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is
-#' symmetric, \eqn{M} is symmetric positive definite.} \item{3}{\eqn{Kx=\lambda
-#' Mx}{K*x=lambda*M*x}, \eqn{K} is symmetric, \eqn{M} is symmetric positive
-#' semi-definite.} \item{4}{\eqn{Kx=\lambda KGx}{K*x=lambda*KG*x}, \eqn{K} is
-#' symmetric positive semi-definite, \eqn{KG} is symmetric indefinite.}
-#' \item{5}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M}
-#' is symmetric positive semi-definite. (Cayley transformed mode.)} } Please
-#' note that only `mode==1` was tested and other values might not work
-#' properly.
+#'         Possible values if the input matrix is not symmetric:
+#'         \describe{
+#'           \item{1}{
+#'             \eqn{Ax=\lambda x}{A*x=lambda*x}.
+#'           }
+#'           \item{2}{
+#'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric positive definite.
+#'           }
+#'           \item{3}{
+#'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric semi-definite.
+#'           }
+#'           \item{4}{
+#'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric semi-definite.
+#'           }
+#'         }
+#'         Please note that only `mode==1` was tested and other values might not work properly.
+#'     }
+#'     \item{start}{
+#'       Not used currently. Later it be used to set a starting vector.
+#'     }
+#'     \item{sigma}{
+#'       Not used currently.
+#'     }
+#'     \item{sigmai}{
+#'       Not use currently.
+#'     }
+#'   }
 #'
-#' Possible values if the input matrix is not symmetric: \describe{
-#' \item{1}{\eqn{Ax=\lambda x}{A*x=lambda*x}.} \item{2}{\eqn{Ax=\lambda
-#' Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric positive definite.}
-#' \item{3}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric
-#' semi-definite.} \item{4}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is
-#' symmetric semi-definite.} } Please note that only `mode==1` was tested
-#' and other values might not work properly.  } \item{start}{Not used
-#' currently. Later it be used to set a starting vector.} \item{sigma}{Not used
-#' currently.} \item{sigmai}{Not use currently.}
+#'   On output the following additional fields are added:
 #'
-#' On output the following additional fields are added: \describe{
-#' \item{info}{Error flag of ARPACK. Possible values: \describe{
-#' \item{0}{Normal exit.} \item{1}{Maximum number of iterations taken.}
-#' \item{3}{No shifts could be applied during a cycle of the Implicitly
-#' restarted Arnoldi iteration. One possibility is to increase the size of
-#' `ncv` relative to `nev`.} }
+#'   \describe{
+#'     \item{info}{
+#'       Error flag of ARPACK. Possible values:
+#'         \describe{
+#'           \item{0}{
+#'             Normal exit.
+#'           }
+#'           \item{1}{
+#'             Maximum number of iterations taken.
+#'           }
+#'           \item{3}{
+#'             No shifts could be applied during a cycle
+#'             of the implicitly restarted Arnoldi iteration.
+#'             One possibility is to increase the size of `ncv` relative to `nev`.
+#'           }
+#'         }
 #'
-#' ARPACK can return more error conditions than these, but they are converted
-#' to regular igraph errors.  } \item{iter}{Number of Arnoldi iterations
-#' taken.} \item{nconv}{Number of \dQuote{converged} Ritz values. This
-#' represents the number of Ritz values that satisfy the convergence critetion.
-#' } \item{numop}{Total number of matrix-vector multiplications.}
-#' \item{numopb}{Not used currently.} \item{numreo}{Total number of steps of
-#' re-orthogonalization.} } } Please see the ARPACK documentation for
-#' additional details.
+#'       ARPACK can return more error conditions than these,
+#'       but they are converted to regular igraph errors.
+#'     }
+#'     \item{iter}{
+#'       Number of Arnoldi iterations taken.
+#'     }
+#'     \item{nconv}{
+#'       Number of \dQuote{converged} Ritz values.
+#'       This represents the number of Ritz values that satisfy the convergence critetion.
+#'     }
+#'     \item{numop}{
+#'       Total number of matrix-vector multiplications.
+#'     }
+#'     \item{numopb}{
+#'       Not used currently.
+#'     }
+#'     \item{numreo}{
+#'       Total number of steps of re-orthogonalization.
+#'     }
+#'   }
+#'
+#' Please see the ARPACK documentation for additional details.
 #'
 #' @aliases arpack arpack-options arpack.unpack.complex
 #' @aliases arpack_defaults
@@ -620,13 +717,22 @@ arpack_defaults <- function() {
 #'   only have real eigenvectors/values), but only non-symmetric ones. If you
 #'   have a non-symmetric problem, but you're sure that the results will be real,
 #'   then supply `FALSE` here.
-#' @return A named list with the following members: \describe{\item{values}{Numeric
-#'   vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
-#'   eigenvectors as columns. If `complex=TRUE` (the default for
-#'   non-symmetric problems), then the matrix is complex.} \item{options}{A named
-#'   list with the supplied `options` and some information about the
-#'   performed calculation, including an ARPACK exit code. See the details above.
-#'   }}
+#' @return A named list with the following members:
+#'   \describe{
+#'     \item{values}{
+#'       Numeric vector, the desired eigenvalues.
+#'     }
+#'     \item{vectors}{
+#'       Numeric matrix, the desired eigenvectors as columns.
+#'       If `complex=TRUE` (the default for non-symmetric problems), then the matrix is complex.
+#'     }
+#'     \item{options}{
+#'       A named list with the supplied `options`
+#'       and some information about the performed calculation,
+#'       including an ARPACK exit code.
+#'       See the details above.
+#'     }
+#'   }
 #' @author Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso [eigen_centrality()], [page_rank()],
@@ -859,10 +965,18 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   [arpack_defaults()].
 #' @return Depends on the algorithm used.
 #'
-#'   For `arpack` a list with three entries is returned: \describe{\item{options}{See
-#'   the return value for `arpack()` for a complete description.}
-#'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
-#'   matrix, with the eigenvectors as columns.}}
+#'   For `arpack` a list with three entries is returned:
+#'   \describe{
+#'     \item{options}{
+#'       See the return value for `arpack()` for a complete description.
+#'     }
+#'     \item{values}{
+#'       Numeric vector, the eigenvalues.
+#'     }
+#'     \item{vectors}{
+#'       Numeric matrix, with the eigenvectors as columns.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_adjacency_matrix()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
@@ -972,11 +1086,18 @@ eigen_defaults <- function() {
 #'   weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
-#' @return A named list with components: \describe{\item{vector}{A vector containing the
-#'   centrality scores.} \item{value}{The eigenvalue corresponding to the
-#'   calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
-#'   list, information about the underlying ARPACK computation. See
-#'   [arpack()] for the details.}}
+#' @return A named list with components:
+#'   \describe{
+#'     \item{vector}{
+#'       A vector containing the centrality scores.
+#'     }
+#'     \item{value}{
+#'       The eigenvalue corresponding to the calculated eigenvector, i.e. the centrality scores.
+#'     }
+#'     \item{options}{
+#'       A named list, information about the underlying ARPACK computation. See [arpack()] for the details.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} and Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
 #' manual page.
@@ -1142,13 +1263,18 @@ diversity <- diversity_impl
 #' @inheritParams rlang::args_dots_empty
 #' @return A named list with members:
 #'   \describe{
-#'   \item{hub}{The hub score of the vertices.}
-#'   \item{authority}{The authority score of the vertices.}
-#'   \item{value}{The corresponding eigenvalue of the calculated
-#'     principal eigenvector.}
-#'   \item{options}{Some information about the ARPACK computation, it has
-#'     the same members as the `options` member returned
-#'     by [arpack()], see that for documentation.}
+#'     \item{hub}{
+#'       The hub score of the vertices.
+#'     }
+#'     \item{authority}{
+#'       The authority score of the vertices.
+#'     }
+#'     \item{value}{
+#'       The corresponding eigenvalue of the calculated principal eigenvector.
+#'     }
+#'     \item{options}{
+#'       Some information about the ARPACK computation, it has the same members as the `options` member returned by [arpack()], see that for documentation.
+#'     }
 #'   }
 #' @seealso [eigen_centrality()] for eigenvector centrality,
 #' [page_rank()] for the Page Rank scores. [arpack()] for
@@ -1296,14 +1422,18 @@ hub_score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defa
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details. This argument is ignored if the PRPACK
 #'   implementation is used.
-#' @return A named list with entries: \describe{\item{vector}{A
-#'   numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
-#'   method, the eigenvalue corresponding to the eigenvector with the PageRank scores
-#'   is returned here. It is expected to be exactly one, and can be used to check
-#'   that ARPACK has successfully converged to the expected eingevector. When using
-#'   the PRPACK method, it is always set to 1.0.} \item{options}{Some information
-#'   about the underlying ARPACK calculation. See [arpack()] for details.
-#'   This entry is `NULL` if not the ARPACK implementation was used.}}
+#' @return A named list with entries:
+#'   \describe{
+#'     \item{vector}{
+#'       A numeric vector with the PageRank scores.
+#'     }
+#'     \item{value}{
+#'       When using the ARPACK method, the eigenvalue corresponding to the eigenvector with the PageRank scores is returned here. It is expected to be exactly one, and can be used to check that ARPACK has successfully converged to the expected eingevector. When using the PRPACK method, it is always set to 1.0.
+#'     }
+#'     \item{options}{
+#'       Some information about the underlying ARPACK calculation. See [arpack()] for details. This entry is `NULL` if not the ARPACK implementation was used.
+#'     }
+#'   }
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
