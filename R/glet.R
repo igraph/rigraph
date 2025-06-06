@@ -53,15 +53,31 @@ graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
 #' @param cliques A list of vertex ids, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
-#' @return `graphlets()` returns a list with two members: \describe{\item{cliques}{A
-#'   list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
-#'   basis.}}
+#' @return `graphlets()` returns a list with two members:
+#'   \describe{
+#'     \item{cliques}{
+#'       A
+#'       list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
+#'       vector of vertex ids.
+#'     }
+#'     \item{Mu}{
+#'       The weights of the subgraphs in graphlet
+#'       basis.
+#'     }
+#'   }
 #'
-#'   `graphlet_basis()` returns a list of two elements: \describe{\item{cliques}{A list
-#'   of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{thresholds}{The weight thresholds used for
-#'   finding the subgraphs.}}
+#'   `graphlet_basis()` returns a list of two elements:
+#'   \describe{
+#'     \item{cliques}{
+#'       A list
+#'       of subgraphs, the candidate graphlet basis. Each subgraph is give by a
+#'       vector of vertex ids.
+#'     }
+#'     \item{thresholds}{
+#'       The weight thresholds used for
+#'       finding the subgraphs.
+#'     }
+#'   }
 #'
 #'   `graphlet_proj()` return a numeric vector, the weights of the graphlet
 #'   basis subgraphs.

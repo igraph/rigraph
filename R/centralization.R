@@ -236,12 +236,18 @@ centralize <- centralization_impl
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
-#'   \item{res}{The node-level centrality scores.}
-#'   \item{centralization}{The graph level centrality index.}
-#'   \item{theoretical_max}{The maximum theoretical graph level
-#'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the `normalized` argument was
-#'     `TRUE`, then the result was divided by this number.}
+#'     \item{res}{
+#'       The node-level centrality scores.
+#'     }
+#'     \item{centralization}{
+#'       The graph level centrality index.
+#'     }
+#'     \item{theoretical_max}{
+#'       The maximum theoretical graph level
+#'       centralization score for a graph with the given number of vertices,
+#'       using the same parameters. If the `normalized` argument was
+#'       `TRUE`, then the result was divided by this number.
+#'     }
 #'   }
 #'
 #' @family centralization related
@@ -325,12 +331,18 @@ centr_degree_tmax <- function(graph = NULL,
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
-#'   \item{res}{The node-level centrality scores.}
-#'   \item{centralization}{The graph level centrality index.}
-#'   \item{theoretical_max}{The maximum theoretical graph level
-#'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the `normalized` argument was
-#'     `TRUE`, then the result was divided by this number.}
+#'     \item{res}{
+#'       The node-level centrality scores.
+#'     }
+#'     \item{centralization}{
+#'       The graph level centrality index.
+#'     }
+#'     \item{theoretical_max}{
+#'       The maximum theoretical graph level
+#'       centralization score for a graph with the given number of vertices,
+#'       using the same parameters. If the `normalized` argument was
+#'       `TRUE`, then the result was divided by this number.
+#'     }
 #'   }
 #'
 #' @family centralization related
@@ -397,13 +409,19 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
-#'   \item{res}{The node-level centrality scores.}
-#'   \item{centralization}{The graph level centrality index.}
-#'   \item{theoretical_max}{The maximum theoretical graph level
-#'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the `normalized` argument was
-#'     `TRUE`, then the result was divided by this number.}
-#'    }
+#'     \item{res}{
+#'       The node-level centrality scores.
+#'     }
+#'     \item{centralization}{
+#'       The graph level centrality index.
+#'     }
+#'     \item{theoretical_max}{
+#'       The maximum theoretical graph level
+#'       centralization score for a graph with the given number of vertices,
+#'       using the same parameters. If the `normalized` argument was
+#'       `TRUE`, then the result was divided by this number.
+#'     }
+#'   }
 #'
 #' @family centralization related
 #'
@@ -461,13 +479,23 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
 #'   \describe{
-#'   \item{vector}{The node-level centrality scores.}
-#'   \item{value}{The corresponding eigenvalue.}
-#'   \item{options}{ARPACK options, see the return value of
-#'     [eigen_centrality()] for details.}
-#'   \item{centralization}{The graph level centrality index.}
-#'   \item{theoretical_max}{The same as above, the theoretical maximum
-#'     centralization score for a graph with the same number of vertices.}
+#'     \item{vector}{
+#'       The node-level centrality scores.
+#'     }
+#'     \item{value}{
+#'       The corresponding eigenvalue.
+#'     }
+#'     \item{options}{
+#'       ARPACK options, see the return value of
+#'       [eigen_centrality()] for details.
+#'     }
+#'     \item{centralization}{
+#'       The graph level centrality index.
+#'     }
+#'     \item{theoretical_max}{
+#'       The same as above, the theoretical maximum
+#'       centralization score for a graph with the same number of vertices.
+#'     }
 #'   }
 #'
 #' @family centralization related

@@ -192,9 +192,17 @@ igraph.i.spMatrix <- function(M) {
 #'
 #'
 #' @param data The data points, a numeric matrix with two columns.
-#' @return A named list with components: \describe{\item{resverts}{The indices of the
-#'   input vertices that constritute the convex hull.} \item{rescoords}{The
-#'   coordinates of the corners of the convex hull.}}
+#' @return A named list with components:
+#'   \describe{
+#'     \item{resverts}{
+#'       The indices of the
+#'       input vertices that constritute the convex hull.
+#'     }
+#'     \item{rescoords}{
+#'       The
+#'       coordinates of the corners of the convex hull.
+#'     }
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
 #' Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and

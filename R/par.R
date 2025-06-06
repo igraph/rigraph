@@ -114,51 +114,77 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'
 #' The currently used parameters in alphabetical order:
 #' \describe{
-#'   \item{add.params}{Logical scalar, whether to add model
-#'     parameter to the graphs that are created by the various
-#'     graph constructors. By default it is `TRUE`.}
-#'   \item{add.vertex.names}{Logical scalar, whether to add
-#'     vertex names to node level indices, like degree, betweenness
-#'     scores, etc. By default it is `TRUE`.}
-#'   \item{annotate.plot}{Logical scalar, whether to annotate igraph
-#'     plots with the graph's name (`name` graph attribute, if
-#'     present) as `main`, and with the number of vertices and edges
-#'     as `xlab`. Defaults to `FALSE`.}
-#'   \item{dend.plot.type}{The plotting function to use when plotting
-#'     community structure dendrograms via
-#'     [plot_dendrogram()]}. Possible values are \sQuote{auto} (the
+#'     \item{add.params}{
+#'       Logical scalar, whether to add model
+#'       parameter to the graphs that are created by the various
+#'       graph constructors. By default it is `TRUE`.
+#'     }
+#'     \item{add.vertex.names}{
+#'       Logical scalar, whether to add
+#'       vertex names to node level indices, like degree, betweenness
+#'       scores, etc. By default it is `TRUE`.
+#'     }
+#'     \item{annotate.plot}{
+#'       Logical scalar, whether to annotate igraph
+#'       plots with the graph's name (`name` graph attribute, if
+#'       present) as `main`, and with the number of vertices and edges
+#'       as `xlab`. Defaults to `FALSE`.
+#'     }
+#'     \item{dend.plot.type}{
+#'       The plotting function to use when plotting
+#'       community structure dendrograms via
+#'       [plot_dendrogram()]
+#'     }. Possible values are \sQuote{auto} (the
 #'     default), \sQuote{phylo}, \sQuote{hclust} and
 #'     \sQuote{dendrogram}. See [plot_dendrogram()] for details.
-#'   \item{edge.attr.comb}{Specifies what to do with the edge
-#'     attributes if the graph is modified. The default value is
-#'     `list(weight="sum", name="concat", "ignore")`. See
-#'     [attribute.combination()] for details on this.}
-#'   \item{print.edge.attributes}{Logical constant, whether to print edge
-#'     attributes when printing graphs. Defaults to `FALSE`.}
-#'   \item{print.full}{Logical scalar, whether [print.igraph()]
-#'     should show the graph structure as well, or only a summary of the
-#'     graph.}
-#'   \item{print.graph.attributes}{Logical constant, whether to print
-#'     graph attributes when printing graphs. Defaults to `FALSE`.}
-#'   \item{print.vertex.attributes}{Logical constant, whether to print
-#'     vertex attributes when printing graphs. Defaults to `FALSE`.}
-#'   \item{return.vs.es}{Whether functions that return a set or sequence
-#'     of vertices/edges should return formal vertex/edge sequence
-#'     objects. This option was introduced in igraph version 1.0.0 and
-#'     defaults to TRUE. If your package requires the old behavior,
-#'     you can set it to FALSE in the `.onLoad` function of
-#'     your package, without affecting other packages.}
-#'   \item{sparsematrices}{Whether to use the `Matrix` package for
-#'     (sparse) matrices. It is recommended, if the user works with
-#'     larger graphs.}
-#'   \item{verbose}{Logical constant, whether igraph functions should
-#'     talk more than minimal. E.g. if `TRUE` then some functions
-#'     will use progress bars while computing. Defaults to `FALSE`.}
-#'   \item{vertex.attr.comb}{Specifies what to do with the vertex
-#'     attributes if the graph is modified. The default value is
-#'     `list(name="concat", "ignore")` See
-#'     [attribute.combination()] for details on this.}
-#' }
+#'     \item{edge.attr.comb}{
+#'       Specifies what to do with the edge
+#'       attributes if the graph is modified. The default value is
+#'       `list(weight="sum", name="concat", "ignore")`. See
+#'       [attribute.combination()] for details on this.
+#'     }
+#'     \item{print.edge.attributes}{
+#'       Logical constant, whether to print edge
+#'       attributes when printing graphs. Defaults to `FALSE`.
+#'     }
+#'     \item{print.full}{
+#'       Logical scalar, whether [print.igraph()]
+#'       should show the graph structure as well, or only a summary of the
+#'       graph.
+#'     }
+#'     \item{print.graph.attributes}{
+#'       Logical constant, whether to print
+#'       graph attributes when printing graphs. Defaults to `FALSE`.
+#'     }
+#'     \item{print.vertex.attributes}{
+#'       Logical constant, whether to print
+#'       vertex attributes when printing graphs. Defaults to `FALSE`.
+#'     }
+#'     \item{return.vs.es}{
+#'       Whether functions that return a set or sequence
+#'       of vertices/edges should return formal vertex/edge sequence
+#'       objects. This option was introduced in igraph version 1.0.0 and
+#'       defaults to TRUE. If your package requires the old behavior,
+#'       you can set it to FALSE in the `.onLoad` function of
+#'       your package, without affecting other packages.
+#'     }
+#'     \item{sparsematrices}{
+#'       Whether to use the `Matrix` package for
+#'       (sparse) matrices. It is recommended, if the user works with
+#'       larger graphs.
+#'     }
+#'     \item{verbose}{
+#'       Logical constant, whether igraph functions should
+#'       talk more than minimal. E.g. if `TRUE` then some functions
+#'       will use progress bars while computing. Defaults to `FALSE`.
+#'     }
+#'     \item{vertex.attr.comb}{
+#'       Specifies what to do with the vertex
+#'       attributes if the graph is modified. The default value is
+#'       `list(name="concat", "ignore")` See
+#'       [attribute.combination()] for details on this.
+#'     }
+#'   }
 #'
 #' @aliases igraph_options igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of

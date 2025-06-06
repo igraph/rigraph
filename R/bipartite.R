@@ -215,10 +215,18 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' mapped independently.
 #'
 #' @param graph The input graph.
-#' @return A named list with two elements: \describe{\item{res}{A logical scalar,
-#'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A
-#'   possible vertex type mapping, a logical vector. If no such mapping exists,
-#'   then an empty vector.}}
+#' @return A named list with two elements:
+#'   \describe{
+#'     \item{res}{
+#'       A logical scalar,
+#'       `TRUE` if the can be bipartite, `FALSE` otherwise.
+#'     }
+#'     \item{type}{
+#'       A
+#'       possible vertex type mapping, a logical vector. If no such mapping exists,
+#'       then an empty vector.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples
