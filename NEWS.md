@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9048
+
+## Bug fixes
+
+- Added `NA` handling for matrix inputs (#917, #918, #1828).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1865).
+
+## Documentation
+
+- Ensure use of `\describe{}` if using `\item{}` in return value (#1736, #1779).
+
+- Link to replacements of deprecated functions (#1823).
+
+## Refactoring
+
+- Use `check_string()` instead of `as.character()` (#1365).
+
+
 # igraph 2.1.4.9047
 
 ## doc
