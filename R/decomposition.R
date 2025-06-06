@@ -68,16 +68,13 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 #' @return A list with three members:
 #'   \describe{
 #'     \item{chordal}{
-#'       Logical scalar, it is
-#'       `TRUE` iff the input graph is chordal.
+#'       Logical scalar, it is `TRUE` iff the input graph is chordal.
 #'     }
 #'     \item{fillin}{
-#'       If requested,
-#'       then a numeric vector giving the fill-in edges. `NULL` otherwise.
+#'       If requested, then a numeric vector giving the fill-in edges. `NULL` otherwise.
 #'     }
 #'     \item{newgraph}{
-#'       If requested, then the triangulated graph, an `igraph`
-#'       object. `NULL` otherwise.
+#'       If requested, then the triangulated graph, an `igraph` object. `NULL` otherwise.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
