@@ -11,12 +11,18 @@ max_cardinality(graph)
 ignored, as the algorithm is defined for undirected graphs.}
 }
 \value{
-A list with two components: \describe{\item{alpha}{Numeric vector. The
-1-based rank of each vertex in the graph such that the vertex with rank 1
-is visited first, the vertex with rank 2 is visited second and so on.}
-\item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
-the elements of this vector are the vertices in reverse maximum cardinality
-search order.}}
+A list with two components:
+\describe{
+\item{alpha}{
+Numeric vector. The 1-based rank of each vertex in the graph
+such that the vertex with rank 1 is visited first,
+the vertex with rank 2 is visited second and so on.
+}
+\item{alpham1}{
+Numeric vector. The inverse of \code{alpha}.
+In other words, the elements of this vector are the vertices in reverse maximum cardinality search order.
+}
+}
 }
 \description{
 Maximum cardinality search is a simple ordering a vertices that is useful in

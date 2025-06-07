@@ -50,11 +50,18 @@ vertex IDs defining the edges. There is no need to have newline characters
 between the edges, a simple space will also do. Vertex IDs contained in
 the file are assumed to start at zero.
 
-Additional arguments: \describe{ \item{n}{The number of vertices in the
+Additional arguments:
+\describe{
+\item{n}{
+The number of vertices in the
 graph. If it is smaller than or equal to the largest integer in the file,
-then it is ignored; so it is safe to set it to zero (the default).}
-\item{directed}{Logical scalar, whether to create a directed graph. The
-default value is \code{TRUE}.} }
+then it is ignored; so it is safe to set it to zero (the default).
+}
+\item{directed}{
+Logical scalar, whether to create a directed graph. The
+default value is \code{TRUE}.
+}
+}
 }
 
 \section{Pajek format}{
@@ -67,26 +74,35 @@ hierarchies, clusters and vectors are not.
 
 \section{NCOL format}{
 
-Additional arguments: \describe{
-\item{predef}{Names of the vertices in the file.
+Additional arguments:
+\describe{
+\item{predef}{
+Names of the vertices in the file.
 If \code{character(0)} (the default) is given here
 then vertex IDs will be assigned to vertex names in the order of
 their appearance in the .ncol file.
 If it is not \code{character(0)} and some unknown vertex names are found
-in the .ncol file then new vertex ids will be assigned to them. }
-\item{names}{Logical value, if \code{TRUE} (the default)
+in the .ncol file then new vertex ids will be assigned to them.
+}
+\item{names}{
+Logical value, if \code{TRUE} (the default)
 the symbolic names of the vertices will be added to the graph
-as a vertex attribute called “name”. }
-\item{weights}{Whether to add the weights of the edges to the graph
+as a vertex attribute called “name”.
+}
+\item{weights}{
+Whether to add the weights of the edges to the graph
 as an edge attribute called “weight”.
 \code{"yes"} adds the weights (even if they are not present in the file,
 in this case they are assumed to be zero).
 \code{"no"} does not add any edge attribute.
 \code{"auto"} (the default) adds the attribute if and only
-if there is at least one explicit edge weight in the input file. }
-\item{directed}{Whether to create a directed graph (default: \code{FALSE}).
+if there is at least one explicit edge weight in the input file.
+}
+\item{directed}{
+Whether to create a directed graph (default: \code{FALSE}).
 As this format was originally used only for undirected graphs
-there is no information in the file about the directedness of the graph.}
+there is no information in the file about the directedness of the graph.
+}
 }
 }
 

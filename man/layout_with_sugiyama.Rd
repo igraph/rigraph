@@ -51,9 +51,14 @@ them.}
 \value{
 A list with the components:
 \describe{
-\item{layout}{The layout, a two-column matrix, for the original graph vertices.}
-\item{layout.dummy}{The layout for the dummy vertices, a two column matrix.}
-\item{extd_graph}{The original graph, extended with dummy vertices.
+\item{layout}{
+The layout, a two-column matrix, for the original graph vertices.
+}
+\item{layout.dummy}{
+The layout for the dummy vertices, a two column matrix.
+}
+\item{extd_graph}{
+The original graph, extended with dummy vertices.
 The \sQuote{dummy} vertex attribute is set on this graph,
 it is a logical attributes, and it tells you whether the vertex is a dummy vertex.
 The \sQuote{layout} graph attribute is also set,
