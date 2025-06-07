@@ -293,18 +293,18 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @section \sQuote{bliss} method:
 #' Uses the BLISS algorithm by Junttila and Kaski, and it works for
@@ -314,10 +314,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' canonical forms are compared.
 #' Extra arguments:
 #' \describe{
-#'   \item{sh}{Character constant, the heuristics to use in the BLISS
-#'     algorithm for `graph1` and `graph2`. See the `sh` argument of
-#'     [canonical_permutation()] for possible values.}
-#' }
+#'     \item{sh}{
+#'       Character constant, the heuristics to use in the BLISS algorithm for `graph1` and `graph2`. See the `sh` argument of [canonical_permutation()] for possible values.
+#'     }
+#'   }
 #' `sh` defaults to \sQuote{fm}.
 #'
 #' @param graph1 The first graph.
@@ -417,35 +417,40 @@ is_isomorphic_to <- isomorphic
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -569,35 +574,38 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph. It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds. It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -667,35 +675,40 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' This is the LAD algorithm by Solnon, see the reference below. It has
 #' the following extra arguments:
 #' \describe{
-#'   \item{domains}{If not `NULL`, then it specifies matching
-#'     restrictions. It must be a list of `target` vertex sets, given
-#'     as numeric vertex ids or symbolic vertex names. The length of the
-#'     list must be `vcount(pattern)` and for each vertex in
-#'     `pattern` it gives the allowed matching vertices in
-#'     `target`. Defaults to `NULL`.}
-#'   \item{induced}{Logical scalar, whether to search for an induced
-#'     subgraph. It is `FALSE` by default.}
-#'   \item{time.limit}{The processor time limit for the computation, in
-#'     seconds. It defaults to `Inf`, which means no limit.}
-#' }
+#'     \item{domains}{
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
+#'     }
+#'     \item{induced}{
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
+#'     }
+#'     \item{time.limit}{
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
+#'     }
+#'   }
 #'
 #' @section \sQuote{vf2} method:
 #' This method uses the VF2 algorithm by Cordella, Foggia et al., see
 #' references below. It supports vertex and edge colors and have the
 #' following extra arguments:
 #' \describe{
-#'   \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-#'     colors of the vertices for colored graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} vertex attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments. See also examples
-#'     below.}
-#'   \item{edge.color1, edge.color2}{Optional integer vectors giving the
-#'     colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'     are not given, but the graph has a \dQuote{color} edge attribute,
-#'     then it will be used. If you want to ignore these attributes, then
-#'     supply `NULL` for both of these arguments.}
-#' }
+#'     \item{vertex.color1, vertex.color2}{
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
+#'     }
+#'     \item{edge.color1, edge.color2}{
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'     }
+#'   }
 #'
 #' @param pattern The smaller graph, it might be directed or
 #'   undirected. Undirected graphs are treated as directed graphs with
@@ -795,13 +808,25 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'
 #' The possible values for the `sh` argument are:
 #' \describe{
-#'   \item{"f"}{First non-singleton cell.}
-#'   \item{"fl"}{First largest non-singleton cell.}
-#'   \item{"fs"}{First smallest non-singleton cell.}
-#'   \item{"fm"}{First maximally non-trivially connectec non-singleton cell. }
-#'   \item{"flm"}{Largest maximally non-trivially connected non-singleton cell. }
-#'   \item{"fsm"}{Smallest maximally non-trivially connected non-singleton cell.}
-#' }
+#'     \item{"f"}{
+#'       First non-singleton cell.
+#'     }
+#'     \item{"fl"}{
+#'       First largest non-singleton cell.
+#'     }
+#'     \item{"fs"}{
+#'       First smallest non-singleton cell.
+#'     }
+#'     \item{"fm"}{
+#'       First maximally non-trivially connectec non-singleton cell.
+#'     }
+#'     \item{"flm"}{
+#'       Largest maximally non-trivially connected non-singleton cell.
+#'     }
+#'     \item{"fsm"}{
+#'       Smallest maximally non-trivially connected non-singleton cell.
+#'     }
+#'   }
 #' See the paper in references for details
 #' about these.
 #'
@@ -816,25 +841,34 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #'   for possible values.
 #' @return A list with the following members:
 #'   \describe{
-#'     \item{labeling}{The canonical
-#'       permutation which takes the input graph into canonical form. A numeric
-#'       vector, the first element is the new label of vertex 0, the second element
-#'       for vertex 1, etc.
+#'     \item{labeling}{
+#'       The canonical permutation which takes the input graph into canonical form.
+#'       A numeric vector, the first element is the new label of vertex 0, the second element for vertex 1, etc.
 #'     }
-#'     \item{info}{Some information about the BLISS
-#'       computation. A named list with the following members:
-#'       \describe{
-#'         \item{"nof_nodes"}{The number of nodes in the search tree.}
-#'         \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
-#'         \item{"nof_bad_nodes"}{Number of bad nodes.}
-#'         \item{"nof_canupdates"}{Number of canrep updates.}
-#'         \item{"max_level"}{Maximum level.}
-#'         \item{"group_size"}{The size
-#'           of the automorphism group of the input graph, as a string. The string
-#'           representation is necessary because the group size can easily exceed
-#'           values that are exactly representable in floating point.
+#'     \item{info}{
+#'       Some information about the BLISS computation. A named list with the following members:
+#'         \describe{
+#'           \item{"nof_nodes"}{
+#'             The number of nodes in the search tree.
+#'           }
+#'           \item{"nof_leaf_nodes"}{
+#'             The number of leaf nodes in the search tree.
+#'           }
+#'           \item{"nof_bad_nodes"}{
+#'             Number of bad nodes.
+#'           }
+#'           \item{"nof_canupdates"}{
+#'             Number of canrep updates.
+#'           }
+#'           \item{"max_level"}{
+#'             Maximum level.
+#'           }
+#'           \item{"group_size"}{
+#'             The size of the automorphism group of the input graph, as a string.
+#'             The string representation is necessary because the group size
+#'             can easily exceed values that are exactly representable in floating point.
+#'           }
 #'         }
-#'       }
 #'     }
 #'   }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
@@ -955,16 +989,25 @@ graph.isomorphic <- isomorphic_impl
 #'     first smallest maximally non-trivially connected non-singleton cell.
 #' @return A named list with the following members:
 #'   \describe{
-#'     \item{group_size}{The size
-#'       of the automorphism group of the input graph, as a string. This number is
-#'       exact if igraph was compiled with the GMP library, and approximate
-#'       otherwise.
+#'     \item{group_size}{
+#'       The size of the automorphism group of the input graph, as a string.
+#'       This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
 #'     }
-#'     \item{nof_nodes}{The number of nodes in the search tree.}
-#'     \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
-#'     \item{nof_bad_nodes}{Number of bad nodes.}
-#'     \item{nof_canupdates}{Number of canrep updates.}
-#'     \item{max_level}{Maximum level.}
+#'     \item{nof_nodes}{
+#'       The number of nodes in the search tree.
+#'     }
+#'     \item{nof_leaf_nodes}{
+#'       The number of leaf nodes in the search tree.
+#'     }
+#'     \item{nof_bad_nodes}{
+#'       Number of bad nodes.
+#'     }
+#'     \item{nof_canupdates}{
+#'       Number of canrep updates.
+#'     }
+#'     \item{max_level}{
+#'       Maximum level.
+#'     }
 #'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
@@ -1039,10 +1082,12 @@ count_automorphisms <- count_automorphisms_impl
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
 #'   \describe{
-#'     \item{generators}{Returns the generators themselves}
-#'     \item{info}{Additional
-#'       information about the BLISS internals. See [count_automorphisms()] for
-#'       more details.
+#'     \item{generators}{
+#'       Returns the generators themselves
+#'     }
+#'     \item{info}{
+#'       Additional information about the BLISS internals.
+#'       See [count_automorphisms()] for more details.
 #'     }
 #'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,

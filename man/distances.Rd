@@ -146,30 +146,47 @@ for each vertex, or \code{NULL}, if it was not requested.}
 
 For \code{all_shortest_paths()} a list is returned:
 \describe{
-\item{vpaths}{This is a list. Each list element
-contains the vertices of a shortest path from \code{from} to a vertex in \code{to}.
-The shortest paths to the same vertex are collected
-into consecutive elements of the list.}
-\item{epaths}{This is a list similar to vpaths,
-but the vectors of the list contain the edge ids along the shortest paths,
-instead of the vertex ids.}
-\item{nrgeo}{A vector in which each element is the number of shortest paths
-(geodesics) from \code{from} to the corresponding vertex in \code{to}.}
-\item{res}{Deprecated}
+\item{vpaths}{
+This is a list.
+Each list element contains the vertices of a shortest path from \code{from} to a vertex in \code{to}.
+The shortest paths to the same vertex are collected into consecutive elements of the list.
+}
+\item{epaths}{
+This is a list similar to vpaths, but the vectors of the list
+contain the edge ids along the shortest paths, instead of the vertex ids.
+}
+\item{nrgeo}{
+A vector in which each element is the number of shortest paths (geodesics)
+from \code{from} to the corresponding vertex in \code{to}.
+}
+\item{res}{
+Deprecated
+}
 }
 
 For \code{mean_distance()} a single number is returned if \code{details=FALSE},
-or a named list with two entries: \describe{\item{\code{res}}{the mean distance as a numeric
-scalar} \item{\code{unconnected}}{the number of unconnected vertex pairs,
-also as a numeric scalar.}}
+or a named list with two entries:
+\describe{
+\item{\code{res}}{
+the mean distance as a numeric scalar
+}
+\item{\code{unconnected}}{
+the number of unconnected vertex pairs, also as a numeric scalar.
+}
+}
 
-\code{distance_table()} returns a named list with two entries: \describe{
-\item{\code{res}}{a numeric vector, the histogram of distances} \item{\code{unconnected}}{a
-numeric scalar, the number of pairs for which the first vertex is not
-reachable from the second. In undirected and directed graphs, unorderde
-and ordered pairs are considered, respectively. Therefore the sum of the
-two entries is always \eqn{n(n-1)} for directed graphs and \eqn{n(n-1)/2}
-for undirected graphs.}}
+\code{distance_table()} returns a named list with two entries:
+\describe{
+\item{\code{res}}{
+a numeric vector, the histogram of distances
+}
+\item{\code{unconnected}}{
+a numeric scalar, the number of pairs for which the first vertex is not reachable from the second.
+In undirected and directed graphs, unorderde and ordered pairs are considered, respectively.
+Therefore the sum of the two entries is always \eqn{n(n-1)} for directed graphs
+and \eqn{n(n-1)/2} for undirected graphs.
+}
+}
 }
 \description{
 \code{distances()} calculates the length of all the shortest paths from

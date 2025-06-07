@@ -70,36 +70,70 @@ the first row will be vertex 0 in the graph, etc.
 If this argument is \code{NULL} then an unweighted graph is created and an
 element of the adjacency matrix gives the number of edges to create between
 the two corresponding vertices.  The details depend on the value of the
-\code{mode} argument: \describe{ \item{"directed"}{The graph will be
-directed and a matrix element gives the number of edges between two
-vertices.} \item{"undirected"}{This is exactly the same as \code{max},
-for convenience. Note that it is \emph{not} checked whether the matrix is
-symmetric.} \item{"max"}{An undirected graph will be created and
-\code{max(A(i,j), A(j,i))} gives the number of edges.}
-\item{"upper"}{An undirected graph will be created, only the upper
-right triangle (including the diagonal) is used for the number of edges.}
-\item{"lower"}{An undirected graph will be created, only the lower
-left triangle (including the diagonal) is used for creating the edges.}
-\item{"min"}{undirected graph will be created with \code{min(A(i,j), A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
-undirected graph will be created with \code{A(i,j)+A(j,i)} edges between
-vertex \code{i} and \code{j}.} }
+\code{mode} argument:
+\describe{
+\item{"directed"}{
+The graph will be directed and a matrix element gives
+the number of edges between two vertices.
+}
+\item{"undirected"}{
+This is exactly the same as \code{max}, for convenience.
+Note that it is \emph{not} checked whether the matrix is symmetric.
+}
+\item{"max"}{
+An undirected graph will be created and \code{max(A(i,j), A(j,i))}
+gives the number of edges.
+}
+\item{"upper"}{
+An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used for the number of edges.
+}
+\item{"lower"}{
+An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.
+}
+\item{"min"}{
+An undirected graph will be created with \code{min(A(i,j), A(j,i))} edges
+between vertex \code{i} and \code{j}.
+}
+\item{"plus"}{
+An undirected graph will be created with \code{A(i,j)+A(j,i)} edges
+between vertex \code{i} and \code{j}.
+}
+}
 
 If the \code{weighted} argument is not \code{NULL} then the elements of the
 matrix give the weights of the edges (if they are not zero).  The details
-depend on the value of the \code{mode} argument: \describe{
-\item{"directed"}{The graph will be directed and a matrix element
-gives the edge weights.} \item{"undirected"}{First we check that the
-matrix is symmetric. It is an error if not. Then only the upper triangle is
-used to create a weighted undirected graph.} \item{"max"}{An
-undirected graph will be created and \code{max(A(i,j), A(j,i))} gives the
-edge weights.} \item{"upper"}{An undirected graph will be created,
-only the upper right triangle (including the diagonal) is used (for the edge
-weights).} \item{"lower"}{An undirected graph will be created, only
-the lower left triangle (including the diagonal) is used for creating the
-edges.} \item{"min"}{An undirected graph will be created,
-\code{min(A(i,j), A(j,i))} gives the edge weights.} \item{"plus"}{An
-undirected graph will be created, \code{A(i,j)+A(j,i)} gives the edge
-weights.} }
+depend on the value of the \code{mode} argument:
+\describe{
+\item{"directed"}{
+The graph will be directed and a matrix element gives the edge weights.
+}
+\item{"undirected"}{
+First we check that the matrix is symmetric. It is an error if not.
+Then only the upper triangle is used to create a weighted undirected graph.
+}
+\item{"max"}{
+An undirected graph will be created and \code{max(A(i,j), A(j,i))}
+gives the edge weights.
+}
+\item{"upper"}{
+An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used (for the edge weights).
+}
+\item{"lower"}{
+An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.
+}
+\item{"min"}{
+An undirected graph will be created, \code{min(A(i,j), A(j,i))}
+gives the edge weights.
+}
+\item{"plus"}{
+An undirected graph will be created, \code{A(i,j)+A(j,i)}
+gives the edge weights.
+}
+}
 }
 \examples{
 

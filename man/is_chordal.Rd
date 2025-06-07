@@ -32,12 +32,15 @@ that is given..}
 \value{
 A list with three members:
 \describe{
-\item{chordal}{Logical scalar, it is
-\code{TRUE} iff the input graph is chordal.}
-\item{fillin}{If requested,
-then a numeric vector giving the fill-in edges. \code{NULL} otherwise.}
-\item{newgraph}{If requested, then the triangulated graph, an \code{igraph}
-object. \code{NULL} otherwise.}
+\item{chordal}{
+Logical scalar, it is \code{TRUE} iff the input graph is chordal.
+}
+\item{fillin}{
+If requested, then a numeric vector giving the fill-in edges. \code{NULL} otherwise.
+}
+\item{newgraph}{
+If requested, then the triangulated graph, an \code{igraph} object. \code{NULL} otherwise.
+}
 }
 }
 \description{

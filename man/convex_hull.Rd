@@ -10,9 +10,15 @@ convex_hull(data)
 \item{data}{The data points, a numeric matrix with two columns.}
 }
 \value{
-A named list with components: \describe{\item{resverts}{The indices of the
-input vertices that constritute the convex hull.} \item{rescoords}{The
-coordinates of the corners of the convex hull.}}
+A named list with components:
+\describe{
+\item{resverts}{
+The indices of the input vertices that constritute the convex hull.
+}
+\item{rescoords}{
+The coordinates of the corners of the convex hull.
+}
+}
 }
 \description{
 Calculate the convex hull of a set of points, i.e. the covering polygon that

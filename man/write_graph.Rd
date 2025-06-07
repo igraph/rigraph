@@ -45,10 +45,14 @@ additional arguments.
 are referred to by name rather than numerical ID. Edge weights may be
 optionally written. Additional parameters:
 \describe{
-\item{names}{The name of a vertex attribute to take vertex names from or
-\code{NULL} to use zero-based numerical IDs.}
-\item{weights}{The name of an edge attribute to take edge weights from or
-\code{NULL} to omit edge weights.}
+\item{names}{
+The name of a vertex attribute to take vertex names from or
+\code{NULL} to use zero-based numerical IDs.
+}
+\item{weights}{
+The name of an edge attribute to take edge weights from or
+\code{NULL} to omit edge weights.
+}
 }
 }
 

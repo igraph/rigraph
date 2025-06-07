@@ -44,50 +44,66 @@ This offers the possibility of customizing the functioning of the
 
 The currently used parameters in alphabetical order:
 \describe{
-\item{add.params}{Logical scalar, whether to add model
-parameter to the graphs that are created by the various
-graph constructors. By default it is \code{TRUE}.}
-\item{add.vertex.names}{Logical scalar, whether to add
-vertex names to node level indices, like degree, betweenness
-scores, etc. By default it is \code{TRUE}.}
-\item{annotate.plot}{Logical scalar, whether to annotate igraph
-plots with the graph's name (\code{name} graph attribute, if
-present) as \code{main}, and with the number of vertices and edges
-as \code{xlab}. Defaults to \code{FALSE}.}
-\item{dend.plot.type}{The plotting function to use when plotting
-community structure dendrograms via
-\code{\link[=plot_dendrogram]{plot_dendrogram()}}}. Possible values are \sQuote{auto} (the
-default), \sQuote{phylo}, \sQuote{hclust} and
-\sQuote{dendrogram}. See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
-\item{edge.attr.comb}{Specifies what to do with the edge
-attributes if the graph is modified. The default value is
-\code{list(weight="sum", name="concat", "ignore")}. See
-\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
-\item{print.edge.attributes}{Logical constant, whether to print edge
-attributes when printing graphs. Defaults to \code{FALSE}.}
-\item{print.full}{Logical scalar, whether \code{\link[=print.igraph]{print.igraph()}}
-should show the graph structure as well, or only a summary of the
-graph.}
-\item{print.graph.attributes}{Logical constant, whether to print
-graph attributes when printing graphs. Defaults to \code{FALSE}.}
-\item{print.vertex.attributes}{Logical constant, whether to print
-vertex attributes when printing graphs. Defaults to \code{FALSE}.}
-\item{return.vs.es}{Whether functions that return a set or sequence
-of vertices/edges should return formal vertex/edge sequence
-objects. This option was introduced in igraph version 1.0.0 and
-defaults to TRUE. If your package requires the old behavior,
-you can set it to FALSE in the \code{.onLoad} function of
-your package, without affecting other packages.}
-\item{sparsematrices}{Whether to use the \code{Matrix} package for
-(sparse) matrices. It is recommended, if the user works with
-larger graphs.}
-\item{verbose}{Logical constant, whether igraph functions should
-talk more than minimal. E.g. if \code{TRUE} then some functions
-will use progress bars while computing. Defaults to \code{FALSE}.}
-\item{vertex.attr.comb}{Specifies what to do with the vertex
-attributes if the graph is modified. The default value is
-\code{list(name="concat", "ignore")} See
-\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
+\item{add.params}{
+Logical scalar, whether to add model parameter to the graphs
+that are created by the various graph constructors.
+By default it is \code{TRUE}.
+}
+\item{add.vertex.names}{
+Logical scalar, whether to add vertex names to node level indices,
+like degree, betweenness scores, etc.
+By default it is \code{TRUE}.
+}
+\item{annotate.plot}{
+Logical scalar, whether to annotate igraph plots
+with the graph's name (\code{name} graph attribute, if present) as \code{main},
+and with the number of vertices and edges as \code{xlab}.
+Defaults to \code{FALSE}.
+}
+\item{dend.plot.type}{
+The plotting function to use when plotting community structure dendrograms via \code{\link[=plot_dendrogram]{plot_dendrogram()}}.
+Possible values are \sQuote{auto} (the default), \sQuote{phylo}, \sQuote{hclust} and \sQuote{dendrogram}.
+See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
+}
+\item{edge.attr.comb}{
+Specifies what to do with the edge attributes if the graph is modified.
+The default value is \code{list(weight="sum", name="concat", "ignore")}.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+}
+\item{print.edge.attributes}{
+Logical constant, whether to print edge attributes when printing graphs.
+Defaults to \code{FALSE}.
+}
+\item{print.full}{
+Logical scalar, whether \code{\link[=print.igraph]{print.igraph()}} should show the graph structure as well,
+or only a summary of the graph.
+}
+\item{print.graph.attributes}{
+Logical constant, whether to print graph attributes when printing graphs. Defaults to \code{FALSE}.
+}
+\item{print.vertex.attributes}{
+Logical constant, whether to print vertex attributes when printing graphs. Defaults to \code{FALSE}.
+}
+\item{return.vs.es}{
+Whether functions that return a set or sequence of vertices/edges
+should return formal vertex/edge sequence objects.
+This option was introduced in igraph version 1.0.0 and defaults to TRUE.
+If your package requires the old behavior, you can set it to FALSE in the \code{.onLoad} function of your package,
+without affecting other packages.
+}
+\item{sparsematrices}{
+Whether to use the \code{Matrix} package for (sparse) matrices.
+It is recommended, if the user works with larger graphs.
+}
+\item{verbose}{
+Logical constant, whether igraph functions should talk more than minimal.
+E.g. if \code{TRUE} then some functions will use progress bars while computing. Defaults to \code{FALSE}.
+}
+\item{vertex.attr.comb}{
+Specifies what to do with the vertex attributes if the graph is modified.
+The default value is \code{list(name="concat", "ignore")}.
+See \code{\link[=attribute.combination]{attribute.combination()}} for details on this.
+}
 }
 }
 \examples{

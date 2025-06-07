@@ -391,34 +391,53 @@ as_edgelist <- function(graph, names = TRUE) {
 #' `as_undirected()` does the opposite, it converts a directed graph to
 #' undirected.
 #'
-#' Conversion algorithms for `as_directed()`: \describe{
-#' \item{"arbitrary"}{The number of edges in the graph stays the same, an
-#' arbitrarily directed edge is created for each undirected edge, but the
-#' direction of the edge is deterministic (i.e. it always points the same
-#' way if you call the function multiple times).}
-#' \item{"mutual"}{Two directed edges are created for each undirected
-#' edge, one in each direction.}
-#' \item{"random"}{The number of edges in the graph stays the same, and
-#' a randomly directed edge is created for each undirected edge. You
-#' will get different results if you call the function multiple times
-#' with the same graph.}
-#' \item{"acyclic"}{The number of edges in the graph stays the same, and
-#' a directed edge is created for each undirected edge such that the
-#' resulting graph is guaranteed to be acyclic. This is achieved by ensuring
-#' that edges always point from a lower index vertex to a higher index.
-#' Note that the graph may include cycles of length 1 if the original
-#' graph contained loop edges.}
-#' }
+#' Conversion algorithms for `as_directed()`:
+#'   \describe{
+#'     \item{"arbitrary"}{
+#'       The number of edges in the graph stays the same, an
+#'       arbitrarily directed edge is created for each undirected edge, but the
+#'       direction of the edge is deterministic (i.e. it always points the same
+#'       way if you call the function multiple times).
+#'     }
+#'     \item{"mutual"}{
+#'       Two directed edges are created for each undirected
+#'       edge, one in each direction.
+#'     }
+#'     \item{"random"}{
+#'       The number of edges in the graph stays the same, and
+#'       a randomly directed edge is created for each undirected edge. You
+#'       will get different results if you call the function multiple times
+#'       with the same graph.
+#'     }
+#'     \item{"acyclic"}{
+#'       The number of edges in the graph stays the same, and
+#'       a directed edge is created for each undirected edge such that the
+#'       resulting graph is guaranteed to be acyclic. This is achieved by ensuring
+#'       that edges always point from a lower index vertex to a higher index.
+#'       Note that the graph may include cycles of length 1 if the original
+#'       graph contained loop edges.
+#'     }
+#'   }
 #'
-#' Conversion algorithms for `as_undirected()`: \describe{
-#' \item{"each"}{The number of edges remains constant, an undirected edge
-#' is created for each directed one, this version might create graphs with
-#' multiple edges.} \item{"collapse"}{One undirected edge will be created
-#' for each pair of vertices which are connected with at least one directed
-#' edge, no multiple edges will be created.} \item{"mutual"}{One
-#' undirected edge will be created for each pair of mutual edges. Non-mutual
-#' edges are ignored. This mode might create multiple edges if there are more
-#' than one mutual edge pairs between the same pair of vertices.  } }
+#' Conversion algorithms for `as_undirected()`:
+#'   \describe{
+#'     \item{"each"}{
+#'       The number of edges remains constant, an undirected edge
+#'       is created for each directed one, this version might create graphs with
+#'       multiple edges.
+#'     }
+#'     \item{"collapse"}{
+#'       One undirected edge will be created
+#'       for each pair of vertices which are connected with at least one directed
+#'       edge, no multiple edges will be created.
+#'     }
+#'     \item{"mutual"}{
+#'       One
+#'       undirected edge will be created for each pair of mutual edges. Non-mutual
+#'       edges are ignored. This mode might create multiple edges if there are more
+#'       than one mutual edge pairs between the same pair of vertices.
+#'     }
+#'   }
 #'
 #' @aliases as_directed as_undirected
 #' @param graph The graph to convert.

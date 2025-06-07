@@ -24,21 +24,29 @@ MCMC procedure is performed until convergence.}
 \code{fit_hrg()} returns an \code{igraphHRG} object. This is a list
 with the following members:
 \describe{
-\item{left}{Vector that contains the left children of the internal
-tree vertices. The first vertex is always the root vertex, so the
-first element of the vector is the left child of the root
-vertex. Internal vertices are denoted with negative numbers, starting
-from -1 and going down, i.e. the root vertex is -1. Leaf vertices
-are denoted by non-negative number, starting from zero and up.}
-\item{right}{Vector that contains the right children of the vertices,
-with the same encoding as the \code{left} vector.}
-\item{prob}{The connection probabilities attached to the internal
-vertices, the first number belongs to the root vertex (i.e. internal
-vertex -1), the second to internal vertex -2, etc.}
-\item{edges}{The number of edges in the subtree below the given
-internal vertex.}
-\item{vertices}{The number of vertices in the subtree below the
-given internal vertex, including itself.}
+\item{left}{
+Vector that contains the left children of the internal tree vertices.
+The first vertex is always the root vertex,
+so the first element of the vector is the left child of the root vertex.
+Internal vertices are denoted with negative numbers,
+starting from -1 and going down, i.e. the root vertex is -1.
+Leaf vertices are denoted by non-negative number, starting from zero and up.
+}
+\item{right}{
+Vector that contains the right children of the vertices,
+with the same encoding as the \code{left} vector.
+}
+\item{prob}{
+The connection probabilities attached to the internal vertices,
+the first number belongs to the root vertex (i.e. internal vertex -1),
+the second to internal vertex -2, etc.
+}
+\item{edges}{
+The number of edges in the subtree below the given internal vertex.
+}
+\item{vertices}{
+The number of vertices in the subtree below the given internal vertex, including itself.
+}
 }
 }
 \description{

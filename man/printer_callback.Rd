@@ -20,15 +20,22 @@ the \code{printer} package, in a form \preformatted{
 The subcommands:
 
 \describe{
-\item{\code{length}}{The length of the data to print, the number of
-items, in natural units. E.g. for a list of objects, it is the
-number of objects.}
-\item{\code{min_width}}{TODO}
-\item{\code{width}}{Width of one item, if \code{no} items will be
-printed. TODO}
-\item{\code{print}}{Argument: \code{no}. Do the actual printing,
-print \code{no} items.}
-\item{\code{done}}{TODO}
+\item{\code{length}}{
+The length of the data to print, the number of items, in natural units.
+E.g. for a list of objects, it is the number of objects.
+}
+\item{\code{min_width}}{
+TODO
+}
+\item{\code{width}}{
+Width of one item, if \code{no} items will be printed. TODO
+}
+\item{\code{print}}{
+Argument: \code{no}. Do the actual printing, print \code{no} items.
+}
+\item{\code{done}}{
+TODO
+}
 }
 }
 \seealso{

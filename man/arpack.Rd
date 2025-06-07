@@ -42,13 +42,22 @@ have a non-symmetric problem, but you're sure that the results will be real,
 then supply \code{FALSE} here.}
 }
 \value{
-A named list with the following members: \describe{\item{values}{Numeric
-vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
-eigenvectors as columns. If \code{complex=TRUE} (the default for
-non-symmetric problems), then the matrix is complex.} \item{options}{A named
-list with the supplied \code{options} and some information about the
-performed calculation, including an ARPACK exit code. See the details above.
-}}
+A named list with the following members:
+\describe{
+\item{values}{
+Numeric vector, the desired eigenvalues.
+}
+\item{vectors}{
+Numeric matrix, the desired eigenvectors as columns.
+If \code{complex=TRUE} (the default for non-symmetric problems), then the matrix is complex.
+}
+\item{options}{
+A named list with the supplied \code{options}
+and some information about the performed calculation,
+including an ARPACK exit code.
+See the details above.
+}
+}
 }
 \description{
 Interface to the ARPACK library for calculating eigenvectors of sparse
@@ -75,87 +84,181 @@ able to calculate the eigenvalues very quickly.
 
 The \code{options} argument specifies what kind of calculation to perform.
 It is a list with the following members, they correspond directly to ARPACK
-parameters. On input it has the following fields: \describe{
-\item{bmat}{Character constant, possible values: \sQuote{\code{I}}, standard
-eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and \sQuote{\code{G}},
-generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
-Currently only \sQuote{\code{I}} is supported.} \item{n}{Numeric scalar. The
-dimension of the eigenproblem. You only need to set this if you call
-\code{\link[=arpack]{arpack()}} directly. (I.e. not needed for
-\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}}, etc.)}
-\item{which}{Specify which eigenvalues/vectors to compute, character
-constant with exactly two characters.
+parameters. On input it has the following fields:
+\describe{
+\item{bmat}{
+Character constant, possible values:
+\sQuote{\code{I}}, standard eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and
+\sQuote{\code{G}}, generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
+Currently only \sQuote{\code{I}} is supported.
+}
+\item{n}{
+Numeric scalar. The dimension of the eigenproblem.
+You only need to set this if you call \code{\link[=arpack]{arpack()}} directly.
+(I.e. not needed for \code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}}, etc.)
+}
+\item{which}{
+Specify which eigenvalues/vectors to compute,
+character constant with exactly two characters.
+Possible values for symmetric input matrices:
+\describe{
+\item{"LA"}{
+Compute \code{nev} largest (algebraic) eigenvalues.
+}
+\item{"SA"}{
+Compute \code{nev} smallest (algebraic) eigenvalues.
+}
+\item{"LM"}{
+Compute \code{nev} largest (in magnitude) eigenvalues.
+}
+\item{"SM"}{
+Compute \code{nev} smallest (in magnitude) eigenvalues.
+}
+\item{"BE"}{
+Compute \code{nev} eigenvalues, half from each end of the spectrum.
+When \code{nev} is odd, compute one more from the high end than from the low end.
+}
+}
+Possible values for non-symmetric input matrices:
+\describe{
+\item{"LM"}{
+Compute \code{nev} eigenvalues of largest magnitude.
+}
+\item{"SM"}{
+Compute \code{nev} eigenvalues of smallest magnitude.
+}
+\item{"LR"}{
+Compute \code{nev} eigenvalues of largest real part.
+}
+\item{"SR"}{
+Compute \code{nev} eigenvalues of smallest real part.
+}
+\item{"LI"}{
+Compute \code{nev} eigenvalues of largest imaginary part.
+}
+\item{"SI"}{
+Compute \code{nev} eigenvalues of smallest imaginary part.
+}
+}
+This parameter is sometimes overwritten by the various functions,
+e.g. \code{\link[=page_rank]{page_rank()}} always sets \sQuote{\code{LM}}.
+}
+\item{nev}{
+Numeric scalar. The number of eigenvalues to be computed.
+}
+\item{tol}{
+Numeric scalar. Stopping criterion:
+the relative accuracy of the Ritz value is considered acceptable
+if its error is less than \code{tol} times its estimated value.
+If this is set to zero then machine precision is used.
+}
+\item{ncv}{
+Number of Lanczos vectors to be generated.
+}
+\item{ldv}{
+Numberic scalar. It should be set to zero in the current implementation.
+}
+\item{ishift}{
+Either zero or one.
+If zero then the shifts are provided by the user via reverse communication.
+If one then exact shifts with respect to the reduced tridiagonal matrix \eqn{T}.
+Please always set this to one.
+}
+\item{maxiter}{
+Maximum number of Arnoldi update iterations allowed.
+}
+\item{nb}{
+Blocksize to be used in the recurrence. Please always leave this on the default value, one.
+}
+\item{mode}{
+The type of the eigenproblem to be solved.  Possible values if the input matrix is symmetric:
+\describe{
+\item{1}{
+\eqn{Ax=\lambda x}{A*x=lambda*x}, \eqn{A} is symmetric.
+}
+\item{2}{
+\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M} is symmetric positive definite.
+}
+\item{3}{
+\eqn{Kx=\lambda Mx}{K*x=lambda*M*x}, \eqn{K} is symmetric, \eqn{M} is symmetric positive semi-definite.
+}
+\item{4}{
+\eqn{Kx=\lambda KGx}{K*x=lambda*KG*x}, \eqn{K} is symmetric positive semi-definite, \eqn{KG} is symmetric indefinite.
+}
+\item{5}{
+\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M} is symmetric positive semi-definite. (Cayley transformed mode.)
+}
+}
+Please note that only \code{mode==1} was tested and other values might not work properly.
+Possible values if the input matrix is not symmetric:
+\describe{
+\item{1}{
+\eqn{Ax=\lambda x}{A*x=lambda*x}.
+}
+\item{2}{
+\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric positive definite.
+}
+\item{3}{
+\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric semi-definite.
+}
+\item{4}{
+\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric semi-definite.
+}
+}
+Please note that only \code{mode==1} was tested and other values might not work properly.
+}
+\item{start}{
+Not used currently. Later it be used to set a starting vector.
+}
+\item{sigma}{
+Not used currently.
+}
+\item{sigmai}{
+Not use currently.
+}
+}
 
-Possible values for symmetric input matrices: \describe{
-\item{"LA"}{Compute \code{nev} largest (algebraic) eigenvalues.}
-\item{"SA"}{Compute \code{nev} smallest (algebraic)
-eigenvalues.} \item{"LM"}{Compute \code{nev} largest (in
-magnitude) eigenvalues.} \item{"SM"}{Compute \code{nev} smallest
-(in magnitude) eigenvalues.} \item{"BE"}{Compute \code{nev}
-eigenvalues, half from each end of the spectrum. When \code{nev} is odd,
-compute one more from the high end than from the low end.} }
+:
+On output the following additional fields are added:
 
-Possible values for non-symmetric input matrices: \describe{
-\item{"LM"}{Compute \code{nev} eigenvalues of largest
-magnitude.} \item{"SM"}{Compute \code{nev} eigenvalues of
-smallest magnitude.} \item{"LR"}{Compute \code{nev} eigenvalues
-of largest real part.} \item{"SR"}{Compute \code{nev}
-eigenvalues of smallest real part.} \item{"LI"}{Compute
-\code{nev} eigenvalues of largest imaginary part.}
-\item{"SI"}{Compute \code{nev} eigenvalues of smallest imaginary
-part.} }
+\describe{
+\item{info}{
+Error flag of ARPACK. Possible values:
+\describe{
+\item{0}{
+Normal exit.
+}
+\item{1}{
+Maximum number of iterations taken.
+}
+\item{3}{
+No shifts could be applied during a cycle
+of the implicitly restarted Arnoldi iteration.
+One possibility is to increase the size of \code{ncv} relative to \code{nev}.
+}
+}
+ARPACK can return more error conditions than these,
+but they are converted to regular igraph errors.
+}
+\item{iter}{
+Number of Arnoldi iterations taken.
+}
+\item{nconv}{
+Number of \dQuote{converged} Ritz values.
+This represents the number of Ritz values that satisfy the convergence critetion.
+}
+\item{numop}{
+Total number of matrix-vector multiplications.
+}
+\item{numopb}{
+Not used currently.
+}
+\item{numreo}{
+Total number of steps of re-orthogonalization.
+}
+}
 
-This parameter is sometimes overwritten by the various functions, e.g.
-\code{\link[=page_rank]{page_rank()}} always sets \sQuote{\code{LM}}.  }
-\item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
-\item{tol}{Numeric scalar. Stopping criterion: the relative accuracy of the
-Ritz value is considered acceptable if its error is less than \code{tol}
-times its estimated value. If this is set to zero then machine precision is
-used.} \item{ncv}{Number of Lanczos vectors to be generated.}
-\item{ldv}{Numberic scalar. It should be set to zero in the current
-implementation.} \item{ishift}{Either zero or one. If zero then the shifts
-are provided by the user via reverse communication. If one then exact shifts
-with respect to the reduced tridiagonal matrix \eqn{T}.  Please always set
-this to one.} \item{maxiter}{Maximum number of Arnoldi update iterations
-allowed. } \item{nb}{Blocksize to be used in the recurrence. Please always
-leave this on the default value, one.} \item{mode}{The type of the
-eigenproblem to be solved.  Possible values if the input matrix is
-symmetric: \describe{ \item{1}{\eqn{Ax=\lambda x}{A*x=lambda*x}, \eqn{A} is
-symmetric.} \item{2}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is
-symmetric, \eqn{M} is symmetric positive definite.} \item{3}{\eqn{Kx=\lambda
-Mx}{K*x=lambda*M*x}, \eqn{K} is symmetric, \eqn{M} is symmetric positive
-semi-definite.} \item{4}{\eqn{Kx=\lambda KGx}{K*x=lambda*KG*x}, \eqn{K} is
-symmetric positive semi-definite, \eqn{KG} is symmetric indefinite.}
-\item{5}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M}
-is symmetric positive semi-definite. (Cayley transformed mode.)} } Please
-note that only \code{mode==1} was tested and other values might not work
-properly.
-
-Possible values if the input matrix is not symmetric: \describe{
-\item{1}{\eqn{Ax=\lambda x}{A*x=lambda*x}.} \item{2}{\eqn{Ax=\lambda
-Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric positive definite.}
-\item{3}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric
-semi-definite.} \item{4}{\eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{M} is
-symmetric semi-definite.} } Please note that only \code{mode==1} was tested
-and other values might not work properly.  } \item{start}{Not used
-currently. Later it be used to set a starting vector.} \item{sigma}{Not used
-currently.} \item{sigmai}{Not use currently.}
-
-On output the following additional fields are added: \describe{
-\item{info}{Error flag of ARPACK. Possible values: \describe{
-\item{0}{Normal exit.} \item{1}{Maximum number of iterations taken.}
-\item{3}{No shifts could be applied during a cycle of the Implicitly
-restarted Arnoldi iteration. One possibility is to increase the size of
-\code{ncv} relative to \code{nev}.} }
-
-ARPACK can return more error conditions than these, but they are converted
-to regular igraph errors.  } \item{iter}{Number of Arnoldi iterations
-taken.} \item{nconv}{Number of \dQuote{converged} Ritz values. This
-represents the number of Ritz values that satisfy the convergence critetion.
-} \item{numop}{Total number of matrix-vector multiplications.}
-\item{numopb}{Not used currently.} \item{numreo}{Total number of steps of
-re-orthogonalization.} } } Please see the ARPACK documentation for
-additional details.
+Please see the ARPACK documentation for additional details.
 }
 \examples{
 

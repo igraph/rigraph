@@ -13,9 +13,15 @@ for undirected circles anyway.}
 \item{circle}{Logical scalar, whether to return the shortest circle itself.}
 }
 \value{
-A named list with two components: \describe{\item{girth}{Integer constant, the
-girth of the graph, or \code{Inf} if the graph is acyclic.} \item{circle}{Numeric
-vector with the vertex ids in the shortest circle.}}
+A named list with two components:
+\describe{
+\item{girth}{
+Integer constant, the girth of the graph, or \code{Inf} if the graph is acyclic.
+}
+\item{circle}{
+Numeric vector with the vertex ids in the shortest circle.
+}
+}
 }
 \description{
 The girth of a graph is the length of the shortest circle in it.
