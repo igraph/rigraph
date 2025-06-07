@@ -500,6 +500,7 @@ arpack_defaults <- function() {
 #' Interface to the ARPACK library for calculating eigenvectors of sparse
 #' matrices
 #'
+#' @details
 #' ARPACK is a library for solving large scale eigenvalue problems.  The
 #' package is designed to compute a few eigenvalues and corresponding
 #' eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}. It is most
@@ -518,6 +519,7 @@ arpack_defaults <- function() {
 #' efficiently, e.g. if the matrix is sparse, then `arpack()` is usually
 #' able to calculate the eigenvalues very quickly.
 #'
+#' @details
 #' The `options` argument specifies what kind of calculation to perform.
 #' It is a list with the following members, they correspond directly to ARPACK
 #' parameters. On input it has the following fields:
@@ -555,8 +557,7 @@ arpack_defaults <- function() {
 #'             When `nev` is odd, compute one more from the high end than from the low end.
 #'           }
 #'         }
-#'
-#'         Possible values for non-symmetric input matrices:
+#'       Possible values for non-symmetric input matrices:
 #'         \describe{
 #'           \item{"LM"}{
 #'             Compute `nev` eigenvalues of largest magnitude.
@@ -577,7 +578,6 @@ arpack_defaults <- function() {
 #'             Compute `nev` eigenvalues of smallest imaginary part.
 #'           }
 #'         }
-#'
 #'       This parameter is sometimes overwritten by the various functions,
 #'       e.g. [page_rank()] always sets \sQuote{`LM`}.
 #'     }
@@ -627,9 +627,8 @@ arpack_defaults <- function() {
 #'             \eqn{Ax=\lambda Mx}{A*x=lambda*M*x}, \eqn{A} is symmetric, \eqn{M} is symmetric positive semi-definite. (Cayley transformed mode.)
 #'           }
 #'         }
-#'         Please note that only `mode==1` was tested and other values might not work properly.
-#'
-#'         Possible values if the input matrix is not symmetric:
+#'       Please note that only `mode==1` was tested and other values might not work properly.
+#'       Possible values if the input matrix is not symmetric:
 #'         \describe{
 #'           \item{1}{
 #'             \eqn{Ax=\lambda x}{A*x=lambda*x}.
@@ -657,6 +656,7 @@ arpack_defaults <- function() {
 #'     }
 #'   }
 #'
+#' @details:
 #'   On output the following additional fields are added:
 #'
 #'   \describe{
@@ -675,7 +675,6 @@ arpack_defaults <- function() {
 #'             One possibility is to increase the size of `ncv` relative to `nev`.
 #'           }
 #'         }
-#'
 #'       ARPACK can return more error conditions than these,
 #'       but they are converted to regular igraph errors.
 #'     }
