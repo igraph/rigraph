@@ -10,20 +10,17 @@
 #'
 #' \describe{
 #'     \item{`length`}{
-#'       The length of the data to print, the number of
-#'       items, in natural units. E.g. for a list of objects, it is the
-#'       number of objects.
+#'       The length of the data to print, the number of items, in natural units.
+#'       E.g. for a list of objects, it is the number of objects.
 #'     }
 #'     \item{`min_width`}{
 #'       TODO
 #'     }
 #'     \item{`width`}{
-#'       Width of one item, if `no` items will be
-#'       printed. TODO
+#'       Width of one item, if `no` items will be printed. TODO
 #'     }
 #'     \item{`print`}{
-#'       Argument: `no`. Do the actual printing,
-#'       print `no` items.
+#'       Argument: `no`. Do the actual printing, print `no` items.
 #'     }
 #'     \item{`done`}{
 #'       TODO

@@ -267,16 +267,13 @@ sample_motifs <- function(
 #' @return A named numeric vector with three elements:
 #'   \describe{
 #'     \item{mut}{
-#'       The number of
-#'       pairs with mutual connections.
+#'       The number of pairs with mutual connections.
 #'     }
 #'     \item{asym}{
-#'       The number of pairs with
-#'       non-mutual connections.
+#'       The number of pairs with non-mutual connections.
 #'     }
 #'     \item{null}{
-#'       The number of pairs with no connection
-#'       between them.
+#'       The number of pairs with no connection between them.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -318,23 +315,19 @@ dyad_census <- function(graph) {
 #'       A,B,C, the empty graph.
 #'     }
 #'     \item{012}{
-#'       A->B, C,
-#'       the graph with a single directed edge.
+#'       A->B, C, the graph with a single directed edge.
 #'     }
 #'     \item{102}{
-#'       A<->B, C, the graph with
-#'       a mutual connection between two vertices.
+#'       A<->B, C, the graph with a mutual connection between two vertices.
 #'     }
 #'     \item{021D}{
-#'       A<-B->C, the
-#'       out-star.
+#'       A<-B->C, the out-star.
 #'     }
 #'     \item{021U}{
 #'       A->B<-C, the in-star.
 #'     }
 #'     \item{021C}{
-#'       A->B->C, directed
-#'       line.
+#'       A->B->C, directed line.
 #'     }
 #'     \item{111D}{
 #'       A<->B<-C.
@@ -343,8 +336,7 @@ dyad_census <- function(graph) {
 #'       A<->B->C.
 #'     }
 #'     \item{030T}{
-#'       A->B<-C,
-#'       A->C.
+#'       A->B<-C, A->C.
 #'     }
 #'     \item{030C}{
 #'       A<-B<-C, A->C.

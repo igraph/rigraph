@@ -24,12 +24,10 @@
 #'   list with two entries:
 #'   \describe{
 #'     \item{res}{
-#'       Logical value that indicates whether the
-#'       graph is a tree.
+#'       Logical value that indicates whether the graph is a tree.
 #'     }
 #'     \item{root}{
-#'       The root vertex of the tree; undefined if
-#'       the graph is not a tree.
+#'       The root vertex of the tree; undefined if the graph is not a tree.
 #'     }
 #'   }
 #'
@@ -77,12 +75,10 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'   list with two entries:
 #'   \describe{
 #'     \item{res}{
-#'       Logical value that indicates whether the
-#'       graph is a tree.
+#'       Logical value that indicates whether the graph is a tree.
 #'     }
 #'     \item{root}{
-#'       The root vertex of the tree; undefined if
-#'       the graph is not a tree.
+#'       The root vertex of the tree; undefined if the graph is not a tree.
 #'     }
 #'   }
 #'

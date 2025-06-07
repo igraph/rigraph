@@ -80,18 +80,20 @@
 #' value for each vertex. (Shorter vectors are recycled.)
 #'   \describe{
 #'     \item{size}{
-#'       The size of the vertex, a numeric scalar or vector, in the
-#'       latter case each vertex sizes may differ. This vertex sizes are scaled in
-#'       order have about the same size of vertices for a given value for all three
-#'       plotting commands. It does not need to be an integer number.
-#'       The default value is 15. This is big enough to place short labels on
-#'       vertices. If `size.scaling` is `TRUE`, `relative.size` is used to scale the size appropriately.
+#'       The size of the vertex, a numeric scalar or vector,
+#'       in the latter case each vertex sizes may differ.
+#'       This vertex sizes are scaled in order have about the same size of vertices
+#'       for a given value for all three plotting commands.
+#'       It does not need to be an integer number. The default value is 15.
+#'       This is big enough to place short labels on vertices.
+#'       If `size.scaling` is `TRUE`, `relative.size` is used to scale the size appropriately.
 #'     }
 #'     \item{size2}{
-#'       The \dQuote{other} size of the vertex, for some
-#'       vertex shapes. For the various rectangle shapes this gives the height of the
-#'       vertices, whereas `size` gives the width. It is ignored by shapes for
-#'       which the size can be specified with a single number.
+#'       The \dQuote{other} size of the vertex, for some vertex shapes.
+#'       For the various rectangle shapes this gives the height of the vertices,
+#'       whereas `size` gives the width.
+#'       It is ignored by shapes for which the size can be specified with a single number.
+#'
 #'       The default is 15.
 #'     }
 #'     \item{color}{
@@ -114,18 +116,14 @@
 #'       The default value is \dQuote{\code{SkyBlue2}}.
 #'     }
 #'     \item{frame.color}{
-#'       The
-#'       color of the frame of the vertices, the same formats are allowed as for the
-#'       fill color.
+#'       The color of the frame of the vertices, the same formats are allowed as for the fill color.
 #'
-#'       If you don't want vertices to have a frame, supply `NA` as the color
-#'       name.
+#'       If you don't want vertices to have a frame, supply `NA` as the color name.
 #'
 #'       By default it is \dQuote{black}.
 #'     }
 #'     \item{frame.width}{
-#'       The width of the
-#'       frame of the vertices. The default value is 1.
+#'       The width of the frame of the vertices. The default value is 1.
 #'     }
 #'     \item{shape}{
 #'       The shape of the vertex, currently \dQuote{\code{circle}},
@@ -149,10 +147,8 @@
 #'       By default vertices are drawn as circles.
 #'     }
 #'     \item{label}{
-#'       The vertex labels.
-#'       They will be converted to character. Specify `NA` to omit vertex
-#'       labels.
-#'       The default vertex labels are the vertex ids.
+#'       The vertex labels. They will be converted to character.
+#'       Specify `NA` to omit vertex labels. The default vertex labels are the vertex ids.
 #'     }
 #'     \item{label.family}{
 #'       The
@@ -181,17 +177,15 @@
 #'       The default value is \sQuote{serif}.
 #'     }
 #'     \item{label.font}{
-#'       The font within
-#'       the font family to use for the vertex labels. It is interpreted the same way
-#'       as the the `font` graphical parameter: 1 is plain text, 2 is bold face,
-#'       3 is italic, 4 is bold and italic and 5 specifies the symbol font.
+#'       The font within the font family to use for the vertex labels.
+#'       It is interpreted the same way as the the `font` graphical parameter:
+#'       1 is plain text, 2 is bold face, 3 is italic, 4 is bold and italic and 5 specifies the symbol font.
 #'
-#'       For [plot.igraph()] this parameter is simply passed to
-#'       [graphics::text()].
+#'       For [plot.igraph()] this parameter is simply passed to [graphics::text()].
 #'
-#'       For [tkplot()], if the `label.family` parameter is not the
-#'       name of a Tk font then this parameter is used to set whether the newly
-#'       created font should be italic and/or boldface. Otherwise it is ignored.
+#'       For [tkplot()], if the `label.family` parameter is not the name of a Tk font
+#'       then this parameter is used to set whether the newly created font should be italic and/or boldface.
+#'       Otherwise it is ignored.
 #'
 #'       For [rglplot()] it is ignored.
 #'
@@ -199,47 +193,42 @@
 #'     }
 #'     \item{label.cex}{
 #'       The font size for vertex labels.
-#'       It is interpreted as a multiplication factor of some device-dependent base
-#'       font size.
+#'       It is interpreted as a multiplication factor of some device-dependent base font size.
 #'
-#'       For [plot.igraph()] it is simply passed to
-#'       [graphics::text()] as argument `cex`.
+#'       For [plot.igraph()] it is simply passed to [graphics::text()] as argument `cex`.
 #'
-#'       For [tkplot()] it is multiplied by 12 and then used as the
-#'       `size` argument for [tcltk::tkfont.create()].  The base font
-#'       is thus 12 for tkplot.
+#'       For [tkplot()] it is multiplied by 12 and then used as the `size` argument for [tcltk::tkfont.create()].
+#'       The base font is thus 12 for tkplot.
 #'
 #'       For [rglplot()] it is ignored.
 #'
 #'       The default value is 1.
 #'     }
 #'     \item{label.dist}{
-#'        The distance of the label from
-#'       the center of the vertex. If it is 0 then the label is centered on the
-#'       vertex. If it is 1 then the label is displayed beside the vertex.
+#'       The distance of the label from the center of the vertex.
+#'       If it is 0 then the label is centered on the vertex.
+#'       If it is 1 then the label is displayed beside the vertex.
 #'
 #'       The default value is 0.
 #'     }
 #'     \item{label.degree}{
-#'        It defines the position of
-#'       the vertex labels, relative to the center of the vertices. It is interpreted
-#'       as an angle in radians, zero means \sQuote{to the right}, and
-#'       \sQuote{\code{pi}} means to the left, up is `-pi/2` and down is
-#'       `pi/2`.
+#'       It defines the position of the vertex labels, relative to the center of the vertices.
+#'       It is interpreted as an angle in radians,
+#'       zero means \sQuote{to the right}, and \sQuote{\code{pi}} means to the left,
+#'       up is `-pi/2` and down is `pi/2`.
 #'
 #'       The default value is `-pi/4`.
 #'     }
 #'     \item{label.color}{
-#'       The color of the
-#'       labels, see the `color` vertex parameter discussed earlier for the
-#'       possible values.
+#'       The color of the labels, see the `color` vertex parameter
+#'       discussed earlier for the possible values.
 #'
 #'       The default value is `black`.
 #'     }
 #'     \item{size.scaling}{
 #'       Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
-#'       If FALSE, `vertex.size` and `vertex.size2` are used as is. If TRUE,
-#'       `relative.size` is used to scale both appropriately with `relative.size`
+#'       If FALSE, `vertex.size` and `vertex.size2` are used as is.
+#'       If TRUE, `relative.size` is used to scale both appropriately with `relative.size`.
 #'     }
 #'     \item{relative.size}{
 #'       The relative size of the smallest and largest vertices as percentage of
@@ -256,35 +245,31 @@
 #' arguments or set by [igraph_options()]. The edge parameters:
 #' \describe{
 #'     \item{color}{
-#'       The color of the edges, see the `color` vertex
-#'       parameter for the possible values.
+#'       The color of the edges, see the `color` vertex parameter for the possible values.
 #'       By default this parameter is `darkgrey`.
 #'     }
 #'     \item{width}{
-#'       The width of
-#'       the edges.
-#'       The default value is 1.
+#'       The width of the edges. The default value is 1.
 #'     }
 #'     \item{arrow.size}{
-#'       The size of the arrows.
-#'       Currently this is a constant, so it is the same for every edge. If a vector
-#'       is submitted then only the first element is used, ie. if this is taken from
-#'       an edge attribute then only the attribute of the first edge is used for all
-#'       arrows. This will likely change in the future.
+#'       The size of the arrows. Currently this is a constant, so it is the same for every edge.
+#'       If a vector is submitted then only the first element is used,
+#'       ie. if this is taken from an edge attribute
+#'       then only the attribute of the first edge is used for all arrows.
+#'       This will likely change in the future.
 #'
 #'       The default value is 1.
 #'     }
 #'     \item{arrow.width}{
-#'       The width of the arrows.
-#'       Currently this is a constant, so it is the same for every edge. If a vector
-#'       is submitted then only the first element is used, ie. if this is taken from
-#'       an edge attribute then only the attribute of the first edge is used for all
-#'       arrows. This will likely change in the future.
+#'       The width of the arrows. Currently this is a constant, so it is the same for every edge.
+#'       If a vector is submitted then only the first element is used,
+#'       ie. if this is taken from an edge attribute
+#'       then only the attribute of the first edge is used for all arrows.
+#'       This will likely change in the future.
 #'
 #'       This argument is currently only used by [plot.igraph()].
 #'
-#'       The default value is 1, which gives the same width as before this option
-#'       appeared in igraph.
+#'       The default value is 1, which gives the same width as before this option appeared in igraph.
 #'     }
 #'     \item{lty}{
 #'       The line type for the edges. Almost the
@@ -309,83 +294,72 @@
 #'       Edge labels are omitted by default.
 #'     }
 #'     \item{label.family}{
-#'       Font family of the
-#'       edge labels. See the vertex parameter with the same name for the details.
+#'       Font family of the edge labels. See the vertex parameter with the same name for the details.
 #'     }
 #'     \item{label.font}{
-#'       The font for the edge labels. See the corresponding vertex
-#'       parameter discussed earlier for details.
+#'       The font for the edge labels. See the corresponding vertex parameter discussed earlier for details.
 #'     }
 #'     \item{label.cex}{
-#'       The font size for
-#'       the edge labels, see the corresponding vertex parameter for details.
+#'       The font size for the edge labels, see the corresponding vertex parameter for details.
 #'     }
 #'     \item{label.color}{
-#'       The color of the edge labels, see the `color` vertex
-#'       parameters on how to specify colors.
+#'       The color of the edge labels, see the `color` vertex parameters on how to specify colors.
 #'     }
 #'     \item{label.x}{
-#'       The horizontal
-#'       `NA` elements will be replaced by automatically calculated coordinates.
-#'       If `NULL`, then all edge horizontal coordinates are calculated
-#'       automatically. This parameter is only supported by `plot.igraph`.
+#'       The horizontal `NA` elements will be replaced by automatically calculated coordinates.
+#'       If `NULL`, then all edge horizontal coordinates are calculated automatically.
+#'       This parameter is only supported by `plot.igraph`.
 #'     }
 #'     \item{label.y}{
 #'       The same as `label.x`, but for vertical coordinates.
 #'     }
 #'     \item{curved}{
-#'       Specifies whether to draw curved edges, or not. This can be a
-#'       logical or a numeric vector or scalar.
+#'       Specifies whether to draw curved edges, or not. This can be a logical or a numeric vector or scalar.
 #'
-#'       First the vector is replicated to have the same length as the number of
-#'       edges in the graph. Then it is interpreted for each edge separately. A
-#'       numeric value specifies the curvature of the edge; zero curvature means
-#'       straight edges, negative values means the edge bends clockwise, positive
-#'       values the opposite. `TRUE` means curvature 0.5, `FALSE` means
-#'       curvature zero.
+#'       First the vector is replicated to have the same length as the number of edges in the graph.
+#'       Then it is interpreted for each edge separately.
+#'       A numeric value specifies the curvature of the edge;
+#'       zero curvature means straight edges, negative values means the edge bends clockwise, positive values the opposite.
+#'       `TRUE` means curvature 0.5, `FALSE` means curvature zero.
 #'
-#'       By default the vector specifying the curvature is calculated via a call to
-#'       the [curve_multiple()] function. This function makes sure that
-#'       multiple edges are curved and are all visible. This parameter is ignored for
-#'       loop edges.
+#'       By default the vector specifying the curvature
+#'       is calculated via a call to the [curve_multiple()] function.
+#'       This function makes sure that multiple edges are curved and are all visible.
+#'       This parameter is ignored for loop edges.
 #'
 #'       The default value is `FALSE`.
 #'
 #'       This parameter is currently ignored by [rglplot()].
 #'     }
 #'     \item{arrow.mode}{
-#'       This parameter can be used to specify for which edges
-#'       should arrows be drawn. If this parameter is given by the user (in either of
-#'       the three ways) then it specifies which edges will have forward, backward
-#'       arrows, or both, or no arrows at all.  As usual, this parameter can be a
-#'       vector or a scalar value.  It can be an integer or character type. If it is
-#'       integer then 0 means no arrows, 1 means backward arrows, 2 is for forward
-#'       arrows and 3 for both. If it is a character vector then \dQuote{<} and
-#'       \dQuote{<-} specify backward, \dQuote{>} and \dQuote{->} forward arrows and
-#'       \dQuote{<>} and \dQuote{<->} stands for both arrows.  All other values mean
-#'       no arrows, perhaps you should use \dQuote{-} or \dQuote{--} to specify no
-#'       arrows.
+#'       This parameter can be used to specify for which edges should arrows be drawn.
+#'       If this parameter is given by the user (in either of the three ways)
+#'       then it specifies which edges will have forward, backward arrows, or both, or no arrows at all.
+#'       As usual, this parameter can be a vector or a scalar value.
+#'       It can be an integer or character type.
+#'       If it is integer then 0 means no arrows, 1 means backward arrows, 2 is for forward arrows and 3 for both.
+#'       If it is a character vector then \dQuote{<} and \dQuote{<-} specify backward,
+#'       \dQuote{>} and \dQuote{->} forward arrows and \dQuote{<>} and \dQuote{<->} stands for both arrows.
+#'       All other values mean no arrows, perhaps you should use \dQuote{-} or \dQuote{--} to specify no arrows.
 #'
-#'       Hint: this parameter can be used as a \sQuote{cheap} solution for drawing
-#'       \dQuote{mixed} graphs: graphs in which some edges are directed some are not.
-#'       If you want do this, then please create a *directed* graph, because as
-#'       of version 0.4 the vertex pairs in the edge lists can be swapped in
-#'       undirected graphs.
+#'       Hint: this parameter can be used as a \sQuote{cheap} solution for drawing \dQuote{mixed} graphs:
+#'       graphs in which some edges are directed some are not.
+#'       If you want do this, then please create a *directed* graph,
+#'       because as of version 0.4 the vertex pairs in the edge lists can be swapped in undirected graphs.
 #'
-#'       By default, no arrows will be drawn for undirected graphs, and for directed
-#'       graphs, an arrow will be drawn for each edge, according to its direction.
+#'       By default, no arrows will be drawn for undirected graphs,
+#'       and for directed graphs, an arrow will be drawn for each edge, according to its direction.
 #'       This is not very surprising, it is the expected behavior.
 #'     }
 #'     \item{loop.angle}{
-#'       Gives the angle in radians for plotting loop edges. See
-#'       the `label.dist` vertex parameter to see how this is interpreted.
+#'       Gives the angle in radians for plotting loop edges.
+#'       See the `label.dist` vertex parameter to see how this is interpreted.
 #'
 #'       The default value is 0.
 #'     }
 #'     \item{loop.angle2}{
-#'       Gives the second angle in
-#'       radians for plotting loop edges. This is only used in 3D, `loop.angle`
-#'       is enough in 2D.
+#'       Gives the second angle in radians for plotting loop edges.
+#'       This is only used in 3D, `loop.angle` is enough in 2D.
 #'
 #'       The default value is 0.
 #'     }
@@ -394,79 +368,73 @@
 #' Other parameters:
 #'   \describe{
 #'     \item{layout}{
-#'        Either a function or a numeric
-#'       matrix. It specifies how the vertices will be placed on the plot.
+#'       Either a function or a numeric matrix.
+#'       It specifies how the vertices will be placed on the plot.
 #'
-#'       If it is a numeric matrix, then the matrix has to have one line for each
-#'       vertex, specifying its coordinates. The matrix should have at least two
-#'       columns, for the `x` and `y` coordinates, and it can also have
-#'       third column, this will be the `z` coordinate for 3D plots and it is
-#'       ignored for 2D plots.
+#'       If it is a numeric matrix, then the matrix has to have one line for each vertex,
+#'       specifying its coordinates.
+#'       The matrix should have at least two columns, for the `x` and `y` coordinates,
+#'       and it can also have third column,
+#'       this will be the `z` coordinate for 3D plots and it is ignored for 2D plots.
 #'
-#'       If a two column matrix is given for the 3D plotting function
-#'       [rglplot()] then the third column is assumed to be 1 for each
-#'       vertex.
+#'       If a two column matrix is given for the 3D plotting function [rglplot()] then the third column is assumed to be 1 for each vertex.
 #'
-#'       If `layout` is a function, this function will be called with the
-#'       `graph` as the single parameter to determine the actual coordinates.
-#'       The function should return a matrix with two or three columns. For the 2D
-#'       plots the third column is ignored.
-#'       The default value is `layout_nicely`, a smart function that chooses a
-#'       layout based on the graph.
+#'       If `layout` is a function, this function will be called with the `graph`
+#'       as the single parameter to determine the actual coordinates.
+#'       The function should return a matrix with two or three columns.
+#'       For the 2D plots the third column is ignored.
+#'       The default value is `layout_nicely`, a smart function that chooses a layout based on the graph.
 #'     }
 #'     \item{margin}{
-#'       The amount of empty space below,
-#'       over, at the left and right of the plot, it is a numeric vector of length
-#'       four. Usually values between 0 and 0.5 are meaningful, but negative values
-#'       are also possible, that will make the plot zoom in to a part of the graph.
+#'       The amount of empty space below, over, at the left and right of the plot,
+#'       it is a numeric vector of length four.
+#'       Usually values between 0 and 0.5 are meaningful, but negative values are also possible,
+#'       that will make the plot zoom in to a part of the graph.
 #'       If it is shorter than four then it is recycled.
-#'       [rglplot()] does not support this parameter, as it can zoom in and
-#'       out the graph in a more flexible way.
+#'       [rglplot()] does not support this parameter, as it can zoom in and out the graph in a more flexible way.
 #'       Its default value is 0.
 #'     }
 #'     \item{palette}{
-#'       The color palette to use for
-#'       vertex color.  The default is \code{\link{categorical_pal}}, which is a
-#'       color-blind friendly categorical palette. See its manual page for details
-#'       and other palettes. This parameters is only supported by `plot`, and
-#'       not by `tkplot` and `rglplot`.
+#'       The color palette to use for vertex color.
+#'       The default is \code{\link{categorical_pal}}, which is a color-blind friendly categorical palette.
+#'       See its manual page for details and other palettes.
+#'       This parameters is only supported by `plot`, and not by `tkplot` and `rglplot`.
 #'     }
 #'     \item{rescale}{
-#'       Logical constant,
-#'       whether to rescale the coordinates to the `[-1,1]x[-1,1](x[-1,1])` interval.
+#'       Logical constant, whether to rescale the coordinates to the `[-1,1]x[-1,1](x[-1,1])` interval.
 #'       This parameter is not implemented for `tkplot`.
 #'       Defaults to `TRUE`, the layout will be rescaled.
 #'     }
 #'     \item{asp}{
-#'       A
-#'       numeric constant, it gives the `asp` parameter for [plot()],
-#'       the aspect ratio. Supply 0 here if you don't want to give an aspect ratio.
+#'       A numeric constant, it gives the `asp` parameter for [plot()], the aspect ratio.
+#'       Supply 0 here if you don't want to give an aspect ratio.
 #'       It is ignored by `tkplot` and `rglplot`.
 #'       Defaults to 1.
 #'     }
 #'     \item{frame}{
-#'       Boolean, whether to plot a frame around the
-#'       graph. It is ignored by `tkplot` and `rglplot`.
+#'       Boolean, whether to plot a frame around the graph.
+#'       It is ignored by `tkplot` and `rglplot`.
 #'       Defaults to `FALSE`.
 #'     }
 #'     \item{main}{
 #'       Overall title for the main plot.
-#'       The default is empty if the `annotate.plot` igraph option is
-#'       `FALSE`, and the graph's `name` attribute otherwise. See the same
-#'       argument of the base `plot` function. Only supported by `plot`.
+#'       The default is empty if the `annotate.plot` igraph option is `FALSE`,
+#'       and the graph's `name` attribute otherwise.
+#'       See the same argument of the base `plot` function.
+#'       Only supported by `plot`.
 #'     }
 #'     \item{sub}{
-#'       Subtitle of the main plot, the default is empty. Only supported
-#'       by `plot`.
+#'       Subtitle of the main plot, the default is empty.
+#'       Only supported by `plot`.
 #'     }
 #'     \item{xlab}{
-#'       Title for the x axis, the default is empty if
-#'       the `annotate.plot` igraph option is `FALSE`, and the number of
-#'       vertices and edges, if it is `TRUE`. Only supported by `plot`.
+#'       Title for the x axis, the default is empty if the `annotate.plot` igraph option is `FALSE`,
+#'       and the number of vertices and edges, if it is `TRUE`.
+#'       Only supported by `plot`.
 #'     }
 #'     \item{ylab}{
-#'       Title for the y axis, the default is empty. Only supported by
-#'       `plot`.
+#'       Title for the y axis, the default is empty.
+#'       Only supported by `plot`.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1572,27 +1540,22 @@ i.default.values[["plot"]] <- i.plot.default
 #' the pie charts will look like:
 #'   \describe{
 #'     \item{pie}{
-#'       Numeric vector, gives
-#'       the sizes of the pie slices.
+#'       Numeric vector, gives the sizes of the pie slices.
 #'     }
 #'     \item{pie.color}{
-#'       A list of color vectors to
-#'       use for the pies. If it is a list of a single vector, then this is used for
-#'       all pies. It the color vector is shorter than the number of areas in a pie,
-#'       then it is recycled.
+#'       A list of color vectors to use for the pies.
+#'       If it is a list of a single vector, then this is used for all pies.
+#'       It the color vector is shorter than the number of areas in a pie, then it is recycled.
 #'     }
 #'     \item{pie.angle}{
-#'       The slope of shading lines, given as
-#'       an angle in degrees (counter-clockwise).
+#'       The slope of shading lines, given as an angle in degrees (counter-clockwise).
 #'     }
 #'     \item{pie.density}{
-#'       The density of
-#'       the shading lines, in lines per inch. Non-positive values inhibit the
-#'       drawing of shading lines.
+#'       The density of the shading lines, in lines per inch.
+#'       Non-positive values inhibit the drawing of shading lines.
 #'     }
 #'     \item{pie.lty}{
-#'       The line type of the border of the
-#'       slices.
+#'       The line type of the border of the slices.
 #'     }
 #'   }
 #'

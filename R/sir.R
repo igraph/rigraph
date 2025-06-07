@@ -78,12 +78,10 @@
 #'       The number of susceptibles in the population, over time.
 #'     }
 #'     \item{NI}{
-#'       The number of infected individuals in the population, over
-#'       time.
+#'       The number of infected individuals in the population, over time.
 #'     }
 #'     \item{NR}{
-#'       The number of recovered individuals in the population, over
-#'       time.
+#'       The number of recovered individuals in the population, over time.
 #'     }
 #'   }
 #'

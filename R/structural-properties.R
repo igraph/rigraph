@@ -797,19 +797,17 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   For `all_shortest_paths()` a list is returned:
 #'   \describe{
 #'     \item{vpaths}{
-#'       This is a list. Each list element
-#'       contains the vertices of a shortest path from `from` to a vertex in `to`.
-#'       The shortest paths to the same vertex are collected
-#'       into consecutive elements of the list.
+#'       This is a list.
+#'       Each list element contains the vertices of a shortest path from `from` to a vertex in `to`.
+#'       The shortest paths to the same vertex are collected into consecutive elements of the list.
 #'     }
 #'     \item{epaths}{
-#'       This is a list similar to vpaths,
-#'       but the vectors of the list contain the edge ids along the shortest paths,
-#'       instead of the vertex ids.
+#'       This is a list similar to vpaths, but the vectors of the list
+#'       contain the edge ids along the shortest paths, instead of the vertex ids.
 #'     }
 #'     \item{nrgeo}{
-#'       A vector in which each element is the number of shortest paths
-#'       (geodesics) from `from` to the corresponding vertex in `to`.
+#'       A vector in which each element is the number of shortest paths (geodesics)
+#'       from `from` to the corresponding vertex in `to`.
 #'     }
 #'     \item{res}{
 #'       Deprecated
@@ -820,12 +818,10 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   or a named list with two entries:
 #'   \describe{
 #'     \item{`res`}{
-#'       the mean distance as a numeric
-#'       scalar
+#'       the mean distance as a numeric scalar
 #'     }
 #'     \item{`unconnected`}{
-#'       the number of unconnected vertex pairs,
-#'       also as a numeric scalar.
+#'       the number of unconnected vertex pairs, also as a numeric scalar.
 #'     }
 #'   }
 #'
@@ -835,16 +831,10 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'       a numeric vector, the histogram of distances
 #'     }
 #'     \item{`unconnected`}{
-#'       a
-#'       numeric scalar, the number of pairs for which the first vertex is not
-#'       reachable from the second. In undirected and directed graphs, unorderde
-#'       and ordered pairs are considered, respectively. Therefore the sum of the
-#'       two entries is always \eqn{
-#'         n(n-1)
-#'       } for directed graphs and \eqn{
-#'         n(n-1)/2
-#'       }
-#'       for undirected graphs.
+#'       a numeric scalar, the number of pairs for which the first vertex is not reachable from the second.
+#'       In undirected and directed graphs, unorderde and ordered pairs are considered, respectively.
+#'       Therefore the sum of the two entries is always \eqn{n(n-1)} for directed graphs
+#'       and \eqn{n(n-1)/2} for undirected graphs.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1135,14 +1125,10 @@ all_shortest_paths <- function(graph, from,
 #' @return A named list with two components is returned:
 #' \describe{
 #'     \item{vpaths}{
-#'       The list of \eqn{
-#'         k
-#'       } shortest paths in terms of vertices
+#'       The list of \eqn{k} shortest paths in terms of vertices
 #'     }
 #'     \item{epaths}{
-#'       The list of \eqn{
-#'         k
-#'       } shortest paths in terms of edges
+#'       The list of \eqn{k} shortest paths in terms of edges
 #'     }
 #'   }
 #' @references Yen, Jin Y.:
@@ -1333,16 +1319,16 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
 #' @param type The type of the transitivity to calculate. Possible values:
 #'   \describe{
 #'     \item{"global"}{
-#'       The global transitivity of an undirected
-#'       graph. This is simply the ratio of the count of triangles and connected triples
-#'       in the graph. In directed graphs, edge directions are ignored.
+#'       The global transitivity of an undirected graph.
+#'       This is simply the ratio of the count of triangles and connected triples in the graph.
+#'       In directed graphs, edge directions are ignored.
 #'     }
 #'     \item{"local"}{
-#'       The local transitivity of an undirected graph. It is
-#'       calculated for each vertex given in the `vids` argument. The local
-#'       transitivity of a vertex is the ratio of the count of triangles connected to the
-#'       vertex and the triples centered on the vertex. In directed graphs, edge
-#'       directions are ignored.
+#'       The local transitivity of an undirected graph.
+#'       It is calculated for each vertex given in the `vids` argument.
+#'       The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
+#'       and the triples centered on the vertex.
+#'       In directed graphs, edge directions are ignored.
 #'     }
 #'     \item{"undirected"}{
 #'       This is the same as `global`.
@@ -1354,8 +1340,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) { # nocov start
 #'       This is the same as `local`.
 #'     }
 #'     \item{"barrat"}{
-#'       The weighted transitivity as defined by A.
-#'       Barrat. See details below.
+#'       The weighted transitivity as defined by A. Barrat. See details below.
 #'     }
 #'     \item{"weighted"}{
 #'       The same as `barrat`.
@@ -1997,12 +1982,10 @@ feedback_vertex_set <- feedback_vertex_set_impl
 #' @return A named list with two components:
 #'   \describe{
 #'     \item{girth}{
-#'       Integer constant, the
-#'       girth of the graph, or `Inf` if the graph is acyclic.
+#'       Integer constant, the girth of the graph, or `Inf` if the graph is acyclic.
 #'     }
 #'     \item{circle}{
-#'       Numeric
-#'       vector with the vertex ids in the shortest circle.
+#'       Numeric vector with the vertex ids in the shortest circle.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2137,11 +2120,11 @@ any_loop <- has_loop_impl
 #'     }
 #'     \item{data}{
 #'       A named numeric vector, with the following entries:
-#'       \sQuote{vid}, the vertex that was just visited, \sQuote{pred}, its
-#'       predecessor (zero if this is the first vertex), \sQuote{succ}, its successor
-#'       (zero if this is the last vertex), \sQuote{rank}, the rank of the
-#'       current vertex, \sQuote{dist}, its distance from the root of the search
-#'       tree.
+#'       \sQuote{vid}, the vertex that was just visited,
+#'       \sQuote{pred}, its predecessor (zero if this is the first vertex),
+#'       \sQuote{succ}, its successor (zero if this is the last vertex),
+#'       \sQuote{rank}, the rank of the current vertex,
+#'       \sQuote{dist}, its distance from the root of the search tree.
 #'     }
 #'     \item{extra}{
 #'       The extra argument.
@@ -2186,41 +2169,33 @@ any_loop <- has_loop_impl
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric scalar.
-#'       The root vertex that was used as the starting point of the search.
+#'       Numeric scalar. The root vertex that was used as the starting point of the search.
 #'     }
 #'     \item{neimode}{
-#'       Character scalar. The `mode` argument of the function
-#'       call. Note that for undirected graphs this is always \sQuote{all},
-#'       irrespectively of the supplied value.
+#'       Character scalar. The `mode` argument of the function call.
+#'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
 #'     \item{order}{
-#'       Numeric vector. The
-#'       vertex ids, in the order in which they were visited by the search.
+#'       Numeric vector. The vertex ids, in the order in which they were visited by the search.
 #'     }
 #'     \item{rank}{
 #'       Numeric vector. The rank for each vertex, zero for unreachable vertices.
 #'     }
 #'     \item{parent}{
-#'       Numeric
-#'       vector. The parent of each vertex, i.e. the vertex it was discovered from.
+#'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
 #'     }
 #'     \item{father}{
 #'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{pred}{
-#'       Numeric vector. The previously visited vertex for each vertex,
-#'       or 0 if there was no such vertex.
+#'       Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
 #'     }
 #'     \item{succ}{
-#'       Numeric vector. The next
-#'       vertex that was visited after the current one, or 0 if there was no such
-#'       vertex.
+#'       Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
 #'     }
 #'     \item{dist}{
-#'       Numeric vector, for each vertex its distance from the
-#'       root of the search tree. Unreachable vertices have a negative distance
-#'       as of igraph 1.6.0, this used to be `NaN`.
+#'       Numeric vector, for each vertex its distance from the root of the search tree.
+#'       Unreachable vertices have a negative distance as of igraph 1.6.0, this used to be `NaN`.
 #'     }
 #'   }
 #'
@@ -2380,12 +2355,11 @@ bfs <- function(
 #'     }
 #'     \item{data}{
 #'       A named numeric vector, with the following entries:
-#'       \sQuote{vid}, the vertex that was just visited and \sQuote{dist}, its
-#'       distance from the root of the search tree.
+#'       \sQuote{vid}, the vertex that was just visited and
+#'       \sQuote{dist}, its distance from the root of the search tree.
 #'     }
 #'     \item{extra}{
-#'       The extra
-#'       argument.
+#'       The extra argument.
 #'     }
 #'   } The callback must return FALSE to continue the search or TRUE
 #' to terminate it. See examples below on how to use the callback functions.
@@ -2421,32 +2395,26 @@ bfs <- function(
 #' @return A named list with the following entries:
 #'   \describe{
 #'     \item{root}{
-#'       Numeric scalar.
-#'       The root vertex that was used as the starting point of the search.
+#'       Numeric scalar. The root vertex that was used as the starting point of the search.
 #'     }
 #'     \item{neimode}{
-#'       Character scalar. The `mode` argument of the function
-#'       call. Note that for undirected graphs this is always \sQuote{all},
-#'       irrespectively of the supplied value.
+#'       Character scalar. The `mode` argument of the function call.
+#'       Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
 #'     }
 #'     \item{order}{
-#'       Numeric vector. The
-#'       vertex ids, in the order in which they were visited by the search.
+#'       Numeric vector. The vertex ids, in the order in which they were visited by the search.
 #'     }
 #'     \item{order.out}{
-#'       Numeric vector, the vertex ids, in the order of the
-#'       completion of their subtree.
+#'       Numeric vector, the vertex ids, in the order of the completion of their subtree.
 #'     }
 #'     \item{parent}{
-#'       Numeric vector. The parent of
-#'       each vertex, i.e. the vertex it was discovered from.
+#'       Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
 #'     }
 #'     \item{father}{
 #'       Like parent, kept for compatibility for now.
 #'     }
 #'     \item{dist}{
-#'       Numeric
-#'       vector, for each vertex its distance from the root of the search tree.
+#'       Numeric vector, for each vertex its distance from the root of the search tree.
 #'     }
 #'   }
 #'
@@ -2607,8 +2575,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   For `components()` a named list with three components:
 #'   \describe{
 #'     \item{membership}{
-#'       numeric vector giving the cluster id to which each vertex
-#'       belongs.
+#'       numeric vector giving the cluster id to which each vertex belongs.
 #'     }
 #'     \item{csize}{
 #'       numeric vector giving the sizes of the clusters.
@@ -2695,13 +2662,10 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' @return A list with two components:
 #'   \describe{
 #'     \item{tree}{
-#'       The result, an `igraph`
-#'       object, a tree or a forest.
+#'       The result, an `igraph` object, a tree or a forest.
 #'     }
 #'     \item{vertex_index}{
-#'       A numeric vector, it gives
-#'       a mapping from the vertices of the new graph to the vertices of the old
-#'       graph.
+#'       A numeric vector, it gives a mapping from the vertices of the new graph to the vertices of the old graph.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2894,18 +2858,16 @@ laplacian_matrix <- function(graph, weights = NULL,
 #'   `max_bipartite_match()` returns a list with components:
 #'   \describe{
 #'     \item{matching_size}{
-#'       The size of the matching, i.e. the number of edges
-#'       connecting the matched vertices.
+#'       The size of the matching, i.e. the number of edges connecting the matched vertices.
 #'     }
 #'     \item{matching_weight}{
-#'       The weights of the matching, if the graph was
-#'       weighted. For unweighted graphs this is the same as the size of the
-#'       matching.
+#'       The weights of the matching, if the graph was weighted.
+#'       For unweighted graphs this is the same as the size of the matching.
 #'     }
 #'     \item{matching}{
-#'       The matching itself. Numeric vertex id, or vertex
-#'       names if the graph was named. Non-matched vertices are denoted by
-#'       `NA`.
+#'       The matching itself.
+#'       Numeric vertex id, or vertex names if the graph was named.
+#'       Non-matched vertices are denoted by `NA`.
 #'     }
 #'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -3070,13 +3032,11 @@ which_mutual <- is_mutual_impl
 #' @return A list with two members:
 #'   \describe{
 #'     \item{knn}{
-#'       A numeric vector giving the
-#'       average nearest neighbor degree for all vertices in `vids`.
+#'       A numeric vector giving the average nearest neighbor degree for all vertices in `vids`.
 #'     }
 #'     \item{knnk}{
-#'       A numeric vector, its length is the maximum (total) vertex
-#'       degree in the graph. The first element is the average nearest neighbor
-#'       degree of vertices with degree one, etc.
+#'       A numeric vector, its length is the maximum (total) vertex degree in the graph.
+#'       The first element is the average nearest neighbor degree of vertices with degree one, etc.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

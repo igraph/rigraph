@@ -148,31 +148,25 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #' The clipping function has the following arguments:
 #' \describe{
 #'     \item{coords}{
-#'       A matrix with four columns, it contains the
-#'       coordinates of the vertices for the edge list supplied in the
-#'       `el` argument.
+#'       A matrix with four columns, it contains the coordinates of the vertices
+#'       for the edge list supplied in the `el` argument.
 #'     }
 #'     \item{el}{
-#'       A matrix with two columns, the edges of which some end
-#'       points will be clipped. It should have the same number of rows as
-#'       `coords`.
+#'       A matrix with two columns, the edges of which some end points will be clipped.
+#'       It should have the same number of rows as `coords`.
 #'     }
 #'     \item{params}{
-#'       This is a function object that can be called to query
-#'       vertex/edge/plot graphical parameters. The first argument of the
-#'       function is \dQuote{`vertex`}, \dQuote{`edge`} or
-#'       \dQuote{`plot`} to decide the type of the parameter, the
-#'       second is a character string giving the name of the
-#'       parameter. E.g.
-#'       \preformatted{params("vertex", "size")}
+#'       This is a function object that can be called to query vertex/edge/plot graphical parameters.
+#'       The first argument of the function is \dQuote{`vertex`}, \dQuote{`edge`} or \dQuote{`plot`}
+#'       to decide the type of the parameter,
+#'       the second is a character string giving the name of the parameter.
+#'       E.g. `params("vertex", "size")`.
 #'     }
 #'     \item{end}{
-#'       Character string, it gives which end points will be
-#'       used. Possible values are \dQuote{`both`},
-#'       \dQuote{`from`} and \dQuote{`to`}. If
-#'       \dQuote{`from`} the function is expected to clip the
-#'       first column in the `el` edge list, \dQuote{`to`}
-#'       selects the second column, \dQuote{`both`} selects both.
+#'       Character string, it gives which end points will be used.
+#'       Possible values are \dQuote{`both`}, \dQuote{`from`} and \dQuote{`to`}.
+#'       If \dQuote{`from`} the function is expected to clip the first column in the `el` edge list,
+#'       \dQuote{`to`} selects the second column, \dQuote{`both`} selects both.
 #'     }
 #'   }
 #'
@@ -185,12 +179,10 @@ add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, pa
 #' The plotting function has the following arguments:
 #' \describe{
 #'     \item{coords}{
-#'       The coordinates of the vertices, a matrix with two
-#'       columns.
+#'       The coordinates of the vertices, a matrix with two columns.
 #'     }
 #'     \item{v}{
-#'       The ids of the vertices to plot. It should match the number
-#'       of rows in the `coords` argument.
+#'       The ids of the vertices to plot. It should match the number of rows in the `coords` argument.
 #'     }
 #'     \item{params}{
 #'       The same as for the clipping function, see above.

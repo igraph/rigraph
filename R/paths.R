@@ -196,14 +196,13 @@ is_acyclic <- is_acyclic_impl
 #' @return A list with two components:
 #'   \describe{
 #'     \item{alpha}{
-#'       Numeric vector. The
-#'       1-based rank of each vertex in the graph such that the vertex with rank 1
-#'       is visited first, the vertex with rank 2 is visited second and so on.
+#'       Numeric vector. The 1-based rank of each vertex in the graph
+#'       such that the vertex with rank 1 is visited first,
+#'       the vertex with rank 2 is visited second and so on.
 #'     }
 #'     \item{alpham1}{
-#'       Numeric vector. The inverse of `alpha`. In other words,
-#'       the elements of this vector are the vertices in reverse maximum cardinality
-#'       search order.
+#'       Numeric vector. The inverse of `alpha`.
+#'       In other words, the elements of this vector are the vertices in reverse maximum cardinality search order.
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

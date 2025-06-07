@@ -445,27 +445,23 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'   \describe{
 #'     \item{`.nei`}{
 #'       takes a vertex sequence as its argument
-#'       and selects neighbors of these vertices. An optional `mode`
-#'       argument can be used to select successors (`mode="out"`), or
-#'       predecessors (`mode="in"`) in directed graphs.
+#'       and selects neighbors of these vertices.
+#'       An optional `mode` argument can be used to select successors (`mode="out"`),
+#'       or predecessors (`mode="in"`) in directed graphs.
 #'     }
 #'     \item{`.inc`}{
-#'       Takes an edge sequence as an argument, and
-#'       selects vertices that have at least one incident edge in this
-#'       edge sequence.
+#'       Takes an edge sequence as an argument,
+#'       and selects vertices that have at least one incident edge in this edge sequence.
 #'     }
 #'     \item{`.from`}{
-#'       Similar to `.inc`, but only considers the
-#'       tails of the edges.
+#'       Similar to `.inc`, but only considers the tails of the edges.
 #'     }
 #'     \item{`.to`}{
-#'       Similar to `.inc`, but only considers the
-#'       heads of the edges.
+#'       Similar to `.inc`, but only considers the heads of the edges.
 #'     }
 #'     \item{`.innei`, `.outnei`}{
-#'       `.innei(v)` is a shorthand for
-#'       `.nei(v, mode = "in")`, and `.outnei(v)` is a shorthand for
-#'       `.nei(v, mode = "out")`.
+#'       `.innei(v)` is a shorthand for `.nei(v, mode = "in")`,
+#'       and `.outnei(v)` is a shorthand for `.nei(v, mode = "out")`.
 #'     }
 #'   }
 #' Note that multiple special functions can be used together, or with
@@ -858,34 +854,25 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' only in expressions indexing edge sequences:
 #'   \describe{
 #'     \item{`.inc`}{
-#'       takes a vertex sequence, and selects
-#'       all edges that have at least one incident vertex in the vertex
-#'       sequence.
+#'       takes a vertex sequence, and selects all edges that have at least one incident vertex in the vertex sequence.
 #'     }
 #'     \item{`.from`}{
-#'       similar to `.inc()`, but only
-#'       the tails of the edges are considered.
+#'       similar to `.inc()`, but only the tails of the edges are considered.
 #'     }
 #'     \item{`.to`}{
-#'       is similar to `.inc()`, but only
-#'       the heads of the edges are considered.
+#'       is similar to `.inc()`, but only the heads of the edges are considered.
 #'     }
 #'     \item{`\%--\%`}{
-#'       a special operator that can be
-#'       used to select all edges between two sets of vertices. It ignores
-#'       the edge directions in directed graphs.
+#'       a special operator that can be used to select all edges between two sets of vertices.
+#'       It ignores the edge directions in directed graphs.
 #'     }
 #'     \item{`\%->\%`}{
-#'       similar to `\%--\%`,
-#'       but edges *from* the left hand side argument, pointing
-#'       *to* the right hand side argument, are selected, in directed
-#'       graphs.
+#'       similar to `\%--\%`, but edges *from* the left hand side argument,
+#'       pointing *to* the right hand side argument, are selected, in directed graphs.
 #'     }
 #'     \item{`\%<-\%`}{
-#'       similar to `\%--\%`,
-#'       but edges *to* the left hand side argument, pointing
-#'       *from* the right hand side argument, are selected, in directed
-#'       graphs.
+#'       similar to `\%--\%`, but edges *to* the left hand side argument,
+#'       pointing *from* the right hand side argument, are selected, in directed graphs.
 #'     }
 #'   }
 #' Note that multiple special functions can be used together, or with

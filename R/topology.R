@@ -294,19 +294,15 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the vertices for colored graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} vertex attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments. See also examples
-#'       below.
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
 #'     }
 #'     \item{edge.color1, edge.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} edge attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments.
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
 #'     }
 #'   }
 #'
@@ -319,9 +315,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' Extra arguments:
 #' \describe{
 #'     \item{sh}{
-#'       Character constant, the heuristics to use in the BLISS
-#'       algorithm for `graph1` and `graph2`. See the `sh` argument of
-#'       [canonical_permutation()] for possible values.
+#'       Character constant, the heuristics to use in the BLISS algorithm for `graph1` and `graph2`. See the `sh` argument of [canonical_permutation()] for possible values.
 #'     }
 #'   }
 #' `sh` defaults to \sQuote{fm}.
@@ -424,20 +418,19 @@ is_isomorphic_to <- isomorphic
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching
-#'       restrictions. It must be a list of `target` vertex sets, given
-#'       as numeric vertex ids or symbolic vertex names. The length of the
-#'       list must be `vcount(pattern)` and for each vertex in
-#'       `pattern` it gives the allowed matching vertices in
-#'       `target`. Defaults to `NULL`.
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
 #'     }
 #'     \item{induced}{
-#'       Logical scalar, whether to search for an induced
-#'       subgraph. It is `FALSE` by default.
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
 #'     }
 #'     \item{time.limit}{
-#'       The processor time limit for the computation, in
-#'       seconds. It defaults to `Inf`, which means no limit.
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
 #'     }
 #'   }
 #'
@@ -447,19 +440,15 @@ is_isomorphic_to <- isomorphic
 #' following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the vertices for colored graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} vertex attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments. See also examples
-#'       below.
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
 #'     }
 #'     \item{edge.color1, edge.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} edge attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments.
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
 #'     }
 #'   }
 #'
@@ -586,20 +575,17 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching
-#'       restrictions. It must be a list of `target` vertex sets, given
-#'       as numeric vertex ids or symbolic vertex names. The length of the
-#'       list must be `vcount(pattern)` and for each vertex in
-#'       `pattern` it gives the allowed matching vertices in
-#'       `target`. Defaults to `NULL`.
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
 #'     }
 #'     \item{induced}{
-#'       Logical scalar, whether to search for an induced
-#'       subgraph. It is `FALSE` by default.
+#'       Logical scalar, whether to search for an induced subgraph. It is `FALSE` by default.
 #'     }
 #'     \item{time.limit}{
-#'       The processor time limit for the computation, in
-#'       seconds. It defaults to `Inf`, which means no limit.
+#'       The processor time limit for the computation, in seconds. It defaults to `Inf`, which means no limit.
 #'     }
 #'   }
 #'
@@ -609,19 +595,15 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #' following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the vertices for colored graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} vertex attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments. See also examples
-#'       below.
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
 #'     }
 #'     \item{edge.color1, edge.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} edge attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments.
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
 #'     }
 #'   }
 #'
@@ -694,20 +676,19 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' the following extra arguments:
 #' \describe{
 #'     \item{domains}{
-#'       If not `NULL`, then it specifies matching
-#'       restrictions. It must be a list of `target` vertex sets, given
-#'       as numeric vertex ids or symbolic vertex names. The length of the
-#'       list must be `vcount(pattern)` and for each vertex in
-#'       `pattern` it gives the allowed matching vertices in
-#'       `target`. Defaults to `NULL`.
+#'       If not `NULL`, then it specifies matching restrictions.
+#'       It must be a list of `target` vertex sets, given as numeric vertex ids or symbolic vertex names.
+#'       The length of the list must be `vcount(pattern)` and for each vertex in `pattern`
+#'       it gives the allowed matching vertices in `target`.
+#'       Defaults to `NULL`.
 #'     }
 #'     \item{induced}{
-#'       Logical scalar, whether to search for an induced
-#'       subgraph. It is `FALSE` by default.
+#'       Logical scalar, whether to search for an induced subgraph.
+#'       It is `FALSE` by default.
 #'     }
 #'     \item{time.limit}{
-#'       The processor time limit for the computation, in
-#'       seconds. It defaults to `Inf`, which means no limit.
+#'       The processor time limit for the computation, in seconds.
+#'       It defaults to `Inf`, which means no limit.
 #'     }
 #'   }
 #'
@@ -717,19 +698,15 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' following extra arguments:
 #' \describe{
 #'     \item{vertex.color1, vertex.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the vertices for colored graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} vertex attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments. See also examples
-#'       below.
+#'       Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} vertex attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
+#'       See also examples below.
 #'     }
 #'     \item{edge.color1, edge.color2}{
-#'       Optional integer vectors giving the
-#'       colors of the edges for edge-colored (sub)graph isomorphism. If they
-#'       are not given, but the graph has a \dQuote{color} edge attribute,
-#'       then it will be used. If you want to ignore these attributes, then
-#'       supply `NULL` for both of these arguments.
+#'       Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+#'       If they are not given, but the graph has a \dQuote{color} edge attribute, then it will be used.
+#'       If you want to ignore these attributes, then supply `NULL` for both of these arguments.
 #'     }
 #'   }
 #'
@@ -865,49 +842,33 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @return A list with the following members:
 #'   \describe{
 #'     \item{labeling}{
-#'       The canonical
-#'       permutation which takes the input graph into canonical form. A numeric
-#'       vector, the first element is the new label of vertex 0, the second element
-#'       for vertex 1, etc.
+#'       The canonical permutation which takes the input graph into canonical form.
+#'       A numeric vector, the first element is the new label of vertex 0, the second element for vertex 1, etc.
 #'     }
 #'     \item{info}{
-#'       Some information about the BLISS
-#'       computation. A named list with the following members:
-#'       \describe{
-#'         \item{
-#'           "nof_nodes"
-#'         }{
-#'           The number of nodes in the search tree.
+#'       Some information about the BLISS computation. A named list with the following members:
+#'         \describe{
+#'           \item{"nof_nodes"}{
+#'             The number of nodes in the search tree.
+#'           }
+#'           \item{"nof_leaf_nodes"}{
+#'             The number of leaf nodes in the search tree.
+#'           }
+#'           \item{"nof_bad_nodes"}{
+#'             Number of bad nodes.
+#'           }
+#'           \item{"nof_canupdates"}{
+#'             Number of canrep updates.
+#'           }
+#'           \item{"max_level"}{
+#'             Maximum level.
+#'           }
+#'           \item{"group_size"}{
+#'             The size of the automorphism group of the input graph, as a string.
+#'             The string representation is necessary because the group size
+#'             can easily exceed values that are exactly representable in floating point.
+#'           }
 #'         }
-#'         \item{
-#'           "nof_leaf_nodes"
-#'         }{
-#'           The number of leaf nodes in the search tree.
-#'         }
-#'         \item{
-#'           "nof_bad_nodes"
-#'         }{
-#'           Number of bad nodes.
-#'         }
-#'         \item{
-#'           "nof_canupdates"
-#'         }{
-#'           Number of canrep updates.
-#'         }
-#'         \item{
-#'           "max_level"
-#'         }{
-#'           Maximum level.
-#'         }
-#'         \item{
-#'           "group_size"
-#'         }{
-#'           The size
-#'           of the automorphism group of the input graph, as a string. The string
-#'           representation is necessary because the group size can easily exceed
-#'           values that are exactly representable in floating point.
-#'         }
-#'       }
 #'     }
 #'   }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
@@ -1029,10 +990,8 @@ graph.isomorphic <- isomorphic_impl
 #' @return A named list with the following members:
 #'   \describe{
 #'     \item{group_size}{
-#'       The size
-#'       of the automorphism group of the input graph, as a string. This number is
-#'       exact if igraph was compiled with the GMP library, and approximate
-#'       otherwise.
+#'       The size of the automorphism group of the input graph, as a string.
+#'       This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
 #'     }
 #'     \item{nof_nodes}{
 #'       The number of nodes in the search tree.
@@ -1127,9 +1086,8 @@ count_automorphisms <- count_automorphisms_impl
 #'       Returns the generators themselves
 #'     }
 #'     \item{info}{
-#'       Additional
-#'       information about the BLISS internals. See [count_automorphisms()] for
-#'       more details.
+#'       Additional information about the BLISS internals.
+#'       See [count_automorphisms()] for more details.
 #'     }
 #'   }
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
