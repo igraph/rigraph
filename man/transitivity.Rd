@@ -17,20 +17,35 @@ transitivity(
 \item{graph}{The graph to analyze.}
 
 \item{type}{The type of the transitivity to calculate. Possible values:
-\describe{ \item{"global"}{The global transitivity of an undirected
-graph. This is simply the ratio of the count of triangles and connected triples
-in the graph. In directed graphs, edge directions are ignored.}
-\item{"local"}{The local transitivity of an undirected graph. It is
-calculated for each vertex given in the \code{vids} argument. The local
-transitivity of a vertex is the ratio of the count of triangles connected to the
-vertex and the triples centered on the vertex. In directed graphs, edge
-directions are ignored.}
-\item{"undirected"}{This is the same as \code{global}.}
-\item{"globalundirected"}{This is the same as \code{global}.}
-\item{"localundirected"}{This is the same as \code{local}.}
-\item{"barrat"}{The weighted transitivity as defined by A.
-Barrat. See details below.}
-\item{"weighted"}{The same as \code{barrat}.} }}
+\describe{
+\item{"global"}{
+The global transitivity of an undirected graph.
+This is simply the ratio of the count of triangles and connected triples in the graph.
+In directed graphs, edge directions are ignored.
+}
+\item{"local"}{
+The local transitivity of an undirected graph.
+It is calculated for each vertex given in the \code{vids} argument.
+The local transitivity of a vertex is the ratio of the count of triangles connected to the vertex
+and the triples centered on the vertex.
+In directed graphs, edge directions are ignored.
+}
+\item{"undirected"}{
+This is the same as \code{global}.
+}
+\item{"globalundirected"}{
+This is the same as \code{global}.
+}
+\item{"localundirected"}{
+This is the same as \code{local}.
+}
+\item{"barrat"}{
+The weighted transitivity as defined by A. Barrat. See details below.
+}
+\item{"weighted"}{
+The same as \code{barrat}.
+}
+}}
 
 \item{vids}{The vertex ids for the local transitivity will be calculated.
 This will be ignored for global transitivity types.  The default value is

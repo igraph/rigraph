@@ -299,12 +299,15 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
 #' @param ... Extra arguments are passed to [local_scan()].
 #' @return A list with entries:
 #'   \describe{
-#'   \item{stat}{The scan statistics in each time step. It is `NA`
-#'     for the initial `tau + ell` time steps.}
-#'   \item{arg_max_v}{The (numeric) vertex ids for the vertex with
-#'     the largest locality statistics, at each time step. It is `NA`
-#'     for the initial `tau + ell` time steps.}
-#'    }
+#'     \item{stat}{
+#'       The scan statistics in each time step.
+#'       It is `NA` for the initial `tau + ell` time steps.
+#'     }
+#'     \item{arg_max_v}{
+#'       The (numeric) vertex ids for the vertex with the largest locality statistics, at each time step.
+#'       It is `NA` for the initial `tau + ell` time steps.
+#'     }
+#'   }
 #'
 #' @family scan statistics
 #' @export

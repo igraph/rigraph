@@ -36,34 +36,53 @@ A new graph object.
 undirected.
 }
 \details{
-Conversion algorithms for \code{as_directed()}: \describe{
-\item{"arbitrary"}{The number of edges in the graph stays the same, an
+Conversion algorithms for \code{as_directed()}:
+\describe{
+\item{"arbitrary"}{
+The number of edges in the graph stays the same, an
 arbitrarily directed edge is created for each undirected edge, but the
 direction of the edge is deterministic (i.e. it always points the same
-way if you call the function multiple times).}
-\item{"mutual"}{Two directed edges are created for each undirected
-edge, one in each direction.}
-\item{"random"}{The number of edges in the graph stays the same, and
+way if you call the function multiple times).
+}
+\item{"mutual"}{
+Two directed edges are created for each undirected
+edge, one in each direction.
+}
+\item{"random"}{
+The number of edges in the graph stays the same, and
 a randomly directed edge is created for each undirected edge. You
 will get different results if you call the function multiple times
-with the same graph.}
-\item{"acyclic"}{The number of edges in the graph stays the same, and
+with the same graph.
+}
+\item{"acyclic"}{
+The number of edges in the graph stays the same, and
 a directed edge is created for each undirected edge such that the
 resulting graph is guaranteed to be acyclic. This is achieved by ensuring
 that edges always point from a lower index vertex to a higher index.
 Note that the graph may include cycles of length 1 if the original
-graph contained loop edges.}
+graph contained loop edges.
+}
 }
 
-Conversion algorithms for \code{as_undirected()}: \describe{
-\item{"each"}{The number of edges remains constant, an undirected edge
+Conversion algorithms for \code{as_undirected()}:
+\describe{
+\item{"each"}{
+The number of edges remains constant, an undirected edge
 is created for each directed one, this version might create graphs with
-multiple edges.} \item{"collapse"}{One undirected edge will be created
+multiple edges.
+}
+\item{"collapse"}{
+One undirected edge will be created
 for each pair of vertices which are connected with at least one directed
-edge, no multiple edges will be created.} \item{"mutual"}{One
+edge, no multiple edges will be created.
+}
+\item{"mutual"}{
+One
 undirected edge will be created for each pair of mutual edges. Non-mutual
 edges are ignored. This mode might create multiple edges if there are more
-than one mutual edge pairs between the same pair of vertices.  } }
+than one mutual edge pairs between the same pair of vertices.
+}
+}
 }
 \examples{
 

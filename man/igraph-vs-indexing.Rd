@@ -74,21 +74,27 @@ same name. Similarly, you can use \code{.data} to match attribute names only.
 \section{Special functions}{
 
 There are some special igraph functions that can be used only
-in expressions indexing vertex sequences: \describe{
-\item{\code{.nei}}{takes a vertex sequence as its argument
-and selects neighbors of these vertices. An optional \code{mode}
-argument can be used to select successors (\code{mode="out"}), or
-predecessors (\code{mode="in"}) in directed graphs.}
-\item{\code{.inc}}{Takes an edge sequence as an argument, and
-selects vertices that have at least one incident edge in this
-edge sequence.}
-\item{\code{.from}}{Similar to \code{.inc}, but only considers the
-tails of the edges.}
-\item{\code{.to}}{Similar to \code{.inc}, but only considers the
-heads of the edges.}
-\item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
-\code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
-\code{.nei(v, mode = "out")}.
+in expressions indexing vertex sequences:
+\describe{
+\item{\code{.nei}}{
+takes a vertex sequence as its argument
+and selects neighbors of these vertices.
+An optional \code{mode} argument can be used to select successors (\code{mode="out"}),
+or predecessors (\code{mode="in"}) in directed graphs.
+}
+\item{\code{.inc}}{
+Takes an edge sequence as an argument,
+and selects vertices that have at least one incident edge in this edge sequence.
+}
+\item{\code{.from}}{
+Similar to \code{.inc}, but only considers the tails of the edges.
+}
+\item{\code{.to}}{
+Similar to \code{.inc}, but only considers the heads of the edges.
+}
+\item{\code{.innei}, \code{.outnei}}{
+\code{.innei(v)} is a shorthand for \code{.nei(v, mode = "in")},
+and \code{.outnei(v)} is a shorthand for \code{.nei(v, mode = "out")}.
 }
 }
 Note that multiple special functions can be used together, or with
