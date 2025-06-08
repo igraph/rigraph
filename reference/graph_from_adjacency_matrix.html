@@ -15,7 +15,7 @@ graphs from adjacency matrices."><meta property="og:image" content="https://r.ig
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,59 +138,63 @@ the first row will be vertex 0 in the graph, etc.</p>
 element of the adjacency matrix gives the number of edges to create between
 the two corresponding vertices.  The details depend on the value of the
 <code>mode</code> argument:</p><dl><dt>"directed"</dt>
-<dd><p>The graph will be
-directed and a matrix element gives the number of edges between two
-vertices.</p></dd>
- <dt>"undirected"</dt>
-<dd><p>This is exactly the same as <code>max</code>,
-for convenience. Note that it is <em>not</em> checked whether the matrix is
-symmetric.</p></dd>
- <dt>"max"</dt>
-<dd><p>An undirected graph will be created and
-<code>max(A(i,j), A(j,i))</code> gives the number of edges.</p></dd>
+<dd><p>The graph will be directed and a matrix element gives
+the number of edges between two vertices.</p></dd>
+
+<dt>"undirected"</dt>
+<dd><p>This is exactly the same as <code>max</code>, for convenience.
+Note that it is <em>not</em> checked whether the matrix is symmetric.</p></dd>
+
+<dt>"max"</dt>
+<dd><p>An undirected graph will be created and <code>max(A(i,j), A(j,i))</code>
+gives the number of edges.</p></dd>
 
 <dt>"upper"</dt>
-<dd><p>An undirected graph will be created, only the upper
-right triangle (including the diagonal) is used for the number of edges.</p></dd>
+<dd><p>An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used for the number of edges.</p></dd>
 
 <dt>"lower"</dt>
-<dd><p>An undirected graph will be created, only the lower
-left triangle (including the diagonal) is used for creating the edges.</p></dd>
+<dd><p>An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.</p></dd>
 
 <dt>"min"</dt>
-<dd><p>undirected graph will be created with <code>min(A(i,j), A(j,i))</code> edges between vertex <code>i</code> and <code>j</code>.</p></dd>
- <dt>"plus"</dt>
-<dd><p>undirected graph will be created with <code>A(i,j)+A(j,i)</code> edges between
-vertex <code>i</code> and <code>j</code>.</p></dd>
+<dd><p>An undirected graph will be created with <code>min(A(i,j), A(j,i))</code> edges
+between vertex <code>i</code> and <code>j</code>.</p></dd>
+
+<dt>"plus"</dt>
+<dd><p>An undirected graph will be created with <code>A(i,j)+A(j,i)</code> edges
+between vertex <code>i</code> and <code>j</code>.</p></dd>
+
 
 </dl><p>If the <code>weighted</code> argument is not <code>NULL</code> then the elements of the
 matrix give the weights of the edges (if they are not zero).  The details
 depend on the value of the <code>mode</code> argument:</p><dl><dt>"directed"</dt>
-<dd><p>The graph will be directed and a matrix element
+<dd><p>The graph will be directed and a matrix element gives the edge weights.</p></dd>
+
+<dt>"undirected"</dt>
+<dd><p>First we check that the matrix is symmetric. It is an error if not.
+Then only the upper triangle is used to create a weighted undirected graph.</p></dd>
+
+<dt>"max"</dt>
+<dd><p>An undirected graph will be created and <code>max(A(i,j), A(j,i))</code>
 gives the edge weights.</p></dd>
- <dt>"undirected"</dt>
-<dd><p>First we check that the
-matrix is symmetric. It is an error if not. Then only the upper triangle is
-used to create a weighted undirected graph.</p></dd>
- <dt>"max"</dt>
-<dd><p>An
-undirected graph will be created and <code>max(A(i,j), A(j,i))</code> gives the
-edge weights.</p></dd>
- <dt>"upper"</dt>
-<dd><p>An undirected graph will be created,
-only the upper right triangle (including the diagonal) is used (for the edge
-weights).</p></dd>
- <dt>"lower"</dt>
-<dd><p>An undirected graph will be created, only
-the lower left triangle (including the diagonal) is used for creating the
-edges.</p></dd>
- <dt>"min"</dt>
-<dd><p>An undirected graph will be created,
-<code>min(A(i,j), A(j,i))</code> gives the edge weights.</p></dd>
- <dt>"plus"</dt>
-<dd><p>An
-undirected graph will be created, <code>A(i,j)+A(j,i)</code> gives the edge
-weights.</p></dd>
+
+<dt>"upper"</dt>
+<dd><p>An undirected graph will be created, only the upper right triangle
+(including the diagonal) is used (for the edge weights).</p></dd>
+
+<dt>"lower"</dt>
+<dd><p>An undirected graph will be created, only the lower left triangle
+(including the diagonal) is used for creating the edges.</p></dd>
+
+<dt>"min"</dt>
+<dd><p>An undirected graph will be created, <code>min(A(i,j), A(j,i))</code>
+gives the edge weights.</p></dd>
+
+<dt>"plus"</dt>
+<dd><p>An undirected graph will be created, <code>A(i,j)+A(j,i)</code>
+gives the edge weights.</p></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -315,7 +319,7 @@ create graphs.</p></div>
 <span class="r-in"><span>  add.rownames <span class="op">=</span> <span class="st">"code"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9f8bc2d DNW- 10 57 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 998616f DNW- 10 57 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), code (v/c), weight (e/n)</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

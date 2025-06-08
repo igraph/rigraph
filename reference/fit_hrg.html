@@ -23,7 +23,7 @@ as.hclust() provided in this package."><meta property="og:image" content="https:
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,29 +102,27 @@ MCMC procedure is performed until convergence.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>fit_hrg()</code> returns an <code>igraphHRG</code> object. This is a list
 with the following members:</p><dl><dt>left</dt>
-<dd><p>Vector that contains the left children of the internal
-tree vertices. The first vertex is always the root vertex, so the
-first element of the vector is the left child of the root
-vertex. Internal vertices are denoted with negative numbers, starting
-from -1 and going down, i.e. the root vertex is -1. Leaf vertices
-are denoted by non-negative number, starting from zero and up.</p></dd>
+<dd><p>Vector that contains the left children of the internal tree vertices.
+The first vertex is always the root vertex,
+so the first element of the vector is the left child of the root vertex.
+Internal vertices are denoted with negative numbers,
+starting from -1 and going down, i.e. the root vertex is -1.
+Leaf vertices are denoted by non-negative number, starting from zero and up.</p></dd>
 
 <dt>right</dt>
 <dd><p>Vector that contains the right children of the vertices,
 with the same encoding as the <code>left</code> vector.</p></dd>
 
 <dt>prob</dt>
-<dd><p>The connection probabilities attached to the internal
-vertices, the first number belongs to the root vertex (i.e. internal
-vertex -1), the second to internal vertex -2, etc.</p></dd>
+<dd><p>The connection probabilities attached to the internal vertices,
+the first number belongs to the root vertex (i.e. internal vertex -1),
+the second to internal vertex -2, etc.</p></dd>
 
 <dt>edges</dt>
-<dd><p>The number of edges in the subtree below the given
-internal vertex.</p></dd>
+<dd><p>The number of edges in the subtree below the given internal vertex.</p></dd>
 
 <dt>vertices</dt>
-<dd><p>The number of vertices in the subtree below the
-given internal vertex, including itself.</p></dd>
+<dd><p>The number of vertices in the subtree below the given internal vertex, including itself.</p></dd>
 
 
 </dl></div>

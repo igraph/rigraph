@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,20 +108,19 @@ to be superior on most graphs.</p>
 
 <p>This is the LAD algorithm by Solnon, see the reference below. It has
 the following extra arguments:</p><dl><dt>domains</dt>
-<dd><p>If not <code>NULL</code>, then it specifies matching
-restrictions. It must be a list of <code>target</code> vertex sets, given
-as numeric vertex ids or symbolic vertex names. The length of the
-list must be <code>vcount(pattern)</code> and for each vertex in
-<code>pattern</code> it gives the allowed matching vertices in
-<code>target</code>. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>If not <code>NULL</code>, then it specifies matching restrictions.
+It must be a list of <code>target</code> vertex sets, given as numeric vertex ids or symbolic vertex names.
+The length of the list must be <code>vcount(pattern)</code> and for each vertex in <code>pattern</code>
+it gives the allowed matching vertices in <code>target</code>.
+Defaults to <code>NULL</code>.</p></dd>
 
 <dt>induced</dt>
-<dd><p>Logical scalar, whether to search for an induced
-subgraph. It is <code>FALSE</code> by default.</p></dd>
+<dd><p>Logical scalar, whether to search for an induced subgraph.
+It is <code>FALSE</code> by default.</p></dd>
 
 <dt>time.limit</dt>
-<dd><p>The processor time limit for the computation, in
-seconds. It defaults to <code>Inf</code>, which means no limit.</p></dd>
+<dd><p>The processor time limit for the computation, in seconds.
+It defaults to <code>Inf</code>, which means no limit.</p></dd>
 
 
 </dl></div>
@@ -132,19 +131,15 @@ seconds. It defaults to <code>Inf</code>, which means no limit.</p></dd>
 <p>This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:</p><dl><dt>vertex.color1, vertex.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the vertices for colored graph isomorphism. If they
-are not given, but the graph has a “color” vertex attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments. See also examples
-below.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+If they are not given, but the graph has a “color” vertex attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.
+See also examples below.</p></dd>
 
 <dt>edge.color1, edge.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the edges for edge-colored (sub)graph isomorphism. If they
-are not given, but the graph has a “color” edge attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+If they are not given, but the graph has a “color” edge attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.</p></dd>
 
 
 </dl></div>
@@ -188,105 +183,105 @@ on Graphbased Representations in Pattern Recognition</em>, 149–159, 2001.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="subgraph_isomorphisms.html">subgraph_isomorphisms</a></span><span class="op">(</span><span class="va">pattern</span>, <span class="va">target</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 7 6 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 4 3 2 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 4 5 6 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 8 9 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 4 5 7 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 5 4 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 5 1 7 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 5 4 9 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[11]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 5 2 3 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[12]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 5 2 1 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[13]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 5 6 7 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[14]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9 6 7 5 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[15]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 9 8 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[16]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 6 7 1 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[17]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7 6 9 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[18]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 7 6 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[19]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 7 1 2 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[20]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 9 6 5 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="subgraph_isomorphisms.html">subgraph_isomorphisms</a></span><span class="op">(</span><span class="va">pattern</span>, <span class="va">target</span>, induced <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 4 3 2 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 5 2 3 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="subgraph_isomorphisms.html">subgraph_isomorphisms</a></span><span class="op">(</span><span class="va">pattern</span>, <span class="va">target</span>, domains <span class="op">=</span> <span class="va">domains</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from f448315:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/9 vertices, named, from 52dbbae:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

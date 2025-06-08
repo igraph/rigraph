@@ -15,7 +15,7 @@ another graph"><meta property="og:image" content="https://r.igraph.org/logo.png"
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,20 +97,17 @@ isomorphic to a (possibly induced) subgraph of <code>target</code>.</p>
 
 <p>This is the LAD algorithm by Solnon, see the reference below. It has
 the following extra arguments:</p><dl><dt>domains</dt>
-<dd><p>If not <code>NULL</code>, then it specifies matching
-restrictions. It must be a list of <code>target</code> vertex sets, given
-as numeric vertex ids or symbolic vertex names. The length of the
-list must be <code>vcount(pattern)</code> and for each vertex in
-<code>pattern</code> it gives the allowed matching vertices in
-<code>target</code>. Defaults to <code>NULL</code>.</p></dd>
+<dd><p>If not <code>NULL</code>, then it specifies matching restrictions.
+It must be a list of <code>target</code> vertex sets, given as numeric vertex ids or symbolic vertex names.
+The length of the list must be <code>vcount(pattern)</code> and for each vertex in <code>pattern</code>
+it gives the allowed matching vertices in <code>target</code>.
+Defaults to <code>NULL</code>.</p></dd>
 
 <dt>induced</dt>
-<dd><p>Logical scalar, whether to search for an induced
-subgraph. It is <code>FALSE</code> by default.</p></dd>
+<dd><p>Logical scalar, whether to search for an induced subgraph. It is <code>FALSE</code> by default.</p></dd>
 
 <dt>time.limit</dt>
-<dd><p>The processor time limit for the computation, in
-seconds. It defaults to <code>Inf</code>, which means no limit.</p></dd>
+<dd><p>The processor time limit for the computation, in seconds. It defaults to <code>Inf</code>, which means no limit.</p></dd>
 
 
 </dl></div>
@@ -121,19 +118,15 @@ seconds. It defaults to <code>Inf</code>, which means no limit.</p></dd>
 <p>This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:</p><dl><dt>vertex.color1, vertex.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the vertices for colored graph isomorphism. If they
-are not given, but the graph has a “color” vertex attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments. See also examples
-below.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+If they are not given, but the graph has a “color” vertex attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.
+See also examples below.</p></dd>
 
 <dt>edge.color1, edge.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the edges for edge-colored (sub)graph isomorphism. If they
-are not given, but the graph has a “color” edge attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+If they are not given, but the graph has a “color” edge attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.</p></dd>
 
 
 </dl></div>

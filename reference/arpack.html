@@ -15,7 +15,7 @@ matrices"><meta property="og:image" content="https://r.igraph.org/logo.png"></he
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,14 +110,19 @@ then supply <code>FALSE</code> here.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list with the following members:</p><dl><dt>vectors</dt>
-<dd><p>Numeric matrix, the desired
-eigenvectors as columns. If <code>complex=TRUE</code> (the default for
-non-symmetric problems), then the matrix is complex.</p></dd>
- <dt>options</dt>
-<dd><p>A named
-list with the supplied <code>options</code> and some information about the
-performed calculation, including an ARPACK exit code. See the details above.</p></dd>
+    <p>A named list with the following members:</p><dl><dt>values</dt>
+<dd><p>Numeric vector, the desired eigenvalues.</p></dd>
+
+<dt>vectors</dt>
+<dd><p>Numeric matrix, the desired eigenvectors as columns.
+If <code>complex=TRUE</code> (the default for non-symmetric problems), then the matrix is complex.</p></dd>
+
+<dt>options</dt>
+<dd><p>A named list with the supplied <code>options</code>
+and some information about the performed calculation,
+including an ARPACK exit code.
+See the details above.</p></dd>
+
 
 </dl></div>
     <div class="section level2">
@@ -140,138 +145,164 @@ able to calculate the eigenvalues very quickly.</p>
 <p>The <code>options</code> argument specifies what kind of calculation to perform.
 It is a list with the following members, they correspond directly to ARPACK
 parameters. On input it has the following fields:</p><dl><dt>bmat</dt>
-<dd><p>Character constant, possible values: ‘<code>I</code>’, standard
-eigenvalue problem, \(Ax=\lambda x\); and ‘<code>G</code>’,
-generalized eigenvalue problem, \(Ax=\lambda B x\).
+<dd><p>Character constant, possible values:
+‘<code>I</code>’, standard eigenvalue problem, \(Ax=\lambda x\); and
+‘<code>G</code>’, generalized eigenvalue problem, \(Ax=\lambda B x\).
 Currently only ‘<code>I</code>’ is supported.</p></dd>
- <dt>n</dt>
-<dd><p>Numeric scalar. The
-dimension of the eigenproblem. You only need to set this if you call
-<code>arpack()</code> directly. (I.e. not needed for
-<code><a href="eigen_centrality.html">eigen_centrality()</a></code>, <code><a href="page_rank.html">page_rank()</a></code>, etc.)</p></dd>
+
+<dt>n</dt>
+<dd><p>Numeric scalar. The dimension of the eigenproblem.
+You only need to set this if you call <code>arpack()</code> directly.
+(I.e. not needed for <code><a href="eigen_centrality.html">eigen_centrality()</a></code>, <code><a href="page_rank.html">page_rank()</a></code>, etc.)</p></dd>
 
 <dt>which</dt>
-<dd><p>Specify which eigenvalues/vectors to compute, character
-constant with exactly two characters.</p>
-<p>Possible values for symmetric input matrices:</p><dl><dt>"LA"</dt>
+<dd><p>Specify which eigenvalues/vectors to compute,
+character constant with exactly two characters.
+Possible values for symmetric input matrices:</p><dl><dt>"LA"</dt>
 <dd><p>Compute <code>nev</code> largest (algebraic) eigenvalues.</p></dd>
 
 <dt>"SA"</dt>
-<dd><p>Compute <code>nev</code> smallest (algebraic)
-eigenvalues.</p></dd>
- <dt>"LM"</dt>
-<dd><p>Compute <code>nev</code> largest (in
-magnitude) eigenvalues.</p></dd>
- <dt>"SM"</dt>
-<dd><p>Compute <code>nev</code> smallest
-(in magnitude) eigenvalues.</p></dd>
- <dt>"BE"</dt>
-<dd><p>Compute <code>nev</code>
-eigenvalues, half from each end of the spectrum. When <code>nev</code> is odd,
-compute one more from the high end than from the low end.</p></dd>
+<dd><p>Compute <code>nev</code> smallest (algebraic) eigenvalues.</p></dd>
+
+<dt>"LM"</dt>
+<dd><p>Compute <code>nev</code> largest (in magnitude) eigenvalues.</p></dd>
+
+<dt>"SM"</dt>
+<dd><p>Compute <code>nev</code> smallest (in magnitude) eigenvalues.</p></dd>
+
+<dt>"BE"</dt>
+<dd><p>Compute <code>nev</code> eigenvalues, half from each end of the spectrum.
+When <code>nev</code> is odd, compute one more from the high end than from the low end.</p></dd>
+
 
 </dl><p>Possible values for non-symmetric input matrices:</p><dl><dt>"LM"</dt>
-<dd><p>Compute <code>nev</code> eigenvalues of largest
-magnitude.</p></dd>
- <dt>"SM"</dt>
-<dd><p>Compute <code>nev</code> eigenvalues of
-smallest magnitude.</p></dd>
- <dt>"LR"</dt>
-<dd><p>Compute <code>nev</code> eigenvalues
-of largest real part.</p></dd>
- <dt>"SR"</dt>
-<dd><p>Compute <code>nev</code>
-eigenvalues of smallest real part.</p></dd>
- <dt>"LI"</dt>
-<dd><p>Compute
-<code>nev</code> eigenvalues of largest imaginary part.</p></dd>
+<dd><p>Compute <code>nev</code> eigenvalues of largest magnitude.</p></dd>
+
+<dt>"SM"</dt>
+<dd><p>Compute <code>nev</code> eigenvalues of smallest magnitude.</p></dd>
+
+<dt>"LR"</dt>
+<dd><p>Compute <code>nev</code> eigenvalues of largest real part.</p></dd>
+
+<dt>"SR"</dt>
+<dd><p>Compute <code>nev</code> eigenvalues of smallest real part.</p></dd>
+
+<dt>"LI"</dt>
+<dd><p>Compute <code>nev</code> eigenvalues of largest imaginary part.</p></dd>
 
 <dt>"SI"</dt>
-<dd><p>Compute <code>nev</code> eigenvalues of smallest imaginary
-part.</p></dd>
+<dd><p>Compute <code>nev</code> eigenvalues of smallest imaginary part.</p></dd>
 
-</dl><p>This parameter is sometimes overwritten by the various functions, e.g.
-<code><a href="page_rank.html">page_rank()</a></code> always sets ‘<code>LM</code>’.</p></dd>
+
+</dl><p>This parameter is sometimes overwritten by the various functions,
+e.g. <code><a href="page_rank.html">page_rank()</a></code> always sets ‘<code>LM</code>’.</p></dd>
 
 <dt>nev</dt>
 <dd><p>Numeric scalar. The number of eigenvalues to be computed.</p></dd>
 
 <dt>tol</dt>
-<dd><p>Numeric scalar. Stopping criterion: the relative accuracy of the
-Ritz value is considered acceptable if its error is less than <code>tol</code>
-times its estimated value. If this is set to zero then machine precision is
-used.</p></dd>
- <dt>ncv</dt>
+<dd><p>Numeric scalar. Stopping criterion:
+the relative accuracy of the Ritz value is considered acceptable
+if its error is less than <code>tol</code> times its estimated value.
+If this is set to zero then machine precision is used.</p></dd>
+
+<dt>ncv</dt>
 <dd><p>Number of Lanczos vectors to be generated.</p></dd>
 
 <dt>ldv</dt>
-<dd><p>Numberic scalar. It should be set to zero in the current
-implementation.</p></dd>
- <dt>ishift</dt>
-<dd><p>Either zero or one. If zero then the shifts
-are provided by the user via reverse communication. If one then exact shifts
-with respect to the reduced tridiagonal matrix \(T\).  Please always set
-this to one.</p></dd>
- <dt>maxiter</dt>
-<dd><p>Maximum number of Arnoldi update iterations
-allowed.</p></dd>
- <dt>nb</dt>
-<dd><p>Blocksize to be used in the recurrence. Please always
-leave this on the default value, one.</p></dd>
- <dt>mode</dt>
-<dd><p>The type of the
-eigenproblem to be solved.  Possible values if the input matrix is
-symmetric:</p><dl><dt>1</dt>
-<dd><p>\(Ax=\lambda x\), \(A\) is
-symmetric.</p></dd>
- <dt>2</dt>
-<dd><p>\(Ax=\lambda Mx\), \(A\) is
-symmetric, \(M\) is symmetric positive definite.</p></dd>
- <dt>3</dt>
-<dd><p>\(Kx=\lambda
-Mx\), \(K\) is symmetric, \(M\) is symmetric positive
-semi-definite.</p></dd>
- <dt>4</dt>
-<dd><p>\(Kx=\lambda KGx\), \(K\) is
-symmetric positive semi-definite, \(KG\) is symmetric indefinite.</p></dd>
+<dd><p>Numberic scalar. It should be set to zero in the current implementation.</p></dd>
 
-<dt>5</dt>
-<dd><p>\(Ax=\lambda Mx\), \(A\) is symmetric, \(M\)
-is symmetric positive semi-definite. (Cayley transformed mode.)</p></dd>
+<dt>ishift</dt>
+<dd><p>Either zero or one.
+If zero then the shifts are provided by the user via reverse communication.
+If one then exact shifts with respect to the reduced tridiagonal matrix \(T\).
+Please always set this to one.</p></dd>
 
-</dl><p>Please
-note that only <code>mode==1</code> was tested and other values might not work
-properly.</p>
-<p>Possible values if the input matrix is not symmetric:</p><dl><dt>1</dt>
-<dd><p>\(Ax=\lambda x\).</p></dd>
- <dt>2</dt>
-<dd><p>\(Ax=\lambda
-Mx\), \(M\) is symmetric positive definite.</p></dd>
+<dt>maxiter</dt>
+<dd><p>Maximum number of Arnoldi update iterations allowed.</p></dd>
+
+<dt>nb</dt>
+<dd><p>Blocksize to be used in the recurrence. Please always leave this on the default value, one.</p></dd>
+
+<dt>mode</dt>
+<dd><p>The type of the eigenproblem to be solved.  Possible values if the input matrix is symmetric:</p><dl><dt>1</dt>
+<dd><p>\(Ax=\lambda x\), \(A\) is symmetric.</p></dd>
+
+<dt>2</dt>
+<dd><p>\(Ax=\lambda Mx\), \(A\) is symmetric, \(M\) is symmetric positive definite.</p></dd>
 
 <dt>3</dt>
-<dd><p>\(Ax=\lambda Mx\), \(M\) is symmetric
-semi-definite.</p></dd>
- <dt>4</dt>
-<dd><p>\(Ax=\lambda Mx\), \(M\) is
-symmetric semi-definite.</p></dd>
+<dd><p>\(Kx=\lambda Mx\), \(K\) is symmetric, \(M\) is symmetric positive semi-definite.</p></dd>
 
-</dl><p>Please note that only <code>mode==1</code> was tested
-and other values might not work properly.</p></dd>
- <dt>start</dt>
-<dd><p>Not used
-currently. Later it be used to set a starting vector.</p></dd>
- <dt>sigma</dt>
-<dd><p>Not used
-currently.</p></dd>
- <dt>sigmai</dt>
+<dt>4</dt>
+<dd><p>\(Kx=\lambda KGx\), \(K\) is symmetric positive semi-definite, \(KG\) is symmetric indefinite.</p></dd>
+
+<dt>5</dt>
+<dd><p>\(Ax=\lambda Mx\), \(A\) is symmetric, \(M\) is symmetric positive semi-definite. (Cayley transformed mode.)</p></dd>
+
+
+</dl><p>Please note that only <code>mode==1</code> was tested and other values might not work properly.
+Possible values if the input matrix is not symmetric:</p><dl><dt>1</dt>
+<dd><p>\(Ax=\lambda x\).</p></dd>
+
+<dt>2</dt>
+<dd><p>\(Ax=\lambda Mx\), \(M\) is symmetric positive definite.</p></dd>
+
+<dt>3</dt>
+<dd><p>\(Ax=\lambda Mx\), \(M\) is symmetric semi-definite.</p></dd>
+
+<dt>4</dt>
+<dd><p>\(Ax=\lambda Mx\), \(M\) is symmetric semi-definite.</p></dd>
+
+
+</dl><p>Please note that only <code>mode==1</code> was tested and other values might not work properly.</p></dd>
+
+<dt>start</dt>
+<dd><p>Not used currently. Later it be used to set a starting vector.</p></dd>
+
+<dt>sigma</dt>
+<dd><p>Not used currently.</p></dd>
+
+<dt>sigmai</dt>
 <dd><p>Not use currently.</p></dd>
 
 
-On output the following additional fields are added:
+</dl><p>:
+On output the following additional fields are added:</p>
+<dl><dt>info</dt>
+<dd><p>Error flag of ARPACK. Possible values:</p><dl><dt>0</dt>
+<dd><p>Normal exit.</p></dd>
+
+<dt>1</dt>
+<dd><p>Maximum number of iterations taken.</p></dd>
+
+<dt>3</dt>
+<dd><p>No shifts could be applied during a cycle
+of the implicitly restarted Arnoldi iteration.
+One possibility is to increase the size of <code>ncv</code> relative to <code>nev</code>.</p></dd>
 
 
-</dl><p>Please see the ARPACK documentation for
-additional details.</p>
+</dl><p>ARPACK can return more error conditions than these,
+but they are converted to regular igraph errors.</p></dd>
+
+<dt>iter</dt>
+<dd><p>Number of Arnoldi iterations taken.</p></dd>
+
+<dt>nconv</dt>
+<dd><p>Number of “converged” Ritz values.
+This represents the number of Ritz values that satisfy the convergence critetion.</p></dd>
+
+<dt>numop</dt>
+<dd><p>Total number of matrix-vector multiplications.</p></dd>
+
+<dt>numopb</dt>
+<dd><p>Not used currently.</p></dd>
+
+<dt>numreo</dt>
+<dd><p>Total number of steps of re-orthogonalization.</p></dd>
+
+
+</dl><p>Please see the ARPACK documentation for additional details.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

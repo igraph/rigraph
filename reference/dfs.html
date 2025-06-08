@@ -15,7 +15,7 @@ root vertex and tries to go quickly as far from as possible."><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,30 +157,26 @@ algorithm. See details below.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A named list with the following entries:</p><dl><dt>root</dt>
-<dd><p>Numeric scalar.
-The root vertex that was used as the starting point of the search.</p></dd>
+<dd><p>Numeric scalar. The root vertex that was used as the starting point of the search.</p></dd>
 
 <dt>neimode</dt>
-<dd><p>Character scalar. The <code>mode</code> argument of the function
-call. Note that for undirected graphs this is always ‘all’,
-irrespectively of the supplied value.</p></dd>
- <dt>order</dt>
-<dd><p>Numeric vector. The
-vertex ids, in the order in which they were visited by the search.</p></dd>
+<dd><p>Character scalar. The <code>mode</code> argument of the function call.
+Note that for undirected graphs this is always ‘all’, irrespectively of the supplied value.</p></dd>
+
+<dt>order</dt>
+<dd><p>Numeric vector. The vertex ids, in the order in which they were visited by the search.</p></dd>
 
 <dt>order.out</dt>
-<dd><p>Numeric vector, the vertex ids, in the order of the
-completion of their subtree.</p></dd>
- <dt>parent</dt>
-<dd><p>Numeric vector. The parent of
-each vertex, i.e. the vertex it was discovered from.</p></dd>
+<dd><p>Numeric vector, the vertex ids, in the order of the completion of their subtree.</p></dd>
+
+<dt>parent</dt>
+<dd><p>Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.</p></dd>
 
 <dt>father</dt>
 <dd><p>Like parent, kept for compatibility for now.</p></dd>
 
 <dt>dist</dt>
-<dd><p>Numeric
-vector, for each vertex its distance from the root of the search tree.</p></dd>
+<dd><p>Numeric vector, for each vertex its distance from the root of the search tree.</p></dd>
 
 
 </dl><p>Note that <code>order</code>, <code>order.out</code>, <code>parent</code>, and <code>dist</code>
@@ -194,11 +190,12 @@ if their calculation is not requested.</p>
 
 <dt>data</dt>
 <dd><p>A named numeric vector, with the following entries:
-‘vid’, the vertex that was just visited and ‘dist’, its
-distance from the root of the search tree.</p></dd>
- <dt>extra</dt>
-<dd><p>The extra
-argument.</p></dd>
+‘vid’, the vertex that was just visited and
+‘dist’, its distance from the root of the search tree.</p></dd>
+
+<dt>extra</dt>
+<dd><p>The extra argument.</p></dd>
+
 
 </dl><p>The callback must return FALSE to continue the search or TRUE
 to terminate it. See examples below on how to use the callback functions.</p>
@@ -256,15 +253,15 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 0ab85a3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 30e3c55:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order.out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 0ab85a3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 30e3c55:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $parent</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 0ab85a3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 30e3c55:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -274,7 +271,7 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 0ab85a3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 30e3c55:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

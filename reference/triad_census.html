@@ -15,7 +15,7 @@ a graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></he
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,44 +81,52 @@ above description.</p>
 Every triple of vertices (A, B, C) are classified into the 16 possible
 states:</p><dl><dt>003</dt>
 <dd><p>A,B,C, the empty graph.</p></dd>
- <dt>012</dt>
-<dd><p>A-&gt;B, C,
-the graph with a single directed edge.</p></dd>
- <dt>102</dt>
-<dd><p>A&lt;-&gt;B, C, the graph with
-a mutual connection between two vertices.</p></dd>
- <dt>021D</dt>
-<dd><p>A&lt;-B-&gt;C, the
-out-star.</p></dd>
- <dt>021U</dt>
+
+<dt>012</dt>
+<dd><p>A-&gt;B, C, the graph with a single directed edge.</p></dd>
+
+<dt>102</dt>
+<dd><p>A&lt;-&gt;B, C, the graph with a mutual connection between two vertices.</p></dd>
+
+<dt>021D</dt>
+<dd><p>A&lt;-B-&gt;C, the out-star.</p></dd>
+
+<dt>021U</dt>
 <dd><p>A-&gt;B&lt;-C, the in-star.</p></dd>
- <dt>021C</dt>
-<dd><p>A-&gt;B-&gt;C, directed
-line.</p></dd>
- <dt>111D</dt>
+
+<dt>021C</dt>
+<dd><p>A-&gt;B-&gt;C, directed line.</p></dd>
+
+<dt>111D</dt>
 <dd><p>A&lt;-&gt;B&lt;-C.</p></dd>
- <dt>111U</dt>
+
+<dt>111U</dt>
 <dd><p>A&lt;-&gt;B-&gt;C.</p></dd>
- <dt>030T</dt>
-<dd><p>A-&gt;B&lt;-C,
-A-&gt;C.</p></dd>
- <dt>030C</dt>
+
+<dt>030T</dt>
+<dd><p>A-&gt;B&lt;-C, A-&gt;C.</p></dd>
+
+<dt>030C</dt>
 <dd><p>A&lt;-B&lt;-C, A-&gt;C.</p></dd>
- <dt>201</dt>
+
+<dt>201</dt>
 <dd><p>A&lt;-&gt;B&lt;-&gt;C.</p></dd>
 
 <dt>120D</dt>
 <dd><p>A&lt;-B-&gt;C, A&lt;-&gt;C.</p></dd>
- <dt>120U</dt>
+
+<dt>120U</dt>
 <dd><p>A-&gt;B&lt;-C, A&lt;-&gt;C.</p></dd>
 
 <dt>120C</dt>
 <dd><p>A-&gt;B-&gt;C, A&lt;-&gt;C.</p></dd>
- <dt>210</dt>
+
+<dt>210</dt>
 <dd><p>A-&gt;B&lt;-&gt;C, A&lt;-&gt;C.</p></dd>
 
 <dt>300</dt>
 <dd><p>A&lt;-&gt;B&lt;-&gt;C, A&lt;-&gt;C, the complete graph.</p></dd>
+
 
 </dl><p>This functions uses the RANDESU motif finder algorithm to find and count the
 subgraphs, see <code><a href="motifs.html">motifs()</a></code>.</p>

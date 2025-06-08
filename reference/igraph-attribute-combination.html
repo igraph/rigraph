@@ -21,7 +21,7 @@ vertex/edge attributes in these cases."><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,57 +95,51 @@ graph; and that the rest of the attributes should be ignored (=dropped).</p>
     <h2 id="predefined-combination-functions">Predefined combination functions<a class="anchor" aria-label="anchor" href="#predefined-combination-functions"></a></h2>
     <p>The following combination
 behaviors are predefined:</p><dl><dt>"ignore"</dt>
-<dd><p>The attribute is
-ignored and dropped.</p></dd>
+<dd><p>The attribute is ignored and dropped.</p></dd>
 
 <dt>"sum"</dt>
-<dd><p>The sum of the attributes is
-calculated. This does not work for character attributes and works for
-complex attributes only if they have a <code>sum</code> generic defined. (E.g. it
-works for sparse matrices from the <code>Matrix</code> package, because they have
-a <code>sum</code> method.)</p></dd>
+<dd><p>The sum of the attributes is calculated.
+This does not work for character attributes and works for complex attributes
+only if they have a <code>sum</code> generic defined.
+(E.g. it works for sparse matrices from the <code>Matrix</code> package,
+because they have a <code>sum</code> method.)</p></dd>
 
 <dt>"prod"</dt>
-<dd><p>The product of the attributes is
-calculated. This does not work for character attributes and works for
-complex attributes only if they have a <code>prod</code> function defined.</p></dd>
+<dd><p>The product of the attributes is calculated.
+This does not work for character attributes and works for complex attributes
+only if they have a <code>prod</code> function defined.</p></dd>
 
 <dt>"min"</dt>
 <dd><p>The minimum of the attributes is calculated and returned.
-For character and complex attributes the standard R <code>min</code> function is
-used.</p></dd>
+For character and complex attributes the standard R <code>min</code> function is used.</p></dd>
 
 <dt>"max"</dt>
-<dd><p>The maximum of the attributes is calculated and
-returned. For character and complex attributes the standard R <code>max</code>
-function is used.</p></dd>
+<dd><p>The maximum of the attributes is calculated and returned.
+For character and complex attributes the standard R <code>max</code> function is used.</p></dd>
 
 <dt>"random"</dt>
-<dd><p>Chooses one of the supplied
-attribute values, uniformly randomly. For character and complex attributes
-this is implemented by calling <code>sample</code>.</p></dd>
+<dd><p>Chooses one of the supplied attribute values, uniformly randomly.
+For character and complex attributes this is implemented by calling <code>sample</code>.</p></dd>
 
 <dt>"first"</dt>
-<dd><p>Always
-chooses the first attribute value. It is implemented by calling the
-<code>head</code> function.</p></dd>
+<dd><p>Always chooses the first attribute value.
+It is implemented by calling the <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> function.</p></dd>
 
 <dt>"last"</dt>
-<dd><p>Always chooses the last attribute
-value. It is implemented by calling the <code>tail</code> function.</p></dd>
+<dd><p>Always chooses the last attribute value.
+It is implemented by calling the <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> function.</p></dd>
 
 <dt>"mean"</dt>
 <dd><p>The mean of the attributes is calculated and returned.
-For character and complex attributes this simply calls the <code>mean</code>
-function.</p></dd>
+For character and complex attributes this simply calls the <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code> function.</p></dd>
 
 <dt>"median"</dt>
 <dd><p>The median of the attributes is selected.
-Calls the R <code>median</code> function for all attribute types.</p></dd>
+Calls the R <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> function for all attribute types.</p></dd>
 
 <dt>"concat"</dt>
-<dd><p>Concatenate the attributes, using the <code>c</code>
-function. This results almost always a complex attribute.</p></dd>
+<dd><p>Concatenate the attributes, using the <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> function.
+This results almost always a complex attribute.</p></dd>
 
 
 </dl></div>
@@ -191,33 +185,33 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## new attribute is the sum of the old ones</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 43c1d53 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fce1dd6 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 43c1d53:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fce1dd6:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## collect attributes into a string</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 385f794 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ec079cb D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 385f794:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ec079cb:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## concatenate them into a vector, this creates a complex</span></span></span>
 <span class="r-in"><span><span class="co">## attribute</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"concat"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 234e707 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH bbfcd6c D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/x)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 234e707:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from bbfcd6c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## both attributes are collected into strings</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 22aa093 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5e44478 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c), name (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 22aa093:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5e44478:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## harmonic average of weights, names are dropped</span></span></span>
@@ -225,9 +219,9 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">x</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"ignore"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 32baa13 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cb579e1 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 32baa13:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cb579e1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 </code></pre></div>
     </div>

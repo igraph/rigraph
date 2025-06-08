@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,16 +127,15 @@ implementation is used.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list with entries:</p><dl><dt>value</dt>
-<dd><p>When using the ARPACK
-method, the eigenvalue corresponding to the eigenvector with the PageRank scores
-is returned here. It is expected to be exactly one, and can be used to check
-that ARPACK has successfully converged to the expected eingevector. When using
-the PRPACK method, it is always set to 1.0.</p></dd>
- <dt>options</dt>
-<dd><p>Some information
-about the underlying ARPACK calculation. See <code><a href="arpack.html">arpack()</a></code> for details.
-This entry is <code>NULL</code> if not the ARPACK implementation was used.</p></dd>
+    <p>A named list with entries:</p><dl><dt>vector</dt>
+<dd><p>A numeric vector with the PageRank scores.</p></dd>
+
+<dt>value</dt>
+<dd><p>When using the ARPACK method, the eigenvalue corresponding to the eigenvector with the PageRank scores is returned here. It is expected to be exactly one, and can be used to check that ARPACK has successfully converged to the expected eingevector. When using the PRPACK method, it is always set to 1.0.</p></dd>
+
+<dt>options</dt>
+<dd><p>Some information about the underlying ARPACK calculation. See <code><a href="arpack.html">arpack()</a></code> for details. This entry is <code>NULL</code> if not the ARPACK implementation was used.</p></dd>
+
 
 </dl></div>
     <div class="section level2">

@@ -15,7 +15,7 @@ vertex shapes when plotting graphs."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,33 +118,25 @@ plots the shape if requested. These functions are called “shape
 functions” in the rest of this manual page. The first one is the
 clipping function and the second is the plotting function.</p>
 <p>The clipping function has the following arguments:</p><dl><dt>coords</dt>
-<dd><p>A matrix with four columns, it contains the
-coordinates of the vertices for the edge list supplied in the
-<code>el</code> argument.</p></dd>
+<dd><p>A matrix with four columns, it contains the coordinates of the vertices
+for the edge list supplied in the <code>el</code> argument.</p></dd>
 
 <dt>el</dt>
-<dd><p>A matrix with two columns, the edges of which some end
-points will be clipped. It should have the same number of rows as
-<code>coords</code>.</p></dd>
+<dd><p>A matrix with two columns, the edges of which some end points will be clipped.
+It should have the same number of rows as <code>coords</code>.</p></dd>
 
 <dt>params</dt>
-<dd><p>This is a function object that can be called to query
-vertex/edge/plot graphical parameters. The first argument of the
-function is “<code>vertex</code>”, “<code>edge</code>” or
-“<code>plot</code>” to decide the type of the parameter, the
-second is a character string giving the name of the
-parameter. E.g.</p><div class="sourceCode"><pre><code><span></span>
-<span>  <span class="fu">params</span><span class="op">(</span><span class="st">"vertex"</span>, <span class="st">"size"</span><span class="op">)</span></span>
-<span>    </span></code></pre></div>
-</dd>
+<dd><p>This is a function object that can be called to query vertex/edge/plot graphical parameters.
+The first argument of the function is “<code>vertex</code>”, “<code>edge</code>” or “<code>plot</code>”
+to decide the type of the parameter,
+the second is a character string giving the name of the parameter.
+E.g. <code>params("vertex", "size")</code>.</p></dd>
 
 <dt>end</dt>
-<dd><p>Character string, it gives which end points will be
-used. Possible values are “<code>both</code>”,
-“<code>from</code>” and “<code>to</code>”. If
-“<code>from</code>” the function is expected to clip the
-first column in the <code>el</code> edge list, “<code>to</code>”
-selects the second column, “<code>both</code>” selects both.</p></dd>
+<dd><p>Character string, it gives which end points will be used.
+Possible values are “<code>both</code>”, “<code>from</code>” and “<code>to</code>”.
+If “<code>from</code>” the function is expected to clip the first column in the <code>el</code> edge list,
+“<code>to</code>” selects the second column, “<code>both</code>” selects both.</p></dd>
 
 
 </dl><p>The clipping function should return a matrix
@@ -153,12 +145,10 @@ If <code>end</code> is <code>both</code> then the matrix must have four
 columns, otherwise two. The matrix contains the modified coordinates,
 with the clipping applied.</p>
 <p>The plotting function has the following arguments:</p><dl><dt>coords</dt>
-<dd><p>The coordinates of the vertices, a matrix with two
-columns.</p></dd>
+<dd><p>The coordinates of the vertices, a matrix with two columns.</p></dd>
 
 <dt>v</dt>
-<dd><p>The ids of the vertices to plot. It should match the number
-of rows in the <code>coords</code> argument.</p></dd>
+<dd><p>The ids of the vertices to plot. It should match the number of rows in the <code>coords</code> argument.</p></dd>
 
 <dt>params</dt>
 <dd><p>The same as for the clipping function, see above.</p></dd>

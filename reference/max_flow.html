@@ -15,7 +15,7 @@ between two vertices is calculated."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,37 +89,31 @@ Note that the <code>weight</code> edge attribute is not used by this function.</
 <dd><p>A numeric scalar, the value of the maximum flow.</p></dd>
 
 <dt>flow</dt>
-<dd><p>A numeric vector, the flow itself, one entry for each
-edge. For undirected graphs this entry is bit trickier, since for
-these the flow direction is not predetermined by the edge
-direction. For these graphs the elements of the this vector can be
-negative, this means that the flow goes from the bigger vertex id to
-the smaller one. Positive values mean that the flow goes from
-the smaller vertex id to the bigger one.</p></dd>
+<dd><p>A numeric vector, the flow itself, one entry for each edge.
+For undirected graphs this entry is bit trickier,
+since for these the flow direction is not predetermined by the edge direction.
+For these graphs the elements of the this vector can be negative,
+this means that the flow goes from the bigger vertex id to the smaller one.
+Positive values mean that the flow goes from the smaller vertex id to the bigger one.</p></dd>
 
 <dt>cut</dt>
-<dd><p>A numeric vector of edge ids, the minimum cut corresponding
-to the maximum flow.</p></dd>
+<dd><p>A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.</p></dd>
 
 <dt>partition1</dt>
-<dd><p>A numeric vector of vertex ids, the vertices in the
-first partition of the minimum cut corresponding to the maximum
-flow.</p></dd>
+<dd><p>A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.</p></dd>
 
 <dt>partition2</dt>
-<dd><p>A numeric vector of vertex ids, the vertices in the
-second partition of the minimum cut corresponding to the maximum
-flow.</p></dd>
+<dd><p>A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.</p></dd>
 
 <dt>stats</dt>
-<dd><p>A list with some statistics from the push-relabel
-algorithm. Five integer values currently: <code>nopush</code> is the
-number of push operations, <code>norelabel</code> the number of
-relabelings, <code>nogap</code> is the number of times the gap heuristics
-was used, <code>nogapnodes</code> is the total number of gap nodes omitted
-because of the gap heuristics and <code>nobfs</code> is the number of
-times a global breadth-first-search update was performed to assign
-better height (=distance) values to the vertices.</p></dd>
+<dd><p>A list with some statistics from the push-relabel algorithm.
+Five integer values currently:
+<code>nopush</code> is the number of push operations,
+<code>norelabel</code> the number of relabelings,
+<code>nogap</code> is the number of times the gap heuristics was used,
+<code>nogapnodes</code> is the total number of gap nodes omitted because of the gap heuristics and
+<code>nobfs</code> is the number of times a global breadth-first-search update was performed
+to assign better height (=distance) values to the vertices.</p></dd>
 
 
 </dl></div>
@@ -173,15 +167,15 @@ Flow Problem <em>Journal of the ACM</em> 35:921-940, 1988.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 1 1 1 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cut</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 edges from 79ea387 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 edges from a928c14 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3-&gt;4 1-&gt;5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from 79ea387:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/6 vertices, named, from a928c14:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $partition2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from 79ea387:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/6 vertices, named, from a928c14:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 5 6 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stats</span>

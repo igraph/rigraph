@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,19 +119,15 @@ have any extra arguments.</p>
 <p>This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:</p><dl><dt>vertex.color1, vertex.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the vertices for colored graph isomorphism. If they
-are not given, but the graph has a “color” vertex attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments. See also examples
-below.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the vertices for colored graph isomorphism.
+If they are not given, but the graph has a “color” vertex attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.
+See also examples below.</p></dd>
 
 <dt>edge.color1, edge.color2</dt>
-<dd><p>Optional integer vectors giving the
-colors of the edges for edge-colored (sub)graph isomorphism. If they
-are not given, but the graph has a “color” edge attribute,
-then it will be used. If you want to ignore these attributes, then
-supply <code>NULL</code> for both of these arguments.</p></dd>
+<dd><p>Optional integer vectors giving the colors of the edges for edge-colored (sub)graph isomorphism.
+If they are not given, but the graph has a “color” edge attribute, then it will be used.
+If you want to ignore these attributes, then supply <code>NULL</code> for both of these arguments.</p></dd>
 
 
 </dl></div>
@@ -145,9 +141,7 @@ undirected graphs. For both graphs the
 function is called to transfer them into canonical form; finally the
 canonical forms are compared.
 Extra arguments:</p><dl><dt>sh</dt>
-<dd><p>Character constant, the heuristics to use in the BLISS
-algorithm for <code>graph1</code> and <code>graph2</code>. See the <code>sh</code> argument of
-<code><a href="canonical_permutation.html">canonical_permutation()</a></code> for possible values.</p></dd>
+<dd><p>Character constant, the heuristics to use in the BLISS algorithm for <code>graph1</code> and <code>graph2</code>. See the <code>sh</code> argument of <code><a href="canonical_permutation.html">canonical_permutation()</a></code> for possible values.</p></dd>
 
 
 </dl><p><code>sh</code> defaults to ‘fm’.</p>

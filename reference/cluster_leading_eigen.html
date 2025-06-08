@@ -17,7 +17,7 @@ the graph."><meta property="og:image" content="https://r.igraph.org/logo.png"></
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,20 +124,19 @@ the modularity matrix. See details below.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p><code>cluster_leading_eigen()</code> returns a named list with the
 following members:</p><dl><dt>membership</dt>
-<dd><p>The membership vector at the end of the
-algorithm, when no more splits are possible.</p></dd>
+<dd><p>The membership vector at the end of the algorithm,
+when no more splits are possible.</p></dd>
 
 <dt>merges</dt>
-<dd><p>The merges
-matrix starting from the state described by the <code>membership</code> member.
-This is a two-column matrix and each line describes a merge of two
-communities, the first line is the first merge and it creates community
-‘<code>N</code>’, <code>N</code> is the number of initial communities in the
-graph, the second line creates community <code>N+1</code>, etc.</p></dd>
+<dd><p>The merges matrix starting from the state
+described by the <code>membership</code> member.
+This is a two-column matrix and each line describes a merge of two communities,
+the first line is the first merge and it creates community ‘<code>N</code>’,
+<code>N</code> is the number of initial communities in the graph,
+the second line creates community <code>N+1</code>, etc.</p></dd>
 
 <dt>options</dt>
-<dd><p>Information about the underlying ARPACK computation, see
-<code><a href="arpack.html">arpack()</a></code> for details.</p></dd>
+<dd><p>Information about the underlying ARPACK computation, see <code><a href="arpack.html">arpack()</a></code> for details.</p></dd>
 
 
 </dl></div>
@@ -169,30 +168,27 @@ following arguments are supplied to this function:</p>
 <dd><p>The actual membership vector, with zero-based indexing.</p></dd>
 
 <dt>community</dt>
-<dd><p>The community that the algorithm just tried to split,
-community numbering starts with zero here.</p></dd>
+<dd><p>The community that the algorithm just tried to split, community numbering starts with zero here.</p></dd>
 
 <dt>value</dt>
-<dd><p>The eigenvalue belonging to the leading eigenvector the
-algorithm just found.</p></dd>
+<dd><p>The eigenvalue belonging to the leading eigenvector the algorithm just found.</p></dd>
 
 <dt>vector</dt>
 <dd><p>The leading eigenvector the algorithm just found.</p></dd>
 
 <dt>multiplier</dt>
-<dd><p>An R function that can be used to multiple the actual
-modularity matrix with an arbitrary vector. Supply the vector as an
-argument to perform this multiplication. This function can be used
-with ARPACK.</p></dd>
+<dd><p>An R function that can be used to multiple the actual modularity matrix
+with an arbitrary vector.
+Supply the vector as an argument to perform this multiplication.
+This function can be used with ARPACK.</p></dd>
 
 <dt>extra</dt>
-<dd><p>The <code>extra</code> argument that was passed to
-<code>cluster_leading_eigen()</code>.</p></dd>
+<dd><p>The <code>extra</code> argument that was passed to <code>cluster_leading_eigen()</code>.</p></dd>
 
-The callback function should return a scalar number. If this number
-is non-zero, then the clustering is terminated.
 
-</dl></div>
+</dl><p>The callback function should return a scalar number. If this number
+is non-zero, then the clustering is terminated.</p>
+    </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>MEJ Newman: Finding community structure using the eigenvectors

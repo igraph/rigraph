@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9047</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9048</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,20 +69,23 @@ it is directed.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A named list with three components:</p><dl><dt>tree_edges</dt>
-<dd><p>The components themselves, a list of numeric vectors. Each
-vector is a set of edge ids giving the edges in a biconnected component.
+    <p>A named list with three components:</p><dl><dt>no</dt>
+<dd><p>Numeric scalar, an integer giving the number of biconnected components in the graph.</p></dd>
+
+<dt>tree_edges</dt>
+<dd><p>The components themselves, a list of numeric vectors.
+Each vector is a set of edge ids giving the edges in a biconnected component.
 These edges define a spanning tree of the component.</p></dd>
 
 <dt>component_edges</dt>
-<dd><p>A list of numeric vectors. It gives all edges in the
-components.</p></dd>
- <dt>components</dt>
-<dd><p>A list of numeric vectors, the vertices of
-the components.</p></dd>
- <dt>articulation_points</dt>
-<dd><p>The articulation points of the
-graph. See <code><a href="articulation_points.html">articulation_points()</a></code>.</p></dd>
+<dd><p>A list of numeric vectors. It gives all edges in the components.</p></dd>
+
+<dt>components</dt>
+<dd><p>A list of numeric vectors, the vertices of the components.</p></dd>
+
+<dt>articulation_points</dt>
+<dd><p>The articulation points of the graph. See <code><a href="articulation_points.html">articulation_points()</a></code>.</p></dd>
+
 
 </dl></div>
     <div class="section level2">
