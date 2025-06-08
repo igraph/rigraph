@@ -263,16 +263,24 @@ dominator.tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'   cut, except if `value.only = FALSE`. In this case a named list with
 #'   components:
 #'   \describe{
-#'     \item{value}{Numeric scalar, the cut value.}
-#'     \item{cut}{Numeric vector, the edges in the cut.}
-#'     \item{partition1}{The vertices in the first partition after the cut
-#'       edges are removed. Note that these vertices might be actually in
-#'       different components (after the cut edges are removed), as the graph
-#'       may fall apart into more than two components.}
-#'     \item{partition2}{The vertices in the second partition
-#'       after the cut edges are removed. Note that these vertices might be
-#'       actually in different components (after the cut edges are removed), as
-#'       the graph may fall apart into more than two components.}
+#'     \item{value}{
+#'       Numeric scalar, the cut value.
+#'     }
+#'     \item{cut}{
+#'       Numeric vector, the edges in the cut.
+#'     }
+#'     \item{partition1}{
+#'       The vertices in the first partition after the cut edges are removed.
+#'       Note that these vertices might be actually in different components
+#'       (after the cut edges are removed),
+#'       as the graph may fall apart into more than two components.
+#'     }
+#'     \item{partition2}{
+#'       The vertices in the second partition after the cut edges are removed.
+#'       Note that these vertices might be actually in different components
+#'       (after the cut edges are removed),
+#'       as the graph may fall apart into more than two components.
+#'     }
 #'   }
 #' @references M. Stoer and F. Wagner: A simple min-cut algorithm,
 #' *Journal of the ACM*, 44 585-591, 1997.
@@ -607,14 +615,16 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @param target The target vertex.
 #' @return A list with entries:
 #'   \describe{
-#'     \item{cuts}{A list of numeric vectors
-#'       containing edge ids. Each vector is an \eqn{(s,t)}-cut.}
-#'     \item{partition1s}{A list of numeric vectors
-#'       containing vertex ids, they correspond to the edge cuts. Each vertex
-#'       set is a generator of the corresponding cut, i.e. in the graph
-#'       \eqn{G=(V,E)}, the vertex set \eqn{X} and its complementer \eqn{V-X},
-#'       generates the cut that contains exactly the edges that go from
-#'       \eqn{X} to \eqn{V-X}.}
+#'     \item{cuts}{
+#'       A list of numeric vectors containing edge ids.
+#'       Each vector is an \eqn{(s,t)}-cut.
+#'     }
+#'     \item{partition1s}{
+#'       A list of numeric vectors containing vertex ids, they correspond to the edge cuts.
+#'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+#'       the vertex set \eqn{X} and its complementer \eqn{V-X},
+#'       generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
+#'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
@@ -664,15 +674,19 @@ st_cuts <- all_st_cuts_impl
 #'   here.
 #' @return A list with entries:
 #'   \describe{
-#'     \item{value}{Numeric scalar, the size of the minimum cut(s).}
-#'     \item{cuts}{A list of numeric vectors
-#'       containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.}
-#'     \item{partition1s}{A list of numeric vectors
-#'       containing vertex ids, they correspond to the edge cuts. Each vertex
-#'       set is a generator of the corresponding cut, i.e. in the graph
-#'       \eqn{G=(V,E)}, the vertex set \eqn{X} and its complementer \eqn{V-X},
-#'       generates the cut that contains exactly the edges that go from
-#'       \eqn{X} to \eqn{V-X}.}
+#'     \item{value}{
+#'       Numeric scalar, the size of the minimum cut(s).
+#'     }
+#'     \item{cuts}{
+#'       A list of numeric vectors containing edge ids. Each vector is a minimum \eqn{(s,t)}-cut.
+#'     }
+#'     \item{partition1s}{
+#'       A list of numeric vectors containing vertex ids,
+#'       they correspond to the edge cuts.
+#'       Each vertex set is a generator of the corresponding cut, i.e. in the graph \eqn{G=(V,E)},
+#'       the vertex set \eqn{X} and its complementer \eqn{V-X},
+#'       generates the cut that contains exactly the edges that go from \eqn{X} to \eqn{V-X}.
+#'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
@@ -721,15 +735,19 @@ st_min_cuts <- all_st_mincuts_impl
 #'   the original one in the input graph.
 #' @return A list with components:
 #'   \describe{
-#'     \item{dom}{ A numeric vector giving the
-#'       immediate dominators for each vertex. For vertices that are unreachable from
-#'       the root, it contains `NaN`. For the root vertex itself it contains
-#'       minus one.  }
-#'     \item{domtree}{ A graph object, the dominator tree. Its vertex
-#'       ids are the as the vertex ids of the input graph. Isolate vertices are the
-#'       ones that are unreachable from the root.  }
-#'     \item{leftout}{ A numeric vector
-#'       containing the vertex ids that are unreachable from the root.  }
+#'     \item{dom}{
+#'       A numeric vector giving the immediate dominators for each vertex.
+#'       For vertices that are unreachable from the root, it contains `NaN`.
+#'       For the root vertex itself it contains minus one.
+#'     }
+#'     \item{domtree}{
+#'       A graph object, the dominator tree.
+#'       Its vertex ids are the as the vertex ids of the input graph.
+#'       Isolate vertices are the ones that are unreachable from the root.
+#'     }
+#'     \item{leftout}{
+#'       A numeric vector containing the vertex ids that are unreachable from the root.
+#'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Thomas Lengauer, Robert Endre Tarjan: A fast algorithm for
@@ -855,30 +873,36 @@ min_st_separators <- all_minimal_st_separators_impl
 #'   Note that the `weight` edge attribute is not used by this function.
 #' @return A named list with components:
 #'   \describe{
-#'     \item{value}{A numeric scalar, the value of the maximum flow.}
-#'     \item{flow}{A numeric vector, the flow itself, one entry for each
-#'       edge. For undirected graphs this entry is bit trickier, since for
-#'       these the flow direction is not predetermined by the edge
-#'       direction. For these graphs the elements of the this vector can be
-#'       negative, this means that the flow goes from the bigger vertex id to
-#'       the smaller one. Positive values mean that the flow goes from
-#'       the smaller vertex id to the bigger one.}
-#'     \item{cut}{A numeric vector of edge ids, the minimum cut corresponding
-#'       to the maximum flow.}
-#'     \item{partition1}{A numeric vector of vertex ids, the vertices in the
-#'       first partition of the minimum cut corresponding to the maximum
-#'       flow.}
-#'     \item{partition2}{A numeric vector of vertex ids, the vertices in the
-#'       second partition of the minimum cut corresponding to the maximum
-#'       flow.}
-#'     \item{stats}{A list with some statistics from the push-relabel
-#'       algorithm. Five integer values currently: `nopush` is the
-#'       number of push operations, `norelabel` the number of
-#'       relabelings, `nogap` is the number of times the gap heuristics
-#'       was used, `nogapnodes` is the total number of gap nodes omitted
-#'       because of the gap heuristics and `nobfs` is the number of
-#'       times a global breadth-first-search update was performed to assign
-#'       better height (=distance) values to the vertices.}
+#'     \item{value}{
+#'       A numeric scalar, the value of the maximum flow.
+#'     }
+#'     \item{flow}{
+#'       A numeric vector, the flow itself, one entry for each edge.
+#'       For undirected graphs this entry is bit trickier,
+#'       since for these the flow direction is not predetermined by the edge direction.
+#'       For these graphs the elements of the this vector can be negative,
+#'       this means that the flow goes from the bigger vertex id to the smaller one.
+#'       Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+#'     }
+#'     \item{cut}{
+#'       A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{partition1}{
+#'       A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{partition2}{
+#'       A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+#'     }
+#'     \item{stats}{
+#'       A list with some statistics from the push-relabel algorithm.
+#'       Five integer values currently:
+#'       `nopush` is the number of push operations,
+#'       `norelabel` the number of relabelings,
+#'       `nogap` is the number of times the gap heuristics was used,
+#'       `nogapnodes` is the total number of gap nodes omitted because of the gap heuristics and
+#'       `nobfs` is the number of times a global breadth-first-search update was performed
+#'       to assign better height (=distance) values to the vertices.
+#'     }
 #'   }
 #' @references A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 #' Flow Problem *Journal of the ACM* 35:921-940, 1988.

@@ -28,10 +28,18 @@ the corresponding eigenvector is calculated.}
 \value{
 Depends on the algorithm used.
 
-For \code{arpack} a list with three entries is returned: \describe{\item{options}{See
-the return value for \code{arpack()} for a complete description.}
-\item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
-matrix, with the eigenvectors as columns.}}
+For \code{arpack} a list with three entries is returned:
+\describe{
+\item{options}{
+See the return value for \code{arpack()} for a complete description.
+}
+\item{values}{
+Numeric vector, the eigenvalues.
+}
+\item{vectors}{
+Numeric matrix, with the eigenvectors as columns.
+}
+}
 }
 \description{
 Calculate selected eigenvalues and eigenvectors of a (supposedly sparse)

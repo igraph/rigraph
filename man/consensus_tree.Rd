@@ -26,13 +26,17 @@ is an \code{igraphHRGConsensus} object, the second is an
 \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the
 following members:
 \describe{
-\item{parents}{For each vertex, the id of its parent vertex is stored,
-or zero, if the vertex is the root vertex in the tree. The first n
-vertex ids (from 0) refer to the original vertices of the graph, the
-other ids refer to vertex groups.}
-\item{weights}{Numeric vector, counts the number of times a given tree
-split occurred in the generated network samples, for each internal
-vertices. The order is the same as in the \code{parents} vector.}
+\item{parents}{
+For each vertex, the id of its parent vertex is stored,
+or zero, if the vertex is the root vertex in the tree.
+The first n vertex ids (from 0) refer to the original vertices of the graph,
+the other ids refer to vertex groups.
+}
+\item{weights}{
+Numeric vector, counts the number of times a given tree split
+occurred in the generated network samples, for each internal vertices.
+The order is the same as in the \code{parents} vector.
+}
 }
 }
 \description{

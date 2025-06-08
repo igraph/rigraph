@@ -18,10 +18,15 @@ is ignored for undirected graphs.}
 search is performed. Typically it contains one vertex per component.}
 }
 \value{
-A list with two components: \describe{\item{tree}{The result, an \code{igraph}
-object, a tree or a forest.} \item{vertex_index}{A numeric vector, it gives
-a mapping from the vertices of the new graph to the vertices of the old
-graph.}}
+A list with two components:
+\describe{
+\item{tree}{
+The result, an \code{igraph} object, a tree or a forest.
+}
+\item{vertex_index}{
+A numeric vector, it gives a mapping from the vertices of the new graph to the vertices of the old graph.
+}
+}
 }
 \description{
 Perform a breadth-first search on a graph and convert it into a tree or

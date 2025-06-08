@@ -20,30 +20,36 @@ Note that the \code{weight} edge attribute is not used by this function.}
 \value{
 A named list with components:
 \describe{
-\item{value}{A numeric scalar, the value of the maximum flow.}
-\item{flow}{A numeric vector, the flow itself, one entry for each
-edge. For undirected graphs this entry is bit trickier, since for
-these the flow direction is not predetermined by the edge
-direction. For these graphs the elements of the this vector can be
-negative, this means that the flow goes from the bigger vertex id to
-the smaller one. Positive values mean that the flow goes from
-the smaller vertex id to the bigger one.}
-\item{cut}{A numeric vector of edge ids, the minimum cut corresponding
-to the maximum flow.}
-\item{partition1}{A numeric vector of vertex ids, the vertices in the
-first partition of the minimum cut corresponding to the maximum
-flow.}
-\item{partition2}{A numeric vector of vertex ids, the vertices in the
-second partition of the minimum cut corresponding to the maximum
-flow.}
-\item{stats}{A list with some statistics from the push-relabel
-algorithm. Five integer values currently: \code{nopush} is the
-number of push operations, \code{norelabel} the number of
-relabelings, \code{nogap} is the number of times the gap heuristics
-was used, \code{nogapnodes} is the total number of gap nodes omitted
-because of the gap heuristics and \code{nobfs} is the number of
-times a global breadth-first-search update was performed to assign
-better height (=distance) values to the vertices.}
+\item{value}{
+A numeric scalar, the value of the maximum flow.
+}
+\item{flow}{
+A numeric vector, the flow itself, one entry for each edge.
+For undirected graphs this entry is bit trickier,
+since for these the flow direction is not predetermined by the edge direction.
+For these graphs the elements of the this vector can be negative,
+this means that the flow goes from the bigger vertex id to the smaller one.
+Positive values mean that the flow goes from the smaller vertex id to the bigger one.
+}
+\item{cut}{
+A numeric vector of edge ids, the minimum cut corresponding to the maximum flow.
+}
+\item{partition1}{
+A numeric vector of vertex ids, the vertices in the first partition of the minimum cut corresponding to the maximum flow.
+}
+\item{partition2}{
+A numeric vector of vertex ids, the vertices in the second partition of the minimum cut corresponding to the maximum flow.
+}
+\item{stats}{
+A list with some statistics from the push-relabel algorithm.
+Five integer values currently:
+\code{nopush} is the number of push operations,
+\code{norelabel} the number of relabelings,
+\code{nogap} is the number of times the gap heuristics was used,
+\code{nogapnodes} is the total number of gap nodes omitted because of the gap heuristics and
+\code{nobfs} is the number of times a global breadth-first-search update was performed
+to assign better height (=distance) values to the vertices.
+}
 }
 }
 \description{

@@ -137,38 +137,54 @@ write.graph.fromraw <- function(buffer, file) {
 #' between the edges, a simple space will also do. Vertex IDs contained in
 #' the file are assumed to start at zero.
 #'
-#' Additional arguments: \describe{ \item{n}{The number of vertices in the
-#' graph. If it is smaller than or equal to the largest integer in the file,
-#' then it is ignored; so it is safe to set it to zero (the default).}
-#' \item{directed}{Logical scalar, whether to create a directed graph. The
-#' default value is `TRUE`.} }
+#' Additional arguments:
+#'   \describe{
+#'     \item{n}{
+#'       The number of vertices in the
+#'       graph. If it is smaller than or equal to the largest integer in the file,
+#'       then it is ignored; so it is safe to set it to zero (the default).
+#'     }
+#'     \item{directed}{
+#'       Logical scalar, whether to create a directed graph. The
+#'       default value is `TRUE`.
+#'     }
+#'   }
 #' @section Pajek format:
 #' Currently igraph only supports Pajek network
 #' files, with a `.net` extension, but not Pajek project files with
 #' a `.paj` extension. Only network data is supported; permutations,
 #' hierarchies, clusters and vectors are not.
 #' @section NCOL format:
-#' Additional arguments: \describe{
-#' \item{predef}{Names of the vertices in the file.
-#' If `character(0)` (the default) is given here
-#' then vertex IDs will be assigned to vertex names in the order of
-#' their appearance in the .ncol file.
-#' If it is not `character(0)` and some unknown vertex names are found
-#' in the .ncol file then new vertex ids will be assigned to them. }
-#' \item{names}{Logical value, if `TRUE` (the default)
-#' the symbolic names of the vertices will be added to the graph
-#' as a vertex attribute called “name”. }
-#' \item{weights}{Whether to add the weights of the edges to the graph
-#' as an edge attribute called “weight”.
-#' `"yes"` adds the weights (even if they are not present in the file,
-#' in this case they are assumed to be zero).
-#' `"no"` does not add any edge attribute.
-#' `"auto"` (the default) adds the attribute if and only
-#' if there is at least one explicit edge weight in the input file. }
-#' \item{directed}{Whether to create a directed graph (default: `FALSE`).
-#' As this format was originally used only for undirected graphs
-#' there is no information in the file about the directedness of the graph.}
-#' }
+#' Additional arguments:
+#'   \describe{
+#'     \item{predef}{
+#'       Names of the vertices in the file.
+#'       If `character(0)` (the default) is given here
+#'       then vertex IDs will be assigned to vertex names in the order of
+#'       their appearance in the .ncol file.
+#'       If it is not `character(0)` and some unknown vertex names are found
+#'       in the .ncol file then new vertex ids will be assigned to them.
+#'     }
+#'     \item{names}{
+#'       Logical value, if `TRUE` (the default)
+#'       the symbolic names of the vertices will be added to the graph
+#'       as a vertex attribute called “name”.
+#'     }
+#'     \item{weights}{
+#'       Whether to add the weights of the edges to the graph
+#'       as an edge attribute called “weight”.
+#'       `"yes"` adds the weights (even if they are not present in the file,
+#'       in this case they are assumed to be zero).
+#'       `"no"` does not add any edge attribute.
+#'       `"auto"` (the default) adds the attribute if and only
+#'       if there is at least one explicit edge weight in the input file.
+#'     }
+#'     \item{directed}{
+#'       Whether to create a directed graph (default: `FALSE`).
+#'       As this format was originally used only for undirected graphs
+#'       there is no information in the file about the directedness of the graph.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [write_graph()]
 #' @keywords graphs
@@ -229,12 +245,16 @@ read_graph <- function(file, format = c(
 #' @section NCOL format: This format is a plain text edge list in which vertices
 #' are referred to by name rather than numerical ID. Edge weights may be
 #' optionally written. Additional parameters:
-#' \describe{
-#' \item{names}{The name of a vertex attribute to take vertex names from or
-#' `NULL` to use zero-based numerical IDs.}
-#' \item{weights}{The name of an edge attribute to take edge weights from or
-#' `NULL` to omit edge weights.}
-#' }
+#'   \describe{
+#'     \item{names}{
+#'       The name of a vertex attribute to take vertex names from or
+#'       `NULL` to use zero-based numerical IDs.
+#'     }
+#'     \item{weights}{
+#'       The name of an edge attribute to take edge weights from or
+#'       `NULL` to omit edge weights.
+#'     }
+#'   }
 #' @section Pajek format: The `pajek` format is provided for interoperability
 #' with the Pajek software only. Since the format does not have a formal
 #' specification, it is not recommended for general data exchange or archival.

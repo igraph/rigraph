@@ -340,12 +340,12 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   label.dist <- params("vertex", "label.dist")
   vertex.color <- .tkplot.convert.color(params("vertex", "color"))
   vertex.size <- params("vertex", "size")
-  
+
   # Adjusting size
   vertex.size <- i.rescale.vertex(
     vertex.size, c(-canvas.width, canvas.height)/2,
     params("vertex", "relative.size"))
-  
+
   vertex.frame.color <- .tkplot.convert.color(params("vertex", "frame.color"))
 
   edge.color <- .tkplot.convert.color(params("edge", "color"))

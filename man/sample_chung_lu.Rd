@@ -42,10 +42,16 @@ of the connection probability between vertices \eqn{i} and \eqn{j}. Given
 \eqn{q_{ij} = \frac{w_i w_j}{S}}{q_ij = w_i w_j / S}, the following
 formulations are available:
 \describe{
-\item{\dQuote{original}}{the original Chung-Lu model, \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.}
-\item{\dQuote{maxent}}{maximum entropy model with fixed expected degrees,
-\eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.}
-\item{\dQuote{nr}}{Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.}
+\item{\dQuote{original}}{
+the original Chung-Lu model, \eqn{p_{ij} = \min(q_{ij}, 1)}{p_ij = min(q_ij, 1)}.
+}
+\item{\dQuote{maxent}}{
+maximum entropy model with fixed expected degrees,
+\eqn{p_{ij} = \frac{q_{ij}}{1 + q_{ij}}}{p_ij = q_ij / (1 + q_ij)}.
+}
+\item{\dQuote{nr}}{
+Norros and Reittu's model, \eqn{p_{ij} = 1 - \exp(-q_{ij})}{p_ij = 1 - exp(-q_ij)}.
+}
 }}
 }
 \value{

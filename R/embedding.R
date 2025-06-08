@@ -67,15 +67,23 @@
 #'   the values given by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
-#'     \item{X}{Estimated latent positions,
-#'       an `n` times `no` matrix, `n` is the number of vertices.}
-#'     \item{Y}{`NULL` for undirected graphs, the second half of the latent
+#'     \item{X}{
+#'       Estimated latent positions,
+#'       an `n` times `no` matrix, `n` is the number of vertices.
+#'     }
+#'     \item{Y}{
+#'       `NULL` for undirected graphs, the second half of the latent
 #'       positions for directed graphs, an `n` times `no` matrix, `n`
-#'       is the number of vertices.}
-#'     \item{D}{The eigenvalues (for undirected graphs)
-#'       or the singular values (for directed graphs) calculated by the algorithm.}
-#'     \item{options}{A named list, information about the underlying ARPACK
-#'       computation. See [arpack()] for the details.}
+#'       is the number of vertices.
+#'     }
+#'     \item{D}{
+#'       The eigenvalues (for undirected graphs)
+#'       or the singular values (for directed graphs) calculated by the algorithm.
+#'     }
+#'     \item{options}{
+#'       A named list, information about the underlying ARPACK
+#'       computation. See [arpack()] for the details.
+#'     }
 #'   }
 #' @seealso [sample_dot_product()]
 #' @references Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E.  A
@@ -211,15 +219,23 @@ dim_select <- dim_select_impl
 #'   the values given by [arpack_defaults()].
 #' @return A list containing with entries:
 #'   \describe{
-#'     \item{X}{Estimated latent positions,
-#'       an `n` times `no` matrix, `n` is the number of vertices.}
-#'     \item{Y}{`NULL` for undirected graphs, the second half of the latent
+#'     \item{X}{
+#'       Estimated latent positions,
+#'       an `n` times `no` matrix, `n` is the number of vertices.
+#'     }
+#'     \item{Y}{
+#'       `NULL` for undirected graphs, the second half of the latent
 #'       positions for directed graphs, an `n` times `no` matrix, `n`
-#'       is the number of vertices.}
-#'     \item{D}{The eigenvalues (for undirected graphs)
-#'       or the singular values (for directed graphs) calculated by the algorithm.}
-#'     \item{options}{A named list, information about the underlying ARPACK
-#'       computation. See [arpack()] for the details.}
+#'       is the number of vertices.
+#'     }
+#'     \item{D}{
+#'       The eigenvalues (for undirected graphs)
+#'       or the singular values (for directed graphs) calculated by the algorithm.
+#'     }
+#'     \item{options}{
+#'       A named list, information about the underlying ARPACK
+#'       computation. See [arpack()] for the details.
+#'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [embed_adjacency_matrix()],

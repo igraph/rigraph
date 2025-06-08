@@ -39,9 +39,15 @@ For \code{is_connected()} a logical constant.
 
 For \code{components()} a named list with three components:
 \describe{
-\item{membership}{numeric vector giving the cluster id to which each vertex
-belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
-\item{no}{numeric constant, the number of clusters.}
+\item{membership}{
+numeric vector giving the cluster id to which each vertex belongs.
+}
+\item{csize}{
+numeric vector giving the sizes of the clusters.
+}
+\item{no}{
+numeric constant, the number of clusters.
+}
 }
 
 For \code{count_components()} an integer constant is returned.

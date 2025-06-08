@@ -31,16 +31,24 @@ For \code{min_cut()} a nuieric constant, the value of the minimum
 cut, except if \code{value.only = FALSE}. In this case a named list with
 components:
 \describe{
-\item{value}{Numeric scalar, the cut value.}
-\item{cut}{Numeric vector, the edges in the cut.}
-\item{partition1}{The vertices in the first partition after the cut
-edges are removed. Note that these vertices might be actually in
-different components (after the cut edges are removed), as the graph
-may fall apart into more than two components.}
-\item{partition2}{The vertices in the second partition
-after the cut edges are removed. Note that these vertices might be
-actually in different components (after the cut edges are removed), as
-the graph may fall apart into more than two components.}
+\item{value}{
+Numeric scalar, the cut value.
+}
+\item{cut}{
+Numeric vector, the edges in the cut.
+}
+\item{partition1}{
+The vertices in the first partition after the cut edges are removed.
+Note that these vertices might be actually in different components
+(after the cut edges are removed),
+as the graph may fall apart into more than two components.
+}
+\item{partition2}{
+The vertices in the second partition after the cut edges are removed.
+Note that these vertices might be actually in different components
+(after the cut edges are removed),
+as the graph may fall apart into more than two components.
+}
 }
 }
 \description{

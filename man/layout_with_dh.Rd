@@ -55,8 +55,12 @@ the energy function.}
 A matrix with two columns, containing the x and y coordinates
 of the vertices:
 \describe{
-\item{x}{The x-coordinate of the vertex.}
-\item{y}{The y-coordinate of the vertex.}
+\item{x}{
+The x-coordinate of the vertex.
+}
+\item{y}{
+The y-coordinate of the vertex.
+}
 }
 }
 \description{

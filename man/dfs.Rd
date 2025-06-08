@@ -69,18 +69,28 @@ algorithm. See details below.}
 \value{
 A named list with the following entries:
 \describe{
-\item{root}{Numeric scalar.
-The root vertex that was used as the starting point of the search.}
-\item{neimode}{Character scalar. The \code{mode} argument of the function
-call. Note that for undirected graphs this is always \sQuote{all},
-irrespectively of the supplied value.} \item{order}{Numeric vector. The
-vertex ids, in the order in which they were visited by the search.}
-\item{order.out}{Numeric vector, the vertex ids, in the order of the
-completion of their subtree.} \item{parent}{Numeric vector. The parent of
-each vertex, i.e. the vertex it was discovered from.}
-\item{father}{Like parent, kept for compatibility for now.}
-\item{dist}{Numeric
-vector, for each vertex its distance from the root of the search tree.}
+\item{root}{
+Numeric scalar. The root vertex that was used as the starting point of the search.
+}
+\item{neimode}{
+Character scalar. The \code{mode} argument of the function call.
+Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
+}
+\item{order}{
+Numeric vector. The vertex ids, in the order in which they were visited by the search.
+}
+\item{order.out}{
+Numeric vector, the vertex ids, in the order of the completion of their subtree.
+}
+\item{parent}{
+Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+}
+\item{father}{
+Like parent, kept for compatibility for now.
+}
+\item{dist}{
+Numeric vector, for each vertex its distance from the root of the search tree.
+}
 }
 
 Note that \code{order}, \code{order.out}, \code{parent}, and \code{dist}
@@ -92,12 +102,20 @@ Depth-first search is an algorithm to traverse a graph. It starts from a
 root vertex and tries to go quickly as far from as possible.
 }
 \details{
-The callback functions must have the following arguments: \describe{
-\item{graph}{The input graph is passed to the callback function here.}
-\item{data}{A named numeric vector, with the following entries:
-\sQuote{vid}, the vertex that was just visited and \sQuote{dist}, its
-distance from the root of the search tree.} \item{extra}{The extra
-argument.} } The callback must return FALSE to continue the search or TRUE
+The callback functions must have the following arguments:
+\describe{
+\item{graph}{
+The input graph is passed to the callback function here.
+}
+\item{data}{
+A named numeric vector, with the following entries:
+\sQuote{vid}, the vertex that was just visited and
+\sQuote{dist}, its distance from the root of the search tree.
+}
+\item{extra}{
+The extra argument.
+}
+} The callback must return FALSE to continue the search or TRUE
 to terminate it. See examples below on how to use the callback functions.
 }
 \examples{
