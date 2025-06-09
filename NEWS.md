@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9049
+
+## Documentation
+
+- Fix indentation of `\describe{}` elements (#1867).
+
+
 # igraph 2.1.4.9048
 
 ## Bug fixes
