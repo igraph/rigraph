@@ -191,7 +191,7 @@ test_that("cluster_leading_eigen works", {
   withr::local_seed(20230115)
 
   check_eigen_value <- function(membership, community, value, vector, multiplier, extra) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)
@@ -233,7 +233,7 @@ test_that("cluster_leading_eigen works", {
   ## Check that the modularity matrix is correct
 
   mod_mat_caller <- function(membership, community, value, vector, multiplier, extra) {
-    M <- sapply(1:length(vector), function(x) {
+    M <- sapply(seq_along(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
       multiplier(v)

@@ -177,7 +177,7 @@ function() {
     co <- layout_with_kk(g)
     par(mar = c(1, 1, 1, 1))
     plot(g, layout = co)
-    for (i in 1:length(gl$Bc)) {
+    for (i in seq_along(gl$Bc)) {
       sel <- gl$Bc[[i]]
       V(g)$color <- "white"
       V(g)[sel]$color <- "#E495A5"

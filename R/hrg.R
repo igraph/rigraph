@@ -517,7 +517,7 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
     r
   }
 
-  oHgt <- 1:nrow(merges)
+  oHgt <- seq_len(nrow(merges))
   hMax <- oHgt[length(oHgt)]
   mynames <- if (is.null(object$names)) 1:(nMerge + 1) else object$names
   z <- list()
@@ -585,7 +585,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   ## the left node.
   map2 <- numeric(nrow(merge))
   mergeInto <- merge
-  for (i in 1:nrow(merge)) {
+  for (i in seq_len(nrow(merge))) {
     mr <- mergeInto[i, ]
     mr[mr > 0] <- -map2[mr[mr > 0]]
     mergeInto[i, ] <- -mr
@@ -600,7 +600,7 @@ as.hclust.igraphHRG <- function(x, ...) {
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(
-    merge = merge, height = 1:nrow(merge), order = order,
+    merge = merge, height = seq_len(nrow(merge)), order = order,
     labels = mynames, method = NA_character_,
     dist.method = NA_character_
   )

@@ -37,7 +37,7 @@ test_that("nominal assortativity works", {
 
   el <- as_edgelist(o, names = FALSE)
   etm <- matrix(0, nrow = max(V(o)$value) + 1, ncol = max(V(o)$value) + 1)
-  for (e in 1:nrow(el)) {
+  for (e in seq_len(nrow(el))) {
     t1 <- V(o)$value[el[e, 1]] + 1
     t2 <- V(o)$value[el[e, 2]] + 1
     etm[t1, t2] <- etm[t1, t2] + 1
