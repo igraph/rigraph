@@ -467,7 +467,7 @@ test_that("graphNEL conversion works", {
   ## Attributes
 
   V(g)$name <- as.character(vcount(g):1)
-  E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(10, ecount(g), replace = TRUE)
   g$name <- "Foobar"
 
   g_graphnel1 <- as_graphnel(g)

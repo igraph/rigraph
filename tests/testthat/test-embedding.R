@@ -75,7 +75,7 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
 test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
   withr::local_seed(42)
   g <- sample_gnm(10, 20, directed = FALSE)
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   no <- 3
   A <- g[]
@@ -192,7 +192,7 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
 test_that("embed_adjacency_matrix -- Directed, weighted case works", {
   withr::local_seed(42)
   g <- sample_gnm(10, 20, directed = TRUE)
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   no <- 3
   A <- g[]
@@ -465,7 +465,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
 test_that("embed_laplacian_matrix -- Undirected, weighted, D-A case works", {
   withr::local_seed(42 * 42)
   g <- sample_gnm(10, 20, directed = FALSE)
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   no <- 3
   A <- as(Matrix::Matrix(diag(strength(g)), doDiag = FALSE), "generalMatrix") - g[]
@@ -723,7 +723,7 @@ test_that("embed_laplacian_matrix -- Directed, weighted case works", {
   withr::local_seed(42 * 42)
 
   g <- sample_gnm(10, 30, directed = TRUE)
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   no <- 3
   O12 <- diag(1 / sqrt(strength(g, mode = "out")))

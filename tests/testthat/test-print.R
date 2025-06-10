@@ -73,7 +73,7 @@ test_that("vs printing", {
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
-    set_vertex_attr("weight", value = sample(1:10, 3))
+    set_vertex_attr("weight", value = sample.int(10, 3))
 
   expect_snapshot({
     V(g)[[1]]
@@ -90,7 +90,7 @@ test_that("vs printing, complex attributes", {
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
-    set_vertex_attr("weight", value = sample(1:10, 3)) %>%
+    set_vertex_attr("weight", value = sample.int(10, 3)) %>%
     set_vertex_attr("cplx", value = replicate(3, 1:4, simplify = FALSE))
 
   expect_snapshot({
@@ -106,7 +106,7 @@ test_that("es printing", {
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%
-    set_edge_attr("weight", value = sample(1:10, 3))
+    set_edge_attr("weight", value = sample.int(10, 3))
 
   expect_snapshot({
     E(g)[[1]]
@@ -121,7 +121,7 @@ test_that("es printing, complex attributes", {
   withr::local_seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%
-    set_edge_attr("weight", value = sample(1:10, 3)) %>%
+    set_edge_attr("weight", value = sample.int(10, 3)) %>%
     set_edge_attr("cmpx", value = replicate(3, 1:4, simplify = FALSE))
 
   expect_snapshot({

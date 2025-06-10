@@ -66,7 +66,7 @@ test_that("creating communities objects works", {
 
   karate <- make_graph("Zachary")
 
-  membership <- sample(1:2, vcount(karate), replace = TRUE)
+  membership <- sample.int(2, vcount(karate), replace = TRUE)
   mod <- modularity(karate, membership)
   comm <- make_clusters(
     algorithm = "random", membership = membership,
@@ -388,7 +388,7 @@ test_that("weighted cluster_optimal works", {
   withr::local_seed(42)
 
   graph_full_ring <- make_full_graph(5) + make_ring(5)
-  E(graph_full_ring)$weight <- sample(1:2, ecount(graph_full_ring), replace = TRUE)
+  E(graph_full_ring)$weight <- sample.int(2, ecount(graph_full_ring), replace = TRUE)
 
   graph_full_ring_optimal <- cluster_optimal(graph_full_ring)
   expect_equal(modularity(graph_full_ring_optimal), 0.4032)

@@ -50,14 +50,14 @@ test_that("sample_degseq() works -- vl generator", {
 
 test_that("sample_degseq() works -- exponential degree ok", {
   withr::local_seed(1)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample.int(100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
   exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
   expect_equal(degree(exp_vl_graph), exponential_degrees)
 })
 
 test_that("sample_degseq() works -- exponential degree error", {
   withr::local_seed(11)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample.int(100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
   expect_snapshot(
     {
       sample_degseq(exponential_degrees, method = "vl")
@@ -69,14 +69,14 @@ test_that("sample_degseq() works -- exponential degree error", {
 
 test_that("sample_degseq() works -- Power-law degree ok", {
   withr::local_seed(3)
-  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+  powerlaw_degrees <- sample.int(100, 100, replace = TRUE, prob = (1:100)^-2)
   powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
   expect_equal(degree(powerlaw_vl_graph), powerlaw_degrees)
 })
 
 test_that("sample_degseq() works -- Power-law degree error", {
   withr::local_seed(7)
-  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+  powerlaw_degrees <- sample.int(100, 100, replace = TRUE, prob = (1:100)^-2)
 
   expect_snapshot(
     {
@@ -241,7 +241,7 @@ test_that("Generating stochastic block models works", {
 test_that("sample_smallworld works", {
   for (i in 1:50) {
     p <- runif(1)
-    d <- sample(1:3, 1)
+    d <- sample.int(3, 1)
     nei <- sample(2:5, 1)
     g <- sample_smallworld(d, 10, nei, p, loops = FALSE)
     expect_false(any(which_loop(g)))

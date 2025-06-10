@@ -154,14 +154,14 @@ test_that("authority_score survives stress test", {
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     as <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(t(M) %*% M, as$authority, as$value)
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     hs <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(M %*% t(M), hs$hub, hs$value)
@@ -379,7 +379,7 @@ test_that("edge_betweenness() works", {
 
   #### Weighted
 
-  E(kite)$weight <- sample(1:10, ecount(kite), replace = TRUE)
+  E(kite)$weight <- sample.int(10, ecount(kite), replace = TRUE)
 
   bet <- betweenness(kite)
   ebet <- edge_betweenness(kite)
@@ -509,7 +509,7 @@ test_that("eigen_centrality() works", {
   }
 
   for (i in 1:1000) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     ev <- eigen_centrality(G)
     expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
   }

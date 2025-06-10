@@ -77,7 +77,7 @@ graphlets.old <- function(graph) {
 test_that("Graphlets work for a bigger graph", {
   withr::local_seed(42)
   g <- make_graph("zachary")
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   gl <- graphlet_basis(g)
   gl2 <- graphlets.old(g)
