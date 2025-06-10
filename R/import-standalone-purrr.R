@@ -103,7 +103,7 @@ pmap <- function(.l, .f, ...) {
   lengths <- lengths(args)
   n <- max(lengths)
 
-  stopifnot(all(lengths == 1L | lengths == n))
+  stopifnot(lengths == 1L | lengths == n)
   to_recycle <- lengths == 1L
   args[to_recycle] <- map(args[to_recycle], function(x) rep.int(x, n))
 

@@ -256,12 +256,12 @@ layout.auto <- function(graph, dim = 2, ...) { # nocov start
 #' plot(g, layout = coords)
 layout_ <- function(graph, layout, ...) {
   modifiers <- list(...)
-  stopifnot(all(sapply(modifiers, inherits,
+  stopifnot(sapply(modifiers, inherits,
     what = "igraph_layout_modifier"
-  )))
+  ))
 
   ids <- sapply(modifiers, "[[", "id")
-  stopifnot(all(ids %in% c("component_wise", "normalize")))
+  stopifnot(ids %in% c("component_wise", "normalize"))
   if (anyDuplicated(ids)) stop("Duplicate modifiers")
   names(modifiers) <- ids
 
