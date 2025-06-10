@@ -471,7 +471,7 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- rep_len(vertex.size, nrow(coords))
 
   # Handle vertex.frame.width <= 0 by hiding the border
   vertex.frame.color[vertex.frame.width <= 0] <- NA
@@ -587,7 +587,7 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- rep_len(vertex.size, nrow(coords))
 
   # Handle vertex.frame.width <= 0 by hiding the border
   vertex.frame.color[vertex.frame.width <= 0] <- NA
@@ -775,7 +775,7 @@ add_shape <- function(shape, clip = shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- rep_len(vertex.size, nrow(coords))
   vertex.size2 <- params("vertex", "size2")
 
   if (length(vertex.size2) != 1 && !is.null(v)) {
@@ -968,11 +968,11 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
       par("fg")
     }
   }
-  col <- rep(col, length.out = nx)
-  border <- rep(border, length.out = nx)
-  lty <- rep(lty, length.out = nx)
-  angle <- rep(angle, length.out = nx)
-  density <- rep(density, length.out = nx)
+  col <- rep_len(col, nx)
+  border <- rep_len(border, nx)
+  lty <- rep_len(lty, nx)
+  angle <- rep_len(angle, nx)
+  density <- rep_len(density, nx)
   t2xy <- function(t) {
     t2p <- twopi * t + init.angle * pi / 180
     list(x = radius * cos(t2p), y = radius * sin(t2p))

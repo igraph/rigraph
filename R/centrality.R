@@ -1697,7 +1697,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
                                    tol = 1e-7) {
   ensure_igraph(graph)
 
-  exo <- rep(exo, length.out = vcount(graph))
+  exo <- rep_len(exo, vcount(graph))
   exo <- matrix(exo, ncol = 1)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1765,7 +1765,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
   M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))
 
   ## exo
-  exo <- cbind(rep(exo, length.out = vc))
+  exo <- cbind(rep_len(exo, vc))
 
   ## Solve the equation
   M3 <- M2 - alpha * M

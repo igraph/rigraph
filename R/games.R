@@ -1995,16 +1995,16 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     if (length(commonlen) != 1) {
       cli::cli_abort("Lengths of {.arg m}, {.arg rho} and {.arg C} must match.")
     }
-    m <- rep(m, length.out = commonlen)
+    m <- rep_len(m, commonlen)
     rho <- if (is.list(rho)) {
-      rep(rho, length.out = commonlen)
+      rep_len(rho, commonlen)
     } else {
-      rep(list(rho), length.out = commonlen)
+      rep_len(list(rho), commonlen)
     }
     C <- if (is.list(C)) {
-      rep(C, length.out = commonlen)
+      rep_len(C, commonlen)
     } else {
-      rep(list(C), length.out = commonlen)
+      rep_len(list(C), commonlen)
     }
     hsbm_list_game_impl(n, m, rho, C, p)
   }
