@@ -1434,7 +1434,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
     if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
-    if (any(!names2 %in% names)) {
+    if (!all(names2 %in% names)) {
       cli::cli_abort("Some vertex names in {.arg d} are not listed in {.arg vertices}")
     }
   }

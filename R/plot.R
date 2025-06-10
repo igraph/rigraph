@@ -1003,8 +1003,8 @@ igraph.Arrows <-
       x1d <- r.seg * cos(th.seg1) / uin[1]
       y1d <- r.seg * sin(th.seg1) / uin[2]
     }
-    if (is.logical(curved) && all(!curved) ||
-      is.numeric(curved) && all(!curved)) {
+    if (is.logical(curved) && !any(curved) ||
+      is.numeric(curved) && !any(curved)) {
       segments(x1 + x1d, y1 + y1d, x2 + x2d, y2 + y2d, lwd = sh.lwd, col = sh.col, lty = sh.lty)
       phi <- atan2(y1 - y2, x1 - x2)
       r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)

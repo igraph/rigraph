@@ -628,7 +628,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   if (byname) {
     bnames <- V(big)$name
     snames <- V(small)$name
-    if (any(!snames %in% bnames)) {
+    if (!all(snames %in% bnames)) {
       small <- small - setdiff(snames, bnames)
       snames <- V(small)$name
     }

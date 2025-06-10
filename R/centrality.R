@@ -298,7 +298,7 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -333,7 +333,7 @@ edge_betweenness <- function(graph, e = E(graph),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -445,7 +445,7 @@ closeness <- function(graph, vids = V(graph),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -815,7 +815,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
   }
 
   defaults <- arpack_defaults()
-  if (any(!names(options) %in% names(defaults))) {
+  if (!all(names(options) %in% names(defaults))) {
     stop(
       "unkown ARPACK option(s): ",
       paste(setdiff(names(options), names(defaults)),
@@ -1709,7 +1709,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- "weight"
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
@@ -1750,7 +1750,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- "weight"
-  } else if (any(!is.na(weights))) {
+  } else if (!all(is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
