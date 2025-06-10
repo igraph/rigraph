@@ -1063,7 +1063,7 @@ path <- function(...) {
   } else if (is_igraph(e2)) {
     ## Disjoint union of graphs
     res <- disjoint_union(e1, e2)
-  } else if ("igraph.edge" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.edge")) {
     ## Adding edges, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
@@ -1074,7 +1074,7 @@ path <- function(...) {
       attr <- e2[names(e2) != ""]
     }
     res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
-  } else if ("igraph.vertex" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vertex")) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
     named <- rlang::have_name(e2)
@@ -1088,7 +1088,7 @@ path <- function(...) {
 
     # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
     res <- add_vertices(e1, nv = vctrs::vec_size_common(!!!e2), attr = e2)
-  } else if ("igraph.path" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.path")) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
@@ -1175,11 +1175,11 @@ path <- function(...) {
   }
   if (is_igraph(e2)) {
     res <- difference(e1, e2)
-  } else if ("igraph.vertex" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vertex")) {
     res <- delete_vertices(e1, unlist(e2, recursive = FALSE))
-  } else if ("igraph.edge" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.edge")) {
     res <- delete_edges(e1, unlist(e2, recursive = FALSE))
-  } else if ("igraph.path" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.path")) {
     todel <- unlist(e2, recursive = FALSE)
     lt <- length(todel)
     if (lt >= 2) {
@@ -1188,9 +1188,9 @@ path <- function(...) {
     } else {
       res <- e1
     }
-  } else if ("igraph.vs" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.vs")) {
     res <- delete_vertices(e1, e2)
-  } else if ("igraph.es" %in% class(e2)) {
+  } else if (inherits(e2, "igraph.es")) {
     res <- delete_edges(e1, e2)
   } else if (is.numeric(e2) || is.character(e2)) {
     res <- delete_vertices(e1, e2)
