@@ -1524,7 +1524,7 @@ bonpow.dense <- function(graph, nodes = V(graph),
   diag(id) <- 1
 
   #  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
-  ev <- solve(id - exponent * d, tol = tol) %*% apply(d, 1, sum)
+  ev <- solve(id - exponent * d, tol = tol) %*% rowSums(d)
   if (rescale) {
     ev <- ev / sum(ev)
   } else {
