@@ -56,10 +56,10 @@
 ^vendor-one\.sh$
 ^patch$
 ^src/deps\.mk$
+^[\.]?air\.toml$
+^\.vscode$
 ^man/dot-igraph.progress\.Rd$
 ^man/dot-igraph.status\.Rd$
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
-^[\.]?air\.toml$
-^\.vscode$
