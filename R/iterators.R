@@ -1338,7 +1338,7 @@ print.igraph.vs <- function(x,
     ":\n"
   cat(title)
 
-  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph) > 0)) {
+  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph)) > 0) {
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
