@@ -1476,7 +1476,7 @@ as_igraph_es <- function(graph, e) {
     ## Based on vertex ids/names
     if (length(Pairs) != 0) {
       vv <- strsplit(e[Pairs], "|", fixed = TRUE)
-      vl <- sapply(vv, length)
+      vl <- lengths(vv)
       if (any(vl != 2)) {
         cli::cli_abort("Invalid edge name: ", e[Pairs][vl != 2][1])
       }

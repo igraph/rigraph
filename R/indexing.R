@@ -72,7 +72,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   }
 
   adj <- adjacent_vertices(x, i_seq, mode = "out")
-  i_degree <- map_int(adj, length)
+  i_degree <- lengths(adj)
 
   from_id <- rep(i_seq, i_degree)
   to_id <- unlist(adj)

@@ -887,7 +887,7 @@ edge.attributes <- function(graph, index = E(graph)) {
     value <- as.list(value)
   }
 
-  if (any(sapply(value, length) != length(index))) {
+  if (any(lengths(value) != length(index))) {
     cli::cli_abort("Invalid attribute value length, must match number of edges")
   }
 

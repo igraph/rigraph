@@ -36,7 +36,7 @@ time_bins.sir <- function(x, middle = TRUE) {
   }
 
   big.time <- unlist(sapply(sir, "[[", "times"))
-  medlen <- median(sapply(lapply(sir, "[[", "times"), length))
+  medlen <- median(lengths(lapply(sir, "[[", "times")))
   ## Adhoc use of Freedman-Diaconis binwidth; rescale time accordingly.
   w <- 2 * IQR(big.time) / (medlen^(1 / 3))
   minbt <- min(big.time)

@@ -31,7 +31,7 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
     cli::cli_abort("Columns must be have (unique) names.")
   }
 
-  lens <- sapply(cols, length)
+  lens <- lengths(cols)
   n1lens <- lens[lens != 1]
 
   if (length(unique(n1lens)) > 1) {

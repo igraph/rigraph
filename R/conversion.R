@@ -694,7 +694,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
     val <- unname(graph::nodeData(graphNEL, attr = n))
-    if (unlist.attrs && all(sapply(val, length) == 1)) {
+    if (unlist.attrs && all(lengths(val) == 1)) {
       val <- unlist(val)
     }
     g <- set_vertex_attr(g, n, value = val)
@@ -710,7 +710,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
     el <- paste(sep = "|", el[, 1], el[, 2])
     for (n in e.n) {
       val <- unname(graph::edgeData(graphNEL, attr = n)[el])
-      if (unlist.attrs && all(sapply(val, length) == 1)) {
+      if (unlist.attrs && all(lengths(val) == 1)) {
         val <- unlist(val)
       }
       g <- set_edge_attr(g, n, value = val)
