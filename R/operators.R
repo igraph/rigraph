@@ -235,7 +235,7 @@ disjoint_union <- function(...) {
   }
   vertex.attributes(res) <- attr
 
-  if ("name" %in% names(attr) && any(duplicated(attr$name))) {
+  if ("name" %in% names(attr) && anyDuplicated(attr$name) > 0) {
     cli::cli_warn("Duplicate vertex names in disjoint union.")
   }
 

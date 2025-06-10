@@ -893,7 +893,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (!missing(index)) {
     index <- as_igraph_es(graph, index)
-    if (any(duplicated(index)) || any(is.na(index))) {
+    if (anyDuplicated(index) > 0 || any(is.na(index))) {
       cli::cli_abort("{.arg index} contains duplicated edges or NAs.")
     }
   }
@@ -1229,7 +1229,7 @@ igraph.i.attribute.combination <- function(comb) {
   if (is.null(names(comb))) {
     names(comb) <- rep("", length(comb))
   }
-  if (any(duplicated(names(comb)))) {
+  if (anyDuplicated(names(comb)) > 0) {
     cli::cli_warn("Some attributes are duplicated")
   }
   comb <- lapply(comb, function(x) {

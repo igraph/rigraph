@@ -1431,7 +1431,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
       cli::cli_abort("{.arg vertices} contains no rows")
     }
     names <- as.character(vertices[, 1])
-    if (any(duplicated(names))) {
+    if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
     if (any(!names2 %in% names)) {
