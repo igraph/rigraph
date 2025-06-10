@@ -386,7 +386,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
-  if (!na_ok && any(is.na(res))) cli::cli_abort("Unknown vertex selected.")
+  if (!na_ok && anyNA(res)) cli::cli_abort("Unknown vertex selected.")
   class(res) <- "igraph.vs"
   res
 }
@@ -795,7 +795,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   } else {
     res <- unclass(x)[i]
   }
-  if (!na_ok && any(is.na(res))) cli::cli_abort("Unknown edge selected")
+  if (!na_ok && anyNA(res)) cli::cli_abort("Unknown edge selected")
   attr(res, "env") <- attr(x, "env")
   attr(res, "graph") <- attr(x, "graph")
   class(res) <- "igraph.es"
@@ -1442,7 +1442,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   }
   if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
-    if (!na.ok && any(is.na(v))) {
+    if (!na.ok && anyNA(v)) {
       cli::cli_abort("Invalid vertex names")
     }
     v
@@ -1454,7 +1454,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
     } else {
       res <- as.numeric(v)
     }
-    if (!na.ok && any(is.na(res))) {
+    if (!na.ok && anyNA(res)) {
       cli::cli_abort("Invalid vertex name(s)")
     }
     res
@@ -1498,7 +1498,7 @@ as_igraph_es <- function(graph, e) {
   } else {
     res <- as.numeric(e)
   }
-  if (any(is.na(res))) {
+  if (anyNA(res)) {
     cli::cli_abort("Invalid edge names")
   }
   res

@@ -893,7 +893,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (!missing(index)) {
     index <- as_igraph_es(graph, index)
-    if (anyDuplicated(index) > 0 || any(is.na(index))) {
+    if (anyDuplicated(index) > 0 || anyNA(index)) {
       cli::cli_abort("{.arg index} contains duplicated edges or NAs.")
     }
   }

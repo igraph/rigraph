@@ -633,7 +633,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
       snames <- V(small)$name
     }
     perm <- match(bnames, snames)
-    if (any(is.na(perm))) {
+    if (anyNA(perm)) {
       perm[is.na(perm)] <- seq(from = vcount(small) + 1, to = vcount(big))
     }
     big <- permute(big, perm)

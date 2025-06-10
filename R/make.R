@@ -681,7 +681,7 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
       )
     }
     edges <- match(edges, vertex.names)
-    if (any(is.na(edges))) {
+    if (anyNA(edges)) {
       cli::cli_abort(
         "edge vector contains a vertex name that is not found in {.arg types}"
       )
@@ -2466,7 +2466,7 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
       )
     }
     edges <- match(edges, vertex.names)
-    if (any(is.na(edges))) {
+    if (anyNA(edges)) {
       cli::cli_abort(
         "edge vector contains a vertex name that is not found in {.arg types}"
       )

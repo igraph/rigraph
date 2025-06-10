@@ -164,7 +164,7 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
       cli::cli_warn("vertex types converted to logical.")
     }
     types <- as.logical(types)
-    if (any(is.na(types))) {
+    if (anyNA(types)) {
       cli::cli_abort("`NA' is not allowed in vertex types")
     }
   }

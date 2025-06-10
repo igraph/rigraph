@@ -1385,21 +1385,21 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
   }
 
   # Parse initial_membership argument
-  if (!is.null(initial_membership) && !any(is.na(initial_membership))) {
+  if (!is.null(initial_membership) && !anyNA(initial_membership)) {
     initial_membership <- as.numeric(initial_membership)
   } else {
     initial_membership <- NULL
   }
 
   # Parse node weights argument
-  if (!is.null(vertex_weights) && !any(is.na(vertex_weights))) {
+  if (!is.null(vertex_weights) && !anyNA(vertex_weights)) {
     vertex_weights <- as.numeric(vertex_weights)
     if (objective_function == 1) { # Using modularity
       cli::cli_warn("Providing node weights contradicts using modularity.")
@@ -1570,7 +1570,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
