@@ -141,7 +141,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
       w[j] <- sum(Mu[ecl[[j]]])
     }
     for (j in 1:length(clf)) {
-      Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + .0001)) / a[j]
+      Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + 0.0001)) / a[j]
     }
   }
 

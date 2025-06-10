@@ -250,7 +250,7 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
 test_that("embed_adjacency_matrix -- Issue #50 is resolved", {
   withr::local_seed(12345)
 
-  g <- sample_gnp(15, .4)
+  g <- sample_gnp(15, 0.4)
   w <- -log(runif(ecount(g)))
   X1 <- embed_adjacency_matrix(g, 2, weights = w)
 

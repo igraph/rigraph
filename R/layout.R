@@ -2526,14 +2526,14 @@ igraph.drl.default <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -2556,14 +2556,14 @@ igraph.drl.coarsen <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -2586,14 +2586,14 @@ igraph.drl.coarsest <- list(
   cooldown.iterations = 200,
   cooldown.temperature = 2000,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 200,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 100,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -2603,7 +2603,7 @@ igraph.drl.refine <- list(
   edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
-  init.attraction = .5,
+  init.attraction = 0.5,
   init.damping.mult = 1.0,
   liquid.iterations = 0,
   liquid.temperature = 2000,
@@ -2611,19 +2611,19 @@ igraph.drl.refine <- list(
   liquid.damping.mult = 1.0,
   expansion.iterations = 50,
   expansion.temperature = 500,
-  expansion.attraction = .1,
-  expansion.damping.mult = .25,
+  expansion.attraction = 0.1,
+  expansion.damping.mult = 0.25,
   cooldown.iterations = 50,
   cooldown.temperature = 250,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 0,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 
@@ -2633,7 +2633,7 @@ igraph.drl.final <- list(
   edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
-  init.attraction = .5,
+  init.attraction = 0.5,
   init.damping.mult = 0,
   liquid.iterations = 0,
   liquid.temperature = 2000,
@@ -2646,14 +2646,14 @@ igraph.drl.final <- list(
   cooldown.iterations = 50,
   cooldown.temperature = 200,
   cooldown.attraction = 1,
-  cooldown.damping.mult = .1,
+  cooldown.damping.mult = 0.1,
   crunch.iterations = 50,
   crunch.temperature = 250,
   crunch.attraction = 1,
   crunch.damping.mult = 0.25,
   simmer.iterations = 25,
   simmer.temperature = 250,
-  simmer.attraction = .5,
+  simmer.attraction = 0.5,
   simmer.damping.mult = 0
 )
 

@@ -187,7 +187,7 @@ test_that("max_cliques() work", {
 
 test_that("max_cliques() work for subsets", {
   withr::local_seed(42)
-  gnp <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, 0.5)
 
   mysort <- function(x) {
     xl <- lengths(x)
@@ -207,7 +207,7 @@ test_that("max_cliques() work for subsets", {
 
 test_that("count_max_cliques works", {
   withr::local_seed(42)
-  gnp <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, 0.5)
 
   cl1 <- count_max_cliques(gnp, min = 8)
 

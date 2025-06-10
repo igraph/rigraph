@@ -348,8 +348,8 @@ plot.igraph <- function(x,
       center <- c(cx, cy)
       cp <- matrix(
         c(
-          x0, y0, x0 + .4 * loopSize, y0 + .2 * loopSize,
-          x0 + .4 * loopSize, y0 - .2 * loopSize, x0, y0
+          x0, y0, x0 + 0.4 * loopSize, y0 + 0.2 * loopSize,
+          x0 + 0.4 * loopSize, y0 - 0.2 * loopSize, x0, y0
         ),
         ncol = 2, byrow = TRUE
       )
@@ -368,7 +368,7 @@ plot.igraph <- function(x,
       plot.bezier(cp, 50, color, width, arr = arr, lty = lty, arrow.size = arrow.size, arr.w = arr.w)
 
       if (is.language(label) || !is.na(label)) {
-        lx <- x0 + .3
+        lx <- x0 + 0.3
         ly <- y0
         phi <- atan2(ly - center[2], lx - center[1])
         r <- sqrt((lx - center[1])**2 + (ly - center[2])**2)

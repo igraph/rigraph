@@ -723,7 +723,7 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
-hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = .01,
+hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = 0.01,
                           ann = FALSE, main = "", sub = "", xlab = "", ylab = "",
                           ...) {
   hc <- as.hclust(x)
@@ -744,7 +744,7 @@ hrgPlotDendrogram <- function(x, ...) {
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
-hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
+hrgPlotPhylo <- function(x, colbar = rainbow(11, start = 0.7, end = 0.1),
                          edge.color = NULL, use.edge.length = FALSE, ...) {
   vc <- length(x$left) + 1
   phy <- ape::as.phylo(x)
