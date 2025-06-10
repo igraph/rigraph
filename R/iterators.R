@@ -599,7 +599,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(3)
+      3
     )
     tmp[as.numeric(x)]
   }
@@ -617,7 +617,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(1)
+      1
     )
     tmp[as.numeric(x)]
   }
@@ -632,7 +632,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(2)
+      2
     )
     tmp[as.numeric(x)]
   }
@@ -933,7 +933,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(3)
+      3
     )
     tmp[as.numeric(x)]
   }
@@ -948,7 +948,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(1)
+      1
     )
     tmp[as.numeric(x)]
   }
@@ -960,7 +960,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(2)
+      2
     )
     tmp[as.numeric(x)]
   }
