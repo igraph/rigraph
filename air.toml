@@ -5,4 +5,4 @@ indent-style = "space"
 line-ending = "auto"
 persistent-line-breaks = true
 default-exclude = true
-skip = ["tribble", "graph_from_literal", "matrix", "c", "make_graph"]
+skip = ["tribble", "graph_from_literal", "matrix", "c", "make_graph", "edges"]
