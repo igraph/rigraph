@@ -250,6 +250,10 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
+    # GitHub Actions:
+    # 60 minutes is the default, 240 for covr
+    timeout-minutes: ${{ (matrix.covr && 240) || 60 }}
+
     steps:
       - uses: actions/checkout@v4
         with:
