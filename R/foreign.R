@@ -785,29 +785,9 @@ graph_from_graphdb <- function(
     } else {
       "l"
     } # "l" ????
-    typegroups <- c(
-      "rand",
-      "rand",
-      "rand",
-      "rand",
-      "m2D",
-      "m2D",
-      "m2D",
-      "m2D",
-      "m2D",
-      "m3D",
-      "m3D",
-      "m3D",
-      "m4D",
-      "m4D",
-      "m4D",
-      "m4D",
-      "bvg",
-      "bvg",
-      "bvg",
-      "bvg",
-      "bvg",
-      "bvg"
+    typegroups <- rep(
+      c("rand", "m2D", "m3D", "m4D", "bvg"),
+      c(4L, 5L, 3L, 4L, 6L)
     )
     typegroup <- typegroups[which(types == type)]
 
