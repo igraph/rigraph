@@ -9,6 +9,8 @@ graph_from_lcf(shifts, ..., n = NULL, repeats = 1L)
 \arguments{
 \item{shifts}{Integer vector, the shifts.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{n}{Integer, the number of vertices in the graph. If \code{NULL} (default),
 it is set to \code{len(shifts) * repeats}.}
 

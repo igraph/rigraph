@@ -2598,6 +2598,7 @@ full_citation_graph <- function(...) {
 #'   it is set to `len(shifts) * repeats`.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.
+#' @inheritParams rlang::args_dots_empty
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [make_graph()] can create arbitrary graphs, see also the other
@@ -2625,7 +2626,7 @@ graph_from_lcf <- function(
 
   check_dots_empty()
 
-  n <- n %||% (len(shifts) * repeats)
+  n <- n %||% (length(shifts) * repeats)
   if (!rlang::is_integer(n, n = 1)) {
     cli::cli_abort(
       "{.arg n} must be an integer of length 1, not {.obj_type_friendly {n}}."
