@@ -8,8 +8,11 @@ test_that("SGM works", {
   g1 <- sample_gnp(vc, .5)
   randperm <- c(1:nos, nos + sample(vc - nos))
   g2 <- sample_correlated_gnp(g1, corr = .7, p = g1$p, permutation = randperm)
-  P <- match_vertices(g1[], g2[],
-    m = nos, start = matrix(1 / (vc - nos), vc - nos, vc - nos),
+  P <- match_vertices(
+    g1[],
+    g2[],
+    m = nos,
+    start = matrix(1 / (vc - nos), vc - nos, vc - nos),
     iteration = 20
   )
 
@@ -30,8 +33,11 @@ test_that("SGM works", {
   perm <- c(1:nos, sample(vc - nos) + nos)
   g2 <- sample_correlated_gnp(g1, corr = 1, p = g1$p, permutation = perm)
 
-  P <- match_vertices(g1[], g2[],
-    m = nos, start = matrix(1 / (vc - nos), vc - nos, vc - nos),
+  P <- match_vertices(
+    g1[],
+    g2[],
+    m = nos,
+    start = matrix(1 / (vc - nos), vc - nos, vc - nos),
     iteration = 20
   )
 

@@ -47,12 +47,45 @@ test_that("print.igraph() works", {
   expect_output(print(g6), "     ")
 
   kite <- make_empty_graph(directed = FALSE) + LETTERS[1:10]
-  kite <- kite + edges(
-    "A", "B", "A", "C", "A", "D", "A", "F",
-    "B", "D", "B", "E", "B", "G", "C", "D", "C", "F",
-    "D", "E", "D", "F", "D", "G", "E", "G",
-    "F", "G", "F", "H", "G", "H", "H", "I", "I", "J"
-  )
+  kite <- kite +
+    edges(
+      "A",
+      "B",
+      "A",
+      "C",
+      "A",
+      "D",
+      "A",
+      "F",
+      "B",
+      "D",
+      "B",
+      "E",
+      "B",
+      "G",
+      "C",
+      "D",
+      "C",
+      "F",
+      "D",
+      "E",
+      "D",
+      "F",
+      "D",
+      "G",
+      "E",
+      "G",
+      "F",
+      "G",
+      "F",
+      "H",
+      "G",
+      "H",
+      "H",
+      "I",
+      "I",
+      "J"
+    )
   expect_output(print(kite), "A -- ")
 })
 
