@@ -1,4 +1,3 @@
-
 pause <- function() {}
 
 ### Traditional approaches: degree, closeness, betweenness
@@ -34,10 +33,16 @@ pause()
 
 ### Take a look at it
 plotG <- function(g) {
-  plot(g,
-    asp = FALSE, vertex.label.color = "blue", vertex.label.cex = 1.5,
-    vertex.label.font = 2, vertex.size = 25, vertex.color = "white",
-    vertex.frame.color = "white", edge.color = "black"
+  plot(
+    g,
+    asp = FALSE,
+    vertex.label.color = "blue",
+    vertex.label.cex = 1.5,
+    vertex.label.font = 2,
+    vertex.size = 25,
+    vertex.color = "white",
+    vertex.frame.color = "white",
+    edge.color = "black"
   )
 }
 plotG(g)
@@ -93,7 +98,13 @@ pause()
 ### Pairs plot
 pairs(cent, lower.panel = function(x, y) {
   usr <- par("usr")
-  text(mean(usr[1:2]), mean(usr[3:4]), round(cor(x, y), 3), cex = 2, col = "blue")
+  text(
+    mean(usr[1:2]),
+    mean(usr[3:4]),
+    round(cor(x, y), 3),
+    cex = 2,
+    col = "blue"
+  )
 })
 
 pause()

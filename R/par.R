@@ -8,7 +8,8 @@
 #' @inheritParams igraph_options
 #' @keywords internal
 #' @export
-igraph.options <- function(...) { # nocov start
+igraph.options <- function(...) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.options()", "igraph_options()")
   igraph_i_options(...)
 } # nocov end
@@ -23,7 +24,8 @@ igraph.options <- function(...) { # nocov start
 #' @inheritParams igraph_opt
 #' @keywords internal
 #' @export
-getIgraphOpt <- function(x, default = NULL) { # nocov start
+getIgraphOpt <- function(x, default = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "getIgraphOpt()", "igraph_opt()")
 
   if (missing(default)) {
@@ -222,7 +224,8 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   temp <- list(...)
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
-    switch(mode(arg),
+    switch(
+      mode(arg),
       list = temp <- arg,
       character = return(.igraph.pars[arg]),
       cli::cli_abort("invalid argument: {arg}.")
@@ -234,7 +237,9 @@ igraph_i_options <- function(..., .in = parent.frame()) {
 
   ## Callbacks
   n <- names(temp)
-  if (is.null(n)) cli::cli_abort("options must be given by name.")
+  if (is.null(n)) {
+    cli::cli_abort("options must be given by name.")
+  }
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])

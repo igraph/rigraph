@@ -32,7 +32,9 @@
 #' @export
 
 printer_callback <- function(fun) {
-  if (!is.function(fun)) warning("'fun' is not a function")
+  if (!is.function(fun)) {
+    warning("'fun' is not a function")
+  }
   add_class(fun, "printer_callback")
 }
 
@@ -77,8 +79,14 @@ print_head_foot <- function(head_foot) {
 #'
 #' @export
 
-head_print <- function(x, max_lines = 20, header = "", footer = "",
-                       omitted_footer = "", ...) {
+head_print <- function(
+  x,
+  max_lines = 20,
+  header = "",
+  footer = "",
+  omitted_footer = "",
+  ...
+) {
   if (is_printer_callback(x)) {
     head_print_callback(x, max_lines, header, footer, omitted_footer, ...)
   } else {
@@ -87,8 +95,15 @@ head_print <- function(x, max_lines = 20, header = "", footer = "",
   invisible(x)
 }
 
-head_print_object <- function(x, max_lines, header, footer, omitted_footer,
-                              print_fun = print, ...) {
+head_print_object <- function(
+  x,
+  max_lines,
+  header,
+  footer,
+  omitted_footer,
+  print_fun = print,
+  ...
+) {
   print_header(header)
 
   cout <- capture.output(print_fun(x, ...))
@@ -97,15 +112,23 @@ head_print_object <- function(x, max_lines, header, footer, omitted_footer,
 
   print_footer(footer)
 
-  if (cout_no < length(cout)) print_footer(omitted_footer)
+  if (cout_no < length(cout)) {
+    print_footer(omitted_footer)
+  }
 
   invisible(c(lines = length(cout), printed = cout_no))
 }
 
 #' @importFrom utils tail
 
-head_print_callback <- function(x, max_lines, header, footer,
-                                omitted_footer, ...) {
+head_print_callback <- function(
+  x,
+  max_lines,
+  header,
+  footer,
+  omitted_footer,
+  ...
+) {
   ## Header
   print_header(header)
 
@@ -127,24 +150,32 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## So how many items should we print?
   no <- tail(which(no_rows <= max_lines), 1)
-  if (is.null(no) || length(no) < 1 || is.na(no)) no <- can_max
+  if (is.null(no) || length(no) < 1 || is.na(no)) {
+    no <- can_max
+  }
 
   cat_pern <- function(..., sep = "\n") cat(..., sep = sep)
 
   ## Format them, and print
   out_lines <- head_print_object(
     x("print", no = no, ...),
-    print_fun = cat_pern, max_lines = max_lines,
-    header = "", footer = "", omitted_footer = ""
+    print_fun = cat_pern,
+    max_lines = max_lines,
+    header = "",
+    footer = "",
+    omitted_footer = ""
   )
 
   done_stat <- c(
-    tried_items = no, tried_lines = out_lines[["lines"]],
+    tried_items = no,
+    tried_lines = out_lines[["lines"]],
     printed_lines = out_lines[["printed"]]
   )
 
-  if (done_stat["tried_items"] < len ||
-    done_stat["printed_lines"] < done_stat["tried_lines"]) {
+  if (
+    done_stat["tried_items"] < len ||
+      done_stat["printed_lines"] < done_stat["tried_lines"]
+  ) {
     print_footer(omitted_footer)
   }
 
@@ -164,7 +195,9 @@ head_print_callback <- function(x, max_lines, header, footer,
 #' @export
 
 indent_print <- function(..., .indent = " ", .printer = print) {
-  if (length(.indent) != 1) stop(".indent must be a scalar")
+  if (length(.indent) != 1) {
+    stop(".indent must be a scalar")
+  }
 
   opt <- options(width = getOption("width") - nchar(.indent))
   on.exit(options(opt), add = TRUE)

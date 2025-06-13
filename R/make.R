@@ -20,8 +20,9 @@ graph <- function(
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph()", "make_graph()")
   if (inherits(edges, "formula")) {
-    if (!missing(n))
+    if (!missing(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
+    }
     if (!missing(isolates)) {
       cli::cli_abort("{.arg isolates} should not be given for graph literals")
     }
@@ -41,11 +42,14 @@ graph <- function(
       cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
     }
 
-    if (!missing(dir) && missing(directed)) directed <- dir
+    if (!missing(dir) && missing(directed)) {
+      directed <- dir
+    }
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n))
+      if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
+      }
       if (!missing(isolates)) {
         cli::cli_warn(
           "{.arg isolates} is ignored for the {.str {edges}} graph."
@@ -59,7 +63,9 @@ graph <- function(
       if (!missing(dir)) {
         cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       make_famous_graph(edges)
 
@@ -69,7 +75,9 @@ graph <- function(
         is.null(edges) ||
         (is.logical(edges) && length(edges) == 0)
     ) {
-      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
+      if (is.null(edges) || is.logical(edges)) {
+        edges <- as.numeric(edges)
+      }
       if (!is.null(isolates)) {
         cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
@@ -88,15 +96,21 @@ graph <- function(
       }
 
       args <- list(edges, ...)
-      if (!missing(n)) args <- c(args, list(n = n))
-      if (!missing(directed)) args <- c(args, list(directed = directed))
+      if (!missing(n)) {
+        args <- c(args, list(n = n))
+      }
+      if (!missing(directed)) {
+        args <- c(args, list(directed = directed))
+      }
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
@@ -133,8 +147,9 @@ graph.famous <- function(
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.famous()", "make_graph()")
   if (inherits(edges, "formula")) {
-    if (!missing(n))
+    if (!missing(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
+    }
     if (!missing(isolates)) {
       cli::cli_abort("{.arg isolates} should not be given for graph literals")
     }
@@ -154,11 +169,14 @@ graph.famous <- function(
       cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
     }
 
-    if (!missing(dir) && missing(directed)) directed <- dir
+    if (!missing(dir) && missing(directed)) {
+      directed <- dir
+    }
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n))
+      if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
+      }
       if (!missing(isolates)) {
         cli::cli_warn(
           "{.arg isolates} is ignored for the {.str {edges}} graph."
@@ -172,7 +190,9 @@ graph.famous <- function(
       if (!missing(dir)) {
         cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       make_famous_graph(edges)
 
@@ -182,7 +202,9 @@ graph.famous <- function(
         is.null(edges) ||
         (is.logical(edges) && length(edges) == 0)
     ) {
-      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
+      if (is.null(edges) || is.logical(edges)) {
+        edges <- as.numeric(edges)
+      }
       if (!is.null(isolates)) {
         cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
@@ -201,15 +223,21 @@ graph.famous <- function(
       }
 
       args <- list(edges, ...)
-      if (!missing(n)) args <- c(args, list(n = n))
-      if (!missing(directed)) args <- c(args, list(directed = directed))
+      if (!missing(n)) {
+        args <- c(args, list(n = n))
+      }
+      if (!missing(directed)) {
+        args <- c(args, list(directed = directed))
+      }
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
@@ -830,9 +858,15 @@ graph.atlas <- function(n) {
       ga <- graph_attr_names(graph)
       va <- vertex_attr_names(graph)
       ea <- edge_attr_names(graph)
-      for (g in ga) graph <- delete_graph_attr(graph, g)
-      for (v in va) graph <- delete_vertex_attr(graph, v)
-      for (e in ea) graph <- delete_edge_attr(graph, e)
+      for (g in ga) {
+        graph <- delete_graph_attr(graph, g)
+      }
+      for (v in va) {
+        graph <- delete_vertex_attr(graph, v)
+      }
+      for (e in ea) {
+        graph <- delete_edge_attr(graph, e)
+      }
     } else if (m$id == "without_loops") {
       graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
     } else if (m$id == "without_multiples") {
@@ -1404,8 +1438,9 @@ make_graph <- function(
   simplify = TRUE
 ) {
   if (inherits(edges, "formula")) {
-    if (!missing(n))
+    if (!missing(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
+    }
     if (!missing(isolates)) {
       cli::cli_abort("{.arg isolates} should not be given for graph literals")
     }
@@ -1425,11 +1460,14 @@ make_graph <- function(
       cli::cli_abort("Only give one of {.arg dir} and {.arg directed}")
     }
 
-    if (!missing(dir) && missing(directed)) directed <- dir
+    if (!missing(dir) && missing(directed)) {
+      directed <- dir
+    }
 
     if (is.character(edges) && length(edges) == 1) {
-      if (!missing(n))
+      if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for the {.str {edges}} graph.")
+      }
       if (!missing(isolates)) {
         cli::cli_warn(
           "{.arg isolates} is ignored for the {.str {edges}} graph."
@@ -1443,7 +1481,9 @@ make_graph <- function(
       if (!missing(dir)) {
         cli::cli_warn("{.arg dir} is ignored for the {.str {edges}} graph.")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       make_famous_graph(edges)
 
@@ -1453,7 +1493,9 @@ make_graph <- function(
         is.null(edges) ||
         (is.logical(edges) && length(edges) == 0)
     ) {
-      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
+      if (is.null(edges) || is.logical(edges)) {
+        edges <- as.numeric(edges)
+      }
       if (!is.null(isolates)) {
         cli::cli_warn("{.arg isolates} ignored for numeric edge list.")
       }
@@ -1472,15 +1514,21 @@ make_graph <- function(
       }
 
       args <- list(edges, ...)
-      if (!missing(n)) args <- c(args, list(n = n))
-      if (!missing(directed)) args <- c(args, list(directed = directed))
+      if (!missing(n)) {
+        args <- c(args, list(n = n))
+      }
+      if (!missing(directed)) {
+        args <- c(args, list(directed = directed))
+      }
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
       if (!missing(n)) {
         cli::cli_warn("{.arg n} is ignored for edge list with vertex names.")
       }
-      if (length(list(...))) cli::cli_abort("Extra arguments in make_graph")
+      if (length(list(...))) {
+        cli::cli_abort("Extra arguments in make_graph")
+      }
 
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
@@ -1783,7 +1831,9 @@ graph_from_literal_i <- function(mf) {
   ids <- seq(along.with = v)
   names(ids) <- v
   res <- make_graph(unname(ids[edges]), n = length(v), directed = directed)
-  if (simplify) res <- simplify(res)
+  if (simplify) {
+    res <- simplify(res)
+  }
   res <- set_vertex_attr(res, "name", value = v)
   res
 }
@@ -2078,8 +2128,9 @@ sample_tree <- tree_game_impl
 #' @rdname make_tree
 #' @param ... Passed to `make_tree()` or `sample_tree()`.
 #' @export
-tree <- function(...)
+tree <- function(...) {
   constructor_spec(list(make = make_tree, sample = sample_tree), ...)
+}
 
 
 ## -----------------------------------------------------------------
@@ -2410,8 +2461,9 @@ make_full_bipartite_graph <- function(
 #' @rdname make_full_bipartite_graph
 #' @param ... Passed to `make_full_bipartite_graph()`.
 #' @export
-full_bipartite_graph <- function(...)
+full_bipartite_graph <- function(...) {
   constructor_spec(make_full_bipartite_graph, ...)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2525,8 +2577,9 @@ make_full_citation_graph <- function(n, directed = TRUE) {
 #' @rdname make_full_citation_graph
 #' @param ... Passed to `make_full_citation_graph()`.
 #' @export
-full_citation_graph <- function(...)
+full_citation_graph <- function(...) {
   constructor_spec(make_full_citation_graph, ...)
+}
 
 ## -----------------------------------------------------------------
 

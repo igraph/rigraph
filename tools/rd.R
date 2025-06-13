@@ -19,7 +19,9 @@ set_class <- function(x) {
 
 tag <- function(x) {
   tag <- attr(x, "Rd_tag")
-  if (is.null(tag)) return()
+  if (is.null(tag)) {
+    return()
+  }
 
   gsub("\\", "tag_", tag, fixed = TRUE)
 }
@@ -39,7 +41,11 @@ rd_file <- function(path) {
     return(TRUE)
   }
 
-  describe <- purrr::keep(unlist(return_value, recursive = FALSE), inherits, "tag_describe")
+  describe <- purrr::keep(
+    unlist(return_value, recursive = FALSE),
+    inherits,
+    "tag_describe"
+  )
   items <- c(
     purrr::keep(unlist(return_value, recursive = FALSE), inherits, "tag_item"),
     purrr::keep(unlist(unlist(return_value, recursive = FALSE), recursive = FALSE), inherits, "tag_item")

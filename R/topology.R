@@ -8,7 +8,8 @@
 #' @inheritParams permute
 #' @keywords internal
 #' @export
-permute.vertices <- function(graph, permutation) { # nocov start
+permute.vertices <- function(graph, permutation) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "permute.vertices()", "permute()")
   permute(graph = graph, permutation = permutation)
 } # nocov end
@@ -23,9 +24,18 @@ permute.vertices <- function(graph, permutation) { # nocov start
 #' @inheritParams graph_from_isomorphism_class
 #' @keywords internal
 #' @export
-graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.isocreate()", "graph_from_isomorphism_class()")
-  graph_from_isomorphism_class(size = size, number = number, directed = directed)
+graph.isocreate <- function(size, number, directed = TRUE) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.isocreate()",
+    "graph_from_isomorphism_class()"
+  )
+  graph_from_isomorphism_class(
+    size = size,
+    number = number,
+    directed = directed
+  )
 } # nocov end
 
 #' Number of automorphisms
@@ -38,8 +48,17 @@ graph.isocreate <- function(size, number, directed = TRUE) { # nocov start
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
-graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.automorphisms()", "count_automorphisms()")
+graph.automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.automorphisms()",
+    "count_automorphisms()"
+  )
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
 
@@ -53,8 +72,17 @@ graph.automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "f
 #' @inheritParams canonical_permutation
 #' @keywords internal
 #' @export
-canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "canonical.permutation()", "canonical_permutation()")
+canonical.permutation <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "canonical.permutation()",
+    "canonical_permutation()"
+  )
   canonical_permutation(graph = graph, colors = colors, sh = sh)
 } # nocov end
 
@@ -68,7 +96,12 @@ canonical.permutation <- function(graph, colors = NULL, sh = c("fm", "f", "fs", 
 #' @inheritParams count_automorphisms
 #' @keywords internal
 #' @export
-automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) { # nocov start
+automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "automorphisms()", "count_automorphisms()")
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
@@ -95,9 +128,14 @@ automorphisms <- function(graph, colors = NULL, sh = c("fm", "f", "fs", "fl", "f
 ###################################################################
 
 #' @export
-graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
-                                       vertex.color2, edge.color1,
-                                       edge.color2) {
+graph.get.isomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
+) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -145,17 +183,27 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
-    vertex.color2, edge.color1, edge.color2
+    R_igraph_get_isomorphisms_vf2,
+    graph1,
+    graph2,
+    vertex.color1,
+    vertex.color2,
+    edge.color1,
+    edge.color2
   )
 
   lapply(res, function(.x) V(graph2)[.x + 1])
 }
 
 #' @export
-graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
-                                          vertex.color2, edge.color1,
-                                          edge.color2) {
+graph.get.subisomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1,
+  vertex.color2,
+  edge.color1,
+  edge.color2
+) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -203,8 +251,13 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_get_subisomorphisms_vf2, graph1, graph2,
-    vertex.color1, vertex.color2, edge.color1, edge.color2
+    R_igraph_get_subisomorphisms_vf2,
+    graph1,
+    graph2,
+    vertex.color1,
+    vertex.color2,
+    edge.color1,
+    edge.color2
   )
 
   lapply(res, function(.x) V(graph1)[.x + 1])
@@ -223,9 +276,15 @@ graph.isoclass.subgraph <- function(graph, vids) {
 }
 
 #' @export
-graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
-                                    induced = FALSE, map = TRUE, all.maps = FALSE,
-                                    time.limit = Inf) {
+graph.subisomorphic.lad <- function(
+  pattern,
+  target,
+  domains = NULL,
+  induced = FALSE,
+  map = TRUE,
+  all.maps = FALSE,
+  time.limit = Inf
+) {
   # Argument checks
   ensure_igraph(pattern)
   ensure_igraph(target)
@@ -239,10 +298,14 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   all.maps <- as.logical(all.maps)
   if (!is.null(domains)) {
     if (!is.list(domains)) {
-      cli::cli_abort("{.arg domains} must be a list of vertex vectors from {.arg target}.")
+      cli::cli_abort(
+        "{.arg domains} must be a list of vertex vectors from {.arg target}."
+      )
     }
     if (length(domains) != vcount(pattern)) {
-      cli::cli_abort("{.arg domains} length and {.arg pattern} number of vertices must match.")
+      cli::cli_abort(
+        "{.arg domains} length and {.arg pattern} number of vertices must match."
+      )
     }
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
@@ -250,8 +313,14 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_subisomorphic_lad, pattern, target, domains,
-    induced, time.limit, map, all.maps
+    R_igraph_subisomorphic_lad,
+    pattern,
+    target,
+    domains,
+    induced,
+    time.limit,
+    map,
+    all.maps
   )
 
   if (map) {
@@ -260,7 +329,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
       names(res$map) <- V(target)$name[res$map]
     }
   }
-  if (all.maps) res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+  if (all.maps) {
+    res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+  }
 
   res
 }
@@ -371,10 +442,17 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #'   vertex.color1 = NULL,
 #'   vertex.color2 = NULL
 #' )
-isomorphic <- function(graph1, graph2, method = c(
-                         "auto", "direct",
-                         "vf2", "bliss"
-                       ), ...) {
+isomorphic <- function(
+  graph1,
+  graph2,
+  method = c(
+    "auto",
+    "direct",
+    "vf2",
+    "bliss"
+  ),
+  ...
+) {
   ensure_igraph(graph1)
   ensure_igraph(graph2)
   method <- igraph.match.arg(method)
@@ -500,15 +578,24 @@ is_isomorphic_to <- isomorphic
 #' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
-subgraph_isomorphic <- function(pattern, target,
-                                method = c("auto", "lad", "vf2"), ...) {
+subgraph_isomorphic <- function(
+  pattern,
+  target,
+  method = c("auto", "lad", "vf2"),
+  ...
+) {
   method <- igraph.match.arg(method)
 
-  if (method == "auto") method <- "lad"
+  if (method == "auto") {
+    method <- "lad"
+  }
 
   if (method == "lad") {
-    graph.subisomorphic.lad(pattern, target,
-      map = FALSE, all.maps = FALSE,
+    graph.subisomorphic.lad(
+      pattern,
+      target,
+      map = FALSE,
+      all.maps = FALSE,
       ...
     )$iso
   } else if (method == "vf2") {
@@ -631,8 +718,12 @@ graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 #'
 #' @export
 #' @family graph isomorphism
-count_subgraph_isomorphisms <- function(pattern, target,
-                                        method = c("lad", "vf2"), ...) {
+count_subgraph_isomorphisms <- function(
+  pattern,
+  target,
+  method = c("lad", "vf2"),
+  ...
+) {
   method <- igraph.match.arg(method)
 
   if (method == "lad") {
@@ -726,8 +817,12 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #'
 #' @export
 #' @family graph isomorphism
-subgraph_isomorphisms <- function(pattern, target,
-                                  method = c("lad", "vf2"), ...) {
+subgraph_isomorphisms <- function(
+  pattern,
+  target,
+  method = c("lad", "vf2"),
+  ...
+) {
   method <- igraph.match.arg(method)
 
   if (method == "lad") {

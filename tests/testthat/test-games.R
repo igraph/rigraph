@@ -32,7 +32,10 @@ test_that("sample_degseq() works -- sample_gnp()", {
 test_that("sample_degseq() works -- 'configuration' generator, connected", {
   original_graph <- largest_component(sample_gnp(1000, 2 / 1000))
 
-  simple_graph <- sample_degseq(degree(original_graph), method = "configuration")
+  simple_graph <- sample_degseq(
+    degree(original_graph),
+    method = "configuration"
+  )
   expect_equal(degree(simple_graph), degree(original_graph))
 
   vl_graph <- sample_degseq(degree(simple_graph), method = "vl")
@@ -50,14 +53,24 @@ test_that("sample_degseq() works -- vl generator", {
 
 test_that("sample_degseq() works -- exponential degree ok", {
   withr::local_seed(1)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample(
+    1:100,
+    100,
+    replace = TRUE,
+    prob = exp(-0.5 * (1:100))
+  )
   exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
   expect_equal(degree(exp_vl_graph), exponential_degrees)
 })
 
 test_that("sample_degseq() works -- exponential degree error", {
   withr::local_seed(11)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample(
+    1:100,
+    100,
+    replace = TRUE,
+    prob = exp(-0.5 * (1:100))
+  )
   expect_snapshot(
     {
       sample_degseq(exponential_degrees, method = "vl")
@@ -101,7 +114,8 @@ test_that("sample_degseq() works -- fast.heur.simple", {
 
 test_that("sample_degseq() works -- configuration.simple", {
   g <- sample_gnp(1000, 1 / 1000)
-  simple_nmu_graph <- sample_degseq(degree(g, mode = "out"),
+  simple_nmu_graph <- sample_degseq(
+    degree(g, mode = "out"),
     degree(g, mode = "in"),
     method = "configuration.simple"
   )
@@ -111,11 +125,15 @@ test_that("sample_degseq() works -- configuration.simple", {
 
 test_that("sample_degseq() works -- edge.switching.simple directed", {
   g <- sample_gnp(1000, 1 / 1000, directed = TRUE)
-  simple_switch_graph <- sample_degseq(degree(g, mode = "out"),
+  simple_switch_graph <- sample_degseq(
+    degree(g, mode = "out"),
     degree(g, mode = "in"),
     method = "edge.switching.simple"
   )
-  expect_equal(degree(simple_switch_graph, mode = "out"), degree(g, mode = "out"))
+  expect_equal(
+    degree(simple_switch_graph, mode = "out"),
+    degree(g, mode = "out")
+  )
   expect_equal(degree(simple_switch_graph, mode = "in"), degree(g, mode = "in"))
 })
 
@@ -125,7 +143,10 @@ test_that("sample_degseq() works -- edge.switching.simple undirected", {
     degree(g, mode = "all"),
     method = "edge.switching.simple"
   )
-  expect_equal(degree(simple_switch_graph, mode = "all"), degree(g, mode = "all"))
+  expect_equal(
+    degree(simple_switch_graph, mode = "all"),
+    degree(g, mode = "all")
+  )
 })
 
 test_that("sample_degseq supports the sample_(...) syntax", {
@@ -162,13 +183,25 @@ test_that("sample_chung_lu works", {
   chung_lu_small <- sample_chung_lu(c(3, 3, 2, 2, 1, 1))
   expect_false(any_multiple(chung_lu_small))
 
-  chung_lu_no_loop_1 <- sample_chung_lu(c(3, 3, 2, 2, 1, 1), loops = FALSE, variant = "original")
+  chung_lu_no_loop_1 <- sample_chung_lu(
+    c(3, 3, 2, 2, 1, 1),
+    loops = FALSE,
+    variant = "original"
+  )
   expect_true(is_simple(chung_lu_no_loop_1))
 
-  chung_lu_no_loop_2 <- sample_chung_lu(c(3, 3, 2, 2, 1, 1), loops = FALSE, variant = "maxent")
+  chung_lu_no_loop_2 <- sample_chung_lu(
+    c(3, 3, 2, 2, 1, 1),
+    loops = FALSE,
+    variant = "maxent"
+  )
   expect_true(is_simple(chung_lu_no_loop_2))
 
-  chung_lu_no_loop_3 <- sample_chung_lu(c(3, 3, 2, 2, 1, 1), loops = FALSE, variant = "nr")
+  chung_lu_no_loop_3 <- sample_chung_lu(
+    c(3, 3, 2, 2, 1, 1),
+    loops = FALSE,
+    variant = "nr"
+  )
   expect_true(is_simple(chung_lu_no_loop_3))
 })
 
@@ -210,29 +243,50 @@ test_that("sample_forestfire() works -- dense", {
 test_that("Generating stochastic block models works", {
   pm <- matrix(1, nrow = 2, ncol = 2)
   bs <- c(4, 6)
-  sbm_small <- sample_sbm(10,
-    pref.matrix = pm, block.sizes = bs,
-    directed = FALSE, loops = FALSE
+  sbm_small <- sample_sbm(
+    10,
+    pref.matrix = pm,
+    block.sizes = bs,
+    directed = FALSE,
+    loops = FALSE
   )
-  expect_isomorphic(sbm_small, make_full_graph(10, directed = FALSE, loops = FALSE))
+  expect_isomorphic(
+    sbm_small,
+    make_full_graph(10, directed = FALSE, loops = FALSE)
+  )
 
-  sbm_small_loops <- sample_sbm(10,
-    pref.matrix = pm, block.sizes = bs,
-    directed = FALSE, loops = TRUE
+  sbm_small_loops <- sample_sbm(
+    10,
+    pref.matrix = pm,
+    block.sizes = bs,
+    directed = FALSE,
+    loops = TRUE
   )
   full_graph_loops <- make_full_graph(10, directed = FALSE, loops = TRUE)
-  expect_equal(sbm_small_loops[sparse = FALSE], full_graph_loops[sparse = FALSE])
+  expect_equal(
+    sbm_small_loops[sparse = FALSE],
+    full_graph_loops[sparse = FALSE]
+  )
 
-  sbm_small_directed <- sample_sbm(10,
-    pref.matrix = pm, block.sizes = bs,
-    directed = TRUE, loops = FALSE
+  sbm_small_directed <- sample_sbm(
+    10,
+    pref.matrix = pm,
+    block.sizes = bs,
+    directed = TRUE,
+    loops = FALSE
   )
   full_graph_directed <- make_full_graph(10, directed = TRUE, loops = FALSE)
-  expect_equal(sbm_small_directed[sparse = FALSE], full_graph_directed[sparse = FALSE])
+  expect_equal(
+    sbm_small_directed[sparse = FALSE],
+    full_graph_directed[sparse = FALSE]
+  )
 
-  sbm_small_all <- sample_sbm(10,
-    pref.matrix = pm, block.sizes = bs,
-    directed = TRUE, loops = TRUE
+  sbm_small_all <- sample_sbm(
+    10,
+    pref.matrix = pm,
+    block.sizes = bs,
+    directed = TRUE,
+    loops = TRUE
   )
   full_graph_all <- make_full_graph(10, directed = TRUE, loops = TRUE)
   expect_equal(sbm_small_all[sparse = FALSE], full_graph_all[sparse = FALSE])
@@ -276,7 +330,12 @@ test_that("sample_pa() works", {
 test_that("sample_pa can start from a graph", {
   withr::local_seed(20231029)
 
-  g_pa1 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_empty_graph(5))
+  g_pa1 <- sample_pa(
+    10,
+    m = 1,
+    algorithm = "bag",
+    start.graph = make_empty_graph(5)
+  )
   expect_ecount(g_pa1, 5)
   expect_vcount(g_pa1, 10)
 
@@ -294,21 +353,27 @@ test_that("sample_pa can start from a graph", {
   g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10))
   expect_isomorphic(g_pa2, make_star(10))
 
-  g_pa3 <- sample_pa(10,
-    m = 3, algorithm = "psumtree-multiple",
+  g_pa3 <- sample_pa(
+    10,
+    m = 3,
+    algorithm = "psumtree-multiple",
     start.graph = make_empty_graph(5)
   )
   expect_equal(degree(g_pa3, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
-  g_pa4 <- sample_pa(10,
-    m = 3, algorithm = "psumtree-multiple",
+  g_pa4 <- sample_pa(
+    10,
+    m = 3,
+    algorithm = "psumtree-multiple",
     start.graph = make_star(5)
   )
   expect_equal(degree(g_pa4, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_isomorphic(induced_subgraph(g_pa4, 1:5), make_star(5))
 
-  g_pa5 <- sample_pa(10,
-    m = 3, algorithm = "psumtree-multiple",
+  g_pa5 <- sample_pa(
+    10,
+    m = 3,
+    algorithm = "psumtree-multiple",
     start.graph = make_star(10)
   )
   expect_isomorphic(g_pa5, make_star(10))
@@ -343,7 +408,13 @@ test_that("sample_bipartite works -- directed gnp", {
   expect_true(is_directed(g_rand_bip_dir))
   expect_output(print_all(g_rand_bip_dir), "5->11")
 
-  g_rand_bip_in <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE, mode = "in")
+  g_rand_bip_in <- sample_bipartite_gnp(
+    10,
+    5,
+    p = .1,
+    directed = TRUE,
+    mode = "in"
+  )
   expect_output(print_all(g_rand_bip_in), "11->3")
 })
 
@@ -362,17 +433,35 @@ test_that("sample_bipartite works -- directed gnm", {
   expect_true(is_directed(g_rand_bip_gnm_dir))
   expect_output(print_all(g_rand_bip_gnm_dir), "5->12")
 
-  g_rand_bip_gnm_in <- sample_bipartite_gnm(10, 5, m = 8, directed = TRUE, mode = "in")
+  g_rand_bip_gnm_in <- sample_bipartite_gnm(
+    10,
+    5,
+    m = 8,
+    directed = TRUE,
+    mode = "in"
+  )
   expect_vcount(g_rand_bip_gnm_in, 15)
   expect_ecount(g_rand_bip_gnm_in, 8)
   expect_true(bipartite_mapping(g_rand_bip_gnm_in)$res)
   expect_true(is_directed(g_rand_bip_gnm_in))
   expect_output(print_all(g_rand_bip_gnm_in), "12->10")
 
-  g_rand_bip_full <- sample_bipartite_gnp(10, 5, p = 0.9999, directed = TRUE, mode = "all")
+  g_rand_bip_full <- sample_bipartite_gnp(
+    10,
+    5,
+    p = 0.9999,
+    directed = TRUE,
+    mode = "all"
+  )
   expect_ecount(g_rand_bip_full, 100)
 
-  g_rand_bip_edges <- sample_bipartite_gnm(10, 5, m = 99, directed = TRUE, mode = "all")
+  g_rand_bip_edges <- sample_bipartite_gnm(
+    10,
+    5,
+    m = 99,
+    directed = TRUE,
+    mode = "all"
+  )
   expect_ecount(g_rand_bip_edges, 99)
 })
 
@@ -381,10 +470,20 @@ test_that("sample_correlated_gnp works", {
   withr::local_seed(42)
 
   gnp_graph <- sample_gnp(10, .1)
-  cor_gnp_graph_1 <- sample_correlated_gnp(gnp_graph, corr = 1, p = gnp_graph$p, permutation = NULL)
+  cor_gnp_graph_1 <- sample_correlated_gnp(
+    gnp_graph,
+    corr = 1,
+    p = gnp_graph$p,
+    permutation = NULL
+  )
   expect_equal(gnp_graph[], cor_gnp_graph_1[])
 
-  cor_gnp_graph_0 <- sample_correlated_gnp(gnp_graph, corr = 0, p = gnp_graph$p, permutation = NULL)
+  cor_gnp_graph_0 <- sample_correlated_gnp(
+    gnp_graph,
+    corr = 0,
+    p = gnp_graph$p,
+    permutation = NULL
+  )
   graph_cor_1 <- cor(as.vector(gnp_graph[]), as.vector(cor_gnp_graph_0[]))
   expect_true(abs(graph_cor_1) < .3)
 
@@ -412,7 +511,12 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 test_that("sample_correlated_gnp_pair works", {
   withr::local_seed(42)
 
-  cor_gnp_pair <- sample_correlated_gnp_pair(10, corr = .95, p = .1, permutation = NULL)
+  cor_gnp_pair <- sample_correlated_gnp_pair(
+    10,
+    corr = .95,
+    p = .1,
+    permutation = NULL
+  )
   expect_true(abs(ecount(cor_gnp_pair[[1]]) - ecount(cor_gnp_pair[[2]])) < 3)
 })
 
@@ -427,18 +531,34 @@ test_that("sample_correlated_gnp corner cases work", {
   }
 
   gnp_graph <- sample_gnp(10, .3)
-  cor_gnp_full <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = .99999999)
+  cor_gnp_full <- sample_correlated_gnp(
+    gnp_graph,
+    corr = 0.000001,
+    p = .99999999
+  )
   expect_true(is_full(cor_gnp_full))
 
-  cor_gnp_empty <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = 0.0000001)
+  cor_gnp_empty <- sample_correlated_gnp(
+    gnp_graph,
+    corr = 0.000001,
+    p = 0.0000001
+  )
   expect_ecount(cor_gnp_empty, 0)
   expect_vcount(cor_gnp_empty, 10)
 
   gnp_graph_directed <- sample_gnp(10, .3, directed = TRUE)
-  cor_gnp_directed <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = .99999999)
+  cor_gnp_directed <- sample_correlated_gnp(
+    gnp_graph_directed,
+    corr = 0.000001,
+    p = .99999999
+  )
   expect_true(is_full(cor_gnp_directed))
 
-  cor_gnp_directed_empty <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = 0.0000001)
+  cor_gnp_directed_empty <- sample_correlated_gnp(
+    gnp_graph_directed,
+    corr = 0.000001,
+    p = 0.0000001
+  )
   expect_ecount(cor_gnp_directed_empty, 0)
   expect_vcount(cor_gnp_directed_empty, 10)
 })
@@ -448,12 +568,22 @@ test_that("permutation works for sample_correlated_gnp", {
 
   gnp_graph <- sample_gnp(10, .3)
   perm <- sample(vcount(gnp_graph))
-  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = .99999, p = .3, permutation = perm)
+  cor_gnp_graph <- sample_correlated_gnp(
+    gnp_graph,
+    corr = .99999,
+    p = .3,
+    permutation = perm
+  )
   gnp_graph <- permute(gnp_graph, perm)
   expect_equal(gnp_graph[], cor_gnp_graph[])
 
   perm <- sample(vcount(gnp_graph))
-  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = 1, p = .3, permutation = perm)
+  cor_gnp_graph <- sample_correlated_gnp(
+    gnp_graph,
+    corr = 1,
+    p = .3,
+    permutation = perm
+  )
   gnp_graph <- permute(gnp_graph, perm)
   expect_equal(gnp_graph[], cor_gnp_graph[])
 })
@@ -467,28 +597,52 @@ test_that("HSBM works", {
     0, 1 / 2, 1 / 2
   ), nrow = 3)
 
-  g_hsbm1 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 0)
+  g_hsbm1 <- sample_hierarchical_sbm(
+    100,
+    10,
+    rho = c(3, 3, 4) / 10,
+    C = C,
+    p = 0
+  )
   expect_ecount(g_hsbm1, 172)
   expect_vcount(g_hsbm1, 100)
   expect_false(is_directed(g_hsbm1))
 
   withr::local_seed(42)
 
-  g_hsbm2 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1)
+  g_hsbm2 <- sample_hierarchical_sbm(
+    100,
+    10,
+    rho = c(3, 3, 4) / 10,
+    C = C,
+    p = 1
+  )
   expect_ecount(g_hsbm2, ecount(g_hsbm1) + 10 * 9 * (90 + 10) / 2)
   expect_vcount(g_hsbm2, 100)
   expect_true(is_simple(g_hsbm2))
 
   withr::local_seed(42)
 
-  g_hsbm3 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1e-15)
+  g_hsbm3 <- sample_hierarchical_sbm(
+    100,
+    10,
+    rho = c(3, 3, 4) / 10,
+    C = C,
+    p = 1e-15
+  )
   expect_ecount(g_hsbm3, ecount(g_hsbm1))
   expect_vcount(g_hsbm3, 100)
   expect_true(is_simple(g_hsbm3))
 
   withr::local_seed(42)
 
-  g_hsbm4 <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 - 1e-15)
+  g_hsbm4 <- sample_hierarchical_sbm(
+    100,
+    10,
+    rho = c(3, 3, 4) / 10,
+    C = C,
+    p = 1 - 1e-15
+  )
   expect_ecount(g_hsbm4, ecount(g_hsbm2))
   expect_vcount(g_hsbm4, 100)
   expect_true(is_simple(g_hsbm4))
@@ -515,14 +669,18 @@ test_that("HSBM with list arguments works", {
   g_hsbm1 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
-    rho = rho, C = C, p = 0
+    rho = rho,
+    C = C,
+    p = 0
   )
 
   withr::local_seed(42)
   g_hsbm2 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     rep(vertices_per_block, blocks),
-    rho = rho, C = C, p = 0
+    rho = rho,
+    C = C,
+    p = 0
   )
   expect_equal(g_hsbm1[], g_hsbm2[])
 
@@ -530,7 +688,9 @@ test_that("HSBM with list arguments works", {
   g_hsbm3 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
-    rho = replicate(blocks, rho, simplify = FALSE), C = C, p = 0
+    rho = replicate(blocks, rho, simplify = FALSE),
+    C = C,
+    p = 0
   )
   expect_equal(g_hsbm1[], g_hsbm3[])
 
@@ -538,7 +698,9 @@ test_that("HSBM with list arguments works", {
   g_hsbm4 <- sample_hierarchical_sbm(
     blocks * vertices_per_block,
     vertices_per_block,
-    rho = rho, C = replicate(blocks, C, simplify = FALSE), p = 0
+    rho = rho,
+    C = replicate(blocks, C, simplify = FALSE),
+    p = 0
   )
 
   expect_equal(g_hsbm1[], g_hsbm4[])
@@ -547,7 +709,9 @@ test_that("HSBM with list arguments works", {
     sample_hierarchical_sbm(
       blocks * vertices_per_block,
       rep(vertices_per_block, blocks),
-      rho = list(rho, rho), C = C, p = 0
+      rho = list(rho, rho),
+      C = C,
+      p = 0
     )
   )
 
@@ -564,16 +728,22 @@ test_that("HSBM with list arguments works", {
   rho4 <- n(c(2, 1))
   C4 <- matrix(0, nrow = 2, ncol = 2)
 
-  g_hsbm5 <- sample_hierarchical_sbm(21,
-    m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-    C = list(C1, C2, C3, C4), p = 1
+  g_hsbm5 <- sample_hierarchical_sbm(
+    21,
+    m = c(3, 10, 5, 3),
+    rho = list(rho1, rho2, rho3, rho4),
+    C = list(C1, C2, C3, C4),
+    p = 1
   )
   expect_true(is_simple(g_hsbm5))
 
   withr::local_seed(42)
-  g_hsbm6 <- sample_hierarchical_sbm(21,
-    m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-    C = list(C1, C2, C3, C4), p = 1 - 1e-10
+  g_hsbm6 <- sample_hierarchical_sbm(
+    21,
+    m = c(3, 10, 5, 3),
+    rho = list(rho1, rho2, rho3, rho4),
+    C = list(C1, C2, C3, C4),
+    p = 1 - 1e-10
   )
   expect_equal(g_hsbm5[], g_hsbm6[])
 
@@ -585,15 +755,21 @@ test_that("HSBM with list arguments works", {
   C3 <- matrix(1)
   rho4 <- n(c(2, 1))
   C4 <- matrix(1, nrow = 2, ncol = 2)
-  g_hsbm7 <- sample_hierarchical_sbm(21,
-    m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-    C = list(C1, C2, C3, C4), p = 0
+  g_hsbm7 <- sample_hierarchical_sbm(
+    21,
+    m = c(3, 10, 5, 3),
+    rho = list(rho1, rho2, rho3, rho4),
+    C = list(C1, C2, C3, C4),
+    p = 0
   )
   expect_true(is_simple(g_hsbm7))
 
-  g_hsbm8 <- sample_hierarchical_sbm(21,
-    m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-    C = list(C1, C2, C3, C4), p = 1
+  g_hsbm8 <- sample_hierarchical_sbm(
+    21,
+    m = c(3, 10, 5, 3),
+    rho = list(rho1, rho2, rho3, rho4),
+    C = list(C1, C2, C3, C4),
+    p = 1
   )
   expect_equal(g_hsbm5[] + g_hsbm7[], g_hsbm8[])
 })
@@ -601,7 +777,9 @@ test_that("HSBM with list arguments works", {
 test_that("Dot product rng works", {
   withr::local_seed(42)
   vecs <- cbind(
-    c(0, 1, 1, 1, 0) / 3, c(0, 1, 1, 0, 1) / 3, c(1, 1, 1, 1, 0) / 4,
+    c(0, 1, 1, 1, 0) / 3,
+    c(0, 1, 1, 0, 1) / 3,
+    c(1, 1, 1, 1, 0) / 4,
     c(0, 1, 1, 1, 0)
   )
 
@@ -627,10 +805,12 @@ test_that("Dot product rng works", {
 test_that("sample_dot_product generates edges with correct probabilities", {
   withr::local_seed(42)
   latent_features <- cbind(
-    c(0, 1, 1, 1, 0) / 3, c(0, 1, 1, 0, 1) / 3, c(1, 1, 1, 1, 0) / 4,
+    c(0, 1, 1, 1, 0) / 3,
+    c(0, 1, 1, 0, 1) / 3,
+    c(1, 1, 1, 1, 0) / 4,
     c(0, 1, 1, 1, 0)
   )
-  expected_probs <- t(latent_features)%*%latent_features
+  expected_probs <- t(latent_features) %*% latent_features
   diag(expected_probs) <- 0
   num_graphs <- 1000
   edge_counts <- matrix(0, nrow = 4, ncol = 4)

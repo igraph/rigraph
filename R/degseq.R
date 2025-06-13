@@ -1,4 +1,4 @@
-#' Is a degree sequence graphical?
+#'   Is a degree sequence graphical?
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -8,9 +8,22 @@
 #' @inheritParams is_graphical
 #' @keywords internal
 #' @export
-is.graphical.degree.sequence <- function(out.deg, in.deg = NULL, allowed.edge.types = c("simple", "loops", "multi", "all")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.graphical.degree.sequence()", "is_graphical()")
-  is_graphical(out.deg = out.deg, in.deg = in.deg, allowed.edge.types = allowed.edge.types)
+is.graphical.degree.sequence <- function(
+  out.deg,
+  in.deg = NULL,
+  allowed.edge.types = c("simple", "loops", "multi", "all")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "is.graphical.degree.sequence()",
+    "is_graphical()"
+  )
+  is_graphical(
+    out.deg = out.deg,
+    in.deg = in.deg,
+    allowed.edge.types = allowed.edge.types
+  )
 } # nocov end
 
 #' Check if a degree sequence is valid for a multi-graph
@@ -23,7 +36,8 @@ is.graphical.degree.sequence <- function(out.deg, in.deg = NULL, allowed.edge.ty
 #' @inheritParams is_degseq
 #' @keywords internal
 #' @export
-is.degree.sequence <- function(out.deg, in.deg = NULL) { # nocov start
+is.degree.sequence <- function(out.deg, in.deg = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.degree.sequence()", "is_degseq()")
   is_degseq(out.deg = out.deg, in.deg = in.deg)
 } # nocov end

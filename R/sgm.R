@@ -4,9 +4,15 @@ solve_LSAP <- function(x, maximum = FALSE) {
   }
   nr <- nrow(x)
   nc <- ncol(x)
-  if (nr > nc) stop("x must not have more rows than columns.")
-  if (nc > nr) x <- rbind(x, matrix(2 * sum(x), nc - nr, nc))
-  if (maximum) x <- max(x) - x
+  if (nr > nc) {
+    stop("x must not have more rows than columns.")
+  }
+  if (nc > nr) {
+    x <- rbind(x, matrix(2 * sum(x), nc - nr, nc))
+  }
+  if (maximum) {
+    x <- max(x) - x
+  }
   storage.mode(x) <- "double"
   out <- .Call(R_igraph_solve_lsap, x, as.numeric(nc)) + 1L
   out[seq_len(nr)]

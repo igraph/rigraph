@@ -1,4 +1,3 @@
-
 pause <- function() {}
 
 ### A modular graph has dense subgraphs
@@ -142,11 +141,15 @@ coords <- layout_with_kk(karate)
 lapply(seq_along(communities), function(x) {
   m <- modularity(communities[[x]])
   par(mar = c(1, 1, 3, 1))
-  plot(communities[[x]], karate,
+  plot(
+    communities[[x]],
+    karate,
     layout = coords,
     main = paste(
-      names(communities)[x], "\n",
-      "Modularity:", round(m, 3)
+      names(communities)[x],
+      "\n",
+      "Modularity:",
+      round(m, 3)
     )
   )
 })
@@ -159,10 +162,13 @@ clique.community <- function(graph, k) {
   edges <- c()
   for (i in seq(along.with = clq)) {
     for (j in seq(along.with = clq)) {
-      if (length(unique(c(
+      if (
+        length(unique(c(
         clq[[i]],
         clq[[j]]
-      ))) == k + 1) {
+      ))) ==
+          k + 1
+      ) {
         edges <- c(edges, c(i, j))
       }
     }
