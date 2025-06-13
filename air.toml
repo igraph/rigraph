@@ -5,4 +5,5 @@ indent-style = "space"
 line-ending = "auto"
 persistent-line-breaks = true
 default-exclude = true
+exclude = ["R/utils-s3.R"]
 skip = ["tribble", "graph_from_literal", "matrix", "c", "make_graph", "edges"]
