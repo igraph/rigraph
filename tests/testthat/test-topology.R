@@ -147,7 +147,7 @@ test_that("LAD stress test", {
   N <- 100
 
   for (i in 1:N) {
-    target <- sample_gnp(20, .5)
+    target <- sample_gnp(20, 0.5)
     pn <- sample(4:18, 1)
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
     iso <- subgraph_isomorphic(pattern, target,
@@ -162,7 +162,7 @@ test_that("LAD stress test", {
   for (i in 1:N) {
     target <- sample_gnp(20, 1 / 20)
     pn <- sample(5:18, 1)
-    pattern <- sample_gnp(pn, .6)
+    pattern <- sample_gnp(pn, 0.6)
     iso <- subgraph_isomorphic(pattern, target,
       induced = TRUE,
       method = "lad"

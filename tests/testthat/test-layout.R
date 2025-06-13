@@ -193,7 +193,7 @@ test_that("Kamada-Kawai layout generator works", {
   expect_true(looks_circular(l[-1, ]))
 
   g <- make_ring(10)
-  E(g)$weight <- rep(1:2, length.out = ecount(g))
+  E(g)$weight <- rep_len(1:2, ecount(g))
   l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
   expect_true(looks_circular(l, check_dists = FALSE))
 

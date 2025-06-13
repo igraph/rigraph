@@ -50,14 +50,14 @@ test_that("sample_degseq() works -- vl generator", {
 
 test_that("sample_degseq() works -- exponential degree ok", {
   withr::local_seed(1)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample.int(100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
   exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
   expect_equal(degree(exp_vl_graph), exponential_degrees)
 })
 
 test_that("sample_degseq() works -- exponential degree error", {
   withr::local_seed(11)
-  exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+  exponential_degrees <- sample.int(100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
   expect_snapshot(
     {
       sample_degseq(exponential_degrees, method = "vl")
@@ -69,14 +69,14 @@ test_that("sample_degseq() works -- exponential degree error", {
 
 test_that("sample_degseq() works -- Power-law degree ok", {
   withr::local_seed(3)
-  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+  powerlaw_degrees <- sample.int(100, 100, replace = TRUE, prob = (1:100)^-2)
   powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
   expect_equal(degree(powerlaw_vl_graph), powerlaw_degrees)
 })
 
 test_that("sample_degseq() works -- Power-law degree error", {
   withr::local_seed(7)
-  powerlaw_degrees <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+  powerlaw_degrees <- sample.int(100, 100, replace = TRUE, prob = (1:100)^-2)
 
   expect_snapshot(
     {
@@ -241,7 +241,7 @@ test_that("Generating stochastic block models works", {
 test_that("sample_smallworld works", {
   for (i in 1:50) {
     p <- runif(1)
-    d <- sample(1:3, 1)
+    d <- sample.int(3, 1)
     nei <- sample(2:5, 1)
     g <- sample_smallworld(d, 10, nei, p, loops = FALSE)
     expect_false(any(which_loop(g)))
@@ -327,7 +327,7 @@ test_that("sample_pa can start from a graph", {
 test_that("sample_bipartite works -- undirected gnp", {
   withr::local_seed(42)
 
-  g_rand_bip <- sample_bipartite_gnp(10, 5, p = .1)
+  g_rand_bip <- sample_bipartite_gnp(10, 5, p = 0.1)
   expect_equal(g_rand_bip$name, "Bipartite Gnp random graph")
   expect_vcount(g_rand_bip, 15)
   expect_ecount(g_rand_bip, 7)
@@ -336,14 +336,14 @@ test_that("sample_bipartite works -- undirected gnp", {
 })
 
 test_that("sample_bipartite works -- directed gnp", {
-  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE)
+  g_rand_bip_dir <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE)
   expect_vcount(g_rand_bip_dir, 15)
   expect_ecount(g_rand_bip_dir, 6)
   expect_true(bipartite_mapping(g_rand_bip_dir)$res)
   expect_true(is_directed(g_rand_bip_dir))
   expect_output(print_all(g_rand_bip_dir), "5->11")
 
-  g_rand_bip_in <- sample_bipartite_gnp(10, 5, p = .1, directed = TRUE, mode = "in")
+  g_rand_bip_in <- sample_bipartite_gnp(10, 5, p = 0.1, directed = TRUE, mode = "in")
   expect_output(print_all(g_rand_bip_in), "11->3")
 })
 
@@ -380,20 +380,20 @@ test_that("sample_bipartite works -- directed gnm", {
 test_that("sample_correlated_gnp works", {
   withr::local_seed(42)
 
-  gnp_graph <- sample_gnp(10, .1)
+  gnp_graph <- sample_gnp(10, 0.1)
   cor_gnp_graph_1 <- sample_correlated_gnp(gnp_graph, corr = 1, p = gnp_graph$p, permutation = NULL)
   expect_equal(gnp_graph[], cor_gnp_graph_1[])
 
   cor_gnp_graph_0 <- sample_correlated_gnp(gnp_graph, corr = 0, p = gnp_graph$p, permutation = NULL)
   graph_cor_1 <- cor(as.vector(gnp_graph[]), as.vector(cor_gnp_graph_0[]))
-  expect_true(abs(graph_cor_1) < .3)
+  expect_true(abs(graph_cor_1) < 0.3)
 
   cor_gnp_no_p_1 <- sample_correlated_gnp(gnp_graph, corr = 1)
   expect_equal(gnp_graph[], cor_gnp_no_p_1[])
 
   cor_gnp_no_p_0 <- sample_correlated_gnp(gnp_graph, corr = 0)
   graph_cor_2 <- cor(as.vector(gnp_graph[]), as.vector(cor_gnp_no_p_0[]))
-  expect_true(abs(graph_cor_2) < .3)
+  expect_true(abs(graph_cor_2) < 0.3)
 })
 
 
@@ -406,13 +406,13 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 
   cor_gnp_graph_0 <- sample_correlated_gnp(grg_graph, corr = 0)
   graph_cor <- cor(as.vector(grg_graph[]), as.vector(cor_gnp_graph_0[]))
-  expect_true(abs(graph_cor) < .3)
+  expect_true(abs(graph_cor) < 0.3)
 })
 
 test_that("sample_correlated_gnp_pair works", {
   withr::local_seed(42)
 
-  cor_gnp_pair <- sample_correlated_gnp_pair(10, corr = .95, p = .1, permutation = NULL)
+  cor_gnp_pair <- sample_correlated_gnp_pair(10, corr = 0.95, p = 0.1, permutation = NULL)
   expect_true(abs(ecount(cor_gnp_pair[[1]]) - ecount(cor_gnp_pair[[2]])) < 3)
 })
 
@@ -426,16 +426,16 @@ test_that("sample_correlated_gnp corner cases work", {
     isomorphic(g, g_full)
   }
 
-  gnp_graph <- sample_gnp(10, .3)
-  cor_gnp_full <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = .99999999)
+  gnp_graph <- sample_gnp(10, 0.3)
+  cor_gnp_full <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = 0.99999999)
   expect_true(is_full(cor_gnp_full))
 
   cor_gnp_empty <- sample_correlated_gnp(gnp_graph, corr = 0.000001, p = 0.0000001)
   expect_ecount(cor_gnp_empty, 0)
   expect_vcount(cor_gnp_empty, 10)
 
-  gnp_graph_directed <- sample_gnp(10, .3, directed = TRUE)
-  cor_gnp_directed <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = .99999999)
+  gnp_graph_directed <- sample_gnp(10, 0.3, directed = TRUE)
+  cor_gnp_directed <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = 0.99999999)
   expect_true(is_full(cor_gnp_directed))
 
   cor_gnp_directed_empty <- sample_correlated_gnp(gnp_graph_directed, corr = 0.000001, p = 0.0000001)
@@ -446,14 +446,14 @@ test_that("sample_correlated_gnp corner cases work", {
 test_that("permutation works for sample_correlated_gnp", {
   withr::local_seed(42)
 
-  gnp_graph <- sample_gnp(10, .3)
+  gnp_graph <- sample_gnp(10, 0.3)
   perm <- sample(vcount(gnp_graph))
-  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = .99999, p = .3, permutation = perm)
+  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = 0.99999, p = 0.3, permutation = perm)
   gnp_graph <- permute(gnp_graph, perm)
   expect_equal(gnp_graph[], cor_gnp_graph[])
 
   perm <- sample(vcount(gnp_graph))
-  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = 1, p = .3, permutation = perm)
+  cor_gnp_graph <- sample_correlated_gnp(gnp_graph, corr = 1, p = 0.3, permutation = perm)
   gnp_graph <- permute(gnp_graph, perm)
   expect_equal(gnp_graph[], cor_gnp_graph[])
 })

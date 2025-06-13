@@ -310,7 +310,7 @@ test_that("make_bipartite_graph works", {
 
 test_that("make_bipartite_graph works with vertex names", {
   types <- c(0, 1, 0, 1, 0, 1)
-  names(types) <- LETTERS[1:length(types)]
+  names(types) <- LETTERS[seq_along(types)]
   edges <- c("A", "B", "C", "D", "E", "F", "A", "D", "D", "E", "B", "C", "C", "F")
   bip_grap <- make_bipartite_graph(types, edges)
 

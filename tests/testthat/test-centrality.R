@@ -154,14 +154,14 @@ test_that("authority_score survives stress test", {
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     as <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(t(M) %*% M, as$authority, as$value)
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     hs <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
     is.good(M %*% t(M), hs$hub, hs$value)
@@ -379,7 +379,7 @@ test_that("edge_betweenness() works", {
 
   #### Weighted
 
-  E(kite)$weight <- sample(1:10, ecount(kite), replace = TRUE)
+  E(kite)$weight <- sample.int(10, ecount(kite), replace = TRUE)
 
   bet <- betweenness(kite)
   ebet <- edge_betweenness(kite)
@@ -447,20 +447,20 @@ test_that("power_centrality() works", {
   expect_equal(fig1.bp, list(c(A = 0.89, B = 1.79, C = 0, D = 0), c(A = 1.15, B = 1.64, C = 0, D = 0), c(A = 1.34, B = 1.49, C = 0, D = 0), c(A = 1.48, B = 1.35, C = 0, D = 0), c(A = 1.59, B = 1.22, C = 0, D = 0)))
 
   g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-  bp.c <- lapply(seq(-.5, .5, by = 0.1), function(x) {
+  bp.c <- lapply(seq(-0.5, 0.5, by = 0.1), function(x) {
     round(power_centrality(g.c, exponent = x), 2)[c(1, 2, 4)]
   })
 
   expect_equal(bp.c, list(c(0.00, 1.58, 0.00), c(0.73, 1.45, 0.36), c(0.97, 1.34, 0.49), c(1.09, 1.27, 0.54), c(1.15, 1.23, 0.58), c(1.20, 1.20, 0.60), c(1.22, 1.17, 0.61), c(1.25, 1.16, 0.62), c(1.26, 1.14, 0.63), c(1.27, 1.13, 0.64), c(1.28, 1.12, 0.64)))
 
   g.d <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
-  bp.d <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.d <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.d, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(bp.d, list(c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54)))
 
   g.e <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
-  bp.e <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.e <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.e, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(bp.e, list(c(-1.00, 1.67, -0.33), c(0.36, 1.81, 0.12), c(1.00, 1.67, 0.33), c(1.30, 1.55, 0.43), c(1.46, 1.46, 0.49), c(1.57, 1.40, 0.52), c(1.63, 1.36, 0.54), c(1.68, 1.33, 0.56), c(1.72, 1.30, 0.57)))
@@ -468,7 +468,7 @@ test_that("power_centrality() works", {
   g.f <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13),
     dir = FALSE
   )
-  bp.f <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+  bp.f <- lapply(seq(-0.4, 0.4, by = 0.1), function(x) {
     round(power_centrality(g.f, exponent = x), 2)[c(1, 2, 5)]
   })
   expect_equal(
@@ -509,7 +509,7 @@ test_that("eigen_centrality() works", {
   }
 
   for (i in 1:1000) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample.int(20, 1))
     ev <- eigen_centrality(G)
     expect_true(is.good(as_adjacency_matrix(G, sparse = FALSE), ev$vector, ev$value))
   }

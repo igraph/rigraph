@@ -251,7 +251,7 @@ test_that("diameter() works -- directed", {
 
 test_that("diameter() works -- weighted", {
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
-  E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(10, ecount(g), replace = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
   expect_equal(max(sp, na.rm = TRUE), diameter(g, unconnected = TRUE))
@@ -545,7 +545,7 @@ test_that("constraint() works", {
   expect_equal(c1, c2)
 
   withr::local_seed(42)
-  E(karate)$weight <- sample(1:10, replace = TRUE, ecount(karate))
+  E(karate)$weight <- sample.int(10, replace = TRUE, ecount(karate))
   wc1 <- constraint(karate)
   wc2 <- constraint.orig(karate, attr = "weight")
   expect_equal(wc1, wc2)

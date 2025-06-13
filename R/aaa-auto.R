@@ -683,7 +683,7 @@ get_shortest_path_bellman_ford_impl <- function(graph, from, to, weights=NULL, m
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -716,7 +716,7 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -743,7 +743,7 @@ voronoi_impl <- function(graph, generators, ..., weights=NULL, mode=c("out", "in
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -765,7 +765,7 @@ get_k_shortest_paths_impl <- function(graph, from, to, ..., k, weights=NULL, mod
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -807,7 +807,7 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -837,7 +837,7 @@ get_widest_paths_impl <- function(graph, from, to=V(graph), weights=NULL, mode=c
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -864,7 +864,7 @@ widest_path_widths_dijkstra_impl <- function(graph, from=V(graph), to=V(graph), 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -886,7 +886,7 @@ widest_path_widths_floyd_warshall_impl <- function(graph, from=V(graph), to=V(gr
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -907,7 +907,7 @@ spanner_impl <- function(graph, stretch, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -932,7 +932,7 @@ betweenness_subset_impl <- function(graph, vids=V(graph), directed=TRUE, sources
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -957,7 +957,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -978,7 +978,7 @@ harmonic_centrality_cutoff_impl <- function(graph, vids=V(graph), mode=c("out", 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1006,7 +1006,7 @@ personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1041,7 +1041,7 @@ personalized_pagerank_vs_impl <- function(graph, algo=c("prpack", "arpack"), vid
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1099,7 +1099,7 @@ average_path_length_dijkstra_impl <- function(graph, weights=NULL, directed=TRUE
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1215,7 +1215,7 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1237,7 +1237,7 @@ feedback_vertex_set_impl <- function(graph, weights=NULL, algo=c("exact_ip")) {
   if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
     weights <- V(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1374,7 +1374,7 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1397,7 +1397,7 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1463,7 +1463,7 @@ avg_nearest_neighbor_degree_impl <- function(graph, vids=V(graph), mode=c("all",
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1484,7 +1484,7 @@ degree_correlation_vector_impl <- function(graph, weights=NULL, from.mode=c("out
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1509,7 +1509,7 @@ strength_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "tota
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1680,7 +1680,7 @@ joint_degree_matrix_impl <- function(graph, weights=NULL, max.out.degree=-1, max
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1701,7 +1701,7 @@ joint_degree_distribution_impl <- function(graph, weights=NULL, from.mode=c("out
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1726,7 +1726,7 @@ joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.typ
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1763,7 +1763,7 @@ eccentricity_dijkstra_impl <- function(graph, vids=V(graph), ..., weights=NULL, 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1787,7 +1787,7 @@ graph_center_dijkstra_impl <- function(graph, ..., weights=NULL, mode=c("all", "
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1810,7 +1810,7 @@ radius_dijkstra_impl <- function(graph, ..., weights=NULL, mode=c("all", "out", 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1847,7 +1847,7 @@ pseudo_diameter_dijkstra_impl <- function(graph, weights=NULL, start.vid, direct
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1872,7 +1872,7 @@ diversity_impl <- function(graph, weights=NULL, vids=V(graph)) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1894,7 +1894,7 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1925,7 +1925,7 @@ global_efficiency_impl <- function(graph, weights=NULL, directed=TRUE) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1946,7 +1946,7 @@ local_efficiency_impl <- function(graph, vids=V(graph), weights=NULL, directed=T
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1969,7 +1969,7 @@ average_local_efficiency_impl <- function(graph, weights=NULL, directed=TRUE, mo
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2140,7 +2140,7 @@ get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), norma
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2161,7 +2161,7 @@ get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total")
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2341,7 +2341,7 @@ weighted_cliques_impl <- function(graph, vertex.weights=NULL, min.weight=0, max.
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
     vertex.weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
     vertex.weights <- as.numeric(vertex.weights)
   } else {
     vertex.weights <- NULL
@@ -2365,7 +2365,7 @@ largest_weighted_cliques_impl <- function(graph, vertex.weights=NULL) {
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
     vertex.weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
     vertex.weights <- as.numeric(vertex.weights)
   } else {
     vertex.weights <- NULL
@@ -2386,7 +2386,7 @@ weighted_clique_number_impl <- function(graph, vertex.weights=NULL) {
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
     vertex.weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
     vertex.weights <- as.numeric(vertex.weights)
   } else {
     vertex.weights <- NULL
@@ -2573,7 +2573,7 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2717,7 +2717,7 @@ get_stochastic_sparse_impl <- function(graph, column.wise=FALSE, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2793,7 +2793,7 @@ local_scan_subset_ecount_impl <- function(graph, weights=NULL, subsets) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2850,7 +2850,7 @@ gomory_hu_tree_impl <- function(graph, capacity=NULL) {
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
-  if (!is.null(capacity) && any(!is.na(capacity))) {
+  if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
   } else {
     capacity <- NULL
@@ -2877,7 +2877,7 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
-  if (!is.null(capacity) && any(!is.na(capacity))) {
+  if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
   } else {
     capacity <- NULL
@@ -2904,7 +2904,7 @@ residual_graph_impl <- function(graph, capacity, flow) {
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
-  if (!is.null(capacity) && any(!is.na(capacity))) {
+  if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
   } else {
     capacity <- NULL
@@ -2924,7 +2924,7 @@ reverse_residual_graph_impl <- function(graph, capacity, flow) {
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
-  if (!is.null(capacity) && any(!is.na(capacity))) {
+  if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
   } else {
     capacity <- NULL
@@ -2994,7 +2994,7 @@ all_st_mincuts_impl <- function(graph, source, target, capacity=NULL) {
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
-  if (!is.null(capacity) && any(!is.na(capacity))) {
+  if (!is.null(capacity) && !all(is.na(capacity))) {
     capacity <- as.numeric(capacity)
   } else {
     capacity <- NULL
@@ -3516,7 +3516,7 @@ adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -3540,7 +3540,7 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -3716,7 +3716,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff=-1, weights=NU
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -3740,7 +3740,7 @@ minimum_cycle_basis_impl <- function(graph, bfs.cutoff=-1, complete=TRUE, use.cy
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -3908,7 +3908,7 @@ moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL

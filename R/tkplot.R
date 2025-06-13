@@ -362,12 +362,12 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   edge.label.color <- params("edge", "label.color")
   arrow.size <- params("edge", "arrow.size")[1]
   curved <- params("edge", "curved")
-  curved <- rep(curved, length.out = ecount(graph))
+  curved <- rep_len(curved, ecount(graph))
 
   layout <- unname(params("plot", "layout"))
   layout[, 2] <- -layout[, 2]
   margin <- params("plot", "margin")
-  margin <- rep(margin, length.out = 4)
+  margin <- rep_len(margin, 4)
 
   # the new style parameters can't do this yet
   arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
@@ -1267,7 +1267,7 @@ tk_canvas <- function(tkp.id) {
   mapply(
     function(from, to, id) .tkplot.create.edge(tkp.id, from, to, id),
     edgematrix[, 1],
-    edgematrix[, 2], 1:nrow(edgematrix)
+    edgematrix[, 2], seq_len(nrow(edgematrix))
   )
 }
 
@@ -1826,7 +1826,7 @@ tk_canvas <- function(tkp.id) {
       tmp.frame <- tcltk::tkframe(dialog)
       tcltk::tkgrid(tmp.frame, row = row, column = 1, sticky = "nw", padx = 5, pady = 5)
       values[[i]] <- tcltk::tclVar(layout$params[[i]]$default)
-      for (j in 1:length(layout$params[[i]]$values)) {
+      for (j in seq_along(layout$params[[i]]$values)) {
         tmp <- tcltk::tkradiobutton(tmp.frame,
           variable = values[[i]],
           value = layout$params[[i]]$values[j],

@@ -563,7 +563,7 @@ i.parse.plot.params <- function(graph, params) {
         if (length(v) == 1) {
           return(rep(v, length(range)))
         } else {
-          return(rep(v, length.out = max(range) + 1)[[range + 1]])
+          return(rep_len(v, max(range) + 1)[[range + 1]])
         }
       }
     }
@@ -592,7 +592,7 @@ i.parse.plot.params <- function(graph, params) {
       }
     }
     if (!is.function(p[[type]][[name]])) {
-      if (any(is.na(p[[type]][[name]]))) {
+      if (anyNA(p[[type]][[name]])) {
         if (name != "label") {
           cli::cli_warn("{type} attribute {name} contains NAs. Replacing with default value {i.default.values[[type]][[name]]
         }")

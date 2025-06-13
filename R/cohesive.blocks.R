@@ -406,7 +406,7 @@ print.cohesiveBlocks <- function(x, ...) {
   myb <- blocks(x)
   ch <- cohesion(x)
   pp <- parent(x)
-  si <- sapply(myb, length)
+  si <- lengths(myb)
 
   cs <- 3 + 2 + nchar(length(x)) +
     max(distances(hierarchy(x), mode = "out", v = 1)) * 3

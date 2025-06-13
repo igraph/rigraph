@@ -393,7 +393,7 @@ test_that("as_biadjacency_matrix() works -- dense", {
 test_that("as_biadjacency_matrix() works -- dense named", {
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
-  V(g)$name <- letters[1:length(V(g))]
+  V(g)$name <- letters[seq_along(V(g))]
 
   expect_true(is_named(g))
 
@@ -467,7 +467,7 @@ test_that("graphNEL conversion works", {
   ## Attributes
 
   V(g)$name <- as.character(vcount(g):1)
-  E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(10, ecount(g), replace = TRUE)
   g$name <- "Foobar"
 
   g_graphnel1 <- as_graphnel(g)

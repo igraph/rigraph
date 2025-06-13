@@ -72,7 +72,7 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
   }
 
   adj <- adjacent_vertices(x, i_seq, mode = "out")
-  i_degree <- map_int(adj, length)
+  i_degree <- lengths(adj)
 
   from_id <- rep(i_seq, i_degree)
   to_id <- unlist(adj)
@@ -221,10 +221,10 @@ get_adjacency_submatrix <- function(x, i, j, attr = NULL) {
     cli::cli_abort("Cannot use {.arg from}/{.arg to} without the other")
   }
   if (!missing(from)) {
-    if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
+    if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
-    if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
+    if ((!is.numeric(to) && !is.character(to)) || anyNA(to)) {
       cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {
@@ -438,10 +438,10 @@ expand.grid.unordered <- function(i, j, loops = FALSE, directed = FALSE) {
     cli::cli_abort("Logical or numeric value must be of length 1")
   }
   if (!missing(from)) {
-    if ((!is.numeric(from) && !is.character(from)) || any(is.na(from))) {
+    if ((!is.numeric(from) && !is.character(from)) || anyNA(from)) {
       cli::cli_abort("{.arg from} must be a numeric or character vector without NAs")
     }
-    if ((!is.numeric(to) && !is.character(to)) || any(is.na(to))) {
+    if ((!is.numeric(to) && !is.character(to)) || anyNA(to)) {
       cli::cli_abort("{.arg to} must be a numeric or character vector without NAs")
     }
     if (length(from) != length(to)) {

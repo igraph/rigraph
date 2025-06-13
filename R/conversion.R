@@ -694,7 +694,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
     val <- unname(graph::nodeData(graphNEL, attr = n))
-    if (unlist.attrs && all(sapply(val, length) == 1)) {
+    if (unlist.attrs && all(lengths(val) == 1)) {
       val <- unlist(val)
     }
     g <- set_vertex_attr(g, n, value = val)
@@ -710,7 +710,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
     el <- paste(sep = "|", el[, 1], el[, 2])
     for (n in e.n) {
       val <- unname(graph::edgeData(graphNEL, attr = n)[el])
-      if (unlist.attrs && all(sapply(val, length) == 1)) {
+      if (unlist.attrs && all(lengths(val) == 1)) {
         val <- unlist(val)
       }
       g <- set_edge_attr(g, n, value = val)
@@ -1418,7 +1418,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   ## Handle if some elements are 'NA'
   ensure_no_na(d, "edge data frame")
 
-  if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
+  if (!is.null(vertices) && anyNA(vertices[, 1])) {
     cli::cli_warn("In {.code vertices[,1]}, {.code NA} elements were replaced with string {.str NA}.")
     vertices[, 1][is.na(vertices[, 1])] <- "NA"
   }
@@ -1431,10 +1431,10 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
       cli::cli_abort("{.arg vertices} contains no rows")
     }
     names <- as.character(vertices[, 1])
-    if (any(duplicated(names))) {
+    if (anyDuplicated(names) > 0) {
       cli::cli_abort("{.arg vertices} contains duplicated vertex names")
     }
-    if (any(!names2 %in% names)) {
+    if (!all(names2 %in% names)) {
       cli::cli_abort("Some vertex names in {.arg d} are not listed in {.arg vertices}")
     }
   }

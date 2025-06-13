@@ -72,7 +72,7 @@ test_that("max_cliques() work", {
   gnp <- simplify(gnp)
 
   mysort <- function(x) {
-    xl <- sapply(x, length)
+    xl <- lengths(x)
     x <- lapply(x, sort)
     xc <- sapply(x, paste, collapse = "-")
     x[order(xl, xc)]
@@ -149,7 +149,7 @@ test_that("max_cliques() work", {
           } else {
             numeric()
           }
-          if (any(duplicated(PX$PX))) {
+          if (anyDuplicated(PX$PX) > 0) {
             stop("foo2")
           }
         }
@@ -187,10 +187,10 @@ test_that("max_cliques() work", {
 
 test_that("max_cliques() work for subsets", {
   withr::local_seed(42)
-  gnp <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, 0.5)
 
   mysort <- function(x) {
-    xl <- sapply(x, length)
+    xl <- lengths(x)
     x <- lapply(x, sort)
     xc <- sapply(x, paste, collapse = "-")
     x[order(xl, xc)]
@@ -207,7 +207,7 @@ test_that("max_cliques() work for subsets", {
 
 test_that("count_max_cliques works", {
   withr::local_seed(42)
-  gnp <- sample_gnp(100, .5)
+  gnp <- sample_gnp(100, 0.5)
 
   cl1 <- count_max_cliques(gnp, min = 8)
 
@@ -267,7 +267,7 @@ test_that("largest_ivs() works", {
   g <- sample_gnp(50, 0.8)
   livs <- largest_ivs(g)
   expect_equal(
-    unique(sapply(livs, length)),
+    unique(lengths(livs)),
     ivs_size(g)
   )
 
@@ -285,7 +285,7 @@ test_that("largest_cliques works", {
   expect_length(cliques(g, min = length(lc[[1]]) + 1), 0)
 
   lc_ring <- largest_cliques(make_ring(10))
-  expect_equal(max(sapply(lc_ring, length)), 2)
+  expect_equal(max(lengths(lc_ring)), 2)
 })
 
 test_that("is_clique works", {

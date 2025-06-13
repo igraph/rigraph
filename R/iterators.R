@@ -386,7 +386,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
-  if (!na_ok && any(is.na(res))) cli::cli_abort("Unknown vertex selected.")
+  if (!na_ok && anyNA(res)) cli::cli_abort("Unknown vertex selected.")
   class(res) <- "igraph.vs"
   res
 }
@@ -599,7 +599,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(3)
+      3
     )
     tmp[as.numeric(x)]
   }
@@ -617,7 +617,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(1)
+      1
     )
     tmp[as.numeric(x)]
   }
@@ -632,7 +632,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
-      as.numeric(2)
+      2
     )
     tmp[as.numeric(x)]
   }
@@ -795,7 +795,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   } else {
     res <- unclass(x)[i]
   }
-  if (!na_ok && any(is.na(res))) cli::cli_abort("Unknown edge selected")
+  if (!na_ok && anyNA(res)) cli::cli_abort("Unknown edge selected")
   attr(res, "env") <- attr(x, "env")
   attr(res, "graph") <- attr(x, "graph")
   class(res) <- "igraph.es"
@@ -933,7 +933,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(3)
+      3
     )
     tmp[as.numeric(x)]
   }
@@ -948,7 +948,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(1)
+      1
     )
     tmp[as.numeric(x)]
   }
@@ -960,7 +960,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
-      as.numeric(2)
+      2
     )
     tmp[as.numeric(x)]
   }
@@ -1338,7 +1338,7 @@ print.igraph.vs <- function(x,
     ":\n"
   cat(title)
 
-  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph) > 0)) {
+  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph)) > 0) {
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
@@ -1442,7 +1442,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   }
   if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
-    if (!na.ok && any(is.na(v))) {
+    if (!na.ok && anyNA(v)) {
       cli::cli_abort("Invalid vertex names")
     }
     v
@@ -1454,7 +1454,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
     } else {
       res <- as.numeric(v)
     }
-    if (!na.ok && any(is.na(res))) {
+    if (!na.ok && anyNA(res)) {
       cli::cli_abort("Invalid vertex name(s)")
     }
     res
@@ -1476,7 +1476,7 @@ as_igraph_es <- function(graph, e) {
     ## Based on vertex ids/names
     if (length(Pairs) != 0) {
       vv <- strsplit(e[Pairs], "|", fixed = TRUE)
-      vl <- sapply(vv, length)
+      vl <- lengths(vv)
       if (any(vl != 2)) {
         cli::cli_abort("Invalid edge name: ", e[Pairs][vl != 2][1])
       }
@@ -1498,7 +1498,7 @@ as_igraph_es <- function(graph, e) {
   } else {
     res <- as.numeric(e)
   }
-  if (any(is.na(res))) {
+  if (anyNA(res)) {
     cli::cli_abort("Invalid edge names")
   }
   res
@@ -1518,7 +1518,7 @@ is_igraph_es <- function(x) {
 parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
   args <- list(...)
 
-  if (any(!sapply(args, is_fun))) cli::cli_abort("Not {what} sequence")
+  if (!all(sapply(args, is_fun))) cli::cli_abort("Not {what} sequence")
 
   ## get the ids of all graphs
   graph_id <- sapply(args, get_vs_graph_id) %>%

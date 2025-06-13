@@ -729,7 +729,7 @@ modularity_matrix <- function(graph, membership = lifecycle::deprecated(), weigh
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -851,7 +851,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
   }
   z <- list()
   if (!use.modularity || is.null(object$modularity)) {
-    object$height <- 1:nrow(merges)
+    object$height <- seq_len(nrow(merges))
   } else {
     object$height <- object$modularity[-1]
     object$height <- cumsum(object$height - min(object$height))
@@ -936,7 +936,7 @@ as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   merges <- complete.dend(x, use.modularity)
 
   if (!use.modularity || is.null(x$modularity)) {
-    height <- 1:nrow(merges)
+    height <- seq_len(nrow(merges))
   } else {
     height <- x$modularity[-1]
     height <- cumsum(height - min(height))
@@ -1205,7 +1205,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1385,21 +1385,21 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
   }
 
   # Parse initial_membership argument
-  if (!is.null(initial_membership) && !any(is.na(initial_membership))) {
+  if (!is.null(initial_membership) && !anyNA(initial_membership)) {
     initial_membership <- as.numeric(initial_membership)
   } else {
     initial_membership <- NULL
   }
 
   # Parse node weights argument
-  if (!is.null(vertex_weights) && !any(is.na(vertex_weights))) {
+  if (!is.null(vertex_weights) && !anyNA(vertex_weights)) {
     vertex_weights <- as.numeric(vertex_weights)
     if (objective_function == 1) { # Using modularity
       cli::cli_warn("Providing node weights contradicts using modularity.")
@@ -1570,7 +1570,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
+  if (!is.null(weights) && !anyNA(weights)) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1690,7 +1690,7 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1773,7 +1773,7 @@ cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -1938,7 +1938,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2075,7 +2075,7 @@ cluster_label_prop0 <- function(
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2180,7 +2180,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2270,7 +2270,7 @@ cluster_optimal <- function(graph, weights = NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -2348,7 +2348,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
     e.weights <- E(graph)$weight
   }
-  if (!is.null(e.weights) && any(!is.na(e.weights))) {
+  if (!is.null(e.weights) && !all(is.na(e.weights))) {
     e.weights <- as.numeric(e.weights)
   } else {
     e.weights <- NULL
@@ -2356,7 +2356,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) {
     v.weights <- V(graph)$weight
   }
-  if (!is.null(v.weights) && any(!is.na(v.weights))) {
+  if (!is.null(v.weights) && !all(is.na(v.weights))) {
     v.weights <- as.numeric(v.weights)
   } else {
     v.weights <- NULL

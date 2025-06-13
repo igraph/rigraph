@@ -132,7 +132,7 @@ plot.igraph <- function(x,
 
   layout <- i.postprocess.layout(params("plot", "layout"))
   margin <- params("plot", "margin")
-  margin <- rep(margin, length.out = 4)
+  margin <- rep_len(margin, 4)
   rescale <- params("plot", "rescale")
   asp <- params("plot", "asp")
   frame.plot <- params("plot", "frame.plot")
@@ -222,10 +222,10 @@ plot.igraph <- function(x,
     mark.groups <- communities(mark.groups)
   }
 
-  mark.shape <- rep(mark.shape, length.out = length(mark.groups))
-  mark.border <- rep(mark.border, length.out = length(mark.groups))
-  mark.col <- rep(mark.col, length.out = length(mark.groups))
-  mark.expand <- rep(mark.expand, length.out = length(mark.groups))
+  mark.shape <- rep_len(mark.shape, length(mark.groups))
+  mark.border <- rep_len(mark.border, length(mark.groups))
+  mark.col <- rep_len(mark.col, length(mark.groups))
+  mark.expand <- rep_len(mark.expand, length(mark.groups))
 
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
@@ -233,7 +233,7 @@ plot.igraph <- function(x,
     if (length(vertex.size) == 1) {
       vs <- vertex.size
     } else {
-      vs <- rep(vertex.size, length.out = vcount(graph))[v]
+      vs <- rep_len(vertex.size, vcount(graph))[v]
     }
     igraph.polygon(layout[v, , drop = FALSE],
       vertex.size = vs,
@@ -278,7 +278,7 @@ plot.igraph <- function(x,
     )
   } else {
     ## different vertex shapes, do it by "endpoint"
-    shape <- rep(shape, length.out = vcount(graph))
+    shape <- rep_len(shape, vcount(graph))
     ec <- edge.coords
     ec[, 1:2] <- t(sapply(seq(length.out = nrow(el)), function(x) {
       .igraph.shapes[[shape[el[x, 1]]]]$clip(edge.coords[x, , drop = FALSE],
@@ -348,8 +348,8 @@ plot.igraph <- function(x,
       center <- c(cx, cy)
       cp <- matrix(
         c(
-          x0, y0, x0 + .4 * loopSize, y0 + .2 * loopSize,
-          x0 + .4 * loopSize, y0 - .2 * loopSize, x0, y0
+          x0, y0, x0 + 0.4 * loopSize, y0 + 0.2 * loopSize,
+          x0 + 0.4 * loopSize, y0 - 0.2 * loopSize, x0, y0
         ),
         ncol = 2, byrow = TRUE
       )
@@ -368,7 +368,7 @@ plot.igraph <- function(x,
       plot.bezier(cp, 50, color, width, arr = arr, lty = lty, arrow.size = arrow.size, arr.w = arr.w)
 
       if (is.language(label) || !is.na(label)) {
-        lx <- x0 + .3
+        lx <- x0 + 0.3
         ly <- y0
         phi <- atan2(ly - center[2], lx - center[1])
         r <- sqrt((lx - center[1])**2 + (ly - center[2])**2)
@@ -480,7 +480,7 @@ plot.igraph <- function(x,
     } else {
       ## different kinds of arrows drawn separately as 'arrows' cannot
       ## handle a vector as the 'code' argument
-      curved <- rep(curved, length.out = ecount(graph))[nonloops.e]
+      curved <- rep_len(curved, ecount(graph))[nonloops.e]
       lc.x <- lc.y <- numeric(length(curved))
       for (code in 0:3) {
         valid <- arrow.mode == code
@@ -1003,8 +1003,8 @@ igraph.Arrows <-
       x1d <- r.seg * cos(th.seg1) / uin[1]
       y1d <- r.seg * sin(th.seg1) / uin[2]
     }
-    if (is.logical(curved) && all(!curved) ||
-      is.numeric(curved) && all(!curved)) {
+    if (is.logical(curved) && !any(curved) ||
+      is.numeric(curved) && !any(curved)) {
       segments(x1 + x1d, y1 + y1d, x2 + x2d, y2 + y2d, lwd = sh.lwd, col = sh.col, lty = sh.lty)
       phi <- atan2(y1 - y2, x1 - x2)
       r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
@@ -1016,7 +1016,7 @@ igraph.Arrows <-
       } else {
         lambda <- as.logical(curved) * 0.5
       }
-      lambda <- rep(lambda, length.out = length(x1))
+      lambda <- rep_len(lambda, length(x1))
       c.x1 <- x1 + x1d
       c.y1 <- y1 + y1d
       c.x2 <- x2 + x2d
@@ -1026,9 +1026,9 @@ igraph.Arrows <-
       midy <- (y1 + y2) / 2
       spx <- midx - lambda * 1 / 2 * (c.y2 - c.y1)
       spy <- midy + lambda * 1 / 2 * (c.x2 - c.x1)
-      sh.col <- rep(sh.col, length.out = length(c.x1))
-      sh.lty <- rep(sh.lty, length.out = length(c.x1))
-      sh.lwd <- rep(sh.lwd, length.out = length(c.x1))
+      sh.col <- rep_len(sh.col, length(c.x1))
+      sh.lty <- rep_len(sh.lty, length(c.x1))
+      sh.lwd <- rep_len(sh.lwd, length(c.x1))
       lc.x <- lc.y <- numeric(length(c.x1))
 
       for (i in seq_len(length(c.x1))) {

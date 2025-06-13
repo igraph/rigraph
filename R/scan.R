@@ -401,7 +401,7 @@ scan_vertex_norm <- function(input_stat, tau) {
         if (tau == 0) {
           nstat[, i] <- input_stat[, i]
         } else {
-          muv <- apply(as.matrix(input_stat[, (i - tau):(i - 1)]), 1, mean)
+          muv <- rowMeans(as.matrix(input_stat[, (i - tau):(i - 1)]))
           sdv <- apply(as.matrix(input_stat[, (i - tau):(i - 1)]), 1, sd)
           sdv[is.na(sdv)] <- 1
           nstat[, i] <- (input_stat[, i] - muv) / pmax(sdv, 1)
@@ -418,7 +418,7 @@ scan_vertex_norm <- function(input_stat, tau) {
         if (tau == 0) {
           nstat[, i] <- input_stat[, (tau + 1), i]
         } else {
-          muv <- apply(as.matrix(input_stat[, (1:tau), i]), 1, mean)
+          muv <- rowMeans(as.matrix(input_stat[, (1:tau), i]))
           sdv <- apply(as.matrix(input_stat[, (1:tau), i]), 1, sd)
           sdv[is.na(sdv)] <- 1
           nstat[, i] <- (input_stat[, (tau + 1), i] - muv) / pmax(sdv, 1)

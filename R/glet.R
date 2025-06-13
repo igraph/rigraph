@@ -123,7 +123,7 @@ graphlet_basis <- function(graph, weights = NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -145,7 +145,7 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !all(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -177,7 +177,7 @@ function() {
     co <- layout_with_kk(g)
     par(mar = c(1, 1, 1, 1))
     plot(g, layout = co)
-    for (i in 1:length(gl$Bc)) {
+    for (i in seq_along(gl$Bc)) {
       sel <- gl$Bc[[i]]
       V(g)$color <- "white"
       V(g)[sel]$color <- "#E495A5"

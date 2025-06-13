@@ -517,7 +517,7 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
     r
   }
 
-  oHgt <- 1:nrow(merges)
+  oHgt <- seq_len(nrow(merges))
   hMax <- oHgt[length(oHgt)]
   mynames <- if (is.null(object$names)) 1:(nMerge + 1) else object$names
   z <- list()
@@ -585,7 +585,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   ## the left node.
   map2 <- numeric(nrow(merge))
   mergeInto <- merge
-  for (i in 1:nrow(merge)) {
+  for (i in seq_len(nrow(merge))) {
     mr <- mergeInto[i, ]
     mr[mr > 0] <- -map2[mr[mr > 0]]
     mergeInto[i, ] <- -mr
@@ -600,7 +600,7 @@ as.hclust.igraphHRG <- function(x, ...) {
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(
-    merge = merge, height = 1:nrow(merge), order = order,
+    merge = merge, height = seq_len(nrow(merge)), order = order,
     labels = mynames, method = NA_character_,
     dist.method = NA_character_
   )
@@ -723,7 +723,7 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
-hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = .01,
+hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = 0.01,
                           ann = FALSE, main = "", sub = "", xlab = "", ylab = "",
                           ...) {
   hc <- as.hclust(x)
@@ -744,7 +744,7 @@ hrgPlotDendrogram <- function(x, ...) {
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
-hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
+hrgPlotPhylo <- function(x, colbar = rainbow(11, start = 0.7, end = 0.1),
                          edge.color = NULL, use.edge.length = FALSE, ...) {
   vc <- length(x$left) + 1
   phy <- ape::as.phylo(x)
@@ -805,7 +805,7 @@ print.igraphHRG <- function(x, type = c("auto", "tree", "plain"),
                             level = 3, ...) {
   type <- igraph.match.arg(type)
   if (type == "auto") {
-    type <- if (length(x$left <= 100)) "tree" else "plain"
+    type <- if (length(x$left) <= 100) "tree" else "plain"
   }
   if (type == "tree") {
     return(print1.igraphHRG(x, level = level, ...))

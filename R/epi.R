@@ -36,7 +36,7 @@ time_bins.sir <- function(x, middle = TRUE) {
   }
 
   big.time <- unlist(sapply(sir, "[[", "times"))
-  medlen <- median(sapply(lapply(sir, "[[", "times"), length))
+  medlen <- median(lengths(lapply(sir, "[[", "times")))
   ## Adhoc use of Freedman-Diaconis binwidth; rescale time accordingly.
   w <- 2 * IQR(big.time) / (medlen^(1 / 3))
   minbt <- min(big.time)
@@ -175,7 +175,7 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
   if (is.null(quantile_color)) {
     quantile_color <- c(NI = "blue", NS = "red", NR = "gold")[comp]
   }
-  quantile_color <- rep(quantile_color, length.out = length(quantiles))
+  quantile_color <- rep_len(quantile_color, length(quantiles))
 
   ns <- length(sir)
   xlim <- xlim %||% c(0, max(sapply(sir, function(x) max(x$times))))

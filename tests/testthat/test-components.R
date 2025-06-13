@@ -5,7 +5,7 @@ test_that("components works", {
     largest_component(sample_gnp(n, 1 / n))
   }
 
-  random_lg_list <- lapply(1:30, function(x) random_largest_component(sample(100, 1)))
+  random_lg_list <- lapply(1:30, function(x) random_largest_component(sample.int(100, 1)))
   lg_size <- sapply(random_lg_list, vcount)
 
   dis_union <- disjoint_union(random_lg_list)

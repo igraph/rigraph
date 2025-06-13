@@ -1,6 +1,6 @@
 sortgl <- function(x) {
   cl <- lapply(x$cliques, sort)
-  n <- sapply(cl, length)
+  n <- lengths(cl)
   list(cliques = cl[order(n)], thresholds = x$thresholds[order(n)])
 }
 
@@ -43,14 +43,14 @@ threshold.net <- function(graph, level) {
 
   clqt <- unvs(max_cliques(graph.t))
   clqt <- lapply(clqt, sort)
-  clqt[order(sapply(clqt, length), decreasing = TRUE)]
+  clqt[order(lengths(clqt), decreasing = TRUE)]
 }
 
 graphlets.old <- function(graph) {
   if (!is_weighted(graph)) {
     stop("Graph not weighted")
   }
-  if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
+  if (min(E(graph)$weight) <= 0 || !all(is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
 
@@ -69,7 +69,7 @@ graphlets.old <- function(graph) {
   clu <- unique(cls)
 
   ## Delete cliques that consist of single vertices
-  clf <- clu[sapply(clu, length) != 1]
+  clf <- clu[lengths(clu) != 1]
 
   clf
 }
@@ -77,7 +77,7 @@ graphlets.old <- function(graph) {
 test_that("Graphlets work for a bigger graph", {
   withr::local_seed(42)
   g <- make_graph("zachary")
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample.int(5, ecount(g), replace = TRUE)
 
   gl <- graphlet_basis(g)
   gl2 <- graphlets.old(g)
@@ -92,7 +92,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   if (!is_weighted(graph)) {
     stop("Graph not weighted")
   }
-  if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
+  if (min(E(graph)$weight) <= 0 || !all(is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
   if (length(iter) != 1 || !is.numeric(iter) ||
@@ -104,7 +104,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 
   ## Create vertex-clique list first
   vcl <- vector(length = vcount(graph), mode = "list")
-  for (i in 1:length(clf)) {
+  for (i in seq_along(clf)) {
     for (j in clf[[i]]) {
       vcl[[j]] <- c(vcl[[j]], i)
     }
@@ -122,7 +122,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   ## We will also need a clique-edge list, the edges in the cliques
   system.time({
     cel <- vector(length = length(clf), mode = "list")
-    for (i in 1:length(ecl)) {
+    for (i in seq_along(ecl)) {
       for (j in ecl[[i]]) {
         cel[[j]] <- c(cel[[j]], i)
       }
@@ -137,11 +137,11 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   w <- numeric(length(ecl))
   a <- sapply(clf, function(x) length(x) * (length(x) + 1) / 2)
   for (i in 1:iter) {
-    for (j in 1:length(ecl)) {
+    for (j in seq_along(ecl)) {
       w[j] <- sum(Mu[ecl[[j]]])
     }
-    for (j in 1:length(clf)) {
-      Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + .0001)) / a[j]
+    for (j in seq_along(clf)) {
+      Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + 0.0001)) / a[j]
     }
   }
 
