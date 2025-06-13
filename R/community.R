@@ -8,9 +8,22 @@
 #' @inheritParams make_clusters
 #' @keywords internal
 #' @export
-create.communities <- function(graph, membership = NULL, algorithm = NULL, merges = NULL, modularity = TRUE) { # nocov start
+create.communities <- function(
+  graph,
+  membership = NULL,
+  algorithm = NULL,
+  merges = NULL,
+  modularity = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "create.communities()", "make_clusters()")
-  make_clusters(graph = graph, membership = membership, algorithm = algorithm, merges = merges, modularity = modularity)
+  make_clusters(
+    graph = graph,
+    membership = membership,
+    algorithm = algorithm,
+    merges = merges,
+    modularity = modularity
+  )
 } # nocov end
 
 #' Community structure via short random walks
@@ -23,9 +36,28 @@ create.communities <- function(graph, membership = NULL, algorithm = NULL, merge
 #' @inheritParams cluster_walktrap
 #' @keywords internal
 #' @export
-walktrap.community <- function(graph, weights = NULL, steps = 4, merges = TRUE, modularity = TRUE, membership = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "walktrap.community()", "cluster_walktrap()")
-  cluster_walktrap(graph = graph, weights = weights, steps = steps, merges = merges, modularity = modularity, membership = membership)
+walktrap.community <- function(
+  graph,
+  weights = NULL,
+  steps = 4,
+  merges = TRUE,
+  modularity = TRUE,
+  membership = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "walktrap.community()",
+    "cluster_walktrap()"
+  )
+  cluster_walktrap(
+    graph = graph,
+    weights = weights,
+    steps = steps,
+    merges = merges,
+    modularity = modularity,
+    membership = membership
+  )
 } # nocov end
 
 #' Finding communities in graphs based on statistical meachanics
@@ -38,9 +70,40 @@ walktrap.community <- function(graph, weights = NULL, steps = 4, merges = TRUE, 
 #' @inheritParams cluster_spinglass
 #' @keywords internal
 #' @export
-spinglass.community <- function(graph, weights = NULL, vertex = NULL, spins = 25, parupdate = FALSE, start.temp = 1, stop.temp = 0.01, cool.fact = 0.99, update.rule = c("config", "random", "simple"), gamma = 1.0, implementation = c("orig", "neg"), gamma.minus = 1.0) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "spinglass.community()", "cluster_spinglass()")
-  cluster_spinglass(graph = graph, weights = weights, vertex = vertex, spins = spins, parupdate = parupdate, start.temp = start.temp, stop.temp = stop.temp, cool.fact = cool.fact, update.rule = update.rule, gamma = gamma, implementation = implementation, gamma.minus = gamma.minus)
+spinglass.community <- function(
+  graph,
+  weights = NULL,
+  vertex = NULL,
+  spins = 25,
+  parupdate = FALSE,
+  start.temp = 1,
+  stop.temp = 0.01,
+  cool.fact = 0.99,
+  update.rule = c("config", "random", "simple"),
+  gamma = 1.0,
+  implementation = c("orig", "neg"),
+  gamma.minus = 1.0
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "spinglass.community()",
+    "cluster_spinglass()"
+  )
+  cluster_spinglass(
+    graph = graph,
+    weights = weights,
+    vertex = vertex,
+    spins = spins,
+    parupdate = parupdate,
+    start.temp = start.temp,
+    stop.temp = stop.temp,
+    cool.fact = cool.fact,
+    update.rule = update.rule,
+    gamma = gamma,
+    implementation = implementation,
+    gamma.minus = gamma.minus
+  )
 } # nocov end
 
 #' Functions to deal with the result of network community detection
@@ -53,7 +116,8 @@ spinglass.community <- function(graph, weights = NULL, vertex = NULL, spins = 25
 #' @inheritParams show_trace
 #' @keywords internal
 #' @export
-showtrace <- function(communities) { # nocov start
+showtrace <- function(communities) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "showtrace()", "show_trace()")
   show_trace(communities = communities)
 } # nocov end
@@ -68,7 +132,8 @@ showtrace <- function(communities) { # nocov start
 #' @inheritParams cluster_optimal
 #' @keywords internal
 #' @export
-optimal.community <- function(graph, weights = NULL) { # nocov start
+optimal.community <- function(graph, weights = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "optimal.community()", "cluster_optimal()")
   cluster_optimal(graph = graph, weights = weights)
 } # nocov end
@@ -83,8 +148,13 @@ optimal.community <- function(graph, weights = NULL) { # nocov start
 #' @inheritParams cluster_louvain
 #' @keywords internal
 #' @export
-multilevel.community <- function(graph, weights = NULL, resolution = 1) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "multilevel.community()", "cluster_louvain()")
+multilevel.community <- function(graph, weights = NULL, resolution = 1) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "multilevel.community()",
+    "cluster_louvain()"
+  )
   cluster_louvain(graph = graph, weights = weights, resolution = resolution)
 } # nocov end
 
@@ -98,9 +168,22 @@ multilevel.community <- function(graph, weights = NULL, resolution = 1) { # noco
 #' @inheritParams modularity_matrix
 #' @keywords internal
 #' @export
-mod.matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) { # nocov start
+mod.matrix <- function(
+  graph,
+  membership,
+  weights = NULL,
+  resolution = 1,
+  directed = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "mod.matrix()", "modularity_matrix()")
-  modularity_matrix(graph = graph, membership = membership, weights = weights, resolution = resolution, directed = directed)
+  modularity_matrix(
+    graph = graph,
+    membership = membership,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
+  )
 } # nocov end
 
 #' Community structure detecting based on the leading eigenvector of the community matrix
@@ -113,9 +196,32 @@ mod.matrix <- function(graph, membership, weights = NULL, resolution = 1, direct
 #' @inheritParams cluster_leading_eigen
 #' @keywords internal
 #' @export
-leading.eigenvector.community <- function(graph, steps = -1, weights = NULL, start = NULL, options = arpack_defaults(), callback = NULL, extra = NULL, env = parent.frame()) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "leading.eigenvector.community()", "cluster_leading_eigen()")
-  cluster_leading_eigen(graph = graph, steps = steps, weights = weights, start = start, options = options, callback = callback, extra = extra, env = env)
+leading.eigenvector.community <- function(
+  graph,
+  steps = -1,
+  weights = NULL,
+  start = NULL,
+  options = arpack_defaults(),
+  callback = NULL,
+  extra = NULL,
+  env = parent.frame()
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "leading.eigenvector.community()",
+    "cluster_leading_eigen()"
+  )
+  cluster_leading_eigen(
+    graph = graph,
+    steps = steps,
+    weights = weights,
+    start = start,
+    options = options,
+    callback = callback,
+    extra = extra,
+    env = env
+  )
 } # nocov end
 
 #' Finding communities based on propagating labels
@@ -128,9 +234,28 @@ leading.eigenvector.community <- function(graph, steps = -1, weights = NULL, sta
 #' @inheritParams cluster_label_prop
 #' @keywords internal
 #' @export
-label.propagation.community <- function(graph, weights = NULL, ..., mode = c("out", "in", "all"), initial = NULL, fixed = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "label.propagation.community()", "cluster_label_prop()")
-  cluster_label_prop(graph = graph, weights = weights, mode = mode, initial = initial, fixed = fixed, ...)
+label.propagation.community <- function(
+  graph,
+  weights = NULL,
+  ...,
+  mode = c("out", "in", "all"),
+  initial = NULL,
+  fixed = NULL
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "label.propagation.community()",
+    "cluster_label_prop()"
+  )
+  cluster_label_prop(
+    graph = graph,
+    weights = weights,
+    mode = mode,
+    initial = initial,
+    fixed = fixed,
+    ...
+  )
 } # nocov end
 
 #' Functions to deal with the result of network community detection
@@ -143,7 +268,8 @@ label.propagation.community <- function(graph, weights = NULL, ..., mode = c("ou
 #' @inheritParams is_hierarchical
 #' @keywords internal
 #' @export
-is.hierarchical <- function(communities) { # nocov start
+is.hierarchical <- function(communities) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.hierarchical()", "is_hierarchical()")
   is_hierarchical(communities = communities)
 } # nocov end
@@ -158,9 +284,22 @@ is.hierarchical <- function(communities) { # nocov start
 #' @inheritParams cluster_infomap
 #' @keywords internal
 #' @export
-infomap.community <- function(graph, e.weights = NULL, v.weights = NULL, nb.trials = 10, modularity = TRUE) { # nocov start
+infomap.community <- function(
+  graph,
+  e.weights = NULL,
+  v.weights = NULL,
+  nb.trials = 10,
+  modularity = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "infomap.community()", "cluster_infomap()")
-  cluster_infomap(graph = graph, e.weights = e.weights, v.weights = v.weights, nb.trials = nb.trials, modularity = modularity)
+  cluster_infomap(
+    graph = graph,
+    e.weights = e.weights,
+    v.weights = v.weights,
+    nb.trials = nb.trials,
+    modularity = modularity
+  )
 } # nocov end
 
 #' Community structure via greedy optimization of modularity
@@ -173,9 +312,26 @@ infomap.community <- function(graph, e.weights = NULL, v.weights = NULL, nb.tria
 #' @inheritParams cluster_fast_greedy
 #' @keywords internal
 #' @export
-fastgreedy.community <- function(graph, merges = TRUE, modularity = TRUE, membership = TRUE, weights = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "fastgreedy.community()", "cluster_fast_greedy()")
-  cluster_fast_greedy(graph = graph, merges = merges, modularity = modularity, membership = membership, weights = weights)
+fastgreedy.community <- function(
+  graph,
+  merges = TRUE,
+  modularity = TRUE,
+  membership = TRUE,
+  weights = NULL
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "fastgreedy.community()",
+    "cluster_fast_greedy()"
+  )
+  cluster_fast_greedy(
+    graph = graph,
+    merges = merges,
+    modularity = modularity,
+    membership = membership,
+    weights = weights
+  )
 } # nocov end
 
 #' Community structure detection based on edge betweenness
@@ -188,9 +344,32 @@ fastgreedy.community <- function(graph, merges = TRUE, modularity = TRUE, member
 #' @inheritParams cluster_edge_betweenness
 #' @keywords internal
 #' @export
-edge.betweenness.community <- function(graph, weights = NULL, directed = TRUE, edge.betweenness = TRUE, merges = TRUE, bridges = TRUE, modularity = TRUE, membership = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "edge.betweenness.community()", "cluster_edge_betweenness()")
-  cluster_edge_betweenness(graph = graph, weights = weights, directed = directed, edge.betweenness = edge.betweenness, merges = merges, bridges = bridges, modularity = modularity, membership = membership)
+edge.betweenness.community <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  edge.betweenness = TRUE,
+  merges = TRUE,
+  bridges = TRUE,
+  modularity = TRUE,
+  membership = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "edge.betweenness.community()",
+    "cluster_edge_betweenness()"
+  )
+  cluster_edge_betweenness(
+    graph = graph,
+    weights = weights,
+    directed = directed,
+    edge.betweenness = edge.betweenness,
+    merges = merges,
+    bridges = bridges,
+    modularity = modularity,
+    membership = membership
+  )
 } # nocov end
 
 #' Community structure dendrogram plots
@@ -203,7 +382,8 @@ edge.betweenness.community <- function(graph, weights = NULL, directed = TRUE, e
 #' @inheritParams plot_dendrogram
 #' @keywords internal
 #' @export
-dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) { # nocov start
+dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "dendPlot()", "plot_dendrogram()")
   plot_dendrogram(x = x, mode = mode, ...)
 } # nocov end
@@ -218,7 +398,8 @@ dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) { # nocov star
 #' @inheritParams cut_at
 #' @keywords internal
 #' @export
-cutat <- function(communities, no, steps) { # nocov start
+cutat <- function(communities, no, steps) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "cutat()", "cut_at()")
   cut_at(communities = communities, no = no, steps = steps)
 } # nocov end
@@ -233,9 +414,18 @@ cutat <- function(communities, no, steps) { # nocov start
 #' @inheritParams contract
 #' @keywords internal
 #' @export
-contract.vertices <- function(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb")) { # nocov start
+contract.vertices <- function(
+  graph,
+  mapping,
+  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "contract.vertices()", "contract()")
-  contract(graph = graph, mapping = mapping, vertex.attr.comb = vertex.attr.comb)
+  contract(
+    graph = graph,
+    mapping = mapping,
+    vertex.attr.comb = vertex.attr.comb
+  )
 } # nocov end
 
 #' Functions to deal with the result of network community detection
@@ -248,7 +438,8 @@ contract.vertices <- function(graph, mapping, vertex.attr.comb = igraph_opt("ver
 #' @inheritParams code_len
 #' @keywords internal
 #' @export
-code.length <- function(communities) { # nocov start
+code.length <- function(communities) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "code.length()", "code_len()")
   code_len(communities = communities)
 } # nocov end
@@ -461,10 +652,13 @@ code.length <- function(communities) { # nocov start
 membership <- function(communities) {
   if (!is.null(communities$membership)) {
     res <- communities$membership
-  } else if (!is.null(communities$merges) &&
-    !is.null(communities$modularity)) {
+  } else if (
+    !is.null(communities$merges) &&
+      !is.null(communities$modularity)
+  ) {
     res <- community.to.membership2(
-      communities$merges, communities$vcount,
+      communities$merges,
+      communities$vcount,
       which.max(communities$modularity)
     )
   } else {
@@ -514,13 +708,23 @@ print.communities <- function(x, ...) {
   }
   alg <- x$algorithm %||% "unknown"
 
-  cat("IGRAPH clustering ", alg, ", groups: ", noc, ", mod: ", mod, "\n", sep = "")
+  cat(
+    "IGRAPH clustering ",
+    alg,
+    ", groups: ",
+    noc,
+    ", mod: ",
+    mod,
+    "\n",
+    sep = ""
+  )
 
   if (!is.null(x$membership)) {
     grp <- groups(x)
     cat("+ groups:\n")
     hp <- function(o) {
-      head_print(o,
+      head_print(
+        o,
         max_lines = igraph_opt("auto.print.lines"),
         omitted_footer = "+ ... omitted several groups/vertices\n",
       )
@@ -566,17 +770,28 @@ print.communities <- function(x, ...) {
 #'   }
 #' @family community
 #' @export
-make_clusters <- function(graph, membership = NULL, algorithm = NULL,
-                          merges = NULL, modularity = TRUE) {
+make_clusters <- function(
+  graph,
+  membership = NULL,
+  algorithm = NULL,
+  merges = NULL,
+  modularity = TRUE
+) {
   stopifnot(is.null(membership) || is.numeric(membership))
-  stopifnot(is.null(algorithm) ||
-    (is.character(algorithm) && length(algorithm) == 1))
-  stopifnot(is.null(merges) ||
-    (is.matrix(merges) && is.numeric(merges) && ncol(merges) == 2))
-  stopifnot(is.null(modularity) ||
-    (is.logical(modularity) && length(modularity) == 1) ||
-    (is.numeric(modularity) &&
-      length(modularity) %in% c(1, length(membership))))
+  stopifnot(
+    is.null(algorithm) ||
+      (is.character(algorithm) && length(algorithm) == 1)
+  )
+  stopifnot(
+    is.null(merges) ||
+      (is.matrix(merges) && is.numeric(merges) && ncol(merges) == 2)
+  )
+  stopifnot(
+    is.null(modularity) ||
+      (is.logical(modularity) && length(modularity) == 1) ||
+      (is.numeric(modularity) &&
+        length(modularity) %in% c(1, length(membership)))
+  )
 
   if (is.logical(modularity)) {
     if (modularity && !is.null(membership)) {
@@ -688,20 +903,38 @@ modularity <- function(x, ...) {
 #' modularity(wtc)
 #' modularity(g, membership(wtc))
 #'
-modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...) {
+modularity.igraph <- function(
+  x,
+  membership,
+  weights = NULL,
+  resolution = 1,
+  directed = TRUE,
+  ...
+) {
   # Argument checks
   ensure_igraph(x)
-  if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
+  if (
+    is.null(membership) || (!is.numeric(membership) && !is.factor(membership))
+  ) {
     cli::cli_abort("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
-  if (!is.null(weights)) weights <- as.numeric(weights)
+  if (!is.null(weights)) {
+    weights <- as.numeric(weights)
+  }
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_modularity, x, membership - 1, weights, resolution, directed)
+  res <- .Call(
+    R_igraph_modularity,
+    x,
+    membership - 1,
+    weights,
+    resolution,
+    directed
+  )
   res
 }
 
@@ -712,18 +945,29 @@ modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
     max(x$modularity)
   } else {
-    cli::cli_abort("cluster algorithm was run with {.arg modularity = FALSE} and no modularity value was computed.")
+    cli::cli_abort(
+      "cluster algorithm was run with {.arg modularity = FALSE} and no modularity value was computed."
+    )
   }
 }
 
 #' @rdname modularity.igraph
 #' @export
-modularity_matrix <- function(graph, membership = lifecycle::deprecated(), weights = NULL, resolution = 1, directed = TRUE) {
+modularity_matrix <- function(
+  graph,
+  membership = lifecycle::deprecated(),
+  weights = NULL,
+  resolution = 1,
+  directed = TRUE
+) {
   # Argument checks
   ensure_igraph(graph)
 
   if (!missing(membership)) {
-    lifecycle::deprecate_warn("2.1.0", "modularity_matrix(membership = 'is no longer used')")
+    lifecycle::deprecate_warn(
+      "2.1.0",
+      "modularity_matrix(membership = 'is no longer used')"
+    )
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -826,8 +1070,12 @@ complete.dend <- function(comm, use.modularity) {
 #' @importFrom stats as.dendrogram
 #' @method as.dendrogram communities
 #' @export
-as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
-                                      ...) {
+as.dendrogram.communities <- function(
+  object,
+  hang = -1,
+  use.modularity = FALSE,
+  ...
+) {
   if (!is_hierarchical(object)) {
     cli::cli_abort("Not a hierarchical community structure")
   }
@@ -869,7 +1117,8 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
     if (any(neg <- x < leafs + 1)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
-    if (all(neg)) { # two leaves
+    if (all(neg)) {
+      # two leaves
       zk <- as.list(x)
       attr(zk, "members") <- two
       attr(zk, "midpoint") <- 0.5 # mean( c(0,1) )
@@ -879,7 +1128,8 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk[[1]], "members") <- attr(zk[[2]], "members") <- one
       attr(zk[[1]], "height") <- attr(zk[[2]], "height") <- h0
       attr(zk[[1]], "leaf") <- attr(zk[[2]], "leaf") <- TRUE
-    } else if (any(neg)) { # one leaf, one node
+    } else if (any(neg)) {
+      # one leaf, one node
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
       X <- format(x, scientific = FALSE, trim = TRUE)
@@ -899,7 +1149,8 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk[[2 - isL]], "height") <- h0
       attr(zk[[2 - isL]], "label") <- object$names[x[2 - isL]]
       attr(zk[[2 - isL]], "leaf") <- TRUE
-    } else { # two nodes
+    } else {
+      # two nodes
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
       x <- format(x, scientific = FALSE, trim = TRUE)
@@ -908,7 +1159,8 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
         attr(z[[x[2]]], "members")
       attr(zk, "midpoint") <- (attr(z[[x[1]]], "members") +
         attr(z[[x[1]]], "midpoint") +
-        attr(z[[x[2]]], "midpoint")) / 2
+        attr(z[[x[2]]], "midpoint")) /
+        2
     }
     attr(zk, "height") <- oHgt[k]
     z[[k <- format(k + leafs, scientific = FALSE)]] <- zk
@@ -922,8 +1174,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
 #' @importFrom stats as.hclust
 #' @method as.hclust communities
 #' @export
-as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
-                                  ...) {
+as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE, ...) {
   as.hclust(as.dendrogram(x, hang = hang, use.modularity = use.modularity))
 }
 
@@ -973,7 +1224,9 @@ as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   }
 
   obj <- list(
-    edge = edge, edge.length = edge.length / 2, tip.label = labels,
+    edge = edge,
+    edge.length = edge.length / 2,
+    tip.label = labels,
     Nnode = N
   )
   class(obj) <- "phylo"
@@ -990,8 +1243,10 @@ cut_at <- function(communities, no, steps) {
     cli::cli_abort("Not a hierarchical communitity structure")
   }
 
-  if ((!missing(no) && !missing(steps)) ||
-    (missing(no) && missing(steps))) {
+  if (
+    (!missing(no) && !missing(steps)) ||
+      (missing(no) && missing(steps))
+  ) {
     cli::cli_abort("Please use either {.arg no} or {.arg steps} (but not both)")
   }
 
@@ -1027,24 +1282,31 @@ show_trace <- function(communities) {
   res <- character()
   i <- 1
   while (i <= length(communities$history)) {
-    if (communities$history[i] == 2) { # IGRAPH_LEVC_HIST_SPLIT
+    if (communities$history[i] == 2) {
+      # IGRAPH_LEVC_HIST_SPLIT
       resnew <- paste(
-        "Splitting community", communities$history[i + 1],
+        "Splitting community",
+        communities$history[i + 1],
         "into two."
       )
       i <- i + 2
-    } else if (communities$history[i] == 3) { # IGRAPH_LEVC_HIST_FAILED
+    } else if (communities$history[i] == 3) {
+      # IGRAPH_LEVC_HIST_FAILED
       resnew <- paste(
         "Failed splitting community",
-        communities$history[i + 1], "into two."
+        communities$history[i + 1],
+        "into two."
       )
       i <- i + 2
-    } else if (communities$history[i] == 4) { # IGRAPH_LEVC_START_FULL
+    } else if (communities$history[i] == 4) {
+      # IGRAPH_LEVC_START_FULL
       resnew <- "Starting with the whole graph as a community."
       i <- i + 1
-    } else if (communities$history[i] == 5) { # IGRAPH_LEVC_START_GIVEN
+    } else if (communities$history[i] == 5) {
+      # IGRAPH_LEVC_START_GIVEN
       resnew <- paste(
-        "Starting from the", communities$history[i + 1],
+        "Starting from the",
+        communities$history[i + 1],
         "given communities."
       )
       i <- i + 2
@@ -1067,8 +1329,6 @@ community.to.membership2 <- function(merges, vcount, steps) {
 }
 
 #####################################################################
-
-
 
 #' Finding communities in graphs based on statistical meachanics
 #'
@@ -1194,12 +1454,20 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' cluster_spinglass(g, spins = 2)
 #' cluster_spinglass(g, vertex = 1)
 #'
-cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
-                              parupdate = FALSE, start.temp = 1,
-                              stop.temp = 0.01, cool.fact = 0.99,
-                              update.rule = c("config", "random", "simple"),
-                              gamma = 1.0, implementation = c("orig", "neg"),
-                              gamma.minus = 1.0) {
+cluster_spinglass <- function(
+  graph,
+  weights = NULL,
+  vertex = NULL,
+  spins = 25,
+  parupdate = FALSE,
+  start.temp = 1,
+  stop.temp = 0.01,
+  cool.fact = 0.99,
+  update.rule = c("config", "random", "simple"),
+  gamma = 1.0,
+  implementation = c("orig", "neg"),
+  gamma.minus = 1.0
+) {
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1212,12 +1480,9 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
   }
 
   update.rule <- igraph.match.arg(update.rule)
-  update.rule <- switch(update.rule,
-    "simple" = 0,
-    "random" = 0,
-    "config" = 1
-  )
-  implementation <- switch(igraph.match.arg(implementation),
+  update.rule <- switch(update.rule, "simple" = 0, "random" = 0, "config" = 1)
+  implementation <- switch(
+    igraph.match.arg(implementation),
     "orig" = 0,
     "neg" = 1
   )
@@ -1225,12 +1490,18 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
   on.exit(.Call(R_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(
-      R_igraph_spinglass_community, graph, weights,
-      as.numeric(spins), as.logical(parupdate),
+      R_igraph_spinglass_community,
+      graph,
+      weights,
+      as.numeric(spins),
+      as.logical(parupdate),
       as.numeric(start.temp),
-      as.numeric(stop.temp), as.numeric(cool.fact),
-      as.numeric(update.rule), as.numeric(gamma),
-      as.numeric(implementation), as.numeric(gamma.minus)
+      as.numeric(stop.temp),
+      as.numeric(cool.fact),
+      as.numeric(update.rule),
+      as.numeric(gamma),
+      as.numeric(implementation),
+      as.numeric(gamma.minus)
     )
     res$algorithm <- "spinglass"
     res$vcount <- vcount(graph)
@@ -1241,9 +1512,13 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
     class(res) <- "communities"
   } else {
     res <- .Call(
-      R_igraph_spinglass_my_community, graph, weights,
-      as_igraph_vs(graph, vertex) - 1, as.numeric(spins),
-      as.numeric(update.rule), as.numeric(gamma)
+      R_igraph_spinglass_my_community,
+      graph,
+      weights,
+      as_igraph_vs(graph, vertex) - 1,
+      as.numeric(spins),
+      as.numeric(update.rule),
+      as.numeric(gamma)
     )
     res$community <- res$community + 1
   }
@@ -1355,12 +1630,18 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' ldc <- cluster_leiden(g, resolution = r)
 #' print(ldc)
 #' plot(ldc, g)
-cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
-                           ...,
-                           weights = NULL, resolution = 1,
-                           resolution_parameter = deprecated(), beta = 0.01,
-                           initial_membership = NULL,
-                           n_iterations = 2, vertex_weights = NULL) {
+cluster_leiden <- function(
+  graph,
+  objective_function = c("CPM", "modularity"),
+  ...,
+  weights = NULL,
+  resolution = 1,
+  resolution_parameter = deprecated(),
+  beta = 0.01,
+  initial_membership = NULL,
+  n_iterations = 2,
+  vertex_weights = NULL
+) {
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
@@ -1376,10 +1657,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 
   # Parse objective function argument
   objective_function <- igraph.match.arg(objective_function)
-  objective_function <- switch(objective_function,
-    "cpm" = 0,
-    "modularity" = 1
-  )
+  objective_function <- switch(objective_function, "cpm" = 0, "modularity" = 1)
 
   # Parse edge weights argument
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1401,11 +1679,13 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   # Parse node weights argument
   if (!is.null(vertex_weights) && !any(is.na(vertex_weights))) {
     vertex_weights <- as.numeric(vertex_weights)
-    if (objective_function == 1) { # Using modularity
+    if (objective_function == 1) {
+      # Using modularity
       cli::cli_warn("Providing node weights contradicts using modularity.")
     }
   } else {
-    if (objective_function == 1) { # Using modularity
+    if (objective_function == 1) {
+      # Using modularity
       # Set correct node weights
       vertex_weights <- strength(graph, weights = weights)
       # Also correct resolution parameter
@@ -1417,9 +1697,14 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   membership <- initial_membership
   if (n_iterations > 0) {
     res <- .Call(
-      R_igraph_community_leiden, graph, weights,
-      vertex_weights, as.numeric(resolution),
-      as.numeric(beta), !is.null(membership), as.numeric(n_iterations),
+      R_igraph_community_leiden,
+      graph,
+      weights,
+      vertex_weights,
+      as.numeric(resolution),
+      as.numeric(beta),
+      !is.null(membership),
+      as.numeric(n_iterations),
       membership
     )
     membership <- res$membership
@@ -1429,9 +1714,14 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     while (prev_quality < quality) {
       prev_quality <- quality
       res <- .Call(
-        R_igraph_community_leiden, graph, weights,
-        vertex_weights, as.numeric(resolution),
-        as.numeric(beta), !is.null(membership), 1,
+        R_igraph_community_leiden,
+        graph,
+        weights,
+        vertex_weights,
+        as.numeric(resolution),
+        as.numeric(beta),
+        !is.null(membership),
+        1,
         membership
       )
       membership <- res$membership
@@ -1493,7 +1783,11 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  membership <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
+  membership <- .Call(
+    R_igraph_community_fluid_communities,
+    graph,
+    no.of.communities
+  )
 
   res <- list()
   res$membership <- membership + 1
@@ -1558,9 +1852,14 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #' g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 #' cluster_walktrap(g)
 #'
-cluster_walktrap <- function(graph, weights = NULL, steps = 4,
-                             merges = TRUE, modularity = TRUE,
-                             membership = TRUE) {
+cluster_walktrap <- function(
+  graph,
+  weights = NULL,
+  steps = 4,
+  merges = TRUE,
+  modularity = TRUE,
+  membership = TRUE
+) {
   ensure_igraph(graph)
 
   if (membership && !modularity) {
@@ -1578,8 +1877,13 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_walktrap_community, graph, weights, as.numeric(steps),
-    as.logical(merges), as.logical(modularity), as.logical(membership)
+    R_igraph_walktrap_community,
+    graph,
+    weights,
+    as.numeric(steps),
+    as.logical(merges),
+    as.logical(modularity),
+    as.logical(membership)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -1596,7 +1900,6 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
   class(res) <- "communities"
   res
 }
-
 
 
 #' Community structure detection based on edge betweenness
@@ -1679,12 +1982,16 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' eb <- cluster_edge_betweenness(g)
 #' eb
 #'
-cluster_edge_betweenness <- function(graph, weights = NULL,
-                                     directed = TRUE,
-                                     edge.betweenness = TRUE,
-                                     merges = TRUE, bridges = TRUE,
-                                     modularity = TRUE,
-                                     membership = TRUE) {
+cluster_edge_betweenness <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  edge.betweenness = TRUE,
+  merges = TRUE,
+  bridges = TRUE,
+  modularity = TRUE,
+  membership = TRUE
+) {
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1698,11 +2005,15 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_edge_betweenness, graph, weights,
+    R_igraph_community_edge_betweenness,
+    graph,
+    weights,
     as.logical(directed),
     as.logical(edge.betweenness),
-    as.logical(merges), as.logical(bridges),
-    as.logical(modularity), as.logical(membership)
+    as.logical(merges),
+    as.logical(bridges),
+    as.logical(modularity),
+    as.logical(membership)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -1766,8 +2077,13 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #' membership(fc)
 #' sizes(fc)
 #'
-cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
-                                membership = TRUE, weights = NULL) {
+cluster_fast_greedy <- function(
+  graph,
+  merges = TRUE,
+  modularity = TRUE,
+  membership = TRUE,
+  weights = NULL
+) {
   ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1781,8 +2097,12 @@ cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_fastgreedy, graph, as.logical(merges),
-    as.logical(modularity), as.logical(membership), weights
+    R_igraph_community_fastgreedy,
+    graph,
+    as.logical(merges),
+    as.logical(modularity),
+    as.logical(membership),
+    weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -1802,7 +2122,6 @@ igraph.i.levc.arp <- function(externalP, externalE) {
   }
   f
 }
-
 
 
 #' Community structure detecting based on the leading eigenvector of the
@@ -1917,16 +2236,23 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'
 #' cluster_leading_eigen(g, start = membership(lec))
 #'
-cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
-                                  start = NULL,
-                                  options = arpack_defaults(),
-                                  callback = NULL, extra = NULL,
-                                  env = parent.frame()) {
+cluster_leading_eigen <- function(
+  graph,
+  steps = -1,
+  weights = NULL,
+  start = NULL,
+  options = arpack_defaults(),
+  callback = NULL,
+  extra = NULL,
+  env = parent.frame()
+) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       "cluster_leading_eigen(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
+      details = c(
+        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
+      )
     )
     options <- options()
   }
@@ -1952,8 +2278,15 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_community_leading_eigenvector, graph, steps,
-    weights, options, start, callback, extra, env,
+    R_igraph_community_leading_eigenvector,
+    graph,
+    steps,
+    weights,
+    options,
+    start,
+    callback,
+    extra,
+    env,
     environment(igraph.i.levc.arp)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2034,12 +2367,13 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' cluster_label_prop(g)
 #'
 cluster_label_prop <- function(
-    graph,
-    weights = NULL,
-    ...,
-    mode = c("out", "in", "all"),
-    initial = NULL,
-    fixed = NULL) {
+  graph,
+  weights = NULL,
+  ...,
+  mode = c("out", "in", "all"),
+  initial = NULL,
+  fixed = NULL
+) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "1.6.0",
@@ -2064,11 +2398,12 @@ cluster_label_prop <- function(
 }
 
 cluster_label_prop0 <- function(
-    graph,
-    weights = NULL,
-    mode = c("out", "in", "all"),
-    initial = NULL,
-    fixed = NULL) {
+  graph,
+  weights = NULL,
+  mode = c("out", "in", "all"),
+  initial = NULL,
+  fixed = NULL
+) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -2080,23 +2415,31 @@ cluster_label_prop0 <- function(
   } else {
     weights <- NULL
   }
-  if (!is.null(initial)) initial <- as.numeric(initial)
-  if (!is.null(fixed)) fixed <- as.logical(fixed)
+  if (!is.null(initial)) {
+    initial <- as.numeric(initial)
+  }
+  if (!is.null(fixed)) {
+    fixed <- as.logical(fixed)
+  }
 
-  directed <- switch(igraph.match.arg(mode),
+  directed <- switch(
+    igraph.match.arg(mode),
     "out" = TRUE,
     "in" = TRUE,
     "all" = FALSE
   )
-  mode <- switch(igraph.match.arg(mode),
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L
-  )
+  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  membership <- .Call(R_igraph_community_label_propagation, graph, mode, weights, initial, fixed)
+  membership <- .Call(
+    R_igraph_community_label_propagation,
+    graph,
+    mode,
+    weights,
+    initial,
+    fixed
+  )
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -2108,7 +2451,6 @@ cluster_label_prop0 <- function(
   class(res) <- "communities"
   res
 }
-
 
 
 #' Finding community structure by multi-level optimization of modularity
@@ -2202,7 +2544,6 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 }
 
 
-
 #' Optimal community structure
 #'
 #' This function calculates the optimal community structure of a graph, by
@@ -2290,7 +2631,6 @@ cluster_optimal <- function(graph, weights = NULL) {
 }
 
 
-
 #' Infomap community finding
 #'
 #' Find community structure that minimizes the expected description length of a
@@ -2340,8 +2680,13 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' membership(imc)
 #' communities(imc)
 #'
-cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
-                            nb.trials = 10, modularity = TRUE) {
+cluster_infomap <- function(
+  graph,
+  e.weights = NULL,
+  v.weights = NULL,
+  nb.trials = 10,
+  modularity = TRUE
+) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -2366,8 +2711,11 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_community_infomap, graph, e.weights,
-    v.weights, nb.trials
+    R_igraph_community_infomap,
+    graph,
+    e.weights,
+    v.weights,
+    nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2387,18 +2735,22 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
 #' @method plot communities
 #' @export
 #' @importFrom graphics plot
-plot.communities <- function(x, y,
-                             col = membership(x),
-                             mark.groups = communities(x),
-                             edge.color = c("black", "red")[crossing(x, y) + 1],
-                             ...) {
-  plot(y,
-    vertex.color = col, mark.groups = mark.groups,
+plot.communities <- function(
+  x,
+  y,
+  col = membership(x),
+  mark.groups = communities(x),
+  edge.color = c("black", "red")[crossing(x, y) + 1],
+  ...
+) {
+  plot(
+    y,
+    vertex.color = col,
+    mark.groups = mark.groups,
     edge.color = edge.color,
     ...
   )
 }
-
 
 
 #' @rdname plot_dendrogram.communities
@@ -2406,7 +2758,6 @@ plot.communities <- function(x, y,
 plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
   UseMethod("plot_dendrogram")
 }
-
 
 
 #' Community structure dendrogram plots
@@ -2489,10 +2840,13 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' fc <- cluster_fast_greedy(karate)
 #' plot_dendrogram(fc)
 #'
-plot_dendrogram.communities <- function(x,
-                                        mode = igraph_opt("dend.plot.type"), ...,
-                                        use.modularity = FALSE,
-                                        palette = categorical_pal(8)) {
+plot_dendrogram.communities <- function(
+  x,
+  mode = igraph_opt("dend.plot.type"),
+  ...,
+  use.modularity = FALSE,
+  palette = categorical_pal(8)
+) {
   mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
@@ -2515,14 +2869,29 @@ plot_dendrogram.communities <- function(x,
 #' @importFrom grDevices palette
 #' @importFrom graphics plot
 #' @importFrom stats rect.hclust
-dendPlotHclust <- function(communities, rect = length(communities),
-                           colbar = palette(), hang = -1, ann = FALSE,
-                           main = "", sub = "", xlab = "", ylab = "", ...,
-                           use.modularity = FALSE) {
+dendPlotHclust <- function(
+  communities,
+  rect = length(communities),
+  colbar = palette(),
+  hang = -1,
+  ann = FALSE,
+  main = "",
+  sub = "",
+  xlab = "",
+  ylab = "",
+  ...,
+  use.modularity = FALSE
+) {
   hc <- as.hclust(communities, hang = hang, use.modularity = use.modularity)
-  ret <- plot(hc,
-    hang = hang, ann = ann, main = main, sub = sub, xlab = xlab,
-    ylab = ylab, ...
+  ret <- plot(
+    hc,
+    hang = hang,
+    ann = ann,
+    main = main,
+    sub = sub,
+    xlab = xlab,
+    ylab = ylab,
+    ...
   )
   if (rect > 0) {
     rect.hclust(hc, k = rect, border = colbar)
@@ -2531,8 +2900,12 @@ dendPlotHclust <- function(communities, rect = length(communities),
 }
 
 #' @importFrom graphics plot
-dendPlotDendrogram <- function(communities, hang = -1, ...,
-                               use.modularity = FALSE) {
+dendPlotDendrogram <- function(
+  communities,
+  hang = -1,
+  ...,
+  use.modularity = FALSE
+) {
   plot(
     as.dendrogram(communities, hang = hang, use.modularity = use.modularity),
     ...
@@ -2541,12 +2914,16 @@ dendPlotDendrogram <- function(communities, hang = -1, ...,
 
 #' @importFrom grDevices palette
 #' @importFrom graphics plot
-dendPlotPhylo <- function(communities, colbar = palette(),
-                          col = colbar[membership(communities)],
-                          mark.groups = communities(communities),
-                          use.modularity = FALSE,
-                          edge.color = "#AAAAAAFF",
-                          edge.lty = c(1, 2), ...) {
+dendPlotPhylo <- function(
+  communities,
+  colbar = palette(),
+  col = colbar[membership(communities)],
+  mark.groups = communities(communities),
+  use.modularity = FALSE,
+  edge.color = "#AAAAAAFF",
+  edge.lty = c(1, 2),
+  ...
+) {
   phy <- ape::as.phylo(communities, use.modularity = use.modularity)
 
   getedges <- function(tip) {
@@ -2630,33 +3007,51 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #' compare(sg, le, method = "rand")
 #' compare(membership(sg), membership(le))
 #'
-compare <- function(comm1, comm2, method = c(
-                      "vi", "nmi",
-                      "split.join", "rand",
-                      "adjusted.rand"
-                    )) {
+compare <- function(
+  comm1,
+  comm2,
+  method = c(
+    "vi",
+    "nmi",
+    "split.join",
+    "rand",
+    "adjusted.rand"
+  )
+) {
   UseMethod("compare")
 }
 
 #' @method compare communities
 #' @family community
 #' @export
-compare.communities <- function(comm1, comm2,
-                                method = c(
-                                  "vi", "nmi", "split.join", "rand",
-                                  "adjusted.rand"
-                                )) {
+compare.communities <- function(
+  comm1,
+  comm2,
+  method = c(
+    "vi",
+    "nmi",
+    "split.join",
+    "rand",
+    "adjusted.rand"
+  )
+) {
   i_compare(comm1, comm2, method)
 }
 
 #' @method compare membership
 #' @family community
 #' @export
-compare.membership <- function(comm1, comm2,
-                               method = c(
-                                 "vi", "nmi", "split.join", "rand",
-                                 "adjusted.rand"
-                               )) {
+compare.membership <- function(
+  comm1,
+  comm2,
+  method = c(
+    "vi",
+    "nmi",
+    "split.join",
+    "rand",
+    "adjusted.rand"
+  )
+) {
   i_compare(comm1, comm2, method)
 }
 
@@ -2665,10 +3060,17 @@ compare.membership <- function(comm1, comm2,
 #' @export
 compare.default <- compare.membership
 
-i_compare <- function(comm1, comm2, method = c(
-                        "vi", "nmi", "split.join",
-                        "rand", "adjusted.rand"
-                      )) {
+i_compare <- function(
+  comm1,
+  comm2,
+  method = c(
+    "vi",
+    "nmi",
+    "split.join",
+    "rand",
+    "adjusted.rand"
+  )
+) {
   comm1 <- if (inherits(comm1, "communities")) {
     as.numeric(membership(comm1))
   } else {
@@ -2679,7 +3081,8 @@ i_compare <- function(comm1, comm2, method = c(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- switch(igraph.match.arg(method),
+  method <- switch(
+    igraph.match.arg(method),
     vi = 0L,
     nmi = 1L,
     split.join = 2L,
@@ -2777,7 +3180,9 @@ groups <- function(x) {
 #' @export
 groups.default <- function(x) {
   vids <- names(x$membership)
-  if (is.null(vids)) vids <- seq_along(x$membership)
+  if (is.null(vids)) {
+    vids <- seq_along(x$membership)
+  }
   tapply(vids, x$membership, simplify = FALSE, function(x) x)
 }
 

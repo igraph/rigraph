@@ -130,7 +130,7 @@ test_that("igraph_version returns a version string", {
 
   expect_match(igraph_version("R"), regex)
   expect_match(igraph_version(), regex)
-  
+
   c_regex <- paste0(
     "\\b", # word boundary
     "(?:0|[1-9][0-9]*)\\.", # major

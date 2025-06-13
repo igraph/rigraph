@@ -8,9 +8,22 @@
 #' @inheritParams predict_edges
 #' @keywords internal
 #' @export
-hrg.predict <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000, num.bins = 25) { # nocov start
+hrg.predict <- function(
+  graph,
+  hrg = NULL,
+  start = FALSE,
+  num.samples = 10000,
+  num.bins = 25
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.predict()", "predict_edges()")
-  predict_edges(graph = graph, hrg = hrg, start = start, num.samples = num.samples, num.bins = num.bins)
+  predict_edges(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    num.samples = num.samples,
+    num.bins = num.bins
+  )
 } # nocov end
 
 #' Fit a hierarchical random graph model
@@ -23,7 +36,8 @@ hrg.predict <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000, n
 #' @inheritParams fit_hrg
 #' @keywords internal
 #' @export
-hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) { # nocov start
+hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.fit()", "fit_hrg()")
   fit_hrg(graph = graph, hrg = hrg, start = start, steps = steps)
 } # nocov end
@@ -38,7 +52,8 @@ hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) { # nocov start
 #' @inheritParams sample_hrg
 #' @keywords internal
 #' @export
-hrg.game <- function(hrg) { # nocov start
+hrg.game <- function(hrg) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.game()", "sample_hrg()")
   sample_hrg(hrg = hrg)
 } # nocov end
@@ -53,7 +68,8 @@ hrg.game <- function(hrg) { # nocov start
 #' @inheritParams hrg_tree
 #' @keywords internal
 #' @export
-hrg.dendrogram <- function(hrg) { # nocov start
+hrg.dendrogram <- function(hrg) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.dendrogram()", "hrg_tree()")
   hrg_tree(hrg = hrg)
 } # nocov end
@@ -68,7 +84,8 @@ hrg.dendrogram <- function(hrg) { # nocov start
 #' @inheritParams hrg
 #' @keywords internal
 #' @export
-hrg.create <- function(graph, prob) { # nocov start
+hrg.create <- function(graph, prob) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.create()", "hrg()")
   hrg(graph = graph, prob = prob)
 } # nocov end
@@ -83,9 +100,20 @@ hrg.create <- function(graph, prob) { # nocov start
 #' @inheritParams consensus_tree
 #' @keywords internal
 #' @export
-hrg.consensus <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000) { # nocov start
+hrg.consensus <- function(
+  graph,
+  hrg = NULL,
+  start = FALSE,
+  num.samples = 10000
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "hrg.consensus()", "consensus_tree()")
-  consensus_tree(graph = graph, hrg = hrg, start = start, num.samples = num.samples)
+  consensus_tree(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    num.samples = num.samples
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -209,7 +237,10 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
-      left = c(), right = c(), prob = c(), edges = c(),
+      left = c(),
+      right = c(),
+      prob = c(),
+      edges = c(),
       vertices = c()
     )
   }
@@ -303,9 +334,10 @@ hrg <- hrg_create_impl
 #' @export
 #' @cdocs igraph_from_hrg_dendrogram
 hrg_tree <- function(hrg) {
-
   if (!inherits(hrg, "igraphHRG")) {
-    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+    cli::cli_abort(
+      "{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}."
+    )
   }
 
   out <- from_hrg_dendrogram_impl(hrg)
@@ -327,9 +359,10 @@ hrg_tree <- function(hrg) {
 #' @export
 #' @cdocs igraph_hrg_game
 sample_hrg <- function(hrg) {
-
   if (!inherits(hrg, "igraphHRG")) {
-    cli::cli_abort("{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}.")
+    cli::cli_abort(
+      "{.arg hrg} must be an {.cls igraphHRG} object, not {.obj_type_friendly {hrg}}."
+    )
   }
 
   hrg_game_impl(hrg)
@@ -391,13 +424,21 @@ sample_hrg <- function(hrg) {
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
-                          num.bins = 25) {
+predict_edges <- function(
+  graph,
+  hrg = NULL,
+  start = FALSE,
+  num.samples = 10000,
+  num.bins = 25
+) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
-      left = c(), right = c(), prob = c(), edges = c(),
+      left = c(),
+      right = c(),
+      prob = c(),
+      edges = c(),
       vertices = c()
     )
   }
@@ -412,14 +453,17 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_hrg_predict, graph, hrg, start, num.samples,
+    R_igraph_hrg_predict,
+    graph,
+    hrg,
+    start,
+    num.samples,
     num.bins
   )
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"
   res
 }
-
 
 
 #' Conversion to igraph
@@ -481,9 +525,11 @@ buildMerges <- function(object) {
   while (length(S) != 0) {
     curr <- S[length(S)]
     ## coming from parent? going left if possible.
-    if (is.null(prev) ||
-      (prev < 0 && object$left[-prev] == curr) ||
-      (prev < 0 && object$right[-prev] == curr)) {
+    if (
+      is.null(prev) ||
+        (prev < 0 && object$left[-prev] == curr) ||
+        (prev < 0 && object$right[-prev] == curr)
+    ) {
       if (curr < 0) {
         S <- c(S, object$left[-curr])
       }
@@ -527,7 +573,8 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
     if (any(neg <- x >= 0)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
-    if (all(neg)) { # two leaves
+    if (all(neg)) {
+      # two leaves
       zk <- as.list(x + 1)
       attr(zk, "members") <- 2L
       attr(zk, "midpoint") <- 1 / 2 # mean( c(0,1) )
@@ -537,7 +584,8 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
       attr(zk[[1]], "members") <- attr(zk[[2]], "members") <- 1L
       attr(zk[[1]], "height") <- attr(zk[[2]], "height") <- h0
       attr(zk[[1]], "leaf") <- attr(zk[[2]], "leaf") <- TRUE
-    } else if (any(neg)) { # one leaf, one node
+    } else if (any(neg)) {
+      # one leaf, one node
       X <- paste0("g", -x)
       isL <- x[1] >= 0
       zk <- if (isL) list(x[1] + 1, z[[X[2]]]) else list(z[[X[1]]], x[2] + 1)
@@ -548,14 +596,16 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
       attr(zk[[2 - isL]], "height") <- h0
       attr(zk[[2 - isL]], "label") <- mynames[x[2 - isL] + 1]
       attr(zk[[2 - isL]], "leaf") <- TRUE
-    } else { # two nodes
+    } else {
+      # two nodes
       X <- paste0("g", -x)
       zk <- list(z[[X[1]]], z[[X[2]]])
       attr(zk, "members") <- attr(z[[X[1]]], "members") +
         attr(z[[X[2]]], "members")
       attr(zk, "midpoint") <- (attr(z[[X[1]]], "members") +
         attr(z[[X[1]]], "midpoint") +
-        attr(z[[X[2]]], "midpoint")) / 2
+        attr(z[[X[2]]], "midpoint")) /
+        2
     }
     attr(zk, "height") <- oHgt[k]
     z[[k <- paste0("g", -merges[k, 3])]] <- zk
@@ -600,8 +650,11 @@ as.hclust.igraphHRG <- function(x, ...) {
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(
-    merge = merge, height = 1:nrow(merge), order = order,
-    labels = mynames, method = NA_character_,
+    merge = merge,
+    height = 1:nrow(merge),
+    order = order,
+    labels = mynames,
+    method = NA_character_,
     dist.method = NA_character_
   )
   class(res) <- "hclust"
@@ -621,7 +674,9 @@ as.phylo.igraphHRG <- function(x, ...) {
   edge.length <- rep(0.5, nrow(edge))
   labels <- if (is.null(x$names)) 1:ovc else x$names
   obj <- list(
-    edge = edge, edge.length = edge.length / 2, tip.label = labels,
+    edge = edge,
+    edge.length = edge.length / 2,
+    tip.label = labels,
     Nnode = ivc
   )
   class(obj) <- "phylo"
@@ -705,7 +760,11 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #' hrg <- fit_hrg(g)
 #' plot_dendrogram(hrg)
 #'
-plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+plot_dendrogram.igraphHRG <- function(
+  x,
+  mode = igraph_opt("dend.plot.type"),
+  ...
+) {
   if (mode == "auto") {
     have_ape <- requireNamespace("ape", quietly = TRUE)
     mode <- if (have_ape) "phylo" else "hclust"
@@ -723,13 +782,28 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
-hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = .01,
-                          ann = FALSE, main = "", sub = "", xlab = "", ylab = "",
-                          ...) {
+hrgPlotHclust <- function(
+  x,
+  rect = 0,
+  colbar = rainbow(rect),
+  hang = .01,
+  ann = FALSE,
+  main = "",
+  sub = "",
+  xlab = "",
+  ylab = "",
+  ...
+) {
   hc <- as.hclust(x)
-  ret <- plot(hc,
-    hang = hang, ann = ann, main = main, sub = sub, xlab = xlab,
-    ylab = ylab, ...
+  ret <- plot(
+    hc,
+    hang = hang,
+    ann = ann,
+    main = main,
+    sub = sub,
+    xlab = xlab,
+    ylab = ylab,
+    ...
   )
   if (rect > 0) {
     rect.hclust(hc, k = rect, border = colbar)
@@ -744,8 +818,13 @@ hrgPlotDendrogram <- function(x, ...) {
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
-hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
-                         edge.color = NULL, use.edge.length = FALSE, ...) {
+hrgPlotPhylo <- function(
+  x,
+  colbar = rainbow(11, start = .7, end = .1),
+  edge.color = NULL,
+  use.edge.length = FALSE,
+  ...
+) {
   vc <- length(x$left) + 1
   phy <- ape::as.phylo(x)
   br <- seq(0, 1, length.out = length(colbar))
@@ -801,8 +880,12 @@ hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
 #' @method print igraphHRG
 #' @export
 #' @family hierarchical random graph functions
-print.igraphHRG <- function(x, type = c("auto", "tree", "plain"),
-                            level = 3, ...) {
+print.igraphHRG <- function(
+  x,
+  type = c("auto", "tree", "plain"),
+  level = 3,
+  ...
+) {
   type <- igraph.match.arg(type)
   if (type == "auto") {
     type <- if (length(x$left <= 100)) "tree" else "plain"
@@ -908,19 +991,26 @@ print1.igraphHRG <- function(x, level = 3, ...) {
       lf <- paste(collapse = "\n", lf)
     }
     op <- paste(
-      sep = "", format(he, width = cs),
-      " p=", format(x$prob[b], digits = 2, width = pw, justify = "left"),
-      "  ", paste(collapse = " ", lf)
+      sep = "",
+      format(he, width = cs),
+      " p=",
+      format(x$prob[b], digits = 2, width = pw, justify = "left"),
+      "  ",
+      paste(collapse = " ", lf)
     )
     cat(op, fill = TRUE)
 
     ## recursive call
-    if (x$left[b] < 0 && l < level) .plot(-x$left[b], l + 1, ind)
+    if (x$left[b] < 0 && l < level) {
+      .plot(-x$left[b], l + 1, ind)
+    }
     if (x$right[b] < 0 && l < level) .plot(-x$right[b], l + 1, ind)
   }
 
   ## Do it
-  if (length(x$left) > 0) .plot(b = 1, l = 1)
+  if (length(x$left) > 0) {
+    .plot(b = 1, l = 1)
+  }
 
   invisible(x)
 }
@@ -943,9 +1033,13 @@ print2.igraphHRG <- function(x, ...) {
       nn[x$right[i] + 1]
     }
     paste(
-      sep = "", format(paste(sep = "", "g", i), width = bw),
+      sep = "",
+      format(paste(sep = "", "g", i), width = bw),
       format(paste(sep = "", " p=", p[i]), width = pw),
-      "-> ", lc, " ", rc
+      "-> ",
+      lc,
+      " ",
+      rc
     )
   })
   op <- format(op, justify = "left")
@@ -987,9 +1081,11 @@ print.igraphHRGConsensus <- function(x, ...) {
       mych <- gsub(" ", "x", mych, fixed = TRUE)
       mych <- paste(collapse = " ", mych)
       pref <- paste(collapse = "", rep(" ", bw + 5))
-      mych <- strwrap(mych,
+      mych <- strwrap(
+        mych,
         width = getOption("width") - bw - 4,
-        initial = "", prefix = pref
+        initial = "",
+        prefix = pref
       )
       mych <- gsub("x", " ", mych, fixed = TRUE)
       mych <- paste(collapse = "\n", mych)

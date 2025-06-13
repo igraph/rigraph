@@ -8,7 +8,8 @@
 #' @inheritParams distance_table
 #' @keywords internal
 #' @export
-path.length.hist <- function(graph, directed = TRUE) { # nocov start
+path.length.hist <- function(graph, directed = TRUE) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "path.length.hist()", "distance_table()")
   distance_table(graph = graph, directed = directed)
 } # nocov end
@@ -23,8 +24,13 @@ path.length.hist <- function(graph, directed = TRUE) { # nocov start
 #' @inheritParams max_cardinality
 #' @keywords internal
 #' @export
-maximum.cardinality.search <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximum.cardinality.search()", "max_cardinality()")
+maximum.cardinality.search <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "maximum.cardinality.search()",
+    "max_cardinality()"
+  )
   max_cardinality(graph = graph)
 } # nocov end
 
@@ -38,7 +44,8 @@ maximum.cardinality.search <- function(graph) { # nocov start
 #' @inheritParams is_dag
 #' @keywords internal
 #' @export
-is.dag <- function(graph) { # nocov start
+is.dag <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.dag()", "is_dag()")
   is_dag(graph = graph)
 } # nocov end
@@ -99,14 +106,19 @@ is.dag <- function(graph) { # nocov start
 #'
 #' @family paths
 #' @export
-all_simple_paths <- function(graph, from, to = V(graph),
-                             mode = c("out", "in", "all", "total"),
-                             cutoff = -1) {
+all_simple_paths <- function(
+  graph,
+  from,
+  to = V(graph),
+  mode = c("out", "in", "all", "total"),
+  cutoff = -1
+) {
   ## Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   to <- as_igraph_vs(graph, to)
-  mode <- switch(igraph.match.arg(mode),
+  mode <- switch(
+    igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -117,8 +129,12 @@ all_simple_paths <- function(graph, from, to = V(graph),
 
   ## Function call
   res <- .Call(
-    R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.numeric(cutoff), mode
+    R_igraph_get_all_simple_paths,
+    graph,
+    from - 1,
+    to - 1,
+    as.numeric(cutoff),
+    mode
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -264,7 +280,13 @@ max_cardinality <- maximum_cardinality_search_impl
 #' @family paths
 #' @export
 #' @cdocs igraph_eccentricity_dijkstra
-eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+eccentricity <- function(
+  graph,
+  vids = V(graph),
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",
@@ -313,7 +335,12 @@ eccentricity <- function(graph, vids = V(graph), ..., weights = NULL, mode = c("
 #' @family paths
 #' @export
 #' @cdocs igraph_radius_dijkstra
-radius <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+radius <- function(
+  graph,
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
       "2.1.0",

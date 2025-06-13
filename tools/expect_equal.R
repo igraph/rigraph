@@ -16,12 +16,16 @@ treat_deprecated <- function(xml, path) {
   true_lack <- xml2::xml_siblings(equal)[length(xml2::xml_siblings(equal)) - 1]
   xml2::xml_add_child(true_lack, "NUM_CONST", "TRUE", line1 = first_line)
   xml2::xml_add_sibling(equal, "EQ_FORMALS", "=", line1 = first_line)
-  xml2::xml_add_sibling(equal, "SYMBOL_FORMALS", "ignore_attr", line1 = first_line)
+  xml2::xml_add_sibling(
+    equal,
+    "SYMBOL_FORMALS",
+    "ignore_attr",
+    line1 = first_line
+  )
   xml2::xml_add_sibling(equal, "OP-COMMA", ",", line1 = first_line)
 }
 
 parse_script <- function(path) {
-
   cli::cli_alert_info("Refactoring {path}.")
 
   lines <- brio::read_lines(path)
@@ -39,7 +43,6 @@ parse_script <- function(path) {
   purrr::walk(deprecated, treat_deprecated, path = path)
 
   for (deprecated_call in deprecated) {
-
     parent <- xml2::xml_parent(xml2::xml_parent(deprecated_call))
 
     line1 <- as.numeric(xml2::xml_attr(parent, "line1"))
@@ -56,24 +59,25 @@ parse_script <- function(path) {
         )
       }
     }
-
-
   }
 
   brio::write_lines(lines, path)
 
-  if (! (path %in% gert::git_status()[["file"]])) {
+  if (!(path %in% gert::git_status()[["file"]])) {
     return(invisible(TRUE))
   }
 
   styler::style_file(path)
-  if (! (path %in% gert::git_status()[["file"]])) {
+  if (!(path %in% gert::git_status()[["file"]])) {
     return(invisible(TRUE))
   }
 
   gert::git_add(path)
   gert::git_commit(
-    sprintf("refactor: remove deprecated expect_that() from %s", fs::path_file(path))
+    sprintf(
+      "refactor: remove deprecated expect_that() from %s",
+      fs::path_file(path)
+    )
   )
 }
 

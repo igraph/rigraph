@@ -3,7 +3,11 @@ library(purrr)
 
 lines_r <- brio::read_file("tools/stimulus/functions-R.yaml")
 
-split_r <- strsplit(lines_r, "\n(?=((?:#.*|)\n)+igraph_.*:\n(?:(?:[ #].*|)\n)*\n+)", perl = TRUE)[[1]]
+split_r <- strsplit(
+  lines_r,
+  "\n(?=((?:#.*|)\n)+igraph_.*:\n(?:(?:[ #].*|)\n)*\n+)",
+  perl = TRUE
+)[[1]]
 
 proper_r <- grepl("^\nigraph_", split_r)
 
@@ -19,9 +23,16 @@ map(r$text_r, grep, pattern = "\nigraph") |>
   lengths() |>
   unique()
 
-lines_c <- paste0(brio::read_file("src/vendor/cigraph/interfaces/functions.yaml"), "\n")
+lines_c <- paste0(
+  brio::read_file("src/vendor/cigraph/interfaces/functions.yaml"),
+  "\n"
+)
 
-split_c <- strsplit(lines_c, "\n(?=((?:#.*|)\n)+igraph_.*:\n(?:(?:[ #].*|)\n)*\n+)", perl = TRUE)[[1]]
+split_c <- strsplit(
+  lines_c,
+  "\n(?=((?:#.*|)\n)+igraph_.*:\n(?:(?:[ #].*|)\n)*\n+)",
+  perl = TRUE
+)[[1]]
 
 proper_c <- grepl("^\nigraph_", split_c)
 

@@ -21,7 +21,6 @@
 ##
 ## -----------------------------------------------------------------------
 
-
 #' Palette for categories
 #'
 #' This is a color blind friendly palette from
@@ -55,11 +54,19 @@ categorical_pal <- function(n) {
   stopifnot(n > 0)
 
   x <- c(
-    "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
-    "#D55E00", "#CC79A7", "#999999"
+    "#E69F00",
+    "#56B4E9",
+    "#009E73",
+    "#F0E442",
+    "#0072B2",
+    "#D55E00",
+    "#CC79A7",
+    "#999999"
   )
 
-  if (n > length(x)) cli::cli_warn("Cannot make {n} categorical colors.")
+  if (n > length(x)) {
+    cli::cli_warn("Cannot make {n} categorical colors.")
+  }
 
   n <- min(n, length(x))
 
@@ -102,20 +109,40 @@ sequential_pal <- function(n) {
     c("#FEF0D9", "#FDCC8A", "#FC8D59", "#E34A33", "#B30000"),
     c("#FEF0D9", "#FDD49E", "#FDBB84", "#FC8D59", "#E34A33", "#B30000"),
     c(
-      "#FEF0D9", "#FDD49E", "#FDBB84", "#FC8D59", "#EF6548", "#D7301F",
+      "#FEF0D9",
+      "#FDD49E",
+      "#FDBB84",
+      "#FC8D59",
+      "#EF6548",
+      "#D7301F",
       "#990000"
     ),
     c(
-      "#FFF7EC", "#FEE8C8", "#FDD49E", "#FDBB84", "#FC8D59", "#EF6548",
-      "#D7301F", "#990000"
+      "#FFF7EC",
+      "#FEE8C8",
+      "#FDD49E",
+      "#FDBB84",
+      "#FC8D59",
+      "#EF6548",
+      "#D7301F",
+      "#990000"
     ),
     c(
-      "#FFF7EC", "#FEE8C8", "#FDD49E", "#FDBB84", "#FC8D59", "#EF6548",
-      "#D7301F", "#B30000", "#7F0000"
+      "#FFF7EC",
+      "#FEE8C8",
+      "#FDD49E",
+      "#FDBB84",
+      "#FC8D59",
+      "#EF6548",
+      "#D7301F",
+      "#B30000",
+      "#7F0000"
     )
   )
 
-  if (n > length(x)) cli::cli_warn("Cannot make {n} sequential colors.")
+  if (n > length(x)) {
+    cli::cli_warn("Cannot make {n} sequential colors.")
+  }
 
   n <- min(n, length(x))
 
@@ -170,28 +197,65 @@ diverging_pal <- function(n) {
     c("#E66101", "#FDB863", "#F7F7F7", "#B2ABD2", "#5E3C99"),
     c("#B35806", "#F1A340", "#FEE0B6", "#D8DAEB", "#998EC3", "#542788"),
     c(
-      "#B35806", "#F1A340", "#FEE0B6", "#F7F7F7", "#D8DAEB", "#998EC3",
+      "#B35806",
+      "#F1A340",
+      "#FEE0B6",
+      "#F7F7F7",
+      "#D8DAEB",
+      "#998EC3",
       "#542788"
     ),
     c(
-      "#B35806", "#E08214", "#FDB863", "#FEE0B6", "#D8DAEB", "#B2ABD2",
-      "#8073AC", "#542788"
+      "#B35806",
+      "#E08214",
+      "#FDB863",
+      "#FEE0B6",
+      "#D8DAEB",
+      "#B2ABD2",
+      "#8073AC",
+      "#542788"
     ),
     c(
-      "#B35806", "#E08214", "#FDB863", "#FEE0B6", "#F7F7F7", "#D8DAEB",
-      "#B2ABD2", "#8073AC", "#542788"
+      "#B35806",
+      "#E08214",
+      "#FDB863",
+      "#FEE0B6",
+      "#F7F7F7",
+      "#D8DAEB",
+      "#B2ABD2",
+      "#8073AC",
+      "#542788"
     ),
     c(
-      "#7F3B08", "#B35806", "#E08214", "#FDB863", "#FEE0B6", "#D8DAEB",
-      "#B2ABD2", "#8073AC", "#542788", "#2D004B"
+      "#7F3B08",
+      "#B35806",
+      "#E08214",
+      "#FDB863",
+      "#FEE0B6",
+      "#D8DAEB",
+      "#B2ABD2",
+      "#8073AC",
+      "#542788",
+      "#2D004B"
     ),
     c(
-      "#7F3B08", "#B35806", "#E08214", "#FDB863", "#FEE0B6", "#F7F7F7",
-      "#D8DAEB", "#B2ABD2", "#8073AC", "#542788", "#2D004B"
+      "#7F3B08",
+      "#B35806",
+      "#E08214",
+      "#FDB863",
+      "#FEE0B6",
+      "#F7F7F7",
+      "#D8DAEB",
+      "#B2ABD2",
+      "#8073AC",
+      "#542788",
+      "#2D004B"
     )
   )
 
-  if (n > length(x)) cli::cli_warn("Cannot make {n} divergent colors.")
+  if (n > length(x)) {
+    cli::cli_warn("Cannot make {n} divergent colors.")
+  }
 
   n <- min(n, length(x))
 
@@ -213,7 +277,9 @@ diverging_pal <- function(n) {
 #' @importFrom grDevices palette
 r_pal <- function(n) {
   x <- palette()
-  if (n > length(x)) cli::cli_warn("Cannot make {n} divergent colors.")
+  if (n > length(x)) {
+    cli::cli_warn("Cannot make {n} divergent colors.")
+  }
   n <- min(n, length(x))
   if (n == 0) character() else x[[n]]
 }

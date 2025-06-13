@@ -179,7 +179,9 @@ test_that("Kamada-Kawai layout generator works", {
       return(TRUE)
     }
 
-    dists <- apply(layout[-nrow(layout), ] - layout[-1, ], 1, function(x) sqrt(sum(x**2)))
+    dists <- apply(layout[-nrow(layout), ] - layout[-1, ], 1, function(x) {
+      sqrt(sum(x**2))
+    })
     norm_dists <- (dists - mean(dists)) / mean(dists)
     all(abs(norm_dists) < eps)
   }

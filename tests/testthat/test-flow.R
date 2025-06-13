@@ -55,17 +55,33 @@ test_that("st_cuts() works", {
   expect_equal(
     unvs(all_cuts_star_v7$cuts),
     list(
-      c(1, 2), c(1, 7), c(2, 3, 4, 5, 6), c(2, 3, 4, 5, 10),
-      c(2, 3, 4, 6, 9), c(2, 3, 4, 9, 10), c(2, 3, 5, 6, 8),
-      c(2, 3, 5, 8, 10), c(2, 3, 6, 8, 9), c(2, 3, 8, 9, 10), c(3, 7)
+      c(1, 2),
+      c(1, 7),
+      c(2, 3, 4, 5, 6),
+      c(2, 3, 4, 5, 10),
+      c(2, 3, 4, 6, 9),
+      c(2, 3, 4, 9, 10),
+      c(2, 3, 5, 6, 8),
+      c(2, 3, 5, 8, 10),
+      c(2, 3, 6, 8, 9),
+      c(2, 3, 8, 9, 10),
+      c(3, 7)
     )
   )
   expect_equal(
     unvs(all_cuts_star_v7$partition1s),
     list(
-      1, c(1, 3), c(1, 2), c(1, 2, 7), c(1, 2, 6),
-      c(1, 2, 6, 7), c(1, 2, 5), c(1, 2, 5, 7),
-      c(1, 2, 5, 6), c(1, 2, 5, 6, 7), c(1, 2, 5, 6, 7, 3)
+      1,
+      c(1, 3),
+      c(1, 2),
+      c(1, 2, 7),
+      c(1, 2, 6),
+      c(1, 2, 6, 7),
+      c(1, 2, 5),
+      c(1, 2, 5, 7),
+      c(1, 2, 5, 6),
+      c(1, 2, 5, 6, 7),
+      c(1, 2, 5, 6, 7, 3)
     )
   )
 
@@ -73,7 +89,10 @@ test_that("st_cuts() works", {
   all_cuts_star_v9 <- st_min_cuts(g_star_v9, source = "s", target = "t")
   expect_equal(all_cuts_star_v9$value, 2)
   expect_equal(unvs(all_cuts_star_v9$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
-  expect_equal(unvs(all_cuts_star_v9$partition1s), list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5)))
+  expect_equal(
+    unvs(all_cuts_star_v9$partition1s),
+    list(1, c(1, 3), c(1, 3, 2, 9, 8, 7, 6, 5))
+  )
 })
 
 test_that("st_cuts errors work", {
@@ -81,12 +100,25 @@ test_that("st_cuts errors work", {
 
   expect_snapshot(st_cuts(g_path, source = "a", target = NULL), error = TRUE)
   expect_snapshot(st_cuts(g_path, source = NULL, target = "a"), error = TRUE)
-  expect_snapshot(st_min_cuts(g_path, source = "a", target = NULL), error = TRUE)
-  expect_snapshot(st_min_cuts(g_path, source = NULL, target = "a"), error = TRUE)
+  expect_snapshot(
+    st_min_cuts(g_path, source = "a", target = NULL),
+    error = TRUE
+  )
+  expect_snapshot(
+    st_min_cuts(g_path, source = NULL, target = "a"),
+    error = TRUE
+  )
 })
 
 test_that("max_flow works", {
-  edge_mat <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
+  edge_mat <- rbind(
+    c(1, 3, 3),
+    c(3, 4, 1),
+    c(4, 2, 2),
+    c(1, 5, 1),
+    c(5, 6, 2),
+    c(6, 2, 10)
+  )
   colnames(edge_mat) <- c("from", "to", "capacity")
   g_ring_acyc <- graph_from_data_frame(as.data.frame(edge_mat))
   flow <- max_flow(g_ring_acyc, source = "1", target = "2")
@@ -117,7 +149,6 @@ test_that("edge_connectivity works", {
   g_full <- make_full_graph(5)
   expect_equal(edge_connectivity(g_full), 4)
   expect_equal(edge_connectivity(g_full, source = 1, target = 2), 4)
-
 
   g_path <- make_ring(5, directed = TRUE, circular = FALSE)
   expect_equal(edge_connectivity(g_path), 0)
@@ -161,8 +192,14 @@ test_that("edge_disjoint_paths works", {
 
 test_that("edge_disjoint_paths error works", {
   g_path <- make_ring(5, circular = FALSE)
-  expect_snapshot(edge_disjoint_paths(g_path, source = 1, target = NULL), error = TRUE)
-  expect_snapshot(edge_disjoint_paths(g_path, source = NULL, target = 1), error = TRUE)
+  expect_snapshot(
+    edge_disjoint_paths(g_path, source = 1, target = NULL),
+    error = TRUE
+  )
+  expect_snapshot(
+    edge_disjoint_paths(g_path, source = NULL, target = 1),
+    error = TRUE
+  )
 })
 
 test_that("vertex_disjoint_paths works", {
@@ -193,7 +230,10 @@ test_that("vertex_disjoint_paths error works", {
 
 
 test_that("dominator_tree works", {
-  g_tree <- graph_from_edgelist(matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2), directed = TRUE)
+  g_tree <- graph_from_edgelist(
+    matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2),
+    directed = TRUE
+  )
   dom_tree_tree <- dominator_tree(g_tree, 1)
 
   expect_equal(dom_tree_tree$dom[2], 1)
@@ -208,7 +248,10 @@ test_that("dominator_tree works", {
 })
 
 test_that("dominator_tree errors work", {
-  g_tree <- graph_from_edgelist(matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2), directed = TRUE)
+  g_tree <- graph_from_edgelist(
+    matrix(c(1, 2, 2, 3, 3, 4, 2, 5, 5, 6), byrow = TRUE, ncol = 2),
+    directed = TRUE
+  )
   expect_snapshot(dominator_tree(g_tree), error = TRUE)
   expect_snapshot(dominator_tree(g_tree, root = NULL), error = TRUE)
 })
@@ -223,11 +266,17 @@ test_that("dominator_tree works -- legacy", {
   names <- c("$root", V(g)$name)
   dtree$dom <- names[ifelse(dtree$dom < 0, 1, dtree$dom + 1)]
   dtree$leftout <- V(g)$name[dtree$leftout]
-  expect_equal(dtree$dom, c("$root", "R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R"))
+  expect_equal(
+    dtree$dom,
+    c("$root", "R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R")
+  )
   expect_equal(dtree$leftout, character())
   expect_equal(
     as_edgelist(dtree$domtree),
-    structure(c("R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R", "A", "B", "C", "D", "E", "F", "G", "L", "H", "I", "J", "K"), .Dim = c(12L, 2L))
+    structure(
+      c("R", "R", "R", "R", "R", "C", "C", "D", "R", "R", "G", "R", "A", "B", "C", "D", "E", "F", "G", "L", "H", "I", "J", "K"),
+      .Dim = c(12L, 2L)
+    )
   )
 })
 

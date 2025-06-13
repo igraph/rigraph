@@ -14,5 +14,5 @@ list(
     scg = "Spectral Coarse Graining",
     sgm = "Graph matching",
     `constructor modifiers` = "Constructor modifiers (and related functions)"
-    )
+  )
 )

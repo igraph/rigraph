@@ -27,7 +27,10 @@ test_that("assortativity works", {
 
   p <- read_graph(f <- gzfile("power.gml.gz"), format = "gml")
   expect_equal(assortativity_degree(p), assortativity(p, degree(p)))
-  expect_equal(assortativity_degree(p), reference_assortativity(as_directed(p, mode = "mutual")))
+  expect_equal(
+    assortativity_degree(p),
+    reference_assortativity(as_directed(p, mode = "mutual"))
+  )
 })
 
 test_that("nominal assortativity works", {
@@ -44,7 +47,8 @@ test_that("nominal assortativity works", {
     etm[t2, t1] <- etm[t2, t1] + 1
   }
   etm <- etm / sum(etm)
-  reference_nominal_assortativity <- (sum(diag(etm)) - sum(etm %*% etm)) / (1 - sum(etm %*% etm))
+  reference_nominal_assortativity <- (sum(diag(etm)) - sum(etm %*% etm)) /
+    (1 - sum(etm %*% etm))
 
   expect_equal(nominal_assortativity, reference_nominal_assortativity)
 })

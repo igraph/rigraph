@@ -120,9 +120,15 @@ test_that("motifs works", {
     )
   )
 
-  expect_equal(m4 / m, c(NA, NA, 0.439770385262173, NA, 0.441040560282398, 0.224489795918367, 0.438752023472278, 0.534246575342466, NaN, 0.430769230769231, NaN, 0.391304347826087, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m4 / m,
+    c(NA, NA, 0.439770385262173, NA, 0.441040560282398, 0.224489795918367, 0.438752023472278, 0.534246575342466, NaN, 0.430769230769231, NaN, 0.391304347826087, NaN, NaN, NaN, NaN)
+  )
 
-  expect_equal(m5 / m, c(NA, NA, 0.444436015122204, NA, 0.445736750036052, 0.489795918367347, 0.445353601780656, 0.575342465753425, NaN, 0.415384615384615, NaN, 0.347826086956522, NaN, NaN, NaN, NaN))
+  expect_equal(
+    m5 / m,
+    c(NA, NA, 0.444436015122204, NA, 0.445736750036052, 0.489795918367347, 0.445353601780656, 0.575342465753425, NaN, 0.415384615384615, NaN, 0.347826086956522, NaN, NaN, NaN, NaN)
+  )
 })
 
 test_that("sample_motifs works", {
@@ -135,10 +141,14 @@ test_that("sample_motifs works", {
   expect_true(0 <= motif_count && motif_count <= n * (n - 1) * (n - 2) / 6)
 
   motif_count_letters <- sample_motifs(g, sample = c("C", "D", "E", "F"))
-  expect_true(0 <= motif_count_letters && motif_count_letters <= n * (n - 1) * (n - 2) / 6)
+  expect_true(
+    0 <= motif_count_letters && motif_count_letters <= n * (n - 1) * (n - 2) / 6
+  )
 
   motif_count_all <- sample_motifs(g, sample = V(g))
-  expect_true(0 <= motif_count_all && motif_count_all <= n * (n - 1) * (n - 2) / 6)
+  expect_true(
+    0 <= motif_count_all && motif_count_all <= n * (n - 1) * (n - 2) / 6
+  )
 })
 
 test_that("dyad_census works", {

@@ -19,8 +19,6 @@
 #
 ###################################################################
 
-
-
 #' Cocitation coupling
 #'
 #' Two vertices are cocited if there is another vertex citing both of them.

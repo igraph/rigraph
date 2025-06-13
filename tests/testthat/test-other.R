@@ -1,5 +1,8 @@
 test_that("convex_hull works", {
-  xy <- cbind(c(0, 1, 2, 3, 4, 0, 1, 2, 3, 1, 2), c(0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2))
+  xy <- cbind(
+    c(0, 1, 2, 3, 4, 0, 1, 2, 3, 1, 2),
+    c(0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2)
+  )
   vp <- convex_hull(xy)
   expect_equal(vp$resverts, c(1, 6, 10, 11, 5))
   expect_equal(vp$rescoords, xy[vp$resverts, ])
@@ -39,7 +42,11 @@ test_that("R help contains guarantee on number of RNG bits", {
   get_help_file <- get(".getHelpFile", envir = asNamespace("utils"))
   text <- capture.output(tools::Rd2txt(get_help_file(help("Random"))))
 
-  expect_true(any(grepl("all give at least 30 varying bits", text, fixed = TRUE)))
+  expect_true(any(grepl(
+    "all give at least 30 varying bits",
+    text,
+    fixed = TRUE
+  )))
 })
 
 test_that("serialization works", {
@@ -48,7 +55,10 @@ test_that("serialization works", {
   g <- make_ring(3, directed = TRUE)
   gs <- unserialize(serialize(g, NULL))
 
-  expect_identical(unclass(g)[-igraph_t_idx_env], unclass(gs)[-igraph_t_idx_env])
+  expect_identical(
+    unclass(g)[-igraph_t_idx_env],
+    unclass(gs)[-igraph_t_idx_env]
+  )
 
   expect_snapshot({
     g

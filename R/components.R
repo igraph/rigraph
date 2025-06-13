@@ -8,7 +8,8 @@
 #' @inheritParams count_components
 #' @keywords internal
 #' @export
-no.clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
+no.clusters <- function(graph, mode = c("weak", "strong")) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "no.clusters()", "count_components()")
   count_components(graph = graph, mode = mode)
 } # nocov end
@@ -23,9 +24,20 @@ no.clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
 #' @inheritParams decompose
 #' @keywords internal
 #' @export
-decompose.graph <- function(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0) { # nocov start
+decompose.graph <- function(
+  graph,
+  mode = c("weak", "strong"),
+  max.comps = NA,
+  min.vertices = 0
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "decompose.graph()", "decompose()")
-  decompose(graph = graph, mode = mode, max.comps = max.comps, min.vertices = min.vertices)
+  decompose(
+    graph = graph,
+    mode = mode,
+    max.comps = max.comps,
+    min.vertices = min.vertices
+  )
 } # nocov end
 
 #' Connected components of a graph
@@ -38,9 +50,24 @@ decompose.graph <- function(graph, mode = c("weak", "strong"), max.comps = NA, m
 #' @inheritParams component_distribution
 #' @keywords internal
 #' @export
-cluster.distribution <- function(graph, cumulative = FALSE, mul.size = FALSE, ...) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "cluster.distribution()", "component_distribution()")
-  component_distribution(graph = graph, cumulative = cumulative, mul.size = mul.size, ...)
+cluster.distribution <- function(
+  graph,
+  cumulative = FALSE,
+  mul.size = FALSE,
+  ...
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "cluster.distribution()",
+    "component_distribution()"
+  )
+  component_distribution(
+    graph = graph,
+    cumulative = cumulative,
+    mul.size = mul.size,
+    ...
+  )
 } # nocov end
 
 #' Biconnected components
@@ -53,8 +80,13 @@ cluster.distribution <- function(graph, cumulative = FALSE, mul.size = FALSE, ..
 #' @inheritParams biconnected_components
 #' @keywords internal
 #' @export
-biconnected.components <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "biconnected.components()", "biconnected_components()")
+biconnected.components <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "biconnected.components()",
+    "biconnected_components()"
+  )
   biconnected_components(graph = graph)
 } # nocov end
 
@@ -68,8 +100,13 @@ biconnected.components <- function(graph) { # nocov start
 #' @inheritParams articulation_points
 #' @keywords internal
 #' @export
-articulation.points <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "articulation.points()", "articulation_points()")
+articulation.points <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "articulation.points()",
+    "articulation_points()"
+  )
   articulation_points(graph = graph)
 } # nocov end
 #   IGraph R package
@@ -105,8 +142,12 @@ articulation.points <- function(graph) { # nocov start
 #' @family components
 #' @export
 #' @importFrom graphics hist
-component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
-                                   ...) {
+component_distribution <- function(
+  graph,
+  cumulative = FALSE,
+  mul.size = FALSE,
+  ...
+) {
   ensure_igraph(graph)
 
   cs <- components(graph, ...)$csize
@@ -123,7 +164,6 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 
   res
 }
-
 
 
 #' Decompose a graph into components
@@ -156,22 +196,26 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #' components <- decompose(g, min.vertices = 2)
 #' sapply(components, diameter)
 #'
-decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
-                      min.vertices = 0) {
+decompose <- function(
+  graph,
+  mode = c("weak", "strong"),
+  max.comps = NA,
+  min.vertices = 0
+) {
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode,
-    "weak" = 1L,
-    "strong" = 2L
-  )
+  mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   if (is.na(max.comps)) {
     max.comps <- -1
   }
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_decompose, graph, as.numeric(mode),
-    as.numeric(max.comps), as.numeric(min.vertices)
+    R_igraph_decompose,
+    graph,
+    as.numeric(mode),
+    as.numeric(max.comps),
+    as.numeric(min.vertices)
   )
 }
 
@@ -277,16 +321,31 @@ biconnected_components <- function(graph) {
   # See https://github.com/igraph/rigraph/issues/1203
 
   if (igraph_opt("return.vs.es")) {
-    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree_edges <- lapply(
+      res$tree_edges,
+      unsafe_create_es,
+      graph = graph,
+      es = E(graph)
+    )
     res$tree.edges <- NULL
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component_edges <- lapply(
+      res$component_edges,
+      unsafe_create_es,
+      graph = graph,
+      es = E(graph)
+    )
     res$component.edges <- NULL
   }
   if (igraph_opt("return.vs.es")) {
-    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$components <- lapply(
+      res$components,
+      unsafe_create_vs,
+      graph = graph,
+      verts = V(graph)
+    )
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)

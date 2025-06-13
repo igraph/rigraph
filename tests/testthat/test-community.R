@@ -2,11 +2,17 @@ test_that("community detection functions work", {
   withr::local_seed(42)
 
   cluster_algos <- list(
-    "cluster_edge_betweenness", "cluster_fast_greedy",
-    "cluster_label_prop", "cluster_leading_eigen",
-    "cluster_louvain", "cluster_spinglass", "cluster_walktrap"
+    "cluster_edge_betweenness",
+    "cluster_fast_greedy",
+    "cluster_label_prop",
+    "cluster_leading_eigen",
+    "cluster_louvain",
+    "cluster_spinglass",
+    "cluster_walktrap"
   )
-  if (has_glpk()) cluster_algos <- c(cluster_algos, "cluster_optimal")
+  if (has_glpk()) {
+    cluster_algos <- c(cluster_algos, "cluster_optimal")
+  }
 
   karate <- make_graph("Zachary")
 
@@ -22,7 +28,8 @@ test_that("community detection functions work", {
     flat_karate_communities <- unlist(karate_comunities)
     is_vertex_in_several_clusters <- duplicated(flat_karate_communities)
     expect_false(any(is_vertex_in_several_clusters))
-    is_cluster_id_valid <- flat_karate_communities <= vcount(karate) & flat_karate_communities >= 1
+    is_cluster_id_valid <- flat_karate_communities <= vcount(karate) &
+      flat_karate_communities >= 1
     expect_true(all(is_cluster_id_valid))
     expect_length(karate_clustering, max(membership(karate_clustering)))
   }
@@ -69,7 +76,8 @@ test_that("creating communities objects works", {
   membership <- sample(1:2, vcount(karate), replace = TRUE)
   mod <- modularity(karate, membership)
   comm <- make_clusters(
-    algorithm = "random", membership = membership,
+    algorithm = "random",
+    membership = membership,
     modularity = mod
   )
 
@@ -92,7 +100,8 @@ test_that("communities function works", {
         `3` = c(9L, 10L, 15L, 16L, 19L, 21L, 23L, 27L, 30L, 31L, 33L, 34L),
         `4` = c(24L, 25L, 26L, 28L, 29L, 32L)
       ),
-      .Dim = 4L, .Dimnames = list(c("1", "2", "3", "4"))
+      .Dim = 4L,
+      .Dimnames = list(c("1", "2", "3", "4"))
     )
   )
 
@@ -107,7 +116,8 @@ test_that("communities function works", {
         `1` = letters[1:5],
         `2` = letters[6:10]
       ),
-      .Dim = 2L, .Dimnames = list(c("1", "2"))
+      .Dim = 2L,
+      .Dimnames = list(c("1", "2"))
     )
   )
 })
@@ -116,7 +126,10 @@ test_that("cluster_edge_betweenness works", {
   karate <- make_graph("Zachary")
   karate_ebc <- cluster_edge_betweenness(karate)
 
-  expect_equal(max(karate_ebc$modularity), modularity(karate, karate_ebc$membership))
+  expect_equal(
+    max(karate_ebc$modularity),
+    modularity(karate, karate_ebc$membership)
+  )
   expect_equal(
     membership(karate_ebc),
     c(
@@ -151,7 +164,10 @@ test_that("cluster_fast_greedy works", {
   karate <- make_graph("Zachary")
   karate_fc <- cluster_fast_greedy(karate)
 
-  expect_equal(modularity(karate, karate_fc$membership), max(karate_fc$modularity))
+  expect_equal(
+    modularity(karate, karate_fc$membership),
+    max(karate_fc$modularity)
+  )
   expect_equal(
     membership(karate_fc),
     c(
@@ -184,13 +200,23 @@ test_that("label.propagation.community works", {
   expect_in(membership(karate_lpc), seq_len(length(karate_lpc)))
   expect_s3_class(sizes(karate_lpc), "table")
   expect_equal(sum(sizes(karate_lpc)), vcount(karate))
-  expect_identical(sizes(karate_lpc), table(membership(karate_lpc), dnn = "Community sizes"))
+  expect_identical(
+    sizes(karate_lpc),
+    table(membership(karate_lpc), dnn = "Community sizes")
+  )
 })
 
 test_that("cluster_leading_eigen works", {
   withr::local_seed(20230115)
 
-  check_eigen_value <- function(membership, community, value, vector, multiplier, extra) {
+  check_eigen_value <- function(
+    membership,
+    community,
+    value,
+    vector,
+    multiplier,
+    extra
+  ) {
     M <- sapply(1:length(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
@@ -224,15 +250,24 @@ test_that("cluster_leading_eigen works", {
     structure(
       c(7L, 12L, 9L, 6L),
       .Dim = 4L,
-      .Dimnames = structure(list(`Community sizes` = c("1", "2", "3", "4")),
+      .Dimnames = structure(
+        list(`Community sizes` = c("1", "2", "3", "4")),
         .Names = "Community sizes"
-      ), class = "table"
+      ),
+      class = "table"
     )
   )
 
   ## Check that the modularity matrix is correct
 
-  mod_mat_caller <- function(membership, community, value, vector, multiplier, extra) {
+  mod_mat_caller <- function(
+    membership,
+    community,
+    value,
+    vector,
+    multiplier,
+    extra
+  ) {
     M <- sapply(1:length(vector), function(x) {
       v <- rep(0, length(vector))
       v[x] <- 1
@@ -288,9 +323,11 @@ test_that("cluster_leiden works", {
     structure(
       c(17L, 17L),
       .Dim = 2L,
-      .Dimnames = structure(list(`Community sizes` = c("1", "2")),
+      .Dimnames = structure(
+        list(`Community sizes` = c("1", "2")),
         .Names = "Community sizes"
-      ), class = "table"
+      ),
+      class = "table"
     )
   )
 
@@ -310,9 +347,11 @@ test_that("cluster_leiden works", {
     structure(
       c(11L, 5L, 12L, 6L),
       .Dim = 4L,
-      .Dimnames = structure(list(`Community sizes` = c("1", "2", "3", "4")),
+      .Dimnames = structure(
+        list(`Community sizes` = c("1", "2", "3", "4")),
         .Names = "Community sizes"
-      ), class = "table"
+      ),
+      class = "table"
     )
   )
 })
@@ -323,7 +362,11 @@ test_that("modularity_matrix works", {
   karate_fc <- cluster_fast_greedy(karate)
 
   karate_m1 <- modularity(karate, membership(karate_fc))
-  karate_m2 <- modularity(karate, membership(karate_fc), weights = rep(1, ecount(karate)))
+  karate_m2 <- modularity(
+    karate,
+    membership(karate_fc),
+    weights = rep(1, ecount(karate))
+  )
   expect_equal(karate_m1, karate_m2)
 
   karate_modmat1 <- modularity_matrix(karate)
@@ -346,12 +389,18 @@ test_that("cluster_louvain works", {
   karate_mc <- cluster_louvain(karate)
 
   expect_in(membership(karate_mc), 1:4)
-  expect_equal(modularity(karate, karate_mc$membership), max(karate_mc$modularity))
+  expect_equal(
+    modularity(karate, karate_mc$membership),
+    max(karate_mc$modularity)
+  )
   expect_in(length(karate_mc), 3:4)
   expect_in(membership(karate_mc), seq_len(length(karate_mc)))
   expect_s3_class(sizes(karate_mc), "table")
   expect_equal(sum(sizes(karate_mc)), vcount(karate))
-  expect_identical(sizes(karate_mc), table(membership(karate_mc), dnn = "Community sizes"))
+  expect_identical(
+    sizes(karate_mc),
+    table(membership(karate_mc), dnn = "Community sizes")
+  )
 })
 
 test_that("cluster_optimal works", {
@@ -368,16 +417,21 @@ test_that("cluster_optimal works", {
       3, 4, 4, 4, 3, 4, 4, 3, 3, 4, 3, 3
     )
   )
-  expect_equal(modularity(karate, karate_optimal$membership), karate_optimal$modularity)
+  expect_equal(
+    modularity(karate, karate_optimal$membership),
+    karate_optimal$modularity
+  )
   expect_length(karate_optimal, 4)
   expect_equal(
     sizes(karate_optimal),
     structure(
       c(11L, 5L, 12L, 6L),
       .Dim = 4L,
-      .Dimnames = structure(list(`Community sizes` = c("1", "2", "3", "4")),
+      .Dimnames = structure(
+        list(`Community sizes` = c("1", "2", "3", "4")),
         .Names = "Community sizes"
-      ), class = "table"
+      ),
+      class = "table"
     )
   )
 })
@@ -388,7 +442,11 @@ test_that("weighted cluster_optimal works", {
   withr::local_seed(42)
 
   graph_full_ring <- make_full_graph(5) + make_ring(5)
-  E(graph_full_ring)$weight <- sample(1:2, ecount(graph_full_ring), replace = TRUE)
+  E(graph_full_ring)$weight <- sample(
+    1:2,
+    ecount(graph_full_ring),
+    replace = TRUE
+  )
 
   graph_full_ring_optimal <- cluster_optimal(graph_full_ring)
   expect_equal(modularity(graph_full_ring_optimal), 0.4032)
@@ -400,7 +458,10 @@ test_that("cluster_walktrap works", {
   karate <- make_graph("Zachary")
   karate_walktrap <- cluster_walktrap(karate)
 
-  expect_equal(modularity(karate, membership(karate_walktrap)), modularity(karate_walktrap))
+  expect_equal(
+    modularity(karate, membership(karate_walktrap)),
+    modularity(karate_walktrap)
+  )
   expect_equal(
     membership(karate_walktrap),
     c(1, 1, 2, 1, 5, 5, 5, 1, 2, 2, 5, 1, 1, 2, 3, 3, 5, 1, 3, 1, 3, 1, 3, 4, 4, 4, 3, 4, 2, 3, 2, 2, 3, 3)
@@ -408,9 +469,14 @@ test_that("cluster_walktrap works", {
   expect_length(karate_walktrap, 5)
   expect_equal(
     sizes(karate_walktrap),
-    structure(c(9L, 7L, 9L, 4L, 5L),
+    structure(
+      c(9L, 7L, 9L, 4L, 5L),
       .Dim = 5L,
-      .Dimnames = structure(list(`Community sizes` = c("1", "2", "3", "4", "5")), .Names = "Community sizes"), class = "table"
+      .Dimnames = structure(
+        list(`Community sizes` = c("1", "2", "3", "4", "5")),
+        .Names = "Community sizes"
+      ),
+      class = "table"
     )
   )
 
@@ -440,12 +506,26 @@ test_that("groups works", {
   g <- make_ring(10) + make_full_graph(5)
   gr <- groups(components(g))
 
-  expect_equal(gr, structure(list(`1` = 1:10, `2` = 11:15), .Dim = 2L, .Dimnames = list(c("1", "2"))))
+  expect_equal(
+    gr,
+    structure(
+      list(`1` = 1:10, `2` = 11:15),
+      .Dim = 2L,
+      .Dimnames = list(c("1", "2"))
+    )
+  )
 
   V(g)$name <- letters[1:15]
   gr <- groups(components(g))
 
-  expect_equal(gr, structure(list(`1` = letters[1:10], `2` = letters[11:15]), .Dim = 2L, .Dimnames = list(c("1", "2"))))
+  expect_equal(
+    gr,
+    structure(
+      list(`1` = letters[1:10], `2` = letters[11:15]),
+      .Dim = 2L,
+      .Dimnames = list(c("1", "2"))
+    )
+  )
 })
 
 test_that("voronoi works", {
@@ -469,14 +549,18 @@ test_that("contract works", {
   V(g)$name <- letters[1:vcount(g)]
   E(g)$weight <- sample(ecount(g))
 
-  g2 <- contract(g, rep(1:5, each = 2),
-    vertex.attr.comb = toString
-  )
+  g2 <- contract(g, rep(1:5, each = 2), vertex.attr.comb = toString)
 
   expect_equal(g2$name, g$name)
   expect_equal(V(g2)$name, c("a, b", "c, d", "e, f", "g, h", "i, j"))
   expect_equal(
     as_unnamed_dense_matrix(g2[]),
-    cbind(c(10, 9, 0, 0, 7), c(9, 3, 6, 0, 0), c(0, 6, 4, 8, 0), c(0, 0, 8, 5, 1), c(7, 0, 0, 1, 2))
+    cbind(
+      c(10, 9, 0, 0, 7),
+      c(9, 3, 6, 0, 0),
+      c(0, 6, 4, 8, 0),
+      c(0, 0, 8, 5, 1),
+      c(7, 0, 0, 1, 2)
+    )
   )
 })

@@ -8,7 +8,8 @@
 #' @inheritParams triad_census
 #' @keywords internal
 #' @export
-triad.census <- function(graph) { # nocov start
+triad.census <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "triad.census()", "triad_census()")
   triad_census(graph = graph)
 } # nocov end
@@ -43,9 +44,22 @@ graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @inheritParams sample_motifs
 #' @keywords internal
 #' @export
-graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.size = vcount(graph) / 10, sample = NULL) { # nocov start
+graph.motifs.est <- function(
+  graph,
+  size = 3,
+  cut.prob = rep(0, size),
+  sample.size = vcount(graph) / 10,
+  sample = NULL
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
-  sample_motifs(graph = graph, size = size, cut.prob = cut.prob, sample.size = sample.size, sample = sample)
+  sample_motifs(
+    graph = graph,
+    size = size,
+    cut.prob = cut.prob,
+    sample.size = sample.size,
+    sample = sample
+  )
 } # nocov end
 
 #' Graph motifs
@@ -62,7 +76,8 @@ graph.motifs.est <- function(graph, size = 3, cut.prob = rep(0, size), sample.si
 #' @inheritParams motifs
 #' @keywords internal
 #' @export
-graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov start
+graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
   motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
@@ -77,7 +92,8 @@ graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) { # nocov sta
 #' @inheritParams dyad_census
 #' @keywords internal
 #' @export
-dyad.census <- function(graph) { # nocov start
+dyad.census <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "dyad.census()", "dyad_census()")
   dyad_census(graph = graph)
 } # nocov end
@@ -137,7 +153,9 @@ dyad.census <- function(graph) { # nocov start
 motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
+  }
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
@@ -145,7 +163,9 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_motifs_randesu, graph, as.numeric(size),
+    R_igraph_motifs_randesu,
+    graph,
+    as.numeric(size),
     cut.prob
   )
   res[is.nan(res)] <- NA
@@ -180,7 +200,9 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
 count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
+  }
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
@@ -188,7 +210,9 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_no, graph, as.numeric(size),
+    R_igraph_motifs_randesu_no,
+    graph,
+    as.numeric(size),
     cut.prob
   )
 }
@@ -226,14 +250,17 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 sample_motifs <- function(
-    graph,
-    size = 3,
-    cut.prob = rep(0, size),
-    sample.size = NULL,
-    sample = NULL) {
+  graph,
+  size = 3,
+  cut.prob = rep(0, size),
+  sample.size = NULL,
+  sample = NULL
+) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut.prob)) {
+    cut.prob <- as.numeric(cut.prob)
+  }
 
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
@@ -250,8 +277,12 @@ sample_motifs <- function(
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
-    cut.prob, as.numeric(sample.size), sample
+    R_igraph_motifs_randesu_estimate,
+    graph,
+    as.numeric(size),
+    cut.prob,
+    as.numeric(sample.size),
+    sample
   )
 }
 
