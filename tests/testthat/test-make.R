@@ -86,18 +86,18 @@ test_that("graph_from_literal() and undirected explosion", {
 test_that("graph_from_literal() and simple directed graphs", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A - +B)
-    graph_from_literal(A - +B - +C)
-    graph_from_literal(A - +B - +C - +A)
-    graph_from_literal(A - +B + -C - +A)
+    graph_from_literal(A -+ B)
+    graph_from_literal(A -+ B -+ C)
+    graph_from_literal(A -+ B -+ C -+ A)
+    graph_from_literal(A -+ B +- C -+ A)
   })
 })
 
 test_that("graph_from_literal() and directed explosion", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot({
-    graph_from_literal(A:B:C - +D:E, B:D + -C:E)
-    graph_from_literal(A:B:C - +D:E + -F:G:H - +I + -J:K:L:M)
+    graph_from_literal(A:B:C -+ D:E, B:D +- C:E)
+    graph_from_literal(A:B:C -+ D:E +- F:G:H -+ I +- J:K:L:M)
   })
 })
 
@@ -320,10 +320,7 @@ test_that("make_de_bruijn_graph works", {
 })
 
 test_that("make_bipartite_graph works", {
-  inc_mat_rand <- matrix(
-    sample(0:1, 35, replace = TRUE, prob = c(3, 1)),
-    ncol = 5
-  )
+  inc_mat_rand <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   bip_from_inc <- graph_from_biadjacency_matrix(inc_mat_rand)
 
   edges <- unlist(sapply(seq_len(nrow(inc_mat_rand)), function(x) {
@@ -346,22 +343,7 @@ test_that("make_bipartite_graph works", {
 test_that("make_bipartite_graph works with vertex names", {
   types <- c(0, 1, 0, 1, 0, 1)
   names(types) <- LETTERS[1:length(types)]
-  edges <- c(
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "A",
-    "D",
-    "D",
-    "E",
-    "B",
-    "C",
-    "C",
-    "F"
-  )
+  edges <- c("A", "B", "C", "D", "E", "F", "A", "D", "D", "E", "B", "C", "C", "F")
   bip_grap <- make_bipartite_graph(types, edges)
 
   expect_equal(
