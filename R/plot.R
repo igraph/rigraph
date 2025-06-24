@@ -135,6 +135,11 @@ plot.igraph <- function(
   }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
+  if (nrow(layout) != vc) {
+    cli::cli_warn(
+      "The layout has {nrow(layout)} rows, but the graph has {vc} vertices. Unintended results may occur."
+    )
+  }
   margin <- params("plot", "margin")
   margin <- rep(margin, length.out = 4)
   rescale <- params("plot", "rescale")
