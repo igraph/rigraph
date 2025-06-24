@@ -8,7 +8,13 @@ test_that("is_chordal works", {
 
   mc <- max_cardinality(g1)
   mc$alpham1 <- as.vector(mc$alpham1)
-  expect_equal(mc, list(alpha = c(9, 4, 6, 8, 3, 5, 7, 2, 1), alpham1 = c(9, 8, 5, 2, 6, 3, 7, 4, 1)))
+  expect_equal(
+    mc,
+    list(
+      alpha = c(9, 4, 6, 8, 3, 5, 7, 2, 1),
+      alpham1 = c(9, 8, 5, 2, 6, 3, 7, 4, 1)
+    )
+  )
 
   ic <- is_chordal(g1, fillin = TRUE)
   expect_equal(ic$chordal, FALSE)
@@ -23,7 +29,13 @@ test_that("is_chordal works", {
 
   mc2 <- max_cardinality(g2)
   mc2$alpham1 <- as.vector(mc2$alpham1)
-  expect_equal(mc2, list(alpha = c(10, 8, 9, 6, 7, 5, 4, 2, 3, 1), alpham1 = c(10, 8, 9, 7, 6, 4, 5, 2, 3, 1)))
+  expect_equal(
+    mc2,
+    list(
+      alpha = c(10, 8, 9, 6, 7, 5, 4, 2, 3, 1),
+      alpham1 = c(10, 8, 9, 7, 6, 4, 5, 2, 3, 1)
+    )
+  )
 
   ic2 <- is_chordal(g2, fillin = TRUE)
   expect_equal(ic2, list(chordal = TRUE, fillin = numeric(), newgraph = NULL))

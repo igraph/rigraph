@@ -21,7 +21,13 @@ test_that("bipartite_projection works", {
   proj2 <- bipartite_projection(g2)
   expect_equal(
     as_unnamed_dense_matrix(proj2[[1]][]),
-    cbind(c(0, 2, 0, 2, 2), c(2, 0, 1, 2, 2), c(0, 1, 0, 0, 0), c(2, 2, 0, 0, 2), c(2, 2, 0, 2, 0))
+    cbind(
+      c(0, 2, 0, 2, 2),
+      c(2, 0, 1, 2, 2),
+      c(0, 1, 0, 0, 0),
+      c(2, 2, 0, 0, 2),
+      c(2, 2, 0, 2, 0)
+    )
   )
   expect_equal(
     as_unnamed_dense_matrix(proj2[[2]][]),

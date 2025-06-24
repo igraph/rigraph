@@ -22,7 +22,9 @@
 ## -----------------------------------------------------------------------
 
 make_call <- function(f, ..., .args = list()) {
-  if (is.character(f)) f <- as.name(f)
+  if (is.character(f)) {
+    f <- as.name(f)
+  }
   as.call(c(f, ..., .args))
 }
 

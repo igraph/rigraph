@@ -1,4 +1,3 @@
-
 pause <- function() {}
 
 ### R objects, (real) numbers

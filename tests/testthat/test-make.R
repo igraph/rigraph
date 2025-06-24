@@ -61,7 +61,7 @@ test_that("error messages are proper", {
 
 test_that("we pass arguments unevaluated", {
   rlang::local_options(lifecycle_verbosity = "quiet")
-  g0 <- graph_from_literal(A - +B:C)
+  g0 <- graph_from_literal(A -+ B:C)
   g1 <- graph_(from_literal(A - +B:C))
   expect_identical_graphs(g0, g1)
 })
@@ -149,73 +149,43 @@ test_that("make_lattice works", {
   lattice_make <- make_lattice(dim = 2, length = 3, periodic = FALSE)
   lattice_elist <- make_empty_graph(n = 9) +
     edges(c(
-      1,
-      2,
-      1,
-      4,
-      2,
-      3,
-      2,
-      5,
-      3,
-      6,
-      4,
-      5,
-      4,
-      7,
-      5,
-      6,
-      5,
-      8,
-      6,
-      9,
-      7,
-      8,
-      8,
-      9
-    ))
+    1, 2,
+    1, 4,
+    2, 3,
+    2, 5,
+    3, 6,
+    4, 5,
+    4, 7,
+    5, 6,
+    5, 8,
+    6, 9,
+    7, 8,
+    8, 9
+  ))
   expect_equal(as_edgelist(lattice_make), as_edgelist(lattice_elist))
 
   lattice_make_periodic <- make_lattice(dim = 2, length = 3, periodic = TRUE)
   lattice_elist_periodic <- make_empty_graph(n = 9) +
     edges(c(
-      1,
-      2,
-      1,
-      4,
-      2,
-      3,
-      2,
-      5,
-      1,
-      3,
-      3,
-      6,
-      4,
-      5,
-      4,
-      7,
-      5,
-      6,
-      5,
-      8,
-      4,
-      6,
-      6,
-      9,
-      7,
-      8,
-      1,
-      7,
-      8,
-      9,
-      2,
-      8,
-      7,
-      9,
-      3,
-      9
-    ))
+    1, 2,
+    1, 4,
+    2, 3,
+    2, 5,
+    1, 3,
+    3, 6,
+    4, 5,
+    4, 7,
+    5, 6,
+    5, 8,
+    4, 6,
+    6, 9,
+    7, 8,
+    1, 7,
+    8, 9,
+    2, 8,
+    7, 9,
+    3, 9
+  ))
   expect_equal(
     as_edgelist(lattice_make_periodic),
     as_edgelist(lattice_elist_periodic)
@@ -306,12 +276,17 @@ test_that("make_graph_atlas works", {
   atlas_124 <- graph_from_atlas(124)
   expect_isomorphic(
     atlas_124,
-    make_graph(c(1, 2, 2, 3, 3, 4, 4, 5, 1, 5, 1, 3, 2, 6), directed = FALSE)
+    make_graph(c(1, 2, 2, 3, 3, 4, 4, 5, 1, 5, 1, 3, 2, 6),
+    directed = FALSE
+  )
   )
   atlas_234 <- graph_from_atlas(234)
   expect_isomorphic(
     atlas_234,
-    make_graph(c(1, 6, 2, 6, 3, 6, 4, 6, 5, 6), n = 7, directed = FALSE)
+    make_graph(c(1, 6, 2, 6, 3, 6, 4, 6, 5, 6),
+    n = 7,
+    directed = FALSE
+  )
   )
 })
 
@@ -337,23 +312,9 @@ test_that("make_de_bruijn_graph works", {
   expect_isomorphic(
     de_bruijn21_line,
     make_graph(c(
-      1,
-      1,
-      3,
-      1,
-      1,
-      2,
-      3,
-      2,
-      2,
-      3,
-      4,
-      3,
-      2,
-      4,
-      4,
-      4
-    ))
+    1, 1, 3, 1, 1, 2, 3, 2, 2, 3,
+    4, 3, 2, 4, 4, 4
+  ))
   )
   expect_isomorphic(de_bruijn22, de_bruijn21_line)
 })
@@ -441,103 +402,16 @@ test_that("make_kautz_graph works", {
     el,
     structure(
       c(
-        1,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4,
-        4,
-        5,
-        5,
-        6,
-        6,
-        7,
-        7,
-        8,
-        8,
-        9,
-        9,
-        10,
-        10,
-        11,
-        11,
-        12,
-        12,
-        13,
-        13,
-        14,
-        14,
-        15,
-        15,
-        16,
-        16,
-        17,
-        17,
-        18,
-        18,
-        19,
-        19,
-        20,
-        20,
-        21,
-        21,
-        22,
-        22,
-        23,
-        23,
-        24,
-        24,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
-      ),
+      1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6,
+      7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
+      12, 13, 13, 14, 14, 15, 15, 16, 16, 17,
+      17, 18, 18, 19, 19, 20, 20, 21, 21, 22,
+      22, 23, 23, 24, 24, 9, 10, 11, 12, 13,
+      14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+      24, 1, 2, 3, 4, 5, 6, 7, 8, 17, 18, 19,
+      20, 21, 22, 23, 24, 1, 2, 3, 4, 5, 6, 7,
+      8, 9, 10, 11, 12, 13, 14, 15, 16
+    ),
       .Dim = c(48L, 2L)
     )
   )

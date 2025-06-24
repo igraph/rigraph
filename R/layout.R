@@ -1,4 +1,4 @@
-#' Merging graph layouts
+#'   Merging graph layouts
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
@@ -8,8 +8,13 @@
 #' @inheritParams layout_components
 #' @keywords internal
 #' @export
-piecewise.layout <- function(graph, layout = layout_with_kk, ...) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "piecewise.layout()", "layout_components()")
+piecewise.layout <- function(graph, layout = layout_with_kk, ...) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "piecewise.layout()",
+    "layout_components()"
+  )
   layout_components(graph = graph, layout = layout, ...)
 } # nocov end
 
@@ -23,9 +28,30 @@ piecewise.layout <- function(graph, layout = layout_with_kk, ...) { # nocov star
 #' @inheritParams layout_with_sugiyama
 #' @keywords internal
 #' @export
-layout.sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1, maxiter = 100, weights = NULL, attributes = c("default", "all", "none")) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.sugiyama()", "layout_with_sugiyama()")
-  layout_with_sugiyama(graph = graph, layers = layers, hgap = hgap, vgap = vgap, maxiter = maxiter, weights = weights, attributes = attributes)
+layout.sugiyama <- function(
+  graph,
+  layers = NULL,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100,
+  weights = NULL,
+  attributes = c("default", "all", "none")
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "layout.sugiyama()",
+    "layout_with_sugiyama()"
+  )
+  layout_with_sugiyama(
+    graph = graph,
+    layers = layers,
+    hgap = hgap,
+    vgap = vgap,
+    maxiter = maxiter,
+    weights = weights,
+    attributes = attributes
+  )
 } # nocov end
 
 #' Generate coordinates to place the vertices of a graph in a star-shape
@@ -38,7 +64,8 @@ layout.sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1, maxiter = 
 #' @inheritParams layout_as_star
 #' @keywords internal
 #' @export
-layout.star <- function(graph, center = V(graph)[1], order = NULL) { # nocov start
+layout.star <- function(graph, center = V(graph)[1], order = NULL) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.star()", "layout_as_star()")
   layout_as_star(graph = graph, center = center, order = order)
 } # nocov end
@@ -53,9 +80,26 @@ layout.star <- function(graph, center = V(graph)[1], order = NULL) { # nocov sta
 #' @inheritParams norm_coords
 #' @keywords internal
 #' @export
-layout.norm <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1, zmin = -1, zmax = 1) { # nocov start
+layout.norm <- function(
+  layout,
+  xmin = -1,
+  xmax = 1,
+  ymin = -1,
+  ymax = 1,
+  zmin = -1,
+  zmax = 1
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.norm()", "norm_coords()")
-  norm_coords(layout = layout, xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, zmin = zmin, zmax = zmax)
+  norm_coords(
+    layout = layout,
+    xmin = xmin,
+    xmax = xmax,
+    ymin = ymin,
+    ymax = ymax,
+    zmin = zmin,
+    zmax = zmax
+  )
 } # nocov end
 
 #' Merging graph layouts
@@ -68,7 +112,8 @@ layout.norm <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1, zmin =
 #' @inheritParams merge_coords
 #' @keywords internal
 #' @export
-layout.merge <- function(graphs, layouts, method = "dla") { # nocov start
+layout.merge <- function(graphs, layouts, method = "dla") {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.merge()", "merge_coords()")
   merge_coords(graphs = graphs, layouts = layouts, method = method)
 } # nocov end
@@ -83,7 +128,13 @@ layout.merge <- function(graphs, layouts, method = "dla") { # nocov start
 #' @inheritParams layout_with_mds
 #' @keywords internal
 #' @export
-layout.mds <- function(graph, dist = NULL, dim = 2, options = arpack_defaults()) { # nocov start
+layout.mds <- function(
+  graph,
+  dist = NULL,
+  dim = 2,
+  options = arpack_defaults()
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.mds()", "layout_with_mds()")
   layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
 } # nocov end
@@ -98,7 +149,8 @@ layout.mds <- function(graph, dist = NULL, dim = 2, options = arpack_defaults())
 #' @inheritParams layout_on_grid
 #' @keywords internal
 #' @export
-layout.grid <- function(graph, width = 0, height = 0, dim = 2) { # nocov start
+layout.grid <- function(graph, width = 0, height = 0, dim = 2) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.grid()", "layout_on_grid()")
   layout_on_grid(graph = graph, width = width, height = height, dim = dim)
 } # nocov end
@@ -113,9 +165,32 @@ layout.grid <- function(graph, width = 0, height = 0, dim = 2) { # nocov start
 #' @inheritParams layout_with_graphopt
 #' @keywords internal
 #' @export
-layout.graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001, mass = 30, spring.length = 0, spring.constant = 1, max.sa.movement = 5) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.graphopt()", "layout_with_graphopt()")
-  layout_with_graphopt(graph = graph, start = start, niter = niter, charge = charge, mass = mass, spring.length = spring.length, spring.constant = spring.constant, max.sa.movement = max.sa.movement)
+layout.graphopt <- function(
+  graph,
+  start = NULL,
+  niter = 500,
+  charge = 0.001,
+  mass = 30,
+  spring.length = 0,
+  spring.constant = 1,
+  max.sa.movement = 5
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "layout.graphopt()",
+    "layout_with_graphopt()"
+  )
+  layout_with_graphopt(
+    graph = graph,
+    start = start,
+    niter = niter,
+    charge = charge,
+    mass = mass,
+    spring.length = spring.length,
+    spring.constant = spring.constant,
+    max.sa.movement = max.sa.movement
+  )
 } # nocov end
 
 #' The GEM layout algorithm
@@ -128,9 +203,24 @@ layout.graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001, ma
 #' @inheritParams layout_with_gem
 #' @keywords internal
 #' @export
-layout.gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2, temp.max = max(vcount(graph), 1), temp.min = 1 / 10, temp.init = sqrt(max(vcount(graph), 1))) { # nocov start
+layout.gem <- function(
+  graph,
+  coords = NULL,
+  maxiter = 40 * vcount(graph)^2,
+  temp.max = max(vcount(graph), 1),
+  temp.min = 1 / 10,
+  temp.init = sqrt(max(vcount(graph), 1))
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.gem()", "layout_with_gem()")
-  layout_with_gem(graph = graph, coords = coords, maxiter = maxiter, temp.max = temp.max, temp.min = temp.min, temp.init = temp.init)
+  layout_with_gem(
+    graph = graph,
+    coords = coords,
+    maxiter = maxiter,
+    temp.max = temp.max,
+    temp.min = temp.min,
+    temp.init = temp.init
+  )
 } # nocov end
 
 #' The Davidson-Harel layout algorithm
@@ -143,9 +233,36 @@ layout.gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2, tem
 #' @inheritParams layout_with_dh
 #' @keywords internal
 #' @export
-layout.davidson.harel <- function(graph, coords = NULL, maxiter = 10, fineiter = max(10, log2(vcount(graph))), cool.fact = 0.75, weight.node.dist = 1.0, weight.border = 0.0, weight.edge.lengths = edge_density(graph) / 10, weight.edge.crossings = 1.0 - sqrt(edge_density(graph)), weight.node.edge.dist = 0.2 * (1 - edge_density(graph))) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.davidson.harel()", "layout_with_dh()")
-  layout_with_dh(graph = graph, coords = coords, maxiter = maxiter, fineiter = fineiter, cool.fact = cool.fact, weight.node.dist = weight.node.dist, weight.border = weight.border, weight.edge.lengths = weight.edge.lengths, weight.edge.crossings = weight.edge.crossings, weight.node.edge.dist = weight.node.edge.dist)
+layout.davidson.harel <- function(
+  graph,
+  coords = NULL,
+  maxiter = 10,
+  fineiter = max(10, log2(vcount(graph))),
+  cool.fact = 0.75,
+  weight.node.dist = 1.0,
+  weight.border = 0.0,
+  weight.edge.lengths = edge_density(graph) / 10,
+  weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
+  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "layout.davidson.harel()",
+    "layout_with_dh()"
+  )
+  layout_with_dh(
+    graph = graph,
+    coords = coords,
+    maxiter = maxiter,
+    fineiter = fineiter,
+    cool.fact = cool.fact,
+    weight.node.dist = weight.node.dist,
+    weight.border = weight.border,
+    weight.edge.lengths = weight.edge.lengths,
+    weight.edge.crossings = weight.edge.crossings,
+    weight.node.edge.dist = weight.node.edge.dist
+  )
 } # nocov end
 
 #' Simple two-row layout for bipartite graphs
@@ -158,9 +275,26 @@ layout.davidson.harel <- function(graph, coords = NULL, maxiter = 10, fineiter =
 #' @inheritParams layout_as_bipartite
 #' @keywords internal
 #' @export
-layout.bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 100) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.bipartite()", "layout_as_bipartite()")
-  layout_as_bipartite(graph = graph, types = types, hgap = hgap, vgap = vgap, maxiter = maxiter)
+layout.bipartite <- function(
+  graph,
+  types = NULL,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "layout.bipartite()",
+    "layout_as_bipartite()"
+  )
+  layout_as_bipartite(
+    graph = graph,
+    types = types,
+    hgap = hgap,
+    vgap = vgap,
+    maxiter = maxiter
+  )
 } # nocov end
 
 #' Choose an appropriate graph layout algorithm automatically
@@ -173,7 +307,8 @@ layout.bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1, maxiter = 
 #' @inheritParams layout_nicely
 #' @keywords internal
 #' @export
-layout.auto <- function(graph, dim = 2, ...) { # nocov start
+layout.auto <- function(graph, dim = 2, ...) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.auto()", "layout_nicely()")
   layout_nicely(graph = graph, dim = dim, ...)
 } # nocov end
@@ -201,11 +336,9 @@ layout.auto <- function(graph, dim = 2, ...) { # nocov start
 ##
 ## ----------------------------------------------------------------
 
-
 ## ----------------------------------------------------------------
 ## This is the new layout API
 ## ----------------------------------------------------------------
-
 
 #' Graph layouts
 #'
@@ -256,13 +389,13 @@ layout.auto <- function(graph, dim = 2, ...) { # nocov start
 #' plot(g, layout = coords)
 layout_ <- function(graph, layout, ...) {
   modifiers <- list(...)
-  stopifnot(all(sapply(modifiers, inherits,
-    what = "igraph_layout_modifier"
-  )))
+  stopifnot(all(sapply(modifiers, inherits, what = "igraph_layout_modifier")))
 
   ids <- sapply(modifiers, "[[", "id")
   stopifnot(all(ids %in% c("component_wise", "normalize")))
-  if (anyDuplicated(ids)) stop("Duplicate modifiers")
+  if (anyDuplicated(ids)) {
+    stop("Duplicate modifiers")
+  }
   names(modifiers) <- ids
 
   ## TODO: better, generic mechanism for modifiers
@@ -285,7 +418,8 @@ layout_ <- function(graph, layout, ...) {
 
   if ("normalize" %in% ids) {
     result <- do_call(
-      norm_coords, list(result),
+      norm_coords,
+      list(result),
       modifiers[["normalize"]]$args
     )
   }
@@ -340,7 +474,8 @@ print.igraph_layout_spec <- function(x, ...) {
   cat(paste(
     sep = "",
     "igraph layout specification, see ?layout_:\n",
-    x$call_str, "\n"
+    x$call_str,
+    "\n"
   ))
 }
 
@@ -401,8 +536,14 @@ component_wise <- function(merge_method = "dla") {
 #' @export
 #' @examples
 #' layout_(make_ring(10), with_fr(), normalize())
-normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
-                      zmin = xmin, zmax = xmax) {
+normalize <- function(
+  xmin = -1,
+  xmax = 1,
+  ymin = xmin,
+  ymax = xmax,
+  zmin = xmin,
+  zmax = xmax
+) {
   args <- grab_args()
 
   layout_modifier(
@@ -414,7 +555,6 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 ## ----------------------------------------------------------------
 ## Layout definitions for the new API
 ## ----------------------------------------------------------------
-
 
 #' Simple two-row layout for bipartite graphs
 #'
@@ -458,8 +598,13 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' g %>%
 #'   add_layout_(as_bipartite()) %>%
 #'   plot()
-layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
-                                maxiter = 100) {
+layout_as_bipartite <- function(
+  graph,
+  types = NULL,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100
+) {
   ## Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
@@ -483,7 +628,6 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' Generate coordinates to place the vertices of a graph in a star-shape
 #'
@@ -526,7 +670,9 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
   if (length(center) == 0) {
     center <- 1
   }
-  if (!is.null(order)) order <- as.numeric(order) - 1
+  if (!is.null(order)) {
+    order <- as.numeric(order) - 1
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -543,7 +689,6 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' The Reingold-Tilford graph layout algorithm
 #'
@@ -601,14 +746,20 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   root = c(1, 11),
 #'   rootlevel = c(2, 1)
 #' ))
-layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
-                           rootlevel = numeric(), mode = c("out", "in", "all"),
-                           flip.y = TRUE) {
+layout_as_tree <- function(
+  graph,
+  root = numeric(),
+  circular = FALSE,
+  rootlevel = numeric(),
+  mode = c("out", "in", "all"),
+  flip.y = TRUE
+) {
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root) - 1
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
-  mode <- switch(igraph.match.arg(mode),
+  mode <- switch(
+    igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -618,8 +769,12 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_layout_reingold_tilford, graph, root, mode,
-    rootlevel, circular
+    R_igraph_layout_reingold_tilford,
+    graph,
+    root,
+    mode,
+    rootlevel,
+    circular
   )
   if (flip.y && vcount(graph) > 0) {
     res[, 2] <- max(res[, 2]) - res[, 2]
@@ -645,12 +800,15 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @keywords internal
 #' @export
 layout.reingold.tilford <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.reingold.tilford()", "layout_as_tree()")
+  lifecycle::deprecate_soft(
+    "2.1.0",
+    "layout.reingold.tilford()",
+    "layout_as_tree()"
+  )
   do_call(layout_as_tree, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
-
 
 #' Graph layout with vertices on a circle.
 #'
@@ -711,7 +869,6 @@ layout.circle <- function(..., params = list()) {
 }
 
 ## ----------------------------------------------------------------
-
 
 #' Choose an appropriate graph layout algorithm automatically
 #'
@@ -788,7 +945,9 @@ layout_nicely <- function(graph, dim = 2, ...) {
       if ("weight" %in% edge_attr_names(graph)) {
         weights <- E(graph)$weight
         if (any(weights <= 0, na.rm = TRUE)) {
-          cli::cli_warn("Non-positive edge weight found, ignoring all weights during graph layout.")
+          cli::cli_warn(
+            "Non-positive edge weight found, ignoring all weights during graph layout."
+          )
           args$weights <- NA
         }
       }
@@ -812,7 +971,6 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' Simple grid layout
 #'
@@ -893,7 +1051,6 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 
 ## ----------------------------------------------------------------
 
-
 #' Graph layout with vertices on the surface of a sphere
 #'
 #' Place vertices on a sphere, approximately uniformly, in the order of their
@@ -941,7 +1098,6 @@ layout.sphere <- function(..., params = list()) {
 }
 
 ## ----------------------------------------------------------------
-
 
 #' Randomly place vertices on a plane or in 3d space
 #'
@@ -995,8 +1151,6 @@ layout.random <- function(..., params = list()) {
 
 
 ## ----------------------------------------------------------------
-
-
 
 #' The Davidson-Harel layout algorithm
 #'
@@ -1108,12 +1262,18 @@ layout.random <- function(..., params = list()) {
 #'   path(4, 9, 20, 30, 36) + path(1, 7, 12, 14, 19, 24, 26, 30, 37) +
 #'   path(5, 9, 13, 15, 19, 23, 25, 28, 33) + path(3, 12, 16, 25, 35, 26, 22, 13, 3)
 #' plot(g_12, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
-layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
-                           fineiter = max(10, log2(vcount(graph))), cool.fact = 0.75,
-                           weight.node.dist = 1.0, weight.border = 0.0,
-                           weight.edge.lengths = edge_density(graph) / 10,
-                           weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
-                           weight.node.edge.dist = 0.2 * (1 - edge_density(graph))) {
+layout_with_dh <- function(
+  graph,
+  coords = NULL,
+  maxiter = 10,
+  fineiter = max(10, log2(vcount(graph))),
+  cool.fact = 0.75,
+  weight.node.dist = 1.0,
+  weight.border = 0.0,
+  weight.edge.lengths = edge_density(graph) / 10,
+  weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
+  weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
+) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(coords)) {
@@ -1135,9 +1295,17 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_layout_davidson_harel, graph, coords, use.seed,
-    maxiter, fineiter, cool.fact, weight.node.dist,
-    weight.border, weight.edge.lengths, weight.edge.crossings,
+    R_igraph_layout_davidson_harel,
+    graph,
+    coords,
+    use.seed,
+    maxiter,
+    fineiter,
+    cool.fact,
+    weight.node.dist,
+    weight.border,
+    weight.edge.lengths,
+    weight.edge.crossings,
     weight.node.edge.dist
   )
 
@@ -1151,9 +1319,7 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
 
-
 ## ----------------------------------------------------------------
-
 
 #' The Fruchterman-Reingold layout algorithm
 #'
@@ -1232,14 +1398,26 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' axis(1)
 #' axis(2)
 #'
-layout_with_fr <- function(graph, coords = NULL, dim = 2,
-                           niter = 500, start.temp = sqrt(vcount(graph)),
-                           grid = c("auto", "grid", "nogrid"), weights = NULL,
-                           minx = NULL, maxx = NULL, miny = NULL, maxy = NULL,
-                           minz = NULL, maxz = NULL,
-                           coolexp = deprecated(), maxdelta = deprecated(),
-                           area = deprecated(), repulserad = deprecated(),
-                           maxiter = deprecated()) {
+layout_with_fr <- function(
+  graph,
+  coords = NULL,
+  dim = 2,
+  niter = 500,
+  start.temp = sqrt(vcount(graph)),
+  grid = c("auto", "grid", "nogrid"),
+  weights = NULL,
+  minx = NULL,
+  maxx = NULL,
+  miny = NULL,
+  maxy = NULL,
+  minz = NULL,
+  maxz = NULL,
+  coolexp = deprecated(),
+  maxdelta = deprecated(),
+  area = deprecated(),
+  repulserad = deprecated(),
+  maxiter = deprecated()
+) {
   # Argument checks
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
@@ -1250,16 +1428,14 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   if (!missing(niter) && !missing(maxiter)) {
     stop("Both `niter' and `maxiter' are given, give only one of them")
   }
-  if (!missing(maxiter)) niter <- maxiter
+  if (!missing(maxiter)) {
+    niter <- maxiter
+  }
   niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
   grid <- igraph.match.arg(grid)
-  grid <- switch(grid,
-    "grid" = 0L,
-    "nogrid" = 1L,
-    "auto" = 2L
-  )
+  grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1269,12 +1445,24 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   } else {
     weights <- NULL
   }
-  if (!is.null(minx)) minx <- as.numeric(minx)
-  if (!is.null(maxx)) maxx <- as.numeric(maxx)
-  if (!is.null(miny)) miny <- as.numeric(miny)
-  if (!is.null(maxy)) maxy <- as.numeric(maxy)
-  if (!is.null(minz)) minz <- as.numeric(minz)
-  if (!is.null(maxz)) maxz <- as.numeric(maxz)
+  if (!is.null(minx)) {
+    minx <- as.numeric(minx)
+  }
+  if (!is.null(maxx)) {
+    maxx <- as.numeric(maxx)
+  }
+  if (!is.null(miny)) {
+    miny <- as.numeric(miny)
+  }
+  if (!is.null(maxy)) {
+    maxy <- as.numeric(maxy)
+  }
+  if (!is.null(minz)) {
+    minz <- as.numeric(minz)
+  }
+  if (!is.null(maxz)) {
+    maxz <- as.numeric(maxz)
+  }
   if (lifecycle::is_present(coolexp)) {
     lifecycle::deprecate_stop("0.8.0", "layout_with_fr(coolexp = )")
   }
@@ -1291,14 +1479,32 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   on.exit(.Call(R_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold, graph, coords,
-      niter, start.temp, weights, minx, maxx, miny, maxy, grid
+      R_igraph_layout_fruchterman_reingold,
+      graph,
+      coords,
+      niter,
+      start.temp,
+      weights,
+      minx,
+      maxx,
+      miny,
+      maxy,
+      grid
     )
   } else {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold_3d, graph, coords,
-      niter, start.temp, weights, minx, maxx, miny, maxy,
-      minz, maxz
+      R_igraph_layout_fruchterman_reingold_3d,
+      graph,
+      coords,
+      niter,
+      start.temp,
+      weights,
+      minx,
+      maxx,
+      miny,
+      maxy,
+      minz,
+      maxz
     )
   }
   res
@@ -1321,12 +1527,15 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.fruchterman.reingold()", "layout_with_fr()")
+  lifecycle::deprecate_soft(
+    "2.1.0",
+    "layout.fruchterman.reingold()",
+    "layout_with_fr()"
+  )
   do_call(layout_with_fr, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
-
 
 #' The GEM layout algorithm
 #'
@@ -1366,9 +1575,14 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' g <- make_ring(10)
 #' plot(g, layout = layout_with_gem)
 #'
-layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2,
-                            temp.max = max(vcount(graph), 1), temp.min = 1 / 10,
-                            temp.init = sqrt(max(vcount(graph), 1))) {
+layout_with_gem <- function(
+  graph,
+  coords = NULL,
+  maxiter = 40 * vcount(graph)^2,
+  temp.max = max(vcount(graph), 1),
+  temp.min = 1 / 10,
+  temp.init = sqrt(max(vcount(graph), 1))
+) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(coords)) {
@@ -1387,8 +1601,14 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_layout_gem, graph, coords, use.seed, maxiter,
-    temp.max, temp.min, temp.init
+    R_igraph_layout_gem,
+    graph,
+    coords,
+    use.seed,
+    maxiter,
+    temp.max,
+    temp.min,
+    temp.init
   )
 
   res
@@ -1402,7 +1622,6 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' The graphopt layout algorithm
 #'
@@ -1444,9 +1663,16 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001,
-                                 mass = 30, spring.length = 0, spring.constant = 1,
-                                 max.sa.movement = 5) {
+layout_with_graphopt <- function(
+  graph,
+  start = NULL,
+  niter = 500,
+  charge = 0.001,
+  mass = 30,
+  spring.length = 0,
+  spring.constant = 1,
+  max.sa.movement = 5
+) {
   ensure_igraph(graph)
   start[] <- as.numeric(start)
   niter <- as.double(niter)
@@ -1458,8 +1684,15 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_layout_graphopt, graph, niter, charge, mass,
-    spring.length, spring.constant, max.sa.movement, start
+    R_igraph_layout_graphopt,
+    graph,
+    niter,
+    charge,
+    mass,
+    spring.length,
+    spring.constant,
+    max.sa.movement,
+    start
   )
 }
 
@@ -1471,7 +1704,6 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' The Kamada-Kawai layout algorithm
 #'
@@ -1533,21 +1765,33 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' E(g)$weight <- rep(1:2, length.out = ecount(g))
 #' plot(g, layout = layout_with_kk, edge.label = E(g)$weight)
 #'
-layout_with_kk <- function(graph, coords = NULL, dim = 2,
-                           maxiter = 50 * vcount(graph),
-                           epsilon = 0.0, kkconst = max(vcount(graph), 1),
-                           weights = NULL, minx = NULL, maxx = NULL,
-                           miny = NULL, maxy = NULL, minz = NULL, maxz = NULL,
-                           niter = deprecated(),
-                           sigma = deprecated(),
-                           initemp = deprecated(),
-                           coolexp = deprecated(),
-                           start = deprecated()) {
+layout_with_kk <- function(
+  graph,
+  coords = NULL,
+  dim = 2,
+  maxiter = 50 * vcount(graph),
+  epsilon = 0.0,
+  kkconst = max(vcount(graph), 1),
+  weights = NULL,
+  minx = NULL,
+  maxx = NULL,
+  miny = NULL,
+  maxy = NULL,
+  minz = NULL,
+  maxz = NULL,
+  niter = deprecated(),
+  sigma = deprecated(),
+  initemp = deprecated(),
+  coolexp = deprecated(),
+  start = deprecated()
+) {
   # Argument checks
   if (!missing(coords) && !missing(start)) {
     stop("Both `coords' and `start' are given, give only one of them.")
   }
-  if (!missing(start)) coords <- start
+  if (!missing(start)) {
+    coords <- start
+  }
 
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
@@ -1567,12 +1811,24 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   } else {
     weights <- NULL
   }
-  if (!is.null(minx)) minx <- as.numeric(minx)
-  if (!is.null(maxx)) maxx <- as.numeric(maxx)
-  if (!is.null(miny)) miny <- as.numeric(miny)
-  if (!is.null(maxy)) maxy <- as.numeric(maxy)
-  if (!is.null(minz)) minz <- as.numeric(minz)
-  if (!is.null(maxz)) maxz <- as.numeric(maxz)
+  if (!is.null(minx)) {
+    minx <- as.numeric(minx)
+  }
+  if (!is.null(maxx)) {
+    maxx <- as.numeric(maxx)
+  }
+  if (!is.null(miny)) {
+    miny <- as.numeric(miny)
+  }
+  if (!is.null(maxy)) {
+    maxy <- as.numeric(maxy)
+  }
+  if (!is.null(minz)) {
+    minz <- as.numeric(minz)
+  }
+  if (!is.null(maxz)) {
+    maxz <- as.numeric(maxz)
+  }
 
   if (lifecycle::is_present(niter)) {
     lifecycle::deprecate_stop("0.8.0", "layout_with_kk(niter = )")
@@ -1591,13 +1847,32 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   # Function call
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_kamada_kawai, graph, coords, maxiter,
-      epsilon, kkconst, weights, minx, maxx, miny, maxy
+      R_igraph_layout_kamada_kawai,
+      graph,
+      coords,
+      maxiter,
+      epsilon,
+      kkconst,
+      weights,
+      minx,
+      maxx,
+      miny,
+      maxy
     )
   } else {
     res <- .Call(
-      R_igraph_layout_kamada_kawai_3d, graph, coords, maxiter,
-      epsilon, kkconst, weights, minx, maxx, miny, maxy, minz,
+      R_igraph_layout_kamada_kawai_3d,
+      graph,
+      coords,
+      maxiter,
+      epsilon,
+      kkconst,
+      weights,
+      minx,
+      maxx,
+      miny,
+      maxy,
+      minz,
       maxz
     )
   }
@@ -1623,12 +1898,15 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @keywords internal
 #' @export
 layout.kamada.kawai <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.kamada.kawai()", "layout_with_kk()")
+  lifecycle::deprecate_soft(
+    "2.1.0",
+    "layout.kamada.kawai()",
+    "layout_with_kk()"
+  )
   do_call(layout_with_kk, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
-
 
 #' Large Graph Layout
 #'
@@ -1658,10 +1936,16 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
-                            area = vcount(graph)^2, coolexp = 1.5,
-                            repulserad = area * vcount(graph),
-                            cellsize = sqrt(sqrt(area)), root = NULL) {
+layout_with_lgl <- function(
+  graph,
+  maxiter = 150,
+  maxdelta = vcount(graph),
+  area = vcount(graph)^2,
+  coolexp = 1.5,
+  repulserad = area * vcount(graph),
+  cellsize = sqrt(sqrt(area)),
+  root = NULL
+) {
   ensure_igraph(graph)
   if (is.null(root)) {
     root <- -1
@@ -1671,9 +1955,15 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_layout_lgl, graph, as.double(maxiter),
-    as.double(maxdelta), as.double(area), as.double(coolexp),
-    as.double(repulserad), as.double(cellsize), root
+    R_igraph_layout_lgl,
+    graph,
+    as.double(maxiter),
+    as.double(maxdelta),
+    as.double(area),
+    as.double(coolexp),
+    as.double(repulserad),
+    as.double(cellsize),
+    root
   )
 }
 
@@ -1699,8 +1989,6 @@ layout.lgl <- function(..., params = list()) {
 }
 
 ## ----------------------------------------------------------------
-
-
 
 #' Graph layout by multidimensional scaling
 #'
@@ -1745,13 +2033,19 @@ layout.lgl <- function(..., params = list()) {
 #' g <- sample_gnp(100, 2 / 100)
 #' l <- layout_with_mds(g)
 #' plot(g, layout = l, vertex.label = NA, vertex.size = 3)
-layout_with_mds <- function(graph, dist = NULL, dim = 2,
-                            options = arpack_defaults()) {
+layout_with_mds <- function(
+  graph,
+  dist = NULL,
+  dim = 2,
+  options = arpack_defaults()
+) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
       "1.6.0",
       "layout_with_mds(options = 'must be a list')",
-      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
+      details = c(
+        "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
+      )
     )
     options <- options()
   }
@@ -1776,7 +2070,6 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' The Sugiyama graph layout generator
 #'
@@ -1988,12 +2281,20 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'   edge.arrow.mode = ifelse(realedge, 2, 0)
 #' )
 #'
-layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
-                                 maxiter = 100, weights = NULL,
-                                 attributes = c("default", "all", "none")) {
+layout_with_sugiyama <- function(
+  graph,
+  layers = NULL,
+  hgap = 1,
+  vgap = 1,
+  maxiter = 100,
+  weights = NULL,
+  attributes = c("default", "all", "none")
+) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(layers)) layers <- as.numeric(layers) - 1
+  if (!is.null(layers)) {
+    layers <- as.numeric(layers) - 1
+  }
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
   maxiter <- as.numeric(maxiter)
@@ -2010,8 +2311,13 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_layout_sugiyama, graph, layers, hgap,
-    vgap, maxiter, weights
+    R_igraph_layout_sugiyama,
+    graph,
+    layers,
+    hgap,
+    vgap,
+    maxiter,
+    weights
   )
 
   # Flip the y coordinates, more natural this way
@@ -2033,7 +2339,9 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
   E(res$extd_graph)$orig <- res$extd_to_orig_eids
   res$extd_to_orig_eids <- NULL
 
-  res$extd_graph <- set_vertex_attr(res$extd_graph, "dummy",
+  res$extd_graph <- set_vertex_attr(
+    res$extd_graph,
+    "dummy",
     value = c(
       rep(FALSE, vc),
       rep(TRUE, nrow(res$res) - vc)
@@ -2088,14 +2396,16 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
     )
     for (ga in gatt) {
       res$extd_graph <- set_graph_attr(
-        res$extd_graph, ga,
+        res$extd_graph,
+        ga,
         graph_attr(graph, ga)
       )
     }
     for (va in vatt) {
       notdummy <- which(!V(res$extd_graph)$dummy)
       res$extd_graph <- set_vertex_attr(
-        res$extd_graph, va,
+        res$extd_graph,
+        va,
         notdummy,
         vertex_attr(graph, va)
       )
@@ -2118,7 +2428,6 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
 
 ## ----------------------------------------------------------------
-
 
 #' Merging graph layouts
 #'
@@ -2174,14 +2483,14 @@ merge_coords <- function(graphs, layouts, method = "dla") {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
       R_igraph_layout_merge_dla,
-      graphs, layouts
+      graphs,
+      layouts
     )
   } else {
     stop("Invalid `method'.")
   }
   res
 }
-
 
 
 #' Normalize coordinates for plotting graphs
@@ -2204,8 +2513,15 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #' @export
 #' @family graph layouts
 #' @keywords graphs
-norm_coords <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1,
-                        zmin = -1, zmax = 1) {
+norm_coords <- function(
+  layout,
+  xmin = -1,
+  xmax = 1,
+  ymin = -1,
+  ymax = 1,
+  zmin = -1,
+  zmax = 1
+) {
   if (!is.matrix(layout)) {
     stop("`layout' must be a matrix")
   }
@@ -2323,9 +2639,24 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
 #' @inheritParams layout_with_drl
 #' @keywords internal
 #' @export
-layout.drl <- function(graph, use.seed = FALSE, seed = matrix(runif(vcount(graph) * 2), ncol = 2), options = drl_defaults$default, weights = NULL, dim = 2) { # nocov start
+layout.drl <- function(
+  graph,
+  use.seed = FALSE,
+  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
+  options = drl_defaults$default,
+  weights = NULL,
+  dim = 2
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "layout.drl()", "layout_with_drl()")
-  layout_with_drl(graph = graph, use.seed = use.seed, seed = seed, options = options, weights = weights, dim = dim)
+  layout_with_drl(
+    graph = graph,
+    use.seed = use.seed,
+    seed = seed,
+    options = options,
+    weights = weights,
+    dim = dim
+  )
 } # nocov end
 
 #' The DrL graph layout generator
@@ -2459,11 +2790,14 @@ layout.drl <- function(graph, use.seed = FALSE, seed = matrix(runif(vcount(graph
 #' l <- layout_with_drl(g, options = list(simmer.attraction = 0))
 #' plot(g, layout = l, vertex.size = 3, vertex.label = NA)
 #'
-layout_with_drl <- function(graph, use.seed = FALSE,
-                            seed = matrix(runif(vcount(graph) * 2), ncol = 2),
-                            options = drl_defaults$default,
-                            weights = NULL,
-                            dim = 2) {
+layout_with_drl <- function(
+  graph,
+  use.seed = FALSE,
+  seed = matrix(runif(vcount(graph) * 2), ncol = 2),
+  options = drl_defaults$default,
+  weights = NULL,
+  dim = 2
+) {
   ensure_igraph(graph)
 
   if (dim != 2 && dim != 3) {
@@ -2487,12 +2821,20 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   on.exit(.Call(R_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_drl, graph, seed, use.seed, options,
+      R_igraph_layout_drl,
+      graph,
+      seed,
+      use.seed,
+      options,
       weights
     )
   } else {
     res <- .Call(
-      R_igraph_layout_drl_3d, graph, seed, use.seed, options,
+      R_igraph_layout_drl_3d,
+      graph,
+      seed,
+      use.seed,
+      options,
       weights
     )
   }
