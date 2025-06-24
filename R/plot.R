@@ -539,6 +539,14 @@ plot.igraph <- function(
 
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] - sin(la) * vs
+
+    loop_table <- table(loops.v)
+    loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
+    base_loop_size <- loop.size
+    loop_increment <- 0.5
+
+    adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
+
     mapply(
       loop,
       xx0,
@@ -556,7 +564,8 @@ plot.igraph <- function(
       arrow.size = asize,
       arr.w = arrow.width,
       lab.x = loop.labx,
-      lab.y = loop.laby
+      lab.y = loop.laby,
+      loopSize = adjusted_loop_size
     )
   }
 
