@@ -549,7 +549,6 @@ plot.igraph <- function(
     adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
 
     la <- sapply(loops.v, function(v) {
-      # Get all incident non-loop edges
       incident_edges <- incident(graph, v, mode = "all")
       incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
 
@@ -557,7 +556,6 @@ plot.igraph <- function(
         return(0)
       }
 
-      # Compute angles to the *other* node of each edge
       angles <- sapply(incident_edges, function(e) {
         ends_e <- ends(graph, e)
         other <- if (as.numeric(ends_e[1]) == v) {
