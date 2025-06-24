@@ -543,7 +543,7 @@ plot.igraph <- function(
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
     base_loop_size <- loop.size
-    loop_increment <- 0.5
+    loop_increment <- 0.25
 
     adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
 
