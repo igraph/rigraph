@@ -439,13 +439,17 @@ plot.igraph <- function(
         ncol = 2,
         byrow = TRUE
       )
-      phi <- atan2(cp[, 2] - center[2], cp[, 1] - center[1])
-      r <- sqrt((cp[, 1] - center[1])**2 + (cp[, 2] - center[2])**2)
+      # Translate to local coordinates
+      cp_centered <- cp -
+        matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
 
-      phi <- phi + rad
+      # Rotate all control points around the center
+      rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
+      cp_rotated <- t(rotation_matrix %*% t(cp_centered))
 
-      cp[, 1] <- cx + r * cos(phi)
-      cp[, 2] <- cy + r * sin(phi)
+      # Translate back to global coordinates
+      cp <- cp_rotated +
+        matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
 
       if (is.na(width)) {
         width <- 1
@@ -504,10 +508,10 @@ plot.igraph <- function(
     if (length(edge.width) > 1) {
       ew <- ew[loops.e]
     }
-    la <- loop.angle
-    if (length(loop.angle) > 1) {
-      la <- la[loops.e]
-    }
+    # la <- loop.angle
+    # if (length(loop.angle) > 1) {
+    #   la <- la[loops.e]
+    # }
     lty <- edge.lty
     if (length(edge.lty) > 1) {
       lty <- lty[loops.e]
@@ -537,9 +541,6 @@ plot.igraph <- function(
       lcex <- lcex[loops.e]
     }
 
-    xx0 <- layout[loops.v, 1] + cos(la) * vs
-    yy0 <- layout[loops.v, 2] - sin(la) * vs
-
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
     base_loop_size <- loop.size
@@ -547,6 +548,43 @@ plot.igraph <- function(
 
     adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
 
+    la <- sapply(loops.v, function(v) {
+      # Get all incident non-loop edges
+      incident_edges <- incident(graph, v, mode = "all")
+      incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
+
+      if (length(incident_edges) == 0) {
+        return(0)
+      }
+
+      # Compute angles to the *other* node of each edge
+      angles <- sapply(incident_edges, function(e) {
+        ends_e <- ends(graph, e)
+        other <- if (as.numeric(ends_e[1]) == v) {
+          as.numeric(ends_e[2])
+        } else {
+          as.numeric(ends_e[1])
+        }
+        dx <- layout[other, 1] - layout[v, 1]
+        dy <- layout[other, 2] - layout[v, 2]
+        atan2(dy, dx)
+      })
+
+      # Normalize and sort
+      angles <- (angles + 2 * pi) %% (2 * pi)
+      angles <- sort(angles)
+
+      if (length(angles) == 0) {
+        return(0) # Default angle if isolated node
+      } else {
+        gaps <- diff(c(angles, angles[1] + 2 * pi)) # wrap around
+        max_gap_index <- which.max(gaps)
+        (angles[max_gap_index] + gaps[max_gap_index] / 2) %% (2 * pi)
+      }
+    })
+    xx0 <- layout[loops.v, 1] + cos(la) * vs
+    yy0 <- layout[loops.v, 2] + sin(la) * vs
+    ### CHANGED/ADDED: Dynamically calculate loop.angle based on largest gap
     mapply(
       loop,
       xx0,
