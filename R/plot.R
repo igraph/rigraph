@@ -596,8 +596,8 @@ plot.igraph <- function(
 
       # Compute narrowing factor based on angular space
       angle_per_loop <- gap_span / n_loops
-      # Scale narrowing between 1 (wide) and ~0.3 (tight)
-      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 5))) # full width if ≥36°, compress below
+      # Scale narrowing between 1 (wide) and ~0.2 (tight)
+      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
       narrowing[idx] <- narrowing_factor
     }
     if (length(la) == 1) {
