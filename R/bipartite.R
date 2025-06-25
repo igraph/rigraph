@@ -198,10 +198,10 @@ bipartite_projection <- function(
     which
   )
   if (remove.type) {
-    if (is_igraph(res[[1]])) {
+    if (is_igraph(res[[1]]) && "type" %in% vertex_attr_names(res[[1]])) {
       res[[1]] <- delete_vertex_attr(res[[1]], "type")
     }
-    if (is_igraph(res[[2]])) {
+    if (is_igraph(res[[2]]) && "type" %in% vertex_attr_names(res[[2]])) {
       res[[2]] <- delete_vertex_attr(res[[2]], "type")
     }
   }
