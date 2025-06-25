@@ -465,16 +465,13 @@ plot.igraph <- function(
       )
 
       if (is.language(label) || !is.na(label)) {
-        lx <- x0 + .3
-        ly <- y0
-        phi <- atan2(ly - center[2], lx - center[1])
-        r <- sqrt((lx - center[1])**2 + (ly - center[2])**2)
+        # Get midpoint of the Bezier curve for label placement
+        p <- compute.bezier(cp, 50)
+        mid_index <- floor(ncol(p) / 2)
+        lx <- p[1, mid_index]
+        ly <- p[2, mid_index]
 
-        phi <- phi + rad
-
-        lx <- cx + r * cos(phi)
-        ly <- cy + r * sin(phi)
-
+        # Override if label position explicitly given
         if (!is.na(lab.x)) {
           lx <- lab.x
         }

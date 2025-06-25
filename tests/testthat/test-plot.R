@@ -105,7 +105,13 @@ test_that("label colors are correct when loops are present", {
   vdiffr::expect_doppelganger(
     "loop graph",
     function() {
-      plot(g, edge.color = cols, edge.label.color = cols, edge.label = cols)
+      plot(
+        g,
+        edge.color = cols,
+        edge.label.color = cols,
+        edge.label = cols,
+        margin = 0.5
+      )
     }
   )
 })
@@ -130,4 +136,25 @@ test_that("Edges stop at outside of rectangle node", {
   }
 
   vdiffr::expect_doppelganger("rectangle-edges", rectangle_edges)
+})
+
+test_that("Multi loops are arranged correctly", {
+  skip_if_not_installed("vdiffr")
+
+  multi_loops_triangle <- function() {
+    g <- make_graph(c(1,2,2,3,3,1,1,1,1,1,1,1,1,1),directed = FALSE)
+    V(g)$x <- c(1,1.5,2)
+    V(g)$y <- c(0,1,0)
+    plot(g, margin = 0.2, loop.size = 2)
+  }
+
+  vdiffr::expect_doppelganger("multi-loops-triangle", multi_loops_triangle)
+
+  multi_loops_many <- function() {
+    withr::local_seed(42)
+    g2 <- make_graph(c(1,2, 2,3, 3,1, 1,4, 4,5, 5,1, 3,4, 5,2, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1),directed = FALSE)
+    plot(g2, loop.size = 2)
+  }
+
+  vdiffr::expect_doppelganger("multi-loops-many", multi_loops_many)
 })
