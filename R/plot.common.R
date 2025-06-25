@@ -355,7 +355,7 @@
 #'   Gives the angle in radians for plotting loop edges.
 #'   See the `label.dist` vertex parameter to see how this is interpreted.
 #'
-#'   The default value is 0.
+#'   The default value is NA. This means that the loop edges will be drawn in the largest gap possible.
 #' }
 #' \item{loop.angle2}{
 #'   Gives the second angle in radians for plotting loop edges.
@@ -4886,7 +4886,7 @@ i.edge.default <- list(
   label = i.get.edge.labels,
   lty = 1,
   width = 1,
-  loop.angle = 0,
+  loop.angle = NA,
   loop.angle2 = 0,
   label.family = "serif",
   label.font = 1,

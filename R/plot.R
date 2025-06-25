@@ -508,10 +508,10 @@ plot.igraph <- function(
     if (length(edge.width) > 1) {
       ew <- ew[loops.e]
     }
-    # la <- loop.angle
-    # if (length(loop.angle) > 1) {
-    #   la <- la[loops.e]
-    # }
+    la <- loop.angle
+    if (length(loop.angle) > 1) {
+      la <- la[loops.e]
+    }
     lty <- edge.lty
     if (length(edge.lty) > 1) {
       lty <- lty[loops.e]
@@ -541,6 +541,7 @@ plot.igraph <- function(
       lcex <- lcex[loops.e]
     }
 
+    # Get the number of loops per vertex to optimally align them
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
     base_loop_size <- loop.size
@@ -548,7 +549,8 @@ plot.igraph <- function(
 
     adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
 
-    la <- sapply(loops.v, function(v) {
+    # Calculate the angles for the loops to fit in the largest gap
+    la_dyn <- sapply(loops.v, function(v) {
       incident_edges <- incident(graph, v, mode = "all")
       incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
 
@@ -568,21 +570,24 @@ plot.igraph <- function(
         atan2(dy, dx)
       })
 
-      # Normalize and sort
       angles <- (angles + 2 * pi) %% (2 * pi)
       angles <- sort(angles)
 
       if (length(angles) == 0) {
         return(0) # Default angle if isolated node
       } else {
-        gaps <- diff(c(angles, angles[1] + 2 * pi)) # wrap around
+        gaps <- diff(c(angles, angles[1] + 2 * pi))
         max_gap_index <- which.max(gaps)
         (angles[max_gap_index] + gaps[max_gap_index] / 2) %% (2 * pi)
       }
     })
+    if (length(la) == 1) {
+      la <- rep(la, length(loops.v))
+    }
+    la[is.na(la)] <- la_dyn[is.na(la)]
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] + sin(la) * vs
-    ### CHANGED/ADDED: Dynamically calculate loop.angle based on largest gap
+
     mapply(
       loop,
       xx0,
