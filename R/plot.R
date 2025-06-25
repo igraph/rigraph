@@ -421,7 +421,8 @@ plot.igraph <- function(
       arr.w = arr.w,
       lab.x,
       lab.y,
-      loopSize = loop.size
+      loopSize = loop.size,
+      narrowing = 1
     ) {
       rad <- angle
       center <- c(cx, cy)
@@ -430,9 +431,9 @@ plot.igraph <- function(
           x0,
           y0,
           x0 + .4 * loopSize,
-          y0 + .2 * loopSize,
+          y0 + narrowing * .2 * loopSize,
           x0 + .4 * loopSize,
-          y0 - .2 * loopSize,
+          y0 - narrowing * .2 * loopSize,
           x0,
           y0
         ),
@@ -442,7 +443,7 @@ plot.igraph <- function(
       # Translate to local coordinates
       cp_centered <- cp -
         matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
-
+      print(cp_centered)
       # Rotate all control points around the center
       rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
       cp_rotated <- t(rotation_matrix %*% t(cp_centered))
@@ -541,53 +542,74 @@ plot.igraph <- function(
       lcex <- lcex[loops.e]
     }
 
-    # Get the number of loops per vertex to optimally align them
+    # For each loop, assign unique angle within largest gap (flower petal style)
+    la_dyn <- numeric(length(loops.v)) # one angle per loop
+
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
-    base_loop_size <- loop.size
-    loop_increment <- 0.25
+    loop_count <- loop_table[as.character(loops.v)]
+    narrowing <- pmax(0.3, 1 - (loop_count - 1) * 0.15)
 
-    adjusted_loop_size <- base_loop_size + (loop_idx - 1) * loop_increment
+    for (v in unique(loops.v)) {
+      idx <- which(loops.v == v)
 
-    # Calculate the angles for the loops to fit in the largest gap
-    la_dyn <- sapply(loops.v, function(v) {
+      # Find largest angular gap for this vertex
       incident_edges <- incident(graph, v, mode = "all")
       incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
 
       if (length(incident_edges) == 0) {
-        return(0)
-      }
-
-      angles <- sapply(incident_edges, function(e) {
-        ends_e <- ends(graph, e)
-        other <- if (as.numeric(ends_e[1]) == v) {
-          as.numeric(ends_e[2])
-        } else {
-          as.numeric(ends_e[1])
-        }
-        dx <- layout[other, 1] - layout[v, 1]
-        dy <- layout[other, 2] - layout[v, 2]
-        atan2(dy, dx)
-      })
-
-      angles <- (angles + 2 * pi) %% (2 * pi)
-      angles <- sort(angles)
-
-      if (length(angles) == 0) {
-        return(0) # Default angle if isolated node
+        # No neighbors, spread loops in full circle
+        loop_angles <- seq(0, 2 * pi, length.out = length(idx) + 1)[-1]
       } else {
+        angles <- sapply(incident_edges, function(e) {
+          ends_e <- ends(graph, e)
+          other <- if (as.numeric(ends_e[1]) == v) {
+            as.numeric(ends_e[2])
+          } else {
+            as.numeric(ends_e[1])
+          }
+          dx <- layout[other, 1] - layout[v, 1]
+          dy <- layout[other, 2] - layout[v, 2]
+          atan2(dy, dx)
+        })
+
+        angles <- (angles + 2 * pi) %% (2 * pi)
+        angles <- sort(angles)
         gaps <- diff(c(angles, angles[1] + 2 * pi))
         max_gap_index <- which.max(gaps)
-        (angles[max_gap_index] + gaps[max_gap_index] / 2) %% (2 * pi)
+
+        gap_start <- angles[max_gap_index]
+        gap_end <- (gap_start + gaps[max_gap_index]) %% (2 * pi)
+
+        # Generate equally spaced angles inside the gap
+        if (gap_end > gap_start) {
+          loop_angles <- seq(gap_start, gap_end, length.out = length(idx) + 2)[
+            -c(1, length(idx) + 2)
+          ]
+        } else {
+          # wrapped gap
+          gap_end <- gap_end + 2 * pi
+          loop_angles <- seq(gap_start, gap_end, length.out = length(idx) + 2)[
+            -c(1, length(idx) + 2)
+          ] %%
+            (2 * pi)
+        }
       }
-    })
+
+      la_dyn[idx] <- loop_angles
+    }
     if (length(la) == 1) {
       la <- rep(la, length(loops.v))
     }
     la[is.na(la)] <- la_dyn[is.na(la)]
+    # === BEGIN: improved loop size/placement ===
+    # All loops same size, but different directions like flower petals
+    adjusted_loop_size <- rep(loop.size, length(loops.v))
+
+    # Position loop attachment points using per-loop angles
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] + sin(la) * vs
-
+    # === END: loop placement ===
     mapply(
       loop,
       xx0,
@@ -606,7 +628,8 @@ plot.igraph <- function(
       arr.w = arrow.width,
       lab.x = loop.labx,
       lab.y = loop.laby,
-      loopSize = adjusted_loop_size
+      loopSize = adjusted_loop_size,
+      narrowing = narrowing
     )
   }
 
