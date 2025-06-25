@@ -19,7 +19,7 @@ vertices and across the time steps."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9050</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9051</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,22 +136,23 @@ It is <code>NA</code> for the initial <code>tau + ell</code> time steps.</p></dd
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">scan_stat</span><span class="op">(</span>graphs <span class="op">=</span> <span class="va">tsg</span>, k <span class="op">=</span> <span class="fl">1</span>, tau <span class="op">=</span> <span class="fl">4</span>, ell <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]          NA          NA          NA          NA          NA          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  2.12899367 -0.66335441  1.40695371 -0.73824336 -0.01512755 -0.51846036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13]  1.77031947  0.08592913 -1.58782704 -1.31377876  1.43622124 -0.11258351</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19]  2.75715749  4.17298202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]         NA         NA         NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  0.5714811 -2.1885083 -0.4922457  9.4067542  0.3248869 -3.1112698</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] -0.2911616 -2.8750000  1.7172593 -0.9466626 -0.3035773  0.8299761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] -1.3226551 12.2951874</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $arg_max_v</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA 16 11  5 13  3  8 10  6  5  9 20 15  2 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA 10 18  7  6 19  5 16  7  6 20  4 12  3 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">scan_stat</span><span class="op">(</span>graphs <span class="op">=</span> <span class="va">tsg</span>, locality <span class="op">=</span> <span class="st">"them"</span>, k <span class="op">=</span> <span class="fl">1</span>, tau <span class="op">=</span> <span class="fl">4</span>, ell <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $stat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]        NA        NA        NA        NA        NA        NA -0.500000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8]  0.000000  1.750000 -1.111168 -1.021376  0.500000  0.625000  0.875000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15]  0.125000 -0.875000  0.375000  0.625000  2.875000  1.521351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]         NA         NA         NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  0.8157896  1.2446372  0.6429492  2.3750000 -1.9959332  0.3782589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] -0.5783432 -0.7071068  1.2500000 -1.1250000  0.5050763  1.8856181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] -1.6250000  6.6782307</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $arg_max_v</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA 16  7  5  2 11  8 12  3  5 15 19  8  4 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA NA NA NA NA NA 12 16 18 10 19  5 18 19 13  7  4 14  2 18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

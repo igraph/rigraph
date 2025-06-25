@@ -15,7 +15,7 @@ graph, like an adjacency matrix."><meta property="og:image" content="https://r.i
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9050</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9051</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,57 +150,57 @@ defined in the ‘<code>Matrix</code>’ package, if <code>sparse</code> if
 <span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] . . . . . . . . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] . . . . . 1 . 1 . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] . . . . . . 1 . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] . . . . . . 1 . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] . . . . . 1 . 1 . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] . 1 . . 1 . 1 . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] . . 1 1 . 1 . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] . 1 . . 1 . . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] . . . . . . . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] . . . 1 1 1 1 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] . 1 1 . . . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 1 . 1 . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 1 1 . . . . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] . . . . . . . 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] . . . . . . . 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] . . . . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] . . . . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] . 1 . 1 1 1 1 . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] . . . 1 1 . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] . . . . . . . 1 . .</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a . . . . . . . . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b . . . . . 1 . 1 . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c . . . . . . 1 . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d . . . . . . 1 . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e . . . . . 1 . 1 . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f . 1 . . 1 . 1 . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g . . 1 1 . 1 . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h . 1 . . 1 . . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i . . . . . . . . . 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j . . . 1 1 1 1 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a . 1 1 . . . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 1 . 1 . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c 1 1 . . . . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d . . . . . . . 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e . . . . . . . 1 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f . . . . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g . . . . . . . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h . 1 . 1 1 1 1 . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i . . . 1 1 . . . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j . . . . . . . 1 . .</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span>, attr <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a . .         .          .         .           .           .          .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b . .         .          .         .           0.330121691 .          0.8328456</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c . .         .          .         .           .           0.07899829 .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d . .         .          .         .           .           0.62337103 .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e . .         .          .         .           0.009822477 .          0.4678542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f . 0.3301217 .          .         0.009822477 .           0.35373960 .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g . .         0.07899829 0.6233710 .           0.353739604 .          .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h . 0.8328456 .          .         0.467854201 .           .          .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i . .         .          .         .           .           .          .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j . .         .          0.9239261 0.316179677 0.823120607 0.78203059 0.8823195</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a .         .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b .         .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> c .         .        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> d .         0.9239261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> e .         0.3161797</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> f .         0.8231206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g .         0.7820306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> h .         0.8823195</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> i .         0.3621016</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> j 0.3621016 .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a .         0.4678542 0.9239261 .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 0.4678542 .         0.3161797 .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c 0.9239261 0.3161797 .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d .         .         .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e .         .         .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f .         .         .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g .         .         .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h .         0.8231206 .         0.7820306 0.8823195 0.3621016 0.8196023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i .         .         .         0.2665549 0.2042925 .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j .         .         .         .         .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 0.8231206 .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d 0.7820306 0.2665549 .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e 0.8823195 0.2042925 .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> f 0.3621016 .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g 0.8196023 .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> h .         .         0.8312953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> i .         .         .        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> j 0.8312953 .         .        </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

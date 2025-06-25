@@ -15,7 +15,7 @@ and shuffling its vertices."><meta property="og:image" content="https://r.igraph
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9050</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9051</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,32 +151,32 @@ graph matching for correlated Erdős-Rényi graphs.
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">.1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_correlated_gnp</span><span class="op">(</span><span class="va">g</span>, corr <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">g2</span><span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5006405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4976292</span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 651aa1f U--- 1000 49982 -- Erdos-Renyi (gnp) graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b01f826 U--- 1000 49861 -- Erdos-Renyi (gnp) graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 651aa1f:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 3  2-- 3  4-- 7  2-- 9  5--10  9--10  1--11  6--12  7--12  9--12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  2--13  8--13 12--13  3--14  4--14  5--15  7--16  3--17  4--17 12--17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 17--18  9--19  1--20  3--20  5--21 16--21  9--22 19--22  6--23  7--23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 11--23 18--23 20--23 14--24 15--24 16--25 18--25 23--25 11--26 15--26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 15--27  2--28  8--28 11--28 12--28  6--29 15--29 28--29  1--30 11--30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 24--30 26--30  4--31  5--31 14--31  3--32 15--32 25--32  3--33  7--33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 14--33 29--33 11--34 11--35 14--35 25--35 34--35 13--36 18--36 19--36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 23--36 25--36 27--36 28--36 30--36  4--37 37--38  9--39 11--39 15--39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b01f826:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  3-- 4  4-- 8  6-- 8  1-- 9 11--12  7--13  3--15  1--16  5--16 13--18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 14--18 11--20  3--21  6--22 16--22 18--22  4--23 13--23  2--24  8--24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 17--24 11--25 15--25  7--26 23--26  6--27  8--27 14--27 15--27 18--27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 23--27 26--27 18--28 19--28  1--29  7--29 14--29 20--29  9--30  3--31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 20--31 22--31 24--31 28--31  5--32  6--32  8--32  9--32 18--32 28--32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 18--33 22--33  7--34 15--34 16--34 17--34 22--34 33--34 19--35  9--36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 21--36 26--36  1--37  4--37 14--37  6--38 10--38 26--38 36--38  4--39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [71]  7--39 14--39 15--39 17--39  8--40 23--40  3--41  6--41 14--41 23--41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 7505af3 U--- 1000 49666 -- Correlated random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 78f1643 U--- 1000 49857 -- Correlated random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), corr (g/n), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 7505af3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  4-- 7  5--10  5--12  9--12  8--13 12--13  3--14  5--15  1--16  7--16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3--17  4--17  8--17 12--17 13--18 14--18 17--18  4--19  1--20  3--20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  2--21  5--21 18--22  2--23 18--23 20--23  8--24  7--25 16--25 18--25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31]  3--26 11--26 15--26 18--26 19--27  8--28 11--28 12--28 21--28 15--29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 26--29 28--29  1--30 10--30  2--31  4--31 24--31 26--31  8--32 15--32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 18--32  3--33  6--33  7--33 15--33 17--33 29--33 11--34 11--35 19--35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 25--35 27--35 13--36 23--36 25--36 27--36 28--36 34--36  4--37 29--37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [71]  1--38 10--38 19--38  9--39 15--39 11--40 13--40 28--40 30--40  5--41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 78f1643:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  7-- 9  9--11  6--12  7--13  9--13  3--15  4--16  5--16  6--16 10--16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 13--18 14--18  6--19 11--20 17--20  3--21 16--21 10--22 16--22 10--23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8--24 22--24  8--25 11--25  7--26 15--26 19--26 21--26 23--26  1--27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31]  2--27  6--27 10--27 14--27 15--27 18--27 14--29 16--29  9--30  3--31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 20--31 22--31  3--32  5--32 18--32 19--32  9--33 10--33 13--33 18--33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 22--33 15--34 16--34 33--34  2--35 19--35 21--35 34--35  6--36 21--36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 26--36  4--37 14--37  6--38 10--38  4--39 10--39 18--39 10--40 20--40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 23--40  3--41  6--41 18--41 22--41 30--41  2--42  8--42 30--42 14--43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>

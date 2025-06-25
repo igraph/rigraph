@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9050</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9051</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,17 +156,17 @@ and evaluation. <em>Social Networks</em>, 14, 5–61.</p>
 <span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.001</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.05</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_sbm</span><span class="op">(</span><span class="fl">1000</span>, pref.matrix <span class="op">=</span> <span class="va">pm</span>, block.sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b5f0d14 U--- 1000 16978 -- Stochastic block model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 55c07da U--- 1000 16868 -- Stochastic block model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b5f0d14:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 5  4-- 5  1-- 7  6-- 7  3-- 8  5-- 9 12--14 12--15 14--15  4--16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  7--17 14--17 10--18 11--18  4--19  5--20  9--20 14--20 16--20 17--21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 20--21 14--22 17--22  1--23  4--23 11--23 13--23 23--24  5--25 11--25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31]  3--26  6--26 16--26 23--26 12--27 16--27 20--27 17--28  2--29  6--29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 14--29 19--29 23--29 24--29 27--29  1--30 12--30 22--30 11--31 12--32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 18--33 23--33 24--33 27--33 32--33 12--34 14--34 33--34 19--35 20--35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 22--35 30--35 31--36  5--37 15--37 18--37 21--38 27--38 29--38  7--39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 10--39 15--39 17--39 27--39 30--39 36--39 17--40 28--40  7--42 12--42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 55c07da:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2-- 3  5-- 6  2-- 8  4-- 9  6--10  7--11  3--13  9--14 10--15 13--15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  2--16  8--16 13--18  2--19 11--19 17--19  1--20  9--20 14--20  8--23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 15--23  1--24 14--24 20--24 16--25  7--26 14--26 19--26  5--27 18--27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31]  2--28 14--28 22--28 26--29 28--29  5--30  7--30  9--30 10--30 11--30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 24--30  9--31 10--31 28--31  4--32 25--33 30--33  1--34 20--34 14--35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 20--35  7--36 19--36 31--36  1--37  2--37  5--37 11--37 19--37 21--37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 18--38 34--38 37--38  7--39 16--39 17--39 20--39 24--39 30--39 32--39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 35--39  1--40 18--40 34--40 12--41 20--41 24--41 25--41 27--41 35--41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>
