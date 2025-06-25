@@ -557,7 +557,7 @@ plot.igraph <- function(
         gap_span <- 2 * pi
       } else {
         angles <- sapply(incident_edges, function(e) {
-          ends_e <- ends(graph, e)
+          ends_e <- ends(graph, e, names = FALSE)
           other <- if (as.numeric(ends_e[1]) == v) {
             as.numeric(ends_e[2])
           } else {
