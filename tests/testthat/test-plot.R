@@ -67,7 +67,7 @@ test_that("basic plot test, spheres", {
   vdiffr::expect_doppelganger(
     "Basic graph, spheres",
     function() {
-      plot(g, vertex.shape = "sphere", vertex.size = 100)
+      plot(g, vertex.shape = "sphere", vertex.size = 40)
     }
   )
 })

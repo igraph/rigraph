@@ -598,7 +598,6 @@ plot.igraph <- function(
       angle_per_loop <- gap_span / n_loops
       # Scale narrowing between 1 (wide) and ~0.3 (tight)
       narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 5))) # full width if ≥36°, compress below
-      print(narrowing_factor)
       narrowing[idx] <- narrowing_factor
     }
     if (length(la) == 1) {
@@ -609,8 +608,9 @@ plot.igraph <- function(
 
     adjusted_loop_size <- rep(loop.size, length(loops.v))
 
-    xx0 <- layout[loops.v, 1] + cos(la) * vs
-    yy0 <- layout[loops.v, 2] + sin(la) * vs
+    r_offset <- 0 # radius offset for loops if needed later
+    xx0 <- layout[loops.v, 1] + cos(la) * r_offset
+    yy0 <- layout[loops.v, 2] + sin(la) * r_offset
 
     mapply(
       loop,
