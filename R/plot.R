@@ -537,22 +537,24 @@ plot.igraph <- function(
     }
 
     # For each loop, assign unique angle within largest gap (flower petal style)
+    # depending on the number of loops and the available angular space
     la_dyn <- numeric(length(loops.v))
+    narrowing <- numeric(length(loops.v))
 
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
-    loop_count <- loop_table[as.character(loops.v)]
-    narrowing <- pmax(0.3, 1 - (loop_count - 1) * 0.15)
 
     for (v in unique(loops.v)) {
       idx <- which(loops.v == v)
+      n_loops <- length(idx)
 
       incident_edges <- incident(graph, v, mode = "all")
       incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
 
       if (length(incident_edges) == 0) {
-        # No neighbors, spread loops in full circle
-        loop_angles <- seq(0, 2 * pi, length.out = length(idx) + 1)[-1]
+        # Full circle available if no edges
+        loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
+        gap_span <- 2 * pi
       } else {
         angles <- sapply(incident_edges, function(e) {
           ends_e <- ends(graph, e)
@@ -572,30 +574,39 @@ plot.igraph <- function(
         max_gap_index <- which.max(gaps)
 
         gap_start <- angles[max_gap_index]
-        gap_end <- (gap_start + gaps[max_gap_index]) %% (2 * pi)
+        gap_span <- gaps[max_gap_index]
+        gap_end <- (gap_start + gap_span) %% (2 * pi)
 
-        # Generate equally spaced angles inside the gap
+        # Generate loop angles spaced inside the gap
         if (gap_end > gap_start) {
-          loop_angles <- seq(gap_start, gap_end, length.out = length(idx) + 2)[
-            -c(1, length(idx) + 2)
+          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+            -c(1, n_loops + 2)
           ]
         } else {
-          # wrapped gap
+          # wrap around
           gap_end <- gap_end + 2 * pi
-          loop_angles <- seq(gap_start, gap_end, length.out = length(idx) + 2)[
-            -c(1, length(idx) + 2)
+          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+            -c(1, n_loops + 2)
           ] %%
             (2 * pi)
         }
       }
 
       la_dyn[idx] <- loop_angles
+
+      # Compute narrowing factor based on angular space
+      angle_per_loop <- gap_span / n_loops
+      # Scale narrowing between 1 (wide) and ~0.3 (tight)
+      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 5))) # full width if ≥36°, compress below
+      print(narrowing_factor)
+      narrowing[idx] <- narrowing_factor
     }
     if (length(la) == 1) {
       la <- rep(la, length(loops.v))
     }
+
     la[is.na(la)] <- la_dyn[is.na(la)]
-    # All loops same size, but different directions like flower petals
+
     adjusted_loop_size <- rep(loop.size, length(loops.v))
 
     xx0 <- layout[loops.v, 1] + cos(la) * vs
