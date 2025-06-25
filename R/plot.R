@@ -440,15 +440,12 @@ plot.igraph <- function(
         ncol = 2,
         byrow = TRUE
       )
-      # Translate to local coordinates
       cp_centered <- cp -
         matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
-      print(cp_centered)
-      # Rotate all control points around the center
+
       rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
       cp_rotated <- t(rotation_matrix %*% t(cp_centered))
 
-      # Translate back to global coordinates
       cp <- cp_rotated +
         matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
 
@@ -543,7 +540,7 @@ plot.igraph <- function(
     }
 
     # For each loop, assign unique angle within largest gap (flower petal style)
-    la_dyn <- numeric(length(loops.v)) # one angle per loop
+    la_dyn <- numeric(length(loops.v))
 
     loop_table <- table(loops.v)
     loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
@@ -553,7 +550,6 @@ plot.igraph <- function(
     for (v in unique(loops.v)) {
       idx <- which(loops.v == v)
 
-      # Find largest angular gap for this vertex
       incident_edges <- incident(graph, v, mode = "all")
       incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
 
@@ -602,14 +598,12 @@ plot.igraph <- function(
       la <- rep(la, length(loops.v))
     }
     la[is.na(la)] <- la_dyn[is.na(la)]
-    # === BEGIN: improved loop size/placement ===
     # All loops same size, but different directions like flower petals
     adjusted_loop_size <- rep(loop.size, length(loops.v))
 
-    # Position loop attachment points using per-loop angles
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] + sin(la) * vs
-    # === END: loop placement ===
+
     mapply(
       loop,
       xx0,
