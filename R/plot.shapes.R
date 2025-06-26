@@ -1242,7 +1242,12 @@ mypie <- function(
     p
   }
   vertex.color <- getparam("color")
-  vertex.frame.color <- getparam("frame.color")
+
+  vertex.frame.color <- rep(
+    getparam("frame.color"),
+    length = (nrow(coords))
+  )
+  print(vertex.frame.color)
   vertex.size <- rep(getparam("size"), length = nrow(coords))
   vertex.pie <- getparam("pie")
   vertex.pie.color <- getparam("pie.color")
@@ -1270,7 +1275,7 @@ mypie <- function(
       col = col,
       angle = na.omit(vertex.pie.angle[c(i, 1)])[1],
       density = na.omit(vertex.pie.density[c(i, 1)])[1],
-      border = na.omit(vertex.frame.color[c(i, 1)])[1],
+      border = vertex.frame.color[i],
       lty = na.omit(vertex.pie.lty[c(i, 1)])[1]
     )
   }
