@@ -2594,9 +2594,11 @@ full_citation_graph <- function(...) {
 #'
 #'
 #' @aliases graph_from_lcf
-#' @param n Integer, the number of vertices in the graph.
+#' @param n Integer, the number of vertices in the graph. If `NULL` (default),
+#'   it is set to `len(shifts) * repeats`.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.
+#' @inheritParams rlang::args_dots_empty
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [make_graph()] can create arbitrary graphs, see also the other
@@ -2605,13 +2607,40 @@ full_citation_graph <- function(...) {
 #' @examples
 #'
 #' # This is the Franklin graph:
-#' g1 <- graph_from_lcf(12, c(5, -5), 6)
+#' g1 <- graph_from_lcf(shifts = c(5L, -5L), n = 12L, repeats = 6L)
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
 #' @cdocs igraph_lcf_vector
-graph_from_lcf <- lcf_vector_impl
+graph_from_lcf <- function(
+  shifts,
+  ...,
+  n = NULL,
+  repeats = 1L
+) {
+  if (!rlang::is_integer(shifts)) {
+    cli::cli_abort(
+      "{.arg shift} must be an integer vector, not {.obj_type_friendly {shifts}}."
+    )
+  }
 
+  check_dots_empty()
+
+  n <- n %||% (length(shifts) * repeats)
+  if (!rlang::is_integer(n, n = 1)) {
+    cli::cli_abort(
+      "{.arg n} must be an integer of length 1, not {.obj_type_friendly {n}}."
+    )
+  }
+
+  if (!rlang::is_integer(repeats, n = 1)) {
+    cli::cli_abort(
+      "{.arg repeats} must be an integer of length 1, not {.obj_type_friendly {repeats}}."
+    )
+  }
+
+  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
+}
 ## -----------------------------------------------------------------
 
 #' Creating a graph from a given degree sequence, deterministically

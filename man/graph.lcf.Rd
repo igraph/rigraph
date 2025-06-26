@@ -7,7 +7,8 @@
 graph.lcf(n, shifts, repeats = 1)
 }
 \arguments{
-\item{n}{Integer, the number of vertices in the graph.}
+\item{n}{Integer, the number of vertices in the graph. If \code{NULL} (default),
+it is set to \code{len(shifts) * repeats}.}
 
 \item{shifts}{Integer vector, the shifts.}
 
