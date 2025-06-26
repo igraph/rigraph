@@ -41,11 +41,11 @@
 <polygon points='261.76,400.66 262.09,399.47 262.49,398.22 262.97,396.88 263.57,395.41 264.38,393.76 265.55,391.74 269.00,387.48 268.90,387.38 264.58,390.76 262.54,391.90 260.88,392.67 259.40,393.25 258.06,393.72 256.79,394.09 255.60,394.40 ' style='stroke-width: 0.75; stroke: #A9A9A9; fill: #A9A9A9;' />
 <polygon points='453.54,245.46 452.42,245.98 451.21,246.49 449.88,246.99 448.37,247.48 446.59,247.94 444.29,248.36 438.81,248.49 438.80,248.64 444.17,249.73 446.36,250.54 448.03,251.31 449.43,252.05 450.65,252.78 451.76,253.50 452.77,254.21 ' style='stroke-width: 0.75; stroke: #A9A9A9; fill: #A9A9A9;' />
 <polygon points='404.52,205.39 405.21,206.41 405.92,207.52 406.63,208.75 407.36,210.16 408.10,211.84 408.89,214.04 409.92,219.42 410.06,219.41 410.26,213.94 410.71,211.64 411.19,209.87 411.70,208.37 412.21,207.04 412.74,205.83 413.28,204.72 ' style='stroke-width: 0.75; stroke: #A9A9A9; fill: #A9A9A9;' />
-<rect x='268.95' y='334.30' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #E69F00;' />
-<rect x='385.24' y='219.41' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #E69F00;' />
-<rect x='374.30' y='75.47' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #E69F00;' />
-<rect x='169.07' y='432.57' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #E69F00;' />
-<rect x='526.17' y='231.87' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #E69F00;' />
+<rect x='268.95' y='334.30' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #1AB3CC; fill-opacity: 0.10;' />
+<rect x='385.24' y='219.41' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #1AB3CC; fill-opacity: 0.10;' />
+<rect x='374.30' y='75.47' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #1AB3CC; fill-opacity: 0.10;' />
+<rect x='169.07' y='432.57' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #1AB3CC; fill-opacity: 0.10;' />
+<rect x='526.17' y='231.87' width='53.57' height='53.57' style='stroke-width: 0.75; fill: #1AB3CC; fill-opacity: 0.10;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <text x='295.73' y='365.21' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
