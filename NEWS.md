@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9052
+
+## Bug fixes
+
+- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
+
+- Do not try to destroy non-initialized SIR objects upon error.
+
+  see https://github.com/igraph/rigraph/issues/1888
+
+
 # igraph 2.1.4.9051
 
 ## Chore
