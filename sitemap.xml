@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://r.igraph.org/404.html</loc></url>
 <url><loc>https://r.igraph.org/AUTHORS-list.html</loc></url>
+<url><loc>https://r.igraph.org/CLAUDE.html</loc></url>
 <url><loc>https://r.igraph.org/CONTRIBUTING.html</loc></url>
 <url><loc>https://r.igraph.org/articles/current-deprecations.html</loc></url>
 <url><loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc></url>
