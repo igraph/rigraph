@@ -12,6 +12,8 @@ permissions: read-all
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
@@ -39,6 +41,7 @@ jobs:
         shell: Rscript {0}
 
       - uses: codecov/codecov-action@v5
+        timeout-minutes: 360
         with:
           # Fail if error if not on PR, or if on PR and token is given
           fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
