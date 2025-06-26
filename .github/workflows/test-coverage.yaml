@@ -30,6 +30,7 @@ jobs:
           needs: coverage
 
       - name: Test coverage
+        timeout-minutes: 360
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,
