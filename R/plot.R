@@ -112,6 +112,8 @@ plot.igraph <- function(
   label.degree <- params("vertex", "label.degree")
   label.color <- params("vertex", "label.color")
   label.dist <- params("vertex", "label.dist")
+  label.angle <- params("vertex", "label.angle")
+  label.adj <- params("vertex", "label.adj")
   labels <- params("vertex", "label")
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
@@ -724,30 +726,42 @@ plot.igraph <- function(
   y <- layout[, 2] +
     label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
   if (vc > 0) {
-    if (length(label.family) == 1) {
-      text(
-        x,
-        y,
-        labels = labels,
-        col = label.color,
-        family = label.family,
-        font = label.font,
-        cex = label.cex
-      )
-    } else {
-      if1 <- function(vect, idx) if (length(vect) == 1) vect else vect[idx]
-      sapply(seq_len(vcount(graph)), function(v) {
+    nv <- vcount(graph)
+
+    # Replicate all label attributes to length nv
+    label.col <- rep(label.color, length.out = nv)
+    label.fam <- rep(label.family, length.out = nv)
+    label.fnt <- rep(label.font, length.out = nv)
+    label.cex <- rep(label.cex, length.out = nv)
+    label.ang <- rep(label.angle, length.out = nv)
+    label.adj <- rep(list(label.adj), length.out = nv)
+    label.text <- rep(labels, length.out = nv)
+
+    # Draw vertex labels
+    invisible(mapply(
+      function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
         text(
-          x[v],
-          y[v],
-          labels = if1(labels, v),
-          col = if1(label.color, v),
-          family = if1(label.family, v),
-          font = if1(label.font, v),
-          cex = if1(label.cex, v)
+          x0,
+          y0,
+          labels = lbl,
+          col = col,
+          family = fam,
+          font = fnt,
+          cex = cex,
+          srt = srt,
+          adj = adj
         )
-      })
-    }
+      },
+      x,
+      y,
+      label.text,
+      label.col,
+      label.fam,
+      label.fnt,
+      label.cex,
+      label.ang,
+      label.adj
+    ))
   }
   rm(x, y)
   invisible(NULL)
