@@ -726,16 +726,13 @@ plot.igraph <- function(
   y <- layout[, 2] +
     label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
   if (vc > 0) {
-    nv <- vcount(graph)
-
-    # Replicate all label attributes to length nv
-    label.col <- rep(label.color, length.out = nv)
-    label.fam <- rep(label.family, length.out = nv)
-    label.fnt <- rep(label.font, length.out = nv)
-    label.cex <- rep(label.cex, length.out = nv)
-    label.ang <- rep(label.angle, length.out = nv)
-    label.adj <- rep(list(label.adj), length.out = nv)
-    label.text <- rep(labels, length.out = nv)
+    label.col <- rep(label.color, length.out = vc)
+    label.fam <- rep(label.family, length.out = vc)
+    label.fnt <- rep(label.font, length.out = vc)
+    label.cex <- rep(label.cex, length.out = vc)
+    label.ang <- rep(label.angle, length.out = vc)
+    label.adj <- rep(list(label.adj), length.out = vc)
+    label.text <- rep(labels, length.out = vc)
 
     # Draw vertex labels
     invisible(mapply(
