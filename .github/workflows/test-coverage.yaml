@@ -26,13 +26,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr, any::xml2
+          extra-packages: r-lib/covr#611, any::xml2
           needs: coverage
 
       - name: Test coverage
         timeout-minutes: 360
         run: |
-          options(covr.gcov = "")
           cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
