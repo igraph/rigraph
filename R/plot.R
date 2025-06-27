@@ -257,7 +257,7 @@ plot.igraph <- function(
   mark.border <- rep(mark.border, length.out = length(mark.groups))
   mark.col <- rep(mark.col, length.out = length(mark.groups))
   mark.expand <- rep(mark.expand, length.out = length(mark.groups))
-  mark.lwd <- rep(mark.lwd, length.out = length(mark.lwd))
+  mark.lwd <- rep(mark.lwd, length.out = length(mark.groups))
 
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
@@ -1820,6 +1820,7 @@ igraph.polygon <- function(
   )
 
   cl <- convex_hull(pp)
+
   xspline(
     cl$rescoords,
     shape = shape,
