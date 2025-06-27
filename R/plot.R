@@ -57,6 +57,10 @@
 #'   the marked vertex groups. It is in the same units as the vertex sizes. If a
 #'   vector is given, then different values are used for the different vertex
 #'   groups.
+#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around
+#'   the marked vertex groups.  If a
+#'   vector is given, then different values are used for the different vertex
+#'   groups.
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
@@ -92,6 +96,7 @@ plot.igraph <- function(
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
   mark.border = rainbow(length(mark.groups), alpha = 1),
   mark.expand = 15,
+  mark.lwd = 1,
   loop.size = 1,
   ...
 ) {
@@ -252,6 +257,7 @@ plot.igraph <- function(
   mark.border <- rep(mark.border, length.out = length(mark.groups))
   mark.col <- rep(mark.col, length.out = length(mark.groups))
   mark.expand <- rep(mark.expand, length.out = length(mark.groups))
+  mark.lwd <- rep(mark.lwd, length.out = length(mark.lwd))
 
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
@@ -267,7 +273,8 @@ plot.igraph <- function(
       expand.by = mark.expand[g] / 200,
       shape = mark.shape[g],
       col = mark.col[g],
-      border = mark.border[g]
+      border = mark.border[g],
+      border.lwd = mark.lwd[g]
     )
   }
 
@@ -1800,7 +1807,8 @@ igraph.polygon <- function(
   expand.by = 15 / 200,
   shape = 1 / 2,
   col = "#ff000033",
-  border = NA
+  border = NA,
+  border.lwd = 1
 ) {
   by <- expand.by
   pp <- rbind(
@@ -1812,5 +1820,12 @@ igraph.polygon <- function(
   )
 
   cl <- convex_hull(pp)
-  xspline(cl$rescoords, shape = shape, open = FALSE, col = col, border = border)
+  xspline(
+    cl$rescoords,
+    shape = shape,
+    open = FALSE,
+    col = col,
+    border = border,
+    lwd = border.lwd
+  )
 }
