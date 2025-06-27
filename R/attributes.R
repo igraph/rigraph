@@ -576,9 +576,9 @@ i_set_vertex_attr <- function(
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
-    if (length(value) == 1) {
-      value_in <- rep(unname(value), length(index))
-    } else if (length(value) == length(index)) {
+    if (vctrs::vec_size(value) == 1) {
+      value_in <- rep(unname(value), vctrs::vec_size(index))
+    } else if (vctrs::vec_size(value) == length(index)) {
       value_in <- unname(value)
     } else {
       cli::cli_abort(
@@ -826,9 +826,9 @@ i_set_edge_attr <- function(
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
-    if (length(value) == 1) {
-      value_in <- rep(unname(value), length(index))
-    } else if (length(value) == length(index)) {
+    if (vctrs::vec_size(value) == 1) {
+      value_in <- rep(unname(value), vctrs::vec_size(index))
+    } else if (vctrs::vec_size(value) == vctrs::vec_size(index)) {
       value_in <- unname(value)
     } else {
       cli::cli_abort(
