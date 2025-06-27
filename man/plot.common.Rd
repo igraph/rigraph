@@ -234,6 +234,12 @@ discussed earlier for the possible values.
 
 The default value is \code{black}.
 }
+\item{label.angle}{
+The rotation of the vertex labels, in degrees. Corresponds to the \code{srt} parameter of \code{\link[graphics:text]{graphics::text()}}.
+}
+\item{label.adj}{
+one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also \code{adj} in \code{\link[graphics:text]{graphics::text()}}.
+}
 \item{size.scaling}{
 Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 If FALSE, \code{vertex.size} and \code{vertex.size2} are used as is.
