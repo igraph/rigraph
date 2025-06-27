@@ -233,7 +233,8 @@ plot.igraph <- function(
       graph,
       list(
         vertex.size = 1 / 200 * vertex.size,
-        vertex.size2 = 1 / 200 * params("vertex", "size2")
+        vertex.size2 = 1 / 200 * params("vertex", "size2"),
+        ...
       )
     )
     vertex.size <- 1 / 200 * vertex.size
@@ -659,6 +660,7 @@ plot.igraph <- function(
     if (length(efam) > 1) {
       efam <- efam[nonloops.e]
     }
+
     efon <- edge.label.font
     if (length(efon) > 1) {
       efon <- efon[nonloops.e]
@@ -667,16 +669,32 @@ plot.igraph <- function(
     if (length(ecex) > 1) {
       ecex <- ecex[nonloops.e]
     }
+    en <- length(nonloops.e)
+    ecol <- rep(ecol, length.out = en)
+    efam <- rep(efam, length.out = en)
+    efon <- rep(efon, length.out = en)
+    ecex <- rep(ecex, length.out = en)
 
-    text(
+    invisible(mapply(
+      function(x, y, label, col, family, font, cex) {
+        text(
+          x,
+          y,
+          labels = label,
+          col = col,
+          family = family,
+          font = font,
+          cex = cex
+        )
+      },
       lc.x,
       lc.y,
-      labels = edge.labels,
-      col = ecol,
-      family = efam,
-      font = efon,
-      cex = ecex
-    )
+      edge.labels,
+      ecol,
+      efam,
+      efon,
+      ecex
+    ))
   }
 
   rm(x0, y0, x1, y1)

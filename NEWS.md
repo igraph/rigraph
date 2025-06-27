@@ -1,5 +1,57 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9053
+
+## Bug fixes
+
+- Allow more than one edge label font family (#37, #1896).
+
+- Pie shapes work as intended (#1882, #1883).
+
+## Features
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1895).
+
+- Auto-update from GitHub Actions (#1893).
+
+- Auto-update from GitHub Actions (#1892).
+
+## Continuous integration
+
+- Turn off gcov.
+
+- More timeouts.
+
+- No timeout for covr.
+
+- Add plain covr workflow.
+
+- Add instructions.
+
+- Add Claude workflow.
+
+- Add description for workflow.
+
+## Breaking changes
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+
+# igraph 2.1.4.9052
+
+## Bug fixes
+
+- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
+
+- Do not try to destroy non-initialized SIR objects upon error.
+
+  see https://github.com/igraph/rigraph/issues/1888
+
+
 # igraph 2.1.4.9051
 
 ## Chore
