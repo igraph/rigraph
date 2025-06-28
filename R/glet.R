@@ -3,14 +3,27 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.project()` was renamed to `graphlet_proj()` to create a more
+#' `graphlets.project()` was renamed to [graphlet_proj()] to create a more
 #' consistent API.
 #' @inheritParams graphlet_proj
 #' @keywords internal
 #' @export
-graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu = rep(1, length(cliques))) { # nocov start
+graphlets.project <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graphlets.project()", "graphlet_proj()")
-  graphlet_proj(graph = graph, weights = weights, cliques = cliques, niter = niter, Mu = Mu)
+  graphlet_proj(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    niter = niter,
+    Mu = Mu
+  )
 } # nocov end
 
 #' Graphlet decomposition of a graph
@@ -18,13 +31,18 @@ graphlets.project <- function(graph, weights = NULL, cliques, niter = 1000, Mu =
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graphlets.candidate.basis()` was renamed to `graphlet_basis()` to create a more
+#' `graphlets.candidate.basis()` was renamed to [graphlet_basis()] to create a more
 #' consistent API.
 #' @inheritParams graphlet_basis
 #' @keywords internal
 #' @export
-graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graphlets.candidate.basis()", "graphlet_basis()")
+graphlets.candidate.basis <- function(graph, weights = NULL) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graphlets.candidate.basis()",
+    "graphlet_basis()"
+  )
   graphlet_basis(graph = graph, weights = weights)
 } # nocov end
 
@@ -53,15 +71,27 @@ graphlets.candidate.basis <- function(graph, weights = NULL) { # nocov start
 #' @param cliques A list of vertex ids, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
-#' @return `graphlets()` returns a list with two members: \item{cliques}{A
-#'   list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
-#'   basis.}
+#' @return `graphlets()` returns a list with two members:
+#'   \describe{
+#'     \item{cliques}{
+#'       A list of subgraphs, the candidate graphlet basis.
+#'       Each subgraph is give by a vector of vertex ids.
+#'     }
+#'     \item{Mu}{
+#'       The weights of the subgraphs in graphlet basis.
+#'     }
+#'   }
 #'
-#'   `graphlet_basis()` returns a list of two elements: \item{cliques}{A list
-#'   of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#'   vector of vertex ids.} \item{thresholds}{The weight thresholds used for
-#'   finding the subgraphs.}
+#'   `graphlet_basis()` returns a list of two elements:
+#'   \describe{
+#'     \item{cliques}{
+#'       A list of subgraphs, the candidate graphlet basis.
+#'       Each subgraph is give by a vector of vertex ids.
+#'     }
+#'     \item{thresholds}{
+#'       The weight thresholds used for finding the subgraphs.
+#'     }
+#'   }
 #'
 #'   `graphlet_proj()` return a numeric vector, the weights of the graphlet
 #'   basis subgraphs.
@@ -126,8 +156,13 @@ graphlet_basis <- function(graph, weights = NULL) {
 
 #' @rdname graphlet_basis
 #' @export
-graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
-                          Mu = rep(1, length(cliques))) {
+graphlet_proj <- function(
+  graph,
+  weights = NULL,
+  cliques,
+  niter = 1000,
+  Mu = rep(1, length(cliques))
+) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -186,7 +221,11 @@ function() {
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
 
-  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode = "undirected", weighted = TRUE)
+  g <- graph_from_adjacency_matrix(
+    D1 + D2 + D3,
+    mode = "undirected",
+    weighted = TRUE
+  )
   gl <- graphlets(g, iter = 1000)
 
   fitandplot(g, gl)

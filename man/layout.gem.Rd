@@ -38,7 +38,7 @@ default is the square root of the number of vertices.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{layout.gem()} was renamed to \code{layout_with_gem()} to create a more
+\code{layout.gem()} was renamed to \code{\link[=layout_with_gem]{layout_with_gem()}} to create a more
 consistent API.
 }
 \keyword{internal}

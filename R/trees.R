@@ -22,10 +22,14 @@
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
 #'   list with two entries:
-#'   \item{res}{Logical value that indicates whether the
-#'   graph is a tree.}
-#'   \item{root}{The root vertex of the tree; undefined if
-#'   the graph is not a tree.}
+#'   \describe{
+#'     \item{res}{
+#'       Logical value that indicates whether the graph is a tree.
+#'     }
+#'     \item{root}{
+#'       The root vertex of the tree; undefined if the graph is not a tree.
+#'     }
+#'   }
 #'
 #' @keywords graphs
 #' @examples
@@ -37,7 +41,11 @@
 #' @family trees
 #' @export
 #' @cdocs igraph_is_tree
-is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALSE) {
+is_tree <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
   out <- is_tree_impl(graph, mode, details)
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
     out$root <- V(graph)[1]
@@ -68,9 +76,15 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'   or also a possible root (`TRUE`)
 #' @return When `details` is `FALSE`, a logical value that indicates
 #'   whether the graph is a tree. When `details` is `TRUE`, a named
-#'   list with two entries: \item{res}{Logical value that indicates whether the
-#'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
-#'   the graph is not a tree.}
+#'   list with two entries:
+#'   \describe{
+#'     \item{res}{
+#'       Logical value that indicates whether the graph is a tree.
+#'     }
+#'     \item{root}{
+#'       The root vertex of the tree; undefined if the graph is not a tree.
+#'     }
+#'   }
 #'
 #' @keywords graphs
 #' @examples

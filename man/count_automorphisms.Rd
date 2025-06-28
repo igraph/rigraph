@@ -21,21 +21,45 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
-largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
-cell, \sQuote{\code{fm}}: first maximally non-trivially connected
-non-singleton cell, \sQuote{\code{flm}}: first largest maximally
-non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
-smallest maximally non-trivially connected non-singleton cell.}
+are:
+\sQuote{\code{f}}:
+first non-singleton cell,
+\sQuote{\code{fl}}:
+first largest non-singleton cell,
+\sQuote{\code{fs}}:
+first smallest non-singleton cell,
+\sQuote{\code{fm}}:
+first maximally non-trivially connected
+non-singleton cell,
+\sQuote{\code{flm}}:
+first largest maximally
+non-trivially connected non-singleton cell,
+\sQuote{\code{fsm}}:
+first smallest maximally non-trivially connected non-singleton cell.}
 }
 \value{
-A named list with the following members: \item{group_size}{The size
-of the automorphism group of the input graph, as a string. This number is
-exact if igraph was compiled with the GMP library, and approximate
-otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
-\item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
-\item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
-canrep updates.} \item{max_level}{Maximum level.}
+A named list with the following members:
+\describe{
+\item{group_size}{
+The size of the automorphism group of the input graph, as a string.
+This number is exact if igraph was compiled with the GMP library, and approximate otherwise.
+}
+\item{nof_nodes}{
+The number of nodes in the search tree.
+}
+\item{nof_leaf_nodes}{
+The number of leaf nodes in the search tree.
+}
+\item{nof_bad_nodes}{
+Number of bad nodes.
+}
+\item{nof_canupdates}{
+Number of canrep updates.
+}
+\item{max_level}{
+Maximum level.
+}
+}
 }
 \description{
 Calculate the number of automorphisms of a graph, i.e. the number of

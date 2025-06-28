@@ -17,7 +17,7 @@ be calculated.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{degree.distribution()} was renamed to \code{degree_distribution()} to create a more
+\code{degree.distribution()} was renamed to \code{\link[=degree_distribution]{degree_distribution()}} to create a more
 consistent API.
 }
 \keyword{internal}

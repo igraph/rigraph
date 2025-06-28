@@ -9,7 +9,6 @@
 /version_number
 igraph.Rcheck/
 .venv/
-.vscode/
 .Rproj.user
 /configure~
 /src/build/
@@ -21,3 +20,6 @@ cran
 /compile_commands.json
 /.cache
 /rchk
+/src/*.d
+/src/symbols.rds
+/covr

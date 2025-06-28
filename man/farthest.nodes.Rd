@@ -25,7 +25,7 @@ used by default.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{farthest.nodes()} was renamed to \code{farthest_vertices()} to create a more
+\code{farthest.nodes()} was renamed to \code{\link[=farthest_vertices]{farthest_vertices()}} to create a more
 consistent API.
 }
 \keyword{internal}

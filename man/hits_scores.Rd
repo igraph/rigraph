@@ -32,13 +32,20 @@ edges are effectively added up.}
 }
 \value{
 A named list with members:
-\item{hub}{The hub score of the vertices.}
-\item{authority}{The authority score of the vertices.}
-\item{value}{The corresponding eigenvalue of the calculated
-principal eigenvector.}
-\item{options}{Some information about the ARPACK computation, it has
-the same members as the \code{options} member returned
-by \code{\link[=arpack]{arpack()}}, see that for documentation.}
+\describe{
+\item{hub}{
+The hub score of the vertices.
+}
+\item{authority}{
+The authority score of the vertices.
+}
+\item{value}{
+The corresponding eigenvalue of the calculated principal eigenvector.
+}
+\item{options}{
+Some information about the ARPACK computation, it has the same members as the \code{options} member returned by \code{\link[=arpack]{arpack()}}, see that for documentation.
+}
+}
 }
 \description{
 The hub scores of the vertices are defined as the principal eigenvector

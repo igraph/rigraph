@@ -1,5 +1,199 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9054
+
+## Continuous integration
+
+- Fix main coverage workflow.
+
+- Install covr fix.
+
+
+# igraph 2.1.4.9053
+
+## Bug fixes
+
+- Allow more than one edge label font family (#37, #1896).
+
+- Pie shapes work as intended (#1882, #1883).
+
+## Features
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1895).
+
+- Auto-update from GitHub Actions (#1893).
+
+- Auto-update from GitHub Actions (#1892).
+
+## Continuous integration
+
+- Turn off gcov.
+
+- More timeouts.
+
+- No timeout for covr.
+
+- Add plain covr workflow.
+
+- Add instructions.
+
+- Add Claude workflow.
+
+- Add description for workflow.
+
+## Breaking changes
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+
+# igraph 2.1.4.9052
+
+## Bug fixes
+
+- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
+
+- Do not try to destroy non-initialized SIR objects upon error.
+
+  see https://github.com/igraph/rigraph/issues/1888
+
+
+# igraph 2.1.4.9051
+
+## Chore
+
+- Add air code formatting (#1734, #1869).
+
+
+# igraph 2.1.4.9050
+
+## Continuous integration
+
+- Increase timeout also for covr step.
+
+- Increase timeout for all builds.
+
+- Give more time to covr.
+
+
+# igraph 2.1.4.9049
+
+## Documentation
+
+- Fix indentation of `\describe{}` elements (#1867).
+
+
+# igraph 2.1.4.9048
+
+## Bug fixes
+
+- Added `NA` handling for matrix inputs (#917, #918, #1828).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1865).
+
+## Documentation
+
+- Ensure use of `\describe{}` if using `\item{}` in return value (#1736, #1779).
+
+- Link to replacements of deprecated functions (#1823).
+
+## Refactoring
+
+- Use `check_string()` instead of `as.character()` (#1365).
+
+
+# igraph 2.1.4.9047
+
+## doc
+
+- Refer to current latest version of R in troubleshooting page.
+
+
+# igraph 2.1.4.9046
+
+## Chore
+
+- Auto-update from GitHub Actions (#1861).
+
+- Add deps file to build-ignore.
+
+## Continuous integration
+
+- Allow workflow dispatch.
+
+- Allow PR creation.
+
+
+# igraph 2.1.4.9045
+
+## Chore
+
+- Fix `devtools::load_all()` (#1857).
+
+
+# igraph 2.1.4.9044
+
+## Bug fixes
+
+- Added factor support for `graph_from_data_frame()` (#34, #1829).
+
+## Chore
+
+- Refer to the dev version of roxygen2 as build dependency (#1832).
+
+## Continuous integration
+
+- Fix sanitizer.
+
+- Permissions, better tests for missing suggests, lints (#1851).
+
+- Only fail covr builds if token is given (#1848).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1846).
+
+- Correct installation of xml2 (#1842).
+
+- Add xml2 for covr, print testthat results (#1840).
+
+- Sync (#1839).
+
+## Documentation
+
+- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
+
+## Testing
+
+- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28 (#1854).
+
+- Update vendored sources to igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267 (#1853).
+
+- Update vendored sources to igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760 (#1852).
+
+- Update vendored sources to igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3 (#1843).
+
+
+# igraph 2.1.4.9043
+
+## vendor
+
+- Update vendored sources to igraph/igraph@2d6d0abc05ac3cb53872cc3ea86b847a7556198e (#1837).
+
+- Update vendored sources to igraph/igraph@a899e60c8e3992f769e2159aeedf480ad46de337 (#1836).
+
+- Update vendored sources to igraph/igraph@145b35107659f73d85186b6a021dfe4284cf50c7 (#1835).
+
+- Update vendored sources to igraph/igraph@198fe3751b97bb130e724ca847d8aa5f9a58c4dc (#1834).
+
+
 # igraph 2.1.4.9042
 
 ## vendor

@@ -65,20 +65,34 @@ be used to calculate confidence intervals and log-likelihood. See
 
 If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
 named list with entries:
-\item{continuous}{Logical scalar, whether the
-fitted power-law distribution was continuous or discrete.}
-\item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
-\item{xmin}{Numeric scalar, the minimum value from which the
+\describe{
+\item{continuous}{
+Logical scalar, whether the
+fitted power-law distribution was continuous or discrete.
+}
+\item{alpha}{
+Numeric scalar, the exponent of the fitted power-law distribution.
+}
+\item{xmin}{
+Numeric scalar, the minimum value from which the
 power-law distribution was fitted. In other words, only the values larger
-than \code{xmin} were used from the input vector.}
-\item{logLik}{Numeric scalar, the log-likelihood of the fitted parameters.}
-\item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+than \code{xmin} were used from the input vector.
+}
+\item{logLik}{
+Numeric scalar, the log-likelihood of the fitted parameters.
+}
+\item{KS.stat}{
+Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
 that compares the fitted distribution with the input vector.
-Smaller scores denote better fit.}
-\item{KS.p}{Only for \code{p.value = TRUE}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
+Smaller scores denote better fit.
+}
+\item{KS.p}{
+Only for \code{p.value = TRUE}. Numeric scalar, the p-value of the Kolmogorov-Smirnov
 test. Small p-values (less than 0.05) indicate that the test rejected the
 hypothesis that the original data could have been drawn from the fitted
-power-law distribution.}
+power-law distribution.
+}
+}
 }
 \description{
 \code{fit_power_law()} fits a power-law distribution to a data set.

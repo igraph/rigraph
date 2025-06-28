@@ -49,12 +49,13 @@
 #' cor(table(w), pg)
 #' @cdocs igraph_random_walk
 random_walk <- function(
-    graph,
-    start,
-    steps,
-    weights = NULL,
-    mode = c("out", "in", "all", "total"),
-    stuck = c("return", "error")) {
+  graph,
+  start,
+  steps,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  stuck = c("return", "error")
+) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
@@ -66,12 +67,13 @@ random_walk <- function(
 #' @export
 #' @cdocs igraph_random_walk
 random_edge_walk <- function(
-    graph,
-    start,
-    steps,
-    weights = NULL,
-    mode = c("out", "in", "all", "total"),
-    stuck = c("return", "error")) {
+  graph,
+  start,
+  steps,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  stuck = c("return", "error")
+) {
   mode <- match.arg(mode)
   stuck <- match.arg(stuck)
   out <- random_walk_impl(graph, start, steps, weights, mode, stuck)

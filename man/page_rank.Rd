@@ -55,14 +55,18 @@ selected by the surfer.}
 implementation is used.}
 }
 \value{
-A named list with entries: \item{vector}{A
-numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
-method, the eigenvalue corresponding to the eigenvector with the PageRank scores
-is returned here. It is expected to be exactly one, and can be used to check
-that ARPACK has successfully converged to the expected eingevector. When using
-the PRPACK method, it is always set to 1.0.} \item{options}{Some information
-about the underlying ARPACK calculation. See \code{\link[=arpack]{arpack()}} for details.
-This entry is \code{NULL} if not the ARPACK implementation was used.}
+A named list with entries:
+\describe{
+\item{vector}{
+A numeric vector with the PageRank scores.
+}
+\item{value}{
+When using the ARPACK method, the eigenvalue corresponding to the eigenvector with the PageRank scores is returned here. It is expected to be exactly one, and can be used to check that ARPACK has successfully converged to the expected eingevector. When using the PRPACK method, it is always set to 1.0.
+}
+\item{options}{
+Some information about the underlying ARPACK calculation. See \code{\link[=arpack]{arpack()}} for details. This entry is \code{NULL} if not the ARPACK implementation was used.
+}
+}
 }
 \description{
 Calculates the Google PageRank for the specified vertices.

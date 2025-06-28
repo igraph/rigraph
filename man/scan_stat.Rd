@@ -27,11 +27,16 @@ statistics.}
 }
 \value{
 A list with entries:
-\item{stat}{The scan statistics in each time step. It is \code{NA}
-for the initial \code{tau + ell} time steps.}
-\item{arg_max_v}{The (numeric) vertex ids for the vertex with
-the largest locality statistics, at each time step. It is \code{NA}
-for the initial \code{tau + ell} time steps.}
+\describe{
+\item{stat}{
+The scan statistics in each time step.
+It is \code{NA} for the initial \code{tau + ell} time steps.
+}
+\item{arg_max_v}{
+The (numeric) vertex ids for the vertex with the largest locality statistics, at each time step.
+It is \code{NA} for the initial \code{tau + ell} time steps.
+}
+}
 }
 \description{
 Calculate scan statistics on a time series of graphs.

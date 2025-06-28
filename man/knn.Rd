@@ -37,11 +37,16 @@ Weights are are used to calculate a weighted degree (also called
 \code{\link[=strength]{strength()}}) instead of the degree.}
 }
 \value{
-A list with two members: \item{knn}{A numeric vector giving the
-average nearest neighbor degree for all vertices in \code{vids}.}
-\item{knnk}{A numeric vector, its length is the maximum (total) vertex
-degree in the graph. The first element is the average nearest neighbor
-degree of vertices with degree one, etc.  }
+A list with two members:
+\describe{
+\item{knn}{
+A numeric vector giving the average nearest neighbor degree for all vertices in \code{vids}.
+}
+\item{knnk}{
+A numeric vector, its length is the maximum (total) vertex degree in the graph.
+The first element is the average nearest neighbor degree of vertices with degree one, etc.
+}
+}
 }
 \description{
 Calculate the average nearest neighbor degree of the given vertices and the

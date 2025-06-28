@@ -9,7 +9,7 @@ igraph.shape.noplot(coords, v = NULL, params)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{igraph.shape.noplot()} was renamed to \code{shape_noplot()} to create a more
+\code{igraph.shape.noplot()} was renamed to \code{\link[=shape_noplot]{shape_noplot()}} to create a more
 consistent API.
 }
 \keyword{internal}

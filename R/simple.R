@@ -3,12 +3,13 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.simple()` was renamed to `is_simple()` to create a more
+#' `is.simple()` was renamed to [is_simple()] to create a more
 #' consistent API.
 #' @inheritParams is_simple
 #' @keywords internal
 #' @export
-is.simple <- function(graph) { # nocov start
+is.simple <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.simple()", "is_simple()")
   is_simple(graph = graph)
 } # nocov end

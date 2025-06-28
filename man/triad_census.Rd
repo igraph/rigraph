@@ -21,15 +21,57 @@ a graph.
 \details{
 Triad census was defined by David and Leinhardt (see References below).
 Every triple of vertices (A, B, C) are classified into the 16 possible
-states: \describe{ \item{003}{A,B,C, the empty graph.} \item{012}{A->B, C,
-the graph with a single directed edge.} \item{102}{A<->B, C, the graph with
-a mutual connection between two vertices.} \item{021D}{A<-B->C, the
-out-star.} \item{021U}{A->B<-C, the in-star.} \item{021C}{A->B->C, directed
-line.} \item{111D}{A<->B<-C.} \item{111U}{A<->B->C.} \item{030T}{A->B<-C,
-A->C.} \item{030C}{A<-B<-C, A->C.} \item{201}{A<->B<->C.}
-\item{120D}{A<-B->C, A<->C.} \item{120U}{A->B<-C, A<->C.}
-\item{120C}{A->B->C, A<->C.} \item{210}{A->B<->C, A<->C.}
-\item{300}{A<->B<->C, A<->C, the complete graph.} }
+states:
+\describe{
+\item{003}{
+A,B,C, the empty graph.
+}
+\item{012}{
+A->B, C, the graph with a single directed edge.
+}
+\item{102}{
+A<->B, C, the graph with a mutual connection between two vertices.
+}
+\item{021D}{
+A<-B->C, the out-star.
+}
+\item{021U}{
+A->B<-C, the in-star.
+}
+\item{021C}{
+A->B->C, directed line.
+}
+\item{111D}{
+A<->B<-C.
+}
+\item{111U}{
+A<->B->C.
+}
+\item{030T}{
+A->B<-C, A->C.
+}
+\item{030C}{
+A<-B<-C, A->C.
+}
+\item{201}{
+A<->B<->C.
+}
+\item{120D}{
+A<-B->C, A<->C.
+}
+\item{120U}{
+A->B<-C, A<->C.
+}
+\item{120C}{
+A->B->C, A<->C.
+}
+\item{210}{
+A->B<->C, A<->C.
+}
+\item{300}{
+A<->B<->C, A<->C, the complete graph.
+}
+}
 
 This functions uses the RANDESU motif finder algorithm to find and count the
 subgraphs, see \code{\link[=motifs]{motifs()}}.

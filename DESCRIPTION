@@ -1,6 +1,6 @@
 Package: igraph
 Title: Network Analysis and Visualization
-Version: 2.1.4.9042
+Version: 2.1.4.9054
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0001-7098-9676")),
@@ -42,7 +42,7 @@ Imports:
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
-    rlang,
+    rlang (>= 1.1.0),
     stats,
     utils,
     vctrs
@@ -67,7 +67,11 @@ LinkingTo:
     cpp11 (>= 0.5.0)
 VignetteBuilder: 
     knitr
-Config/Needs/build: roxygen2, devtools, irlba, pkgconfig,
+Config/build/compilation-database: false
+Config/build/never-clean: true
+Config/comment/compilation-database: Generate manually with
+    pkgload:::generate_db() for faster pkgload::load_all()
+Config/Needs/build: r-lib/roxygen2, devtools, irlba, pkgconfig,
     igraph/igraph.r2cdocs, moodymudskipper/devtag
 Config/Needs/coverage: covr
 Config/Needs/website: here, readr, tibble, xmlparsedata, xml2

@@ -3,14 +3,27 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.chordal()` was renamed to `is_chordal()` to create a more
+#' `is.chordal()` was renamed to [is_chordal()] to create a more
 #' consistent API.
 #' @inheritParams is_chordal
 #' @keywords internal
 #' @export
-is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newgraph = FALSE) { # nocov start
+is.chordal <- function(
+  graph,
+  alpha = NULL,
+  alpham1 = NULL,
+  fillin = FALSE,
+  newgraph = FALSE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.chordal()", "is_chordal()")
-  is_chordal(graph = graph, alpha = alpha, alpham1 = alpham1, fillin = fillin, newgraph = newgraph)
+  is_chordal(
+    graph = graph,
+    alpha = alpha,
+    alpham1 = alpham1,
+    fillin = fillin,
+    newgraph = newgraph
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2008-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -36,8 +49,6 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 ###################################################################
 # Graph decomposition
 ###################################################################
-
-
 
 #' Chordality of a graph
 #'
@@ -65,11 +76,18 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 #'   [max_cardinality()], or from `alpha`.
 #' @param fillin Logical scalar, whether to calculate the fill-in edges.
 #' @param newgraph Logical scalar, whether to calculate the triangulated graph.
-#' @return A list with three members: \item{chordal}{Logical scalar, it is
-#'   `TRUE` iff the input graph is chordal.} \item{fillin}{If requested,
-#'   then a numeric vector giving the fill-in edges. `NULL` otherwise.}
-#'   \item{newgraph}{If requested, then the triangulated graph, an `igraph`
-#'   object. `NULL` otherwise.}
+#' @return A list with three members:
+#'   \describe{
+#'     \item{chordal}{
+#'       Logical scalar, it is `TRUE` iff the input graph is chordal.
+#'     }
+#'     \item{fillin}{
+#'       If requested, then a numeric vector giving the fill-in edges. `NULL` otherwise.
+#'     }
+#'     \item{newgraph}{
+#'       If requested, then the triangulated graph, an `igraph` object. `NULL` otherwise.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [max_cardinality()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
@@ -98,8 +116,13 @@ is.chordal <- function(graph, alpha = NULL, alpham1 = NULL, fillin = FALSE, newg
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #'
-is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
-                       fillin = FALSE, newgraph = FALSE) {
+is_chordal <- function(
+  graph,
+  alpha = NULL,
+  alpham1 = NULL,
+  fillin = FALSE,
+  newgraph = FALSE
+) {
   ensure_igraph(graph)
   if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1
@@ -111,8 +134,12 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   newgraph <- as.logical(newgraph)
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_is_chordal, graph, alpha, alpham1,
-    fillin, newgraph
+    R_igraph_is_chordal,
+    graph,
+    alpha,
+    alpham1,
+    fillin,
+    newgraph
   )
   if (fillin) {
     res$fillin <- res$fillin + 1

@@ -40,7 +40,7 @@ of a path is the sum of the weights of its constituent edges.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{get.all.shortest.paths()} was renamed to \code{all_shortest_paths()} to create a more
+\code{get.all.shortest.paths()} was renamed to \code{\link[=all_shortest_paths]{all_shortest_paths()}} to create a more
 consistent API.
 }
 \keyword{internal}

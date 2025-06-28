@@ -60,40 +60,89 @@ National Laboratories.
 \details{
 This function implements the force-directed DrL layout generator.
 
-The generator has the following parameters: \describe{ \item{edge.cut}{Edge
-cutting is done in the late stages of the algorithm in order to achieve less
-dense layouts.  Edges are cut if there is a lot of stress on them (a large
-value in the objective function sum). The edge cutting parameter is a value
-between 0 and 1 with 0 representing no edge cutting and 1 representing
-maximal edge cutting. } \item{init.iterations}{Number of iterations in the
-first phase.} \item{init.temperature}{Start temperature, first phase.}
-\item{init.attraction}{Attraction, first phase.}
-\item{init.damping.mult}{Damping, first phase.}
-\item{liquid.iterations}{Number of iterations, liquid phase.}
-\item{liquid.temperature}{Start temperature, liquid phase.}
-\item{liquid.attraction}{Attraction, liquid phase.}
-\item{liquid.damping.mult}{Damping, liquid phase.}
-\item{expansion.iterations}{Number of iterations, expansion phase.}
-\item{expansion.temperature}{Start temperature, expansion phase.}
-\item{expansion.attraction}{Attraction, expansion phase.}
-\item{expansion.damping.mult}{Damping, expansion phase.}
-\item{cooldown.iterations}{Number of iterations, cooldown phase.}
-\item{cooldown.temperature}{Start temperature, cooldown phase.}
-\item{cooldown.attraction}{Attraction, cooldown phase.}
-\item{cooldown.damping.mult}{Damping, cooldown phase.}
-\item{crunch.iterations}{Number of iterations, crunch phase.}
-\item{crunch.temperature}{Start temperature, crunch phase.}
-\item{crunch.attraction}{Attraction, crunch phase.}
-\item{crunch.damping.mult}{Damping, crunch phase.}
-\item{simmer.iterations}{Number of iterations, simmer phase.}
-\item{simmer.temperature}{Start temperature, simmer phase.}
-\item{simmer.attraction}{Attraction, simmer phase.}
-\item{simmer.damping.mult}{Damping, simmer phase.}
+The generator has the following parameters:
+\describe{
+\item{edge.cut}{
+Edge cutting is done in the late stages of the algorithm in order to achieve less dense layouts.  Edges are cut if there is a lot of stress on them (a large value in the objective function sum). The edge cutting parameter is a value between 0 and 1 with 0 representing no edge cutting and 1 representing maximal edge cutting.
+}
+\item{init.iterations}{
+Number of iterations in the first phase.
+}
+\item{init.temperature}{
+Start temperature, first phase.
+}
+\item{init.attraction}{
+Attraction, first phase.
+}
+\item{init.damping.mult}{
+Damping, first phase.
+}
+\item{liquid.iterations}{
+Number of iterations, liquid phase.
+}
+\item{liquid.temperature}{
+Start temperature, liquid phase.
+}
+\item{liquid.attraction}{
+Attraction, liquid phase.
+}
+\item{liquid.damping.mult}{
+Damping, liquid phase.
+}
+\item{expansion.iterations}{
+Number of iterations, expansion phase.
+}
+\item{expansion.temperature}{
+Start temperature, expansion phase.
+}
+\item{expansion.attraction}{
+Attraction, expansion phase.
+}
+\item{expansion.damping.mult}{
+Damping, expansion phase.
+}
+\item{cooldown.iterations}{
+Number of iterations, cooldown phase.
+}
+\item{cooldown.temperature}{
+Start temperature, cooldown phase.
+}
+\item{cooldown.attraction}{
+Attraction, cooldown phase.
+}
+\item{cooldown.damping.mult}{
+Damping, cooldown phase.
+}
+\item{crunch.iterations}{
+Number of iterations, crunch phase.
+}
+\item{crunch.temperature}{
+Start temperature, crunch phase.
+}
+\item{crunch.attraction}{
+Attraction, crunch phase.
+}
+\item{crunch.damping.mult}{
+Damping, crunch phase.
+}
+\item{simmer.iterations}{
+Number of iterations, simmer phase.
+}
+\item{simmer.temperature}{
+Start temperature, simmer phase.
+}
+\item{simmer.attraction}{
+Attraction, simmer phase.
+}
+\item{simmer.damping.mult}{
+Damping, simmer phase.
+}
+}
 
 There are five pre-defined parameter settings as well, these are called
 \code{drl_defaults$default}, \code{drl_defaults$coarsen},
 \code{drl_defaults$coarsest}, \code{drl_defaults$refine} and
-\code{drl_defaults$final}.  }
+\code{drl_defaults$final}.
 }
 \examples{
 

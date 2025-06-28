@@ -3,12 +3,13 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraphdemo()` was renamed to `igraph_demo()` to create a more
+#' `igraphdemo()` was renamed to [igraph_demo()] to create a more
 #' consistent API.
 #' @inheritParams igraph_demo
 #' @keywords internal
 #' @export
-igraphdemo <- function(which) { # nocov start
+igraphdemo <- function(which) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraphdemo()", "igraph_demo()")
   igraph_demo(which = which)
 } # nocov end
@@ -32,8 +33,6 @@ igraphdemo <- function(which) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Run igraph demos, step by step
 #'
@@ -155,7 +154,9 @@ igraph_demo <- function(which) {
     tcltk::tktag.configure(txt, "chunk", "-relief", "sunken")
     if (length(ch) >= 2) {
       tcltk::tktag.add(
-        txt, "active", paste(sep = "", ch[1], ".0"),
+        txt,
+        "active",
+        paste(sep = "", ch[1], ".0"),
         paste(sep = "", ch[2] - 1, ".0")
       )
       tcltk::tktag.configure(txt, "active", "-foreground", "red")
@@ -165,7 +166,9 @@ igraph_demo <- function(which) {
     comm <- grep("^#", demolines)
     for (i in comm) {
       tcltk::tktag.add(
-        txt, "comment", paste(sep = "", i, ".0"),
+        txt,
+        "comment",
+        paste(sep = "", i, ".0"),
         paste(sep = "", i, ".end")
       )
     }
@@ -185,13 +188,14 @@ igraph_demo <- function(which) {
   })
   tcltk::tkconfigure(top, "-menu", main.menu)
 
-  scr <- tcltk::tkscrollbar(top,
-    repeatinterval = 5,
-    command = function(...) tcltk::tkyview(txt, ...)
-  )
-  txt <- tcltk::tktext(top,
+  scr <- tcltk::tkscrollbar(top, repeatinterval = 5, command = function(...) {
+    tcltk::tkyview(txt, ...)
+  })
+  txt <- tcltk::tktext(
+    top,
     yscrollcommand = function(...) tcltk::tkset(scr, ...),
-    width = 80, height = 40
+    width = 80,
+    height = 40
   )
   but <- tcltk::tkbutton(top, text = "Next", command = function() {
     .igraphdemo.next(top, txt)

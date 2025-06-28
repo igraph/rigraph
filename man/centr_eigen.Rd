@@ -29,13 +29,24 @@ centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
-\item{vector}{The node-level centrality scores.}
-\item{value}{The corresponding eigenvalue.}
-\item{options}{ARPACK options, see the return value of
-\code{\link[=eigen_centrality]{eigen_centrality()}} for details.}
-\item{centralization}{The graph level centrality index.}
-\item{theoretical_max}{The same as above, the theoretical maximum
-centralization score for a graph with the same number of vertices.}
+\describe{
+\item{vector}{
+The node-level centrality scores.
+}
+\item{value}{
+The corresponding eigenvalue.
+}
+\item{options}{
+ARPACK options, see the return value of \code{\link[=eigen_centrality]{eigen_centrality()}} for details.
+}
+\item{centralization}{
+The graph level centrality index.
+}
+\item{theoretical_max}{
+The same as above, the theoretical maximum centralization score
+for a graph with the same number of vertices.
+}
+}
 }
 \description{
 See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.

@@ -55,11 +55,14 @@ test_that("[ indexing works with logical vectors", {
       0, 0, 0, 0, 0, 0, 0, 0
     ),
     .Dim = c(2L, 20L),
-    .Dimnames = list(c("b", "c"), c(
+    .Dimnames = list(
+      c("b", "c"),
+      c(
       "a", "b", "c",
       "d", "e", "f", "g", "h", "i", "j", "k", "l",
       "m", "n", "o", "p", "q", "r", "s", "t"
-    ))
+    )
+    )
   )
   expect_equal(g[degree(g, mode = "in") == 0, 2], 1)
   expect_equal(as.matrix(g[2:3, TRUE]), lres)
@@ -204,7 +207,18 @@ test_that("[[ indexing works with filtering on both ends", {
 
   expect_equal(
     g[[1:10, 1:10]],
-    list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7], d = V(g)[8:9], e = V(g)[10], f = V(g)[numeric()], g = V(g)[numeric()], h = V(g)[numeric()], i = V(g)[numeric()], j = V(g)[numeric()]),
+    list(
+      a = V(g)[2:3],
+      b = V(g)[4:5],
+      c = V(g)[6:7],
+      d = V(g)[8:9],
+      e = V(g)[10],
+      f = V(g)[numeric()],
+      g = V(g)[numeric()],
+      h = V(g)[numeric()],
+      i = V(g)[numeric()],
+      j = V(g)[numeric()]
+    ),
     ignore_attr = TRUE
   )
 })
@@ -280,7 +294,18 @@ test_that("[[ queries edges with vertex names", {
   ## Filtering on both ends
   expect_equal(
     g[[1:10, 1:10, edges = TRUE]],
-    list(E(g)[1:2], E(g)[3:4], E(g)[5:6], E(g)[7:8], E(g)[9], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()], E(g)[numeric()]),
+    list(
+      E(g)[1:2],
+      E(g)[3:4],
+      E(g)[5:6],
+      E(g)[7:8],
+      E(g)[9],
+      E(g)[numeric()],
+      E(g)[numeric()],
+      E(g)[numeric()],
+      E(g)[numeric()],
+      E(g)[numeric()]
+    ),
     ignore_attr = TRUE
   )
 })
@@ -378,7 +403,10 @@ test_that("[ handles duplicated i/j well", {
   g <- graph_from_adjacency_matrix(A, "directed")
   expect_equal(as_unnamed_dense_matrix(g[c(1, 2, 2), ]), A[c(1, 2, 2), ])
   expect_equal(as_unnamed_dense_matrix(g[, c(3, 3, 4, 4)]), A[, c(3, 3, 4, 4)])
-  expect_equal(as_unnamed_dense_matrix(g[c(1, 2, 2), c(3, 3, 4, 4)]), A[c(1, 2, 2), c(3, 3, 4, 4)])
+  expect_equal(
+    as_unnamed_dense_matrix(g[c(1, 2, 2), c(3, 3, 4, 4)]),
+    A[c(1, 2, 2), c(3, 3, 4, 4)]
+  )
 })
 
 test_that("[ can add and delete edges", {
@@ -435,7 +463,11 @@ test_that("[ can add edges and ste weights via vertex names", {
   A["b", "c"] <- g["b", "c"] <- TRUE
   expect_equal(as_unnamed_dense_matrix(g[]), as_unnamed_dense_matrix(A))
 
-  A[c("a", "f"), c("f", "a")] <- g[c("a", "f"), c("f", "a"), loops = TRUE] <- TRUE
+  A[c("a", "f"), c("f", "a")] <- g[
+    c("a", "f"),
+    c("f", "a"),
+    loops = TRUE
+  ] <- TRUE
   expect_equal(as_unnamed_dense_matrix(g[]), as_unnamed_dense_matrix(A))
 
   A[A == 1] <- NA
@@ -458,11 +490,18 @@ test_that("[ and the from-to notation", {
   )
   expect_equal(as_unnamed_dense_matrix(g[]), as_unnamed_dense_matrix(A))
 
-  g[from = c("a", "c", "h", "a"), to = c("a", "a", "a", "e"), attr = "weight"] <- 3
+  g[
+    from = c("a", "c", "h", "a"),
+    to = c("a", "a", "a", "e"),
+    attr = "weight"
+  ] <- 3
   A[A != 0] <- NA
   A["a", "a"] <- A["c", "a"] <- A["h", "a"] <- A["a", "e"] <- 3
   expect_equal(
-    g[from = c("a", "c", "h", "a", "c", "c"), to = c("a", "a", "a", "e", "f", "b")],
+    g[
+      from = c("a", "c", "h", "a", "c", "c"),
+      to = c("a", "a", "a", "e", "f", "b")
+    ],
     c(3, 3, 3, 3, 0, NA)
   )
   expect_equal(as_unnamed_dense_matrix(g[]), as_unnamed_dense_matrix(A))
@@ -476,14 +515,21 @@ test_that("[ and from-to with multiple values", {
 
   g[from = c("a", "c", "h"), to = c("a", "b", "c")] <- 1
   A["a", "a"] <- A["c", "b"] <- A["h", "c"] <- 1
-  g[from = c("a", "c", "h", "a"), to = c("a", "a", "a", "e"), attr = "weight"] <- 5:8
+  g[
+    from = c("a", "c", "h", "a"),
+    to = c("a", "a", "a", "e"),
+    attr = "weight"
+  ] <- 5:8
   A[A != 0] <- NA
   A["a", "a"] <- 5
   A["c", "a"] <- 6
   A["h", "a"] <- 7
   A["a", "e"] <- 8
   expect_equal(
-    g[from = c("a", "c", "h", "a", "c", "c"), to = c("a", "a", "a", "e", "f", "b")],
+    g[
+      from = c("a", "c", "h", "a", "c", "c"),
+      to = c("a", "a", "a", "e", "f", "b")
+    ],
     c(5:8, 0, NA)
   )
   expect_equal(as_unnamed_dense_matrix(g[]), as_unnamed_dense_matrix(A))
@@ -626,13 +672,19 @@ test_that("Weighted indexing does not remove edges", {
   expect_equal(E(g)$weight, c(0, rep(NA, 9)))
 
   el <- as_edgelist(g)
-  g[from = el[, 1], to = el[, 2], attr = "sim"] <- rep(0:1, length.out = ecount(g))
+  g[from = el[, 1], to = el[, 2], attr = "sim"] <- rep(
+    0:1,
+    length.out = ecount(g)
+  )
   expect_in("sim", edge_attr_names(g))
   expect_equal(E(g)$sim, rep(0:1, 5))
 
   V(g)$name <- letters[seq_len(vcount(g))]
   el <- as_edgelist(g)
-  g[from = el[, 1], to = el[, 2], attr = "sim"] <- rep(1:0, length.out = ecount(g))
+  g[from = el[, 1], to = el[, 2], attr = "sim"] <- rep(
+    1:0,
+    length.out = ecount(g)
+  )
   expect_equal(E(g)$sim, rep(1:0, 5))
 })
 
@@ -669,7 +721,11 @@ test_that("indexing an es twice works", {
 
   x <- E(g)["BOS" %->% "JFK"][carrier == "foo"]
 
-  expect_equal(ignore_attr = TRUE, x, E(g)[carrier == "foo" & .from("BOS") & .to("JFK")])
+  expect_equal(
+    ignore_attr = TRUE,
+    x,
+    E(g)[carrier == "foo" & .from("BOS") & .to("JFK")]
+  )
 })
 
 

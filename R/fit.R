@@ -3,14 +3,29 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `power.law.fit()` was renamed to `fit_power_law()` to create a more
+#' `power.law.fit()` was renamed to [fit_power_law()] to create a more
 #' consistent API.
 #' @inheritParams fit_power_law
 #' @keywords internal
 #' @export
-power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, implementation = c("plfit", "R.mle"), ...) { # nocov start
+power.law.fit <- function(
+  x,
+  xmin = NULL,
+  start = 2,
+  force.continuous = FALSE,
+  implementation = c("plfit", "R.mle"),
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "power.law.fit()", "fit_power_law()")
-  fit_power_law(x = x, xmin = xmin, start = start, force.continuous = force.continuous, implementation = implementation, ...)
+  fit_power_law(
+    x = x,
+    xmin = xmin,
+    start = start,
+    force.continuous = force.continuous,
+    implementation = implementation,
+    ...
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -37,8 +52,6 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 # Pit a power-law (khmm a Yule really) distribution,
 # this is a common degree distribution in networks
 ###################################################################
-
-
 
 #' Fitting a power-law distribution function to discrete data
 #'
@@ -115,20 +128,34 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #'
 #'   If `implementation` is \sQuote{`plfit`}, then the result is a
 #'   named list with entries:
-#'   \item{continuous}{Logical scalar, whether the
-#'   fitted power-law distribution was continuous or discrete.}
-#'   \item{alpha}{Numeric scalar, the exponent of the fitted power-law distribution.}
-#'   \item{xmin}{Numeric scalar, the minimum value from which the
-#'   power-law distribution was fitted. In other words, only the values larger
-#'   than `xmin` were used from the input vector.}
-#'   \item{logLik}{Numeric scalar, the log-likelihood of the fitted parameters.}
-#'   \item{KS.stat}{Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
-#'   that compares the fitted distribution with the input vector.
-#'   Smaller scores denote better fit.}
-#'   \item{KS.p}{Only for `p.value = TRUE`. Numeric scalar, the p-value of the Kolmogorov-Smirnov
-#'   test. Small p-values (less than 0.05) indicate that the test rejected the
-#'   hypothesis that the original data could have been drawn from the fitted
-#'   power-law distribution.}
+#'   \describe{
+#'     \item{continuous}{
+#'       Logical scalar, whether the
+#'       fitted power-law distribution was continuous or discrete.
+#'     }
+#'     \item{alpha}{
+#'       Numeric scalar, the exponent of the fitted power-law distribution.
+#'     }
+#'     \item{xmin}{
+#'       Numeric scalar, the minimum value from which the
+#'       power-law distribution was fitted. In other words, only the values larger
+#'       than `xmin` were used from the input vector.
+#'     }
+#'     \item{logLik}{
+#'       Numeric scalar, the log-likelihood of the fitted parameters.
+#'     }
+#'     \item{KS.stat}{
+#'       Numeric scalar, the test statistic of a Kolmogorov-Smirnov test
+#'       that compares the fitted distribution with the input vector.
+#'       Smaller scores denote better fit.
+#'     }
+#'     \item{KS.p}{
+#'       Only for `p.value = TRUE`. Numeric scalar, the p-value of the Kolmogorov-Smirnov
+#'       test. Small p-values (less than 0.05) indicate that the test rejected the
+#'       hypothesis that the original data could have been drawn from the fitted
+#'       power-law distribution.
+#'     }
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso [stats4::mle()]
@@ -154,19 +181,22 @@ power.law.fit <- function(x, xmin = NULL, start = 2, force.continuous = FALSE, i
 #' stats4::logLik(fit2)
 #'
 fit_power_law <- function(
-    x,
-    xmin = NULL,
-    start = 2,
-    force.continuous = FALSE,
-    implementation = c("plfit", "R.mle"),
-    p.value = FALSE,
-    p.precision = NULL,
-    ...) {
+  x,
+  xmin = NULL,
+  start = 2,
+  force.continuous = FALSE,
+  implementation = c("plfit", "R.mle"),
+  p.value = FALSE,
+  p.precision = NULL,
+  ...
+) {
   implementation <- igraph.match.arg(implementation)
 
   if (implementation == "r.mle") {
     if (isTRUE(p.value)) {
-      cli::cli_abort("{.arg p.value} is not supported for {.arg implementation} = {.str R.mle}")
+      cli::cli_abort(
+        "{.arg p.value} is not supported for {.arg implementation} = {.str R.mle}"
+      )
     }
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation == "plfit.p") {
@@ -223,7 +253,13 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   alpha
 }
 
-power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value = FALSE, p.precision = 0.01) {
+power.law.fit.new <- function(
+  data,
+  xmin = -1,
+  force.continuous = FALSE,
+  p.value = FALSE,
+  p.precision = 0.01
+) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
@@ -231,7 +267,14 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE, p.value
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_power_law_fit_new, data, xmin, force.continuous, p.value, p.precision)
+  res <- .Call(
+    R_igraph_power_law_fit_new,
+    data,
+    xmin,
+    force.continuous,
+    p.value,
+    p.precision
+  )
 
   res
 }

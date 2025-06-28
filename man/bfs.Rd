@@ -75,25 +75,37 @@ from igraph 1.3.0; use \code{mode} instead.}
 }
 \value{
 A named list with the following entries:
-\item{root}{Numeric scalar.
-The root vertex that was used as the starting point of the search.}
-\item{neimode}{Character scalar. The \code{mode} argument of the function
-call. Note that for undirected graphs this is always \sQuote{all},
-irrespectively of the supplied value.}
-\item{order}{Numeric vector. The
-vertex ids, in the order in which they were visited by the search.}
-\item{rank}{Numeric vector. The rank for each vertex, zero for unreachable vertices.}
-\item{parent}{Numeric
-vector. The parent of each vertex, i.e. the vertex it was discovered from.}
-\item{father}{Like parent, kept for compatibility for now.}
-\item{pred}{Numeric vector. The previously visited vertex for each vertex,
-or 0 if there was no such vertex.}
-\item{succ}{Numeric vector. The next
-vertex that was visited after the current one, or 0 if there was no such
-vertex.}
-\item{dist}{Numeric vector, for each vertex its distance from the
-root of the search tree. Unreachable vertices have a negative distance
-as of igraph 1.6.0, this used to be \code{NaN}.}
+\describe{
+\item{root}{
+Numeric scalar. The root vertex that was used as the starting point of the search.
+}
+\item{neimode}{
+Character scalar. The \code{mode} argument of the function call.
+Note that for undirected graphs this is always \sQuote{all}, irrespectively of the supplied value.
+}
+\item{order}{
+Numeric vector. The vertex ids, in the order in which they were visited by the search.
+}
+\item{rank}{
+Numeric vector. The rank for each vertex, zero for unreachable vertices.
+}
+\item{parent}{
+Numeric vector. The parent of each vertex, i.e. the vertex it was discovered from.
+}
+\item{father}{
+Like parent, kept for compatibility for now.
+}
+\item{pred}{
+Numeric vector. The previously visited vertex for each vertex, or 0 if there was no such vertex.
+}
+\item{succ}{
+Numeric vector. The next vertex that was visited after the current one, or 0 if there was no such vertex.
+}
+\item{dist}{
+Numeric vector, for each vertex its distance from the root of the search tree.
+Unreachable vertices have a negative distance as of igraph 1.6.0, this used to be \code{NaN}.
+}
+}
 
 Note that \code{order}, \code{rank}, \code{parent}, \code{pred}, \code{succ}
 and \code{dist} might be \code{NULL} if their corresponding argument is
@@ -106,14 +118,20 @@ root vertex and spread along every edge \dQuote{simultaneously}.
 \details{
 The callback function must have the following arguments:
 \describe{
-\item{graph}{The input graph is passed to the callback function here.}
-\item{data}{A named numeric vector, with the following entries:
-\sQuote{vid}, the vertex that was just visited, \sQuote{pred}, its
-predecessor (zero if this is the first vertex), \sQuote{succ}, its successor
-(zero if this is the last vertex), \sQuote{rank}, the rank of the
-current vertex, \sQuote{dist}, its distance from the root of the search
-tree.}
-\item{extra}{The extra argument.}
+\item{graph}{
+The input graph is passed to the callback function here.
+}
+\item{data}{
+A named numeric vector, with the following entries:
+\sQuote{vid}, the vertex that was just visited,
+\sQuote{pred}, its predecessor (zero if this is the first vertex),
+\sQuote{succ}, its successor (zero if this is the last vertex),
+\sQuote{rank}, the rank of the current vertex,
+\sQuote{dist}, its distance from the root of the search tree.
+}
+\item{extra}{
+The extra argument.
+}
 }
 
 The callback must return \code{FALSE}

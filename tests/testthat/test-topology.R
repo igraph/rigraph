@@ -32,7 +32,10 @@ test_that("automorphism_group works", {
 
 test_that("automorphism_group works with colored graphs", {
   full <- make_full_graph(4)
-  aut_full <- lapply(automorphism_group(full, colors = c(1, 2, 1, 2)), as.vector)
+  aut_full <- lapply(
+    automorphism_group(full, colors = c(1, 2, 1, 2)),
+    as.vector
+  )
   aut_full <- aut_full[order(sapply(aut_full, "[[", 1))]
   expect_equal(aut_full, list(c(1, 4, 3, 2), c(3, 2, 1, 4)))
 
@@ -47,9 +50,11 @@ test_that("isomorphisms() works", {
     vertices("D1", "D2", type = c("type1", "type1")) +
     edges("D1", "D2", type = c("type2"))
   motif_iso <- isomorphisms(
-    motif, motif,
+    motif,
+    motif,
     method = "vf2",
-    vertex.color1 = 2:1, vertex.color2 = 1:2
+    vertex.color1 = 2:1,
+    vertex.color2 = 1:2
   )
   expect_length(motif_iso, 1)
   expect_equal(as.numeric(motif_iso[[1]]), 2:1)
@@ -60,8 +65,11 @@ test_that("subgraph_isomorphisms works", {
     vertices("D1", "D2", type = c("type1", "type1")) +
     edges("D1", "D2", type = c("type2"))
   out <- subgraph_isomorphisms(
-    target = motif, pattern = motif, method = "vf2",
-    vertex.color1 = 2:1, vertex.color2 = 1:2
+    target = motif,
+    pattern = motif,
+    method = "vf2",
+    vertex.color1 = 2:1,
+    vertex.color2 = 1:2
   )
   expect_length(out, 1)
   expect_equal(as.numeric(out[[1]]), 2:1)
@@ -126,12 +134,22 @@ test_that("graph.subisomorphic, method = 'lad' works", {
     8 - 4:9, 9 - 6:4:8
   )
   domains <- list(
-    `1` = c(1, 3, 9), `2` = c(5, 6, 7, 8), `3` = c(2, 4, 6, 7, 8, 9),
-    `4` = c(1, 3, 9), `5` = c(2, 4, 8, 9)
+    `1` = c(1, 3, 9),
+    `2` = c(5, 6, 7, 8),
+    `3` = c(2, 4, 6, 7, 8, 9),
+    `4` = c(1, 3, 9),
+    `5` = c(2, 4, 8, 9)
   )
   sub_iso1 <- subgraph_isomorphic(pattern, target, method = "lad")
-  sub_iso2 <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
-  sub_iso3 <- subgraph_isomorphic(pattern, target,
+  sub_iso2 <- subgraph_isomorphic(
+    pattern,
+    target,
+    induced = TRUE,
+    method = "lad"
+  )
+  sub_iso3 <- subgraph_isomorphic(
+    pattern,
+    target,
     domains = domains,
     method = "lad"
   )
@@ -150,10 +168,7 @@ test_that("LAD stress test", {
     target <- sample_gnp(20, .5)
     pn <- sample(4:18, 1)
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
-    iso <- subgraph_isomorphic(pattern, target,
-      induced = TRUE,
-      method = "lad"
-    )
+    iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
     expect_true(iso)
   }
 
@@ -163,10 +178,7 @@ test_that("LAD stress test", {
     target <- sample_gnp(20, 1 / 20)
     pn <- sample(5:18, 1)
     pattern <- sample_gnp(pn, .6)
-    iso <- subgraph_isomorphic(pattern, target,
-      induced = TRUE,
-      method = "lad"
-    )
+    iso <- subgraph_isomorphic(pattern, target, induced = TRUE, method = "lad")
     expect_false(iso)
   }
 })
@@ -228,7 +240,8 @@ test_that("count_isomorphisms", {
 
 test_that("count_isomorphisms_with_colors", {
   expect_equal(
-    count_isomorphisms(make_ring(3),
+    count_isomorphisms(
+      make_ring(3),
       make_ring(3),
       edge.color1 = c(2, 2, 2),
       edge.color2 = c(2, 2, 2),
@@ -240,7 +253,8 @@ test_that("count_isomorphisms_with_colors", {
   )
 
   expect_equal(
-    count_isomorphisms(make_ring(3),
+    count_isomorphisms(
+      make_ring(3),
       make_ring(3),
       edge.color1 = c(2, 2, 2),
       edge.color2 = c(2, 2, 2),
@@ -252,7 +266,8 @@ test_that("count_isomorphisms_with_colors", {
   )
 
   expect_equal(
-    count_isomorphisms(make_ring(3),
+    count_isomorphisms(
+      make_ring(3),
       make_ring(3),
       edge.color1 = c(2, 2, 3),
       edge.color2 = c(3, 2, 2),
@@ -312,7 +327,11 @@ test_that("subgraph_isomorphisms, lad", {
     V(g1)[4, 1, 2]
   )
 
-  expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g1, method = "lad"), res)
+  expect_equal(
+    ignore_attr = TRUE,
+    subgraph_isomorphisms(g2, g1, method = "lad"),
+    res
+  )
 
   g3 <- graph_from_literal(X - Y - Z - X)
   expect_equal(subgraph_isomorphisms(g3, g1, method = "lad"), list())
@@ -333,7 +352,11 @@ test_that("subgraph_isomorphisms, vf2", {
     V(g1)[4, 3, 2]
   )
 
-  expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g1, method = "vf2"), res)
+  expect_equal(
+    ignore_attr = TRUE,
+    subgraph_isomorphisms(g2, g1, method = "vf2"),
+    res
+  )
 
   g3 <- graph_from_literal(X - Y - Z - X)
   expect_equal(subgraph_isomorphisms(g3, g1, method = "vf2"), list())

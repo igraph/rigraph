@@ -3,13 +3,18 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.projection.size()` was renamed to `bipartite_projection_size()` to create a more
+#' `bipartite.projection.size()` was renamed to [bipartite_projection_size()] to create a more
 #' consistent API.
 #' @inheritParams bipartite_projection_size
 #' @keywords internal
 #' @export
-bipartite.projection.size <- function(graph, types = NULL) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bipartite.projection.size()", "bipartite_projection_size()")
+bipartite.projection.size <- function(graph, types = NULL) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "bipartite.projection.size()",
+    "bipartite_projection_size()"
+  )
   bipartite_projection_size(graph = graph, types = types)
 } # nocov end
 
@@ -18,14 +23,33 @@ bipartite.projection.size <- function(graph, types = NULL) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.projection()` was renamed to `bipartite_projection()` to create a more
+#' `bipartite.projection()` was renamed to [bipartite_projection()] to create a more
 #' consistent API.
 #' @inheritParams bipartite_projection
 #' @keywords internal
 #' @export
-bipartite.projection <- function(graph, types = NULL, multiplicity = TRUE, probe1 = NULL, which = c("both", "true", "false"), remove.type = TRUE) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bipartite.projection()", "bipartite_projection()")
-  bipartite_projection(graph = graph, types = types, multiplicity = multiplicity, probe1 = probe1, which = which, remove.type = remove.type)
+bipartite.projection <- function(
+  graph,
+  types = NULL,
+  multiplicity = TRUE,
+  probe1 = NULL,
+  which = c("both", "true", "false"),
+  remove.type = TRUE
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "bipartite.projection()",
+    "bipartite_projection()"
+  )
+  bipartite_projection(
+    graph = graph,
+    types = types,
+    multiplicity = multiplicity,
+    probe1 = probe1,
+    which = which,
+    remove.type = remove.type
+  )
 } # nocov end
 
 #' Decide whether a graph is bipartite
@@ -33,13 +57,18 @@ bipartite.projection <- function(graph, types = NULL, multiplicity = TRUE, probe
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `bipartite.mapping()` was renamed to `bipartite_mapping()` to create a more
+#' `bipartite.mapping()` was renamed to [bipartite_mapping()] to create a more
 #' consistent API.
 #' @inheritParams bipartite_mapping
 #' @keywords internal
 #' @export
-bipartite.mapping <- function(graph) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "bipartite.mapping()", "bipartite_mapping()")
+bipartite.mapping <- function(graph) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "bipartite.mapping()",
+    "bipartite_mapping()"
+  )
   bipartite_mapping(graph = graph)
 } # nocov end
 #   IGraph R package
@@ -62,8 +91,6 @@ bipartite.mapping <- function(graph) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Project a bipartite graph
 #'
@@ -132,10 +159,14 @@ bipartite.mapping <- function(graph) { # nocov start
 #' print(proj2[[1]], g = TRUE, e = TRUE)
 #' print(proj2[[2]], g = TRUE, e = TRUE)
 #'
-bipartite_projection <- function(graph, types = NULL,
-                                 multiplicity = TRUE, probe1 = NULL,
-                                 which = c("both", "true", "false"),
-                                 remove.type = TRUE) {
+bipartite_projection <- function(
+  graph,
+  types = NULL,
+  multiplicity = TRUE,
+  probe1 = NULL,
+  which = c("both", "true", "false"),
+  remove.type = TRUE
+) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
@@ -147,7 +178,8 @@ bipartite_projection <- function(graph, types = NULL,
   } else {
     probe1 <- -1
   }
-  which <- switch(igraph.match.arg(which),
+  which <- switch(
+    igraph.match.arg(which),
     "both" = 0L,
     "false" = 1L,
     "true" = 2L
@@ -159,14 +191,17 @@ bipartite_projection <- function(graph, types = NULL,
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_bipartite_projection, graph, types,
-    as.numeric(probe1), which
+    R_igraph_bipartite_projection,
+    graph,
+    types,
+    as.numeric(probe1),
+    which
   )
   if (remove.type) {
-    if (is_igraph(res[[1]])) {
+    if (is_igraph(res[[1]]) && "type" %in% vertex_attr_names(res[[1]])) {
       res[[1]] <- delete_vertex_attr(res[[1]], "type")
     }
-    if (is_igraph(res[[2]])) {
+    if (is_igraph(res[[2]]) && "type" %in% vertex_attr_names(res[[2]])) {
       res[[2]] <- delete_vertex_attr(res[[2]], "type")
     }
   }
@@ -215,10 +250,16 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' mapped independently.
 #'
 #' @param graph The input graph.
-#' @return A named list with two elements: \item{res}{A logical scalar,
-#'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A
-#'   possible vertex type mapping, a logical vector. If no such mapping exists,
-#'   then an empty vector.}
+#' @return A named list with two elements:
+#'   \describe{
+#'     \item{res}{
+#'       A logical scalar, `TRUE` if the can be bipartite, `FALSE` otherwise.
+#'     }
+#'     \item{type}{
+#'       A possible vertex type mapping, a logical vector.
+#'       If no such mapping exists, then an empty vector.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples

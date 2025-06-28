@@ -12,7 +12,7 @@ tkplot.center(tkp.id)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{tkplot.center()} was renamed to \code{tk_center()} to create a more
+\code{tkplot.center()} was renamed to \code{\link[=tk_center]{tk_center()}} to create a more
 consistent API.
 }
 \keyword{internal}

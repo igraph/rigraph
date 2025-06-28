@@ -31,7 +31,10 @@ test_that("clique_size_counts() works", {
   expect_equal(clique_size_counts(g, maximal = TRUE), c(0, 0, 1, 0, 1))
   expect_equal(clique_size_counts(g, min = 3, maximal = TRUE), c(0, 0, 1, 0, 1))
   expect_equal(clique_size_counts(g, max = 4, maximal = TRUE), c(0, 0, 1))
-  expect_equal(clique_size_counts(g, min = 2, max = 4, maximal = TRUE), c(0, 0, 1))
+  expect_equal(
+    clique_size_counts(g, min = 2, max = 4, maximal = TRUE),
+    c(0, 0, 1)
+  )
 })
 
 test_that("weighted_cliques works", {
@@ -40,7 +43,8 @@ test_that("weighted_cliques works", {
 
   is_clique_weight <- function(graph, vids, min_weight) {
     s <- induced_subgraph(graph, vids)
-    ecount(s) == vcount(s) * (vcount(s) - 1) / 2 && sum(V(s)$weight) >= min_weight
+    ecount(s) == vcount(s) * (vcount(s) - 1) / 2 &&
+      sum(V(s)$weight) >= min_weight
   }
 
   expect_equal(
@@ -49,7 +53,12 @@ test_that("weighted_cliques works", {
   )
 
   V(g)$weight <- weights
-  cl <- sapply(weighted_cliques(g, min.weight = 9), is_clique_weight, graph = g, min_weight = 9)
+  cl <- sapply(
+    weighted_cliques(g, min.weight = 9),
+    is_clique_weight,
+    graph = g,
+    min_weight = 9
+  )
   expect_equal(cl, rep(TRUE, 14))
 
   karate <- make_graph("zachary")
@@ -171,8 +180,11 @@ test_that("max_cliques() work", {
         X <- numeric()
       }
       PX <- list(
-        PX = c(P, X), PS = 1, PE = length(P),
-        XS = length(P) + 1, XE = length(P) + length(X)
+        PX = c(P, X),
+        PS = 1,
+        PE = length(P),
+        XS = length(P) + 1,
+        XE = length(P) + length(X)
       )
       res <- c(res, bkpivot(PX, cord[v]))
     }
@@ -240,7 +252,9 @@ test_that("ivs() works, cliques of complement", {
 
   ivs_with_equivalent <- map_lgl(
     ivs,
-    function(element, cliques) any(map_lgl(cliques, function(x) identical(x, element))),
+    function(element, cliques) {
+      any(map_lgl(cliques, function(x) identical(x, element)))
+    },
     cliques = cliques
   )
   expect_equal(sum(ivs_with_equivalent), length(ivs))

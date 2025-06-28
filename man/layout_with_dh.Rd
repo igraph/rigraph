@@ -52,8 +52,16 @@ the energy function.}
 \item{...}{Passed to \code{layout_with_dh()}.}
 }
 \value{
-A two- or three-column matrix, each row giving the coordinates of a
-vertex, according to the ids of the vertex ids.
+A matrix with two columns, containing the x and y coordinates
+of the vertices:
+\describe{
+\item{x}{
+The x-coordinate of the vertex.
+}
+\item{y}{
+The y-coordinate of the vertex.
+}
+}
 }
 \description{
 Place vertices of a graph on the plane, according to the simulated annealing

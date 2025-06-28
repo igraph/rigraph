@@ -9,7 +9,9 @@ test_that("graph_from_biadjacency_matrix() works -- dense", {
   expect_snapshot((g <- graph_from_biadjacency_matrix(inc)))
   expect_false(is_weighted(g))
 
-  expect_snapshot((weighted_g <- graph_from_biadjacency_matrix(inc, weighted = TRUE)))
+  expect_snapshot(
+    (weighted_g <- graph_from_biadjacency_matrix(inc, weighted = TRUE))
+  )
   expect_true(is_weighted(weighted_g))
 })
 
@@ -48,7 +50,10 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes", {
   mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all")
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 14)
-  expect_equal(as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7))
+  expect_equal(
+    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    c(6, 6, 7, 7)
+  )
 })
 
 test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
@@ -59,25 +64,48 @@ test_that("graph_from_biadjacency_matrix() works - dense, modes, weighted", {
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
-  out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out", weighted = TRUE)
+  out_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "out",
+    weighted = TRUE
+  )
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 8)
   expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7, 8))
 
-  in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in", weighted = TRUE)
+  in_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "in",
+    weighted = TRUE
+  )
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 8)
   expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7, 8))
 
-  mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all", weighted = TRUE)
+  mutual_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "all",
+    weighted = TRUE
+  )
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 16)
-  expect_equal(as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7, 8, 8))
+  expect_equal(
+    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    c(6, 6, 7, 7, 8, 8)
+  )
 
   inc_frac <- matrix(runif(15), 3, 5)
   colnames(inc_frac) <- letters[1:5]
   rownames(inc_frac) <- LETTERS[1:3]
-  frac_g <- graph_from_biadjacency_matrix(inc_frac, directed = TRUE, mode = "out", weighted = TRUE)
+  frac_g <- graph_from_biadjacency_matrix(
+    inc_frac,
+    directed = TRUE,
+    mode = "out",
+    weighted = TRUE
+  )
   expect_equal(inc_frac, as_biadjacency_matrix(frac_g, attr = "weight"))
 })
 
@@ -93,7 +121,9 @@ test_that("graph_from_biadjacency_matrix() works -- sparse", {
   expect_snapshot((g <- graph_from_biadjacency_matrix(inc)))
   expect_false(is_weighted(g))
 
-  expect_snapshot((weighted_g <- graph_from_biadjacency_matrix(inc, weighted = TRUE)))
+  expect_snapshot(
+    (weighted_g <- graph_from_biadjacency_matrix(inc, weighted = TRUE))
+  )
   expect_true(is_weighted(weighted_g))
 })
 
@@ -132,7 +162,10 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes", {
   mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all")
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 14)
-  expect_equal(as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7))
+  expect_equal(
+    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    c(6, 6, 7, 7)
+  )
 })
 
 test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
@@ -144,20 +177,38 @@ test_that("graph_from_biadjacency_matrix() works - sparse, modes, weighted", {
   colnames(inc) <- letters[1:5]
   rownames(inc) <- LETTERS[1:3]
 
-  out_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "out", weighted = TRUE)
+  out_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "out",
+    weighted = TRUE
+  )
   expect_true(is_directed(out_g))
   expect_length(E(out_g), 8)
   expect_equal(as_adj_list(out_g, mode = "out")$A %>% as.numeric(), c(6, 7, 8))
 
-  in_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "in", weighted = TRUE)
+  in_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "in",
+    weighted = TRUE
+  )
   expect_true(is_directed(in_g))
   expect_length(E(in_g), 8)
   expect_equal(as_adj_list(in_g, mode = "in")$A %>% as.numeric(), c(6, 7, 8))
 
-  mutual_g <- graph_from_biadjacency_matrix(inc, directed = TRUE, mode = "all", weighted = TRUE)
+  mutual_g <- graph_from_biadjacency_matrix(
+    inc,
+    directed = TRUE,
+    mode = "all",
+    weighted = TRUE
+  )
   expect_true(is_directed(mutual_g))
   expect_length(E(mutual_g), 16)
-  expect_equal(as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(), c(6, 6, 7, 7, 8, 8))
+  expect_equal(
+    as_adj_list(mutual_g, mode = "all")$A %>% as.numeric(),
+    c(6, 6, 7, 7, 8, 8)
+  )
 })
 
 test_that("graph_from_biadjacency_matrix() errors well", {
@@ -174,4 +225,9 @@ test_that("graph_from_biadjacency_matrix() errors well", {
   expect_snapshot(error = TRUE, {
     (g <- graph_from_biadjacency_matrix(inc, multiple = TRUE, weighted = TRUE))
   })
+})
+
+test_that("graph_from_biadjacency_matrix errors for NAs", {
+  A <- matrix(c(1, 1, NA, 1), 2, 2)
+  expect_snapshot(graph_from_biadjacency_matrix(A), error = TRUE)
 })

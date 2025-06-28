@@ -21,17 +21,26 @@ all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
 
 \item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
-largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
-cell, \sQuote{\code{fm}}: first maximally non-trivially connected
-non-singleton cell, \sQuote{\code{flm}}: first largest maximally
-non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
-smallest maximally non-trivially connected non-singleton cell.}
+are:
+\sQuote{\code{f}}:
+first non-singleton cell,
+\sQuote{\code{fl}}:
+first largest non-singleton cell,
+\sQuote{\code{fs}}:
+first smallest non-singleton cell,
+\sQuote{\code{fm}}:
+first maximally non-trivially connected
+non-singleton cell,
+\sQuote{\code{flm}}:
+first largest maximally
+non-trivially connected non-singleton cell,
+\sQuote{\code{fsm}}:
+first smallest maximally non-trivially connected non-singleton cell.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.automorphisms()} was renamed to \code{count_automorphisms()} to create a more
+\code{graph.automorphisms()} was renamed to \code{\link[=count_automorphisms]{count_automorphisms()}} to create a more
 consistent API.
 }
 \keyword{internal}

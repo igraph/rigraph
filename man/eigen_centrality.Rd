@@ -37,11 +37,18 @@ weights spread the centrality better.}
 \code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
-A named list with components: \item{vector}{A vector containing the
-centrality scores.} \item{value}{The eigenvalue corresponding to the
-calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
-list, information about the underlying ARPACK computation. See
-\code{\link[=arpack]{arpack()}} for the details.}
+A named list with components:
+\describe{
+\item{vector}{
+A vector containing the centrality scores.
+}
+\item{value}{
+The eigenvalue corresponding to the calculated eigenvector, i.e. the centrality scores.
+}
+\item{options}{
+A named list, information about the underlying ARPACK computation. See \code{\link[=arpack]{arpack()}} for the details.
+}
+}
 }
 \description{
 \code{eigen_centrality()} takes a graph (\code{graph}) and returns the

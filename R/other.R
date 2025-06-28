@@ -3,12 +3,13 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `running.mean()` was renamed to `running_mean()` to create a more
+#' `running.mean()` was renamed to [running_mean()] to create a more
 #' consistent API.
 #' @inheritParams running_mean
 #' @keywords internal
 #' @export
-running.mean <- function(v, binwidth) { # nocov start
+running.mean <- function(v, binwidth) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "running.mean()", "running_mean()")
   running_mean(v = v, binwidth = binwidth)
 } # nocov end
@@ -18,12 +19,13 @@ running.mean <- function(v, binwidth) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `igraph.sample()` was renamed to `sample_seq()` to create a more
+#' `igraph.sample()` was renamed to [sample_seq()] to create a more
 #' consistent API.
 #' @inheritParams sample_seq
 #' @keywords internal
 #' @export
-igraph.sample <- function(low, high, length) { # nocov start
+igraph.sample <- function(low, high, length) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "igraph.sample()", "sample_seq()")
   sample_seq(low = low, high = high, length = length)
 } # nocov end
@@ -33,12 +35,13 @@ igraph.sample <- function(low, high, length) { # nocov start
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `convex.hull()` was renamed to `convex_hull()` to create a more
+#' `convex.hull()` was renamed to [convex_hull()] to create a more
 #' consistent API.
 #' @inheritParams convex_hull
 #' @keywords internal
 #' @export
-convex.hull <- function(data) { # nocov start
+convex.hull <- function(data) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "convex.hull()", "convex_hull()")
   convex_hull(data = data)
 } # nocov end
@@ -62,8 +65,6 @@ convex.hull <- function(data) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Running mean of a time series
 #'
@@ -99,7 +100,6 @@ running_mean <- function(v, binwidth) {
 }
 
 
-
 #' Sampling a random integer sequence
 #'
 #' This function provides a very efficient way to pull an integer random sample
@@ -132,7 +132,9 @@ sample_seq <- function(low, high, length) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_random_sample, as.numeric(low), as.numeric(high),
+    R_igraph_random_sample,
+    as.numeric(low),
+    as.numeric(high),
     as.numeric(length)
   )
 }
@@ -169,7 +171,9 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
     }
   }
   if (is.null(types) && required) {
-    cli::cli_abort("Not a bipartite graph, supply {.arg types} argument or add a vertex attribute named {.arg type}.")
+    cli::cli_abort(
+      "Not a bipartite graph, supply {.arg types} argument or add a vertex attribute named {.arg type}."
+    )
   }
   return(types)
 }
@@ -178,9 +182,14 @@ igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
   } else {
-    new("dgCMatrix",
-      Dim = M$dim, Dimnames = list(NULL, NULL),
-      factors = list(), i = M$i, p = M$p, x = M$x
+    new(
+      "dgCMatrix",
+      Dim = M$dim,
+      Dimnames = list(NULL, NULL),
+      factors = list(),
+      i = M$i,
+      p = M$p,
+      x = M$x
     )
   }
 }
@@ -192,9 +201,15 @@ igraph.i.spMatrix <- function(M) {
 #'
 #'
 #' @param data The data points, a numeric matrix with two columns.
-#' @return A named list with components: \item{resverts}{The indices of the
-#'   input vertices that constritute the convex hull.} \item{rescoords}{The
-#'   coordinates of the corners of the convex hull.}
+#' @return A named list with components:
+#'   \describe{
+#'     \item{resverts}{
+#'       The indices of the input vertices that constritute the convex hull.
+#'     }
+#'     \item{rescoords}{
+#'       The coordinates of the corners of the convex hull.
+#'     }
+#'   }
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
 #' Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and

@@ -3,13 +3,18 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `adjacent.triangles()` was renamed to `count_triangles()` to create a more
+#' `adjacent.triangles()` was renamed to [count_triangles()] to create a more
 #' consistent API.
 #' @inheritParams count_triangles
 #' @keywords internal
 #' @export
-adjacent.triangles <- function(graph, vids = V(graph)) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "adjacent.triangles()", "count_triangles()")
+adjacent.triangles <- function(graph, vids = V(graph)) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "adjacent.triangles()",
+    "count_triangles()"
+  )
   count_triangles(graph = graph, vids = vids)
 } # nocov end
 
@@ -35,7 +40,6 @@ adjacent.triangles <- function(graph, vids = V(graph)) { # nocov start
 ##   02110-1301 USA
 ##
 ## -----------------------------------------------------------------------
-
 
 #' Find triangles in graphs
 #'

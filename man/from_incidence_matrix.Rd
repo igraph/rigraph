@@ -9,7 +9,7 @@ from_incidence_matrix(...)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph_from_incidence_matrix()} was renamed to \code{graph_from_biadjacency_matrix()} to create a more
+\code{graph_from_incidence_matrix()} was renamed to \code{\link[=graph_from_biadjacency_matrix]{graph_from_biadjacency_matrix()}} to create a more
 consistent API.
 }
 \details{

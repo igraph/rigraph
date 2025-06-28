@@ -3,12 +3,28 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `write.graph()` was renamed to `write_graph()` to create a more
+#' `write.graph()` was renamed to [write_graph()] to create a more
 #' consistent API.
 #' @inheritParams write_graph
 #' @keywords internal
 #' @export
-write.graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot", "leda"), ...) { # nocov start
+write.graph <- function(
+  graph,
+  file,
+  format = c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "gml",
+    "dot",
+    "leda"
+  ),
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "write.graph()", "write_graph()")
   write_graph(graph = graph, file = file, format = format, ...)
 } # nocov end
@@ -18,12 +34,27 @@ write.graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lg
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `read.graph()` was renamed to `read_graph()` to create a more
+#' `read.graph()` was renamed to [read_graph()] to create a more
 #' consistent API.
 #' @inheritParams read_graph
 #' @keywords internal
 #' @export
-read.graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "graphdb", "gml", "dl"), ...) { # nocov start
+read.graph <- function(
+  file,
+  format = c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "graphdb",
+    "gml",
+    "dl"
+  ),
+  ...
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "read.graph()", "read_graph()")
   read_graph(file = file, format = format, ...)
 } # nocov end
@@ -33,14 +64,35 @@ read.graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl", "gra
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.graphdb()` was renamed to `graph_from_graphdb()` to create a more
+#' `graph.graphdb()` was renamed to [graph_from_graphdb()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_graphdb
 #' @keywords internal
 #' @export
-graph.graphdb <- function(url = NULL, prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0, base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip", compressed = TRUE, directed = TRUE) { # nocov start
+graph.graphdb <- function(
+  url = NULL,
+  prefix = "iso",
+  type = "r001",
+  nodes = NULL,
+  pair = "A",
+  which = 0,
+  base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
+  compressed = TRUE,
+  directed = TRUE
+) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.graphdb()", "graph_from_graphdb()")
-  graph_from_graphdb(url = url, prefix = prefix, type = type, nodes = nodes, pair = pair, which = which, base = base, compressed = compressed, directed = directed)
+  graph_from_graphdb(
+    url = url,
+    prefix = prefix,
+    type = type,
+    nodes = nodes,
+    pair = pair,
+    which = which,
+    base = base,
+    compressed = compressed,
+    directed = directed
+  )
 } # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -109,7 +161,6 @@ write.graph.fromraw <- function(buffer, file) {
 }
 
 
-
 #' Reading foreign file formats
 #'
 #' The `read_graph()` function is able to read graphs in various
@@ -137,38 +188,54 @@ write.graph.fromraw <- function(buffer, file) {
 #' between the edges, a simple space will also do. Vertex IDs contained in
 #' the file are assumed to start at zero.
 #'
-#' Additional arguments: \describe{ \item{n}{The number of vertices in the
-#' graph. If it is smaller than or equal to the largest integer in the file,
-#' then it is ignored; so it is safe to set it to zero (the default).}
-#' \item{directed}{Logical scalar, whether to create a directed graph. The
-#' default value is `TRUE`.} }
+#' Additional arguments:
+#'   \describe{
+#'     \item{n}{
+#'       The number of vertices in the
+#'       graph. If it is smaller than or equal to the largest integer in the file,
+#'       then it is ignored; so it is safe to set it to zero (the default).
+#'     }
+#'     \item{directed}{
+#'       Logical scalar, whether to create a directed graph. The
+#'       default value is `TRUE`.
+#'     }
+#'   }
 #' @section Pajek format:
 #' Currently igraph only supports Pajek network
 #' files, with a `.net` extension, but not Pajek project files with
 #' a `.paj` extension. Only network data is supported; permutations,
 #' hierarchies, clusters and vectors are not.
 #' @section NCOL format:
-#' Additional arguments: \describe{
-#' \item{predef}{Names of the vertices in the file.
-#' If `character(0)` (the default) is given here
-#' then vertex IDs will be assigned to vertex names in the order of
-#' their appearance in the .ncol file.
-#' If it is not `character(0)` and some unknown vertex names are found
-#' in the .ncol file then new vertex ids will be assigned to them. }
-#' \item{names}{Logical value, if `TRUE` (the default)
-#' the symbolic names of the vertices will be added to the graph
-#' as a vertex attribute called “name”. }
-#' \item{weights}{Whether to add the weights of the edges to the graph
-#' as an edge attribute called “weight”.
-#' `"yes"` adds the weights (even if they are not present in the file,
-#' in this case they are assumed to be zero).
-#' `"no"` does not add any edge attribute.
-#' `"auto"` (the default) adds the attribute if and only
-#' if there is at least one explicit edge weight in the input file. }
-#' \item{directed}{Whether to create a directed graph (default: `FALSE`).
-#' As this format was originally used only for undirected graphs
-#' there is no information in the file about the directedness of the graph.}
-#' }
+#' Additional arguments:
+#'   \describe{
+#'     \item{predef}{
+#'       Names of the vertices in the file.
+#'       If `character(0)` (the default) is given here
+#'       then vertex IDs will be assigned to vertex names in the order of
+#'       their appearance in the .ncol file.
+#'       If it is not `character(0)` and some unknown vertex names are found
+#'       in the .ncol file then new vertex ids will be assigned to them.
+#'     }
+#'     \item{names}{
+#'       Logical value, if `TRUE` (the default)
+#'       the symbolic names of the vertices will be added to the graph
+#'       as a vertex attribute called “name”.
+#'     }
+#'     \item{weights}{
+#'       Whether to add the weights of the edges to the graph
+#'       as an edge attribute called “weight”.
+#'       `"yes"` adds the weights (even if they are not present in the file,
+#'       in this case they are assumed to be zero).
+#'       `"no"` does not add any edge attribute.
+#'       `"auto"` (the default) adds the attribute if and only
+#'       if there is at least one explicit edge weight in the input file.
+#'     }
+#'     \item{directed}{
+#'       Whether to create a directed graph (default: `FALSE`).
+#'       As this format was originally used only for undirected graphs
+#'       there is no information in the file about the directedness of the graph.
+#'     }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [write_graph()]
 #' @keywords graphs
@@ -177,20 +244,34 @@ write.graph.fromraw <- function(buffer, file) {
 #' @cdocs igraph_read_graph_dimacs_flow igraph_read_graph_dl igraph_read_graph_edgelist
 #' @cdocs igraph_read_graph_gml igraph_read_graph_graphdb igraph_read_graph_graphml
 #' @cdocs igraph_read_graph_lgl igraph_read_graph_ncol igraph_read_graph_pajek
-read_graph <- function(file, format = c(
-                         "edgelist", "pajek", "ncol", "lgl",
-                         "graphml", "dimacs", "graphdb", "gml", "dl"
-                       ),
-                       ...) {
-  if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
-    length(grep("~", file, fixed = TRUE)) > 0) {
+read_graph <- function(
+  file,
+  format = c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "graphdb",
+    "gml",
+    "dl"
+  ),
+  ...
+) {
+  if (
+    !is.character(file) ||
+      length(grep("://", file, fixed = TRUE)) > 0 ||
+      length(grep("~", file, fixed = TRUE)) > 0
+  ) {
     buffer <- read.graph.toraw(file)
     file <- tempfile()
     write.graph.fromraw(buffer, file)
   }
 
   format <- igraph.match.arg(format)
-  res <- switch(format,
+  res <- switch(
+    format,
     "pajek" = read.graph.pajek(file, ...),
     "ncol" = read.graph.ncol(file, ...),
     "edgelist" = read.graph.edgelist(file, ...),
@@ -204,7 +285,6 @@ read_graph <- function(file, format = c(
   )
   res
 }
-
 
 
 #' Writing the graph to a file in some format
@@ -229,12 +309,16 @@ read_graph <- function(file, format = c(
 #' @section NCOL format: This format is a plain text edge list in which vertices
 #' are referred to by name rather than numerical ID. Edge weights may be
 #' optionally written. Additional parameters:
-#' \describe{
-#' \item{names}{The name of a vertex attribute to take vertex names from or
-#' `NULL` to use zero-based numerical IDs.}
-#' \item{weights}{The name of an edge attribute to take edge weights from or
-#' `NULL` to omit edge weights.}
-#' }
+#'   \describe{
+#'     \item{names}{
+#'       The name of a vertex attribute to take vertex names from or
+#'       `NULL` to use zero-based numerical IDs.
+#'     }
+#'     \item{weights}{
+#'       The name of an edge attribute to take edge weights from or
+#'       `NULL` to omit edge weights.
+#'     }
+#'   }
 #' @section Pajek format: The `pajek` format is provided for interoperability
 #' with the Pajek software only. Since the format does not have a formal
 #' specification, it is not recommended for general data exchange or archival.
@@ -258,15 +342,28 @@ read_graph <- function(file, format = c(
 #'   unlink(file)
 #' }
 #'
-write_graph <- function(graph, file,
-                        format = c(
-                          "edgelist", "pajek", "ncol", "lgl",
-                          "graphml", "dimacs", "gml", "dot", "leda"
-                        ),
-                        ...) {
+write_graph <- function(
+  graph,
+  file,
+  format = c(
+    "edgelist",
+    "pajek",
+    "ncol",
+    "lgl",
+    "graphml",
+    "dimacs",
+    "gml",
+    "dot",
+    "leda"
+  ),
+  ...
+) {
   ensure_igraph(graph)
-  if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
-    length(grep("~", file, fixed = TRUE)) > 0) {
+  if (
+    !is.character(file) ||
+      length(grep("://", file, fixed = TRUE)) > 0 ||
+      length(grep("~", file, fixed = TRUE)) > 0
+  ) {
     tmpfile <- TRUE
     origfile <- file
     file <- tempfile()
@@ -275,7 +372,8 @@ write_graph <- function(graph, file,
   }
 
   format <- igraph.match.arg(format)
-  res <- switch(format,
+  res <- switch(
+    format,
     "pajek" = write.graph.pajek(graph, file, ...),
     "edgelist" = write.graph.edgelist(graph, file, ...),
     "ncol" = write.graph.ncol(graph, file, ...),
@@ -300,15 +398,16 @@ write_graph <- function(graph, file,
 # Plain edge list format, not sorted
 ################################################################
 
-read.graph.edgelist <- function(file, n = 0,
-                                directed = TRUE, ...) {
+read.graph.edgelist <- function(file, n = 0, directed = TRUE, ...) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (edgelist format)")
   }
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_edgelist, file,
-    as.numeric(n), as.logical(directed)
+    R_igraph_read_graph_edgelist,
+    file,
+    as.numeric(n),
+    as.logical(directed)
   )
 }
 
@@ -324,26 +423,41 @@ write.graph.edgelist <- function(graph, file, ...) {
 # NCOL and LGL formats, quite simple
 ################################################################
 
-read.graph.ncol <- function(file, predef = character(0), names = TRUE,
-                            weights = c("auto", "yes", "no"),
-                            directed = FALSE, ...) {
+read.graph.ncol <- function(
+  file,
+  predef = character(0),
+  names = TRUE,
+  weights = c("auto", "yes", "no"),
+  directed = FALSE,
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (NCOL format)")
   }
-  weights <- switch(igraph.match.arg(weights),
+  weights <- switch(
+    igraph.match.arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
   )
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_ncol, file, as.character(predef),
-    as.logical(names), weights, as.logical(directed)
+    R_igraph_read_graph_ncol,
+    file,
+    as.character(predef),
+    as.logical(names),
+    weights,
+    as.logical(directed)
   )
 }
 
-write.graph.ncol <- function(graph, file,
-                             names = "name", weights = "weight", ...) {
+write.graph.ncol <- function(
+  graph,
+  file,
+  names = "name",
+  weights = "weight",
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (NCOL format)")
   }
@@ -358,33 +472,48 @@ write.graph.ncol <- function(graph, file,
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_ncol, graph, file,
-    names, weights
+    R_igraph_write_graph_ncol,
+    graph,
+    file,
+    names,
+    weights
   )
 }
 
-read.graph.lgl <- function(file, names = TRUE,
-                           weights = c("auto", "yes", "no"),
-                           directed = FALSE,
-                           ...) {
+read.graph.lgl <- function(
+  file,
+  names = TRUE,
+  weights = c("auto", "yes", "no"),
+  directed = FALSE,
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (LGL format)")
   }
-  weights <- switch(igraph.match.arg(weights),
+  weights <- switch(
+    igraph.match.arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
   )
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_lgl, file,
-    as.logical(names), weights, as.logical(directed)
+    R_igraph_read_graph_lgl,
+    file,
+    as.logical(names),
+    weights,
+    as.logical(directed)
   )
 }
 
-write.graph.lgl <- function(graph, file,
-                            names = "name", weights = "weight",
-                            isolates = FALSE, ...) {
+write.graph.lgl <- function(
+  graph,
+  file,
+  names = "name",
+  weights = "weight",
+  isolates = FALSE,
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (LGL format)")
   }
@@ -399,8 +528,12 @@ write.graph.lgl <- function(graph, file,
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_lgl, graph, file,
-    names, weights, as.logical(isolates)
+    R_igraph_write_graph_lgl,
+    graph,
+    file,
+    names,
+    weights,
+    as.logical(isolates)
   )
 }
 
@@ -446,8 +579,14 @@ read.graph.dimacs <- function(file, directed = TRUE, ...) {
   }
 }
 
-write.graph.dimacs <- function(graph, file,
-                               source = NULL, target = NULL, capacity = NULL, ...) {
+write.graph.dimacs <- function(
+  graph,
+  file,
+  source = NULL,
+  target = NULL,
+  capacity = NULL,
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (DIMACS format)")
   }
@@ -463,8 +602,12 @@ write.graph.dimacs <- function(graph, file,
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_dimacs, graph, file, as.numeric(source),
-    as.numeric(target), as.numeric(capacity)
+    R_igraph_write_graph_dimacs,
+    graph,
+    file,
+    as.numeric(source),
+    as.numeric(target),
+    as.numeric(capacity)
   )
 }
 
@@ -543,8 +686,6 @@ write.graph.dot <- function(graph, file, ...) {
 # isomorphic problems
 ################################################################
 
-
-
 #' Load a graph from the graph database for testing graph isomorphism.
 #'
 #' This function downloads a graph from a database created for the evaluation
@@ -614,17 +755,39 @@ graph_from_graphdb <- function(
   if (is.null(url)) {
     prefixes <- c("iso", "si6", "mcs10", "mcs30", "mcs50", "mcs70", "mcs90")
     types <- c(
-      "r001", "r005", "r01", "r02", "m2D", "m2Dr2", "m2Dr4", "m2Dr6",
-      "m3D", "m3Dr2", "m3Dr4", "m3Dr6", "m4D", "m4Dr2", "m4Dr4",
-      "m4Dr6", "b03", "b03m", "b06", "b06m", "b09", "b09m"
+      "r001",
+      "r005",
+      "r01",
+      "r02",
+      "m2D",
+      "m2Dr2",
+      "m2Dr4",
+      "m2Dr6",
+      "m3D",
+      "m3Dr2",
+      "m3Dr4",
+      "m3Dr6",
+      "m4D",
+      "m4Dr2",
+      "m4Dr4",
+      "m4Dr6",
+      "b03",
+      "b03m",
+      "b06",
+      "b06m",
+      "b09",
+      "b09m"
     )
-    sizecode <- if (nodes <= 100) "s" else if (nodes < 2000) "m" else "l" # "l" ????
-    typegroups <- c(
-      "rand", "rand", "rand", "rand",
-      "m2D", "m2D", "m2D", "m2D",
-      "m2D", "m3D", "m3D", "m3D",
-      "m4D", "m4D", "m4D", "m4D",
-      "bvg", "bvg", "bvg", "bvg", "bvg", "bvg"
+    sizecode <- if (nodes <= 100) {
+      "s"
+    } else if (nodes < 2000) {
+      "m"
+    } else {
+      "l"
+    } # "l" ????
+    typegroups <- rep(
+      c("rand", "m2D", "m3D", "m4D", "bvg"),
+      c(4L, 5L, 3L, 4L, 6L)
     )
     typegroup <- typegroups[which(types == type)]
 
@@ -642,9 +805,25 @@ graph_from_graphdb <- function(
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(
-      sep = "", base, "/", prefix, "/", typegroup, "/", type, "/",
-      prefix, "_", type, "_", sizecode, nodes,
-      ".", pair, formatC(which, width = 2, flag = "0"), suff
+      sep = "",
+      base,
+      "/",
+      prefix,
+      "/",
+      typegroup,
+      "/",
+      type,
+      "/",
+      prefix,
+      "_",
+      type,
+      "_",
+      sizecode,
+      nodes,
+      ".",
+      pair,
+      formatC(which, width = 2, flag = "0"),
+      suff
     )
   } else {
     filename <- url
@@ -654,7 +833,9 @@ graph_from_graphdb <- function(
 
   f <- try(gzcon(file(filename, open = "rb")))
   if (inherits(f, "try-error")) {
-    cli::cli_abort("Cannot open URL provided in {.arg filename}: {.url {filename}}")
+    cli::cli_abort(
+      "Cannot open URL provided in {.arg filename}: {.url {filename}}"
+    )
   }
 
   buffer <- read.graph.toraw(f)
@@ -672,8 +853,13 @@ read.graph.graphdb <- function(file, directed = TRUE, ...) {
   .Call(R_igraph_read_graph_graphdb, file, as.logical(directed))
 }
 
-write.graph.leda <- function(graph, file, vertex.attr = NULL, edge.attr = NULL,
-                             ...) {
+write.graph.leda <- function(
+  graph,
+  file,
+  vertex.attr = NULL,
+  edge.attr = NULL,
+  ...
+) {
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (LEDA format)")
   }

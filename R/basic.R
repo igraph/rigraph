@@ -3,12 +3,13 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `is.igraph()` was renamed to `is_igraph()` to create a more
+#' `is.igraph()` was renamed to [is_igraph()] to create a more
 #' consistent API.
 #' @inheritParams is_igraph
 #' @keywords internal
 #' @export
-is.igraph <- function(graph) { # nocov start
+is.igraph <- function(graph) {
+  # nocov start
   lifecycle::deprecate_soft("2.0.0", "is.igraph()", "is_igraph()")
   is_igraph(graph = graph)
 } # nocov end
@@ -32,8 +33,6 @@ is.igraph <- function(graph) { # nocov start
 #   02110-1301 USA
 #
 ###################################################################
-
-
 
 #' Is this object an igraph graph?
 #'

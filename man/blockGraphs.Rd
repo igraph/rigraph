@@ -18,7 +18,7 @@ argument.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{blockGraphs()} was renamed to \code{graphs_from_cohesive_blocks()} to create a more
+\code{blockGraphs()} was renamed to \code{\link[=graphs_from_cohesive_blocks]{graphs_from_cohesive_blocks()}} to create a more
 consistent API.
 }
 \keyword{internal}

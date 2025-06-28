@@ -31,9 +31,14 @@ used by default.}
 \value{
 A numeric constant for \code{diameter()}, a numeric vector for
 \code{get_diameter()}. \code{farthest_vertices()} returns a list with two
-entries: \itemize{
-\item \code{vertices} The two vertices that are the farthest.
-\item \code{distance} Their distance.
+entries:
+\describe{
+\item{\code{vertices}}{
+The two vertices that are the farthest.
+}
+\item{\code{distance}}{
+Their distance.
+}
 }
 }
 \description{

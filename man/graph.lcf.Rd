@@ -7,7 +7,8 @@
 graph.lcf(n, shifts, repeats = 1)
 }
 \arguments{
-\item{n}{Integer, the number of vertices in the graph.}
+\item{n}{Integer, the number of vertices in the graph. If \code{NULL} (default),
+it is set to \code{len(shifts) * repeats}.}
 
 \item{shifts}{Integer vector, the shifts.}
 
@@ -16,7 +17,7 @@ graph.lcf(n, shifts, repeats = 1)
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{graph.lcf()} was renamed to \code{graph_from_lcf()} to create a more
+\code{graph.lcf()} was renamed to \code{\link[=graph_from_lcf]{graph_from_lcf()}} to create a more
 consistent API.
 }
 \keyword{internal}

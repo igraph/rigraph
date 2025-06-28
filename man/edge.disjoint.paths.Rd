@@ -26,7 +26,7 @@ thanks Peter.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{edge.disjoint.paths()} was renamed to \code{edge_connectivity()} to create a more
+\code{edge.disjoint.paths()} was renamed to \code{\link[=edge_connectivity]{edge_connectivity()}} to create a more
 consistent API.
 }
 \keyword{internal}

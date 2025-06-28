@@ -3,14 +3,33 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' `graph.adjacency()` was renamed to `graph_from_adjacency_matrix()` to create a more
+#' `graph.adjacency()` was renamed to [graph_from_adjacency_matrix()] to create a more
 #' consistent API.
 #' @inheritParams graph_from_adjacency_matrix
 #' @keywords internal
 #' @export
-graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA) { # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.adjacency()", "graph_from_adjacency_matrix()")
-  graph_from_adjacency_matrix(adjmatrix = adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
+graph.adjacency <- function(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+) {
+  # nocov start
+  lifecycle::deprecate_soft(
+    "2.0.0",
+    "graph.adjacency()",
+    "graph_from_adjacency_matrix()"
+  )
+  graph_from_adjacency_matrix(
+    adjmatrix = adjmatrix,
+    mode = mode,
+    weighted = weighted,
+    diag = diag,
+    add.colnames = add.colnames,
+    add.rownames = add.rownames
+  )
 } # nocov end
 
 ## ----------------------------------------------------------------
@@ -50,37 +69,70 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #' If this argument is `NULL` then an unweighted graph is created and an
 #' element of the adjacency matrix gives the number of edges to create between
 #' the two corresponding vertices.  The details depend on the value of the
-#' `mode` argument: \describe{ \item{"directed"}{The graph will be
-#' directed and a matrix element gives the number of edges between two
-#' vertices.} \item{"undirected"}{This is exactly the same as `max`,
-#' for convenience. Note that it is *not* checked whether the matrix is
-#' symmetric.} \item{"max"}{An undirected graph will be created and
-#' `max(A(i,j), A(j,i))` gives the number of edges.}
-#' \item{"upper"}{An undirected graph will be created, only the upper
-#' right triangle (including the diagonal) is used for the number of edges.}
-#' \item{"lower"}{An undirected graph will be created, only the lower
-#' left triangle (including the diagonal) is used for creating the edges.}
-#' \item{"min"}{undirected graph will be created with `min(A(i,j),
-#' A(j,i))` edges between vertex `i` and `j`.} \item{"plus"}{
-#' undirected graph will be created with `A(i,j)+A(j,i)` edges between
-#' vertex `i` and `j`.} }
+#' `mode` argument:
+#'   \describe{
+#'     \item{"directed"}{
+#'       The graph will be directed and a matrix element gives
+#'       the number of edges between two vertices.
+#'     }
+#'     \item{"undirected"}{
+#'       This is exactly the same as `max`, for convenience.
+#'       Note that it is *not* checked whether the matrix is symmetric.
+#'     }
+#'     \item{"max"}{
+#'       An undirected graph will be created and `max(A(i,j), A(j,i))`
+#'       gives the number of edges.
+#'     }
+#'     \item{"upper"}{
+#'       An undirected graph will be created, only the upper right triangle
+#'       (including the diagonal) is used for the number of edges.
+#'     }
+#'     \item{"lower"}{
+#'       An undirected graph will be created, only the lower left triangle
+#'       (including the diagonal) is used for creating the edges.
+#'     }
+#'     \item{"min"}{
+#'       An undirected graph will be created with `min(A(i,j), A(j,i))` edges
+#'       between vertex `i` and `j`.
+#'     }
+#'     \item{"plus"}{
+#'       An undirected graph will be created with `A(i,j)+A(j,i)` edges
+#'       between vertex `i` and `j`.
+#'     }
+#'   }
 #'
 #' If the `weighted` argument is not `NULL` then the elements of the
 #' matrix give the weights of the edges (if they are not zero).  The details
-#' depend on the value of the `mode` argument: \describe{
-#' \item{"directed"}{The graph will be directed and a matrix element
-#' gives the edge weights.} \item{"undirected"}{First we check that the
-#' matrix is symmetric. It is an error if not. Then only the upper triangle is
-#' used to create a weighted undirected graph.} \item{"max"}{An
-#' undirected graph will be created and `max(A(i,j), A(j,i))` gives the
-#' edge weights.} \item{"upper"}{An undirected graph will be created,
-#' only the upper right triangle (including the diagonal) is used (for the edge
-#' weights).} \item{"lower"}{An undirected graph will be created, only
-#' the lower left triangle (including the diagonal) is used for creating the
-#' edges.} \item{"min"}{An undirected graph will be created,
-#' `min(A(i,j), A(j,i))` gives the edge weights.} \item{"plus"}{An
-#' undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
-#' weights.} }
+#' depend on the value of the `mode` argument:
+#'   \describe{
+#'     \item{"directed"}{
+#'       The graph will be directed and a matrix element gives the edge weights.
+#'     }
+#'     \item{"undirected"}{
+#'       First we check that the matrix is symmetric. It is an error if not.
+#'       Then only the upper triangle is used to create a weighted undirected graph.
+#'     }
+#'     \item{"max"}{
+#'       An undirected graph will be created and `max(A(i,j), A(j,i))`
+#'       gives the edge weights.
+#'     }
+#'     \item{"upper"}{
+#'       An undirected graph will be created, only the upper right triangle
+#'       (including the diagonal) is used (for the edge weights).
+#'     }
+#'     \item{"lower"}{
+#'       An undirected graph will be created, only the lower left triangle
+#'       (including the diagonal) is used for creating the edges.
+#'     }
+#'     \item{"min"}{
+#'       An undirected graph will be created, `min(A(i,j), A(j,i))`
+#'       gives the edge weights.
+#'     }
+#'     \item{"plus"}{
+#'       An undirected graph will be created, `A(i,j)+A(j,i)`
+#'       gives the edge weights.
+#'     }
+#'   }
 #'
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
 #'   can be a sparse matrix created with the `Matrix` package.
@@ -221,13 +273,23 @@ graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max",
 #' summary(g10)
 #'
 #' @export
-graph_from_adjacency_matrix <- function(adjmatrix,
-                                        mode = c(
-                                          "directed", "undirected", "max",
-                                          "min", "upper", "lower", "plus"
-                                        ),
-                                        weighted = NULL, diag = TRUE,
-                                        add.colnames = NULL, add.rownames = NA) {
+graph_from_adjacency_matrix <- function(
+  adjmatrix,
+  mode = c(
+    "directed",
+    "undirected",
+    "max",
+    "min",
+    "upper",
+    "lower",
+    "plus"
+  ),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+) {
+  ensure_no_na(adjmatrix, "adjacency matrix")
   mode <- igraph.match.arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
@@ -250,9 +312,19 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   }
 
   if (inherits(adjmatrix, "Matrix")) {
-    res <- graph.adjacency.sparse(adjmatrix, mode = mode, weighted = weighted, diag = diag)
+    res <- graph.adjacency.sparse(
+      adjmatrix,
+      mode = mode,
+      weighted = weighted,
+      diag = diag
+    )
   } else {
-    res <- graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted, diag = diag)
+    res <- graph.adjacency.dense(
+      adjmatrix,
+      mode = mode,
+      weighted = weighted,
+      diag = diag
+    )
   }
 
   ## Add columns and row names as attributes
@@ -282,8 +354,9 @@ graph_from_adjacency_matrix <- function(adjmatrix,
     }
   }
 
-  if (!is.na(add.rownames) && !is.na(add.colnames) &&
-    add.rownames == add.colnames) {
+  if (
+    !is.na(add.rownames) && !is.na(add.colnames) && add.rownames == add.colnames
+  ) {
     cli::cli_warn("Same attribute for columns and rows, row names are ignored")
     add.rownames <- NA
   }
@@ -314,14 +387,18 @@ is_symmetric <- function(x) {
 #' @param ... Passed to `graph_from_adjacency_matrix()`.
 #' @family adjacency
 #' @export
-from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)
+from_adjacency <- function(...) {
+  constructor_spec(graph_from_adjacency_matrix, ...)
+}
 
 graph.adjacency.dense <- function(
-    adjmatrix,
+  adjmatrix,
+  mode,
+  weighted = NULL,
+  diag = c("once", "twice", "ignore")
+) {
+  mode <- switch(
     mode,
-    weighted = NULL,
-    diag = c("once", "twice", "ignore")) {
-  mode <- switch(mode,
     "directed" = 0L,
     "undirected" = 1L,
     "upper" = 2L,
@@ -335,11 +412,7 @@ graph.adjacency.dense <- function(
     diag <- ifelse(diag, "once", "ignore")
   }
   diag <- igraph.match.arg(diag)
-  diag <- switch(diag,
-    "ignore" = 0L,
-    "twice" = 1L,
-    "once" = 2L
-  )
+  diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
     stop("Adjacency matrices must be square.")
@@ -387,13 +460,22 @@ pmin_AB <- function(A, B) {
   A
 }
 
-graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE, call = rlang::caller_env()) {
+graph.adjacency.sparse <- function(
+  adjmatrix,
+  mode,
+  weighted = NULL,
+  diag = TRUE,
+  call = rlang::caller_env()
+) {
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
       weighted <- "weight"
     }
     if (!is.character(weighted)) {
-      cli::cli_abort("Invalid value supplied for `weighted' argument, please see docs.", call = call)
+      cli::cli_abort(
+        "Invalid value supplied for `weighted' argument, please see docs.",
+        call = call
+      )
     }
   }
 
@@ -429,9 +511,15 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     adjmatrix <- adjmatrix + Matrix::t(adjmatrix)
     adjmatrix <- Matrix::tril(adjmatrix)
   } else if (mode == "max") {
-    adjmatrix <- pmax_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
+    adjmatrix <- pmax_AB(
+      Matrix::tril(adjmatrix),
+      Matrix::t(Matrix::triu(adjmatrix))
+    )
   } else if (mode == "min") {
-    adjmatrix <- pmin_AB(Matrix::tril(adjmatrix), Matrix::t(Matrix::triu(adjmatrix)))
+    adjmatrix <- pmin_AB(
+      Matrix::tril(adjmatrix),
+      Matrix::t(Matrix::triu(adjmatrix))
+    )
     adjmatrix <- Matrix::drop0(adjmatrix)
   }
   el <- mysummary(adjmatrix)
