@@ -481,7 +481,7 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
       lifecycle::deprecate_warn(
         "2.1.5",
         "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')",
-        details = c("For backward compatibility, edges are interpreted columnwise.", "convert to a data.frame with two columns and one row per edge.")
+        details = c("For backward compatibility, it is assumed that each row is an edge, from the first column to the second column.", "convert to a data.frame with two columns and one row per edge.")
       )
       c(x)
     } else if (nrow == 2) {
