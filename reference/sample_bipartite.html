@@ -15,7 +15,7 @@ Use sample_bipartite_gnm() and sample_bipartite_gnp() instead."><meta property="
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9053</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9054</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,15 +163,15 @@ is ignored for undirected graphs.</p></dd>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`sample_bipartite()` was deprecated in igraph 2.2.0.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `sample_bipartite_gnp()` instead.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 606e4df U--B 15 0 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 59ad2f3 U--B 15 0 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 606e4df:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 59ad2f3:</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## full graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH bd45e4f U--B 15 50 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e150203 U--B 15 50 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from bd45e4f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e150203:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15</span>
@@ -180,18 +180,18 @@ is ignored for undirected graphs.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## random bipartite graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6a220d0 U--B 15 3 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3daa3e3 U--B 15 3 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6a220d0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3daa3e3:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3--13 4--13 3--15</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## directed bipartite graph, G(n,m)</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, type <span class="op">=</span> <span class="st">"Gnm"</span>, m <span class="op">=</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`sample_bipartite()` was deprecated in igraph 2.2.0.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `sample_bipartite_gnm()` instead.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8774c24 D--B 15 20 -- Bipartite Gnm random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9362066 D--B 15 20 -- Bipartite Gnm random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8774c24:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9362066:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  5-&gt;11  7-&gt;11  9-&gt;11  1-&gt;12  6-&gt;12  9-&gt;13  3-&gt;14  9-&gt;14  3-&gt;15  6-&gt;15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 10-&gt;15 14-&gt; 3 11-&gt; 4 14-&gt; 4 15-&gt; 5 11-&gt; 6 12-&gt; 6 14-&gt; 8 12-&gt;10 15-&gt;10</span>
 <span class="r-in"><span></span></span>
