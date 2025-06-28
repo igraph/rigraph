@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9054
+
+## Continuous integration
+
+- Fix main coverage workflow.
+
+- Install covr fix.
+
+
 # igraph 2.1.4.9053
 
 ## Bug fixes
