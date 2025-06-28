@@ -1,7 +1,7 @@
 # See https://docs.codecov.io/docs/codecov-yaml for documentation
 
 codecov:
-  require_ci_to_pass: yes
+  require_ci_to_pass: true
 
 comment: false
 
@@ -14,3 +14,10 @@ coverage:
       default:
         threshold: 0.1%
     patch: off
+
+ignore:
+  - "src/vendor/arpack"
+  - "src/vendor/cigraph/vendor"
+  - "src/vendor/io"
+  - "src/vendor/simpleraytracer"
+  - "src/vendor/uuid"
