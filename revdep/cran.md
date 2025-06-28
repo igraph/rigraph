@@ -14,8 +14,7 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
 
 * CITMIC
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * CoDiNA
   checking examples ... ERROR
@@ -26,8 +25,7 @@ Issues with CRAN packages are summarised below.
 * criticalpath
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * deepdep
   checking tests ... ERROR
@@ -43,8 +41,7 @@ Issues with CRAN packages are summarised below.
   checking installed package size ... NOTE
 
 * incidentally
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * intergraph
   checking tests ... ERROR
@@ -71,24 +68,18 @@ Issues with CRAN packages are summarised below.
 
 * purgeR
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * remify
   checking tests ... ERROR
 
-* RevEcoR
-  checking running R code from vignettes ... ERROR
-
 * riverconn
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rsetse
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * SEMID
   checking examples ... ERROR
@@ -103,8 +94,7 @@ Issues with CRAN packages are summarised below.
 
 * tilemaps
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * timeordered
   checking examples ... ERROR
