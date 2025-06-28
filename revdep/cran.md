@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 898 reverse dependencies (889 from CRAN + 9 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 77 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 33 new problems
- * We failed to check 33 packages
+ * We saw 32 new problems
+ * We failed to check 5 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -14,8 +14,7 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
 
 * CITMIC
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * CoDiNA
   checking examples ... ERROR
@@ -26,8 +25,7 @@ Issues with CRAN packages are summarised below.
 * criticalpath
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * deepdep
   checking tests ... ERROR
@@ -41,18 +39,17 @@ Issues with CRAN packages are summarised below.
 
 * DrDimont
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * dynwrap
   checking examples ... ERROR
+  checking tests ... ERROR
 
 * EGAnet
   checking examples ... ERROR
 
 * egor
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * frscore
   checking examples ... ERROR
@@ -60,16 +57,14 @@ Issues with CRAN packages are summarised below.
 * icmstate
   checking examples ... ERROR
   checking tests ... ERROR
-  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... ERROR
 
 * ideanet
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * incidentally
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * intergraph
   checking tests ... ERROR
@@ -96,24 +91,18 @@ Issues with CRAN packages are summarised below.
 
 * purgeR
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * remify
   checking tests ... ERROR
 
-* RevEcoR
-  checking running R code from vignettes ... ERROR
-
 * riverconn
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * rsetse
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * SEMID
   checking examples ... ERROR
@@ -128,44 +117,15 @@ Issues with CRAN packages are summarised below.
 
 * tilemaps
   checking examples ... ERROR
-  checking running R code from vignettes ... ERROR
-  checking re-building of vignette outputs ... NOTE
+  checking re-building of vignette outputs ... ERROR
 
 * timeordered
   checking examples ... ERROR
 
 ### Failed to check
 
-* CARBayes              (NA)
-* CIDER                 (NA)
-* ClusterGVis           (NA)
-* ConnectednessApproach (NA)
-* csurvey               (NA)
-* dartR.base            (NA)
-* dartR.captive         (NA)
-* dartR.popgen          (NA)
-* datapack              (NA)
-* DRviaSPCN             (NA)
-* easybgm               (NA)
-* erah                  (NA)
-* evolqg                (NA)
-* frechet               (NA)
-* genekitr              (NA)
-* ggpicrust2            (NA)
-* HetSeq                (NA)
-* immcp                 (NA)
-* manet                 (NA)
-* mlmts                 (NA)
-* multinma              (NA)
-* netcmc                (NA)
-* NetworkChange         (NA)
-* pcvr                  (NA)
-* ProgModule            (NA)
-* ReporterScore         (NA)
-* robber                (NA)
-* RPointCloud           (NA)
-* RSP                   (NA)
-* rTwig                 (NA)
-* Seurat                (NA)
-* SiFINeT               (NA)
-* streamDAG             (NA)
+* bnlearn   (NA)
+* datapack  (NA)
+* multinma  (NA)
+* RSP       (NA)
+* streamDAG (NA)

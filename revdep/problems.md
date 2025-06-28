@@ -56,26 +56,7 @@ Run `revdepcheck::cloud_details(, "CITMIC")` for more info
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘CITMIC.Rmd’
-      ...
-    [1] 4
-    
-    > GEP <- GetData_CITMIC("GEP")
-    
-    > lnScore <- CITMIC(GEP, weighted = TRUE, base = 10, 
-    +     damping = 0.9, cl.cores = 1, cell.type = NULL)
-    
-      When sourcing ‘CITMIC.R’:
-    Error: `name` must be a single string, not `TRUE`.
-    Execution halted
-    
-      ‘CITMIC.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
@@ -1103,26 +1084,7 @@ Run `revdepcheck::cloud_details(, "criticalpath")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘criticalpath-introduction.Rmd’
-      ...
-    > library(criticalpath)
-    
-    > sch <- sch_new() %>% sch_title("Project 1: Cost Information System") %>% 
-    +     sch_reference("VANHOUCKE, Mario.\n    Integrated project management  ..." ... [TRUNCATED] 
-    
-      When sourcing ‘criticalpath-introduction.R’:
-    Error: The schedule is invalid!!! To view the problem, execute:
-    
-             `validation <- sch_validate(sch)`
-    Execution halted
-    
-      ‘criticalpath-introduction.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘criticalpath-introduction.Rmd’ using rmarkdown
@@ -2378,9 +2340,9 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.5Mb
+      installed size is  6.0Mb
       sub-directories of 1Mb or more:
-        R             1.0Mb
+        R             1.5Mb
         help          1.5Mb
         htmlwidgets   2.8Mb
     ```
@@ -2511,16 +2473,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-06-26 09:22:46] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-06-28 06:41:21] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-06-26 09:22:46] Generating graph of layer mrna for groupA...
-    [25-06-26 09:22:46] Reducing network by WGCNA::pickHardThreshold...
-    [25-06-26 09:22:46] R2 cutoff: 0.65
-    [25-06-26 09:22:46] Cut Threshold: 0.26
+    [25-06-28 06:41:21] Generating graph of layer mrna for groupA...
+    [25-06-28 06:41:21] Reducing network by WGCNA::pickHardThreshold...
+    [25-06-28 06:41:21] R2 cutoff: 0.65
+    [25-06-28 06:41:22] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -2536,26 +2498,7 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘DrDimont_Vignette.Rmd’
-      ...
-    > example_individual_graphs <- generate_individual_graphs(correlation_matrices = correlation_matrices_example, 
-    +     layers = all_layers, settings =  .... [TRUNCATED] 
-    [25-06-26 09:22:54] Generating graph of layer mrna for groupA...
-    [25-06-26 09:22:54] Reducing network by WGCNA::pickHardThreshold...
-    [25-06-26 09:22:54] R2 cutoff: 0.65
-    [25-06-26 09:22:55] Cut Threshold: 0.26
-    
-      When sourcing ‘DrDimont_Vignette.R’:
-    Error: Cannot create a graph object because the adjacency matrix contains NAs.
-    Execution halted
-    
-      ‘DrDimont_Vignette.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
@@ -2575,6 +2518,15 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
+    ```
+
+## In both
+
+*   checking Rd files ... NOTE
+    ```
+    checkRd: (-1) generate_individual_graphs.Rd:11: Lost braces
+        11 | code{\link[DrDimont]{compute_correlation_matrices}}}
+           |     ^
     ```
 
 # dynwrap
@@ -2675,8 +2627,6 @@ Run `revdepcheck::cloud_details(, "dynwrap")` for more info
      16.         └─rlang::abort(...)
     Execution halted
     ```
-
-## In both
 
 *   checking tests ... ERROR
     ```
@@ -3538,28 +3488,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘using_egor.Rmd’
-      ...
-    14     14   28.1
-    15     15   27.8
-    
-    > data("egor32")
-    
-    > graphs <- clustered_graphs(egor32, "age")
-    
-      When sourcing ‘using_egor.R’:
-    Error: Cannot create a graph object because the edge data frame contains NAs.
-    Execution halted
-    
-      ‘egor_allbus.Rmd’ using ‘UTF-8’... OK
-      ‘qualtrics.Rmd’ using ‘UTF-8’... OK
-      ‘using_egor.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘egor_allbus.Rmd’ using rmarkdown
@@ -3827,54 +3756,7 @@ Run `revdepcheck::cloud_details(, "icmstate")` for more info
       Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Overview.Rmd’
-      ...
-    
-    > library(icenReg)
-    Loading required package: Rcpp
-    Loading required package: coda
-    
-    > SimpleMult <- npmsm(gd = dat, tmat = tmat, method = "multinomial")
-    
-      When sourcing ‘Overview.R’:
-    Error: Cannot create a graph object because the adjacency matrix contains NAs.
-    Execution halted
-    when running code in ‘comparison-with-known-results.Rmd’
-      ...
-    > dat_frydman <- msmtoFrydman(dat)
-    
-    > visualise_data(dat_frydman)
-    
-    > mod_npmsm <- npmsm(gd = dat, tmat = tmat_EID, maxit = 300, 
-    +     exact = c(3, 4), tol = 1e-06)
-    
-      When sourcing ‘comparison-with-known-results.R’:
-    Error: Cannot create a graph object because the adjacency matrix contains NAs.
-    Execution halted
-    when running code in ‘sim_msm.Rmd’
-      ...
-    > obs_data <- data.frame(time = c(rep(seq(0, 20, 2), 
-    +     50), rep(seq(1, 19, 2), 50)), id = c(rep(1:50, each = 11), 
-    +     rep(51:100, each = 10)))
-    
-    > data_manual <- sim_weibmsm(data = obs_data, tmat = tmat_ID, 
-    +     shape = shape_ID, scale = scale_ID)
-    
-      When sourcing ‘sim_msm.R’:
-    Error: Cannot create a graph object because the adjacency matrix contains NAs.
-    Execution halted
-    
-      ‘Overview.Rmd’ using ‘UTF-8’... failed
-      ‘comparison-with-known-results.Rmd’ using ‘UTF-8’... failed
-      ‘sim_msm.Rmd’ using ‘UTF-8’... failed
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Overview.Rmd’ using rmarkdown
@@ -3908,6 +3790,92 @@ Run `revdepcheck::cloud_details(, "icmstate")` for more info
     
     Error: processing vignette 'sim_msm.Rmd' failed with diagnostics:
     Cannot create a graph object because the adjacency matrix contains NAs.
+    --- failed re-building ‘sim_msm.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘Overview.Rmd’ ‘comparison-with-known-results.Rmd’ ‘sim_msm.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## Newly fixed
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘Overview.Rmd’ using rmarkdown
+    
+    tlmgr: Remote database at https://ctan.math.illinois.edu/systems/texlive/tlnet
+    (revision 75624 of the texlive-scripts package)
+    seems to be older than the local installation
+    (revision 75632 of texlive-scripts);
+    please use a different mirror and/or wait a day or two.
+    
+    
+    tlmgr: Remote database at https://mirrors.ibiblio.org/pub/mirrors/CTAN/systems/texlive/tlnet
+    (revision 75624 of the texlive-scripts package)
+    seems to be older than the local installation
+    (revision 75632 of texlive-scripts);
+    please use a different mirror and/or wait a day or two.
+    
+    ! LaTeX Error: File `tikz.sty' not found.
+    
+    ! Emergency stop.
+    <read *> 
+    
+    Error: processing vignette 'Overview.Rmd' failed with diagnostics:
+    LaTeX failed to compile /tmp/workdir/icmstate/old/icmstate.Rcheck/vign_test/icmstate/vignettes/Overview.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See Overview.log for more info.
+    --- failed re-building ‘Overview.Rmd’
+    
+    --- re-building ‘comparison-with-known-results.Rmd’ using rmarkdown
+    tlmgr: package repository https://ctan.mirrors.hoobly.com/systems/texlive/tlnet (verified)
+    [1/2, ??:??/??:??] install: fp [19k]
+    [2/2, 00:00/00:00] install: pgf [701k]
+    running mktexlsr ...
+    done running mktexlsr.
+    tlmgr: package log updated: /opt/TinyTeX/texmf-var/web2c/tlmgr.log
+    tlmgr: command log updated: /opt/TinyTeX/texmf-var/web2c/tlmgr-commands.log
+    
+    tlmgr: Remote database at https://ctan.math.illinois.edu/systems/texlive/tlnet
+    (revision 75624 of the texlive-scripts package)
+    seems to be older than the local installation
+    (revision 75632 of texlive-scripts);
+    please use a different mirror and/or wait a day or two.
+    
+    
+    tlmgr: Remote database at https://mirrors.ibiblio.org/pub/mirrors/CTAN/systems/texlive/tlnet
+    (revision 75624 of the texlive-scripts package)
+    seems to be older than the local installation
+    (revision 75632 of texlive-scripts);
+    please use a different mirror and/or wait a day or two.
+    
+    ! LaTeX Error: File `pgfplots.sty' not found.
+    
+    ! Emergency stop.
+    <read *> 
+    
+    Error: processing vignette 'comparison-with-known-results.Rmd' failed with diagnostics:
+    LaTeX failed to compile /tmp/workdir/icmstate/old/icmstate.Rcheck/vign_test/icmstate/vignettes/comparison-with-known-results.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See comparison-with-known-results.log for more info.
+    --- failed re-building ‘comparison-with-known-results.Rmd’
+    
+    --- re-building ‘sim_msm.Rmd’ using rmarkdown
+    
+    tlmgr: Remote database at https://latex.us/systems/texlive/tlnet
+    (revision 75624 of the texlive-scripts package)
+    seems to be older than the local installation
+    (revision 75632 of texlive-scripts);
+    please use a different mirror and/or wait a day or two.
+    
+    Warning in system2("tlmgr", args, ...) :
+      running command ''tlmgr' search --file --global '/pgfplots.sty'' had status 1 and error message 'Function not implemented'
+    ! LaTeX Error: File `pgfplots.sty' not found.
+    
+    ! Emergency stop.
+    <read *> 
+    
+    Error: processing vignette 'sim_msm.Rmd' failed with diagnostics:
+    LaTeX failed to compile /tmp/workdir/icmstate/old/icmstate.Rcheck/vign_test/icmstate/vignettes/sim_msm.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See sim_msm.log for more info.
     --- failed re-building ‘sim_msm.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -4017,33 +3985,7 @@ Run `revdepcheck::cloud_details(, "ideanet")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘roles.Rmd’
-      ...
-    Warning in stats::cor(this_mat) : the standard deviation is zero
-    Warning in stats::cor(this_mat) : the standard deviation is zero
-    Warning in stats::cor(this_mat) : the standard deviation is zero
-    Warning in stats::cor(this_mat) : the standard deviation is zero
-    Warning in cluster::daisy(euclid_mat, metric = "euclidean") :
-      binary variable(s) 27, 36 treated as interval scaled
-    
-      When sourcing ‘roles.R’:
-    Error: Cannot create a graph object because the adjacency matrix contains NAs.
-    Execution halted
-    
-      ‘CHAMP.Rmd’ using ‘UTF-8’... OK
-      ‘CHAMP_football.Rmd’ using ‘UTF-8’... OK
-      ‘CHAMP_karate.Rmd’ using ‘UTF-8’... OK
-      ‘ego_netwrite.Rmd’ using ‘UTF-8’... OK
-      ‘mrqap.Rmd’ using ‘UTF-8’... OK
-      ‘nc_read.Rmd’ using ‘UTF-8’... OK
-      ‘netwrite.Rmd’ using ‘UTF-8’... OK
-      ‘roles.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘CHAMP.Rmd’ using rmarkdown
@@ -4065,27 +4007,7 @@ Run `revdepcheck::cloud_details(, "incidentally")` for more info
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘incidentally.Rmd’
-      ...
-    > G <- erdos.renyi.game(15, 0.5)
-    Warning: `erdos.renyi.game()` was deprecated in igraph 0.8.0.
-    ℹ Please use `sample_gnp()` instead.
-    
-    > I <- incidence.from.adjacency(G, k = 1, p = 0.75, 
-    +     model = "team")
-    
-      When sourcing ‘incidentally.R’:
-    Error: INTEGER() can only be applied to a 'integer', not a 'NULL'
-    Execution halted
-    
-      ‘congress.Rmd’ using ‘UTF-8’... OK
-      ‘incidentally.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘congress.Rmd’ using rmarkdown
@@ -4197,7 +4119,7 @@ Run `revdepcheck::cloud_details(, "IOHanalyzer")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.5Mb
+      installed size is  6.6Mb
       sub-directories of 1Mb or more:
         data           1.4Mb
         libs           3.2Mb
@@ -4384,6 +4306,14 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 *   checking package dependencies ... NOTE
     ```
     Package which this enhances but not available for checking: ‘Rgraphviz’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        R           1.5Mb
+        tutorials   1.6Mb
     ```
 
 # miic
@@ -4881,27 +4811,7 @@ Run `revdepcheck::cloud_details(, "purgeR")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘purgeR-tutorial.Rmd’
-      ...
-    
-    
-    > atlas_VE <- purgeR::ped_graph(purgeR::atlas)
-    
-    > G_atlas <- igraph::graph_from_data_frame(d = atlas_VE$edges, 
-    +     vertices = atlas_VE$vertices, directed = TRUE)
-    
-      When sourcing ‘purgeR-tutorial.R’:
-    Error: Cannot create a graph object because the edge data frame contains NAs.
-    Execution halted
-    
-      ‘ip.Rmd’ using ‘UTF-8’... OK
-      ‘purgeR-tutorial.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘ip.Rmd’ using rmarkdown
@@ -4979,7 +4889,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.6s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m3.5s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -5032,7 +4942,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-error-messages.R..   19 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.2s[0m
+      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.3s[0m
       
       test-remify-methods.R.........    0 tests    
       test-remify-methods.R.........    0 tests    
@@ -5194,7 +5104,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m9.0s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m13.2s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -5264,7 +5174,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.5s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.8s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -5396,7 +5306,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.7s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m1.1s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
@@ -5452,41 +5362,6 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       sub-directories of 1Mb or more:
         doc    3.5Mb
         libs   4.8Mb
-    ```
-
-# RevEcoR
-
-<details>
-
-* Version: 0.99.3
-* GitHub: NA
-* Source code: https://github.com/cran/RevEcoR
-* Date/Publication: 2016-04-03 17:14:01
-* Number of recursive dependencies: 23
-
-Run `revdepcheck::cloud_details(, "RevEcoR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘RevEcoR.Rmd’
-      ...
-    
-    > g2 <- reconstructGsMN(metabolic.data, RefData = RefDbcache)
-    
-    > seed.set <- getSeedSets(buc.net, 0.2)
-    
-      When sourcing ‘RevEcoR.R’:
-    Error: The `neimode` argument of `dfs()` was deprecated in igraph 1.3.0 and is
-    now defunct.
-    ℹ Please use the `mode` argument instead.
-    Execution halted
-    
-      ‘RevEcoR.Rmd’ using ‘UTF-8’... failed
     ```
 
 # riverconn
@@ -5551,26 +5426,7 @@ Run `revdepcheck::cloud_details(, "riverconn")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘Tutorial.Rmd’
-      ...
-    > oldpar <- par(mfrow = c(1, 1))
-    
-    > par(mfrow = c(1, 3))
-    
-    > g1 <- set_graph_directionality(g, field_name = "Id", 
-    +     outlet_name = "16")
-    
-      When sourcing ‘Tutorial.R’:
-    Error: Cannot create a graph object because the edge data frame contains NAs.
-    Execution halted
-    
-      ‘Tutorial.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Tutorial.Rmd’ using rmarkdown
@@ -5642,27 +5498,7 @@ Run `revdepcheck::cloud_details(, "rsetse")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘separate-peels-quintet.Rmd’
-      ...
-    +     set.vertex.attribute(., "type", value = paste("type", LETTERS[.x])) %> .... [TRUNCATED] 
-    Warning: `set.vertex.attribute()` was deprecated in igraph 2.0.0.
-    ℹ Please use `set_vertex_attr()` instead.
-    
-      When sourcing ‘separate-peels-quintet.R’:
-    Error: ℹ In index: 1.
-    Caused by error in `igraph::graph_from_adjacency_matrix()`:
-    ! Cannot create a graph object because the adjacency matrix contains
-      NAs.
-    Execution halted
-    
-      ‘Categorical-and-continuous-features.Rmd’ using ‘UTF-8’... OK
-      ‘separate-peels-quintet.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Categorical-and-continuous-features.Rmd’ using rmarkdown
@@ -6634,26 +6470,7 @@ Run `revdepcheck::cloud_details(, "tilemaps")` for more info
     Execution halted
     ```
 
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘tilemaps.Rmd’
-      ...
-    +     square = FALSE, flat_topped = TRUE))
-    
-      When sourcing ‘tilemaps.R’:
-    Error: ℹ In argument: `tile_map = generate_map(geometry, square = FALSE,
-      flat_topped = TRUE)`.
-    Caused by error:
-    ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and
-      is now defunct.
-    ℹ Please use the `mode` argument instead.
-    Execution halted
-    
-      ‘tilemaps.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
