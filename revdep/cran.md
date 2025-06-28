@@ -10,8 +10,31 @@ Issues with CRAN packages are summarised below.
 ### New problems
 (This reports the first line of each new failure)
 
+* AnimalHabitatNetwork
+  checking examples ... ERROR
+
+* CITMIC
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
+
+* CoDiNA
+  checking examples ... ERROR
+
 * corpustools
   checking examples ... ERROR
+
+* criticalpath
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
+
+* deepdep
+  checking tests ... ERROR
+
+* DiagrammeR
+  checking examples ... ERROR
+  checking tests ... ERROR
 
 * dosearch
   checking tests ... ERROR
@@ -20,9 +43,23 @@ Issues with CRAN packages are summarised below.
   checking installed package size ... NOTE
 
 * incidentally
-  checking re-building of vignette outputs ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
+
+* intergraph
+  checking tests ... ERROR
+
+* IOHanalyzer
+  checking examples ... ERROR
 
 * klassR
+  checking examples ... ERROR
+
+* manynet
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+* miic
   checking examples ... ERROR
 
 * multinet
@@ -32,23 +69,45 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* netdiffuseR
+* purgeR
   checking examples ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
 
 * remify
   checking tests ... ERROR
+
+* RevEcoR
+  checking running R code from vignettes ... ERROR
+
+* riverconn
+  checking examples ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
+
+* rsetse
+  checking examples ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
 
 * SEMID
   checking examples ... ERROR
   checking tests ... ERROR
 
-* ssifs
+* sharpshootR
   checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
+
+* SpaDES.core
+  checking examples ... ERROR
+  checking tests ... ERROR
 
 * tilemaps
   checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
+
+* timeordered
+  checking examples ... ERROR
 
 ### Failed to check
 
