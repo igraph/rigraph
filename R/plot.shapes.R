@@ -1247,7 +1247,6 @@ mypie <- function(
     getparam("frame.color"),
     length = (nrow(coords))
   )
-  print(vertex.frame.color)
   vertex.size <- rep(getparam("size"), length = nrow(coords))
   vertex.pie <- getparam("pie")
   vertex.pie.color <- getparam("pie.color")
