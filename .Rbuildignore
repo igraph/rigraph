@@ -59,11 +59,11 @@
 ^[\.]?air\.toml$
 ^\.vscode$
 ^CLAUDE\.md$
+^covr$
+^src/*\.gcda$
+^src/*\.gcno$
 ^man/dot-igraph.progress\.Rd$
 ^man/dot-igraph.status\.Rd$
 ^man/dot-extract_constructor_and_modifiers\.Rd$
 ^man/dot-apply_modifiers\.Rd$
 ^man/handle_vertex_type_arg\.Rd$
-^covr$
-^src/*\.gcda$
-^src/*\.gcno$
