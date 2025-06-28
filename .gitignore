@@ -22,3 +22,4 @@ cran
 /rchk
 /src/*.d
 /src/symbols.rds
+/covr
