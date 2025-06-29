@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 77 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 36 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 32 new problems
- * We failed to check 5 packages
+ * We saw 30 new problems
+ * We failed to check 4 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -17,9 +17,6 @@ Issues with CRAN packages are summarised below.
   checking re-building of vignette outputs ... ERROR
 
 * CoDiNA
-  checking examples ... ERROR
-
-* corpustools
   checking examples ... ERROR
 
 * criticalpath
@@ -86,7 +83,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
 
 * mwcsr
-  checking examples ... ERROR
   checking tests ... ERROR
 
 * purgeR
@@ -103,10 +99,6 @@ Issues with CRAN packages are summarised below.
 * rsetse
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
-
-* SEMID
-  checking examples ... ERROR
-  checking tests ... ERROR
 
 * sharpshootR
   checking examples ... ERROR
@@ -126,6 +118,5 @@ Issues with CRAN packages are summarised below.
 
 * bnlearn   (NA)
 * datapack  (NA)
-* multinma  (NA)
 * RSP       (NA)
 * streamDAG (NA)
