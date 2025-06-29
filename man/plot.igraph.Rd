@@ -16,6 +16,7 @@
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
   mark.border = rainbow(length(mark.groups), alpha = 1),
   mark.expand = 15,
+  mark.lwd = 1,
   loop.size = 1,
   ...
 )
@@ -55,6 +56,11 @@ drawn.}
 
 \item{mark.expand}{A numeric scalar or vector, the size of the border around
 the marked vertex groups. It is in the same units as the vertex sizes. If a
+vector is given, then different values are used for the different vertex
+groups.}
+
+\item{mark.lwd}{A numeric scalar or vector, the linewidth of the border around
+the marked vertex groups.  If a
 vector is given, then different values are used for the different vertex
 groups.}
 
