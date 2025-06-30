@@ -1586,8 +1586,8 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
     cli::cli_abort("{.arg d} should contain at least two columns")
   }
 
-  ## Handle if some elements are 'NA'
-  ensure_no_na(d, "edge data frame")
+  ## Handle if some elements are 'NA' (first two columns are interpreted as from/to)
+  ensure_no_na(d[, c(1,2)], "edge data frame")
 
   if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
     cli::cli_warn(
