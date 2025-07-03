@@ -225,6 +225,13 @@
 #'
 #'   The default value is `black`.
 #' }
+#' \item{label.angle}{
+#'   The rotation of the vertex labels, in degrees. Corresponds to the `srt` parameter of [graphics::text()].
+#' }
+#' \item{label.adj}{
+#'   one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also `adj` in [graphics::text()].
+#' }
+
 #' \item{size.scaling}{
 #'   Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 #'   If FALSE, `vertex.size` and `vertex.size2` are used as is.
@@ -4847,6 +4854,8 @@ i.vertex.default <- list(
   label.family = "serif",
   label.font = 1,
   label.cex = 1,
+  label.angle = 0,
+  label.adj = NULL,
   frame.color = "black",
   frame.width = 1,
   shape = "circle",

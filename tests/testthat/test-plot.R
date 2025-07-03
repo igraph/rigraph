@@ -132,7 +132,26 @@ test_that("Edges stop at outside of rectangle node", {
   vdiffr::expect_doppelganger("rectangle-edges", rectangle_edges)
 })
 
+test_that("Vertex label rotation works", {
+  skip_if_not_installed("vdiffr")
+
+  label_rotate <- function() {
+    g <- make_ring(5, directed = FALSE, circular = FALSE)
+    V(g)$label <- c("AAAAA", "BBBBB", "CCCCC","DDDDD", "EEEEE")
+    g$layout <- cbind(1:5, rep(1, 5))
+    plot(
+      g,
+      vertex.label.angle = c(90, 90, 270, 270, 90),
+      vertex.label.adj = c(1.1,0.5)
+    )
+  }
+
+  vdiffr::expect_doppelganger("label-rotate", label_rotate)
+})
+          
 test_that("Arrow drawing works correctly", {
+  skip_if_not_installed("vdiffr")
+
   standard_arrow <- function() {
     g <- make_graph(c(1, 2, 1, 3, 2, 4), directed = TRUE)
     g$layout <- cbind(1:4, rep(0, 4))
