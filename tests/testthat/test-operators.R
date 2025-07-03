@@ -30,7 +30,7 @@ test_that("disjoint_union() works", {
   )
 })
 
-test_that("disjoint_union() does not convert types", {
+test_that("disjoint_union() does not convert edge types", {
   # https://github.com/igraph/rigraph/issues/761
 
   g1 <- make_graph(~ A - -B)
@@ -42,6 +42,28 @@ test_that("disjoint_union() does not convert types", {
   u <- disjoint_union(g1, g2)
 
   expect_s3_class(E(u)$date, c("POSIXct", "POSIXt"))
+})
+
+test_that("disjoint_union() does not convert vertex types", {
+  # https://github.com/igraph/rigraph/issues/1640
+
+  g1 <- make_graph(~ B --C, C --D)
+  g2 <- make_graph(~ A --G, E --F)
+
+  g1 <- set_vertex_attr(
+    g1,
+    "date",
+    value = as.POSIXct(c("2021-01-01 01:01:01", "2022-02-02 02:02:02", "2023-03-03 03:03:03"))
+  )
+  g2 <- set_vertex_attr(
+    g2,
+    "date",
+    value = as.POSIXct(c("2021-03-03 03:03:03", "2022-04-04 04:04:04", "2023-05-05 05:05:05", "2024-06-06 06:06:06"))
+  )
+
+  u <- disjoint_union(g1, g2)
+
+  expect_s3_class(vertex_attr(u, "date"), c("POSIXct", "POSIXt"))
 })
 
 test_that("intersection() works", {
