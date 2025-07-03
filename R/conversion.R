@@ -1587,7 +1587,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   }
 
   ## Handle if some elements are 'NA' (first two columns are interpreted as from/to)
-  ensure_no_na(d[, c(1,2)], "edge data frame")
+  ensure_no_na(d[, 1:2], "edge data frame")
 
   if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
     cli::cli_warn(
