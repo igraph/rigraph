@@ -356,7 +356,7 @@ This is not very surprising, it is the expected behavior.
 Gives the angle in radians for plotting loop edges.
 See the \code{label.dist} vertex parameter to see how this is interpreted.
 
-The default value is NA. This means that the loop edges will be drawn in the largest gap possible.
+The default value is NULL. This means that the loop edges will be drawn automatically in the largest gap possible.
 }
 \item{loop.angle2}{
 Gives the second angle in radians for plotting loop edges.
