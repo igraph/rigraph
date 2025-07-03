@@ -15,11 +15,11 @@ runs:
       shell: bash
 
     - name: Install air
-      if: ${{ steps.check.outputs.scope }}
+      if: ${{ steps.check.outputs.enabled == 'true' }}
       uses: posit-dev/setup-air@v1
 
     - name: Run air
-      if: ${{ steps.check.outputs.scope }}
+      if: ${{ steps.check.outputs.enabled == 'true' }}
       run: |
         air format .
       shell: bash
