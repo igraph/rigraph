@@ -445,6 +445,13 @@ EDGE_TYPE_SW:
         %I% <- switch(igraph.match.arg(%I%),
           "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
 
+GRAPH_PRODUCT_TYPE:
+    DEFAULT:
+        CARTESIAN: c("cartesian", "tensor")
+        TENSOR: c("tensor", "cartesian")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "cartesian"=0L, "tensor"=1L)
+
 RANDOM_TREE_METHOD:
     DEFAULT:
         PRUFER: c("prufer", "lerw")
