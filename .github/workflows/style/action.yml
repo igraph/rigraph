@@ -22,4 +22,4 @@ runs:
       if: ${{ steps.check.outputs.scope }}
       run: |
         air format .
-      shell: Rscript {0}
+      shell: bash
