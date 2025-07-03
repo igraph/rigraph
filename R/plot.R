@@ -57,6 +57,10 @@
 #'   the marked vertex groups. It is in the same units as the vertex sizes. If a
 #'   vector is given, then different values are used for the different vertex
 #'   groups.
+#' @param mark.lwd A numeric scalar or vector, the linewidth of the border around
+#'   the marked vertex groups.  If a
+#'   vector is given, then different values are used for the different vertex
+#'   groups.
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
@@ -92,6 +96,7 @@ plot.igraph <- function(
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
   mark.border = rainbow(length(mark.groups), alpha = 1),
   mark.expand = 15,
+  mark.lwd = 1,
   loop.size = 1,
   ...
 ) {
@@ -112,6 +117,8 @@ plot.igraph <- function(
   label.degree <- params("vertex", "label.degree")
   label.color <- params("vertex", "label.color")
   label.dist <- params("vertex", "label.dist")
+  label.angle <- params("vertex", "label.angle")
+  label.adj <- params("vertex", "label.adj")
   labels <- params("vertex", "label")
   shape <- igraph.check.shapes(params("vertex", "shape"))
 
@@ -252,6 +259,7 @@ plot.igraph <- function(
   mark.border <- rep(mark.border, length.out = length(mark.groups))
   mark.col <- rep(mark.col, length.out = length(mark.groups))
   mark.expand <- rep(mark.expand, length.out = length(mark.groups))
+  mark.lwd <- rep(mark.lwd, length.out = length(mark.groups))
 
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
@@ -267,7 +275,8 @@ plot.igraph <- function(
       expand.by = mark.expand[g] / 200,
       shape = mark.shape[g],
       col = mark.col[g],
-      border = mark.border[g]
+      border = mark.border[g],
+      border.lwd = mark.lwd[g]
     )
   }
 
@@ -799,30 +808,39 @@ plot.igraph <- function(
   y <- layout[, 2] +
     label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)) / 200
   if (vc > 0) {
-    if (length(label.family) == 1) {
-      text(
-        x,
-        y,
-        labels = labels,
-        col = label.color,
-        family = label.family,
-        font = label.font,
-        cex = label.cex
-      )
-    } else {
-      if1 <- function(vect, idx) if (length(vect) == 1) vect else vect[idx]
-      sapply(seq_len(vcount(graph)), function(v) {
+    label.col <- rep(label.color, length.out = vc)
+    label.fam <- rep(label.family, length.out = vc)
+    label.fnt <- rep(label.font, length.out = vc)
+    label.cex <- rep(label.cex, length.out = vc)
+    label.ang <- rep(label.angle, length.out = vc)
+    label.adj <- rep(list(label.adj), length.out = vc)
+    label.text <- rep(labels, length.out = vc)
+
+    # Draw vertex labels
+    invisible(mapply(
+      function(x0, y0, lbl, col, fam, fnt, cex, srt, adj) {
         text(
-          x[v],
-          y[v],
-          labels = if1(labels, v),
-          col = if1(label.color, v),
-          family = if1(label.family, v),
-          font = if1(label.font, v),
-          cex = if1(label.cex, v)
+          x0,
+          y0,
+          labels = lbl,
+          col = col,
+          family = fam,
+          font = fnt,
+          cex = cex,
+          srt = srt,
+          adj = adj
         )
-      })
-    }
+      },
+      x,
+      y,
+      label.text,
+      label.col,
+      label.fam,
+      label.fnt,
+      label.cex,
+      label.ang,
+      label.adj
+    ))
   }
   rm(x, y)
   invisible(NULL)
@@ -1851,7 +1869,8 @@ igraph.polygon <- function(
   expand.by = 15 / 200,
   shape = 1 / 2,
   col = "#ff000033",
-  border = NA
+  border = NA,
+  border.lwd = 1
 ) {
   by <- expand.by
   pp <- rbind(
@@ -1863,5 +1882,13 @@ igraph.polygon <- function(
   )
 
   cl <- convex_hull(pp)
-  xspline(cl$rescoords, shape = shape, open = FALSE, col = col, border = border)
+
+  xspline(
+    cl$rescoords,
+    shape = shape,
+    open = FALSE,
+    col = col,
+    border = border,
+    lwd = border.lwd
+  )
 }

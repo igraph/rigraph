@@ -160,6 +160,23 @@ test_that("Multi loops are arranged correctly", {
   vdiffr::expect_doppelganger("multi-loops-many", multi_loops_many)
 })
 
+test_that("Vertex label rotation works", {
+  skip_if_not_installed("vdiffr")
+
+  label_rotate <- function() {
+    g <- make_ring(5, directed = FALSE, circular = FALSE)
+    V(g)$label <- c("AAAAA", "BBBBB", "CCCCC","DDDDD", "EEEEE")
+    g$layout <- cbind(1:5, rep(1, 5))
+    plot(
+      g,
+      vertex.label.angle = c(90, 90, 270, 270, 90),
+      vertex.label.adj = c(1.1,0.5)
+    )
+  }
+
+  vdiffr::expect_doppelganger("label-rotate", label_rotate)
+})
+          
 test_that("Arrow drawing works correctly", {
   skip_if_not_installed("vdiffr")
 
@@ -183,4 +200,27 @@ test_that("Arrow drawing works correctly", {
     plot(g, edge.arrow.size = c(1,2,3))
   }
   vdiffr::expect_doppelganger("standard-arrow-sizes", standard_arrow_sizes)
+})
+
+test_that("mark border linewidth", {
+  skip_if_not_installed("vdiffr")
+  mark_border_lwd <- function() {
+    g <- make_full_graph(4, directed = FALSE)
+    V(g)$x <- c(1, 2, 2, 1)
+    V(g)$y <- c(1, 1, 2, 2)
+    wc <- cluster_walktrap(g)
+    plot(
+      wc,
+      g,
+      vertex.label = NA,
+      vertex.size = 20,
+      mark.shape = 0,
+      edge.width = 0.1,
+      mark.expand = 40,
+      mark.lwd = 5,
+      margin = 1
+    )
+  }
+
+  vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
