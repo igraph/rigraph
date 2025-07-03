@@ -3,3 +3,5 @@
 /config.h
 /config.h.in~
 /Makevars
+*.gcda
+*.gcno
