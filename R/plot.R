@@ -431,7 +431,8 @@ plot.igraph <- function(
       arr.w = arr.w,
       lab.x,
       lab.y,
-      loopSize = loop.size
+      loopSize = loop.size,
+      narrowing = 1
     ) {
       rad <- angle
       center <- c(cx, cy)
@@ -440,22 +441,23 @@ plot.igraph <- function(
           x0,
           y0,
           x0 + .4 * loopSize,
-          y0 + .2 * loopSize,
+          y0 + narrowing * .2 * loopSize,
           x0 + .4 * loopSize,
-          y0 - .2 * loopSize,
+          y0 - narrowing * .2 * loopSize,
           x0,
           y0
         ),
         ncol = 2,
         byrow = TRUE
       )
-      phi <- atan2(cp[, 2] - center[2], cp[, 1] - center[1])
-      r <- sqrt((cp[, 1] - center[1])**2 + (cp[, 2] - center[2])**2)
+      cp_centered <- cp -
+        matrix(rep(center, each = nrow(cp)), ncol = 2, byrow = FALSE)
 
-      phi <- phi + rad
+      rotation_matrix <- matrix(c(cos(rad), -sin(rad), sin(rad), cos(rad)), ncol = 2)
+      cp_rotated <- t(rotation_matrix %*% t(cp_centered))
 
-      cp[, 1] <- cx + r * cos(phi)
-      cp[, 2] <- cy + r * sin(phi)
+      cp <- cp_rotated +
+        matrix(rep(center, each = nrow(cp_rotated)), ncol = 2, byrow = FALSE)
 
       if (is.na(width)) {
         width <- 1
@@ -473,16 +475,13 @@ plot.igraph <- function(
       )
 
       if (is.language(label) || !is.na(label)) {
-        lx <- x0 + .3
-        ly <- y0
-        phi <- atan2(ly - center[2], lx - center[1])
-        r <- sqrt((lx - center[1])**2 + (ly - center[2])**2)
+        # Get midpoint of the Bezier curve for label placement
+        p <- compute.bezier(cp, 50)
+        mid_index <- floor(ncol(p) / 2)
+        lx <- p[1, mid_index]
+        ly <- p[2, mid_index]
 
-        phi <- phi + rad
-
-        lx <- cx + r * cos(phi)
-        ly <- cy + r * sin(phi)
-
+        # Override if label position explicitly given
         if (!is.na(lab.x)) {
           lx <- lab.x
         }
@@ -547,8 +546,82 @@ plot.igraph <- function(
       lcex <- lcex[loops.e]
     }
 
-    xx0 <- layout[loops.v, 1] + cos(la) * vs
-    yy0 <- layout[loops.v, 2] - sin(la) * vs
+    # For each loop, assign unique angle within largest gap (flower petal style)
+    # depending on the number of loops and the available angular space
+    la_dyn <- numeric(length(loops.v))
+    narrowing <- numeric(length(loops.v))
+
+    loop_table <- table(loops.v)
+    loop_idx <- ave(seq_along(loops.v), loops.v, FUN = seq_along)
+
+    for (v in unique(loops.v)) {
+      idx <- which(loops.v == v)
+      n_loops <- length(idx)
+
+      incident_edges <- incident(graph, v, mode = "all")
+      incident_edges <- incident_edges[!which_loop(graph)[incident_edges]]
+
+      if (length(incident_edges) == 0) {
+        # Full circle available if no edges
+        loop_angles <- seq(0, 2 * pi, length.out = n_loops + 1)[-1]
+        gap_span <- 2 * pi
+      } else {
+        angles <- sapply(incident_edges, function(e) {
+          ends_e <- ends(graph, e, names = FALSE)
+          other <- if (as.numeric(ends_e[1]) == v) {
+            as.numeric(ends_e[2])
+          } else {
+            as.numeric(ends_e[1])
+          }
+          dx <- layout[other, 1] - layout[v, 1]
+          dy <- layout[other, 2] - layout[v, 2]
+          atan2(dy, dx)
+        })
+
+        angles <- (angles + 2 * pi) %% (2 * pi)
+        angles <- sort(angles)
+        gaps <- diff(c(angles, angles[1] + 2 * pi))
+        max_gap_index <- which.max(gaps)
+
+        gap_start <- angles[max_gap_index]
+        gap_span <- gaps[max_gap_index]
+        gap_end <- (gap_start + gap_span) %% (2 * pi)
+
+        # Generate loop angles spaced inside the gap
+        if (gap_end > gap_start) {
+          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+            -c(1, n_loops + 2)
+          ]
+        } else {
+          # wrap around
+          gap_end <- gap_end + 2 * pi
+          loop_angles <- seq(gap_start, gap_end, length.out = n_loops + 2)[
+            -c(1, n_loops + 2)
+          ] %%
+            (2 * pi)
+        }
+      }
+
+      la_dyn[idx] <- loop_angles
+
+      # Compute narrowing factor based on angular space
+      angle_per_loop <- gap_span / n_loops
+      # Scale narrowing between 1 (wide) and ~0.2 (tight)
+      narrowing_factor <- pmin(1, pmax(0.2, angle_per_loop / (pi / 4))) # full width if ≥45°, compress below
+      narrowing[idx] <- narrowing_factor
+    }
+    if (is.null(la)) {
+      la <- rep(NA, length(loops.v))
+    }
+
+    la[is.na(la)] <- la_dyn[is.na(la)]
+
+    adjusted_loop_size <- rep(loop.size, length(loops.v))
+
+    r_offset <- 0
+    xx0 <- layout[loops.v, 1] + cos(la) * r_offset
+    yy0 <- layout[loops.v, 2] + sin(la) * r_offset
+
     mapply(
       loop,
       xx0,
@@ -566,7 +639,9 @@ plot.igraph <- function(
       arrow.size = asize,
       arr.w = arrow.width,
       lab.x = loop.labx,
-      lab.y = loop.laby
+      lab.y = loop.laby,
+      loopSize = adjusted_loop_size,
+      narrowing = narrowing
     )
   }
 
