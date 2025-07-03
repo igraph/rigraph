@@ -4,7 +4,7 @@
 PYTHON ?= python3
 PYVENV ?= .venv
 STIMULUS ?= $(PYVENV)/bin/stimulus
-DOCKER ?= docker run --rm --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/rig-ubuntu-igraph:main
+DOCKER ?= docker run --rm --platform linux/amd64 -v $$(pwd):/root/workspace ghcr.io/cynkra/docker-images/rig-ubuntu-igraph
 
 all: pre_build
 

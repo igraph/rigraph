@@ -9071,6 +9071,36 @@ SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
 }
 
 /*-------------------------------------------/
+/ igraph_product                             /
+/-------------------------------------------*/
+SEXP R_igraph_product(SEXP g1, SEXP g2, SEXP type) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_t c_g1;
+  igraph_t c_g2;
+  igraph_product_t c_type;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(g1, &c_g1);
+  R_SEXP_to_igraph(g2, &c_g2);
+  c_type = (igraph_product_t) Rf_asInteger(type);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_product(&c_res, &c_g1, &c_g2, c_type));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_gomory_hu_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_gomory_hu_tree(SEXP graph, SEXP capacity) {
