@@ -284,6 +284,7 @@ extern SEXP R_igraph_largest_cliques(SEXP);
 extern SEXP R_igraph_largest_independent_vertex_sets(SEXP);
 extern SEXP R_igraph_largest_weighted_cliques(SEXP, SEXP);
 extern SEXP R_igraph_lastcit_game(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_layout_align(SEXP, SEXP);
 extern SEXP R_igraph_layout_bipartite(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_circle(SEXP, SEXP);
 extern SEXP R_igraph_layout_davidson_harel(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -743,6 +744,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_largest_independent_vertex_sets",            (DL_FUNC) &R_igraph_largest_independent_vertex_sets,             1},
     {"R_igraph_largest_weighted_cliques",                   (DL_FUNC) &R_igraph_largest_weighted_cliques,                    2},
     {"R_igraph_lastcit_game",                               (DL_FUNC) &R_igraph_lastcit_game,                                5},
+    {"R_igraph_layout_align",                               (DL_FUNC) &R_igraph_layout_align,                                2},
     {"R_igraph_layout_bipartite",                           (DL_FUNC) &R_igraph_layout_bipartite,                            5},
     {"R_igraph_layout_circle",                              (DL_FUNC) &R_igraph_layout_circle,                               2},
     {"R_igraph_layout_davidson_harel",                      (DL_FUNC) &R_igraph_layout_davidson_harel,                      11},

@@ -2472,6 +2472,18 @@ layout_umap_compute_weights_impl <- function(graph, distances, weights) {
   res
 }
 
+layout_align_impl <- function(graph, layout) {
+  # Argument checks
+  ensure_igraph(graph)
+  layout[] <- as.numeric(layout)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_layout_align, graph, layout)
+
+  res
+}
+
 similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
