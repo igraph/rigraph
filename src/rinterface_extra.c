@@ -3180,6 +3180,7 @@ void R_igraph_sirlist_destroy(igraph_vector_ptr_t *sl) {
   igraph_integer_t n=igraph_vector_ptr_size(sl);
   for (igraph_integer_t i=0; i<n; i++) {
     igraph_sir_t *sir=VECTOR(*sl)[i];
+    if (sir == NULL) continue;
     igraph_vector_destroy(&sir->times);
     igraph_vector_int_destroy(&sir->no_s);
     igraph_vector_int_destroy(&sir->no_i);

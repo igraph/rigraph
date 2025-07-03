@@ -159,3 +159,28 @@ test_that("Multi loops are arranged correctly", {
 
   vdiffr::expect_doppelganger("multi-loops-many", multi_loops_many)
 })
+
+test_that("Arrow drawing works correctly", {
+  skip_if_not_installed("vdiffr")
+
+  standard_arrow <- function() {
+    g <- make_graph(c(1, 2, 1, 3, 2, 4), directed = TRUE)
+    g$layout <- cbind(1:4, rep(0, 4))
+    plot(g)
+  }
+  vdiffr::expect_doppelganger("standard-arrow", standard_arrow)
+
+  standard_arrow_modes <- function() {
+    g <- make_graph(c(1, 2, 2, 3, 3, 4), directed = TRUE)
+    g$layout <- cbind(1:4, rep(0, 4))
+    plot(g, edge.arrow.mode = c(1,2,3))
+  }
+  vdiffr::expect_doppelganger("standard-arrow-modes", standard_arrow_modes)
+
+  standard_arrow_sizes <- function() {
+    g <- make_graph(c(1, 2, 2, 3, 3, 4), directed = TRUE)
+    g$layout <- cbind(1:4, rep(0, 4))
+    plot(g, edge.arrow.size = c(1,2,3))
+  }
+  vdiffr::expect_doppelganger("standard-arrow-sizes", standard_arrow_sizes)
+})

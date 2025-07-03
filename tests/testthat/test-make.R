@@ -450,3 +450,9 @@ test_that("graph is updated if in LHS", {
   E(g)[1:5]$weight <- 0
   expect_equal(E(g)$weight, c(rep(0, 5), 6:10))
 })
+
+test_that("graph_from_lcf() works", {
+  g1 <- graph_from_lcf(shifts = c(5L, -5L), n = 12L, repeats = 6L)
+  g2 <- make_graph("Franklin")
+  expect_isomorphic(g1, g2)
+})

@@ -127,8 +127,8 @@ plot.igraph <- function(
   edge.label.color <- params("edge", "label.color")
   elab.x <- params("edge", "label.x")
   elab.y <- params("edge", "label.y")
-  arrow.size <- params("edge", "arrow.size")[1]
-  arrow.width <- params("edge", "arrow.width")[1]
+  arrow.size <- params("edge", "arrow.size")
+  arrow.width <- params("edge", "arrow.width")
   curved <- params("edge", "curved")
   if (is.function(curved)) {
     curved <- curved(graph)
@@ -233,7 +233,8 @@ plot.igraph <- function(
       graph,
       list(
         vertex.size = 1 / 200 * vertex.size,
-        vertex.size2 = 1 / 200 * params("vertex", "size2")
+        vertex.size2 = 1 / 200 * params("vertex", "size2"),
+        ...
       )
     )
     vertex.size <- 1 / 200 * vertex.size
@@ -734,6 +735,7 @@ plot.igraph <- function(
     if (length(efam) > 1) {
       efam <- efam[nonloops.e]
     }
+
     efon <- edge.label.font
     if (length(efon) > 1) {
       efon <- efon[nonloops.e]
@@ -742,16 +744,32 @@ plot.igraph <- function(
     if (length(ecex) > 1) {
       ecex <- ecex[nonloops.e]
     }
+    en <- length(nonloops.e)
+    ecol <- rep(ecol, length.out = en)
+    efam <- rep(efam, length.out = en)
+    efon <- rep(efon, length.out = en)
+    ecex <- rep(ecex, length.out = en)
 
-    text(
+    invisible(mapply(
+      function(x, y, label, col, family, font, cex) {
+        text(
+          x,
+          y,
+          labels = label,
+          col = col,
+          family = family,
+          font = font,
+          cex = cex
+        )
+      },
       lc.x,
       lc.y,
-      labels = edge.labels,
-      col = ecol,
-      family = efam,
-      font = efon,
-      cex = ecex
-    )
+      edge.labels,
+      ecol,
+      efam,
+      efon,
+      ecex
+    ))
   }
 
   rm(x0, y0, x1, y1)
@@ -1668,204 +1686,163 @@ rglplot.igraph <- function(x, ...) {
 # slightly modified: code argument added
 
 #' @importFrom graphics par xyinch segments xspline lines polygon
-igraph.Arrows <-
-  function(
-    x1,
-    y1,
-    x2,
-    y2,
-    code = 2,
-    size = 1,
-    width = 1.2 / 4 / cin,
-    open = TRUE,
-    sh.adj = 0.1,
-    sh.lwd = 1,
-    sh.col = par("fg"),
-    sh.lty = 1,
-    h.col = sh.col,
-    h.col.bo = sh.col,
-    h.lwd = sh.lwd,
-    h.lty = sh.lty,
-    curved = FALSE
-  ) {
-    ## Author: Andreas Ruckstuhl, refined by Rene Locher
-    ## Version: 2005-10-17
-    cin <- size * par("cin")[2]
-    width <- width * (1.2 / 4 / cin)
-    uin <- 1 / xyinch()
+# Vectorized and modular igraph.Arrows refactor
+igraph.Arrows <- function(
+  x1,
+  y1,
+  x2,
+  y2,
+  code = 2,
+  size = 1,
+  width = 1.2 / 4 / par("cin")[2],
+  open = TRUE,
+  sh.adj = 0.1,
+  sh.lwd = 1,
+  sh.col = par("fg"),
+  sh.lty = 1,
+  h.col = sh.col,
+  h.col.bo = sh.col,
+  h.lwd = sh.lwd,
+  h.lty = sh.lty,
+  curved = FALSE
+) {
+  n <- length(x1)
+
+  recycle <- function(x) rep(x, length.out = n)
+
+  x1 <- recycle(x1)
+  y1 <- recycle(y1)
+  x2 <- recycle(x2)
+  y2 <- recycle(y2)
+  size <- recycle(size)
+  width <- recycle(width)
+  curved <- recycle(curved)
+  sh.lwd <- recycle(sh.lwd)
+  sh.col <- recycle(sh.col)
+  sh.lty <- recycle(sh.lty)
+  h.col <- recycle(h.col)
+  h.col.bo <- recycle(h.col.bo)
+  h.lwd <- recycle(h.lwd)
+  h.lty <- recycle(h.lty)
+
+  uin <- 1 / xyinch()
+
+  label_x <- numeric(n)
+  label_y <- numeric(n)
+
+  for (i in seq_len(n)) {
+    cin <- size[i] * par("cin")[2]
+    w <- width[i] * (1.2 / 4 / cin)
+    delta <- sqrt(h.lwd[i]) * par("cin")[2] * 0.005
+
+    # Arrowhead shape
     x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
-    delta <- sqrt(h.lwd) * par("cin")[2] * 0.005 ## has been 0.05
     x.arr <- c(-rev(x), -x)
-    wx2 <- width * x^2
+    wx2 <- w * x^2
     y.arr <- c(-rev(wx2 + delta), wx2 + delta)
     deg.arr <- c(atan2(y.arr, x.arr), NA)
     r.arr <- c(sqrt(x.arr^2 + y.arr^2), NA)
 
-    ## backup
-    bx1 <- x1
-    bx2 <- x2
-    by1 <- y1
-    by2 <- y2
+    theta1 <- atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
+    theta2 <- atan2((y2[i] - y1[i]) * uin[2], (x2[i] - x1[i]) * uin[1])
+    r.seg <- cin * sh.adj
 
-    ## shaft
-    lx <- length(x1)
-    r.seg <- rep(cin * sh.adj, lx)
-    theta1 <- atan2((y1 - y2) * uin[2], (x1 - x2) * uin[1])
-    th.seg1 <- theta1 + rep(atan2(0, -cin), lx)
-    theta2 <- atan2((y2 - y1) * uin[2], (x2 - x1) * uin[1])
-    th.seg2 <- theta2 + rep(atan2(0, -cin), lx)
     x1d <- y1d <- x2d <- y2d <- 0
     if (code %in% c(1, 3)) {
-      x2d <- r.seg * cos(th.seg2) / uin[1]
-      y2d <- r.seg * sin(th.seg2) / uin[2]
+      x2d <- r.seg * cos(theta2) / uin[1]
+      y2d <- r.seg * sin(theta2) / uin[2]
     }
     if (code %in% c(2, 3)) {
-      x1d <- r.seg * cos(th.seg1) / uin[1]
-      y1d <- r.seg * sin(th.seg1) / uin[2]
+      x1d <- r.seg * cos(theta1) / uin[1]
+      y1d <- r.seg * sin(theta1) / uin[2]
     }
-    if (
-      is.logical(curved) && all(!curved) || is.numeric(curved) && all(!curved)
-    ) {
+
+    sx1 <- x1[i] + x1d
+    sy1 <- y1[i] + y1d
+    sx2 <- x2[i] + x2d
+    sy2 <- y2[i] + y2d
+
+    if (!curved[i]) {
       segments(
-        x1 + x1d,
-        y1 + y1d,
-        x2 + x2d,
-        y2 + y2d,
-        lwd = sh.lwd,
-        col = sh.col,
-        lty = sh.lty
+        sx1,
+        sy1,
+        sx2,
+        sy2,
+        lwd = sh.lwd[i],
+        col = sh.col[i],
+        lty = sh.lty[i]
       )
-      phi <- atan2(y1 - y2, x1 - x2)
-      r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
-      lc.x <- x2 + 2 / 3 * r * cos(phi)
-      lc.y <- y2 + 2 / 3 * r * sin(phi)
+      phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
+      r <- sqrt((x1[i] - x2[i])^2 + (y1[i] - y2[i])^2)
+      label_x[i] <- x2[i] + 2 / 3 * r * cos(phi)
+      label_y[i] <- y2[i] + 2 / 3 * r * sin(phi)
     } else {
-      if (is.numeric(curved)) {
-        lambda <- curved
-      } else {
-        lambda <- as.logical(curved) * 0.5
+      lambda <- if (is.numeric(curved)) curved[i] else 0.5
+      midx <- (x1[i] + x2[i]) / 2
+      midy <- (y1[i] + y2[i]) / 2
+      spx <- midx - lambda * 1 / 2 * (sy2 - sy1)
+      spy <- midy + lambda * 1 / 2 * (sx2 - sx1)
+
+      spl <- xspline(
+        x = c(sx1, spx, sx2),
+        y = c(sy1, spy, sy2),
+        shape = 1,
+        draw = FALSE
+      )
+      lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+      label_x[i] <- spl$x[round(2 / 3 * length(spl$x))]
+      label_y[i] <- spl$y[round(2 / 3 * length(spl$y))]
+
+      if (code %in% c(2, 3)) {
+        x1[i] <- spl$x[round(3 / 4 * length(spl$x))]
+        y1[i] <- spl$y[round(3 / 4 * length(spl$y))]
       }
-      lambda <- rep(lambda, length.out = length(x1))
-      c.x1 <- x1 + x1d
-      c.y1 <- y1 + y1d
-      c.x2 <- x2 + x2d
-      c.y2 <- y2 + y2d
-
-      midx <- (x1 + x2) / 2
-      midy <- (y1 + y2) / 2
-      spx <- midx - lambda * 1 / 2 * (c.y2 - c.y1)
-      spy <- midy + lambda * 1 / 2 * (c.x2 - c.x1)
-      sh.col <- rep(sh.col, length.out = length(c.x1))
-      sh.lty <- rep(sh.lty, length.out = length(c.x1))
-      sh.lwd <- rep(sh.lwd, length.out = length(c.x1))
-      lc.x <- lc.y <- numeric(length(c.x1))
-
-      for (i in seq_len(length(c.x1))) {
-        ## Straight line?
-        if (lambda[i] == 0) {
-          segments(
-            c.x1[i],
-            c.y1[i],
-            c.x2[i],
-            c.y2[i],
-            lwd = sh.lwd[i],
-            col = sh.col[i],
-            lty = sh.lty[i]
-          )
-          phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
-          r <- sqrt((x1[i] - x2[i])^2 + (y1[i] - y2[i])^2)
-          lc.x[i] <- x2[i] + 2 / 3 * r * cos(phi)
-          lc.y[i] <- y2[i] + 2 / 3 * r * sin(phi)
-        } else {
-          spl <- xspline(
-            x = c(c.x1[i], spx[i], c.x2[i]),
-            y = c(c.y1[i], spy[i], c.y2[i]),
-            shape = 1,
-            draw = FALSE
-          )
-          lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
-          if (code %in% c(2, 3)) {
-            x1[i] <- spl$x[3 * length(spl$x) / 4]
-            y1[i] <- spl$y[3 * length(spl$y) / 4]
-          }
-          if (code %in% c(1, 3)) {
-            x2[i] <- spl$x[length(spl$x) / 4]
-            y2[i] <- spl$y[length(spl$y) / 4]
-          }
-          lc.x[i] <- spl$x[2 / 3 * length(spl$x)]
-          lc.y[i] <- spl$y[2 / 3 * length(spl$y)]
-        }
+      if (code %in% c(1, 3)) {
+        x2[i] <- spl$x[round(1 / 4 * length(spl$x))]
+        y2[i] <- spl$y[round(1 / 4 * length(spl$y))]
       }
     }
 
-    ## forward arrowhead
+    draw_arrowhead <- function(px, py, theta) {
+      px2 <- rep(px, length(deg.arr))
+      py2 <- rep(py, length(deg.arr))
+      ttheta <- rep(theta, length(deg.arr)) + deg.arr
+
+      xhead <- px2 + r.arr * cos(ttheta) / uin[1]
+      yhead <- py2 + r.arr * sin(ttheta) / uin[2]
+
+      if (open) {
+        lines(xhead, yhead, lwd = h.lwd[i], col = h.col.bo[i], lty = h.lty[i])
+      } else {
+        polygon(
+          xhead,
+          yhead,
+          col = h.col[i],
+          lwd = h.lwd[i],
+          border = h.col.bo[i],
+          lty = h.lty[i]
+        )
+      }
+    }
+
     if (code %in% c(2, 3)) {
-      theta <- atan2((by2 - y1) * uin[2], (bx2 - x1) * uin[1])
-      Rep <- rep(length(deg.arr), lx)
-      p.x2 <- rep(bx2, Rep)
-      p.y2 <- rep(by2, Rep)
-      ttheta <- rep(theta, Rep) + rep(deg.arr, lx)
-      r.arr.rep <- rep(r.arr, lx)
-      if (open) {
-        lines(
-          (p.x2 + r.arr.rep * cos(ttheta) / uin[1]),
-          (p.y2 + r.arr.rep * sin(ttheta) / uin[2]),
-          lwd = h.lwd,
-          col = h.col.bo,
-          lty = h.lty
-        )
-      } else {
-        polygon(
-          p.x2 + r.arr.rep * cos(ttheta) / uin[1],
-          p.y2 + r.arr * sin(ttheta) / uin[2],
-          col = h.col,
-          lwd = h.lwd,
-          border = h.col.bo,
-          lty = h.lty
-        )
-      }
+      draw_arrowhead(
+        x2[i],
+        y2[i],
+        atan2((y2[i] - y1[i]) * uin[2], (x2[i] - x1[i]) * uin[1])
+      )
     }
-
-    ## backward arrow head
     if (code %in% c(1, 3)) {
-      x1 <- bx1
-      y1 <- by1
-      tmp <- x1
-      x1 <- x2
-      x2 <- tmp
-      tmp <- y1
-      y1 <- y2
-      y2 <- tmp
-      theta <- atan2((y2 - y1) * uin[2], (x2 - x1) * uin[1])
-      lx <- length(x1)
-      Rep <- rep(length(deg.arr), lx)
-      p.x2 <- rep(x2, Rep)
-      p.y2 <- rep(y2, Rep)
-      ttheta <- rep(theta, Rep) + rep(deg.arr, lx)
-      r.arr.rep <- rep(r.arr, lx)
-
-      if (open) {
-        lines(
-          (p.x2 + r.arr.rep * cos(ttheta) / uin[1]),
-          (p.y2 + r.arr.rep * sin(ttheta) / uin[2]),
-          lwd = h.lwd,
-          col = h.col.bo,
-          lty = h.lty
-        )
-      } else {
-        polygon(
-          p.x2 + r.arr.rep * cos(ttheta) / uin[1],
-          p.y2 + r.arr.rep * sin(ttheta) / uin[2],
-          col = h.col,
-          lwd = h.lwd,
-          border = h.col.bo,
-          lty = h.lty
-        )
-      }
+      draw_arrowhead(
+        x1[i],
+        y1[i],
+        atan2((y1[i] - y2[i]) * uin[2], (x1[i] - x2[i]) * uin[1])
+      )
     }
+  }
 
-    list(lab.x = lc.x, lab.y = lc.y)
-  } # Arrows
+  list(lab.x = label_x, lab.y = label_y)
+}
 
 #' @importFrom graphics xspline
 igraph.polygon <- function(
