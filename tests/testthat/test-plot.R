@@ -176,7 +176,7 @@ test_that("Vertex label rotation works", {
 
   vdiffr::expect_doppelganger("label-rotate", label_rotate)
 })
-          
+
 test_that("Arrow drawing works correctly", {
   skip_if_not_installed("vdiffr")
 
