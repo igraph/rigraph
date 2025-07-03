@@ -23,3 +23,9 @@ runs:
       run: |
         air format .
       shell: bash
+
+    - name: Check Git status
+      if: ${{ steps.check.outputs.enabled == 'true' }}
+      run: |
+        git status
+      shell: bash
