@@ -70,6 +70,7 @@ non-interactive companion of the <code><a href="tkplot.html">tkplot()</a></code>
 <span>  mark.col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mark.groups</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>,</span>
 <span>  mark.border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">mark.groups</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  mark.expand <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  mark.lwd <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  loop.size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -132,6 +133,13 @@ drawn.</p></dd>
 <dt id="arg-mark-expand">mark.expand<a class="anchor" aria-label="anchor" href="#arg-mark-expand"></a></dt>
 <dd><p>A numeric scalar or vector, the size of the border around
 the marked vertex groups. It is in the same units as the vertex sizes. If a
+vector is given, then different values are used for the different vertex
+groups.</p></dd>
+
+
+<dt id="arg-mark-lwd">mark.lwd<a class="anchor" aria-label="anchor" href="#arg-mark-lwd"></a></dt>
+<dd><p>A numeric scalar or vector, the linewidth of the border around
+the marked vertex groups.  If a
 vector is given, then different values are used for the different vertex
 groups.</p></dd>
 
