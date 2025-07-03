@@ -7219,6 +7219,32 @@ SEXP R_igraph_layout_umap_compute_weights(SEXP graph, SEXP distances, SEXP weigh
 }
 
 /*-------------------------------------------/
+/ igraph_layout_align                        /
+/-------------------------------------------*/
+SEXP R_igraph_layout_align(SEXP graph, SEXP layout) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_layout;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_matrix_copy(layout, &c_layout));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_layout);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_layout_align(&c_graph, &c_layout));
+
+                                        /* Convert output */
+  PROTECT(layout=R_igraph_matrix_to_SEXP(&c_layout));
+  igraph_matrix_destroy(&c_layout);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = layout;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_similarity_dice                     /
 /-------------------------------------------*/
 SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
