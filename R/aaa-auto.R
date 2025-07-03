@@ -3960,10 +3960,10 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
+vertex_path_from_edge_path_impl <- function(graph, start=NULL, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
-  start <- as_igraph_vs(graph, start)
+  if (!is.null(start)) start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
     stop("No vertex was specified")
   }

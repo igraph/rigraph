@@ -11758,14 +11758,16 @@ SEXP R_igraph_vertex_path_from_edge_path(SEXP graph, SEXP start, SEXP edge_path,
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_start = (igraph_integer_t) REAL(start)[0];
+  if (!Rf_isNull(start)) {
+    c_start = (igraph_integer_t) REAL(start)[0];
+  }
   R_SEXP_to_vector_int_copy(edge_path, &c_edge_path);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_path);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_path, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_path);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_vertex_path_from_edge_path(&c_graph, c_start, &c_edge_path, &c_vertex_path, c_mode));
+  IGRAPH_R_CHECK(igraph_vertex_path_from_edge_path(&c_graph, (Rf_isNull(start) ? 0 : c_start), &c_edge_path, &c_vertex_path, c_mode));
 
                                         /* Convert output */
   igraph_vector_int_destroy(&c_edge_path);
