@@ -745,6 +745,33 @@ SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
 }
 
 /*-------------------------------------------/
+/ igraph_mycielski_graph                     /
+/-------------------------------------------*/
+SEXP R_igraph_mycielski_graph(SEXP k) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_k;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_mycielski_graph(&c_graph, c_k));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_adjlist                             /
 /-------------------------------------------*/
 SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
@@ -9091,6 +9118,35 @@ SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
   SET_STRING_ELT(r_names, 2, Rf_mkChar("invmap"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_mycielskian                         /
+/-------------------------------------------*/
+SEXP R_igraph_mycielskian(SEXP graph, SEXP k) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_t c_res;
+  igraph_integer_t c_k;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_mycielskian(&c_graph, &c_res, c_k));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);
