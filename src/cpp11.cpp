@@ -350,6 +350,8 @@ extern SEXP R_igraph_mybracket2_copy(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_names(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_set(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket3_set(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_mycielski_graph(SEXP);
+extern SEXP R_igraph_mycielskian(SEXP, SEXP);
 extern SEXP R_igraph_neighborhood(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_graphs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_size(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -810,6 +812,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_mybracket2_names",                           (DL_FUNC) &R_igraph_mybracket2_names,                            3},
     {"R_igraph_mybracket2_set",                             (DL_FUNC) &R_igraph_mybracket2_set,                              4},
     {"R_igraph_mybracket3_set",                             (DL_FUNC) &R_igraph_mybracket3_set,                              5},
+    {"R_igraph_mycielski_graph",                            (DL_FUNC) &R_igraph_mycielski_graph,                             1},
+    {"R_igraph_mycielskian",                                (DL_FUNC) &R_igraph_mycielskian,                                 2},
     {"R_igraph_neighborhood",                               (DL_FUNC) &R_igraph_neighborhood,                                5},
     {"R_igraph_neighborhood_graphs",                        (DL_FUNC) &R_igraph_neighborhood_graphs,                         5},
     {"R_igraph_neighborhood_size",                          (DL_FUNC) &R_igraph_neighborhood_size,                           5},

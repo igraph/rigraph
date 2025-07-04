@@ -189,6 +189,17 @@ lcf_vector_impl <- function(n, shifts, repeats=1) {
   res
 }
 
+mycielski_graph_impl <- function(k) {
+  # Argument checks
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielski_graph, k)
+
+  res
+}
+
 adjlist_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
   # Argument checks
   adjlist <- lapply(adjlist, function(x) as.numeric(x)-1)
@@ -2852,6 +2863,18 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_induced_subgraph_map, graph, vids-1, impl)
+
+  res
+}
+
+mycielskian_impl <- function(graph, k=1) {
+  # Argument checks
+  ensure_igraph(graph)
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielskian, graph, k)
 
   res
 }
