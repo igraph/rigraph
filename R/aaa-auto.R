@@ -2856,11 +2856,11 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   res
 }
 
-product_impl <- function(g1, g2, type=c("cartesian", "tensor")) {
+product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", "tensor")) {
   # Argument checks
   ensure_igraph(g1)
   ensure_igraph(g2)
-  type <- switch(igraph.match.arg(type), "cartesian"=0L, "tensor"=1L)
+  type <- switch(igraph.match.arg(type), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
