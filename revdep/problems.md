@@ -141,94 +141,6 @@ Run `revdepcheck::cloud_details(, "CoDiNA")` for more info
     Execution halted
     ```
 
-# corpustools
-
-<details>
-
-* Version: 0.5.1
-* GitHub: https://github.com/kasperwelbers/corpustools
-* Source code: https://github.com/cran/corpustools
-* Date/Publication: 2023-05-08 09:50:15 UTC
-* Number of recursive dependencies: 77
-
-Run `revdepcheck::cloud_details(, "corpustools")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘corpustools-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: ego_semnet
-    > ### Title: Create an ego network
-    > ### Aliases: ego_semnet
-    > 
-    > ### ** Examples
-    > 
-    > tc = create_tcorpus(c('a b c', 'd e f', 'a d'))
-    > g = semnet(tc, 'token')
-    > 
-    > igraph::get.data.frame(g)
-       from to weight
-    1     b  a    1.0
-    2     c  a    1.0
-    3     d  a    0.5
-    4     a  b    0.5
-    5     c  b    1.0
-    6     a  c    0.5
-    7     b  c    1.0
-    8     a  d    0.5
-    9     e  d    1.0
-    10    f  d    1.0
-    11    d  e    0.5
-    12    f  e    1.0
-    13    d  f    0.5
-    14    e  f    1.0
-    > ## only keep nodes directly connected to given node
-    > g_ego = ego_semnet(g, 'e')
-    > igraph::get.data.frame(g_ego)
-      from to weight
-    1    e  d    1.0
-    2    f  d    1.0
-    3    d  e    0.5
-    4    f  e    1.0
-    5    d  f    0.5
-    6    e  f    1.0
-    > 
-    > ## only keep edges directly connected to given node
-    > g_ego = ego_semnet(g, 'e', only_filter_vertices = FALSE)
-    Error:
-    ! The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-    Backtrace:
-        ▆
-     1. └─corpustools::ego_semnet(g, "e", only_filter_vertices = FALSE)
-     2.   └─igraph::get.edge.ids(g, vp = rbind(ego$x, ego$y))
-     3.     └─igraph::get_edge_ids(...)
-     4.       └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-     5.         └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-     6.           └─lifecycle:::deprecate_stop0(msg)
-     7.             └─rlang::cnd_signal(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.0Mb
-      sub-directories of 1Mb or more:
-        libs   5.5Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 438 marked UTF-8 strings
-    ```
-
 # criticalpath
 
 <details>
@@ -2473,16 +2385,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-06-28 06:41:21] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-06-28 07:57:13] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-06-28 06:41:21] Generating graph of layer mrna for groupA...
-    [25-06-28 06:41:21] Reducing network by WGCNA::pickHardThreshold...
-    [25-06-28 06:41:21] R2 cutoff: 0.65
-    [25-06-28 06:41:22] Cut Threshold: 0.26
+    [25-06-28 07:57:13] Generating graph of layer mrna for groupA...
+    [25-06-28 07:57:13] Reducing network by WGCNA::pickHardThreshold...
+    [25-06-28 07:57:13] R2 cutoff: 0.65
+    [25-06-28 07:57:14] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -3812,13 +3724,8 @@ Run `revdepcheck::cloud_details(, "icmstate")` for more info
     (revision 75632 of texlive-scripts);
     please use a different mirror and/or wait a day or two.
     
-    
-    tlmgr: Remote database at https://mirrors.ibiblio.org/pub/mirrors/CTAN/systems/texlive/tlnet
-    (revision 75624 of the texlive-scripts package)
-    seems to be older than the local installation
-    (revision 75632 of texlive-scripts);
-    please use a different mirror and/or wait a day or two.
-    
+    Warning in system2("tlmgr", args, ...) :
+      running command ''tlmgr' search --file --global '/tikz.sty'' had status 1 and error message 'Function not implemented'
     ! LaTeX Error: File `tikz.sty' not found.
     
     ! Emergency stop.
@@ -3829,28 +3736,16 @@ Run `revdepcheck::cloud_details(, "icmstate")` for more info
     --- failed re-building ‘Overview.Rmd’
     
     --- re-building ‘comparison-with-known-results.Rmd’ using rmarkdown
-    tlmgr: package repository https://ctan.mirrors.hoobly.com/systems/texlive/tlnet (verified)
-    [1/2, ??:??/??:??] install: fp [19k]
-    [2/2, 00:00/00:00] install: pgf [701k]
-    running mktexlsr ...
-    done running mktexlsr.
-    tlmgr: package log updated: /opt/TinyTeX/texmf-var/web2c/tlmgr.log
-    tlmgr: command log updated: /opt/TinyTeX/texmf-var/web2c/tlmgr-commands.log
     
-    tlmgr: Remote database at https://ctan.math.illinois.edu/systems/texlive/tlnet
+    tlmgr: Remote database at https://latex.us/systems/texlive/tlnet
     (revision 75624 of the texlive-scripts package)
     seems to be older than the local installation
     (revision 75632 of texlive-scripts);
     please use a different mirror and/or wait a day or two.
     
-    
-    tlmgr: Remote database at https://mirrors.ibiblio.org/pub/mirrors/CTAN/systems/texlive/tlnet
-    (revision 75624 of the texlive-scripts package)
-    seems to be older than the local installation
-    (revision 75632 of texlive-scripts);
-    please use a different mirror and/or wait a day or two.
-    
-    ! LaTeX Error: File `pgfplots.sty' not found.
+    Warning in system2("tlmgr", args, ...) :
+      running command ''tlmgr' search --file --global '/tikz.sty'' had status 1 and error message 'Function not implemented'
+    ! LaTeX Error: File `tikz.sty' not found.
     
     ! Emergency stop.
     <read *> 
@@ -3861,15 +3756,15 @@ Run `revdepcheck::cloud_details(, "icmstate")` for more info
     
     --- re-building ‘sim_msm.Rmd’ using rmarkdown
     
-    tlmgr: Remote database at https://latex.us/systems/texlive/tlnet
+    tlmgr: Remote database at https://mirror.las.iastate.edu/tex-archive/systems/texlive/tlnet
     (revision 75624 of the texlive-scripts package)
     seems to be older than the local installation
     (revision 75632 of texlive-scripts);
     please use a different mirror and/or wait a day or two.
     
     Warning in system2("tlmgr", args, ...) :
-      running command ''tlmgr' search --file --global '/pgfplots.sty'' had status 1 and error message 'Function not implemented'
-    ! LaTeX Error: File `pgfplots.sty' not found.
+      running command ''tlmgr' search --file --global '/tikz.sty'' had status 1 and error message 'Function not implemented'
+    ! LaTeX Error: File `tikz.sty' not found.
     
     ! Emergency stop.
     <read *> 
@@ -4675,26 +4570,6 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘mwcsr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: virgo_solver
-    > ### Title: Construct a virgo solver
-    > ### Aliases: virgo_solver
-    > 
-    > ### ** Examples
-    > 
-    > data("sgmwcs_small_instance")
-    > approx_vs <- virgo_solver(mst=TRUE, threads = 1)
-    > approx_vs$run_main("-h")
-    Option (* = required)                  Description                            
-    ---------------------                  -----------                            
-    --benchmark, --bm                      Benchmark output file (default: )      
-    -c <Integer>                           Threshold for CPE solver (default: 25) 
-    ```
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
@@ -4704,7 +4579,7 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
       > library(mwcsr)
       > 
       > test_check("mwcsr")
-      [ FAIL 3 | WARN 10 | SKIP 5 | PASS 40 ]
+      [ FAIL 1 | WARN 11 | SKIP 5 | PASS 42 ]
       
       ══ Skipped tests (5) ═══════════════════════════════════════════════════════════
       • No CPLEX available (3): 'test_virgo.R:5:9', 'test_virgo.R:15:9',
@@ -4720,40 +4595,8 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
        2.   └─igraph:::ensure_no_na(d, "edge data frame")
        3.     └─cli::cli_abort(...)
        4.       └─rlang::abort(...)
-      ── Error ('test_virgo.R:48:5'): heuristic virgo_solver works on SGMWCS ─────────
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. ├─mwcsr::solve_mwcsp(solver, sgmwcs_small_instance) at test_virgo.R:48:5
-        2. └─mwcsr:::solve_mwcsp.virgo_solver(solver, sgmwcs_small_instance)
-        3.   └─mwcsr:::solve_sgmwcs(solver, instance, ...)
-        4.     └─mwcsr:::run_solver(...)
-        5.       └─igraph::get.edge.ids(instance, t(edges[, 1:2]))
-        6.         └─igraph::get_edge_ids(...)
-        7.           └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-        8.             └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-        9.               └─lifecycle:::deprecate_stop0(msg)
-       10.                 └─rlang::cnd_signal(...)
-      ── Error ('test_virgo.R:81:5'): heuristic virgo_solver works on SGMWCS ─────────
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. ├─mwcsr::solve_mwcsp(solver, si) at test_virgo.R:81:5
-        2. └─mwcsr:::solve_mwcsp.virgo_solver(solver, si)
-        3.   └─mwcsr:::solve_sgmwcs(solver, instance, ...)
-        4.     └─mwcsr:::run_solver(...)
-        5.       └─igraph::get.edge.ids(instance, t(edges[, 1:2]))
-        6.         └─igraph::get_edge_ids(...)
-        7.           └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-        8.             └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-        9.               └─lifecycle:::deprecate_stop0(msg)
-       10.                 └─rlang::cnd_signal(...)
       
-      [ FAIL 3 | WARN 10 | SKIP 5 | PASS 40 ]
+      [ FAIL 1 | WARN 11 | SKIP 5 | PASS 42 ]
       Error: Test failures
       Execution halted
     ```
@@ -4889,7 +4732,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m3.5s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.0s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -4942,7 +4785,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-error-messages.R..   19 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.3s[0m
+      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.1s[0m
       
       test-remify-methods.R.........    0 tests    
       test-remify-methods.R.........    0 tests    
@@ -5104,7 +4947,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m13.2s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m7.3s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -5174,7 +5017,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.8s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.4s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -5306,7 +5149,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m1.1s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.6s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
@@ -5502,337 +5345,6 @@ Run `revdepcheck::cloud_details(, "rsetse")` for more info
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Categorical-and-continuous-features.Rmd’ using rmarkdown
-    ```
-
-# SEMID
-
-<details>
-
-* Version: 0.4.1
-* GitHub: https://github.com/Lucaweihs/SEMID
-* Source code: https://github.com/cran/SEMID
-* Date/Publication: 2023-07-19 14:00:11 UTC
-* Number of recursive dependencies: 33
-
-Run `revdepcheck::cloud_details(, "SEMID")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘SEMID-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: SEMID-package
-    > ### Title: SEMID package documentation.
-    > ### Aliases: SEMID-package SEMID
-    > 
-    > ### ** Examples
-    > 
-    > ###
-    > # Checking the generic identifiability of parameters in a mixed graph.
-    > ###
-    > 
-    > # Mixed graphs are specified by their directed adjacency matrix L and
-    > # bidirected adjacency matrix O.
-    > L = t(matrix(
-    +  c(0, 1, 1, 0, 0,
-    +    0, 0, 1, 1, 1,
-    +    0, 0, 0, 1, 0,
-    +    0, 0, 0, 0, 1,
-    +    0, 0, 0, 0, 0), 5, 5))
-    > 
-    > O = t(matrix(
-    +  c(0, 0, 0, 1, 0,
-    +    0, 0, 1, 0, 1,
-    +    0, 0, 0, 0, 0,
-    +    0, 0, 0, 0, 0,
-    +    0, 0, 0, 0, 0), 5, 5)); O=O+t(O)
-    > 
-    > # Create a mixed graph object
-    > graph = MixedGraph(L, O)
-    > 
-    > # We can plot what this mixed graph looks like, blue edges are directed
-    > # red edges are bidirected.
-    > plot(graph)
-    > 
-    > # Without using decomposition techniques we can't identify all nodes
-    > # just using the half-trek criterion
-    > htcID(graph, tianDecompose = FALSE)
-    Warning: The `vp` argument of `get_edge_ids()` supplied as a matrix should be a n times
-    2 matrix, not 2 times n as of igraph 2.1.5.
-    ℹ either transpose the matrix with t() or convert it to a data.frame with two
-      columns.
-    ℹ The deprecated feature was likely used in the igraph package.
-      Please report the issue at <https://github.com/igraph/rigraph/issues>.
-    Call: htcID(mixedGraph = graph, tianDecompose = FALSE)
-    
-    Mixed Graph Info.
-    # nodes: 5 
-    # dir. edges: 7 
-    # bi. edges: 3 
-    
-    Generic Identifiability Summary
-    # dir. edges shown gen. identifiable: 1 
-    # bi. edges shown gen. identifiable: 0 
-    
-    Generically identifiable dir. edges:
-    1->2 
-    
-    Generically identifiable bi. edges:
-    None
-    > 
-    > # The edgewiseTSID function can show that all edges are generically
-    > # identifiable without proprocessing with decomposition techniques
-    > edgewiseTSID(graph, tianDecompose = FALSE)
-    Error:
-    ! The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-    Backtrace:
-         ▆
-      1. └─SEMID::edgewiseTSID(graph, tianDecompose = FALSE)
-      2.   └─SEMID::generalGenericID(...)
-      3.     └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-      4.       └─SEMID::trekSeparationIdentifyStep(...)
-      5.         └─mixedGraph$getTrekSystem(sources, c(targets, i), avoidRightEdges = toRemoveOnRight)
-      6.           ├─SEMID::getTrekSystem(this, ...)
-      7.           └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-      8.             └─this$.internalGraph$getTrekSystem(...)
-      9.               ├─SEMID::getTrekSystem(this, ...)
-     10.               └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-     11.                 └─this$.internalGraph$getTrekSystem(...)
-     12.                   ├─SEMID::getTrekSystem(this, ...)
-     13.                   └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-     14.                     └─this$.trekFlowGraph$updateEdgeCapacities(...)
-     15.                       ├─SEMID::updateEdgeCapacities(this, ...)
-     16.                       └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-     17.                         └─igraph::get.edge.ids(...)
-     18.                           └─igraph::get_edge_ids(...)
-     19.                             └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-     20.                               └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-     21.                                 └─lifecycle:::deprecate_stop0(msg)
-     22.                                   └─rlang::cnd_signal(...)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(SEMID)
-      > 
-      > test_check("SEMID")
-      [ FAIL 7 | WARN 11 | SKIP 0 | PASS 965 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test_LatentDigraph.R:67:3'): Single node graph works properly ───────
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. ├─testthat::expect_equal(...) at test_LatentDigraph.R:67:3
-        2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─g$getTrekSystem(1, 1)
-        5.   ├─SEMID::getTrekSystem(this, ...)
-        6.   └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-        7.     └─this$.internalGraph$getTrekSystem(...)
-        8.       ├─SEMID::getTrekSystem(this, ...)
-        9.       └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       10.         └─this$createTrekFlowGraph()
-       11.           ├─SEMID::createTrekFlowGraph(this, ...)
-       12.           └─SEMID:::createTrekFlowGraph.LatentDigraphFixedOrder(this, ...)
-       13.             └─SEMID::FlowGraph(adjMat, 1, adjMat)
-       14.               └─igraph::get.edge.ids(flowGraph, rbind(1:m, 1:m + m))
-       15.                 └─igraph::get_edge_ids(...)
-       16.                   └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       17.                     └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       18.                       └─lifecycle:::deprecate_stop0(msg)
-       19.                         └─rlang::cnd_signal(...)
-      ── Error ('test_ancestral.R:19:17'): Ancestral identification does not identify edges erroneously. ──
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID::ancestralID(g) at test_ancestral.R:19:17
-        2.   └─SEMID::generalGenericID(...)
-        3.     └─SEMID::generalGenericID(...)
-        4.       └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-        5.         └─tianAncGraph$getHalfTrekSystem(allowedNodes, nodeParents)
-        6.           ├─SEMID::getHalfTrekSystem(this, ...)
-        7.           └─SEMID:::getHalfTrekSystem.MixedGraph(this, ...)
-        8.             └─this$getTrekSystem(...)
-        9.               ├─SEMID::getTrekSystem(this, ...)
-       10.               └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-       11.                 └─this$.internalGraph$getTrekSystem(...)
-       12.                   ├─SEMID::getTrekSystem(this, ...)
-       13.                   └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-       14.                     └─this$.internalGraph$getTrekSystem(...)
-       15.                       ├─SEMID::getTrekSystem(this, ...)
-       16.                       └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       17.                         └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       18.                           ├─SEMID::updateEdgeCapacities(this, ...)
-       19.                           └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       20.                             └─igraph::get.edge.ids(...)
-       21.                               └─igraph::get_edge_ids(...)
-       22.                                 └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       23.                                   └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       24.                                     └─lifecycle:::deprecate_stop0(msg)
-       25.                                       └─rlang::cnd_signal(...)
-      ── Error ('test_ancestral.R:44:17'): Old and new ancestralID implementations agree. ──
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID::ancestralID(MixedGraph(L, O)) at test_ancestral.R:44:17
-        2.   └─SEMID::generalGenericID(...)
-        3.     └─SEMID::generalGenericID(...)
-        4.       └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-        5.         └─tianAncGraph$getHalfTrekSystem(allowedNodes, nodeParents)
-        6.           ├─SEMID::getHalfTrekSystem(this, ...)
-        7.           └─SEMID:::getHalfTrekSystem.MixedGraph(this, ...)
-        8.             └─this$getTrekSystem(...)
-        9.               ├─SEMID::getTrekSystem(this, ...)
-       10.               └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-       11.                 └─this$.internalGraph$getTrekSystem(...)
-       12.                   ├─SEMID::getTrekSystem(this, ...)
-       13.                   └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-       14.                     └─this$.internalGraph$getTrekSystem(...)
-       15.                       ├─SEMID::getTrekSystem(this, ...)
-       16.                       └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       17.                         └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       18.                           ├─SEMID::updateEdgeCapacities(this, ...)
-       19.                           └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       20.                             └─igraph::get.edge.ids(...)
-       21.                               └─igraph::get_edge_ids(...)
-       22.                                 └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       23.                                   └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       24.                                     └─lifecycle:::deprecate_stop0(msg)
-       25.                                       └─rlang::cnd_signal(...)
-      ── Error ('test_edgewiseID.R:18:17'): Edgewise identification does not identify edges erroneously. ──
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID::htcID(g) at test_edgewiseID.R:18:17
-        2.   └─SEMID::generalGenericID(mixedGraph, list(htcIdentifyStep), tianDecompose = tianDecompose)
-        3.     └─SEMID::generalGenericID(...)
-        4.       └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-        5.         └─mixedGraph$getHalfTrekSystem(allowedNodes, nodeParents)
-        6.           ├─SEMID::getHalfTrekSystem(this, ...)
-        7.           └─SEMID:::getHalfTrekSystem.MixedGraph(this, ...)
-        8.             └─this$getTrekSystem(...)
-        9.               ├─SEMID::getTrekSystem(this, ...)
-       10.               └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-       11.                 └─this$.internalGraph$getTrekSystem(...)
-       12.                   ├─SEMID::getTrekSystem(this, ...)
-       13.                   └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-       14.                     └─this$.internalGraph$getTrekSystem(...)
-       15.                       ├─SEMID::getTrekSystem(this, ...)
-       16.                       └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       17.                         └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       18.                           ├─SEMID::updateEdgeCapacities(this, ...)
-       19.                           └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       20.                             └─igraph::get.edge.ids(...)
-       21.                               └─igraph::get_edge_ids(...)
-       22.                                 └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       23.                                   └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       24.                                     └─lifecycle:::deprecate_stop0(msg)
-       25.                                       └─rlang::cnd_signal(...)
-      ── Error ('test_edgewiseID.R:44:9'): TO DELETE ─────────────────────────────────
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID::htcID(g, tianDecompose = F) at test_edgewiseID.R:44:9
-        2.   └─SEMID::generalGenericID(mixedGraph, list(htcIdentifyStep), tianDecompose = tianDecompose)
-        3.     └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-        4.       └─mixedGraph$getHalfTrekSystem(allowedNodes, nodeParents)
-        5.         ├─SEMID::getHalfTrekSystem(this, ...)
-        6.         └─SEMID:::getHalfTrekSystem.MixedGraph(this, ...)
-        7.           └─this$getTrekSystem(...)
-        8.             ├─SEMID::getTrekSystem(this, ...)
-        9.             └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-       10.               └─this$.internalGraph$getTrekSystem(...)
-       11.                 ├─SEMID::getTrekSystem(this, ...)
-       12.                 └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-       13.                   └─this$.internalGraph$getTrekSystem(...)
-       14.                     ├─SEMID::getTrekSystem(this, ...)
-       15.                     └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       16.                       └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       17.                         ├─SEMID::updateEdgeCapacities(this, ...)
-       18.                         └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       19.                           └─igraph::get.edge.ids(...)
-       20.                             └─igraph::get_edge_ids(...)
-       21.                               └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       22.                                 └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       23.                                   └─lifecycle:::deprecate_stop0(msg)
-       24.                                     └─rlang::cnd_signal(...)
-      ── Error ('test_lfhtcID.R:8:5'): lfhtcID returns correct value for known examples. ──
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID::lfhtcID(digraphExamples[[i]]$graph) at test_lfhtcID.R:8:5
-        2.   └─SEMID::lfhtcIdentifyStep(...)
-        3.     └─graph$getTrekSystem(...)
-        4.       ├─SEMID::getTrekSystem(this, ...)
-        5.       └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-        6.         └─this$.internalGraph$getTrekSystem(...)
-        7.           ├─SEMID::getTrekSystem(this, ...)
-        8.           └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-        9.             └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       10.               ├─SEMID::updateEdgeCapacities(this, ...)
-       11.               └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       12.                 └─igraph::get.edge.ids(...)
-       13.                   └─igraph::get_edge_ids(...)
-       14.                     └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       15.                       └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       16.                         └─lifecycle:::deprecate_stop0(msg)
-       17.                           └─rlang::cnd_signal(...)
-      ── Error ('test_trekSepID.R:25:17'): Edgewise identification does not identify edges erroneously. ──
-      <lifecycle_error_deprecated/defunctError/rlang_error/error/condition>
-      Error: The `vp` argument of `get_edge_ids()` is not allowed to be a 2 times 2
-      matrix as of igraph 2.1.5.
-      Backtrace:
-           ▆
-        1. └─SEMID (local) trekSepId(MixedGraph(L, O)) at test_trekSepID.R:25:17
-        2.   └─SEMID::generalGenericID(mixedGraph, list(tsIdStep)) at test_trekSepID.R:11:5
-        3.     └─SEMID::generalGenericID(...)
-        4.       └─SEMID (local) idStepFunction(mixedGraph, unsolvedParents, solvedParents, identifier)
-        5.         └─SEMID::trekSeparationIdentifyStep(...) at test_trekSepID.R:8:9
-        6.           └─mixedGraph$getTrekSystem(sources, c(targets, i), avoidRightEdges = toRemoveOnRight)
-        7.             ├─SEMID::getTrekSystem(this, ...)
-        8.             └─SEMID:::getTrekSystem.MixedGraph(this, ...)
-        9.               └─this$.internalGraph$getTrekSystem(...)
-       10.                 ├─SEMID::getTrekSystem(this, ...)
-       11.                 └─SEMID:::getTrekSystem.LatentDigraph(this, ...)
-       12.                   └─this$.internalGraph$getTrekSystem(...)
-       13.                     ├─SEMID::getTrekSystem(this, ...)
-       14.                     └─SEMID:::getTrekSystem.LatentDigraphFixedOrder(this, ...)
-       15.                       └─this$.trekFlowGraph$updateEdgeCapacities(...)
-       16.                         ├─SEMID::updateEdgeCapacities(this, ...)
-       17.                         └─SEMID:::updateEdgeCapacities.FlowGraph(this, ...)
-       18.                           └─igraph::get.edge.ids(...)
-       19.                             └─igraph::get_edge_ids(...)
-       20.                               └─igraph:::el_to_vec(vp, call = rlang::caller_env())
-       21.                                 └─lifecycle::deprecate_stop("2.1.5", "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')")
-       22.                                   └─lifecycle:::deprecate_stop0(msg)
-       23.                                     └─rlang::cnd_signal(...)
-      
-      [ FAIL 7 | WARN 11 | SKIP 0 | PASS 965 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # sharpshootR
