@@ -618,7 +618,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   )
 
   if (!missing(index)) {
-    if (!index_is_natural_sequence(index, graph)) {
+    if (!index_is_natural_sequence(index, graph, type = "vertices")) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -658,7 +658,10 @@ set_value_at <- function(value, idx, length_out) {
     }
   }
 
-  if (!missing(index) && !index_is_natural_sequence(index, graph)) {
+  if (
+    !missing(index) &&
+      !index_is_natural_sequence(index, graph, type = "vertices")
+  ) {
     value <- map(
       value,
       set_value_at,
@@ -869,7 +872,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))
+      !index_is_natural_sequence(index, graph, type = "edges")
   ) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
@@ -900,16 +903,14 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))
+      !index_is_natural_sequence(index, graph, type = "edges")
   ) {
-    es <- E(graph)
-    for (i in seq_along(value)) {
-      tmp <- value[[i]]
-      length(tmp) <- 0
-      length(tmp) <- length(es)
-      tmp[index] <- value[[i]]
-      value[[i]] <- tmp
-    }
+    value <- map(
+      value,
+      set_value_at,
+      idx = index,
+      length_out = length(E(graph))
+    )
   }
 
   .Call(
@@ -1442,6 +1443,12 @@ assert_named_list <- function(value) {
   }
 }
 
-index_is_natural_sequence <- function(index, graph) {
-  length(index) == vcount(graph) && all(index == seq_len(vcount(graph)))
+index_is_natural_sequence <- function(index, graph, type = "vertices") {
+  if (type == "vertices") {
+    length(index) == vcount(graph) && all(index == seq_len(vcount(graph)))
+  } else if (type == "edges") {
+    length(index) == ecount(graph) && all(index == seq_len(ecount(graph)))
+  } else {
+    cli::cli_abort("Unknown type {.arg {type}} for index.")
+  }
 }
