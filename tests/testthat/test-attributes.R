@@ -465,3 +465,11 @@ test_that("good error message when not using character", {
     set_graph_attr(ring, 1, 1)
   })
 })
+
+test_that("duplicated vertex names are handled correctly", {
+  g <- make_empty_graph(4)
+  V(g)$name <- LETTERS[1:4]
+  expect_snapshot(error = TRUE, {
+    add_vertices(g, nv = 2, attr = list(name = c("A", "B")))
+  })
+})
