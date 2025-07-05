@@ -506,6 +506,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   }
 }
 
+
 #' Set vertex attributes
 #'
 #' @param graph The graph.
@@ -525,14 +526,53 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_vertex_attr <- function(graph, name, index = V(graph), value) {
-  check_string(name)
+set_vertex_attr <- function(graph, name, index = V(graph), value, ...) {
+  legacy <- !missing(name) && !missing(value)
 
-  if (is_complete_iterator(index)) {
-    i_set_vertex_attr(graph = graph, name = name, value = value, check = FALSE)
-  } else {
-    i_set_vertex_attr(graph = graph, name = name, index = index, value = value)
+  if (legacy) {
+    if (!is.character(name) || length(name) != 1) {
+      cli::cli_abort("`name` must be a single string.")
+    }
+
+    if (is_complete_iterator(index)) {
+      return(i_set_vertex_attr(
+        graph = graph,
+        name = name,
+        value = value,
+        check = FALSE
+      ))
+    } else {
+      return(i_set_vertex_attr(
+        graph = graph,
+        name = name,
+        index = index,
+        value = value
+      ))
+    }
   }
+
+  dots <- list(...)
+  if (length(dots) == 0L) {
+    cli::cli_abort(
+      "Must supply either a named attribute and value, or named arguments via `...`."
+    )
+  }
+
+  if (is.null(names(dots)) || any(names(dots) == "")) {
+    cli::cli_abort("All arguments in `...` must be named.")
+  }
+
+  for (attr_name in names(dots)) {
+    attr_value <- dots[[attr_name]]
+    graph <- i_set_vertex_attr(
+      graph,
+      name = attr_name,
+      index = index,
+      value = attr_value
+    )
+  }
+
+  graph
 }
 
 i_set_vertex_attr <- function(
