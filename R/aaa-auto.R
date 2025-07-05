@@ -189,6 +189,17 @@ lcf_vector_impl <- function(n, shifts, repeats=1) {
   res
 }
 
+mycielski_graph_impl <- function(k) {
+  # Argument checks
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielski_graph, k)
+
+  res
+}
+
 adjlist_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
   # Argument checks
   adjlist <- lapply(adjlist, function(x) as.numeric(x)-1)
@@ -2472,6 +2483,18 @@ layout_umap_compute_weights_impl <- function(graph, distances, weights) {
   res
 }
 
+layout_align_impl <- function(graph, layout) {
+  # Argument checks
+  ensure_igraph(graph)
+  layout[] <- as.numeric(layout)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_layout_align, graph, layout)
+
+  res
+}
+
 similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
@@ -2840,6 +2863,31 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_induced_subgraph_map, graph, vids-1, impl)
+
+  res
+}
+
+mycielskian_impl <- function(graph, k=1) {
+  # Argument checks
+  ensure_igraph(graph)
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielskian, graph, k)
+
+  res
+}
+
+product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", "tensor")) {
+  # Argument checks
+  ensure_igraph(g1)
+  ensure_igraph(g2)
+  type <- switch(igraph.match.arg(type), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_product, g1, g2, type)
 
   res
 }
@@ -3960,10 +4008,10 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
+vertex_path_from_edge_path_impl <- function(graph, start=NULL, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
-  start <- as_igraph_vs(graph, start)
+  if (!is.null(start)) start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
     stop("No vertex was specified")
   }

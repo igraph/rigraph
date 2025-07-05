@@ -185,6 +185,9 @@ igraph_famous:
 igraph_lcf_vector:
     PARAMS: OUT GRAPH graph, INTEGER n, VECTOR_INT shifts, INTEGER repeats=1
 
+igraph_mycielski_graph:
+    PARAMS: OUT GRAPH graph, INTEGER k
+
 igraph_adjlist:
     PARAMS: |-
         OUT GRAPH graph, ADJLIST adjlist, NEIMODE mode=OUT,
@@ -1566,6 +1569,9 @@ igraph_layout_umap_compute_weights:
     PARAMS: |-
         GRAPH graph, VECTOR distances, INOUT VECTOR weights
 
+igraph_layout_align:
+    PARAMS: GRAPH graph, INOUT MATRIX layout
+
 #######################################
 # Cocitation and other similarity measures
 #######################################
@@ -2079,6 +2085,14 @@ igraph_induced_subgraph_map:
         GRAPH graph, OUT GRAPH res, VERTEX_SELECTOR vids, SUBGRAPH_IMPL impl,
         OPTIONAL OUT INDEX_VECTOR map, OPTIONAL OUT INDEX_VECTOR invmap
     DEPS: vids ON graph
+
+igraph_mycielskian:
+    PARAMS: |-
+        IN GRAPH graph, OUT GRAPH res, INTEGER k=1
+
+igraph_product:
+    PARAMS: |-
+        OUT GRAPH res, GRAPH g1, GRAPH g2, GRAPH_PRODUCT_TYPE type=CARTESIAN
 
 #######################################
 # Maximum flows, minimum cuts
@@ -2701,7 +2715,7 @@ igraph_invalidate_cache:
 
 igraph_vertex_path_from_edge_path:
     PARAMS: |-
-        GRAPH graph, VERTEX start, EDGE_INDICES edge_path,
+        GRAPH graph, OPTIONAL VERTEX start, EDGE_INDICES edge_path,
         OUT VERTEX_INDICES vertex_path, NEIMODE mode=OUT
 
 #######################################
