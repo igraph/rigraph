@@ -957,7 +957,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
     args$dim <- dim
 
     if (vcount(graph) < 1000) {
-      do.call(layout_with_fr, args)
+      layout_align_impl(graph, do.call(layout_with_fr, args))
     } else {
       do.call(layout_with_drl, args)
     }
