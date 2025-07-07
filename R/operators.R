@@ -10,7 +10,7 @@
 #' @export
 graph.intersection <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.intersection()", "intersection()")
+  lifecycle::deprecate_warn("2.2.0", "graph.intersection()", "intersection()")
   intersection(...)
 } # nocov end
 
@@ -26,7 +26,7 @@ graph.intersection <- function(...) {
 #' @export
 graph.union <- function(..., byname = "auto") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.union()", "union.igraph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.union()", "union.igraph()")
   union.igraph(byname = byname, ...)
 } # nocov end
 
@@ -42,7 +42,7 @@ graph.union <- function(..., byname = "auto") {
 #' @export
 graph.difference <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.difference()", "difference()")
+  lifecycle::deprecate_warn("2.2.0", "graph.difference()", "difference()")
   difference(...)
 } # nocov end
 
@@ -58,8 +58,8 @@ graph.difference <- function(...) {
 #' @export
 graph.disjoint.union <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.disjoint.union()",
     "disjoint_union()"
   )
@@ -78,7 +78,7 @@ graph.disjoint.union <- function(...) {
 #' @export
 graph.compose <- function(g1, g2, byname = "auto") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.compose()", "compose()")
+  lifecycle::deprecate_warn("2.2.0", "graph.compose()", "compose()")
   compose(g1 = g1, g2 = g2, byname = byname)
 } # nocov end
 
@@ -94,7 +94,7 @@ graph.compose <- function(g1, g2, byname = "auto") {
 #' @export
 graph.complementer <- function(graph, loops = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.complementer()", "complementer()")
+  lifecycle::deprecate_warn("2.2.0", "graph.complementer()", "complementer()")
   complementer(graph = graph, loops = loops)
 } # nocov end
 #   IGraph R package

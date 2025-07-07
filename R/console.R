@@ -10,7 +10,7 @@
 #' @export
 igraph.console <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.console()", "console()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.console()", "console()")
   console()
 } # nocov end
 

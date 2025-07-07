@@ -10,7 +10,7 @@
 #' @export
 centralize.scores <- function(scores, theoretical.max = 0, normalized = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "centralize.scores()", "centralize()")
+  lifecycle::deprecate_warn("2.2.0", "centralize.scores()", "centralize()")
   centralize(
     scores = scores,
     theoretical.max = theoretical.max,
@@ -35,8 +35,8 @@ centralization.evcent.tmax <- function(
   scale = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.evcent.tmax()",
     "centr_eigen_tmax()"
   )
@@ -66,7 +66,7 @@ centralization.evcent <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "centralization.evcent()", "centr_eigen()")
+  lifecycle::deprecate_warn("2.2.0", "centralization.evcent()", "centr_eigen()")
   centr_eigen(
     graph = graph,
     directed = directed,
@@ -93,8 +93,8 @@ centralization.degree.tmax <- function(
   loops = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.degree.tmax()",
     "centr_degree_tmax()"
   )
@@ -118,8 +118,8 @@ centralization.degree <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.degree()",
     "centr_degree()"
   )
@@ -147,8 +147,8 @@ centralization.closeness.tmax <- function(
   mode = c("out", "in", "all", "total")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.closeness.tmax()",
     "centr_clo_tmax()"
   )
@@ -171,8 +171,8 @@ centralization.closeness <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.closeness()",
     "centr_clo()"
   )
@@ -195,8 +195,8 @@ centralization.betweenness.tmax <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.betweenness.tmax()",
     "centr_betw_tmax()"
   )
@@ -219,8 +219,8 @@ centralization.betweenness <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "centralization.betweenness()",
     "centr_betw()"
   )
@@ -389,7 +389,7 @@ centr_degree_tmax <- function(
   loops
 ) {
   if (!lifecycle::is_present(loops)) {
-    lifecycle::deprecate_warn(
+    lifecycle::deprecate_stop(
       when = "2.0.0",
       what = "centr_degree_tmax(loops = 'must be explicit')",
       details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
@@ -623,7 +623,7 @@ centr_eigen <- function(
   normalized = TRUE
 ) {
   if (lifecycle::is_present(scale)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.2.0",
       "centr_eigen(scale = )",
       details = "The function always behaves as if `scale = TRUE`.
@@ -674,7 +674,7 @@ centr_eigen_tmax <- function(
   scale = deprecated()
 ) {
   if (lifecycle::is_present(scale)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.2.0",
       "centr_eigen_tmax(scale = )",
       details = "The function always behaves as if `scale = TRUE`.

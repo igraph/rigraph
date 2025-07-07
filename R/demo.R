@@ -10,7 +10,7 @@
 #' @export
 igraphdemo <- function(which) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraphdemo()", "igraph_demo()")
+  lifecycle::deprecate_warn("2.2.0", "igraphdemo()", "igraph_demo()")
   igraph_demo(which = which)
 } # nocov end
 #   IGraph R package

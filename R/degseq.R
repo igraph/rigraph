@@ -14,8 +14,8 @@ is.graphical.degree.sequence <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "is.graphical.degree.sequence()",
     "is_graphical()"
   )
@@ -38,7 +38,7 @@ is.graphical.degree.sequence <- function(
 #' @export
 is.degree.sequence <- function(out.deg, in.deg = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.degree.sequence()", "is_degseq()")
+  lifecycle::deprecate_warn("2.2.0", "is.degree.sequence()", "is_degseq()")
   is_degseq(out.deg = out.deg, in.deg = in.deg)
 } # nocov end
 

@@ -17,7 +17,7 @@ power.law.fit <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "power.law.fit()", "fit_power_law()")
+  lifecycle::deprecate_warn("2.2.0", "power.law.fit()", "fit_power_law()")
   fit_power_law(
     x = x,
     xmin = xmin,
@@ -201,7 +201,7 @@ fit_power_law <- function(
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation == "plfit.p") {
     lifecycle::deprecate_stop(
-      "2.1.0",
+      "2.2.0",
       'fit_power_law(implementation = "cannot be \\"plfit.p\\"")',
       I('`fit_power_law(implementation = "plfit", p.value = TRUE)`')
     )

@@ -10,7 +10,7 @@
 #' @export
 tkplot.setcoords <- function(tkp.id, coords) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.setcoords()", "tk_set_coords()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.setcoords()", "tk_set_coords()")
   tk_set_coords(tkp.id = tkp.id, coords = coords)
 } # nocov end
 
@@ -26,7 +26,7 @@ tkplot.setcoords <- function(tkp.id, coords) {
 #' @export
 tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.rotate()", "tk_rotate()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.rotate()", "tk_rotate()")
   tk_rotate(tkp.id = tkp.id, degree = degree, rad = rad)
 } # nocov end
 
@@ -42,7 +42,7 @@ tkplot.rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 #' @export
 tkplot.reshape <- function(tkp.id, newlayout, ..., params) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.reshape()", "tk_reshape()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.reshape()", "tk_reshape()")
   tk_reshape(tkp.id = tkp.id, newlayout = newlayout, params = params, ...)
 } # nocov end
 
@@ -58,7 +58,7 @@ tkplot.reshape <- function(tkp.id, newlayout, ..., params) {
 #' @export
 tkplot.off <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.off()", "tk_off()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.off()", "tk_off()")
   tk_off()
 } # nocov end
 
@@ -74,7 +74,7 @@ tkplot.off <- function() {
 #' @export
 tkplot.getcoords <- function(tkp.id, norm = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.getcoords()", "tk_coords()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.getcoords()", "tk_coords()")
   tk_coords(tkp.id = tkp.id, norm = norm)
 } # nocov end
 
@@ -90,7 +90,7 @@ tkplot.getcoords <- function(tkp.id, norm = FALSE) {
 #' @export
 tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.fit.to.screen()", "tk_fit()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.fit.to.screen()", "tk_fit()")
   tk_fit(tkp.id = tkp.id, width = width, height = height)
 } # nocov end
 
@@ -106,8 +106,8 @@ tkplot.fit.to.screen <- function(tkp.id, width = NULL, height = NULL) {
 #' @export
 tkplot.export.postscript <- function(tkp.id) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "tkplot.export.postscript()",
     "tk_postscript()"
   )
@@ -126,7 +126,7 @@ tkplot.export.postscript <- function(tkp.id) {
 #' @export
 tkplot.close <- function(tkp.id, window.close = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.close()", "tk_close()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.close()", "tk_close()")
   tk_close(tkp.id = tkp.id, window.close = window.close)
 } # nocov end
 
@@ -142,7 +142,7 @@ tkplot.close <- function(tkp.id, window.close = TRUE) {
 #' @export
 tkplot.center <- function(tkp.id) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.center()", "tk_center()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.center()", "tk_center()")
   tk_center(tkp.id = tkp.id)
 } # nocov end
 
@@ -158,7 +158,7 @@ tkplot.center <- function(tkp.id) {
 #' @export
 tkplot.canvas <- function(tkp.id) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "tkplot.canvas()", "tk_canvas()")
+  lifecycle::deprecate_warn("2.2.0", "tkplot.canvas()", "tk_canvas()")
   tk_canvas(tkp.id = tkp.id)
 } # nocov end
 #   IGraph R package

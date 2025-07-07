@@ -10,8 +10,8 @@
 #' @export
 maximal.independent.vertex.sets <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "maximal.independent.vertex.sets()",
     "max_ivs()"
   )
@@ -35,8 +35,8 @@ maximal.cliques.count <- function(
   subset = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "maximal.cliques.count()",
     "count_max_cliques()"
   )
@@ -61,7 +61,7 @@ maximal.cliques <- function(
   file = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maximal.cliques()", "max_cliques()")
+  lifecycle::deprecate_warn("2.2.0", "maximal.cliques()", "max_cliques()")
   max_cliques(graph = graph, min = min, max = max, subset = subset, file = file)
 } # nocov end
 
@@ -77,8 +77,8 @@ maximal.cliques <- function(
 #' @export
 largest.independent.vertex.sets <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "largest.independent.vertex.sets()",
     "largest_ivs()"
   )
@@ -97,7 +97,7 @@ largest.independent.vertex.sets <- function(graph) {
 #' @export
 largest.cliques <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "largest.cliques()", "largest_cliques()")
+  lifecycle::deprecate_warn("2.2.0", "largest.cliques()", "largest_cliques()")
   largest_cliques(graph = graph)
 } # nocov end
 
@@ -113,7 +113,7 @@ largest.cliques <- function(graph) {
 #' @export
 independent.vertex.sets <- function(graph, min = NULL, max = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "independent.vertex.sets()", "ivs()")
+  lifecycle::deprecate_warn("2.2.0", "independent.vertex.sets()", "ivs()")
   ivs(graph = graph, min = min, max = max)
 } # nocov end
 
@@ -129,7 +129,7 @@ independent.vertex.sets <- function(graph, min = NULL, max = NULL) {
 #' @export
 independence.number <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "independence.number()", "ivs_size()")
+  lifecycle::deprecate_warn("2.2.0", "independence.number()", "ivs_size()")
   ivs_size(graph = graph)
 } # nocov end
 
@@ -145,7 +145,7 @@ independence.number <- function(graph) {
 #' @export
 clique.number <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "clique.number()", "clique_num()")
+  lifecycle::deprecate_warn("2.2.0", "clique.number()", "clique_num()")
   clique_num(graph = graph)
 } # nocov end
 #   IGraph R package
@@ -550,7 +550,7 @@ max_ivs <- function(graph) {
 #' @inheritParams max_ivs
 #' @keywords internal
 maximal_ivs <- function(graph) {
-  lifecycle::deprecate_soft("2.1.0", "maximal_ivs()", "max_ivs()")
+  lifecycle::deprecate_warn("2.2.0", "maximal_ivs()", "max_ivs()")
   max_ivs(graph)
 }
 

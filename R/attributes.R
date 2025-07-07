@@ -10,8 +10,8 @@
 #' @export
 set.vertex.attribute <- function(graph, name, index = V(graph), value) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "set.vertex.attribute()",
     "set_vertex_attr()"
   )
@@ -30,8 +30,8 @@ set.vertex.attribute <- function(graph, name, index = V(graph), value) {
 #' @export
 set.graph.attribute <- function(graph, name, value) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "set.graph.attribute()",
     "set_graph_attr()"
   )
@@ -50,7 +50,7 @@ set.graph.attribute <- function(graph, name, value) {
 #' @export
 set.edge.attribute <- function(graph, name, index = E(graph), value) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "set.edge.attribute()", "set_edge_attr()")
+  lifecycle::deprecate_warn("2.2.0", "set.edge.attribute()", "set_edge_attr()")
   set_edge_attr(graph = graph, name = name, index = index, value = value)
 } # nocov end
 
@@ -66,8 +66,8 @@ set.edge.attribute <- function(graph, name, index = E(graph), value) {
 #' @export
 remove.vertex.attribute <- function(graph, name) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "remove.vertex.attribute()",
     "delete_vertex_attr()"
   )
@@ -86,8 +86,8 @@ remove.vertex.attribute <- function(graph, name) {
 #' @export
 remove.graph.attribute <- function(graph, name) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "remove.graph.attribute()",
     "delete_graph_attr()"
   )
@@ -106,8 +106,8 @@ remove.graph.attribute <- function(graph, name) {
 #' @export
 remove.edge.attribute <- function(graph, name) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "remove.edge.attribute()",
     "delete_edge_attr()"
   )
@@ -126,8 +126,8 @@ remove.edge.attribute <- function(graph, name) {
 #' @export
 list.vertex.attributes <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "list.vertex.attributes()",
     "vertex_attr_names()"
   )
@@ -146,8 +146,8 @@ list.vertex.attributes <- function(graph) {
 #' @export
 list.graph.attributes <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "list.graph.attributes()",
     "graph_attr_names()"
   )
@@ -166,8 +166,8 @@ list.graph.attributes <- function(graph) {
 #' @export
 list.edge.attributes <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "list.edge.attributes()",
     "edge_attr_names()"
   )
@@ -186,7 +186,7 @@ list.edge.attributes <- function(graph) {
 #' @export
 is.weighted <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.weighted()", "is_weighted()")
+  lifecycle::deprecate_warn("2.2.0", "is.weighted()", "is_weighted()")
   is_weighted(graph = graph)
 } # nocov end
 
@@ -202,7 +202,7 @@ is.weighted <- function(graph) {
 #' @export
 is.named <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.named()", "is_named()")
+  lifecycle::deprecate_warn("2.2.0", "is.named()", "is_named()")
   is_named(graph = graph)
 } # nocov end
 
@@ -218,7 +218,7 @@ is.named <- function(graph) {
 #' @export
 is.bipartite <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.bipartite()", "is_bipartite()")
+  lifecycle::deprecate_warn("2.2.0", "is.bipartite()", "is_bipartite()")
   is_bipartite(graph = graph)
 } # nocov end
 
@@ -234,7 +234,7 @@ is.bipartite <- function(graph) {
 #' @export
 get.vertex.attribute <- function(graph, name, index = V(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.vertex.attribute()", "vertex_attr()")
+  lifecycle::deprecate_warn("2.2.0", "get.vertex.attribute()", "vertex_attr()")
   vertex_attr(graph = graph, name = name, index = index)
 } # nocov end
 
@@ -250,7 +250,7 @@ get.vertex.attribute <- function(graph, name, index = V(graph)) {
 #' @export
 get.graph.attribute <- function(graph, name) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.graph.attribute()", "graph_attr()")
+  lifecycle::deprecate_warn("2.2.0", "get.graph.attribute()", "graph_attr()")
   graph_attr(graph = graph, name = name)
 } # nocov end
 
@@ -266,7 +266,7 @@ get.graph.attribute <- function(graph, name) {
 #' @export
 get.edge.attribute <- function(graph, name, index = E(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.edge.attribute()", "edge_attr()")
+  lifecycle::deprecate_warn("2.2.0", "get.edge.attribute()", "edge_attr()")
   edge_attr(graph = graph, name = name, index = index)
 } # nocov end
 #   IGraph R package

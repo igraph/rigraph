@@ -25,7 +25,7 @@ write.graph <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "write.graph()", "write_graph()")
+  lifecycle::deprecate_warn("2.2.0", "write.graph()", "write_graph()")
   write_graph(graph = graph, file = file, format = format, ...)
 } # nocov end
 
@@ -55,7 +55,7 @@ read.graph <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "read.graph()", "read_graph()")
+  lifecycle::deprecate_warn("2.2.0", "read.graph()", "read_graph()")
   read_graph(file = file, format = format, ...)
 } # nocov end
 
@@ -81,7 +81,7 @@ graph.graphdb <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.graphdb()", "graph_from_graphdb()")
+  lifecycle::deprecate_warn("2.2.0", "graph.graphdb()", "graph_from_graphdb()")
   graph_from_graphdb(
     url = url,
     prefix = prefix,

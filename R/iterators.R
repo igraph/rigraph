@@ -600,19 +600,19 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   nei <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "nei()", ".nei()")
+    lifecycle::deprecate_stop("2.2.0", "nei()", ".nei()")
   }
   .innei <- function(v, mode = c("in", "all", "out", "total")) {
     .nei(v, mode = mode[1])
   }
   innei <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "innei()", ".innei()")
+    lifecycle::deprecate_stop("2.2.0", "innei()", ".innei()")
   }
   .outnei <- function(v, mode = c("out", "all", "in", "total")) {
     .nei(v, mode = mode[1])
   }
   outnei <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "outnei()", ".outnei()")
+    lifecycle::deprecate_stop("2.2.0", "outnei()", ".outnei()")
   }
   .inc <- function(e) {
     ## TRUE iff the vertex (in the vs) is incident
@@ -631,10 +631,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   inc <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "inc()", ".inc()")
+    lifecycle::deprecate_stop("2.2.0", "inc()", ".inc()")
   }
   adj <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "adj()", ".inc()")
+    lifecycle::deprecate_stop("2.2.0", "adj()", ".inc()")
   }
   .from <- function(e) {
     ## TRUE iff the vertex is the source of at least one edge in e
@@ -652,7 +652,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
+    lifecycle::deprecate_stop("2.2.0", "from()", ".from()")
   }
   .to <- function(e) {
     ## TRUE iff the vertex is the target of at least one edge in e
@@ -670,7 +670,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
+    lifecycle::deprecate_stop("2.2.0", "to()", ".to()")
   }
 
   graph <- get_vs_graph(x)
@@ -993,10 +993,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   adj <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "adj()", ".inc()")
+    lifecycle::deprecate_stop("2.2.0", "adj()", ".inc()")
   }
   inc <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "inc()", ".inc()")
+    lifecycle::deprecate_stop("2.2.0", "inc()", ".inc()")
   }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
@@ -1011,7 +1011,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "from()", ".from()")
+    lifecycle::deprecate_stop("2.2.0", "from()", ".from()")
   }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
@@ -1026,7 +1026,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    lifecycle::deprecate_stop("2.1.0", "to()", ".to()")
+    lifecycle::deprecate_stop("2.2.0", "to()", ".to()")
   }
 
   graph <- get_es_graph(x)

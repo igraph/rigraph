@@ -10,7 +10,7 @@
 #' @export
 igraph.shape.noplot <- function(coords, v = NULL, params) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noplot()", "shape_noplot()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.shape.noplot()", "shape_noplot()")
   shape_noplot(coords = coords, v = v, params = params)
 } # nocov end
 
@@ -31,7 +31,7 @@ igraph.shape.noclip <- function(
   end = c("both", "from", "to")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noclip()", "shape_noclip()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.shape.noclip()", "shape_noclip()")
   shape_noclip(coords = coords, el = el, params = params, end = end)
 } # nocov end
 
@@ -47,7 +47,7 @@ igraph.shape.noclip <- function(
 #' @export
 vertex.shapes <- function(shape = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "vertex.shapes()", "shapes()")
+  lifecycle::deprecate_warn("2.2.0", "vertex.shapes()", "shapes()")
   shapes(shape = shape)
 } # nocov end
 
@@ -68,7 +68,7 @@ add.vertex.shape <- function(
   parameters = list()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "add.vertex.shape()", "add_shape()")
+  lifecycle::deprecate_warn("2.2.0", "add.vertex.shape()", "add_shape()")
   add_shape(shape = shape, clip = clip, plot = plot, parameters = parameters)
 } # nocov end
 

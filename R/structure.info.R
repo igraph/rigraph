@@ -10,7 +10,7 @@
 #' @export
 are.connected <- function(graph, v1, v2) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "are.connected()", "are_adjacent()")
+  lifecycle::deprecate_warn("2.2.0", "are.connected()", "are_adjacent()")
   are_adjacent(graph = graph, v1 = v1, v2 = v2)
 } # nocov end
 

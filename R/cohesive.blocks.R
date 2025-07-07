@@ -10,7 +10,7 @@
 #' @export
 exportPajek <- function(blocks, graph, file, project.file = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "exportPajek()", "export_pajek()")
+  lifecycle::deprecate_warn("2.2.0", "exportPajek()", "export_pajek()")
   export_pajek(
     blocks = blocks,
     graph = graph,
@@ -35,7 +35,7 @@ plotHierarchy <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "plotHierarchy()", "plot_hierarchy()")
+  lifecycle::deprecate_warn("2.2.0", "plotHierarchy()", "plot_hierarchy()")
   plot_hierarchy(blocks = blocks, layout = layout, ...)
 } # nocov end
 
@@ -51,7 +51,7 @@ plotHierarchy <- function(
 #' @export
 maxcohesion <- function(blocks) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "maxcohesion()", "max_cohesion()")
+  lifecycle::deprecate_warn("2.2.0", "maxcohesion()", "max_cohesion()")
   max_cohesion(blocks = blocks)
 } # nocov end
 
@@ -68,7 +68,7 @@ maxcohesion <- function(blocks) {
 #' @export
 graph.cohesion <- function(x, ...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.cohesion()", "cohesion()")
+  lifecycle::deprecate_warn("2.2.0", "graph.cohesion()", "cohesion()")
   cohesion(x = x, ...)
 } # nocov end
 
@@ -84,7 +84,7 @@ graph.cohesion <- function(x, ...) {
 #' @export
 cohesive.blocks <- function(graph, labels = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "cohesive.blocks()", "cohesive_blocks()")
+  lifecycle::deprecate_warn("2.2.0", "cohesive.blocks()", "cohesive_blocks()")
   cohesive_blocks(graph = graph, labels = labels)
 } # nocov end
 
@@ -100,8 +100,8 @@ cohesive.blocks <- function(graph, labels = TRUE) {
 #' @export
 blockGraphs <- function(blocks, graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "blockGraphs()",
     "graphs_from_cohesive_blocks()"
   )

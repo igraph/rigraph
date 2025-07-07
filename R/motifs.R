@@ -10,7 +10,7 @@
 #' @export
 triad.census <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "triad.census()", "triad_census()")
+  lifecycle::deprecate_warn("2.2.0", "triad.census()", "triad_census()")
   triad_census(graph = graph)
 } # nocov end
 
@@ -26,7 +26,7 @@ triad.census <- function(graph) {
 #' @export
 graph.motifs.no <- function(graph, size = 3, cut.prob = rep(0, size)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs.no()", "count_motifs()")
+  lifecycle::deprecate_warn("2.2.0", "graph.motifs.no()", "count_motifs()")
   count_motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
 
@@ -52,7 +52,7 @@ graph.motifs.est <- function(
   sample = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs.est()", "sample_motifs()")
+  lifecycle::deprecate_warn("2.2.0", "graph.motifs.est()", "sample_motifs()")
   sample_motifs(
     graph = graph,
     size = size,
@@ -78,7 +78,7 @@ graph.motifs.est <- function(
 #' @export
 graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.motifs()", "motifs()")
+  lifecycle::deprecate_warn("2.2.0", "graph.motifs()", "motifs()")
   motifs(graph = graph, size = size, cut.prob = cut.prob)
 } # nocov end
 
@@ -94,7 +94,7 @@ graph.motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @export
 dyad.census <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "dyad.census()", "dyad_census()")
+  lifecycle::deprecate_warn("2.2.0", "dyad.census()", "dyad_census()")
   dyad_census(graph = graph)
 } # nocov end
 

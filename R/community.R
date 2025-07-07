@@ -16,7 +16,7 @@ create.communities <- function(
   modularity = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "create.communities()", "make_clusters()")
+  lifecycle::deprecate_warn("2.2.0", "create.communities()", "make_clusters()")
   make_clusters(
     graph = graph,
     membership = membership,
@@ -45,8 +45,8 @@ walktrap.community <- function(
   membership = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "walktrap.community()",
     "cluster_walktrap()"
   )
@@ -85,8 +85,8 @@ spinglass.community <- function(
   gamma.minus = 1.0
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "spinglass.community()",
     "cluster_spinglass()"
   )
@@ -118,7 +118,7 @@ spinglass.community <- function(
 #' @export
 showtrace <- function(communities) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "showtrace()", "show_trace()")
+  lifecycle::deprecate_warn("2.2.0", "showtrace()", "show_trace()")
   show_trace(communities = communities)
 } # nocov end
 
@@ -134,7 +134,7 @@ showtrace <- function(communities) {
 #' @export
 optimal.community <- function(graph, weights = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "optimal.community()", "cluster_optimal()")
+  lifecycle::deprecate_warn("2.2.0", "optimal.community()", "cluster_optimal()")
   cluster_optimal(graph = graph, weights = weights)
 } # nocov end
 
@@ -150,8 +150,8 @@ optimal.community <- function(graph, weights = NULL) {
 #' @export
 multilevel.community <- function(graph, weights = NULL, resolution = 1) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "multilevel.community()",
     "cluster_louvain()"
   )
@@ -176,7 +176,7 @@ mod.matrix <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "mod.matrix()", "modularity_matrix()")
+  lifecycle::deprecate_warn("2.2.0", "mod.matrix()", "modularity_matrix()")
   modularity_matrix(
     graph = graph,
     membership = membership,
@@ -207,8 +207,8 @@ leading.eigenvector.community <- function(
   env = parent.frame()
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "leading.eigenvector.community()",
     "cluster_leading_eigen()"
   )
@@ -243,8 +243,8 @@ label.propagation.community <- function(
   fixed = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "label.propagation.community()",
     "cluster_label_prop()"
   )
@@ -270,7 +270,7 @@ label.propagation.community <- function(
 #' @export
 is.hierarchical <- function(communities) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.hierarchical()", "is_hierarchical()")
+  lifecycle::deprecate_warn("2.2.0", "is.hierarchical()", "is_hierarchical()")
   is_hierarchical(communities = communities)
 } # nocov end
 
@@ -292,7 +292,7 @@ infomap.community <- function(
   modularity = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "infomap.community()", "cluster_infomap()")
+  lifecycle::deprecate_warn("2.2.0", "infomap.community()", "cluster_infomap()")
   cluster_infomap(
     graph = graph,
     e.weights = e.weights,
@@ -320,8 +320,8 @@ fastgreedy.community <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "fastgreedy.community()",
     "cluster_fast_greedy()"
   )
@@ -355,8 +355,8 @@ edge.betweenness.community <- function(
   membership = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "edge.betweenness.community()",
     "cluster_edge_betweenness()"
   )
@@ -384,7 +384,7 @@ edge.betweenness.community <- function(
 #' @export
 dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "dendPlot()", "plot_dendrogram()")
+  lifecycle::deprecate_warn("2.2.0", "dendPlot()", "plot_dendrogram()")
   plot_dendrogram(x = x, mode = mode, ...)
 } # nocov end
 
@@ -400,7 +400,7 @@ dendPlot <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' @export
 cutat <- function(communities, no, steps) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "cutat()", "cut_at()")
+  lifecycle::deprecate_warn("2.2.0", "cutat()", "cut_at()")
   cut_at(communities = communities, no = no, steps = steps)
 } # nocov end
 
@@ -420,7 +420,7 @@ contract.vertices <- function(
   vertex.attr.comb = igraph_opt("vertex.attr.comb")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "contract.vertices()", "contract()")
+  lifecycle::deprecate_warn("2.2.0", "contract.vertices()", "contract()")
   contract(
     graph = graph,
     mapping = mapping,
@@ -440,7 +440,7 @@ contract.vertices <- function(
 #' @export
 code.length <- function(communities) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "code.length()", "code_len()")
+  lifecycle::deprecate_warn("2.2.0", "code.length()", "code_len()")
   code_len(communities = communities)
 } # nocov end
 #   IGraph R package
@@ -964,8 +964,8 @@ modularity_matrix <- function(
   ensure_igraph(graph)
 
   if (!missing(membership)) {
-    lifecycle::deprecate_warn(
-      "2.1.0",
+    lifecycle::deprecate_stop(
+      "2.2.0",
       "modularity_matrix(membership = 'is no longer used')"
     )
   }
@@ -1645,8 +1645,8 @@ cluster_leiden <- function(
   check_dots_empty()
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_soft(
-      "2.1.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "cluster_leiden(resolution_parameter)",
       "cluster_leiden(resolution)"
     )
@@ -2247,8 +2247,8 @@ cluster_leading_eigen <- function(
   env = parent.frame()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "cluster_leading_eigen(options = 'must be a list')",
       details = c(
         "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
@@ -2375,8 +2375,8 @@ cluster_label_prop <- function(
   fixed = NULL
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "cluster_label_prop(... = )",
       details = "Arguments `initial` and `fixed` must be named."
     )

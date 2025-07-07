@@ -17,8 +17,8 @@ watts.strogatz.game <- function(
   multiple = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "watts.strogatz.game()",
     "sample_smallworld()"
   )
@@ -52,8 +52,8 @@ static.power.law.game <- function(
   finite.size.correction = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "static.power.law.game()",
     "sample_fitness_pl()"
   )
@@ -86,8 +86,8 @@ static.fitness.game <- function(
   multiple = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "static.fitness.game()",
     "sample_fitness()"
   )
@@ -118,7 +118,7 @@ sbm.game <- function(
   loops = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "sbm.game()", "sample_sbm()")
+  lifecycle::deprecate_warn("2.2.0", "sbm.game()", "sample_sbm()")
   sample_sbm(
     n = n,
     pref.matrix = pref.matrix,
@@ -148,7 +148,7 @@ preference.game <- function(
   loops = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "preference.game()", "sample_pref()")
+  lifecycle::deprecate_warn("2.2.0", "preference.game()", "sample_pref()")
   sample_pref(
     nodes = nodes,
     types = types,
@@ -178,7 +178,7 @@ lastcit.game <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "lastcit.game()", "sample_last_cit()")
+  lifecycle::deprecate_warn("2.2.0", "lastcit.game()", "sample_last_cit()")
   sample_last_cit(
     n = n,
     edges = edges,
@@ -200,7 +200,7 @@ lastcit.game <- function(
 #' @export
 k.regular.game <- function(no.of.nodes, k, directed = FALSE, multiple = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "k.regular.game()", "sample_k_regular()")
+  lifecycle::deprecate_warn("2.2.0", "k.regular.game()", "sample_k_regular()")
   sample_k_regular(
     no.of.nodes = no.of.nodes,
     k = k,
@@ -226,8 +226,8 @@ interconnected.islands.game <- function(
   n.inter
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "interconnected.islands.game()",
     "sample_islands()"
   )
@@ -251,7 +251,7 @@ interconnected.islands.game <- function(
 #' @export
 grg.game <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "grg.game()", "sample_grg()")
+  lifecycle::deprecate_warn("2.2.0", "grg.game()", "sample_grg()")
   sample_grg(nodes = nodes, radius = radius, torus = torus, coords = coords)
 } # nocov end
 
@@ -267,8 +267,8 @@ grg.game <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @export
 growing.random.game <- function(n, m = 1, directed = TRUE, citation = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "growing.random.game()",
     "sample_growing()"
   )
@@ -293,8 +293,8 @@ forest.fire.game <- function(
   directed = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "forest.fire.game()",
     "sample_forestfire()"
   )
@@ -326,7 +326,7 @@ establishment.game <- function(
   directed = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "establishment.game()", "sample_traits()")
+  lifecycle::deprecate_warn("2.2.0", "establishment.game()", "sample_traits()")
   sample_traits(
     nodes = nodes,
     types = types,
@@ -353,8 +353,8 @@ degree.sequence.game <- function(
   method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "degree.sequence.game()",
     "sample_degseq()"
   )
@@ -377,7 +377,7 @@ connect.neighborhood <- function(
   mode = c("all", "out", "in", "total")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "connect.neighborhood()", "connect()")
+  lifecycle::deprecate_warn("2.2.0", "connect.neighborhood()", "connect()")
   connect(graph = graph, order = order, mode = mode)
 } # nocov end
 
@@ -400,8 +400,8 @@ citing.cited.type.game <- function(
   attr = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "citing.cited.type.game()",
     "sample_cit_cit_types()"
   )
@@ -434,7 +434,7 @@ cited.type.game <- function(
   attr = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "cited.type.game()", "sample_cit_types()")
+  lifecycle::deprecate_warn("2.2.0", "cited.type.game()", "sample_cit_types()")
   sample_cit_types(
     n = n,
     edges = edges,
@@ -464,8 +464,8 @@ callaway.traits.game <- function(
   directed = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "callaway.traits.game()",
     "sample_traits_callaway()"
   )
@@ -499,8 +499,8 @@ bipartite.random.game <- function(
   mode = c("out", "in", "all")
 ) {
   # nocov start
-  lifecycle::deprecate_warn(
-    "2.0.0",
+  lifecycle::deprecate_stop(
+    "2.2.0",
     "bipartite.random.game()",
     details = "Use sample_bipartite_gnp() or sample_bipartite_gnm()"
   )
@@ -538,7 +538,7 @@ barabasi.game <- function(
   start.graph = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "barabasi.game()", "sample_pa()")
+  lifecycle::deprecate_warn("2.2.0", "barabasi.game()", "sample_pa()")
   sample_pa(
     n = n,
     power = power,
@@ -576,7 +576,7 @@ ba.game <- function(
   start.graph = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "ba.game()", "sample_pa()")
+  lifecycle::deprecate_warn("2.2.0", "ba.game()", "sample_pa()")
   sample_pa(
     n = n,
     power = power,
@@ -609,8 +609,8 @@ asymmetric.preference.game <- function(
   loops = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "asymmetric.preference.game()",
     "sample_asym_pref()"
   )
@@ -650,7 +650,7 @@ aging.barabasi.game <- function(
   time.window = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "aging.barabasi.game()", "sample_pa_age()")
+  lifecycle::deprecate_warn("2.2.0", "aging.barabasi.game()", "sample_pa_age()")
   sample_pa_age(
     n = n,
     pa.exp = pa.exp,
@@ -696,7 +696,7 @@ aging.ba.game <- function(
   time.window = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "aging.ba.game()", "sample_pa_age()")
+  lifecycle::deprecate_warn("2.2.0", "aging.ba.game()", "sample_pa_age()")
   sample_pa_age(
     n = n,
     pa.exp = pa.exp,
@@ -742,7 +742,7 @@ aging.prefatt.game <- function(
   time.window = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "aging.prefatt.game()", "sample_pa_age()")
+  lifecycle::deprecate_warn("2.2.0", "aging.prefatt.game()", "sample_pa_age()")
   sample_pa_age(
     n = n,
     pa.exp = pa.exp,
@@ -1145,10 +1145,10 @@ erdos.renyi.game <- function(
   type <- igraph.match.arg(type)
 
   if (type == "gnp") {
-    lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
+    lifecycle::deprecate_warn("2.2.0", "erdos.renyi.game()", "sample_gnp()")
     sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
   } else if (type == "gnm") {
-    lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnm()")
+    lifecycle::deprecate_warn("2.2.0", "erdos.renyi.game()", "sample_gnm()")
     sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
   }
 }
@@ -1165,10 +1165,10 @@ random.graph.game <- function(
   type <- igraph.match.arg(type)
 
   if (type == "gnp") {
-    lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
+    lifecycle::deprecate_warn("2.2.0", "random.graph.game()", "sample_gnp()")
     sample_gnp(n = n, p = p.or.m, directed = directed, loops = loops)
   } else if (type == "gnm") {
-    lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnm()")
+    lifecycle::deprecate_warn("2.2.0", "random.graph.game()", "sample_gnm()")
     sample_gnm(n = n, m = p.or.m, directed = directed, loops = loops)
   }
 }
@@ -1375,24 +1375,24 @@ sample_degseq <- function(
   )
 
   if (method == "simple") {
-    lifecycle::deprecate_warn(
-      "2.1.0",
+    lifecycle::deprecate_stop(
+      "2.2.0",
       "sample_degseq(method = 'must be configuration instead of simple')"
     )
     method <- "configuration"
   }
 
   if (method == "simple.no.multiple") {
-    lifecycle::deprecate_warn(
-      "2.1.0",
+    lifecycle::deprecate_stop(
+      "2.2.0",
       "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')"
     )
     method <- "fast.heur.simple"
   }
 
   if (method == "simple.no.multiple.uniform") {
-    lifecycle::deprecate_warn(
-      "2.1.0",
+    lifecycle::deprecate_stop(
+      "2.2.0",
       "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')"
     )
     method <- "configuration.simple"
@@ -2309,14 +2309,14 @@ sample_bipartite <- function(
   mode <- igraph.match.arg(mode)
 
   if (type == "gnp") {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.2.0",
       "sample_bipartite()",
       "sample_bipartite_gnp()"
     )
     sample_bipartite_gnp(n1, n2, p, directed = directed, mode = mode)
   } else if (type == "gnm") {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "2.2.0",
       "sample_bipartite()",
       "sample_bipartite_gnm()"
@@ -2332,15 +2332,15 @@ sample_bipartite <- function(
 #' @export
 bipartite <- function(..., type = NULL) {
   if (is.null(type) || type == "gnp") {
-    lifecycle::deprecate_soft(
-      "2.1.3",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "bipartite()",
       "bipartite_gnp()"
     )
     bipartite_gnp(...)
   } else if (type == "gnm") {
-    lifecycle::deprecate_soft(
-      "2.1.3",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "bipartite()",
       "bipartite_gnm()"
     )

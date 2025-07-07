@@ -10,7 +10,7 @@
 #' @export
 permute.vertices <- function(graph, permutation) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "permute.vertices()", "permute()")
+  lifecycle::deprecate_warn("2.2.0", "permute.vertices()", "permute()")
   permute(graph = graph, permutation = permutation)
 } # nocov end
 
@@ -26,8 +26,8 @@ permute.vertices <- function(graph, permutation) {
 #' @export
 graph.isocreate <- function(size, number, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.isocreate()",
     "graph_from_isomorphism_class()"
   )
@@ -54,8 +54,8 @@ graph.automorphisms <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.automorphisms()",
     "count_automorphisms()"
   )
@@ -78,8 +78,8 @@ canonical.permutation <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "canonical.permutation()",
     "canonical_permutation()"
   )
@@ -102,7 +102,7 @@ automorphisms <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "automorphisms()", "count_automorphisms()")
+  lifecycle::deprecate_warn("2.2.0", "automorphisms()", "count_automorphisms()")
   count_automorphisms(graph = graph, colors = colors, sh = sh)
 } # nocov end
 

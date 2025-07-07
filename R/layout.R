@@ -10,8 +10,8 @@
 #' @export
 piecewise.layout <- function(graph, layout = layout_with_kk, ...) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "piecewise.layout()",
     "layout_components()"
   )
@@ -38,8 +38,8 @@ layout.sugiyama <- function(
   attributes = c("default", "all", "none")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.sugiyama()",
     "layout_with_sugiyama()"
   )
@@ -66,7 +66,7 @@ layout.sugiyama <- function(
 #' @export
 layout.star <- function(graph, center = V(graph)[1], order = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.star()", "layout_as_star()")
+  lifecycle::deprecate_warn("2.2.0", "layout.star()", "layout_as_star()")
   layout_as_star(graph = graph, center = center, order = order)
 } # nocov end
 
@@ -90,7 +90,7 @@ layout.norm <- function(
   zmax = 1
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.norm()", "norm_coords()")
+  lifecycle::deprecate_warn("2.2.0", "layout.norm()", "norm_coords()")
   norm_coords(
     layout = layout,
     xmin = xmin,
@@ -114,7 +114,7 @@ layout.norm <- function(
 #' @export
 layout.merge <- function(graphs, layouts, method = "dla") {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.merge()", "merge_coords()")
+  lifecycle::deprecate_warn("2.2.0", "layout.merge()", "merge_coords()")
   merge_coords(graphs = graphs, layouts = layouts, method = method)
 } # nocov end
 
@@ -135,7 +135,7 @@ layout.mds <- function(
   options = arpack_defaults()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.mds()", "layout_with_mds()")
+  lifecycle::deprecate_warn("2.2.0", "layout.mds()", "layout_with_mds()")
   layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
 } # nocov end
 
@@ -151,7 +151,7 @@ layout.mds <- function(
 #' @export
 layout.grid <- function(graph, width = 0, height = 0, dim = 2) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.grid()", "layout_on_grid()")
+  lifecycle::deprecate_warn("2.2.0", "layout.grid()", "layout_on_grid()")
   layout_on_grid(graph = graph, width = width, height = height, dim = dim)
 } # nocov end
 
@@ -176,8 +176,8 @@ layout.graphopt <- function(
   max.sa.movement = 5
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.graphopt()",
     "layout_with_graphopt()"
   )
@@ -212,7 +212,7 @@ layout.gem <- function(
   temp.init = sqrt(max(vcount(graph), 1))
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.gem()", "layout_with_gem()")
+  lifecycle::deprecate_warn("2.2.0", "layout.gem()", "layout_with_gem()")
   layout_with_gem(
     graph = graph,
     coords = coords,
@@ -246,8 +246,8 @@ layout.davidson.harel <- function(
   weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.davidson.harel()",
     "layout_with_dh()"
   )
@@ -283,8 +283,8 @@ layout.bipartite <- function(
   maxiter = 100
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.bipartite()",
     "layout_as_bipartite()"
   )
@@ -309,7 +309,7 @@ layout.bipartite <- function(
 #' @export
 layout.auto <- function(graph, dim = 2, ...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.auto()", "layout_nicely()")
+  lifecycle::deprecate_warn("2.2.0", "layout.auto()", "layout_nicely()")
   layout_nicely(graph = graph, dim = dim, ...)
 } # nocov end
 
@@ -800,8 +800,8 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @keywords internal
 #' @export
 layout.reingold.tilford <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.reingold.tilford()",
     "layout_as_tree()"
   )
@@ -864,7 +864,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @keywords internal
 #' @export
 layout.circle <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.circle()", "layout_in_circle()")
+  lifecycle::deprecate_warn("2.2.0", "layout.circle()", "layout_in_circle()")
   do_call(layout_in_circle, .args = c(list(...), params))
 }
 
@@ -1046,7 +1046,7 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 #' @export
 #' @keywords internal
 layout.grid.3d <- function(graph, width = 0, height = 0) {
-  lifecycle::deprecate_stop("2.1.0", "layout.grid.3d()", "layout_on_grid()")
+  lifecycle::deprecate_stop("2.2.0", "layout.grid.3d()", "layout_on_grid()")
 }
 
 ## ----------------------------------------------------------------
@@ -1093,7 +1093,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @keywords internal
 #' @export
 layout.sphere <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.sphere()", "layout_on_sphere()")
+  lifecycle::deprecate_warn("2.2.0", "layout.sphere()", "layout_on_sphere()")
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
@@ -1145,7 +1145,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @keywords internal
 #' @export
 layout.random <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.random()", "layout_randomly()")
+  lifecycle::deprecate_warn("2.2.0", "layout.random()", "layout_randomly()")
   do_call(layout_randomly, .args = c(list(...), params))
 }
 
@@ -1464,16 +1464,16 @@ layout_with_fr <- function(
     maxz <- as.numeric(maxz)
   }
   if (lifecycle::is_present(coolexp)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(coolexp = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_fr(coolexp = )")
   }
   if (lifecycle::is_present(maxdelta)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(maxdelta = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_fr(maxdelta = )")
   }
   if (lifecycle::is_present(area)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(area = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_fr(area = )")
   }
   if (lifecycle::is_present(repulserad)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_fr(repulserad = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_fr(repulserad = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1527,8 +1527,8 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.fruchterman.reingold()",
     "layout_with_fr()"
   )
@@ -1831,16 +1831,16 @@ layout_with_kk <- function(
   }
 
   if (lifecycle::is_present(niter)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(niter = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_kk(niter = )")
   }
   if (lifecycle::is_present(sigma)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(sigma = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_kk(sigma = )")
   }
   if (lifecycle::is_present(initemp)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(initemp = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_kk(initemp = )")
   }
   if (lifecycle::is_present(coolexp)) {
-    lifecycle::deprecate_stop("0.8.0", "layout_with_kk(coolexp = )")
+    lifecycle::deprecate_stop("2.2.0", "layout_with_kk(coolexp = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1898,8 +1898,8 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @keywords internal
 #' @export
 layout.kamada.kawai <- function(..., params = list()) {
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "layout.kamada.kawai()",
     "layout_with_kk()"
   )
@@ -1984,7 +1984,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @keywords internal
 #' @export
 layout.lgl <- function(..., params = list()) {
-  lifecycle::deprecate_soft("2.1.0", "layout.lgl()", "layout_with_lgl()")
+  lifecycle::deprecate_warn("2.2.0", "layout.lgl()", "layout_with_lgl()")
   do_call(layout_with_lgl, .args = c(list(...), params))
 }
 
@@ -2040,8 +2040,8 @@ layout_with_mds <- function(
   options = arpack_defaults()
 ) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "layout_with_mds(options = 'must be a list')",
       details = c(
         "`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`."
@@ -2584,7 +2584,7 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
 #' @export
 #' @keywords internal
 layout.spring <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.spring()", "layout_with_fr()")
+  lifecycle::deprecate_stop("2.2.0", "layout.spring()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
@@ -2602,7 +2602,7 @@ layout.spring <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.svd <- function(graph, ...) {
-  lifecycle::deprecate_warn("2.1.0", "layout.svd()", "layout_with_fr()")
+  lifecycle::deprecate_stop("2.2.0", "layout.svd()", "layout_with_fr()")
   layout_with_fr(graph)
 }
 
@@ -2621,8 +2621,8 @@ layout.svd <- function(graph, ...) {
 #' @keywords internal
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
-  lifecycle::deprecate_warn(
-    "2.1.0",
+  lifecycle::deprecate_stop(
+    "2.2.0",
     "layout.fruchterman.reingold.grid()",
     "layout_with_fr()"
   )
@@ -2648,7 +2648,7 @@ layout.drl <- function(
   dim = 2
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "layout.drl()", "layout_with_drl()")
+  lifecycle::deprecate_warn("2.2.0", "layout.drl()", "layout_with_drl()")
   layout_with_drl(
     graph = graph,
     use.seed = use.seed,

@@ -499,7 +499,7 @@ NULL
 #' @export
 autocurve.edges <- function(graph, start = 0.5) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "autocurve.edges()", "curve_multiple()")
+  lifecycle::deprecate_warn("2.2.0", "autocurve.edges()", "curve_multiple()")
   curve_multiple(graph = graph, start = start)
 } # nocov end
 #   IGraph R package

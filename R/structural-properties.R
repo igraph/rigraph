@@ -20,7 +20,7 @@ get.shortest.paths <- function(
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.shortest.paths()", "shortest_paths()")
+  lifecycle::deprecate_warn("2.2.0", "get.shortest.paths()", "shortest_paths()")
   shortest_paths(
     graph = graph,
     from = from,
@@ -52,8 +52,8 @@ get.all.shortest.paths <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "get.all.shortest.paths()",
     "all_shortest_paths()"
   )
@@ -83,7 +83,7 @@ get.diameter <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.diameter()", "get_diameter()")
+  lifecycle::deprecate_warn("2.2.0", "get.diameter()", "get_diameter()")
   get_diameter(
     graph = graph,
     directed = directed,
@@ -104,7 +104,7 @@ get.diameter <- function(
 #' @export
 unfold.tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "unfold.tree()", "unfold_tree()")
+  lifecycle::deprecate_warn("2.2.0", "unfold.tree()", "unfold_tree()")
   unfold_tree(graph = graph, mode = mode, roots = roots)
 } # nocov end
 
@@ -120,7 +120,7 @@ unfold.tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' @export
 topological.sort <- function(graph, mode = c("out", "all", "in")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "topological.sort()", "topo_sort()")
+  lifecycle::deprecate_warn("2.2.0", "topological.sort()", "topo_sort()")
   topo_sort(graph = graph, mode = mode)
 } # nocov end
 
@@ -149,7 +149,7 @@ shortest.paths <- function(
   )
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "shortest.paths()", "distances()")
+  lifecycle::deprecate_warn("2.2.0", "shortest.paths()", "distances()")
   algorithm <- igraph.match.arg(algorithm)
   mode <- igraph.match.arg(mode)
   distances(
@@ -180,7 +180,7 @@ neighborhood.size <- function(
   mindist = 0
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "neighborhood.size()", "ego_size()")
+  lifecycle::deprecate_warn("2.2.0", "neighborhood.size()", "ego_size()")
   ego_size(
     graph = graph,
     order = order,
@@ -207,8 +207,8 @@ maximum.bipartite.matching <- function(
   eps = .Machine$double.eps
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "maximum.bipartite.matching()",
     "max_bipartite_match()"
   )
@@ -232,7 +232,7 @@ maximum.bipartite.matching <- function(
 #' @export
 is.mutual <- function(graph, eids = E(graph), loops = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.mutual()", "which_mutual()")
+  lifecycle::deprecate_warn("2.2.0", "is.mutual()", "which_mutual()")
   which_mutual(graph = graph, eids = eids, loops = loops)
 } # nocov end
 
@@ -248,7 +248,7 @@ is.mutual <- function(graph, eids = E(graph), loops = TRUE) {
 #' @export
 is.multiple <- function(graph, eids = E(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.multiple()", "which_multiple()")
+  lifecycle::deprecate_warn("2.2.0", "is.multiple()", "which_multiple()")
   which_multiple(graph = graph, eids = eids)
 } # nocov end
 
@@ -264,8 +264,8 @@ is.multiple <- function(graph, eids = E(graph)) {
 #' @export
 is.maximal.matching <- function(graph, matching, types = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "is.maximal.matching()",
     "is_max_matching()"
   )
@@ -284,7 +284,7 @@ is.maximal.matching <- function(graph, matching, types = NULL) {
 #' @export
 is.matching <- function(graph, matching, types = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.matching()", "is_matching()")
+  lifecycle::deprecate_warn("2.2.0", "is.matching()", "is_matching()")
   is_matching(graph = graph, matching = matching, types = types)
 } # nocov end
 
@@ -300,7 +300,7 @@ is.matching <- function(graph, matching, types = NULL) {
 #' @export
 is.loop <- function(graph, eids = E(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.loop()", "which_loop()")
+  lifecycle::deprecate_warn("2.2.0", "is.loop()", "which_loop()")
   which_loop(graph = graph, eids = eids)
 } # nocov end
 
@@ -316,7 +316,7 @@ is.loop <- function(graph, eids = E(graph)) {
 #' @export
 is.connected <- function(graph, mode = c("weak", "strong")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.connected()", "is_connected()")
+  lifecycle::deprecate_warn("2.2.0", "is.connected()", "is_connected()")
   is_connected(graph = graph, mode = mode)
 } # nocov end
 
@@ -336,7 +336,7 @@ induced.subgraph <- function(
   impl = c("auto", "copy_and_delete", "create_from_scratch")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "induced.subgraph()", "induced_subgraph()")
+  lifecycle::deprecate_warn("2.2.0", "induced.subgraph()", "induced_subgraph()")
   induced_subgraph(graph = graph, vids = vids, impl = impl)
 } # nocov end
 
@@ -352,7 +352,7 @@ induced.subgraph <- function(
 #' @export
 has.multiple <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "has.multiple()", "any_multiple()")
+  lifecycle::deprecate_warn("2.2.0", "has.multiple()", "any_multiple()")
   any_multiple(graph = graph)
 } # nocov end
 
@@ -374,7 +374,7 @@ graph.neighborhood <- function(
   mindist = 0
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.neighborhood()", "make_ego_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.neighborhood()", "make_ego_graph()")
   make_ego_graph(
     graph = graph,
     order = order,
@@ -401,7 +401,7 @@ graph.laplacian <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.laplacian()", "laplacian_matrix()")
+  lifecycle::deprecate_warn("2.2.0", "graph.laplacian()", "laplacian_matrix()")
   laplacian_matrix(
     graph = graph,
     normalized = normalized,
@@ -428,7 +428,7 @@ graph.knn <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.knn()", "knn()")
+  lifecycle::deprecate_warn("2.2.0", "graph.knn()", "knn()")
   knn(
     graph = graph,
     vids = vids,
@@ -465,7 +465,7 @@ graph.dfs <- function(
   neimode
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.dfs()", "dfs()")
+  lifecycle::deprecate_warn("2.2.0", "graph.dfs()", "dfs()")
   dfs(
     graph = graph,
     root = root,
@@ -495,7 +495,7 @@ graph.dfs <- function(
 #' @export
 graph.density <- function(graph, loops = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.density()", "edge_density()")
+  lifecycle::deprecate_warn("2.2.0", "graph.density()", "edge_density()")
   edge_density(graph = graph, loops = loops)
 } # nocov end
 
@@ -511,7 +511,7 @@ graph.density <- function(graph, loops = FALSE) {
 #' @export
 graph.coreness <- function(graph, mode = c("all", "out", "in")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.coreness()", "coreness()")
+  lifecycle::deprecate_warn("2.2.0", "graph.coreness()", "coreness()")
   coreness(graph = graph, mode = mode)
 } # nocov end
 
@@ -544,7 +544,7 @@ graph.bfs <- function(
   neimode
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.bfs()", "bfs()")
+  lifecycle::deprecate_warn("2.2.0", "graph.bfs()", "bfs()")
   bfs(
     graph = graph,
     root = root,
@@ -581,7 +581,7 @@ farthest.nodes <- function(
   weights = NULL
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "farthest.nodes()", "farthest_vertices()")
+  lifecycle::deprecate_warn("2.2.0", "farthest.nodes()", "farthest_vertices()")
   farthest_vertices(
     graph = graph,
     directed = directed,
@@ -602,8 +602,8 @@ farthest.nodes <- function(
 #' @export
 degree.distribution <- function(graph, cumulative = FALSE, ...) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "degree.distribution()",
     "degree_distribution()"
   )
@@ -622,7 +622,7 @@ degree.distribution <- function(graph, cumulative = FALSE, ...) {
 #' @export
 count.multiple <- function(graph, eids = E(graph)) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "count.multiple()", "count_multiple()")
+  lifecycle::deprecate_warn("2.2.0", "count.multiple()", "count_multiple()")
   count_multiple(graph = graph, eids = eids)
 } # nocov end
 
@@ -638,7 +638,7 @@ count.multiple <- function(graph, eids = E(graph)) {
 #' @export
 clusters <- function(graph, mode = c("weak", "strong")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "clusters()", "components()")
+  lifecycle::deprecate_warn("2.2.0", "clusters()", "components()")
   components(graph = graph, mode = mode)
 } # nocov end
 
@@ -660,7 +660,7 @@ average.path.length <- function(
   details = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "average.path.length()", "mean_distance()")
+  lifecycle::deprecate_warn("2.2.0", "average.path.length()", "mean_distance()")
   mean_distance(
     graph = graph,
     weights = weights,
@@ -1594,8 +1594,8 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "subgraph.edges()",
     "subgraph_from_edges()"
   )
@@ -2597,14 +2597,14 @@ bfs <- function(
 
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_stop(
-      "1.3.0",
+      "2.2.0",
       "bfs(neimode = )",
       "bfs(mode = )"
     )
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.2.0", "bfs(father = )", "bfs(parent = )")
+    lifecycle::deprecate_stop("2.2.0", "bfs(father = )", "bfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
@@ -2859,14 +2859,14 @@ dfs <- function(
   ensure_igraph(graph)
   if (lifecycle::is_present(neimode)) {
     lifecycle::deprecate_stop(
-      "1.3.0",
+      "2.2.0",
       "dfs(neimode = )",
       "dfs(mode = )"
     )
   }
 
   if (lifecycle::is_present(father)) {
-    lifecycle::deprecate_warn("2.2.0", "dfs(father = )", "dfs(parent = )")
+    lifecycle::deprecate_stop("2.2.0", "dfs(father = )", "dfs(parent = )")
     if (missing(parent)) {
       parent <- father
     }
@@ -3163,8 +3163,8 @@ laplacian_matrix <- function(
 ) {
   # Argument checks
   if (lifecycle::is_present(normalized)) {
-    lifecycle::deprecate_soft(
-      "2.0.3",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "make_lattice(normalized = 'provide normalization instead')",
       details = c(
         "`normalized` is now deprecated, use `normalization` instead."

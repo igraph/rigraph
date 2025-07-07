@@ -10,7 +10,7 @@
 #' @export
 no.clusters <- function(graph, mode = c("weak", "strong")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "no.clusters()", "count_components()")
+  lifecycle::deprecate_warn("2.2.0", "no.clusters()", "count_components()")
   count_components(graph = graph, mode = mode)
 } # nocov end
 
@@ -31,7 +31,7 @@ decompose.graph <- function(
   min.vertices = 0
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "decompose.graph()", "decompose()")
+  lifecycle::deprecate_warn("2.2.0", "decompose.graph()", "decompose()")
   decompose(
     graph = graph,
     mode = mode,
@@ -57,8 +57,8 @@ cluster.distribution <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "cluster.distribution()",
     "component_distribution()"
   )
@@ -82,8 +82,8 @@ cluster.distribution <- function(
 #' @export
 biconnected.components <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "biconnected.components()",
     "biconnected_components()"
   )
@@ -102,8 +102,8 @@ biconnected.components <- function(graph) {
 #' @export
 articulation.points <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "articulation.points()",
     "articulation_points()"
   )

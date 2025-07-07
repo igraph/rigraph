@@ -10,7 +10,7 @@
 #' @export
 is.simple <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.simple()", "is_simple()")
+  lifecycle::deprecate_warn("2.2.0", "is.simple()", "is_simple()")
   is_simple(graph = graph)
 } # nocov end
 

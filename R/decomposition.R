@@ -16,7 +16,7 @@ is.chordal <- function(
   newgraph = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.chordal()", "is_chordal()")
+  lifecycle::deprecate_warn("2.2.0", "is.chordal()", "is_chordal()")
   is_chordal(
     graph = graph,
     alpha = alpha,

@@ -14,7 +14,7 @@ get.stochastic <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.stochastic()", "stochastic_matrix()")
+  lifecycle::deprecate_warn("2.2.0", "get.stochastic()", "stochastic_matrix()")
   stochastic_matrix(graph = graph, column.wise = column.wise, sparse = sparse)
 } # nocov end
 #   IGraph R package

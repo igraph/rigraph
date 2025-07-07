@@ -16,7 +16,7 @@ hrg.predict <- function(
   num.bins = 25
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.predict()", "predict_edges()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.predict()", "predict_edges()")
   predict_edges(
     graph = graph,
     hrg = hrg,
@@ -38,7 +38,7 @@ hrg.predict <- function(
 #' @export
 hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.fit()", "fit_hrg()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.fit()", "fit_hrg()")
   fit_hrg(graph = graph, hrg = hrg, start = start, steps = steps)
 } # nocov end
 
@@ -54,7 +54,7 @@ hrg.fit <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' @export
 hrg.game <- function(hrg) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.game()", "sample_hrg()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.game()", "sample_hrg()")
   sample_hrg(hrg = hrg)
 } # nocov end
 
@@ -70,7 +70,7 @@ hrg.game <- function(hrg) {
 #' @export
 hrg.dendrogram <- function(hrg) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.dendrogram()", "hrg_tree()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.dendrogram()", "hrg_tree()")
   hrg_tree(hrg = hrg)
 } # nocov end
 
@@ -86,7 +86,7 @@ hrg.dendrogram <- function(hrg) {
 #' @export
 hrg.create <- function(graph, prob) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.create()", "hrg()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.create()", "hrg()")
   hrg(graph = graph, prob = prob)
 } # nocov end
 
@@ -107,7 +107,7 @@ hrg.consensus <- function(
   num.samples = 10000
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "hrg.consensus()", "consensus_tree()")
+  lifecycle::deprecate_warn("2.2.0", "hrg.consensus()", "consensus_tree()")
   consensus_tree(
     graph = graph,
     hrg = hrg,

@@ -202,7 +202,7 @@ clear_native_ptr <- function(g) {
 #' @export
 igraph.version <- function() {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.version()", "igraph_version()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.version()", "igraph_version()")
   igraph_version()
 } # nocov end
 

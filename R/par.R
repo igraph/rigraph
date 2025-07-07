@@ -10,7 +10,7 @@
 #' @export
 igraph.options <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.options()", "igraph_options()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.options()", "igraph_options()")
   igraph_i_options(...)
 } # nocov end
 
@@ -26,7 +26,7 @@ igraph.options <- function(...) {
 #' @export
 getIgraphOpt <- function(x, default = NULL) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "getIgraphOpt()", "igraph_opt()")
+  lifecycle::deprecate_warn("2.2.0", "getIgraphOpt()", "igraph_opt()")
 
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])

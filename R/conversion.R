@@ -10,7 +10,7 @@
 #' @export
 igraph.to.graphNEL <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.to.graphNEL()", "as_graphnel()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.to.graphNEL()", "as_graphnel()")
   as_graphnel(graph = graph)
 } # nocov end
 
@@ -31,8 +31,8 @@ igraph.from.graphNEL <- function(
   unlist.attrs = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "igraph.from.graphNEL()",
     "graph_from_graphnel()"
   )
@@ -60,7 +60,7 @@ graph.adjlist <- function(
   duplicate = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "graph.adjlist()", "graph_from_adj_list()")
+  lifecycle::deprecate_warn("2.2.0", "graph.adjlist()", "graph_from_adj_list()")
   graph_from_adj_list(adjlist = adjlist, mode = mode, duplicate = duplicate)
 } # nocov end
 
@@ -82,8 +82,8 @@ get.incidence <- function(
   sparse = FALSE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "get.incidence()",
     "as_biadjacency_matrix()"
   )
@@ -108,7 +108,7 @@ get.incidence <- function(
 #' @export
 get.edgelist <- function(graph, names = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.edgelist()", "as_edgelist()")
+  lifecycle::deprecate_warn("2.2.0", "get.edgelist()", "as_edgelist()")
   as_edgelist(graph = graph, names = names)
 } # nocov end
 
@@ -124,7 +124,7 @@ get.edgelist <- function(graph, names = TRUE) {
 #' @export
 get.data.frame <- function(x, what = c("edges", "vertices", "both")) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.data.frame()", "as_data_frame()")
+  lifecycle::deprecate_warn("2.2.0", "get.data.frame()", "as_data_frame()")
   as_data_frame(x = x, what = what)
 } # nocov end
 
@@ -147,7 +147,7 @@ get.adjacency <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjacency()", "as_adjacency_matrix()")
+  lifecycle::deprecate_warn("2.2.0", "get.adjacency()", "as_adjacency_matrix()")
   as_adjacency_matrix(
     graph = graph,
     type = type,
@@ -175,7 +175,7 @@ get.adjlist <- function(
   multiple = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjlist()", "as_adj_list()")
+  lifecycle::deprecate_warn("2.2.0", "get.adjlist()", "as_adj_list()")
   as_adj_list(graph = graph, mode = mode, loops = loops, multiple = multiple)
 } # nocov end
 
@@ -195,7 +195,7 @@ get.adjedgelist <- function(
   loops = c("twice", "once", "ignore")
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "get.adjedgelist()", "as_adj_edge_list()")
+  lifecycle::deprecate_warn("2.2.0", "get.adjedgelist()", "as_adj_edge_list()")
   as_adj_edge_list(graph = graph, mode = mode, loops = loops)
 } # nocov end
 #   IGraph R package
@@ -233,8 +233,8 @@ get.adjacency.dense <- function(
 
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
-    lifecycle::deprecate_soft(
-      "2.1.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "get.adjacency.dense(loops = 'must be a character')",
       details = sprintf(
         "Converting to get.adjacency.dense (loops = '%s')",
@@ -417,7 +417,7 @@ as_adjacency_matrix <- function(
   ensure_igraph(graph)
 
   if (lifecycle::is_present(edges) && isTRUE(edges)) {
-    lifecycle::deprecate_stop("2.0.0", "as_adjacency_matrix(edges = )")
+    lifecycle::deprecate_stop("2.2.0", "as_adjacency_matrix(edges = )")
   }
 
   if (sparse) {
@@ -451,7 +451,7 @@ as_adj <- function(
   names = TRUE,
   sparse = igraph_opt("sparsematrices")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as_adj()", "as_adjacency_matrix()")
+  lifecycle::deprecate_warn("2.2.0", "as_adj()", "as_adjacency_matrix()")
 
   as_adjacency_matrix(
     graph = graph,
@@ -1160,8 +1160,8 @@ as_biadjacency_matrix <- function(
 #' @export
 as_incidence_matrix <- function(...) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "1.6.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "as_incidence_matrix()",
     "as_biadjacency_matrix()"
   )
@@ -1389,7 +1389,7 @@ as.directed <- function(
   graph,
   mode = c("mutual", "arbitrary", "random", "acyclic")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as.directed()", "as_directed()")
+  lifecycle::deprecate_warn("2.2.0", "as.directed()", "as_directed()")
   as_directed(graph, mode = mode)
 }
 
@@ -1408,7 +1408,7 @@ as.undirected <- function(
   mode = c("collapse", "each", "mutual"),
   edge.attr.comb = igraph_opt("edge.attr.comb")
 ) {
-  lifecycle::deprecate_soft("2.1.0", "as.undirected()", "as_undirected()")
+  lifecycle::deprecate_warn("2.2.0", "as.undirected()", "as_undirected()")
   as_undirected(graph = graph, mode = mode, edge.attr.comb = edge.attr.comb)
 }
 
@@ -1424,8 +1424,8 @@ as.undirected <- function(
 #' @export
 graph.edgelist <- function(el, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.edgelist()",
     "graph_from_edgelist()"
   )
@@ -1444,8 +1444,8 @@ graph.edgelist <- function(el, directed = TRUE) {
 #' @export
 graph.data.frame <- function(d, directed = TRUE, vertices = NULL) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.data.frame()",
     "graph_from_data_frame()"
   )

@@ -10,7 +10,7 @@
 #' @export
 is.directed <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "is.directed()", "is_directed()")
+  lifecycle::deprecate_warn("2.2.0", "is.directed()", "is_directed()")
   is_directed(graph = graph)
 } # nocov end
 
@@ -26,7 +26,7 @@ is.directed <- function(graph) {
 #' @export
 delete.vertices <- function(graph, v) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "delete.vertices()", "delete_vertices()")
+  lifecycle::deprecate_warn("2.2.0", "delete.vertices()", "delete_vertices()")
   delete_vertices(graph = graph, v = v)
 } # nocov end
 
@@ -42,7 +42,7 @@ delete.vertices <- function(graph, v) {
 #' @export
 delete.edges <- function(graph, edges) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "delete.edges()", "delete_edges()")
+  lifecycle::deprecate_warn("2.2.0", "delete.edges()", "delete_edges()")
   delete_edges(graph = graph, edges = edges)
 } # nocov end
 
@@ -58,7 +58,7 @@ delete.edges <- function(graph, edges) {
 #' @export
 add.vertices <- function(graph, nv, ..., attr = list()) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "add.vertices()", "add_vertices()")
+  lifecycle::deprecate_warn("2.2.0", "add.vertices()", "add_vertices()")
   add_vertices(graph = graph, nv = nv, attr = attr, ...)
 } # nocov end
 
@@ -74,7 +74,7 @@ add.vertices <- function(graph, nv, ..., attr = list()) {
 #' @export
 add.edges <- function(graph, edges, ..., attr = list()) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "add.edges()", "add_edges()")
+  lifecycle::deprecate_warn("2.2.0", "add.edges()", "add_edges()")
   add_edges(graph = graph, edges = edges, attr = attr, ...)
 } # nocov end
 #   IGraph R package
@@ -484,12 +484,12 @@ el_to_vec <- function(x, call = rlang::caller_env()) {
     ncol <- dimx[[2]]
     if (nrow == 2 && ncol == 2) {
       lifecycle::deprecate_stop(
-        "2.1.5",
+        "2.2.0",
         "get_edge_ids(vp = 'is not allowed to be a 2 times 2 matrix')"
       )
     } else if (nrow == 2) {
-      lifecycle::deprecate_warn(
-        "2.1.5",
+      lifecycle::deprecate_stop(
+        "2.2.0",
         "get_edge_ids(vp = 'supplied as a matrix should be a n times 2 matrix, not 2 times n')",
         details = "either transpose the matrix with t() or convert it to a data.frame with two columns."
       )
@@ -595,12 +595,12 @@ get.edge.ids <- function(
 ) {
   if (lifecycle::is_present(multi)) {
     if (isTRUE(multi)) {
-      lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
+      lifecycle::deprecate_stop("2.2.0", "get.edge.ids(multi = )")
     }
 
-    lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
+    lifecycle::deprecate_warn("2.2.0", "get.edge.ids(multi = )")
   }
-  lifecycle::deprecate_soft("2.1.0", "get.edge.ids()", "get_edge_ids()")
+  lifecycle::deprecate_warn("2.2.0", "get.edge.ids()", "get_edge_ids()")
   get_edge_ids(graph = graph, vp = vp, directed = directed, error = error)
 }
 

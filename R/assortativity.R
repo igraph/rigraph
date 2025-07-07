@@ -15,8 +15,8 @@ assortativity.nominal <- function(
   normalized = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "assortativity.nominal()",
     "assortativity_nominal()"
   )
@@ -40,8 +40,8 @@ assortativity.nominal <- function(
 #' @export
 assortativity.degree <- function(graph, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.0.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "assortativity.degree()",
     "assortativity_degree()"
   )
@@ -172,8 +172,8 @@ assortativity <- function(
   types2 = NULL
 ) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "assortativity(... =)",
       details = "Arguments `values` and `values.in` must be named."
     )
@@ -194,8 +194,8 @@ assortativity <- function(
   }
 
   if (missing(values)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "assortativity(types1 =)",
       "assortativity(values =)"
     )
@@ -203,8 +203,8 @@ assortativity <- function(
   }
 
   if (!is.null(types2)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "assortativity(types2 =)",
       "assortativity(values.in =)"
     )

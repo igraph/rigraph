@@ -10,7 +10,7 @@
 #' @export
 running.mean <- function(v, binwidth) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "running.mean()", "running_mean()")
+  lifecycle::deprecate_warn("2.2.0", "running.mean()", "running_mean()")
   running_mean(v = v, binwidth = binwidth)
 } # nocov end
 
@@ -26,7 +26,7 @@ running.mean <- function(v, binwidth) {
 #' @export
 igraph.sample <- function(low, high, length) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "igraph.sample()", "sample_seq()")
+  lifecycle::deprecate_warn("2.2.0", "igraph.sample()", "sample_seq()")
   sample_seq(low = low, high = high, length = length)
 } # nocov end
 
@@ -42,7 +42,7 @@ igraph.sample <- function(low, high, length) {
 #' @export
 convex.hull <- function(data) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "convex.hull()", "convex_hull()")
+  lifecycle::deprecate_warn("2.2.0", "convex.hull()", "convex_hull()")
   convex_hull(data = data)
 } # nocov end
 #   IGraph R package

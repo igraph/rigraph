@@ -15,7 +15,7 @@ minimum.spanning.tree <- function(
   ...
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0", "minimum.spanning.tree()", "mst()")
+  lifecycle::deprecate_warn("2.2.0", "minimum.spanning.tree()", "mst()")
   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
 } # nocov end
 #   IGraph R package

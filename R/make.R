@@ -18,7 +18,7 @@ graph <- function(
   simplify = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph()", "make_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph()", "make_graph()")
   if (inherits(edges, "formula")) {
     if (!missing(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
@@ -145,7 +145,7 @@ graph.famous <- function(
   simplify = TRUE
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.famous()", "make_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.famous()", "make_graph()")
   if (inherits(edges, "formula")) {
     if (!missing(n)) {
       cli::cli_abort("{.arg n} should not be given for graph literals")
@@ -264,7 +264,7 @@ graph.famous <- function(
 #' @export
 line.graph <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "line.graph()", "make_line_graph()")
+  lifecycle::deprecate_warn("2.2.0", "line.graph()", "make_line_graph()")
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -287,7 +287,7 @@ line.graph <- function(graph) {
 #' @export
 graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
+  lifecycle::deprecate_warn("2.2.0", "graph.ring()", "make_ring()")
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_ring,
@@ -316,7 +316,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @export
 graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
+  lifecycle::deprecate_warn("2.2.0", "graph.tree()", "make_tree()")
   mode <- igraph.match.arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
@@ -351,7 +351,7 @@ graph.star <- function(
   center = 1
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
+  lifecycle::deprecate_warn("2.2.0", "graph.star()", "make_star()")
   mode <- igraph.match.arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
@@ -382,7 +382,7 @@ graph.star <- function(
 #' @export
 graph.lcf <- function(n, shifts, repeats = 1) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
+  lifecycle::deprecate_warn("2.2.0", "graph.lcf()", "graph_from_lcf()")
   # Argument checks
   n <- as.numeric(n)
   shifts <- as.numeric(shifts)
@@ -421,15 +421,15 @@ graph.lattice <- function(
   circular = deprecated()
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.lattice()", "make_lattice()")
+  lifecycle::deprecate_warn("2.2.0", "graph.lattice()", "make_lattice()")
   if (is.numeric(length) && length != floor(length)) {
     cli::cli_warn("{.arg length} was rounded to the nearest integer.")
     length <- round(length)
   }
 
   if (lifecycle::is_present(circular)) {
-    lifecycle::deprecate_soft(
-      "2.0.3",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "graph.lattice(circular = 'use periodic argument instead')",
       details = c("`circular` is now deprecated, use `periodic` instead.")
     )
@@ -473,7 +473,7 @@ graph.lattice <- function(
 #' @export
 graph.kautz <- function(m, n) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.kautz()", "make_kautz_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.kautz()", "make_kautz_graph()")
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
@@ -496,8 +496,8 @@ graph.kautz <- function(m, n) {
 #' @export
 graph.full.citation <- function(n, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.full.citation()",
     "make_full_citation_graph()"
   )
@@ -530,8 +530,8 @@ graph.full.bipartite <- function(
   mode = c("all", "out", "in")
 ) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.full.bipartite()",
     "make_full_bipartite_graph()"
   )
@@ -569,7 +569,7 @@ graph.full.bipartite <- function(
 #' @export
 graph.full <- function(n, directed = FALSE, loops = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.full()", "make_full_graph()")
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_full,
@@ -596,7 +596,7 @@ graph.full <- function(n, directed = FALSE, loops = FALSE) {
 #' @export
 graph.formula <- function(..., simplify = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.formula()", "graph_from_literal()")
+  lifecycle::deprecate_warn("2.2.0", "graph.formula()", "graph_from_literal()")
   mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
 } # nocov end
@@ -613,8 +613,8 @@ graph.formula <- function(..., simplify = TRUE) {
 #' @export
 graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.extended.chordal.ring()",
     "make_chordal_ring()"
   )
@@ -644,7 +644,7 @@ graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
 #' @export
 graph.empty <- function(n = 0, directed = TRUE) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.empty()", "make_empty_graph()")
+  lifecycle::deprecate_warn("2.2.0", "graph.empty()", "make_empty_graph()")
   # Argument checks
   n <- as.numeric(n)
   directed <- as.logical(directed)
@@ -668,8 +668,8 @@ graph.empty <- function(n = 0, directed = TRUE) {
 #' @export
 graph.de.bruijn <- function(m, n) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.de.bruijn()",
     "make_de_bruijn_graph()"
   )
@@ -695,8 +695,8 @@ graph.de.bruijn <- function(m, n) {
 #' @export
 graph.bipartite <- function(types, edges, directed = FALSE) {
   # nocov start
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph.bipartite()",
     "make_bipartite_graph()"
   )
@@ -743,7 +743,7 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
 #' @export
 graph.atlas <- function(n) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "graph.atlas()", "graph_from_atlas()")
+  lifecycle::deprecate_warn("2.2.0", "graph.atlas()", "graph_from_atlas()")
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_atlas, as.numeric(n))
   if (igraph_opt("add.params")) {
@@ -1037,8 +1037,8 @@ sample_ <- function(...) {
 #' graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 graph_ <- function(...) {
-  lifecycle::deprecate_soft(
-    "2.1.0",
+  lifecycle::deprecate_warn(
+    "2.2.0",
     "graph_()",
     details = c(
       "Please use constructors directly, for instance graph_from_edgelist().",
@@ -1973,8 +1973,8 @@ make_lattice <- function(
   circular = deprecated()
 ) {
   if (lifecycle::is_present(circular)) {
-    lifecycle::deprecate_soft(
-      "2.0.3",
+    lifecycle::deprecate_warn(
+      "2.2.0",
       "make_lattice(circular = 'use periodic argument instead')",
       details = c("`circular` is now deprecated, use `periodic` instead.")
     )
