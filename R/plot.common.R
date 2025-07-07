@@ -225,6 +225,13 @@
 #'
 #'   The default value is `black`.
 #' }
+#' \item{label.angle}{
+#'   The rotation of the vertex labels, in degrees. Corresponds to the `srt` parameter of [graphics::text()].
+#' }
+#' \item{label.adj}{
+#'   one or two numeric values, giving the horizontal and vertical adjustment of the vertex labels. See also `adj` in [graphics::text()].
+#' }
+
 #' \item{size.scaling}{
 #'   Switches between absolute vertex sizing (FALSE,default) and relative (TRUE).
 #'   If FALSE, `vertex.size` and `vertex.size2` are used as is.
@@ -252,24 +259,10 @@
 #'   The width of the edges. The default value is 1.
 #' }
 #' \item{arrow.size}{
-#'   The size of the arrows. Currently this is a constant, so it is the same for every edge.
-#'   If a vector is submitted then only the first element is used,
-#'   ie. if this is taken from an edge attribute
-#'   then only the attribute of the first edge is used for all arrows.
-#'   This will likely change in the future.
-#'
-#'   The default value is 1.
+#'   The size of the arrows. The default value is 1.
 #' }
 #' \item{arrow.width}{
-#'   The width of the arrows. Currently this is a constant, so it is the same for every edge.
-#'   If a vector is submitted then only the first element is used,
-#'   ie. if this is taken from an edge attribute
-#'   then only the attribute of the first edge is used for all arrows.
-#'   This will likely change in the future.
-#'
-#'   This argument is currently only used by [plot.igraph()].
-#'
-#'   The default value is 1, which gives the same width as before this option appeared in igraph.
+#'   The width of the arrows. The default value is 1.
 #' }
 #' \item{lty}{
 #'   The line type for the edges. Almost the
@@ -355,7 +348,7 @@
 #'   Gives the angle in radians for plotting loop edges.
 #'   See the `label.dist` vertex parameter to see how this is interpreted.
 #'
-#'   The default value is 0.
+#'   The default value is NULL. This means that the loop edges will be drawn automatically in the largest gap possible.
 #' }
 #' \item{loop.angle2}{
 #'   Gives the second angle in radians for plotting loop edges.
@@ -4861,6 +4854,8 @@ i.vertex.default <- list(
   label.family = "serif",
   label.font = 1,
   label.cex = 1,
+  label.angle = 0,
+  label.adj = NULL,
   frame.color = "black",
   frame.width = 1,
   shape = "circle",
@@ -4886,7 +4881,7 @@ i.edge.default <- list(
   label = i.get.edge.labels,
   lty = 1,
   width = 1,
-  loop.angle = 0,
+  loop.angle = NULL,
   loop.angle2 = 0,
   label.family = "serif",
   label.font = 1,

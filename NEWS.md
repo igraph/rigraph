@@ -1,5 +1,206 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9058
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ccf3125052d65ee504abe9b29e6d089a4275b187 (#1954).
+
+
+# igraph 2.1.4.9057
+
+## vendor
+
+- Update vendored sources to igraph/igraph@cb8a06487520edf3c5e8d30225cfdcbc22c209df (#1952).
+
+- Update vendored sources to igraph/igraph@44c57191247e7fec2940db9bef2e6d07c2d88e7c (#1951).
+
+- Update vendored sources to igraph/igraph@46f1e12c7cd12801d62e6b712130071b4ed3d151 (#1950).
+
+- Update vendored sources to igraph/igraph@fbcbfb7ed47a9bd644d4c3bef3c6cac02b7a220d (#1949).
+
+- Update vendored sources to igraph/igraph@ae1f405faa2c0e2dfec6c7006f06486dfd4e6146 (#1948).
+
+- Update vendored sources to igraph/igraph@4e71883edad5f343d76954ce29374627820a28a0 (#1947).
+
+
+# igraph 2.1.4.9056
+
+## Bug fixes
+
+- Automatically arrange loops in `plot()` (#407, #556, #1881).
+
+- `NA` checking only in from/to columns of edge data.frame (#1906).
+
+- Vectorized drawing of arrows (#257, #1904).
+
+- Keep vertex attribute type for `disjoint_union()` (#1640, #1909).
+
+## Features
+
+- Support for more graph product types.
+
+- Added `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
+
+- Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1920).
+
+- Auto-update from GitHub Actions (#1918).
+
+## Continuous integration
+
+- Show Git status.
+
+- Fix flag.
+
+- Fix shell.
+
+- Use air.
+
+- Do not talk about Claude failures.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@83b1d7a2cda5e0fcc3b6d04800cc96c32c47e2b3 (#1944).
+
+- Update vendored sources to igraph/igraph@8b0500e47f2777e1a2380cd3f9a717be1ea38881 (#1942).
+
+- Update vendored sources to igraph/igraph@7c967b95f62ca1a58f672a2fd9bea194334dc632 (#1941).
+
+- Update vendored sources to igraph/igraph@7239a13da6037e3f6b10ee19b095bca2b0a18742 (#1940).
+
+- Update vendored sources to igraph/igraph@65a83a4f34261a5e453cf2e5a04a0591f50d0da6 (#1939).
+
+- Update vendored sources to igraph/igraph@a3967d418293e382174b4e848921221b00dffb6e (#1938).
+
+- Update vendored sources to igraph/igraph@873aa6c8d823b7cca18fca5032c0a2487fb9d082 (#1937).
+
+- Update vendored sources to igraph/igraph@06074d94ffd0f8e283e079415c8e47b2eaf92cda (#1936).
+
+- Update vendored sources to igraph/igraph@50cf73d2844dd2ace266b38ac09ca29b627cb7ce (#1935).
+
+- Update vendored sources to igraph/igraph@e2a3b7c6e26683e9bb5f6a07d4e380861bd40f93 (#1934).
+
+- Update vendored sources to igraph/igraph@12078c2b256e7cc15404ccf32c349101ececcf56 (#1933).
+
+- Update vendored sources to igraph/igraph@cd62af9732e71060cc3b579fa49364bd08917175 (#1931).
+
+- Update vendored sources to igraph/igraph@015d34e5b6e6876d8328bf959a7c494bdd61c756 (#1930).
+
+- Update vendored sources to igraph/igraph@ea227139ceaa3d5525bf0ccb0656c93c6ca0b93c (#1929).
+
+- Update vendored sources to igraph/igraph@4b18e606d56b01d0ce7aa60063e88be3500c896e (#1928).
+
+- Update vendored sources (tag 0.10.16) to igraph/igraph@beebfcdcd707f50a31cf8eb3568cf09f8b7baf54 (#1927).
+
+- Update vendored sources to igraph/igraph@0f4e5be81a752112e828ce6614ad692cef29f5fb (#1926).
+
+- Update vendored sources to igraph/igraph@881c7d39b63b7986143db617afe65d4cf3b23e0e (#1925).
+
+- Update vendored sources to igraph/igraph@075be76c92b99ca4c95ad9207bcc1af6d471c85e (#1924).
+
+- Update vendored sources to igraph/igraph@06754306e700de9c6751301221744b781cdc791c (#1923).
+
+- Update vendored sources to igraph/igraph@ab6faf22c37cc5169063edd134193233ebab264e (#1922).
+
+- Update vendored sources to igraph/igraph@753afcc39f16942730913dcfd331c10668c18de1 (#1921).
+
+- Update vendored sources to igraph/igraph@80aea5c5897c67137872c945f684ad29408a5810 (#1919).
+
+- Update vendored sources to igraph/igraph@2c3cc367a24299b41cc7ae3f308781fde27950db (#1917).
+
+- Update vendored sources to igraph/igraph@7180ad04d0a1a3c796eb6931a21d25f5df532c7a (#1914).
+
+- Update vendored sources to igraph/igraph@8c1a72c8a38df0bd1337b5458f96555fbfce2778 (#1913).
+
+- Update vendored sources to igraph/igraph@f845707d5b35e889676821ee31b30a2cf7b670ef (#1912).
+
+- Update vendored sources to igraph/igraph@83f1f05905ff23f0c16e526b79ec1277f4209669 (#1911).
+
+
+# igraph 2.1.4.9055
+
+## Chore
+
+- Auto-update from GitHub Actions (#1901).
+
+- Revdepchecks, second run.
+
+- Ignore.
+
+- Revdepchecks.
+
+- Ignore.
+
+## Continuous integration
+
+- Ignore vendored libraries.
+
+
+# igraph 2.1.4.9054
+
+## Continuous integration
+
+- Fix main coverage workflow.
+
+- Install covr fix.
+
+
+# igraph 2.1.4.9053
+
+## Bug fixes
+
+- Allow more than one edge label font family (#37, #1896).
+
+- Pie shapes work as intended (#1882, #1883).
+
+## Features
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+## Chore
+
+- Auto-update from GitHub Actions (#1895).
+
+- Auto-update from GitHub Actions (#1893).
+
+- Auto-update from GitHub Actions (#1892).
+
+## Continuous integration
+
+- Turn off gcov.
+
+- More timeouts.
+
+- No timeout for covr.
+
+- Add plain covr workflow.
+
+- Add instructions.
+
+- Add Claude workflow.
+
+- Add description for workflow.
+
+## Breaking changes
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+
+# igraph 2.1.4.9052
+
+## Bug fixes
+
+- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
+
+- Do not try to destroy non-initialized SIR objects upon error.
+
+  see https://github.com/igraph/rigraph/issues/1888
+
+
 # igraph 2.1.4.9051
 
 ## Chore
