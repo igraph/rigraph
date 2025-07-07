@@ -526,7 +526,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_vertex_attr <- function(graph, name, index = V(graph), value, ...) {
+set_vertex_attr <- function(graph, name, index = V(graph), value) {
   check_string(name)
   if (is_complete_iterator(index)) {
     return(i_set_vertex_attr(

@@ -4,7 +4,7 @@
 \alias{set_vertex_attr}
 \title{Set vertex attributes}
 \usage{
-set_vertex_attr(graph, name, index = V(graph), value, ...)
+set_vertex_attr(graph, name, index = V(graph), value)
 }
 \arguments{
 \item{graph}{The graph.}
