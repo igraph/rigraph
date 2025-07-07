@@ -142,6 +142,11 @@ plot.igraph <- function(
   }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
+  if (nrow(layout) != vc) {
+    cli::cli_abort(c(
+      "The layout has {nrow(layout)} rows, but the graph has {vc} vertices.",
+    "i" = "It is recommended to store the layout as x and y vertex attributes and not as a matrix graph attribute."))
+  }
   margin <- params("plot", "margin")
   margin <- rep(margin, length.out = 4)
   rescale <- params("plot", "rescale")

@@ -138,6 +138,15 @@ test_that("Edges stop at outside of rectangle node", {
   vdiffr::expect_doppelganger("rectangle-edges", rectangle_edges)
 })
 
+
+test_that("layout as graph attribute error works", {
+  g <- make_full_graph(10)
+  g$layout <- layout_in_circle(g)[1:5, ]
+  expect_snapshot(error = TRUE, {
+    plot(g)
+  })
+})
+
 test_that("Multi loops are arranged correctly", {
   skip_if_not_installed("vdiffr")
 
