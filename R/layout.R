@@ -3028,6 +3028,7 @@ drl_defaults <- list(
 #' @param graph The graph whose layout is to be aligned.
 #' @param layout A matrix whose rows are the coordinates of vertices.
 #' @return modified layout matrix
+#' @export
 #' @examples
 #' g <- make_lattice(c(3, 3))
 #' l1 <- layout_with_fr(g)
