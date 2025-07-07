@@ -877,12 +877,18 @@ layout.circle <- function(..., params = list()) {
 #'
 #' `layout_nicely()` tries to choose an appropriate layout function for the
 #' supplied graph, and uses that to generate the layout. The current
-#' implementation works like this: \enumerate{ \item If the graph has a graph
-#' attribute called \sQuote{layout}, then this is used. If this attribute is an
-#' R function, then it is called, with the graph and any other extra arguments.
+#' implementation works like this:
+#' \enumerate{
+#' \item If the graph has a graph attribute called \sQuote{layout},
+#' then this is used. If this attribute is an R function, then it is called, with the graph and any other extra arguments.
+#'
 #' \item Otherwise, if the graph has vertex attributes called \sQuote{x} and
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
-#' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
+#' additional \sQuote{z} vertex attribute, that is also used.
+#'
+#' \item Otherwise, if the graph is a forest and has less than 30 vertices, `layout_as_tree()` is used.
+#'
+#' \item Otherwise,
 #' if the graph is connected and has less than 1000 vertices, the
 #' Fruchterman-Reingold layout is used, by calling `layout_with_fr()`.
 #' \item Otherwise the DrL layout is used, `layout_with_drl()` is called.  }
@@ -916,6 +922,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
   ##    we use those (and the 'z' vertex attribute as well, if present).
+  ## 3. If the graph is a forest and has less than 30 vertices, layout_as_tree is used
   ## 3. Otherwise, if the graph is small (<1000) we use
   ##    the Fruchterman-Reingold layout.
   ## 4. Otherwise we use the DrL layout generator.
@@ -954,10 +961,15 @@ layout_nicely <- function(graph, dim = 2, ...) {
     }
 
     args$graph <- graph
+
+    if (is_forest(graph) && vcount(graph) <= 30) {
+      return(align_layout(graph, do.call(layout_as_tree, args)))
+    }
+
     args$dim <- dim
 
     if (vcount(graph) < 1000) {
-      layout_align_impl(graph, do.call(layout_with_fr, args))
+      align_layout(graph, do.call(layout_with_fr, args))
     } else {
       do.call(layout_with_drl, args)
     }
@@ -3008,3 +3020,18 @@ drl_defaults <- list(
   final = igraph.drl.final,
   refine = igraph.drl.refine
 )
+
+#' Align a vertex layout
+#' This function centers a vertex layout on the coordinate system origin and
+#' rotates the layout to achieve a visually pleasing alignment with the coordinate
+#' axes. Doing this is particularly useful with force-directed layouts such as [layout_with_fr()].
+#' @param graph The graph whose layout is to be aligned.
+#' @param layout A matrix whose rows are the coordinates of vertices.
+#' @return modified layout matrix
+#' @examples
+#' g <- make_lattice(c(3, 3))
+#' l1 <- layout_with_fr(g)
+#' l2 <- align_layout(g,l1)
+#' plot(g, layout = l1)
+#' plot(g, layout = l2)
+align_layout <- layout_align_impl
