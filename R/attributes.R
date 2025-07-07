@@ -1444,11 +1444,10 @@ assert_named_list <- function(value) {
 }
 
 index_is_natural_sequence <- function(index, graph, type = "vertices") {
-  if (type == "vertices") {
-    length(index) == vcount(graph) && all(index == seq_len(vcount(graph)))
-  } else if (type == "edges") {
-    length(index) == ecount(graph) && all(index == seq_len(ecount(graph)))
-  } else {
-    cli::cli_abort("Unknown type {.arg {type}} for index.")
-  }
+  count <- switch(
+    type,
+    vertices = vcount(graph),
+    edges = ecount(graph)
+  )
+  length(index) == count && all(index == seq_len(count))
 }
