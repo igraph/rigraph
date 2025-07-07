@@ -963,7 +963,7 @@ layout_nicely <- function(graph, dim = 2, ...) {
     args$graph <- graph
 
     if (is_forest(graph) && vcount(graph) <= 30) {
-      return(align_layout(graph, do.call(layout_as_tree, args)))
+      return(do.call(layout_as_tree, args))
     }
 
     args$dim <- dim
