@@ -549,7 +549,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' Set multiple vertex attributes
 #'
 #' @param graph The graph.
-#' @param ... Named arguments, where the names are the attributes
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
 #' @return The graph, with the vertex attributes added or set.
 #'
 #' @family attributes
@@ -561,7 +561,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' g
 #' plot(g)
 set_vertex_attrs <- function(graph, index = V(graph), ...) {
-  dots <- list(...)
+  dots <- list2(...)
 
   if (!rlang::is_named(dots)) {
     cli::cli_abort("All arguments in `...` must be named.")

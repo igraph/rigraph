@@ -9,7 +9,7 @@ set_vertex_attrs(graph, index = V(graph), ...)
 \arguments{
 \item{graph}{The graph.}
 
-\item{...}{Named arguments, where the names are the attributes}
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
 }
 \value{
 The graph, with the vertex attributes added or set.
