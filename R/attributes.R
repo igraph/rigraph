@@ -527,36 +527,41 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' g
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value, ...) {
-  legacy <- !missing(name) && !missing(value)
-
-  if (legacy) {
-    if (!is.character(name) || length(name) != 1) {
-      cli::cli_abort("`name` must be a single string.")
-    }
-
-    if (is_complete_iterator(index)) {
-      return(i_set_vertex_attr(
-        graph = graph,
-        name = name,
-        value = value,
-        check = FALSE
-      ))
-    } else {
-      return(i_set_vertex_attr(
-        graph = graph,
-        name = name,
-        index = index,
-        value = value
-      ))
-    }
+  check_string(name)
+  if (is_complete_iterator(index)) {
+    return(i_set_vertex_attr(
+      graph = graph,
+      name = name,
+      value = value,
+      check = FALSE
+    ))
+  } else {
+    return(i_set_vertex_attr(
+      graph = graph,
+      name = name,
+      index = index,
+      value = value
+    ))
   }
+  graph
+}
 
+#' Set multiple vertex attributes
+#'
+#' @param graph The graph.
+#' @param ... Named arguments, where the names are the attributes
+#' @return The graph, with the vertex attributes added or set.
+#'
+#' @family attributes
+#'
+#' @export
+#' @examples
+#' g <- make_ring(10) %>%
+#'   set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+#' g
+#' plot(g)
+set_vertex_attrs <- function(graph, index = V(graph), ...) {
   dots <- list(...)
-  if (length(dots) == 0L) {
-    cli::cli_abort(
-      "Must supply either a named attribute and value, or named arguments via `...`."
-    )
-  }
 
   if (is.null(names(dots)) || any(names(dots) == "")) {
     cli::cli_abort("All arguments in `...` must be named.")
