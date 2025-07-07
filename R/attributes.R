@@ -563,7 +563,7 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 set_vertex_attrs <- function(graph, index = V(graph), ...) {
   dots <- list(...)
 
-  if (is.null(names(dots)) || any(names(dots) == "")) {
+  if (!rlang::is_named(dots)) {
     cli::cli_abort("All arguments in `...` must be named.")
   }
 
