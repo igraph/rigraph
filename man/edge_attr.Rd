@@ -46,6 +46,7 @@ Vertex, edge and graph attributes
 \code{\link{set_edge_attr}()},
 \code{\link{set_graph_attr}()},
 \code{\link{set_vertex_attr}()},
+\code{\link{set_vertex_attrs}()},
 \code{\link{vertex_attr}()},
 \code{\link{vertex_attr<-}()},
 \code{\link{vertex_attr_names}()}
