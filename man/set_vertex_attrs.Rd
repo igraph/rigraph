@@ -21,8 +21,8 @@ The graph, with the vertex attributes added or set.
 Set multiple vertex attributes
 }
 \examples{
-g <- make_ring(10) \%>\%
-  set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+g <- make_ring(10)
+g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
 g
 plot(g)
 }
