@@ -9,6 +9,9 @@ set_vertex_attrs(graph, index = V(graph), ...)
 \arguments{
 \item{graph}{The graph.}
 
+\item{index}{An optional vertex sequence to set the attributes
+of a subset of vertices.}
+
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
 }
 \value{

@@ -549,6 +549,8 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' Set multiple vertex attributes
 #'
 #' @param graph The graph.
+#' @param index An optional vertex sequence to set the attributes
+#'   of a subset of vertices.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
 #' @return The graph, with the vertex attributes added or set.
 #'
