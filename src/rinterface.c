@@ -437,6 +437,72 @@ SEXP R_igraph_triangular_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
 }
 
 /*-------------------------------------------/
+/ igraph_path_graph                          /
+/-------------------------------------------*/
+SEXP R_igraph_path_graph(SEXP n, SEXP directed, SEXP mutual) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_mutual;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_path_graph(&c_graph, c_n, c_directed, c_mutual));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_cycle_graph                         /
+/-------------------------------------------*/
+SEXP R_igraph_cycle_graph(SEXP n, SEXP directed, SEXP mutual) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_mutual;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_cycle_graph(&c_graph, c_n, c_directed, c_mutual));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_symmetric_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_symmetric_tree(SEXP branches, SEXP type) {
