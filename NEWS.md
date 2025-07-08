@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9059
+
+## Bug fixes
+
+- Fail if `"layout"` attribute doesn't match the number of vertices (#1880).
+
+
 # igraph 2.1.4.9058
 
 ## vendor
