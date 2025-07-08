@@ -134,6 +134,32 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
   res
 }
 
+path_graph_impl <- function(n, directed=FALSE, mutual=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_path_graph, n, directed, mutual)
+
+  res
+}
+
+cycle_graph_impl <- function(n, directed=FALSE, mutual=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_cycle_graph, n, directed, mutual)
+
+  res
+}
+
 symmetric_tree_impl <- function(branches, type=c("out", "in", "undirected")) {
   # Argument checks
   branches <- as.numeric(branches)
