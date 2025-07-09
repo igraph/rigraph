@@ -174,7 +174,7 @@ write.graph.fromraw <- function(buffer, file) {
 #' @aliases LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
 #'   `http` or `ftp` connection. It can also be a character string with
-#'   the file name or URI.
+#'   the file name or URI or contain the graph in a single string.
 #' @param format Character constant giving the file format. Right now
 #'   `edgelist`, `pajek`, `ncol`, `lgl`, `graphml`,
 #'   `dimacs`, `graphdb`, `gml` and `dl` are supported,
@@ -362,7 +362,7 @@ read_graph <- function(
 #'
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
-#'   to.
+#'   to. If file is `""`, `stdout()` or `"-"`, then the output is written directly to the terminal.
 #' @param format Character string giving the file format. Right now
 #'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
 #'   `lgl`, `ncol`, `leda` and `dimacs` are implemented. As of igraph 0.4
