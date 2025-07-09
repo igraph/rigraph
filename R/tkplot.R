@@ -908,6 +908,92 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   )
 )
 
+.tkplot.addlayout(
+  "davidson.harel",
+  list(
+    name = "Davidson-Harel",
+    f = layout_with_dh,
+    params = list(
+      maxiter = list(
+        name = "Maximum iterations",
+        type = "numeric",
+        default = 10
+      ),
+      fineiter = list(
+        name = "Fine-tuning iterations",
+        type = "expression",
+        default = expression(max(10, log2(vcount(.tkplot.g))))
+      ),
+      cool.fact = list(
+        name = "Cooling factor",
+        type = "numeric",
+        default = 0.75
+      ),
+      weight.node.dist = list(
+        name = "Node distance weight",
+        type = "numeric",
+        default = 1.0
+      ),
+      weight.border = list(
+        name = "Border weight",
+        type = "numeric",
+        default = 0.0
+      ),
+      weight.edge.lengths = list(
+        name = "Edge length weight",
+        type = "expression",
+        default = expression(edge_density(.tkplot.g) / 10)
+      ),
+      weight.edge.crossings = list(
+        name = "Edge crossing weight",
+        type = "expression",
+        default = expression(1.0 - sqrt(edge_density(.tkplot.g)))
+      ),
+      weight.node.edge.dist = list(
+        name = "Node-edge distance weight",
+        type = "expression",
+        default = expression(0.2 * (1 - edge_density(.tkplot.g)))
+      )
+    )
+  )
+)
+
+.tkplot.addlayout(
+  "drl",
+  list(
+    name = "DrL/VxOrd",
+    f = layout_with_drl,
+    params = list(
+      options = list(
+        name = "Layout options",
+        type = "choice",
+        values = c("default", "coarsen", "coarsest", "refine"),
+        default = "default"
+      ),
+      seed = list(
+        name = "Random seed",
+        type = "numeric",
+        default = -1
+      ),
+      weights = list(
+        name = "Edge weights",
+        type = "expression",
+        default = expression(NULL)
+      ),
+      fixed = list(
+        name = "Fixed vertices",
+        type = "expression",
+        default = expression(NULL)
+      ),
+      dim = list(
+        name = "Dimensions",
+        type = "numeric",
+        default = 2
+      )
+    )
+  )
+)
+
 ###################################################################
 # Other public functions, misc.
 ###################################################################
