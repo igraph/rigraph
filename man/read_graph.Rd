@@ -168,6 +168,11 @@ For igraph DL files are case sensitive, i.e. Larry and larry are not the same.
 }
 }
 
+\section{GML format}{
+
+GML is a quite general textual format. For the specifics of the implementation, see the linked documentation of the cClibrary.
+}
+
 \section{GraphDB format}{
 
 This is a binary format, used in the ARG Graph Database for isomorphism testing. For more information, see \url{https://mivia.unisa.it/datasets/graph-database/arg-database/}
