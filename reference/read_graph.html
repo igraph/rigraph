@@ -163,6 +163,89 @@ there is no information in the file about the directedness of the graph.</p></dd
 
 </dl></div>
     <div class="section level2">
+    <h2 id="graphml-format">GraphML format<a class="anchor" aria-label="anchor" href="#graphml-format"></a></h2>
+
+
+<p>GraphML is an XML-based file format for representing various types of graphs.
+Currently only the most basic import functionality is implemented in igraph:
+it can read GraphML files without nested graphs and hyperedges.</p><dl><dt>index</dt>
+<dd><p>Integer, specifies which graph to read from a GraphML file
+containing multiple graphs. Defaults to 0 for the first graph.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="lgl-format">LGL format<a class="anchor" aria-label="anchor" href="#lgl-format"></a></h2>
+
+
+<p>The .lgl format is used by the Large Graph Layout visualization software (<a href="https://lgl.sourceforge.net" class="external-link">https://lgl.sourceforge.net</a>), it can describe undirected optionally weighted graphs</p><dl><dt>names</dt>
+<dd><p>Logical, whether to add vertex names as a vertex attribute
+called "name". Default is TRUE.</p></dd>
+
+<dt>weights</dt>
+<dd><p>Whether to add the weights of the edges to the graph
+as an edge attribute called “weight”.
+<code>"yes"</code> adds the weights (even if they are not present in the file,
+in this case they are assumed to be zero).
+<code>"no"</code> does not add any edge attribute.
+<code>"auto"</code> (the default) adds the attribute if and only
+if there is at least one explicit edge weight in the input file.</p></dd>
+
+<dt>directed</dt>
+<dd><p>Logical, whether to create a directed graph. Default is FALSE.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="dimacs-format">DIMACS format<a class="anchor" aria-label="anchor" href="#dimacs-format"></a></h2>
+
+
+<p>This is a line-oriented text file (ASCII) format.
+The first character of each line defines the type of the line.
+If the first character is c the line is a comment line and it is ignored.
+There is one problem line (p in the file),
+it must appear before any node and arc descriptor lines.
+The problem line has three fields separated by spaces: the problem type (max or edge),
+the number of vertices, and number of edges in the graph. In MAX problems,
+exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
+These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
+Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
+In EDGE problems, there may be a node line (n) for each node. It specifies the node index and an
+integer node label. Nodes for which no explicit label was specified will use their index as label.
+In EDGE problems, each edge is specified as an edge line (e).</p><dl><dt>directed</dt>
+<dd><p>Logical, whether to create a directed graph. Default is TRUE.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="dl-format">DL format<a class="anchor" aria-label="anchor" href="#dl-format"></a></h2>
+
+
+<p>This is a simple textual file format used by UCINET. See <a href="http://www.analytictech.com/networks/dataentry.htm" class="external-link">http://www.analytictech.com/networks/dataentry.htm</a> for examples. All the forms described here are supported by igraph.
+Vertex names and edge weights are also supported and they are added as attributes.
+(If an attribute handler is attached.)
+Note the specification does not mention whether the format is case sensitive or not.
+For igraph DL files are case sensitive, i.e. Larry and larry are not the same.</p><dl><dt>directed</dt>
+<dd><p>Logical, whether to create a directed graph. Default is TRUE.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="gml-format">GML format<a class="anchor" aria-label="anchor" href="#gml-format"></a></h2>
+
+
+<p>GML is a quite general textual format. For the specifics of the implementation, see the linked documentation of the cClibrary.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="graphdb-format">GraphDB format<a class="anchor" aria-label="anchor" href="#graphdb-format"></a></h2>
+
+
+<p>This is a binary format, used in the ARG Graph Database for isomorphism testing. For more information, see <a href="https://mivia.unisa.it/datasets/graph-database/arg-database/" class="external-link">https://mivia.unisa.it/datasets/graph-database/arg-database/</a></p><dl><dt>directed</dt>
+<dd><p>Logical, whether to create a directed graph. Default is TRUE.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="write_graph.html">write_graph()</a></code></p>
 <p>Foreign format readers
