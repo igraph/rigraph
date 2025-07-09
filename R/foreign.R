@@ -319,7 +319,17 @@ read_graph <- function(
   ),
   ...
 ) {
-  if (
+  from_string <- is.character(file) && length(file) == 1 && !file.exists(file)
+
+  if (from_string || inherits(file, "connection")) {
+    con <- if (inherits(file, "connection")) file else textConnection(file)
+    tmp <- tempfile()
+    writeLines(readLines(con), tmp)
+    if (!inherits(file, "connection")) {
+      close(con)
+    }
+    file <- tmp
+  } else if (
     !is.character(file) ||
       length(grep("://", file, fixed = TRUE)) > 0 ||
       length(grep("~", file, fixed = TRUE)) > 0
@@ -344,7 +354,6 @@ read_graph <- function(
   )
   res
 }
-
 
 #' Writing the graph to a file in some format
 #'
@@ -481,10 +490,16 @@ write_graph <- function(
   ...
 ) {
   ensure_igraph(graph)
+
+  to_stdout <- identical(file, "") ||
+    identical(file, stdout()) ||
+    identical(file, "-")
+
   if (
     !is.character(file) ||
       length(grep("://", file, fixed = TRUE)) > 0 ||
-      length(grep("~", file, fixed = TRUE)) > 0
+      length(grep("~", file, fixed = TRUE)) > 0 ||
+      to_stdout
   ) {
     tmpfile <- TRUE
     origfile <- file
@@ -509,12 +524,18 @@ write_graph <- function(
 
   if (tmpfile) {
     buffer <- read.graph.toraw(file)
-    write.graph.fromraw(buffer, origfile)
+
+    if (to_stdout) {
+      raw_connection <- rawConnection(buffer)
+      cat(readLines(raw_connection), sep = "\n")
+      close(raw_connection)
+    } else {
+      write.graph.fromraw(buffer, origfile)
+    }
   }
 
   invisible(res)
 }
-
 ################################################################
 # Plain edge list format, not sorted
 ################################################################
