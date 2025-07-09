@@ -527,8 +527,8 @@ write_graph <- function(
 
     if (to_stdout) {
       raw_connection <- rawConnection(buffer)
+      on.exit(close(raw_connection))
       cat(readLines(raw_connection), sep = "\n")
-      close(raw_connection)
     } else {
       write.graph.fromraw(buffer, origfile)
     }
