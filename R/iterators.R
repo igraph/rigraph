@@ -1449,7 +1449,7 @@ print.igraph.vs <- function(
   if (
     is_single_index(x) &&
       !is.null(graph) &&
-      length(vertex_attr_names(graph) > 0)
+      length(vertex_attr_names(graph)) > 0
   ) {
     ## Double bracket
     va <- vertex_attr(graph)
