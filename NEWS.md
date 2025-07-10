@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9061
+
+## Features
+
+- Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969).
+
+- Add more layouts to tkplot (#160, #1967).
+
+
 # igraph 2.1.4.9060
 
 ## vendor
