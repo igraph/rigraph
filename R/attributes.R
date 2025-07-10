@@ -618,7 +618,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   )
 
   if (!missing(index)) {
-    if (!index_is_natural_sequence(index, graph, type = "vertices")) {
+    if (!index_is_natural_vertex_sequence(index, graph)) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -660,7 +660,7 @@ set_value_at <- function(value, idx, length_out) {
 
   if (
     !missing(index) &&
-      !index_is_natural_sequence(index, graph, type = "vertices")
+      !index_is_natural_vertex_sequence(index, graph)
   ) {
     value <- map(
       value,
@@ -872,7 +872,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      !index_is_natural_sequence(index, graph, type = "edges")
+      !index_is_natural_edge_sequence(index, graph)
   ) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
@@ -903,7 +903,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      !index_is_natural_sequence(index, graph, type = "edges")
+      !index_is_natural_edge_sequence(index, graph)
   ) {
     value <- map(
       value,
@@ -1443,11 +1443,12 @@ assert_named_list <- function(value) {
   }
 }
 
-index_is_natural_sequence <- function(index, graph, type = "vertices") {
-  count <- switch(
-    type,
-    vertices = vcount(graph),
-    edges = ecount(graph)
-  )
+index_is_natural_vertex_sequence <- function(index, graph) {
+  count <- vcount(graph)
+  length(index) == count && all(index == seq_len(count))
+}
+
+index_is_natural_edge_sequence <- function(index, graph) {
+  count <- ecount(graph)
   length(index) == count && all(index == seq_len(count))
 }
