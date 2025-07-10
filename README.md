@@ -74,6 +74,7 @@ GNU GPL version 2 or later
 ## Contributors
 
 
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -132,6 +133,12 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 
 <tr>
 <td align="center">
+<a href="https://github.com/schochastics">
+<img src="https://avatars.githubusercontent.com/u/17147355?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=schochastics">schochastics</a>
+</td>
+<td align="center">
 <a href="https://github.com/adalisan">
 <img src="https://avatars.githubusercontent.com/u/1790714?v=4" width="100px;" alt=""/>
 </a><br>
@@ -156,27 +163,27 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/commits?author=dmurdoch">dmurdoch</a>
 </td>
 <td align="center">
+<a href="https://github.com/kalibera">
+<img src="https://avatars.githubusercontent.com/u/1734520?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=kalibera">kalibera</a>
+</td>
+<td align="center">
 <a href="https://github.com/pupamanyu">
 <img src="https://avatars.githubusercontent.com/u/1937416?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=pupamanyu">pupamanyu</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/olivroy">
 <img src="https://avatars.githubusercontent.com/u/52606734?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=olivroy">olivroy</a>
 </td>
-<td align="center">
-<a href="https://github.com/kalibera">
-<img src="https://avatars.githubusercontent.com/u/1734520?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=kalibera">kalibera</a>
-</td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/hadley">
 <img src="https://avatars.githubusercontent.com/u/4196?v=4" width="100px;" alt=""/>
@@ -190,16 +197,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/commits?author=Matyasch">Matyasch</a>
 </td>
 <td align="center">
+<a href="https://github.com/stibu81">
+<img src="https://avatars.githubusercontent.com/u/7131000?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=stibu81">stibu81</a>
+</td>
+<td align="center">
 <a href="https://github.com/clpippel">
 <img src="https://avatars.githubusercontent.com/u/9609214?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=clpippel">clpippel</a>
-</td>
-<td align="center">
-<a href="https://github.com/dougmet">
-<img src="https://avatars.githubusercontent.com/u/5878305?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=dougmet">dougmet</a>
 </td>
 <td align="center">
 <a href="https://github.com/wael-sadek">
@@ -208,10 +215,50 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/commits?author=wael-sadek">wael-sadek</a>
 </td>
 <td align="center">
-<a href="https://github.com/das-intensity">
-<img src="https://avatars.githubusercontent.com/u/12521554?v=4" width="100px;" alt=""/>
+<a href="https://github.com/dougmet">
+<img src="https://avatars.githubusercontent.com/u/5878305?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=das-intensity">das-intensity</a>
+<a href="https://github.com/igraph/rigraph/commits?author=dougmet">dougmet</a>
+</td>
+</tr>
+
+
+<tr>
+<td align="center">
+<a href="https://github.com/smoe">
+<img src="https://avatars.githubusercontent.com/u/207407?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=smoe">smoe</a>
+</td>
+<td align="center">
+<a href="https://github.com/simoncarrignon">
+<img src="https://avatars.githubusercontent.com/u/4749455?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=simoncarrignon">simoncarrignon</a>
+</td>
+<td align="center">
+<a href="https://github.com/zeehio">
+<img src="https://avatars.githubusercontent.com/u/75441?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=zeehio">zeehio</a>
+</td>
+<td align="center">
+<a href="https://github.com/richardfergie">
+<img src="https://avatars.githubusercontent.com/u/2488905?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=richardfergie">richardfergie</a>
+</td>
+<td align="center">
+<a href="https://github.com/raulzr">
+<img src="https://avatars.githubusercontent.com/u/13007941?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=raulzr">raulzr</a>
+</td>
+<td align="center">
+<a href="https://github.com/RahulHP">
+<img src="https://avatars.githubusercontent.com/u/4871132?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=RahulHP">RahulHP</a>
 </td>
 <td align="center">
 <a href="https://github.com/peranti">
@@ -224,40 +271,22 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 
 <tr>
 <td align="center">
-<a href="https://github.com/RahulHP">
-<img src="https://avatars.githubusercontent.com/u/4871132?v=4" width="100px;" alt=""/>
+<a href="https://github.com/das-intensity">
+<img src="https://avatars.githubusercontent.com/u/12521554?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=RahulHP">RahulHP</a>
+<a href="https://github.com/igraph/rigraph/commits?author=das-intensity">das-intensity</a>
 </td>
 <td align="center">
-<a href="https://github.com/raulzr">
-<img src="https://avatars.githubusercontent.com/u/13007941?v=4" width="100px;" alt=""/>
+<a href="https://github.com/MichaelChirico">
+<img src="https://avatars.githubusercontent.com/u/7606389?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=raulzr">raulzr</a>
+<a href="https://github.com/igraph/rigraph/commits?author=MichaelChirico">MichaelChirico</a>
 </td>
 <td align="center">
-<a href="https://github.com/richardfergie">
-<img src="https://avatars.githubusercontent.com/u/2488905?v=4" width="100px;" alt=""/>
+<a href="https://github.com/mfansler">
+<img src="https://avatars.githubusercontent.com/u/1182216?v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=richardfergie">richardfergie</a>
-</td>
-<td align="center">
-<a href="https://github.com/zeehio">
-<img src="https://avatars.githubusercontent.com/u/75441?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=zeehio">zeehio</a>
-</td>
-<td align="center">
-<a href="https://github.com/simoncarrignon">
-<img src="https://avatars.githubusercontent.com/u/4749455?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=simoncarrignon">simoncarrignon</a>
-</td>
-<td align="center">
-<a href="https://github.com/smoe">
-<img src="https://avatars.githubusercontent.com/u/207407?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=smoe">smoe</a>
+<a href="https://github.com/igraph/rigraph/commits?author=mfansler">mfansler</a>
 </td>
 <td align="center">
 <a href="https://github.com/covoes">
@@ -265,10 +294,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=covoes">covoes</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/mirca">
 <img src="https://avatars.githubusercontent.com/u/13077051?v=4" width="100px;" alt=""/>
@@ -287,6 +312,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=a-lambda">a-lambda</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/aleszib">
 <img src="https://avatars.githubusercontent.com/u/9567948?v=4" width="100px;" alt=""/>
@@ -311,10 +340,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=etheleon">etheleon</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/knwng">
 <img src="https://avatars.githubusercontent.com/u/26247277?v=4" width="100px;" alt=""/>
@@ -333,6 +358,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=ahmohamed">ahmohamed</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/kasterma">
 <img src="https://avatars.githubusercontent.com/u/421437?v=4" width="100px;" alt=""/>
@@ -357,10 +386,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=rundel">rundel</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/qsz13">
 <img src="https://avatars.githubusercontent.com/u/4075761?v=4" width="100px;" alt=""/>
@@ -378,6 +403,22 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <img src="https://avatars.githubusercontent.com/u/302469?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=QuLogic">QuLogic</a>
+</td>
+</tr>
+
+
+<tr>
+<td align="center">
+<a href="https://github.com/eqmooring">
+<img src="https://avatars.githubusercontent.com/u/43585225?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=eqmooring">eqmooring</a>
+</td>
+<td align="center">
+<a href="https://github.com/gvegayon">
+<img src="https://avatars.githubusercontent.com/u/893619?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=gvegayon">gvegayon</a>
 </td>
 <td align="center">
 <a href="https://github.com/dalloliogm">
@@ -402,6 +443,12 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <img src="https://avatars.githubusercontent.com/u/216319?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=jeroen">jeroen</a>
+</td>
+<td align="center">
+<a href="https://github.com/JJ">
+<img src="https://avatars.githubusercontent.com/u/500?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/commits?author=JJ">JJ</a>
 </td>
 </tr>
 
@@ -442,12 +489,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <img src="https://avatars.githubusercontent.com/u/1019198?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/commits?author=mhils">mhils</a>
-</td>
-<td align="center">
-<a href="https://github.com/mfansler">
-<img src="https://avatars.githubusercontent.com/u/1182216?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/commits?author=mfansler">mfansler</a>
 </td>
 </tr>
 
@@ -513,7 +554,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/ko-ichi-h">
-<img src="https://avatars.githubusercontent.com/u/12220822?u=4016734c90cc821a11dffb574aae244227080f81&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/12220822?u=325cce3767f6a66759d80dc87a4073b9bee27983&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ako-ichi-h">ko-ichi-h</a>
 </td>
@@ -708,12 +749,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ayoungser">youngser</a>
 </td>
 <td align="center">
-<a href="https://github.com/Tixierae">
-<img src="https://avatars.githubusercontent.com/u/13351315?u=e6b8218cc2ada775afc408bf2c84c44cc1308bb6&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ATixierae">Tixierae</a>
-</td>
-<td align="center">
 <a href="https://github.com/hecking">
 <img src="https://avatars.githubusercontent.com/u/3762131?v=4" width="100px;" alt=""/>
 </a><br>
@@ -721,7 +756,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/proj786">
-<img src="https://avatars.githubusercontent.com/u/17924473?v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/17924473?u=ff28e3a15b1001747010a14264d3f4d29dd078de&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aproj786">proj786</a>
 </td>
@@ -731,16 +766,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Afbreitwieser">fbreitwieser</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/mabafaba">
 <img src="https://avatars.githubusercontent.com/u/10742493?u=c20312b6a69b1a737d179ea45322f788db7a17a4&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amabafaba">mabafaba</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/anudeepchimakurthi">
 <img src="https://avatars.githubusercontent.com/u/11219063?v=4" width="100px;" alt=""/>
@@ -752,12 +787,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <img src="https://avatars.githubusercontent.com/u/4357614?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Augroempi">ugroempi</a>
-</td>
-<td align="center">
-<a href="https://github.com/gvegayon">
-<img src="https://avatars.githubusercontent.com/u/893619?u=3241b6152012c7dd7a4ace90fcd22c64712182c7&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Agvegayon">gvegayon</a>
 </td>
 <td align="center">
 <a href="https://github.com/wjmaddox">
@@ -777,10 +806,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aatxmar001">atxmar001</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/emilBeBri">
 <img src="https://avatars.githubusercontent.com/u/964816?u=649b772910577a690659d03e53daa47713fe2ff3&v=4" width="100px;" alt=""/>
@@ -793,6 +818,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abyrney">byrney</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/aterhorst">
 <img src="https://avatars.githubusercontent.com/u/7367819?u=d140a7c96888d337ffad08801ff2765fe5bc31c4&v=4" width="100px;" alt=""/>
@@ -807,7 +836,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/geoHeil">
-<img src="https://avatars.githubusercontent.com/u/1694964?u=9c66999822ce8e23c2a227f6e0247159f5068738&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/1694964?u=885f8c86b3103c6fea1c0deef819be9339677033&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AgeoHeil">geoHeil</a>
 </td>
@@ -823,10 +852,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aotoomet">otoomet</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/benjaminpelissie">
 <img src="https://avatars.githubusercontent.com/u/18444792?v=4" width="100px;" alt=""/>
@@ -839,6 +864,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AMrBeardface">MrBeardface</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ngr-t">
 <img src="https://avatars.githubusercontent.com/u/729653?u=26a52e8e2e6d52a48536c21d9181a199e3dae4b6&v=4" width="100px;" alt=""/>
@@ -869,10 +898,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Azkamvar">zkamvar</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/Lcarey">
 <img src="https://avatars.githubusercontent.com/u/7055619?u=65cbc90ba60650e42ca990cda8aec55b66121df3&v=4" width="100px;" alt=""/>
@@ -885,6 +910,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amkoohafkan">mkoohafkan</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/rafapereirabr">
 <img src="https://avatars.githubusercontent.com/u/7448421?u=01aed495e612154e54be4c51221e706cdff7779d&v=4" width="100px;" alt=""/>
@@ -915,10 +944,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AHTizard">HTizard</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/mjsteinbaugh">
 <img src="https://avatars.githubusercontent.com/u/1760218?v=4" width="100px;" alt=""/>
@@ -931,6 +956,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ayangstat">yangstat</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/MattMyint">
 <img src="https://avatars.githubusercontent.com/u/29650381?u=c47d7f2d57c17768ef2480142ebca9d13084c2a2&v=4" width="100px;" alt=""/>
@@ -961,10 +990,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Arohan-shah">rohan-shah</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/liuyifang">
 <img src="https://avatars.githubusercontent.com/u/520808?u=710dd2837e2b5b9e25c5877544550211a55179c7&v=4" width="100px;" alt=""/>
@@ -977,6 +1002,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aalexandergerber">alexandergerber</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/wlandau">
 <img src="https://avatars.githubusercontent.com/u/1580860?u=6ed1edc717e0853259312206ae59a3aa81fe3bbc&v=4" width="100px;" alt=""/>
@@ -1007,13 +1036,9 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3APinakiGhosh">PinakiGhosh</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/otsaw">
-<img src="https://avatars.githubusercontent.com/u/1157847?u=d9fa45a197751a7cb6c11df2ee7ec30f6f2dbafc&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/1157847?u=7465cec16342aa74ef05c6e62c1063ada71c4538&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aotsaw">otsaw</a>
 </td>
@@ -1023,6 +1048,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ANoah89">Noah89</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/hktan0131">
 <img src="https://avatars.githubusercontent.com/u/31991444?v=4" width="100px;" alt=""/>
@@ -1053,10 +1082,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AGianRos">GianRos</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/pm321">
 <img src="https://avatars.githubusercontent.com/u/18599510?v=4" width="100px;" alt=""/>
@@ -1069,6 +1094,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ajpalowitch">jpalowitch</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/Xiaojieqiu">
 <img src="https://avatars.githubusercontent.com/u/7456281?u=a8becbc98bdd70f03aaf93b0a7273527961e257f&v=4" width="100px;" alt=""/>
@@ -1099,10 +1128,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aknbknb">knbknb</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/dpmcsuss">
 <img src="https://avatars.githubusercontent.com/u/547932?v=4" width="100px;" alt=""/>
@@ -1115,6 +1140,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ASantiFilippo">SantiFilippo</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/oganm">
 <img src="https://avatars.githubusercontent.com/u/6352379?u=a0c3463b5845e1e347ddd6afa8ecd045f1f08f34&v=4" width="100px;" alt=""/>
@@ -1145,10 +1174,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amick001">mick001</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/sammo3182">
 <img src="https://avatars.githubusercontent.com/u/6463211?u=4e60d2b10329d0d454e66bc779ae6069608a28ce&v=4" width="100px;" alt=""/>
@@ -1161,6 +1186,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ajoycewang914">joycewang914</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/FilipeamTeixeira">
 <img src="https://avatars.githubusercontent.com/u/25100785?u=d6452333c97bde13661dc02535dbac3ca5e61f33&v=4" width="100px;" alt=""/>
@@ -1169,7 +1198,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/tyleransom">
-<img src="https://avatars.githubusercontent.com/u/13243576?u=0304f2938ba5d74516fa73748522413407c35ce2&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/13243576?u=d63d4984524eb6c9fca880439cd8e0dee05c74ba&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Atyleransom">tyleransom</a>
 </td>
@@ -1191,10 +1220,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Afloswald">floswald</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/beemyfriend">
 <img src="https://avatars.githubusercontent.com/u/17094367?v=4" width="100px;" alt=""/>
@@ -1207,6 +1232,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Awillnotburn">willnotburn</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/vhcandido">
 <img src="https://avatars.githubusercontent.com/u/4206558?u=d0212cb18ca578289e8ebb38ab36b3985d210eff&v=4" width="100px;" alt=""/>
@@ -1237,10 +1266,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aalubbock">alubbock</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/anova00">
 <img src="https://avatars.githubusercontent.com/u/28386739?v=4" width="100px;" alt=""/>
@@ -1253,6 +1278,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Agmfricke">gmfricke</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/smartinsightsfromdata">
 <img src="https://avatars.githubusercontent.com/u/3786727?v=4" width="100px;" alt=""/>
@@ -1283,10 +1312,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abilldenney">billdenney</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/liyq601">
 <img src="https://avatars.githubusercontent.com/u/15606525?v=4" width="100px;" alt=""/>
@@ -1299,6 +1324,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abommert">bommert</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/richierocks">
 <img src="https://avatars.githubusercontent.com/u/197589?u=26538c19393fd17faacf985e9dfc83f30539f4d2&v=4" width="100px;" alt=""/>
@@ -1329,10 +1358,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aqalid7">qalid7</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/petershan1119">
 <img src="https://avatars.githubusercontent.com/u/35440844?v=4" width="100px;" alt=""/>
@@ -1345,6 +1370,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Akenahoo">kenahoo</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/alessiaf">
 <img src="https://avatars.githubusercontent.com/u/45920274?v=4" width="100px;" alt=""/>
@@ -1375,10 +1404,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aolyerickson">olyerickson</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/jooyoungseo">
 <img src="https://avatars.githubusercontent.com/u/19754711?v=4" width="100px;" alt=""/>
@@ -1391,6 +1416,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Antillie">ntillie</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/TiagoVentura">
 <img src="https://avatars.githubusercontent.com/u/14006141?u=b7354b3c59f7b8c4df28394a849f9d92c7c2ce3e&v=4" width="100px;" alt=""/>
@@ -1421,10 +1450,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Acxd1995">cxd1995</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/SalimMegat">
 <img src="https://avatars.githubusercontent.com/u/43888158?v=4" width="100px;" alt=""/>
@@ -1437,6 +1462,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Axiwa2006">xiwa2006</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/fmccown">
 <img src="https://avatars.githubusercontent.com/u/1423663?u=e37312e6347e09024abfdcb075b490997a879322&v=4" width="100px;" alt=""/>
@@ -1445,7 +1474,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/andybeet">
-<img src="https://avatars.githubusercontent.com/u/22455149?u=87649c9bdbeee79c2a51da2b6e68b39fe6037fb2&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/22455149?u=18dc43176a699702b6c2de13072362b466d97c86&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aandybeet">andybeet</a>
 </td>
@@ -1467,10 +1496,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Avkehayas">vkehayas</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/iaconogi">
 <img src="https://avatars.githubusercontent.com/u/31130982?v=4" width="100px;" alt=""/>
@@ -1483,6 +1508,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Arobertamezquita">robertamezquita</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/gholl0">
 <img src="https://avatars.githubusercontent.com/u/54959043?u=9937eaa905de757eb99a82ca4479f7dd33b55d3c&v=4" width="100px;" alt=""/>
@@ -1513,10 +1542,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amcenno">mcenno</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/coelhocao">
 <img src="https://avatars.githubusercontent.com/u/30055054?u=0b3ac9b80f364e55c01850cefa9cc6f2140a74f1&v=4" width="100px;" alt=""/>
@@ -1529,6 +1554,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Acslycord">cslycord</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/topl0305">
 <img src="https://avatars.githubusercontent.com/u/58388770?v=4" width="100px;" alt=""/>
@@ -1559,13 +1588,9 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AEnchufa2">Enchufa2</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/MabroukAhmed">
-<img src="https://avatars.githubusercontent.com/u/7476584?u=cc5c3a6535b9dbc29cc9479539818fb17ff4688a&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/7476584?u=2092913cec8fe001299bd18296861dd323c6fd87&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AMabroukAhmed">MabroukAhmed</a>
 </td>
@@ -1575,6 +1600,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Avronizor">vronizor</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/jdfoote">
 <img src="https://avatars.githubusercontent.com/u/452218?u=3f0fe0e22331d6e03bc8edf41f045d4a4894861f&v=4" width="100px;" alt=""/>
@@ -1605,10 +1634,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AOsterhhase">Osterhhase</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/arencambre">
 <img src="https://avatars.githubusercontent.com/u/411495?u=31d67932d388b36f181a05cf5d33dea9ec53532a&v=4" width="100px;" alt=""/>
@@ -1621,6 +1646,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Apat-s">pat-s</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/pollicipes">
 <img src="https://avatars.githubusercontent.com/u/35963280?u=5e1d120faf3c2c2a5e0909aa015d5e399f2829ee&v=4" width="100px;" alt=""/>
@@ -1651,10 +1680,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Akomalsrathi">komalsrathi</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/SamGG">
 <img src="https://avatars.githubusercontent.com/u/3333348?u=727af103e6d86a678b9001853f51b023de88aeab&v=4" width="100px;" alt=""/>
@@ -1667,6 +1692,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abergen288">bergen288</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ourrym">
 <img src="https://avatars.githubusercontent.com/u/29061275?v=4" width="100px;" alt=""/>
@@ -1697,10 +1726,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amikeaalv">mikeaalv</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/aabor">
 <img src="https://avatars.githubusercontent.com/u/29178038?v=4" width="100px;" alt=""/>
@@ -1713,6 +1738,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Atorfason">torfason</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/GrayAlex49">
 <img src="https://avatars.githubusercontent.com/u/8571038?u=463bb8e6d41c3a608c8727d5474979cc5824c71d&v=4" width="100px;" alt=""/>
@@ -1743,10 +1772,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AManuelHentschel">ManuelHentschel</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/NeginValizadegan">
 <img src="https://avatars.githubusercontent.com/u/12476457?u=be8aaee412bcd1d8c4385462be0e239e6b88304f&v=4" width="100px;" alt=""/>
@@ -1759,6 +1784,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AMingwuDuan">MingwuDuan</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/vagabond12">
 <img src="https://avatars.githubusercontent.com/u/24886447?u=e3bee972e82a21fa666ab17783a88f87b06c8613&v=4" width="100px;" alt=""/>
@@ -1789,10 +1818,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amoldach">moldach</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/lcolladotor">
 <img src="https://avatars.githubusercontent.com/u/2288213?v=4" width="100px;" alt=""/>
@@ -1805,6 +1830,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Afubingting">fubingting</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/mgirlich">
 <img src="https://avatars.githubusercontent.com/u/18258854?u=8f632064bbddf843f9b39331ebee70171bea5641&v=4" width="100px;" alt=""/>
@@ -1835,10 +1864,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Adeeenes">deeenes</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/ray1919">
 <img src="https://avatars.githubusercontent.com/u/975135?u=4932e6821e65ee9fb111e69699abfb90d8db236b&v=4" width="100px;" alt=""/>
@@ -1851,6 +1876,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Awanglu2014">wanglu2014</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ha5dzs">
 <img src="https://avatars.githubusercontent.com/u/1833759?v=4" width="100px;" alt=""/>
@@ -1881,10 +1910,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aprivefl">privefl</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/samlipworth">
 <img src="https://avatars.githubusercontent.com/u/23723340?u=70bcb4a6292795d49ae02b643352e30194e4365e&v=4" width="100px;" alt=""/>
@@ -1897,6 +1922,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aspocks">spocks</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ggrothendieck">
 <img src="https://avatars.githubusercontent.com/u/7840510?v=4" width="100px;" alt=""/>
@@ -1927,10 +1956,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ABurhanSabuwala">BurhanSabuwala</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/youngjinkim81">
 <img src="https://avatars.githubusercontent.com/u/20967028?u=b94bd00eaccef8bda5e1ae1ef7723d83c0015c76&v=4" width="100px;" alt=""/>
@@ -1943,6 +1968,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Adbarneche">dbarneche</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/JacobElder">
 <img src="https://avatars.githubusercontent.com/u/16260312?v=4" width="100px;" alt=""/>
@@ -1973,10 +2002,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AYulongNiu">YulongNiu</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/seedvestige">
 <img src="https://avatars.githubusercontent.com/u/48083130?v=4" width="100px;" alt=""/>
@@ -1989,6 +2014,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abrooksambrose">brooksambrose</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/bockthom">
 <img src="https://avatars.githubusercontent.com/u/5575176?v=4" width="100px;" alt=""/>
@@ -2019,10 +2048,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ahpages">hpages</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/jobeid">
 <img src="https://avatars.githubusercontent.com/u/11788900?u=0e4deeea65157e0112762d30cf40537e3686a3ae&v=4" width="100px;" alt=""/>
@@ -2035,6 +2060,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Adrives28">drives28</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/levinhein">
 <img src="https://avatars.githubusercontent.com/u/68268222?v=4" width="100px;" alt=""/>
@@ -2065,10 +2094,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ajessexknight">jessexknight</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/dipterix">
 <img src="https://avatars.githubusercontent.com/u/8163576?u=90dd5516f021c8934c83a68dbdca9f151471354f&v=4" width="100px;" alt=""/>
@@ -2081,6 +2106,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ArLannes">rLannes</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/Jeff87075">
 <img src="https://avatars.githubusercontent.com/u/78546899?v=4" width="100px;" alt=""/>
@@ -2111,10 +2140,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Atedmoorman">tedmoorman</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/robert-koetsier">
 <img src="https://avatars.githubusercontent.com/u/72259814?v=4" width="100px;" alt=""/>
@@ -2127,12 +2152,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Astefpeschel">stefpeschel</a>
 </td>
-<td align="center">
-<a href="https://github.com/yli223">
-<img src="https://avatars.githubusercontent.com/u/83890858?v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ayli223">yli223</a>
-</td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/zaynabhammoud">
 <img src="https://avatars.githubusercontent.com/u/19550037?v=4" width="100px;" alt=""/>
@@ -2153,14 +2176,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/barracuda156">
-<img src="https://avatars.githubusercontent.com/u/92015510?v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/92015510?u=6de14c3bf7ca288facebb7ed2e31ff1beb1b6b4e&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Abarracuda156">barracuda156</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/HenrikBengtsson">
 <img src="https://avatars.githubusercontent.com/u/1616850?u=3db13be6479d854fd363b262ae8d379dbd982f91&v=4" width="100px;" alt=""/>
@@ -2179,6 +2198,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3A3SMMZRjWgS">3SMMZRjWgS</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/dbswls0322">
 <img src="https://avatars.githubusercontent.com/u/125324934?v=4" width="100px;" alt=""/>
@@ -2203,10 +2226,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aheathergaya">heathergaya</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/igibek">
 <img src="https://avatars.githubusercontent.com/u/4621646?u=afe4e81c6a10e6bad2e840f5beabbcc7323fa591&v=4" width="100px;" alt=""/>
@@ -2225,6 +2244,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AAmalthyia">Amalthyia</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/LuShuYangMing">
 <img src="https://avatars.githubusercontent.com/u/26463478?u=26589960e8913669a2d035f2be15b6762ccb9f6b&v=4" width="100px;" alt=""/>
@@ -2249,10 +2272,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Apehenne12">pehenne12</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/jskvor">
 <img src="https://avatars.githubusercontent.com/u/93953799?u=0eab3d6635a1f6a29c583dedb9972e0409b45d3f&v=4" width="100px;" alt=""/>
@@ -2271,6 +2290,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Adavidskalinder">davidskalinder</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/szymanskiburgos">
 <img src="https://avatars.githubusercontent.com/u/77420949?v=4" width="100px;" alt=""/>
@@ -2295,10 +2318,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Asilasalvescosta">silasalvescosta</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/luukvdmeer">
 <img src="https://avatars.githubusercontent.com/u/26540305?u=c576e87314499815cbf698b7781ee58fd1d773e2&v=4" width="100px;" alt=""/>
@@ -2317,6 +2336,10 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Astephenashton-dhsc">stephenashton-dhsc</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/joshua-zh">
 <img src="https://avatars.githubusercontent.com/u/59653591?v=4" width="100px;" alt=""/>
@@ -2341,10 +2364,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Agherrarte">gherrarte</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/tdhock">
 <img src="https://avatars.githubusercontent.com/u/932850?u=7bc9737cadf2fb8529ff1f0a00102ed26f53537c&v=4" width="100px;" alt=""/>
@@ -2363,17 +2382,15 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Acsqsiew">csqsiew</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/maksymiuks">
 <img src="https://avatars.githubusercontent.com/u/32574056?u=46b5f7591faee8816d0d8928ed34cee74ccf5e35&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Amaksymiuks">maksymiuks</a>
-</td>
-<td align="center">
-<a href="https://github.com/JJ">
-<img src="https://avatars.githubusercontent.com/u/500?u=9716671c4fc8f3c203397f8dc4a3c454d31b4534&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AJJ">JJ</a>
 </td>
 <td align="center">
 <a href="https://github.com/gauzens">
@@ -2387,10 +2404,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aababaian">ababaian</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/DOSull">
 <img src="https://avatars.githubusercontent.com/u/8213420?u=d54915f6371f42d5325a16731320621b8be81191&v=4" width="100px;" alt=""/>
@@ -2399,15 +2412,43 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/jhollway">
-<img src="https://avatars.githubusercontent.com/u/5595229?u=19579df455b7073d0f04eb1cc8deffb145d09a3c&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/5595229?u=d21faa2a4ede7f979871031756a3859ca3b318e8&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ajhollway">jhollway</a>
 </td>
 <td align="center">
-<a href="https://github.com/schochastics">
-<img src="https://avatars.githubusercontent.com/u/17147355?u=cd9dd91aa19c137e746cc7b4cca90cd44a808979&v=4" width="100px;" alt=""/>
+<a href="https://github.com/TheLaughingDuck">
+<img src="https://avatars.githubusercontent.com/u/16163914?u=afe6aaf5e20ab4919c3424f90d4025186c1d570e&v=4" width="100px;" alt=""/>
 </a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Aschochastics">schochastics</a>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3ATheLaughingDuck">TheLaughingDuck</a>
+</td>
+<td align="center">
+<a href="https://github.com/llrs">
+<img src="https://avatars.githubusercontent.com/u/6818218?u=c0a96a5dc32b3035f057ee75a7679680363b1a89&v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Allrs">llrs</a>
+</td>
+</tr>
+
+
+<tr>
+<td align="center">
+<a href="https://github.com/shun2wang">
+<img src="https://avatars.githubusercontent.com/u/10348402?u=3ecda94041cfb73759ab5bae422a5231e69082a6&v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Ashun2wang">shun2wang</a>
+</td>
+<td align="center">
+<a href="https://github.com/dgkf">
+<img src="https://avatars.githubusercontent.com/u/18220321?u=bef717254e5b877159fa712e2b8ad6952c816064&v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3Adgkf">dgkf</a>
+</td>
+<td align="center">
+<a href="https://github.com/JonasGeschke">
+<img src="https://avatars.githubusercontent.com/u/14090764?u=96a3d82f3f4024d5c28a013f06ef261e1d5148f2&v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+author%3AJonasGeschke">JonasGeschke</a>
 </td>
 </tr>
 
@@ -2513,7 +2554,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <tr>
 <td align="center">
 <a href="https://github.com/alessandrobessi">
-<img src="https://avatars.githubusercontent.com/u/7074258?u=4acf1241def0b426b580eccfaf912ef9ad6cdb12&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/7074258?u=3344834d234c8c6b3b04b1f5f6cecc4a1b68a77b&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aalessandrobessi">alessandrobessi</a>
 </td>
@@ -2800,12 +2841,6 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Atvatter">tvatter</a>
 </td>
 <td align="center">
-<a href="https://github.com/MichaelChirico">
-<img src="https://avatars.githubusercontent.com/u/7606389?u=30429bf83cff0649fdf94e40492e457b32e6cfaa&v=4" width="100px;" alt=""/>
-</a><br>
-<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AMichaelChirico">MichaelChirico</a>
-</td>
-<td align="center">
 <a href="https://github.com/fairmiracle">
 <img src="https://avatars.githubusercontent.com/u/9360799?u=aa6fb8e9c0f62fda1a25b59f2892db433012ee1d&v=4" width="100px;" alt=""/>
 </a><br>
@@ -2829,16 +2864,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AKodiologist">Kodiologist</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/alugowski">
 <img src="https://avatars.githubusercontent.com/u/2730364?u=06388803b5f69bfe3f8833362a87434c98f4412d&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aalugowski">alugowski</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/cchng">
 <img src="https://avatars.githubusercontent.com/u/3256076?v=4" width="100px;" alt=""/>
@@ -2875,16 +2910,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Abersbersbers">bersbersbers</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/rbreunev">
 <img src="https://avatars.githubusercontent.com/u/12892566?u=7a62d5c04d3d03d1cc45726376e7f117ff4473f6&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Arbreunev">rbreunev</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/OnlyBelter">
 <img src="https://avatars.githubusercontent.com/u/16537617?u=4d5f4753c72dda25c33d380497d854ad0d4beecf&v=4" width="100px;" alt=""/>
@@ -2921,16 +2956,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Ashubham1637">shubham1637</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/sbaudoin">
 <img src="https://avatars.githubusercontent.com/u/11422850?u=950fc10ca76e21e308aec66167fe93737c9a3318&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Asbaudoin">sbaudoin</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/SKrPl">
 <img src="https://avatars.githubusercontent.com/u/12163892?u=612a0f5bca1c6fcd1119a79e73c1103f5d48e1a4&v=4" width="100px;" alt=""/>
@@ -2967,16 +3002,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AD-Harouni">D-Harouni</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/taosun112">
 <img src="https://avatars.githubusercontent.com/u/94044459?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Ataosun112">taosun112</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/MEFarhadieh">
 <img src="https://avatars.githubusercontent.com/u/100343349?u=b9c515cbfb771eb7865f5b4f2e80a1a73db49b64&v=4" width="100px;" alt=""/>
@@ -3013,16 +3048,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AStephCarr">StephCarr</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/kosmoz">
 <img src="https://avatars.githubusercontent.com/u/16959694?u=96568a2b0b40dc541d8582ddd66fba6d4715ecd7&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Akosmoz">kosmoz</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/alexperrone">
 <img src="https://avatars.githubusercontent.com/u/4990236?u=126c35511fc759246279ff00b1632c0c1ec3c77b&v=4" width="100px;" alt=""/>
@@ -3059,16 +3094,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AMariaHei">MariaHei</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/rmflight">
 <img src="https://avatars.githubusercontent.com/u/1509626?u=4f357bf045a6ffde6801f1d6c4c40727f65007a6&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Armflight">rmflight</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/daf">
 <img src="https://avatars.githubusercontent.com/u/228715?u=72bf278ab5b907d798f4e83c698cc288ed0ac5cb&v=4" width="100px;" alt=""/>
@@ -3105,16 +3140,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AThreadNet">ThreadNet</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/JLPuga">
 <img src="https://avatars.githubusercontent.com/u/26841930?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AJLPuga">JLPuga</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ahbon123">
 <img src="https://avatars.githubusercontent.com/u/15428667?v=4" width="100px;" alt=""/>
@@ -3151,16 +3186,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Altierney">ltierney</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/domi84">
 <img src="https://avatars.githubusercontent.com/u/1794097?u=50228214d3d86b1ee35c3adec0b800d4fe963413&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Adomi84">domi84</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/asuccurro">
 <img src="https://avatars.githubusercontent.com/u/2011939?u=c8e954b0f50ddc0c88229f7720c4dac4693e84a5&v=4" width="100px;" alt=""/>
@@ -3197,16 +3232,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aachubaty">achubaty</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/fusaroli">
 <img src="https://avatars.githubusercontent.com/u/6108197?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Afusaroli">fusaroli</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/irudnyts">
 <img src="https://avatars.githubusercontent.com/u/9625310?u=3e2b85b5c4a43b2266ead97185d42d0db1b7467b&v=4" width="100px;" alt=""/>
@@ -3233,7 +3268,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/mcas-git">
-<img src="https://avatars.githubusercontent.com/u/64894698?u=9a272e630164d427a3c573b8ece71e8d8f32236a&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/64894698?u=9b31a46a494d870ae8628dfc1fc5cea24b931ba8&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Amcas-git">mcas-git</a>
 </td>
@@ -3243,16 +3278,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aangelovaag">angelovaag</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/kojikoji">
 <img src="https://avatars.githubusercontent.com/u/2767011?u=5e846374a04a4b7d189772ac65ba770fdffd25bd&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Akojikoji">kojikoji</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/mawds">
 <img src="https://avatars.githubusercontent.com/u/12030124?v=4" width="100px;" alt=""/>
@@ -3289,16 +3324,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aseanv507">seanv507</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/cls3415">
 <img src="https://avatars.githubusercontent.com/u/4186250?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Acls3415">cls3415</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/kendonB">
 <img src="https://avatars.githubusercontent.com/u/5327505?u=3561faea2f6a445da1e13aaab3cf2cdeed5d2096&v=4" width="100px;" alt=""/>
@@ -3335,16 +3370,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Acramjaco">cramjaco</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/FloHu">
 <img src="https://avatars.githubusercontent.com/u/9386875?u=b28921f359b5143f288eb93e1e192e9d02497637&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AFloHu">FloHu</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/hsiaoyi0504">
 <img src="https://avatars.githubusercontent.com/u/10943928?u=52d3cb18b13aea03fee96cfb0dedba6cc5d51631&v=4" width="100px;" alt=""/>
@@ -3381,16 +3416,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AJidgdoi">Jidgdoi</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/WilliamBarela">
 <img src="https://avatars.githubusercontent.com/u/21199528?u=09c6aa90d24632e9f3cecb069ead568273239fa0&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AWilliamBarela">WilliamBarela</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/HenrikEckermann">
 <img src="https://avatars.githubusercontent.com/u/22709846?v=4" width="100px;" alt=""/>
@@ -3411,7 +3446,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/jake-bioinfo">
-<img src="https://avatars.githubusercontent.com/u/26894254?v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/26894254?u=c9f3001124a633b1c5ed010e7c29e6c7d80c9396&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Ajake-bioinfo">jake-bioinfo</a>
 </td>
@@ -3427,16 +3462,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Agjhuizing">gjhuizing</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/mgei">
 <img src="https://avatars.githubusercontent.com/u/32815823?u=62a5b42b18171abee42e618b2b978cd98408afa8&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Amgei">mgei</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/airuchen">
 <img src="https://avatars.githubusercontent.com/u/34813159?u=2a8e52517884dc6832f03f59fee016ceb1eedd2b&v=4" width="100px;" alt=""/>
@@ -3469,20 +3504,20 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/igorkf">
-<img src="https://avatars.githubusercontent.com/u/47466755?u=8c90ae04d73f6ed0387ef11a9a29fb8a771f920b&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/47466755?u=c00128a4ca83dd773c12ce3e577976a53d295a53&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aigorkf">igorkf</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/botellaflotante">
 <img src="https://avatars.githubusercontent.com/u/53616369?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Abotellaflotante">botellaflotante</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/Ge526874">
 <img src="https://avatars.githubusercontent.com/u/56182657?u=8d60a532586ef802daa60f92d744b525716ceaa8&v=4" width="100px;" alt=""/>
@@ -3519,16 +3554,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Acdueben">cdueben</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/Vivianstats">
 <img src="https://avatars.githubusercontent.com/u/25557722?u=7c427ee0f85327e5dd08b64277b294844d36126f&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AVivianstats">Vivianstats</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/amin-kaveh">
 <img src="https://avatars.githubusercontent.com/u/5902514?u=68ce36844a96b96174ed6b402f73229e3f55d7c4&v=4" width="100px;" alt=""/>
@@ -3565,16 +3600,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Adchiu911">dchiu911</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/griznog">
 <img src="https://avatars.githubusercontent.com/u/247722?u=df8aa972c5d729493f8d8a2c59dff143eaf86605&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Agriznog">griznog</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/harryprince">
 <img src="https://avatars.githubusercontent.com/u/5362577?u=7bb8214b9ac5bc232d1bf194f586f1ab8b104bc4&v=4" width="100px;" alt=""/>
@@ -3611,16 +3646,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3ADevGra">DevGra</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/jmarshallnz">
 <img src="https://avatars.githubusercontent.com/u/406571?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Ajmarshallnz">jmarshallnz</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/LTribelhorn">
 <img src="https://avatars.githubusercontent.com/u/56150361?u=73e8c92a0e1c56d1a2f3c2534d611442551b01fe&v=4" width="100px;" alt=""/>
@@ -3657,16 +3692,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3APrashantPaunipagar">PrashantPaunipagar</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/kzuza">
 <img src="https://avatars.githubusercontent.com/u/47668139?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Akzuza">kzuza</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/Colelyman">
 <img src="https://avatars.githubusercontent.com/u/1154533?u=7bd2371b94d2ae20a9afa7bf1632f5153f00acc1&v=4" width="100px;" alt=""/>
@@ -3703,16 +3738,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Apacificma">pacificma</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/nickharrigan">
 <img src="https://avatars.githubusercontent.com/u/17229804?u=099c08cd91d8a0da9c9cade208190fef810b155c&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Anickharrigan">nickharrigan</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/hua1991">
 <img src="https://avatars.githubusercontent.com/u/51027086?v=4" width="100px;" alt=""/>
@@ -3749,16 +3784,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Atesttraag">testtraag</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/see24">
 <img src="https://avatars.githubusercontent.com/u/39161074?u=bb3153c80f042f63b32555184beb5f63a2c85d53&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Asee24">see24</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/ex-tag">
 <img src="https://avatars.githubusercontent.com/u/1149793?u=6b64df71ff371da0485ec7aff5d9b332f314820d&v=4" width="100px;" alt=""/>
@@ -3779,7 +3814,7 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </td>
 <td align="center">
 <a href="https://github.com/lpalbou">
-<img src="https://avatars.githubusercontent.com/u/24249870?u=13fb0b9893bddabd2d0361aca7117fec13383347&v=4" width="100px;" alt=""/>
+<img src="https://avatars.githubusercontent.com/u/24249870?u=62211b8e37a7bc797346bb219a9cf23ae0cf9002&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Alpalbou">lpalbou</a>
 </td>
@@ -3795,16 +3830,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aucb">ucb</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/xiaoying201355">
 <img src="https://avatars.githubusercontent.com/u/13807432?v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Axiaoying201355">xiaoying201355</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/zhpn1024">
 <img src="https://avatars.githubusercontent.com/u/5006162?v=4" width="100px;" alt=""/>
@@ -3841,16 +3876,16 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Arfsaldanha">rfsaldanha</a>
 </td>
-</tr>
-
-
-<tr>
 <td align="center">
 <a href="https://github.com/nipnipj">
 <img src="https://avatars.githubusercontent.com/u/36553373?u=9c85f7711bfbe6e6bc8d43b82e71bfff4afea295&v=4" width="100px;" alt=""/>
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Anipnipj">nipnipj</a>
 </td>
+</tr>
+
+
+<tr>
 <td align="center">
 <a href="https://github.com/peibana">
 <img src="https://avatars.githubusercontent.com/u/102594752?u=eafb88a9786c6c22eea7d03a6c009a264e16ac72&v=4" width="100px;" alt=""/>
@@ -3869,6 +3904,24 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 </a><br>
 <a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Aemilio-berti">emilio-berti</a>
 </td>
+<td align="center">
+<a href="https://github.com/maxloeffler">
+<img src="https://avatars.githubusercontent.com/u/56791528?u=db81e47837808516ec408a004a54ae49c8473610&v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3Amaxloeffler">maxloeffler</a>
+</td>
+<td align="center">
+<a href="https://github.com/Krastanov">
+<img src="https://avatars.githubusercontent.com/u/705248?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3AKrastanov">Krastanov</a>
+</td>
+<td align="center">
+<a href="https://github.com/DavidRConnell">
+<img src="https://avatars.githubusercontent.com/u/35470740?v=4" width="100px;" alt=""/>
+</a><br>
+<a href="https://github.com/igraph/rigraph/issues?q=is%3Aissue+commenter%3ADavidRConnell">DavidRConnell</a>
+</td>
 </tr>
 
 </table>
@@ -3876,4 +3929,5 @@ All contributions to this project are gratefully acknowledged using the [`allcon
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
