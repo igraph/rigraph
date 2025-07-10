@@ -549,9 +549,9 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' Set multiple vertex attributes
 #'
 #' @param graph The graph.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
-#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
 #' @return The graph, with the vertex attributes added or set.
 #'
 #' @family attributes
@@ -559,11 +559,14 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
 #' @export
 #' @examples
 #' g <- make_ring(10)
-#' g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-#' g
-#' plot(g)
-set_vertex_attrs <- function(graph, index = V(graph), ...) {
-  dots <- list2(...)
+#' set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+#' # use splicing if suplying a list
+#' x <- list(color = "red", name = LETTERS[1:10])
+#' set_vertex_attrs(g, !!!x)
+#' # to set an attribute named "index" use `:=`
+#' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
+set_vertex_attrs <- function(graph, ..., index = V(graph)) {
+  dots <- rlang::list2(...)
 
   if (!rlang::is_named(dots)) {
     cli::cli_abort("All arguments in `...` must be named.")
