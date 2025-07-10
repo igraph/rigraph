@@ -89,12 +89,12 @@ the real layout function. For <code>nicely()</code> all argument are passed to
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>layout_nicely()</code> tries to choose an appropriate layout function for the
 supplied graph, and uses that to generate the layout. The current
-implementation works like this:</p><ol><li><p>If the graph has a graph
-attribute called ‘layout’, then this is used. If this attribute is an
-R function, then it is called, with the graph and any other extra arguments.</p></li>
+implementation works like this:</p><ol><li><p>If the graph has a graph attribute called ‘layout’,
+then this is used. If this attribute is an R function, then it is called, with the graph and any other extra arguments.</p></li>
 <li><p>Otherwise, if the graph has vertex attributes called ‘x’ and
 ‘y’, then these are used as coordinates. If the graph has an
 additional ‘z’ vertex attribute, that is also used.</p></li>
+<li><p>Otherwise, if the graph is a forest and has less than 30 vertices, <code><a href="layout_as_tree.html">layout_as_tree()</a></code> is used.</p></li>
 <li><p>Otherwise,
 if the graph is connected and has less than 1000 vertices, the
 Fruchterman-Reingold layout is used, by calling <code><a href="layout_with_fr.html">layout_with_fr()</a></code>.</p></li>
