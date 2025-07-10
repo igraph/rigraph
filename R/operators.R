@@ -228,6 +228,30 @@ disjoint_union <- function(...) {
   )
   lapply(graphs, ensure_igraph)
 
+  ## Handle mixed named/unnamed graphs by generating generic names
+  have_names <- sapply(graphs, is_named)
+  if (sum(have_names) > 0 && sum(have_names) < length(graphs)) {
+    # Some graphs have names, others don't - generate names for unnamed graphs
+    existing_names <- unlist(lapply(graphs[have_names], function(g) V(g)$name))
+    
+    # Create a counter for generating new names (check if named graph already has generic names)
+    prefix <- "V"
+    name_counter <- if (any(grepl(paste0("^", prefix, "[0-9]+$"), existing_names))) {
+      max(as.integer(gsub(paste0("^", prefix, "([0-9]+)$"), "\\1", existing_names)), na.rm = TRUE) + 1
+    } else {
+      1
+    }
+    
+    for (i in seq_along(graphs)) {
+      if (!have_names[i]) {
+        n <- vcount(graphs[[i]])
+        num_id <- seq(name_counter, name_counter + n - 1)
+        V(graphs[[i]])$name <- paste0(prefix, num_id)
+        name_counter <- name_counter + n
+      }
+    }
+  }
+
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_disjoint_union, graphs)
 
