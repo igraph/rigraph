@@ -28,12 +28,18 @@ graph, automatically, based on a simple algorithm. See details below.
 \details{
 \code{layout_nicely()} tries to choose an appropriate layout function for the
 supplied graph, and uses that to generate the layout. The current
-implementation works like this: \enumerate{ \item If the graph has a graph
-attribute called \sQuote{layout}, then this is used. If this attribute is an
-R function, then it is called, with the graph and any other extra arguments.
+implementation works like this:
+\enumerate{
+\item If the graph has a graph attribute called \sQuote{layout},
+then this is used. If this attribute is an R function, then it is called, with the graph and any other extra arguments.
+
 \item Otherwise, if the graph has vertex attributes called \sQuote{x} and
 \sQuote{y}, then these are used as coordinates. If the graph has an
-additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
+additional \sQuote{z} vertex attribute, that is also used.
+
+\item Otherwise, if the graph is a forest and has less than 30 vertices, \code{layout_as_tree()} is used.
+
+\item Otherwise,
 if the graph is connected and has less than 1000 vertices, the
 Fruchterman-Reingold layout is used, by calling \code{layout_with_fr()}.
 \item Otherwise the DrL layout is used, \code{layout_with_drl()} is called.  }
