@@ -233,3 +233,35 @@ test_that("mark border linewidth", {
 
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
 })
+
+test_that("plot rescales correctly", {
+  skip_if_not_installed("vdiffr")
+  rescale_coords <- function() {
+    n <- 11
+    a <- seq(0, 2 * pi, length.out = n + 1)[-1]
+    x <- 5 * cos(a)
+    y <- 3 * sin(a)
+    L <- matrix(c(x, y), ncol = 2)
+
+    G <- make_full_graph(n) |>
+      set_vertex_attr("x", value = x) |>
+      set_vertex_attr("y", value = y)
+
+    withr::with_par(
+      list(mfrow = c(1, 3)),
+      code = {
+        plot(G, layout = layout_nicely(G), axes = TRUE)
+        plot(G, layout = L, rescale = FALSE, axes = TRUE)
+        plot(
+          G,
+          xlim = range(V(G)$x),
+          ylim = range(V(G)$y),
+          rescale = FALSE,
+          asp = 1,
+          axes = TRUE
+        )
+      }
+    )
+  }
+  vdiffr::expect_doppelganger("rescale-coords", rescale_coords)
+})
