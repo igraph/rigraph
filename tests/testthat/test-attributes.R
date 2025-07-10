@@ -475,4 +475,9 @@ test_that("set_vertex_attrs() works", {
   expect_snapshot(error = TRUE, {
     set_vertex_attrs(g)
   })
+
+  attr_list <- list(age = 42, gender = "F")
+  g <- set_vertex_attrs(g, !!!attr_list)
+  expect_equal(V(g)$age, rep(42, vcount(g)))
+  expect_equal(V(g)$gender, rep("F", vcount(g)))
 })
