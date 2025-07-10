@@ -62,3 +62,11 @@
       Error in `set_graph_attr()`:
       ! `name` must be a single string, not the number 1.
 
+# set_vertex_attrs() works
+
+    Code
+      set_vertex_attrs(g)
+    Condition
+      Error in `set_vertex_attrs()`:
+      ! All arguments in `...` must be named.
+
