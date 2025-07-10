@@ -888,7 +888,8 @@ print.igraphHRG <- function(
 ) {
   type <- igraph.match.arg(type)
   if (type == "auto") {
-    type <- if (length(x$left <= 100)) "tree" else "plain"
+    is_graph_small <- (length(x$left) <= 100)
+    type <- if (is_graph_small) "tree" else "plain"
   }
   if (type == "tree") {
     return(print1.igraphHRG(x, level = level, ...))

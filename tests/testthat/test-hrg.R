@@ -29,3 +29,23 @@ test_that("hrg_tree() checks its argument", {
     hrg_tree(make_ring(10))
   })
 })
+
+test_that("print.igrapHRG() works", {
+  withr::local_seed(42)
+
+  small_g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
+  small_g <- fit_hrg(small_g)
+
+  # auto, tree because small
+  expect_snapshot(print(small_g))
+
+  expect_snapshot(print(small_g, type = "plain"))
+
+  big_g <- sample_gnp(110, p = 1 / 2) + sample_gnp(110, p = 1 / 2)
+  big_hrg <- fit_hrg(big_g)
+
+  # auto, plain because not small
+  expect_snapshot(print(big_hrg))
+
+  expect_snapshot(print(big_hrg, type = "tree"))
+})
