@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 77 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2160 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 32 new problems
- * We failed to check 5 packages
+ * We saw 25 new problems
+ * We failed to check 12 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -13,26 +13,13 @@ Issues with CRAN packages are summarised below.
 * AnimalHabitatNetwork
   checking examples ... ERROR
 
+* archeofrag
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
 * CITMIC
   checking re-building of vignette outputs ... ERROR
-
-* CoDiNA
-  checking examples ... ERROR
-
-* corpustools
-  checking examples ... ERROR
-
-* criticalpath
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* deepdep
-  checking tests ... ERROR
-
-* DiagrammeR
-  checking examples ... ERROR
-  checking tests ... ERROR
 
 * dosearch
   checking tests ... ERROR
@@ -41,33 +28,26 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* dynwrap
-  checking examples ... ERROR
-  checking tests ... ERROR
-
 * EGAnet
   checking examples ... ERROR
 
 * egor
   checking re-building of vignette outputs ... ERROR
 
-* frscore
+* FCMapper
   checking examples ... ERROR
 
-* icmstate
+* GephiForR
   checking examples ... ERROR
+
+* gor
+  checking examples ... ERROR
+
+* handwriterRF
   checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* ideanet
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * incidentally
   checking re-building of vignette outputs ... ERROR
-
-* intergraph
-  checking tests ... ERROR
 
 * IOHanalyzer
   checking examples ... ERROR
@@ -79,9 +59,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* miic
-  checking examples ... ERROR
-
 * multinet
   checking examples ... ERROR
 
@@ -89,16 +66,14 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* purgeR
+* pathfindR
+  checking tests ... ERROR
+
+* PopComm
   checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * remify
   checking tests ... ERROR
-
-* riverconn
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * rsetse
   checking examples ... ERROR
@@ -111,10 +86,6 @@ Issues with CRAN packages are summarised below.
 * sharpshootR
   checking examples ... ERROR
 
-* SpaDES.core
-  checking examples ... ERROR
-  checking tests ... ERROR
-
 * tilemaps
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -124,8 +95,15 @@ Issues with CRAN packages are summarised below.
 
 ### Failed to check
 
-* bnlearn   (NA)
-* datapack  (NA)
-* multinma  (NA)
-* RSP       (NA)
-* streamDAG (NA)
+* bnlearn         (NA)
+* dataone         (NA)
+* datapack        (NA)
+* FAfA            (NA)
+* FAIRmaterials   (NA)
+* lavaan.shiny    (NA)
+* multinma        (NA)
+* randomForestSRC (NA)
+* RSP             (NA)
+* sphereML        (NA)
+* streamDAG       (NA)
+* TestAnaAPP      (NA)
