@@ -8,9 +8,9 @@
 #' @inheritParams is_igraph
 #' @keywords internal
 #' @export
-is.igraph <- function(graph){
+is.igraph <- function(graph) {
   # nocov start
-  lifecycle::deprecate_soft("2.0.0",  "is.igraph()", "is_igraph()")
+  lifecycle::deprecate_soft("2.0.0", "is.igraph()", "is_igraph()")
   is_igraph(graph = graph)
 } # nocov end
 #   IGraph R package
