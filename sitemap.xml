@@ -588,6 +588,7 @@
 <url><loc>https://r.igraph.org/reference/set_edge_attr.html</loc></url>
 <url><loc>https://r.igraph.org/reference/set_graph_attr.html</loc></url>
 <url><loc>https://r.igraph.org/reference/set_vertex_attr.html</loc></url>
+<url><loc>https://r.igraph.org/reference/set_vertex_attrs.html</loc></url>
 <url><loc>https://r.igraph.org/reference/shapes.html</loc></url>
 <url><loc>https://r.igraph.org/reference/shortest.paths.html</loc></url>
 <url><loc>https://r.igraph.org/reference/showtrace.html</loc></url>
