@@ -4,15 +4,15 @@
 \alias{set_vertex_attrs}
 \title{Set multiple vertex attributes}
 \usage{
-set_vertex_attrs(graph, index = V(graph), ...)
+set_vertex_attrs(graph, ..., index = V(graph))
 }
 \arguments{
 \item{graph}{The graph.}
 
+\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
+
 \item{index}{An optional vertex sequence to set the attributes
 of a subset of vertices.}
-
-\item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}> Named arguments, where the names are the attributes}
 }
 \value{
 The graph, with the vertex attributes added or set.
@@ -22,9 +22,12 @@ Set multiple vertex attributes
 }
 \examples{
 g <- make_ring(10)
-g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
-g
-plot(g)
+set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+# use splicing if suplying a list
+x <- list(color = "red", name = LETTERS[1:10])
+set_vertex_attrs(g, !!!x)
+# to set an attribute named "index" use `:=`
+set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
 }
 \seealso{
 Vertex, edge and graph attributes
