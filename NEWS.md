@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9062
+
+## Bug fixes
+
+- Dont rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
+
+- HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
+
+## Features
+
+- Add multi attribute assignment (#55, #1916).
+
+- Expose `align_layout()` and add to `layout_nicely()` to align layout with axis automatically (#1907, #1957, #1958).
+
+## Documentation
+
+- Update allcontributors info (#1975).
+
+## Refactoring
+
+- Improve logic for updating edge attributes (#1332, #1915).
+
+
 # igraph 2.1.4.9061
 
 ## Features
