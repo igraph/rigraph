@@ -501,6 +501,21 @@ union.igraph <- function(..., byname = "auto") {
   )
 }
 
+#' @method union list
+#' @export
+union.list <- function(..., byname = "auto") {
+  args <- list(...)
+  if (length(args) == 1 && is.list(args[[1]])) {
+    args <- args[[1]]
+  }
+
+  if (!all(vapply(args, inherits, logical(1), what = "igraph"))) {
+    cli::cli_abort("All elements of the list must be igraph objects.")
+  }
+
+  do.call(union.igraph, c(args, list(byname = byname)))
+}
+
 #' @family functions for manipulating graph structure
 #' @export
 "%u%" <- function(x, y) {

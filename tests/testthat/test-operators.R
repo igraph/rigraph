@@ -1285,3 +1285,15 @@ test_that("unique on detached vs, names", {
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
 })
+
+test_that("union with list works", {
+  g1 <- make_ring(5)
+  g2 <- make_ring(5)
+  g3 <- make_ring(5)
+  V(g1)$name <- letters[1:5]
+  V(g2)$name <- letters[5:9]
+  V(g3)$name <- letters[9:13]
+  union_dots <- union(g1, g2, g3)
+  union_list <- union(list(g1, g2, g3))
+  expect_identical_graphs(union_dots, union_list)
+})
