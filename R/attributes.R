@@ -566,7 +566,7 @@ i_set_vertex_attr <- function(
     igraph_attr_idx_vertex
   )
 
-  #Uniqueness check for vertex "name" attribute
+  # Uniqueness check for vertex "name" attribute
   if (name == "name") {
     current_names <- vattrs[["name"]]
     if (is.null(current_names)) {
