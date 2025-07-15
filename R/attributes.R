@@ -570,7 +570,7 @@ i_set_vertex_attr <- function(
   if (name == "name") {
     current_names <- vattrs[["name"]]
     if (is.null(current_names)) {
-      current_names <- rep(NA_character_, vcount(graph))
+      current_names <- rep_len(NA_character_, vcount(graph))
     }
     idx_numeric <- as.numeric(index)
 
