@@ -68,5 +68,5 @@
       add_vertices(g, nv = 2, attr = list(name = c("A", "B")))
     Condition
       Error in `i_set_vertex_attr()`:
-      ! Vertex name already exist: A, B
+      ! Vertex names already exist: A, B
 

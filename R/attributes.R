@@ -584,7 +584,8 @@ i_set_vertex_attr <- function(
     if (any(value %in% unaffected_names)) {
       dupes <- value[value %in% unaffected_names]
       cli::cli_abort(
-        "Vertex name{?s} already exist{?s}: {paste(unique(dupes), collapse = ', ')}"
+        "{cli::qty(length(unique(dupes)))} Vertex {?name/names} already {?exists/exist}:
+              {paste(unique(dupes), collapse = ', ')}"
       )
     }
   }
