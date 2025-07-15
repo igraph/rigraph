@@ -138,6 +138,15 @@ test_that("Edges stop at outside of rectangle node", {
   vdiffr::expect_doppelganger("rectangle-edges", rectangle_edges)
 })
 
+
+test_that("layout as graph attribute error works", {
+  g <- make_full_graph(10)
+  g$layout <- layout_in_circle(g)[1:5, ]
+  expect_snapshot(error = TRUE, {
+    plot(g)
+  })
+})
+
 test_that("Multi loops are arranged correctly", {
   skip_if_not_installed("vdiffr")
 
@@ -223,4 +232,36 @@ test_that("mark border linewidth", {
   }
 
   vdiffr::expect_doppelganger("mark-border-lwd", mark_border_lwd)
+})
+
+test_that("plot rescales correctly", {
+  skip_if_not_installed("vdiffr")
+  rescale_coords <- function() {
+    n <- 11
+    a <- seq(0, 2 * pi, length.out = n + 1)[-1]
+    x <- 5 * cos(a)
+    y <- 3 * sin(a)
+    L <- matrix(c(x, y), ncol = 2)
+
+    G <- make_full_graph(n) |>
+      set_vertex_attr("x", value = x) |>
+      set_vertex_attr("y", value = y)
+
+    withr::with_par(
+      list(mfrow = c(1, 3)),
+      code = {
+        plot(G, layout = layout_nicely(G), axes = TRUE)
+        plot(G, layout = L, rescale = FALSE, axes = TRUE)
+        plot(
+          G,
+          xlim = range(V(G)$x),
+          ylim = range(V(G)$y),
+          rescale = FALSE,
+          asp = 1,
+          axes = TRUE
+        )
+      }
+    )
+  }
+  vdiffr::expect_doppelganger("rescale-coords", rescale_coords)
 })

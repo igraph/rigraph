@@ -106,6 +106,81 @@ there is no information in the file about the directedness of the graph.
 }
 }
 
+\section{GraphML format}{
+
+GraphML is an XML-based file format for representing various types of graphs.
+Currently only the most basic import functionality is implemented in igraph:
+it can read GraphML files without nested graphs and hyperedges.
+\describe{
+\item{index}{Integer, specifies which graph to read from a GraphML file
+containing multiple graphs. Defaults to 0 for the first graph.}
+}
+}
+
+\section{LGL format}{
+
+The .lgl format is used by the Large Graph Layout visualization software (\url{https://lgl.sourceforge.net}), it can describe undirected optionally weighted graphs
+\describe{
+\item{names}{Logical, whether to add vertex names as a vertex attribute
+called "name". Default is TRUE.}
+\item{weights}{
+Whether to add the weights of the edges to the graph
+as an edge attribute called “weight”.
+\code{"yes"} adds the weights (even if they are not present in the file,
+in this case they are assumed to be zero).
+\code{"no"} does not add any edge attribute.
+\code{"auto"} (the default) adds the attribute if and only
+if there is at least one explicit edge weight in the input file.
+}
+\item{directed}{Logical, whether to create a directed graph. Default is FALSE.}
+}
+}
+
+\section{DIMACS format}{
+
+This is a line-oriented text file (ASCII) format.
+The first character of each line defines the type of the line.
+If the first character is c the line is a comment line and it is ignored.
+There is one problem line (p in the file),
+it must appear before any node and arc descriptor lines.
+The problem line has three fields separated by spaces: the problem type (max or edge),
+the number of vertices, and number of edges in the graph. In MAX problems,
+exactly two node identification lines are expected (n), one for the source, and one for the target vertex.
+These have two fields: the ID of the vertex and the type of the vertex, either s ( = source) or t ( = target).
+Arc lines start with a and have three fields: the source vertex, the target vertex and the edge capacity.
+In EDGE problems, there may be a node line (n) for each node. It specifies the node index and an
+integer node label. Nodes for which no explicit label was specified will use their index as label.
+In EDGE problems, each edge is specified as an edge line (e).
+\describe{
+\item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
+}
+}
+
+\section{DL format}{
+
+This is a simple textual file format used by UCINET. See \url{http://www.analytictech.com/networks/dataentry.htm} for examples. All the forms described here are supported by igraph.
+Vertex names and edge weights are also supported and they are added as attributes.
+(If an attribute handler is attached.)
+Note the specification does not mention whether the format is case sensitive or not.
+For igraph DL files are case sensitive, i.e. Larry and larry are not the same.
+\describe{
+\item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
+}
+}
+
+\section{GML format}{
+
+GML is a quite general textual format. For the specifics of the implementation, see the linked documentation of the cClibrary.
+}
+
+\section{GraphDB format}{
+
+This is a binary format, used in the ARG Graph Database for isomorphism testing. For more information, see \url{https://mivia.unisa.it/datasets/graph-database/arg-database/}
+\describe{
+\item{directed}{Logical, whether to create a directed graph. Default is TRUE.}
+}
+}
+
 \seealso{
 \code{\link[=write_graph]{write_graph()}}
 

@@ -69,4 +69,11 @@
     Condition
       Error in `i_set_vertex_attr()`:
       ! Vertex names already exist: A, B
+# set_vertex_attrs() works
+
+    Code
+      set_vertex_attrs(g)
+    Condition
+      Error in `set_vertex_attrs()`:
+      ! All arguments in `...` must be named.
 

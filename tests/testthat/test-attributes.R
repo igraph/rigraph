@@ -454,9 +454,13 @@ test_that("empty returns work", {
 
 test_that("assign data.frame attributes works", {
   # https://github.com/igraph/rigraph/issues/1669
-  g <- make_tree(10, 3)
-  edge.attributes(g) <- head(mtcars, ecount(g))
-  expect_no_error(E(g)[c(1, 2)])
+  g1 <- make_tree(10, 3)
+  edge.attributes(g1) <- head(mtcars, ecount(g1))
+  expect_no_error(E(g1)[c(1, 2)])
+
+  g2 <- make_tree(10, 3)
+  edge.attributes(g2, E(g2)[1:5]) <- head(mtcars, 5)
+  expect_equal(E(g2)$wt, c(mtcars$wt[1:5], rep(NA, ecount(g2) - 5)))
 })
 
 test_that("good error message when not using character", {
@@ -472,4 +476,18 @@ test_that("duplicated vertex names are handled correctly", {
   expect_snapshot(error = TRUE, {
     add_vertices(g, nv = 2, attr = list(name = c("A", "B")))
   })
+test_that("set_vertex_attrs() works", {
+  g <- make_ring(10)
+  g <- set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+  expect_equal(V(g)$color, rep("blue", vcount(g)))
+  expect_equal(V(g)$size, rep(10, vcount(g)))
+  expect_equal(V(g)$name, LETTERS[1:10])
+  expect_snapshot(error = TRUE, {
+    set_vertex_attrs(g)
+  })
+
+  attr_list <- list(age = 42, gender = "F")
+  g <- set_vertex_attrs(g, !!!attr_list)
+  expect_equal(V(g)$age, rep(42, vcount(g)))
+  expect_equal(V(g)$gender, rep("F", vcount(g)))
 })

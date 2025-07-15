@@ -89,8 +89,8 @@ plot.igraph <- function(
   # SPECIFIC: #####################################
   axes = FALSE,
   add = FALSE,
-  xlim = c(-1, 1),
-  ylim = c(-1, 1),
+  xlim = NULL,
+  ylim = NULL,
   mark.groups = list(),
   mark.shape = 1 / 2,
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
@@ -142,6 +142,11 @@ plot.igraph <- function(
   }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
+  if (nrow(layout) != vc) {
+    cli::cli_abort(c(
+      "The layout has {nrow(layout)} rows, but the graph has {vc} vertices.",
+    "i" = "It is recommended to store the layout as x and y vertex attributes and not as a matrix graph attribute."))
+  }
   margin <- params("plot", "margin")
   margin <- rep(margin, length.out = 4)
   rescale <- params("plot", "rescale")
@@ -165,6 +170,12 @@ plot.igraph <- function(
   ################################################################
   ## create the plot
   if (rescale) {
+    if (is.null(xlim)) {
+      xlim <- c(-1, 1)
+    }
+    if (is.null(ylim)) {
+      ylim <- c(-1, 1)
+    }
     layout <- norm_coords(layout, -1, 1, -1, 1)
     fact <- (1 - vertex.size.scaling)
     maxv <- 1 / 200 * max(vertex.size)
@@ -177,6 +188,13 @@ plot.igraph <- function(
       ylim[1] - margin[1] - fact * maxv,
       ylim[2] + margin[3] + fact * maxv
     )
+  } else {
+    if (is.null(xlim)) {
+      xlim <- range(layout[, 1]) + c(-margin[2], margin[4])
+    }
+    if (is.null(ylim)) {
+      ylim <- range(layout[, 2]) + c(-margin[1], margin[3])
+    }
   }
   if (!add) {
     plot(
@@ -618,7 +636,7 @@ plot.igraph <- function(
 
     adjusted_loop_size <- rep(loop.size, length(loops.v))
 
-    r_offset <- 0
+    r_offset <- vertex.size[loops.v]
     xx0 <- layout[loops.v, 1] + cos(la) * r_offset
     yy0 <- layout[loops.v, 2] + sin(la) * r_offset
 

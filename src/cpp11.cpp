@@ -121,6 +121,7 @@ extern SEXP R_igraph_count_subisomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEX
 extern SEXP R_igraph_count_triangles(SEXP);
 extern SEXP R_igraph_create(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_create_bipartite(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_cycle_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_de_bruijn(SEXP, SEXP);
 extern SEXP R_igraph_decompose(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree(SEXP, SEXP, SEXP, SEXP);
@@ -284,6 +285,7 @@ extern SEXP R_igraph_largest_cliques(SEXP);
 extern SEXP R_igraph_largest_independent_vertex_sets(SEXP);
 extern SEXP R_igraph_largest_weighted_cliques(SEXP, SEXP);
 extern SEXP R_igraph_lastcit_game(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_layout_align(SEXP, SEXP);
 extern SEXP R_igraph_layout_bipartite(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_circle(SEXP, SEXP);
 extern SEXP R_igraph_layout_davidson_harel(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -349,11 +351,14 @@ extern SEXP R_igraph_mybracket2_copy(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_names(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_set(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket3_set(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_mycielski_graph(SEXP);
+extern SEXP R_igraph_mycielskian(SEXP, SEXP);
 extern SEXP R_igraph_neighborhood(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_graphs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_size(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighbors(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_no_components(SEXP, SEXP);
+extern SEXP R_igraph_path_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_path_length_hist(SEXP, SEXP);
 extern SEXP R_igraph_permute_vertices(SEXP, SEXP);
 extern SEXP R_igraph_personalized_pagerank(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -580,6 +585,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_count_triangles",                            (DL_FUNC) &R_igraph_count_triangles,                             1},
     {"R_igraph_create",                                     (DL_FUNC) &R_igraph_create,                                      3},
     {"R_igraph_create_bipartite",                           (DL_FUNC) &R_igraph_create_bipartite,                            3},
+    {"R_igraph_cycle_graph",                                (DL_FUNC) &R_igraph_cycle_graph,                                 3},
     {"R_igraph_de_bruijn",                                  (DL_FUNC) &R_igraph_de_bruijn,                                   2},
     {"R_igraph_decompose",                                  (DL_FUNC) &R_igraph_decompose,                                   4},
     {"R_igraph_degree",                                     (DL_FUNC) &R_igraph_degree,                                      4},
@@ -743,6 +749,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_largest_independent_vertex_sets",            (DL_FUNC) &R_igraph_largest_independent_vertex_sets,             1},
     {"R_igraph_largest_weighted_cliques",                   (DL_FUNC) &R_igraph_largest_weighted_cliques,                    2},
     {"R_igraph_lastcit_game",                               (DL_FUNC) &R_igraph_lastcit_game,                                5},
+    {"R_igraph_layout_align",                               (DL_FUNC) &R_igraph_layout_align,                                2},
     {"R_igraph_layout_bipartite",                           (DL_FUNC) &R_igraph_layout_bipartite,                            5},
     {"R_igraph_layout_circle",                              (DL_FUNC) &R_igraph_layout_circle,                               2},
     {"R_igraph_layout_davidson_harel",                      (DL_FUNC) &R_igraph_layout_davidson_harel,                      11},
@@ -808,11 +815,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_mybracket2_names",                           (DL_FUNC) &R_igraph_mybracket2_names,                            3},
     {"R_igraph_mybracket2_set",                             (DL_FUNC) &R_igraph_mybracket2_set,                              4},
     {"R_igraph_mybracket3_set",                             (DL_FUNC) &R_igraph_mybracket3_set,                              5},
+    {"R_igraph_mycielski_graph",                            (DL_FUNC) &R_igraph_mycielski_graph,                             1},
+    {"R_igraph_mycielskian",                                (DL_FUNC) &R_igraph_mycielskian,                                 2},
     {"R_igraph_neighborhood",                               (DL_FUNC) &R_igraph_neighborhood,                                5},
     {"R_igraph_neighborhood_graphs",                        (DL_FUNC) &R_igraph_neighborhood_graphs,                         5},
     {"R_igraph_neighborhood_size",                          (DL_FUNC) &R_igraph_neighborhood_size,                           5},
     {"R_igraph_neighbors",                                  (DL_FUNC) &R_igraph_neighbors,                                   3},
     {"R_igraph_no_components",                              (DL_FUNC) &R_igraph_no_components,                               2},
+    {"R_igraph_path_graph",                                 (DL_FUNC) &R_igraph_path_graph,                                  3},
     {"R_igraph_path_length_hist",                           (DL_FUNC) &R_igraph_path_length_hist,                            2},
     {"R_igraph_permute_vertices",                           (DL_FUNC) &R_igraph_permute_vertices,                            2},
     {"R_igraph_personalized_pagerank",                      (DL_FUNC) &R_igraph_personalized_pagerank,                       8},

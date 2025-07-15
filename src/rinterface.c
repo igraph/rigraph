@@ -437,6 +437,72 @@ SEXP R_igraph_triangular_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
 }
 
 /*-------------------------------------------/
+/ igraph_path_graph                          /
+/-------------------------------------------*/
+SEXP R_igraph_path_graph(SEXP n, SEXP directed, SEXP mutual) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_mutual;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_path_graph(&c_graph, c_n, c_directed, c_mutual));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_cycle_graph                         /
+/-------------------------------------------*/
+SEXP R_igraph_cycle_graph(SEXP n, SEXP directed, SEXP mutual) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_n;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_mutual;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_cycle_graph(&c_graph, c_n, c_directed, c_mutual));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_symmetric_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_symmetric_tree(SEXP branches, SEXP type) {
@@ -737,6 +803,33 @@ SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_shifts);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_mycielski_graph                     /
+/-------------------------------------------*/
+SEXP R_igraph_mycielski_graph(SEXP k) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_k;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_mycielski_graph(&c_graph, c_k));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -7219,6 +7312,32 @@ SEXP R_igraph_layout_umap_compute_weights(SEXP graph, SEXP distances, SEXP weigh
 }
 
 /*-------------------------------------------/
+/ igraph_layout_align                        /
+/-------------------------------------------*/
+SEXP R_igraph_layout_align(SEXP graph, SEXP layout) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_layout;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_matrix_copy(layout, &c_layout));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_layout);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_layout_align(&c_graph, &c_layout));
+
+                                        /* Convert output */
+  PROTECT(layout=R_igraph_matrix_to_SEXP(&c_layout));
+  igraph_matrix_destroy(&c_layout);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = layout;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_similarity_dice                     /
 /-------------------------------------------*/
 SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
@@ -9065,6 +9184,35 @@ SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
   SET_STRING_ELT(r_names, 2, Rf_mkChar("invmap"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_mycielskian                         /
+/-------------------------------------------*/
+SEXP R_igraph_mycielskian(SEXP graph, SEXP k) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_t c_res;
+  igraph_integer_t c_k;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_mycielskian(&c_graph, &c_res, c_k));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);

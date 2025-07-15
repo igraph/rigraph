@@ -65,6 +65,7 @@ reference:
   - has_concept("plot.common")
   - has_concept("plot.shapes")
   - vertex.shape.pie
+  - align_layout
 - subtitle: Graph coloring
 - contents:
   - has_concept("coloring")

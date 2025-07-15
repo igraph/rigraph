@@ -506,6 +506,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   }
 }
 
+
 #' Set vertex attributes
 #'
 #' @param graph The graph.
@@ -527,12 +528,61 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
   check_string(name)
-
   if (is_complete_iterator(index)) {
-    i_set_vertex_attr(graph = graph, name = name, value = value, check = FALSE)
+    return(i_set_vertex_attr(
+      graph = graph,
+      name = name,
+      value = value,
+      check = FALSE
+    ))
   } else {
-    i_set_vertex_attr(graph = graph, name = name, index = index, value = value)
+    return(i_set_vertex_attr(
+      graph = graph,
+      name = name,
+      index = index,
+      value = value
+    ))
   }
+  graph
+}
+
+#' Set multiple vertex attributes
+#'
+#' @param graph The graph.
+#' @param ... <[`dynamic-dots`][rlang::dyn-dots]> Named arguments, where the names are the attributes
+#' @param index An optional vertex sequence to set the attributes
+#'   of a subset of vertices.
+#' @return The graph, with the vertex attributes added or set.
+#'
+#' @family attributes
+#'
+#' @export
+#' @examples
+#' g <- make_ring(10)
+#' set_vertex_attrs(g, color = "blue", size = 10, name = LETTERS[1:10])
+#' # use splicing if suplying a list
+#' x <- list(color = "red", name = LETTERS[1:10])
+#' set_vertex_attrs(g, !!!x)
+#' # to set an attribute named "index" use `:=`
+#' set_vertex_attrs(g, color = "blue", index := 10, name = LETTERS[1:10])
+set_vertex_attrs <- function(graph, ..., index = V(graph)) {
+  dots <- rlang::list2(...)
+
+  if (!rlang::is_named(dots)) {
+    cli::cli_abort("All arguments in `...` must be named.")
+  }
+
+  for (attr_name in names(dots)) {
+    attr_value <- dots[[attr_name]]
+    graph <- i_set_vertex_attr(
+      graph,
+      name = attr_name,
+      index = index,
+      value = attr_value
+    )
+  }
+
+  graph
 }
 
 i_set_vertex_attr <- function(
@@ -642,7 +692,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   )
 
   if (!missing(index)) {
-    if (!index_is_natural_sequence(index, graph)) {
+    if (!index_is_natural_vertex_sequence(index, graph)) {
       for (i in seq_along(res)) {
         res[[i]] <- res[[i]][index]
       }
@@ -682,7 +732,10 @@ set_value_at <- function(value, idx, length_out) {
     }
   }
 
-  if (!missing(index) && !index_is_natural_sequence(index, graph)) {
+  if (
+    !missing(index) &&
+      !index_is_natural_vertex_sequence(index, graph)
+  ) {
     value <- map(
       value,
       set_value_at,
@@ -893,7 +946,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))
+      !index_is_natural_edge_sequence(index, graph)
   ) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
@@ -924,16 +977,14 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (
     !missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))
+      !index_is_natural_edge_sequence(index, graph)
   ) {
-    es <- E(graph)
-    for (i in seq_along(value)) {
-      tmp <- value[[i]]
-      length(tmp) <- 0
-      length(tmp) <- length(es)
-      tmp[index] <- value[[i]]
-      value[[i]] <- tmp
-    }
+    value <- map(
+      value,
+      set_value_at,
+      idx = index,
+      length_out = length(E(graph))
+    )
   }
 
   .Call(
@@ -1466,6 +1517,12 @@ assert_named_list <- function(value) {
   }
 }
 
-index_is_natural_sequence <- function(index, graph) {
-  length(index) == vcount(graph) && all(index == seq_len(vcount(graph)))
+index_is_natural_vertex_sequence <- function(index, graph) {
+  count <- vcount(graph)
+  length(index) == count && all(index == seq_len(count))
+}
+
+index_is_natural_edge_sequence <- function(index, graph) {
+  count <- ecount(graph)
+  length(index) == count && all(index == seq_len(count))
 }

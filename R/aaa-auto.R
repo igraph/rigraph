@@ -134,6 +134,32 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
   res
 }
 
+path_graph_impl <- function(n, directed=FALSE, mutual=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_path_graph, n, directed, mutual)
+
+  res
+}
+
+cycle_graph_impl <- function(n, directed=FALSE, mutual=FALSE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_cycle_graph, n, directed, mutual)
+
+  res
+}
+
 symmetric_tree_impl <- function(branches, type=c("out", "in", "undirected")) {
   # Argument checks
   branches <- as.numeric(branches)
@@ -185,6 +211,17 @@ lcf_vector_impl <- function(n, shifts, repeats=1) {
   if (igraph_opt("add.params")) {
     res$name <- 'LCF graph'
   }
+
+  res
+}
+
+mycielski_graph_impl <- function(k) {
+  # Argument checks
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielski_graph, k)
 
   res
 }
@@ -2472,6 +2509,18 @@ layout_umap_compute_weights_impl <- function(graph, distances, weights) {
   res
 }
 
+layout_align_impl <- function(graph, layout) {
+  # Argument checks
+  ensure_igraph(graph)
+  layout[] <- as.numeric(layout)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_layout_align, graph, layout)
+
+  res
+}
+
 similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
@@ -2844,11 +2893,23 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   res
 }
 
-product_impl <- function(g1, g2, type=c("cartesian", "tensor")) {
+mycielskian_impl <- function(graph, k=1) {
+  # Argument checks
+  ensure_igraph(graph)
+  k <- as.numeric(k)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_mycielskian, graph, k)
+
+  res
+}
+
+product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", "tensor")) {
   # Argument checks
   ensure_igraph(g1)
   ensure_igraph(g2)
-  type <- switch(igraph.match.arg(type), "cartesian"=0L, "tensor"=1L)
+  type <- switch(igraph.match.arg(type), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

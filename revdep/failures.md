@@ -412,6 +412,68 @@ ERROR: loading failed
 
 
 ```
+# dataone
+
+<details>
+
+* Version: 2.2.2
+* GitHub: https://github.com/DataONEorg/rdataone
+* Source code: https://github.com/cran/dataone
+* Date/Publication: 2022-06-10 19:30:02 UTC
+* Number of recursive dependencies: 63
+
+Run `revdepcheck::cloud_details(, "dataone")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘dataone’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/dataone/new/dataone.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘dataone’ ...
+** package ‘dataone’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘dataone’
+* removing ‘/tmp/workdir/dataone/new/dataone.Rcheck/dataone’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘dataone’ ...
+** package ‘dataone’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘dataone’
+* removing ‘/tmp/workdir/dataone/old/dataone.Rcheck/dataone’
+
+
+```
 # datapack
 
 <details>
@@ -471,6 +533,188 @@ Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.
 Execution halted
 ERROR: lazy loading failed for package ‘datapack’
 * removing ‘/tmp/workdir/datapack/old/datapack.Rcheck/datapack’
+
+
+```
+# FAfA
+
+<details>
+
+* Version: 0.3
+* GitHub: NA
+* Source code: https://github.com/cran/FAfA
+* Date/Publication: 2025-05-23 19:42:09 UTC
+* Number of recursive dependencies: 248
+
+Run `revdepcheck::cloud_details(, "FAfA")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘FAfA’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/FAfA/new/FAfA.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘FAfA’ ...
+** package ‘FAfA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘FAfA’
+* removing ‘/tmp/workdir/FAfA/new/FAfA.Rcheck/FAfA’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘FAfA’ ...
+** package ‘FAfA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘FAfA’
+* removing ‘/tmp/workdir/FAfA/old/FAfA.Rcheck/FAfA’
+
+
+```
+# FAIRmaterials
+
+<details>
+
+* Version: 0.4.2.1
+* GitHub: NA
+* Source code: https://github.com/cran/FAIRmaterials
+* Date/Publication: 2024-06-27 15:40:02 UTC
+* Number of recursive dependencies: 90
+
+Run `revdepcheck::cloud_details(, "FAIRmaterials")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘FAIRmaterials’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/FAIRmaterials/new/FAIRmaterials.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘FAIRmaterials’ ...
+** package ‘FAIRmaterials’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘FAIRmaterials’
+* removing ‘/tmp/workdir/FAIRmaterials/new/FAIRmaterials.Rcheck/FAIRmaterials’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘FAIRmaterials’ ...
+** package ‘FAIRmaterials’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
+  librdf.so.0: cannot open shared object file: No such file or directory
+Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
+Execution halted
+ERROR: lazy loading failed for package ‘FAIRmaterials’
+* removing ‘/tmp/workdir/FAIRmaterials/old/FAIRmaterials.Rcheck/FAIRmaterials’
+
+
+```
+# lavaan.shiny
+
+<details>
+
+* Version: 1.2
+* GitHub: https://github.com/kylehamilton/lavaan.shiny
+* Source code: https://github.com/cran/lavaan.shiny
+* Date/Publication: 2017-04-07 06:05:09 UTC
+* Number of recursive dependencies: 114
+
+Run `revdepcheck::cloud_details(, "lavaan.shiny")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘lavaan.shiny’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/lavaan.shiny/new/lavaan.shiny.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘lavaan.shiny’ ...
+** package ‘lavaan.shiny’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘lavaan.shiny’
+* removing ‘/tmp/workdir/lavaan.shiny/new/lavaan.shiny.Rcheck/lavaan.shiny’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘lavaan.shiny’ ...
+** package ‘lavaan.shiny’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘lavaan.shiny’
+* removing ‘/tmp/workdir/lavaan.shiny/old/lavaan.shiny.Rcheck/lavaan.shiny’
 
 
 ```
@@ -2512,6 +2756,170 @@ ERROR: compilation failed for package ‘multinma’
 
 
 ```
+# randomForestSRC
+
+<details>
+
+* Version: 3.4.1
+* GitHub: https://github.com/kogalur/randomForestSRC
+* Source code: https://github.com/cran/randomForestSRC
+* Date/Publication: 2025-06-08 00:00:02 UTC
+* Number of recursive dependencies: 156
+
+Run `revdepcheck::cloud_details(, "randomForestSRC")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/randomForestSRC/new/randomForestSRC.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘randomForestSRC/DESCRIPTION’ ... OK
+* this is package ‘randomForestSRC’ version ‘3.4.1’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘imbalance’
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘randomForestSRC’ can be installed ... OK
+* used C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/randomForestSRC/old/randomForestSRC.Rcheck’
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
+* R was compiled by
+    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+* running under: Ubuntu 24.04.2 LTS
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘randomForestSRC/DESCRIPTION’ ... OK
+* this is package ‘randomForestSRC’ version ‘3.4.1’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘imbalance’
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘randomForestSRC’ can be installed ... OK
+* used C compiler: ‘gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0’
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking whether startup messages can be suppressed ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking line endings in shell scripts ... OK
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
 # RSP
 
 <details>
@@ -2569,6 +2977,66 @@ Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWith
 Execution halted
 ERROR: lazy loading failed for package ‘RSP’
 * removing ‘/tmp/workdir/RSP/old/RSP.Rcheck/RSP’
+
+
+```
+# sphereML
+
+<details>
+
+* Version: 0.1.1
+* GitHub: https://github.com/santosoph/sphereML
+* Source code: https://github.com/cran/sphereML
+* Date/Publication: 2025-05-09 17:10:06 UTC
+* Number of recursive dependencies: 192
+
+Run `revdepcheck::cloud_details(, "sphereML")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘sphereML’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/sphereML/new/sphereML.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘sphereML’ ...
+** package ‘sphereML’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘sphereML’
+* removing ‘/tmp/workdir/sphereML/new/sphereML.Rcheck/sphereML’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘sphereML’ ...
+** package ‘sphereML’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘sphereML’
+* removing ‘/tmp/workdir/sphereML/old/sphereML.Rcheck/sphereML’
 
 
 ```
@@ -2641,6 +3109,66 @@ Status: 1 ERROR
 
 
 
+
+
+```
+# TestAnaAPP
+
+<details>
+
+* Version: 1.1.2
+* GitHub: https://github.com/jiangyouxiang/TestAnaAPP
+* Source code: https://github.com/cran/TestAnaAPP
+* Date/Publication: 2024-11-09 04:00:02 UTC
+* Number of recursive dependencies: 259
+
+Run `revdepcheck::cloud_details(, "TestAnaAPP")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘TestAnaAPP’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/TestAnaAPP/new/TestAnaAPP.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘TestAnaAPP’ ...
+** package ‘TestAnaAPP’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘TestAnaAPP’
+* removing ‘/tmp/workdir/TestAnaAPP/new/TestAnaAPP.Rcheck/TestAnaAPP’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘TestAnaAPP’ ...
+** package ‘TestAnaAPP’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘OpenMx’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘TestAnaAPP’
+* removing ‘/tmp/workdir/TestAnaAPP/old/TestAnaAPP.Rcheck/TestAnaAPP’
 
 
 ```
