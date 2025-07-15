@@ -63,7 +63,7 @@
       IGRAPH UN-- 3 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A--B A--C B--C
+      [1] A--B B--C A--C
 
 # graph_from_literal() and undirected explosion
 
@@ -112,7 +112,7 @@
       IGRAPH DN-- 3 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A->B C->A C->B
+      [1] A->B C->B C->A
 
 # graph_from_literal() and directed explosion
 
@@ -129,7 +129,7 @@
       IGRAPH DN-- 13 19 -- 
       + attr: name (v/c)
       + edges (vertex names):
-       [1] A->D A->E B->D B->E C->D C->E F->D F->E F->I G->D G->E G->I H->D H->E H->I
+       [1] A->D A->E B->D B->E C->D C->E F->D G->D H->D F->E G->E H->E F->I G->I H->I
       [16] J->I K->I L->I M->I
 
 # graph_from_literal(simplify = FALSE)
