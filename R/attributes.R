@@ -575,14 +575,14 @@ i_set_vertex_attr <- function(
     idx_numeric <- as.numeric(index)
 
     unaffected <- setdiff(seq_along(current_names), idx_numeric)
-    names_unaffected <- current_names[unaffected]
+    unaffected_names <- current_names[unaffected]
 
     if (length(value) == 1 && length(idx_numeric) > 1) {
       value <- rep(value, length(idx_numeric))
     }
 
-    if (any(value %in% names_unaffected)) {
-      dupes <- value[value %in% names_unaffected]
+    if (any(value %in% unaffected_names)) {
+      dupes <- value[value %in% unaffected_names]
       cli::cli_abort(
         "Vertex name{?s} already exist{?s}: {paste(unique(dupes), collapse = ', ')}"
       )
