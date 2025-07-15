@@ -111,7 +111,7 @@ local_scan <- function(
   weighted = FALSE,
   mode = c("out", "in", "all"),
   neighborhoods = NULL,
-  weights = NULL, # New parameter
+  weights = NULL,
   ...
 ) {
   ## Must be igraph object
