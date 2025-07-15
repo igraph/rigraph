@@ -578,7 +578,7 @@ i_set_vertex_attr <- function(
     unaffected_names <- current_names[unaffected]
 
     if (length(value) == 1 && length(idx_numeric) > 1) {
-      value <- rep(value, length(idx_numeric))
+      value <- rep_len(value, length(idx_numeric))
     }
 
     if (any(value %in% unaffected_names)) {
