@@ -50,7 +50,13 @@ test_that("st_cuts() works", {
   expect_equal(unvs(all_cuts_path$cuts), list(1, 2, 3, 4))
   expect_equal(unvs(all_cuts_path$partition1s), list(1, 1:2, 1:3, 1:4))
 
-  g_star_v7 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3 -+ b)
+  el <- structure(
+    c(
+      "s", "s", "a", "a", "a", "a", "b", "1", "2", "3", 
+      "a", "b", "t", "1", "2", "3", "t", "b", "b", "b"),
+    dim = c(10L, 2L)
+  )
+  g_star_v7 <- graph_from_edgelist(el)
   all_cuts_star_v7 <- st_cuts(g_star_v7, source = "s", target = "t")
   expect_equal(
     unvs(all_cuts_star_v7$cuts),
@@ -84,8 +90,13 @@ test_that("st_cuts() works", {
       c(1, 2, 5, 6, 7, 3)
     )
   )
-
-  g_star_v9 <- graph_from_literal(s -+ a:b -+ t, a -+ 1:2:3:4:5 -+ b)
+  el <- structure(
+    c("s", "s", "a", "a", "a", "a", "a", "a", "b", "1", 
+  "2", "3", "4", "5", "a", "b", "t", "1", "2", "3", "4", "5", "t", 
+  "b", "b", "b", "b", "b"),
+    dim = c(14L, 2L)
+  )
+  g_star_v9 <- graph_from_edgelist(el)
   all_cuts_star_v9 <- st_min_cuts(g_star_v9, source = "s", target = "t")
   expect_equal(all_cuts_star_v9$value, 2)
   expect_equal(unvs(all_cuts_star_v9$cuts), list(c(1, 2), c(1, 9), c(3, 9)))
