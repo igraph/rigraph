@@ -69,6 +69,15 @@
     Condition
       Error in `i_set_vertex_attr()`:
       ! Vertex names already exist: A, B
+
+---
+
+    Code
+      set_vertex_attr(g, "name", 2:3, "C")
+    Condition
+      Error in `i_set_vertex_attr()`:
+      ! Cannot set vertex attribute `name` to a single value (C) for multiple vertices because it results in duplicate names.
+
 # set_vertex_attrs() works
 
     Code

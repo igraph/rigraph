@@ -622,13 +622,14 @@ i_set_vertex_attr <- function(
     if (is.null(current_names)) {
       current_names <- rep_len(NA_character_, vcount(graph))
     }
-    idx_numeric <- as.numeric(index)
 
-    unaffected <- setdiff(seq_along(current_names), idx_numeric)
+    unaffected <- setdiff(seq_along(current_names), index)
     unaffected_names <- current_names[unaffected]
 
-    if (length(value) == 1 && length(idx_numeric) > 1) {
-      value <- rep_len(value, length(idx_numeric))
+    if (length(value) == 1 && length(index) > 1) {
+      cli::cli_abort(
+        "Cannot set vertex attribute {.arg {name}} to a single value ({value}) for multiple vertices because it results in duplicate names."
+      )
     }
 
     if (any(value %in% unaffected_names)) {
