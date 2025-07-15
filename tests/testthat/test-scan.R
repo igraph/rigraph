@@ -169,3 +169,13 @@ test_that("FUN argument works, #32", {
   expect_equal(r1, rep(2, 10))
   expect_equal(r2, rep(2, 10))
 })
+
+test_that("weights argument works", {
+  g <- make_ring(10)
+  E(g)$weight <- 1:10
+  r1 <- local_scan(g, k = 1, weighted = TRUE, weights = 1:10)
+  r2 <- local_scan(g, k = 1, weighted = TRUE, weights = E(g)$weight)
+  expect_equal(r1, r2)
+  r3 <- local_scan(g, k = 1, weighted = FALSE, weights = 1:10)
+  expect_equal(r3, rep(2, 10))
+})
