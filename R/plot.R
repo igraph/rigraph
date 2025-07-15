@@ -636,7 +636,7 @@ plot.igraph <- function(
 
     adjusted_loop_size <- rep(loop.size, length(loops.v))
 
-    r_offset <- 0
+    r_offset <- vertex.size[loops.v]
     xx0 <- layout[loops.v, 1] + cos(la) * r_offset
     yy0 <- layout[loops.v, 2] + sin(la) * r_offset
 
