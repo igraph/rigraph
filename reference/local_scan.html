@@ -72,6 +72,7 @@ for a given neighborhood size and the statistic function.</p>
 <span>  weighted <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
 <span>  neighborhoods <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -128,6 +129,10 @@ for multiple <code>graph.them</code> arguments. Then the neighborhoods can be
 calculated on <code>graph.us</code> and used with multiple graphs. In
 practice, this is currently slower than simply using <code>graph.them</code>
 multiple times.</p></dd>
+
+
+<dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
+<dd><p>Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If <code>NULL</code> (the default) the edge weight attribute is used.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
