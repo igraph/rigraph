@@ -70,6 +70,7 @@
 #'   calculated on `graph.us` and used with multiple graphs. In
 #'   practice, this is currently slower than simply using `graph.them`
 #'   multiple times.
+#' @param weights Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If `NULL` (the default) the edge weight attribute is used.
 #' @param \dots Arguments passed to `FUN`, the function that computes
 #'   the local statistics.
 #' @return For `local_scan()` typically a numeric vector containing the
@@ -110,6 +111,7 @@ local_scan <- function(
   weighted = FALSE,
   mode = c("out", "in", "all"),
   neighborhoods = NULL,
+  weights = NULL,
   ...
 ) {
   ## Must be igraph object
@@ -140,6 +142,16 @@ local_scan <- function(
           is_weighted(graph.them)))
   )
 
+  # Check weight parameter only if weighted=TRUE
+  if (weighted && !is.null(weights)) {
+    stopifnot(is.numeric(weights))
+    if (!is.null(graph.them)) {
+      stopifnot(length(weights) == ecount(graph.them))
+    } else {
+      stopifnot(length(weights) == ecount(graph.us))
+    }
+  }
+
   ## Check if 'neighborhoods' makes sense
   if (!is.null(neighborhoods)) {
     stopifnot(is.list(neighborhoods))
@@ -160,6 +172,19 @@ local_scan <- function(
     FUN <- if (weighted) "sumweights" else "ecount"
   }
 
+  # Only use weights if weighted=TRUE
+  edge_weights <- if (weighted) {
+    if (!is.null(weights)) {
+      as.numeric(weights)
+    } else if (!is.null(graph.them)) {
+      as.numeric(E(graph.them)$weight)
+    } else {
+      as.numeric(E(graph.us)$weight)
+    }
+  } else {
+    NULL
+  }
+
   res <- if (is.null(graph.them)) {
     if (!is.null(neighborhoods)) {
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
@@ -170,7 +195,7 @@ local_scan <- function(
         .Call(
           R_igraph_local_scan_neighborhood_ecount,
           graph.us,
-          if (weighted) as.numeric(E(graph.us)$weight) else NULL,
+          edge_weights,
           neighborhoods
         )
       } else {
@@ -187,7 +212,7 @@ local_scan <- function(
         .Call(
           R_igraph_local_scan_0,
           graph.us,
-          if (weighted) as.numeric(E(graph.us)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
@@ -199,7 +224,7 @@ local_scan <- function(
         .Call(
           R_igraph_local_scan_1_ecount,
           graph.us,
-          if (weighted) as.numeric(E(graph.us)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
@@ -210,7 +235,7 @@ local_scan <- function(
           R_igraph_local_scan_k_ecount,
           graph.us,
           as.numeric(k),
-          if (weighted) as.numeric(E(graph.us)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
@@ -226,7 +251,7 @@ local_scan <- function(
   } else {
     if (!is.null(neighborhoods)) {
       neighborhoods <- lapply(neighborhoods, as.vector)
-      if (is.character(FUN) && FUN %in% c("ecount", "wumweights")) {
+      if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         neighborhoods <- lapply(neighborhoods, function(x) {
           as.numeric(x) - 1
         })
@@ -234,7 +259,7 @@ local_scan <- function(
         .Call(
           R_igraph_local_scan_neighborhood_ecount,
           graph.them,
-          if (weighted) as.numeric(E(graph.them)$weight) else NULL,
+          edge_weights,
           neighborhoods
         )
       } else {
@@ -252,7 +277,7 @@ local_scan <- function(
           R_igraph_local_scan_0_them,
           graph.us,
           graph.them,
-          if (weighted) as.numeric(E(graph.them)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
@@ -265,7 +290,7 @@ local_scan <- function(
           R_igraph_local_scan_1_ecount_them,
           graph.us,
           graph.them,
-          if (weighted) as.numeric(E(graph.them)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
@@ -277,11 +302,11 @@ local_scan <- function(
           graph.us,
           graph.them,
           as.numeric(k),
-          if (weighted) as.numeric(E(graph.them)$weight) else NULL,
+          edge_weights,
           cmode
         )
 
-        ## general case
+        ## General
       } else {
         sapply(V(graph.us), function(x) {
           vei <- neighborhood(graph.us, order = k, nodes = x, mode = mode)[[1]]
