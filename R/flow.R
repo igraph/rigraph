@@ -507,7 +507,8 @@ min_cut <- function(
 #'   perform these checks, as they can be done quickly compared to the
 #'   connectivity calculation itself.  They were suggested by Peter McMahan,
 #'   thanks Peter.
-#' @param ... Ignored.
+#' @param ... Additional arguments passed to methods. Not used by `vertex_connectivity()`
+#'   directly but may be used by other methods that implement `cohesion()`.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
