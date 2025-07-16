@@ -30,7 +30,8 @@ perform these checks, as they can be done quickly compared to the
 connectivity calculation itself.  They were suggested by Peter McMahan,
 thanks Peter.}
 
-\item{...}{Ignored.}
+\item{...}{Additional arguments passed to methods. Not used by \code{vertex_connectivity()}
+directly but may be used by other methods that implement \code{cohesion()}.}
 }
 \value{
 A scalar real value.
