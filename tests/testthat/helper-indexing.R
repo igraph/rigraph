@@ -24,8 +24,8 @@ make_test_weighted_tree <- function() {
 }
 
 make_scan_graphs <- function(version = 1) {
+  local_rng_version("3.5.0")
   if (version == 1) {
-    local_rng_version("3.5.0")
     withr::local_seed(12345)
     n <- 10^3
     p <- 0.1
