@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9064
+
+## Bug fixes
+
+- Adjust loop position to vertex size (#1980).
+
+
 # igraph 2.1.4.9063
 
 ## Chore
