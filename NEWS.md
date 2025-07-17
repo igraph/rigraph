@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9065
+
+## Features
+
+- Added weights parameter to `local_scan()` (#1082, #1448, #1982).
+
+## Documentation
+
+- Document ellipsis in `cohesion()` (#971, #1985).
+
+- Add 2023 preprint (#1240, #1984).
+
+## Testing
+
+- Simplify test (@1741643+krlmlr).
+
+
 # igraph 2.1.4.9064
 
 ## Bug fixes
