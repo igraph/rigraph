@@ -160,7 +160,7 @@ test_that("BFS callback does not blow up when an invalid value is returned", {
 
 test_that("BFS callback does not blow up when an error is raised within the callback", {
   callback <- function(graph, data, extra) {
-    stop("test")
+    cli::cli_abort("test")
     FALSE
   }
 
