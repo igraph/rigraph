@@ -25,7 +25,7 @@
     Condition
       Error in `read.graph.lgl()`:
       ! unused argument (useless = 1)
-      
+
 # reading graph in unsupported format
 
     Code
