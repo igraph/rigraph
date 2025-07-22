@@ -1035,21 +1035,16 @@ arpack <- function(
     options <- options()
   }
 
-  if (
-    !is.list(options) ||
-      (is.null(names(options)) && length(options) != 0)
-  ) {
-    stop("options must be a named list")
-  }
-  if (any(names(options) == "")) {
-    stop("all options must be named")
+  if (!is.list(options) || !rlang::is_named2(options)) {
+    cli::cli_abort("{.arg options} must be a named list")
   }
 
   defaults <- arpack_defaults()
   if (any(!names(options) %in% names(defaults))) {
-    stop(
-      "unkown ARPACK option(s): ",
-      paste(setdiff(names(options), names(defaults)), collapse = ", ")
+    unknown_options <- setdiff(names(options), names(defaults))
+    cli::cli_abort(
+      "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}: 
+      {toString(unknown_options)}"
     )
   }
 
