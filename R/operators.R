@@ -1176,7 +1176,7 @@ path <- function(...) {
     ## Adding named vertices
     res <- add_vertices(e1, length(e2), name = e2)
   } else {
-    cli::cli_abort("Cannot add {.obj_type_friendly type} to igraph graph.")
+    cli::cli_abort("Cannot add {.obj_type_friendly {type}} to igraph graph.")
   }
   res
 }
@@ -1257,7 +1257,7 @@ path <- function(...) {
     res <- delete_vertices(e1, e2)
   } else {
     cli::cli_abort(
-      "Cannot substract {.obj_type_friendly type} from igraph graph."
+      "Cannot substract {.obj_type_friendly {type}} from igraph graph."
     )
   }
   res
@@ -1310,7 +1310,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
     rep.igraph(x, n)
   } else {
     cli::cli_abort(
-      "Cannot multiply igraph graph with {.obj_type_friendly type}."
+      "Cannot multiply igraph graph with {.obj_type_friendly {type}}."
     )
   }
 }
