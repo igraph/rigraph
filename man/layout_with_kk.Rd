@@ -8,7 +8,7 @@
 layout_with_kk(
   graph,
   coords = NULL,
-  dim = 2,
+  dim = c(2, 3),
   maxiter = 50 * vcount(graph),
   epsilon = 0,
   kkconst = max(vcount(graph), 1),

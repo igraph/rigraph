@@ -8,7 +8,7 @@
 layout_with_fr(
   graph,
   coords = NULL,
-  dim = 2,
+  dim = c(2, 3),
   niter = 500,
   start.temp = sqrt(vcount(graph)),
   grid = c("auto", "grid", "nogrid"),
