@@ -18,6 +18,14 @@
       + edges (vertex names):
       [1] 0--1 1--2
 
+# reading graph, unused argument
+
+    Code
+      read_graph(lgl_path, "lgl", useless = 1)
+    Condition
+      Error in `read.graph.lgl()`:
+      ! unused argument (useless = 1)
+
 # graph_from_graphdb works
 
     Code
