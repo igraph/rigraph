@@ -13,7 +13,7 @@
       upgrade_graph(g)
     Condition
       Error in `upgrade_graph()`:
-      ! Don't know how to upgrade graph from version 0 to 4
+      ! Don't know how to upgrade graph from version 0 to 4.
 
 # we can't upgrade from 0.2 to 1.5.0, on the fly
 
