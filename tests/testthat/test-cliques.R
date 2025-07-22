@@ -159,7 +159,7 @@ test_that("max_cliques() work", {
             numeric()
           }
           if (any(duplicated(PX$PX))) {
-            stop("foo2")
+            cli::cli_abort("foo2")
           }
         }
         pres
