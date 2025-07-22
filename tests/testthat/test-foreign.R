@@ -46,6 +46,8 @@ test_that("reading graph, unused argument", {
   g <- make_graph(c(1, 2, 2, 3))
   write_graph(g, lgl_path, "lgl")
   expect_snapshot(error = TRUE, read_graph(lgl_path, "lgl", useless = 1))
+})
+
 test_that("reading graph in unsupported format", {
   expect_snapshot(error = TRUE, read_graph("bla", format = "blop"))
 })
