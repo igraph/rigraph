@@ -591,11 +591,11 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 #' @rdname cohesive_blocks
 #' @export
 export_pajek <- function(blocks, graph, file, project.file = TRUE) {
-  if (!project.file && !is.character(file)) {
-    stop(paste(
-      "`file' must be a filename (without extension) when writing",
-      "to separate files"
-    ))
+  if (!project.file && (!is.character(file) || !nzchar(file))) {
+    cli::cli_abort(
+      "{.arg file} must be a filename (without extension) when writing
+      to separate files, not {.obj_type_friendly {file}}."
+    )
   }
 
   if (project.file) {
