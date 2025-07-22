@@ -542,10 +542,13 @@ i.parse.plot.params <- function(graph, params) {
     }
   }
 
-  func <- function(type, name, range = NULL, dontcall = FALSE) {
-    if (!type %in% names(p)) {
-      stop("Invalid plot option type")
-    }
+  func <- function(
+    type = c("vertex", "edge", "plot"),
+    name,
+    range = NULL,
+    dontcall = FALSE
+  ) {
+    type <- igraph.match.arg(type)
     ret <- function() {
       v <- p[[type]][[name]]
       if (is.function(v) && !dontcall) {
@@ -676,7 +679,7 @@ igraph.check.shapes <- function(x) {
   bad.shapes <- !xx %in% ls(.igraph.shapes)
   if (any(bad.shapes)) {
     bs <- paste(xx[bad.shapes], collapse = ", ")
-    stop("Bad vertex shape(s): ", bs, ".")
+    cli::cli_abort("Bad vertex {cli::qty(length(bad.shapes))} shape{?s}: {bs}.")
   }
   x
 }
