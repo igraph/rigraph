@@ -5,7 +5,7 @@
 \alias{randomly}
 \title{Randomly place vertices on a plane or in 3d space}
 \usage{
-layout_randomly(graph, dim = 2)
+layout_randomly(graph, dim = c(2, 3))
 
 randomly(...)
 }
