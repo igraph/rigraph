@@ -119,26 +119,26 @@ graph.complementer <- function(graph, loops = FALSE) {
 ###################################################################
 
 rename.attr.if.needed <- function(
-  type,
+  type = c("g", "v", "e"),
   graphs,
   newsize = NULL,
   maps = NULL,
   maps2 = NULL,
   ignore = character()
 ) {
+  type <- igraph.match.arg(type)
+
   listfun <- switch(
     type,
     "g" = graph_attr_names,
     "v" = vertex_attr_names,
-    "e" = edge_attr_names,
-    stop("Internal igraph error")
+    "e" = edge_attr_names
   )
   getfun <- switch(
     type,
     "g" = graph_attr,
     "v" = vertex_attr,
-    "e" = edge_attr,
-    stop("Internal igraph error")
+    "e" = edge_attr
   )
   alist <- lapply(graphs, listfun)
   an <- unique(unlist(alist))
