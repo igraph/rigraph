@@ -340,8 +340,7 @@ read_graph <- function(
     "dimacs" = read.graph.dimacs(file, ...),
     "graphdb" = read.graph.graphdb(file, ...),
     "gml" = read.graph.gml(file, ...),
-    "dl" = read.graph.dl(file, ...),
-    stop(paste("Unknown file format:", format))
+    "dl" = read.graph.dl(file, ...)
   )
   res
 }
@@ -505,8 +504,7 @@ write_graph <- function(
     "dimacs" = write.graph.dimacs(graph, file, ...),
     "gml" = write.graph.gml(graph, file, ...),
     "dot" = write.graph.dot(graph, file, ...),
-    "leda" = write.graph.leda(graph, file, ...),
-    stop(paste("Unknown file format:", format))
+    "leda" = write.graph.leda(graph, file, ...)
   )
 
   if (tmpfile) {
