@@ -17,7 +17,12 @@ ensure_igraph <- function(graph, optional = FALSE) {
 }
 
 
-igraph.match.arg <- function(arg, values, error_call = rlang::caller_env()) {
+igraph.match.arg <- function(
+  arg,
+  values,
+  error_call = rlang::caller_env()
+) {
+  error_arg <- rlang::caller_arg(arg)
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
@@ -29,6 +34,7 @@ igraph.match.arg <- function(arg, values, error_call = rlang::caller_env()) {
   rlang::arg_match(
     arg = arg,
     values = values,
+    error_arg = error_arg,
     error_call = error_call
   )
 }
