@@ -1079,7 +1079,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       }
       if (is.logical(ii) && (length(ii) != length(x) && length(ii) != 1)) {
         cli::cli_abort(
-          "Error: Logical index length does not match the number of edges. Recycling is not allowed."
+          "Logical index length does not match the number of edges. Recycling is not allowed."
         )
       }
 
@@ -1144,14 +1144,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    cli::cli_abort("Invalid indexing.")
+  if (!rlang::has_name(attributes(value), "name")) {
+    cli::cli_abort("Can't find {.val name} for attribute.")
   }
   if (is.null(get_vs_graph(x))) {
-    stop("Graph is unknown.")
+    cli::cli_abort("Can't find graph.")
   }
   value
 }
@@ -1166,14 +1163,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    stop("Invalid indexing.")
+  if (!rlang::has_name(attributes(value), "name")) {
+    cli::cli_abort("Can't find {.val name} for attribute.")
   }
   if (is.null(get_es_graph(x))) {
-    stop("Graph is unknown.")
+    cli::cli_abort("Can't find graph.")
   }
   value
 }
@@ -1239,7 +1233,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 `$.igraph.vs` <- function(x, name) {
   graph <- get_vs_graph(x)
   if (is.null(graph)) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   res <- vertex_attr(graph, name, x)
   if (is_single_index(x)) {
@@ -1292,7 +1286,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 `$.igraph.es` <- function(x, name) {
   graph <- get_es_graph(x)
   if (is.null(graph)) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   res <- edge_attr(graph, name, x)
   if (is_single_index(x)) {
@@ -1310,7 +1304,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `$<-.igraph.vs` <- function(x, name, value) {
   if (is.null(get_vs_graph(x))) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   attr(x, "name") <- name
   attr(x, "value") <- value
@@ -1325,7 +1319,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @family vertex and edge sequences
 `$<-.igraph.es` <- function(x, name, value) {
   if (is.null(get_es_graph(x))) {
-    cli::cli_abort("Graph is unknown")
+    cli::cli_abort("Can't find graph.")
   }
   attr(x, "name") <- name
   attr(x, "value") <- value
@@ -1336,11 +1330,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `V<-` <- function(x, value) {
   ensure_igraph(x)
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    cli::cli_abort("invalid indexing")
+  if (!rlang::has_name(attributes(value), "name")) {
+    cli::cli_abort("Can't find {.val name} for vertex attribute.")
   }
   i_set_vertex_attr(
     x,
@@ -1360,11 +1351,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
   ensure_igraph(x)
-  if (
-    !"name" %in% names(attributes(value)) ||
-      !"value" %in% names(attributes(value))
-  ) {
-    cli::cli_abort("invalid indexing")
+  if (!rlang::has_name(attributes(value), "name")) {
+    cli::cli_abort("Can't find {.val name} for edge attribute.")
   }
   i_set_edge_attr(
     x,
@@ -1563,7 +1551,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
     if (!na.ok && any(is.na(v))) {
-      cli::cli_abort("Invalid vertex names")
+      cli::cli_abort("Invalid vertex names {.arg v}.")
     }
     v
   } else {
@@ -1575,7 +1563,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
       res <- as.numeric(v)
     }
     if (!na.ok && any(is.na(res))) {
-      cli::cli_abort("Invalid vertex name(s)")
+      cli::cli_abort("Invalid vertex name(s) {.arg v}.")
     }
     res
   }
@@ -1618,7 +1606,7 @@ as_igraph_es <- function(graph, e) {
     res <- as.numeric(e)
   }
   if (any(is.na(res))) {
-    cli::cli_abort("Invalid edge names")
+    cli::cli_abort("Invalid edge names {.arg e}.")
   }
   res
 }
@@ -1638,7 +1626,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
   args <- list(...)
 
   if (any(!sapply(args, is_fun))) {
-    cli::cli_abort("Not {what} sequence")
+    cli::cli_abort("Not {what} sequence.")
   }
 
   ## get the ids of all graphs
