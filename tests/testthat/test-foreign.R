@@ -39,6 +39,16 @@ test_that("reading graph in LGL format", {
   expect_snapshot(read_graph(lgl_path, "lgl"))
 })
 
+test_that("reading graph in unsupported format", {
+  expect_snapshot(error = TRUE, read_graph("bla", format = "blop"))
+})
+
+test_that("writing graph in unsupported format", {
+  g <- make_graph(c(1, 2, 2, 3))
+  file <- withr::local_tempfile()
+  expect_snapshot(error = TRUE, write_graph(g, file, format = "blop"))
+})
+
 test_that("graph_from_graphdb works", {
   skip_on_cran()
 
