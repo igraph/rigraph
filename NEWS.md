@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9069
+
+## Chore
+
+- Improve errors in layout.R (#2007).
+
+- Remove one more `stop()`.
+
+- Use `cli_abort()`.
+
+- Use `cli_abort()` instead of `stop()`.
+
+- Simplify error by relying on default behavior (#1997).
+
+- Better error in centrality (#2000).
+
+- Simplify error (#1999).
+
+- Rm useless error message (#1998).
+
+- Improve `igraph.match.arg()` (#1996).
+
+
 # igraph 2.1.4.9068
 
 ## vendor
