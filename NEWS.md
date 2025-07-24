@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9070
+
+## Chore
+
+- No `stop()` in version.
+
+- Don't use `stop()` in tests.
+
+- Improve error in stochastic_matrix.
+
+- Improve errors in sgm.R.
+
+- Improve errors in operator.R.
+
+- Fix cli syntax.
+
+- Improve error in rewire.
+
+- Improve errors in plot.common.
+
+- Improve error in `rename.attr.if.needed()`.
+
+
 # igraph 2.1.4.9069
 
 ## Chore
