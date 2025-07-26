@@ -63,13 +63,9 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -666,13 +662,9 @@ are_adjacent_impl <- function(graph, v1, v2) {
   # Argument checks
   ensure_igraph(graph)
   v1 <- as_igraph_vs(graph, v1)
-  if (length(v1) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(v1)
   v2 <- as_igraph_vs(graph, v2)
-  if (length(v2) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(v2)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -685,13 +677,9 @@ get_shortest_path_impl <- function(graph, from, to, mode=c("out", "in", "all", "
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -710,13 +698,9 @@ get_shortest_path_bellman_ford_impl <- function(graph, from, to, weights=NULL, m
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -743,13 +727,9 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -809,13 +789,9 @@ get_k_shortest_paths_impl <- function(graph, from, to, ..., k, weights=NULL, mod
   }
   k <- as.numeric(k)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -834,13 +810,9 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -867,13 +839,9 @@ get_widest_paths_impl <- function(graph, from, to=V(graph), weights=NULL, mode=c
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
+  check_vertex(to)
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
@@ -1865,9 +1833,7 @@ pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TR
   # Argument checks
   ensure_igraph(graph)
   start.vid <- as_igraph_vs(graph, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(start.vid)
   directed <- as.logical(directed)
   unconnected <- as.logical(unconnected)
 
@@ -1890,9 +1856,7 @@ pseudo_diameter_dijkstra_impl <- function(graph, weights=NULL, start.vid, direct
     weights <- NULL
   }
   start.vid <- as_igraph_vs(graph, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(start.vid)
   directed <- as.logical(directed)
   unconnected <- as.logical(unconnected)
 
@@ -1937,9 +1901,7 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
     weights <- NULL
   }
   start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(start)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
   steps <- as.numeric(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
@@ -2072,9 +2034,7 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(root)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2941,13 +2901,9 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(source)
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(target)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
@@ -3016,9 +2972,7 @@ dominator_tree_impl <- function(graph, root, mode=c("out", "in", "all", "total")
   # Argument checks
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(root)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3034,13 +2988,9 @@ all_st_cuts_impl <- function(graph, source, target) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(source)
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(target)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3058,13 +3008,9 @@ all_st_mincuts_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(source)
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(target)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
@@ -3783,9 +3729,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff=-1, weights=NU
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(start)
   bfs.cutoff <- as.numeric(bfs.cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -3917,9 +3861,7 @@ random_spanning_tree_impl <- function(graph, vid=0) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(vid)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3962,9 +3904,7 @@ deterministic_optimal_imitation_impl <- function(graph, vid, optimality=c("maxim
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(vid)
   optimality <- switch(igraph.match.arg(optimality), "minimum"=0L, "maximum"=1L)
   strategies <- as.numeric(strategies)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
@@ -4003,9 +3943,7 @@ roulette_wheel_imitation_impl <- function(graph, vid, is.local, quantities, stra
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(vid)
   is.local <- as.logical(is.local)
   strategies <- as.numeric(strategies)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
@@ -4021,9 +3959,7 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(vid)
   strategies <- as.numeric(strategies)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
@@ -4038,9 +3974,7 @@ vertex_path_from_edge_path_impl <- function(graph, start=NULL, edge.path, mode=c
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(start)
   edge.path <- as_igraph_es(graph, edge.path)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
