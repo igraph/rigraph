@@ -63,6 +63,7 @@ extern SEXP R_igraph_bipartite_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_game_gnp(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_projection(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_projection_size(SEXP, SEXP);
+extern SEXP R_igraph_bond_percolation(SEXP, SEXP);
 extern SEXP R_igraph_bridges(SEXP);
 extern SEXP R_igraph_callaway_traits_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_canonical_permutation(SEXP, SEXP, SEXP);
@@ -148,6 +149,7 @@ extern SEXP R_igraph_edge_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edge_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edge_connectivity(SEXP, SEXP);
 extern SEXP R_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_edgelist_percolation(SEXP);
 extern SEXP R_igraph_edges(SEXP, SEXP);
 extern SEXP R_igraph_eigen_adjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -414,6 +416,7 @@ extern SEXP R_igraph_simple_interconnected_islands_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_simplify_and_colorize(SEXP);
 extern SEXP R_igraph_sir(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_site_percolation(SEXP, SEXP);
 extern SEXP R_igraph_solve_lsap(SEXP, SEXP);
 extern SEXP R_igraph_spanner(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_spinglass_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -527,6 +530,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_bipartite_game_gnp",                         (DL_FUNC) &R_igraph_bipartite_game_gnp,                          5},
     {"R_igraph_bipartite_projection",                       (DL_FUNC) &R_igraph_bipartite_projection,                        4},
     {"R_igraph_bipartite_projection_size",                  (DL_FUNC) &R_igraph_bipartite_projection_size,                   2},
+    {"R_igraph_bond_percolation",                           (DL_FUNC) &R_igraph_bond_percolation,                            2},
     {"R_igraph_bridges",                                    (DL_FUNC) &R_igraph_bridges,                                     1},
     {"R_igraph_callaway_traits_game",                       (DL_FUNC) &R_igraph_callaway_traits_game,                        6},
     {"R_igraph_canonical_permutation",                      (DL_FUNC) &R_igraph_canonical_permutation,                       3},
@@ -612,6 +616,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edge_betweenness_subset",                    (DL_FUNC) &R_igraph_edge_betweenness_subset,                     6},
     {"R_igraph_edge_connectivity",                          (DL_FUNC) &R_igraph_edge_connectivity,                           2},
     {"R_igraph_edge_disjoint_paths",                        (DL_FUNC) &R_igraph_edge_disjoint_paths,                         3},
+    {"R_igraph_edgelist_percolation",                       (DL_FUNC) &R_igraph_edgelist_percolation,                        1},
     {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
@@ -878,6 +883,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_simplify",                                   (DL_FUNC) &R_igraph_simplify,                                    4},
     {"R_igraph_simplify_and_colorize",                      (DL_FUNC) &R_igraph_simplify_and_colorize,                       1},
     {"R_igraph_sir",                                        (DL_FUNC) &R_igraph_sir,                                         4},
+    {"R_igraph_site_percolation",                           (DL_FUNC) &R_igraph_site_percolation,                            2},
     {"R_igraph_solve_lsap",                                 (DL_FUNC) &R_igraph_solve_lsap,                                  2},
     {"R_igraph_spanner",                                    (DL_FUNC) &R_igraph_spanner,                                     3},
     {"R_igraph_spinglass_community",                        (DL_FUNC) &R_igraph_spinglass_community,                        11},
