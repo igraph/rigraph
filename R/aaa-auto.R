@@ -2294,6 +2294,41 @@ count_reachable_impl <- function(graph, mode) {
   res
 }
 
+bond_percolation_impl <- function(graph, edge.order=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (!is.null(edge.order)) edge.order <- as_igraph_es(graph, edge.order)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_bond_percolation, graph, edge.order-1)
+
+  res
+}
+
+site_percolation_impl <- function(graph, vertex.order=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (!is.null(vertex.order)) vertex.order <- as_igraph_vs(graph, vertex.order)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_site_percolation, graph, vertex.order-1)
+
+  res
+}
+
+edgelist_percolation_impl <- function(edges) {
+  # Argument checks
+
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_edgelist_percolation, edges)
+
+  res
+}
+
 is_clique_impl <- function(graph, candidate, directed=FALSE) {
   # Argument checks
   ensure_igraph(graph)

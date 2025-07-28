@@ -6335,6 +6335,152 @@ SEXP R_igraph_count_reachable(SEXP graph, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_bond_percolation                    /
+/-------------------------------------------*/
+SEXP R_igraph_bond_percolation(SEXP graph, SEXP edge_order) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_giant_size;
+  igraph_vector_int_t c_vetex_count;
+  igraph_vector_int_t c_edge_order;
+  SEXP giant_size;
+  SEXP vetex_count;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_giant_size, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_giant_size);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_vetex_count, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vetex_count);
+  if (!Rf_isNull(edge_order)) {
+    R_SEXP_to_vector_int_copy(edge_order, &c_edge_order);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_order);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_order, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_order);
+  }
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_bond_percolation(&c_graph, &c_giant_size, &c_vetex_count, (Rf_isNull(edge_order) ? 0 : &c_edge_order)));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(giant_size=R_igraph_vector_int_to_SEXP(&c_giant_size));
+  igraph_vector_int_destroy(&c_giant_size);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(vetex_count=R_igraph_vector_int_to_SEXP(&c_vetex_count));
+  igraph_vector_int_destroy(&c_vetex_count);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_edge_order);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, giant_size);
+  SET_VECTOR_ELT(r_result, 1, vetex_count);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("giant_size"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("vetex_count"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_site_percolation                    /
+/-------------------------------------------*/
+SEXP R_igraph_site_percolation(SEXP graph, SEXP vertex_order) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_giant_size;
+  igraph_vector_int_t c_edge_count;
+  igraph_vector_int_t c_vertex_order;
+  SEXP giant_size;
+  SEXP edge_count;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_giant_size, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_giant_size);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_count, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_count);
+  if (!Rf_isNull(vertex_order)) {
+    R_SEXP_to_vector_int_copy(vertex_order, &c_vertex_order);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_order);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_order, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_order);
+  }
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_site_percolation(&c_graph, &c_giant_size, &c_edge_count, (Rf_isNull(vertex_order) ? 0 : &c_vertex_order)));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(giant_size=R_igraph_vector_int_to_SEXP(&c_giant_size));
+  igraph_vector_int_destroy(&c_giant_size);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edge_count=R_igraph_vector_int_to_SEXP(&c_edge_count));
+  igraph_vector_int_destroy(&c_edge_count);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vertex_order);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, giant_size);
+  SET_VECTOR_ELT(r_result, 1, edge_count);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("giant_size"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("edge_count"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_edgelist_percolation                /
+/-------------------------------------------*/
+SEXP R_igraph_edgelist_percolation(SEXP edges) {
+                                        /* Declarations */
+  igraph_vector_int_t c_edges;
+  igraph_vector_int_t c_giant_size;
+  igraph_vector_int_t c_vertex_count;
+  SEXP giant_size;
+  SEXP vertex_count;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_vector_int_copy(edges, &c_edges);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_giant_size, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_giant_size);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_count, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_count);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_edgelist_percolation(&c_edges, &c_giant_size, &c_vertex_count));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  igraph_vector_int_destroy(&c_edges);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(giant_size=R_igraph_vector_int_to_SEXP(&c_giant_size));
+  igraph_vector_int_destroy(&c_giant_size);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(vertex_count=R_igraph_vector_int_to_SEXP(&c_vertex_count));
+  igraph_vector_int_destroy(&c_vertex_count);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, giant_size);
+  SET_VECTOR_ELT(r_result, 1, vertex_count);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("giant_size"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("vertex_count"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_is_clique                           /
 /-------------------------------------------*/
 SEXP R_igraph_is_clique(SEXP graph, SEXP candidate, SEXP directed) {

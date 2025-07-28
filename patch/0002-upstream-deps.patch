@@ -1,0 +1,28 @@
+From 77f21dc92bc6717d8668140211c36620388014f0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Mon, 28 Jul 2025 21:25:09 +0200
+Subject: [PATCH] upstream-deps
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index 633fa25425..f447f9afff 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -1321,9 +1321,11 @@ igraph_count_reachable:
+ 
+ igraph_bond_percolation:
+     PARAMS: GRAPH graph, OUT VECTOR_INT giant_size, OUT VECTOR_INT vetex_count, OPTIONAL EDGE_INDICES edge_order
++    DEPS: edge_order ON graph
+ 
+ igraph_site_percolation:
+     PARAMS: GRAPH graph, OUT VECTOR_INT giant_size, OUT VECTOR_INT edge_count, OPTIONAL VERTEX_INDICES vertex_order
++    DEPS: vertex_order ON graph
+ 
+ igraph_edgelist_percolation:
+     PARAMS: VERTEX_INDEX_PAIRS edges, OUT VECTOR_INT giant_size, OUT VECTOR_INT vertex_count
+-- 
+2.49.0
+
