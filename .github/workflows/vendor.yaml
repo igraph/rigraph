@@ -21,7 +21,7 @@ jobs:
       matrix:
         include:
           - branch: main
-            upstream: main
+            upstream: master
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
 
@@ -41,6 +41,11 @@ jobs:
           ref: ${{ matrix.upstream }}
 
       - uses: ./.github/workflows/git-identity
+
+      - uses: ./.github/workflows/install
+        with:
+          cache-version: rcc-vendor
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Vendor sources
         id: vendor
