@@ -7,7 +7,7 @@ on:
       - "vendor-one.sh"
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
 
 concurrency:
   group: ${{ github.workflow }}
@@ -17,28 +17,30 @@ name: vendor
 jobs:
   vendor:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - branch: main
+            upstream: main
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
 
-    name: "Update vendored sources"
+    name: "Update vendored sources (${{ matrix.branch }})"
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ matrix.branch }}
 
       - uses: actions/checkout@v4
         with:
           repository: igraph/igraph
           path: .git/igraph
           fetch-depth: 0
+          ref: ${{ matrix.upstream }}
 
       - uses: ./.github/workflows/git-identity
-
-      - uses: ./.github/workflows/install
-        with:
-          cache-version: rcc-vendor
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Vendor sources
         id: vendor
@@ -49,7 +51,7 @@ jobs:
           git push --dry-run
           # Check if ahead of upstream branch
           # If yes, set a step output
-          if [ $(git rev-list HEAD...origin/main --count) -gt 0 ]; then
+          if [ $(git rev-list HEAD...origin/${{ matrix.branch }} --count) -gt 0 ]; then
             # Avoid set-output, it's deprecated
             echo "vendor=ok" >> "$GITHUB_OUTPUT"
           fi
@@ -60,9 +62,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
-          git checkout -b vendor
+          git checkout -b vendor-${{ matrix.branch }}
           if git push -u origin HEAD; then
-            gh pr create --fill-first
-            gh workflow run rcc -f ref=vendor
+            gh pr create --base ${{ matrix.branch }} --fill-first
+            gh workflow run rcc -f ref=vendor-${{ matrix.branch }}
             gh pr merge --auto --squash
           fi
