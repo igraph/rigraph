@@ -1,0 +1,86 @@
+---
+title: "Community Detection"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Community Detection}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE, warning = FALSE}
+library(igraph)
+```
+
+
+```{r example_graph, echo = FALSE}
+set.seed(1234)
+g <- sample_islands(5, 20, 0.9, 5)
+g <- simplify(g)
+
+colors <- c("red", "green", "blue", "yellow", "purple")
+
+V(g)$color <- rep(colors, each = 20)
+plot(g, vertex.label = NA, vertex.size = 5)
+```
+
+```{r algos, echo = FALSE, message = FALSE}
+algs <- as.character(lsf.str("package:igraph"))
+algs[grepl("cluster_", algs)]
+```
+
+Most of these algorithms are based on the so called "modularity maximization". 
+Modularity measures how well a network can be divided into distinct groups, where nodes within the same group are more densely connected to each other than to nodes in other groups. 
+The modularity score compares the actual density of links within communities to the expected density if the links were randomly distributed. 
+A higher modularity value indicates a stronger community structure. 
+This approach is widely used in social networks, biology, and other fields to uncover meaningful groupings in complex systems.
+
+The workflow of a cluster analysis is always the same, independent from the chosen method. We illustrate the workflow using the infamous karate club network.
+
+```{r karate}
+karate <- make_graph("Zachary")
+plot(karate)
+```
+
+Below we illustrate the workflow using the `cluster_louvain()` function, which is one of the most commonly used clustering algorithms in igraph.
+
+```{r cluster_ex}
+# compute clustering
+clu <- cluster_louvain(karate)
+
+# cluster membership vector
+mem <- membership(clu)
+mem
+
+# clusters as list
+com <- communities(clu)
+com
+```
+
+To compare the quality of clusterings, we can compute the modularity score for each output.
+
+```{r karate-cluster}
+
+imc <- cluster_infomap(karate)
+lec <- cluster_leading_eigen(karate)
+loc <- cluster_louvain(karate)
+sgc <- cluster_spinglass(karate)
+wtc <- cluster_walktrap(karate)
+
+scores <- c(
+  infomap = modularity(karate, membership(imc)),
+  eigen = modularity(karate, membership(lec)),
+  louvain = modularity(karate, membership(loc)),
+  spinglass = modularity(karate, membership(sgc)),
+  walk = modularity(karate, membership(wtc))
+)
+scores
+```
+
+For the karate network, `cluster_spinglass()` produces the highest modularity score.
