@@ -84,3 +84,51 @@ scores
 ```
 
 For the karate network, `cluster_spinglass()` produces the highest modularity score.
+
+Modularity maximization is still widely considered as the state-of-the-art clustering method
+for networks. There are, however, some technical shortcomings that one should be aware of.
+One of those is the so called "resolution limit". When modularity is being maximized, it can happen
+that smaller clusters are merged together to form bigger clusters. The prime example is the graph that
+consists of cliques connected in a ring.
+
+```{r prepare-Kn-graph, echo = FALSE, message = FALSE}
+n1 <- 5
+n2 <- 50
+A <- matrix(1, n1, n1)
+lst <- vector("list", n2)
+lst <- lapply(lst, function(x) A)
+AA <- Matrix::bdiag(lst)
+for (i in 1:(n2 - 1)) {
+  AA[i * n1, i * n1 + 1] <- AA[i * n1 + 1, i * n1] <- 1
+}
+AA[1, n1 * n2] <- AA[n1 * n2, 1] <- 1
+K50 <- graph_from_adjacency_matrix(AA, "undirected", diag = FALSE)
+```
+
+The figure below shows such a graph, consisting of 50 cliques of size 5. 
+
+```{r plot-K50-blank, echo = FALSE, message = FALSE}
+plot(K50, vertex.label = NA, vertex.size = 2, edge.color = "grey66")
+```
+
+Intuitively, any clustering method should return a cluster for each clique.
+But as the table below shows, the clustering methods based on modularity maximization do not return the expected result but rather merge neighboring cliques together.
+
+```{r clu-louvain-K50}
+clu_louvain <- cluster_louvain(K50)
+table(membership(clu_louvain))
+```
+
+A clustering algorithm that fixes this issue is the leiden algorithm.
+
+```{r}
+#| label: clu-leiden-K50
+clu_leiden <- cluster_leiden(
+  K50,
+  objective_function = "CPM",
+  resolution = 0.5
+)
+table(membership(clu_leiden))
+```
+
+The tricky part, however, is to choose the right resolution parameter which can vary from graph to graph.
