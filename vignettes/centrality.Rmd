@@ -185,4 +185,4 @@ Centrality measures are essential tools in network analysis, providing insights 
 
 When working with weighted graphs, it is crucial to understand how weights are interpreted by each centrality function and whether they need to be inverted or not. This ensures accurate representation of the graph's characteristics and the vertices' importance.
 
-It is also important to note that the actual values returned by a centrality function are not as important as the ranking they indicate. The relative values of centrality measures are what matter most, as they help identify the most important vertices in the graph.
+It is also important to note that the actual values returned by a centrality function are not as important as the ranking they produce. The relative values of centrality measures are what matter most, as they help identify the most important vertices in the graph.
