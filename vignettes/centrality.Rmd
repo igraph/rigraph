@@ -26,7 +26,6 @@ The `igraph` package implements the following indices:
 - alpha centrality (`alpha_centrality()`)
 - power centrality (`power_centrality()`)
 - PageRank (`page_rank()`)
-- eccentricity (`eccentricity()`)
 - hubs and authorities (`authority_score()` and `hub_score()`)
 - subgraph centrality (`subgraph_centrality()`)
 
@@ -99,4 +98,91 @@ subgraph_centrality(g)
 
 ## Undirected and weighted centrality measures
 
-When the graph is weighted, the centrality measures can be adjusted to account for edge weights. The `strength()` function calculates the weighted degree, and other measures can also be adapted to consider weights.
+When the graph is weighted, the centrality measures can be adjusted to account for edge weights. The `strength()` function calculates the weighted degree.
+
+```{r}
+g <- make_full_graph(5, directed = FALSE)
+E(g)$weight <- 1:10
+```
+
+
+```{r}
+strength(g)
+```
+
+Other measures can also be adapted to consider weights. Note that most indices automatically calculate the weighted version if an edge attribute called `weight` exists. But be aware that weights are interpreted differently across functions. For betweeness, for example, they are interpreted as costs (distances), so higher weights are interpreted as being costly. So if the `weight` attribute is not a cost variable (for example frequency of contact), you essentially need to supply the inverse of it to reverse its meaning. 
+
+
+```{r betweenness_weighted}
+# Automatically using weights
+betweenness(g)
+
+# Explicitly providing weights attribute
+betweenness(g, weights = E(g)$weight)
+
+# Explicitly providing weights if the weights are not costs
+betweenness(g, weights = 1 / E(g)$weight)
+
+# Supplying a different vector of weights
+betweenness(g, weights = 1:10)
+```
+
+For closeness centrality, the weights are interpreted similarly. 
+
+For eigenvector centrality, on the other hand, the weights are  interpreted as importance, so you do not need to invert them if the weight attribute is indicating importance rather than distance. 
+
+```{r eigenvector_weighted}
+
+eigen_centrality(g)$vector
+eigen_centrality(g, weights = E(g)$weight)$vector
+```
+
+Note that when you are interested in the unweighted version when you have a edge weight attribute, you should set `weights = NA`. This will ignore the weights and calculate the unweighted version. In any case, it is important to be aware of how the weights are interpreted by each function and what your edge attribute represents and whether it needs to be inverted or not.
+
+## Directed centrality indices
+
+
+```{r graph_directed}
+g <- graph_from_literal(A -+ B -+ C -+ D, A -+ C, B -+ D, E -+ C)
+plot(g)
+```
+
+In directed graphs, some centrality measures can be calculated for both incoming and outgoing edges. The `mode` argument is used to specify whether to consider incoming or outgoing edges.
+
+
+```{r}
+degree(g, mode = "in")
+degree(g, mode = "out")
+closeness(g, mode = "in")
+closeness(g, mode = "out")
+```
+
+Note that for closeness it is possible to obtain `NA` values if the vertex is not reachable from all other vertices. Node `A` for example has only outgoing edges, so it is not reachable from any other node.
+
+A special case is betweeness centrality which does not have a `mode` argument. It is always calculated based on the directed paths, so it is not necessary to specify the direction.
+```{r betwenness_directed}
+betweenness(g, directed = TRUE)
+```
+
+Besides the centrality measures already discussed, there exist additional indices specifically designed for directed graphs. A directed version of `eigen_centrality()` is `page_rank()`, which is used in web analysis to rank web pages based on their link structure. A page is considered important, if other important pages link to it. 
+
+```{r page_rank}
+page_rank(g)$vector
+```
+
+Hubs and Authorities is another way to rank web pages, sometimes used alongside or compared to PageRank. hubs are pages that link to many other pages, while authorities are pages that are linked to by many hubs. While PageRank focuses on overall link popularity, Hubs and Authorities emphasizes a mutual reinforcement—good hubs point to good authorities, and good authorities are pointed to by good hubs.
+
+```{r hubs_authorities}
+authority_score(g)$vector
+hub_score(g)$vector
+```
+
+The `alpha_centrality()` and `power_centrality()` functions are also available for directed graphs. They are less commonly used but can be useful in specific contexts. See there respective documentation for details on their usage.
+
+## Summary
+
+Centrality measures are essential tools in network analysis, providing insights into the importance of vertices within a graph. The `igraph` package offers a wide range of centrality indices for both undirected and directed graphs, as well as weighted graphs.
+
+When working with weighted graphs, it is crucial to understand how weights are interpreted by each centrality function and whether they need to be inverted or not. This ensures accurate representation of the graph's characteristics and the vertices' importance.
+
+It is also important to note that the actual values returned by a centrality function are not as important as the ranking they indicate. The relative values of centrality measures are what matter most, as they help identify the most important vertices in the graph.
