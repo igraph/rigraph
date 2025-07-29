@@ -1,5 +1,5 @@
 ---
-title: "centrality"
+title: "Centrality"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Centrality}
