@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9073
+
+## Chore
+
+- Adapt default path.
+
+## Continuous integration
+
+- Fix vendoring.
+
+- Align vendoring workflow with duckdb.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@d807fc2bff14714686fa75f945772899dda8925c (#2025).
+
+- Update vendored sources to igraph/igraph@7788ba9623c249cd00f45f204d3aed2bfb295328 (#2024).
+
+- Update vendored sources to igraph/igraph@db03c3207a27a6ea5559ec79941ae2ff26a27386 (#2023).
+
+## Uncategorized
+
+- Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
+
+
 # igraph 2.1.4.9072
 
 ## vendor
