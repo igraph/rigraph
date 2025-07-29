@@ -1,0 +1,106 @@
+---
+title: "centrality"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Centrality}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In network analysis, centrality measures help identify the most important vertices within a graph. These measures are used in a wide variety of domains such as sociology (influential individuals), biology (essential proteins), or web analysis (important web pages).
+
+The `igraph` package implements the following indices:
+
+- degree (`degree()`)
+- weighted degree (`strength()`)
+- betweenness (`betweenness()`)
+- closeness (`closeness()`)
+- eigenvector (`eigen_centrality()`)
+- alpha centrality (`alpha_centrality()`)
+- power centrality (`power_centrality()`)
+- PageRank (`page_rank()`)
+- eccentricity (`eccentricity()`)
+- hubs and authorities (`authority_score()` and `hub_score()`)
+- subgraph centrality (`subgraph_centrality()`)
+
+
+
+```{r setup}
+library(igraph)
+```
+
+The following graph will be used to illustrate the undirected centrality measures.
+```{r graph}
+el <- matrix(
+  c(
+    "A", "B", "C", "C", "D", "E", "E", "F", "F", "F", "F", "G", "G", "G", "H",
+    "H", "I", "K", "D", "E", "K", "H", "I", "K", "G", "H", "J", "K", "I", "J",
+    "K", "I", "J", "J"
+  ),
+  nrow = 17L,
+  ncol = 2L
+)
+
+g <- graph_from_edgelist(el, directed = FALSE)
+plot(
+  g,
+  vertex.label = V(g)$name,
+  vertex.size = 30
+)
+```
+
+## Undirected and unweighted centrality measures
+
+### Degree centrality
+
+The degree centrality of a vertex is the number of edges incident to it. In an undirected graph, this is simply the number of neighbors.
+
+```{r degree}
+degree(g)
+```
+
+### Betweenness centrality
+
+Betweenness centrality measures the extent to which a vertex lies on the shortest paths between other vertices. It is calculated as the sum of the fraction of all-pairs shortest paths that pass through the vertex.
+
+```{r betweenness}
+betweenness(g)
+```
+
+### Closeness centrality
+Closeness centrality is the reciprocal of the average length of the shortest path from a vertex to all other vertices in the graph. It indicates how quickly a vertex can access other vertices.
+
+```{r closeness}
+closeness(g)
+```
+
+### Eigenvector centrality
+
+Eigenvector centrality measures a vertex's influence based on the number and quality of its connections. It considers not only the number of neighbors but also the centrality of those neighbors.
+
+```{r eigenvector}
+eigen_centrality(g)$vector
+```
+
+### Subgraph centrality
+
+Subgraph centrality is a measure that counts the number of closed walks of all lengths that pass through a vertex. It provides a more comprehensive view of a vertex's importance in the graph structure.
+
+```{r subgraph_centrality}
+subgraph_centrality(g)
+```
+
+## Undirected and weighted centrality measures
+
+When the graph is weighted, the centrality measures can be adjusted to account for edge weights. The `strength()` function calculates the weighted degree, and other measures can also be adapted to consider weights.
+
+```{r weighted_graph}
+E(g)$weight <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+```
