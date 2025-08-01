@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9076
+
+## Continuous integration
+
+- Format with air, check detritus, better handling of `extra-packages` (#2035).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@d7a119ddef575026d9eba9414fedea4d8f11774b (#2034).
+
+- Update vendored sources to igraph/igraph@01cabca5a8c685ff263a11a6563ff42cac8572b8 (#2033).
+
+- Update vendored sources to igraph/igraph@f01a024b1dc6f49720cc2d089687228a55f4aa6b (#2032).
+
+
 # igraph 2.1.4.9075
 
 ## vendor
