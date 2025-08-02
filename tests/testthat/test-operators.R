@@ -345,6 +345,46 @@ test_that("disjoint union gives warning for non-unique vertex names", {
   )
 })
 
+test_that("disjoint union handles mixed named/unnamed graphs", {
+  # Test named + unnamed graphs
+  g1 <- make_ring(4)
+  g2 <- make_ring(3)
+  V(g1)$name <- c("A", "B", "C", "D")
+
+  result <- disjoint_union(g1, g2)
+  
+  expect_equal(V(result)$name, c("A", "B", "C", "D", "V1", "V2", "V3"))
+  expect_equal(vcount(result), 7)
+  expect_equal(ecount(result), 7)
+  
+  # Test with existing V-pattern names
+  g3 <- make_ring(3)
+  g4 <- make_ring(2)
+  V(g3)$name <- c("V1", "V2", "V3")
+  
+  result2 <- disjoint_union(g3, g4)
+  expect_equal(V(result2)$name, c("V1", "V2", "V3", "V4", "V5"))
+  
+  # Test unnamed + named graphs (should work the same)
+  result3 <- disjoint_union(g2, g1)
+  expect_equal(V(result3)$name, c("V1", "V2", "V3", "A", "B", "C", "D"))
+  
+  # Test all unnamed graphs (should not add names)
+  g5 <- make_ring(2)
+  g6 <- make_ring(2)
+  result4 <- disjoint_union(g5, g6)
+  expect_true(is.null(V(result4)$name) || all(is.na(V(result4)$name)))
+  
+  # Test all named graphs (should work as before)
+  g7 <- make_ring(2)
+  g8 <- make_ring(2)
+  V(g7)$name <- c("X", "Y")
+  V(g8)$name <- c("P", "Q")
+  
+  result5 <- disjoint_union(g7, g8)
+  expect_equal(V(result5)$name, c("X", "Y", "P", "Q"))
+})
+
 
 test_that("union of unnamed graphs works", {
   g1 <- make_ring(10)
