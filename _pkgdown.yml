@@ -214,9 +214,6 @@ reference:
   - has_concept("processes")
   - has_concept("random_walk")
 # -----
-- title: Demo
-- contents:
-  - has_concept("demo")
 - title: I/O read/write files
 - contents:
   - has_concept("foreign")
