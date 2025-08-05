@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9078
+
+## Continuous integration
+
+- Cleanup and fix macOS (#2042).
+
+
 # igraph 2.1.4.9077
 
 ## vendor
