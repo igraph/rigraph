@@ -142,8 +142,8 @@ The **degree** of a node is the number of edges connected to it. The **degree di
 
 The degree distribution can be calculated using the `degree_distribution()` function. It returns a vector of probabilities for each degree value in the network.
 ```{r degree_distribution_gnp}
-g <- sample_gnp(1000, 0.01)
-degree_dist <- degree_distribution(g)
+gnp <- sample_gnp(1000, 0.01)
+degree_dist <- degree_distribution(gnp)
 plot(
   degree_dist,
   xlab = "Degree",
@@ -156,8 +156,8 @@ plot(
 The degree distribution of a GNP graph is usually Poisson distributed.
 
 ```{r degree_distribution_pa}
-g <- sample_pa(1000, power = 1, m = 2)
-degree_dist <- degree_distribution(g)
+pa <- sample_pa(1000, power = 1, m = 2)
+degree_dist <- degree_distribution(pa)
 plot(
   degree_dist,
   xlab = "Degree",
