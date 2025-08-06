@@ -1,0 +1,139 @@
+---
+title: "Descriptive Statistics for Graphs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Descriptive Statistics for Graphs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(igraph)
+```
+
+This vignette will introduce a series of descriptive network statistics.
+
+```{r graph}
+karate <- make_graph("Zachary")
+```
+
+```{r plot_karate, echo=FALSE}
+xy <- matrix(
+  c(
+    1.093966887087722, 0.6529823735960844, 0.113857179935990385,
+    1.0085601998539617252, 2.070175212713373, 2.2894669847085685,
+    2.073251021482423, 0.9074652164386368, -0.218839345089003129,
+    -0.7942155888555399, 1.6992683670536126, 1.3013148352817825,
+    2.0587212117790386, 0.07840464375031649, -1.83225113852727928,
+    -2.043107183215482, 3.1903504510195644, 1.7252916727157002,
+    -2.1635297757006606, 0.1099363214367048, -2.0173609083270283,
+    1.438173180664004, -1.526167873866698, -1.391704520819019, 0.0427082625044537,
+    -0.6266672832455868, -2.4328956848424186, -0.5765938127636058,
+    -0.7235522657428076, -1.890884, -0.49828843603408735,
+    -0.0382689951910894, -1.16044073125891867, -1.0946750031954726,
+    -0.03704005890734676, 1.0959410277670554, -0.03380487817978164,
+    0.7639081234015446, -0.0056942042878972, -0.2762080169182307,
+    -0.7888685525880392, 0.2731545198004819, 0.25591411019330024,
+    1.1600380074120809, -0.8725800247858699, -1.2680925791346904,
+    0.7216614853390146, 0.7578488361025302, 1.0484169427497647,
+    0.7123644274753804, -0.857921398588591, 1.1365954184204712,
+    0.31429269895315737, 0.38929448248564685, -0.3514298049811463,
+    1.4685069662610182, 1.2955819756075229, -1.1458655130616306,
+    -1.904014863664545, -1.9548058940536703, -0.2371036,
+    -0.978877855547320874, -0.6088580898473848, -0.790031387175628,
+    1.1533732492508566, -0.7439629784967702, -0.011113968389847993,
+    0.2006269
+  ),
+  nrow = 34L,
+  ncol = 2L
+)
+plot(karate, layout = xy)
+```
+The graph a simple network of the famous Zachary's Karate Club. The network consists of 34 nodes and 78 edges, representing the friendships between members of the club.
+
+```{r print_karate}
+karate
+```
+
+The **density** of a network is defined as the fraction of the potential edges in a network that are actually present.
+```{r density}
+c(
+    edge_density(make_empty_graph(10)),
+    edge_density(karate),
+    edge_density(make_full_graph(10))
+)
+```
+
+The density of an empty network is $0$ and for the full network it is $1$. 
+The density of empirical network is somewhere in between but as the number of nodes increases, we'd expect the density to decrease.
+
+A **shortest path** is a path that connects two nodes in a network with a minimal number of edges. 
+```{r shortest_path}
+shortest_paths(karate,from = 1,to = 34,output = "vpath")
+```
+
+```{r karate_shortest_path,echo=FALSE}
+E(karate)$color <- "grey66"
+E(karate)$color[as.integer(shortest_paths(karate,from = 1,to = 34,output = "epath")$epath[[1]])] <- "red"
+plot(karate, layout = xy)
+karate <- remove_edge_attr(karate, "color")
+```
+
+The length of a shortest path is called the **distance** between two nodes. The distance matrix can be calculated using the `distances()` function.
+
+```{r disntances}
+distances(karate)[1:10, 1:10]
+```
+
+The karate network is **connected** and consists of $1$ **connected components**. 
+
+The length of the longest shortest path is called the **diameter** of the network.
+```{r diameter}
+diameter(karate)
+```
+
+**Transitivity** measures the probability that the neighbors of a node are also connected. This is also called the **clustering coefficient**.  
+```{r}
+#| label: transitivity
+transitivity(karate, type = "global")
+transitivity(karate, type = "local", isolates = "zero")
+```
+The global transitivity of an undirected network is the ratio of the triangles and the connected triples in the network.
+
+THe local transitivity of a node is the ratio of the triangles connected to the node and the triples centered on the node itself.
+
+For directed networks, a measure of importance is **reciprocity**, which is defined as the proportion of reciprocated edges between nodes.
+
+```{r reciprocity_example}
+g <- sample_gnp(20, 5 / 20, directed = TRUE)
+reciprocity(g)
+```
+
+About `r round(reciprocity(g)*100)`% of edges are reciprocated in the graph. 
+
+## Dyad and Triad Census
+
+The **dyad census** categorize all possible dyads within a network based on their mutual connection status. It classifies dyads into three categories: mutual (both nodes have a directed edge to the other, i.e. reciprocated), asymmetric (only one node has a directed edge to the other), and null (no directed edges between the nodes). The census provides insights into the overall reciprocity and directionality of relationships in the network, helping to understand the balance between mutual cooperation, one-sided relationships, and absence of direct interaction.
+
+```{r dyad_census}
+dyad_census(g)
+```
+
+More important than the dyad census is usually the **triad census**.
+In a directed network, there are 16 possible configurations of edges that can occur between three nodes. 
+![](triad_census.jpg)
+
+The triad census of a network gives the number of occurrences of each of these triad. Triads are labelled `xyzL` where `x` is the number of reciprocated ties, `y` is the number of not reciprocated ties and `z` is the number of null ties. The `L` term is a letter (U,C,D or T) which allows to differentiate between triads where these numbers are the same. 
+
+```{r triad_census}
+triad_census(g)
+```
+
+## Degree distributions
