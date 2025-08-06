@@ -112,7 +112,7 @@ THe local transitivity of a node is the ratio of the triangles connected to the 
 For directed networks, a measure of importance is **reciprocity**, which is defined as the proportion of reciprocated edges between nodes.
 
 ```{r reciprocity_example}
-g <- sample_gnp(20, 5 / 20, directed = TRUE)
+g <- sample_gnp(100, 0.05, directed = TRUE)
 reciprocity(g)
 ```
 
@@ -168,3 +168,4 @@ plot(
 ```
 
 The degree distribution of a preferential attachment graph is commonly said to be "scale-free".
+
