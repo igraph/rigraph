@@ -1,0 +1,77 @@
+---
+title: "Generators for Graphs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Graph-generators}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(igraph)
+```
+
+The `igraph` package provides a variety of functions to generate different types of graphs. This vignette will cover some of the most commonly used graph generators.
+
+## Trivial graph generators
+
+By trivial, we mean graphs that are not generated from any particular model or structure, but rather are created with specific parameters. These include:
+- **Empty graph**: A graph with no vertices or edges.
+- **Complete graph**: A graph where every pair of distinct vertices is connected by a unique edge.
+- **Star graph**: A graph with one central vertex connected to all other vertices.
+- **Path graph**: A simple path with a specified number of vertices.
+- **Cycle graph**: A closed path where the last vertex is connected back to the first.
+- **Lattice graph**: A grid-like structure where vertices are arranged in a regular pattern.
+- **Tree graph**: A connected acyclic graph with a specified number of vertices.
+
+The code below shows how to create these trivial graphs using the `igraph` package. The examples use undirected graphs, but you can set `directed = TRUE` for directed versions or change the `mode` parameter as needed. In all cases, the parameter `n` specifies the number of vertices in the graph.
+
+```{r example_trivial_graphs}
+g1 <- make_empty_graph(n = 10, directed = FALSE)
+plot(g1)
+g2 <- make_full_graph(n = 10, directed = FALSE)
+plot(g2)
+g3 <- make_star(n = 10, mode = "undirected")
+plot(g3)
+g4 <- make_ring(n = 10, directed = FALSE, circular = FALSE)
+plot(g4)
+g5 <- make_ring(n = 10, directed = FALSE, circular = TRUE)
+plot(g5)
+g6 <- make_lattice(dimvector = c(3, 3), directed = FALSE)
+plot(g6)
+```
+
+## Graph generators from models
+The `igraph` package also includes generators based on specific models, such as:
+- **Erdős-Rényi model**: Generates random graphs where each edge is included with a certain probability.
+- **Barabási-Albert model**: Generates scale-free networks using a preferential attachment mechanism.
+- **Watts-Strogatz model**: Generates small-world networks with a specified degree of randomness.
+- **Configuration model**: Generates random graphs with a specified degree sequence.
+
+
+```{r sample_gnp}
+g7 <- sample_gnp(n = 100, p = 0.05, directed = FALSE)
+g7
+```
+
+The parameters `n` and `p` control the number of vertices and the probability of edge creation, respectively. The resulting graph is a random graph where each edge is included with probability `p`.
+
+```{r sample_pa}
+g8 <- sample_pa(n = 100, power = 1, directed = FALSE)
+g8
+```
+
+The `power` parameter controls the preferential attachment mechanism, which influences the degree distribution of the resulting graph.
+
+```{r sample_ws}
+g9 <- sample_smallworld(dim = 1, size = 100, nei = 2, p = 0.05, directed = FALSE)
+g9
+```
+The `dim` parameter specifies the dimensionality of the small-world network, `size` is the number of vertices, `nei` is the number of nearest neighbors to connect to, and `p` is the probability of rewiring edges.
