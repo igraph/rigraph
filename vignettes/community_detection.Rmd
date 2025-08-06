@@ -119,7 +119,7 @@ clu_louvain <- cluster_louvain(K50)
 table(membership(clu_louvain))
 ```
 
-A clustering algorithm that fixes this issue is the leiden algorithm.
+A clustering algorithm that fixes this issue is the leiden algorithm which, by default, uses the "CPM" objective function instead of modularity.
 
 ```{r}
 #| label: clu-leiden-K50
@@ -131,4 +131,11 @@ clu_leiden <- cluster_leiden(
 table(membership(clu_leiden))
 ```
 
-The tricky part, however, is to choose the right resolution parameter which can vary from graph to graph.
+The `resolution` parameter controls the granularity of the clustering. A higher resolution leads to smaller clusters, while a lower resolution results in larger clusters. The optimal value often depends on the specific structure of the graph and the research question at hand.
+
+A reasonable starting point for the parameter is to use the average edge strength of the graph divided by the number of vertices minus one. 
+
+```r
+quantile(strength(g))[2] / (gorder(g) - 1)
+```
+
