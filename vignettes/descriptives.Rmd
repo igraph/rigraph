@@ -137,3 +137,34 @@ triad_census(g)
 ```
 
 ## Degree distributions
+
+The **degree** of a node is the number of edges connected to it. The **degree distribution** is the probability distribution of the degrees over the entire network. 
+
+The degree distribution can be calculated using the `degree_distribution()` function. It returns a vector of probabilities for each degree value in the network.
+```{r degree_distribution_gnp}
+g <- sample_gnp(1000, 0.01)
+degree_dist <- degree_distribution(g)
+plot(
+  degree_dist,
+  xlab = "Degree",
+  ylab = "Probability",
+  type = "s",
+  main = "Degree Distribution of a GNP Graph"
+)
+```
+
+The degree distribution of a GNP graph is usually Poisson distributed.
+
+```{r degree_distribution_pa}
+g <- sample_pa(1000, power = 1, m = 2)
+degree_dist <- degree_distribution(g)
+plot(
+  degree_dist,
+  xlab = "Degree",
+  ylab = "Probability",
+  type = "s",
+  main = "Degree Distribution of a PA Graph",
+)
+```
+
+The degree distribution of a preferential attachment graph is commonly said to be "scale-free".
