@@ -1,0 +1,25 @@
+From ffced517fdd10884cf5c99cabc9b2f5587926f23 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Thu, 7 Aug 2025 17:10:17 +0200
+Subject: [PATCH] Temporary fix
+
+---
+ src/vendor/cigraph/src/operators/permute.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/src/operators/permute.c b/src/vendor/cigraph/src/operators/permute.c
+index 60cbb08b12..f84ba6bc66 100644
+--- a/src/vendor/cigraph/src/operators/permute.c
++++ b/src/vendor/cigraph/src/operators/permute.c
+@@ -24,7 +24,7 @@
+ 
+ #include "igraph_constructors.h"
+ #include "igraph_interface.h"
+-#include "igraph_isomorphism.h"
++#include "igraph_topology.h"
+ 
+ #include "graph/attributes.h"
+ 
+-- 
+2.49.0
+
