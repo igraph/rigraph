@@ -22,6 +22,8 @@ jobs:
         include:
           - branch: main
             upstream: master
+          - branch: next
+            upstream: develop
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
 
