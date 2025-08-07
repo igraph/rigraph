@@ -413,8 +413,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
 
     const igraph_integer_t no_of_nodes = igraph_vcount(graph);
 
-    RNG_BEGIN();
-
     dendro d;
 
     // If we want to start from HRG
@@ -438,8 +436,6 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
     } else {
         MCMCEquilibrium_Find(d, hrg);
     }
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 
@@ -465,14 +461,10 @@ igraph_error_t igraph_hrg_sample(const igraph_hrg_t *hrg, igraph_t *sample) {
 
     // TODO: error handling
 
-    RNG_BEGIN();
-
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
     d.makeRandomGraph();
     IGRAPH_CHECK(d.recordGraphStructure(sample));
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -512,8 +504,6 @@ igraph_error_t igraph_hrg_sample_many(
         return IGRAPH_SUCCESS;
     }
 
-    RNG_BEGIN();
-
     d.clearDendrograph();
     d.importDendrogramStructure(hrg);
     while (num_samples-- > 0) {
@@ -523,8 +513,6 @@ igraph_error_t igraph_hrg_sample_many(
         IGRAPH_CHECK(igraph_graph_list_push_back(samples, &g));
         IGRAPH_FINALLY_CLEAN(1);
     }
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
     IGRAPH_HANDLE_EXCEPTIONS_END
@@ -636,12 +624,9 @@ igraph_error_t igraph_hrg_dendrogram(igraph_t *graph, const igraph_hrg_t *hrg) {
     const igraph_integer_t no_of_edges = no_of_nodes > 0 ? no_of_nodes - 1 : 0;
     igraph_vector_int_t edges;
     igraph_integer_t i, idx = 0;
-    igraph_vector_ptr_t vattrs;
+    igraph_attribute_record_list_t vattrs;
     igraph_vector_t prob;
-    igraph_attribute_record_t rec = { "probability",
-                                      IGRAPH_ATTRIBUTE_NUMERIC,
-                                      &prob
-                                    };
+    igraph_attribute_record_t* rec;
 
     // Probability labels, for leaf nodes they are IGRAPH_NAN
     IGRAPH_VECTOR_INIT_FINALLY(&prob, no_of_nodes);
@@ -653,9 +638,13 @@ igraph_error_t igraph_hrg_dendrogram(igraph_t *graph, const igraph_hrg_t *hrg) {
     }
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
-    IGRAPH_CHECK(igraph_vector_ptr_init(&vattrs, 1));
-    IGRAPH_FINALLY(igraph_vector_ptr_destroy, &vattrs);
-    VECTOR(vattrs)[0] = &rec;
+    IGRAPH_CHECK(igraph_attribute_record_list_init(&vattrs, 1));
+    IGRAPH_FINALLY(igraph_attribute_record_list_destroy, &vattrs);
+
+    rec = igraph_attribute_record_list_get_ptr(&vattrs, 1);
+    IGRAPH_CHECK(igraph_attribute_record_set_name(rec, "probability"));
+    IGRAPH_CHECK(igraph_attribute_record_set_type(rec, IGRAPH_ATTRIBUTE_NUMERIC));
+    igraph_vector_swap(rec->value.as_vector, &prob);
 
     for (i = 0; i < orig_nodes - 1; i++) {
         igraph_integer_t left = VECTOR(hrg->left)[i];
@@ -672,7 +661,7 @@ igraph_error_t igraph_hrg_dendrogram(igraph_t *graph, const igraph_hrg_t *hrg) {
     IGRAPH_CHECK(igraph_add_vertices(graph, no_of_nodes, &vattrs));
     IGRAPH_CHECK(igraph_add_edges(graph, &edges, NULL));
 
-    igraph_vector_ptr_destroy(&vattrs);
+    igraph_attribute_record_list_destroy(&vattrs);
     igraph_vector_int_destroy(&edges);
     igraph_vector_destroy(&prob);
     IGRAPH_FINALLY_CLEAN(4);  // + 1 for graph
@@ -720,8 +709,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given if `start' is true.", IGRAPH_EINVAL);
     }
 
-    RNG_BEGIN();
-
     dendro d;
 
     if (start) {
@@ -739,8 +726,6 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
     markovChainMonteCarlo2(d, num_samples);
 
     d.recordConsensusTree(parents, weights);
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 
@@ -875,8 +860,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
         IGRAPH_ERROR("`hrg' must be given when `start' is true", IGRAPH_EINVAL);
     }
 
-    RNG_BEGIN();
-
     dendro d;
 
     std::unique_ptr<simpleGraph> sg = igraph_i_hrg_getsimplegraph(graph, d, num_bins);
@@ -902,8 +885,6 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
     MCMCEquilibrium_Sample(d, num_samples);
     rankCandidatesByProbability(*sg, d, br_list.get(), mk);
     IGRAPH_CHECK(recordPredictions(br_list.get(), edges, prob, mk));
-
-    RNG_END();
 
     return IGRAPH_SUCCESS;
 
@@ -974,7 +955,7 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
                      IGRAPH_EINVAL);
     }
 
-    IGRAPH_CHECK(igraph_is_simple(graph, &simple));
+    IGRAPH_CHECK(igraph_is_simple(graph, &simple, IGRAPH_DIRECTED));
     if (!simple) {
         IGRAPH_ERROR("HRG graph must be a simple graph.", IGRAPH_EINVAL);
     }
@@ -1050,7 +1031,7 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
         if (ri >= 0) {
             continue;
         }
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         VECTOR(hrg->left )[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[0] ];
         VECTOR(hrg->right)[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[1] ];
         VECTOR(hrg->prob )[-ri - 1] = VECTOR(*prob)[i];

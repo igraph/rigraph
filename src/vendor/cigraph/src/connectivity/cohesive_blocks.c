@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -87,7 +86,9 @@ static igraph_error_t igraph_i_cb_components(igraph_t *graph,
         while (!igraph_dqueue_int_empty(Q)) {
             igraph_integer_t node = igraph_dqueue_int_pop(Q);
             igraph_integer_t j, n;
-            IGRAPH_CHECK(igraph_neighbors(graph, neis, node, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, neis, node, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+            ));
             n = igraph_vector_int_size(neis);
             for (j = 0; j < n; j++) {
                 igraph_integer_t v = VECTOR(*neis)[j];
@@ -243,7 +244,7 @@ igraph_error_t igraph_cohesive_blocks(const igraph_t *graph,
                      IGRAPH_EINVAL);
     }
 
-    IGRAPH_CHECK(igraph_is_simple(graph, &is_simple));
+    IGRAPH_CHECK(igraph_is_simple(graph, &is_simple, IGRAPH_DIRECTED));
     if (!is_simple) {
         IGRAPH_ERROR("Cohesive blocking only works on simple graphs.",
                      IGRAPH_EINVAL);

@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2005-2021 The igraph development team
@@ -19,8 +18,6 @@
    02110-1301 USA
 
 */
-
-#include <string.h>
 
 #include "igraph_constructors.h"
 

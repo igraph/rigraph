@@ -1,0 +1,154 @@
+From c8c9b9194093aa700f38a3e55cb76412eb54b851 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Sun, 17 Aug 2025 15:31:16 +0200
+Subject: [PATCH] Tweak function definitions
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 28 +++++++++++---------
+ src/vendor/cigraph/interfaces/types.yaml     |  7 ++++-
+ 2 files changed, 22 insertions(+), 13 deletions(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index c8b9ca948e..cee8b524c3 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -230,8 +230,9 @@ igraph_adjlist:
+ 
+ igraph_full_bipartite:
+     PARAMS: |-
+-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types, INTEGER n1,
++        OUT GRAPH graph, OPTIONAL OUT ALL_BIPARTITE_TYPES types, INTEGER n1,
+         INTEGER n2, BOOLEAN directed=False, NEIMODE mode=ALL
++    DEPS: types ON graph
+ 
+ igraph_full_multipartite:
+     PARAMS: |-
+@@ -523,14 +524,14 @@ igraph_get_shortest_paths:
+         VERTEX from, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT,
+         OPTIONAL OUT VECTOR_INT parents,
+         OPTIONAL OUT VECTOR_INT inbound_edges
+-    DEPS: weights ON graph, edges ON graph, from ON graph, to ON graph
++    DEPS: weights ON graph, vertices ON graph, edges ON graph, from ON graph, to ON graph
+ 
+ igraph_get_all_shortest_paths:
+     PARAMS: |-
+         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
+         OPTIONAL OUT VERTEX_INDICES_LIST vertices, OPTIONAL OUT EDGE_INDICES_LIST edges,
+         OPTIONAL OUT VECTOR_INT nrgeo, VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
+-    DEPS: weights ON graph, edges ON graph, from ON graph, to ON graph
++    DEPS: weights ON graph, vertices ON graph, edges ON graph, from ON graph, to ON graph
+ 
+ igraph_distances_dijkstra:
+     PARAMS: |-
+@@ -694,7 +695,7 @@ igraph_edge_betweenness_subset:
+         BOOLEAN directed=True, VERTEX_SELECTOR sources=ALL, VERTEX_SELECTOR targets=ALL,
+         OPTIONAL EDGE_WEIGHTS weights
+     DEPS: |-
+-        eids ON graph, weights ON graph, res ON graph, sources ON graph, targets ON graph
++        res ON graph eids, eids ON graph, sources ON graph, targets ON graph, weights ON graph
+ 
+ igraph_harmonic_centrality:
+     PARAMS: |-
+@@ -905,6 +906,7 @@ igraph_hub_and_authority_scores:
+         GRAPH graph, OUT ALL_VERTEX_QTY hub_vector, OUT ALL_VERTEX_QTY authority_vector,
+         OUT REAL value, OPTIONAL EDGE_WEIGHTS weights,
+         INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS
++    DEPS: weights ON graph, hub_vector ON graph, authority_vector ON graph
+ 
+ igraph_unfold_tree:
+     PARAMS: |-
+@@ -1187,6 +1189,7 @@ igraph_create_bipartite:
+     PARAMS: |-
+         OUT GRAPH graph, IN BIPARTITE_TYPES types,
+         VECTOR_INT edges, BOOLEAN directed=False
++    DEPS: types ON graph, edges ON graph
+ 
+ igraph_biadjacency:
+     PARAMS: |-
+@@ -1197,7 +1200,7 @@ igraph_biadjacency:
+ igraph_weighted_biadjacency:
+     PARAMS: |-
+         OUT GRAPH graph,
+-        OUT BIPARTITE_TYPES types, OUT EDGE_WEIGHTS weights,
++        OUT ALL_BIPARTITE_TYPES types, OUT EDGE_WEIGHTS weights,
+         MATRIX biadjmatrix,
+         BOOLEAN directed=False, NEIMODE mode=ALL
+     DEPS: |-
+@@ -1221,17 +1224,17 @@ igraph_bipartite_game_gnp:
+ 
+ igraph_bipartite_game_gnm:
+     PARAMS: |-
+-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types,
++        OUT GRAPH graph, OPTIONAL OUT ALL_BIPARTITE_TYPES types,
+         INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
+         NEIMODE mode=ALL, BOOLEAN multiple=False
++    DEPS: types ON graph
+ 
+ igraph_bipartite_iea_game:
+     PARAMS: |-
+-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types,
++        OUT GRAPH graph, OPTIONAL OUT ALL_BIPARTITE_TYPES types,
+         INTEGER n1, INTEGER n2, INTEGER m,
+         BOOLEAN directed=False, NEIMODE mode=ALL
+-    DEPS: |-
+-        types ON graph
++    DEPS: types ON graph
+ 
+ #######################################
+ # Spectral properties
+@@ -2472,7 +2475,7 @@ igraph_maximum_bipartite_matching:
+         OPTIONAL OUT REAL matching_weight,
+         OUT INDEX_VECTOR matching,
+         OPTIONAL EDGE_WEIGHTS weights, REAL eps=.Machine$double.eps
+-    DEPS: types ON graph, weights ON graph
++    DEPS: types ON graph matching, weights ON graph
+ 
+ #######################################
+ # Embedding
+@@ -2609,7 +2612,7 @@ igraph_eulerian_cycle:
+ 
+ igraph_fundamental_cycles:
+     PARAMS: |-
+-        GRAPH graph, OUT EDGE_INDICES_LIST basis, OPTIONAL VERTEX start,
++        GRAPH graph, OUT EDGE_INDICES_LIST basis, OPTIONAL VERTEX start=-1,
+         INTEGER bfs_cutoff=-1, OPTIONAL EDGE_WEIGHTS weights
+     DEPS: weights ON graph, basis ON graph, start ON graph
+ 
+@@ -2649,7 +2652,7 @@ igraph_minimum_spanning_tree:
+     DEPS: res ON graph, weights ON graph
+ 
+ igraph_random_spanning_tree:
+-    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid
++    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=-1
+     DEPS: res ON graph, vid ON graph
+ 
+ igraph_tree_game:
+@@ -2720,6 +2723,7 @@ igraph_vertex_path_from_edge_path:
+     PARAMS: |-
+         GRAPH graph, OPTIONAL VERTEX start, EDGE_INDICES edge_path,
+         OUT VERTEX_INDICES vertex_path, NEIMODE mode=OUT
++    DEPS: start ON graph, edge_path ON graph, vertex_path ON graph
+ 
+ #######################################
+ # Meta info
+diff --git a/src/vendor/cigraph/interfaces/types.yaml b/src/vendor/cigraph/interfaces/types.yaml
+index 3382fd4d14..3d4819fe2d 100644
+--- a/src/vendor/cigraph/interfaces/types.yaml
++++ b/src/vendor/cigraph/interfaces/types.yaml
+@@ -169,7 +169,12 @@ VERTEX_SELECTOR:
+ 
+ BIPARTITE_TYPES:
+     # A vector containing Booleans that define the two partitions of a
+-    # bipartite graph
++    # bipartite graph, for a set of vertices
++    CTYPE: igraph_vector_bool_t
++    FLAGS: BY_REF
++
++ALL_BIPARTITE_TYPES:
++    # Same as BIPARTITE_TYPES, for all vertices of a graph
+     CTYPE: igraph_vector_bool_t
+     FLAGS: BY_REF
+ 
+-- 
+2.49.0
+

@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2014  Gabor Csardi <csardi.gabor@gmail.com>
@@ -138,19 +137,13 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
         IGRAPH_ERROR("Number of SIR simulations must be positive.", IGRAPH_EINVAL);
     }
 
-    IGRAPH_CHECK(igraph_is_simple(graph, &simple));
+    if (igraph_is_directed(graph)) {
+        IGRAPH_WARNING("Edge directions are ignored in SIR model.");
+    }
+
+    IGRAPH_CHECK(igraph_is_simple(graph, &simple, IGRAPH_UNDIRECTED));
     if (!simple) {
         IGRAPH_ERROR("SIR model only works with simple graphs.", IGRAPH_EINVAL);
-    }
-    if (igraph_is_directed(graph)) {
-        igraph_bool_t has_mutual;
-        IGRAPH_WARNING("Edge directions are ignored in SIR model.");
-        /* When the graph is directed, mutual edges are effectively multi-edges as we
-         * are ignoring edge directions. */
-        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
-        if (has_mutual) {
-            IGRAPH_ERROR("SIR model only works with simple graphs.", IGRAPH_EINVAL);
-        }
     }
 
     IGRAPH_CHECK(igraph_vector_int_init(&status, no_of_nodes));
@@ -171,8 +164,6 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
         IGRAPH_CHECK(igraph_sir_init(sir));
         VECTOR(*result)[i] = sir;
     }
-
-    RNG_BEGIN();
 
     for (j = 0; j < no_sim; j++) {
 
@@ -264,8 +255,6 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
         } /* psum > 0 */
 
     } /* j < no_sim */
-
-    RNG_END();
 
     igraph_psumtree_destroy(&tree);
     igraph_adjlist_destroy(&adjlist);

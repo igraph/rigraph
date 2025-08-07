@@ -43,7 +43,7 @@ ALL_VERTEX_QTY:
     OUTCONV:
         OUT: |-
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
-              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+              names(%I%) <- vertex_attr(%I1%, "name")
             }
 
 VECTOR_INT:
@@ -181,29 +181,7 @@ EDGE_SELECTOR:
               %I% <- create_es(%I1%, %I%)
             }
 
-EDGEWEIGHTS:
-    INCONV: |-
-        if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
-          %I% <- E(%I1%)$weight
-        }
-        if (!is.null(%I%) && any(!is.na(%I%))) {
-          %I% <- as.numeric(%I%)
-        } else {
-          %I% <- NULL
-        }
-
-VERTEXWEIGHTS:
-    INCONV: |-
-        if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
-          %I% <- V(%I1%)$weight
-        }
-        if (!is.null(%I%) && any(!is.na(%I%))) {
-          %I% <- as.numeric(%I%)
-        } else {
-          %I% <- NULL
-        }
-
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$capacity
@@ -234,7 +212,7 @@ ALL_BIPARTITE_TYPES:
 
 BIPARTITE_TYPES_UNNAMED:
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     INCONV: |-
         if (missing(%I%)) {
           if ("color" %in% vertex_attr_names(%I1%)) {
@@ -253,7 +231,7 @@ VERTEX_COLOR:
               names(%I%) <- vertex_attr(%I1%, "name")
             }
 
-EDGE_COLOR:
+EDGE_COLORS:
     INCONV: |-
         if (missing(%I%)) {
           if ("color" %in% edge_attr_names(%I1%)) {
@@ -299,7 +277,7 @@ EDGESET_LIST:
     CALL: {}
     HEADER: ~
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     DEFAULT:
         ARPACK_DEFAULTS: arpack_defaults()
     INCONV:
@@ -413,6 +391,7 @@ LAPLACIAN_NORMALIZATION:
 LOOPS:
     DEFAULT:
         ONCE: c("once", "none", "twice")
+        TWICE: c("twice", "none", "once")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "none"=0L, "twice"=1L, "once"=2L)'
 
 SIRLIST: {}
@@ -453,6 +432,13 @@ RWSTUCK:
     DEFAULT:
         RETURN: c("return", "error")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "error" = 0L, "return" = 1L)'
+
+LPA_VARIANT:
+    DEFAULT:
+        Default: c("dominance", "retention", "fast")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%),
+          "dominance"=0L, "retention"=1L, "fast"=2L)
 
 EDGE_TYPE_SW:
     DEFAULT:

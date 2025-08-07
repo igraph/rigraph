@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2013  Gabor Csardi <csardi.gabor@gmail.com>
@@ -201,7 +200,7 @@ static igraph_error_t igraph_i_subclique_next(const igraph_t *graph,
 
         for (v = 0; v < clsize; v++) {
             igraph_integer_t i, neilen, node = VECTOR(*clique)[v];
-            IGRAPH_CHECK(igraph_incident(graph, &neis, node, IGRAPH_ALL));
+            IGRAPH_CHECK(igraph_incident(graph, &neis, node, IGRAPH_ALL, IGRAPH_LOOPS));
             neilen = igraph_vector_int_size(&neis);
             VECTOR(mark)[node] = c + 1;
             for (i = 0; i < neilen; i++) {
@@ -558,18 +557,9 @@ igraph_error_t igraph_graphlets_candidate_basis(const igraph_t *graph,
         IGRAPH_ERROR("Invalid weight vector length", IGRAPH_EINVAL);
     }
 
-    IGRAPH_CHECK(igraph_is_simple(graph, &simple));
+    IGRAPH_CHECK(igraph_is_simple(graph, &simple, IGRAPH_UNDIRECTED));
     if (!simple) {
         IGRAPH_ERROR("Graphlets work on simple graphs only", IGRAPH_EINVAL);
-    }
-    if (igraph_is_directed(graph)) {
-        /* When the graph is directed, mutual edges are effectively multi-edges as we
-         * are ignoring edge directions. */
-        igraph_bool_t has_mutual;
-        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
-        if (has_mutual) {
-            IGRAPH_ERROR("Graphlets work on simple graphs only", IGRAPH_EINVAL);
-        }
     }
 
     /* Internally, we will still use igraph_vector_ptr_t instead of
@@ -641,18 +631,9 @@ igraph_error_t igraph_i_graphlets_project(
     if (niter < 0) {
         IGRAPH_ERROR("Number of iterations must be non-negative", IGRAPH_EINVAL);
     }
-    IGRAPH_CHECK(igraph_is_simple(graph, &simple));
+    IGRAPH_CHECK(igraph_is_simple(graph, &simple, IGRAPH_UNDIRECTED));
     if (!simple) {
         IGRAPH_ERROR("Graphlets work on simple graphs only", IGRAPH_EINVAL);
-    }
-    if (igraph_is_directed(graph)) {
-        /* When the graph is directed, mutual edges are effectively multi-edges as we
-         * are ignoring edge directions. */
-        igraph_bool_t has_mutual;
-        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
-        if (has_mutual) {
-            IGRAPH_ERROR("Graphlets work on simple graphs only", IGRAPH_EINVAL);
-        }
     }
 
     if (!startMu) {
@@ -891,7 +872,7 @@ igraph_error_t igraph_graphlets(const igraph_t *graph,
                    igraph_i_graphlets_order_cmp);
 
     IGRAPH_CHECK(igraph_vector_int_list_permute(cliques, &order));
-    IGRAPH_CHECK(igraph_vector_index_int(Mu, &order));
+    IGRAPH_CHECK(igraph_vector_index_in_place(Mu, &order));
 
     igraph_vector_int_destroy(&order);
     IGRAPH_FINALLY_CLEAN(1);

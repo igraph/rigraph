@@ -279,7 +279,7 @@ ADJLIST:
     OUTCONV:
         IN: igraph_adjlist_destroy(&%C%);
 
-EDGEWEIGHTS:
+EDGE_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -294,7 +294,7 @@ EDGEWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXWEIGHTS:
+VERTEX_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -309,7 +309,7 @@ VERTEXWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_CAPACITY:
+EDGE_CAPACITIES:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
@@ -427,6 +427,12 @@ ALL_VERTEX_QTY:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+NEIMODE:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: 'NULL'
+
 VERTEX_SELECTOR:
     CALL:
         IN: '%C%'
@@ -490,6 +496,27 @@ VERTEX_INDICES_PV:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+VERTEX_INDICES_LIST:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_list_t
+    INCONV:
+        IN: |-
+            R_igraph_SEXP_to_vector_int_list(%I%, &%C%);
+            IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &%C%);
+        OUT: |-
+            if (0 != igraph_vector_int_list_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_int_list_to_SEXPp1(&%C%));
+            igraph_vector_int_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEX_INDEX_PAIRS:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
@@ -528,6 +555,27 @@ EDGE_INDICES:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+EDGE_INDICES_LIST:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_list_t
+    INCONV:
+        IN: |-
+            R_igraph_SEXP_to_vector_int_list(%I%, &%C%);
+            IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &%C%);
+        OUT: |-
+            if (0 != igraph_vector_int_list_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &%C%);
+    OUTCONV:
+        IN: |-
+            igraph_vector_int_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_int_list_to_SEXPp1(&%C%));
+            igraph_vector_int_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 'NULL':
     CALL: '0'
     CTYPE: ~
@@ -558,14 +606,14 @@ ATTRIBUTES:
     CTYPE: ~
     HEADER: {}
 
-ARPACKOPT:
+ARPACK_OPTIONS:
     CALL: '&%C%'
     INCONV:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
         INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
 
-ARPACKSTORAGE:
+ARPACK_STORAGE:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
@@ -647,7 +695,7 @@ BIPARTITE_TYPES_UNNAMED:
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEX_COLOR:
+VERTEX_COLORS:
     CALL:
         IN: '&%C%'
         OUT: '&%C%'
@@ -672,7 +720,7 @@ VERTEX_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGE_COLOR:
+EDGE_COLORS:
     CALL:
         IN: '&%C%'
         OUT: '&%C%'

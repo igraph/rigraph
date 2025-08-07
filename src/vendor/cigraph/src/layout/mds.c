@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2003-2020  The igraph development team
@@ -28,7 +26,6 @@
 #include "igraph_components.h"
 #include "igraph_eigen.h"
 #include "igraph_interface.h"
-#include "igraph_memory.h"
 #include "igraph_operators.h"
 #include "igraph_paths.h"
 #include "igraph_random.h"
@@ -195,8 +192,6 @@ igraph_error_t igraph_layout_mds(const igraph_t *graph, igraph_matrix_t *res,
     igraph_matrix_t m;
     igraph_bool_t conn;
 
-    RNG_BEGIN();
-
     /* Check the distance matrix */
     if (dist && (igraph_matrix_nrow(dist) != no_of_nodes ||
                  igraph_matrix_ncol(dist) != no_of_nodes)) {
@@ -215,7 +210,7 @@ igraph_error_t igraph_layout_mds(const igraph_t *graph, igraph_matrix_t *res,
     /* Copy or obtain the distance matrix */
     if (dist == 0) {
         IGRAPH_MATRIX_INIT_FINALLY(&m, no_of_nodes, no_of_nodes);
-        IGRAPH_CHECK(igraph_distances(graph, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_distances(graph, NULL, &m, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL));
     } else {
         IGRAPH_CHECK(igraph_matrix_init_copy(&m, dist));
         IGRAPH_FINALLY(igraph_matrix_destroy, &m);
@@ -292,8 +287,6 @@ igraph_error_t igraph_layout_mds(const igraph_t *graph, igraph_matrix_t *res,
         igraph_vector_int_destroy(&comp);
         IGRAPH_FINALLY_CLEAN(6);
     }
-
-    RNG_END();
 
     igraph_matrix_destroy(&m);
     IGRAPH_FINALLY_CLEAN(1);

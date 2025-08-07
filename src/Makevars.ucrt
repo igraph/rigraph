@@ -27,10 +27,11 @@ else
     PKG_LIBS = $(shell pkg-config --libs libxml-2.0 glpk)
 endif
 
-PKG_CPPFLAGS += -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers -Ivendor/mini-gmp \
+PKG_CPPFLAGS += -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor -Ivendor/io/parsers -Ivendor/mini-gmp -Ivendor/cigraph/vendor/infomap/src \
     -DNDEBUG -DNTIMER -DNPRINT -DIGRAPH_THREAD_LOCAL= \
     -DPRPACK_IGRAPH_SUPPORT \
     -DHAVE_GFORTRAN=1 \
+    -DHAVE_INFOMAP=1 \
     -D_GNU_SOURCE=1 \
     -DHAVE_LIBXML
 

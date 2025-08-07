@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2006-2020 The igraph development team
+   Copyright (C) 2006-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,17 +13,14 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_operators.h"
+#include "igraph_isomorphism.h"
 
 #include "igraph_constructors.h"
 #include "igraph_interface.h"
-#include "igraph_topology.h"
 
 #include "graph/attributes.h"
 
@@ -46,7 +42,7 @@ igraph_error_t igraph_invert_permutation(const igraph_vector_int_t *permutation,
     IGRAPH_CHECK(igraph_vector_int_resize(inverse, n));
     igraph_vector_int_fill(inverse, -1);
 
-    for (igraph_integer_t i=0; i < n; i++) {
+    for (igraph_integer_t i = 0; i < n; i++) {
         igraph_integer_t j = VECTOR(*permutation)[i];
         if (j < 0 || j >= n) {
             IGRAPH_ERROR("Invalid index in permutation vector.", IGRAPH_EINVAL);
@@ -73,8 +69,9 @@ igraph_error_t igraph_invert_permutation(const igraph_vector_int_t *permutation,
  * \param graph The input graph.
  * \param res Pointer to an uninitialized graph object. The new graph
  *    is created here.
- * \param permutation The permutation to apply. Vertex 0 is mapped to
- *    the first element of the vector, vertex 1 to the second, etc.
+ * \param permutation The permutation to apply. The i-th element of the
+ *    vector specifies the index of the vertex in the original graph that
+ *    will become vertex i in the new graph.
  * \return Error code.
  *
  * Time complexity: O(|V|+|E|), linear in terms of the number of
@@ -102,8 +99,8 @@ igraph_error_t igraph_permute_vertices(const igraph_t *graph, igraph_t *res,
 
     p = 0;
     for (igraph_integer_t i = 0; i < no_of_edges; i++) {
-        VECTOR(edges)[p++] = VECTOR(*permutation)[ IGRAPH_FROM(graph, i) ];
-        VECTOR(edges)[p++] = VECTOR(*permutation)[ IGRAPH_TO(graph, i) ];
+        VECTOR(edges)[p++] = VECTOR(index)[ IGRAPH_FROM(graph, i) ];
+        VECTOR(edges)[p++] = VECTOR(index)[ IGRAPH_TO(graph, i) ];
     }
 
     IGRAPH_CHECK(igraph_create(res, &edges, no_of_nodes, igraph_is_directed(graph)));
@@ -112,12 +109,11 @@ igraph_error_t igraph_permute_vertices(const igraph_t *graph, igraph_t *res,
     /* Attributes */
     if (graph->attr) {
         igraph_vector_int_t vtypes;
-        IGRAPH_I_ATTRIBUTE_DESTROY(res);
-        IGRAPH_I_ATTRIBUTE_COPY(res, graph, /*graph=*/1, /*vertex=*/0, /*edge=*/1);
+        IGRAPH_CHECK(igraph_i_attribute_copy(res, graph, true, /* vertex= */ false, true));
         IGRAPH_VECTOR_INT_INIT_FINALLY(&vtypes, 0);
         IGRAPH_CHECK(igraph_i_attribute_get_info(graph, 0, 0, 0, &vtypes, 0, 0));
         if (igraph_vector_int_size(&vtypes) != 0) {
-            IGRAPH_CHECK(igraph_i_attribute_permute_vertices(graph, res, &index));
+            IGRAPH_CHECK(igraph_i_attribute_permute_vertices(graph, res, permutation));
         }
         igraph_vector_int_destroy(&vtypes);
         IGRAPH_FINALLY_CLEAN(1);

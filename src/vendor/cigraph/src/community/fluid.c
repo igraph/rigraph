@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2007-2020 The igraph development team
@@ -57,21 +55,30 @@
  *
  * Time complexity: O(|E|)
  */
-igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
-                                       igraph_integer_t no_of_communities,
-                                       igraph_vector_int_t *membership) {
-    /* Declaration of variables */
-    igraph_integer_t no_of_nodes, i, j, k, kv1;
+igraph_error_t igraph_community_fluid_communities(
+        const igraph_t *graph,
+        igraph_integer_t no_of_communities,
+        igraph_vector_int_t *membership) {
+
+    const igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_integer_t i, j, k, kv1;
     igraph_adjlist_t al;
     igraph_real_t max_density;
     igraph_bool_t is_simple, is_connected, running;
     igraph_vector_t density, label_counters;
     igraph_vector_int_t dominant_labels, node_order, com_to_numvertices;
 
-    /* Initialization of variables needed for initial checking */
-    no_of_nodes = igraph_vcount(graph);
-
     /* Checking input values */
+    if (igraph_is_directed(graph)) {
+        IGRAPH_WARNING("Edge directions are ignored by fluid community detection.");
+    }
+    IGRAPH_CHECK(igraph_is_simple(graph, &is_simple, IGRAPH_UNDIRECTED));
+    if (!is_simple) {
+        IGRAPH_ERROR("Fluid community detection supports only simple graphs.", IGRAPH_EINVAL);
+    }
+
+    /* This must come before the connectedness check so we can support the null
+     * graph (considered disconnected) for purposes of convenience. */
     if (no_of_nodes < 2) {
         if (membership) {
             IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
@@ -79,32 +86,19 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
         }
         return IGRAPH_SUCCESS;
     }
+
     if (no_of_communities < 1) {
-        IGRAPH_ERROR("Number of requested communities must be greater than zero.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Number of requested communities must be positive.", IGRAPH_EINVAL);
     }
+
     if (no_of_communities > no_of_nodes) {
         IGRAPH_ERROR("Number of requested communities must not be greater than the number of nodes.",
                      IGRAPH_EINVAL);
     }
-    IGRAPH_CHECK(igraph_is_simple(graph, &is_simple));
-    if (!is_simple) {
-        IGRAPH_ERROR("Fluid community detection supports only simple graphs.", IGRAPH_EINVAL);
-    }
-    if (igraph_is_directed(graph)) {
-        /* When the graph is directed, mutual edges are effectively multi-edges as we
-         * are ignoring edge directions. */
-        igraph_bool_t has_mutual;
-        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
-        if (has_mutual) {
-            IGRAPH_ERROR("Fluid community detection supports only simple graphs.", IGRAPH_EINVAL);
-        }
-    }
+
     IGRAPH_CHECK(igraph_is_connected(graph, &is_connected, IGRAPH_WEAK));
     if (!is_connected) {
         IGRAPH_ERROR("Fluid community detection supports only connected graphs.", IGRAPH_EINVAL);
-    }
-    if (igraph_is_directed(graph)) {
-        IGRAPH_WARNING("Edge directions are ignored by fluid community detection.");
     }
 
     /* Internal variables initialization */
@@ -129,7 +123,7 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
     igraph_vector_fill(&density, max_density);
 
     /* Initialize com_to_numvertices and initialize communities into membership vector */
-    IGRAPH_CHECK(igraph_vector_int_shuffle(&node_order));
+    igraph_vector_int_shuffle(&node_order);
     for (i = 0; i < no_of_communities; i++) {
         /* Initialize membership at initial nodes for each community
          * where 0 refers to have no label*/
@@ -148,8 +142,6 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
     IGRAPH_CHECK(igraph_vector_init(&label_counters, no_of_communities));
     IGRAPH_FINALLY(igraph_vector_destroy, &label_counters);
 
-    RNG_BEGIN();
-
     /* running is the convergence boolean variable */
     running = true;
     while (running) {
@@ -162,7 +154,7 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
         running = false;
 
         /* Shuffle the node ordering vector */
-        IGRAPH_CHECK(igraph_vector_int_shuffle(&node_order));
+        igraph_vector_int_shuffle(&node_order);
         /* In the prescribed order, loop over the vertices and reassign labels */
         for (i = 0; i < no_of_nodes; i++) {
             /* Clear dominant_labels and nonzero_labels vectors */
@@ -236,8 +228,6 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
         }
     }
 
-    RNG_END();
-
     /* Shift back the membership vector */
     /* There must be no 0 labels in membership vector at this point */
     for (i = 0; i < no_of_nodes; i++) {
@@ -246,14 +236,12 @@ igraph_error_t igraph_community_fluid_communities(const igraph_t *graph,
     }
 
     igraph_adjlist_destroy(&al);
-    IGRAPH_FINALLY_CLEAN(1);
-
     igraph_vector_int_destroy(&node_order);
     igraph_vector_destroy(&density);
     igraph_vector_int_destroy(&com_to_numvertices);
     igraph_vector_destroy(&label_counters);
     igraph_vector_int_destroy(&dominant_labels);
-    IGRAPH_FINALLY_CLEAN(5);
+    IGRAPH_FINALLY_CLEAN(6);
 
     return IGRAPH_SUCCESS;
 }

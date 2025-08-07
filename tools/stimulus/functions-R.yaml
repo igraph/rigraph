@@ -23,6 +23,8 @@ igraph_delete_edges:
 igraph_delete_vertices:
     IGNORE: RR, RC
 
+igraph_vcount:
+
 igraph_ecount:
     IGNORE: RR, RC
 
@@ -103,10 +105,9 @@ igraph_connect_neighborhood:
 igraph_famous:
     IGNORE: RR, RC
 
-igraph_lcf_vector:
-    R:
-      GATTR:
-        name: LCF graph
+igraph_adjlist:
+
+igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
@@ -232,6 +233,10 @@ igraph_correlated_game:
           name: Correlated random graph
         GATTR-PARAM: corr, p
 
+igraph_correlated_pair_game:
+
+igraph_dot_product_game:
+
 #######################################
 # Basic query functions
 #######################################
@@ -302,37 +307,6 @@ igraph_get_k_shortest_paths:
         vertex_paths: vpaths
         edge_paths: epaths
 
-igraph_get_widest_path:
-    PARAMS: |-
-        GRAPH graph,
-        OPTIONAL OUT VERTEX_INDICES vertices, OPTIONAL OUT EDGE_INDICES edges,
-        VERTEX from, VERTEX to, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
-    DEPS: |-
-        from ON graph, to ON graph, weights ON graph, vertices ON graph, edges ON graph
-
-igraph_get_widest_paths:
-    PARAMS: |-
-        GRAPH graph,
-        OPTIONAL OUT VERTEXSET_LIST vertices, OPTIONAL OUT EDGESET_LIST edges,
-        VERTEX from, VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL,
-        NEIMODE mode=OUT, OPTIONAL OUT VECTOR_INT parents,
-        OPTIONAL OUT VECTOR_INT inbound_edges
-    DEPS: |-
-        from ON graph, to ON graph, weights ON graph, vertices ON graph,
-        edges ON graph
-
-igraph_widest_path_widths_dijkstra:
-    PARAMS: |-
-        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
-    DEPS: from ON graph, to ON graph, weights ON graph
-
-igraph_widest_path_widths_floyd_warshall:
-    PARAMS: |-
-        GRAPH graph, OUT MATRIX res, VERTEX_SELECTOR from=ALL,
-        VERTEX_SELECTOR to=ALL, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT
-    DEPS: from ON graph, to ON graph, weights ON graph
-
 igraph_spanner:
     DEPS: weights ON graph, spanner ON graph
 
@@ -360,15 +334,17 @@ igraph_personalized_pagerank_vs:
 igraph_rewire:
     IGNORE: RR, RC
 
-igraph_average_path_length:
-    IGNORE: RR, RC, RInit
-    # No need for it, igraph_average_path_length_dijkstra takes care of the
-    # unweighted case as well
+igraph_subgraph_from_edges:
 
-igraph_average_path_length_dijkstra:
-    PARAM_NAMES:
-        unconn_pairs: unconnected
-        unconn: unconnected
+igraph_reverse_edges:
+
+igraph_path_length_hist:
+
+igraph_simplify:
+
+igraph_ecc:
+
+igraph_reciprocity:
 
 igraph_constraint:
     IGNORE: RR, RC
@@ -430,16 +406,6 @@ igraph_hub_score:
 igraph_authority_score:
     IGNORE: RR, RC
 
-igraph_hub_and_authority_scores:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: weights ON graph, hub ON graph V(graph), authority ON graph V(graph)
-    PARAMS: GRAPH graph, OUT VERTEX_QTY hub, OUT VERTEX_QTY authority,
-        OUT REAL value, BOOLEAN scale=True, OPTIONAL EDGEWEIGHTS weights,
-        INOUT ARPACKOPT options=ARPACK_DEFAULTS
-
 igraph_is_mutual:
     PARAM_NAMES:
         es: eids
@@ -447,38 +413,69 @@ igraph_is_mutual:
 igraph_is_chordal:
     IGNORE: RR, RC, RInit
 
-# We use igraph_eccentricity_dijkstra instead
-igraph_eccentricity:
-    IGNORE: RR, RC
+igraph_avg_nearest_neighbor_degree:
 
-igraph_eccentricity_dijkstra:
-    PARAM_ORDER: graph, vids, *, weights, ...
+igraph_degree_correlation_vector:
 
-# We use igraph_graph_center_dijkstra instead
-igraph_graph_center:
-    IGNORE: RR, RC
+igraph_strength:
 
-igraph_graph_center_dijkstra:
-    FIRST_KW_PARAM: weights
+igraph_centralization:
+
+igraph_centralization_degree:
+
+igraph_centralization_degree_tmax:
+    IGNORE: RR
+    # temporarily coded manually because we need to handle a deprecation
+    # between igraph 1.3.0 and 1.4.0
+
+igraph_centralization_betweenness:
+
+igraph_centralization_betweenness_tmax:
+
+igraph_centralization_closeness:
+
+igraph_centralization_closeness_tmax:
+
+igraph_centralization_eigenvector_centrality:
+
+igraph_centralization_eigenvector_centrality_tmax:
+
+igraph_assortativity_nominal:
+
+igraph_assortativity:
+
+igraph_assortativity_degree:
+
+igraph_joint_degree_matrix:
+
+igraph_joint_degree_distribution:
+
+igraph_joint_type_distribution:
+
+igraph_contract_vertices:
 
 # We use igraph_radius_dijkstra instead
 igraph_radius:
     IGNORE: RR, RC
 
-igraph_radius_dijkstra:
-    FIRST_KW_PARAM: weights
-
 igraph_pseudo_diameter:
     DEPS: start_vid ON graph
 
-igraph_pseudo_diameter_dijkstra:
-    DEPS: start_vid ON graph, weights ON graph
+igraph_diversity:
 
 igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
 
 igraph_random_edge_walk:
     IGNORE: RR, RC
+
+igraph_global_efficiency:
+
+igraph_local_efficiency:
+
+igraph_average_local_efficiency:
+
+igraph_trussness:
 
 #######################################
 # Degree sequences
@@ -521,9 +518,6 @@ igraph_bipartite_projection_size:
 igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
 
-igraph_create_bipartite:
-    IGNORE: RR
-
 igraph_biadjacency:
     DEPS: types ON graph V(graph)
 
@@ -536,12 +530,6 @@ igraph_bipartite_game_gnp:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
         INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
-        NEIMODE mode=ALL
-
-igraph_bipartite_game_gnm:
-    PARAMS: |-
-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
-        INTEGER n1, INTEGER n2, INTEGER m, BOOLEAN directed=False,
         NEIMODE mode=ALL
 
 igraph_bipartite_game:
@@ -640,12 +628,6 @@ igraph_layout_kamada_kawai_3d:
 
 igraph_layout_graphopt:
     IGNORE: RR, RC, RInit
-
-igraph_layout_drl:
-    IGNORE: RR
-
-igraph_layout_drl_3d:
-    IGNORE: RR
 
 igraph_layout_merge_dla:
     IGNORE: RR, RC
@@ -905,6 +887,16 @@ igraph_coreness:
 igraph_get_subisomorphisms_vf2_callback:
     IGNORE: RR, RC
 
+igraph_count_subisomorphisms_vf2:
+
+igraph_canonical_permutation:
+
+igraph_permute_vertices:
+
+igraph_isomorphic_bliss:
+
+igraph_count_automorphisms:
+
 igraph_subisomorphic_lad:
     IGNORE: RR, RC, RInit
     # R function is hand-rolled
@@ -997,6 +989,8 @@ igraph_eulerian_cycle:
 # Cycle bases
 #######################################
 
+igraph_minimum_cycle_basis:
+
 #######################################
 # Trees
 #######################################
@@ -1020,19 +1014,11 @@ igraph_minimum_spanning_tree_unweighted:
 igraph_minimum_spanning_tree_prim:
     IGNORE: RR, RC
 
-igraph_random_spanning_tree:
-    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
-
 #######################################
 # Coloring
 #######################################
 
-#######################################
-# Microscopic update
-#######################################
-
-igraph_moran_process:
-    DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
+igraph_vertex_coloring_greedy:
 
 #######################################
 # Other, (yet) undocumented functions
@@ -1062,14 +1048,16 @@ igraph_strerror:
 # Other functions, documented, graph related
 #######################################
 
+# A very special case
 igraph_expand_path_to_pairs:
     IGNORE: RR
 
 igraph_invalidate_cache:
     PARAMS: INOUT GRAPH graph
 
+# FIXME: Optional IN vertex not easily supported
 igraph_vertex_path_from_edge_path:
-    DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
+    IGNORE: RC, RR
 
 #######################################
 # Meta info

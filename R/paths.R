@@ -376,8 +376,8 @@ radius <- function(
 #' graph_center(ring)
 #'
 #' @export
-#' @cdocs igraph_graph_center_dijkstra
-graph_center <- graph_center_dijkstra_impl
+#' @cdocs igraph_graph_center
+graph_center <- graph_center_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,

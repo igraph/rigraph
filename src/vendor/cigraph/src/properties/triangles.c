@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -189,7 +187,7 @@ static igraph_error_t transitivity_local_undirected2(const igraph_t *graph,
             maxdegree = deg;
         }
     }
-    IGRAPH_CHECK(igraph_vector_int_order1(&degree, &order, maxdegree + 1));
+    IGRAPH_CHECK(igraph_i_vector_int_order(&degree, &order, maxdegree + 1));
     igraph_vector_int_destroy(&degree);
     IGRAPH_FINALLY_CLEAN(1);
     IGRAPH_VECTOR_INIT_FINALLY(&rank, affected_nodes);
@@ -534,28 +532,6 @@ igraph_error_t igraph_count_adjacent_triangles(const igraph_t *graph,
     }
 }
 
-/**
- * \function igraph_adjacent_triangles
- * \brief Count the number of triangles a vertex is part of (deprecated alias).
- *
- * \deprecated-by igraph_count_adjacent_triangles 0.10.15
- *
- * \param graph The input graph. Edge directions and multiplicities are ignored.
- * \param res Initiliazed vector, the results are stored here.
- * \param vids The vertices to perform the calculation for.
- * \return Error mode.
- *
- * \sa \ref igraph_list_triangles() to list them.
- *
- * Time complexity: O(d^2 n), d is the average vertex degree of the
- * queried vertices, n is their number.
- */
-
-igraph_error_t igraph_adjacent_triangles(const igraph_t *graph,
-                                         igraph_vector_t *res,
-                                         const igraph_vs_t vids) {
-    return igraph_count_adjacent_triangles(graph, res, vids);
-}
 
 /**
  * \function igraph_list_triangles
@@ -576,7 +552,7 @@ igraph_error_t igraph_adjacent_triangles(const igraph_t *graph,
  * \return Error code.
  *
  * \sa \ref igraph_count_triangles() to count the triangles,
- * \ref igraph_adjacent_triangles() to count the triangles a vertex
+ * \ref igraph_count_adjacent_triangles() to count the triangles a vertex
  * participates in, \ref igraph_transitivity_undirected() to compute
  * the global clustering coefficient.
  *
@@ -778,7 +754,7 @@ static igraph_error_t transitivity_barrat4(
     IGRAPH_CHECK(igraph_degree(graph, &degree, igraph_vss_all(), IGRAPH_ALL,
                                IGRAPH_LOOPS));
     maxdegree = igraph_vector_int_max(&degree) + 1;
-    IGRAPH_CHECK(igraph_vector_int_order1(&degree, &order, maxdegree));
+    IGRAPH_CHECK(igraph_i_vector_int_order(&degree, &order, maxdegree));
 
     IGRAPH_CHECK(igraph_strength(graph, &strength, igraph_vss_all(), IGRAPH_ALL,
                                  IGRAPH_LOOPS, weights));

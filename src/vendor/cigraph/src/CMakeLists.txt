@@ -39,7 +39,6 @@ add_custom_target(parsersources SOURCES ${PARSER_SOURCES})
 # Declare the files needed to compile the igraph library
 add_library(
   igraph
-  core/array.c
   core/bitset.c
   core/bitset_list.c
   core/buckets.c
@@ -61,6 +60,7 @@ add_library(
   core/progress.c
   core/psumtree.c
   core/set.c
+  core/setup.c
   core/sparsemat.c
   core/stack.c
   core/statusbar.c
@@ -80,10 +80,12 @@ add_library(
   linalg/lapack.c
 
   random/random.c
+  random/random_device.cpp
   random/rng_glibc2.c
   random/rng_mt19937.c
   random/rng_pcg32.c
   random/rng_pcg64.c
+  random/sampling.c
 
   graph/adjlist.c
   graph/attributes.c
@@ -112,7 +114,6 @@ add_library(
   constructors/prufer.c
   constructors/regular.c
   constructors/trees.c
-
 
   games/barabasi.c
   games/callaway_traits.c
@@ -159,14 +160,12 @@ add_library(
   community/edge_betweenness.c
   community/fast_modularity.c
   community/fluid.c
-  community/infomap/infomap_FlowGraph.cc
-  community/infomap/infomap_Greedy.cc
-  community/infomap/infomap.cc
   community/label_propagation.c
   community/leading_eigenvector.c
   community/leiden.c
   community/louvain.c
   community/modularity.c
+  community/infomap.cpp
   community/optimal_modularity.c
   community/spinglass/clustertool.cpp
   community/spinglass/NetDataTypes.cpp
@@ -280,6 +279,7 @@ add_library(
   properties/multiplicity.c
   properties/neighborhood.c
   properties/perfect.c
+  properties/rich_club.c
   properties/spectral.c
   properties/trees.c
   properties/triangles.c
@@ -302,7 +302,6 @@ add_library(
   misc/feedback_arc_set.c
   misc/graphicality.c
   misc/matching.c
-  misc/microscopic_update.c
   misc/mixing.c
   misc/motifs.c
   misc/order_cycle.cpp
@@ -312,13 +311,14 @@ add_library(
   misc/sir.c
   misc/spanning_trees.c
 
+  spatial/nearest_neighbor.cpp
+
   internal/glpk_support.c
   internal/hacks.c
   internal/lsap.c
   internal/qsort_r.c
   internal/qsort.c
   internal/utils.c
-  internal/zeroin.c
 
   version.c
 
@@ -327,6 +327,7 @@ add_library(
   $<IF:$<BOOL:${ARPACK_IS_VENDORED}>,$<TARGET_OBJECTS:arpack_vendored>,>
   $<IF:$<BOOL:${BLAS_IS_VENDORED}>,$<TARGET_OBJECTS:blas_vendored>,>
   $<IF:$<BOOL:${GLPK_IS_VENDORED}>,$<TARGET_OBJECTS:glpk_vendored>,>
+  $<IF:$<BOOL:${INFOMAP_IS_VENDORED}>,$<TARGET_OBJECTS:infomap_vendored>,>
   $<IF:$<BOOL:${GMP_IS_VENDORED}>,$<TARGET_OBJECTS:gmp_vendored>,>
   $<IF:$<BOOL:${LAPACK_IS_VENDORED}>,$<TARGET_OBJECTS:lapack_vendored>,>
   $<IF:$<BOOL:${PLFIT_IS_VENDORED}>,$<TARGET_OBJECTS:plfit_vendored>,>
@@ -372,10 +373,12 @@ target_include_directories(
 
   # Vendored library include paths
   "$<$<BOOL:${GLPK_IS_VENDORED}>:$<TARGET_PROPERTY:glpk_vendored,INCLUDE_DIRECTORIES>>"
+  "$<$<BOOL:${INFOMAP_IS_VENDORED}>:$<TARGET_PROPERTY:infomap_vendored,INCLUDE_DIRECTORIES>>"
   "$<$<BOOL:${PLFIT_IS_VENDORED}>:$<TARGET_PROPERTY:plfit_vendored,INCLUDE_DIRECTORIES>>"
 
   # Include paths for dependencies
   "$<$<BOOL:${GLPK_INCLUDE_DIR}>:${GLPK_INCLUDE_DIR}>"
+  "$<$<BOOL:${INFOMAP_INCLUDE_DIR}>:${INFOMAP_INCLUDE_DIR}>"
   "$<$<BOOL:${GMP_INCLUDE_DIR}>:${GMP_INCLUDE_DIR}>"
   "$<$<BOOL:${LIBXML2_INCLUDE_DIRS}>:${LIBXML2_INCLUDE_DIRS}>"
   "$<$<BOOL:${PLFIT_INCLUDE_DIRS}>:${PLFIT_INCLUDE_DIRS}>"
@@ -395,6 +398,10 @@ endif()
 
 if(GLPK_LIBRARIES)
   target_link_libraries(igraph PRIVATE ${GLPK_LIBRARIES})
+endif()
+
+if(INFOMAP_LIBRARIES)
+  target_link_libraries(igraph PRIVATE ${INFOMAP_LIBRARIES})
 endif()
 
 if(GMP_LIBRARIES)

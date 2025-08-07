@@ -86,8 +86,7 @@ igraph_error_t igraph_sbm_game(igraph_t *graph, igraph_integer_t n,
     /* ------------------------------------------------------------ */
 
     if (igraph_matrix_ncol(pref_matrix) != no_blocks) {
-        IGRAPH_ERROR("Preference matrix is not square.",
-                     IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Preference matrix is not square.", IGRAPH_EINVAL);
     }
 
     if (no_blocks > 0) {
@@ -126,8 +125,6 @@ igraph_error_t igraph_sbm_game(igraph_t *graph, igraph_integer_t n,
      */
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
-
-    RNG_BEGIN();
 
     for (from = 0; from < no_blocks; from++) {
         igraph_integer_t fromsize = VECTOR(*block_sizes)[from];
@@ -233,8 +230,6 @@ igraph_error_t igraph_sbm_game(igraph_t *graph, igraph_integer_t n,
         fromoff += fromsize;
     }
 
-    RNG_END();
-
     IGRAPH_CHECK(igraph_create(graph, &edges, n, directed));
 
     igraph_vector_int_destroy(&edges);
@@ -326,8 +321,6 @@ igraph_error_t igraph_hsbm_game(igraph_t *graph, igraph_integer_t n,
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
 
-    RNG_BEGIN();
-
     /* Block models first */
 
     for (b = 0; b < no_blocks; b++) {
@@ -414,8 +407,6 @@ igraph_error_t igraph_hsbm_game(igraph_t *graph, igraph_integer_t n,
             tooff += m;
         }
     }
-
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(graph, &edges, n, /*directed=*/ 0));
 
@@ -532,8 +523,6 @@ igraph_error_t igraph_hsbm_list_game(igraph_t *graph, igraph_integer_t n,
     IGRAPH_VECTOR_INIT_FINALLY(&csizes, 0);
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
 
-    RNG_BEGIN();
-
     /* Block models first */
 
     for (b = 0; b < no_blocks; b++) {
@@ -630,8 +619,6 @@ igraph_error_t igraph_hsbm_list_game(igraph_t *graph, igraph_integer_t n,
             }
         }
     }
-
-    RNG_END();
 
     IGRAPH_CHECK(igraph_create(graph, &edges, n, /*directed=*/ 0));
 

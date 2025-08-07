@@ -851,8 +851,8 @@ farthest_vertices <- function(
 
 #' @export
 #' @rdname distances
-#' @cdocs igraph_average_path_length_dijkstra
-mean_distance <- average_path_length_dijkstra_impl
+#' @cdocs igraph_average_path_length
+mean_distance <- average_path_length_impl
 
 
 #' Degree and degree distribution of the vertices

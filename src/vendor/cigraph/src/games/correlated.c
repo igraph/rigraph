@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -122,7 +120,7 @@ igraph_error_t igraph_correlated_game(const igraph_t *old_graph, igraph_t *new_g
                          IGRAPH_EINVAL);
         }
     }
-    IGRAPH_CHECK(igraph_is_simple(old_graph, &simple));
+    IGRAPH_CHECK(igraph_is_simple(old_graph, &simple, IGRAPH_DIRECTED));
     if (! simple) {
         IGRAPH_ERROR("The original graph must be simple for correlated Erdos-Renyi game.",
                      IGRAPH_EINVAL);
@@ -162,8 +160,6 @@ igraph_error_t igraph_correlated_game(const igraph_t *old_graph, igraph_t *new_g
      */
     sort_edges(&edges, old_graph);
 
-    RNG_BEGIN();
-
     if (p_del > 0) {
         last = RNG_GEOM(p_del);
         while (last < no_of_edges) {
@@ -183,8 +179,6 @@ igraph_error_t igraph_correlated_game(const igraph_t *old_graph, igraph_t *new_g
         }
     }
     no_add = igraph_vector_size(&add);
-
-    RNG_END();
 
     /* Now we are merging the original edges, the edges that are removed,
        and the new edges. We have the following pointers:

@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2005-2021 The igraph development team
@@ -99,7 +98,7 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_integer_t ord
 
     for (i = 0; i < no_of_nodes; i++) {
         added[i] = i + 1;
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode));
+        IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
         in = igraph_vector_int_size(&neis);
         if (order > 1) {
             for (j = 0; j < in; j++) {
@@ -114,7 +113,7 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_integer_t ord
             igraph_integer_t actnode = igraph_dqueue_int_pop(&q);
             igraph_integer_t actdist = igraph_dqueue_int_pop(&q);
             igraph_integer_t n;
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode));
+            IGRAPH_CHECK(igraph_neighbors(graph, &neis, actnode, mode, IGRAPH_LOOPS, IGRAPH_MULTIPLE));
             n = igraph_vector_int_size(&neis);
 
             if (actdist < order - 1) {
@@ -171,11 +170,9 @@ igraph_error_t igraph_connect_neighborhood(igraph_t *graph, igraph_integer_t ord
 
 /**
  * \function igraph_graph_power
- * \brief The kth power of a graph.
+ * \brief The k-th power of a graph.
  *
- * \experimental
- *
- * The kth power of a graph G is a simple graph where vertex \c u is connected to
+ * The k-th power of a graph G is a simple graph where vertex \c u is connected to
  * \c v by a single edge if \c v is reachable from \c u in G within at most k steps.
  * By convention, the zeroth power of a graph has no edges. The first power is
  * identical to the original graph, except that multiple edges and self-loops
@@ -218,8 +215,7 @@ igraph_error_t igraph_graph_power(const igraph_t *graph, igraph_t *res,
     }
 
     IGRAPH_CHECK(igraph_empty(res, no_of_nodes, dir));
-    IGRAPH_I_ATTRIBUTE_DESTROY(res);
-    IGRAPH_I_ATTRIBUTE_COPY(res, graph, /* graph */ true, /* vertex */ true, /* edge */ false);
+    IGRAPH_CHECK(igraph_i_attribute_copy(res, graph, true, true, /* edges= */ false));
     if (order == 0) {
         return IGRAPH_SUCCESS;
     }

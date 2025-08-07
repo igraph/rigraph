@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2005-2021 The igraph development team
@@ -38,8 +36,6 @@
 /**
  * \function igraph_distances_dijkstra_cutoff
  * \brief Weighted shortest path lengths between vertices, with cutoff.
- *
- * \experimental
  *
  * This function is similar to \ref igraph_distances_dijkstra(), but
  * paths longer than \p cutoff will not be considered.
@@ -111,7 +107,7 @@ igraph_error_t igraph_distances_dijkstra_cutoff(const igraph_t *graph,
     igraph_vector_int_t indexv;
 
     if (!weights) {
-        return igraph_distances_cutoff(graph, res, from, to, mode, cutoff);
+        return igraph_distances_cutoff(graph, NULL, res, from, to, mode, cutoff);
     }
 
     if (igraph_vector_size(weights) != no_of_edges) {
@@ -300,20 +296,6 @@ igraph_error_t igraph_distances_dijkstra(const igraph_t *graph,
     return igraph_distances_dijkstra_cutoff(graph, res, from, to, weights, mode, -1);
 }
 
-/**
- * \function igraph_shortest_paths_dijkstra
- * \brief Weighted shortest path lengths between vertices (deprecated).
- *
- * \deprecated-by igraph_distances_dijkstra 0.10.0
- */
-igraph_error_t igraph_shortest_paths_dijkstra(const igraph_t *graph,
-                                       igraph_matrix_t *res,
-                                       const igraph_vs_t from,
-                                       const igraph_vs_t to,
-                                       const igraph_vector_t *weights,
-                                       igraph_neimode_t mode) {
-    return igraph_distances_dijkstra(graph, res, from, to, weights, mode);
-}
 
 /**
  * \ingroup structural
@@ -434,7 +416,7 @@ igraph_error_t igraph_get_shortest_paths_dijkstra(const igraph_t *graph,
     igraph_integer_t i, to_reach;
 
     if (!weights) {
-        return igraph_get_shortest_paths(graph, vertices, edges, from, to, mode,
+        return igraph_get_shortest_paths(graph, NULL, vertices, edges, from, to, mode,
                                          parents, inbound_edges);
     }
 
@@ -696,12 +678,12 @@ igraph_error_t igraph_get_shortest_path_dijkstra(const igraph_t *graph,
     /* We use the constant time vector_swap() instead of the linear-time vector_update() to move the
        result to the output parameter. */
     if (edges) {
-        IGRAPH_CHECK(igraph_vector_int_swap(edges, igraph_vector_int_list_get_ptr(&edges2, 0)));
+        igraph_vector_int_swap(edges, igraph_vector_int_list_get_ptr(&edges2, 0));
         igraph_vector_int_list_destroy(&edges2);
         IGRAPH_FINALLY_CLEAN(1);
     }
     if (vertices) {
-        IGRAPH_CHECK(igraph_vector_int_swap(vertices, igraph_vector_int_list_get_ptr(&vertices2, 0)));
+        igraph_vector_int_swap(vertices, igraph_vector_int_list_get_ptr(&vertices2, 0));
         igraph_vector_int_list_destroy(&vertices2);
         IGRAPH_FINALLY_CLEAN(1);
     }
@@ -801,7 +783,7 @@ igraph_error_t igraph_get_all_shortest_paths_dijkstra(const igraph_t *graph,
     const double eps = IGRAPH_SHORTEST_PATH_EPSILON;
 
     if (!weights) {
-        return igraph_get_all_shortest_paths(graph, vertices, edges, nrgeo, from, to, mode);
+        return igraph_get_all_shortest_paths(graph, NULL, vertices, edges, nrgeo, from, to, mode);
     }
 
     if (from < 0 || from >= no_of_nodes) {

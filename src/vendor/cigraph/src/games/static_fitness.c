@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -202,7 +200,6 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
         p_cum_fitness_in = &cum_fitness_out;
     }
 
-    RNG_BEGIN();
     num_steps = no_of_edges;
     if (multiple) {
         /* Generating when multiple edges are allowed */
@@ -292,7 +289,6 @@ igraph_error_t igraph_static_fitness_game(igraph_t *graph, igraph_integer_t no_o
         igraph_adjlist_destroy(&al);
         IGRAPH_FINALLY_CLEAN(1);
     }
-    RNG_END();
 
     IGRAPH_PROGRESS("Static fitness game", 100.0, NULL);
 
@@ -445,7 +441,7 @@ igraph_error_t igraph_static_power_law_game(igraph_t *graph,
         for (igraph_integer_t i = 0; i < no_of_nodes; i++, j--) {
             VECTOR(fitness_in)[i] = pow(j, alpha_in);
         }
-        IGRAPH_CHECK(igraph_vector_shuffle(&fitness_in));
+        igraph_vector_shuffle(&fitness_in);
 
         IGRAPH_CHECK(igraph_static_fitness_game(graph, no_of_edges,
                                                 &fitness_out, &fitness_in, loops, multiple));

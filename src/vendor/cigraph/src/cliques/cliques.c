@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2005-2023 The igraph development team
@@ -1008,7 +1007,7 @@ static igraph_error_t igraph_i_maximal_or_largest_cliques_or_indsets(const igrap
     clqdata.keep_only_largest = keep_only_largest;
 
     if (complementer) {
-        IGRAPH_CHECK(igraph_adjlist_init_complementer(graph, &clqdata.adj_list, IGRAPH_ALL, 0));
+        IGRAPH_CHECK(igraph_adjlist_init_complementer(graph, &clqdata.adj_list, IGRAPH_ALL, IGRAPH_NO_LOOPS));
     } else {
         IGRAPH_CHECK(igraph_adjlist_init(
             graph, &clqdata.adj_list, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE

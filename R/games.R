@@ -1081,7 +1081,8 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
     as.numeric(n),
     as.numeric(m),
     as.logical(directed),
-    as.logical(loops)
+    as.logical(loops),
+    FALSE
   )
 
   if (igraph_opt("add.params")) {

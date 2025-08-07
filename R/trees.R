@@ -152,4 +152,6 @@ to_prufer <- to_prufer_impl
 #' @family trees
 #' @export
 #' @cdocs igraph_random_spanning_tree
-sample_spanning_tree <- random_spanning_tree_impl
+sample_spanning_tree <- function(graph, vid = NULL) {
+  random_spanning_tree_impl(graph, vid)
+}

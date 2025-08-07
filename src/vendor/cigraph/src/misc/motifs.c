@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -328,8 +327,6 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_inte
     IGRAPH_CHECK(igraph_stack_int_init(&stack, 0));
     IGRAPH_FINALLY(igraph_stack_int_destroy, &stack);
 
-    RNG_BEGIN();
-
     for (father = 0; father < no_of_nodes; father++) {
         igraph_integer_t level;
 
@@ -486,8 +483,6 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_inte
 
     } /* for father */
 
-    RNG_END();
-
     IGRAPH_FREE(added);
     IGRAPH_FREE(subg);
     igraph_vector_int_destroy(&vids);
@@ -522,7 +517,10 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_inte
  * the search tree.
  *
  * \param graph The graph object to study.
- * \param est Pointer to an integer, the result will be stored here.
+ * \param est Pointer to an \c igraph_real_t, the result will be stored here.
+ *        Note that even though the result is an integer, we need to use
+ *        \c igraph_real_t to avoid overflow when igraph is compiled with
+ *        32-bit integers.
  * \param size The size of the subgraphs to look for.
  * \param cut_prob Vector of probabilities for cutting the search tree
  *        at a given level. The first element is the first level, etc.
@@ -544,7 +542,7 @@ igraph_error_t igraph_motifs_randesu_callback(const igraph_t *graph, igraph_inte
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_integer_t *est,
+igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_real_t *est,
                                    igraph_integer_t size, const igraph_vector_t *cut_prob,
                                    igraph_integer_t sample_size,
                                    const igraph_vector_int_t *parsample) {
@@ -608,8 +606,6 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
 
     *est = 0;
 
-    RNG_BEGIN();
-
     for (sam = 0; sam < sample_size; sam++) {
         igraph_integer_t father = VECTOR(*sample)[sam];
         igraph_integer_t level, s;
@@ -629,7 +625,9 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
 
         /* init V_E */
         igraph_vector_int_clear(&adjverts);
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, father, IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &neis, father, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+        ));
         s = igraph_vector_int_size(&neis);
         for (i = 0; i < s; i++) {
             igraph_integer_t nei = VECTOR(neis)[i];
@@ -671,7 +669,9 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
                     IGRAPH_CHECK(igraph_stack_int_push(&stack, nei));
                     IGRAPH_CHECK(igraph_stack_int_push(&stack, level));
 
-                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, nei, IGRAPH_ALL));
+                    IGRAPH_CHECK(igraph_neighbors(
+                        graph, &neis, nei, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+                    ));
                     s = igraph_vector_int_size(&neis);
                     for (i = 0; i < s; i++) {
                         igraph_integer_t nei2 = VECTOR(neis)[i];
@@ -696,7 +696,9 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
 
                 nei = igraph_vector_int_pop_back(&vids);
                 added[nei] -= 1; level -= 1;
-                IGRAPH_CHECK(igraph_neighbors(graph, &neis, nei, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_neighbors(
+                    graph, &neis, nei, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+                ));
                 s = igraph_vector_int_size(&neis);
                 for (i = 0; i < s; i++) {
                     added[ VECTOR(neis)[i] ] -= 1;
@@ -712,15 +714,15 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
 
         /* clear the added vector */
         added[father] -= 1;
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, father, IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &neis, father, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+        ));
         s = igraph_vector_int_size(&neis);
         for (i = 0; i < s; i++) {
             added[ VECTOR(neis)[i] ] -= 1;
         }
 
     } /* for father */
-
-    RNG_END();
 
     (*est) *= ((igraph_real_t) no_of_nodes / sample_size);
 
@@ -748,8 +750,10 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
  * classes to them. Arbitrarily large motif sizes are supported.
  *
  * \param graph The graph object to study.
- * \param no Pointer to an integer type, the result will be stored
- *        here.
+ * \param no Pointer to an \c igraph_real_t, the result will be stored here.
+ *        Note that even though the result is an integer, we need to use
+ *        \c igraph_real_t to avoid overflow when igraph is compiled with
+ *        32-bit integers.
  * \param size The size of the motifs to count.
  * \param cut_prob Vector of probabilities for cutting the search tree
  *        at a given level. The first element is the first level, etc.
@@ -763,8 +767,10 @@ igraph_error_t igraph_motifs_randesu_estimate(const igraph_t *graph, igraph_inte
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t *no,
-                             igraph_integer_t size, const igraph_vector_t *cut_prob) {
+igraph_error_t igraph_motifs_randesu_no(
+    const igraph_t *graph, igraph_real_t *no, igraph_integer_t size,
+    const igraph_vector_t *cut_prob
+) {
 
     igraph_integer_t no_of_nodes = igraph_vcount(graph);
     igraph_vector_int_t neis;
@@ -796,8 +802,6 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t 
 
     *no = 0;
 
-    RNG_BEGIN();
-
     for (father = 0; father < no_of_nodes; father++) {
         igraph_integer_t level, s;
 
@@ -816,7 +820,9 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t 
 
         /* init V_E */
         igraph_vector_int_clear(&adjverts);
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, father, IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &neis, father, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+        ));
         s = igraph_vector_int_size(&neis);
         for (i = 0; i < s; i++) {
             igraph_integer_t nei = VECTOR(neis)[i];
@@ -858,7 +864,9 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t 
                     IGRAPH_CHECK(igraph_stack_int_push(&stack, nei));
                     IGRAPH_CHECK(igraph_stack_int_push(&stack, level));
 
-                    IGRAPH_CHECK(igraph_neighbors(graph, &neis, nei, IGRAPH_ALL));
+                    IGRAPH_CHECK(igraph_neighbors(
+                        graph, &neis, nei, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+                    ));
                     s = igraph_vector_int_size(&neis);
                     for (i = 0; i < s; i++) {
                         igraph_integer_t nei2 = VECTOR(neis)[i];
@@ -883,7 +891,9 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t 
 
                 nei = igraph_vector_int_pop_back(&vids);
                 added[nei] -= 1; level -= 1;
-                IGRAPH_CHECK(igraph_neighbors(graph, &neis, nei, IGRAPH_ALL));
+                IGRAPH_CHECK(igraph_neighbors(
+                    graph, &neis, nei, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+                ));
                 s = igraph_vector_int_size(&neis);
                 for (i = 0; i < s; i++) {
                     added[ VECTOR(neis)[i] ] -= 1;
@@ -899,15 +909,15 @@ igraph_error_t igraph_motifs_randesu_no(const igraph_t *graph, igraph_integer_t 
 
         /* clear the added vector */
         added[father] -= 1;
-        IGRAPH_CHECK(igraph_neighbors(graph, &neis, father, IGRAPH_ALL));
+        IGRAPH_CHECK(igraph_neighbors(
+            graph, &neis, father, IGRAPH_ALL, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+        ));
         s = igraph_vector_int_size(&neis);
         for (i = 0; i < s; i++) {
             added[ VECTOR(neis)[i] ] -= 1;
         }
 
     } /* for father */
-
-    RNG_END();
 
     IGRAPH_FREE(added);
     igraph_vector_int_destroy(&vids);
@@ -967,8 +977,8 @@ igraph_error_t igraph_dyad_census(const igraph_t *graph, igraph_real_t *mut,
         igraph_integer_t ideg, odeg;
         igraph_integer_t ip, op;
 
-        IGRAPH_CHECK(igraph_i_neighbors(graph, &inneis, i, IGRAPH_IN, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
-        IGRAPH_CHECK(igraph_i_neighbors(graph, &outneis, i, IGRAPH_OUT, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
+        IGRAPH_CHECK(igraph_neighbors(graph, &inneis, i, IGRAPH_IN, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
+        IGRAPH_CHECK(igraph_neighbors(graph, &outneis, i, IGRAPH_OUT, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
 
         ideg = igraph_vector_int_size(&inneis);
         odeg = igraph_vector_int_size(&outneis);

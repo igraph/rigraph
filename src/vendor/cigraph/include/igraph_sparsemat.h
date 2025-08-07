@@ -1,8 +1,6 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2010-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,10 +13,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #ifndef IGRAPH_SPARSEMAT_H
@@ -33,7 +28,7 @@
 
 #include <stdio.h>
 
-__BEGIN_DECLS
+IGRAPH_BEGIN_C_DECLS
 
 /*
  * These types are private to igraph, and customized to use igraph_integer_t.
@@ -155,13 +150,6 @@ IGRAPH_EXPORT igraph_error_t igraph_sparsemat_lusol(const igraph_sparsemat_t *A,
 
 IGRAPH_EXPORT igraph_error_t igraph_sparsemat_print(const igraph_sparsemat_t *A,
                                          FILE *outstream);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat(igraph_t *graph, const igraph_sparsemat_t *A,
-                                   igraph_bool_t directed);
-
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat_t *A,
-                                            igraph_bool_t directed, const char *attr,
-                                            igraph_bool_t loops);
 
 IGRAPH_EXPORT igraph_error_t igraph_matrix_as_sparsemat(igraph_sparsemat_t *res,
                                              const igraph_matrix_t *mat,
@@ -298,15 +286,6 @@ IGRAPH_EXPORT igraph_integer_t igraph_sparsemat_iterator_idx(const igraph_sparse
 IGRAPH_EXPORT igraph_real_t igraph_sparsemat_iterator_get(const igraph_sparsemat_iterator_t *it);
 IGRAPH_EXPORT igraph_integer_t igraph_sparsemat_iterator_next(igraph_sparsemat_iterator_t *it);
 
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_copy(
-    igraph_sparsemat_t *to, const igraph_sparsemat_t *from);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_diag(
-    igraph_sparsemat_t *A, igraph_integer_t nzmax, const igraph_vector_t *values,
-    igraph_bool_t compress);
-IGRAPH_EXPORT IGRAPH_DEPRECATED igraph_error_t igraph_sparsemat_eye(
-    igraph_sparsemat_t *A, igraph_integer_t n, igraph_integer_t nzmax,
-    igraph_real_t value, igraph_bool_t compress);
-
-__END_DECLS
+IGRAPH_END_C_DECLS
 
 #endif

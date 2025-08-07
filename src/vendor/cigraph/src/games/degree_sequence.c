@@ -39,7 +39,7 @@ static igraph_error_t configuration(
         const igraph_vector_int_t *out_seq,
         const igraph_vector_int_t *in_seq) {
 
-    const igraph_bool_t directed = (in_seq != NULL && igraph_vector_int_size(in_seq) != 0);
+    const igraph_bool_t directed = (in_seq != NULL);
     igraph_integer_t outsum = 0, insum = 0;
     igraph_bool_t graphical;
     igraph_integer_t no_of_nodes, no_of_edges;
@@ -84,8 +84,6 @@ static igraph_error_t configuration(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges * 2));
 
-    RNG_BEGIN();
-
     if (directed) {
         for (igraph_integer_t i = 0; i < no_of_edges; i++) {
             igraph_integer_t from = RNG_INTEGER(0, bagp1 - 1);
@@ -109,8 +107,6 @@ static igraph_error_t configuration(
             bagp1--;
         }
     }
-
-    RNG_END();
 
     IGRAPH_FREE(bag1);
     IGRAPH_FINALLY_CLEAN(1);
@@ -159,9 +155,6 @@ static igraph_error_t fast_heur_undirected(
     IGRAPH_VECTOR_INT_INIT_FINALLY(&residual_degrees, no_of_nodes);
     IGRAPH_CHECK(igraph_set_init(&incomplete_vertices, 0));
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_vertices);
-
-    /* Start the RNG */
-    RNG_BEGIN();
 
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
@@ -248,9 +241,6 @@ static igraph_error_t fast_heur_undirected(
         }
     }
 
-    /* Finish the RNG */
-    RNG_END();
-
     /* Clean up */
     igraph_set_destroy(&incomplete_vertices);
     igraph_vector_int_destroy(&residual_degrees);
@@ -309,9 +299,6 @@ static igraph_error_t fast_heur_directed(
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_out_vertices);
     IGRAPH_CHECK(igraph_set_init(&incomplete_in_vertices, 0));
     IGRAPH_FINALLY(igraph_set_destroy, &incomplete_in_vertices);
-
-    /* Start the RNG */
-    RNG_BEGIN();
 
     /* Outer loop; this will try to construct a graph several times from scratch
      * until it finally succeeds. */
@@ -395,9 +382,6 @@ static igraph_error_t fast_heur_directed(
         }
     }
 
-    /* Finish the RNG */
-    RNG_END();
-
     /* Clean up */
     igraph_set_destroy(&incomplete_in_vertices);
     igraph_set_destroy(&incomplete_out_vertices);
@@ -448,8 +432,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_CHECK(igraph_set_reserve(set, VECTOR(*degseq)[i]));
     }
 
-    RNG_BEGIN();
-
     for (;;) {
         igraph_bool_t success = true;
 
@@ -495,8 +477,6 @@ static igraph_error_t configuration_simple_undirected_set(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-    RNG_END();
-
     igraph_vector_ptr_destroy_all(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
 
@@ -517,8 +497,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
     for (igraph_integer_t i = 0; i < vcount; ++i) {
         IGRAPH_CHECK(igraph_bitset_resize(igraph_bitset_list_get_ptr(&adjlist, i), vcount));
     }
-
-    RNG_BEGIN();
 
     for (;;) {
         igraph_bool_t success = true;
@@ -564,8 +542,6 @@ static igraph_error_t configuration_simple_undirected_bitset(
 
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
-
-    RNG_END();
 
     igraph_bitset_list_destroy(&adjlist);
     IGRAPH_FINALLY_CLEAN(1);
@@ -671,8 +647,6 @@ static igraph_error_t configuration_simple_directed(
 
     igraph_integer_t vertex_done_mark = 1;
 
-    RNG_BEGIN();
-
     for (;;) {
         igraph_bool_t success = true;
         igraph_integer_t previous_to = -1;
@@ -715,8 +689,6 @@ static igraph_error_t configuration_simple_directed(
         IGRAPH_ALLOW_INTERRUPTION_LIMITED(iter, 1 << 8);
     }
 
-    RNG_END();
-
     for (igraph_integer_t i=0; i < ecount; i++) {
         VECTOR(edges)[2*i]   = VECTOR(out_stubs)[i];
         VECTOR(edges)[2*i+1] = VECTOR(in_stubs)[i];
@@ -744,7 +716,7 @@ igraph_error_t edge_switching(
 
     IGRAPH_CHECK(igraph_realize_degree_sequence(graph, out_seq, in_seq, IGRAPH_SIMPLE_SW, IGRAPH_REALIZE_DEGSEQ_INDEX));
     IGRAPH_FINALLY(igraph_destroy, graph);
-    IGRAPH_CHECK(igraph_rewire(graph, 10 * igraph_ecount(graph), IGRAPH_REWIRING_SIMPLE));
+    IGRAPH_CHECK(igraph_rewire(graph, 10 * igraph_ecount(graph), IGRAPH_SIMPLE_SW));
     IGRAPH_FINALLY_CLEAN(1);
     return IGRAPH_SUCCESS;
 }
@@ -778,13 +750,10 @@ igraph_error_t edge_switching(
  * https://doi.org/10.1088/2632-072x/abced5.
  *
  * \param graph Pointer to an uninitialized graph object.
- * \param out_deg The degree sequence for an undirected graph (if
- *        \p in_seq is \c NULL or of length zero), or the out-degree
- *        sequence of a directed graph (if \p in_deq is not
- *        of length zero).
- * \param in_deg It is either a zero-length vector or
- *        \c NULL (if an undirected
- *        graph is generated), or the in-degree sequence.
+ * \param out_degrees A vector of integers specifying the degree sequence for
+ *     undirected graphs or the out-degree sequence for directed graphs.
+ * \param in_degrees A vector of integers specifying the in-degree sequence for
+ *     directed graphs. For undirected graphs, it must be \c NULL.
  * \param method The method to generate the graph. Possible values:
  *        \clist
  *          \cli IGRAPH_DEGSEQ_CONFIGURATION
@@ -861,37 +830,33 @@ igraph_error_t edge_switching(
 
 igraph_error_t igraph_degree_sequence_game(
         igraph_t *graph,
-        const igraph_vector_int_t *out_deg,
-        const igraph_vector_int_t *in_deg,
+        const igraph_vector_int_t *out_degrees,
+        const igraph_vector_int_t *in_degrees,
         igraph_degseq_t method) {
-
-    if (in_deg && igraph_vector_int_empty(in_deg) && !igraph_vector_int_empty(out_deg)) {
-        in_deg = NULL;
-    }
 
     switch (method) {
     case IGRAPH_DEGSEQ_CONFIGURATION:
-        return configuration(graph, out_deg, in_deg);
+        return configuration(graph, out_degrees, in_degrees);
 
     case IGRAPH_DEGSEQ_VL:
-        return igraph_i_degree_sequence_game_vl(graph, out_deg, in_deg);
+        return igraph_i_degree_sequence_game_vl(graph, out_degrees, in_degrees);
 
     case IGRAPH_DEGSEQ_FAST_HEUR_SIMPLE:
-        if (! in_deg) {
-            return fast_heur_undirected(graph, out_deg);
+        if (! in_degrees) {
+            return fast_heur_undirected(graph, out_degrees);
         } else {
-            return fast_heur_directed(graph, out_deg, in_deg);
+            return fast_heur_directed(graph, out_degrees, in_degrees);
         }
 
     case IGRAPH_DEGSEQ_CONFIGURATION_SIMPLE:
-        if (! in_deg) {
-            return configuration_simple_undirected(graph, out_deg);
+        if (! in_degrees) {
+            return configuration_simple_undirected(graph, out_degrees);
         } else {
-            return configuration_simple_directed(graph, out_deg, in_deg);
+            return configuration_simple_directed(graph, out_degrees, in_degrees);
         }
 
     case IGRAPH_DEGSEQ_EDGE_SWITCHING_SIMPLE:
-        return edge_switching(graph, out_deg, in_deg);
+        return edge_switching(graph, out_degrees, in_degrees);
 
     default:
         IGRAPH_ERROR("Invalid degree sequence game method.", IGRAPH_EINVAL);

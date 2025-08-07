@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2003-2021 The igraph development team
@@ -163,8 +161,6 @@ igraph_error_t igraph_callaway_traits_game(igraph_t *graph, igraph_integer_t nod
         IGRAPH_VECTOR_INT_INIT_FINALLY(nodetypes, nodes);
     }
 
-    RNG_BEGIN();
-
     for (i = 0; i < nodes; i++) {
         igraph_real_t uni = RNG_UNIF(0, maxcum);
         igraph_integer_t type;
@@ -185,8 +181,6 @@ igraph_error_t igraph_callaway_traits_game(igraph_t *graph, igraph_integer_t nod
             }
         }
     }
-
-    RNG_END();
 
     if (! node_type_vec) {
         igraph_vector_int_destroy(nodetypes);

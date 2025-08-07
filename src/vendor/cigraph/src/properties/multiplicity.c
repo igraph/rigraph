@@ -1,5 +1,3 @@
-/* -*- mode: C -*-  */
-/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
    Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -37,6 +35,11 @@
  * \param graph The input graph.
  * \param res Pointer to a boolean constant, the result
  *     is stored here.
+ * \param directed Whether to consider the directions of edges. \c IGRAPH_UNDIRECTED
+ *     means that edge directions will be ignored and a directed graph with at
+ *     least one mutual edge pair will be considered non-simple. \c IGRAPH_DIRECTED
+ *     means that edge directions will be considered. Ignored for
+ *     undirected graphs.
  * \return Error code.
  *
  * \sa \ref igraph_is_loop() and \ref igraph_is_multiple() to
@@ -46,7 +49,7 @@
  *
  * Time complexity: O(|V|+|E|).
  */
-igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res) {
+igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res, igraph_bool_t directed) {
     igraph_integer_t vc = igraph_vcount(graph);
     igraph_integer_t ec = igraph_ecount(graph);
 
@@ -56,12 +59,15 @@ igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res) {
     /* If it is known, does the graph have them? */
     igraph_bool_t has_loop, has_multi;
 
+    /* Will we need to check mutual edges explicitly? */
+    igraph_bool_t need_to_check_mutual = directed == IGRAPH_UNDIRECTED && igraph_is_directed(graph);
+
     known_loop  = igraph_i_property_cache_has(graph, IGRAPH_PROP_HAS_LOOP);
     if (known_loop) {
         has_loop = igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_HAS_LOOP);
         if (has_loop) {
             *res = false;
-            return IGRAPH_SUCCESS;
+            goto early_exit;
         }
     }
 
@@ -70,15 +76,13 @@ igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res) {
         has_multi = igraph_i_property_cache_get_bool(graph, IGRAPH_PROP_HAS_MULTI);
         if (has_multi) {
             *res = false;
-            return IGRAPH_SUCCESS;
+            goto early_exit;
         }
     }
 
-    if (known_loop && known_multi) {
-        if (!has_loop && !has_multi) {
-            *res = true;
-            return IGRAPH_SUCCESS;
-        }
+    if (known_loop && known_multi && !has_loop && !has_multi) {
+        *res = true;
+        goto early_exit;
     }
 
     /* Up to now, these variables were used to store the cache status.
@@ -95,7 +99,9 @@ igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res) {
         igraph_vector_int_t neis;
         IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
         for (igraph_integer_t i = 0; i < vc; i++) {
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+            ));
             const igraph_integer_t n = igraph_vector_int_size(&neis);
             for (igraph_integer_t j = 0; j < n; j++) {
                 if (VECTOR(neis)[j] == i) {
@@ -124,6 +130,19 @@ igraph_error_t igraph_is_simple(const igraph_t *graph, igraph_bool_t *res) {
 
     if (known_multi) {
         igraph_i_property_cache_set_bool_checked(graph, IGRAPH_PROP_HAS_MULTI, has_multi);
+    }
+
+early_exit:
+    /* If at this point we have concluded that the graph is simple, _but_ the user
+     * asked us to ignore edge directions, we need to look for mutual edge pairs
+     * and return false if we find one. */
+    if (*res && need_to_check_mutual) {
+        /* If the graph is undirected, we also check for mutual edges. */
+        igraph_bool_t has_mutual;
+        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
+        if (has_mutual) {
+            *res = false;
+        }
     }
 
     return IGRAPH_SUCCESS;
@@ -169,8 +188,9 @@ igraph_error_t igraph_has_multiple(const igraph_t *graph, igraph_bool_t *res) {
         igraph_bool_t found = false;
         IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
         for (i = 0; i < vc && !found; i++) {
-            IGRAPH_CHECK(igraph_neighbors(graph, &neis, i,
-                                          IGRAPH_OUT));
+            IGRAPH_CHECK(igraph_neighbors(
+                graph, &neis, i, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+            ));
             n = igraph_vector_int_size(&neis);
             for (j = 1; j < n; j++) {
                 if (VECTOR(neis)[j - 1] == VECTOR(neis)[j]) {
@@ -353,7 +373,9 @@ igraph_error_t igraph_count_multiple_1(const igraph_t *graph, igraph_integer_t *
     igraph_vector_int_t vids;
 
     IGRAPH_VECTOR_INT_INIT_FINALLY(&vids, 0);
-    IGRAPH_CHECK(igraph_neighbors(graph, &vids, from, IGRAPH_OUT));
+    IGRAPH_CHECK(igraph_neighbors(
+        graph, &vids, from, IGRAPH_OUT, IGRAPH_LOOPS, IGRAPH_MULTIPLE
+    ));
 
     count = 0;
     n = igraph_vector_int_size(&vids);

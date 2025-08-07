@@ -1,4 +1,3 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -28,7 +27,6 @@
 #include "igraph_interface.h"
 #include "igraph_memory.h"
 #include "igraph_types.h"
-#include "igraph_vector_ptr.h"
 
 #include "internal/hacks.h"    /* IGRAPH_STATIC_ASSERT */
 
@@ -170,19 +168,6 @@ igraph_error_t igraph_sparsemat_init_copy(
     memcpy(to->cs->x, from->cs->x, sizeof(CS_ENTRY) * (size_t) (from->cs->nzmax));
 
     return IGRAPH_SUCCESS;
-}
-
-/**
- * \function igraph_sparsemat_copy
- * \brief Copies a sparse matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_copy 0.10
- */
-
-igraph_error_t igraph_sparsemat_copy(
-    igraph_sparsemat_t *to, const igraph_sparsemat_t *from
-) {
-    return igraph_sparsemat_init_copy(to, from);
 }
 
 /**
@@ -1010,7 +995,7 @@ igraph_error_t igraph_sparsemat_lsolve(const igraph_sparsemat_t *L,
                             igraph_vector_t *res) {
 
     if (L->cs->m != L->cs->n) {
-        IGRAPH_ERROR("Cannot perform lower triangular solve", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot perform lower triangular solve on non-square matrix.", IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1018,7 +1003,7 @@ igraph_error_t igraph_sparsemat_lsolve(const igraph_sparsemat_t *L,
     }
 
     if (! cs_lsolve(L->cs, VECTOR(*res))) {
-        IGRAPH_ERROR("Cannot perform lower triangular solve", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Cannot perform lower triangular solve.", IGRAPH_FAILURE);
     }
 
     return IGRAPH_SUCCESS;
@@ -1044,8 +1029,10 @@ igraph_error_t igraph_sparsemat_ltsolve(const igraph_sparsemat_t *L,
                              igraph_vector_t *res) {
 
     if (L->cs->m != L->cs->n) {
-        IGRAPH_ERROR("Cannot perform transposed lower triangular solve",
-                     IGRAPH_NONSQUARE);
+        IGRAPH_ERROR(
+            "Cannot perform transposed lower triangular solve on non-square matrix.",
+            IGRAPH_EINVAL
+        );
     }
 
     if (res != b) {
@@ -1053,7 +1040,7 @@ igraph_error_t igraph_sparsemat_ltsolve(const igraph_sparsemat_t *L,
     }
 
     if (!cs_ltsolve(L->cs, VECTOR(*res))) {
-        IGRAPH_ERROR("Cannot perform lower triangular solve", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Cannot perform lower triangular solve.", IGRAPH_FAILURE);
     }
 
     return IGRAPH_SUCCESS;
@@ -1078,7 +1065,10 @@ igraph_error_t igraph_sparsemat_usolve(const igraph_sparsemat_t *U,
                             igraph_vector_t *res) {
 
     if (U->cs->m != U->cs->n) {
-        IGRAPH_ERROR("Cannot perform upper triangular solve", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR(
+            "Cannot perform upper triangular solve on non-square matrix.",
+            IGRAPH_EINVAL
+        );
     }
 
     if (res != b) {
@@ -1086,7 +1076,7 @@ igraph_error_t igraph_sparsemat_usolve(const igraph_sparsemat_t *U,
     }
 
     if (! cs_usolve(U->cs, VECTOR(*res))) {
-        IGRAPH_ERROR("Cannot perform upper triangular solve", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Cannot perform upper triangular solve.", IGRAPH_FAILURE);
     }
 
     return IGRAPH_SUCCESS;
@@ -1112,8 +1102,10 @@ igraph_error_t igraph_sparsemat_utsolve(const igraph_sparsemat_t *U,
                              igraph_vector_t *res) {
 
     if (U->cs->m != U->cs->n) {
-        IGRAPH_ERROR("Cannot perform transposed upper triangular solve",
-                     IGRAPH_NONSQUARE);
+        IGRAPH_ERROR(
+            "Cannot perform transposed upper triangular solve on non-square matrix.",
+            IGRAPH_EINVAL
+        );
     }
 
     if (res != b) {
@@ -1121,7 +1113,7 @@ igraph_error_t igraph_sparsemat_utsolve(const igraph_sparsemat_t *U,
     }
 
     if (!cs_utsolve(U->cs, VECTOR(*res))) {
-        IGRAPH_ERROR("Cannot perform transposed upper triangular solve",
+        IGRAPH_ERROR("Cannot perform transposed upper triangular solve.",
                      IGRAPH_FAILURE);
     }
 
@@ -1151,8 +1143,10 @@ igraph_error_t igraph_sparsemat_cholsol(const igraph_sparsemat_t *A,
                              igraph_integer_t order) {
 
     if (A->cs->m != A->cs->n) {
-        IGRAPH_ERROR("Cannot perform sparse symmetric solve",
-                     IGRAPH_NONSQUARE);
+        IGRAPH_ERROR(
+            "Cannot perform sparse symmetric solve on non-square matrix.",
+            IGRAPH_EINVAL
+        );
     }
 
     if (res != b) {
@@ -1160,7 +1154,7 @@ igraph_error_t igraph_sparsemat_cholsol(const igraph_sparsemat_t *A,
     }
 
     if (! cs_cholsol(order, A->cs, VECTOR(*res))) {
-        IGRAPH_ERROR("Cannot perform sparse symmetric solve", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Cannot perform sparse symmetric solve.", IGRAPH_FAILURE);
     }
 
     return IGRAPH_SUCCESS;
@@ -1193,8 +1187,7 @@ igraph_error_t igraph_sparsemat_lusol(const igraph_sparsemat_t *A,
                            igraph_real_t tol) {
 
     if (A->cs->m != A->cs->n) {
-        IGRAPH_ERROR("Cannot perform LU solve",
-                     IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Cannot perform LU solve on non-square matrix.", IGRAPH_EINVAL);
     }
 
     if (res != b) {
@@ -1202,214 +1195,8 @@ igraph_error_t igraph_sparsemat_lusol(const igraph_sparsemat_t *A,
     }
 
     if (! cs_lusol(order, A->cs, VECTOR(*res), tol)) {
-        IGRAPH_ERROR("Cannot perform LU solve", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Cannot perform LU solve.", IGRAPH_FAILURE);
     }
-
-    return IGRAPH_SUCCESS;
-}
-
-static igraph_error_t igraph_i_sparsemat_cc(igraph_t *graph, const igraph_sparsemat_t *A,
-                                 igraph_bool_t directed) {
-
-    igraph_vector_int_t edges;
-    CS_INT no_of_nodes = A->cs->m;
-    CS_INT no_of_edges = A->cs->p[A->cs->n];
-    CS_INT *p = A->cs->p;
-    CS_INT *i = A->cs->i;
-    igraph_integer_t from = 0;
-    igraph_integer_t to = 0;
-    igraph_integer_t e = 0;
-
-    if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
-    }
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
-
-    while (*p < no_of_edges) {
-        while (to < * (p + 1)) {
-            if (directed || from >= *i) {
-                VECTOR(edges)[e++] = from;
-                VECTOR(edges)[e++] = (*i);
-            }
-            to++;
-            i++;
-        }
-        from++;
-        p++;
-    }
-    igraph_vector_int_resize(&edges, e);
-
-    IGRAPH_CHECK(igraph_create(graph, &edges, no_of_nodes, directed));
-    igraph_vector_int_destroy(&edges);
-    IGRAPH_FINALLY_CLEAN(1);
-
-    return IGRAPH_SUCCESS;
-}
-
-static igraph_error_t igraph_i_sparsemat_triplet(igraph_t *graph, const igraph_sparsemat_t *A,
-                                      igraph_bool_t directed) {
-
-    igraph_vector_int_t edges;
-    CS_INT no_of_nodes = A->cs->m;
-    CS_INT no_of_edges = A->cs->nz;
-    CS_INT *i = A->cs->p;
-    CS_INT *j = A->cs->i;
-    igraph_integer_t e;
-
-    if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
-    }
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
-
-    for (e = 0; e < 2 * no_of_edges; i++, j++) {
-        if (directed || *i >= *j) {
-            VECTOR(edges)[e++] = (*i);
-            VECTOR(edges)[e++] = (*j);
-        }
-    }
-    igraph_vector_int_resize(&edges, e);
-
-    IGRAPH_CHECK(igraph_create(graph, &edges, no_of_nodes, directed));
-    igraph_vector_int_destroy(&edges);
-    IGRAPH_FINALLY_CLEAN(1);
-
-    return IGRAPH_SUCCESS;
-}
-
-/**
- * \function igraph_sparsemat
- * \brief Creates an igraph graph from a sparse matrix.
- *
- * One edge is created for each non-zero entry in the matrix. If you
- * have a symmetric matrix, and want to create an undirected graph,
- * then delete the entries in the upper diagonal first, or call \ref
- * igraph_simplify() on the result graph to eliminate the multiple
- * edges.
- *
- * \param graph Pointer to an uninitialized igraph_t object, the
- *    graphs is stored here.
- * \param A The input matrix, in triplet or column-compressed format.
- * \param directed Whether to create a directed graph.
- * \return Error code.
- *
- * Time complexity: TODO.
- */
-
-igraph_error_t igraph_sparsemat(igraph_t *graph, const igraph_sparsemat_t *A,
-                     igraph_bool_t directed) {
-
-    if (igraph_sparsemat_is_cc(A)) {
-        return (igraph_i_sparsemat_cc(graph, A, directed));
-    } else {
-        return (igraph_i_sparsemat_triplet(graph, A, directed));
-    }
-}
-
-static igraph_error_t igraph_i_weighted_sparsemat_cc(const igraph_sparsemat_t *A,
-                                          igraph_bool_t directed, const char *attr,
-                                          igraph_bool_t loops,
-                                          igraph_vector_int_t *edges,
-                                          igraph_vector_t *weights) {
-
-    CS_INT no_of_edges = A->cs->p[A->cs->n];
-    CS_INT *p = A->cs->p;
-    CS_INT *i = A->cs->i;
-    CS_ENTRY *x = A->cs->x;
-    igraph_integer_t from = 0;
-    igraph_integer_t to = 0;
-    igraph_integer_t e = 0, w = 0;
-
-    IGRAPH_UNUSED(attr);
-
-    IGRAPH_CHECK(igraph_vector_int_resize(edges, no_of_edges * 2));
-    IGRAPH_CHECK(igraph_vector_resize(weights, no_of_edges));
-
-    while (*p < no_of_edges) {
-        while (to < * (p + 1)) {
-            if ( (loops || from != *i) && (directed || from >= *i) && *x != 0) {
-                VECTOR(*edges)[e++] = (*i);
-                VECTOR(*edges)[e++] = from;
-                VECTOR(*weights)[w++] = (*x);
-            }
-            to++;
-            i++;
-            x++;
-        }
-        from++;
-        p++;
-    }
-
-    igraph_vector_int_resize(edges, e); /* shrinks */
-    igraph_vector_resize(weights, w); /* shrinks */
-
-    return IGRAPH_SUCCESS;
-}
-
-static igraph_error_t igraph_i_weighted_sparsemat_triplet(const igraph_sparsemat_t *A,
-                                               igraph_bool_t directed,
-                                               const char *attr,
-                                               igraph_bool_t loops,
-                                               igraph_vector_int_t *edges,
-                                               igraph_vector_t *weights) {
-
-    IGRAPH_UNUSED(A); IGRAPH_UNUSED(directed); IGRAPH_UNUSED(attr);
-    IGRAPH_UNUSED(loops); IGRAPH_UNUSED(edges); IGRAPH_UNUSED(weights);
-
-    /* TODO */
-    IGRAPH_ERROR("Triplet matrices are not implemented",
-                 IGRAPH_UNIMPLEMENTED);
-}
-
-igraph_error_t igraph_weighted_sparsemat(igraph_t *graph, const igraph_sparsemat_t *A,
-                              igraph_bool_t directed, const char *attr,
-                              igraph_bool_t loops) {
-
-    igraph_vector_int_t edges;
-    igraph_vector_t weights;
-    CS_INT pot_edges = igraph_i_sparsemat_count_elements(A);
-    const char* default_attr = "weight";
-    igraph_vector_ptr_t attr_vec;
-    igraph_attribute_record_t attr_rec;
-    CS_INT no_of_nodes = A->cs->m;
-
-    if (no_of_nodes != A->cs->n) {
-        IGRAPH_ERROR("Cannot create graph object", IGRAPH_NONSQUARE);
-    }
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, pot_edges * 2);
-    IGRAPH_VECTOR_INIT_FINALLY(&weights, pot_edges);
-    IGRAPH_VECTOR_PTR_INIT_FINALLY(&attr_vec, 1);
-
-    if (igraph_sparsemat_is_cc(A)) {
-        IGRAPH_CHECK(igraph_i_weighted_sparsemat_cc(A, directed, attr, loops,
-                     &edges, &weights));
-    } else {
-        IGRAPH_CHECK(igraph_i_weighted_sparsemat_triplet(A, directed, attr,
-                     loops, &edges,
-                     &weights));
-    }
-
-    /* Prepare attribute record */
-    attr_rec.name = attr ? attr : default_attr;
-    attr_rec.type = IGRAPH_ATTRIBUTE_NUMERIC;
-    attr_rec.value = &weights;
-    VECTOR(attr_vec)[0] = &attr_rec;
-
-    /* Create graph */
-    IGRAPH_CHECK(igraph_empty(graph, no_of_nodes, directed));
-    IGRAPH_FINALLY(igraph_destroy, graph);
-    if (igraph_vector_int_size(&edges) > 0) {
-        IGRAPH_CHECK(igraph_add_edges(graph, &edges, &attr_vec));
-    }
-    IGRAPH_FINALLY_CLEAN(1);
-
-    /* Cleanup */
-    igraph_vector_int_destroy(&edges);
-    igraph_vector_destroy(&weights);
-    igraph_vector_ptr_destroy(&attr_vec);
-    IGRAPH_FINALLY_CLEAN(3);
 
     return IGRAPH_SUCCESS;
 }
@@ -1524,20 +1311,6 @@ igraph_error_t igraph_sparsemat_init_eye(
     }
 }
 
-/**
- * \function igraph_sparsemat_eye
- * \brief Creates a sparse identity matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_eye 0.10
- */
-
-igraph_error_t igraph_sparsemat_eye(
-    igraph_sparsemat_t *A, igraph_integer_t n, igraph_integer_t nzmax,
-    igraph_real_t value, igraph_bool_t compress
-) {
-    return igraph_sparsemat_init_eye(A, n, nzmax, value, compress);
-}
-
 static igraph_error_t igraph_i_sparsemat_init_diag_triplet(
     igraph_sparsemat_t *A, igraph_integer_t nzmax, const igraph_vector_t *values
 ) {
@@ -1602,20 +1375,6 @@ igraph_error_t igraph_sparsemat_init_diag(
     } else {
         return (igraph_i_sparsemat_init_diag_triplet(A, nzmax, values));
     }
-}
-
-/**
- * \function igraph_sparsemat_diag
- * \brief Creates a sparse diagonal matrix (deprecated alias).
- *
- * \deprecated-by igraph_sparsemat_init_diag 0.10
- */
-
-igraph_error_t igraph_sparsemat_diag(
-    igraph_sparsemat_t *A, igraph_integer_t nzmax, const igraph_vector_t *values,
-    igraph_bool_t compress
-) {
-    return igraph_sparsemat_init_diag(A, nzmax, values, compress);
 }
 
 static igraph_error_t igraph_i_sparsemat_arpack_multiply(igraph_real_t *to,
@@ -1702,11 +1461,11 @@ igraph_error_t igraph_sparsemat_arpack_rssolve(const igraph_sparsemat_t *A,
     igraph_integer_t n = igraph_sparsemat_nrow(A);
 
     if (n != igraph_sparsemat_ncol(A)) {
-        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Non-square matrix for ARPACK.", IGRAPH_EINVAL);
     }
 
     if (n > INT_MAX) {
-        IGRAPH_ERROR("Matrix too large for ARPACK", IGRAPH_EOVERFLOW);
+        IGRAPH_ERROR("Matrix too large for ARPACK.", IGRAPH_EOVERFLOW);
     }
 
     if (options == 0) {
@@ -1806,11 +1565,11 @@ igraph_error_t igraph_sparsemat_arpack_rnsolve(const igraph_sparsemat_t *A,
     igraph_integer_t n = igraph_sparsemat_nrow(A);
 
     if (n > INT_MAX) {
-        IGRAPH_ERROR("Matrix too large for ARPACK", IGRAPH_EOVERFLOW);
+        IGRAPH_ERROR("Matrix too large for ARPACK.", IGRAPH_EOVERFLOW);
     }
 
     if (n != igraph_sparsemat_ncol(A)) {
-        IGRAPH_ERROR("Non-square matrix for ARPACK", IGRAPH_NONSQUARE);
+        IGRAPH_ERROR("Non-square matrix for ARPACK.", IGRAPH_EINVAL);
     }
 
     if (options == 0) {

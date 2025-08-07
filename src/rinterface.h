@@ -37,7 +37,7 @@
 
 #include "uuid/uuid.h"
 
-#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
+#define IGRAPH_I_DESTROY igraph_i_attribute_destroy
 
 SEXP R_igraph_add_env(SEXP graph);
 
@@ -80,6 +80,7 @@ void R_igraph_sirlist_destroy(igraph_vector_ptr_t *sl);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info);
 
+// FIXME: Remove inconsistent prefix
 igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);
 igraph_error_t R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
 void           R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
