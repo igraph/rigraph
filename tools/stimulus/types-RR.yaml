@@ -97,9 +97,7 @@ VERTEX:
     CALL: '%I%-1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) == 0) {
-          stop("No vertex was specified")
-        }
+        check_vertex(%I%)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -110,9 +108,7 @@ VERTEX_ROOT:
     CALL: '%I%-1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
-        if (length(%I%) == 0) {
-          stop("No vertex was specified")
-        }
+        check_vertex(%I%)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es") && vcount(%I1%) != 0) {
