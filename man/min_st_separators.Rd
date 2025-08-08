@@ -33,21 +33,13 @@ Note that the code below returns \verb{\{1, 3\}} despite its subset \code{{1}} b
 separator as well. This is because \verb{\{1, 3\}} is minimal with respect to
 separating vertices 2 and 4.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
+\if{html}{\out{<div class="sourceCode {r, eval=FALSE}">}}\preformatted{g <- make_graph(~ 0-1-2-3-4-1)
 min_st_separators(g)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [[1]]
-#> + 1/5 vertex, named:
-#> [1] 1
-#> 
-#> [[2]]
-#> + 2/5 vertices, named:
-#> [1] 2 4
-#> 
-#> [[3]]
-#> + 2/5 vertices, named:
-#> [1] 1 3
+\if{html}{\out{<div class="sourceCode {r, echo=FALSE}">}}\preformatted{local_igraph_options(print.id = FALSE)
+g <- make_graph(~ 0-1-2-3-4-1)
+min_st_separators(g)
 }\if{html}{\out{</div>}}
 }
 
