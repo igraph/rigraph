@@ -1082,10 +1082,8 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @export
 #' @family graph layouts
 layout_on_sphere <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_layout_sphere, graph)
+  # Use the _impl function
+  layout_sphere_impl(graph)
 }
 
 
