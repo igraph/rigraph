@@ -359,13 +359,6 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
-  # Argument checks
-  n <- as.numeric(n)
-  alpha <- as.numeric(alpha)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
-
-  res
+  # Use the _impl function
+  sample_dirichlet_impl(n = n, alpha = alpha)
 }
