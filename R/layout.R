@@ -1109,11 +1109,9 @@ layout_randomly <- function(graph, dim = c(2, 3)) {
   dim <- igraph.match.arg(dim)
 
   if (dim == 2) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_layout_random, graph)
+    layout_random_impl(graph)
   } else if (dim == 3) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_layout_random_3d, graph)
+    layout_random_3d_impl(graph)
   }
 }
 
