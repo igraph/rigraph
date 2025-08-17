@@ -616,7 +616,6 @@ igraph_independence_number:
 #######################################
 # Layouts
 #######################################
-    DEPS: center ON graph
 
 igraph_layout_fruchterman_reingold:
     IGNORE: RR, RC, RInit
