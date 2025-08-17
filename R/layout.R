@@ -607,17 +607,8 @@ layout_as_bipartite <- function(
 ) {
   ## Argument checks
   ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
-  hgap <- as.numeric(hgap)
-  vgap <- as.numeric(vgap)
-  maxiter <- as.numeric(maxiter)
-
-  on.exit(.Call(R_igraph_finalizer))
-
-  ## Function call
-  res <- .Call(R_igraph_layout_bipartite, graph, types, hgap, vgap, maxiter)
-
-  res
+  # Use the _impl function
+  layout_bipartite_impl(graph, types, hgap, vgap, maxiter)
 }
 
 
