@@ -1,0 +1,29 @@
+From dea8c80ae39c7dff6bd3e5060ef6d6088352f200 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Sun, 17 Aug 2025 14:50:44 +0200
+Subject: [PATCH] Accept out parameter
+
+---
+ tools/stimulus/types-RC.yaml | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/tools/stimulus/types-RC.yaml b/tools/stimulus/types-RC.yaml
+index e0091a0a78..7255680cf4 100644
+--- a/tools/stimulus/types-RC.yaml
++++ b/tools/stimulus/types-RC.yaml
+@@ -427,6 +427,12 @@ ALL_VERTEX_QTY:
+             igraph_vector_destroy(&%C%);
+             IGRAPH_FINALLY_CLEAN(1);
+ 
++NEIMODE:
++    CALL:
++        IN: '%C%'
++        INOUT: '&%C%'
++        OUT: 'NULL'
++
+ VERTEX_SELECTOR:
+     CALL:
+         IN: '%C%'
+-- 
+2.49.0
+

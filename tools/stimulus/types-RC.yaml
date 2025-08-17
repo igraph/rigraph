@@ -427,6 +427,12 @@ ALL_VERTEX_QTY:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+NEIMODE:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: 'NULL'
+
 VERTEX_SELECTOR:
     CALL:
         IN: '%C%'
