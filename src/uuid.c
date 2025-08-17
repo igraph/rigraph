@@ -1,7 +1,11 @@
-#include "uuid.h"
+#include "vendor/uuid/uuid.h"
 
 #include <Rinternals.h>
-#include "igraph_random.h"
+
+#define RNG_BEGIN()    GetRNGstate()
+#define RNG_END()      PutRNGstate()
+void GetRNGstate(void);
+void PutRNGstate(void);
 
 SEXP UUID_gen(SEXP sTime) {
 
@@ -11,11 +15,11 @@ SEXP UUID_gen(SEXP sTime) {
     char c[40];
     int use_time = asInteger(sTime);
     if (use_time == TRUE)
-	uuid_generate_time(u);
+        uuid_generate_time(u);
     else if (use_time == FALSE)
-	uuid_generate_random(u);
+        uuid_generate_random(u);
     else
-	uuid_generate(u);
+        uuid_generate(u);
     uuid_unparse_lower(u, c);
 
     RNG_END();

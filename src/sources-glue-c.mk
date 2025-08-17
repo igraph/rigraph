@@ -1,1 +1,1 @@
-GLUE_C_SOURCES=rinterface.o rinterface_extra.o rrandom.o
+GLUE_C_SOURCES=rinterface.o rinterface_extra.o rrandom.o uuid.o
