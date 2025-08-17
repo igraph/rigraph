@@ -4073,6 +4073,22 @@ product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", 
   res
 }
 
+rooted_product_impl <- function(g1, g2, root) {
+  # Argument checks
+  ensure_igraph(g1)
+  ensure_igraph(g2)
+  root <- as_igraph_vs(g2, root)
+  if (length(root) == 0) {
+    stop("No vertex was specified")
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_rooted_product, g1, g2, root-1)
+
+  res
+}
+
 gomory_hu_tree_impl <- function(graph, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
