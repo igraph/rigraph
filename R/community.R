@@ -1693,19 +1693,18 @@ cluster_leiden <- function(
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   membership <- initial_membership
   if (n_iterations > 0) {
-    res <- .Call(
-      R_igraph_community_leiden,
+    res <- community_leiden_impl(
       graph,
-      weights,
-      vertex_weights,
-      as.numeric(resolution),
-      as.numeric(beta),
-      !is.null(membership),
-      as.numeric(n_iterations),
-      membership
+      weights = weights,
+      # FIXME: Also check below, might not be covered by tests
+      vertex.weights = vertex_weights,
+      resolution = resolution,
+      beta = beta,
+      start = !is.null(membership),
+      n.iterations = n_iterations,
+      membership = membership
     )
     membership <- res$membership
   } else {
@@ -1713,16 +1712,16 @@ cluster_leiden <- function(
     quality <- 0.0
     while (prev_quality < quality) {
       prev_quality <- quality
-      res <- .Call(
-        R_igraph_community_leiden,
+      res <- community_leiden_impl(
         graph,
-        weights,
-        vertex_weights,
-        as.numeric(resolution),
-        as.numeric(beta),
-        !is.null(membership),
-        1,
-        membership
+        weights = weights,
+        # FIXME: Also check above, might not be covered by tests
+        vertex.weights = vertex_weights,
+        resolution = resolution,
+        beta = beta,
+        start = !is.null(membership),
+        n.iterations = 1,
+        membership = membership
       )
       membership <- res$membership
       quality <- res$quality
