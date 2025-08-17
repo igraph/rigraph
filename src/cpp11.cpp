@@ -253,12 +253,14 @@ extern SEXP R_igraph_invalidate_cache(SEXP);
 extern SEXP R_igraph_is_acyclic(SEXP);
 extern SEXP R_igraph_is_biconnected(SEXP);
 extern SEXP R_igraph_is_bipartite(SEXP);
+extern SEXP R_igraph_is_bipartite_coloring(SEXP, SEXP);
 extern SEXP R_igraph_is_chordal(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_is_clique(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_is_complete(SEXP);
 extern SEXP R_igraph_is_connected(SEXP, SEXP);
 extern SEXP R_igraph_is_dag(SEXP);
 extern SEXP R_igraph_is_directed(SEXP);
+extern SEXP R_igraph_is_edge_coloring(SEXP, SEXP);
 extern SEXP R_igraph_is_eulerian(SEXP);
 extern SEXP R_igraph_is_forest(SEXP, SEXP);
 extern SEXP R_igraph_is_graphical(SEXP, SEXP, SEXP);
@@ -273,6 +275,7 @@ extern SEXP R_igraph_is_perfect(SEXP);
 extern SEXP R_igraph_is_separator(SEXP, SEXP);
 extern SEXP R_igraph_is_simple(SEXP);
 extern SEXP R_igraph_is_tree(SEXP, SEXP);
+extern SEXP R_igraph_is_vertex_coloring(SEXP, SEXP);
 extern SEXP R_igraph_isoclass(SEXP);
 extern SEXP R_igraph_isoclass_create(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_isoclass_subgraph(SEXP, SEXP);
@@ -725,12 +728,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_acyclic",                                 (DL_FUNC) &R_igraph_is_acyclic,                                  1},
     {"R_igraph_is_biconnected",                             (DL_FUNC) &R_igraph_is_biconnected,                              1},
     {"R_igraph_is_bipartite",                               (DL_FUNC) &R_igraph_is_bipartite,                                1},
+    {"R_igraph_is_bipartite_coloring",                      (DL_FUNC) &R_igraph_is_bipartite_coloring,                       2},
     {"R_igraph_is_chordal",                                 (DL_FUNC) &R_igraph_is_chordal,                                  5},
     {"R_igraph_is_clique",                                  (DL_FUNC) &R_igraph_is_clique,                                   3},
     {"R_igraph_is_complete",                                (DL_FUNC) &R_igraph_is_complete,                                 1},
     {"R_igraph_is_connected",                               (DL_FUNC) &R_igraph_is_connected,                                2},
     {"R_igraph_is_dag",                                     (DL_FUNC) &R_igraph_is_dag,                                      1},
     {"R_igraph_is_directed",                                (DL_FUNC) &R_igraph_is_directed,                                 1},
+    {"R_igraph_is_edge_coloring",                           (DL_FUNC) &R_igraph_is_edge_coloring,                            2},
     {"R_igraph_is_eulerian",                                (DL_FUNC) &R_igraph_is_eulerian,                                 1},
     {"R_igraph_is_forest",                                  (DL_FUNC) &R_igraph_is_forest,                                   2},
     {"R_igraph_is_graphical",                               (DL_FUNC) &R_igraph_is_graphical,                                3},
@@ -745,6 +750,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_is_separator",                               (DL_FUNC) &R_igraph_is_separator,                                2},
     {"R_igraph_is_simple",                                  (DL_FUNC) &R_igraph_is_simple,                                   1},
     {"R_igraph_is_tree",                                    (DL_FUNC) &R_igraph_is_tree,                                     2},
+    {"R_igraph_is_vertex_coloring",                         (DL_FUNC) &R_igraph_is_vertex_coloring,                          2},
     {"R_igraph_isoclass",                                   (DL_FUNC) &R_igraph_isoclass,                                    1},
     {"R_igraph_isoclass_create",                            (DL_FUNC) &R_igraph_isoclass_create,                             3},
     {"R_igraph_isoclass_subgraph",                          (DL_FUNC) &R_igraph_isoclass_subgraph,                           2},

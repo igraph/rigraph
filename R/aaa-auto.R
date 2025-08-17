@@ -5312,6 +5312,60 @@ vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors", 
   res
 }
 
+is_vertex_coloring_impl <- function(graph, types) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (missing(types)) {
+    if ("color" %in% vertex_attr_names(graph)) {
+      types <- V(graph)$color
+    } else {
+      types <- NULL
+    }
+  }
+  if (!is.null(types)) {
+    types <- as.numeric(types)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_vertex_coloring, graph, types)
+
+  res
+}
+
+is_bipartite_coloring_impl <- function(graph, types) {
+  # Argument checks
+  ensure_igraph(graph)
+  types <- handle_vertex_type_arg(types, graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_bipartite_coloring, graph, types)
+
+  res
+}
+
+is_edge_coloring_impl <- function(graph, types) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (missing(types)) {
+    if ("color" %in% edge_attr_names(graph)) {
+      types <- E(graph)$color
+    } else {
+      types <- NULL
+    }
+  }
+  if (!is.null(types)) {
+    types <- as.numeric(types)-1
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_is_edge_coloring, graph, types)
+
+  res
+}
+
 deterministic_optimal_imitation_impl <- function(graph, vid, optimality=c("maximum", "minimum"), quantities, strategies, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
