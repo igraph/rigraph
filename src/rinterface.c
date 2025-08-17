@@ -9440,6 +9440,36 @@ SEXP R_igraph_product(SEXP g1, SEXP g2, SEXP type) {
 }
 
 /*-------------------------------------------/
+/ igraph_rooted_product                      /
+/-------------------------------------------*/
+SEXP R_igraph_rooted_product(SEXP g1, SEXP g2, SEXP root) {
+                                        /* Declarations */
+  igraph_t c_res;
+  igraph_t c_g1;
+  igraph_t c_g2;
+  igraph_integer_t c_root;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(g1, &c_g1);
+  R_SEXP_to_igraph(g2, &c_g2);
+  c_root = (igraph_integer_t) REAL(root)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_rooted_product(&c_res, &c_g1, &c_g2, c_root));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_gomory_hu_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_gomory_hu_tree(SEXP graph, SEXP capacity) {
