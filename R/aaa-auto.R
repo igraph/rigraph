@@ -1525,9 +1525,10 @@ simplify_impl <- function(graph, remove.multiple=TRUE, remove.loops=TRUE, edge.a
   res
 }
 
-transitivity_undirected_impl <- function(graph, mode=NAN) {
+transitivity_undirected_impl <- function(graph, mode=c("nan", "zero")) {
   # Argument checks
   ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "nan"=0L, "zero"=1L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1536,10 +1537,11 @@ transitivity_undirected_impl <- function(graph, mode=NAN) {
   res
 }
 
-transitivity_local_undirected_impl <- function(graph, vids=V(graph), mode=NAN) {
+transitivity_local_undirected_impl <- function(graph, vids=V(graph), mode=c("nan", "zero")) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
+  mode <- switch(igraph.match.arg(mode), "nan"=0L, "zero"=1L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1548,9 +1550,10 @@ transitivity_local_undirected_impl <- function(graph, vids=V(graph), mode=NAN) {
   res
 }
 
-transitivity_avglocal_undirected_impl <- function(graph, mode=NAN) {
+transitivity_avglocal_undirected_impl <- function(graph, mode=c("nan", "zero")) {
   # Argument checks
   ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "nan"=0L, "zero"=1L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1559,7 +1562,7 @@ transitivity_avglocal_undirected_impl <- function(graph, mode=NAN) {
   res
 }
 
-transitivity_barrat_impl <- function(graph, vids=V(graph), weights=NULL, mode=NAN) {
+transitivity_barrat_impl <- function(graph, vids=V(graph), weights=NULL, mode=c("nan", "zero")) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
@@ -1571,6 +1574,7 @@ transitivity_barrat_impl <- function(graph, vids=V(graph), weights=NULL, mode=NA
   } else {
     weights <- NULL
   }
+  mode <- switch(igraph.match.arg(mode), "nan"=0L, "zero"=1L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3648,7 +3652,7 @@ from_hrg_dendrogram_impl <- function(hrg) {
   res
 }
 
-get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=ONCE) {
+get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=c("once", "none", "twice")) {
   # Argument checks
   ensure_igraph(graph)
   type <- switch(igraph.match.arg(type), "upper"=0L, "lower"=1L, "both"=2L)
@@ -3660,6 +3664,7 @@ get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), w
   } else {
     weights <- NULL
   }
+  loops <- switch(igraph.match.arg(loops), "none"=0L, "twice"=1L, "once"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

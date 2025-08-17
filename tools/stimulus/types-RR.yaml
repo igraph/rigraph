@@ -90,6 +90,11 @@ TOUNDIRECTED:
         MUTUAL: c("mutual", "collapse", "each")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1L, "each"=0L, "mutual"=2L)'
 
+TRANSITIVITY_MODE:
+    DEFAULT:
+        NAN: c("nan", "zero")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "nan"=0L, "zero"=1L)'
+
 INT:
     INCONV: '%I% <- as.integer(%I%)'
 
@@ -395,6 +400,11 @@ LAPLACIAN_NORMALIZATION:
     DEFAULT:
         UNNORMALIZED: c("unnormalized", "symmetric", "left", "right")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)'
+
+LOOPS:
+    DEFAULT:
+        ONCE: c("once", "none", "twice")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "none"=0L, "twice"=1L, "once"=2L)'
 
 SIRLIST: {}
 
