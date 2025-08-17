@@ -842,7 +842,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
 layout_in_circle <- function(graph, order = V(graph)) {
-  # Use the _impl function  
+  # Use the _impl function
   layout_circle_impl(graph, order)
 }
 
