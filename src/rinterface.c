@@ -4429,6 +4429,51 @@ SEXP R_igraph_degree_correlation_vector(SEXP graph, SEXP weights, SEXP from_mode
 }
 
 /*-------------------------------------------/
+/ igraph_rich_club_sequence                  /
+/-------------------------------------------*/
+SEXP R_igraph_rich_club_sequence(SEXP graph, SEXP weights, SEXP vertex_order, SEXP normalized, SEXP loops, SEXP directed) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_vector_t c_res;
+  igraph_vector_int_t c_vertex_order;
+  igraph_bool_t c_normalized;
+  igraph_bool_t c_loops;
+  igraph_bool_t c_directed;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_vector_int_copy(vertex_order, &c_vertex_order);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_order);
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_rich_club_sequence(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, &c_vertex_order, c_normalized, c_loops, c_directed));
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
+  igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vertex_order);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_strength                            /
 /-------------------------------------------*/
 SEXP R_igraph_strength(SEXP graph, SEXP vids, SEXP mode, SEXP loops, SEXP weights) {

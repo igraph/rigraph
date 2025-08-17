@@ -1954,6 +1954,29 @@ degree_correlation_vector_impl <- function(graph, weights=NULL, from.mode=c("out
   res
 }
 
+rich_club_sequence_impl <- function(graph, weights=NULL, vertex.order, normalized=TRUE, loops=FALSE, directed=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  vertex.order <- as.numeric(vertex.order)-1
+  normalized <- as.logical(normalized)
+  loops <- as.logical(loops)
+  directed <- as.logical(directed)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_rich_club_sequence, graph, weights, vertex.order, normalized, loops, directed)
+
+  res
+}
+
 strength_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=TRUE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
