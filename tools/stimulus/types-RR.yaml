@@ -223,6 +223,15 @@ BIPARTITE_TYPES:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
+ALL_BIPARTITE_TYPES:
+    INCONV: |-
+        %I% <- handle_vertex_type_arg(%I%, %I1%)
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name")
+            }
+
 BIPARTITE_TYPES_UNNAMED:
 
 VERTEX_COLOR:

@@ -203,8 +203,9 @@ igraph_adjlist:
 
 igraph_full_bipartite:
     PARAMS: |-
-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES types, INTEGER n1,
+        OUT GRAPH graph, OPTIONAL OUT ALL_BIPARTITE_TYPES types, INTEGER n1,
         INTEGER n2, BOOLEAN directed=False, NEIMODE mode=ALL
+    DEPS: types ON graph
 
 igraph_full_multipartite:
     PARAMS: |-
@@ -521,14 +522,14 @@ igraph_get_shortest_paths:
         VERTEX from, VERTEX_SELECTOR to=ALL, NEIMODE mode=OUT,
         OPTIONAL OUT VECTOR_INT parents,
         OPTIONAL OUT VECTOR_INT inbound_edges
-    DEPS: edges ON graph, from ON graph, to ON graph
+    DEPS: vertices ON graph, edges ON graph, from ON graph, to ON graph
 
 igraph_get_all_shortest_paths:
     PARAMS: |-
         GRAPH graph, OPTIONAL OUT VERTEXSET_LIST vertices,
         OPTIONAL OUT EDGESET_LIST edges, OPTIONAL OUT VECTOR_INT nrgeo,
         VERTEX from, VERTEX_SELECTOR to, NEIMODE mode=OUT
-    DEPS: edges ON graph, from ON graph, to ON graph
+    DEPS: vertices ON graph, edges ON graph, from ON graph, to ON graph
 
 igraph_distances_dijkstra:
     PARAMS: |-

@@ -319,8 +319,8 @@ full_bipartite_impl <- function(n1, n2, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_bipartite, n1, n2, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named()) {
-    names(res$types) <- vertex_attr(, "name", )
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$types) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -982,7 +982,7 @@ get_all_shortest_paths_impl <- function(graph, from, to, mode=c("out", "in", "al
   # Function call
   res <- .Call(R_igraph_get_all_shortest_paths, graph, from-1, to-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = , verts = V())
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
     res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
