@@ -117,7 +117,7 @@
       arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
     Condition
       Error in `arpack()`:
-      ! At vendor/cigraph/src/linalg/arpack.c:1102 : ARPACK error, N must be positive
+      ! At vendor/cigraph/src/linalg/arpack.c:1025 : N must be positive, ARPACK error
 
 ---
 
