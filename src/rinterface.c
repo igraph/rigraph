@@ -11921,7 +11921,7 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   R_SEXP_to_igraph(graph, &c_graph);
   R_SEXP_to_vector_bool(types, &c_types);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, c_mode));
+  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, NULL));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
