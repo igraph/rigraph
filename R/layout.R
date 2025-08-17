@@ -2046,11 +2046,8 @@ layout_with_mds <- function(
   dist[] <- as.numeric(dist)
   dim <- as.numeric(dim)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_layout_mds, graph, dist, dim)
-
-  res
+  layout_mds_impl(graph, dist, dim)
 }
 
 
