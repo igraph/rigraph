@@ -102,15 +102,12 @@
       min_st_separators(g_note)
     Output
       [[1]]
-      + 1/5 vertex, named, from something
-      [1] 1
+      [1] 2
       
       [[2]]
-      + 2/5 vertices, named, from something
-      [1] 2 4
+      [1] 3 5
       
       [[3]]
-      + 2/5 vertices, named, from something
-      [1] 1 3
+      [1] 2 4
       
 
