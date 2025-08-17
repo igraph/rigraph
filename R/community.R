@@ -2601,9 +2601,11 @@ cluster_optimal <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_optimal_modularity, graph, weights)
+  res <- community_optimal_modularity_impl(
+    graph,
+    weights = weights
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
