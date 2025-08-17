@@ -11872,6 +11872,107 @@ SEXP R_igraph_vertex_coloring_greedy(SEXP graph, SEXP heuristic) {
 }
 
 /*-------------------------------------------/
+/ igraph_is_vertex_coloring                  /
+/-------------------------------------------*/
+SEXP R_igraph_is_vertex_coloring(SEXP graph, SEXP types) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_types;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(types)) {
+    IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(types, &c_types));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_types, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_vertex_coloring(&c_graph, &c_types, &c_res));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_types);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_bipartite_coloring               /
+/-------------------------------------------*/
+SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_bool_t c_types;
+  igraph_bool_t c_res;
+  igraph_neimode_t c_mode;
+  SEXP res;
+  SEXP mode;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  R_SEXP_to_vector_bool(types, &c_types);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, NULL));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, mode);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("mode"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_edge_coloring                    /
+/-------------------------------------------*/
+SEXP R_igraph_is_edge_coloring(SEXP graph, SEXP types) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_types;
+  igraph_bool_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(types)) {
+    IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(types, &c_types));
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_types, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_is_edge_coloring(&c_graph, &c_types, &c_res));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_types);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(res=NEW_LOGICAL(1));
+  LOGICAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_deterministic_optimal_imitation     /
 /-------------------------------------------*/
 SEXP R_igraph_deterministic_optimal_imitation(SEXP graph, SEXP vid, SEXP optimality, SEXP quantities, SEXP strategies, SEXP mode) {
