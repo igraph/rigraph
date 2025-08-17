@@ -657,19 +657,8 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
     # vertices
     return(layout_in_circle(graph))
   }
-  center <- as_igraph_vs(graph, center)
-  if (length(center) == 0) {
-    center <- 1
-  }
-  if (!is.null(order)) {
-    order <- as.numeric(order) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_layout_star, graph, center - 1, order)
-
-  res
+  # Use the _impl function
+  layout_star_impl(graph, center, order)
 }
 
 
