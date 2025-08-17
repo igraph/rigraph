@@ -115,26 +115,16 @@ all_simple_paths <- function(
 ) {
   ## Argument checks
   ensure_igraph(graph)
-  from <- as_igraph_vs(graph, from)
-  to <- as_igraph_vs(graph, to)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(
-    R_igraph_get_all_simple_paths,
-    graph,
-    from - 1,
-    to - 1,
-    as.numeric(cutoff),
-    mode
+  res <- with_igraph_opt(
+    list(return.vs.es = FALSE),
+    get_all_simple_paths_impl(
+      graph,
+      from = from,
+      to = to,
+      mode = mode
+    )
   )
   res <- get.all.simple.paths.pp(res)
 
