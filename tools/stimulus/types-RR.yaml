@@ -10,9 +10,9 @@ INTEGER:
 
 REAL:
     DEFAULT:
-        ECROSSW: 1.0 - sqrt(density(graph))
-        ELENW: density(graph) / 10
-        NEDISTW: 0.2 * (1-density(graph))
+        ECROSSW: 1.0 - sqrt(edge_density(graph))
+        ELENW: edge_density(graph) / 10
+        NEDISTW: 0.2 * (1-edge_density(graph))
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
