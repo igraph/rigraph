@@ -1008,15 +1008,12 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
     height <- as.numeric(height)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call(R_igraph_layout_grid, graph, width)
+    layout_grid_impl(graph, width)
   } else {
-    res <- .Call(R_igraph_layout_grid_3d, graph, width, height)
+    layout_grid_3d_impl(graph, width, height)
   }
-
-  res
 }
 
 
