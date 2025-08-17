@@ -2407,38 +2407,16 @@ cluster_label_prop0 <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  if (!is.null(initial)) {
-    initial <- as.numeric(initial)
-  }
-  if (!is.null(fixed)) {
-    fixed <- as.logical(fixed)
-  }
+  # Necessary because evaluated later
+  mode <- igraph.match.arg(mode)
 
-  directed <- switch(
-    igraph.match.arg(mode),
-    "out" = TRUE,
-    "in" = TRUE,
-    "all" = FALSE
-  )
-  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  membership <- .Call(
-    R_igraph_community_label_propagation,
+  membership <- community_label_propagation_impl(
     graph,
-    mode,
-    weights,
-    initial,
-    fixed
+    mode = mode,
+    weights = weights,
+    initial = initial,
+    fixed = fixed
   )
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2447,7 +2425,14 @@ cluster_label_prop0 <- function(
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
   res$membership <- membership + 1
-  res$modularity <- modularity(graph, res$membership, weights, directed)
+
+  res$modularity <- modularity(
+    graph,
+    res$membership,
+    weights,
+    directed = (mode != "all")
+  )
+
   class(res) <- "communities"
   res
 }
