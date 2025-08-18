@@ -4060,11 +4060,11 @@ mycielskian_impl <- function(graph, k=1) {
   res
 }
 
-product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", "tensor")) {
+product_impl <- function(g1, g2, type=c("cartesian", "lexicographic", "strong", "tensor", "modular")) {
   # Argument checks
   ensure_igraph(g1)
   ensure_igraph(g2)
-  type <- switch(igraph.match.arg(type), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L)
+  type <- switch(igraph.match.arg(type), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L, "modular"=4L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
