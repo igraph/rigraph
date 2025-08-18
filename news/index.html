@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9079</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.4.9080</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,53 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.1.4.9080" id="igraph-2149080">igraph 2.1.4.9080<a class="anchor" aria-label="anchor" href="#igraph-2149080"></a></h2>
+<div class="section level3">
+<h3 id="features-2-1-4-9080">Features<a class="anchor" aria-label="anchor" href="#features-2-1-4-9080"></a></h3>
+<ul><li>Generate almost all R implementations (<a href="https://github.com/igraph/rigraph/issues/2047" class="external-link">#2047</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-1-4-9080">Chore<a class="anchor" aria-label="anchor" href="#chore-2-1-4-9080"></a></h3>
+<ul><li><p>Move uuid glue out of vendoring.</p></li>
+<li><p>Fix vendoring script.</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_on_sphere.html">layout_on_sphere()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2053" class="external-link">#2053</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_randomly.html">layout_randomly()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2054" class="external-link">#2054</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_on_grid.html">layout_on_grid()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2052" class="external-link">#2052</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_with_mds.html">layout_with_mds()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2055" class="external-link">#2055</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_as_star.html">layout_as_star()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2050" class="external-link">#2050</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_as_bipartite.html">layout_as_bipartite()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2049" class="external-link">#2049</a>).</p></li>
+<li><p>Remove call from <code><a href="../reference/layout_in_circle.html">layout_in_circle()</a></code> (<a href="https://github.com/igraph/rigraph/issues/2051" class="external-link">#2051</a>).</p></li>
+<li><p>Fix call in <code><a href="../reference/sample_dirichlet.html">sample_dirichlet()</a></code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/sample_sphere_volume.html">sample_sphere_volume()</a></code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/sample_sphere_surface.html">sample_sphere_surface()</a></code>.</p></li>
+<li><p>Fix syntax.</p></li>
+<li><p>Fix call in <code><a href="../reference/graph.lcf.html">graph.lcf()</a></code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/distances.html">all_shortest_paths()</a></code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/all_simple_paths.html">all_simple_paths()</a></code>.</p></li>
+<li><p>Fix call in <code>get.incidence.dense()</code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/cluster_optimal.html">cluster_optimal()</a></code>.</p></li>
+<li><p>Fix call in <code><a href="../reference/cluster_leiden.html">cluster_leiden()</a></code>.</p></li>
+<li><p>Avoid call in <code>cluster_label_prop0()</code>.</p></li>
+<li><p>Fix remaining Stimulus types (<a href="https://github.com/igraph/rigraph/issues/2048" class="external-link">#2048</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="vendor-2-1-4-9080">vendor<a class="anchor" aria-label="anchor" href="#vendor-2-1-4-9080"></a></h3>
+<ul><li><p>Update vendored sources to <a href="mailto:igraph/igraph@29087cd09a1aeb0ca4a1b490f1437af9826e146e" class="email">igraph/igraph@29087cd09a1aeb0ca4a1b490f1437af9826e146e</a> (<a href="https://github.com/igraph/rigraph/issues/2068" class="external-link">#2068</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@187e713b7cb7c369a44f171fec4aa6ec085f0c70" class="email">igraph/igraph@187e713b7cb7c369a44f171fec4aa6ec085f0c70</a> (<a href="https://github.com/igraph/rigraph/issues/2067" class="external-link">#2067</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@089ddde82352d222552408cb233288b1cb9a459b" class="email">igraph/igraph@089ddde82352d222552408cb233288b1cb9a459b</a> (<a href="https://github.com/igraph/rigraph/issues/2066" class="external-link">#2066</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@02a5288427e435ba43c95a4d9b3707712296d2a6" class="email">igraph/igraph@02a5288427e435ba43c95a4d9b3707712296d2a6</a> (<a href="https://github.com/igraph/rigraph/issues/2065" class="external-link">#2065</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@378629ea57ee631844c391237faa021d8652cbf4" class="email">igraph/igraph@378629ea57ee631844c391237faa021d8652cbf4</a> (<a href="https://github.com/igraph/rigraph/issues/2064" class="external-link">#2064</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@5819c1bcb3f8a5835867ccafd2f8901beff1ac9d" class="email">igraph/igraph@5819c1bcb3f8a5835867ccafd2f8901beff1ac9d</a> (<a href="https://github.com/igraph/rigraph/issues/2063" class="external-link">#2063</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@2b9db4b52dc78623c830131b8662de944c827cbc" class="email">igraph/igraph@2b9db4b52dc78623c830131b8662de944c827cbc</a> (<a href="https://github.com/igraph/rigraph/issues/2062" class="external-link">#2062</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@693c0caa4f1a67788867fc6fb81e649b1876888a" class="email">igraph/igraph@693c0caa4f1a67788867fc6fb81e649b1876888a</a> (<a href="https://github.com/igraph/rigraph/issues/2061" class="external-link">#2061</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@5ed8bdee3ad2261f0c62225159b6d56c370bfb90" class="email">igraph/igraph@5ed8bdee3ad2261f0c62225159b6d56c370bfb90</a> (<a href="https://github.com/igraph/rigraph/issues/2060" class="external-link">#2060</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@e9e2707e3e881f31b615c5165b0b144fcead71c6" class="email">igraph/igraph@e9e2707e3e881f31b615c5165b0b144fcead71c6</a> (<a href="https://github.com/igraph/rigraph/issues/2059" class="external-link">#2059</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@bb48c90c682825731ea6f4a96712cf517c7f0c7d" class="email">igraph/igraph@bb48c90c682825731ea6f4a96712cf517c7f0c7d</a> (<a href="https://github.com/igraph/rigraph/issues/2057" class="external-link">#2057</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@552af428369d3fc873c1d5daf2eb40197e1e8cc3" class="email">igraph/igraph@552af428369d3fc873c1d5daf2eb40197e1e8cc3</a> (<a href="https://github.com/igraph/rigraph/issues/2056" class="external-link">#2056</a>).</p></li>
+<li><p>Update vendored sources to <a href="mailto:igraph/igraph@7adb4c4d47e799d6137e13dafc03ea5e4da76a01" class="email">igraph/igraph@7adb4c4d47e799d6137e13dafc03ea5e4da76a01</a> (<a href="https://github.com/igraph/rigraph/issues/2045" class="external-link">#2045</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.1.4.9079" id="igraph-2149079">igraph 2.1.4.9079<a class="anchor" aria-label="anchor" href="#igraph-2149079"></a></h2>
 <div class="section level3">
