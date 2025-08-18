@@ -1,5 +1,84 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9080
+
+## Features
+
+- Generate almost all R implementations (#2047).
+
+## Chore
+
+- Move uuid glue out of vendoring.
+
+- Fix vendoring script.
+
+- Remove call from `layout_on_sphere()` (#2053).
+
+- Remove call from `layout_randomly()` (#2054).
+
+- Remove call from `layout_on_grid()` (#2052).
+
+- Remove call from `layout_with_mds()` (#2055).
+
+- Remove call from `layout_as_star()` (#2050).
+
+- Remove call from `layout_as_bipartite()` (#2049).
+
+- Remove call from `layout_in_circle()` (#2051).
+
+- Fix call in `sample_dirichlet()`.
+
+- Fix call in `sample_sphere_volume()`.
+
+- Fix call in `sample_sphere_surface()`.
+
+- Fix syntax.
+
+- Fix call in `graph.lcf()`.
+
+- Fix call in `all_shortest_paths()`.
+
+- Fix call in `all_simple_paths()`.
+
+- Fix call in `get.incidence.dense()`.
+
+- Fix call in `cluster_optimal()`.
+
+- Fix call in `cluster_leiden()`.
+
+- Avoid call in `cluster_label_prop0()`.
+
+- Fix remaining Stimulus types (#2048).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@29087cd09a1aeb0ca4a1b490f1437af9826e146e (#2068).
+
+- Update vendored sources to igraph/igraph@187e713b7cb7c369a44f171fec4aa6ec085f0c70 (#2067).
+
+- Update vendored sources to igraph/igraph@089ddde82352d222552408cb233288b1cb9a459b (#2066).
+
+- Update vendored sources to igraph/igraph@02a5288427e435ba43c95a4d9b3707712296d2a6 (#2065).
+
+- Update vendored sources to igraph/igraph@378629ea57ee631844c391237faa021d8652cbf4 (#2064).
+
+- Update vendored sources to igraph/igraph@5819c1bcb3f8a5835867ccafd2f8901beff1ac9d (#2063).
+
+- Update vendored sources to igraph/igraph@2b9db4b52dc78623c830131b8662de944c827cbc (#2062).
+
+- Update vendored sources to igraph/igraph@693c0caa4f1a67788867fc6fb81e649b1876888a (#2061).
+
+- Update vendored sources to igraph/igraph@5ed8bdee3ad2261f0c62225159b6d56c370bfb90 (#2060).
+
+- Update vendored sources to igraph/igraph@e9e2707e3e881f31b615c5165b0b144fcead71c6 (#2059).
+
+- Update vendored sources to igraph/igraph@bb48c90c682825731ea6f4a96712cf517c7f0c7d (#2057).
+
+- Update vendored sources to igraph/igraph@552af428369d3fc873c1d5daf2eb40197e1e8cc3 (#2056).
+
+- Update vendored sources to igraph/igraph@7adb4c4d47e799d6137e13dafc03ea5e4da76a01 (#2045).
+
+
 # igraph 2.1.4.9079
 
 ## vendor
