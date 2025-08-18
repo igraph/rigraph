@@ -454,12 +454,13 @@ EDGE_TYPE_SW:
 
 GRAPH_PRODUCT_TYPE:
     DEFAULT:
-        CARTESIAN: c("cartesian", "lexicographic", "strong", "tensor")
-        LEXICOGRAPHIC: c("lexicographic", "cartesian", "strong", "tensor")
-        STRONG: c("strong", "cartesian", "lexicographic", "tensor")
-        TENSOR: c("tensor", "cartesian", "lexicographic", "strong")
+        CARTESIAN: c("cartesian", "lexicographic", "strong", "tensor", "modular")
+        LEXICOGRAPHIC: c("lexicographic", "cartesian", "strong", "tensor", "modular")
+        STRONG: c("strong", "cartesian", "lexicographic", "tensor", "modular")
+        TENSOR: c("tensor", "cartesian", "lexicographic", "strong", "modular")
+        MODULAR: c("modular", "cartesian", "lexicographic", "strong", "tensor")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L)
+        %I% <- switch(igraph.match.arg(%I%), "cartesian"=0L, "lexicographic"=1L, "strong"=2L, "tensor"=3L, "modular"=4L)
 
 RANDOM_TREE_METHOD:
     DEFAULT:
