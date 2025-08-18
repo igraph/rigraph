@@ -5059,13 +5059,13 @@ sir_impl <- function(graph, beta, gamma, no.sim=100) {
   res
 }
 
-convex_hull_impl <- function(data) {
+convex_hull_2d_impl <- function(data) {
   # Argument checks
   data[] <- as.numeric(data)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_convex_hull, data)
+  res <- .Call(R_igraph_convex_hull_2d, data)
 
   res
 }
