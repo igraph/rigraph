@@ -11283,9 +11283,9 @@ SEXP R_igraph_sir(SEXP graph, SEXP beta, SEXP gamma, SEXP no_sim) {
 }
 
 /*-------------------------------------------/
-/ igraph_convex_hull                         /
+/ igraph_convex_hull_2d                      /
 /-------------------------------------------*/
-SEXP R_igraph_convex_hull(SEXP data) {
+SEXP R_igraph_convex_hull_2d(SEXP data) {
                                         /* Declarations */
   igraph_matrix_t c_data;
   igraph_vector_int_t c_resverts;
@@ -11301,7 +11301,7 @@ SEXP R_igraph_convex_hull(SEXP data) {
   IGRAPH_R_CHECK(igraph_matrix_init(&c_rescoords, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_rescoords);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_convex_hull(&c_data, &c_resverts, &c_rescoords));
+  IGRAPH_R_CHECK(igraph_convex_hull_2d(&c_data, &c_resverts, &c_rescoords));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
