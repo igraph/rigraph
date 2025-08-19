@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9081
+
+## Chore
+
+- Add modular product to GRAPH_PRODUCT_TYPE in interfaces.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@6f25b860c91f0a94ae32d7eb70f88478edb895ce (#2080).
+
+- Update vendored sources to igraph/igraph@03e7e6e86d0fb88c70ca50ebca075b0b503ea33a (#2079).
+
+- Update vendored sources to igraph/igraph@90852c630f7620eb2c1b3702c8b2aeac223f1e21 (#2078).
+
+- Update vendored sources to igraph/igraph@40b84ab4906f8438ad76f580993a59a595d78ade (#2077).
+
+- Update vendored sources to igraph/igraph@425e6f074a2c35e3c9a720b4b9a8a89d73c6bc4d (#2076).
+
+- Update vendored sources to igraph/igraph@0150a9ce3e23ea58674318693a42db45425ba639 (#2075).
+
+- Update vendored sources to igraph/igraph@a4d8f0a6e84b1793a054279276024541a5998280 (#2074).
+
+- Update vendored sources to igraph/igraph@16d599e36a62c221ae39b496b349cf30ed4e63bf (#2073).
+
+- Update vendored sources to igraph/igraph@c0124eec9a8ad2d16ddabbcab0802e39c12e283d (#2072).
+
+- Update vendored sources to igraph/igraph@f7c7b43367cef17dc34efd11b9639f5dfa5a62f3 (#2071).
+
+- Update vendored sources to igraph/igraph@c50c977a1686731a4158915fe49f8b9b2d2dcfab (#2070).
+
+
 # igraph 2.1.4.9080
 
 ## Features
