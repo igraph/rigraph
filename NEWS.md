@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9083
+
+## Chore
+
+- Improve readability of code about not all values being `NA` (#1870, #2082).
+
+
 # igraph 2.1.4.9082
 
 ## vendor
