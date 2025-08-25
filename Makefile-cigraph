@@ -72,7 +72,7 @@ src/sources.mk:
 
 # R source and doc files
 
-RSRC := $(shell git ls-files R doc inst demo NEWS cleanup.win configure.win)
+RSRC := $(shell git ls-files R doc inst NEWS cleanup.win configure.win)
 
 # ARPACK Fortran sources
 
