@@ -2382,11 +2382,10 @@ igraph_error_t R_igraph_progress_handler(const char *message, double percent,
   SEXP l3 = PROTECT(Rf_lang2(l1, l2));
   SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(percent));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
-  SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6));
-  PROTECT(ec=Rf_eval(l7, rho));
+  SEXP l4 = PROTECT(Rf_ScalarReal(percent));
+  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
+  SEXP l6 = PROTECT(Rf_lang3(l3, l4, l5));
+  PROTECT(ec=Rf_eval(l6, rho));
 
   ecint=INTEGER(ec)[0];
   UNPROTECT(11);
@@ -2485,12 +2484,11 @@ SEXP R_igraph_finalizer(void) {
   SEXP l3 = PROTECT(Rf_lang2(l1, l2));
   SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
 
-  SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
-  SEXP l5 = PROTECT(Rf_ScalarReal(0.0));
-  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(""))));
-  SEXP l7 = PROTECT(Rf_ScalarLogical(1));
-  SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7));
-  Rf_eval(l8, rho);
+  SEXP l4 = PROTECT(Rf_ScalarReal(0.0));
+  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(""))));
+  SEXP l6 = PROTECT(Rf_ScalarLogical(1));
+  SEXP l7 = PROTECT(Rf_lang4(l3, l4, l5, l6));
+  Rf_eval(l7, rho);
   UNPROTECT(11);
   return R_NilValue;
 }
