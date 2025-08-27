@@ -952,9 +952,7 @@ get_all_shortest_paths_impl <- function(graph, from, to, mode=c("out", "in", "al
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
@@ -974,9 +972,7 @@ get_all_shortest_paths_dijkstra_impl <- function(graph, from, to=V(graph), weigh
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1027,9 +1023,7 @@ get_all_simple_paths_impl <- function(graph, from, to=V(graph), cutoff=-1, mode=
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(from)
   to <- as_igraph_vs(graph, to)
   cutoff <- as.numeric(cutoff)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
@@ -1109,7 +1103,6 @@ get_widest_paths_impl <- function(graph, from, to=V(graph), weights=NULL, mode=c
   from <- as_igraph_vs(graph, from)
   check_vertex(from)
   to <- as_igraph_vs(graph, to)
-  check_vertex(to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2941,9 +2934,7 @@ layout_star_impl <- function(graph, center=V(graph)[1], order=NULL) {
   # Argument checks
   ensure_igraph(graph)
   center <- as_igraph_vs(graph, center)
-  if (length(center) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(center)
   if (!is.null(order)) order <- as.numeric(order)-1
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -4041,9 +4032,7 @@ rooted_product_impl <- function(g1, g2, root) {
   ensure_igraph(g1)
   ensure_igraph(g2)
   root <- as_igraph_vs(g2, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(root)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -4146,13 +4135,9 @@ st_mincut_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(source)
   target <- as_igraph_vs(graph, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(target)
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
