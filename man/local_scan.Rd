@@ -12,6 +12,7 @@ local_scan(
   weighted = FALSE,
   mode = c("out", "in", "all"),
   neighborhoods = NULL,
+  weights = NULL,
   ...
 )
 }
@@ -52,6 +53,8 @@ for multiple \code{graph.them} arguments. Then the neighborhoods can be
 calculated on \code{graph.us} and used with multiple graphs. In
 practice, this is currently slower than simply using \code{graph.them}
 multiple times.}
+
+\item{weights}{Numeric vector, edge weights to use for the scan instead of the edge attribute weight. If \code{NULL} (the default) the edge weight attribute is used.}
 
 \item{\dots}{Arguments passed to \code{FUN}, the function that computes
 the local statistics.}

@@ -219,11 +219,10 @@ fit_power_law <- function(
 }
 
 power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
-  if (length(x) == 0) {
-    stop("zero length vector")
-  }
-  if (length(x) == 1) {
-    stop("vector should be at least of length two")
+  if (length(x) < 2) {
+    cli::cli_abort(
+      "{.arg x} must be a vector of length at least 2, not {length(x)}."
+    )
   }
 
   xmin <- xmin %||% min(x)

@@ -1363,38 +1363,29 @@ all_shortest_paths <- function(
   weights = NULL
 ) {
   ensure_igraph(graph)
+
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
     }
-  } else {
-    if (length(weights) == 1 && is.na(weights)) {
-      weights <- NULL
-    } else {
-      weights <- as.numeric(weights)
-    }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   if (is.null(weights)) {
-    res <- .Call(
-      R_igraph_get_all_shortest_paths,
+    res <- get_all_shortest_paths_impl(
       graph,
-      as_igraph_vs(graph, from) - 1,
-      as_igraph_vs(graph, to) - 1,
-      as.numeric(mode)
+      from = from,
+      to = to,
+      mode = mode
     )
   } else {
-    res <- .Call(
-      R_igraph_get_all_shortest_paths_dijkstra,
+    res <- get_all_shortest_paths_dijkstra_impl(
       graph,
-      as_igraph_vs(graph, from) - 1,
-      as_igraph_vs(graph, to) - 1,
-      weights,
-      as.numeric(mode)
+      from = from,
+      to = to,
+      weights = weights,
+      mode = mode
     )
   }
 

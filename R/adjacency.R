@@ -415,7 +415,7 @@ graph.adjacency.dense <- function(
   diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
-    stop("Adjacency matrices must be square.")
+    cli::cli_abort("Adjacency matrices must be square.")
   }
 
   mode(adjmatrix) <- "double"

@@ -52,10 +52,10 @@ threshold.net <- function(graph, level) {
 
 graphlets.old <- function(graph) {
   if (!is_weighted(graph)) {
-    stop("Graph not weighted")
+    cli::cli_abort("Graph not weighted")
   }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
-    stop("Edge weights must be non-negative and finite")
+    cli::cli_abort("Edge weights must be non-negative and finite")
   }
 
   ## Do all thresholds
@@ -94,10 +94,10 @@ test_that("Graphlets work for a bigger graph", {
 
 graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   if (!is_weighted(graph)) {
-    stop("Graph not weighted")
+    cli::cli_abort("Graph not weighted")
   }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
-    stop("Edge weights must be non-negative and finite")
+    cli::cli_abort("Edge weights must be non-negative and finite")
   }
   if (
     length(iter) != 1 ||
@@ -105,7 +105,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
       !is.finite(iter) ||
       iter != as.integer(iter)
   ) {
-    stop("`iter' must be a non-negative finite integer scalar")
+    cli::cli_abort("`iter' must be a non-negative finite integer scalar")
   }
 
   clf <- cliques

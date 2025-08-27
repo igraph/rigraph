@@ -288,17 +288,13 @@ embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 #' })
 #' vec.norm
 sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_surface, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_surface_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample vectors uniformly from the volume of a sphere
@@ -330,17 +326,13 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' })
 #' vec.norm
 sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
-  # Argument checks
-  dim <- as.numeric(dim)
-  n <- as.numeric(n)
-  radius <- as.numeric(radius)
-  positive <- as.logical(positive)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_sphere_volume, dim, n, radius, positive)
-
-  res
+  # Use the _impl function
+  sample_sphere_volume_impl(
+    dim = dim,
+    n = n,
+    radius = radius,
+    positive = positive
+  )
 }
 
 #' Sample from a Dirichlet distribution
@@ -367,13 +359,6 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
-  # Argument checks
-  n <- as.numeric(n)
-  alpha <- as.numeric(alpha)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
-
-  res
+  # Use the _impl function
+  sample_dirichlet_impl(n = n, alpha = alpha)
 }

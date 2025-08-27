@@ -325,3 +325,10 @@ test_that("add_layout_ works", {
     graph_attr("layout")
   expect_identical(l1, l3)
 })
+
+test_that("layout_randomly() errors well", {
+  g <- make_empty_graph(1)
+  expect_snapshot(error = TRUE, {
+    layout_randomly(g, dim = 4)
+  })
+})

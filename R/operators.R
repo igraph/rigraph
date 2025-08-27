@@ -119,26 +119,26 @@ graph.complementer <- function(graph, loops = FALSE) {
 ###################################################################
 
 rename.attr.if.needed <- function(
-  type,
+  type = c("g", "v", "e"),
   graphs,
   newsize = NULL,
   maps = NULL,
   maps2 = NULL,
   ignore = character()
 ) {
+  type <- igraph.match.arg(type)
+
   listfun <- switch(
     type,
     "g" = graph_attr_names,
     "v" = vertex_attr_names,
-    "e" = edge_attr_names,
-    stop("Internal igraph error")
+    "e" = edge_attr_names
   )
   getfun <- switch(
     type,
     "g" = graph_attr,
     "v" = vertex_attr,
-    "e" = edge_attr,
-    stop("Internal igraph error")
+    "e" = edge_attr
   )
   alist <- lapply(graphs, listfun)
   an <- unique(unlist(alist))
@@ -1176,7 +1176,7 @@ path <- function(...) {
     ## Adding named vertices
     res <- add_vertices(e1, length(e2), name = e2)
   } else {
-    cli::cli_abort("Cannot add {.obj_type_friendly type} to igraph graph.")
+    cli::cli_abort("Cannot add {.obj_type_friendly {type}} to igraph graph.")
   }
   res
 }
@@ -1257,7 +1257,7 @@ path <- function(...) {
     res <- delete_vertices(e1, e2)
   } else {
     cli::cli_abort(
-      "Cannot substract {.obj_type_friendly type} from igraph graph."
+      "Cannot substract {.obj_type_friendly {type}} from igraph graph."
     )
   }
   res
@@ -1310,7 +1310,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
     rep.igraph(x, n)
   } else {
     cli::cli_abort(
-      "Cannot multiply igraph graph with {.obj_type_friendly type}."
+      "Cannot multiply igraph graph with {.obj_type_friendly {type}}."
     )
   }
 }

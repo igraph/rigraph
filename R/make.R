@@ -383,20 +383,8 @@ graph.star <- function(
 graph.lcf <- function(n, shifts, repeats = 1) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
-  # Argument checks
-  n <- as.numeric(n)
-  shifts <- as.numeric(shifts)
-  repeats <- as.numeric(repeats)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_lcf_vector, n, shifts, repeats)
-
-  if (igraph_opt("add.params")) {
-    res$name <- "LCF graph"
-  }
-
-  res
+  # Use the _impl function
+  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
 } # nocov end
 
 #' Create a lattice graph

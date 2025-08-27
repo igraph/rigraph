@@ -92,11 +92,8 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop(
-      "Don't know how to downgrade graph from version ",
-      g_ver,
-      " to ",
-      p_ver
+    cli::cli_abort(
+      "Don't know how to downgrade graph from version {g_ver} to {p_ver}."
     )
   }
 
@@ -119,7 +116,9 @@ upgrade_graph <- function(graph) {
 
     graph
   } else {
-    stop("Don't know how to upgrade graph from version ", g_ver, " to ", p_ver)
+    cli::cli_abort(
+      "Don't know how to upgrade graph from version {g_ver} to {p_ver}."
+    )
   }
 }
 
@@ -157,8 +156,9 @@ warn_version <- function(graph) {
     return(TRUE)
   }
 
-  stop(
-    "This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again."
+  cli::cli_abort(
+    "This graph was created by a newer igraph version.
+    Please install the latest version of igraph and try again."
   )
 }
 

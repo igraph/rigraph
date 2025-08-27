@@ -26,3 +26,9 @@ test_that("fit_power_law() works", {
   expect_equal(fit[names(fit) != "KS.p"], expected)
   expect_equal(fit$KS.p, expected_p, tolerance = 1e-2)
 })
+
+test_that("fit_power_law() errors well", {
+  expect_snapshot(error = TRUE, {
+    fit_power_law(1, implementation = "R.mle")
+  })
+})

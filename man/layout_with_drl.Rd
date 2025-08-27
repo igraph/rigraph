@@ -17,7 +17,7 @@ layout_with_drl(
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,
   weights = NULL,
-  dim = 2
+  dim = c(2, 3)
 )
 
 with_drl(...)

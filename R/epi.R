@@ -31,9 +31,6 @@ time_bins <- function(x, middle = TRUE) {
 #' @importFrom stats IQR
 time_bins.sir <- function(x, middle = TRUE) {
   sir <- x
-  if (!inherits(sir, "sir")) {
-    stop("This is not an SIR model output")
-  }
 
   big.time <- unlist(sapply(sir, "[[", "times"))
   medlen <- median(sapply(lapply(sir, "[[", "times"), length))
@@ -54,9 +51,6 @@ time_bins.sir <- function(x, middle = TRUE) {
 #' @export
 median.sir <- function(x, na.rm = FALSE, ...) {
   sir <- x
-  if (!inherits(sir, "sir")) {
-    stop("This is not an SIR model output")
-  }
   times <- unlist(sapply(sir, "[[", "times"))
   big.N.NS <- unlist(sapply(sir, "[[", "NS"))
   big.N.NI <- unlist(sapply(sir, "[[", "NI"))
@@ -74,9 +68,6 @@ median.sir <- function(x, na.rm = FALSE, ...) {
 #' @export
 quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
-  if (!inherits(sir, "sir")) {
-    stop("This is not an SIR model output")
-  }
   comp <- toupper(igraph.match.arg(comp))
   times <- unlist(sapply(sir, "[[", "times"))
   big.N <- unlist(sapply(sir, function(x) {
@@ -168,12 +159,9 @@ plot.sir <- function(
 ) {
   sir <- x
 
-  if (!inherits(sir, "sir")) {
-    stop("This is not an SIR model output")
-  }
   comp <- toupper(igraph.match.arg(comp))
   if (!all(quantiles >= 0 & quantiles <= 1)) {
-    stop("Quantiles should be in [0,1]")
+    cli::cli_abort("All {.arg quantiles} should be in [0,1].")
   }
 
   if (is.null(color)) {
