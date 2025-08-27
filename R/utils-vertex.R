@@ -14,7 +14,8 @@ check_vertex <- function(arg, call = rlang::caller_env()) {
 
   if (!ok) {
     cli::cli_abort(
-      "Can't find vertex corresponding to {.arg {arg_name}}."
+      "Can't find vertex corresponding to {.arg {arg_name}}.",
+      call = call
     )
   }
 }

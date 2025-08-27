@@ -3,7 +3,7 @@
     Code
       st_cuts(g_path, source = "a", target = NULL)
     Condition
-      Error in `check_vertex()`:
+      Error in `st_cuts()`:
       ! Can't find vertex corresponding to `target`.
 
 ---
@@ -11,7 +11,7 @@
     Code
       st_cuts(g_path, source = NULL, target = "a")
     Condition
-      Error in `check_vertex()`:
+      Error in `st_cuts()`:
       ! Can't find vertex corresponding to `source`.
 
 ---
@@ -19,7 +19,7 @@
     Code
       st_min_cuts(g_path, source = "a", target = NULL)
     Condition
-      Error in `check_vertex()`:
+      Error in `st_min_cuts()`:
       ! Can't find vertex corresponding to `target`.
 
 ---
@@ -27,7 +27,7 @@
     Code
       st_min_cuts(g_path, source = NULL, target = "a")
     Condition
-      Error in `check_vertex()`:
+      Error in `st_min_cuts()`:
       ! Can't find vertex corresponding to `source`.
 
 # vertex_connectivity error works
