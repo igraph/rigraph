@@ -956,9 +956,8 @@ get.incidence.dense <- function(
   call = rlang::caller_env()
 ) {
   if (is.null(attr)) {
-    on.exit(.Call(R_igraph_finalizer))
     ## Function call
-    res <- .Call(R_igraph_get_biadjacency, graph, types)
+    res <- get_biadjacency_impl(graph, types)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[res$row_ids]
@@ -967,53 +966,55 @@ get.incidence.dense <- function(
       rownames(res$res) <- res$row_ids
       colnames(res$res) <- res$col_ids
     }
-    res$res
-  } else {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      cli::cli_abort("No such edge attribute", call = call)
-    }
-
-    vc <- vcount(graph)
-    n1 <- sum(!types)
-    n2 <- vc - n1
-    res <- matrix(0, n1, n2)
-
-    recode <- numeric(vc)
-    # move from 1..n indexing to 1..n1 row indices for type == FALSE
-    # and 1..n2 col indices for type == TRUE
-    # recode holds the mapping [1..n] -> [1..n1,1..n2]
-    recode[!types] <- seq_len(n1)
-    recode[types] <- seq_len(n2)
-
-    el <- as_edgelist(graph, names = FALSE)
-    idx <- types[el[, 1]]
-    el[] <- recode[el]
-
-    # switch order of source/target such that nodes with
-    # type == FALSE are in el[ ,1]
-    el[idx, ] <- el[idx, 2:1]
-    # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
-    # and we can populate the matrix
-    value <- edge_attr(graph, attr)
-    if (!is.numeric(value) && !is.logical(value)) {
-      cli::cli_abort(
-        "Matrices must be either numeric or logical, and the edge attribute is not",
-        call = call
-      )
-    }
-    res[el] <- value
-
-    if (names && "name" %in% vertex_attr_names(graph)) {
-      rownames(res) <- V(graph)$name[which(!types)]
-      colnames(res) <- V(graph)$name[which(types)]
-    } else {
-      rownames(res) <- which(!types)
-      colnames(res) <- which(types)
-    }
-
-    res
+    return(res$res)
   }
+
+  types <- handle_vertex_type_arg(types, graph)
+
+  attr <- as.character(attr)
+  if (!attr %in% edge_attr_names(graph)) {
+    cli::cli_abort("No such edge attribute", call = call)
+  }
+
+  vc <- vcount(graph)
+  n1 <- sum(!types)
+  n2 <- vc - n1
+  res <- matrix(0, n1, n2)
+
+  recode <- numeric(vc)
+  # move from 1..n indexing to 1..n1 row indices for type == FALSE
+  # and 1..n2 col indices for type == TRUE
+  # recode holds the mapping [1..n] -> [1..n1,1..n2]
+  recode[!types] <- seq_len(n1)
+  recode[types] <- seq_len(n2)
+
+  el <- as_edgelist(graph, names = FALSE)
+  idx <- types[el[, 1]]
+  el[] <- recode[el]
+
+  # switch order of source/target such that nodes with
+  # type == FALSE are in el[ ,1]
+  el[idx, ] <- el[idx, 2:1]
+  # el[ ,1] only holds values 1..n1 and el[ ,2] values 1..n2
+  # and we can populate the matrix
+  value <- edge_attr(graph, attr)
+  if (!is.numeric(value) && !is.logical(value)) {
+    cli::cli_abort(
+      "Matrices must be either numeric or logical, and the edge attribute is not",
+      call = call
+    )
+  }
+  res[el] <- value
+
+  if (names && "name" %in% vertex_attr_names(graph)) {
+    rownames(res) <- V(graph)$name[which(!types)]
+    colnames(res) <- V(graph)$name[which(types)]
+  } else {
+    rownames(res) <- which(!types)
+    colnames(res) <- which(types)
+  }
+
+  res
 }
 
 get.incidence.sparse <- function(
@@ -1023,6 +1024,8 @@ get.incidence.sparse <- function(
   attr,
   call = rlang::caller_env()
 ) {
+  types <- handle_vertex_type_arg(types, graph)
+
   vc <- vcount(graph)
   if (length(types) != vc) {
     cli::cli_abort("Invalid types vector", call = call)
@@ -1127,7 +1130,6 @@ as_biadjacency_matrix <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
 
   names <- as.logical(names)
   sparse <- as.logical(sparse)

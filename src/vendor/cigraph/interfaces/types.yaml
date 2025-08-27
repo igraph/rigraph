@@ -173,7 +173,12 @@ VERTEX_SELECTOR:
 
 BIPARTITE_TYPES:
     # A vector containing Booleans that define the two partitions of a
-    # bipartite graph
+    # bipartite graph, for a set of vertices
+    CTYPE: igraph_vector_bool_t
+    FLAGS: BY_REF
+
+ALL_BIPARTITE_TYPES:
+    # Same as BIPARTITE_TYPES, for all vertices of a graph
     CTYPE: igraph_vector_bool_t
     FLAGS: BY_REF
 

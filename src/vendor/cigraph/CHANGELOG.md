@@ -5,16 +5,33 @@
 ### Added
 
  - `igraph_layout_align()` attempts to align a graph layout with the coordinate axes in a visually pleasing manner (experimental function).
- - `igraph_product()` supports the lexicographic and strong graph products. Thanks to Gulshan Kumar @gulshan-123 for contributing this functionality in #2772!
+ - `igraph_product()` supports the lexicographic, strong and modular graph products. Thanks to Gulshan Kumar @gulshan-123 for contributing this functionality in #2772 and #2793!
+ - `igraph_rooted_product()` computes the the rooted graph product. Thanks to Gulshan Kumar @gulshan-123 for contributing this functionality in #2793!
  - `igraph_mycielskian()` and `igraph_mycielski_graph()` compute a Mycielski transformation of a graph, and a Mycielski graph, respectively. Thanks to Gulshan Kumar @gulshan-123 for contributing this functionality in #2741!
  - `igraph_path_graph()` is a convenience wrapper for `igraph_ring()` with `circular=false`.
  - `igraph_cycle_graph()` is a convenience wrapper for `igraph_ring()` with `circular=true`.
+ - `igraph_bond_percolation()`, `igraph_site_percolation()` and `igraph_edgelist_percolation()` calculates the time evolution of the size of the giant component of a graph when edges or vertices are added one by one in a certain (or random) order. Thanks to Arnór Friðriksson @Zepeacedust for implementing this in #2778!
+ - `igraph_invert_permutation()` inverts a permutation stored in an integer vector.
+ - `igraph_is_vertex_coloring()` and `igraph_is_edge_coloring()` check if a vertex or edge coloring is valid, i.e. whether adjacenct vertices/edges always have distinct colors. Thanks to Sarah Rashidi @its-serah for contributing this in #2807!
+ - `igraph_rich_club_sequence()` calculates how the density of a graph changes as vertices are removed. Thanks to Zara Zong @minifinity for contributing this in #2740!
+
+### Changed
+
+ - `igraph_bipartite_game_gnp()` can now generate graphs with more than a hundred million vertices. Thanks to Dev Lohani @devlohani99 for implementing this in #2767!
+ - `igraph_reindex_membership()` now supports arbitrary cluster indices. Previously, it would error when indices are not within `0 .. n-1` where `n` is the membership vector length.
+ - `igraph_modularity()` now supports arbitrary cluster indices. However, ensuring that cluster indices are within the range `0 .. n-1`, where `n` is the vertex count, allows for better performance.
 
 ### Fixed
 
  - Fix failure in SIR simulation due to roundoff errors creating slightly negative rates.
  - Fix infinite coordinates for certain path graphs with `igraph_layout_kamada_kawai_3d()`.
- - `igraph_community_leiden()` did iterate until the partition ceased to change when `n_iterations < 0`. Thanks to Lucas Lopes Felipe @lucaslopes for fixing this in #2799!
+ - `igraph_community_leiden()` did not iterate until the partition ceased to change when `n_iterations < 0`. Thanks to Lucas Lopes Felipe @lucaslopes for fixing this in #2799!
+ - The widest path functions `igraph_widest_path_widths_floyd_warshall()`, `igraph_widest_path_widths_dijkstra()`, `igraph_get_widest_paths()`, and `igraph_get_widest_path()` incorrectly ignored edges with positive infinite width. Now they ignore edges with negative infinite width.
+
+### Deprecated
+
+ - `igraph_sparsemat()` and `igraph_weighted_sparsemat()` are now deprecated; their functionality is duplicated by `igraph_get_adjacency_sparse()`. They will be removed in veresion 1.0.
+ - `igraph_convex_hull()` is deprecated in favour of `igraph_convex_hull_2d()` and scheduled for removal in 1.0.
 
 ### Other
 
@@ -105,6 +122,7 @@
  - `igraph_array3_t` and all associated functions are deprecated and scheduled for removal in igraph 1.0.
  - `igraph_vector_qsort_ind()` is deprecated in favour of `igraph_vector_sort_ind()`.
  - `igraph_vector_binsearch2()` is deprecated in favour of `igraph_vector_contains_sorted()`.
+ - The error code `IGRAPH_ENEGLOOP` is deprecated in favour of the newly introduced `IGRAPH_ENEGCYCLE`. The underlying integer code did not change.
 
 ### Other
 

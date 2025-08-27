@@ -1693,19 +1693,18 @@ cluster_leiden <- function(
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   membership <- initial_membership
   if (n_iterations > 0) {
-    res <- .Call(
-      R_igraph_community_leiden,
+    res <- community_leiden_impl(
       graph,
-      weights,
-      vertex_weights,
-      as.numeric(resolution),
-      as.numeric(beta),
-      !is.null(membership),
-      as.numeric(n_iterations),
-      membership
+      weights = weights,
+      # FIXME: Also check below, might not be covered by tests
+      vertex.weights = vertex_weights,
+      resolution = resolution,
+      beta = beta,
+      start = !is.null(membership),
+      n.iterations = n_iterations,
+      membership = membership
     )
     membership <- res$membership
   } else {
@@ -1713,16 +1712,16 @@ cluster_leiden <- function(
     quality <- 0.0
     while (prev_quality < quality) {
       prev_quality <- quality
-      res <- .Call(
-        R_igraph_community_leiden,
+      res <- community_leiden_impl(
         graph,
-        weights,
-        vertex_weights,
-        as.numeric(resolution),
-        as.numeric(beta),
-        !is.null(membership),
-        1,
-        membership
+        weights = weights,
+        # FIXME: Also check above, might not be covered by tests
+        vertex.weights = vertex_weights,
+        resolution = resolution,
+        beta = beta,
+        start = !is.null(membership),
+        n.iterations = 1,
+        membership = membership
       )
       membership <- res$membership
       quality <- res$quality
@@ -2407,38 +2406,16 @@ cluster_label_prop0 <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  if (!is.null(initial)) {
-    initial <- as.numeric(initial)
-  }
-  if (!is.null(fixed)) {
-    fixed <- as.logical(fixed)
-  }
+  # Necessary because evaluated later
+  mode <- igraph.match.arg(mode)
 
-  directed <- switch(
-    igraph.match.arg(mode),
-    "out" = TRUE,
-    "in" = TRUE,
-    "all" = FALSE
-  )
-  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  membership <- .Call(
-    R_igraph_community_label_propagation,
+  membership <- community_label_propagation_impl(
     graph,
-    mode,
-    weights,
-    initial,
-    fixed
+    mode = mode,
+    weights = weights,
+    initial = initial,
+    fixed = fixed
   )
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2447,7 +2424,14 @@ cluster_label_prop0 <- function(
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
   res$membership <- membership + 1
-  res$modularity <- modularity(graph, res$membership, weights, directed)
+
+  res$modularity <- modularity(
+    graph,
+    res$membership,
+    weights,
+    directed = (mode != "all")
+  )
+
   class(res) <- "communities"
   res
 }
@@ -2617,9 +2601,11 @@ cluster_optimal <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_optimal_modularity, graph, weights)
+  res <- community_optimal_modularity_impl(
+    graph,
+    weights = weights
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

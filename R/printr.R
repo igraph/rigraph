@@ -195,8 +195,11 @@ head_print_callback <- function(
 #' @export
 
 indent_print <- function(..., .indent = " ", .printer = print) {
-  if (length(.indent) != 1) {
-    stop(".indent must be a scalar")
+  if (length(.indent) != 1 || !is.character(.indent)) {
+    indent <- .indent # cli literal cannot start with a dot
+    cli::cli_abort(
+      "{.arg .indent} must be a character scalar, not {.obj_type_friendly {indent}}."
+    )
   }
 
   opt <- options(width = getOption("width") - nchar(.indent))

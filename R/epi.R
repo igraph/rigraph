@@ -161,7 +161,7 @@ plot.sir <- function(
 
   comp <- toupper(igraph.match.arg(comp))
   if (!all(quantiles >= 0 & quantiles <= 1)) {
-    stop("Quantiles should be in [0,1]")
+    cli::cli_abort("All {.arg quantiles} should be in [0,1].")
   }
 
   if (is.null(color)) {

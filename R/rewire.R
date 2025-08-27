@@ -40,7 +40,10 @@
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 rewire <- function(graph, with) {
   if (!is(with, "igraph_rewiring_method")) {
-    stop("'with' is not an igraph rewiring method")
+    cli::cli_abort(
+      "{.arg with} must be an igraph rewiring method, 
+      not {.obj_type_friendly {with}}."
+    )
   }
   do_call(with$fun, list(graph), .args = with$args)
 }
@@ -140,7 +143,10 @@ each_edge <- function(
   multiple <- as.logical(multiple)
   if (mode != 3) {
     if (!multiple) {
-      stop("multiple = FALSE not supported when mode != \"all\"")
+      cli::cli_abort(
+        '{.code multiple = FALSE} is not supported
+         when {.code mode != "all"}'
+      )
     }
     method <- list(
       fun = rewire_each_directed_edge,

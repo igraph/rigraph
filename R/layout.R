@@ -394,7 +394,7 @@ layout_ <- function(graph, layout, ...) {
   ids <- sapply(modifiers, "[[", "id")
   stopifnot(all(ids %in% c("component_wise", "normalize")))
   if (anyDuplicated(ids)) {
-    stop("Duplicate modifiers")
+    cli::cli_abort("Duplicate modifiers.")
   }
   names(modifiers) <- ids
 
@@ -607,17 +607,8 @@ layout_as_bipartite <- function(
 ) {
   ## Argument checks
   ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
-  hgap <- as.numeric(hgap)
-  vgap <- as.numeric(vgap)
-  maxiter <- as.numeric(maxiter)
-
-  on.exit(.Call(R_igraph_finalizer))
-
-  ## Function call
-  res <- .Call(R_igraph_layout_bipartite, graph, types, hgap, vgap, maxiter)
-
-  res
+  # Use the _impl function
+  layout_bipartite_impl(graph, types, hgap, vgap, maxiter)
 }
 
 
@@ -666,19 +657,8 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
     # vertices
     return(layout_in_circle(graph))
   }
-  center <- as_igraph_vs(graph, center)
-  if (length(center) == 0) {
-    center <- 1
-  }
-  if (!is.null(order)) {
-    order <- as.numeric(order) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_layout_star, graph, center - 1, order)
-
-  res
+  # Use the _impl function
+  layout_star_impl(graph, center, order)
 }
 
 
@@ -842,10 +822,8 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
 layout_in_circle <- function(graph, order = V(graph)) {
-  ensure_igraph(graph)
-  order <- as_igraph_vs(graph, order) - 1L
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_layout_circle, graph, order)
+  # Use the _impl function
+  layout_circle_impl(graph, order)
 }
 
 #' @rdname layout_in_circle
@@ -1030,15 +1008,12 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
     height <- as.numeric(height)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call(R_igraph_layout_grid, graph, width)
+    layout_grid_impl(graph, width)
   } else {
-    res <- .Call(R_igraph_layout_grid_3d, graph, width, height)
+    layout_grid_3d_impl(graph, width, height)
   }
-
-  res
 }
 
 
@@ -1082,10 +1057,8 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @export
 #' @family graph layouts
 layout_on_sphere <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_layout_sphere, graph)
+  # Use the _impl function
+  layout_sphere_impl(graph)
 }
 
 
@@ -1128,16 +1101,15 @@ layout.sphere <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_randomly <- function(graph, dim = 2) {
+layout_randomly <- function(graph, dim = c(2, 3)) {
   ensure_igraph(graph)
+
+  dim <- igraph.match.arg(dim)
+
   if (dim == 2) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_layout_random, graph)
+    layout_random_impl(graph)
   } else if (dim == 3) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_layout_random_3d, graph)
-  } else {
-    stop("Invalid `dim' value")
+    layout_random_3d_impl(graph)
   }
 }
 
@@ -1413,7 +1385,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 layout_with_fr <- function(
   graph,
   coords = NULL,
-  dim = 2,
+  dim = c(2, 3),
   niter = 500,
   start.temp = sqrt(vcount(graph)),
   grid = c("auto", "grid", "nogrid"),
@@ -1433,12 +1405,12 @@ layout_with_fr <- function(
   # Argument checks
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- as.numeric(dim)
-  if (dim != 2L && dim != 3L) {
-    stop("Dimension must be two or three")
-  }
+  dim <- igraph.match.arg(dim)
   if (!missing(niter) && !missing(maxiter)) {
-    stop("Both `niter' and `maxiter' are given, give only one of them")
+    cli::cli_abort(c(
+      "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
+      i = "Specify only {.arg niter}, {.arg maxiter} is deprecated."
+    ))
   }
   if (!missing(maxiter)) {
     niter <- maxiter
@@ -1780,7 +1752,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 layout_with_kk <- function(
   graph,
   coords = NULL,
-  dim = 2,
+  dim = c(2, 3),
   maxiter = 50 * vcount(graph),
   epsilon = 0.0,
   kkconst = max(vcount(graph), 1),
@@ -1799,7 +1771,10 @@ layout_with_kk <- function(
 ) {
   # Argument checks
   if (!missing(coords) && !missing(start)) {
-    stop("Both `coords' and `start' are given, give only one of them.")
+    cli::cli_abort(c(
+      "{.arg coords} and {.arg start} must not be specified at the same time.",
+      i = "Specify only {.arg coords}, {.arg start} is deprecated."
+    ))
   }
   if (!missing(start)) {
     coords <- start
@@ -1807,10 +1782,7 @@ layout_with_kk <- function(
 
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- as.numeric(dim)
-  if (dim != 2L && dim != 3L) {
-    stop("Dimension must be two or three")
-  }
+  dim <- igraph.match.arg(dim)
 
   maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
@@ -2067,11 +2039,8 @@ layout_with_mds <- function(
   dist[] <- as.numeric(dist)
   dim <- as.numeric(dim)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_layout_mds, graph, dist, dim)
-
-  res
+  layout_mds_impl(graph, dist, dim)
 }
 
 
@@ -2491,17 +2460,16 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 merge_coords <- function(graphs, layouts, method = "dla") {
   lapply(graphs, ensure_igraph)
-  if (method == "dla") {
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(
-      R_igraph_layout_merge_dla,
-      graphs,
-      layouts
-    )
-  } else {
-    stop("Invalid `method'.")
+  if (method != "dla") {
+    cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
   }
-  res
+
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(
+    R_igraph_layout_merge_dla,
+    graphs,
+    layouts
+  )
 }
 
 
@@ -2535,10 +2503,14 @@ norm_coords <- function(
   zmax = 1
 ) {
   if (!is.matrix(layout)) {
-    stop("`layout' must be a matrix")
+    cli::cli_abort(
+      "{.arg layout} must be a matrix, not {.obj_type_friendly {layout}}."
+    )
   }
-  if (ncol(layout) != 2 && ncol(layout) != 3) {
-    stop("`layout' should have 2 or three columns")
+  if (!(ncol(layout) %in% c(2, 3))) {
+    cli::cli_abort(
+      "{.arg layout} should have 2 or 3 columns, not {ncol(layout)}."
+    )
   }
 
   if (!is.null(xmin) && !is.null(xmax)) {
@@ -2808,13 +2780,11 @@ layout_with_drl <- function(
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,
   weights = NULL,
-  dim = 2
+  dim = c(2, 3)
 ) {
   ensure_igraph(graph)
 
-  if (dim != 2 && dim != 3) {
-    stop("`dim' must be 2 or 3")
-  }
+  dim <- igraph.match.arg(dim)
 
   use.seed <- as.logical(use.seed)
   seed <- as.matrix(seed)

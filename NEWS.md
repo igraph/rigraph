@@ -1,5 +1,298 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9085
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ea3ad176e59119abe6b336172dab92ce25c45e1d (#2091).
+
+
+# igraph 2.1.4.9084
+
+## vendor
+
+- Update vendored sources to igraph/igraph@62791a3a19d4fae5dbe49d28b24bf1040837de80 (#2088).
+
+
+# igraph 2.1.4.9083
+
+## Chore
+
+- Improve readability of code about not all values being `NA` (#1870, #2082).
+
+
+# igraph 2.1.4.9082
+
+## vendor
+
+- Update vendored sources to igraph/igraph@94058853ef23463198d730681c3f7ccbe1896260 (#2084).
+
+- Update vendored sources to igraph/igraph@6064a031f6d9ad45a23d0c663452b70522d4a196 (#2083).
+
+
+# igraph 2.1.4.9081
+
+## Chore
+
+- Add modular product to GRAPH_PRODUCT_TYPE in interfaces.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@6f25b860c91f0a94ae32d7eb70f88478edb895ce (#2080).
+
+- Update vendored sources to igraph/igraph@03e7e6e86d0fb88c70ca50ebca075b0b503ea33a (#2079).
+
+- Update vendored sources to igraph/igraph@90852c630f7620eb2c1b3702c8b2aeac223f1e21 (#2078).
+
+- Update vendored sources to igraph/igraph@40b84ab4906f8438ad76f580993a59a595d78ade (#2077).
+
+- Update vendored sources to igraph/igraph@425e6f074a2c35e3c9a720b4b9a8a89d73c6bc4d (#2076).
+
+- Update vendored sources to igraph/igraph@0150a9ce3e23ea58674318693a42db45425ba639 (#2075).
+
+- Update vendored sources to igraph/igraph@a4d8f0a6e84b1793a054279276024541a5998280 (#2074).
+
+- Update vendored sources to igraph/igraph@16d599e36a62c221ae39b496b349cf30ed4e63bf (#2073).
+
+- Update vendored sources to igraph/igraph@c0124eec9a8ad2d16ddabbcab0802e39c12e283d (#2072).
+
+- Update vendored sources to igraph/igraph@f7c7b43367cef17dc34efd11b9639f5dfa5a62f3 (#2071).
+
+- Update vendored sources to igraph/igraph@c50c977a1686731a4158915fe49f8b9b2d2dcfab (#2070).
+
+
+# igraph 2.1.4.9080
+
+## Features
+
+- Generate almost all R implementations (#2047).
+
+## Chore
+
+- Move uuid glue out of vendoring.
+
+- Fix vendoring script.
+
+- Remove call from `layout_on_sphere()` (#2053).
+
+- Remove call from `layout_randomly()` (#2054).
+
+- Remove call from `layout_on_grid()` (#2052).
+
+- Remove call from `layout_with_mds()` (#2055).
+
+- Remove call from `layout_as_star()` (#2050).
+
+- Remove call from `layout_as_bipartite()` (#2049).
+
+- Remove call from `layout_in_circle()` (#2051).
+
+- Fix call in `sample_dirichlet()`.
+
+- Fix call in `sample_sphere_volume()`.
+
+- Fix call in `sample_sphere_surface()`.
+
+- Fix syntax.
+
+- Fix call in `graph.lcf()`.
+
+- Fix call in `all_shortest_paths()`.
+
+- Fix call in `all_simple_paths()`.
+
+- Fix call in `get.incidence.dense()`.
+
+- Fix call in `cluster_optimal()`.
+
+- Fix call in `cluster_leiden()`.
+
+- Avoid call in `cluster_label_prop0()`.
+
+- Fix remaining Stimulus types (#2048).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@29087cd09a1aeb0ca4a1b490f1437af9826e146e (#2068).
+
+- Update vendored sources to igraph/igraph@187e713b7cb7c369a44f171fec4aa6ec085f0c70 (#2067).
+
+- Update vendored sources to igraph/igraph@089ddde82352d222552408cb233288b1cb9a459b (#2066).
+
+- Update vendored sources to igraph/igraph@02a5288427e435ba43c95a4d9b3707712296d2a6 (#2065).
+
+- Update vendored sources to igraph/igraph@378629ea57ee631844c391237faa021d8652cbf4 (#2064).
+
+- Update vendored sources to igraph/igraph@5819c1bcb3f8a5835867ccafd2f8901beff1ac9d (#2063).
+
+- Update vendored sources to igraph/igraph@2b9db4b52dc78623c830131b8662de944c827cbc (#2062).
+
+- Update vendored sources to igraph/igraph@693c0caa4f1a67788867fc6fb81e649b1876888a (#2061).
+
+- Update vendored sources to igraph/igraph@5ed8bdee3ad2261f0c62225159b6d56c370bfb90 (#2060).
+
+- Update vendored sources to igraph/igraph@e9e2707e3e881f31b615c5165b0b144fcead71c6 (#2059).
+
+- Update vendored sources to igraph/igraph@bb48c90c682825731ea6f4a96712cf517c7f0c7d (#2057).
+
+- Update vendored sources to igraph/igraph@552af428369d3fc873c1d5daf2eb40197e1e8cc3 (#2056).
+
+- Update vendored sources to igraph/igraph@7adb4c4d47e799d6137e13dafc03ea5e4da76a01 (#2045).
+
+
+# igraph 2.1.4.9079
+
+## vendor
+
+- Update vendored sources to igraph/igraph@6a92b9a7aedcbdf1e40ac93b88031e06cfa1a8c7 (#2044).
+
+- Update vendored sources to igraph/igraph@dce0a61a0bf67be4926d42bf8dd8a475a20a52a7 (#2040).
+
+
+# igraph 2.1.4.9078
+
+## Continuous integration
+
+- Cleanup and fix macOS (#2042).
+
+
+# igraph 2.1.4.9077
+
+## vendor
+
+- Update vendored sources to igraph/igraph@09bc672c2d1221c0a3a78a312584fae8da3d0af6 (#2039).
+
+- Update vendored sources to igraph/igraph@5ff19a9281745f8d7b39bf7b477865d3ad573729 (#2038).
+
+- Update vendored sources to igraph/igraph@0b3d9704f616651a4937c9a6079a5cdf36ec39e7 (#2037).
+
+
+# igraph 2.1.4.9076
+
+## Continuous integration
+
+- Format with air, check detritus, better handling of `extra-packages` (#2035).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@d7a119ddef575026d9eba9414fedea4d8f11774b (#2034).
+
+- Update vendored sources to igraph/igraph@01cabca5a8c685ff263a11a6563ff42cac8572b8 (#2033).
+
+- Update vendored sources to igraph/igraph@f01a024b1dc6f49720cc2d089687228a55f4aa6b (#2032).
+
+
+# igraph 2.1.4.9075
+
+## vendor
+
+- Update vendored sources to igraph/igraph@9d9ad1935c6cea28415b8616e33d80c0c7a33c0d (#2030).
+
+- Update vendored sources to igraph/igraph@33be55ee088923d8b6b485e3b63352d258cde184 (#2029).
+
+
+# igraph 2.1.4.9074
+
+## vendor
+
+- Update vendored sources to igraph/igraph@a546942ec1d99acfd4d6b2aa35965b028a633665 (#2027).
+
+
+# igraph 2.1.4.9073
+
+## Chore
+
+- Adapt default path.
+
+## Continuous integration
+
+- Fix vendoring.
+
+- Align vendoring workflow with duckdb.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@d807fc2bff14714686fa75f945772899dda8925c (#2025).
+
+- Update vendored sources to igraph/igraph@7788ba9623c249cd00f45f204d3aed2bfb295328 (#2024).
+
+- Update vendored sources to igraph/igraph@db03c3207a27a6ea5559ec79941ae2ff26a27386 (#2023).
+
+## Uncategorized
+
+- Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
+
+
+# igraph 2.1.4.9072
+
+## vendor
+
+- Update vendored sources to igraph/igraph@a3a1271a91a476b2623275d05fd722c1fb171b00 (#2021).
+
+- Update vendored sources to igraph/igraph@cfb3e897a2b82fa60146325535c3d97c81c1936d (#2020).
+
+
+# igraph 2.1.4.9071
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ba9bbc17aa56a75bd6529f3168d4dd76330689db (#2018).
+
+- Update vendored sources to igraph/igraph@6b59bafb6acf36a3c2ef1885927c613e80405379 (#2017).
+
+- Update vendored sources to igraph/igraph@232a9819f414d66c2841f7b5c8afe01ebed7374d (#2016).
+
+- Update vendored sources to igraph/igraph@36fec29268a872935ee0bb20727114f8bf81f7c5 (#2015).
+
+- Update vendored sources to igraph/igraph@0f99574f928a8463c042bf14541708def3bf4e98 (#2014).
+
+
+# igraph 2.1.4.9070
+
+## Chore
+
+- No `stop()` in version.
+
+- Don't use `stop()` in tests.
+
+- Improve error in stochastic_matrix.
+
+- Improve errors in sgm.R.
+
+- Improve errors in operator.R.
+
+- Fix cli syntax.
+
+- Improve error in rewire.
+
+- Improve errors in plot.common.
+
+- Improve error in `rename.attr.if.needed()`.
+
+
+# igraph 2.1.4.9069
+
+## Chore
+
+- Improve errors in layout.R (#2007).
+
+- Remove one more `stop()`.
+
+- Use `cli_abort()`.
+
+- Use `cli_abort()` instead of `stop()`.
+
+- Simplify error by relying on default behavior (#1997).
+
+- Better error in centrality (#2000).
+
+- Simplify error (#1999).
+
+- Rm useless error message (#1998).
+
+- Improve `igraph.match.arg()` (#1996).
+
+
 # igraph 2.1.4.9068
 
 ## vendor
