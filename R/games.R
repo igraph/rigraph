@@ -938,10 +938,6 @@ sample_pa <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
-  }
-
   algorithm <- igraph.match.arg(algorithm)
   algorithm1 <- switch(
     algorithm,
