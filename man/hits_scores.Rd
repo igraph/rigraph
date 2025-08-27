@@ -7,7 +7,7 @@
 hits_scores(
   graph,
   ...,
-  scale = TRUE,
+  scale = deprecated(),
   weights = NULL,
   options = arpack_defaults()
 )
@@ -17,9 +17,7 @@ hits_scores(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{scale}{Logical scalar, whether to scale the result to have a maximum
-score of one. If no scaling is used then the result vector has unit length
-in the Euclidean norm.}
+\item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored, always scaled.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 scores. If the graph has a \code{weight} edge attribute, then this is used
