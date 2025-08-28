@@ -56,9 +56,6 @@ igraph_get_all_eids_between:
     # in the argument list.
     DEPS: from ON graph, to ON graph, eids ON graph
 
-igraph_incident:
-    IGNORE: RR, RC
-
 igraph_is_same_graph:
     IGNORE: RR, RC, RInit
     # Not needed in R; we can simply compare things in the R layer without
