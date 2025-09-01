@@ -3307,6 +3307,26 @@ compare_communities_impl <- function(comm1, comm2, method=c("vi", "nmi", "split.
   res
 }
 
+community_edge_betweenness_impl <- function(graph, directed=TRUE, weights=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  directed <- as.logical(directed)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_community_edge_betweenness, graph, directed, weights)
+
+  res
+}
+
 modularity_impl <- function(graph, membership, weights=NULL, resolution=1.0, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)

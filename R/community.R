@@ -2002,8 +2002,7 @@ cluster_edge_betweenness <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
+  res <- community_edge_betweenness_impl(
     R_igraph_community_edge_betweenness,
     graph,
     weights,

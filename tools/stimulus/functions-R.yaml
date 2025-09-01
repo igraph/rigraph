@@ -674,7 +674,6 @@ igraph_community_walktrap:
     IGNORE: RR, RC, RInit
 
 igraph_community_edge_betweenness:
-    IGNORE: RR, RC, RInit
 
 igraph_community_eb_get_merges:
     IGNORE: RR, RC, RInit
