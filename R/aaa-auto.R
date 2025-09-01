@@ -59,6 +59,30 @@ vcount_impl <- function(graph) {
   res
 }
 
+edge_impl <- function(graph, eid) {
+  # Argument checks
+  ensure_igraph(graph)
+  eid <- as.numeric(eid)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_edge, graph, eid)
+
+  res
+}
+
+edges_impl <- function(graph, eids) {
+  # Argument checks
+  ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_edges, graph, eids-1)
+
+  res
+}
+
 get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)

@@ -452,9 +452,9 @@ ends <- function(graph, es, names = TRUE) {
   on.exit(.Call(R_igraph_finalizer))
 
   if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(R_igraph_get_edge, graph, es2) + 1
+    res[, !is.na(es)] <- edge_impl(graph, es2) + 1
   } else {
-    res[, !is.na(es)] <- .Call(R_igraph_edges, graph, es2) + 1
+    res[, !is.na(es)] <- edges_impl(graph, es2) + 1
   }
 
   if (names && is_named(graph)) {

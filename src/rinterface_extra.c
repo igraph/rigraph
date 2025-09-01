@@ -5630,44 +5630,6 @@ SEXP R_igraph_recent_degree_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
   return result;
 }
 
-SEXP R_igraph_get_edge(SEXP graph, SEXP peid) {
-
-  igraph_t g;
-  igraph_integer_t eid=(igraph_integer_t) REAL(peid)[0];
-  igraph_integer_t from, to;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_edge(&g, eid, &from, &to));
-  PROTECT(result=NEW_NUMERIC(2));
-  REAL(result)[0]=from;
-  REAL(result)[1]=to;
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_edges(SEXP graph, SEXP eids) {
-  igraph_t g;
-  igraph_es_t es;
-  igraph_vector_int_t es_data;
-  igraph_vector_int_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_es(eids, &g, &es, &es_data);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_edges(&g, es, &res));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-  igraph_vector_int_destroy(&es_data);
-  igraph_es_destroy(&es);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_constraint(SEXP graph, SEXP vids, SEXP pweights) {
 
   igraph_t g;

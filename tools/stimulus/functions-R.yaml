@@ -36,10 +36,8 @@ igraph_degree:
     IGNORE: RR, RC
 
 igraph_edge:
-    IGNORE: RR, RC, RInit
 
 igraph_edges:
-    IGNORE: RR, RC
 
 igraph_get_eid:
     IGNORE: RR, RC, RInit

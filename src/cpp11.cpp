@@ -146,6 +146,7 @@ extern SEXP R_igraph_dyad_census(SEXP);
 extern SEXP R_igraph_ecc(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eccentricity_dijkstra(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_ecount(SEXP);
+extern SEXP R_igraph_edge(SEXP, SEXP);
 extern SEXP R_igraph_edge_betweenness(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edge_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edge_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -623,6 +624,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_ecc",                                        (DL_FUNC) &R_igraph_ecc,                                         5},
     {"R_igraph_eccentricity_dijkstra",                      (DL_FUNC) &R_igraph_eccentricity_dijkstra,                       4},
     {"R_igraph_ecount",                                     (DL_FUNC) &R_igraph_ecount,                                      1},
+    {"R_igraph_edge",                                       (DL_FUNC) &R_igraph_edge,                                        2},
     {"R_igraph_edge_betweenness",                           (DL_FUNC) &R_igraph_edge_betweenness,                            3},
     {"R_igraph_edge_betweenness_cutoff",                    (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                     4},
     {"R_igraph_edge_betweenness_subset",                    (DL_FUNC) &R_igraph_edge_betweenness_subset,                     6},

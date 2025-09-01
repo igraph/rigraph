@@ -189,6 +189,78 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_edge                                /
+/-------------------------------------------*/
+SEXP R_igraph_edge(SEXP graph, SEXP eid) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_eid;
+  igraph_integer_t c_from;
+  igraph_integer_t c_to;
+  SEXP from;
+  SEXP to;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(eid);
+  c_eid = (igraph_integer_t) REAL(eid)[0];
+  c_from=0;
+  c_to=0;
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_edge(&c_graph, c_eid, &c_from, &c_to));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(from=NEW_NUMERIC(1));
+  REAL(from)[0]=(double) c_from;
+  PROTECT(to=NEW_NUMERIC(1));
+  REAL(to)[0]=(double) c_to;
+  SET_VECTOR_ELT(r_result, 0, from);
+  SET_VECTOR_ELT(r_result, 1, to);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("from"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("to"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_edges                               /
+/-------------------------------------------*/
+SEXP R_igraph_edges(SEXP graph, SEXP eids) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_es_t c_eids;
+  igraph_vector_int_t c_edges;
+  SEXP edges;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edges, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_edges(&c_graph, c_eids, &c_edges));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
+  PROTECT(edges=R_igraph_vector_int_to_SEXP(&c_edges));
+  igraph_vector_int_destroy(&c_edges);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = edges;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_all_eids_between                /
 /-------------------------------------------*/
 SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed) {
