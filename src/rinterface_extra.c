@@ -3377,11 +3377,11 @@ void R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
 }
 
 igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
-  igraph_integer_t length = Rf_xlength(rval);
+  const igraph_integer_t length = Rf_xlength(rval);
   sv->stor_begin=(const char**) R_alloc((size_t) length, sizeof(char*));
   sv->stor_end=sv->stor_begin+length;
   sv->end=sv->stor_end;
-  for (igraph_integer_t i=0; i<igraph_strvector_size(sv); i++) {
+  for (igraph_integer_t i=0; i<length; i++) {
     sv->stor_begin[i]=(char*) CHAR(STRING_ELT(rval, i));
   }
 
@@ -3389,8 +3389,9 @@ igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
 }
 
 igraph_error_t R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv) {
-  IGRAPH_STRVECTOR_INIT_FINALLY(sv, Rf_xlength(rval));
-  for (igraph_integer_t i=0; i<igraph_strvector_size(sv); i++) {
+  const igraph_integer_t length = Rf_xlength(rval);
+  IGRAPH_STRVECTOR_INIT_FINALLY(sv, length);
+  for (igraph_integer_t i=0; i<length; i++) {
     IGRAPH_CHECK(igraph_strvector_set(sv, i, CHAR(STRING_ELT(rval, i))));
   }
   IGRAPH_FINALLY_CLEAN(1);
