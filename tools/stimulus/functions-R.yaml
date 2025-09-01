@@ -734,7 +734,6 @@ igraph_get_adjacency:
 
 
 igraph_get_edgelist:
-    IGNORE: RR, RC
 
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL

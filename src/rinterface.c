@@ -8700,6 +8700,36 @@ SEXP R_igraph_get_adjacency_sparse(SEXP graph, SEXP type, SEXP weights, SEXP loo
 }
 
 /*-------------------------------------------/
+/ igraph_get_edgelist                        /
+/-------------------------------------------*/
+SEXP R_igraph_get_edgelist(SEXP graph, SEXP bycol) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_res;
+  igraph_bool_t c_bycol;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  IGRAPH_R_CHECK_BOOL(bycol);
+  c_bycol = LOGICAL(bycol)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_edgelist(&c_graph, &c_res, c_bycol));
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  igraph_vector_int_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_stochastic                      /
 /-------------------------------------------*/
 SEXP R_igraph_get_stochastic(SEXP graph, SEXP column_wise, SEXP weights) {

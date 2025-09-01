@@ -4799,23 +4799,6 @@ SEXP R_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
   return result;
 }
 
-SEXP R_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
-
-  igraph_t g;
-  igraph_vector_int_t res;
-  igraph_bool_t bycol=LOGICAL(pbycol)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_get_edgelist(&g, &res, bycol));
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) {
 
   igraph_t g;

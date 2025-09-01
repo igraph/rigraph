@@ -3720,6 +3720,18 @@ get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), w
   res
 }
 
+get_edgelist_impl <- function(graph, bycol=FALSE) {
+  # Argument checks
+  ensure_igraph(graph)
+  bycol <- as.logical(bycol)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_get_edgelist, graph, bycol)
+
+  res
+}
+
 get_stochastic_impl <- function(graph, column.wise=FALSE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
