@@ -903,15 +903,12 @@ degree <- function(
   ensure_igraph(graph)
   v <- as_igraph_vs(graph, v)
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_degree,
+  res <- degree_impl(
     graph,
-    v - 1,
-    as.numeric(mode),
-    as.logical(loops)
+    vids = v - 1,
+    mode = mode,
+    loops = loops
   )
   if (normalized) {
     res <- res / (vcount(graph) - 1)
