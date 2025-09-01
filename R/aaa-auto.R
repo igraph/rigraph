@@ -81,6 +81,24 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   res
 }
 
+incident_impl <- function(graph, vid, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_incident, graph, vid-1, mode)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(, res)
+  }
+  res
+}
+
 wheel_impl <- function(n, mode=c("out", "in", "undirected", "mutual"), center=0) {
   # Argument checks
   n <- as.numeric(n)

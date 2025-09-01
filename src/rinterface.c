@@ -223,6 +223,37 @@ SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed
 }
 
 /*-------------------------------------------/
+/ igraph_incident                            /
+/-------------------------------------------*/
+SEXP R_igraph_incident(SEXP graph, SEXP vid, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_eids;
+  igraph_integer_t c_vid;
+  igraph_neimode_t c_mode;
+  SEXP eids;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_eids, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_eids);
+  c_vid = (igraph_integer_t) REAL(vid)[0];
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_incident(&c_graph, &c_eids, c_vid, c_mode));
+
+                                        /* Convert output */
+  PROTECT(eids=R_igraph_vector_int_to_SEXPp1(&c_eids));
+  igraph_vector_int_destroy(&c_eids);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = eids;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_adjacency                           /
 /-------------------------------------------*/
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
