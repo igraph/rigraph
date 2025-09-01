@@ -357,8 +357,8 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_neighbors, graph, v - 1, as.numeric(mode)) + 1L
+
+  res <- neighbors_impl(graph, vid = v - 1, mode = mode) + 1L
 
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)

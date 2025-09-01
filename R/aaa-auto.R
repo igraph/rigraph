@@ -59,6 +59,24 @@ vcount_impl <- function(graph) {
   res
 }
 
+neighbors_impl <- function(graph, vid, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_neighbors, graph, vid-1, mode)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(, res)
+  }
+  res
+}
+
 get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)
