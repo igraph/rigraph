@@ -410,9 +410,13 @@ centr_degree_tmax <- function(
   )
   loops <- as.logical(loops)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
+  res <- centralization_degree_tmax_impl(
+    graph,
+    nodes = nodes,
+    mode = mode,
+    loops = loops
+  )
 
   res
 }
