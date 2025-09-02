@@ -906,7 +906,7 @@ degree <- function(
 
   res <- degree_impl(
     graph,
-    vids = v - 1,
+    vids = v,
     mode = mode,
     loops = loops
   )
