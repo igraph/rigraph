@@ -3893,7 +3893,6 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_incident(SEXP graph, SEXP pvid, SEXP pmode) {
 
   igraph_t g;
   igraph_vector_int_t neis;
