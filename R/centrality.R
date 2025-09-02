@@ -1393,7 +1393,6 @@ eigen_centrality <- function(
   eigenvector_centrality_impl(
     graph = graph,
     directed = directed,
-    scale = TRUE,
     weights = weights,
     options = options
   )
@@ -1497,9 +1496,7 @@ diversity <- diversity_impl
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
+#' @param scale  `r lifecycle::badge("deprecated")` Ignored, always scaled.
 #' @param weights Optional positive weight vector for calculating weighted
 #'   scores. If the graph has a `weight` edge attribute, then this is used
 #'   by default. Pass `NA` to ignore the weight attribute. This function
@@ -1545,15 +1542,22 @@ diversity <- diversity_impl
 hits_scores <- function(
   graph,
   ...,
-  scale = TRUE,
+  scale = deprecated(),
   weights = NULL,
   options = arpack_defaults()
 ) {
   rlang::check_dots_empty()
 
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.1.5",
+      "hits_scores(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
   hub_and_authority_scores_impl(
     graph = graph,
-    scale = scale,
     weights = weights,
     options = options
   )
