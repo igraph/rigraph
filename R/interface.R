@@ -396,7 +396,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
+
   res <- incident_impl(graph, vid = v, mode = mode)
 
   if (igraph_opt("return.vs.es")) {
@@ -687,20 +687,19 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
 
-  vv <- as_igraph_vs(graph, v) - 1
+  vv <- as_igraph_vs(graph, v)
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
 
   res <- incident_impl(graph, vid = vv, mode = mode)
-  res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
   }
 
   if (is_named(graph)) {
-    names(res) <- V(graph)$name[vv + 1]
+    names(res) <- V(graph)$name[vv]
   }
 
   res
