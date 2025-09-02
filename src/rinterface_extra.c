@@ -8317,48 +8317,6 @@ SEXP R_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
-
-  igraph_t graph;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_vit_t vit;
-  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
-  SEXP result;
-  size_t i, n;
-  igraph_lazy_inclist_t adjlist;
-
-  R_SEXP_to_igraph(pgraph, &graph);
-  R_SEXP_to_igraph_vs(pe, &graph, &vs, &vs_data);
-  IGRAPH_FINALLY(igraph_vs_destroy, &vs);
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &vs_data);
-
-  igraph_vit_create(&graph, vs, &vit);
-  IGRAPH_FINALLY(igraph_vit_destroy, &vit);
-  n = IGRAPH_VIT_SIZE(vit);
-
-  igraph_lazy_inclist_init(&graph, &adjlist, mode, IGRAPH_LOOPS_TWICE);
-  IGRAPH_FINALLY(igraph_lazy_inclist_destroy, &adjlist);
-
-  PROTECT(result = NEW_LIST(n));
-  for (IGRAPH_VIT_RESET(vit), i=0;
-       !IGRAPH_VIT_END(vit);
-       IGRAPH_VIT_NEXT(vit), i++) {
-    igraph_integer_t eid = IGRAPH_VIT_GET(vit);
-    igraph_vector_int_t *neis = igraph_lazy_inclist_get(&adjlist, eid);
-    SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(neis));
-  }
-
-  igraph_lazy_inclist_destroy(&adjlist);
-  igraph_vit_destroy(&vit);
-  igraph_vs_destroy(&vs);
-  igraph_vector_int_destroy(&vs_data);
-  IGRAPH_FINALLY_CLEAN(4);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue, SEXP precision)
 {
   igraph_vector_t c_data;
