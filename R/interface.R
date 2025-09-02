@@ -397,7 +397,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
     stop("No vertex was specified")
   }
   on.exit(.Call(R_igraph_finalizer))
-  res <- incident_impl(graph, vid = v - 1, mode = mode) + 1L
+  res <- incident_impl(graph, vid = v, mode = mode)
 
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
