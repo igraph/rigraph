@@ -245,7 +245,6 @@ igraph_are_connected:
 #######################################
 
 igraph_diameter:
-    IGNORE: RR, RC, RInit
 
 igraph_diameter_dijkstra:
     IGNORE: RR, RC, RInit

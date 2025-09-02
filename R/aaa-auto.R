@@ -828,6 +828,19 @@ are_adjacent_impl <- function(graph, v1, v2) {
   res
 }
 
+diameter_impl <- function(graph, directed=TRUE, unconnected=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  directed <- as.logical(directed)
+  unconnected <- as.logical(unconnected)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_diameter, graph, directed, unconnected)
+
+  res
+}
+
 closeness_impl <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), weights=NULL, normalized=FALSE) {
   # Argument checks
   ensure_igraph(graph)

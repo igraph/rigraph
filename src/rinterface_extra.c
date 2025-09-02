@@ -4013,29 +4013,6 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP pmode, SEXP ploops) {
   return result;
 }
 
-SEXP R_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
-                       SEXP pweights) {
-
-  igraph_t g;
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t unconnected=LOGICAL(punconnected)[0];
-  igraph_vector_t weights;
-  igraph_real_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(pweights)) {
-    R_SEXP_to_vector(pweights, &weights);
-  }
-  IGRAPH_R_CHECK(igraph_diameter_dijkstra(&g, Rf_isNull(pweights) ? 0 : &weights, &res, 0, 0, 0, 0, directed, unconnected));
-
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
                            SEXP pweights) {
 
