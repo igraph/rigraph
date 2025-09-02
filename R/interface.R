@@ -358,11 +358,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
     stop("No vertex was specified")
   }
 
-  res <- neighbors_impl(graph, vid = v - 1, mode = mode) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
+  res <- neighbors_impl(graph, vid = v, mode = mode)
 
   res
 }
