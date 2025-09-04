@@ -24,6 +24,8 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Clarify the use of weights in `layout_with_kk()`.
 
+- remove demos (#2008)
+
 ## hack
 
 - Provide `NULL` default for types argument in `bipartite_projection_size()`.
@@ -156,8 +158,6 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Fix call in `sample_sphere_surface()`.
 
-- Fix syntax.
-
 - Fix call in `graph.lcf()`.
 
 - Fix call in `all_shortest_paths()`.
@@ -174,51 +174,35 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Fix remaining Stimulus types (#2048).
 
-- Adapt default path.
-
-- No `stop()` in version.
-
 - Don't use `stop()` in tests.
 
-- Improve error in stochastic_matrix.
+- Improve error in `stochastic_matrix()`.
 
-- Improve errors in sgm.R.
+- Improve errors in `sgm.R`.
 
-- Improve errors in operator.R.
+- Improve errors in `operator.R`.
 
 - Fix cli syntax.
 
-- Improve error in rewire.
+- Improve error in `rewire()`.
 
-- Improve errors in plot.common.
+- Improve errors in `plot.common()`.
 
 - Improve error in `rename.attr.if.needed()`.
 
-- Improve errors in layout.R (#2007).
-
-- Remove one more `stop()`.
-
-- Use `cli_abort()`.
+- Improve errors in `layout.R` (#2007).
 
 - Use `cli_abort()` instead of `stop()`.
 
 - Simplify error by relying on default behavior (#1997).
 
-- Better error in centrality (#2000).
+- Better error in `centrality.R` (#2000).
 
-- Simplify error (#1999).
+- Simplify errors (#1999).
 
-- Rm useless error message (#1998).
+- Remove useless error message (#1998).
 
 - Improve `igraph.match.arg()` (#1996).
-
-- Results for revdepchecks.
-
-- Revdepchecks, second run.
-
-- Ignore.
-
-- Revdepchecks.
 
 - Add air code formatting (#1734, #1869).
 
@@ -228,31 +212,13 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Refer to the dev version of roxygen2 as build dependency (#1832).
 
-- Results from main.
-
-- Results from check with new arpack.
-
-- Format with air.
-
-- Results from revdepcheck.
-
-- Render docs.
-
-- Updated results.
-
 - Update generated documentation.
-
-- Install build dependencies.
 
 - Require copyright assignment in PR template (#1747).
 
-- Fix `Makefile-cigraph` again.
+- Fix `Makefile-cigraph`.
 
 - Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
-
-- Add include.
-
-- R 4.0 compat.
 
 - Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
 
@@ -264,11 +230,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Run {styler} (with {igraph.style}) (#1696).
 
-- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
-
 - Adapt handling of optional parameters to interface definition changes in the C core (#1567).
-
-- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
 
 ## Documentation
 
@@ -299,11 +261,11 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 - `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
   This change was implemented in the C core.
 
-- Update decription of `order` parameter of `ego()` and related functions (#1746).
+- Update description of `order` parameter of `ego()` and related functions (#1746).
 
 - Welcome Maëlle Salmon and David Schoch as authors (#1733).
 
-- Lifecycle table (#1525).
+- Added lifecycle table (#1525).
 
 - Replace instances of `#' if` with `#' @examplesIf` (#1134, #1698).
 
@@ -313,9 +275,9 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 ## Refactoring
 
-- Some cleanup in vs/es functions in rinterface_extra.c.
+- Some cleanup in vs/es functions in `rinterface_extra.c`.
 
-- Avoid repeated calls to \_size() functions in for loops.
+- Avoid repeated calls to `_size()` functions in for loops.
   as this has a non-neglibile performance impact
 
 - Improve logic for updating edge attributes (#1332, #1915).
@@ -352,35 +314,35 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Added tests for untested files in R/ (#1728).
 
-- Merged and refactored other.R tests (#1727).
+- Merged and refactored `other.R` tests (#1727).
 
-- Merged and refactored structural.properties.R tests (#1726).
+- Merged and refactored `structural.properties.R` tests (#1726).
 
 - Merged and refactored orphaned test files (#1724).
 
-- Merged and refactored iterators.R and operators.R tests (#1723).
+- Merged and refactored `iterators.R` and `operators.R` tests (#1723).
 
-- Merged and refactored topology.R tests (#1720).
+- Merged and refactored `topology.R` tests (#1720).
 
-- Merged and refactored embedding.R tests (#1721).
+- Merged and refactored `embedding.R` tests (#1721).
 
-- Merge all tests for foreign.R into one test file (#1713).
+- Merge all tests for `foreign.R` into one test file (#1713).
 
-- Improve test-dot.product.game (#1396, #1705).
+- Improve `test-dot.product.game` (#1396, #1705).
 
-- Merged and refactored conversion.R tests (#1701).
+- Merged and refactored `conversion.R` tests (#1701).
 
 - Create helpers (#1691, #1695).
 
-- Merged and refactored make.R tests (#1685).
+- Merged and refactored `make.R` tests (#1685).
 
-- Merged and refactored community.R tests (#1689).
+- Merged and refactored `community.R` tests (#1689).
 
-- Merged and refactored indexing.R tests (#1687).
+- Merged and refactored `indexing.R` tests (#1687).
 
-- Merged and refactored flow.R tests (#1675).
+- Merged and refactored `flow.R` tests (#1675).
 
-- Merged and refactored games.R tests (#1682).
+- Merged and refactored `games.R` tests (#1682).
 
 ## Uncategorized
 
