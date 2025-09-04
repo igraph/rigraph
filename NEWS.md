@@ -14,24 +14,26 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
 
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
+
 ## doc
 
 - Refer to current latest version of R in troubleshooting page.
 
 - Fix typos in `laplacian_matrix` documentation.
 
-- Clarify weights use in `layout_with_kk()`.
+- Clarify the use of weights in `layout_with_kk()`.
 
 ## hack
 
-- Provide NULL default for types argument of `bipartite_projection_size()`.
+- Provide `NULL` default for types argument in `bipartite_projection_size()`.
   This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
 
 ## Bug fixes
 
-- Adjust loop position to vertex size (#1980).
+- Adjust loop position to vertex size in `plot()` (#1980).
 
-- Dont rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
+- Don't rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
 
 - HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
 
@@ -39,54 +41,50 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Automatically arrange loops in `plot()` (#407, #556, #1881).
 
-- `NA` checking only in from/to columns of edge data.frame (#1906).
+- `NA` checking only in from/to columns of edge `data.frame` (#1906).
 
-- Vectorized drawing of arrows (#257, #1904).
+- Vectorized drawing of arrows in `plot()` (#257, #1904).
 
 - Keep vertex attribute type for `disjoint_union()` (#1640, #1909).
 
-- Allow more than one edge label font family (#37, #1896).
+- Allow more than one edge label font family in `plot()` (#37, #1896).
 
-- Pie shapes work as intended (#1882, #1883).
+- Pie shapes now work as intended (#1882, #1883).
 
-- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
+- Error in bipartite projection if `type` is not a vertex attribute (#898, #1889).
 
-- Do not try to destroy non-initialized SIR objects upon error.
+- Do not try to destroy non-initialized SIR objects upon error (#1888).
 
-  see https://github.com/igraph/rigraph/issues/1888
+- Added proper `NA` handling for matrix inputs (#917, #918, #1828).
 
-- Added `NA` handling for matrix inputs (#917, #918, #1828).
+- Added support for factors in `graph_from_data_frame()` (#34, #1829).
 
-- Added factor support for `graph_from_data_frame()` (#34, #1829).
-
-- Remove string matrix support from biadjacency matrix functions (#1540, #1542, #1803).
+- Remove string matrix support from functions operating on biadjacency matrices (#1540, #1542, #1803).
 
 - Removed redundant inheritParams call (#1802).
 
 - Loops not plotted on canvas (#1799, #1800).
 
-- Load the Matrix package before coercing to a sparse matrix.
+- Load the Matrix package before Matrices are coerced to a sparse matrix in tests.
 
-- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
+- Replace `NA` values in `label` attributes in `plot()` with default values (#1796, #1797).
 
 - Integer vectors are validated before transferring them to the C library (#1434, #1582).
 
-- Changed base location for graph_from_graphdb and added tests (#1712, #1732).
+- Changed base location for `graph_from_graphdb()` and added tests (#1712, #1732).
 
 - Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (#848, #1731).
 
-- Use function instead of (x) in arrow.mode (#1722).
+- Use `function()` instead of `(x)` in `arrow.mode` (#1722).
 
-- Duplicated arrowhead drawing (#640, #1709).
+- Removed duplicated plotting of arrow heads (#640, #1709).
 
 - Correct mapping of edge label properties in plots when loops are present (#157, #1706).
 
-- NA attribute values are replaced with default values for plotting (#293, #1707).
-
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
+- NA attribute values are replaced with default values in `plot()` (#293, #1707).
 
 - Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
-  as the framework for handling callback functions is not yet present
+  as the framework for handling callback functions is not yet present.
 
 ## Features
 
@@ -100,23 +98,19 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969).
 
-- Add more layouts to tkplot (#160, #1967).
-
-- Support for more graph product types.
+- Add more layouts to `tkplot()` (#160, #1967).
 
 - Added `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
 
 - Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
 
-- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
-
-- `simple_cycles()` lists all simple cycles (#1573, #1580).
+- `simple_cycles()` added to list all simple cycles (#1573, #1580).
 
 - Expose C version (#1208, #1781).
 
 - Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
 
-- Add relative size scaling to vertices in plots (@gvegayon, #172).
+- Add relative size scaling to vertices in `plot()` (@gvegayon, #172).
 
 - Expose `find_cycle()` (#1471, #1571).
 
@@ -124,9 +118,9 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
 
-- Added proper support for adding attributes via data.frames (#1373, #1669, #1716).
+- Added support for adding attributes via `data.frames` (#1373, #1669, #1716).
 
-- Hrg functions check their argument (#1074, #1699).
+- all `_hrg()` functions check their argument (#1074, #1699).
 
 - `get_edge_ids()` accepts data frames and matrices (#1663).
 
