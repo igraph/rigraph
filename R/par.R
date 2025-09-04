@@ -75,24 +75,8 @@ getIgraphOpt <- function(x, default = NULL) {
 )
 
 igraph.pars.set.verbose <- function(verbose) {
-  if (is.logical(verbose)) {
-    .Call(R_igraph_set_verbose, verbose)
-  } else if (is.character(verbose)) {
-    if (!verbose %in% c("tk", "tkconsole")) {
-      cli::cli_abort("Unknown {.arg verbose} value.")
-    }
-    if (verbose %in% c("tk", "tkconsole")) {
-      if (!capabilities()[["X11"]]) {
-        cli::cli_abort("X11 not available.")
-      }
-      if (!requireNamespace("tcltk", quietly = TRUE)) {
-        cli::cli_abort("tcltk package not available.")
-      }
-    }
-    .Call(R_igraph_set_verbose, TRUE)
-  } else {
-    cli::cli_abort("{.arg verbose} should be a logical or character scalar.")
-  }
+  check_logical(verbose)
+  .Call(R_igraph_set_verbose, verbose)
   verbose
 }
 
