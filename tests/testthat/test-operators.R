@@ -108,8 +108,15 @@ test_that("compose() works", {
 })
 
 test_that("compose works for named graphs", {
-  g1 <- graph_from_literal(A - B:D:E, B - C:D, C - D, D - E)
-  g2 <- graph_from_literal(A - B - E - A)
+  el1 <- structure(
+    c(
+      "A", "A", "A", "B", "B", "D", "D", "B", "D", "E", 
+      "D", "C", "E", "C"),
+    dim = c(7L, 2L)
+  )
+  el2 <- structure(c("A", "A", "B", "B", "E", "E"), dim = 3:2)
+  g1 <- graph_from_edgelist(el1, directed = FALSE)
+  g2 <- graph_from_edgelist(el2, directed = FALSE)
 
   V(g1)$bar1 <- seq_len(vcount(g1))
   V(g2)$bar2 <- seq_len(vcount(g2))

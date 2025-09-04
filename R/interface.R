@@ -354,9 +354,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
     mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   }
   v <- as_igraph_vs(graph, v)
-  if (length(v) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(v)
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_neighbors, graph, v - 1, as.numeric(mode)) + 1L
 
@@ -393,9 +391,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
     mode <- 1
   }
   v <- as_igraph_vs(graph, v)
-  if (length(v) == 0) {
-    stop("No vertex was specified")
-  }
+  check_vertex(v)
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
 
