@@ -54,7 +54,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-2-1-99-9900">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-2-1-99-9900"></a></h3>
 <ul><li><p>Breaking change: change arguments default and order for <code><a href="../reference/graph_from_lcf.html">graph_from_lcf()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1858" class="external-link">#1858</a>, <a href="https://github.com/igraph/rigraph/issues/1872" class="external-link">#1872</a>).</p></li>
-<li><p>Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new <code>loops</code> argument is set to <code>TRUE</code> (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1662" class="external-link">#1662</a>, <a href="https://github.com/igraph/rigraph/issues/1661" class="external-link">#1661</a>).</p></li>
+<li><p>Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new <code>loops</code> argument is set to <code>TRUE</code> (<a href="https://github.com/igraph/rigraph/issues/1662" class="external-link">#1662</a>, <a href="https://github.com/igraph/rigraph/issues/1661" class="external-link">#1661</a>).</p></li>
 <li><p>Breaking change: remove deprecated <code>neimode</code> parameter from <code><a href="../reference/bfs.html">bfs()</a></code> and <code><a href="../reference/dfs.html">dfs()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1105" class="external-link">#1105</a>, <a href="https://github.com/igraph/rigraph/issues/1526" class="external-link">#1526</a>).</p></li>
 <li><p>Breaking change: stricter deprecation of non-functional parameters of <code><a href="../reference/layout_with_kk.html">layout_with_kk()</a></code> and <code><a href="../reference/layout_with_fr.html">layout_with_fr()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1108" class="external-link">#1108</a>, <a href="https://github.com/igraph/rigraph/issues/1628" class="external-link">#1628</a>).</p></li>
 </ul></div>
@@ -93,13 +93,13 @@
 <li><p>Load the Matrix package before coercing to a sparse matrix.</p></li>
 <li><p><code>NA</code> replacement for labels in plots and arrow mode (<a href="https://github.com/igraph/rigraph/issues/1796" class="external-link">#1796</a>, <a href="https://github.com/igraph/rigraph/issues/1797" class="external-link">#1797</a>).</p></li>
 <li><p>Integer vectors are validated before transferring them to the C library (<a href="https://github.com/igraph/rigraph/issues/1434" class="external-link">#1434</a>, <a href="https://github.com/igraph/rigraph/issues/1582" class="external-link">#1582</a>).</p></li>
-<li><p>Changed base location for graph_from_graphdb and added tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1712" class="external-link">#1712</a>, <a href="https://github.com/igraph/rigraph/issues/1732" class="external-link">#1732</a>).</p></li>
-<li><p>Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/848" class="external-link">#848</a>, <a href="https://github.com/igraph/rigraph/issues/1731" class="external-link">#1731</a>).</p></li>
-<li><p>Use function instead of (x) in arrow.mode (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1722" class="external-link">#1722</a>).</p></li>
-<li><p>Duplicated arrowhead drawing (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/640" class="external-link">#640</a>, <a href="https://github.com/igraph/rigraph/issues/1709" class="external-link">#1709</a>).</p></li>
-<li><p>Correct mapping of edge label properties in plots when loops are present (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/157" class="external-link">#157</a>, <a href="https://github.com/igraph/rigraph/issues/1706" class="external-link">#1706</a>).</p></li>
-<li><p>NA attribute values are replaced with default values for plotting (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/293" class="external-link">#293</a>, <a href="https://github.com/igraph/rigraph/issues/1707" class="external-link">#1707</a>).</p></li>
-<li><p>Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new <code>loops</code> argument is set to <code>TRUE</code> (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1662" class="external-link">#1662</a>, <a href="https://github.com/igraph/rigraph/issues/1661" class="external-link">#1661</a>).</p></li>
+<li><p>Changed base location for graph_from_graphdb and added tests (<a href="https://github.com/igraph/rigraph/issues/1712" class="external-link">#1712</a>, <a href="https://github.com/igraph/rigraph/issues/1732" class="external-link">#1732</a>).</p></li>
+<li><p>Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (<a href="https://github.com/igraph/rigraph/issues/848" class="external-link">#848</a>, <a href="https://github.com/igraph/rigraph/issues/1731" class="external-link">#1731</a>).</p></li>
+<li><p>Use function instead of (x) in arrow.mode (<a href="https://github.com/igraph/rigraph/issues/1722" class="external-link">#1722</a>).</p></li>
+<li><p>Duplicated arrowhead drawing (<a href="https://github.com/igraph/rigraph/issues/640" class="external-link">#640</a>, <a href="https://github.com/igraph/rigraph/issues/1709" class="external-link">#1709</a>).</p></li>
+<li><p>Correct mapping of edge label properties in plots when loops are present (<a href="https://github.com/igraph/rigraph/issues/157" class="external-link">#157</a>, <a href="https://github.com/igraph/rigraph/issues/1706" class="external-link">#1706</a>).</p></li>
+<li><p>NA attribute values are replaced with default values for plotting (<a href="https://github.com/igraph/rigraph/issues/293" class="external-link">#293</a>, <a href="https://github.com/igraph/rigraph/issues/1707" class="external-link">#1707</a>).</p></li>
+<li><p>Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new <code>loops</code> argument is set to <code>TRUE</code> (<a href="https://github.com/igraph/rigraph/issues/1662" class="external-link">#1662</a>, <a href="https://github.com/igraph/rigraph/issues/1661" class="external-link">#1661</a>).</p></li>
 <li><p>Temporarily disable generating an interface for <code>igraph_simple_cycles_callback()</code>. as the framework for handling callback functions is not yet present</p></li>
 </ul></div>
 <div class="section level3">
@@ -121,7 +121,7 @@
 <li><p>Expose <code><a href="../reference/find_cycle.html">find_cycle()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1471" class="external-link">#1471</a>, <a href="https://github.com/igraph/rigraph/issues/1571" class="external-link">#1571</a>).</p></li>
 <li><p>Split <code><a href="../reference/sample_bipartite.html">sample_bipartite()</a></code> into two functions for the G(n, m) a… (<a href="https://github.com/igraph/rigraph/issues/630" class="external-link">#630</a>, <a href="https://github.com/igraph/rigraph/issues/1692" class="external-link">#1692</a>).</p></li>
 <li><p><code><a href="../reference/feedback_vertex_set.html">feedback_vertex_set()</a></code> finds a minimum feedback vertex set in a graph (<a href="https://github.com/igraph/rigraph/issues/1446" class="external-link">#1446</a>, <a href="https://github.com/igraph/rigraph/issues/1447" class="external-link">#1447</a>, <a href="https://github.com/igraph/rigraph/issues/1560" class="external-link">#1560</a>).</p></li>
-<li><p>Added proper support for adding attributes via data.frames (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1373" class="external-link">#1373</a>, <a href="https://github.com/igraph/rigraph/issues/1669" class="external-link">#1669</a>, <a href="https://github.com/igraph/rigraph/issues/1716" class="external-link">#1716</a>).</p></li>
+<li><p>Added proper support for adding attributes via data.frames (<a href="https://github.com/igraph/rigraph/issues/1373" class="external-link">#1373</a>, <a href="https://github.com/igraph/rigraph/issues/1669" class="external-link">#1669</a>, <a href="https://github.com/igraph/rigraph/issues/1716" class="external-link">#1716</a>).</p></li>
 <li><p>Hrg functions check their argument (<a href="https://github.com/igraph/rigraph/issues/1074" class="external-link">#1074</a>, <a href="https://github.com/igraph/rigraph/issues/1699" class="external-link">#1699</a>).</p></li>
 <li><p><code><a href="../reference/get_edge_ids.html">get_edge_ids()</a></code> accepts data frames and matrices (<a href="https://github.com/igraph/rigraph/issues/1663" class="external-link">#1663</a>).</p></li>
 </ul></div>
@@ -176,7 +176,7 @@
 <li><p>Revdepchecks.</p></li>
 <li><p>Add air code formatting (<a href="https://github.com/igraph/rigraph/issues/1734" class="external-link">#1734</a>, <a href="https://github.com/igraph/rigraph/issues/1869" class="external-link">#1869</a>).</p></li>
 <li><p>Add deps file to build-ignore.</p></li>
-<li><p>Fix <code><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">devtools::load_all()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1857" class="external-link">#1857</a>).</p></li>
+<li><p>Fix <code>devtools::load_all()</code> (<a href="https://github.com/igraph/rigraph/issues/1857" class="external-link">#1857</a>).</p></li>
 <li><p>Refer to the dev version of roxygen2 as build dependency (<a href="https://github.com/igraph/rigraph/issues/1832" class="external-link">#1832</a>).</p></li>
 <li><p>Results from main.</p></li>
 <li><p>Results from check with new arpack.</p></li>
@@ -194,7 +194,7 @@
 <li><p>Remove <code>Rf_allocSExp()</code> which is no longer in R’s C API (<a href="https://github.com/igraph/rigraph/issues/1735" class="external-link">#1735</a>).</p></li>
 <li><p>Fix Stimulus (<a href="https://github.com/igraph/rigraph/issues/1737" class="external-link">#1737</a>).</p></li>
 <li><p>Use <code>"parent"</code> instead of <code>"father"</code> in <code><a href="../reference/bfs.html">bfs()</a></code> and <code><a href="../reference/dfs.html">dfs()</a></code> (<a href="https://github.com/igraph/rigraph/issues/880" class="external-link">#880</a>, <a href="https://github.com/igraph/rigraph/issues/1523" class="external-link">#1523</a>).</p></li>
-<li><p>Run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1710" class="external-link">#1710</a>).</p></li>
+<li><p>Run <code>devtools::document()</code> (<a href="https://github.com/igraph/rigraph/issues/1710" class="external-link">#1710</a>).</p></li>
 <li><p>Run {styler} (with {igraph.style}) (<a href="https://github.com/igraph/rigraph/issues/1696" class="external-link">#1696</a>).</p></li>
 <li><p>Breaking change: remove deprecated <code>neimode</code> parameter from <code><a href="../reference/bfs.html">bfs()</a></code> and <code><a href="../reference/dfs.html">dfs()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1105" class="external-link">#1105</a>, <a href="https://github.com/igraph/rigraph/issues/1526" class="external-link">#1526</a>).</p></li>
 <li><p>Adapt handling of optional parameters to interface definition changes in the C core (<a href="https://github.com/igraph/rigraph/issues/1567" class="external-link">#1567</a>).</p></li>
@@ -230,13 +230,13 @@
 <li><p>Use <code>check_string()</code> instead of <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1365" class="external-link">#1365</a>).</p></li>
 <li><p>Adapt to <code>cut.prob</code>’s new handling of NULL in the C core (<a href="https://github.com/igraph/rigraph/issues/1570" class="external-link">#1570</a>, <a href="https://github.com/igraph/rigraph/issues/1602" class="external-link">#1602</a>).</p></li>
 <li><p>One less tmp use case (<a href="https://github.com/igraph/rigraph/issues/1715" class="external-link">#1715</a>).</p></li>
-<li><p>Enhance readability and performance of graph.adjacency.sparse (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1667" class="external-link">#1667</a>).</p></li>
+<li><p>Enhance readability and performance of graph.adjacency.sparse (<a href="https://github.com/igraph/rigraph/issues/1667" class="external-link">#1667</a>).</p></li>
 <li><p>Prepare for C core interface standardizing ‘type’ -&gt; ‘types’ in igraph_is_bipartite.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="performance-2-1-99-9900">Performance<a class="anchor" aria-label="anchor" href="#performance-2-1-99-9900"></a></h3>
 <ul><li><p>Accelerate check if an index sequence corresponds to the entire list of vertices (<a href="https://github.com/igraph/rigraph/issues/1427" class="external-link">#1427</a>, <a href="https://github.com/igraph/rigraph/issues/1818" class="external-link">#1818</a>).</p></li>
-<li><p>Faster single bracket querying of a graph (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1465" class="external-link">#1465</a>, <a href="https://github.com/igraph/rigraph/issues/1658" class="external-link">#1658</a>).</p></li>
+<li><p>Faster single bracket querying of a graph (<a href="https://github.com/igraph/rigraph/issues/1465" class="external-link">#1465</a>, <a href="https://github.com/igraph/rigraph/issues/1658" class="external-link">#1658</a>).</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="testing-2-1-99-9900">Testing<a class="anchor" aria-label="anchor" href="#testing-2-1-99-9900"></a></h3>
@@ -246,22 +246,22 @@
 <li><p>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/igraph/rigraph/issues/1738" class="external-link">#1738</a>).</p></li>
 <li><p>Rename, add test for <code><a href="../reference/laplacian_matrix.html">laplacian_matrix()</a></code> (<a href="https://github.com/igraph/rigraph/issues/1714" class="external-link">#1714</a>).</p></li>
 <li><p>Merged feedback.set tests into structural.properties (<a href="https://github.com/igraph/rigraph/issues/1743" class="external-link">#1743</a>).</p></li>
-<li><p>Added tests for untested files (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1728" class="external-link">#1728</a>).</p></li>
-<li><p>Merged and refactored other.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1727" class="external-link">#1727</a>).</p></li>
-<li><p>Merged and refactored structural.properties.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1726" class="external-link">#1726</a>).</p></li>
-<li><p>Merged and refactored orphaned test files (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1724" class="external-link">#1724</a>).</p></li>
-<li><p>Merged and refactored iterators.R and operators.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1723" class="external-link">#1723</a>).</p></li>
-<li><p>Merged and refactored topology.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1720" class="external-link">#1720</a>).</p></li>
-<li><p>Merged and refactored embedding.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1721" class="external-link">#1721</a>).</p></li>
+<li><p>Added tests for untested files in R/ (<a href="https://github.com/igraph/rigraph/issues/1728" class="external-link">#1728</a>).</p></li>
+<li><p>Merged and refactored other.R tests (<a href="https://github.com/igraph/rigraph/issues/1727" class="external-link">#1727</a>).</p></li>
+<li><p>Merged and refactored structural.properties.R tests (<a href="https://github.com/igraph/rigraph/issues/1726" class="external-link">#1726</a>).</p></li>
+<li><p>Merged and refactored orphaned test files (<a href="https://github.com/igraph/rigraph/issues/1724" class="external-link">#1724</a>).</p></li>
+<li><p>Merged and refactored iterators.R and operators.R tests (<a href="https://github.com/igraph/rigraph/issues/1723" class="external-link">#1723</a>).</p></li>
+<li><p>Merged and refactored topology.R tests (<a href="https://github.com/igraph/rigraph/issues/1720" class="external-link">#1720</a>).</p></li>
+<li><p>Merged and refactored embedding.R tests (<a href="https://github.com/igraph/rigraph/issues/1721" class="external-link">#1721</a>).</p></li>
 <li><p>Merge all tests for foreign.R into one test file (<a href="https://github.com/igraph/rigraph/issues/1713" class="external-link">#1713</a>).</p></li>
 <li><p>Improve test-dot.product.game (<a href="https://github.com/igraph/rigraph/issues/1396" class="external-link">#1396</a>, <a href="https://github.com/igraph/rigraph/issues/1705" class="external-link">#1705</a>).</p></li>
-<li><p>Merged and refactored conversion.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1701" class="external-link">#1701</a>).</p></li>
+<li><p>Merged and refactored conversion.R tests (<a href="https://github.com/igraph/rigraph/issues/1701" class="external-link">#1701</a>).</p></li>
 <li><p>Create helpers (<a href="https://github.com/igraph/rigraph/issues/1691" class="external-link">#1691</a>, <a href="https://github.com/igraph/rigraph/issues/1695" class="external-link">#1695</a>).</p></li>
-<li><p>Merged and refactored make.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1685" class="external-link">#1685</a>).</p></li>
-<li><p>Merged and refactored community.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1689" class="external-link">#1689</a>).</p></li>
-<li><p>Merged and refactored indexing.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1687" class="external-link">#1687</a>).</p></li>
-<li><p>Merged and refactored flow.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1675" class="external-link">#1675</a>).</p></li>
-<li><p>Merged and refactored games.R tests (<a href="https://github.com/schochastics" class="external-link">@schochastics</a>, <a href="https://github.com/igraph/rigraph/issues/1682" class="external-link">#1682</a>).</p></li>
+<li><p>Merged and refactored make.R tests (<a href="https://github.com/igraph/rigraph/issues/1685" class="external-link">#1685</a>).</p></li>
+<li><p>Merged and refactored community.R tests (<a href="https://github.com/igraph/rigraph/issues/1689" class="external-link">#1689</a>).</p></li>
+<li><p>Merged and refactored indexing.R tests (<a href="https://github.com/igraph/rigraph/issues/1687" class="external-link">#1687</a>).</p></li>
+<li><p>Merged and refactored flow.R tests (<a href="https://github.com/igraph/rigraph/issues/1675" class="external-link">#1675</a>).</p></li>
+<li><p>Merged and refactored games.R tests (<a href="https://github.com/igraph/rigraph/issues/1682" class="external-link">#1682</a>).</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="uncategorized-2-1-99-9900">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-2-1-99-9900"></a></h3>
