@@ -3367,11 +3367,11 @@ void R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
 }
 
 igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
-  igraph_integer_t length = Rf_xlength(rval);
+  const igraph_integer_t length = Rf_xlength(rval);
   sv->stor_begin=(char**) R_alloc((size_t) length, sizeof(char*));
   sv->stor_end=sv->stor_begin+length;
   sv->end=sv->stor_end;
-  for (igraph_integer_t i=0; i<igraph_strvector_size(sv); i++) {
+  for (igraph_integer_t i=0; i<length; i++) {
     sv->stor_begin[i]=(char*) CHAR(STRING_ELT(rval, i));
   }
 
@@ -3379,8 +3379,9 @@ igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
 }
 
 igraph_error_t R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv) {
-  IGRAPH_STRVECTOR_INIT_FINALLY(sv, Rf_xlength(rval));
-  for (igraph_integer_t i=0; i<igraph_strvector_size(sv); i++) {
+  const igraph_integer_t length = Rf_xlength(rval);
+  IGRAPH_STRVECTOR_INIT_FINALLY(sv, length);
+  for (igraph_integer_t i=0; i<length; i++) {
     IGRAPH_CHECK(igraph_strvector_set(sv, i, CHAR(STRING_ELT(rval, i))));
   }
   IGRAPH_FINALLY_CLEAN(1);
@@ -3501,7 +3502,7 @@ igraph_error_t R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 igraph_error_t R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, igraph_vector_int_t *data) {
 
   IGRAPH_CHECK(R_SEXP_to_vector_int_copy(rit, data));
-  igraph_vs_vector(it, data);
+  IGRAPH_CHECK(igraph_vs_vector(it, data));
 
   return IGRAPH_SUCCESS;
 }
@@ -3513,7 +3514,7 @@ igraph_error_t R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, i
 igraph_error_t R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it, igraph_vector_int_t *data) {
 
   IGRAPH_CHECK(R_SEXP_to_vector_int_copy(rit, data));
-  igraph_es_vector(it, data);
+  IGRAPH_CHECK(igraph_es_vector(it, data));
 
   return IGRAPH_SUCCESS;
 }
@@ -3885,26 +3886,6 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
   mode = (igraph_neimode_t) Rf_asInteger(pmode);
   R_SEXP_to_igraph(graph, &g);
   IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, (igraph_integer_t) vid, mode));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&neis));
-  igraph_vector_int_destroy(&neis);
-
-  UNPROTECT(1);
-  return result;
-}
-
-
-  igraph_t g;
-  igraph_vector_int_t neis;
-  SEXP result;
-  igraph_real_t vid;
-  igraph_neimode_t mode;
-
-  igraph_vector_int_init(&neis, 0);
-  vid=REAL(pvid)[0];
-  mode = (igraph_neimode_t) Rf_asInteger(pmode);
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_incident(&g, &neis, (igraph_integer_t) vid, mode));
 
   PROTECT(result=R_igraph_vector_int_to_SEXP(&neis));
   igraph_vector_int_destroy(&neis);
@@ -5858,15 +5839,20 @@ SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
   igraph_vector_int_init(&neis, 0);
   igraph_vit_create(&g, v, &vv);
   PROTECT(result=NEW_LOGICAL(igraph_vcount(&g)));
-  memset(LOGICAL(result), 0, sizeof(LOGICAL(result)[0]) *
+  memset(LOGICAL(result), FALSE, sizeof(LOGICAL(result)[0]) *
          (size_t) igraph_vcount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
+    igraph_integer_t neis_size;
+
     IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode));
-    for (igraph_integer_t i=0; i<igraph_vector_int_size(&neis); i++) {
-      igraph_integer_t nei=VECTOR(neis)[i];
-      LOGICAL(result)[nei]=1;
+    
+    neis_size = igraph_vector_int_size(&neis);
+    for (igraph_integer_t i=0; i < neis_size; i++) {
+      igraph_integer_t nei = VECTOR(neis)[i];
+      LOGICAL(result)[nei] = TRUE;
     }
+
     IGRAPH_VIT_NEXT(vv);
   }
 
@@ -5895,16 +5881,16 @@ SEXP R_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
 
   igraph_eit_create(&g, e, &ee);
   PROTECT(result=NEW_LOGICAL(igraph_vcount(&g)));
-  memset(LOGICAL(result), 0, sizeof(LOGICAL(result)[0]) *
+  memset(LOGICAL(result), FALSE, sizeof(LOGICAL(result)[0]) *
          (size_t) igraph_vcount(&g));
 
   while (!IGRAPH_EIT_END(ee)) {
     IGRAPH_R_CHECK(igraph_edge(&g, IGRAPH_EIT_GET(ee), &from, &to));
-    if (mode & 1) {
-      LOGICAL(result)[from]=1;
+    if (mode & IGRAPH_OUT) {
+      LOGICAL(result)[from] = TRUE;
     }
-    if (mode & 2) {
-      LOGICAL(result)[to]=1;
+    if (mode & IGRAPH_IN) {
+      LOGICAL(result)[to] = TRUE;
     }
     IGRAPH_EIT_NEXT(ee);
   }
@@ -5938,10 +5924,14 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
          (size_t) igraph_ecount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
+    igraph_integer_t adje_size;
+
     IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), mode));
-    for (igraph_integer_t i=0; i < igraph_vector_int_size(&adje); i++) {
+    adje_size = igraph_vector_int_size(&adje);
+
+    for (igraph_integer_t i=0; i < adje_size; i++) {
       igraph_integer_t edge=VECTOR(adje)[i];
-      LOGICAL(result)[edge]=1;
+      LOGICAL(result)[edge] = TRUE;
     }
     IGRAPH_VIT_NEXT(vv);
   }
@@ -8307,6 +8297,48 @@ SEXP R_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
   }
 
   igraph_lazy_adjlist_destroy(&adjlist);
+  igraph_vit_destroy(&vit);
+  igraph_vs_destroy(&vs);
+  igraph_vector_int_destroy(&vs_data);
+  IGRAPH_FINALLY_CLEAN(4);
+
+  UNPROTECT(1);
+  return result;
+}
+
+SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
+
+  igraph_t graph;
+  igraph_vs_t vs;
+  igraph_vector_int_t vs_data;
+  igraph_vit_t vit;
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
+  SEXP result;
+  size_t i, n;
+  igraph_lazy_inclist_t adjlist;
+
+  R_SEXP_to_igraph(pgraph, &graph);
+  R_SEXP_to_igraph_vs(pe, &graph, &vs, &vs_data);
+  IGRAPH_FINALLY(igraph_vs_destroy, &vs);
+  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &vs_data);
+
+  igraph_vit_create(&graph, vs, &vit);
+  IGRAPH_FINALLY(igraph_vit_destroy, &vit);
+  n = IGRAPH_VIT_SIZE(vit);
+
+  igraph_lazy_inclist_init(&graph, &adjlist, mode, IGRAPH_LOOPS_TWICE);
+  IGRAPH_FINALLY(igraph_lazy_inclist_destroy, &adjlist);
+
+  PROTECT(result = NEW_LIST(n));
+  for (IGRAPH_VIT_RESET(vit), i=0;
+       !IGRAPH_VIT_END(vit);
+       IGRAPH_VIT_NEXT(vit), i++) {
+    igraph_integer_t eid = IGRAPH_VIT_GET(vit);
+    igraph_vector_int_t *neis = igraph_lazy_inclist_get(&adjlist, eid);
+    SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(neis));
+  }
+
+  igraph_lazy_inclist_destroy(&adjlist);
   igraph_vit_destroy(&vit);
   igraph_vs_destroy(&vs);
   igraph_vector_int_destroy(&vs_data);
