@@ -62,6 +62,7 @@
 ^covr$
 ^src/*\.gcda$
 ^src/*\.gcno$
+^R/release\.R$
 ^man/dot-igraph.progress\.Rd$
 ^man/dot-igraph.status\.Rd$
 ^man/dot-extract_constructor_and_modifiers\.Rd$
