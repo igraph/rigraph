@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 2160 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2174 reverse dependencies (2173 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 25 new problems
- * We failed to check 12 packages
+ * We saw 29 new problems
+ * We failed to check 32 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -18,8 +18,18 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* cfid
+  checking tests ... ERROR
+
+* cglasso
+  checking examples ... ERROR
+
 * CITMIC
   checking re-building of vignette outputs ... ERROR
+
+* DiagrammeR
+  checking examples ... ERROR
+  checking tests ... ERROR
 
 * dosearch
   checking tests ... ERROR
@@ -27,9 +37,6 @@ Issues with CRAN packages are summarised below.
 * DrDimont
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
-
-* EGAnet
-  checking examples ... ERROR
 
 * egor
   checking re-building of vignette outputs ... ERROR
@@ -39,12 +46,6 @@ Issues with CRAN packages are summarised below.
 
 * GephiForR
   checking examples ... ERROR
-
-* gor
-  checking examples ... ERROR
-
-* handwriterRF
-  checking tests ... ERROR
 
 * incidentally
   checking re-building of vignette outputs ... ERROR
@@ -59,6 +60,9 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+* mlmts
+  checking installed package size ... NOTE
+
 * multinet
   checking examples ... ERROR
 
@@ -66,11 +70,11 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* pathfindR
-  checking tests ... ERROR
-
 * PopComm
   checking examples ... ERROR
+
+* ProgModule
+  checking re-building of vignette outputs ... ERROR
 
 * remify
   checking tests ... ERROR
@@ -83,8 +87,17 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+* sfnetworks
+  checking tests ... ERROR
+
 * sharpshootR
   checking examples ... ERROR
+
+* TDApplied
+  checking examples ... ERROR
+
+* tidygraph
+  checking tests ... ERROR
 
 * tilemaps
   checking examples ... ERROR
@@ -96,14 +109,34 @@ Issues with CRAN packages are summarised below.
 ### Failed to check
 
 * bnlearn         (NA)
+* bnpa            (NA)
+* bsts            (NA)
+* cdmTools        (NA)
 * dataone         (NA)
 * datapack        (NA)
+* dySEM           (NA)
+* EGAnet          (NA)
 * FAfA            (NA)
 * FAIRmaterials   (NA)
+* fdm2id          (NA)
+* ggsem           (NA)
+* jmv             (NA)
+* latentFactoR    (NA)
 * lavaan.shiny    (NA)
+* lcsm            (NA)
+* lvnet           (NA)
+* manymome        (NA)
 * multinma        (NA)
+* phylosem        (NA)
+* psychonetrics   (NA)
 * randomForestSRC (NA)
-* RSP             (NA)
+* semdrw          (NA)
+* semptools       (NA)
 * sphereML        (NA)
+* SSVS            (NA)
 * streamDAG       (NA)
+* Surrogate       (NA)
+* TELP            (NA)
 * TestAnaAPP      (NA)
+* tidybins        (NA)
+* tidycomm        (NA)

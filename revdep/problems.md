@@ -276,6 +276,128 @@ Run `revdepcheck::cloud_details(, "archeofrag")` for more info
       Note: found 3 marked UTF-8 strings
     ```
 
+# cfid
+
+<details>
+
+* Version: 0.1.7
+* GitHub: https://github.com/santikka/cfid
+* Source code: https://github.com/cran/cfid
+* Date/Publication: 2023-11-27 16:00:04 UTC
+* Number of recursive dependencies: 46
+
+Run `revdepcheck::cloud_details(, "cfid")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(cfid)
+      > 
+      > test_check("cfid")
+      [ FAIL 1 | WARN 4 | SKIP 0 | PASS 203 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test-graphs.R:166:3'): causaleffect syntax with igraph supported ──
+      import_graph(ig) (`actual`) not identical to dag("X -> Z -> Y X <-> Y") (`expected`).
+      
+        `dim(actual)`: 5 5
+      `dim(expected)`: 4 4
+      
+      `attr(actual, 'labels')[2:5]`:   "Z" "Y" "U[X,Y]" "U[Z,Y]"
+      `attr(expected, 'labels')[2:4]`: "Z" "Y" "U[X,Y]"         
+      
+      `attr(actual, 'latent')[2:5]`:   FALSE FALSE TRUE TRUE
+      `attr(expected, 'latent')[2:4]`: FALSE FALSE TRUE     
+      
+        `attr(actual, 'order')`: 4 5 3 1 2
+      `attr(expected, 'order')`: 4 1 2 3  
+      
+      `attr(actual, 'text')`:   "X; Z; Y; X -> Z; Y -> X; X <-> Y; Z <-> Y"
+      `attr(expected, 'text')`: "X; Z; Y; X -> Z; Z -> Y; X <-> Y"         
+      
+              `actual`: 0 0 1 1 0 1 0 0 0 1 and 15 more...
+      `expected[2:16]`: 0 0 1 1 0 0 0 0 1 0            ...
+      
+      [ FAIL 1 | WARN 4 | SKIP 0 | PASS 203 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# cglasso
+
+<details>
+
+* Version: 2.0.7
+* GitHub: NA
+* Source code: https://github.com/cran/cglasso
+* Date/Publication: 2024-02-12 08:40:02 UTC
+* Number of recursive dependencies: 12
+
+Run `revdepcheck::cloud_details(, "cglasso")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘cglasso-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: plot.cglasso2igraph
+    > ### Title: Plot Method for a cglasso2igraph Object"
+    > ### Aliases: plot.cglasso2igraph
+    > ### Keywords: graphs
+    > 
+    > ### ** Examples
+    > 
+    > set.seed(123)
+    > # Y ~ N(0, Sigma) and probability of left/right censored values equal to 0.05
+    > n <- 100L
+    > p <- 3L
+    > rho <- 0.3
+    > Sigma <- outer(1L:p, 1L:p, function(i, j) rho^abs(i - j))
+    > Z <- rcggm(n = n, Sigma = Sigma, probl = 0.05, probr = 0.05)
+    > out <- cglasso(. ~ ., data = Z)
+    > out.graph <- to_graph(out)
+    > plot(out.graph, type = "Gyy")
+    Warning: vertex attribute color contains NAs. Replacing with default value 1
+    Warning: vertex attribute frame.color contains NAs. Replacing with default value black
+    > 
+    > out.graph <- to_graph(out, weighted = TRUE)
+    > plot(out.graph,  type = "Gyy")
+    Warning: Non-positive edge weight found, ignoring all weights during graph layout.
+    Warning: vertex attribute color contains NAs. Replacing with default value 1
+    Warning: vertex attribute frame.color contains NAs. Replacing with default value black
+    > 
+    > 
+    > # Y ~ N(b0 +XB, Sigma)  and probability of left/right censored values equal to 0.05
+    > n <- 100L
+    > p <- 3L
+    > q <- 2L
+    > b0 <- runif(p)
+    > B <- matrix(runif(q * p), nrow = q, ncol = p)
+    > X <- matrix(rnorm(n * q), nrow = n, ncol = q)
+    > rho <- 0.3
+    > Sigma <- outer(1L:p, 1L:p, function(i, j) rho^abs(i - j))
+    > Z <- rcggm(n = n, b0 = b0, X = X, B = B, Sigma = Sigma, probl = 0.05, probr = 0.05)
+    > out <- cglasso(. ~ ., data = Z)
+    > out.graph <- to_graph(out, lambda.id = 3, rho.id = 3, weighted = TRUE)
+    > plot(out.graph, type = "Gyy")
+    Warning: Non-positive edge weight found, ignoring all weights during graph layout.
+    Error in (function (graph, root = numeric(), circular = FALSE, rootlevel = numeric(),  : 
+      unused argument (weights = NA)
+    Calls: plot ... i.postprocess.layout -> %in% -> params -> ret -> v -> do.call
+    Execution halted
+    ```
+
 # CITMIC
 
 <details>
@@ -312,6 +434,138 @@ Run `revdepcheck::cloud_details(, "CITMIC")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
+    ```
+
+# DiagrammeR
+
+<details>
+
+* Version: 1.0.11
+* GitHub: https://github.com/rich-iannone/DiagrammeR
+* Source code: https://github.com/cran/DiagrammeR
+* Date/Publication: 2024-02-02 23:30:03 UTC
+* Number of recursive dependencies: 79
+
+Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘DiagrammeR-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: get_leverage_centrality
+    > ### Title: Get leverage centrality
+    > ### Aliases: get_leverage_centrality
+    > 
+    > ### ** Examples
+    > 
+    > # Create a random graph using the
+    > # `add_gnm_graph()` function
+    > graph <-
+    +   create_graph(
+    +     directed = FALSE) %>%
+    +   add_gnm_graph(
+    +     n = 10,
+    +     m = 15,
+    +     set_seed = 23)
+    > 
+    > # Get leverage centrality values
+    > # for all nodes in the graph
+    > graph %>%
+    +   get_leverage_centrality()
+    Error in `purrr::map()`:
+    ℹ In index: 1.
+    Caused by error in `igraph::neighbors()`:
+    ! Can't find vertex corresponding to `v`.
+    Backtrace:
+         ▆
+      1. ├─graph %>% get_leverage_centrality()
+      2. ├─DiagrammeR::get_leverage_centrality(.)
+      3. │ ├─... %>% unlist()
+      4. │ └─purrr::map(...)
+      5. │   └─purrr:::map_("list", .x, .f, ..., .progress = .progress)
+      6. │     ├─purrr:::with_indexed_errors(...)
+      7. │     │ └─base::withCallingHandlers(...)
+      8. │     ├─purrr:::call_with_cleanup(...)
+      9. │     └─DiagrammeR (local) .f(.x[[i]], ...)
+     10. │       ├─base::mean(...)
+     11. │       └─igraph::neighbors(ig_graph, degree_vals)
+     12. │         └─igraph:::check_vertex(v)
+     13. │           └─cli::cli_abort(...)
+     14. │             └─rlang::abort(...)
+     15. └─base::unlist(.)
+    Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > # This file is part of the standard setup for testthat.
+      > # It is recommended that you do not modify it.
+      > #
+      > # Where should you do additional test configuration?
+      > # Learn more about the roles of various files in:
+      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+      > # * https://testthat.r-lib.org/articles/special-files.html
+      > 
+      > library(testthat)
+      > library(DiagrammeR)
+      > 
+      > test_check("DiagrammeR")
+      [ FAIL 1 | WARN 3 | SKIP 24 | PASS 1696 ]
+      
+      ══ Skipped tests (24) ══════════════════════════════════════════════════════════
+      • On CRAN (24): 'test-add_forward_reverse_edges.R:94:3',
+        'test-add_graphs.R:41:3', 'test-add_graphs.R:262:3',
+        'test-add_graphs.R:1787:3', 'test-add_nodes_edges_from_table.R:684:3',
+        'test-cache_attrs.R:38:3', 'test-colorize_nodes_edges.R:415:3',
+        'test-create_combine_nodes.R:88:3', 'test-create_subgraph.R:73:3',
+        'test-delete_node_edge.R:286:3',
+        'test-get_select_last_nodes_edges_created.R:135:3',
+        'test-graph_series.R:361:3', 'test-graph_validation.R:17:3',
+        'test-graph_validation.R:241:3', 'test-graph_validation.R:301:3',
+        'test-render_graph.R:3:3', 'test-selections.R:163:3',
+        'test-set_get_node_edge_attrs.R:332:3', 'test-similarity_measures.R:106:3',
+        'test-similarity_measures.R:126:3', 'test-transform_graph.R:138:3',
+        'test-transform_graph.R:308:3', 'test-trav_out_until.R:73:3',
+        'test-traversals.R:148:3'
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Error ('test-get_node_calculations.R:255:3'): Getting leverage centrality is possible ──
+      <purrr_error_indexed/rlang_error/error/condition>
+      Error in `purrr::map(seq_along(degree_vals), function(x) {
+          mean((degree_vals[x] - degree_vals[igraph::neighbors(ig_graph, 
+              degree_vals)])/(degree_vals[x] + degree_vals[igraph::neighbors(ig_graph, 
+              degree_vals)]))
+      })`: i In index: 1.
+      Caused by error in `igraph::neighbors()`:
+      ! Can't find vertex corresponding to `v`.
+      
+      [ FAIL 1 | WARN 3 | SKIP 24 | PASS 1696 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.0Mb
+      sub-directories of 1Mb or more:
+        R             1.5Mb
+        help          1.5Mb
+        htmlwidgets   2.8Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 1 marked UTF-8 string
     ```
 
 # dosearch
@@ -435,16 +689,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-07-10 09:23:08] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-09-04 10:12:50] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-07-10 09:23:08] Generating graph of layer mrna for groupA...
-    [25-07-10 09:23:08] Reducing network by WGCNA::pickHardThreshold...
-    [25-07-10 09:23:08] R2 cutoff: 0.65
-    [25-07-10 09:23:08] Cut Threshold: 0.26
+    [25-09-04 10:12:50] Generating graph of layer mrna for groupA...
+    [25-09-04 10:12:50] Reducing network by WGCNA::pickHardThreshold...
+    [25-09-04 10:12:50] R2 cutoff: 0.65
+    [25-09-04 10:12:50] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -489,75 +743,6 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     checkRd: (-1) generate_individual_graphs.Rd:11: Lost braces
         11 | code{\link[DrDimont]{compute_correlation_matrices}}}
            |     ^
-    ```
-
-# EGAnet
-
-<details>
-
-* Version: 2.3.0
-* GitHub: https://github.com/hfgolino/EGAnet
-* Source code: https://github.com/cran/EGAnet
-* Date/Publication: 2025-04-09 23:10:15 UTC
-* Number of recursive dependencies: 180
-
-Run `revdepcheck::cloud_details(, "EGAnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘EGAnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: EGA
-    > ### Title: Exploratory Graph Analysis
-    > ### Aliases: EGA
-    > 
-    > ### ** Examples
-    > 
-    > # Obtain data
-    > wmt <- wmt2[,7:24]
-    > 
-    > # Estimate EGA
-    > ega.wmt <- EGA(
-    +   data = wmt,
-    +   plot.EGA = FALSE # No plot for CRAN checks
-    + )
-    Error in `set_vertex_attr()`:
-    ! `name` must be a single string, not `FALSE`.
-    Backtrace:
-         ▆
-      1. └─EGAnet::EGA(data = wmt, plot.EGA = FALSE)
-      2.   └─EGAnet::EGA.estimate(...)
-      3.     ├─base::do.call(...)
-      4.     └─EGAnet (local) `<fn>`(...)
-      5.       └─EGAnet::convert2igraph(network)
-      6.         ├─EGAnet:::silent_call(...)
-      7.         │ ├─utils::capture.output(result <- suppressWarnings(suppressMessages(...)))
-      8.         │ │ └─base::withVisible(...elt(i))
-      9.         │ ├─base::suppressWarnings(suppressMessages(...))
-     10.         │ │ └─base::withCallingHandlers(...)
-     11.         │ └─base::suppressMessages(...)
-     12.         │   └─base::withCallingHandlers(...)
-     13.         └─igraph::graph_from_adjacency_matrix(...)
-     14.           └─igraph::set_vertex_attr(name = add.colnames)
-     15.             └─igraph:::check_string(name)
-     16.               └─igraph:::stop_input_type(...)
-     17.                 └─rlang::abort(message, ..., call = call, arg = arg)
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.2Mb
-      sub-directories of 1Mb or more:
-        R      1.5Mb
-        data   4.0Mb
     ```
 
 # egor
@@ -691,176 +876,14 @@ Run `revdepcheck::cloud_details(, "GephiForR")` for more info
     Execution halted
     ```
 
-# gor
-
-<details>
-
-* Version: 1.0
-* GitHub: NA
-* Source code: https://github.com/cran/gor
-* Date/Publication: 2023-05-03 18:40:02 UTC
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "gor")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘gor-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: generate_fundamental_cycles
-    > ### Title: Generate fundamental cycles in a connected graph
-    > ### Aliases: generate_fundamental_cycles
-    > 
-    > ### ** Examples
-    > 
-    > g <- make_graph("Dodecahedron")
-    > n <- gorder(g)
-    > b <- bfs(g, 1, father = TRUE)                 # BFS tree
-    Warning: The `father` argument of `bfs()` is deprecated as of igraph 2.2.0.
-    ℹ Please use the `parent` argument instead.
-    > T <- make_graph(rbind(b$father[2:n], 2:n), n) # Tree as igraph graph
-    > eT <- as_edgelist(T)
-    > eG <- as_edgelist(g)
-    > C <- generate_fundamental_cycles(eT, eG)      # Fundamental cycles
-    > mu <- gsize(g) - gorder(g) + 1                # Cyclomatic number
-    > z <- layout_with_gem(g)
-    > for (i in 1:mu) {                             # Cycle drawing
-    +     c1 <- make_graph(t(eG[which(C[i,] == 1),]) , dir = FALSE)
-    +     plot(g, layout = z)
-    +     plot(c1, layout = z, add = TRUE, edge.color = "cyan4",
-    +          edge.lty = "dashed", edge.width = 3)
-    +     title(paste0("Cycle ", i, " of ", mu))
-    +     #Sys.sleep(1) # Adjust time to see the cycles
-    + }
-    Error in `plot()`:
-    ! The layout has 20 rows, but the graph has 5 vertices.
-    ℹ It is recommended to store the layout as x and y vertex attributes and not as
-      a matrix graph attribute.
-    Backtrace:
-        ▆
-     1. ├─base::plot(...)
-     2. └─igraph::plot.igraph(...)
-     3.   └─cli::cli_abort(...)
-     4.     └─rlang::abort(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) compute_lower_bound_1tree.Rd:31: Lost braces; missing escapes or markup?
-        31 | instance from vertex 1.  Internally, it creates the graph Kn-{v1}
-           |                                                              ^
-    ```
-
-# handwriterRF
-
-<details>
-
-* Version: 1.1.1
-* GitHub: https://github.com/CSAFE-ISU/handwriterRF
-* Source code: https://github.com/cran/handwriterRF
-* Date/Publication: 2025-01-29 00:20:01 UTC
-* Number of recursive dependencies: 123
-
-Run `revdepcheck::cloud_details(, "handwriterRF")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > # This file is part of the standard setup for testthat.
-      > # It is recommended that you do not modify it.
-      > #
-      > # Where should you do additional test configuration?
-      > # Learn more about the roles of various files in:
-      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-      > # * https://testthat.r-lib.org/articles/special-files.html
-      > 
-      > library(testthat)
-      > library(handwriterRF)
-      > 
-      > test_check("handwriterRF")
-      Copying samples to project directory > docs...
-      
-      Estimating writer profiles...
-      Listing documents to be processed...
-      Creating output directory...
-      Directory already exists.
-      Processing document w0030_s01_pWOZ_r01.png...
-      path in readPNGBinary: /tmp/RtmpSZltDI/comparison/docs/w0030_s01_pWOZ_r01.png
-      Starting Processing...
-      Getting Nodes...
-      Skeletonizing writing...
-      Splitting document into components...
-      Merging nodes...
-      Finding paths...
-      Split paths into graphs...
-      Organizing graphs...
-      Creating graph lists...
-      Adding character features...
-      Document processing complete
-      Saving processed document w0030_s01_pWOZ_r01.png...
-      
-      Processing document w0030_s01_pWOZ_r02.png...
-      path in readPNGBinary: /tmp/RtmpSZltDI/comparison/docs/w0030_s01_pWOZ_r02.png
-      Starting Processing...
-      Getting Nodes...
-      Skeletonizing writing...
-      Splitting document into components...
-      Merging nodes...
-      Finding paths...
-      Split paths into graphs...
-      Organizing graphs...
-      Creating graph lists...
-      Adding character features...
-      Document processing complete
-      Saving processed document w0030_s01_pWOZ_r02.png...
-      
-      All documents were successfully processed...
-      
-      Loading graphs for w0030_s01_pWOZ_r01_proclist.rds
-      Getting cluster assignments for w0030_s01_pWOZ_r01
-      Saving cluster assignments for  w0030_s01_pWOZ_r01 
-      
-      Loading graphs for w0030_s01_pWOZ_r02_proclist.rds
-      Getting cluster assignments for w0030_s01_pWOZ_r02
-      Saving cluster assignments for  w0030_s01_pWOZ_r02 
-      
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating SLR...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating SLR...
-      Killed
-    ```
-
 # incidentally
 
 <details>
 
-* Version: 1.0.2
+* Version: 1.0.3
 * GitHub: https://github.com/zpneal/incidentally
 * Source code: https://github.com/cran/incidentally
-* Date/Publication: 2023-02-15 21:00:02 UTC
+* Date/Publication: 2025-07-28 22:10:02 UTC
 * Number of recursive dependencies: 36
 
 Run `revdepcheck::cloud_details(, "incidentally")` for more info
@@ -1004,11 +1027,11 @@ Run `revdepcheck::cloud_details(, "klassR")` for more info
 
 <details>
 
-* Version: 1.5.1
+* Version: 1.6.0
 * GitHub: https://github.com/stocnet/manynet
 * Source code: https://github.com/cran/manynet
-* Date/Publication: 2025-06-23 08:30:02 UTC
-* Number of recursive dependencies: 135
+* Date/Publication: 2025-08-22 23:40:02 UTC
+* Number of recursive dependencies: 117
 
 Run `revdepcheck::cloud_details(, "manynet")` for more info
 
@@ -1021,31 +1044,23 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
     Running examples in ‘manynet-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: manip_paths
-    > ### Title: Modifying networks paths
-    > ### Aliases: manip_paths to_matching to_mentoring to_eulerian to_tree
-    > ###   to_dominating
+    > ### Name: mark_features
+    > ### Title: Marking networks features
+    > ### Aliases: mark_features is_connected is_perfect_matching is_eulerian
+    > ###   is_acyclic is_aperiodic
     > 
     > ### ** Examples
     > 
-    > to_matching(ison_southern_women)
-    Error in `igraph::graph_from_data_frame()`:
-    ! Cannot create a graph object because the edge data frame contains NAs.
-    Backtrace:
-         ▆
-      1. ├─manynet::to_matching(ison_southern_women)
-      2. └─manynet:::to_matching.tbl_graph(ison_southern_women)
-      3.   ├─manynet::as_tidygraph(to_matching.igraph(.data, mark, capacities = capacities))
-      4.   └─manynet:::to_matching.igraph(.data, mark, capacities = capacities)
-      5.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-      6.     │ └─base::withCallingHandlers(...)
-      7.     ├─manynet::as_igraph(el, twomode = TRUE)
-      8.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-      9.       └─igraph::graph_from_data_frame(.data)
-     10.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-     11.           └─cli::cli_abort(...)
-     12.             └─rlang::abort(...)
-    Execution halted
+    > is_connected(ison_southern_women)
+    [1] TRUE
+    > is_perfect_matching(ison_southern_women)
+    [1] FALSE
+    > is_eulerian(ison_brandes)
+    [1] FALSE
+    > is_acyclic(ison_algebra)
+    [1] FALSE
+    > is_aperiodic(ison_algebra)
+    Killed
     ```
 
 *   checking tests ... ERROR
@@ -1058,75 +1073,64 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       > 
       > test_check("manynet")
       Starting 2 test processes
-      [ FAIL 2 | WARN 404 | SKIP 20 | PASS 570 ]
       
-      ══ Skipped tests (20) ══════════════════════════════════════════════════════════
-      • On CRAN (20): 'test-manip_as.R:86:3', 'test-manip_split.R:49:3',
-        'test-map_autograph.R:2:3', 'test-map_autograph.R:17:3',
-        'test-map_autograph.R:31:3', 'test-map_autograph.R:47:3',
-        'test-map_autograph.R:65:3', 'test-map_autograph.R:91:3',
-        'test-map_autograph.R:103:3', 'test-map_autograph.R:113:3',
-        'test-map_autograph.R:120:3', 'test-map_autograph.R:127:3',
-        'test-map_autograph.R:140:3', 'test-map_autograph.R:171:3',
-        'test-map_autograph.R:180:3', 'test-mark_nodes.R:36:3',
-        'test-mark_nodes.R:45:3', 'test-mark_nodes.R:81:3', 'test-mark_ties.R:24:3',
-        'test-mark_ties.R:33:3'
       
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-mark_is.R:12:3'): is_ tests return correct values ──────────────
-      Error in `igraph::graph_from_data_frame(.data)`: Cannot create a graph object because the edge data frame contains NAs.
+      Error in `private$handle_error()`:
+      ! testthat subprocess exited in file `test-measure_closure.R`
+      Caused by error:
+      ! R session crashed with exit code -9
       Backtrace:
            ▆
-        1. ├─testthat::expect_false(is_perfect_matching(ison_southern_women)) at test-mark_is.R:12:3
-        2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─manynet::is_perfect_matching(ison_southern_women)
-        5.   ├─manynet::to_matching(.data, mark = mark)
-        6.   └─manynet:::to_matching.igraph(.data, mark = mark)
-        7.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-        8.     │ └─base::withCallingHandlers(...)
-        9.     ├─manynet::as_igraph(el, twomode = TRUE)
-       10.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-       11.       └─igraph::graph_from_data_frame(.data)
-       12.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-       13.           └─cli::cli_abort(...)
-       14.             └─rlang::abort(...)
-      ── Error ('test-manip_transform.R:43:3'): to matching works ────────────────────
-      Error in `igraph::graph_from_data_frame(.data)`: Cannot create a graph object because the edge data frame contains NAs.
-      Backtrace:
-           ▆
-        1. ├─manynet::as_edgelist(to_matching(ison_southern_women)) at test-manip_transform.R:43:3
-        2. ├─manynet::to_matching(ison_southern_women)
-        3. └─manynet:::to_matching.tbl_graph(ison_southern_women)
-        4.   ├─manynet::as_tidygraph(to_matching.igraph(.data, mark, capacities = capacities))
-        5.   └─manynet:::to_matching.igraph(.data, mark, capacities = capacities)
-        6.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-        7.     │ └─base::withCallingHandlers(...)
-        8.     ├─manynet::as_igraph(el, twomode = TRUE)
-        9.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-       10.       └─igraph::graph_from_data_frame(.data)
-       11.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-       12.           └─cli::cli_abort(...)
-       13.             └─rlang::abort(...)
-      
-      [ FAIL 2 | WARN 404 | SKIP 20 | PASS 570 ]
-      Error: Test failures
+        1. └─testthat::test_check("manynet")
+        2.   └─testthat::test_dir(...)
+        3.     └─testthat:::test_files(...)
+        4.       └─testthat:::test_files_parallel(...)
+        5.         ├─withr::with_dir(...)
+        6.         │ └─base::force(code)
+        7.         ├─testthat::with_reporter(...)
+        8.         │ └─base::tryCatch(...)
+        9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+       10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+       11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+       12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
+       13.           └─queue$poll(Inf)
+       14.             └─base::lapply(...)
+       15.               └─testthat (local) FUN(X[[i]], ...)
+       16.                 └─private$handle_error(msg, i)
+       17.                   └─rlang::abort(...)
       Execution halted
+    ```
+
+# mlmts
+
+<details>
+
+* Version: 1.1.2
+* GitHub: NA
+* Source code: https://github.com/cran/mlmts
+* Date/Publication: 2024-08-18 08:40:06 UTC
+* Number of recursive dependencies: 242
+
+Run `revdepcheck::cloud_details(, "mlmts")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  7.0Mb
+      sub-directories of 1Mb or more:
+        data   6.5Mb
     ```
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.1Mb
-      sub-directories of 1Mb or more:
-        R           1.5Mb
-        tutorials   1.6Mb
+    Namespaces in Imports field not imported from:
+      ‘ClusterR’ ‘MASS’ ‘Rdpack’ ‘multiwave’ ‘randomForest’ ‘ranger’
+      All declared Imports should be used.
     ```
 
 # multinet
@@ -1284,69 +1288,6 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
         libs  10.5Mb
     ```
 
-# pathfindR
-
-<details>
-
-* Version: 2.5.0
-* GitHub: https://github.com/egeulgen/pathfindR
-* Source code: https://github.com/cran/pathfindR
-* Date/Publication: 2025-06-15 00:00:02 UTC
-* Number of recursive dependencies: 147
-
-Run `revdepcheck::cloud_details(, "pathfindR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat-active_snw.R’
-      Running ‘testthat-clustering.R’
-    Running the tests in ‘tests/testthat-clustering.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(pathfindR)
-      Loading required package: pathfindR.data
-      ##############################################################################
-                              Welcome to pathfindR!
-      
-      Please cite the article below if you use pathfindR in published reseach:
-      
-      Ulgen E, Ozisik O, Sezerman OU. 2019. pathfindR: An R Package for Comprehensive
-      Identification of Enriched Pathways in Omics Data Through Active Subnetworks.
-      Front. Genet. doi:10.3389/fgene.2019.00858
-      
-      ##############################################################################
-      > 
-      > test_check("pathfindR", filter = "clustering")
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-clustering.R:198:5'): `cluster_graph_vis()` -- coloring of 'extra' clusters work ──
-      Error in `igraph::graph_from_adjacency_matrix(kappa_mat2, weighted = TRUE)`: Cannot create a graph object because the adjacency matrix contains NAs.
-      Backtrace:
-           ▆
-        1. ├─testthat::expect_silent(...) at test-clustering.R:198:5
-        2. │ └─testthat:::quasi_capture(enquo(object), NULL, evaluate_promise)
-        3. │   ├─testthat (local) .capture(...)
-        4. │   │ ├─withr::with_output_sink(...)
-        5. │   │ │ └─base::force(code)
-        6. │   │ ├─base::withCallingHandlers(...)
-        7. │   │ └─base::withVisible(code)
-        8. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
-        9. └─pathfindR::cluster_graph_vis(...)
-       10.   └─igraph::graph_from_adjacency_matrix(kappa_mat2, weighted = TRUE)
-       11.     └─igraph:::ensure_no_na(adjmatrix, "adjacency matrix")
-       12.       └─cli::cli_abort(...)
-       13.         └─rlang::abort(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # PopComm
 
 <details>
@@ -1381,6 +1322,44 @@ Run `revdepcheck::cloud_details(, "PopComm")` for more info
     Error in p[[type]][[name]][is.na(p[[type]][[name]])] <- i.default.values[[type]][[name]] : 
       replacement has length zero
     Calls: circle_plot -> plot -> plot.igraph -> params
+    Execution halted
+    ```
+
+# ProgModule
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/ProgModule
+* Date/Publication: 2024-05-16 14:40:05 UTC
+* Number of recursive dependencies: 219
+
+Run `revdepcheck::cloud_details(, "ProgModule")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘ProgModule.Rmd’ using rmarkdown
+    
+    Quitting from ProgModule.Rmd:110-122 [unnamed-chunk-6]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NULL
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Error: processing vignette 'ProgModule.Rmd' failed with diagnostics:
+    Can't find vertex corresponding to `v`.
+    --- failed re-building ‘ProgModule.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘ProgModule.Rmd’
+    
+    Error: Vignette re-building failed.
     Execution halted
     ```
 
@@ -1443,7 +1422,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m1.8s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -1496,7 +1475,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-error-messages.R..   19 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.2s[0m
+      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.1s[0m
       
       test-remify-methods.R.........    0 tests    
       test-remify-methods.R.........    0 tests    
@@ -1658,7 +1637,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m11.4s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m6.5s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -1728,7 +1707,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.6s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.4s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -1860,7 +1839,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.7s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.5s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
@@ -2321,6 +2300,59 @@ Run `revdepcheck::cloud_details(, "SEMID")` for more info
       Execution halted
     ```
 
+# sfnetworks
+
+<details>
+
+* Version: 0.6.5
+* GitHub: https://github.com/luukvdmeer/sfnetworks
+* Source code: https://github.com/cran/sfnetworks
+* Date/Publication: 2024-12-06 15:40:02 UTC
+* Number of recursive dependencies: 104
+
+Run `revdepcheck::cloud_details(, "sfnetworks")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(sfnetworks)
+      > 
+      > test_check("sfnetworks")
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 276 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Error ('test_paths.R:41:3'): Only the first from argument
+                is used for shortest paths calculations ──
+      Error in `get_all_shortest_paths_dijkstra_impl(graph, from = from, to = to, 
+          weights = weights, mode = mode)`: Can't find vertex corresponding to `from`.
+      Backtrace:
+           ▆
+        1. ├─testthat::expect_warning(...) at test_paths.R:41:3
+        2. │ └─testthat:::quasi_capture(...)
+        3. │   ├─testthat (local) .capture(...)
+        4. │   │ └─base::withCallingHandlers(...)
+        5. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
+        6. ├─sfnetworks::st_network_paths(...)
+        7. └─sfnetworks:::st_network_paths.sfnetwork(...)
+        8.   └─sfnetworks:::get_all_shortest_paths(...)
+        9.     └─igraph::all_shortest_paths(x, from, to, weights = weights, ...)
+       10.       └─igraph:::get_all_shortest_paths_dijkstra_impl(graph, from = from, to = to, weights = weights, mode = mode)
+       11.         └─igraph:::check_vertex(from)
+       12.           └─cli::cli_abort(...)
+       13.             └─rlang::abort(...)
+      
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 276 ]
+      Error: Test failures
+      Execution halted
+    ```
+
 # sharpshootR
 
 <details>
@@ -2381,6 +2413,271 @@ Run `revdepcheck::cloud_details(, "sharpshootR")` for more info
      3.     └─cli::cli_abort(...)
      4.       └─rlang::abort(...)
     Execution halted
+    ```
+
+# TDApplied
+
+<details>
+
+* Version: 3.0.4
+* GitHub: https://github.com/shaelebrown/TDApplied
+* Source code: https://github.com/cran/TDApplied
+* Date/Publication: 2024-10-29 08:30:02 UTC
+* Number of recursive dependencies: 81
+
+Run `revdepcheck::cloud_details(, "TDApplied")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘TDApplied-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: plot_vr_graph
+    > ### Title: Plot a VR graph using the igraph package.
+    > ### Aliases: plot_vr_graph
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > if(require("TDAstats") & require("igraph"))
+    + {
+    +   # simulate data from the unit circle and calculate 
+    +   # its diagram
+    +   df <- TDAstats::circle2d[sample(1:100,25),]
+    +   diag <- TDAstats::calculate_homology(df,
+    +                                        dim = 1,
+    +                                        threshold = 2)
+    +   
+    +   # get minimum death radius of any data cluster
+    +   min_death_H0 <- 
+    +   min(diag[which(diag[,1] == 0),3L])
+    +   
+    +   # get birth and death radius of the loop
+    +   loop_birth <- as.numeric(diag[nrow(diag),2L])
+    +   loop_death <- as.numeric(diag[nrow(diag),3L])
+    + 
+    +   # compute VR graphs at radii half of 
+    +   # min_death_H0 and the mean of loop_birth and 
+    +   # loop_death, returning clusters
+    +   graphs <- vr_graphs(X = df,eps = 
+    +   c(0.5*min_death_H0,(loop_birth + loop_death)/2))
+    +   
+    +   # plot graph of smaller (first) radius
+    +   plot_vr_graph(graphs = graphs,eps = 0.5*min_death_H0,
+    +                   plot_isolated_vertices = TRUE)
+    +   
+    +   # plot graph of larger (second) radius
+    +   plot_vr_graph(graphs = graphs,eps = (loop_birth + loop_death)/2)
+    +   
+    +   # repeat but with rownames for df, each vertex
+    +   # will be plotted with its rownames
+    +   rownames(df) <- paste0("V",1:25)
+    +   graphs <- vr_graphs(X = df,eps = 
+    +   c(0.5*min_death_H0,(loop_birth + loop_death)/2))
+    +   plot_vr_graph(graphs = graphs,eps = 0.5*min_death_H0,
+    +                   plot_isolated_vertices = TRUE)
+    +   
+    +   # plot without vertex labels
+    +   plot_vr_graph(graphs = graphs,eps = (loop_birth + loop_death)/2,
+    +                   vertex_labels = FALSE)
+    +                  
+    +   # plot only the graph component containing vertex "1"
+    +   plot_vr_graph(graphs = graphs,eps = 0.5*min_death_H0,
+    +                   component_of = "V1",plot_isolated_vertices = TRUE)
+    +  
+    +   # save the layout of the graph for adding features to 
+    +   # the same graph layout, like color
+    +   layout <- plot_vr_graph(graphs = graphs,eps = (loop_birth + loop_death)/2,
+    +                             return_layout = TRUE,vertex_labels = TRUE)
+    +   cols <- rep("blue",25)
+    +   cols[1:5] <- "red"
+    +   plot_vr_graph(graphs = graphs,eps = (loop_birth + loop_death)/2,cols = cols,
+    +                   layout = layout)
+    +   
+    + }
+    Loading required package: TDAstats
+    
+    Attaching package: ‘TDAstats’
+    
+    The following object is masked from ‘package:TDApplied’:
+    
+        permutation_test
+    
+    Loading required package: igraph
+    
+    Attaching package: ‘igraph’
+    
+    The following objects are masked from ‘package:stats’:
+    
+        decompose, spectrum
+    
+    The following object is masked from ‘package:base’:
+    
+        union
+    
+    Error in if (vr[1] == vr[2]) { : missing value where TRUE/FALSE needed
+    Calls: plot_vr_graph -> <Anonymous> -> norm_coords -> .layout.norm.col
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.3Mb
+      sub-directories of 1Mb or more:
+        doc    8.2Mb
+        libs   3.6Mb
+    ```
+
+# tidygraph
+
+<details>
+
+* Version: 1.3.1
+* GitHub: https://github.com/thomasp85/tidygraph
+* Source code: https://github.com/cran/tidygraph
+* Date/Publication: 2024-01-30 13:40:02 UTC
+* Number of recursive dependencies: 78
+
+Run `revdepcheck::cloud_details(, "tidygraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > # This file is part of the standard setup for testthat.
+      > # It is recommended that you do not modify it.
+      > #
+      > # Where should you do additional test configuration?
+      > # Learn more about the roles of various files in:
+      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+      > # * https://testthat.r-lib.org/articles/special-files.html
+      > 
+      > library(testthat)
+      > library(tidygraph)
+      
+      Attaching package: 'tidygraph'
+      
+      The following object is masked from 'package:testthat':
+      
+          matches
+      
+      The following object is masked from 'package:stats':
+      
+          filter
+      
+      > 
+      > test_check("tidygraph")
+      Ungrouping `.data`...
+      Splitting by nodes
+      Unfocusing graph...
+      `focus()` selected all nodes. Returning unfocused graph
+      `focus()` didn't select any nodes. Returning unfocused graph
+      Unfocusing graph...
+      Unfocusing prior to grouping
+      Unfocusing prior to morphing
+      Unfocusing graph...
+      Joining with `by = join_by(from, to)`
+      Joining with `by = join_by(from, to)`
+      Joining with `by = join_by(from, to)`
+      Joining with `by = join_by(from, to)`
+      Joining with `by = join_by(from, to)`
+      Joining with `by = join_by(from, to)`
+      Ungrouping `.data`...
+      Subsetting by nodes
+      Splitting by nodes
+      Unfocusing prior to morphing
+      [ FAIL 2 | WARN 20 | SKIP 1 | PASS 428 ]
+      
+      ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
+      • On CRAN (1): 'test-random-walk.R:19:3'
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Error ('test-group.R:18:3'): grouping returns integer vector ────────────────
+      <dplyr:::mutate_error/rlang_error/error/condition>
+      Error in `mutate(d_tmp, ...)`: i In argument: `group = fn`.
+      Caused by error in `modularity.igraph()`:
+      ! At vendor/cigraph/src/community/modularity.c:177 : Weight vector size differs from number of edges. Invalid value
+      Backtrace:
+           ▆
+        1. ├─testthat::expect_type(get_group(gr, group_label_prop()), "integer") at test-group.R:18:3
+        2. │ └─testthat::quasi_label(enquo(object), arg = "object")
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. ├─tidygraph (local) get_group(gr, group_label_prop())
+        5. │ └─gr %>% mutate(group = fn) %>% pull(group) at test-group.R:2:3
+        6. ├─dplyr::pull(., group)
+        7. ├─dplyr::mutate(., group = fn)
+        8. ├─tidygraph:::mutate.tbl_graph(., group = fn)
+        9. │ └─tidygraph::mutate_as_tbl(.data, !!!dot)
+       10. │   ├─dplyr::mutate(d_tmp, ...)
+       11. │   └─dplyr:::mutate.data.frame(d_tmp, ...)
+       12. │     └─dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
+       13. │       ├─base::withCallingHandlers(...)
+       14. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
+       15. │         └─mask$eval_all_mutate(quo)
+       16. │           └─dplyr (local) eval()
+       17. ├─tidygraph::group_label_prop()
+       18. │ ├─igraph::membership(...)
+       19. │ └─igraph::cluster_label_prop(...)
+       20. │   └─igraph:::cluster_label_prop0(graph, weights, mode, initial, fixed)
+       21. │     ├─igraph::modularity(...)
+       22. │     └─igraph:::modularity.igraph(...)
+       23. └─base::.handleSimpleError(...)
+       24.   └─dplyr (local) h(simpleError(msg, call))
+       25.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
+      ── Error ('test-group.R:38:3'): grouping returns integer of correct length ─────
+      <dplyr:::mutate_error/rlang_error/error/condition>
+      Error in `mutate(d_tmp, ...)`: i In argument: `group = fn`.
+      Caused by error in `modularity.igraph()`:
+      ! At vendor/cigraph/src/community/modularity.c:177 : Weight vector size differs from number of edges. Invalid value
+      Backtrace:
+           ▆
+        1. ├─testthat::expect_length(get_group(gr, group_label_prop()), igraph::gorder(gr)) at test-group.R:38:3
+        2. │ └─testthat::quasi_label(enquo(object), arg = "object")
+        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+        4. ├─tidygraph (local) get_group(gr, group_label_prop())
+        5. │ └─gr %>% mutate(group = fn) %>% pull(group) at test-group.R:2:3
+        6. ├─dplyr::pull(., group)
+        7. ├─dplyr::mutate(., group = fn)
+        8. ├─tidygraph:::mutate.tbl_graph(., group = fn)
+        9. │ └─tidygraph::mutate_as_tbl(.data, !!!dot)
+       10. │   ├─dplyr::mutate(d_tmp, ...)
+       11. │   └─dplyr:::mutate.data.frame(d_tmp, ...)
+       12. │     └─dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
+       13. │       ├─base::withCallingHandlers(...)
+       14. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
+       15. │         └─mask$eval_all_mutate(quo)
+       16. │           └─dplyr (local) eval()
+       17. ├─tidygraph::group_label_prop()
+       18. │ ├─igraph::membership(...)
+       19. │ └─igraph::cluster_label_prop(...)
+       20. │   └─igraph:::cluster_label_prop0(graph, weights, mode, initial, fixed)
+       21. │     ├─igraph::modularity(...)
+       22. │     └─igraph:::modularity.igraph(...)
+       23. └─base::.handleSimpleError(...)
+       24.   └─dplyr (local) h(simpleError(msg, call))
+       25.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
+      
+      [ FAIL 2 | WARN 20 | SKIP 1 | PASS 428 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘NetSwan’
     ```
 
 # tilemaps
