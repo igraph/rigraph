@@ -8,7 +8,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
 
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
 
 - Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
 
@@ -71,19 +71,19 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Integer vectors are validated before transferring them to the C library (#1434, #1582).
 
-- Changed base location for graph_from_graphdb and added tests (@schochastics, #1712, #1732).
+- Changed base location for graph_from_graphdb and added tests (#1712, #1732).
 
-- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (@schochastics, #848, #1731).
+- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (#848, #1731).
 
-- Use function instead of (x) in arrow.mode (@schochastics, #1722).
+- Use function instead of (x) in arrow.mode (#1722).
 
-- Duplicated arrowhead drawing (@schochastics, #640, #1709).
+- Duplicated arrowhead drawing (#640, #1709).
 
-- Correct mapping of edge label properties in plots when loops are present (@schochastics, #157, #1706).
+- Correct mapping of edge label properties in plots when loops are present (#157, #1706).
 
-- NA attribute values are replaced with default values for plotting (@schochastics, #293, #1707).
+- NA attribute values are replaced with default values for plotting (#293, #1707).
 
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
 
 - Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
   as the framework for handling callback functions is not yet present
@@ -124,7 +124,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
 
-- Added proper support for adding attributes via data.frames (@schochastics, #1373, #1669, #1716).
+- Added proper support for adding attributes via data.frames (#1373, #1669, #1716).
 
 - Hrg functions check their argument (#1074, #1699).
 
@@ -332,7 +332,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - One less tmp use case (#1715).
 
-- Enhance readability and performance of graph.adjacency.sparse (@schochastics, #1667).
+- Enhance readability and performance of graph.adjacency.sparse (#1667).
 
 - Prepare for C core interface standardizing 'type' -\> 'types' in igraph_is_bipartite.
 
@@ -340,7 +340,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
 
-- Faster single bracket querying of a graph (@schochastics, #1465, #1658).
+- Faster single bracket querying of a graph (#1465, #1658).
 
 ## Testing
 
@@ -356,37 +356,37 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Merged feedback.set tests into structural.properties (#1743).
 
-- Added tests for untested files (@schochastics, #1728).
+- Added tests for untested files in R/ (#1728).
 
-- Merged and refactored other.R tests (@schochastics, #1727).
+- Merged and refactored other.R tests (#1727).
 
-- Merged and refactored structural.properties.R tests (@schochastics, #1726).
+- Merged and refactored structural.properties.R tests (#1726).
 
-- Merged and refactored orphaned test files (@schochastics, #1724).
+- Merged and refactored orphaned test files (#1724).
 
-- Merged and refactored iterators.R and operators.R tests (@schochastics, #1723).
+- Merged and refactored iterators.R and operators.R tests (#1723).
 
-- Merged and refactored topology.R tests (@schochastics, #1720).
+- Merged and refactored topology.R tests (#1720).
 
-- Merged and refactored embedding.R tests (@schochastics, #1721).
+- Merged and refactored embedding.R tests (#1721).
 
 - Merge all tests for foreign.R into one test file (#1713).
 
 - Improve test-dot.product.game (#1396, #1705).
 
-- Merged and refactored conversion.R tests (@schochastics, #1701).
+- Merged and refactored conversion.R tests (#1701).
 
 - Create helpers (#1691, #1695).
 
-- Merged and refactored make.R tests (@schochastics, #1685).
+- Merged and refactored make.R tests (#1685).
 
-- Merged and refactored community.R tests (@schochastics, #1689).
+- Merged and refactored community.R tests (#1689).
 
-- Merged and refactored indexing.R tests (@schochastics, #1687).
+- Merged and refactored indexing.R tests (#1687).
 
-- Merged and refactored flow.R tests (@schochastics, #1675).
+- Merged and refactored flow.R tests (#1675).
 
-- Merged and refactored games.R tests (@schochastics, #1682).
+- Merged and refactored games.R tests (#1682).
 
 ## Uncategorized
 
