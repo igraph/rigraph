@@ -689,16 +689,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-09-04 10:12:50] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-09-04 20:40:54] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-09-04 10:12:50] Generating graph of layer mrna for groupA...
-    [25-09-04 10:12:50] Reducing network by WGCNA::pickHardThreshold...
-    [25-09-04 10:12:50] R2 cutoff: 0.65
-    [25-09-04 10:12:50] Cut Threshold: 0.26
+    [25-09-04 20:40:54] Generating graph of layer mrna for groupA...
+    [25-09-04 20:40:54] Reducing network by WGCNA::pickHardThreshold...
+    [25-09-04 20:40:54] R2 cutoff: 0.65
+    [25-09-04 20:40:54] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -1101,38 +1101,6 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       Execution halted
     ```
 
-# mlmts
-
-<details>
-
-* Version: 1.1.2
-* GitHub: NA
-* Source code: https://github.com/cran/mlmts
-* Date/Publication: 2024-08-18 08:40:06 UTC
-* Number of recursive dependencies: 242
-
-Run `revdepcheck::cloud_details(, "mlmts")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.0Mb
-      sub-directories of 1Mb or more:
-        data   6.5Mb
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘ClusterR’ ‘MASS’ ‘Rdpack’ ‘multiwave’ ‘randomForest’ ‘ranger’
-      All declared Imports should be used.
-    ```
-
 # multinet
 
 <details>
@@ -1422,7 +1390,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m1.8s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -1475,7 +1443,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-error-messages.R..   19 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.1s[0m
+      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.2s[0m
       
       test-remify-methods.R.........    0 tests    
       test-remify-methods.R.........    0 tests    
@@ -1637,7 +1605,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m6.5s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m10.3s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -1707,7 +1675,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.4s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.6s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -1839,7 +1807,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.5s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.7s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
