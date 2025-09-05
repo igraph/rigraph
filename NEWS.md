@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9088
+
+## Chore
+
+- Auto-update from GitHub Actions (#2113).
+
+- Build-ignore.
+
+- Use `centralization_degree_tmax_imp()` (#2101).
+
+## Documentation
+
+- Remove demo (#2004, #2008).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ffd3eeae6db4efe2cab60f467820eccc9fadeb28 (igraph/igraph#2706, #2108).
+
+
 # igraph 2.1.4.9087
 
 ## Chore
