@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9089
+
+## Continuous integration
+
+- Use reviewdog for external PRs (#2116).
+
+
 # igraph 2.1.4.9088
 
 ## Chore
