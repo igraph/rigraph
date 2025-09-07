@@ -1026,6 +1026,10 @@ igraph_random_spanning_tree:
 # Coloring
 #######################################
 
+igraph_is_bipartite_coloring:
+    PARAMS: GRAPH graph, BIPARTITE_TYPES types, OUT BOOLEAN res, OPTIONAL OUT NULL mode
+    DEPS: types ON graph
+
 #######################################
 # Microscopic update
 #######################################

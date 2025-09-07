@@ -5843,7 +5843,7 @@ SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
     igraph_integer_t neis_size;
 
     IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode));
-    
+
     neis_size = igraph_vector_int_size(&neis);
     for (igraph_integer_t i=0; i < neis_size; i++) {
       igraph_integer_t nei = VECTOR(neis)[i];
@@ -8648,7 +8648,6 @@ SEXP R_igraph_add_env(SEXP graph) {
     SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
   }
 
-#if defined(R_VERSION) && R_VERSION >= R_Version(4, 1, 0)
   // Get the base namespace
   SEXP base_ns = PROTECT(R_FindNamespace(Rf_mkString("base"))); px++;
   // Get the emptyenv function
@@ -8657,9 +8656,6 @@ SEXP R_igraph_add_env(SEXP graph) {
   SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
   // Evaluate the call
   SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
-#else
-  SEXP env = Rf_allocSExp(ENVSXP);
-#endif
 
   SET_VECTOR_ELT(result, igraph_t_idx_env, env);
 
