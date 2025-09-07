@@ -576,6 +576,8 @@ test_that("eigen_centrality() works", {
 
   ## Eigenvector-centrality, small stress-test
 
+  set.seed(20250907)
+
   is.principal <- function(M, lambda, eps = 1e-12) {
     abs(eigen(M)$values[1] - lambda) < eps
   }
