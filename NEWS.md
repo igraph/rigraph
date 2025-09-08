@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.99.9901
+
+## Chore
+
+- Fix seed for test (#2118).
+
+- Results for revdepchecks.
+
+## vendor
+
+- Update vendored sources to igraph/igraph@9635f97c8d96aba53f4122b78d6e41a38d73b2d3 (#2122).
+
+- Update vendored sources to igraph/igraph@bcb8fbcfa7dfaeed02a5f4472eae36513c716f29 (#2121).
+
+- Update vendored sources to igraph/igraph@3eb9ef3f404a76a1701ae34fd340a364b1d6e610 (#2120).
+
+- Update vendored sources to igraph/igraph@c65b9aa15249be47126dee14374b5ddaceaeaa67 (#2119).
+
+- Update vendored sources to igraph/igraph@2a81653a0b82b7702a79e5d29052f53c9f431d45 (igraph/igraph#2706, #2114).
+
+
 # igraph 2.1.99.9900
 
 See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287bfde1/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
