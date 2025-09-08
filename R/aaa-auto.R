@@ -94,7 +94,7 @@ incident_impl <- function(graph, vid, mode=c("all", "out", "in", "total")) {
   # Function call
   res <- .Call(R_igraph_incident, graph, vid-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res <- create_es(, res)
+    res <- create_es(graph, res)
   }
   res
 }
