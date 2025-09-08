@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.4.9087
+
+## Chore
+
+- Auto-update from GitHub Actions (#2111).
+
+
+# igraph 2.1.4.9086
+
+## Chore
+
+- Create list of custom tasks for release (#1976, #2096).
+
+## Refactoring
+
+- Some cleanup in vs/es functions in rinterface_extra.c.
+
+- Avoid repeated calls to \_size() functions in for loops.
+  as this has a non-neglibile performance impact
+
+## vendor
+
+- Update vendored sources to igraph/igraph@ffd3eeae6db4efe2cab60f467820eccc9fadeb28 (igraph/igraph#2706, #2092).
+
+
 # igraph 2.1.4.9085
 
 ## vendor
