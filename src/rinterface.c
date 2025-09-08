@@ -7932,6 +7932,97 @@ SEXP R_igraph_modularity_matrix(SEXP graph, SEXP weights, SEXP resolution, SEXP 
 }
 
 /*-------------------------------------------/
+/ igraph_community_leading_eigenvector       /
+/-------------------------------------------*/
+SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP weights, SEXP steps, SEXP options, SEXP start, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_int_t c_merges;
+  igraph_vector_int_t c_membership;
+  igraph_integer_t c_steps;
+  igraph_arpack_options_t c_options;
+  igraph_real_t c_modularity;
+  igraph_bool_t c_start;
+  igraph_vector_t c_eigenvalues;
+  igraph_vector_list_t c_eigenvectors;
+  igraph_vector_t c_history;
+  igraph_community_leading_eigenvector_callback_t c_callback;
+
+  SEXP merges;
+  SEXP membership;
+  SEXP modularity;
+  SEXP eigenvalues;
+  SEXP eigenvectors;
+  SEXP history;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  IGRAPH_R_CHECK(igraph_matrix_int_init(&c_merges, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_merges);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  IGRAPH_R_CHECK_INT(steps);
+  c_steps = (igraph_integer_t) REAL(steps)[0];
+  R_SEXP_to_igraph_arpack_options(options, &c_options);
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK(igraph_vector_init(&c_eigenvalues, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_eigenvalues);
+  IGRAPH_R_CHECK(igraph_vector_list_init(&c_eigenvectors, 0));
+  IGRAPH_FINALLY(igraph_vector_list_destroy, &c_eigenvectors);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_history, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_history);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_community_leading_eigenvector(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_merges, &c_membership, c_steps, &c_options, &c_modularity, c_start, &c_eigenvalues, &c_eigenvectors, &c_history, (Rf_isNull(callback) ? 0 : c_callback), 0));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(7));
+  PROTECT(r_names=NEW_CHARACTER(7));
+  PROTECT(merges=R_igraph_matrix_int_to_SEXP(&c_merges));
+  igraph_matrix_int_destroy(&c_merges);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(membership=R_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(modularity=NEW_NUMERIC(1));
+  REAL(modularity)[0]=c_modularity;
+  PROTECT(eigenvalues=R_igraph_vector_to_SEXP(&c_eigenvalues));
+  igraph_vector_destroy(&c_eigenvalues);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(eigenvectors=R_igraph_vectorlist_to_SEXP(&c_eigenvectors));
+  igraph_vector_list_destroy(&c_eigenvectors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(history=R_igraph_vector_to_SEXP(&c_history));
+  igraph_vector_destroy(&c_history);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, merges);
+  SET_VECTOR_ELT(r_result, 1, membership);
+  SET_VECTOR_ELT(r_result, 2, options);
+  SET_VECTOR_ELT(r_result, 3, modularity);
+  SET_VECTOR_ELT(r_result, 4, eigenvalues);
+  SET_VECTOR_ELT(r_result, 5, eigenvectors);
+  SET_VECTOR_ELT(r_result, 6, history);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("merges"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("options"));
+  SET_STRING_ELT(r_names, 3, Rf_mkChar("modularity"));
+  SET_STRING_ELT(r_names, 4, Rf_mkChar("eigenvalues"));
+  SET_STRING_ELT(r_names, 5, Rf_mkChar("eigenvectors"));
+  SET_STRING_ELT(r_names, 6, Rf_mkChar("history"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(8);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_community_fluid_communities         /
 /-------------------------------------------*/
 SEXP R_igraph_community_fluid_communities(SEXP graph, SEXP no_of_communities) {
