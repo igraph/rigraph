@@ -767,14 +767,13 @@ diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_diameter,
+  res <- diameter_impl(
     graph,
-    as.logical(directed),
-    as.logical(unconnected),
-    weights
+    weights = weights,
+    directed = directed,
+    unconnected = unconnected
   )
+  res$res
 }
 
 #' @rdname diameter
