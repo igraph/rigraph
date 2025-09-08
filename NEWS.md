@@ -1,73 +1,159 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.4.9085
-
-## vendor
-
-- Update vendored sources to igraph/igraph@ea3ad176e59119abe6b336172dab92ce25c45e1d (#2091).
-
-
-# igraph 2.1.4.9084
-
-## vendor
-
-- Update vendored sources to igraph/igraph@62791a3a19d4fae5dbe49d28b24bf1040837de80 (#2088).
-
-
-# igraph 2.1.4.9083
+# igraph 2.1.99.9901
 
 ## Chore
 
-- Improve readability of code about not all values being `NA` (#1870, #2082).
+- Fix seed for test (#2118).
 
-
-# igraph 2.1.4.9082
-
-## vendor
-
-- Update vendored sources to igraph/igraph@94058853ef23463198d730681c3f7ccbe1896260 (#2084).
-
-- Update vendored sources to igraph/igraph@6064a031f6d9ad45a23d0c663452b70522d4a196 (#2083).
-
-
-# igraph 2.1.4.9081
-
-## Chore
-
-- Add modular product to GRAPH_PRODUCT_TYPE in interfaces.
+- Results for revdepchecks.
 
 ## vendor
 
-- Update vendored sources to igraph/igraph@6f25b860c91f0a94ae32d7eb70f88478edb895ce (#2080).
+- Update vendored sources to igraph/igraph@9635f97c8d96aba53f4122b78d6e41a38d73b2d3 (#2122).
 
-- Update vendored sources to igraph/igraph@03e7e6e86d0fb88c70ca50ebca075b0b503ea33a (#2079).
+- Update vendored sources to igraph/igraph@bcb8fbcfa7dfaeed02a5f4472eae36513c716f29 (#2121).
 
-- Update vendored sources to igraph/igraph@90852c630f7620eb2c1b3702c8b2aeac223f1e21 (#2078).
+- Update vendored sources to igraph/igraph@3eb9ef3f404a76a1701ae34fd340a364b1d6e610 (#2120).
 
-- Update vendored sources to igraph/igraph@40b84ab4906f8438ad76f580993a59a595d78ade (#2077).
+- Update vendored sources to igraph/igraph@c65b9aa15249be47126dee14374b5ddaceaeaa67 (#2119).
 
-- Update vendored sources to igraph/igraph@425e6f074a2c35e3c9a720b4b9a8a89d73c6bc4d (#2076).
-
-- Update vendored sources to igraph/igraph@0150a9ce3e23ea58674318693a42db45425ba639 (#2075).
-
-- Update vendored sources to igraph/igraph@a4d8f0a6e84b1793a054279276024541a5998280 (#2074).
-
-- Update vendored sources to igraph/igraph@16d599e36a62c221ae39b496b349cf30ed4e63bf (#2073).
-
-- Update vendored sources to igraph/igraph@c0124eec9a8ad2d16ddabbcab0802e39c12e283d (#2072).
-
-- Update vendored sources to igraph/igraph@f7c7b43367cef17dc34efd11b9639f5dfa5a62f3 (#2071).
-
-- Update vendored sources to igraph/igraph@c50c977a1686731a4158915fe49f8b9b2d2dcfab (#2070).
+- Update vendored sources to igraph/igraph@2a81653a0b82b7702a79e5d29052f53c9f431d45 (igraph/igraph#2706, #2114).
 
 
-# igraph 2.1.4.9080
+# igraph 2.1.99.9900
+
+See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287bfde1/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+
+## Breaking changes
+
+- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
+
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
+
+- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
+
+- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
+
+- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
+
+## doc
+
+- Refer to current latest version of R in troubleshooting page.
+
+- Fix typos in `laplacian_matrix` documentation.
+
+- Clarify the use of weights in `layout_with_kk()`.
+
+- remove demos (#2008)
+
+## hack
+
+- Provide `NULL` default for types argument in `bipartite_projection_size()`.
+  This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
+
+## Bug fixes
+
+- Adjust loop position to vertex size in `plot()` (#1980).
+
+- Don't rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
+
+- HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
+
+- Fail if `"layout"` attribute doesn't match the number of vertices (#1880).
+
+- Automatically arrange loops in `plot()` (#407, #556, #1881).
+
+- `NA` checking only in from/to columns of edge `data.frame` (#1906).
+
+- Vectorized drawing of arrows in `plot()` (#257, #1904).
+
+- Keep vertex attribute type for `disjoint_union()` (#1640, #1909).
+
+- Allow more than one edge label font family in `plot()` (#37, #1896).
+
+- Pie shapes now work as intended (#1882, #1883).
+
+- Error in bipartite projection if `type` is not a vertex attribute (#898, #1889).
+
+- Do not try to destroy non-initialized SIR objects upon error (#1888).
+
+- Added proper `NA` handling for matrix inputs (#917, #918, #1828).
+
+- Added support for factors in `graph_from_data_frame()` (#34, #1829).
+
+- Remove string matrix support from functions operating on biadjacency matrices (#1540, #1542, #1803).
+
+- Removed redundant inheritParams call (#1802).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Load the Matrix package before Matrices are coerced to a sparse matrix in tests.
+
+- Replace `NA` values in `label` attributes in `plot()` with default values (#1796, #1797).
+
+- Integer vectors are validated before transferring them to the C library (#1434, #1582).
+
+- Changed base location for `graph_from_graphdb()` and added tests (#1712, #1732).
+
+- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (#848, #1731).
+
+- Use `function()` instead of `(x)` in `arrow.mode` (#1722).
+
+- Removed duplicated plotting of arrow heads (#640, #1709).
+
+- Correct mapping of edge label properties in plots when loops are present (#157, #1706).
+
+- NA attribute values are replaced with default values in `plot()` (#293, #1707).
+
+- Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
+  as the framework for handling callback functions is not yet present.
 
 ## Features
 
 - Generate almost all R implementations (#2047).
 
+- Added weights parameter to `local_scan()` (#1082, #1448, #1982).
+
+- Add multi attribute assignment (#55, #1916).
+
+- Expose `align_layout()` and add to `layout_nicely()` to align layout with axis automatically (#1907, #1957, #1958).
+
+- Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969).
+
+- Add more layouts to `tkplot()` (#160, #1967).
+
+- Added `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
+
+- Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
+
+- `simple_cycles()` added to list all simple cycles (#1573, #1580).
+
+- Expose C version (#1208, #1781).
+
+- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
+
+- Add relative size scaling to vertices in `plot()` (@gvegayon, #172).
+
+- Expose `find_cycle()` (#1471, #1571).
+
+- Split `sample_bipartite()` into two functions for the G(n, m) a… (#630, #1692).
+
+- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
+
+- Added support for adding attributes via `data.frames` (#1373, #1669, #1716).
+
+- all `_hrg()` functions check their argument (#1074, #1699).
+
+- `get_edge_ids()` accepts data frames and matrices (#1663).
+
 ## Chore
+
+- Create list of custom tasks for release (#1976, #2096).
+
+- Improve readability of code about not all values being `NA` (#1870, #2082).
+
+- Add modular product to GRAPH_PRODUCT_TYPE in interfaces.
 
 - Move uuid glue out of vendoring.
 
@@ -93,8 +179,6 @@
 
 - Fix call in `sample_sphere_surface()`.
 
-- Fix syntax.
-
 - Fix call in `graph.lcf()`.
 
 - Fix call in `all_shortest_paths()`.
@@ -111,930 +195,51 @@
 
 - Fix remaining Stimulus types (#2048).
 
-## vendor
-
-- Update vendored sources to igraph/igraph@29087cd09a1aeb0ca4a1b490f1437af9826e146e (#2068).
-
-- Update vendored sources to igraph/igraph@187e713b7cb7c369a44f171fec4aa6ec085f0c70 (#2067).
-
-- Update vendored sources to igraph/igraph@089ddde82352d222552408cb233288b1cb9a459b (#2066).
-
-- Update vendored sources to igraph/igraph@02a5288427e435ba43c95a4d9b3707712296d2a6 (#2065).
-
-- Update vendored sources to igraph/igraph@378629ea57ee631844c391237faa021d8652cbf4 (#2064).
-
-- Update vendored sources to igraph/igraph@5819c1bcb3f8a5835867ccafd2f8901beff1ac9d (#2063).
-
-- Update vendored sources to igraph/igraph@2b9db4b52dc78623c830131b8662de944c827cbc (#2062).
-
-- Update vendored sources to igraph/igraph@693c0caa4f1a67788867fc6fb81e649b1876888a (#2061).
-
-- Update vendored sources to igraph/igraph@5ed8bdee3ad2261f0c62225159b6d56c370bfb90 (#2060).
-
-- Update vendored sources to igraph/igraph@e9e2707e3e881f31b615c5165b0b144fcead71c6 (#2059).
-
-- Update vendored sources to igraph/igraph@bb48c90c682825731ea6f4a96712cf517c7f0c7d (#2057).
-
-- Update vendored sources to igraph/igraph@552af428369d3fc873c1d5daf2eb40197e1e8cc3 (#2056).
-
-- Update vendored sources to igraph/igraph@7adb4c4d47e799d6137e13dafc03ea5e4da76a01 (#2045).
-
-
-# igraph 2.1.4.9079
-
-## vendor
-
-- Update vendored sources to igraph/igraph@6a92b9a7aedcbdf1e40ac93b88031e06cfa1a8c7 (#2044).
-
-- Update vendored sources to igraph/igraph@dce0a61a0bf67be4926d42bf8dd8a475a20a52a7 (#2040).
-
-
-# igraph 2.1.4.9078
-
-## Continuous integration
-
-- Cleanup and fix macOS (#2042).
-
-
-# igraph 2.1.4.9077
-
-## vendor
-
-- Update vendored sources to igraph/igraph@09bc672c2d1221c0a3a78a312584fae8da3d0af6 (#2039).
-
-- Update vendored sources to igraph/igraph@5ff19a9281745f8d7b39bf7b477865d3ad573729 (#2038).
-
-- Update vendored sources to igraph/igraph@0b3d9704f616651a4937c9a6079a5cdf36ec39e7 (#2037).
-
-
-# igraph 2.1.4.9076
-
-## Continuous integration
-
-- Format with air, check detritus, better handling of `extra-packages` (#2035).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@d7a119ddef575026d9eba9414fedea4d8f11774b (#2034).
-
-- Update vendored sources to igraph/igraph@01cabca5a8c685ff263a11a6563ff42cac8572b8 (#2033).
-
-- Update vendored sources to igraph/igraph@f01a024b1dc6f49720cc2d089687228a55f4aa6b (#2032).
-
-
-# igraph 2.1.4.9075
-
-## vendor
-
-- Update vendored sources to igraph/igraph@9d9ad1935c6cea28415b8616e33d80c0c7a33c0d (#2030).
-
-- Update vendored sources to igraph/igraph@33be55ee088923d8b6b485e3b63352d258cde184 (#2029).
-
-
-# igraph 2.1.4.9074
-
-## vendor
-
-- Update vendored sources to igraph/igraph@a546942ec1d99acfd4d6b2aa35965b028a633665 (#2027).
-
-
-# igraph 2.1.4.9073
-
-## Chore
-
-- Adapt default path.
-
-## Continuous integration
-
-- Fix vendoring.
-
-- Align vendoring workflow with duckdb.
-
-## vendor
-
-- Update vendored sources to igraph/igraph@d807fc2bff14714686fa75f945772899dda8925c (#2025).
-
-- Update vendored sources to igraph/igraph@7788ba9623c249cd00f45f204d3aed2bfb295328 (#2024).
-
-- Update vendored sources to igraph/igraph@db03c3207a27a6ea5559ec79941ae2ff26a27386 (#2023).
-
-## Uncategorized
-
-- Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
-
-
-# igraph 2.1.4.9072
-
-## vendor
-
-- Update vendored sources to igraph/igraph@a3a1271a91a476b2623275d05fd722c1fb171b00 (#2021).
-
-- Update vendored sources to igraph/igraph@cfb3e897a2b82fa60146325535c3d97c81c1936d (#2020).
-
-
-# igraph 2.1.4.9071
-
-## vendor
-
-- Update vendored sources to igraph/igraph@ba9bbc17aa56a75bd6529f3168d4dd76330689db (#2018).
-
-- Update vendored sources to igraph/igraph@6b59bafb6acf36a3c2ef1885927c613e80405379 (#2017).
-
-- Update vendored sources to igraph/igraph@232a9819f414d66c2841f7b5c8afe01ebed7374d (#2016).
-
-- Update vendored sources to igraph/igraph@36fec29268a872935ee0bb20727114f8bf81f7c5 (#2015).
-
-- Update vendored sources to igraph/igraph@0f99574f928a8463c042bf14541708def3bf4e98 (#2014).
-
-
-# igraph 2.1.4.9070
-
-## Chore
-
-- No `stop()` in version.
-
 - Don't use `stop()` in tests.
 
-- Improve error in stochastic_matrix.
+- Improve error in `stochastic_matrix()`.
 
-- Improve errors in sgm.R.
+- Improve errors in `sgm.R`.
 
-- Improve errors in operator.R.
+- Improve errors in `operator.R`.
 
 - Fix cli syntax.
 
-- Improve error in rewire.
+- Improve error in `rewire()`.
 
-- Improve errors in plot.common.
+- Improve errors in `plot.common()`.
 
 - Improve error in `rename.attr.if.needed()`.
 
-
-# igraph 2.1.4.9069
-
-## Chore
-
-- Improve errors in layout.R (#2007).
-
-- Remove one more `stop()`.
-
-- Use `cli_abort()`.
+- Improve errors in `layout.R` (#2007).
 
 - Use `cli_abort()` instead of `stop()`.
 
 - Simplify error by relying on default behavior (#1997).
 
-- Better error in centrality (#2000).
+- Better error in `centrality.R` (#2000).
 
-- Simplify error (#1999).
+- Simplify errors (#1999).
 
-- Rm useless error message (#1998).
+- Remove useless error message (#1998).
 
 - Improve `igraph.match.arg()` (#1996).
 
-
-# igraph 2.1.4.9068
-
-## vendor
-
-- Update vendored sources to igraph/igraph@fd1d3a75efafaf57aea513e0820733c32f3ffc02 (#1994).
-
-
-# igraph 2.1.4.9067
-
-## vendor
-
-- Update vendored sources to igraph/igraph@0224bb3745b974fa7b6804af4ef893e85e7e1f8c (#1992).
-
-- Update vendored sources to igraph/igraph@f73277f19681d169d65e69d36f450b7edd7fe5a3 (#1991).
-
-- Update vendored sources to igraph/igraph@accada1256e859610bac5009c57de46852f7bc69 (#1990).
-
-
-# igraph 2.1.4.9066
-
-## vendor
-
-- Update vendored sources to igraph/igraph@8309c746e2e8aa4416c6e02b7f076738509598eb (#1988).
-
-- Update vendored sources to igraph/igraph@9239256bd56b19263d1cf9e16d1fa882becd7a3b (#1987).
-
-
-# igraph 2.1.4.9065
-
-## Features
-
-- Added weights parameter to `local_scan()` (#1082, #1448, #1982).
-
-## Documentation
-
-- Document ellipsis in `cohesion()` (#971, #1985).
-
-- Add 2023 preprint (#1240, #1984).
-
-## Testing
-
-- Simplify test (@1741643+krlmlr).
-
-
-# igraph 2.1.4.9064
-
-## Bug fixes
-
-- Adjust loop position to vertex size (#1980).
-
-
-# igraph 2.1.4.9063
-
-## Chore
-
-- Results for revdepchecks.
-
-
-# igraph 2.1.4.9062
-
-## Bug fixes
-
-- Dont rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
-
-- HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
-
-## Features
-
-- Add multi attribute assignment (#55, #1916).
-
-- Expose `align_layout()` and add to `layout_nicely()` to align layout with axis automatically (#1907, #1957, #1958).
-
-## Documentation
-
-- Update allcontributors info (#1975).
-
-## Refactoring
-
-- Improve logic for updating edge attributes (#1332, #1915).
-
-
-# igraph 2.1.4.9061
-
-## Features
-
-- Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969).
-
-- Add more layouts to tkplot (#160, #1967).
-
-
-# igraph 2.1.4.9060
-
-## vendor
-
-- Update vendored sources to igraph/igraph@f51ea4f217a45f5895e749e7ea919040492cab5e (#1965).
-
-- Update vendored sources to igraph/igraph@94c0284cc6f45080cc7edb7586f137a69993ae7b (#1964).
-
-
-# igraph 2.1.4.9059
-
-## Bug fixes
-
-- Fail if `"layout"` attribute doesn't match the number of vertices (#1880).
-
-
-# igraph 2.1.4.9058
-
-## vendor
-
-- Update vendored sources to igraph/igraph@ccf3125052d65ee504abe9b29e6d089a4275b187 (#1954).
-
-
-# igraph 2.1.4.9057
-
-## vendor
-
-- Update vendored sources to igraph/igraph@cb8a06487520edf3c5e8d30225cfdcbc22c209df (#1952).
-
-- Update vendored sources to igraph/igraph@44c57191247e7fec2940db9bef2e6d07c2d88e7c (#1951).
-
-- Update vendored sources to igraph/igraph@46f1e12c7cd12801d62e6b712130071b4ed3d151 (#1950).
-
-- Update vendored sources to igraph/igraph@fbcbfb7ed47a9bd644d4c3bef3c6cac02b7a220d (#1949).
-
-- Update vendored sources to igraph/igraph@ae1f405faa2c0e2dfec6c7006f06486dfd4e6146 (#1948).
-
-- Update vendored sources to igraph/igraph@4e71883edad5f343d76954ce29374627820a28a0 (#1947).
-
-
-# igraph 2.1.4.9056
-
-## Bug fixes
-
-- Automatically arrange loops in `plot()` (#407, #556, #1881).
-
-- `NA` checking only in from/to columns of edge data.frame (#1906).
-
-- Vectorized drawing of arrows (#257, #1904).
-
-- Keep vertex attribute type for `disjoint_union()` (#1640, #1909).
-
-## Features
-
-- Support for more graph product types.
-
-- Added `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
-
-- Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
-
-## Chore
-
-- Auto-update from GitHub Actions (#1920).
-
-- Auto-update from GitHub Actions (#1918).
-
-## Continuous integration
-
-- Show Git status.
-
-- Fix flag.
-
-- Fix shell.
-
-- Use air.
-
-- Do not talk about Claude failures.
-
-## vendor
-
-- Update vendored sources to igraph/igraph@83b1d7a2cda5e0fcc3b6d04800cc96c32c47e2b3 (#1944).
-
-- Update vendored sources to igraph/igraph@8b0500e47f2777e1a2380cd3f9a717be1ea38881 (#1942).
-
-- Update vendored sources to igraph/igraph@7c967b95f62ca1a58f672a2fd9bea194334dc632 (#1941).
-
-- Update vendored sources to igraph/igraph@7239a13da6037e3f6b10ee19b095bca2b0a18742 (#1940).
-
-- Update vendored sources to igraph/igraph@65a83a4f34261a5e453cf2e5a04a0591f50d0da6 (#1939).
-
-- Update vendored sources to igraph/igraph@a3967d418293e382174b4e848921221b00dffb6e (#1938).
-
-- Update vendored sources to igraph/igraph@873aa6c8d823b7cca18fca5032c0a2487fb9d082 (#1937).
-
-- Update vendored sources to igraph/igraph@06074d94ffd0f8e283e079415c8e47b2eaf92cda (#1936).
-
-- Update vendored sources to igraph/igraph@50cf73d2844dd2ace266b38ac09ca29b627cb7ce (#1935).
-
-- Update vendored sources to igraph/igraph@e2a3b7c6e26683e9bb5f6a07d4e380861bd40f93 (#1934).
-
-- Update vendored sources to igraph/igraph@12078c2b256e7cc15404ccf32c349101ececcf56 (#1933).
-
-- Update vendored sources to igraph/igraph@cd62af9732e71060cc3b579fa49364bd08917175 (#1931).
-
-- Update vendored sources to igraph/igraph@015d34e5b6e6876d8328bf959a7c494bdd61c756 (#1930).
-
-- Update vendored sources to igraph/igraph@ea227139ceaa3d5525bf0ccb0656c93c6ca0b93c (#1929).
-
-- Update vendored sources to igraph/igraph@4b18e606d56b01d0ce7aa60063e88be3500c896e (#1928).
-
-- Update vendored sources (tag 0.10.16) to igraph/igraph@beebfcdcd707f50a31cf8eb3568cf09f8b7baf54 (#1927).
-
-- Update vendored sources to igraph/igraph@0f4e5be81a752112e828ce6614ad692cef29f5fb (#1926).
-
-- Update vendored sources to igraph/igraph@881c7d39b63b7986143db617afe65d4cf3b23e0e (#1925).
-
-- Update vendored sources to igraph/igraph@075be76c92b99ca4c95ad9207bcc1af6d471c85e (#1924).
-
-- Update vendored sources to igraph/igraph@06754306e700de9c6751301221744b781cdc791c (#1923).
-
-- Update vendored sources to igraph/igraph@ab6faf22c37cc5169063edd134193233ebab264e (#1922).
-
-- Update vendored sources to igraph/igraph@753afcc39f16942730913dcfd331c10668c18de1 (#1921).
-
-- Update vendored sources to igraph/igraph@80aea5c5897c67137872c945f684ad29408a5810 (#1919).
-
-- Update vendored sources to igraph/igraph@2c3cc367a24299b41cc7ae3f308781fde27950db (#1917).
-
-- Update vendored sources to igraph/igraph@7180ad04d0a1a3c796eb6931a21d25f5df532c7a (#1914).
-
-- Update vendored sources to igraph/igraph@8c1a72c8a38df0bd1337b5458f96555fbfce2778 (#1913).
-
-- Update vendored sources to igraph/igraph@f845707d5b35e889676821ee31b30a2cf7b670ef (#1912).
-
-- Update vendored sources to igraph/igraph@83f1f05905ff23f0c16e526b79ec1277f4209669 (#1911).
-
-
-# igraph 2.1.4.9055
-
-## Chore
-
-- Auto-update from GitHub Actions (#1901).
-
-- Revdepchecks, second run.
-
-- Ignore.
-
-- Revdepchecks.
-
-- Ignore.
-
-## Continuous integration
-
-- Ignore vendored libraries.
-
-
-# igraph 2.1.4.9054
-
-## Continuous integration
-
-- Fix main coverage workflow.
-
-- Install covr fix.
-
-
-# igraph 2.1.4.9053
-
-## Bug fixes
-
-- Allow more than one edge label font family (#37, #1896).
-
-- Pie shapes work as intended (#1882, #1883).
-
-## Features
-
-- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
-
-## Chore
-
-- Auto-update from GitHub Actions (#1895).
-
-- Auto-update from GitHub Actions (#1893).
-
-- Auto-update from GitHub Actions (#1892).
-
-## Continuous integration
-
-- Turn off gcov.
-
-- More timeouts.
-
-- No timeout for covr.
-
-- Add plain covr workflow.
-
-- Add instructions.
-
-- Add Claude workflow.
-
-- Add description for workflow.
-
-## Breaking changes
-
-- Breaking change: change arguments default and order for `graph_from_lcf()` (#1858, #1872).
-
-
-# igraph 2.1.4.9052
-
-## Bug fixes
-
-- Error in bipartite projection if type is not a vertex attribute (#898, #1889).
-
-- Do not try to destroy non-initialized SIR objects upon error.
-
-  see https://github.com/igraph/rigraph/issues/1888
-
-
-# igraph 2.1.4.9051
-
-## Chore
-
 - Add air code formatting (#1734, #1869).
-
-
-# igraph 2.1.4.9050
-
-## Continuous integration
-
-- Increase timeout also for covr step.
-
-- Increase timeout for all builds.
-
-- Give more time to covr.
-
-
-# igraph 2.1.4.9049
-
-## Documentation
-
-- Fix indentation of `\describe{}` elements (#1867).
-
-
-# igraph 2.1.4.9048
-
-## Bug fixes
-
-- Added `NA` handling for matrix inputs (#917, #918, #1828).
-
-## Chore
-
-- Auto-update from GitHub Actions (#1865).
-
-## Documentation
-
-- Ensure use of `\describe{}` if using `\item{}` in return value (#1736, #1779).
-
-- Link to replacements of deprecated functions (#1823).
-
-## Refactoring
-
-- Use `check_string()` instead of `as.character()` (#1365).
-
-
-# igraph 2.1.4.9047
-
-## doc
-
-- Refer to current latest version of R in troubleshooting page.
-
-
-# igraph 2.1.4.9046
-
-## Chore
-
-- Auto-update from GitHub Actions (#1861).
 
 - Add deps file to build-ignore.
 
-## Continuous integration
-
-- Allow workflow dispatch.
-
-- Allow PR creation.
-
-
-# igraph 2.1.4.9045
-
-## Chore
-
 - Fix `devtools::load_all()` (#1857).
-
-
-# igraph 2.1.4.9044
-
-## Bug fixes
-
-- Added factor support for `graph_from_data_frame()` (#34, #1829).
-
-## Chore
 
 - Refer to the dev version of roxygen2 as build dependency (#1832).
 
-## Continuous integration
-
-- Fix sanitizer.
-
-- Permissions, better tests for missing suggests, lints (#1851).
-
-- Only fail covr builds if token is given (#1848).
-
-- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1846).
-
-- Correct installation of xml2 (#1842).
-
-- Add xml2 for covr, print testthat results (#1840).
-
-- Sync (#1839).
-
-## Documentation
-
-- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
-
-## Testing
-
-- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@ca0fca2d41bfd2819e49cf98cbc69044dbca9a28 (#1854).
-
-- Update vendored sources to igraph/igraph@cb74a4a43c5b35ad4ec2bf2e3acbc547d23f2267 (#1853).
-
-- Update vendored sources to igraph/igraph@f159656faeed3ab23313fceddc17fa60cb6f2760 (#1852).
-
-- Update vendored sources to igraph/igraph@595b969fb1b5f206f474f0c6e4befa80f0f14fa3 (#1843).
-
-
-# igraph 2.1.4.9043
-
-## vendor
-
-- Update vendored sources to igraph/igraph@2d6d0abc05ac3cb53872cc3ea86b847a7556198e (#1837).
-
-- Update vendored sources to igraph/igraph@a899e60c8e3992f769e2159aeedf480ad46de337 (#1836).
-
-- Update vendored sources to igraph/igraph@145b35107659f73d85186b6a021dfe4284cf50c7 (#1835).
-
-- Update vendored sources to igraph/igraph@198fe3751b97bb130e724ca847d8aa5f9a58c4dc (#1834).
-
-
-# igraph 2.1.4.9042
-
-## vendor
-
-- Update vendored sources to igraph/igraph@05d18670f356403c1dcca4e48f78710e31b3c9b0 (#1825).
-
-
-# igraph 2.1.4.9041
-
-## Chore
-
-- Results from main.
-
-- Results from check with new arpack.
-
-## Documentation
-
-- Document return value of `make_clusters()` (#1794).
-
-
-# igraph 2.1.4.9040
-
-## Documentation
-
-- Add author links (#1821).
-
-
-# igraph 2.1.4.9039
-
-## Bug fixes
-
-- Remove string matrix support from biadjacency matrix functions (#1540, #1542, #1803).
-
-## Features
-
-- `simple_cycles()` lists all simple cycles (#1573, #1580).
-
-- Expose C version (#1208, #1781).
-
-## Chore
-
-- Format with air.
-
-## Documentation
-
-- Fix style (#1819).
-
-## Performance
-
-- Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
-
-
-# igraph 2.1.4.9038
-
-## Documentation
-
-- Correct the description of the `weights` parameter of `hits_scores()`.
-
-## Refactoring
-
-- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
-
-
-# igraph 2.1.4.9037
-
-## vendor
-
-- Update vendored sources to igraph/igraph@09f6f258c4a864654ad1950e053ff2f5c507be54 (#1814).
-
-- Update vendored sources to igraph/igraph@d48a25ba0f6d72e447c6d17d74b667b1f21754fb (#1813).
-
-
-# igraph 2.1.4.9036
-
-## Features
-
-- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@a68d7cafcd0935e6f229437981811e730af4f03f (#1811).
-
-
-# igraph 2.1.4.9035
-
-## vendor
-
-- Update vendored sources to igraph/igraph@01b15eb1f44d36418ea65394710a02887ca16857 (#1808).
-
-- Update vendored sources to igraph/igraph@8d5db4db95e2e80cbe8169bbe66ce64f73df7bd3 (#1807).
-
-- Update vendored sources to igraph/igraph@6c5b349a4b56ebee0003953ee43994d2dd93f189 (#1806).
-
-
-# igraph 2.1.4.9034
-
-## Bug fixes
-
-- Removed redundant inheritParams call (#1802).
-
-- Loops not plotted on canvas (#1799, #1800).
-
-- Load the Matrix package before coercing to a sparse matrix.
-
-- `NA` replacement for labels in plots and arrow mode (#1796, #1797).
-
-## Chore
-
-- Results from revdepcheck.
-
-## Testing
-
-- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
-
-
-# igraph 2.1.4.9033
-
-## Features
-
-- Add relative size scaling to vertices in plots (@gvegayon, #172).
-
-## Chore
-
-- Render docs.
-
-- Updated results.
-
-## Documentation
-
-- Better describe output of `all_shortest_paths()` (#1029, #1778).
-
-
-# igraph 2.1.4.9032
-
-## vendor
-
-- Update vendored sources to igraph/igraph@0a22a85cb9281ce147b0db7415610e55dee2e332 (#1791).
-
-
-# igraph 2.1.4.9031
-
-## vendor
-
-- Update vendored sources to igraph/igraph@e5de49c7f65708763b70413dbde4ac0eba7ef5b6 (#1789).
-
-- Update vendored sources to igraph/igraph@7d634197abd2bb0bc3317c1216cfb82c3813d1af (#1788).
-
-- Update vendored sources to igraph/igraph@bc19dd7ec62ceb80409513009caefb5412c0dab1 (#1787).
-
-
-# igraph 2.1.4.9030
-
-## Documentation
-
-- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
-  This change was implemented in the C core.
-
-## vendor
-
-- Update vendored sources to igraph/igraph@ead8aea0dcecf43755f9a1857d09ce092d6ff9cf (#1785).
-
-
-# igraph 2.1.4.9029
-
-## vendor
-
-- Update vendored sources to igraph/igraph@65cf9a269634047812afbbe966099bb6983ced68 (#1783).
-
-
-# igraph 2.1.4.9028
-
-## vendor
-
-- Update vendored sources to igraph/igraph@fc6860b31887b362e8ddbb07e44e6a12e9cef82d (#1776).
-
-- Update vendored sources to igraph/igraph@dcdad62cbb2e7969fb58429850487a5f0e00c812 (#1775).
-
-- Update vendored sources to igraph/igraph@1636677c821f9dd453049b86e370c0dd6477640b (#1774).
-
-- Update vendored sources to igraph/igraph@6d85a48755d5de8e36fa9d4e53fee891ad0428fa (#1773).
-
-- Update vendored sources to igraph/igraph@fe6bdb78c4a3269b542c6af7a167b9599f08173d (#1772).
-
-- Update vendored sources to igraph/igraph@e5e5374c55164557ba29beee4dbde1a61fa1c50b (igraph/igraph#2473, #1771).
-
-
-# igraph 2.1.4.9027
-
-## vendor
-
-- Update vendored sources to igraph/igraph@910770148045f66ee30bd0c519adaec0e7a7cc31 (igraph/igraph#2473, #1769).
-
-- Update vendored sources to igraph/igraph@10d4fc75f146f5fc8ec17d99ab808c53a3c49dae (#1768).
-
-- Update vendored sources to igraph/igraph@92ec35b3e427734fde7f8ebc9d978ee6fd207c68 (#1767).
-
-
-# igraph 2.1.4.9026
-
-## vendor
-
-- Update vendored sources to igraph/igraph@dd208201b117baecfb1f0de9018e20a6929da865 (#1765).
-
-- Update vendored sources to igraph/igraph@64e4649039ab5b2762068e56fd07ce4b93256767 (#1764).
-
-- Update vendored sources to igraph/igraph@aec39d00ee55245b368421cc3453457ac7ae737e (#1763).
-
-
-# igraph 2.1.4.9025
-
-## Features
-
-- Expose `find_cycle()` (#1471, #1571).
-
-- Split `sample_bipartite()` into two functions for the G(n, m) a… (#630, #1692).
-
-## Chore
-
-- Results from revdepcheck.
-
 - Update generated documentation.
-
-- Install build dependencies.
-
-## Documentation
-
-- Update decription of `order` parameter of `ego()` and related functions (#1746).
-
-## Testing
-
-- Snapshot updates for rcc-smoke (null) (#1738).
-
-
-# igraph 2.1.4.9024
-
-## Bug fixes
-
-- Integer vectors are validated before transferring them to the C library (#1434, #1582).
-
-
-# igraph 2.1.4.9023
-
-## vendor
-
-- Update vendored sources to igraph/igraph@b42d0101d7c2a6d31ac6568aa4b4398d5f619e2e (#1758).
-
-- Update vendored sources to igraph/igraph@627f71a5e0eac5c00f56499fb4457ff4f9ee315d (igraph/igraph#2710, #1757).
-
-- Update vendored sources to igraph/igraph@a7d22863ea48ec7b206ef6a03869ff7817cb8a5b (#1756).
-
-
-# igraph 2.1.4.9022
-
-## Chore
 
 - Require copyright assignment in PR template (#1747).
 
-
-# igraph 2.1.4.9021
-
-## Chore
-
-- Fix `Makefile-cigraph` again.
+- Fix `Makefile-cigraph`.
 
 - Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
-
-## Testing
-
-- Rename, add test for `laplacian_matrix()` (#1714).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@662abbdfa467a6436bad650c31a8360787d75379 (#1753).
-
-- Update vendored sources to igraph/igraph@1a7f9b71505c8455afb836628bc133e387154118 (#1752).
-
-- Update vendored sources to igraph/igraph@410fc4089639fde7f2e6b42ce4588bd6af3d78de (#1751).
-
-- Update vendored sources to igraph/igraph@1cbe1ae2abedacb0afde1b367a788580c9810c6c (#1750).
-
-- Update vendored sources to igraph/igraph@5bda8315202ff0647e30da77de0d70c7f25d89bf (#1749).
-
-- Update vendored sources to igraph/igraph@091e2927a6acce4e89db0db37d7db8496a59f117 (#1748).
-
-
-# igraph 2.1.4.9020
-
-## Bug fixes
-
-- Changed base location for graph_from_graphdb and added tests (@schochastics, #1712, #1732).
-
-- Recycling of logical vectors when indexing into edge/vertex selectors now throws an error (@schochastics, #848, #1731).
-
-## Features
-
-- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
-
-## Chore
-
-- Add include.
-
-- R 4.0 compat.
 
 - Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
 
@@ -1042,877 +247,133 @@
 
 - Use `"parent"` instead of `"father"` in `bfs()` and `dfs()` (#880, #1523).
 
+- Run `devtools::document()` (#1710).
+
+- Run {styler} (with {igraph.style}) (#1696).
+
+- Adapt handling of optional parameters to interface definition changes in the C core (#1567).
+
 ## Documentation
+
+- Document ellipsis in `cohesion()` (#971, #1985).
+
+- Add 2023 preprint (#1240, #1984).
+
+- Update allcontributors info (#1975).
+
+- Fix indentation of `\describe{}` elements (#1867).
+
+- Ensure use of `\describe{}` if using `\item{}` in return value (#1736, #1779).
+
+- Link to replacements of deprecated functions (#1823).
+
+- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
+
+- Document return value of `make_clusters()` (#1794).
+
+- Add author links (#1821).
+
+- Fix style (#1819).
+
+- Correct the description of the `weights` parameter of `hits_scores()`.
+
+- Better describe output of `all_shortest_paths()` (#1029, #1778).
+
+- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
+  This change was implemented in the C core.
+
+- Update description of `order` parameter of `ego()` and related functions (#1746).
 
 - Welcome Maëlle Salmon and David Schoch as authors (#1733).
 
-## Testing
-
-- Merged feedback.set tests into structural.properties (#1743).
-
-
-# igraph 2.1.4.9019
-
-## Testing
-
-- Added tests for untested files (@schochastics, #1728).
-
-- Merged and refactored other.R tests (@schochastics, #1727).
-
-- Merged and refactored structural.properties.R tests (@schochastics, #1726).
-
-
-# igraph 2.1.4.9018
-
-## Bug fixes
-
-- Use function instead of (x) in arrow.mode (@schochastics, #1722).
-
-## Documentation
-
-- Lifecycle table (#1525).
-
-## Refactoring
-
-- One less tmp use case (#1715).
-
-## Testing
-
-- Merged and refactored orphaned test files (@schochastics, #1724).
-
-- Merged and refactored iterators.R and operators.R tests (@schochastics, #1723).
-
-- Merged and refactored topology.R tests (@schochastics, #1720).
-
-- Merged and refactored embedding.R tests (@schochastics, #1721).
-
-- Merge all tests for foreign.R into one test file (#1713).
-
-
-# igraph 2.1.4.9017
-
-## Features
-
-- Added proper support for adding attributes via data.frames (@schochastics, #1373, #1669, #1716).
-
-
-# igraph 2.1.4.9016
-
-## doc
-
-- Fix typos in `laplacian_matrix` documentation.
-
-
-# igraph 2.1.4.9015
-
-## Chore
-
-- Run `devtools::document()` (#1710).
-
-
-# igraph 2.1.4.9014
-
-## Bug fixes
-
-- Duplicated arrowhead drawing (@schochastics, #640, #1709).
-
-- Correct mapping of edge label properties in plots when loops are present (@schochastics, #157, #1706).
-
-- NA attribute values are replaced with default values for plotting (@schochastics, #293, #1707).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@10ef19bc2a61de6c6cfe76e5a068f82b1d29fff1 (#1694).
-
-
-# igraph 2.1.4.9013
-
-## Features
-
-- Hrg functions check their argument (#1074, #1699).
-
-## Documentation
+- Added lifecycle table (#1525).
 
 - Replace instances of `#' if` with `#' @examplesIf` (#1134, #1698).
 
 - Update graph saving rec (#1242, #1700).
 
-## Testing
-
-- Improve test-dot.product.game (#1396, #1705).
-
-
-# igraph 2.1.4.9012
-
-## Chore
-
-- Run {styler} (with {igraph.style}) (#1696).
-
-## Documentation
-
 - Add more about igraph.r2cdocs in the contributing guide (#1686, #1697).
-
-## Testing
-
-- Merged and refactored conversion.R tests (@schochastics, #1701).
-
-- Create helpers (#1691, #1695).
-
-- Merged and refactored make.R tests (@schochastics, #1685).
-
-- Merged and refactored community.R tests (@schochastics, #1689).
-
-- Merged and refactored indexing.R tests (@schochastics, #1687).
-
-
-# igraph 2.1.4.9011
-
-## Testing
-
-- Merged and refactored flow.R tests (@schochastics, #1675).
-
-- Merged and refactored games.R tests (@schochastics, #1682).
-
-## Uncategorized
-
-- Refactor: consolidate graph.incidence.\* (#1483) (#1654).
-
-
-# igraph 2.1.4.9010
-
-## vendor
-
-- Update vendored sources to igraph/igraph@6981deb377ddd9ca9f098d683a743c3dd793e563 (#1680).
-
-- Update vendored sources to igraph/igraph@7955e08f37feda6c61f684428063e13e5a71ff5f (#1679).
-
-
-# igraph 2.1.4.9009
-
-## vendor
-
-- Update vendored sources to igraph/igraph@199fdbf0a511294c7444eaa25c1861e784b3aa8a (#1677).
-
-
-# igraph 2.1.4.9008
 
 ## Refactoring
 
-- Enhance readability and performance of graph.adjacency.sparse (@schochastics, #1667).
+- Some cleanup in vs/es functions in `rinterface_extra.c`.
+
+- Avoid repeated calls to `_size()` functions in for loops.
+  as this has a non-neglibile performance impact
+
+- Improve logic for updating edge attributes (#1332, #1915).
+
+- Use `check_string()` instead of `as.character()` (#1365).
+
+- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
+
+- One less tmp use case (#1715).
+
+- Enhance readability and performance of graph.adjacency.sparse (#1667).
+
+- Prepare for C core interface standardizing 'type' -\> 'types' in igraph_is_bipartite.
 
 ## Performance
 
-- Faster single bracket querying of a graph (@schochastics, #1465, #1658).
+- Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
 
+- Faster single bracket querying of a graph (#1465, #1658).
 
-# igraph 2.1.4.9007
+## Testing
 
-## vendor
+- Simplify test (@1741643+krlmlr).
 
-- Update vendored sources to igraph/igraph@27624a9b65031aabd3bb976efe944524d9e7dd43 (#1672).
+- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
 
-## doc
+- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
 
-- Clarify weights use in `layout_with_kk()`.
+- Snapshot updates for rcc-smoke (null) (#1738).
 
+- Rename, add test for `laplacian_matrix()` (#1714).
 
-# igraph 2.1.4.9006
+- Merged feedback.set tests into structural.properties (#1743).
 
-## Continuous integration
+- Added tests for untested files in R/ (#1728).
 
-- Use igraph repo for vendoring.
+- Merged and refactored `other.R` tests (#1727).
 
-- Fix vendoring workflow.
+- Merged and refactored `structural.properties.R` tests (#1726).
 
-## vendor
+- Merged and refactored orphaned test files (#1724).
 
-- Update vendored sources to igraph/igraph@2ab6b87947187a0b046fa3cbb10a30ec370843aa (#1670).
+- Merged and refactored `iterators.R` and `operators.R` tests (#1723).
 
+- Merged and refactored `topology.R` tests (#1720).
 
-# igraph 2.1.4.9005
+- Merged and refactored `embedding.R` tests (#1721).
 
-## Features
+- Merge all tests for `foreign.R` into one test file (#1713).
 
-- `get_edge_ids()` accepts data frames and matrices (#1663).
+- Improve `test-dot.product.game` (#1396, #1705).
 
+- Merged and refactored `conversion.R` tests (#1701).
 
-# igraph 2.1.4.9004
+- Create helpers (#1691, #1695).
+
+- Merged and refactored `make.R` tests (#1685).
+
+- Merged and refactored `community.R` tests (#1689).
+
+- Merged and refactored `indexing.R` tests (#1687).
+
+- Merged and refactored `flow.R` tests (#1675).
+
+- Merged and refactored `games.R` tests (#1682).
+
+## Uncategorized
+
+- Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
+
+- Refactor: consolidate graph.incidence.\* (#1483) (#1654).
 
 - Refactor: forward `get.adjacency.dense()` to `get.adjacency.sparse()` if attributes are present (#1483) (#1653).
 
-
-# igraph 2.1.4.9003
-
-## Bug fixes
-
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
-
-## Breaking changes
-
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (@schochastics, #1662, #1661).
-
-
-# igraph 2.1.4.9002
-
-## Bug fixes
-
-- Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
-  as the framework for handling callback functions is not yet present
-
-## Chore
-
-- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
-
-- Adapt handling of optional parameters to interface definition changes in the C core (#1567).
-
-- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
-
-## Continuous integration
-
-- Sync vendor workflow with duckdb.
-
-## Refactoring
-
-- Prepare for C core interface standardizing 'type' -\> 'types' in igraph_is_bipartite.
-
-## Breaking changes
-
-- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
-
-- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
-
-## vendor
-
-- Update vendored sources to igraph/igraph@5216243786a5368ab14db9649008d1caca75f5af.
-
-  refactor: cleaner workaround in plfit for Windows 11 SDK bug where NAN is defined in a non-constant manner
-
-- Update vendored sources to igraph/igraph@622f331dc9249b050bc6afbad2032e2c4e78de9e.
-
-  fix: remove unused converage exclusion
-
-- Update vendored sources to igraph/igraph@c675c805a6ed436887ec0e6f9c6e18ca6d13ecad.
-
-  chore: update CodeCoverage.cmake from upstream https://github.com/bilke/cmake-modules/blob/master/CodeCoverage.cmake
-
-- Update vendored sources to igraph/igraph@b25eda2dba6ccbcf5a47fe1cb77796a7f0f524d4.
-
-  fix: UBSan warning about negative shift when generating Q_0 hypercube graph
-
-- Update vendored sources to igraph/igraph@e0dbe374e30adc654ad55a50d5aaf47ebc753908.
-
-  chore: update plfit to 1.0.0
-
-- Update vendored sources to igraph/igraph@2cdc20a37fe048143ac54a3fa8288bb017402e7c.
-
-  chore: update plfit
-  fuzzer: use libxml2 2.13.5
-  chore(deps): bump codecov/codecov-action from 4 to 5
-
-- Update vendored sources to igraph/igraph@082e2c6ba1a96d34d05a4e75a59c4f690aeca58d.
-
-  chore: update changelog \[skip ci\]
-
-- Update vendored sources to igraph/igraph@8d242741a1cdc2686f180838d28f80cb96985c74.
-
-  chore: update plfit
-
-- Update vendored sources to igraph/igraph@6c57e8c955d3c4d81160281d018dd3fa0a4052d8.
-
-  refactor: minor cleanup in maximal cliques
-
-- Update vendored sources to igraph/igraph@d6348668ba511735110758dc4ee0423a983bf1ac.
-
-  refactor: remove extraneous whitespace before continuation backslashes in max clique template code
-
-- Update vendored sources to igraph/igraph@9f06e4c34d8b1d533ba331ae581844a2ea9b565f.
-
-  chore: punctuate som error messages
-
-- Update vendored sources to igraph/igraph@befc831fff74e4bae39743b1f83b38e6b3af0390.
-
-  fix: correct some implicit integer conversions
-
-- Update vendored sources to igraph/igraph@5e3c56c6a10cb954b78c7441c5460a3c6ad4f5b7.
-
-  fix: eliminate some unused parameter warnings
-
-- Update vendored sources to igraph/igraph@8cdfd787c2be8886cc4eac014f3004055a8c3ca0.
-
-  refactor: improved const-correctness in vector implementation
-
-- Update vendored sources to igraph/igraph@ab123f04e487bc8bc1b93b9258e577e5f05d7ce9.
-
-  chore: update plfit, works around non-compile-time-constant NAN bug in recent Windows 11 SDKs
-
-- Update vendored sources to igraph/igraph@833672f02161051010d1b633b23be53765663372.
-
-  chore: restrict workaround to CMake 3.31.0 USE_TERMINAL bug to the single affected CMake version
-
-- Update vendored sources to igraph/igraph@5e734a2c1211d017088a882ed121f25956e20189.
-
-  ci: support for controlling the use of plfit and improve alpine jon
-
-- Update vendored sources to igraph/igraph@ed43183a2eeb9e604addf1dc672908b7b845cec7.
-
-  refactor: some cleanup in shortest path implementations
-
-- Update vendored sources to igraph/igraph@2412652489721e41617e3d9719b02923da31ab0d.
-
-  chore: devcontainer update
-
-- Update vendored sources to igraph/igraph@48ff9407b74cca8e50f1d256b039452e40662985.
-
-  chore: link to relevant CMake bug regarding policy CMP0175
-
-- Update vendored sources to igraph/igraph@3631b1d5a0f3b7e49463f89cbbba762b24d9383d.
-
-  refactor: clean up igraph_path_length_hist()
-
-- Update vendored sources to igraph/igraph@6fd3903c84d741d4bed0284c85db277836a4af79.
-
-  refactor: clean up igraph_vertex_path_from_edge_path() and clarify that it is suitable for any walk, not just paths
-
-- Update vendored sources to igraph/igraph@379ef39bb89f41ba6d0ff39a86039571796e3bde.
-
-  refactor: eliminate redundant pointer variable in GraphML reader
-
-- Update vendored sources to igraph/igraph@af14d843991f9e4f2894477a8644cfbd27a13d11.
-
-  fix: mark global variables in GraphML parser as static
-
-- Update vendored sources to igraph/igraph@05979d3b2c85c12334ce5d3508dd473cdfa3c6f5.
-
-  doc: improve maximal clique docs
-
-- Update vendored sources to igraph/igraph@41d855d470c7e5cca40bb8a2e294656504aa2a56.
-
-  chore: update changelog
-
-- Update vendored sources to igraph/igraph@a2109c50681c0b444285cf40d09a602047141ea1.
-
-  docs: more cross-referencing
-
-- Update vendored sources to igraph/igraph@62881320e766e8df227839a67078dd22e909cd2d.
-
-  docs: fix typo
-
-- Update vendored sources to igraph/igraph@3673a0a9c3b3604ab1975432f6bbeed697dc9f7c.
-
-  doc: more cross-linking
-
-- Update vendored sources to igraph/igraph@e842e658993df7305aec9d805baf36008aec9e4d.
-
-  fix: compatibility with CMake 3.31
-
-- Update vendored sources to igraph/igraph@2f0e27c9c19e8e7eb9b3b2df01ae3186f1e62470.
-
-  ci: use modern CMake features for CTest parallelization
-
-- Update vendored sources to igraph/igraph@a16619502b6c21d4883eeee992794b271e1035d9.
-
-  chore: updated changelog
-
-- Update vendored sources (tag 0.10.15) to igraph/igraph@635b432eff0a89580ac9bb98068d2fbc8ef374f2.
-
-  chore: updated changelog
-
-- Update vendored sources to igraph/igraph@563aa5e8569b85a73680752bd8ad5624575610b6.
-
-  chore: run pre-commit hooks
-
-- Update vendored sources to igraph/igraph@f32e621f3833556e361a3078ab9e046f6acdd9b8.
-
-  chore: bump VERSION property in shared library
-
-- Update vendored sources to igraph/igraph@26d3718b364167dd0528c63a35f9e5e513df6845.
-
-  refactor: do not use vector_get() in simple cycle finder
-
-- Update vendored sources to igraph/igraph@cd7bcd9d9b9bfd9acd83dace6438507947297ce2.
-
-  refactor: cleaner parameter ordering in igraph_i_simple_cycles_circuit()
-
-- Update vendored sources to igraph/igraph@dafe829b811f9344fb1f5a8412a100b586817e3f.
-
-  refactor: support specifying a minimum cycle length in `igraph_simple_cycles()`
-
-- Update vendored sources to igraph/igraph@c263ce7541e904f71dbcb7e06ca0dfb08cbf2ed7.
-
-  interface: loops=True default for igraph_degree()
-
-- Update vendored sources to igraph/igraph@f6ec07e8a9425f09259bd04b0fefe1ebdfe64067.
-
-  chore: updated contributors list
-
-- Update vendored sources to igraph/igraph@a6441e7a00118988aeac528910d6b9d417aec364.
-
-  chore: trim trailing whitespace in interface file
-
-- Update vendored sources to igraph/igraph@042a2c5230e8008b976a5ad0f04fe2b3e00cde97.
-
-  interface: add missing interface for igraph_get_isomorphisms_vf2_callback()
-
-- Update vendored sources to igraph/igraph@797ab4fa6c9a119ff12af1f5d6080de8d1e4f142.
-
-  interface: mark all callback extra parameters and some callback functions as optional
-
-- Update vendored sources to igraph/igraph@518fcc4165c420b9f4958d1496a607d325d69826.
-
-  interface: add default parameter values for fundamental_cycles() and minimum_cycle_basis()
-
-- Update vendored sources to igraph/igraph@d9c328f61e31d93681e2c0894ace18ad59a5dba2.
-
-  interface: even more missing OPTIONAL markers
-
-- Update vendored sources to igraph/igraph@3b9cb6ff078cf4e7fdb2be593811e50b97232fea.
-
-  interface: add more missing OPTIONAL markers
-
-- Update vendored sources to igraph/igraph@5512e864ecddc76af4a7c93b7e4ebfd7030cc404.
-
-  fix: some weights parameters were incorrectly marked as OPTIONAL in functions.yaml
-
-- Update vendored sources to igraph/igraph@4b208d877de74a730e8707e94ebad5318cf308ae.
-
-  fix: mark some optional weight parameters as OPTIONAL in functions.yaml
-
-- Update vendored sources to igraph/igraph@d0616a433134dcb6ae6f3195c5a72e456f5a4809.
-
-  fix: type -\> types in is_bipartite interface
-
-- Update vendored sources to igraph/igraph@c3f9a823d8bc7fa210df4e1225c86226195e1f16.
-
-  fix: some BIPARTITE_TYPES parameters were incorrectly marked as optional
-
-- Update vendored sources to igraph/igraph@34f8d72f3c702aa490644244ebee98b836ac45d1.
-
-  refactor: use OPTIONAL instead of =NULL in interfaces
-
-- Update vendored sources to igraph/igraph@5c74801197212e9908f561139af3141410cf49d2.
-
-  feat: functionality for listing all simple cycles
-
-- Update vendored sources to igraph/igraph@f5d79f2eb90c2597ea0e33c60d0e6a083efc4abc.
-
-  interface: default OUT mode for igraph_find_cycle()
-
-- Update vendored sources to igraph/igraph@992f77abdbe675c2d0dd2926536c57496b720c81.
-
-  refactor: better error reporting for igraph_find_cycle()
-
-- Update vendored sources to igraph/igraph@207f0bb1624bb73a9d1f2f979bf2b2bfde60626f.
-
-  chore: some copyright header cleanup in public headers
-
-- Update vendored sources to igraph/igraph@8eaa07489a27f55cdf8421bbbb8e34b60eacd1bf.
-
-  refactor: minor readability improvements
-
-- Update vendored sources to igraph/igraph@5cd6552bf00d6a774cdd64b5fabf2c79524ccfc7.
-
-  fix: add some missing IGRAPH_CHECKs
-
-- Update vendored sources to igraph/igraph@82d35eebd8c73a9476d5e2d205a851b4ebfc8eda.
-
-  refactor: minor readability cleanup in matching functions
-
-- Update vendored sources to igraph/igraph@01db8e25a80dd8f93ccb9d7a6f39379a57fdc3ad.
-
-  fix: `igraph_bipartite_projection_size()` now validates the bipartite `types` vector
-
-- Update vendored sources to igraph/igraph@7284ee015d2662ca4e1ab62e3ce17ff34df24430.
-
-  chore: fix some spelling mistakes
-
-- Update vendored sources to igraph/igraph@1d6ef7c417e38c881ef325d8c553ccf767db6b6f.
-
-  refactor: minor readability cleanup in igraph_decompose()
-
-- Update vendored sources to igraph/igraph@0878f577d45ff5fdc33e0ecacc542277a8024af9.
-
-  doc: more documentation improvements
-
-- Update vendored sources to igraph/igraph@bd7b3a82bb9db038ebfcc046319947c5ea196660.
-
-  doc: several documentation improvements and cross-referencing
-
-- Update vendored sources to igraph/igraph@764954eda823c40341d302ac290629d96d5bd9bf.
-
-  chore: fix typo in error message
-
-- Update vendored sources to igraph/igraph@6c0a4310474e9935acc557673e1a2f9ec0dd6db3.
-
-  docs: community_optimal_modulairty() does support directed graphs
-
-- Update vendored sources to igraph/igraph@59d71d001308d424782a386fea3069cf880d82a2.
-
-  chore: do not warn about unknown warning options with legacy Intel compiler
-
-- Update vendored sources to igraph/igraph@7a0d4918abfd34c38eb2fdeec4460b2370cea1c9.
-
-  fix: validate sample size in igraph_motifs_randesu_estimate()
-
-- Update vendored sources to igraph/igraph@e7820cf969a8c63d6564452f73246c044ee99ba9.
-
-  chore: fix typo in comment
-
-## hack
-
-- Provide NULL default for types argument of `bipartite_projection_size()`.
-  This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
-
-## Uncategorized
-
 - Refactor: removed `for` loops from `get.incidence.dense()` (#1483) (#1655).
-
-- Vendor: Update vendored sources to igraph/igraph@ae93a3a2431bb6fd8a1feb687cac32feef63730b.
-
-- Vendor: Update vendored sources to igraph/igraph@e940ab737938dfdd4518164c866b2599af40856f.
-
-- Vendor: Update vendored sources to igraph/igraph@3ac79b81bdf835460445ca6163f25e6559ec9958.
-
-- Vendor: Update vendored sources to igraph/igraph@f7b77f9e9cb4d670886b7e15e876c5549250befa.
-
-- Vendor: Update vendored sources to igraph/igraph@a662f79d46970bbcc2888e69dce5daa3fee8906e.
-
-- Vendor: Update vendored sources to igraph/igraph@a1389c191ac42b5ed3fcaf341ff3235c9f6f19f3.
-
-- Vendor: Update vendored sources to igraph/igraph@12299c4928f9f463c06d0b46752df69a6d67c289.
-
-
-# igraph 2.1.3.9003
-
-- Refactor: removed `for` loops from `get.incidence.dense()` (#1483) (#1655).
-
-
-# igraph 2.1.3.9002
-
-## Chore
-
-- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
-
-- Adapt handling of optional parameters to interface definition changes in the C core (#1567).
-
-- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
-
-## Breaking changes
-
-- Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
-
-- Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
-
-
-# igraph 2.1.3.9001
-
-## Bug fixes
-
-- Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
-  as the framework for handling callback functions is not yet present
-
-## Refactoring
-
-- Prepare for C core interface standardizing 'type' -\> 'types' in igraph_is_bipartite.
-
-## vendor
-
-- Update vendored sources to igraph/igraph@5216243786a5368ab14db9649008d1caca75f5af.
-
-  refactor: cleaner workaround in plfit for Windows 11 SDK bug where NAN is defined in a non-constant manner
-
-- Update vendored sources to igraph/igraph@622f331dc9249b050bc6afbad2032e2c4e78de9e.
-
-  fix: remove unused converage exclusion
-
-- Update vendored sources to igraph/igraph@c675c805a6ed436887ec0e6f9c6e18ca6d13ecad.
-
-  chore: update CodeCoverage.cmake from upstream https://github.com/bilke/cmake-modules/blob/master/CodeCoverage.cmake
-
-- Update vendored sources to igraph/igraph@b25eda2dba6ccbcf5a47fe1cb77796a7f0f524d4.
-
-  fix: UBSan warning about negative shift when generating Q_0 hypercube graph
-
-- Update vendored sources to igraph/igraph@e0dbe374e30adc654ad55a50d5aaf47ebc753908.
-
-  chore: update plfit to 1.0.0
-
-- Update vendored sources to igraph/igraph@2cdc20a37fe048143ac54a3fa8288bb017402e7c.
-
-  chore: update plfit
-  fuzzer: use libxml2 2.13.5
-  chore(deps): bump codecov/codecov-action from 4 to 5
-
-- Update vendored sources to igraph/igraph@082e2c6ba1a96d34d05a4e75a59c4f690aeca58d.
-
-  chore: update changelog \[skip ci\]
-
-- Update vendored sources to igraph/igraph@8d242741a1cdc2686f180838d28f80cb96985c74.
-
-  chore: update plfit
-
-- Update vendored sources to igraph/igraph@6c57e8c955d3c4d81160281d018dd3fa0a4052d8.
-
-  refactor: minor cleanup in maximal cliques
-
-- Update vendored sources to igraph/igraph@d6348668ba511735110758dc4ee0423a983bf1ac.
-
-  refactor: remove extraneous whitespace before continuation backslashes in max clique template code
-
-- Update vendored sources to igraph/igraph@9f06e4c34d8b1d533ba331ae581844a2ea9b565f.
-
-  chore: punctuate som error messages
-
-- Update vendored sources to igraph/igraph@befc831fff74e4bae39743b1f83b38e6b3af0390.
-
-  fix: correct some implicit integer conversions
-
-- Update vendored sources to igraph/igraph@5e3c56c6a10cb954b78c7441c5460a3c6ad4f5b7.
-
-  fix: eliminate some unused parameter warnings
-
-- Update vendored sources to igraph/igraph@8cdfd787c2be8886cc4eac014f3004055a8c3ca0.
-
-  refactor: improved const-correctness in vector implementation
-
-- Update vendored sources to igraph/igraph@ab123f04e487bc8bc1b93b9258e577e5f05d7ce9.
-
-  chore: update plfit, works around non-compile-time-constant NAN bug in recent Windows 11 SDKs
-
-- Update vendored sources to igraph/igraph@833672f02161051010d1b633b23be53765663372.
-
-  chore: restrict workaround to CMake 3.31.0 USE_TERMINAL bug to the single affected CMake version
-
-- Update vendored sources to igraph/igraph@5e734a2c1211d017088a882ed121f25956e20189.
-
-  ci: support for controlling the use of plfit and improve alpine jon
-
-- Update vendored sources to igraph/igraph@ed43183a2eeb9e604addf1dc672908b7b845cec7.
-
-  refactor: some cleanup in shortest path implementations
-
-- Update vendored sources to igraph/igraph@2412652489721e41617e3d9719b02923da31ab0d.
-
-  chore: devcontainer update
-
-- Update vendored sources to igraph/igraph@48ff9407b74cca8e50f1d256b039452e40662985.
-
-  chore: link to relevant CMake bug regarding policy CMP0175
-
-- Update vendored sources to igraph/igraph@3631b1d5a0f3b7e49463f89cbbba762b24d9383d.
-
-  refactor: clean up igraph_path_length_hist()
-
-- Update vendored sources to igraph/igraph@6fd3903c84d741d4bed0284c85db277836a4af79.
-
-  refactor: clean up igraph_vertex_path_from_edge_path() and clarify that it is suitable for any walk, not just paths
-
-- Update vendored sources to igraph/igraph@379ef39bb89f41ba6d0ff39a86039571796e3bde.
-
-  refactor: eliminate redundant pointer variable in GraphML reader
-
-- Update vendored sources to igraph/igraph@af14d843991f9e4f2894477a8644cfbd27a13d11.
-
-  fix: mark global variables in GraphML parser as static
-
-- Update vendored sources to igraph/igraph@05979d3b2c85c12334ce5d3508dd473cdfa3c6f5.
-
-  doc: improve maximal clique docs
-
-- Update vendored sources to igraph/igraph@41d855d470c7e5cca40bb8a2e294656504aa2a56.
-
-  chore: update changelog
-
-- Update vendored sources to igraph/igraph@a2109c50681c0b444285cf40d09a602047141ea1.
-
-  docs: more cross-referencing
-
-- Update vendored sources to igraph/igraph@62881320e766e8df227839a67078dd22e909cd2d.
-
-  docs: fix typo
-
-- Update vendored sources to igraph/igraph@3673a0a9c3b3604ab1975432f6bbeed697dc9f7c.
-
-  doc: more cross-linking
-
-- Update vendored sources to igraph/igraph@e842e658993df7305aec9d805baf36008aec9e4d.
-
-  fix: compatibility with CMake 3.31
-
-- Update vendored sources to igraph/igraph@2f0e27c9c19e8e7eb9b3b2df01ae3186f1e62470.
-
-  ci: use modern CMake features for CTest parallelization
-
-- Update vendored sources to igraph/igraph@a16619502b6c21d4883eeee992794b271e1035d9.
-
-  chore: updated changelog
-
-- Update vendored sources (tag 0.10.15) to igraph/igraph@635b432eff0a89580ac9bb98068d2fbc8ef374f2.
-
-  chore: updated changelog
-
-- Update vendored sources to igraph/igraph@563aa5e8569b85a73680752bd8ad5624575610b6.
-
-  chore: run pre-commit hooks
-
-- Update vendored sources to igraph/igraph@f32e621f3833556e361a3078ab9e046f6acdd9b8.
-
-  chore: bump VERSION property in shared library
-
-- Update vendored sources to igraph/igraph@26d3718b364167dd0528c63a35f9e5e513df6845.
-
-  refactor: do not use vector_get() in simple cycle finder
-
-- Update vendored sources to igraph/igraph@cd7bcd9d9b9bfd9acd83dace6438507947297ce2.
-
-  refactor: cleaner parameter ordering in igraph_i_simple_cycles_circuit()
-
-- Update vendored sources to igraph/igraph@dafe829b811f9344fb1f5a8412a100b586817e3f.
-
-  refactor: support specifying a minimum cycle length in `igraph_simple_cycles()`
-
-- Update vendored sources to igraph/igraph@c263ce7541e904f71dbcb7e06ca0dfb08cbf2ed7.
-
-  interface: loops=True default for igraph_degree()
-
-- Update vendored sources to igraph/igraph@f6ec07e8a9425f09259bd04b0fefe1ebdfe64067.
-
-  chore: updated contributors list
-
-- Update vendored sources to igraph/igraph@a6441e7a00118988aeac528910d6b9d417aec364.
-
-  chore: trim trailing whitespace in interface file
-
-- Update vendored sources to igraph/igraph@042a2c5230e8008b976a5ad0f04fe2b3e00cde97.
-
-  interface: add missing interface for igraph_get_isomorphisms_vf2_callback()
-
-- Update vendored sources to igraph/igraph@797ab4fa6c9a119ff12af1f5d6080de8d1e4f142.
-
-  interface: mark all callback extra parameters and some callback functions as optional
-
-- Update vendored sources to igraph/igraph@518fcc4165c420b9f4958d1496a607d325d69826.
-
-  interface: add default parameter values for fundamental_cycles() and minimum_cycle_basis()
-
-- Update vendored sources to igraph/igraph@d9c328f61e31d93681e2c0894ace18ad59a5dba2.
-
-  interface: even more missing OPTIONAL markers
-
-- Update vendored sources to igraph/igraph@3b9cb6ff078cf4e7fdb2be593811e50b97232fea.
-
-  interface: add more missing OPTIONAL markers
-
-- Update vendored sources to igraph/igraph@5512e864ecddc76af4a7c93b7e4ebfd7030cc404.
-
-  fix: some weights parameters were incorrectly marked as OPTIONAL in functions.yaml
-
-- Update vendored sources to igraph/igraph@4b208d877de74a730e8707e94ebad5318cf308ae.
-
-  fix: mark some optional weight parameters as OPTIONAL in functions.yaml
-
-- Update vendored sources to igraph/igraph@d0616a433134dcb6ae6f3195c5a72e456f5a4809.
-
-  fix: type -\> types in is_bipartite interface
-
-- Update vendored sources to igraph/igraph@c3f9a823d8bc7fa210df4e1225c86226195e1f16.
-
-  fix: some BIPARTITE_TYPES parameters were incorrectly marked as optional
-
-- Update vendored sources to igraph/igraph@34f8d72f3c702aa490644244ebee98b836ac45d1.
-
-  refactor: use OPTIONAL instead of =NULL in interfaces
-
-- Update vendored sources to igraph/igraph@5c74801197212e9908f561139af3141410cf49d2.
-
-  feat: functionality for listing all simple cycles
-
-- Update vendored sources to igraph/igraph@f5d79f2eb90c2597ea0e33c60d0e6a083efc4abc.
-
-  interface: default OUT mode for igraph_find_cycle()
-
-- Update vendored sources to igraph/igraph@992f77abdbe675c2d0dd2926536c57496b720c81.
-
-  refactor: better error reporting for igraph_find_cycle()
-
-- Update vendored sources to igraph/igraph@207f0bb1624bb73a9d1f2f979bf2b2bfde60626f.
-
-  chore: some copyright header cleanup in public headers
-
-- Update vendored sources to igraph/igraph@8eaa07489a27f55cdf8421bbbb8e34b60eacd1bf.
-
-  refactor: minor readability improvements
-
-- Update vendored sources to igraph/igraph@5cd6552bf00d6a774cdd64b5fabf2c79524ccfc7.
-
-  fix: add some missing IGRAPH_CHECKs
-
-- Update vendored sources to igraph/igraph@82d35eebd8c73a9476d5e2d205a851b4ebfc8eda.
-
-  refactor: minor readability cleanup in matching functions
-
-- Update vendored sources to igraph/igraph@01db8e25a80dd8f93ccb9d7a6f39379a57fdc3ad.
-
-  fix: `igraph_bipartite_projection_size()` now validates the bipartite `types` vector
-
-- Update vendored sources to igraph/igraph@7284ee015d2662ca4e1ab62e3ce17ff34df24430.
-
-  chore: fix some spelling mistakes
-
-- Update vendored sources to igraph/igraph@1d6ef7c417e38c881ef325d8c553ccf767db6b6f.
-
-  refactor: minor readability cleanup in igraph_decompose()
-
-- Update vendored sources to igraph/igraph@0878f577d45ff5fdc33e0ecacc542277a8024af9.
-
-  doc: more documentation improvements
-
-- Update vendored sources to igraph/igraph@bd7b3a82bb9db038ebfcc046319947c5ea196660.
-
-  doc: several documentation improvements and cross-referencing
-
-- Update vendored sources to igraph/igraph@764954eda823c40341d302ac290629d96d5bd9bf.
-
-  chore: fix typo in error message
-
-- Update vendored sources to igraph/igraph@6c0a4310474e9935acc557673e1a2f9ec0dd6db3.
-
-  docs: community_optimal_modulairty() does support directed graphs
-
-- Update vendored sources to igraph/igraph@59d71d001308d424782a386fea3069cf880d82a2.
-
-  chore: do not warn about unknown warning options with legacy Intel compiler
-
-- Update vendored sources to igraph/igraph@7a0d4918abfd34c38eb2fdeec4460b2370cea1c9.
-
-  fix: validate sample size in igraph_motifs_randesu_estimate()
-
-- Update vendored sources to igraph/igraph@e7820cf969a8c63d6564452f73246c044ee99ba9.
-
-  chore: fix typo in comment
-
-## hack
-
-- Provide NULL default for types argument of `bipartite_projection_size()`.
-  This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
-
-## Uncategorized
-
-- Vendor: Update vendored sources to igraph/igraph@ae93a3a2431bb6fd8a1feb687cac32feef63730b.
-
-- Vendor: Update vendored sources to igraph/igraph@e940ab737938dfdd4518164c866b2599af40856f.
-
-- Vendor: Update vendored sources to igraph/igraph@3ac79b81bdf835460445ca6163f25e6559ec9958.
-
-- Vendor: Update vendored sources to igraph/igraph@f7b77f9e9cb4d670886b7e15e876c5549250befa.
-
-- Vendor: Update vendored sources to igraph/igraph@a662f79d46970bbcc2888e69dce5daa3fee8906e.
-
-- Vendor: Update vendored sources to igraph/igraph@a1389c191ac42b5ed3fcaf341ff3235c9f6f19f3.
-
-- Vendor: Update vendored sources to igraph/igraph@12299c4928f9f463c06d0b46752df69a6d67c289.
-
-
-# igraph 2.1.3.9000
 
 - Switching to development version.
 
@@ -2005,7 +466,7 @@ See <https://github.com/igraph/rigraph/blob/9828d7b11be330f994f07ae93a071b356ece
 
 See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b924770/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
-## Lifecycle 
+## Lifecycle
 
 ### Breaking changes
 
@@ -2450,7 +911,7 @@ The internal format of graph objects has changed in a mostly backward-compatible
 This graph was created by an old(er) igraph version.
   Call upgrade_graph() on it to use with the current igraph version
   For now we convert it on the fly...
-Error in is_directed(object) : 
+Error in is_directed(object) :
   REAL() can only be applied to a 'numeric', not a 'NULL'
 ```
 

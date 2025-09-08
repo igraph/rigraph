@@ -189,31 +189,37 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
-/ igraph_neighbors                           /
+/ igraph_degree                              /
 /-------------------------------------------*/
-SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
+SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_int_t c_neis;
-  igraph_integer_t c_vid;
+  igraph_vector_int_t c_res;
+  igraph_vs_t c_vids;
   igraph_neimode_t c_mode;
-  SEXP neis;
+  igraph_bool_t c_loops;
+  SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_neis, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_neis);
-  c_vid = (igraph_integer_t) REAL(vid)[0];
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_neighbors(&c_graph, &c_neis, c_vid, c_mode));
+  IGRAPH_R_CHECK(igraph_degree(&c_graph, &c_res, c_vids, c_mode, c_loops));
 
                                         /* Convert output */
-  PROTECT(neis=R_igraph_vector_int_to_SEXPp1(&c_neis));
-  igraph_vector_int_destroy(&c_neis);
+  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  r_result = neis;
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);
@@ -12018,7 +12024,7 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
   igraph_bool_t c_res;
-  igraph_neimode_t c_mode;
+
   SEXP res;
   SEXP mode;
 
@@ -12027,19 +12033,12 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   R_SEXP_to_igraph(graph, &c_graph);
   R_SEXP_to_vector_bool(types, &c_types);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, NULL));
+  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, 0));
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, mode);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("mode"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);

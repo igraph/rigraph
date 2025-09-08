@@ -33,7 +33,6 @@ igraph_is_directed:
     IGNORE: RR, RC
 
 igraph_degree:
-    IGNORE: RR, RC
 
 igraph_edge:
     IGNORE: RR, RC, RInit
@@ -1026,6 +1025,10 @@ igraph_random_spanning_tree:
 #######################################
 # Coloring
 #######################################
+
+igraph_is_bipartite_coloring:
+    PARAMS: GRAPH graph, BIPARTITE_TYPES types, OUT BOOLEAN res, OPTIONAL OUT NULL mode
+    DEPS: types ON graph
 
 #######################################
 # Microscopic update

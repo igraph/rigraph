@@ -435,16 +435,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-07-10 09:23:08] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-09-05 04:12:21] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-07-10 09:23:08] Generating graph of layer mrna for groupA...
-    [25-07-10 09:23:08] Reducing network by WGCNA::pickHardThreshold...
-    [25-07-10 09:23:08] R2 cutoff: 0.65
-    [25-07-10 09:23:08] Cut Threshold: 0.26
+    [25-09-05 04:12:21] Generating graph of layer mrna for groupA...
+    [25-09-05 04:12:21] Reducing network by WGCNA::pickHardThreshold...
+    [25-09-05 04:12:21] R2 cutoff: 0.65
+    [25-09-05 04:12:22] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -489,75 +489,6 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     checkRd: (-1) generate_individual_graphs.Rd:11: Lost braces
         11 | code{\link[DrDimont]{compute_correlation_matrices}}}
            |     ^
-    ```
-
-# EGAnet
-
-<details>
-
-* Version: 2.3.0
-* GitHub: https://github.com/hfgolino/EGAnet
-* Source code: https://github.com/cran/EGAnet
-* Date/Publication: 2025-04-09 23:10:15 UTC
-* Number of recursive dependencies: 180
-
-Run `revdepcheck::cloud_details(, "EGAnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘EGAnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: EGA
-    > ### Title: Exploratory Graph Analysis
-    > ### Aliases: EGA
-    > 
-    > ### ** Examples
-    > 
-    > # Obtain data
-    > wmt <- wmt2[,7:24]
-    > 
-    > # Estimate EGA
-    > ega.wmt <- EGA(
-    +   data = wmt,
-    +   plot.EGA = FALSE # No plot for CRAN checks
-    + )
-    Error in `set_vertex_attr()`:
-    ! `name` must be a single string, not `FALSE`.
-    Backtrace:
-         ▆
-      1. └─EGAnet::EGA(data = wmt, plot.EGA = FALSE)
-      2.   └─EGAnet::EGA.estimate(...)
-      3.     ├─base::do.call(...)
-      4.     └─EGAnet (local) `<fn>`(...)
-      5.       └─EGAnet::convert2igraph(network)
-      6.         ├─EGAnet:::silent_call(...)
-      7.         │ ├─utils::capture.output(result <- suppressWarnings(suppressMessages(...)))
-      8.         │ │ └─base::withVisible(...elt(i))
-      9.         │ ├─base::suppressWarnings(suppressMessages(...))
-     10.         │ │ └─base::withCallingHandlers(...)
-     11.         │ └─base::suppressMessages(...)
-     12.         │   └─base::withCallingHandlers(...)
-     13.         └─igraph::graph_from_adjacency_matrix(...)
-     14.           └─igraph::set_vertex_attr(name = add.colnames)
-     15.             └─igraph:::check_string(name)
-     16.               └─igraph:::stop_input_type(...)
-     17.                 └─rlang::abort(message, ..., call = call, arg = arg)
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.2Mb
-      sub-directories of 1Mb or more:
-        R      1.5Mb
-        data   4.0Mb
     ```
 
 # egor
@@ -691,176 +622,14 @@ Run `revdepcheck::cloud_details(, "GephiForR")` for more info
     Execution halted
     ```
 
-# gor
-
-<details>
-
-* Version: 1.0
-* GitHub: NA
-* Source code: https://github.com/cran/gor
-* Date/Publication: 2023-05-03 18:40:02 UTC
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "gor")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘gor-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: generate_fundamental_cycles
-    > ### Title: Generate fundamental cycles in a connected graph
-    > ### Aliases: generate_fundamental_cycles
-    > 
-    > ### ** Examples
-    > 
-    > g <- make_graph("Dodecahedron")
-    > n <- gorder(g)
-    > b <- bfs(g, 1, father = TRUE)                 # BFS tree
-    Warning: The `father` argument of `bfs()` is deprecated as of igraph 2.2.0.
-    ℹ Please use the `parent` argument instead.
-    > T <- make_graph(rbind(b$father[2:n], 2:n), n) # Tree as igraph graph
-    > eT <- as_edgelist(T)
-    > eG <- as_edgelist(g)
-    > C <- generate_fundamental_cycles(eT, eG)      # Fundamental cycles
-    > mu <- gsize(g) - gorder(g) + 1                # Cyclomatic number
-    > z <- layout_with_gem(g)
-    > for (i in 1:mu) {                             # Cycle drawing
-    +     c1 <- make_graph(t(eG[which(C[i,] == 1),]) , dir = FALSE)
-    +     plot(g, layout = z)
-    +     plot(c1, layout = z, add = TRUE, edge.color = "cyan4",
-    +          edge.lty = "dashed", edge.width = 3)
-    +     title(paste0("Cycle ", i, " of ", mu))
-    +     #Sys.sleep(1) # Adjust time to see the cycles
-    + }
-    Error in `plot()`:
-    ! The layout has 20 rows, but the graph has 5 vertices.
-    ℹ It is recommended to store the layout as x and y vertex attributes and not as
-      a matrix graph attribute.
-    Backtrace:
-        ▆
-     1. ├─base::plot(...)
-     2. └─igraph::plot.igraph(...)
-     3.   └─cli::cli_abort(...)
-     4.     └─rlang::abort(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking Rd files ... NOTE
-    ```
-    checkRd: (-1) compute_lower_bound_1tree.Rd:31: Lost braces; missing escapes or markup?
-        31 | instance from vertex 1.  Internally, it creates the graph Kn-{v1}
-           |                                                              ^
-    ```
-
-# handwriterRF
-
-<details>
-
-* Version: 1.1.1
-* GitHub: https://github.com/CSAFE-ISU/handwriterRF
-* Source code: https://github.com/cran/handwriterRF
-* Date/Publication: 2025-01-29 00:20:01 UTC
-* Number of recursive dependencies: 123
-
-Run `revdepcheck::cloud_details(, "handwriterRF")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > # This file is part of the standard setup for testthat.
-      > # It is recommended that you do not modify it.
-      > #
-      > # Where should you do additional test configuration?
-      > # Learn more about the roles of various files in:
-      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-      > # * https://testthat.r-lib.org/articles/special-files.html
-      > 
-      > library(testthat)
-      > library(handwriterRF)
-      > 
-      > test_check("handwriterRF")
-      Copying samples to project directory > docs...
-      
-      Estimating writer profiles...
-      Listing documents to be processed...
-      Creating output directory...
-      Directory already exists.
-      Processing document w0030_s01_pWOZ_r01.png...
-      path in readPNGBinary: /tmp/RtmpSZltDI/comparison/docs/w0030_s01_pWOZ_r01.png
-      Starting Processing...
-      Getting Nodes...
-      Skeletonizing writing...
-      Splitting document into components...
-      Merging nodes...
-      Finding paths...
-      Split paths into graphs...
-      Organizing graphs...
-      Creating graph lists...
-      Adding character features...
-      Document processing complete
-      Saving processed document w0030_s01_pWOZ_r01.png...
-      
-      Processing document w0030_s01_pWOZ_r02.png...
-      path in readPNGBinary: /tmp/RtmpSZltDI/comparison/docs/w0030_s01_pWOZ_r02.png
-      Starting Processing...
-      Getting Nodes...
-      Skeletonizing writing...
-      Splitting document into components...
-      Merging nodes...
-      Finding paths...
-      Split paths into graphs...
-      Organizing graphs...
-      Creating graph lists...
-      Adding character features...
-      Document processing complete
-      Saving processed document w0030_s01_pWOZ_r02.png...
-      
-      All documents were successfully processed...
-      
-      Loading graphs for w0030_s01_pWOZ_r01_proclist.rds
-      Getting cluster assignments for w0030_s01_pWOZ_r01
-      Saving cluster assignments for  w0030_s01_pWOZ_r01 
-      
-      Loading graphs for w0030_s01_pWOZ_r02_proclist.rds
-      Getting cluster assignments for w0030_s01_pWOZ_r02
-      Saving cluster assignments for  w0030_s01_pWOZ_r02 
-      
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating SLR...
-      Calculating distance between samples...
-      Calculating similarity score...
-      Calculating SLR...
-      Killed
-    ```
-
 # incidentally
 
 <details>
 
-* Version: 1.0.2
+* Version: 1.0.3
 * GitHub: https://github.com/zpneal/incidentally
 * Source code: https://github.com/cran/incidentally
-* Date/Publication: 2023-02-15 21:00:02 UTC
+* Date/Publication: 2025-07-28 22:10:02 UTC
 * Number of recursive dependencies: 36
 
 Run `revdepcheck::cloud_details(, "incidentally")` for more info
@@ -1004,11 +773,11 @@ Run `revdepcheck::cloud_details(, "klassR")` for more info
 
 <details>
 
-* Version: 1.5.1
+* Version: 1.6.0
 * GitHub: https://github.com/stocnet/manynet
 * Source code: https://github.com/cran/manynet
-* Date/Publication: 2025-06-23 08:30:02 UTC
-* Number of recursive dependencies: 135
+* Date/Publication: 2025-08-22 23:40:02 UTC
+* Number of recursive dependencies: 117
 
 Run `revdepcheck::cloud_details(, "manynet")` for more info
 
@@ -1021,31 +790,23 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
     Running examples in ‘manynet-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: manip_paths
-    > ### Title: Modifying networks paths
-    > ### Aliases: manip_paths to_matching to_mentoring to_eulerian to_tree
-    > ###   to_dominating
+    > ### Name: mark_features
+    > ### Title: Marking networks features
+    > ### Aliases: mark_features is_connected is_perfect_matching is_eulerian
+    > ###   is_acyclic is_aperiodic
     > 
     > ### ** Examples
     > 
-    > to_matching(ison_southern_women)
-    Error in `igraph::graph_from_data_frame()`:
-    ! Cannot create a graph object because the edge data frame contains NAs.
-    Backtrace:
-         ▆
-      1. ├─manynet::to_matching(ison_southern_women)
-      2. └─manynet:::to_matching.tbl_graph(ison_southern_women)
-      3.   ├─manynet::as_tidygraph(to_matching.igraph(.data, mark, capacities = capacities))
-      4.   └─manynet:::to_matching.igraph(.data, mark, capacities = capacities)
-      5.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-      6.     │ └─base::withCallingHandlers(...)
-      7.     ├─manynet::as_igraph(el, twomode = TRUE)
-      8.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-      9.       └─igraph::graph_from_data_frame(.data)
-     10.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-     11.           └─cli::cli_abort(...)
-     12.             └─rlang::abort(...)
-    Execution halted
+    > is_connected(ison_southern_women)
+    [1] TRUE
+    > is_perfect_matching(ison_southern_women)
+    [1] FALSE
+    > is_eulerian(ison_brandes)
+    [1] FALSE
+    > is_acyclic(ison_algebra)
+    [1] FALSE
+    > is_aperiodic(ison_algebra)
+    Killed
     ```
 
 *   checking tests ... ERROR
@@ -1058,75 +819,32 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       > 
       > test_check("manynet")
       Starting 2 test processes
-      [ FAIL 2 | WARN 404 | SKIP 20 | PASS 570 ]
       
-      ══ Skipped tests (20) ══════════════════════════════════════════════════════════
-      • On CRAN (20): 'test-manip_as.R:86:3', 'test-manip_split.R:49:3',
-        'test-map_autograph.R:2:3', 'test-map_autograph.R:17:3',
-        'test-map_autograph.R:31:3', 'test-map_autograph.R:47:3',
-        'test-map_autograph.R:65:3', 'test-map_autograph.R:91:3',
-        'test-map_autograph.R:103:3', 'test-map_autograph.R:113:3',
-        'test-map_autograph.R:120:3', 'test-map_autograph.R:127:3',
-        'test-map_autograph.R:140:3', 'test-map_autograph.R:171:3',
-        'test-map_autograph.R:180:3', 'test-mark_nodes.R:36:3',
-        'test-mark_nodes.R:45:3', 'test-mark_nodes.R:81:3', 'test-mark_ties.R:24:3',
-        'test-mark_ties.R:33:3'
       
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-mark_is.R:12:3'): is_ tests return correct values ──────────────
-      Error in `igraph::graph_from_data_frame(.data)`: Cannot create a graph object because the edge data frame contains NAs.
+      Error in `private$handle_error()`:
+      ! testthat subprocess exited in file `test-measure_closure.R`
+      Caused by error:
+      ! R session crashed with exit code -9
       Backtrace:
            ▆
-        1. ├─testthat::expect_false(is_perfect_matching(ison_southern_women)) at test-mark_is.R:12:3
-        2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
-        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-        4. └─manynet::is_perfect_matching(ison_southern_women)
-        5.   ├─manynet::to_matching(.data, mark = mark)
-        6.   └─manynet:::to_matching.igraph(.data, mark = mark)
-        7.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-        8.     │ └─base::withCallingHandlers(...)
-        9.     ├─manynet::as_igraph(el, twomode = TRUE)
-       10.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-       11.       └─igraph::graph_from_data_frame(.data)
-       12.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-       13.           └─cli::cli_abort(...)
-       14.             └─rlang::abort(...)
-      ── Error ('test-manip_transform.R:43:3'): to matching works ────────────────────
-      Error in `igraph::graph_from_data_frame(.data)`: Cannot create a graph object because the edge data frame contains NAs.
-      Backtrace:
-           ▆
-        1. ├─manynet::as_edgelist(to_matching(ison_southern_women)) at test-manip_transform.R:43:3
-        2. ├─manynet::to_matching(ison_southern_women)
-        3. └─manynet:::to_matching.tbl_graph(ison_southern_women)
-        4.   ├─manynet::as_tidygraph(to_matching.igraph(.data, mark, capacities = capacities))
-        5.   └─manynet:::to_matching.igraph(.data, mark, capacities = capacities)
-        6.     ├─base::suppressWarnings(as_igraph(el, twomode = TRUE))
-        7.     │ └─base::withCallingHandlers(...)
-        8.     ├─manynet::as_igraph(el, twomode = TRUE)
-        9.     └─manynet:::as_igraph.data.frame(el, twomode = TRUE)
-       10.       └─igraph::graph_from_data_frame(.data)
-       11.         └─igraph:::ensure_no_na(d[, 1:2], "edge data frame")
-       12.           └─cli::cli_abort(...)
-       13.             └─rlang::abort(...)
-      
-      [ FAIL 2 | WARN 404 | SKIP 20 | PASS 570 ]
-      Error: Test failures
+        1. └─testthat::test_check("manynet")
+        2.   └─testthat::test_dir(...)
+        3.     └─testthat:::test_files(...)
+        4.       └─testthat:::test_files_parallel(...)
+        5.         ├─withr::with_dir(...)
+        6.         │ └─base::force(code)
+        7.         ├─testthat::with_reporter(...)
+        8.         │ └─base::tryCatch(...)
+        9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+       10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+       11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+       12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
+       13.           └─queue$poll(Inf)
+       14.             └─base::lapply(...)
+       15.               └─testthat (local) FUN(X[[i]], ...)
+       16.                 └─private$handle_error(msg, i)
+       17.                   └─rlang::abort(...)
       Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.1Mb
-      sub-directories of 1Mb or more:
-        R           1.5Mb
-        tutorials   1.6Mb
     ```
 
 # multinet
@@ -1284,69 +1002,6 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
         libs  10.5Mb
     ```
 
-# pathfindR
-
-<details>
-
-* Version: 2.5.0
-* GitHub: https://github.com/egeulgen/pathfindR
-* Source code: https://github.com/cran/pathfindR
-* Date/Publication: 2025-06-15 00:00:02 UTC
-* Number of recursive dependencies: 147
-
-Run `revdepcheck::cloud_details(, "pathfindR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat-active_snw.R’
-      Running ‘testthat-clustering.R’
-    Running the tests in ‘tests/testthat-clustering.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(pathfindR)
-      Loading required package: pathfindR.data
-      ##############################################################################
-                              Welcome to pathfindR!
-      
-      Please cite the article below if you use pathfindR in published reseach:
-      
-      Ulgen E, Ozisik O, Sezerman OU. 2019. pathfindR: An R Package for Comprehensive
-      Identification of Enriched Pathways in Omics Data Through Active Subnetworks.
-      Front. Genet. doi:10.3389/fgene.2019.00858
-      
-      ##############################################################################
-      > 
-      > test_check("pathfindR", filter = "clustering")
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-clustering.R:198:5'): `cluster_graph_vis()` -- coloring of 'extra' clusters work ──
-      Error in `igraph::graph_from_adjacency_matrix(kappa_mat2, weighted = TRUE)`: Cannot create a graph object because the adjacency matrix contains NAs.
-      Backtrace:
-           ▆
-        1. ├─testthat::expect_silent(...) at test-clustering.R:198:5
-        2. │ └─testthat:::quasi_capture(enquo(object), NULL, evaluate_promise)
-        3. │   ├─testthat (local) .capture(...)
-        4. │   │ ├─withr::with_output_sink(...)
-        5. │   │ │ └─base::force(code)
-        6. │   │ ├─base::withCallingHandlers(...)
-        7. │   │ └─base::withVisible(code)
-        8. │   └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
-        9. └─pathfindR::cluster_graph_vis(...)
-       10.   └─igraph::graph_from_adjacency_matrix(kappa_mat2, weighted = TRUE)
-       11.     └─igraph:::ensure_no_na(adjmatrix, "adjacency matrix")
-       12.       └─cli::cli_abort(...)
-       13.         └─rlang::abort(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # PopComm
 
 <details>
@@ -1443,7 +1098,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   24 tests [0;32mOK[0m 
       test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.9s[0m
+      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.3s[0m
       
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
       test-remify-error-messages.R..    1 tests [0;32mOK[0m 
@@ -1496,7 +1151,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-error-messages.R..   19 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
       test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.2s[0m
+      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.1s[0m
       
       test-remify-methods.R.........    0 tests    
       test-remify-methods.R.........    0 tests    
@@ -1658,7 +1313,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
       test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m11.4s[0m
+      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m7.6s[0m
       
       test-remify-warning-messages.R    0 tests    
       test-remify-warning-messages.R    0 tests    
@@ -1728,7 +1383,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   29 tests [0;32mOK[0m 
       test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.6s[0m
+      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.5s[0m
       
       test-remify.R.................    0 tests    
       test-remify.R.................    1 tests [0;32mOK[0m 
@@ -1860,7 +1515,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
       test-remify.R.................   61 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
       test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.7s[0m
+      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.5s[0m
       ----- FAILED[xcpt]: test-remify-methods.R<349--349>
        call| expect_silent(plot(x = out))
        diff| Execution was not silent. A warning was thrown with message
