@@ -27,7 +27,6 @@ igraph_ecount:
     IGNORE: RR, RC
 
 igraph_neighbors:
-    DEPS: vid ON graph
 
 igraph_is_directed:
     IGNORE: RR, RC
