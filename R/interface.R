@@ -388,9 +388,8 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
   if (is_directed(graph)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   } else {
-    mode <- 1
+    mode <- "out"
   }
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
@@ -688,9 +687,6 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
 
   vv <- as_igraph_vs(graph, v)
-  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
-
-  on.exit(.Call(R_igraph_finalizer))
 
   res <- incident_impl(graph, vid = vv, mode = mode)
 
