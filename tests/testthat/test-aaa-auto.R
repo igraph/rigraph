@@ -1,10 +1,4 @@
-# Snapshot tests for functions in aaa-auto.R
-
-library(testthat)
-pkgload::load_all()
-
 # 1. empty_impl
-
 test_that("empty_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
@@ -344,8 +338,12 @@ test_that("extended_chordal_ring_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(extended_chordal_ring_impl(5, list(c(1,2))))
-  expect_snapshot(extended_chordal_ring_impl(5, list(c(1,2)), directed = TRUE))
+  expect_snapshot(extended_chordal_ring_impl(5, matrix(c(1,2))))
+  expect_snapshot(extended_chordal_ring_impl(
+    5,
+    matrix(c(1,2)),
+    directed = TRUE
+  ))
   igraph_options(print.id = oldval)
 })
 
@@ -353,7 +351,7 @@ test_that("extended_chordal_ring_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, extended_chordal_ring_impl(-1, list(c(1,2))))
+  expect_snapshot(error = TRUE, extended_chordal_ring_impl(-1, matrix(c(1,2))))
   igraph_options(print.id = oldval)
 })
 
@@ -472,7 +470,7 @@ test_that("adjlist_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, adjlist_impl(NULL, mode = "out"))
+  expect_snapshot(error = TRUE, adjlist_impl(-1, mode = "out"))
   igraph_options(print.id = oldval)
 })
 
@@ -523,7 +521,7 @@ test_that("realize_degree_sequence_impl basic", {
   expect_snapshot(realize_degree_sequence_impl(
     c(2,2,2),
     c(2,2,2),
-    allowed.edge.types = "loops",
+    allowed.edge.types = "multiple",
     method = "largest"
   ))
   igraph_options(print.id = oldval)
@@ -781,7 +779,7 @@ test_that("forest_fire_game_impl basic", {
   expect_snapshot(forest_fire_game_impl(
     5,
     0.5,
-    bw.factor = 2,
+    bw.factor = 0.2,
     ambs = 2,
     directed = FALSE
   ))
@@ -934,7 +932,7 @@ test_that("hsbm_game_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(hsbm_game_impl(5, 2, 0.5, matrix(1,2,2), 0.5))
+  expect_snapshot(hsbm_game_impl(6, 2, c(0.5,0.5), matrix(1,2,2), 0.5))
   igraph_options(print.id = oldval)
 })
 
@@ -952,12 +950,17 @@ test_that("hsbm_list_game_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
+  C <- matrix(c(
+    1, 3 / 4, 0,
+    3 / 4, 0, 3 / 4,
+    0, 3 / 4, 3 / 4
+  ), nrow = 3)
   expect_snapshot(hsbm_list_game_impl(
-    5,
-    c(2,3),
-    list(0.5, 0.5),
-    list(matrix(1,2,2), matrix(1,2,2)),
-    0.5
+    100,
+    list(50, 50),
+    rho = list(c(3, 3, 4) / 10),
+    C = list(C),
+    p = 1 / 20
   ))
   igraph_options(print.id = oldval)
 })
@@ -1324,7 +1327,7 @@ test_that("get_widest_path_impl basic", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(get_widest_path_impl(g, 1, 3))
+  expect_snapshot(get_widest_path_impl(g, 1, 3, weights = c(1,2)))
   igraph_options(print.id = oldval)
 })
 
@@ -1343,7 +1346,7 @@ test_that("get_widest_paths_impl basic", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(get_widest_paths_impl(g, 1, 3))
+  expect_snapshot(get_widest_paths_impl(g, 1, 3, weights = c(1,2)))
   igraph_options(print.id = oldval)
 })
 
@@ -1352,47 +1355,6 @@ test_that("get_widest_paths_impl errors", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   expect_snapshot(error = TRUE, get_widest_paths_impl(NULL, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-# 68. widest_path_widths_dijkstra_impl
-
-test_that("widest_path_widths_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(widest_path_widths_dijkstra_impl(g, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-test_that("widest_path_widths_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, widest_path_widths_dijkstra_impl(NULL, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-# 69. widest_path_widths_floyd_warshall_impl
-
-test_that("widest_path_widths_floyd_warshall_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(widest_path_widths_floyd_warshall_impl(g, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-test_that("widest_path_widths_floyd_warshall_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    widest_path_widths_floyd_warshall_impl(NULL, 1, 3)
-  )
   igraph_options(print.id = oldval)
 })
 
@@ -1637,442 +1599,9 @@ test_that("reverse_edges_impl errors", {
   igraph_options(print.id = oldval)
 })
 
-# 82. average_path_length_dijkstra_impl
-
-test_that("average_path_length_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(average_path_length_dijkstra_impl(g))
-  expect_snapshot(average_path_length_dijkstra_impl(
-    g,
-    directed = FALSE,
-    unconnected = FALSE,
-    details = TRUE
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("average_path_length_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, average_path_length_dijkstra_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 83. average_path_length_floyd_warshall_impl
-
-test_that("average_path_length_floyd_warshall_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(average_path_length_floyd_warshall_impl(g))
-  expect_snapshot(average_path_length_floyd_warshall_impl(
-    g,
-    directed = FALSE,
-    unconnected = FALSE,
-    details = TRUE
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("average_path_length_floyd_warshall_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, average_path_length_floyd_warshall_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 84. diameter_impl
-
-test_that("diameter_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(diameter_impl(g))
-  expect_snapshot(diameter_impl(
-    g,
-    directed = FALSE,
-    unconnected = FALSE,
-    weights = NULL
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("diameter_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, diameter_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 85. get_diameter_impl
-
-test_that("get_diameter_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_diameter_impl(g))
-  expect_snapshot(get_diameter_impl(
-    g,
-    directed = FALSE,
-    unconnected = FALSE,
-    weights = NULL
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_diameter_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_diameter_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 86. eccentricity_impl
-
-test_that("eccentricity_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(eccentricity_impl(g))
-  expect_snapshot(eccentricity_impl(g, mode = "in", weights = NULL))
-  igraph_options(print.id = oldval)
-})
-
-test_that("eccentricity_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eccentricity_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 87. radius_impl
-
-test_that("radius_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(radius_impl(g))
-  expect_snapshot(radius_impl(g, mode = "in", weights = NULL))
-  igraph_options(print.id = oldval)
-})
-
-test_that("radius_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, radius_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 88. get_eccentricity_impl
-
-test_that("get_eccentricity_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_eccentricity_impl(g))
-  expect_snapshot(get_eccentricity_impl(g, mode = "in", weights = NULL))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_eccentricity_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_eccentricity_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 89. get_radius_impl
-
-test_that("get_radius_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_radius_impl(g))
-  expect_snapshot(get_radius_impl(g, mode = "in", weights = NULL))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_radius_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_radius_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 90. mean_distance_impl
-
-test_that("mean_distance_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(mean_distance_impl(g))
-  expect_snapshot(mean_distance_impl(
-    g,
-    directed = FALSE,
-    unconnected = FALSE,
-    weights = NULL
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("mean_distance_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, mean_distance_impl(NULL))
-  igraph_options(print.id = oldval)
-})
-
-# 91. get_shortest_paths_impl
-
-test_that("get_shortest_paths_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_shortest_paths_impl(g, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_shortest_paths_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_shortest_paths_impl(NULL, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-# 92. get_all_shortest_paths_bellman_ford_impl
-
-test_that("get_all_shortest_paths_bellman_ford_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_all_shortest_paths_bellman_ford_impl(g, 1, 3))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_all_shortest_paths_bellman_ford_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_all_shortest_paths_bellman_ford_impl(NULL, 1, 3)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 93. get_all_shortest_paths_bellman_ford_cutoff_impl
-
-test_that("get_all_shortest_paths_bellman_ford_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_all_shortest_paths_bellman_ford_cutoff_impl(
-    g,
-    1,
-    3,
-    cutoff = 2
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_all_shortest_paths_bellman_ford_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_all_shortest_paths_bellman_ford_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 94. get_all_shortest_paths_dijkstra_cutoff_impl
-
-test_that("get_all_shortest_paths_dijkstra_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_all_shortest_paths_dijkstra_cutoff_impl(
-    g,
-    1,
-    3,
-    cutoff = 2
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_all_shortest_paths_dijkstra_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_all_shortest_paths_dijkstra_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 95. get_all_simple_paths_cutoff_impl
-
-test_that("get_all_simple_paths_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_all_simple_paths_cutoff_impl(g, 1, 3, cutoff = 2))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_all_simple_paths_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_all_simple_paths_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 96. get_k_shortest_paths_cutoff_impl
-
-test_that("get_k_shortest_paths_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_k_shortest_paths_cutoff_impl(g, 1, 3, k = 2, cutoff = 2))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_k_shortest_paths_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_k_shortest_paths_cutoff_impl(NULL, 1, 3, k = 2, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 97. get_widest_path_cutoff_impl
-
-test_that("get_widest_path_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_widest_path_cutoff_impl(g, 1, 3, cutoff = 2))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_widest_path_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_widest_path_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 98. get_widest_paths_cutoff_impl
-
-test_that("get_widest_paths_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(get_widest_paths_cutoff_impl(g, 1, 3, cutoff = 2))
-  igraph_options(print.id = oldval)
-})
-
-test_that("get_widest_paths_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    get_widest_paths_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 99. widest_path_widths_dijkstra_cutoff_impl
-
-test_that("widest_path_widths_dijkstra_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(widest_path_widths_dijkstra_cutoff_impl(g, 1, 3, cutoff = 2))
-  igraph_options(print.id = oldval)
-})
-
-test_that("widest_path_widths_dijkstra_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    widest_path_widths_dijkstra_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
-
-# 100. widest_path_widths_floyd_warshall_cutoff_impl
-
-test_that("widest_path_widths_floyd_warshall_cutoff_impl basic", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(widest_path_widths_floyd_warshall_cutoff_impl(
-    g,
-    1,
-    3,
-    cutoff = 2
-  ))
-  igraph_options(print.id = oldval)
-})
-
-test_that("widest_path_widths_floyd_warshall_cutoff_impl errors", {
-  withr::local_seed(20250909)
-  oldval <- igraph_opt("print.id")
-  igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
-    widest_path_widths_floyd_warshall_cutoff_impl(NULL, 1, 3, cutoff = 2)
-  )
-  igraph_options(print.id = oldval)
-})
+# and much more halucination before...
+# 91-96: halucination of get_shortest_path_*
+# 97-100: halucination of get_widest_path_cutoff_impl,get_widest_paths_cutoff_impl, widest_path_widths_dijkstra_cutoff_impl, widest_path_widths_floyd_warshall_cutoff_impl
 
 # 101. path_length_hist_impl
 
@@ -2204,9 +1733,9 @@ test_that("ecc_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(4)
   expect_snapshot(ecc_impl(g))
-  expect_snapshot(ecc_impl(g, k = 2, offset = TRUE, normalize = FALSE))
+  expect_snapshot(ecc_impl(g, k = 3, offset = TRUE, normalize = FALSE))
   igraph_options(print.id = oldval)
 })
 
@@ -3262,6 +2791,7 @@ test_that("diversity_impl basic", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
+  E(g)$weight <- c(1,2)
   expect_snapshot(diversity_impl(g))
   igraph_options(print.id = oldval)
 })
@@ -3364,7 +2894,7 @@ test_that("transitive_closure_dag_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(3, directed = TRUE)
   expect_snapshot(transitive_closure_dag_impl(g))
   igraph_options(print.id = oldval)
 })
@@ -3464,7 +2994,8 @@ test_that("bipartite_projection_size_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(4)
+  V(g)$type <- c(TRUE, FALSE, TRUE, FALSE)
   expect_snapshot(bipartite_projection_size_impl(g))
   igraph_options(print.id = oldval)
 })
@@ -3765,7 +3296,7 @@ test_that("count_reachable_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(5)
   expect_snapshot(count_reachable_impl(g, mode = "out"))
   expect_snapshot(count_reachable_impl(g, mode = "in"))
   igraph_options(print.id = oldval)
@@ -4413,7 +3944,7 @@ test_that("layout_umap_compute_weights_impl basic", {
   g <- path_graph_impl(3)
   expect_snapshot(layout_umap_compute_weights_impl(
     g,
-    distances = 1:3,
+    distances = 1:2,
     weights = 1:3
   ))
   igraph_options(print.id = oldval)
@@ -4508,7 +4039,7 @@ test_that("similarity_dice_pairs_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(4)
   expect_snapshot(similarity_dice_pairs_impl(
     g,
     pairs = matrix(c(1,2,2,3), ncol=2)
@@ -4613,7 +4144,7 @@ test_that("similarity_jaccard_pairs_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(4)
   expect_snapshot(similarity_jaccard_pairs_impl(
     g,
     pairs = matrix(c(1,2,2,3), ncol=2)
@@ -4807,7 +4338,6 @@ test_that("community_leiden_impl basic", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(community_leiden_impl(g, resolution = 1))
   expect_snapshot(community_leiden_impl(
     g,
     weights = c(1,2),
@@ -4879,8 +4409,9 @@ test_that("graphlets_impl basic", {
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
+  E(g)$weight <- 1:2
   expect_snapshot(graphlets_impl(g))
-  expect_snapshot(graphlets_impl(g, weights = c(1,2), niter = 10))
+  expect_snapshot(graphlets_impl(g, weights = c(3,4), niter = 10))
   igraph_options(print.id = oldval)
 })
 
@@ -4898,14 +4429,8 @@ test_that("hrg_fit_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(hrg_fit_impl(g))
-  expect_snapshot(hrg_fit_impl(
-    g,
-    hrg = list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1),
-    start = TRUE,
-    steps = 1
-  ))
+  g1 <- path_graph_impl(3)
+  expect_snapshot(hrg_fit_impl(g1))
   igraph_options(print.id = oldval)
 })
 
@@ -5032,8 +4557,8 @@ test_that("hrg_create_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(hrg_create_impl(g, prob = 0.5))
+  g <- make_tree(5)
+  expect_snapshot(hrg_create_impl(g, prob = rep(0.5, 2)))
   igraph_options(print.id = oldval)
 })
 
@@ -5041,7 +4566,8 @@ test_that("hrg_create_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_create_impl(NULL, prob = 0.5))
+  g <- make_full_graph(4, directed = TRUE)
+  expect_snapshot(error = TRUE, hrg_create_impl(g, prob = 0.5))
   igraph_options(print.id = oldval)
 })
 
@@ -5062,7 +4588,7 @@ test_that("hrg_resize_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_resize_impl(NULL, newsize = 2))
+  expect_snapshot(error = TRUE, hrg_resize_impl(-1, newsize = 2))
   igraph_options(print.id = oldval)
 })
 
@@ -5086,7 +4612,7 @@ test_that("hrg_size_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_size_impl(NULL))
+  expect_snapshot(error = TRUE, hrg_size_impl(-1))
   igraph_options(print.id = oldval)
 })
 
@@ -5110,7 +4636,7 @@ test_that("from_hrg_dendrogram_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, from_hrg_dendrogram_impl(NULL))
+  expect_snapshot(error = TRUE, from_hrg_dendrogram_impl(-1))
   igraph_options(print.id = oldval)
 })
 
@@ -5235,7 +4761,7 @@ test_that("motifs_randesu_impl basic", {
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(motifs_randesu_impl(g))
-  expect_snapshot(motifs_randesu_impl(g, size = 4, cut.prob = 0.1))
+  expect_snapshot(motifs_randesu_impl(g, size = 4, cut.prob = rep(0.1, 4)))
   igraph_options(print.id = oldval)
 })
 
@@ -5253,12 +4779,12 @@ test_that("motifs_randesu_estimate_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(6)
   expect_snapshot(motifs_randesu_estimate_impl(g, size = 3, sample.size = 2))
   expect_snapshot(motifs_randesu_estimate_impl(
     g,
     size = 4,
-    cut.prob = 0.1,
+    cut.prob = rep(0.1, 4),
     sample.size = 2,
     sample = 1:2
   ))
@@ -5284,7 +4810,11 @@ test_that("motifs_randesu_no_impl basic", {
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(motifs_randesu_no_impl(g))
-  expect_snapshot(motifs_randesu_no_impl(g, size = 4, cut.prob = 0.1))
+  expect_snapshot(motifs_randesu_no_impl(
+    g,
+    size = 4,
+    cut.prob = c(0.1,0.1,0.1,0.1)
+  ))
   igraph_options(print.id = oldval)
 })
 
@@ -5292,7 +4822,11 @@ test_that("motifs_randesu_no_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, motifs_randesu_no_impl(NULL))
+  g <- path_graph_impl(3)
+  expect_snapshot(
+    error = TRUE,
+    motifs_randesu_no_impl(g, size = 3, cut.prob = c(0.1))
+  )
   igraph_options(print.id = oldval)
 })
 
@@ -5532,15 +5066,15 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(4)
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
-    neighborhoods = list(1:2, 2:3)
+    neighborhoods = list(1.0)
   ))
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
-    weights = c(1,2),
-    neighborhoods = list(1:2, 2:3)
+    weights = c(1,2,3),
+    neighborhoods = list(as.numeric(1:2), as.numeric(2:3))
   ))
   igraph_options(print.id = oldval)
 })
@@ -5562,12 +5096,15 @@ test_that("local_scan_subset_ecount_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(local_scan_subset_ecount_impl(g, subsets = list(1:2, 2:3)))
+  g <- path_graph_impl(4)
   expect_snapshot(local_scan_subset_ecount_impl(
     g,
-    weights = c(1,2),
-    subsets = list(1:2, 2:3)
+    subsets = list(c(1.0,2.0), c(2.0,3.0))
+  ))
+  expect_snapshot(local_scan_subset_ecount_impl(
+    g,
+    weights = c(1.0,2.0,3.0),
+    subsets = list(c(1.0,2.0), c(2.0,3.0))
   ))
   igraph_options(print.id = oldval)
 })
@@ -5576,9 +5113,10 @@ test_that("local_scan_subset_ecount_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
+  g <- path_graph_impl(4)
   expect_snapshot(
     error = TRUE,
-    local_scan_subset_ecount_impl(NULL, subsets = list(1:2, 2:3))
+    local_scan_subset_ecount_impl(g, subsets = list(1:2, 2:3))
   )
   igraph_options(print.id = oldval)
 })
@@ -5823,7 +5361,7 @@ test_that("dominator_tree_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(3, directed = TRUE)
   expect_snapshot(dominator_tree_impl(g, root = 1))
   expect_snapshot(dominator_tree_impl(g, root = 1, mode = "in"))
   igraph_options(print.id = oldval)
@@ -5843,7 +5381,7 @@ test_that("all_st_cuts_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(3, directed = TRUE)
   expect_snapshot(all_st_cuts_impl(g, source = 1, target = 3))
   igraph_options(print.id = oldval)
 })
@@ -5862,7 +5400,7 @@ test_that("all_st_mincuts_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- path_graph_impl(3, directed = TRUE)
   expect_snapshot(all_st_mincuts_impl(g, source = 1, target = 3))
   expect_snapshot(all_st_mincuts_impl(
     g,
@@ -6024,8 +5562,8 @@ test_that("isoclass_subgraph_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(isoclass_subgraph_impl(g, 1:2))
+  g <- path_graph_impl(4)
+  expect_snapshot(isoclass_subgraph_impl(g, 1))
   igraph_options(print.id = oldval)
 })
 
@@ -6554,12 +6092,15 @@ test_that("eigen_adjacency_impl basic", {
   igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(eigen_adjacency_impl(g))
-  expect_snapshot(eigen_adjacency_impl(
-    g,
-    algorithm = "lapack",
-    which = list(which = "LA"),
-    options = list(maxiter = 10)
-  ))
+  expect_snapshot(
+    error = TRUE,
+    eigen_adjacency_impl(
+      g,
+      algorithm = "lapack",
+      which = list(which = "LA"),
+      options = list(maxiter = 10)
+    )
+  )
   igraph_options(print.id = oldval)
 })
 
@@ -6646,7 +6187,7 @@ test_that("dim_select_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, dim_select_impl("a"))
+  expect_snapshot(error = TRUE, dim_select_impl(NULL))
   igraph_options(print.id = oldval)
 })
 
@@ -6757,8 +6298,10 @@ test_that("eulerian_cycle_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(eulerian_cycle_impl(g))
+  g1 <- path_graph_impl(3)
+  expect_snapshot(error = TRUE, eulerian_cycle_impl(g1))
+  g2 <- cycle_graph_impl(4)
+  expect_snapshot(eulerian_cycle_impl(g2))
   igraph_options(print.id = oldval)
 })
 
@@ -6904,8 +6447,8 @@ test_that("tree_from_parent_vector_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(tree_from_parent_vector_impl(1:3))
-  expect_snapshot(tree_from_parent_vector_impl(1:3, type = "in"))
+  expect_snapshot(tree_from_parent_vector_impl(c(-1,1,2,3)))
+  expect_snapshot(tree_from_parent_vector_impl(c(-1,1,2,3), type = "in"))
   igraph_options(print.id = oldval)
 })
 

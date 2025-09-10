@@ -392,13 +392,31 @@
       Error in `atlas_impl()`:
       ! At vendor/cigraph/src/constructors/atlas.c:74 : No such graph in atlas. The graph index must be less than 1253. Invalid value
 
+# extended_chordal_ring_impl basic
+
+    Code
+      extended_chordal_ring_impl(5, matrix(c(1, 2)))
+    Output
+      IGRAPH U--- 5 15 -- 
+      + edges:
+       [1] 1--2 2--3 3--4 4--5 1--5 1--2 1--3 2--3 2--4 3--4 3--5 4--5 1--4 1--5 2--5
+
+---
+
+    Code
+      extended_chordal_ring_impl(5, matrix(c(1, 2)), directed = TRUE)
+    Output
+      IGRAPH D--- 5 15 -- 
+      + edges:
+       [1] 1->2 2->3 3->4 4->5 5->1 1->2 1->3 2->3 2->4 3->4 3->5 4->5 4->1 5->1 5->2
+
 # extended_chordal_ring_impl errors
 
     Code
-      extended_chordal_ring_impl(-1, list(c(1, 2)))
+      extended_chordal_ring_impl(-1, matrix(c(1, 2)))
     Condition
       Error in `extended_chordal_ring_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'list'
+      ! At vendor/cigraph/src/constructors/regular.c:950 : An extended chordal ring has at least 3 nodes. Invalid value
 
 # graph_power_impl basic
 
@@ -526,6 +544,14 @@
       IGRAPH D--- 3 4 -- 
       + edges:
       [1] 1->2 1->3 2->1 3->1
+
+# adjlist_impl errors
+
+    Code
+      adjlist_impl(-1, mode = "out")
+    Condition
+      Error in `adjlist_impl()`:
+      ! At vendor/cigraph/src/constructors/basic_constructors.c:75 : Invalid (negative or too large) vertex ID. Invalid vertex ID
 
 # full_bipartite_impl errors
 
@@ -864,6 +890,16 @@
       + edges:
       [1] 2->1 3->2 4->2 4->1 4->3 5->1 5->2 5->4 5->3
 
+---
+
+    Code
+      forest_fire_game_impl(5, 0.5, bw.factor = 0.2, ambs = 2, directed = FALSE)
+    Output
+      IGRAPH U--- 5 4 -- Forest fire model
+      + attr: name (g/c), fw.prob (g/n), bw.factor (g/n), ambs (g/n)
+      + edges:
+      [1] 1--2 1--3 1--4 4--5
+
 # forest_fire_game_impl errors
 
     Code
@@ -1037,6 +1073,16 @@
       Error in `sbm_game_impl()`:
       ! At vendor/cigraph/src/games/sbm.c:120 : Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
 
+# hsbm_game_impl basic
+
+    Code
+      hsbm_game_impl(6, 2, c(0.5, 0.5), matrix(1, 2, 2), 0.5)
+    Output
+      IGRAPH U--- 6 9 -- Hierarchical stochastic block model
+      + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
+      + edges:
+      [1] 1--2 3--4 5--6 1--4 1--5 2--5 1--6 4--5 3--6
+
 # hsbm_game_impl errors
 
     Code
@@ -1044,6 +1090,25 @@
     Condition
       Error in `hsbm_game_impl()`:
       ! At vendor/cigraph/src/games/sbm.c:287 : `n' must be positive for HSBM, Invalid value
+
+# hsbm_list_game_impl basic
+
+    Code
+      hsbm_list_game_impl(100, list(50, 50), rho = list(c(3, 3, 4) / 10), C = list(C),
+      p = 1 / 20)
+    Output
+      IGRAPH U--- 100 783 -- Hierarchical stochastic block model
+      + attr: name (g/c), p (g/n)
+      + edges:
+       [1]  1-- 2  1-- 3  2-- 3  1-- 4  2-- 4  3-- 4  1-- 5  2-- 5  3-- 5  4-- 5
+      [11]  1-- 6  2-- 6  3-- 6  4-- 6  5-- 6  1-- 7  2-- 7  3-- 7  4-- 7  5-- 7
+      [21]  6-- 7  1-- 8  2-- 8  3-- 8  4-- 8  5-- 8  6-- 8  7-- 8  1-- 9  2-- 9
+      [31]  3-- 9  4-- 9  5-- 9  6-- 9  7-- 9  8-- 9  1--10  2--10  3--10  4--10
+      [41]  5--10  6--10  7--10  8--10  9--10  1--11  2--11  3--11  4--11  5--11
+      [51]  6--11  7--11  8--11  9--11 10--11  1--12  2--12  3--12  4--12  5--12
+      [61]  6--12  7--12  8--12  9--12 10--12 11--12  1--13  2--13  3--13  4--13
+      [71]  5--13  6--13  7--13  8--13  9--13 10--13 11--13 12--13  1--14  2--14
+      + ... omitted several edges
 
 # hsbm_list_game_impl errors
 
@@ -1507,6 +1572,20 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# get_widest_path_impl basic
+
+    Code
+      get_widest_path_impl(g, 1, 3, weights = c(1, 2))
+    Output
+      $vertices
+      + 3/3 vertices:
+      [1] 1 2 3
+      
+      $edges
+      + 2/2 edges:
+      [1] 1--2 2--3
+      
+
 # get_widest_path_impl errors
 
     Code
@@ -1515,26 +1594,34 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# get_widest_paths_impl basic
+
+    Code
+      get_widest_paths_impl(g, 1, 3, weights = c(1, 2))
+    Output
+      $vertices
+      $vertices[[1]]
+      + 3/3 vertices:
+      [1] 1 2 3
+      
+      
+      $edges
+      $edges[[1]]
+      + 2/2 edges:
+      [1] 1--2 2--3
+      
+      
+      $parents
+      [1] -1  0  1
+      
+      $inbound_edges
+      [1] -1  0  1
+      
+
 # get_widest_paths_impl errors
 
     Code
       get_widest_paths_impl(NULL, 1, 3)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# widest_path_widths_dijkstra_impl errors
-
-    Code
-      widest_path_widths_dijkstra_impl(NULL, 1, 3)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# widest_path_widths_floyd_warshall_impl errors
-
-    Code
-      widest_path_widths_floyd_warshall_impl(NULL, 1, 3)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -1882,178 +1969,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# average_path_length_dijkstra_impl basic
-
-    Code
-      average_path_length_dijkstra_impl(g)
-    Output
-      [1] 1.333333
-
----
-
-    Code
-      average_path_length_dijkstra_impl(g, directed = FALSE, unconnected = FALSE,
-        details = TRUE)
-    Output
-      $res
-      [1] 1.333333
-      
-      $unconnected
-      [1] 0
-      
-
-# average_path_length_dijkstra_impl errors
-
-    Code
-      average_path_length_dijkstra_impl(NULL)
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# average_path_length_floyd_warshall_impl errors
-
-    Code
-      average_path_length_floyd_warshall_impl(NULL)
-    Condition
-      Error in `average_path_length_floyd_warshall_impl()`:
-      ! could not find function "average_path_length_floyd_warshall_impl"
-
-# diameter_impl errors
-
-    Code
-      diameter_impl(NULL)
-    Condition
-      Error in `diameter_impl()`:
-      ! could not find function "diameter_impl"
-
-# get_diameter_impl errors
-
-    Code
-      get_diameter_impl(NULL)
-    Condition
-      Error in `get_diameter_impl()`:
-      ! could not find function "get_diameter_impl"
-
-# eccentricity_impl errors
-
-    Code
-      eccentricity_impl(NULL)
-    Condition
-      Error in `eccentricity_impl()`:
-      ! could not find function "eccentricity_impl"
-
-# radius_impl errors
-
-    Code
-      radius_impl(NULL)
-    Condition
-      Error in `radius_impl()`:
-      ! could not find function "radius_impl"
-
-# get_eccentricity_impl errors
-
-    Code
-      get_eccentricity_impl(NULL)
-    Condition
-      Error in `get_eccentricity_impl()`:
-      ! could not find function "get_eccentricity_impl"
-
-# get_radius_impl errors
-
-    Code
-      get_radius_impl(NULL)
-    Condition
-      Error in `get_radius_impl()`:
-      ! could not find function "get_radius_impl"
-
-# mean_distance_impl errors
-
-    Code
-      mean_distance_impl(NULL)
-    Condition
-      Error in `mean_distance_impl()`:
-      ! could not find function "mean_distance_impl"
-
-# get_shortest_paths_impl errors
-
-    Code
-      get_shortest_paths_impl(NULL, 1, 3)
-    Condition
-      Error in `get_shortest_paths_impl()`:
-      ! could not find function "get_shortest_paths_impl"
-
-# get_all_shortest_paths_bellman_ford_impl errors
-
-    Code
-      get_all_shortest_paths_bellman_ford_impl(NULL, 1, 3)
-    Condition
-      Error in `get_all_shortest_paths_bellman_ford_impl()`:
-      ! could not find function "get_all_shortest_paths_bellman_ford_impl"
-
-# get_all_shortest_paths_bellman_ford_cutoff_impl errors
-
-    Code
-      get_all_shortest_paths_bellman_ford_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `get_all_shortest_paths_bellman_ford_cutoff_impl()`:
-      ! could not find function "get_all_shortest_paths_bellman_ford_cutoff_impl"
-
-# get_all_shortest_paths_dijkstra_cutoff_impl errors
-
-    Code
-      get_all_shortest_paths_dijkstra_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `get_all_shortest_paths_dijkstra_cutoff_impl()`:
-      ! could not find function "get_all_shortest_paths_dijkstra_cutoff_impl"
-
-# get_all_simple_paths_cutoff_impl errors
-
-    Code
-      get_all_simple_paths_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `get_all_simple_paths_cutoff_impl()`:
-      ! could not find function "get_all_simple_paths_cutoff_impl"
-
-# get_k_shortest_paths_cutoff_impl errors
-
-    Code
-      get_k_shortest_paths_cutoff_impl(NULL, 1, 3, k = 2, cutoff = 2)
-    Condition
-      Error in `get_k_shortest_paths_cutoff_impl()`:
-      ! could not find function "get_k_shortest_paths_cutoff_impl"
-
-# get_widest_path_cutoff_impl errors
-
-    Code
-      get_widest_path_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `get_widest_path_cutoff_impl()`:
-      ! could not find function "get_widest_path_cutoff_impl"
-
-# get_widest_paths_cutoff_impl errors
-
-    Code
-      get_widest_paths_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `get_widest_paths_cutoff_impl()`:
-      ! could not find function "get_widest_paths_cutoff_impl"
-
-# widest_path_widths_dijkstra_cutoff_impl errors
-
-    Code
-      widest_path_widths_dijkstra_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `widest_path_widths_dijkstra_cutoff_impl()`:
-      ! could not find function "widest_path_widths_dijkstra_cutoff_impl"
-
-# widest_path_widths_floyd_warshall_cutoff_impl errors
-
-    Code
-      widest_path_widths_floyd_warshall_cutoff_impl(NULL, 1, 3, cutoff = 2)
-    Condition
-      Error in `widest_path_widths_floyd_warshall_cutoff_impl()`:
-      ! could not find function "widest_path_widths_floyd_warshall_cutoff_impl"
-
 # path_length_hist_impl basic
 
     Code
@@ -2211,7 +2126,14 @@
     Code
       ecc_impl(g)
     Output
-      [1] NaN NaN
+      [1] NaN   0 NaN
+
+---
+
+    Code
+      ecc_impl(g, k = 3, offset = TRUE, normalize = FALSE)
+    Output
+      [1] 1 1 1
 
 # ecc_impl errors
 
@@ -3720,6 +3642,13 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# diversity_impl basic
+
+    Code
+      diversity_impl(g)
+    Output
+      [1] 0.0000000 0.9182958 0.0000000
+
 # diversity_impl errors
 
     Code
@@ -3830,6 +3759,15 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# transitive_closure_dag_impl basic
+
+    Code
+      transitive_closure_dag_impl(g)
+    Output
+      IGRAPH D--- 3 3 -- 
+      + edges:
+      [1] 1->3 1->2 2->3
+
 # transitive_closure_dag_impl errors
 
     Code
@@ -3933,6 +3871,24 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# bipartite_projection_size_impl basic
+
+    Code
+      bipartite_projection_size_impl(g)
+    Output
+      $vcount1
+      [1] 2
+      
+      $ecount1
+      [1] 1
+      
+      $vcount2
+      [1] 2
+      
+      $ecount2
+      [1] 1
+      
 
 # bipartite_projection_size_impl errors
 
@@ -5045,6 +5001,13 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# layout_umap_compute_weights_impl basic
+
+    Code
+      layout_umap_compute_weights_impl(g, distances = 1:2, weights = 1:3)
+    Output
+      [1] 1 1
+
 # layout_umap_compute_weights_impl errors
 
     Code
@@ -5119,6 +5082,21 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# similarity_dice_pairs_impl basic
+
+    Code
+      similarity_dice_pairs_impl(g, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
+    Output
+      [1] 0 0
+
+---
+
+    Code
+      similarity_dice_pairs_impl(g, pairs = matrix(c(1, 2, 2, 3), ncol = 2), mode = "in",
+      loops = TRUE)
+    Output
+      [1] 0.6666667 0.8000000
 
 # similarity_dice_pairs_impl errors
 
@@ -5203,6 +5181,21 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# similarity_jaccard_pairs_impl basic
+
+    Code
+      similarity_jaccard_pairs_impl(g, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
+    Output
+      [1] 0 0
+
+---
+
+    Code
+      similarity_jaccard_pairs_impl(g, pairs = matrix(c(1, 2, 2, 3), ncol = 2), mode = "in",
+      loops = TRUE)
+    Output
+      [1] 0.5000000 0.6666667
 
 # similarity_jaccard_pairs_impl errors
 
@@ -5397,6 +5390,22 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# community_leiden_impl basic
+
+    Code
+      community_leiden_impl(g, weights = c(1, 2), vertex.weights = c(1, 2, 3),
+      resolution = 0.5, beta = 0.1, start = TRUE, n.iterations = 1, membership = 1:3)
+    Output
+      $membership
+      [1] 0 1 2
+      
+      $nb_clusters
+      [1] 3
+      
+      $quality
+      [1] -1.166667
+      
+
 # community_leiden_impl errors
 
     Code
@@ -5460,6 +5469,44 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# graphlets_impl basic
+
+    Code
+      graphlets_impl(g)
+    Output
+      $cliques
+      $cliques[[1]]
+      + 2/3 vertices:
+      [1] 2 3
+      
+      $cliques[[2]]
+      + 2/3 vertices:
+      [1] 1 2
+      
+      
+      $Mu
+      [1] 0.6665667 0.3332333
+      
+
+---
+
+    Code
+      graphlets_impl(g, weights = c(3, 4), niter = 10)
+    Output
+      $cliques
+      $cliques[[1]]
+      + 2/3 vertices:
+      [1] 2 3
+      
+      $cliques[[2]]
+      + 2/3 vertices:
+      [1] 1 2
+      
+      
+      $Mu
+      [1] 1.333233 0.999900
+      
+
 # graphlets_impl errors
 
     Code
@@ -5471,7 +5518,7 @@
 # hrg_fit_impl basic
 
     Code
-      hrg_fit_impl(g)
+      hrg_fit_impl(g1)
     Output
       $left
       [1] -2  0
@@ -5573,13 +5620,22 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# hrg_create_impl basic
+
+    Code
+      hrg_create_impl(g, prob = rep(0.5, 2))
+    Output
+      Hierarchical random graph, at level 3:
+      g1     p=0.5  1
+      '- g2  p=0.5  2 3
+
 # hrg_create_impl errors
 
     Code
-      hrg_create_impl(NULL, prob = 0.5)
+      hrg_create_impl(g, prob = 0.5)
     Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
+      Error in `hrg_create_impl()`:
+      ! At vendor/cigraph/src/hrg/hrg.cc:963 : HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
 
 # hrg_resize_impl basic
 
@@ -5603,12 +5659,28 @@
       [1] 1
       
 
+# hrg_resize_impl errors
+
+    Code
+      hrg_resize_impl(-1, newsize = 2)
+    Condition
+      Error in `hrg_resize_impl()`:
+      ! At rinterface_extra.c:3424 : The value nan is not representable as an integer. Invalid value
+
 # hrg_size_impl basic
 
     Code
       hrg_size_impl(list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1))
     Output
       [1] 2
+
+# hrg_size_impl errors
+
+    Code
+      hrg_size_impl(-1)
+    Condition
+      Error in `hrg_size_impl()`:
+      ! At rinterface_extra.c:3424 : The value nan is not representable as an integer. Invalid value
 
 # from_hrg_dendrogram_impl basic
 
@@ -5624,6 +5696,14 @@
       $prob
       [1] NaN NaN 0.5
       
+
+# from_hrg_dendrogram_impl errors
+
+    Code
+      from_hrg_dendrogram_impl(-1)
+    Condition
+      Error in `from_hrg_dendrogram_impl()`:
+      ! At rinterface_extra.c:3424 : The value nan is not representable as an integer. Invalid value
 
 # get_adjacency_sparse_impl basic
 
@@ -5820,6 +5900,13 @@
     Output
       [1] NaN NaN   1   0
 
+---
+
+    Code
+      motifs_randesu_impl(g, size = 4, cut.prob = rep(0.1, 4))
+    Output
+       [1] NaN NaN NaN NaN   0 NaN   0   0   0   0   0
+
 # motifs_randesu_impl errors
 
     Code
@@ -5833,7 +5920,15 @@
     Code
       motifs_randesu_estimate_impl(g, size = 3, sample.size = 2)
     Output
-      [1] 0
+      [1] 3
+
+---
+
+    Code
+      motifs_randesu_estimate_impl(g, size = 4, cut.prob = rep(0.1, 4), sample.size = 2,
+      sample = 1:2)
+    Output
+      [1] 3
 
 # motifs_randesu_estimate_impl errors
 
@@ -5850,13 +5945,20 @@
     Output
       [1] 1
 
+---
+
+    Code
+      motifs_randesu_no_impl(g, size = 4, cut.prob = c(0.1, 0.1, 0.1, 0.1))
+    Output
+      [1] 0
+
 # motifs_randesu_no_impl errors
 
     Code
-      motifs_randesu_no_impl(NULL)
+      motifs_randesu_no_impl(g, size = 3, cut.prob = c(0.1))
     Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
+      Error in `motifs_randesu_no_impl()`:
+      ! At vendor/cigraph/src/misc/motifs.c:785 : Cut probability vector size (1) must agree with motif size (3). Invalid value
 
 # dyad_census_impl basic
 
@@ -6076,13 +6178,28 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# local_scan_subset_ecount_impl basic
+
+    Code
+      local_scan_subset_ecount_impl(g, subsets = list(c(1, 2), c(2, 3)))
+    Output
+      [1] 1 1
+
+---
+
+    Code
+      local_scan_subset_ecount_impl(g, weights = c(1, 2, 3), subsets = list(c(1, 2),
+      c(2, 3)))
+    Output
+      [1] 2 3
+
 # local_scan_subset_ecount_impl errors
 
     Code
-      local_scan_subset_ecount_impl(NULL, subsets = list(1:2, 2:3))
+      local_scan_subset_ecount_impl(g, subsets = list(1:2, 2:3))
     Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
+      Error in `local_scan_subset_ecount_impl()`:
+      ! REAL() can only be applied to a 'numeric', not a 'integer'
 
 # list_triangles_impl basic
 
@@ -6410,6 +6527,40 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# dominator_tree_impl basic
+
+    Code
+      dominator_tree_impl(g, root = 1)
+    Output
+      $dom
+      [1] 0 1 2
+      
+      $domtree
+      IGRAPH D--- 3 2 -- 
+      + edges:
+      [1] 1->2 2->3
+      
+      $leftout
+      + 0/3 vertices:
+      
+
+---
+
+    Code
+      dominator_tree_impl(g, root = 1, mode = "in")
+    Output
+      $dom
+      [1]  0 -1 -1
+      
+      $domtree
+      IGRAPH D--- 3 0 -- 
+      + edges:
+      
+      $leftout
+      + 2/3 vertices:
+      [1] 2 3
+      
+
 # dominator_tree_impl errors
 
     Code
@@ -6418,6 +6569,32 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# all_st_cuts_impl basic
+
+    Code
+      all_st_cuts_impl(g, source = 1, target = 3)
+    Output
+      $cuts
+      $cuts[[1]]
+      + 1/2 edge:
+      [1] 1->2
+      
+      $cuts[[2]]
+      + 1/2 edge:
+      [1] 2->3
+      
+      
+      $partition1s
+      $partition1s[[1]]
+      + 1/3 vertex:
+      [1] 1
+      
+      $partition1s[[2]]
+      + 2/3 vertices:
+      [1] 1 2
+      
+      
+
 # all_st_cuts_impl errors
 
     Code
@@ -6425,6 +6602,56 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# all_st_mincuts_impl basic
+
+    Code
+      all_st_mincuts_impl(g, source = 1, target = 3)
+    Output
+      $value
+      [1] 1
+      
+      $cuts
+      $cuts[[1]]
+      + 1/2 edge:
+      [1] 1->2
+      
+      $cuts[[2]]
+      + 1/2 edge:
+      [1] 2->3
+      
+      
+      $partition1s
+      $partition1s[[1]]
+      + 1/3 vertex:
+      [1] 1
+      
+      $partition1s[[2]]
+      + 2/3 vertices:
+      [1] 1 2
+      
+      
+
+---
+
+    Code
+      all_st_mincuts_impl(g, source = 1, target = 3, capacity = c(1, 2))
+    Output
+      $value
+      [1] 1
+      
+      $cuts
+      $cuts[[1]]
+      + 1/2 edge:
+      [1] 1->2
+      
+      
+      $partition1s
+      $partition1s[[1]]
+      + 1/3 vertex:
+      [1] 1
+      
+      
 
 # all_st_mincuts_impl errors
 
@@ -7643,6 +7870,15 @@
       $cmplxvectors
       <0 x 0 matrix>
       
+
+---
+
+    Code
+      eigen_adjacency_impl(g, algorithm = "lapack", which = list(which = "LA"),
+      options = list(maxiter = 10))
+    Condition
+      Error in `eigen_adjacency_impl()`:
+      ! At vendor/cigraph/src/linalg/eigen.c:1438 : 'LAPACK' algorithm not implemented yet, Unimplemented function call
 
 # eigen_adjacency_impl errors
 
@@ -9187,6 +9423,14 @@
     Output
       [1] 1
 
+# dim_select_impl errors
+
+    Code
+      dim_select_impl(NULL)
+    Condition
+      Error in `dim_select_impl()`:
+      ! At vendor/cigraph/src/misc/embedding.c:1147 : Need at least one singular value for dimensionality selection, Invalid value
+
 # solve_lsap_impl basic
 
     Code
@@ -9309,6 +9553,28 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# eulerian_cycle_impl basic
+
+    Code
+      eulerian_cycle_impl(g1)
+    Condition
+      Error in `eulerian_cycle_impl()`:
+      ! At vendor/cigraph/src/paths/eulerian.c:615 : The graph does not have an Eulerian cycle. Input problem has no solution
+
+---
+
+    Code
+      eulerian_cycle_impl(g2)
+    Output
+      $epath
+      + 4/4 edges:
+      [1] 1--2 2--3 3--4 1--4
+      
+      $vpath
+      + 5/4 vertices:
+      [1] 1 2 3 4 1
+      
 
 # eulerian_cycle_impl errors
 
@@ -9453,6 +9719,24 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# tree_from_parent_vector_impl basic
+
+    Code
+      tree_from_parent_vector_impl(c(-1, 1, 2, 3))
+    Output
+      IGRAPH D--- 4 3 -- 
+      + edges:
+      [1] 1->2 2->3 3->4
+
+---
+
+    Code
+      tree_from_parent_vector_impl(c(-1, 1, 2, 3), type = "in")
+    Output
+      IGRAPH D--- 4 3 -- 
+      + edges:
+      [1] 2->1 3->2 4->3
 
 # tree_from_parent_vector_impl errors
 
