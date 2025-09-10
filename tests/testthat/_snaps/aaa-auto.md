@@ -9844,3 +9844,190 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# is_bipartite_coloring_impl basic
+
+    Code
+      is_bipartite_coloring_impl(g, types = c(TRUE, FALSE, TRUE))
+    Output
+      [1] TRUE
+
+# is_bipartite_coloring_impl errors
+
+    Code
+      is_bipartite_coloring_impl(NULL, types = c(TRUE, FALSE, TRUE))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# is_edge_coloring_impl basic
+
+    Code
+      is_edge_coloring_impl(g, types = c(1, 2))
+    Output
+      [1] TRUE
+
+---
+
+    Code
+      is_edge_coloring_impl(g)
+    Output
+      [1] TRUE
+
+# is_edge_coloring_impl errors
+
+    Code
+      is_edge_coloring_impl(NULL, types = c(1, 2))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# deterministic_optimal_imitation_impl basic
+
+    Code
+      deterministic_optimal_imitation_impl(g, 1, quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3))
+    Output
+      [1] 2 2 3
+
+---
+
+    Code
+      deterministic_optimal_imitation_impl(g, 1, optimality = "minimum", quantities = c(
+        1, 2, 3), strategies = c(1, 2, 3), mode = "in")
+    Output
+      [1] 1 2 3
+
+# deterministic_optimal_imitation_impl errors
+
+    Code
+      deterministic_optimal_imitation_impl(NULL, 1, quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# moran_process_impl errors
+
+    Code
+      moran_process_impl(NULL, quantities = c(1, 2, 3), strategies = c(1, 2, 3))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# roulette_wheel_imitation_impl basic
+
+    Code
+      roulette_wheel_imitation_impl(g, 1, TRUE, quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3))
+    Output
+      [1] 1 2 3
+
+---
+
+    Code
+      roulette_wheel_imitation_impl(g, 1, FALSE, quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3), mode = "in")
+    Output
+      [1] 3 2 3
+
+# roulette_wheel_imitation_impl errors
+
+    Code
+      roulette_wheel_imitation_impl(NULL, 1, TRUE, quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# stochastic_imitation_impl basic
+
+    Code
+      stochastic_imitation_impl(g, 1, algo = 1, quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3))
+    Output
+      [1] 1 2 3
+
+---
+
+    Code
+      stochastic_imitation_impl(g, 1, algo = 2, quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3), mode = "in")
+    Output
+      [1] 1 2 3
+
+# stochastic_imitation_impl errors
+
+    Code
+      stochastic_imitation_impl(NULL, 1, algo = 1, quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# invalidate_cache_impl basic
+
+    Code
+      invalidate_cache_impl(g)
+    Output
+      IGRAPH U--- 3 2 -- 
+      + edges:
+      [1] 1--2 2--3
+
+# invalidate_cache_impl errors
+
+    Code
+      invalidate_cache_impl(NULL)
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# vertex_path_from_edge_path_impl basic
+
+    Code
+      vertex_path_from_edge_path_impl(g, start = 1, edge.path = c(1, 2))
+    Output
+      + 3/3 vertices:
+      [1] 1 2 3
+
+---
+
+    Code
+      vertex_path_from_edge_path_impl(g, start = 1, edge.path = c(1), mode = "in")
+    Output
+      + 2/3 vertices:
+      [1] 1 2
+
+# vertex_path_from_edge_path_impl errors
+
+    Code
+      vertex_path_from_edge_path_impl(NULL, start = 1, edge.path = c(1, 2))
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# version_impl basic
+
+    Code
+      version_impl()
+    Output
+      $version_string
+      [1] "0.10.16-152-gb2f4d7f1c"
+      
+      $major
+      [1] 0
+      
+      $minor
+      [1] 10
+      
+      $subminor
+      [1] 16
+      
+
+# version_impl errors
+
+    Code
+      version_impl("invalid")
+    Condition
+      Error in `version_impl()`:
+      ! unused argument ("invalid")
+
