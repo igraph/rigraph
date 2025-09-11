@@ -166,7 +166,7 @@ test_that("hypercube_impl errors", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hypercube_impl(-1))
+  expect_snapshot(error = TRUE, hypercube_impl(10000))
   igraph_options(print.id = oldval)
 })
 

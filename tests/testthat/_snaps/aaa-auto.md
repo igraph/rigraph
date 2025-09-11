@@ -178,10 +178,10 @@
 # hypercube_impl errors
 
     Code
-      hypercube_impl(-1)
+      hypercube_impl(10000)
     Condition
       Error in `hypercube_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:101 : Number of vertices must not be negative. Invalid value
+      ! At vendor/cigraph/src/constructors/regular.c:1034 : The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
 
 # square_lattice_impl basic
 
