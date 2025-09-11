@@ -5375,14 +5375,14 @@ test_that("is_vertex_coloring_impl errors", {
 
 test_that("is_bipartite_coloring_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(is_bipartite_coloring_impl(g, types = c(TRUE, FALSE, TRUE)))
 })
 
 test_that("is_bipartite_coloring_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     is_bipartite_coloring_impl(NULL, types = c(TRUE, FALSE, TRUE))
@@ -5393,7 +5393,7 @@ test_that("is_bipartite_coloring_impl errors", {
 
 test_that("is_edge_coloring_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   E(g)$color <- c(1, 2)
   expect_snapshot(is_edge_coloring_impl(g, types = c(1, 2)))
@@ -5402,7 +5402,7 @@ test_that("is_edge_coloring_impl basic", {
 
 test_that("is_edge_coloring_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(error = TRUE, is_edge_coloring_impl(NULL, types = c(1, 2)))
 })
 
@@ -5410,7 +5410,7 @@ test_that("is_edge_coloring_impl errors", {
 
 test_that("deterministic_optimal_imitation_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(deterministic_optimal_imitation_impl(
     g,
@@ -5430,7 +5430,7 @@ test_that("deterministic_optimal_imitation_impl basic", {
 
 test_that("deterministic_optimal_imitation_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     deterministic_optimal_imitation_impl(
@@ -5446,7 +5446,7 @@ test_that("deterministic_optimal_imitation_impl errors", {
 
 test_that("moran_process_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(moran_process_impl(
     g,
@@ -5464,7 +5464,7 @@ test_that("moran_process_impl basic", {
 
 test_that("moran_process_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     moran_process_impl(NULL, quantities = c(1, 2, 3), strategies = c(1, 2, 3))
@@ -5475,7 +5475,7 @@ test_that("moran_process_impl errors", {
 
 test_that("roulette_wheel_imitation_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(roulette_wheel_imitation_impl(
     g,
@@ -5496,7 +5496,7 @@ test_that("roulette_wheel_imitation_impl basic", {
 
 test_that("roulette_wheel_imitation_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     roulette_wheel_imitation_impl(
@@ -5513,7 +5513,7 @@ test_that("roulette_wheel_imitation_impl errors", {
 
 test_that("stochastic_imitation_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(stochastic_imitation_impl(
     g,
@@ -5534,7 +5534,7 @@ test_that("stochastic_imitation_impl basic", {
 
 test_that("stochastic_imitation_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     stochastic_imitation_impl(
@@ -5551,14 +5551,14 @@ test_that("stochastic_imitation_impl errors", {
 
 test_that("invalidate_cache_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(invalidate_cache_impl(g))
 })
 
 test_that("invalidate_cache_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(error = TRUE, invalidate_cache_impl(NULL))
 })
 
@@ -5566,7 +5566,7 @@ test_that("invalidate_cache_impl errors", {
 
 test_that("vertex_path_from_edge_path_impl basic", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(vertex_path_from_edge_path_impl(
     g,
@@ -5583,7 +5583,7 @@ test_that("vertex_path_from_edge_path_impl basic", {
 
 test_that("vertex_path_from_edge_path_impl errors", {
   withr::local_seed(12345)
-  igraph:::local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
     vertex_path_from_edge_path_impl(NULL, start = 1, edge.path = c(1, 2))
