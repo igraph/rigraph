@@ -2764,7 +2764,7 @@ is_biconnected_impl <- function(graph) {
   res
 }
 
-count_reachable_impl <- function(graph, mode) {
+count_reachable_impl <- function(graph, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
