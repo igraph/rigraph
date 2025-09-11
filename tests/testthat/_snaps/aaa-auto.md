@@ -5637,10 +5637,14 @@
 # hrg_sample_impl basic
 
     Code
-      hrg_sample_impl(list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1))
+      hrg_sample_impl(hrg_model)
     Output
-      IGRAPH U--- 2 0 -- 
+      IGRAPH U--- 10 45 -- 
       + edges:
+       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
+      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
+      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
+      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
 
 # hrg_sample_impl errors
 
@@ -5654,17 +5658,23 @@
 # hrg_sample_many_impl basic
 
     Code
-      hrg_sample_many_impl(list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1),
-      num.samples = 2)
+      hrg_sample_many_impl(hrg_model, num.samples = 2)
     Output
       [[1]]
-      IGRAPH U--- 2 0 -- 
+      IGRAPH U--- 10 45 -- 
       + edges:
+       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
+      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
+      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
+      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
       
       [[2]]
-      IGRAPH U--- 2 1 -- 
-      + edge:
-      [1] 1--2
+      IGRAPH U--- 10 45 -- 
+      + edges:
+       [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 3 2-- 4 2-- 5
+      [13] 2-- 6 2-- 7 2-- 8 2-- 9 2--10 3-- 4 3-- 5 3-- 6 3-- 7 3-- 8 3-- 9 3--10
+      [25] 4-- 5 4-- 6 4-- 7 4-- 8 4-- 9 4--10 5-- 6 5-- 7 5-- 8 5-- 9 5--10 6-- 7
+      [37] 6-- 8 6-- 9 6--10 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
       
 
 # hrg_sample_many_impl errors
@@ -5734,23 +5744,22 @@
 # hrg_resize_impl basic
 
     Code
-      hrg_resize_impl(list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1),
-      newsize = 2)
+      hrg_resize_impl(hrg_model, newsize = 5)
     Output
       $left
-      [1] 1
+      [1]  0 -9 -6 -2
       
       $right
-      [1] 2
+      [1] -4  4  7 -8
       
       $prob
-      [1] 0.5
+      [1] 1 1 1 1
       
       $edges
-      [1] 1
+      [1]  9  6  3 14
       
       $vertices
-      [1] 1
+      [1] 10  7  4  9
       
 
 # hrg_resize_impl errors
@@ -5764,9 +5773,9 @@
 # hrg_size_impl basic
 
     Code
-      hrg_size_impl(list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1))
+      hrg_size_impl(hrg_model)
     Output
-      [1] 2
+      [1] 10
 
 # hrg_size_impl errors
 
@@ -5779,16 +5788,16 @@
 # from_hrg_dendrogram_impl basic
 
     Code
-      from_hrg_dendrogram_impl(list(left = 1, right = 2, prob = 0.5, edges = 1,
-        vertices = 1))
+      from_hrg_dendrogram_impl(hrg_model)
     Output
       $graph
-      IGRAPH D--- 3 2 -- 
+      IGRAPH D--- 19 18 -- 
       + edges:
-      [1] 3->2 3->3
+       [1] 11-> 1 11->14 12->19 12-> 5 13->16 13-> 8 14->12 14->18 15-> 3 15-> 6
+      [11] 16->15 16->10 17->13 17-> 4 18-> 7 18-> 9 19-> 2 19->17
       
       $prob
-      [1] NaN NaN 0.5
+       [1] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN   1   1   1   1   1   1   1   1   1
       
 
 # from_hrg_dendrogram_impl errors

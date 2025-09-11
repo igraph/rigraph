@@ -3635,13 +3635,9 @@ test_that("hrg_fit_impl errors", {
 test_that("hrg_sample_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(hrg_sample_impl(list(
-    left = 1,
-    right = 2,
-    prob = 0.5,
-    edges = 1,
-    vertices = 1
-  )))
+  g <- make_full_graph(10)
+  hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
+  expect_snapshot(hrg_sample_impl(hrg_model))
 })
 
 test_that("hrg_sample_impl errors", {
@@ -3655,10 +3651,9 @@ test_that("hrg_sample_impl errors", {
 test_that("hrg_sample_many_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(hrg_sample_many_impl(
-    list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1),
-    num.samples = 2
-  ))
+  g <- make_full_graph(10)
+  hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
+  expect_snapshot(hrg_sample_many_impl(hrg_model, num.samples = 2))
 })
 
 test_that("hrg_sample_many_impl errors", {
@@ -3738,10 +3733,9 @@ test_that("hrg_create_impl errors", {
 test_that("hrg_resize_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(hrg_resize_impl(
-    list(left = 1, right = 2, prob = 0.5, edges = 1, vertices = 1),
-    newsize = 2
-  ))
+  g <- make_full_graph(10)
+  hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
+  expect_snapshot(hrg_resize_impl(hrg_model, newsize = 5))
 })
 
 test_that("hrg_resize_impl errors", {
@@ -3755,13 +3749,9 @@ test_that("hrg_resize_impl errors", {
 test_that("hrg_size_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(hrg_size_impl(list(
-    left = 1,
-    right = 2,
-    prob = 0.5,
-    edges = 1,
-    vertices = 1
-  )))
+  g <- make_full_graph(10)
+  hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
+  expect_snapshot(hrg_size_impl(hrg_model))
 })
 
 test_that("hrg_size_impl errors", {
@@ -3775,13 +3765,9 @@ test_that("hrg_size_impl errors", {
 test_that("from_hrg_dendrogram_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(from_hrg_dendrogram_impl(list(
-    left = 1,
-    right = 2,
-    prob = 0.5,
-    edges = 1,
-    vertices = 1
-  )))
+  g <- make_full_graph(10)
+  hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
+  expect_snapshot(from_hrg_dendrogram_impl(hrg_model))
 })
 
 test_that("from_hrg_dendrogram_impl errors", {
