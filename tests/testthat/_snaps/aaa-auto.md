@@ -553,6 +553,34 @@
       Error in `adjlist_impl()`:
       ! At vendor/cigraph/src/constructors/basic_constructors.c:75 : Invalid (negative or too large) vertex ID. Invalid vertex ID
 
+# full_bipartite_impl basic
+
+    Code
+      full_bipartite_impl(2, 3)
+    Output
+      $graph
+      IGRAPH U--- 5 6 -- 
+      + edges:
+      [1] 1--3 1--4 1--5 2--3 2--4 2--5
+      
+      $types
+      [1] FALSE FALSE  TRUE  TRUE  TRUE
+      
+
+---
+
+    Code
+      full_bipartite_impl(2, 3, directed = TRUE, mode = "in")
+    Output
+      $graph
+      IGRAPH D--- 5 6 -- 
+      + edges:
+      [1] 3->1 4->1 5->1 3->2 4->2 5->2
+      
+      $types
+      [1] FALSE FALSE  TRUE  TRUE  TRUE
+      
+
 # full_bipartite_impl errors
 
     Code
@@ -2951,6 +2979,14 @@
     Output
       [1] 3
 
+# centralization_impl errors
+
+    Code
+      centralization_impl(package_version("1.2.3"))
+    Condition
+      Error in `centralization_impl()`:
+      ! 'list' object cannot be coerced to type 'double'
+
 # centralization_degree_impl basic
 
     Code
@@ -3898,6 +3934,34 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# biadjacency_impl basic
+
+    Code
+      biadjacency_impl(m)
+    Output
+      $graph
+      IGRAPH U--- 5 4 -- 
+      + edges:
+      [1] 1--3 1--4 1--5 2--5
+      
+      $types
+      [1] FALSE FALSE  TRUE  TRUE  TRUE
+      
+
+---
+
+    Code
+      biadjacency_impl(m, directed = TRUE, mode = "in", multiple = TRUE)
+    Output
+      $graph
+      IGRAPH D--- 5 4 -- 
+      + edges:
+      [1] 3->1 4->1 5->1 5->2
+      
+      $types
+      [1] FALSE FALSE  TRUE  TRUE  TRUE
+      
+
 # biadjacency_impl errors
 
     Code
@@ -4261,6 +4325,20 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# count_reachable_impl basic
+
+    Code
+      count_reachable_impl(g, mode = "out")
+    Output
+      [1] 5 5 5 5 5
+
+---
+
+    Code
+      count_reachable_impl(g, mode = "in")
+    Output
+      [1] 5 5 5 5 5
 
 # count_reachable_impl errors
 
