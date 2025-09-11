@@ -1,0 +1,25 @@
+From e8e2fedaa1eaf6a47d388e7a264d55c8b0d49c17 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Thu, 11 Sep 2025 11:13:47 +0200
+Subject: [PATCH] induced_subgraph_map
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index c7e2319550..da6f8b3c16 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -2126,7 +2126,7 @@ igraph_compose:
+ 
+ igraph_induced_subgraph_map:
+     PARAMS: |-
+-        GRAPH graph, OUT GRAPH res, VERTEX_SELECTOR vids, SUBGRAPH_IMPL impl,
++        GRAPH graph, OUT GRAPH res, VERTEX_SELECTOR vids, SUBGRAPH_IMPL impl=AUTO,
+         OPTIONAL OUT INDEX_VECTOR map, OPTIONAL OUT INDEX_VECTOR invmap
+     DEPS: vids ON graph
+ 
+-- 
+2.50.1
+

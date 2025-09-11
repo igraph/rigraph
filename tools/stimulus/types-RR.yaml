@@ -260,6 +260,7 @@ ISOCOMPAT_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
+    CALL: lapply(%I%, function(.x) .x-1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -267,6 +268,7 @@ VERTEXSET_LIST:
             }
 
 EDGESET_LIST:
+    CALL: lapply(%I%, function(.x) .x-1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
