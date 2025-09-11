@@ -333,8 +333,8 @@ full_bipartite_impl <- function(n1, n2, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_bipartite, n1, n2, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name")
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name")
   }
   res
 }
@@ -2576,8 +2576,8 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
@@ -4000,7 +4000,7 @@ local_scan_neighborhood_ecount_impl <- function(graph, weights=NULL, neighborhoo
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, neighborhoods)
+  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, lapply(neighborhoods, function(.x) .x-1))
 
   res
 }
@@ -4019,7 +4019,7 @@ local_scan_subset_ecount_impl <- function(graph, weights=NULL, subsets) {
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, subsets)
+  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, lapply(subsets, function(.x) .x-1))
 
   res
 }
