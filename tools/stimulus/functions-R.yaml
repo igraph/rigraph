@@ -504,7 +504,7 @@ igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
 
 igraph_biadjacency:
-    DEPS: types ON graph V(graph)
+    DEPS: types ON res$graph V(res$graph)
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
@@ -519,6 +519,9 @@ igraph_bipartite_game_gnp:
 
 igraph_bipartite_game:
     IGNORE: RR, RC
+
+igraph_full_bipartite:
+    DEPS: types ON res$graph
 
 
 #######################################
