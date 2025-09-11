@@ -4049,7 +4049,7 @@ join_impl <- function(left, right) {
   res
 }
 
-induced_subgraph_map_impl <- function(graph, vids, impl) {
+induced_subgraph_map_impl <- function(graph, vids, impl=c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
