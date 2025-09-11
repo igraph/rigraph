@@ -10,7 +10,7 @@ test_that("empty_impl basic", {
 test_that("empty_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, empty_impl(-1))
+  expect_snapshot_igraph_error(empty_impl(-1))
 })
 
 # 2. add_edges_impl
@@ -25,7 +25,7 @@ test_that("add_edges_impl basic", {
 test_that("add_edges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, add_edges_impl(NULL, c(1, 2)))
+  expect_snapshot_igraph_error(add_edges_impl(NULL, c(1, 2)))
 })
 
 # 3. copy_impl
@@ -40,7 +40,7 @@ test_that("copy_impl basic", {
 test_that("copy_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, copy_impl(NULL))
+  expect_snapshot_igraph_error(copy_impl(NULL))
 })
 
 # 4. delete_vertices_idx_impl
@@ -55,7 +55,7 @@ test_that("delete_vertices_idx_impl basic", {
 test_that("delete_vertices_idx_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, delete_vertices_idx_impl(NULL, 1))
+  expect_snapshot_igraph_error(delete_vertices_idx_impl(NULL, 1))
 })
 
 # 5. vcount_impl
@@ -70,7 +70,7 @@ test_that("vcount_impl basic", {
 test_that("vcount_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, vcount_impl(NULL))
+  expect_snapshot_igraph_error(vcount_impl(NULL))
 })
 
 # 6. degree_impl
@@ -86,7 +86,7 @@ test_that("degree_impl basic", {
 test_that("degree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, degree_impl(NULL))
+  expect_snapshot_igraph_error(degree_impl(NULL))
 })
 
 # 7. get_all_eids_between_impl
@@ -101,7 +101,7 @@ test_that("get_all_eids_between_impl basic", {
 test_that("get_all_eids_between_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_all_eids_between_impl(NULL, 1, 2))
+  expect_snapshot_igraph_error(get_all_eids_between_impl(NULL, 1, 2))
 })
 
 # 8. wheel_impl
@@ -116,7 +116,7 @@ test_that("wheel_impl basic", {
 test_that("wheel_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, wheel_impl(-1))
+  expect_snapshot_igraph_error(wheel_impl(-1))
 })
 
 # 9. hypercube_impl
@@ -131,7 +131,7 @@ test_that("hypercube_impl basic", {
 test_that("hypercube_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hypercube_impl(10000))
+  expect_snapshot_igraph_error(hypercube_impl(10000))
 })
 
 # 10. square_lattice_impl
@@ -152,7 +152,7 @@ test_that("square_lattice_impl basic", {
 test_that("square_lattice_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, square_lattice_impl(-1))
+  expect_snapshot_igraph_error(square_lattice_impl(-1))
 })
 
 # 11. triangular_lattice_impl
@@ -171,7 +171,7 @@ test_that("triangular_lattice_impl basic", {
 test_that("triangular_lattice_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, triangular_lattice_impl(-1))
+  expect_snapshot_igraph_error(triangular_lattice_impl(-1))
 })
 
 # 12. path_graph_impl
@@ -186,7 +186,7 @@ test_that("path_graph_impl basic", {
 test_that("path_graph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, path_graph_impl(-1))
+  expect_snapshot_igraph_error(path_graph_impl(-1))
 })
 
 # 13. cycle_graph_impl
@@ -201,7 +201,7 @@ test_that("cycle_graph_impl basic", {
 test_that("cycle_graph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, cycle_graph_impl(-1))
+  expect_snapshot_igraph_error(cycle_graph_impl(-1))
 })
 
 # 14. symmetric_tree_impl
@@ -216,7 +216,7 @@ test_that("symmetric_tree_impl basic", {
 test_that("symmetric_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, symmetric_tree_impl(-1))
+  expect_snapshot_igraph_error(symmetric_tree_impl(-1))
 })
 
 # 15. regular_tree_impl
@@ -231,7 +231,7 @@ test_that("regular_tree_impl basic", {
 test_that("regular_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, regular_tree_impl(-1))
+  expect_snapshot_igraph_error(regular_tree_impl(-1))
 })
 
 # 16. full_citation_impl
@@ -246,7 +246,7 @@ test_that("full_citation_impl basic", {
 test_that("full_citation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, full_citation_impl(-1))
+  expect_snapshot_igraph_error(full_citation_impl(-1))
 })
 
 # 17. atlas_impl
@@ -261,7 +261,7 @@ test_that("atlas_impl basic", {
 test_that("atlas_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, atlas_impl(-1))
+  expect_snapshot_igraph_error(atlas_impl(-1))
 })
 
 # 18. extended_chordal_ring_impl
@@ -280,7 +280,7 @@ test_that("extended_chordal_ring_impl basic", {
 test_that("extended_chordal_ring_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, extended_chordal_ring_impl(-1, matrix(c(1, 2))))
+  expect_snapshot_igraph_error(extended_chordal_ring_impl(-1, matrix(c(1, 2))))
 })
 
 # 19. graph_power_impl
@@ -296,7 +296,7 @@ test_that("graph_power_impl basic", {
 test_that("graph_power_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, graph_power_impl(NULL, 2))
+  expect_snapshot_igraph_error(graph_power_impl(NULL, 2))
 })
 
 # 20. linegraph_impl
@@ -311,7 +311,7 @@ test_that("linegraph_impl basic", {
 test_that("linegraph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, linegraph_impl(NULL))
+  expect_snapshot_igraph_error(linegraph_impl(NULL))
 })
 
 # 21. de_bruijn_impl
@@ -323,7 +323,7 @@ test_that("de_bruijn_impl basic", {
 test_that("de_bruijn_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, de_bruijn_impl(-1, 3))
+  expect_snapshot_igraph_error(de_bruijn_impl(-1, 3))
 })
 
 # 22. kautz_impl
@@ -335,7 +335,7 @@ test_that("kautz_impl basic", {
 test_that("kautz_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, kautz_impl(-1, 3))
+  expect_snapshot_igraph_error(kautz_impl(-1, 3))
 })
 
 # 23. lcf_vector_impl
@@ -347,7 +347,7 @@ test_that("lcf_vector_impl basic", {
 test_that("lcf_vector_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, lcf_vector_impl(-1, c(3, -3, 4), 2))
+  expect_snapshot_igraph_error(lcf_vector_impl(-1, c(3, -3, 4), 2))
 })
 
 # 24. mycielski_graph_impl
@@ -359,7 +359,7 @@ test_that("mycielski_graph_impl basic", {
 test_that("mycielski_graph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, mycielski_graph_impl(-1))
+  expect_snapshot_igraph_error(mycielski_graph_impl(-1))
 })
 
 # 25. adjlist_impl
@@ -371,7 +371,7 @@ test_that("adjlist_impl basic", {
 test_that("adjlist_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, adjlist_impl(-1, mode = "out"))
+  expect_snapshot_igraph_error(adjlist_impl(-1, mode = "out"))
 })
 
 # 26. full_bipartite_impl
@@ -384,7 +384,7 @@ test_that("full_bipartite_impl basic", {
 test_that("full_bipartite_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, full_bipartite_impl(-1, 3))
+  expect_snapshot_igraph_error(full_bipartite_impl(-1, 3))
 })
 
 # 27. full_multipartite_impl
@@ -401,7 +401,7 @@ test_that("full_multipartite_impl basic", {
 test_that("full_multipartite_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, full_multipartite_impl(-1))
+  expect_snapshot_igraph_error(full_multipartite_impl(-1))
 })
 
 # 28. realize_degree_sequence_impl
@@ -419,7 +419,7 @@ test_that("realize_degree_sequence_impl basic", {
 test_that("realize_degree_sequence_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, realize_degree_sequence_impl(-1))
+  expect_snapshot_igraph_error(realize_degree_sequence_impl(-1))
 })
 
 # 29. realize_bipartite_degree_sequence_impl
@@ -437,8 +437,7 @@ test_that("realize_bipartite_degree_sequence_impl basic", {
 test_that("realize_bipartite_degree_sequence_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     realize_bipartite_degree_sequence_impl(-1, c(2, 2))
   )
 })
@@ -453,7 +452,7 @@ test_that("circulant_impl basic", {
 test_that("circulant_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, circulant_impl(-1, c(1, 2)))
+  expect_snapshot_igraph_error(circulant_impl(-1, c(1, 2)))
 })
 
 # 31. generalized_petersen_impl
@@ -465,7 +464,7 @@ test_that("generalized_petersen_impl basic", {
 test_that("generalized_petersen_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, generalized_petersen_impl(-1, 2))
+  expect_snapshot_igraph_error(generalized_petersen_impl(-1, 2))
 })
 
 # 32. turan_impl
@@ -477,7 +476,7 @@ test_that("turan_impl basic", {
 test_that("turan_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, turan_impl(-1, 2))
+  expect_snapshot_igraph_error(turan_impl(-1, 2))
 })
 
 # 33. erdos_renyi_game_gnp_impl
@@ -495,7 +494,7 @@ test_that("erdos_renyi_game_gnp_impl basic", {
 test_that("erdos_renyi_game_gnp_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, erdos_renyi_game_gnp_impl(-1, 0.5))
+  expect_snapshot_igraph_error(erdos_renyi_game_gnp_impl(-1, 0.5))
 })
 
 # 34. erdos_renyi_game_gnm_impl
@@ -513,7 +512,7 @@ test_that("erdos_renyi_game_gnm_impl basic", {
 test_that("erdos_renyi_game_gnm_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, erdos_renyi_game_gnm_impl(-1, 3))
+  expect_snapshot_igraph_error(erdos_renyi_game_gnm_impl(-1, 3))
 })
 
 # 35. growing_random_game_impl
@@ -531,7 +530,7 @@ test_that("growing_random_game_impl basic", {
 test_that("growing_random_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, growing_random_game_impl(-1, 2))
+  expect_snapshot_igraph_error(growing_random_game_impl(-1, 2))
 })
 
 # 36. preference_game_impl
@@ -549,8 +548,7 @@ test_that("preference_game_impl basic", {
 test_that("preference_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     preference_game_impl(
       -1,
       2,
@@ -576,8 +574,7 @@ test_that("asymmetric_preference_game_impl basic", {
 test_that("asymmetric_preference_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     asymmetric_preference_game_impl(
       -1,
       2,
@@ -598,7 +595,7 @@ test_that("rewire_edges_impl basic", {
 test_that("rewire_edges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, rewire_edges_impl(NULL, 0.5))
+  expect_snapshot_igraph_error(rewire_edges_impl(NULL, 0.5))
 })
 
 # 39. rewire_directed_edges_impl
@@ -611,7 +608,7 @@ test_that("rewire_directed_edges_impl basic", {
 test_that("rewire_directed_edges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, rewire_directed_edges_impl(NULL, 0.5))
+  expect_snapshot_igraph_error(rewire_directed_edges_impl(NULL, 0.5))
 })
 
 # 40. forest_fire_game_impl
@@ -630,7 +627,7 @@ test_that("forest_fire_game_impl basic", {
 test_that("forest_fire_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, forest_fire_game_impl(-1, 0.5))
+  expect_snapshot_igraph_error(forest_fire_game_impl(-1, 0.5))
 })
 
 # 41. simple_interconnected_islands_game_impl
@@ -642,8 +639,7 @@ test_that("simple_interconnected_islands_game_impl basic", {
 test_that("simple_interconnected_islands_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     simple_interconnected_islands_game_impl(-1, 3, 0.5, 1)
   )
 })
@@ -663,7 +659,7 @@ test_that("chung_lu_game_impl basic", {
 test_that("chung_lu_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, chung_lu_game_impl(-1))
+  expect_snapshot_igraph_error(chung_lu_game_impl(-1))
 })
 
 # 43. static_fitness_game_impl
@@ -682,7 +678,7 @@ test_that("static_fitness_game_impl basic", {
 test_that("static_fitness_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, static_fitness_game_impl(-1, c(1, 2, 3)))
+  expect_snapshot_igraph_error(static_fitness_game_impl(-1, c(1, 2, 3)))
 })
 
 # 44. static_power_law_game_impl
@@ -703,7 +699,7 @@ test_that("static_power_law_game_impl basic", {
 test_that("static_power_law_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, static_power_law_game_impl(-1, 4, 2.5))
+  expect_snapshot_igraph_error(static_power_law_game_impl(-1, 4, 2.5))
 })
 
 # 45. k_regular_game_impl
@@ -718,7 +714,7 @@ test_that("k_regular_game_impl basic", {
 test_that("k_regular_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, k_regular_game_impl(-1, 2))
+  expect_snapshot_igraph_error(k_regular_game_impl(-1, 2))
 })
 
 # 46. sbm_game_impl
@@ -739,7 +735,7 @@ test_that("sbm_game_impl basic", {
 test_that("sbm_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sbm_game_impl(-1, matrix(0.5, 2, 2), c(2, 3)))
+  expect_snapshot_igraph_error(sbm_game_impl(-1, matrix(0.5, 2, 2), c(2, 3)))
 })
 
 # 47. hsbm_game_impl
@@ -753,8 +749,7 @@ test_that("hsbm_game_impl basic", {
 test_that("hsbm_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     hsbm_game_impl(-1, 2, 0.5, matrix(1, 2, 2), 0.5)
   )
 })
@@ -790,8 +785,7 @@ test_that("hsbm_list_game_impl basic", {
 test_that("hsbm_list_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     hsbm_list_game_impl(
       -1,
       c(2, 3),
@@ -814,7 +808,7 @@ test_that("correlated_game_impl basic", {
 test_that("correlated_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, correlated_game_impl(NULL, 0.5))
+  expect_snapshot_igraph_error(correlated_game_impl(NULL, 0.5))
 })
 
 # 50. correlated_pair_game_impl
@@ -829,7 +823,7 @@ test_that("correlated_pair_game_impl basic", {
 test_that("correlated_pair_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, correlated_pair_game_impl(-1, 0.5, 0.5))
+  expect_snapshot_igraph_error(correlated_pair_game_impl(-1, 0.5, 0.5))
 })
 
 # 51. dot_product_game_impl
@@ -844,7 +838,7 @@ test_that("dot_product_game_impl basic", {
 test_that("dot_product_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, dot_product_game_impl(NULL))
+  expect_snapshot_igraph_error(dot_product_game_impl(NULL))
 })
 
 # 52. sample_sphere_surface_impl
@@ -864,7 +858,7 @@ test_that("sample_sphere_surface_impl basic", {
 test_that("sample_sphere_surface_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sample_sphere_surface_impl(-1, 5))
+  expect_snapshot_igraph_error(sample_sphere_surface_impl(-1, 5))
 })
 
 # 53. sample_sphere_volume_impl
@@ -879,7 +873,7 @@ test_that("sample_sphere_volume_impl basic", {
 test_that("sample_sphere_volume_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sample_sphere_volume_impl(-1, 5))
+  expect_snapshot_igraph_error(sample_sphere_volume_impl(-1, 5))
 })
 
 # 54. sample_dirichlet_impl
@@ -893,7 +887,7 @@ test_that("sample_dirichlet_impl basic", {
 test_that("sample_dirichlet_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sample_dirichlet_impl(-1, c(1, 1, 1)))
+  expect_snapshot_igraph_error(sample_dirichlet_impl(-1, c(1, 1, 1)))
 })
 
 # 55. are_adjacent_impl
@@ -908,7 +902,7 @@ test_that("are_adjacent_impl basic", {
 test_that("are_adjacent_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, are_adjacent_impl(NULL, 1, 2))
+  expect_snapshot_igraph_error(are_adjacent_impl(NULL, 1, 2))
 })
 
 # 56. closeness_impl
@@ -924,7 +918,7 @@ test_that("closeness_impl basic", {
 test_that("closeness_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, closeness_impl(NULL))
+  expect_snapshot_igraph_error(closeness_impl(NULL))
 })
 
 # 57. closeness_cutoff_impl
@@ -945,7 +939,7 @@ test_that("closeness_cutoff_impl basic", {
 test_that("closeness_cutoff_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, closeness_cutoff_impl(NULL))
+  expect_snapshot_igraph_error(closeness_cutoff_impl(NULL))
 })
 
 # 58. get_shortest_path_impl
@@ -960,7 +954,7 @@ test_that("get_shortest_path_impl basic", {
 test_that("get_shortest_path_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_shortest_path_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_shortest_path_impl(NULL, 1, 3))
 })
 
 # 59. get_shortest_path_bellman_ford_impl
@@ -975,7 +969,7 @@ test_that("get_shortest_path_bellman_ford_impl basic", {
 test_that("get_shortest_path_bellman_ford_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_shortest_path_bellman_ford_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_shortest_path_bellman_ford_impl(NULL, 1, 3))
 })
 
 # 60. get_shortest_path_dijkstra_impl
@@ -990,7 +984,7 @@ test_that("get_shortest_path_dijkstra_impl basic", {
 test_that("get_shortest_path_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_shortest_path_dijkstra_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_shortest_path_dijkstra_impl(NULL, 1, 3))
 })
 
 # 61. get_all_shortest_paths_impl
@@ -1005,7 +999,7 @@ test_that("get_all_shortest_paths_impl basic", {
 test_that("get_all_shortest_paths_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_all_shortest_paths_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_all_shortest_paths_impl(NULL, 1, 3))
 })
 
 # 62. get_all_shortest_paths_dijkstra_impl
@@ -1020,8 +1014,7 @@ test_that("get_all_shortest_paths_dijkstra_impl basic", {
 test_that("get_all_shortest_paths_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     get_all_shortest_paths_dijkstra_impl(NULL, 1, 3)
   )
 })
@@ -1039,7 +1032,7 @@ test_that("voronoi_impl basic", {
 test_that("voronoi_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, voronoi_impl(NULL, 1))
+  expect_snapshot_igraph_error(voronoi_impl(NULL, 1))
 })
 
 # 64. get_all_simple_paths_impl
@@ -1054,7 +1047,7 @@ test_that("get_all_simple_paths_impl basic", {
 test_that("get_all_simple_paths_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_all_simple_paths_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_all_simple_paths_impl(NULL, 1, 3))
 })
 
 # 65. get_k_shortest_paths_impl
@@ -1069,7 +1062,7 @@ test_that("get_k_shortest_paths_impl basic", {
 test_that("get_k_shortest_paths_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_k_shortest_paths_impl(NULL, 1, 3, k = 2))
+  expect_snapshot_igraph_error(get_k_shortest_paths_impl(NULL, 1, 3, k = 2))
 })
 
 # 66. get_widest_path_impl
@@ -1084,7 +1077,7 @@ test_that("get_widest_path_impl basic", {
 test_that("get_widest_path_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_widest_path_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_widest_path_impl(NULL, 1, 3))
 })
 
 # 67. get_widest_paths_impl
@@ -1099,7 +1092,7 @@ test_that("get_widest_paths_impl basic", {
 test_that("get_widest_paths_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_widest_paths_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_widest_paths_impl(NULL, 1, 3))
 })
 
 # 70. spanner_impl
@@ -1114,7 +1107,7 @@ test_that("spanner_impl basic", {
 test_that("spanner_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, spanner_impl(NULL, 2))
+  expect_snapshot_igraph_error(spanner_impl(NULL, 2))
 })
 
 # 71. betweenness_cutoff_impl
@@ -1129,7 +1122,7 @@ test_that("betweenness_cutoff_impl basic", {
 test_that("betweenness_cutoff_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, betweenness_cutoff_impl(NULL, cutoff = 2))
+  expect_snapshot_igraph_error(betweenness_cutoff_impl(NULL, cutoff = 2))
 })
 
 # 72. betweenness_subset_impl
@@ -1144,7 +1137,7 @@ test_that("betweenness_subset_impl basic", {
 test_that("betweenness_subset_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, betweenness_subset_impl(NULL))
+  expect_snapshot_igraph_error(betweenness_subset_impl(NULL))
 })
 
 # 73. edge_betweenness_impl
@@ -1159,7 +1152,7 @@ test_that("edge_betweenness_impl basic", {
 test_that("edge_betweenness_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, edge_betweenness_impl(NULL))
+  expect_snapshot_igraph_error(edge_betweenness_impl(NULL))
 })
 
 # 74. edge_betweenness_cutoff_impl
@@ -1174,7 +1167,7 @@ test_that("edge_betweenness_cutoff_impl basic", {
 test_that("edge_betweenness_cutoff_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, edge_betweenness_cutoff_impl(NULL, cutoff = 2))
+  expect_snapshot_igraph_error(edge_betweenness_cutoff_impl(NULL, cutoff = 2))
 })
 
 # 75. edge_betweenness_subset_impl
@@ -1189,7 +1182,7 @@ test_that("edge_betweenness_subset_impl basic", {
 test_that("edge_betweenness_subset_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, edge_betweenness_subset_impl(NULL))
+  expect_snapshot_igraph_error(edge_betweenness_subset_impl(NULL))
 })
 
 # 76. harmonic_centrality_cutoff_impl
@@ -1204,8 +1197,7 @@ test_that("harmonic_centrality_cutoff_impl basic", {
 test_that("harmonic_centrality_cutoff_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     harmonic_centrality_cutoff_impl(NULL, cutoff = 2)
   )
 })
@@ -1223,7 +1215,7 @@ test_that("personalized_pagerank_impl basic", {
 test_that("personalized_pagerank_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, personalized_pagerank_impl(NULL))
+  expect_snapshot_igraph_error(personalized_pagerank_impl(NULL))
 })
 
 # 78. personalized_pagerank_vs_impl
@@ -1244,8 +1236,7 @@ test_that("personalized_pagerank_vs_impl basic", {
 test_that("personalized_pagerank_vs_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     personalized_pagerank_vs_impl(NULL, reset.vids = 1)
   )
 })
@@ -1262,7 +1253,7 @@ test_that("induced_subgraph_impl basic", {
 test_that("induced_subgraph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, induced_subgraph_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(induced_subgraph_impl(NULL, 1:2))
 })
 
 # 80. subgraph_from_edges_impl
@@ -1277,7 +1268,7 @@ test_that("subgraph_from_edges_impl basic", {
 test_that("subgraph_from_edges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, subgraph_from_edges_impl(NULL, 1))
+  expect_snapshot_igraph_error(subgraph_from_edges_impl(NULL, 1))
 })
 
 # 81. reverse_edges_impl
@@ -1292,7 +1283,7 @@ test_that("reverse_edges_impl basic", {
 test_that("reverse_edges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, reverse_edges_impl(NULL))
+  expect_snapshot_igraph_error(reverse_edges_impl(NULL))
 })
 
 # and much more halucination before...
@@ -1312,7 +1303,7 @@ test_that("path_length_hist_impl basic", {
 test_that("path_length_hist_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, path_length_hist_impl(NULL))
+  expect_snapshot_igraph_error(path_length_hist_impl(NULL))
 })
 
 # 102. simplify_impl
@@ -1332,7 +1323,7 @@ test_that("simplify_impl basic", {
 test_that("simplify_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, simplify_impl(NULL))
+  expect_snapshot_igraph_error(simplify_impl(NULL))
 })
 
 # 103. transitivity_undirected_impl
@@ -1348,7 +1339,7 @@ test_that("transitivity_undirected_impl basic", {
 test_that("transitivity_undirected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitivity_undirected_impl(NULL))
+  expect_snapshot_igraph_error(transitivity_undirected_impl(NULL))
 })
 
 # 104. transitivity_local_undirected_impl
@@ -1364,7 +1355,7 @@ test_that("transitivity_local_undirected_impl basic", {
 test_that("transitivity_local_undirected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitivity_local_undirected_impl(NULL))
+  expect_snapshot_igraph_error(transitivity_local_undirected_impl(NULL))
 })
 
 # 105. transitivity_avglocal_undirected_impl
@@ -1380,7 +1371,7 @@ test_that("transitivity_avglocal_undirected_impl basic", {
 test_that("transitivity_avglocal_undirected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitivity_avglocal_undirected_impl(NULL))
+  expect_snapshot_igraph_error(transitivity_avglocal_undirected_impl(NULL))
 })
 
 # 106. transitivity_barrat_impl
@@ -1396,7 +1387,7 @@ test_that("transitivity_barrat_impl basic", {
 test_that("transitivity_barrat_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitivity_barrat_impl(NULL))
+  expect_snapshot_igraph_error(transitivity_barrat_impl(NULL))
 })
 
 # 107. ecc_impl
@@ -1412,7 +1403,7 @@ test_that("ecc_impl basic", {
 test_that("ecc_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, ecc_impl(NULL))
+  expect_snapshot_igraph_error(ecc_impl(NULL))
 })
 
 # 108. reciprocity_impl
@@ -1428,7 +1419,7 @@ test_that("reciprocity_impl basic", {
 test_that("reciprocity_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, reciprocity_impl(NULL))
+  expect_snapshot_igraph_error(reciprocity_impl(NULL))
 })
 
 # 109. maxdegree_impl
@@ -1444,7 +1435,7 @@ test_that("maxdegree_impl basic", {
 test_that("maxdegree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, maxdegree_impl(NULL))
+  expect_snapshot_igraph_error(maxdegree_impl(NULL))
 })
 
 # 110. density_impl
@@ -1460,7 +1451,7 @@ test_that("density_impl basic", {
 test_that("density_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, density_impl(NULL))
+  expect_snapshot_igraph_error(density_impl(NULL))
 })
 
 # 111. mean_degree_impl
@@ -1476,7 +1467,7 @@ test_that("mean_degree_impl basic", {
 test_that("mean_degree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, mean_degree_impl(NULL))
+  expect_snapshot_igraph_error(mean_degree_impl(NULL))
 })
 
 # 112. feedback_arc_set_impl
@@ -1492,7 +1483,7 @@ test_that("feedback_arc_set_impl basic", {
 test_that("feedback_arc_set_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, feedback_arc_set_impl(NULL))
+  expect_snapshot_igraph_error(feedback_arc_set_impl(NULL))
 })
 
 # 113. feedback_vertex_set_impl
@@ -1507,7 +1498,7 @@ test_that("feedback_vertex_set_impl basic", {
 test_that("feedback_vertex_set_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, feedback_vertex_set_impl(NULL))
+  expect_snapshot_igraph_error(feedback_vertex_set_impl(NULL))
 })
 
 # 114. is_loop_impl
@@ -1522,7 +1513,7 @@ test_that("is_loop_impl basic", {
 test_that("is_loop_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_loop_impl(NULL))
+  expect_snapshot_igraph_error(is_loop_impl(NULL))
 })
 
 # 115. is_dag_impl
@@ -1537,7 +1528,7 @@ test_that("is_dag_impl basic", {
 test_that("is_dag_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_dag_impl(NULL))
+  expect_snapshot_igraph_error(is_dag_impl(NULL))
 })
 
 # 116. is_acyclic_impl
@@ -1552,7 +1543,7 @@ test_that("is_acyclic_impl basic", {
 test_that("is_acyclic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_acyclic_impl(NULL))
+  expect_snapshot_igraph_error(is_acyclic_impl(NULL))
 })
 
 # 117. is_simple_impl
@@ -1567,7 +1558,7 @@ test_that("is_simple_impl basic", {
 test_that("is_simple_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_simple_impl(NULL))
+  expect_snapshot_igraph_error(is_simple_impl(NULL))
 })
 
 # 118. is_multiple_impl
@@ -1582,7 +1573,7 @@ test_that("is_multiple_impl basic", {
 test_that("is_multiple_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_multiple_impl(NULL))
+  expect_snapshot_igraph_error(is_multiple_impl(NULL))
 })
 
 # 119. has_loop_impl
@@ -1597,7 +1588,7 @@ test_that("has_loop_impl basic", {
 test_that("has_loop_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, has_loop_impl(NULL))
+  expect_snapshot_igraph_error(has_loop_impl(NULL))
 })
 
 # 120. has_multiple_impl
@@ -1612,7 +1603,7 @@ test_that("has_multiple_impl basic", {
 test_that("has_multiple_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, has_multiple_impl(NULL))
+  expect_snapshot_igraph_error(has_multiple_impl(NULL))
 })
 
 # 121. count_loops_impl
@@ -1627,7 +1618,7 @@ test_that("count_loops_impl basic", {
 test_that("count_loops_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_loops_impl(NULL))
+  expect_snapshot_igraph_error(count_loops_impl(NULL))
 })
 
 # 122. count_multiple_impl
@@ -1642,7 +1633,7 @@ test_that("count_multiple_impl basic", {
 test_that("count_multiple_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_multiple_impl(NULL))
+  expect_snapshot_igraph_error(count_multiple_impl(NULL))
 })
 
 # 123. is_perfect_impl
@@ -1657,7 +1648,7 @@ test_that("is_perfect_impl basic", {
 test_that("is_perfect_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_perfect_impl(NULL))
+  expect_snapshot_igraph_error(is_perfect_impl(NULL))
 })
 
 # 124. eigenvector_centrality_impl
@@ -1677,7 +1668,7 @@ test_that("eigenvector_centrality_impl basic", {
 test_that("eigenvector_centrality_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eigenvector_centrality_impl(NULL))
+  expect_snapshot_igraph_error(eigenvector_centrality_impl(NULL))
 })
 
 # 125. hub_and_authority_scores_impl
@@ -1693,7 +1684,7 @@ test_that("hub_and_authority_scores_impl basic", {
 test_that("hub_and_authority_scores_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hub_and_authority_scores_impl(NULL))
+  expect_snapshot_igraph_error(hub_and_authority_scores_impl(NULL))
 })
 
 # 126. unfold_tree_impl
@@ -1709,7 +1700,7 @@ test_that("unfold_tree_impl basic", {
 test_that("unfold_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, unfold_tree_impl(NULL, roots = 1))
+  expect_snapshot_igraph_error(unfold_tree_impl(NULL, roots = 1))
 })
 
 # 127. is_mutual_impl
@@ -1725,7 +1716,7 @@ test_that("is_mutual_impl basic", {
 test_that("is_mutual_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_mutual_impl(NULL))
+  expect_snapshot_igraph_error(is_mutual_impl(NULL))
 })
 
 # 128. has_mutual_impl
@@ -1741,7 +1732,7 @@ test_that("has_mutual_impl basic", {
 test_that("has_mutual_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, has_mutual_impl(NULL))
+  expect_snapshot_igraph_error(has_mutual_impl(NULL))
 })
 
 # 129. maximum_cardinality_search_impl
@@ -1756,7 +1747,7 @@ test_that("maximum_cardinality_search_impl basic", {
 test_that("maximum_cardinality_search_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, maximum_cardinality_search_impl(NULL))
+  expect_snapshot_igraph_error(maximum_cardinality_search_impl(NULL))
 })
 
 # 130. avg_nearest_neighbor_degree_impl
@@ -1776,7 +1767,7 @@ test_that("avg_nearest_neighbor_degree_impl basic", {
 test_that("avg_nearest_neighbor_degree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, avg_nearest_neighbor_degree_impl(NULL))
+  expect_snapshot_igraph_error(avg_nearest_neighbor_degree_impl(NULL))
 })
 
 # 131. degree_correlation_vector_impl
@@ -1797,7 +1788,7 @@ test_that("degree_correlation_vector_impl basic", {
 test_that("degree_correlation_vector_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, degree_correlation_vector_impl(NULL))
+  expect_snapshot_igraph_error(degree_correlation_vector_impl(NULL))
 })
 
 # 132. rich_club_sequence_impl
@@ -1819,8 +1810,7 @@ test_that("rich_club_sequence_impl basic", {
 test_that("rich_club_sequence_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     rich_club_sequence_impl(NULL, vertex.order = 1:3)
   )
 })
@@ -1838,7 +1828,7 @@ test_that("strength_impl basic", {
 test_that("strength_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, strength_impl(NULL))
+  expect_snapshot_igraph_error(strength_impl(NULL))
 })
 
 # 134. centralization_impl
@@ -1857,7 +1847,7 @@ test_that("centralization_impl basic", {
 test_that("centralization_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_impl(package_version("1.2.3")))
+  expect_snapshot_igraph_error(centralization_impl(package_version("1.2.3")))
 })
 
 # 135. centralization_degree_impl
@@ -1878,7 +1868,7 @@ test_that("centralization_degree_impl basic", {
 test_that("centralization_degree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_degree_impl(NULL))
+  expect_snapshot_igraph_error(centralization_degree_impl(NULL))
 })
 
 # 136. centralization_degree_tmax_impl
@@ -1897,8 +1887,7 @@ test_that("centralization_degree_tmax_impl basic", {
 test_that("centralization_degree_tmax_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     centralization_degree_tmax_impl(nodes = -1, loops = TRUE)
   )
 })
@@ -1920,7 +1909,7 @@ test_that("centralization_betweenness_impl basic", {
 test_that("centralization_betweenness_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_betweenness_impl(NULL))
+  expect_snapshot_igraph_error(centralization_betweenness_impl(NULL))
 })
 
 # 138. centralization_betweenness_tmax_impl
@@ -1941,8 +1930,7 @@ test_that("centralization_betweenness_tmax_impl basic", {
 test_that("centralization_betweenness_tmax_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     centralization_betweenness_tmax_impl(nodes = -1, directed = TRUE)
   )
 })
@@ -1964,7 +1952,7 @@ test_that("centralization_closeness_impl basic", {
 test_that("centralization_closeness_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_closeness_impl(NULL))
+  expect_snapshot_igraph_error(centralization_closeness_impl(NULL))
 })
 
 # 140. centralization_closeness_tmax_impl
@@ -1979,7 +1967,7 @@ test_that("centralization_closeness_tmax_impl basic", {
 test_that("centralization_closeness_tmax_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_closeness_tmax_impl(nodes = -1))
+  expect_snapshot_igraph_error(centralization_closeness_tmax_impl(nodes = -1))
 })
 
 # 141. centralization_eigenvector_centrality_impl
@@ -2000,8 +1988,7 @@ test_that("centralization_eigenvector_centrality_impl basic", {
 test_that("centralization_eigenvector_centrality_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     centralization_eigenvector_centrality_impl(NULL)
   )
 })
@@ -2022,8 +2009,7 @@ test_that("centralization_eigenvector_centrality_tmax_impl basic", {
 test_that("centralization_eigenvector_centrality_tmax_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     centralization_eigenvector_centrality_tmax_impl(nodes = -1)
   )
 })
@@ -2046,7 +2032,7 @@ test_that("assortativity_nominal_impl basic", {
 test_that("assortativity_nominal_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, assortativity_nominal_impl(NULL, c(1, 2, 1)))
+  expect_snapshot_igraph_error(assortativity_nominal_impl(NULL, c(1, 2, 1)))
 })
 
 # 144. assortativity_impl
@@ -2068,7 +2054,7 @@ test_that("assortativity_impl basic", {
 test_that("assortativity_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, assortativity_impl(NULL, c(1, 2, 1)))
+  expect_snapshot_igraph_error(assortativity_impl(NULL, c(1, 2, 1)))
 })
 
 # 145. assortativity_degree_impl
@@ -2084,7 +2070,7 @@ test_that("assortativity_degree_impl basic", {
 test_that("assortativity_degree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, assortativity_degree_impl(NULL))
+  expect_snapshot_igraph_error(assortativity_degree_impl(NULL))
 })
 
 # 146. joint_degree_matrix_impl
@@ -2104,7 +2090,7 @@ test_that("joint_degree_matrix_impl basic", {
 test_that("joint_degree_matrix_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, joint_degree_matrix_impl(NULL))
+  expect_snapshot_igraph_error(joint_degree_matrix_impl(NULL))
 })
 
 # 147. joint_degree_distribution_impl
@@ -2128,7 +2114,7 @@ test_that("joint_degree_distribution_impl basic", {
 test_that("joint_degree_distribution_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, joint_degree_distribution_impl(NULL))
+  expect_snapshot_igraph_error(joint_degree_distribution_impl(NULL))
 })
 
 # 148. joint_type_distribution_impl
@@ -2150,8 +2136,7 @@ test_that("joint_type_distribution_impl basic", {
 test_that("joint_type_distribution_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     joint_type_distribution_impl(NULL, from.types = c(1, 2, 1))
   )
 })
@@ -2168,7 +2153,7 @@ test_that("contract_vertices_impl basic", {
 test_that("contract_vertices_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, contract_vertices_impl(NULL, c(1, 1, 2)))
+  expect_snapshot_igraph_error(contract_vertices_impl(NULL, c(1, 1, 2)))
 })
 
 # 150. eccentricity_dijkstra_impl
@@ -2184,7 +2169,7 @@ test_that("eccentricity_dijkstra_impl basic", {
 test_that("eccentricity_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eccentricity_dijkstra_impl(NULL))
+  expect_snapshot_igraph_error(eccentricity_dijkstra_impl(NULL))
 })
 
 # 151. graph_center_dijkstra_impl
@@ -2200,7 +2185,7 @@ test_that("graph_center_dijkstra_impl basic", {
 test_that("graph_center_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, graph_center_dijkstra_impl(NULL))
+  expect_snapshot_igraph_error(graph_center_dijkstra_impl(NULL))
 })
 
 # 152. radius_dijkstra_impl
@@ -2216,7 +2201,7 @@ test_that("radius_dijkstra_impl basic", {
 test_that("radius_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, radius_dijkstra_impl(NULL))
+  expect_snapshot_igraph_error(radius_dijkstra_impl(NULL))
 })
 
 # 153. pseudo_diameter_impl
@@ -2237,7 +2222,7 @@ test_that("pseudo_diameter_impl basic", {
 test_that("pseudo_diameter_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, pseudo_diameter_impl(NULL, 1))
+  expect_snapshot_igraph_error(pseudo_diameter_impl(NULL, 1))
 })
 
 # 154. pseudo_diameter_dijkstra_impl
@@ -2258,8 +2243,7 @@ test_that("pseudo_diameter_dijkstra_impl basic", {
 test_that("pseudo_diameter_dijkstra_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     pseudo_diameter_dijkstra_impl(NULL, start.vid = 1)
   )
 })
@@ -2277,7 +2261,7 @@ test_that("diversity_impl basic", {
 test_that("diversity_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, diversity_impl(NULL))
+  expect_snapshot_igraph_error(diversity_impl(NULL))
 })
 
 # 156. random_walk_impl
@@ -2293,7 +2277,7 @@ test_that("random_walk_impl basic", {
 test_that("random_walk_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, random_walk_impl(NULL, 1, 2))
+  expect_snapshot_igraph_error(random_walk_impl(NULL, 1, 2))
 })
 
 # 157. global_efficiency_impl
@@ -2309,7 +2293,7 @@ test_that("global_efficiency_impl basic", {
 test_that("global_efficiency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, global_efficiency_impl(NULL))
+  expect_snapshot_igraph_error(global_efficiency_impl(NULL))
 })
 
 # 158. local_efficiency_impl
@@ -2325,7 +2309,7 @@ test_that("local_efficiency_impl basic", {
 test_that("local_efficiency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, local_efficiency_impl(NULL))
+  expect_snapshot_igraph_error(local_efficiency_impl(NULL))
 })
 
 # 159. average_local_efficiency_impl
@@ -2345,7 +2329,7 @@ test_that("average_local_efficiency_impl basic", {
 test_that("average_local_efficiency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, average_local_efficiency_impl(NULL))
+  expect_snapshot_igraph_error(average_local_efficiency_impl(NULL))
 })
 
 # 160. transitive_closure_dag_impl
@@ -2360,7 +2344,7 @@ test_that("transitive_closure_dag_impl basic", {
 test_that("transitive_closure_dag_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitive_closure_dag_impl(NULL))
+  expect_snapshot_igraph_error(transitive_closure_dag_impl(NULL))
 })
 
 # 161. transitive_closure_impl
@@ -2375,7 +2359,7 @@ test_that("transitive_closure_impl basic", {
 test_that("transitive_closure_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, transitive_closure_impl(NULL))
+  expect_snapshot_igraph_error(transitive_closure_impl(NULL))
 })
 
 # 162. trussness_impl
@@ -2390,7 +2374,7 @@ test_that("trussness_impl basic", {
 test_that("trussness_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, trussness_impl(NULL))
+  expect_snapshot_igraph_error(trussness_impl(NULL))
 })
 
 # 163. is_graphical_impl
@@ -2409,7 +2393,7 @@ test_that("is_graphical_impl basic", {
 test_that("is_graphical_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_graphical_impl("a"))
+  expect_snapshot_igraph_error(is_graphical_impl("a"))
 })
 
 # 164. bfs_simple_impl
@@ -2425,7 +2409,7 @@ test_that("bfs_simple_impl basic", {
 test_that("bfs_simple_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bfs_simple_impl(NULL, 1))
+  expect_snapshot_igraph_error(bfs_simple_impl(NULL, 1))
 })
 
 # 165. bipartite_projection_size_impl
@@ -2441,7 +2425,7 @@ test_that("bipartite_projection_size_impl basic", {
 test_that("bipartite_projection_size_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bipartite_projection_size_impl(NULL))
+  expect_snapshot_igraph_error(bipartite_projection_size_impl(NULL))
 })
 
 # 166. biadjacency_impl
@@ -2462,7 +2446,7 @@ test_that("biadjacency_impl basic", {
 test_that("biadjacency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, biadjacency_impl("a"))
+  expect_snapshot_igraph_error(biadjacency_impl("a"))
 })
 
 # 167. get_biadjacency_impl
@@ -2477,8 +2461,7 @@ test_that("get_biadjacency_impl basic", {
 test_that("get_biadjacency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     get_biadjacency_impl(NULL, c(TRUE, FALSE, TRUE))
   )
 })
@@ -2495,7 +2478,7 @@ test_that("is_bipartite_impl basic", {
 test_that("is_bipartite_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_bipartite_impl(NULL))
+  expect_snapshot_igraph_error(is_bipartite_impl(NULL))
 })
 
 # 169. bipartite_game_gnp_impl
@@ -2516,7 +2499,7 @@ test_that("bipartite_game_gnp_impl basic", {
 test_that("bipartite_game_gnp_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bipartite_game_gnp_impl(-1, 2, 0.5))
+  expect_snapshot_igraph_error(bipartite_game_gnp_impl(-1, 2, 0.5))
 })
 
 # 170. bipartite_game_gnm_impl
@@ -2537,7 +2520,7 @@ test_that("bipartite_game_gnm_impl basic", {
 test_that("bipartite_game_gnm_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bipartite_game_gnm_impl(-1, 2, 1))
+  expect_snapshot_igraph_error(bipartite_game_gnm_impl(-1, 2, 1))
 })
 
 # 171. get_laplacian_impl
@@ -2558,7 +2541,7 @@ test_that("get_laplacian_impl basic", {
 test_that("get_laplacian_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_laplacian_impl(NULL))
+  expect_snapshot_igraph_error(get_laplacian_impl(NULL))
 })
 
 # 172. get_laplacian_sparse_impl
@@ -2579,7 +2562,7 @@ test_that("get_laplacian_sparse_impl basic", {
 test_that("get_laplacian_sparse_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_laplacian_sparse_impl(NULL))
+  expect_snapshot_igraph_error(get_laplacian_sparse_impl(NULL))
 })
 
 # 173. connected_components_impl
@@ -2595,7 +2578,7 @@ test_that("connected_components_impl basic", {
 test_that("connected_components_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, connected_components_impl(NULL))
+  expect_snapshot_igraph_error(connected_components_impl(NULL))
 })
 
 # 174. is_connected_impl
@@ -2611,7 +2594,7 @@ test_that("is_connected_impl basic", {
 test_that("is_connected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_connected_impl(NULL))
+  expect_snapshot_igraph_error(is_connected_impl(NULL))
 })
 
 # 175. articulation_points_impl
@@ -2626,7 +2609,7 @@ test_that("articulation_points_impl basic", {
 test_that("articulation_points_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, articulation_points_impl(NULL))
+  expect_snapshot_igraph_error(articulation_points_impl(NULL))
 })
 
 # 176. biconnected_components_impl
@@ -2641,7 +2624,7 @@ test_that("biconnected_components_impl basic", {
 test_that("biconnected_components_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, biconnected_components_impl(NULL))
+  expect_snapshot_igraph_error(biconnected_components_impl(NULL))
 })
 
 # 177. bridges_impl
@@ -2656,7 +2639,7 @@ test_that("bridges_impl basic", {
 test_that("bridges_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bridges_impl(NULL))
+  expect_snapshot_igraph_error(bridges_impl(NULL))
 })
 
 # 178. is_biconnected_impl
@@ -2671,7 +2654,7 @@ test_that("is_biconnected_impl basic", {
 test_that("is_biconnected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_biconnected_impl(NULL))
+  expect_snapshot_igraph_error(is_biconnected_impl(NULL))
 })
 
 # 179. count_reachable_impl
@@ -2687,7 +2670,7 @@ test_that("count_reachable_impl basic", {
 test_that("count_reachable_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_reachable_impl(NULL, mode = "out"))
+  expect_snapshot_igraph_error(count_reachable_impl(NULL, mode = "out"))
 })
 
 # 180. bond_percolation_impl
@@ -2702,7 +2685,7 @@ test_that("bond_percolation_impl basic", {
 test_that("bond_percolation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, bond_percolation_impl(NULL))
+  expect_snapshot_igraph_error(bond_percolation_impl(NULL))
 })
 
 # 181. site_percolation_impl
@@ -2717,7 +2700,7 @@ test_that("site_percolation_impl basic", {
 test_that("site_percolation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, site_percolation_impl(NULL))
+  expect_snapshot_igraph_error(site_percolation_impl(NULL))
 })
 
 # 182. edgelist_percolation_impl
@@ -2731,7 +2714,7 @@ test_that("edgelist_percolation_impl basic", {
 test_that("edgelist_percolation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, edgelist_percolation_impl("a"))
+  expect_snapshot_igraph_error(edgelist_percolation_impl("a"))
 })
 
 # 183. is_clique_impl
@@ -2747,7 +2730,7 @@ test_that("is_clique_impl basic", {
 test_that("is_clique_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_clique_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(is_clique_impl(NULL, 1:2))
 })
 
 # 184. cliques_impl
@@ -2763,7 +2746,7 @@ test_that("cliques_impl basic", {
 test_that("cliques_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, cliques_impl(NULL))
+  expect_snapshot_igraph_error(cliques_impl(NULL))
 })
 
 # 185. clique_size_hist_impl
@@ -2779,7 +2762,7 @@ test_that("clique_size_hist_impl basic", {
 test_that("clique_size_hist_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, clique_size_hist_impl(NULL))
+  expect_snapshot_igraph_error(clique_size_hist_impl(NULL))
 })
 
 # 186. largest_cliques_impl
@@ -2794,7 +2777,7 @@ test_that("largest_cliques_impl basic", {
 test_that("largest_cliques_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, largest_cliques_impl(NULL))
+  expect_snapshot_igraph_error(largest_cliques_impl(NULL))
 })
 
 # 187. maximal_cliques_hist_impl
@@ -2810,7 +2793,7 @@ test_that("maximal_cliques_hist_impl basic", {
 test_that("maximal_cliques_hist_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, maximal_cliques_hist_impl(NULL))
+  expect_snapshot_igraph_error(maximal_cliques_hist_impl(NULL))
 })
 
 # 188. clique_number_impl
@@ -2825,7 +2808,7 @@ test_that("clique_number_impl basic", {
 test_that("clique_number_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, clique_number_impl(NULL))
+  expect_snapshot_igraph_error(clique_number_impl(NULL))
 })
 
 # 189. weighted_cliques_impl
@@ -2847,7 +2830,7 @@ test_that("weighted_cliques_impl basic", {
 test_that("weighted_cliques_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, weighted_cliques_impl(NULL))
+  expect_snapshot_igraph_error(weighted_cliques_impl(NULL))
 })
 
 # 190. largest_weighted_cliques_impl
@@ -2863,7 +2846,7 @@ test_that("largest_weighted_cliques_impl basic", {
 test_that("largest_weighted_cliques_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, largest_weighted_cliques_impl(NULL))
+  expect_snapshot_igraph_error(largest_weighted_cliques_impl(NULL))
 })
 
 # 191. weighted_clique_number_impl
@@ -2879,7 +2862,7 @@ test_that("weighted_clique_number_impl basic", {
 test_that("weighted_clique_number_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, weighted_clique_number_impl(NULL))
+  expect_snapshot_igraph_error(weighted_clique_number_impl(NULL))
 })
 
 # 192. is_independent_vertex_set_impl
@@ -2894,7 +2877,7 @@ test_that("is_independent_vertex_set_impl basic", {
 test_that("is_independent_vertex_set_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_independent_vertex_set_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(is_independent_vertex_set_impl(NULL, 1:2))
 })
 
 # 193. layout_random_impl
@@ -2909,7 +2892,7 @@ test_that("layout_random_impl basic", {
 test_that("layout_random_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_random_impl(NULL))
+  expect_snapshot_igraph_error(layout_random_impl(NULL))
 })
 
 # 194. layout_circle_impl
@@ -2925,7 +2908,7 @@ test_that("layout_circle_impl basic", {
 test_that("layout_circle_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_circle_impl(NULL))
+  expect_snapshot_igraph_error(layout_circle_impl(NULL))
 })
 
 # 195. layout_star_impl
@@ -2941,7 +2924,7 @@ test_that("layout_star_impl basic", {
 test_that("layout_star_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_star_impl(NULL))
+  expect_snapshot_igraph_error(layout_star_impl(NULL))
 })
 
 # 196. layout_grid_impl
@@ -2957,7 +2940,7 @@ test_that("layout_grid_impl basic", {
 test_that("layout_grid_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_grid_impl(NULL))
+  expect_snapshot_igraph_error(layout_grid_impl(NULL))
 })
 
 # 197. layout_grid_3d_impl
@@ -2973,7 +2956,7 @@ test_that("layout_grid_3d_impl basic", {
 test_that("layout_grid_3d_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_grid_3d_impl(NULL))
+  expect_snapshot_igraph_error(layout_grid_3d_impl(NULL))
 })
 
 # 198. roots_for_tree_layout_impl
@@ -2988,8 +2971,7 @@ test_that("roots_for_tree_layout_impl basic", {
 test_that("roots_for_tree_layout_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     roots_for_tree_layout_impl(NULL, mode = "out", heuristic = 1)
   )
 })
@@ -3006,7 +2988,7 @@ test_that("layout_random_3d_impl basic", {
 test_that("layout_random_3d_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_random_3d_impl(NULL))
+  expect_snapshot_igraph_error(layout_random_3d_impl(NULL))
 })
 
 # 200. layout_sphere_impl
@@ -3021,7 +3003,7 @@ test_that("layout_sphere_impl basic", {
 test_that("layout_sphere_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_sphere_impl(NULL))
+  expect_snapshot_igraph_error(layout_sphere_impl(NULL))
 })
 
 # 201. layout_sugiyama_impl
@@ -3044,7 +3026,7 @@ test_that("layout_sugiyama_impl basic", {
 test_that("layout_sugiyama_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_sugiyama_impl(NULL))
+  expect_snapshot_igraph_error(layout_sugiyama_impl(NULL))
 })
 
 # 202. layout_mds_impl
@@ -3060,7 +3042,7 @@ test_that("layout_mds_impl basic", {
 test_that("layout_mds_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, layout_mds_impl(NULL))
+  expect_snapshot_igraph_error(layout_mds_impl(NULL))
 })
 
 # 203. layout_bipartite_impl
@@ -3082,8 +3064,7 @@ test_that("layout_bipartite_impl basic", {
 test_that("layout_bipartite_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_bipartite_impl(NULL, types = c(TRUE, FALSE, TRUE))
   )
 })
@@ -3109,8 +3090,7 @@ test_that("layout_gem_impl basic", {
 test_that("layout_gem_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_gem_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
@@ -3143,8 +3123,7 @@ test_that("layout_davidson_harel_impl basic", {
 test_that("layout_davidson_harel_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_davidson_harel_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
@@ -3170,8 +3149,7 @@ test_that("layout_umap_impl basic", {
 test_that("layout_umap_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_umap_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
@@ -3197,8 +3175,7 @@ test_that("layout_umap_3d_impl basic", {
 test_that("layout_umap_3d_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_umap_3d_impl(NULL, res = matrix(0, nrow = 3, ncol = 3))
   )
 })
@@ -3219,8 +3196,7 @@ test_that("layout_umap_compute_weights_impl basic", {
 test_that("layout_umap_compute_weights_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_umap_compute_weights_impl(NULL, distances = 1:3, weights = 1:3)
   )
 })
@@ -3237,8 +3213,7 @@ test_that("layout_align_impl basic", {
 test_that("layout_align_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     layout_align_impl(NULL, layout = matrix(0, nrow = 3, ncol = 2))
   )
 })
@@ -3261,7 +3236,7 @@ test_that("similarity_dice_impl basic", {
 test_that("similarity_dice_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, similarity_dice_impl(NULL))
+  expect_snapshot_igraph_error(similarity_dice_impl(NULL))
 })
 
 # 211. similarity_dice_es_impl
@@ -3282,7 +3257,7 @@ test_that("similarity_dice_es_impl basic", {
 test_that("similarity_dice_es_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, similarity_dice_es_impl(NULL))
+  expect_snapshot_igraph_error(similarity_dice_es_impl(NULL))
 })
 
 # 212. similarity_dice_pairs_impl
@@ -3306,8 +3281,7 @@ test_that("similarity_dice_pairs_impl basic", {
 test_that("similarity_dice_pairs_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     similarity_dice_pairs_impl(NULL, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
   )
 })
@@ -3329,7 +3303,7 @@ test_that("similarity_inverse_log_weighted_impl basic", {
 test_that("similarity_inverse_log_weighted_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, similarity_inverse_log_weighted_impl(NULL))
+  expect_snapshot_igraph_error(similarity_inverse_log_weighted_impl(NULL))
 })
 
 # 214. similarity_jaccard_impl
@@ -3350,7 +3324,7 @@ test_that("similarity_jaccard_impl basic", {
 test_that("similarity_jaccard_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, similarity_jaccard_impl(NULL))
+  expect_snapshot_igraph_error(similarity_jaccard_impl(NULL))
 })
 
 # 215. similarity_jaccard_es_impl
@@ -3371,7 +3345,7 @@ test_that("similarity_jaccard_es_impl basic", {
 test_that("similarity_jaccard_es_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, similarity_jaccard_es_impl(NULL))
+  expect_snapshot_igraph_error(similarity_jaccard_es_impl(NULL))
 })
 
 # 216. similarity_jaccard_pairs_impl
@@ -3395,8 +3369,7 @@ test_that("similarity_jaccard_pairs_impl basic", {
 test_that("similarity_jaccard_pairs_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     similarity_jaccard_pairs_impl(NULL, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
   )
 })
@@ -3417,7 +3390,7 @@ test_that("compare_communities_impl basic", {
 test_that("compare_communities_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, compare_communities_impl("a", c(2, 1, 2)))
+  expect_snapshot_igraph_error(compare_communities_impl("a", c(2, 1, 2)))
 })
 
 # 218. modularity_impl
@@ -3439,7 +3412,7 @@ test_that("modularity_impl basic", {
 test_that("modularity_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, modularity_impl(NULL, membership = c(1, 2, 1)))
+  expect_snapshot_igraph_error(modularity_impl(NULL, membership = c(1, 2, 1)))
 })
 
 # 219. modularity_matrix_impl
@@ -3460,7 +3433,7 @@ test_that("modularity_matrix_impl basic", {
 test_that("modularity_matrix_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, modularity_matrix_impl(NULL))
+  expect_snapshot_igraph_error(modularity_matrix_impl(NULL))
 })
 
 # 220. community_fluid_communities_impl
@@ -3475,8 +3448,7 @@ test_that("community_fluid_communities_impl basic", {
 test_that("community_fluid_communities_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     community_fluid_communities_impl(NULL, no.of.communities = 2)
   )
 })
@@ -3500,7 +3472,7 @@ test_that("community_label_propagation_impl basic", {
 test_that("community_label_propagation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, community_label_propagation_impl(NULL))
+  expect_snapshot_igraph_error(community_label_propagation_impl(NULL))
 })
 
 # 222. community_multilevel_impl
@@ -3520,7 +3492,7 @@ test_that("community_multilevel_impl basic", {
 test_that("community_multilevel_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, community_multilevel_impl(NULL))
+  expect_snapshot_igraph_error(community_multilevel_impl(NULL))
 })
 
 # 223. community_optimal_modularity_impl
@@ -3536,7 +3508,7 @@ test_that("community_optimal_modularity_impl basic", {
 test_that("community_optimal_modularity_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, community_optimal_modularity_impl(NULL))
+  expect_snapshot_igraph_error(community_optimal_modularity_impl(NULL))
 })
 
 # 224. community_leiden_impl
@@ -3560,7 +3532,7 @@ test_that("community_leiden_impl basic", {
 test_that("community_leiden_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, community_leiden_impl(NULL, resolution = 1))
+  expect_snapshot_igraph_error(community_leiden_impl(NULL, resolution = 1))
 })
 
 # 225. split_join_distance_impl
@@ -3574,7 +3546,7 @@ test_that("split_join_distance_impl basic", {
 test_that("split_join_distance_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, split_join_distance_impl("a", c(2, 1, 2)))
+  expect_snapshot_igraph_error(split_join_distance_impl("a", c(2, 1, 2)))
 })
 
 # 226. community_infomap_impl
@@ -3595,7 +3567,7 @@ test_that("community_infomap_impl basic", {
 test_that("community_infomap_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, community_infomap_impl(NULL))
+  expect_snapshot_igraph_error(community_infomap_impl(NULL))
 })
 
 # 227. graphlets_impl
@@ -3612,7 +3584,7 @@ test_that("graphlets_impl basic", {
 test_that("graphlets_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, graphlets_impl(NULL))
+  expect_snapshot_igraph_error(graphlets_impl(NULL))
 })
 
 # 228. hrg_fit_impl
@@ -3627,7 +3599,7 @@ test_that("hrg_fit_impl basic", {
 test_that("hrg_fit_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_fit_impl(NULL))
+  expect_snapshot_igraph_error(hrg_fit_impl(NULL))
 })
 
 # 229. hrg_sample_impl
@@ -3643,7 +3615,7 @@ test_that("hrg_sample_impl basic", {
 test_that("hrg_sample_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_sample_impl(NULL))
+  expect_snapshot_igraph_error(hrg_sample_impl(NULL))
 })
 
 # 230. hrg_sample_many_impl
@@ -3659,7 +3631,7 @@ test_that("hrg_sample_many_impl basic", {
 test_that("hrg_sample_many_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_sample_many_impl(NULL, num.samples = 2))
+  expect_snapshot_igraph_error(hrg_sample_many_impl(NULL, num.samples = 2))
 })
 
 # 231. hrg_game_impl
@@ -3675,7 +3647,7 @@ test_that("hrg_game_impl basic", {
 test_that("hrg_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_game_impl(NULL))
+  expect_snapshot_igraph_error(hrg_game_impl(NULL))
 })
 
 # 232. hrg_consensus_impl
@@ -3692,7 +3664,7 @@ test_that("hrg_game_impl errors", {
 test_that("hrg_consensus_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_consensus_impl(NULL))
+  expect_snapshot_igraph_error(hrg_consensus_impl(NULL))
 })
 
 # 233. hrg_predict_impl
@@ -3709,7 +3681,7 @@ test_that("hrg_consensus_impl errors", {
 test_that("hrg_predict_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_predict_impl(NULL))
+  expect_snapshot_igraph_error(hrg_predict_impl(NULL))
 })
 
 # 234. hrg_create_impl
@@ -3725,7 +3697,7 @@ test_that("hrg_create_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(4, directed = TRUE)
-  expect_snapshot(error = TRUE, hrg_create_impl(g, prob = 0.5))
+  expect_snapshot_igraph_error(hrg_create_impl(g, prob = 0.5))
 })
 
 # 235. hrg_resize_impl
@@ -3741,7 +3713,7 @@ test_that("hrg_resize_impl basic", {
 test_that("hrg_resize_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_resize_impl(-1, newsize = 2))
+  expect_snapshot_igraph_error(hrg_resize_impl(-1, newsize = 2))
 })
 
 # 236. hrg_size_impl
@@ -3757,7 +3729,7 @@ test_that("hrg_size_impl basic", {
 test_that("hrg_size_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hrg_size_impl(-1))
+  expect_snapshot_igraph_error(hrg_size_impl(-1))
 })
 
 # 237. from_hrg_dendrogram_impl
@@ -3773,7 +3745,7 @@ test_that("from_hrg_dendrogram_impl basic", {
 test_that("from_hrg_dendrogram_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, from_hrg_dendrogram_impl(-1))
+  expect_snapshot_igraph_error(from_hrg_dendrogram_impl(-1))
 })
 
 # 238. get_adjacency_sparse_impl
@@ -3794,7 +3766,7 @@ test_that("get_adjacency_sparse_impl basic", {
 test_that("get_adjacency_sparse_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_adjacency_sparse_impl(NULL))
+  expect_snapshot_igraph_error(get_adjacency_sparse_impl(NULL))
 })
 
 # 239. get_stochastic_impl
@@ -3810,7 +3782,7 @@ test_that("get_stochastic_impl basic", {
 test_that("get_stochastic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_stochastic_impl(NULL))
+  expect_snapshot_igraph_error(get_stochastic_impl(NULL))
 })
 
 # 240. get_stochastic_sparse_impl
@@ -3830,7 +3802,7 @@ test_that("get_stochastic_sparse_impl basic", {
 test_that("get_stochastic_sparse_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, get_stochastic_sparse_impl(NULL))
+  expect_snapshot_igraph_error(get_stochastic_sparse_impl(NULL))
 })
 
 # 241. to_directed_impl
@@ -3846,7 +3818,7 @@ test_that("to_directed_impl basic", {
 test_that("to_directed_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, to_directed_impl(NULL))
+  expect_snapshot_igraph_error(to_directed_impl(NULL))
 })
 
 # 242. to_undirected_impl
@@ -3866,7 +3838,7 @@ test_that("to_undirected_impl basic", {
 test_that("to_undirected_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, to_undirected_impl(NULL))
+  expect_snapshot_igraph_error(to_undirected_impl(NULL))
 })
 
 # 243. motifs_randesu_impl
@@ -3882,7 +3854,7 @@ test_that("motifs_randesu_impl basic", {
 test_that("motifs_randesu_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, motifs_randesu_impl(NULL))
+  expect_snapshot_igraph_error(motifs_randesu_impl(NULL))
 })
 
 # 244. motifs_randesu_estimate_impl
@@ -3904,8 +3876,7 @@ test_that("motifs_randesu_estimate_impl basic", {
 test_that("motifs_randesu_estimate_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     motifs_randesu_estimate_impl(NULL, size = 3, sample.size = 2)
   )
 })
@@ -3928,8 +3899,7 @@ test_that("motifs_randesu_no_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     motifs_randesu_no_impl(g, size = 3, cut.prob = c(0.1))
   )
 })
@@ -3946,7 +3916,7 @@ test_that("dyad_census_impl basic", {
 test_that("dyad_census_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, dyad_census_impl(NULL))
+  expect_snapshot_igraph_error(dyad_census_impl(NULL))
 })
 
 # 247. triad_census_impl
@@ -3961,7 +3931,7 @@ test_that("triad_census_impl basic", {
 test_that("triad_census_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, triad_census_impl(NULL))
+  expect_snapshot_igraph_error(triad_census_impl(NULL))
 })
 
 # 248. count_adjacent_triangles_impl
@@ -3977,7 +3947,7 @@ test_that("count_adjacent_triangles_impl basic", {
 test_that("count_adjacent_triangles_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_adjacent_triangles_impl(NULL))
+  expect_snapshot_igraph_error(count_adjacent_triangles_impl(NULL))
 })
 
 # 249. count_triangles_impl
@@ -3992,7 +3962,7 @@ test_that("count_triangles_impl basic", {
 test_that("count_triangles_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_triangles_impl(NULL))
+  expect_snapshot_igraph_error(count_triangles_impl(NULL))
 })
 
 # 250. local_scan_0_impl
@@ -4008,7 +3978,7 @@ test_that("local_scan_0_impl basic", {
 test_that("local_scan_0_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, local_scan_0_impl(NULL))
+  expect_snapshot_igraph_error(local_scan_0_impl(NULL))
 })
 
 # 251. local_scan_0_them_impl
@@ -4030,8 +4000,7 @@ test_that("local_scan_0_them_impl basic", {
 test_that("local_scan_0_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     local_scan_0_them_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4049,7 +4018,7 @@ test_that("local_scan_1_ecount_impl basic", {
 test_that("local_scan_1_ecount_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, local_scan_1_ecount_impl(NULL))
+  expect_snapshot_igraph_error(local_scan_1_ecount_impl(NULL))
 })
 
 # 253. local_scan_1_ecount_them_impl
@@ -4071,8 +4040,7 @@ test_that("local_scan_1_ecount_them_impl basic", {
 test_that("local_scan_1_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     local_scan_1_ecount_them_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4095,7 +4063,7 @@ test_that("local_scan_k_ecount_impl basic", {
 test_that("local_scan_k_ecount_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, local_scan_k_ecount_impl(NULL, k = 1))
+  expect_snapshot_igraph_error(local_scan_k_ecount_impl(NULL, k = 1))
 })
 
 # 255. local_scan_k_ecount_them_impl
@@ -4118,8 +4086,7 @@ test_that("local_scan_k_ecount_them_impl basic", {
 test_that("local_scan_k_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     local_scan_k_ecount_them_impl(NULL, path_graph_impl(3), k = 1)
   )
 })
@@ -4144,8 +4111,7 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
 test_that("local_scan_neighborhood_ecount_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     local_scan_neighborhood_ecount_impl(NULL, neighborhoods = list(1:2, 2:3))
   )
 })
@@ -4171,8 +4137,7 @@ test_that("local_scan_subset_ecount_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(4)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     local_scan_subset_ecount_impl(g, subsets = list(1:2, letters[2:3]))
   )
 })
@@ -4189,7 +4154,7 @@ test_that("list_triangles_impl basic", {
 test_that("list_triangles_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, list_triangles_impl(NULL))
+  expect_snapshot_igraph_error(list_triangles_impl(NULL))
 })
 
 # 259. join_impl
@@ -4205,7 +4170,7 @@ test_that("join_impl basic", {
 test_that("join_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, join_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(join_impl(NULL, path_graph_impl(3)))
 })
 
 # 260. induced_subgraph_map_impl
@@ -4221,8 +4186,7 @@ test_that("induced_subgraph_map_impl basic", {
 test_that("induced_subgraph_map_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     induced_subgraph_map_impl(NULL, 1:2, impl = "auto")
   )
 })
@@ -4240,7 +4204,7 @@ test_that("mycielskian_impl basic", {
 test_that("mycielskian_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, mycielskian_impl(NULL))
+  expect_snapshot_igraph_error(mycielskian_impl(NULL))
 })
 
 # 262. product_impl
@@ -4257,7 +4221,7 @@ test_that("product_impl basic", {
 test_that("product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, product_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(product_impl(NULL, path_graph_impl(3)))
 })
 
 # 263. rooted_product_impl
@@ -4273,8 +4237,7 @@ test_that("rooted_product_impl basic", {
 test_that("rooted_product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     rooted_product_impl(NULL, path_graph_impl(3), root = 1)
   )
 })
@@ -4292,7 +4255,7 @@ test_that("gomory_hu_tree_impl basic", {
 test_that("gomory_hu_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, gomory_hu_tree_impl(NULL))
+  expect_snapshot_igraph_error(gomory_hu_tree_impl(NULL))
 })
 
 # 265. maxflow_impl
@@ -4308,7 +4271,7 @@ test_that("maxflow_impl basic", {
 test_that("maxflow_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, maxflow_impl(NULL, source = 1, target = 3))
+  expect_snapshot_igraph_error(maxflow_impl(NULL, source = 1, target = 3))
 })
 
 # 266. residual_graph_impl
@@ -4323,8 +4286,7 @@ test_that("residual_graph_impl basic", {
 test_that("residual_graph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     residual_graph_impl(NULL, capacity = c(1, 2), flow = c(1, 2))
   )
 })
@@ -4345,8 +4307,7 @@ test_that("reverse_residual_graph_impl basic", {
 test_that("reverse_residual_graph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     reverse_residual_graph_impl(NULL, capacity = c(1, 2), flow = c(1, 2))
   )
 })
@@ -4364,7 +4325,7 @@ test_that("st_mincut_impl basic", {
 test_that("st_mincut_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, st_mincut_impl(NULL, source = 1, target = 3))
+  expect_snapshot_igraph_error(st_mincut_impl(NULL, source = 1, target = 3))
 })
 
 # 269. dominator_tree_impl
@@ -4380,7 +4341,7 @@ test_that("dominator_tree_impl basic", {
 test_that("dominator_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, dominator_tree_impl(NULL, root = 1))
+  expect_snapshot_igraph_error(dominator_tree_impl(NULL, root = 1))
 })
 
 # 270. all_st_cuts_impl
@@ -4395,7 +4356,7 @@ test_that("all_st_cuts_impl basic", {
 test_that("all_st_cuts_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, all_st_cuts_impl(NULL, source = 1, target = 3))
+  expect_snapshot_igraph_error(all_st_cuts_impl(NULL, source = 1, target = 3))
 })
 
 # 271. all_st_mincuts_impl
@@ -4416,8 +4377,7 @@ test_that("all_st_mincuts_impl basic", {
 test_that("all_st_mincuts_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     all_st_mincuts_impl(NULL, source = 1, target = 3)
   )
 })
@@ -4434,7 +4394,7 @@ test_that("even_tarjan_reduction_impl basic", {
 test_that("even_tarjan_reduction_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, even_tarjan_reduction_impl(NULL))
+  expect_snapshot_igraph_error(even_tarjan_reduction_impl(NULL))
 })
 
 # 273. is_separator_impl
@@ -4449,7 +4409,7 @@ test_that("is_separator_impl basic", {
 test_that("is_separator_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_separator_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(is_separator_impl(NULL, 1:2))
 })
 
 # 274. is_minimal_separator_impl
@@ -4464,7 +4424,7 @@ test_that("is_minimal_separator_impl basic", {
 test_that("is_minimal_separator_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_minimal_separator_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(is_minimal_separator_impl(NULL, 1:2))
 })
 
 # 275. all_minimal_st_separators_impl
@@ -4479,7 +4439,7 @@ test_that("all_minimal_st_separators_impl basic", {
 test_that("all_minimal_st_separators_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, all_minimal_st_separators_impl(NULL))
+  expect_snapshot_igraph_error(all_minimal_st_separators_impl(NULL))
 })
 
 # 276. minimum_size_separators_impl
@@ -4494,7 +4454,7 @@ test_that("minimum_size_separators_impl basic", {
 test_that("minimum_size_separators_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, minimum_size_separators_impl(NULL))
+  expect_snapshot_igraph_error(minimum_size_separators_impl(NULL))
 })
 
 # 277. isoclass_impl
@@ -4509,7 +4469,7 @@ test_that("isoclass_impl basic", {
 test_that("isoclass_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isoclass_impl(NULL))
+  expect_snapshot_igraph_error(isoclass_impl(NULL))
 })
 
 # 278. isomorphic_impl
@@ -4525,7 +4485,7 @@ test_that("isomorphic_impl basic", {
 test_that("isomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isomorphic_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(isomorphic_impl(NULL, path_graph_impl(3)))
 })
 
 # 279. isoclass_subgraph_impl
@@ -4540,7 +4500,7 @@ test_that("isoclass_subgraph_impl basic", {
 test_that("isoclass_subgraph_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isoclass_subgraph_impl(NULL, 1:2))
+  expect_snapshot_igraph_error(isoclass_subgraph_impl(NULL, 1:2))
 })
 
 # 280. isoclass_create_impl
@@ -4555,7 +4515,7 @@ test_that("isoclass_create_impl basic", {
 test_that("isoclass_create_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isoclass_create_impl("a", 1))
+  expect_snapshot_igraph_error(isoclass_create_impl("a", 1))
 })
 
 # 281. isomorphic_vf2_impl
@@ -4579,7 +4539,7 @@ test_that("isomorphic_vf2_impl basic", {
 test_that("isomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isomorphic_vf2_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(isomorphic_vf2_impl(NULL, path_graph_impl(3)))
 })
 
 # 282. get_isomorphisms_vf2_callback_impl
@@ -4606,8 +4566,7 @@ test_that("count_isomorphisms_vf2_impl basic", {
 test_that("count_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     count_isomorphisms_vf2_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4633,8 +4592,7 @@ test_that("get_isomorphisms_vf2_impl basic", {
 test_that("get_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     get_isomorphisms_vf2_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4652,7 +4610,7 @@ test_that("subisomorphic_impl basic", {
 test_that("subisomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, subisomorphic_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(subisomorphic_impl(NULL, path_graph_impl(3)))
 })
 
 # 286. subisomorphic_vf2_impl
@@ -4676,8 +4634,7 @@ test_that("subisomorphic_vf2_impl basic", {
 test_that("subisomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     subisomorphic_vf2_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4703,8 +4660,7 @@ test_that("count_subisomorphisms_vf2_impl basic", {
 test_that("count_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     count_subisomorphisms_vf2_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4730,8 +4686,7 @@ test_that("get_subisomorphisms_vf2_impl basic", {
 test_that("get_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     get_subisomorphisms_vf2_impl(NULL, path_graph_impl(3))
   )
 })
@@ -4749,7 +4704,7 @@ test_that("canonical_permutation_impl basic", {
 test_that("canonical_permutation_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, canonical_permutation_impl(NULL))
+  expect_snapshot_igraph_error(canonical_permutation_impl(NULL))
 })
 
 # 290. permute_vertices_impl
@@ -4764,7 +4719,7 @@ test_that("permute_vertices_impl basic", {
 test_that("permute_vertices_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, permute_vertices_impl(NULL, permutation = 3:1))
+  expect_snapshot_igraph_error(permute_vertices_impl(NULL, permutation = 3:1))
 })
 
 # 291. isomorphic_bliss_impl
@@ -4787,7 +4742,7 @@ test_that("isomorphic_bliss_impl basic", {
 test_that("isomorphic_bliss_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, isomorphic_bliss_impl(NULL, path_graph_impl(3)))
+  expect_snapshot_igraph_error(isomorphic_bliss_impl(NULL, path_graph_impl(3)))
 })
 
 # 292. count_automorphisms_impl
@@ -4803,7 +4758,7 @@ test_that("count_automorphisms_impl basic", {
 test_that("count_automorphisms_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, count_automorphisms_impl(NULL))
+  expect_snapshot_igraph_error(count_automorphisms_impl(NULL))
 })
 
 # 293. automorphism_group_impl
@@ -4824,7 +4779,7 @@ test_that("automorphism_group_impl basic", {
 test_that("automorphism_group_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, automorphism_group_impl(NULL))
+  expect_snapshot_igraph_error(automorphism_group_impl(NULL))
 })
 
 # 294. simplify_and_colorize_impl
@@ -4839,7 +4794,7 @@ test_that("simplify_and_colorize_impl basic", {
 test_that("simplify_and_colorize_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, simplify_and_colorize_impl(NULL))
+  expect_snapshot_igraph_error(simplify_and_colorize_impl(NULL))
 })
 
 # 295. graph_count_impl
@@ -4854,7 +4809,7 @@ test_that("graph_count_impl basic", {
 test_that("graph_count_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, graph_count_impl("a"))
+  expect_snapshot_igraph_error(graph_count_impl("a"))
 })
 
 # 296. is_matching_impl
@@ -4874,7 +4829,7 @@ test_that("is_matching_impl basic", {
 test_that("is_matching_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_matching_impl(NULL, matching = 1:2))
+  expect_snapshot_igraph_error(is_matching_impl(NULL, matching = 1:2))
 })
 
 # 297. is_maximal_matching_impl
@@ -4894,7 +4849,7 @@ test_that("is_maximal_matching_impl basic", {
 test_that("is_maximal_matching_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_maximal_matching_impl(NULL, matching = 1:2))
+  expect_snapshot_igraph_error(is_maximal_matching_impl(NULL, matching = 1:2))
 })
 
 # 298. maximum_bipartite_matching_impl
@@ -4918,8 +4873,7 @@ test_that("maximum_bipartite_matching_impl basic", {
 test_that("maximum_bipartite_matching_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     maximum_bipartite_matching_impl(NULL, types = c(TRUE, FALSE, TRUE))
   )
 })
@@ -4945,7 +4899,7 @@ test_that("adjacency_spectral_embedding_impl basic", {
 test_that("adjacency_spectral_embedding_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, adjacency_spectral_embedding_impl(NULL, no = 2))
+  expect_snapshot_igraph_error(adjacency_spectral_embedding_impl(NULL, no = 2))
 })
 
 # 300. laplacian_spectral_embedding_impl
@@ -4969,7 +4923,7 @@ test_that("laplacian_spectral_embedding_impl basic", {
 test_that("laplacian_spectral_embedding_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, laplacian_spectral_embedding_impl(NULL, no = 2))
+  expect_snapshot_igraph_error(laplacian_spectral_embedding_impl(NULL, no = 2))
 })
 
 # 301. eigen_adjacency_impl
@@ -4979,8 +4933,7 @@ test_that("eigen_adjacency_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(eigen_adjacency_impl(g))
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     eigen_adjacency_impl(
       g,
       algorithm = "lapack",
@@ -4993,7 +4946,7 @@ test_that("eigen_adjacency_impl basic", {
 test_that("eigen_adjacency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eigen_adjacency_impl(NULL))
+  expect_snapshot_igraph_error(eigen_adjacency_impl(NULL))
 })
 
 # 302. power_law_fit_impl
@@ -5012,7 +4965,7 @@ test_that("power_law_fit_impl basic", {
 test_that("power_law_fit_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, power_law_fit_impl("a"))
+  expect_snapshot_igraph_error(power_law_fit_impl("a"))
 })
 
 # 303. sir_impl
@@ -5028,7 +4981,7 @@ test_that("sir_impl basic", {
 test_that("sir_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sir_impl(NULL, beta = 0.1, gamma = 0.1))
+  expect_snapshot_igraph_error(sir_impl(NULL, beta = 0.1, gamma = 0.1))
 })
 
 # 304. convex_hull_2d_impl
@@ -5042,7 +4995,7 @@ test_that("convex_hull_2d_impl basic", {
 test_that("convex_hull_2d_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, convex_hull_2d_impl("a"))
+  expect_snapshot_igraph_error(convex_hull_2d_impl("a"))
 })
 
 # 305. dim_select_impl
@@ -5056,7 +5009,7 @@ test_that("dim_select_impl basic", {
 test_that("dim_select_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, dim_select_impl(NULL))
+  expect_snapshot_igraph_error(dim_select_impl(NULL))
 })
 
 # 306. solve_lsap_impl
@@ -5070,7 +5023,7 @@ test_that("solve_lsap_impl basic", {
 test_that("solve_lsap_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, solve_lsap_impl("a", n = 2))
+  expect_snapshot_igraph_error(solve_lsap_impl("a", n = 2))
 })
 
 # 307. find_cycle_impl
@@ -5086,7 +5039,7 @@ test_that("find_cycle_impl basic", {
 test_that("find_cycle_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, find_cycle_impl(NULL))
+  expect_snapshot_igraph_error(find_cycle_impl(NULL))
 })
 
 # 308. simple_cycles_impl
@@ -5107,7 +5060,7 @@ test_that("simple_cycles_impl basic", {
 test_that("simple_cycles_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, simple_cycles_impl(NULL))
+  expect_snapshot_igraph_error(simple_cycles_impl(NULL))
 })
 
 # 309. is_eulerian_impl
@@ -5122,7 +5075,7 @@ test_that("is_eulerian_impl basic", {
 test_that("is_eulerian_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_eulerian_impl(NULL))
+  expect_snapshot_igraph_error(is_eulerian_impl(NULL))
 })
 
 # 310. eulerian_path_impl
@@ -5137,7 +5090,7 @@ test_that("eulerian_path_impl basic", {
 test_that("eulerian_path_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eulerian_path_impl(NULL))
+  expect_snapshot_igraph_error(eulerian_path_impl(NULL))
 })
 
 # 311. eulerian_cycle_impl
@@ -5146,7 +5099,7 @@ test_that("eulerian_cycle_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g1 <- path_graph_impl(3)
-  expect_snapshot(error = TRUE, eulerian_cycle_impl(g1))
+  expect_snapshot_igraph_error(eulerian_cycle_impl(g1))
   g2 <- cycle_graph_impl(4)
   expect_snapshot(eulerian_cycle_impl(g2))
 })
@@ -5154,7 +5107,7 @@ test_that("eulerian_cycle_impl basic", {
 test_that("eulerian_cycle_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, eulerian_cycle_impl(NULL))
+  expect_snapshot_igraph_error(eulerian_cycle_impl(NULL))
 })
 
 # 312. fundamental_cycles_impl
@@ -5175,7 +5128,7 @@ test_that("fundamental_cycles_impl basic", {
 test_that("fundamental_cycles_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, fundamental_cycles_impl(NULL, start = 1))
+  expect_snapshot_igraph_error(fundamental_cycles_impl(NULL, start = 1))
 })
 
 # 313. minimum_cycle_basis_impl
@@ -5197,7 +5150,7 @@ test_that("minimum_cycle_basis_impl basic", {
 test_that("minimum_cycle_basis_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, minimum_cycle_basis_impl(NULL))
+  expect_snapshot_igraph_error(minimum_cycle_basis_impl(NULL))
 })
 
 # 314. is_tree_impl
@@ -5213,7 +5166,7 @@ test_that("is_tree_impl basic", {
 test_that("is_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_tree_impl(NULL))
+  expect_snapshot_igraph_error(is_tree_impl(NULL))
 })
 
 # 315. is_forest_impl
@@ -5229,7 +5182,7 @@ test_that("is_forest_impl basic", {
 test_that("is_forest_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_forest_impl(NULL))
+  expect_snapshot_igraph_error(is_forest_impl(NULL))
 })
 
 # 316. from_prufer_impl
@@ -5243,7 +5196,7 @@ test_that("from_prufer_impl basic", {
 test_that("from_prufer_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, from_prufer_impl("a"))
+  expect_snapshot_igraph_error(from_prufer_impl("a"))
 })
 
 # 317. to_prufer_impl
@@ -5258,7 +5211,7 @@ test_that("to_prufer_impl basic", {
 test_that("to_prufer_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, to_prufer_impl(NULL))
+  expect_snapshot_igraph_error(to_prufer_impl(NULL))
 })
 
 # 318. tree_from_parent_vector_impl
@@ -5273,7 +5226,7 @@ test_that("tree_from_parent_vector_impl basic", {
 test_that("tree_from_parent_vector_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, tree_from_parent_vector_impl("a"))
+  expect_snapshot_igraph_error(tree_from_parent_vector_impl("a"))
 })
 
 # 319. is_complete_impl
@@ -5288,7 +5241,7 @@ test_that("is_complete_impl basic", {
 test_that("is_complete_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_complete_impl(NULL))
+  expect_snapshot_igraph_error(is_complete_impl(NULL))
 })
 
 # 320. random_spanning_tree_impl
@@ -5303,7 +5256,7 @@ test_that("random_spanning_tree_impl basic", {
 test_that("random_spanning_tree_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, random_spanning_tree_impl(NULL, vid = 1))
+  expect_snapshot_igraph_error(random_spanning_tree_impl(NULL, vid = 1))
 })
 
 # 321. tree_game_impl
@@ -5318,7 +5271,7 @@ test_that("tree_game_impl basic", {
 test_that("tree_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, tree_game_impl("a"))
+  expect_snapshot_igraph_error(tree_game_impl("a"))
 })
 
 # 322. vertex_coloring_greedy_impl
@@ -5334,7 +5287,7 @@ test_that("vertex_coloring_greedy_impl basic", {
 test_that("vertex_coloring_greedy_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, vertex_coloring_greedy_impl(NULL))
+  expect_snapshot_igraph_error(vertex_coloring_greedy_impl(NULL))
 })
 
 # 323. is_vertex_coloring_impl
@@ -5349,8 +5302,7 @@ test_that("is_vertex_coloring_impl basic", {
 test_that("is_vertex_coloring_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     is_vertex_coloring_impl(NULL, types = c(1, 2, 3))
   )
 })
@@ -5377,8 +5329,7 @@ test_that("is_bipartite_coloring_impl basic", {
 test_that("is_bipartite_coloring_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     is_bipartite_coloring_impl(NULL, types = c(TRUE, FALSE, TRUE))
   )
 })
@@ -5397,7 +5348,7 @@ test_that("is_edge_coloring_impl basic", {
 test_that("is_edge_coloring_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, is_edge_coloring_impl(NULL, types = c(1, 2)))
+  expect_snapshot_igraph_error(is_edge_coloring_impl(NULL, types = c(1, 2)))
 })
 
 # 327. deterministic_optimal_imitation_impl
@@ -5425,8 +5376,7 @@ test_that("deterministic_optimal_imitation_impl basic", {
 test_that("deterministic_optimal_imitation_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     deterministic_optimal_imitation_impl(
       NULL,
       1,
@@ -5454,8 +5404,7 @@ test_that("moran_process_impl basic", {
 test_that("moran_process_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     moran_process_impl(NULL, quantities = c(1, 2, 3), strategies = c(1, 2, 3))
   )
 })
@@ -5486,8 +5435,7 @@ test_that("roulette_wheel_imitation_impl basic", {
 test_that("roulette_wheel_imitation_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     roulette_wheel_imitation_impl(
       NULL,
       1,
@@ -5524,8 +5472,7 @@ test_that("stochastic_imitation_impl basic", {
 test_that("stochastic_imitation_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     stochastic_imitation_impl(
       NULL,
       1,
@@ -5548,7 +5495,7 @@ test_that("invalidate_cache_impl basic", {
 test_that("invalidate_cache_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, invalidate_cache_impl(NULL))
+  expect_snapshot_igraph_error(invalidate_cache_impl(NULL))
 })
 
 # 332. vertex_path_from_edge_path_impl
@@ -5573,8 +5520,7 @@ test_that("vertex_path_from_edge_path_impl basic", {
 test_that("vertex_path_from_edge_path_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(
-    error = TRUE,
+  expect_snapshot_igraph_error(
     vertex_path_from_edge_path_impl(NULL, start = 1, edge.path = c(1, 2))
   )
 })
@@ -5589,5 +5535,5 @@ test_that("version_impl basic", {
 test_that("version_impl errors", {
   withr::local_seed(12345)
   # version_impl() has no parameters, so testing with invalid arguments
-  expect_snapshot(error = TRUE, version_impl("invalid"))
+  expect_snapshot_igraph_error(version_impl("invalid"))
 })
