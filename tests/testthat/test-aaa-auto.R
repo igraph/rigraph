@@ -269,10 +269,10 @@ test_that("atlas_impl errors", {
 test_that("extended_chordal_ring_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(extended_chordal_ring_impl(5, matrix(c(1,2))))
+  expect_snapshot(extended_chordal_ring_impl(5, matrix(c(1, 2))))
   expect_snapshot(extended_chordal_ring_impl(
     5,
-    matrix(c(1,2)),
+    matrix(c(1, 2)),
     directed = TRUE
   ))
 })
@@ -280,7 +280,7 @@ test_that("extended_chordal_ring_impl basic", {
 test_that("extended_chordal_ring_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, extended_chordal_ring_impl(-1, matrix(c(1,2))))
+  expect_snapshot(error = TRUE, extended_chordal_ring_impl(-1, matrix(c(1, 2))))
 })
 
 # 19. graph_power_impl
@@ -543,7 +543,7 @@ test_that("preference_game_impl basic", {
     2,
     c(0.5, 0.5),
     FALSE,
-    matrix(c(0.5,0.5,0.5,0.5),2,2)
+    matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   ))
 })
 test_that("preference_game_impl errors", {
@@ -556,7 +556,7 @@ test_that("preference_game_impl errors", {
       2,
       c(0.5, 0.5),
       FALSE,
-      matrix(c(0.5,0.5,0.5,0.5),2,2)
+      matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
     )
   )
 })
@@ -569,8 +569,8 @@ test_that("asymmetric_preference_game_impl basic", {
     5,
     2,
     2,
-    matrix(c(0.5,0.5,0.5,0.5),2,2),
-    matrix(c(0.5,0.5,0.5,0.5),2,2)
+    matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
+    matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   ))
 })
 test_that("asymmetric_preference_game_impl errors", {
@@ -582,8 +582,8 @@ test_that("asymmetric_preference_game_impl errors", {
       -1,
       2,
       2,
-      matrix(c(0.5,0.5,0.5,0.5),2,2),
-      matrix(c(0.5,0.5,0.5,0.5),2,2)
+      matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
+      matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
     )
   )
 })
@@ -726,10 +726,10 @@ test_that("k_regular_game_impl errors", {
 test_that("sbm_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(sbm_game_impl(5, matrix(0.5,2,2), c(2, 3)))
+  expect_snapshot(sbm_game_impl(5, matrix(0.5, 2, 2), c(2, 3)))
   expect_snapshot(sbm_game_impl(
     5,
-    matrix(0.5,2,2),
+    matrix(0.5, 2, 2),
     c(2, 3),
     directed = TRUE,
     loops = TRUE
@@ -739,7 +739,7 @@ test_that("sbm_game_impl basic", {
 test_that("sbm_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, sbm_game_impl(-1, matrix(0.5,2,2), c(2, 3)))
+  expect_snapshot(error = TRUE, sbm_game_impl(-1, matrix(0.5, 2, 2), c(2, 3)))
 })
 
 # 47. hsbm_game_impl
@@ -747,13 +747,16 @@ test_that("sbm_game_impl errors", {
 test_that("hsbm_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(hsbm_game_impl(6, 2, c(0.5, 0.5), matrix(1,2,2), 0.5))
+  expect_snapshot(hsbm_game_impl(6, 2, c(0.5, 0.5), matrix(1, 2, 2), 0.5))
 })
 
 test_that("hsbm_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, hsbm_game_impl(-1, 2, 0.5, matrix(1,2,2), 0.5))
+  expect_snapshot(
+    error = TRUE,
+    hsbm_game_impl(-1, 2, 0.5, matrix(1, 2, 2), 0.5)
+  )
 })
 
 # 48. hsbm_list_game_impl
@@ -761,11 +764,20 @@ test_that("hsbm_game_impl errors", {
 test_that("hsbm_list_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  C <- matrix(c(
-    1, 3 / 4, 0,
-    3 / 4, 0, 3 / 4,
-    0, 3 / 4, 3 / 4
-  ), nrow = 3)
+  C <- matrix(
+    c(
+      1,
+      3 / 4,
+      0,
+      3 / 4,
+      0,
+      3 / 4,
+      0,
+      3 / 4,
+      3 / 4
+    ),
+    nrow = 3
+  )
   expect_snapshot(hsbm_list_game_impl(
     100,
     list(50, 50),
@@ -784,7 +796,7 @@ test_that("hsbm_list_game_impl errors", {
       -1,
       c(2, 3),
       list(0.5, 0.5),
-      list(matrix(1,2,2), matrix(1,2,2)),
+      list(matrix(1, 2, 2), matrix(1, 2, 2)),
       0.5
     )
   )
@@ -2437,7 +2449,7 @@ test_that("bipartite_projection_size_impl errors", {
 test_that("biadjacency_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  m <- matrix(c(1,0,1,0,1,1), nrow=2)
+  m <- matrix(c(1, 0, 1, 0, 1, 1), nrow = 2)
   expect_snapshot(biadjacency_impl(m))
   expect_snapshot(biadjacency_impl(
     m,
@@ -2713,7 +2725,7 @@ test_that("site_percolation_impl errors", {
 test_that("edgelist_percolation_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(edgelist_percolation_impl(matrix(c(1,2,2,3), ncol=2)))
+  expect_snapshot(edgelist_percolation_impl(matrix(c(1, 2, 2, 3), ncol = 2)))
 })
 
 test_that("edgelist_percolation_impl errors", {
@@ -3042,7 +3054,7 @@ test_that("layout_mds_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(layout_mds_impl(g))
-  expect_snapshot(layout_mds_impl(g, dist = matrix(1:9, nrow=3), dim = 3))
+  expect_snapshot(layout_mds_impl(g, dist = matrix(1:9, nrow = 3), dim = 3))
 })
 
 test_that("layout_mds_impl errors", {
@@ -3082,10 +3094,10 @@ test_that("layout_gem_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_gem_impl(g, res = matrix(0, nrow=3, ncol=2)))
+  expect_snapshot(layout_gem_impl(g, res = matrix(0, nrow = 3, ncol = 2)))
   expect_snapshot(layout_gem_impl(
     g,
-    res = matrix(0, nrow=3, ncol=2),
+    res = matrix(0, nrow = 3, ncol = 2),
     use.seed = TRUE,
     maxiter = 10,
     temp.max = 2,
@@ -3099,7 +3111,7 @@ test_that("layout_gem_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    layout_gem_impl(NULL, res = matrix(0, nrow=3, ncol=2))
+    layout_gem_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
 
@@ -3111,11 +3123,11 @@ test_that("layout_davidson_harel_impl basic", {
   g <- path_graph_impl(3)
   expect_snapshot(layout_davidson_harel_impl(
     g,
-    res = matrix(0, nrow=3, ncol=2)
+    res = matrix(0, nrow = 3, ncol = 2)
   ))
   expect_snapshot(layout_davidson_harel_impl(
     g,
-    res = matrix(0, nrow=3, ncol=2),
+    res = matrix(0, nrow = 3, ncol = 2),
     use.seed = TRUE,
     maxiter = 10,
     fineiter = 5,
@@ -3133,7 +3145,7 @@ test_that("layout_davidson_harel_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    layout_davidson_harel_impl(NULL, res = matrix(0, nrow=3, ncol=2))
+    layout_davidson_harel_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
 
@@ -3143,10 +3155,10 @@ test_that("layout_umap_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_umap_impl(g, res = matrix(0, nrow=3, ncol=2)))
+  expect_snapshot(layout_umap_impl(g, res = matrix(0, nrow = 3, ncol = 2)))
   expect_snapshot(layout_umap_impl(
     g,
-    res = matrix(0, nrow=3, ncol=2),
+    res = matrix(0, nrow = 3, ncol = 2),
     use.seed = TRUE,
     distances = 1:3,
     min.dist = 0.1,
@@ -3160,7 +3172,7 @@ test_that("layout_umap_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    layout_umap_impl(NULL, res = matrix(0, nrow=3, ncol=2))
+    layout_umap_impl(NULL, res = matrix(0, nrow = 3, ncol = 2))
   )
 })
 
@@ -3170,10 +3182,10 @@ test_that("layout_umap_3d_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_umap_3d_impl(g, res = matrix(0, nrow=3, ncol=3)))
+  expect_snapshot(layout_umap_3d_impl(g, res = matrix(0, nrow = 3, ncol = 3)))
   expect_snapshot(layout_umap_3d_impl(
     g,
-    res = matrix(0, nrow=3, ncol=3),
+    res = matrix(0, nrow = 3, ncol = 3),
     use.seed = TRUE,
     distances = 1:3,
     min.dist = 0.1,
@@ -3187,7 +3199,7 @@ test_that("layout_umap_3d_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    layout_umap_3d_impl(NULL, res = matrix(0, nrow=3, ncol=3))
+    layout_umap_3d_impl(NULL, res = matrix(0, nrow = 3, ncol = 3))
   )
 })
 
@@ -3219,7 +3231,7 @@ test_that("layout_align_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_align_impl(g, layout = matrix(0, nrow=3, ncol=2)))
+  expect_snapshot(layout_align_impl(g, layout = matrix(0, nrow = 3, ncol = 2)))
 })
 
 test_that("layout_align_impl errors", {
@@ -3227,7 +3239,7 @@ test_that("layout_align_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    layout_align_impl(NULL, layout = matrix(0, nrow=3, ncol=2))
+    layout_align_impl(NULL, layout = matrix(0, nrow = 3, ncol = 2))
   )
 })
 
@@ -3281,11 +3293,11 @@ test_that("similarity_dice_pairs_impl basic", {
   g <- path_graph_impl(4)
   expect_snapshot(similarity_dice_pairs_impl(
     g,
-    pairs = matrix(c(1,2,2,3), ncol=2)
+    pairs = matrix(c(1, 2, 2, 3), ncol = 2)
   ))
   expect_snapshot(similarity_dice_pairs_impl(
     g,
-    pairs = matrix(c(1,2,2,3), ncol=2),
+    pairs = matrix(c(1, 2, 2, 3), ncol = 2),
     mode = "in",
     loops = TRUE
   ))
@@ -3296,7 +3308,7 @@ test_that("similarity_dice_pairs_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    similarity_dice_pairs_impl(NULL, pairs = matrix(c(1,2,2,3), ncol=2))
+    similarity_dice_pairs_impl(NULL, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
   )
 })
 
@@ -3370,11 +3382,11 @@ test_that("similarity_jaccard_pairs_impl basic", {
   g <- path_graph_impl(4)
   expect_snapshot(similarity_jaccard_pairs_impl(
     g,
-    pairs = matrix(c(1,2,2,3), ncol=2)
+    pairs = matrix(c(1, 2, 2, 3), ncol = 2)
   ))
   expect_snapshot(similarity_jaccard_pairs_impl(
     g,
-    pairs = matrix(c(1,2,2,3), ncol=2),
+    pairs = matrix(c(1, 2, 2, 3), ncol = 2),
     mode = "in",
     loops = TRUE
   ))
@@ -3385,7 +3397,7 @@ test_that("similarity_jaccard_pairs_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(
     error = TRUE,
-    similarity_jaccard_pairs_impl(NULL, pairs = matrix(c(1,2,2,3), ncol=2))
+    similarity_jaccard_pairs_impl(NULL, pairs = matrix(c(1, 2, 2, 3), ncol = 2))
   )
 })
 
@@ -5042,7 +5054,7 @@ test_that("sir_impl errors", {
 test_that("convex_hull_2d_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(convex_hull_2d_impl(matrix(1:6, ncol=2)))
+  expect_snapshot(convex_hull_2d_impl(matrix(1:6, ncol = 2)))
 })
 
 test_that("convex_hull_2d_impl errors", {
@@ -5070,7 +5082,7 @@ test_that("dim_select_impl errors", {
 test_that("solve_lsap_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(solve_lsap_impl(matrix(1:4, ncol=2), n = 2))
+  expect_snapshot(solve_lsap_impl(matrix(1:4, ncol = 2), n = 2))
 })
 
 test_that("solve_lsap_impl errors", {
