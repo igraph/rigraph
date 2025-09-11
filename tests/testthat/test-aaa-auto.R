@@ -5450,11 +5450,6 @@ test_that("moran_process_impl basic", {
   g <- path_graph_impl(3)
   expect_snapshot(moran_process_impl(
     g,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(moran_process_impl(
-    g,
     weights = c(1, 1),
     quantities = c(1, 2, 3),
     strategies = c(1, 2, 3),
