@@ -4000,7 +4000,7 @@ local_scan_neighborhood_ecount_impl <- function(graph, weights=NULL, neighborhoo
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, neighborhoods)
+  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, lapply(neighborhoods, function(.x) .x-1))
 
   res
 }
@@ -4019,7 +4019,7 @@ local_scan_subset_ecount_impl <- function(graph, weights=NULL, subsets) {
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, subsets)
+  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, lapply(subsets, function(.x) .x-1))
 
   res
 }

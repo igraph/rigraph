@@ -638,6 +638,18 @@
       + edges:
       [1] 1--3 2--3 1--2
 
+---
+
+    Code
+      realize_degree_sequence_impl(c(2, 2, 2), c(2, 2, 2), allowed.edge.types = "simple",
+      method = "largest")
+    Output
+      IGRAPH D--- 3 6 -- Graph from degree sequence
+      + attr: name (g/c), out.deg (g/n), in.deg (g/n), allowed.edge.types
+      | (g/n), method (g/n)
+      + edges:
+      [1] 1->2 1->3 2->1 2->3 3->1 3->2
+
 # realize_degree_sequence_impl errors
 
     Code
@@ -6248,6 +6260,21 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# local_scan_neighborhood_ecount_impl basic
+
+    Code
+      local_scan_neighborhood_ecount_impl(g, neighborhoods = list(1:2, 2:3, 2:4, 2))
+    Output
+      [1] 1 1 2 0
+
+---
+
+    Code
+      local_scan_neighborhood_ecount_impl(g, weights = c(1, 2, 3), neighborhoods = list(
+        1:2, 1:3, 2:4, 1))
+    Output
+      [1] 1 3 5 0
+
 # local_scan_neighborhood_ecount_impl errors
 
     Code
@@ -6269,15 +6296,15 @@
       local_scan_subset_ecount_impl(g, weights = c(1, 2, 3), subsets = list(c(1, 2),
       c(2, 3)))
     Output
-      [1] 2 3
+      [1] 1 2
 
 # local_scan_subset_ecount_impl errors
 
     Code
-      local_scan_subset_ecount_impl(g, subsets = list(1:2, 2:3))
+      local_scan_subset_ecount_impl(g, subsets = list(1:2, letters[2:3]))
     Condition
-      Error in `local_scan_subset_ecount_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'integer'
+      Error in `.x - 1`:
+      ! non-numeric argument to binary operator
 
 # list_triangles_impl basic
 

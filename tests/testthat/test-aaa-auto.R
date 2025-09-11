@@ -412,7 +412,7 @@ test_that("realize_degree_sequence_impl basic", {
   expect_snapshot(realize_degree_sequence_impl(
     c(2, 2, 2),
     c(2, 2, 2),
-    allowed.edge.types = "multiple",
+    allowed.edge.types = "simple",
     method = "largest"
   ))
 })
@@ -4150,12 +4150,12 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
   g <- path_graph_impl(4)
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
-    neighborhoods = list(1.0)
+    neighborhoods = list(1:2, 2:3, 2:4, 2)
   ))
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
     weights = c(1, 2, 3),
-    neighborhoods = list(as.numeric(1:2), as.numeric(2:3))
+    neighborhoods = list(1:2, 1:3, 2:4, 1)
   ))
 })
 
@@ -4191,7 +4191,7 @@ test_that("local_scan_subset_ecount_impl errors", {
   g <- path_graph_impl(4)
   expect_snapshot(
     error = TRUE,
-    local_scan_subset_ecount_impl(g, subsets = list(1:2, 2:3))
+    local_scan_subset_ecount_impl(g, subsets = list(1:2, letters[2:3]))
   )
 })
 
