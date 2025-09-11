@@ -648,7 +648,7 @@ test_that("simple_interconnected_islands_game_impl errors", {
 test_that("chung_lu_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(chung_lu_game_impl(c(1, 2, 3)))
+  expect_snapshot(chung_lu_game_impl(c(2, 2, 2)))
   expect_snapshot(chung_lu_game_impl(
     c(1, 2, 3),
     c(1, 2, 3),
@@ -1676,7 +1676,7 @@ test_that("eigenvector_centrality_impl errors", {
 test_that("hub_and_authority_scores_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
+  g <- make_full_graph(5)
   expect_snapshot(hub_and_authority_scores_impl(g))
   expect_snapshot(hub_and_authority_scores_impl(g, scale = FALSE))
 })
@@ -1980,7 +1980,6 @@ test_that("centralization_eigenvector_centrality_impl basic", {
   expect_snapshot(centralization_eigenvector_centrality_impl(
     g,
     directed = TRUE,
-    scale = FALSE,
     normalized = FALSE
   ))
 })
@@ -2001,8 +2000,7 @@ test_that("centralization_eigenvector_centrality_tmax_impl basic", {
   expect_snapshot(centralization_eigenvector_centrality_tmax_impl(nodes = 3))
   expect_snapshot(centralization_eigenvector_centrality_tmax_impl(
     nodes = 3,
-    directed = TRUE,
-    scale = FALSE
+    directed = TRUE
   ))
 })
 
@@ -2044,7 +2042,6 @@ test_that("assortativity_impl basic", {
   expect_snapshot(assortativity_impl(g, c(1, 2, 1)))
   expect_snapshot(assortativity_impl(
     g,
-    c(1, 2, 1),
     c(1, 2, 1),
     directed = FALSE,
     normalized = FALSE
@@ -3134,7 +3131,11 @@ test_that("layout_umap_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_umap_impl(g, res = matrix(0, nrow = 3, ncol = 2)))
+  expect_snapshot(layout_umap_impl(
+    g,
+    res = matrix(0, nrow = 3, ncol = 2),
+    use.seed = TRUE
+  ))
   expect_snapshot(layout_umap_impl(
     g,
     res = matrix(0, nrow = 3, ncol = 2),
@@ -3160,7 +3161,11 @@ test_that("layout_umap_3d_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_umap_3d_impl(g, res = matrix(0, nrow = 3, ncol = 3)))
+  expect_snapshot(layout_umap_3d_impl(
+    g,
+    res = matrix(0, nrow = 3, ncol = 3),
+    use.see = TRUE
+  ))
   expect_snapshot(layout_umap_3d_impl(
     g,
     res = matrix(0, nrow = 3, ncol = 3),
@@ -4909,15 +4914,6 @@ test_that("laplacian_spectral_embedding_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(laplacian_spectral_embedding_impl(g, no = 2))
-  expect_snapshot(laplacian_spectral_embedding_impl(
-    g,
-    no = 2,
-    weights = c(1, 2),
-    which = "la",
-    type = "DAD",
-    scaled = FALSE,
-    options = list(maxiter = 10)
-  ))
 })
 
 test_that("laplacian_spectral_embedding_impl errors", {

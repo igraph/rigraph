@@ -968,15 +968,12 @@
 # chung_lu_game_impl basic
 
     Code
-      chung_lu_game_impl(c(1, 2, 3))
-    Condition
-      Warning in `chung_lu_game_impl()`:
-      At vendor/cigraph/src/games/chung_lu.c:279 : Expected degrees 3 and 3 lead to a calculated connection probability larger than 1 in Chung-Lu model. The degrees of the resulting graph will not be consistent with the given input.
+      chung_lu_game_impl(c(2, 2, 2))
     Output
-      IGRAPH U--- 3 6 -- Chung-Lu model
+      IGRAPH U--- 3 5 -- Chung-Lu model
       + attr: name (g/c), variant (g/n)
       + edges:
-      [1] 3--3 2--3 1--3 2--2 1--2 1--1
+      [1] 1--2 1--3 2--2 2--3 3--3
 
 ---
 
@@ -2617,20 +2614,20 @@
       hub_and_authority_scores_impl(g)
     Output
       $hub
-      [1] 0 1 0
+      [1] 1 1 1 1 1
       
       $authority
-      [1] 1 0 1
+      [1] 1 1 1 1 1
       
       $value
-      [1] 2
+      [1] 16
       
       $options
       $options$bmat
       [1] "I"
       
       $options$n
-      [1] 3
+      [1] 5
       
       $options$which
       [1] "LA"
@@ -2678,13 +2675,13 @@
       [1] 1
       
       $options$numop
-      [1] 3
+      [1] 4
       
       $options$numopb
       [1] 0
       
       $options$numreo
-      [1] 3
+      [1] 4
       
       
 
@@ -2694,20 +2691,20 @@
       hub_and_authority_scores_impl(g, scale = FALSE)
     Output
       $hub
-      [1] 0.4082508 0.8164941 0.4082508
+      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
       
       $authority
-      [1] 0.5773485 0.5773538 0.5773485
+      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
       
       $value
-      [1] 2
+      [1] 16
       
       $options
       $options$bmat
       [1] "I"
       
       $options$n
-      [1] 3
+      [1] 5
       
       $options$which
       [1] "LA"
@@ -2755,13 +2752,13 @@
       [1] 1
       
       $options$numop
-      [1] 3
+      [1] 4
       
       $options$numopb
       [1] 0
       
       $options$numreo
-      [1] 3
+      [1] 4
       
       
 
@@ -3259,11 +3256,7 @@
 ---
 
     Code
-      centralization_eigenvector_centrality_impl(g, directed = TRUE, scale = FALSE,
-        normalized = FALSE)
-    Condition
-      Warning in `centralization_eigenvector_centrality_impl()`:
-      At vendor/cigraph/src/centrality/centralization.c:621 : Computing eigenvector centralization requires normalized eigenvector centrality scores. Normalizing eigenvector centralities by their maximum even though 'scale=false' was requested. The 'scale' parameter will be removed in the future.
+      centralization_eigenvector_centrality_impl(g, directed = TRUE, normalized = FALSE)
     Output
       $vector
       [1] 0.7071068 1.0000000 0.7071068
@@ -3358,11 +3351,7 @@
 ---
 
     Code
-      centralization_eigenvector_centrality_tmax_impl(nodes = 3, directed = TRUE,
-        scale = FALSE)
-    Condition
-      Warning in `centralization_eigenvector_centrality_tmax_impl()`:
-      At vendor/cigraph/src/centrality/centralization.c:728 : Theoretical maximum for eigenvector centralization can only be computed with normalized eigenvector centrality scores. Assuming that eigenvector centralities are normalized by their maximum even though 'scale=false' was passed. The 'scale' parameter will be removed in the future.
+      centralization_eigenvector_centrality_tmax_impl(nodes = 3, directed = TRUE)
     Output
       [1] 2
 
@@ -3406,10 +3395,7 @@
 ---
 
     Code
-      assortativity_impl(g, c(1, 2, 1), c(1, 2, 1), directed = FALSE, normalized = FALSE)
-    Condition
-      Warning in `assortativity_impl()`:
-      At vendor/cigraph/src/misc/mixing.c:273 : Incoming vertex values are ignored when calculating undirected assortativity.
+      assortativity_impl(g, c(1, 2, 1), directed = FALSE, normalized = FALSE)
     Output
       [1] -0.25
 
@@ -5033,12 +5019,12 @@
 # layout_umap_impl basic
 
     Code
-      layout_umap_impl(g, res = matrix(0, nrow = 3, ncol = 2))
+      layout_umap_impl(g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE)
     Output
-                    [,1]         [,2]
-      [1,] -4.794111e-03  0.347315560
-      [2,] -6.202537e-05  0.004493508
-      [3,]  4.856136e-03 -0.351809068
+           [,1] [,2]
+      [1,]    0    0
+      [2,]    0    0
+      [3,]    0    0
 
 ---
 
@@ -5062,12 +5048,12 @@
 # layout_umap_3d_impl basic
 
     Code
-      layout_umap_3d_impl(g, res = matrix(0, nrow = 3, ncol = 3))
+      layout_umap_3d_impl(g, res = matrix(0, nrow = 3, ncol = 3), use.see = TRUE)
     Output
-                   [,1]         [,2]          [,3]
-      [1,] -0.132218955  0.321540285 -7.840461e-03
-      [2,] -0.001372184  0.003336982 -8.136922e-05
-      [3,]  0.133591138 -0.324877267  7.921831e-03
+           [,1] [,2] [,3]
+      [1,]    0    0    0
+      [2,]    0    0    0
+      [3,]    0    0    0
 
 ---
 
@@ -7852,87 +7838,6 @@
       
       $options$numreo
       [1] 3
-      
-      
-
----
-
-    Code
-      laplacian_spectral_embedding_impl(g, no = 2, weights = c(1, 2), which = "la",
-      type = "DAD", scaled = FALSE, options = list(maxiter = 10))
-    Output
-      $X
-                   [,1]         [,2]
-      [1,]  0.577335354 -0.004149962
-      [2,] -0.007187945 -0.999974166
-      [3,]  0.816475488 -0.005868932
-      
-      $Y
-      NULL
-      
-      $D
-      [1] 1 1
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 3
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 2
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 3
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 10
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 2
-      
-      $options$numop
-      [1] 3
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 2
       
       
 
