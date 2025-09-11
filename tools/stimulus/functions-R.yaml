@@ -524,7 +524,7 @@ igraph_create_bipartite:
     IGNORE: RR
 
 igraph_biadjacency:
-    DEPS: types ON graph V(graph)
+    DEPS: types ON res$graph V(res$graph)
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:

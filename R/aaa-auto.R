@@ -2576,8 +2576,8 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
