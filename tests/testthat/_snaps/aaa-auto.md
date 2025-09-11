@@ -6233,6 +6233,40 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# induced_subgraph_map_impl basic
+
+    Code
+      induced_subgraph_map_impl(g, 1:2, impl = "auto")
+    Output
+      $res
+      IGRAPH U--- 2 1 -- 
+      + edge:
+      [1] 1--2
+      
+      $map
+      [1] 2 3 1
+      
+      $invmap
+      [1] 1 2
+      
+
+---
+
+    Code
+      induced_subgraph_map_impl(g, 1:2, impl = "copy_and_delete")
+    Output
+      $res
+      IGRAPH U--- 2 1 -- 
+      + edge:
+      [1] 1--2
+      
+      $map
+      [1] 2 3 1
+      
+      $invmap
+      [1] 1 2
+      
+
 # induced_subgraph_map_impl errors
 
     Code
@@ -9912,6 +9946,19 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# moran_process_impl basic
+
+    Code
+      moran_process_impl(g, weights = c(1, 1), quantities = c(1, 2, 3), strategies = c(
+        1, 2, 3), mode = "in")
+    Output
+      $quantities
+      [1] 1 3 3
+      
+      $strategies
+      [1] 1 3 3
+      
 
 # moran_process_impl errors
 
