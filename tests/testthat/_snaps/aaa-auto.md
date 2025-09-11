@@ -6779,6 +6779,13 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# isoclass_subgraph_impl basic
+
+    Code
+      isoclass_subgraph_impl(g, c(1, 2, 3))
+    Output
+      [1] 2
+
 # isoclass_subgraph_impl errors
 
     Code

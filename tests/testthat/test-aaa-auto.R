@@ -5562,8 +5562,8 @@ test_that("isoclass_subgraph_impl basic", {
   withr::local_seed(20250909)
   oldval <- igraph_opt("print.id")
   igraph_options(print.id = FALSE)
-  g <- path_graph_impl(4)
-  expect_snapshot(isoclass_subgraph_impl(g, 1))
+  g <- path_graph_impl(5)
+  expect_snapshot(isoclass_subgraph_impl(g, c(1,2,3)))
   igraph_options(print.id = oldval)
 })
 
