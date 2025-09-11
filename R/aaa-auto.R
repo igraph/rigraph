@@ -333,9 +333,7 @@ full_bipartite_impl <- function(n1, n2, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_bipartite, n1, n2, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name")
-  }
+
   res
 }
 

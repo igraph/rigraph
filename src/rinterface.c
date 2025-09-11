@@ -912,18 +912,14 @@ SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
 SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_bool_t c_types;
   igraph_integer_t c_n1;
   igraph_integer_t c_n2;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
   SEXP graph;
-  SEXP types;
 
-  SEXP r_result, r_names;
+  SEXP r_result;
                                         /* Convert input */
-  IGRAPH_R_CHECK(igraph_vector_bool_init(&c_types, 0));
-  IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
   IGRAPH_R_CHECK_INT(n1);
   c_n1 = (igraph_integer_t) REAL(n1)[0];
   IGRAPH_R_CHECK_INT(n2);
@@ -932,24 +928,14 @@ SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_full_bipartite(&c_graph, &c_types, c_n1, c_n2, c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_full_bipartite(&c_graph, c_n1, c_n2, c_directed, c_mode));
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(types=R_igraph_vector_bool_to_SEXP(&c_types));
-  igraph_vector_bool_destroy(&c_types);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, graph);
-  SET_VECTOR_ELT(r_result, 1, types);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("types"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
