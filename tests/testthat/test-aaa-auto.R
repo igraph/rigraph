@@ -1857,7 +1857,7 @@ test_that("centralization_impl basic", {
 test_that("centralization_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot(error = TRUE, centralization_impl("a"))
+  expect_snapshot(error = TRUE, centralization_impl(package_version("1.2.3")))
 })
 
 # 135. centralization_degree_impl
