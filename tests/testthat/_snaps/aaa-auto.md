@@ -10078,20 +10078,9 @@
 # version_impl basic
 
     Code
-      version_impl()
+      version_impl_clean()
     Output
-      $version_string
-      [1] "0.10.16-153-g9c5eb40bf"
-      
-      $major
-      [1] 0
-      
-      $minor
-      [1] 10
-      
-      $subminor
-      [1] 16
-      
+      [1] "0.10.16"
 
 # version_impl errors
 

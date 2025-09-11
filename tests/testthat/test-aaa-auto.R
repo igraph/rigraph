@@ -5525,7 +5525,11 @@ test_that("vertex_path_from_edge_path_impl errors", {
 
 test_that("version_impl basic", {
   withr::local_seed(12345)
-  expect_snapshot(version_impl())
+  version_impl_clean <- function() {
+    v <- version_impl()
+    paste(v$major, v$minor, v$subminor, sep = ".")
+  }
+  expect_snapshot(version_impl_clean())
 })
 
 test_that("version_impl errors", {
