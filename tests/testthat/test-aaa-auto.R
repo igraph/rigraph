@@ -2914,8 +2914,8 @@ test_that("layout_star_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(layout_star_impl(g))
-  expect_snapshot(layout_star_impl(g, center = 1, order = 1:3))
+  expect_snapshot(round(layout_star_impl(g), 4))
+  expect_snapshot(round(layout_star_impl(g, center = 1, order = 3:1), 4))
 })
 
 test_that("layout_star_impl errors", {
