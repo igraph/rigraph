@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.99.9904
+
+## tests
+
+- Add tests for aaa-auto.R (#2129).
+
+## vendor
+
+- Update vendored sources to igraph/igraph@0630ac8e5a6076942ce77e20567f35295600951f (#2134).
+
+
 # igraph 2.1.99.9903
 
 ## vendor
