@@ -4717,22 +4717,22 @@
 # layout_star_impl basic
 
     Code
-      layout_star_impl(g)
+      round(layout_star_impl(g), 4)
     Output
-           [,1]         [,2]
-      [1,]    0 0.000000e+00
-      [2,]    1 0.000000e+00
-      [3,]   -1 1.224647e-16
+           [,1] [,2]
+      [1,]    0    0
+      [2,]    1    0
+      [3,]   -1    0
 
 ---
 
     Code
-      layout_star_impl(g, center = 1, order = 1:3)
+      round(layout_star_impl(g, center = 1, order = 3:1), 4)
     Output
-           [,1]         [,2]
-      [1,]    0 0.000000e+00
-      [2,]    1 0.000000e+00
-      [3,]   -1 1.224647e-16
+           [,1] [,2]
+      [1,]    0    0
+      [2,]   -1    0
+      [3,]    1    0
 
 # layout_star_impl errors
 
