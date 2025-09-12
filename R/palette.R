@@ -281,5 +281,5 @@ r_pal <- function(n) {
     cli::cli_warn("Cannot make {n} divergent colors.")
   }
   n <- min(n, length(x))
-  if (n == 0) character() else x[[n]]
+  x[seq_len(n)]
 }
