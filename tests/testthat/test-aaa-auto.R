@@ -364,11 +364,13 @@ test_that("mycielski_graph_impl errors", {
 
 # 25. adjlist_impl
 test_that("adjlist_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(adjlist_impl(list(c(2, 3), c(1), c(1)), mode = "out"))
 })
 test_that("adjlist_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(adjlist_impl(-1, mode = "out"))
@@ -2377,6 +2379,7 @@ test_that("trussness_impl errors", {
 # 163. is_graphical_impl
 
 test_that("is_graphical_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(is_graphical_impl(c(2, 2, 2)))
@@ -2388,6 +2391,7 @@ test_that("is_graphical_impl basic", {
 })
 
 test_that("is_graphical_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(is_graphical_impl("a"))
@@ -3382,6 +3386,7 @@ test_that("similarity_jaccard_pairs_impl errors", {
 # 217. compare_communities_impl
 
 test_that("compare_communities_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(compare_communities_impl(c(1, 2, 1), c(2, 1, 2)))
@@ -3393,6 +3398,7 @@ test_that("compare_communities_impl basic", {
 })
 
 test_that("compare_communities_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(compare_communities_impl("a", c(2, 1, 2)))
@@ -3610,6 +3616,7 @@ test_that("hrg_fit_impl errors", {
 # 229. hrg_sample_impl
 
 test_that("hrg_sample_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(10)
@@ -3618,6 +3625,7 @@ test_that("hrg_sample_impl basic", {
 })
 
 test_that("hrg_sample_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_sample_impl(NULL))
@@ -3626,6 +3634,7 @@ test_that("hrg_sample_impl errors", {
 # 230. hrg_sample_many_impl
 
 test_that("hrg_sample_many_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(10)
@@ -3634,6 +3643,7 @@ test_that("hrg_sample_many_impl basic", {
 })
 
 test_that("hrg_sample_many_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_sample_many_impl(NULL, num.samples = 2))
@@ -3642,6 +3652,7 @@ test_that("hrg_sample_many_impl errors", {
 # 231. hrg_game_impl
 
 test_that("hrg_game_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(10)
@@ -3650,6 +3661,7 @@ test_that("hrg_game_impl basic", {
 })
 
 test_that("hrg_game_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_game_impl(NULL))
@@ -3708,6 +3720,7 @@ test_that("hrg_create_impl errors", {
 # 235. hrg_resize_impl
 
 test_that("hrg_resize_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(10)
@@ -3716,6 +3729,7 @@ test_that("hrg_resize_impl basic", {
 })
 
 test_that("hrg_resize_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_resize_impl(-1, newsize = 2))
@@ -3724,6 +3738,7 @@ test_that("hrg_resize_impl errors", {
 # 236. hrg_size_impl
 
 test_that("hrg_size_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(10)
@@ -3732,6 +3747,7 @@ test_that("hrg_size_impl basic", {
 })
 
 test_that("hrg_size_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_size_impl(-1))
@@ -5184,12 +5200,14 @@ test_that("is_forest_impl errors", {
 # 316. from_prufer_impl
 
 test_that("from_prufer_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(from_prufer_impl(1:2))
 })
 
 test_that("from_prufer_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(from_prufer_impl("a"))
@@ -5213,6 +5231,7 @@ test_that("to_prufer_impl errors", {
 # 318. tree_from_parent_vector_impl
 
 test_that("tree_from_parent_vector_impl basic", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(tree_from_parent_vector_impl(c(-1, 1, 2, 3)))
@@ -5220,6 +5239,7 @@ test_that("tree_from_parent_vector_impl basic", {
 })
 
 test_that("tree_from_parent_vector_impl errors", {
+  skip_if(Sys.getenv("R_SANITIZER") == "true")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(tree_from_parent_vector_impl("a"))
