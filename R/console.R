@@ -1,3 +1,4 @@
+#nocov start
 #' The igraph console
 #'
 #' @description
@@ -330,3 +331,4 @@ close.igraphconsole <- function(con, ...) {
   pb <- list(widget = pBar, get = get, set = set, label = .lab)
   list(frame = frame, pb = pb)
 }
+#nocov end
