@@ -349,20 +349,13 @@ ecount <- gsize
 #' intersection(n1, n34)
 neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
-  if (is.character(mode)) {
-    mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
-  }
+  mode <- igraph.match.arg(mode)
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_neighbors, graph, v - 1, as.numeric(mode)) + 1L
 
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
+  res <- neighbors_impl(graph, vid = v, mode = mode)
 
   res
 }
