@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.99.9905
+
+## Bug fixes
+
+- Prevent memory leak.
+
+## Chore
+
+- Added more nocov (#2142).
+
+- Add nocov to `tkplot.R` (#2141).
+
+## Testing
+
+- Skip sanitizer checks with memory leaks.
+
+- Stabilize tests on Windows.
+
+- Added tests for `palette.R` (#2140).
+
+- Added tests for `plot.shapes.R` (#2139).
+
+
 # igraph 2.1.99.9904
 
 ## tests
