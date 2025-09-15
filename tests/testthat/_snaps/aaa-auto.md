@@ -636,7 +636,7 @@
       + attr: name (g/c), out.deg (g/n), in.deg (g/x), allowed.edge.types
       | (g/n), method (g/n)
       + edges:
-      [1] 1--3 2--3 1--2
+      [1] 2--3 1--3 1--2
 
 ---
 
