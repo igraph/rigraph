@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.99.9907
+
+## vendor
+
+- Update vendored sources to igraph/igraph@57dbe29d11d68f6ec7fe7cfb9524ac31dd3efa12 (#2147).
+
+
 # igraph 2.1.99.9906
 
 ## vendor
