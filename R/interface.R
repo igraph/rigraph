@@ -388,16 +388,15 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
   if (is_directed(graph)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   } else {
-    mode <- 1
+    mode <- "out"
   }
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
+
+  res <- incident_impl(graph, vid = v, mode = mode)
 
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -687,20 +686,16 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
 
-  vv <- as_igraph_vs(graph, v) - 1
-  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  vv <- as_igraph_vs(graph, v)
 
-  on.exit(.Call(R_igraph_finalizer))
-
-  res <- .Call(R_igraph_incident_edges, graph, vv, mode)
-  res <- lapply(res, `+`, 1)
+  res <- incident_impl(graph, vid = vv, mode = mode)
 
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
   }
 
   if (is_named(graph)) {
-    names(res) <- V(graph)$name[vv + 1]
+    names(res) <- V(graph)$name[vv]
   }
 
   res
