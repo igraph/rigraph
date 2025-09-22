@@ -293,7 +293,11 @@ eccentricity <- function(
     }
   }
 
-  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- as.numeric(E(graph)$weight)
+  }
+
+  eccentricity_impl(graph, vids = vids, weights = weights, mode = mode)
 }
 
 
@@ -347,7 +351,11 @@ radius <- function(
     }
   }
 
-  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- as.numeric(E(graph)$weight)
+  }
+
+  radius_impl(graph, weights = weights, mode = mode)
 }
 
 #' Central vertices of a graph
