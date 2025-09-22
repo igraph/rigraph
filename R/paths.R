@@ -293,10 +293,6 @@ eccentricity <- function(
     }
   }
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- as.numeric(E(graph)$weight)
-  }
-
   eccentricity_impl(graph, vids = vids, weights = weights, mode = mode)
 }
 
@@ -349,10 +345,6 @@ radius <- function(
     if (missing(mode) && length(dots) > 0) {
       mode <- dots[[1]]
     }
-  }
-
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- as.numeric(E(graph)$weight)
   }
 
   radius_impl(graph, weights = weights, mode = mode)

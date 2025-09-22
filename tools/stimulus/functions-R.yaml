@@ -246,8 +246,6 @@ igraph_are_connected:
 # Structural properties
 #######################################
 
-igraph_diameter:
-
 igraph_distances:
     IGNORE: RR, RC
 
@@ -449,7 +447,7 @@ igraph_contract_vertices:
 
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
+    DEPS: start_vid ON graph, weights ON graph
 
 igraph_diversity:
 
