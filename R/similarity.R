@@ -26,7 +26,9 @@
 #' 25(3):211-230, 2003.
 #'
 #' @param graph The input graph.
-#' @param vids The vertex ids for which the similarity is calculated.
+#' @param vids lifecycle::badge("deprecated")
+#' @param vids_from The vertex ids from which the similarity is calculated.
+#' @param vids_to The vertex ids to which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
 #'   \sQuote{`all`}.
@@ -52,7 +54,7 @@
 #' similarity(g, method = "jaccard")
 similarity <- function(
   graph,
-  vids = V(graph),
+  vids = deprecated(),
   mode = c(
     "all",
     "out",
@@ -64,16 +66,46 @@ similarity <- function(
     "jaccard",
     "dice",
     "invlogweighted"
-  )
+  ),
+  vids_from = V(graph),
+  vids_to = V(graph)
 ) {
-  method <- igraph.match.arg(method)
-  if (method == "jaccard") {
-    similarity_jaccard_impl(graph, vids, mode, loops)
-  } else if (method == "dice") {
-    similarity_dice_impl(graph, vids, mode, loops)
-  } else if (method == "invlogweighted") {
-    similarity_inverse_log_weighted_impl(graph, vids, mode)
+  if (lifecycle::is_present(vids)) {
+    lifecycle::deprecate_soft(
+      "similarity(vids =)",
+      I("similarity(vids_from =, vids_to =)"),
+      when = "3.0.0"
+    )
+    if (!lifecycle::is_present(vids_from)) {
+      vids_from <- vids
+    }
   }
+
+  method <- igraph.match.arg(method)
+
+  switch(
+    method,
+    jaccard = similarity_jaccard_impl(
+      graph,
+      vit.from = vids_from,
+      vit.to = vids_to,
+      mode = mode,
+      loops = loops
+    ),
+    dice = similarity_dice_impl(
+      graph,
+      vit.from = vids_from,
+      vit.to = vids_to,
+      mode = mode,
+      loops = loops
+    ),
+    invlogweighted = similarity_inverse_log_weighted_impl(
+      graph,
+      vit.from = vids_from,
+      vit.to = vids_to,
+      mode = mode
+    )
+  )
 }
 
 #' Similarity measures of two vertices (Jaccard)
@@ -83,6 +115,7 @@ similarity <- function(
 #'
 #' Please use [similarity()] with `method = "jaccard"` instead.
 #' @inheritParams similarity
+#' @param vids The vertex ids for which the similarity is calculated.
 #' @keywords internal
 #' @export
 similarity.jaccard <- function(
@@ -114,6 +147,7 @@ similarity.jaccard <- function(
 #'
 #' Please use [similarity()] with `method = "dice"` instead.
 #' @inheritParams similarity
+#' @param vids The vertex ids for which the similarity is calculated.
 #' @keywords internal
 #' @export
 similarity.dice <- function(
@@ -145,6 +179,7 @@ similarity.dice <- function(
 #'
 #' Please use [similarity()] with `method = "invlogweighted"` instead.
 #' @inheritParams similarity
+#' @param vids The vertex ids for which the similarity is calculated.
 #' @keywords internal
 #' @export
 similarity.invlogweighted <- function(
