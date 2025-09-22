@@ -107,6 +107,7 @@ igraph_get_all_eids_between:
 
 igraph_incident:
     PARAMS: GRAPH graph, OUT EDGE_INDICES eids, VERTEX vid, NEIMODE mode=ALL, LOOPS loops=TWICE
+    DEPS: eids ON graph, vid ON graph
     FLAGS: no_rng
 
 igraph_is_same_graph:
