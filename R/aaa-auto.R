@@ -2275,6 +2275,18 @@ graph_center_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "t
   res
 }
 
+radius_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_radius, graph, weights, mode)
+
+  res
+}
+
 pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
