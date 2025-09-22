@@ -5531,6 +5531,38 @@ SEXP R_igraph_graph_center(SEXP graph, SEXP weights, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_radius                              /
+/-------------------------------------------*/
+SEXP R_igraph_radius(SEXP graph, SEXP weights, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_real_t c_radius;
+  igraph_neimode_t c_mode;
+  SEXP radius;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_radius(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_radius, c_mode));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(radius=NEW_NUMERIC(1));
+  REAL(radius)[0]=c_radius;
+  r_result = radius;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_pseudo_diameter                     /
 /-------------------------------------------*/
 SEXP R_igraph_pseudo_diameter(SEXP graph, SEXP weights, SEXP start_vid, SEXP directed, SEXP unconnected) {
