@@ -151,22 +151,14 @@ dyad.census <- function(graph) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 motifs <- function(graph, size = 3, cut.prob = NULL) {
-  ensure_igraph(graph)
-
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_motifs_randesu,
+  res <- motifs_randesu_impl(
     graph,
-    as.numeric(size),
-    cut.prob
+    size = size,
+    cut.prob = cut.prob
   )
   res[is.nan(res)] <- NA
   res
