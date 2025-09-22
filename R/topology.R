@@ -1129,7 +1129,7 @@ graph.isomorphic <- isomorphic_impl
 #' @family graph automorphism
 #' @export
 #' @cdocs igraph_count_automorphisms
-count_automorphisms <- count_automorphisms_impl
+count_automorphisms <- count_automorphisms_bliss_impl
 
 
 #' Generating set of the automorphism group of a graph
