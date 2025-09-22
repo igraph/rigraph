@@ -200,20 +200,14 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
 count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_no,
+  motifs_randesu_no_impl(
     graph,
-    as.numeric(size),
-    cut.prob
+    size = size,
+    cut.prob = cut.prob
   )
 }
 
