@@ -10080,7 +10080,7 @@
     Code
       version_impl_clean()
     Output
-      [1] "0.10.16"
+      [1] "0.10.17"
 
 # version_impl errors
 
