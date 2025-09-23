@@ -1,10 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.1.99.9908
-
-## Testing
-
-- Tweak tests.
+# igraph 2.2.0
 
 ## vendor
 
@@ -26,84 +22,17 @@
 
 - Update vendored sources to igraph/igraph@cb33cd7c27b7b430118aa554dc51baa09f9f2939 (#2148).
 
-## Uncategorized
-
-- Vendor: Update vendored sources to igraph/igraph@ccbbe37333b62ff01facd9c190deb93fb26e60af.
-
-
-# igraph 2.1.99.9907
-
-## vendor
-
 - Update vendored sources to igraph/igraph@57dbe29d11d68f6ec7fe7cfb9524ac31dd3efa12 (#2147).
-
-
-# igraph 2.1.99.9906
-
-## vendor
 
 - Update vendored sources to igraph/igraph@a6cf9700378fd1f8a5bcdd066022e05bc43c6b94 (#2145).
 
 - Update vendored sources to igraph/igraph@90dc1fc593cef32a7d836f7b0d1908050cdc3ab7 (#2144).
 
-
-# igraph 2.1.99.9905
-
-## Bug fixes
-
-- Prevent memory leak.
-
-## Chore
-
-- Added more nocov (#2142).
-
-- Add nocov to `tkplot.R` (#2141).
-
-## Testing
-
-- Skip sanitizer checks with memory leaks.
-
-- Stabilize tests on Windows.
-
-- Added tests for `palette.R` (#2140).
-
-- Added tests for `plot.shapes.R` (#2139).
-
-
-# igraph 2.1.99.9904
-
-## tests
-
-- Add tests for aaa-auto.R (#2129).
-
-## vendor
-
 - Update vendored sources to igraph/igraph@0630ac8e5a6076942ce77e20567f35295600951f (#2134).
-
-
-# igraph 2.1.99.9903
-
-## vendor
 
 - Update vendored sources to igraph/igraph@9c5eb40bff2d58944efd42eb760e9b68d5814c7c (#2131).
 
-
-# igraph 2.1.99.9902
-
-## vendor
-
 - Update vendored sources to igraph/igraph@b2f4d7f1c02cf1ca5ec7206c86dffde6806ae65c (#2125).
-
-
-# igraph 2.1.99.9901
-
-## Chore
-
-- Fix seed for test (#2118).
-
-- Results for revdepchecks.
-
-## vendor
 
 - Update vendored sources to igraph/igraph@9635f97c8d96aba53f4122b78d6e41a38d73b2d3 (#2122).
 
@@ -115,8 +44,11 @@
 
 - Update vendored sources to igraph/igraph@2a81653a0b82b7702a79e5d29052f53c9f431d45 (igraph/igraph#2706, #2114).
 
+## tests
 
-# igraph 2.1.99.9900
+- Add tests for aaa-auto.R (#2129).
+
+## 
 
 See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287bfde1/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
@@ -129,8 +61,6 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 - Breaking change: remove deprecated `neimode` parameter from `bfs()` and `dfs()` (#1105, #1526).
 
 - Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
-
-- Breaking change: Subset assignment of a graph avoids addition of double edges and ignores loops unless the new `loops` argument is set to `TRUE` (#1662, #1661).
 
 ## doc
 
@@ -148,6 +78,8 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
   This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
 
 ## Bug fixes
+
+- Prevent memory leak.
 
 - Adjust loop position to vertex size in `plot()` (#1980).
 
@@ -243,6 +175,14 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 - `get_edge_ids()` accepts data frames and matrices (#1663).
 
 ## Chore
+
+- Added more nocov (#2142).
+
+- Add nocov to `tkplot.R` (#2141).
+
+- Fix seed for test (#2118).
+
+- Results for revdepchecks.
 
 - Create list of custom tasks for release (#1976, #2096).
 
@@ -416,6 +356,16 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 ## Testing
 
+- Tweak tests.
+
+- Skip sanitizer checks with memory leaks.
+
+- Stabilize tests on Windows.
+
+- Added tests for `palette.R` (#2140).
+
+- Added tests for `plot.shapes.R` (#2139).
+
 - Simplify test (@1741643+krlmlr).
 
 - Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
@@ -461,6 +411,8 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 - Merged and refactored `games.R` tests (#1682).
 
 ## Uncategorized
+
+- Vendor: Update vendored sources to igraph/igraph@ccbbe37333b62ff01facd9c190deb93fb26e60af.
 
 - Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
 
