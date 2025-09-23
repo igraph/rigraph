@@ -2,55 +2,43 @@
 
 # igraph 2.2.0
 
-## vendor
+Update C core to version 0.10.17. See <https://github.com/igraph/rigraph/blob/20552ef94aed6ae4b23465ae8c7e4d3b0e558c71/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
 
-- Update vendored sources (tag 0.10.17) to igraph/igraph@529e7be11019d3c23e9c538932007d687c9eaae1.
+## Features
 
-  chore: updated changelog
+- Generate almost all R implementations (#2047).
 
-- Update vendored sources to igraph/igraph@a4c6be577f992bd09eb3a966aec960e8bd3fbe7b.
+- Expose `align_layout()` and add to `layout_nicely()` to align layout with axis automatically (#1907, #1957, #1958).
 
-  tests: improve coloring example
+- Expose `simple_cycles()` which lists all simple cycles (#1573, #1580).
 
-- Update vendored sources to igraph/igraph@788c9a199a125b0f497a3d30f0e9ec9a33eac401.
+- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
 
-  fix: assertion error when stopping search early in igraph_simple_cycles_callback()
+- Expose `find_cycle()` (#1471, #1571).
 
-- Update vendored sources to igraph/igraph@650da2404ce18cf2928f1be816871b0745e40a11.
+- Expose `feedback_vertex_set()` to find a minimum feedback vertex set in a graph (#1446, #1447, #1560).
 
-  chore: update changelog
+- Add `weights` parameter to `local_scan()` (#1082, #1448, #1982).
 
-- Update vendored sources to igraph/igraph@cb33cd7c27b7b430118aa554dc51baa09f9f2939 (#2148).
+- Add more layouts to `tkplot()` (#160, #1967).
 
-- Update vendored sources to igraph/igraph@57dbe29d11d68f6ec7fe7cfb9524ac31dd3efa12 (#2147).
+- Add `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
 
-- Update vendored sources to igraph/igraph@a6cf9700378fd1f8a5bcdd066022e05bc43c6b94 (#2145).
+- Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
 
-- Update vendored sources to igraph/igraph@90dc1fc593cef32a7d836f7b0d1908050cdc3ab7 (#2144).
+- Add relative size scaling to vertices in `plot()` (@gvegayon, #172).
 
-- Update vendored sources to igraph/igraph@0630ac8e5a6076942ce77e20567f35295600951f (#2134).
+- Split `sample_bipartite()` into two functions for the G(n, m) and G(n, p) case (#630, #1692).
 
-- Update vendored sources to igraph/igraph@9c5eb40bff2d58944efd42eb760e9b68d5814c7c (#2131).
+- Implement multi attribute assignment (#55, #1916) and adding attributes via data frames (#1373, #1669, #1716). Support factors in `graph_from_data_frame()` (#34, #1829).
 
-- Update vendored sources to igraph/igraph@b2f4d7f1c02cf1ca5ec7206c86dffde6806ae65c (#2125).
+- All `_hrg()` functions check their argument (#1074, #1699).
 
-- Update vendored sources to igraph/igraph@9635f97c8d96aba53f4122b78d6e41a38d73b2d3 (#2122).
+- HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
 
-- Update vendored sources to igraph/igraph@bcb8fbcfa7dfaeed02a5f4472eae36513c716f29 (#2121).
+- `get_edge_ids()` accepts data frames and matrices (#1663).
 
-- Update vendored sources to igraph/igraph@3eb9ef3f404a76a1701ae34fd340a364b1d6e610 (#2120).
-
-- Update vendored sources to igraph/igraph@c65b9aa15249be47126dee14374b5ddaceaeaa67 (#2119).
-
-- Update vendored sources to igraph/igraph@2a81653a0b82b7702a79e5d29052f53c9f431d45 (igraph/igraph#2706, #2114).
-
-## tests
-
-- Add tests for aaa-auto.R (#2129).
-
-## 
-
-See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287bfde1/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+- `igraph_version()` returns version of C core in an attribute (#1208, #1781).
 
 ## Breaking changes
 
@@ -62,44 +50,13 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Breaking change: stricter deprecation of non-functional parameters of `layout_with_kk()` and `layout_with_fr()` (#1108, #1628).
 
-## doc
-
-- Refer to current latest version of R in troubleshooting page.
-
-- Fix typos in `laplacian_matrix` documentation.
-
-- Clarify the use of weights in `layout_with_kk()`.
-
-- remove demos (#2008)
-
-## hack
-
-- Provide `NULL` default for types argument in `bipartite_projection_size()`.
-  This parameter is optional in R, but not in C. Therefore the C interface definition doesn't provide a default or OPTIONAL marker.
-
 ## Bug fixes
 
-- Prevent memory leak.
+- `NA` attribute values are replaced with default values in `plot()` (#293, #1707).
 
-- Adjust loop position to vertex size in `plot()` (#1980).
-
-- Don't rescale coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
-
-- HRG printing with `type = "auto"` uses `"plain"` for large trees (#1879).
-
-- Fail if `"layout"` attribute doesn't match the number of vertices (#1880).
-
-- Automatically arrange loops in `plot()` (#407, #556, #1881).
-
-- `NA` checking only in from/to columns of edge `data.frame` (#1906).
-
-- Vectorized drawing of arrows in `plot()` (#257, #1904).
+- `NA` checking only in from/to columns of edge data frame (#1906).
 
 - Keep vertex attribute type for `disjoint_union()` (#1640, #1909).
-
-- Allow more than one edge label font family in `plot()` (#37, #1896).
-
-- Pie shapes now work as intended (#1882, #1883).
 
 - Error in bipartite projection if `type` is not a vertex attribute (#898, #1889).
 
@@ -107,17 +64,7 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Added proper `NA` handling for matrix inputs (#917, #918, #1828).
 
-- Added support for factors in `graph_from_data_frame()` (#34, #1829).
-
 - Remove string matrix support from functions operating on biadjacency matrices (#1540, #1542, #1803).
-
-- Removed redundant inheritParams call (#1802).
-
-- Loops not plotted on canvas (#1799, #1800).
-
-- Load the Matrix package before Matrices are coerced to a sparse matrix in tests.
-
-- Replace `NA` values in `label` attributes in `plot()` with default values (#1796, #1797).
 
 - Integer vectors are validated before transferring them to the C library (#1434, #1582).
 
@@ -127,302 +74,75 @@ See <https://github.com/igraph/rigraph/blob/c11166f857e58728554811655e247df0287b
 
 - Use `function()` instead of `(x)` in `arrow.mode` (#1722).
 
+- Temporarily disable generating an interface for `igraph_simple_cycles_callback()` as the framework for handling callback functions is not yet present.
+
+## Plotting bug fixes
+
+- Adjust loop position to vertex size in `plot()` (#1980).
+
+- Don't rescale plot coordinates to `[-1,1] x [-1,1]` by default (#1492, #1956, #1962).
+
+- Fail if `"layout"` attribute doesn't match the number of vertices (#1880).
+
+- Automatically arrange loops in `plot()` (#407, #556, #1881).
+
+- Vectorized drawing of arrows in `plot()` (#257, #1904).
+
+- Allow more than one edge label font family in `plot()` (#37, #1896).
+
+- Pie shapes now work as intended (#1882, #1883).
+
+- Loops not plotted on canvas (#1799, #1800).
+
+- Replace `NA` values in `label` attributes in `plot()` with default values (#1796, #1797).
+
 - Removed duplicated plotting of arrow heads (#640, #1709).
 
 - Correct mapping of edge label properties in plots when loops are present (#157, #1706).
 
-- NA attribute values are replaced with default values in `plot()` (#293, #1707).
-
-- Temporarily disable generating an interface for `igraph_simple_cycles_callback()`.
-  as the framework for handling callback functions is not yet present.
-
-## Features
-
-- Generate almost all R implementations (#2047).
-
-- Added weights parameter to `local_scan()` (#1082, #1448, #1982).
-
-- Add multi attribute assignment (#55, #1916).
-
-- Expose `align_layout()` and add to `layout_nicely()` to align layout with axis automatically (#1907, #1957, #1958).
-
-- Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969).
-
-- Add more layouts to `tkplot()` (#160, #1967).
-
-- Added `plot(mark.lwd = )` to change line width of mark.groups (#306, #1898).
-
-- Add `plot(vertex.label.angle = , vertex.label.adj = )` arguments to rotate vertex labels (#106, #1899).
-
-- `simple_cycles()` added to list all simple cycles (#1573, #1580).
-
-- Expose C version (#1208, #1781).
-
-- Expose `is_complete()`, `is_clique()` and `is_ivs()` (#1316, #1388, #1581).
-
-- Add relative size scaling to vertices in `plot()` (@gvegayon, #172).
-
-- Expose `find_cycle()` (#1471, #1571).
-
-- Split `sample_bipartite()` into two functions for the G(n, m) a… (#630, #1692).
-
-- `feedback_vertex_set()` finds a minimum feedback vertex set in a graph (#1446, #1447, #1560).
-
-- Added support for adding attributes via `data.frames` (#1373, #1669, #1716).
-
-- all `_hrg()` functions check their argument (#1074, #1699).
-
-- `get_edge_ids()` accepts data frames and matrices (#1663).
-
-## Chore
-
-- Added more nocov (#2142).
-
-- Add nocov to `tkplot.R` (#2141).
-
-- Fix seed for test (#2118).
-
-- Results for revdepchecks.
-
-- Create list of custom tasks for release (#1976, #2096).
-
-- Improve readability of code about not all values being `NA` (#1870, #2082).
-
-- Add modular product to GRAPH_PRODUCT_TYPE in interfaces.
-
-- Move uuid glue out of vendoring.
-
-- Fix vendoring script.
-
-- Remove call from `layout_on_sphere()` (#2053).
-
-- Remove call from `layout_randomly()` (#2054).
-
-- Remove call from `layout_on_grid()` (#2052).
-
-- Remove call from `layout_with_mds()` (#2055).
-
-- Remove call from `layout_as_star()` (#2050).
-
-- Remove call from `layout_as_bipartite()` (#2049).
-
-- Remove call from `layout_in_circle()` (#2051).
-
-- Fix call in `sample_dirichlet()`.
-
-- Fix call in `sample_sphere_volume()`.
-
-- Fix call in `sample_sphere_surface()`.
-
-- Fix call in `graph.lcf()`.
-
-- Fix call in `all_shortest_paths()`.
-
-- Fix call in `all_simple_paths()`.
-
-- Fix call in `get.incidence.dense()`.
-
-- Fix call in `cluster_optimal()`.
-
-- Fix call in `cluster_leiden()`.
-
-- Avoid call in `cluster_label_prop0()`.
-
-- Fix remaining Stimulus types (#2048).
-
-- Don't use `stop()` in tests.
-
-- Improve error in `stochastic_matrix()`.
-
-- Improve errors in `sgm.R`.
-
-- Improve errors in `operator.R`.
-
-- Fix cli syntax.
-
-- Improve error in `rewire()`.
-
-- Improve errors in `plot.common()`.
-
-- Improve error in `rename.attr.if.needed()`.
-
-- Improve errors in `layout.R` (#2007).
-
-- Use `cli_abort()` instead of `stop()`.
-
-- Simplify error by relying on default behavior (#1997).
-
-- Better error in `centrality.R` (#2000).
-
-- Simplify errors (#1999).
-
-- Remove useless error message (#1998).
-
-- Improve `igraph.match.arg()` (#1996).
-
-- Add air code formatting (#1734, #1869).
-
-- Add deps file to build-ignore.
-
-- Fix `devtools::load_all()` (#1857).
-
-- Refer to the dev version of roxygen2 as build dependency (#1832).
-
-- Update generated documentation.
-
-- Require copyright assignment in PR template (#1747).
-
-- Fix `Makefile-cigraph`.
-
-- Deprecate `scale` argument of `centr_eigen()` and `centr_eigen_tmax()` (#1531, #1625).
-
-- Remove `Rf_allocSExp()` which is no longer in R's C API (#1735).
-
-- Fix Stimulus (#1737).
-
-- Use `"parent"` instead of `"father"` in `bfs()` and `dfs()` (#880, #1523).
-
-- Run `devtools::document()` (#1710).
-
-- Run {styler} (with {igraph.style}) (#1696).
-
-- Adapt handling of optional parameters to interface definition changes in the C core (#1567).
-
 ## Documentation
 
-- Document ellipsis in `cohesion()` (#971, #1985).
+- Welcome Maëlle Salmon and David Schoch as authors (#1733), add author links (#1821).
+
+- Remove demos (#2008).
 
 - Add 2023 preprint (#1240, #1984).
 
 - Update allcontributors info (#1975).
 
-- Fix indentation of `\describe{}` elements (#1867).
-
-- Ensure use of `\describe{}` if using `\item{}` in return value (#1736, #1779).
-
 - Link to replacements of deprecated functions (#1823).
 
-- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
+- Add documentation of all file formats to `read_graph()` and `write_graph()` (#777, #1969). Recommend `saveRDS()` and `readRDS()` for saving and loading graphs (#1242, #1700).
 
 - Document return value of `make_clusters()` (#1794).
 
-- Add author links (#1821).
+- Clarify that `girth()` returns `Inf` for acyclic graphs (@eqmooring, #1831).
 
-- Fix style (#1819).
+- Clarify the use of weights in `layout_with_kk()`.
+
+- Refer to current latest version of R in troubleshooting page.
+
+- Fix typos in `laplacian_matrix()` documentation.
+
+- Document ellipsis in `cohesion()` (#971, #1985).
 
 - Correct the description of the `weights` parameter of `hits_scores()`.
 
 - Better describe output of `all_shortest_paths()` (#1029, #1778).
 
-- `make_graph()` now supports `Groetzsch` as an alias of `Grotzsch`.
-  This change was implemented in the C core.
+- `make_graph()` now supports `"Groetzsch"` as an alias of `"Grotzsch"`. This change was implemented in the C core.
 
 - Update description of `order` parameter of `ego()` and related functions (#1746).
 
-- Welcome Maëlle Salmon and David Schoch as authors (#1733).
-
 - Added lifecycle table (#1525).
 
-- Replace instances of `#' if` with `#' @examplesIf` (#1134, #1698).
-
-- Update graph saving rec (#1242, #1700).
-
 - Add more about igraph.r2cdocs in the contributing guide (#1686, #1697).
-
-## Refactoring
-
-- Some cleanup in vs/es functions in `rinterface_extra.c`.
-
-- Avoid repeated calls to `_size()` functions in for loops.
-  as this has a non-neglibile performance impact
-
-- Improve logic for updating edge attributes (#1332, #1915).
-
-- Use `check_string()` instead of `as.character()` (#1365).
-
-- Adapt to `cut.prob`'s new handling of NULL in the C core (#1570, #1602).
-
-- One less tmp use case (#1715).
-
-- Enhance readability and performance of graph.adjacency.sparse (#1667).
-
-- Prepare for C core interface standardizing 'type' -\> 'types' in igraph_is_bipartite.
 
 ## Performance
 
 - Accelerate check if an index sequence corresponds to the entire list of vertices (#1427, #1818).
 
 - Faster single bracket querying of a graph (#1465, #1658).
-
-## Testing
-
-- Tweak tests.
-
-- Skip sanitizer checks with memory leaks.
-
-- Stabilize tests on Windows.
-
-- Added tests for `palette.R` (#2140).
-
-- Added tests for `plot.shapes.R` (#2139).
-
-- Simplify test (@1741643+krlmlr).
-
-- Don't `library(Matrix)` in tests (@MichaelChirico, #1833).
-
-- Added more weight tests to `graph_from_biadjacency_matrix()` (#1544, #1804).
-
-- Snapshot updates for rcc-smoke (null) (#1738).
-
-- Rename, add test for `laplacian_matrix()` (#1714).
-
-- Merged feedback.set tests into structural.properties (#1743).
-
-- Added tests for untested files in R/ (#1728).
-
-- Merged and refactored `other.R` tests (#1727).
-
-- Merged and refactored `structural.properties.R` tests (#1726).
-
-- Merged and refactored orphaned test files (#1724).
-
-- Merged and refactored `iterators.R` and `operators.R` tests (#1723).
-
-- Merged and refactored `topology.R` tests (#1720).
-
-- Merged and refactored `embedding.R` tests (#1721).
-
-- Merge all tests for `foreign.R` into one test file (#1713).
-
-- Improve `test-dot.product.game` (#1396, #1705).
-
-- Merged and refactored `conversion.R` tests (#1701).
-
-- Create helpers (#1691, #1695).
-
-- Merged and refactored `make.R` tests (#1685).
-
-- Merged and refactored `community.R` tests (#1689).
-
-- Merged and refactored `indexing.R` tests (#1687).
-
-- Merged and refactored `flow.R` tests (#1675).
-
-- Merged and refactored `games.R` tests (#1682).
-
-## Uncategorized
-
-- Vendor: Update vendored sources to igraph/igraph@ccbbe37333b62ff01facd9c190deb93fb26e60af.
-
-- Vendor: Update vendored sources to igraph/igraph@a1c1a30aed2c4afb2892b18227e936d5b68660ca.
-
-- Refactor: consolidate graph.incidence.\* (#1483) (#1654).
-
-- Refactor: forward `get.adjacency.dense()` to `get.adjacency.sparse()` if attributes are present (#1483) (#1653).
-
-- Refactor: removed `for` loops from `get.incidence.dense()` (#1483) (#1655).
-
-- Switching to development version.
 
 
 # igraph 2.1.4
