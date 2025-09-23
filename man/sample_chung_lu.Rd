@@ -202,5 +202,5 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 }
 \concept{games}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
 
