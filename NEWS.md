@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.1.99.9908
+
+## Testing
+
+- Tweak tests.
+
+## vendor
+
+- Update vendored sources (tag 0.10.17) to igraph/igraph@529e7be11019d3c23e9c538932007d687c9eaae1.
+
+  chore: updated changelog
+
+- Update vendored sources to igraph/igraph@a4c6be577f992bd09eb3a966aec960e8bd3fbe7b.
+
+  tests: improve coloring example
+
+- Update vendored sources to igraph/igraph@788c9a199a125b0f497a3d30f0e9ec9a33eac401.
+
+  fix: assertion error when stopping search early in igraph_simple_cycles_callback()
+
+- Update vendored sources to igraph/igraph@650da2404ce18cf2928f1be816871b0745e40a11.
+
+  chore: update changelog
+
+- Update vendored sources to igraph/igraph@cb33cd7c27b7b430118aa554dc51baa09f9f2939 (#2148).
+
+## Uncategorized
+
+- Vendor: Update vendored sources to igraph/igraph@ccbbe37333b62ff01facd9c190deb93fb26e60af.
+
+
 # igraph 2.1.99.9907
 
 ## vendor
