@@ -408,7 +408,7 @@ add_shape <- function(
   }
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
-  do.call(igraph.options, parameters)
+  do.call(igraph_options, parameters)
   invisible(TRUE)
 }
 
