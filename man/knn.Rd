@@ -125,5 +125,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}.}
 

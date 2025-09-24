@@ -116,5 +116,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_multiple}{\code{is_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_multiple}{\code{count_multiple()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop}{\code{has_loop()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple}{\code{is_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple}{\code{count_multiple()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop}{\code{is_loop()}}, \href{https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop}{\code{has_loop()}}.}
 

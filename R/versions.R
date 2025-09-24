@@ -214,7 +214,8 @@ igraph.version <- function() {
 #' Returns the R package version,
 #' prints the R package version and C library version.
 #'
-#'#' @return A character scalar, the igraph version string.
+#' @return A character scalar, the igraph version string, with an attribute
+#'  `"c_version"` giving the C library version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @keywords internal
@@ -222,7 +223,7 @@ igraph.version <- function() {
 #' @examples
 #' igraph_version()
 #'
-igraph_version <- function(software = c("R", "C")) {
+igraph_version <- function() {
   r_version <- getNamespaceInfo("igraph", "spec")[["version"]]
 
   version <- structure(
