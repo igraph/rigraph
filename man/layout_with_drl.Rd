@@ -160,7 +160,7 @@ Reports, 2008. 2936: p. 1-10.
 \code{\link[=layout]{layout()}} for other layout generators.
 }
 \author{
-Shawn Martin (\url{http://www.cs.otago.ac.nz/homepages/smartin/})
+Shawn Martin (\url{https://www.cs.otago.ac.nz/homepages/smartin/})
 and Gabor Csardi \email{csardi.gabor@gmail.com} for the R/igraph interface
 and the three dimensional version.
 }

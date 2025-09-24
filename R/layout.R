@@ -2757,7 +2757,7 @@ layout.drl <- function(
 #'   nature of the DrL algorithm, the three dimensional layout takes
 #'   significantly longer to compute.
 #' @return A numeric matrix with two columns.
-#' @author Shawn Martin (<http://www.cs.otago.ac.nz/homepages/smartin/>)
+#' @author Shawn Martin (<https://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
 #' @seealso [layout()] for other layout generators.

@@ -1532,7 +1532,7 @@ cluster_spinglass <- function(
 #' [cluster_louvain()], but it is faster and yields higher quality
 #' solutions. It can optimize both modularity and the Constant Potts Model,
 #' which does not suffer from the resolution-limit (see preprint
-#' http://arxiv.org/abs/1104.3083).
+#' <https://arxiv.org/abs/1104.3083>).
 #'
 #' The Leiden algorithm consists of three phases: (1) local moving of nodes,
 #' (2) refinement of the partition and (3) aggregation of the network based on

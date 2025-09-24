@@ -1834,7 +1834,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' @return A graph object. If `coords` is `TRUE` then with vertex
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
-#' written by Keith Briggs (<http://keithbriggs.info/>).
+#' written by Keith Briggs (<https://keithbriggs.info/>).
 #' @family games
 #' @export
 #' @keywords graphs
@@ -3028,7 +3028,7 @@ sample_fitness_pl <- static_power_law_game_impl
 #' @note The version of the model in the published paper is incorrect in the
 #' sense that it cannot generate the kind of graphs the authors claim. A
 #' corrected version is available from
-#' <http://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
+#' <https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
 #' implementation is based on this.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_pa()] for the basic preferential attachment

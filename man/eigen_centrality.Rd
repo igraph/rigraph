@@ -139,7 +139,7 @@ Centrality measures
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} and Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
 manual page.
 }
 \concept{centrality}
