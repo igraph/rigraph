@@ -280,7 +280,9 @@ write.graph.fromraw <- function(buffer, file) {
 #' }
 #'
 #' @section DL format:
-#' This is a simple textual file format used by UCINET. See <http://www.analytictech.com/networks/dataentry.htm> for examples. All the forms described here are supported by igraph.
+#' This is a simple textual file format used by UCINET.
+#' See <http://www.analytictech.com/networks/dataentry.htm> for examples.
+#' All the forms described here are supported by igraph.
 #' Vertex names and edge weights are also supported and they are added as attributes.
 #' (If an attribute handler is attached.)
 #' Note the specification does not mention whether the format is case sensitive or not.
@@ -431,7 +433,8 @@ read_graph <- function(
 #' }
 #'
 #' @section LEDA format:
-#'  This function writes a graph to an output stream in LEDA format. See <http://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html>
+#' This function writes a graph to an output stream in LEDA format.
+#' See <https://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html>.
 #' The support for the LEDA format is very basic at the moment; igraph writes only the LEDA graph section which supports one selected vertex and edge
 #' attribute and no layout information or visual attributes.
 #' \describe{
@@ -439,7 +442,8 @@ read_graph <- function(
 #'   \item{edge.attr}{Name of edge attribute to include in the file.}
 #' }
 #' @section DOT format:
-#'  DOT is the format used by the widely known GraphViz software, see http://www.graphviz.org for details. The grammar of the DOT format can be found here: http://www.graphviz.org/doc/info/lang.html
+#' DOT is the format used by the widely known GraphViz software, see <https://www.graphviz.org> for details.
+#' The grammar of the DOT format can be found here: <https://www.graphviz.org/doc/info/lang.html>.
 #' This is only a preliminary implementation, no visualization information is written.
 #' This format is meant solely for interoperability with Graphviz. It is not recommended for
 #' data exchange or archival.
@@ -772,7 +776,7 @@ write.graph.dot <- function(graph, file) {
 #'
 #' Unfortunately the original graph database homepage is now defunct, but see
 #' its old version at
-#' <http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
+#' <https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 #' for the actual format of a graph database file and other information.
 #'
 #' @param url If not `NULL` it is a complete URL with the file to import.

@@ -2,7 +2,7 @@
 # CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # --------------------------------------------
- 
+
 cff-version: 1.2.0
 message: 'To cite package "igraph" in publications use:'
 type: software
@@ -457,7 +457,7 @@ references:
   title: igraphdata
   abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'
   notes: Suggests
-  url: http://igraph.org
+  url: https://igraph.org
   repository: https://CRAN.R-project.org/package=igraphdata
   authors:
   - family-names: Csardi

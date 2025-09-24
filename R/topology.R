@@ -1104,7 +1104,7 @@ graph.isomorphic <- isomorphic_impl
 #'       Maximum level.
 #'     }
 #'   }
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
 #' @seealso [canonical_permutation()], [permute()],
@@ -1185,7 +1185,7 @@ count_automorphisms <- count_automorphisms_impl
 #'       See [count_automorphisms()] for more details.
 #'     }
 #'   }
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
 #' @seealso [canonical_permutation()], [permute()],

@@ -24,8 +24,8 @@ LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
 3-regular Hamiltonian graphs. It constists of three parameters, the number
 of vertices in the graph, a list of shifts giving additional edges to a
 cycle backbone and another integer giving how many times the shifts should
-be performed. See \url{http://mathworld.wolfram.com/LCFNotation.html} for
-details.
+be performed.
+See \url{https://mathworld.wolfram.com/LCFNotation.html} for details.
 }
 \examples{
 

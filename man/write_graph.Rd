@@ -121,7 +121,8 @@ uniqueness across vertex/edge/graph attributes. Default is TRUE.}
 
 \section{LEDA format}{
 
-This function writes a graph to an output stream in LEDA format. See \url{http://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html}
+This function writes a graph to an output stream in LEDA format.
+See \url{https://www.algorithmic-solutions.info/leda_guide/graphs/leda_native_graph_fileformat.html}.
 The support for the LEDA format is very basic at the moment; igraph writes only the LEDA graph section which supports one selected vertex and edge
 attribute and no layout information or visual attributes.
 \describe{
@@ -132,7 +133,8 @@ attribute and no layout information or visual attributes.
 
 \section{DOT format}{
 
-DOT is the format used by the widely known GraphViz software, see http://www.graphviz.org for details. The grammar of the DOT format can be found here: http://www.graphviz.org/doc/info/lang.html
+DOT is the format used by the widely known GraphViz software, see \url{https://www.graphviz.org} for details.
+The grammar of the DOT format can be found here: \url{https://www.graphviz.org/doc/info/lang.html}.
 This is only a preliminary implementation, no visualization information is written.
 This format is meant solely for interoperability with Graphviz. It is not recommended for
 data exchange or archival.
