@@ -122,7 +122,7 @@ Processes on graphs
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
-(\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
+(\url{https://kolaczyk.github.io/}) wrote the initial version in R.
 }
 \concept{processes}
 \keyword{graphs}

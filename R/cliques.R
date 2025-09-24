@@ -457,7 +457,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #'
 #'   `ivs_size()` returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty
-#' Graph Library by Keith Briggs (<http://keithbriggs.info/>) and Gabor
+#' Graph Library by Keith Briggs (<https://keithbriggs.info/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual
 #' page.
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new

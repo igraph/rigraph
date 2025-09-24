@@ -124,7 +124,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' @param \dots Additional arguments are passed to [plot()], that is run
 #'   before any of the curves are added, to create the figure.
 #' @return Nothing.
-#' @author Eric Kolaczyk (<http://math.bu.edu/people/kolaczyk/>) and Gabor
+#' @author Eric Kolaczyk (<https://kolaczyk.github.io/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso [sir()] for running the actual simulation.
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of

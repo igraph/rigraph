@@ -102,7 +102,7 @@ Other graph automorphism:
 \code{\link{automorphism_group}()}
 }
 \author{
-Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS
+Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS
 and Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code
 and this manual page.
 }
