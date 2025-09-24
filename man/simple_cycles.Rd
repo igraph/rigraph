@@ -57,5 +57,5 @@ Graph cycles
 }
 \concept{cycles}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_simple_cycles}{\code{simple_cycles()}}.}
 
