@@ -122,5 +122,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{embedding}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_laplacian_spectral_embedding}{\code{laplacian_spectral_embedding()}}.}
 
