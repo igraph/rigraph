@@ -128,8 +128,9 @@ test_that("igraph_version returns a version string", {
     "\\b"
   )
 
-  expect_match(igraph_version("R"), regex)
-  expect_match(igraph_version(), regex)
+  version <- igraph_version()
+
+  expect_match(version, regex)
 
   c_regex <- paste0(
     "\\b", # word boundary
@@ -139,5 +140,5 @@ test_that("igraph_version returns a version string", {
     "\\b"
   )
 
-  expect_match(igraph_version("C"), c_regex)
+  expect_match(attr(version, "c_version"), c_regex)
 })
