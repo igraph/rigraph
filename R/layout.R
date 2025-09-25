@@ -934,20 +934,23 @@ layout_nicely <- function(graph, dim = 2, ...) {
             "Non-positive edge weight found, ignoring all weights during graph layout."
           )
           args$weights <- NA
+        } else {
+          args$weights <- weights
         }
       }
     }
 
     args$graph <- graph
 
-    if (is_forest(graph) && vcount(graph) <= 30) {
+    if (is_forest(graph) && vcount(graph) <= 30 && is.null(args$weights)) {
       return(do.call(layout_as_tree, args))
     }
 
     args$dim <- dim
 
     if (vcount(graph) < 1000) {
-      align_layout(graph, do.call(layout_with_fr, args))
+      layout <- do.call(layout_with_fr, args)
+      align_layout(graph, layout)
     } else {
       do.call(layout_with_drl, args)
     }
@@ -2529,14 +2532,20 @@ norm_coords <- function(
 }
 
 .layout.norm.col <- function(v, min, max) {
-  vr <- range(v)
-  if (vr[1] == vr[2]) {
-    fac <- 1
+  # Likely cause: division by zero upstream
+  if (all(is.nan(v))) {
+    diff <- 0
   } else {
-    fac <- (max - min) / (vr[2] - vr[1])
+    vr <- range(v)
+    diff <- diff(vr)
   }
 
-  (v - vr[1]) * fac + min
+  if (diff == 0) {
+    return(rep((min + max) / 2, length(v)))
+  }
+
+  fac <- (max - min) / diff
+  (v - vr[[1]]) * fac + min
 }
 
 #' @rdname merge_coords

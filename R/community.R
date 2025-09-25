@@ -919,8 +919,10 @@ modularity.igraph <- function(
     cli::cli_abort("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
-  if (!is.null(weights)) {
+  if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
   }
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
