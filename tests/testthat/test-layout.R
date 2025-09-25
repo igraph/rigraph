@@ -30,6 +30,12 @@ test_that("layout_with_fr() deprecated argument", {
   })
 })
 
+test_that("layout_nicely() works with proper weights and small trees", {
+  g <- make_star(12, mode = "out")
+  E(g)$weight <- 5:15
+  expect_warning(layout_nicely(g), NA)
+})
+
 test_that("layout_nicely() works with negative weights", {
   g <- make_graph("petersen")
   E(g)$weight <- -5:9

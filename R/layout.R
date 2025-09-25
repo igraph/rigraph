@@ -934,20 +934,23 @@ layout_nicely <- function(graph, dim = 2, ...) {
             "Non-positive edge weight found, ignoring all weights during graph layout."
           )
           args$weights <- NA
+        } else {
+          args$weights <- weights
         }
       }
     }
 
     args$graph <- graph
 
-    if (is_forest(graph) && vcount(graph) <= 30) {
+    if (is_forest(graph) && vcount(graph) <= 30 && is.null(args$weights)) {
       return(do.call(layout_as_tree, args))
     }
 
     args$dim <- dim
 
     if (vcount(graph) < 1000) {
-      align_layout(graph, do.call(layout_with_fr, args))
+      layout <- do.call(layout_with_fr, args)
+      align_layout(graph, layout)
     } else {
       do.call(layout_with_drl, args)
     }
