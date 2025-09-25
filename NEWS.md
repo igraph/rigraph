@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9000
+
+## Chore
+
+- Auto-update from GitHub Actions (#2164).
+
+
 # igraph 2.2.0
 
 Update C core to version 0.10.17. See <https://github.com/igraph/rigraph/blob/20552ef94aed6ae4b23465ae8c7e4d3b0e558c71/src/vendor/cigraph/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
