@@ -2532,14 +2532,20 @@ norm_coords <- function(
 }
 
 .layout.norm.col <- function(v, min, max) {
-  vr <- range(v)
-  if (vr[1] == vr[2]) {
-    fac <- 1
+  # Likely cause: division by zero upstream
+  if (all(is.nan(v))) {
+    diff <- 0
   } else {
-    fac <- (max - min) / (vr[2] - vr[1])
+    vr <- range(v)
+    diff <- diff(vr)
   }
 
-  (v - vr[1]) * fac + min
+  if (diff == 0) {
+    return(rep((min + max) / 2, length(v)))
+  }
+
+  fac <- (max - min) / diff
+  (v - vr[[1]]) * fac + min
 }
 
 #' @rdname merge_coords
