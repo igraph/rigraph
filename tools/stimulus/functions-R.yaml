@@ -54,7 +54,7 @@ igraph_get_all_eids_between:
     DEPS: from ON graph, to ON graph, eids ON graph
 
 igraph_incident:
-    IGNORE: RR, RC
+    DEPS: vid ON graph, eids ON graph
 
 igraph_is_same_graph:
     IGNORE: RR, RC, RInit
