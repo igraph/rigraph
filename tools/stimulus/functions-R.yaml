@@ -246,8 +246,6 @@ igraph_are_connected:
 # Structural properties
 #######################################
 
-igraph_diameter:
-
 igraph_distances:
     IGNORE: RR, RC
 
@@ -447,12 +445,9 @@ igraph_joint_type_distribution:
 
 igraph_contract_vertices:
 
-# We use igraph_radius_dijkstra instead
-igraph_radius:
-    IGNORE: RR, RC
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
+    DEPS: start_vid ON graph, weights ON graph
 
 igraph_diversity:
 

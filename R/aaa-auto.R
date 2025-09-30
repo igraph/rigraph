@@ -821,6 +821,14 @@ are_adjacent_impl <- function(graph, v1, v2) {
 diameter_impl <- function(graph, weights=NULL, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   directed <- as.logical(directed)
   unconnected <- as.logical(unconnected)
 
@@ -2275,11 +2283,31 @@ graph_center_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "t
   res
 }
 
+radius_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_radius, graph, weights, mode)
+
+  res
+}
+
 pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(%I1%)) {
-    weights <- E(%I1%)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
@@ -3028,8 +3056,8 @@ layout_drl_impl <- function(graph, res, use.seed=FALSE, options=drl_defaults$def
   res[] <- as.numeric(res)
   use.seed <- as.logical(use.seed)
   options <- modify_list(drl_defaults$default, options)
-  if (is.null(weights) && "weight" %in% edge_attr_names(%I1%)) {
-    weights <- E(%I1%)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
@@ -3050,8 +3078,8 @@ layout_drl_3d_impl <- function(graph, res, use.seed=FALSE, options=drl_defaults$
   res[] <- as.numeric(res)
   use.seed <- as.logical(use.seed)
   options <- modify_list(drl_defaults$default, options)
-  if (is.null(weights) && "weight" %in% edge_attr_names(%I1%)) {
-    weights <- E(%I1%)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
