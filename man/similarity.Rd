@@ -11,7 +11,7 @@ similarity(
   loops = FALSE,
   method = c("jaccard", "dice", "invlogweighted"),
   vids_from = V(graph),
-  vids_to = V(graph)
+  vids_to = vids_from
 )
 }
 \arguments{
@@ -28,9 +28,11 @@ sets.}
 
 \item{method}{The method to use.}
 
-\item{vids_from}{The vertex ids from which the similarity is calculated.}
+\item{vids_from}{The vertex IDs of the first set of vertices of the pairs
+for which the calculation will be done.}
 
-\item{vids_to}{The vertex ids to which the similarity is calculated.}
+\item{vids_to}{The vertex IDs of the second set of vertices of the pairs
+for which the calculation will be done.}
 }
 \value{
 A \code{length(vids)} by \code{length(vids)} numeric matrix

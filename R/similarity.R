@@ -27,8 +27,10 @@
 #'
 #' @param graph The input graph.
 #' @param vids lifecycle::badge("deprecated")
-#' @param vids_from The vertex ids from which the similarity is calculated.
-#' @param vids_to The vertex ids to which the similarity is calculated.
+#' @param vids_from The vertex IDs of the first set of vertices of the pairs
+#' for which the calculation will be done.
+#' @param vids_to The vertex IDs of the second set of vertices of the pairs
+#' for which the calculation will be done.
 #' @param mode The type of neighboring vertices to use for the calculation,
 #'   possible values: \sQuote{`out`}, \sQuote{`in`},
 #'   \sQuote{`all`}.
@@ -68,7 +70,7 @@ similarity <- function(
     "invlogweighted"
   ),
   vids_from = V(graph),
-  vids_to = V(graph)
+  vids_to = vids_from
 ) {
   if (lifecycle::is_present(vids)) {
     lifecycle::deprecate_soft(
@@ -78,6 +80,7 @@ similarity <- function(
     )
     if (!lifecycle::is_present(vids_from)) {
       vids_from <- vids
+      vids_to <- vids_from
     }
   }
 
