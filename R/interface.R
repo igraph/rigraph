@@ -374,6 +374,13 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' @param mode Whether to query outgoing (\sQuote{out}), incoming
 #'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 #'   ignored for undirected graphs.
+#' @param loops Specifies how to treat loop edges.
+#' `"none"` removes loop edges from the result.
+#' `"once"` makes each loop edge appear only once in the result.
+#' `"twice"` makes loop edges appear twice in the result
+#' if the graph is undirected or `mode` is set to `"all"`
+#' (and once otherwise as returning them twice
+#' does not make sense for directed graphs).
 #' @return An edge sequence containing the incident edges of
 #'   the input vertex.
 #'
@@ -384,26 +391,30 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' g <- make_graph("Zachary")
 #' incident(g, 1)
 #' incident(g, 34)
-incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
+incident <- function(
+  graph,
+  v,
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "none", "once")
+) {
   ensure_igraph(graph)
   if (is_directed(graph)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   } else {
-    mode <- 1
+    mode <- "out"
   }
+  loops <- igraph.match.arg(loops)
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
 
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
-  }
-
-  res
+  incident_impl(
+    graph,
+    vid = v,
+    mode = mode,
+    loops = loops
+  )
 }
 
 #' Check whether a graph is directed
