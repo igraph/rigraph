@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9001
+
+## Chore
+
+- Autogenerate `igraph_neighbors()` (#2151).
+
+## Continuous integration
+
+- Fix vendoring.
+
+## Uncategorized
+
+- Merge branch 'release-2.2.0'.
+
+
 # igraph 2.2.0.9000
 
 ## Chore
