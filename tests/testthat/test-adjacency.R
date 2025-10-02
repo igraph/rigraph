@@ -805,7 +805,11 @@ test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = F
   expect_null(V(g_no_colnames)$name)
 
   # Test add.rownames = FALSE (should not add row names)
-  g_no_rownames <- graph_from_adjacency_matrix(M, add.colnames = NA, add.rownames = FALSE)
+  g_no_rownames <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = NA,
+    add.rownames = FALSE
+  )
   expect_null(V(g_no_rownames)$name)
 
   # Test both FALSE
