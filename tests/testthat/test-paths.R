@@ -61,3 +61,13 @@ test_that("graph_center() works -- weights", {
   E(g)$weight <- seq_len(ecount(g))
   expect_equal(as.numeric(graph_center(g)), 7)
 })
+
+test_that("all_simple_paths() passes on cutoff argument", {
+  g <- make_ring(7)
+  expect_equal(lengths(all_simple_paths(g, 1, cutoff = 1)), c(2, 2))
+  expect_equal(lengths(all_simple_paths(g, 1, cutoff = 2)), c(2, 3, 2, 3))
+  expect_equal(
+    lengths(all_simple_paths(g, 1)),
+    c(2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7)
+  )
+})
