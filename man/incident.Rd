@@ -4,7 +4,12 @@
 \alias{incident}
 \title{Incident edges of a vertex in a graph}
 \usage{
-incident(graph, v, mode = c("all", "out", "in", "total"))
+incident(
+  graph,
+  v,
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "none", "once")
+)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -14,6 +19,14 @@ incident(graph, v, mode = c("all", "out", "in", "total"))
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 ignored for undirected graphs.}
+
+\item{loops}{Specifies how to treat loop edges.
+\code{"none"} removes loop edges from the result.
+\code{"once"} makes each loop edge appear only once in the result.
+\code{"twice"} makes loop edges appear twice in the result
+if the graph is undirected or \code{mode} is set to \code{"all"}
+(and once otherwise as returning them twice
+does not make sense for directed graphs).}
 }
 \value{
 An edge sequence containing the incident edges of
