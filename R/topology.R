@@ -997,7 +997,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_canonical_permutation
-canonical_permutation <- canonical_permutation_impl
+canonical_permutation <- canonical_permutation_bliss_impl
 
 
 #' Permute the vertices of a graph
