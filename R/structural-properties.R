@@ -758,15 +758,6 @@ diameter <- function(
 ) {
   ensure_igraph(graph)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-
   res <- diameter_impl(
     graph,
     weights = weights,
