@@ -34,9 +34,6 @@ igraph_neighbors:
 igraph_is_directed:
     IGNORE: RR, RC
 
-igraph_degree:
-    IGNORE: RR, RC
-
 igraph_edge:
     IGNORE: RR, RC, RInit
 
