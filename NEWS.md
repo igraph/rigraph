@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9001
+
+## Bug fixes
+
+- Pass on `cutoff` arguemnt to `all_simple_paths()`.
+
+## Chore
+
+- Auto-update from GitHub Actions (#2184).
+
+- Auto-update from GitHub Actions (#2181).
+
+- Autogenerate `igraph_neighbors()` (#2151).
+
+## Continuous integration
+
+- Fix vendoring.
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#2170).
+
+## Uncategorized
+
+- Merge branch 'release-2.2.0'.
+
+
 # igraph 2.2.0.9000
 
 ## Chore
