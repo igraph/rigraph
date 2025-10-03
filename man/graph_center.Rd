@@ -4,12 +4,10 @@
 \alias{graph_center}
 \title{Central vertices of a graph}
 \usage{
-graph_center(graph, ..., weights = NULL, mode = c("all", "out", "in", "total"))
+graph_center(graph, weights = NULL, mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
-
-\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
@@ -57,5 +55,5 @@ Other paths:
 \code{\link{radius}()}
 }
 \concept{paths}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_graph_center_dijkstra}{\code{graph_center_dijkstra()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_graph_center}{\code{graph_center()}}.}
 
