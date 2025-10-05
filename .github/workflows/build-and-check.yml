@@ -38,11 +38,11 @@ jobs:
       - name: run sanitizer
         uses: addnab/docker-run-action@v3
         with:
-          image: ghcr.io/cynkra/docker-images/rigraph-san:latest
+          image: ghcr.io/cynkra/docker-images/r-debug-csan-igraph:latest
           options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
           run: |
             set -e
             printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
-            TESTTHAT_PARALLEL=false CI=true R_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
+            CI=true R_SANITIZER=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
