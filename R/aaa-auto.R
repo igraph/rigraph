@@ -3382,6 +3382,29 @@ modularity_matrix_impl <- function(graph, weights=NULL, resolution=1.0, directed
   res
 }
 
+community_leading_eigenvector_impl <- function(graph, weights=NULL, steps=-1, options=arpack_defaults(), start=FALSE, callback=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  steps <- as.numeric(steps)
+  options <- modify_list(arpack_defaults(), options)
+  start <- as.logical(start)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_community_leading_eigenvector, graph, weights, steps, options, start, callback)
+
+  class(res) <- "igraph.eigenc"
+  res
+}
+
 community_fluid_communities_impl <- function(graph, no.of.communities) {
   # Argument checks
   ensure_igraph(graph)

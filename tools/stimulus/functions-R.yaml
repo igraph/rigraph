@@ -691,7 +691,7 @@ igraph_reindex_membership:
     IGNORE: RR, RC, RInit
 
 igraph_community_leading_eigenvector:
-    IGNORE: RR, RC, RInit
+    DEPS: weights ON graph
     R:
         CLASS: igraph.eigenc
 
