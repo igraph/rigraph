@@ -76,3 +76,12 @@ test_that("graph_from_graphdb works", {
     error = TRUE
   )
 })
+
+test_that("read/write from/to string works", {
+  g <- make_ring(10)
+
+  expect_snapshot(write_graph(g, file = "", format = "graphml"))
+  str <- r"---(0 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 0 9)---"
+  g2 <- read_graph(str, format = "edgelist", directed = FALSE)
+  expect_isomorphic(g, g2)
+})
