@@ -616,6 +616,31 @@ i_set_vertex_attr <- function(
     igraph_attr_idx_vertex
   )
 
+  # Uniqueness check for vertex "name" attribute
+  if (name == "name") {
+    current_names <- vattrs[["name"]]
+    if (is.null(current_names)) {
+      current_names <- rep_len(NA_character_, vcount(graph))
+    }
+
+    unaffected <- setdiff(seq_along(current_names), index)
+    unaffected_names <- current_names[unaffected]
+
+    if (length(value) == 1 && length(index) > 1) {
+      cli::cli_abort(
+        "Cannot set vertex attribute {.arg {name}} to a single value ({value}) for multiple vertices because it results in duplicate names."
+      )
+    }
+
+    if (any(value %in% unaffected_names)) {
+      dupes <- value[value %in% unaffected_names]
+      cli::cli_abort(
+        "{cli::qty(length(unique(dupes)))} Vertex {?name/names} already {?exists/exist}:
+              {paste(unique(dupes), collapse = ', ')}"
+      )
+    }
+  }
+
   complete <- is_complete_iterator(index)
   name_available <- (name %in% names(vattrs))
   if (!complete && !name_available) {

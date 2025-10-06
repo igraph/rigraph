@@ -62,6 +62,22 @@
       Error in `set_graph_attr()`:
       ! `name` must be a single string, not the number 1.
 
+# duplicated vertex names are handled correctly
+
+    Code
+      add_vertices(g, nv = 2, attr = list(name = c("A", "B")))
+    Condition
+      Error in `i_set_vertex_attr()`:
+      ! Vertex names already exist: A, B
+
+---
+
+    Code
+      set_vertex_attr(g, "name", 2:3, "C")
+    Condition
+      Error in `i_set_vertex_attr()`:
+      ! Cannot set vertex attribute `name` to a single value (C) for multiple vertices because it results in duplicate names.
+
 # set_vertex_attrs() works
 
     Code
