@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9002
+
+## Continuous integration
+
+- Use newer CSAN image.
+
+
 # igraph 2.2.0.9001
 
 ## Bug fixes
