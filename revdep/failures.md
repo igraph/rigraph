@@ -424,130 +424,6 @@ ERROR: loading failed
 
 
 ```
-# dataone
-
-<details>
-
-* Version: 2.2.2
-* GitHub: https://github.com/DataONEorg/rdataone
-* Source code: https://github.com/cran/dataone
-* Date/Publication: 2022-06-10 19:30:02 UTC
-* Number of recursive dependencies: 63
-
-Run `revdepcheck::cloud_details(, "dataone")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘dataone’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/dataone/new/dataone.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘dataone’ ...
-** package ‘dataone’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘dataone’
-* removing ‘/tmp/workdir/dataone/new/dataone.Rcheck/dataone’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘dataone’ ...
-** package ‘dataone’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘dataone’
-* removing ‘/tmp/workdir/dataone/old/dataone.Rcheck/dataone’
-
-
-```
-# datapack
-
-<details>
-
-* Version: 1.4.1
-* GitHub: https://github.com/ropensci/datapack
-* Source code: https://github.com/cran/datapack
-* Date/Publication: 2022-06-10 19:40:01 UTC
-* Number of recursive dependencies: 63
-
-Run `revdepcheck::cloud_details(, "datapack")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘datapack’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/datapack/new/datapack.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘datapack’ ...
-** package ‘datapack’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘datapack’
-* removing ‘/tmp/workdir/datapack/new/datapack.Rcheck/datapack’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘datapack’ ...
-** package ‘datapack’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘datapack’
-* removing ‘/tmp/workdir/datapack/old/datapack.Rcheck/datapack’
-
-
-```
 # EGAnet
 
 <details>
@@ -573,7 +449,7 @@ Run `revdepcheck::cloud_details(, "EGAnet")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘EGAnet/DESCRIPTION’ ... OK
@@ -602,7 +478,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘EGAnet/DESCRIPTION’ ... OK
@@ -647,7 +523,7 @@ Run `revdepcheck::cloud_details(, "FAfA")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘FAfA/DESCRIPTION’ ... OK
@@ -676,7 +552,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘FAfA/DESCRIPTION’ ... OK
@@ -696,68 +572,6 @@ Status: 1 ERROR
 
 
 ```
-# FAIRmaterials
-
-<details>
-
-* Version: 0.4.2.1
-* GitHub: NA
-* Source code: https://github.com/cran/FAIRmaterials
-* Date/Publication: 2024-06-27 15:40:02 UTC
-* Number of recursive dependencies: 90
-
-Run `revdepcheck::cloud_details(, "FAIRmaterials")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘FAIRmaterials’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/FAIRmaterials/new/FAIRmaterials.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘FAIRmaterials’ ...
-** package ‘FAIRmaterials’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘FAIRmaterials’
-* removing ‘/tmp/workdir/FAIRmaterials/new/FAIRmaterials.Rcheck/FAIRmaterials’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘FAIRmaterials’ ...
-** package ‘FAIRmaterials’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/usr/local/lib/R/site-library/redland/libs/redland.so':
-  librdf.so.0: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘FAIRmaterials’
-* removing ‘/tmp/workdir/FAIRmaterials/old/FAIRmaterials.Rcheck/FAIRmaterials’
-
-
-```
 # lavaan.shiny
 
 <details>
@@ -766,7 +580,7 @@ ERROR: lazy loading failed for package ‘FAIRmaterials’
 * GitHub: https://github.com/kylehamilton/lavaan.shiny
 * Source code: https://github.com/cran/lavaan.shiny
 * Date/Publication: 2017-04-07 06:05:09 UTC
-* Number of recursive dependencies: 114
+* Number of recursive dependencies: 110
 
 Run `revdepcheck::cloud_details(, "lavaan.shiny")` for more info
 
@@ -783,7 +597,7 @@ Run `revdepcheck::cloud_details(, "lavaan.shiny")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘lavaan.shiny/DESCRIPTION’ ... OK
@@ -812,7 +626,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘lavaan.shiny/DESCRIPTION’ ... OK
@@ -840,7 +654,7 @@ Status: 1 ERROR
 * GitHub: https://github.com/dmphillippo/multinma
 * Source code: https://github.com/cran/multinma
 * Date/Publication: 2025-05-31 00:00:02 UTC
-* Number of recursive dependencies: 149
+* Number of recursive dependencies: 150
 
 Run `revdepcheck::cloud_details(, "multinma")` for more info
 
@@ -2874,11 +2688,11 @@ ERROR: compilation failed for package ‘multinma’
 
 <details>
 
-* Version: 3.4.1
+* Version: 3.4.2
 * GitHub: https://github.com/kogalur/randomForestSRC
 * Source code: https://github.com/cran/randomForestSRC
-* Date/Publication: 2025-06-08 00:00:02 UTC
-* Number of recursive dependencies: 156
+* Date/Publication: 2025-09-30 11:40:02 UTC
+* Number of recursive dependencies: 155
 
 Run `revdepcheck::cloud_details(, "randomForestSRC")` for more info
 
@@ -2895,11 +2709,11 @@ Run `revdepcheck::cloud_details(, "randomForestSRC")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘randomForestSRC/DESCRIPTION’ ... OK
-* this is package ‘randomForestSRC’ version ‘3.4.1’
+* this is package ‘randomForestSRC’ version ‘3.4.2’
 * checking package namespace information ... OK
 * checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘imbalance’
@@ -2969,11 +2783,11 @@ Status: 1 NOTE
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘randomForestSRC/DESCRIPTION’ ... OK
-* this is package ‘randomForestSRC’ version ‘3.4.1’
+* this is package ‘randomForestSRC’ version ‘3.4.2’
 * checking package namespace information ... OK
 * checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘imbalance’
@@ -3077,7 +2891,7 @@ Run `revdepcheck::cloud_details(, "RSP")` for more info
 * GitHub: https://github.com/santosoph/sphereML
 * Source code: https://github.com/cran/sphereML
 * Date/Publication: 2025-05-09 17:10:06 UTC
-* Number of recursive dependencies: 192
+* Number of recursive dependencies: 193
 
 Run `revdepcheck::cloud_details(, "sphereML")` for more info
 
@@ -3094,7 +2908,7 @@ Run `revdepcheck::cloud_details(, "sphereML")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘sphereML/DESCRIPTION’ ... OK
@@ -3124,7 +2938,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘sphereML/DESCRIPTION’ ... OK
@@ -3153,7 +2967,7 @@ Status: 1 ERROR
 * GitHub: NA
 * Source code: https://github.com/cran/streamDAG
 * Date/Publication: 2025-01-14 21:50:02 UTC
-* Number of recursive dependencies: 137
+* Number of recursive dependencies: 136
 
 Run `revdepcheck::cloud_details(, "streamDAG")` for more info
 
@@ -3170,7 +2984,7 @@ Run `revdepcheck::cloud_details(, "streamDAG")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘streamDAG/DESCRIPTION’ ... OK
@@ -3198,7 +3012,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘streamDAG/DESCRIPTION’ ... OK
@@ -3242,7 +3056,7 @@ Run `revdepcheck::cloud_details(, "TestAnaAPP")` for more info
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘TestAnaAPP/DESCRIPTION’ ... OK
@@ -3271,7 +3085,7 @@ Status: 1 ERROR
 * R was compiled by
     gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
     GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.2 LTS
+* running under: Ubuntu 24.04.3 LTS
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘TestAnaAPP/DESCRIPTION’ ... OK
