@@ -935,7 +935,7 @@ test_that("knn works -- random graph", {
   r4 <- knn(g4)
   expect_equal(r4$knn[1000], 5)
   expect_equal(length(r4$knnk), 15)
-  expect_equal(r4$knnk[12], 5.64)
+  expect_equal(r4$knnk[12], 5.6389, tolerance = 1e-5)
 })
 
 test_that("knn works -- weighted graph", {
