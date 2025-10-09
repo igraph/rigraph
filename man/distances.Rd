@@ -14,7 +14,7 @@ mean_distance(
   graph,
   weights = NULL,
   directed = TRUE,
-  unconnected = TRUE,
+  unconn = TRUE,
   details = FALSE
 )
 
@@ -59,12 +59,6 @@ this argument is ignored for undirected graphs.}
 attribute is used. If this is \code{NA} then no weights are used (even if
 the graph has a \code{weight} attribute). In a weighted graph, the length
 of a path is the sum of the weights of its constituent edges.}
-
-\item{unconnected}{What to do if the graph is unconnected (not
-strongly connected if directed paths are considered). If TRUE, only
-the lengths of the existing paths are considered and averaged; if
-FALSE, the length of the missing paths are considered as having infinite
-length, making the mean distance infinite as well.}
 
 \item{details}{Whether to provide additional details in the result.
 Functions accepting this argument (like \code{mean_distance()}) return
@@ -121,6 +115,12 @@ which vertex \code{i} was reached. The start vertex and vertices that were
 not reached during the search will have zero in the corresponding entry of
 the vector. Note that the search terminates if all the vertices in \code{to}
 are reached.}
+
+\item{unconnected}{What to do if the graph is unconnected (not
+strongly connected if directed paths are considered). If TRUE, only
+the lengths of the existing paths are considered and averaged; if
+FALSE, the length of the missing paths are considered as having infinite
+length, making the mean distance infinite as well.}
 }
 \value{
 For \code{distances()} a numeric matrix with \code{length(to)}
@@ -328,5 +328,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \concept{paths}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_path_length_dijkstra}{\code{average_path_length_dijkstra()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_path_length}{\code{average_path_length()}}.}
 

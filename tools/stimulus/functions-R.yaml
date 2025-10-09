@@ -34,9 +34,6 @@ igraph_neighbors:
 igraph_is_directed:
     IGNORE: RR, RC
 
-igraph_degree:
-    IGNORE: RR, RC
-
 igraph_edge:
     IGNORE: RR, RC, RInit
 
@@ -246,12 +243,6 @@ igraph_are_connected:
 # Structural properties
 #######################################
 
-igraph_diameter:
-    IGNORE: RR, RC, RInit
-
-igraph_diameter_dijkstra:
-    IGNORE: RR, RC, RInit
-
 igraph_distances:
     IGNORE: RR, RC
 
@@ -451,12 +442,9 @@ igraph_joint_type_distribution:
 
 igraph_contract_vertices:
 
-# We use igraph_radius_dijkstra instead
-igraph_radius:
-    IGNORE: RR, RC
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
+    DEPS: start_vid ON graph, weights ON graph
 
 igraph_diversity:
 
