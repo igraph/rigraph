@@ -30,6 +30,12 @@ test_that("layout_with_fr() deprecated argument", {
   })
 })
 
+test_that("layout_nicely() works with proper weights and small trees", {
+  g <- make_star(12, mode = "out")
+  E(g)$weight <- 5:15
+  expect_warning(layout_nicely(g), NA)
+})
+
 test_that("layout_nicely() works with negative weights", {
   g <- make_graph("petersen")
   E(g)$weight <- -5:9
@@ -331,4 +337,41 @@ test_that("layout_randomly() errors well", {
   expect_snapshot(error = TRUE, {
     layout_randomly(g, dim = 4)
   })
+})
+
+test_that("layout normalization handles all-NaN coordinates correctly", {
+  # Test the internal .layout.norm.col function directly
+  # This tests the fix for all-NaN coordinate normalization
+
+  # Test normal case
+  normal_coords <- c(1, 2, 3, 4, 5)
+  normalized <- igraph:::.layout.norm.col(normal_coords, 0, 1)
+  expect_equal(range(normalized), c(0, 1))
+
+  # Test all-NaN case (this was the bug that was fixed)
+  nan_coords <- rep(NaN, 5)
+  normalized_nan <- igraph:::.layout.norm.col(nan_coords, 0, 1)
+  expected_middle <- rep(0.5, 5) # Should return middle value (0+1)/2 = 0.5
+  expect_equal(normalized_nan, expected_middle)
+
+  # Test all-NaN case with different range
+  normalized_nan_range <- igraph:::.layout.norm.col(nan_coords, -10, 10)
+  expected_middle_range <- rep(0, 5) # Should return middle value (-10+10)/2 = 0
+  expect_equal(normalized_nan_range, expected_middle_range)
+
+  # Test constant values (difference is zero)
+  constant_coords <- rep(5, 5)
+  normalized_constant <- igraph:::.layout.norm.col(constant_coords, 0, 1)
+  expected_constant_middle <- rep(0.5, 5)
+  expect_equal(normalized_constant, expected_constant_middle)
+
+  # Test that norm_coords works with all-NaN layouts
+  layout_all_nan <- matrix(NaN, nrow = 5, ncol = 2)
+  normalized_layout <- norm_coords(layout_all_nan, 0, 1, 0, 1)
+  expect_equal(normalized_layout, matrix(c(rep(0.5, 5), rep(0.5, 5)), ncol = 2))
+
+  # Test 3D layout normalization with all-NaN coordinates
+  layout_3d_nan <- matrix(NaN, nrow = 3, ncol = 3)
+  normalized_3d <- norm_coords(layout_3d_nan, 0, 1, 0, 1, 0, 1)
+  expect_equal(normalized_3d, matrix(rep(0.5, 9), ncol = 3))
 })

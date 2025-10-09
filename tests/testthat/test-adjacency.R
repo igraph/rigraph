@@ -789,3 +789,69 @@ test_that("graph_from_adjacency_matrix errors for NAs", {
   A <- matrix(c(1, 1, NA, 1), 2, 2)
   expect_snapshot(graph_from_adjacency_matrix(A), error = TRUE)
 })
+
+test_that("graph_from_adjacency_matrix handles add.colnames and add.rownames = FALSE correctly", {
+  # Create test matrix with row and column names
+  M <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  rownames(M) <- c("A", "B")
+  colnames(M) <- c("X", "Y")
+
+  # Test default behavior (should add names)
+  g_default <- graph_from_adjacency_matrix(M)
+  expect_equal(V(g_default)$name, c("X", "Y"))
+
+  # Test add.colnames = FALSE (should not add column names)
+  g_no_colnames <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_null(V(g_no_colnames)$name)
+
+  # Test add.rownames = FALSE (should not add row names)
+  g_no_rownames <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = NA,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_rownames)$name)
+
+  # Test both FALSE
+  g_no_names <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names)$name)
+
+  # Test with custom attribute names and FALSE values
+  g_col_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = FALSE,
+    add.rownames = "vertex_id"
+  )
+  expect_equal(V(g_col_false)$vertex_id, c("A", "B"))
+  expect_null(V(g_col_false)$name)
+
+  g_row_false <- graph_from_adjacency_matrix(
+    M,
+    add.colnames = "vertex_name",
+    add.rownames = FALSE
+  )
+  expect_equal(V(g_row_false)$vertex_name, c("X", "Y"))
+  expect_null(V(g_row_false)$name)
+
+  # Test matrix without names and FALSE parameters
+  M_no_names <- matrix(c(0, 1, 1, 0), nrow = 2, ncol = 2)
+  g_no_names_matrix <- graph_from_adjacency_matrix(
+    M_no_names,
+    add.colnames = FALSE,
+    add.rownames = FALSE
+  )
+  expect_null(V(g_no_names_matrix)$name)
+
+  # Test that FALSE is equivalent to NA behavior
+  g_na_col <- graph_from_adjacency_matrix(M, add.colnames = NA)
+  g_false_col <- graph_from_adjacency_matrix(M, add.colnames = FALSE)
+  expect_equal(vertex_attr_names(g_na_col), vertex_attr_names(g_false_col))
+
+  g_na_row <- graph_from_adjacency_matrix(M, add.rownames = NA)
+  g_false_row <- graph_from_adjacency_matrix(M, add.rownames = FALSE)
+  expect_equal(vertex_attr_names(g_na_row), vertex_attr_names(g_false_row))
+})

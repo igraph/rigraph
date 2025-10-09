@@ -189,6 +189,37 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_neighbors                           /
+/-------------------------------------------*/
+SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_neis;
+  igraph_integer_t c_vid;
+  igraph_neimode_t c_mode;
+  SEXP neis;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_neis, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_neis);
+  c_vid = (igraph_integer_t) REAL(vid)[0];
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_neighbors(&c_graph, &c_neis, c_vid, c_mode));
+
+                                        /* Convert output */
+  PROTECT(neis=R_igraph_vector_int_to_SEXPp1(&c_neis));
+  igraph_vector_int_destroy(&c_neis);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = neis;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_degree                              /
 /-------------------------------------------*/
 SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
