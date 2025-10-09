@@ -3981,30 +3981,6 @@ SEXP R_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
   return result;
 }
 
-SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP pmode, SEXP ploops) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_vector_int_t res;
-  igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(vids, &g, &vs, &vs_data);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_degree(&g, &res, vs, mode, loops));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
                            SEXP pweights) {
 

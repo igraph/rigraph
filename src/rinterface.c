@@ -189,6 +189,42 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_degree                              /
+/-------------------------------------------*/
+SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_res;
+  igraph_vs_t c_vids;
+  igraph_neimode_t c_mode;
+  igraph_loops_t c_loops;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_degree(&c_graph, &c_res, c_vids, c_mode, c_loops));
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  igraph_vector_int_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_all_eids_between                /
 /-------------------------------------------*/
 SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed) {

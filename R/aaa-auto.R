@@ -59,6 +59,20 @@ vcount_impl <- function(graph) {
   res
 }
 
+degree_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=c("twice", "none", "once")) {
+  # Argument checks
+  ensure_igraph(graph)
+  vids <- as_igraph_vs(graph, vids)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  loops <- switch(igraph.match.arg(loops), "none"=0L, "twice"=1L, "once"=2L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_degree, graph, vids-1, mode, loops)
+
+  res
+}
+
 get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   # Argument checks
   ensure_igraph(graph)
