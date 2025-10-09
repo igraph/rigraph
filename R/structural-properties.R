@@ -908,7 +908,7 @@ degree <- function(
 
   if (is.logical(loops)) {
     lifecycle::deprecate_soft(
-      "2.1.5",
+      "2.2.0",
       "degree(loops = 'must be a character string')"
     )
     if (loops) {
@@ -951,7 +951,7 @@ max_degree <- function(
 
   if (is.logical(loops)) {
     lifecycle::deprecate_soft(
-      "2.1.5",
+      "2.2.0",
       "max_degree(loops = 'must be a character string')"
     )
     if (loops) {
