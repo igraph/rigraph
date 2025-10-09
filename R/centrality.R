@@ -1593,7 +1593,8 @@ authority_score <- function(
     weights = weights,
     options = options
   )
-  scores$hub <- NULL
+  scores[["hub_vector"]] <- NULL
+
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 
@@ -1638,7 +1639,7 @@ hub_score <- function(
     weights = weights,
     options = options
   )
-  scores$authority <- NULL
+  scores[["authority_vector"]] <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 
