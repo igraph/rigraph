@@ -842,8 +842,28 @@ farthest_vertices <- function(
 #' @export
 #' @rdname distances
 #' @cdocs igraph_average_path_length
-mean_distance <- average_path_length_impl
+mean_distance <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  unconnected = TRUE,
+  details = FALSE
+) {
+  res <- average_path_length_impl(
+    graph,
+    weights = weights,
+    directed = directed,
+    unconn = unconnected,
+    details = details
+  )
 
+  if (details) {
+    res$unconnected <- res$unconn_pair
+    res$unconn_pair <- NULL
+  }
+
+  res
+}
 
 #' Degree and degree distribution of the vertices
 #'
