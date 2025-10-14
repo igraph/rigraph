@@ -6,7 +6,7 @@
 \usage{
 eigen_centrality(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   weights = NULL,
   options = arpack_defaults(),

@@ -1371,7 +1371,7 @@ eigen_defaults <- function() {
 #' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   weights = NULL,
   options = arpack_defaults(),
