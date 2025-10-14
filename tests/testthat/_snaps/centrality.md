@@ -90,6 +90,34 @@
       Warning:
       The `directed` argument of `eigen_centrality()` is deprecated as of igraph 2.2.0.
       i Use the mode argument.
+      s3 <- authority_score(g2, options = arpack_defaults)$vector
+    Condition
+      Warning:
+      `authority_score()` was deprecated in igraph 2.1.0.
+      i Please use `hits_scores()` instead.
+      Warning:
+      arpack_defaults was deprecated in igraph 1.6.0.
+      i Please use `arpack_defaults()` instead.
+      i So the function arpack_defaults(), not an object called arpack_defaults.
+      Warning:
+      The `scale` argument of `hits_scores()` is deprecated as of igraph 2.1.5.
+      i The function always behaves as if `scale = TRUE`. The argument will be removed in the future.
+
+# `hub_score()` works
+
+    Code
+      s3 <- hub_score(g2, options = arpack_defaults)$vector
+    Condition
+      Warning:
+      `hub_score()` was deprecated in igraph 2.0.3.
+      i Please use `hits_scores()` instead.
+      Warning:
+      arpack_defaults was deprecated in igraph 1.6.0.
+      i Please use `arpack_defaults()` instead.
+      i So the function arpack_defaults(), not an object called arpack_defaults.
+      Warning:
+      The `scale` argument of `hits_scores()` is deprecated as of igraph 2.1.5.
+      i The function always behaves as if `scale = TRUE`. The argument will be removed in the future.
 
 # arpack() errors well
 
