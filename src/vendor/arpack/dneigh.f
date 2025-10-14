@@ -13,7 +13,7 @@ c     ( RNORM, N, H, LDH, RITZR, RITZI, BOUNDS, Q, LDQ, WORKL, IERR )
 c
 c\Arguments
 c  RNORM   Double precision scalar.  (INPUT)
-c          Residual norm corresponding to the current upper Hessenberg 
+c          Residual norm corresponding to the current upper Hessenberg
 c          matrix H.
 c
 c  N       Integer.  (INPUT)
@@ -27,13 +27,13 @@ c          Leading dimension of H exactly as declared in the calling
 c          program.
 c
 c  RITZR,  Double precision arrays of length N.  (OUTPUT)
-c  RITZI   On output, RITZR(1:N) (resp. RITZI(1:N)) contains the real 
+c  RITZI   On output, RITZR(1:N) (resp. RITZI(1:N)) contains the real
 c          (respectively imaginary) parts of the eigenvalues of H.
 c
 c  BOUNDS  Double precision array of length N.  (OUTPUT)
 c          On output, BOUNDS contains the Ritz estimates associated with
-c          the eigenvalues RITZR and RITZI.  This is equal to RNORM 
-c          times the last components of the eigenvectors corresponding 
+c          the eigenvalues RITZR and RITZI.  This is equal to RNORM
+c          times the last components of the eigenvectors corresponding
 c          to the eigenvalues in RITZR and RITZI.
 c
 c  Q       Double precision N by N array.  (WORKSPACE)
@@ -49,7 +49,7 @@ c          the front end.  This is needed to keep the full Schur form
 c          of H and also in the calculation of the eigenvectors of H.
 c
 c  IERR    Integer.  (OUTPUT)
-c          Error exit flag from igraphdlaqrb or dtrevc.
+c          Error exit flag from dlahqr or dtrevc.
 c
 c\EndDoc
 c
@@ -61,9 +61,9 @@ c\Local variables:
 c     xxxxxx  real
 c
 c\Routines called:
-c     igraphdlaqrb  ARPACK routine to compute the real Schur form of an
+c     dlahqr  LAPACK routine to compute the real Schur form of an
 c             upper Hessenberg matrix and last row of the Schur vectors.
-c     igraphsecond  ARPACK utility routine for timing.
+c     igrapharscnd  ARPACK utility routine for timing.
 c     igraphdmout   ARPACK utility routine that prints matrices
 c     igraphdvout   ARPACK utility routine that prints vectors.
 c     dlacpy  LAPACK matrix copy routine.
@@ -74,20 +74,20 @@ c     dgemv   Level 2 BLAS routine for matrix vector multiplication.
 c     dcopy   Level 1 BLAS that copies one vector to another .
 c     dnrm2   Level 1 BLAS that computes the norm of a vector.
 c     dscal   Level 1 BLAS that scales a vector.
-c     
+c
 c
 c\Author
 c     Danny Sorensen               Phuong Vu
 c     Richard Lehoucq              CRPC / Rice University
 c     Dept. of Computational &     Houston, Texas
 c     Applied Mathematics
-c     Rice University           
-c     Houston, Texas    
+c     Rice University
+c     Houston, Texas
 c
 c\Revision history:
 c     xx/xx/92: Version ' 2.1'
 c
-c\SCCS Information: @(#) 
+c\SCCS Information: @(#)
 c FILE: neigh.F   SID: 2.3   DATE OF SID: 4/20/96   RELEASE: 2
 c
 c\Remarks
@@ -97,7 +97,7 @@ c\EndLib
 c
 c-----------------------------------------------------------------------
 c
-      subroutine igraphdneigh (rnorm, n, h, ldh, ritzr, ritzi, bounds, 
+      subroutine igraphdneigh (rnorm, n, h, ldh, ritzr, ritzi, bounds,
      &                   q, ldq, workl, ierr)
 c
 c     %----------------------------------------------------%
@@ -112,40 +112,40 @@ c     | Scalar Arguments |
 c     %------------------%
 c
       integer    ierr, n, ldh, ldq
-      Double precision     
+      Double precision
      &           rnorm
 c
 c     %-----------------%
 c     | Array Arguments |
 c     %-----------------%
 c
-      Double precision     
+      Double precision
      &           bounds(n), h(ldh,n), q(ldq,n), ritzi(n), ritzr(n),
      &           workl(n*(n+3))
-c 
+c
 c     %------------%
 c     | Parameters |
 c     %------------%
 c
-      Double precision     
+      Double precision
      &           one, zero
       parameter (one = 1.0D+0, zero = 0.0D+0)
-c 
+c
 c     %------------------------%
 c     | Local Scalars & Arrays |
 c     %------------------------%
 c
       logical    select(1)
       integer    i, iconj, msglvl
-      Double precision     
+      Double precision
      &           temp, vl(1)
 c
 c     %----------------------%
 c     | External Subroutines |
 c     %----------------------%
 c
-      external   dcopy, dlacpy, igraphdlaqrb, dtrevc, igraphdvout, 
-     & igraphsecond
+      external   dcopy, dlacpy, dlahqr, dtrevc, igraphdvout, 
+     &           igrapharscnd
 c
 c     %--------------------%
 c     | External Functions |
@@ -171,25 +171,29 @@ c     | Initialize timing statistics  |
 c     | & message level for debugging |
 c     %-------------------------------%
 c
-      call igraphsecond (t0)
+      call igrapharscnd (t0)
       msglvl = mneigh
-c 
+c
       if (msglvl .gt. 2) then
-          call igraphdmout (logfil, n, n, h, ldh, ndigit, 
+          call igraphdmout (logfil, n, n, h, ldh, ndigit,
      &         '_neigh: Entering upper Hessenberg matrix H ')
       end if
-c 
+c
 c     %-----------------------------------------------------------%
 c     | 1. Compute the eigenvalues, the last components of the    |
 c     |    corresponding Schur vectors and the full Schur form T  |
 c     |    of the current upper Hessenberg matrix H.              |
-c     | igraphdlaqrb returns the full Schur form of H in WORKL(1:N**2)  |
+c     | dlahqr returns the full Schur form of H in WORKL(1:N**2)  |
 c     | and the last components of the Schur vectors in BOUNDS.   |
 c     %-----------------------------------------------------------%
 c
       call dlacpy ('All', n, n, h, ldh, workl, n)
-      call igraphdlaqrb (.true., n, 1, n, workl, n, ritzr, ritzi,
-     &      bounds, ierr)
+      do 5 j = 1, n-1
+          bounds(j) = zero
+   5  continue
+      bounds(n) = 1
+      call dlahqr(.true., .true., n, 1, n, workl, n, ritzr, ritzi, 1, 1,
+     &            bounds, 1, ierr)
       if (ierr .ne. 0) go to 9000
 c
       if (msglvl .gt. 1) then
@@ -228,7 +232,7 @@ c
 c           %----------------------%
 c           | Real eigenvalue case |
 c           %----------------------%
-c    
+c
             temp = dnrm2( n, q(1,i), 1 )
             call dscal ( n, one / temp, q(1,i), 1 )
          else
@@ -242,7 +246,7 @@ c           | square root of two.                       |
 c           %-------------------------------------------%
 c
             if (iconj .eq. 0) then
-               temp = dlapy2( dnrm2( n, q(1,i), 1 ), 
+               temp = dlapy2( dnrm2( n, q(1,i), 1 ),
      &                        dnrm2( n, q(1,i+1), 1 ) )
                call dscal ( n, one / temp, q(1,i), 1 )
                call dscal ( n, one / temp, q(1,i+1), 1 )
@@ -250,7 +254,7 @@ c
             else
                iconj = 0
             end if
-         end if         
+         end if
    10 continue
 c
       call dgemv ('T', n, n, one, q, ldq, bounds, 1, zero, workl, 1)
@@ -271,7 +275,7 @@ c
 c           %----------------------%
 c           | Real eigenvalue case |
 c           %----------------------%
-c    
+c
             bounds(i) = rnorm * abs( workl(i) )
          else
 c
@@ -302,7 +306,7 @@ c
      &              '_neigh: Ritz estimates for the eigenvalues of H')
       end if
 c
-      call igraphsecond (t1)
+      call igrapharscnd (t1)
       tneigh = tneigh + (t1 - t0)
 c
  9000 continue

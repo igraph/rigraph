@@ -92,13 +92,13 @@
       [1] 1
       
       $options$numop
-      [1] 7
+      [1] 8
       
       $options$numopb
       [1] 0
       
       $options$numreo
-      [1] 5
+      [1] 6
       
       
 
