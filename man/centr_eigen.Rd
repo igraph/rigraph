@@ -6,17 +6,17 @@
 \usage{
 centr_eigen(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   options = arpack_defaults(),
-  normalized = TRUE
+  normalized = TRUE,
+  mode = c("out", "in", "all")
 )
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{directed}{logical scalar, whether to use directed shortest paths for
-calculating eigenvector centrality.}
+\item{directed}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{mode} instead.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
 eigenvector centralization requires normalized eigenvector centrality scores.}
@@ -26,6 +26,20 @@ for the ARPACK eigensolver.}
 
 \item{normalized}{Logical scalar. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}
+
+\item{mode}{How to consider edge directions in directed graphs.
+It is ignored for undirected graphs.
+Possible values:
+\itemize{
+\item \code{"out"} the left eigenvector of the adjacency matrix is calculated,
+i.e. the centrality of a vertex is proportional to the sum of centralities
+of vertices pointing to it. This is the standard eigenvector centrality.
+\item \code{"in"} the right eigenvector of the adjacency matrix is calculated,
+i.e. the centrality of a vertex is proportional to the sum of centralities
+of vertices it points to.
+\item \code{"all"} edge directions are ignored,
+and the unweighted eigenvector centrality is calculated.
+}}
 }
 \value{
 A named list with the following components:
