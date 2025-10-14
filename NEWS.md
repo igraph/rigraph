@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9003
+
+## Features
+
+- Generate almost all R implementations (#2047).
+
+
 # igraph 2.2.0.9002
 
 ## Continuous integration
