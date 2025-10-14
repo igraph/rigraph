@@ -1,7 +1,7 @@
-# eigen_centrality() deprecated scale argument
+# eigen_centrality() deprecated arguments
 
     Code
-      eigen_centrality(g, scale = TRUE)
+      eigen_centrality(g, directed = TRUE, scale = TRUE)
     Condition
       Warning:
       The `scale` argument of `eigen_centrality()` is deprecated as of igraph 2.1.1.
@@ -82,7 +82,7 @@
 ---
 
     Code
-      invisible(eigen_centrality(g, scale = FALSE))
+      invisible(eigen_centrality(g, directed = TRUE, scale = FALSE))
     Condition
       Warning:
       The `scale` argument of `eigen_centrality()` always as if TRUE as of igraph 2.1.1.
