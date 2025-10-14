@@ -1414,7 +1414,7 @@ eigen_centrality <- function(
         details = "Use the mode argument."
       )
       if (!lifecycle::is_present(mode)) {
-        mode <- "in"
+        mode <- "out"
       }
     } else {
       lifecycle::deprecate_soft(
