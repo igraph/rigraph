@@ -56,6 +56,8 @@ centralization.evcent.tmax <- function(
 #' `centralization.evcent()` was renamed to [centr_eigen()] to create a more
 #' consistent API.
 #' @inheritParams centr_eigen
+#' @param directed logical scalar, whether to use directed shortest paths for
+#'   calculating eigenvector centrality.
 #' @keywords internal
 #' @export
 centralization.evcent <- function(
@@ -569,12 +571,22 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
-#'   calculating eigenvector centrality.
+#' @param directed `r lifecycle::badge("deprecated")` Use `mode` instead.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
+#' @param mode How to consider edge directions in directed graphs.
+#' It is ignored for undirected graphs.
+#' Possible values:
+#'   - `"out"` the left eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices pointing to it. This is the standard eigenvector centrality.
+#'   - `"in"` the right eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices it points to.
+#'   - `"all"` edge directions are ignored,
+#' and the unweighted eigenvector centrality is calculated.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -617,10 +629,11 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #' @cdocs igraph_centralization_eigenvector_centrality
 centr_eigen <- function(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   options = arpack_defaults(),
-  normalized = TRUE
+  normalized = TRUE,
+  mode = c("out", "in", "all")
 ) {
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
@@ -631,12 +644,35 @@ centr_eigen <- function(
     )
   }
 
+  mode <- igraph.match.arg(mode)
+
+  if (lifecycle::is_present(directed)) {
+    if (directed) {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "out"
+      }
+    } else {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "all"
+      }
+    }
+  }
+
   centralization_eigenvector_centrality_impl(
     graph = graph,
-    directed = directed,
     options = options,
     normalized = normalized,
-    scale = TRUE
+    mode = mode
   )
 }
 
@@ -670,8 +706,9 @@ centr_eigen <- function(
 centr_eigen_tmax <- function(
   graph = NULL,
   nodes = 0,
-  directed = FALSE,
-  scale = deprecated()
+  directed = deprecated(),
+  scale = deprecated(),
+  mode = c("out", "in", "all")
 ) {
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
@@ -681,11 +718,33 @@ centr_eigen_tmax <- function(
       The argument will be removed in the future."
     )
   }
+  mode <- igraph.match.arg(mode)
+
+  if (lifecycle::is_present(directed)) {
+    if (directed) {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "out"
+      }
+    } else {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "all"
+      }
+    }
+  }
 
   centralization_eigenvector_centrality_tmax_impl(
     graph = graph,
     nodes = nodes,
-    directed = directed,
-    scale = TRUE
+    mode = mode
   )
 }
