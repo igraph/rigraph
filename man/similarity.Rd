@@ -6,16 +6,18 @@
 \usage{
 similarity(
   graph,
-  vids = V(graph),
+  vids = deprecated(),
   mode = c("all", "out", "in", "total"),
   loops = FALSE,
-  method = c("jaccard", "dice", "invlogweighted")
+  method = c("jaccard", "dice", "invlogweighted"),
+  vids_from = V(graph),
+  vids_to = vids_from
 )
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertex ids for which the similarity is calculated.}
+\item{vids}{lifecycle::badge("deprecated")}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
 possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
@@ -25,6 +27,12 @@ possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 sets.}
 
 \item{method}{The method to use.}
+
+\item{vids_from}{The vertex IDs of the first set of vertices of the pairs
+for which the calculation will be done.}
+
+\item{vids_to}{The vertex IDs of the second set of vertices of the pairs
+for which the calculation will be done.}
 }
 \value{
 A \code{length(vids)} by \code{length(vids)} numeric matrix

@@ -6,7 +6,7 @@
       IGRAPH UN-B 8 7 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-      [1] A--c A--d B--b B--c B--e C--b C--d
+      [1] B--b C--b A--c B--c A--d C--d B--e
 
 ---
 
@@ -26,7 +26,7 @@
       IGRAPH UN-B 8 10 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-       [1] A--c A--d A--d A--e B--b B--e C--b C--c C--c C--e
+       [1] B--b C--b A--c C--c C--c A--d A--d A--e B--e C--e
 
 # graph_from_biadjacency_matrix() works -- sparse
 

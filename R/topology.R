@@ -997,7 +997,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_canonical_permutation
-canonical_permutation <- canonical_permutation_impl
+canonical_permutation <- canonical_permutation_bliss_impl
 
 
 #' Permute the vertices of a graph
@@ -1129,7 +1129,7 @@ graph.isomorphic <- isomorphic_impl
 #' @family graph automorphism
 #' @export
 #' @cdocs igraph_count_automorphisms
-count_automorphisms <- count_automorphisms_impl
+count_automorphisms <- count_automorphisms_bliss_impl
 
 
 #' Generating set of the automorphism group of a graph

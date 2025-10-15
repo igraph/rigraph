@@ -7,8 +7,9 @@
 centr_eigen_tmax(
   graph = NULL,
   nodes = 0,
-  directed = FALSE,
-  scale = deprecated()
+  directed = deprecated(),
+  scale = deprecated(),
+  mode = c("out", "in", "all")
 )
 }
 \arguments{
