@@ -58,7 +58,7 @@ minimum.spanning.tree <- function(
 #'   distances.
 #' @param algorithm The algorithm to use for calculation. `unweighted` can
 #'   be used for unweighted graphs, and `prim` runs Prim's algorithm for
-#'   weighted graphs.  If this is `NULL` then igraph will select the
+#'   weighted graphs.  By default igraph will select the
 #'   algorithm automatically: if the graph has an edge attribute called
 #'   `weight` or the `weights` argument is not `NULL` then Prim's
 #'   algorithm is chosen, otherwise the unweighted algorithm is used.
@@ -79,29 +79,17 @@ minimum.spanning.tree <- function(
 #' g <- sample_gnp(100, 3 / 100)
 #' g_mst <- mst(g)
 #'
-mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
+mst <- function(
+  graph,
+  weights = NULL,
+  algorithm = c("automatic", "unweighted", "prim", "kruskal"),
+  ...
+) {
   ensure_igraph(graph)
-
-  if (is.null(algorithm)) {
-    if (!is.null(weights) || "weight" %in% edge_attr_names(graph)) {
-      algorithm <- "prim"
-    } else {
-      algorithm <- "unweighted"
-    }
-  }
-
-  if (algorithm == "unweighted") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
-  } else if (algorithm == "prim") {
-    if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
-      cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
-    } else if (is.null(weights)) {
-      weights <- E(graph)$weight
-    }
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
-  } else {
-    cli::cli_abort("Invalid {.arg algorithm}.")
-  }
+  algorithm <- igraph.match.arg(algorithm)
+  minimum_spanning_tree_impl(
+    graph,
+    weights = weights,
+    method = algorithm
+  )
 }

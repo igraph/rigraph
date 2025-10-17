@@ -5411,7 +5411,7 @@ is_complete_impl <- function(graph) {
   res
 }
 
-minimum_spanning_tree_impl <- function(graph, weights=NULL, method=c("automatic", "prim", "kruskal", "unweighted")) {
+minimum_spanning_tree_impl <- function(graph, weights=NULL, method=c("automatic", "unweighted", "prim", "kruskal")) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -5422,6 +5422,7 @@ minimum_spanning_tree_impl <- function(graph, weights=NULL, method=c("automatic"
   } else {
     weights <- NULL
   }
+  method <- switch(igraph.match.arg(method), "automatic"=0L, "unweighted"=1L, "prim"=2L, "kruskal"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

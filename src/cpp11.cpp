@@ -246,7 +246,7 @@ extern SEXP R_igraph_hypercube(SEXP, SEXP);
 extern SEXP R_igraph_i_levc_arp(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_identical_graphs(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_iea_game(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_incident(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_incident(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_incident_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_independence_number(SEXP);
 extern SEXP R_igraph_independent_vertex_sets(SEXP, SEXP, SEXP);
@@ -351,8 +351,7 @@ extern SEXP R_igraph_mincut(SEXP, SEXP);
 extern SEXP R_igraph_mincut_value(SEXP, SEXP);
 extern SEXP R_igraph_minimum_cycle_basis(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_minimum_size_separators(SEXP);
-extern SEXP R_igraph_minimum_spanning_tree_prim(SEXP, SEXP);
-extern SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP);
+extern SEXP R_igraph_minimum_spanning_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_modularity(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_modularity_matrix(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu(SEXP, SEXP, SEXP);
@@ -381,6 +380,7 @@ extern SEXP R_igraph_power_law_fit_new(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_preference_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_product(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_pseudo_diameter(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_radius(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_random_sample(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_random_spanning_tree(SEXP, SEXP);
 extern SEXP R_igraph_random_walk(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -719,7 +719,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
     {"R_igraph_iea_game",                                   (DL_FUNC) &R_igraph_iea_game,                                    4},
-    {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},
+    {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    4},
     {"R_igraph_incident_edges",                             (DL_FUNC) &R_igraph_incident_edges,                              3},
     {"R_igraph_independence_number",                        (DL_FUNC) &R_igraph_independence_number,                         1},
     {"R_igraph_independent_vertex_sets",                    (DL_FUNC) &R_igraph_independent_vertex_sets,                     3},
@@ -824,8 +824,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_mincut_value",                               (DL_FUNC) &R_igraph_mincut_value,                                2},
     {"R_igraph_minimum_cycle_basis",                        (DL_FUNC) &R_igraph_minimum_cycle_basis,                         5},
     {"R_igraph_minimum_size_separators",                    (DL_FUNC) &R_igraph_minimum_size_separators,                     1},
-    {"R_igraph_minimum_spanning_tree_prim",                 (DL_FUNC) &R_igraph_minimum_spanning_tree_prim,                  2},
-    {"R_igraph_minimum_spanning_tree_unweighted",           (DL_FUNC) &R_igraph_minimum_spanning_tree_unweighted,            1},
+    {"R_igraph_minimum_spanning_tree",                      (DL_FUNC) &R_igraph_minimum_spanning_tree,                       3},
     {"R_igraph_modularity",                                 (DL_FUNC) &R_igraph_modularity,                                  5},
     {"R_igraph_modularity_matrix",                          (DL_FUNC) &R_igraph_modularity_matrix,                           4},
     {"R_igraph_motifs_randesu",                             (DL_FUNC) &R_igraph_motifs_randesu,                              3},
@@ -854,6 +853,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
     {"R_igraph_product",                                    (DL_FUNC) &R_igraph_product,                                     3},
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             5},
+    {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      3},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},
     {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},
     {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 6},
