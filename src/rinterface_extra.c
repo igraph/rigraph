@@ -4508,67 +4508,6 @@ SEXP R_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
   return result;
 }
 
-SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP graph) {
-
-  igraph_t g;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-
-  igraph_vector_int_t edges;
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree(&g, &edges, NULL, IGRAPH_MST_UNWEIGHTED));
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &edges);
-
-  igraph_es_t edge_set;
-  IGRAPH_R_CHECK(igraph_edges(&g, edge_set, &edges, false));
-  IGRAPH_FINALLY_PV(igraph_es_destroy, &edge_set);
-  igraph_vector_int_destroy(&edges);
-
-  igraph_t mst;
-  IGRAPH_R_CHECK(igraph_subgraph_from_edges(&g, &mst, edge_set, true));
-  igraph_es_destroy(&edge_set);
-
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
-
-  IGRAPH_FINALLY_CLEAN(2);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_minimum_spanning_tree_prim(SEXP graph, SEXP pweights) {
-
-  igraph_t g;
-  igraph_vector_t weights;
-  SEXP result;
-
-  R_SEXP_to_vector(pweights, &weights);
-
-  R_SEXP_to_igraph(graph, &g);
-
-  igraph_vector_int_t edges;
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree(&g, &edges, &weights, IGRAPH_MST_PRIM));
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &edges);
-
-  igraph_es_t edge_set;
-  IGRAPH_R_CHECK(igraph_edges(&g, edge_set, &edges, false));
-  IGRAPH_FINALLY_PV(igraph_es_destroy, &edge_set);
-  igraph_vector_int_destroy(&edges);
-
-  igraph_t mst;
-  IGRAPH_R_CHECK(igraph_subgraph_from_edges(&g, &mst, edge_set, true));
-  igraph_es_destroy(&edge_set);
-
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
-
-  IGRAPH_FINALLY_CLEAN(2);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
                                  SEXP pmode, SEXP pno, SEXP weights,
                                  SEXP output, SEXP ppred, SEXP pinbound,
