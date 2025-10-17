@@ -820,7 +820,7 @@ test_that("arpack works for non-symmetric matrices", {
 test_that("eigen_centrality() deprecated scale argument", {
   g <- make_ring(10, directed = FALSE)
   expect_snapshot({
-    eigen_centrality(g, scale = TRUE)
+    invisible(eigen_centrality(g, scale = TRUE))
   })
   # For some reason, this produces different outputs on Windows and macOS
   expect_snapshot({
