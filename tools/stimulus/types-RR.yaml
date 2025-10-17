@@ -546,3 +546,7 @@ VERTEX_WEIGHTS:
         } else {
           %I% <- NULL
         }
+
+MSTALGORITHM:
+    DEFAULT:
+        AUTOMATIC: c("automatic", "prim", "kruskal", "unweighted")
