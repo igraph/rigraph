@@ -151,22 +151,14 @@ dyad.census <- function(graph) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 motifs <- function(graph, size = 3, cut.prob = NULL) {
-  ensure_igraph(graph)
-
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_motifs_randesu,
+  res <- motifs_randesu_impl(
     graph,
-    as.numeric(size),
-    cut.prob
+    size = size,
+    cut.prob = cut.prob
   )
   res[is.nan(res)] <- NA
   res
@@ -200,20 +192,14 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
 count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_no,
+  motifs_randesu_no_impl(
     graph,
-    as.numeric(size),
-    cut.prob
+    size = size,
+    cut.prob = cut.prob
   )
 }
 
@@ -258,10 +244,6 @@ sample_motifs <- function(
 ) {
   ensure_igraph(graph)
 
-  if (!is.null(cut.prob)) {
-    cut.prob <- as.numeric(cut.prob)
-  }
-
   if (!is.null(cut.prob) && length(cut.prob) != size) {
     cli::cli_abort("{arg cut.prob} must be the same length as {.arg size}")
   }
@@ -275,13 +257,11 @@ sample_motifs <- function(
     sample.size <- 0
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_motifs_randesu_estimate,
+  motifs_randesu_estimate_impl(
     graph,
-    as.numeric(size),
-    cut.prob,
-    as.numeric(sample.size),
+    size = size,
+    cut.prob = cut.prob,
+    sample.size = sample.size,
     sample
   )
 }
