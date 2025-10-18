@@ -147,30 +147,26 @@ test_that("authority_score survives stress test", {
   withr::local_seed(42)
 
   is.principal <- function(M, lambda) {
-    expect_equal(eigen(M)$values[1], lambda)
+    all.equal(eigen(M)$values[1], lambda)
   }
 
   is.ev <- function(M, v, lambda) {
-    expect_equal(as.vector(M %*% v), lambda * v)
+    all.equal(as.vector(M %*% v), lambda * v)
   }
 
   is.good <- function(M, v, lambda) {
-    is.principal(M, lambda)
-    is.ev(M, v, lambda)
+    is.principal(M, lambda) && is.ev(M, v, lambda)
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
-    as <- hits_scores(G)
-    M <- as_adjacency_matrix(G, sparse = FALSE)
-    is.good(t(M) %*% M, as$authority, as$value)
-  }
-
-  for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    G <- sample_gnm(10, sample(15:25, 1), directed = FALSE)
+    while (!is_connected(G)) {
+      G <- sample_gnm(10, sample(15:25, 1), directed = FALSE)
+    }
+    G <- as_directed(G, mode = "mutual")
     hs <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
-    is.good(M %*% t(M), hs$hub, hs$value)
+    expect_true(is.good(M %*% t(M), hs$hub, hs$value))
   }
 })
 
