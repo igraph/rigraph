@@ -16,7 +16,7 @@ distances.}
 
 \item{algorithm}{The algorithm to use for calculation. \code{unweighted} can
 be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
-weighted graphs.  If this is \code{NULL} then igraph will select the
+weighted graphs.  By default igraph will select the
 algorithm automatically: if the graph has an edge attribute called
 \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
 algorithm is chosen, otherwise the unweighted algorithm is used.}

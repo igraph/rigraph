@@ -546,3 +546,8 @@ VERTEX_WEIGHTS:
         } else {
           %I% <- NULL
         }
+
+MSTALGORITHM:
+    DEFAULT:
+        AUTOMATIC: c("automatic", "unweighted", "prim", "kruskal")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "automatic"=0L, "unweighted"=1L, "prim"=2L, "kruskal"=3L)'

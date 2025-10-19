@@ -990,14 +990,6 @@ igraph_from_prufer:
           name: Tree from Prufer sequence
         GATTR-PARAM: prufer
 
-igraph_minimum_spanning_tree:
-    IGNORE: RR, RC, RInit
-
-igraph_minimum_spanning_tree_unweighted:
-    IGNORE: RR, RC
-
-igraph_minimum_spanning_tree_prim:
-    IGNORE: RR, RC
 
 #######################################
 # Coloring
