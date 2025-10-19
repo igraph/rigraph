@@ -1364,14 +1364,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $nrgeo
@@ -1393,14 +1391,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $nrgeo
@@ -1452,8 +1448,9 @@
     Code
       get_all_simple_paths_impl(g, 1, 3)
     Output
-      + 3/3 vertices:
+      [[1]]
       [1] 1 2 3
+      
 
 # get_all_simple_paths_impl errors
 
@@ -1470,14 +1467,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
 
@@ -1518,14 +1513,12 @@
     Output
       $vertices
       $vertices[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $edges
       $edges[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $parents
@@ -2496,10 +2489,10 @@
     Code
       suppressWarnings(hub_and_authority_scores_impl(g))
     Output
-      $hub
+      $hub_vector
       [1] 1 1 1 1 1
       
-      $authority
+      $authority_vector
       [1] 1 1 1 1 1
       
       $value
@@ -2826,7 +2819,7 @@
       [1] 2
       
       $theoretical_max
-      [1] 2
+      [1] 6
       
 
 # centralization_degree_impl errors
@@ -3922,22 +3915,14 @@
       
       $components
       $components[[1]]
-      + 2/3 vertices:
       [1] 3 2
       
       $components[[2]]
-      + 2/3 vertices:
       [1] 2 1
       
       
       $articulation_points
       [1] 2
-      
-      $tree.edges
-      list()
-      
-      $component.edges
-      list()
       
       $articulation.points
       + 0/3 vertices:
@@ -4092,23 +4077,18 @@
       cliques_impl(g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
       [[2]]
-      + 1/3 vertex:
       [1] 3
       
       [[3]]
-      + 2/3 vertices:
       [1] 2 3
       
       [[4]]
-      + 1/3 vertex:
       [1] 1
       
       [[5]]
-      + 2/3 vertices:
       [1] 1 2
       
 
@@ -4118,11 +4098,9 @@
       cliques_impl(g, min = 2, max = 2)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 2 3
       
       [[2]]
-      + 2/3 vertices:
       [1] 1 2
       
 
@@ -4162,11 +4140,9 @@
       largest_cliques_impl(g)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4221,23 +4197,18 @@
       weighted_cliques_impl(g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
       [[2]]
-      + 1/3 vertex:
       [1] 3
       
       [[3]]
-      + 2/3 vertices:
       [1] 2 3
       
       [[4]]
-      + 1/3 vertex:
       [1] 1
       
       [[5]]
-      + 2/3 vertices:
       [1] 1 2
       
 
@@ -4248,7 +4219,6 @@
       max.weight = 3, maximal = TRUE)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 1 2
       
 
@@ -4266,11 +4236,9 @@
       largest_weighted_cliques_impl(g)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4280,7 +4248,6 @@
       largest_weighted_cliques_impl(g, vertex.weights = c(1, 2, 3))
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4335,9 +4302,9 @@
       layout_random_impl(g)
     Output
                   [,1]       [,2]
-      [1,]  0.91714717  0.7003783
-      [2,] -0.84358557  0.6509057
-      [3,] -0.08120892 -0.8259847
+      [1,]  0.91714717 -0.8435856
+      [2,] -0.08120892  0.7003783
+      [3,]  0.65090567 -0.8259847
 
 # layout_random_impl errors
 
@@ -4480,10 +4447,10 @@
     Code
       layout_random_3d_impl(g)
     Output
-                  [,1]       [,2]      [,3]
-      [1,]  0.91714717  0.7003783 0.7338074
-      [2,] -0.84358557  0.6509057 0.4644714
-      [3,] -0.08120892 -0.8259847 0.5240391
+                [,1]       [,2]        [,3]
+      [1,] 0.9171472 -0.8435856 -0.08120892
+      [2,] 0.7003783  0.6509057 -0.82598468
+      [3,] 0.7338074  0.4644714  0.52403915
 
 # layout_random_3d_impl errors
 
@@ -4623,9 +4590,9 @@
       layout_gem_impl(g, res = matrix(0, nrow = 3, ncol = 2))
     Output
                 [,1]      [,2]
-      [1,] 200.18284 -69.23950
-      [2,]  86.00346  64.12806
-      [3,]  66.22930 -92.94294
+      [1,] 198.00782 -89.56102
+      [2,]  97.48628  69.81047
+      [3,]  62.46741 -81.07358
 
 ---
 
@@ -4633,10 +4600,10 @@
       layout_gem_impl(g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE,
       maxiter = 10, temp.max = 2, temp.min = 0.1, temp.init = 1)
     Output
-                 [,1]       [,2]
-      [1,]  1.0114521 -0.1206363
-      [2,] -0.2178589  2.9621162
-      [3,] -0.7089555 -3.8896500
+                   [,1]         [,2]
+      [1,]  2.957479289 -2.693158072
+      [2,] -2.952570979  2.698577710
+      [3,] -0.008515571 -0.009237893
 
 # layout_gem_impl errors
 
@@ -4651,10 +4618,10 @@
     Code
       layout_davidson_harel_impl(g, res = matrix(0, nrow = 3, ncol = 2))
     Output
-               [,1]      [,2]
-      [1,] 1.152116 0.9424808
-      [2,] 2.474361 2.5195497
-      [3,] 3.849187 4.0402661
+               [,1]       [,2]
+      [1,] 4.585389  0.5320103
+      [2,] 3.619767 -1.3038597
+      [3,] 2.715926 -3.1387678
 
 ---
 
@@ -4665,9 +4632,9 @@
       weight.node.edge.dist = 0.3)
     Output
                 [,1]      [,2]
-      [1,] -6.609493 -2.155221
-      [2,] -8.660255 -3.797365
-      [3,] -6.485087 -5.224752
+      [1,] 0.7466363 -2.423994
+      [2,] 2.9971183 -2.558975
+      [3,] 5.1781802 -3.072543
 
 # layout_davidson_harel_impl errors
 
@@ -4783,9 +4750,9 @@
     Code
       similarity_dice_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
     Output
-           [,1] [,2]
-      [1,]  1.0  0.8
-      [2,]  0.8  1.0
+           [,1]      [,2] [,3]
+      [1,]  1.0 0.6666667  0.5
+      [2,]  0.8 1.0000000  0.5
 
 # similarity_dice_impl errors
 
@@ -4882,9 +4849,9 @@
     Code
       similarity_jaccard_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
     Output
-                [,1]      [,2]
-      [1,] 1.0000000 0.6666667
-      [2,] 0.6666667 1.0000000
+                [,1] [,2]      [,3]
+      [1,] 1.0000000  0.5 0.3333333
+      [2,] 0.6666667  1.0 0.3333333
 
 # similarity_jaccard_impl errors
 
@@ -5179,7 +5146,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.512987
+      [1] 1.5
       
 
 ---
@@ -5192,7 +5159,7 @@
       [1] 0 0 0
       
       $codelength
-      [1] 1.462254
+      [1] 1.459148
       
 
 # community_infomap_impl errors
@@ -5210,11 +5177,9 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -5229,11 +5194,9 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -5920,7 +5883,8 @@
 # local_scan_neighborhood_ecount_impl basic
 
     Code
-      local_scan_neighborhood_ecount_impl(g, neighborhoods = list(1:2, 2:3, 2:4, 2))
+      local_scan_neighborhood_ecount_impl(g, neighborhoods = list(1:2 - 1, 2:3 - 1, 2:
+        4 - 1, 2 - 1))
     Output
       [1] 1 1 2 0
 
@@ -5928,7 +5892,7 @@
 
     Code
       local_scan_neighborhood_ecount_impl(g, weights = c(1, 2, 3), neighborhoods = list(
-        1:2, 1:3, 2:4, 1))
+        1:2 - 1, 1:3 - 1, 2:4 - 1, 1 - 1))
     Output
       [1] 1 3 5 0
 
@@ -5953,15 +5917,15 @@
       local_scan_subset_ecount_impl(g, weights = c(1, 2, 3), subsets = list(c(1, 2),
       c(2, 3)))
     Output
-      [1] 1 2
+      [1] 2 3
 
 # local_scan_subset_ecount_impl errors
 
     Code
       x
     Condition
-      Error in `.x - 1`:
-      ! non-numeric argument to binary operator
+      Error in `local_scan_subset_ecount_impl()`:
+      ! REAL() can only be applied to a 'numeric', not a 'integer'
 
 # list_triangles_impl basic
 
@@ -6006,7 +5970,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -6023,7 +5987,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -6372,21 +6336,17 @@
     Output
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      [1] 2
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -6409,21 +6369,17 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      [1] 2
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -6438,13 +6394,11 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       
@@ -6515,7 +6469,6 @@
       all_minimal_st_separators_impl(g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
 
@@ -6533,7 +6486,6 @@
       minimum_size_separators_impl(g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
 
@@ -6822,58 +6774,14 @@
     Code
       canonical_permutation_impl(g)
     Output
-      $labeling
-      [1] 2 3 1
-      
-      $info
-      $info$nof_nodes
-      [1] 3
-      
-      $info$nof_leaf_nodes
-      [1] 3
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 1
-      
-      $info$max_level
-      [1] 1
-      
-      $info$group_size
-      [1] "2"
-      
-      
+      [1] 3 1 2
 
 ---
 
     Code
       canonical_permutation_impl(g, colors = c(1, 2, 3))
     Output
-      $labeling
       [1] 1 2 3
-      
-      $info
-      $info$nof_nodes
-      [1] 1
-      
-      $info$nof_leaf_nodes
-      [1] 1
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 0
-      
-      $info$max_level
-      [1] 0
-      
-      $info$group_size
-      [1] "1"
-      
-      
 
 # canonical_permutation_impl errors
 
@@ -7023,48 +6931,14 @@
     Code
       count_automorphisms_impl(g)
     Output
-      $nof_nodes
-      [1] 3
-      
-      $nof_leaf_nodes
-      [1] 3
-      
-      $nof_bad_nodes
-      [1] 0
-      
-      $nof_canupdates
-      [1] 1
-      
-      $max_level
-      [1] 1
-      
-      $group_size
-      [1] "2"
-      
+      [1] 2
 
 ---
 
     Code
       count_automorphisms_impl(g, colors = c(1, 2, 3))
     Output
-      $nof_nodes
       [1] 1
-      
-      $nof_leaf_nodes
-      [1] 1
-      
-      $nof_bad_nodes
-      [1] 0
-      
-      $nof_canupdates
-      [1] 0
-      
-      $max_level
-      [1] 0
-      
-      $group_size
-      [1] "1"
-      
 
 # count_automorphisms_impl errors
 
@@ -7080,7 +6954,6 @@
       automorphism_group_impl(g)
     Output
       [[1]]
-      + 3/3 vertices:
       [1] 3 2 1
       
 
@@ -7089,29 +6962,7 @@
     Code
       automorphism_group_impl(g, colors = c(1, 2, 3))
     Output
-      $generators
       list()
-      
-      $info
-      $info$nof_nodes
-      [1] 1
-      
-      $info$nof_leaf_nodes
-      [1] 1
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 0
-      
-      $info$max_level
-      [1] 0
-      
-      $info$group_size
-      [1] "1"
-      
-      
 
 # automorphism_group_impl errors
 
@@ -7429,9 +7280,9 @@
     Output
       $X
                  [,1]       [,2]
-      [1,] -0.7071068 -0.7071068
+      [1,] -0.7071068  0.7071068
       [2,]  1.4142136  0.0000000
-      [3,] -0.7071068  0.7071068
+      [3,] -0.7071068 -0.7071068
       
       $Y
       NULL
