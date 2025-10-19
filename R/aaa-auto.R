@@ -59,6 +59,26 @@ vcount_impl <- function(graph) {
   res
 }
 
+neighbors_impl <- function(graph, vid, mode=c("all", "out", "in", "total"), loops=c("twice", "none", "once"), multiple=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  loops <- switch(igraph.match.arg(loops), "none"=0L, "twice"=1L, "once"=2L)
+  multiple <- as.logical(multiple)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_neighbors, graph, vid-1, mode, loops, multiple)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 degree_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=c("twice", "none", "once")) {
   # Argument checks
   ensure_igraph(graph)
