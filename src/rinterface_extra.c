@@ -3512,7 +3512,7 @@ igraph_error_t R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 igraph_error_t R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, igraph_vector_int_t *data) {
 
   IGRAPH_CHECK(R_SEXP_to_vector_int_copy(rit, data));
-  igraph_vs_vector(it, data);
+  IGRAPH_CHECK(igraph_vs_vector(it, data));
 
   return IGRAPH_SUCCESS;
 }
@@ -3524,7 +3524,7 @@ igraph_error_t R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, i
 igraph_error_t R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it, igraph_vector_int_t *data) {
 
   IGRAPH_CHECK(R_SEXP_to_vector_int_copy(rit, data));
-  igraph_es_vector(it, data);
+  IGRAPH_CHECK(igraph_es_vector(it, data));
 
   return IGRAPH_SUCCESS;
 }
@@ -5767,18 +5767,23 @@ SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
   igraph_vector_int_init(&neis, 0);
   igraph_vit_create(&g, v, &vv);
   PROTECT(result=NEW_LOGICAL(igraph_vcount(&g)));
-  memset(LOGICAL(result), 0, sizeof(LOGICAL(result)[0]) *
+  memset(LOGICAL(result), FALSE, sizeof(LOGICAL(result)[0]) *
          (size_t) igraph_vcount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
+    igraph_integer_t neis_size;
+
     // FIXME: expose
     igraph_bool_t loops = false;
     igraph_bool_t multiple = false;
     IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode, loops, multiple));
-    for (igraph_integer_t i=0; i<igraph_vector_int_size(&neis); i++) {
-      igraph_integer_t nei=VECTOR(neis)[i];
-      LOGICAL(result)[nei]=1;
+
+    neis_size = igraph_vector_int_size(&neis);
+    for (igraph_integer_t i=0; i < neis_size; i++) {
+      igraph_integer_t nei = VECTOR(neis)[i];
+      LOGICAL(result)[nei] = TRUE;
     }
+
     IGRAPH_VIT_NEXT(vv);
   }
 
@@ -5807,16 +5812,16 @@ SEXP R_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
 
   igraph_eit_create(&g, e, &ee);
   PROTECT(result=NEW_LOGICAL(igraph_vcount(&g)));
-  memset(LOGICAL(result), 0, sizeof(LOGICAL(result)[0]) *
+  memset(LOGICAL(result), FALSE, sizeof(LOGICAL(result)[0]) *
          (size_t) igraph_vcount(&g));
 
   while (!IGRAPH_EIT_END(ee)) {
     IGRAPH_R_CHECK(igraph_edge(&g, IGRAPH_EIT_GET(ee), &from, &to));
-    if (mode & 1) {
-      LOGICAL(result)[from]=1;
+    if (mode & IGRAPH_OUT) {
+      LOGICAL(result)[from] = TRUE;
     }
-    if (mode & 2) {
-      LOGICAL(result)[to]=1;
+    if (mode & IGRAPH_IN) {
+      LOGICAL(result)[to] = TRUE;
     }
     IGRAPH_EIT_NEXT(ee);
   }
@@ -5850,12 +5855,16 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
          (size_t) igraph_ecount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
+    igraph_integer_t adje_size;
+
     // FIXME: expose
     igraph_bool_t loops = false;
     IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), mode, loops));
-    for (igraph_integer_t i=0; i < igraph_vector_int_size(&adje); i++) {
+    adje_size = igraph_vector_int_size(&adje);
+
+    for (igraph_integer_t i=0; i < adje_size; i++) {
       igraph_integer_t edge=VECTOR(adje)[i];
-      LOGICAL(result)[edge]=1;
+      LOGICAL(result)[edge] = TRUE;
     }
     IGRAPH_VIT_NEXT(vv);
   }
