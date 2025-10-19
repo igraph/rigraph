@@ -408,11 +408,6 @@ igraph_centralization:
 
 igraph_centralization_degree:
 
-igraph_centralization_degree_tmax:
-    IGNORE: RR
-    # temporarily coded manually because we need to handle a deprecation
-    # between igraph 1.3.0 and 1.4.0
-
 igraph_centralization_betweenness:
 
 igraph_centralization_betweenness_tmax:
