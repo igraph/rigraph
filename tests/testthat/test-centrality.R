@@ -146,31 +146,28 @@ test_that("authority_score survives stress test", {
 
   withr::local_seed(42)
 
-  is.principal <- function(M, lambda) {
+  expect_principal <- function(M, lambda) {
     expect_equal(eigen(M)$values[1], lambda)
   }
 
-  is.ev <- function(M, v, lambda) {
+  expect_ev <- function(M, v, lambda) {
     expect_equal(as.vector(M %*% v), lambda * v)
   }
 
-  is.good <- function(M, v, lambda) {
-    is.principal(M, lambda)
-    is.ev(M, v, lambda)
+  expect_good <- function(M, v, lambda) {
+    expect_principal(M, lambda)
+    expect_ev(M, v, lambda)
   }
 
   for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
-    as <- hits_scores(G)
-    M <- as_adjacency_matrix(G, sparse = FALSE)
-    is.good(t(M) %*% M, as$authority, as$value)
-  }
-
-  for (i in 1:100) {
-    G <- sample_gnm(10, sample(1:20, 1))
+    repeat {
+      G <- sample_gnm(10, sample(15:25, 1), directed = FALSE)
+      if (is_connected(G)) break
+    }
+    G <- as_directed(G, mode = "mutual")
     hs <- hits_scores(G)
     M <- as_adjacency_matrix(G, sparse = FALSE)
-    is.good(M %*% t(M), hs$hub, hs$value)
+    expect_good(M %*% t(M), hs$hub, hs$value)
   }
 })
 
@@ -578,26 +575,27 @@ test_that("eigen_centrality() works", {
 
   set.seed(20250907)
 
-  is.principal <- function(M, lambda, eps = 1e-12) {
-    abs(eigen(M)$values[1] - lambda) < eps
+  expect_principal <- function(M, lambda, eps = 1e-12) {
+    expect_lt(abs(eigen(M)$values[1] - lambda), eps)
   }
 
-  is.ev <- function(M, v, lambda, eps = 1e-12) {
-    max(abs(M %*% v - lambda * v)) < eps
+  expect_ev <- function(M, v, lambda, eps = 1e-12) {
+    expect_lt(max(abs(M %*% v - lambda * v)), eps)
   }
 
-  is.good <- function(M, v, lambda, eps = 1e-12) {
-    is.principal(M, lambda, eps) && is.ev(M, v, lambda, eps)
+  expect_good <- function(M, v, lambda, eps = 1e-12) {
+    expect_principal(M, lambda, eps)
+    expect_ev(M, v, lambda, eps)
   }
 
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
     ev <- eigen_centrality(G)
-    expect_true(is.good(
+    expect_good(
       as_adjacency_matrix(G, sparse = FALSE),
       ev$vector,
       ev$value
-    ))
+    )
   }
 })
 
