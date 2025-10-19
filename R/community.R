@@ -2417,7 +2417,7 @@ cluster_label_prop0 <- function(
   # Necessary because evaluated later
   mode <- igraph.match.arg(mode)
   lpa_variant <- igraph.match.arg(lpa_variant)
-  browser()
+
   # Function call
   membership <- community_label_propagation_impl(
     graph,
