@@ -435,7 +435,9 @@ RWSTUCK:
 
 LPA_VARIANT:
     DEFAULT:
-        Default: c("dominance", "retention", "fast")
+        DOMINANCE: c("dominance", "retention", "fast")
+        RETENTION: c("retention", "dominance", "fast")
+        FAST: c("fast", "dominance", "retention")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%),
           "dominance"=0L, "retention"=1L, "fast"=2L)
