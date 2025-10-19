@@ -533,7 +533,7 @@ EDGE_WEIGHTS:
         if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$weight
         }
-        if (!is.null(%I%) && any(!is.na(%I%))) {
+        if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
         } else {
           %I% <- NULL
@@ -544,7 +544,7 @@ VERTEX_WEIGHTS:
         if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
           %I% <- V(%I1%)$weight
         }
-        if (!is.null(%I%) && any(!is.na(%I%))) {
+        if (!is.null(%I%) && !all(is.na(%I%))) {
           %I% <- as.numeric(%I%)
         } else {
           %I% <- NULL
