@@ -2343,6 +2343,10 @@ cluster_leading_eigen <- function(
 #' @param fixed Logical vector denoting which labels are fixed. Of course this
 #'   makes sense only if you provided an initial state, otherwise this element
 #'   will be ignored. Also note that vertices without labels cannot be fixed.
+#' @param lpa_variant Which variant of the label propagation algorithm to run.
+#'   - `"dominance"` (default) check for dominance of all nodes after each iteration.
+#'   - `"retention"` keep current label if among dominant labels, only check if labels changed.
+#'   - `"fast"` sample from dominant labels, only check neighbors.
 #' @return `cluster_label_prop()` returns a
 #'   [communities()] object, please see the [communities()]
 #'   manual page for details.
@@ -2371,7 +2375,8 @@ cluster_label_prop <- function(
   ...,
   mode = c("out", "in", "all"),
   initial = NULL,
-  fixed = NULL
+  fixed = NULL,
+  lpa_variant = c("dominance", "retention", "fast")
 ) {
   if (...length() > 0) {
     lifecycle::deprecate_soft(
@@ -2393,7 +2398,7 @@ cluster_label_prop <- function(
     return(inject(cluster_label_prop0(!!!dots)))
   }
 
-  cluster_label_prop0(graph, weights, mode, initial, fixed)
+  cluster_label_prop0(graph, weights, mode, initial, fixed, lpa_variant)
 }
 
 cluster_label_prop0 <- function(
@@ -2401,22 +2406,26 @@ cluster_label_prop0 <- function(
   weights = NULL,
   mode = c("out", "in", "all"),
   initial = NULL,
-  fixed = NULL
+  fixed = NULL,
+  lpa_variant = c("dominance", "retention", "fast")
 ) {
   # Argument checks
   ensure_igraph(graph)
 
   # Necessary because evaluated later
   mode <- igraph.match.arg(mode)
-
+  lpa_variant <- igraph.match.arg(lpa_variant)
+  browser()
   # Function call
   membership <- community_label_propagation_impl(
     graph,
     mode = mode,
     weights = weights,
     initial = initial,
-    fixed = fixed
+    fixed = fixed,
+    lpa.variant = lpa_variant
   )
+
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
