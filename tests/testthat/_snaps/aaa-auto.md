@@ -736,7 +736,7 @@
       x
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices for G(n,p) model. Invalid value
 
 # erdos_renyi_game_gnm_impl basic
 
@@ -762,7 +762,7 @@
       x
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices for G(n,m) model. Invalid value
 
 # growing_random_game_impl basic
 
@@ -908,11 +908,11 @@
     Code
       simple_interconnected_islands_game_impl(2, 3, 0.5, 1)
     Output
-      IGRAPH U--- 6 5 -- Interconnected islands model
+      IGRAPH U--- 6 6 -- Interconnected islands model
       + attr: name (g/c), islands.n (g/n), islands.size (g/n), islands.pin
       | (g/n), n.inter (g/n)
       + edges:
-      [1] 1--2 1--3 2--3 3--6 5--6
+      [1] 1--2 1--3 2--3 2--6 4--5 4--6
 
 # simple_interconnected_islands_game_impl errors
 
@@ -1166,7 +1166,7 @@
       x
     Condition
       Error in `correlated_pair_game_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices for G(n,p) model. Invalid value
 
 # dot_product_game_impl basic
 
@@ -1174,7 +1174,7 @@
       dot_product_game_impl(matrix(0.5, 5, 2))
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      At vendor/cigraph/src/games/dotproduct.c:87 : Greater than 1 connection probability in dot-product graph.
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1186,7 +1186,7 @@
       dot_product_game_impl(matrix(0.5, 5, 2), directed = TRUE)
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      At vendor/cigraph/src/games/dotproduct.c:87 : Greater than 1 connection probability in dot-product graph.
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -1294,7 +1294,7 @@
 # get_shortest_path_impl basic
 
     Code
-      get_shortest_path_impl(g, 1, 3)
+      get_shortest_path_impl(g, from = 1, to = 3)
     Output
       $vertices
       + 3/3 vertices:
@@ -1360,7 +1360,7 @@
 # get_all_shortest_paths_impl basic
 
     Code
-      get_all_shortest_paths_impl(g, 1, 3)
+      get_all_shortest_paths_impl(g, from = 1, to = 3)
     Output
       $vpaths
       $vpaths[[1]]
@@ -2016,7 +2016,7 @@
       transitivity_barrat_impl(g)
     Condition
       Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      At vendor/cigraph/src/properties/triangles.c:889 : No weights given for Barrat's transitivity, unweighted version is used.
     Output
       [1] NaN   0 NaN
 
@@ -2026,7 +2026,7 @@
       transitivity_barrat_impl(g, mode = "zero")
     Condition
       Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      At vendor/cigraph/src/properties/triangles.c:889 : No weights given for Barrat's transitivity, unweighted version is used.
     Output
       [1] 0 0 0
 
@@ -2092,7 +2092,7 @@
 ---
 
     Code
-      maxdegree_impl(g, mode = "in", loops = FALSE)
+      maxdegree_impl(g, mode = "in", loops = "twice")
     Output
       [1] 2
 
@@ -2412,10 +2412,10 @@
 ---
 
     Code
-      eigenvector_centrality_impl(g, directed = TRUE, scale = FALSE)
+      eigenvector_centrality_impl(g, mode = "out")
     Output
       $vector
-      [1] 0.5000000 0.7071068 0.5000000
+      [1] 0.7071068 1.0000000 0.7071068
       
       $value
       [1] 1.414214
@@ -2494,90 +2494,13 @@
 # hub_and_authority_scores_impl basic
 
     Code
-      hub_and_authority_scores_impl(g)
+      suppressWarnings(hub_and_authority_scores_impl(g))
     Output
       $hub
       [1] 1 1 1 1 1
       
       $authority
       [1] 1 1 1 1 1
-      
-      $value
-      [1] 16
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 5
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 4
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 4
-      
-      
-
----
-
-    Code
-      hub_and_authority_scores_impl(g, scale = FALSE)
-    Output
-      $hub
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
-      
-      $authority
-      [1] 0.4472136 0.4472136 0.4472136 0.4472136 0.4472136
       
       $value
       [1] 16
@@ -2842,7 +2765,7 @@
 ---
 
     Code
-      strength_impl(g, mode = "in", loops = FALSE)
+      strength_impl(g, mode = "in", loops = "twice")
     Output
       [1] 1 2 1
 
@@ -2894,7 +2817,7 @@
 ---
 
     Code
-      centralization_degree_impl(g, mode = "in", loops = FALSE, normalized = FALSE)
+      centralization_degree_impl(g, mode = "in", loops = "twice", normalized = FALSE)
     Output
       $res
       [1] 1 2 1
@@ -3117,7 +3040,7 @@
 ---
 
     Code
-      centralization_eigenvector_centrality_impl(g, directed = TRUE, normalized = FALSE)
+      centralization_eigenvector_centrality_impl(g, mode = "out", normalized = FALSE)
     Output
       $vector
       [1] 0.7071068 1.0000000 0.7071068
@@ -3207,12 +3130,12 @@
     Code
       centralization_eigenvector_centrality_tmax_impl(nodes = 3)
     Output
-      [1] 1
+      [1] 2
 
 ---
 
     Code
-      centralization_eigenvector_centrality_tmax_impl(nodes = 3, directed = TRUE)
+      centralization_eigenvector_centrality_tmax_impl(nodes = 3, mode = "out")
     Output
       [1] 2
 
@@ -3393,7 +3316,7 @@
 # pseudo_diameter_impl basic
 
     Code
-      pseudo_diameter_impl(g, 1)
+      pseudo_diameter_impl(g, start.vid = 1)
     Output
       $diameter
       [1] 2
@@ -3408,7 +3331,7 @@
 ---
 
     Code
-      pseudo_diameter_impl(g, 1, directed = FALSE, unconnected = FALSE)
+      pseudo_diameter_impl(g, start.vid = 1, directed = FALSE, unconnected = FALSE)
     Output
       $diameter
       [1] 2
@@ -3783,7 +3706,7 @@
       x
     Condition
       Error in `bipartite_game_gnp_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite G(n,p) model. Invalid value
 
 # bipartite_game_gnm_impl basic
 
@@ -3819,7 +3742,7 @@
       x
     Condition
       Error in `bipartite_game_gnm_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite G(n,m) model. Invalid value
 
 # get_laplacian_impl basic
 
@@ -4858,7 +4781,7 @@
 ---
 
     Code
-      similarity_dice_impl(g, vids = 1:2, mode = "in", loops = TRUE)
+      similarity_dice_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
     Output
            [,1] [,2]
       [1,]  1.0  0.8
@@ -4957,7 +4880,7 @@
 ---
 
     Code
-      similarity_jaccard_impl(g, vids = 1:2, mode = "in", loops = TRUE)
+      similarity_jaccard_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
     Output
                 [,1]      [,2]
       [1,] 1.0000000 0.6666667
@@ -5109,7 +5032,7 @@
 # community_label_propagation_impl basic
 
     Code
-      community_label_propagation_impl(g)
+      community_label_propagation_impl(g, lpa.variant = "dominance")
     Output
       [1] 0 0 0
 
@@ -5117,7 +5040,7 @@
 
     Code
       community_label_propagation_impl(g, mode = "in", weights = c(1, 2), initial = 1:
-        3, fixed = c(TRUE, FALSE, TRUE))
+        3, fixed = c(TRUE, FALSE, TRUE), lpa.variant = "retention")
     Output
       [1] 0 1 1
 
@@ -5204,7 +5127,7 @@
 # community_leiden_impl basic
 
     Code
-      community_leiden_impl(g, weights = c(1, 2), vertex.weights = c(1, 2, 3),
+      community_leiden_impl(g, weights = c(1, 2), vertex.out.weights = c(1, 2, 3),
       resolution = 0.5, beta = 0.1, start = TRUE, n.iterations = 1, membership = 1:3)
     Output
       $membership
@@ -5262,7 +5185,7 @@
 ---
 
     Code
-      community_infomap_impl(g, e.weights = c(1, 2), v.weights = c(1, 2, 3),
+      community_infomap_impl(g, edge.weights = c(1, 2), vertex.weights = c(1, 2, 3),
       nb.trials = 2)
     Output
       $membership
@@ -5813,7 +5736,7 @@
       triad_census_impl(g)
     Condition
       Warning in `triad_census_impl()`:
-      At vendor/cigraph/src/misc/motifs.c:1157 : Triad census called on an undirected graph. All connections will be treated as mutual.
+      At vendor/cigraph/src/misc/motifs.c:1167 : Triad census called on an undirected graph. All connections will be treated as mutual.
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -6926,7 +6849,7 @@
 ---
 
     Code
-      canonical_permutation_impl(g, colors = c(1, 2, 3), sh = "fl")
+      canonical_permutation_impl(g, colors = c(1, 2, 3))
     Output
       $labeling
       [1] 1 2 3
@@ -7122,7 +7045,7 @@
 ---
 
     Code
-      count_automorphisms_impl(g, colors = c(1, 2, 3), sh = "fl")
+      count_automorphisms_impl(g, colors = c(1, 2, 3))
     Output
       $nof_nodes
       [1] 1
@@ -7164,7 +7087,7 @@
 ---
 
     Code
-      automorphism_group_impl(g, colors = c(1, 2, 3), sh = "fl", details = TRUE)
+      automorphism_group_impl(g, colors = c(1, 2, 3))
     Output
       $generators
       list()
@@ -9189,30 +9112,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# convex_hull_2d_impl basic
-
-    Code
-      convex_hull_2d_impl(matrix(1:6, ncol = 2))
-    Output
-      $resverts
-      [1] 1 3
-      
-      $rescoords
-           [,1] [,2]
-      [1,]    1    4
-      [2,]    3    6
-      
-
-# convex_hull_2d_impl errors
-
-    Code
-      x
-    Condition
-      Warning in `convex_hull_2d_impl()`:
-      NAs introduced by coercion
-      Error in `convex_hull_2d_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'character'
 
 # dim_select_impl basic
 
