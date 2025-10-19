@@ -874,13 +874,13 @@ test_that("get_shortest_path_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(get_shortest_path_impl(g, 1, 3))
+  expect_snapshot(get_shortest_path_impl(g, from = 1, to = 3))
 })
 
 test_that("get_shortest_path_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(get_shortest_path_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_shortest_path_impl(NULL, from = 1, to = 3))
 })
 
 # 59. get_shortest_path_bellman_ford_impl
@@ -919,13 +919,17 @@ test_that("get_all_shortest_paths_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(get_all_shortest_paths_impl(g, 1, 3))
+  expect_snapshot(get_all_shortest_paths_impl(g, from = 1, to = 3))
 })
 
 test_that("get_all_shortest_paths_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(get_all_shortest_paths_impl(NULL, 1, 3))
+  expect_snapshot_igraph_error(get_all_shortest_paths_impl(
+    NULL,
+    from = 1,
+    to = 3
+  ))
 })
 
 # 62. get_all_shortest_paths_dijkstra_impl
@@ -1355,7 +1359,7 @@ test_that("maxdegree_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(maxdegree_impl(g))
-  expect_snapshot(maxdegree_impl(g, mode = "in", loops = FALSE))
+  expect_snapshot(maxdegree_impl(g, mode = "in", loops = "twice"))
 })
 
 test_that("maxdegree_impl errors", {
@@ -1584,11 +1588,7 @@ test_that("eigenvector_centrality_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(eigenvector_centrality_impl(g))
-  expect_snapshot(eigenvector_centrality_impl(
-    g,
-    directed = TRUE,
-    scale = FALSE
-  ))
+  expect_snapshot(eigenvector_centrality_impl(g, mode = "out"))
 })
 
 test_that("eigenvector_centrality_impl errors", {
@@ -1603,8 +1603,7 @@ test_that("hub_and_authority_scores_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_full_graph(5)
-  expect_snapshot(hub_and_authority_scores_impl(g))
-  expect_snapshot(hub_and_authority_scores_impl(g, scale = FALSE))
+  expect_snapshot(suppressWarnings(hub_and_authority_scores_impl(g)))
 })
 
 test_that("hub_and_authority_scores_impl errors", {
@@ -1748,7 +1747,7 @@ test_that("strength_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(strength_impl(g))
-  expect_snapshot(strength_impl(g, mode = "in", loops = FALSE))
+  expect_snapshot(strength_impl(g, mode = "in", loops = "twice"))
 })
 
 test_that("strength_impl errors", {
@@ -1786,7 +1785,7 @@ test_that("centralization_degree_impl basic", {
   expect_snapshot(centralization_degree_impl(
     g,
     mode = "in",
-    loops = FALSE,
+    loops = "twice",
     normalized = FALSE
   ))
 })
@@ -1884,7 +1883,7 @@ test_that("centralization_eigenvector_centrality_impl basic", {
   expect_snapshot(centralization_eigenvector_centrality_impl(g))
   expect_snapshot(centralization_eigenvector_centrality_impl(
     g,
-    directed = TRUE,
+    mode = "out",
     normalized = FALSE
   ))
 })
@@ -1905,7 +1904,7 @@ test_that("centralization_eigenvector_centrality_tmax_impl basic", {
   expect_snapshot(centralization_eigenvector_centrality_tmax_impl(nodes = 3))
   expect_snapshot(centralization_eigenvector_centrality_tmax_impl(
     nodes = 3,
-    directed = TRUE
+    mode = "out"
   ))
 })
 
@@ -2064,10 +2063,10 @@ test_that("pseudo_diameter_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(pseudo_diameter_impl(g, 1))
+  expect_snapshot(pseudo_diameter_impl(g, start.vid = 1))
   expect_snapshot(pseudo_diameter_impl(
     g,
-    1,
+    start.vid = 1,
     directed = FALSE,
     unconnected = FALSE
   ))
@@ -3051,7 +3050,7 @@ test_that("similarity_dice_impl basic", {
   expect_snapshot(similarity_dice_impl(g))
   expect_snapshot(similarity_dice_impl(
     g,
-    vids = 1:2,
+    vit.from = 1:2,
     mode = "in",
     loops = TRUE
   ))
@@ -3139,7 +3138,7 @@ test_that("similarity_jaccard_impl basic", {
   expect_snapshot(similarity_jaccard_impl(g))
   expect_snapshot(similarity_jaccard_impl(
     g,
-    vids = 1:2,
+    vit.from = 1:2,
     mode = "in",
     loops = TRUE
   ))
@@ -3283,13 +3282,17 @@ test_that("community_label_propagation_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
-  expect_snapshot(community_label_propagation_impl(g))
+  expect_snapshot(community_label_propagation_impl(
+    g,
+    lpa.variant = "dominance"
+  ))
   expect_snapshot(community_label_propagation_impl(
     g,
     mode = "in",
     weights = c(1, 2),
     initial = 1:3,
-    fixed = c(TRUE, FALSE, TRUE)
+    fixed = c(TRUE, FALSE, TRUE),
+    lpa.variant = "retention"
   ))
 })
 
@@ -3344,7 +3347,7 @@ test_that("community_leiden_impl basic", {
   expect_snapshot(community_leiden_impl(
     g,
     weights = c(1, 2),
-    vertex.weights = c(1, 2, 3),
+    vertex.out.weights = c(1, 2, 3),
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
@@ -3382,8 +3385,8 @@ test_that("community_infomap_impl basic", {
   expect_snapshot(community_infomap_impl(g))
   expect_snapshot(community_infomap_impl(
     g,
-    e.weights = c(1, 2),
-    v.weights = c(1, 2, 3),
+    edge.weights = c(1, 2),
+    vertex.weights = c(1, 2, 3),
     nb.trials = 2
   ))
 })
@@ -3933,12 +3936,12 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
   g <- path_graph_impl(4)
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
-    neighborhoods = list(1:2, 2:3, 2:4, 2)
+    neighborhoods = list(1:2 - 1, 2:3 - 1, 2:4 - 1, 2 - 1)
   ))
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     g,
     weights = c(1, 2, 3),
-    neighborhoods = list(1:2, 1:3, 2:4, 1)
+    neighborhoods = list(1:2 - 1, 1:3 - 1, 2:4 - 1, 1 - 1)
   ))
 })
 
@@ -4532,7 +4535,7 @@ test_that("canonical_permutation_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(canonical_permutation_impl(g))
-  expect_snapshot(canonical_permutation_impl(g, colors = c(1, 2, 3), sh = "fl"))
+  expect_snapshot(canonical_permutation_impl(g, colors = c(1, 2, 3)))
 })
 
 test_that("canonical_permutation_impl errors", {
@@ -4586,7 +4589,7 @@ test_that("count_automorphisms_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(3)
   expect_snapshot(count_automorphisms_impl(g))
-  expect_snapshot(count_automorphisms_impl(g, colors = c(1, 2, 3), sh = "fl"))
+  expect_snapshot(count_automorphisms_impl(g, colors = c(1, 2, 3)))
 })
 
 test_that("count_automorphisms_impl errors", {
@@ -4604,9 +4607,7 @@ test_that("automorphism_group_impl basic", {
   expect_snapshot(automorphism_group_impl(g))
   expect_snapshot(automorphism_group_impl(
     g,
-    colors = c(1, 2, 3),
-    sh = "fl",
-    details = TRUE
+    colors = c(1, 2, 3)
   ))
 })
 
@@ -4807,20 +4808,6 @@ test_that("sir_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(sir_impl(NULL, beta = 0.1, gamma = 0.1))
-})
-
-# 304. convex_hull_2d_impl
-
-test_that("convex_hull_2d_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(convex_hull_2d_impl(matrix(1:6, ncol = 2)))
-})
-
-test_that("convex_hull_2d_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(convex_hull_2d_impl("a"))
 })
 
 # 305. dim_select_impl
