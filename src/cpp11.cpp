@@ -368,7 +368,7 @@ extern SEXP R_igraph_nearest_neighbor_graph(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_graphs(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_neighborhood_size(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_neighbors(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_neighbors(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_no_components(SEXP, SEXP);
 extern SEXP R_igraph_path_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_path_length_hist(SEXP, SEXP);
@@ -841,7 +841,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_neighborhood",                               (DL_FUNC) &R_igraph_neighborhood,                                5},
     {"R_igraph_neighborhood_graphs",                        (DL_FUNC) &R_igraph_neighborhood_graphs,                         5},
     {"R_igraph_neighborhood_size",                          (DL_FUNC) &R_igraph_neighborhood_size,                           5},
-    {"R_igraph_neighbors",                                  (DL_FUNC) &R_igraph_neighbors,                                   3},
+    {"R_igraph_neighbors",                                  (DL_FUNC) &R_igraph_neighbors,                                   5},
     {"R_igraph_no_components",                              (DL_FUNC) &R_igraph_no_components,                               2},
     {"R_igraph_path_graph",                                 (DL_FUNC) &R_igraph_path_graph,                                  3},
     {"R_igraph_path_length_hist",                           (DL_FUNC) &R_igraph_path_length_hist,                            2},
