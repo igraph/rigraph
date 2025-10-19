@@ -16,6 +16,7 @@ on:
     branches:
       - main
       - master
+      - next
   workflow_dispatch:
     inputs:
       ref:
