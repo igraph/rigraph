@@ -12982,7 +12982,7 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
   igraph_bool_t c_res;
-  igraph_neimode_t c_mode;
+
   SEXP res;
   SEXP mode;
 
@@ -12992,20 +12992,13 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   R_SEXP_to_vector_bool(types, &c_types);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, NULL));
+  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, 0));
   PutRNGstate();
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, mode);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("mode"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);

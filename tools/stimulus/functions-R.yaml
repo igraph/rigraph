@@ -997,6 +997,10 @@ igraph_from_prufer:
 
 igraph_vertex_coloring_greedy:
 
+igraph_is_bipartite_coloring:
+    PARAMS: GRAPH graph, BIPARTITE_TYPES types, OUT BOOLEAN res, OPTIONAL OUT NULL mode
+    DEPS: types ON graph
+
 #######################################
 # Other, (yet) undocumented functions
 #######################################
