@@ -325,6 +325,7 @@ assign(".next", 1, .tkplot.env)
 #' }
 #'
 tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
+  # nocov start
   ensure_igraph(graph)
 
   # Libraries
@@ -799,12 +800,13 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   )
 
   tkp.id
+  # nocov end
 }
 
 ###################################################################
 # Internal functions handling data about layouts for the GUI
 ###################################################################
-
+# nocov start
 .tkplot.addlayout <- function(name, layout.data) {
   if (!exists(".layouts", envir = .tkplot.env)) {
     assign(".layouts", list(), .tkplot.env)
@@ -993,7 +995,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     )
   )
 )
-
+# nocov end
 ###################################################################
 # Other public functions, misc.
 ###################################################################
@@ -1001,6 +1003,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 #' @rdname tkplot
 #' @export
 tk_close <- function(tkp.id, window.close = TRUE) {
+  # nocov start
   if (window.close) {
     cmd <- paste(sep = "", "tkp.", tkp.id, "$top")
     top <- eval(parse(text = cmd), .tkplot.env)
@@ -1010,21 +1013,25 @@ tk_close <- function(tkp.id, window.close = TRUE) {
   cmd <- paste(sep = "", "tkp.", tkp.id)
   rm(list = cmd, envir = .tkplot.env)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_off <- function() {
+  # nocov start
   eapply(.tkplot.env, function(tkp) {
     tcltk::tkdestroy(tkp$top)
   })
   rm(list = ls(.tkplot.env), envir = .tkplot.env)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_fit <- function(tkp.id, width = NULL, height = NULL) {
+  # nocov start
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
     width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
@@ -1051,11 +1058,13 @@ tk_fit <- function(tkp.id, width = NULL, height = NULL) {
   # Update
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_center <- function(tkp.id) {
+  # nocov start
   tkp <- .tkplot.get(tkp.id)
   width <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
   height <- as.numeric(tcltk::tkwinfo("height", tkp$canvas))
@@ -1075,12 +1084,14 @@ tk_center <- function(tkp.id) {
   # Update
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
+  # nocov start
   tkp <- .tkplot.get(tkp.id)
   new_coords <- do_call(
     newlayout,
@@ -1090,11 +1101,13 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tk_fit(tkp.id)
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_postscript <- function(tkp.id) {
+  # nocov start
   tkp <- .tkplot.get(tkp.id)
 
   filename <- tcltk::tkgetSaveFile(
@@ -1104,11 +1117,13 @@ tk_postscript <- function(tkp.id) {
   )
   tcltk::tkpostscript(tkp$canvas, file = filename)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_coords <- function(tkp.id, norm = FALSE) {
+  # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
   coords[, 2] <- max(coords[, 2]) - coords[, 2]
   if (norm) {
@@ -1120,20 +1135,24 @@ tk_coords <- function(tkp.id, norm = FALSE) {
     coords[, 2] <- coords[, 2] / max(coords[, 2]) - 0.5
   }
   coords
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_set_coords <- function(tkp.id, coords) {
+  # nocov start
   stopifnot(is.matrix(coords), ncol(coords) == 2)
   .tkplot.set(tkp.id, "coords", coords)
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
+  # nocov start
   coords <- .tkplot.get(tkp.id, "coords")
 
   if (is.null(degree) && is.null(rad)) {
@@ -1154,12 +1173,15 @@ tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   .tkplot.set(tkp.id, "coords", coords)
   tk_center(tkp.id)
   invisible(NULL)
+  # nocov end
 }
 
 #' @rdname tkplot
 #' @export
 tk_canvas <- function(tkp.id) {
+  # nocov start
   .tkplot.get(tkp.id)$canvas
+  # nocov end
 }
 
 ###################################################################
@@ -1167,6 +1189,7 @@ tk_canvas <- function(tkp.id) {
 ###################################################################
 
 .tkplot.new <- function(tkp) {
+  # nocov start
   id <- get(".next", .tkplot.env)
   assign(".next", id + 1, .tkplot.env)
   assign("tmp", tkp, .tkplot.env)
@@ -1174,34 +1197,42 @@ tk_canvas <- function(tkp.id) {
   eval(parse(text = cmd), .tkplot.env)
   rm("tmp", envir = .tkplot.env)
   id
+  # nocov end
 }
 
 .tkplot.get <- function(tkp.id, what = NULL) {
+  # nocov start
   if (is.null(what)) {
     get(paste("tkp.", tkp.id, sep = ""), .tkplot.env)
   } else {
     cmd <- paste("tkp.", tkp.id, "$", what, sep = "")
     eval(parse(text = cmd), .tkplot.env)
   }
+  # nocov end
 }
 
 .tkplot.set <- function(tkp.id, what, value) {
+  # nocov start
   assign("tmp", value, .tkplot.env)
   cmd <- paste(sep = "", "tkp.", tkp.id, "$", what, "<-tmp")
   eval(parse(text = cmd), .tkplot.env)
   rm("tmp", envir = .tkplot.env)
   TRUE
+  # nocov end
 }
 
 .tkplot.set.params <- function(tkp.id, what, value) {
+  # nocov start
   assign("tmp", value, .tkplot.env)
   cmd <- paste(sep = "", "tkp.", tkp.id, "$params$", what, "<-tmp")
   eval(parse(text = cmd), .tkplot.env)
   rm("tmp", envir = .tkplot.env)
   TRUE
+  # nocov end
 }
 
 .tkplot.set.vertex.coords <- function(tkp.id, id, x, y) {
+  # nocov start
   cmd <- paste(
     sep = "",
     "tkp.",
@@ -1216,9 +1247,11 @@ tk_canvas <- function(tkp.id) {
   )
   eval(parse(text = cmd), .tkplot.env)
   TRUE
+  # nocov end
 }
 
 .tkplot.set.label.degree <- function(tkp.id, id, phi) {
+  # nocov start
   tkp <- .tkplot.get(tkp.id)
 
   if (length(tkp$params$label.degree) == 1) {
@@ -1241,12 +1274,13 @@ tk_canvas <- function(tkp.id) {
     eval(parse(text = cmd), .tkplot.env)
   }
   TRUE
+  # nocov end
 }
 
 ###################################################################
 # Internal functions, creating and updating canvas objects
 ###################################################################
-
+# nocov start
 # Creates a new vertex tk object
 .tkplot.create.vertex <- function(tkp.id, id, label, x = 0, y = 0) {
   tkp <- .tkplot.get(tkp.id)
@@ -2410,3 +2444,4 @@ i.tkplot.get.edge.lty <- function(edge.lty) {
   }
   edge.lty
 }
+# nocov end

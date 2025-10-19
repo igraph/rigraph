@@ -3418,12 +3418,14 @@ igraph_error_t R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   igraph_integer_t n = Rf_xlength(sv);
   double *svv=REAL(sv);
   IGRAPH_CHECK(igraph_vector_int_init(v, n));
+  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, v);
   for (igraph_integer_t i = 0; i<n; i++) {
     VECTOR(*v)[i] = (igraph_integer_t) svv[i];
     if (VECTOR(*v)[i] != svv[i]) {
       IGRAPH_ERRORF("The value %.17g is not representable as an integer.", IGRAPH_EINVAL, svv[i]);
     }
   }
+  IGRAPH_FINALLY_CLEAN(1);
   return IGRAPH_SUCCESS;
 }
 
@@ -3868,27 +3870,6 @@ SEXP R_igraph_ecount(SEXP graph) {
   R_SEXP_to_igraph(graph, &g);
   PROTECT(result=NEW_NUMERIC(1));
   REAL(result)[0]=igraph_ecount(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
-
-  igraph_t g;
-  igraph_vector_int_t neis;
-  SEXP result;
-  igraph_real_t vid;
-  igraph_neimode_t mode;
-
-  igraph_vector_int_init(&neis, 0);
-  vid=REAL(pvid)[0];
-  mode = (igraph_neimode_t) Rf_asInteger(pmode);
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, (igraph_integer_t) vid, mode));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&neis));
-  igraph_vector_int_destroy(&neis);
 
   UNPROTECT(1);
   return result;

@@ -100,7 +100,7 @@ Other cliques:
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty
-Graph Library by Keith Briggs (\url{http://keithbriggs.info/}) and Gabor
+Graph Library by Keith Briggs (\url{https://keithbriggs.info/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com} wrote the R interface and this manual
 page.
 }

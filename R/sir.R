@@ -96,7 +96,7 @@
 #'   one requested) if only one quantile is requested. If multiple quantiles are
 #'   requested, then a list of these vectors is returned, one for each quantile.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}. Eric Kolaczyk
-#' (<http://math.bu.edu/people/kolaczyk/>) wrote the initial version in R.
+#' (<https://kolaczyk.github.io/>) wrote the initial version in R.
 #' @seealso [plot.sir()] to conveniently plot the results
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.

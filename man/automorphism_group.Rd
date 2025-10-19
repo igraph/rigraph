@@ -92,7 +92,7 @@ Other graph automorphism:
 \code{\link{count_automorphisms}()}
 }
 \author{
-Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
+Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS,
 Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code and
 Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }

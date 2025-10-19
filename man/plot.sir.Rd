@@ -89,7 +89,7 @@ Processes on graphs
 \code{\link{time_bins}()}
 }
 \author{
-Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
+Eric Kolaczyk (\url{https://kolaczyk.github.io/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com}.
 }
 \concept{processes}

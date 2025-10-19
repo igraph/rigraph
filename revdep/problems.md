@@ -6,7 +6,7 @@
 * GitHub: NA
 * Source code: https://github.com/cran/AnimalHabitatNetwork
 * Date/Publication: 2019-11-25 19:40:02 UTC
-* Number of recursive dependencies: 27
+* Number of recursive dependencies: 22
 
 Run `revdepcheck::cloud_details(, "AnimalHabitatNetwork")` for more info
 
@@ -38,242 +38,6 @@ Run `revdepcheck::cloud_details(, "AnimalHabitatNetwork")` for more info
      4.       └─cli::cli_abort(...)
      5.         └─rlang::abort(...)
     Execution halted
-    ```
-
-# archeofrag
-
-<details>
-
-* Version: 1.2.0
-* GitHub: https://github.com/sebastien-plutniak/archeofrag
-* Source code: https://github.com/cran/archeofrag
-* Date/Publication: 2025-03-27 11:50:25 UTC
-* Number of recursive dependencies: 62
-
-Run `revdepcheck::cloud_details(, "archeofrag")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘archeofrag-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: frag.cycles
-    > ### Title: Count the k-cycles in a graph, for cycles =< k
-    > ### Aliases: frag.cycles
-    > ### Keywords: measurement
-    > 
-    > ### ** Examples
-    > 
-    > g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
-    Error in `vctrs::vec_c()`:
-    ! Can't combine `..1` <double> and `..2` <character>.
-    Backtrace:
-         ▆
-      1. ├─archeofrag::frag.simul.process(...)
-      2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-      3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-      4. └─vctrs (local) `<fn>`()
-      5.   └─vctrs::vec_default_ptype2(...)
-      6.     ├─base::withRestarts(...)
-      7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-      8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-      9.     └─vctrs::stop_incompatible_type(...)
-     10.       └─vctrs:::stop_incompatible(...)
-     11.         └─vctrs:::stop_vctrs(...)
-     12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(archeofrag)
-      > 
-      > test_check("archeofrag")
-      More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.
-      More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.
-      More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.
-      More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.
-      [ FAIL 9 | WARN 0 | SKIP 0 | PASS 58 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-frag.graph.reduce.R:24:3'): reduce vertice number (not conserving objects nr) ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.graph.reduce.R:24:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.graph.reduce.R:33:3'): reduce vertice number (conserving objects nr, conserving fragments balance) ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.graph.reduce.R:33:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.graph.reduce.R:48:3'): reduce vertice number (conserving fragments balance and inter-units connection) ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.graph.reduce.R:48:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.compare.R:5:3'): frag.simul.compare works ───────────
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.compare.R:5:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.process.R:44:3'): parameters of a generated graph with 2 initial layers are correct ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.process.R:44:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.process.R:56:3'): admixture and cohesion values of a graph with 2 initial layers are correct ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.process.R:56:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.process.R:67:3'): the optional asymmetric.transport.from parameter works ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.process.R:67:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.process.R:84:3'): the optional from.observed.graph parameter works ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.process.R:84:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      ── Error ('test-frag.simul.summarise.R:4:3'): parameters of a constrained generated graph with 1 initial layer are correct ──
-      <vctrs_error_ptype2/vctrs_error_incompatible_type/vctrs_error_incompatible/vctrs_error/rlang_error/error/condition>
-      Error in `vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])`: Can't combine `..1` <double> and `..2` <character>.
-      Backtrace:
-           ▆
-        1. ├─archeofrag::frag.simul.process(...) at test-frag.simul.summarise.R:4:3
-        2. │ └─igraph::disjoint_union(g.layer1, g.layer2)
-        3. │   └─vctrs::vec_c(attr[[exattr[a]]], va[[exattr[a]]])
-        4. └─vctrs (local) `<fn>`()
-        5.   └─vctrs::vec_default_ptype2(...)
-        6.     ├─base::withRestarts(...)
-        7.     │ └─base (local) withOneRestart(expr, restarts[[1L]])
-        8.     │   └─base (local) doWithOneRestart(return(expr), restart)
-        9.     └─vctrs::stop_incompatible_type(...)
-       10.       └─vctrs:::stop_incompatible(...)
-       11.         └─vctrs:::stop_vctrs(...)
-       12.           └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      
-      [ FAIL 9 | WARN 0 | SKIP 0 | PASS 58 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘archeofrag-vignette.Rmd’ using rmarkdown
-    ```
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 3 marked UTF-8 strings
     ```
 
 # CITMIC
@@ -314,86 +78,6 @@ Run `revdepcheck::cloud_details(, "CITMIC")` for more info
     Execution halted
     ```
 
-# dosearch
-
-<details>
-
-* Version: 1.0.11
-* GitHub: https://github.com/santikka/dosearch
-* Source code: https://github.com/cran/dosearch
-* Date/Publication: 2024-07-16 09:50:02 UTC
-* Number of recursive dependencies: 90
-
-Run `revdepcheck::cloud_details(, "dosearch")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > #' @srrstats {G5.2} Error and warning behavior is tested.
-      > #' @srrstats {G5.2a} Messages are unique.
-      > #' @srrstats {G5.2b} Conditions are demonstrated.
-      > #' @srrstats {G5.4, G5.4a, G5.6} Output of dosearch is compared against known
-      > #'   theoretical identifiability and non-identifiability results.
-      > #'   In other words, correctness can be tested independently of the
-      > #'   implementation.
-      > #' @srrstats {G5.5} The algorithm is deterministic, so this could also be NA
-      > #' @srrstats {G5.6a} Because the package output is symbolic, the recovery
-      > #'   of e.g., a causal effect is exact.
-      > #' @srrstats {G5.7} Performance and scalability have been demonstrated
-      > #'   in the JSS paper, and the simulations are too large to run on a single
-      > #'   PC and require a cluster. The replication materials for this simulation
-      > #'   are included in the 'rep' directory. The algorithm has exponential
-      > #'   time and memory complexity in the number of the vertices of the graph,
-      > #'   and it has been hypothesized that the general identifiability problem
-      > #'   itself is NP-hard.
-      > #' @srrstats {G5.8, G5.8a G5.8b, G5.8c, G5.8d} Edge conditions are tested.
-      > #' @srrstats {NW6.0} Inputs types are tested.
-      > #' @noRd
-      > library(testthat)
-      > library(dosearch)
-      > 
-      > test_check("dosearch")
-      [ FAIL 1 | WARN 3 | SKIP 0 | PASS 294 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-interface.R:32:3'): igraph graph without names gets named ──────
-      Error in `FUN(X[[i]], ...)`: Error: Logical index length does not match the number of edges. Recycling is not allowed.
-      Backtrace:
-           ▆
-        1. ├─testthat::expect_message(parse_graph(g_igraph), "Argument `graph` is not named, node names have been assigned") at test-interface.R:32:3
-        2. │ └─testthat:::expect_condition_matching(...)
-        3. │   └─testthat:::quasi_capture(...)
-        4. │     ├─testthat (local) .capture(...)
-        5. │     │ └─base::withCallingHandlers(...)
-        6. │     └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
-        7. └─dosearch:::parse_graph(g_igraph)
-        8.   ├─e[(is.na(description) | description != "U")]
-        9.   └─igraph:::`[.igraph.es`(...)
-       10.     └─base::lapply(...)
-       11.       └─igraph (local) FUN(X[[i]], ...)
-       12.         └─cli::cli_abort("Error: Logical index length does not match the number of edges. Recycling is not allowed.")
-       13.           └─rlang::abort(...)
-      
-      [ FAIL 1 | WARN 3 | SKIP 0 | PASS 294 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        libs   5.0Mb
-    ```
-
 # DrDimont
 
 <details>
@@ -402,7 +86,7 @@ Run `revdepcheck::cloud_details(, "dosearch")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/DrDimont
 * Date/Publication: 2022-09-23 15:40:02 UTC
-* Number of recursive dependencies: 124
+* Number of recursive dependencies: 121
 
 Run `revdepcheck::cloud_details(, "DrDimont")` for more info
 
@@ -435,16 +119,16 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     +                         reduction_method="pickHardThreshold",
     +                         r_squared=list(default=0.65, metabolite=0.1),
     +                         cut_vector=list(default=seq(0.2, 0.5, 0.01)))
-    [25-09-05 04:12:21] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
+    [25-10-09 09:41:00] WARNING: Python executable in virtual environment 'r-DrDimont' not found. Either run `install_python_dependencies(package_manager='pip') or set `conda=TRUE` in `drdimont_settings()` if conda installation was used.
     > 
     > example_individual_graphs <- generate_individual_graphs(
     +                                  correlation_matrices=correlation_matrices_example,
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [25-09-05 04:12:21] Generating graph of layer mrna for groupA...
-    [25-09-05 04:12:21] Reducing network by WGCNA::pickHardThreshold...
-    [25-09-05 04:12:21] R2 cutoff: 0.65
-    [25-09-05 04:12:22] Cut Threshold: 0.26
+    [25-10-09 09:41:00] Generating graph of layer mrna for groupA...
+    [25-10-09 09:41:00] Reducing network by WGCNA::pickHardThreshold...
+    [25-10-09 09:41:00] R2 cutoff: 0.65
+    [25-10-09 09:41:01] Cut Threshold: 0.26
     Error in `graph_from_adjacency_matrix()`:
     ! Cannot create a graph object because the adjacency matrix contains
       NAs.
@@ -661,7 +345,7 @@ Run `revdepcheck::cloud_details(, "incidentally")` for more info
 * GitHub: https://github.com/IOHprofiler/IOHAnalyzer
 * Source code: https://github.com/cran/IOHanalyzer
 * Date/Publication: 2024-03-01 12:52:37 UTC
-* Number of recursive dependencies: 136
+* Number of recursive dependencies: 134
 
 Run `revdepcheck::cloud_details(, "IOHanalyzer")` for more info
 
@@ -701,7 +385,7 @@ Run `revdepcheck::cloud_details(, "IOHanalyzer")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.6Mb
+      installed size is  6.7Mb
       sub-directories of 1Mb or more:
         data           1.4Mb
         libs           3.2Mb
@@ -769,92 +453,14 @@ Run `revdepcheck::cloud_details(, "klassR")` for more info
       Note: found 1764 marked UTF-8 strings
     ```
 
-# manynet
-
-<details>
-
-* Version: 1.6.0
-* GitHub: https://github.com/stocnet/manynet
-* Source code: https://github.com/cran/manynet
-* Date/Publication: 2025-08-22 23:40:02 UTC
-* Number of recursive dependencies: 117
-
-Run `revdepcheck::cloud_details(, "manynet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘manynet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: mark_features
-    > ### Title: Marking networks features
-    > ### Aliases: mark_features is_connected is_perfect_matching is_eulerian
-    > ###   is_acyclic is_aperiodic
-    > 
-    > ### ** Examples
-    > 
-    > is_connected(ison_southern_women)
-    [1] TRUE
-    > is_perfect_matching(ison_southern_women)
-    [1] FALSE
-    > is_eulerian(ison_brandes)
-    [1] FALSE
-    > is_acyclic(ison_algebra)
-    [1] FALSE
-    > is_aperiodic(ison_algebra)
-    Killed
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      > 
-      > test_check("manynet")
-      Starting 2 test processes
-      
-      
-      Error in `private$handle_error()`:
-      ! testthat subprocess exited in file `test-measure_closure.R`
-      Caused by error:
-      ! R session crashed with exit code -9
-      Backtrace:
-           ▆
-        1. └─testthat::test_check("manynet")
-        2.   └─testthat::test_dir(...)
-        3.     └─testthat:::test_files(...)
-        4.       └─testthat:::test_files_parallel(...)
-        5.         ├─withr::with_dir(...)
-        6.         │ └─base::force(code)
-        7.         ├─testthat::with_reporter(...)
-        8.         │ └─base::tryCatch(...)
-        9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
-       10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
-       11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
-       12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
-       13.           └─queue$poll(Inf)
-       14.             └─base::lapply(...)
-       15.               └─testthat (local) FUN(X[[i]], ...)
-       16.                 └─private$handle_error(msg, i)
-       17.                   └─rlang::abort(...)
-      Execution halted
-    ```
-
 # multinet
 
 <details>
 
-* Version: 4.2.2
+* Version: 4.3.1
 * GitHub: NA
 * Source code: https://github.com/cran/multinet
-* Date/Publication: 2025-04-08 07:20:06 UTC
+* Date/Publication: 2025-09-23 16:50:02 UTC
 * Number of recursive dependencies: 13
 
 Run `revdepcheck::cloud_details(, "multinet")` for more info
@@ -896,9 +502,9 @@ Run `revdepcheck::cloud_details(, "multinet")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 137.5Mb
+      installed size is 139.0Mb
       sub-directories of 1Mb or more:
-        libs  137.2Mb
+        libs  138.7Mb
     ```
 
 # mwcsr
@@ -1010,7 +616,7 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/PopComm
 * Date/Publication: 2025-04-25 15:20:09 UTC
-* Number of recursive dependencies: 172
+* Number of recursive dependencies: 173
 
 Run `revdepcheck::cloud_details(, "PopComm")` for more info
 
@@ -1039,540 +645,6 @@ Run `revdepcheck::cloud_details(, "PopComm")` for more info
     Execution halted
     ```
 
-# remify
-
-<details>
-
-* Version: 3.2.8
-* GitHub: https://github.com/TilburgNetworkGroup/remify
-* Source code: https://github.com/cran/remify
-* Date/Publication: 2025-01-29 13:20:05 UTC
-* Number of recursive dependencies: 36
-
-Run `revdepcheck::cloud_details(, "remify")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘tinytest.R’
-    Running the tests in ‘tests/tinytest.R’ failed.
-    Complete output:
-      > if ( requireNamespace("tinytest", quietly=TRUE) ){
-      +   tinytest::test_package("remify")
-      + }
-      
-      test-rehshape.R...............    0 tests    
-      test-rehshape.R...............    1 tests [0;32mOK[0m 
-      test-rehshape.R...............    1 tests [0;32mOK[0m 
-      test-rehshape.R...............    2 tests [0;32mOK[0m 
-      test-rehshape.R...............    3 tests [0;32mOK[0m 
-      test-rehshape.R...............    4 tests [0;32mOK[0m 
-      test-rehshape.R...............    5 tests [0;32mOK[0m 
-      test-rehshape.R...............    6 tests [0;32mOK[0m 
-      test-rehshape.R...............    7 tests [0;32mOK[0m 
-      test-rehshape.R...............    8 tests [0;32mOK[0m 
-      test-rehshape.R...............    9 tests [0;32mOK[0m 
-      test-rehshape.R...............   10 tests [0;32mOK[0m 
-      test-rehshape.R...............   10 tests [0;32mOK[0m 
-      test-rehshape.R...............   11 tests [0;32mOK[0m 
-      test-rehshape.R...............   12 tests [0;32mOK[0m 
-      test-rehshape.R...............   13 tests [0;32mOK[0m 
-      test-rehshape.R...............   14 tests [0;32mOK[0m 
-      test-rehshape.R...............   15 tests [0;32mOK[0m 
-      test-rehshape.R...............   16 tests [0;32mOK[0m 
-      test-rehshape.R...............   17 tests [0;32mOK[0m 
-      test-rehshape.R...............   18 tests [0;32mOK[0m 
-      test-rehshape.R...............   19 tests [0;32mOK[0m 
-      test-rehshape.R...............   19 tests [0;32mOK[0m 
-      test-rehshape.R...............   20 tests [0;32mOK[0m 
-      test-rehshape.R...............   20 tests [0;32mOK[0m 
-      test-rehshape.R...............   21 tests [0;32mOK[0m 
-      test-rehshape.R...............   22 tests [0;32mOK[0m 
-      test-rehshape.R...............   22 tests [0;32mOK[0m 
-      test-rehshape.R...............   22 tests [0;32mOK[0m 
-      test-rehshape.R...............   23 tests [0;32mOK[0m 
-      test-rehshape.R...............   24 tests [0;32mOK[0m 
-      test-rehshape.R...............   24 tests [0;32mOK[0m 
-      test-rehshape.R...............   24 tests [0;32mOK[0m 
-      test-rehshape.R...............   25 tests [0;32mOK[0m 
-      test-rehshape.R...............   26 tests [0;32mOK[0m [0;34m2.3s[0m
-      
-      test-remify-error-messages.R..    1 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    1 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    1 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    2 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    2 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    2 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    3 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    3 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    3 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    4 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    5 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    6 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    6 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    6 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    7 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    7 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    8 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    8 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    8 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    9 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    9 tests [0;32mOK[0m 
-      test-remify-error-messages.R..    9 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   10 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   10 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   10 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   11 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   11 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   11 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   12 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   12 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   12 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   13 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   13 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   14 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   14 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   14 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   15 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   15 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   15 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   16 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   16 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   16 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   17 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   17 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   17 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   18 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   18 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   19 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   19 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   20 tests [0;32mOK[0m 
-      test-remify-error-messages.R..   21 tests [0;32mOK[0m [0;34m0.1s[0m
-      
-      test-remify-methods.R.........    0 tests    
-      test-remify-methods.R.........    0 tests    
-      test-remify-methods.R.........    1 tests [0;32mOK[0m 
-      test-remify-methods.R.........    2 tests [0;32mOK[0m 
-      test-remify-methods.R.........    3 tests [0;32mOK[0m 
-      test-remify-methods.R.........    4 tests [0;32mOK[0m 
-      test-remify-methods.R.........    4 tests [0;32mOK[0m 
-      test-remify-methods.R.........    4 tests [0;32mOK[0m 
-      test-remify-methods.R.........    4 tests [0;32mOK[0m 
-      test-remify-methods.R.........    5 tests [0;32mOK[0m 
-      test-remify-methods.R.........    6 tests [0;32mOK[0m 
-      test-remify-methods.R.........    7 tests [0;32mOK[0m 
-      test-remify-methods.R.........    8 tests [0;32mOK[0m 
-      test-remify-methods.R.........    8 tests [0;32mOK[0m 
-      test-remify-methods.R.........    8 tests [0;32mOK[0m 
-      test-remify-methods.R.........    8 tests [0;32mOK[0m 
-      test-remify-methods.R.........    8 tests [0;32mOK[0m 
-      test-remify-methods.R.........    9 tests [0;32mOK[0m 
-      test-remify-methods.R.........   10 tests [0;32mOK[0m 
-      test-remify-methods.R.........   11 tests [0;32mOK[0m 
-      test-remify-methods.R.........   12 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   13 tests [0;32mOK[0m 
-      test-remify-methods.R.........   14 tests [0;32mOK[0m 
-      test-remify-methods.R.........   15 tests [0;32mOK[0m 
-      test-remify-methods.R.........   16 tests [0;32mOK[0m 
-      test-remify-methods.R.........   17 tests [0;32mOK[0m 
-      test-remify-methods.R.........   18 tests [0;32mOK[0m 
-      test-remify-methods.R.........   18 tests [0;32mOK[0m 
-      test-remify-methods.R.........   18 tests [0;32mOK[0m 
-      test-remify-methods.R.........   18 tests [0;32mOK[0m 
-      test-remify-methods.R.........   18 tests [0;32mOK[0m 
-      test-remify-methods.R.........   19 tests [0;32mOK[0m 
-      test-remify-methods.R.........   20 tests [0;32mOK[0m 
-      test-remify-methods.R.........   21 tests [0;32mOK[0m 
-      test-remify-methods.R.........   22 tests [0;32mOK[0m 
-      test-remify-methods.R.........   23 tests [0;32mOK[0m 
-      test-remify-methods.R.........   23 tests [0;32mOK[0m 
-      test-remify-methods.R.........   23 tests [0;32mOK[0m 
-      test-remify-methods.R.........   24 tests [0;32mOK[0m 
-      test-remify-methods.R.........   25 tests [0;32mOK[0m 
-      test-remify-methods.R.........   26 tests [0;32mOK[0m 
-      test-remify-methods.R.........   27 tests [0;32mOK[0m 
-      test-remify-methods.R.........   27 tests [0;32mOK[0m 
-      test-remify-methods.R.........   27 tests [0;32mOK[0m 
-      test-remify-methods.R.........   28 tests [0;32mOK[0m 
-      test-remify-methods.R.........   29 tests [0;32mOK[0m 
-      test-remify-methods.R.........   30 tests [0;32mOK[0m 
-      test-remify-methods.R.........   31 tests [0;32mOK[0m 
-      test-remify-methods.R.........   31 tests [0;32mOK[0m 
-      test-remify-methods.R.........   31 tests [0;32mOK[0m 
-      test-remify-methods.R.........   32 tests [0;32mOK[0m 
-      test-remify-methods.R.........   33 tests [0;32mOK[0m 
-      test-remify-methods.R.........   33 tests [0;32mOK[0m 
-      test-remify-methods.R.........   33 tests [0;32mOK[0m 
-      test-remify-methods.R.........   34 tests [0;32mOK[0m 
-      test-remify-methods.R.........   35 tests [0;32mOK[0m 
-      test-remify-methods.R.........   36 tests [0;32mOK[0m 
-      test-remify-methods.R.........   37 tests [0;32mOK[0m 
-      test-remify-methods.R.........   38 tests [0;32mOK[0m 
-      test-remify-methods.R.........   39 tests [0;32mOK[0m 
-      test-remify-methods.R.........   40 tests [0;32mOK[0m 
-      test-remify-methods.R.........   41 tests [0;32mOK[0m 
-      test-remify-methods.R.........   42 tests [0;32mOK[0m 
-      test-remify-methods.R.........   43 tests [0;32mOK[0m 
-      test-remify-methods.R.........   44 tests [0;32mOK[0m 
-      test-remify-methods.R.........   45 tests [0;32mOK[0m 
-      test-remify-methods.R.........   46 tests [0;32mOK[0m 
-      test-remify-methods.R.........   47 tests [0;32mOK[0m 
-      test-remify-methods.R.........   48 tests [0;32mOK[0m 
-      test-remify-methods.R.........   49 tests [0;32mOK[0m 
-      test-remify-methods.R.........   49 tests [0;32mOK[0m 
-      test-remify-methods.R.........   50 tests [0;32mOK[0m 
-      test-remify-methods.R.........   51 tests [0;32mOK[0m 
-      test-remify-methods.R.........   52 tests [0;32mOK[0m 
-      test-remify-methods.R.........   53 tests [0;32mOK[0m 
-      test-remify-methods.R.........   54 tests [0;32mOK[0m 
-      test-remify-methods.R.........   55 tests [0;32mOK[0m 
-      test-remify-methods.R.........   56 tests [0;32mOK[0m 
-      test-remify-methods.R.........   57 tests [0;32mOK[0m 
-      test-remify-methods.R.........   58 tests [0;32mOK[0m 
-      test-remify-methods.R.........   59 tests [0;32mOK[0m 
-      test-remify-methods.R.........   60 tests [0;32mOK[0m 
-      test-remify-methods.R.........   61 tests [0;32mOK[0m 
-      test-remify-methods.R.........   62 tests [0;32mOK[0m 
-      test-remify-methods.R.........   63 tests [0;32mOK[0m 
-      test-remify-methods.R.........   64 tests [0;32mOK[0m 
-      test-remify-methods.R.........   64 tests [0;32mOK[0m 
-      test-remify-methods.R.........   65 tests [0;32mOK[0m 
-      test-remify-methods.R.........   66 tests [0;32mOK[0m 
-      test-remify-methods.R.........   67 tests [0;32mOK[0m 
-      test-remify-methods.R.........   68 tests [0;32mOK[0m 
-      test-remify-methods.R.........   69 tests [0;32mOK[0m 
-      test-remify-methods.R.........   70 tests [0;32mOK[0m 
-      test-remify-methods.R.........   71 tests [0;32mOK[0m 
-      test-remify-methods.R.........   72 tests [0;32mOK[0m 
-      test-remify-methods.R.........   73 tests [0;32mOK[0m 
-      test-remify-methods.R.........   74 tests [0;32mOK[0m 
-      test-remify-methods.R.........   75 tests [0;32mOK[0m 
-      test-remify-methods.R.........   76 tests [0;32mOK[0m 
-      test-remify-methods.R.........   76 tests [0;32mOK[0m 
-      test-remify-methods.R.........   76 tests [0;32mOK[0m 
-      test-remify-methods.R.........   77 tests [0;32mOK[0m 
-      test-remify-methods.R.........   78 tests [0;32mOK[0m 
-      test-remify-methods.R.........   79 tests [0;32mOK[0m 
-      test-remify-methods.R.........   80 tests [0;32mOK[0m 
-      test-remify-methods.R.........   81 tests [0;32mOK[0m 
-      test-remify-methods.R.........   82 tests [0;32mOK[0m 
-      test-remify-methods.R.........   82 tests [0;32mOK[0m 
-      test-remify-methods.R.........   82 tests [0;32mOK[0m 
-      test-remify-methods.R.........   83 tests [0;32mOK[0m 
-      test-remify-methods.R.........   84 tests [0;32mOK[0m 
-      test-remify-methods.R.........   85 tests [0;32mOK[0m 
-      test-remify-methods.R.........   86 tests [0;32mOK[0m 
-      test-remify-methods.R.........   87 tests [0;32mOK[0m 
-      test-remify-methods.R.........   88 tests [0;32mOK[0m 
-      test-remify-methods.R.........   89 tests [0;32mOK[0m 
-      test-remify-methods.R.........   90 tests [0;32mOK[0m 
-      test-remify-methods.R.........   90 tests [0;32mOK[0m 
-      test-remify-methods.R.........   90 tests [0;32mOK[0m 
-      test-remify-methods.R.........   90 tests [0;32mOK[0m 
-      test-remify-methods.R.........   91 tests [0;32mOK[0m 
-      test-remify-methods.R.........   91 tests [0;32mOK[0m 
-      test-remify-methods.R.........   92 tests [0;31m1 fails[0m 
-      test-remify-methods.R.........   93 tests [0;31m2 fails[0m 
-      test-remify-methods.R.........   94 tests [0;31m3 fails[0m 
-      test-remify-methods.R.........   95 tests [0;31m4 fails[0m 
-      test-remify-methods.R.........   96 tests [0;31m5 fails[0m 
-      test-remify-methods.R.........   97 tests [0;31m6 fails[0m 
-      test-remify-methods.R.........   98 tests [0;31m7 fails[0m 
-      test-remify-methods.R.........   98 tests [0;31m7 fails[0m 
-      test-remify-methods.R.........   99 tests [0;31m8 fails[0m 
-      test-remify-methods.R.........  100 tests [0;31m9 fails[0m 
-      test-remify-methods.R.........  101 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  101 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  102 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  103 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  104 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  105 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  106 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  107 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  107 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  107 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  108 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  109 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  109 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  109 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  110 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  110 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  110 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  111 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  111 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  111 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  112 tests [0;31m10 fails[0m 
-      test-remify-methods.R.........  113 tests [0;31m10 fails[0m [0;34m7.6s[0m
-      
-      test-remify-warning-messages.R    0 tests    
-      test-remify-warning-messages.R    0 tests    
-      test-remify-warning-messages.R    1 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    1 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    2 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    2 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    2 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    3 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    3 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    3 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    4 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    4 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    4 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    5 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    5 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    5 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    6 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    6 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    6 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    7 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    7 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    7 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    7 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    8 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    9 tests [0;32mOK[0m 
-      test-remify-warning-messages.R    9 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   10 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   11 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   11 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   11 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   12 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   13 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   13 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   14 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   15 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   15 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   15 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   15 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   15 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   16 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   17 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   17 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   18 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   19 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   19 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   19 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   19 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   20 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   21 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   21 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   22 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   23 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   23 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   23 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   23 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   23 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   24 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   25 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   25 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   26 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   27 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   27 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   27 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   27 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   28 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   29 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   29 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   30 tests [0;32mOK[0m 
-      test-remify-warning-messages.R   31 tests [0;32mOK[0m [0;34m0.5s[0m
-      
-      test-remify.R.................    0 tests    
-      test-remify.R.................    1 tests [0;32mOK[0m 
-      test-remify.R.................    2 tests [0;32mOK[0m 
-      test-remify.R.................    3 tests [0;32mOK[0m 
-      test-remify.R.................    4 tests [0;32mOK[0m 
-      test-remify.R.................    5 tests [0;32mOK[0m 
-      test-remify.R.................    6 tests [0;32mOK[0m 
-      test-remify.R.................    7 tests [0;32mOK[0m 
-      test-remify.R.................    8 tests [0;32mOK[0m 
-      test-remify.R.................    9 tests [0;32mOK[0m 
-      test-remify.R.................   10 tests [0;32mOK[0m 
-      test-remify.R.................   10 tests [0;32mOK[0m 
-      test-remify.R.................   10 tests [0;32mOK[0m 
-      test-remify.R.................   10 tests [0;32mOK[0m 
-      test-remify.R.................   11 tests [0;32mOK[0m 
-      test-remify.R.................   12 tests [0;32mOK[0m 
-      test-remify.R.................   13 tests [0;32mOK[0m 
-      test-remify.R.................   13 tests [0;32mOK[0m 
-      test-remify.R.................   13 tests [0;32mOK[0m 
-      test-remify.R.................   14 tests [0;32mOK[0m 
-      test-remify.R.................   15 tests [0;32mOK[0m 
-      test-remify.R.................   15 tests [0;32mOK[0m 
-      test-remify.R.................   15 tests [0;32mOK[0m 
-      test-remify.R.................   15 tests [0;32mOK[0m 
-      test-remify.R.................   16 tests [0;32mOK[0m 
-      test-remify.R.................   17 tests [0;32mOK[0m 
-      test-remify.R.................   17 tests [0;32mOK[0m 
-      test-remify.R.................   17 tests [0;32mOK[0m 
-      test-remify.R.................   17 tests [0;32mOK[0m 
-      test-remify.R.................   18 tests [0;32mOK[0m 
-      test-remify.R.................   19 tests [0;32mOK[0m 
-      test-remify.R.................   19 tests [0;32mOK[0m 
-      test-remify.R.................   19 tests [0;32mOK[0m 
-      test-remify.R.................   19 tests [0;32mOK[0m 
-      test-remify.R.................   20 tests [0;32mOK[0m 
-      test-remify.R.................   20 tests [0;32mOK[0m 
-      test-remify.R.................   21 tests [0;32mOK[0m 
-      test-remify.R.................   21 tests [0;32mOK[0m 
-      test-remify.R.................   21 tests [0;32mOK[0m 
-      test-remify.R.................   21 tests [0;32mOK[0m 
-      test-remify.R.................   21 tests [0;32mOK[0m 
-      test-remify.R.................   22 tests [0;32mOK[0m 
-      test-remify.R.................   22 tests [0;32mOK[0m 
-      test-remify.R.................   23 tests [0;32mOK[0m 
-      test-remify.R.................   23 tests [0;32mOK[0m 
-      test-remify.R.................   23 tests [0;32mOK[0m 
-      test-remify.R.................   23 tests [0;32mOK[0m 
-      test-remify.R.................   24 tests [0;32mOK[0m 
-      test-remify.R.................   24 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   25 tests [0;32mOK[0m 
-      test-remify.R.................   26 tests [0;32mOK[0m 
-      test-remify.R.................   26 tests [0;32mOK[0m 
-      test-remify.R.................   26 tests [0;32mOK[0m 
-      test-remify.R.................   27 tests [0;32mOK[0m 
-      test-remify.R.................   27 tests [0;32mOK[0m 
-      test-remify.R.................   27 tests [0;32mOK[0m 
-      test-remify.R.................   27 tests [0;32mOK[0m 
-      test-remify.R.................   28 tests [0;32mOK[0m 
-      test-remify.R.................   29 tests [0;32mOK[0m 
-      test-remify.R.................   30 tests [0;32mOK[0m 
-      test-remify.R.................   30 tests [0;32mOK[0m 
-      test-remify.R.................   31 tests [0;32mOK[0m 
-      test-remify.R.................   31 tests [0;32mOK[0m 
-      test-remify.R.................   32 tests [0;32mOK[0m 
-      test-remify.R.................   32 tests [0;32mOK[0m 
-      test-remify.R.................   33 tests [0;32mOK[0m 
-      test-remify.R.................   33 tests [0;32mOK[0m 
-      test-remify.R.................   34 tests [0;32mOK[0m 
-      test-remify.R.................   34 tests [0;32mOK[0m 
-      test-remify.R.................   34 tests [0;32mOK[0m 
-      test-remify.R.................   34 tests [0;32mOK[0m 
-      test-remify.R.................   34 tests [0;32mOK[0m 
-      test-remify.R.................   35 tests [0;32mOK[0m 
-      test-remify.R.................   35 tests [0;32mOK[0m 
-      test-remify.R.................   36 tests [0;32mOK[0m 
-      test-remify.R.................   37 tests [0;32mOK[0m 
-      test-remify.R.................   38 tests [0;32mOK[0m 
-      test-remify.R.................   39 tests [0;32mOK[0m 
-      test-remify.R.................   40 tests [0;32mOK[0m 
-      test-remify.R.................   41 tests [0;32mOK[0m 
-      test-remify.R.................   42 tests [0;32mOK[0m 
-      test-remify.R.................   43 tests [0;32mOK[0m 
-      test-remify.R.................   44 tests [0;32mOK[0m 
-      test-remify.R.................   45 tests [0;32mOK[0m 
-      test-remify.R.................   45 tests [0;32mOK[0m 
-      test-remify.R.................   45 tests [0;32mOK[0m 
-      test-remify.R.................   46 tests [0;32mOK[0m 
-      test-remify.R.................   47 tests [0;32mOK[0m 
-      test-remify.R.................   47 tests [0;32mOK[0m 
-      test-remify.R.................   47 tests [0;32mOK[0m 
-      test-remify.R.................   48 tests [0;32mOK[0m 
-      test-remify.R.................   49 tests [0;32mOK[0m 
-      test-remify.R.................   49 tests [0;32mOK[0m 
-      test-remify.R.................   50 tests [0;32mOK[0m 
-      test-remify.R.................   51 tests [0;32mOK[0m 
-      test-remify.R.................   51 tests [0;32mOK[0m 
-      test-remify.R.................   52 tests [0;32mOK[0m 
-      test-remify.R.................   53 tests [0;32mOK[0m 
-      test-remify.R.................   53 tests [0;32mOK[0m 
-      test-remify.R.................   54 tests [0;32mOK[0m 
-      test-remify.R.................   55 tests [0;32mOK[0m 
-      test-remify.R.................   55 tests [0;32mOK[0m 
-      test-remify.R.................   55 tests [0;32mOK[0m 
-      test-remify.R.................   55 tests [0;32mOK[0m 
-      test-remify.R.................   55 tests [0;32mOK[0m 
-      test-remify.R.................   56 tests [0;32mOK[0m 
-      test-remify.R.................   56 tests [0;32mOK[0m 
-      test-remify.R.................   57 tests [0;32mOK[0m 
-      test-remify.R.................   57 tests [0;32mOK[0m 
-      test-remify.R.................   57 tests [0;32mOK[0m 
-      test-remify.R.................   58 tests [0;32mOK[0m 
-      test-remify.R.................   58 tests [0;32mOK[0m 
-      test-remify.R.................   59 tests [0;32mOK[0m 
-      test-remify.R.................   59 tests [0;32mOK[0m 
-      test-remify.R.................   59 tests [0;32mOK[0m 
-      test-remify.R.................   59 tests [0;32mOK[0m 
-      test-remify.R.................   60 tests [0;32mOK[0m 
-      test-remify.R.................   60 tests [0;32mOK[0m 
-      test-remify.R.................   61 tests [0;32mOK[0m 
-      test-remify.R.................   61 tests [0;32mOK[0m 
-      test-remify.R.................   61 tests [0;32mOK[0m 
-      test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   62 tests [0;32mOK[0m 
-      test-remify.R.................   63 tests [0;32mOK[0m [0;34m0.5s[0m
-      ----- FAILED[xcpt]: test-remify-methods.R<349--349>
-       call| expect_silent(plot(x = out))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<350--350>
-       call| expect_silent(plot(x = out, breaks = NULL, palette = NULL, n_intervals = NULL, 
-       call| -->    rev = NULL, actors = NULL, pch.degree = NULL, igraph.edge.color = NULL, 
-       call| -->    igraph.vertex.color = NULL))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<351--351>
-       call| expect_silent(plot(x = out, pch.degree = -1))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<352--352>
-       call| expect_silent(plot(x = out, igraph.edge.color = "#000000000", 
-       call| -->    igraph.vertex.color = "#000000000"))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<353--353>
-       call| expect_silent(plot(x = out, igraph.edge.color = "magenta", igraph.vertex.color = "cyan4"))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<354--354>
-       call| expect_silent(plot(x = out, n_intervals = 5))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<355--355>
-       call| expect_silent(plot(x = out, actors = attr(out, "dictionary")$actors$actorName[1:5]))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<362--362>
-       call| expect_silent(plot(x = out))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<363--363>
-       call| expect_silent(plot(x = out, n_intervals = 5))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      ----- FAILED[xcpt]: test-remify-methods.R<364--364>
-       call| expect_silent(plot(x = out, actors = attr(out, "dictionary")$actors$actorName[1:5]))
-       diff| Execution was not silent. A warning was thrown with message
-       diff| 'vertex attribute frame.color contains NAs. Replacing with default value black'
-      Error: 10 out of 254 tests failed
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  9.2Mb
-      sub-directories of 1Mb or more:
-        doc    3.5Mb
-        libs   4.8Mb
-    ```
-
 # rsetse
 
 <details>
@@ -1581,7 +653,7 @@ Run `revdepcheck::cloud_details(, "remify")` for more info
 * GitHub: https://github.com/JonnoB/rSETSe
 * Source code: https://github.com/cran/rsetse
 * Date/Publication: 2021-06-11 10:00:02 UTC
-* Number of recursive dependencies: 79
+* Number of recursive dependencies: 78
 
 Run `revdepcheck::cloud_details(, "rsetse")` for more info
 
@@ -1976,156 +1048,14 @@ Run `revdepcheck::cloud_details(, "SEMID")` for more info
       Execution halted
     ```
 
-# sharpshootR
-
-<details>
-
-* Version: 2.3.3
-* GitHub: https://github.com/ncss-tech/sharpshootR
-* Source code: https://github.com/cran/sharpshootR
-* Date/Publication: 2025-04-17 06:50:02 UTC
-* Number of recursive dependencies: 146
-
-Run `revdepcheck::cloud_details(, "sharpshootR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sharpshootR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: table5.2
-    > ### Title: Table 5.2 from Hole and Campbell, 1985.
-    > ### Aliases: table5.2
-    > ### Keywords: datasets
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > data("table5.2")
-    > 
-    > if(requireNamespace("igraph")) {
-    +   
-    +   # note special incantation to get the "correct" graph structure
-    +   g <- igraph::graph_from_adjacency_matrix(table5.2, mode = 'upper', diag = FALSE, weighted = TRUE)
-    +   
-    +   # visualize
-    +   op <- par(no.readonly = TRUE)
-    +   
-    +   par(mar = c(0,0,0,0))
-    +   plot(g)
-    +   
-    +   plot(g, vertex.size = sqrt(igraph::degree(g) * 25), vertex.label.family = 'sans')
-    +   
-    +   # find communities
-    +   cm <- igraph::cluster_walktrap(g)
-    +   plot(cm, g, vertex.label.family = 'sans')
-    +   
-    +   par(op)
-    + }
-    Error in `igraph::graph_from_adjacency_matrix()`:
-    ! Cannot create a graph object because the adjacency matrix contains
-      NAs.
-    Backtrace:
-        ▆
-     1. └─igraph::graph_from_adjacency_matrix(table5.2, mode = "upper", diag = FALSE, weighted = TRUE)
-     2.   └─igraph:::ensure_no_na(adjmatrix, "adjacency matrix")
-     3.     └─cli::cli_abort(...)
-     4.       └─rlang::abort(...)
-    Execution halted
-    ```
-
-# tilemaps
-
-<details>
-
-* Version: 0.2.0
-* GitHub: https://github.com/kaerosen/tilemaps
-* Source code: https://github.com/cran/tilemaps
-* Date/Publication: 2020-07-10 04:20:02 UTC
-* Number of recursive dependencies: 69
-
-Run `revdepcheck::cloud_details(, "tilemaps")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘tilemaps-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: create_island
-    > ### Title: Create a Tile for an Island
-    > ### Aliases: create_island
-    > 
-    > ### ** Examples
-    > 
-    > library(sf)
-    Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.4.0; sf_use_s2() is TRUE
-    > northeast <- governors[c(6,7,17,18,19,27,28,30,36,37,43),]
-    > tile_map <- generate_map(northeast$geometry, square = FALSE)
-    Error:
-    ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and
-      is now defunct.
-    ℹ Please use the `mode` argument instead.
-    Backtrace:
-        ▆
-     1. └─tilemaps::generate_map(northeast$geometry, square = FALSE)
-     2.   └─igraph::bfs(neighbor_graph, 1, neimode = "all", unreachable = FALSE)
-     3.     └─lifecycle::deprecate_stop("1.3.0", "bfs(neimode = )", "bfs(mode = )")
-     4.       └─lifecycle:::deprecate_stop0(msg)
-     5.         └─rlang::cnd_signal(...)
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘tilemaps.Rmd’ using rmarkdown
-    
-    Quitting from tilemaps.Rmd:32-41 [unnamed-chunk-2]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NULL
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    Error: processing vignette 'tilemaps.Rmd' failed with diagnostics:
-    ℹ In argument: `tile_map = generate_map(geometry, square = FALSE,
-      flat_topped = TRUE)`.
-    Caused by error:
-    ! The `neimode` argument of `bfs()` was deprecated in igraph 1.3.0 and
-      is now defunct.
-    ℹ Please use the `mode` argument instead.
-    --- failed re-building ‘tilemaps.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘tilemaps.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘lwgeom’
-      All declared Imports should be used.
-    ```
-
 # timeordered
 
 <details>
 
-* Version: 1.0.1
+* Version: 1.0.2
 * GitHub: NA
 * Source code: https://github.com/cran/timeordered
-* Date/Publication: 2024-09-15 22:10:02 UTC
+* Date/Publication: 2025-09-29 11:10:02 UTC
 * Number of recursive dependencies: 13
 
 Run `revdepcheck::cloud_details(, "timeordered")` for more info
@@ -2171,10 +1101,9 @@ Run `revdepcheck::cloud_details(, "timeordered")` for more info
     [1] 0.95
     [1] 1
     > b <- transformspreadbyindividual(sa)
-    > plot(ts(b),plot.type="single",col=rainbow(ncol(b)),xlab="Time",ylab="Fraction reached")
-    Error in xy.coords(x, NULL, log = log, setLab = FALSE) : 
-      'list' object cannot be coerced to type 'double'
-    Calls: plot -> plot.ts -> plotts -> xy.coords
+    > heatmap(b, Rowv=NA, Colv=NA, scale='none', xlab="Individual", ylab="Time")
+    Error in heatmap(b, Rowv = NA, Colv = NA, scale = "none", xlab = "Individual",  : 
+      'x' must be a numeric matrix
     Execution halted
     ```
 

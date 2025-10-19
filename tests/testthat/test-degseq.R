@@ -33,3 +33,9 @@ test_that("realize_degseq supports the make_(...) syntax", {
 
   expect_identical_graphs(g1, g2)
 })
+
+test_that("is_degseq works", {
+  g <- make_full_graph(10)
+  expect_true(is_degseq(degree(g)))
+  expect_true(is_graphical(degree(g)))
+})

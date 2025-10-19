@@ -26,9 +26,6 @@ igraph_delete_vertices:
 igraph_ecount:
     IGNORE: RR, RC
 
-igraph_neighbors:
-    IGNORE: RR, RC
-
 igraph_is_directed:
     IGNORE: RR, RC
 
@@ -524,7 +521,7 @@ igraph_create_bipartite:
     IGNORE: RR
 
 igraph_biadjacency:
-    DEPS: types ON graph V(graph)
+    DEPS: types ON res$graph V(res$graph)
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
@@ -546,11 +543,9 @@ igraph_bipartite_game_gnm:
 igraph_bipartite_game:
     IGNORE: RR, RC
 
-# Two return values, silently dropping the second currently
 igraph_full_bipartite:
-    PARAMS: |-
-        OUT GRAPH graph, OPTIONAL NULL types, INTEGER n1,
-        INTEGER n2, BOOLEAN directed=False, NEIMODE mode=ALL
+    DEPS: types ON res$graph
+
 
 #######################################
 # Spectral properties

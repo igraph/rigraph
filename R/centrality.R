@@ -1043,7 +1043,7 @@ arpack <- function(
   if (any(!names(options) %in% names(defaults))) {
     unknown_options <- setdiff(names(options), names(defaults))
     cli::cli_abort(
-      "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}: 
+      "Can't use unkown ARPACK {cli::qty(unknown_options)} option{?s}:
       {toString(unknown_options)}"
     )
   }
@@ -1342,7 +1342,7 @@ eigen_defaults <- function() {
 #'     }
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} and Carter T. Butts
-#' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
+#' (<https://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
 #' manual page.
 #' @references Bonacich, P.  (1987).  Power and Centrality: A Family of
 #' Measures. *American Journal of Sociology*, 92, 1170-1182.
@@ -1913,7 +1913,7 @@ bonpow.sparse <- function(
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
 #' fixed when we get a better algorithm.
 #' @author Carter T. Butts
-#' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
+#' (<https://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [eigen_centrality()] and [alpha_centrality()]
 #' @references Bonacich, P.  (1972).  ``Factoring and Weighting Approaches to

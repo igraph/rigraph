@@ -68,7 +68,7 @@ assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
 
 Unfortunately the original graph database homepage is now defunct, but see
 its old version at
-\url{http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
+\url{https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
 for the actual format of a graph database file and other information.
 }
 \references{

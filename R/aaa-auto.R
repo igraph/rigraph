@@ -59,6 +59,24 @@ vcount_impl <- function(graph) {
   res
 }
 
+neighbors_impl <- function(graph, vid, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_neighbors, graph, vid-1, mode)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 degree_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=TRUE) {
   # Argument checks
   ensure_igraph(graph)
@@ -333,7 +351,9 @@ full_bipartite_impl <- function(n1, n2, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_bipartite, n1, n2, directed, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name")
+  }
   res
 }
 
@@ -2574,8 +2594,8 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", V(graph))
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
@@ -2762,7 +2782,7 @@ is_biconnected_impl <- function(graph) {
   res
 }
 
-count_reachable_impl <- function(graph, mode) {
+count_reachable_impl <- function(graph, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
@@ -3998,7 +4018,7 @@ local_scan_neighborhood_ecount_impl <- function(graph, weights=NULL, neighborhoo
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, neighborhoods)
+  res <- .Call(R_igraph_local_scan_neighborhood_ecount, graph, weights, lapply(neighborhoods, function(.x) .x-1))
 
   res
 }
@@ -4017,7 +4037,7 @@ local_scan_subset_ecount_impl <- function(graph, weights=NULL, subsets) {
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, subsets)
+  res <- .Call(R_igraph_local_scan_subset_ecount, graph, weights, lapply(subsets, function(.x) .x-1))
 
   res
 }
@@ -4047,7 +4067,7 @@ join_impl <- function(left, right) {
   res
 }
 
-induced_subgraph_map_impl <- function(graph, vids, impl) {
+induced_subgraph_map_impl <- function(graph, vids, impl=c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)

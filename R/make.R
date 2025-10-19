@@ -2577,8 +2577,8 @@ full_citation_graph <- function(...) {
 #' 3-regular Hamiltonian graphs. It constists of three parameters, the number
 #' of vertices in the graph, a list of shifts giving additional edges to a
 #' cycle backbone and another integer giving how many times the shifts should
-#' be performed. See <http://mathworld.wolfram.com/LCFNotation.html> for
-#' details.
+#' be performed.
+#' See <https://mathworld.wolfram.com/LCFNotation.html> for details.
 #'
 #'
 #' @aliases graph_from_lcf
