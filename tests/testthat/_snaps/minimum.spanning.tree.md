@@ -4,5 +4,6 @@
       mst(g, algorithm = "undefined")
     Condition
       Error in `mst()`:
-      ! Invalid `algorithm`.
+      ! `algorithm` must be one of "automatic", "unweighted", "prim", or "kruskal", not "undefined".
+      i Did you mean "unweighted"?
 
