@@ -2070,6 +2070,20 @@ centralization_degree_impl <- function(graph, mode=c("all", "out", "in", "total"
   res
 }
 
+centralization_degree_tmax_impl <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "total"), loops) {
+  # Argument checks
+  if (!is.null(graph)) ensure_igraph(graph)
+  nodes <- as.numeric(nodes)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  loops <- switch(igraph.match.arg(loops), "none"=0L, "twice"=1L, "once"=2L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
+
+  res
+}
+
 centralization_betweenness_impl <- function(graph, directed=TRUE, normalized=TRUE) {
   # Argument checks
   ensure_igraph(graph)
