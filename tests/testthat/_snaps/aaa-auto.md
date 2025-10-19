@@ -55,30 +55,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# delete_vertices_idx_impl basic
-
-    Code
-      delete_vertices_idx_impl(g, 1)
-    Output
-      $graph
-      IGRAPH D--- 2 0 -- 
-      + edges:
-      
-      $idx
-      [1] 0 1 2
-      
-      $invidx
-      [1] 1 2
-      
-
-# delete_vertices_idx_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # vcount_impl basic
 
     Code
@@ -499,25 +475,6 @@
     Condition
       Error in `kautz_impl()`:
       ! At vendor/cigraph/src/constructors/kautz.c:xx : `m' and `n' should be non-negative in a Kautz graph, Invalid value
-
-# lcf_vector_impl basic
-
-    Code
-      lcf_vector_impl(10, c(3, -3, 4), 2)
-    Output
-      IGRAPH U--- 10 16 -- LCF graph
-      + attr: name (g/c)
-      + edges:
-       [1] 1-- 2 1-- 4 1--10 2-- 3 2-- 5 2-- 9 3-- 4 3-- 7 4-- 5 4-- 7 5-- 6 6-- 7
-      [13] 6--10 7-- 8 8-- 9 9--10
-
-# lcf_vector_impl errors
-
-    Code
-      x
-    Condition
-      Error in `lcf_vector_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:xx : Number of vertices must not be negative. Invalid value
 
 # mycielski_graph_impl basic
 
@@ -1242,80 +1199,6 @@
     Condition
       Error in `dot_product_game_impl()`:
       ! REAL() can only be applied to a 'numeric', not a 'NULL'
-
-# sample_sphere_surface_impl basic
-
-    Code
-      sample_sphere_surface_impl(3, 5)
-    Output
-                 [,1]      [,2]      [,3]      [,4]       [,5]
-      [1,] 0.87877523 0.8206548 0.1430028 0.6349227 0.99933629
-      [2,] 0.05165973 0.5261159 0.1145481 0.2979741 0.02649327
-      [3,] 0.47443162 0.2229974 0.9830712 0.7128005 0.02500179
-
----
-
-    Code
-      sample_sphere_surface_impl(3, 5, radius = 2, positive = FALSE)
-    Output
-                 [,1]       [,2]       [,3]        [,4]     [,5]
-      [1,] -0.4904253 -1.4825368 -0.5141332  1.95644246 0.369407
-      [2,] -1.6787252  1.1329528 -0.7872709 -0.41498660 1.953509
-      [3,] -0.9702395  0.7200713  1.7651832 -0.01090904 0.217584
-
-# sample_sphere_surface_impl errors
-
-    Code
-      x
-    Condition
-      Error in `sample_sphere_surface_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
-
-# sample_sphere_volume_impl basic
-
-    Code
-      sample_sphere_volume_impl(3, 5)
-    Output
-                 [,1]      [,2]       [,3]      [,4]       [,5]
-      [1,] 0.67165090 0.6105364 0.09806950 0.4132698 0.73325518
-      [2,] 0.03948371 0.3914105 0.07855561 0.1939507 0.01943923
-      [3,] 0.36260970 0.1659017 0.67417787 0.4639603 0.01834487
-
----
-
-    Code
-      sample_sphere_volume_impl(3, 5, radius = 2, positive = FALSE)
-    Output
-                   [,1]       [,2]       [,3]      [,4]       [,5]
-      [1,]  1.903629152 -1.3795904 -1.2061886 0.9035986 -1.1692436
-      [2,] -0.159619927  0.2402815 -0.1258477 0.1842403 -1.4940836
-      [3,]  0.003829883  1.2440192  0.6204597 1.5776103  0.4096058
-
-# sample_sphere_volume_impl errors
-
-    Code
-      x
-    Condition
-      Error in `sample_sphere_volume_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
-
-# sample_dirichlet_impl basic
-
-    Code
-      sample_dirichlet_impl(5, c(1, 1, 1))
-    Output
-                [,1]      [,2]       [,3]      [,4]      [,5]
-      [1,] 0.6298008 0.4168413 0.29594281 0.2432340 0.1516815
-      [2,] 0.1093984 0.3461600 0.08924333 0.4251328 0.3561426
-      [3,] 0.2608008 0.2369988 0.61481386 0.3316331 0.4921759
-
-# sample_dirichlet_impl errors
-
-    Code
-      x
-    Condition
-      Error in `sample_dirichlet_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Number of samples should be non-negative, got -1. Invalid value
 
 # are_adjacent_impl basic
 
@@ -3031,28 +2914,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# centralization_degree_tmax_impl basic
-
-    Code
-      centralization_degree_tmax_impl(nodes = 3, loops = TRUE)
-    Output
-      [1] 6
-
----
-
-    Code
-      centralization_degree_tmax_impl(nodes = 3, mode = "in", loops = FALSE)
-    Output
-      [1] 4
-
-# centralization_degree_tmax_impl errors
-
-    Code
-      x
-    Condition
-      Error in `centralization_degree_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
-
 # centralization_betweenness_impl basic
 
     Code
@@ -3529,74 +3390,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# eccentricity_dijkstra_impl basic
-
-    Code
-      eccentricity_dijkstra_impl(g)
-    Output
-      [1] 2 1 2
-
----
-
-    Code
-      eccentricity_dijkstra_impl(g, mode = "in")
-    Output
-      [1] 2 1 2
-
-# eccentricity_dijkstra_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# graph_center_dijkstra_impl basic
-
-    Code
-      graph_center_dijkstra_impl(g)
-    Output
-      + 1/3 vertex:
-      [1] 2
-
----
-
-    Code
-      graph_center_dijkstra_impl(g, mode = "in")
-    Output
-      + 1/3 vertex:
-      [1] 2
-
-# graph_center_dijkstra_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# radius_dijkstra_impl basic
-
-    Code
-      radius_dijkstra_impl(g)
-    Output
-      [1] 1
-
----
-
-    Code
-      radius_dijkstra_impl(g, mode = "in")
-    Output
-      [1] 1
-
-# radius_dijkstra_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # pseudo_diameter_impl basic
 
     Code
@@ -3628,44 +3421,6 @@
       
 
 # pseudo_diameter_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# pseudo_diameter_dijkstra_impl basic
-
-    Code
-      pseudo_diameter_dijkstra_impl(g, start.vid = 1)
-    Output
-      $diameter
-      [1] 2
-      
-      $from
-      [1] 0
-      
-      $to
-      [1] 2
-      
-
----
-
-    Code
-      pseudo_diameter_dijkstra_impl(g, start.vid = 1, directed = FALSE, unconnected = FALSE)
-    Output
-      $diameter
-      [1] 2
-      
-      $from
-      [1] 0
-      
-      $to
-      [1] 2
-      
-
-# pseudo_diameter_dijkstra_impl errors
 
     Code
       x
@@ -3783,23 +3538,6 @@
       [1] 0
 
 # average_local_efficiency_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# transitive_closure_dag_impl basic
-
-    Code
-      transitive_closure_dag_impl(g)
-    Output
-      IGRAPH D--- 3 3 -- 
-      + edges:
-      [1] 1->3 1->2 2->3
-
-# transitive_closure_dag_impl errors
 
     Code
       x
@@ -9941,99 +9679,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# deterministic_optimal_imitation_impl basic
-
-    Code
-      deterministic_optimal_imitation_impl(g, 1, quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3))
-    Output
-      [1] 2 2 3
-
----
-
-    Code
-      deterministic_optimal_imitation_impl(g, 1, optimality = "minimum", quantities = c(
-        1, 2, 3), strategies = c(1, 2, 3), mode = "in")
-    Output
-      [1] 1 2 3
-
-# deterministic_optimal_imitation_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# moran_process_impl basic
-
-    Code
-      moran_process_impl(g, weights = c(1, 1), quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3), mode = "in")
-    Output
-      $quantities
-      [1] 1 3 3
-      
-      $strategies
-      [1] 1 3 3
-      
-
-# moran_process_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# roulette_wheel_imitation_impl basic
-
-    Code
-      roulette_wheel_imitation_impl(g, 1, TRUE, quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3))
-    Output
-      [1] 1 2 3
-
----
-
-    Code
-      roulette_wheel_imitation_impl(g, 1, FALSE, quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3), mode = "in")
-    Output
-      [1] 3 2 3
-
-# roulette_wheel_imitation_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# stochastic_imitation_impl basic
-
-    Code
-      stochastic_imitation_impl(g, 1, algo = 1, quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3))
-    Output
-      [1] 1 2 3
-
----
-
-    Code
-      stochastic_imitation_impl(g, 1, algo = 2, quantities = c(1, 2, 3), strategies = c(
-        1, 2, 3), mode = "in")
-    Output
-      [1] 1 2 3
-
-# stochastic_imitation_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # invalidate_cache_impl basic
 
     Code
@@ -10044,30 +9689,6 @@
       [1] 1--2 2--3
 
 # invalidate_cache_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# vertex_path_from_edge_path_impl basic
-
-    Code
-      vertex_path_from_edge_path_impl(g, start = 1, edge.path = c(1, 2))
-    Output
-      + 3/3 vertices:
-      [1] 1 2 3
-
----
-
-    Code
-      vertex_path_from_edge_path_impl(g, start = 1, edge.path = c(1), mode = "in")
-    Output
-      + 2/3 vertices:
-      [1] 1 2
-
-# vertex_path_from_edge_path_impl errors
 
     Code
       x
