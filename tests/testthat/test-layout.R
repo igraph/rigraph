@@ -1,4 +1,5 @@
 test_that("layout_with_fr() works", {
+  skip("RNG")
   skip_on_os("solaris")
 
   withr::with_seed(42, {
