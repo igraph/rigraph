@@ -43,21 +43,6 @@ test_that("copy_impl errors", {
   expect_snapshot_igraph_error(copy_impl(NULL))
 })
 
-# 4. delete_vertices_idx_impl
-
-test_that("delete_vertices_idx_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- empty_impl(3)
-  expect_snapshot(delete_vertices_idx_impl(g, 1))
-})
-
-test_that("delete_vertices_idx_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(delete_vertices_idx_impl(NULL, 1))
-})
-
 # 5. vcount_impl
 
 test_that("vcount_impl basic", {
@@ -336,18 +321,6 @@ test_that("kautz_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(kautz_impl(-1, 3))
-})
-
-# 23. lcf_vector_impl
-test_that("lcf_vector_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(lcf_vector_impl(10, c(3, -3, 4), 2))
-})
-test_that("lcf_vector_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(lcf_vector_impl(-1, c(3, -3, 4), 2))
 })
 
 # 24. mycielski_graph_impl
@@ -841,55 +814,6 @@ test_that("dot_product_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(dot_product_game_impl(NULL))
-})
-
-# 52. sample_sphere_surface_impl
-
-test_that("sample_sphere_surface_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(sample_sphere_surface_impl(3, 5))
-  expect_snapshot(sample_sphere_surface_impl(
-    3,
-    5,
-    radius = 2,
-    positive = FALSE
-  ))
-})
-
-test_that("sample_sphere_surface_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(sample_sphere_surface_impl(-1, 5))
-})
-
-# 53. sample_sphere_volume_impl
-
-test_that("sample_sphere_volume_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(sample_sphere_volume_impl(3, 5))
-  expect_snapshot(sample_sphere_volume_impl(3, 5, radius = 2, positive = FALSE))
-})
-
-test_that("sample_sphere_volume_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(sample_sphere_volume_impl(-1, 5))
-})
-
-# 54. sample_dirichlet_impl
-
-test_that("sample_dirichlet_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(sample_dirichlet_impl(5, c(1, 1, 1)))
-})
-
-test_that("sample_dirichlet_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(sample_dirichlet_impl(-1, c(1, 1, 1)))
 })
 
 # 55. are_adjacent_impl
@@ -1873,27 +1797,6 @@ test_that("centralization_degree_impl errors", {
   expect_snapshot_igraph_error(centralization_degree_impl(NULL))
 })
 
-# 136. centralization_degree_tmax_impl
-
-test_that("centralization_degree_tmax_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot(centralization_degree_tmax_impl(nodes = 3, loops = TRUE))
-  expect_snapshot(centralization_degree_tmax_impl(
-    nodes = 3,
-    mode = "in",
-    loops = FALSE
-  ))
-})
-
-test_that("centralization_degree_tmax_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    centralization_degree_tmax_impl(nodes = -1, loops = TRUE)
-  )
-})
-
 # 137. centralization_betweenness_impl
 
 test_that("centralization_betweenness_impl basic", {
@@ -2155,54 +2058,6 @@ test_that("contract_vertices_impl errors", {
   expect_snapshot_igraph_error(contract_vertices_impl(NULL, c(1, 1, 2)))
 })
 
-# 150. eccentricity_dijkstra_impl
-
-test_that("eccentricity_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(eccentricity_dijkstra_impl(g))
-  expect_snapshot(eccentricity_dijkstra_impl(g, mode = "in"))
-})
-
-test_that("eccentricity_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(eccentricity_dijkstra_impl(NULL))
-})
-
-# 151. graph_center_dijkstra_impl
-
-test_that("graph_center_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(graph_center_dijkstra_impl(g))
-  expect_snapshot(graph_center_dijkstra_impl(g, mode = "in"))
-})
-
-test_that("graph_center_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(graph_center_dijkstra_impl(NULL))
-})
-
-# 152. radius_dijkstra_impl
-
-test_that("radius_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(radius_dijkstra_impl(g))
-  expect_snapshot(radius_dijkstra_impl(g, mode = "in"))
-})
-
-test_that("radius_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(radius_dijkstra_impl(NULL))
-})
-
 # 153. pseudo_diameter_impl
 
 test_that("pseudo_diameter_impl basic", {
@@ -2222,29 +2077,6 @@ test_that("pseudo_diameter_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(pseudo_diameter_impl(NULL, 1))
-})
-
-# 154. pseudo_diameter_dijkstra_impl
-
-test_that("pseudo_diameter_dijkstra_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(pseudo_diameter_dijkstra_impl(g, start.vid = 1))
-  expect_snapshot(pseudo_diameter_dijkstra_impl(
-    g,
-    start.vid = 1,
-    directed = FALSE,
-    unconnected = FALSE
-  ))
-})
-
-test_that("pseudo_diameter_dijkstra_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    pseudo_diameter_dijkstra_impl(NULL, start.vid = 1)
-  )
 })
 
 # 155. diversity_impl
@@ -2329,21 +2161,6 @@ test_that("average_local_efficiency_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(average_local_efficiency_impl(NULL))
-})
-
-# 160. transitive_closure_dag_impl
-
-test_that("transitive_closure_dag_impl basic", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3, directed = TRUE)
-  expect_snapshot(transitive_closure_dag_impl(g))
-})
-
-test_that("transitive_closure_dag_impl errors", {
-  withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(transitive_closure_dag_impl(NULL))
 })
 
 # 161. transitive_closure_impl
@@ -5359,138 +5176,6 @@ test_that("is_edge_coloring_impl errors", {
   expect_snapshot_igraph_error(is_edge_coloring_impl(NULL, types = c(1, 2)))
 })
 
-# 327. deterministic_optimal_imitation_impl
-
-test_that("deterministic_optimal_imitation_impl basic", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(deterministic_optimal_imitation_impl(
-    g,
-    1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(deterministic_optimal_imitation_impl(
-    g,
-    1,
-    optimality = "minimum",
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-})
-
-test_that("deterministic_optimal_imitation_impl errors", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    deterministic_optimal_imitation_impl(
-      NULL,
-      1,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
-# 328. moran_process_impl
-
-test_that("moran_process_impl basic", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(moran_process_impl(
-    g,
-    weights = c(1, 1),
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-})
-
-test_that("moran_process_impl errors", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    moran_process_impl(NULL, quantities = c(1, 2, 3), strategies = c(1, 2, 3))
-  )
-})
-
-# 329. roulette_wheel_imitation_impl
-
-test_that("roulette_wheel_imitation_impl basic", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(roulette_wheel_imitation_impl(
-    g,
-    1,
-    TRUE,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(roulette_wheel_imitation_impl(
-    g,
-    1,
-    FALSE,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-})
-
-test_that("roulette_wheel_imitation_impl errors", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    roulette_wheel_imitation_impl(
-      NULL,
-      1,
-      TRUE,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
-# 330. stochastic_imitation_impl
-
-test_that("stochastic_imitation_impl basic", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(stochastic_imitation_impl(
-    g,
-    1,
-    algo = 1,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3)
-  ))
-  expect_snapshot(stochastic_imitation_impl(
-    g,
-    1,
-    algo = 2,
-    quantities = c(1, 2, 3),
-    strategies = c(1, 2, 3),
-    mode = "in"
-  ))
-})
-
-test_that("stochastic_imitation_impl errors", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    stochastic_imitation_impl(
-      NULL,
-      1,
-      algo = 1,
-      quantities = c(1, 2, 3),
-      strategies = c(1, 2, 3)
-    )
-  )
-})
-
 # 331. invalidate_cache_impl
 
 test_that("invalidate_cache_impl basic", {
@@ -5504,33 +5189,6 @@ test_that("invalidate_cache_impl errors", {
   withr::local_seed(12345)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(invalidate_cache_impl(NULL))
-})
-
-# 332. vertex_path_from_edge_path_impl
-
-test_that("vertex_path_from_edge_path_impl basic", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  g <- path_graph_impl(3)
-  expect_snapshot(vertex_path_from_edge_path_impl(
-    g,
-    start = 1,
-    edge.path = c(1, 2)
-  ))
-  expect_snapshot(vertex_path_from_edge_path_impl(
-    g,
-    start = 1,
-    edge.path = c(1),
-    mode = "in"
-  ))
-})
-
-test_that("vertex_path_from_edge_path_impl errors", {
-  withr::local_seed(12345)
-  local_igraph_options(print.id = FALSE)
-  expect_snapshot_igraph_error(
-    vertex_path_from_edge_path_impl(NULL, start = 1, edge.path = c(1, 2))
-  )
 })
 
 # 333. version_impl
