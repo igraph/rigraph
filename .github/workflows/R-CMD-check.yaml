@@ -10,6 +10,7 @@ on:
       - main
       - master
       - release
+      - next
       - cran-*
   pull_request:
     branches:
