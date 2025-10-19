@@ -546,6 +546,11 @@ igraph_bipartite_game_gnm:
 igraph_bipartite_game:
     IGNORE: RR, RC
 
+# Two return values, silently dropping the second currently
+igraph_full_bipartite:
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL NULL types, INTEGER n1,
+        INTEGER n2, BOOLEAN directed=False, NEIMODE mode=ALL
 
 #######################################
 # Spectral properties

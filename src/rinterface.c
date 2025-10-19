@@ -912,6 +912,7 @@ SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
 SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
+
   igraph_integer_t c_n1;
   igraph_integer_t c_n2;
   igraph_bool_t c_directed;
@@ -928,7 +929,7 @@ SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_full_bipartite(&c_graph, c_n1, c_n2, c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_full_bipartite(&c_graph, 0, c_n1, c_n2, c_directed, c_mode));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
