@@ -270,7 +270,7 @@ max_cardinality <- maximum_cardinality_search_impl
 #' eccentricity(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_eccentricity_dijkstra
+#' @cdocs igraph_eccentricity
 eccentricity <- function(
   graph,
   vids = V(graph),
@@ -325,7 +325,7 @@ eccentricity <- function(
 #' radius(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_radius_dijkstra
+#' @cdocs igraph_radius
 radius <- function(
   graph,
   ...,

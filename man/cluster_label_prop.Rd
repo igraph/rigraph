@@ -11,7 +11,7 @@ cluster_label_prop(
   mode = c("out", "in", "all"),
   initial = NULL,
   fixed = NULL,
-  lta_variant = c("dominance", "retention", "fast")
+  lpa_variant = c("dominance", "retention", "fast")
 )
 }
 \arguments{

@@ -2599,7 +2599,7 @@ full_citation_graph <- function(...) {
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @cdocs igraph_lcf_vector
+#' @cdocs igraph_lcf
 graph_from_lcf <- function(
   shifts,
   ...,
