@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9005
+
+## Chore
+
+- Use autogen-impl functions for 3 motifs functions (#2152).
+
+## Testing
+
+- Improve centralitystress test (#2214).
+
+
 # igraph 2.2.0.9004
 
 ## Testing
