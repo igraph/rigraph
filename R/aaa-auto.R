@@ -5633,3 +5633,43 @@ version_impl <- function() {
   res
 }
 
+sample_sphere_surface_impl <- function(dim, n=1, radius=1, positive=TRUE) {
+  # Argument checks
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
+  radius <- as.numeric(radius)
+  positive <- as.logical(positive)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_sample_sphere_surface, dim, n, radius, positive)
+
+  res
+}
+
+sample_sphere_volume_impl <- function(dim, n=1, radius=1, positive=TRUE) {
+  # Argument checks
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
+  radius <- as.numeric(radius)
+  positive <- as.logical(positive)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_sample_sphere_volume, dim, n, radius, positive)
+
+  res
+}
+
+sample_dirichlet_impl <- function(n, alpha) {
+  # Argument checks
+  n <- as.numeric(n)
+  alpha <- as.numeric(alpha)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
+
+  res
+}
+
