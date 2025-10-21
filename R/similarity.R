@@ -104,8 +104,7 @@ similarity <- function(
     ),
     invlogweighted = similarity_inverse_log_weighted_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      vids = vids_from,
       mode = mode
     )
   )
