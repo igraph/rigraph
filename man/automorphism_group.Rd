@@ -15,26 +15,6 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
-
-\item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are:
-\sQuote{\code{f}}:
-first non-singleton cell,
-\sQuote{\code{fl}}:
-first largest non-singleton cell,
-\sQuote{\code{fs}}:
-first smallest non-singleton cell,
-\sQuote{\code{fm}}:
-first maximally non-trivially connected
-non-singleton cell,
-\sQuote{\code{flm}}:
-first largest maximally
-non-trivially connected non-singleton cell,
-\sQuote{\code{fsm}}:
-first smallest maximally non-trivially connected non-singleton cell.}
-
-\item{details}{Specifies whether to provide additional details about the
-BLISS internals in the result.}
 }
 \value{
 When \code{details} is \code{FALSE}, a list of vertex permutations
