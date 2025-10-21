@@ -8,7 +8,7 @@ runs:
         echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
       shell: bash
 
-    - name: REMOVE ME: Avoid checking native code symbols
+    - name: "REMOVE ME: Avoid checking native code symbols"
       run: |
         echo 'UserNM=true' | tee -a $GITHUB_ENV
       shell: bash
