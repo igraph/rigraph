@@ -24,6 +24,9 @@ during the calculation. Ignored in undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Computing
 eigenvector centralization requires normalized eigenvector centrality scores.}
+
+\item{mode}{This is the same as the \code{mode} argument of
+\code{degree()}.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph

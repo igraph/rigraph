@@ -685,7 +685,9 @@ centr_eigen <- function(
 #' @param directed logical scalar, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
-#' eigenvector centralization requires normalized eigenvector centrality scores.
+#'   eigenvector centralization requires normalized eigenvector centrality scores.
+#' @param mode This is the same as the `mode` argument of
+#'   `degree()`.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   eigenvector centrality score for graphs with given vertex count and
 #'   other parameters.
