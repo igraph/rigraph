@@ -150,3 +150,19 @@ void R_check_bool_scalar(SEXP value);
 igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res);
 igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
 igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
+
+igraph_error_t igraph_sample_sphere_surface(igraph_integer_t dim,
+                                            igraph_integer_t n,
+                                            igraph_real_t radius,
+                                            igraph_bool_t positive,
+                                            igraph_matrix_t *res);
+
+igraph_error_t igraph_sample_sphere_volume(igraph_integer_t dim,
+                                           igraph_integer_t n,
+                                           igraph_real_t radius,
+                                           igraph_bool_t positive,
+                                           igraph_matrix_t *res);
+
+igraph_error_t igraph_sample_dirichlet(igraph_integer_t n,
+                                       const igraph_vector_t *alpha,
+                                       igraph_matrix_t *res);

@@ -21,6 +21,8 @@
 
 */
 
+#include "igraph_random.h"
+#include "igraph_sampling.h"
 #include "rinterface.h"
 #include "rrandom.h"
 
@@ -8574,4 +8576,28 @@ SEXP R_igraph_add_env(SEXP graph) {
 
 SEXP R_igraph_get_graph_id(SEXP graph) {
   return Rf_findVar(Rf_install("myid"), R_igraph_graph_env(graph));
+}
+
+igraph_error_t igraph_sample_sphere_surface(igraph_integer_t dim,
+                                            igraph_integer_t n,
+                                            igraph_real_t radius,
+                                            igraph_bool_t positive,
+                                            igraph_matrix_t *res) {
+  return igraph_rng_sample_sphere_surface(igraph_rng_default(), dim, n, radius,
+                                          positive, res);
+}
+
+igraph_error_t igraph_sample_sphere_volume(igraph_integer_t dim,
+                                           igraph_integer_t n,
+                                           igraph_real_t radius,
+                                           igraph_bool_t positive,
+                                           igraph_matrix_t *res) {
+  return igraph_rng_sample_sphere_volume(igraph_rng_default(), dim, n, radius,
+                                         positive, res);
+}
+
+igraph_error_t igraph_sample_dirichlet(igraph_integer_t n,
+                                       const igraph_vector_t *alpha,
+                                       igraph_matrix_t *res) {
+  return igraph_rng_sample_dirichlet(igraph_rng_default(), n, alpha, res);
 }

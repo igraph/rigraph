@@ -13137,3 +13137,113 @@ SEXP R_igraph_version(void) {
   UNPROTECT(1);
   return(r_result);
 }
+
+/*-------------------------------------------/
+/ igraph_sample_sphere_surface               /
+/-------------------------------------------*/
+SEXP R_igraph_sample_sphere_surface(SEXP dim, SEXP n, SEXP radius, SEXP positive) {
+                                        /* Declarations */
+  igraph_integer_t c_dim;
+  igraph_integer_t c_n;
+  igraph_real_t c_radius;
+  igraph_bool_t c_positive;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_sphere_surface(c_dim, c_n, c_radius, c_positive, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sample_sphere_volume                /
+/-------------------------------------------*/
+SEXP R_igraph_sample_sphere_volume(SEXP dim, SEXP n, SEXP radius, SEXP positive) {
+                                        /* Declarations */
+  igraph_integer_t c_dim;
+  igraph_integer_t c_n;
+  igraph_real_t c_radius;
+  igraph_bool_t c_positive;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_sphere_volume(c_dim, c_n, c_radius, c_positive, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sample_dirichlet                    /
+/-------------------------------------------*/
+SEXP R_igraph_sample_dirichlet(SEXP n, SEXP alpha) {
+                                        /* Declarations */
+  igraph_integer_t c_n;
+  igraph_vector_t c_alpha;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  R_SEXP_to_vector(alpha, &c_alpha);
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_dirichlet(c_n, &c_alpha, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
