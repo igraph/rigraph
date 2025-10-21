@@ -1094,7 +1094,15 @@ voronoi_impl <- function(graph, generators, ..., weights=NULL, mode=c("out", "in
   res
 }
 
-get_all_simple_paths_impl <- function(graph, from, to=V(graph), minlen=-1, maxlen=-1, mode=c("out", "in", "all", "total")) {
+get_all_simple_paths_impl <- function(
+  graph,
+  from,
+  to = V(graph),
+  minlen = -1,
+  maxlen = -1,
+  mode = c("out", "in", "all", "total"),
+  cutoff
+) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
