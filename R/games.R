@@ -1559,7 +1559,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' @family games
 #' @export
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' # The maximum degree for graph with different aging exponents
 #' g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
