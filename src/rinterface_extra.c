@@ -2406,17 +2406,15 @@ igraph_error_t R_igraph_progress_handler(const char *message, double percent,
 }
 
 igraph_error_t R_igraph_status_handler(const char *message, void *data) {
-  SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
-  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
-
-  SEXP l4 = PROTECT(Rf_install(".igraph.status"));
+  SEXP l1 = PROTECT(Rf_install(":::"));
+  SEXP l2 = PROTECT(Rf_install("igraph"));
+  SEXP l3 = PROTECT(Rf_install(".igraph.status"));
+  SEXP l4 = PROTECT(Rf_lang3(l1, l2, l3));
   SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
   SEXP l6 = PROTECT(Rf_lang2(l4, l5));
-  PROTECT(Rf_eval(l6, rho));
+  PROTECT(Rf_eval(l6, R_BaseEnv));
 
-  UNPROTECT(10);
+  UNPROTECT(8);
   return 0;
 }
 
