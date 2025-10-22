@@ -127,7 +127,6 @@ all_simple_paths <- function(
       mode = mode
     )
   )
-  res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))

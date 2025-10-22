@@ -8449,27 +8449,6 @@ int igraphhcass2(int n, const int *ia, const int *ib,
   return 0;
 } /* hcass2_ */
 
-SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
-  SEXP result;
-  igraph_integer_t no=0, n=Rf_xlength(vector);
-  double *vec=REAL(vector), *p=vec, *pp=vec;
-  for (igraph_integer_t i=0; i<n; i++) {
-    if (vec[i] == 0) { no++; }
-  }
-
-  PROTECT(result=NEW_LIST(no));
-  for (igraph_integer_t i=0; i<no; i++) {
-    SEXP svec;
-    while (*p != 0) { p++; }
-    SET_VECTOR_ELT(result, i, svec=NEW_NUMERIC(p-pp));
-    memcpy(REAL(svec), pp, (p-pp) * sizeof(double));
-    pp = ++p;
-  }
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_address(SEXP object) {
   char s[64];
   snprintf(s, 64, "%p", (void*) object);
