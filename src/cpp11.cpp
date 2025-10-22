@@ -408,6 +408,9 @@ extern SEXP R_igraph_ring(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rooted_product(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_roots_for_tree_layout(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_running_mean(SEXP, SEXP);
+extern SEXP R_igraph_sample_dirichlet(SEXP, SEXP);
+extern SEXP R_igraph_sample_sphere_surface(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_sample_sphere_volume(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_sbm_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_set_verbose(SEXP);
 extern SEXP R_igraph_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -880,6 +883,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_rooted_product",                             (DL_FUNC) &R_igraph_rooted_product,                              3},
     {"R_igraph_roots_for_tree_layout",                      (DL_FUNC) &R_igraph_roots_for_tree_layout,                       3},
     {"R_igraph_running_mean",                               (DL_FUNC) &R_igraph_running_mean,                                2},
+    {"R_igraph_sample_dirichlet",                           (DL_FUNC) &R_igraph_sample_dirichlet,                            2},
+    {"R_igraph_sample_sphere_surface",                      (DL_FUNC) &R_igraph_sample_sphere_surface,                       4},
+    {"R_igraph_sample_sphere_volume",                       (DL_FUNC) &R_igraph_sample_sphere_volume,                        4},
     {"R_igraph_sbm_game",                                   (DL_FUNC) &R_igraph_sbm_game,                                    5},
     {"R_igraph_set_verbose",                                (DL_FUNC) &R_igraph_set_verbose,                                 1},
     {"R_igraph_shortest_paths",                             (DL_FUNC) &R_igraph_shortest_paths,                              6},
