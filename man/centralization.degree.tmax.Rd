@@ -19,8 +19,11 @@ centralization.degree.tmax(
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
 if \code{graph} is given and the graph is undirected.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
-calculating the degree.}
+\item{loops}{Character string,
+\code{"none"} (the default) ignores loop edges;
+\code{"once"} counts each loop edge only once;
+\code{"twice"} counts each loop edge twice in undirected graphs.
+and once in directed graphs.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

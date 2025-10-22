@@ -19,8 +19,11 @@ centr_degree_tmax(
 \item{mode}{This is the same as the \code{mode} argument of \code{degree()}. Ignored
 if \code{graph} is given and the graph is undirected.}
 
-\item{loops}{Logical scalar, whether to consider loops edges when
-calculating the degree.}
+\item{loops}{Character string,
+\code{"none"} (the default) ignores loop edges;
+\code{"once"} counts each loop edge only once;
+\code{"twice"} counts each loop edge twice in undirected graphs.
+and once in directed graphs.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph degree
@@ -32,8 +35,8 @@ See \code{\link[=centralize]{centralize()}} for a summary of graph centralizatio
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
-centr_degree(g, normalized = FALSE)$centralization \%>\%
-  `/`(centr_degree_tmax(g, loops = FALSE))
+centr_degree(g, normalized = FALSE)$centralization /
+  centr_degree_tmax(g, loops = "twice")
 centr_degree(g, normalized = TRUE)$centralization
 }
 \seealso{

@@ -308,7 +308,7 @@ NULL
 #'
 #' # Calculate centralization from pre-computed scores
 #' deg <- degree(g)
-#' tmax <- centr_degree_tmax(g, loops = FALSE)
+#' tmax <- centr_degree_tmax(g, loops = "none")
 #' centralize(deg, tmax)
 #'
 #' # The most centralized graph according to eigenvector centrality
@@ -369,8 +369,11 @@ centr_degree <- centralization_degree_impl
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
-#' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#' @param loops Character string,
+#'   `"none"` (the default) ignores loop edges;
+#'   `"once"` counts each loop edge only once;
+#'   `"twice"` counts each loop edge twice in undirected graphs.
+#' and once in directed graphs.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -381,8 +384,8 @@ centr_degree <- centralization_degree_impl
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_degree(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_degree_tmax(g, loops = FALSE))
+#' centr_degree(g, normalized = FALSE)$centralization /
+#'   centr_degree_tmax(g, loops = "twice")
 #' centr_degree(g, normalized = TRUE)$centralization
 centr_degree_tmax <- function(
   graph = NULL,
@@ -396,15 +399,13 @@ centr_degree_tmax <- function(
       what = "centr_degree_tmax(loops = 'must be explicit')",
       details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
-    loops <- FALSE
+    loops <- "none"
   }
 
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
   nodes <- as.numeric(nodes)
-
-  loops <- as.logical(loops)
 
   # Function call
   res <- centralization_degree_tmax_impl(

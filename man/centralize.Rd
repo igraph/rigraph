@@ -56,7 +56,7 @@ centr_eigen(g, directed = FALSE)$centralization
 
 # Calculate centralization from pre-computed scores
 deg <- degree(g)
-tmax <- centr_degree_tmax(g, loops = FALSE)
+tmax <- centr_degree_tmax(g, loops = "none")
 centralize(deg, tmax)
 
 # The most centralized graph according to eigenvector centrality
