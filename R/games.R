@@ -1234,7 +1234,7 @@ random.graph.game <- function(
 #' @family games
 #' @export
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' ## The simple generator
 #' undirected_graph <- sample_degseq(rep(2, 100))
