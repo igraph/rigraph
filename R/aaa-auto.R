@@ -1094,15 +1094,7 @@ voronoi_impl <- function(graph, generators, ..., weights=NULL, mode=c("out", "in
   res
 }
 
-get_all_simple_paths_impl <- function(
-  graph,
-  from,
-  to = V(graph),
-  minlen = -1,
-  maxlen = -1,
-  mode = c("out", "in", "all", "total"),
-  cutoff
-) {
+get_all_simple_paths_impl <- function(graph, from, to=V(graph), minlen=-1, maxlen=-1, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
@@ -2083,12 +2075,7 @@ centralization_degree_tmax_impl <- function(graph=NULL, nodes=0, mode=c("all", "
   if (!is.null(graph)) ensure_igraph(graph)
   nodes <- as.numeric(nodes)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  loops <- switch(
-    igraph.match.arg(loops, c("none", "twice", "once")),
-    "none" = 0L,
-    "twice" = 1L,
-    "once" = 2L
-  )
+  loops <- switch(igraph.match.arg(loops), "none"=0L, "twice"=1L, "once"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2677,8 +2664,8 @@ bipartite_game_gnm_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode, multiple)
-  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
-    names(res$types) <- vertex_attr(res$graph, "name")
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$types) <- vertex_attr(graph, "name")
   }
   res
 }
@@ -2821,13 +2808,7 @@ is_biconnected_impl <- function(graph) {
 count_reachable_impl <- function(graph, mode) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode, c("out", "in", "all", "total")),
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3488,12 +3469,8 @@ community_label_propagation_impl <- function(graph, mode=c("all", "out", "in", "
   }
   if (!is.null(initial)) initial <- as.numeric(initial)-1
   if (!is.null(fixed)) fixed <- as.logical(fixed)
-  lpa.variant <- switch(
-    igraph.match.arg(lpa.variant, c("dominance", "retention", "fast")),
-    "dominance" = 0L,
-    "retention" = 1L,
-    "fast" = 2L
-  )
+  lpa.variant <- switch(igraph.match.arg(lpa.variant),
+    "dominance"=0L, "retention"=1L, "fast"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -4164,15 +4141,7 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- switch(
-    igraph.match.arg(
-      impl,
-      c("auto", "copy_and_delete", "create_from_scratch")
-    ),
-    "auto" = 0L,
-    "copy_and_delete" = 1L,
-    "create_from_scratch" = 2L
-  )
+  impl <- switch(igraph.match.arg(impl), "auto"=0L, "copy_and_delete"=1L, "create_from_scratch"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -5193,7 +5162,7 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   res
 }
 
-eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults(), storage) {
+eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults(), storage=NULL) {
   # Argument checks
   ensure_igraph(graph)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
@@ -5205,7 +5174,7 @@ eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", 
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_eigen_adjacency, graph, algorithm, which, options)
+  res <- .Call(R_igraph_eigen_adjacency, graph, algorithm, which, options, storage)
 
   res
 }

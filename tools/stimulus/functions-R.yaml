@@ -1055,3 +1055,11 @@ igraph_vertex_path_from_edge_path:
 #######################################
 
 igraph_version:
+
+igraph_eigen_adjacency:
+    PARAMS: |-
+        GRAPH graph, EIGENALGO algorithm=ARPACK,
+        EIGENWHICH which=Default,
+        INOUT ARPACK_OPTIONS options=ARPACK_DEFAULTS,
+        INOUT ARPACK_STORAGE storage=NULL, OUT VECTOR values, OUT MATRIX vectors,
+        OUT VECTOR_COMPLEX cmplxvalues, OUT MATRIX_COMPLEX cmplxvectors
