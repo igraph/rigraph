@@ -1015,21 +1015,17 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' # Pick a simple graph on 6 vertices uniformly at random
 #' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
-  type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
+  if (loops) {
+    allowed.edge.types <- "loops"
+  } else {
+    allowed.edge.types <- "simple"
+  }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnp,
-    as.numeric(n),
-    as.numeric(p),
-    as.logical(directed),
-    as.logical(loops)
-  )
+  res <- erdos_renyi_game_gnp_impl(n, p, directed, allowed.edge.types)
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
-    res$type <- type
+    res$type <- "gnp"
+    res$name <- sprintf("Erdos-Renyi (%s) graph", res$type)
     res$loops <- loops
     res$p <- p
   }
