@@ -1174,7 +1174,7 @@
       dot_product_game_impl(matrix(0.5, 5, 2))
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:87 : Greater than 1 connection probability in dot-product graph.
+      At vendor/cigraph/src/games/dotproduct.c:86 : Greater than 1 connection probability in dot-product graph.
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1186,7 +1186,7 @@
       dot_product_game_impl(matrix(0.5, 5, 2), directed = TRUE)
     Condition
       Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:87 : Greater than 1 connection probability in dot-product graph.
+      At vendor/cigraph/src/games/dotproduct.c:86 : Greater than 1 connection probability in dot-product graph.
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -5736,7 +5736,7 @@
       triad_census_impl(g)
     Condition
       Warning in `triad_census_impl()`:
-      At vendor/cigraph/src/misc/motifs.c:1167 : Triad census called on an undirected graph. All connections will be treated as mutual.
+      At vendor/cigraph/src/misc/motifs.c:1170 : Triad census called on an undirected graph. All connections will be treated as mutual.
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -9600,7 +9600,7 @@
     Code
       version_impl_clean()
     Output
-      [1] "0.10.16"
+      [1] "1.0.0"
 
 # version_impl errors
 
