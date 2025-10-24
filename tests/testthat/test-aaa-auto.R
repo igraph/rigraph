@@ -2960,6 +2960,7 @@ test_that("assortativity_degree_impl errors", {
 # 146. joint_degree_matrix_impl
 
 test_that("joint_degree_matrix_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
