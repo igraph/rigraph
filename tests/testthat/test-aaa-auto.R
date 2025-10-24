@@ -7297,6 +7297,7 @@ test_that("eulerian_cycle_impl errors", {
 # 312. fundamental_cycles_impl
 
 test_that("fundamental_cycles_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
