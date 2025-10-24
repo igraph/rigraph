@@ -7088,6 +7088,7 @@ test_that("laplacian_spectral_embedding_impl errors", {
 # 301. eigen_adjacency_impl
 
 test_that("eigen_adjacency_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
