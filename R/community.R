@@ -2685,11 +2685,13 @@ cluster_infomap <- function(
   nb.trials = 10,
   modularity = TRUE
 ) {
+  # FIXME: modularity argument?
+
   res <- community_infomap_impl(
-    graph = graph,
-    e.weights = e.weights,
-    v.weights = v.weights,
-    nb.trials = nb.trials
+    graph,
+    e.weights,
+    v.weights,
+    nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
