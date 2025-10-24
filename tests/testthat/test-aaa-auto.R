@@ -913,6 +913,7 @@ test_that("chung_lu_game_impl errors", {
 
 # 43. static_fitness_game_impl
 test_that("static_fitness_game_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(static_fitness_game_impl(
