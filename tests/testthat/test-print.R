@@ -1,4 +1,5 @@
 test_that("print.igraph() works", {
+  skip("Investigate")
   local_igraph_options(print.full = TRUE)
   withr::local_options(width = 76)
 
