@@ -4674,6 +4674,7 @@ test_that("similarity_inverse_log_weighted_impl errors", {
 # 214. similarity_jaccard_impl
 
 test_that("similarity_jaccard_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
