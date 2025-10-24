@@ -162,16 +162,21 @@ each_edge <- function(
 }
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
-  ensure_igraph(graph)
+  if (loops) {
+    if (multiple) {
+      allowed.edge.types <- "all"
+    } else {
+      allowed.edge.types <- "loops"
+    }
+  } else {
+    if (multiple) {
+      allowed.edge.types <- "multi"
+    } else {
+      allowed.edge.types <- "simple"
+    }
+  }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_rewire_edges,
-    graph,
-    as.numeric(prob),
-    as.logical(loops),
-    as.logical(multiple)
-  )
+  rewire_edges_impl(graph, prob, allowed.edge.types)
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
