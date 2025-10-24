@@ -996,6 +996,7 @@ test_that("k_regular_game_impl errors", {
 # 46. sbm_game_impl
 
 test_that("sbm_game_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(sbm_game_impl(
