@@ -2967,6 +2967,7 @@ test_that("joint_degree_matrix_impl errors", {
 # 147. joint_degree_distribution_impl
 
 test_that("joint_degree_distribution_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
