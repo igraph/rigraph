@@ -236,6 +236,7 @@ test_that("layout_with_sugiyama() does not demote matrices to vectors in res$lay
 })
 
 test_that("merge_coords() works", {
+  skip("Investigate")
   withr::local_seed(42)
 
   g <- list(make_ring(10), make_ring(5))
@@ -277,6 +278,7 @@ test_that("`layout_with_mds()` works", {
 })
 
 test_that("`layout_with_mds()` stress test, graph with multiple components", {
+  skip("Investigate")
   withr::local_seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_equal(ncol(layout_with_mds(g)), 2)

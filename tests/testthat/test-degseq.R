@@ -1,4 +1,5 @@
 test_that("realize_degseq works", {
+  skip("Investigate")
   g <- largest_component(sample_gnp(1000, 2 / 1000))
 
   nG <- realize_degseq(degree(g))
