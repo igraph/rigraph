@@ -78,7 +78,7 @@ union YYSTYPE
 {
 #line 78 "src/vendor/cigraph/src/io/dl-parser.y"
 
-  igraph_integer_t integer;
+  igraph_int_t integer;
   igraph_real_t real;
 
 #line 85 "src/vendor/io/dl-parser.h"

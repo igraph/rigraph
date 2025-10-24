@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2005-2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
@@ -58,9 +58,9 @@
  * \param graph The input graph. Edge directions will be ignored.
  * \param girth Pointer to an \c igraph_real_t, if not \c NULL then the result
  *     will be stored here.
- * \param circle Pointer to an initialized vector, the vertex IDs in
- *     the shortest circle will be stored here. If \c NULL then it is
- *     ignored.
+ * \param cycle Pointer to an initialized vector, the vertex IDs in
+ *     the shortest cycle of length at least 3 will be stored here.
+ *     If \c NULL then it is ignored.
  * \return Error code.
  *
  * Time complexity: O((|V|+|E|)^2), |V| is the number of vertices, |E|
@@ -70,20 +70,21 @@
  *
  * \example examples/simple/igraph_girth.c
  */
-igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
-                 igraph_vector_int_t *circle) {
+igraph_error_t igraph_girth(const igraph_t *graph,
+                            igraph_real_t *girth,
+                            igraph_vector_int_t *cycle) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    igraph_int_t no_of_nodes = igraph_vcount(graph);
     igraph_dqueue_int_t q;
     igraph_lazy_adjlist_t adjlist;
-    igraph_integer_t mincirc = IGRAPH_INTEGER_MAX, minvertex = 0;
-    igraph_integer_t node;
+    igraph_int_t mincirc = IGRAPH_INTEGER_MAX, minvertex = 0;
+    igraph_int_t node;
     igraph_bool_t triangle = false;
     igraph_vector_int_t *neis;
     igraph_vector_int_t level;
-    igraph_integer_t stoplevel = no_of_nodes + 1;
+    igraph_int_t stoplevel = no_of_nodes + 1;
     igraph_bool_t anycircle = false;
-    igraph_integer_t t1 = 0, t2 = 0;
+    igraph_int_t t1 = 0, t2 = 0;
 
     IGRAPH_CHECK(igraph_lazy_adjlist_init(graph, &adjlist, IGRAPH_ALL, IGRAPH_NO_LOOPS, IGRAPH_NO_MULTIPLE));
     IGRAPH_FINALLY(igraph_lazy_adjlist_destroy, &adjlist);
@@ -111,9 +112,9 @@ igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
         IGRAPH_ALLOW_INTERRUPTION();
 
         while (!igraph_dqueue_int_empty(&q)) {
-            igraph_integer_t actnode = igraph_dqueue_int_pop(&q);
-            igraph_integer_t actlevel = VECTOR(level)[actnode];
-            igraph_integer_t i, n;
+            igraph_int_t actnode = igraph_dqueue_int_pop(&q);
+            igraph_int_t actlevel = VECTOR(level)[actnode];
+            igraph_int_t i, n;
 
             if (actlevel >= stoplevel) {
                 break;
@@ -124,8 +125,8 @@ igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
 
             n = igraph_vector_int_size(neis);
             for (i = 0; i < n; i++) {
-                igraph_integer_t nei = VECTOR(*neis)[i];
-                igraph_integer_t neilevel = VECTOR(level)[nei];
+                igraph_int_t nei = VECTOR(*neis)[i];
+                igraph_int_t neilevel = VECTOR(level)[nei];
                 if (neilevel != 0) {
                     if (neilevel == actlevel - 1) {
                         continue;
@@ -148,7 +149,7 @@ igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
                         }
                     }
                 } else {
-                    igraph_dqueue_int_push(&q, nei);
+                    IGRAPH_CHECK(igraph_dqueue_int_push(&q, nei));
                     VECTOR(level)[nei] = actlevel + 1;
                 }
             }
@@ -169,42 +170,42 @@ igraph_error_t igraph_girth(const igraph_t *graph, igraph_real_t *girth,
     }
 
     /* Store the actual circle, if needed */
-    if (circle) {
-        IGRAPH_CHECK(igraph_vector_int_resize(circle, mincirc));
+    if (cycle) {
+        IGRAPH_CHECK(igraph_vector_int_resize(cycle, mincirc));
         if (mincirc != 0) {
-            igraph_integer_t i, n, idx = 0;
+            igraph_int_t i, n, idx = 0;
             igraph_dqueue_int_clear(&q);
-            igraph_vector_int_null(&level); /* used for father pointers */
-#define FATHER(x) (VECTOR(level)[(x)])
+            igraph_vector_int_null(&level); /* used for parent pointers */
+#define PARENT(x) (VECTOR(level)[(x)])
             IGRAPH_CHECK(igraph_dqueue_int_push(&q, minvertex));
-            FATHER(minvertex) = minvertex;
-            while (FATHER(t1) == 0 || FATHER(t2) == 0) {
-                igraph_integer_t actnode = igraph_dqueue_int_pop(&q);
+            PARENT(minvertex) = minvertex;
+            while (PARENT(t1) == 0 || PARENT(t2) == 0) {
+                igraph_int_t actnode = igraph_dqueue_int_pop(&q);
                 neis = igraph_lazy_adjlist_get(&adjlist, actnode);
                 IGRAPH_CHECK_OOM(neis, "Failed to query neighbors.");
                 n = igraph_vector_int_size(neis);
                 for (i = 0; i < n; i++) {
-                    igraph_integer_t nei = VECTOR(*neis)[i];
-                    if (FATHER(nei) == 0) {
-                        FATHER(nei) = actnode + 1;
-                        igraph_dqueue_int_push(&q, nei);
+                    igraph_int_t nei = VECTOR(*neis)[i];
+                    if (PARENT(nei) == 0) {
+                        PARENT(nei) = actnode + 1;
+                        IGRAPH_CHECK(igraph_dqueue_int_push(&q, nei));
                     }
                 }
             }  /* while q !empty */
-            /* Ok, now use FATHER to create the path */
+            /* Ok, now use PARENT to create the path */
             while (t1 != minvertex) {
-                VECTOR(*circle)[idx++] = t1;
-                t1 = FATHER(t1) - 1;
+                VECTOR(*cycle)[idx++] = t1;
+                t1 = PARENT(t1) - 1;
             }
-            VECTOR(*circle)[idx] = minvertex;
+            VECTOR(*cycle)[idx] = minvertex;
             idx = mincirc - 1;
             while (t2 != minvertex) {
-                VECTOR(*circle)[idx--] = t2;
-                t2 = FATHER(t2) - 1;
+                VECTOR(*cycle)[idx--] = t2;
+                t2 = PARENT(t2) - 1;
             }
         } /* anycircle */
     } /* circle */
-#undef FATHER
+#undef PARENT
 
     igraph_vector_int_destroy(&level);
     igraph_dqueue_int_destroy(&q);

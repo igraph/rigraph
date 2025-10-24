@@ -76,7 +76,7 @@
 
 
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
@@ -107,12 +107,12 @@ int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context,
                       const char *s);
 static igraph_error_t igraph_i_dl_add_str(char *newstr, yy_size_t length,
                         igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_add_edge(igraph_integer_t from, igraph_integer_t to,
+static igraph_error_t igraph_i_dl_add_edge(igraph_int_t from, igraph_int_t to,
                          igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_add_edge_w(igraph_integer_t from, igraph_integer_t to,
+static igraph_error_t igraph_i_dl_add_edge_w(igraph_int_t from, igraph_int_t to,
                            igraph_real_t weight,
                            igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid);
+static igraph_error_t igraph_i_dl_check_vid(igraph_int_t dl_vid);
 
 #define scanner context->scanner
 
@@ -1848,7 +1848,7 @@ yyreduce:
   case 40: /* edgelist1dataline: integer integer weight "end of line"  */
 #line 197 "src/vendor/cigraph/src/io/dl-parser.y"
                                                   {
-                    igraph_integer_t from = (yyvsp[-3].integer), to = (yyvsp[-2].integer);
+                    igraph_int_t from = (yyvsp[-3].integer), to = (yyvsp[-2].integer);
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
                     IGRAPH_YY_CHECK(igraph_i_dl_add_edge_w(from-1, to-1, (yyvsp[-1].real), context)); }
@@ -1858,7 +1858,7 @@ yyreduce:
   case 41: /* edgelist1dataline: integer integer "end of line"  */
 #line 202 "src/vendor/cigraph/src/io/dl-parser.y"
                                            {
-                    igraph_integer_t from = (yyvsp[-2].integer), to = (yyvsp[-1].integer);
+                    igraph_int_t from = (yyvsp[-2].integer), to = (yyvsp[-1].integer);
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
                     IGRAPH_YY_CHECK(igraph_i_dl_add_edge(from-1, to-1, context));
@@ -1869,7 +1869,7 @@ yyreduce:
   case 42: /* integer: "number"  */
 #line 209 "src/vendor/cigraph/src/io/dl-parser.y"
              {
-    igraph_integer_t val;
+    igraph_int_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_dl_yyget_text(scanner),
                                            igraph_dl_yyget_leng(scanner),
                                            &val));
@@ -1920,11 +1920,11 @@ yyreduce:
   case 48: /* elabel: "label"  */
 #line 235 "src/vendor/cigraph/src/io/dl-parser.y"
               {
-  igraph_integer_t trie_id;
+  igraph_int_t trie_id;
 
   /* Copy label list to trie, if needed */
   if (igraph_strvector_size(&context->labels) != 0) {
-    igraph_integer_t i, id, n=igraph_strvector_size(&context->labels);
+    igraph_int_t i, id, n=igraph_strvector_size(&context->labels);
     for (i=0; i<n; i++) {
       IGRAPH_YY_CHECK(igraph_trie_get(&context->trie, igraph_strvector_get(&context->labels, i), &id));
     }
@@ -2012,7 +2012,7 @@ yyreduce:
   case 60: /* tolist: tolist integer  */
 #line 276 "src/vendor/cigraph/src/io/dl-parser.y"
                             {
-  igraph_integer_t to = (yyvsp[0].integer);
+  igraph_int_t to = (yyvsp[0].integer);
   IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
                                               context->from-1));
@@ -2305,7 +2305,7 @@ static igraph_error_t igraph_i_dl_add_str(char *newstr, yy_size_t length,
   return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_dl_add_edge(igraph_integer_t from, igraph_integer_t to,
+static igraph_error_t igraph_i_dl_add_edge(igraph_int_t from, igraph_int_t to,
                          igraph_i_dl_parsedata_t *context) {
   //IGRAPH_CHECK(igraph_i_dl_check_vid(from+1));
   //IGRAPH_CHECK(igraph_i_dl_check_vid(to+1));
@@ -2314,11 +2314,11 @@ static igraph_error_t igraph_i_dl_add_edge(igraph_integer_t from, igraph_integer
   return IGRAPH_SUCCESS;
 }
 
-static igraph_error_t igraph_i_dl_add_edge_w(igraph_integer_t from, igraph_integer_t to,
+static igraph_error_t igraph_i_dl_add_edge_w(igraph_int_t from, igraph_int_t to,
                            igraph_real_t weight,
                            igraph_i_dl_parsedata_t *context) {
-  igraph_integer_t n=igraph_vector_size(&context->weights);
-  igraph_integer_t n2=igraph_vector_int_size(&context->edges)/2;
+  igraph_int_t n=igraph_vector_size(&context->weights);
+  igraph_int_t n2=igraph_vector_int_size(&context->edges)/2;
   if (n != n2) {
     IGRAPH_CHECK(igraph_vector_resize(&context->weights, n2));
     for (; n<n2; n++) {
@@ -2332,7 +2332,7 @@ static igraph_error_t igraph_i_dl_add_edge_w(igraph_integer_t from, igraph_integ
 
 /* Raise an error if the vertex index is invalid in the DL file.
  * DL files use 1-based vertex indices. */
-static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid) {
+static igraph_error_t igraph_i_dl_check_vid(igraph_int_t dl_vid) {
     if (dl_vid < 1) {
         IGRAPH_ERRORF("Invalid vertex index in DL file: %" IGRAPH_PRId ".",
                       IGRAPH_EINVAL, dl_vid);
