@@ -446,22 +446,14 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  res <- betweenness_cutoff_impl(
-    graph = graph,
-    vids = v,
+  betweenness_cutoff_impl(
+    graph,
+    v = v,
     directed = directed,
     weights = weights,
+    normalized = normalized,
     cutoff = cutoff
   )
-  if (normalized) {
-    vc <- as.numeric(vcount(graph))
-    if (is_directed(graph) && directed) {
-      res <- res / (vc * vc - 3 * vc + 2)
-    } else {
-      res <- 2 * res / (vc * vc - 3 * vc + 2)
-    }
-  }
-  res
 }
 
 #' @rdname betweenness
@@ -474,13 +466,17 @@ edge_betweenness <- function(
   weights = NULL,
   cutoff = -1
 ) {
-  e <- as_igraph_es(graph, e)
+  # Argument checks
+  ensure_igraph(graph)
+
   res <- edge_betweenness_cutoff_impl(
-    graph = graph,
-    directed = directed,
+    graph,
     weights = weights,
+    eids = e,
+    directed = directed,
     cutoff = cutoff
   )
+
   res[as.numeric(e)]
 }
 
