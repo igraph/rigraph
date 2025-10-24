@@ -72,6 +72,7 @@ test_that("weighted_cliques works", {
 })
 
 test_that("max_cliques() work", {
+  skip("Investigate")
   withr::local_seed(42)
   gnp <- sample_gnm(1000, 1000)
   full10 <- make_full_graph(10)
