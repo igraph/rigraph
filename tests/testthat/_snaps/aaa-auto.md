@@ -593,7 +593,7 @@
       + attr: name (g/c), out.deg (g/n), in.deg (g/x), allowed.edge.types
       | (g/n), method (g/n)
       + edges:
-      [1] 1--3 2--3 1--2
+      [1] 2--3 1--3 1--2
 
 ---
 
@@ -721,15 +721,6 @@
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
 
----
-
-    Code
-      erdos_renyi_game_gnp_impl(5, 0.5, directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 12 -- 
-      + edges:
-       [1] 2->1 3->1 4->1 2->2 1->3 2->3 4->3 1->4 2->4 5->4 3->5 4->5
-
 # erdos_renyi_game_gnp_impl errors
 
     Code
@@ -746,15 +737,6 @@
       IGRAPH U--- 5 3 -- 
       + edges:
       [1] 3--4 2--5 4--5
-
----
-
-    Code
-      erdos_renyi_game_gnm_impl(5, 3, directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 3 -- 
-      + edges:
-      [1] 4->3 5->3 3->5
 
 # erdos_renyi_game_gnm_impl errors
 
@@ -950,26 +932,6 @@
       Error in `chung_lu_game_impl()`:
       ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
 
-# static_fitness_game_impl basic
-
-    Code
-      static_fitness_game_impl(3, c(1, 2, 3))
-    Output
-      IGRAPH U--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3
-
----
-
-    Code
-      static_fitness_game_impl(3, c(1, 2, 3), c(1, 2, 3), loops = TRUE, multiple = TRUE)
-    Output
-      IGRAPH D--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1->2 2->3 1->3
-
 # static_fitness_game_impl errors
 
     Code
@@ -977,29 +939,6 @@
     Condition
       Error in `static_fitness_game_impl()`:
       ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
-
-# static_power_law_game_impl basic
-
-    Code
-      static_power_law_game_impl(5, 4, 2.5)
-    Output
-      IGRAPH U--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
-      + edges:
-      [1] 1--5 2--4 3--5 4--5
-
----
-
-    Code
-      static_power_law_game_impl(5, 4, 2.5, exponent.in = 2, loops = TRUE, multiple = TRUE,
-        finite.size.correction = FALSE)
-    Output
-      IGRAPH D--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
-      + edges:
-      [1] 1->1 3->5 1->4 5->1
 
 # static_power_law_game_impl errors
 
@@ -1037,33 +976,13 @@
       Error in `k_regular_game_impl()`:
       ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
 
-# sbm_game_impl basic
-
-    Code
-      sbm_game_impl(5, matrix(0.5, 2, 2), c(2, 3))
-    Output
-      IGRAPH U--- 5 6 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 1--5 3--5
-
----
-
-    Code
-      sbm_game_impl(5, matrix(0.5, 2, 2), c(2, 3), directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 14 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-       [1] 1->1 2->1 2->4 1->5 4->1 5->1 5->2 3->3 5->3 3->4 4->4 5->4 3->5 5->5
-
 # sbm_game_impl errors
 
     Code
       x
     Condition
       Error in `sbm_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
+      ! INTEGER() can only be applied to a 'integer', not a 'NULL'
 
 # hsbm_game_impl basic
 
@@ -1442,15 +1361,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# get_all_simple_paths_impl basic
-
-    Code
-      get_all_simple_paths_impl(g, 1, 3)
-    Output
-      [[1]]
-      [1] 1 2 3
-      
 
 # get_all_simple_paths_impl errors
 
@@ -3140,20 +3050,6 @@
       Error in `centralization_eigenvector_centrality_tmax_impl()`:
       ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
 
-# assortativity_nominal_impl basic
-
-    Code
-      assortativity_nominal_impl(g, c(1, 2, 1))
-    Output
-      [1] -1
-
----
-
-    Code
-      assortativity_nominal_impl(g, c(1, 2, 1), directed = FALSE, normalized = FALSE)
-    Output
-      [1] -0.5
-
 # assortativity_nominal_impl errors
 
     Code
@@ -3161,20 +3057,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# assortativity_impl basic
-
-    Code
-      assortativity_impl(g, c(1, 2, 1))
-    Output
-      [1] -1
-
----
-
-    Code
-      assortativity_impl(g, c(1, 2, 1), directed = FALSE, normalized = FALSE)
-    Output
-      [1] -0.25
 
 # assortativity_impl errors
 
@@ -3206,24 +3088,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# joint_degree_matrix_impl basic
-
-    Code
-      joint_degree_matrix_impl(g)
-    Output
-           [,1] [,2]
-      [1,]    0    2
-      [2,]    2    0
-
----
-
-    Code
-      joint_degree_matrix_impl(g, max.out.degree = 2, max.in.degree = 2)
-    Output
-           [,1] [,2]
-      [1,]    0    2
-      [2,]    2    0
-
 # joint_degree_matrix_impl errors
 
     Code
@@ -3231,28 +3095,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# joint_degree_distribution_impl basic
-
-    Code
-      joint_degree_distribution_impl(g)
-    Output
-           [,1] [,2] [,3]
-      [1,]    0  0.0  0.0
-      [2,]    0  0.0  0.5
-      [3,]    0  0.5  0.0
-
----
-
-    Code
-      joint_degree_distribution_impl(g, from.mode = "in", to.mode = "out",
-        directed.neighbors = FALSE, normalized = FALSE, max.from.degree = 2,
-        max.to.degree = 2)
-    Output
-           [,1] [,2] [,3]
-      [1,]    0    0    0
-      [2,]    0    0    2
-      [3,]    0    2    0
 
 # joint_degree_distribution_impl errors
 
@@ -3665,34 +3507,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# bipartite_game_gnp_impl basic
-
-    Code
-      bipartite_game_gnp_impl(2, 2, 0.5)
-    Output
-      $graph
-      IGRAPH U--- 4 4 -- 
-      + edges:
-      [1] 1--3 2--3 1--4 2--4
-      
-      $types
-      [1] FALSE FALSE  TRUE  TRUE
-      
-
----
-
-    Code
-      bipartite_game_gnp_impl(2, 2, 0.5, directed = TRUE, mode = "in")
-    Output
-      $graph
-      IGRAPH D--- 4 1 -- 
-      + edge:
-      [1] 3->2
-      
-      $types
-      [1] FALSE FALSE  TRUE  TRUE
-      
-
 # bipartite_game_gnp_impl errors
 
     Code
@@ -4071,39 +3885,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# cliques_impl basic
-
-    Code
-      cliques_impl(g)
-    Output
-      [[1]]
-      [1] 2
-      
-      [[2]]
-      [1] 3
-      
-      [[3]]
-      [1] 2 3
-      
-      [[4]]
-      [1] 1
-      
-      [[5]]
-      [1] 1 2
-      
-
----
-
-    Code
-      cliques_impl(g, min = 2, max = 2)
-    Output
-      [[1]]
-      [1] 2 3
-      
-      [[2]]
-      [1] 1 2
-      
-
 # cliques_impl errors
 
     Code
@@ -4191,37 +3972,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# weighted_cliques_impl basic
-
-    Code
-      weighted_cliques_impl(g)
-    Output
-      [[1]]
-      [1] 2
-      
-      [[2]]
-      [1] 3
-      
-      [[3]]
-      [1] 2 3
-      
-      [[4]]
-      [1] 1
-      
-      [[5]]
-      [1] 1 2
-      
-
----
-
-    Code
-      weighted_cliques_impl(g, vertex.weights = c(1, 2, 3), min.weight = 1,
-      max.weight = 3, maximal = TRUE)
-    Output
-      [[1]]
-      [1] 1 2
-      
-
 # weighted_cliques_impl errors
 
     Code
@@ -4302,9 +4052,9 @@
       layout_random_impl(g)
     Output
                   [,1]       [,2]
-      [1,]  0.91714717 -0.8435856
-      [2,] -0.08120892  0.7003783
-      [3,]  0.65090567 -0.8259847
+      [1,]  0.91714717  0.7003783
+      [2,] -0.84358557  0.6509057
+      [3,] -0.08120892 -0.8259847
 
 # layout_random_impl errors
 
@@ -4447,10 +4197,10 @@
     Code
       layout_random_3d_impl(g)
     Output
-                [,1]       [,2]        [,3]
-      [1,] 0.9171472 -0.8435856 -0.08120892
-      [2,] 0.7003783  0.6509057 -0.82598468
-      [3,] 0.7338074  0.4644714  0.52403915
+                  [,1]       [,2]      [,3]
+      [1,]  0.91714717  0.7003783 0.7338074
+      [2,] -0.84358557  0.6509057 0.4644714
+      [3,] -0.08120892 -0.8259847 0.5240391
 
 # layout_random_3d_impl errors
 
@@ -4471,55 +4221,6 @@
       [3,]  0.0000000 0.0000000    1
 
 # layout_sphere_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
-# layout_sugiyama_impl basic
-
-    Code
-      layout_sugiyama_impl(g)
-    Output
-      $res
-           [,1] [,2]
-      [1,]  0.0    1
-      [2,]  0.5    0
-      [3,]  1.0    1
-      
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
-      
-      $extd_to_orig_eids
-      [1] 1 2
-      
-
----
-
-    Code
-      layout_sugiyama_impl(g, layers = 1:3, hgap = 2, vgap = 2, maxiter = 10,
-      weights = c(1, 2))
-    Output
-      $res
-           [,1] [,2]
-      [1,]    0    0
-      [2,]    0    2
-      [3,]    0    4
-      
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
-      
-      $extd_to_orig_eids
-      [1] 1 2
-      
-
-# layout_sugiyama_impl errors
 
     Code
       x
@@ -4745,15 +4446,6 @@
       [2,]    0    1    0
       [3,]    1    0    1
 
----
-
-    Code
-      similarity_dice_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-           [,1]      [,2] [,3]
-      [1,]  1.0 0.6666667  0.5
-      [2,]  0.8 1.0000000  0.5
-
 # similarity_dice_impl errors
 
     Code
@@ -4843,15 +4535,6 @@
       [1,]    1    0    1
       [2,]    0    1    0
       [3,]    1    0    1
-
----
-
-    Code
-      similarity_jaccard_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-                [,1] [,2]      [,3]
-      [1,] 1.0000000  0.5 0.3333333
-      [2,] 0.6666667  1.0 0.3333333
 
 # similarity_jaccard_impl errors
 
@@ -7273,86 +6956,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# laplacian_spectral_embedding_impl basic
-
-    Code
-      laplacian_spectral_embedding_impl(g, no = 2)
-    Output
-      $X
-                 [,1]       [,2]
-      [1,] -0.7071068  0.7071068
-      [2,]  1.4142136  0.0000000
-      [3,] -0.7071068 -0.7071068
-      
-      $Y
-      NULL
-      
-      $D
-      [1] 3 1
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 3
-      
-      $options$which
-      [1] "LM"
-      
-      $options$nev
-      [1] 2
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 3
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 2
-      
-      $options$numop
-      [1] 3
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 3
-      
-      
-
 # laplacian_spectral_embedding_impl errors
 
     Code
@@ -7360,97 +6963,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# eigen_adjacency_impl basic
-
-    Code
-      eigen_adjacency_impl(g)
-    Output
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 3
-      
-      $options$which
-      [1] "LM"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 2
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 0
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 29
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 30
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 16
-      
-      
-      $values
-      [1] -1.414214
-      
-      $vectors
-                 [,1]
-      [1,] -0.5000000
-      [2,]  0.7071068
-      [3,] -0.5000000
-      
-      $cmplxvalues
-      complex(0)
-      
-      $cmplxvectors
-      <0 x 0 matrix>
-      
-
----
-
-    Code
-      x
-    Condition
-      Error in `eigen_adjacency_impl()`:
-      ! At vendor/cigraph/src/linalg/eigen.c:xx : 'LAPACK' algorithm not implemented yet, Unimplemented function call
 
 # eigen_adjacency_impl errors
 
@@ -9028,30 +8540,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# simple_cycles_impl basic
-
-    Code
-      simple_cycles_impl(g)
-    Output
-      $vertices
-      list()
-      
-      $edges
-      list()
-      
-
----
-
-    Code
-      simple_cycles_impl(g, mode = "in", min.cycle.length = 2, max.cycle.length = 3)
-    Output
-      $vertices
-      list()
-      
-      $edges
-      list()
-      
-
 # simple_cycles_impl errors
 
     Code
@@ -9132,20 +8620,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# fundamental_cycles_impl basic
-
-    Code
-      fundamental_cycles_impl(g, start = 1)
-    Output
-      list()
-
----
-
-    Code
-      fundamental_cycles_impl(g, start = 1, bfs.cutoff = 2, weights = c(1, 2))
-    Output
-      list()
-
 # fundamental_cycles_impl errors
 
     Code
@@ -9153,21 +8627,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# minimum_cycle_basis_impl basic
-
-    Code
-      minimum_cycle_basis_impl(g)
-    Output
-      list()
-
----
-
-    Code
-      minimum_cycle_basis_impl(g, bfs.cutoff = 2, complete = FALSE, use.cycle.order = FALSE,
-        weights = c(1, 2))
-    Output
-      list()
 
 # minimum_cycle_basis_impl errors
 
