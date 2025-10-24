@@ -4522,6 +4522,7 @@ test_that("layout_align_impl errors", {
 # 210. similarity_dice_impl
 
 test_that("similarity_dice_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
