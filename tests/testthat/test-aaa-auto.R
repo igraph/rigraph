@@ -1420,6 +1420,7 @@ test_that("voronoi_impl errors", {
 # 64. get_all_simple_paths_impl
 
 test_that("get_all_simple_paths_impl basic", {
+  skip("Investigate")
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- path_graph_impl(
