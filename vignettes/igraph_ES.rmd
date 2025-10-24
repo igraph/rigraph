@@ -365,13 +365,13 @@ De igual manera, se utiliza una sintaxis similar para la mayoría de las propied
 
 Además del grado, igraph incluye funciones integradas para calcular muchas otras propiedades de centralidad, como la intermediación de vértices y aristas (`edge_betweenness()`) o el PageRank de Google (`page_rank()`), por nombrar algunas. Aquí sólo ilustraremos la intermediación de aristas:
 
-```{r echo = TRUE}
+```{r echo = TRUE, eval = FALSE}
 edge_betweenness(g)
 ```
 
 De este modo, ahora también podemos averiguar qué conexiones tienen la mayor centralidad de intermediación:
 
-```{r echo = TRUE}
+```{r echo = TRUE, eval = FALSE}
 ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
 ```

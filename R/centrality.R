@@ -446,40 +446,14 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_betweenness_cutoff,
+  betweenness_cutoff_impl(
     graph,
-    v - 1,
-    directed,
-    weights,
-    cutoff
+    v = v,
+    directed = directed,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )
-  if (normalized) {
-    vc <- as.numeric(vcount(graph))
-    if (is_directed(graph) && directed) {
-      res <- res / (vc * vc - 3 * vc + 2)
-    } else {
-      res <- 2 * res / (vc * vc - 3 * vc + 2)
-    }
-  }
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
-  }
-  res
 }
 
 #' @rdname betweenness
@@ -495,27 +469,14 @@ edge_betweenness <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  e <- as_igraph_es(graph, e)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_edge_betweenness_cutoff,
+  res <- edge_betweenness_cutoff_impl(
     graph,
-    directed,
-    weights,
-    cutoff
+    weights = weights,
+    eids = e,
+    directed = directed,
+    cutoff = cutoff
   )
+
   res[as.numeric(e)]
 }
 
