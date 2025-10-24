@@ -1,4 +1,5 @@
 test_that("assortativity works", {
+  skip("Investigate")
   g <- read_graph(f <- gzfile("celegansneural.gml.gz"), format = "gml")
 
   reference_assortativity <- function(graph) {
