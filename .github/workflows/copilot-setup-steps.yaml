@@ -46,3 +46,6 @@ jobs:
         run: |
           UserNM=true R CMD INSTALL . || true
         shell: bash
+
+      - name: Install air
+        uses: posit-dev/setup-air@v1
