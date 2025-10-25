@@ -12,6 +12,11 @@ igraph is an R package with routines for simple graphs and network analysis. It 
 
 ## Code Style and Documentation
 
+### PR and Commit Style
+
+- PRs and commits use the conventional commit style with backticks for code references such as `function_call()` .
+- PRs are generally squashed, a clean history within a PR is not necessary.
+
 ### Comment Style
 
 - Add comprehensive comments to utility functions that aren't immediately obvious
