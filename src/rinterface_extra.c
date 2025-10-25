@@ -8634,7 +8634,7 @@ SEXP R_igraph_add_env(SEXP graph) {
   // Get the emptyenv function
   SEXP empty_env_fun = PROTECT(Rf_findVarInFrame(base_ns, Rf_install("emptyenv"))); px++;
   // Call emptyenv()
-  SEXP empty_env = PROTECT(Rf_eval(Rf_lang1(empty_env_fun), R_GlobalEnv)); px++;
+  SEXP empty_env = PROTECT(Rf_eval(PROTECT(Rf_lang1(empty_env_fun)), R_GlobalEnv)); px++; px++;
   // Evaluate the call
   SEXP env = PROTECT(R_NewEnv(empty_env, 0, 0)); px++;
 
