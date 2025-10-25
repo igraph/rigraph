@@ -3073,7 +3073,7 @@ sample_fitness_pl <- function(
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
-  static_power_law_game_impl(
+  res <- static_power_law_game_impl(
     no.of.nodes = no.of.nodes,
     no.of.edges = no.of.edges,
     exponent.out = exponent.out,
@@ -3082,6 +3082,13 @@ sample_fitness_pl <- function(
     multiple = multiple,
     finite.size.correction = finite.size.correction
   )
+
+  if (igraph_opt("add.params")) {
+    res$loops <- loops
+    res$multiple <- multiple
+  }
+
+  res
 }
 
 

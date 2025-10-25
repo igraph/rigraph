@@ -701,8 +701,6 @@ static_power_law_game_impl <- function(no.of.nodes, no.of.edges, exponent.out, e
     res$name <- 'Static power law model'
     res$exponent.out <- exponent.out
     res$exponent.in <- exponent.in
-    res$loops <- loops
-    res$multiple <- multiple
     res$finite.size.correction <- finite.size.correction
   }
 

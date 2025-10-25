@@ -190,7 +190,7 @@ igraph_static_power_law_game:
     R:
         GATTR:
           name: Static power law model
-        GATTR-PARAM: exponent_out, exponent_in, loops, multiple, finite_size_correction
+        GATTR-PARAM: exponent_out, exponent_in, finite_size_correction
 
 igraph_k_regular_game:
     R:
