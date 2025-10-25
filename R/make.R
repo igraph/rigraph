@@ -2111,7 +2111,13 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #'
 #' @export
 #' @cdocs igraph_tree_game
-sample_tree <- tree_game_impl
+sample_tree <- function(n, directed = FALSE, method = c("lerw", "prufer")) {
+  tree_game_impl(
+    n = n,
+    directed = directed,
+    method = method
+  )
+}
 
 #' @rdname make_tree
 #' @param ... Passed to `make_tree()` or `sample_tree()`.
@@ -2146,7 +2152,11 @@ tree <- function(...) {
 #' @family trees
 #' @export
 #' @cdocs igraph_from_prufer
-make_from_prufer <- from_prufer_impl
+make_from_prufer <- function(prufer) {
+  from_prufer_impl(
+    prufer = prufer
+  )
+}
 
 #' @rdname make_from_prufer
 #' @param ... Passed to `make_from_prufer()`
@@ -2721,7 +2731,19 @@ graph_from_lcf <- function(
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
 #' @cdocs igraph_realize_degree_sequence
-realize_degseq <- realize_degree_sequence_impl
+realize_degseq <- function(
+  out.deg,
+  in.deg = NULL,
+  allowed.edge.types = c("simple", "loops", "multi", "all"),
+  method = c("smallest", "largest", "index")
+) {
+  realize_degree_sequence_impl(
+    out.deg = out.deg,
+    in.deg = in.deg,
+    allowed.edge.types = allowed.edge.types,
+    method = method
+  )
+}
 
 
 #' Creating a bipartite graph from two degree sequences, deterministically
