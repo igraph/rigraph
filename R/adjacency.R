@@ -289,8 +289,8 @@ graph_from_adjacency_matrix <- function(
   add.colnames = NULL,
   add.rownames = NA
 ) {
-  ensure_no_na(adjmatrix, "adjacency matrix")
   mode <- igraph.match.arg(mode)
+  ensure_no_na(adjmatrix, "adjacency matrix", mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
     lifecycle::deprecate_soft(
