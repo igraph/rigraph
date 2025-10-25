@@ -4485,7 +4485,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
   res
 }
 
-get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL, ishohandler.fn) {
+get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -4532,15 +4532,7 @@ get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NUL
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2_callback,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
-  )
+  res <- .Call(R_igraph_get_isomorphisms_vf2_callback, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
 
   res
 }
