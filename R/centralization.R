@@ -363,7 +363,12 @@ centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
 #' @cdocs igraph_centralization_degree
-centr_degree <- function(graph, mode = c("all", "out", "in", "total"), loops = TRUE, normalized = TRUE) {
+centr_degree <- function(
+  graph,
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = TRUE
+) {
   centralization_degree_impl(
     graph = graph,
     mode = mode,
@@ -552,7 +557,11 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
 #' @cdocs igraph_centralization_closeness
-centr_clo <- function(graph, mode = c("out", "in", "all", "total"), normalized = TRUE) {
+centr_clo <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  normalized = TRUE
+) {
   centralization_closeness_impl(
     graph = graph,
     mode = mode,
@@ -585,7 +594,11 @@ centr_clo <- function(graph, mode = c("out", "in", "all", "total"), normalized =
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
 #' @cdocs igraph_centralization_closeness_tmax
-centr_clo_tmax <- function(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total")) {
+centr_clo_tmax <- function(
+  graph = NULL,
+  nodes = 0,
+  mode = c("out", "in", "all", "total")
+) {
   centralization_closeness_tmax_impl(
     graph = graph,
     nodes = nodes,
