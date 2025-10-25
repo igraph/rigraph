@@ -135,6 +135,14 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' }
 #' @family glet
 #' @export
+# Helper to call graphlet functions without vertex sequence conversion
+with_plain_vectors <- function(expr) {
+  old_opt <- igraph_opt("return.vs.es")
+  on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
+  igraph_options(return.vs.es = FALSE)
+  expr
+}
+
 graphlet_basis <- function(graph, weights = NULL) {
   ## Argument checks
   ensure_igraph(graph)
@@ -147,13 +155,7 @@ graphlet_basis <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  # Call the implementation but ensure we get plain integer vectors
-  # instead of vertex sequences
-  old_opt <- igraph_opt("return.vs.es")
-  on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
-  igraph_options(return.vs.es = FALSE)
-  
-  graphlets_candidate_basis_impl(graph, weights)
+  with_plain_vectors(graphlets_candidate_basis_impl(graph, weights))
 }
 
 #' @rdname graphlet_basis
@@ -178,13 +180,7 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  # Call the implementation but ensure we get plain integer vectors
-  # instead of vertex sequences
-  old_opt <- igraph_opt("return.vs.es")
-  on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
-  igraph_options(return.vs.es = FALSE)
-  
-  graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter)
+  with_plain_vectors(graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter))
 }
 
 #################
