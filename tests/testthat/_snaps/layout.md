@@ -22,5 +22,5 @@
       layout_randomly(g, dim = 4)
     Condition
       Error in `layout_randomly()`:
-      ! `dim` must be one of "2" or "3", not "4".
+      ! `"4"` must be one of "2" or "3", not "4".
 

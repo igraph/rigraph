@@ -32,7 +32,7 @@
       read_graph("bla", format = "blop")
     Condition
       Error in `read_graph()`:
-      ! `format` must be one of "edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "graphdb", "gml", or "dl", not "blop".
+      ! `"blop"` must be one of "edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "graphdb", "gml", or "dl", not "blop".
 
 # writing graph in unsupported format
 
@@ -40,7 +40,7 @@
       write_graph(g, file, format = "blop")
     Condition
       Error in `write_graph()`:
-      ! `format` must be one of "edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot", or "leda", not "blop".
+      ! `"blop"` must be one of "edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot", or "leda", not "blop".
 
 # graph_from_graphdb works
 

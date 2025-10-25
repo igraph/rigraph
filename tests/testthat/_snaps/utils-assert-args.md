@@ -16,5 +16,5 @@
       cluster_leiden(make_graph("Zachary"), objective_function = "something")
     Condition
       Error in `cluster_leiden()`:
-      ! `objective_function` must be one of "cpm" or "modularity", not "something".
+      ! `"something"` must be one of "cpm" or "modularity", not "something".
 
