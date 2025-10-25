@@ -136,7 +136,7 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' @family glet
 #' @export
 # Helper to call graphlet functions without vertex sequence conversion
-with_plain_vectors <- function(expr) {
+.with_plain_vectors <- function(expr) {
   old_opt <- igraph_opt("return.vs.es")
   on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
   igraph_options(return.vs.es = FALSE)
@@ -155,7 +155,7 @@ graphlet_basis <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  with_plain_vectors(graphlets_candidate_basis_impl(graph, weights))
+  .with_plain_vectors(graphlets_candidate_basis_impl(graph, weights))
 }
 
 #' @rdname graphlet_basis
@@ -180,7 +180,7 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  with_plain_vectors(graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter))
+  .with_plain_vectors(graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter))
 }
 
 #################
