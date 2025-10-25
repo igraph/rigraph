@@ -12,21 +12,6 @@ graphlets.project(
   Mu = rep(1, length(cliques))
 )
 }
-\arguments{
-\item{graph}{The input graph, edge directions are ignored. Only simple graph
-(i.e. graphs without self-loops and multiple edges) are supported.}
-
-\item{weights}{Edge weights. If the graph has a \code{weight} edge attribute
-and this argument is \code{NULL} (the default), then the \code{weight} edge
-attribute is used.}
-
-\item{cliques}{A list of vertex ids, the graphlet basis to use for the
-projection.}
-
-\item{niter}{Integer scalar, the number of iterations to perform.}
-
-\item{Mu}{Starting weights for the projection.}
-}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 

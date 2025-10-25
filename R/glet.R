@@ -180,7 +180,14 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  .with_plain_vectors(graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter))
+  .with_plain_vectors(graphlets_project_impl(
+    graph,
+    weights,
+    cliques,
+    Mu,
+    FALSE,
+    niter
+  ))
 }
 
 #################
