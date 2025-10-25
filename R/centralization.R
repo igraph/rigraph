@@ -315,7 +315,13 @@ NULL
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
 #' @cdocs igraph_centralization
-centralize <- centralization_impl
+centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
+  centralization_impl(
+    scores = scores,
+    theoretical.max = theoretical.max,
+    normalized = normalized
+  )
+}
 
 #' Centralize a graph according to the degrees of vertices
 #'
@@ -357,7 +363,19 @@ centralize <- centralization_impl
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
 #' @cdocs igraph_centralization_degree
-centr_degree <- centralization_degree_impl
+centr_degree <- function(
+  graph,
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = TRUE
+) {
+  centralization_degree_impl(
+    graph = graph,
+    mode = mode,
+    loops = loops,
+    normalized = normalized
+  )
+}
 
 #' Theoretical maximum for degree centralization
 #'
@@ -493,7 +511,13 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
 #' @cdocs igraph_centralization_betweenness_tmax
-centr_betw_tmax <- centralization_betweenness_tmax_impl
+centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
+  centralization_betweenness_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    directed = directed
+  )
+}
 
 #' Centralize a graph according to the closeness of vertices
 #'
@@ -533,7 +557,17 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
 #' @cdocs igraph_centralization_closeness
-centr_clo <- centralization_closeness_impl
+centr_clo <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  normalized = TRUE
+) {
+  centralization_closeness_impl(
+    graph = graph,
+    mode = mode,
+    normalized = normalized
+  )
+}
 
 #' Theoretical maximum for closeness centralization
 #'
@@ -560,7 +594,17 @@ centr_clo <- centralization_closeness_impl
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
 #' @cdocs igraph_centralization_closeness_tmax
-centr_clo_tmax <- centralization_closeness_tmax_impl
+centr_clo_tmax <- function(
+  graph = NULL,
+  nodes = 0,
+  mode = c("out", "in", "all", "total")
+) {
+  centralization_closeness_tmax_impl(
+    graph = graph,
+    nodes = nodes,
+    mode = mode
+  )
+}
 
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'

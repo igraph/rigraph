@@ -31,4 +31,12 @@
 #' plot(g, vertex.color = col)
 #'
 #' @cdocs igraph_vertex_coloring_greedy
-greedy_vertex_coloring <- vertex_coloring_greedy_impl
+greedy_vertex_coloring <- function(
+  graph,
+  heuristic = c("colored_neighbors", "dsatur")
+) {
+  vertex_coloring_greedy_impl(
+    graph = graph,
+    heuristic = heuristic
+  )
+}
