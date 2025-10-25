@@ -230,7 +230,12 @@ assortativity_legacy <- function(
 #' @rdname assortativity
 #' @export
 #' @cdocs igraph_assortativity_nominal
-assortativity_nominal <- function(graph, types, directed = TRUE, normalized = TRUE) {
+assortativity_nominal <- function(
+  graph,
+  types,
+  directed = TRUE,
+  normalized = TRUE
+) {
   assortativity_nominal_impl(
     graph = graph,
     types = types,
