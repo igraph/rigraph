@@ -65,11 +65,13 @@ distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_
 which generates the fitnesses for you with a given exponent.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 N <- 10000
 g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 degree_distribution(g)
 plot(degree_distribution(g, cumulative = TRUE), log = "xy")
+\dontshow{\}) # examplesIf}
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load
