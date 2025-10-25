@@ -2503,7 +2503,13 @@ sample_bipartite_gnp <- function(
 #' @family games
 #' @export
 #' @cdocs igraph_sbm_game
-sample_sbm <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE) {
+sample_sbm <- function(
+  n,
+  pref.matrix,
+  block.sizes,
+  directed = FALSE,
+  loops = FALSE
+) {
   sbm_game_impl(
     n = n,
     pref.matrix = pref.matrix,
@@ -2723,7 +2729,12 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
 #' @family games
 #' @export
 #' @cdocs igraph_k_regular_game
-sample_k_regular <- function(no.of.nodes, k, directed = FALSE, multiple = FALSE) {
+sample_k_regular <- function(
+  no.of.nodes,
+  k,
+  directed = FALSE,
+  multiple = FALSE
+) {
   k_regular_game_impl(
     no.of.nodes = no.of.nodes,
     k = k,
@@ -2879,7 +2890,13 @@ sample_k_regular <- function(no.of.nodes, k, directed = FALSE, multiple = FALSE)
 #' ))
 #' @export
 #' @cdocs igraph_chung_lu_game
-sample_chung_lu <- function(out.weights, in.weights = NULL, ..., loops = TRUE, variant = c("original", "maxent", "nr")) {
+sample_chung_lu <- function(
+  out.weights,
+  in.weights = NULL,
+  ...,
+  loops = TRUE,
+  variant = c("original", "maxent", "nr")
+) {
   chung_lu_game_impl(
     out.weights = out.weights,
     in.weights = in.weights,
@@ -2969,7 +2986,13 @@ chung_lu <- function(
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
 #' @cdocs igraph_static_fitness_game
-sample_fitness <- function(no.of.edges, fitness.out, fitness.in = NULL, loops = FALSE, multiple = FALSE) {
+sample_fitness <- function(
+  no.of.edges,
+  fitness.out,
+  fitness.in = NULL,
+  loops = FALSE,
+  multiple = FALSE
+) {
   static_fitness_game_impl(
     no.of.edges = no.of.edges,
     fitness.out = fitness.out,
@@ -3044,7 +3067,15 @@ sample_fitness <- function(no.of.edges, fitness.out, fitness.in = NULL, loops = 
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
 #' @cdocs igraph_static_power_law_game
-sample_fitness_pl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.in = -1, loops = FALSE, multiple = FALSE, finite.size.correction = TRUE) {
+sample_fitness_pl <- function(
+  no.of.nodes,
+  no.of.edges,
+  exponent.out,
+  exponent.in = -1,
+  loops = FALSE,
+  multiple = FALSE,
+  finite.size.correction = TRUE
+) {
   static_power_law_game_impl(
     no.of.nodes = no.of.nodes,
     no.of.edges = no.of.edges,
@@ -3117,7 +3148,13 @@ sample_fitness_pl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.i
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 #' @cdocs igraph_forest_fire_game
-sample_forestfire <- function(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE) {
+sample_forestfire <- function(
+  nodes,
+  fw.prob,
+  bw.factor = 1,
+  ambs = 1,
+  directed = TRUE
+) {
   forest_fire_game_impl(
     nodes = nodes,
     fw.prob = fw.prob,
@@ -3165,7 +3202,12 @@ sample_forestfire <- function(nodes, fw.prob, bw.factor = 1, ambs = 1, directed 
 #' g
 #' g2
 #' @cdocs igraph_correlated_game
-sample_correlated_gnp <- function(old.graph, corr, p = edge_density(old.graph), permutation = NULL) {
+sample_correlated_gnp <- function(
+  old.graph,
+  corr,
+  p = edge_density(old.graph),
+  permutation = NULL
+) {
   correlated_game_impl(
     old.graph = old.graph,
     corr = corr,
@@ -3210,7 +3252,13 @@ sample_correlated_gnp <- function(old.graph, corr, p = edge_density(old.graph), 
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 #' @cdocs igraph_correlated_pair_game
-sample_correlated_gnp_pair <- function(n, corr, p, directed = FALSE, permutation = NULL) {
+sample_correlated_gnp_pair <- function(
+  n,
+  corr,
+  p,
+  directed = FALSE,
+  permutation = NULL
+) {
   correlated_pair_game_impl(
     n = n,
     corr = corr,
