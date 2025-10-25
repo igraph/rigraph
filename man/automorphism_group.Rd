@@ -4,12 +4,7 @@
 \alias{automorphism_group}
 \title{Generating set of the automorphism group of a graph}
 \usage{
-automorphism_group(
-  graph,
-  colors = NULL,
-  sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
-  details = FALSE
-)
+automorphism_group(graph, colors = NULL)
 }
 \arguments{
 \item{graph}{The input graph, it is treated as undirected.}
@@ -20,26 +15,6 @@ automorphism. When omitted, igraph uses the \code{color} attribute of the
 vertices, or, if there is no such vertex attribute, it simply assumes that
 all vertices have the same color. Pass NULL explicitly if the graph has a
 \code{color} vertex attribute but you do not want to use it.}
-
-\item{sh}{The splitting heuristics for the BLISS algorithm. Possible values
-are:
-\sQuote{\code{f}}:
-first non-singleton cell,
-\sQuote{\code{fl}}:
-first largest non-singleton cell,
-\sQuote{\code{fs}}:
-first smallest non-singleton cell,
-\sQuote{\code{fm}}:
-first maximally non-trivially connected
-non-singleton cell,
-\sQuote{\code{flm}}:
-first largest maximally
-non-trivially connected non-singleton cell,
-\sQuote{\code{fsm}}:
-first smallest maximally non-trivially connected non-singleton cell.}
-
-\item{details}{Specifies whether to provide additional details about the
-BLISS internals in the result.}
 }
 \value{
 When \code{details} is \code{FALSE}, a list of vertex permutations
@@ -92,7 +67,7 @@ Other graph automorphism:
 \code{\link{count_automorphisms}()}
 }
 \author{
-Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
+Tommi Junttila (\url{https://users.ics.aalto.fi/tjunttil/}) for BLISS,
 Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code and
 Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }

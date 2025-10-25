@@ -122,9 +122,9 @@ Processes on graphs
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
-(\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
+(\url{https://kolaczyk.github.io/}) wrote the initial version in R.
 }
 \concept{processes}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Spatial-Games.html#igraph_sir}{\code{sir()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Processes.html#igraph_sir}{\code{sir()}}.}
 

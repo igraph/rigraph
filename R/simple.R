@@ -71,6 +71,11 @@ is.simple <- function(graph) {
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
 #'   [attribute.combination()] for details on this.
+#' @param directed Boolean.Whether to consider the directions of edges.
+#' The default, `TRUE`  means that edge directions will be considered.
+#' `FALSE` means that edge directions will be ignored and a directed graph
+#' with at least one mutual edge pair will be considered non-simple.
+#' Ignored for undirected graphs.
 #' @return a new graph object with the edges deleted.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [which_loop()], [which_multiple()] and
@@ -84,6 +89,11 @@ is.simple <- function(graph) {
 #' is_simple(simplify(g, remove.loops = FALSE))
 #' is_simple(simplify(g, remove.multiple = FALSE))
 #' is_simple(simplify(g))
+#'
+#' # directed argument
+#' g <- graph_from_literal(1 +-+ 2 -+ 3)
+#' is_simple(g)
+#' is_simple(g, directed = FALSE)
 #' @family simple
 #' @family functions for manipulating graph structure
 #' @family isomorphism

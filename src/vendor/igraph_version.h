@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2010-2025  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -23,16 +23,16 @@
 
 IGRAPH_BEGIN_C_DECLS
 
-#define IGRAPH_VERSION "0.10.16-913-g1db733b23"
-#define IGRAPH_VERSION_MAJOR 0
-#define IGRAPH_VERSION_MINOR 10
-#define IGRAPH_VERSION_PATCH 16
-#define IGRAPH_VERSION_PRERELEASE "913-g1db733b23"
+#define IGRAPH_VERSION "1.0.0-30-g2d1bce327"
+#define IGRAPH_VERSION_MAJOR 1
+#define IGRAPH_VERSION_MINOR 0
+#define IGRAPH_VERSION_PATCH 0
+#define IGRAPH_VERSION_PRERELEASE "30-g2d1bce327"
 
 IGRAPH_EXPORT void igraph_version(const char **version_string,
                                   int *major,
                                   int *minor,
-                                  int *subminor);
+                                  int *patch);
 
 IGRAPH_END_C_DECLS
 

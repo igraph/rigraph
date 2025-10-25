@@ -50,7 +50,7 @@ all the newly cited vertices.  }
 The version of the model in the published paper is incorrect in the
 sense that it cannot generate the kind of graphs the authors claim. A
 corrected version is available from
-\url{http://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our
+\url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our
 implementation is based on this.
 }
 \examples{
@@ -109,5 +109,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_forest_fire_game}{\code{forest_fire_game()}}.}
 

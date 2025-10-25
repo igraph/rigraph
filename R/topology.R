@@ -997,7 +997,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_canonical_permutation
-canonical_permutation <- canonical_permutation_impl
+canonical_permutation <- canonical_permutation_bliss_impl
 
 
 #' Permute the vertices of a graph
@@ -1104,7 +1104,7 @@ graph.isomorphic <- isomorphic_impl
 #'       Maximum level.
 #'     }
 #'   }
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
 #' @seealso [canonical_permutation()], [permute()],
@@ -1129,7 +1129,7 @@ graph.isomorphic <- isomorphic_impl
 #' @family graph automorphism
 #' @export
 #' @cdocs igraph_count_automorphisms
-count_automorphisms <- count_automorphisms_impl
+count_automorphisms <- count_automorphisms_bliss_impl
 
 
 #' Generating set of the automorphism group of a graph
@@ -1155,24 +1155,6 @@ count_automorphisms <- count_automorphisms_impl
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
-#' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are:
-#'   \sQuote{`f`}:
-#'     first non-singleton cell,
-#'   \sQuote{`fl`}:
-#'     first largest non-singleton cell,
-#'   \sQuote{`fs`}:
-#'     first smallest non-singleton cell,
-#'   \sQuote{`fm`}:
-#'     first maximally non-trivially connected
-#'     non-singleton cell,
-#'   \sQuote{`flm`}:
-#'     first largest maximally
-#'     non-trivially connected non-singleton cell,
-#'   \sQuote{`fsm`}:
-#'     first smallest maximally non-trivially connected non-singleton cell.
-#' @param details Specifies whether to provide additional details about the
-#'   BLISS internals in the result.
 #' @return When `details` is `FALSE`, a list of vertex permutations
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
@@ -1185,7 +1167,7 @@ count_automorphisms <- count_automorphisms_impl
 #'       See [count_automorphisms()] for more details.
 #'     }
 #'   }
-#' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
+#' @author Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
 #' @seealso [canonical_permutation()], [permute()],

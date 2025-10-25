@@ -28,13 +28,7 @@ igraph_vcount:
 igraph_ecount:
     IGNORE: RR, RC
 
-igraph_neighbors:
-    IGNORE: RR, RC
-
 igraph_is_directed:
-    IGNORE: RR, RC
-
-igraph_degree:
     IGNORE: RR, RC
 
 igraph_edge:
@@ -196,7 +190,7 @@ igraph_static_power_law_game:
     R:
         GATTR:
           name: Static power law model
-        GATTR-PARAM: exponent_out, exponent_in, loops, multiple, finite_size_correction
+        GATTR-PARAM: exponent_out, exponent_in, finite_size_correction
 
 igraph_k_regular_game:
     R:
@@ -234,6 +228,21 @@ igraph_correlated_pair_game:
 
 igraph_dot_product_game:
 
+# HACK
+igraph_sample_sphere_surface:
+    PARAMS: |-
+        INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_sample_sphere_volume:
+    PARAMS: |-
+        INTEGER dim, INTEGER n=1, REAL radius=1,
+        BOOLEAN positive=True, OUT MATRIX res
+
+igraph_sample_dirichlet:
+    PARAMS: INTEGER n, VECTOR alpha, OUT MATRIX res
+
+
 #######################################
 # Basic query functions
 #######################################
@@ -245,12 +254,6 @@ igraph_are_connected:
 #######################################
 # Structural properties
 #######################################
-
-igraph_diameter:
-    IGNORE: RR, RC, RInit
-
-igraph_diameter_dijkstra:
-    IGNORE: RR, RC, RInit
 
 igraph_distances:
     IGNORE: RR, RC
@@ -420,11 +423,6 @@ igraph_centralization:
 
 igraph_centralization_degree:
 
-igraph_centralization_degree_tmax:
-    IGNORE: RR
-    # temporarily coded manually because we need to handle a deprecation
-    # between igraph 1.3.0 and 1.4.0
-
 igraph_centralization_betweenness:
 
 igraph_centralization_betweenness_tmax:
@@ -451,12 +449,9 @@ igraph_joint_type_distribution:
 
 igraph_contract_vertices:
 
-# We use igraph_radius_dijkstra instead
-igraph_radius:
-    IGNORE: RR, RC
 
 igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
+    DEPS: start_vid ON graph, weights ON graph
 
 igraph_diversity:
 
@@ -516,7 +511,7 @@ igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
 
 igraph_biadjacency:
-    DEPS: types ON graph V(graph)
+    DEPS: types ON res$graph V(res$graph)
 
 # Use the name 'type' instead of 'types' (provided by the C core)
 igraph_is_bipartite:
@@ -531,6 +526,9 @@ igraph_bipartite_game_gnp:
 
 igraph_bipartite_game:
     IGNORE: RR, RC
+
+igraph_full_bipartite:
+    DEPS: types ON res$graph
 
 
 #######################################
@@ -1002,20 +1000,16 @@ igraph_from_prufer:
           name: Tree from Prufer sequence
         GATTR-PARAM: prufer
 
-igraph_minimum_spanning_tree:
-    IGNORE: RR, RC, RInit
-
-igraph_minimum_spanning_tree_unweighted:
-    IGNORE: RR, RC
-
-igraph_minimum_spanning_tree_prim:
-    IGNORE: RR, RC
 
 #######################################
 # Coloring
 #######################################
 
 igraph_vertex_coloring_greedy:
+
+igraph_is_bipartite_coloring:
+    PARAMS: GRAPH graph, BIPARTITE_TYPES types, OUT BOOLEAN res, OPTIONAL OUT NULL mode
+    DEPS: types ON graph
 
 #######################################
 # Other, (yet) undocumented functions

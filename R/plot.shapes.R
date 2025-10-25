@@ -408,12 +408,12 @@ add_shape <- function(
   }
 
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
-  do.call(igraph.options, parameters)
+  do.call(igraph_options, parameters)
   invisible(TRUE)
 }
 
 ## These are the predefined shapes
-
+#nocov start
 .igraph.shape.circle.clip <- function(
   coords,
   el,
@@ -1112,7 +1112,7 @@ add_shape <- function(
   ## does not plot anything at all
   invisible(NULL)
 }
-
+#nocov end
 #' @importFrom graphics par polygon
 mypie <- function(
   x,
@@ -1170,7 +1170,7 @@ mypie <- function(
     )
   }
 }
-
+#nocov start
 .igraph.shape.pie.clip <- function(
   coords,
   el,
@@ -1351,6 +1351,8 @@ mypie <- function(
     )
   }
 }
+
+#nocov end
 
 .igraph.shapes <- new.env()
 .igraph.shapes[["circle"]] <- list(

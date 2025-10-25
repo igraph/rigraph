@@ -1,5 +1,5 @@
 /*
-   IGraph library.
+   igraph library.
    Copyright (C) 2021  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
@@ -55,11 +55,11 @@
  *
  * Time complexity: O(|V|), the number of vertices in the graph.
  */
-igraph_error_t igraph_generalized_petersen(igraph_t *graph, igraph_integer_t n, igraph_integer_t k) {
+igraph_error_t igraph_generalized_petersen(igraph_t *graph, igraph_int_t n, igraph_int_t k) {
     /* This is a generalized Petersen graph constructor */
     igraph_vector_int_t edges;
-    igraph_integer_t no_of_nodes, no_of_edges2;
-    igraph_integer_t i;
+    igraph_int_t no_of_nodes, no_of_edges2;
+    igraph_int_t i;
 
     if (n < 3) {
         IGRAPH_ERRORF("n = %" IGRAPH_PRId " must be at least 3.", IGRAPH_EINVAL, n);
@@ -78,12 +78,12 @@ igraph_error_t igraph_generalized_petersen(igraph_t *graph, igraph_integer_t n, 
     IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges2));
 
     for (i = 0; i < n; i++) {
-        igraph_vector_int_push_back(&edges, i);
-        igraph_vector_int_push_back(&edges, (i + 1) % n);
-        igraph_vector_int_push_back(&edges, i);
-        igraph_vector_int_push_back(&edges, i + n);
-        igraph_vector_int_push_back(&edges, i + n);
-        igraph_vector_int_push_back(&edges, ((i + k) % n) + n);
+        igraph_vector_int_push_back(&edges, i); /* reserved */
+        igraph_vector_int_push_back(&edges, (i + 1) % n); /* reserved */
+        igraph_vector_int_push_back(&edges, i); /* reserved */
+        igraph_vector_int_push_back(&edges, i + n); /* reserved */
+        igraph_vector_int_push_back(&edges, i + n); /* reserved */
+        igraph_vector_int_push_back(&edges, ((i + k) % n) + n); /* reserved */
     }
 
     IGRAPH_CHECK(igraph_create(graph, &edges, no_of_nodes, IGRAPH_UNDIRECTED));

@@ -74,7 +74,7 @@ Random graph models (games)
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}, first version was
-written by Keith Briggs (\url{http://keithbriggs.info/}).
+written by Keith Briggs (\url{https://keithbriggs.info/}).
 }
 \concept{games}
 \keyword{graphs}

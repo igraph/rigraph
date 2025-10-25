@@ -4,14 +4,15 @@
 \alias{igraph_version}
 \title{Query igraph's version string}
 \usage{
-igraph_version(software = c("R", "C"))
+igraph_version()
+}
+\value{
+A character scalar, the igraph version string, with an attribute
+\code{"c_version"} giving the C library version string.
 }
 \description{
 Returns the R package version,
 prints the R package version and C library version.
-}
-\details{
-#' @return A character scalar, the igraph version string.
 }
 \examples{
 igraph_version()

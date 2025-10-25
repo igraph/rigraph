@@ -43,3 +43,14 @@ expect_identical_graphs <- function(g1, g2, ...) {
 expect_not_identical_graphs <- function(g1, g2, ...) {
   expect_false(identical_graphs(g1, g2, ...))
 }
+
+expect_snapshot_igraph_error <- function(x, ...) {
+  expect_snapshot(
+    x,
+    error = TRUE,
+    transform = function(y) {
+      gsub(":(\\d+)", ":xx", y)
+    },
+    ...
+  )
+}

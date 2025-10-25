@@ -222,3 +222,10 @@ test_that("get_edge_id() errors correctly for wrong matrices", {
   mat <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2, ncol = 3)
   lifecycle::expect_deprecated(get_edge_ids(g, mat))
 })
+
+test_that("incident() works", {
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph("Zachary")
+  expect_snapshot(incident(g, 1))
+  expect_snapshot(incident(g, 34))
+})

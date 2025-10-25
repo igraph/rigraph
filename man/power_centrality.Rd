@@ -157,7 +157,7 @@ Centrality measures
 }
 \author{
 Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
 igraph by Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{centrality}

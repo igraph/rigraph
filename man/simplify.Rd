@@ -13,7 +13,7 @@ simplify(
   edge.attr.comb = igraph_opt("edge.attr.comb")
 )
 
-is_simple(graph)
+is_simple(graph, directed = TRUE)
 
 simplify_and_colorize(graph)
 }
@@ -29,6 +29,12 @@ removed.}
 \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
 \code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
+
+\item{directed}{Boolean.Whether to consider the directions of edges.
+The default, \code{TRUE}  means that edge directions will be considered.
+\code{FALSE} means that edge directions will be ignored and a directed graph
+with at least one mutual edge pair will be considered non-simple.
+Ignored for undirected graphs.}
 }
 \value{
 a new graph object with the edges deleted.
@@ -65,6 +71,11 @@ is_simple(g)
 is_simple(simplify(g, remove.loops = FALSE))
 is_simple(simplify(g, remove.multiple = FALSE))
 is_simple(simplify(g))
+
+# directed argument
+g <- graph_from_literal(1 +-+ 2 -+ 3)
+is_simple(g)
+is_simple(g, directed = FALSE)
 }
 \seealso{
 \code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and

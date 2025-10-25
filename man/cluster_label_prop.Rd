@@ -10,7 +10,8 @@ cluster_label_prop(
   ...,
   mode = c("out", "in", "all"),
   initial = NULL,
-  fixed = NULL
+  fixed = NULL,
+  lpa_variant = c("dominance", "retention", "fast")
 )
 }
 \arguments{
@@ -43,6 +44,13 @@ entries denote vertices without labels.}
 \item{fixed}{Logical vector denoting which labels are fixed. Of course this
 makes sense only if you provided an initial state, otherwise this element
 will be ignored. Also note that vertices without labels cannot be fixed.}
+
+\item{lpa_variant}{Which variant of the label propagation algorithm to run.
+\itemize{
+\item \code{"dominance"} (default) check for dominance of all nodes after each iteration.
+\item \code{"retention"} keep current label if among dominant labels, only check if labels changed.
+\item \code{"fast"} sample from dominant labels, only check neighbors.
+}}
 }
 \value{
 \code{cluster_label_prop()} returns a

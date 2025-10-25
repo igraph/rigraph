@@ -1,3 +1,4 @@
+#nocov start
 #' The igraph console
 #'
 #' @description
@@ -94,18 +95,26 @@ console <- function() {
 #' @inheritParams .igraph.progress
 #' @dev
 .igraph.status <- function(message) {
-  type <- igraph_opt("verbose")
-  if (is.logical(type) && type) {
-    message(message, appendLF = FALSE)
-  } else {
-    switch(
-      type,
-      "tk" = message(message, appendLF = FALSE),
-      "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
-      stop("Cannot interpret 'verbose' option, this should not happen")
-    )
-  }
-  0L
+  # Catch all errors
+  tryCatch(
+    {
+      type <- igraph::igraph_opt("verbose")
+      if (is.logical(type) && type) {
+        message(message, appendLF = FALSE)
+      } else {
+        switch(
+          type,
+          "tk" = message(message, appendLF = FALSE),
+          "tkconsole" = .igraph.progress.tkconsole.message(
+            message,
+            start = TRUE
+          ),
+          stop("Cannot interpret 'verbose' option, this should not happen")
+        )
+      }
+    },
+    error = function(e) {}
+  )
 }
 
 #' @importFrom utils txtProgressBar setTxtProgressBar
@@ -322,3 +331,4 @@ close.igraphconsole <- function(con, ...) {
   pb <- list(widget = pBar, get = get, set = set, label = .lab)
   list(frame = frame, pb = pb)
 }
+#nocov end

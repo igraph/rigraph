@@ -158,7 +158,9 @@ In EDGE problems, each edge is specified as an edge line (e).
 
 \section{DL format}{
 
-This is a simple textual file format used by UCINET. See \url{http://www.analytictech.com/networks/dataentry.htm} for examples. All the forms described here are supported by igraph.
+This is a simple textual file format used by UCINET.
+See \url{http://www.analytictech.com/networks/dataentry.htm} for examples.
+All the forms described here are supported by igraph.
 Vertex names and edge weights are also supported and they are added as attributes.
 (If an attribute handler is attached.)
 Note the specification does not mention whether the format is case sensitive or not.

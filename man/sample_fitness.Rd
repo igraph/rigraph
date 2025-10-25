@@ -8,8 +8,7 @@ sample_fitness(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
-  loops = FALSE,
-  multiple = FALSE
+  allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 }
 \arguments{
@@ -111,5 +110,5 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_static_fitness_game}{\code{static_fitness_game()}}.}
 

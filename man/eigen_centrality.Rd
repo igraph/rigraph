@@ -6,16 +6,17 @@
 \usage{
 eigen_centrality(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   weights = NULL,
-  options = arpack_defaults()
+  options = arpack_defaults(),
+  mode = c("out", "in", "all")
 )
 }
 \arguments{
 \item{graph}{Graph to be analyzed.}
 
-\item{directed}{Logical scalar, whether to consider direction of the edges
+\item{directed}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Logical scalar, whether to consider direction of the edges
 in directed graphs. It is ignored for undirected graphs.}
 
 \item{scale}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Normalization will always take
@@ -35,6 +36,20 @@ weights spread the centrality better.}
 
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details.}
+
+\item{mode}{How to consider edge directions in directed graphs.
+It is ignored for undirected graphs.
+Possible values:
+\itemize{
+\item \code{"out"} the left eigenvector of the adjacency matrix is calculated,
+i.e. the centrality of a vertex is proportional to the sum of centralities
+of vertices pointing to it. This is the standard eigenvector centrality.
+\item \code{"in"} the right eigenvector of the adjacency matrix is calculated,
+i.e. the centrality of a vertex is proportional to the sum of centralities
+of vertices it points to.
+\item \code{"all"} edge directions are ignored,
+and the unweighted eigenvector centrality is calculated.
+}}
 }
 \value{
 A named list with components:
@@ -124,7 +139,7 @@ Centrality measures
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} and Carter T. Butts
-(\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
+(\url{https://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
 manual page.
 }
 \concept{centrality}

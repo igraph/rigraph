@@ -189,6 +189,78 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_neighbors                           /
+/-------------------------------------------*/
+SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode, SEXP loops, SEXP multiple) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_neis;
+  igraph_integer_t c_vid;
+  igraph_neimode_t c_mode;
+  igraph_loops_t c_loops;
+  igraph_bool_t c_multiple;
+  SEXP neis;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_neis, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_neis);
+  c_vid = (igraph_integer_t) REAL(vid)[0];
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_neighbors(&c_graph, &c_neis, c_vid, c_mode, c_loops, c_multiple));
+
+                                        /* Convert output */
+  PROTECT(neis=R_igraph_vector_int_to_SEXPp1(&c_neis));
+  igraph_vector_int_destroy(&c_neis);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = neis;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_degree                              /
+/-------------------------------------------*/
+SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_res;
+  igraph_vs_t c_vids;
+  igraph_neimode_t c_mode;
+  igraph_loops_t c_loops;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_loops = (igraph_loops_t) Rf_asInteger(loops);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_degree(&c_graph, &c_res, c_vids, c_mode, c_loops));
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  igraph_vector_int_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_all_eids_between                /
 /-------------------------------------------*/
 SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed) {
@@ -1242,13 +1314,14 @@ SEXP R_igraph_turan(SEXP n, SEXP r) {
 /*-------------------------------------------/
 / igraph_erdos_renyi_game_gnp                /
 /-------------------------------------------*/
-SEXP R_igraph_erdos_renyi_game_gnp(SEXP n, SEXP p, SEXP directed, SEXP loops) {
+SEXP R_igraph_erdos_renyi_game_gnp(SEXP n, SEXP p, SEXP directed, SEXP allowed_edge_types, SEXP edge_labeled) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
   igraph_real_t c_p;
   igraph_bool_t c_directed;
-  igraph_bool_t c_loops;
+  igraph_edge_type_sw_t c_allowed_edge_types;
+  igraph_bool_t c_edge_labeled;
   SEXP graph;
 
   SEXP r_result;
@@ -1259,11 +1332,12 @@ SEXP R_igraph_erdos_renyi_game_gnp(SEXP n, SEXP p, SEXP directed, SEXP loops) {
   c_p = REAL(p)[0];
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnp(&c_graph, c_n, c_p, c_directed, c_loops));
+  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnp(&c_graph, c_n, c_p, c_directed, c_allowed_edge_types, c_edge_labeled));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1280,14 +1354,14 @@ SEXP R_igraph_erdos_renyi_game_gnp(SEXP n, SEXP p, SEXP directed, SEXP loops) {
 /*-------------------------------------------/
 / igraph_erdos_renyi_game_gnm                /
 /-------------------------------------------*/
-SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP loops, SEXP multiple) {
+SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP allowed_edge_types, SEXP edge_labeled) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
   igraph_integer_t c_m;
   igraph_bool_t c_directed;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
+  igraph_bool_t c_edge_labeled;
   SEXP graph;
 
   SEXP r_result;
@@ -1298,13 +1372,12 @@ SEXP R_igraph_erdos_renyi_game_gnm(SEXP n, SEXP m, SEXP directed, SEXP loops, SE
   c_m = (igraph_integer_t) REAL(m)[0];
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnm(&c_graph, c_n, c_m, c_directed, c_loops, c_multiple));
+  IGRAPH_R_CHECK(igraph_erdos_renyi_game_gnm(&c_graph, c_n, c_m, c_directed, c_allowed_edge_types, c_edge_labeled));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1521,12 +1594,11 @@ SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_typ
 /*-------------------------------------------/
 / igraph_rewire_edges                        /
 /-------------------------------------------*/
-SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
+SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP allowed_edge_types) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_real_t c_prob;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
 
   SEXP r_result;
                                         /* Convert input */
@@ -1534,13 +1606,10 @@ SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   IGRAPH_R_CHECK_REAL(prob);
   c_prob = REAL(prob)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_rewire_edges(&c_graph, c_prob, c_loops, c_multiple));
+  IGRAPH_R_CHECK(igraph_rewire_edges(&c_graph, c_prob, c_allowed_edge_types));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1706,14 +1775,13 @@ SEXP R_igraph_chung_lu_game(SEXP out_weights, SEXP in_weights, SEXP loops, SEXP 
 /*-------------------------------------------/
 / igraph_static_fitness_game                 /
 /-------------------------------------------*/
-SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitness_in, SEXP loops, SEXP multiple) {
+SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitness_in, SEXP allowed_edge_types) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_no_of_edges;
   igraph_vector_t c_fitness_out;
   igraph_vector_t c_fitness_in;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
   SEXP graph;
 
   SEXP r_result;
@@ -1724,13 +1792,10 @@ SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitne
   if (!Rf_isNull(fitness_in)) {
     R_SEXP_to_vector(fitness_in, &c_fitness_in);
   }
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_static_fitness_game(&c_graph, c_no_of_edges, &c_fitness_out, (Rf_isNull(fitness_in) ? NULL : &c_fitness_in), c_loops, c_multiple));
+  IGRAPH_R_CHECK(igraph_static_fitness_game(&c_graph, c_no_of_edges, &c_fitness_out, (Rf_isNull(fitness_in) ? NULL : &c_fitness_in), c_allowed_edge_types));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1747,15 +1812,14 @@ SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitne
 /*-------------------------------------------/
 / igraph_static_power_law_game               /
 /-------------------------------------------*/
-SEXP R_igraph_static_power_law_game(SEXP no_of_nodes, SEXP no_of_edges, SEXP exponent_out, SEXP exponent_in, SEXP loops, SEXP multiple, SEXP finite_size_correction) {
+SEXP R_igraph_static_power_law_game(SEXP no_of_nodes, SEXP no_of_edges, SEXP exponent_out, SEXP exponent_in, SEXP allowed_edge_types, SEXP finite_size_correction) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_no_of_nodes;
   igraph_integer_t c_no_of_edges;
   igraph_real_t c_exponent_out;
   igraph_real_t c_exponent_in;
-  igraph_bool_t c_loops;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
   igraph_bool_t c_finite_size_correction;
   SEXP graph;
 
@@ -1769,15 +1833,12 @@ SEXP R_igraph_static_power_law_game(SEXP no_of_nodes, SEXP no_of_edges, SEXP exp
   c_exponent_out = REAL(exponent_out)[0];
   IGRAPH_R_CHECK_REAL(exponent_in);
   c_exponent_in = REAL(exponent_in)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
   IGRAPH_R_CHECK_BOOL(finite_size_correction);
   c_finite_size_correction = LOGICAL(finite_size_correction)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_static_power_law_game(&c_graph, c_no_of_nodes, c_no_of_edges, c_exponent_out, c_exponent_in, c_loops, c_multiple, c_finite_size_correction));
+  IGRAPH_R_CHECK(igraph_static_power_law_game(&c_graph, c_no_of_nodes, c_no_of_edges, c_exponent_out, c_exponent_in, c_allowed_edge_types, c_finite_size_correction));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1832,30 +1893,26 @@ SEXP R_igraph_k_regular_game(SEXP no_of_nodes, SEXP k, SEXP directed, SEXP multi
 /*-------------------------------------------/
 / igraph_sbm_game                            /
 /-------------------------------------------*/
-SEXP R_igraph_sbm_game(SEXP n, SEXP pref_matrix, SEXP block_sizes, SEXP directed, SEXP loops) {
+SEXP R_igraph_sbm_game(SEXP pref_matrix, SEXP block_sizes, SEXP directed, SEXP allowed_edge_types) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_integer_t c_n;
   igraph_matrix_t c_pref_matrix;
   igraph_vector_int_t c_block_sizes;
   igraph_bool_t c_directed;
-  igraph_bool_t c_loops;
+  igraph_edge_type_sw_t c_allowed_edge_types;
   SEXP graph;
 
   SEXP r_result;
                                         /* Convert input */
-  IGRAPH_R_CHECK_INT(n);
-  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
   IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(block_sizes, &c_block_sizes));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_block_sizes);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_BOOL(loops);
-  c_loops = LOGICAL(loops)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_sbm_game(&c_graph, c_n, &c_pref_matrix, &c_block_sizes, c_directed, c_loops));
+  IGRAPH_R_CHECK(igraph_sbm_game(&c_graph, &c_pref_matrix, &c_block_sizes, c_directed, c_allowed_edge_types));
   PutRNGstate();
 
                                         /* Convert output */
@@ -1956,8 +2013,8 @@ SEXP R_igraph_hsbm_list_game(SEXP n, SEXP mlist, SEXP rholist, SEXP Clist, SEXP 
 /-------------------------------------------*/
 SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutation) {
                                         /* Declarations */
-  igraph_t c_old_graph;
   igraph_t c_new_graph;
+  igraph_t c_old_graph;
   igraph_real_t c_corr;
   igraph_real_t c_p;
   igraph_vector_int_t c_permutation;
@@ -1979,7 +2036,7 @@ SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutatio
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_correlated_game(&c_old_graph, &c_new_graph, c_corr, c_p, (Rf_isNull(permutation) ? NULL : &c_permutation)));
+  IGRAPH_R_CHECK(igraph_correlated_game(&c_new_graph, &c_old_graph, c_corr, c_p, (Rf_isNull(permutation) ? NULL : &c_permutation)));
   PutRNGstate();
 
                                         /* Convert output */
@@ -2112,6 +2169,79 @@ SEXP R_igraph_are_adjacent(SEXP graph, SEXP v1, SEXP v2) {
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
   r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_diameter                            /
+/-------------------------------------------*/
+SEXP R_igraph_diameter(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_real_t c_res;
+  igraph_integer_t c_from;
+  igraph_integer_t c_to;
+  igraph_vector_int_t c_vertex_path;
+  igraph_vector_int_t c_edge_path;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_unconnected;
+  SEXP res;
+  SEXP from;
+  SEXP to;
+  SEXP vertex_path;
+  SEXP edge_path;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_from=0;
+  c_to=0;
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_path, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_path);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_path, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_path);
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(unconnected);
+  c_unconnected = LOGICAL(unconnected)[0];
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_diameter(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, &c_from, &c_to, &c_vertex_path, &c_edge_path, c_directed, c_unconnected));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(5));
+  PROTECT(r_names=NEW_CHARACTER(5));
+  PROTECT(res=NEW_NUMERIC(1));
+  REAL(res)[0]=c_res;
+  PROTECT(from=NEW_NUMERIC(1));
+  REAL(from)[0]=(double) c_from;
+  PROTECT(to=NEW_NUMERIC(1));
+  REAL(to)[0]=(double) c_to;
+  PROTECT(vertex_path=R_igraph_vector_int_to_SEXP(&c_vertex_path));
+  igraph_vector_int_destroy(&c_vertex_path);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(edge_path=R_igraph_vector_int_to_SEXP(&c_edge_path));
+  igraph_vector_int_destroy(&c_edge_path);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, from);
+  SET_VECTOR_ELT(r_result, 2, to);
+  SET_VECTOR_ELT(r_result, 3, vertex_path);
+  SET_VECTOR_ELT(r_result, 4, edge_path);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("from"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("to"));
+  SET_STRING_ELT(r_names, 3, Rf_mkChar("vertex_path"));
+  SET_STRING_ELT(r_names, 4, Rf_mkChar("edge_path"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(6);
 
   UNPROTECT(1);
   return(r_result);
@@ -2602,15 +2732,16 @@ SEXP R_igraph_voronoi(SEXP graph, SEXP generators, SEXP weights, SEXP mode, SEXP
 /*-------------------------------------------/
 / igraph_get_all_simple_paths                /
 /-------------------------------------------*/
-SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP minlen, SEXP maxlen, SEXP mode) {
+SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP minlen, SEXP maxlen, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_from;
   igraph_vs_t c_to;
+  igraph_neimode_t c_mode;
   igraph_integer_t c_minlen;
   igraph_integer_t c_maxlen;
-  igraph_neimode_t c_mode;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -2623,14 +2754,16 @@ SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP minlen, 
   c_from = (igraph_integer_t) REAL(from)[0];
   igraph_vector_int_t c_to_data;
   R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_INT(minlen);
   c_minlen = (igraph_integer_t) REAL(minlen)[0];
   IGRAPH_R_CHECK_INT(maxlen);
   c_maxlen = (igraph_integer_t) REAL(maxlen)[0];
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_get_all_simple_paths(&c_graph, &c_res, c_from, c_to, c_minlen, c_maxlen, c_mode));
+  IGRAPH_R_CHECK(igraph_get_all_simple_paths(&c_graph, &c_res, c_from, c_to, c_mode, c_minlen, c_maxlen, c_max_results));
   PutRNGstate();
 
                                         /* Convert output */
@@ -2957,33 +3090,36 @@ SEXP R_igraph_spanner(SEXP graph, SEXP stretch, SEXP weights) {
 /*-------------------------------------------/
 / igraph_betweenness_cutoff                  /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP vids, SEXP directed, SEXP weights, SEXP cutoff) {
+SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP weights, SEXP vids, SEXP directed, SEXP normalized, SEXP cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
   igraph_bool_t c_directed;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_normalized;
   igraph_real_t c_cutoff;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
-  if (!Rf_isNull(weights)) {
-    R_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
   IGRAPH_R_CHECK_REAL(cutoff);
   c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_betweenness_cutoff(&c_graph, &c_res, c_vids, c_directed, (Rf_isNull(weights) ? NULL : &c_weights), c_cutoff));
+  IGRAPH_R_CHECK(igraph_betweenness_cutoff(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_vids, c_directed, c_normalized, c_cutoff));
   PutRNGstate();
 
                                         /* Convert output */
@@ -3001,36 +3137,39 @@ SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP vids, SEXP directed, SEXP weig
 /*-------------------------------------------/
 / igraph_betweenness_subset                  /
 /-------------------------------------------*/
-SEXP R_igraph_betweenness_subset(SEXP graph, SEXP vids, SEXP directed, SEXP sources, SEXP targets, SEXP weights) {
+SEXP R_igraph_betweenness_subset(SEXP graph, SEXP weights, SEXP vids, SEXP sources, SEXP targets, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
   igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
   igraph_vs_t c_sources;
   igraph_vs_t c_targets;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   R_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
   R_SEXP_to_igraph_vs(targets, &c_graph, &c_targets, &c_targets_data);
-  if (!Rf_isNull(weights)) {
-    R_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, &c_res, c_vids, c_directed, c_sources, c_targets, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_betweenness_subset(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_vids, c_sources, c_targets, c_directed, c_normalized));
   PutRNGstate();
 
                                         /* Convert output */
@@ -3052,33 +3191,41 @@ SEXP R_igraph_betweenness_subset(SEXP graph, SEXP vids, SEXP directed, SEXP sour
 /*-------------------------------------------/
 / igraph_edge_betweenness                    /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
+SEXP R_igraph_edge_betweenness(SEXP graph, SEXP weights, SEXP eids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_bool_t c_directed;
   igraph_vector_t c_weights;
+  igraph_vector_t c_res;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) {
     R_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_edge_betweenness(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_edge_betweenness(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_eids, c_directed, c_normalized));
   PutRNGstate();
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -3088,36 +3235,44 @@ SEXP R_igraph_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
 /*-------------------------------------------/
 / igraph_edge_betweenness_cutoff             /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, SEXP cutoff) {
+SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP weights, SEXP eids, SEXP directed, SEXP normalized, SEXP cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_res;
-  igraph_bool_t c_directed;
   igraph_vector_t c_weights;
+  igraph_vector_t c_res;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   igraph_real_t c_cutoff;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) {
     R_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
   IGRAPH_R_CHECK_REAL(cutoff);
   c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_edge_betweenness_cutoff(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? NULL : &c_weights), c_cutoff));
+  IGRAPH_R_CHECK(igraph_edge_betweenness_cutoff(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_eids, c_directed, c_normalized, c_cutoff));
   PutRNGstate();
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -3127,48 +3282,51 @@ SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, S
 /*-------------------------------------------/
 / igraph_edge_betweenness_subset             /
 /-------------------------------------------*/
-SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP eids, SEXP directed, SEXP sources, SEXP targets, SEXP weights) {
+SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP weights, SEXP sources, SEXP targets, SEXP eids, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_res;
-  igraph_es_t c_eids;
-  igraph_bool_t c_directed;
   igraph_vs_t c_sources;
   igraph_vs_t c_targets;
-  igraph_vector_t c_weights;
+  igraph_es_t c_eids;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
   SEXP res;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK(igraph_vector_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  igraph_vector_int_t c_eids_data;
-  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   R_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
   R_SEXP_to_igraph_vs(targets, &c_graph, &c_targets, &c_targets_data);
-  if (!Rf_isNull(weights)) {
-    R_SEXP_to_vector(weights, &c_weights);
-  }
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_edge_betweenness_subset(&c_graph, &c_res, c_eids, c_directed, c_sources, c_targets, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_edge_betweenness_subset(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_sources, c_targets, c_eids, c_directed, c_normalized));
   PutRNGstate();
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_eids_data);
-  igraph_es_destroy(&c_eids);
   igraph_vector_int_destroy(&c_sources_data);
   igraph_vs_destroy(&c_sources);
   igraph_vector_int_destroy(&c_targets_data);
   igraph_vs_destroy(&c_targets);
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -3224,17 +3382,17 @@ SEXP R_igraph_harmonic_centrality_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP 
 /*-------------------------------------------/
 / igraph_personalized_pagerank               /
 /-------------------------------------------*/
-SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP personalized, SEXP weights, SEXP options) {
+SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP weights, SEXP reset, SEXP damping, SEXP directed, SEXP vids, SEXP algo, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_pagerank_algo_t c_algo;
+  igraph_vector_t c_weights;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
+  igraph_vector_t c_reset;
   igraph_real_t c_damping;
-  igraph_vector_t c_personalized;
-  igraph_vector_t c_weights;
+  igraph_bool_t c_directed;
+  igraph_vs_t c_vids;
+  igraph_pagerank_algo_t c_algo;
   igraph_arpack_options_t c_options1;
   void* c_options;
   SEXP vector;
@@ -3243,21 +3401,21 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  igraph_vector_int_t c_vids_data;
-  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_REAL(damping);
-  c_damping = REAL(damping)[0];
-  if (!Rf_isNull(personalized)) {
-    R_SEXP_to_vector(personalized, &c_personalized);
-  }
   if (!Rf_isNull(weights)) {
     R_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
+  if (!Rf_isNull(reset)) {
+    R_SEXP_to_vector(reset, &c_reset);
+  }
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
   if (!Rf_isNull(options)) {
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       R_SEXP_to_igraph_arpack_options(options, &c_options1);
@@ -3268,7 +3426,7 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_personalized_pagerank(&c_graph, c_algo, &c_vector, &c_value, c_vids, c_directed, c_damping, (Rf_isNull(personalized) ? NULL : &c_personalized), (Rf_isNull(weights) ? NULL : &c_weights), c_options));
+  IGRAPH_R_CHECK(igraph_personalized_pagerank(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_vector, &c_value, (Rf_isNull(reset) ? NULL : &c_reset), c_damping, c_directed, c_vids, c_algo, c_options));
   PutRNGstate();
 
                                         /* Convert output */
@@ -3302,17 +3460,17 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
 /*-------------------------------------------/
 / igraph_personalized_pagerank_vs            /
 /-------------------------------------------*/
-SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP reset_vids, SEXP weights, SEXP options) {
+SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP weights, SEXP reset_vids, SEXP damping, SEXP directed, SEXP vids, SEXP algo, SEXP options) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_pagerank_algo_t c_algo;
+  igraph_vector_t c_weights;
   igraph_vector_t c_vector;
   igraph_real_t c_value;
-  igraph_vs_t c_vids;
-  igraph_bool_t c_directed;
-  igraph_real_t c_damping;
   igraph_vs_t c_reset_vids;
-  igraph_vector_t c_weights;
+  igraph_real_t c_damping;
+  igraph_bool_t c_directed;
+  igraph_vs_t c_vids;
+  igraph_pagerank_algo_t c_algo;
   igraph_arpack_options_t c_options1;
   void* c_options;
   SEXP vector;
@@ -3321,20 +3479,20 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
-  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  igraph_vector_int_t c_vids_data;
-  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  IGRAPH_R_CHECK_BOOL(directed);
-  c_directed = LOGICAL(directed)[0];
-  IGRAPH_R_CHECK_REAL(damping);
-  c_damping = REAL(damping)[0];
-  igraph_vector_int_t c_reset_vids_data;
-  R_SEXP_to_igraph_vs(reset_vids, &c_graph, &c_reset_vids, &c_reset_vids_data);
   if (!Rf_isNull(weights)) {
     R_SEXP_to_vector(weights, &c_weights);
   }
+  IGRAPH_R_CHECK(igraph_vector_init(&c_vector, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
+  igraph_vector_int_t c_reset_vids_data;
+  R_SEXP_to_igraph_vs(reset_vids, &c_graph, &c_reset_vids, &c_reset_vids_data);
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
+  c_algo = (igraph_pagerank_algo_t) Rf_asInteger(algo);
   if (!Rf_isNull(options)) {
     if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
       R_SEXP_to_igraph_arpack_options(options, &c_options1);
@@ -3345,7 +3503,7 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_personalized_pagerank_vs(&c_graph, c_algo, &c_vector, &c_value, c_vids, c_directed, c_damping, c_reset_vids, (Rf_isNull(weights) ? NULL : &c_weights), c_options));
+  IGRAPH_R_CHECK(igraph_personalized_pagerank_vs(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_vector, &c_value, c_reset_vids, c_damping, c_directed, c_vids, c_algo, c_options));
   PutRNGstate();
 
                                         /* Convert output */
@@ -3356,10 +3514,10 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  igraph_vector_int_destroy(&c_vids_data);
-  igraph_vs_destroy(&c_vids);
   igraph_vector_int_destroy(&c_reset_vids_data);
   igraph_vs_destroy(&c_reset_vids);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
     PROTECT(options = R_igraph_arpack_options_to_SEXP(&c_options1));
   } else {
@@ -3852,9 +4010,10 @@ SEXP R_igraph_maxdegree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
 /*-------------------------------------------/
 / igraph_density                             /
 /-------------------------------------------*/
-SEXP R_igraph_density(SEXP graph, SEXP loops) {
+SEXP R_igraph_density(SEXP graph, SEXP weights, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_real_t c_res;
   igraph_bool_t c_loops;
   SEXP res;
@@ -3862,11 +4021,14 @@ SEXP R_igraph_density(SEXP graph, SEXP loops) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_density(&c_graph, &c_res, c_loops));
+  IGRAPH_R_CHECK(igraph_density(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_res, c_loops));
   PutRNGstate();
 
                                         /* Convert output */
@@ -5103,9 +5265,10 @@ SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP graph, SEXP nodes,
 /*-------------------------------------------/
 / igraph_assortativity_nominal               /
 /-------------------------------------------*/
-SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP normalized) {
+SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP weights, SEXP types, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_t c_types;
   igraph_real_t c_res;
   igraph_bool_t c_directed;
@@ -5115,6 +5278,9 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   R_SEXP_to_vector_int_copy(types, &c_types);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
   IGRAPH_R_CHECK_BOOL(directed);
@@ -5123,7 +5289,7 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_assortativity_nominal(&c_graph, &c_types, &c_res, c_directed, c_normalized));
+  IGRAPH_R_CHECK(igraph_assortativity_nominal(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_types, &c_res, c_directed, c_normalized));
   PutRNGstate();
 
                                         /* Convert output */
@@ -5140,9 +5306,10 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
 /*-------------------------------------------/
 / igraph_assortativity                       /
 /-------------------------------------------*/
-SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP directed, SEXP normalized) {
+SEXP R_igraph_assortativity(SEXP graph, SEXP weights, SEXP values, SEXP values_in, SEXP directed, SEXP normalized) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_t c_values;
   igraph_vector_t c_values_in;
   igraph_real_t c_res;
@@ -5153,6 +5320,9 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   R_SEXP_to_vector(values, &c_values);
   if (!Rf_isNull(values_in)) {
     R_SEXP_to_vector(values_in, &c_values_in);
@@ -5163,7 +5333,7 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
   c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_assortativity(&c_graph, &c_values, (Rf_isNull(values_in) ? NULL : &c_values_in), &c_res, c_directed, c_normalized));
+  IGRAPH_R_CHECK(igraph_assortativity(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_values, (Rf_isNull(values_in) ? NULL : &c_values_in), &c_res, c_directed, c_normalized));
   PutRNGstate();
 
                                         /* Convert output */
@@ -5452,6 +5622,38 @@ SEXP R_igraph_graph_center(SEXP graph, SEXP weights, SEXP mode) {
   igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_radius                              /
+/-------------------------------------------*/
+SEXP R_igraph_radius(SEXP graph, SEXP weights, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_real_t c_radius;
+  igraph_neimode_t c_mode;
+  SEXP radius;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_radius(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_radius, c_mode));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(radius=NEW_NUMERIC(1));
+  REAL(radius)[0]=c_radius;
+  r_result = radius;
 
   UNPROTECT(1);
   return(r_result);
@@ -6226,7 +6428,7 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
 /*-------------------------------------------/
 / igraph_bipartite_game_gnm                  /
 /-------------------------------------------*/
-SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP mode, SEXP multiple) {
+SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP mode, SEXP allowed_edge_types, SEXP edge_labeled) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
@@ -6235,7 +6437,8 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   igraph_integer_t c_m;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
-  igraph_bool_t c_multiple;
+  igraph_edge_type_sw_t c_allowed_edge_types;
+  igraph_bool_t c_edge_labeled;
   SEXP graph;
   SEXP types;
 
@@ -6252,11 +6455,12 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  IGRAPH_R_CHECK_BOOL(multiple);
-  c_multiple = LOGICAL(multiple)[0];
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode, c_multiple));
+  IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode, c_allowed_edge_types, c_edge_labeled));
   PutRNGstate();
 
                                         /* Convert output */
@@ -6866,12 +7070,13 @@ SEXP R_igraph_is_clique(SEXP graph, SEXP candidate, SEXP directed) {
 /*-------------------------------------------/
 / igraph_cliques                             /
 /-------------------------------------------*/
-SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
+SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_res;
   igraph_integer_t c_min_size;
   igraph_integer_t c_max_size;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -6885,9 +7090,11 @@ SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
   c_min_size = (igraph_integer_t) REAL(min_size)[0];
   IGRAPH_R_CHECK_INT(max_size);
   c_max_size = (igraph_integer_t) REAL(max_size)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size));
+  IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size, c_max_results));
   PutRNGstate();
 
                                         /* Convert output */
@@ -7031,14 +7238,15 @@ SEXP R_igraph_clique_number(SEXP graph) {
 /*-------------------------------------------/
 / igraph_weighted_cliques                    /
 /-------------------------------------------*/
-SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight, SEXP max_weight, SEXP maximal) {
+SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP maximal, SEXP min_weight, SEXP max_weight, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_vertex_weights;
   igraph_vector_int_list_t c_res;
+  igraph_bool_t c_maximal;
   igraph_real_t c_min_weight;
   igraph_real_t c_max_weight;
-  igraph_bool_t c_maximal;
+  igraph_integer_t c_max_results;
   SEXP res;
 
   SEXP r_result;
@@ -7051,15 +7259,17 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight,
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_res);
+  IGRAPH_R_CHECK_BOOL(maximal);
+  c_maximal = LOGICAL(maximal)[0];
   IGRAPH_R_CHECK_REAL(min_weight);
   c_min_weight = REAL(min_weight)[0];
   IGRAPH_R_CHECK_REAL(max_weight);
   c_max_weight = REAL(max_weight)[0];
-  IGRAPH_R_CHECK_BOOL(maximal);
-  c_maximal = LOGICAL(maximal)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? NULL : &c_vertex_weights), &c_res, c_min_weight, c_max_weight, c_maximal));
+  IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? NULL : &c_vertex_weights), &c_res, c_maximal, c_min_weight, c_max_weight, c_max_results));
   PutRNGstate();
 
                                         /* Convert output */
@@ -7511,24 +7721,20 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_t c_extd_graph;
-  igraph_vector_int_t c_extd_to_orig_eids;
+  igraph_matrix_list_t c_routing;
   igraph_vector_int_t c_layers;
   igraph_real_t c_hgap;
   igraph_real_t c_vgap;
   igraph_integer_t c_maxiter;
   igraph_vector_t c_weights;
   SEXP res;
-  SEXP extd_graph;
-  SEXP extd_to_orig_eids;
+  SEXP routing;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  IGRAPH_R_CHECK(igraph_vector_int_init(&c_extd_to_orig_eids, 0));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_extd_to_orig_eids);
   if (!Rf_isNull(layers)) {
     R_SEXP_to_vector_int_copy(layers, &c_layers);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_layers);
@@ -7547,32 +7753,23 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_layout_sugiyama(&c_graph, &c_res, &c_extd_graph, &c_extd_to_orig_eids, (Rf_isNull(layers) ? NULL : &c_layers), c_hgap, c_vgap, c_maxiter, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_layout_sugiyama(&c_graph, &c_res, &c_routing, (Rf_isNull(layers) ? NULL : &c_layers), c_hgap, c_vgap, c_maxiter, (Rf_isNull(weights) ? NULL : &c_weights)));
   PutRNGstate();
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  IGRAPH_FINALLY(igraph_destroy, &c_extd_graph);
-  PROTECT(extd_graph=R_igraph_to_SEXP(&c_extd_graph));
-  IGRAPH_I_DESTROY(&c_extd_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(extd_to_orig_eids=R_igraph_vector_int_to_SEXPp1(&c_extd_to_orig_eids));
-  igraph_vector_int_destroy(&c_extd_to_orig_eids);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_layers);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, extd_graph);
-  SET_VECTOR_ELT(r_result, 2, extd_to_orig_eids);
+  SET_VECTOR_ELT(r_result, 1, routing);
   SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("extd_graph"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("extd_to_orig_eids"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("routing"));
   SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(r_result);
@@ -7901,12 +8098,12 @@ SEXP R_igraph_layout_align(SEXP graph, SEXP layout) {
 /*-------------------------------------------/
 / igraph_similarity_dice                     /
 /-------------------------------------------*/
-SEXP R_igraph_similarity_dice(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mode, SEXP loops) {
+SEXP R_igraph_similarity_dice(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_vs_t c_vit_from;
-  igraph_vs_t c_vit_to;
+  igraph_vs_t c_from;
+  igraph_vs_t c_to;
   igraph_neimode_t c_mode;
   igraph_bool_t c_loops;
   SEXP res;
@@ -7916,26 +8113,26 @@ SEXP R_igraph_similarity_dice(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mode,
   R_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  igraph_vector_int_t c_vit_from_data;
-  R_SEXP_to_igraph_vs(vit_from, &c_graph, &c_vit_from, &c_vit_from_data);
-  igraph_vector_int_t c_vit_to_data;
-  R_SEXP_to_igraph_vs(vit_to, &c_graph, &c_vit_to, &c_vit_to_data);
+  igraph_vector_int_t c_from_data;
+  R_SEXP_to_igraph_vs(from, &c_graph, &c_from, &c_from_data);
+  igraph_vector_int_t c_to_data;
+  R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vit_from, c_vit_to, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_from, c_to, c_mode, c_loops));
   PutRNGstate();
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vit_from_data);
-  igraph_vs_destroy(&c_vit_from);
-  igraph_vector_int_destroy(&c_vit_to_data);
-  igraph_vs_destroy(&c_vit_to);
+  igraph_vector_int_destroy(&c_from_data);
+  igraph_vs_destroy(&c_from);
+  igraph_vector_int_destroy(&c_to_data);
+  igraph_vs_destroy(&c_to);
   r_result = res;
 
   UNPROTECT(1);
@@ -8059,12 +8256,12 @@ SEXP R_igraph_similarity_inverse_log_weighted(SEXP graph, SEXP vids, SEXP mode) 
 /*-------------------------------------------/
 / igraph_similarity_jaccard                  /
 /-------------------------------------------*/
-SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mode, SEXP loops) {
+SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP loops) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_res;
-  igraph_vs_t c_vit_from;
-  igraph_vs_t c_vit_to;
+  igraph_vs_t c_from;
+  igraph_vs_t c_to;
   igraph_neimode_t c_mode;
   igraph_bool_t c_loops;
   SEXP res;
@@ -8074,26 +8271,26 @@ SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vit_from, SEXP vit_to, SEXP mo
   R_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  igraph_vector_int_t c_vit_from_data;
-  R_SEXP_to_igraph_vs(vit_from, &c_graph, &c_vit_from, &c_vit_from_data);
-  igraph_vector_int_t c_vit_to_data;
-  R_SEXP_to_igraph_vs(vit_to, &c_graph, &c_vit_to, &c_vit_to_data);
+  igraph_vector_int_t c_from_data;
+  R_SEXP_to_igraph_vs(from, &c_graph, &c_from, &c_from_data);
+  igraph_vector_int_t c_to_data;
+  R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   IGRAPH_R_CHECK_BOOL(loops);
   c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vit_from, c_vit_to, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_from, c_to, c_mode, c_loops));
   PutRNGstate();
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_vit_from_data);
-  igraph_vs_destroy(&c_vit_from);
-  igraph_vector_int_destroy(&c_vit_to_data);
-  igraph_vs_destroy(&c_vit_to);
+  igraph_vector_int_destroy(&c_from_data);
+  igraph_vs_destroy(&c_from);
+  igraph_vector_int_destroy(&c_to_data);
+  igraph_vs_destroy(&c_to);
   r_result = res;
 
   UNPROTECT(1);
@@ -8559,6 +8756,75 @@ SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_out_weights
 }
 
 /*-------------------------------------------/
+/ igraph_community_leiden_simple             /
+/-------------------------------------------*/
+SEXP R_igraph_community_leiden_simple(SEXP graph, SEXP weights, SEXP objective, SEXP resolution, SEXP beta, SEXP start, SEXP n_iterations, SEXP membership) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_leiden_objective_t c_objective;
+  igraph_real_t c_resolution;
+  igraph_real_t c_beta;
+  igraph_bool_t c_start;
+  igraph_integer_t c_n_iterations;
+  igraph_vector_int_t c_membership;
+  igraph_integer_t c_nb_clusters;
+  igraph_real_t c_quality;
+  SEXP nb_clusters;
+  SEXP quality;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_objective = (igraph_leiden_objective_t) Rf_asInteger(objective);
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(n_iterations);
+  c_n_iterations = (igraph_integer_t) REAL(n_iterations)[0];
+  if (!Rf_isNull(membership)) {
+    IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(membership, &c_membership));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  }
+  c_nb_clusters=0;
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_community_leiden_simple(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), c_objective, c_resolution, c_beta, c_start, c_n_iterations, &c_membership, &c_nb_clusters, &c_quality));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(membership=R_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(nb_clusters=NEW_NUMERIC(1));
+  REAL(nb_clusters)[0]=(double) c_nb_clusters;
+  PROTECT(quality=NEW_NUMERIC(1));
+  REAL(quality)[0]=c_quality;
+  SET_VECTOR_ELT(r_result, 0, membership);
+  SET_VECTOR_ELT(r_result, 1, nb_clusters);
+  SET_VECTOR_ELT(r_result, 2, quality);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("nb_clusters"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("quality"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_split_join_distance                 /
 /-------------------------------------------*/
 SEXP R_igraph_split_join_distance(SEXP comm1, SEXP comm2) {
@@ -8608,12 +8874,14 @@ SEXP R_igraph_split_join_distance(SEXP comm1, SEXP comm2) {
 /*-------------------------------------------/
 / igraph_community_infomap                   /
 /-------------------------------------------*/
-SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weights, SEXP nb_trials) {
+SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weights, SEXP nb_trials, SEXP is_regularized, SEXP regularization_strength) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_edge_weights;
   igraph_vector_t c_vertex_weights;
   igraph_integer_t c_nb_trials;
+  igraph_bool_t c_is_regularized;
+  igraph_real_t c_regularization_strength;
   igraph_vector_int_t c_membership;
   igraph_real_t c_codelength;
   SEXP membership;
@@ -8630,11 +8898,15 @@ SEXP R_igraph_community_infomap(SEXP graph, SEXP edge_weights, SEXP vertex_weigh
   }
   IGRAPH_R_CHECK_INT(nb_trials);
   c_nb_trials = (igraph_integer_t) REAL(nb_trials)[0];
+  IGRAPH_R_CHECK_BOOL(is_regularized);
+  c_is_regularized = LOGICAL(is_regularized)[0];
+  IGRAPH_R_CHECK_REAL(regularization_strength);
+  c_regularization_strength = REAL(regularization_strength)[0];
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(edge_weights) ? NULL : &c_edge_weights), (Rf_isNull(vertex_weights) ? NULL : &c_vertex_weights), c_nb_trials, &c_membership, &c_codelength));
+  IGRAPH_R_CHECK(igraph_community_infomap(&c_graph, (Rf_isNull(edge_weights) ? NULL : &c_edge_weights), (Rf_isNull(vertex_weights) ? NULL : &c_vertex_weights), c_nb_trials, c_is_regularized, c_regularization_strength, &c_membership, &c_codelength));
   PutRNGstate();
 
                                         /* Convert output */
@@ -10703,24 +10975,24 @@ SEXP R_igraph_count_automorphisms(SEXP graph, SEXP colors) {
 SEXP R_igraph_isoclass_subgraph(SEXP graph, SEXP vids) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_int_t c_vids;
+  igraph_vs_t c_vids;
   igraph_integer_t c_isoclass;
   SEXP isoclass;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  IGRAPH_R_CHECK(R_SEXP_to_vector_int_copy(vids, &c_vids));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vids);
+  igraph_vector_int_t c_vids_data;
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_isoclass=0;
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_isoclass_subgraph(&c_graph, &c_vids, &c_isoclass));
+  IGRAPH_R_CHECK(igraph_isoclass_subgraph(&c_graph, c_vids, &c_isoclass));
   PutRNGstate();
 
                                         /* Convert output */
-  igraph_vector_int_destroy(&c_vids);
-  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_vids_data);
+  igraph_vs_destroy(&c_vids);
   PROTECT(isoclass=NEW_NUMERIC(1));
   REAL(isoclass)[0]=(double) c_isoclass;
   r_result = isoclass;
@@ -11979,9 +12251,9 @@ SEXP R_igraph_sir(SEXP graph, SEXP beta, SEXP gamma, SEXP no_sim) {
 }
 
 /*-------------------------------------------/
-/ igraph_convex_hull                         /
+/ igraph_convex_hull_2d                      /
 /-------------------------------------------*/
-SEXP R_igraph_convex_hull(SEXP data) {
+SEXP R_igraph_convex_hull_2d(SEXP data) {
                                         /* Declarations */
   igraph_matrix_t c_data;
   igraph_vector_int_t c_resverts;
@@ -11998,7 +12270,7 @@ SEXP R_igraph_convex_hull(SEXP data) {
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_rescoords);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_convex_hull(&c_data, &c_resverts, &c_rescoords));
+  IGRAPH_R_CHECK(igraph_convex_hull_2d(&c_data, &c_resverts, &c_rescoords));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12128,7 +12400,7 @@ SEXP R_igraph_find_cycle(SEXP graph, SEXP mode) {
 /*-------------------------------------------/
 / igraph_simple_cycles                       /
 /-------------------------------------------*/
-SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length) {
+SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP max_cycle_length, SEXP max_results) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_list_t c_vertices;
@@ -12136,6 +12408,7 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP m
   igraph_neimode_t c_mode;
   igraph_integer_t c_min_cycle_length;
   igraph_integer_t c_max_cycle_length;
+  igraph_integer_t c_max_results;
   SEXP vertices;
   SEXP edges;
 
@@ -12155,9 +12428,11 @@ SEXP R_igraph_simple_cycles(SEXP graph, SEXP mode, SEXP min_cycle_length, SEXP m
   c_min_cycle_length = (igraph_integer_t) REAL(min_cycle_length)[0];
   IGRAPH_R_CHECK_INT(max_cycle_length);
   c_max_cycle_length = (igraph_integer_t) REAL(max_cycle_length)[0];
+  IGRAPH_R_CHECK_INT(max_results);
+  c_max_results = (igraph_integer_t) REAL(max_results)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_min_cycle_length, c_max_cycle_length));
+  IGRAPH_R_CHECK(igraph_simple_cycles(&c_graph, &c_vertices, &c_edges, c_mode, c_min_cycle_length, c_max_cycle_length, c_max_results));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12306,18 +12581,21 @@ SEXP R_igraph_eulerian_cycle(SEXP graph) {
 /*-------------------------------------------/
 / igraph_fundamental_cycles                  /
 /-------------------------------------------*/
-SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP weights) {
+SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP weights, SEXP start, SEXP bfs_cutoff) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_basis;
   igraph_integer_t c_start;
-  igraph_integer_t c_bfs_cutoff;
-  igraph_vector_t c_weights;
+  igraph_real_t c_bfs_cutoff;
   SEXP basis;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   if (0 != igraph_vector_int_list_init(&c_basis, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -12325,14 +12603,11 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
   if (!Rf_isNull(start)) {
     c_start = (igraph_integer_t) REAL(start)[0];
   }
-  IGRAPH_R_CHECK_INT(bfs_cutoff);
-  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
-  if (!Rf_isNull(weights)) {
-    R_SEXP_to_vector(weights, &c_weights);
-  }
+  IGRAPH_R_CHECK_REAL(bfs_cutoff);
+  c_bfs_cutoff = REAL(bfs_cutoff)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, (Rf_isNull(start) ? -1 : c_start), c_bfs_cutoff, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, (Rf_isNull(start) ? NULL : c_start), c_bfs_cutoff));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12348,35 +12623,35 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
 /*-------------------------------------------/
 / igraph_minimum_cycle_basis                 /
 /-------------------------------------------*/
-SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP bfs_cutoff, SEXP complete, SEXP use_cycle_order, SEXP weights) {
+SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP weights, SEXP bfs_cutoff, SEXP complete, SEXP use_cycle_order) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_vector_int_list_t c_basis;
-  igraph_integer_t c_bfs_cutoff;
+  igraph_real_t c_bfs_cutoff;
   igraph_bool_t c_complete;
   igraph_bool_t c_use_cycle_order;
-  igraph_vector_t c_weights;
   SEXP basis;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
   if (0 != igraph_vector_int_list_init(&c_basis, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_basis);
-  IGRAPH_R_CHECK_INT(bfs_cutoff);
-  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
+  IGRAPH_R_CHECK_REAL(bfs_cutoff);
+  c_bfs_cutoff = REAL(bfs_cutoff)[0];
   IGRAPH_R_CHECK_BOOL(complete);
   c_complete = LOGICAL(complete)[0];
   IGRAPH_R_CHECK_BOOL(use_cycle_order);
   c_use_cycle_order = LOGICAL(use_cycle_order)[0];
-  if (!Rf_isNull(weights)) {
-    R_SEXP_to_vector(weights, &c_weights);
-  }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order, (Rf_isNull(weights) ? NULL : &c_weights)));
+  IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12591,6 +12866,41 @@ SEXP R_igraph_is_complete(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_minimum_spanning_tree               /
+/-------------------------------------------*/
+SEXP R_igraph_minimum_spanning_tree(SEXP graph, SEXP weights, SEXP method) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_res;
+  igraph_vector_t c_weights;
+  igraph_mst_algorithm_t c_method;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  if (!Rf_isNull(weights)) {
+    R_SEXP_to_vector(weights, &c_weights);
+  }
+  c_method = (igraph_mst_algorithm_t) Rf_asInteger(method);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_minimum_spanning_tree(&c_graph, &c_res, (Rf_isNull(weights) ? NULL : &c_weights), c_method));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_int_to_SEXPp1(&c_res));
+  igraph_vector_int_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_random_spanning_tree                /
 /-------------------------------------------*/
 SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
@@ -12610,7 +12920,7 @@ SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? -1 : c_vid)));
+  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? NULL : c_vid)));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12697,6 +13007,227 @@ SEXP R_igraph_nearest_neighbor_graph(SEXP points, SEXP metric, SEXP neighbors, S
 }
 
 /*-------------------------------------------/
+/ igraph_delaunay_graph                      /
+/-------------------------------------------*/
+SEXP R_igraph_delaunay_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_delaunay_graph(&c_graph, &c_points));
+  PutRNGstate();
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_gabriel_graph                       /
+/-------------------------------------------*/
+SEXP R_igraph_gabriel_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_gabriel_graph(&c_graph, &c_points));
+  PutRNGstate();
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_relative_neighborhood_graph         /
+/-------------------------------------------*/
+SEXP R_igraph_relative_neighborhood_graph(SEXP points) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_matrix(points, &c_points);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_relative_neighborhood_graph(&c_graph, &c_points));
+  PutRNGstate();
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_lune_beta_skeleton                  /
+/-------------------------------------------*/
+SEXP R_igraph_lune_beta_skeleton(SEXP points, SEXP beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  igraph_real_t c_beta;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_lune_beta_skeleton(&c_graph, &c_points, c_beta));
+  PutRNGstate();
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_circle_beta_skeleton                /
+/-------------------------------------------*/
+SEXP R_igraph_circle_beta_skeleton(SEXP points, SEXP beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_matrix_t c_points;
+  igraph_real_t c_beta;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_circle_beta_skeleton(&c_graph, &c_points, c_beta));
+  PutRNGstate();
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_beta_weighted_gabriel_graph         /
+/-------------------------------------------*/
+SEXP R_igraph_beta_weighted_gabriel_graph(SEXP points, SEXP max_beta) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_t c_points;
+  igraph_real_t c_max_beta;
+  SEXP graph;
+  SEXP weights;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  IGRAPH_R_CHECK(igraph_vector_init(&c_weights, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
+  weights=R_GlobalEnv; /* hack to have a non-NULL value */
+  R_SEXP_to_matrix(points, &c_points);
+  IGRAPH_R_CHECK_REAL(max_beta);
+  c_max_beta = REAL(max_beta)[0];
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_beta_weighted_gabriel_graph(&c_graph, &c_weights, &c_points, c_max_beta));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(weights=R_igraph_0orvector_to_SEXP(&c_weights));
+  igraph_vector_destroy(&c_weights);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, weights);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("weights"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_spatial_edge_lengths                /
+/-------------------------------------------*/
+SEXP R_igraph_spatial_edge_lengths(SEXP graph, SEXP points, SEXP METRIC) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_lengths;
+  igraph_matrix_t c_points;
+  igraph_metric_t c_METRIC;
+  SEXP lengths;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  R_SEXP_to_matrix(points, &c_points);
+  c_METRIC = (igraph_metric_t) Rf_asInteger(METRIC);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, c_lengths, &c_points, c_METRIC));
+  PutRNGstate();
+
+                                        /* Convert output */
+
+  r_result = lengths;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_vertex_coloring_greedy              /
 /-------------------------------------------*/
 SEXP R_igraph_vertex_coloring_greedy(SEXP graph, SEXP heuristic) {
@@ -12770,7 +13301,7 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
   igraph_bool_t c_res;
-  igraph_neimode_t c_mode;
+
   SEXP res;
   SEXP mode;
 
@@ -12780,20 +13311,13 @@ SEXP R_igraph_is_bipartite_coloring(SEXP graph, SEXP types) {
   R_SEXP_to_vector_bool(types, &c_types);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, NULL));
+  IGRAPH_R_CHECK(igraph_is_bipartite_coloring(&c_graph, &c_types, &c_res, 0));
   PutRNGstate();
 
                                         /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, mode);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("mode"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);
@@ -12928,6 +13452,116 @@ SEXP R_igraph_version(void) {
   SET_STRING_ELT(r_names, 3, Rf_mkChar("subminor"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(5);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sample_sphere_surface               /
+/-------------------------------------------*/
+SEXP R_igraph_sample_sphere_surface(SEXP dim, SEXP n, SEXP radius, SEXP positive) {
+                                        /* Declarations */
+  igraph_integer_t c_dim;
+  igraph_integer_t c_n;
+  igraph_real_t c_radius;
+  igraph_bool_t c_positive;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_sphere_surface(c_dim, c_n, c_radius, c_positive, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sample_sphere_volume                /
+/-------------------------------------------*/
+SEXP R_igraph_sample_sphere_volume(SEXP dim, SEXP n, SEXP radius, SEXP positive) {
+                                        /* Declarations */
+  igraph_integer_t c_dim;
+  igraph_integer_t c_n;
+  igraph_real_t c_radius;
+  igraph_bool_t c_positive;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_sphere_volume(c_dim, c_n, c_radius, c_positive, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_sample_dirichlet                    /
+/-------------------------------------------*/
+SEXP R_igraph_sample_dirichlet(SEXP n, SEXP alpha) {
+                                        /* Declarations */
+  igraph_integer_t c_n;
+  igraph_vector_t c_alpha;
+  igraph_matrix_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  R_SEXP_to_vector(alpha, &c_alpha);
+  IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+                                        /* Call igraph */
+  GetRNGstate();
+  IGRAPH_R_CHECK(igraph_sample_dirichlet(c_n, &c_alpha, &c_res));
+  PutRNGstate();
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);

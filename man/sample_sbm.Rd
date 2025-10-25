@@ -5,13 +5,16 @@
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{
-sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
+sample_sbm(
+  pref.matrix,
+  block.sizes,
+  directed = FALSE,
+  allowed.edge.types = c("simple", "loops", "multi", "all")
+)
 
 sbm(...)
 }
 \arguments{
-\item{n}{Number of vertices in the graph.}
-
 \item{pref.matrix}{The matrix giving the Bernoulli rates.  This is a
 \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
 probability of creating an edge between vertices from groups \eqn{i} and
@@ -23,9 +26,11 @@ group. The sum of the vector must match the number of vertices.}
 
 \item{directed}{Logical scalar, whether to generate a directed graph.}
 
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
-
 \item{...}{Passed to \code{sample_sbm()}.}
+
+\item{n}{Number of vertices in the graph.}
+
+\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
 \value{
 An igraph graph.
@@ -85,5 +90,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game}{\code{sbm_game()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Games.html#igraph_sbm_game}{\code{sbm_game()}}.}
 

@@ -1,0 +1,24 @@
+From eb04b1de45d13baf0d7b78d09fe568a69745ecc3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Sun, 19 Oct 2025 16:22:43 +0200
+Subject: [PATCH] deps
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index 5ee970b5d8..560bf6157d 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -63,6 +63,7 @@ igraph_neighbors:
+     PARAMS: |-
+         GRAPH graph, OUT VERTEX_INDICES neis, VERTEX vid, NEIMODE mode=ALL,
+         LOOPS loops=TWICE, BOOLEAN multiple=True
++    DEPS: neis ON graph, vid ON graph
+     FLAGS: no_rng
+ 
+ igraph_is_directed:
+-- 
+2.50.1
+

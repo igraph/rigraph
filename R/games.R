@@ -938,10 +938,6 @@ sample_pa <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
-  }
-
   algorithm <- igraph.match.arg(algorithm)
   algorithm1 <- switch(
     algorithm,
@@ -1466,7 +1462,15 @@ degseq <- function(..., deterministic = FALSE) {
 #' g2 <- sample_growing(500, citation = TRUE)
 #'
 #' @cdocs igraph_growing_random_game
-sample_growing <- growing_random_game_impl
+sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
+  growing_random_game_impl(
+    n = n,
+    m = m,
+    ...,
+    directed = directed,
+    citation = citation
+  )
+}
 
 #' @rdname sample_growing
 #' @param ... Passed to `sample_growing()`.
@@ -1838,7 +1842,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' @return A graph object. If `coords` is `TRUE` then with vertex
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
-#' written by Keith Briggs (<http://keithbriggs.info/>).
+#' written by Keith Briggs (<https://keithbriggs.info/>).
 #' @family games
 #' @export
 #' @keywords graphs
@@ -2496,7 +2500,21 @@ sample_bipartite_gnp <- function(
 #' @family games
 #' @export
 #' @cdocs igraph_sbm_game
-sample_sbm <- sbm_game_impl
+sample_sbm <- function(
+  n,
+  pref.matrix,
+  block.sizes,
+  directed = FALSE,
+  loops = FALSE
+) {
+  sbm_game_impl(
+    n = n,
+    pref.matrix = pref.matrix,
+    block.sizes = block.sizes,
+    directed = directed,
+    loops = loops
+  )
+}
 
 #' @rdname sample_sbm
 #' @param ... Passed to `sample_sbm()`.
@@ -2625,7 +2643,12 @@ hierarchical_sbm <- function(...) {
 #' @family games
 #' @export
 #' @cdocs igraph_dot_product_game
-sample_dot_product <- dot_product_game_impl
+sample_dot_product <- function(vecs, directed = FALSE) {
+  dot_product_game_impl(
+    vecs = vecs,
+    directed = directed
+  )
+}
 
 #' @rdname sample_dot_product
 #' @param ... Passed to `sample_dot_product()`.
@@ -2657,7 +2680,14 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @family games
 #' @export
 #' @cdocs igraph_simple_interconnected_islands_game
-sample_islands <- simple_interconnected_islands_game_impl
+sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
+  simple_interconnected_islands_game_impl(
+    islands.n = islands.n,
+    islands.size = islands.size,
+    islands.pin = islands.pin,
+    n.inter = n.inter
+  )
+}
 
 
 #' Create a random regular graph
@@ -2696,7 +2726,19 @@ sample_islands <- simple_interconnected_islands_game_impl
 #' @family games
 #' @export
 #' @cdocs igraph_k_regular_game
-sample_k_regular <- k_regular_game_impl
+sample_k_regular <- function(
+  no.of.nodes,
+  k,
+  directed = FALSE,
+  multiple = FALSE
+) {
+  k_regular_game_impl(
+    no.of.nodes = no.of.nodes,
+    k = k,
+    directed = directed,
+    multiple = multiple
+  )
+}
 
 
 #' Random graph with given expected degrees
@@ -2845,7 +2887,21 @@ sample_k_regular <- k_regular_game_impl
 #' ))
 #' @export
 #' @cdocs igraph_chung_lu_game
-sample_chung_lu <- chung_lu_game_impl
+sample_chung_lu <- function(
+  out.weights,
+  in.weights = NULL,
+  ...,
+  loops = TRUE,
+  variant = c("original", "maxent", "nr")
+) {
+  chung_lu_game_impl(
+    out.weights = out.weights,
+    in.weights = in.weights,
+    ...,
+    loops = loops,
+    variant = variant
+  )
+}
 
 #' @rdname sample_chung_lu
 #' @export
@@ -2927,7 +2983,21 @@ chung_lu <- function(
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
 #' @cdocs igraph_static_fitness_game
-sample_fitness <- static_fitness_game_impl
+sample_fitness <- function(
+  no.of.edges,
+  fitness.out,
+  fitness.in = NULL,
+  loops = FALSE,
+  multiple = FALSE
+) {
+  static_fitness_game_impl(
+    no.of.edges = no.of.edges,
+    fitness.out = fitness.out,
+    fitness.in = fitness.in,
+    loops = loops,
+    multiple = multiple
+  )
+}
 
 
 #' Scale-free random graphs, from vertex fitness scores
@@ -2994,7 +3064,32 @@ sample_fitness <- static_fitness_game_impl
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
 #' @cdocs igraph_static_power_law_game
-sample_fitness_pl <- static_power_law_game_impl
+sample_fitness_pl <- function(
+  no.of.nodes,
+  no.of.edges,
+  exponent.out,
+  exponent.in = -1,
+  loops = FALSE,
+  multiple = FALSE,
+  finite.size.correction = TRUE
+) {
+  res <- static_power_law_game_impl(
+    no.of.nodes = no.of.nodes,
+    no.of.edges = no.of.edges,
+    exponent.out = exponent.out,
+    exponent.in = exponent.in,
+    loops = loops,
+    multiple = multiple,
+    finite.size.correction = finite.size.correction
+  )
+
+  if (igraph_opt("add.params")) {
+    res$loops <- loops
+    res$multiple <- multiple
+  }
+
+  res
+}
 
 
 #' Forest Fire Network Model
@@ -3032,7 +3127,7 @@ sample_fitness_pl <- static_power_law_game_impl
 #' @note The version of the model in the published paper is incorrect in the
 #' sense that it cannot generate the kind of graphs the authors claim. A
 #' corrected version is available from
-#' <http://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
+#' <https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
 #' implementation is based on this.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_pa()] for the basic preferential attachment
@@ -3057,7 +3152,21 @@ sample_fitness_pl <- static_power_law_game_impl
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 #' @cdocs igraph_forest_fire_game
-sample_forestfire <- forest_fire_game_impl
+sample_forestfire <- function(
+  nodes,
+  fw.prob,
+  bw.factor = 1,
+  ambs = 1,
+  directed = TRUE
+) {
+  forest_fire_game_impl(
+    nodes = nodes,
+    fw.prob = fw.prob,
+    bw.factor = bw.factor,
+    ambs = ambs,
+    directed = directed
+  )
+}
 
 
 #' Generate a new random graph from a given graph by randomly
@@ -3097,7 +3206,19 @@ sample_forestfire <- forest_fire_game_impl
 #' g
 #' g2
 #' @cdocs igraph_correlated_game
-sample_correlated_gnp <- correlated_game_impl
+sample_correlated_gnp <- function(
+  old.graph,
+  corr,
+  p = edge_density(old.graph),
+  permutation = NULL
+) {
+  correlated_game_impl(
+    old.graph = old.graph,
+    corr = corr,
+    p = p,
+    permutation = permutation
+  )
+}
 
 
 #' Sample a pair of correlated \eqn{G(n,p)} random graphs
@@ -3135,4 +3256,18 @@ sample_correlated_gnp <- correlated_game_impl
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 #' @cdocs igraph_correlated_pair_game
-sample_correlated_gnp_pair <- correlated_pair_game_impl
+sample_correlated_gnp_pair <- function(
+  n,
+  corr,
+  p,
+  directed = FALSE,
+  permutation = NULL
+) {
+  correlated_pair_game_impl(
+    n = n,
+    corr = corr,
+    p = p,
+    directed = directed,
+    permutation = permutation
+  )
+}
