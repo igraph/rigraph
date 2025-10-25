@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "stimulus"
+version = "0.21.5"
+description = "Experimental code generator for high-level interfaces of igraph"
+authors = [
+    "Gabor Csardi <csardi.gabor@gmail.com>",
+    "Tamas Nepusz <ntamas@gmail.com>",
+]
+packages = [{ include = "stimulus", from = "src" }]
+license = "GPL-2.0-or-later"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+PyYAML = "^6.0"
+deepmerge = "^0.3.0"
+jinja2 = "^3.1.2"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+stimulus = 'stimulus.__main__:main'
+
+[tool.ruff]
+ignore = ["B905", "C901", "E402", "E501"]
+line-length = 80
+select = ["B", "C", "E", "F", "W"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
