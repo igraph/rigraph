@@ -123,13 +123,13 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH 20419e6 UNW- 5 5 -- Event network
+#> IGRAPH 15fe958 UNW- 5 5 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 20419e6 (vertex names):
+#> + edges from 15fe958 (vertex names):
 #> [1] Alice--Bob   Alice--Dan   Bob  --Dan   Bob  --Ethel Dan  --Ethel
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH d726bf6 UNW- 3 2 -- Event network
+#> IGRAPH 3094024 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from d726bf6 (vertex names):
+#> + edges from 3094024 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

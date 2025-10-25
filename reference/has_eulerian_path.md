@@ -78,11 +78,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 763f5ee (vertex names):
+#> + 10/10 edges from 3296a8a (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 763f5ee:
+#> + 11/6 vertices, named, from 3296a8a:
 #>  [1] A B C D B F A E D F E
 #> 
 
