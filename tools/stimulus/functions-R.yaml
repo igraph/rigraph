@@ -1011,10 +1011,8 @@ igraph_minimum_spanning_tree:
     IGNORE: RR, RC, RInit
 
 igraph_minimum_spanning_tree_unweighted:
-    IGNORE: RR, RC
 
 igraph_minimum_spanning_tree_prim:
-    IGNORE: RR, RC
 
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
