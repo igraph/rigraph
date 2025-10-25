@@ -6374,7 +6374,7 @@ SEXP R_igraph_is_bipartite(SEXP graph) {
 /*-------------------------------------------/
 / igraph_bipartite_game_gnp                  /
 /-------------------------------------------*/
-SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP mode) {
+SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP mode, SEXP allowed_edge_types, SEXP edge_labeled) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
@@ -6383,6 +6383,8 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
   igraph_real_t c_p;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
+  igraph_edge_type_sw_t c_allowed_edge_types;
+  igraph_bool_t c_edge_labeled;
   SEXP graph;
   SEXP types;
 
@@ -6399,9 +6401,12 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_bipartite_game_gnp(&c_graph, &c_types, c_n1, c_n2, c_p, c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_bipartite_game_gnp(&c_graph, &c_types, c_n1, c_n2, c_p, c_directed, c_mode, c_allowed_edge_types, c_edge_labeled));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12600,14 +12605,12 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP weights, SEXP start, SEXP bfs_
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_basis);
-  if (!Rf_isNull(start)) {
-    c_start = (igraph_integer_t) REAL(start)[0];
-  }
+  c_start = (igraph_integer_t) REAL(start)[0];
   IGRAPH_R_CHECK_REAL(bfs_cutoff);
   c_bfs_cutoff = REAL(bfs_cutoff)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, (Rf_isNull(start) ? NULL : c_start), c_bfs_cutoff));
+  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, c_start, c_bfs_cutoff));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12915,12 +12918,10 @@ SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
   R_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_vector_int_init(&c_res, 0));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
-  if (!Rf_isNull(vid)) {
-    c_vid = (igraph_integer_t) REAL(vid)[0];
-  }
+  c_vid = (igraph_integer_t) REAL(vid)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? NULL : c_vid)));
+  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, c_vid));
   PutRNGstate();
 
                                         /* Convert output */
@@ -13212,15 +13213,20 @@ SEXP R_igraph_spatial_edge_lengths(SEXP graph, SEXP points, SEXP METRIC) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_lengths, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_lengths);
+  lengths=R_GlobalEnv; /* hack to have a non-NULL value */
   R_SEXP_to_matrix(points, &c_points);
   c_METRIC = (igraph_metric_t) Rf_asInteger(METRIC);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, c_lengths, &c_points, c_METRIC));
+  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, &c_lengths, &c_points, c_METRIC));
   PutRNGstate();
 
                                         /* Convert output */
-
+  PROTECT(lengths=R_igraph_0orvector_to_SEXP(&c_lengths));
+  igraph_vector_destroy(&c_lengths);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = lengths;
 
   UNPROTECT(1);

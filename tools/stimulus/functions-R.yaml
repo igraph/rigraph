@@ -522,13 +522,31 @@ igraph_bipartite_game_gnp:
     PARAMS: |-
         OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
         INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
-        NEIMODE mode=ALL
+        NEIMODE mode=ALL,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE, BOOLEAN edge_labeled=False
+    DEPS: types ON res$graph V(res$graph)
 
 igraph_bipartite_game:
     IGNORE: RR, RC
 
+igraph_bipartite_game_gnm:
+    DEPS: types ON res$graph V(res$graph)
+
+igraph_bipartite_iea_game:
+    DEPS: types ON res$graph V(res$graph)
+
+igraph_create_bipartite:
+    DEPS: types ON graph
+
+igraph_weighted_biadjacency:
+    DEPS: |-
+        weights ON res$graph E(res$graph), types ON res$graph V(res$graph)
+
 igraph_full_bipartite:
-    DEPS: types ON res$graph
+    PARAMS: |-
+        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
+        INTEGER n1, INTEGER n2, BOOLEAN directed=False, NEIMODE mode=ALL
+    DEPS: types ON res$graph V(res$graph)
 
 
 #######################################
@@ -986,6 +1004,14 @@ igraph_eulerian_cycle:
 
 igraph_minimum_cycle_basis:
 
+igraph_fundamental_cycles:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
+        OUT EDGE_INDICES_LIST basis,
+        VERTEX start=-1,
+        REAL bfs_cutoff=UNLIMITED
+    DEPS: weights ON graph, basis ON graph, start ON graph
+
 #######################################
 # Trees
 #######################################
@@ -993,6 +1019,10 @@ igraph_minimum_cycle_basis:
 igraph_is_tree:
     PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
     DEPS: root ON graph
+
+igraph_random_spanning_tree:
+    PARAMS: GRAPH graph, OUT EDGE_INDICES res, VERTEX vid=-1
+    DEPS: res ON graph, vid ON graph
 
 igraph_from_prufer:
     R:

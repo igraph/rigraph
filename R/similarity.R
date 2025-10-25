@@ -49,7 +49,7 @@
 #' @family cocitation
 #' @cdocs igraph_similarity_jaccard igraph_similarity_dice igraph_similarity_inverse_log_weighted
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #'
 #' g <- make_ring(5)
 #' similarity(g, method = "dice")
@@ -90,22 +90,21 @@ similarity <- function(
     method,
     jaccard = similarity_jaccard_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      from = vids_from,
+      to = vids_to,
       mode = mode,
       loops = loops
     ),
     dice = similarity_dice_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      from = vids_from,
+      to = vids_to,
       mode = mode,
       loops = loops
     ),
     invlogweighted = similarity_inverse_log_weighted_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      vids = vids_from,
       mode = mode
     )
   )

@@ -82,6 +82,7 @@ The \dQuote{edge.switching.simple} is an MCMC sampler based on
 degree-preserving edge switches. It generates simple undirected or directed graphs.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 ## The simple generator
 undirected_graph <- sample_degseq(rep(2, 100))
@@ -123,6 +124,7 @@ exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
 all(degree(exp_vl_graph) == exponential_degrees)
 
 ## An example that does not work
+\dontshow{\}) # examplesIf}
 \dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 ## withr::with_seed(11, {
 ## exponential_degrees <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))

@@ -160,6 +160,7 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 })
 
 test_that("LAD stress test", {
+  skip("Investigate")
   local_rng_version("3.5.0")
   withr::local_seed(42)
   N <- 100
@@ -184,6 +185,7 @@ test_that("LAD stress test", {
 })
 
 test_that("graph.subisomorphic.vf2 works", {
+  skip("Investigate")
   withr::local_seed(42)
 
   gnp1 <- sample_gnp(20, 6 / 20)

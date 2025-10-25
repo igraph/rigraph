@@ -201,6 +201,7 @@ clique.number <- function(graph) {
 #'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
+#' @param max.results FIXME
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
 #'   return a list containing numeric vectors of vertex ids. Each list element is
 #'   a clique, i.e. a vertex sequence of class [igraph.vs][V].
@@ -248,6 +249,7 @@ cliques <- function(graph, min = 0, max = 0) {
 }
 
 #' @rdname cliques
+#' @param weights FIXME
 #' @export
 #' @cdocs igraph_largest_cliques
 largest_cliques <- function(graph) {
@@ -398,6 +400,7 @@ clique_num <- function(graph) {
 #'   of the weighted clique finder supports positive integer weights only.
 #' @param maximal Specifies whether to look for all weighted cliques (`FALSE`)
 #'   or only the maximal ones (`TRUE`).
+#' @param max.results FIXME
 #' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
 #'   clique, i.e. a vertex sequence of class [igraph.vs][V].

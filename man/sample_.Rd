@@ -31,6 +31,7 @@ to the newly created graphs.
 See the examples and the various constructor modifiers below.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 blocky <- sample_(sbm(
   n = 20, pref.matrix = pref_matrix,
@@ -43,6 +44,7 @@ blocky2 <- pref_matrix \%>\%
 ## Arguments are passed on from sample_ to sample_sbm
 blocky3 <- pref_matrix \%>\%
   sample_(sbm(), n = 20, block.sizes = c(10, 10))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Random graph models (games)

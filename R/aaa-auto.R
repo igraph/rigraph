@@ -368,9 +368,7 @@ full_bipartite_impl <- function(n1, n2, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_bipartite, n1, n2, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
-    names(res$types) <- vertex_attr(res$graph, "name", )
-  }
+
   res
 }
 
@@ -2593,7 +2591,7 @@ bipartite_projection_size_impl <- function(graph, types=NULL) {
 
 create_bipartite_impl <- function(types, edges, directed=FALSE) {
   # Argument checks
-  types <- handle_vertex_type_arg(types, %I1%)
+  types <- handle_vertex_type_arg(types, graph)
   edges <- as.numeric(edges)
   directed <- as.logical(directed)
 
@@ -2629,8 +2627,8 @@ weighted_biadjacency_impl <- function(biadjmatrix, directed=FALSE, mode=c("all",
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_weighted_biadjacency, biadjmatrix, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", )
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
@@ -2668,17 +2666,20 @@ is_bipartite_impl <- function(graph) {
   res
 }
 
-bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "out", "in", "total")) {
+bipartite_game_gnp_impl <- function(n1, n2, p, directed=FALSE, mode=c("all", "out", "in", "total"), allowed.edge.types=c("simple", "loops", "multi", "all"), edge.labeled=FALSE) {
   # Argument checks
   n1 <- as.numeric(n1)
   n2 <- as.numeric(n2)
   p <- as.numeric(p)
   directed <- as.logical(directed)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
+    "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
+  edge.labeled <- as.logical(edge.labeled)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode)
+  res <- .Call(R_igraph_bipartite_game_gnp, n1, n2, p, directed, mode, allowed.edge.types, edge.labeled)
 
   res
 }
@@ -2697,8 +2698,8 @@ bipartite_game_gnm_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_game_gnm, n1, n2, m, directed, mode, allowed.edge.types, edge.labeled)
-  if (igraph_opt("add.vertex.names") && is_named()) {
-    names(res$types) <- vertex_attr(, "name", )
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
@@ -2714,8 +2715,8 @@ bipartite_iea_game_impl <- function(n1, n2, m, directed=FALSE, mode=c("all", "ou
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bipartite_iea_game, n1, n2, m, directed, mode)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", )
+  if (igraph_opt("add.vertex.names") && is_named(res$graph)) {
+    names(res$types) <- vertex_attr(res$graph, "name", V(res$graph))
   }
   res
 }
@@ -5377,7 +5378,7 @@ eulerian_cycle_impl <- function(graph) {
   res
 }
 
-fundamental_cycles_impl <- function(graph, weights=NULL, start=NULL, bfs.cutoff=UNLIMITED) {
+fundamental_cycles_impl <- function(graph, weights=NULL, start=-1, bfs.cutoff=UNLIMITED) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -5388,7 +5389,7 @@ fundamental_cycles_impl <- function(graph, weights=NULL, start=NULL, bfs.cutoff=
   } else {
     weights <- NULL
   }
-  if (!is.null(start)) start <- as_igraph_vs(graph, start)
+  start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
     stop("No vertex was specified")
   }
@@ -5529,10 +5530,10 @@ minimum_spanning_tree_impl <- function(graph, weights=NULL, method=c("automatic"
   res
 }
 
-random_spanning_tree_impl <- function(graph, vid=NULL) {
+random_spanning_tree_impl <- function(graph, vid=-1) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)
+  vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
     stop("No vertex was specified")
   }

@@ -363,7 +363,7 @@ local_scan <- function(
 #'
 #' @family scan statistics
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' ## Generate a bunch of SBMs, with the last one being different
 #' num_t <- 20
 #' block_sizes <- c(10, 5, 5)

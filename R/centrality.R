@@ -26,6 +26,11 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' `page.rank()` was renamed to [page_rank()] to create a more
 #' consistent API.
 #' @inheritParams page_rank
+#' @param personalized Optional vector giving a probability distribution to
+#'   calculate personalized PageRank. For personalized PageRank, the probability
+#'   of jumping to a node when abandoning the random walk is not uniform, but it
+#'   is given by this vector. The vector should contains an entry for each vertex
+#'   and it will be rescaled to sum up to one.
 #' @keywords internal
 #' @export
 page.rank <- function(
@@ -40,13 +45,19 @@ page.rank <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+
+  if (lifecycle::is_present(personalized)) {
+    cli::cli_warn(
+      "The {.arg personalized} argument is deprecated and will be ignored."
+    )
+  }
+
   page_rank(
     graph = graph,
     algo = algo,
     vids = vids,
     directed = directed,
     damping = damping,
-    personalized = personalized,
     weights = weights,
     options = options
   )
@@ -446,40 +457,14 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_betweenness_cutoff,
+  betweenness_cutoff_impl(
     graph,
-    v - 1,
-    directed,
-    weights,
-    cutoff
+    v = v,
+    directed = directed,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )
-  if (normalized) {
-    vc <- as.numeric(vcount(graph))
-    if (is_directed(graph) && directed) {
-      res <- res / (vc * vc - 3 * vc + 2)
-    } else {
-      res <- 2 * res / (vc * vc - 3 * vc + 2)
-    }
-  }
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
-  }
-  res
 }
 
 #' @rdname betweenness
@@ -495,27 +480,14 @@ edge_betweenness <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  e <- as_igraph_es(graph, e)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_edge_betweenness_cutoff,
+  res <- edge_betweenness_cutoff_impl(
     graph,
-    directed,
-    weights,
-    cutoff
+    weights = weights,
+    eids = e,
+    directed = directed,
+    cutoff = cutoff
   )
+
   res[as.numeric(e)]
 }
 
@@ -1735,11 +1707,7 @@ hub_score <- function(
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
-#' @param personalized Optional vector giving a probability distribution to
-#'   calculate personalized PageRank. For personalized PageRank, the probability
-#'   of jumping to a node when abandoning the random walk is not uniform, but it
-#'   is given by this vector. The vector should contains an entry for each vertex
-#'   and it will be rescaled to sum up to one.
+#' @param reset FIXME
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted PageRank of vertices. If
 #'   this is `NULL` and the graph has a `weight` edge attribute then
@@ -1773,7 +1741,7 @@ hub_score <- function(
 #' Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
 #' Conference, Brisbane, Australia, April 1998.
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' page_rank(g)$vector

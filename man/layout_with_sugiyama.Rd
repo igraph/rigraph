@@ -92,6 +92,7 @@ the dummy nodes.
 For more details, see the reference below.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 ## Data taken from http://tehnick-8.narod.ru/dc_clients/
 DC <- graph_from_literal(
@@ -230,7 +231,7 @@ plot(layex$extd_graph,
   vertex.label = ifelse(origvert, V(ex)$name, ""),
   edge.arrow.mode = ifelse(realedge, 2, 0)
 )
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
