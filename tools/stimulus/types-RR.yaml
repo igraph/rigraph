@@ -281,6 +281,10 @@ ISOCOMPAT_FUNC:
     CALL: {}
     HEADER: ~
 
+ISOMORPHISM_FUNC:
+    CALL: {}
+    HEADER: ~
+
 VERTEXSET_LIST:
     CALL: lapply(%I%, function(.x) .x-1)
     OUTCONV:
