@@ -67,14 +67,46 @@
 #' global_efficiency(g)
 #' average_local_efficiency(g)
 #' @cdocs igraph_global_efficiency
-global_efficiency <- global_efficiency_impl
+global_efficiency <- function(graph, weights = NULL, directed = TRUE) {
+  global_efficiency_impl(
+    graph = graph,
+    weights = weights,
+    directed = directed
+  )
+}
 
 #' @rdname global_efficiency
 #' @export
 #' @cdocs igraph_local_efficiency
-local_efficiency <- local_efficiency_impl
+local_efficiency <- function(
+  graph,
+  vids = V(graph),
+  weights = NULL,
+  directed = TRUE,
+  mode = c("all", "out", "in", "total")
+) {
+  local_efficiency_impl(
+    graph = graph,
+    vids = vids,
+    weights = weights,
+    directed = directed,
+    mode = mode
+  )
+}
 
 #' @rdname global_efficiency
 #' @export
 #' @cdocs igraph_average_local_efficiency
-average_local_efficiency <- average_local_efficiency_impl
+average_local_efficiency <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  mode = c("all", "out", "in", "total")
+) {
+  average_local_efficiency_impl(
+    graph = graph,
+    weights = weights,
+    directed = directed,
+    mode = mode
+  )
+}
