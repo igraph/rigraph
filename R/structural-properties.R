@@ -1433,7 +1433,15 @@ all_shortest_paths <- function(
 #' @seealso [shortest_paths()], [all_shortest_paths()]
 #' @keywords graphs
 #' @cdocs igraph_get_k_shortest_paths
-k_shortest_paths <- function(graph, from, to, k, ..., weights = NULL, mode = c("out", "in", "all", "total")) {
+k_shortest_paths <- function(
+  graph,
+  from,
+  to,
+  k,
+  ...,
+  weights = NULL,
+  mode = c("out", "in", "all", "total")
+) {
   get_k_shortest_paths_impl(
     graph = graph,
     from = from,
@@ -1913,7 +1921,11 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' reciprocity(g)
 #'
 #' @cdocs igraph_reciprocity
-reciprocity <- function(graph, ignore.loops = TRUE, mode = c("default", "ratio")) {
+reciprocity <- function(
+  graph,
+  ignore.loops = TRUE,
+  mode = c("default", "ratio")
+) {
   reciprocity_impl(
     graph = graph,
     ignore.loops = ignore.loops,
@@ -2278,7 +2290,11 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo = "approx_eades")
 #' @cdocs igraph_feedback_arc_set
-feedback_arc_set <- function(graph, weights = NULL, algo = c("approx_eades", "exact_ip")) {
+feedback_arc_set <- function(
+  graph,
+  weights = NULL,
+  algo = c("approx_eades", "exact_ip")
+) {
   feedback_arc_set_impl(
     graph = graph,
     weights = weights,
@@ -3538,7 +3554,13 @@ which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
 #' @family structural.properties
 #' @export
 #' @cdocs igraph_avg_nearest_neighbor_degree
-knn <- function(graph, vids = V(graph), mode = c("all", "out", "in", "total"), neighbor.degree.mode = c("all", "out", "in", "total"), weights = NULL) {
+knn <- function(
+  graph,
+  vids = V(graph),
+  mode = c("all", "out", "in", "total"),
+  neighbor.degree.mode = c("all", "out", "in", "total"),
+  weights = NULL
+) {
   avg_nearest_neighbor_degree_impl(
     graph = graph,
     vids = vids,
