@@ -22,7 +22,8 @@ switch_igraph_arg <- function(
   error_call = rlang::caller_env()
 ) {
   values <- ...names()
-  igraph.match.arg(arg, values, error_call = error_call)
+  match <- igraph.match.arg(arg, values, error_call = error_call)
+  switch(match, ...)
 }
 
 igraph.match.arg <- function(
