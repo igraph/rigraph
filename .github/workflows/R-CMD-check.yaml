@@ -68,10 +68,13 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Update status for rcc
+        if: github.actor != 'github-copilot[bot]'
         # FIXME: Wrap into action
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Actor: ${{ github.actor }}"
+
           # Check status of this workflow
           state="pending"
           sha=${{ inputs.ref }}
@@ -171,7 +174,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always()
+        if: always() && (github.actor != 'github-copilot[bot]')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -190,6 +193,35 @@ jobs:
             sha=${{ github.sha }}
           fi
             sha=$(git rev-parse ${sha})
+
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
+
+      - name: Update status for rcc (Copilot)
+        # Update status directly when triggered by Copilot or bots, since they can't dispatch workflows
+        if: always() && (github.actor == 'github-copilot[bot]')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check status of this workflow
+          state="pending"
+          sha=${{ inputs.ref }}
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+          sha=$(git rev-parse ${sha})
 
           html_url=$(gh api \
             -H "Accept: application/vnd.github+json" \
