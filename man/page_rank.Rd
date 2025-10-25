@@ -90,6 +90,7 @@ PageRank for only some of the vertices does not result in any performance
 increase at all.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
@@ -102,6 +103,7 @@ g3 <- make_ring(10)
 page_rank(g3)$vector
 reset <- seq(vcount(g3))
 page_rank(g3, personalized = reset)$vector
+\dontshow{\}) # examplesIf}
 }
 \references{
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale

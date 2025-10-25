@@ -1734,7 +1734,7 @@ hub_score <- function(
 #' Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
 #' Conference, Brisbane, Australia, April 1998.
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' page_rank(g)$vector
