@@ -3237,7 +3237,11 @@ communities <- groups.communities
 #' @export
 #' @family functions for manipulating graph structure
 #' @cdocs igraph_contract_vertices
-contract <- function(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb")) {
+contract <- function(
+  graph,
+  mapping,
+  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+) {
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
@@ -3289,7 +3293,14 @@ contract <- function(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.
 #' @export
 #' @family community
 #' @cdocs igraph_voronoi
-voronoi_cells <- function(graph, generators, ..., weights = NULL, mode = c("out", "in", "all", "total"), tiebreaker = c("random", "first", "last")) {
+voronoi_cells <- function(
+  graph,
+  generators,
+  ...,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  tiebreaker = c("random", "first", "last")
+) {
   voronoi_impl(
     graph = graph,
     generators = generators,
