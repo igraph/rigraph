@@ -19,19 +19,28 @@ ensure_igraph <- function(graph, optional = FALSE) {
 switch_igraph_arg <- function(
   arg,
   ...,
-  error_call = rlang::caller_env()
+  .error_arg = rlang::caller_arg(arg),
+  .error_call = rlang::caller_env()
 ) {
-  values <- ...names()
-  match <- igraph.match.arg(arg, values, error_call = error_call)
+  values <- tolower(...names())
+  if (length(arg) > 1) {
+    values <- intersect(values, tolower(arg))
+  }
+  match <- igraph.match.arg(
+    arg,
+    values,
+    error_arg = .error_arg,
+    error_call = .error_call
+  )
   switch(match, ...)
 }
 
 igraph.match.arg <- function(
   arg,
   values,
+  error_arg = rlang::caller_arg(arg),
   error_call = rlang::caller_env()
 ) {
-  error_arg <- rlang::caller_arg(arg)
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
