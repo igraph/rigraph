@@ -472,38 +472,35 @@ isomorphic <- function(
 
 #' @export
 #' @cdocs igraph_isomorphic_bliss
-graph.isomorphic.bliss <- function(graph1, graph2, colors1 = NULL, colors2 = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) {
-  isomorphic_bliss_impl(
-    graph1 = graph1,
-    graph2 = graph2,
-    colors1 = colors1,
-    colors2 = colors2,
-    sh = sh
-  )
+graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh) {
+  args <- list(graph1 = graph1, graph2 = graph2)
+  if (!missing(colors1)) args$colors1 <- colors1
+  if (!missing(colors2)) args$colors2 <- colors2
+  if (!missing(sh)) args$sh <- sh
+
+  do.call(isomorphic_bliss_impl, args)
 }
 #' @export
 #' @cdocs igraph_isomorphic_vf2
-graph.isomorphic.vf2 <- function(graph1, graph2, vertex.color1 = NULL, vertex.color2 = NULL, edge.color1 = NULL, edge.color2 = NULL) {
-  isomorphic_vf2_impl(
-    graph1 = graph1,
-    graph2 = graph2,
-    vertex.color1 = vertex.color1,
-    vertex.color2 = vertex.color2,
-    edge.color1 = edge.color1,
-    edge.color2 = edge.color2
-  )
+graph.isomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+  args <- list(graph1 = graph1, graph2 = graph2)
+  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
+  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
+  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
+  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
+
+  do.call(isomorphic_vf2_impl, args)
 }
 #' @export
 #' @cdocs igraph_subisomorphic_vf2
-graph.subisomorphic.vf2 <- function(graph1, graph2, vertex.color1 = NULL, vertex.color2 = NULL, edge.color1 = NULL, edge.color2 = NULL) {
-  subisomorphic_vf2_impl(
-    graph1 = graph1,
-    graph2 = graph2,
-    vertex.color1 = vertex.color1,
-    vertex.color2 = vertex.color2,
-    edge.color1 = edge.color1,
-    edge.color2 = edge.color2
-  )
+graph.subisomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+  args <- list(graph1 = graph1, graph2 = graph2)
+  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
+  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
+  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
+  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
+
+  do.call(subisomorphic_vf2_impl, args)
 }
 
 #' @export
@@ -678,7 +675,15 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 
 #' @export
 #' @cdocs igraph_count_isomorphisms_vf2
-graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
+graph.count.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+  args <- list(graph1 = graph1, graph2 = graph2)
+  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
+  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
+  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
+  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
+
+  do.call(count_isomorphisms_vf2_impl, args)
+}
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
 #' another graph
@@ -761,7 +766,15 @@ count_subgraph_isomorphisms <- function(
 
 #' @export
 #' @cdocs igraph_count_subisomorphisms_vf2
-graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
+graph.count.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+  args <- list(graph1 = graph1, graph2 = graph2)
+  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
+  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
+  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
+  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
+
+  do.call(count_subisomorphisms_vf2_impl, args)
+}
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
 #'
@@ -893,7 +906,9 @@ isomorphism_class <- function(graph, v) {
 
 #' @export
 #' @cdocs igraph_isoclass
-graph.isoclass <- isoclass_impl
+graph.isoclass <- function(graph) {
+  isoclass_impl(graph = graph)
+}
 
 #' Create a graph from an isomorphism class
 #'
