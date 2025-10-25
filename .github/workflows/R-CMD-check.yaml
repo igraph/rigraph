@@ -69,7 +69,6 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -175,7 +174,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always() && github.event_name == 'workflow_dispatch'
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
