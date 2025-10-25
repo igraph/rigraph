@@ -81,9 +81,17 @@ has_eulerian_cycle <- function(graph) {
 #' @rdname has_eulerian_path
 #' @export
 #' @cdocs igraph_eulerian_path
-eulerian_path <- eulerian_path_impl
+eulerian_path <- function(graph) {
+  eulerian_path_impl(
+    graph = graph
+  )
+}
 
 #' @rdname has_eulerian_path
 #' @export
 #' @cdocs igraph_eulerian_cycle
-eulerian_cycle <- eulerian_cycle_impl
+eulerian_cycle <- function(graph) {
+  eulerian_cycle_impl(
+    graph = graph
+  )
+}
