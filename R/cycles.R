@@ -50,7 +50,9 @@
 #' @cdocs igraph_find_cycle
 #' @export
 
-find_cycle <- find_cycle_impl
+find_cycle <- function(...) {
+  find_cycle_impl(...)
+}
 
 
 #' Finds all simple cycles in a graph.
