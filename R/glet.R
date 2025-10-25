@@ -147,6 +147,12 @@ graphlet_basis <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
+  # Call the implementation but ensure we get plain integer vectors
+  # instead of vertex sequences
+  old_opt <- igraph_opt("return.vs.es")
+  on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
+  igraph_options(return.vs.es = FALSE)
+  
   graphlets_candidate_basis_impl(graph, weights)
 }
 
@@ -172,6 +178,12 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
+  # Call the implementation but ensure we get plain integer vectors
+  # instead of vertex sequences
+  old_opt <- igraph_opt("return.vs.es")
+  on.exit(igraph_options(return.vs.es = old_opt), add = TRUE)
+  igraph_options(return.vs.es = FALSE)
+  
   graphlets_project_impl(graph, weights, cliques, Mu, FALSE, niter)
 }
 
