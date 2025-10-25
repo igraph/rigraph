@@ -474,7 +474,7 @@ isomorphic <- function(
 #' @cdocs igraph_isomorphic_bliss
 graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh) {
   if (missing(sh)) sh <- c("fm", "f", "fs", "fl", "flm", "fsm")
-  
+
   if (missing(colors1) && missing(colors2)) {
     isomorphic_bliss_impl(
       graph1 = graph1,
@@ -513,7 +513,7 @@ graph.isomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, e
   if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
   if (!missing(edge.color1)) args$edge.color1 <- edge.color1
   if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-  
+
   do.call(isomorphic_vf2_impl, args)
 }
 #' @export
@@ -524,7 +524,7 @@ graph.subisomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2
   if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
   if (!missing(edge.color1)) args$edge.color1 <- edge.color1
   if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-  
+
   do.call(subisomorphic_vf2_impl, args)
 }
 
@@ -706,7 +706,7 @@ graph.count.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1, vertex.c
   if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
   if (!missing(edge.color1)) args$edge.color1 <- edge.color1
   if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-  
+
   do.call(count_isomorphisms_vf2_impl, args)
 }
 
@@ -797,7 +797,7 @@ graph.count.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1, verte
   if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
   if (!missing(edge.color1)) args$edge.color1 <- edge.color1
   if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-  
+
   do.call(count_subisomorphisms_vf2_impl, args)
 }
 
@@ -1071,7 +1071,7 @@ graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
 #' @cdocs igraph_canonical_permutation
 canonical_permutation <- function(graph, colors, sh) {
   if (missing(sh)) sh <- c("fm", "f", "fs", "fl", "flm", "fsm")
-  
+
   if (missing(colors)) {
     canonical_permutation_impl(
       graph = graph,
@@ -1228,7 +1228,7 @@ graph.isomorphic <- function(graph1, graph2) {
 #' @cdocs igraph_count_automorphisms
 count_automorphisms <- function(graph, colors, sh) {
   if (missing(sh)) sh <- c("fm", "f", "fs", "fl", "flm", "fsm")
-  
+
   if (missing(colors)) {
     count_automorphisms_impl(
       graph = graph,
@@ -1319,7 +1319,7 @@ count_automorphisms <- function(graph, colors, sh) {
 automorphism_group <- function(graph, colors, sh, details) {
   if (missing(sh)) sh <- c("fm", "f", "fs", "fl", "flm", "fsm")
   if (missing(details)) details <- FALSE
-  
+
   if (missing(colors)) {
     automorphism_group_impl(
       graph = graph,
