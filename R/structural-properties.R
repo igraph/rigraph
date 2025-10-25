@@ -1433,7 +1433,25 @@ all_shortest_paths <- function(
 #' @seealso [shortest_paths()], [all_shortest_paths()]
 #' @keywords graphs
 #' @cdocs igraph_get_k_shortest_paths
-k_shortest_paths <- get_k_shortest_paths_impl
+k_shortest_paths <- function(
+  graph,
+  from,
+  to,
+  k,
+  ...,
+  weights = NULL,
+  mode = c("out", "in", "all", "total")
+) {
+  get_k_shortest_paths_impl(
+    graph = graph,
+    from = from,
+    to = to,
+    k = k,
+    ...,
+    weights = weights,
+    mode = mode
+  )
+}
 
 #' In- or out- component of a vertex
 #'
@@ -1903,7 +1921,17 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' reciprocity(g)
 #'
 #' @cdocs igraph_reciprocity
-reciprocity <- reciprocity_impl
+reciprocity <- function(
+  graph,
+  ignore.loops = TRUE,
+  mode = c("default", "ratio")
+) {
+  reciprocity_impl(
+    graph = graph,
+    ignore.loops = ignore.loops,
+    mode = mode
+  )
+}
 
 
 #' Graph density
@@ -1944,7 +1972,12 @@ reciprocity <- reciprocity_impl
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
 #' @cdocs igraph_density
-edge_density <- density_impl
+edge_density <- function(graph, loops = FALSE) {
+  density_impl(
+    graph = graph,
+    loops = loops
+  )
+}
 
 #' @rdname ego
 #' @export
@@ -2257,7 +2290,17 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo = "approx_eades")
 #' @cdocs igraph_feedback_arc_set
-feedback_arc_set <- feedback_arc_set_impl
+feedback_arc_set <- function(
+  graph,
+  weights = NULL,
+  algo = c("approx_eades", "exact_ip")
+) {
+  feedback_arc_set_impl(
+    graph = graph,
+    weights = weights,
+    algo = algo
+  )
+}
 
 #' Finding a feedback vertex set in a graph
 #'
@@ -2288,7 +2331,13 @@ feedback_arc_set <- feedback_arc_set_impl
 #' g <- make_lattice(c(3,3))
 #' feedback_vertex_set(g)
 #' @cdocs igraph_feedback_vertex_set
-feedback_vertex_set <- feedback_vertex_set_impl
+feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
+  feedback_vertex_set_impl(
+    graph = graph,
+    weights = weights,
+    algo = algo
+  )
+}
 
 #' Girth of a graph
 #'
@@ -2415,23 +2464,46 @@ girth <- function(graph, circle = TRUE) {
 #' E(g)$weight
 #'
 #' @cdocs igraph_is_multiple
-which_multiple <- is_multiple_impl
+which_multiple <- function(graph, eids = E(graph)) {
+  is_multiple_impl(
+    graph = graph,
+    eids = eids
+  )
+}
 #' @rdname which_multiple
 #' @export
 #' @cdocs igraph_has_multiple
-any_multiple <- has_multiple_impl
+any_multiple <- function(graph) {
+  has_multiple_impl(
+    graph = graph
+  )
+}
 #' @rdname which_multiple
 #' @export
 #' @cdocs igraph_count_multiple
-count_multiple <- count_multiple_impl
+count_multiple <- function(graph, eids = E(graph)) {
+  count_multiple_impl(
+    graph = graph,
+    eids = eids
+  )
+}
 #' @rdname which_multiple
 #' @export
 #' @cdocs igraph_is_loop
-which_loop <- is_loop_impl
+which_loop <- function(graph, eids = E(graph)) {
+  is_loop_impl(
+    graph = graph,
+    eids = eids
+  )
+}
 #' @rdname which_multiple
 #' @export
 #' @cdocs igraph_has_loop
-any_loop <- has_loop_impl
+any_loop <- function(graph) {
+  has_loop_impl(
+    graph = graph
+  )
+}
 
 
 #' Breadth-first search
@@ -3018,7 +3090,12 @@ components <- function(graph, mode = c("weak", "strong")) {
 #' @rdname components
 #' @export
 #' @cdocs igraph_is_connected
-is_connected <- is_connected_impl
+is_connected <- function(graph, mode = c("weak", "strong")) {
+  is_connected_impl(
+    graph = graph,
+    mode = mode
+  )
+}
 
 #' @rdname components
 #' @export
@@ -3393,7 +3470,13 @@ max_bipartite_match <- function(
 #' @family structural.properties
 #' @export
 #' @cdocs igraph_is_mutual
-which_mutual <- is_mutual_impl
+which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
+  is_mutual_impl(
+    graph = graph,
+    eids = eids,
+    loops = loops
+  )
+}
 
 
 #' Average nearest neighbor degree
@@ -3471,4 +3554,18 @@ which_mutual <- is_mutual_impl
 #' @family structural.properties
 #' @export
 #' @cdocs igraph_avg_nearest_neighbor_degree
-knn <- avg_nearest_neighbor_degree_impl
+knn <- function(
+  graph,
+  vids = V(graph),
+  mode = c("all", "out", "in", "total"),
+  neighbor.degree.mode = c("all", "out", "in", "total"),
+  weights = NULL
+) {
+  avg_nearest_neighbor_degree_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    neighbor.degree.mode = neighbor.degree.mode,
+    weights = weights
+  )
+}
