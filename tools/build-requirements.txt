@@ -3,4 +3,4 @@
 # environment to detect when to re-create the virtualenv so the hash
 # needs to change whenever a package is updated.
 
-git+https://github.com/krlmlr/stimulus@r#egg=stimulus
+./tools/py-stimulus/
