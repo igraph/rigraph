@@ -52,12 +52,12 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> IGRAPH a69e4bf U--- 5 10 -- Full graph
+#> IGRAPH 0d5a765 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from a69e4bf:
+#> + edges from 0d5a765:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH 01cc0bf D--- 4 12 -- Full graph
+#> IGRAPH d8992c4 D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

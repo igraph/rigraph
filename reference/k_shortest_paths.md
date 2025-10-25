@@ -11,8 +11,8 @@ k_shortest_paths(
   graph,
   from,
   to,
-  ...,
   k,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total")
 )
@@ -32,14 +32,14 @@ k_shortest_paths(
 
   The target vertex of the shortest paths.
 
-- ...:
-
-  These dots are for future extensions and must be empty.
-
 - k:
 
   The number of paths to find. They will be returned in order of
   increasing length.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - weights:
 
