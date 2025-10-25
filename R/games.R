@@ -2982,7 +2982,7 @@ chung_lu <- function(
 #' @keywords graphs
 #' @family games
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #'
 #' N <- 10000
 #' g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
