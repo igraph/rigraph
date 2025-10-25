@@ -1,0 +1,146 @@
+# Installation troubleshooting
+
+This page details common problems encountered when trying to install
+igraph. If you did not find an answer to your problem here, feel free to
+ask for help on <https://igraph.discourse.group/>. When you do so, be
+sure to state:
+
+1.  the output of
+    [`sessionInfo()`](https://rdrr.io/r/utils/sessionInfo.html)
+2.  where you obtained R from
+3.  the complete output from running `install.packages("igraph")` in a
+    fresh R session
+
+## Cannot compile igraph from sources on Windows or macOS
+
+Do not compile igraph from sources, unless you know what you are doing!
+It is much more convenient to use the binaries from CRAN instead. These
+can be installed using `install.packages("igraph")`.
+
+Usually, it takes a few days for binary releases to become available on
+CRAN after each new igraph source release. During this period,
+[`install.packages()`](https://rdrr.io/r/utils/install.packages.html)
+will give you a choice about using the latest source release or the
+previous binary release. Just choose to use the binary release,
+i.e. respond “no” to “Do you want to install from sources?”
+
+    > install.packages('igraph')
+
+      There is a binary version available but the source
+      version is later:
+           binary source needs_compilation
+    igraph  1.2.7  1.2.8              TRUE
+
+    Do you want to install from sources the package which needs compilation? (Yes/no/cancel) no
+
+CRAN provides Windows and macOS binaries only for the last two minor
+releases of R (e.g. 4.5 and 4.4), but not for older ones (e.g. 4.3).
+Make sure that you are using one of these supported R versions. Refer to
+<https://r-project.org/> to find out what the latest R version is at the
+moment.
+
+Note that the pre-compiled binaries on CRAN are only compatible with the
+R distribution [provided by CRAN itself](https://www.r-project.org/). If
+you obtained R from different sources, such as Homebrew or MacPorts on
+macOS, you will not be able to use these, and the only way to install
+packages will be to compile them from sources.
+
+#### I still want to compile igraph from sources
+
+If you decide to try to compile from sources anyway, basic requirements
+are listed below. It is assumed that you are comfortable compiling
+software from sources and resolving basic issues as they arise.
+Otherwise, please use the binaries.
+
+- Make sure you have a compatible toolchain installed, including a
+  Fortran compiler. On macOS, make sure you have Xcode and [`gfortran`
+  from here](https://cran.r-project.org/bin/macosx/tools/). For Windows,
+  you will need Rtools.
+- On Windows, see the [instructions for installing Rtools for your
+  version of R](https://cran.r-project.org/bin/windows/Rtools/). Check
+  the “Using pacman” link in the [Rtools 4.0
+  instructions](https://cran.r-project.org/bin/windows/Rtools/rtools40.html).
+  You will find a [copyable pacman command for installing all
+  dependencies](https://github.com/igraph/rigraph/#installation).
+- On Windows, make sure you have the GLPK C library installed. This is
+  not the same as the Rglpk R package. Instructions for installing
+  libraries for Rtools4 on Windows are
+  [here](https://cran.r-project.org/bin/windows/Rtools/)
+
+## Cannot compile igraph from sources on Linux
+
+Since CRAN does not provide binary packages for Linux, Linux users
+usually need to compile igraph from sources. In order to do so, make
+sure that you have all the prerequisites:
+
+- C, C++ and Fortran compilers. On Debian-based distros, use
+  `sudo apt install build-essential gfortran`. On Fedora, use
+  `yum install gcc gcc-c++ gcc-gfortran`.
+- Development packages for `glpk` and `libxml2`. On Debian-based
+  distros, use `sudo apt install libglpk-dev libxml2-dev`. On Fedora,
+  use `yum install glpk-devel libxml2-devel`.
+
+If you have an Anaconda environment active, deactivate it *before*
+compiling igraph. Having conda environments active are known to cause a
+number of issues, both during compilation and later during usage.
+
+Set up your Anaconda installation so no environment is active by
+default. Make sure that Anaconda’s `bin` directory is *not* present in
+your `PATH` environment variable. [Do not add this directory to the path
+manually. Instead, let Anaconda manage it using `conda init`, as
+recommended by
+Anaconda.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path)
+Only Anaconda’s `condabin`, *but not `bin`*, should be present in the
+`PATH`.
+
+## fatal error: glpk.h: No such file or directory
+
+If you are using Windows or macOS, please refer to [Cannot compile
+igraph from sources on Windows or
+macOS](#cannot-compile-igraph-from-sources-on-windows-or-macos).
+
+If you are using Linux, please refer to [Cannot compile igraph from
+sources on Linux](#cannot-compile-igraph-from-sources-on-linux).
+
+## libgfortran.so.4: cannot open shared object file: No such file or directory
+
+This problem occurs when there are multiple incompatible gfortran
+versions on your machine. Most commonly, one of them comes from an
+active Anaconda environment. Always deactivate all Anaconda environments
+using `conda deactivate` before installing igraph using
+[`install.packages()`](https://rdrr.io/r/utils/install.packages.html).
+
+Set up your Anaconda installation so no environment is active by
+default. Make sure that Anaconda’s `bin` directory is *not* present in
+your `PATH` environment variable. [Do not add this directory to the path
+manually. Instead, let Anaconda manage it using `conda init`, as
+recommended by
+Anaconda.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path)
+Only Anaconda’s `condabin`, *but not `bin`*, should be present in the
+`PATH`.
+
+## libmkl_rt.so.1: cannot open shared object file: No such file or directory
+
+This issue typically occurs when an Anaconda environment containing
+conflicting BLAS libraries is active. Please refer to the instructions
+in the section “libgfortran.so.4: cannot open shared object file”.
+
+## libglpk.so.40: cannot open shared object file: No such file or directory
+
+This error will occur on Linux systems when igraph was compiled with
+GLPK support, but GLPK is not currently installed on the system. To
+resolve it, install GLPK. On Debian-based systems, simply use
+`sudo apt install libglpk40`.
+
+This may happen when a binary version of igraph is installed from
+<https://packagemanager.rstudio.com>. These binaries assume that GLPK is
+present on your system.
+
+## GLPK is not available, Unimplemented function call
+
+This error occurs when calling an igraph function that relies on GLPK,
+but igraph was compiled without GLPK support. This cannot happen in
+igraph 2.0.3 and later. If you are compiling an earlier version, please
+refer to [“Cannot compile igraph from sources on
+Linux”](#cannot-compile-igraph-from-sources-on-linux) for instructions
+on compiling igraph with GLPK support.

@@ -1,0 +1,169 @@
+# Canonical permutation of a graph
+
+The canonical permutation brings every isomorphic graphs into the same
+(labeled) graph.
+
+## Usage
+
+``` r
+canonical_permutation(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+)
+```
+
+## Arguments
+
+- graph:
+
+  The input graph, treated as undirected.
+
+- colors:
+
+  The colors of the individual vertices of the graph; only vertices
+  having the same color are allowed to match each other in an
+  automorphism. When omitted, igraph uses the `color` attribute of the
+  vertices, or, if there is no such vertex attribute, it simply assumes
+  that all vertices have the same color. Pass NULL explicitly if the
+  graph has a `color` vertex attribute but you do not want to use it.
+
+- sh:
+
+  Type of the heuristics to use for the BLISS algorithm. See details for
+  possible values.
+
+## Value
+
+A list with the following members:
+
+- labeling:
+
+  The canonical permutation which takes the input graph into canonical
+  form. A numeric vector, the first element is the new label of vertex
+  0, the second element for vertex 1, etc.
+
+- info:
+
+  Some information about the BLISS computation. A named list with the
+  following members:
+
+  "nof_nodes"
+
+  :   The number of nodes in the search tree.
+
+  "nof_leaf_nodes"
+
+  :   The number of leaf nodes in the search tree.
+
+  "nof_bad_nodes"
+
+  :   Number of bad nodes.
+
+  "nof_canupdates"
+
+  :   Number of canrep updates.
+
+  "max_level"
+
+  :   Maximum level.
+
+  "group_size"
+
+  :   The size of the automorphism group of the input graph, as a
+      string. The string representation is necessary because the group
+      size can easily exceed values that are exactly representable in
+      floating point.
+
+## Details
+
+`canonical_permutation()` computes a permutation which brings the graph
+into canonical form, as defined by the BLISS algorithm. All isomorphic
+graphs have the same canonical form.
+
+See the paper below for the details about BLISS. This and more
+information is available at
+[http://www.tcs.hut.fi/Software/bliss/index.html](http://www.tcs.hut.fi/Software/bliss/index.md).
+
+The possible values for the `sh` argument are:
+
+- "f":
+
+  First non-singleton cell.
+
+- "fl":
+
+  First largest non-singleton cell.
+
+- "fs":
+
+  First smallest non-singleton cell.
+
+- "fm":
+
+  First maximally non-trivially connectec non-singleton cell.
+
+- "flm":
+
+  Largest maximally non-trivially connected non-singleton cell.
+
+- "fsm":
+
+  Smallest maximally non-trivially connected non-singleton cell.
+
+See the paper in references for details about these.
+
+## References
+
+Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
+Labeling Tool for Large and Sparse Graphs, *Proceedings of the Ninth
+Workshop on Algorithm Engineering and Experiments and the Fourth
+Workshop on Analytic Algorithms and Combinatorics.* 2007.
+
+## See also
+
+[`permute()`](https://r.igraph.org/reference/permute.md) to apply a
+permutation to a graph,
+[`isomorphic()`](https://r.igraph.org/reference/isomorphic.md) for
+deciding graph isomorphism, possibly based on canonical labels.
+
+Other graph isomorphism:
+[`count_isomorphisms()`](https://r.igraph.org/reference/count_isomorphisms.md),
+[`count_subgraph_isomorphisms()`](https://r.igraph.org/reference/count_subgraph_isomorphisms.md),
+[`graph_from_isomorphism_class()`](https://r.igraph.org/reference/graph_from_isomorphism_class.md),
+[`isomorphic()`](https://r.igraph.org/reference/isomorphic.md),
+[`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md),
+[`isomorphisms()`](https://r.igraph.org/reference/isomorphisms.md),
+[`subgraph_isomorphic()`](https://r.igraph.org/reference/subgraph_isomorphic.md),
+[`subgraph_isomorphisms()`](https://r.igraph.org/reference/subgraph_isomorphisms.md)
+
+## Author
+
+Tommi Junttila for BLISS, Gabor Csardi <csardi.gabor@gmail.com> for the
+igraph and R interfaces.
+
+## Related documentation in the C library
+
+[`canonical_permutation()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_canonical_permutation).
+
+## Examples
+
+``` r
+## Calculate the canonical form of a random graph
+g1 <- sample_gnm(10, 20)
+cp1 <- canonical_permutation(g1)
+cf1 <- permute(g1, cp1$labeling)
+
+## Do the same with a random permutation of it
+g2 <- permute(g1, sample(vcount(g1)))
+cp2 <- canonical_permutation(g2)
+cf2 <- permute(g2, cp2$labeling)
+
+## Check that they are the same
+el1 <- as_edgelist(cf1)
+el2 <- as_edgelist(cf2)
+el1 <- el1[order(el1[, 1], el1[, 2]), ]
+el2 <- el2[order(el2[, 1], el2[, 2]), ]
+all(el1 == el2)
+#> [1] TRUE
+```
