@@ -96,7 +96,17 @@ is_tree <- function(
 #' @family trees
 #' @export
 #' @cdocs igraph_is_forest
-is_forest <- is_forest_impl
+is_forest <- function(
+  graph,
+  mode = c("out", "in", "all", "total"),
+  details = FALSE
+) {
+  is_forest_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+}
 
 #' Convert a tree graph to its Prüfer sequence
 #'
@@ -123,7 +133,9 @@ is_forest <- is_forest_impl
 #' @family trees
 #' @export
 #' @cdocs igraph_to_prufer
-to_prufer <- to_prufer_impl
+to_prufer <- function(graph) {
+  to_prufer_impl(graph = graph)
+}
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
