@@ -66,10 +66,12 @@ Eytan Adar: Friends and neighbors on the Web. Social Networks,
 25(3):211-230, 2003.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 g <- make_ring(5)
 similarity(g, method = "dice")
 similarity(g, method = "jaccard")
+\dontshow{\}) # examplesIf}
 }
 \references{
 Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.

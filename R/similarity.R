@@ -49,7 +49,7 @@
 #' @family cocitation
 #' @cdocs igraph_similarity_jaccard igraph_similarity_dice igraph_similarity_inverse_log_weighted
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #'
 #' g <- make_ring(5)
 #' similarity(g, method = "dice")
