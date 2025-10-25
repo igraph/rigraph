@@ -1436,7 +1436,21 @@ eigen_centrality <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_strength
-strength <- strength_impl
+strength <- function(
+  graph,
+  vids = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  weights = NULL
+) {
+  strength_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    loops = loops,
+    weights = weights
+  )
+}
 
 
 #' Graph diversity
@@ -1480,7 +1494,13 @@ strength <- strength_impl
 #' @family centrality
 #' @export
 #' @cdocs igraph_diversity
-diversity <- diversity_impl
+diversity <- function(graph, weights = NULL, vids = V(graph)) {
+  diversity_impl(
+    graph = graph,
+    weights = weights,
+    vids = vids
+  )
+}
 
 
 #' Kleinberg's hub and authority centrality scores.
@@ -1726,7 +1746,27 @@ hub_score <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_personalized_pagerank
-page_rank <- personalized_pagerank_impl
+page_rank <- function(
+  graph,
+  algo = c("prpack", "arpack"),
+  vids = V(graph),
+  directed = TRUE,
+  damping = 0.85,
+  personalized = NULL,
+  weights = NULL,
+  options = NULL
+) {
+  personalized_pagerank_impl(
+    graph = graph,
+    algo = algo,
+    vids = vids,
+    directed = directed,
+    damping = damping,
+    personalized = personalized,
+    weights = weights,
+    options = options
+  )
+}
 
 #' Harmonic centrality of vertices
 #'
@@ -1774,7 +1814,23 @@ page_rank <- personalized_pagerank_impl
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
 #' @cdocs igraph_harmonic_centrality_cutoff
-harmonic_centrality <- harmonic_centrality_cutoff_impl
+harmonic_centrality <- function(
+  graph,
+  vids = V(graph),
+  mode = c("out", "in", "all", "total"),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+) {
+  harmonic_centrality_cutoff_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
+  )
+}
 
 
 bonpow.dense <- function(

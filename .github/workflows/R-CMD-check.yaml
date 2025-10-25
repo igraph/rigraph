@@ -69,16 +69,12 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Check status of this workflow
           state="pending"
           sha=${{ inputs.ref }}
-          if [ -z "${sha}" ]; then
-            sha=${{ github.head_ref }}
-          fi
           if [ -z "${sha}" ]; then
             sha=${{ github.sha }}
           fi
@@ -175,7 +171,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always() && github.event_name == 'workflow_dispatch'
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -189,9 +185,6 @@ jobs:
           sha=${{ steps.commit.outputs.sha }}
           if [ -z "${sha}" ]; then
             sha=${{ inputs.ref }}
-          fi
-          if [ -z "${sha}" ]; then
-            sha=${{ github.head_ref }}
           fi
           if [ -z "${sha}" ]; then
             sha=${{ github.sha }}
