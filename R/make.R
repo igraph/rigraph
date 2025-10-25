@@ -2731,7 +2731,12 @@ graph_from_lcf <- function(
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
 #' @cdocs igraph_realize_degree_sequence
-realize_degseq <- function(out.deg, in.deg = NULL, allowed.edge.types = c("simple", "loops", "multi", "all"), method = c("smallest", "largest", "index")) {
+realize_degseq <- function(
+  out.deg,
+  in.deg = NULL,
+  allowed.edge.types = c("simple", "loops", "multi", "all"),
+  method = c("smallest", "largest", "index")
+) {
   realize_degree_sequence_impl(
     out.deg = out.deg,
     in.deg = in.deg,
