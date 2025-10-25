@@ -46,11 +46,13 @@ The order of the vertices in the generated graph corresponds to the
 \code{block.sizes} argument.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 ## Two groups with not only few connection between groups
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
+\dontshow{\}) # examplesIf}
 }
 \references{
 Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation

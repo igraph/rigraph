@@ -45,6 +45,7 @@ each graph and each vertex, and then normalizing across the
 vertices and across the time steps.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 ## Generate a bunch of SBMs, with the last one being different
 num_t <- 20
 block_sizes <- c(10, 5, 5)
@@ -62,6 +63,7 @@ tsg <- replicate(num_t - 1, P0, simplify = FALSE) \%>\%
 
 scan_stat(graphs = tsg, k = 1, tau = 4, ell = 2)
 scan_stat(graphs = tsg, locality = "them", k = 1, tau = 4, ell = 2)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other scan statistics: 
