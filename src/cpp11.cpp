@@ -205,7 +205,7 @@ extern SEXP R_igraph_get_edgelist(SEXP, SEXP);
 extern SEXP R_igraph_get_eids(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_graph_id(SEXP);
 extern SEXP R_igraph_get_isomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_get_isomorphisms_vf2_callback(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_isomorphisms_vf2_callback(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_k_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_laplacian_sparse(SEXP, SEXP, SEXP, SEXP);
@@ -688,7 +688,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    4},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},
-    {"R_igraph_get_isomorphisms_vf2_callback",              (DL_FUNC) &R_igraph_get_isomorphisms_vf2_callback,               7},
+    {"R_igraph_get_isomorphisms_vf2_callback",              (DL_FUNC) &R_igraph_get_isomorphisms_vf2_callback,               6},
     {"R_igraph_get_k_shortest_paths",                       (DL_FUNC) &R_igraph_get_k_shortest_paths,                        6},
     {"R_igraph_get_laplacian",                              (DL_FUNC) &R_igraph_get_laplacian,                               4},
     {"R_igraph_get_laplacian_sparse",                       (DL_FUNC) &R_igraph_get_laplacian_sparse,                        4},
