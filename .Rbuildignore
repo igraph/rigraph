@@ -58,7 +58,7 @@
 ^src/deps\.mk$
 ^[\.]?air\.toml$
 ^\.vscode$
-^CLAUDE\.md$
+^AGENTS\.md$
 ^covr$
 ^src/*\.gcda$
 ^src/*\.gcno$
