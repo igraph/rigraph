@@ -653,10 +653,8 @@ igraph_layout_merge_dla:
 #######################################
 
 igraph_cocitation:
-    IGNORE: RR, RC
 
 igraph_bibcoupling:
-    IGNORE: RR, RC
 
 #######################################
 # Community structure

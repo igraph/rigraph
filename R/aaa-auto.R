@@ -3283,6 +3283,30 @@ layout_align_impl <- function(graph, layout) {
   res
 }
 
+cocitation_impl <- function(graph, vids=V(graph)) {
+  # Argument checks
+  ensure_igraph(graph)
+  vids <- as_igraph_vs(graph, vids)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_cocitation, graph, vids-1)
+
+  res
+}
+
+bibcoupling_impl <- function(graph, vids=V(graph)) {
+  # Argument checks
+  ensure_igraph(graph)
+  vids <- as_igraph_vs(graph, vids)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_bibcoupling, graph, vids-1)
+
+  res
+}
+
 similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)

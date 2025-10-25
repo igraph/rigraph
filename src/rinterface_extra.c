@@ -4088,50 +4088,6 @@ SEXP R_igraph_running_mean(SEXP pdata, SEXP pbinwidth) {
   return result;
 }
 
-SEXP R_igraph_cocitation(SEXP graph, SEXP pvids) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_matrix_t m;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_matrix_init(&m, 0, 0);
-  IGRAPH_R_CHECK(igraph_cocitation(&g, &m, vs));
-
-  PROTECT(result=R_igraph_matrix_to_SEXP(&m));
-  igraph_matrix_destroy(&m);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_bibcoupling(SEXP graph, SEXP pvids) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_matrix_t m;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_matrix_init(&m, 0, 0);
-  IGRAPH_R_CHECK(igraph_bibcoupling(&g, &m, vs));
-
-  PROTECT(result=R_igraph_matrix_to_SEXP(&m));
-  igraph_matrix_destroy(&m);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
 /* igraph_shortest_paths_johnson() does not have a 'mode' argument in C/igraph 0.9 and 0.10.
  * This function fills in this functionality. It should be removed when C/igraph is updated,
  * to version 0.11 where igraph_distances_johnson() does support 'mode'. */
