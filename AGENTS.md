@@ -1,8 +1,14 @@
-# Claude Development Guidelines for igraph
+# AI Agent Development Guidelines for igraph
 
 ## Project Overview
 
 igraph is an R package with routines for simple graphs and network analysis. It can handle large graphs very well and provides functions for generating random and regular graphs, graph visualization, centrality methods and much more.
+
+## Install and run R
+
+- When run on GitHub Actions, assume that R, the package in its current state and all dependencies are installed.
+- Only install new packages when needed for implementing new features or tests.
+- Run `R -q -e 'testthat::test_local(reporter = "check")` to execute tests as a final step.
 
 ## Code Style and Documentation
 
@@ -16,35 +22,8 @@ igraph is an R package with routines for simple graphs and network analysis. It 
 ### R Code Conventions
 
 - Follow existing naming conventions (snake_case for functions, camelCase for some legacy functions)
-- Use explicit package prefixes (e.g., `withr::local_db_connection`) for clarity
+- Use explicit package prefixes (e.g., `withr::local_db_connection()`) for clarity
 - Maintain consistent indentation and spacing patterns
 - Use meaningful variable names that reflect the testing context
-
-## Install and run R
-
-Never check if rig or R are installed on GitHub Actions, they are not.
-Use rig to install R.
-Install rig with:
-
-```bash
-curl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-$(arch)-latest.tar.gz |
-  sudo tar xz -C /usr/local
-```
-
-Then install the current release version of R:
-
-```bash
-rig add release
-```
-
-Run R code with:
-
-```bash
-Rscript -e '<expression>'
-```
-
-Use pak to install packages, it will be installed by rig:
-
-```R
-pak::pak("<package>")
-```
+- Run `air format .` before committing changes to ensure consistent formatting
+- Keep documentation in sync with code changes. When updating roxygen2 documentation, ensure that each sentence is on its own line for better readability. Run `R -q -e 'devtools::document()'` to update the documentation.
