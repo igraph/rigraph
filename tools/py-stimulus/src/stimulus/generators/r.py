@@ -349,7 +349,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
 
         ## See if there is a postprocessor
         if "PP" in r_spec:
-            out.write(f'  res <- {r_spec["PP"]}(res)\n')
+            out.write(f"  res <- {r_spec['PP']}(res)\n")
 
         out.write("  res\n}\n\n")
 
@@ -516,7 +516,7 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
                     and not param.is_output
                     and call != "0"
                 ):
-                    call = f"(Rf_isNull(%I%) ? 0 : {call})"
+                    call = f"(Rf_isNull(%I%) ? {param.get_default_value(t) or "NULL"} : {call})"
                 call = call.replace("%C%", f"c_{param.name}").replace("%I%", param.name)
                 calls.append(call)
 
@@ -533,6 +533,9 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
                 res = f"  {desc.name}({calls});\n"
             else:
                 res = f"  c_result={desc.name}({calls});\n"
+
+        if desc.uses_rng:
+            res = "".join(["  GetRNGstate();\n", res, "  PutRNGstate();\n"])
 
         return res
 

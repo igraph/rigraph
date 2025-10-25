@@ -5,8 +5,8 @@
 ;
 [subrepo]
 	remote = git@github.com:igraph/stimulus
-	branch = 0.21.5
-	commit = f62f215a6d325545b44b59e114c963cf04abb4ce
-	parent = 63943053a43a247f1bf7628bbf481d400ce3e315
+	branch = main
+	commit = 9652bc7b3037b235f5e88b3f6e325ec9f5fda7b9
+	parent = 9fbd9772fd942be5a2516c496c59a4166438f6d2
 	method = merge
 	cmdver = 0.4.9

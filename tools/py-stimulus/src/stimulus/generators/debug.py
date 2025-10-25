@@ -160,7 +160,7 @@ class FunctionSpecificationValidator(SingleBlockCodeGenerator):
         write("#endif")
 
         write()
-        write('    printf("Everything OK!\n");')
+        write('    printf("Everything OK!\\n");')
         write("    return 0;")
         write("}")
 

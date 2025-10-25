@@ -71,6 +71,11 @@ class FunctionDescriptor(Mapping[str, Any], DescriptorMixin):
         return self.has_flag("internal")
 
     @property
+    def uses_rng(self) -> bool:
+        """Returns whether the function uses a random number generator."""
+        return not self.has_flag("no_rng")
+
+    @property
     def parameters(self) -> OrderedDict[str, ParamSpec]:
         if self._parameters is None:
             self._parameters = self._parse_parameter_specifications()
