@@ -301,7 +301,14 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' @family hierarchical random graph functions
 #' @export
 #' @cdocs igraph_hrg_consensus
-consensus_tree <- hrg_consensus_impl
+consensus_tree <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000) {
+  hrg_consensus_impl(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    num.samples = num.samples
+  )
+}
 
 
 #' Create a hierarchical random graph from an igraph graph
@@ -319,7 +326,12 @@ consensus_tree <- hrg_consensus_impl
 #' @family hierarchical random graph functions
 #' @export
 #' @cdocs igraph_hrg_create
-hrg <- hrg_create_impl
+hrg <- function(graph, prob) {
+  hrg_create_impl(
+    graph = graph,
+    prob = prob
+  )
+}
 
 
 #' Create an igraph graph from a hierarchical random graph model
