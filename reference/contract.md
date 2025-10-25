@@ -89,10 +89,10 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> IGRAPH bae7cdb UNW- 5 10 -- Ring
+#> IGRAPH 366ed6d UNW- 5 10 -- Ring
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
 #> | (e/n)
-#> + edges from bae7cdb (vertex names):
+#> + edges from 366ed6d (vertex names):
 #>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h
 #>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j
 ```
