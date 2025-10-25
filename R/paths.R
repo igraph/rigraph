@@ -123,7 +123,7 @@ all_simple_paths <- function(
       graph = graph,
       from = from,
       to = to,
-      cutoff = cutoff,
+      maxlen = cutoff,
       mode = mode
     )
   )
