@@ -89,7 +89,12 @@ is.simple <- function(graph) {
 #' @family isomorphism
 #' @export
 #' @cdocs igraph_simplify
-simplify <- function(graph, remove.multiple = TRUE, remove.loops = TRUE, edge.attr.comb = igraph_opt("edge.attr.comb")) {
+simplify <- function(
+  graph,
+  remove.multiple = TRUE,
+  remove.loops = TRUE,
+  edge.attr.comb = igraph_opt("edge.attr.comb")
+) {
   simplify_impl(
     graph = graph,
     remove.multiple = remove.multiple,
