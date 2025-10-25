@@ -239,12 +239,22 @@ clique.number <- function(graph) {
 #' # Check that all returned vertex sets are indeed cliques
 #' all(sapply(max_cliques(g), function (c) is_clique(g, c)))
 #' @cdocs igraph_cliques
-cliques <- cliques_impl
+cliques <- function(graph, min = 0, max = 0) {
+  cliques_impl(
+    graph = graph,
+    min = min,
+    max = max
+  )
+}
 
 #' @rdname cliques
 #' @export
 #' @cdocs igraph_largest_cliques
-largest_cliques <- largest_cliques_impl
+largest_cliques <- function(graph) {
+  largest_cliques_impl(
+    graph = graph
+  )
+}
 
 #' @rdname cliques
 #' @param subset If not `NULL`, then it must be a vector of vertex ids,
@@ -352,7 +362,11 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 #' @rdname cliques
 #' @export
 #' @cdocs igraph_clique_number
-clique_num <- clique_number_impl
+clique_num <- function(graph) {
+  clique_number_impl(
+    graph = graph
+  )
+}
 
 
 #' Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph
@@ -405,15 +419,39 @@ clique_num <- clique_number_impl
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
 #' @cdocs igraph_weighted_cliques
-weighted_cliques <- weighted_cliques_impl
+weighted_cliques <- function(
+  graph,
+  vertex.weights = NULL,
+  min.weight = 0,
+  max.weight = 0,
+  maximal = FALSE
+) {
+  weighted_cliques_impl(
+    graph = graph,
+    vertex.weights = vertex.weights,
+    min.weight = min.weight,
+    max.weight = max.weight,
+    maximal = maximal
+  )
+}
 #' @export
 #' @rdname cliques
 #' @cdocs igraph_largest_weighted_cliques
-largest_weighted_cliques <- largest_weighted_cliques_impl
+largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
+  largest_weighted_cliques_impl(
+    graph = graph,
+    vertex.weights = vertex.weights
+  )
+}
 #' @export
 #' @rdname cliques
 #' @cdocs igraph_weighted_clique_number
-weighted_clique_num <- weighted_clique_number_impl
+weighted_clique_num <- function(graph, vertex.weights = NULL) {
+  weighted_clique_number_impl(
+    graph = graph,
+    vertex.weights = vertex.weights
+  )
+}
 
 #' Independent vertex sets
 #'
@@ -600,7 +638,11 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
 #' is_complete(g)
 #' g <- as_undirected(g)
 #' is_complete(g)
-is_complete <- is_complete_impl
+is_complete <- function(graph) {
+  is_complete_impl(
+    graph = graph
+  )
+}
 
 #' @rdname cliques
 #'
@@ -616,7 +658,13 @@ is_complete <- is_complete_impl
 #' @keywords graphs
 #' @export
 #' @cdocs igraph_is_clique
-is_clique <- is_clique_impl
+is_clique <- function(graph, candidate, directed = FALSE) {
+  is_clique_impl(
+    graph = graph,
+    candidate = candidate,
+    directed = directed
+  )
+}
 
 #' @rdname ivs
 #'
@@ -627,4 +675,9 @@ is_clique <- is_clique_impl
 #' @keywords graphs
 #' @export
 #' @cdocs igraph_is_independent_vertex_set
-is_ivs <- is_independent_vertex_set_impl
+is_ivs <- function(graph, candidate) {
+  is_independent_vertex_set_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}
