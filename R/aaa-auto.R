@@ -2983,6 +2983,58 @@ is_independent_vertex_set_impl <- function(graph, candidate) {
   res
 }
 
+independent_vertex_sets_impl <- function(graph, min=0, max=0) {
+  # Argument checks
+  ensure_igraph(graph)
+  min <- as.numeric(min)
+  max <- as.numeric(max)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_independent_vertex_sets, graph, min, max)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+largest_independent_vertex_sets_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+maximal_independent_vertex_sets_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+independence_number_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_independence_number, graph)
+
+  res
+}
+
 layout_random_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
@@ -4532,15 +4584,7 @@ get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NUL
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2_callback,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
-  )
+  res <- .Call(R_igraph_get_isomorphisms_vf2_callback, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
 
   res
 }

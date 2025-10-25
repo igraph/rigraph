@@ -481,8 +481,6 @@ weighted_clique_num <- weighted_clique_number_impl
 #'
 #' length(max_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
-  ensure_igraph(graph)
-
   if (is.null(min)) {
     min <- 0
   }
@@ -491,53 +489,16 @@ ivs <- function(graph, min = NULL, max = NULL) {
     max <- 0
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_independent_vertex_sets,
-    graph,
-    as.numeric(min),
-    as.numeric(max)
-  )
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  independent_vertex_sets_impl(graph, min, max)
 }
 
 #' @rdname ivs
 #' @export
-largest_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
-}
+largest_ivs <- largest_independent_vertex_sets_impl
 
 #' @rdname ivs
 #' @export
-max_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
-}
+max_ivs <- maximal_independent_vertex_sets_impl
 
 #' Maximal independent vertex sets in the graph
 #'
@@ -556,12 +517,7 @@ maximal_ivs <- function(graph) {
 
 #' @rdname ivs
 #' @export
-ivs_size <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_independence_number, graph)
-}
+ivs_size <- independence_number_impl
 
 #' @rdname ivs
 #' @export
