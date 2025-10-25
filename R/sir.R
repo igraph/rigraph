@@ -109,4 +109,11 @@
 #' @family processes
 #' @export
 #' @cdocs igraph_sir
-sir <- sir_impl
+sir <- function(graph, beta, gamma, no.sim = 100) {
+  sir_impl(
+    graph = graph,
+    beta = beta,
+    gamma = gamma,
+    no.sim = no.sim
+  )
+}
