@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.0.9006
+
+## Chore
+
+- Fix ASAN checks.
+
+- Add protection to fix rchk error.
+
+- Use autogen-impl functions for 3 motifs functions (#2152).
+
+
 # igraph 2.2.0.9005
 
 ## Chore
