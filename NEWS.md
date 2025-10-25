@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 2.2.0.9006
+# igraph 2.2.1
 
 ## Chore
 
@@ -8,73 +8,11 @@
 
 - Add protection to fix rchk error.
 
-- Use autogen-impl functions for 3 motifs functions (#2152).
-
-
-# igraph 2.2.0.9005
-
-## Chore
-
-- Use autogen-impl functions for 3 motifs functions (#2152).
-
 ## Testing
 
 - Improve centralitystress test (#2214).
 
-
-# igraph 2.2.0.9004
-
-## Testing
-
 - Fix flaky test.
-
-
-# igraph 2.2.0.9003
-
-## Features
-
-- Generate almost all R implementations (#2047).
-
-
-# igraph 2.2.0.9002
-
-## Continuous integration
-
-- Use newer CSAN image.
-
-
-# igraph 2.2.0.9001
-
-## Bug fixes
-
-- Pass on `cutoff` arguemnt to `all_simple_paths()`.
-
-## Chore
-
-- Auto-update from GitHub Actions (#2184).
-
-- Auto-update from GitHub Actions (#2181).
-
-- Autogenerate `igraph_neighbors()` (#2151).
-
-## Continuous integration
-
-- Fix vendoring.
-
-## Testing
-
-- Snapshot updates for rcc-smoke (null) (#2170).
-
-## Uncategorized
-
-- Merge branch 'release-2.2.0'.
-
-
-# igraph 2.2.0.9000
-
-## Chore
-
-- Auto-update from GitHub Actions (#2164).
 
 
 # igraph 2.2.0
