@@ -761,7 +761,13 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @family flow
 #' @export
 #' @cdocs igraph_all_st_cuts
-st_cuts <- all_st_cuts_impl
+st_cuts <- function(graph, source, target) {
+  all_st_cuts_impl(
+    graph = graph,
+    source = source,
+    target = target
+  )
+}
 
 
 #' List all minimum \eqn{(s,t)}-cuts of a graph
@@ -819,7 +825,14 @@ st_cuts <- all_st_cuts_impl
 #' @family flow
 #' @export
 #' @cdocs igraph_all_st_mincuts
-st_min_cuts <- all_st_mincuts_impl
+st_min_cuts <- function(graph, source, target, capacity = NULL) {
+  all_st_mincuts_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
+  )
+}
 
 
 #' Dominator tree
@@ -964,7 +977,9 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' ```
 #' @family flow
 #' @cdocs igraph_all_minimal_st_separators
-min_st_separators <- all_minimal_st_separators_impl
+min_st_separators <- function(graph) {
+  all_minimal_st_separators_impl(graph = graph)
+}
 
 
 #' Maximum flow in a graph
@@ -1032,7 +1047,14 @@ min_st_separators <- all_minimal_st_separators_impl
 #' @family flow
 #' @export
 #' @cdocs igraph_maxflow
-max_flow <- maxflow_impl
+max_flow <- function(graph, source, target, capacity = NULL) {
+  maxflow_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
+  )
+}
 
 
 #' Check whether removing this set of vertices would disconnect the graph.
@@ -1061,7 +1083,12 @@ max_flow <- maxflow_impl
 #'
 #' @export
 #' @cdocs igraph_is_separator
-is_separator <- is_separator_impl
+is_separator <- function(graph, candidate) {
+  is_separator_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}
 
 
 #' Minimal vertex separators
@@ -1110,7 +1137,12 @@ is_separator <- is_separator_impl
 #' @family flow
 #' @export
 #' @cdocs igraph_is_minimal_separator
-is_min_separator <- is_minimal_separator_impl
+is_min_separator <- function(graph, candidate) {
+  is_minimal_separator_impl(
+    graph = graph,
+    candidate = candidate
+  )
+}
 
 
 #' Minimum size vertex separators
@@ -1181,4 +1213,6 @@ is_min_separator <- is_minimal_separator_impl
 #' )
 #' min_separators(camp)
 #' @cdocs igraph_minimum_size_separators
-min_separators <- minimum_size_separators_impl
+min_separators <- function(graph) {
+  minimum_size_separators_impl(graph = graph)
+}
