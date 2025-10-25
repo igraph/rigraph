@@ -927,7 +927,12 @@ graph.isoclass <- function(graph) {
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_isoclass_create
-graph_from_isomorphism_class <- isoclass_create_impl
+graph_from_isomorphism_class <- function(size, number, directed) {
+  args <- list(size = size, number = number)
+  if (!missing(directed)) args$directed <- directed
+
+  do.call(isoclass_create_impl, args)
+}
 
 
 #' Canonical permutation of a graph
@@ -1038,7 +1043,13 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_canonical_permutation
-canonical_permutation <- canonical_permutation_impl
+canonical_permutation <- function(graph, colors, sh) {
+  args <- list(graph = graph)
+  if (!missing(colors)) args$colors <- colors
+  if (!missing(sh)) args$sh <- sh
+
+  do.call(canonical_permutation_impl, args)
+}
 
 
 #' Permute the vertices of a graph
@@ -1080,7 +1091,9 @@ canonical_permutation <- canonical_permutation_impl
 #' @export
 #' @family functions for manipulating graph structure
 #' @cdocs igraph_permute_vertices
-permute <- permute_vertices_impl
+permute <- function(graph, permutation) {
+  permute_vertices_impl(graph = graph, permutation = permutation)
+}
 
 #' @export
 #' @cdocs igraph_isomorphic
