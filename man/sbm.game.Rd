@@ -16,7 +16,7 @@ probability of creating an edge between vertices from groups \eqn{i} and
 must be symmetric.}
 
 \item{block.sizes}{Numeric vector giving the number of vertices in each
-group. The sum of the vector must match the number of vertices.}
+group. The sum of the vector must match the total number of vertices.}
 
 \item{directed}{Logical scalar, whether to generate a directed graph.}
 

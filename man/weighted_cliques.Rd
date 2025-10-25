@@ -31,6 +31,8 @@ or only the maximal ones (\code{TRUE}).}
 
 \item{max.weight}{Numeric constant, upper limit on the weight of the cliques to find.
 \code{NULL} means no limit.}
+
+\item{max.results}{FIXME}
 }
 \value{
 \code{weighted_cliques()} and \code{largest_weighted_cliques()} return a

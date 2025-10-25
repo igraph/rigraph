@@ -40,6 +40,8 @@ watts.strogatz.game <- function(
 #' `static.power.law.game()` was renamed to [sample_fitness_pl()] to create a more
 #' consistent API.
 #' @inheritParams sample_fitness_pl
+#' @param multiple Logical scalar, whether to allow multiple edges in the
+#'   generated graph.
 #' @keywords internal
 #' @export
 static.power.law.game <- function(
@@ -57,13 +59,24 @@ static.power.law.game <- function(
     "static.power.law.game()",
     "sample_fitness_pl()"
   )
+
+  if (lifecycle::is_present(multiple)) {
+    cli::cli_warn(
+      "{.arg multiple} argument is deprecated and will be ignored."
+    )
+  }
+
+  if (lifecycle::is_present(loops)) {
+    cli::cli_warn(
+      "{.arg loops} argument is deprecated and will be ignored."
+    )
+  }
+
   sample_fitness_pl(
     no.of.nodes = no.of.nodes,
     no.of.edges = no.of.edges,
     exponent.out = exponent.out,
     exponent.in = exponent.in,
-    loops = loops,
-    multiple = multiple,
     finite.size.correction = finite.size.correction
   )
 } # nocov end
@@ -76,6 +89,8 @@ static.power.law.game <- function(
 #' `static.fitness.game()` was renamed to [sample_fitness()] to create a more
 #' consistent API.
 #' @inheritParams sample_fitness
+#' @param multiple Logical scalar, whether to allow multiple edges in the
+#'   graph.
 #' @keywords internal
 #' @export
 static.fitness.game <- function(
@@ -91,12 +106,23 @@ static.fitness.game <- function(
     "static.fitness.game()",
     "sample_fitness()"
   )
+
+  if (lifecycle::is_present(loops)) {
+    cli::cli_warn(
+      "{.arg loops} argument is deprecated and will be ignored."
+    )
+  }
+
+  if (lifecycle::is_present(multiple)) {
+    cli::cli_warn(
+      "{.arg multiple} argument is deprecated and will be ignored."
+    )
+  }
+
   sample_fitness(
     no.of.edges = no.of.edges,
     fitness.out = fitness.out,
-    fitness.in = fitness.in,
-    loops = loops,
-    multiple = multiple
+    fitness.in = fitness.in
   )
 } # nocov end
 
@@ -108,6 +134,7 @@ static.fitness.game <- function(
 #' `sbm.game()` was renamed to [sample_sbm()] to create a more
 #' consistent API.
 #' @inheritParams sample_sbm
+#' @param n Number of vertices in the graph.
 #' @keywords internal
 #' @export
 sbm.game <- function(
@@ -119,12 +146,23 @@ sbm.game <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "sbm.game()", "sample_sbm()")
+
+  if (lifecycle::is_present(n)) {
+    cli::cli_warn(
+      "{.arg n} argument is deprecated and will be ignored."
+    )
+  }
+
+  if (lifecycle::is_present(loops)) {
+    cli::cli_warn(
+      "{.arg loops} argument is deprecated and will be ignored."
+    )
+  }
+
   sample_sbm(
-    n = n,
     pref.matrix = pref.matrix,
     block.sizes = block.sizes,
-    directed = directed,
-    loops = loops
+    directed = directed
   )
 } # nocov end
 
@@ -2471,16 +2509,20 @@ sample_bipartite_gnp <- function(
 #' The order of the vertices in the generated graph corresponds to the
 #' `block.sizes` argument.
 #'
-#' @param n Number of vertices in the graph.
 #' @param pref.matrix The matrix giving the Bernoulli rates.  This is a
 #'   \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
 #'   probability of creating an edge between vertices from groups \eqn{i} and
 #'   \eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
 #'   must be symmetric.
 #' @param block.sizes Numeric vector giving the number of vertices in each
-#'   group. The sum of the vector must match the number of vertices.
+#'   group. The sum of the vector must match the total number of vertices.
 #' @param directed Logical scalar, whether to generate a directed graph.
 #' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @param allowed.edge.types Character scalar, specifying the types of allowed edges.
+#'   Possible values are: `"simple"` (no self-loops, no multiple edges),
+#'   `"loops"` (self-loops allowed, no multiple edges),
+#'   `"multi"` (no self-loops, multiple edges allowed),
+#'   `"all"` (both self-loops and multiple edges allowed).
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -2972,8 +3014,11 @@ chung_lu <- function(
 #'   If this argument is not `NULL`, then a directed graph is generated,
 #'   otherwise an undirected one.
 #' @param loops Logical scalar, whether to allow loop edges in the graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
-#'   graph.
+#' @param allowed.edge.types Character scalar, specifying the types of allowed edges.
+#'   Possible values are: `"simple"` (no self-loops, no multiple edges),
+#'   `"loops"` (self-loops allowed, no multiple edges),
+#'   `"multi"` (no self-loops, multiple edges allowed),
+#'   `"all"` (both self-loops and multiple edges allowed).
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Goh K-I, Kahng B, Kim D: Universal behaviour of load
@@ -3046,8 +3091,11 @@ sample_fitness <- function(
 #'   error will be generated.
 #' @param loops Logical scalar, whether to allow loop edges in the generated
 #'   graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
-#'   generated graph.
+#' @param allowed.edge.types Character scalar, specifying the types of allowed edges.
+#'   Possible values are: `"simple"` (no self-loops, no multiple edges),
+#'   `"loops"` (self-loops allowed, no multiple edges),
+#'   `"multi"` (no self-loops, multiple edges allowed),
+#'   `"all"` (both self-loops and multiple edges allowed).
 #' @param finite.size.correction Logical scalar, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
