@@ -394,4 +394,6 @@ dyad_census <- function(graph) {
 #' @family motifs
 #' @export
 #' @cdocs igraph_triad_census
-triad_census <- triad_census_impl
+triad_census <- function(graph) {
+  triad_census_impl(graph = graph)
+}
