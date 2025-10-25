@@ -508,24 +508,76 @@ graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh) {
 #' @export
 #' @cdocs igraph_isomorphic_vf2
 graph.isomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
-  args <- list(graph1 = graph1, graph2 = graph2)
-  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
-  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
-  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
-  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-
-  do.call(isomorphic_vf2_impl, args)
+  if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1) && missing(vertex.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1)
+  } else if (missing(vertex.color2) && missing(edge.color1)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1)
+  } else if (missing(vertex.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(edge.color1) && missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2)
+  } else if (missing(edge.color1)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(edge.color2)) {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else {
+    isomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  }
 }
 #' @export
 #' @cdocs igraph_subisomorphic_vf2
 graph.subisomorphic.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
-  args <- list(graph1 = graph1, graph2 = graph2)
-  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
-  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
-  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
-  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-
-  do.call(subisomorphic_vf2_impl, args)
+  if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1) && missing(vertex.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1)
+  } else if (missing(vertex.color2) && missing(edge.color1)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1)
+  } else if (missing(vertex.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(edge.color1) && missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2)
+  } else if (missing(edge.color1)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(edge.color2)) {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else {
+    subisomorphic_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  }
 }
 
 #' @export
@@ -623,7 +675,7 @@ is_isomorphic_to <- isomorphic
 #' subgraph_isomorphisms(pattern, target, domains = domains)
 #'
 #' # Directed LAD example
-#' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
+#' pattern <- make_graph(~ 1:2:3, 1 - +2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
 subgraph_isomorphic <- function(
@@ -701,13 +753,39 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' @export
 #' @cdocs igraph_count_isomorphisms_vf2
 graph.count.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
-  args <- list(graph1 = graph1, graph2 = graph2)
-  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
-  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
-  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
-  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-
-  do.call(count_isomorphisms_vf2_impl, args)
+  if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1) && missing(vertex.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1)
+  } else if (missing(vertex.color2) && missing(edge.color1)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1)
+  } else if (missing(vertex.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(edge.color1) && missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2)
+  } else if (missing(edge.color1)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(edge.color2)) {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else {
+    count_isomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  }
 }
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
@@ -792,13 +870,39 @@ count_subgraph_isomorphisms <- function(
 #' @export
 #' @cdocs igraph_count_subisomorphisms_vf2
 graph.count.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
-  args <- list(graph1 = graph1, graph2 = graph2)
-  if (!missing(vertex.color1)) args$vertex.color1 <- vertex.color1
-  if (!missing(vertex.color2)) args$vertex.color2 <- vertex.color2
-  if (!missing(edge.color1)) args$edge.color1 <- edge.color1
-  if (!missing(edge.color2)) args$edge.color2 <- edge.color2
-
-  do.call(count_subisomorphisms_vf2_impl, args)
+  if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color1)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(vertex.color2) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1) && missing(vertex.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2)
+  } else if (missing(vertex.color1) && missing(edge.color1)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(vertex.color1) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else if (missing(vertex.color1)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color1) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1)
+  } else if (missing(vertex.color2) && missing(edge.color1)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color2 = edge.color2)
+  } else if (missing(vertex.color2) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1)
+  } else if (missing(vertex.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  } else if (missing(edge.color1) && missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2)
+  } else if (missing(edge.color1)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color2 = edge.color2)
+  } else if (missing(edge.color2)) {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1)
+  } else {
+    count_subisomorphisms_vf2_impl(graph1 = graph1, graph2 = graph2, vertex.color1 = vertex.color1, vertex.color2 = vertex.color2, edge.color1 = edge.color1, edge.color2 = edge.color2)
+  }
 }
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
