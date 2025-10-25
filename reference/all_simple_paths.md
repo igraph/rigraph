@@ -70,28 +70,28 @@ Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
 #> [[1]]
-#> + 5/10 vertices, from 7c17cf2:
+#> + 5/10 vertices, from e61933d:
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> + 7/10 vertices, from 7c17cf2:
+#> + 7/10 vertices, from e61933d:
 #> [1]  1 10  9  8  7  6  5
 #> 
 all_simple_paths(g, 1, c(3, 5))
 #> [[1]]
-#> + 3/10 vertices, from 7c17cf2:
+#> + 3/10 vertices, from e61933d:
 #> [1] 1 2 3
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 7c17cf2:
+#> + 5/10 vertices, from e61933d:
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> + 7/10 vertices, from 7c17cf2:
+#> + 7/10 vertices, from e61933d:
 #> [1]  1 10  9  8  7  6  5
 #> 
 #> [[4]]
-#> + 9/10 vertices, from 7c17cf2:
+#> + 9/10 vertices, from e61933d:
 #> [1]  1 10  9  8  7  6  5  4  3
 #> 
 ```

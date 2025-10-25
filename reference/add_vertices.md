@@ -74,12 +74,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH ad21c89 D--- 5 4 -- 
+#> IGRAPH eae3adb D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from ad21c89:
+#> + edges from eae3adb:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from ad21c89:
+#> + 5/5 vertices, from eae3adb:
 #>   color
 #> 1   red
 #> 2   red

@@ -124,16 +124,16 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> IGRAPH c009aa3 D--- 10 20 -- Ring graph
+#> IGRAPH 735c527 D--- 10 20 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from c009aa3:
+#> + edges from 735c527:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10  1->10
 #> [11]  2-> 1  3-> 2  4-> 3  5-> 4  6-> 5  7-> 6  8-> 7  9-> 8 10-> 9 10-> 1
 g2 <- make_star(10)
 as_undirected(g)
-#> IGRAPH 0dc5c5f U--- 10 10 -- Ring graph
+#> IGRAPH 9c16341 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 0dc5c5f:
+#> + edges from 9c16341:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Combining edge attributes
@@ -141,9 +141,9 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> IGRAPH 201549f U-W- 10 10 -- Ring graph
+#> IGRAPH 5c7e9dc U-W- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n)
-#> + edges from 201549f:
+#> + edges from 5c7e9dc:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 1--10 9--10
 if (FALSE) { # rlang::is_interactive()
 x11(width = 10, height = 5)
@@ -163,8 +163,8 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> IGRAPH 43593a0 U-W- 10 7 -- 
+#> IGRAPH e0766f4 U-W- 10 7 -- 
 #> + attr: weight (e/n)
-#> + edges from 43593a0:
+#> + edges from e0766f4:
 #> [1]  6-- 7  7-- 8  8-- 9  8-- 9  9-- 9 10--10 10--10
 ```
