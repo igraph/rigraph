@@ -22,6 +22,9 @@ switch_igraph_arg <- function(
   .error_arg = rlang::caller_arg(arg),
   .error_call = rlang::caller_env()
 ) {
+  # Materialize early, before accessing arg
+  force(.error_arg)
+
   values <- tolower(...names())
   if (length(arg) > 1) {
     values <- intersect(values, tolower(arg))
@@ -41,6 +44,9 @@ igraph.match.arg <- function(
   error_arg = rlang::caller_arg(arg),
   error_call = rlang::caller_env()
 ) {
+  # Materialize early, before accessing arg
+  force(error_arg)
+
   if (missing(values)) {
     formal.args <- formals(sys.function(sys.parent()))
     values <- eval(formal.args[[deparse(substitute(arg))]])
