@@ -8,8 +8,7 @@ sample_fitness(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
-  loops = FALSE,
-  multiple = FALSE
+  allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 }
 \arguments{

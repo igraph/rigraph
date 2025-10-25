@@ -10,7 +10,7 @@ harmonic_centrality(
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
-  cutoff = -1
+  cutoff = UNLIMITED
 )
 }
 \arguments{
