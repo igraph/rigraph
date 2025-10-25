@@ -20,10 +20,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - branch: main
-            upstream: master
           - branch: next
-            upstream: develop
+            upstream: main
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
 
