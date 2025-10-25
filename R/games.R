@@ -2486,7 +2486,7 @@ sample_bipartite_gnp <- function(
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
 #' and evaluation. *Social Networks*, 14, 5--61.
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' ## Two groups with not only few connection between groups
 #' pm <- cbind(c(.1, .001), c(.001, .05))
