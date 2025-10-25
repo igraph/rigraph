@@ -32,3 +32,7 @@ igraph is an R package with routines for simple graphs and network analysis. It 
 - Use meaningful variable names that reflect the testing context
 - Run `air format .` before committing changes to ensure consistent formatting
 - Keep documentation in sync with code changes. When updating roxygen2 documentation, ensure that each sentence is on its own line for better readability. Run `R -q -e 'devtools::document()'` to update the documentation.
+
+## Code Generation
+
+See `tools/README.md` for guidelines on code generation using the Stimulus framework.
