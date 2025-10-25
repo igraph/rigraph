@@ -6374,7 +6374,7 @@ SEXP R_igraph_is_bipartite(SEXP graph) {
 /*-------------------------------------------/
 / igraph_bipartite_game_gnp                  /
 /-------------------------------------------*/
-SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP mode) {
+SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP mode, SEXP allowed_edge_types, SEXP edge_labeled) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
@@ -6383,6 +6383,8 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
   igraph_real_t c_p;
   igraph_bool_t c_directed;
   igraph_neimode_t c_mode;
+  igraph_edge_type_sw_t c_allowed_edge_types;
+  igraph_bool_t c_edge_labeled;
   SEXP graph;
   SEXP types;
 
@@ -6399,9 +6401,12 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
   IGRAPH_R_CHECK_BOOL(directed);
   c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
+  IGRAPH_R_CHECK_BOOL(edge_labeled);
+  c_edge_labeled = LOGICAL(edge_labeled)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_bipartite_game_gnp(&c_graph, &c_types, c_n1, c_n2, c_p, c_directed, c_mode));
+  IGRAPH_R_CHECK(igraph_bipartite_game_gnp(&c_graph, &c_types, c_n1, c_n2, c_p, c_directed, c_mode, c_allowed_edge_types, c_edge_labeled));
   PutRNGstate();
 
                                         /* Convert output */

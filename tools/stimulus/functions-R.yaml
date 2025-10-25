@@ -519,16 +519,26 @@ igraph_is_bipartite:
     DEPS: type ON graph V(graph)
 
 igraph_bipartite_game_gnp:
-    PARAMS: |-
-        OUT GRAPH graph, OPTIONAL OUT BIPARTITE_TYPES_UNNAMED types,
-        INTEGER n1, INTEGER n2, REAL p, BOOLEAN directed=False,
-        NEIMODE mode=ALL
+    DEPS: types ON res$graph V(res$graph)
 
 igraph_bipartite_game:
     IGNORE: RR, RC
 
+igraph_bipartite_game_gnm:
+    DEPS: types ON res$graph V(res$graph)
+
+igraph_bipartite_iea_game:
+    DEPS: types ON res$graph V(res$graph)
+
+igraph_create_bipartite:
+    DEPS: types ON graph
+
+igraph_weighted_biadjacency:
+    DEPS: |-
+        weights ON res$graph E(res$graph), types ON res$graph V(res$graph)
+
 igraph_full_bipartite:
-    DEPS: types ON res$graph
+    DEPS: types ON res$graph V(res$graph)
 
 
 #######################################
