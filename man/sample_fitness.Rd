@@ -24,10 +24,13 @@ specifies the in-fitness of each vertex.
 If this argument is not \code{NULL}, then a directed graph is generated,
 otherwise an undirected one.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+\item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
+Possible values are: \code{"simple"} (no self-loops, no multiple edges),
+\code{"loops"} (self-loops allowed, no multiple edges),
+\code{"multi"} (no self-loops, multiple edges allowed),
+\code{"all"} (both self-loops and multiple edges allowed).}
 
-\item{multiple}{Logical scalar, whether to allow multiple edges in the
-graph.}
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 }
 \value{
 An igraph graph, directed or undirected.

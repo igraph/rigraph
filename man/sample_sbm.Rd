@@ -22,13 +22,17 @@ probability of creating an edge between vertices from groups \eqn{i} and
 must be symmetric.}
 
 \item{block.sizes}{Numeric vector giving the number of vertices in each
-group. The sum of the vector must match the number of vertices.}
+group. The sum of the vector must match the total number of vertices.}
 
 \item{directed}{Logical scalar, whether to generate a directed graph.}
 
-\item{...}{Passed to \code{sample_sbm()}.}
+\item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
+Possible values are: \code{"simple"} (no self-loops, no multiple edges),
+\code{"loops"} (self-loops allowed, no multiple edges),
+\code{"multi"} (no self-loops, multiple edges allowed),
+\code{"all"} (both self-loops and multiple edges allowed).}
 
-\item{n}{Number of vertices in the graph.}
+\item{...}{Passed to \code{sample_sbm()}.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
