@@ -69,9 +69,11 @@ the square root of the number of edges times the average degree; see the
 paper of Chung and Lu, and Cho et al for more details.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
+\dontshow{\}) # examplesIf}
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load
