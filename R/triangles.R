@@ -89,9 +89,18 @@ adjacent.triangles <- function(graph, vids = V(graph)) {
 #' @export
 #' @rdname count_triangles
 #' @cdocs igraph_list_triangles
-triangles <- list_triangles_impl
+triangles <- function(graph) {
+  list_triangles_impl(
+    graph = graph
+  )
+}
 
 #' @export
 #' @rdname count_triangles
 #' @cdocs igraph_adjacent_triangles
-count_triangles <- count_adjacent_triangles_impl
+count_triangles <- function(graph, vids = V(graph)) {
+  count_adjacent_triangles_impl(
+    graph = graph,
+    vids = vids
+  )
+}

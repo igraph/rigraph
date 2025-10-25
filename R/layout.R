@@ -3014,4 +3014,9 @@ drl_defaults <- list(
 #' l2 <- align_layout(g,l1)
 #' plot(g, layout = l1)
 #' plot(g, layout = l2)
-align_layout <- layout_align_impl
+align_layout <- function(graph, layout) {
+  layout_align_impl(
+    graph = graph,
+    layout = layout
+  )
+}
