@@ -227,7 +227,12 @@ bipartite_projection <- function(
 #' @rdname bipartite_projection
 #' @export
 #' @cdocs igraph_bipartite_projection_size
-bipartite_projection_size <- bipartite_projection_size_impl
+bipartite_projection_size <- function(graph, types = NULL) {
+  bipartite_projection_size_impl(
+    graph = graph,
+    types = types
+  )
+}
 
 #' Decide whether a graph is bipartite
 #'
@@ -279,4 +284,8 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' @family bipartite
 #' @export
 #' @cdocs igraph_is_bipartite
-bipartite_mapping <- is_bipartite_impl
+bipartite_mapping <- function(graph) {
+  is_bipartite_impl(
+    graph = graph
+  )
+}

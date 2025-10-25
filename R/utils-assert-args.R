@@ -16,6 +16,14 @@ ensure_igraph <- function(graph, optional = FALSE) {
   }
 }
 
+switch_igraph_arg <- function(
+  arg,
+  ...,
+  error_call = rlang::caller_env()
+) {
+  values <- ...names()
+  igraph.match.arg(arg, values, error_call = error_call)
+}
 
 igraph.match.arg <- function(
   arg,
