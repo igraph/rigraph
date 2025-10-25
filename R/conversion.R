@@ -600,7 +600,15 @@ as_edgelist <- function(graph, names = TRUE) {
 #' print(ug4, e = TRUE)
 #'
 #' @cdocs igraph_to_directed
-as_directed <- to_directed_impl
+as_directed <- function(
+  graph,
+  mode = c("mutual", "arbitrary", "random", "acyclic")
+) {
+  to_directed_impl(
+    graph = graph,
+    mode = mode
+  )
+}
 
 #' @rdname as_directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
@@ -1267,7 +1275,17 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' @family conversion
 #' @export
 #' @cdocs igraph_adjlist
-graph_from_adj_list <- adjlist_impl
+graph_from_adj_list <- function(
+  adjlist,
+  mode = c("out", "in", "all", "total"),
+  duplicate = TRUE
+) {
+  adjlist_impl(
+    adjlist = adjlist,
+    mode = mode,
+    duplicate = duplicate
+  )
+}
 
 
 #' Convert a graph to a long data frame
