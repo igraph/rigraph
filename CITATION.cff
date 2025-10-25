@@ -457,7 +457,7 @@ references:
   title: igraphdata
   abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'
   notes: Suggests
-  url: https://igraph.org
+  url: http://igraph.org
   repository: https://CRAN.R-project.org/package=igraphdata
   authors:
   - family-names: Csardi
