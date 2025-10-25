@@ -3625,6 +3625,50 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   res
 }
 
+graphlets_candidate_basis_impl <- function(graph, weights=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graphlets_candidate_basis, graph, weights)
+  if (igraph_opt("return.vs.es")) {
+    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+graphlets_project_impl <- function(graph, weights=NULL, cliques, Muc, startMu=FALSE, niter=1000) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  Muc <- as.numeric(Muc)
+  startMu <- as.logical(startMu)
+  niter <- as.numeric(niter)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graphlets_project, graph, weights, lapply(cliques, function(.x) .x-1), Muc, startMu, niter)
+
+  class(res) <- "igraphHRG"
+  res
+}
+
 hrg_fit_impl <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   # Argument checks
   ensure_igraph(graph)

@@ -703,10 +703,8 @@ igraph_graphlets:
     IGNORE: RC
 
 igraph_graphlets_candidate_basis:
-    IGNORE: RR, RC
 
 igraph_graphlets_project:
-    IGNORE: RR, RC, RInit
 
 #######################################
 # Hierarchical random graphs
