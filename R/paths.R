@@ -384,7 +384,12 @@ radius <- function(
 #'
 #' @export
 #' @cdocs igraph_graph_center_dijkstra
-graph_center <- function(graph, ..., weights = NULL, mode = c("all", "out", "in", "total")) {
+graph_center <- function(
+  graph,
+  ...,
+  weights = NULL,
+  mode = c("all", "out", "in", "total")
+) {
   graph_center_dijkstra_impl(
     graph = graph,
     ...,
