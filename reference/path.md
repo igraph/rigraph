@@ -74,7 +74,7 @@ plot(g2)
 
 g3 <- g2 + path("e", "f", "g", weight = 1:2, color = "red")
 E(g3)[[]]
-#> + 5/5 edges from 065b09e (vertex names):
+#> + 5/5 edges from 2f515e9 (vertex names):
 #>   tail head tid hid weight color
 #> 1    a    b   1   2     NA  <NA>
 #> 2    b    c   2   3     NA  <NA>
@@ -84,7 +84,7 @@ E(g3)[[]]
 
 g4 <- g3 + path(c("f", "c", "j", "d"), width = 1:3, color = "green")
 E(g4)[[]]
-#> + 8/8 edges from e790902 (vertex names):
+#> + 8/8 edges from c7f7a6b (vertex names):
 #>   tail head tid hid weight color width
 #> 1    a    b   1   2     NA  <NA>    NA
 #> 2    b    c   2   3     NA  <NA>    NA
