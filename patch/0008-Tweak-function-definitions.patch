@@ -1,0 +1,34 @@
+From 7545c34b50bf4e0d6b0c45a1f9af92e709a11034 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kirill=20M=C3=BCller?= <kirill@cynkra.com>
+Date: Sun, 26 Oct 2025 01:35:37 +0200
+Subject: [PATCH] Tweak function definitions
+
+---
+ src/vendor/cigraph/interfaces/functions.yaml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/vendor/cigraph/interfaces/functions.yaml b/src/vendor/cigraph/interfaces/functions.yaml
+index 17d0ba25fe..a1ba2d947a 100644
+--- a/src/vendor/cigraph/interfaces/functions.yaml
++++ b/src/vendor/cigraph/interfaces/functions.yaml
+@@ -2669,7 +2669,7 @@ igraph_fundamental_cycles:
+     PARAMS: |-
+         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
+         OUT EDGE_INDICES_LIST basis,
+-        OPTIONAL VERTEX start,
++        OPTIONAL VERTEX start=-1,
+         REAL bfs_cutoff=UNLIMITED
+     DEPS: weights ON graph, basis ON graph, start ON graph
+ 
+@@ -2710,7 +2710,7 @@ igraph_minimum_spanning_tree:
+     DEPS: res ON graph, weights ON graph
+ 
+ igraph_random_spanning_tree:
+-    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid
++    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=-1
+     DEPS: res ON graph, vid ON graph
+ 
+ igraph_tree_game:
+-- 
+2.50.1
+

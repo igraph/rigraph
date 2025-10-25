@@ -2669,7 +2669,7 @@ igraph_fundamental_cycles:
     PARAMS: |-
         GRAPH graph, OPTIONAL EDGE_WEIGHTS weights,
         OUT EDGE_INDICES_LIST basis,
-        OPTIONAL VERTEX start,
+        OPTIONAL VERTEX start=-1,
         REAL bfs_cutoff=UNLIMITED
     DEPS: weights ON graph, basis ON graph, start ON graph
 
@@ -2710,7 +2710,7 @@ igraph_minimum_spanning_tree:
     DEPS: res ON graph, weights ON graph
 
 igraph_random_spanning_tree:
-    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid
+    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=-1
     DEPS: res ON graph, vid ON graph
 
 igraph_tree_game:

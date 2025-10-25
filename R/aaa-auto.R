@@ -5382,7 +5382,7 @@ eulerian_cycle_impl <- function(graph) {
   res
 }
 
-fundamental_cycles_impl <- function(graph, weights=NULL, start=NULL, bfs.cutoff=UNLIMITED) {
+fundamental_cycles_impl <- function(graph, weights=NULL, start=-1, bfs.cutoff=UNLIMITED) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -5534,7 +5534,7 @@ minimum_spanning_tree_impl <- function(graph, weights=NULL, method=c("automatic"
   res
 }
 
-random_spanning_tree_impl <- function(graph, vid=NULL) {
+random_spanning_tree_impl <- function(graph, vid=-1) {
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)

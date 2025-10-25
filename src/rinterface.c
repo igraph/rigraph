@@ -12612,7 +12612,7 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP weights, SEXP start, SEXP bfs_
   c_bfs_cutoff = REAL(bfs_cutoff)[0];
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, (Rf_isNull(start) ? NULL : c_start), c_bfs_cutoff));
+  IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, (Rf_isNull(weights) ? NULL : &c_weights), &c_basis, (Rf_isNull(start) ? -1 : c_start), c_bfs_cutoff));
   PutRNGstate();
 
                                         /* Convert output */
@@ -12925,7 +12925,7 @@ SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
   }
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? NULL : c_vid)));
+  IGRAPH_R_CHECK(igraph_random_spanning_tree(&c_graph, &c_res, (Rf_isNull(vid) ? -1 : c_vid)));
   PutRNGstate();
 
                                         /* Convert output */
