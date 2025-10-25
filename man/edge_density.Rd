@@ -9,6 +9,8 @@ edge_density(graph, weights = NULL, loops = FALSE)
 \arguments{
 \item{graph}{The input graph.}
 
+\item{weights}{FIXME}
+
 \item{loops}{Logical constant, whether loop edges may exist in the graph.
 This affects the calculation of the largest possible number of edges in the
 graph. If this parameter is set to FALSE yet the graph contains self-loops,

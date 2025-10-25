@@ -26,6 +26,11 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' `page.rank()` was renamed to [page_rank()] to create a more
 #' consistent API.
 #' @inheritParams page_rank
+#' @param personalized Optional vector giving a probability distribution to
+#'   calculate personalized PageRank. For personalized PageRank, the probability
+#'   of jumping to a node when abandoning the random walk is not uniform, but it
+#'   is given by this vector. The vector should contains an entry for each vertex
+#'   and it will be rescaled to sum up to one.
 #' @keywords internal
 #' @export
 page.rank <- function(
@@ -40,13 +45,19 @@ page.rank <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+
+  if (lifecycle::is_present(personalized)) {
+    cli::cli_warn(
+      "The {.arg personalized} argument is deprecated and will be ignored."
+    )
+  }
+
   page_rank(
     graph = graph,
     algo = algo,
     vids = vids,
     directed = directed,
     damping = damping,
-    personalized = personalized,
     weights = weights,
     options = options
   )
@@ -1696,11 +1707,7 @@ hub_score <- function(
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
-#' @param personalized Optional vector giving a probability distribution to
-#'   calculate personalized PageRank. For personalized PageRank, the probability
-#'   of jumping to a node when abandoning the random walk is not uniform, but it
-#'   is given by this vector. The vector should contains an entry for each vertex
-#'   and it will be rescaled to sum up to one.
+#' @param reset FIXME
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted PageRank of vertices. If
 #'   this is `NULL` and the graph has a `weight` edge attribute then

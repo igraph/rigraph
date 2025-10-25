@@ -121,6 +121,7 @@ assortativity.degree <- function(graph, directed = TRUE) {
 #'
 #' @aliases assortativity
 #' @param graph The input graph, it can be directed or undirected.
+#' @param weights FIXME
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty
 #' @param values.in A second value vector to use for the incoming edges when
