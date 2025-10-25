@@ -472,13 +472,39 @@ isomorphic <- function(
 
 #' @export
 #' @cdocs igraph_isomorphic_bliss
-graph.isomorphic.bliss <- isomorphic_bliss_impl
+graph.isomorphic.bliss <- function(graph1, graph2, colors1 = NULL, colors2 = NULL, sh = c("fm", "f", "fs", "fl", "flm", "fsm")) {
+  isomorphic_bliss_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    colors1 = colors1,
+    colors2 = colors2,
+    sh = sh
+  )
+}
 #' @export
 #' @cdocs igraph_isomorphic_vf2
-graph.isomorphic.vf2 <- isomorphic_vf2_impl
+graph.isomorphic.vf2 <- function(graph1, graph2, vertex.color1 = NULL, vertex.color2 = NULL, edge.color1 = NULL, edge.color2 = NULL) {
+  isomorphic_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex.color1 = vertex.color1,
+    vertex.color2 = vertex.color2,
+    edge.color1 = edge.color1,
+    edge.color2 = edge.color2
+  )
+}
 #' @export
 #' @cdocs igraph_subisomorphic_vf2
-graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
+graph.subisomorphic.vf2 <- function(graph1, graph2, vertex.color1 = NULL, vertex.color2 = NULL, edge.color1 = NULL, edge.color2 = NULL) {
+  subisomorphic_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex.color1 = vertex.color1,
+    vertex.color2 = vertex.color2,
+    edge.color1 = edge.color1,
+    edge.color2 = edge.color2
+  )
+}
 
 #' @export
 #' @rdname isomorphic
@@ -575,7 +601,7 @@ is_isomorphic_to <- isomorphic
 #' subgraph_isomorphisms(pattern, target, domains = domains)
 #'
 #' # Directed LAD example
-#' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
+#' pattern <- make_graph(~ 1:2:3, 1 - +2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
 subgraph_isomorphic <- function(
