@@ -2,47 +2,17 @@
 
 # igraph 2.2.1
 
-## Bug fixes
-
-- Pass on `cutoff` arguemnt to `all_simple_paths()`.
-
-## Features
-
-- Generate almost all R implementations (#2047).
-
 ## Chore
 
 - Fix ASAN checks.
 
 - Add protection to fix rchk error.
 
-- Use autogen-impl functions for 3 motifs functions (#2152).
-
-- Auto-update from GitHub Actions (#2184).
-
-- Auto-update from GitHub Actions (#2181).
-
-- Autogenerate `igraph_neighbors()` (#2151).
-
-- Auto-update from GitHub Actions (#2164).
-
-## Continuous integration
-
-- Use newer CSAN image.
-
-- Fix vendoring.
-
 ## Testing
 
 - Improve centralitystress test (#2214).
 
 - Fix flaky test.
-
-- Snapshot updates for rcc-smoke (null) (#2170).
-
-## Uncategorized
-
-- Merge branch 'release-2.2.0'.
 
 
 # igraph 2.2.0
