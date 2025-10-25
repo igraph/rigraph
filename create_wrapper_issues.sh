@@ -18,7 +18,7 @@ Replace the direct aliasing of \`assortativity_nominal <- assortativity_nominal_
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -56,7 +56,7 @@ Replace the direct aliasing of \`assortativity_degree <- assortativity_degree_im
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -92,7 +92,7 @@ Replace the direct aliasing of \`bipartite_projection_size <- bipartite_projecti
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -127,7 +127,7 @@ Replace the direct aliasing of \`bipartite_mapping <- is_bipartite_impl\` in \`R
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -162,7 +162,7 @@ Replace the direct aliasing of \`strength <- strength_impl\` in \`R/centrality.R
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -201,7 +201,7 @@ Replace the direct aliasing of \`diversity <- diversity_impl\` in \`R/centrality
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -238,7 +238,7 @@ Replace the direct aliasing of \`page_rank <- personalized_pagerank_impl\` in \`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -280,7 +280,7 @@ Replace the direct aliasing of \`harmonic_centrality <- harmonic_centrality_cuto
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -319,7 +319,7 @@ Replace the direct aliasing of \`centralize <- centralization_impl\` in \`R/cent
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -356,7 +356,7 @@ Replace the direct aliasing of \`centr_degree <- centralization_degree_impl\` in
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -394,7 +394,7 @@ Replace the direct aliasing of \`centr_betw_tmax <- centralization_betweenness_t
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -430,7 +430,7 @@ Replace the direct aliasing of \`centr_clo <- centralization_closeness_impl\` in
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -467,7 +467,7 @@ Replace the direct aliasing of \`centr_clo_tmax <- centralization_closeness_tmax
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -503,7 +503,7 @@ Replace the direct aliasing of \`cliques <- cliques_impl\` in \`R/cliques.R\` wi
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -540,7 +540,7 @@ Replace the direct aliasing of \`largest_cliques <- largest_cliques_impl\` in \`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -575,7 +575,7 @@ Replace the direct aliasing of \`clique_num <- clique_number_impl\` in \`R/cliqu
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -610,7 +610,7 @@ Replace the direct aliasing of \`weighted_cliques <- weighted_cliques_impl\` in 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -649,7 +649,7 @@ Replace the direct aliasing of \`largest_weighted_cliques <- largest_weighted_cl
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -685,7 +685,7 @@ Replace the direct aliasing of \`weighted_clique_num <- weighted_clique_number_i
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -721,7 +721,7 @@ Replace the direct aliasing of \`is_complete <- is_complete_impl\` in \`R/clique
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -756,7 +756,7 @@ Replace the direct aliasing of \`is_clique <- is_clique_impl\` in \`R/cliques.R\
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -792,7 +792,7 @@ Replace the direct aliasing of \`is_ivs <- is_independent_vertex_set_impl\` in \
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -828,7 +828,7 @@ Replace the direct aliasing of \`greedy_vertex_coloring <- vertex_coloring_greed
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -864,7 +864,7 @@ Replace the direct aliasing of \`contract <- contract_vertices_impl\` in \`R/com
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -900,7 +900,7 @@ Replace the direct aliasing of \`voronoi_cells <- voronoi_impl\` in \`R/communit
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -940,7 +940,7 @@ Replace the direct aliasing of \`articulation_points <- articulation_points_impl
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -975,7 +975,7 @@ Replace the direct aliasing of \`bridges <- bridges_impl\` in \`R/components.R\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1010,7 +1010,7 @@ Replace the direct aliasing of \`is_biconnected <- is_biconnected_impl\` in \`R/
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1045,7 +1045,7 @@ Replace the direct aliasing of \`as_directed <- to_directed_impl\` in \`R/conver
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1081,7 +1081,7 @@ Replace the direct aliasing of \`graph_from_adj_list <- adjlist_impl\` in \`R/co
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1118,7 +1118,7 @@ Replace the direct aliasing of \`find_cycle <- find_cycle_impl\` in \`R/cycles.R
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1154,7 +1154,7 @@ Replace the direct aliasing of \`is_graphical <- is_graphical_impl\` in \`R/degs
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1191,7 +1191,7 @@ Replace the direct aliasing of \`global_efficiency <- global_efficiency_impl\` i
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1228,7 +1228,7 @@ Replace the direct aliasing of \`local_efficiency <- local_efficiency_impl\` in 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1266,7 +1266,7 @@ Replace the direct aliasing of \`average_local_efficiency <- average_local_effic
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1304,7 +1304,7 @@ Replace the direct aliasing of \`embed_adjacency_matrix <- adjacency_spectral_em
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1344,7 +1344,7 @@ Replace the direct aliasing of \`dim_select <- dim_select_impl\` in \`R/embeddin
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1383,7 +1383,7 @@ Replace the direct aliasing of \`embed_laplacian_matrix <- laplacian_spectral_em
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1424,7 +1424,7 @@ Replace the direct aliasing of \`eulerian_path <- eulerian_path_impl\` in \`R/eu
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1459,7 +1459,7 @@ Replace the direct aliasing of \`eulerian_cycle <- eulerian_cycle_impl\` in \`R/
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1494,7 +1494,7 @@ Replace the direct aliasing of \`st_cuts <- all_st_cuts_impl\` in \`R/flow.R\` w
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1531,7 +1531,7 @@ Replace the direct aliasing of \`st_min_cuts <- all_st_mincuts_impl\` in \`R/flo
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1569,7 +1569,7 @@ Replace the direct aliasing of \`min_st_separators <- all_minimal_st_separators_
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1604,7 +1604,7 @@ Replace the direct aliasing of \`max_flow <- maxflow_impl\` in \`R/flow.R\` with
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1642,7 +1642,7 @@ Replace the direct aliasing of \`is_separator <- is_separator_impl\` in \`R/flow
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1678,7 +1678,7 @@ Replace the direct aliasing of \`is_min_separator <- is_minimal_separator_impl\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1714,7 +1714,7 @@ Replace the direct aliasing of \`min_separators <- minimum_size_separators_impl\
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1749,7 +1749,7 @@ Replace the direct aliasing of \`sample_growing <- growing_random_game_impl\` in
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1787,7 +1787,7 @@ Replace the direct aliasing of \`sample_sbm <- sbm_game_impl\` in \`R/games.R\` 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1826,7 +1826,7 @@ Replace the direct aliasing of \`sample_dot_product <- dot_product_game_impl\` i
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1862,7 +1862,7 @@ Replace the direct aliasing of \`sample_islands <- simple_interconnected_islands
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1900,7 +1900,7 @@ Replace the direct aliasing of \`sample_k_regular <- k_regular_game_impl\` in \`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1938,7 +1938,7 @@ Replace the direct aliasing of \`sample_chung_lu <- chung_lu_game_impl\` in \`R/
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -1976,7 +1976,7 @@ Replace the direct aliasing of \`sample_fitness <- static_fitness_game_impl\` in
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2015,7 +2015,7 @@ Replace the direct aliasing of \`sample_fitness_pl <- static_power_law_game_impl
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2056,7 +2056,7 @@ Replace the direct aliasing of \`sample_forestfire <- forest_fire_game_impl\` in
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2095,7 +2095,7 @@ Replace the direct aliasing of \`sample_correlated_gnp <- correlated_game_impl\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2133,7 +2133,7 @@ Replace the direct aliasing of \`sample_correlated_gnp_pair <- correlated_pair_g
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2172,7 +2172,7 @@ Replace the direct aliasing of \`graphlets <- graphlets_impl\` in \`R/glet.R\` w
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2208,7 +2208,7 @@ Replace the direct aliasing of \`consensus_tree <- hrg_consensus_impl\` in \`R/h
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2246,7 +2246,7 @@ Replace the direct aliasing of \`hrg <- hrg_create_impl\` in \`R/hrg.R\` with an
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2283,7 +2283,7 @@ Replace the direct aliasing of \`align_layout <- layout_align_impl\` in \`R/layo
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2321,7 +2321,7 @@ Replace the direct aliasing of \`sample_tree <- tree_game_impl\` in \`R/make.R\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2358,7 +2358,7 @@ Replace the direct aliasing of \`make_from_prufer <- from_prufer_impl\` in \`R/m
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2393,7 +2393,7 @@ Replace the direct aliasing of \`realize_degseq <- realize_degree_sequence_impl\
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2431,7 +2431,7 @@ Replace the direct aliasing of \`triad_census <- triad_census_impl\` in \`R/moti
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2466,7 +2466,7 @@ Replace the direct aliasing of \`reverse_edges <- reverse_edges_impl\` in \`R/op
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2502,7 +2502,7 @@ Replace the direct aliasing of \`convex_hull <- convex_hull_2d_impl\` in \`R/oth
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2537,7 +2537,7 @@ Replace the direct aliasing of \`is_dag <- is_dag_impl\` in \`R/paths.R\` with a
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2572,7 +2572,7 @@ Replace the direct aliasing of \`is_acyclic <- is_acyclic_impl\` in \`R/paths.R\
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2607,7 +2607,7 @@ Replace the direct aliasing of \`max_cardinality <- maximum_cardinality_search_i
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2642,7 +2642,7 @@ Replace the direct aliasing of \`graph_center <- graph_center_impl\` in \`R/path
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2679,7 +2679,7 @@ Replace the direct aliasing of \`distance_table <- path_length_hist_impl\` in \`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2715,7 +2715,7 @@ Replace the direct aliasing of \`simplify <- simplify_impl\` in \`R/simple.R\` w
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2753,7 +2753,7 @@ Replace the direct aliasing of \`is_simple <- is_simple_impl\` in \`R/simple.R\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2788,7 +2788,7 @@ Replace the direct aliasing of \`sir <- sir_impl\` in \`R/sir.R\` with an explic
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2826,7 +2826,7 @@ Replace the direct aliasing of \`k_shortest_paths <- get_k_shortest_paths_impl\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2867,7 +2867,7 @@ Replace the direct aliasing of \`reciprocity <- reciprocity_impl\` in \`R/struct
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2904,7 +2904,7 @@ Replace the direct aliasing of \`edge_density <- density_impl\` in \`R/structura
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2940,7 +2940,7 @@ Replace the direct aliasing of \`feedback_arc_set <- feedback_arc_set_impl\` in 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -2977,7 +2977,7 @@ Replace the direct aliasing of \`feedback_vertex_set <- feedback_vertex_set_impl
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3014,7 +3014,7 @@ Replace the direct aliasing of \`which_multiple <- is_multiple_impl\` in \`R/str
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3050,7 +3050,7 @@ Replace the direct aliasing of \`any_multiple <- has_multiple_impl\` in \`R/stru
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3085,7 +3085,7 @@ Replace the direct aliasing of \`count_multiple <- count_multiple_impl\` in \`R/
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3121,7 +3121,7 @@ Replace the direct aliasing of \`which_loop <- is_loop_impl\` in \`R/structural-
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3157,7 +3157,7 @@ Replace the direct aliasing of \`any_loop <- has_loop_impl\` in \`R/structural-p
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3192,7 +3192,7 @@ Replace the direct aliasing of \`is_connected <- is_connected_impl\` in \`R/stru
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3228,7 +3228,7 @@ Replace the direct aliasing of \`which_mutual <- is_mutual_impl\` in \`R/structu
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3264,7 +3264,7 @@ Replace the direct aliasing of \`knn <- avg_nearest_neighbor_degree_impl\` in \`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3303,7 +3303,7 @@ Replace the direct aliasing of \`are_adjacent <- are_adjacent_impl\` in \`R/stru
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3340,7 +3340,7 @@ Replace the direct aliasing of \`graph.isomorphic.bliss <- isomorphic_bliss_impl
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3378,7 +3378,7 @@ Replace the direct aliasing of \`graph.isomorphic.vf2 <- isomorphic_vf2_impl\` i
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3418,7 +3418,7 @@ Replace the direct aliasing of \`graph.subisomorphic.vf2 <- subisomorphic_vf2_im
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3458,7 +3458,7 @@ Replace the direct aliasing of \`graph.count.isomorphisms.vf2 <- count_isomorphi
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3498,7 +3498,7 @@ Replace the direct aliasing of \`graph.count.subisomorphisms.vf2 <- count_subiso
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3538,7 +3538,7 @@ Replace the direct aliasing of \`graph.isoclass <- isoclass_impl\` in \`R/topolo
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3573,7 +3573,7 @@ Replace the direct aliasing of \`graph_from_isomorphism_class <- isoclass_create
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3610,7 +3610,7 @@ Replace the direct aliasing of \`canonical_permutation <- canonical_permutation_
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3646,7 +3646,7 @@ Replace the direct aliasing of \`permute <- permute_vertices_impl\` in \`R/topol
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3682,7 +3682,7 @@ Replace the direct aliasing of \`graph.isomorphic <- isomorphic_impl\` in \`R/to
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3691,12 +3691,12 @@ graph.isomorphic <- isomorphic_impl
 
 **Desired Pattern**
 \`\`\`r
-graph.isomorphic <- function(graph1, graph2, method = c("auto", "direct", "vf2", "bliss"), ...)) {
+graph.isomorphic <- function(graph1, graph2, method = c("auto", "direct", "vf2", "bliss"), ...) {
   isomorphic_impl(
     graph1 = graph1,
     graph2 = graph2,
     method = method,
-    ... = ...
+    ...
   )
 }
 \`\`\`
@@ -3720,7 +3720,7 @@ Replace the direct aliasing of \`count_automorphisms <- count_automorphisms_blis
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3757,7 +3757,7 @@ Replace the direct aliasing of \`automorphism_group <- automorphism_group_impl\`
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3795,7 +3795,7 @@ Replace the direct aliasing of \`is_forest <- is_forest_impl\` in \`R/trees.R\` 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3831,7 +3831,7 @@ Replace the direct aliasing of \`to_prufer <- to_prufer_impl\` in \`R/trees.R\` 
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3866,7 +3866,7 @@ Replace the direct aliasing of \`triangles <- list_triangles_impl\` in \`R/trian
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
@@ -3901,7 +3901,7 @@ Replace the direct aliasing of \`count_triangles <- count_adjacent_triangles_imp
 **Instructions**
 1. Create an explicit function with a complete signature that matches the \`_impl\` function's parameters
 2. Forward each argument individually and explicitly using \`arg = arg\` notation
-3. Do not use \`...\` - instead, list all parameters explicitly
+3. Do not use \`...\` unless the \`_impl\` function itself uses \`...\`
 
 **Current Pattern**
 \`\`\`r
