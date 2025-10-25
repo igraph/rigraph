@@ -1436,7 +1436,13 @@ eigen_centrality <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_strength
-strength <- function(graph, vids = V(graph), mode = c("all", "out", "in", "total"), loops = TRUE, weights = NULL) {
+strength <- function(
+  graph,
+  vids = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  weights = NULL
+) {
   strength_impl(
     graph = graph,
     vids = vids,
@@ -1740,7 +1746,16 @@ hub_score <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_personalized_pagerank
-page_rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), directed = TRUE, damping = 0.85, personalized = NULL, weights = NULL, options = NULL) {
+page_rank <- function(
+  graph,
+  algo = c("prpack", "arpack"),
+  vids = V(graph),
+  directed = TRUE,
+  damping = 0.85,
+  personalized = NULL,
+  weights = NULL,
+  options = NULL
+) {
   personalized_pagerank_impl(
     graph = graph,
     algo = algo,
@@ -1799,7 +1814,14 @@ page_rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), dire
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
 #' @cdocs igraph_harmonic_centrality_cutoff
-harmonic_centrality <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), weights = NULL, normalized = FALSE, cutoff = -1) {
+harmonic_centrality <- function(
+  graph,
+  vids = V(graph),
+  mode = c("out", "in", "all", "total"),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+) {
   harmonic_centrality_cutoff_impl(
     graph = graph,
     vids = vids,
