@@ -294,6 +294,21 @@ EDGE_WEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+EDGE_LENGTHS:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: R_SEXP_to_vector(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_vector_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VERTEX_WEIGHTS:
     CALL: '&%C%'
     CTYPE: igraph_vector_t

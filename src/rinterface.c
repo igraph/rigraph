@@ -13217,15 +13217,20 @@ SEXP R_igraph_spatial_edge_lengths(SEXP graph, SEXP points, SEXP METRIC) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_init(&c_lengths, 0));
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_lengths);
+  lengths=R_GlobalEnv; /* hack to have a non-NULL value */
   R_SEXP_to_matrix(points, &c_points);
   c_METRIC = (igraph_metric_t) Rf_asInteger(METRIC);
                                         /* Call igraph */
   GetRNGstate();
-  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, c_lengths, &c_points, c_METRIC));
+  IGRAPH_R_CHECK(igraph_spatial_edge_lengths(&c_graph, &c_lengths, &c_points, c_METRIC));
   PutRNGstate();
 
                                         /* Convert output */
-
+  PROTECT(lengths=R_igraph_0orvector_to_SEXP(&c_lengths));
+  igraph_vector_destroy(&c_lengths);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = lengths;
 
   UNPROTECT(1);
