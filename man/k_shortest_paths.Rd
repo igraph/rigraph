@@ -8,8 +8,8 @@ k_shortest_paths(
   graph,
   from,
   to,
-  ...,
   k,
+  ...,
   weights = NULL,
   mode = c("out", "in", "all", "total")
 )
@@ -21,10 +21,10 @@ k_shortest_paths(
 
 \item{to}{The target vertex of the shortest paths.}
 
-\item{...}{These dots are for future extensions and must be empty.}
-
 \item{k}{The number of paths to find. They will be returned in order of
 increasing length.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the
