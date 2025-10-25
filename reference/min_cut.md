@@ -120,15 +120,15 @@ min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
 #> [1] 2
 #> 
 #> $cut
-#> + 2/100 edges from 346e7ac:
+#> + 2/100 edges from e97957e:
 #> [1] 1--2 2--3
 #> 
 #> $partition1
-#> + 1/100 vertex, from 346e7ac:
+#> + 1/100 vertex, from e97957e:
 #> [1] 2
 #> 
 #> $partition2
-#> + 99/100 vertices, from 346e7ac:
+#> + 99/100 vertices, from e97957e:
 #>  [1]   1   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20
 #> [20]  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39
 #> [39]  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58
@@ -144,15 +144,15 @@ min_cut(g2, value.only = FALSE)
 #> [1] 1
 #> 
 #> $cut
-#> + 1/7 edge from da846f3:
+#> + 1/7 edge from a783842:
 #> [1] 2->3
 #> 
 #> $partition1
-#> + 1/6 vertex, from da846f3:
+#> + 1/6 vertex, from a783842:
 #> [1] 2
 #> 
 #> $partition2
-#> + 5/6 vertices, from da846f3:
+#> + 5/6 vertices, from a783842:
 #> [1] 1 3 4 5 6
 #> 
 ```
