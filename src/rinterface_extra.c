@@ -2672,7 +2672,7 @@ SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
   }
 
   PROTECT(result=NEW_NUMERIC(igraph_matrix_size(m)));
-  igraph_matrix_copy_to(m, REAL(result));
+  igraph_matrix_copy_to(m, REAL(result), IGRAPH_COLUMN_MAJOR);
   PROTECT(dim=NEW_INTEGER(2));
   INTEGER(dim)[0] = (int) nrow;
   INTEGER(dim)[1] = (int) ncol;
@@ -2739,7 +2739,7 @@ SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
   }
 
   PROTECT(result=NEW_COMPLEX(igraph_matrix_complex_size(m)));
-  igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result));
+  igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result), IGRAPH_COLUMN_MAJOR);
   PROTECT(dim=NEW_INTEGER(2));
   INTEGER(dim)[0] = (int) nrow;
   INTEGER(dim)[1] = (int) ncol;
@@ -3269,7 +3269,7 @@ SEXP R_igraph_sparsemat_to_SEXP_cc(const igraph_sparsemat_t *sp) {
     igraph_vector_t x;
     R_SEXP_to_vector_int_copy(VECTOR_ELT(res, 2), &p);
     R_SEXP_to_vector_int_copy(VECTOR_ELT(res, 3), &i);
-    igraph_vector_view(&x, REAL(VECTOR_ELT(res, 4)), nz);
+    x = igraph_vector_view(REAL(VECTOR_ELT(res, 4)), nz);
     igraph_sparsemat_getelements_sorted(sp, &i, &p, &x);
   }
 
@@ -3335,7 +3335,7 @@ void R_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list) {
   for (igraph_integer_t i=0; i<length; i++) {
     igraph_vector_t *v=&vecs[i];
     SEXP el=VECTOR_ELT(vectorlist, i);
-    igraph_vector_view(v, REAL(el), Rf_xlength(el));
+    *v = igraph_vector_view(REAL(el), Rf_xlength(el));
   }
 }
 
@@ -3374,7 +3374,7 @@ void R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
     igraph_matrix_t *v=&vecs[i];
     SEXP el=VECTOR_ELT(matrixlist, i);
     SEXP dim=GET_DIM(el);
-    igraph_matrix_view(v, REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
+    *v = igraph_matrix_view(REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
   }
 }
 
@@ -4114,7 +4114,7 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   }
   if (mode == IGRAPH_ALL && negw) {
     /* Reject undirected grahs with negative weights, just like igraph_shortest_paths_johnson() would. */
-    IGRAPH_ERROR("Undirected graph with negative weight.", IGRAPH_ENEGLOOP);
+    IGRAPH_ERROR("Undirected graph with negative weight.", IGRAPH_ENEGCYCLE);
   }
   if (! negw) {
     /* Fall back to Dijstra when there are no negative weights, just like igraph_shortest_paths_johnson() would. */
@@ -5667,7 +5667,7 @@ SEXP R_igraph_rewire(SEXP graph, SEXP pn, SEXP pmode) {
   SEXP result;
 
   R_SEXP_to_igraph_copy(graph, &g);
-  IGRAPH_R_CHECK(igraph_rewire(&g, n, mode));
+  IGRAPH_R_CHECK(igraph_rewire(&g, n, mode, /* stats= */ NULL));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -6421,9 +6421,10 @@ SEXP R_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
   igraph_real_t p=REAL(pp)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
   igraph_bool_t multiple=LOGICAL(pmultiple)[0];
+  igraph_edge_type_sw_t allowed_edge_types = (loops ? IGRAPH_LOOPS_SW : 0) | (multiple ? IGRAPH_MULTI_SW : IGRAPH_SIMPLE_SW);
   SEXP result;
 
-  IGRAPH_R_CHECK(igraph_watts_strogatz_game(&g, dim, size, nei, p, loops, multiple));
+  IGRAPH_R_CHECK(igraph_watts_strogatz_game(&g, dim, size, nei, p, allowed_edge_types));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -6469,7 +6470,7 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   igraph_vector_int_list_init(&list, 0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &list, /*no=*/ 0, /*file=*/ 0,
-                                minsize, maxsize);
+                                minsize, maxsize, /*max_results=*/ 0);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
 
@@ -6509,7 +6510,7 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                 __LINE__, IGRAPH_EFILE); }
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
-                                minsize, maxsize);
+                                minsize, maxsize, /*max_results=*/ 0);
   fclose(stream);
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
@@ -6549,7 +6550,7 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
                                         /* Call igraph */
   igraph_maximal_cliques_subset(&c_graph, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, &c_no, /*file=*/ 0,
-                                c_min_size, c_max_size);
+                                c_min_size, c_max_size, /*max_results=*/ 0);
 
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
@@ -6572,7 +6573,7 @@ SEXP R_igraph_independent_vertex_sets(SEXP graph,
 
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_int_list_init(&list, 0);
-  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize));
+  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize, /*max_results=*/ 0));
   PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
   igraph_vector_int_list_destroy(&list);
 
@@ -6602,7 +6603,7 @@ SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph) {
 
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_int_list_init(&list,0);
-  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &list));
+  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &list, /*min_size=*/ 0, /*max_size=*/ 0, /*max_results=*/ 0));
   PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
   igraph_vector_int_list_destroy(&list);
 
