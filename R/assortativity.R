@@ -230,9 +230,21 @@ assortativity_legacy <- function(
 #' @rdname assortativity
 #' @export
 #' @cdocs igraph_assortativity_nominal
-assortativity_nominal <- assortativity_nominal_impl
+assortativity_nominal <- function(graph, types, directed = TRUE, normalized = TRUE) {
+  assortativity_nominal_impl(
+    graph = graph,
+    types = types,
+    directed = directed,
+    normalized = normalized
+  )
+}
 
 #' @rdname assortativity
 #' @export
 #' @cdocs igraph_assortativity_degree
-assortativity_degree <- assortativity_degree_impl
+assortativity_degree <- function(graph, directed = TRUE) {
+  assortativity_degree_impl(
+    graph = graph,
+    directed = directed
+  )
+}
