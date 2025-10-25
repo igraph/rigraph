@@ -1334,7 +1334,12 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @family functions for manipulating graph structure
 #' @export
 #' @cdocs igraph_reverse_edges
-reverse_edges <- reverse_edges_impl
+reverse_edges <- function(graph, eids = E(graph)) {
+  reverse_edges_impl(
+    graph = graph,
+    eids = eids
+  )
+}
 
 #' @rdname reverse_edges
 #' @param x The input graph.
