@@ -419,7 +419,13 @@ clique_num <- function(graph) {
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
 #' @cdocs igraph_weighted_cliques
-weighted_cliques <- function(graph, vertex.weights = NULL, min.weight = 0, max.weight = 0, maximal = FALSE) {
+weighted_cliques <- function(
+  graph,
+  vertex.weights = NULL,
+  min.weight = 0,
+  max.weight = 0,
+  maximal = FALSE
+) {
   weighted_cliques_impl(
     graph = graph,
     vertex.weights = vertex.weights,
