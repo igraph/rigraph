@@ -601,16 +601,15 @@ igraph_maximal_cliques_hist:
     INTERNAL: true
 
 igraph_independent_vertex_sets:
-    IGNORE: RR, RC
+    PARAM_NAMES:
+        min_size: min
+        max_size: max
 
 igraph_largest_independent_vertex_sets:
-    IGNORE: RR, RC
 
 igraph_maximal_independent_vertex_sets:
-    IGNORE: RR, RC
 
 igraph_independence_number:
-    IGNORE: RR, RC
 
 #######################################
 # Layouts
@@ -654,10 +653,8 @@ igraph_layout_merge_dla:
 #######################################
 
 igraph_cocitation:
-    IGNORE: RR, RC
 
 igraph_bibcoupling:
-    IGNORE: RR, RC
 
 #######################################
 # Community structure
@@ -706,10 +703,8 @@ igraph_graphlets:
     IGNORE: RC
 
 igraph_graphlets_candidate_basis:
-    IGNORE: RR, RC
 
 igraph_graphlets_project:
-    IGNORE: RR, RC, RInit
 
 #######################################
 # Hierarchical random graphs
@@ -1014,10 +1009,8 @@ igraph_minimum_spanning_tree:
     IGNORE: RR, RC, RInit
 
 igraph_minimum_spanning_tree_unweighted:
-    IGNORE: RR, RC
 
 igraph_minimum_spanning_tree_prim:
-    IGNORE: RR, RC
 
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0

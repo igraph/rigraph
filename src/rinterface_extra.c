@@ -4088,50 +4088,6 @@ SEXP R_igraph_running_mean(SEXP pdata, SEXP pbinwidth) {
   return result;
 }
 
-SEXP R_igraph_cocitation(SEXP graph, SEXP pvids) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_matrix_t m;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_matrix_init(&m, 0, 0);
-  IGRAPH_R_CHECK(igraph_cocitation(&g, &m, vs));
-
-  PROTECT(result=R_igraph_matrix_to_SEXP(&m));
-  igraph_matrix_destroy(&m);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_bibcoupling(SEXP graph, SEXP pvids) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_matrix_t m;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(pvids, &g, &vs, &vs_data);
-  igraph_matrix_init(&m, 0, 0);
-  IGRAPH_R_CHECK(igraph_bibcoupling(&g, &m, vs));
-
-  PROTECT(result=R_igraph_matrix_to_SEXP(&m));
-  igraph_matrix_destroy(&m);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
 /* igraph_shortest_paths_johnson() does not have a 'mode' argument in C/igraph 0.9 and 0.10.
  * This function fills in this functionality. It should be removed when C/igraph is updated,
  * to version 0.11 where igraph_distances_johnson() does support 'mode'. */
@@ -4519,39 +4475,6 @@ SEXP R_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
   IGRAPH_R_CHECK(igraph_layout_lgl(&g, &res, maxiter, maxdelta, area, coolexp, repulserad, cellsize, root));
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP graph) {
-
-  igraph_t g;
-  igraph_t mst;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree_unweighted(&g, &mst));
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_minimum_spanning_tree_prim(SEXP graph, SEXP pweights) {
-
-  igraph_t g;
-  igraph_t mst;
-  igraph_vector_t weights;
-  SEXP result;
-
-  R_SEXP_to_vector(pweights, &weights);
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree_prim(&g, &mst, &weights));
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
 
   UNPROTECT(1);
   return result;
@@ -6627,68 +6550,6 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   return(result);
 }
 
-SEXP R_igraph_independent_vertex_sets(SEXP graph,
-                                      SEXP pminsize, SEXP pmaxsize) {
-  igraph_t g;
-  igraph_vector_int_list_t list;
-  igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
-  igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_list_init(&list, 0);
-  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize));
-  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
-  igraph_vector_int_list_destroy(&list);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_largest_independent_vertex_sets(SEXP graph) {
-  igraph_t g;
-  igraph_vector_int_list_t list;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_list_init(&list,0);
-  IGRAPH_R_CHECK(igraph_largest_independent_vertex_sets(&g, &list));
-  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
-  igraph_vector_int_list_destroy(&list);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph) {
-  igraph_t g;
-  igraph_vector_int_list_t list;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_list_init(&list,0);
-  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &list));
-  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
-  igraph_vector_int_list_destroy(&list);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_independence_number(SEXP graph) {
-  igraph_t g;
-  igraph_integer_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_independence_number(&g, &res));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_lastcit_game(SEXP pnodes, SEXP pedges, SEXP pagebins,
                            SEXP ppreference, SEXP pdirected) {
 
@@ -7899,107 +7760,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
 /*-------------------------------------------/
 / igraph_graphlets_candidate_basis           /
 /-------------------------------------------*/
-SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
-  /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_weights;
-  igraph_vector_int_list_t c_cliques;
-  igraph_vector_t c_thresholds;
-  SEXP cliques;
-  SEXP thresholds;
-
-  SEXP result, names;
-
-  /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (0 != igraph_vector_int_list_init(&c_cliques, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_cliques);
-  if (0 != igraph_vector_init(&c_thresholds, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_destroy, &c_thresholds);
-  /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graphlets_candidate_basis(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_thresholds));
-
-  /* Convert output */
-  PROTECT(result=NEW_LIST(2));
-  PROTECT(names=NEW_CHARACTER(2));
-  PROTECT(cliques=R_igraph_vector_int_list_to_SEXPp1(&c_cliques));
-  igraph_vector_int_list_destroy(&c_cliques);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(thresholds=R_igraph_vector_to_SEXP(&c_thresholds));
-  igraph_vector_destroy(&c_thresholds);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(result, 0, cliques);
-  SET_VECTOR_ELT(result, 1, thresholds);
-  SET_STRING_ELT(names, 0, Rf_mkChar("cliques"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("thresholds"));
-  SET_NAMES(result, names);
-
-  UNPROTECT(4);
-
-  return(result);
-}
-
-igraph_error_t igraph_i_graphlets_project(
-            const igraph_t *graph, const igraph_vector_t *weights,
-            const igraph_vector_int_list_t *cliques, igraph_vector_t *Mu, igraph_bool_t startMu,
-            igraph_integer_t niter, igraph_integer_t vid1);
-
-/*-------------------------------------------/
-/ igraph_graphlets_project                   /
-/-------------------------------------------*/
-
-SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
-                                SEXP Mu, SEXP niter) {
-  /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_weights;
-  igraph_vector_int_list_t c_cliques;
-  igraph_vector_t c_Mu;
-  igraph_integer_t c_niter;
-
-  SEXP result;
-
-  /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(cliques)) {
-    R_igraph_SEXP_to_vector_int_list(cliques, &c_cliques);
-  } else {
-    igraph_vector_int_list_init(&c_cliques, 0);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_cliques);
-  if (0 != R_SEXP_to_vector_copy(Mu, &c_Mu)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_destroy, &c_Mu);
-  c_niter=(igraph_integer_t) REAL(niter)[0];
-
-  /* TODO: Change igraph_i_graphlets_project to igraph_graphlets_project, because
-   * we should not depend on non-public functions from igraph.
-   */
-  /* Call igraph */
-  igraph_i_graphlets_project(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights),
-                             &c_cliques, &c_Mu, /*startMu=*/ 1, c_niter,
-                             /*vid1=*/ 1);
-
-  /* Convert output */
-  PROTECT(Mu=R_igraph_vector_to_SEXP(&c_Mu));
-  igraph_vector_int_list_destroy(&c_cliques);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_destroy(&c_Mu);
-  IGRAPH_FINALLY_CLEAN(1);
-  result=Mu;
-
-  UNPROTECT(1);
-  return(result);
-}
-
-
 SEXP R_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
                                            SEXP pweights, SEXP pwhich,
                                            SEXP scaled, SEXP cvec,

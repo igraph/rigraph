@@ -2983,6 +2983,58 @@ is_independent_vertex_set_impl <- function(graph, candidate) {
   res
 }
 
+independent_vertex_sets_impl <- function(graph, min=0, max=0) {
+  # Argument checks
+  ensure_igraph(graph)
+  min <- as.numeric(min)
+  max <- as.numeric(max)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_independent_vertex_sets, graph, min, max)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+largest_independent_vertex_sets_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+maximal_independent_vertex_sets_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+independence_number_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_independence_number, graph)
+
+  res
+}
+
 layout_random_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
@@ -3227,6 +3279,30 @@ layout_align_impl <- function(graph, layout) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_layout_align, graph, layout)
+
+  res
+}
+
+cocitation_impl <- function(graph, vids=V(graph)) {
+  # Argument checks
+  ensure_igraph(graph)
+  vids <- as_igraph_vs(graph, vids)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_cocitation, graph, vids-1)
+
+  res
+}
+
+bibcoupling_impl <- function(graph, vids=V(graph)) {
+  # Argument checks
+  ensure_igraph(graph)
+  vids <- as_igraph_vs(graph, vids)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_bibcoupling, graph, vids-1)
 
   res
 }
@@ -3546,6 +3622,50 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   if (igraph_opt("return.vs.es")) {
     res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
   }
+  res
+}
+
+graphlets_candidate_basis_impl <- function(graph, weights=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graphlets_candidate_basis, graph, weights)
+  if (igraph_opt("return.vs.es")) {
+    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
+  res
+}
+
+graphlets_project_impl <- function(graph, weights=NULL, cliques, Muc, startMu=FALSE, niter=1000) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  Muc <- as.numeric(Muc)
+  startMu <- as.logical(startMu)
+  niter <- as.numeric(niter)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graphlets_project, graph, weights, lapply(cliques, function(.x) .x-1), Muc, startMu, niter)
+
+  class(res) <- "igraphHRG"
   res
 }
 
@@ -4532,15 +4652,7 @@ get_isomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NUL
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2_callback,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
-  )
+  res <- .Call(R_igraph_get_isomorphisms_vf2_callback, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
 
   res
 }
@@ -5342,6 +5454,36 @@ is_complete_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_complete, graph)
+
+  res
+}
+
+minimum_spanning_tree_unweighted_impl <- function(graph) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
+
+  res
+}
+
+minimum_spanning_tree_prim_impl <- function(graph, weights) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_minimum_spanning_tree_prim, graph, weights)
 
   res
 }
