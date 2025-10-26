@@ -863,7 +863,7 @@ mean_distance <- function(
     graph,
     weights = weights,
     directed = directed,
-    unconn = unconnected,
+    unconnected = unconnected,
     details = details
   )
 }
