@@ -2258,35 +2258,19 @@ cluster_leading_eigen <- function(
     options <- options()
   }
 
-  # Argument checks
-  ensure_igraph(graph)
-
-  steps <- as.numeric(steps)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
 
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(
-    R_igraph_community_leading_eigenvector,
-    graph,
-    steps,
-    weights,
-    options,
-    start,
-    callback,
-    extra,
+  res <- community_leading_eigenvector_impl(
+    graph = graph,
+    weights = weights,
+    steps = steps,
+    options = options,
+    start = start,
+    callback = callback,
+    extra = extra,
     env,
     environment(igraph.i.levc.arp)
   )
