@@ -8211,7 +8211,7 @@ test_that("ecount_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- make_empty_graph(5)
   expect_snapshot(ecount_impl(g))
-  
+
   g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
   expect_snapshot(ecount_impl(g))
 })
@@ -8229,7 +8229,7 @@ test_that("is_directed_impl basic", {
   local_igraph_options(print.id = FALSE)
   g <- make_empty_graph(5, directed = TRUE)
   expect_snapshot(is_directed_impl(g))
-  
+
   g <- make_empty_graph(5, directed = FALSE)
   expect_snapshot(is_directed_impl(g))
 })

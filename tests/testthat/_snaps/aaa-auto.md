@@ -10115,6 +10115,13 @@
     Output
       [1] 0
 
+---
+
+    Code
+      ecount_impl(g)
+    Output
+      [1] 3
+
 # ecount_impl errors
 
     Code
