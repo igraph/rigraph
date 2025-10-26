@@ -69,8 +69,8 @@ Other functions for manipulating graph structure:
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH bec126c DN-- 4 3 -- 
+#> IGRAPH ae38214 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from bec126c (vertex names):
+#> + edges from ae38214 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

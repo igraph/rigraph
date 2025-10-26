@@ -42,9 +42,9 @@ Gabor Csardi <csardi.gabor@gmail.com>.
 g <- make_full_graph(5) + make_full_graph(5)
 hrg <- fit_hrg(g)
 as.igraph(hrg)
-#> IGRAPH c03d7f6 DN-- 19 18 -- Fitted HRG
+#> IGRAPH 660ea6c DN-- 19 18 -- Fitted HRG
 #> + attr: name (g/c), name (v/c), prob (v/n)
-#> + edges from c03d7f6 (vertex names):
+#> + edges from 660ea6c (vertex names):
 #>  [1] g1->g4 g2->g6 g3->g9 g4->g5 g5->g3 g6->6  g7->7  g8->8  g9->1  g1->g2
 #> [11] g2->g7 g3->2  g4->3  g5->5  g6->9  g7->g8 g8->10 g9->4 
 ```
