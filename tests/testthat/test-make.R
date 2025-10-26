@@ -503,9 +503,10 @@ test_that("make_turan() works", {
   # Test edge cases
   g3 <- make_turan(5, 5) # r equals n
   expect_vcount(g3, 5)
-  expect_ecount(g3, 10) # Should be complete graph
+  # When r equals n, each vertex is in its own partition, creating a complete graph
+  expect_ecount(g3, 10) # Complete graph K5 has 5*4/2 = 10 edges
 
-  g4 <- make_turan(5, 1) # r = 1, no edges
+  g4 <- make_turan(5, 1) # r = 1, single partition, no edges
   expect_ecount(g4, 0)
 
   # Test constructor spec form
