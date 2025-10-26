@@ -269,9 +269,8 @@ graph.isoclass.subgraph <- function(graph, vids) {
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids) - 1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_isoclass_subgraph, graph, vids)
+  res <- isoclass_subgraph_impl(graph, vids)
   res
 }
 
@@ -458,11 +457,9 @@ isomorphic <- function(
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(graph1, graph2)
   } else if (method == "direct") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {

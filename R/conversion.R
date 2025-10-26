@@ -624,17 +624,10 @@ as_undirected <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "collapse" = 1L,
-    "each" = 0L,
-    "mutual" = 2L
-  )
-  edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
+  mode <- igraph.match.arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_to_undirected, graph, mode, edge.attr.comb)
+  res <- to_undirected_impl(graph, mode, edge.attr.comb)
 
   res
 }

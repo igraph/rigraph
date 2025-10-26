@@ -118,9 +118,8 @@ simplify_and_colorize <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_simplify_and_colorize, graph)
+  res <- simplify_and_colorize_impl(graph)
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

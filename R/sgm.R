@@ -25,7 +25,7 @@ solve_LSAP <- function(x, maximum = FALSE) {
     x <- max(x) - x
   }
   storage.mode(x) <- "double"
-  out <- .Call(R_igraph_solve_lsap, x, as.numeric(nc)) + 1L
+  out <- solve_lsap_impl(x, as.numeric(nc)) + 1L
   out[seq_len(nr)]
 }
 

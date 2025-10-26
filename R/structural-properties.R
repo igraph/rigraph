@@ -1582,16 +1582,10 @@ induced_subgraph <- function(
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- switch(
-    igraph.match.arg(impl),
-    "auto" = 0L,
-    "copy_and_delete" = 1L,
-    "create_from_scratch" = 2L
-  )
+  impl <- igraph.match.arg(impl)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_induced_subgraph, graph, vids - 1, impl)
+  res <- induced_subgraph_impl(graph, vids, impl)
 
   res
 }
@@ -1603,13 +1597,13 @@ induced_subgraph <- function(
 #' @export
 subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
+  # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
   delete.vertices <- as.logical(delete.vertices)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_subgraph_from_edges, graph, eids - 1, delete.vertices)
+  res <- subgraph_from_edges_impl(graph, eids, delete.vertices)
 
   res
 }
@@ -1796,14 +1790,13 @@ transitivity <- function(
   }
 
   isolates <- igraph.match.arg(isolates)
-  isolates <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
 
-  on.exit(.Call(R_igraph_finalizer))
   if (type == 0) {
-    .Call(R_igraph_transitivity_undirected, graph, isolates)
+    transitivity_undirected_impl(graph, isolates)
   } else if (type == 1) {
+    isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call(R_igraph_transitivity_local_undirected_all, graph, isolates)
+      res <- .Call(R_igraph_transitivity_local_undirected_all, graph, isolates_num)
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name
       }
@@ -1814,15 +1807,14 @@ transitivity <- function(
         R_igraph_transitivity_local_undirected,
         graph,
         vids - 1,
-        isolates
+        isolates_num
       )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name[vids]
       }
-      res
     }
   } else if (type == 2) {
-    .Call(R_igraph_transitivity_avglocal_undirected, graph, isolates)
+    transitivity_avglocal_undirected_impl(graph, isolates)
   } else if (type == 3) {
     if (is.null(vids)) {
       vids <- V(graph)
@@ -3100,11 +3092,10 @@ dfs <- function(
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "weak" = 1, "strong" = 2)
+  mode <- igraph.match.arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_connected_components, graph, mode)
+  res <- connected_components_impl(graph, mode, details = TRUE)
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name
@@ -3176,18 +3167,11 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph.match.arg(mode)
   roots <- as_igraph_vs(graph, roots) - 1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_unfold_tree, graph, mode, roots)
+  res <- unfold_tree_impl(graph, mode, roots)
   res
 }
 
@@ -3411,9 +3395,8 @@ is_matching <- function(graph, matching, types = NULL) {
   matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_is_matching, graph, types, matching)
+  res <- is_matching_impl(graph, types, matching)
 
   res
 }
@@ -3427,9 +3410,8 @@ is_max_matching <- function(graph, matching, types = NULL) {
   matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_is_maximal_matching, graph, types, matching)
+  res <- is_maximal_matching_impl(graph, types, matching)
 
   res
 }
