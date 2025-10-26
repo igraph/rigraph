@@ -90,13 +90,13 @@ Other vertex and edge sequences:
 # Edges of an unnamed graph
 g <- make_ring(10)
 E(g)
-#> + 10/10 edges from 5e12dae:
+#> + 10/10 edges from b9b882e:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Edges of a named graph
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = letters[1:10])
 E(g2)
-#> + 10/10 edges from 318bc96 (vertex names):
+#> + 10/10 edges from 09771bc (vertex names):
 #>  [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
 ```

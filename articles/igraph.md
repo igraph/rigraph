@@ -90,9 +90,9 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-    ## IGRAPH 96addf6 UN-- 10 2 -- 
+    ## IGRAPH 488d6db UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from 96addf6 (vertex names):
+    ## + edges from 488d6db (vertex names):
     ## [1] 1--2 1--5
 
 This means: **U**ndirected **N**amed graph with **10** vertices and
@@ -111,7 +111,7 @@ edges:
 summary(g)
 ```
 
-    ## IGRAPH 96addf6 UN-- 10 2 -- 
+    ## IGRAPH 488d6db UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 The same function
@@ -227,9 +227,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH db60e69 U--- 40 86 -- Zachary
+    ## IGRAPH d135f94 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from db60e69:
+    ## + edges from d135f94:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -353,7 +353,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(graph1)
 ```
 
-    ## IGRAPH 6eddba3 U--- 127 126 -- Tree
+    ## IGRAPH d25a5b9 U--- 127 126 -- Tree
     ## + attr: name (g/c), children (g/n), mode (g/c)
 
 This generates a regular tree graph with 127 vertices, each vertex
@@ -380,7 +380,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH d3ec023 U--- 100 499 -- Geometric random graph
+    ## IGRAPH 7afbf7d U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 This generates a geometric random graph: *n* points are chosen randomly
@@ -449,7 +449,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH c5050f9 UN-- 7 9 -- 
+    ## IGRAPH ddf8985 UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 [`V()`](https://r.igraph.org/reference/V.md) and
@@ -519,7 +519,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from c5050f9:
+    ## + 7/7 vertices, named, from ddf8985:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 To delete attributes:
@@ -682,7 +682,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from 2ec6bd1:
+    ## + 3/10 vertices, from 2c3551a:
     ## [1] 2 3 7
 
 ``` r
@@ -690,7 +690,7 @@ seq <- seq[1, 3] # filtering an existing vertex set
 seq
 ```
 
-    ## + 2/10 vertices, from 2ec6bd1:
+    ## + 2/10 vertices, from 2c3551a:
     ## [1] 2 7
 
 Selecting a vertex that does not exist results in an error:
@@ -768,7 +768,7 @@ Carmina (who has vertex index 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from c5050f9 (vertex names):
+    ## + 4/9 edges from ddf8985 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Of course it also works with vertex names:
@@ -777,7 +777,7 @@ Of course it also works with vertex names:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from c5050f9 (vertex names):
+    ## + 4/9 edges from ddf8985 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Using [`.to()`](https://r.igraph.org/reference/inside-square-error.md)
@@ -798,7 +798,7 @@ index 3), Nang (vertex index 5) and Samira (vertex index 6):
 E(g)[3:5 %--% 5:6]
 ```
 
-    ## + 3/9 edges from c5050f9 (vertex names):
+    ## + 3/9 edges from ddf8985 (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 To make the `%--%` operator work with names, you can build string
@@ -829,7 +829,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from c5050f9 (vertex names):
+    ## + 5/9 edges from ddf8985 (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
