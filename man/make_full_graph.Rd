@@ -41,7 +41,8 @@ Other deterministic constructors:
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_tri_lattice}()}
 }
 \concept{Full graph}
 \concept{deterministic constructors}

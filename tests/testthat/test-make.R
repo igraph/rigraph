@@ -205,6 +205,47 @@ test_that("make_lattice prints a warning for fractional length)", {
   expect_identical_graphs(lattice_rounded, lattice_integer)
 })
 
+test_that("make_tri_lattice works with 1D (triangular shape)", {
+  g <- make_tri_lattice(3)
+  expect_vcount(g, 6)
+  expect_ecount(g, 9)
+  expect_false(is_directed(g))
+})
+
+test_that("make_tri_lattice works with 2D (quasi-rectangular shape)", {
+  g <- make_tri_lattice(c(3, 3))
+  expect_vcount(g, 9)
+  expect_ecount(g, 16)
+  expect_false(is_directed(g))
+})
+
+test_that("make_tri_lattice works with 3D (hexagonal shape)", {
+  g <- make_tri_lattice(c(2, 2, 2))
+  expect_vcount(g, 7)
+  expect_ecount(g, 12)
+  expect_false(is_directed(g))
+})
+
+test_that("make_tri_lattice works with directed and mutual parameters", {
+  g_undirected <- make_tri_lattice(c(2, 2))
+  g_directed <- make_tri_lattice(c(2, 2), directed = TRUE)
+  g_mutual <- make_tri_lattice(c(2, 2), directed = TRUE, mutual = TRUE)
+
+  expect_false(is_directed(g_undirected))
+  expect_true(is_directed(g_directed))
+  expect_true(is_directed(g_mutual))
+
+  # Mutual should have twice the edges
+  expect_equal(ecount(g_mutual), 2 * ecount(g_undirected))
+})
+
+test_that("tri_lattice constructor spec works with make_()", {
+  g1 <- make_tri_lattice(c(3, 3))
+  g2 <- make_(tri_lattice(c(3, 3)))
+
+  expect_identical_graphs(g1, g2)
+})
+
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
   graph_elist <- make_empty_graph(n = 10) + edges(1:10)

@@ -2001,6 +2001,66 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a triangular lattice graph
+#'
+#' `make_tri_lattice()` creates a triangular lattice with a specified shape.
+#' The shape can be triangular (1 dimension), quasi-rectangular (2 dimensions),
+#' or hexagonal (3 dimensions).
+#'
+#' @concept Lattice
+#' @param dims Integer vector defining the shape of the lattice.
+#'   - If `dims` is of length 1, the resulting lattice has a triangular shape
+#'     where each side of the triangle contains `dims[1]` vertices.
+#'   - If `dims` is of length 2, the resulting lattice has a "quasi rectangular"
+#'     shape with the sides containing `dims[1]` and `dims[2]` vertices, respectively.
+#'   - If `dims` is of length 3, the resulting lattice has a hexagonal shape
+#'     where the sides of the hexagon contain `dims[1]`, `dims[2]`, and `dims[3]`
+#'     vertices.
+#'   All dimensions must be non-negative.
+#' @param directed Logical scalar, whether to create a directed graph.
+#'   If the `mutual` argument is not set to `TRUE`, edges will be directed
+#'   from lower-index vertices towards higher-index ones.
+#' @param mutual Logical scalar, if the graph is directed, this gives whether
+#'   to create all connections as mutual.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Triangular lattice (1D case - creates a triangle)
+#' g1 <- make_tri_lattice(5)
+#' plot(g1)
+#'
+#' # Quasi-rectangular lattice (2D case)
+#' g2 <- make_tri_lattice(c(3, 4))
+#' plot(g2)
+#'
+#' # Hexagonal lattice (3D case)
+#' g3 <- make_tri_lattice(c(3, 3, 3))
+#' plot(g3)
+#'
+#' # Directed triangular lattice with mutual edges
+#' g4 <- make_tri_lattice(c(3, 3), directed = TRUE, mutual = TRUE)
+#' @cdocs igraph_triangular_lattice
+make_tri_lattice <- function(dims, directed = FALSE, mutual = FALSE) {
+  on.exit(.Call(R_igraph_finalizer))
+  res <- triangular_lattice_impl(dims, directed, mutual)
+  if (igraph_opt("add.params")) {
+    res$name <- "Triangular lattice"
+    res$dims <- dims
+    res$directed <- directed
+    res$mutual <- mutual
+  }
+  res
+}
+
+#' @rdname make_tri_lattice
+#' @param ... Passed to `make_tri_lattice()`.
+#' @export
+tri_lattice <- function(...) constructor_spec(make_tri_lattice, ...)
+
+## -----------------------------------------------------------------
+
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
