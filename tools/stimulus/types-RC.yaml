@@ -578,7 +578,7 @@ ARPACKOPT:
     INCONV:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
-        INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
+        INOUT: PROTECT(%I%=Rx_igraph_arpack_options_to_SEXP(&%C%));
 
 ARPACKSTORAGE:
     CALL: '0'
@@ -895,7 +895,7 @@ PAGERANKOPT:
     OUTCONV:
         INOUT: |-
           if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK) {
-            PROTECT(%I% = R_igraph_arpack_options_to_SEXP(&%C%1));
+            PROTECT(%I% = Rx_igraph_arpack_options_to_SEXP(&%C%1));
           } else {
             PROTECT(%I%);
           }

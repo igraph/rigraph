@@ -5,7 +5,7 @@ generate_uuid <- function(use_time = NA) {
 
 get_graph_id <- function(graph) {
   if (!warn_version(graph)) {
-    .Call(R_igraph_get_graph_id, graph)
+    .Call(Rx_igraph_get_graph_id, graph)
   } else {
     NA_character_
   }
