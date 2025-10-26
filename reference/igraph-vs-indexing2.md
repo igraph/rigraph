@@ -74,10 +74,10 @@ g <- make_ring(10) %>%
   set_vertex_attr("color", value = "red") %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g)
-#> + 10/10 vertices, named, from 27cb7cb:
+#> + 10/10 vertices, named, from e76acca:
 #>  [1] A B C D E F G H I J
 V(g)[[]]
-#> + 10/10 vertices, named, from 27cb7cb:
+#> + 10/10 vertices, named, from e76acca:
 #>    color name
 #> 1    red    A
 #> 2    red    B
@@ -90,10 +90,10 @@ V(g)[[]]
 #> 9    red    I
 #> 10   red    J
 V(g)[1:5]
-#> + 5/10 vertices, named, from 27cb7cb:
+#> + 5/10 vertices, named, from e76acca:
 #> [1] A B C D E
 V(g)[[1:5]]
-#> + 5/10 vertices, named, from 27cb7cb:
+#> + 5/10 vertices, named, from e76acca:
 #>   color name
 #> 1   red    A
 #> 2   red    B
