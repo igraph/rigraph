@@ -357,7 +357,9 @@ hrg_tree <- function(hrg) {
     )
   }
 
-  out <- from_hrg_dendrogram_impl(hrg)
+  out <- from_hrg_dendrogram_impl(
+    hrg = hrg
+  )
 
   g <- out$graph
   set_vertex_attr(g, "probability", value = out$prob)
@@ -382,7 +384,9 @@ sample_hrg <- function(hrg) {
     )
   }
 
-  hrg_game_impl(hrg)
+  hrg_game_impl(
+    hrg = hrg
+  )
 }
 #' Predict edges based on a hierarchical random graph model
 #'
