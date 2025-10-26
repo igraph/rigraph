@@ -30,6 +30,14 @@ on:
         description: "Create a matrix of suggested dependencies"
         type: boolean
         default: false
+      run-rcc-full:
+        description: "Run rcc-full job"
+        type: boolean
+        default: false
+      run-rcc-suggests:
+        description: "Run rcc-suggests job"
+        type: boolean
+        default: false
   merge_group:
     types:
       - checks_requested
@@ -265,7 +273,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
+    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-full)) }}
 
     name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
@@ -327,7 +335,7 @@ jobs:
 
     runs-on: ubuntu-22.04
 
-    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' }}
+    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-suggests)) }}
 
     name: Without ${{ matrix.package }}
 
