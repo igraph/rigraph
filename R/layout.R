@@ -392,36 +392,42 @@ layout_ <- function(graph, layout, ...) {
   stopifnot(all(sapply(modifiers, inherits, what = "igraph_layout_modifier")))
 
   ids <- sapply(modifiers, "[[", "id")
-  stopifnot(all(ids %in% c("component_wise", "normalize")))
   if (anyDuplicated(ids)) {
     cli::cli_abort("Duplicate modifiers.")
   }
   names(modifiers) <- ids
 
-  ## TODO: better, generic mechanism for modifiers
-  if ("component_wise" %in% ids) {
-    graph$id <- seq(vcount(graph))
-    comps <- decompose(graph)
-    coords <- lapply(comps, function(comp) {
-      do_call(layout$fun, list(graph = comp), layout$args)
-    })
-    all_coords <- merge_coords(
-      comps,
-      coords,
-      method = modifiers[["component_wise"]]$args$merge_method
-    )
-    all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
-    result <- all_coords
+  # Separate pre-layout and post-layout modifiers
+  pre_modifiers <- Filter(
+    function(m) {
+      isTRUE(m$type == "pre")
+    },
+    modifiers
+  )
+  post_modifiers <- Filter(
+    function(m) {
+      isTRUE(m$type == "post")
+    },
+    modifiers
+  )
+
+  # Apply pre-layout modifiers
+  if (length(pre_modifiers) > 0) {
+    # Pre-layout modifiers should handle the entire layout calculation
+    # Currently only component_wise is a pre-layout modifier
+    if (length(pre_modifiers) > 1) {
+      cli::cli_abort("Multiple pre-layout modifiers are not supported.")
+    }
+    modifier <- pre_modifiers[[1]]
+    result <- modifier$apply(graph, layout, modifier$args)
   } else {
+    # No pre-layout modifiers, do standard layout
     result <- do_call(layout$fun, list(graph = graph), layout$args)
   }
 
-  if ("normalize" %in% ids) {
-    result <- do_call(
-      norm_coords,
-      list(result),
-      modifiers[["normalize"]]$args
-    )
+  # Apply post-layout modifiers in order
+  for (modifier in post_modifiers) {
+    result <- modifier$apply(graph, result, modifier$args)
   }
 
   result
@@ -518,7 +524,22 @@ component_wise <- function(merge_method = "dla") {
 
   layout_modifier(
     id = "component_wise",
-    args = args
+    type = "pre",
+    args = args,
+    apply = function(graph, layout, modifier_args) {
+      graph$id <- seq(vcount(graph))
+      comps <- decompose(graph)
+      coords <- lapply(comps, function(comp) {
+        do_call(layout$fun, list(graph = comp), layout$args)
+      })
+      all_coords <- merge_coords(
+        comps,
+        coords,
+        method = modifier_args$merge_method
+      )
+      all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
+      all_coords
+    }
   )
 }
 
@@ -548,7 +569,15 @@ normalize <- function(
 
   layout_modifier(
     id = "normalize",
-    args = args
+    type = "post",
+    args = args,
+    apply = function(graph, layout, modifier_args) {
+      do_call(
+        norm_coords,
+        list(layout),
+        modifier_args
+      )
+    }
   )
 }
 
