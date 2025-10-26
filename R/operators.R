@@ -969,7 +969,7 @@ edges <- edge
 vertex <- function(...) {
   args <- list(...)
   arg_names <- names(args)
-  
+
   # Check for duplicate named arguments
   if (!is.null(arg_names)) {
     named_args <- arg_names[arg_names != ""]
@@ -980,7 +980,7 @@ vertex <- function(...) {
       )
     }
   }
-  
+
   structure(args, class = "igraph.vertex")
 }
 

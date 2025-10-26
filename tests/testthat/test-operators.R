@@ -258,19 +258,19 @@ test_that("vertices() errors on duplicate attribute names", {
     vertices("a", name = "c", name = "d"),
     "Duplicate attribute name"
   )
-  
+
   # Test case from issue: vertices("a", blop = "c", blop = 1)
   expect_error(
     vertices("a", blop = "c", blop = 1),
     "Duplicate attribute name"
   )
-  
+
   # Test with graph addition
   expect_error(
     make_empty_graph(1) + vertices("a", "b", name = "c", name = "d"),
     "Duplicate attribute name"
   )
-  
+
   # Test multiple duplicates
   expect_error(
     vertices(foo = 1, foo = 2, bar = 3, bar = 4),
