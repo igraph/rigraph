@@ -3862,19 +3862,6 @@ SEXP R_igraph_add_vertices(SEXP graph, SEXP pnv) {
   return result;
 }
 
-SEXP R_igraph_ecount(SEXP graph) {
-
-  igraph_t g;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=igraph_ecount(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_incident(SEXP graph, SEXP pvid, SEXP pmode) {
 
   igraph_t g;
@@ -3929,19 +3916,6 @@ SEXP R_igraph_delete_vertices(SEXP graph, SEXP vertices) {
   IGRAPH_I_DESTROY(&g);
   igraph_vector_int_destroy(&vs_data);
   igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_is_directed(SEXP graph) {
-
-  igraph_t g;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  PROTECT(result=NEW_LOGICAL(1));
-  LOGICAL(result)[0]=igraph_is_directed(&g);
 
   UNPROTECT(1);
   return result;

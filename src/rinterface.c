@@ -189,6 +189,28 @@ SEXP R_igraph_vcount(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_ecount                              /
+/-------------------------------------------*/
+SEXP R_igraph_ecount(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_result;
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  c_result=igraph_ecount(&c_graph);
+
+                                        /* Convert output */
+
+  PROTECT(r_result=NEW_NUMERIC(1));
+  REAL(r_result)[0]=(double) c_result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_neighbors                           /
 /-------------------------------------------*/
 SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
@@ -214,6 +236,28 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP vid, SEXP mode) {
   igraph_vector_int_destroy(&c_neis);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = neis;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_is_directed                         /
+/-------------------------------------------*/
+SEXP R_igraph_is_directed(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_bool_t c_result;
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+                                        /* Call igraph */
+  c_result=igraph_is_directed(&c_graph);
+
+                                        /* Convert output */
+
+  PROTECT(r_result=NEW_LOGICAL(1));
+  LOGICAL(r_result)[0]=c_result;
 
   UNPROTECT(1);
   return(r_result);

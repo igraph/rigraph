@@ -24,10 +24,8 @@ igraph_delete_vertices:
     IGNORE: RR, RC
 
 igraph_ecount:
-    IGNORE: RR, RC
 
 igraph_is_directed:
-    IGNORE: RR, RC
 
 igraph_degree:
 

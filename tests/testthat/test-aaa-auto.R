@@ -8203,3 +8203,39 @@ test_that("version_impl errors", {
     "invalid"
   ))
 })
+
+# 334. ecount_impl
+
+test_that("ecount_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_empty_graph(5)
+  expect_snapshot(ecount_impl(g))
+  
+  g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
+  expect_snapshot(ecount_impl(g))
+})
+
+test_that("ecount_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(ecount_impl(NULL))
+})
+
+# 335. is_directed_impl
+
+test_that("is_directed_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_empty_graph(5, directed = TRUE)
+  expect_snapshot(is_directed_impl(g))
+  
+  g <- make_empty_graph(5, directed = FALSE)
+  expect_snapshot(is_directed_impl(g))
+})
+
+test_that("is_directed_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(is_directed_impl(NULL))
+})

@@ -89,6 +89,22 @@ vcount_impl <- function(
   res
 }
 
+ecount_impl <- function(
+  graph
+) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_ecount,
+    graph
+  )
+
+  res
+}
+
 neighbors_impl <- function(
   graph,
   vid,
@@ -116,6 +132,22 @@ neighbors_impl <- function(
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
   }
+  res
+}
+
+is_directed_impl <- function(
+  graph
+) {
+  # Argument checks
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_is_directed,
+    graph
+  )
+
   res
 }
 
