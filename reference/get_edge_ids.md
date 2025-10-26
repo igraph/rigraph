@@ -76,7 +76,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> + 2/10 edges from b092b47:
+#> + 2/10 edges from 34a15dd:
 #> [1] 1--2 4--5
 
 ## non-existant edge
@@ -90,6 +90,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> + 2/5 edges from 6079c6e:
+#> + 2/5 edges from f6afa3d:
 #> [1] 1->2 1->2
 ```
