@@ -574,7 +574,7 @@ as_veincidence_matrix <- function(
   sparse = igraph_opt("sparsematrices")
 ) {
   ensure_igraph(graph)
-  
+
   if (lifecycle::is_present(types)) {
     lifecycle::deprecate_warn(
       "2.1.0",
@@ -598,10 +598,10 @@ get.ve.incidence.dense <- function(
 ) {
   vc <- vcount(graph)
   ec <- ecount(graph)
-  
+
   # Initialize matrix with zeros
   res <- matrix(0, nrow = vc, ncol = ec)
-  
+
   if (ec == 0) {
     # Empty graph
     if (names && "name" %in% vertex_attr_names(graph)) {
@@ -609,10 +609,10 @@ get.ve.incidence.dense <- function(
     }
     return(res)
   }
-  
+
   # Get edge list
   el <- as_edgelist(graph, names = FALSE)
-  
+
   # Get weights if specified
   if (!is.null(attr)) {
     attr <- as.character(attr)
@@ -629,13 +629,13 @@ get.ve.incidence.dense <- function(
   } else {
     weights <- rep(1, ec)
   }
-  
+
   if (is_directed(graph)) {
     # For directed graphs: -weight for tail, +weight for head
     for (i in seq_len(ec)) {
       tail <- el[i, 1]
       head <- el[i, 2]
-      
+
       if (tail == head) {
         # Self-loop: contribution is 0 in directed graphs
         res[tail, i] <- 0
@@ -649,7 +649,7 @@ get.ve.incidence.dense <- function(
     for (i in seq_len(ec)) {
       v1 <- el[i, 1]
       v2 <- el[i, 2]
-      
+
       if (v1 == v2) {
         # Self-loop: contribution is 2*weight
         res[v1, i] <- 2 * weights[i]
@@ -659,7 +659,7 @@ get.ve.incidence.dense <- function(
       }
     }
   }
-  
+
   # Add row names (vertex names or IDs)
   if (names) {
     if ("name" %in% vertex_attr_names(graph)) {
@@ -667,9 +667,11 @@ get.ve.incidence.dense <- function(
     } else {
       rownames(res) <- seq_len(vc)
     }
-    
+
     # Add column names (edge labels or IDs)
-    if (!is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)) {
+    if (
+      !is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)
+    ) {
       colnames(res) <- E(graph)$label
     } else if ("label" %in% edge_attr_names(graph)) {
       colnames(res) <- E(graph)$label
@@ -677,7 +679,7 @@ get.ve.incidence.dense <- function(
       colnames(res) <- seq_len(ec)
     }
   }
-  
+
   res
 }
 
@@ -689,7 +691,7 @@ get.ve.incidence.sparse <- function(
 ) {
   vc <- vcount(graph)
   ec <- ecount(graph)
-  
+
   if (ec == 0) {
     # Empty graph
     res <- Matrix::Matrix(0, nrow = vc, ncol = ec, sparse = TRUE)
@@ -698,10 +700,10 @@ get.ve.incidence.sparse <- function(
     }
     return(res)
   }
-  
+
   # Get edge list
   el <- as_edgelist(graph, names = FALSE)
-  
+
   # Get weights if specified
   if (!is.null(attr)) {
     attr <- as.character(attr)
@@ -718,18 +720,18 @@ get.ve.incidence.sparse <- function(
   } else {
     weights <- rep(1, ec)
   }
-  
+
   # Build sparse matrix using triplet format
   i_indices <- integer()
   j_indices <- integer()
   x_values <- numeric()
-  
+
   if (is_directed(graph)) {
     # For directed graphs: -weight for tail, +weight for head
     for (e in seq_len(ec)) {
       tail <- el[e, 1]
       head <- el[e, 2]
-      
+
       if (tail == head) {
         # Self-loop: contribution is 0, so we skip it (sparse)
       } else {
@@ -743,7 +745,7 @@ get.ve.incidence.sparse <- function(
     for (e in seq_len(ec)) {
       v1 <- el[e, 1]
       v2 <- el[e, 2]
-      
+
       if (v1 == v2) {
         # Self-loop: contribution is 2*weight
         i_indices <- c(i_indices, v1)
@@ -756,7 +758,7 @@ get.ve.incidence.sparse <- function(
       }
     }
   }
-  
+
   # Create sparse matrix
   res <- Matrix::sparseMatrix(
     i = i_indices,
@@ -764,7 +766,7 @@ get.ve.incidence.sparse <- function(
     x = x_values,
     dims = c(vc, ec)
   )
-  
+
   # Add row names (vertex names or IDs)
   if (names) {
     if ("name" %in% vertex_attr_names(graph)) {
@@ -772,9 +774,11 @@ get.ve.incidence.sparse <- function(
     } else {
       rownames(res) <- seq_len(vc)
     }
-    
+
     # Add column names (edge labels or IDs)
-    if (!is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)) {
+    if (
+      !is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)
+    ) {
       colnames(res) <- E(graph)$label
     } else if ("label" %in% edge_attr_names(graph)) {
       colnames(res) <- E(graph)$label
@@ -782,7 +786,7 @@ get.ve.incidence.sparse <- function(
       colnames(res) <- seq_len(ec)
     }
   }
-  
+
   res
 }
 
