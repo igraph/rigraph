@@ -52,11 +52,34 @@ final results.
 \section{Modifiers}{
 
 Modifiers modify how a layout calculation is performed.
-Currently implemented modifiers: \itemize{
-\item \code{component_wise()} calculates the layout separately
-for each component of the graph, and then merges
-them.
-\item \code{normalize()} scales the layout to a square.
+Modifiers are applied in the order they are specified as arguments to
+\code{layout_()}.
+
+There are two types of modifiers:
+\itemize{
+\item \strong{Pre-layout modifiers} affect how the layout is calculated.
+Only one pre-layout modifier can be used at a time.
+\item \strong{Post-layout modifiers} transform the resulting coordinates.
+Multiple post-layout modifiers can be chained together.
+}
+
+Currently implemented modifiers:
+\itemize{
+\item \code{component_wise()} (pre-layout) calculates the layout separately
+for each component of the graph, and then merges them.
+\item \code{normalize()} (post-layout) scales the layout to a square.
+}
+
+Custom modifiers can be created using the \code{layout_modifier()} function.
+A custom modifier must specify:
+\itemize{
+\item \code{id}: A unique identifier string for the modifier
+\item \code{type}: Either \code{"pre"} for pre-layout or \code{"post"} for post-layout
+\item \code{args}: A list of arguments to pass to the apply function
+\item \code{apply}: A function with signature
+\verb{function(graph, layout, modifier_args)} that performs the modification.
+For pre-layout modifiers, \code{layout} is the layout specification.
+For post-layout modifiers, \code{layout} is the coordinate matrix to transform.
 }
 }
 
@@ -64,6 +87,25 @@ them.
 g <- make_ring(10) + make_full_graph(5)
 coords <- layout_(g, as_star())
 plot(g, layout = coords)
+
+# Using modifiers
+g <- make_ring(10) + make_ring(5)
+coords <- layout_(g, in_circle(), component_wise(), normalize())
+plot(g, layout = coords)
+
+# Creating a custom post-layout modifier
+scale_by <- function(factor = 2) {
+  layout_modifier(
+    id = "scale_by",
+    type = "post",
+    args = list(factor = factor),
+    apply = function(graph, layout, modifier_args) {
+      layout * modifier_args$factor
+    }
+  )
+}
+coords <- layout_(make_ring(10), in_circle(), scale_by(3))
+plot(make_ring(10), layout = coords)
 }
 \seealso{
 \code{\link[=add_layout_]{add_layout_()}} to add the layout to the
