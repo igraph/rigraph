@@ -41,7 +41,7 @@
 rewire <- function(graph, with) {
   if (!is(with, "igraph_rewiring_method")) {
     cli::cli_abort(
-      "{.arg with} must be an igraph rewiring method, 
+      "{.arg with} must be an igraph rewiring method,
       not {.obj_type_friendly {with}}."
     )
   }
@@ -89,7 +89,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
   mode <- if (loops) 1 else 0
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
+  .Call(Rx_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex

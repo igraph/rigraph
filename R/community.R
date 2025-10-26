@@ -1326,7 +1326,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_community_to_membership2, merges - 1, vcount, steps)
+  res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
 
@@ -2119,7 +2119,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(R_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(Rx_igraph_i_levc_arp, externalP, externalE, v)
   }
   f
 }
