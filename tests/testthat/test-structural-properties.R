@@ -73,19 +73,18 @@ test_that("max_degree() works", {
 })
 
 test_that("mean_degree() works", {
-  # Undirected graph: each edge contributes 2 to total degree
+  # Undirected graph: formula is 2 * edges / vertices
   g_undirected <- make_ring(10)
   expect_equal(mean_degree(g_undirected), 2)
 
-  # Directed graph with 3 edges between 3 vertices
-  # Formula for directed: edges / vertices = 3 / 3 = 1
+  # Directed graph: formula is edges / vertices
+  # This graph has edges 1->2, 2->2 (loop), 2->3, so 3 edges / 3 vertices = 1
   g_directed <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
   expect_equal(mean_degree(g_directed), 1)
 
-  # Graph with self-loops (has 1 loop: 2->2)
+  # Test loops parameter: excluding the self-loop (2->2)
   # Without loops: (3 edges - 1 loop) / 3 vertices = 2/3
-  g_loop <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
-  expect_equal(mean_degree(g_loop, loops = FALSE), 2 / 3)
+  expect_equal(mean_degree(g_directed, loops = FALSE), 2 / 3)
 
   # Empty graph
   expect_true(is.nan(mean_degree(make_empty_graph())))
