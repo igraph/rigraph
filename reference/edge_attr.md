@@ -58,10 +58,10 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> IGRAPH 1b29b30 U-W- 10 10 -- Ring graph
+#> IGRAPH bfc0317 U-W- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n), color
 #> | (e/c)
-#> + edges from 1b29b30:
+#> + edges from bfc0317:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g, edge.width = E(g)$weight)
 ```

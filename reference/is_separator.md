@@ -50,11 +50,11 @@ Other flow:
 ring <- make_ring(4)
 min_st_separators(ring)
 #> [[1]]
-#> + 2/4 vertices, from 6975e6c:
+#> + 2/4 vertices, from 5c808ec:
 #> [1] 2 4
 #> 
 #> [[2]]
-#> + 2/4 vertices, from 6975e6c:
+#> + 2/4 vertices, from 5c808ec:
 #> [1] 1 3
 #> 
 is_separator(ring, 1)
