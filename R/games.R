@@ -1912,8 +1912,8 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric.
-#' @param directed Logical constant, whether to create a directed graph.
-#' @param loops Logical constant, whether self-loops are allowed in the graph.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param loops Logical scalar, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
