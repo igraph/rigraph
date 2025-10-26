@@ -4,7 +4,7 @@
 \alias{as_edgelist}
 \title{Convert a graph to an edge list}
 \usage{
-as_edgelist(graph, names = TRUE)
+as_edgelist(graph, names = TRUE, as.vector = FALSE)
 }
 \arguments{
 \item{graph}{The graph to convert.}
@@ -12,9 +12,17 @@ as_edgelist(graph, names = TRUE)
 \item{names}{Whether to return a character matrix containing vertex
 names (i.e. the \code{name} vertex attribute) if they exist or numeric
 vertex ids.}
+
+\item{as.vector}{Logical scalar, whether to return the edge list as a vector
+instead of a matrix.
+When \code{TRUE}, the result is a vector in the format \code{c(from1, to1, from2, to2, ...)}
+which is suitable for passing to \code{\link[=make_graph]{make_graph()}}.
+When \code{FALSE} (the default), the result is an \code{ecount(graph)} by 2 matrix.}
 }
 \value{
-A \code{ecount(graph)} by 2 numeric matrix.
+If \code{as.vector} is \code{FALSE} (the default), an \code{ecount(graph)} by 2 numeric matrix.
+If \code{as.vector} is \code{TRUE}, a vector of length \code{2 * ecount(graph)} with edges
+in the format \code{c(from1, to1, from2, to2, ...)}.
 }
 \description{
 Sometimes it is useful to work with a standard representation of a
@@ -31,9 +39,15 @@ as_edgelist(g)
 V(g)$name <- LETTERS[seq_len(gorder(g))]
 as_edgelist(g)
 
+# Get edges as a vector suitable for make_graph()
+g2 <- make_graph(c(1, 2, 2, 3, 3, 4))
+edges <- as_edgelist(g2, names = FALSE, as.vector = TRUE)
+g3 <- make_graph(edges)
+identical_graphs(g2, g3)
+
 }
 \seealso{
-\code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
+\code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}, \code{\link[=make_graph]{make_graph()}}
 
 Other conversion: 
 \code{\link{as.matrix.igraph}()},

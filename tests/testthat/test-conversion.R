@@ -451,6 +451,40 @@ test_that("as_edgelist works", {
   expect_isomorphic(g, g2)
 })
 
+test_that("as_edgelist with as.vector = TRUE works", {
+  # Test basic functionality with numeric vertices
+  g <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 5))
+  edges_vec <- as_edgelist(g, names = FALSE, as.vector = TRUE)
+  expect_equal(edges_vec, c(1, 2, 2, 3, 3, 4, 4, 5))
+  expect_type(edges_vec, "double")
+
+  # Test that we can recreate the graph
+  g2 <- make_graph(edges_vec)
+  expect_identical_graphs(g, g2)
+
+  # Test with named vertices
+  V(g)$name <- letters[1:5]
+  edges_vec_named <- as_edgelist(g, names = TRUE, as.vector = TRUE)
+  expect_equal(edges_vec_named, c("a", "b", "b", "c", "c", "d", "d", "e"))
+  expect_type(edges_vec_named, "character")
+
+  # Test with empty graph
+  g_empty <- make_graph(c(), n = 3)
+  edges_empty <- as_edgelist(g_empty, names = FALSE, as.vector = TRUE)
+  expect_equal(edges_empty, numeric(0))
+
+  # Test default behavior unchanged (as.vector = FALSE)
+  el_matrix <- as_edgelist(g, names = FALSE)
+  expect_true(is.matrix(el_matrix))
+  expect_equal(ncol(el_matrix), 2)
+
+  # Test that as.vector = TRUE is more efficient than t()
+  g_large <- sample_gnp(100, 3 / 100)
+  edges_direct <- as_edgelist(g_large, names = FALSE, as.vector = TRUE)
+  edges_transpose <- as.vector(t(as_edgelist(g_large, names = FALSE)))
+  expect_equal(edges_direct, edges_transpose)
+})
+
 test_that("as_biadjacency_matrix() works -- dense", {
   biadj_mat <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_biadjacency_matrix(biadj_mat)
