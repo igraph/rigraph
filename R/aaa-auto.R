@@ -4409,16 +4409,16 @@ biconnected_components_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res$tree.edges <- lapply(res$tree.edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$component.edges <- lapply(res$component.edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
     res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$articulation.points <- create_vs(graph, res$articulation.points)
+    res$articulation_points <- create_vs(graph, res$articulation_points)
   }
   res
 }
