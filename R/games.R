@@ -3123,7 +3123,7 @@ sample_fitness_pl <- function(
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
-#' @param directed Logical scalar, whether to create a directed graph.
+#' @inheritParams sample_k_regular
 #' @return A simple graph, possibly directed if the `directed` argument is
 #'   `TRUE`.
 #' @note The version of the model in the published paper is incorrect in the
