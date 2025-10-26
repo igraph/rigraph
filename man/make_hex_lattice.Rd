@@ -27,21 +27,24 @@ An igraph graph.
 lattice. The name "hexagonal lattice" refers to the hexagonal tiling pattern
 created when vertices are arranged in this structure, while "triangular
 lattice" refers to the fact that edges form triangles. Both terms describe
-the same graph structure.
+the same graph structure. The term "triangular lattice" is more common in
+graph theory, while "hexagonal lattice" is often used in crystallography
+and physics.
 }
 \details{
-A triangular (or hexagonal) lattice is a two-dimensional lattice where each
-internal vertex has degree 3. The resulting graph structure resembles a
-triangular or hexagonal tiling pattern, which is why it's known by both names.
+A triangular (or hexagonal) lattice is a lattice structure where each
+internal vertex has degree 3. The fundamental structure is based on
+triangular tiling, but the function supports creating lattices with
+different boundary shapes.
 
-The \code{dims} parameter determines the shape of the lattice:
+The \code{dims} parameter determines the boundary shape of the lattice:
 \itemize{
-\item If \code{dims} is a single number, the lattice has a triangular shape
+\item If \code{dims} is a single number, the lattice has a triangular boundary
 where each side contains \code{dims} vertices.
 \item If \code{dims} is a vector of length 2, the lattice has a rectangular
-shape with sides containing \code{dims[1]} and \code{dims[2]} vertices.
+boundary with sides containing \code{dims[1]} and \code{dims[2]} vertices.
 \item If \code{dims} is a vector of length 3, the lattice has a hexagonal
-shape where the sides contain \code{dims[1]}, \code{dims[2]}, and \code{dims[3]}
+boundary where the sides contain \code{dims[1]}, \code{dims[2]}, and \code{dims[3]}
 vertices.
 }
 }
