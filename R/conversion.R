@@ -505,6 +505,8 @@ as_edgelist <- function(graph, names = TRUE, as.vector = FALSE) {
 
   if (as.vector) {
     # Return as a flat vector suitable for make_graph()
+    # The FALSE parameter tells R_igraph_get_edgelist to return edges in column-major order,
+    # which produces the format: c(from1, to1, from2, to2, ...)
     res <- .Call(R_igraph_get_edgelist, graph, FALSE)
     res <- res + 1
     if (names && "name" %in% vertex_attr_names(graph)) {
@@ -512,6 +514,8 @@ as_edgelist <- function(graph, names = TRUE, as.vector = FALSE) {
     }
   } else {
     # Return as a matrix (original behavior)
+    # The TRUE parameter tells R_igraph_get_edgelist to return edges in row-major order,
+    # which can be directly converted to a matrix with edges as rows
     res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE), ncol = 2)
     res <- res + 1
     if (names && "name" %in% vertex_attr_names(graph)) {
