@@ -721,7 +721,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' @return The graph with its cache invalidated. Since the graph is modified
 #'   in place in R as well, you can also ignore the return value.
 #'
-#' @family structural queries
+#' @family low-level operations
 #'
 #' @export
 #' @examples
