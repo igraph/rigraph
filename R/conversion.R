@@ -473,8 +473,15 @@ as_adj <- function(
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
 #'   vertex ids.
-#' @return A `ecount(graph)` by 2 numeric matrix.
-#' @seealso [graph_from_adjacency_matrix()], [read_graph()]
+#' @param as.vector Logical scalar, whether to return the edge list as a vector
+#'   instead of a matrix.
+#'   When `TRUE`, the result is a vector in the format `c(from1, to1, from2, to2, ...)`
+#'   which is suitable for passing to [make_graph()].
+#'   When `FALSE` (the default), the result is an `ecount(graph)` by 2 matrix.
+#' @return If `as.vector` is `FALSE` (the default), an `ecount(graph)` by 2 numeric matrix.
+#'   If `as.vector` is `TRUE`, a vector of length `2 * ecount(graph)` with edges
+#'   in the format `c(from1, to1, from2, to2, ...)`.
+#' @seealso [graph_from_adjacency_matrix()], [read_graph()], [make_graph()]
 #' @keywords graphs
 #' @examples
 #'
@@ -484,15 +491,32 @@ as_adj <- function(
 #' V(g)$name <- LETTERS[seq_len(gorder(g))]
 #' as_edgelist(g)
 #'
+#' # Get edges as a vector suitable for make_graph()
+#' g2 <- make_graph(c(1, 2, 2, 3, 3, 4))
+#' edges <- as_edgelist(g2, names = FALSE, as.vector = TRUE)
+#' g3 <- make_graph(edges)
+#' identical_graphs(g2, g3)
+#'
 #' @family conversion
 #' @export
-as_edgelist <- function(graph, names = TRUE) {
+as_edgelist <- function(graph, names = TRUE, as.vector = FALSE) {
   ensure_igraph(graph)
   on.exit(.Call(R_igraph_finalizer))
-  res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE), ncol = 2)
-  res <- res + 1
-  if (names && "name" %in% vertex_attr_names(graph)) {
-    res <- matrix(V(graph)$name[res], ncol = 2)
+
+  if (as.vector) {
+    # Return as a flat vector suitable for make_graph()
+    res <- .Call(R_igraph_get_edgelist, graph, FALSE)
+    res <- res + 1
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      res <- V(graph)$name[res]
+    }
+  } else {
+    # Return as a matrix (original behavior)
+    res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE), ncol = 2)
+    res <- res + 1
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      res <- matrix(V(graph)$name[res], ncol = 2)
+    }
   }
 
   res
