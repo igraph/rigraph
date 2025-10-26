@@ -847,14 +847,20 @@ test_that("sample_last_cit() works with explicit parameters", {
   expect_equal(vcount(g), 100)
   expect_equal(ecount(g), 99)
   expect_true(is_directed(g))
-  
+
   # Test with more edges per step
   g2 <- sample_last_cit(50, edges = 2, agebins = 3, pref = (1:4)^-2)
   expect_equal(vcount(g2), 50)
-  expect_equal(ecount(g2), 98)  # (50 - 1) * 2
-  
+  expect_equal(ecount(g2), 98) # (50 - 1) * 2
+
   # Test undirected version
-  g3 <- sample_last_cit(30, edges = 1, agebins = 2, pref = c(1, 0.5, 0.25), directed = FALSE)
+  g3 <- sample_last_cit(
+    30,
+    edges = 1,
+    agebins = 2,
+    pref = c(1, 0.5, 0.25),
+    directed = FALSE
+  )
   expect_equal(vcount(g3), 30)
   expect_false(is_directed(g3))
 })
@@ -864,7 +870,7 @@ test_that("sample_last_cit() requires agebins and pref parameters", {
     sample_last_cit(100),
     'argument "agebins" is missing, with no default'
   )
-  
+
   expect_error(
     sample_last_cit(100, agebins = 5),
     'argument "pref" is missing, with no default'

@@ -2169,7 +2169,7 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' # Create a citation graph with 100 vertices, 5 age bins,
 #' # and preferential attachment following a t^-3 power-law decay
 #' g <- sample_last_cit(100, edges = 1, agebins = 5, pref = (1:6)^-3)
-#' 
+#'
 #' # The preference vector determines how likely vertices in each age bin
 #' # are to receive citations. Newer vertices (lower indices) are preferred.
 #' g2 <- sample_last_cit(200, edges = 2, agebins = 10, pref = (1:11)^-2)
