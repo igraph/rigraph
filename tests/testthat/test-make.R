@@ -205,6 +205,59 @@ test_that("make_lattice prints a warning for fractional length)", {
   expect_identical_graphs(lattice_rounded, lattice_integer)
 })
 
+test_that("make_hypercube works", {
+  # 0-dimensional hypercube has 1 vertex and 0 edges
+  hc0 <- make_hypercube(0)
+  expect_vcount(hc0, 1)
+  expect_ecount(hc0, 0)
+
+  # 1-dimensional hypercube (line segment) has 2 vertices and 1 edge
+  hc1 <- make_hypercube(1)
+  expect_vcount(hc1, 2)
+  expect_ecount(hc1, 1)
+
+  # 2-dimensional hypercube (square) has 4 vertices and 4 edges
+  hc2 <- make_hypercube(2)
+  expect_vcount(hc2, 4)
+  expect_ecount(hc2, 4)
+
+  # 3-dimensional hypercube (cube) has 8 vertices and 12 edges
+  hc3 <- make_hypercube(3)
+  expect_vcount(hc3, 8)
+  expect_ecount(hc3, 12)
+
+  # Verify edges for 3D hypercube
+  # Vertices should be connected if their IDs (minus 1) differ in exactly one bit
+  # IDs: 1(000), 2(001), 3(010), 4(011), 5(100), 6(101), 7(110), 8(111)
+  expected_edges <- make_empty_graph(n = 8) +
+    edges(c(
+      1, 2,  # 000 - 001
+      1, 3,  # 000 - 010
+      1, 5,  # 000 - 100
+      2, 4,  # 001 - 011
+      2, 6,  # 001 - 101
+      3, 4,  # 010 - 011
+      3, 7,  # 010 - 110
+      4, 8,  # 011 - 111
+      5, 6,  # 100 - 101
+      5, 7,  # 100 - 110
+      6, 8,  # 101 - 111
+      7, 8   # 110 - 111
+    ))
+  expect_equal(as_edgelist(hc3), as_edgelist(expected_edges))
+
+  # Test directed hypercube
+  hc3_directed <- make_hypercube(3, directed = TRUE)
+  expect_true(is_directed(hc3_directed))
+  expect_ecount(hc3_directed, 12)
+})
+
+test_that("make_hypercube can be used with make_()", {
+  hc1 <- make_hypercube(3)
+  hc2 <- make_(hypercube(3))
+  expect_identical_graphs(hc1, hc2)
+})
+
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
   graph_elist <- make_empty_graph(n = 10) + edges(1:10)
