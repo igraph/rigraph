@@ -1,5 +1,82 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9000
+
+## Chore
+
+- New `switch_igraph_arg()` to avoid the need for default arguments.
+
+- Fix isomorphism callback function.
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/bipartite.R` (#2334, #2361).
+
+- Replace \_impl aliases with explicit wrapper functions in R/centralization.R (#2336, #2360).
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/cliques.R` (#2337, #2363).
+
+- Replace `_impl` function aliases with explicit wrappers in `R/centrality.R` (#2335, #2362).
+
+- Replace `_impl` alias with explicit wrapper in `R/coloring.R` (#2338, #2364).
+
+- Embed Stimulus sources, add docs.
+
+- Replace `_impl` aliases with explicit wrappers in R/assortativity.R (#2332, #2333).
+
+- Auto-update from GitHub Actions (#2331).
+
+- Auto-update from GitHub Actions (#2330).
+
+- Use autogen-impl functions for 3 motifs functions (#2152).
+
+## Continuous integration
+
+- Install air for Copilot.
+
+- Update status directly for Copilot.
+
+- Remove Claude assistant.
+
+- Avoid passing head branch for status update.
+
+- Always update status after run, in some cases workflows push to the branch.
+
+- Detail.
+
+- Deterministic setup for Copilot.
+
+- Use reviewdog only for foreign PRs.
+
+## Documentation
+
+- Remove spaces from vignettes.
+
+## Refactoring
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/triangles.R` (#2368, #2369).
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/make.R` (#2352, #2384).
+
+- Replace `_impl` alias with explicit wrapper in `R/layout.R` (#2351, #2382).
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/structural-properties.R` (#2359, #2372).
+
+- Replace `sir <- sir_impl` alias with explicit wrapper (#2358, #2370).
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/games.R` (#2348, #2383).
+
+- Replace `_impl` aliases with explicit wrapper functions in `R/simple.R` (#2357, #2386).
+
+- Replace `_impl` aliases with explicit wrappers in `R/embedding.R` (#2345, #2380).
+
+- Replace `are_adjacent` alias with explicit wrapper in `R/structure.info.R` (#2365, #2374).
+
+- Replace `_impl` aliases with explicit wrappers in `R/trees.R` (#2367, #2373).
+
+## Testing
+
+- Improve centralitystress test (#2214).
+
+
 # igraph 2.2.1
 
 ## Chore
