@@ -55,7 +55,7 @@ jobs:
             echo "Assigning to @github/copilot"
 
             # Assign the issue to Copilot
-            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee "@me"
+            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee "@copilot"
 
             # Add a comment to the issue
             gh issue comment "$oldest_issue" --repo "$REPO" --body "🤖 This issue has been assigned to Copilot for automated handling."
