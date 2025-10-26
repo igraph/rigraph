@@ -45,16 +45,17 @@ jobs:
           set -euo pipefail
 
           # Check gh version and upgrade if needed
+          # https://github.com/cli/cli/issues/11809
           current_version=$(gh --version | head -n1 | awk '{print $3}')
           required_version="2.82.1"
 
           if [ "$(printf '%s\n' "$required_version" "$current_version" | sort -V | head -n1)" != "$required_version" ]; then
             echo "Current gh version ($current_version) is below required ($required_version), upgrading..."
             # Use official installation from GitHub releases
-            
+
             # Get latest version
             latest_version=$(curl -fsSL https://api.github.com/repos/cli/cli/releases/latest | jq -r .tag_name | sed 's/^v//')
-            
+
             # Download and install latest gh
             gh_url="https://github.com/cli/cli/releases/download/v${latest_version}/gh_${latest_version}_linux_amd64.tar.gz"
             echo "Downloading from: $gh_url"
@@ -77,7 +78,7 @@ jobs:
             echo "Assigning to @copilot"
 
             # Assign the issue to Copilot using gh issue edit
-            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee copilot
+            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee "@copilot"
 
             # Verify that copilot is actually assigned
             assigned_users=$(gh issue view "$oldest_issue" --repo "$REPO" --json assignees --jq '.assignees[].login')
