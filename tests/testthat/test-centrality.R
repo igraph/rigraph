@@ -590,7 +590,8 @@ test_that("eigen_centrality() works", {
 
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
-    ev <- eigen_centrality(G)
+    # FIXME: Find a way to avoid warnings
+    suppressWarnings(ev <- eigen_centrality(G))
     expect_good(
       as_adjacency_matrix(G, sparse = FALSE),
       ev$vector,

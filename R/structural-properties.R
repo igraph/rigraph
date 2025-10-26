@@ -758,23 +758,13 @@ diameter <- function(
 ) {
   ensure_igraph(graph)
 
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_diameter,
+  res <- diameter_impl(
     graph,
-    as.logical(directed),
-    as.logical(unconnected),
-    weights
+    weights = weights,
+    directed = directed,
+    unconnected = unconnected
   )
+  res$res
 }
 
 #' @rdname diameter
@@ -851,9 +841,29 @@ farthest_vertices <- function(
 
 #' @export
 #' @rdname distances
-#' @cdocs igraph_average_path_length_dijkstra
-mean_distance <- average_path_length_dijkstra_impl
+#' @cdocs igraph_average_path_length
+mean_distance <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  unconnected = TRUE,
+  details = FALSE
+) {
+  res <- average_path_length_impl(
+    graph,
+    weights = weights,
+    directed = directed,
+    unconn = unconnected,
+    details = details
+  )
 
+  if (details) {
+    res$unconnected <- res$unconn_pair
+    res$unconn_pair <- NULL
+  }
+
+  res
+}
 
 #' Degree and degree distribution of the vertices
 #'
@@ -866,7 +876,11 @@ mean_distance <- average_path_length_dijkstra_impl
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
-#' @param loops Logical; whether the loop edges are also counted.
+#' @param loops Character string,
+#' `"none"` ignores loop edges;
+#' `"once"` counts each loop edge only once;
+#' `"twice"` (the default) counts each loop edge twice in undirected graphs
+#' and once in directed graphs.
 #' @param normalized Logical scalar, whether to normalize the degree.  If
 #'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
@@ -897,12 +911,25 @@ degree <- function(
   graph,
   v = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   normalized = FALSE
 ) {
   ensure_igraph(graph)
-  v <- as_igraph_vs(graph, v)
   mode <- igraph.match.arg(mode)
+
+  if (is.logical(loops)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "degree(loops = 'must be a character string')"
+    )
+    if (loops) {
+      loops <- "twice"
+    } else {
+      loops <- "none"
+    }
+  }
+
+  loops <- igraph.match.arg(loops)
 
   res <- degree_impl(
     graph,
@@ -910,6 +937,7 @@ degree <- function(
     mode = mode,
     loops = loops
   )
+
   if (normalized) {
     res <- res / (vcount(graph) - 1)
   }
@@ -922,8 +950,36 @@ degree <- function(
 #' @rdname degree
 #' @export
 #' @cdocs igraph_maxdegree
-max_degree <- maxdegree_impl
+max_degree <- function(
+  graph,
+  ...,
+  v = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "none", "once")
+) {
+  ensure_igraph(graph)
+  mode <- igraph.match.arg(mode)
 
+  if (is.logical(loops)) {
+    lifecycle::deprecate_soft(
+      "2.2.0",
+      "max_degree(loops = 'must be a character string')"
+    )
+    if (loops) {
+      loops <- "twice"
+    } else {
+      loops <- "none"
+    }
+  }
+  loops <- igraph.match.arg(loops)
+
+  maxdegree_impl(
+    graph,
+    v = v,
+    mode = mode,
+    loops = loops
+  )
+}
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.

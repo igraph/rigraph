@@ -127,7 +127,6 @@ all_simple_paths <- function(
       mode = mode
     )
   )
-  res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -276,7 +275,7 @@ max_cardinality <- function(graph) {
 #' eccentricity(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_eccentricity_dijkstra
+#' @cdocs igraph_eccentricity
 eccentricity <- function(
   graph,
   vids = V(graph),
@@ -300,7 +299,7 @@ eccentricity <- function(
     }
   }
 
-  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+  eccentricity_impl(graph, vids = vids, weights = weights, mode = mode)
 }
 
 
@@ -331,7 +330,7 @@ eccentricity <- function(
 #' radius(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_radius_dijkstra
+#' @cdocs igraph_radius
 radius <- function(
   graph,
   ...,
@@ -354,7 +353,7 @@ radius <- function(
     }
   }
 
-  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+  radius_impl(graph, weights = weights, mode = mode)
 }
 
 #' Central vertices of a graph
@@ -383,14 +382,14 @@ radius <- function(
 #' graph_center(ring)
 #'
 #' @export
-#' @cdocs igraph_graph_center_dijkstra
+#' @cdocs igraph_graph_center
 graph_center <- function(
   graph,
   ...,
   weights = NULL,
   mode = c("all", "out", "in", "total")
 ) {
-  graph_center_dijkstra_impl(
+  graph_center_impl(
     graph = graph,
     ...,
     weights = weights,

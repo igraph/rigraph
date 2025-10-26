@@ -938,10 +938,6 @@ sample_pa <- function(
     ))
   }
 
-  if (is.null(out.seq)) {
-    out.seq <- numeric()
-  }
-
   algorithm <- igraph.match.arg(algorithm)
   algorithm1 <- switch(
     algorithm,
@@ -1081,7 +1077,8 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
     as.numeric(n),
     as.numeric(m),
     as.logical(directed),
-    as.logical(loops)
+    as.logical(loops),
+    FALSE
   )
 
   if (igraph_opt("add.params")) {
@@ -3076,7 +3073,7 @@ sample_fitness_pl <- function(
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
-  static_power_law_game_impl(
+  res <- static_power_law_game_impl(
     no.of.nodes = no.of.nodes,
     no.of.edges = no.of.edges,
     exponent.out = exponent.out,
@@ -3085,6 +3082,13 @@ sample_fitness_pl <- function(
     multiple = multiple,
     finite.size.correction = finite.size.correction
   )
+
+  if (igraph_opt("add.params")) {
+    res$loops <- loops
+    res$multiple <- multiple
+  }
+
+  res
 }
 
 
