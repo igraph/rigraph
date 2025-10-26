@@ -76,13 +76,8 @@ jobs:
             echo "Found unassigned AI issue #$oldest_issue"
             echo "Assigning to @copilot"
 
-            # Assign the issue to Copilot using gh api
-            gh api \
-              --method POST \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "repos/$REPO/issues/$oldest_issue/assignees" \
-              -f assignees[]='copilot'
+            # Assign the issue to Copilot using gh issue edit
+            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee copilot
 
             # Verify that copilot is actually assigned
             assigned_users=$(gh issue view "$oldest_issue" --repo "$REPO" --json assignees --jq '.assignees[].login')
