@@ -4,7 +4,13 @@
 \alias{lastcit.game}
 \title{Random citation graphs}
 \usage{
-lastcit.game(n, edges = 1, agebins, pref, directed = TRUE)
+lastcit.game(
+  n,
+  edges = 1,
+  agebins = n/7100,
+  pref = (1:(agebins + 1))^-3,
+  directed = TRUE
+)
 }
 \arguments{
 \item{n}{Number of vertices.}

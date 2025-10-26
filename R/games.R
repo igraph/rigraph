@@ -173,8 +173,8 @@ preference.game <- function(
 lastcit.game <- function(
   n,
   edges = 1,
-  agebins,
-  pref,
+  agebins = n / 7100,
+  pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
   # nocov start
