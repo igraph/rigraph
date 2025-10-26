@@ -184,6 +184,8 @@ graph.diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' `evcent()` was renamed to [eigen_centrality()] to create a more
 #' consistent API.
 #' @inheritParams eigen_centrality
+#' @param directed Logical scalar, whether to consider direction of the edges
+#'   in directed graphs. It is ignored for undirected graphs.
 #' @keywords internal
 #' @export
 evcent <- function(
@@ -1312,7 +1314,7 @@ eigen_defaults <- function() {
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
 #' @param graph Graph to be analyzed.
-#' @param directed Logical scalar, whether to consider direction of the edges
+#' @param directed `r lifecycle::badge("deprecated")` Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Normalization will always take
 #' place.
@@ -1329,6 +1331,17 @@ eigen_defaults <- function() {
 #'   weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @param mode How to consider edge directions in directed graphs.
+#' It is ignored for undirected graphs.
+#' Possible values:
+#'   - `"out"` the left eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices pointing to it. This is the standard eigenvector centrality.
+#'   - `"in"` the right eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices it points to.
+#'   - `"all"` edge directions are ignored,
+#' and the unweighted eigenvector centrality is calculated.
 #' @return A named list with components:
 #'   \describe{
 #'     \item{vector}{
@@ -1358,10 +1371,11 @@ eigen_defaults <- function() {
 #' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   weights = NULL,
-  options = arpack_defaults()
+  options = arpack_defaults(),
+  mode = c("out", "in", "all")
 ) {
   if (is.function(options)) {
     lifecycle::deprecate_soft(
@@ -1390,10 +1404,33 @@ eigen_centrality <- function(
     }
   }
 
+  mode <- igraph.match.arg(mode)
+
+  if (lifecycle::is_present(directed)) {
+    if (directed) {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "out"
+      }
+    } else {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "all"
+      }
+    }
+  }
+
   eigenvector_centrality_impl(
     graph = graph,
-    directed = directed,
-    scale = TRUE,
+    mode = mode,
     weights = weights,
     options = options
   )
@@ -1517,9 +1554,7 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' scores are the same as authority scores.
 #'
 #' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
+#' @param scale  `r lifecycle::badge("deprecated")` Ignored, always scaled.
 #' @param weights Optional positive weight vector for calculating weighted
 #'   scores. If the graph has a `weight` edge attribute, then this is used
 #'   by default. Pass `NA` to ignore the weight attribute. This function
@@ -1565,15 +1600,22 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 hits_scores <- function(
   graph,
   ...,
-  scale = TRUE,
+  scale = deprecated(),
   weights = NULL,
   options = arpack_defaults()
 ) {
   rlang::check_dots_empty()
 
+  if (lifecycle::is_present(scale)) {
+    lifecycle::deprecate_soft(
+      "2.1.5",
+      "hits_scores(scale = )",
+      details = "The function always behaves as if `scale = TRUE`.
+      The argument will be removed in the future."
+    )
+  }
   hub_and_authority_scores_impl(
     graph = graph,
-    scale = scale,
     weights = weights,
     options = options
   )
@@ -1609,7 +1651,8 @@ authority_score <- function(
     weights = weights,
     options = options
   )
-  scores$hub <- NULL
+  scores[["hub_vector"]] <- NULL
+
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 
@@ -1654,7 +1697,7 @@ hub_score <- function(
     weights = weights,
     options = options
   )
-  scores$authority <- NULL
+  scores[["authority_vector"]] <- NULL
   rlang::set_names(scores, c("vector", "value", "options"))
 }
 

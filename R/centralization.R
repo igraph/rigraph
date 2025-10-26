@@ -56,6 +56,8 @@ centralization.evcent.tmax <- function(
 #' `centralization.evcent()` was renamed to [centr_eigen()] to create a more
 #' consistent API.
 #' @inheritParams centr_eigen
+#' @param directed logical scalar, whether to use directed shortest paths for
+#'   calculating eigenvector centrality.
 #' @keywords internal
 #' @export
 centralization.evcent <- function(
@@ -306,7 +308,7 @@ NULL
 #'
 #' # Calculate centralization from pre-computed scores
 #' deg <- degree(g)
-#' tmax <- centr_degree_tmax(g, loops = FALSE)
+#' tmax <- centr_degree_tmax(g, loops = "none")
 #' centralize(deg, tmax)
 #'
 #' # The most centralized graph according to eigenvector centrality
@@ -385,8 +387,11 @@ centr_degree <- function(
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
-#' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#' @param loops Character string,
+#'   `"none"` (the default) ignores loop edges;
+#'   `"once"` counts each loop edge only once;
+#'   `"twice"` counts each loop edge twice in undirected graphs.
+#' and once in directed graphs.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -397,8 +402,8 @@ centr_degree <- function(
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
-#' centr_degree(g, normalized = FALSE)$centralization %>%
-#'   `/`(centr_degree_tmax(g, loops = FALSE))
+#' centr_degree(g, normalized = FALSE)$centralization /
+#'   centr_degree_tmax(g, loops = "twice")
 #' centr_degree(g, normalized = TRUE)$centralization
 centr_degree_tmax <- function(
   graph = NULL,
@@ -412,15 +417,13 @@ centr_degree_tmax <- function(
       what = "centr_degree_tmax(loops = 'must be explicit')",
       details = "The default value (currently `FALSE`) will be dropped in the next release. Add an explicit value for the `loops` argument."
     )
-    loops <- FALSE
+    loops <- "none"
   }
 
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
   nodes <- as.numeric(nodes)
-
-  loops <- as.logical(loops)
 
   # Function call
   res <- centralization_degree_tmax_impl(
@@ -611,12 +614,22 @@ centr_clo_tmax <- function(
 #' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param directed logical scalar, whether to use directed shortest paths for
-#'   calculating eigenvector centrality.
+#' @param directed `r lifecycle::badge("deprecated")` Use `mode` instead.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
 #' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
+#' @param mode How to consider edge directions in directed graphs.
+#' It is ignored for undirected graphs.
+#' Possible values:
+#'   - `"out"` the left eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices pointing to it. This is the standard eigenvector centrality.
+#'   - `"in"` the right eigenvector of the adjacency matrix is calculated,
+#' i.e. the centrality of a vertex is proportional to the sum of centralities
+#' of vertices it points to.
+#'   - `"all"` edge directions are ignored,
+#' and the unweighted eigenvector centrality is calculated.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -659,10 +672,11 @@ centr_clo_tmax <- function(
 #' @cdocs igraph_centralization_eigenvector_centrality
 centr_eigen <- function(
   graph,
-  directed = FALSE,
+  directed = deprecated(),
   scale = deprecated(),
   options = arpack_defaults(),
-  normalized = TRUE
+  normalized = TRUE,
+  mode = c("out", "in", "all")
 ) {
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
@@ -673,12 +687,35 @@ centr_eigen <- function(
     )
   }
 
+  mode <- igraph.match.arg(mode)
+
+  if (lifecycle::is_present(directed)) {
+    if (directed) {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "out"
+      }
+    } else {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "all"
+      }
+    }
+  }
+
   centralization_eigenvector_centrality_impl(
     graph = graph,
-    directed = directed,
     options = options,
     normalized = normalized,
-    scale = TRUE
+    mode = mode
   )
 }
 
@@ -693,7 +730,9 @@ centr_eigen <- function(
 #' @param directed logical scalar, whether to consider edge directions
 #'   during the calculation. Ignored in undirected graphs.
 #' @param scale `r lifecycle::badge("deprecated")` Ignored. Computing
-#' eigenvector centralization requires normalized eigenvector centrality scores.
+#'   eigenvector centralization requires normalized eigenvector centrality scores.
+#' @param mode This is the same as the `mode` argument of
+#'   `degree()`.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   eigenvector centrality score for graphs with given vertex count and
 #'   other parameters.
@@ -712,8 +751,9 @@ centr_eigen <- function(
 centr_eigen_tmax <- function(
   graph = NULL,
   nodes = 0,
-  directed = FALSE,
-  scale = deprecated()
+  directed = deprecated(),
+  scale = deprecated(),
+  mode = c("out", "in", "all")
 ) {
   if (lifecycle::is_present(scale)) {
     lifecycle::deprecate_soft(
@@ -723,11 +763,33 @@ centr_eigen_tmax <- function(
       The argument will be removed in the future."
     )
   }
+  mode <- igraph.match.arg(mode)
+
+  if (lifecycle::is_present(directed)) {
+    if (directed) {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "out"
+      }
+    } else {
+      lifecycle::deprecate_soft(
+        "2.2.0",
+        "eigen_centrality(directed)",
+        details = "Use the mode argument."
+      )
+      if (!lifecycle::is_present(mode)) {
+        mode <- "all"
+      }
+    }
+  }
 
   centralization_eigenvector_centrality_tmax_impl(
     graph = graph,
     nodes = nodes,
-    directed = directed,
-    scale = TRUE
+    mode = mode
   )
 }

@@ -1122,7 +1122,7 @@ canonical_permutation <- function(
   colors = NULL,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
-  canonical_permutation_impl(
+  canonical_permutation_bliss_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
     sh = sh
@@ -1274,7 +1274,7 @@ count_automorphisms <- function(
   colors = NULL,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 ) {
-  count_automorphisms_impl(
+  count_automorphisms_bliss_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
     sh = sh
@@ -1305,24 +1305,6 @@ count_automorphisms <- function(
 #'   vertices, or, if there is no such vertex attribute, it simply assumes that
 #'   all vertices have the same color. Pass NULL explicitly if the graph has a
 #'   `color` vertex attribute but you do not want to use it.
-#' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#'   are:
-#'   \sQuote{`f`}:
-#'     first non-singleton cell,
-#'   \sQuote{`fl`}:
-#'     first largest non-singleton cell,
-#'   \sQuote{`fs`}:
-#'     first smallest non-singleton cell,
-#'   \sQuote{`fm`}:
-#'     first maximally non-trivially connected
-#'     non-singleton cell,
-#'   \sQuote{`flm`}:
-#'     first largest maximally
-#'     non-trivially connected non-singleton cell,
-#'   \sQuote{`fsm`}:
-#'     first smallest maximally non-trivially connected non-singleton cell.
-#' @param details Specifies whether to provide additional details about the
-#'   BLISS internals in the result.
 #' @return When `details` is `FALSE`, a list of vertex permutations
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:

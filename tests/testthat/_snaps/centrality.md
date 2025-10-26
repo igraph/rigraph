@@ -10,6 +10,9 @@
       arpack_defaults was deprecated in igraph 1.6.0.
       i Please use `arpack_defaults()` instead.
       i So the function arpack_defaults(), not an object called arpack_defaults.
+      Warning:
+      The `scale` argument of `hits_scores()` is deprecated as of igraph 2.1.5.
+      i The function always behaves as if `scale = TRUE`. The argument will be removed in the future.
 
 # `hub_score()` works
 
@@ -23,6 +26,9 @@
       arpack_defaults was deprecated in igraph 1.6.0.
       i Please use `arpack_defaults()` instead.
       i So the function arpack_defaults(), not an object called arpack_defaults.
+      Warning:
+      The `scale` argument of `hits_scores()` is deprecated as of igraph 2.1.5.
+      i The function always behaves as if `scale = TRUE`. The argument will be removed in the future.
 
 # eigen_centrality() deprecated scale argument
 
@@ -48,7 +54,7 @@
       arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
     Condition
       Error in `arpack()`:
-      ! At vendor/cigraph/src/linalg/arpack.c:1102 : ARPACK error, N must be positive
+      ! At vendor/cigraph/src/linalg/arpack.c:1025 : N must be positive, ARPACK error
 
 ---
 

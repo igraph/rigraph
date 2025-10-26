@@ -41,7 +41,7 @@
 rewire <- function(graph, with) {
   if (!is(with, "igraph_rewiring_method")) {
     cli::cli_abort(
-      "{.arg with} must be an igraph rewiring method, 
+      "{.arg with} must be an igraph rewiring method,
       not {.obj_type_friendly {with}}."
     )
   }

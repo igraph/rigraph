@@ -384,7 +384,7 @@ graph.lcf <- function(n, shifts, repeats = 1) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
   # Use the _impl function
-  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
+  lcf_impl(n = n, shifts = shifts, repeats = repeats)
 } # nocov end
 
 #' Create a lattice graph
@@ -2609,7 +2609,7 @@ full_citation_graph <- function(...) {
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @cdocs igraph_lcf_vector
+#' @cdocs igraph_lcf
 graph_from_lcf <- function(
   shifts,
   ...,
@@ -2637,7 +2637,7 @@ graph_from_lcf <- function(
     )
   }
 
-  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
+  lcf_impl(n = n, shifts = shifts, repeats = repeats)
 }
 ## -----------------------------------------------------------------
 
