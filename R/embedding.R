@@ -183,7 +183,9 @@ embed_adjacency_matrix <- function(
 #' @export
 #' @cdocs igraph_dim_select
 dim_select <- function(sv) {
-  dim_select_impl(sv = sv)
+  dim_select_impl(
+    sv = sv
+  )
 }
 
 
@@ -398,5 +400,8 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
   # Use the _impl function
-  sample_dirichlet_impl(n = n, alpha = alpha)
+  sample_dirichlet_impl(
+    n = n,
+    alpha = alpha
+  )
 }

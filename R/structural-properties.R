@@ -852,8 +852,21 @@ farthest_vertices <- function(
 #' @export
 #' @rdname distances
 #' @cdocs igraph_average_path_length_dijkstra
-mean_distance <- average_path_length_dijkstra_impl
-
+mean_distance <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  unconnected = TRUE,
+  details = FALSE
+) {
+  average_path_length_dijkstra_impl(
+    graph,
+    weights = weights,
+    directed = directed,
+    unconnected = unconnected,
+    details = details
+  )
+}
 
 #' Degree and degree distribution of the vertices
 #'
@@ -905,11 +918,12 @@ degree <- function(
   mode <- igraph.match.arg(mode)
 
   res <- degree_impl(
-    graph,
+    graph = graph,
     vids = v,
     mode = mode,
     loops = loops
   )
+
   if (normalized) {
     res <- res / (vcount(graph) - 1)
   }
@@ -922,7 +936,20 @@ degree <- function(
 #' @rdname degree
 #' @export
 #' @cdocs igraph_maxdegree
-max_degree <- maxdegree_impl
+max_degree <- function(
+  graph,
+  ...,
+  v = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE
+) {
+  maxdegree_impl(
+    graph,
+    v = v,
+    mode = mode,
+    loops = loops
+  )
+}
 
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
@@ -1371,14 +1398,14 @@ all_shortest_paths <- function(
 
   if (is.null(weights)) {
     res <- get_all_shortest_paths_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       mode = mode
     )
   } else {
     res <- get_all_shortest_paths_dijkstra_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       weights = weights,
@@ -1447,7 +1474,6 @@ k_shortest_paths <- function(
     from = from,
     to = to,
     k = k,
-    ...,
     weights = weights,
     mode = mode
   )
@@ -3260,9 +3286,19 @@ laplacian_matrix <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (sparse) {
-    res <- get_laplacian_sparse_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_sparse_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   } else {
-    res <- get_laplacian_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   }
   if (sparse) {
     res <- igraph.i.spMatrix(res)

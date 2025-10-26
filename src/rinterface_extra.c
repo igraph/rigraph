@@ -2994,13 +2994,13 @@ SEXP R_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list) {
   return result;
 }
 
-SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr) {
+SEXP R_igraph_matrixlist_to_SEXP(const igraph_matrix_list_t *ptr) {
   SEXP result;
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
+  igraph_integer_t n=igraph_matrix_list_size(ptr);
 
   PROTECT(result=NEW_LIST(n));
   for (igraph_integer_t i=0; i<n; i++) {
-    igraph_matrix_t *v=VECTOR(*ptr)[i];
+    igraph_matrix_t *v=VECTOR(*ptr) + i;
     SET_VECTOR_ELT(result, i, R_igraph_matrix_to_SEXP(v));
   }
 
