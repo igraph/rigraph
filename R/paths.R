@@ -455,7 +455,7 @@ distance_table <- function(graph, directed = TRUE) {
 #'   For sparse graphs, Dijkstra is faster; for dense graphs, Floyd-Warshall is faster.
 #'   You can override igraph's choice by explicitly giving this parameter.
 #' @param output Character scalar, defines how to report the widest paths for `widest_paths()`.
-#'   \dQuote{vpath} means that the vertices along the paths are reported, 
+#'   \dQuote{vpath} means that the vertices along the paths are reported,
 #'   \dQuote{epath} means that the edges along the paths are reported.
 #'   \dQuote{both} means that both forms are returned, in a named list with components
 #'   \dQuote{vpath} and \dQuote{epath}.
@@ -511,10 +511,6 @@ distance_table <- function(graph, directed = TRUE) {
 #' E(g)$weight <- seq_len(ecount(g))
 #' widest_path_widths(g)
 #' widest_paths(g, 5)
-#'
-#' # In the unweighted case, all existing edges have the same width
-#' g2 <- make_ring(10)
-#' widest_path_widths(g2, weights = NA)
 #'
 #' @cdocs igraph_widest_path_widths_dijkstra
 widest_path_widths <- function(
@@ -643,11 +639,11 @@ widest_paths <- function(
 
   # Process output based on the output parameter
   result <- list()
-  
+
   if (output == "vpath" || output == "both") {
     result$vpath <- res$vertices
   }
-  
+
   if (output == "epath" || output == "both") {
     result$epath <- res$edges
   }

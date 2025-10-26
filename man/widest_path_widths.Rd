@@ -138,10 +138,6 @@ E(g)$weight <- seq_len(ecount(g))
 widest_path_widths(g)
 widest_paths(g, 5)
 
-# In the unweighted case, all existing edges have the same width
-g2 <- make_ring(10)
-widest_path_widths(g2, weights = NA)
-
 }
 \seealso{
 Other paths: 
