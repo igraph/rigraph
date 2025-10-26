@@ -98,7 +98,10 @@ neighbors_impl <- function(
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -151,11 +154,17 @@ get_all_eids_between_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   directed <- as.logical(directed)
 
@@ -1384,11 +1393,17 @@ are_adjacent_impl <- function(
   ensure_igraph(graph)
   v1 <- as_igraph_vs(graph, v1)
   if (length(v1) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg v1} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   v2 <- as_igraph_vs(graph, v2)
   if (length(v2) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg v2} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1490,11 +1505,17 @@ get_shortest_path_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -1527,11 +1548,17 @@ get_shortest_path_bellman_ford_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1573,11 +1600,17 @@ get_shortest_path_dijkstra_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1618,7 +1651,10 @@ get_all_shortest_paths_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
@@ -1652,7 +1688,10 @@ get_all_shortest_paths_dijkstra_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1732,7 +1771,10 @@ get_all_simple_paths_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   cutoff <- as.numeric(cutoff)
@@ -1777,11 +1819,17 @@ get_k_shortest_paths_impl <- function(
   k <- as.numeric(k)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -1816,11 +1864,17 @@ get_widest_path_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (length(to) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg to} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1862,7 +1916,10 @@ get_widest_paths_impl <- function(
   ensure_igraph(graph)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg from} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   to <- as_igraph_vs(graph, to)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -3736,7 +3793,10 @@ pseudo_diameter_impl <- function(
   ensure_igraph(graph)
   start.vid <- as_igraph_vs(graph, start.vid)
   if (length(start.vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg start.vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   directed <- as.logical(directed)
   unconnected <- as.logical(unconnected)
@@ -3773,7 +3833,10 @@ pseudo_diameter_dijkstra_impl <- function(
   }
   start.vid <- as_igraph_vs(graph, start.vid)
   if (length(start.vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg start.vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   directed <- as.logical(directed)
   unconnected <- as.logical(unconnected)
@@ -3843,7 +3906,10 @@ random_walk_impl <- function(
   }
   start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg start} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
   steps <- as.numeric(steps)
@@ -4047,7 +4113,10 @@ bfs_simple_impl <- function(
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
   if (length(root) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg root} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -4739,7 +4808,10 @@ layout_star_impl <- function(
   ensure_igraph(graph)
   center <- as_igraph_vs(graph, center)
   if (length(center) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg center} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (!is.null(order)) order <- as.numeric(order)-1
 
@@ -6494,7 +6566,10 @@ rooted_product_impl <- function(
   ensure_igraph(g2)
   root <- as_igraph_vs(g2, root)
   if (length(root) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg root} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6545,11 +6620,17 @@ maxflow_impl <- function(
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
   if (length(source) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg source} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   target <- as_igraph_vs(graph, target)
   if (length(target) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg target} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
@@ -6649,11 +6730,17 @@ st_mincut_impl <- function(
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
   if (length(source) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg source} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   target <- as_igraph_vs(graph, target)
   if (length(target) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg target} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
@@ -6694,7 +6781,10 @@ dominator_tree_impl <- function(
   ensure_igraph(graph)
   root <- as_igraph_vs(graph, root)
   if (length(root) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg root} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -6721,11 +6811,17 @@ all_st_cuts_impl <- function(
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
   if (length(source) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg source} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   target <- as_igraph_vs(graph, target)
   if (length(target) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg target} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6755,11 +6851,17 @@ all_st_mincuts_impl <- function(
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
   if (length(source) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg source} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   target <- as_igraph_vs(graph, target)
   if (length(target) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg target} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
@@ -6965,7 +7067,7 @@ isomorphic_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -6975,7 +7077,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -6985,7 +7087,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -6995,7 +7097,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7032,7 +7134,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7042,7 +7144,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7052,7 +7154,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7062,7 +7164,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7099,7 +7201,7 @@ count_isomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7109,7 +7211,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7119,7 +7221,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7129,7 +7231,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7166,7 +7268,7 @@ get_isomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7176,7 +7278,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7186,7 +7288,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7196,7 +7298,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7252,7 +7354,7 @@ subisomorphic_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7262,7 +7364,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7272,7 +7374,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7282,7 +7384,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7319,7 +7421,7 @@ count_subisomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7329,7 +7431,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7339,7 +7441,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7349,7 +7451,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7386,7 +7488,7 @@ get_subisomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
+  if (is_missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7396,7 +7498,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (missing(vertex.color2)) {
+  if (is_missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7406,7 +7508,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (missing(edge.color1)) {
+  if (is_missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7416,7 +7518,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (missing(edge.color2)) {
+  if (is_missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7449,7 +7551,7 @@ canonical_permutation_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (missing(colors)) {
+  if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -7502,7 +7604,7 @@ isomorphic_bliss_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (missing(colors1)) {
+  if (is_missing(colors1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       colors1 <- V(graph1)$color
     } else {
@@ -7512,7 +7614,7 @@ isomorphic_bliss_impl <- function(
   if (!is.null(colors1)) {
     colors1 <- as.numeric(colors1)-1
   }
-  if (missing(colors2)) {
+  if (is_missing(colors2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       colors2 <- V(graph2)$color
     } else {
@@ -7545,7 +7647,7 @@ count_automorphisms_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (missing(colors)) {
+  if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -7577,7 +7679,7 @@ automorphism_group_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (missing(colors)) {
+  if (is_missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -8051,7 +8153,10 @@ fundamental_cycles_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg start} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   bfs.cutoff <- as.numeric(bfs.cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -8245,7 +8350,10 @@ random_spanning_tree_impl <- function(
   ensure_igraph(graph)
   if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8311,7 +8419,7 @@ is_vertex_coloring_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (missing(types)) {
+  if (is_missing(types)) {
     if ("color" %in% vertex_attr_names(graph)) {
       types <- V(graph)$color
     } else {
@@ -8358,7 +8466,7 @@ is_edge_coloring_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (missing(types)) {
+  if (is_missing(types)) {
     if ("color" %in% edge_attr_names(graph)) {
       types <- E(graph)$color
     } else {
@@ -8392,7 +8500,10 @@ deterministic_optimal_imitation_impl <- function(
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   optimality <- switch_igraph_arg(optimality, "minimum" = 0L, "maximum" = 1L)
   strategies <- as.numeric(strategies)
@@ -8461,7 +8572,10 @@ roulette_wheel_imitation_impl <- function(
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   is.local <- as.logical(is.local)
   strategies <- as.numeric(strategies)
@@ -8494,7 +8608,10 @@ stochastic_imitation_impl <- function(
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   strategies <- as.numeric(strategies)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
@@ -8540,7 +8657,10 @@ vertex_path_from_edge_path_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
-    stop("No vertex was specified")
+    cli::cli_abort(
+      "{.arg start} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
   }
   edge.path <- as_igraph_es(graph, edge.path)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
