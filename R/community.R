@@ -3045,14 +3045,7 @@ i_compare <- function(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- switch(
-    igraph.match.arg(method),
-    vi = 0L,
-    nmi = 1L,
-    split.join = 2L,
-    rand = 3L,
-    adjusted.rand = 4L
-  )
+  method <- igraph.match.arg(method)
   res <- compare_communities_impl(comm1, comm2, method)
   res
 }
