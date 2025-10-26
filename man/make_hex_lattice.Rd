@@ -23,18 +23,17 @@ controls whether edges are mutual (bidirectional).}
 An igraph graph.
 }
 \description{
-\code{make_hex_lattice()} creates a triangular lattice, also known as a hexagonal
-lattice. The name "hexagonal lattice" refers to the hexagonal tiling pattern
-created when vertices are arranged in this structure, while "triangular
-lattice" refers to the fact that edges form triangles. Both terms describe
-the same graph structure. The term "triangular lattice" is more common in
-graph theory, while "hexagonal lattice" is often used in crystallography
-and physics.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-A triangular (or hexagonal) lattice is a lattice structure where each
-interior vertex (not on the boundary) has degree 3. The fundamental structure
-is based on triangular tiling, but the function supports creating lattices
+\code{make_hex_lattice()} creates a hexagonal lattice. In graph theory, this is
+also sometimes referred to as a "triangular lattice" due to the triangular
+faces formed by the edges. The name "hexagonal lattice" refers to the
+hexagonal tiling pattern created when vertices are arranged in this structure,
+and is more commonly used in crystallography and physics.
+
+A hexagonal lattice is a lattice structure where each interior vertex
+(not on the boundary) has degree 3. The function supports creating lattices
 with different boundary shapes.
 
 The \code{dims} parameter determines the boundary shape of the lattice:
@@ -78,5 +77,5 @@ Other deterministic constructors:
 \code{\link{make_tree}()}
 }
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_triangular_lattice}{\code{triangular_lattice()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hexagonal_lattice}{\code{hexagonal_lattice()}}.}
 

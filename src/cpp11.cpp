@@ -227,6 +227,7 @@ extern SEXP R_igraph_harmonic_centrality_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SE
 extern SEXP R_igraph_has_loop(SEXP);
 extern SEXP R_igraph_has_multiple(SEXP);
 extern SEXP R_igraph_has_mutual(SEXP, SEXP);
+extern SEXP R_igraph_hexagonal_lattice(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_consensus(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_create(SEXP, SEXP);
 extern SEXP R_igraph_hrg_fit(SEXP, SEXP, SEXP, SEXP);
@@ -704,6 +705,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_has_loop",                                   (DL_FUNC) &R_igraph_has_loop,                                    1},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
     {"R_igraph_has_mutual",                                 (DL_FUNC) &R_igraph_has_mutual,                                  2},
+    {"R_igraph_hexagonal_lattice",                          (DL_FUNC) &R_igraph_hexagonal_lattice,                           3},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},
     {"R_igraph_hrg_fit",                                    (DL_FUNC) &R_igraph_hrg_fit,                                     4},
