@@ -60,20 +60,20 @@ Other vertex and edge sequences:
 # Unnamed graphs
 g <- make_ring(10)
 V(g)
-#> + 10/10 vertices, from 31129cc:
+#> + 10/10 vertices, from b46857e:
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 
 # Named graphs
 g2 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 V(g2)
-#> + 10/10 vertices, named, from 4d05650:
+#> + 10/10 vertices, named, from d6f043e:
 #>  [1] A B C D E F G H I J
 
 # All vertices in the sequence
 g3 <- make_ring(1000)
 V(g3)
-#> + 1000/1000 vertices, from 9e0f22b:
+#> + 1000/1000 vertices, from fa046c3:
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -86,7 +86,7 @@ V(g3)
 #>  [127]  127  128  129  130  131  132  133  134  135  136  137  138  139  140
 #> + ... omitted several vertices
 print(V(g3), full = TRUE)
-#> + 1000/1000 vertices, from 9e0f22b:
+#> + 1000/1000 vertices, from fa046c3:
 #>    [1]    1    2    3    4    5    6    7    8    9   10   11   12   13   14
 #>   [15]   15   16   17   18   19   20   21   22   23   24   25   26   27   28
 #>   [29]   29   30   31   32   33   34   35   36   37   38   39   40   41   42
@@ -165,7 +165,7 @@ g4 <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10]) %>%
   set_vertex_attr("color", value = "red")
 V(g4)[[]]
-#> + 10/10 vertices, named, from 328729c:
+#> + 10/10 vertices, named, from f446388:
 #>    name color
 #> 1     A   red
 #> 2     B   red
@@ -178,7 +178,7 @@ V(g4)[[]]
 #> 9     I   red
 #> 10    J   red
 V(g4)[[2:5, 7:8]]
-#> + 6/10 vertices, named, from 328729c:
+#> + 6/10 vertices, named, from f446388:
 #>   name color
 #> 2    B   red
 #> 3    C   red

@@ -78,17 +78,17 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 3bf369d (vertex names):
+#> + 10/10 edges from 7f1e697 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 3bf369d:
+#> + 11/6 vertices, named, from 7f1e697:
 #>  [1] A B C D B F A E D F E
 #> 
 
 has_eulerian_cycle(g)
 #> [1] FALSE
 try(eulerian_cycle(g))
-#> Error in eulerian_cycle(g) : 
+#> Error in eulerian_cycle_impl(graph = graph) : 
 #>   At vendor/cigraph/src/paths/eulerian.c:615 : The graph does not have an Eulerian cycle. Input problem has no solution
 ```

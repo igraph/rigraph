@@ -49,3 +49,8 @@ centrality methods and much more.
   documentation, ensure that each sentence is on its own line for better
   readability. Run `R -q -e 'devtools::document()'` to update the
   documentation.
+
+## Code Generation
+
+See `tools/README.md` for guidelines on code generation using the
+Stimulus framework.
