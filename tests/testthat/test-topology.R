@@ -383,17 +383,29 @@ test_that("transitive_closure works for directed graphs", {
 })
 
 test_that("transitive_closure works for undirected graphs", {
-  # Two disconnected components
+  # Two disconnected components with 2 vertices each
   g <- make_graph(c(1, 2, 3, 4), directed = FALSE)
   tc <- transitive_closure(g)
 
-  # Should have complete graphs on each component
+  # Each 2-vertex component already forms a complete graph, 
+  # so transitive closure doesn't add new edges
   expect_equal(vcount(tc), 4)
-  expect_equal(ecount(tc), 2) # One edge per component
+  expect_equal(ecount(tc), 2) # Same as input: one edge per 2-vertex component
   expect_true(are_adjacent(tc, 1, 2))
   expect_true(are_adjacent(tc, 3, 4))
   expect_false(are_adjacent(tc, 1, 3))
   expect_false(are_adjacent(tc, 1, 4))
+  
+  # Test with a path that needs closure
+  g2 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  tc2 <- transitive_closure(g2)
+  
+  # Should create a complete graph (triangle)
+  expect_equal(vcount(tc2), 3)
+  expect_equal(ecount(tc2), 3) # Complete graph on 3 vertices
+  expect_true(are_adjacent(tc2, 1, 2))
+  expect_true(are_adjacent(tc2, 2, 3))
+  expect_true(are_adjacent(tc2, 1, 3)) # This edge is added by closure
 })
 
 test_that("transitive_closure handles graphs with cycles", {
