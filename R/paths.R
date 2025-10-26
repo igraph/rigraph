@@ -620,7 +620,7 @@ widest_paths <- function(
   } else {
     if (length(weights) == 1 && is.na(weights)) {
       cli::cli_abort(
-        "Widest path functions require edge weights. {.arg weights = NA} is not supported.",
+        "Widest path functions require edge weights. {.code weights = NA} is not supported.",
         call = rlang::caller_env()
       )
     } else {
