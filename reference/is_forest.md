@@ -73,7 +73,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> + 2/8 vertices, from 52f908f:
+#> + 2/8 vertices, from e9479b4:
 #> [1] 1 4
 #> 
 ```
