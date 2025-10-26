@@ -61,6 +61,7 @@ is the smallest possible degree.
 
 For \code{mean_degree()}, the average degree in the graph as a single number.
 For graphs with no vertices, \code{NaN} is returned.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \description{
 The degree of a vertex is its most basic structural property, the number of

@@ -897,6 +897,7 @@ mean_distance <- function(
 #'
 #'   For `mean_degree()`, the average degree in the graph as a single number.
 #'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
