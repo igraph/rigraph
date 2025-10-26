@@ -960,7 +960,7 @@ max_degree <- function(
 #' @cdocs igraph_mean_degree
 mean_degree <- function(graph, loops = TRUE) {
   mean_degree_impl(
-    graph,
+    graph = graph,
     loops = loops
   )
 }
