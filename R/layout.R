@@ -608,7 +608,13 @@ layout_as_bipartite <- function(
   ## Argument checks
   ensure_igraph(graph)
   # Use the _impl function
-  layout_bipartite_impl(graph, types, hgap, vgap, maxiter)
+  layout_bipartite_impl(
+    graph = graph,
+    types = types,
+    hgap = hgap,
+    vgap = vgap,
+    maxiter = maxiter
+  )
 }
 
 
@@ -658,7 +664,11 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
     return(layout_in_circle(graph))
   }
   # Use the _impl function
-  layout_star_impl(graph, center, order)
+  layout_star_impl(
+    graph = graph,
+    center = center,
+    order = order
+  )
 }
 
 
@@ -823,7 +833,10 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' plot(karate, layout = coords)
 layout_in_circle <- function(graph, order = V(graph)) {
   # Use the _impl function
-  layout_circle_impl(graph, order)
+  layout_circle_impl(
+    graph = graph,
+    order = order
+  )
 }
 
 #' @rdname layout_in_circle
@@ -1013,9 +1026,16 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 
   # Function call
   if (dim == 2) {
-    layout_grid_impl(graph, width)
+    layout_grid_impl(
+      graph = graph,
+      width = width
+    )
   } else {
-    layout_grid_3d_impl(graph, width, height)
+    layout_grid_3d_impl(
+      graph = graph,
+      width = width,
+      height = height
+    )
   }
 }
 
@@ -1061,7 +1081,9 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @family graph layouts
 layout_on_sphere <- function(graph) {
   # Use the _impl function
-  layout_sphere_impl(graph)
+  layout_sphere_impl(
+    graph = graph
+  )
 }
 
 
@@ -1110,9 +1132,13 @@ layout_randomly <- function(graph, dim = c(2, 3)) {
   dim <- igraph.match.arg(dim)
 
   if (dim == 2) {
-    layout_random_impl(graph)
+    layout_random_impl(
+      graph = graph
+    )
   } else if (dim == 3) {
-    layout_random_3d_impl(graph)
+    layout_random_3d_impl(
+      graph = graph
+    )
   }
 }
 
@@ -2043,7 +2069,11 @@ layout_with_mds <- function(
   dim <- as.numeric(dim)
 
   # Function call
-  layout_mds_impl(graph, dist, dim)
+  layout_mds_impl(
+    graph = graph,
+    dist = dist,
+    dim = dim
+  )
 }
 
 

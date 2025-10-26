@@ -156,10 +156,11 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
   }
 
   res <- motifs_randesu_impl(
-    graph,
+    graph = graph,
     size = size,
     cut.prob = cut.prob
   )
+
   res[is.nan(res)] <- NA
   res
 }
@@ -197,7 +198,7 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   }
 
   motifs_randesu_no_impl(
-    graph,
+    graph = graph,
     size = size,
     cut.prob = cut.prob
   )
@@ -258,11 +259,11 @@ sample_motifs <- function(
   }
 
   motifs_randesu_estimate_impl(
-    graph,
+    graph = graph,
     size = size,
     cut.prob = cut.prob,
     sample.size = sample.size,
-    sample
+    sample = sample
   )
 }
 
@@ -309,7 +310,9 @@ dyad_census <- function(graph) {
     warn("`dyad_census()` requires a directed graph.")
   }
 
-  dyad_census_impl(graph)
+  dyad_census_impl(
+    graph = graph
+  )
 }
 
 
@@ -395,5 +398,7 @@ dyad_census <- function(graph) {
 #' @export
 #' @cdocs igraph_triad_census
 triad_census <- function(graph) {
-  triad_census_impl(graph = graph)
+  triad_census_impl(
+    graph = graph
+  )
 }
