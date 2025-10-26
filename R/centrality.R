@@ -1449,9 +1449,22 @@ strength <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   weights = NULL
 ) {
+  if (is.logical(loops)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "strength(loops = 'cannot be a logical')",
+      details = "Use the new character argument instead: 'twice', 'once', or 'none'."
+    )
+    if (loops) {
+      loops <- "twice"
+    } else {
+      loops <- "none"
+    }
+  }
+
   strength_impl(
     graph = graph,
     vids = vids,
