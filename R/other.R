@@ -224,5 +224,7 @@ igraph.i.spMatrix <- function(M) {
 #' @export
 #' @cdocs igraph_convex_hull
 convex_hull <- function(data) {
-  convex_hull_2d_impl(data = data)
+  convex_hull_2d_impl(
+    data = data
+  )
 }
