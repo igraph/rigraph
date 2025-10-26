@@ -417,7 +417,7 @@ layout.auto <- function(graph, dim = 2, ...) {
 #' plot(g, layout = coords)
 #'
 #' # Creating a custom post-layout modifier
-#' scale_by <- function(factor = 2) {
+#' scale_by <- function(factor) {
 #'   layout_modifier(
 #'     id = "scale_by",
 #'     type = "post",
@@ -439,24 +439,14 @@ layout_ <- function(graph, layout, ...) {
   }
   names(modifiers) <- ids
 
-  # Separate pre-layout and post-layout modifiers
-  pre_modifiers <- Filter(
-    function(m) {
-      isTRUE(m$type == "pre")
-    },
-    modifiers
-  )
-  post_modifiers <- Filter(
-    function(m) {
-      isTRUE(m$type == "post")
-    },
-    modifiers
-  )
+  # Separate modifiers by type
+  is_pre <- vapply(modifiers, function(m) isTRUE(m$type == "pre"), logical(1))
+  pre_modifiers <- modifiers[is_pre]
+  post_modifiers <- modifiers[!is_pre]
 
   # Apply pre-layout modifiers
   if (length(pre_modifiers) > 0) {
-    # Pre-layout modifiers should handle the entire layout calculation
-    # Currently only component_wise is a pre-layout modifier
+    # Only one pre-layout modifier is supported at a time
     if (length(pre_modifiers) > 1) {
       cli::cli_abort("Multiple pre-layout modifiers are not supported.")
     }

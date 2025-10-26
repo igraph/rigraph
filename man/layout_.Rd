@@ -94,7 +94,7 @@ coords <- layout_(g, in_circle(), component_wise(), normalize())
 plot(g, layout = coords)
 
 # Creating a custom post-layout modifier
-scale_by <- function(factor = 2) {
+scale_by <- function(factor) {
   layout_modifier(
     id = "scale_by",
     type = "post",
