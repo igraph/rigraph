@@ -2013,9 +2013,9 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #'
 #' @details
 #' A triangular (or hexagonal) lattice is a lattice structure where each
-#' internal vertex has degree 3. The fundamental structure is based on
-#' triangular tiling, but the function supports creating lattices with
-#' different boundary shapes.
+#' interior vertex (not on the boundary) has degree 3. The fundamental structure
+#' is based on triangular tiling, but the function supports creating lattices
+#' with different boundary shapes.
 #'
 #' The `dims` parameter determines the boundary shape of the lattice:
 #' \itemize{
