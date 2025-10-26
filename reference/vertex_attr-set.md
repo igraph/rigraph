@@ -64,10 +64,10 @@ vertex_attr(g) <- list(
 )
 vertex_attr(g, "label") <- V(g)$name
 g
-#> IGRAPH b20f853 UN-- 10 10 -- Ring graph
+#> IGRAPH fcc185f UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), color
 #> | (v/c), label (v/c)
-#> + edges from b20f853 (vertex names):
+#> + edges from fcc185f (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 plot(g)
 ```
