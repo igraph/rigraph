@@ -4,7 +4,7 @@
       st_cuts(g_path, source = "a", target = NULL)
     Condition
       Error in `st_cuts()`:
-      ! No vertex was specified
+      ! `target` must specify at least one vertex
 
 ---
 
@@ -12,7 +12,7 @@
       st_cuts(g_path, source = NULL, target = "a")
     Condition
       Error in `st_cuts()`:
-      ! No vertex was specified
+      ! `source` must specify at least one vertex
 
 ---
 
@@ -20,7 +20,7 @@
       st_min_cuts(g_path, source = "a", target = NULL)
     Condition
       Error in `st_min_cuts()`:
-      ! No vertex was specified
+      ! `target` must specify at least one vertex
 
 ---
 
@@ -28,7 +28,7 @@
       st_min_cuts(g_path, source = NULL, target = "a")
     Condition
       Error in `st_min_cuts()`:
-      ! No vertex was specified
+      ! `source` must specify at least one vertex
 
 # vertex_connectivity error works
 
