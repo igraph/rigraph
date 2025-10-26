@@ -909,11 +909,12 @@ degree <- function(
   mode <- igraph.match.arg(mode)
 
   res <- degree_impl(
-    graph,
+    graph = graph,
     vids = v,
     mode = mode,
     loops = loops
   )
+
   if (normalized) {
     res <- res / (vcount(graph) - 1)
   }
@@ -1380,14 +1381,14 @@ all_shortest_paths <- function(
 
   if (is.null(weights)) {
     res <- get_all_shortest_paths_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       mode = mode
     )
   } else {
     res <- get_all_shortest_paths_dijkstra_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       weights = weights,
@@ -1456,7 +1457,6 @@ k_shortest_paths <- function(
     from = from,
     to = to,
     k = k,
-    ...,
     weights = weights,
     mode = mode
   )
@@ -3269,9 +3269,19 @@ laplacian_matrix <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (sparse) {
-    res <- get_laplacian_sparse_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_sparse_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   } else {
-    res <- get_laplacian_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   }
   if (sparse) {
     res <- igraph.i.spMatrix(res)
