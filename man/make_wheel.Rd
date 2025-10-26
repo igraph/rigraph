@@ -25,14 +25,15 @@ center, \code{mutual}: a directed wheel is created with mutual edges,
 An igraph graph.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 A wheel graph is created by connecting a center vertex to all vertices of a
 cycle graph.
 A wheel graph on \code{n} vertices can be thought of as a wheel with \code{n - 1}
 spokes.
 The cycle graph part makes up the rim, while the star graph part adds the
 spokes.
-}
-\details{
+
 Note that the two and three-vertex wheel graphs are non-simple: The
 two-vertex wheel graph contains a self-loop, while the three-vertex wheel
 graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).

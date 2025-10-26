@@ -2067,6 +2067,9 @@ ring <- function(...) constructor_spec(make_ring, ...)
 
 #' Create a wheel graph
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' A wheel graph is created by connecting a center vertex to all vertices of a
 #' cycle graph.
 #' A wheel graph on `n` vertices can be thought of as a wheel with `n - 1`
@@ -2098,18 +2101,18 @@ make_wheel <- function(
   mode = c("in", "out", "mutual", "undirected"),
   center = 1
 ) {
-  mode <- igraph.match.arg(mode)
-  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_wheel,
-    as.numeric(n),
-    as.numeric(mode1),
-    as.numeric(center) - 1
+  res <- wheel_impl(
+    n = n,
+    mode = mode,
+    center = center - 1
   )
   if (igraph_opt("add.params")) {
-    res$name <- switch(mode, "in" = "In-wheel", "out" = "Out-wheel", "Wheel")
+    res$name <- switch(
+      igraph.match.arg(mode),
+      "in" = "In-wheel",
+      "out" = "Out-wheel",
+      "Wheel"
+    )
     res$mode <- mode
     res$center <- center
   }
