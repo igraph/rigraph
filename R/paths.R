@@ -120,7 +120,7 @@ all_simple_paths <- function(
   res <- with_igraph_opt(
     list(return.vs.es = FALSE),
     get_all_simple_paths_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       cutoff = cutoff,
@@ -161,7 +161,9 @@ all_simple_paths <- function(
 #' @export
 #' @cdocs igraph_is_dag
 is_dag <- function(graph) {
-  is_dag_impl(graph = graph)
+  is_dag_impl(
+    graph = graph
+  )
 }
 
 #' Acyclic graphs
@@ -186,7 +188,9 @@ is_dag <- function(graph) {
 #' @export
 #' @cdocs igraph_is_acyclic
 is_acyclic <- function(graph) {
-  is_acyclic_impl(graph = graph)
+  is_acyclic_impl(
+    graph = graph
+  )
 }
 
 #' Maximum cardinality search
@@ -245,7 +249,9 @@ is_acyclic <- function(graph) {
 #' @family chordal
 #' @cdocs igraph_maximum_cardinality_search
 max_cardinality <- function(graph) {
-  maximum_cardinality_search_impl(graph = graph)
+  maximum_cardinality_search_impl(
+    graph = graph
+  )
 }
 
 
@@ -300,7 +306,12 @@ eccentricity <- function(
     }
   }
 
-  eccentricity_dijkstra_impl(graph, vids = vids, weights = weights, mode = mode)
+  eccentricity_dijkstra_impl(
+    graph = graph,
+    vids = vids,
+    weights = weights,
+    mode = mode
+  )
 }
 
 
@@ -354,7 +365,11 @@ radius <- function(
     }
   }
 
-  radius_dijkstra_impl(graph, weights = weights, mode = mode)
+  radius_dijkstra_impl(
+    graph = graph,
+    weights = weights,
+    mode = mode
+  )
 }
 
 #' Central vertices of a graph
@@ -392,7 +407,6 @@ graph_center <- function(
 ) {
   graph_center_dijkstra_impl(
     graph = graph,
-    ...,
     weights = weights,
     mode = mode
   )
@@ -404,5 +418,8 @@ graph_center <- function(
 #' @export
 #' @cdocs igraph_path_length_hist
 distance_table <- function(graph, directed = TRUE) {
-  path_length_hist_impl(graph = graph, directed = directed)
+  path_length_hist_impl(
+    graph = graph,
+    directed = directed
+  )
 }
