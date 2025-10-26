@@ -54,6 +54,76 @@ def optional_wrapper_r(conv: str) -> str:
     return f"if (!is.null(%I%)) {conv}"
 
 
+def format_switch_statement(code: str) -> str:
+    """Format switch statements with proper spacing and line breaks."""
+    # Match switch(...) patterns
+    switch_pattern = r'(switch\([^,]+)(,\s*)([^)]+)(\))'
+
+    def format_switch_args(match):
+        prefix = match.group(1)  # "switch(igraph.match.arg(mode)"
+        comma = match.group(2)   # ","
+        args = match.group(3)    # the key-value pairs
+        suffix = match.group(4)  # ")"
+
+        # Split by comma, preserving quoted strings
+        parts = []
+        current = []
+        in_quotes = False
+        paren_depth = 0
+
+        for char in args:
+            if char == '"' and (not current or current[-1] != '\\'):
+                in_quotes = not in_quotes
+            elif char == '(' and not in_quotes:
+                paren_depth += 1
+            elif char == ')' and not in_quotes:
+                paren_depth -= 1
+            elif char == ',' and not in_quotes and paren_depth == 0:
+                parts.append(''.join(current).strip())
+                current = []
+                continue
+            current.append(char)
+
+        if current:
+            parts.append(''.join(current).strip())
+
+        # Check if we should format multiline (more than 3 parts or total length > 80)
+        total_len = len(prefix) + len(comma) + sum(len(p) for p in parts) + len(parts) * 2 + len(suffix)
+
+        if len(parts) > 3 or total_len > 80:
+            # Format multiline with proper spacing around =
+            formatted_parts = []
+            for part in parts:
+                # Add spaces around = in key-value pairs
+                part = re.sub(r'(["\w]+)=(\S)', r'\1 = \2', part)
+                formatted_parts.append(part)
+
+            # Create multiline format: put the first argument on its own
+            # line after the opening 'switch(' and indent the remaining
+            # key/value parts further.
+            indent_str = '    '
+            # prefix currently holds 'switch(some_expr' — we want
+            # to emit 'switch(\n    some_expr,\n' (use indent_str)
+            first_arg = prefix[prefix.find('(') + 1 :].strip()
+            result = 'switch(\n' + indent_str + first_arg + ',\n'
+            for i, part in enumerate(formatted_parts):
+                result += indent_str + part
+                if i < len(formatted_parts) - 1:
+                    result += ','
+                result += '\n'
+            result += '  ' + suffix
+            return result
+        else:
+            # Single line format with spaces around =
+            formatted_parts = []
+            for part in parts:
+                part = re.sub(r'(["\w]+)=(\S)', r'\1 = \2', part)
+                formatted_parts.append(part)
+            return prefix + ', ' + ', '.join(formatted_parts) + suffix
+
+    return re.sub(switch_pattern, format_switch_args, code)
+
+
 class RRCodeGenerator(SingleBlockCodeGenerator):
     def generate_function(self, function: str, out: IO[str]) -> None:
         # Check types
@@ -94,7 +164,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
         )
 
         out.write(name)
-        out.write("_impl <- function(")
+        out.write("_impl <- function(\n")
 
         def handle_input_argument(param: ParamSpec) -> str:
             tname = param.type
@@ -111,7 +181,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                 "NULL" if param.is_optional and header else ""
             )
             if default:
-                header = f"{header}={default}"
+                header = f"{header} = {default}"
 
             for i, dep in enumerate(param.dependencies):
                 header = header.replace("%I" + str(i + 1) + "%", dep)
@@ -154,9 +224,12 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                 )
                 needs_details_arg = False
         if needs_details_arg:
-            head.append("details=FALSE")
+            head.append("details = FALSE")
 
-        out.write(", ".join(head))
+        # Format parameters: one per line with proper indentation
+        if head:
+            formatted_params = ",\n  ".join(head)
+            out.write("  " + formatted_params + "\n")
         out.write(") {\n")
 
         ## Argument checks, INCONV
@@ -192,6 +265,9 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                     f"Missing IN dependency for {tname} {param.name} in function {function}"
                 )
 
+            # Format switch statements
+            res = format_switch_statement(res)
+
             return res
 
         inconv = [handle_argument_check(param) for param in spec.iter_parameters()]
@@ -208,9 +284,10 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
         ## completely ignored, so giving an empty CALL field is
         ## different than not giving it at all.
 
-        out.write("  on.exit( .Call(R_igraph_finalizer) )\n")
+        out.write("  on.exit(.Call(R_igraph_finalizer))\n")
         out.write("  # Function call\n")
-        out.write("  res <- .Call(R_" + function)
+        out.write("  res <- .Call(\n")
+        out.write("    R_" + function)
 
         parts = []
         for param in spec.iter_input_parameters():
@@ -218,11 +295,17 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
             name = get_r_parameter_name(param)
             call = type.get("CALL", name)
             if call:
-                parts.append(call.replace("%I%", name))
+                call_formatted = call.replace("%I%", name)
+                # Add spaces around arithmetic operators
+                call_formatted = re.sub(r'(\w+)(\+|\-|\*|/)(\d+)', r'\1 \2 \3', call_formatted)
+                parts.append(call_formatted)
 
-        if len(parts):
-            out.write(", " + ", ".join(parts))
-        out.write(")\n")
+        # Format .Call() as multi-line with each argument on its own line
+        for part in parts:
+            out.write(",\n")
+            out.write("    " + part)
+
+        out.write("\n  )\n")
 
         ## Output conversions
         def handle_output_argument(
@@ -268,8 +351,9 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
             retconv = indent(rt.get_output_conversion_template_for(ParamMode.OUT))
             retconv = retconv.replace("%I%", "res")
             # TODO: %I1% etc, is not handled here!
-            outconv.append("")
-            outconv.append(retconv)
+            if retconv.strip():
+                outconv.append("")
+                outconv.append(retconv)
         elif len(retpars) == 1:
             # returning a single output value
             pass
