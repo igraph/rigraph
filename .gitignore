@@ -23,4 +23,3 @@ cran
 /src/*.d
 /src/symbols.rds
 /covr
-tests/testthat/testthat-problems.rds
