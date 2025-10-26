@@ -31,13 +31,13 @@ the id of the graph they were created from.
 ``` r
 g <- make_ring(10)
 graph_id(g)
-#> [1] "5fe1e086-4150-4ddc-8b01-66f5a687f7ff"
+#> [1] "15e3da39-7859-4448-a912-7701e91010d6"
 graph_id(V(g))
-#> [1] "5fe1e086-4150-4ddc-8b01-66f5a687f7ff"
+#> [1] "15e3da39-7859-4448-a912-7701e91010d6"
 graph_id(E(g))
-#> [1] "5fe1e086-4150-4ddc-8b01-66f5a687f7ff"
+#> [1] "15e3da39-7859-4448-a912-7701e91010d6"
 
 g2 <- g + 1
 graph_id(g2)
-#> [1] "2b70d8a4-9248-4953-87e4-dc2e3b05ab42"
+#> [1] "e433a14e-7ca0-476d-ae2a-6048227f9567"
 ```
