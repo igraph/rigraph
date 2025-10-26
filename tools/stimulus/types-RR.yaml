@@ -242,7 +242,7 @@ BIPARTITE_TYPES_UNNAMED:
 
 VERTEX_COLOR:
     INCONV: |-
-        if (missing(%I%)) {
+        if (is_missing(%I%)) {
           if ("color" %in% vertex_attr_names(%I1%)) {
             %I% <- V(%I1%)$color
           } else {
@@ -261,7 +261,7 @@ VERTEX_COLOR:
 
 EDGE_COLOR:
     INCONV: |-
-        if (missing(%I%)) {
+        if (is_missing(%I%)) {
           if ("color" %in% edge_attr_names(%I1%)) {
             %I% <- E(%I1%)$color
           } else {
