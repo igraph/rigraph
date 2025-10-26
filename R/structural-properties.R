@@ -958,7 +958,12 @@ max_degree <- function(
 #' @rdname degree
 #' @export
 #' @cdocs igraph_mean_degree
-mean_degree <- mean_degree_impl
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph,
+    loops = loops
+  )
+}
 
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
