@@ -72,6 +72,35 @@ test_that("max_degree() works", {
   expect_equal(max_degree(make_empty_graph()), 0)
 })
 
+test_that("mean_degree() works", {
+  # Undirected graph: each edge contributes 2 to total degree
+  g_undirected <- make_ring(10)
+  expect_equal(mean_degree(g_undirected), 2)
+
+  # Directed graph with 3 edges between 3 vertices
+  # Formula for directed: edges / vertices = 3 / 3 = 1
+  g_directed <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+  expect_equal(mean_degree(g_directed), 1)
+
+  # Graph with self-loops (has 1 loop: 2->2)
+  # Without loops: (3 edges - 1 loop) / 3 vertices = 2/3
+  g_loop <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+  expect_equal(mean_degree(g_loop, loops = FALSE), 2 / 3)
+
+  # Empty graph
+  expect_true(is.nan(mean_degree(make_empty_graph())))
+
+  # Compare with manual calculation for undirected graph
+  g_random <- sample_gnp(100, 0.05)
+  manual_mean <- 2 * ecount(g_random) / vcount(g_random)
+  expect_equal(mean_degree(g_random), manual_mean)
+
+  # For directed graph
+  g_directed_random <- sample_gnp(100, 0.05, directed = TRUE)
+  manual_mean_dir <- ecount(g_directed_random) / vcount(g_directed_random)
+  expect_equal(mean_degree(g_directed_random), manual_mean_dir)
+})
+
 test_that("BFS uses 1-based root vertex index", {
   g <- make_ring(3)
   expect_equal(bfs(g, root = 1)$root, 1)

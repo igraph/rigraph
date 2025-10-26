@@ -881,6 +881,9 @@ mean_distance <- average_path_length_dijkstra_impl
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -891,6 +894,7 @@ mean_distance <- average_path_length_dijkstra_impl
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -923,6 +927,11 @@ degree <- function(
 #' @export
 #' @cdocs igraph_maxdegree
 max_degree <- maxdegree_impl
+
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- mean_degree_impl
 
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
