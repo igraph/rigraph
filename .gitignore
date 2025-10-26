@@ -23,3 +23,5 @@ cran
 /src/*.d
 /src/symbols.rds
 /covr
+tests/testthat/_snaps/*.new.md
+tests/testthat/testthat-problems.rds
