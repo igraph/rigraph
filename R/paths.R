@@ -541,10 +541,18 @@ widest_path_widths <- function(
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
+    } else {
+      cli::cli_abort(
+        "Widest path functions require edge weights. Please provide {.arg weights} or add a {.field weight} edge attribute.",
+        call = rlang::caller_env()
+      )
     }
   } else {
     if (length(weights) == 1 && is.na(weights)) {
-      weights <- NULL
+      cli::cli_abort(
+        "Widest path functions require edge weights. {.arg weights = NA} is not supported.",
+        call = rlang::caller_env()
+      )
     } else {
       weights <- as.numeric(weights)
     }
@@ -607,10 +615,18 @@ widest_paths <- function(
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
       weights <- as.numeric(E(graph)$weight)
+    } else {
+      cli::cli_abort(
+        "Widest path functions require edge weights. Please provide {.arg weights} or add a {.field weight} edge attribute.",
+        call = rlang::caller_env()
+      )
     }
   } else {
     if (length(weights) == 1 && is.na(weights)) {
-      weights <- NULL
+      cli::cli_abort(
+        "Widest path functions require edge weights. {.arg weights = NA} is not supported.",
+        call = rlang::caller_env()
+      )
     } else {
       weights <- as.numeric(weights)
     }
