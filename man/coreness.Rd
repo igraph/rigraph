@@ -48,6 +48,7 @@ Networks}, 5, 269--287.
 \code{\link[=degree]{degree()}}
 
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

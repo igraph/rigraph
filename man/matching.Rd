@@ -118,6 +118,7 @@ max_bipartite_match(g2)
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

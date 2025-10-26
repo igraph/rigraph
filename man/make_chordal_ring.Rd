@@ -47,13 +47,21 @@ Other deterministic constructors:
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
+\code{\link{make_generalized_petersen}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
+\code{\link{make_regular_tree}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_symmetric_tree}()},
+\code{\link{make_tree}()},
+\code{\link{make_triangular_lattice}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}

@@ -50,6 +50,7 @@ tree <- unfold_tree(g, roots = roots)
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

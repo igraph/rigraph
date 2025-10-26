@@ -51,6 +51,7 @@ heuristic for the feedback arc set problem. \emph{Information Processing Letters
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

@@ -135,6 +135,7 @@ Sci. USA 101, 3747 (2004)
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

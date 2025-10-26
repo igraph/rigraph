@@ -94,3 +94,24 @@ modify_list <- function(x, y) {
 
   utils::modifyList(x, y)
 }
+
+#' Invalidate cached properties of a graph
+#'
+#' This function invalidates all cached properties of a graph.
+#' It is primarily useful for debugging purposes.
+#'
+#' igraph caches some properties of graphs to improve performance.
+#' This function forces igraph to recompute these properties when they are
+#' next accessed.
+#'
+#' @param graph The input graph.
+#' @return The graph with invalidated cache.
+#' This function is called for its side effects and returns the modified graph.
+#' @export
+#' @cdocs igraph_invalidate_cache
+#' @examples
+#' g <- make_ring(10)
+#' g <- invalidate_cache(g)
+invalidate_cache <- function(graph) {
+  invalidate_cache_impl(graph = graph)
+}
