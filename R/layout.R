@@ -446,7 +446,7 @@ layout_ <- function(graph, layout, ...) {
 
   # Apply pre-layout modifiers
   if (length(pre_modifiers) > 0) {
-    # Only one pre-layout modifier is supported at a time
+    # Enforce single pre-layout modifier restriction
     if (length(pre_modifiers) > 1) {
       cli::cli_abort("Multiple pre-layout modifiers are not supported.")
     }
