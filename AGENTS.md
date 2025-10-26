@@ -108,6 +108,11 @@ Update them using: `make -f Makefile-cigraph src/rinterface.c R/aaa-auto.R`
 
 See `tools/README.md` for guidelines on code generation using the Stimulus framework.
 
+### Build Artifacts
+
+Do not commit: `*.dd`, `*.d`, `*.o`, `*.so` files in `src/`, and `tests/testthat/testthat-problems.rds`.
+These are build artifacts that are regenerated automatically (see `src/README.md` for details on dependency tracking).
+
 ## Testing
 
 - Add test cases for all new functionality
