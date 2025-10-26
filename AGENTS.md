@@ -63,6 +63,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Use explicit package prefixes (e.g., `withr::local_db_connection()`) for clarity
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context
+- When testing error behavior, use snapshot tests. Ensure stability by setting a random seed and calling `local_igraph_options(print.id = FALSE)` if graph IDs are involved.
 - Run `air format .` before committing changes to ensure consistent formatting
 
 ### Documentation
