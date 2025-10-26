@@ -40,6 +40,7 @@ Other structural queries:
 \code{\link{head_of}()},
 \code{\link{incident}()},
 \code{\link{incident_edges}()},
+\code{\link{invalidate_cache}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}
