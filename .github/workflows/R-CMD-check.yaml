@@ -76,7 +76,7 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Update status for rcc
-        if: github.actor != 'github-copilot[bot]'
+        if: github.actor != 'Copilot'
         # FIXME: Wrap into action
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -182,7 +182,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always() && (github.actor != 'github-copilot[bot]')
+        if: always() && (github.actor != 'Copilot')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -219,7 +219,7 @@ jobs:
 
       - name: Update status for rcc (Copilot)
         # Update status directly when triggered by Copilot or bots, since they can't dispatch workflows
-        if: always() && (github.actor == 'github-copilot[bot]')
+        if: always() && (github.actor == 'Copilot')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
