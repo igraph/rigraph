@@ -68,6 +68,7 @@ pak::pak(dependencies = "Config/Needs/build")
 ### Documentation
 
 - Use roxygen2 with Markdown syntax for all function documentation
+- Use math notation for formulas: `\eqn{...}` for inline, `\deqn{...}` for display equations
 - Keep each sentence on its own line in roxygen2 comments for better readability
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag: `#' @cdocs igraph_function_name`
