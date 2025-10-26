@@ -30,4 +30,3 @@ vectors after printing a warning.
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
 }
-\keyword{internal}

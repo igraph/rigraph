@@ -498,6 +498,293 @@ as_edgelist <- function(graph, names = TRUE) {
   res
 }
 
+#' Convert a graph to a vertex-edge incidence matrix
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `as_veincidence_matrix()` returns the vertex-edge incidence matrix of a graph.
+#'
+#' The vertex-edge incidence matrix is a matrix where rows correspond to vertices
+#' and columns correspond to edges. For undirected graphs, the matrix element
+#' is 1 if the vertex is incident to the edge, 0 otherwise. For directed graphs,
+#' the element is -1 if the vertex is the tail (source) of the edge, +1 if it is
+#' the head (target), and 0 otherwise.
+#'
+#' For loops (edges connecting a vertex to itself):
+#' \itemize{
+#'   \item In undirected graphs: the incidence value is 2
+#'   \item In directed graphs: the incidence value is 0
+#' }
+#'
+#' When weights are used, the values -1 and +1 are replaced by -w and +w
+#' respectively, where w is the weight of the edge.
+#'
+#' @param graph The input graph.
+#' @param types `r lifecycle::badge("deprecated")` This argument is deprecated
+#'   and not used. It was originally intended for compatibility but vertex-edge
+#'   incidence matrices don't use types.
+#' @param attr Either `NULL` or a character string giving an edge attribute name.
+#'   If `NULL`, unweighted incidence is returned (values are -1, 0, 1 for directed
+#'   graphs and 0, 1, 2 for undirected graphs). If not `NULL`, weighted incidence
+#'   is returned using the specified edge attribute as weights. For directed graphs,
+#'   values are -w, 0, w where w is the weight. For undirected graphs, values are
+#'   0, w, 2w.
+#' @param names Logical scalar, whether to add vertex and edge names to the matrix.
+#'   If `TRUE` (default), vertex names are used for row names if the `name`
+#'   vertex attribute exists, and edge labels are used for column names if
+#'   the `label` edge attribute exists. Vertex and edge IDs are used otherwise.
+#' @param sparse Logical scalar, whether to return a sparse matrix. The
+#'   \sQuote{`Matrix`} package must be installed for creating sparse matrices.
+#' @return A (usually sparse) matrix with `vcount(graph)` rows and
+#'   `ecount(graph)` columns.
+#'
+#' @seealso [as_adjacency_matrix()], [as_edgelist()], [laplacian_matrix()]
+#'
+#' @examples
+#' # Undirected graph
+#' g1 <- make_ring(3, circular = FALSE)
+#' as_veincidence_matrix(g1, sparse = FALSE)
+#'
+#' # Directed graph
+#' g2 <- make_ring(3, circular = FALSE, directed = TRUE)
+#' as_veincidence_matrix(g2, sparse = FALSE)
+#'
+#' # Weighted graph
+#' g3 <- make_ring(3, circular = FALSE)
+#' E(g3)$weight <- c(2, 3)
+#' as_veincidence_matrix(g3, attr = "weight", sparse = FALSE)
+#'
+#' # Named graph
+#' g4 <- graph_from_literal(a-b, b-c, c-d)
+#' E(g4)$label <- paste0("e", seq_len(ecount(g4)))
+#' as_veincidence_matrix(g4, sparse = FALSE)
+#'
+#' # Graph with loop
+#' g5 <- graph(c(1, 1, 1, 2), directed = FALSE)
+#' as_veincidence_matrix(g5, sparse = FALSE)
+#'
+#' @family conversion
+#' @concept matrices
+#' @export
+as_veincidence_matrix <- function(
+  graph,
+  types = deprecated(),
+  attr = NULL,
+  names = TRUE,
+  sparse = igraph_opt("sparsematrices")
+) {
+  ensure_igraph(graph)
+  
+  if (lifecycle::is_present(types)) {
+    lifecycle::deprecate_warn(
+      "2.1.0",
+      "as_veincidence_matrix(types = )",
+      details = "The 'types' argument is not used for vertex-edge incidence matrices."
+    )
+  }
+
+  if (sparse) {
+    get.ve.incidence.sparse(graph, attr = attr, names = names)
+  } else {
+    get.ve.incidence.dense(graph, attr = attr, names = names)
+  }
+}
+
+get.ve.incidence.dense <- function(
+  graph,
+  attr = NULL,
+  names = TRUE,
+  call = rlang::caller_env()
+) {
+  vc <- vcount(graph)
+  ec <- ecount(graph)
+  
+  # Initialize matrix with zeros
+  res <- matrix(0, nrow = vc, ncol = ec)
+  
+  if (ec == 0) {
+    # Empty graph
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      rownames(res) <- V(graph)$name
+    }
+    return(res)
+  }
+  
+  # Get edge list
+  el <- as_edgelist(graph, names = FALSE)
+  
+  # Get weights if specified
+  if (!is.null(attr)) {
+    attr <- as.character(attr)
+    if (!attr %in% edge_attr_names(graph)) {
+      cli::cli_abort("No such edge attribute: {.str {attr}}", call = call)
+    }
+    weights <- edge_attr(graph, attr)
+    if (!is.numeric(weights)) {
+      cli::cli_abort(
+        "Edge attribute {.str {attr}} must be numeric",
+        call = call
+      )
+    }
+  } else {
+    weights <- rep(1, ec)
+  }
+  
+  if (is_directed(graph)) {
+    # For directed graphs: -weight for tail, +weight for head
+    for (i in seq_len(ec)) {
+      tail <- el[i, 1]
+      head <- el[i, 2]
+      
+      if (tail == head) {
+        # Self-loop: contribution is 0 in directed graphs
+        res[tail, i] <- 0
+      } else {
+        res[tail, i] <- -weights[i]
+        res[head, i] <- weights[i]
+      }
+    }
+  } else {
+    # For undirected graphs: weight for each incident vertex
+    for (i in seq_len(ec)) {
+      v1 <- el[i, 1]
+      v2 <- el[i, 2]
+      
+      if (v1 == v2) {
+        # Self-loop: contribution is 2*weight
+        res[v1, i] <- 2 * weights[i]
+      } else {
+        res[v1, i] <- weights[i]
+        res[v2, i] <- weights[i]
+      }
+    }
+  }
+  
+  # Add row names (vertex names or IDs)
+  if (names) {
+    if ("name" %in% vertex_attr_names(graph)) {
+      rownames(res) <- V(graph)$name
+    } else {
+      rownames(res) <- seq_len(vc)
+    }
+    
+    # Add column names (edge labels or IDs)
+    if (!is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)) {
+      colnames(res) <- E(graph)$label
+    } else if ("label" %in% edge_attr_names(graph)) {
+      colnames(res) <- E(graph)$label
+    } else {
+      colnames(res) <- seq_len(ec)
+    }
+  }
+  
+  res
+}
+
+get.ve.incidence.sparse <- function(
+  graph,
+  attr = NULL,
+  names = TRUE,
+  call = rlang::caller_env()
+) {
+  vc <- vcount(graph)
+  ec <- ecount(graph)
+  
+  if (ec == 0) {
+    # Empty graph
+    res <- Matrix::Matrix(0, nrow = vc, ncol = ec, sparse = TRUE)
+    if (names && "name" %in% vertex_attr_names(graph)) {
+      rownames(res) <- V(graph)$name
+    }
+    return(res)
+  }
+  
+  # Get edge list
+  el <- as_edgelist(graph, names = FALSE)
+  
+  # Get weights if specified
+  if (!is.null(attr)) {
+    attr <- as.character(attr)
+    if (!attr %in% edge_attr_names(graph)) {
+      cli::cli_abort("No such edge attribute: {.str {attr}}", call = call)
+    }
+    weights <- edge_attr(graph, attr)
+    if (!is.numeric(weights)) {
+      cli::cli_abort(
+        "Edge attribute {.str {attr}} must be numeric",
+        call = call
+      )
+    }
+  } else {
+    weights <- rep(1, ec)
+  }
+  
+  # Build sparse matrix using triplet format
+  i_indices <- integer()
+  j_indices <- integer()
+  x_values <- numeric()
+  
+  if (is_directed(graph)) {
+    # For directed graphs: -weight for tail, +weight for head
+    for (e in seq_len(ec)) {
+      tail <- el[e, 1]
+      head <- el[e, 2]
+      
+      if (tail == head) {
+        # Self-loop: contribution is 0, so we skip it (sparse)
+      } else {
+        i_indices <- c(i_indices, tail, head)
+        j_indices <- c(j_indices, e, e)
+        x_values <- c(x_values, -weights[e], weights[e])
+      }
+    }
+  } else {
+    # For undirected graphs: weight for each incident vertex
+    for (e in seq_len(ec)) {
+      v1 <- el[e, 1]
+      v2 <- el[e, 2]
+      
+      if (v1 == v2) {
+        # Self-loop: contribution is 2*weight
+        i_indices <- c(i_indices, v1)
+        j_indices <- c(j_indices, e)
+        x_values <- c(x_values, 2 * weights[e])
+      } else {
+        i_indices <- c(i_indices, v1, v2)
+        j_indices <- c(j_indices, e, e)
+        x_values <- c(x_values, weights[e], weights[e])
+      }
+    }
+  }
+  
+  # Create sparse matrix
+  res <- Matrix::sparseMatrix(
+    i = i_indices,
+    j = j_indices,
+    x = x_values,
+    dims = c(vc, ec)
+  )
+  
+  # Add row names (vertex names or IDs)
+  if (names) {
+    if ("name" %in% vertex_attr_names(graph)) {
+      rownames(res) <- V(graph)$name
+    } else {
+      rownames(res) <- seq_len(vc)
+    }
+    
+    # Add column names (edge labels or IDs)
+    if (!is.null(attr) && attr == "label" && "label" %in% edge_attr_names(graph)) {
+      colnames(res) <- E(graph)$label
+    } else if ("label" %in% edge_attr_names(graph)) {
+      colnames(res) <- E(graph)$label
+    } else {
+      colnames(res) <- seq_len(ec)
+    }
+  }
+  
+  res
+}
 
 #' Convert between directed and undirected graphs
 #'
