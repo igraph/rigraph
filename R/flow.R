@@ -762,15 +762,10 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @export
 #' @cdocs igraph_all_st_cuts
 st_cuts <- function(graph, source, target) {
-  tryCatch(
-    all_st_cuts_impl(
-      graph = graph,
-      source = source,
-      target = target
-    ),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(st_cuts()))
-    }
+  all_st_cuts_impl(
+    graph = graph,
+    source = source,
+    target = target
   )
 }
 
@@ -831,16 +826,11 @@ st_cuts <- function(graph, source, target) {
 #' @export
 #' @cdocs igraph_all_st_mincuts
 st_min_cuts <- function(graph, source, target, capacity = NULL) {
-  tryCatch(
-    all_st_mincuts_impl(
-      graph = graph,
-      source = source,
-      target = target,
-      capacity = capacity
-    ),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(st_min_cuts()))
-    }
+  all_st_mincuts_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
   )
 }
 
@@ -988,12 +978,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @family flow
 #' @cdocs igraph_all_minimal_st_separators
 min_st_separators <- function(graph) {
-  tryCatch(
-    all_minimal_st_separators_impl(graph = graph),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(min_st_separators()))
-    }
-  )
+  all_minimal_st_separators_impl(graph = graph)
 }
 
 
@@ -1063,16 +1048,11 @@ min_st_separators <- function(graph) {
 #' @export
 #' @cdocs igraph_maxflow
 max_flow <- function(graph, source, target, capacity = NULL) {
-  tryCatch(
-    maxflow_impl(
-      graph = graph,
-      source = source,
-      target = target,
-      capacity = capacity
-    ),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(max_flow()))
-    }
+  maxflow_impl(
+    graph = graph,
+    source = source,
+    target = target,
+    capacity = capacity
   )
 }
 
@@ -1104,14 +1084,9 @@ max_flow <- function(graph, source, target, capacity = NULL) {
 #' @export
 #' @cdocs igraph_is_separator
 is_separator <- function(graph, candidate) {
-  tryCatch(
-    is_separator_impl(
-      graph = graph,
-      candidate = candidate
-    ),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(is_separator()))
-    }
+  is_separator_impl(
+    graph = graph,
+    candidate = candidate
   )
 }
 
@@ -1163,14 +1138,9 @@ is_separator <- function(graph, candidate) {
 #' @export
 #' @cdocs igraph_is_minimal_separator
 is_min_separator <- function(graph, candidate) {
-  tryCatch(
-    is_minimal_separator_impl(
-      graph = graph,
-      candidate = candidate
-    ),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(is_min_separator()))
-    }
+  is_minimal_separator_impl(
+    graph = graph,
+    candidate = candidate
   )
 }
 
@@ -1244,10 +1214,5 @@ is_min_separator <- function(graph, candidate) {
 #' min_separators(camp)
 #' @cdocs igraph_minimum_size_separators
 min_separators <- function(graph) {
-  tryCatch(
-    minimum_size_separators_impl(graph = graph),
-    error = function(e) {
-      rlang::abort(conditionMessage(e), call = quote(min_separators()))
-    }
-  )
+  minimum_size_separators_impl(graph = graph)
 }
