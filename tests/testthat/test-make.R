@@ -132,6 +132,31 @@ test_that("make_star works", {
   )
 })
 
+test_that("make_wheel works", {
+  # Wheel with 5 vertices: 1 center + 4 rim vertices
+  # The rim should form a cycle, and all rim vertices connect to center
+  wheel5 <- make_wheel(5, mode = "undirected")
+  expect_vcount(wheel5, 5)
+  # 4 edges in the cycle + 4 spokes = 8 edges
+  expect_ecount(wheel5, 8)
+
+  # Check that center vertex (default is 1) has degree 4
+  expect_equal(degree(wheel5)[1], 4)
+  # Check that rim vertices have degree 3 (2 from cycle + 1 to center)
+  expect_equal(degree(wheel5)[2:5], rep(3, 4))
+
+  # Test directed versions
+  wheel5_out <- make_wheel(5, mode = "out")
+  expect_true(is_directed(wheel5_out))
+
+  wheel5_in <- make_wheel(5, mode = "in")
+  expect_true(is_directed(wheel5_in))
+
+  # Test with different center
+  wheel5_center3 <- make_wheel(5, mode = "undirected", center = 3)
+  expect_equal(degree(wheel5_center3)[3], 4)
+})
+
 test_that("make_full_graph works", {
   adj_mat <- matrix(1, 3, 3)
   diag(adj_mat) <- 0

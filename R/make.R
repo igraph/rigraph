@@ -2044,6 +2044,64 @@ ring <- function(...) constructor_spec(make_ring, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a wheel graph
+#'
+#' A wheel graph is created by connecting a center vertex to all vertices of a
+#' cycle graph.
+#' A wheel graph on `n` vertices can be thought of as a wheel with `n - 1`
+#' spokes.
+#' The cycle graph part makes up the rim, while the star graph part adds the
+#' spokes.
+#'
+#' Note that the two and three-vertex wheel graphs are non-simple: The
+#' two-vertex wheel graph contains a self-loop, while the three-vertex wheel
+#' graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
+#'
+#' @concept Wheel graph
+#' @param n Number of vertices.
+#' @param mode It defines the direction of the edges.
+#'   `in`: the edges point *to* the center, `out`: the edges point *from* the
+#'   center, `mutual`: a directed wheel is created with mutual edges,
+#'   `undirected`: the edges are undirected.
+#' @param center ID of the center vertex.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_wheel(10, mode = "out")
+#' make_wheel(5, mode = "undirected")
+#' @cdocs igraph_wheel
+make_wheel <- function(
+  n,
+  mode = c("in", "out", "mutual", "undirected"),
+  center = 1
+) {
+  mode <- igraph.match.arg(mode)
+  mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
+
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_wheel,
+    as.numeric(n),
+    as.numeric(mode1),
+    as.numeric(center) - 1
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- switch(mode, "in" = "In-wheel", "out" = "Out-wheel", "Wheel")
+    res$mode <- mode
+    res$center <- center
+  }
+  res
+}
+
+#' @rdname make_wheel
+#' @param ... Passed to `make_wheel()`.
+#' @export
+wheel <- function(...) constructor_spec(make_wheel, ...)
+
+## -----------------------------------------------------------------
+
 #' Create tree graphs
 #'
 #' Create a k-ary tree graph, where almost all vertices other than the leaves
