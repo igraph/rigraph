@@ -36,3 +36,25 @@ igraph is an R package with routines for simple graphs and network analysis. It 
 ## Code Generation
 
 See `tools/README.md` for guidelines on code generation using the Stimulus framework.
+
+## Build Artifacts and Generated Files
+
+### Files Not to Commit
+
+The following build artifacts and generated files should not be committed:
+
+- `*.dd` files in `src/` - These are generated dependency tracking files created during build. They are already ignored via `src/.gitignore`.
+- `tests/testthat/testthat-problems.rds` - Test result artifacts that change with each test run.
+- `src/*.d` - Makefile dependency files.
+- `src/*.o` and `src/*.so` - Compiled object files and shared libraries.
+
+### Dependency Tracking System
+
+The build system uses a dependency tracking mechanism implemented via `.dd` files:
+
+- **Purpose**: Track dependencies between source files and headers to enable incremental builds
+- **Generation**: Created automatically by the build system from `.d` files (see `src/deps.mk`)
+- **Format**: Makefile-compatible dependency declarations listing local (non-system) headers
+- **Lifecycle**: Generated during build, filtered to exclude system headers, and used by Make to determine what needs recompiling
+
+See `src/deps.mk` for the implementation. The `.dd` files should never be committed as they contain machine-specific paths and are regenerated on each build.
