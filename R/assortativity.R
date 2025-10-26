@@ -249,7 +249,9 @@ assortativity_nominal <- function(
   normalized = TRUE
 ) {
   # Convert character types to factor then to integer for categorical data
-  types <- as.integer(as.factor(types))
+  if (is.character(types)) {
+    types <- as.integer(as.factor(types))
+  }
 
   assortativity_nominal_impl(
     graph = graph,
