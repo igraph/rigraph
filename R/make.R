@@ -2258,6 +2258,52 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a circulant graph
+#'
+#' A circulant graph `G(n, shifts)` consists of `n` vertices `v_0`, ..., `v_(n-1)`
+#' such that for each `s_i` in the list of offsets `shifts`, `v_j` is connected to
+#' `v_((j + s_i) mod n)` for all j.
+#'
+#' The function can generate either directed or undirected graphs.
+#' It does not generate multi-edges or self-loops.
+#'
+#' @param n Integer, the number of vertices in the circulant graph.
+#' @param shifts Integer vector, a list of the offsets within the circulant graph.
+#' @param directed Boolean, whether to create a directed graph.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a circulant graph with 10 vertices and shifts 1 and 3
+#' g <- make_circulant(10, c(1, 3))
+#' print_all(g)
+#'
+#' # A directed circulant graph
+#' g2 <- make_circulant(10, c(1, 3), directed = TRUE)
+#' print_all(g2)
+make_circulant <- function(n, shifts, directed = FALSE) {
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(
+    R_igraph_circulant,
+    as.numeric(n),
+    as.numeric(shifts),
+    as.logical(directed)
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- "Circulant graph"
+    res$shifts <- shifts
+  }
+  res
+}
+
+#' @rdname make_circulant
+#' @param ... Passed to `make_circulant()`.
+#' @export
+circulant <- function(...) constructor_spec(make_circulant, ...)
+
+## -----------------------------------------------------------------
+
 #' Line graph of a graph
 #'
 #' This function calculates the line graph of another graph.

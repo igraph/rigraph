@@ -298,6 +298,33 @@ test_that("make_chordal_ring works", {
   expect_equal(degree(chord), rep(6, 15))
 })
 
+test_that("make_circulant works", {
+  # Test basic circulant graph with shift 1 (should be a ring)
+  circ <- make_circulant(10, c(1))
+  ring <- make_ring(10)
+  expect_isomorphic(circ, ring)
+
+  # Test circulant graph with multiple shifts
+  circ2 <- make_circulant(6, c(1, 2))
+  expect_vcount(circ2, 6)
+  # Each vertex should be connected to vertices at distance 1 and 2
+  # In undirected graph, degree should be 4 (2 neighbors on each side)
+  expect_equal(degree(circ2), rep(4, 6))
+
+  # Test directed circulant graph
+  circ_dir <- make_circulant(5, c(1, 2), directed = TRUE)
+  expect_true(is_directed(circ_dir))
+  expect_vcount(circ_dir, 5)
+  # In directed graph, each vertex has out-degree 2
+  expect_equal(degree(circ_dir, mode = "out"), rep(2, 5))
+  expect_equal(degree(circ_dir, mode = "in"), rep(2, 5))
+
+  # Test empty shifts
+  circ_empty <- make_circulant(5, c())
+  expect_vcount(circ_empty, 5)
+  expect_ecount(circ_empty, 0)
+})
+
 test_that("make_line_graph works", {
   graph_ring_n5 <- make_ring(n = 5)
   graph_line_n5 <- make_line_graph(graph_ring_n5)
