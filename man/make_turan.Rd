@@ -18,7 +18,7 @@ turan(...)
 }
 \value{
 An igraph graph with a vertex attribute \code{type} storing the
-partition index of each vertex (1-indexed).
+partition index of each vertex. Partition indices start from 1.
 }
 \description{
 Turán graphs are complete multipartite graphs with the property that the
@@ -35,7 +35,7 @@ returned if the number of partitions is greater than the number of vertices.
 \examples{
 # Create a Turán graph with 10 vertices and 3 partitions
 g <- make_turan(10, 3)
-print(g, v = TRUE)
+plot(g)
 
 # The sizes of the partitions are as balanced as possible
 table(V(g)$type)

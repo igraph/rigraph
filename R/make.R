@@ -2560,17 +2560,18 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #'   direction is realized; `"all"` creates mutual edges. This parameter is
 #'   ignored for undirected graphs.
 #' @return An igraph graph with a vertex attribute `type` storing the
-#'   partition index of each vertex (1-indexed).
+#'   partition index of each vertex. Partition indices start from 1.
 #'
 #' @family deterministic constructors
 #' @export
 #' @examples
 #' # Create a multipartite graph with partitions of size 2, 3, and 4
 #' g <- make_full_multipartite(c(2, 3, 4))
-#' print(g, v = TRUE)
+#' plot(g)
 #'
 #' # Create a directed multipartite graph
 #' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
+#' plot(g2)
 #' @cdocs igraph_full_multipartite
 make_full_multipartite <- function(
   n,
@@ -2582,13 +2583,14 @@ make_full_multipartite <- function(
   mode <- igraph.match.arg(mode)
 
   res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   if (igraph_opt("add.params")) {
-    res$graph$name <- "Full multipartite graph"
-    res$n <- n
-    res$mode <- mode
+    graph <- set_graph_attr(graph, "name", "Full multipartite graph")
+    graph <- set_graph_attr(graph, "n", n)
+    graph <- set_graph_attr(graph, "mode", mode)
   }
-  set_vertex_attr(res$graph, "type", value = res$types)
+  graph
 }
 
 #' @rdname make_full_multipartite
@@ -2616,14 +2618,14 @@ full_multipartite <- function(...) {
 #' @param n Integer, the number of vertices in the graph.
 #' @param r Integer, the number of partitions in the graph, must be positive.
 #' @return An igraph graph with a vertex attribute `type` storing the
-#'   partition index of each vertex (1-indexed).
+#'   partition index of each vertex. Partition indices start from 1.
 #'
 #' @family deterministic constructors
 #' @export
 #' @examples
 #' # Create a Turán graph with 10 vertices and 3 partitions
 #' g <- make_turan(10, 3)
-#' print(g, v = TRUE)
+#' plot(g)
 #'
 #' # The sizes of the partitions are as balanced as possible
 #' table(V(g)$type)
@@ -2633,13 +2635,14 @@ make_turan <- function(n, r) {
   r <- as.numeric(r)
 
   res <- turan_impl(n = n, r = r)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   if (igraph_opt("add.params")) {
-    res$graph$name <- "Turan graph"
-    res$n <- n
-    res$r <- r
+    graph <- set_graph_attr(graph, "name", "Turan graph")
+    graph <- set_graph_attr(graph, "n", n)
+    graph <- set_graph_attr(graph, "r", r)
   }
-  set_vertex_attr(res$graph, "type", value = res$types)
+  graph
 }
 
 #' @rdname make_turan

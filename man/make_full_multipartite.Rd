@@ -24,7 +24,7 @@ ignored for undirected graphs.}
 }
 \value{
 An igraph graph with a vertex attribute \code{type} storing the
-partition index of each vertex (1-indexed).
+partition index of each vertex. Partition indices start from 1.
 }
 \description{
 A multipartite graph contains multiple types of vertices and connections
@@ -35,10 +35,11 @@ different partitions are present.
 \examples{
 # Create a multipartite graph with partitions of size 2, 3, and 4
 g <- make_full_multipartite(c(2, 3, 4))
-print(g, v = TRUE)
+plot(g)
 
 # Create a directed multipartite graph
 g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
+plot(g2)
 }
 \seealso{
 Other deterministic constructors: 
