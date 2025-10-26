@@ -174,6 +174,10 @@
 </ul><p>Update them using: <code>make -f Makefile-cigraph src/rinterface.c R/aaa-auto.R</code></p>
 <p>See <code>tools/README.md</code> for guidelines on code generation using the Stimulus framework.</p>
 </div>
+<div class="section level3">
+<h3 id="build-artifacts">Build Artifacts<a class="anchor" aria-label="anchor" href="#build-artifacts"></a></h3>
+<p>Do not commit: <code>*.dd</code>, <code>*.d</code>, <code>*.o</code>, <code>*.so</code> files in <code>src/</code>, and <code>tests/testthat/testthat-problems.rds</code>. These are build artifacts that are regenerated automatically (see <code>src/README.md</code> for details on dependency tracking).</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a></h2>
