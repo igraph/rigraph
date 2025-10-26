@@ -387,7 +387,7 @@ test_that("transitive_closure works for undirected graphs", {
   g <- make_graph(c(1, 2, 3, 4), directed = FALSE)
   tc <- transitive_closure(g)
 
-  # Each 2-vertex component already forms a complete graph, 
+  # Each 2-vertex component already forms a complete graph,
   # so transitive closure doesn't add new edges
   expect_equal(vcount(tc), 4)
   expect_equal(ecount(tc), 2) # Same as input: one edge per 2-vertex component
@@ -395,11 +395,11 @@ test_that("transitive_closure works for undirected graphs", {
   expect_true(are_adjacent(tc, 3, 4))
   expect_false(are_adjacent(tc, 1, 3))
   expect_false(are_adjacent(tc, 1, 4))
-  
+
   # Test with a path that needs closure
   g2 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
   tc2 <- transitive_closure(g2)
-  
+
   # Should create a complete graph (triangle)
   expect_equal(vcount(tc2), 3)
   expect_equal(ecount(tc2), 3) # Complete graph on 3 vertices
