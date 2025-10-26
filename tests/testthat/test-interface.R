@@ -222,3 +222,39 @@ test_that("get_edge_id() errors correctly for wrong matrices", {
   mat <- matrix(c(1, 2, 1, 3, 1, 4), nrow = 2, ncol = 3)
   lifecycle::expect_deprecated(get_edge_ids(g, mat))
 })
+
+test_that("head_of respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- head_of(g, E(g)[c(1, 4)])
+  expect_s3_class(result, "igraph.vs")
+  expect_length(result, 2)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- head_of(g, E(g)[c(1, 4)])
+  expect_type(result, "integer")
+  expect_length(result, 2)
+  expect_equal(as.numeric(result), c(2, 5))
+})
+
+test_that("tail_of respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- tail_of(g, E(g)[c(1, 4)])
+  expect_s3_class(result, "igraph.vs")
+  expect_length(result, 2)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- tail_of(g, E(g)[c(1, 4)])
+  expect_type(result, "integer")
+  expect_length(result, 2)
+  expect_equal(as.numeric(result), c(1, 2))
+})

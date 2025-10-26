@@ -444,6 +444,24 @@ test_that("as_adj_list works when return.vs.es is FALSE", {
   }
 })
 
+test_that("as_adj_edge_list respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  adj_el_list <- as_adj_edge_list(g)
+  expect_s3_class(adj_el_list[[1]], "igraph.es")
+  expect_length(adj_el_list[[1]], 2)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  adj_el_list <- as_adj_edge_list(g)
+  expect_type(adj_el_list[[1]], "integer")
+  expect_length(adj_el_list[[1]], 2)
+  expect_equal(as.numeric(adj_el_list[[1]]), c(1, 2))
+})
+
 test_that("as_edgelist works", {
   g <- sample_gnp(100, 3 / 100)
   el <- as_edgelist(g)

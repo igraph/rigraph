@@ -361,3 +361,52 @@ test_that("subgraph_isomorphisms, vf2", {
   g3 <- graph_from_literal(X - Y - Z - X)
   expect_equal(subgraph_isomorphisms(g3, g1, method = "vf2"), list())
 })
+
+test_that("graph.get.isomorphisms.vf2 respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+  V(g)$name <- paste0("V", 1:6)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- graph.get.isomorphisms.vf2(g, g)
+  expect_s3_class(result[[1]], "igraph.vs")
+  expect_length(result[[1]], 6)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- graph.get.isomorphisms.vf2(g, g)
+  expect_type(result[[1]], "integer")
+  expect_length(result[[1]], 6)
+})
+
+test_that("graph.get.subisomorphisms.vf2 respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- graph.get.subisomorphisms.vf2(g, g)
+  expect_s3_class(result[[1]], "igraph.vs")
+  expect_length(result[[1]], 6)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- graph.get.subisomorphisms.vf2(g, g)
+  expect_type(result[[1]], "integer")
+  expect_length(result[[1]], 6)
+})
+
+test_that("graph.subisomorphic.lad respects return.vs.es option", {
+  g <- make_tree(6, children = 2)
+
+  # Test with return.vs.es = TRUE (default)
+  local_igraph_options(return.vs.es = TRUE)
+  result <- graph.subisomorphic.lad(g, g, all.maps = TRUE)
+  expect_s3_class(result$maps[[1]], "igraph.vs")
+  expect_length(result$maps[[1]], 6)
+
+  # Test with return.vs.es = FALSE
+  local_igraph_options(return.vs.es = FALSE)
+  result <- graph.subisomorphic.lad(g, g, all.maps = TRUE)
+  expect_type(result$maps[[1]], "integer")
+  expect_length(result$maps[[1]], 6)
+})
