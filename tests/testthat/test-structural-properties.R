@@ -996,3 +996,31 @@ test_that("feedback_vertex_set works with weights", {
   fvs <- feedback_vertex_set(g)
   expect_equal(as.vector(fvs), c(5))
 })
+
+test_that("any_mutual works", {
+  # Directed graph with mutual edges
+  g1 <- make_graph(c(1, 2, 2, 1, 2, 3), directed = TRUE)
+  expect_true(any_mutual(g1))
+
+  # Directed graph without mutual edges
+  g2 <- make_graph(c(1, 2, 2, 3, 3, 4), directed = TRUE)
+  expect_false(any_mutual(g2))
+
+  # Undirected graph always has mutual edges
+  g3 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  expect_true(any_mutual(g3))
+
+  # Graph with self-loop
+  g4 <- make_graph(c(1, 1, 1, 2), directed = TRUE)
+  expect_true(any_mutual(g4, loops = TRUE))
+  expect_false(any_mutual(g4, loops = FALSE))
+})
+
+test_that("invalidate_cache works", {
+  g <- make_ring(10)
+  # Should return the graph (side effect function)
+  g2 <- invalidate_cache(g)
+  expect_true(is_igraph(g2))
+  expect_equal(vcount(g), vcount(g2))
+  expect_equal(ecount(g), ecount(g2))
+})

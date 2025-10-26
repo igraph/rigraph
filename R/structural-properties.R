@@ -3478,6 +3478,37 @@ which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
   )
 }
 
+#' Check if a graph has any mutual edges
+#'
+#' This function checks whether a directed graph has any mutual edges at all.
+#'
+#' In a directed graph an (A,B) edge is mutual if the graph also includes a
+#' (B,A) directed edge.
+#'
+#' Undirected graphs always have mutual edges by definition.
+#'
+#' @param graph The input graph.
+#' @param loops Logical, whether to consider directed self-loops to be mutual.
+#' @return A logical scalar, `TRUE` if the graph has at least one mutual edge,
+#'   `FALSE` otherwise.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [which_mutual()], [reciprocity()], [dyad_census()]
+#' @keywords graphs
+#' @examples
+#'
+#' g <- sample_gnm(10, 50, directed = TRUE)
+#' any_mutual(g)
+#' reciprocity(g)
+#' @family structural.properties
+#' @export
+#' @cdocs igraph_has_mutual
+any_mutual <- function(graph, loops = TRUE) {
+  has_mutual_impl(
+    graph = graph,
+    loops = loops
+  )
+}
+
 
 #' Average nearest neighbor degree
 #'

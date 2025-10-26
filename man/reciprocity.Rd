@@ -43,6 +43,7 @@ reciprocity(g)
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

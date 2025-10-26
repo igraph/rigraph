@@ -50,6 +50,7 @@ Methods and Applications.  Cambridge: Cambridge University Press.
 to get rid of the multiple and/or loop edges.
 
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

@@ -2806,3 +2806,183 @@ realize_bipartite_degseq <- function(
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g
 }
+
+#' Create a wheel graph
+#'
+#' A wheel graph is a graph formed by connecting a single universal vertex to
+#' all vertices of a cycle.
+#'
+#' @param n The number of vertices in the graph.
+#' @param mode Specifies the mode of the wheel graph:
+#'   * `"out"`: A directed graph where edges point from the center to the rim and around the rim.
+#'   * `"in"`: A directed graph where edges point from the rim to the center and around the rim.
+#'   * `"undirected"`: An undirected graph.
+#'   * `"mutual"`: A directed graph with mutual edges.
+#' @param center The index of the center vertex, defaults to 0.
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_wheel(10)
+#' make_wheel(10, mode = "in")
+#' @cdocs igraph_wheel
+make_wheel <- function(
+  n,
+  mode = c("out", "in", "undirected", "mutual"),
+  center = 0
+) {
+  wheel_impl(n = n, mode = mode, center = center)
+}
+
+#' Create a circulant graph
+#'
+#' A circulant graph is a graph where vertices are arranged in a circle and
+#' each vertex is connected to vertices at certain distances (shifts) from it.
+#'
+#' @param n The number of vertices in the graph.
+#' @param shifts A numeric vector specifying the shifts. Each vertex i will be
+#'   connected to vertex (i + shift) mod n for each shift in the vector.
+#' @param directed Whether to create a directed graph.
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_circulant(10, c(1, 3))
+#' make_circulant(10, c(1, 2, 3), directed = TRUE)
+#' @cdocs igraph_circulant
+make_circulant <- function(n, shifts, directed = FALSE) {
+  circulant_impl(n = n, shifts = shifts, directed = directed)
+}
+
+#' Create a Turán graph
+#'
+#' A Turán graph is a complete multipartite graph formed by partitioning a set
+#' of n vertices into r subsets, with edges between vertices in different
+#' subsets but not within the same subset.
+#'
+#' @param n The number of vertices in the graph.
+#' @param r The number of partitions.
+#' @return An igraph graph with a `type` vertex attribute indicating partition membership.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_turan(10, 3)
+#' make_turan(13, 4)
+#' @cdocs igraph_turan
+make_turan <- function(n, r) {
+  result <- turan_impl(n = n, r = r)
+  graph <- result$graph
+  V(graph)$type <- result$types
+  graph
+}
+
+#' Create a generalized Petersen graph
+#'
+#' The generalized Petersen graph is a cubic graph formed by connecting
+#' vertices of a regular polygon to a star polygon.
+#'
+#' @param n The number of vertices in the outer and inner polygons.
+#' @param k The step size for the star polygon.
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_generalized_petersen(5, 2)
+#' make_generalized_petersen(8, 3)
+#' @cdocs igraph_generalized_petersen
+make_generalized_petersen <- function(n, k) {
+  generalized_petersen_impl(n = n, k = k)
+}
+
+#' Create a full multipartite graph
+#'
+#' A full multipartite graph consists of several partitions with edges between
+#' vertices in different partitions but no edges within a partition.
+#'
+#' @param n A numeric vector specifying the size of each partition.
+#' @param directed Whether to create a directed graph.
+#' @param mode For directed graphs, specifies how edges are oriented:
+#'   * `"all"` or `"total"`: Edges in both directions.
+#'   * `"out"`: Edges from lower-indexed to higher-indexed partitions.
+#'   * `"in"`: Edges from higher-indexed to lower-indexed partitions.
+#' @return An igraph graph with a `type` vertex attribute indicating partition membership.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_full_multipartite(c(3, 4, 2))
+#' make_full_multipartite(c(2, 3, 4), directed = TRUE, mode = "out")
+#' @cdocs igraph_full_multipartite
+make_full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in", "total")
+) {
+  result <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  graph <- result$graph
+  V(graph)$type <- result$types
+  graph
+}
+
+#' Create a regular tree graph
+#'
+#' A regular tree is a tree where all internal vertices have the same degree.
+#'
+#' @param h The height of the tree (number of levels).
+#' @param k The degree of internal vertices (branching factor), defaults to 3.
+#' @param type Whether to create an undirected tree or a directed tree with
+#'   edges pointing outward (`"out"`) or inward (`"in"`).
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_regular_tree(3, 2)
+#' make_regular_tree(4, 3, type = "out")
+#' @cdocs igraph_regular_tree
+make_regular_tree <- function(h, k = 3, type = c("undirected", "out", "in")) {
+  regular_tree_impl(h = h, k = k, type = type)
+}
+
+#' Create a symmetric tree graph
+#'
+#' A symmetric tree where each level has a specified branching factor.
+#'
+#' @param branches A numeric vector specifying the branching factor at each level.
+#' @param type Whether to create an undirected tree or a directed tree with
+#'   edges pointing outward (`"out"`) or inward (`"in"`).
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_symmetric_tree(c(2, 3))
+#' make_symmetric_tree(c(2, 2, 3), type = "out")
+#' @cdocs igraph_symmetric_tree
+make_symmetric_tree <- function(branches, type = c("out", "in", "undirected")) {
+  symmetric_tree_impl(branches = branches, type = type)
+}
+
+#' Create a triangular lattice
+#'
+#' A triangular lattice is a two-dimensional lattice where each vertex is
+#' connected to its six neighbors in a triangular pattern.
+#'
+#' @param dimvector A numeric vector of length 2 specifying the dimensions of the lattice.
+#' @param directed Whether to create a directed lattice.
+#' @param mutual Whether directed edges should be mutual (bidirectional).
+#' @return An igraph graph.
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_triangular_lattice(c(5, 5))
+#' make_triangular_lattice(c(4, 6), directed = TRUE, mutual = TRUE)
+#' @cdocs igraph_triangular_lattice
+make_triangular_lattice <- function(
+  dimvector,
+  directed = FALSE,
+  mutual = FALSE
+) {
+  triangular_lattice_impl(
+    dimvector = dimvector,
+    directed = directed,
+    mutual = mutual
+  )
+}

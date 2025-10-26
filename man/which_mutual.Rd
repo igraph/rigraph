@@ -43,6 +43,7 @@ sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 want some statistics about mutual edges.
 
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

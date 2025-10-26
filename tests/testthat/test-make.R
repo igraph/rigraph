@@ -456,3 +456,80 @@ test_that("graph_from_lcf() works", {
   g2 <- make_graph("Franklin")
   expect_isomorphic(g1, g2)
 })
+
+test_that("make_wheel works", {
+  g <- make_wheel(10)
+  expect_equal(vcount(g), 10)
+  expect_equal(ecount(g), 18) # 9 edges on rim + 9 spokes
+
+  # Directed version
+  g_dir <- make_wheel(10, mode = "out")
+  expect_true(is_directed(g_dir))
+  expect_equal(vcount(g_dir), 10)
+})
+
+test_that("make_circulant works", {
+  g <- make_circulant(10, c(1, 3))
+  expect_equal(vcount(g), 10)
+  expect_equal(ecount(g), 20) # Each vertex connects to 2 others in each direction
+
+  g_dir <- make_circulant(10, c(1, 2), directed = TRUE)
+  expect_true(is_directed(g_dir))
+  expect_equal(vcount(g_dir), 10)
+})
+
+test_that("make_turan works", {
+  g <- make_turan(10, 3)
+  expect_equal(vcount(g), 10)
+  expect_true(is_simple(g))
+
+  g2 <- make_turan(13, 4)
+  expect_equal(vcount(g2), 13)
+})
+
+test_that("make_generalized_petersen works", {
+  g <- make_generalized_petersen(5, 2)
+  expect_equal(vcount(g), 10) # 2n vertices
+  expect_equal(ecount(g), 15) # 3n edges
+
+  g2 <- make_generalized_petersen(8, 3)
+  expect_equal(vcount(g2), 16)
+})
+
+test_that("make_full_multipartite works", {
+  g <- make_full_multipartite(c(3, 4, 2))
+  expect_equal(vcount(g), 9)
+  # 3*4 + 3*2 + 4*2 = 12 + 6 + 8 = 26 edges
+  expect_equal(ecount(g), 26)
+
+  g_dir <- make_full_multipartite(c(2, 3), directed = TRUE, mode = "out")
+  expect_true(is_directed(g_dir))
+})
+
+test_that("make_regular_tree works", {
+  g <- make_regular_tree(3, 2)
+  expect_true(is_tree(g))
+  expect_equal(vcount(g), 2^3 - 1) # Binary tree with height 3
+
+  g2 <- make_regular_tree(4, 3, type = "out")
+  expect_true(is_directed(g2))
+  expect_true(is_dag(g2))
+})
+
+test_that("make_symmetric_tree works", {
+  g <- make_symmetric_tree(c(2, 3))
+  expect_true(is_tree(g))
+  expect_equal(vcount(g), 1 + 2 + 2 * 3) # root + 2 children + 2*3 grandchildren
+
+  g2 <- make_symmetric_tree(c(2, 2, 3), type = "out")
+  expect_true(is_directed(g2))
+})
+
+test_that("make_triangular_lattice works", {
+  g <- make_triangular_lattice(c(5, 5))
+  expect_equal(vcount(g), 25)
+  expect_true(vcount(g) > 0)
+
+  g_dir <- make_triangular_lattice(c(4, 6), directed = TRUE, mutual = TRUE)
+  expect_true(is_directed(g_dir))
+})

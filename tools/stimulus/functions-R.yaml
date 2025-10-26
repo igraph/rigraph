@@ -119,6 +119,25 @@ igraph_realize_bipartite_degree_sequence:
         name: Bipartite graph from degree sequence
       GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
 
+igraph_wheel:
+
+igraph_circulant:
+
+igraph_turan:
+
+igraph_generalized_petersen:
+
+igraph_regular_tree:
+
+igraph_symmetric_tree:
+
+igraph_full_multipartite:
+
+igraph_triangular_lattice:
+
+# hexagonal_lattice is not yet in the cigraph interfaces/functions.yaml
+# igraph_hexagonal_lattice:
+
 # TODO: temporarily disabled
 igraph_weighted_sparsemat:
     IGNORE: RR, RC

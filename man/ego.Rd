@@ -176,6 +176,7 @@ Other functions for manipulating graph structure:
 \code{\link{vertex}()}
 
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{constraint}()},

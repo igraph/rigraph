@@ -53,6 +53,7 @@ Burt, R.S. (2004). Structural holes and good ideas.
 }
 \seealso{
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},

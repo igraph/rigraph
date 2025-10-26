@@ -86,6 +86,7 @@ E(g)$weight
 \code{\link[=simplify]{simplify()}} to eliminate loop and multiple edges.
 
 Other structural.properties: 
+\code{\link{any_mutual}()},
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
 \code{\link{connect}()},
