@@ -1797,7 +1797,7 @@ transitivity <- function(
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
       res <- .Call(
-        R_igraph_transitivity_local_undirected_all,
+        Rx_igraph_transitivity_local_undirected_all,
         graph,
         isolates_num
       )
@@ -1806,13 +1806,7 @@ transitivity <- function(
       }
       res
     } else {
-      vids <- as_igraph_vs(graph, vids)
-      res <- .Call(
-        R_igraph_transitivity_local_undirected,
-        graph,
-        vids - 1,
-        isolates_num
-      )
+      res <- transitivity_local_undirected_impl(graph, vids, isolates)
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name[vids]
       }
@@ -1821,27 +1815,16 @@ transitivity <- function(
   } else if (type == 2) {
     transitivity_avglocal_undirected_impl(graph, isolates)
   } else if (type == 3) {
-    if (is.null(vids)) {
-      vids <- V(graph)
-    }
-    vids <- as_igraph_vs(graph, vids)
     res <- if (is.null(weights)) {
-      .Call(
-        R_igraph_transitivity_local_undirected,
-        graph,
-        vids - 1,
-        isolates
-      )
+      transitivity_local_undirected_impl(graph, vids, isolates)
     } else {
-      .Call(
-        R_igraph_transitivity_barrat,
-        graph,
-        vids - 1,
-        weights,
-        isolates
-      )
+      transitivity_barrat_impl(graph, vids, weights, isolates)
     }
     if (igraph_opt("add.vertex.names") && is_named(graph)) {
+      if (is.null(vids)) {
+        vids <- V(graph)
+      }
+      vids <- as_igraph_vs(graph, vids)
       names(res) <- V(graph)$name[vids]
     }
     res
@@ -1902,7 +1885,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
   }
@@ -2222,7 +2205,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_coreness, graph, as.numeric(mode))
+  res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
@@ -2265,7 +2248,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
+  res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
@@ -2413,7 +2396,7 @@ girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_girth, graph, as.logical(circle))
+  res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
   if (res$girth == 0) {
     res$girth <- Inf
   }
@@ -3127,7 +3110,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_components, graph, mode)
+  .Call(Rx_igraph_no_components, graph, mode)
 }
 
 #' Convert a general graph into a forest

@@ -411,9 +411,9 @@ min_cut <- function(
 
   if (is.null(target) && is.null(source)) {
     if (value.only) {
-      res <- .Call(R_igraph_mincut_value, graph, capacity)
+      res <- .Call(Rx_igraph_mincut_value, graph, capacity)
     } else {
-      res <- .Call(R_igraph_mincut, graph, capacity)
+      res <- .Call(Rx_igraph_mincut, graph, capacity)
       res$cut <- res$cut + 1
       res$partition1 <- res$partition1 + 1
       res$partition2 <- res$partition2 + 1
@@ -542,7 +542,7 @@ vertex_connectivity <- function(
 
   if (is.null(source) && is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_vertex_connectivity, graph, as.logical(checks))
+    .Call(Rx_igraph_vertex_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(
@@ -648,7 +648,7 @@ edge_connectivity <- function(
 
   if (is.null(source) && is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_edge_connectivity, graph, as.logical(checks))
+    .Call(Rx_igraph_edge_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(
@@ -704,7 +704,7 @@ adhesion <- function(graph, checks = TRUE) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_adhesion, graph, as.logical(checks))
+  .Call(Rx_igraph_adhesion, graph, as.logical(checks))
 }
 
 #' @rdname vertex_connectivity
@@ -714,7 +714,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
   ensure_igraph(x)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_cohesion, x, as.logical(checks))
+  .Call(Rx_igraph_cohesion, x, as.logical(checks))
 }
 
 #' List all (s,t)-cuts of a graph

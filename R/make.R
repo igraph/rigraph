@@ -1532,7 +1532,7 @@ make_famous_graph <- function(name) {
   name <- gsub("\\s", "_", name)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_famous, name)
+  res <- .Call(Rx_igraph_famous, name)
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
   }
