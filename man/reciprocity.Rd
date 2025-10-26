@@ -60,6 +60,7 @@ Other structural.properties:
 \code{\link{is_matching}()},
 \code{\link{k_shortest_paths}()},
 \code{\link{knn}()},
+\code{\link{knnk}()},
 \code{\link{subcomponent}()},
 \code{\link{subgraph}()},
 \code{\link{topo_sort}()},

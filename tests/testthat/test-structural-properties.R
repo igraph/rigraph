@@ -949,6 +949,71 @@ test_that("knn works", {
   )
 })
 
+test_that("knnk works", {
+  withr::local_seed(42)
+
+  ## Ring graph - all vertices have degree 2
+  g <- make_ring(10)
+  result <- knnk(g)
+  # Index 1 is degree 0 (NaN), index 2 is degree 1 (NaN), index 3 is degree 2 (value 2)
+  expect_equal(result, c(NaN, NaN, 2))
+
+  # Compare with knn result (knn's knnk starts at degree 1)
+  knn_result <- knn(g)
+  expect_equal(result[2:3], knn_result$knnk)
+
+  ## Star graph
+  g2 <- make_star(10)
+  result2 <- knnk(g2)
+  # Degree 0: NaN, Degree 1: avg neighbor degree is 9
+  expect_equal(result2, c(NaN, 9))
+
+  # Compare with knn
+  knn_result2 <- knn(g2)
+  expect_equal(result2[2], knn_result2$knnk[1])
+
+  ## Directed graph with different modes
+  g3 <- make_graph(c(1, 2, 1, 3, 2, 3, 3, 4), directed = TRUE)
+  # Vertex 1 has out-degree 2, points to vertices 2 and 3 with in-degrees 1 and 2
+  # Vertex 2 has out-degree 1, points to vertex 3 with in-degree 2
+  # Vertex 3 has out-degree 1, points to vertex 4 with in-degree 1
+  # Vertex 4 has out-degree 0
+
+  # from.mode = "out", to.mode = "in"
+  result3 <- knnk(g3, from.mode = "out", to.mode = "in")
+  expect_equal(result3[1], NaN) # degree 0
+  expect_equal(result3[2], 1.5) # degree 1: vertices 2 and 3 point to vertices with in-degree 2 and 1, avg = 1.5
+  expect_equal(result3[3], 1.5) # degree 2: vertex 1 points to vertices with in-degree 1 and 2, avg = 1.5
+
+  ## Weighted graph - star with 5 vertices
+  g4 <- make_star(5)
+  E(g4)$weight <- c(1, 2, 3, 4)
+  result4 <- knnk(g4)
+  # Only degree 1 and degree 4 exist in this graph
+  expect_equal(result4, c(NaN, 4))
+
+  ## Test directed.neighbors parameter
+  g5 <- make_graph(c(1, 2, 1, 3), directed = TRUE)
+  # With directed.neighbors = TRUE (default): edges are directed
+  result5a <- knnk(
+    g5,
+    from.mode = "out",
+    to.mode = "in",
+    directed.neighbors = TRUE
+  )
+  # With directed.neighbors = FALSE: edges are treated as reciprocal
+  result5b <- knnk(
+    g5,
+    from.mode = "out",
+    to.mode = "in",
+    directed.neighbors = FALSE
+  )
+  # Results should differ when directed.neighbors changes
+  expect_false(identical(result5a, result5b))
+  expect_equal(result5a, c(NaN, NaN, 1)) # With directed: only out-degree 2 vertex exists
+  expect_equal(result5b, c(NaN, 2, 1)) # With reciprocal: out-degree 0 vertices now also have out-degree 1
+})
+
 test_that("reciprocity works", {
   g <- make_graph(c(1, 2, 2, 1, 2, 3, 3, 4, 4, 4), directed = TRUE)
   expect_equal(reciprocity(g), 0.5)
