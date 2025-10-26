@@ -53,9 +53,9 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 V(g)[1, 1:5, 1:10, 5:10]
-#> + 22/10 vertices, named, from 2d79fd7:
+#> + 22/10 vertices, named, from 7bcb18e:
 #>  [1] A A B C D E A B C D E F G H I J E F G H I J
 V(g)[1, 1:5, 1:10, 5:10] %>% unique()
-#> + 10/10 vertices, named, from 2d79fd7:
+#> + 10/10 vertices, named, from 7bcb18e:
 #>  [1] A B C D E F G H I J
 ```

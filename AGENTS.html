@@ -127,6 +127,7 @@
 <li>Use explicit package prefixes (e.g., <code><a href="https://withr.r-lib.org/reference/with_db_connection.html" class="external-link">withr::local_db_connection()</a></code>) for clarity</li>
 <li>Maintain consistent indentation (2 spaces) and spacing patterns</li>
 <li>Use meaningful variable names that reflect context</li>
+<li>When testing error behavior, use snapshot tests. Ensure stability by setting a random seed and calling <code>local_igraph_options(print.id = FALSE)</code> if graph IDs are involved.</li>
 <li>Run <code>air format .</code> before committing changes to ensure consistent formatting</li>
 </ul></div>
 <div class="section level3">
