@@ -44,6 +44,8 @@ jobs:
         run: |
           set -euo pipefail
 
+          gh --version
+
           # Get all open, unassigned issues with the "AI 🤖" label, sorted by creation date (oldest first)
           oldest_issue=$(gh issue list \
             --repo "$REPO" \
