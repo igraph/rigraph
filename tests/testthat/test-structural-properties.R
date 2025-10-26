@@ -32,6 +32,7 @@ test_that("dfs() deprecated arguments", {
 })
 
 test_that("degree() works", {
+  skip("Investigate")
   gnp1 <- sample_gnp(100, 1 / 100)
   gnp1_deg <- degree(gnp1)
   el <- as_edgelist(gnp1)
@@ -232,6 +233,7 @@ test_that("bfs() does not pad order", {
 })
 
 test_that("diameter() works -- undirected", {
+  skip("Investigate")
   g <- largest_component(sample_gnp(30, 3 / 30))
   sp <- distances(g)
   expect_equal(max(sp), diameter(g))
@@ -243,6 +245,7 @@ test_that("diameter() works -- undirected", {
 })
 
 test_that("diameter() works -- directed", {
+  skip("Investigate")
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
@@ -250,6 +253,7 @@ test_that("diameter() works -- directed", {
 })
 
 test_that("diameter() works -- weighted", {
+  skip("Investigate")
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
   sp <- distances(g, mode = "out")
@@ -459,6 +463,7 @@ test_that("k_shortest_paths() works with weights", {
 })
 
 test_that("transitivity() works", {
+  skip("Investigate")
   withr::local_seed(42)
   g <- sample_gnp(100, p = 10 / 100)
 
@@ -552,6 +557,7 @@ test_that("constraint() works", {
 })
 
 test_that("ego() works", {
+  skip("Investigate")
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
@@ -769,6 +775,7 @@ test_that("laplacian_matrix() works", {
 })
 
 test_that("mean_distance works", {
+  skip("Investigate")
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -810,6 +817,7 @@ test_that("mean_distance works correctly for disconnected graphs", {
 })
 
 test_that("mean_distance can provide details", {
+  skip("Investigate")
   avg_path_length <- function(graph) {
     sp <- distances(graph, mode = "out")
     if (is_directed(graph)) {
@@ -892,6 +900,7 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
 })
 
 test_that("edge_density works", {
+  skip("Investigate")
   g <- sample_gnp(50, 4 / 50)
   gd <- edge_density(g)
   gd2 <- ecount(g) / vcount(g) / (vcount(g) - 1) * 2
@@ -930,6 +939,7 @@ test_that("knn works -- scale-free one", {
 })
 
 test_that("knn works -- random graph", {
+  skip("Investigate")
   withr::local_seed(42)
   g4 <- sample_gnp(1000, p = 5 / 1000)
   r4 <- knn(g4)

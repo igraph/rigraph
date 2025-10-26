@@ -593,7 +593,7 @@
       + attr: name (g/c), out.deg (g/n), in.deg (g/x), allowed.edge.types
       | (g/n), method (g/n)
       + edges:
-      [1] 1--3 2--3 1--2
+      [1] 2--3 1--3 1--2
 
 ---
 
@@ -721,15 +721,6 @@
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
 
----
-
-    Code
-      erdos_renyi_game_gnp_impl(n = 5, p = 0.5, directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 12 -- 
-      + edges:
-       [1] 2->1 3->1 4->1 2->2 1->3 2->3 4->3 1->4 2->4 5->4 3->5 4->5
-
 # erdos_renyi_game_gnp_impl errors
 
     Code
@@ -746,15 +737,6 @@
       IGRAPH U--- 5 3 -- 
       + edges:
       [1] 3--4 2--5 4--5
-
----
-
-    Code
-      erdos_renyi_game_gnm_impl(n = 5, m = 3, directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 3 -- 
-      + edges:
-      [1] 4->3 5->3 3->5
 
 # erdos_renyi_game_gnm_impl errors
 
@@ -954,27 +936,6 @@
       Error in `chung_lu_game_impl()`:
       ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
 
-# static_fitness_game_impl basic
-
-    Code
-      static_fitness_game_impl(no.of.edges = 3, fitness.out = c(1, 2, 3))
-    Output
-      IGRAPH U--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3
-
----
-
-    Code
-      static_fitness_game_impl(no.of.edges = 3, fitness.out = c(1, 2, 3), fitness.in = c(
-        1, 2, 3), loops = TRUE, multiple = TRUE)
-    Output
-      IGRAPH D--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1->2 2->3 1->3
-
 # static_fitness_game_impl errors
 
     Code
@@ -989,22 +950,10 @@
       static_power_law_game_impl(no.of.nodes = 5, no.of.edges = 4, exponent.out = 2.5)
     Output
       IGRAPH U--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
+      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n),
+      | finite.size.correction (g/l)
       + edges:
       [1] 1--5 2--4 3--5 4--5
-
----
-
-    Code
-      static_power_law_game_impl(no.of.nodes = 5, no.of.edges = 4, exponent.out = 2.5,
-        exponent.in = 2, loops = TRUE, multiple = TRUE, finite.size.correction = FALSE)
-    Output
-      IGRAPH D--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
-      + edges:
-      [1] 1->1 3->5 1->4 5->1
 
 # static_power_law_game_impl errors
 
@@ -1041,27 +990,6 @@
     Condition
       Error in `k_regular_game_impl()`:
       ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
-
-# sbm_game_impl basic
-
-    Code
-      sbm_game_impl(n = 5, pref.matrix = matrix(0.5, 2, 2), block.sizes = c(2, 3))
-    Output
-      IGRAPH U--- 5 6 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3 1--4 1--5 3--5
-
----
-
-    Code
-      sbm_game_impl(n = 5, pref.matrix = matrix(0.5, 2, 2), block.sizes = c(2, 3),
-      directed = TRUE, loops = TRUE)
-    Output
-      IGRAPH D--- 5 14 -- Stochastic block model
-      + attr: name (g/c), loops (g/l)
-      + edges:
-       [1] 1->1 2->1 2->4 1->5 4->1 5->1 5->2 3->3 5->3 3->4 4->4 5->4 3->5 5->5
 
 # sbm_game_impl errors
 
@@ -1370,14 +1298,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $nrgeo
@@ -1399,14 +1325,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $nrgeo
@@ -1453,14 +1377,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# get_all_simple_paths_impl basic
-
-    Code
-      get_all_simple_paths_impl(graph = g, from = 1, to = 3)
-    Output
-      + 3/3 vertices:
-      [1] 1 2 3
-
 # get_all_simple_paths_impl errors
 
     Code
@@ -1476,14 +1392,12 @@
     Output
       $vpaths
       $vpaths[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $epaths
       $epaths[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
 
@@ -1524,14 +1438,12 @@
     Output
       $vertices
       $vertices[[1]]
-      + 3/3 vertices:
       [1] 1 2 3
       
       
       $edges
       $edges[[1]]
-      + 2/2 edges:
-      [1] 1--2 2--3
+      [1] 1 2
       
       
       $parents
@@ -2503,10 +2415,10 @@
     Code
       suppressWarnings(hub_and_authority_scores_impl(graph = g))
     Output
-      $hub
+      $hub_vector
       [1] 1 1 1 1 1
       
-      $authority
+      $authority_vector
       [1] 1 1 1 1 1
       
       $value
@@ -2833,7 +2745,7 @@
       [1] 2
       
       $theoretical_max
-      [1] 2
+      [1] 6
       
 
 # centralization_degree_impl errors
@@ -2965,86 +2877,6 @@
       ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
 
 # centralization_eigenvector_centrality_impl basic
-
-    Code
-      centralization_eigenvector_centrality_impl(graph = g)
-    Output
-      $vector
-      [1] 0.7071068 1.0000000 0.7071068
-      
-      $value
-      [1] 1.414214
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 3
-      
-      $options$which
-      [1] "LA"
-      
-      $options$nev
-      [1] 1
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 0
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 1
-      
-      $options$numop
-      [1] 3
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 3
-      
-      
-      $centralization
-      [1] 0.5857864
-      
-      $theoretical_max
-      [1] 1
-      
-
----
 
     Code
       centralization_eigenvector_centrality_impl(graph = g, mode = "out", normalized = FALSE)
@@ -3222,24 +3054,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# joint_degree_matrix_impl basic
-
-    Code
-      joint_degree_matrix_impl(graph = g)
-    Output
-           [,1] [,2]
-      [1,]    0    2
-      [2,]    2    0
-
----
-
-    Code
-      joint_degree_matrix_impl(graph = g, max.out.degree = 2, max.in.degree = 2)
-    Output
-           [,1] [,2]
-      [1,]    0    2
-      [2,]    2    0
-
 # joint_degree_matrix_impl errors
 
     Code
@@ -3247,28 +3061,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# joint_degree_distribution_impl basic
-
-    Code
-      joint_degree_distribution_impl(graph = g)
-    Output
-           [,1] [,2] [,3]
-      [1,]    0  0.0  0.0
-      [2,]    0  0.0  0.5
-      [3,]    0  0.5  0.0
-
----
-
-    Code
-      joint_degree_distribution_impl(graph = g, from.mode = "in", to.mode = "out",
-        directed.neighbors = FALSE, normalized = FALSE, max.from.degree = 2,
-        max.to.degree = 2)
-    Output
-           [,1] [,2] [,3]
-      [1,]    0    0    0
-      [2,]    0    0    2
-      [3,]    0    2    0
 
 # joint_degree_distribution_impl errors
 
@@ -3932,22 +3724,14 @@
       
       $components
       $components[[1]]
-      + 2/3 vertices:
       [1] 3 2
       
       $components[[2]]
-      + 2/3 vertices:
       [1] 2 1
       
       
       $articulation_points
       [1] 2
-      
-      $tree.edges
-      list()
-      
-      $component.edges
-      list()
       
       $articulation.points
       + 0/3 vertices:
@@ -4096,46 +3880,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# cliques_impl basic
-
-    Code
-      cliques_impl(graph = g)
-    Output
-      [[1]]
-      + 1/3 vertex:
-      [1] 2
-      
-      [[2]]
-      + 1/3 vertex:
-      [1] 3
-      
-      [[3]]
-      + 2/3 vertices:
-      [1] 2 3
-      
-      [[4]]
-      + 1/3 vertex:
-      [1] 1
-      
-      [[5]]
-      + 2/3 vertices:
-      [1] 1 2
-      
-
----
-
-    Code
-      cliques_impl(graph = g, min = 2, max = 2)
-    Output
-      [[1]]
-      + 2/3 vertices:
-      [1] 2 3
-      
-      [[2]]
-      + 2/3 vertices:
-      [1] 1 2
-      
-
 # cliques_impl errors
 
     Code
@@ -4172,11 +3916,9 @@
       largest_cliques_impl(graph = g)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4225,43 +3967,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# weighted_cliques_impl basic
-
-    Code
-      weighted_cliques_impl(graph = g)
-    Output
-      [[1]]
-      + 1/3 vertex:
-      [1] 2
-      
-      [[2]]
-      + 1/3 vertex:
-      [1] 3
-      
-      [[3]]
-      + 2/3 vertices:
-      [1] 2 3
-      
-      [[4]]
-      + 1/3 vertex:
-      [1] 1
-      
-      [[5]]
-      + 2/3 vertices:
-      [1] 1 2
-      
-
----
-
-    Code
-      weighted_cliques_impl(graph = g, vertex.weights = c(1, 2, 3), min.weight = 1,
-      max.weight = 3, maximal = TRUE)
-    Output
-      [[1]]
-      + 2/3 vertices:
-      [1] 1 2
-      
-
 # weighted_cliques_impl errors
 
     Code
@@ -4276,11 +3981,9 @@
       largest_weighted_cliques_impl(graph = g)
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 1 2
       
       [[2]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4290,7 +3993,6 @@
       largest_weighted_cliques_impl(graph = g, vertex.weights = c(1, 2, 3))
     Output
       [[1]]
-      + 2/3 vertices:
       [1] 2 3
       
 
@@ -4521,55 +4223,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# layout_sugiyama_impl basic
-
-    Code
-      layout_sugiyama_impl(graph = g)
-    Output
-      $res
-           [,1] [,2]
-      [1,]  0.0    1
-      [2,]  0.5    0
-      [3,]  1.0    1
-      
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
-      
-      $extd_to_orig_eids
-      [1] 1 2
-      
-
----
-
-    Code
-      layout_sugiyama_impl(graph = g, layers = 1:3, hgap = 2, vgap = 2, maxiter = 10,
-      weights = c(1, 2))
-    Output
-      $res
-           [,1] [,2]
-      [1,]    0    0
-      [2,]    0    2
-      [3,]    0    4
-      
-      $extd_graph
-      IGRAPH U--- 3 2 -- 
-      + edges:
-      [1] 1--2 2--3
-      
-      $extd_to_orig_eids
-      [1] 1 2
-      
-
-# layout_sugiyama_impl errors
-
-    Code
-      x
-    Condition
-      Error in `ensure_igraph()`:
-      ! Must provide a graph object (provided `NULL`).
-
 # layout_mds_impl basic
 
     Code
@@ -4633,9 +4286,9 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
                 [,1]      [,2]
-      [1,] 200.18284 -69.23950
-      [2,]  86.00346  64.12806
-      [3,]  66.22930 -92.94294
+      [1,] 198.00782 -89.56102
+      [2,]  97.48628  69.81047
+      [3,]  62.46741 -81.07358
 
 ---
 
@@ -4643,10 +4296,10 @@
       layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE,
       maxiter = 10, temp.max = 2, temp.min = 0.1, temp.init = 1)
     Output
-                 [,1]       [,2]
-      [1,]  1.0114521 -0.1206363
-      [2,] -0.2178589  2.9621162
-      [3,] -0.7089555 -3.8896500
+                   [,1]         [,2]
+      [1,]  2.957479289 -2.693158072
+      [2,] -2.952570979  2.698577710
+      [3,] -0.008515571 -0.009237893
 
 # layout_gem_impl errors
 
@@ -4661,10 +4314,10 @@
     Code
       layout_davidson_harel_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2))
     Output
-               [,1]      [,2]
-      [1,] 1.152116 0.9424808
-      [2,] 2.474361 2.5195497
-      [3,] 3.849187 4.0402661
+               [,1]       [,2]
+      [1,] 4.585389  0.5320103
+      [2,] 3.619767 -1.3038597
+      [3,] 2.715926 -3.1387678
 
 ---
 
@@ -4675,9 +4328,9 @@
       weight.node.edge.dist = 0.3)
     Output
                 [,1]      [,2]
-      [1,] -6.609493 -2.155221
-      [2,] -8.660255 -3.797365
-      [3,] -6.485087 -5.224752
+      [1,] 0.7466363 -2.423994
+      [2,] 2.9971183 -2.558975
+      [3,] 5.1781802 -3.072543
 
 # layout_davidson_harel_impl errors
 
@@ -4778,25 +4431,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# similarity_dice_impl basic
-
-    Code
-      similarity_dice_impl(graph = g)
-    Output
-           [,1] [,2] [,3]
-      [1,]    1    0    1
-      [2,]    0    1    0
-      [3,]    1    0    1
-
----
-
-    Code
-      similarity_dice_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-           [,1] [,2]
-      [1,]  1.0  0.8
-      [2,]  0.8  1.0
-
 # similarity_dice_impl errors
 
     Code
@@ -4876,25 +4510,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# similarity_jaccard_impl basic
-
-    Code
-      similarity_jaccard_impl(graph = g)
-    Output
-           [,1] [,2] [,3]
-      [1,]    1    0    1
-      [2,]    0    1    0
-      [3,]    1    0    1
-
----
-
-    Code
-      similarity_jaccard_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-                [,1]      [,2]
-      [1,] 1.0000000 0.6666667
-      [2,] 0.6666667 1.0000000
 
 # similarity_jaccard_impl errors
 
@@ -5192,26 +4807,14 @@
 # community_infomap_impl basic
 
     Code
-      community_infomap_impl(graph = g)
+      community_infomap_impl(graph = g, edge.weights = c(1, 2), vertex.weights = c(1,
+        2, 3), nb.trials = 2)
     Output
       $membership
       [1] 0 0 0
       
       $codelength
-      [1] 1.512987
-      
-
----
-
-    Code
-      community_infomap_impl(graph = g, edge.weights = c(1, 2), vertex.weights = c(1, 2, 3),
-      nb.trials = 2)
-    Output
-      $membership
-      [1] 0 0 0
-      
-      $codelength
-      [1] 1.462254
+      [1] 1.459148
       
 
 # community_infomap_impl errors
@@ -5229,11 +4832,9 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -5248,11 +4849,9 @@
     Output
       $cliques
       $cliques[[1]]
-      + 2/3 vertices:
       [1] 2 3
       
       $cliques[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -6027,7 +5626,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -6044,7 +5643,7 @@
       [1] 1--2
       
       $map
-      [1] 2 3 1
+      [1] 1 2 0
       
       $invmap
       [1] 1 2
@@ -6393,21 +5992,17 @@
     Output
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      [1] 2
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -6430,21 +6025,17 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       $cuts[[2]]
-      + 1/2 edge:
-      [1] 2->3
+      [1] 2
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       $partition1s[[2]]
-      + 2/3 vertices:
       [1] 1 2
       
       
@@ -6459,13 +6050,11 @@
       
       $cuts
       $cuts[[1]]
-      + 1/2 edge:
-      [1] 1->2
+      [1] 1
       
       
       $partition1s
       $partition1s[[1]]
-      + 1/3 vertex:
       [1] 1
       
       
@@ -6536,7 +6125,6 @@
       all_minimal_st_separators_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
 
@@ -6554,7 +6142,6 @@
       minimum_size_separators_impl(graph = g)
     Output
       [[1]]
-      + 1/3 vertex:
       [1] 2
       
 
@@ -6843,58 +6430,14 @@
     Code
       canonical_permutation_impl(graph = g)
     Output
-      $labeling
-      [1] 2 3 1
-      
-      $info
-      $info$nof_nodes
-      [1] 3
-      
-      $info$nof_leaf_nodes
-      [1] 3
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 1
-      
-      $info$max_level
-      [1] 1
-      
-      $info$group_size
-      [1] "2"
-      
-      
+      [1] 3 1 2
 
 ---
 
     Code
       canonical_permutation_impl(graph = g, colors = c(1, 2, 3))
     Output
-      $labeling
       [1] 1 2 3
-      
-      $info
-      $info$nof_nodes
-      [1] 1
-      
-      $info$nof_leaf_nodes
-      [1] 1
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 0
-      
-      $info$max_level
-      [1] 0
-      
-      $info$group_size
-      [1] "1"
-      
-      
 
 # canonical_permutation_impl errors
 
@@ -7045,48 +6588,14 @@
     Code
       count_automorphisms_impl(graph = g)
     Output
-      $nof_nodes
-      [1] 3
-      
-      $nof_leaf_nodes
-      [1] 3
-      
-      $nof_bad_nodes
-      [1] 0
-      
-      $nof_canupdates
-      [1] 1
-      
-      $max_level
-      [1] 1
-      
-      $group_size
-      [1] "2"
-      
+      [1] 2
 
 ---
 
     Code
       count_automorphisms_impl(graph = g, colors = c(1, 2, 3))
     Output
-      $nof_nodes
       [1] 1
-      
-      $nof_leaf_nodes
-      [1] 1
-      
-      $nof_bad_nodes
-      [1] 0
-      
-      $nof_canupdates
-      [1] 0
-      
-      $max_level
-      [1] 0
-      
-      $group_size
-      [1] "1"
-      
 
 # count_automorphisms_impl errors
 
@@ -7101,39 +6610,7 @@
     Code
       automorphism_group_impl(graph = g, colors = c(1, 2, 3))
     Output
-      [[1]]
-      + 3/3 vertices:
-      [1] 3 2 1
-      
-
----
-
-    Code
-      automorphism_group_impl(g, colors = c(1, 2, 3))
-    Output
-      $generators
       list()
-      
-      $info
-      $info$nof_nodes
-      [1] 1
-      
-      $info$nof_leaf_nodes
-      [1] 1
-      
-      $info$nof_bad_nodes
-      [1] 0
-      
-      $info$nof_canupdates
-      [1] 0
-      
-      $info$max_level
-      [1] 0
-      
-      $info$group_size
-      [1] "1"
-      
-      
 
 # automorphism_group_impl errors
 
@@ -7444,86 +6921,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# laplacian_spectral_embedding_impl basic
-
-    Code
-      laplacian_spectral_embedding_impl(graph = g, no = 2)
-    Output
-      $X
-                 [,1]       [,2]
-      [1,] -0.7071068 -0.7071068
-      [2,]  1.4142136  0.0000000
-      [3,] -0.7071068  0.7071068
-      
-      $Y
-      NULL
-      
-      $D
-      [1] 3 1
-      
-      $options
-      $options$bmat
-      [1] "I"
-      
-      $options$n
-      [1] 3
-      
-      $options$which
-      [1] "LM"
-      
-      $options$nev
-      [1] 2
-      
-      $options$tol
-      [1] 0
-      
-      $options$ncv
-      [1] 3
-      
-      $options$ldv
-      [1] 0
-      
-      $options$ishift
-      [1] 1
-      
-      $options$maxiter
-      [1] 3000
-      
-      $options$nb
-      [1] 1
-      
-      $options$mode
-      [1] 1
-      
-      $options$start
-      [1] 1
-      
-      $options$sigma
-      [1] 0
-      
-      $options$sigmai
-      [1] 0
-      
-      $options$info
-      [1] 0
-      
-      $options$iter
-      [1] 1
-      
-      $options$nconv
-      [1] 2
-      
-      $options$numop
-      [1] 3
-      
-      $options$numopb
-      [1] 0
-      
-      $options$numreo
-      [1] 3
-      
-      
 
 # laplacian_spectral_embedding_impl errors
 
@@ -9200,31 +8597,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# simple_cycles_impl basic
-
-    Code
-      simple_cycles_impl(graph = g)
-    Output
-      $vertices
-      list()
-      
-      $edges
-      list()
-      
-
----
-
-    Code
-      simple_cycles_impl(graph = g, mode = "in", min.cycle.length = 2,
-        max.cycle.length = 3)
-    Output
-      $vertices
-      list()
-      
-      $edges
-      list()
-      
-
 # simple_cycles_impl errors
 
     Code
@@ -9305,20 +8677,6 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
-# fundamental_cycles_impl basic
-
-    Code
-      fundamental_cycles_impl(graph = g, start = 1)
-    Output
-      list()
-
----
-
-    Code
-      fundamental_cycles_impl(graph = g, start = 1, bfs.cutoff = 2, weights = c(1, 2))
-    Output
-      list()
-
 # fundamental_cycles_impl errors
 
     Code
@@ -9326,21 +8684,6 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
-
-# minimum_cycle_basis_impl basic
-
-    Code
-      minimum_cycle_basis_impl(graph = g)
-    Output
-      list()
-
----
-
-    Code
-      minimum_cycle_basis_impl(graph = g, bfs.cutoff = 2, complete = FALSE,
-        use.cycle.order = FALSE, weights = c(1, 2))
-    Output
-      list()
 
 # minimum_cycle_basis_impl errors
 

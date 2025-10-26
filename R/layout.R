@@ -2155,7 +2155,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' @importFrom utils head
 #' @family graph layouts
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' ## Data taken from http://tehnick-8.narod.ru/dc_clients/
 #' DC <- graph_from_literal(

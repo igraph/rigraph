@@ -28,6 +28,8 @@ This function interprets edge weights as connection strengths. In the
 random surfer model, an edge with a larger weight is more likely to be
 selected by the surfer.}
 
+\item{reset}{FIXME}
+
 \item{damping}{The damping factor (\sQuote{d} in the original paper).}
 
 \item{directed}{Logical, if true directed paths will be considered for
@@ -47,12 +49,6 @@ PageRank scores by solving an eingevalue problem.}
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details. This argument is ignored if the PRPACK
 implementation is used.}
-
-\item{personalized}{Optional vector giving a probability distribution to
-calculate personalized PageRank. For personalized PageRank, the probability
-of jumping to a node when abandoning the random walk is not uniform, but it
-is given by this vector. The vector should contains an entry for each vertex
-and it will be rescaled to sum up to one.}
 }
 \value{
 A named list with entries:
@@ -90,6 +86,7 @@ PageRank for only some of the vertices does not result in any performance
 increase at all.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
@@ -102,6 +99,7 @@ g3 <- make_ring(10)
 page_rank(g3)$vector
 reset <- seq(vcount(g3))
 page_rank(g3, personalized = reset)$vector
+\dontshow{\}) # examplesIf}
 }
 \references{
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale

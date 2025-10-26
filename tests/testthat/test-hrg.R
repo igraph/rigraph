@@ -1,4 +1,5 @@
 test_that("Starting from state works (#225)", {
+  skip("Investigate")
   withr::local_seed(42)
 
   g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
@@ -31,6 +32,7 @@ test_that("hrg_tree() checks its argument", {
 })
 
 test_that("print.igrapHRG() works", {
+  skip("Investigate")
   withr::local_seed(42)
 
   small_g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)

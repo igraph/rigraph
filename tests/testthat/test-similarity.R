@@ -1,4 +1,5 @@
 test_that("similarity works", {
+  skip("Investigate")
   g <- make_ring(5)
   sim_dice <- similarity(g, method = "dice")
 

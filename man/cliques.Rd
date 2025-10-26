@@ -39,6 +39,8 @@ is_clique(graph, candidate, directed = FALSE)
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
 
+\item{max.results}{FIXME}
+
 \item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
 numeric or symbolic if the graph is named. The algorithm is run from these
 vertices only, so only a subset of all maximal cliques is returned. See the
@@ -63,6 +65,8 @@ or only the maximal ones (\code{TRUE}).}
 \item{candidate}{The vertex set to test for being a clique.}
 
 \item{directed}{Whether to consider edge directions.}
+
+\item{weights}{FIXME}
 }
 \value{
 \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}

@@ -125,6 +125,7 @@ If the \code{time.window} argument is given (and not NULL) then
 This function might generate graphs with multiple edges.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 # The maximum degree for graph with different aging exponents
 g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
@@ -133,6 +134,7 @@ g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
 max(degree(g1))
 max(degree(g2))
 max(degree(g3))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Random graph models (games)

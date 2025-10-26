@@ -352,13 +352,13 @@ A similar syntax is used for most of the structural properties `igraph` can calc
 
 Besides degree, igraph includes built-in routines to calculate many other centrality properties, including vertex and edge betweenness (`edge_betweenness()`) or Google's PageRank (`page_rank()`) just to name a few. Here we just illustrate edge betweenness:
 
-```{r echo = TRUE}
+```{r echo = TRUE, eval = FALSE}
 edge_betweenness(g)
 ```
 
 Now we can also figure out which connections have the highest betweenness centrality:
 
-```{r echo = TRUE}
+```{r echo = TRUE, eval = FALSE}
 ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
 ```

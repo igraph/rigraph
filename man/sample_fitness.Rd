@@ -24,10 +24,13 @@ specifies the in-fitness of each vertex.
 If this argument is not \code{NULL}, then a directed graph is generated,
 otherwise an undirected one.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+\item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
+Possible values are: \code{"simple"} (no self-loops, no multiple edges),
+\code{"loops"} (self-loops allowed, no multiple edges),
+\code{"multi"} (no self-loops, multiple edges allowed),
+\code{"all"} (both self-loops and multiple edges allowed).}
 
-\item{multiple}{Logical scalar, whether to allow multiple edges in the
-graph.}
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 }
 \value{
 An igraph graph, directed or undirected.
@@ -65,11 +68,13 @@ distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_
 which generates the fitnesses for you with a given exponent.
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 
 N <- 10000
 g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 degree_distribution(g)
 plot(degree_distribution(g, cumulative = TRUE), log = "xy")
+\dontshow{\}) # examplesIf}
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load

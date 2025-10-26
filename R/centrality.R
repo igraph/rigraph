@@ -26,6 +26,11 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' `page.rank()` was renamed to [page_rank()] to create a more
 #' consistent API.
 #' @inheritParams page_rank
+#' @param personalized Optional vector giving a probability distribution to
+#'   calculate personalized PageRank. For personalized PageRank, the probability
+#'   of jumping to a node when abandoning the random walk is not uniform, but it
+#'   is given by this vector. The vector should contains an entry for each vertex
+#'   and it will be rescaled to sum up to one.
 #' @keywords internal
 #' @export
 page.rank <- function(
@@ -40,13 +45,19 @@ page.rank <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+
+  if (lifecycle::is_present(personalized)) {
+    cli::cli_warn(
+      "The {.arg personalized} argument is deprecated and will be ignored."
+    )
+  }
+
   page_rank(
     graph = graph,
     algo = algo,
     vids = vids,
     directed = directed,
     damping = damping,
-    personalized = personalized,
     weights = weights,
     options = options
   )
@@ -446,22 +457,14 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  res <- betweenness_cutoff_impl(
-    graph = graph,
-    vids = v,
+  betweenness_cutoff_impl(
+    graph,
+    v = v,
     directed = directed,
     weights = weights,
+    normalized = normalized,
     cutoff = cutoff
   )
-  if (normalized) {
-    vc <- as.numeric(vcount(graph))
-    if (is_directed(graph) && directed) {
-      res <- res / (vc * vc - 3 * vc + 2)
-    } else {
-      res <- 2 * res / (vc * vc - 3 * vc + 2)
-    }
-  }
-  res
 }
 
 #' @rdname betweenness
@@ -474,13 +477,17 @@ edge_betweenness <- function(
   weights = NULL,
   cutoff = -1
 ) {
-  e <- as_igraph_es(graph, e)
+  # Argument checks
+  ensure_igraph(graph)
+
   res <- edge_betweenness_cutoff_impl(
-    graph = graph,
-    directed = directed,
+    graph,
     weights = weights,
+    eids = e,
+    directed = directed,
     cutoff = cutoff
   )
+
   res[as.numeric(e)]
 }
 
@@ -1442,9 +1449,22 @@ strength <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = TRUE,
+  loops = c("twice", "none", "once"),
   weights = NULL
 ) {
+  if (is.logical(loops)) {
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      "strength(loops = 'cannot be a logical')",
+      details = "Use the new character argument instead: 'twice', 'once', or 'none'."
+    )
+    if (loops) {
+      loops <- "twice"
+    } else {
+      loops <- "none"
+    }
+  }
+
   strength_impl(
     graph = graph,
     vids = vids,
@@ -1700,11 +1720,7 @@ hub_score <- function(
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
-#' @param personalized Optional vector giving a probability distribution to
-#'   calculate personalized PageRank. For personalized PageRank, the probability
-#'   of jumping to a node when abandoning the random walk is not uniform, but it
-#'   is given by this vector. The vector should contains an entry for each vertex
-#'   and it will be rescaled to sum up to one.
+#' @param reset FIXME
 #' @param weights A numerical vector or `NULL`. This argument can be used
 #'   to give edge weights for calculating the weighted PageRank of vertices. If
 #'   this is `NULL` and the graph has a `weight` edge attribute then
@@ -1738,7 +1754,7 @@ hub_score <- function(
 #' Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
 #' Conference, Brisbane, Australia, April 1998.
 #' @keywords graphs
-#' @examples
+#' @examplesIf FALSE
 #'
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' page_rank(g)$vector

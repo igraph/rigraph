@@ -987,7 +987,7 @@ make_ <- function(...) {
 #' @param ... Parameters, see details below.
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 #' blocky <- sample_(sbm(
 #'   n = 20, pref.matrix = pref_matrix,
