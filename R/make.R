@@ -384,7 +384,11 @@ graph.lcf <- function(n, shifts, repeats = 1) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.lcf()", "graph_from_lcf()")
   # Use the _impl function
-  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
+  lcf_vector_impl(
+    n = n,
+    shifts = shifts,
+    repeats = repeats
+  )
 } # nocov end
 
 #' Create a lattice graph
@@ -438,7 +442,14 @@ graph.lattice <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
+  res <- square_lattice_impl(
+    dimvector = dimvector,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic
+  )
+
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
@@ -1595,7 +1606,10 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
       "{.arg directed} must be a logical, not {.obj_type_friendly {directed}}."
     )
   }
-  empty_impl(n, directed)
+  empty_impl(
+    n = n,
+    directed = directed
+  )
 }
 
 #' @rdname make_empty_graph
@@ -1983,7 +1997,14 @@ make_lattice <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- square_lattice_impl(dimvector, nei, directed, mutual, periodic)
+  res <- square_lattice_impl(
+    dimvector = dimvector,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic
+  )
+
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
@@ -2746,7 +2767,11 @@ graph_from_lcf <- function(
     )
   }
 
-  lcf_vector_impl(n = n, shifts = shifts, repeats = repeats)
+  lcf_vector_impl(
+    n = n,
+    shifts = shifts,
+    repeats = repeats
+  )
 }
 ## -----------------------------------------------------------------
 
@@ -2912,6 +2937,7 @@ realize_bipartite_degseq <- function(
     allowed.edge.types = allowed.edge.types,
     method = method
   )
+
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g
 }
