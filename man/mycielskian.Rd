@@ -23,28 +23,28 @@ The Mycielski construction can be used to create triangle-free graphs with an
 arbitrarily large chromatic number.
 }
 \details{
-Let the \code{n} vertices of the given graph \code{G} be v_1, ..., v_n.
-The Mycielskian of \code{G}, denoted M(G), contains \code{G} itself as a subgraph,
-together with \code{n+1} additional vertices:
+Let the \eqn{n} vertices of the given graph \eqn{G} be \eqn{v_1, \ldots, v_n}.
+The Mycielskian of \eqn{G}, denoted \eqn{M(G)}, contains \eqn{G} itself as a subgraph,
+together with \eqn{n+1} additional vertices:
 \itemize{
-\item A vertex u_i corresponding to each vertex v_i of \code{G}.
-\item An extra vertex w.
+\item A vertex \eqn{u_i} corresponding to each vertex \eqn{v_i} of \eqn{G}.
+\item An extra vertex \eqn{w}.
 }
 
 The edges are added as follows:
 \itemize{
-\item Each vertex u_i is connected to w, forming a star.
-\item For each edge (v_i, v_j) in \code{G}, two new edges are added:
-(u_i, v_j) and (v_i, u_j).
+\item Each vertex \eqn{u_i} is connected to \eqn{w}, forming a star.
+\item For each edge \eqn{(v_i, v_j)} in \eqn{G}, two new edges are added:
+\eqn{(u_i, v_j)} and \eqn{(v_i, u_j)}.
 }
 
-Thus, if \code{G} has \code{n} vertices and \code{m} edges, the Mycielskian M(G) has
-\verb{2n + 1} vertices, and \verb{3m + n} edges.
+Thus, if \eqn{G} has \eqn{n} vertices and \eqn{m} edges, the Mycielskian \eqn{M(G)} has
+\eqn{2n + 1} vertices, and \eqn{3m + n} edges.
 
 This function can apply the Mycielski transformation an arbitrary number of
-times, controlled by the parameter \code{k}. The k-th iterated Mycielskian has
-\code{n_k = (n + 1) * 2^k - 1} vertices and
-\verb{m_k = ((2m + 2n + 1) * 3^k - n_\{k+1\}) / 2} edges, where \code{n} and \code{m} are the
+times, controlled by the parameter \eqn{k}. The \eqn{k}-th iterated Mycielskian has
+\eqn{n_k = (n + 1) \cdot 2^k - 1} vertices and
+\eqn{m_k = ((2m + 2n + 1) \cdot 3^k - n_{k+1}) / 2} edges, where \eqn{n} and \eqn{m} are the
 vertex and edge count of the original graph, respectively.
 }
 \examples{

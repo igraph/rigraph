@@ -13,24 +13,24 @@ make_mycielski_graph(k)
 An igraph graph object.
 }
 \description{
-The Mycielski graph of order \code{k}, denoted M_k, is a triangle-free graph with
-chromatic number \code{k}.
+The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with
+chromatic number \eqn{k}.
 It is constructed using the Mycielski transformation as described in
 \code{\link[=mycielskian]{mycielskian()}}.
 }
 \details{
-The Mycielski graph M_k is defined for all non-negative integers \code{k}.
+The Mycielski graph \eqn{M_k} is defined for all non-negative integers \eqn{k}.
 The first few Mycielski graphs are:
 \itemize{
-\item M_0: Null graph (no vertices)
-\item M_1: Single vertex
-\item M_2: Path graph with 2 vertices
-\item M_3: Cycle graph with 5 vertices (pentagon)
-\item M_4: Grötzsch graph (triangle-free with chromatic number 4)
+\item \eqn{M_0}: Null graph (no vertices)
+\item \eqn{M_1}: Single vertex
+\item \eqn{M_2}: Path graph with 2 vertices
+\item \eqn{M_3}: Cycle graph with 5 vertices (pentagon)
+\item \eqn{M_4}: Grötzsch graph (triangle-free with chromatic number 4)
 }
 
-The vertex count of M_k is \code{3 * 2^(k-2) - 1} for \code{k > 1} and \code{k} otherwise.
-The edge count is \code{(7 * 3^(k-2) + 1) / 2 - 3 * 2^(k - 2)} for \code{k > 1} and 0
+The vertex count of \eqn{M_k} is \eqn{3 \cdot 2^{k-2} - 1} for \eqn{k > 1} and \eqn{k} otherwise.
+The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k - 2}} for \eqn{k > 1} and 0
 otherwise.
 }
 \examples{
