@@ -64,6 +64,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context
 - Run `air format .` before committing changes to ensure consistent formatting
+- Never change deprecated functions
 
 ### Documentation
 
