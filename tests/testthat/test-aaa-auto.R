@@ -29,8 +29,7 @@ test_that("add_edges_impl basic", {
 
   expect_snapshot(add_edges_impl(
     graph = g,
-    edges = c(0, 1, 1, 
-        2)
+    edges = c(0, 1, 1, 2)
   ))
 })
 
@@ -214,17 +213,14 @@ test_that("square_lattice_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(square_lattice_impl(
-    dimvector = c(2, 
-    2)
+    dimvector = c(2, 2)
   ))
   expect_snapshot(square_lattice_impl(
-    dimvector = c(2, 
-    2),
+    dimvector = c(2, 2),
     nei = 2,
     directed = TRUE,
     mutual = TRUE,
-    periodic = c(TRUE, 
-        TRUE)
+    periodic = c(TRUE, TRUE)
   ))
 })
 
@@ -242,12 +238,10 @@ test_that("triangular_lattice_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(triangular_lattice_impl(
-    dimvector = c(2, 
-    2)
+    dimvector = c(2, 2)
   ))
   expect_snapshot(triangular_lattice_impl(
-    dimvector = c(2, 
-    2),
+    dimvector = c(2, 2),
     directed = TRUE,
     mutual = TRUE
   ))
@@ -513,8 +507,7 @@ test_that("lcf_vector_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(lcf_vector_impl(
     n = 10,
-    shifts = c(3, -3, 
-        4),
+    shifts = c(3, -3, 4),
     repeats = 2
   ))
 })
@@ -523,8 +516,7 @@ test_that("lcf_vector_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(lcf_vector_impl(
     n = -1,
-    shifts = c(3, -3, 
-        4),
+    shifts = c(3, -3, 4),
     repeats = 2
   ))
 })
@@ -552,8 +544,7 @@ test_that("adjlist_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(adjlist_impl(
     adjlist = list(
-      c(2, 
-    3),
+      c(2, 3),
       c(1),
       c(1)
     ),
@@ -599,12 +590,10 @@ test_that("full_multipartite_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(full_multipartite_impl(
-    n = c(2, 
-    3, 4)
+    n = c(2, 3, 4)
   ))
   expect_snapshot(full_multipartite_impl(
-    n = c(2, 
-    3, 4),
+    n = c(2, 3, 4),
     directed = TRUE,
     mode = "in"
   ))
@@ -622,14 +611,11 @@ test_that("realize_degree_sequence_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(realize_degree_sequence_impl(
-    out.deg = c(2, 
-    2, 2)
+    out.deg = c(2, 2, 2)
   ))
   expect_snapshot(realize_degree_sequence_impl(
-    out.deg = c(2, 
-    2, 2),
-    in.deg = c(2, 
-    2, 2),
+    out.deg = c(2, 2, 2),
+    in.deg = c(2, 2, 2),
     allowed.edge.types = "simple",
     method = "largest"
   ))
@@ -647,16 +633,12 @@ test_that("realize_bipartite_degree_sequence_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(realize_bipartite_degree_sequence_impl(
-    degrees1 = c(2, 
-    2),
-    degrees2 = c(2, 
-    2)
+    degrees1 = c(2, 2),
+    degrees2 = c(2, 2)
   ))
   expect_snapshot(realize_bipartite_degree_sequence_impl(
-    degrees1 = c(2, 
-    2),
-    degrees2 = c(2, 
-    2),
+    degrees1 = c(2, 2),
+    degrees2 = c(2, 2),
     allowed.edge.types = "loops",
     method = "largest"
   ))
@@ -810,8 +792,7 @@ test_that("preference_game_impl basic", {
   expect_snapshot(preference_game_impl(
     nodes = 5,
     types = 2,
-    type.dist = c(0.5, 
-        0.5),
+    type.dist = c(0.5, 0.5),
     fixed.sizes = FALSE,
     pref.matrix = matrix(c(0.5, 
         0.5, 0.5, 0.5), 
@@ -825,8 +806,7 @@ test_that("preference_game_impl errors", {
     preference_game_impl(
       nodes = -1,
       types = 2,
-      type.dist = c(0.5, 
-        0.5),
+      type.dist = c(0.5, 0.5),
       fixed.sizes = FALSE,
       pref.matrix = matrix(c(0.5, 
         0.5, 0.5, 0.5), 
@@ -968,14 +948,11 @@ test_that("chung_lu_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(chung_lu_game_impl(
-    out.weights = c(2, 
-    2, 2)
+    out.weights = c(2, 2, 2)
   ))
   expect_snapshot(chung_lu_game_impl(
-    out.weights = c(1, 
-    2, 3),
-    in.weights = c(1, 
-    2, 3),
+    out.weights = c(1, 2, 3),
+    in.weights = c(1, 2, 3),
     loops = FALSE,
     variant = "maxent"
   ))
@@ -994,15 +971,12 @@ test_that("static_fitness_game_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(static_fitness_game_impl(
     no.of.edges = 3,
-    fitness.out = c(1, 
-        2, 3)
+    fitness.out = c(1, 2, 3)
   ))
   expect_snapshot(static_fitness_game_impl(
     no.of.edges = 3,
-    fitness.out = c(1, 
-        2, 3),
-    fitness.in = c(1, 
-        2, 3),
+    fitness.out = c(1, 2, 3),
+    fitness.in = c(1, 2, 3),
     loops = TRUE,
     multiple = TRUE
   ))
@@ -1012,8 +986,7 @@ test_that("static_fitness_game_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(static_fitness_game_impl(
     no.of.edges = -1,
-    fitness.out = c(1, 
-        2, 3)
+    fitness.out = c(1, 2, 3)
   ))
 })
 
@@ -1081,15 +1054,13 @@ test_that("sbm_game_impl basic", {
     n = 5,
     pref.matrix = matrix(0.5, 
         2, 2),
-    block.sizes = c(2, 
-        3)
+    block.sizes = c(2, 3)
   ))
   expect_snapshot(sbm_game_impl(
     n = 5,
     pref.matrix = matrix(0.5, 
         2, 2),
-    block.sizes = c(2, 
-        3),
+    block.sizes = c(2, 3),
     directed = TRUE,
     loops = TRUE
   ))
@@ -1102,8 +1073,7 @@ test_that("sbm_game_impl errors", {
     n = -1,
     pref.matrix = matrix(0.5, 
         2, 2),
-    block.sizes = c(2, 
-        3)
+    block.sizes = c(2, 3)
   ))
 })
 
@@ -1115,8 +1085,7 @@ test_that("hsbm_game_impl basic", {
   expect_snapshot(hsbm_game_impl(
     n = 6,
     m = 2,
-    rho = c(0.5, 
-        0.5),
+    rho = c(0.5, 0.5),
     C = matrix(1, 
         2, 2),
     p = 0.5
@@ -1161,8 +1130,7 @@ test_that("hsbm_list_game_impl basic", {
     n = 100,
     mlist = list(50, 50),
     rholist = list(
-      c(3, 
-        3, 4) /
+      c(3, 3, 4) /
         10
     ),
     Clist = list(C),
@@ -2819,12 +2787,10 @@ test_that("centralization_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(centralization_impl(
-    scores = c(1, 
-    2, 3)
+    scores = c(1, 2, 3)
   ))
   expect_snapshot(centralization_impl(
-    scores = c(1, 
-    2, 3),
+    scores = c(1, 2, 3),
     theoretical.max = 2,
     normalized = FALSE
   ))
@@ -3089,13 +3055,11 @@ test_that("assortativity_impl basic", {
 
   expect_snapshot(assortativity_impl(
     graph = g,
-    values = c(1, 2, 
-        1)
+    values = c(1, 2, 1)
   ))
   expect_snapshot(assortativity_impl(
     graph = g,
-    values = c(1, 2, 
-        1),
+    values = c(1, 2, 1),
     directed = FALSE,
     normalized = FALSE
   ))
@@ -3106,8 +3070,7 @@ test_that("assortativity_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(assortativity_impl(
     graph = NULL,
-    values = c(1, 2, 
-        1)
+    values = c(1, 2, 1)
   ))
 })
 
@@ -3206,15 +3169,12 @@ test_that("joint_type_distribution_impl basic", {
 
   expect_snapshot(joint_type_distribution_impl(
     graph = g,
-    from.types = c(1, 
-        2, 1)
+    from.types = c(1, 2, 1)
   ))
   expect_snapshot(joint_type_distribution_impl(
     graph = g,
-    from.types = c(1, 
-        2, 1),
-    to.types = c(1, 
-        2, 1),
+    from.types = c(1, 2, 1),
+    to.types = c(1, 2, 1),
     directed = FALSE,
     normalized = FALSE
   ))
@@ -3226,8 +3186,7 @@ test_that("joint_type_distribution_impl errors", {
   expect_snapshot_igraph_error(
     joint_type_distribution_impl(
       graph = NULL,
-      from.types = c(1, 
-        2, 1)
+      from.types = c(1, 2, 1)
     )
   )
 })
@@ -3243,8 +3202,7 @@ test_that("contract_vertices_impl basic", {
 
   expect_snapshot(contract_vertices_impl(
     graph = g,
-    mapping = c(1, 1, 
-        2)
+    mapping = c(1, 1, 2)
   ))
 })
 
@@ -3253,8 +3211,7 @@ test_that("contract_vertices_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(contract_vertices_impl(
     graph = NULL,
-    mapping = c(1, 1, 
-        2)
+    mapping = c(1, 1, 2)
   ))
 })
 
@@ -3607,14 +3564,11 @@ test_that("is_graphical_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(is_graphical_impl(
-    out.deg = c(2, 
-    2, 2)
+    out.deg = c(2, 2, 2)
   ))
   expect_snapshot(is_graphical_impl(
-    out.deg = c(2, 
-    2, 2),
-    in.deg = c(1, 
-    1, 1),
+    out.deg = c(2, 2, 2),
+    in.deg = c(1, 1, 1),
     allowed.edge.types = "all"
   ))
 })
@@ -3715,8 +3669,7 @@ test_that("get_biadjacency_impl basic", {
 
   expect_snapshot(get_biadjacency_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE)
+    types = c(TRUE, FALSE, TRUE)
   ))
 })
 
@@ -3726,8 +3679,7 @@ test_that("get_biadjacency_impl errors", {
   expect_snapshot_igraph_error(
     get_biadjacency_impl(
       graph = NULL,
-      types = c(TRUE, FALSE, 
-        TRUE)
+      types = c(TRUE, FALSE, TRUE)
     )
   )
 })
@@ -4268,8 +4220,7 @@ test_that("weighted_cliques_impl basic", {
   ))
   expect_snapshot(weighted_cliques_impl(
     graph = g,
-    vertex.weights = c(1, 
-        2, 3),
+    vertex.weights = c(1, 2, 3),
     min.weight = 1,
     max.weight = 3,
     maximal = TRUE
@@ -4298,8 +4249,7 @@ test_that("largest_weighted_cliques_impl basic", {
   ))
   expect_snapshot(largest_weighted_cliques_impl(
     graph = g,
-    vertex.weights = c(1, 
-        2, 3)
+    vertex.weights = c(1, 2, 3)
   ))
 })
 
@@ -4325,8 +4275,7 @@ test_that("weighted_clique_number_impl basic", {
   ))
   expect_snapshot(weighted_clique_number_impl(
     graph = g,
-    vertex.weights = c(1, 
-        2, 3)
+    vertex.weights = c(1, 2, 3)
   ))
 })
 
@@ -4637,13 +4586,11 @@ test_that("layout_bipartite_impl basic", {
 
   expect_snapshot(layout_bipartite_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE)
+    types = c(TRUE, FALSE, TRUE)
   ))
   expect_snapshot(layout_bipartite_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE),
+    types = c(TRUE, FALSE, TRUE),
     hgap = 2,
     vgap = 2,
     maxiter = 10
@@ -4656,8 +4603,7 @@ test_that("layout_bipartite_impl errors", {
   expect_snapshot_igraph_error(
     layout_bipartite_impl(
       graph = NULL,
-      types = c(TRUE, FALSE, 
-        TRUE)
+      types = c(TRUE, FALSE, TRUE)
     )
   )
 })
@@ -5091,16 +5037,12 @@ test_that("compare_communities_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(compare_communities_impl(
-    comm1 = c(1, 
-    2, 1),
-    comm2 = c(2, 
-    1, 2)
+    comm1 = c(1, 2, 1),
+    comm2 = c(2, 1, 2)
   ))
   expect_snapshot(compare_communities_impl(
-    comm1 = c(1, 
-    2, 1),
-    comm2 = c(2, 
-    1, 2),
+    comm1 = c(1, 2, 1),
+    comm2 = c(2, 1, 2),
     method = "nmi"
   ))
 })
@@ -5125,15 +5067,12 @@ test_that("modularity_impl basic", {
 
   expect_snapshot(modularity_impl(
     graph = g,
-    membership = c(1, 
-        2, 1)
+    membership = c(1, 2, 1)
   ))
   expect_snapshot(modularity_impl(
     graph = g,
-    membership = c(1, 
-        2, 1),
-    weights = c(1, 
-        2),
+    membership = c(1, 2, 1),
+    weights = c(1, 2),
     resolution = 0.5,
     directed = FALSE
   ))
@@ -5144,8 +5083,7 @@ test_that("modularity_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(modularity_impl(
     graph = NULL,
-    membership = c(1, 
-        2, 1)
+    membership = c(1, 2, 1)
   ))
 })
 
@@ -5218,11 +5156,9 @@ test_that("community_label_propagation_impl basic", {
   expect_snapshot(community_label_propagation_impl(
     graph = g,
     mode = "in",
-    weights = c(1, 
-        2),
+    weights = c(1, 2),
     initial = 1:3,
-    fixed = c(TRUE, FALSE, 
-        TRUE)
+    fixed = c(TRUE, FALSE, TRUE)
   ))
 })
 
@@ -5299,8 +5235,7 @@ test_that("community_leiden_impl basic", {
   expect_snapshot(community_leiden_impl(
     graph = g,
     weights = c(1, 2),
-    vertex.weights = c(1, 
-        2, 3),
+    vertex.weights = c(1, 2, 3),
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
@@ -5324,10 +5259,8 @@ test_that("split_join_distance_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(split_join_distance_impl(
-    comm1 = c(1, 
-    2, 1),
-    comm2 = c(2, 
-    1, 2)
+    comm1 = c(1, 2, 1),
+    comm2 = c(2, 1, 2)
   ))
 })
 
@@ -5354,10 +5287,8 @@ test_that("community_infomap_impl basic", {
   ))
   expect_snapshot(community_infomap_impl(
     graph = g,
-    e.weights = c(1, 
-        2),
-    v.weights = c(1, 
-        2, 3),
+    e.weights = c(1, 2),
+    v.weights = c(1, 2, 3),
     nb.trials = 2
   ))
 })
@@ -5629,8 +5560,7 @@ test_that("get_adjacency_sparse_impl basic", {
   expect_snapshot(get_adjacency_sparse_impl(
     graph = g,
     type = "upper",
-    weights = c(1, 
-        2),
+    weights = c(1, 2),
     loops = "none"
   ))
 })
@@ -5827,8 +5757,7 @@ test_that("motifs_randesu_no_impl basic", {
   expect_snapshot(motifs_randesu_no_impl(
     graph = g,
     size = 4,
-    cut.prob = c(0.1, 
-        0.1, 0.1, 0.1)
+    cut.prob = c(0.1, 0.1, 0.1, 0.1)
   ))
 })
 
@@ -5987,8 +5916,7 @@ test_that("local_scan_0_them_impl basic", {
   expect_snapshot(local_scan_0_them_impl(
     us = g1,
     them = g2,
-    weights.them = c(1, 
-        2),
+    weights.them = c(1, 2),
     mode = "in"
   ))
 })
@@ -6051,8 +5979,7 @@ test_that("local_scan_1_ecount_them_impl basic", {
   expect_snapshot(local_scan_1_ecount_them_impl(
     us = g1,
     them = g2,
-    weights.them = c(1, 
-        2),
+    weights.them = c(1, 2),
     mode = "in"
   ))
 })
@@ -6084,8 +6011,7 @@ test_that("local_scan_k_ecount_impl basic", {
   expect_snapshot(local_scan_k_ecount_impl(
     graph = g,
     k = 1,
-    weights = c(1, 
-        2),
+    weights = c(1, 2),
     mode = "in"
   ))
 })
@@ -6121,8 +6047,7 @@ test_that("local_scan_k_ecount_them_impl basic", {
     us = g1,
     them = g2,
     k = 1,
-    weights.them = c(1, 
-        2),
+    weights.them = c(1, 2),
     mode = "in"
   ))
 })
@@ -6154,8 +6079,7 @@ test_that("local_scan_neighborhood_ecount_impl basic", {
   ))
   expect_snapshot(local_scan_neighborhood_ecount_impl(
     graph = g,
-    weights = c(1, 2, 
-        3),
+    weights = c(1, 2, 3),
     neighborhoods = list(1:2, 1:3, 2:4, 1)
   ))
 })
@@ -6183,18 +6107,15 @@ test_that("local_scan_subset_ecount_impl basic", {
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
     subsets = list(
-      c(1, 
-        2),
+      c(1, 2),
       c(2, 3)
     )
   ))
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
-    weights = c(1, 2, 
-        3),
+    weights = c(1, 2, 3),
     subsets = list(
-      c(1, 
-        2),
+      c(1, 2),
       c(2, 3)
     )
   ))
@@ -6860,14 +6781,10 @@ test_that("isomorphic_vf2_impl basic", {
   expect_snapshot(isomorphic_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -6903,14 +6820,10 @@ test_that("count_isomorphisms_vf2_impl basic", {
   expect_snapshot(count_isomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -6945,14 +6858,10 @@ test_that("get_isomorphisms_vf2_impl basic", {
   expect_snapshot(get_isomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -7015,14 +6924,10 @@ test_that("subisomorphic_vf2_impl basic", {
   expect_snapshot(subisomorphic_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -7057,14 +6962,10 @@ test_that("count_subisomorphisms_vf2_impl basic", {
   expect_snapshot(count_subisomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -7099,14 +7000,10 @@ test_that("get_subisomorphisms_vf2_impl basic", {
   expect_snapshot(get_subisomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 
-        2, 3),
-    vertex.color2 = c(1, 
-        2, 3),
-    edge.color1 = c(1, 
-        2),
-    edge.color2 = c(1, 
-        2)
+    vertex.color1 = c(1, 2, 3),
+    vertex.color2 = c(1, 2, 3),
+    edge.color1 = c(1, 2),
+    edge.color2 = c(1, 2)
   ))
 })
 
@@ -7135,8 +7032,7 @@ test_that("canonical_permutation_impl basic", {
   ))
   expect_snapshot(canonical_permutation_impl(
     graph = g,
-    colors = c(1, 2, 
-        3),
+    colors = c(1, 2, 3),
     sh = "fl"
   ))
 })
@@ -7193,10 +7089,8 @@ test_that("isomorphic_bliss_impl basic", {
   expect_snapshot(isomorphic_bliss_impl(
     graph1 = g1,
     graph2 = g2,
-    colors1 = c(1, 
-        2, 3),
-    colors2 = c(1, 
-        2, 3),
+    colors1 = c(1, 2, 3),
+    colors2 = c(1, 2, 3),
     sh = "fl"
   ))
 })
@@ -7224,8 +7118,7 @@ test_that("count_automorphisms_impl basic", {
   ))
   expect_snapshot(count_automorphisms_impl(
     graph = g,
-    colors = c(1, 2, 
-        3),
+    colors = c(1, 2, 3),
     sh = "fl"
   ))
 })
@@ -7252,8 +7145,7 @@ test_that("automorphism_group_impl basic", {
   ))
   expect_snapshot(automorphism_group_impl(
     graph = g,
-    colors = c(1, 2, 
-        3),
+    colors = c(1, 2, 3),
     sh = "fl",
     details = TRUE
   ))
@@ -7326,8 +7218,7 @@ test_that("is_matching_impl basic", {
   ))
   expect_snapshot(is_matching_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE),
+    types = c(TRUE, FALSE, TRUE),
     matching = 1:2
   ))
 })
@@ -7356,8 +7247,7 @@ test_that("is_maximal_matching_impl basic", {
   ))
   expect_snapshot(is_maximal_matching_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE),
+    types = c(TRUE, FALSE, TRUE),
     matching = 1:2
   ))
 })
@@ -7382,15 +7272,12 @@ test_that("maximum_bipartite_matching_impl basic", {
 
   expect_snapshot(maximum_bipartite_matching_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE)
+    types = c(TRUE, FALSE, TRUE)
   ))
   expect_snapshot(maximum_bipartite_matching_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE),
-    weights = c(1, 
-        2),
+    types = c(TRUE, FALSE, TRUE),
+    weights = c(1, 2),
     eps = 1e-05
   ))
 })
@@ -7401,8 +7288,7 @@ test_that("maximum_bipartite_matching_impl errors", {
   expect_snapshot_igraph_error(
     maximum_bipartite_matching_impl(
       graph = NULL,
-      types = c(TRUE, FALSE, 
-        TRUE)
+      types = c(TRUE, FALSE, TRUE)
     )
   )
 })
@@ -7423,12 +7309,10 @@ test_that("adjacency_spectral_embedding_impl basic", {
   expect_snapshot(adjacency_spectral_embedding_impl(
     graph = g,
     no = 2,
-    weights = c(1, 
-        2),
+    weights = c(1, 2),
     which = "la",
     scaled = FALSE,
-    cvec = c(1, 
-        2, 3),
+    cvec = c(1, 2, 3),
     options = list(maxiter = 10)
   ))
 })
@@ -7502,12 +7386,10 @@ test_that("power_law_fit_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(power_law_fit_impl(
-    data = c(1, 
-    2, 3)
+    data = c(1, 2, 3)
   ))
   expect_snapshot(power_law_fit_impl(
-    data = c(1, 
-    2, 3),
+    data = c(1, 2, 3),
     xmin = 1,
     force.continuous = TRUE
   ))
@@ -7578,8 +7460,7 @@ test_that("dim_select_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(dim_select_impl(
-    sv = c(1, 
-    2, 3)
+    sv = c(1, 2, 3)
   ))
 })
 
@@ -7898,12 +7779,10 @@ test_that("tree_from_parent_vector_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(tree_from_parent_vector_impl(
-    parents = c(-1, 
-    1, 2, 3)
+    parents = c(-1, 1, 2, 3)
   ))
   expect_snapshot(tree_from_parent_vector_impl(
-    parents = c(-1, 
-    1, 2, 3),
+    parents = c(-1, 1, 2, 3),
     type = "in"
   ))
 })
@@ -8058,8 +7937,7 @@ test_that("is_bipartite_coloring_impl basic", {
 
   expect_snapshot(is_bipartite_coloring_impl(
     graph = g,
-    types = c(TRUE, FALSE, 
-        TRUE)
+    types = c(TRUE, FALSE, TRUE)
   ))
 })
 
@@ -8069,8 +7947,7 @@ test_that("is_bipartite_coloring_impl errors", {
   expect_snapshot_igraph_error(
     is_bipartite_coloring_impl(
       graph = NULL,
-      types = c(TRUE, FALSE, 
-        TRUE)
+      types = c(TRUE, FALSE, TRUE)
     )
   )
 })
@@ -8115,19 +7992,15 @@ test_that("deterministic_optimal_imitation_impl basic", {
   expect_snapshot(deterministic_optimal_imitation_impl(
     graph = g,
     vid = 1,
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3)
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3)
   ))
   expect_snapshot(deterministic_optimal_imitation_impl(
     graph = g,
     vid = 1,
     optimality = "minimum",
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3),
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3),
     mode = "in"
   ))
 })
@@ -8139,10 +8012,8 @@ test_that("deterministic_optimal_imitation_impl errors", {
     deterministic_optimal_imitation_impl(
       graph = NULL,
       vid = 1,
-      quantities = c(1, 
-        2, 3),
-      strategies = c(1, 
-        2, 3)
+      quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3)
     )
   )
 })
@@ -8159,10 +8030,8 @@ test_that("moran_process_impl basic", {
   expect_snapshot(moran_process_impl(
     graph = g,
     weights = c(1, 1),
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3),
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3),
     mode = "in"
   ))
 })
@@ -8173,10 +8042,8 @@ test_that("moran_process_impl errors", {
   expect_snapshot_igraph_error(
     moran_process_impl(
       graph = NULL,
-      quantities = c(1, 
-        2, 3),
-      strategies = c(1, 
-        2, 3)
+      quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3)
     )
   )
 })
@@ -8194,19 +8061,15 @@ test_that("roulette_wheel_imitation_impl basic", {
     graph = g,
     vid = 1,
     is.local = TRUE,
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3)
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3)
   ))
   expect_snapshot(roulette_wheel_imitation_impl(
     graph = g,
     vid = 1,
     is.local = FALSE,
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3),
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3),
     mode = "in"
   ))
 })
@@ -8219,10 +8082,8 @@ test_that("roulette_wheel_imitation_impl errors", {
       graph = NULL,
       vid = 1,
       is.local = TRUE,
-      quantities = c(1, 
-        2, 3),
-      strategies = c(1, 
-        2, 3)
+      quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3)
     )
   )
 })
@@ -8240,19 +8101,15 @@ test_that("stochastic_imitation_impl basic", {
     graph = g,
     vid = 1,
     algo = 1,
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3)
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3)
   ))
   expect_snapshot(stochastic_imitation_impl(
     graph = g,
     vid = 1,
     algo = 2,
-    quantities = c(1, 
-        2, 3),
-    strategies = c(1, 
-        2, 3),
+    quantities = c(1, 2, 3),
+    strategies = c(1, 2, 3),
     mode = "in"
   ))
 })
@@ -8265,10 +8122,8 @@ test_that("stochastic_imitation_impl errors", {
       graph = NULL,
       vid = 1,
       algo = 1,
-      quantities = c(1, 
-        2, 3),
-      strategies = c(1, 
-        2, 3)
+      quantities = c(1, 2, 3),
+      strategies = c(1, 2, 3)
     )
   )
 })
@@ -8307,8 +8162,7 @@ test_that("vertex_path_from_edge_path_impl basic", {
   expect_snapshot(vertex_path_from_edge_path_impl(
     graph = g,
     start = 1,
-    edge.path = c(1, 
-        2)
+    edge.path = c(1, 2)
   ))
   expect_snapshot(vertex_path_from_edge_path_impl(
     graph = g,
@@ -8325,8 +8179,7 @@ test_that("vertex_path_from_edge_path_impl errors", {
     vertex_path_from_edge_path_impl(
       graph = NULL,
       start = 1,
-      edge.path = c(1, 
-        2)
+      edge.path = c(1, 2)
     )
   )
 })
