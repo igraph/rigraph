@@ -3,32 +3,32 @@
     Code
       st_cuts(g_path, source = "a", target = NULL)
     Condition
-      Error in `all_st_cuts_impl()`:
-      ! No vertex was specified
+      Error in `st_cuts()`:
+      ! `target` must specify at least one vertex
 
 ---
 
     Code
       st_cuts(g_path, source = NULL, target = "a")
     Condition
-      Error in `all_st_cuts_impl()`:
-      ! No vertex was specified
+      Error in `st_cuts()`:
+      ! `source` must specify at least one vertex
 
 ---
 
     Code
       st_min_cuts(g_path, source = "a", target = NULL)
     Condition
-      Error in `all_st_mincuts_impl()`:
-      ! No vertex was specified
+      Error in `st_min_cuts()`:
+      ! `target` must specify at least one vertex
 
 ---
 
     Code
       st_min_cuts(g_path, source = NULL, target = "a")
     Condition
-      Error in `all_st_mincuts_impl()`:
-      ! No vertex was specified
+      Error in `st_min_cuts()`:
+      ! `source` must specify at least one vertex
 
 # vertex_connectivity error works
 

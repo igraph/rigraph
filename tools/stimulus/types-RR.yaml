@@ -103,7 +103,10 @@ VERTEX:
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
-          stop("No vertex was specified")
+          cli::cli_abort(
+            "{.arg %I%} must specify at least one vertex",
+            call = rlang::caller_env()
+          )
         }
     OUTCONV:
         OUT: |-
@@ -116,7 +119,10 @@ VERTEX_ROOT:
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
-          stop("No vertex was specified")
+          cli::cli_abort(
+            "{.arg %I%} must specify at least one vertex",
+            call = rlang::caller_env()
+          )
         }
     OUTCONV:
         OUT: |-
