@@ -472,29 +472,12 @@ edge_betweenness <- function(
   weights = NULL,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
   e <- as_igraph_es(graph, e)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_edge_betweenness_cutoff,
-    graph,
-    directed,
-    weights,
-    cutoff
+  res <- edge_betweenness_cutoff_impl(
+    graph = graph,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
   )
   res[as.numeric(e)]
 }
