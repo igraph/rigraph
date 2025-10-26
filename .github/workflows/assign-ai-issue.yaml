@@ -52,10 +52,16 @@ jobs:
 
           if [ -n "$oldest_issue" ] && [ "$oldest_issue" != "null" ]; then
             echo "Found unassigned AI issue #$oldest_issue"
-            echo "Assigning to @github/copilot"
+            echo "Assigning to @copilot"
 
-            # Assign the issue to Copilot
-            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee "@copilot"
+            # Assign the issue to Copilot using the API
+            # https://github.com/cli/cli/issues/11809
+            gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "/repos/$REPO/issues/$oldest_issue/assignees" \
+              -f "assignees[]=copilot"
 
             # Add a comment to the issue
             gh issue comment "$oldest_issue" --repo "$REPO" --body "🤖 This issue has been assigned to Copilot for automated handling."
