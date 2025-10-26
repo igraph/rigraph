@@ -482,8 +482,8 @@ graph.isomorphic.bliss <- function(
   isomorphic_bliss_impl(
     graph1 = graph1,
     graph2 = graph2,
-    colors1 = colors1,
-    colors2 = colors2,
+    colors1 = if (missing(colors1)) missing_arg() else colors1,
+    colors2 = if (missing(colors2)) missing_arg() else colors2,
     sh = sh
   )
 }
@@ -500,10 +500,18 @@ graph.isomorphic.vf2 <- function(
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = vertex.color1,
-    vertex.color2 = vertex.color2,
-    edge.color1 = edge.color1,
-    edge.color2 = edge.color2
+    vertex.color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex.color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 #' @export
@@ -519,10 +527,18 @@ graph.subisomorphic.vf2 <- function(
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = vertex.color1,
-    vertex.color2 = vertex.color2,
-    edge.color1 = edge.color1,
-    edge.color2 = edge.color2
+    vertex.color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex.color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -698,7 +714,31 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 
 #' @export
 #' @cdocs igraph_count_isomorphisms_vf2
-graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
+graph.count.isomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  count_isomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex.color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex.color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
 #' another graph
@@ -781,7 +821,31 @@ count_subgraph_isomorphisms <- function(
 
 #' @export
 #' @cdocs igraph_count_subisomorphisms_vf2
-graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
+graph.count.subisomorphisms.vf2 <- function(
+  graph1,
+  graph2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL,
+  edge.color1 = NULL,
+  edge.color2 = NULL
+) {
+  count_subisomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex.color1 = if (missing(vertex.color1)) {
+      missing_arg()
+    } else {
+      vertex.color1
+    },
+    vertex.color2 = if (missing(vertex.color2)) {
+      missing_arg()
+    } else {
+      vertex.color2
+    },
+    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+  )
+}
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
 #'
@@ -913,7 +977,11 @@ isomorphism_class <- function(graph, v) {
 
 #' @export
 #' @cdocs igraph_isoclass
-graph.isoclass <- isoclass_impl
+graph.isoclass <- function(graph) {
+  isoclass_impl(
+    graph = graph
+  )
+}
 
 #' Create a graph from an isomorphism class
 #'
@@ -932,7 +1000,13 @@ graph.isoclass <- isoclass_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_isoclass_create
-graph_from_isomorphism_class <- isoclass_create_impl
+graph_from_isomorphism_class <- function(size, number, directed = TRUE) {
+  isoclass_create_impl(
+    size = size,
+    number = number,
+    directed = directed
+  )
+}
 
 
 #' Canonical permutation of a graph
@@ -1043,7 +1117,17 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' @family graph isomorphism
 #' @export
 #' @cdocs igraph_canonical_permutation
-canonical_permutation <- canonical_permutation_bliss_impl
+canonical_permutation <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  canonical_permutation_bliss_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh
+  )
+}
 
 
 #' Permute the vertices of a graph
@@ -1085,11 +1169,21 @@ canonical_permutation <- canonical_permutation_bliss_impl
 #' @export
 #' @family functions for manipulating graph structure
 #' @cdocs igraph_permute_vertices
-permute <- permute_vertices_impl
+permute <- function(graph, permutation) {
+  permute_vertices_impl(
+    graph = graph,
+    permutation = permutation
+  )
+}
 
 #' @export
 #' @cdocs igraph_isomorphic
-graph.isomorphic <- isomorphic_impl
+graph.isomorphic <- function(graph1, graph2) {
+  isomorphic_impl(
+    graph1 = graph1,
+    graph2 = graph2
+  )
+}
 
 #' Number of automorphisms
 #'
@@ -1175,7 +1269,17 @@ graph.isomorphic <- isomorphic_impl
 #' @family graph automorphism
 #' @export
 #' @cdocs igraph_count_automorphisms
-count_automorphisms <- count_automorphisms_bliss_impl
+count_automorphisms <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+) {
+  count_automorphisms_bliss_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh
+  )
+}
 
 
 #' Generating set of the automorphism group of a graph
@@ -1232,4 +1336,16 @@ count_automorphisms <- count_automorphisms_bliss_impl
 #' @family graph automorphism
 #' @export
 #' @cdocs igraph_automorphism_group
-automorphism_group <- automorphism_group_impl
+automorphism_group <- function(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
+  details = FALSE
+) {
+  automorphism_group_impl(
+    graph = graph,
+    colors = if (missing(colors)) missing_arg() else colors,
+    sh = sh,
+    details = details
+  )
+}
