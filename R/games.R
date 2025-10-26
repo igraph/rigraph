@@ -2482,8 +2482,7 @@ sample_bipartite_gnp <- function(
 #'   must be symmetric.
 #' @param block.sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
-#' @param directed Logical scalar, whether to generate a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @inheritParams sample_pref
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -3047,10 +3046,7 @@ sample_fitness <- function(
 #'   undirected. If greater than or equal to 2, this argument specifies the
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
-#' @param loops Logical scalar, whether to allow loop edges in the generated
-#'   graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
-#'   generated graph.
+#' @inheritParams sample_fitness
 #' @param finite.size.correction Logical scalar, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
