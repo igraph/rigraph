@@ -3657,6 +3657,8 @@ knnk <- function(
   to.mode = c("in", "out", "all", "total"),
   directed.neighbors = TRUE
 ) {
+  from.mode <- match.arg(from.mode)
+  to.mode <- match.arg(to.mode)
   degree_correlation_vector_impl(
     graph = graph,
     weights = weights,
