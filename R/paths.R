@@ -445,10 +445,10 @@ distance_table <- function(graph, directed = TRUE) {
 #'   it will be considered. If `all`, the default, then the graph is treated
 #'   as undirected, i.e. edge directions are not taken into account. This
 #'   argument is ignored for undirected graphs.
-#' @param weights Possibly a numeric vector giving edge weights (interpreted as widths).
+#' @param weights A numeric vector giving edge weights (interpreted as widths).
 #'   If this is `NULL` and the graph has a `weight` edge attribute, then the
-#'   attribute is used. If this is `NA` then no weights are used (even if
-#'   the graph has a `weight` attribute).
+#'   attribute is used. Widest path functions require edge weights, so if no
+#'   `weight` attribute exists and `weights` is not provided, an error is raised.
 #'   In a weighted graph, the width of a path is the minimum weight along the path.
 #' @param algorithm Which algorithm to use for the calculation. By default
 #'   igraph selects automatically between Dijkstra's algorithm and Floyd-Warshall.

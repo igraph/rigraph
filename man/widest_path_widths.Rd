@@ -41,10 +41,10 @@ it will be considered. If \code{all}, the default, then the graph is treated
 as undirected, i.e. edge directions are not taken into account. This
 argument is ignored for undirected graphs.}
 
-\item{weights}{Possibly a numeric vector giving edge weights (interpreted as widths).
+\item{weights}{A numeric vector giving edge weights (interpreted as widths).
 If this is \code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute).
+attribute is used. Widest path functions require edge weights, so if no
+\code{weight} attribute exists and \code{weights} is not provided, an error is raised.
 In a weighted graph, the width of a path is the minimum weight along the path.}
 
 \item{algorithm}{Which algorithm to use for the calculation. By default
