@@ -354,7 +354,6 @@ join <- function(g1, g2) {
   join_impl(g1, g2)
 }
 
-#' @family functions for manipulating graph structure
 #' @export
 #' @rdname join
 "%j%" <- function(x, y) {
