@@ -192,7 +192,12 @@ graph.get.isomorphisms.vf2 <- function(
     edge.color2
   )
 
-  lapply(res, function(.x) V(graph2)[.x + 1])
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(.x) V(graph2)[.x + 1])
+  } else {
+    res <- lapply(res, `+`, 1)
+  }
+  res
 }
 
 #' @export
@@ -260,7 +265,12 @@ graph.get.subisomorphisms.vf2 <- function(
     edge.color2
   )
 
-  lapply(res, function(.x) V(graph1)[.x + 1])
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(.x) V(graph1)[.x + 1])
+  } else {
+    res <- lapply(res, `+`, 1)
+  }
+  res
 }
 
 #' @export
@@ -330,7 +340,11 @@ graph.subisomorphic.lad <- function(
     }
   }
   if (all.maps) {
-    res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+    if (igraph_opt("return.vs.es")) {
+      res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
+    } else {
+      res$maps <- lapply(res$maps, `+`, 1)
+    }
   }
 
   res
@@ -854,8 +868,10 @@ graph.count.subisomorphisms.vf2 <- function(
 #' @param method Currently only \sQuote{vf2} is supported, see
 #'   [isomorphic()] for details about it and extra arguments.
 #' @param ... Extra arguments, passed to the various methods.
-#' @return A list of vertex sequences, corresponding to all
-#'   mappings from the first graph to the second.
+#' @return A list of vertex sequences (if the `return.vs.es` igraph option is
+#'   true, the default), or a list of numeric vectors of vertex IDs (if
+#'   `return.vs.es` is false), corresponding to all mappings from the first
+#'   graph to the second.
 #'
 #' @aliases graph.get.isomorphisms.vf2
 #'
@@ -920,8 +936,10 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' @param method The method to use. Possible values: \sQuote{auto},
 #'   \sQuote{lad}, \sQuote{vf2}. See their details below.
 #' @param ... Additional arguments, passed to the various methods.
-#' @return A list of vertex sequences, corresponding to all
-#'   mappings from the first graph to the second.
+#' @return A list of vertex sequences (if the `return.vs.es` igraph option is
+#'   true, the default), or a list of numeric vectors of vertex IDs (if
+#'   `return.vs.es` is false), corresponding to all mappings from the first
+#'   graph to the second.
 #'
 #' @aliases graph.get.subisomorphisms.vf2
 #'

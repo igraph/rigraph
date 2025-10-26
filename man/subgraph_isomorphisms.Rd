@@ -22,8 +22,10 @@ mutual edges.}
 \item{...}{Additional arguments, passed to the various methods.}
 }
 \value{
-A list of vertex sequences, corresponding to all
-mappings from the first graph to the second.
+A list of vertex sequences (if the \code{return.vs.es} igraph option is
+true, the default), or a list of numeric vectors of vertex IDs (if
+\code{return.vs.es} is false), corresponding to all mappings from the first
+graph to the second.
 }
 \description{
 All isomorphic mappings between a graph and subgraphs of another graph

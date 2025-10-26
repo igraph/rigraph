@@ -34,7 +34,8 @@ is not allowed for directed graphs and will be replaced with \code{"once"}.}
 of each set of parallel edges.}
 }
 \value{
-A list of \code{igraph.vs} or a list of numeric vectors depending on
+A list of \code{igraph.vs} (for \code{as_adj_list()}) or \code{igraph.es}
+(for \code{as_adj_edge_list()}), or a list of numeric vectors depending on
 the value of \code{igraph_opt("return.vs.es")}, see details for performance
 characteristics.
 }
@@ -49,7 +50,9 @@ vertices.
 
 \code{as_adj_edge_list()} returns a list of numeric vectors, which include the
 ids of adjacent edges (according to the \code{mode} argument) of all
-vertices.
+vertices. The return type depends on the \code{return.vs.es} option: if true
+(default), a list of \code{igraph.es} is returned; if false, a list of numeric
+vectors is returned.
 
 If \code{igraph_opt("return.vs.es")} is true (default), the numeric
 vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be

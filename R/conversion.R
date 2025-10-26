@@ -651,7 +651,9 @@ as_undirected <- function(
 #'
 #' `as_adj_edge_list()` returns a list of numeric vectors, which include the
 #' ids of adjacent edges (according to the `mode` argument) of all
-#' vertices.
+#' vertices. The return type depends on the `return.vs.es` option: if true
+#' (default), a list of `igraph.es` is returned; if false, a list of numeric
+#' vectors is returned.
 #'
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
@@ -663,7 +665,8 @@ as_undirected <- function(
 #'   is not allowed for directed graphs and will be replaced with `"once"`.
 #' @param multiple Logical scalar, set to `FALSE` to use only one representative
 #'   of each set of parallel edges.
-#' @return A list of `igraph.vs` or a list of numeric vectors depending on
+#' @return A list of `igraph.vs` (for `as_adj_list()`) or `igraph.es`
+#'   (for `as_adj_edge_list()`), or a list of numeric vectors depending on
 #'   the value of `igraph_opt("return.vs.es")`, see details for performance
 #'   characteristics.
 #' @details If `igraph_opt("return.vs.es")` is true (default), the numeric
@@ -730,7 +733,11 @@ as_adj_edge_list <- function(
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_get_adjedgelist, graph, mode, loops)
-  res <- lapply(res, function(.x) E(graph)[.x + 1])
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(.x) E(graph)[.x + 1])
+  } else {
+    res <- lapply(res, `+`, 1)
+  }
   if (is_named(graph)) {
     names(res) <- V(graph)$name
   }
