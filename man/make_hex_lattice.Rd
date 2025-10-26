@@ -24,13 +24,15 @@ An igraph graph.
 }
 \description{
 \code{make_hex_lattice()} creates a triangular lattice, also known as a hexagonal
-lattice. This is a lattice where each vertex has up to three neighbors and
-the structure forms a triangular/hexagonal tiling pattern.
+lattice. The name "hexagonal lattice" refers to the hexagonal tiling pattern
+created when vertices are arranged in this structure, while "triangular
+lattice" refers to the fact that edges form triangles. Both terms describe
+the same graph structure.
 }
 \details{
 A triangular (or hexagonal) lattice is a two-dimensional lattice where each
 internal vertex has degree 3. The resulting graph structure resembles a
-triangular or hexagonal tiling.
+triangular or hexagonal tiling pattern, which is why it's known by both names.
 
 The \code{dims} parameter determines the shape of the lattice:
 \itemize{
