@@ -3440,7 +3440,7 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP weights, SEXP reset, SEXP d
   igraph_vector_int_destroy(&c_vids_data);
   igraph_vs_destroy(&c_vids);
   if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
-    PROTECT(options = R_igraph_arpack_options_to_SEXP(&c_options1));
+    PROTECT(options = Rx_igraph_arpack_options_to_SEXP(&c_options1));
   } else {
     PROTECT(options);
   }
@@ -3519,7 +3519,7 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP weights, SEXP reset_vids
   igraph_vector_int_destroy(&c_vids_data);
   igraph_vs_destroy(&c_vids);
   if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
-    PROTECT(options = R_igraph_arpack_options_to_SEXP(&c_options1));
+    PROTECT(options = Rx_igraph_arpack_options_to_SEXP(&c_options1));
   } else {
     PROTECT(options);
   }
@@ -4464,7 +4464,7 @@ SEXP R_igraph_eigenvector_centrality(SEXP graph, SEXP mode, SEXP weights, SEXP o
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(options=Rx_igraph_arpack_options_to_SEXP(&c_options));
   SET_VECTOR_ELT(r_result, 0, vector);
   SET_VECTOR_ELT(r_result, 1, value);
   SET_VECTOR_ELT(r_result, 2, options);
@@ -4520,7 +4520,7 @@ SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP weights, SEXP options) {
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(options=Rx_igraph_arpack_options_to_SEXP(&c_options));
   SET_VECTOR_ELT(r_result, 0, hub_vector);
   SET_VECTOR_ELT(r_result, 1, authority_vector);
   SET_VECTOR_ELT(r_result, 2, value);
@@ -5207,7 +5207,7 @@ SEXP R_igraph_centralization_eigenvector_centrality(SEXP graph, SEXP mode, SEXP 
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(options=Rx_igraph_arpack_options_to_SEXP(&c_options));
   PROTECT(centralization=NEW_NUMERIC(1));
   REAL(centralization)[0]=c_centralization;
   PROTECT(theoretical_max=NEW_NUMERIC(1));
@@ -12161,7 +12161,7 @@ SEXP R_igraph_eigen_adjacency(SEXP graph, SEXP algorithm, SEXP which, SEXP optio
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(5));
   PROTECT(r_names=NEW_CHARACTER(5));
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
+  PROTECT(options=Rx_igraph_arpack_options_to_SEXP(&c_options));
   PROTECT(values=R_igraph_vector_to_SEXP(&c_values));
   igraph_vector_destroy(&c_values);
   IGRAPH_FINALLY_CLEAN(1);
