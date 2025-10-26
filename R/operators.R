@@ -311,9 +311,9 @@ disjoint_union <- function(...) {
 #' i.e., have distinct vertex sets. First the vertices of the second graph will
 #' be relabeled with new vertex IDs, then the union of the two graphs is formed.
 #' Finally, all vertices from the first graph will be connected to all vertices
-#' from the second graph. If the two graphs have |V1| and |V2| vertices and
-#' |E1| and |E2| edges respectively, then the new graph will have |V1|+|V2|
-#' vertices and |E1|+|E2|+|V1|*|V2| edges. This function can also be used via
+#' from the second graph. If the two graphs have \eqn{|V_1|} and \eqn{|V_2|} vertices and
+#' \eqn{|E_1|} and \eqn{|E_2|} edges respectively, then the new graph will have \eqn{|V_1|+|V_2|}
+#' vertices and \eqn{|E_1|+|E_2|+|V_1| \times |V_2|} edges. This function can also be used via
 #' the `%j%` operator.
 #'
 #' The vertex ordering of the graphs is preserved. In other words, the vertex
