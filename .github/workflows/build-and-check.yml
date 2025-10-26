@@ -3,14 +3,10 @@
 on:
   push:
     branches:
-      - main
-      - fix/*
-  pull_request:
-    branches:
-      - main
-      - fix/*
+      - cran-*
   schedule:
     - cron: '0 2 * * *'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}

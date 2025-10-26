@@ -50,7 +50,12 @@
 #' @cdocs igraph_find_cycle
 #' @export
 
-find_cycle <- find_cycle_impl
+find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
+  find_cycle_impl(
+    graph = graph,
+    mode = mode
+  )
+}
 
 
 #' Finds all simple cycles in a graph.
