@@ -37,9 +37,10 @@ pak::pak(dependencies = "Config/Needs/build")
 
 - Load package for development: `pkgload::load_all()`
 - Run tests: `testthat::test_local(reporter = "check")`
+- Run tests for a single file `test-foo.R`: `testthat::test_local(filter = "foo", reporter = "check")`
 - Build package: `devtools::build()`
 - Check package: `devtools::check()`
-- Update documentation: `devtools::document()`
+- Update `.Rd` documentation: `devtools::document()`
 - Format code: `air format .`
 
 ## Code Style and Documentation
