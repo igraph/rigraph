@@ -1,0 +1,67 @@
+name: Assign AI Issue to Copilot
+
+on:
+  # Run hourly
+  schedule:
+    - cron: "0 * * * *"
+  # Allow manual trigger
+  workflow_dispatch:
+  # Run when workflow changes
+  push:
+    paths:
+      - .github/workflows/assign-ai-issue.yaml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
+
+jobs:
+  check_fork:
+    runs-on: ubuntu-24.04
+    outputs:
+      is_forked: ${{ steps.check.outputs.is_forked }}
+    steps:
+      - name: Check if the repo is forked
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          is_forked=$(gh api repos/${{ github.repository }} | jq .fork)
+          echo "is_forked=${is_forked}" >> $GITHUB_OUTPUT
+        shell: bash
+
+  assign_issue:
+    runs-on: ubuntu-24.04
+    needs: check_fork
+    if: needs.check_fork.outputs.is_forked == 'false'
+    permissions:
+      issues: write
+    steps:
+      - name: Find and assign oldest unassigned AI issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Get all open, unassigned issues with the "AI 🤖" label, sorted by creation date (oldest first)
+          oldest_issue=$(gh issue list \
+            --repo "$REPO" \
+            --label "AI 🤖" \
+            --state open \
+            --json number,createdAt,assignees \
+            --jq 'map(select(.assignees | length == 0)) | sort_by(.createdAt) | .[0].number')
+
+          if [ -n "$oldest_issue" ] && [ "$oldest_issue" != "null" ]; then
+            echo "Found unassigned AI issue #$oldest_issue"
+            echo "Assigning to @github/copilot"
+
+            # Assign the issue to Copilot
+            gh issue edit "$oldest_issue" --repo "$REPO" --add-assignee "@me"
+
+            # Add a comment to the issue
+            gh issue comment "$oldest_issue" --repo "$REPO" --body "🤖 This issue has been assigned to Copilot for automated handling."
+
+            echo "Successfully assigned issue #$oldest_issue"
+          else
+            echo "No unassigned AI issues found"
+          fi
+        shell: bash
