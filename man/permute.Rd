@@ -65,6 +65,7 @@ Other functions for manipulating graph structure:
 \code{\link{igraph-minus}},
 \code{\link{intersection}()},
 \code{\link{intersection.igraph}()},
+\code{\link{join}()},
 \code{\link{path}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},

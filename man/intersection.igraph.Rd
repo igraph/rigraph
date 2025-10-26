@@ -74,6 +74,7 @@ Other functions for manipulating graph structure:
 \code{\link{edge}()},
 \code{\link{igraph-minus}},
 \code{\link{intersection}()},
+\code{\link{join}()},
 \code{\link{path}()},
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
