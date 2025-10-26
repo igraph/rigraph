@@ -367,9 +367,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #'
 #' @param graph The input graph.
 #' @param v The vertex of which the incident edges are queried.
-#' @param mode Whether to query outgoing (\sQuote{out}), incoming
-#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
-#'   ignored for undirected graphs.
+#' @inheritParams neighbors
 #' @return An edge sequence containing the incident edges of
 #'   the input vertex.
 #'
@@ -633,9 +631,7 @@ gorder <- vcount
 #'
 #' @param graph Input graph.
 #' @param v The vertices to query.
-#' @param mode Whether to query outgoing (\sQuote{out}), incoming
-#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
-#'   ignored for undirected graphs.
+#' @inheritParams neighbors
 #' @return A list of vertex sequences.
 #'
 #' @family structural queries
@@ -672,9 +668,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #'
 #' @param graph Input graph.
 #' @param v The vertices to query
-#' @param mode Whether to query outgoing (\sQuote{out}), incoming
-#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
-#'   ignored for undirected graphs.
+#' @inheritParams neighbors
 #' @return A list of edge sequences.
 #'
 #' @family structural queries

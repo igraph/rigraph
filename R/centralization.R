@@ -440,8 +440,7 @@ centr_degree_tmax <- function(
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -525,8 +524,7 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -616,8 +614,7 @@ centr_clo_tmax <- function(
 #' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{vector}{
