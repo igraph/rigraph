@@ -2606,10 +2606,11 @@ make_full_multipartite <- function(
   res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
+  # Transfer graph attributes from res to graph if add.params is enabled
   if (igraph_opt("add.params")) {
-    graph <- set_graph_attr(graph, "name", "Full multipartite graph")
-    graph <- set_graph_attr(graph, "n", n)
-    graph <- set_graph_attr(graph, "mode", mode)
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
   }
   graph
 }
@@ -2658,10 +2659,11 @@ make_turan <- function(n, r) {
   res <- turan_impl(n = n, r = r)
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
+  # Transfer graph attributes from res to graph if add.params is enabled
   if (igraph_opt("add.params")) {
-    graph <- set_graph_attr(graph, "name", "Turan graph")
-    graph <- set_graph_attr(graph, "n", n)
-    graph <- set_graph_attr(graph, "r", r)
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
   }
   graph
 }

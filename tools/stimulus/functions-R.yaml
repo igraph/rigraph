@@ -119,6 +119,20 @@ igraph_realize_bipartite_degree_sequence:
         name: Bipartite graph from degree sequence
       GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
 
+igraph_full_multipartite:
+    DEPS: types ON res$graph
+    R:
+      GATTR:
+        name: Full multipartite graph
+      GATTR-PARAM: n, mode
+
+igraph_turan:
+    DEPS: types ON res$graph
+    R:
+      GATTR:
+        name: Turan graph
+      GATTR-PARAM: n, r
+
 # TODO: temporarily disabled
 igraph_weighted_sparsemat:
     IGNORE: RR, RC
