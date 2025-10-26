@@ -22,4 +22,5 @@ cran
 /rchk
 /src/*.d
 /src/symbols.rds
+/tests/testthat/testthat-problems.rds
 /covr
