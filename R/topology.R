@@ -1370,6 +1370,9 @@ automorphism_group <- function(
 
 #' Transitive closure of a graph
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' Computes the transitive closure of a graph.
 #' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
 #' if \eqn{j} is reachable from \eqn{i} in the original graph.

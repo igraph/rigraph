@@ -15,11 +15,12 @@ A new graph object representing the transitive closure.
 The returned graph will have the same directedness as the input.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Computes the transitive closure of a graph.
 The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
 if \eqn{j} is reachable from \eqn{i} in the original graph.
-}
-\details{
+
 The transitive closure of a graph is a new graph where there is an edge
 between any two vertices if there is a path between them in the original
 graph.
