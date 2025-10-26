@@ -46,7 +46,12 @@ is_tree <- function(
   mode = c("out", "in", "all", "total"),
   details = FALSE
 ) {
-  out <- is_tree_impl(graph, mode, details)
+  out <- is_tree_impl(
+    graph = graph,
+    mode = mode,
+    details = details
+  )
+
   if (isTRUE(details) && !out$res && vcount(graph) > 0) {
     out$root <- V(graph)[1]
   }
@@ -134,7 +139,9 @@ is_forest <- function(
 #' @export
 #' @cdocs igraph_to_prufer
 to_prufer <- function(graph) {
-  to_prufer_impl(graph = graph)
+  to_prufer_impl(
+    graph = graph
+  )
 }
 
 #' Samples from the spanning trees of a graph randomly and uniformly
