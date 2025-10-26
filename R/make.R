@@ -2635,7 +2635,7 @@ make_turan <- function(n, r) {
   res <- turan_impl(n = n, r = r)
 
   if (igraph_opt("add.params")) {
-    res$graph$name <- "Turán graph"
+    res$graph$name <- "Turan graph"
     res$n <- n
     res$r <- r
   }
