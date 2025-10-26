@@ -7740,6 +7740,8 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
   R_SEXP_to_igraph(graph, &c_graph);
   IGRAPH_R_CHECK(igraph_matrix_init(&c_res, 0, 0));
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+  IGRAPH_R_CHECK(igraph_matrix_list_init(&c_routing, 0));
+  IGRAPH_FINALLY(igraph_matrix_list_destroy, &c_routing);
   if (!Rf_isNull(layers)) {
     R_SEXP_to_vector_int_copy(layers, &c_layers);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_layers);
@@ -7766,6 +7768,9 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
   PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(routing=R_igraph_matrixlist_to_SEXP(&c_routing));
+  igraph_matrix_list_destroy(&c_routing);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_layers);
   IGRAPH_FINALLY_CLEAN(1);

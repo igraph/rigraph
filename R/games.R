@@ -1018,13 +1018,11 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
   type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnp,
-    as.numeric(n),
-    as.numeric(p),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnp_impl(
+    n = n,
+    p = p,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {

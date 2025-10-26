@@ -2687,35 +2687,11 @@ cluster_infomap <- function(
   nb.trials = 10,
   modularity = TRUE
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
-    e.weights <- E(graph)$weight
-  }
-  if (!is.null(e.weights) && any(!is.na(e.weights))) {
-    e.weights <- as.numeric(e.weights)
-  } else {
-    e.weights <- NULL
-  }
-  if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) {
-    v.weights <- V(graph)$weight
-  }
-  if (!is.null(v.weights) && any(!is.na(v.weights))) {
-    v.weights <- as.numeric(v.weights)
-  } else {
-    v.weights <- NULL
-  }
-  nb.trials <- as.numeric(nb.trials)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_community_infomap,
-    graph,
-    e.weights,
-    v.weights,
-    nb.trials
+  res <- community_infomap_impl(
+    graph = graph,
+    e.weights = e.weights,
+    v.weights = v.weights,
+    nb.trials = nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
