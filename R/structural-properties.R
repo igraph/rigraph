@@ -1796,7 +1796,11 @@ transitivity <- function(
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call(R_igraph_transitivity_local_undirected_all, graph, isolates_num)
+      res <- .Call(
+        R_igraph_transitivity_local_undirected_all,
+        graph,
+        isolates_num
+      )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name
       }
@@ -1812,6 +1816,7 @@ transitivity <- function(
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name[vids]
       }
+      res
     }
   } else if (type == 2) {
     transitivity_avglocal_undirected_impl(graph, isolates)
@@ -3392,8 +3397,8 @@ is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
-  matching[is.na(matching)] <- -1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE)
+  matching[is.na(matching)] <- 0 # Use 0 since is_matching_impl will subtract 1, making it -1
 
   # Function call
   res <- is_matching_impl(graph, types, matching)
@@ -3407,8 +3412,8 @@ is_max_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
-  matching[is.na(matching)] <- -1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE)
+  matching[is.na(matching)] <- 0 # Use 0 since is_maximal_matching_impl will subtract 1, making it -1
 
   # Function call
   res <- is_maximal_matching_impl(graph, types, matching)
