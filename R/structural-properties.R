@@ -852,8 +852,21 @@ farthest_vertices <- function(
 #' @export
 #' @rdname distances
 #' @cdocs igraph_average_path_length_dijkstra
-mean_distance <- average_path_length_dijkstra_impl
-
+mean_distance <- function(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  unconnected = TRUE,
+  details = FALSE
+) {
+  average_path_length_dijkstra_impl(
+    graph,
+    weights = weights,
+    directed = directed,
+    unconnected = unconnected,
+    details = details
+  )
+}
 
 #' Degree and degree distribution of the vertices
 #'
@@ -927,7 +940,20 @@ degree <- function(
 #' @rdname degree
 #' @export
 #' @cdocs igraph_maxdegree
-max_degree <- maxdegree_impl
+max_degree <- function(
+  graph,
+  ...,
+  v = V(graph),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE
+) {
+  maxdegree_impl(
+    graph,
+    v = v,
+    mode = mode,
+    loops = loops
+  )
+}
 
 #' @rdname degree
 #' @export
