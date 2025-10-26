@@ -1244,7 +1244,7 @@ count_automorphisms <- function(
 ) {
   count_automorphisms_impl(
     graph = graph,
-    colors = colors,
+    colors = if (missing(colors)) missing_arg() else colors,
     sh = sh
   )
 }
