@@ -173,8 +173,8 @@ preference.game <- function(
 lastcit.game <- function(
   n,
   edges = 1,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins,
+  pref,
   directed = TRUE
 ) {
   # nocov start
@@ -2149,9 +2149,13 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
 #' @param agebins Number of aging bins.
+#'   Must be at least 1.
+#'   This determines how finely the aging process is discretized.
 #' @param pref Vector (`sample_last_cit()` and `sample_cit_types()` or
 #'   matrix (`sample_cit_cit_types()`) giving the (unnormalized) citation
 #'   probabilities for the different vertex types.
+#'   For `sample_last_cit()`, this should be a numeric vector of length `agebins + 1`.
+#'   A common choice is a power-law decay, e.g., `(1:(agebins + 1))^-3`.
 #' @param directed Logical scalar, whether to generate directed networks.
 #' @param types Vector of length \sQuote{`n`}, the types of the vertices.
 #'   Types are numbered from zero.
@@ -2161,12 +2165,20 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family games
+#' @examples
+#' # Create a citation graph with 100 vertices, 5 age bins,
+#' # and preferential attachment following a t^-3 power-law decay
+#' g <- sample_last_cit(100, edges = 1, agebins = 5, pref = (1:6)^-3)
+#' 
+#' # The preference vector determines how likely vertices in each age bin
+#' # are to receive citations. Newer vertices (lower indices) are preferred.
+#' g2 <- sample_last_cit(200, edges = 2, agebins = 10, pref = (1:11)^-2)
 #' @export
 sample_last_cit <- function(
   n,
   edges = 1,
-  agebins = n / 7100,
-  pref = (1:(agebins + 1))^-3,
+  agebins,
+  pref,
   directed = TRUE
 ) {
   on.exit(.Call(R_igraph_finalizer))
