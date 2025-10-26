@@ -77,13 +77,19 @@ get.edge <- function(graph, id) {
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.
-#' @return A vertex sequence with the head(s) of the edge(s).
+#' @return A vertex sequence with the head(s) of the edge(s) if
+#'   the `return.vs.es` igraph option is true (the default), or a numeric
+#'   vector of vertex IDs otherwise.
 #'
 #' @family structural queries
 #'
 #' @export
 head_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[, 2])
+  res <- ends(graph, es, names = FALSE)[, 2]
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
 }
 
 #' Tails of the edge(s) in a graph
@@ -94,11 +100,17 @@ head_of <- function(graph, es) {
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.
-#' @return A vertex sequence with the tail(s) of the edge(s).
+#' @return A vertex sequence with the tail(s) of the edge(s) if
+#'   the `return.vs.es` igraph option is true (the default), or a numeric
+#'   vector of vertex IDs otherwise.
 #'
 #' @family structural queries
 #'
 #' @export
 tail_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[, 1])
+  res <- ends(graph, es, names = FALSE)[, 1]
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
 }
