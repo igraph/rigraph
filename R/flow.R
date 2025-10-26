@@ -978,7 +978,9 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' @family flow
 #' @cdocs igraph_all_minimal_st_separators
 min_st_separators <- function(graph) {
-  all_minimal_st_separators_impl(graph = graph)
+  all_minimal_st_separators_impl(
+    graph = graph
+  )
 }
 
 
@@ -1214,5 +1216,7 @@ is_min_separator <- function(graph, candidate) {
 #' min_separators(camp)
 #' @cdocs igraph_minimum_size_separators
 min_separators <- function(graph) {
-  minimum_size_separators_impl(graph = graph)
+  minimum_size_separators_impl(
+    graph = graph
+  )
 }

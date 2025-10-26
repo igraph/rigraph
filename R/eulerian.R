@@ -68,14 +68,22 @@
 #' @export
 #' @cdocs igraph_is_eulerian
 has_eulerian_path <- function(graph) {
-  is_eulerian_impl(graph)$has_path
+  res <- is_eulerian_impl(
+    graph = graph
+  )
+
+  res$has_path
 }
 
 #' @rdname has_eulerian_path
 #' @export
 #' @cdocs igraph_is_eulerian
 has_eulerian_cycle <- function(graph) {
-  is_eulerian_impl(graph)$has_cycle
+  res <- is_eulerian_impl(
+    graph = graph
+  )
+
+  res$has_cycle
 }
 
 #' @rdname has_eulerian_path

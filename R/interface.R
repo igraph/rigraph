@@ -356,7 +356,11 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
     stop("No vertex was specified")
   }
 
-  neighbors_impl(graph, vid = v, mode = mode)
+  neighbors_impl(
+    graph = graph,
+    vid = v,
+    mode = mode
+  )
 }
 
 #' Incident edges of a vertex in a graph
@@ -402,7 +406,7 @@ incident <- function(
   }
 
   incident_impl(
-    graph,
+    graph = graph,
     vid = v,
     mode = mode,
     loops = loops
@@ -624,7 +628,9 @@ get.edge.ids <- function(
 #' vcount(g)
 #' @cdocs igraph_vcount
 vcount <- function(graph) {
-  as.numeric(vcount_impl(graph))
+  as.numeric(vcount_impl(
+    graph = graph
+  ))
 }
 
 #' @export

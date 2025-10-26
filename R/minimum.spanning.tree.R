@@ -88,7 +88,7 @@ mst <- function(
   ensure_igraph(graph)
   algorithm <- igraph.match.arg(algorithm)
   minimum_spanning_tree_impl(
-    graph,
+    graph = graph,
     weights = weights,
     method = algorithm
   )

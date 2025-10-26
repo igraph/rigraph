@@ -759,11 +759,12 @@ diameter <- function(
   ensure_igraph(graph)
 
   res <- diameter_impl(
-    graph,
+    graph = graph,
     weights = weights,
     directed = directed,
     unconnected = unconnected
   )
+
   res$res
 }
 
@@ -850,7 +851,7 @@ mean_distance <- function(
   details = FALSE
 ) {
   res <- average_path_length_impl(
-    graph,
+    graph = graph,
     weights = weights,
     directed = directed,
     unconn = unconnected,
@@ -932,7 +933,7 @@ degree <- function(
   loops <- igraph.match.arg(loops)
 
   res <- degree_impl(
-    graph,
+    graph = graph,
     vids = v,
     mode = mode,
     loops = loops
@@ -974,7 +975,7 @@ max_degree <- function(
   loops <- igraph.match.arg(loops)
 
   maxdegree_impl(
-    graph,
+    graph = graph,
     v = v,
     mode = mode,
     loops = loops
@@ -1427,14 +1428,14 @@ all_shortest_paths <- function(
 
   if (is.null(weights)) {
     res <- get_all_shortest_paths_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       mode = mode
     )
   } else {
     res <- get_all_shortest_paths_dijkstra_impl(
-      graph,
+      graph = graph,
       from = from,
       to = to,
       weights = weights,
@@ -1503,7 +1504,6 @@ k_shortest_paths <- function(
     from = from,
     to = to,
     k = k,
-    ...,
     weights = weights,
     mode = mode
   )
@@ -3316,9 +3316,19 @@ laplacian_matrix <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (sparse) {
-    res <- get_laplacian_sparse_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_sparse_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   } else {
-    res <- get_laplacian_impl(graph, "out", normalization, weights)
+    res <- get_laplacian_impl(
+      graph = graph,
+      mode = "out",
+      normalization = normalization,
+      weights = weights
+    )
   }
   if (sparse) {
     res <- igraph.i.spMatrix(res)

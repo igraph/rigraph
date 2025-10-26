@@ -427,7 +427,7 @@ centr_degree_tmax <- function(
 
   # Function call
   res <- centralization_degree_tmax_impl(
-    graph,
+    graph = graph,
     nodes = nodes,
     mode = mode,
     loops = loops
@@ -713,9 +713,9 @@ centr_eigen <- function(
 
   centralization_eigenvector_centrality_impl(
     graph = graph,
+    mode = mode,
     options = options,
-    normalized = normalized,
-    mode = mode
+    normalized = normalized
   )
 }
 

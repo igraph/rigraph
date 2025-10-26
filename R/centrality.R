@@ -1247,7 +1247,7 @@ spectrum <- function(
   }
 
   eigen_adjacency_impl(
-    graph,
+    graph = graph,
     algorithm = algorithm,
     which = which,
     options = options

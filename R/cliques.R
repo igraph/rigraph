@@ -429,9 +429,9 @@ weighted_cliques <- function(
   weighted_cliques_impl(
     graph = graph,
     vertex.weights = vertex.weights,
+    maximal = maximal,
     min.weight = min.weight,
-    max.weight = max.weight,
-    maximal = maximal
+    max.weight = max.weight
   )
 }
 #' @export
@@ -611,9 +611,17 @@ independence_number <- ivs_size
 #' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
-    maximal_cliques_hist_impl(graph, min, max)
+    maximal_cliques_hist_impl(
+      graph = graph,
+      min.size = min,
+      max.size = max
+    )
   } else {
-    clique_size_hist_impl(graph, min, max)
+    clique_size_hist_impl(
+      graph = graph,
+      min.size = min,
+      max.size = max
+    )
   }
 }
 

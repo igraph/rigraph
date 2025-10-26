@@ -1698,7 +1698,7 @@ cluster_leiden <- function(
   membership <- initial_membership
   if (n_iterations > 0) {
     res <- community_leiden_impl(
-      graph,
+      graph = graph,
       weights = weights,
       # FIXME: Also check below, might not be covered by tests
       vertex.weights = vertex_weights,
@@ -1708,6 +1708,7 @@ cluster_leiden <- function(
       n.iterations = n_iterations,
       membership = membership
     )
+
     membership <- res$membership
   } else {
     prev_quality <- -Inf
@@ -1715,7 +1716,7 @@ cluster_leiden <- function(
     while (prev_quality < quality) {
       prev_quality <- quality
       res <- community_leiden_impl(
-        graph,
+        graph = graph,
         weights = weights,
         # FIXME: Also check above, might not be covered by tests
         vertex.weights = vertex_weights,
@@ -1725,6 +1726,7 @@ cluster_leiden <- function(
         n.iterations = 1,
         membership = membership
       )
+
       membership <- res$membership
       quality <- res$quality
     }
@@ -2420,7 +2422,7 @@ cluster_label_prop0 <- function(
 
   # Function call
   membership <- community_label_propagation_impl(
-    graph,
+    graph = graph,
     mode = mode,
     weights = weights,
     initial = initial,
@@ -2614,9 +2616,10 @@ cluster_optimal <- function(graph, weights = NULL) {
 
   # Function call
   res <- community_optimal_modularity_impl(
-    graph,
+    graph = graph,
     weights = weights
   )
+
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -3313,7 +3316,6 @@ voronoi_cells <- function(
   voronoi_impl(
     graph = graph,
     generators = generators,
-    ...,
     weights = weights,
     mode = mode,
     tiebreaker = tiebreaker

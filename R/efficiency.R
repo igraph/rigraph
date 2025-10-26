@@ -87,8 +87,8 @@ local_efficiency <- function(
 ) {
   local_efficiency_impl(
     graph = graph,
-    vids = vids,
     weights = weights,
+    vids = vids,
     directed = directed,
     mode = mode
   )

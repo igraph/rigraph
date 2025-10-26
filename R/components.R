@@ -258,14 +258,18 @@ decompose <- function(
 #' @export
 #' @cdocs igraph_articulation_points
 articulation_points <- function(graph) {
-  articulation_points_impl(graph = graph)
+  articulation_points_impl(
+    graph = graph
+  )
 }
 
 #' @rdname articulation_points
 #' @export
 #' @cdocs igraph_bridges
 bridges <- function(graph) {
-  bridges_impl(graph = graph)
+  bridges_impl(
+    graph = graph
+  )
 }
 
 
@@ -319,7 +323,9 @@ bridges <- function(graph) {
 #' @cdocs igraph_biconnected_components
 biconnected_components <- function(graph) {
   # Function call
-  res <- biconnected_components_impl(graph)
+  res <- biconnected_components_impl(
+    graph = graph
+  )
 
   # TODO: Clean up after fixing "." / "_" problem.
   # See https://github.com/igraph/rigraph/issues/1203
@@ -388,7 +394,9 @@ biconnected_components <- function(graph) {
 #' @export
 #' @cdocs igraph_is_biconnected
 is_biconnected <- function(graph) {
-  is_biconnected_impl(graph = graph)
+  is_biconnected_impl(
+    graph = graph
+  )
 }
 
 
