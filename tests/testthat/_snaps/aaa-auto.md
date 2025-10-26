@@ -4257,18 +4257,22 @@
       
       $tree_edges
       $tree_edges[[1]]
-      [1] 2
+      + 1/2 edge:
+      [1] 2--3
       
       $tree_edges[[2]]
-      [1] 1
+      + 1/2 edge:
+      [1] 1--2
       
       
       $component_edges
       $component_edges[[1]]
-      [1] 2
+      + 1/2 edge:
+      [1] 2--3
       
       $component_edges[[2]]
-      [1] 1
+      + 1/2 edge:
+      [1] 1--2
       
       
       $components
@@ -4282,16 +4286,8 @@
       
       
       $articulation_points
+      + 1/3 vertex:
       [1] 2
-      
-      $tree.edges
-      list()
-      
-      $component.edges
-      list()
-      
-      $articulation.points
-      + 0/3 vertices:
       
 
 # biconnected_components_impl errors
