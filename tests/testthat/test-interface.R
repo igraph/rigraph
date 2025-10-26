@@ -229,3 +229,29 @@ test_that("incident() works", {
   expect_snapshot(incident(g, 1))
   expect_snapshot(incident(g, 34))
 })
+
+test_that("invalidate_cache works", {
+  g <- make_ring(10)
+
+  # Cache is populated when calling is_simple()
+  expect_true(is_simple(g))
+
+  # Invalidate cache
+  result <- invalidate_cache(g)
+
+  # Result should be the same after cache invalidation
+  expect_true(is_simple(result))
+
+  # Function should return a graph object
+  expect_true(is_igraph(result))
+
+  # Graph properties should be preserved
+  expect_equal(vcount(result), 10)
+  expect_equal(ecount(result), 10)
+})
+
+test_that("invalidate_cache errors on invalid input", {
+  expect_error(invalidate_cache(NULL))
+  expect_error(invalidate_cache("not a graph"))
+  expect_error(invalidate_cache(123))
+})
