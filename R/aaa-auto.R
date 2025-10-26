@@ -6965,7 +6965,7 @@ isomorphic_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -6975,7 +6975,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -6985,7 +6985,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -6995,7 +6995,7 @@ isomorphic_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7032,7 +7032,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7042,7 +7042,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7052,7 +7052,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7062,7 +7062,7 @@ get_isomorphisms_vf2_callback_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7099,7 +7099,7 @@ count_isomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7109,7 +7109,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7119,7 +7119,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7129,7 +7129,7 @@ count_isomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7166,7 +7166,7 @@ get_isomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7176,7 +7176,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7186,7 +7186,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7196,7 +7196,7 @@ get_isomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7252,7 +7252,7 @@ subisomorphic_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7262,7 +7262,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7272,7 +7272,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7282,7 +7282,7 @@ subisomorphic_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7319,7 +7319,7 @@ count_subisomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7329,7 +7329,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7339,7 +7339,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7349,7 +7349,7 @@ count_subisomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7386,7 +7386,7 @@ get_subisomorphisms_vf2_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(vertex.color1)) {
+  if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
     } else {
@@ -7396,7 +7396,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color1)) {
     vertex.color1 <- as.numeric(vertex.color1)-1
   }
-  if (is.null(vertex.color2)) {
+  if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       vertex.color2 <- V(graph2)$color
     } else {
@@ -7406,7 +7406,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(vertex.color2)) {
     vertex.color2 <- as.numeric(vertex.color2)-1
   }
-  if (is.null(edge.color1)) {
+  if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
       edge.color1 <- E(graph1)$color
     } else {
@@ -7416,7 +7416,7 @@ get_subisomorphisms_vf2_impl <- function(
   if (!is.null(edge.color1)) {
     edge.color1 <- as.numeric(edge.color1)-1
   }
-  if (is.null(edge.color2)) {
+  if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
       edge.color2 <- E(graph2)$color
     } else {
@@ -7449,7 +7449,7 @@ canonical_permutation_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(colors)) {
+  if (missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -7502,7 +7502,7 @@ isomorphic_bliss_impl <- function(
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is.null(colors1)) {
+  if (missing(colors1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       colors1 <- V(graph1)$color
     } else {
@@ -7512,7 +7512,7 @@ isomorphic_bliss_impl <- function(
   if (!is.null(colors1)) {
     colors1 <- as.numeric(colors1)-1
   }
-  if (is.null(colors2)) {
+  if (missing(colors2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
       colors2 <- V(graph2)$color
     } else {
@@ -7545,7 +7545,7 @@ count_automorphisms_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(colors)) {
+  if (missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -7577,7 +7577,7 @@ automorphism_group_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(colors)) {
+  if (missing(colors)) {
     if ("color" %in% vertex_attr_names(graph)) {
       colors <- V(graph)$color
     } else {
@@ -8311,7 +8311,7 @@ is_vertex_coloring_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(types)) {
+  if (missing(types)) {
     if ("color" %in% vertex_attr_names(graph)) {
       types <- V(graph)$color
     } else {
@@ -8358,7 +8358,7 @@ is_edge_coloring_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(types)) {
+  if (missing(types)) {
     if ("color" %in% edge_attr_names(graph)) {
       types <- E(graph)$color
     } else {
