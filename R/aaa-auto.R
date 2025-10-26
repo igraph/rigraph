@@ -5717,7 +5717,7 @@ hrg_fit_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -5741,7 +5741,7 @@ hrg_sample_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -5761,7 +5761,7 @@ hrg_sample_many_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   num.samples <- as.numeric(num.samples)
@@ -5782,7 +5782,7 @@ hrg_game_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -5809,7 +5809,7 @@ hrg_consensus_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -5838,7 +5838,7 @@ hrg_predict_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -5887,7 +5887,7 @@ hrg_resize_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   newsize <- as.numeric(newsize)
@@ -5908,7 +5908,7 @@ hrg_size_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -5927,7 +5927,7 @@ from_hrg_dendrogram_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -7825,7 +7825,7 @@ adjacency_spectral_embedding_impl <- function(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = strength(graph, weights=weights)/(vcount(graph)-1),
+  cvec = strength(graph, weights = weights)/(vcount(graph)-1),
   options = arpack_defaults()
 ) {
   # Argument checks

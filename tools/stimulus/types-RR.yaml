@@ -29,7 +29,7 @@ INDEX_VECTOR:
 
 VECTOR:
     DEFAULT:
-        AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
+        AsmDefaultCvec: strength(%I1%, weights = weights)/(vcount(%I1%)-1)
     INCONV: '%I% <- as.numeric(%I%)'
 
 VERTEX_QTY:
@@ -365,7 +365,7 @@ HRG:
         Default: 'NULL'
     INCONV: |-
         if (is.null(%I%)) {
-          %I% <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+          %I% <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
         }
         %I% <- lapply(%I%[c("left","right","prob","edges","vertices")], as.numeric)
 
