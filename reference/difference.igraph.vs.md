@@ -57,6 +57,6 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 difference(V(g), V(g)[6:10])
-#> + 5/10 vertices, named, from a8ff27d:
+#> + 5/10 vertices, named, from 60bc352:
 #> [1] A B C D E
 ```

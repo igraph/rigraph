@@ -132,105 +132,105 @@ domains <- list(
 )
 subgraph_isomorphisms(pattern, target)
 #> [[1]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 2 1 7 6 5
 #> 
 #> [[2]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 4 3 2 5
 #> 
 #> [[4]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 8 4 5 6 9
 #> 
 #> [[5]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 5 4 8 9 6
 #> 
 #> [[6]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 9 4 5 7 6
 #> 
 #> [[7]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 5 4 6 7
 #> 
 #> [[8]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 5 4 3 2
 #> 
 #> [[9]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 4 5 1 7 6
 #> 
 #> [[10]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 7 5 4 9 6
 #> 
 #> [[11]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 5 2 3 4
 #> 
 #> [[12]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 5 2 1 7
 #> 
 #> [[13]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 2 5 6 7 1
 #> 
 #> [[14]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 9 6 7 5 4
 #> 
 #> [[15]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 5 6 9 8 4
 #> 
 #> [[16]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 4 6 7 1 5
 #> 
 #> [[17]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 7 6 9 4 5
 #> 
 #> [[18]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 7 6 4 5
 #> 
 #> [[19]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 7 1 2 5
 #> 
 #> [[20]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 8 9 6 5 4
 #> 
 subgraph_isomorphisms(pattern, target, induced = TRUE)
 #> [[1]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 4 3 2 5
 #> 
 #> [[3]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 6 5 2 3 4
 #> 
 #> [[4]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 5 4 3 2
 #> 
 subgraph_isomorphisms(pattern, target, domains = domains)
 #> [[1]]
-#> + 5/9 vertices, named, from 12657ce:
+#> + 5/9 vertices, named, from 8e91e4b:
 #> [1] 1 5 4 3 2
 #> 
 
