@@ -385,8 +385,7 @@ centr_degree <- function(
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
-#' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#' @inheritParams centr_degree
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'

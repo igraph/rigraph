@@ -1057,9 +1057,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #'
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1119,9 +1117,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #'   the graph (for \eqn{G(n,m)} graphs).
 #' @param type The type of the random graph to create, either `gnp()`
 #'   (\eqn{G(n,p)} graph) or `gnm()` (\eqn{G(n,m)} graph).
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes

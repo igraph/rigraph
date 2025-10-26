@@ -1409,7 +1409,7 @@ eigen_centrality <- function(
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
-#' @param loops Logical; whether the loop edges are also counted.
+#' @inheritParams degree
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a
