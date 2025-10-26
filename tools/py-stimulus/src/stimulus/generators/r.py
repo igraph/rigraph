@@ -51,7 +51,21 @@ def optional_wrapper_r(conv: str) -> str:
     if "is.null" in conv:
         return conv
 
-    return f"if (!is.null(%I%)) {conv}"
+    # Check if conv is a multi-line block
+    if "\n" in conv:
+        # Wrap multi-line block with if statement and proper indentation
+        lines = conv.split("\n")
+        wrapped_lines = [f"if (!is.null(%I%)) {{"]
+        for line in lines:
+            if line.strip():  # Only indent non-empty lines
+                wrapped_lines.append(f"  {line}")
+            else:
+                wrapped_lines.append(line)
+        wrapped_lines.append("}")
+        return "\n".join(wrapped_lines)
+    else:
+        # Single-line: wrap as before
+        return f"if (!is.null(%I%)) {conv}"
 
 
 def format_switch_statement(code: str) -> str:
@@ -600,7 +614,10 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
                     and not param.is_output
                     and call != "0"
                 ):
-                    call = f"(Rf_isNull(%I%) ? 0 : {call})"
+                    # For VERTEX types, use -1 when NULL (indicates no vertex/all components)
+                    # For other types, use 0
+                    null_value = "-1" if param.type == "VERTEX" else "0"
+                    call = f"(Rf_isNull(%I%) ? {null_value} : {call})"
                 call = call.replace("%C%", f"c_{param.name}").replace("%I%", param.name)
                 calls.append(call)
 
