@@ -2129,6 +2129,52 @@ tree <- function(...) {
 
 ## -----------------------------------------------------------------
 
+#' Create a Mycielski graph
+#'
+#' The Mycielski graph of order `k`, denoted M_k, is a triangle-free graph with
+#' chromatic number `k`.
+#' It is constructed using the Mycielski transformation as described in
+#' [mycielskian()].
+#'
+#' The Mycielski graph M_k is defined for all non-negative integers `k`.
+#' The first few Mycielski graphs are:
+#' * M_0: Null graph (no vertices)
+#' * M_1: Single vertex
+#' * M_2: Path graph with 2 vertices
+#' * M_3: Cycle graph with 5 vertices (pentagon)
+#' * M_4: Grötzsch graph (triangle-free with chromatic number 4)
+#'
+#' The vertex count of M_k is `3 * 2^(k-2) - 1` for `k > 1` and `k` otherwise.
+#' The edge count is `(7 * 3^(k-2) + 1) / 2 - 3 * 2^(k - 2)` for `k > 1` and 0
+#' otherwise.
+#'
+#' @param k Integer, the order of the Mycielski graph (must be non-negative).
+#' @return An igraph graph object.
+#'
+#' @family deterministic constructors
+#' @seealso [mycielskian()] for the Mycielski transformation of an arbitrary graph
+#' @export
+#' @examples
+#' # Create some Mycielski graphs
+#' g2 <- make_mycielski_graph(2)
+#' print_all(g2)
+#'
+#' # M_3 is a cycle graph with 5 vertices
+#' g3 <- make_mycielski_graph(3)
+#' print_all(g3)
+#' isomorphic(g3, make_ring(5))
+#'
+#' # M_4 is the Grötzsch graph
+#' g4 <- make_mycielski_graph(4)
+#' vcount(g4)
+#' ecount(g4)
+make_mycielski_graph <- function(k) {
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_mycielski_graph, as.numeric(k))
+}
+
+## -----------------------------------------------------------------
+
 #' Create an undirected tree graph from its Prüfer sequence
 #'
 #' `make_from_prufer()` creates an undirected tree graph from its Prüfer

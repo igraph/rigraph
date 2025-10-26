@@ -1346,3 +1346,60 @@ reverse_edges <- function(graph, eids = E(graph)) {
 #' @method t igraph
 #' @export
 t.igraph <- function(x) reverse_edges(x)
+
+
+#' Mycielski transformation of a graph
+#'
+#' The Mycielskian of a graph is a larger graph formed using a construction due
+#' to Jan Mycielski that increases the chromatic number by one while preserving
+#' the triangle-free property.
+#' The Mycielski construction can be used to create triangle-free graphs with an
+#' arbitrarily large chromatic number.
+#'
+#' Let the `n` vertices of the given graph `G` be v_1, ..., v_n.
+#' The Mycielskian of `G`, denoted M(G), contains `G` itself as a subgraph,
+#' together with `n+1` additional vertices:
+#' * A vertex u_i corresponding to each vertex v_i of `G`.
+#' * An extra vertex w.
+#'
+#' The edges are added as follows:
+#' * Each vertex u_i is connected to w, forming a star.
+#' * For each edge (v_i, v_j) in `G`, two new edges are added:
+#'   (u_i, v_j) and (v_i, u_j).
+#'
+#' Thus, if `G` has `n` vertices and `m` edges, the Mycielskian M(G) has
+#' `2n + 1` vertices, and `3m + n` edges.
+#'
+#' This function can apply the Mycielski transformation an arbitrary number of
+#' times, controlled by the parameter `k`. The k-th iterated Mycielskian has
+#' `n_k = (n + 1) * 2^k - 1` vertices and
+#' `m_k = ((2m + 2n + 1) * 3^k - n_{k+1}) / 2` edges, where `n` and `m` are the
+#' vertex and edge count of the original graph, respectively.
+#'
+#' @param graph The input graph.
+#' @param k Integer, the number of Mycielski iterations to perform (must be
+#'   non-negative).
+#' @return An igraph graph object.
+#'
+#' @family functions for manipulating graph structure
+#' @seealso [make_mycielski_graph()] for creating Mycielski graphs directly
+#' @export
+#' @examples
+#' # Create a Mycielskian of a triangle
+#' g <- make_full_graph(3)
+#' mg <- mycielskian(g, 1)
+#' print_all(mg)
+#' vcount(mg)  # Should be 2*3 + 1 = 7
+#' ecount(mg)  # Should be 3*3 + 3 = 12
+#'
+#' # Two iterations of the Mycielski transformation
+#' g <- make_ring(5)
+#' mg <- mycielskian(g, 2)
+#' vcount(mg)
+#' ecount(mg)
+mycielskian <- function(graph, k = 1) {
+  ensure_igraph(graph)
+
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_mycielskian, graph, as.numeric(k))
+}
