@@ -48,7 +48,7 @@ graph.motifs.est <- function(
   graph,
   size = 3,
   cut.prob = rep(0, size),
-  sample.size = vcount(graph) / 10,
+  sample.size = NULL,
   sample = NULL
 ) {
   # nocov start
