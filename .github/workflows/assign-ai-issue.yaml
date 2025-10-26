@@ -51,8 +51,14 @@ jobs:
           if [ "$(printf '%s\n' "$required_version" "$current_version" | sort -V | head -n1)" != "$required_version" ]; then
             echo "Current gh version ($current_version) is below required ($required_version), upgrading..."
             # Use official installation from GitHub releases
-            curl -fsSL https://github.com/cli/cli/releases/latest/download/gh_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz | \
-              sudo tar -xz -C /usr/local --strip-components=1
+            
+            # Get latest version
+            latest_version=$(curl -fsSL https://api.github.com/repos/cli/cli/releases/latest | jq -r .tag_name | sed 's/^v//')
+            
+            # Download and install latest gh
+            gh_url="https://github.com/cli/cli/releases/download/v${latest_version}/gh_${latest_version}_linux_amd64.tar.gz"
+            echo "Downloading from: $gh_url"
+            curl -fsSL "$gh_url" | sudo tar -xz -C /usr/local --strip-components=1
             gh --version
           else
             echo "gh version $current_version is sufficient"
