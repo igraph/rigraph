@@ -66,7 +66,7 @@ When running in CI/CD, assume R, the package, and all dependencies are already i
 
 ### Naming Conventions
 
-- Use `max` for maximal and `largest` for maximum
+- Use `max` for maximal (graph theory term: a vertex is maximal if no other vertex dominates it) and `largest` for maximum (the biggest value in a set)
 - Align script and test names: code in `R/name.R` should be tested in `tests/testthat/test-name.R`
 
 ### Commit and PR Style
@@ -129,10 +129,10 @@ Then vendor the changes using:
 
 ## Common Pitfalls
 
-- Don't install new packages unless necessary for new features or tests
+- Don't install new packages unless absolutely necessary for new features or tests. Prefer base R or existing package solutions when feasible. Evaluate necessity by checking if functionality can be implemented with existing tools.
 - Don't restyle unrelated code in a PR
 - Ensure parent directories exist before creating files
-- On Windows, ensure RTools is installed and system requirements (glpk, libxml2) are met
+- On Windows, ensure RTools is installed and system requirements (glpk, libxml2) are met. For R >= 4.0, install these from an RTools terminal: `pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2`. See README.md for more details.
 - Don't modify generated files directly (e.g., `src/rinterface.c`, `R/aaa-auto.R`)
 
 ## Resources
