@@ -965,7 +965,10 @@ get.incidence.dense <- function(
 ) {
   if (is.null(attr)) {
     ## Function call
-    res <- get_biadjacency_impl(graph, types)
+    res <- get_biadjacency_impl(
+      graph = graph,
+      types = types
+    )
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[res$row_ids]
