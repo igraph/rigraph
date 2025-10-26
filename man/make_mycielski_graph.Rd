@@ -13,12 +13,12 @@ make_mycielski_graph(k)
 An igraph graph object.
 }
 \description{
-The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with
-chromatic number \eqn{k}.
-It is constructed using the Mycielski transformation as described in
-\code{\link[=mycielskian]{mycielskian()}}.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
+The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with chromatic number \eqn{k}.
+It is constructed using the Mycielski transformation as described in \code{\link[=mycielskian]{mycielskian()}}.
+
 The Mycielski graph \eqn{M_k} is defined for all non-negative integers \eqn{k}.
 The first few Mycielski graphs are:
 \itemize{
@@ -30,8 +30,7 @@ The first few Mycielski graphs are:
 }
 
 The vertex count of \eqn{M_k} is \eqn{3 \cdot 2^{k-2} - 1} for \eqn{k > 1} and \eqn{k} otherwise.
-The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k - 2}} for \eqn{k > 1} and 0
-otherwise.
+The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k - 2}} for \eqn{k > 1} and 0 otherwise.
 }
 \examples{
 # Create some Mycielski graphs
@@ -66,4 +65,5 @@ Other deterministic constructors:
 \code{\link{make_star}()},
 \code{\link{make_tree}()}
 }
+\concept{Mycielski graph}
 \concept{deterministic constructors}

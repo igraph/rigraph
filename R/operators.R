@@ -1350,37 +1350,30 @@ t.igraph <- function(x) reverse_edges(x)
 
 #' Mycielski transformation of a graph
 #'
-#' The Mycielskian of a graph is a larger graph formed using a construction due
-#' to Jan Mycielski that increases the chromatic number by one while preserving
-#' the triangle-free property.
-#' The Mycielski construction can be used to create triangle-free graphs with an
-#' arbitrarily large chromatic number.
+#' `r lifecycle::badge("experimental")`
+#'
+#' The Mycielskian of a graph is a larger graph formed using a construction due to Jan Mycielski that increases the chromatic number by one while preserving the triangle-free property.
+#' The Mycielski construction can be used to create triangle-free graphs with an arbitrarily large chromatic number.
 #'
 #' Let the \eqn{n} vertices of the given graph \eqn{G} be \eqn{v_1, \ldots, v_n}.
-#' The Mycielskian of \eqn{G}, denoted \eqn{M(G)}, contains \eqn{G} itself as a subgraph,
-#' together with \eqn{n+1} additional vertices:
+#' The Mycielskian of \eqn{G}, denoted \eqn{M(G)}, contains \eqn{G} itself as a subgraph, together with \eqn{n+1} additional vertices:
 #' * A vertex \eqn{u_i} corresponding to each vertex \eqn{v_i} of \eqn{G}.
 #' * An extra vertex \eqn{w}.
 #'
 #' The edges are added as follows:
 #' * Each vertex \eqn{u_i} is connected to \eqn{w}, forming a star.
-#' * For each edge \eqn{(v_i, v_j)} in \eqn{G}, two new edges are added:
-#'   \eqn{(u_i, v_j)} and \eqn{(v_i, u_j)}.
+#' * For each edge \eqn{(v_i, v_j)} in \eqn{G}, two new edges are added: \eqn{(u_i, v_j)} and \eqn{(v_i, u_j)}.
 #'
-#' Thus, if \eqn{G} has \eqn{n} vertices and \eqn{m} edges, the Mycielskian \eqn{M(G)} has
-#' \eqn{2n + 1} vertices, and \eqn{3m + n} edges.
+#' Thus, if \eqn{G} has \eqn{n} vertices and \eqn{m} edges, the Mycielskian \eqn{M(G)} has \eqn{2n + 1} vertices, and \eqn{3m + n} edges.
 #'
-#' This function can apply the Mycielski transformation an arbitrary number of
-#' times, controlled by the parameter \eqn{k}. The \eqn{k}-th iterated Mycielskian has
-#' \eqn{n_k = (n + 1) \cdot 2^k - 1} vertices and
-#' \eqn{m_k = ((2m + 2n + 1) \cdot 3^k - n_{k+1}) / 2} edges, where \eqn{n} and \eqn{m} are the
-#' vertex and edge count of the original graph, respectively.
+#' This function can apply the Mycielski transformation an arbitrary number of times, controlled by the parameter \eqn{k}.
+#' The \eqn{k}-th iterated Mycielskian has \eqn{n_k = (n + 1) \cdot 2^k - 1} vertices and \eqn{m_k = ((2m + 2n + 1) \cdot 3^k - n_{k+1}) / 2} edges, where \eqn{n} and \eqn{m} are the vertex and edge count of the original graph, respectively.
 #'
 #' @param graph The input graph.
-#' @param k Integer, the number of Mycielski iterations to perform (must be
-#'   non-negative).
+#' @param k Integer, the number of Mycielski iterations to perform (must be non-negative).
 #' @return An igraph graph object.
 #'
+#' @concept Mycielski graph
 #' @family functions for manipulating graph structure
 #' @seealso [make_mycielski_graph()] for creating Mycielski graphs directly
 #' @export
