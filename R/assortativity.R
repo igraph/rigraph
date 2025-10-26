@@ -212,7 +212,13 @@ assortativity <- function(
     values.in <- types2
   }
 
-  assortativity_impl(graph, values, values.in, directed, normalized)
+  assortativity_impl(
+    graph = graph,
+    values = values,
+    values.in = values.in,
+    directed = directed,
+    normalized = normalized
+  )
 }
 
 assortativity_legacy <- function(
@@ -221,7 +227,12 @@ assortativity_legacy <- function(
   types2 = NULL,
   directed = TRUE
 ) {
-  assortativity_impl(graph, types1, types2, directed)
+  assortativity_impl(
+    graph = graph,
+    values = types1,
+    values.in = types2,
+    directed = directed
+  )
 }
 
 #' @param types Vector giving the vertex types. They as assumed to be integer
