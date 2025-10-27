@@ -205,12 +205,12 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`read_graph_dimacs_flow()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_dimacs_flow),
-[`read_graph_dl()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_dl),
-[`read_graph_edgelist()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_edgelist),
-[`read_graph_gml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_gml),
-[`read_graph_graphdb()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphdb),
-[`read_graph_graphml()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_graphml),
-[`read_graph_lgl()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_lgl),
-[`read_graph_ncol()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_ncol),
-[`read_graph_pajek()`](https://igraph.org/c/html/0.10.17/igraph-Foreign.html#igraph_read_graph_pajek).
+[`read_graph_dimacs_flow()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dimacs_flow),
+[`read_graph_dl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl),
+[`read_graph_edgelist()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_edgelist),
+[`read_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml),
+[`read_graph_graphdb()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb),
+[`read_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml),
+[`read_graph_lgl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_lgl),
+[`read_graph_ncol()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_ncol),
+[`read_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek).

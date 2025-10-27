@@ -59,7 +59,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[[`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)](https://igraph.org/c/html/0.10.17/igraph-Bipartite.html#igraph_is_bipartite).
+[[`is_bipartite()`](https://r.igraph.org/reference/is_bipartite.md)](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_is_bipartite).
 
 ## Examples
 

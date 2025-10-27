@@ -66,7 +66,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`diversity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_diversity).
+[`diversity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_diversity).
 
 ## Examples
 

@@ -30,7 +30,7 @@ Other cliques: [`cliques()`](https://r.igraph.org/reference/cliques.md),
 
 ## Related documentation in the C library
 
-[`is_complete()`](https://igraph.org/c/html/0.10.17/igraph-Cliques.html#igraph_is_complete).
+[`is_complete()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_complete).
 
 ## Examples
 

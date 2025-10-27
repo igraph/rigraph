@@ -104,7 +104,7 @@ manual page.
 
 ## Related documentation in the C library
 
-[`count_automorphisms()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_count_automorphisms).
+[`count_automorphisms()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms).
 
 ## Examples
 

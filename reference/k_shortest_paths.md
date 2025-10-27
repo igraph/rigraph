@@ -110,4 +110,4 @@ Other structural.properties:
 
 ## Related documentation in the C library
 
-[`get_k_shortest_paths()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_k_shortest_paths).
+[`get_k_shortest_paths()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_k_shortest_paths).

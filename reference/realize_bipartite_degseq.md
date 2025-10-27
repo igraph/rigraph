@@ -71,7 +71,7 @@ to create a not necessarily bipartite graph.
 
 ## Related documentation in the C library
 
-[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_realize_bipartite_degree_sequence).
+[`realize_bipartite_degree_sequence()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_bipartite_degree_sequence).
 
 ## Examples
 

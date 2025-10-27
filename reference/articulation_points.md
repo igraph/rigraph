@@ -53,8 +53,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`articulation_points()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_articulation_points),
-[`bridges()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_bridges).
+[`articulation_points()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_articulation_points),
+[`bridges()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_bridges).
 
 ## Examples
 
@@ -63,11 +63,11 @@ g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)))
 articulation_points(g)
-#> + 2/10 vertices, from e5ad632:
+#> + 2/10 vertices, from 976954c:
 #> [1] 6 1
 
 g <- make_graph("krackhardt_kite")
 bridges(g)
-#> + 2/18 edges from 0191c0e:
+#> + 2/18 edges from 395fb34:
 #> [1] 9--10 8-- 9
 ```

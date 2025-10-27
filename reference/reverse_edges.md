@@ -62,15 +62,15 @@ Other functions for manipulating graph structure:
 
 ## Related documentation in the C library
 
-[`reverse_edges()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_reverse_edges).
+[`reverse_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges).
 
 ## Examples
 
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH 3163d4c DN-- 4 3 -- 
+#> IGRAPH a7b6e0b DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 3163d4c (vertex names):
+#> + edges from a7b6e0b (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

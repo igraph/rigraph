@@ -94,11 +94,11 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`is_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_multiple),
-[`has_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_multiple),
-[`count_multiple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_count_multiple),
-[`is_loop()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_loop),
-[`has_loop()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_has_loop).
+[`is_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_multiple),
+[`has_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple),
+[`count_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_multiple),
+[`is_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop),
+[`has_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop).
 
 ## Examples
 

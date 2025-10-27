@@ -70,7 +70,7 @@ Random graph models (games)
 
 ## Related documentation in the C library
 
-[`tree_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_tree_game).
+[`tree_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_tree_game).
 
 ## Examples
 

@@ -72,7 +72,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`contract_vertices()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_contract_vertices).
+[`contract_vertices()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices).
 
 ## Examples
 
@@ -89,10 +89,10 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> IGRAPH dfe6f2e UNW- 5 10 -- Ring
+#> IGRAPH 6dcf3cc UNW- 5 10 -- Ring
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
 #> | (e/n)
-#> + edges from dfe6f2e (vertex names):
+#> + edges from 6dcf3cc (vertex names):
 #>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h
 #>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j
 ```

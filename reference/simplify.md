@@ -107,8 +107,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`simplify()`](https://igraph.org/c/html/0.10.17/igraph-Operators.html#igraph_simplify),
-[`is_simple()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_simple).
+[`simplify()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[`is_simple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_simple).
 
 ## Examples
 

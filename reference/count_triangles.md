@@ -50,8 +50,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`list_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_list_triangles),
-[`adjacent_triangles()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_adjacent_triangles).
+[`list_triangles()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_list_triangles),
+[`adjacent_triangles()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_adjacent_triangles).
 
 ## Examples
 

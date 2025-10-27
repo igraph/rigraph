@@ -76,7 +76,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`is_mutual()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_mutual).
+[`is_mutual()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_mutual).
 
 ## Examples
 

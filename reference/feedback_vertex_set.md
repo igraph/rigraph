@@ -76,13 +76,13 @@ Graph cycles
 
 ## Related documentation in the C library
 
-[`feedback_vertex_set()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_feedback_vertex_set).
+[`feedback_vertex_set()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_vertex_set).
 
 ## Examples
 
 ``` r
 g <- make_lattice(c(3,3))
 feedback_vertex_set(g)
-#> + 2/9 vertices, from 8788a67:
+#> + 2/9 vertices, from 078220c:
 #> [1] 2 8
 ```

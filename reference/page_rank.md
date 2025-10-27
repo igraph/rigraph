@@ -151,7 +151,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 ## Related documentation in the C library
 
-[`personalized_pagerank()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_personalized_pagerank).
+[`personalized_pagerank()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank).
 
 ## Examples
 

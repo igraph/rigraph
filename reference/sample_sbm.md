@@ -93,7 +93,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`sbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_sbm_game).
+[`sbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game).
 
 ## Examples
 
@@ -102,9 +102,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> IGRAPH fe5cfda U--- 1000 17014 -- Stochastic block model
+#> IGRAPH 0d405db U--- 1000 17014 -- Stochastic block model
 #> + attr: name (g/c), loops (g/l)
-#> + edges from fe5cfda:
+#> + edges from 0d405db:
 #>  [1]  3-- 7  4-- 7  2-- 8  3--10  1--11  3--11  7--11 10--11  2--12  5--12
 #> [11]  7--13  7--14  9--15  5--16  8--16  3--18 15--18  3--19  8--20  3--21
 #> [21] 10--21 15--21  3--22  7--22 22--23  1--24  4--24  5--25 12--25 23--25

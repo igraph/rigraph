@@ -46,7 +46,7 @@ Tamas Nepusz <ntamas@gmail.com>
 
 ## Related documentation in the C library
 
-[`convex_hull()`](https://igraph.org/c/html/0.10.17/igraph-Nongraph.html#igraph_convex_hull).
+[`convex_hull()`](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_convex_hull).
 
 ## Examples
 

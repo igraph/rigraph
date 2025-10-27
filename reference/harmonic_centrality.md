@@ -96,7 +96,7 @@ Centrality measures
 
 ## Related documentation in the C library
 
-[`harmonic_centrality_cutoff()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_harmonic_centrality_cutoff).
+[`harmonic_centrality_cutoff()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_harmonic_centrality_cutoff).
 
 ## Examples
 

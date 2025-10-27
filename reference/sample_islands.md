@@ -75,4 +75,4 @@ Samuel Thiriot
 
 ## Related documentation in the C library
 
-[`simple_interconnected_islands_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_simple_interconnected_islands_game).
+[`simple_interconnected_islands_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_simple_interconnected_islands_game).

@@ -78,7 +78,7 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 ## Related documentation in the C library
 
-[`reciprocity()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_reciprocity).
+[`reciprocity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity).
 
 ## Examples
 

@@ -123,7 +123,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`avg_nearest_neighbor_degree()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_avg_nearest_neighbor_degree).
+[`avg_nearest_neighbor_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_avg_nearest_neighbor_degree).
 
 ## Examples
 

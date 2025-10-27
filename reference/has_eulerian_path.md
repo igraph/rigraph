@@ -65,9 +65,9 @@ Graph cycles
 
 ## Related documentation in the C library
 
-[`is_eulerian()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_is_eulerian),
-[`eulerian_path()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_path),
-[`eulerian_cycle()`](https://igraph.org/c/html/0.10.17/igraph-Cycles.html#igraph_eulerian_cycle).
+[`is_eulerian()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_is_eulerian),
+[`eulerian_path()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_path),
+[`eulerian_cycle()`](https://igraph.org/c/html/latest/igraph-Cycles.html#igraph_eulerian_cycle).
 
 ## Examples
 
@@ -78,11 +78,11 @@ has_eulerian_path(g)
 #> [1] TRUE
 eulerian_path(g)
 #> $epath
-#> + 10/10 edges from 7765795 (vertex names):
+#> + 10/10 edges from 79df1f2 (vertex names):
 #>  [1] A--B B--C C--D B--D B--F A--F A--E D--E D--F E--F
 #> 
 #> $vpath
-#> + 11/6 vertices, named, from 7765795:
+#> + 11/6 vertices, named, from 79df1f2:
 #>  [1] A B C D B F A E D F E
 #> 
 

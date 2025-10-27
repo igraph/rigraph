@@ -78,7 +78,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_density).
+[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density).
 
 ## Examples
 

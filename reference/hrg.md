@@ -40,4 +40,4 @@ Other hierarchical random graph functions:
 
 ## Related documentation in the C library
 
-[`hrg_create()`](https://igraph.org/c/html/0.10.17/igraph-HRG.html#igraph_hrg_create).
+[`hrg_create()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create).

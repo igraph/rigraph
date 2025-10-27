@@ -144,7 +144,7 @@ igraph and R interfaces.
 
 ## Related documentation in the C library
 
-[`canonical_permutation()`](https://igraph.org/c/html/0.10.17/igraph-Isomorphism.html#igraph_canonical_permutation).
+[`canonical_permutation()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_canonical_permutation).
 
 ## Examples
 

@@ -70,7 +70,7 @@ Other paths:
 
 ## Related documentation in the C library
 
-[`radius_dijkstra()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_radius_dijkstra).
+[`radius_dijkstra()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_radius_dijkstra).
 
 ## Examples
 
