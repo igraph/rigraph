@@ -7791,10 +7791,7 @@ SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob,
 
   if (!Rf_isNull(cut_prob)) {
     R_SEXP_to_vector(cut_prob, &c_cut_prob);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_cut_prob, 0));
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_cut_prob);
 
   // Setup callback if provided
   if (!Rf_isNull(callback)) {
@@ -7814,9 +7811,6 @@ SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob,
     p_callback,
     p_cb_data
   ));
-
-  igraph_vector_destroy(&c_cut_prob);
-  IGRAPH_FINALLY_CLEAN(1);
 
   return R_NilValue;
 }
