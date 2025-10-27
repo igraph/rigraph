@@ -38,6 +38,25 @@ add_edges_impl <- function(
   res
 }
 
+add_vertices_impl <- function(
+  graph,
+  nv
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  nv <- as.numeric(nv)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_add_vertices,
+    graph,
+    nv
+  )
+
+  res
+}
+
 copy_impl <- function(
   from
 ) {
@@ -49,6 +68,44 @@ copy_impl <- function(
   res <- .Call(
     R_igraph_copy,
     from
+  )
+
+  res
+}
+
+delete_edges_impl <- function(
+  graph,
+  edges
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  edges <- as_igraph_es(graph, edges)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_delete_edges,
+    graph,
+    edges - 1
+  )
+
+  res
+}
+
+delete_vertices_impl <- function(
+  graph,
+  vertices
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  vertices <- as_igraph_vs(graph, vertices)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_delete_vertices,
+    graph,
+    vertices - 1
   )
 
   res
@@ -227,6 +284,36 @@ get_all_eids_between_impl <- function(
     from - 1,
     to - 1,
     directed
+  )
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
+  res
+}
+
+incident_impl <- function(
+  graph,
+  vid,
+  mode = c("all", "out", "in", "total")
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    cli::cli_abort(
+      "{.arg vid} must specify at least one vertex",
+      call = rlang::caller_env()
+    )
+  }
+  mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_incident,
+    graph,
+    vid - 1,
+    mode
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)

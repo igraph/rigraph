@@ -15,13 +15,10 @@ igraph_empty_attrs:
     IGNORE: RR, RC
 
 igraph_add_vertices:
-    IGNORE: RR, RC, RInit
 
 igraph_delete_edges:
-    IGNORE: RR, RC
 
 igraph_delete_vertices:
-    IGNORE: RR, RC
 
 igraph_ecount:
 
@@ -48,7 +45,6 @@ igraph_get_all_eids_between:
     DEPS: from ON graph, to ON graph, eids ON graph
 
 igraph_incident:
-    IGNORE: RR, RC
 
 igraph_is_same_graph:
     IGNORE: RR, RC, RInit

@@ -8259,3 +8259,72 @@ test_that("edges_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(edges_impl(NULL, 1))
 })
+
+# 337. add_vertices_impl
+
+test_that("add_vertices_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_empty_graph(3)
+  
+  g_new <- add_vertices_impl(g, 2)
+  expect_snapshot(vcount(g_new))
+})
+
+test_that("add_vertices_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(add_vertices_impl(NULL, 1))
+})
+
+# 338. delete_edges_impl
+
+test_that("delete_edges_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
+  
+  g_new <- delete_edges_impl(g, c(1, 2))
+  expect_snapshot(ecount(g_new))
+})
+
+test_that("delete_edges_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(delete_edges_impl(NULL, 1))
+})
+
+# 339. delete_vertices_impl
+
+test_that("delete_vertices_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
+  
+  g_new <- delete_vertices_impl(g, c(1, 3))
+  expect_snapshot(vcount(g_new))
+})
+
+test_that("delete_vertices_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(delete_vertices_impl(NULL, 1))
+})
+
+# 340. incident_impl
+
+test_that("incident_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE, return.vs.es = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 1), n = 3, directed = TRUE)
+  
+  expect_snapshot(incident_impl(g, 2, mode = "out"))
+  expect_snapshot(incident_impl(g, 2, mode = "in"))
+  expect_snapshot(incident_impl(g, 2, mode = "all"))
+})
+
+test_that("incident_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(incident_impl(NULL, 1))
+})

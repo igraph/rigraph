@@ -24,6 +24,7 @@ extern "C" {
 /* .Call calls */
 extern SEXP R_igraph_add_edges(SEXP, SEXP);
 extern SEXP R_igraph_add_edges_manual(SEXP, SEXP);
+extern SEXP R_igraph_add_vertices(SEXP, SEXP);
 extern SEXP R_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjlist(SEXP, SEXP, SEXP);
@@ -108,6 +109,8 @@ extern SEXP R_igraph_decompose(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree_correlation_vector(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree_sequence_game(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_delete_edges(SEXP, SEXP);
+extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices_idx(SEXP, SEXP);
 extern SEXP R_igraph_density(SEXP, SEXP);
 extern SEXP R_igraph_deterministic_optimal_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -202,6 +205,7 @@ extern SEXP R_igraph_hsbm_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hsbm_list_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hub_and_authority_scores(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hypercube(SEXP, SEXP);
+extern SEXP R_igraph_incident(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_independent_vertex_sets(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_induced_subgraph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_induced_subgraph_map(SEXP, SEXP, SEXP);
@@ -504,6 +508,7 @@ extern SEXP UUID_gen(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
     {"R_igraph_add_edges_manual",                           (DL_FUNC) &R_igraph_add_edges_manual,                            2},
+    {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_adjacency",                                  (DL_FUNC) &R_igraph_adjacency,                                   3},
     {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
     {"R_igraph_adjlist",                                    (DL_FUNC) &R_igraph_adjlist,                                     3},
@@ -588,6 +593,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_degree",                                     (DL_FUNC) &R_igraph_degree,                                      4},
     {"R_igraph_degree_correlation_vector",                  (DL_FUNC) &R_igraph_degree_correlation_vector,                   5},
     {"R_igraph_degree_sequence_game",                       (DL_FUNC) &R_igraph_degree_sequence_game,                        3},
+    {"R_igraph_delete_edges",                               (DL_FUNC) &R_igraph_delete_edges,                                2},
+    {"R_igraph_delete_vertices",                            (DL_FUNC) &R_igraph_delete_vertices,                             2},
     {"R_igraph_delete_vertices_idx",                        (DL_FUNC) &R_igraph_delete_vertices_idx,                         2},
     {"R_igraph_density",                                    (DL_FUNC) &R_igraph_density,                                     2},
     {"R_igraph_deterministic_optimal_imitation",            (DL_FUNC) &R_igraph_deterministic_optimal_imitation,             6},
@@ -682,6 +689,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hsbm_list_game",                             (DL_FUNC) &R_igraph_hsbm_list_game,                              5},
     {"R_igraph_hub_and_authority_scores",                   (DL_FUNC) &R_igraph_hub_and_authority_scores,                    4},
     {"R_igraph_hypercube",                                  (DL_FUNC) &R_igraph_hypercube,                                   2},
+    {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},
     {"R_igraph_independent_vertex_sets",                    (DL_FUNC) &R_igraph_independent_vertex_sets,                     3},
     {"R_igraph_induced_subgraph",                           (DL_FUNC) &R_igraph_induced_subgraph,                            3},
     {"R_igraph_induced_subgraph_map",                       (DL_FUNC) &R_igraph_induced_subgraph_map,                        3},
