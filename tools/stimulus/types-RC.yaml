@@ -69,7 +69,7 @@ CSTRING:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            %C% = Rf_translateCharUTF8(%I%);
+            %C% = Rf_translateCharUTF8(STRING_ELT(%I%, 0));
     OUTCONV:
         OUT: |-
             PROTECT(%I% = Rf_ScalarString(Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8)));
