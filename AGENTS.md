@@ -120,7 +120,7 @@ See `tools/README.md` for guidelines on code generation using the Stimulus frame
 Do not commit: `*.d`, `*.o`, `*.so` files in `src/`, and `tests/testthat/testthat-problems.rds`.
 These are build artifacts that are regenerated automatically (see `src/README.md` for details on dependency tracking).
 
-Revert all changes to `*.dd` but keep these files version-controlled.
+Careful with changes to `*.dd`, keep system headers out, only expect changes if new source files are added or their local dependencies change.
 
 ## Testing
 
