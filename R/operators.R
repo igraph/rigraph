@@ -351,7 +351,7 @@ join <- function(g1, g2) {
   ensure_igraph(g2)
 
   on.exit(.Call(R_igraph_finalizer))
-  join_impl(g1, g2)
+  join_impl(left = g1, right = g2)
 }
 
 #' @export
