@@ -1047,7 +1047,7 @@ SEXP R_igraph_famous(SEXP name) {
 
   SEXP r_result;
                                         /* Convert input */
-  c_name = Rf_translateCharUTF8(name);
+  c_name = Rf_translateCharUTF8(STRING_ELT(name, 0));
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_famous(&c_graph, c_name));
 
@@ -9632,8 +9632,8 @@ SEXP R_igraph_write_graph_leda(SEXP graph, SEXP outstream, SEXP names, SEXP weig
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_names = Rf_translateCharUTF8(names);
-  c_weights = Rf_translateCharUTF8(weights);
+  c_names = Rf_translateCharUTF8(STRING_ELT(names, 0));
+  c_weights = Rf_translateCharUTF8(STRING_ELT(weights, 0));
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_write_graph_leda(&c_graph, c_outstream, c_names, c_weights));
 
@@ -9709,7 +9709,7 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP outstream, SEXP options, SEXP id,
   c_options = (igraph_write_gml_sw_t) Rf_asInteger(options);
   R_SEXP_to_vector(id, &c_id);
   if (!Rf_isNull(creator)) {
-    c_creator = Rf_translateCharUTF8(creator);
+    c_creator = Rf_translateCharUTF8(STRING_ELT(creator, 0));
   }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_write_graph_gml(&c_graph, c_outstream, c_options, &c_id, (Rf_isNull(creator) ? 0 : c_creator)));
