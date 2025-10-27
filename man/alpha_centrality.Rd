@@ -6,7 +6,7 @@
 \usage{
 alpha_centrality(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -19,7 +19,7 @@ alpha_centrality(
 \item{graph}{The input graph, can be directed or undirected. In undirected
 graphs, edges are treated as if they were reciprocal directed ones.}
 
-\item{nodes}{Vertex sequence, the vertices for which the alpha centrality
+\item{vertices}{Vertex sequence, the vertices for which the alpha centrality
 values are returned. (For technical reasons they will be calculated for all
 vertices, anyway.)}
 

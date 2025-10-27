@@ -43,7 +43,7 @@ page.rank <- function(
   page_rank(
     graph = graph,
     algo = algo,
-    vids = vids,
+    vertices = vids,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -255,7 +255,7 @@ bonpow <- function(
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     loops = loops,
     exponent = exponent,
     rescale = rescale,
@@ -288,7 +288,7 @@ alpha.centrality <- function(
   lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
   alpha_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     alpha = alpha,
     loops = loops,
     exo = exo,
@@ -1653,7 +1653,7 @@ hub_score <- function(
 #'   for all but small graphs.  `"arpack"` uses the ARPACK library, the
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
-#' @param vids The vertices of interest.
+#' @param vertices The vertices of interest.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
@@ -1714,7 +1714,7 @@ hub_score <- function(
 page_rank <- function(
   graph,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vertices = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -1724,7 +1724,7 @@ page_rank <- function(
   personalized_pagerank_impl(
     graph = graph,
     algo = algo,
-    vids = vids,
+    vids = vertices,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -1914,7 +1914,7 @@ bonpow.sparse <- function(
 #' is important to think about the edge direction and what it represents.
 #'
 #' @param graph the input graph.
-#' @param nodes vertex sequence indicating which vertices are to be included in
+#' @param vertices vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
 #' @param loops boolean indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -1975,14 +1975,14 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
   } else {
@@ -2114,7 +2114,7 @@ alpha.centrality.sparse <- function(
 #'
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
-#' @param nodes Vertex sequence, the vertices for which the alpha centrality
+#' @param vertices Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. (For technical reasons they will be calculated for all
 #'   vertices, anyway.)
 #' @param alpha Parameter specifying the relative importance of endogenous
@@ -2160,7 +2160,7 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2168,7 +2168,7 @@ alpha_centrality <- function(
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- alpha.centrality.sparse(
       graph,
