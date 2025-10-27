@@ -733,5 +733,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' # Result should be the same
 #' is_simple(g)
 invalidate_cache <- function(graph) {
-  invalidate_cache_impl(graph)
+  invalidate_cache_impl(
+    graph = graph
+  )
 }

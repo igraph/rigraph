@@ -24,7 +24,11 @@ solve_LSAP <- function(x, maximum = FALSE) {
   if (maximum) {
     x <- max(x) - x
   }
-  out <- solve_lsap_impl(c = x, n = as.numeric(nc)) + 1L
+  out <- solve_lsap_impl(
+    c = x,
+    n = as.numeric(nc)
+  ) +
+    1L
   out[seq_len(nr)]
 }
 

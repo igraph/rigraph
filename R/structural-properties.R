@@ -860,7 +860,7 @@ mean_distance <- function(
   details = FALSE
 ) {
   average_path_length_dijkstra_impl(
-    graph,
+    graph = graph,
     weights = weights,
     directed = directed,
     unconnected = unconnected,
@@ -944,7 +944,7 @@ max_degree <- function(
   loops = TRUE
 ) {
   maxdegree_impl(
-    graph,
+    graph = graph,
     v = v,
     mode = mode,
     loops = loops
@@ -1585,7 +1585,11 @@ induced_subgraph <- function(
   impl <- igraph.match.arg(impl)
 
   # Function call
-  res <- induced_subgraph_impl(graph = graph, vids = vids, impl = impl)
+  res <- induced_subgraph_impl(
+    graph = graph,
+    vids = vids,
+    impl = impl
+  )
 
   res
 }
@@ -1796,7 +1800,10 @@ transitivity <- function(
   isolates <- igraph.match.arg(isolates)
 
   if (type == 0) {
-    transitivity_undirected_impl(graph, isolates)
+    transitivity_undirected_impl(
+      graph = graph,
+      mode = isolates
+    )
   } else if (type == 1) {
     isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
@@ -1810,7 +1817,11 @@ transitivity <- function(
       }
       res
     } else {
-      res <- transitivity_local_undirected_impl(graph, vids, isolates)
+      res <- transitivity_local_undirected_impl(
+        graph = graph,
+        vids = vids,
+        mode = isolates
+      )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         vids_indices <- as_igraph_vs(graph, vids)
         names(res) <- V(graph)$name[vids_indices]
@@ -1818,22 +1829,41 @@ transitivity <- function(
       res
     }
   } else if (type == 2) {
-    transitivity_avglocal_undirected_impl(graph, isolates)
+    transitivity_avglocal_undirected_impl(
+      graph = graph,
+      mode = isolates
+    )
   } else if (type == 3) {
     # Save original vids for naming if needed
     vids_for_names <- if (is.null(vids)) V(graph) else vids
 
     res <- if (is.null(weights)) {
       if (is.null(vids)) {
-        transitivity_local_undirected_impl(graph, mode = isolates)
+        transitivity_local_undirected_impl(
+          graph = graph,
+          mode = isolates
+        )
       } else {
-        transitivity_local_undirected_impl(graph, vids, isolates)
+        transitivity_local_undirected_impl(
+          graph = graph,
+          vids = vids,
+          mode = isolates
+        )
       }
     } else {
       if (is.null(vids)) {
-        transitivity_barrat_impl(graph, weights = weights, mode = isolates)
+        transitivity_barrat_impl(
+          graph = graph,
+          weights = weights,
+          mode = isolates
+        )
       } else {
-        transitivity_barrat_impl(graph, vids, weights, isolates)
+        transitivity_barrat_impl(
+          graph = graph,
+          vids = vids,
+          weights = weights,
+          mode = isolates
+        )
       }
     }
 
@@ -3097,7 +3127,11 @@ components <- function(graph, mode = c("weak", "strong")) {
   mode <- igraph.match.arg(mode)
 
   # Function call
-  res <- connected_components_impl(graph, mode, details = TRUE)
+  res <- connected_components_impl(
+    graph = graph,
+    mode = mode,
+    details = TRUE
+  )
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name
@@ -3173,7 +3207,11 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   roots <- as_igraph_vs(graph, roots) - 1
 
   # Function call
-  res <- unfold_tree_impl(graph = graph, mode = mode, roots = roots)
+  res <- unfold_tree_impl(
+    graph = graph,
+    mode = mode,
+    roots = roots
+  )
   res
 }
 
@@ -3398,7 +3436,11 @@ is_matching <- function(graph, matching, types = NULL) {
   matching[is.na(matching)] <- 0 # Use 0 since is_matching_impl will subtract 1, making it -1
 
   # Function call
-  res <- is_matching_impl(graph = graph, types = types, matching = matching)
+  res <- is_matching_impl(
+    graph = graph,
+    types = types,
+    matching = matching
+  )
 
   res
 }
