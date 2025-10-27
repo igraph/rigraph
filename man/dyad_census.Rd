@@ -55,5 +55,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{graph motifs}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}.}
+\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}.}
 
