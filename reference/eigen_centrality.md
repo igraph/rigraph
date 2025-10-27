@@ -144,7 +144,7 @@ manual page.
 
 ## Related documentation in the C library
 
-[`eigenvector_centrality()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eigenvector_centrality).
+[`eigenvector_centrality()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_eigenvector_centrality).
 
 ## Examples
 

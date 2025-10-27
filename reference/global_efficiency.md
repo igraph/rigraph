@@ -103,9 +103,9 @@ transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 
 ## Related documentation in the C library
 
-[`global_efficiency()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_global_efficiency),
-[`local_efficiency()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_efficiency),
-[`average_local_efficiency()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_average_local_efficiency).
+[`global_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_global_efficiency),
+[`local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_local_efficiency),
+[`average_local_efficiency()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_average_local_efficiency).
 
 ## Examples
 

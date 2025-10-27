@@ -94,9 +94,9 @@ aristas:
 g
 ```
 
-    ## IGRAPH e1de6d8 UN-- 10 2 -- 
+    ## IGRAPH 07c62f2 UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from e1de6d8 (vertex names):
+    ## + edges from 07c62f2 (vertex names):
     ## [1] 1--2 1--5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
@@ -115,7 +115,7 @@ aristas:
 summary(g)
 ```
 
-    ## IGRAPH e1de6d8 UN-- 10 2 -- 
+    ## IGRAPH 07c62f2 UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -227,16 +227,16 @@ utilizar el paquete `magrittr`, que proporciona un mecanismo para
 encadenar comandos con el operador `%>%`:
 
 ``` r
-g <- g %>%
-  add_edges(edges = c(1, 34)) %>%
+g <- g %>% 
+  add_edges(edges = c(1, 34)) %>% 
   add_vertices(3) %>%
   add_edges(edges = c(38, 39, 39, 40, 40, 38, 40, 37))
 g
 ```
 
-    ## IGRAPH b98cee8 U--- 40 86 -- Zachary
+    ## IGRAPH 40dda60 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from b98cee8:
+    ## + edges from 40dda60:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -301,13 +301,13 @@ utilizando
 
 ``` r
 g1 <- graph_from_literal(
-  A-B:C:I,
-  B-A:C:D,
-  C-A:B:E:H,
+  A-B:C:I, 
+  B-A:C:D, 
+  C-A:B:E:H, 
   D-B:E:F,
-  E-C:D:F:H,
-  F-D:E:G,
-  G-F:H,
+  E-C:D:F:H, 
+  F-D:E:G, 
+  G-F:H, 
   H-C:E:G:I,
   I-A:H
 )
@@ -362,7 +362,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH dcf44e1 U--- 5 3 -- Ring graph
+    ## IGRAPH 3d6d7e9 U--- 5 3 -- Ring graph
     ## + attr: name (g/c), mutual (g/l), circular (g/l)
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
@@ -389,7 +389,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH 69b3c00 U--- 100 499 -- Geometric random graph
+    ## IGRAPH d3b438d U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
@@ -442,7 +442,7 @@ Para demostrar el uso de los atributos, creemos una red social sencilla:
 g <- make_graph(
   ~ Alice-Boris:Himari:Moshe,
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe,
+  Ibrahim-Nang:Moshe, 
   Nang-Samira
 )
 ```
@@ -456,13 +456,13 @@ como [`graph_attr()`](https://r.igraph.org/reference/graph_attr.md) y
 [`set_graph_attr()`](https://r.igraph.org/reference/set_graph_attr.md).
 
 ``` r
-V(g)$age <- c(25, 31, 18, 23, 47, 22, 50)
+V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
 V(g)$gender <- c("f", "m", "f", "m", "m", "f", "m")
 E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH 4c3cb6b UN-- 7 9 -- 
+    ## IGRAPH f12cdb7 UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
@@ -475,9 +475,9 @@ el operador `%>%`:
 
 ``` r
 g <- make_graph(
-  ~ Alice-Boris:Himari:Moshe,
+  ~ Alice-Boris:Himari:Moshe, 
   Himari-Alice:Nang:Moshe:Samira,
-  Ibrahim-Nang:Moshe,
+  Ibrahim-Nang:Moshe, 
   Nang-Samira
 ) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
@@ -535,7 +535,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from 4c3cb6b:
+    ## + 7/7 vertices, named, from f12cdb7:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -705,7 +705,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from a39c61e:
+    ## + 3/10 vertices, from 4c60f74:
     ## [1] 2 3 7
 
 ``` r
@@ -713,7 +713,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from a39c61e:
+    ## + 2/10 vertices, from 4c60f74:
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -722,7 +722,7 @@ Al seleccionar un vértice que no existe se produce un error:
 seq <- V(graph)[2, 3, 7, "foo", 3.5]
 ```
 
-    ## Error in `simple_vs_index()` at rigraph/R/iterators.R:736:7:
+    ## Error in `simple_vs_index()` at igraph/R/iterators.R:736:7:
     ## ! Unknown vertex selected.
 
 Los nombres de los atributos también pueden utilizarse tal cual dentro
@@ -797,7 +797,7 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from 4c3cb6b (vertex names):
+    ## + 4/9 edges from f12cdb7 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Por supuesto, también funciona con nombres de vértices:
@@ -806,7 +806,7 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from 4c3cb6b (vertex names):
+    ## + 4/9 edges from f12cdb7 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Al usar
@@ -831,7 +831,7 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from 4c3cb6b (vertex names):
+    ## + 3/9 edges from f12cdb7 (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -863,7 +863,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from 4c3cb6b (vertex names):
+    ## + 5/9 edges from f12cdb7 (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
@@ -969,7 +969,7 @@ crear una variable de diseño, como en el ejemplo anterior:
 
 ``` r
 plot(
-  g,
+  g, 
   layout = layout_with_fr,
   main = "Red social con el algoritmo de disposición Fruchterman-Reingold"
 )
@@ -984,8 +984,8 @@ nombres ligeramente fuera de los vértices para mejorar la legibilidad:
 ``` r
 V(g)$color <- ifelse(V(g)$gender == "m", "yellow", "red")
 plot(
-  g,
-  layout = layout,
+  g, 
+  layout = layout, 
   vertex.label.dist = 3.5,
   main = "Red social - con los géneros como colores"
 )
@@ -1001,9 +1001,9 @@ los vértices. Los colores se asignan automáticamente:
 
 ``` r
 plot(
-  g,
-  layout = layout,
-  vertex.label.dist = 3.5,
+  g, 
+  layout = layout, 
+  vertex.label.dist = 3.5, 
   vertex.color = as.factor(V(g)$gender))
 ```
 
@@ -1161,7 +1161,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.2.1.9000
+    ## [1] igraph_2.2.1
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] crayon_1.5.3       vctrs_0.6.5        cli_3.6.5          knitr_1.50        

@@ -90,8 +90,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`hsbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game),
-[`hsbm_list_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game).
+[`hsbm_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_game),
+[`hsbm_list_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_hsbm_list_game).
 
 ## Examples
 
@@ -104,9 +104,9 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-#> IGRAPH cc2349f U--- 100 452 -- Hierarchical stochastic block model
+#> IGRAPH d939969 U--- 100 452 -- Hierarchical stochastic block model
 #> + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
-#> + edges from cc2349f:
+#> + edges from d939969:
 #>  [1]  1-- 2  1-- 3  2-- 3  1-- 4  2-- 4  3-- 4  2-- 5  1-- 6  2-- 6  3-- 6
 #> [11]  4-- 7  5-- 7  4-- 8  5-- 8  6-- 8  4-- 9  6-- 9  4--10  5--10  6--10
 #> [21]  7-- 8  8-- 9  7--10  8--10  9--10 11--12 11--13 12--13 11--14 13--14

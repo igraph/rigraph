@@ -82,8 +82,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`get_laplacian()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian),
-[`get_laplacian_sparse()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian_sparse).
+[`get_laplacian()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_laplacian),
+[`get_laplacian_sparse()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_get_laplacian_sparse).
 
 ## Examples
 

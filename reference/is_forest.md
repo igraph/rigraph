@@ -60,7 +60,7 @@ Other trees: [`is_tree()`](https://r.igraph.org/reference/is_tree.md),
 
 ## Related documentation in the C library
 
-[`is_forest()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest).
+[`is_forest()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_forest).
 
 ## Examples
 
@@ -73,7 +73,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> + 2/8 vertices, from 926fc89:
+#> + 2/8 vertices, from 2deb2c8:
 #> [1] 1 4
 #> 
 ```

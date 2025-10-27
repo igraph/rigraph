@@ -46,15 +46,15 @@ Other deterministic constructors:
 
 ## Related documentation in the C library
 
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty).
+[`empty()`](https://igraph.org/c/html/0.10.17/igraph-Basic.html#igraph_empty).
 
 ## Examples
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 88a48e9 D--- 10 0 -- 
-#> + edges from 88a48e9:
+#> IGRAPH 7b06e9f D--- 10 0 -- 
+#> + edges from 7b06e9f:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH 3e11e52 U--- 5 0 -- 
-#> + edges from 3e11e52:
+#> IGRAPH ecc9e4c U--- 5 0 -- 
+#> + edges from ecc9e4c:
 ```

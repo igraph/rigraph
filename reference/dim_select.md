@@ -57,7 +57,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`dim_select()`](https://igraph.org/c/html/latest/igraph-Embedding.html#igraph_dim_select).
+[`dim_select()`](https://igraph.org/c/html/0.10.17/igraph-Embedding.html#igraph_dim_select).
 
 ## Examples
 

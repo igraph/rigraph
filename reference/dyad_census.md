@@ -56,7 +56,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`dyad_census()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_dyad_census).
+[`dyad_census()`](https://igraph.org/c/html/0.10.17/igraph-Motifs.html#igraph_dyad_census).
 
 ## Examples
 

@@ -84,9 +84,9 @@ Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 
 ## Related documentation in the C library
 
-[`similarity_jaccard()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_jaccard),
-[`similarity_dice()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_dice),
-[`similarity_inverse_log_weighted()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_similarity_inverse_log_weighted).
+[`similarity_jaccard()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_jaccard),
+[`similarity_dice()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_dice),
+[`similarity_inverse_log_weighted()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_similarity_inverse_log_weighted).
 
 ## Examples
 

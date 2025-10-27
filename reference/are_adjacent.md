@@ -46,16 +46,16 @@ Other structural queries:
 
 ## Related documentation in the C library
 
-[`are_adjacent()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent).
+[`are_adjacent()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_are_adjacent).
 
 ## Examples
 
 ``` r
 ug <- make_ring(10)
 ug
-#> IGRAPH 19bdd71 U--- 10 10 -- Ring graph
+#> IGRAPH bb2a9af U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 19bdd71:
+#> + edges from bb2a9af:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 are_adjacent(ug, 1, 2)
 #> [1] TRUE
@@ -64,9 +64,9 @@ are_adjacent(ug, 2, 1)
 
 dg <- make_ring(10, directed = TRUE)
 dg
-#> IGRAPH d279c59 D--- 10 10 -- Ring graph
+#> IGRAPH 692a8ed D--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from d279c59:
+#> + edges from 692a8ed:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 are_adjacent(ug, 1, 2)
 #> [1] TRUE

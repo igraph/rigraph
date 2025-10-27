@@ -83,7 +83,7 @@ Random graph models (games)
 
 ## Related documentation in the C library
 
-[`correlated_pair_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game).
+[`correlated_pair_game()`](https://igraph.org/c/html/0.10.17/igraph-Generators.html#igraph_correlated_pair_game).
 
 ## Examples
 
@@ -94,15 +94,15 @@ gg <- sample_correlated_gnp_pair(
 )
 gg
 #> $graph1
-#> IGRAPH 12033b4 U--- 10 25 -- 
-#> + edges from 12033b4:
+#> IGRAPH 285c3e8 U--- 10 25 -- 
+#> + edges from 285c3e8:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 4-- 6 1-- 7 2-- 7 3-- 7 6-- 7 3-- 8 4-- 8
 #> [13] 1-- 9 2-- 9 4-- 9 6-- 9 7-- 9 8-- 9 1--10 2--10 3--10 5--10 7--10 8--10
 #> [25] 9--10
 #> 
 #> $graph2
-#> IGRAPH 55a4ce2 U--- 10 24 -- 
-#> + edges from 55a4ce2:
+#> IGRAPH 09235b4 U--- 10 24 -- 
+#> + edges from 09235b4:
 #>  [1] 1-- 2 2-- 3 3-- 4 1-- 5 1-- 6 4-- 6 1-- 7 2-- 7 3-- 7 6-- 7 3-- 8 4-- 8
 #> [13] 5-- 8 1-- 9 2-- 9 4-- 9 6-- 9 7-- 9 8-- 9 2--10 3--10 5--10 7--10 9--10
 #> 

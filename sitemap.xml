@@ -1,7 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://r.igraph.org/404.html</loc></url>
-<url><loc>https://r.igraph.org/AGENTS.html</loc></url>
 <url><loc>https://r.igraph.org/AUTHORS-list.html</loc></url>
+<url><loc>https://r.igraph.org/CLAUDE.html</loc></url>
 <url><loc>https://r.igraph.org/CONTRIBUTING.html</loc></url>
 <url><loc>https://r.igraph.org/articles/current-deprecations.html</loc></url>
 <url><loc>https://r.igraph.org/articles/deprecated-dot-case.html</loc></url>
@@ -10,7 +10,6 @@
 <url><loc>https://r.igraph.org/articles/index.html</loc></url>
 <url><loc>https://r.igraph.org/articles/installation-troubleshooting.html</loc></url>
 <url><loc>https://r.igraph.org/authors.html</loc></url>
-<url><loc>https://r.igraph.org/copilot-instructions.html</loc></url>
 <url><loc>https://r.igraph.org/cran-comments.template.html</loc></url>
 <url><loc>https://r.igraph.org/index.html</loc></url>
 <url><loc>https://r.igraph.org/news/index.html</loc></url>
@@ -359,7 +358,6 @@
 <url><loc>https://r.igraph.org/reference/intersection.igraph.es.html</loc></url>
 <url><loc>https://r.igraph.org/reference/intersection.igraph.html</loc></url>
 <url><loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc></url>
-<url><loc>https://r.igraph.org/reference/invalidate_cache.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.bipartite.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.chordal.html</loc></url>
 <url><loc>https://r.igraph.org/reference/is.connected.html</loc></url>

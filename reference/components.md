@@ -141,7 +141,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 
 ## Related documentation in the C library
 
-[`is_connected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected).
+[`is_connected()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_is_connected).
 
 ## Examples
 
@@ -171,9 +171,9 @@ groups(clu)
 #> [1] 20
 #> 
 largest_component(g)
-#> IGRAPH ee956ef U--- 14 14 -- Erdos-Renyi (gnp) graph
+#> IGRAPH f528df3 U--- 14 14 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from ee956ef:
+#> + edges from f528df3:
 #>  [1]  2-- 4  4-- 5  2-- 6  2-- 7  1-- 8  2-- 8  2--10  3--12  7--12  9--12
 #> [11] 11--12  9--13 10--13  4--14
 ```

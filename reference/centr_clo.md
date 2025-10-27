@@ -58,7 +58,7 @@ Other centralization related:
 
 ## Related documentation in the C library
 
-[`centralization_closeness()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_closeness).
+[`centralization_closeness()`](https://igraph.org/c/html/0.10.17/igraph-Structural.html#igraph_centralization_closeness).
 
 ## Examples
 

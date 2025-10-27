@@ -79,7 +79,7 @@ changed to improve consistency with the underlying C library.
 
 ## Related documentation in the C library
 
-[`random_walk()`](https://igraph.org/c/html/latest/igraph-Visitors.html#igraph_random_walk).
+[`random_walk()`](https://igraph.org/c/html/0.10.17/igraph-Visitors.html#igraph_random_walk).
 
 ## Examples
 
