@@ -479,7 +479,11 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   normalized <- as.logical(normalized)
 
   # Function call
-  res <- centralization_betweenness_impl(graph = graph, directed = directed, normalized = normalized)
+  res <- centralization_betweenness_impl(
+    graph = graph,
+    directed = directed,
+    normalized = normalized
+  )
 
   res
 }

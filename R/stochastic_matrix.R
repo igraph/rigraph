@@ -96,10 +96,18 @@ stochastic_matrix <- function(
   }
 
   if (sparse) {
-    res <- get_stochastic_sparse_impl(graph = graph, column.wise = column.wise, weights = NULL)
+    res <- get_stochastic_sparse_impl(
+      graph = graph,
+      column.wise = column.wise,
+      weights = NULL
+    )
     res <- igraph.i.spMatrix(res)
   } else {
-    res <- get_stochastic_impl(graph = graph, column.wise = column.wise, weights = NULL)
+    res <- get_stochastic_impl(
+      graph = graph,
+      column.wise = column.wise,
+      weights = NULL
+    )
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

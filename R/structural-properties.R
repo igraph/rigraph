@@ -1603,7 +1603,11 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   delete.vertices <- as.logical(delete.vertices)
 
   # Function call
-  res <- subgraph_from_edges_impl(graph = graph, eids = eids, delete.vertices = delete.vertices)
+  res <- subgraph_from_edges_impl(
+    graph = graph,
+    eids = eids,
+    delete.vertices = delete.vertices
+  )
 
   res
 }
@@ -1818,7 +1822,7 @@ transitivity <- function(
   } else if (type == 3) {
     # Save original vids for naming if needed
     vids_for_names <- if (is.null(vids)) V(graph) else vids
-    
+
     res <- if (is.null(weights)) {
       if (is.null(vids)) {
         transitivity_local_undirected_impl(graph, mode = isolates)
@@ -1832,7 +1836,7 @@ transitivity <- function(
         transitivity_barrat_impl(graph, vids, weights, isolates)
       }
     }
-    
+
     if (igraph_opt("add.vertex.names") && is_named(graph)) {
       vids_indices <- as_igraph_vs(graph, vids_for_names)
       names(res) <- V(graph)$name[vids_indices]
@@ -3409,7 +3413,11 @@ is_max_matching <- function(graph, matching, types = NULL) {
   matching[is.na(matching)] <- 0 # Use 0 since is_maximal_matching_impl will subtract 1, making it -1
 
   # Function call
-  res <- is_maximal_matching_impl(graph = graph, types = types, matching = matching)
+  res <- is_maximal_matching_impl(
+    graph = graph,
+    types = types,
+    matching = matching
+  )
 
   res
 }
