@@ -985,7 +985,7 @@ modularity_matrix <- function(
   directed <- as.logical(directed)
 
   # Function call
-  res <- modularity_matrix_impl(graph, weights, resolution, directed)
+  res <- modularity_matrix_impl(graph = graph, weights = weights, resolution = resolution, directed = directed)
 
   res
 }
@@ -2516,7 +2516,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   resolution <- as.numeric(resolution)
 
   # Function call
-  res <- community_multilevel_impl(graph, weights, resolution)
+  res <- community_multilevel_impl(graph = graph, weights = weights, resolution = resolution)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -3046,7 +3046,7 @@ i_compare <- function(
     as.numeric(as.factor(comm2))
   }
   method <- igraph.match.arg(method)
-  res <- compare_communities_impl(comm1, comm2, method)
+  res <- compare_communities_impl(comm1 = comm1, comm2 = comm2, method = method)
   res
 }
 
@@ -3094,7 +3094,7 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  res <- split_join_distance_impl(comm1, comm2)
+  res <- split_join_distance_impl(comm1 = comm1, comm2 = comm2)
   unlist(res)
 }
 

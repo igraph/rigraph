@@ -627,7 +627,7 @@ as_undirected <- function(
   mode <- igraph.match.arg(mode)
 
   # Function call
-  res <- to_undirected_impl(graph, mode, edge.attr.comb)
+  res <- to_undirected_impl(graph = graph, mode = mode, edge.attr.comb = edge.attr.comb)
 
   res
 }

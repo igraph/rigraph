@@ -1585,7 +1585,7 @@ induced_subgraph <- function(
   impl <- igraph.match.arg(impl)
 
   # Function call
-  res <- induced_subgraph_impl(graph, vids, impl)
+  res <- induced_subgraph_impl(graph = graph, vids = vids, impl = impl)
 
   res
 }
@@ -1603,7 +1603,7 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   delete.vertices <- as.logical(delete.vertices)
 
   # Function call
-  res <- subgraph_from_edges_impl(graph, eids, delete.vertices)
+  res <- subgraph_from_edges_impl(graph = graph, eids = eids, delete.vertices = delete.vertices)
 
   res
 }
@@ -3169,7 +3169,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   roots <- as_igraph_vs(graph, roots) - 1
 
   # Function call
-  res <- unfold_tree_impl(graph, mode, roots)
+  res <- unfold_tree_impl(graph = graph, mode = mode, roots = roots)
   res
 }
 
@@ -3394,7 +3394,7 @@ is_matching <- function(graph, matching, types = NULL) {
   matching[is.na(matching)] <- 0 # Use 0 since is_matching_impl will subtract 1, making it -1
 
   # Function call
-  res <- is_matching_impl(graph, types, matching)
+  res <- is_matching_impl(graph = graph, types = types, matching = matching)
 
   res
 }
@@ -3409,7 +3409,7 @@ is_max_matching <- function(graph, matching, types = NULL) {
   matching[is.na(matching)] <- 0 # Use 0 since is_maximal_matching_impl will subtract 1, making it -1
 
   # Function call
-  res <- is_maximal_matching_impl(graph, types, matching)
+  res <- is_maximal_matching_impl(graph = graph, types = types, matching = matching)
 
   res
 }

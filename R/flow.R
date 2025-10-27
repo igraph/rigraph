@@ -909,7 +909,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   mode <- igraph.match.arg(mode)
 
   # Function call
-  res <- dominator_tree_impl(graph, root, mode)
+  res <- dominator_tree_impl(graph = graph, root = root, mode = mode)
   if (igraph_opt("return.vs.es")) {
     res$leftout <- create_vs(graph, res$leftout)
   }

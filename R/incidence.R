@@ -82,7 +82,7 @@ graph_incidence_build <- function(
   if (!inherits(incidence, "Matrix") && is.null(weighted)) {
     mode(incidence) <- "double"
 
-    res <- biadjacency_impl(incidence, directed, mode, multiple)
+    res <- biadjacency_impl(incidence = incidence, directed = directed, mode = mode, multiple = multiple)
     return(set_vertex_attr(res$graph, "type", value = res$types))
   }
 

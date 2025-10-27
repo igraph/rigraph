@@ -270,7 +270,7 @@ graph.isoclass.subgraph <- function(graph, vids) {
   vids <- as_igraph_vs(graph, vids) - 1
 
   # Function call
-  res <- isoclass_subgraph_impl(graph, vids)
+  res <- isoclass_subgraph_impl(graph = graph, vids = vids)
   res
 }
 
@@ -457,9 +457,9 @@ isomorphic <- function(
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
-    isomorphic_impl(graph1, graph2)
+    isomorphic_impl(graph1 = graph1, graph2 = graph2)
   } else if (method == "direct") {
-    isomorphic_impl(graph1, graph2)
+    isomorphic_impl(graph1 = graph1, graph2 = graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
