@@ -301,6 +301,38 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
 }
 
 /*-------------------------------------------/
+/ igraph_edges                               /
+/-------------------------------------------*/
+SEXP R_igraph_edges(SEXP graph, SEXP eids) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_es_t c_eids;
+  igraph_vector_int_t c_edges;
+  SEXP edges;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  igraph_vector_int_t c_eids_data;
+  IGRAPH_R_CHECK(R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data));
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_edges, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_edges(&c_graph, c_eids, &c_edges));
+
+                                        /* Convert output */
+  igraph_vector_int_destroy(&c_eids_data);
+  igraph_es_destroy(&c_eids);
+  PROTECT(edges=R_igraph_vector_int_to_SEXP(&c_edges));
+  igraph_vector_int_destroy(&c_edges);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = edges;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_get_all_eids_between                /
 /-------------------------------------------*/
 SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed) {

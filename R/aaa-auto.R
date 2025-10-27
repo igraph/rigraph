@@ -176,6 +176,25 @@ degree_impl <- function(
   res
 }
 
+edges_impl <- function(
+  graph,
+  eids
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_edges,
+    graph,
+    eids - 1
+  )
+
+  res
+}
+
 get_all_eids_between_impl <- function(
   graph,
   from,

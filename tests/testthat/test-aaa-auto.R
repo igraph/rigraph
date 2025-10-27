@@ -8239,3 +8239,23 @@ test_that("is_directed_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(is_directed_impl(NULL))
 })
+
+# 336. edges_impl
+
+test_that("edges_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 4), n = 4, directed = TRUE)
+  
+  # Get all edges
+  expect_snapshot(edges_impl(g, E(g)))
+  
+  # Get specific edges
+  expect_snapshot(edges_impl(g, c(1, 3)))
+})
+
+test_that("edges_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(edges_impl(NULL, 1))
+})
