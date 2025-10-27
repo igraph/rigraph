@@ -1,6 +1,15 @@
 # FIXME: ASAN tests for this file are crashing on CRAN, can we replicate?
 skip_on_cran()
 
+# NOTE: This file tests all auto-generated _impl functions.
+# According to the issue, each function should have:
+# 1. Snapshot tests (using expect_snapshot) - captures the full output
+# 2. Structured tests (using regular expectations) - tests specific aspects
+#
+# The first several functions demonstrate this pattern with comprehensive
+# structured tests. For remaining functions, structured tests should be added
+# as they are enhanced or when bugs are found.
+
 # 1. empty_impl
 test_that("empty_impl basic", {
   withr::local_seed(20250909)
