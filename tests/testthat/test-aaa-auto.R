@@ -1,3 +1,6 @@
+# FIXME: ASAN tests for this file are crashing on CRAN, can we replicate?
+skip_on_cran()
+
 # 1. empty_impl
 test_that("empty_impl basic", {
   withr::local_seed(20250909)
