@@ -305,22 +305,40 @@ sample_motifs <- function(
 #' @concept graph_motifs
 #'
 #' @examples
-#' # Collect all triads (3-vertex motifs) in a small graph
+#' # Sample triads from a graph
 #' g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
-#' motif_list <- list()
-#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
-#'   extra[[length(extra) + 1]] <<- motif
-#'   TRUE # continue searching
-#' }, extra = motif_list)
-#' length(motif_list)
 #'
-#' # Stop after finding 5 triads
-#' motif_list <- list()
+#' # Example 1: Count all triads
+#' triad_count <- 0
 #' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
-#'   extra[[length(extra) + 1]] <<- motif
-#'   length(extra) < 5 # stop when we have 5 motifs
-#' }, extra = motif_list)
-#' length(motif_list)
+#'   triad_count <<- triad_count + 1
+#'   TRUE # continue searching
+#' })
+#' triad_count
+#'
+#' # Example 2: Stop after finding 5 triads
+#' triad_count <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+#'   triad_count <<- triad_count + 1
+#'   triad_count < 5 # stop when we have 5 motifs
+#' })
+#' triad_count
+#'
+#' # Example 3: Collect information about closed vs open triads
+#' # In undirected graphs, isoclass 2 represents closed triangles (A-B-C-A)
+#' # and isoclass 1 represents open paths (A-B-C)
+#' closed_triads <- 0
+#' open_triads <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+#'   if (motif$isoclass == 2) {
+#'     closed_triads <<- closed_triads + 1
+#'   } else if (motif$isoclass == 1) {
+#'     open_triads <<- open_triads + 1
+#'   }
+#'   TRUE
+#' })
+#' closed_triads
+#' open_triads
 #' @cdocs igraph_motifs_randesu_callback
 motifs_randesu_callback <- function(
   graph,
