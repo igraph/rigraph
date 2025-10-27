@@ -906,17 +906,14 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   }
   root <- as_igraph_vs(graph, root)
 
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph.match.arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_dominator_tree, graph, root - 1, mode)
+  res <- dominator_tree_impl(
+    graph = graph,
+    root = root,
+    mode = mode
+  )
   if (igraph_opt("return.vs.es")) {
     res$leftout <- create_vs(graph, res$leftout)
   }

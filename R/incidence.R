@@ -80,11 +80,12 @@ graph_incidence_build <- function(
 
   # Handle dense unweighted matrices first
   if (!inherits(incidence, "Matrix") && is.null(weighted)) {
-    mode(incidence) <- "double"
-    on.exit(.Call(R_igraph_finalizer))
-
-    mode_num <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
-    res <- .Call(R_igraph_biadjacency, incidence, directed, mode_num, multiple)
+    res <- biadjacency_impl(
+      incidence = incidence,
+      directed = directed,
+      mode = mode,
+      multiple = multiple
+    )
     return(set_vertex_attr(res$graph, "type", value = res$types))
   }
 
