@@ -10111,14 +10111,14 @@
 # ecount_impl basic
 
     Code
-      ecount_impl(g)
+      ecount_impl(graph = g)
     Output
       [1] 0
 
 ---
 
     Code
-      ecount_impl(g)
+      ecount_impl(graph = g)
     Output
       [1] 3
 
@@ -10133,18 +10133,226 @@
 # is_directed_impl basic
 
     Code
-      is_directed_impl(g)
+      is_directed_impl(graph = g)
     Output
       [1] TRUE
 
 ---
 
     Code
-      is_directed_impl(g)
+      is_directed_impl(graph = g)
     Output
       [1] FALSE
 
 # is_directed_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# edges_impl basic
+
+    Code
+      edges_impl(graph = g, eids = E(g))
+    Output
+      [1] 0 1 1 2 2 3
+
+---
+
+    Code
+      edges_impl(graph = g, eids = c(1, 3))
+    Output
+      [1] 0 1 2 3
+
+# edges_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# add_vertices_impl basic
+
+    Code
+      vcount(g_new)
+    Output
+      [1] 5
+
+# add_vertices_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# delete_edges_impl basic
+
+    Code
+      ecount(g_new)
+    Output
+      [1] 1
+
+# delete_edges_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# delete_vertices_impl basic
+
+    Code
+      vcount(g_new)
+    Output
+      [1] 2
+
+# delete_vertices_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# incident_impl basic
+
+    Code
+      incident_impl(graph = g, vid = 2, mode = "out")
+    Output
+      [1] 2
+
+---
+
+    Code
+      incident_impl(graph = g, vid = 2, mode = "in")
+    Output
+      [1] 1
+
+---
+
+    Code
+      incident_impl(graph = g, vid = 2, mode = "all")
+    Output
+      [1] 1 2
+
+# incident_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# famous_impl errors
+
+    Code
+      x
+    Condition
+      Error in `famous_impl()`:
+      ! 'Rf_translateCharUTF8' must be called on a CHARSXP, but got 'character'
+
+# constraint_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# cocitation_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# bibcoupling_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# girth_impl basic
+
+    Code
+      result$girth
+    Output
+      [1] 5
+
+# girth_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# coreness_impl basic
+
+    Code
+      coreness_impl(graph = g)
+    Output
+      [1] 2 2 2 1
+
+# coreness_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# union_impl basic
+
+    Code
+      union_impl(left = g1, right = g2)
+    Output
+      $res
+      IGRAPH D--- 4 4 -- 
+      + edges:
+      [1] 1->2 1->3 2->3 3->4
+      
+      $edge_map_left
+      [1] 1 3
+      
+      $edge_map_right
+      [1] 2 4
+      
+
+# union_impl errors
+
+    Code
+      x
+    Condition
+      Error in `ensure_igraph()`:
+      ! Must provide a graph object (provided `NULL`).
+
+# intersection_impl basic
+
+    Code
+      intersection_impl(left = g1, right = g2)
+    Output
+      $res
+      IGRAPH D--- 3 2 -- 
+      + edges:
+      [1] 1->2 2->3
+      
+      $edge_map_left
+      [1] 1 2
+      
+      $edge_map_right
+      [1] 1 2
+      
+
+# intersection_impl errors
 
     Code
       x

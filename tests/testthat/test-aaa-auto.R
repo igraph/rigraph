@@ -8344,11 +8344,9 @@ test_that("incident_impl errors", {
 test_that("famous_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- famous_impl(
+  expect_snapshot(famous_impl(
     name = "Zachary"
-  )
-  expect_snapshot(vcount(g))
-  expect_snapshot(ecount(g))
+  ))
 })
 
 test_that("famous_impl errors", {
@@ -8445,10 +8443,9 @@ test_that("coreness_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_graph(c(1, 2, 2, 3, 3, 1, 3, 4), n = 4, directed = FALSE)
-  result <- coreness_impl(
+  expect_snapshot(coreness_impl(
     graph = g
-  )
-  expect_length(result, 4)
+  ))
 })
 
 test_that("coreness_impl errors", {
@@ -8466,11 +8463,10 @@ test_that("union_impl basic", {
   local_igraph_options(print.id = FALSE)
   g1 <- make_graph(c(1, 2, 2, 3), n = 3)
   g2 <- make_graph(c(1, 3, 3, 4), n = 4)
-  g_union <- union_impl(
+  expect_snapshot(union_impl(
     left = g1,
     right = g2
-  )
-  expect_snapshot(ecount(g_union))
+  ))
 })
 
 test_that("union_impl errors", {
@@ -8489,11 +8485,10 @@ test_that("intersection_impl basic", {
   local_igraph_options(print.id = FALSE)
   g1 <- make_graph(c(1, 2, 2, 3, 1, 3), n = 3)
   g2 <- make_graph(c(1, 2, 2, 3), n = 3)
-  g_int <- intersection_impl(
+  expect_snapshot(intersection_impl(
     left = g1,
     right = g2
-  )
-  expect_snapshot(ecount(g_int))
+  ))
 })
 
 test_that("intersection_impl errors", {
