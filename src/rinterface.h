@@ -39,7 +39,7 @@
 
 #define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
 
-SEXP R_igraph_add_env(SEXP graph);
+SEXP Rx_igraph_add_env(SEXP graph);
 
 void R_igraph_attribute_clean_preserve_list(void);
 void R_igraph_set_in_r_check(bool set);
@@ -77,7 +77,7 @@ SEXP R_igraph_0orsparsemat_to_SEXP(const igraph_sparsemat_t *sp);
 SEXP R_igraph_maxflow_stats_to_SEXP(const igraph_maxflow_stats_t *st);
 SEXP R_igraph_sirlist_to_SEXP(const igraph_vector_ptr_t *sl);
 void R_igraph_sirlist_destroy(igraph_vector_ptr_t *sl);
-SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
+SEXP Rx_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info);
 
 igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);

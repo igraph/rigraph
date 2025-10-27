@@ -149,7 +149,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   ## Function call
-  res <- .Call(R_igraph_graphlets_candidate_basis, graph, weights)
+  res <- .Call(Rx_igraph_graphlets_candidate_basis, graph, weights)
 
   res
 }
@@ -178,7 +178,7 @@ graphlet_proj <- function(
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
+  res <- .Call(Rx_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
 
   res
 }

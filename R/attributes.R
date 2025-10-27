@@ -328,7 +328,7 @@ graph_attr <- function(graph, name) {
 
   check_string(name)
 
-  .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[
+  .Call(Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[
     name
   ]]
 }
@@ -402,7 +402,7 @@ set_graph_attr <- function(graph, name, value) {
 graph.attributes <- function(graph) {
   ensure_igraph(graph)
   .Call(
-    R_igraph_mybracket2_copy,
+    Rx_igraph_mybracket2_copy,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph
@@ -418,7 +418,7 @@ graph.attributes <- function(graph) {
   }
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph,
@@ -460,7 +460,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   check_string(name)
   myattr <-
     .Call(
-      R_igraph_mybracket2,
+      Rx_igraph_mybracket2,
       graph,
       igraph_t_idx_attr,
       igraph_attr_idx_vertex
@@ -610,7 +610,7 @@ i_set_vertex_attr <- function(
   }
 
   vattrs <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex
@@ -644,7 +644,7 @@ i_set_vertex_attr <- function(
   }
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex,
@@ -661,7 +661,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   }
 
   res <- .Call(
-    R_igraph_mybracket2_copy,
+    Rx_igraph_mybracket2_copy,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex
@@ -721,7 +721,7 @@ set_value_at <- function(value, idx, length_out) {
   }
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex,
@@ -762,7 +762,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
   } else {
     check_string(name)
     myattr <- .Call(
-      R_igraph_mybracket2,
+      Rx_igraph_mybracket2,
       graph,
       igraph_t_idx_attr,
       igraph_attr_idx_edge
@@ -866,7 +866,7 @@ i_set_edge_attr <- function(
   }
 
   eattrs <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge
@@ -897,7 +897,7 @@ i_set_edge_attr <- function(
   }
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge,
@@ -914,7 +914,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   }
 
   res <- .Call(
-    R_igraph_mybracket2_copy,
+    Rx_igraph_mybracket2_copy,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge
@@ -964,7 +964,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   }
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge,
@@ -987,7 +987,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 graph_attr_names <- function(graph) {
   ensure_igraph(graph)
   res <- .Call(
-    R_igraph_mybracket2_names,
+    Rx_igraph_mybracket2_names,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph
@@ -1016,7 +1016,7 @@ vertex_attr_names <- function(graph) {
   ensure_igraph(graph)
 
   res <- .Call(
-    R_igraph_mybracket2_names,
+    Rx_igraph_mybracket2_names,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex
@@ -1044,7 +1044,7 @@ vertex_attr_names <- function(graph) {
 edge_attr_names <- function(graph) {
   ensure_igraph(graph)
   res <- .Call(
-    R_igraph_mybracket2_names,
+    Rx_igraph_mybracket2_names,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge
@@ -1078,7 +1078,7 @@ delete_graph_attr <- function(graph, name) {
   }
 
   gattr <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph
@@ -1086,7 +1086,7 @@ delete_graph_attr <- function(graph, name) {
   gattr[[name]] <- NULL
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph,
@@ -1118,7 +1118,7 @@ delete_vertex_attr <- function(graph, name) {
   }
 
   vattr <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex
@@ -1126,7 +1126,7 @@ delete_vertex_attr <- function(graph, name) {
   vattr[[name]] <- NULL
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex,
@@ -1158,7 +1158,7 @@ delete_edge_attr <- function(graph, name) {
   }
 
   eattr <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge
@@ -1166,7 +1166,7 @@ delete_edge_attr <- function(graph, name) {
   eattr[[name]] <- NULL
 
   .Call(
-    R_igraph_mybracket2_set,
+    Rx_igraph_mybracket2_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_edge,
