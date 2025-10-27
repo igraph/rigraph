@@ -64,8 +64,7 @@ for (file in all_files) {
     # Splice
     text <- c(
       text[seq2(1, repl_line$line1 - 1)],
-      paste0(str_sub(text[repl_line$line1], 1, repl_line$col1 - 1), paste(deparsed, collapse = "\n")),
-      str_sub(text[repl_line$line2], repl_line$col2 + 1),
+      paste0(str_sub(text[repl_line$line1], 1, repl_line$col1 - 1), paste(deparsed, collapse = "\n"), str_sub(text[repl_line$line2], repl_line$col2 + 1)),
       text[seq2(repl_line$line2 + 1, length(text))]
     )
   }
