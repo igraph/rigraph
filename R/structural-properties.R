@@ -1808,24 +1808,34 @@ transitivity <- function(
     } else {
       res <- transitivity_local_undirected_impl(graph, vids, isolates)
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
-        names(res) <- V(graph)$name[vids]
+        vids_indices <- as_igraph_vs(graph, vids)
+        names(res) <- V(graph)$name[vids_indices]
       }
       res
     }
   } else if (type == 2) {
     transitivity_avglocal_undirected_impl(graph, isolates)
   } else if (type == 3) {
+    # Save original vids for naming if needed
+    vids_for_names <- if (is.null(vids)) V(graph) else vids
+    
     res <- if (is.null(weights)) {
-      transitivity_local_undirected_impl(graph, vids, isolates)
-    } else {
-      transitivity_barrat_impl(graph, vids, weights, isolates)
-    }
-    if (igraph_opt("add.vertex.names") && is_named(graph)) {
       if (is.null(vids)) {
-        vids <- V(graph)
+        transitivity_local_undirected_impl(graph, mode = isolates)
+      } else {
+        transitivity_local_undirected_impl(graph, vids, isolates)
       }
-      vids <- as_igraph_vs(graph, vids)
-      names(res) <- V(graph)$name[vids]
+    } else {
+      if (is.null(vids)) {
+        transitivity_barrat_impl(graph, weights = weights, mode = isolates)
+      } else {
+        transitivity_barrat_impl(graph, vids, weights, isolates)
+      }
+    }
+    
+    if (igraph_opt("add.vertex.names") && is_named(graph)) {
+      vids_indices <- as_igraph_vs(graph, vids_for_names)
+      names(res) <- V(graph)$name[vids_indices]
     }
     res
   }
