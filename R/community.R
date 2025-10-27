@@ -984,9 +984,13 @@ modularity_matrix <- function(
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_modularity_matrix, graph, weights, resolution, directed)
+  res <- modularity_matrix_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
+  )
 
   res
 }
@@ -2516,9 +2520,12 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   }
   resolution <- as.numeric(resolution)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_multilevel, graph, weights, resolution)
+  res <- community_multilevel_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -3047,16 +3054,8 @@ i_compare <- function(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- switch(
-    igraph.match.arg(method),
-    vi = 0L,
-    nmi = 1L,
-    split.join = 2L,
-    rand = 3L,
-    adjusted.rand = 4L
-  )
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_compare_communities, comm1, comm2, method)
+  method <- igraph.match.arg(method)
+  res <- compare_communities_impl(comm1 = comm1, comm2 = comm2, method = method)
   res
 }
 
@@ -3104,8 +3103,7 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_split_join_distance, comm1, comm2)
+  res <- split_join_distance_impl(comm1 = comm1, comm2 = comm2)
   unlist(res)
 }
 
