@@ -2537,7 +2537,7 @@ personalized_pagerank_vs_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = SIMPLE
+  mode = 0L
 ) {
   # Argument checks
   ensure_igraph(rewire)
@@ -6678,7 +6678,7 @@ write_graph_pajek_impl <- function(
 write_graph_gml_impl <- function(
   graph,
   outstream,
-  options = DEFAULT,
+  options = 0L,
   id,
   creator = NULL
 ) {

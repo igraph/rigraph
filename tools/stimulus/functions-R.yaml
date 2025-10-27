@@ -346,6 +346,9 @@ igraph_personalized_pagerank_vs:
         options ON algo, reset_vids ON graph
 
 igraph_rewire:
+    R:
+        DEFAULTS:
+            mode: 0L
 
 igraph_average_path_length:
     IGNORE: RR, RC, RInit
@@ -768,6 +771,9 @@ igraph_write_graph_dimacs_flow:
         VECTOR capacity
 
 igraph_write_graph_gml:
+    R:
+        DEFAULTS:
+            options: 0L
 
 igraph_write_graph_dot:
 
