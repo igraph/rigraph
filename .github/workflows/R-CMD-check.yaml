@@ -223,8 +223,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Check status of this workflow
-          state="pending"
+          # Set status to success if job succeeded, failure otherwise
+          if [ "${{ job.status }}" == "success" ]; then
+            state="success"
+          else
+            state="failure"
+          fi
           sha=${{ inputs.ref }}
           if [ -z "${sha}" ]; then
             sha=${{ github.sha }}
