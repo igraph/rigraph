@@ -268,7 +268,7 @@ max_cardinality <- function(graph) {
 #' Isolate vertices have eccentricity zero.
 #'
 #' @param graph The input graph, it can be directed or undirected.
-#' @param vids The vertices for which the eccentricity is calculated.
+#' @param vertices The vertices for which the eccentricity is calculated.
 #' @inheritParams distances
 #' @inheritParams rlang::args_dots_empty
 #' @return `eccentricity()` returns a numeric vector, containing the
@@ -285,7 +285,7 @@ max_cardinality <- function(graph) {
 #' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   ...,
   weights = NULL,
   mode = c("all", "out", "in", "total")
@@ -308,7 +308,7 @@ eccentricity <- function(
 
   eccentricity_dijkstra_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     weights = weights,
     mode = mode
   )

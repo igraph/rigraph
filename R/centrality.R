@@ -120,7 +120,7 @@ graph.strength <- function(
   lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
   strength(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     loops = loops,
     weights = weights
@@ -543,7 +543,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which closeness will be calculated.
+#' @param vertices The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
 #'   *to* a vertex, \dQuote{out} measures paths *from* a vertex,
@@ -578,7 +578,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 closeness <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -587,7 +587,7 @@ closeness <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  vids <- as_igraph_vs(graph, vids)
+  vids <- as_igraph_vs(graph, vertices)
   mode <- switch(
     igraph.match.arg(mode),
     "out" = 1,
@@ -1370,7 +1370,7 @@ eigen_centrality <- function(
 #'
 #'
 #' @param graph The input graph.
-#' @param vids The vertices for which the strength will be calculated.
+#' @param vertices The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
@@ -1403,14 +1403,14 @@ eigen_centrality <- function(
 #' @cdocs igraph_strength
 strength <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
 ) {
   strength_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     loops = loops,
     weights = weights
@@ -1439,7 +1439,7 @@ strength <- function(
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
-#' @param vids The vertex ids for which to calculate the measure.
+#' @param vertices The vertex ids for which to calculate the measure.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
@@ -1459,11 +1459,11 @@ strength <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_diversity
-diversity <- function(graph, weights = NULL, vids = V(graph)) {
+diversity <- function(graph, weights = NULL, vertices = V(graph)) {
   diversity_impl(
     graph = graph,
     weights = weights,
-    vids = vids
+    vids = vertices
   )
 }
 
@@ -1744,7 +1744,7 @@ page_rank <- function(
 #' default), then the function calculates the exact harmonic centrality scores.
 #'
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which harmonic centrality will be calculated.
+#' @param vertices The vertices for which harmonic centrality will be calculated.
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
 #'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
@@ -1781,7 +1781,7 @@ page_rank <- function(
 #' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -1789,7 +1789,7 @@ harmonic_centrality <- function(
 ) {
   harmonic_centrality_cutoff_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     weights = weights,
     normalized = normalized,

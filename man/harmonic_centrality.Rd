@@ -6,7 +6,7 @@
 \usage{
 harmonic_centrality(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -16,7 +16,7 @@ harmonic_centrality(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which harmonic centrality will be calculated.}
+\item{vertices}{The vertices for which harmonic centrality will be calculated.}
 
 \item{mode}{Character string, defining the types of the paths used for
 measuring the distance in directed graphs. \dQuote{out} follows paths along
