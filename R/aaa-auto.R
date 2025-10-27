@@ -691,6 +691,11 @@ circulant_impl <- function(
     directed
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Circulant graph'
+    res$shifts <- shifts
+  }
+
   res
 }
 

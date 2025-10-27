@@ -22,9 +22,9 @@ circulant(...)
 An igraph graph.
 }
 \description{
-A circulant graph \code{G(n, shifts)} consists of \code{n} vertices \code{v_0}, ..., \code{v_(n-1)}
-such that for each \code{s_i} in the list of offsets \code{shifts}, \code{v_j} is connected to
-\verb{v_((j + s_i) mod n)} for all j.
+A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
+\eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets
+\code{shifts}, \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
 }
 \details{
 The function can generate either directed or undirected graphs.
@@ -33,11 +33,11 @@ It does not generate multi-edges or self-loops.
 \examples{
 # Create a circulant graph with 10 vertices and shifts 1 and 3
 g <- make_circulant(10, c(1, 3))
-print_all(g)
+plot(g, layout = layout_in_circle)
 
 # A directed circulant graph
 g2 <- make_circulant(10, c(1, 3), directed = TRUE)
-print_all(g2)
+plot(g2, layout = layout_in_circle)
 }
 \seealso{
 Other deterministic constructors: 
