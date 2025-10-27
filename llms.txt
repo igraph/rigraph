@@ -710,6 +710,11 @@ specification. Contributions of any kind are welcome!
 - [`fit_power_law()`](https://r.igraph.org/reference/fit_power_law.md) :
   Fitting a power-law distribution function to discrete data
 
+### Low-level operations
+
+- [`invalidate_cache()`](https://r.igraph.org/reference/invalidate_cache.md)
+  : Invalidate the cache of a graph
+
 ## Structural properties
 
 - [`bfs()`](https://r.igraph.org/reference/bfs.md) : Breadth-first
