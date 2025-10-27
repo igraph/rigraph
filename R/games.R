@@ -150,7 +150,7 @@ preference.game <- function(
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "preference.game()", "sample_pref()")
   sample_pref(
-    nodes = nodes,
+    n = nodes,
     types = types,
     type.dist = type.dist,
     fixed.sizes = fixed.sizes,
@@ -252,7 +252,7 @@ interconnected.islands.game <- function(
 grg.game <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "grg.game()", "sample_grg()")
-  sample_grg(nodes = nodes, radius = radius, torus = torus, coords = coords)
+  sample_grg(n = nodes, radius = radius, torus = torus, coords = coords)
 } # nocov end
 
 #' Growing random graph generation
@@ -299,7 +299,7 @@ forest.fire.game <- function(
     "sample_forestfire()"
   )
   sample_forestfire(
-    nodes = nodes,
+    n = nodes,
     fw.prob = fw.prob,
     bw.factor = bw.factor,
     ambs = ambs,
@@ -328,7 +328,7 @@ establishment.game <- function(
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "establishment.game()", "sample_traits()")
   sample_traits(
-    nodes = nodes,
+    n = nodes,
     types = types,
     k = k,
     type.dist = type.dist,
@@ -470,7 +470,7 @@ callaway.traits.game <- function(
     "sample_traits_callaway()"
   )
   sample_traits_callaway(
-    nodes = nodes,
+    n = nodes,
     types = types,
     edge.per.step = edge.per.step,
     type.dist = type.dist,
@@ -615,7 +615,7 @@ asymmetric.preference.game <- function(
     "sample_asym_pref()"
   )
   sample_asym_pref(
-    nodes = nodes,
+    n = nodes,
     types = types,
     type.dist.matrix = type.dist.matrix,
     pref.matrix = pref.matrix,
@@ -1729,7 +1729,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' depends on the types of the vertices involved and is taken from
 #' `pref.matrix`.
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
 #' @param types The number of different vertex types.
 #' @param edge.per.step The number of edges to add to the graph per time step.
 #' @param type.dist The distribution of the vertex types. This is assumed to be
@@ -1749,7 +1749,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' g1 <- sample_traits_callaway(1000, 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 #' g2 <- sample_traits(1000, 2, k = 2, pref.matrix = matrix(c(1, 0, 0, 1), ncol = 2))
 sample_traits_callaway <- function(
-  nodes,
+  n,
   types,
   edge.per.step = 1,
   type.dist = rep(1, types),
@@ -1759,7 +1759,7 @@ sample_traits_callaway <- function(
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_callaway_traits_game,
-    as.double(nodes),
+    as.double(n),
     as.double(types),
     as.double(edge.per.step),
     as.double(type.dist),
@@ -1789,7 +1789,7 @@ traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 #' @rdname sample_traits_callaway
 #' @export
 sample_traits <- function(
-  nodes,
+  n,
   types,
   k = 1,
   type.dist = rep(1, types),
@@ -1799,7 +1799,7 @@ sample_traits <- function(
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_establishment_game,
-    as.double(nodes),
+    as.double(n),
     as.double(types),
     as.double(k),
     as.double(type.dist),
@@ -1833,7 +1833,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' Euclidean norm than a given radius. If the `torus` argument is
 #' `TRUE` then a unit area torus is used instead of a square.
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
 #' @param torus Logical constant, whether to use a torus instead of a square.
@@ -1851,11 +1851,11 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' g <- sample_grg(1000, 0.05, torus = FALSE)
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
-sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+sample_grg <- function(n, radius, torus = FALSE, coords = FALSE) {
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_grg_game,
-    as.double(nodes),
+    as.double(n),
     as.double(radius),
     as.logical(torus),
     as.logical(coords)
@@ -1901,7 +1901,7 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' `type` vertex attribute for `sample_pref()` and from the
 #' `intype` and `outtype` vertex attribute for `sample_asym_pref()`.
 #'
-#' @param nodes The number of vertices in the graphs.
+#' @param n The number of vertices in the graphs.
 #' @param types The number of different vertex types.
 #' @param type.dist The distribution of the vertex types, a numeric vector of
 #'   length \sQuote{types} containing non-negative numbers. The vector will be
@@ -1938,7 +1938,7 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' tkplot(g, layout = layout_in_circle)
 #'
 sample_pref <- function(
-  nodes,
+  n,
   types,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
@@ -1956,7 +1956,7 @@ sample_pref <- function(
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_preference_game,
-    as.numeric(nodes),
+    as.numeric(n),
     as.numeric(types),
     as.double(type.dist),
     as.logical(fixed.sizes),
@@ -1985,7 +1985,7 @@ pref <- function(...) constructor_spec(sample_pref, ...)
 #' @rdname sample_pref
 #' @export
 sample_asym_pref <- function(
-  nodes,
+  n,
   types,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
@@ -2007,7 +2007,7 @@ sample_asym_pref <- function(
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_asymmetric_preference_game,
-    as.numeric(nodes),
+    as.numeric(n),
     as.numeric(types),
     as.numeric(types),
     matrix(as.double(type.dist.matrix), types, types),
@@ -3120,7 +3120,7 @@ sample_fitness_pl <- function(
 #' available then we cite all of them.  \item The same procedure is applied to
 #' all the newly cited vertices.  }
 #'
-#' @param nodes The number of vertices in the graph.
+#' @param n The number of vertices in the graph.
 #' @param fw.prob The forward burning probability, see details below.
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
@@ -3157,14 +3157,14 @@ sample_fitness_pl <- function(
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 #' @cdocs igraph_forest_fire_game
 sample_forestfire <- function(
-  nodes,
+  n,
   fw.prob,
   bw.factor = 1,
   ambs = 1,
   directed = TRUE
 ) {
   forest_fire_game_impl(
-    nodes = nodes,
+    nodes = n,
     fw.prob = fw.prob,
     bw.factor = bw.factor,
     ambs = ambs,

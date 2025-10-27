@@ -15,8 +15,6 @@ preference.game(
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graphs.}
-
 \item{types}{The number of different vertex types.}
 
 \item{type.dist}{The distribution of the vertex types, a numeric vector of

@@ -8,7 +8,7 @@
 \title{Trait-based random generation}
 \usage{
 sample_pref(
-  nodes,
+  n,
   types,
   type.dist = rep(1, types),
   fixed.sizes = FALSE,
@@ -20,7 +20,7 @@ sample_pref(
 pref(...)
 
 sample_asym_pref(
-  nodes,
+  n,
   types,
   type.dist.matrix = matrix(1, types, types),
   pref.matrix = matrix(1, types, types),
@@ -30,7 +30,7 @@ sample_asym_pref(
 asym_pref(...)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graphs.}
+\item{n}{The number of vertices in the graphs.}
 
 \item{types}{The number of different vertex types.}
 

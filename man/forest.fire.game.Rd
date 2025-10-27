@@ -7,8 +7,6 @@
 forest.fire.game(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
-
 \item{fw.prob}{The forward burning probability, see details below.}
 
 \item{bw.factor}{The backward burning ratio. The backward burning

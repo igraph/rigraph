@@ -7,8 +7,6 @@
 grg.game(nodes, radius, torus = FALSE, coords = FALSE)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
-
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}
 

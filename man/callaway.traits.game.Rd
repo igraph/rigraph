@@ -14,8 +14,6 @@ callaway.traits.game(
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
-
 \item{types}{The number of different vertex types.}
 
 \item{edge.per.step}{The number of edges to add to the graph per time step.}

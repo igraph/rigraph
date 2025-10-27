@@ -14,8 +14,6 @@ establishment.game(
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
-
 \item{types}{The number of different vertex types.}
 
 \item{k}{The number of trials per time step, see details below.}

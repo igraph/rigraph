@@ -13,8 +13,6 @@ asymmetric.preference.game(
 )
 }
 \arguments{
-\item{nodes}{The number of vertices in the graphs.}
-
 \item{types}{The number of different vertex types.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
