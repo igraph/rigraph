@@ -8328,3 +8328,131 @@ test_that("incident_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(incident_impl(NULL, 1))
 })
+
+test_that("famous_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- famous_impl("Zachary")
+  expect_snapshot(vcount(g))
+  expect_snapshot(ecount(g))
+})
+
+test_that("famous_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(famous_impl("NonexistentGraph"))
+})
+
+# 342. constraint_impl
+
+test_that("constraint_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 1), n = 3, directed = FALSE)
+  result <- constraint_impl(g)
+  expect_length(result, 3)
+})
+
+test_that("constraint_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(constraint_impl(NULL))
+})
+
+# 343. cocitation_impl
+
+test_that("cocitation_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), n = 4, directed = TRUE)
+  result <- cocitation_impl(g)
+  expect_true(is.matrix(result))
+})
+
+test_that("cocitation_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(cocitation_impl(NULL))
+})
+
+# 344. bibcoupling_impl
+
+test_that("bibcoupling_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 4), n = 4, directed = TRUE)
+  result <- bibcoupling_impl(g)
+  expect_true(is.matrix(result))
+})
+
+test_that("bibcoupling_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(bibcoupling_impl(NULL))
+})
+
+# 345. girth_impl
+
+test_that("girth_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_ring(5)
+  result <- girth_impl(g)
+  expect_snapshot(result$girth)
+})
+
+test_that("girth_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(girth_impl(NULL))
+})
+
+# 346. coreness_impl
+
+test_that("coreness_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g <- make_graph(c(1, 2, 2, 3, 3, 1, 3, 4), n = 4, directed = FALSE)
+  result <- coreness_impl(g)
+  expect_length(result, 4)
+})
+
+test_that("coreness_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(coreness_impl(NULL))
+})
+
+# 347. union_impl
+
+test_that("union_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- make_graph(c(1, 2, 2, 3), n = 3)
+  g2 <- make_graph(c(1, 3, 3, 4), n = 4)
+  g_union <- union_impl(g1, g2)
+  expect_snapshot(ecount(g_union))
+})
+
+test_that("union_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(union_impl(NULL, NULL))
+})
+
+# 348. intersection_impl
+
+test_that("intersection_impl basic", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  g1 <- make_graph(c(1, 2, 2, 3, 1, 3), n = 3)
+  g2 <- make_graph(c(1, 2, 2, 3), n = 3)
+  g_int <- intersection_impl(g1, g2)
+  expect_snapshot(ecount(g_int))
+})
+
+test_that("intersection_impl errors", {
+  withr::local_seed(20250909)
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot_igraph_error(intersection_impl(NULL, NULL))
+})
