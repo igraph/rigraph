@@ -119,7 +119,7 @@ simplify_and_colorize <- function(graph) {
   ensure_igraph(graph)
 
   # Function call
-  res <- simplify_and_colorize_impl(graph)
+  res <- simplify_and_colorize_impl(graph = graph)
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color
