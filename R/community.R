@@ -3055,7 +3055,11 @@ i_compare <- function(
     as.numeric(as.factor(comm2))
   }
   method <- igraph.match.arg(method)
-  res <- compare_communities_impl(comm1 = comm1, comm2 = comm2, method = method)
+  res <- compare_communities_impl(
+    comm1 = comm1,
+    comm2 = comm2,
+    method = method
+  )
   res
 }
 
@@ -3103,7 +3107,10 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  res <- split_join_distance_impl(comm1 = comm1, comm2 = comm2)
+  res <- split_join_distance_impl(
+    comm1 = comm1,
+    comm2 = comm2
+  )
   unlist(res)
 }
 

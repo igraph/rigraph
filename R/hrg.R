@@ -252,7 +252,12 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   steps <- as.numeric(steps)
 
   # Function call
-  res <- hrg_fit_impl(graph = graph, hrg = hrg, start = start, steps = steps)
+  res <- hrg_fit_impl(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    steps = steps
+  )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name

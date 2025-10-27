@@ -267,7 +267,9 @@ line.graph <- function(graph) {
   lifecycle::deprecate_soft("2.1.0", "line.graph()", "make_line_graph()")
   ensure_igraph(graph)
 
-  res <- linegraph_impl(graph = graph)
+  res <- linegraph_impl(
+    graph = graph
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
@@ -472,7 +474,10 @@ graph.lattice <- function(
 graph.kautz <- function(m, n) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.kautz()", "make_kautz_graph()")
-  res <- kautz_impl(m = m, n = n)
+  res <- kautz_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
     res$m <- m
@@ -499,7 +504,10 @@ graph.full.citation <- function(n, directed = TRUE) {
     "make_full_citation_graph()"
   )
   # Function call
-  res <- full_citation_impl(n = n, directed = directed)
+  res <- full_citation_impl(
+    n = n,
+    directed = directed
+  )
 
   res <- set_graph_attr(res, "name", "Full citation graph")
   res
@@ -538,7 +546,12 @@ graph.full.bipartite <- function(
     "total" = 3
   )
 
-  res <- full_bipartite_impl(n1 = n1, n2 = n2, directed = directed, mode = mode)
+  res <- full_bipartite_impl(
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
     res$n1 <- n1
@@ -637,7 +650,10 @@ graph.empty <- function(n = 0, directed = TRUE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.empty()", "make_empty_graph()")
   # Function call
-  res <- empty_impl(n = n, directed = directed)
+  res <- empty_impl(
+    n = n,
+    directed = directed
+  )
 
   res
 } # nocov end
@@ -659,7 +675,10 @@ graph.de.bruijn <- function(m, n) {
     "graph.de.bruijn()",
     "make_de_bruijn_graph()"
   )
-  res <- de_bruijn_impl(m = m, n = n)
+  res <- de_bruijn_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
     res$m <- m
@@ -729,7 +748,9 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
 graph.atlas <- function(n) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.atlas()", "graph_from_atlas()")
-  res <- atlas_impl(number = n)
+  res <- atlas_impl(
+    number = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
     res$n <- n
@@ -2199,7 +2220,9 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
 graph_from_atlas <- function(n) {
-  res <- atlas_impl(number = n)
+  res <- atlas_impl(
+    number = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
     res$n <- n
@@ -2295,7 +2318,9 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 make_line_graph <- function(graph) {
   ensure_igraph(graph)
 
-  res <- linegraph_impl(graph = graph)
+  res <- linegraph_impl(
+    graph = graph
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
@@ -2341,7 +2366,10 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' make_de_bruijn_graph(2, 2)
 #' make_line_graph(g)
 make_de_bruijn_graph <- function(m, n) {
-  res <- de_bruijn_impl(m = m, n = n)
+  res <- de_bruijn_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
     res$m <- m
@@ -2385,7 +2413,10 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' make_kautz_graph(2, 2)
 #'
 make_kautz_graph <- function(m, n) {
-  res <- kautz_impl(m = m, n = n)
+  res <- kautz_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
     res$m <- m
@@ -2447,7 +2478,12 @@ make_full_bipartite_graph <- function(
     "total" = 3
   )
 
-  res <- full_bipartite_impl(n1 = n1, n2 = n2, directed = directed, mode = mode)
+  res <- full_bipartite_impl(
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
     res$n1 <- n1
@@ -2562,7 +2598,10 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' print_all(make_full_citation_graph(10))
 make_full_citation_graph <- function(n, directed = TRUE) {
   # Function call
-  res <- full_citation_impl(n = n, directed = directed)
+  res <- full_citation_impl(
+    n = n,
+    directed = directed
+  )
 
   res <- set_graph_attr(res, "name", "Full citation graph")
   res
