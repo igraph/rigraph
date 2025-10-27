@@ -448,11 +448,12 @@ betweenness <- function(
 ) {
   res <- betweenness_cutoff_impl(
     graph = graph,
+    weights = weights,
     vids = v,
     directed = directed,
-    weights = weights,
     cutoff = cutoff
   )
+
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -477,10 +478,11 @@ edge_betweenness <- function(
   e <- as_igraph_es(graph, e)
   res <- edge_betweenness_cutoff_impl(
     graph = graph,
-    directed = directed,
     weights = weights,
+    directed = directed,
     cutoff = cutoff
   )
+
   res[as.numeric(e)]
 }
 

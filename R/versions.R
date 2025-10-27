@@ -244,5 +244,6 @@ print.igraph_version <- function(x, ...) {
 
 c_version <- function() {
   version <- version_impl()
+
   version[["version_string"]]
 }

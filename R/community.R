@@ -1700,7 +1700,6 @@ cluster_leiden <- function(
     res <- community_leiden_impl(
       graph = graph,
       weights = weights,
-      # FIXME: Also check below, might not be covered by tests
       vertex.weights = vertex_weights,
       resolution = resolution,
       beta = beta,
@@ -1718,7 +1717,6 @@ cluster_leiden <- function(
       res <- community_leiden_impl(
         graph = graph,
         weights = weights,
-        # FIXME: Also check above, might not be covered by tests
         vertex.weights = vertex_weights,
         resolution = resolution,
         beta = beta,
