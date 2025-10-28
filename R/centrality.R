@@ -444,27 +444,12 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_betweenness_cutoff,
-    graph,
-    v - 1,
-    directed,
-    weights,
-    cutoff
+  res <- betweenness_cutoff_impl(
+    graph = graph,
+    vids = v,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
   )
   if (normalized) {
     vc <- as.numeric(vcount(graph))
@@ -473,9 +458,6 @@ betweenness <- function(
     } else {
       res <- 2 * res / (vc * vc - 3 * vc + 2)
     }
-  }
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
   }
   res
 }
@@ -490,29 +472,12 @@ edge_betweenness <- function(
   weights = NULL,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
   e <- as_igraph_es(graph, e)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_edge_betweenness_cutoff,
-    graph,
-    directed,
-    weights,
-    cutoff
+  res <- edge_betweenness_cutoff_impl(
+    graph = graph,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
   )
   res[as.numeric(e)]
 }
@@ -1056,7 +1021,7 @@ arpack <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_arpack, func, extra, options, env, sym)
+  res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -1094,7 +1059,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
 
   res
 }
@@ -1245,7 +1210,7 @@ spectrum <- function(
   }
 
   eigen_adjacency_impl(
-    graph,
+    graph = graph,
     algorithm = algorithm,
     which = which,
     options = options

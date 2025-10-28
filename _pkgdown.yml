@@ -113,6 +113,9 @@ reference:
   - running_mean
   - sample_seq
   - fit_power_law
+- subtitle: Low-level operations
+- contents:
+  - has_concept("low-level operations")
 # [[[ network analysis start
 - title: Structural properties
 - contents:

@@ -229,7 +229,7 @@ disjoint_union <- function(...) {
   lapply(graphs, ensure_igraph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_disjoint_union, graphs)
+  res <- .Call(Rx_igraph_disjoint_union, graphs)
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
@@ -350,9 +350,9 @@ disjoint_union <- function(...) {
 
     on.exit(.Call(R_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(R_igraph_union, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_union, newgraphs, edgemaps)
     } else {
-      res <- .Call(R_igraph_intersection, newgraphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, newgraphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -390,9 +390,9 @@ disjoint_union <- function(...) {
 
     on.exit(.Call(R_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(R_igraph_union, graphs, edgemaps)
+      res <- .Call(Rx_igraph_union, graphs, edgemaps)
     } else {
-      res <- .Call(R_igraph_intersection, graphs, edgemaps)
+      res <- .Call(Rx_igraph_intersection, graphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -696,11 +696,11 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
     big <- permute(big, perm)
 
     on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(R_igraph_difference, big, small)
+    res <- .Call(Rx_igraph_difference, big, small)
     permute(res, match(V(res)$name, bnames))
   } else {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_difference, big, small)
+    .Call(Rx_igraph_difference, big, small)
   }
 }
 
@@ -747,7 +747,7 @@ complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_complementer, graph, as.logical(loops))
+  .Call(Rx_igraph_complementer, graph, as.logical(loops))
 }
 
 
@@ -851,7 +851,7 @@ compose <- function(g1, g2, byname = "auto") {
     length(edge_attr_names(g2)) != 0)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_compose, g1, g2, edgemaps)
+  res <- .Call(Rx_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
 

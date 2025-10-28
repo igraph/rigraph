@@ -1022,13 +1022,11 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
   type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnp,
-    as.numeric(n),
-    as.numeric(p),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnp_impl(
+    n = n,
+    p = p,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1469,7 +1467,6 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
   growing_random_game_impl(
     n = n,
     m = m,
-    ...,
     directed = directed,
     citation = citation
   )
@@ -2576,7 +2573,13 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   commonlen <- unique(c(mlen, rholen, Clen))
 
   if (length(commonlen) == 1 && commonlen == 1) {
-    hsbm_game_impl(n, m, rho, C, p)
+    hsbm_game_impl(
+      n = n,
+      m = m,
+      rho = rho,
+      C = C,
+      p = p
+    )
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
@@ -2593,7 +2596,13 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     } else {
       rep(list(C), length.out = commonlen)
     }
-    hsbm_list_game_impl(n, m, rho, C, p)
+    hsbm_list_game_impl(
+      n = n,
+      mlist = m,
+      rholist = rho,
+      Clist = C,
+      p = p
+    )
   }
 }
 
@@ -2900,7 +2909,6 @@ sample_chung_lu <- function(
   chung_lu_game_impl(
     out.weights = out.weights,
     in.weights = in.weights,
-    ...,
     loops = loops,
     variant = variant
   )

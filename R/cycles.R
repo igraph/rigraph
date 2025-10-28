@@ -97,5 +97,12 @@ simple_cycles <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  simple_cycles_impl(graph, mode, min %||% -1, max %||% -1)
+  simple_cycles_impl(
+    graph = graph,
+    mode = mode,
+    min.cycle.length = min %||%
+      -1,
+    max.cycle.length = max %||%
+      -1
+  )
 }

@@ -354,7 +354,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_maximal_cliques_count, graph, subset, min, max)
+  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
 
   res
 }
@@ -551,7 +551,7 @@ largest_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
+  res <- .Call(Rx_igraph_largest_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -567,7 +567,7 @@ max_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
+  res <- .Call(Rx_igraph_maximal_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -598,7 +598,7 @@ ivs_size <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_independence_number, graph)
+  .Call(Rx_igraph_independence_number, graph)
 }
 
 #' @rdname ivs
@@ -611,9 +611,17 @@ independence_number <- ivs_size
 #' @cdocs igraph_clique_size_hist
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
-    maximal_cliques_hist_impl(graph, min, max)
+    maximal_cliques_hist_impl(
+      graph = graph,
+      min.size = min,
+      max.size = max
+    )
   } else {
-    clique_size_hist_impl(graph, min, max)
+    clique_size_hist_impl(
+      graph = graph,
+      min.size = min,
+      max.size = max
+    )
   }
 }
 
