@@ -44,6 +44,7 @@ vertex connectivity is at least two.
 Connected components
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
+[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
@@ -63,11 +64,11 @@ g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)))
 articulation_points(g)
-#> + 2/10 vertices, from f1b5855:
+#> + 2/10 vertices, from 2ae8ce5:
 #> [1] 6 1
 
 g <- make_graph("krackhardt_kite")
 bridges(g)
-#> + 2/18 edges from 7168096:
+#> + 2/18 edges from e93b951:
 #> [1] 9--10 8-- 9
 ```

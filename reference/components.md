@@ -106,6 +106,7 @@ consecutive depth-first searches.
 Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
+[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 
@@ -171,9 +172,9 @@ groups(clu)
 #> [1] 20
 #> 
 largest_component(g)
-#> IGRAPH d644e0c U--- 14 14 -- Erdos-Renyi (gnp) graph
+#> IGRAPH 8bbfae4 U--- 14 14 -- Erdos-Renyi (gnp) graph
 #> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)
-#> + edges from d644e0c:
+#> + edges from 8bbfae4:
 #>  [1]  2-- 4  4-- 5  2-- 6  2-- 7  1-- 8  2-- 8  2--10  3--12  7--12  9--12
 #> [11] 11--12  9--13 10--13  4--14
 ```

@@ -64,6 +64,7 @@ be part of many biconnected components.
 Connected components
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
+[`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md),
 [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
 

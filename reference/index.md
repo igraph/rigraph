@@ -1133,6 +1133,8 @@
   [`is_connected()`](https://r.igraph.org/reference/components.md)
   [`count_components()`](https://r.igraph.org/reference/components.md) :
   Connected components of a graph
+- [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  **\[experimental\]** : Count reachable vertices
 - [`decompose()`](https://r.igraph.org/reference/decompose.md) :
   Decompose a graph into components
 - [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
@@ -1223,6 +1225,8 @@
 
 ## Experimental functions
 
+- [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  **\[experimental\]** : Count reachable vertices
 - [`feedback_vertex_set()`](https://r.igraph.org/reference/feedback_vertex_set.md)
   **\[experimental\]** : Finding a feedback vertex set in a graph
 - [`find_cycle()`](https://r.igraph.org/reference/find_cycle.md)

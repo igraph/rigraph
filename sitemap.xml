@@ -141,6 +141,7 @@
 <url><loc>https://r.igraph.org/reference/count_automorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_isomorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_motifs.html</loc></url>
+<url><loc>https://r.igraph.org/reference/count_reachable.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_subgraph_isomorphisms.html</loc></url>
 <url><loc>https://r.igraph.org/reference/count_triangles.html</loc></url>
 <url><loc>https://r.igraph.org/reference/create.communities.html</loc></url>
