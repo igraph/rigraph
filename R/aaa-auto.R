@@ -768,14 +768,14 @@ realize_degree_sequence_impl <- function(
   out.deg,
   in.deg = NULL,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  algorithm = c("smallest", "largest", "index")
 ) {
   # Argument checks
   out.deg <- as.numeric(out.deg)
   if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
   allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
     "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
-  method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
+  algorithm <- switch_igraph_arg(algorithm, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -784,7 +784,7 @@ realize_degree_sequence_impl <- function(
     out.deg,
     in.deg,
     allowed.edge.types,
-    method
+    algorithm
   )
 
   if (igraph_opt("add.params")) {
@@ -792,7 +792,7 @@ realize_degree_sequence_impl <- function(
     res$out.deg <- out.deg
     res$in.deg <- in.deg
     res$allowed.edge.types <- allowed.edge.types
-    res$method <- method
+    res$algorithm <- algorithm
   }
 
   res
@@ -802,14 +802,14 @@ realize_bipartite_degree_sequence_impl <- function(
   degrees1,
   degrees2,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  algorithm = c("smallest", "largest", "index")
 ) {
   # Argument checks
   degrees1 <- as.numeric(degrees1)
   degrees2 <- as.numeric(degrees2)
   allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
     "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
-  method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
+  algorithm <- switch_igraph_arg(algorithm, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -818,7 +818,7 @@ realize_bipartite_degree_sequence_impl <- function(
     degrees1,
     degrees2,
     allowed.edge.types,
-    method
+    algorithm
   )
 
   if (igraph_opt("add.params")) {
@@ -826,7 +826,7 @@ realize_bipartite_degree_sequence_impl <- function(
     res$degrees1 <- degrees1
     res$degrees2 <- degrees2
     res$allowed.edge.types <- allowed.edge.types
-    res$method <- method
+    res$algorithm <- algorithm
   }
 
   res
@@ -2441,7 +2441,7 @@ harmonic_centrality_cutoff_impl <- function(
 
 personalized_pagerank_impl <- function(
   graph,
-  algo = c("prpack", "arpack"),
+  algorithm = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
@@ -2451,7 +2451,7 @@ personalized_pagerank_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
+  algorithm <- switch_igraph_arg(algorithm, "arpack" = 1L, "prpack" = 2L)
   vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   damping <- as.numeric(damping)
@@ -2479,7 +2479,7 @@ personalized_pagerank_impl <- function(
   res <- .Call(
     R_igraph_personalized_pagerank,
     graph,
-    algo,
+    algorithm,
     vids - 1,
     directed,
     damping,
@@ -2495,7 +2495,7 @@ personalized_pagerank_impl <- function(
 
 personalized_pagerank_vs_impl <- function(
   graph,
-  algo = c("prpack", "arpack"),
+  algorithm = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
@@ -2506,7 +2506,7 @@ personalized_pagerank_vs_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  algo <- switch_igraph_arg(algo, "arpack" = 1L, "prpack" = 2L)
+  algorithm <- switch_igraph_arg(algorithm, "arpack" = 1L, "prpack" = 2L)
   vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   damping <- as.numeric(damping)
@@ -2534,7 +2534,7 @@ personalized_pagerank_vs_impl <- function(
   res <- .Call(
     R_igraph_personalized_pagerank_vs,
     graph,
-    algo,
+    algorithm,
     vids - 1,
     directed,
     damping,
@@ -2554,7 +2554,7 @@ personalized_pagerank_vs_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = 0L
+  mode = SIMPLE
 ) {
   # Argument checks
   ensure_igraph(rewire)
@@ -2972,7 +2972,7 @@ topological_sorting_impl <- function(
 feedback_arc_set_impl <- function(
   graph,
   weights = NULL,
-  algo = c("approx_eades", "exact_ip")
+  algorithm = c("approx_eades", "exact_ip")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -2984,7 +2984,7 @@ feedback_arc_set_impl <- function(
   } else {
     weights <- NULL
   }
-  algo <- switch_igraph_arg(algo, "exact_ip" = 0L, "approx_eades" = 1L)
+  algorithm <- switch_igraph_arg(algorithm, "exact_ip" = 0L, "approx_eades" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2992,7 +2992,7 @@ feedback_arc_set_impl <- function(
     R_igraph_feedback_arc_set,
     graph,
     weights,
-    algo
+    algorithm
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -3003,7 +3003,7 @@ feedback_arc_set_impl <- function(
 feedback_vertex_set_impl <- function(
   graph,
   weights = NULL,
-  algo = c("exact_ip")
+  algorithm = c("exact_ip")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -3015,7 +3015,7 @@ feedback_vertex_set_impl <- function(
   } else {
     weights <- NULL
   }
-  algo <- switch_igraph_arg(algo, "exact_ip" = 0L)
+  algorithm <- switch_igraph_arg(algorithm, "exact_ip" = 0L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -3023,7 +3023,7 @@ feedback_vertex_set_impl <- function(
     R_igraph_feedback_vertex_set,
     graph,
     weights,
-    algo
+    algorithm
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
@@ -6695,7 +6695,7 @@ write_graph_pajek_impl <- function(
 write_graph_gml_impl <- function(
   graph,
   outstream,
-  options = 0L,
+  options = DEFAULT,
   id,
   creator = NULL
 ) {
@@ -9384,12 +9384,12 @@ random_spanning_tree_impl <- function(
 tree_game_impl <- function(
   n,
   directed = FALSE,
-  method = c("lerw", "prufer")
+  algorithm = c("lerw", "prufer")
 ) {
   # Argument checks
   n <- as.numeric(n)
   directed <- as.logical(directed)
-  method <- switch_igraph_arg(method, "prufer" = 0L, "lerw" = 1L)
+  algorithm <- switch_igraph_arg(algorithm, "prufer" = 0L, "lerw" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -9397,7 +9397,7 @@ tree_game_impl <- function(
     R_igraph_tree_game,
     n,
     directed,
-    method
+    algorithm
   )
 
   res

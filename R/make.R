@@ -2122,27 +2122,40 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @param n The number of nodes in the tree
 #' @param directed Whether to create a directed tree. The edges of the tree are
 #'   oriented away from the root.
-#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
+#' @param algorithm The algorithm to use to generate the tree. \sQuote{prufer}
 #'   samples Prüfer sequences uniformly and then converts the sampled sequence to
 #'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
 #'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
-#'   algorithm). The default is \sQuote{lerw}. Note that the method based on
+#'   algorithm). The default is \sQuote{lerw}. Note that the algorithm based on
 #'   Prüfer sequences does not support directed trees at the moment.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @return A graph object.
 #'
 #' @family games
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_tree(100, method = "lerw")
+#' g <- sample_tree(100, algorithm = "lerw")
 #'
 #' @export
 #' @cdocs igraph_tree_game
-sample_tree <- function(n, directed = FALSE, method = c("lerw", "prufer")) {
+sample_tree <- function(
+  n,
+  directed = FALSE,
+  method = deprecated(),
+  algorithm = c("lerw", "prufer")
+) {
+  if (lifecycle::is_present(method)) {
+    lifecycle::deprecate_warn("2.1.0", "sample_tree(method = )", "sample_tree(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- method
+    }
+  }
+  
   tree_game_impl(
     n = n,
     directed = directed,
-    method = method
+    algorithm = algorithm
   )
 }
 
@@ -2860,7 +2873,8 @@ graph_from_lcf <- function(
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
-#' @param method Character, the method for generating the graph; see below.
+#' @param algorithm Character, the algorithm for generating the graph; see below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param allowed.edge.types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
 #'   \dQuote{multiple} allows multiple edges but disallows loop.
@@ -2903,7 +2917,7 @@ graph_from_lcf <- function(
 #' if (sum(degs) %% 2 != 0) {
 #'   degs[1] <- degs[1] + 1
 #' }
-#' g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
+#' g4 <- realize_degseq(degs, algorithm = "largest", allowed.edge.types = "all")
 #' all(degree(g4) == degs)
 #'
 #' ## Power-law degree distribution, no loops allowed but multiple edges
@@ -2920,13 +2934,21 @@ realize_degseq <- function(
   out.deg,
   in.deg = NULL,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  method = deprecated(),
+  algorithm = c("smallest", "largest", "index")
 ) {
+  if (lifecycle::is_present(method)) {
+    lifecycle::deprecate_warn("2.1.0", "realize_degseq(method = )", "realize_degseq(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- method
+    }
+  }
+  
   realize_degree_sequence_impl(
     out.deg = out.deg,
     in.deg = in.deg,
     allowed.edge.types = allowed.edge.types,
-    method = method
+    algorithm = algorithm
   )
 }
 
@@ -2963,7 +2985,8 @@ realize_degseq <- function(
 #' @param allowed.edge.types Character, specifies the types of allowed edges.
 #'   \dQuote{simple} allows simple graphs only (no multiple edges).
 #'   \dQuote{multiple} allows multiple edges.
-#' @param method Character, the method for generating the graph; see below.
+#' @param algorithm Character, the algorithm for generating the graph; see below.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @inheritParams rlang::args_dots_empty
 #' @seealso [realize_degseq()] to create a not necessarily bipartite graph.
 #' @export
@@ -2977,16 +3000,25 @@ realize_bipartite_degseq <- function(
   degrees2,
   ...,
   allowed.edge.types = c("simple", "multiple"),
-  method = c("smallest", "largest", "index")
+  method = deprecated(),
+  algorithm = c("smallest", "largest", "index")
 ) {
   check_dots_empty()
+  
+  if (lifecycle::is_present(method)) {
+    lifecycle::deprecate_warn("2.1.0", "realize_bipartite_degseq(method = )", "realize_bipartite_degseq(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- method
+    }
+  }
+  
   allowed.edge.types <- igraph.match.arg(allowed.edge.types)
-  method <- igraph.match.arg(method)
+  algorithm <- igraph.match.arg(algorithm)
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
     allowed.edge.types = allowed.edge.types,
-    method = method
+    algorithm = algorithm
   )
 
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))

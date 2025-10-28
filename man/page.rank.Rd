@@ -6,26 +6,20 @@
 \usage{
 page.rank(
   graph,
-  algo = c("prpack", "arpack"),
+  algo = deprecated(),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
   weights = NULL,
-  options = NULL
+  options = NULL,
+  algorithm = c("prpack", "arpack")
 )
 }
 \arguments{
 \item{graph}{The graph object.}
 
-\item{algo}{Character scalar, which implementation to use to carry out the
-calculation. The default is \code{"prpack"}, which uses the PRPACK library
-(\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
-by solving a set of linear equations. This is a new implementation in igraph
-version 0.7, and the suggested one, as it is the most stable and the fastest
-for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
-default implementation from igraph version 0.5 until version 0.7. It computes
-PageRank scores by solving an eingevalue problem.}
+\item{algo}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
 
 \item{vids}{The vertices of interest.}
 
@@ -53,6 +47,15 @@ selected by the surfer.}
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details. This argument is ignored if the PRPACK
 implementation is used.}
+
+\item{algorithm}{Character scalar, which implementation to use to carry out the
+calculation. The default is \code{"prpack"}, which uses the PRPACK library
+(\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
+by solving a set of linear equations. This is a new implementation in igraph
+version 0.7, and the suggested one, as it is the most stable and the fastest
+for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
+default implementation from igraph version 0.5 until version 0.7. It computes
+PageRank scores by solving an eingevalue problem.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -9,7 +9,8 @@ realize_bipartite_degseq(
   degrees2,
   ...,
   allowed.edge.types = c("simple", "multiple"),
-  method = c("smallest", "largest", "index")
+  method = deprecated(),
+  algorithm = c("smallest", "largest", "index")
 )
 }
 \arguments{
@@ -23,7 +24,9 @@ realize_bipartite_degseq(
 \dQuote{simple} allows simple graphs only (no multiple edges).
 \dQuote{multiple} allows multiple edges.}
 
-\item{method}{Character, the method for generating the graph; see below.}
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
+
+\item{algorithm}{Character, the algorithm for generating the graph; see below.}
 }
 \value{
 The new graph object.

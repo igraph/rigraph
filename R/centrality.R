@@ -30,19 +30,28 @@ subgraph.centrality <- function(graph, diag = FALSE) {
 #' @export
 page.rank <- function(
   graph,
-  algo = c("prpack", "arpack"),
+  algo = deprecated(),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
   weights = NULL,
-  options = NULL
+  options = NULL,
+  algorithm = c("prpack", "arpack")
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+  
+  if (lifecycle::is_present(algo)) {
+    lifecycle::deprecate_warn("2.1.0", "page.rank(algo = )", "page.rank(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- algo
+    }
+  }
+  
   page_rank(
     graph = graph,
-    algo = algo,
+    algorithm = algorithm,
     vids = vids,
     directed = directed,
     damping = damping,
@@ -1645,7 +1654,7 @@ hub_score <- function(
 #' increase at all.
 #'
 #' @param graph The graph object.
-#' @param algo Character scalar, which implementation to use to carry out the
+#' @param algorithm Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library
 #'   (<https://github.com/dgleich/prpack>) to calculate PageRank scores
 #'   by solving a set of linear equations. This is a new implementation in igraph
@@ -1653,6 +1662,7 @@ hub_score <- function(
 #'   for all but small graphs.  `"arpack"` uses the ARPACK library, the
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
+#' @param algo `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @param vids The vertices of interest.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
@@ -1713,17 +1723,25 @@ hub_score <- function(
 #' @cdocs igraph_personalized_pagerank
 page_rank <- function(
   graph,
-  algo = c("prpack", "arpack"),
+  algo = deprecated(),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
   weights = NULL,
-  options = NULL
+  options = NULL,
+  algorithm = c("prpack", "arpack")
 ) {
+  if (lifecycle::is_present(algo)) {
+    lifecycle::deprecate_warn("2.1.0", "page_rank(algo = )", "page_rank(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- algo
+    }
+  }
+  
   personalized_pagerank_impl(
     graph = graph,
-    algo = algo,
+    algorithm = algorithm,
     vids = vids,
     directed = directed,
     damping = damping,
