@@ -10361,9 +10361,9 @@
       union_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH U--- 4 4 -- 
+      IGRAPH D--- 4 4 -- 
       + edges:
-      [1] 1--2 1--3 2--3 3--4
+      [1] 1->2 1->3 2->3 3->4
       
       $edge_map_left
       [1] 1 3
@@ -10386,9 +10386,9 @@
       intersection_impl(left = g1, right = g2)
     Output
       $res
-      IGRAPH U--- 3 2 -- 
+      IGRAPH D--- 3 2 -- 
       + edges:
-      [1] 1--2 2--3
+      [1] 1->2 2->3
       
       $edge_map_left
       [1] 1 2
