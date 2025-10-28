@@ -5,7 +5,7 @@
 \alias{tree}
 \title{Create tree graphs}
 \usage{
-make_tree(n, children = 2, mode = c("out", "in", "undirected"))
+make_tree(n, children = 2, mode = c("undirected", "out", "in"))
 
 tree(...)
 }

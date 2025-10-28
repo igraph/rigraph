@@ -383,10 +383,10 @@ test_that("sample_pa can start from a graph", {
 
   g_pa7 <- sample_pa(10, m = 3, start.graph = make_star(5, mode = "in"))
   expect_equal(degree(g_pa7, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
-  expect_isomorphic(induced_subgraph(g_pa7, 1:5), make_star(5))
+  expect_isomorphic(induced_subgraph(g_pa7, 1:5), make_star(5, mode = "in"))
 
-  g_pa8 <- sample_pa(10, m = 3, start.graph = make_star(10))
-  expect_isomorphic(g_pa8, make_star(10))
+  g_pa8 <- sample_pa(10, m = 3, start.graph = make_star(10, mode = "in"))
+  expect_isomorphic(g_pa8, make_star(10, mode = "in"))
 })
 
 test_that("sample_bipartite works -- undirected gnp", {

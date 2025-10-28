@@ -99,9 +99,7 @@ graph <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
@@ -226,9 +224,7 @@ graph.famous <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
@@ -1522,9 +1518,7 @@ make_graph <- function(
       if (!missing(n)) {
         args <- c(args, list(n = n))
       }
-      if (!missing(directed)) {
-        args <- c(args, list(directed = directed))
-      }
+      args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
     } else if (is.character(edges)) {
