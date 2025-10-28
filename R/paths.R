@@ -306,6 +306,18 @@ eccentricity <- function(
     }
   }
 
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "eccentricity(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   eccentricity_dijkstra_impl(
     graph = graph,
     vids = vids,
@@ -365,6 +377,18 @@ radius <- function(
     }
   }
 
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "radius(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   radius_dijkstra_impl(
     graph = graph,
     weights = weights,
@@ -405,6 +429,18 @@ graph_center <- function(
   weights = NULL,
   mode = c("all", "out", "in", "total")
 ) {
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "graph_center(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   graph_center_dijkstra_impl(
     graph = graph,
     weights = weights,

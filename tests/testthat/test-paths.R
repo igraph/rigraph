@@ -2,7 +2,7 @@ test_that("radius() works", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_equal(radius(g), 3)
+  expect_equal(radius(g, mode = "all"), 3)
   expect_equal(radius(g, mode = "in"), 0)
   expect_equal(radius(g, mode = "out"), 0)
 })
@@ -26,7 +26,7 @@ test_that("eccentricity() works", {
   withr::local_seed(42)
   g <- make_tree(10, 2)
 
-  expect_equal(eccentricity(g), c(3, 3, 4, 4, 4, 5, 5, 5, 5, 5))
+  expect_equal(eccentricity(g, mode = "all"), c(3, 3, 4, 4, 4, 5, 5, 5, 5, 5))
   expect_equal(eccentricity(g, mode = "in"), c(0, 1, 1, 2, 2, 2, 2, 3, 3, 3))
   expect_equal(eccentricity(g, mode = "out"), c(3, 2, 1, 1, 1, 0, 0, 0, 0, 0))
 })
@@ -49,7 +49,7 @@ test_that("eccentricity() works -- lifecycle", {
 test_that("graph_center() works", {
   withr::local_seed(42)
   g <- make_tree(100, 7)
-  expect_equal(as.numeric(graph_center(g)), c(1, 2))
+  expect_equal(as.numeric(graph_center(g, mode = "all")), c(1, 2))
   expect_equal(as.numeric(graph_center(g, mode = "in")), 1)
   expect_equal(as.numeric(graph_center(g, mode = "out")), 16:100)
 })
