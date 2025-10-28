@@ -69,7 +69,7 @@ CSTRING:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            %C% = Rf_translateCharUTF8(%I%);
+            %C% = Rf_translateCharUTF8(STRING_ELT(%I%, 0));
     OUTCONV:
         OUT: |-
             PROTECT(%I% = Rf_ScalarString(Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8)));
@@ -183,7 +183,16 @@ MATRIX_LIST:
     CALL: '&%C%'
     CTYPE: igraph_matrix_list_t
     INCONV:
-        IN: R_igraph_SEXP_to_matrixlist(%I%, &%C%);
+        IN: |-
+            R_igraph_SEXP_to_matrixlist(%I%, &%C%);
+        OUT: |-
+            IGRAPH_R_CHECK(igraph_matrix_list_init(&%C%, 0));
+            IGRAPH_FINALLY(igraph_matrix_list_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_matrixlist_to_SEXP(&%C%));
+            igraph_matrix_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 VECTOR_LIST:
     CALL: '&%C%'
@@ -569,7 +578,7 @@ ARPACKOPT:
     INCONV:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
-        INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
+        INOUT: PROTECT(%I%=Rx_igraph_arpack_options_to_SEXP(&%C%));
 
 ARPACKSTORAGE:
     CALL: '0'
@@ -886,7 +895,7 @@ PAGERANKOPT:
     OUTCONV:
         INOUT: |-
           if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK) {
-            PROTECT(%I% = R_igraph_arpack_options_to_SEXP(&%C%1));
+            PROTECT(%I% = Rx_igraph_arpack_options_to_SEXP(&%C%1));
           } else {
             PROTECT(%I%);
           }
