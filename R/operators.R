@@ -333,6 +333,7 @@ disjoint_union <- function(...) {
 #'
 #' @aliases %j%
 #' @param g1,g2 Graph objects.
+#' @param x,y Graph objects.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export

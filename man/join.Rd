@@ -11,6 +11,8 @@ x \%j\% y
 }
 \arguments{
 \item{g1, g2}{Graph objects.}
+
+\item{x, y}{Graph objects.}
 }
 \value{
 A new graph object.
