@@ -1162,8 +1162,8 @@ path <- function(...) {
     )
 
     # Abort if adding named vertices to a non-empty unnamed graph
-    # Allow adding to graphs with no edges (like make_empty_graph(n))
-    if (!is.null(nn) && !is_named(e1) && ecount(e1) > 0) {
+    # Empty graphs have zero vertices
+    if (!is.null(nn) && !is_named(e1) && vcount(e1) > 0) {
       cli::cli_abort(
         "Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have {.code NA} names."
       )
@@ -1197,8 +1197,8 @@ path <- function(...) {
   } else if (is.character(e2)) {
     ## Adding named vertices
     # Abort if adding named vertices to a non-empty unnamed graph
-    # Allow adding to graphs with no edges (like make_empty_graph(n))
-    if (!is_named(e1) && ecount(e1) > 0) {
+    # Empty graphs have zero vertices
+    if (!is_named(e1) && vcount(e1) > 0) {
       cli::cli_abort(
         "Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have {.code NA} names."
       )
