@@ -963,6 +963,31 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   )
 })
 
+test_that("any_loop(), which_loop(), count_loops() works", {
+  # Graph with loops
+  g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
+  expect_true(any_loop(g))
+  expect_equal(which_loop(g), c(TRUE, TRUE, TRUE, FALSE))
+  expect_equal(count_loops(g), 3)
+
+  # Graph without loops
+  g2 <- make_graph(c(1, 2, 2, 3, 3, 4))
+  expect_false(any_loop(g2))
+  expect_equal(which_loop(g2), c(FALSE, FALSE, FALSE))
+  expect_equal(count_loops(g2), 0)
+
+  # Empty graph
+  g3 <- make_empty_graph(n = 5)
+  expect_false(any_loop(g3))
+  expect_equal(count_loops(g3), 0)
+
+  # Graph with only loops
+  g4 <- make_graph(c(1, 1, 2, 2, 3, 3))
+  expect_true(any_loop(g4))
+  expect_equal(which_loop(g4), c(TRUE, TRUE, TRUE))
+  expect_equal(count_loops(g4), 3)
+})
+
 test_that("edge_density works", {
   g <- sample_gnp(50, 4 / 50)
   gd <- edge_density(g)
