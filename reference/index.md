@@ -28,6 +28,9 @@
 - [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md)
   [`chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md)
   : Create an extended chordal ring graph
+- [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
+  [`circulant()`](https://r.igraph.org/reference/make_circulant.md) :
+  Create a circulant graph
 - [`make_clusters()`](https://r.igraph.org/reference/make_clusters.md) :
   Creates a communities object.
 - [`make_de_bruijn_graph()`](https://r.igraph.org/reference/make_de_bruijn_graph.md)
@@ -641,6 +644,7 @@
   decomposition of graphs
 - [`degree()`](https://r.igraph.org/reference/degree.md)
   [`max_degree()`](https://r.igraph.org/reference/degree.md)
+  [`mean_degree()`](https://r.igraph.org/reference/degree.md)
   [`degree_distribution()`](https://r.igraph.org/reference/degree.md) :
   Degree and degree distribution of the vertices
 - [`dfs()`](https://r.igraph.org/reference/dfs.md) : Depth-first search

@@ -77,6 +77,7 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
@@ -93,10 +94,10 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> IGRAPH 4e30e20 U--- 125 300 -- Lattice graph
+#> IGRAPH 0ba0764 U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from 4e30e20:
+#> + edges from 0ba0764:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
@@ -106,10 +107,10 @@ make_lattice(c(5, 5, 5))
 #> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> IGRAPH 3945253 U--- 125 300 -- Lattice graph
+#> IGRAPH 2f3d990 U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from 3945253:
+#> + edges from 2f3d990:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16

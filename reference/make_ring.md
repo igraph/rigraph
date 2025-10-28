@@ -46,6 +46,7 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
@@ -58,7 +59,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_ring(10))
-#> IGRAPH 4c2abf9 U--- 10 10 -- Ring graph
+#> IGRAPH c04d1d9 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -67,10 +68,10 @@ print_all(make_ring(10))
 #> |   [1] FALSE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from 4c2abf9:
+#> + edges from c04d1d9:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-#> IGRAPH cccf8ac D--- 10 20 -- Ring graph
+#> IGRAPH 2244d00 D--- 10 20 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -79,7 +80,7 @@ print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 #> |   [1] TRUE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from cccf8ac:
+#> + edges from 2244d00:
 #>  [1]  1-> 2  2-> 1  2-> 3  3-> 2  3-> 4  4-> 3  4-> 5  5-> 4  5-> 6  6-> 5
 #> [11]  6-> 7  7-> 6  7-> 8  8-> 7  8-> 9  9-> 8  9->10 10-> 9 10-> 1  1->10
 ```

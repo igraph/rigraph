@@ -40,6 +40,7 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
@@ -52,12 +53,12 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> IGRAPH dc21ceb U--- 5 10 -- Full graph
+#> IGRAPH 93ce3d0 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from dc21ceb:
+#> + edges from 93ce3d0:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH b0e6f6c D--- 4 12 -- Full graph
+#> IGRAPH efb8511 D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

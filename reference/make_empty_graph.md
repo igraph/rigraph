@@ -36,6 +36,7 @@ Other deterministic constructors:
 [`graph_from_literal()`](https://r.igraph.org/reference/graph_from_literal.md),
 [`make_()`](https://r.igraph.org/reference/make_.md),
 [`make_chordal_ring()`](https://r.igraph.org/reference/make_chordal_ring.md),
+[`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
@@ -52,9 +53,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH bee2ddd D--- 10 0 -- 
-#> + edges from bee2ddd:
+#> IGRAPH 1e187e3 D--- 10 0 -- 
+#> + edges from 1e187e3:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH c853426 U--- 5 0 -- 
-#> + edges from c853426:
+#> IGRAPH dd923b1 U--- 5 0 -- 
+#> + edges from dd923b1:
 ```
