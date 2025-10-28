@@ -984,9 +984,13 @@ modularity_matrix <- function(
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_modularity_matrix, graph, weights, resolution, directed)
+  res <- modularity_matrix_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
+  )
 
   res
 }
@@ -1326,7 +1330,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_community_to_membership2, merges - 1, vcount, steps)
+  res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
 
@@ -1698,9 +1702,8 @@ cluster_leiden <- function(
   membership <- initial_membership
   if (n_iterations > 0) {
     res <- community_leiden_impl(
-      graph,
+      graph = graph,
       weights = weights,
-      # FIXME: Also check below, might not be covered by tests
       vertex.weights = vertex_weights,
       resolution = resolution,
       beta = beta,
@@ -1708,6 +1711,7 @@ cluster_leiden <- function(
       n.iterations = n_iterations,
       membership = membership
     )
+
     membership <- res$membership
   } else {
     prev_quality <- -Inf
@@ -1715,9 +1719,8 @@ cluster_leiden <- function(
     while (prev_quality < quality) {
       prev_quality <- quality
       res <- community_leiden_impl(
-        graph,
+        graph = graph,
         weights = weights,
-        # FIXME: Also check above, might not be covered by tests
         vertex.weights = vertex_weights,
         resolution = resolution,
         beta = beta,
@@ -1725,6 +1728,7 @@ cluster_leiden <- function(
         n.iterations = 1,
         membership = membership
       )
+
       membership <- res$membership
       quality <- res$quality
     }
@@ -2119,7 +2123,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(R_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(Rx_igraph_i_levc_arp, externalP, externalE, v)
   }
   f
 }
@@ -2413,12 +2417,13 @@ cluster_label_prop0 <- function(
 
   # Function call
   membership <- community_label_propagation_impl(
-    graph,
+    graph = graph,
     mode = mode,
     weights = weights,
     initial = initial,
     fixed = fixed
   )
+
   res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -2515,9 +2520,12 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   }
   resolution <- as.numeric(resolution)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_multilevel, graph, weights, resolution)
+  res <- community_multilevel_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -2605,9 +2613,10 @@ cluster_optimal <- function(graph, weights = NULL) {
 
   # Function call
   res <- community_optimal_modularity_impl(
-    graph,
+    graph = graph,
     weights = weights
   )
+
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -2675,35 +2684,11 @@ cluster_infomap <- function(
   nb.trials = 10,
   modularity = TRUE
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
-    e.weights <- E(graph)$weight
-  }
-  if (!is.null(e.weights) && any(!is.na(e.weights))) {
-    e.weights <- as.numeric(e.weights)
-  } else {
-    e.weights <- NULL
-  }
-  if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) {
-    v.weights <- V(graph)$weight
-  }
-  if (!is.null(v.weights) && any(!is.na(v.weights))) {
-    v.weights <- as.numeric(v.weights)
-  } else {
-    v.weights <- NULL
-  }
-  nb.trials <- as.numeric(nb.trials)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_community_infomap,
-    graph,
-    e.weights,
-    v.weights,
-    nb.trials
+  res <- community_infomap_impl(
+    graph = graph,
+    e.weights = e.weights,
+    v.weights = v.weights,
+    nb.trials = nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -3069,16 +3054,12 @@ i_compare <- function(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- switch(
-    igraph.match.arg(method),
-    vi = 0L,
-    nmi = 1L,
-    split.join = 2L,
-    rand = 3L,
-    adjusted.rand = 4L
+  method <- igraph.match.arg(method)
+  res <- compare_communities_impl(
+    comm1 = comm1,
+    comm2 = comm2,
+    method = method
   )
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_compare_communities, comm1, comm2, method)
   res
 }
 
@@ -3126,8 +3107,10 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_split_join_distance, comm1, comm2)
+  res <- split_join_distance_impl(
+    comm1 = comm1,
+    comm2 = comm2
+  )
   unlist(res)
 }
 
@@ -3304,7 +3287,6 @@ voronoi_cells <- function(
   voronoi_impl(
     graph = graph,
     generators = generators,
-    ...,
     weights = weights,
     mode = mode,
     tiebreaker = tiebreaker

@@ -22,17 +22,17 @@
 ## -----------------------------------------------------------------------
 
 make_weak_ref <- function(key, value, finalizer = NULL) {
-  .Call(R_igraph_make_weak_ref, key, value, finalizer)
+  .Call(Rx_igraph_make_weak_ref, key, value, finalizer)
 }
 
 weak_ref_key <- function(ref) {
-  .Call(R_igraph_weak_ref_key, ref)
+  .Call(Rx_igraph_weak_ref_key, ref)
 }
 
 weak_ref_value <- function(ref) {
-  .Call(R_igraph_weak_ref_value, ref)
+  .Call(Rx_igraph_weak_ref_value, ref)
 }
 
 weak_ref_run_finalizer <- function(ref) {
-  .Call(R_igraph_weak_ref_run_finalizer, ref)
+  .Call(Rx_igraph_weak_ref_run_finalizer, ref)
 }

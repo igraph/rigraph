@@ -489,7 +489,7 @@ as_adj <- function(
 as_edgelist <- function(graph, names = TRUE) {
   ensure_igraph(graph)
   on.exit(.Call(R_igraph_finalizer))
-  res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE), ncol = 2)
+  res <- matrix(.Call(Rx_igraph_get_edgelist, graph, TRUE), ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
     res <- matrix(V(graph)$name[res], ncol = 2)
@@ -624,17 +624,14 @@ as_undirected <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "collapse" = 1L,
-    "each" = 0L,
-    "mutual" = 2L
-  )
-  edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
+  mode <- igraph.match.arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_to_undirected, graph, mode, edge.attr.comb)
+  res <- to_undirected_impl(
+    graph = graph,
+    mode = mode,
+    edge.attr.comb = edge.attr.comb
+  )
 
   res
 }
@@ -699,7 +696,7 @@ as_adj_list <- function(
 
   multiple <- if (multiple) 1 else 0
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_get_adjlist, graph, mode, loops, multiple)
+  res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -729,7 +726,7 @@ as_adj_edge_list <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_get_adjedgelist, graph, mode, loops)
+  res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {
     names(res) <- V(graph)$name
@@ -965,7 +962,10 @@ get.incidence.dense <- function(
 ) {
   if (is.null(attr)) {
     ## Function call
-    res <- get_biadjacency_impl(graph, types)
+    res <- get_biadjacency_impl(
+      graph = graph,
+      types = types
+    )
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[res$row_ids]
@@ -1190,7 +1190,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 
   if (what %in% c("vertices", "both")) {
     ver <- .Call(
-      R_igraph_mybracket2,
+      Rx_igraph_mybracket2,
       x,
       igraph_t_idx_attr,
       igraph_attr_idx_vertex
@@ -1208,7 +1208,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
     el <- as_edgelist(x)
     edg <- c(
       list(from = el[, 1], to = el[, 2]),
-      .Call(R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
+      .Call(Rx_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
     )
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
@@ -1315,7 +1315,7 @@ as_long_data_frame <- function(graph) {
   ensure_igraph(graph)
 
   ver <- .Call(
-    R_igraph_mybracket2,
+    Rx_igraph_mybracket2,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_vertex
@@ -1332,7 +1332,7 @@ as_long_data_frame <- function(graph) {
   edg <- c(
     list(from = el[, 1]),
     list(to = el[, 2]),
-    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+    .Call(Rx_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
   )
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))
