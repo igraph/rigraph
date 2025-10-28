@@ -91,6 +91,12 @@ igraph_connect_neighborhood:
 
 igraph_famous:
 
+igraph_circulant:
+    R:
+      GATTR:
+        name: Circulant graph
+      GATTR-PARAM: shifts
+
 igraph_lcf_vector:
     R:
       GATTR:

@@ -694,7 +694,8 @@
     Code
       circulant_impl(n = 5, shifts = c(1, 2))
     Output
-      IGRAPH U--- 5 10 -- 
+      IGRAPH U--- 5 10 -- Circulant graph
+      + attr: name (g/c), shifts (g/n)
       + edges:
        [1] 1--2 2--3 3--4 4--5 1--5 1--3 2--4 3--5 1--4 2--5
 
@@ -703,7 +704,8 @@
     Code
       circulant_impl(n = 5, shifts = c(1, 2), directed = TRUE)
     Output
-      IGRAPH D--- 5 10 -- 
+      IGRAPH D--- 5 10 -- Circulant graph
+      + attr: name (g/c), shifts (g/n)
       + edges:
        [1] 1->2 2->3 3->4 4->5 5->1 1->3 2->4 3->5 4->1 5->2
 
