@@ -39,11 +39,13 @@ Other deterministic constructors:
 [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
 
 ## Related documentation in the C library
 
@@ -53,9 +55,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 1e187e3 D--- 10 0 -- 
-#> + edges from 1e187e3:
+#> IGRAPH 23e927f D--- 10 0 -- 
+#> + edges from 23e927f:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH dd923b1 U--- 5 0 -- 
-#> + edges from dd923b1:
+#> IGRAPH 399354f U--- 5 0 -- 
+#> + edges from 399354f:
 ```

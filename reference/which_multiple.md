@@ -16,6 +16,8 @@ count_multiple(graph, eids = E(graph))
 which_loop(graph, eids = E(graph))
 
 any_loop(graph)
+
+count_loops(graph)
 ```
 
 ## Arguments
@@ -33,13 +35,16 @@ any_loop(graph)
 
 `any_loop()` and `any_multiple()` return a logical scalar.
 `which_loop()` and `which_multiple()` return a logical vector.
-`count_multiple()` returns a numeric vector.
+`count_loops()` returns a numeric scalar with the total number of loop
+edges. `count_multiple()` returns a numeric vector.
 
 ## Details
 
 `any_loop()` decides whether the graph has any loop edges.
 
 `which_loop()` decides whether the edges of the graph are loop edges.
+
+`count_loops()` counts the total number of loop edges in the graph.
 
 `any_multiple()` decides whether the graph has any multiple edges.
 
@@ -98,7 +103,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 [`has_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple),
 [`count_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_multiple),
 [`is_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop),
-[`has_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop).
+[`has_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_loop),
+[`count_loops()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_loops).
 
 ## Examples
 
@@ -109,6 +115,8 @@ any_loop(g)
 #> [1] TRUE
 which_loop(g)
 #> [1]  TRUE  TRUE  TRUE FALSE
+count_loops(g)
+#> [1] 3
 
 # Multiple edges
 g <- sample_pa(10, m = 3, algorithm = "bag")

@@ -95,22 +95,24 @@
 <code><a href="make_circulant.html">make_circulant()</a></code>,
 <code><a href="make_empty_graph.html">make_empty_graph()</a></code>,
 <code><a href="make_full_citation_graph.html">make_full_citation_graph()</a></code>,
+<code><a href="make_full_multipartite.html">make_full_multipartite()</a></code>,
 <code><a href="make_graph.html">make_graph()</a></code>,
 <code><a href="make_lattice.html">make_lattice()</a></code>,
 <code><a href="make_ring.html">make_ring()</a></code>,
 <code><a href="make_star.html">make_star()</a></code>,
-<code><a href="make_tree.html">make_tree()</a></code></p></div>
+<code><a href="make_tree.html">make_tree()</a></code>,
+<code><a href="make_turan.html">make_turan()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_full_graph</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 93ce3d0 U--- 5 10 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 84d8411 U--- 5 10 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 93ce3d0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 84d8411:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5</span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_full_graph</span><span class="op">(</span><span class="fl">4</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH efb8511 D--- 4 12 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9d579ec D--- 4 12 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>

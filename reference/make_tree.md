@@ -49,22 +49,24 @@ Other deterministic constructors:
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
-[`make_star()`](https://r.igraph.org/reference/make_star.md)
+[`make_star()`](https://r.igraph.org/reference/make_star.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
 
 ## Examples
 
 ``` r
 make_tree(10, 2)
-#> IGRAPH b26e27a D--- 10 9 -- Tree
+#> IGRAPH b561cfe D--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from b26e27a:
+#> + edges from b561cfe:
 #> [1] 1-> 2 1-> 3 2-> 4 2-> 5 3-> 6 3-> 7 4-> 8 4-> 9 5->10
 make_tree(10, 3, mode = "undirected")
-#> IGRAPH cf67420 U--- 10 9 -- Tree
+#> IGRAPH 2632907 U--- 10 9 -- Tree
 #> + attr: name (g/c), children (g/n), mode (g/c)
-#> + edges from cf67420:
+#> + edges from 2632907:
 #> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10
 ```

@@ -273,22 +273,24 @@ Other deterministic constructors:
 [`make_empty_graph()`](https://r.igraph.org/reference/make_empty_graph.md),
 [`make_full_citation_graph()`](https://r.igraph.org/reference/make_full_citation_graph.md),
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md),
+[`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
 
 ## Examples
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 15f902c U--- 6 4 -- 
-#> + edges from 15f902c:
+#> IGRAPH 928e0ce U--- 6 4 -- 
+#> + edges from 928e0ce:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 360945f UN-- 4 3 -- 
+#> IGRAPH f81bbb3 UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 360945f (vertex names):
+#> + edges from f81bbb3 (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

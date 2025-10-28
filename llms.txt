@@ -141,6 +141,9 @@ specification. Contributions of any kind are welcome!
 - [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md)
   [`full_graph()`](https://r.igraph.org/reference/make_full_graph.md) :
   Create a full graph
+- [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  [`full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  : Create a full multipartite graph
 - [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
   [`make_directed_graph()`](https://r.igraph.org/reference/make_graph.md)
   [`make_undirected_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -165,6 +168,9 @@ specification. Contributions of any kind are welcome!
 - [`make_tree()`](https://r.igraph.org/reference/make_tree.md)
   [`tree()`](https://r.igraph.org/reference/make_tree.md) : Create tree
   graphs
+- [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+  [`turan()`](https://r.igraph.org/reference/make_turan.md) : Create a
+  Turán graph
 - [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
   : Creating a graph from a given degree sequence, deterministically
 - [`realize_bipartite_degseq()`](https://r.igraph.org/reference/realize_bipartite_degseq.md)
@@ -790,7 +796,8 @@ specification. Contributions of any kind are welcome!
   [`any_multiple()`](https://r.igraph.org/reference/which_multiple.md)
   [`count_multiple()`](https://r.igraph.org/reference/which_multiple.md)
   [`which_loop()`](https://r.igraph.org/reference/which_multiple.md)
-  [`any_loop()`](https://r.igraph.org/reference/which_multiple.md) :
+  [`any_loop()`](https://r.igraph.org/reference/which_multiple.md)
+  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) :
   Find the multiple or loop edges in a graph
 - [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md) :
   Find mutual edges in a directed graph

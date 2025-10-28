@@ -95,9 +95,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 # Random graph with expected mean degree of 2
 g <- sample_gnp(1000, 2 / 1000)
 mean(degree(g))
-#> [1] 2.056
+#> [1] 1.976
 degree_distribution(g)
-#>  [1] 0.119 0.274 0.279 0.173 0.099 0.037 0.013 0.004 0.000 0.002
+#>  [1] 0.134 0.276 0.276 0.182 0.086 0.028 0.012 0.004 0.000 0.002
 
 # Pick a simple graph on 6 vertices uniformly at random
 plot(sample_gnp(6, 0.5))
