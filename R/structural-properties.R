@@ -2800,6 +2800,8 @@ bfs <- function(
   }
   if (parent) {
     res$parent <- res$parent + 1
+    # Convert 0 (no parent) to NA
+    res$parent[res$parent == 0] <- NA
   }
   if (pred) {
     res$pred <- res$pred + 1
@@ -2811,9 +2813,6 @@ bfs <- function(
   if (igraph_opt("return.vs.es")) {
     if (order) {
       res$order <- V(graph)[.env$res$order, na_ok = TRUE]
-    }
-    if (parent) {
-      res$parent <- create_vs(graph, res$parent, na_ok = TRUE)
     }
     if (pred) {
       res$pred <- create_vs(graph, res$pred, na_ok = TRUE)
@@ -3053,6 +3052,8 @@ dfs <- function(
   }
   if (parent) {
     res$parent <- res$parent + 1
+    # Convert 0 (no parent) to NA
+    res$parent[res$parent == 0] <- NA
   }
 
   if (igraph_opt("return.vs.es")) {
@@ -3062,7 +3063,6 @@ dfs <- function(
     if (order.out) {
       res$order.out <- V(graph)[.env$res$order.out, na_ok = TRUE]
     }
-    if (parent) res$parent <- create_vs(graph, res$parent, na_ok = TRUE)
   } else {
     if (order) {
       res$order <- res$order[res$order != 0]
