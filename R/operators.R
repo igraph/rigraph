@@ -967,7 +967,21 @@ edges <- edge
 #' g
 #' plot(g)
 vertex <- function(...) {
-  structure(list(...), class = "igraph.vertex")
+  args <- list(...)
+  arg_names <- names(args)
+
+  # Check for duplicate named arguments
+  if (!is.null(arg_names)) {
+    named_args <- arg_names[arg_names != ""]
+    if (anyDuplicated(named_args)) {
+      duplicates <- unique(named_args[duplicated(named_args)])
+      cli::cli_abort(
+        "Duplicate attribute {cli::qty(duplicates)}name{?s} in {.fn vertices}: {.val {duplicates}}."
+      )
+    }
+  }
+
+  structure(args, class = "igraph.vertex")
 }
 
 #' @export
