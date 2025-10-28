@@ -894,6 +894,10 @@ mean_distance <- function(
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -904,6 +908,7 @@ mean_distance <- function(
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -947,6 +952,16 @@ max_degree <- function(
     graph = graph,
     v = v,
     mode = mode,
+    loops = loops
+  )
+}
+
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph = graph,
     loops = loops
   )
 }
