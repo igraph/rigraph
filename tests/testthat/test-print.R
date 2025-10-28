@@ -32,7 +32,7 @@ test_that("print.igraph() works", {
   expect_output(print(g3), "1 --")
 
   withr::with_seed(42, {
-    g4 <- make_star(100)
+    g4 <- make_star(100, mode = "in")
   })
   expect_output(print(g4), "2->1")
 

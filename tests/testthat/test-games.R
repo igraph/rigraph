@@ -350,14 +350,14 @@ test_that("sample_pa can start from a graph", {
   is_degree_two_or_three <- (degree(g_pa1) %in% 2:3)
   expect_true(sum(is_degree_two_or_three) %in% 0:4)
 
-  g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10))
-  expect_isomorphic(g_pa2, make_star(10))
+  g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10, mode = "in"))
+  expect_isomorphic(g_pa2, make_star(10, mode = "in"))
 
   g_pa3 <- sample_pa(
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_empty_graph(5)
+    start.graph = make_empty_graph(5, directed = TRUE)
   )
   expect_equal(degree(g_pa3, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
@@ -365,23 +365,23 @@ test_that("sample_pa can start from a graph", {
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_star(5)
+    start.graph = make_star(5, mode = "in")
   )
   expect_equal(degree(g_pa4, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
-  expect_isomorphic(induced_subgraph(g_pa4, 1:5), make_star(5))
+  expect_isomorphic(induced_subgraph(g_pa4, 1:5), make_star(5, mode = "in"))
 
   g_pa5 <- sample_pa(
     10,
     m = 3,
     algorithm = "psumtree-multiple",
-    start.graph = make_star(10)
+    start.graph = make_star(10, mode = "in")
   )
-  expect_isomorphic(g_pa5, make_star(10))
+  expect_isomorphic(g_pa5, make_star(10, mode = "in"))
 
-  g_pa6 <- sample_pa(10, m = 3, start.graph = make_empty_graph(5))
+  g_pa6 <- sample_pa(10, m = 3, start.graph = make_empty_graph(5, directed = TRUE))
   expect_equal(degree(g_pa6, mode = "out"), c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3))
 
-  g_pa7 <- sample_pa(10, m = 3, start.graph = make_star(5))
+  g_pa7 <- sample_pa(10, m = 3, start.graph = make_star(5, mode = "in"))
   expect_equal(degree(g_pa7, mode = "out"), c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3))
   expect_isomorphic(induced_subgraph(g_pa7, 1:5), make_star(5))
 

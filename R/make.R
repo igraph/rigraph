@@ -13,7 +13,7 @@ graph <- function(
   ...,
   n = max(edges),
   isolates = NULL,
-  directed = TRUE,
+  directed = FALSE,
   dir = directed,
   simplify = TRUE
 ) {
@@ -315,7 +315,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @inheritParams make_tree
 #' @keywords internal
 #' @export
-graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
+graph.tree <- function(n, children = 2, mode = c("undirected", "out", "in")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
   mode <- igraph.match.arg(mode)
@@ -348,7 +348,7 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @export
 graph.star <- function(
   n,
-  mode = c("in", "out", "mutual", "undirected"),
+  mode = c("undirected", "in", "out", "mutual"),
   center = 1
 ) {
   # nocov start
@@ -1438,7 +1438,7 @@ make_graph <- function(
   ...,
   n = max(edges),
   isolates = NULL,
-  directed = TRUE,
+  directed = FALSE,
   dir = directed,
   simplify = TRUE
 ) {
@@ -1876,7 +1876,7 @@ from_literal <- function(...) {
 #' make_star(5, mode = "undirected")
 make_star <- function(
   n,
-  mode = c("in", "out", "mutual", "undirected"),
+  mode = c("undirected", "in", "out", "mutual"),
   center = 1
 ) {
   mode <- igraph.match.arg(mode)
@@ -2092,7 +2092,7 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' @examples
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
-make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
+make_tree <- function(n, children = 2, mode = c("undirected", "out", "in")) {
   mode <- igraph.match.arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 

@@ -231,7 +231,7 @@ test_that("make_graph works for numeric edges and isolates", {
 
 test_that("make_graph handles names", {
   graph_make_names <- make_graph(letters[1:10])
-  graph_elist_names <- make_empty_graph() +
+  graph_elist_names <- make_empty_graph(directed = FALSE) +
     vertices(letters[1:10]) +
     edges(letters[1:10])
   expect_identical_graphs(graph_make_names, graph_elist_names)
@@ -239,7 +239,7 @@ test_that("make_graph handles names", {
 
 test_that("make_graph handles names and isolates", {
   graph_make_iso <- make_graph(letters[1:10], isolates = letters[11:20])
-  graph_elist_iso <- make_empty_graph() +
+  graph_elist_iso <- make_empty_graph(directed = FALSE) +
     vertices(letters[1:20]) +
     edges(letters[1:10])
   expect_identical_graphs(graph_make_iso, graph_elist_iso)
