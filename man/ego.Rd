@@ -16,7 +16,7 @@ connect(graph, order, mode = c("all", "out", "in", "total"))
 ego_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -24,7 +24,7 @@ ego_size(
 neighborhood_size(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -32,7 +32,7 @@ neighborhood_size(
 ego(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -40,7 +40,7 @@ ego(
 neighborhood(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -48,7 +48,7 @@ neighborhood(
 make_ego_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -56,7 +56,7 @@ make_ego_graph(
 make_neighborhood_graph(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 )
@@ -75,7 +75,7 @@ vertices from which the source vertex is reachable in at most \code{order}
 steps are counted. \sQuote{"all"} ignores the direction of the edges. This
 argument is ignored for undirected graphs.}
 
-\item{nodes}{The vertices for which the calculation is performed.}
+\item{vids}{The vertices for which the calculation is performed.}
 
 \item{mindist}{The minimum distance to include the vertex in the result.}
 }

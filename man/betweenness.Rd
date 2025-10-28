@@ -9,7 +9,7 @@
 \usage{
 betweenness(
   graph,
-  v = V(graph),
+  vids = V(graph),
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -27,7 +27,7 @@ edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The vertices for which the vertex betweenness will be calculated.}
+\item{vids}{The vertices for which the vertex betweenness will be calculated.}
 
 \item{directed}{Logical, whether directed paths should be considered while
 determining the shortest paths.}
@@ -56,7 +56,7 @@ betweenness. If negative, then there is no such limit.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in
-\code{v} for \code{betweenness()}.
+\code{vids} for \code{betweenness()}.
 
 A numeric vector with the edge betweenness score for each edge in \code{e}
 for \code{edge_betweenness()}.

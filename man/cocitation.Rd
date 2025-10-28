@@ -5,21 +5,21 @@
 \alias{bibcoupling}
 \title{Cocitation coupling}
 \usage{
-cocitation(graph, v = V(graph))
+cocitation(graph, vids = V(graph))
 
-bibcoupling(graph, v = V(graph))
+bibcoupling(graph, vids = V(graph))
 }
 \arguments{
 \item{graph}{The graph object to analyze}
 
-\item{v}{Vertex sequence or numeric vector, the vertex ids for which the
+\item{vids}{Vertex sequence or numeric vector, the vertex ids for which the
 cocitation or bibliographic coupling values we want to calculate. The
 default is all vertices.}
 }
 \value{
-A numeric matrix with \code{length(v)} lines and
+A numeric matrix with \code{length(vids)} lines and
 \code{vcount(graph)} columns. Element \verb{(i,j)} contains the cocitation
-or bibliographic coupling for vertices \code{v[i]} and \code{j}.
+or bibliographic coupling for vertices \code{vids[i]} and \code{j}.
 }
 \description{
 Two vertices are cocited if there is another vertex citing both of them.
@@ -29,10 +29,10 @@ both cite, \code{bibcoupling()} calculates this.
 }
 \details{
 \code{cocitation()} calculates the cocitation counts for the vertices in the
-\code{v} argument and all vertices in the graph.
+\code{vids} argument and all vertices in the graph.
 
 \code{bibcoupling()} calculates the bibliographic coupling for vertices in
-\code{v} and all vertices in the graph.
+\code{vids} and all vertices in the graph.
 
 Calculating the cocitation or bibliographic coupling for only one vertex
 costs the same amount of computation as for all vertices. This might change
