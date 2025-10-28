@@ -1,19 +1,19 @@
 test_that("as_directed works", {
   gnp_undirected <- sample_gnp(100, 2 / 100)
   gnp_mutual <- as_directed(gnp_undirected, mode = "mutual")
-  expect_equal(degree(gnp_undirected), degree(gnp_mutual) / 2)
+  expect_equal(degree(gnp_undirected), degree(gnp_mutual, mode = "all") / 2)
   expect_isomorphic(gnp_undirected, as_undirected(gnp_mutual))
 
   gnp_arbitrary <- as_directed(gnp_undirected, mode = "arbitrary")
-  expect_equal(degree(gnp_undirected), degree(gnp_arbitrary))
+  expect_equal(degree(gnp_undirected), degree(gnp_arbitrary, mode = "all"))
   expect_isomorphic(gnp_undirected, as_undirected(gnp_arbitrary))
 
   gnp_random <- as_directed(gnp_undirected, mode = "random")
-  expect_equal(degree(gnp_undirected), degree(gnp_random))
+  expect_equal(degree(gnp_undirected), degree(gnp_random, mode = "all"))
   expect_isomorphic(gnp_undirected, as_undirected(gnp_random))
 
   gnp_acyclic <- as_directed(gnp_undirected, mode = "acyclic")
-  expect_equal(degree(gnp_undirected), degree(gnp_acyclic))
+  expect_equal(degree(gnp_undirected), degree(gnp_acyclic, mode = "all"))
   expect_isomorphic(gnp_undirected, as_undirected(gnp_acyclic))
 })
 

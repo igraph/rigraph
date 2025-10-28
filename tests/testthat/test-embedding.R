@@ -24,7 +24,12 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
   no <- 7
   A <- g[]
   A <- A +
-    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+    1 /
+      2 *
+      as(
+        Matrix::Matrix(diag(degree(g, mode = "all")), doDiag = FALSE),
+        "generalMatrix"
+      )
   ss <- eigen(A)
 
   U <- standardize_eigen_signs(ss$vectors)
@@ -34,14 +39,14 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_la <- embed_adjacency_matrix(
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -57,14 +62,14 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_lm <- embed_adjacency_matrix(
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -83,14 +88,14 @@ test_that("embed_adjacency_matrix -- Undirected, unweighted case works", {
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_sa <- embed_adjacency_matrix(
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -111,7 +116,12 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
   no <- 3
   A <- g[]
   A <- A +
-    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+    1 /
+      2 *
+      as(
+        Matrix::Matrix(diag(degree(g, mode = "all")), doDiag = FALSE),
+        "generalMatrix"
+      )
   ss <- eigen(A)
 
   U <- standardize_eigen_signs(ss$vectors)
@@ -121,14 +131,14 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_la <- embed_adjacency_matrix(
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -144,14 +154,14 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_lm <- embed_adjacency_matrix(
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -170,14 +180,14 @@ test_that("embed_adjacency_matrix -- Undirected, weighted case works", {
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_sa <- embed_adjacency_matrix(
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -195,7 +205,12 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
   no <- 3
   A <- g[]
   A <- A +
-    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+    1 /
+      2 *
+      as(
+        Matrix::Matrix(diag(degree(g, mode = "all")), doDiag = FALSE),
+        "generalMatrix"
+      )
   ss <- svd(A)
 
   U <- standardize_eigen_signs(ss$u)
@@ -207,14 +222,14 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_la <- embed_adjacency_matrix(
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -235,14 +250,14 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_lm <- embed_adjacency_matrix(
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -263,14 +278,14 @@ test_that("embed_adjacency_matrix -- Directed, unweighted case works", {
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_sa <- embed_adjacency_matrix(
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -296,7 +311,12 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
   no <- 3
   A <- g[]
   A <- A +
-    1 / 2 * as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix")
+    1 /
+      2 *
+      as(
+        Matrix::Matrix(diag(degree(g, mode = "all")), doDiag = FALSE),
+        "generalMatrix"
+      )
   ss <- svd(A)
 
   U <- standardize_eigen_signs(ss$u)
@@ -308,14 +328,14 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_la <- embed_adjacency_matrix(
     g,
     no = no,
     which = "la",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -334,14 +354,14 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_lm <- embed_adjacency_matrix(
     g,
     no = no,
     which = "lm",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -360,14 +380,14 @@ test_that("embed_adjacency_matrix -- Directed, weighted case works", {
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = TRUE
   )
   as_sa <- embed_adjacency_matrix(
     g,
     no = no,
     which = "sa",
-    cvec = degree(g) / 2,
+    cvec = degree(g, mode = "all") / 2,
     scaled = FALSE
   )
 
@@ -415,7 +435,10 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, D-A case works", {
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  A <- as(Matrix::Matrix(diag(degree(g)), doDiag = FALSE), "generalMatrix") -
+  A <- as(
+    Matrix::Matrix(diag(degree(g, mode = "all")), doDiag = FALSE),
+    "generalMatrix"
+  ) -
     g[]
   ss <- eigen(A)
 
@@ -514,7 +537,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  D12 <- diag(1 / sqrt(degree(g)))
+  D12 <- diag(1 / sqrt(degree(g, mode = "all")))
   A <- D12 %*% g[] %*% D12
   ss <- eigen(A)
 
@@ -613,7 +636,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  D12 <- diag(1 / sqrt(degree(g)))
+  D12 <- diag(1 / sqrt(degree(g, mode = "all")))
   A <- diag(vcount(g)) - D12 %*% g[] %*% D12
   ss <- eigen(A)
 
@@ -810,7 +833,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, DAD case works", {
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  D12 <- diag(1 / sqrt(degree(g)))
+  D12 <- diag(1 / sqrt(degree(g, mode = "all")))
   A <- D12 %*% g[] %*% D12
   ss <- eigen(A)
 
@@ -910,7 +933,7 @@ test_that("embed_laplacian_matrix -- Undirected, unweighted, I-DAD case works", 
   g <- sample_gnm(10, 20, directed = FALSE)
 
   no <- 3
-  D12 <- diag(1 / sqrt(degree(g)))
+  D12 <- diag(1 / sqrt(degree(g, mode = "all")))
   A <- diag(vcount(g)) - D12 %*% g[] %*% D12
   ss <- eigen(A)
 

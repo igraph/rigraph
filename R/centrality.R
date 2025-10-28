@@ -1408,6 +1408,18 @@ strength <- function(
   loops = TRUE,
   weights = NULL
 ) {
+  # Warn about upcoming change in default mode parameter
+  if (missing(mode) && is_directed(graph)) {
+    lifecycle::deprecate_soft(
+      "2.1.0",
+      "strength(mode =)",
+      details = paste(
+        "The default value of `mode` will change from \"all\" to \"out\" in a future version.",
+        "Please specify `mode` explicitly to avoid this warning and ensure consistent behavior."
+      )
+    )
+  }
+
   strength_impl(
     graph = graph,
     vids = vids,
