@@ -214,28 +214,24 @@ test_that("t() is aliased to edge reversal for graphs", {
 })
 
 test_that("vertices() works", {
-  g_all_unnamed <- suppressWarnings(make_empty_graph(1) + vertices("a", "b"))
+  g_all_unnamed <- make_empty_graph(1) + vertices("a", "b")
   expect_s3_class(V(g_all_unnamed), "igraph.vs")
   expect_identical(V(g_all_unnamed)$name, c(NA, "a", "b"))
 
-  g_mix_named_unnamed <- suppressWarnings(
-    make_empty_graph(1) + vertices("a", "b", foo = 5)
-  )
+  g_mix_named_unnamed <- make_empty_graph(1) + vertices("a", "b", foo = 5)
   expect_s3_class(V(g_mix_named_unnamed), "igraph.vs")
   expect_true(is.na(V(g_mix_named_unnamed)$name[1]))
   expect_identical(V(g_mix_named_unnamed)$name[-1], c("a", "b"))
   expect_equal(V(g_mix_named_unnamed)$foo, c(NA, 5, 5))
 
-  g_mix_bigger_attribute <- suppressWarnings(
-    make_empty_graph(1) +
-      vertices("a", "b", "c", foo = 5:7, bar = 8)
-  )
+  g_mix_bigger_attribute <- make_empty_graph(1) +
+    vertices("a", "b", "c", foo = 5:7, bar = 8)
   expect_s3_class(V(g_mix_bigger_attribute), "igraph.vs")
   expect_identical(V(g_mix_bigger_attribute)$name, c(NA, "a", "b", "c"))
   expect_equal(V(g_mix_bigger_attribute)$foo, c(NA, 5, 6, 7))
   expect_equal(V(g_mix_bigger_attribute)$bar, c(NA, 8, 8, 8))
 
-  g_one_unnamed <- suppressWarnings(make_empty_graph(1) + vertices(letters))
+  g_one_unnamed <- make_empty_graph(1) + vertices(letters)
   expect_s3_class(V(g_one_unnamed), "igraph.vs")
   expect_identical(V(g_one_unnamed)$name, c(NA, letters))
 
@@ -253,9 +249,9 @@ test_that("vertices() works", {
   expect_s3_class(V(g_none), "igraph.vs")
   expect_null(V(g_none)$name)
 
-  expect_snapshot_error(suppressWarnings(
+  expect_snapshot_error(
     make_empty_graph(1) + vertices("a", "b", foo = 5:7)
-  ))
+  )
 })
 
 test_that("vertices() errors on duplicate attribute names", {
@@ -280,39 +276,40 @@ test_that("vertices() errors on duplicate attribute names", {
   )
 })
 
-test_that("adding named vertices to unnamed graphs warns", {
+test_that("adding named vertices to non-empty unnamed graphs errors", {
   # Test with vertex() function
-  expect_warning(
-    make_ring(10) + vertex(1),
-    "Adding named vertices to an unnamed graph"
+  expect_snapshot_error(
+    make_ring(10) + vertex(1)
   )
 
-  expect_warning(
-    make_ring(10) + vertex("a"),
-    "Adding named vertices to an unnamed graph"
+  expect_snapshot_error(
+    make_ring(10) + vertex("a")
   )
 
-  expect_warning(
-    make_ring(10) + vertices("a", "b"),
-    "Adding named vertices to an unnamed graph"
+  expect_snapshot_error(
+    make_ring(10) + vertices("a", "b")
   )
 
   # Test with character vector
-  expect_warning(
-    make_ring(10) + c("a", "b"),
-    "Adding named vertices to an unnamed graph"
+  expect_snapshot_error(
+    make_ring(10) + c("a", "b")
   )
 
-  # No warning when adding to named graph
+  # No error when adding to named graph
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
-  expect_no_warning(g + vertex("k"))
-  expect_no_warning(g + c("x", "y"))
+  expect_no_error(g + vertex("k"))
+  expect_no_error(g + c("x", "y"))
 
-  # No warning when adding unnamed vertices
-  expect_no_warning(make_ring(10) + vertex(foo = 5))
-  expect_no_warning(make_ring(10) + vertices(foo = 1:3))
-  expect_no_warning(make_ring(10) + 5)
+  # No error when adding unnamed vertices
+  expect_no_error(make_ring(10) + vertex(foo = 5))
+  expect_no_error(make_ring(10) + vertices(foo = 1:3))
+  expect_no_error(make_ring(10) + 5)
+
+  # No error when adding to empty graph
+  expect_no_error(make_empty_graph() + vertex("a"))
+  expect_no_error(make_empty_graph() + c("a", "b"))
+  expect_no_error(make_empty_graph() + vertices("a", "b"))
 })
 
 

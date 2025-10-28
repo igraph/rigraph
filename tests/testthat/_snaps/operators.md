@@ -18,3 +18,19 @@
 
     Duplicate attribute names in `vertices()`: "foo" and "bar".
 
+# adding named vertices to non-empty unnamed graphs errors
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+
+---
+
+    Cannot add named vertices to a non-empty unnamed graph. Existing vertices will have `NA` names.
+

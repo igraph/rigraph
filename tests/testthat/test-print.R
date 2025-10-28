@@ -46,7 +46,7 @@ test_that("print.igraph() works", {
   })
   expect_output(print(g6), "     ")
 
-  kite <- suppressWarnings(make_empty_graph(directed = FALSE) + LETTERS[1:10])
+  kite <- make_empty_graph(directed = FALSE) + LETTERS[1:10]
   kite <- kite +
     edges(
       "A", "B",

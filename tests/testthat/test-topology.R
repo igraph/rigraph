@@ -46,11 +46,9 @@ test_that("automorphism_group works with colored graphs", {
 })
 
 test_that("isomorphisms() works", {
-  motif <- suppressWarnings(
-    make_empty_graph(directed = FALSE) +
-      vertices("D1", "D2", type = c("type1", "type1")) +
-      edges("D1", "D2", type = c("type2"))
-  )
+  motif <- make_empty_graph(directed = FALSE) +
+    vertices("D1", "D2", type = c("type1", "type1")) +
+    edges("D1", "D2", type = c("type2"))
   motif_iso <- isomorphisms(
     motif,
     motif,
@@ -63,11 +61,9 @@ test_that("isomorphisms() works", {
 })
 
 test_that("subgraph_isomorphisms works", {
-  motif <- suppressWarnings(
-    make_empty_graph(directed = FALSE) +
-      vertices("D1", "D2", type = c("type1", "type1")) +
-      edges("D1", "D2", type = c("type2"))
-  )
+  motif <- make_empty_graph(directed = FALSE) +
+    vertices("D1", "D2", type = c("type1", "type1")) +
+    edges("D1", "D2", type = c("type2"))
   out <- subgraph_isomorphisms(
     target = motif,
     pattern = motif,
