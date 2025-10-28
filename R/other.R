@@ -96,7 +96,7 @@ running_mean <- function(v, binwidth) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_running_mean, v, binwidth)
+  .Call(Rx_igraph_running_mean, v, binwidth)
 }
 
 

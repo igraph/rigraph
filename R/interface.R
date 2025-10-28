@@ -218,7 +218,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 
   vertices.orig <- vcount(graph)
   on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(R_igraph_add_vertices, graph, as.numeric(nv))
+  graph <- .Call(Rx_igraph_add_vertices, graph, as.numeric(nv))
   vertices.new <- vcount(graph)
 
   if (vertices.new - vertices.orig != 0) {
@@ -265,7 +265,7 @@ delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
+  .Call(Rx_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
 }
 
 #' Delete vertices from a graph
@@ -291,7 +291,7 @@ delete_vertices <- function(graph, v) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
+  .Call(Rx_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
 }
 
 ###################################################################
@@ -321,7 +321,7 @@ gsize <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_ecount, graph)
+  .Call(Rx_igraph_ecount, graph)
 }
 #' @rdname gsize
 #' @export
@@ -393,7 +393,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
     stop("No vertex was specified")
   }
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
+  res <- .Call(Rx_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -420,7 +420,7 @@ is_directed <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_is_directed, graph)
+  .Call(Rx_igraph_is_directed, graph)
 }
 
 #' Incident vertices of some graph edges
@@ -448,9 +448,9 @@ ends <- function(graph, es, names = TRUE) {
   on.exit(.Call(R_igraph_finalizer))
 
   if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(R_igraph_get_edge, graph, es2) + 1
+    res[, !is.na(es)] <- .Call(Rx_igraph_get_edge, graph, es2) + 1
   } else {
-    res[, !is.na(es)] <- .Call(R_igraph_edges, graph, es2) + 1
+    res[, !is.na(es)] <- .Call(Rx_igraph_edges, graph, es2) + 1
   }
 
   if (names && is_named(graph)) {
@@ -651,7 +651,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(R_igraph_finalizer))
 
-  res <- .Call(R_igraph_adjacent_vertices, graph, vv, mode)
+  res <- .Call(Rx_igraph_adjacent_vertices, graph, vv, mode)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -690,7 +690,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(R_igraph_finalizer))
 
-  res <- .Call(R_igraph_incident_edges, graph, vv, mode)
+  res <- .Call(Rx_igraph_incident_edges, graph, vv, mode)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -702,4 +702,38 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   }
 
   res
+}
+
+#' Invalidate the cache of a graph
+#'
+#' igraph graphs cache some basic properties (such as whether the graph is a
+#' DAG or whether it is simple) in an internal data structure for faster
+#' repeated queries. This function invalidates the cache, forcing a
+#' recalculation of the cached properties the next time they are needed.
+#'
+#' You should not need to call this function during normal usage; however, it
+#' may be useful for debugging cache-related issues. A tell-tale sign of an
+#' invalid cache entry is when the result of a cached function (such as
+#' \code{\link{is_dag}()} or \code{\link{is_simple}()}) changes after calling
+#' this function.
+#'
+#' @param graph The graph whose cache is to be invalidated.
+#' @return The graph with its cache invalidated. Since the graph is modified
+#'   in place in R as well, you can also ignore the return value.
+#'
+#' @family low-level operations
+#'
+#' @export
+#' @examples
+#' g <- make_ring(10)
+#' # Cache is populated when calling is_simple()
+#' is_simple(g)
+#' # Invalidate cache (for debugging purposes)
+#' invalidate_cache(g)
+#' # Result should be the same
+#' is_simple(g)
+invalidate_cache <- function(graph) {
+  invalidate_cache_impl(
+    graph = graph
+  )
 }
