@@ -1739,6 +1739,20 @@ page_rank <- function(
     }
   }
   
+  # Don't call personalized_pagerank_impl directly due to a Stimulus bug
+  # where renamed parameters aren't properly handled in conditional logic.
+  # Instead, replicate the logic here.
+  
+  # Handle options initialization based on algorithm (before conversion to integer)
+  if (is.null(options)) {
+    algorithm_val <- match.arg(algorithm)
+    if (algorithm_val == "arpack") {
+      options <- arpack_defaults()
+    } else if (algorithm_val == "prpack") {
+      options <- list(niter=1000, eps=0.001)
+    }
+  }
+  
   personalized_pagerank_impl(
     graph = graph,
     algorithm = algorithm,
