@@ -483,3 +483,60 @@ test_that("graph_from_lcf() works", {
   g2 <- make_graph("Franklin")
   expect_isomorphic(g1, g2)
 })
+
+test_that("make_full_multipartite() works", {
+  # Test basic multipartite graph
+  g <- make_full_multipartite(c(2, 3, 4))
+  expect_vcount(g, 9)
+  expect_ecount(g, 2 * 3 + 2 * 4 + 3 * 4)
+  expect_true("type" %in% vertex_attr_names(g))
+  expect_equal(V(g)$type, c(rep(1, 2), rep(2, 3), rep(3, 4)))
+  expect_false(is_directed(g))
+
+  # Test directed multipartite graph
+  g2 <- make_full_multipartite(c(2, 2), directed = TRUE, mode = "out")
+  expect_true(is_directed(g2))
+  expect_ecount(g2, 4)
+
+  # Test single partition (should have no edges)
+  g3 <- make_full_multipartite(5)
+  expect_vcount(g3, 5)
+  expect_ecount(g3, 0)
+
+  # Test constructor spec form
+  g4 <- make_(full_multipartite(c(2, 3)))
+  expect_vcount(g4, 5)
+  expect_ecount(g4, 6)
+})
+
+test_that("make_turan() works", {
+  # Test basic Turán graph
+  g <- make_turan(10, 3)
+  expect_vcount(g, 10)
+  expect_true("type" %in% vertex_attr_names(g))
+  expect_false(is_directed(g))
+
+  # Check partition sizes are balanced
+  types <- V(g)$type
+  sizes <- table(types)
+  expect_equal(max(sizes) - min(sizes), 1) # Should differ by at most 1
+
+  # Test with n divisible by r
+  g2 <- make_turan(9, 3)
+  types2 <- V(g2)$type
+  sizes2 <- table(types2)
+  expect_true(all(sizes2 == 3)) # All partitions should have size 3
+
+  # Test edge cases
+  g3 <- make_turan(5, 5) # r equals n
+  expect_vcount(g3, 5)
+  # When r equals n, each vertex is in its own partition, creating a complete graph
+  expect_ecount(g3, 10) # Complete graph K5 has 5*4/2 = 10 edges
+
+  g4 <- make_turan(5, 1) # r = 1, single partition, no edges
+  expect_ecount(g4, 0)
+
+  # Test constructor spec form
+  g5 <- make_(turan(10, 2))
+  expect_vcount(g5, 10)
+})

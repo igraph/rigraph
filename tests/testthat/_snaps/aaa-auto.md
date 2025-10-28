@@ -603,6 +603,15 @@
       $types
       [1] 1 1 2 2 2 3 3 3 3
       
+      $name
+      [1] "Full multipartite graph"
+      
+      $n
+      [1] 2 3 4
+      
+      $mode
+      [1] 3
+      
 
 ---
 
@@ -617,6 +626,15 @@
       
       $types
       [1] 1 1 2 2 2 3 3 3 3
+      
+      $name
+      [1] "Full multipartite graph"
+      
+      $n
+      [1] 2 3 4
+      
+      $mode
+      [1] 2
       
 
 # full_multipartite_impl errors
@@ -747,6 +765,15 @@
       
       $types
       [1] 1 1 1 2 2
+      
+      $name
+      [1] "Turan graph"
+      
+      $n
+      [1] 5
+      
+      $r
+      [1] 2
       
 
 # turan_impl errors

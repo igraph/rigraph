@@ -2617,6 +2617,117 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a full multipartite graph
+#'
+#' A multipartite graph contains multiple types of vertices and connections
+#' are only possible between vertices of different types. This function
+#' creates a complete multipartite graph where all possible edges between
+#' different partitions are present.
+#'
+#' @param n A numeric vector giving the number of vertices in each partition.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param mode Character scalar, the type of connections for directed graphs.
+#'   If `"out"`, then edges point from vertices of partitions with lower
+#'   indices to partitions with higher indices; if `"in"`, then the opposite
+#'   direction is realized; `"all"` creates mutual edges. This parameter is
+#'   ignored for undirected graphs.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a multipartite graph with partitions of size 2, 3, and 4
+#' g <- make_full_multipartite(c(2, 3, 4))
+#' plot(g)
+#'
+#' # Create a directed multipartite graph
+#' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
+#' plot(g2)
+#' @cdocs igraph_full_multipartite
+make_full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mode <- igraph.match.arg(mode)
+
+  res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_full_multipartite
+#' @param ... Passed to `make_full_multipartite()`.
+#' @export
+full_multipartite <- function(...) {
+  constructor_spec(make_full_multipartite, ...)
+}
+
+## -----------------------------------------------------------------
+
+#' Create a Turán graph
+#'
+#' Turán graphs are complete multipartite graphs with the property that the
+#' sizes of the partitions are as close to equal as possible.
+#'
+#' @details
+#' The Turán graph with `n` vertices and `r` partitions is the densest
+#' graph on `n` vertices that does not contain a clique of size `r+1`.
+#'
+#' This function generates undirected graphs. The null graph is
+#' returned when the number of vertices is zero. A complete graph is
+#' returned if the number of partitions is greater than the number of vertices.
+#'
+#' @param n Integer, the number of vertices in the graph.
+#' @param r Integer, the number of partitions in the graph, must be positive.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a Turán graph with 10 vertices and 3 partitions
+#' g <- make_turan(10, 3)
+#' plot(g)
+#'
+#' # The sizes of the partitions are as balanced as possible
+#' table(V(g)$type)
+#' @cdocs igraph_turan
+make_turan <- function(n, r) {
+  n <- as.numeric(n)
+  r <- as.numeric(r)
+
+  res <- turan_impl(n = n, r = r)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_turan
+#' @param ... Passed to `make_turan()`.
+#' @export
+turan <- function(...) {
+  constructor_spec(make_turan, ...)
+}
+
+## -----------------------------------------------------------------
+
 #' Create a complete (full) citation graph
 #'
 #' `make_full_citation_graph()` creates a full citation graph. This is a

@@ -755,6 +755,12 @@ full_multipartite_impl <- function(
     mode
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Full multipartite graph'
+    res$n <- n
+    res$mode <- mode
+  }
+
   res
 }
 
@@ -887,6 +893,12 @@ turan_impl <- function(
     n,
     r
   )
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Turan graph'
+    res$n <- n
+    res$r <- r
+  }
 
   res
 }
