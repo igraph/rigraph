@@ -1161,6 +1161,13 @@ path <- function(...) {
       e2[named]
     )
 
+    # Warn if adding named vertices to an unnamed graph
+    if (!is.null(nn) && !is_named(e1)) {
+      cli::cli_warn(
+        "Adding named vertices to an unnamed graph. Existing vertices will have {.code NA} names."
+      )
+    }
+
     # When adding vertices via +, all unnamed arguments are interpreted as vertex names of the new vertices.
     res <- add_vertices(e1, nv = vctrs::vec_size_common(!!!e2), attr = e2)
   } else if ("igraph.path" %in% class(e2)) {
@@ -1188,6 +1195,12 @@ path <- function(...) {
     res <- add_vertices(e1, e2)
   } else if (is.character(e2)) {
     ## Adding named vertices
+    # Warn if adding named vertices to an unnamed graph
+    if (!is_named(e1)) {
+      cli::cli_warn(
+        "Adding named vertices to an unnamed graph. Existing vertices will have {.code NA} names."
+      )
+    }
     res <- add_vertices(e1, length(e2), name = e2)
   } else {
     cli::cli_abort("Cannot add {.obj_type_friendly {type}} to igraph graph.")
