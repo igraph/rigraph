@@ -8,7 +8,8 @@ realize_degseq(
   out.deg,
   in.deg = NULL,
   allowed.edge.types = c("simple", "loops", "multi", "all"),
-  method = c("smallest", "largest", "index")
+  method = deprecated(),
+  algorithm = c("smallest", "largest", "index")
 )
 }
 \arguments{
@@ -27,7 +28,9 @@ should be even. For directed graphs its sum should be the same as the sum of
 unimplemented). \dQuote{all} allows all types of edges. The default is
 \dQuote{simple}.}
 
-\item{method}{Character, the method for generating the graph; see below.}
+\item{method}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{algorithm} instead.}
+
+\item{algorithm}{Character, the algorithm for generating the graph; see below.}
 }
 \value{
 The new graph object.
@@ -73,7 +76,7 @@ degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
 if (sum(degs) \%\% 2 != 0) {
   degs[1] <- degs[1] + 1
 }
-g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
+g4 <- realize_degseq(degs, algorithm = "largest", allowed.edge.types = "all")
 all(degree(g4) == degs)
 
 ## Power-law degree distribution, no loops allowed but multiple edges

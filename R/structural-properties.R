@@ -2333,13 +2333,14 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #'   `NULL`, then the edge attribute is used automatically. The goal of
 #'   the feedback arc set problem is to find a feedback arc set with the smallest
 #'   total weight.
-#' @param algo Specifies the algorithm to use. \dQuote{`exact_ip`} solves
+#' @param algorithm Specifies the algorithm to use. \dQuote{`exact_ip`} solves
 #'   the feedback arc set problem with an exact integer programming algorithm that
 #'   guarantees that the total weight of the removed edges is as small as possible.
 #'   \dQuote{`approx_eades`} uses a fast (linear-time) approximation
 #'   algorithm from Eades, Lin and Smyth. \dQuote{`exact`} is an alias to
 #'   \dQuote{`exact_ip`} while \dQuote{`approx`} is an alias to
 #'   \dQuote{`approx_eades`}.
+#' @param algo `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @return An edge sequence (by default, but see the `return.vs.es` option
 #'   of [igraph_options()]) containing the feedback arc set.
 #' @references Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
@@ -2353,17 +2354,25 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #'
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
-#' feedback_arc_set(g, algo = "approx_eades")
+#' feedback_arc_set(g, algorithm = "approx_eades")
 #' @cdocs igraph_feedback_arc_set
 feedback_arc_set <- function(
   graph,
   weights = NULL,
-  algo = c("approx_eades", "exact_ip")
+  algo = deprecated(),
+  algorithm = c("approx_eades", "exact_ip")
 ) {
+  if (lifecycle::is_present(algo)) {
+    lifecycle::deprecate_warn("2.1.0", "feedback_arc_set(algo = )", "feedback_arc_set(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- algo
+    }
+  }
+  
   feedback_arc_set_impl(
     graph = graph,
     weights = weights,
-    algo = algo
+    algorithm = algorithm
   )
 }
 
@@ -2382,9 +2391,10 @@ feedback_arc_set <- function(
 #'   `NULL`, then the vertex attribute is used automatically. The goal of
 #'   the feedback vertex set problem is to find a feedback vertex set with
 #'   the smallest total weight.
-#' @param algo Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
+#' @param algorithm Specifies the algorithm to use. Currently, \dQuote{`exact_ip`},
 #'   which solves the feedback vertex set problem with an exact integer
 #'   programming approach, is the only option.
+#' @param algo `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @return A vertex sequence (by default, but see the `return.vs.es` option
 #'   of [igraph_options()]) containing the feedback vertex set.
 #' @keywords graphs
@@ -2396,11 +2406,23 @@ feedback_arc_set <- function(
 #' g <- make_lattice(c(3,3))
 #' feedback_vertex_set(g)
 #' @cdocs igraph_feedback_vertex_set
-feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
+feedback_vertex_set <- function(
+  graph,
+  weights = NULL,
+  algo = deprecated(),
+  algorithm = c("exact_ip")
+) {
+  if (lifecycle::is_present(algo)) {
+    lifecycle::deprecate_warn("2.1.0", "feedback_vertex_set(algo = )", "feedback_vertex_set(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- algo
+    }
+  }
+  
   feedback_vertex_set_impl(
     graph = graph,
     weights = weights,
-    algo = algo
+    algorithm = algorithm
   )
 }
 

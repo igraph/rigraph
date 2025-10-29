@@ -350,7 +350,8 @@ establishment.game <- function(
 degree.sequence.game <- function(
   out.deg,
   in.deg = NULL,
-  method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")
+  method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform"),
+  algorithm = deprecated()
 ) {
   # nocov start
   lifecycle::deprecate_soft(
@@ -358,7 +359,19 @@ degree.sequence.game <- function(
     "degree.sequence.game()",
     "sample_degseq()"
   )
-  sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
+  
+  # Handle parameter renaming
+  if (!missing(method) && lifecycle::is_present(algorithm)) {
+    cli::cli_abort("Cannot specify both {.arg method} and {.arg algorithm}.")
+  }
+  
+  if (!missing(method)) {
+    sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
+  } else if (lifecycle::is_present(algorithm)) {
+    sample_degseq(out.deg = out.deg, in.deg = in.deg, algorithm = algorithm)
+  } else {
+    sample_degseq(out.deg = out.deg, in.deg = in.deg)
+  }
 } # nocov end
 
 #' Neighborhood of graph vertices
@@ -1226,7 +1239,8 @@ random.graph.game <- function(
 #'   `in.deg`.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
 #'   `NULL` and an undirected graph is created.
-#' @param method Character, the method for generating the graph. See Details.
+#' @param algorithm Character, the algorithm for generating the graph. See Details.
+#' @param method `r lifecycle::badge("deprecated")` Use `algorithm` instead.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso
@@ -1248,7 +1262,7 @@ random.graph.game <- function(
 #' degree(directed_graph, mode = "in")
 #'
 #' ## The vl generator
-#' vl_graph <- sample_degseq(rep(2, 100), method = "vl")
+#' vl_graph <- sample_degseq(rep(2, 100), algorithm = "vl")
 #' degree(vl_graph)
 #' is_simple(vl_graph) # always TRUE
 #'
@@ -1273,7 +1287,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 #' all(degree(exp_vl_graph) == exponential_degrees)
 #'
 #' ## An example that does not work
@@ -1295,7 +1309,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   exponential_degrees[1] <- exponential_degrees[1] + 1
 #' }
-#' exp_vl_graph <- sample_degseq(exponential_degrees, method = "vl")
+#' exp_vl_graph <- sample_degseq(exponential_degrees, algorithm = "vl")
 #'
 #' @examples
 #' ## Power-law degree distribution
@@ -1319,7 +1333,7 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 #' }
-#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 #' ## An example that does not work
@@ -1341,13 +1355,14 @@ random.graph.game <- function(
 #' if (is_exponential_degrees_sum_odd) {
 #'   powerlaw_degrees[1] <- powerlaw_degrees[1] + 1
 #' }
-#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, method = "vl")
+#' powerlaw_vl_graph <- sample_degseq(powerlaw_degrees, algorithm = "vl")
 #' all(degree(powerlaw_vl_graph) == powerlaw_degrees)
 #'
 sample_degseq <- function(
   out.deg,
   in.deg = NULL,
-  method = c(
+  method = deprecated(),
+  algorithm = c(
     "configuration",
     "vl",
     "fast.heur.simple",
@@ -1355,11 +1370,18 @@ sample_degseq <- function(
     "edge.switching.simple"
   )
 ) {
-  if (missing(method)) {
-    method <- method[1]
+  if (lifecycle::is_present(method)) {
+    lifecycle::deprecate_warn("2.1.0", "sample_degseq(method = )", "sample_degseq(algorithm = )")
+    if (missing(algorithm)) {
+      algorithm <- method
+    }
   }
-  method <- igraph.match.arg(
-    method,
+  
+  if (missing(algorithm)) {
+    algorithm <- algorithm[1]
+  }
+  algorithm <- igraph.match.arg(
+    algorithm,
     values = c(
       "configuration",
       "vl",
@@ -1372,33 +1394,33 @@ sample_degseq <- function(
     )
   )
 
-  if (method == "simple") {
+  if (algorithm == "simple") {
     lifecycle::deprecate_warn(
       "2.1.0",
-      "sample_degseq(method = 'must be configuration instead of simple')"
+      "sample_degseq(algorithm = 'must be configuration instead of simple')"
     )
-    method <- "configuration"
+    algorithm <- "configuration"
   }
 
-  if (method == "simple.no.multiple") {
+  if (algorithm == "simple.no.multiple") {
     lifecycle::deprecate_warn(
       "2.1.0",
-      "sample_degseq(method = 'must be fast.heur.simple instead of simple.no.multiple')"
+      "sample_degseq(algorithm = 'must be fast.heur.simple instead of simple.no.multiple')"
     )
-    method <- "fast.heur.simple"
+    algorithm <- "fast.heur.simple"
   }
 
-  if (method == "simple.no.multiple.uniform") {
+  if (algorithm == "simple.no.multiple.uniform") {
     lifecycle::deprecate_warn(
       "2.1.0",
-      "sample_degseq(method = 'must be configuration.simple instead of simple.no.multiple.uniform')"
+      "sample_degseq(algorithm = 'must be configuration.simple instead of simple.no.multiple.uniform')"
     )
-    method <- "configuration.simple"
+    algorithm <- "configuration.simple"
   }
 
   # numbers from https://github.com/igraph/igraph/blob/640083c88bf85fd322ff7b748b9b4e16ebe32aa2/include/igraph_constants.h#L94
   method1 <- switch(
-    method,
+    algorithm,
     "configuration" = 0,
     "vl" = 1,
     "fast.heur.simple" = 2,

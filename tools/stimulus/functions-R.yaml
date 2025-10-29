@@ -83,6 +83,10 @@ igraph_ring:
 igraph_kary_tree:
     IGNORE: RR, RC
 
+igraph_tree_game:
+    PARAM_NAMES:
+        method: algorithm
+
 igraph_full:
     IGNORE: RR, RC
 
@@ -106,16 +110,20 @@ igraph_realize_degree_sequence:
     PARAMS: |-
         OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
+    PARAM_NAMES:
+        method: algorithm
     R:
       GATTR:
         name: Graph from degree sequence
-      GATTR-PARAM: out_deg, in_deg, allowed_edge_types, method
+      GATTR-PARAM: out_deg, in_deg, allowed_edge_types, algorithm
 
 igraph_realize_bipartite_degree_sequence:
+    PARAM_NAMES:
+        method: algorithm
     R:
       GATTR:
         name: Bipartite graph from degree sequence
-      GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
+      GATTR-PARAM: degrees1, degrees2, allowed_edge_types, algorithm
 
 igraph_full_multipartite:
     DEPS: types ON res$graph
@@ -361,7 +369,13 @@ igraph_harmonic_centrality:
 igraph_pagerank:
     IGNORE: RR, RC, RInit
 
+igraph_personalized_pagerank:
+    PARAM_NAMES:
+        algo: algorithm
+
 igraph_personalized_pagerank_vs:
+    PARAM_NAMES:
+        algo: algorithm
     DEPS: vids ON graph, weights ON graph, vector ON graph vids,
         options ON algo, reset_vids ON graph
 
@@ -950,6 +964,14 @@ igraph_eigen_matrix_symmetric:
 #######################################
 # Finding cycles
 #######################################
+
+igraph_feedback_arc_set:
+    PARAM_NAMES:
+        algo: algorithm
+
+igraph_feedback_vertex_set:
+    PARAM_NAMES:
+        algo: algorithm
 
 igraph_simple_cycles_callback:
     IGNORE: RR, RC
