@@ -2,6 +2,10 @@
 GRAPH:
     INCONV: ensure_igraph(%I%)
 
+INFILE:
+    INCONV: |
+        check_string(%I%)
+
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
@@ -374,6 +378,11 @@ RECIP:
         DEFAULT: c("default", "ratio")
     INCONV: '%I% <- switch_igraph_arg(%I%, "default" = 0L, "ratio" = 1L)'
 
+REWIRING_MODE:
+    DEFAULT:
+        SIMPLE: c("simple", "simple_loops")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "simple_loops" = 1L)'
+
 SPARSEMAT:
     INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
@@ -475,6 +484,11 @@ EDGE_TYPE_SW:
     INCONV: |-
         %I% <- switch_igraph_arg(%I%,
           "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
+
+WRITE_GML_SW:
+    DEFAULT:
+        DEFAULT: c("default", "encode_only_quot")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "default" = 0L, "encode_only_quot" = 1L)'
 
 GRAPH_PRODUCT_TYPE:
     DEFAULT:

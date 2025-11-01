@@ -30,7 +30,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_copy_env, graph)
+    .Call(Rx_igraph_copy_env, graph)
   } else {
     NULL
   }
@@ -84,7 +84,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @export
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  .Call(R_igraph_identical_graphs, g1, g2, as.logical(attrs))
+  .Call(Rx_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 
 add_vses_graph_ref <- function(vses, graph) {
@@ -1061,8 +1061,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
       parent = top,
       c(
         attrs,
-        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
+        .igraph.from = list(.Call(Rx_igraph_copy_from, graph)[as.numeric(x)]),
+        .igraph.to = list(.Call(Rx_igraph_copy_to, graph)[as.numeric(x)]),
         .igraph.graph = list(graph),
         .env = env,
         .data = list(attrs)
