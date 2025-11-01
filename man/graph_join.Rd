@@ -40,7 +40,7 @@ of the first graph.
 
 Both graphs need to have the same directedness, i.e. either both directed or
 both undirected. If both graphs are directed, then for each pair of vertices
-v, u in graphs G1, G2 we add edges (v, u) and (u, v) to maintain completeness.
+\eqn{v}, \eqn{u} in graphs \eqn{G_1}, \eqn{G_2} we add edges \eqn{(v, u)} and \eqn{(u, v)} to maintain completeness.
 
 Note that the current version of this function cannot handle graph, vertex
 and edge attributes; they will be lost in the result.
