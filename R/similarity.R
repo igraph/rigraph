@@ -84,7 +84,7 @@ similarity <- function(
     }
   }
 
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   switch(
     method,

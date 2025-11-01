@@ -190,7 +190,7 @@ fit_power_law <- function(
   p.precision = NULL,
   ...
 ) {
-  implementation <- igraph.match.arg(implementation)
+  implementation <- igraph_match_arg(implementation)
 
   if (implementation == "r.mle") {
     if (isTRUE(p.value)) {

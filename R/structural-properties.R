@@ -150,8 +150,8 @@ shortest.paths <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "shortest.paths()", "distances()")
-  algorithm <- igraph.match.arg(algorithm)
-  mode <- igraph.match.arg(mode)
+  algorithm <- igraph_match_arg(algorithm)
+  mode <- igraph_match_arg(mode)
   distances(
     graph = graph,
     v = v,
@@ -921,7 +921,7 @@ degree <- function(
   normalized = FALSE
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (is.logical(loops)) {
     lifecycle::deprecate_soft(
@@ -935,7 +935,7 @@ degree <- function(
     }
   }
 
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
 
   res <- degree_impl(
     graph = graph,
@@ -964,7 +964,7 @@ max_degree <- function(
   loops = c("twice", "none", "once")
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (is.logical(loops)) {
     lifecycle::deprecate_soft(
@@ -977,7 +977,7 @@ max_degree <- function(
       loops <- "none"
     }
   }
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
 
   maxdegree_impl(
     graph = graph,
@@ -1244,9 +1244,9 @@ distances <- function(
 
   v <- as_igraph_vs(graph, v)
   to <- as_igraph_vs(graph, to)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm <- switch(
     algorithm,
     "automatic" = 0,
@@ -1327,11 +1327,11 @@ shortest_paths <- function(
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  output <- igraph.match.arg(output)
+  output <- igraph_match_arg(output)
   output <- switch(output, "vpath" = 0, "epath" = 1, "both" = 2)
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm <- switch(
     algorithm,
     "automatic" = 0,
@@ -1433,7 +1433,7 @@ all_shortest_paths <- function(
 ) {
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -1553,7 +1553,7 @@ k_shortest_paths <- function(
 #' subcomponent(g, 1, "all")
 subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1627,7 +1627,7 @@ induced_subgraph <- function(
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- igraph.match.arg(impl)
+  impl <- igraph_match_arg(impl)
 
   # Function call
   res <- induced_subgraph_impl(
@@ -1818,7 +1818,7 @@ transitivity <- function(
   isolates = c("NaN", "zero")
 ) {
   ensure_igraph(graph)
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
   type <- switch(
     type,
     "undirected" = 0L,
@@ -1842,7 +1842,7 @@ transitivity <- function(
     weights <- NULL
   }
 
-  isolates <- igraph.match.arg(isolates)
+  isolates <- igraph_match_arg(isolates)
 
   if (type == 0) {
     transitivity_undirected_impl(
@@ -2084,7 +2084,7 @@ ego_size <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
@@ -2198,7 +2198,7 @@ ego <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
@@ -2233,7 +2233,7 @@ make_ego_graph <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
 
@@ -2290,7 +2290,7 @@ make_neighborhood_graph <- make_ego_graph
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2333,7 +2333,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2785,7 +2785,7 @@ bfs <- function(
     root <- 0 # ignored anyway
   }
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -3041,7 +3041,7 @@ dfs <- function(
 
   root <- as_igraph_vs(graph, root) - 1
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -3181,7 +3181,7 @@ dfs <- function(
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   res <- connected_components_impl(
@@ -3211,7 +3211,7 @@ is_connected <- function(graph, mode = c("weak", "strong")) {
 #' @export
 count_components <- function(graph, mode = c("weak", "strong")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -3311,7 +3311,7 @@ count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
 unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   roots <- as_igraph_vs(graph, roots) - 1
 
   # Function call

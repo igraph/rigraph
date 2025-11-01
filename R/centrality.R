@@ -593,7 +593,7 @@ closeness <- function(
 
   vids <- as_igraph_vs(graph, vids)
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -1371,7 +1371,7 @@ eigen_centrality <- function(
     }
   }
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (lifecycle::is_present(directed)) {
     if (directed) {

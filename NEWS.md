@@ -150,7 +150,7 @@
 
 - Rm useless error message (#1998).
 
-- Improve `igraph.match.arg()` (#1996).
+- Improve `igraph_match_arg()` (#1996).
 
 
 # igraph 2.1.4.9068
@@ -1871,7 +1871,7 @@ See <https://github.com/igraph/rigraph/blob/05973441b83decdeab8cc9c500a642c00b92
 
 - Breaking change: remove tkigraph from {igraph} proper (#1474).
 - Breaking change: Hard-deprecate `get.edge()` and `layout.grid.3d()` which have been deprecated for 10 years (#1398).
-- Breaking change: use `rlang::arg_match()` in `igraph.match.arg()` (#1165).
+- Breaking change: use `rlang::arg_match()` in `igraph_match_arg()` (#1165).
 
 ### In-progress deprecations
 

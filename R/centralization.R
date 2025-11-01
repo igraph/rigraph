@@ -690,7 +690,7 @@ centr_eigen <- function(
     )
   }
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (lifecycle::is_present(directed)) {
     if (directed) {
@@ -766,7 +766,7 @@ centr_eigen_tmax <- function(
       The argument will be removed in the future."
     )
   }
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (lifecycle::is_present(directed)) {
     if (directed) {
