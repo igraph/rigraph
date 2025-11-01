@@ -65,6 +65,7 @@ Other functions for manipulating graph structure:
 \code{\link{difference}()},
 \code{\link{difference.igraph}()},
 \code{\link{edge}()},
+\code{\link{graph_join}()},
 \code{\link{igraph-minus}},
 \code{\link{intersection}()},
 \code{\link{intersection.igraph}()},
