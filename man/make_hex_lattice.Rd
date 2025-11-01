@@ -5,19 +5,19 @@
 \alias{hex_lattice}
 \title{Create a hexagonal lattice graph}
 \usage{
-make_hex_lattice(dims, directed = FALSE, mutual = FALSE)
+make_hex_lattice(dims, ..., directed = FALSE, mutual = FALSE)
 
-hex_lattice(...)
+hex_lattice(dims, ..., directed = FALSE, mutual = FALSE)
 }
 \arguments{
 \item{dims}{Integer vector, defines the shape of the lattice. See details below.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical scalar, whether to create a directed graph.}
 
 \item{mutual}{Logical scalar, if the graph is directed this parameter
 controls whether edges are mutual (bidirectional).}
-
-\item{...}{Passed to \code{make_hex_lattice()}.}
 }
 \value{
 An igraph graph.

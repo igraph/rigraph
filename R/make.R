@@ -2054,6 +2054,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' }
 #'
 #' @param dims Integer vector, defines the shape of the lattice. See details below.
+#' @param ... These dots are for future extensions and must be empty.
 #' @param directed Logical scalar, whether to create a directed graph.
 #' @param mutual Logical scalar, if the graph is directed this parameter
 #'   controls whether edges are mutual (bidirectional).
@@ -2074,7 +2075,9 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' g3 <- make_hex_lattice(c(3, 3, 3))
 #' plot(g3)
 #' @cdocs igraph_hexagonal_lattice
-make_hex_lattice <- function(dims, directed = FALSE, mutual = FALSE) {
+make_hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  
   graph <- hexagonal_lattice_impl(
     dimvector = dims,
     directed = directed,
@@ -2091,9 +2094,10 @@ make_hex_lattice <- function(dims, directed = FALSE, mutual = FALSE) {
 }
 
 #' @rdname make_hex_lattice
-#' @param ... Passed to `make_hex_lattice()`.
 #' @export
-hex_lattice <- function(...) constructor_spec(make_hex_lattice, ...)
+hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  constructor_spec(make_hex_lattice, dims = dims, directed = directed, mutual = mutual)
+}
 
 ## -----------------------------------------------------------------
 
