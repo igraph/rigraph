@@ -9775,6 +9775,34 @@ SEXP R_igraph_motifs_randesu(SEXP graph, SEXP size, SEXP cut_prob) {
 }
 
 /*-------------------------------------------/
+/ igraph_motifs_randesu_callback             /
+/-------------------------------------------*/
+SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+
+
+
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  if (!Rf_isNull(cut_prob)) {
+    R_SEXP_to_vector(cut_prob, &c_cut_prob);
+  }
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_motifs_randesu_callback(&c_graph, c_size, (Rf_isNull(cut_prob) ? 0 : &c_cut_prob), 0, 0));
+
+                                        /* Convert output */
+
+
+
+  return(R_NilValue);
+}
+
+/*-------------------------------------------/
 / igraph_motifs_randesu_estimate             /
 /-------------------------------------------*/
 SEXP R_igraph_motifs_randesu_estimate(SEXP graph, SEXP size, SEXP cut_prob, SEXP sample_size, SEXP sample) {

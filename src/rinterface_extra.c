@@ -7617,7 +7617,7 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
 }
 
 SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP psize, SEXP pcut_prob,
-                                      SEXP pcallback, SEXP pextra, SEXP prho) {
+                                      SEXP pcallback, SEXP pextra) {
 
   igraph_t g;
   igraph_integer_t size = (igraph_integer_t) REAL(psize)[0];
@@ -7636,10 +7636,28 @@ SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP psize, SEXP pcut_prob,
 
   /* Setup callback if provided */
   if (!Rf_isNull(pcallback)) {
+    SEXP actual_extra = R_NilValue;
+    SEXP rho = R_GlobalEnv;
+    
+    /* Extract extra and rho from the wrapped extra parameter */
+    if (!Rf_isNull(pextra) && Rf_isVectorList(pextra)) {
+      SEXP names = Rf_getAttrib(pextra, R_NamesSymbol);
+      if (!Rf_isNull(names)) {
+        for (R_xlen_t i = 0; i < Rf_xlength(pextra); i++) {
+          const char *name = CHAR(STRING_ELT(names, i));
+          if (strcmp(name, "extra") == 0) {
+            actual_extra = VECTOR_ELT(pextra, i);
+          } else if (strcmp(name, "rho") == 0) {
+            rho = VECTOR_ELT(pextra, i);
+          }
+        }
+      }
+    }
+    
     cb_data.graph = graph;
     cb_data.fun = pcallback;
-    cb_data.extra = pextra;
-    cb_data.rho = prho;
+    cb_data.extra = actual_extra;
+    cb_data.rho = rho;
     callback = R_igraph_motifs_handler;
     p_cb_data = &cb_data;
   }

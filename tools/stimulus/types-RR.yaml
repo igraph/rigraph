@@ -284,8 +284,10 @@ EDGE_COLOR:
     HEADER: ~
 
 EXTRA:
-    CALL: {}
-    HEADER: ~
+    CALL: '%I%'
+
+MOTIFS_HANDLER_FUNC:
+    CALL: '%I%'
 
 ISOCOMPAT_FUNC:
     CALL: {}
