@@ -9,7 +9,7 @@
 \usage{
 degree(
   graph,
-  v = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
@@ -30,7 +30,7 @@ degree_distribution(graph, cumulative = FALSE, ...)
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{v}{The ids of vertices of which the degree will be calculated.}
+\item{vids}{The ids of vertices of which the degree will be calculated.}
 
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{total} for the sum of the two. For undirected graphs
@@ -49,7 +49,7 @@ be calculated.}
 }
 \value{
 For \code{degree()} a numeric vector of the same length as argument
-\code{v}.
+\code{vids}.
 
 For \code{degree_distribution()} a numeric vector of the same length as the
 maximum degree plus one. The first element is the relative frequency zero

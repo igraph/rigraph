@@ -875,7 +875,7 @@ mean_distance <- function(
 #'
 #'
 #' @param graph The graph to analyze.
-#' @param v The ids of vertices of which the degree will be calculated.
+#' @param vids The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
 #'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
@@ -885,7 +885,7 @@ mean_distance <- function(
 #'   number of vertices in the graph.
 #' @inheritParams rlang::args_dots_empty
 #' @return For `degree()` a numeric vector of the same length as argument
-#'   `v`.
+#'   `vids`.
 #'
 #'   For `degree_distribution()` a numeric vector of the same length as the
 #'   maximum degree plus one. The first element is the relative frequency zero
@@ -913,18 +913,18 @@ mean_distance <- function(
 #'
 degree <- function(
   graph,
-  v = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   normalized = FALSE
 ) {
   ensure_igraph(graph)
-  v <- as_igraph_vs(graph, v)
+  vids <- as_igraph_vs(graph, vids)
   mode <- igraph.match.arg(mode)
 
   res <- degree_impl(
     graph = graph,
-    vids = v,
+    vids = vids,
     mode = mode,
     loops = loops
   )
@@ -933,7 +933,7 @@ degree <- function(
     res <- res / (vcount(graph) - 1)
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
+    names(res) <- V(graph)$name[vids]
   }
   res
 }
@@ -1045,7 +1045,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' histogram.
 #'
 #' @param graph The graph to work on.
-#' @param v Numeric vector, the vertices from which the shortest paths will be
+#' @param vids Numeric vector, the vertices from which the shortest paths will be
 #'   calculated.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
 #'   calculated. By default it includes all vertices. Note that for
@@ -1082,7 +1082,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   FALSE, the length of the missing paths are considered as having infinite
 #'   length, making the mean distance infinite as well.
 #' @return For `distances()` a numeric matrix with `length(to)`
-#'   columns and `length(v)` rows. The shortest path length from a vertex to
+#'   columns and `length(vids)` rows. The shortest path length from a vertex to
 #'   itself is always zero. For unreachable vertices `Inf` is included.
 #'
 #'   For `shortest_paths()` a named list with four entries is returned:
@@ -1190,7 +1190,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'
 distances <- function(
   graph,
-  v = V(graph),
+  vids = V(graph),
   to = V(graph),
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -1212,7 +1212,7 @@ distances <- function(
     mode <- "out"
   }
 
-  v <- as_igraph_vs(graph, v)
+  vids <- as_igraph_vs(graph, vids)
   to <- as_igraph_vs(graph, to)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
@@ -1248,7 +1248,7 @@ distances <- function(
   res <- .Call(
     R_igraph_shortest_paths,
     graph,
-    v - 1,
+    vids - 1,
     to - 1,
     as.numeric(mode),
     weights,
@@ -1256,7 +1256,7 @@ distances <- function(
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- V(graph)$name[v]
+    rownames(res) <- V(graph)$name[vids]
     colnames(res) <- V(graph)$name[to]
   }
   res
@@ -1914,7 +1914,7 @@ transitivity <- function(
 #' graph adjacency matrix. For isolated vertices, constraint is undefined.
 #'
 #' @param graph A graph object, the input graph.
-#' @param nodes The vertices for which the constraint will be calculated.
+#' @param vids The vertices for which the constraint will be calculated.
 #'   Defaults to all vertices.
 #' @param weights The weights of the edges. If this is `NULL` and there is
 #'   a `weight` edge attribute this is used. If there is no such edge
@@ -1933,9 +1933,9 @@ transitivity <- function(
 #' g <- sample_gnp(20, 5 / 20)
 #' constraint(g)
 #'
-constraint <- function(graph, nodes = V(graph), weights = NULL) {
+constraint <- function(graph, vids = V(graph), weights = NULL) {
   ensure_igraph(graph)
-  nodes <- as_igraph_vs(graph, nodes)
+  vids <- as_igraph_vs(graph, vids)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -1944,9 +1944,9 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- .Call(Rx_igraph_constraint, graph, vids - 1, as.numeric(weights))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[nodes]
+    names(res) <- V(graph)$name[vids]
   }
   res
 }
@@ -2049,7 +2049,7 @@ edge_density <- function(graph, loops = FALSE) {
 ego_size <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2062,7 +2062,7 @@ ego_size <- function(
   .Call(
     R_igraph_neighborhood_size,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vids) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2105,7 +2105,7 @@ neighborhood_size <- ego_size
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood. Negative values
 #'   indicate an infinite order.
-#' @param nodes The vertices for which the calculation is performed.
+#' @param vids The vertices for which the calculation is performed.
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
 #'   outgoing edges are followed, so all vertices reachable from the source
@@ -2163,7 +2163,7 @@ neighborhood_size <- ego_size
 ego <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2176,7 +2176,7 @@ ego <- function(
   res <- .Call(
     R_igraph_neighborhood,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vids) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2198,7 +2198,7 @@ neighborhood <- ego
 make_ego_graph <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vids = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2211,7 +2211,7 @@ make_ego_graph <- function(
   res <- .Call(
     R_igraph_neighborhood_graphs,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vids) - 1,
     as.numeric(order),
     as.integer(mode),
     mindist

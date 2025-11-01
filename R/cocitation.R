@@ -27,22 +27,22 @@
 #' both cite, `bibcoupling()` calculates this.
 #'
 #' `cocitation()` calculates the cocitation counts for the vertices in the
-#' `v` argument and all vertices in the graph.
+#' `vids` argument and all vertices in the graph.
 #'
 #' `bibcoupling()` calculates the bibliographic coupling for vertices in
-#' `v` and all vertices in the graph.
+#' `vids` and all vertices in the graph.
 #'
 #' Calculating the cocitation or bibliographic coupling for only one vertex
 #' costs the same amount of computation as for all vertices. This might change
 #' in the future.
 #'
 #' @param graph The graph object to analyze
-#' @param v Vertex sequence or numeric vector, the vertex ids for which the
+#' @param vids Vertex sequence or numeric vector, the vertex ids for which the
 #'   cocitation or bibliographic coupling values we want to calculate. The
 #'   default is all vertices.
-#' @return A numeric matrix with `length(v)` lines and
+#' @return A numeric matrix with `length(vids)` lines and
 #'   `vcount(graph)` columns. Element `(i,j)` contains the cocitation
-#'   or bibliographic coupling for vertices `v[i]` and `j`.
+#'   or bibliographic coupling for vertices `vids[i]` and `j`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family cocitation
 #' @export
@@ -53,14 +53,14 @@
 #' cocitation(g)
 #' bibcoupling(g)
 #'
-cocitation <- function(graph, v = V(graph)) {
+cocitation <- function(graph, vids = V(graph)) {
   ensure_igraph(graph)
 
-  v <- as_igraph_vs(graph, v)
+  vids <- as_igraph_vs(graph, vids)
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_cocitation, graph, v - 1)
+  res <- .Call(Rx_igraph_cocitation, graph, vids - 1)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- vertex_attr(graph, "name", v)
+    rownames(res) <- vertex_attr(graph, "name", vids)
     colnames(res) <- vertex_attr(graph, "name")
   }
   res
@@ -68,14 +68,14 @@ cocitation <- function(graph, v = V(graph)) {
 
 #' @rdname cocitation
 #' @export
-bibcoupling <- function(graph, v = V(graph)) {
+bibcoupling <- function(graph, vids = V(graph)) {
   ensure_igraph(graph)
 
-  v <- as_igraph_vs(graph, v)
+  vids <- as_igraph_vs(graph, vids)
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_bibcoupling, graph, v - 1)
+  res <- .Call(Rx_igraph_bibcoupling, graph, vids - 1)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    rownames(res) <- vertex_attr(graph, "name", v)
+    rownames(res) <- vertex_attr(graph, "name", vids)
     colnames(res) <- vertex_attr(graph, "name")
   }
   res

@@ -16,9 +16,6 @@ shortest.paths(
 \arguments{
 \item{graph}{The graph to work on.}
 
-\item{v}{Numeric vector, the vertices from which the shortest paths will be
-calculated.}
-
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
 calculated. By default it includes all vertices. Note that for
 \code{distances()} every vertex must be included here at most once. (This

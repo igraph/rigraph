@@ -20,7 +20,7 @@ mean_distance(
 
 distances(
   graph,
-  v = V(graph),
+  vids = V(graph),
   to = V(graph),
   mode = c("all", "out", "in"),
   weights = NULL,
@@ -71,7 +71,7 @@ Functions accepting this argument (like \code{mean_distance()}) return
 additional information like the number of disconnected vertex pairs in
 the result when this parameter is set to \code{TRUE}.}
 
-\item{v}{Numeric vector, the vertices from which the shortest paths will be
+\item{vids}{Numeric vector, the vertices from which the shortest paths will be
 calculated.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
@@ -124,7 +124,7 @@ are reached.}
 }
 \value{
 For \code{distances()} a numeric matrix with \code{length(to)}
-columns and \code{length(v)} rows. The shortest path length from a vertex to
+columns and \code{length(vids)} rows. The shortest path length from a vertex to
 itself is always zero. For unreachable vertices \code{Inf} is included.
 
 For \code{shortest_paths()} a named list with four entries is returned:

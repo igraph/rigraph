@@ -390,7 +390,7 @@ betweenness.estimate <- estimate_betweenness
 #' @aliases betweenness.estimate
 #' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
-#' @param v The vertices for which the vertex betweenness will be calculated.
+#' @param vids The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
 #'   determining the shortest paths.
 #' @param weights Optional positive weight vector for calculating weighted
@@ -411,7 +411,7 @@ betweenness.estimate <- estimate_betweenness
 #' @param cutoff The maximum shortest path length to consider when calculating
 #'   betweenness. If negative, then there is no such limit.
 #' @return A numeric vector with the betweenness score for each vertex in
-#'   `v` for `betweenness()`.
+#'   `vids` for `betweenness()`.
 #'
 #'   A numeric vector with the edge betweenness score for each edge in `e`
 #'   for `edge_betweenness()`.
@@ -438,7 +438,7 @@ betweenness.estimate <- estimate_betweenness
 #'
 betweenness <- function(
   graph,
-  v = V(graph),
+  vids = V(graph),
   directed = TRUE,
   weights = NULL,
   normalized = FALSE,
@@ -446,7 +446,7 @@ betweenness <- function(
 ) {
   res <- betweenness_cutoff_impl(
     graph = graph,
-    vids = v,
+    vids = vids,
     directed = directed,
     weights = weights,
     cutoff = cutoff
@@ -1800,7 +1800,7 @@ harmonic_centrality <- function(
 
 bonpow.dense <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
@@ -1823,12 +1823,12 @@ bonpow.dense <- function(
   } else {
     ev <- ev * sqrt(n / sum((ev)^2))
   }
-  ev[as.numeric(nodes)]
+  ev[as.numeric(vids)]
 }
 
 bonpow.sparse <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
@@ -1856,7 +1856,7 @@ bonpow.sparse <- function(
     ev <- ev * sqrt(vcount(graph) / sum((ev)^2))
   }
 
-  ev[as.numeric(nodes)]
+  ev[as.numeric(vids)]
 }
 
 
@@ -1914,7 +1914,7 @@ bonpow.sparse <- function(
 #' is important to think about the edge direction and what it represents.
 #'
 #' @param graph the input graph.
-#' @param nodes vertex sequence indicating which vertices are to be included in
+#' @param vids vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
 #' @param loops boolean indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -1975,22 +1975,22 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  vids <- as_igraph_vs(graph, vids)
   if (sparse) {
-    res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.sparse(graph, vids, loops, exponent, rescale, tol)
   } else {
-    res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
+    res <- bonpow.dense(graph, vids, loops, exponent, rescale, tol)
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", vids)
   }
 
   res
@@ -1998,7 +1998,7 @@ power_centrality <- function(
 
 alpha.centrality.dense <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2037,12 +2037,12 @@ alpha.centrality.dense <- function(
   diag(id) <- 1
 
   ev <- solve(id - alpha * d, tol = tol) %*% exo
-  ev[as.numeric(nodes)]
+  ev[as.numeric(vids)]
 }
 
 alpha.centrality.sparse <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2092,7 +2092,7 @@ alpha.centrality.sparse <- function(
   M3 <- M2 - alpha * M
   r <- Matrix::solve(M3, tol = tol, exo)
 
-  r[as.numeric(nodes)]
+  r[as.numeric(vids)]
 }
 
 
@@ -2114,7 +2114,7 @@ alpha.centrality.sparse <- function(
 #'
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
-#' @param nodes Vertex sequence, the vertices for which the alpha centrality
+#' @param vids Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. (For technical reasons they will be calculated for all
 #'   vertices, anyway.)
 #' @param alpha Parameter specifying the relative importance of endogenous
@@ -2160,7 +2160,7 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = V(graph),
+  vids = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2168,11 +2168,11 @@ alpha_centrality <- function(
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  vids <- as_igraph_vs(graph, vids)
   if (sparse) {
     res <- alpha.centrality.sparse(
       graph,
-      nodes,
+      vids,
       alpha,
       loops,
       exo,
@@ -2182,7 +2182,7 @@ alpha_centrality <- function(
   } else {
     res <- alpha.centrality.dense(
       graph,
-      nodes,
+      vids,
       alpha,
       loops,
       exo,
@@ -2191,7 +2191,7 @@ alpha_centrality <- function(
     )
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", nodes)
+    names(res) <- vertex_attr(graph, "name", vids)
   }
   res
 }
