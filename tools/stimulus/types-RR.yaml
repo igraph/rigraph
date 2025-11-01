@@ -2,6 +2,10 @@
 GRAPH:
     INCONV: ensure_igraph(%I%)
 
+INFILE:
+    INCONV: |
+        check_string(%I%)
+
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))

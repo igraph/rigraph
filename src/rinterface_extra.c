@@ -174,6 +174,15 @@ igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res)
   return IGRAPH_SUCCESS;
 }
 
+FILE* R_igraph_fopen_read(SEXP instream) {
+  FILE *file;
+
+  file=fopen(CHAR(STRING_ELT(instream, 0)), "r");
+  if (file==0) { igraph_error("Cannot open file for reading", __FILE__, __LINE__,
+                              IGRAPH_EFILE); }
+  return file;
+}
+
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
     PROTECT(s);
