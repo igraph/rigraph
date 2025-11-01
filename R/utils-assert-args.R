@@ -64,7 +64,12 @@ igraph.match.arg <- function(
 }
 
 #' @importFrom rlang caller_env
-ensure_no_na <- function(x, what, call = caller_env()) {
+ensure_no_na <- function(x, what, mode = "", call = caller_env()) {
+  if (mode == "upper") {
+    x <- x[upper.tri(x)]
+  } else if (mode == "lower") {
+    x <- x[lower.tri(x)]
+  }
   if (anyNA(x)) {
     cli::cli_abort(
       "Cannot create a graph object because the {what} contains NAs.",
