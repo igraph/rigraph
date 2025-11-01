@@ -217,8 +217,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(Rx_igraph_add_vertices, graph, as.numeric(nv))
+  graph <- add_vertices_impl(
+    graph = graph,
+    nv = nv
+  )
   vertices.new <- vcount(graph)
 
   if (vertices.new - vertices.orig != 0) {
@@ -262,10 +264,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
+  delete_edges_impl(
+    graph = graph,
+    edges = edges
+  )
 }
 
 #' Delete vertices from a graph
@@ -288,10 +290,10 @@ delete_edges <- function(graph, edges) {
 #' g2
 #' V(g2)
 delete_vertices <- function(graph, v) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
+  delete_vertices_impl(
+    graph = graph,
+    vertices = v
+  )
 }
 
 ###################################################################
@@ -436,12 +438,12 @@ ends <- function(graph, es, names = TRUE) {
   es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(R_igraph_finalizer))
-
-  if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(Rx_igraph_get_edge, graph, es2) + 1
-  } else {
-    res[, !is.na(es)] <- .Call(Rx_igraph_edges, graph, es2) + 1
+  if (length(es) > 0) {
+    edge_data <- edges_impl(
+      graph = graph,
+      eids = es2 + 1
+    )
+    res[, !is.na(es)] <- edge_data
   }
 
   if (names && is_named(graph)) {
