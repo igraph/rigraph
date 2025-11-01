@@ -66,11 +66,11 @@ test_that("disjoint_union() does not convert vertex types", {
   expect_s3_class(vertex_attr(u, "date"), c("POSIXct", "POSIXt"))
 })
 
-test_that("join() works", {
+test_that("graph_join() works", {
   # Test basic join of undirected graphs
   g1 <- make_ring(5)
   g2 <- make_ring(3)
-  gj <- join(g1, g2)
+  gj <- graph_join(g1, g2)
 
   # Check vertex and edge counts
   expect_vcount(gj, 8) # 5 + 3
@@ -89,7 +89,7 @@ test_that("join() works", {
   # Test directed graphs
   g1_dir <- make_ring(4, directed = TRUE)
   g2_dir <- make_ring(3, directed = TRUE)
-  gj_dir <- join(g1_dir, g2_dir)
+  gj_dir <- graph_join(g1_dir, g2_dir)
 
   expect_vcount(gj_dir, 7) # 4 + 3
   # For directed: original edges + 2 * v1 * v2 = 4 + 3 + 2*4*3 = 31
@@ -97,16 +97,16 @@ test_that("join() works", {
 
   # Test mixed directedness should error
   expect_error(
-    join(g1, g1_dir),
+    graph_join(g1, g1_dir),
     "Cannot create join"
   )
 })
 
-test_that("join() preserves vertex ordering", {
+test_that("graph_join() preserves vertex ordering", {
   g1 <- make_ring(3)
   g2 <- make_ring(2)
 
-  gj <- join(g1, g2)
+  gj <- graph_join(g1, g2)
 
   # Check that edges from g1 are preserved
   el1 <- as_edgelist(g1)

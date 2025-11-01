@@ -2,21 +2,21 @@
 rinterface.o: \
   rinterface.c \
   rinterface.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Arith.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Boolean.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Complex.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Constants.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Error.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Memory.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Print.h \
- /opt/R/4.5.1/lib/R/include/R_ext/RS.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Random.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Rdynload.h \
- /opt/R/4.5.1/lib/R/include/R_ext/Utils.h \
- /opt/R/4.5.1/lib/R/include/R_ext/libextern.h \
- /opt/R/4.5.1/lib/R/include/Rconfig.h \
- /opt/R/4.5.1/lib/R/include/Rdefines.h \
- /opt/R/4.5.1/lib/R/include/Rinternals.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Arith.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Boolean.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Complex.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Constants.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Error.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Memory.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Print.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/RS.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Random.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Rdynload.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/Utils.h \
+ /opt/R/4.5.2/lib/R/include/R_ext/libextern.h \
+ /opt/R/4.5.2/lib/R/include/Rconfig.h \
+ /opt/R/4.5.2/lib/R/include/Rdefines.h \
+ /opt/R/4.5.2/lib/R/include/Rinternals.h \
  vendor/cigraph/include/igraph_adjlist.h \
  vendor/cigraph/include/igraph_arpack.h \
  vendor/cigraph/include/igraph_array.h \

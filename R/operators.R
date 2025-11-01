@@ -307,7 +307,7 @@ disjoint_union <- function(...) {
 #' The join of two graphs is created by connecting all vertices from
 #' the first graph to all vertices in the second graph.
 #'
-#' `join()` creates the join of two graphs. The graphs must be disjoint,
+#' `graph_join()` creates the join of two graphs. The graphs must be disjoint,
 #' i.e., have distinct vertex sets. First the vertices of the second graph will
 #' be relabeled with new vertex IDs, then the union of the two graphs is formed.
 #' Finally, all vertices from the first graph will be connected to all vertices
@@ -347,7 +347,7 @@ disjoint_union <- function(...) {
 #' print_all(g1 %j% g2)
 #' @export
 #' @cdocs igraph_join
-join <- function(g1, g2) {
+graph_join <- function(g1, g2) {
   ensure_igraph(g1)
   ensure_igraph(g2)
 
@@ -356,9 +356,9 @@ join <- function(g1, g2) {
 }
 
 #' @export
-#' @rdname join
+#' @rdname graph_join
 "%j%" <- function(x, y) {
-  join(x, y)
+  graph_join(x, y)
 }
 
 .igraph.graph.union.or.intersection <- function(
