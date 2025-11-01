@@ -9131,12 +9131,14 @@ fundamental_cycles_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(start)) start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+  if (!is.null(start)) {
+    start <- as_igraph_vs(graph, start)
+    if (length(start) == 0) {
+      cli::cli_abort(
+        "{.arg start} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
   bfs.cutoff <- as.numeric(bfs.cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -9153,7 +9155,7 @@ fundamental_cycles_impl <- function(
   res <- .Call(
     R_igraph_fundamental_cycles,
     graph,
-    start - 1,
+    if (!is.null(start)) start - 1 else NULL,
     bfs.cutoff,
     weights
   )
@@ -9366,16 +9368,18 @@ minimum_spanning_tree_prim_impl <- function(
 
 random_spanning_tree_impl <- function(
   graph,
-  vid = 0
+  vid = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+  if (!is.null(vid)) {
+    vid <- as_igraph_vs(graph, vid)
+    if (length(vid) == 0) {
+      cli::cli_abort(
+        "{.arg vid} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -9383,7 +9387,7 @@ random_spanning_tree_impl <- function(
   res <- .Call(
     R_igraph_random_spanning_tree,
     graph,
-    vid - 1
+    if (!is.null(vid)) vid - 1 else NULL
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -9677,12 +9681,14 @@ vertex_path_from_edge_path_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(start)) start <- as_igraph_vs(graph, start)
-  if (length(start) == 0) {
-    cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+  if (!is.null(start)) {
+    start <- as_igraph_vs(graph, start)
+    if (length(start) == 0) {
+      cli::cli_abort(
+        "{.arg start} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
   edge.path <- as_igraph_es(graph, edge.path)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
@@ -9692,7 +9698,7 @@ vertex_path_from_edge_path_impl <- function(
   res <- .Call(
     R_igraph_vertex_path_from_edge_path,
     graph,
-    start - 1,
+    if (!is.null(start)) start - 1 else NULL,
     edge.path - 1,
     mode
   )
