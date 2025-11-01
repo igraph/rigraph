@@ -790,11 +790,6 @@ igraph_write_graph_dimacs_flow:
         INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
         VECTOR capacity
 
-igraph_write_graph_gml:
-    R:
-        DEFAULTS:
-            options: 0L
-
 igraph_write_graph_dot:
 
 #######################################

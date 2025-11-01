@@ -2554,11 +2554,12 @@ personalized_pagerank_vs_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = 0L
+  mode = c("simple", "simple_loops")
 ) {
   # Argument checks
   ensure_igraph(rewire)
   n <- as.numeric(n)
+  mode <- switch_igraph_arg(mode, "simple" = 0L, "simple_loops" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6695,12 +6696,13 @@ write_graph_pajek_impl <- function(
 write_graph_gml_impl <- function(
   graph,
   outstream,
-  options = 0L,
+  options = c("default", "encode_only_quot"),
   id,
   creator = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  options <- switch_igraph_arg(options, "default" = 0L, "encode_only_quot" = 1L)
   id <- as.numeric(id)
 
   on.exit(.Call(R_igraph_finalizer))
