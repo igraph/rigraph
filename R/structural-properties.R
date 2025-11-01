@@ -860,7 +860,7 @@ mean_distance <- function(
   details = FALSE
 ) {
   average_path_length_dijkstra_impl(
-    graph,
+    graph = graph,
     weights = weights,
     directed = directed,
     unconnected = unconnected,
@@ -894,6 +894,10 @@ mean_distance <- function(
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -904,6 +908,7 @@ mean_distance <- function(
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -944,9 +949,19 @@ max_degree <- function(
   loops = TRUE
 ) {
   maxdegree_impl(
-    graph,
+    graph = graph,
     v = v,
     mode = mode,
+    loops = loops
+  )
+}
+
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph = graph,
     loops = loops
   )
 }
@@ -1582,16 +1597,14 @@ induced_subgraph <- function(
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- switch(
-    igraph.match.arg(impl),
-    "auto" = 0L,
-    "copy_and_delete" = 1L,
-    "create_from_scratch" = 2L
-  )
+  impl <- igraph.match.arg(impl)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_induced_subgraph, graph, vids - 1, impl)
+  res <- induced_subgraph_impl(
+    graph = graph,
+    vids = vids,
+    impl = impl
+  )
 
   res
 }
@@ -1603,13 +1616,17 @@ induced_subgraph <- function(
 #' @export
 subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
+  # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
   delete.vertices <- as.logical(delete.vertices)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_subgraph_from_edges, graph, eids - 1, delete.vertices)
+  res <- subgraph_from_edges_impl(
+    graph = graph,
+    eids = eids,
+    delete.vertices = delete.vertices
+  )
 
   res
 }
@@ -1796,56 +1813,78 @@ transitivity <- function(
   }
 
   isolates <- igraph.match.arg(isolates)
-  isolates <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
 
-  on.exit(.Call(R_igraph_finalizer))
   if (type == 0) {
-    .Call(R_igraph_transitivity_undirected, graph, isolates)
+    transitivity_undirected_impl(
+      graph = graph,
+      mode = isolates
+    )
   } else if (type == 1) {
+    isolates_num <- as.double(switch(isolates, "nan" = 0, "zero" = 1))
     if (is.null(vids)) {
-      res <- .Call(R_igraph_transitivity_local_undirected_all, graph, isolates)
+      res <- .Call(
+        Rx_igraph_transitivity_local_undirected_all,
+        graph,
+        isolates_num
+      )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
         names(res) <- V(graph)$name
       }
       res
     } else {
-      vids <- as_igraph_vs(graph, vids)
-      res <- .Call(
-        R_igraph_transitivity_local_undirected,
-        graph,
-        vids - 1,
-        isolates
+      res <- transitivity_local_undirected_impl(
+        graph = graph,
+        vids = vids,
+        mode = isolates
       )
       if (igraph_opt("add.vertex.names") && is_named(graph)) {
-        names(res) <- V(graph)$name[vids]
+        vids_indices <- as_igraph_vs(graph, vids)
+        names(res) <- V(graph)$name[vids_indices]
       }
       res
     }
   } else if (type == 2) {
-    .Call(R_igraph_transitivity_avglocal_undirected, graph, isolates)
+    transitivity_avglocal_undirected_impl(
+      graph = graph,
+      mode = isolates
+    )
   } else if (type == 3) {
-    if (is.null(vids)) {
-      vids <- V(graph)
-    }
-    vids <- as_igraph_vs(graph, vids)
+    # Save original vids for naming if needed
+    vids_for_names <- if (is.null(vids)) V(graph) else vids
+
     res <- if (is.null(weights)) {
-      .Call(
-        R_igraph_transitivity_local_undirected,
-        graph,
-        vids - 1,
-        isolates
-      )
+      if (is.null(vids)) {
+        transitivity_local_undirected_impl(
+          graph = graph,
+          mode = isolates
+        )
+      } else {
+        transitivity_local_undirected_impl(
+          graph = graph,
+          vids = vids,
+          mode = isolates
+        )
+      }
     } else {
-      .Call(
-        R_igraph_transitivity_barrat,
-        graph,
-        vids - 1,
-        weights,
-        isolates
-      )
+      if (is.null(vids)) {
+        transitivity_barrat_impl(
+          graph = graph,
+          weights = weights,
+          mode = isolates
+        )
+      } else {
+        transitivity_barrat_impl(
+          graph = graph,
+          vids = vids,
+          weights = weights,
+          mode = isolates
+        )
+      }
     }
+
     if (igraph_opt("add.vertex.names") && is_named(graph)) {
-      names(res) <- V(graph)$name[vids]
+      vids_indices <- as_igraph_vs(graph, vids_for_names)
+      names(res) <- V(graph)$name[vids_indices]
     }
     res
   }
@@ -1905,7 +1944,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
   }
@@ -2225,7 +2264,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_coreness, graph, as.numeric(mode))
+  res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
@@ -2268,7 +2307,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
+  res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
@@ -2416,7 +2455,7 @@ girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_girth, graph, as.logical(circle))
+  res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
   if (res$girth == 0) {
     res$girth <- Inf
   }
@@ -2435,6 +2474,8 @@ girth <- function(graph, circle = TRUE) {
 #' `any_loop()` decides whether the graph has any loop edges.
 #'
 #' `which_loop()` decides whether the edges of the graph are loop edges.
+#'
+#' `count_loops()` counts the total number of loop edges in the graph.
 #'
 #' `any_multiple()` decides whether the graph has any multiple edges.
 #'
@@ -2457,6 +2498,7 @@ girth <- function(graph, circle = TRUE) {
 #'   all edges in the graph.
 #' @return `any_loop()` and `any_multiple()` return a logical scalar.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
+#'   `count_loops()` returns a numeric scalar with the total number of loop edges.
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
@@ -2469,6 +2511,7 @@ girth <- function(graph, circle = TRUE) {
 #' g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 #' any_loop(g)
 #' which_loop(g)
+#' count_loops(g)
 #'
 #' # Multiple edges
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
@@ -2527,6 +2570,14 @@ which_loop <- function(graph, eids = E(graph)) {
 #' @cdocs igraph_has_loop
 any_loop <- function(graph) {
   has_loop_impl(
+    graph = graph
+  )
+}
+#' @rdname which_multiple
+#' @export
+#' @cdocs igraph_count_loops
+count_loops <- function(graph) {
+  count_loops_impl(
     graph = graph
   )
 }
@@ -3100,11 +3151,14 @@ dfs <- function(
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "weak" = 1, "strong" = 2)
+  mode <- igraph.match.arg(mode)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_connected_components, graph, mode)
+  res <- connected_components_impl(
+    graph = graph,
+    mode = mode,
+    details = TRUE
+  )
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name
@@ -3131,7 +3185,58 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_components, graph, mode)
+  .Call(Rx_igraph_no_components, graph, mode)
+}
+
+#' Count reachable vertices
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Counts the number of vertices reachable from each vertex in the graph.
+#'
+#' For each vertex in the graph, this function counts how many vertices
+#' are reachable from it, including the vertex itself.
+#' A vertex is reachable from another if there is a directed path between them.
+#' For undirected graphs, two vertices are reachable from each other if they
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#' @param mode Character constant, defines how edge directions are considered
+#'   in directed graphs.
+#'   `"out"` counts vertices reachable via outgoing edges,
+#'   `"in"` counts vertices from which the current vertex is reachable via
+#'   incoming edges,
+#'   `"all"` or `"total"` ignores edge directions.
+#'   This parameter is ignored for undirected graphs.
+#' @return An integer vector of length `vcount(graph)`.
+#'   The i-th element is the number of vertices reachable from vertex i
+#'   (including vertex i itself).
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [components()], [subcomponent()], [is_connected()]
+#' @family components
+#' @export
+#' @keywords graphs
+#' @examples
+#'
+#' # In a directed path graph, the reachability depends on direction
+#' g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
+#' count_reachable(g, mode = "out")
+#' count_reachable(g, mode = "in")
+#'
+#' # In an undirected graph, reachability is the same in all directions
+#' g2 <- make_graph(~ 1 - 2 - 3 - 4 - 5)
+#' count_reachable(g2, mode = "out")
+#'
+#' # A graph with multiple components
+#' g3 <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
+#' count_reachable(g3, mode = "all")
+#'
+#' @cdocs igraph_count_reachable
+count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
+  count_reachable_impl(
+    graph = graph,
+    mode = mode
+  )
 }
 
 #' Convert a general graph into a forest
@@ -3176,18 +3281,15 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph.match.arg(mode)
   roots <- as_igraph_vs(graph, roots) - 1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_unfold_tree, graph, mode, roots)
+  res <- unfold_tree_impl(
+    graph = graph,
+    mode = mode,
+    roots = roots
+  )
   res
 }
 
@@ -3408,12 +3510,15 @@ is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
-  matching[is.na(matching)] <- -1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE)
+  matching[is.na(matching)] <- 0 # Use 0 since is_matching_impl will subtract 1, making it -1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_is_matching, graph, types, matching)
+  res <- is_matching_impl(
+    graph = graph,
+    types = types,
+    matching = matching
+  )
 
   res
 }
@@ -3424,12 +3529,15 @@ is_max_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
-  matching[is.na(matching)] <- -1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE)
+  matching[is.na(matching)] <- 0 # Use 0 since is_maximal_matching_impl will subtract 1, making it -1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_is_maximal_matching, graph, types, matching)
+  res <- is_maximal_matching_impl(
+    graph = graph,
+    types = types,
+    matching = matching
+  )
 
   res
 }

@@ -351,6 +351,33 @@ test_that("make_chordal_ring works", {
   expect_equal(degree(chord), rep(6, 15))
 })
 
+test_that("make_circulant works", {
+  # Test basic circulant graph with shift 1 (should be a ring)
+  circ <- make_circulant(10, c(1))
+  ring <- make_ring(10)
+  expect_isomorphic(circ, ring)
+
+  # Test circulant graph with multiple shifts
+  circ2 <- make_circulant(6, c(1, 2))
+  expect_vcount(circ2, 6)
+  # Each vertex should be connected to vertices at distance 1 and 2
+  # In undirected graph, degree should be 4 (2 neighbors on each side)
+  expect_equal(degree(circ2), rep(4, 6))
+
+  # Test directed circulant graph
+  circ_dir <- make_circulant(5, c(1, 2), directed = TRUE)
+  expect_true(is_directed(circ_dir))
+  expect_vcount(circ_dir, 5)
+  # In directed graph, each vertex has out-degree 2
+  expect_equal(degree(circ_dir, mode = "out"), rep(2, 5))
+  expect_equal(degree(circ_dir, mode = "in"), rep(2, 5))
+
+  # Test empty shifts
+  circ_empty <- make_circulant(5, c())
+  expect_vcount(circ_empty, 5)
+  expect_ecount(circ_empty, 0)
+})
+
 test_that("make_line_graph works", {
   graph_ring_n5 <- make_ring(n = 5)
   graph_line_n5 <- make_line_graph(graph_ring_n5)
@@ -508,4 +535,61 @@ test_that("graph_from_lcf() works", {
   g1 <- graph_from_lcf(shifts = c(5L, -5L), n = 12L, repeats = 6L)
   g2 <- make_graph("Franklin")
   expect_isomorphic(g1, g2)
+})
+
+test_that("make_full_multipartite() works", {
+  # Test basic multipartite graph
+  g <- make_full_multipartite(c(2, 3, 4))
+  expect_vcount(g, 9)
+  expect_ecount(g, 2 * 3 + 2 * 4 + 3 * 4)
+  expect_true("type" %in% vertex_attr_names(g))
+  expect_equal(V(g)$type, c(rep(1, 2), rep(2, 3), rep(3, 4)))
+  expect_false(is_directed(g))
+
+  # Test directed multipartite graph
+  g2 <- make_full_multipartite(c(2, 2), directed = TRUE, mode = "out")
+  expect_true(is_directed(g2))
+  expect_ecount(g2, 4)
+
+  # Test single partition (should have no edges)
+  g3 <- make_full_multipartite(5)
+  expect_vcount(g3, 5)
+  expect_ecount(g3, 0)
+
+  # Test constructor spec form
+  g4 <- make_(full_multipartite(c(2, 3)))
+  expect_vcount(g4, 5)
+  expect_ecount(g4, 6)
+})
+
+test_that("make_turan() works", {
+  # Test basic Turán graph
+  g <- make_turan(10, 3)
+  expect_vcount(g, 10)
+  expect_true("type" %in% vertex_attr_names(g))
+  expect_false(is_directed(g))
+
+  # Check partition sizes are balanced
+  types <- V(g)$type
+  sizes <- table(types)
+  expect_equal(max(sizes) - min(sizes), 1) # Should differ by at most 1
+
+  # Test with n divisible by r
+  g2 <- make_turan(9, 3)
+  types2 <- V(g2)$type
+  sizes2 <- table(types2)
+  expect_true(all(sizes2 == 3)) # All partitions should have size 3
+
+  # Test edge cases
+  g3 <- make_turan(5, 5) # r equals n
+  expect_vcount(g3, 5)
+  # When r equals n, each vertex is in its own partition, creating a complete graph
+  expect_ecount(g3, 10) # Complete graph K5 has 5*4/2 = 10 edges
+
+  g4 <- make_turan(5, 1) # r = 1, single partition, no edges
+  expect_ecount(g4, 0)
+
+  # Test constructor spec form
+  g5 <- make_(turan(10, 2))
+  expect_vcount(g5, 10)
 })
