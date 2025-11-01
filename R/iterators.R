@@ -583,7 +583,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   .nei <- function(v, mode = c("all", "in", "out", "total")) {
     ## TRUE iff the vertex is a neighbor (any type)
     ## of at least one vertex in v
-    mode <- igraph.match.arg(mode)
+    mode <- igraph_match_arg(mode)
     mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
     if (is.logical(v)) {

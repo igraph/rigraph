@@ -318,7 +318,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -353,7 +353,7 @@ graph.star <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -539,7 +539,7 @@ graph.full.bipartite <- function(
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -1879,7 +1879,7 @@ make_star <- function(
   mode = c("in", "out", "mutual", "undirected"),
   center = 1
 ) {
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2129,7 +2129,7 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
 make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2542,7 +2542,7 @@ make_full_bipartite_graph <- function(
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -2688,7 +2688,7 @@ make_full_multipartite <- function(
 ) {
   n <- as.numeric(n)
   directed <- as.logical(directed)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
@@ -3016,8 +3016,8 @@ realize_bipartite_degseq <- function(
   method = c("smallest", "largest", "index")
 ) {
   check_dots_empty()
-  allowed.edge.types <- igraph.match.arg(allowed.edge.types)
-  method <- igraph.match.arg(method)
+  allowed.edge.types <- igraph_match_arg(allowed.edge.types)
+  method <- igraph_match_arg(method)
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
