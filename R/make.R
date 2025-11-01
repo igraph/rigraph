@@ -2939,14 +2939,14 @@ realize_degseq <- function(
     allowed_edge_types = allowed.edge.types,
     method = method
   )
-  
+
   # Add backward-compatible dotted names
   if (igraph_opt("add.params")) {
     res$out.deg <- res$out_deg
     res$in.deg <- res$in_deg
     res$allowed.edge.types <- res$allowed_edge_types
   }
-  
+
   res
 }
 
@@ -3008,7 +3008,7 @@ realize_bipartite_degseq <- function(
     allowed_edge_types = allowed.edge.types,
     method = method
   )
-  
+
   # Add backward-compatible dotted names
   if (igraph_opt("add.params")) {
     g$allowed.edge.types <- g$allowed_edge_types

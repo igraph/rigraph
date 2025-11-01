@@ -2699,7 +2699,7 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
     islands_pin = islands.pin,
     n_inter = n.inter
   )
-  
+
   # Add backward-compatible dotted names
   if (igraph_opt("add.params")) {
     res$islands.n <- res$islands_n
@@ -2707,7 +2707,7 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
     res$islands.pin <- res$islands_pin
     res$n.inter <- res$n_inter
   }
-  
+
   res
 }
 
@@ -3103,14 +3103,14 @@ sample_fitness_pl <- function(
     multiple = multiple,
     finite_size_correction = finite.size.correction
   )
-  
+
   # Add backward-compatible dotted names
   if (igraph_opt("add.params")) {
     res$exponent.out <- res$exponent_out
     res$exponent.in <- res$exponent_in
     res$finite.size.correction <- res$finite_size_correction
   }
-  
+
   res
 }
 
@@ -3189,13 +3189,13 @@ sample_forestfire <- function(
     ambs = ambs,
     directed = directed
   )
-  
+
   # Add backward-compatible dotted names
   if (igraph_opt("add.params")) {
     res$fw.prob <- res$fw_prob
     res$bw.factor <- res$bw_factor
   }
-  
+
   res
 }
 
