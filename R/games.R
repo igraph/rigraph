@@ -1475,6 +1475,7 @@ degseq <- function(..., deterministic = FALSE) {
 #'
 #' @param n Numeric constant, number of vertices in the graph.
 #' @param m Numeric constant, number of edges added in each time step.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical, whether to create a directed graph.
 #' @param citation Logical. If `TRUE` a citation graph is created, i.e. in
 #'   each time step the added edges are originating from the new vertex.
@@ -1501,14 +1502,8 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @rdname sample_growing
 #' @export
 growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
-  constructor_spec(
-    sample_growing,
-    n,
-    m = m,
-    ...,
-    directed = directed,
-    citation = citation
-  )
+  check_dots_empty()
+  constructor_spec(sample_growing, n, m = m, directed = directed, citation = citation)
 }
 
 ## -----------------------------------------------------------------
@@ -1847,8 +1842,6 @@ sample_traits_callaway <- function(
 }
 
 #' @rdname sample_traits_callaway
-#' @param ... Passed to the constructor, `sample_traits()` or
-#'   `sample_traits_callaway()`.
 #' @export
 traits_callaway <- function(
   nodes,
@@ -2078,8 +2071,6 @@ sample_pref <- function(
 }
 
 #' @rdname sample_pref
-#' @param ... Passed to the constructor, `sample_pref()` or
-#'   `sample_asym_pref()`.
 #' @export
 pref <- function(
   nodes,
@@ -2560,15 +2551,8 @@ bipartite_gnm <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  constructor_spec(
-    sample_bipartite_gnm,
-    n1,
-    n2,
-    m,
-    ...,
-    directed = directed,
-    mode = mode
-  )
+  check_dots_empty()
+  constructor_spec(sample_bipartite_gnm, n1, n2, m, directed = directed, mode = mode)
 }
 
 #' @rdname sample_bipartite_gnm
@@ -2581,15 +2565,8 @@ bipartite_gnp <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  constructor_spec(
-    sample_bipartite_gnp,
-    n1,
-    n2,
-    p,
-    ...,
-    directed = directed,
-    mode = mode
-  )
+  check_dots_empty()
+  constructor_spec(sample_bipartite_gnp, n1, n2, p, directed = directed, mode = mode)
 }
 
 #' Bipartite random graphs
@@ -2607,6 +2584,7 @@ bipartite_gnp <- function(
 #' @param n2 Integer scalar, the number of top vertices.
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs.
+#' @inheritParams rlang::args_dots_empty
 #' @param directed Logical scalar, whether to create a directed graph. See also
 #'   the `mode` argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed

@@ -1002,10 +1002,6 @@ make_ <- function(...) {
 #'
 #' blocky2 <- pref_matrix %>%
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
-#'
-#' ## Arguments are passed on from sample_ to sample_sbm
-#' blocky3 <- pref_matrix %>%
-#'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 #' @family games
 #' @family constructor modifiers
 sample_ <- function(...) {
@@ -2166,7 +2162,8 @@ wheel <- function(
   mode = c("in", "out", "mutual", "undirected"),
   center = 1
 ) {
-  constructor_spec(make_wheel, n, ..., mode = mode, center = center)
+  check_dots_empty()
+  constructor_spec(make_wheel, n, mode = mode, center = center)
 }
 
 ## -----------------------------------------------------------------

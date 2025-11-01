@@ -36,6 +36,8 @@ sample_bipartite_gnp(
 
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical scalar, whether to create a directed graph. See also
 the \code{mode} argument.}
 

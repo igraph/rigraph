@@ -59,9 +59,6 @@ types. These should be probabilities, i.e. numbers between zero and one.}
 \item{directed}{Logical constant, whether to generate directed graphs.}
 
 \item{k}{The number of trials per time step, see details below.}
-
-\item{...}{Passed to the constructor, \code{sample_traits()} or
-\code{sample_traits_callaway()}.}
 }
 \value{
 A new graph object.

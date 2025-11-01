@@ -14,6 +14,8 @@ growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
 \item{m}{Numeric constant, number of edges added in each time step.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical, whether to create a directed graph.}
 
 \item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in

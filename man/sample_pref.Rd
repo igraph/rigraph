@@ -66,9 +66,6 @@ an undirected graph, it must be symmetric.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}
-
-\item{...}{Passed to the constructor, \code{sample_pref()} or
-\code{sample_asym_pref()}.}
 }
 \value{
 An igraph graph.
