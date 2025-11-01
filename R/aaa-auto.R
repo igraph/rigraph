@@ -6532,6 +6532,7 @@ read_graph_pajek_impl <- function(
   instream
 ) {
   # Argument checks
+  check_string(instream)
 
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6549,6 +6550,8 @@ read_graph_graphml_impl <- function(
   index = 0
 ) {
   # Argument checks
+  check_string(instream)
+
   index <- as.numeric(index)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6567,6 +6570,8 @@ read_graph_graphdb_impl <- function(
   directed = FALSE
 ) {
   # Argument checks
+  check_string(instream)
+
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6584,6 +6589,7 @@ read_graph_gml_impl <- function(
   instream
 ) {
   # Argument checks
+  check_string(instream)
 
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6601,6 +6607,8 @@ read_graph_dl_impl <- function(
   directed = TRUE
 ) {
   # Argument checks
+  check_string(instream)
+
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
