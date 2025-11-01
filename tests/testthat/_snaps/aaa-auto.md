@@ -671,7 +671,7 @@
 # realize_degree_sequence_impl errors
 
     Code
-      realize_degree_sequence_impl(out_deg = -1)
+      realize_degree_sequence_impl(out.deg = -1)
     Condition
       Error in `realize_degree_sequence_impl()`:
       ! At vendor/cigraph/src/misc/degree_sequence.cpp:xx : The sum of degrees must be even for an undirected graph. Invalid value
@@ -882,8 +882,8 @@
 # preference_game_impl errors
 
     Code
-      preference_game_impl(nodes = -1, types = 2, type_dist = c(0.5, 0.5),
-      fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
+      preference_game_impl(nodes = -1, types = 2, type.dist = c(0.5, 0.5),
+      fixed.sizes = FALSE, pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `preference_game_impl()`:
       ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must be non-negative. Invalid value
@@ -910,8 +910,8 @@
 # asymmetric_preference_game_impl errors
 
     Code
-      asymmetric_preference_game_impl(nodes = -1, out_types = 2, in_types = 2,
-        type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2), pref_matrix = matrix(
+      asymmetric_preference_game_impl(nodes = -1, out.types = 2, in.types = 2,
+        type.dist.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2), pref.matrix = matrix(
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `asymmetric_preference_game_impl()`:
@@ -975,7 +975,7 @@
 # forest_fire_game_impl errors
 
     Code
-      forest_fire_game_impl(nodes = -1, fw_prob = 0.5)
+      forest_fire_game_impl(nodes = -1, fw.prob = 0.5)
     Condition
       Error in `forest_fire_game_impl()`:
       ! At vendor/cigraph/src/games/forestfire.c:xx : Insufficient memory for forest fire model. Out of memory
@@ -995,8 +995,8 @@
 # simple_interconnected_islands_game_impl errors
 
     Code
-      simple_interconnected_islands_game_impl(islands_n = -1, islands_size = 3,
-        islands_pin = 0.5, n_inter = 1)
+      simple_interconnected_islands_game_impl(islands.n = -1, islands.size = 3,
+        islands.pin = 0.5, n.inter = 1)
     Condition
       Error in `simple_interconnected_islands_game_impl()`:
       ! At vendor/cigraph/src/games/islands.c:xx : Number of islands cannot be negative, got -1. Invalid value
@@ -1025,7 +1025,7 @@
 # chung_lu_game_impl errors
 
     Code
-      chung_lu_game_impl(out_weights = -1)
+      chung_lu_game_impl(out.weights = -1)
     Condition
       Error in `chung_lu_game_impl()`:
       ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
@@ -1054,7 +1054,7 @@
 # static_fitness_game_impl errors
 
     Code
-      static_fitness_game_impl(no_of_edges = -1, fitness_out = c(1, 2, 3))
+      static_fitness_game_impl(no.of.edges = -1, fitness.out = c(1, 2, 3))
     Condition
       Error in `static_fitness_game_impl()`:
       ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
@@ -1085,7 +1085,7 @@
 # static_power_law_game_impl errors
 
     Code
-      static_power_law_game_impl(no_of_nodes = -1, no_of_edges = 4, exponent_out = 2.5)
+      static_power_law_game_impl(no.of.nodes = -1, no.of.edges = 4, exponent.out = 2.5)
     Condition
       Error in `static_power_law_game_impl()`:
       ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of nodes cannot be negative, got -1. Invalid value
@@ -1113,7 +1113,7 @@
 # k_regular_game_impl errors
 
     Code
-      k_regular_game_impl(no_of_nodes = -1, k = 2)
+      k_regular_game_impl(no.of.nodes = -1, k = 2)
     Condition
       Error in `k_regular_game_impl()`:
       ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
@@ -1142,7 +1142,7 @@
 # sbm_game_impl errors
 
     Code
-      sbm_game_impl(n = -1, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
+      sbm_game_impl(n = -1, pref.matrix = matrix(0.5, 2, 2), block.sizes = c(2, 3))
     Condition
       Error in `sbm_game_impl()`:
       ! At vendor/cigraph/src/games/sbm.c:xx : Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
@@ -1206,7 +1206,7 @@
 # correlated_game_impl errors
 
     Code
-      correlated_game_impl(old_graph = NULL, corr = 0.5)
+      correlated_game_impl(old.graph = NULL, corr = 0.5)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -1988,7 +1988,7 @@
 # personalized_pagerank_vs_impl errors
 
     Code
-      personalized_pagerank_vs_impl(graph = NULL, reset_vids = 1)
+      personalized_pagerank_vs_impl(graph = NULL, reset.vids = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -2985,7 +2985,7 @@
 # rich_club_sequence_impl errors
 
     Code
-      rich_club_sequence_impl(graph = NULL, vertex_order = 1:3)
+      rich_club_sequence_impl(graph = NULL, vertex.order = 1:3)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -3551,7 +3551,7 @@
 # joint_type_distribution_impl errors
 
     Code
-      joint_type_distribution_impl(graph = NULL, from_types = c(1, 2, 1))
+      joint_type_distribution_impl(graph = NULL, from.types = c(1, 2, 1))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -3674,7 +3674,7 @@
 # pseudo_diameter_impl errors
 
     Code
-      pseudo_diameter_impl(graph = NULL, start_vid = 1)
+      pseudo_diameter_impl(graph = NULL, start.vid = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -3713,7 +3713,7 @@
 # pseudo_diameter_dijkstra_impl errors
 
     Code
-      pseudo_diameter_dijkstra_impl(graph = NULL, start_vid = 1)
+      pseudo_diameter_dijkstra_impl(graph = NULL, start.vid = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -3902,7 +3902,7 @@
 # is_graphical_impl errors
 
     Code
-      is_graphical_impl(out_deg = "a")
+      is_graphical_impl(out.deg = "a")
     Condition
       Warning in `is_graphical_impl()`:
       NAs introduced by coercion
@@ -5410,7 +5410,7 @@
 # community_fluid_communities_impl errors
 
     Code
-      community_fluid_communities_impl(graph = NULL, no_of_communities = 2)
+      community_fluid_communities_impl(graph = NULL, no.of.communities = 2)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -5710,7 +5710,7 @@
 # hrg_sample_many_impl errors
 
     Code
-      hrg_sample_many_impl(hrg = NULL, num_samples = 2)
+      hrg_sample_many_impl(hrg = NULL, num.samples = 2)
     Condition
       Error in `hrg_sample_many_impl()`:
       ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
@@ -6066,7 +6066,7 @@
 # motifs_randesu_estimate_impl errors
 
     Code
-      motifs_randesu_estimate_impl(graph = NULL, size = 3, sample_size = 2)
+      motifs_randesu_estimate_impl(graph = NULL, size = 3, sample.size = 2)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6088,7 +6088,7 @@
 # motifs_randesu_no_impl errors
 
     Code
-      motifs_randesu_no_impl(graph = g, size = 3, cut_prob = c(0.1))
+      motifs_randesu_no_impl(graph = g, size = 3, cut.prob = c(0.1))
     Condition
       Error in `motifs_randesu_no_impl()`:
       ! At vendor/cigraph/src/misc/motifs.c:xx : Cut probability vector size (1) must agree with motif size (3). Invalid value
@@ -6210,7 +6210,7 @@
 # local_scan_0_them_impl errors
 
     Code
-      local_scan_0_them_impl(us = NULL, them = them)
+      local_scan_0_them_impl(us = NULL, them = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6254,7 +6254,7 @@
 # local_scan_1_ecount_them_impl errors
 
     Code
-      local_scan_1_ecount_them_impl(us = NULL, them = them)
+      local_scan_1_ecount_them_impl(us = NULL, them = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6299,7 +6299,7 @@
 # local_scan_k_ecount_them_impl errors
 
     Code
-      local_scan_k_ecount_them_impl(us = NULL, them = them, k = 1)
+      local_scan_k_ecount_them_impl(us = NULL, them = path_graph_impl(3), k = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6378,7 +6378,7 @@
 # join_impl errors
 
     Code
-      join_impl(left = NULL, right = right)
+      join_impl(left = NULL, right = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6475,7 +6475,7 @@
 # product_impl errors
 
     Code
-      product_impl(g1 = NULL, g2 = g2)
+      product_impl(g1 = NULL, g2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6492,7 +6492,7 @@
 # rooted_product_impl errors
 
     Code
-      rooted_product_impl(g1 = NULL, g2 = g2, root = 1)
+      rooted_product_impl(g1 = NULL, g2 = path_graph_impl(3), root = 1)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -6958,7 +6958,7 @@
 # isomorphic_impl errors
 
     Code
-      isomorphic_impl(graph1 = NULL, graph2 = graph2)
+      isomorphic_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7040,7 +7040,7 @@
 # isomorphic_vf2_impl errors
 
     Code
-      isomorphic_vf2_impl(graph1 = NULL, graph2 = graph2)
+      isomorphic_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7093,7 +7093,7 @@
 # get_isomorphisms_vf2_impl errors
 
     Code
-      get_isomorphisms_vf2_impl(graph1 = NULL, graph2 = graph2)
+      get_isomorphisms_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7108,7 +7108,7 @@
 # subisomorphic_impl errors
 
     Code
-      subisomorphic_impl(graph1 = NULL, graph2 = graph2)
+      subisomorphic_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7147,7 +7147,7 @@
 # subisomorphic_vf2_impl errors
 
     Code
-      subisomorphic_vf2_impl(graph1 = NULL, graph2 = graph2)
+      subisomorphic_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7170,7 +7170,7 @@
 # count_subisomorphisms_vf2_impl errors
 
     Code
-      count_subisomorphisms_vf2_impl(graph1 = NULL, graph2 = graph2)
+      count_subisomorphisms_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7200,7 +7200,7 @@
 # get_subisomorphisms_vf2_impl errors
 
     Code
-      get_subisomorphisms_vf2_impl(graph1 = NULL, graph2 = graph2)
+      get_subisomorphisms_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -7402,7 +7402,7 @@
 # isomorphic_bliss_impl errors
 
     Code
-      isomorphic_bliss_impl(graph1 = NULL, graph2 = graph2)
+      isomorphic_bliss_impl(graph1 = NULL, graph2 = path_graph_impl(3))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
@@ -10060,7 +10060,7 @@
 # roulette_wheel_imitation_impl errors
 
     Code
-      roulette_wheel_imitation_impl(graph = NULL, vid = 1, is_local = TRUE,
+      roulette_wheel_imitation_impl(graph = NULL, vid = 1, is.local = TRUE,
         quantities = c(1, 2, 3), strategies = c(1, 2, 3))
     Condition
       Error in `ensure_igraph()`:
@@ -10127,7 +10127,7 @@
 # vertex_path_from_edge_path_impl errors
 
     Code
-      vertex_path_from_edge_path_impl(graph = NULL, start = 1, edge_path = c(1, 2))
+      vertex_path_from_edge_path_impl(graph = NULL, start = 1, edge.path = c(1, 2))
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
