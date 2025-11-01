@@ -148,6 +148,6 @@ is_graphical <- function(
   is_graphical_impl(
     out_deg = out.deg,
     in_deg = in.deg,
-    allowed.edge_types = allowed.edge.types
+    allowed_edge_types = allowed.edge.types
   )
 }

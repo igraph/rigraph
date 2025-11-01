@@ -648,10 +648,10 @@
 # realize_degree_sequence_impl basic
 
     Code
-      realize_degree_sequence_impl(out.deg = c(2, 2, 2))
+      realize_degree_sequence_impl(out_deg = c(2, 2, 2))
     Output
       IGRAPH U--- 3 3 -- Graph from degree sequence
-      + attr: name (g/c), out.deg (g/n), in.deg (g/x), allowed.edge.types
+      + attr: name (g/c), out_deg (g/n), in_deg (g/x), allowed_edge_types
       | (g/n), method (g/n)
       + edges:
       [1] 2--3 1--3 1--2
@@ -659,11 +659,11 @@
 ---
 
     Code
-      realize_degree_sequence_impl(out.deg = c(2, 2, 2), in.deg = c(2, 2, 2),
-      allowed.edge.types = "simple", method = "largest")
+      realize_degree_sequence_impl(out_deg = c(2, 2, 2), in_deg = c(2, 2, 2),
+      allowed_edge_types = "simple", method = "largest")
     Output
       IGRAPH D--- 3 6 -- Graph from degree sequence
-      + attr: name (g/c), out.deg (g/n), in.deg (g/n), allowed.edge.types
+      + attr: name (g/c), out_deg (g/n), in_deg (g/n), allowed_edge_types
       | (g/n), method (g/n)
       + edges:
       [1] 1->2 1->3 2->1 2->3 3->1 3->2
@@ -682,7 +682,7 @@
       realize_bipartite_degree_sequence_impl(degrees1 = c(2, 2), degrees2 = c(2, 2))
     Output
       IGRAPH U--- 4 4 -- Bipartite graph from degree sequence
-      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed.edge.types
+      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed_edge_types
       | (g/n), method (g/n)
       + edges:
       [1] 2--3 2--4 1--4 1--3
@@ -691,10 +691,10 @@
 
     Code
       realize_bipartite_degree_sequence_impl(degrees1 = c(2, 2), degrees2 = c(2, 2),
-      allowed.edge.types = "loops", method = "largest")
+      allowed_edge_types = "loops", method = "largest")
     Output
       IGRAPH U--- 4 4 -- Bipartite graph from degree sequence
-      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed.edge.types
+      + attr: name (g/c), degrees1 (g/n), degrees2 (g/n), allowed_edge_types
       | (g/n), method (g/n)
       + edges:
       [1] 1--3 1--4 2--3 2--4
@@ -867,8 +867,8 @@
 # preference_game_impl basic
 
     Code
-      preference_game_impl(nodes = 5, types = 2, type.dist = c(0.5, 0.5),
-      fixed.sizes = FALSE, pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
+      preference_game_impl(nodes = 5, types = 2, type_dist = c(0.5, 0.5),
+      fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Output
       $graph
       IGRAPH U--- 5 4 -- 
@@ -888,25 +888,6 @@
       Error in `preference_game_impl()`:
       ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must be non-negative. Invalid value
 
-# asymmetric_preference_game_impl basic
-
-    Code
-      asymmetric_preference_game_impl(nodes = 5, out.types = 2, in.types = 2,
-        type.dist.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2), pref.matrix = matrix(
-          c(0.5, 0.5, 0.5, 0.5), 2, 2))
-    Output
-      $graph
-      IGRAPH D--- 5 9 -- 
-      + edges:
-      [1] 2->4 4->2 5->2 1->3 4->3 4->5 3->1 1->4 1->5
-      
-      $node_type_out_vec
-      [1] 1 0 1 1 1
-      
-      $node_type_in_vec
-      [1] 1 0 0 1 1
-      
-
 # asymmetric_preference_game_impl errors
 
     Code
@@ -915,7 +896,7 @@
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `asymmetric_preference_game_impl()`:
-      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must not be negative. Invalid value
+      ! unused argument (type.dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
 
 # rewire_edges_impl basic
 
@@ -954,21 +935,21 @@
 # forest_fire_game_impl basic
 
     Code
-      forest_fire_game_impl(nodes = 5, fw.prob = 0.5)
+      forest_fire_game_impl(nodes = 5, fw_prob = 0.5)
     Output
       IGRAPH D--- 5 9 -- Forest fire model
-      + attr: name (g/c), fw.prob (g/n), bw.factor (g/n), ambs (g/n)
+      + attr: name (g/c), fw_prob (g/n), bw_factor (g/n), ambs (g/n)
       + edges:
       [1] 2->1 3->2 4->2 4->1 4->3 5->1 5->2 5->4 5->3
 
 ---
 
     Code
-      forest_fire_game_impl(nodes = 5, fw.prob = 0.5, bw.factor = 0.2, ambs = 2,
+      forest_fire_game_impl(nodes = 5, fw_prob = 0.5, bw_factor = 0.2, ambs = 2,
         directed = FALSE)
     Output
       IGRAPH U--- 5 4 -- Forest fire model
-      + attr: name (g/c), fw.prob (g/n), bw.factor (g/n), ambs (g/n)
+      + attr: name (g/c), fw_prob (g/n), bw_factor (g/n), ambs (g/n)
       + edges:
       [1] 1--2 1--3 1--4 4--5
 
@@ -983,12 +964,12 @@
 # simple_interconnected_islands_game_impl basic
 
     Code
-      simple_interconnected_islands_game_impl(islands.n = 2, islands.size = 3,
-        islands.pin = 0.5, n.inter = 1)
+      simple_interconnected_islands_game_impl(islands_n = 2, islands_size = 3,
+        islands_pin = 0.5, n_inter = 1)
     Output
       IGRAPH U--- 6 5 -- Interconnected islands model
-      + attr: name (g/c), islands.n (g/n), islands.size (g/n), islands.pin
-      | (g/n), n.inter (g/n)
+      + attr: name (g/c), islands_n (g/n), islands_size (g/n), islands_pin
+      | (g/n), n_inter (g/n)
       + edges:
       [1] 1--2 1--3 2--3 3--6 5--6
 
@@ -1001,55 +982,15 @@
       Error in `simple_interconnected_islands_game_impl()`:
       ! At vendor/cigraph/src/games/islands.c:xx : Number of islands cannot be negative, got -1. Invalid value
 
-# chung_lu_game_impl basic
-
-    Code
-      chung_lu_game_impl(out.weights = c(2, 2, 2))
-    Output
-      IGRAPH U--- 3 5 -- Chung-Lu model
-      + attr: name (g/c), variant (g/n)
-      + edges:
-      [1] 1--2 1--3 2--2 2--3 3--3
-
----
-
-    Code
-      chung_lu_game_impl(out.weights = c(1, 2, 3), in.weights = c(1, 2, 3), loops = FALSE,
-      variant = "maxent")
-    Output
-      IGRAPH D--- 3 1 -- Chung-Lu model
-      + attr: name (g/c), variant (g/n)
-      + edge:
-      [1] 3->1
-
 # chung_lu_game_impl errors
 
     Code
       chung_lu_game_impl(out.weights = -1)
     Condition
       Error in `chung_lu_game_impl()`:
-      ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
-
-# static_fitness_game_impl basic
-
-    Code
-      static_fitness_game_impl(no.of.edges = 3, fitness.out = c(1, 2, 3))
-    Output
-      IGRAPH U--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1--2 1--3 2--3
-
----
-
-    Code
-      static_fitness_game_impl(no.of.edges = 3, fitness.out = c(1, 2, 3), fitness.in = c(
-        1, 2, 3), loops = TRUE, multiple = TRUE)
-    Output
-      IGRAPH D--- 3 3 -- Static fitness model
-      + attr: name (g/c), loops (g/l), multiple (g/l)
-      + edges:
-      [1] 1->2 2->3 1->3
+      ! `...` must be empty.
+      x Problematic argument:
+      * ... = pairlist(out_weights = -1)
 
 # static_fitness_game_impl errors
 
@@ -1057,30 +998,7 @@
       static_fitness_game_impl(no.of.edges = -1, fitness.out = c(1, 2, 3))
     Condition
       Error in `static_fitness_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
-
-# static_power_law_game_impl basic
-
-    Code
-      static_power_law_game_impl(no.of.nodes = 5, no.of.edges = 4, exponent.out = 2.5)
-    Output
-      IGRAPH U--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
-      + edges:
-      [1] 1--5 2--4 3--5 4--5
-
----
-
-    Code
-      static_power_law_game_impl(no.of.nodes = 5, no.of.edges = 4, exponent.out = 2.5,
-        exponent.in = 2, loops = TRUE, multiple = TRUE, finite.size.correction = FALSE)
-    Output
-      IGRAPH D--- 5 4 -- Static power law model
-      + attr: name (g/c), exponent.out (g/n), exponent.in (g/n), loops (g/l),
-      | multiple (g/l), finite.size.correction (g/l)
-      + edges:
-      [1] 1->1 3->5 1->4 5->1
+      ! unused argument (no.of_edges = -1)
 
 # static_power_law_game_impl errors
 
@@ -1088,27 +1006,7 @@
       static_power_law_game_impl(no.of.nodes = -1, no.of.edges = 4, exponent.out = 2.5)
     Condition
       Error in `static_power_law_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of nodes cannot be negative, got -1. Invalid value
-
-# k_regular_game_impl basic
-
-    Code
-      k_regular_game_impl(no.of.nodes = 5, k = 2)
-    Output
-      IGRAPH U--- 5 5 -- k-regular graph
-      + attr: name (g/c), k (g/n)
-      + edges:
-      [1] 1--3 1--5 2--3 2--4 4--5
-
----
-
-    Code
-      k_regular_game_impl(no.of.nodes = 5, k = 2, directed = TRUE, multiple = TRUE)
-    Output
-      IGRAPH D--- 5 10 -- k-regular graph
-      + attr: name (g/c), k (g/n)
-      + edges:
-       [1] 3->4 3->3 2->1 5->5 1->5 4->3 5->2 4->1 1->2 2->4
+      ! unused arguments (no.of_nodes = -1, no.of_edges = 4)
 
 # k_regular_game_impl errors
 
@@ -1116,12 +1014,12 @@
       k_regular_game_impl(no.of.nodes = -1, k = 2)
     Condition
       Error in `k_regular_game_impl()`:
-      ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
+      ! unused argument (no.of_nodes = -1)
 
 # sbm_game_impl basic
 
     Code
-      sbm_game_impl(n = 5, pref.matrix = matrix(0.5, 2, 2), block.sizes = c(2, 3))
+      sbm_game_impl(n = 5, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Output
       IGRAPH U--- 5 6 -- Stochastic block model
       + attr: name (g/c), loops (g/l)
@@ -1131,7 +1029,7 @@
 ---
 
     Code
-      sbm_game_impl(n = 5, pref.matrix = matrix(0.5, 2, 2), block.sizes = c(2, 3),
+      sbm_game_impl(n = 5, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3),
       directed = TRUE, loops = TRUE)
     Output
       IGRAPH D--- 5 14 -- Stochastic block model
@@ -1192,16 +1090,6 @@
     Condition
       Error in `hsbm_list_game_impl()`:
       ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM. Invalid value
-
-# correlated_game_impl basic
-
-    Code
-      correlated_game_impl(old.graph = g, corr = 0.5)
-    Output
-      IGRAPH U--- 5 3 -- Correlated random graph
-      + attr: name (g/c), corr (g/n), p (g/n)
-      + edges:
-      [1] 1--3 3--4 2--5
 
 # correlated_game_impl errors
 
@@ -1906,14 +1794,14 @@
 # personalized_pagerank_vs_impl basic
 
     Code
-      personalized_pagerank_vs_impl(graph = g, reset.vids = 1)
+      personalized_pagerank_vs_impl(graph = g, reset_vids = 1)
     Output
       [1] 0.3452703 0.4594595 0.1952703
 
 ---
 
     Code
-      personalized_pagerank_vs_impl(graph = g, algo = "arpack", reset.vids = 1,
+      personalized_pagerank_vs_impl(graph = g, algo = "arpack", reset_vids = 1,
         details = TRUE)
     Output
       $vector
@@ -2088,7 +1976,7 @@
 ---
 
     Code
-      simplify_impl(graph = g, remove.multiple = FALSE, remove.loops = FALSE)
+      simplify_impl(graph = g, remove_multiple = FALSE, remove_loops = FALSE)
     Output
       IGRAPH U--- 3 2 -- 
       + edges:
@@ -2228,7 +2116,7 @@
 ---
 
     Code
-      reciprocity_impl(graph = g, ignore.loops = FALSE, mode = "ratio")
+      reciprocity_impl(graph = g, ignore_loops = FALSE, mode = "ratio")
     Output
       [1] 1
 
@@ -2927,7 +2815,7 @@
 ---
 
     Code
-      avg_nearest_neighbor_degree_impl(graph = g, mode = "in", neighbor.degree.mode = "out")
+      avg_nearest_neighbor_degree_impl(graph = g, mode = "in", neighbor_degree_mode = "out")
     Output
       $knn
       [1] 2 1 2
@@ -2954,8 +2842,8 @@
 ---
 
     Code
-      degree_correlation_vector_impl(graph = g, from.mode = "in", to.mode = "out",
-        directed.neighbors = FALSE)
+      degree_correlation_vector_impl(graph = g, from_mode = "in", to_mode = "out",
+        directed_neighbors = FALSE)
     Output
       [1] NaN   2   1
 
@@ -2970,14 +2858,14 @@
 # rich_club_sequence_impl basic
 
     Code
-      rich_club_sequence_impl(graph = g, vertex.order = 1:3)
+      rich_club_sequence_impl(graph = g, vertex_order = 1:3)
     Output
       [1] 0.6666667 1.0000000       NaN
 
 ---
 
     Code
-      rich_club_sequence_impl(graph = g, vertex.order = 1:3, normalized = FALSE,
+      rich_club_sequence_impl(graph = g, vertex_order = 1:3, normalized = FALSE,
       loops = TRUE, directed = FALSE)
     Output
       [1] 2 1 0
@@ -3022,7 +2910,7 @@
 ---
 
     Code
-      centralization_impl(scores = c(1, 2, 3), theoretical.max = 2, normalized = FALSE)
+      centralization_impl(scores = c(1, 2, 3), theoretical_max = 2, normalized = FALSE)
     Output
       [1] 3
 
@@ -3485,7 +3373,7 @@
 ---
 
     Code
-      joint_degree_matrix_impl(graph = g, max.out.degree = 2, max.in.degree = 2)
+      joint_degree_matrix_impl(graph = g, max_out_degree = 2, max_in_degree = 2)
     Output
            [,1] [,2]
       [1,]    0    2
@@ -3512,9 +3400,9 @@
 ---
 
     Code
-      joint_degree_distribution_impl(graph = g, from.mode = "in", to.mode = "out",
-        directed.neighbors = FALSE, normalized = FALSE, max.from.degree = 2,
-        max.to.degree = 2)
+      joint_degree_distribution_impl(graph = g, from_mode = "in", to_mode = "out",
+        directed_neighbors = FALSE, normalized = FALSE, max_from_degree = 2,
+        max_to_degree = 2)
     Output
            [,1] [,2] [,3]
       [1,]    0    0    0
@@ -3532,7 +3420,7 @@
 # joint_type_distribution_impl basic
 
     Code
-      joint_type_distribution_impl(graph = g, from.types = c(1, 2, 1))
+      joint_type_distribution_impl(graph = g, from_types = c(1, 2, 1))
     Output
            [,1] [,2]
       [1,]  0.0  0.5
@@ -3541,7 +3429,7 @@
 ---
 
     Code
-      joint_type_distribution_impl(graph = g, from.types = c(1, 2, 1), to.types = c(1,
+      joint_type_distribution_impl(graph = g, from_types = c(1, 2, 1), to_types = c(1,
         2, 1), directed = FALSE, normalized = FALSE)
     Output
            [,1] [,2]
@@ -3644,7 +3532,7 @@
 # pseudo_diameter_impl basic
 
     Code
-      pseudo_diameter_impl(graph = g, start.vid = 1)
+      pseudo_diameter_impl(graph = g, start_vid = 1)
     Output
       $diameter
       [1] 2
@@ -3659,7 +3547,7 @@
 ---
 
     Code
-      pseudo_diameter_impl(graph = g, start.vid = 1, directed = FALSE, unconnected = FALSE)
+      pseudo_diameter_impl(graph = g, start_vid = 1, directed = FALSE, unconnected = FALSE)
     Output
       $diameter
       [1] 2
@@ -3682,7 +3570,7 @@
 # pseudo_diameter_dijkstra_impl basic
 
     Code
-      pseudo_diameter_dijkstra_impl(graph = g, start.vid = 1)
+      pseudo_diameter_dijkstra_impl(graph = g, start_vid = 1)
     Output
       $diameter
       [1] 2
@@ -3697,7 +3585,7 @@
 ---
 
     Code
-      pseudo_diameter_dijkstra_impl(graph = g, start.vid = 1, directed = FALSE,
+      pseudo_diameter_dijkstra_impl(graph = g, start_vid = 1, directed = FALSE,
         unconnected = FALSE)
     Output
       $diameter
@@ -3887,15 +3775,15 @@
 # is_graphical_impl basic
 
     Code
-      is_graphical_impl(out.deg = c(2, 2, 2))
+      is_graphical_impl(out_deg = c(2, 2, 2))
     Output
       [1] TRUE
 
 ---
 
     Code
-      is_graphical_impl(out.deg = c(2, 2, 2), in.deg = c(1, 1, 1),
-      allowed.edge.types = "all")
+      is_graphical_impl(out_deg = c(2, 2, 2), in_deg = c(1, 1, 1),
+      allowed_edge_types = "all")
     Output
       [1] FALSE
 
@@ -4291,18 +4179,22 @@
       
       $tree_edges
       $tree_edges[[1]]
-      [1] 2
+      + 1/2 edge:
+      [1] 2--3
       
       $tree_edges[[2]]
-      [1] 1
+      + 1/2 edge:
+      [1] 1--2
       
       
       $component_edges
       $component_edges[[1]]
-      [1] 2
+      + 1/2 edge:
+      [1] 2--3
       
       $component_edges[[2]]
-      [1] 1
+      + 1/2 edge:
+      [1] 1--2
       
       
       $components
@@ -4316,16 +4208,8 @@
       
       
       $articulation_points
+      + 1/3 vertex:
       [1] 2
-      
-      $tree.edges
-      list()
-      
-      $component.edges
-      list()
-      
-      $articulation.points
-      + 0/3 vertices:
       
 
 # biconnected_components_impl errors
@@ -4529,7 +4413,7 @@
 ---
 
     Code
-      clique_size_hist_impl(graph = g, min.size = 2, max.size = 2)
+      clique_size_hist_impl(graph = g, min_size = 2, max_size = 2)
     Output
       [1] 0 2
 
@@ -4573,7 +4457,7 @@
 ---
 
     Code
-      maximal_cliques_hist_impl(graph = g, min.size = 2, max.size = 2)
+      maximal_cliques_hist_impl(graph = g, min_size = 2, max_size = 2)
     Output
       [1] 0 2
 
@@ -4629,8 +4513,8 @@
 ---
 
     Code
-      weighted_cliques_impl(graph = g, vertex.weights = c(1, 2, 3), min.weight = 1,
-      max.weight = 3, maximal = TRUE)
+      weighted_cliques_impl(graph = g, vertex_weights = c(1, 2, 3), min_weight = 1,
+      max_weight = 3, maximal = TRUE)
     Output
       [[1]]
       + 2/3 vertices:
@@ -4662,7 +4546,7 @@
 ---
 
     Code
-      largest_weighted_cliques_impl(graph = g, vertex.weights = c(1, 2, 3))
+      largest_weighted_cliques_impl(graph = g, vertex_weights = c(1, 2, 3))
     Output
       [[1]]
       + 2/3 vertices:
@@ -4687,7 +4571,7 @@
 ---
 
     Code
-      weighted_clique_number_impl(graph = g, vertex.weights = c(1, 2, 3))
+      weighted_clique_number_impl(graph = g, vertex_weights = c(1, 2, 3))
     Output
       [1] 5
 
@@ -5015,8 +4899,8 @@
 ---
 
     Code
-      layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE,
-      maxiter = 10, temp.max = 2, temp.min = 0.1, temp.init = 1)
+      layout_gem_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use_seed = TRUE,
+      maxiter = 10, temp_max = 2, temp_min = 0.1, temp_init = 1)
     Output
                  [,1]       [,2]
       [1,]  1.0114521 -0.1206363
@@ -5045,9 +4929,9 @@
 
     Code
       layout_davidson_harel_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2),
-      use.seed = TRUE, maxiter = 10, fineiter = 5, cool.fact = 0.5, weight.node.dist = 2,
-      weight.border = 1, weight.edge.lengths = 0.1, weight.edge.crossings = 0.2,
-      weight.node.edge.dist = 0.3)
+      use_seed = TRUE, maxiter = 10, fineiter = 5, cool_fact = 0.5, weight_node_dist = 2,
+      weight_border = 1, weight_edge_lengths = 0.1, weight_edge_crossings = 0.2,
+      weight_node_edge_dist = 0.3)
     Output
                 [,1]      [,2]
       [1,] -6.609493 -2.155221
@@ -5065,7 +4949,7 @@
 # layout_umap_impl basic
 
     Code
-      layout_umap_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE)
+      layout_umap_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use_seed = TRUE)
     Output
            [,1] [,2]
       [1,]    0    0
@@ -5075,8 +4959,8 @@
 ---
 
     Code
-      layout_umap_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use.seed = TRUE,
-      distances = 1:3, min.dist = 0.1, epochs = 10, distances.are.weights = TRUE)
+      layout_umap_impl(graph = g, res = matrix(0, nrow = 3, ncol = 2), use_seed = TRUE,
+      distances = 1:3, min_dist = 0.1, epochs = 10, distances_are_weights = TRUE)
     Output
            [,1] [,2]
       [1,]    0    0
@@ -5094,7 +4978,7 @@
 # layout_umap_3d_impl basic
 
     Code
-      layout_umap_3d_impl(graph = g, res = matrix(0, nrow = 3, ncol = 3), use.seed = TRUE)
+      layout_umap_3d_impl(graph = g, res = matrix(0, nrow = 3, ncol = 3), use_seed = TRUE)
     Output
            [,1] [,2] [,3]
       [1,]    0    0    0
@@ -5104,8 +4988,8 @@
 ---
 
     Code
-      layout_umap_3d_impl(graph = g, res = matrix(0, nrow = 3, ncol = 3), use.seed = TRUE,
-      distances = 1:3, min.dist = 0.1, epochs = 10, distances.are.weights = TRUE)
+      layout_umap_3d_impl(graph = g, res = matrix(0, nrow = 3, ncol = 3), use_seed = TRUE,
+      distances = 1:3, min_dist = 0.1, epochs = 10, distances_are_weights = TRUE)
     Output
            [,1] [,2] [,3]
       [1,]    0    0    0
@@ -5403,7 +5287,7 @@
 # community_fluid_communities_impl basic
 
     Code
-      community_fluid_communities_impl(graph = g, no.of.communities = 2)
+      community_fluid_communities_impl(graph = g, no_of_communities = 2)
     Output
       [1] 1 0 0
 
@@ -5513,8 +5397,8 @@
 # community_leiden_impl basic
 
     Code
-      community_leiden_impl(graph = g, weights = c(1, 2), vertex.weights = c(1, 2, 3),
-      resolution = 0.5, beta = 0.1, start = TRUE, n.iterations = 1, membership = 1:3)
+      community_leiden_impl(graph = g, weights = c(1, 2), vertex_weights = c(1, 2, 3),
+      resolution = 0.5, beta = 0.1, start = TRUE, n_iterations = 1, membership = 1:3)
     Output
       $membership
       [1] 0 1 2
@@ -5571,8 +5455,8 @@
 ---
 
     Code
-      community_infomap_impl(graph = g, e.weights = c(1, 2), v.weights = c(1, 2, 3),
-      nb.trials = 2)
+      community_infomap_impl(graph = g, e_weights = c(1, 2), v_weights = c(1, 2, 3),
+      nb_trials = 2)
     Output
       $membership
       [1] 0 0 0
@@ -5688,7 +5572,7 @@
 # hrg_sample_many_impl basic
 
     Code
-      hrg_sample_many_impl(hrg = hrg_model, num.samples = 2)
+      hrg_sample_many_impl(hrg = hrg_model, num_samples = 2)
     Output
       [[1]]
       IGRAPH U--- 10 45 -- 
@@ -5905,7 +5789,7 @@
 ---
 
     Code
-      get_stochastic_impl(graph = g, column.wise = TRUE, weights = c(1, 2))
+      get_stochastic_impl(graph = g, column_wise = TRUE, weights = c(1, 2))
     Output
            [,1]      [,2] [,3]
       [1,]    0 0.3333333    0
@@ -5946,7 +5830,7 @@
 ---
 
     Code
-      get_stochastic_sparse_impl(graph = g, column.wise = TRUE, weights = c(1, 2))
+      get_stochastic_sparse_impl(graph = g, column_wise = TRUE, weights = c(1, 2))
     Output
       $type
       [1] "triplet"
@@ -6012,7 +5896,7 @@
 ---
 
     Code
-      to_undirected_impl(graph = g, mode = "mutual", edge.attr.comb = "sum")
+      to_undirected_impl(graph = g, mode = "mutual", edge_attr_comb = "sum")
     Output
       IGRAPH U--- 3 2 -- 
       + edges:
@@ -6036,7 +5920,7 @@
 ---
 
     Code
-      motifs_randesu_impl(graph = g, size = 4, cut.prob = rep(0.1, 4))
+      motifs_randesu_impl(graph = g, size = 4, cut_prob = rep(0.1, 4))
     Output
        [1] NaN NaN NaN NaN   0 NaN   0   0   0   0   0
 
@@ -6051,15 +5935,15 @@
 # motifs_randesu_estimate_impl basic
 
     Code
-      motifs_randesu_estimate_impl(graph = g, size = 3, sample.size = 2)
+      motifs_randesu_estimate_impl(graph = g, size = 3, sample_size = 2)
     Output
       [1] 3
 
 ---
 
     Code
-      motifs_randesu_estimate_impl(graph = g, size = 4, cut.prob = rep(0.1, 4),
-      sample.size = 2, sample = 1:2)
+      motifs_randesu_estimate_impl(graph = g, size = 4, cut_prob = rep(0.1, 4),
+      sample_size = 2, sample = 1:2)
     Output
       [1] 3
 
@@ -6081,7 +5965,7 @@
 ---
 
     Code
-      motifs_randesu_no_impl(graph = g, size = 4, cut.prob = c(0.1, 0.1, 0.1, 0.1))
+      motifs_randesu_no_impl(graph = g, size = 4, cut_prob = c(0.1, 0.1, 0.1, 0.1))
     Output
       [1] 0
 
@@ -6203,7 +6087,7 @@
 ---
 
     Code
-      local_scan_0_them_impl(us = g1, them = g2, weights.them = c(1, 2), mode = "in")
+      local_scan_0_them_impl(us = g1, them = g2, weights_them = c(1, 2), mode = "in")
     Output
       [1] 1 3 2
 
@@ -6247,7 +6131,7 @@
 ---
 
     Code
-      local_scan_1_ecount_them_impl(us = g1, them = g2, weights.them = c(1, 2), mode = "in")
+      local_scan_1_ecount_them_impl(us = g1, them = g2, weights_them = c(1, 2), mode = "in")
     Output
       [1] 1 3 2
 
@@ -6291,7 +6175,7 @@
 ---
 
     Code
-      local_scan_k_ecount_them_impl(us = g1, them = g2, k = 1, weights.them = c(1, 2),
+      local_scan_k_ecount_them_impl(us = g1, them = g2, k = 1, weights_them = c(1, 2),
       mode = "in")
     Output
       [1] 1 3 2
@@ -7024,8 +6908,8 @@
 ---
 
     Code
-      isomorphic_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2, 3),
-      vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      isomorphic_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2, 3),
+      vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       $iso
       [1] TRUE
@@ -7055,8 +6939,8 @@
 ---
 
     Code
-      count_isomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2, 3),
-      vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      count_isomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2, 3),
+      vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       [1] 1
 
@@ -7083,8 +6967,8 @@
 ---
 
     Code
-      get_isomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2, 3),
-      vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      get_isomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2, 3),
+      vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       [[1]]
       [1] 0 1 2
@@ -7131,8 +7015,8 @@
 ---
 
     Code
-      subisomorphic_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2, 3),
-      vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      subisomorphic_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2, 3),
+      vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       $iso
       [1] TRUE
@@ -7162,8 +7046,8 @@
 ---
 
     Code
-      count_subisomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2,
-        3), vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      count_subisomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2,
+        3), vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       [1] 1
 
@@ -7190,8 +7074,8 @@
 ---
 
     Code
-      get_subisomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex.color1 = c(1, 2,
-        3), vertex.color2 = c(1, 2, 3), edge.color1 = c(1, 2), edge.color2 = c(1, 2))
+      get_subisomorphisms_vf2_impl(graph1 = g1, graph2 = g2, vertex_color1 = c(1, 2,
+        3), vertex_color2 = c(1, 2, 3), edge_color1 = c(1, 2), edge_color2 = c(1, 2))
     Output
       [[1]]
       [1] 0 1 2
@@ -8024,7 +7908,7 @@
 ---
 
     Code
-      power_law_fit_impl(data = c(1, 2, 3), xmin = 1, force.continuous = TRUE)
+      power_law_fit_impl(data = c(1, 2, 3), xmin = 1, force_continuous = TRUE)
     Output
       $continuous
       [1] TRUE
@@ -9463,7 +9347,7 @@
 ---
 
     Code
-      sir_impl(graph = g, beta = 0.1, gamma = 0.1, no.sim = 2)
+      sir_impl(graph = g, beta = 0.1, gamma = 0.1, no_sim = 2)
     Output
       [[1]]
       [[1]]$times
@@ -9607,8 +9491,8 @@
 ---
 
     Code
-      simple_cycles_impl(graph = g, mode = "in", min.cycle.length = 2,
-        max.cycle.length = 3)
+      simple_cycles_impl(graph = g, mode = "in", min_cycle_length = 2,
+        max_cycle_length = 3)
     Output
       $vertices
       list()
@@ -9707,7 +9591,7 @@
 ---
 
     Code
-      fundamental_cycles_impl(graph = g, start = 1, bfs.cutoff = 2, weights = c(1, 2))
+      fundamental_cycles_impl(graph = g, start = 1, bfs_cutoff = 2, weights = c(1, 2))
     Output
       list()
 
@@ -9729,8 +9613,8 @@
 ---
 
     Code
-      minimum_cycle_basis_impl(graph = g, bfs.cutoff = 2, complete = FALSE,
-        use.cycle.order = FALSE, weights = c(1, 2))
+      minimum_cycle_basis_impl(graph = g, bfs_cutoff = 2, complete = FALSE,
+        use_cycle_order = FALSE, weights = c(1, 2))
     Output
       list()
 
@@ -10044,7 +9928,7 @@
 # roulette_wheel_imitation_impl basic
 
     Code
-      roulette_wheel_imitation_impl(graph = g, vid = 1, is.local = TRUE, quantities = c(
+      roulette_wheel_imitation_impl(graph = g, vid = 1, is_local = TRUE, quantities = c(
         1, 2, 3), strategies = c(1, 2, 3))
     Output
       [1] 1 2 3
@@ -10052,7 +9936,7 @@
 ---
 
     Code
-      roulette_wheel_imitation_impl(graph = g, vid = 1, is.local = FALSE, quantities = c(
+      roulette_wheel_imitation_impl(graph = g, vid = 1, is_local = FALSE, quantities = c(
         1, 2, 3), strategies = c(1, 2, 3), mode = "in")
     Output
       [1] 3 2 3
@@ -10111,7 +9995,7 @@
 # vertex_path_from_edge_path_impl basic
 
     Code
-      vertex_path_from_edge_path_impl(graph = g, start = 1, edge.path = c(1, 2))
+      vertex_path_from_edge_path_impl(graph = g, start = 1, edge_path = c(1, 2))
     Output
       + 3/3 vertices:
       [1] 1 2 3
@@ -10119,7 +10003,7 @@
 ---
 
     Code
-      vertex_path_from_edge_path_impl(graph = g, start = 1, edge.path = c(1), mode = "in")
+      vertex_path_from_edge_path_impl(graph = g, start = 1, edge_path = c(1), mode = "in")
     Output
       + 2/3 vertices:
       [1] 1 2

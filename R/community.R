@@ -3228,7 +3228,7 @@ contract <- function(
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
-    vertex.attr_comb = vertex.attr.comb
+    vertex_attr_comb = vertex.attr.comb
   )
 }
 

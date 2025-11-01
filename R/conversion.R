@@ -630,7 +630,7 @@ as_undirected <- function(
   res <- to_undirected_impl(
     graph = graph,
     mode = mode,
-    edge.attr_comb = edge.attr.comb
+    edge_attr_comb = edge.attr.comb
   )
 
   res

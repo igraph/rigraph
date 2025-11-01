@@ -506,18 +506,18 @@ graph.isomorphic.vf2 <- function(
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 #' @export
@@ -533,18 +533,18 @@ graph.subisomorphic.vf2 <- function(
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -731,18 +731,18 @@ graph.count.isomorphisms.vf2 <- function(
   count_isomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -838,18 +838,18 @@ graph.count.subisomorphisms.vf2 <- function(
   count_subisomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 

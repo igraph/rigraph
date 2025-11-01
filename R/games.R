@@ -2907,7 +2907,8 @@ sample_chung_lu <- function(
   variant = c("original", "maxent", "nr")
 ) {
   chung_lu_game_impl(
-    ... = pairlist(out_weights = out.weights, in_weights = in.weights),
+    out_weights = out.weights,
+    in_weights = in.weights,
     loops = loops,
     variant = variant
   )

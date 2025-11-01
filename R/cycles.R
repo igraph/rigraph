@@ -100,9 +100,9 @@ simple_cycles <- function(
   simple_cycles_impl(
     graph = graph,
     mode = mode,
-    min.cycle_length = min %||%
+    min_cycle_length = min %||%
       -1,
-    max.cycle_length = max %||%
+    max_cycle_length = max %||%
       -1
   )
 }

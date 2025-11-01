@@ -3709,7 +3709,7 @@ knn <- function(
     graph = graph,
     vids = vids,
     mode = mode,
-    neighbor.degree_mode = neighbor.degree.mode,
+    neighbor_degree_mode = neighbor.degree.mode,
     weights = weights
   )
 }
