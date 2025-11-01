@@ -8,7 +8,7 @@
 \title{Graph generation based on different vertex types}
 \usage{
 sample_traits_callaway(
-  nodes,
+  n,
   types,
   edge.per.step = 1,
   type.dist = rep(1, types),
@@ -19,7 +19,7 @@ sample_traits_callaway(
 traits_callaway(...)
 
 sample_traits(
-  nodes,
+  n,
   types,
   k = 1,
   type.dist = rep(1, types),
@@ -30,7 +30,7 @@ sample_traits(
 traits(...)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{types}{The number of different vertex types.}
 

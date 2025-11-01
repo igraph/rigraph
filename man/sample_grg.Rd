@@ -5,12 +5,12 @@
 \alias{grg}
 \title{Geometric random graphs}
 \usage{
-sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
+sample_grg(n, radius, torus = FALSE, coords = FALSE)
 
 grg(...)
 }
 \arguments{
-\item{nodes}{The number of vertices in the graph.}
+\item{n}{The number of vertices in the graph.}
 
 \item{radius}{The radius within which the vertices will be connected by an
 edge.}

@@ -4,7 +4,7 @@
 \alias{diversity}
 \title{Graph diversity}
 \usage{
-diversity(graph, weights = NULL, vids = V(graph))
+diversity(graph, weights = NULL, vertices = V(graph))
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}
@@ -13,7 +13,7 @@ diversity(graph, weights = NULL, vids = V(graph))
 computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
 that this measure is not defined for unweighted graphs.}
 
-\item{vids}{The vertex ids for which to calculate the measure.}
+\item{vertices}{The vertex ids for which to calculate the measure.}
 }
 \value{
 A numeric vector, its length is the number of vertices.

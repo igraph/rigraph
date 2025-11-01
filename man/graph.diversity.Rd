@@ -12,8 +12,6 @@ graph.diversity(graph, weights = NULL, vids = V(graph))
 \item{weights}{\code{NULL}, or the vector of edge weights to use for the
 computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
 that this measure is not defined for unweighted graphs.}
-
-\item{vids}{The vertex ids for which to calculate the measure.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -15,8 +15,6 @@ graph.strength(
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vids}{The vertices for which the strength will be calculated.}
-
 \item{mode}{Character string, \dQuote{out} for out-degree, \dQuote{in} for
 in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 argument is ignored.}

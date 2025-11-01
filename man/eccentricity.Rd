@@ -6,7 +6,7 @@
 \usage{
 eccentricity(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   ...,
   weights = NULL,
   mode = c("all", "out", "in", "total")
@@ -15,7 +15,7 @@ eccentricity(
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{vids}{The vertices for which the eccentricity is calculated.}
+\item{vertices}{The vertices for which the eccentricity is calculated.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

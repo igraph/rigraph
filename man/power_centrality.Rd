@@ -6,7 +6,7 @@
 \usage{
 power_centrality(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
@@ -17,7 +17,7 @@ power_centrality(
 \arguments{
 \item{graph}{the input graph.}
 
-\item{nodes}{vertex sequence indicating which vertices are to be included in
+\item{vertices}{vertex sequence indicating which vertices are to be included in
 the calculation.  By default, all vertices are included.}
 
 \item{loops}{boolean indicating whether or not the diagonal should be

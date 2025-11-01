@@ -43,7 +43,7 @@ page.rank <- function(
   page_rank(
     graph = graph,
     algo = algo,
-    vids = vids,
+    vertices = vids,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -120,7 +120,7 @@ graph.strength <- function(
   lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
   strength(
     graph = graph,
-    vids = vids,
+    vertices = vids,
     mode = mode,
     loops = loops,
     weights = weights
@@ -255,7 +255,7 @@ bonpow <- function(
   lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
   power_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     loops = loops,
     exponent = exponent,
     rescale = rescale,
@@ -288,7 +288,7 @@ alpha.centrality <- function(
   lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
   alpha_centrality(
     graph = graph,
-    nodes = nodes,
+    vertices = nodes,
     alpha = alpha,
     loops = loops,
     exo = exo,
@@ -543,7 +543,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 #' @aliases closeness.estimate
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which closeness will be calculated.
+#' @param vertices The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{in} measures the paths
 #'   *to* a vertex, \dQuote{out} measures paths *from* a vertex,
@@ -578,7 +578,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 closeness <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -587,7 +587,7 @@ closeness <- function(
   # Argument checks
   ensure_igraph(graph)
 
-  vids <- as_igraph_vs(graph, vids)
+  vids <- as_igraph_vs(graph, vertices)
   mode <- switch(
     igraph_match_arg(mode),
     "out" = 1,
@@ -1370,7 +1370,7 @@ eigen_centrality <- function(
 #'
 #'
 #' @param graph The input graph.
-#' @param vids The vertices for which the strength will be calculated.
+#' @param vertices The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
@@ -1403,14 +1403,14 @@ eigen_centrality <- function(
 #' @cdocs igraph_strength
 strength <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL
 ) {
   strength_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     loops = loops,
     weights = weights
@@ -1439,7 +1439,7 @@ strength <- function(
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
 #'   that this measure is not defined for unweighted graphs.
-#' @param vids The vertex ids for which to calculate the measure.
+#' @param vertices The vertex ids for which to calculate the measure.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
@@ -1459,11 +1459,11 @@ strength <- function(
 #' @family centrality
 #' @export
 #' @cdocs igraph_diversity
-diversity <- function(graph, weights = NULL, vids = V(graph)) {
+diversity <- function(graph, weights = NULL, vertices = V(graph)) {
   diversity_impl(
     graph = graph,
     weights = weights,
-    vids = vids
+    vids = vertices
   )
 }
 
@@ -1653,7 +1653,7 @@ hub_score <- function(
 #'   for all but small graphs.  `"arpack"` uses the ARPACK library, the
 #'   default implementation from igraph version 0.5 until version 0.7. It computes
 #'   PageRank scores by solving an eingevalue problem.
-#' @param vids The vertices of interest.
+#' @param vertices The vertices of interest.
 #' @param directed Logical, if true directed paths will be considered for
 #'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
@@ -1714,7 +1714,7 @@ hub_score <- function(
 page_rank <- function(
   graph,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vertices = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized = NULL,
@@ -1724,7 +1724,7 @@ page_rank <- function(
   personalized_pagerank_impl(
     graph = graph,
     algo = algo,
-    vids = vids,
+    vids = vertices,
     directed = directed,
     damping = damping,
     personalized = personalized,
@@ -1744,7 +1744,7 @@ page_rank <- function(
 #' default), then the function calculates the exact harmonic centrality scores.
 #'
 #' @param graph The graph to analyze.
-#' @param vids The vertices for which harmonic centrality will be calculated.
+#' @param vertices The vertices for which harmonic centrality will be calculated.
 #' @param mode Character string, defining the types of the paths used for
 #'   measuring the distance in directed graphs. \dQuote{out} follows paths along
 #'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
@@ -1781,7 +1781,7 @@ page_rank <- function(
 #' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- function(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -1789,7 +1789,7 @@ harmonic_centrality <- function(
 ) {
   harmonic_centrality_cutoff_impl(
     graph = graph,
-    vids = vids,
+    vids = vertices,
     mode = mode,
     weights = weights,
     normalized = normalized,
@@ -1914,7 +1914,7 @@ bonpow.sparse <- function(
 #' is important to think about the edge direction and what it represents.
 #'
 #' @param graph the input graph.
-#' @param nodes vertex sequence indicating which vertices are to be included in
+#' @param vertices vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
 #' @param loops boolean indicating whether or not the diagonal should be
 #'   treated as valid data.  Set this true if and only if the data can contain
@@ -1975,14 +1975,14 @@ bonpow.sparse <- function(
 #'
 power_centrality <- function(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   loops = FALSE,
   exponent = 1,
   rescale = FALSE,
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
   } else {
@@ -2114,7 +2114,7 @@ alpha.centrality.sparse <- function(
 #'
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
-#' @param nodes Vertex sequence, the vertices for which the alpha centrality
+#' @param vertices Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. (For technical reasons they will be calculated for all
 #'   vertices, anyway.)
 #' @param alpha Parameter specifying the relative importance of endogenous
@@ -2160,7 +2160,7 @@ alpha.centrality.sparse <- function(
 #'
 alpha_centrality <- function(
   graph,
-  nodes = V(graph),
+  vertices = V(graph),
   alpha = 1,
   loops = FALSE,
   exo = 1,
@@ -2168,7 +2168,7 @@ alpha_centrality <- function(
   tol = 1e-7,
   sparse = TRUE
 ) {
-  nodes <- as_igraph_vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, vertices)
   if (sparse) {
     res <- alpha.centrality.sparse(
       graph,

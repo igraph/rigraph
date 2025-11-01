@@ -7,7 +7,7 @@
 \usage{
 closeness(
   graph,
-  vids = V(graph),
+  vertices = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,
@@ -17,7 +17,7 @@ closeness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{vids}{The vertices for which closeness will be calculated.}
+\item{vertices}{The vertices for which closeness will be calculated.}
 
 \item{mode}{Character string, defined the types of the paths used for
 measuring the distance in directed graphs. \dQuote{in} measures the paths

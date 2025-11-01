@@ -18,8 +18,6 @@ neighborhood.size(
 \item{order}{Integer giving the order of the neighborhood. Negative values
 indicate an infinite order.}
 
-\item{nodes}{The vertices for which the calculation is performed.}
-
 \item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source

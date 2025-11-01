@@ -184,7 +184,7 @@ neighborhood.size <- function(
   ego_size(
     graph = graph,
     order = order,
-    nodes = nodes,
+    vertices = nodes,
     mode = mode,
     mindist = mindist
   )
@@ -378,7 +378,7 @@ graph.neighborhood <- function(
   make_ego_graph(
     graph = graph,
     order = order,
-    nodes = nodes,
+    vertices = nodes,
     mode = mode,
     mindist = mindist
   )
@@ -1914,7 +1914,7 @@ transitivity <- function(
 #' graph adjacency matrix. For isolated vertices, constraint is undefined.
 #'
 #' @param graph A graph object, the input graph.
-#' @param nodes The vertices for which the constraint will be calculated.
+#' @param vertices The vertices for which the constraint will be calculated.
 #'   Defaults to all vertices.
 #' @param weights The weights of the edges. If this is `NULL` and there is
 #'   a `weight` edge attribute this is used. If there is no such edge
@@ -1933,9 +1933,9 @@ transitivity <- function(
 #' g <- sample_gnp(20, 5 / 20)
 #' constraint(g)
 #'
-constraint <- function(graph, nodes = V(graph), weights = NULL) {
+constraint <- function(graph, vertices = V(graph), weights = NULL) {
   ensure_igraph(graph)
-  nodes <- as_igraph_vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, vertices)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -2049,7 +2049,7 @@ edge_density <- function(graph, loops = FALSE) {
 ego_size <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vertices = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2062,7 +2062,7 @@ ego_size <- function(
   .Call(
     R_igraph_neighborhood_size,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2105,7 +2105,7 @@ neighborhood_size <- ego_size
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood. Negative values
 #'   indicate an infinite order.
-#' @param nodes The vertices for which the calculation is performed.
+#' @param vertices The vertices for which the calculation is performed.
 #' @param mode Character constant, it specifies how to use the direction of
 #'   the edges if a directed graph is analyzed. For \sQuote{out} only the
 #'   outgoing edges are followed, so all vertices reachable from the source
@@ -2163,7 +2163,7 @@ neighborhood_size <- ego_size
 ego <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vertices = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2176,7 +2176,7 @@ ego <- function(
   res <- .Call(
     R_igraph_neighborhood,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.numeric(mode),
     mindist
@@ -2198,7 +2198,7 @@ neighborhood <- ego
 make_ego_graph <- function(
   graph,
   order = 1,
-  nodes = V(graph),
+  vertices = V(graph),
   mode = c("all", "out", "in"),
   mindist = 0
 ) {
@@ -2211,7 +2211,7 @@ make_ego_graph <- function(
   res <- .Call(
     R_igraph_neighborhood_graphs,
     graph,
-    as_igraph_vs(graph, nodes) - 1,
+    as_igraph_vs(graph, vertices) - 1,
     as.numeric(order),
     as.integer(mode),
     mindist
