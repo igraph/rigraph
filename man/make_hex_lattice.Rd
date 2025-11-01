@@ -26,11 +26,10 @@ An igraph graph.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-\code{make_hex_lattice()} creates a hexagonal lattice. In graph theory, this is
-also sometimes referred to as a "triangular lattice" due to the triangular
-faces formed by the edges. The name "hexagonal lattice" refers to the
-hexagonal tiling pattern created when vertices are arranged in this structure,
-and is more commonly used in crystallography and physics.
+\code{make_hex_lattice()} creates a hexagonal lattice where each interior vertex
+has degree 3. The hexagonal lattice and triangular lattice are different
+structures; they are planar duals of each other. See \code{igraph_triangular_lattice()}
+in the C library for the triangular lattice.
 
 A hexagonal lattice is a lattice structure where each interior vertex
 (not on the boundary) has degree 3. The function supports creating lattices

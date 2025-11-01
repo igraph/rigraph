@@ -261,7 +261,7 @@
 # hexagonal_lattice_impl errors
 
     Code
-      x
+      hexagonal_lattice_impl(dimvector = -1)
     Condition
       Error in `hexagonal_lattice_impl()`:
       ! At vendor/cigraph/src/constructors/lattices.c:xx : Invalid dimension vector. Invalid value

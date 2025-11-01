@@ -2032,11 +2032,10 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' `make_hex_lattice()` creates a hexagonal lattice. In graph theory, this is
-#' also sometimes referred to as a "triangular lattice" due to the triangular
-#' faces formed by the edges. The name "hexagonal lattice" refers to the
-#' hexagonal tiling pattern created when vertices are arranged in this structure,
-#' and is more commonly used in crystallography and physics.
+#' `make_hex_lattice()` creates a hexagonal lattice where each interior vertex
+#' has degree 3. The hexagonal lattice and triangular lattice are different
+#' structures; they are planar duals of each other. See `igraph_triangular_lattice()`
+#' in the C library for the triangular lattice.
 #'
 #' @details
 #' A hexagonal lattice is a lattice structure where each interior vertex
