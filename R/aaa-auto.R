@@ -6770,14 +6770,13 @@ motifs_randesu_impl <- function(
 motifs_randesu_callback_impl <- function(
   graph,
   size,
-  cut.prob = NULL,
-  callback,
-  extra = NULL
+  cut_prob = NULL,
+  callback
 ) {
   # Argument checks
   ensure_igraph(graph)
   size <- as.numeric(size)
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6785,9 +6784,8 @@ motifs_randesu_callback_impl <- function(
     R_igraph_motifs_randesu_callback,
     graph,
     size,
-    cut.prob,
-    callback,
-    extra
+    cut_prob,
+    callback
   )
 
   res
@@ -8046,11 +8044,10 @@ isoclass_create_impl <- function(
 isomorphic_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8102,11 +8099,10 @@ isomorphic_vf2_impl <- function(
     R_igraph_isomorphic_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8115,11 +8111,10 @@ isomorphic_vf2_impl <- function(
 get_isomorphisms_vf2_callback_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  arg = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8171,11 +8166,10 @@ get_isomorphisms_vf2_callback_impl <- function(
     R_igraph_get_isomorphisms_vf2_callback,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    arg
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8184,11 +8178,10 @@ get_isomorphisms_vf2_callback_impl <- function(
 count_isomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8240,11 +8233,10 @@ count_isomorphisms_vf2_impl <- function(
     R_igraph_count_isomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8253,11 +8245,10 @@ count_isomorphisms_vf2_impl <- function(
 get_isomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8309,11 +8300,10 @@ get_isomorphisms_vf2_impl <- function(
     R_igraph_get_isomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8341,11 +8331,10 @@ subisomorphic_impl <- function(
 subisomorphic_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8397,11 +8386,10 @@ subisomorphic_vf2_impl <- function(
     R_igraph_subisomorphic_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8410,11 +8398,10 @@ subisomorphic_vf2_impl <- function(
 count_subisomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8466,11 +8453,10 @@ count_subisomorphisms_vf2_impl <- function(
     R_igraph_count_subisomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8479,11 +8465,10 @@ count_subisomorphisms_vf2_impl <- function(
 get_subisomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL,
-  extra = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
@@ -8535,11 +8520,10 @@ get_subisomorphisms_vf2_impl <- function(
     R_igraph_get_subisomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2,
-    extra
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res

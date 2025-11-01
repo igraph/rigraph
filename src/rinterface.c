@@ -9777,12 +9777,11 @@ SEXP R_igraph_motifs_randesu(SEXP graph, SEXP size, SEXP cut_prob) {
 /*-------------------------------------------/
 / igraph_motifs_randesu_callback             /
 /-------------------------------------------*/
-SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob) {
+SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob, SEXP callback) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_size;
   igraph_vector_t c_cut_prob;
-
 
 
                                         /* Convert input */
@@ -9793,7 +9792,7 @@ SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob) {
     R_SEXP_to_vector(cut_prob, &c_cut_prob);
   }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_motifs_randesu_callback(&c_graph, c_size, (Rf_isNull(cut_prob) ? 0 : &c_cut_prob), 0, 0));
+  IGRAPH_R_CHECK(igraph_motifs_randesu_callback(&c_graph, c_size, (Rf_isNull(cut_prob) ? 0 : &c_cut_prob), R_igraph_motifs_handler, (void*)callback));
 
                                         /* Convert output */
 

@@ -284,7 +284,8 @@ EDGE_COLOR:
     HEADER: ~
 
 EXTRA:
-    CALL: '%I%'
+    CALL: {}
+    HEADER: ~
 
 MOTIFS_HANDLER_FUNC:
     CALL: '%I%'

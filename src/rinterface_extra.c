@@ -7581,92 +7581,35 @@ SEXP Rx_igraph_cohesive_blocks(SEXP graph) {
   return result;
 }
 
-typedef struct {
-  SEXP graph, fun, extra, rho;
-} R_igraph_i_motifs_data_t;
-
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
                                        igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
                                        void *extra) {
 
-  R_igraph_i_motifs_data_t *data = extra;
-  SEXP args, R_fcall, result;
+  SEXP callback = (SEXP)extra;
+  SEXP vids_r, isoclass_r, R_fcall, result;
   igraph_bool_t cres;
 
   /* Create R vector for vertex IDs (add 1 for R's 1-based indexing) */
-  SEXP vids_r;
   PROTECT(vids_r = NEW_INTEGER(igraph_vector_int_size(vids)));
   for (igraph_integer_t i = 0; i < igraph_vector_int_size(vids); i++) {
     INTEGER(vids_r)[i] = VECTOR(*vids)[i] + 1;
   }
 
   /* Create R integer for isoclass (add 1 for R's 1-based indexing) */
-  SEXP isoclass_r;
   PROTECT(isoclass_r = NEW_INTEGER(1));
   INTEGER(isoclass_r)[0] = isoclass + 1;
 
-  /* Call the R function: fun(graph, vids, isoclass, extra) */
-  PROTECT(R_fcall = Rf_lang5(data->fun, data->graph, vids_r, isoclass_r, data->extra));
-  PROTECT(result = R_igraph_safe_eval_in_env(R_fcall, data->rho, NULL));
-  cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
+  /* Call the R function: callback(vids, isoclass) */
+  PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  cres = Rf_asLogical(result);
 
   UNPROTECT(4);
   /* R callback returns TRUE to continue, FALSE to stop */
   return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
 }
 
-SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP psize, SEXP pcut_prob,
-                                      SEXP pcallback, SEXP pextra) {
-
-  igraph_t g;
-  igraph_integer_t size = (igraph_integer_t) REAL(psize)[0];
-  igraph_vector_t cut_prob;
-  igraph_vector_t *p_cut_prob = NULL;
-  igraph_motifs_handler_t *callback = NULL;
-  R_igraph_i_motifs_data_t cb_data, *p_cb_data = NULL;
-
-  R_SEXP_to_igraph(graph, &g);
-
-  /* Handle cut_prob parameter */
-  if (!Rf_isNull(pcut_prob)) {
-    R_SEXP_to_vector(pcut_prob, &cut_prob);
-    p_cut_prob = &cut_prob;
-  }
-
-  /* Setup callback if provided */
-  if (!Rf_isNull(pcallback)) {
-    SEXP actual_extra = R_NilValue;
-    SEXP rho = R_GlobalEnv;
-    
-    /* Extract extra and rho from the wrapped extra parameter */
-    if (!Rf_isNull(pextra) && Rf_isVectorList(pextra)) {
-      SEXP names = Rf_getAttrib(pextra, R_NamesSymbol);
-      if (!Rf_isNull(names)) {
-        for (R_xlen_t i = 0; i < Rf_xlength(pextra); i++) {
-          const char *name = CHAR(STRING_ELT(names, i));
-          if (strcmp(name, "extra") == 0) {
-            actual_extra = VECTOR_ELT(pextra, i);
-          } else if (strcmp(name, "rho") == 0) {
-            rho = VECTOR_ELT(pextra, i);
-          }
-        }
-      }
-    }
-    
-    cb_data.graph = graph;
-    cb_data.fun = pcallback;
-    cb_data.extra = actual_extra;
-    cb_data.rho = rho;
-    callback = R_igraph_motifs_handler;
-    p_cb_data = &cb_data;
-  }
-
-  /* Call the C function */
-  IGRAPH_R_CHECK(igraph_motifs_randesu_callback(&g, size, p_cut_prob, callback, p_cb_data));
-
-  return R_NilValue;
-}
 
 typedef struct {
   igraph_arpack_function_t *fun;

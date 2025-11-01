@@ -187,7 +187,7 @@ test_that("motifs_randesu_callback works", {
   count <- 0
   isoclasses <- integer(0)
   
-  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     isoclasses <<- c(isoclasses, isoclass)
     TRUE  # continue search
@@ -206,7 +206,7 @@ test_that("motifs_randesu_callback can stop early", {
   # Stop after finding 3 motifs
   count <- 0
   
-  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
     count <<- count + 1
     if (count >= 3) {
       FALSE  # stop after 3 motifs
@@ -218,23 +218,7 @@ test_that("motifs_randesu_callback can stop early", {
   expect_equal(count, 3)
 })
 
-test_that("motifs_randesu_callback passes extra argument", {
-  withr::local_seed(123)
-  
-  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
-  
-  # Use extra argument
-  my_data <- list(prefix = "Motif: ")
-  received_extra <- NULL
-  
-  motifs_randesu_callback(g, 3, extra = my_data,
-                         callback = function(graph, vids, isoclass, extra) {
-    received_extra <<- extra
-    FALSE  # stop immediately
-  })
-  
-  expect_equal(received_extra, my_data)
-})
+
 
 test_that("motifs_randesu_callback receives correct arguments", {
   withr::local_seed(123)
@@ -242,8 +226,7 @@ test_that("motifs_randesu_callback receives correct arguments", {
   g <- make_graph(~ A - B - C - A)
   
   # Check argument types
-  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
-    expect_true(is_igraph(graph))
+  motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
     expect_true(is.integer(vids))
     expect_equal(length(vids), 3)
     expect_true(is.integer(isoclass))

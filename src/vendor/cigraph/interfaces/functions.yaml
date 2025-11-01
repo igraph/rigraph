@@ -2009,7 +2009,7 @@ igraph_motifs_randesu:
 igraph_motifs_randesu_callback:
     PARAMS: |-
         GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
-        MOTIFS_HANDLER_FUNC callback, OPTIONAL EXTRA extra
+        MOTIFS_HANDLER_FUNC callback
 
 igraph_motifs_randesu_estimate:
     PARAMS: |-
