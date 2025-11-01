@@ -4962,10 +4962,10 @@ test_that("weighted_cliques_impl basic", {
   ))
   expect_snapshot(weighted_cliques_impl(
     graph = g,
-    vertex.weights = c(1, 2, 3),
+    vertex_weights = c(1, 2, 3),
     maximal = TRUE,
-    min.weight = 1,
-    max.weight = 3
+    min_weight = 1,
+    max_weight = 3
   ))
 
   # Structured tests
@@ -6080,7 +6080,7 @@ test_that("community_label_propagation_impl basic", {
 
   expect_snapshot(community_label_propagation_impl(
     graph = g,
-    lpa.variant = "dominance"
+    lpa_variant = "dominance"
   ))
   expect_snapshot(community_label_propagation_impl(
     graph = g
@@ -6091,7 +6091,7 @@ test_that("community_label_propagation_impl basic", {
     weights = c(1, 2),
     initial = 1:3,
     fixed = c(TRUE, FALSE, TRUE),
-    lpa.variant = "retention"
+    lpa_variant = "retention"
   ))
 
   # Structured tests
@@ -6186,7 +6186,8 @@ test_that("community_leiden_impl basic", {
   expect_snapshot(community_leiden_impl(
     graph = g,
     weights = c(1, 2),
-    vertex.out.weights = c(1, 2, 3),
+    vertex_out_weights = c(1, 2, 3),
+    vertex_in_weights = c(1, 2, 3),
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
@@ -6255,9 +6256,9 @@ test_that("community_infomap_impl basic", {
 
   expect_snapshot(community_infomap_impl(
     graph = g,
-    edge.weights = c(1, 2),
-    vertex.weights = c(1, 2, 3),
-    nb.trials = 2
+    edge_weights = c(1, 2),
+    vertex_weights = c(1, 2, 3),
+    nb_trials = 2
   ))
 
   # Structured tests
@@ -9174,7 +9175,7 @@ test_that("fundamental_cycles_impl basic", {
     graph = g,
     weights = c(1, 2),
     start = 1,
-    bfs.cutoff = 2
+    bfs_cutoff = 2
   ))
 
   # Structured tests
@@ -9209,9 +9210,9 @@ test_that("minimum_cycle_basis_impl basic", {
   expect_snapshot(minimum_cycle_basis_impl(
     graph = g,
     weights = c(1, 2),
-    bfs.cutoff = 2,
+    bfs_cutoff = 2,
     complete = FALSE,
-    use.cycle.order = FALSE
+    use_cycle_order = FALSE
   ))
 
   # Structured tests

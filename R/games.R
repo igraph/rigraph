@@ -2501,6 +2501,8 @@ sample_sbm <- function(
   directed = FALSE,
   loops = FALSE
 ) {
+  # Force evaluation of loops parameter
+  loops <- isTRUE(loops)
   sbm_game_impl(
     pref_matrix = pref.matrix,
     block_sizes = block.sizes,

@@ -1451,7 +1451,7 @@ strength <- function(
     graph = graph,
     vids = vids,
     mode = mode,
-    loops = loops,
+    loops = if (isTRUE(loops)) "twice" else "none",
     weights = weights
   )
 }
