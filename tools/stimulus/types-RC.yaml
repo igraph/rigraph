@@ -1,3 +1,22 @@
+# Special type for motifs callback function pointer
+# This is a function pointer type that requires special handling
+MOTIFS_CALLBACK:
+    CTYPE: igraph_motifs_handler_t*
+    CALL: '%C%'
+    HEADER: ''
+    INCONV:
+        IN: ''
+    OUTCONV: {}
+
+# Extra data pointer for callback functions
+CALLBACK_EXTRA:
+    CTYPE: void*
+    CALL: '%C%'
+    HEADER: ''
+    INCONV:
+        IN: ''
+    OUTCONV: {}
+
 GRAPH:
     CALL: '&%C%'
     CTYPE: igraph_t

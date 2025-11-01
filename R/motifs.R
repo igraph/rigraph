@@ -268,6 +268,114 @@ sample_motifs <- function(
 }
 
 
+#' Graph motifs with callback
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function is similar to [motifs()], but instead of counting motifs,
+#' it calls a user-supplied callback function for each motif found.
+#' This is useful for sampling motifs from large graphs or for performing
+#' custom operations on each motif.
+#'
+#' @param graph Graph object, the input graph.
+#' @param size The size of the motif, currently sizes 3 and 4 are supported in
+#'   directed graphs and sizes 3-6 in undirected graphs.
+#' @param cut.prob Numeric vector giving the probabilities that the search
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the `size` argument).
+#'   If `NULL`, the default, no cuts are made.
+#' @param callback A function to be called for each motif found. The function
+#'   should accept three arguments:
+#'   \describe{
+#'     \item{graph}{The input graph object.}
+#'     \item{motif}{A named list with two elements: `vids` (the vertex IDs
+#'       in the motif) and `isoclass` (the isomorphism class of the motif).}
+#'     \item{extra}{The `extra` argument passed to `motifs_randesu_callback()`.}
+#'   }
+#'   The callback function should return `TRUE` to continue the search,
+#'   or `FALSE` to stop it.
+#' @param extra An arbitrary R object that will be passed to the callback
+#'   function as the `extra` argument.
+#' @return Invisible `NULL`. This function is called for its side effects
+#'   (calling the callback function).
+#' @seealso [motifs()], [count_motifs()], [sample_motifs()], [isomorphism_class()]
+#'
+#' @export
+#' @family graph motifs
+#' @concept graph_motifs
+#'
+#' @examples
+#' # Sample triads from a graph
+#' g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+#'
+#' # Example 1: Count all triads
+#' triad_count <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+#'   triad_count <<- triad_count + 1
+#'   TRUE # continue searching
+#' })
+#' triad_count
+#'
+#' # Example 2: Stop after finding 5 triads
+#' triad_count <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+#'   triad_count <<- triad_count + 1
+#'   triad_count < 5 # stop when we have 5 motifs
+#' })
+#' triad_count
+#'
+#' # Example 3: Collect information about closed vs open triads
+#' # In undirected graphs, isoclass 2 represents closed triangles (A-B-C-A)
+#' # and isoclass 1 represents open paths (A-B-C)
+#' closed_triads <- 0
+#' open_triads <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+#'   if (motif$isoclass == 2) {
+#'     closed_triads <<- closed_triads + 1
+#'   } else if (motif$isoclass == 1) {
+#'     open_triads <<- open_triads + 1
+#'   }
+#'   TRUE
+#' })
+#' closed_triads
+#' open_triads
+#' @cdocs igraph_motifs_randesu_callback
+motifs_randesu_callback <- function(
+  graph,
+  size = 3,
+  cut.prob = NULL,
+  callback = NULL,
+  extra = NULL
+) {
+  ensure_igraph(graph)
+
+  if (!is.null(cut.prob) && length(cut.prob) != size) {
+    cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
+  }
+
+  if (is.null(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(
+    R_igraph_motifs_randesu_callback,
+    graph,
+    as.numeric(size),
+    if (!is.null(cut.prob)) as.numeric(cut.prob) else NULL,
+    callback,
+    extra,
+    parent.frame()
+  )
+
+  invisible(NULL)
+}
+
+
 #' Dyad census of a graph
 #'
 #' Classify dyads in a directed graphs. The relationship between each pair of
