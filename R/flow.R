@@ -906,7 +906,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   }
   root <- as_igraph_vs(graph, root)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   res <- dominator_tree_impl(

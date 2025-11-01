@@ -66,6 +66,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Use meaningful variable names that reflect context
 - Run `air format .` before committing changes to ensure consistent formatting
 - Never change deprecated functions
+- Avoid `.Call()` outside `*_impl()` in `aaa-auto.R`
 
 ### Documentation
 
@@ -90,6 +91,9 @@ All new functions must include:
 - Proper documentation, including arguments and return values
 - A concept so that it exists in the pkgdown reference index
 - An "experimental" badge via `r lifecycle::badge("experimental")`
+- All arguments in `snake_case`, with documentation and suitable defaults
+- An ellipsis guarded with `check_dots_empty()` separating mandatory and optional arguments
+- Argument validation using built-in `check_*()` functions or `igraph_arg_match()`
 
 If exporting a new function from the C library:
 

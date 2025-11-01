@@ -60,7 +60,7 @@ def format_switch_statement(code: str) -> str:
     switch_pattern = r'(switch\([^,]+)(,\s*)([^)]+)(\))'
 
     def format_switch_args(match):
-        prefix = match.group(1)  # "switch(igraph.match.arg(mode)"
+        prefix = match.group(1)  # "switch(igraph_match_arg(mode)"
         comma = match.group(2)   # ","
         args = match.group(3)    # the key-value pairs
         suffix = match.group(4)  # ")"

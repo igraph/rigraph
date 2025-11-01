@@ -331,7 +331,7 @@ read_graph <- function(
     write.graph.fromraw(buffer, file)
   }
 
-  format <- igraph.match.arg(format)
+  format <- igraph_match_arg(format)
   res <- switch(
     format,
     "pajek" = read.graph.pajek(file, ...),
@@ -497,7 +497,7 @@ write_graph <- function(
     tmpfile <- FALSE
   }
 
-  format <- igraph.match.arg(format)
+  format <- igraph_match_arg(format)
   res <- switch(
     format,
     "pajek" = write.graph.pajek(graph, file, ...),
@@ -550,7 +550,7 @@ read.graph.ncol <- function(
   directed = FALSE
 ) {
   weights <- switch(
-    igraph.match.arg(weights),
+    igraph_match_arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
@@ -598,7 +598,7 @@ read.graph.lgl <- function(
   directed = FALSE
 ) {
   weights <- switch(
-    igraph.match.arg(weights),
+    igraph_match_arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
