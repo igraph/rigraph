@@ -1415,5 +1415,7 @@ automorphism_group <- function(
 #' @export
 #' @cdocs igraph_transitive_closure
 transitive_closure <- function(graph) {
-  transitive_closure_impl(graph = graph)
+  transitive_closure_impl(
+    graph = graph
+  )
 }

@@ -2509,8 +2509,8 @@ sample_sbm <- function(
 ) {
   sbm_game_impl(
     n = n,
-    pref.matrix = pref.matrix,
-    block.sizes = block.sizes,
+    pref_matrix = pref.matrix,
+    block_sizes = block.sizes,
     directed = directed,
     loops = loops
   )
@@ -2694,10 +2694,10 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @cdocs igraph_simple_interconnected_islands_game
 sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
   simple_interconnected_islands_game_impl(
-    islands.n = islands.n,
-    islands.size = islands.size,
-    islands.pin = islands.pin,
-    n.inter = n.inter
+    islands_n = islands.n,
+    islands_size = islands.size,
+    islands_pin = islands.pin,
+    n_inter = n.inter
   )
 }
 
@@ -2745,7 +2745,7 @@ sample_k_regular <- function(
   multiple = FALSE
 ) {
   k_regular_game_impl(
-    no.of.nodes = no.of.nodes,
+    no.of_nodes = no.of.nodes,
     k = k,
     directed = directed,
     multiple = multiple
@@ -2907,8 +2907,7 @@ sample_chung_lu <- function(
   variant = c("original", "maxent", "nr")
 ) {
   chung_lu_game_impl(
-    out.weights = out.weights,
-    in.weights = in.weights,
+    ... = pairlist(out_weights = out.weights, in_weights = in.weights),
     loops = loops,
     variant = variant
   )
@@ -3002,9 +3001,9 @@ sample_fitness <- function(
   multiple = FALSE
 ) {
   static_fitness_game_impl(
-    no.of.edges = no.of.edges,
-    fitness.out = fitness.out,
-    fitness.in = fitness.in,
+    no.of_edges = no.of.edges,
+    fitness_out = fitness.out,
+    fitness_in = fitness.in,
     loops = loops,
     multiple = multiple
   )
@@ -3085,13 +3084,13 @@ sample_fitness_pl <- function(
   finite.size.correction = TRUE
 ) {
   static_power_law_game_impl(
-    no.of.nodes = no.of.nodes,
-    no.of.edges = no.of.edges,
-    exponent.out = exponent.out,
-    exponent.in = exponent.in,
+    no.of_nodes = no.of.nodes,
+    no.of_edges = no.of.edges,
+    exponent_out = exponent.out,
+    exponent_in = exponent.in,
     loops = loops,
     multiple = multiple,
-    finite.size.correction = finite.size.correction
+    finite.size_correction = finite.size.correction
   )
 }
 
@@ -3165,8 +3164,8 @@ sample_forestfire <- function(
 ) {
   forest_fire_game_impl(
     nodes = nodes,
-    fw.prob = fw.prob,
-    bw.factor = bw.factor,
+    fw_prob = fw.prob,
+    bw_factor = bw.factor,
     ambs = ambs,
     directed = directed
   )
@@ -3217,7 +3216,7 @@ sample_correlated_gnp <- function(
   permutation = NULL
 ) {
   correlated_game_impl(
-    old.graph = old.graph,
+    old_graph = old.graph,
     corr = corr,
     p = p,
     permutation = permutation

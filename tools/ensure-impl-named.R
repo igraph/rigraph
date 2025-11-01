@@ -11,7 +11,8 @@ all_files <- c(source_files, test_file)
 # all_files <- all_files[1:10]
 
 pkgload::load_all()
-library(tidyverse)
+library(dplyr)
+library(stringr)
 
 for (file in all_files) {
   cat(sprintf("Processing %s...\n", file))
@@ -59,6 +60,13 @@ for (file in all_files) {
 
     deparsed <- deparse(matched_call, width.cutoff = 20)
     deparsed[[1]] <- sub("(", "(\n    ", deparsed[[1]], fixed = TRUE)
+    # Convert dots to underscores in parameter names
+    deparsed <- gsub(
+      "\\b([a-z]+)\\.([a-z]+)\\s*=",
+      "\\1_\\2 =",
+      deparsed,
+      perl = TRUE
+    )
     print(deparsed)
 
     # Splice
