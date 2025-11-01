@@ -2075,18 +2075,19 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' plot(g3)
 #' @cdocs igraph_hexagonal_lattice
 make_hex_lattice <- function(dims, directed = FALSE, mutual = FALSE) {
-  res <- hexagonal_lattice_impl(
+  graph <- hexagonal_lattice_impl(
     dimvector = dims,
     directed = directed,
     mutual = mutual
   )
+  
   if (igraph_opt("add.params")) {
-    res$name <- "Hexagonal lattice"
-    res$dims <- dims
-    res$directed <- directed
-    res$mutual <- mutual
+    graph <- set_graph_attr(graph, "name", "Hexagonal lattice")
+    graph <- set_graph_attr(graph, "dims", dims)
+    graph <- set_graph_attr(graph, "directed", directed)
+    graph <- set_graph_attr(graph, "mutual", mutual)
   }
-  res
+  graph
 }
 
 #' @rdname make_hex_lattice
