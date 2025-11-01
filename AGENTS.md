@@ -86,6 +86,8 @@ pak::pak(dependencies = "Config/Needs/build")
 - Run `air format .` before committing changes to ensure consistent
   formatting
 - Never change deprecated functions
+- Avoid [`.Call()`](https://rdrr.io/r/base/CallExternal.html) outside
+  `*_impl()` in `aaa-auto.R`
 
 ### Documentation
 
