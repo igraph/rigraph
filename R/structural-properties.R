@@ -894,6 +894,10 @@ mean_distance <- function(
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -904,6 +908,7 @@ mean_distance <- function(
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -947,6 +952,16 @@ max_degree <- function(
     graph = graph,
     v = v,
     mode = mode,
+    loops = loops
+  )
+}
+
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph = graph,
     loops = loops
   )
 }
@@ -2460,6 +2475,8 @@ girth <- function(graph, circle = TRUE) {
 #'
 #' `which_loop()` decides whether the edges of the graph are loop edges.
 #'
+#' `count_loops()` counts the total number of loop edges in the graph.
+#'
 #' `any_multiple()` decides whether the graph has any multiple edges.
 #'
 #' `which_multiple()` decides whether the edges of the graph are multiple
@@ -2481,6 +2498,7 @@ girth <- function(graph, circle = TRUE) {
 #'   all edges in the graph.
 #' @return `any_loop()` and `any_multiple()` return a logical scalar.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
+#'   `count_loops()` returns a numeric scalar with the total number of loop edges.
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
@@ -2493,6 +2511,7 @@ girth <- function(graph, circle = TRUE) {
 #' g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 #' any_loop(g)
 #' which_loop(g)
+#' count_loops(g)
 #'
 #' # Multiple edges
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
@@ -2551,6 +2570,14 @@ which_loop <- function(graph, eids = E(graph)) {
 #' @cdocs igraph_has_loop
 any_loop <- function(graph) {
   has_loop_impl(
+    graph = graph
+  )
+}
+#' @rdname which_multiple
+#' @export
+#' @cdocs igraph_count_loops
+count_loops <- function(graph) {
+  count_loops_impl(
     graph = graph
   )
 }
@@ -3159,6 +3186,57 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(Rx_igraph_no_components, graph, mode)
+}
+
+#' Count reachable vertices
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Counts the number of vertices reachable from each vertex in the graph.
+#'
+#' For each vertex in the graph, this function counts how many vertices
+#' are reachable from it, including the vertex itself.
+#' A vertex is reachable from another if there is a directed path between them.
+#' For undirected graphs, two vertices are reachable from each other if they
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#' @param mode Character constant, defines how edge directions are considered
+#'   in directed graphs.
+#'   `"out"` counts vertices reachable via outgoing edges,
+#'   `"in"` counts vertices from which the current vertex is reachable via
+#'   incoming edges,
+#'   `"all"` or `"total"` ignores edge directions.
+#'   This parameter is ignored for undirected graphs.
+#' @return An integer vector of length `vcount(graph)`.
+#'   The i-th element is the number of vertices reachable from vertex i
+#'   (including vertex i itself).
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [components()], [subcomponent()], [is_connected()]
+#' @family components
+#' @export
+#' @keywords graphs
+#' @examples
+#'
+#' # In a directed path graph, the reachability depends on direction
+#' g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
+#' count_reachable(g, mode = "out")
+#' count_reachable(g, mode = "in")
+#'
+#' # In an undirected graph, reachability is the same in all directions
+#' g2 <- make_graph(~ 1 - 2 - 3 - 4 - 5)
+#' count_reachable(g2, mode = "out")
+#'
+#' # A graph with multiple components
+#' g3 <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
+#' count_reachable(g3, mode = "all")
+#'
+#' @cdocs igraph_count_reachable
+count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
+  count_reachable_impl(
+    graph = graph,
+    mode = mode
+  )
 }
 
 #' Convert a general graph into a forest

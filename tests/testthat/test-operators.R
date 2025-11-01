@@ -310,6 +310,28 @@ test_that("vertices() works", {
   expect_snapshot_error(make_empty_graph(1) + vertices("a", "b", foo = 5:7))
 })
 
+test_that("vertices() errors on duplicate attribute names", {
+  # Test case from issue: vertices("a", name = "c")
+  expect_snapshot_error(
+    vertices("a", name = "c", name = "d")
+  )
+
+  # Test case from issue: vertices("a", blop = "c", blop = 1)
+  expect_snapshot_error(
+    vertices("a", blop = "c", blop = 1)
+  )
+
+  # Test with graph addition
+  expect_snapshot_error(
+    make_empty_graph(1) + vertices("a", "b", name = "c", name = "d")
+  )
+
+  # Test multiple duplicates
+  expect_snapshot_error(
+    vertices(foo = 1, foo = 2, bar = 3, bar = 4)
+  )
+})
+
 test_that("infix operators work", {
   g <- make_ring(10)
   V(g)$name <- letters[1:10]

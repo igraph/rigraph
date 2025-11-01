@@ -93,6 +93,7 @@ Other functions for manipulating graph structure:
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
+\code{\link{transitive_closure}()},
 \code{\link{union}()},
 \code{\link{union.igraph}()},
 \code{\link{vertex}()}

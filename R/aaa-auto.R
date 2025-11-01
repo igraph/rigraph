@@ -755,6 +755,12 @@ full_multipartite_impl <- function(
     mode
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Full multipartite graph'
+    res$n <- n
+    res$mode <- mode
+  }
+
   res
 }
 
@@ -845,6 +851,11 @@ circulant_impl <- function(
     directed
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Circulant graph'
+    res$shifts <- shifts
+  }
+
   res
 }
 
@@ -882,6 +893,12 @@ turan_impl <- function(
     n,
     r
   )
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Turan graph'
+    res$n <- n
+    res$r <- r
+  }
 
   res
 }
@@ -2537,11 +2554,12 @@ personalized_pagerank_vs_impl <- function(
 rewire_impl <- function(
   rewire,
   n,
-  mode = 0L
+  mode = c("simple", "simple_loops")
 ) {
   # Argument checks
   ensure_igraph(rewire)
   n <- as.numeric(n)
+  mode <- switch_igraph_arg(mode, "simple" = 0L, "simple_loops" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6514,6 +6532,7 @@ read_graph_pajek_impl <- function(
   instream
 ) {
   # Argument checks
+  check_string(instream)
 
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6531,6 +6550,8 @@ read_graph_graphml_impl <- function(
   index = 0
 ) {
   # Argument checks
+  check_string(instream)
+
   index <- as.numeric(index)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6549,6 +6570,8 @@ read_graph_graphdb_impl <- function(
   directed = FALSE
 ) {
   # Argument checks
+  check_string(instream)
+
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6566,6 +6589,7 @@ read_graph_gml_impl <- function(
   instream
 ) {
   # Argument checks
+  check_string(instream)
 
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6583,6 +6607,8 @@ read_graph_dl_impl <- function(
   directed = TRUE
 ) {
   # Argument checks
+  check_string(instream)
+
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6678,12 +6704,13 @@ write_graph_pajek_impl <- function(
 write_graph_gml_impl <- function(
   graph,
   outstream,
-  options = 0L,
+  options = c("default", "encode_only_quot"),
   id,
   creator = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
+  options <- switch_igraph_arg(options, "default" = 0L, "encode_only_quot" = 1L)
   id <- as.numeric(id)
 
   on.exit(.Call(R_igraph_finalizer))

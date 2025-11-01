@@ -1373,3 +1373,47 @@ automorphism_group <- function(
     details = details
   )
 }
+
+#' Transitive closure of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Computes the transitive closure of a graph.
+#' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
+#' if \eqn{j} is reachable from \eqn{i} in the original graph.
+#'
+#' The transitive closure of a graph is a new graph where there is an edge
+#' between any two vertices if there is a path between them in the original
+#' graph.
+#' For directed graphs, an edge from \eqn{i} to \eqn{j} is added if there is
+#' a directed path from \eqn{i} to \eqn{j}.
+#' For undirected graphs, this is equivalent to connecting all vertices that
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#'   It can be directed or undirected.
+#' @return A new graph object representing the transitive closure.
+#'   The returned graph will have the same directedness as the input.
+#' @author Fabio Zanini \email{fabio.zanini@@unsw.edu.au}
+#' @seealso [distances()], [are_adjacent()]
+#' @keywords graphs
+#' @examples
+#'
+#' # Directed graph
+#' g <- make_graph(c(1, 2, 2, 3, 3, 4))
+#' tc <- transitive_closure(g)
+#' # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
+#' print_all(tc)
+#'
+#' # Undirected graph - connects all vertices in same component
+#' g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
+#' tc2 <- transitive_closure(g2)
+#' # Full graph on vertices 1, 2 and full graph on vertices 3, 4
+#' print_all(tc2)
+#' @family functions for manipulating graph structure
+#' @export
+#' @cdocs igraph_transitive_closure
+transitive_closure <- function(graph) {
+  transitive_closure_impl(graph = graph)
+}
