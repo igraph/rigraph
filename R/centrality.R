@@ -584,43 +584,14 @@ closeness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch(
-    igraph_match_arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  normalized <- as.logical(normalized)
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_closeness_cutoff,
-    graph,
-    vids - 1,
-    mode,
-    weights,
-    normalized,
-    cutoff
+  closeness_cutoff_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )$res
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[vids]
-  }
-  res
 }
 
 #' Deprecated version of `closeness()`
