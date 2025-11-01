@@ -548,33 +548,17 @@ ivs <- function(graph, min = NULL, max = NULL) {
 #' @rdname ivs
 #' @export
 largest_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_largest_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  largest_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs
 #' @export
 max_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_maximal_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  maximal_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' Maximal independent vertex sets in the graph
@@ -595,10 +579,9 @@ maximal_ivs <- function(graph) {
 #' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_independence_number, graph)
+  independence_number_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs
