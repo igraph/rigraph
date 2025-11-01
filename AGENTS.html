@@ -113,6 +113,7 @@
 <ul><li>IMPORTANT: PR titles end up in <code>NEWS.md</code> grouped by conventional commit label. PRs and commits use the conventional commit style with backticks for code references such as <code>function_call()</code>
 </li>
 <li>PRs are generally squashed, a clean history within a PR is not necessary</li>
+<li>Before resuming work on a PR, always merge the current base branch (typically <code>main</code>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="comment-style">Comment Style<a class="anchor" aria-label="anchor" href="#comment-style"></a></h3>
@@ -137,6 +138,8 @@
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a></h3>
 <ul><li>Use roxygen2 with Markdown syntax for all function documentation</li>
+<li>Use explicit <code>@description</code> and <code>@details</code> sections, aim for a complete description and move only excess details to <code>@details</code>
+</li>
 <li>Use math notation for formulas: <code>\eqn{...}</code> for inline, <code>\deqn{...}</code> for display equations</li>
 <li>Keep each sentence on its own line in roxygen2 comments for better readability</li>
 <li>Document all arguments and return values</li>

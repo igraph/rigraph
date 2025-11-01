@@ -63,6 +63,8 @@ pak::pak(dependencies = "Config/Needs/build")
   backticks for code references such as `function_call()`
 - PRs are generally squashed, a clean history within a PR is not
   necessary
+- Before resuming work on a PR, always merge the current base branch
+  (typically `main`)
 
 ### Comment Style
 
@@ -92,6 +94,8 @@ pak::pak(dependencies = "Config/Needs/build")
 ### Documentation
 
 - Use roxygen2 with Markdown syntax for all function documentation
+- Use explicit `@description` and `@details` sections, aim for a
+  complete description and move only excess details to `@details`
 - Use math notation for formulas: `\eqn{...}` for inline, `\deqn{...}`
   for display equations
 - Keep each sentence on its own line in roxygen2 comments for better
