@@ -29,8 +29,6 @@ init_functions = {
 def get_r_parameter_name(param: ParamSpec) -> str:
     result = param.name_in_higher_level_interface
     # Keep snake_case for _impl functions
-    # if result == param.name:
-    #     result = result.replace("_", ".")
     return result
 
 
