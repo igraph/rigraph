@@ -179,7 +179,7 @@ bipartite_projection <- function(
     probe1 <- -1
   }
   which <- switch(
-    igraph.match.arg(which),
+    igraph_match_arg(which),
     "both" = 0L,
     "false" = 1L,
     "true" = 2L

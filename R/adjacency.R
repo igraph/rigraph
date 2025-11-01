@@ -290,7 +290,7 @@ graph_from_adjacency_matrix <- function(
   add.rownames = NA
 ) {
   ensure_no_na(adjmatrix, "adjacency matrix")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
     lifecycle::deprecate_soft(
@@ -415,7 +415,7 @@ graph.adjacency.dense <- function(
   if (is.logical(diag)) {
     diag <- ifelse(diag, "once", "ignore")
   }
-  diag <- igraph.match.arg(diag)
+  diag <- igraph_match_arg(diag)
   diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {

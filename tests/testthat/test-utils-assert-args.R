@@ -6,7 +6,7 @@ test_that("ensure_igraph() works", {
   expect_silent(ensure_igraph(NULL, optional = TRUE))
 })
 
-test_that("igraph.match.arg() works", {
+test_that("igraph_match_arg() works", {
   expect_snapshot(
     cluster_leiden(make_graph("Zachary"), objective_function = "something"),
     error = TRUE

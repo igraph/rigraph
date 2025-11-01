@@ -942,7 +942,7 @@ sample_pa <- function(
     out.seq <- numeric()
   }
 
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm1 <- switch(
     algorithm,
     "psumtree" = 1,
@@ -1140,7 +1140,7 @@ erdos.renyi.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
@@ -1160,7 +1160,7 @@ random.graph.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
@@ -1358,7 +1358,7 @@ sample_degseq <- function(
   if (missing(method)) {
     method <- method[1]
   }
-  method <- igraph.match.arg(
+  method <- igraph_match_arg(
     method,
     values = c(
       "configuration",
@@ -2038,7 +2038,7 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 #' @family functions for manipulating graph structure
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2310,8 +2310,8 @@ sample_bipartite <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  type <- igraph.match.arg(type)
-  mode <- igraph.match.arg(mode)
+  type <- igraph_match_arg(type)
+  mode <- igraph_match_arg(mode)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft(
@@ -2417,7 +2417,7 @@ sample_bipartite_gnm <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   m <- as.numeric(m)
 
   res <- bipartite_game_gnm_impl(
@@ -2446,7 +2446,7 @@ sample_bipartite_gnp <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   p <- as.numeric(p)
 
   res <- bipartite_game_gnp_impl(

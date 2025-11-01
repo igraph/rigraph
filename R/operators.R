@@ -126,7 +126,7 @@ rename.attr.if.needed <- function(
   maps2 = NULL,
   ignore = character()
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   listfun <- switch(
     type,
