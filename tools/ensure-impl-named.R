@@ -79,3 +79,5 @@ for (file in all_files) {
 
   writeLines(text, con = file)
 }
+
+system("air format .")

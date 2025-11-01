@@ -731,21 +731,13 @@ test_that("adjlist_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(adjlist_impl(
-    adjlist = list(
-      c(2, 3),
-      c(1),
-      c(1)
-    ),
+    adjlist = list(c(2, 3), c(1), c(1)),
     mode = "out"
   ))
 
   # Structured tests
   result <- adjlist_impl(
-    adjlist = list(
-      c(2, 3),
-      c(1),
-      c(1)
-    ),
+    adjlist = list(c(2, 3), c(1), c(1)),
     mode = "out"
   )
   expect_s3_class(result, "igraph")
@@ -1475,10 +1467,7 @@ test_that("hsbm_list_game_impl basic", {
   expect_snapshot(hsbm_list_game_impl(
     n = 100,
     mlist = list(50, 50),
-    rholist = list(
-      c(3, 3, 4) /
-        10
-    ),
+    rholist = list(c(3, 3, 4) / 10),
     Clist = list(C),
     p = 1 / 20
   ))
@@ -1487,10 +1476,7 @@ test_that("hsbm_list_game_impl basic", {
   result <- hsbm_list_game_impl(
     n = 100,
     mlist = list(50, 50),
-    rholist = list(
-      c(3, 3, 4) /
-        10
-    ),
+    rholist = list(c(3, 3, 4) / 10),
     Clist = list(C),
     p = 1 / 20
   )
@@ -1505,10 +1491,7 @@ test_that("hsbm_list_game_impl errors", {
       n = -1,
       mlist = c(2, 3),
       rholist = list(0.5, 0.5),
-      Clist = list(
-        matrix(1, 2, 2),
-        matrix(1, 2, 2)
-      ),
+      Clist = list(matrix(1, 2, 2), matrix(1, 2, 2)),
       p = 0.5
     )
   )
@@ -7441,9 +7424,6 @@ test_that("local_scan_0_them_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 252. local_scan_1_ecount_impl
 
@@ -7520,9 +7500,6 @@ test_that("local_scan_1_ecount_them_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 254. local_scan_k_ecount_impl
 
@@ -7607,9 +7584,6 @@ test_that("local_scan_k_ecount_them_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 256. local_scan_neighborhood_ecount_impl
 
@@ -7660,27 +7634,18 @@ test_that("local_scan_subset_ecount_impl basic", {
 
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   ))
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
     weights = c(1, 2, 3),
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   ))
 
   # Structured tests
   result <- local_scan_subset_ecount_impl(
     graph = g,
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   )
   expect_true(is.numeric(result))
 })
@@ -7762,9 +7727,7 @@ test_that("join_impl errors", {
     right = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 260. induced_subgraph_map_impl
 
 test_that("induced_subgraph_map_impl basic", {
@@ -7877,9 +7840,7 @@ test_that("product_impl errors", {
     g2 = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 263. rooted_product_impl
 
 test_that("rooted_product_impl basic", {
@@ -7919,9 +7880,6 @@ test_that("rooted_product_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 264. gomory_hu_tree_impl
 
@@ -8430,9 +8388,7 @@ test_that("isomorphic_impl errors", {
     graph2 = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 279. isoclass_subgraph_impl
 
 test_that("isoclass_subgraph_impl basic", {
@@ -8538,9 +8494,7 @@ test_that("isomorphic_vf2_impl errors", {
     graph2 = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 282. get_isomorphisms_vf2_callback_impl
 # Skipped: requires callback function, not suitable for snapshot test
 
@@ -8588,9 +8542,6 @@ test_that("count_isomorphisms_vf2_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 284. get_isomorphisms_vf2_impl
 
@@ -8636,9 +8587,6 @@ test_that("get_isomorphisms_vf2_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 285. subisomorphic_impl
 
@@ -8674,9 +8622,7 @@ test_that("subisomorphic_impl errors", {
     graph2 = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 286. subisomorphic_vf2_impl
 
 test_that("subisomorphic_vf2_impl basic", {
@@ -8721,9 +8667,6 @@ test_that("subisomorphic_vf2_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 287. count_subisomorphisms_vf2_impl
 
@@ -8769,9 +8712,6 @@ test_that("count_subisomorphisms_vf2_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 288. get_subisomorphisms_vf2_impl
 
@@ -8817,9 +8757,6 @@ test_that("get_subisomorphisms_vf2_impl errors", {
     )
   )
 })
-path_graph_impl(
-  n = 3
-)
 
 # 289. canonical_permutation_impl
 
@@ -8926,9 +8863,7 @@ test_that("isomorphic_bliss_impl errors", {
     graph2 = path_graph_impl(3)
   ))
 })
-path_graph_impl(
-  n = 3
-)
+
 # 292. count_automorphisms_impl
 
 test_that("count_automorphisms_impl basic", {
