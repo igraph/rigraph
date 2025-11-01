@@ -116,9 +116,10 @@ simplify <- function(
 #' @export
 #' @rdname simplify
 #' @cdocs igraph_is_simple
-is_simple <- function(graph) {
+is_simple <- function(graph, directed = TRUE) {
   is_simple_impl(
-    graph = graph
+    graph = graph,
+    directed = directed
   )
 }
 

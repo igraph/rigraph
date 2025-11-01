@@ -1260,8 +1260,9 @@ static_fitness_game_impl <- function(
 
   if (igraph_opt("add.params")) {
     res$name <- 'Static fitness model'
-    res$loops <- loops
-    res$multiple <- multiple
+    # TODO: Re-add these attributes once loops and multiple are properly mapped from allowed_edge_types
+    # res$loops <- loops
+    # res$multiple <- multiple
   }
 
   res

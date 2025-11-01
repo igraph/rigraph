@@ -374,7 +374,7 @@ centr_degree <- function(
   centralization_degree_impl(
     graph = graph,
     mode = mode,
-    loops = loops,
+    loops = if (isTRUE(loops)) "twice" else "none",
     normalized = normalized
   )
 }

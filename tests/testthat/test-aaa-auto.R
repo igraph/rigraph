@@ -901,7 +901,7 @@ test_that("erdos_renyi_game_gnp_impl basic", {
     n = 5,
     p = 0.5,
     directed = TRUE,
-    loops = TRUE
+    allowed_edge_types = "loops"
   ))
 
   # Structured tests
@@ -932,7 +932,7 @@ test_that("erdos_renyi_game_gnm_impl basic", {
     n = 5,
     m = 3,
     directed = TRUE,
-    loops = TRUE
+    allowed_edge_types = "loops"
   ))
 
   # Structured tests
@@ -1218,8 +1218,7 @@ test_that("static_fitness_game_impl basic", {
     no_of_edges = 3,
     fitness_out = c(1, 2, 3),
     fitness_in = c(1, 2, 3),
-    loops = TRUE,
-    multiple = TRUE
+    allowed_edge_types = "all"
   ))
 
   # Structured tests
@@ -1252,8 +1251,7 @@ test_that("static_power_law_game_impl basic", {
     no_of_edges = 4,
     exponent_out = 2.5,
     exponent_in = 2,
-    loops = TRUE,
-    multiple = TRUE,
+    allowed_edge_types = "all",
     finite_size_correction = FALSE
   ))
 
@@ -2243,7 +2241,7 @@ test_that("personalized_pagerank_vs_impl basic", {
   ))
   expect_snapshot(personalized_pagerank_vs_impl(
     graph = g,
-    reset.vids = 1,
+    reset_vids = 1,
     algo = "arpack",
     details = TRUE
   ))
@@ -4964,10 +4962,10 @@ test_that("weighted_cliques_impl basic", {
   ))
   expect_snapshot(weighted_cliques_impl(
     graph = g,
-    vertex.weights = c(1, 2, 3),
+    vertex_weights = c(1, 2, 3),
     maximal = TRUE,
-    min.weight = 1,
-    max.weight = 3
+    min_weight = 1,
+    max_weight = 3
   ))
 
   # Structured tests
@@ -5704,7 +5702,7 @@ test_that("similarity_dice_impl basic", {
 
   expect_snapshot(similarity_dice_impl(
     g,
-    vit.from = 1:2,
+    from = 1:2,
     mode = "in",
     loops = TRUE
   ))
@@ -5841,7 +5839,7 @@ test_that("similarity_jaccard_impl basic", {
 
   expect_snapshot(similarity_jaccard_impl(
     g,
-    vit.from = 1:2,
+    from = 1:2,
     mode = "in",
     loops = TRUE
   ))
@@ -6082,7 +6080,7 @@ test_that("community_label_propagation_impl basic", {
 
   expect_snapshot(community_label_propagation_impl(
     graph = g,
-    lpa.variant = "dominance"
+    lpa_variant = "dominance"
   ))
   expect_snapshot(community_label_propagation_impl(
     graph = g
@@ -6093,7 +6091,7 @@ test_that("community_label_propagation_impl basic", {
     weights = c(1, 2),
     initial = 1:3,
     fixed = c(TRUE, FALSE, TRUE),
-    lpa.variant = "retention"
+    lpa_variant = "retention"
   ))
 
   # Structured tests
@@ -6188,7 +6186,8 @@ test_that("community_leiden_impl basic", {
   expect_snapshot(community_leiden_impl(
     graph = g,
     weights = c(1, 2),
-    vertex.out.weights = c(1, 2, 3),
+    vertex_out_weights = c(1, 2, 3),
+    vertex_in_weights = c(1, 2, 3),
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
@@ -6257,9 +6256,9 @@ test_that("community_infomap_impl basic", {
 
   expect_snapshot(community_infomap_impl(
     graph = g,
-    edge.weights = c(1, 2),
-    vertex.weights = c(1, 2, 3),
-    nb.trials = 2
+    edge_weights = c(1, 2),
+    vertex_weights = c(1, 2, 3),
+    nb_trials = 2
   ))
 
   # Structured tests
@@ -9176,7 +9175,7 @@ test_that("fundamental_cycles_impl basic", {
     graph = g,
     weights = c(1, 2),
     start = 1,
-    bfs.cutoff = 2
+    bfs_cutoff = 2
   ))
 
   # Structured tests
@@ -9211,9 +9210,9 @@ test_that("minimum_cycle_basis_impl basic", {
   expect_snapshot(minimum_cycle_basis_impl(
     graph = g,
     weights = c(1, 2),
-    bfs.cutoff = 2,
+    bfs_cutoff = 2,
     complete = FALSE,
-    use.cycle.order = FALSE
+    use_cycle_order = FALSE
   ))
 
   # Structured tests
