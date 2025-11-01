@@ -62,6 +62,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -89,10 +90,10 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> IGRAPH ed3de97 UNW- 5 10 -- Ring
+#> IGRAPH e36941e UNW- 5 10 -- Ring
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
 #> | (e/n)
-#> + edges from ed3de97 (vertex names):
+#> + edges from e36941e (vertex names):
 #>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h
 #>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j
 ```

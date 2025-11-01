@@ -75,6 +75,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
 
@@ -92,7 +93,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %u% net2)
-#> IGRAPH 37335aa UN-- 13 21 -- 
+#> IGRAPH 399d5b5 UN-- 13 21 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -109,7 +110,7 @@ print_all(net1 %u% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from 37335aa (vertex names):
+#> + edges from 399d5b5 (vertex names):
 #>  [1] I--J H--Z H--I G--H G--E F--X F--Y F--H F--C F--G B--E B--G A--X A--C A--F
 #> [16] A--B D--Y D--G D--F D--B D--A
 ```

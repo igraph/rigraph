@@ -57,6 +57,7 @@ Other functions for manipulating graph structure:
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`reverse_edges()`](https://r.igraph.org/reference/reverse_edges.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -74,12 +75,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH 25ce37e D--- 5 4 -- 
+#> IGRAPH 0d25afb D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from 25ce37e:
+#> + edges from 0d25afb:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from 25ce37e:
+#> + 5/5 vertices, from 0d25afb:
 #>   color
 #> 1   red
 #> 2   red

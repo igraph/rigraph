@@ -114,6 +114,7 @@ IDs are reversed</p>
 <code><a href="permute.html">permute()</a></code>,
 <code><a href="rep.igraph.html">rep.igraph()</a></code>,
 <code><a href="simplify.html">simplify()</a></code>,
+<code><a href="transitive_closure.html">transitive_closure()</a></code>,
 <code><a href="union.html">union()</a></code>,
 <code><a href="union.igraph.html">union.igraph()</a></code>,
 <code><a href="vertex.html">vertex()</a></code></p></div>
@@ -128,9 +129,9 @@ IDs are reversed</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="fl">1</span> <span class="op">-</span><span class="op">+</span> <span class="fl">2</span>, <span class="fl">2</span> <span class="op">-</span><span class="op">+</span> <span class="fl">3</span>, <span class="fl">3</span> <span class="op">-</span><span class="op">+</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">reverse_edges</span><span class="op">(</span><span class="va">g</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5cd51f0 DN-- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1f40a98 DN-- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5cd51f0 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1f40a98 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 3-&gt;2 3-&gt;4</span>
 </code></pre></div>
     </div>

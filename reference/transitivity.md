@@ -169,7 +169,7 @@ transitivity(g)
 #> [1] 0
 g2 <- sample_gnp(1000, 10 / 1000)
 transitivity(g2) # this is about 10/1000
-#> [1] 0.00993315
+#> [1] 0.008699099
 
 # Weighted version, the figure from the Barrat paper
 gw <- graph_from_literal(A - B:C:D:E, B - C:D, C - D)

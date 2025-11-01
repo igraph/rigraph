@@ -421,6 +421,8 @@
   [`is_simple()`](https://r.igraph.org/reference/simplify.md)
   [`simplify_and_colorize()`](https://r.igraph.org/reference/simplify.md)
   : Simple graphs
+- [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  **\[experimental\]** : Transitive closure of a graph
 - [`union()`](https://r.igraph.org/reference/union.md) : Union of two or
   more sets
 - [`union(`*`<igraph>`*`)`](https://r.igraph.org/reference/union.igraph.md)
@@ -1254,5 +1256,7 @@
   **\[experimental\]** : Random graph with given expected degrees
 - [`simple_cycles()`](https://r.igraph.org/reference/simple_cycles.md)
   **\[experimental\]** : Finds all simple cycles in a graph.
+- [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  **\[experimental\]** : Transitive closure of a graph
 - [`voronoi_cells()`](https://r.igraph.org/reference/voronoi_cells.md)
   **\[experimental\]** : Voronoi partitioning of a graph

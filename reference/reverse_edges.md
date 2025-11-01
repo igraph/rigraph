@@ -56,6 +56,7 @@ Other functions for manipulating graph structure:
 [`permute()`](https://r.igraph.org/reference/permute.md),
 [`rep.igraph()`](https://r.igraph.org/reference/rep.igraph.md),
 [`simplify()`](https://r.igraph.org/reference/simplify.md),
+[`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md),
 [`union()`](https://r.igraph.org/reference/union.md),
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
@@ -69,8 +70,8 @@ Other functions for manipulating graph structure:
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH 5cd51f0 DN-- 4 3 -- 
+#> IGRAPH 1f40a98 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 5cd51f0 (vertex names):
+#> + edges from 1f40a98 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```
