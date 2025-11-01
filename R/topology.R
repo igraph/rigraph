@@ -457,7 +457,7 @@ isomorphic <- function(
 ) {
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "auto") {
     isomorphic_impl(
@@ -652,7 +652,7 @@ subgraph_isomorphic <- function(
   method = c("auto", "lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "auto") {
     method <- "lad"
@@ -711,7 +711,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'   vertex.color2 = NULL
 #' )
 count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.count.isomorphisms.vf2(graph1, graph2, ...)
@@ -816,7 +816,7 @@ count_subgraph_isomorphisms <- function(
   method = c("lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     length(graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps)
@@ -868,7 +868,7 @@ graph.count.subisomorphisms.vf2 <- function(
 #' @export
 #' @family graph isomorphism
 isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
@@ -939,7 +939,7 @@ subgraph_isomorphisms <- function(
   method = c("lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps

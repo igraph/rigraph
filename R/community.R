@@ -1485,10 +1485,10 @@ cluster_spinglass <- function(
     weights <- NULL
   }
 
-  update.rule <- igraph.match.arg(update.rule)
+  update.rule <- igraph_match_arg(update.rule)
   update.rule <- switch(update.rule, "simple" = 0, "random" = 0, "config" = 1)
   implementation <- switch(
-    igraph.match.arg(implementation),
+    igraph_match_arg(implementation),
     "orig" = 0,
     "neg" = 1
   )
@@ -1662,7 +1662,7 @@ cluster_leiden <- function(
   ensure_igraph(graph)
 
   # Parse objective function argument
-  objective_function <- igraph.match.arg(objective_function)
+  objective_function <- igraph_match_arg(objective_function)
   objective_function <- switch(objective_function, "cpm" = 0, "modularity" = 1)
 
   # Parse edge weights argument
@@ -2413,7 +2413,7 @@ cluster_label_prop0 <- function(
   ensure_igraph(graph)
 
   # Necessary because evaluated later
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   membership <- community_label_propagation_impl(
@@ -2820,7 +2820,7 @@ plot_dendrogram.communities <- function(
   use.modularity = FALSE,
   palette = categorical_pal(8)
 ) {
-  mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
+  mode <- igraph_match_arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
   on.exit(palette(old_palette), add = TRUE)
@@ -3054,7 +3054,7 @@ i_compare <- function(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
   res <- compare_communities_impl(
     comm1 = comm1,
     comm2 = comm2,

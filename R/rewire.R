@@ -134,7 +134,7 @@ each_edge <- function(
   mode = c("all", "out", "in", "total")
 ) {
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
