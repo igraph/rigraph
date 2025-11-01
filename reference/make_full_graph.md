@@ -49,18 +49,19 @@ Other deterministic constructors:
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
 ``` r
 make_full_graph(5)
-#> IGRAPH 211b718 U--- 5 10 -- Full graph
+#> IGRAPH d688a8c U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 211b718:
+#> + edges from d688a8c:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH f85e3a5 D--- 4 12 -- Full graph
+#> IGRAPH cba048e D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

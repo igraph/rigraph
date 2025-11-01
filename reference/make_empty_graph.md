@@ -45,7 +45,8 @@ Other deterministic constructors:
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Related documentation in the C library
 
@@ -55,9 +56,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 6a3eac7 D--- 10 0 -- 
-#> + edges from 6a3eac7:
+#> IGRAPH e2655e2 D--- 10 0 -- 
+#> + edges from e2655e2:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH b7a5e74 U--- 5 0 -- 
-#> + edges from b7a5e74:
+#> IGRAPH e97c1ae U--- 5 0 -- 
+#> + edges from e97c1ae:
 ```

@@ -81,6 +81,9 @@
 - [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
   [`turan()`](https://r.igraph.org/reference/make_turan.md) : Create a
   Turán graph
+- [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  [`wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  **\[experimental\]** : Create a wheel graph
 - [`realize_degseq()`](https://r.igraph.org/reference/realize_degseq.md)
   : Creating a graph from a given degree sequence, deterministically
 - [`realize_bipartite_degseq()`](https://r.igraph.org/reference/realize_bipartite_degseq.md)
@@ -1248,6 +1251,9 @@
   **\[experimental\]** : Central vertices of a graph
 - [`is_biconnected()`](https://r.igraph.org/reference/is_biconnected.md)
   **\[experimental\]** : Check biconnectedness
+- [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  [`wheel()`](https://r.igraph.org/reference/make_wheel.md)
+  **\[experimental\]** : Create a wheel graph
 - [`realize_bipartite_degseq()`](https://r.igraph.org/reference/realize_bipartite_degseq.md)
   **\[experimental\]** : Creating a bipartite graph from two degree
   sequences, deterministically

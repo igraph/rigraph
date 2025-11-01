@@ -56,7 +56,8 @@ Other deterministic constructors:
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
-[`make_tree()`](https://r.igraph.org/reference/make_tree.md)
+[`make_tree()`](https://r.igraph.org/reference/make_tree.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Related documentation in the C library
 

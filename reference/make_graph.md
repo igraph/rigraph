@@ -278,19 +278,20 @@ Other deterministic constructors:
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
+[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
 ## Examples
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 40c91c8 U--- 6 4 -- 
-#> + edges from 40c91c8:
+#> IGRAPH 7897f52 U--- 6 4 -- 
+#> + edges from 7897f52:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 901dd0f UN-- 4 3 -- 
+#> IGRAPH c66768d UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 901dd0f (vertex names):
+#> + edges from c66768d (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

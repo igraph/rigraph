@@ -1,14 +1,23 @@
-# Create a star graph, a tree with n vertices and n - 1 leaves
+# Create a wheel graph
 
-`star()` creates a star graph, in this every single vertex is connected
-to the center vertex and nobody else.
+**\[experimental\]**
+
+A wheel graph is created by connecting a center vertex to all vertices
+of a cycle graph. A wheel graph on `n` vertices can be thought of as a
+wheel with `n - 1` spokes. The cycle graph part makes up the rim, while
+the star graph part adds the spokes.
+
+Note that the two and three-vertex wheel graphs are non-simple: The
+two-vertex wheel graph contains a self-loop, while the three-vertex
+wheel graph contains parallel edges (a 1-cycle and a 2-cycle,
+respectively).
 
 ## Usage
 
 ``` r
-make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(...)
+wheel(...)
 ```
 
 ## Arguments
@@ -17,20 +26,20 @@ star(...)
 
   Number of vertices.
 
+- ...:
+
+  Passed to `make_wheel()`.
+
 - mode:
 
-  It defines the direction of the edges, `in`: the edges point *to* the
+  It defines the direction of the edges. `in`: the edges point *to* the
   center, `out`: the edges point *from* the center, `mutual`: a directed
-  star is created with mutual edges, `undirected`: the edges are
+  wheel is created with mutual edges, `undirected`: the edges are
   undirected.
 
 - center:
 
   ID of the center vertex.
-
-- ...:
-
-  Passed to `make_star()`.
 
 ## Value
 
@@ -52,21 +61,26 @@ Other deterministic constructors:
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md),
 [`make_lattice()`](https://r.igraph.org/reference/make_lattice.md),
 [`make_ring()`](https://r.igraph.org/reference/make_ring.md),
+[`make_star()`](https://r.igraph.org/reference/make_star.md),
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
-[`make_turan()`](https://r.igraph.org/reference/make_turan.md),
-[`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
+[`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+
+## Related documentation in the C library
+
+[`wheel()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_wheel).
 
 ## Examples
 
 ``` r
-make_star(10, mode = "out")
-#> IGRAPH 41ca482 D--- 10 9 -- Out-star
+make_wheel(10, mode = "out")
+#> IGRAPH 0fd6c9c D--- 10 18 -- Out-wheel
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 41ca482:
-#> [1] 1-> 2 1-> 3 1-> 4 1-> 5 1-> 6 1-> 7 1-> 8 1-> 9 1->10
-make_star(5, mode = "undirected")
-#> IGRAPH 93522a0 U--- 5 4 -- Star
+#> + edges from 0fd6c9c:
+#>  [1]  1-> 2  1-> 3  1-> 4  1-> 5  1-> 6  1-> 7  1-> 8  1-> 9  1->10  2-> 3
+#> [11]  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 2
+make_wheel(5, mode = "undirected")
+#> IGRAPH 413b642 U--- 5 8 -- Wheel
 #> + attr: name (g/c), mode (g/c), center (g/n)
-#> + edges from 93522a0:
-#> [1] 1--2 1--3 1--4 1--5
+#> + edges from 413b642:
+#> [1] 1--2 1--3 1--4 1--5 2--3 3--4 4--5 2--5
 ```
