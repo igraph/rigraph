@@ -267,8 +267,9 @@ line.graph <- function(graph) {
   lifecycle::deprecate_soft("2.1.0", "line.graph()", "make_line_graph()")
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_linegraph, graph)
+  res <- linegraph_impl(
+    graph = graph
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
@@ -473,8 +474,10 @@ graph.lattice <- function(
 graph.kautz <- function(m, n) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.kautz()", "make_kautz_graph()")
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
+  res <- kautz_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
     res$m <- m
@@ -500,13 +503,11 @@ graph.full.citation <- function(n, directed = TRUE) {
     "graph.full.citation()",
     "make_full_citation_graph()"
   )
-  # Argument checks
-  n <- as.numeric(n)
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_full_citation, n, directed)
+  res <- full_citation_impl(
+    n = n,
+    directed = directed
+  )
 
   res <- set_graph_attr(res, "name", "Full citation graph")
   res
@@ -545,8 +546,12 @@ graph.full.bipartite <- function(
     "total" = 3
   )
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
+  res <- full_bipartite_impl(
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
     res$n1 <- n1
@@ -644,13 +649,11 @@ graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
 graph.empty <- function(n = 0, directed = TRUE) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.empty()", "make_empty_graph()")
-  # Argument checks
-  n <- as.numeric(n)
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_empty, n, directed)
+  res <- empty_impl(
+    n = n,
+    directed = directed
+  )
 
   res
 } # nocov end
@@ -672,8 +675,10 @@ graph.de.bruijn <- function(m, n) {
     "graph.de.bruijn()",
     "make_de_bruijn_graph()"
   )
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
+  res <- de_bruijn_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
     res$m <- m
@@ -743,8 +748,9 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
 graph.atlas <- function(n) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.atlas()", "graph_from_atlas()")
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_atlas, as.numeric(n))
+  res <- atlas_impl(
+    number = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
     res$n <- n
@@ -1547,7 +1553,7 @@ make_famous_graph <- function(name) {
   name <- gsub("\\s", "_", name)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_famous, name)
+  res <- .Call(Rx_igraph_famous, name)
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
   }
@@ -2275,8 +2281,9 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
 graph_from_atlas <- function(n) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_atlas, as.numeric(n))
+  res <- atlas_impl(
+    number = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
     res$n <- n
@@ -2340,6 +2347,41 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a circulant graph
+#'
+#' A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
+#' \eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets
+#' `shifts`, \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
+#'
+#' The function can generate either directed or undirected graphs.
+#' It does not generate multi-edges or self-loops.
+#'
+#' @param n Integer, the number of vertices in the circulant graph.
+#' @param shifts Integer vector, a list of the offsets within the circulant graph.
+#' @param directed Boolean, whether to create a directed graph.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a circulant graph with 10 vertices and shifts 1 and 3
+#' g <- make_circulant(10, c(1, 3))
+#' plot(g, layout = layout_in_circle)
+#'
+#' # A directed circulant graph
+#' g2 <- make_circulant(10, c(1, 3), directed = TRUE)
+#' plot(g2, layout = layout_in_circle)
+make_circulant <- function(n, shifts, directed = FALSE) {
+  circulant_impl(n = n, shifts = shifts, directed = directed)
+}
+
+#' @rdname make_circulant
+#' @param ... Passed to `make_circulant()`.
+#' @export
+circulant <- function(...) constructor_spec(make_circulant, ...)
+
+## -----------------------------------------------------------------
+
 #' Line graph of a graph
 #'
 #' This function calculates the line graph of another graph.
@@ -2372,8 +2414,9 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 make_line_graph <- function(graph) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_linegraph, graph)
+  res <- linegraph_impl(
+    graph = graph
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
@@ -2419,8 +2462,10 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' make_de_bruijn_graph(2, 2)
 #' make_line_graph(g)
 make_de_bruijn_graph <- function(m, n) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
+  res <- de_bruijn_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
     res$m <- m
@@ -2464,8 +2509,10 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' make_kautz_graph(2, 2)
 #'
 make_kautz_graph <- function(m, n) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_kautz, as.numeric(m), as.numeric(n))
+  res <- kautz_impl(
+    m = m,
+    n = n
+  )
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
     res$m <- m
@@ -2527,8 +2574,12 @@ make_full_bipartite_graph <- function(
     "total" = 3
   )
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
+  res <- full_bipartite_impl(
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
     res$n1 <- n1
@@ -2627,6 +2678,117 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a full multipartite graph
+#'
+#' A multipartite graph contains multiple types of vertices and connections
+#' are only possible between vertices of different types. This function
+#' creates a complete multipartite graph where all possible edges between
+#' different partitions are present.
+#'
+#' @param n A numeric vector giving the number of vertices in each partition.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param mode Character scalar, the type of connections for directed graphs.
+#'   If `"out"`, then edges point from vertices of partitions with lower
+#'   indices to partitions with higher indices; if `"in"`, then the opposite
+#'   direction is realized; `"all"` creates mutual edges. This parameter is
+#'   ignored for undirected graphs.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a multipartite graph with partitions of size 2, 3, and 4
+#' g <- make_full_multipartite(c(2, 3, 4))
+#' plot(g)
+#'
+#' # Create a directed multipartite graph
+#' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
+#' plot(g2)
+#' @cdocs igraph_full_multipartite
+make_full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mode <- igraph.match.arg(mode)
+
+  res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_full_multipartite
+#' @param ... Passed to `make_full_multipartite()`.
+#' @export
+full_multipartite <- function(...) {
+  constructor_spec(make_full_multipartite, ...)
+}
+
+## -----------------------------------------------------------------
+
+#' Create a Turán graph
+#'
+#' Turán graphs are complete multipartite graphs with the property that the
+#' sizes of the partitions are as close to equal as possible.
+#'
+#' @details
+#' The Turán graph with `n` vertices and `r` partitions is the densest
+#' graph on `n` vertices that does not contain a clique of size `r+1`.
+#'
+#' This function generates undirected graphs. The null graph is
+#' returned when the number of vertices is zero. A complete graph is
+#' returned if the number of partitions is greater than the number of vertices.
+#'
+#' @param n Integer, the number of vertices in the graph.
+#' @param r Integer, the number of partitions in the graph, must be positive.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a Turán graph with 10 vertices and 3 partitions
+#' g <- make_turan(10, 3)
+#' plot(g)
+#'
+#' # The sizes of the partitions are as balanced as possible
+#' table(V(g)$type)
+#' @cdocs igraph_turan
+make_turan <- function(n, r) {
+  n <- as.numeric(n)
+  r <- as.numeric(r)
+
+  res <- turan_impl(n = n, r = r)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_turan
+#' @param ... Passed to `make_turan()`.
+#' @export
+turan <- function(...) {
+  constructor_spec(make_turan, ...)
+}
+
+## -----------------------------------------------------------------
+
 #' Create a complete (full) citation graph
 #'
 #' `make_full_citation_graph()` creates a full citation graph. This is a
@@ -2642,13 +2804,11 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' @examples
 #' print_all(make_full_citation_graph(10))
 make_full_citation_graph <- function(n, directed = TRUE) {
-  # Argument checks
-  n <- as.numeric(n)
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_full_citation, n, directed)
+  res <- full_citation_impl(
+    n = n,
+    directed = directed
+  )
 
   res <- set_graph_attr(res, "name", "Full citation graph")
   res
