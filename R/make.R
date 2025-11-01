@@ -2941,9 +2941,11 @@ realize_degseq <- function(
   )
   
   # Add backward-compatible dotted names
-  if (!is.null(res$out_deg)) res$out.deg <- res$out_deg
-  if (!is.null(res$in_deg)) res$in.deg <- res$in_deg
-  if (!is.null(res$allowed_edge_types)) res$allowed.edge.types <- res$allowed_edge_types
+  if (igraph_opt("add.params")) {
+    res$out.deg <- res$out_deg
+    res$in.deg <- res$in_deg
+    res$allowed.edge.types <- res$allowed_edge_types
+  }
   
   res
 }
@@ -3008,7 +3010,9 @@ realize_bipartite_degseq <- function(
   )
   
   # Add backward-compatible dotted names
-  if (!is.null(g$allowed_edge_types)) g$allowed.edge.types <- g$allowed_edge_types
+  if (igraph_opt("add.params")) {
+    g$allowed.edge.types <- g$allowed_edge_types
+  }
 
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g

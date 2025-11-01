@@ -2701,10 +2701,12 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
   )
   
   # Add backward-compatible dotted names
-  if (!is.null(res$islands_n)) res$islands.n <- res$islands_n
-  if (!is.null(res$islands_size)) res$islands.size <- res$islands_size
-  if (!is.null(res$islands_pin)) res$islands.pin <- res$islands_pin
-  if (!is.null(res$n_inter)) res$n.inter <- res$n_inter
+  if (igraph_opt("add.params")) {
+    res$islands.n <- res$islands_n
+    res$islands.size <- res$islands_size
+    res$islands.pin <- res$islands_pin
+    res$n.inter <- res$n_inter
+  }
   
   res
 }
@@ -3009,20 +3011,13 @@ sample_fitness <- function(
   loops = FALSE,
   multiple = FALSE
 ) {
-  res <- static_fitness_game_impl(
+  static_fitness_game_impl(
     no_of_edges = no.of.edges,
     fitness_out = fitness.out,
     fitness_in = fitness.in,
     loops = loops,
     multiple = multiple
   )
-  
-  # Add backward-compatible dotted names
-  if (!is.null(res$exponent_out)) res$exponent.out <- res$exponent_out
-  if (!is.null(res$exponent_in)) res$exponent.in <- res$exponent_in
-  if (!is.null(res$finite_size_correction)) res$finite.size.correction <- res$finite_size_correction
-  
-  res
 }
 
 
@@ -3099,7 +3094,7 @@ sample_fitness_pl <- function(
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
-  static_power_law_game_impl(
+  res <- static_power_law_game_impl(
     no_of_nodes = no.of.nodes,
     no_of_edges = no.of.edges,
     exponent_out = exponent.out,
@@ -3108,6 +3103,15 @@ sample_fitness_pl <- function(
     multiple = multiple,
     finite_size_correction = finite.size.correction
   )
+  
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$exponent.out <- res$exponent_out
+    res$exponent.in <- res$exponent_in
+    res$finite.size.correction <- res$finite_size_correction
+  }
+  
+  res
 }
 
 
@@ -3187,8 +3191,10 @@ sample_forestfire <- function(
   )
   
   # Add backward-compatible dotted names
-  if (!is.null(res$fw_prob)) res$fw.prob <- res$fw_prob
-  if (!is.null(res$bw_factor)) res$bw.factor <- res$bw_factor
+  if (igraph_opt("add.params")) {
+    res$fw.prob <- res$fw_prob
+    res$bw.factor <- res$bw_factor
+  }
   
   res
 }
