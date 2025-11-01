@@ -1342,7 +1342,7 @@ automorphism_group <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 ) {
-  automorphism_group_impl(
+  automorphism_group_bliss_impl(
     graph = graph,
     colors = if (missing(colors)) missing_arg() else colors,
     sh = sh,
