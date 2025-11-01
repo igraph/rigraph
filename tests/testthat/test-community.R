@@ -583,7 +583,11 @@ test_that("modularity() handles NA weights correctly", {
   mod_with_implicit_weights <- modularity(gw, membership_vec, weights = NULL)
   expect_equal(mod_with_implicit_weights, mod_with_weights)
 
-  mod_with_explicit_weights <- modularity(g, membership_vec, weights = E(gw)$weight)
+  mod_with_explicit_weights <- modularity(
+    g,
+    membership_vec,
+    weights = E(gw)$weight
+  )
   expect_equal(mod_with_explicit_weights, mod_with_weights)
 
   # Test that modularity works when all weights are NA
