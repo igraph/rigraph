@@ -339,15 +339,15 @@ test_that("sample_pa can start from a graph", {
   expect_ecount(g_pa1, 5)
   expect_vcount(g_pa1, 10)
 
-  is_degree_zero <- (degree(g_pa1) == 0)
+  is_degree_zero <- (degree(g_pa1, mode = "all") == 0)
   expect_true(sum(is_degree_zero) %in% 0:4)
   #  2    3    4    5    6    7    8   10
   # 25  302 1820 2563 3350 1093  816   31
-  is_degree_one <- (degree(g_pa1) == 1)
+  is_degree_one <- (degree(g_pa1, mode = "all") == 1)
   expect_true(sum(is_degree_one) %in% c(2:8, 10L))
   #   0    1    2    3    4
   # 879 2271 5289 1532   29
-  is_degree_two_or_three <- (degree(g_pa1) %in% 2:3)
+  is_degree_two_or_three <- (degree(g_pa1, mode = "all") %in% 2:3)
   expect_true(sum(is_degree_two_or_three) %in% 0:4)
 
   g_pa2 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10))
