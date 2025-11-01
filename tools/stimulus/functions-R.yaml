@@ -91,6 +91,12 @@ igraph_connect_neighborhood:
 
 igraph_famous:
 
+igraph_circulant:
+    R:
+      GATTR:
+        name: Circulant graph
+      GATTR-PARAM: shifts
+
 igraph_lcf_vector:
     R:
       GATTR:
@@ -110,6 +116,20 @@ igraph_realize_bipartite_degree_sequence:
       GATTR:
         name: Bipartite graph from degree sequence
       GATTR-PARAM: degrees1, degrees2, allowed_edge_types, method
+
+igraph_full_multipartite:
+    DEPS: types ON res$graph
+    R:
+      GATTR:
+        name: Full multipartite graph
+      GATTR-PARAM: n, mode
+
+igraph_turan:
+    DEPS: types ON res$graph
+    R:
+      GATTR:
+        name: Turan graph
+      GATTR-PARAM: n, r
 
 # TODO: temporarily disabled
 igraph_weighted_sparsemat:
@@ -769,11 +789,6 @@ igraph_write_graph_dimacs_flow:
     PARAMS: |-
         INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
         VECTOR capacity
-
-igraph_write_graph_gml:
-    R:
-        DEFAULTS:
-            options: 0L
 
 igraph_write_graph_dot:
 

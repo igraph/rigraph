@@ -849,7 +849,7 @@ layout_as_tree <- function(
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -1229,7 +1229,7 @@ layout.sphere <- function(..., params = list()) {
 layout_randomly <- function(graph, dim = c(2, 3)) {
   ensure_igraph(graph)
 
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   if (dim == 2) {
     layout_random_impl(
@@ -1534,7 +1534,7 @@ layout_with_fr <- function(
   # Argument checks
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
   if (!missing(niter) && !missing(maxiter)) {
     cli::cli_abort(c(
       "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
@@ -1547,7 +1547,7 @@ layout_with_fr <- function(
   niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
-  grid <- igraph.match.arg(grid)
+  grid <- igraph_match_arg(grid)
   grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1911,7 +1911,7 @@ layout_with_kk <- function(
 
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
@@ -2420,7 +2420,7 @@ layout_with_sugiyama <- function(
   } else {
     weights <- NULL
   }
-  attributes <- igraph.match.arg(attributes)
+  attributes <- igraph_match_arg(attributes)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2923,7 +2923,7 @@ layout_with_drl <- function(
 ) {
   ensure_igraph(graph)
 
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   use.seed <- as.logical(use.seed)
   seed <- as.matrix(seed)

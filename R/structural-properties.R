@@ -150,8 +150,8 @@ shortest.paths <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.0.0", "shortest.paths()", "distances()")
-  algorithm <- igraph.match.arg(algorithm)
-  mode <- igraph.match.arg(mode)
+  algorithm <- igraph_match_arg(algorithm)
+  mode <- igraph_match_arg(mode)
   distances(
     graph = graph,
     v = v,
@@ -894,6 +894,10 @@ mean_distance <- function(
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -904,6 +908,7 @@ mean_distance <- function(
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -915,7 +920,7 @@ degree <- function(
 ) {
   ensure_igraph(graph)
   v <- as_igraph_vs(graph, v)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   res <- degree_impl(
     graph = graph,
@@ -947,6 +952,16 @@ max_degree <- function(
     graph = graph,
     v = v,
     mode = mode,
+    loops = loops
+  )
+}
+
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph = graph,
     loops = loops
   )
 }
@@ -1199,9 +1214,9 @@ distances <- function(
 
   v <- as_igraph_vs(graph, v)
   to <- as_igraph_vs(graph, to)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm <- switch(
     algorithm,
     "automatic" = 0,
@@ -1282,11 +1297,11 @@ shortest_paths <- function(
   algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
-  output <- igraph.match.arg(output)
+  output <- igraph_match_arg(output)
   output <- switch(output, "vpath" = 0, "epath" = 1, "both" = 2)
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm <- switch(
     algorithm,
     "automatic" = 0,
@@ -1388,7 +1403,7 @@ all_shortest_paths <- function(
 ) {
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -1508,7 +1523,7 @@ k_shortest_paths <- function(
 #' subcomponent(g, 1, "all")
 subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1582,7 +1597,7 @@ induced_subgraph <- function(
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- igraph.match.arg(impl)
+  impl <- igraph_match_arg(impl)
 
   # Function call
   res <- induced_subgraph_impl(
@@ -1773,7 +1788,7 @@ transitivity <- function(
   isolates = c("NaN", "zero")
 ) {
   ensure_igraph(graph)
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
   type <- switch(
     type,
     "undirected" = 0L,
@@ -1797,7 +1812,7 @@ transitivity <- function(
     weights <- NULL
   }
 
-  isolates <- igraph.match.arg(isolates)
+  isolates <- igraph_match_arg(isolates)
 
   if (type == 0) {
     transitivity_undirected_impl(
@@ -2039,7 +2054,7 @@ ego_size <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
@@ -2153,7 +2168,7 @@ ego <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
@@ -2188,7 +2203,7 @@ make_ego_graph <- function(
   mindist = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
 
@@ -2245,7 +2260,7 @@ make_neighborhood_graph <- make_ego_graph
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2288,7 +2303,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2460,6 +2475,8 @@ girth <- function(graph, circle = TRUE) {
 #'
 #' `which_loop()` decides whether the edges of the graph are loop edges.
 #'
+#' `count_loops()` counts the total number of loop edges in the graph.
+#'
 #' `any_multiple()` decides whether the graph has any multiple edges.
 #'
 #' `which_multiple()` decides whether the edges of the graph are multiple
@@ -2481,6 +2498,7 @@ girth <- function(graph, circle = TRUE) {
 #'   all edges in the graph.
 #' @return `any_loop()` and `any_multiple()` return a logical scalar.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
+#'   `count_loops()` returns a numeric scalar with the total number of loop edges.
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
@@ -2493,6 +2511,7 @@ girth <- function(graph, circle = TRUE) {
 #' g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 #' any_loop(g)
 #' which_loop(g)
+#' count_loops(g)
 #'
 #' # Multiple edges
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
@@ -2551,6 +2570,14 @@ which_loop <- function(graph, eids = E(graph)) {
 #' @cdocs igraph_has_loop
 any_loop <- function(graph) {
   has_loop_impl(
+    graph = graph
+  )
+}
+#' @rdname which_multiple
+#' @export
+#' @cdocs igraph_count_loops
+count_loops <- function(graph) {
+  count_loops_impl(
     graph = graph
   )
 }
@@ -2728,7 +2755,7 @@ bfs <- function(
     root <- 0 # ignored anyway
   }
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -2984,7 +3011,7 @@ dfs <- function(
 
   root <- as_igraph_vs(graph, root) - 1
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -3124,7 +3151,7 @@ dfs <- function(
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   res <- connected_components_impl(
@@ -3154,7 +3181,7 @@ is_connected <- function(graph, mode = c("weak", "strong")) {
 #' @export
 count_components <- function(graph, mode = c("weak", "strong")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -3254,7 +3281,7 @@ count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
 unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   roots <- as_igraph_vs(graph, roots) - 1
 
   # Function call

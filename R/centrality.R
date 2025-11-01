@@ -589,7 +589,7 @@ closeness <- function(
 
   vids <- as_igraph_vs(graph, vids)
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -2018,7 +2018,7 @@ alpha.centrality.dense <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
@@ -2065,7 +2065,7 @@ alpha.centrality.sparse <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))

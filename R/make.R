@@ -318,7 +318,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.tree()", "make_tree()")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -353,7 +353,7 @@ graph.star <- function(
 ) {
   # nocov start
   lifecycle::deprecate_soft("2.1.0", "graph.star()", "make_star()")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -539,7 +539,7 @@ graph.full.bipartite <- function(
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -1879,7 +1879,7 @@ make_star <- function(
   mode = c("in", "out", "mutual", "undirected"),
   center = 1
 ) {
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2, "mutual" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2093,7 +2093,7 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
 make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode1 <- switch(mode, "out" = 0, "in" = 1, "undirected" = 2)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2286,6 +2286,41 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a circulant graph
+#'
+#' A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
+#' \eqn{v_0, \ldots, v_{n-1}} such that for each \eqn{s_i} in the list of offsets
+#' `shifts`, \eqn{v_j} is connected to \eqn{v_{(j + s_i) \mod n}} for all \eqn{j}.
+#'
+#' The function can generate either directed or undirected graphs.
+#' It does not generate multi-edges or self-loops.
+#'
+#' @param n Integer, the number of vertices in the circulant graph.
+#' @param shifts Integer vector, a list of the offsets within the circulant graph.
+#' @param directed Boolean, whether to create a directed graph.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a circulant graph with 10 vertices and shifts 1 and 3
+#' g <- make_circulant(10, c(1, 3))
+#' plot(g, layout = layout_in_circle)
+#'
+#' # A directed circulant graph
+#' g2 <- make_circulant(10, c(1, 3), directed = TRUE)
+#' plot(g2, layout = layout_in_circle)
+make_circulant <- function(n, shifts, directed = FALSE) {
+  circulant_impl(n = n, shifts = shifts, directed = directed)
+}
+
+#' @rdname make_circulant
+#' @param ... Passed to `make_circulant()`.
+#' @export
+circulant <- function(...) constructor_spec(make_circulant, ...)
+
+## -----------------------------------------------------------------
+
 #' Line graph of a graph
 #'
 #' This function calculates the line graph of another graph.
@@ -2471,7 +2506,7 @@ make_full_bipartite_graph <- function(
   n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -2579,6 +2614,117 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 #' @param ... Passed to `make_bipartite_graph()`.
 #' @export
 bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
+
+## -----------------------------------------------------------------
+
+#' Create a full multipartite graph
+#'
+#' A multipartite graph contains multiple types of vertices and connections
+#' are only possible between vertices of different types. This function
+#' creates a complete multipartite graph where all possible edges between
+#' different partitions are present.
+#'
+#' @param n A numeric vector giving the number of vertices in each partition.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param mode Character scalar, the type of connections for directed graphs.
+#'   If `"out"`, then edges point from vertices of partitions with lower
+#'   indices to partitions with higher indices; if `"in"`, then the opposite
+#'   direction is realized; `"all"` creates mutual edges. This parameter is
+#'   ignored for undirected graphs.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a multipartite graph with partitions of size 2, 3, and 4
+#' g <- make_full_multipartite(c(2, 3, 4))
+#' plot(g)
+#'
+#' # Create a directed multipartite graph
+#' g2 <- make_full_multipartite(c(2, 2, 2), directed = TRUE, mode = "out")
+#' plot(g2)
+#' @cdocs igraph_full_multipartite
+make_full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+  mode <- igraph_match_arg(mode)
+
+  res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_full_multipartite
+#' @param ... Passed to `make_full_multipartite()`.
+#' @export
+full_multipartite <- function(...) {
+  constructor_spec(make_full_multipartite, ...)
+}
+
+## -----------------------------------------------------------------
+
+#' Create a Turán graph
+#'
+#' Turán graphs are complete multipartite graphs with the property that the
+#' sizes of the partitions are as close to equal as possible.
+#'
+#' @details
+#' The Turán graph with `n` vertices and `r` partitions is the densest
+#' graph on `n` vertices that does not contain a clique of size `r+1`.
+#'
+#' This function generates undirected graphs. The null graph is
+#' returned when the number of vertices is zero. A complete graph is
+#' returned if the number of partitions is greater than the number of vertices.
+#'
+#' @param n Integer, the number of vertices in the graph.
+#' @param r Integer, the number of partitions in the graph, must be positive.
+#' @return An igraph graph with a vertex attribute `type` storing the
+#'   partition index of each vertex. Partition indices start from 1.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Create a Turán graph with 10 vertices and 3 partitions
+#' g <- make_turan(10, 3)
+#' plot(g)
+#'
+#' # The sizes of the partitions are as balanced as possible
+#' table(V(g)$type)
+#' @cdocs igraph_turan
+make_turan <- function(n, r) {
+  n <- as.numeric(n)
+  r <- as.numeric(r)
+
+  res <- turan_impl(n = n, r = r)
+  graph <- set_vertex_attr(res$graph, "type", value = res$types)
+
+  # Transfer graph attributes from res to graph if add.params is enabled
+  if (igraph_opt("add.params")) {
+    for (attr_name in setdiff(names(res), c("graph", "types"))) {
+      graph <- set_graph_attr(graph, attr_name, res[[attr_name]])
+    }
+  }
+  graph
+}
+
+#' @rdname make_turan
+#' @param ... Passed to `make_turan()`.
+#' @export
+turan <- function(...) {
+  constructor_spec(make_turan, ...)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2834,8 +2980,8 @@ realize_bipartite_degseq <- function(
   method = c("smallest", "largest", "index")
 ) {
   check_dots_empty()
-  allowed.edge.types <- igraph.match.arg(allowed.edge.types)
-  method <- igraph.match.arg(method)
+  allowed.edge.types <- igraph_match_arg(allowed.edge.types)
+  method <- igraph_match_arg(method)
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,

@@ -229,7 +229,7 @@ get.adjacency.dense <- function(
 ) {
   ensure_igraph(graph)
 
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (is.logical(loops)) {
     loops <- ifelse(loops, "once", "ignore")
@@ -242,7 +242,7 @@ get.adjacency.dense <- function(
       )
     )
   }
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
   loops <- switch(loops, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (!is.null(weights)) {
@@ -285,7 +285,7 @@ get.adjacency.sparse <- function(
 ) {
   ensure_igraph(graph)
 
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   vc <- vcount(graph)
 
@@ -624,7 +624,7 @@ as_undirected <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   res <- to_undirected_impl(
@@ -685,9 +685,9 @@ as_adj_list <- function(
 ) {
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- as.numeric(switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3))
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
   loops <- as.numeric(switch(loops, "ignore" = 0, "twice" = 1, "once" = 2))
 
   if (is_directed(graph) && loops == 1) {
@@ -716,9 +716,9 @@ as_adj_edge_list <- function(
 ) {
   ensure_igraph(graph)
 
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- as.numeric(switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3))
-  loops <- igraph.match.arg(loops)
+  loops <- igraph_match_arg(loops)
   loops <- as.numeric(switch(loops, "ignore" = 0, "twice" = 1, "once" = 2))
 
   if (is_directed(graph) && loops == 1) {
@@ -1186,7 +1186,7 @@ as_incidence_matrix <- function(...) {
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   ensure_igraph(x)
-  what <- igraph.match.arg(what)
+  what <- igraph_match_arg(what)
 
   if (what %in% c("vertices", "both")) {
     ver <- .Call(

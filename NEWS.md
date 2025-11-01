@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9003
+
+## Bug fixes
+
+- Fix `alpha_centrality()` crash when `weights` is a custom attribute name (#915, #2403).
+
+## Features
+
+- Add `make_full_multipartite()` and `make_turan()` graph constructors (#1562, #2406).
+
+- Add `count_loops()` to R interface (#1379, #2414).
+
+- Add `make_circulant()` to expose `igraph_circulant()` (#1563, #2407).
+
+- Add `mean_degree()` to R (#1380, #2415).
+
+- `vertices()` errors on duplicate attribute names (#1248, #2430).
+
+- Add `count_reachable()` function to R (#1349, #2412).
+
+## Chore
+
+- Auto-update from GitHub Actions (#2454).
+
+
 # igraph 2.2.1.9002
 
 ## Bug fixes

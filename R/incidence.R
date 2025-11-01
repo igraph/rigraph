@@ -195,7 +195,7 @@ graph_from_biadjacency_matrix <- function(
   # Argument checks
   ensure_no_na(incidence, "biadjacency matrix")
   directed <- as.logical(directed)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   multiple <- as.logical(multiple)
 

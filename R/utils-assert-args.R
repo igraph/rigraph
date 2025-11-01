@@ -29,7 +29,7 @@ switch_igraph_arg <- function(
   if (length(arg) > 1) {
     values <- intersect(values, tolower(arg))
   }
-  match <- igraph.match.arg(
+  match <- igraph_match_arg(
     arg,
     values,
     error_arg = .error_arg,
@@ -38,7 +38,7 @@ switch_igraph_arg <- function(
   switch(match, ...)
 }
 
-igraph.match.arg <- function(
+igraph_match_arg <- function(
   arg,
   values,
   error_arg = rlang::caller_arg(arg),
