@@ -1253,24 +1253,18 @@ test_that("chung_lu_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(chung_lu_game_impl(
-    ... = pairlist(
-      out_weights = c(2, 2, 2)
-    )
+    out_weights = c(2, 2, 2)
   ))
   expect_snapshot(chung_lu_game_impl(
-    ... = pairlist(
-      out_weights = c(1, 2, 3),
-      in_weights = c(1, 2, 3)
-    ),
+    out_weights = c(1, 2, 3),
+    in_weights = c(1, 2, 3),
     loops = FALSE,
     variant = "maxent"
   ))
 
   # Structured tests
   result <- chung_lu_game_impl(
-    ... = pairlist(
-      out_weights = c(2, 2, 2)
-    )
+    out_weights = c(2, 2, 2)
   )
   expect_s3_class(result, "igraph")
 })
@@ -1278,7 +1272,7 @@ test_that("chung_lu_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(chung_lu_game_impl(
-    ... = pairlist(out_weights = -1)
+    out_weights = -1
   ))
 })
 
