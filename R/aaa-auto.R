@@ -1411,7 +1411,7 @@ hsbm_list_game_impl <- function(
 correlated_game_impl <- function(
   old_graph,
   corr,
-  p = edge_density(old.graph),
+  p = edge_density(old_graph),
   permutation = NULL
 ) {
   # Argument checks

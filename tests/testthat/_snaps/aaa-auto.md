@@ -1001,15 +1001,34 @@
       Error in `simple_interconnected_islands_game_impl()`:
       ! At vendor/cigraph/src/games/islands.c:xx : Number of islands cannot be negative, got -1. Invalid value
 
+# chung_lu_game_impl basic
+
+    Code
+      chung_lu_game_impl(out_weights = c(2, 2, 2))
+    Output
+      IGRAPH U--- 3 5 -- Chung-Lu model
+      + attr: name (g/c), variant (g/n)
+      + edges:
+      [1] 1--2 1--3 2--2 2--3 3--3
+
+---
+
+    Code
+      chung_lu_game_impl(out_weights = c(1, 2, 3), in_weights = c(1, 2, 3), loops = FALSE,
+      variant = "maxent")
+    Output
+      IGRAPH D--- 3 1 -- Chung-Lu model
+      + attr: name (g/c), variant (g/n)
+      + edge:
+      [1] 3->1
+
 # chung_lu_game_impl errors
 
     Code
       chung_lu_game_impl(out.weights = -1)
     Condition
       Error in `chung_lu_game_impl()`:
-      ! `...` must be empty.
-      x Problematic argument:
-      * ... = pairlist(out_weights = -1)
+      ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
 
 # static_fitness_game_impl basic
 
@@ -1173,6 +1192,16 @@
     Condition
       Error in `hsbm_list_game_impl()`:
       ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM. Invalid value
+
+# correlated_game_impl basic
+
+    Code
+      correlated_game_impl(old_graph = g, corr = 0.5)
+    Output
+      IGRAPH U--- 5 3 -- Correlated random graph
+      + attr: name (g/c), corr (g/n), p (g/n)
+      + edges:
+      [1] 1--3 3--4 2--5
 
 # correlated_game_impl errors
 

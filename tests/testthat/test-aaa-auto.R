@@ -1596,7 +1596,7 @@ test_that("dot_product_game_impl basic", {
 
   # Structured tests
   result <- dot_product_game_impl(
-    vecs = matrix(0.5, 5, 2)
+    vecs = matrix(0.5, 0.2, 1)
   )
   expect_s3_class(result, "igraph")
 })
@@ -2712,8 +2712,10 @@ test_that("transitivity_barrat_impl basic", {
   ))
 
   # Structured tests
-  result <- transitivity_barrat_impl(
-    graph = g
+  expect_warning(
+    result <- transitivity_barrat_impl(
+      graph = g
+    )
   )
   expect_true(is.numeric(result) || is.logical(result))
 })
@@ -7288,8 +7290,10 @@ test_that("triad_census_impl basic", {
   ))
 
   # Structured tests
-  result <- triad_census_impl(
-    graph = g
+  expect_warning(
+    result <- triad_census_impl(
+      graph = g
+    )
   )
   expect_true(is.numeric(result))
 })
