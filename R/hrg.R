@@ -911,7 +911,7 @@ print.igraphHRG <- function(
   level = 3,
   ...
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
   if (type == "auto") {
     is_graph_small <- (length(x$left) <= 100)
     type <- if (is_graph_small) "tree" else "plain"

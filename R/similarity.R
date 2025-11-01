@@ -66,7 +66,7 @@ similarity <- function(
     "invlogweighted"
   )
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
   if (method == "jaccard") {
     similarity_jaccard_impl(
       graph = graph,

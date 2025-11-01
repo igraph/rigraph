@@ -163,7 +163,7 @@ local_scan <- function(
   }
 
   ## Check mode argument
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   cmode <- switch(mode, out = 1, `in` = 2, all = 3, total = 3)
 
   sumweights <- function(g) sum(E(g)$weight)
@@ -404,7 +404,7 @@ scan_stat <- function(
   ## ell must the a non-negative integer
   stopifnot(length(ell) == 1, ell >= 0, trunc(ell) == ell)
 
-  locality <- igraph.match.arg(locality)
+  locality <- igraph_match_arg(locality)
 
   ## number of time steps and number of vertices
   maxTime <- length(graphs)

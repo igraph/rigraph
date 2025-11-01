@@ -203,7 +203,7 @@ decompose <- function(
   min.vertices = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   if (is.na(max.comps)) {
