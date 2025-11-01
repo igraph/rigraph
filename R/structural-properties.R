@@ -896,6 +896,10 @@ mean_distance <- function(
 #'   For `max_degree()`, the largest degree in the graph. When no vertices are
 #'   selected, or when the input is the null graph, zero is returned as this
 #'   is the smallest possible degree.
+#'
+#'   For `mean_degree()`, the average degree in the graph as a single number.
+#'   For graphs with no vertices, `NaN` is returned.
+#'   `r lifecycle::badge("experimental")`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @family structural.properties
@@ -906,6 +910,7 @@ mean_distance <- function(
 #' degree(g)
 #' g2 <- sample_gnp(1000, 10 / 1000)
 #' max_degree(g2)
+#' mean_degree(g2)
 #' degree_distribution(g2)
 #'
 degree <- function(
@@ -981,6 +986,16 @@ max_degree <- function(
     loops = loops
   )
 }
+#' @rdname degree
+#' @export
+#' @cdocs igraph_mean_degree
+mean_degree <- function(graph, loops = TRUE) {
+  mean_degree_impl(
+    graph = graph,
+    loops = loops
+  )
+}
+
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
@@ -2490,6 +2505,8 @@ girth <- function(graph, circle = TRUE) {
 #'
 #' `which_loop()` decides whether the edges of the graph are loop edges.
 #'
+#' `count_loops()` counts the total number of loop edges in the graph.
+#'
 #' `any_multiple()` decides whether the graph has any multiple edges.
 #'
 #' `which_multiple()` decides whether the edges of the graph are multiple
@@ -2511,6 +2528,7 @@ girth <- function(graph, circle = TRUE) {
 #'   all edges in the graph.
 #' @return `any_loop()` and `any_multiple()` return a logical scalar.
 #'   `which_loop()` and `which_multiple()` return a logical vector.
+#'   `count_loops()` returns a numeric scalar with the total number of loop edges.
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
@@ -2523,6 +2541,7 @@ girth <- function(graph, circle = TRUE) {
 #' g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 #' any_loop(g)
 #' which_loop(g)
+#' count_loops(g)
 #'
 #' # Multiple edges
 #' g <- sample_pa(10, m = 3, algorithm = "bag")
@@ -2581,6 +2600,14 @@ which_loop <- function(graph, eids = E(graph)) {
 #' @cdocs igraph_has_loop
 any_loop <- function(graph) {
   has_loop_impl(
+    graph = graph
+  )
+}
+#' @rdname which_multiple
+#' @export
+#' @cdocs igraph_count_loops
+count_loops <- function(graph) {
+  count_loops_impl(
     graph = graph
   )
 }

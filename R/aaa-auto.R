@@ -763,6 +763,12 @@ full_multipartite_impl <- function(
     mode
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Full multipartite graph'
+    res$n <- n
+    res$mode <- mode
+  }
+
   res
 }
 
@@ -853,6 +859,11 @@ circulant_impl <- function(
     directed
   )
 
+  if (igraph_opt("add.params")) {
+    res$name <- 'Circulant graph'
+    res$shifts <- shifts
+  }
+
   res
 }
 
@@ -890,6 +901,12 @@ turan_impl <- function(
     n,
     r
   )
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Turan graph'
+    res$n <- n
+    res$r <- r
+  }
 
   res
 }
@@ -6909,6 +6926,7 @@ write_graph_gml_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  options <- switch_igraph_arg(options, "default" = 0L, "encode_only_quot" = 1L)
   id <- as.numeric(id)
 
   on.exit(.Call(R_igraph_finalizer))

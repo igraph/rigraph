@@ -126,6 +126,8 @@ extern SEXP R_igraph_degree(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree_correlation_vector(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_degree_sequence_game(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_delaunay_graph(SEXP);
+extern SEXP R_igraph_delete_edges(SEXP, SEXP);
+extern SEXP R_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP R_igraph_delete_vertices_map(SEXP, SEXP);
 extern SEXP R_igraph_density(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_dfs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -146,7 +148,7 @@ extern SEXP R_igraph_edge_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP,
 extern SEXP R_igraph_edge_connectivity(SEXP, SEXP);
 extern SEXP R_igraph_edge_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_edgelist_percolation(SEXP);
-extern SEXP R_igraph_edges(SEXP, SEXP);
+extern SEXP R_igraph_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigen_adjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_eigenvector_centrality(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_empty(SEXP, SEXP);
@@ -160,6 +162,7 @@ extern SEXP R_igraph_eulerian_cycle(SEXP);
 extern SEXP R_igraph_eulerian_path(SEXP);
 extern SEXP R_igraph_even_tarjan_reduction(SEXP);
 extern SEXP R_igraph_extended_chordal_ring(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_famous(SEXP);
 extern SEXP R_igraph_farthest_points(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_feedback_arc_set(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_feedback_vertex_set(SEXP, SEXP, SEXP);
@@ -324,7 +327,7 @@ extern SEXP R_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_count(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_file(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_hist(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_maximal_independent_vertex_sets(SEXP);
+extern SEXP R_igraph_maximal_independent_vertex_sets(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximum_bipartite_matching(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximum_cardinality_search(SEXP);
 extern SEXP R_igraph_mean_degree(SEXP, SEXP);
@@ -652,6 +655,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_degree_correlation_vector",                  (DL_FUNC) &R_igraph_degree_correlation_vector,                   5},
     {"R_igraph_degree_sequence_game",                       (DL_FUNC) &R_igraph_degree_sequence_game,                        3},
     {"R_igraph_delaunay_graph",                             (DL_FUNC) &R_igraph_delaunay_graph,                              1},
+    {"R_igraph_delete_edges",                               (DL_FUNC) &R_igraph_delete_edges,                                2},
+    {"R_igraph_delete_vertices",                            (DL_FUNC) &R_igraph_delete_vertices,                             2},
     {"R_igraph_delete_vertices_map",                        (DL_FUNC) &R_igraph_delete_vertices_map,                         2},
     {"R_igraph_density",                                    (DL_FUNC) &R_igraph_density,                                     3},
     {"R_igraph_dfs",                                        (DL_FUNC) &R_igraph_dfs,                                        12},
@@ -672,7 +677,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edge_connectivity",                          (DL_FUNC) &R_igraph_edge_connectivity,                           2},
     {"R_igraph_edge_disjoint_paths",                        (DL_FUNC) &R_igraph_edge_disjoint_paths,                         3},
     {"R_igraph_edgelist_percolation",                       (DL_FUNC) &R_igraph_edgelist_percolation,                        1},
-    {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
+    {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       3},
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      4},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
@@ -686,6 +691,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eulerian_path",                              (DL_FUNC) &R_igraph_eulerian_path,                               1},
     {"R_igraph_even_tarjan_reduction",                      (DL_FUNC) &R_igraph_even_tarjan_reduction,                       1},
     {"R_igraph_extended_chordal_ring",                      (DL_FUNC) &R_igraph_extended_chordal_ring,                       3},
+    {"R_igraph_famous",                                     (DL_FUNC) &R_igraph_famous,                                      1},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
     {"R_igraph_feedback_arc_set",                           (DL_FUNC) &R_igraph_feedback_arc_set,                            3},
     {"R_igraph_feedback_vertex_set",                        (DL_FUNC) &R_igraph_feedback_vertex_set,                         3},
@@ -850,7 +856,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_maximal_cliques_count",                      (DL_FUNC) &R_igraph_maximal_cliques_count,                       3},
     {"R_igraph_maximal_cliques_file",                       (DL_FUNC) &R_igraph_maximal_cliques_file,                        5},
     {"R_igraph_maximal_cliques_hist",                       (DL_FUNC) &R_igraph_maximal_cliques_hist,                        3},
-    {"R_igraph_maximal_independent_vertex_sets",            (DL_FUNC) &R_igraph_maximal_independent_vertex_sets,             1},
+    {"R_igraph_maximal_independent_vertex_sets",            (DL_FUNC) &R_igraph_maximal_independent_vertex_sets,             4},
     {"R_igraph_maximum_bipartite_matching",                 (DL_FUNC) &R_igraph_maximum_bipartite_matching,                  4},
     {"R_igraph_maximum_cardinality_search",                 (DL_FUNC) &R_igraph_maximum_cardinality_search,                  1},
     {"R_igraph_mean_degree",                                (DL_FUNC) &R_igraph_mean_degree,                                 2},
