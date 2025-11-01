@@ -28,8 +28,7 @@ init_functions = {
 
 def get_r_parameter_name(param: ParamSpec) -> str:
     result = param.name_in_higher_level_interface
-    if result == param.name:
-        result = result.replace("_", ".")
+    # Keep snake_case for _impl functions
     return result
 
 
@@ -418,7 +417,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                 if isinstance(pars, str):
                     pars = pars.split(",")
                 for par in pars:
-                    par = par.strip().replace("_", ".")
+                    par = par.strip()  # Keep snake_case for _impl functions
                     lines.append(f"res${par} <- {par}")
 
             if lines:

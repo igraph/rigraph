@@ -107,9 +107,9 @@ simplify <- function(
 ) {
   simplify_impl(
     graph = graph,
-    remove.multiple = remove.multiple,
-    remove.loops = remove.loops,
-    edge.attr.comb = edge.attr.comb
+    remove_multiple = remove.multiple,
+    remove_loops = remove.loops,
+    edge_attr_comb = edge.attr.comb
   )
 }
 

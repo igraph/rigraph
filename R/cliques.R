@@ -440,7 +440,7 @@ weighted_cliques <- function(
 largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
   largest_weighted_cliques_impl(
     graph = graph,
-    vertex.weights = vertex.weights
+    vertex_weights = vertex.weights
   )
 }
 #' @export
@@ -449,7 +449,7 @@ largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
 weighted_clique_num <- function(graph, vertex.weights = NULL) {
   weighted_clique_number_impl(
     graph = graph,
-    vertex.weights = vertex.weights
+    vertex_weights = vertex.weights
   )
 }
 
@@ -613,14 +613,14 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(
       graph = graph,
-      min.size = min,
-      max.size = max
+      min_size = min,
+      max_size = max
     )
   } else {
     clique_size_hist_impl(
       graph = graph,
-      min.size = min,
-      max.size = max
+      min_size = min,
+      max_size = max
     )
   }
 }

@@ -28,7 +28,10 @@ test_that("empty_impl basic", {
   expect_equal(ecount(g1), 0)
   expect_true(is_directed(g1))
 
-  g2 <- empty_impl(n = 5, directed = FALSE)
+  g2 <- empty_impl(
+    n = 5,
+    directed = FALSE
+  )
   expect_s3_class(g2, "igraph")
   expect_equal(vcount(g2), 5)
   expect_equal(ecount(g2), 0)
@@ -58,7 +61,10 @@ test_that("add_edges_impl basic", {
   ))
 
   # Structured tests
-  result <- add_edges_impl(graph = g, edges = c(0, 1, 1, 2))
+  result <- add_edges_impl(
+    graph = g,
+    edges = c(0, 1, 1, 2)
+  )
   expect_s3_class(result, "igraph")
   expect_equal(vcount(result), 3)
   expect_equal(ecount(result), 2)
@@ -87,7 +93,9 @@ test_that("copy_impl basic", {
   ))
 
   # Structured tests
-  result <- copy_impl(from = g)
+  result <- copy_impl(
+    from = g
+  )
   expect_s3_class(result, "igraph")
   expect_equal(vcount(result), vcount(g))
   expect_equal(ecount(result), ecount(g))
@@ -116,7 +124,9 @@ test_that("vcount_impl basic", {
   ))
 
   # Structured tests
-  result <- vcount_impl(graph = g)
+  result <- vcount_impl(
+    graph = g
+  )
   expect_type(result, "double")
   expect_length(result, 1)
   expect_equal(result, 4)
@@ -148,7 +158,9 @@ test_that("degree_impl basic", {
   ))
 
   # Structured tests
-  result <- degree_impl(graph = g)
+  result <- degree_impl(
+    graph = g
+  )
   expect_type(result, "double")
   expect_length(result, 3)
   expect_equal(result, c(0, 0, 0))
@@ -657,21 +669,13 @@ test_that("adjlist_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(adjlist_impl(
-    adjlist = list(
-      c(2, 3),
-      c(1),
-      c(1)
-    ),
+    adjlist = list(c(2, 3), c(1), c(1)),
     mode = "out"
   ))
 
   # Structured tests
   result <- adjlist_impl(
-    adjlist = list(
-      c(2, 3),
-      c(1),
-      c(1)
-    ),
+    adjlist = list(c(2, 3), c(1), c(1)),
     mode = "out"
   )
   expect_s3_class(result, "igraph")
@@ -749,18 +753,18 @@ test_that("realize_degree_sequence_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(realize_degree_sequence_impl(
-    out.deg = c(2, 2, 2)
+    out_deg = c(2, 2, 2)
   ))
   expect_snapshot(realize_degree_sequence_impl(
-    out.deg = c(2, 2, 2),
-    in.deg = c(2, 2, 2),
-    allowed.edge.types = "simple",
+    out_deg = c(2, 2, 2),
+    in_deg = c(2, 2, 2),
+    allowed_edge_types = "simple",
     method = "largest"
   ))
 
   # Structured tests
   result <- realize_degree_sequence_impl(
-    out.deg = c(2, 2, 2)
+    out_deg = c(2, 2, 2)
   )
   expect_s3_class(result, "igraph")
 })
@@ -768,7 +772,7 @@ test_that("realize_degree_sequence_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(realize_degree_sequence_impl(
-    out.deg = -1
+    out_deg = -1
   ))
 })
 
@@ -783,7 +787,7 @@ test_that("realize_bipartite_degree_sequence_impl basic", {
   expect_snapshot(realize_bipartite_degree_sequence_impl(
     degrees1 = c(2, 2),
     degrees2 = c(2, 2),
-    allowed.edge.types = "loops",
+    allowed_edge_types = "loops",
     method = "largest"
   ))
 
@@ -985,18 +989,18 @@ test_that("preference_game_impl basic", {
   expect_snapshot(preference_game_impl(
     nodes = 5,
     types = 2,
-    type.dist = c(0.5, 0.5),
-    fixed.sizes = FALSE,
-    pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+    type_dist = c(0.5, 0.5),
+    fixed_sizes = FALSE,
+    pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   ))
 
   # Structured tests
   result <- preference_game_impl(
     nodes = 5,
     types = 2,
-    type.dist = c(0.5, 0.5),
-    fixed.sizes = FALSE,
-    pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+    type_dist = c(0.5, 0.5),
+    fixed_sizes = FALSE,
+    pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   )
   expect_type(result, "list")
 })
@@ -1007,9 +1011,9 @@ test_that("preference_game_impl errors", {
     preference_game_impl(
       nodes = -1,
       types = 2,
-      type.dist = c(0.5, 0.5),
-      fixed.sizes = FALSE,
-      pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+      type_dist = c(0.5, 0.5),
+      fixed_sizes = FALSE,
+      pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
     )
   )
 })
@@ -1020,19 +1024,19 @@ test_that("asymmetric_preference_game_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(asymmetric_preference_game_impl(
     nodes = 5,
-    out.types = 2,
-    in.types = 2,
-    type.dist.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
-    pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+    out_types = 2,
+    in_types = 2,
+    type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
+    pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   ))
 
   # Structured tests
   result <- asymmetric_preference_game_impl(
     nodes = 5,
-    out.types = 2,
-    in.types = 2,
-    type.dist.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
-    pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+    out_types = 2,
+    in_types = 2,
+    type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
+    pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
   )
   expect_type(result, "list")
 })
@@ -1042,10 +1046,10 @@ test_that("asymmetric_preference_game_impl errors", {
   expect_snapshot_igraph_error(
     asymmetric_preference_game_impl(
       nodes = -1,
-      out.types = 2,
-      in.types = 2,
-      type.dist.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
-      pref.matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
+      out_types = 2,
+      in_types = 2,
+      type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2),
+      pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2)
     )
   )
 })
@@ -1115,12 +1119,12 @@ test_that("forest_fire_game_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(forest_fire_game_impl(
     nodes = 5,
-    fw.prob = 0.5
+    fw_prob = 0.5
   ))
   expect_snapshot(forest_fire_game_impl(
     nodes = 5,
-    fw.prob = 0.5,
-    bw.factor = 0.2,
+    fw_prob = 0.5,
+    bw_factor = 0.2,
     ambs = 2,
     directed = FALSE
   ))
@@ -1128,7 +1132,7 @@ test_that("forest_fire_game_impl basic", {
   # Structured tests
   result <- forest_fire_game_impl(
     nodes = 5,
-    fw.prob = 0.5
+    fw_prob = 0.5
   )
   expect_s3_class(result, "igraph")
 })
@@ -1137,7 +1141,7 @@ test_that("forest_fire_game_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(forest_fire_game_impl(
     nodes = -1,
-    fw.prob = 0.5
+    fw_prob = 0.5
   ))
 })
 
@@ -1146,18 +1150,18 @@ test_that("simple_interconnected_islands_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(simple_interconnected_islands_game_impl(
-    islands.n = 2,
-    islands.size = 3,
-    islands.pin = 0.5,
-    n.inter = 1
+    islands_n = 2,
+    islands_size = 3,
+    islands_pin = 0.5,
+    n_inter = 1
   ))
 
   # Structured tests
   result <- simple_interconnected_islands_game_impl(
-    islands.n = 2,
-    islands.size = 3,
-    islands.pin = 0.5,
-    n.inter = 1
+    islands_n = 2,
+    islands_size = 3,
+    islands_pin = 0.5,
+    n_inter = 1
   )
   expect_s3_class(result, "igraph")
 })
@@ -1166,10 +1170,10 @@ test_that("simple_interconnected_islands_game_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(
     simple_interconnected_islands_game_impl(
-      islands.n = -1,
-      islands.size = 3,
-      islands.pin = 0.5,
-      n.inter = 1
+      islands_n = -1,
+      islands_size = 3,
+      islands_pin = 0.5,
+      n_inter = 1
     )
   )
 })
@@ -1179,18 +1183,18 @@ test_that("chung_lu_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(chung_lu_game_impl(
-    out.weights = c(2, 2, 2)
+    out_weights = c(2, 2, 2)
   ))
   expect_snapshot(chung_lu_game_impl(
-    out.weights = c(1, 2, 3),
-    in.weights = c(1, 2, 3),
+    out_weights = c(1, 2, 3),
+    in_weights = c(1, 2, 3),
     loops = FALSE,
     variant = "maxent"
   ))
 
   # Structured tests
   result <- chung_lu_game_impl(
-    out.weights = c(2, 2, 2)
+    out_weights = c(2, 2, 2)
   )
   expect_s3_class(result, "igraph")
 })
@@ -1198,7 +1202,7 @@ test_that("chung_lu_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(chung_lu_game_impl(
-    out.weights = -1
+    out_weights = -1
   ))
 })
 
@@ -1207,21 +1211,21 @@ test_that("static_fitness_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(static_fitness_game_impl(
-    no.of.edges = 3,
-    fitness.out = c(1, 2, 3)
+    no_of_edges = 3,
+    fitness_out = c(1, 2, 3)
   ))
   expect_snapshot(static_fitness_game_impl(
-    no.of.edges = 3,
-    fitness.out = c(1, 2, 3),
-    fitness.in = c(1, 2, 3),
+    no_of_edges = 3,
+    fitness_out = c(1, 2, 3),
+    fitness_in = c(1, 2, 3),
     loops = TRUE,
     multiple = TRUE
   ))
 
   # Structured tests
   result <- static_fitness_game_impl(
-    no.of.edges = 3,
-    fitness.out = c(1, 2, 3)
+    no_of_edges = 3,
+    fitness_out = c(1, 2, 3)
   )
   expect_s3_class(result, "igraph")
 })
@@ -1229,8 +1233,8 @@ test_that("static_fitness_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(static_fitness_game_impl(
-    no.of.edges = -1,
-    fitness.out = c(1, 2, 3)
+    no_of_edges = -1,
+    fitness_out = c(1, 2, 3)
   ))
 })
 
@@ -1239,25 +1243,25 @@ test_that("static_power_law_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(static_power_law_game_impl(
-    no.of.nodes = 5,
-    no.of.edges = 4,
-    exponent.out = 2.5
+    no_of_nodes = 5,
+    no_of_edges = 4,
+    exponent_out = 2.5
   ))
   expect_snapshot(static_power_law_game_impl(
-    no.of.nodes = 5,
-    no.of.edges = 4,
-    exponent.out = 2.5,
-    exponent.in = 2,
+    no_of_nodes = 5,
+    no_of_edges = 4,
+    exponent_out = 2.5,
+    exponent_in = 2,
     loops = TRUE,
     multiple = TRUE,
-    finite.size.correction = FALSE
+    finite_size_correction = FALSE
   ))
 
   # Structured tests
   result <- static_power_law_game_impl(
-    no.of.nodes = 5,
-    no.of.edges = 4,
-    exponent.out = 2.5
+    no_of_nodes = 5,
+    no_of_edges = 4,
+    exponent_out = 2.5
   )
   expect_s3_class(result, "igraph")
 })
@@ -1265,9 +1269,9 @@ test_that("static_power_law_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(static_power_law_game_impl(
-    no.of.nodes = -1,
-    no.of.edges = 4,
-    exponent.out = 2.5
+    no_of_nodes = -1,
+    no_of_edges = 4,
+    exponent_out = 2.5
   ))
 })
 
@@ -1277,11 +1281,11 @@ test_that("k_regular_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(k_regular_game_impl(
-    no.of.nodes = 5,
+    no_of_nodes = 5,
     k = 2
   ))
   expect_snapshot(k_regular_game_impl(
-    no.of.nodes = 5,
+    no_of_nodes = 5,
     k = 2,
     directed = TRUE,
     multiple = TRUE
@@ -1289,7 +1293,7 @@ test_that("k_regular_game_impl basic", {
 
   # Structured tests
   result <- k_regular_game_impl(
-    no.of.nodes = 5,
+    no_of_nodes = 5,
     k = 2
   )
   expect_s3_class(result, "igraph")
@@ -1299,7 +1303,7 @@ test_that("k_regular_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(k_regular_game_impl(
-    no.of.nodes = -1,
+    no_of_nodes = -1,
     k = 2
   ))
 })
@@ -1311,13 +1315,13 @@ test_that("sbm_game_impl basic", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot(sbm_game_impl(
     n = 5,
-    pref.matrix = matrix(0.5, 2, 2),
-    block.sizes = c(2, 3)
+    pref_matrix = matrix(0.5, 2, 2),
+    block_sizes = c(2, 3)
   ))
   expect_snapshot(sbm_game_impl(
     n = 5,
-    pref.matrix = matrix(0.5, 2, 2),
-    block.sizes = c(2, 3),
+    pref_matrix = matrix(0.5, 2, 2),
+    block_sizes = c(2, 3),
     directed = TRUE,
     loops = TRUE
   ))
@@ -1325,8 +1329,8 @@ test_that("sbm_game_impl basic", {
   # Structured tests
   result <- sbm_game_impl(
     n = 5,
-    pref.matrix = matrix(0.5, 2, 2),
-    block.sizes = c(2, 3)
+    pref_matrix = matrix(0.5, 2, 2),
+    block_sizes = c(2, 3)
   )
   expect_s3_class(result, "igraph")
 })
@@ -1336,8 +1340,8 @@ test_that("sbm_game_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(sbm_game_impl(
     n = -1,
-    pref.matrix = matrix(0.5, 2, 2),
-    block.sizes = c(2, 3)
+    pref_matrix = matrix(0.5, 2, 2),
+    block_sizes = c(2, 3)
   ))
 })
 
@@ -1401,10 +1405,7 @@ test_that("hsbm_list_game_impl basic", {
   expect_snapshot(hsbm_list_game_impl(
     n = 100,
     mlist = list(50, 50),
-    rholist = list(
-      c(3, 3, 4) /
-        10
-    ),
+    rholist = list(c(3, 3, 4) / 10),
     Clist = list(C),
     p = 1 / 20
   ))
@@ -1413,10 +1414,7 @@ test_that("hsbm_list_game_impl basic", {
   result <- hsbm_list_game_impl(
     n = 100,
     mlist = list(50, 50),
-    rholist = list(
-      c(3, 3, 4) /
-        10
-    ),
+    rholist = list(c(3, 3, 4) / 10),
     Clist = list(C),
     p = 1 / 20
   )
@@ -1431,10 +1429,7 @@ test_that("hsbm_list_game_impl errors", {
       n = -1,
       mlist = c(2, 3),
       rholist = list(0.5, 0.5),
-      Clist = list(
-        matrix(1, 2, 2),
-        matrix(1, 2, 2)
-      ),
+      Clist = list(matrix(1, 2, 2), matrix(1, 2, 2)),
       p = 0.5
     )
   )
@@ -1450,13 +1445,13 @@ test_that("correlated_game_impl basic", {
   )
 
   expect_snapshot(correlated_game_impl(
-    old.graph = g,
+    old_graph = g,
     corr = 0.5
   ))
 
   # Structured tests
   result <- correlated_game_impl(
-    old.graph = g,
+    old_graph = g,
     corr = 0.5
   )
   expect_s3_class(result, "igraph")
@@ -1466,7 +1461,7 @@ test_that("correlated_game_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(correlated_game_impl(
-    old.graph = NULL,
+    old_graph = NULL,
     corr = 0.5
   ))
 })
@@ -1522,7 +1517,7 @@ test_that("dot_product_game_impl basic", {
 
   # Structured tests
   result <- dot_product_game_impl(
-    vecs = matrix(0.5, 5, 2)
+    vecs = matrix(0.5, 0.2, 1)
   )
   expect_s3_class(result, "igraph")
 })
@@ -2244,7 +2239,7 @@ test_that("personalized_pagerank_vs_impl basic", {
 
   expect_snapshot(personalized_pagerank_vs_impl(
     graph = g,
-    reset.vids = 1
+    reset_vids = 1
   ))
   expect_snapshot(personalized_pagerank_vs_impl(
     graph = g,
@@ -2256,7 +2251,7 @@ test_that("personalized_pagerank_vs_impl basic", {
   # Structured tests
   result <- personalized_pagerank_vs_impl(
     graph = g,
-    reset.vids = 1
+    reset_vids = 1
   )
   expect_true(is.numeric(result) || is.logical(result))
 })
@@ -2267,7 +2262,7 @@ test_that("personalized_pagerank_vs_impl errors", {
   expect_snapshot_igraph_error(
     personalized_pagerank_vs_impl(
       graph = NULL,
-      reset.vids = 1
+      reset_vids = 1
     )
   )
 })
@@ -2412,8 +2407,8 @@ test_that("simplify_impl basic", {
   ))
   expect_snapshot(simplify_impl(
     graph = g,
-    remove.multiple = FALSE,
-    remove.loops = FALSE
+    remove_multiple = FALSE,
+    remove_loops = FALSE
   ))
 
   # Structured tests
@@ -2545,8 +2540,10 @@ test_that("transitivity_barrat_impl basic", {
   ))
 
   # Structured tests
-  result <- transitivity_barrat_impl(
-    graph = g
+  expect_warning(
+    result <- transitivity_barrat_impl(
+      graph = g
+    )
   )
   expect_true(is.numeric(result) || is.logical(result))
 })
@@ -2607,7 +2604,7 @@ test_that("reciprocity_impl basic", {
   ))
   expect_snapshot(reciprocity_impl(
     graph = g,
-    ignore.loops = FALSE,
+    ignore_loops = FALSE,
     mode = "ratio"
   ))
 
@@ -3257,7 +3254,7 @@ test_that("avg_nearest_neighbor_degree_impl basic", {
   expect_snapshot(avg_nearest_neighbor_degree_impl(
     graph = g,
     mode = "in",
-    neighbor.degree.mode = "out"
+    neighbor_degree_mode = "out"
   ))
 
   # Structured tests
@@ -3289,9 +3286,9 @@ test_that("degree_correlation_vector_impl basic", {
   ))
   expect_snapshot(degree_correlation_vector_impl(
     graph = g,
-    from.mode = "in",
-    to.mode = "out",
-    directed.neighbors = FALSE
+    from_mode = "in",
+    to_mode = "out",
+    directed_neighbors = FALSE
   ))
 
   # Structured tests
@@ -3320,11 +3317,11 @@ test_that("rich_club_sequence_impl basic", {
 
   expect_snapshot(rich_club_sequence_impl(
     graph = g,
-    vertex.order = 1:3
+    vertex_order = 1:3
   ))
   expect_snapshot(rich_club_sequence_impl(
     graph = g,
-    vertex.order = 1:3,
+    vertex_order = 1:3,
     normalized = FALSE,
     loops = TRUE,
     directed = FALSE
@@ -3333,7 +3330,7 @@ test_that("rich_club_sequence_impl basic", {
   # Structured tests
   result <- rich_club_sequence_impl(
     graph = g,
-    vertex.order = 1:3
+    vertex_order = 1:3
   )
   expect_true(is.numeric(result))
 })
@@ -3344,7 +3341,7 @@ test_that("rich_club_sequence_impl errors", {
   expect_snapshot_igraph_error(
     rich_club_sequence_impl(
       graph = NULL,
-      vertex.order = 1:3
+      vertex_order = 1:3
     )
   )
 })
@@ -3392,7 +3389,7 @@ test_that("centralization_impl basic", {
   ))
   expect_snapshot(centralization_impl(
     scores = c(1, 2, 3),
-    theoretical.max = 2,
+    theoretical_max = 2,
     normalized = FALSE
   ))
 
@@ -3754,8 +3751,8 @@ test_that("joint_degree_matrix_impl basic", {
   ))
   expect_snapshot(joint_degree_matrix_impl(
     graph = g,
-    max.out.degree = 2,
-    max.in.degree = 2
+    max_out_degree = 2,
+    max_in_degree = 2
   ))
 
   # Structured tests
@@ -3787,12 +3784,12 @@ test_that("joint_degree_distribution_impl basic", {
   ))
   expect_snapshot(joint_degree_distribution_impl(
     graph = g,
-    from.mode = "in",
-    to.mode = "out",
-    directed.neighbors = FALSE,
+    from_mode = "in",
+    to_mode = "out",
+    directed_neighbors = FALSE,
     normalized = FALSE,
-    max.from.degree = 2,
-    max.to.degree = 2
+    max_from_degree = 2,
+    max_to_degree = 2
   ))
 
   # Structured tests
@@ -3821,12 +3818,12 @@ test_that("joint_type_distribution_impl basic", {
 
   expect_snapshot(joint_type_distribution_impl(
     graph = g,
-    from.types = c(1, 2, 1)
+    from_types = c(1, 2, 1)
   ))
   expect_snapshot(joint_type_distribution_impl(
     graph = g,
-    from.types = c(1, 2, 1),
-    to.types = c(1, 2, 1),
+    from_types = c(1, 2, 1),
+    to_types = c(1, 2, 1),
     directed = FALSE,
     normalized = FALSE
   ))
@@ -3834,7 +3831,7 @@ test_that("joint_type_distribution_impl basic", {
   # Structured tests
   result <- joint_type_distribution_impl(
     graph = g,
-    from.types = c(1, 2, 1)
+    from_types = c(1, 2, 1)
   )
   expect_true(is.numeric(result))
 })
@@ -3845,7 +3842,7 @@ test_that("joint_type_distribution_impl errors", {
   expect_snapshot_igraph_error(
     joint_type_distribution_impl(
       graph = NULL,
-      from.types = c(1, 2, 1)
+      from_types = c(1, 2, 1)
     )
   )
 })
@@ -3892,11 +3889,11 @@ test_that("pseudo_diameter_impl basic", {
 
   expect_snapshot(pseudo_diameter_impl(
     graph = g,
-    start.vid = 1
+    start_vid = 1
   ))
   expect_snapshot(pseudo_diameter_impl(
     graph = g,
-    start.vid = 1,
+    start_vid = 1,
     directed = FALSE,
     unconnected = FALSE
   ))
@@ -3904,7 +3901,7 @@ test_that("pseudo_diameter_impl basic", {
   # Structured tests
   result <- pseudo_diameter_impl(
     graph = g,
-    start.vid = 1
+    start_vid = 1
   )
   expect_type(result, "list")
 })
@@ -3914,7 +3911,7 @@ test_that("pseudo_diameter_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(pseudo_diameter_impl(
     graph = NULL,
-    start.vid = 1
+    start_vid = 1
   ))
 })
 
@@ -4148,17 +4145,17 @@ test_that("is_graphical_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot(is_graphical_impl(
-    out.deg = c(2, 2, 2)
+    out_deg = c(2, 2, 2)
   ))
   expect_snapshot(is_graphical_impl(
-    out.deg = c(2, 2, 2),
-    in.deg = c(1, 1, 1),
-    allowed.edge.types = "all"
+    out_deg = c(2, 2, 2),
+    in_deg = c(1, 1, 1),
+    allowed_edge_types = "all"
   ))
 
   # Structured tests
   result <- is_graphical_impl(
-    out.deg = c(2, 2, 2)
+    out_deg = c(2, 2, 2)
   )
   expect_type(result, "logical")
 })
@@ -4167,7 +4164,7 @@ test_that("is_graphical_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(is_graphical_impl(
-    out.deg = "a"
+    out_deg = "a"
   ))
 })
 
@@ -4845,8 +4842,8 @@ test_that("clique_size_hist_impl basic", {
   ))
   expect_snapshot(clique_size_hist_impl(
     graph = g,
-    min.size = 2,
-    max.size = 2
+    min_size = 2,
+    max_size = 2
   ))
 
   # Structured tests
@@ -4906,8 +4903,8 @@ test_that("maximal_cliques_hist_impl basic", {
   ))
   expect_snapshot(maximal_cliques_hist_impl(
     graph = g,
-    min.size = 2,
-    max.size = 2
+    min_size = 2,
+    max_size = 2
   ))
 
   # Structured tests
@@ -5002,7 +4999,7 @@ test_that("largest_weighted_cliques_impl basic", {
   ))
   expect_snapshot(largest_weighted_cliques_impl(
     graph = g,
-    vertex.weights = c(1, 2, 3)
+    vertex_weights = c(1, 2, 3)
   ))
 
   # Structured tests
@@ -5034,7 +5031,7 @@ test_that("weighted_clique_number_impl basic", {
   ))
   expect_snapshot(weighted_clique_number_impl(
     graph = g,
-    vertex.weights = c(1, 2, 3)
+    vertex_weights = c(1, 2, 3)
   ))
 
   # Structured tests
@@ -5467,11 +5464,11 @@ test_that("layout_gem_impl basic", {
   expect_snapshot(layout_gem_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 2),
-    use.seed = TRUE,
+    use_seed = TRUE,
     maxiter = 10,
-    temp.max = 2,
-    temp.min = 0.1,
-    temp.init = 1
+    temp_max = 2,
+    temp_min = 0.1,
+    temp_init = 1
   ))
 
   # Structured tests
@@ -5509,15 +5506,15 @@ test_that("layout_davidson_harel_impl basic", {
   expect_snapshot(layout_davidson_harel_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 2),
-    use.seed = TRUE,
+    use_seed = TRUE,
     maxiter = 10,
     fineiter = 5,
-    cool.fact = 0.5,
-    weight.node.dist = 2,
-    weight.border = 1,
-    weight.edge.lengths = 0.1,
-    weight.edge.crossings = 0.2,
-    weight.node.edge.dist = 0.3
+    cool_fact = 0.5,
+    weight_node_dist = 2,
+    weight_border = 1,
+    weight_edge_lengths = 0.1,
+    weight_edge_crossings = 0.2,
+    weight_node_edge_dist = 0.3
   ))
 
   # Structured tests
@@ -5551,23 +5548,23 @@ test_that("layout_umap_impl basic", {
   expect_snapshot(layout_umap_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 2),
-    use.seed = TRUE
+    use_seed = TRUE
   ))
   expect_snapshot(layout_umap_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 2),
-    use.seed = TRUE,
+    use_seed = TRUE,
     distances = 1:3,
-    min.dist = 0.1,
+    min_dist = 0.1,
     epochs = 10,
-    distances.are.weights = TRUE
+    distances_are_weights = TRUE
   ))
 
   # Structured tests
   result <- layout_umap_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 2),
-    use.seed = TRUE
+    use_seed = TRUE
   )
   expect_true(is.numeric(result))
 })
@@ -5595,23 +5592,23 @@ test_that("layout_umap_3d_impl basic", {
   expect_snapshot(layout_umap_3d_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 3),
-    use.seed = TRUE
+    use_seed = TRUE
   ))
   expect_snapshot(layout_umap_3d_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 3),
-    use.seed = TRUE,
+    use_seed = TRUE,
     distances = 1:3,
-    min.dist = 0.1,
+    min_dist = 0.1,
     epochs = 10,
-    distances.are.weights = TRUE
+    distances_are_weights = TRUE
   ))
 
   # Structured tests
   result <- layout_umap_3d_impl(
     graph = g,
     res = matrix(0, nrow = 3, ncol = 3),
-    use.seed = TRUE
+    use_seed = TRUE
   )
   expect_true(is.numeric(result))
 })
@@ -6052,13 +6049,13 @@ test_that("community_fluid_communities_impl basic", {
 
   expect_snapshot(community_fluid_communities_impl(
     graph = g,
-    no.of.communities = 2
+    no_of_communities = 2
   ))
 
   # Structured tests
   result <- community_fluid_communities_impl(
     graph = g,
-    no.of.communities = 2
+    no_of_communities = 2
   )
   expect_true(is.numeric(result))
 })
@@ -6069,7 +6066,7 @@ test_that("community_fluid_communities_impl errors", {
   expect_snapshot_igraph_error(
     community_fluid_communities_impl(
       graph = NULL,
-      no.of.communities = 2
+      no_of_communities = 2
     )
   )
 })
@@ -6195,7 +6192,7 @@ test_that("community_leiden_impl basic", {
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
-    n.iterations = 1,
+    n_iterations = 1,
     membership = 1:3
   ))
 
@@ -6203,11 +6200,11 @@ test_that("community_leiden_impl basic", {
   result <- community_leiden_impl(
     graph = g,
     weights = c(1, 2),
-    vertex.weights = c(1, 2, 3),
+    vertex_weights = c(1, 2, 3),
     resolution = 0.5,
     beta = 0.1,
     start = TRUE,
-    n.iterations = 1,
+    n_iterations = 1,
     membership = 1:3
   )
   expect_type(result, "list")
@@ -6380,13 +6377,13 @@ test_that("hrg_sample_many_impl basic", {
   hrg_model <- fit_hrg(g, hrg = NULL, start = FALSE, steps = 0)
   expect_snapshot(hrg_sample_many_impl(
     hrg = hrg_model,
-    num.samples = 2
+    num_samples = 2
   ))
 
   # Structured tests
   result <- hrg_sample_many_impl(
     hrg = hrg_model,
-    num.samples = 2
+    num_samples = 2
   )
   expect_type(result, "list")
 })
@@ -6397,7 +6394,7 @@ test_that("hrg_sample_many_impl errors", {
   local_igraph_options(print.id = FALSE)
   expect_snapshot_igraph_error(hrg_sample_many_impl(
     hrg = NULL,
-    num.samples = 2
+    num_samples = 2
   ))
 })
 
@@ -6437,7 +6434,7 @@ test_that("hrg_game_impl errors", {
 # igraph_options(print.id = FALSE)
 #   g <- path_graph_impl(3)
 #   expect_snapshot(hrg_consensus_impl(g))
-#   expect_snapshot(hrg_consensus_impl(g, hrg=list(left=1, right=2, prob=0.5, edges=1, vertices=1), start=TRUE, num.samples=2))
+#   expect_snapshot(hrg_consensus_impl(g, hrg=list(left=1, right=2, prob=0.5, edges=1, vertices=1), start=TRUE, num_samples=2))
 # })
 
 test_that("hrg_consensus_impl errors", {
@@ -6456,7 +6453,7 @@ test_that("hrg_consensus_impl errors", {
 # igraph_options(print.id = FALSE)
 #   g <- path_graph_impl(3)
 #   expect_snapshot(hrg_predict_impl(g))
-#   expect_snapshot(hrg_predict_impl(g, hrg=list(left=1, right=2, prob=0.5, edges=1, vertices=1), start=TRUE, num.samples=2, num.bins=2))
+#   expect_snapshot(hrg_predict_impl(g, hrg=list(left=1, right=2, prob=0.5, edges=1, vertices=1), start=TRUE, num_samples=2, num_bins=2))
 # })
 
 test_that("hrg_predict_impl errors", {
@@ -6629,7 +6626,7 @@ test_that("get_stochastic_impl basic", {
   ))
   expect_snapshot(get_stochastic_impl(
     graph = g,
-    column.wise = TRUE,
+    column_wise = TRUE,
     weights = c(1, 2)
   ))
 
@@ -6662,7 +6659,7 @@ test_that("get_stochastic_sparse_impl basic", {
   ))
   expect_snapshot(get_stochastic_sparse_impl(
     graph = g,
-    column.wise = TRUE,
+    column_wise = TRUE,
     weights = c(1, 2)
   ))
 
@@ -6728,7 +6725,7 @@ test_that("to_undirected_impl basic", {
   expect_snapshot(to_undirected_impl(
     graph = g,
     mode = "mutual",
-    edge.attr.comb = "sum"
+    edge_attr_comb = "sum"
   ))
 
   # Structured tests
@@ -6761,7 +6758,7 @@ test_that("motifs_randesu_impl basic", {
   expect_snapshot(motifs_randesu_impl(
     graph = g,
     size = 4,
-    cut.prob = rep(0.1, 4)
+    cut_prob = rep(0.1, 4)
   ))
 
   # Structured tests
@@ -6791,13 +6788,13 @@ test_that("motifs_randesu_estimate_impl basic", {
   expect_snapshot(motifs_randesu_estimate_impl(
     graph = g,
     size = 3,
-    sample.size = 2
+    sample_size = 2
   ))
   expect_snapshot(motifs_randesu_estimate_impl(
     graph = g,
     size = 4,
-    cut.prob = rep(0.1, 4),
-    sample.size = 2,
+    cut_prob = rep(0.1, 4),
+    sample_size = 2,
     sample = 1:2
   ))
 
@@ -6805,7 +6802,7 @@ test_that("motifs_randesu_estimate_impl basic", {
   result <- motifs_randesu_estimate_impl(
     graph = g,
     size = 3,
-    sample.size = 2
+    sample_size = 2
   )
   expect_true(is.numeric(result))
 })
@@ -6817,7 +6814,7 @@ test_that("motifs_randesu_estimate_impl errors", {
     motifs_randesu_estimate_impl(
       graph = NULL,
       size = 3,
-      sample.size = 2
+      sample_size = 2
     )
   )
 })
@@ -6837,7 +6834,7 @@ test_that("motifs_randesu_no_impl basic", {
   expect_snapshot(motifs_randesu_no_impl(
     graph = g,
     size = 4,
-    cut.prob = c(0.1, 0.1, 0.1, 0.1)
+    cut_prob = c(0.1, 0.1, 0.1, 0.1)
   ))
 
   # Structured tests
@@ -6858,7 +6855,7 @@ test_that("motifs_randesu_no_impl errors", {
     motifs_randesu_no_impl(
       graph = g,
       size = 3,
-      cut.prob = c(0.1)
+      cut_prob = c(0.1)
     )
   )
 })
@@ -6905,8 +6902,10 @@ test_that("triad_census_impl basic", {
   ))
 
   # Structured tests
-  result <- triad_census_impl(
-    graph = g
+  expect_warning(
+    result <- triad_census_impl(
+      graph = g
+    )
   )
   expect_true(is.numeric(result))
 })
@@ -7032,7 +7031,7 @@ test_that("local_scan_0_them_impl basic", {
   expect_snapshot(local_scan_0_them_impl(
     us = g1,
     them = g2,
-    weights.them = c(1, 2),
+    weights_them = c(1, 2),
     mode = "in"
   ))
 
@@ -7047,10 +7046,13 @@ test_that("local_scan_0_them_impl basic", {
 test_that("local_scan_0_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_0_them_impl(
       us = NULL,
-      them = path_graph_impl(3)
+      them = them
     )
   )
 })
@@ -7108,7 +7110,7 @@ test_that("local_scan_1_ecount_them_impl basic", {
   expect_snapshot(local_scan_1_ecount_them_impl(
     us = g1,
     them = g2,
-    weights.them = c(1, 2),
+    weights_them = c(1, 2),
     mode = "in"
   ))
 
@@ -7123,10 +7125,13 @@ test_that("local_scan_1_ecount_them_impl basic", {
 test_that("local_scan_1_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_1_ecount_them_impl(
       us = NULL,
-      them = path_graph_impl(3)
+      them = them
     )
   )
 })
@@ -7190,7 +7195,7 @@ test_that("local_scan_k_ecount_them_impl basic", {
     us = g1,
     them = g2,
     k = 1,
-    weights.them = c(1, 2),
+    weights_them = c(1, 2),
     mode = "in"
   ))
 
@@ -7206,10 +7211,13 @@ test_that("local_scan_k_ecount_them_impl basic", {
 test_that("local_scan_k_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_k_ecount_them_impl(
       us = NULL,
-      them = path_graph_impl(3),
+      them = them,
       k = 1
     )
   )
@@ -7274,27 +7282,18 @@ test_that("local_scan_subset_ecount_impl basic", {
 
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   ))
   expect_snapshot(local_scan_subset_ecount_impl(
     graph = g,
     weights = c(1, 2, 3),
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   ))
 
   # Structured tests
   result <- local_scan_subset_ecount_impl(
     graph = g,
-    subsets = list(
-      c(1, 2),
-      c(2, 3)
-    )
+    subsets = list(c(1, 2), c(2, 3))
   )
   expect_true(is.numeric(result))
 })
@@ -7371,9 +7370,12 @@ test_that("join_impl basic", {
 test_that("join_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  right <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(join_impl(
     left = NULL,
-    right = path_graph_impl(3)
+    right = right
   ))
 })
 
@@ -7484,9 +7486,12 @@ test_that("product_impl basic", {
 test_that("product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  g2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(product_impl(
     g1 = NULL,
-    g2 = path_graph_impl(3)
+    g2 = g2
   ))
 })
 
@@ -7521,10 +7526,13 @@ test_that("rooted_product_impl basic", {
 test_that("rooted_product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  g2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     rooted_product_impl(
       g1 = NULL,
-      g2 = path_graph_impl(3),
+      g2 = g2,
       root = 1
     )
   )
@@ -8032,9 +8040,12 @@ test_that("isomorphic_impl basic", {
 test_that("isomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8121,10 +8132,10 @@ test_that("isomorphic_vf2_impl basic", {
   expect_snapshot(isomorphic_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8138,9 +8149,12 @@ test_that("isomorphic_vf2_impl basic", {
 test_that("isomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_vf2_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8167,10 +8181,10 @@ test_that("count_isomorphisms_vf2_impl basic", {
   expect_snapshot(count_isomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8184,10 +8198,13 @@ test_that("count_isomorphisms_vf2_impl basic", {
 test_that("count_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     count_isomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8212,10 +8229,10 @@ test_that("get_isomorphisms_vf2_impl basic", {
   expect_snapshot(get_isomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8229,10 +8246,13 @@ test_that("get_isomorphisms_vf2_impl basic", {
 test_that("get_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     get_isomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8266,9 +8286,12 @@ test_that("subisomorphic_impl basic", {
 test_that("subisomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(subisomorphic_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8292,10 +8315,10 @@ test_that("subisomorphic_vf2_impl basic", {
   expect_snapshot(subisomorphic_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8309,10 +8332,13 @@ test_that("subisomorphic_vf2_impl basic", {
 test_that("subisomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     subisomorphic_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8337,10 +8363,10 @@ test_that("count_subisomorphisms_vf2_impl basic", {
   expect_snapshot(count_subisomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8354,10 +8380,13 @@ test_that("count_subisomorphisms_vf2_impl basic", {
 test_that("count_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     count_subisomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8382,10 +8411,10 @@ test_that("get_subisomorphisms_vf2_impl basic", {
   expect_snapshot(get_subisomorphisms_vf2_impl(
     graph1 = g1,
     graph2 = g2,
-    vertex.color1 = c(1, 2, 3),
-    vertex.color2 = c(1, 2, 3),
-    edge.color1 = c(1, 2),
-    edge.color2 = c(1, 2)
+    vertex_color1 = c(1, 2, 3),
+    vertex_color2 = c(1, 2, 3),
+    edge_color1 = c(1, 2),
+    edge_color2 = c(1, 2)
   ))
 
   # Structured tests
@@ -8399,10 +8428,13 @@ test_that("get_subisomorphisms_vf2_impl basic", {
 test_that("get_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     get_subisomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8506,9 +8538,12 @@ test_that("isomorphic_bliss_impl basic", {
 test_that("isomorphic_bliss_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_bliss_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8858,7 +8893,7 @@ test_that("power_law_fit_impl basic", {
   expect_snapshot(power_law_fit_impl(
     data = c(1, 2, 3),
     xmin = 1,
-    force.continuous = TRUE
+    force_continuous = TRUE
   ))
 
   # Structured tests
@@ -8894,7 +8929,7 @@ test_that("sir_impl basic", {
     graph = g,
     beta = 0.1,
     gamma = 0.1,
-    no.sim = 2
+    no_sim = 2
   ))
 
   # Structured tests
@@ -9014,8 +9049,8 @@ test_that("simple_cycles_impl basic", {
   expect_snapshot(simple_cycles_impl(
     graph = g,
     mode = "in",
-    min.cycle.length = 2,
-    max.cycle.length = 3
+    min_cycle_length = 2,
+    max_cycle_length = 3
   ))
 
   # Structured tests
@@ -9775,7 +9810,7 @@ test_that("delete_vertices_impl errors", {
 
 test_that("incident_impl basic", {
   withr::local_seed(20250909)
-  local_igraph_options(print.id = FALSE, return.vs.es = FALSE)
+  local_igraph_options(print.id = FALSE, return.vs_es = FALSE)
   g <- make_graph(c(1, 2, 2, 3, 3, 1), n = 3, directed = TRUE)
 
   expect_snapshot(incident_impl(

@@ -2375,7 +2375,11 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' g2 <- make_circulant(10, c(1, 3), directed = TRUE)
 #' plot(g2, layout = layout_in_circle)
 make_circulant <- function(n, shifts, directed = FALSE) {
-  circulant_impl(n = n, shifts = shifts, directed = directed)
+  circulant_impl(
+    n = n,
+    shifts = shifts,
+    directed = directed
+  )
 }
 
 #' @rdname make_circulant
@@ -2718,7 +2722,11 @@ make_full_multipartite <- function(
   directed <- as.logical(directed)
   mode <- igraph_match_arg(mode)
 
-  res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  res <- full_multipartite_impl(
+    n = n,
+    directed = directed,
+    mode = mode
+  )
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   # Transfer graph attributes from res to graph if add.params is enabled
@@ -2771,7 +2779,10 @@ make_turan <- function(n, r) {
   n <- as.numeric(n)
   r <- as.numeric(r)
 
-  res <- turan_impl(n = n, r = r)
+  res <- turan_impl(
+    n = n,
+    r = r
+  )
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   # Transfer graph attributes from res to graph if add.params is enabled
@@ -2986,12 +2997,21 @@ realize_degseq <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 ) {
-  realize_degree_sequence_impl(
-    out.deg = out.deg,
-    in.deg = in.deg,
-    allowed.edge.types = allowed.edge.types,
+  res <- realize_degree_sequence_impl(
+    out_deg = out.deg,
+    in_deg = in.deg,
+    allowed_edge_types = allowed.edge.types,
     method = method
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$out.deg <- res$out_deg
+    res$in.deg <- res$in_deg
+    res$allowed.edge.types <- res$allowed_edge_types
+  }
+
+  res
 }
 
 
@@ -3049,9 +3069,14 @@ realize_bipartite_degseq <- function(
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
-    allowed.edge.types = allowed.edge.types,
+    allowed_edge_types = allowed.edge.types,
     method = method
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    g$allowed.edge.types <- g$allowed_edge_types
+  }
 
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g
