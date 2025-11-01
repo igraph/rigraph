@@ -43,9 +43,9 @@ Other vertex and edge sequence operations:
 ``` r
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 E(g)
-#> + 10/10 edges from 847f820 (vertex names):
+#> + 10/10 edges from bf00bb2 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 E(g) %>% rev()
-#> + 10/10 edges from 847f820 (vertex names):
+#> + 10/10 edges from bf00bb2 (vertex names):
 #>  [1] A--J I--J H--I G--H F--G E--F D--E C--D B--C A--B
 ```
