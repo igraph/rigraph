@@ -7,14 +7,12 @@
 \usage{
 make_empty_graph(n = 0, directed = TRUE)
 
-empty_graph(...)
+empty_graph(n = 0, directed = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
 
 \item{directed}{Whether to create a directed graph.}
-
-\item{...}{Passed to \code{make_graph_empty}.}
 }
 \value{
 An igraph graph.

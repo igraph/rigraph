@@ -7,7 +7,7 @@
 \usage{
 make_bipartite_graph(types, edges, directed = FALSE)
 
-bipartite_graph(...)
+bipartite_graph(types, edges, directed = FALSE)
 }
 \arguments{
 \item{types}{A vector giving the vertex types. It will be coerced into
@@ -23,8 +23,6 @@ vector. The vector may be a string vector if \code{types} is a named vector.}
 \item{directed}{Whether to create a directed graph, boolean constant. Note
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
-
-\item{...}{Passed to \code{make_bipartite_graph()}.}
 }
 \value{
 \code{make_bipartite_graph()} returns a bipartite igraph graph. In other

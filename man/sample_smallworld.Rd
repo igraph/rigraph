@@ -7,7 +7,7 @@
 \usage{
 sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(...)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 }
 \arguments{
 \item{dim}{Integer constant, the dimension of the starting lattice.}
@@ -24,8 +24,6 @@ generated graph.}
 
 \item{multiple}{Logical scalar, whether multiple edges are allowed int the
 generated graph.}
-
-\item{...}{Passed to \code{sample_smallworld()}.}
 }
 \value{
 A graph object.

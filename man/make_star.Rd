@@ -7,7 +7,7 @@
 \usage{
 make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(...)
+star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -19,8 +19,6 @@ star is created with mutual edges, \code{undirected}: the edges
 are undirected.}
 
 \item{center}{ID of the center vertex.}
-
-\item{...}{Passed to \code{make_star()}.}
 }
 \value{
 An igraph graph.

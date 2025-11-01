@@ -7,7 +7,7 @@
 \usage{
 make_full_graph(n, directed = FALSE, loops = FALSE)
 
-full_graph(...)
+full_graph(n, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -15,8 +15,6 @@ full_graph(...)
 \item{directed}{Whether to create a directed graph.}
 
 \item{loops}{Whether to add self-loops to the graph.}
-
-\item{...}{Passed to \code{make_full_graph()}.}
 }
 \value{
 An igraph graph

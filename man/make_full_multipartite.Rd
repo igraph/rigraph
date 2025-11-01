@@ -7,7 +7,7 @@
 \usage{
 make_full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 
-full_multipartite(...)
+full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 }
 \arguments{
 \item{n}{A numeric vector giving the number of vertices in each partition.}
@@ -19,8 +19,6 @@ If \code{"out"}, then edges point from vertices of partitions with lower
 indices to partitions with higher indices; if \code{"in"}, then the opposite
 direction is realized; \code{"all"} creates mutual edges. This parameter is
 ignored for undirected graphs.}
-
-\item{...}{Passed to \code{make_full_multipartite()}.}
 }
 \value{
 An igraph graph with a vertex attribute \code{type} storing the

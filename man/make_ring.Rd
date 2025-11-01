@@ -7,7 +7,7 @@
 \usage{
 make_ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 
-ring(...)
+ring(n, directed = FALSE, mutual = FALSE, circular = TRUE)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -20,8 +20,6 @@ undirected graphs.}
 \item{circular}{Whether to create a circular ring. A non-circular
 ring is essentially a \dQuote{line}: a tree where every non-leaf
 vertex has one child.}
-
-\item{...}{Passed to \code{make_ring()}.}
 }
 \value{
 An igraph graph.
