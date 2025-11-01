@@ -13,7 +13,7 @@ simplify(
   edge.attr.comb = igraph_opt("edge.attr.comb")
 )
 
-is_simple(graph, directed = TRUE)
+is_simple(graph)
 
 simplify_and_colorize(graph)
 }

@@ -12,7 +12,7 @@
 \alias{is_clique}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
-cliques(graph, min = UNLIMITED, max = UNLIMITED, max.results = UNLIMITED)
+cliques(graph, min = 0, max = 0)
 
 largest_cliques(graph)
 

@@ -8,7 +8,7 @@ strength(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  loops = c("twice", "none", "once"),
+  loops = TRUE,
   weights = NULL
 )
 }

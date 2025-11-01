@@ -7,10 +7,9 @@
 weighted_cliques(
   graph,
   vertex.weights = NULL,
-  maximal = FALSE,
-  min.weight = UNLIMITED,
-  max.weight = UNLIMITED,
-  max.results = UNLIMITED
+  min.weight = 0,
+  max.weight = 0,
+  maximal = FALSE
 )
 }
 \arguments{
@@ -23,14 +22,14 @@ vertex attribute, then this is used by default. If the graph does not have a
 vertex is assumed to have a weight of 1. Note that the current implementation
 of the weighted clique finder supports positive integer weights only.}
 
-\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
-or only the maximal ones (\code{TRUE}).}
-
 \item{min.weight}{Numeric constant, lower limit on the weight of the cliques to find.
 \code{NULL} means no limit, i.e. it is the same as 0.}
 
 \item{max.weight}{Numeric constant, upper limit on the weight of the cliques to find.
 \code{NULL} means no limit.}
+
+\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
+or only the maximal ones (\code{TRUE}).}
 }
 \value{
 \code{weighted_cliques()} and \code{largest_weighted_cliques()} return a

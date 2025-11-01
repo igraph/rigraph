@@ -4,10 +4,12 @@
 \alias{graph_center}
 \title{Central vertices of a graph}
 \usage{
-graph_center(graph, weights = NULL, mode = c("all", "out", "in", "total"))
+graph_center(graph, ..., weights = NULL, mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{weights}{Possibly a numeric vector giving edge weights. If this is
 \code{NULL} and the graph has a \code{weight} edge attribute, then the

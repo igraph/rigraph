@@ -4,7 +4,7 @@
 \alias{edge_density}
 \title{Graph density}
 \usage{
-edge_density(graph, weights = NULL, loops = FALSE)
+edge_density(graph, loops = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.}
