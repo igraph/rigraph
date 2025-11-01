@@ -3191,6 +3191,57 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   .Call(Rx_igraph_no_components, graph, mode)
 }
 
+#' Count reachable vertices
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Counts the number of vertices reachable from each vertex in the graph.
+#'
+#' For each vertex in the graph, this function counts how many vertices
+#' are reachable from it, including the vertex itself.
+#' A vertex is reachable from another if there is a directed path between them.
+#' For undirected graphs, two vertices are reachable from each other if they
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#' @param mode Character constant, defines how edge directions are considered
+#'   in directed graphs.
+#'   `"out"` counts vertices reachable via outgoing edges,
+#'   `"in"` counts vertices from which the current vertex is reachable via
+#'   incoming edges,
+#'   `"all"` or `"total"` ignores edge directions.
+#'   This parameter is ignored for undirected graphs.
+#' @return An integer vector of length `vcount(graph)`.
+#'   The i-th element is the number of vertices reachable from vertex i
+#'   (including vertex i itself).
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [components()], [subcomponent()], [is_connected()]
+#' @family components
+#' @export
+#' @keywords graphs
+#' @examples
+#'
+#' # In a directed path graph, the reachability depends on direction
+#' g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
+#' count_reachable(g, mode = "out")
+#' count_reachable(g, mode = "in")
+#'
+#' # In an undirected graph, reachability is the same in all directions
+#' g2 <- make_graph(~ 1 - 2 - 3 - 4 - 5)
+#' count_reachable(g2, mode = "out")
+#'
+#' # A graph with multiple components
+#' g3 <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
+#' count_reachable(g3, mode = "all")
+#'
+#' @cdocs igraph_count_reachable
+count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
+  count_reachable_impl(
+    graph = graph,
+    mode = mode
+  )
+}
+
 #' Convert a general graph into a forest
 #'
 #' Perform a breadth-first search on a graph and convert it into a tree or

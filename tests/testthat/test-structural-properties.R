@@ -730,6 +730,50 @@ test_that("a null graph has zero components", {
   expect_equal(count_components(g), 0L)
 })
 
+test_that("count_reachable() works for directed graphs", {
+  # Directed path graph: 1 -> 2 -> 3 -> 4 -> 5
+  g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
+
+  # Out mode: count vertices reachable via outgoing edges
+  out_counts <- count_reachable(g, mode = "out")
+  expect_equal(out_counts, c(5, 4, 3, 2, 1))
+
+  # In mode: count vertices from which current vertex is reachable
+  in_counts <- count_reachable(g, mode = "in")
+  expect_equal(in_counts, c(1, 2, 3, 4, 5))
+
+  # All mode: treat as undirected
+  all_counts <- count_reachable(g, mode = "all")
+  expect_equal(all_counts, rep(5, 5))
+})
+
+test_that("count_reachable() works for undirected graphs", {
+  # Undirected path graph
+  g <- make_graph(~ 1 - 2 - 3 - 4 - 5)
+
+  # All vertices are reachable from each other in an undirected path
+  counts <- count_reachable(g, mode = "out")
+  expect_equal(counts, rep(5, 5))
+})
+
+test_that("count_reachable() works for graphs with multiple components", {
+  # Graph with three components: 1-2-3, 4-5, 6
+  g <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
+
+  counts <- count_reachable(g, mode = "all")
+  expect_equal(counts, c(3, 3, 3, 2, 2, 1))
+})
+
+test_that("count_reachable() works for empty and single-vertex graphs", {
+  # Empty graph
+  g0 <- make_empty_graph(0)
+  expect_equal(count_reachable(g0, mode = "out"), integer(0))
+
+  # Single vertex
+  g1 <- make_empty_graph(1)
+  expect_equal(count_reachable(g1, mode = "out"), 1L)
+})
+
 test_that("girth() works", {
   ## No circle in a tree
   g <- make_tree(1000, 3)

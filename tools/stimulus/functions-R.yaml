@@ -15,27 +15,21 @@ igraph_empty_attrs:
     IGNORE: RR, RC
 
 igraph_add_vertices:
-    IGNORE: RR, RC, RInit
 
 igraph_delete_edges:
-    IGNORE: RR, RC
 
 igraph_delete_vertices:
-    IGNORE: RR, RC
 
 igraph_vcount:
 
 igraph_ecount:
-    IGNORE: RR, RC
 
 igraph_is_directed:
-    IGNORE: RR, RC
 
 igraph_edge:
     IGNORE: RR, RC, RInit
 
 igraph_edges:
-    IGNORE: RR, RC
 
 igraph_get_eid:
     IGNORE: RR, RC, RInit
@@ -94,7 +88,6 @@ igraph_connect_neighborhood:
     IGNORE: RR, RC
 
 igraph_famous:
-    IGNORE: RR, RC
 
 igraph_adjlist:
 
@@ -332,7 +325,9 @@ igraph_personalized_pagerank_vs:
         options ON algo, reset_vids ON graph
 
 igraph_rewire:
-    IGNORE: RR, RC
+    R:
+        DEFAULTS:
+            mode: 0L
 
 igraph_subgraph_from_edges:
 
@@ -347,7 +342,6 @@ igraph_ecc:
 igraph_reciprocity:
 
 igraph_constraint:
-    IGNORE: RR, RC
 
 igraph_maxdegree:
     PARAM_ORDER: graph, *, vids, ...
@@ -364,7 +358,6 @@ igraph_neighborhood_graphs:
     IGNORE: RR, RC
 
 igraph_topological_sorting:
-    IGNORE: RR, RC
 
 igraph_is_loop:
     PARAM_NAMES:
@@ -379,7 +372,6 @@ igraph_count_multiple:
         es: eids
 
 igraph_girth:
-    IGNORE: RR, RC, RInit
 
 igraph_add_edge:
     IGNORE: RR, RC, RInit
@@ -584,7 +576,6 @@ igraph_maximal_cliques_callback:
     IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques_count:
-    IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques_file:
     IGNORE: RR, RC, RInit
@@ -598,13 +589,10 @@ igraph_independent_vertex_sets:
     IGNORE: RR, RC
 
 igraph_largest_independent_vertex_sets:
-    IGNORE: RR, RC
 
 igraph_maximal_independent_vertex_sets:
-    IGNORE: RR, RC
 
 igraph_independence_number:
-    IGNORE: RR, RC
 
 #######################################
 # Layouts
@@ -642,10 +630,8 @@ igraph_layout_merge_dla:
 #######################################
 
 igraph_cocitation:
-    IGNORE: RR, RC
 
 igraph_bibcoupling:
-    IGNORE: RR, RC
 
 #######################################
 # Community structure
@@ -694,10 +680,8 @@ igraph_graphlets:
     IGNORE: RC
 
 igraph_graphlets_candidate_basis:
-    IGNORE: RR, RC
 
 igraph_graphlets_project:
-    IGNORE: RR, RC, RInit
 
 #######################################
 # Hierarchical random graphs
@@ -723,7 +707,6 @@ igraph_get_adjacency:
 
 
 igraph_get_edgelist:
-    IGNORE: RR, RC
 
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
@@ -742,26 +725,20 @@ igraph_read_graph_lgl:
     IGNORE: RR, RC
 
 igraph_read_graph_pajek:
-    IGNORE: RR, RC
 
 igraph_read_graph_graphml:
-    IGNORE: RR, RC
 
 # TODO: temporarily disabled
 igraph_read_graph_dimacs_flow:
     IGNORE: RR, RC
 
 igraph_read_graph_graphdb:
-    IGNORE: RR, RC
 
 igraph_read_graph_gml:
-    IGNORE: RR, RC
 
 igraph_read_graph_dl:
-    IGNORE: RR, RC
 
 igraph_write_graph_edgelist:
-    IGNORE: RR, RC
 
 igraph_write_graph_ncol:
     IGNORE: RR, RC
@@ -770,13 +747,10 @@ igraph_write_graph_lgl:
     IGNORE: RR, RC
 
 igraph_write_graph_leda:
-    IGNORE: RR, RC
 
 igraph_write_graph_graphml:
-    IGNORE: RR, RC
 
 igraph_write_graph_pajek:
-    IGNORE: RR, RC
 
 # TODO: temporarily disabled
 igraph_write_graph_dimacs_flow:
@@ -786,10 +760,11 @@ igraph_write_graph_dimacs_flow:
         VECTOR capacity
 
 igraph_write_graph_gml:
-    IGNORE: RR, RC
+    R:
+        DEFAULTS:
+            options: 0L
 
 igraph_write_graph_dot:
-    IGNORE: RR, RC
 
 #######################################
 # Motifs
@@ -800,31 +775,25 @@ igraph_write_graph_dot:
 #######################################
 
 igraph_disjoint_union:
-    IGNORE: RR, RC, RInit
 
 igraph_disjoint_union_many:
     IGNORE: RR, RC, RInit
 
 igraph_union:
-    IGNORE: RR, RC
 
 igraph_union_many:
     IGNORE: RR, RC, RInit
 
 igraph_intersection:
-    IGNORE: RR, RC
 
 igraph_intersection_many:
     IGNORE: RR, RC, RInit
 
 igraph_difference:
-    IGNORE: RR, RC
 
 igraph_complementer:
-    IGNORE: RR, RC
 
 igraph_compose:
-    IGNORE: RR, RC, RInit
 
 #######################################
 # Maximum flows, minimum cuts
@@ -834,10 +803,8 @@ igraph_maxflow_value:
     IGNORE: RR, RC, RInit
 
 igraph_mincut:
-    IGNORE: RR, RC
 
 igraph_mincut_value:
-    IGNORE: RR, RC
 
 igraph_st_mincut_value:
     IGNORE: RR, RC
@@ -846,13 +813,11 @@ igraph_st_vertex_connectivity:
     IGNORE: RR, RC, RInit
 
 igraph_vertex_connectivity:
-    IGNORE: RR, RC
 
 igraph_st_edge_connectivity:
     IGNORE: RR, RC
 
 igraph_edge_connectivity:
-    IGNORE: RR, RC
 
 igraph_edge_disjoint_paths:
     IGNORE: RR, RC
@@ -861,17 +826,14 @@ igraph_vertex_disjoint_paths:
     IGNORE: RR, RC
 
 igraph_adhesion:
-    IGNORE: RR, RC
 
 igraph_cohesion:
-    IGNORE: RR, RC
 
 #######################################
 # Listing s-t cuts, separators
 #######################################
 
 igraph_cohesive_blocks:
-    IGNORE: RR, RC
     R:
         CLASS: cohesiveBlocks
 
@@ -880,7 +842,6 @@ igraph_cohesive_blocks:
 #######################################
 
 igraph_coreness:
-    IGNORE: RR, RC
 
 #######################################
 # Graph isomorphism
@@ -945,7 +906,6 @@ igraph_sir:
 #######################################
 
 igraph_running_mean:
-    IGNORE: RR, RC
 
 igraph_random_sample:
     IGNORE: RR, RC

@@ -69,7 +69,7 @@ CSTRING:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            %C% = Rf_translateCharUTF8(%I%);
+            %C% = Rf_translateCharUTF8(STRING_ELT(%I%, 0));
     OUTCONV:
         OUT: |-
             PROTECT(%I% = Rf_ScalarString(Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8)));
@@ -908,6 +908,10 @@ PLFIT:
     CALL: '&%C%'
     OUTCONV:
         OUT: PROTECT(%I%=R_igraph_plfit_result_to_SEXP(&%C%));
+
+
+REWIRING_STATS:
+    CALL: '&%C%'
 
 MAXFLOW_STATS:
     CALL: '&%C%'
