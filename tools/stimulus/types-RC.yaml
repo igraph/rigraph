@@ -555,7 +555,7 @@ EDGE_INDICES:
     HEADER: {}
 
 EXTRA:
-    CALL: '0'
+    CALL: ~
     CTYPE: ~
     HEADER: {}
 
