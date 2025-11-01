@@ -1704,11 +1704,11 @@ cluster_leiden <- function(
     res <- community_leiden_impl(
       graph = graph,
       weights = weights,
-      vertex.weights = vertex_weights,
+      vertex_weights = vertex_weights,
       resolution = resolution,
       beta = beta,
       start = !is.null(membership),
-      n.iterations = n_iterations,
+      n_iterations = n_iterations,
       membership = membership
     )
 
@@ -1721,11 +1721,11 @@ cluster_leiden <- function(
       res <- community_leiden_impl(
         graph = graph,
         weights = weights,
-        vertex.weights = vertex_weights,
+        vertex_weights = vertex_weights,
         resolution = resolution,
         beta = beta,
         start = !is.null(membership),
-        n.iterations = 1,
+        n_iterations = 1,
         membership = membership
       )
 
@@ -2686,9 +2686,9 @@ cluster_infomap <- function(
 ) {
   res <- community_infomap_impl(
     graph = graph,
-    e.weights = e.weights,
-    v.weights = v.weights,
-    nb.trials = nb.trials
+    e_weights = e.weights,
+    v_weights = v.weights,
+    nb_trials = nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -3228,7 +3228,7 @@ contract <- function(
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
-    vertex.attr.comb = vertex.attr.comb
+    vertex_attr_comb = vertex.attr.comb
   )
 }
 
