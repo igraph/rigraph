@@ -49,6 +49,7 @@ pak::pak(dependencies = "Config/Needs/build")
 
 - IMPORTANT: PR titles end up in `NEWS.md` grouped by conventional commit label. PRs and commits use the conventional commit style with backticks for code references such as `function_call()`
 - PRs are generally squashed, a clean history within a PR is not necessary
+- Before resuming work on a PR, always merge the current base branch (typically `main`)
 
 ### Comment Style
 
