@@ -2745,7 +2745,7 @@ sample_k_regular <- function(
   multiple = FALSE
 ) {
   k_regular_game_impl(
-    no.of_nodes = no.of.nodes,
+    no_of_nodes = no.of.nodes,
     k = k,
     directed = directed,
     multiple = multiple
@@ -3002,7 +3002,7 @@ sample_fitness <- function(
   multiple = FALSE
 ) {
   static_fitness_game_impl(
-    no.of_edges = no.of.edges,
+    no_of_edges = no.of.edges,
     fitness_out = fitness.out,
     fitness_in = fitness.in,
     loops = loops,
@@ -3085,13 +3085,13 @@ sample_fitness_pl <- function(
   finite.size.correction = TRUE
 ) {
   static_power_law_game_impl(
-    no.of_nodes = no.of.nodes,
-    no.of_edges = no.of.edges,
+    no_of_nodes = no.of.nodes,
+    no_of_edges = no.of.edges,
     exponent_out = exponent.out,
     exponent_in = exponent.in,
     loops = loops,
     multiple = multiple,
-    finite.size_correction = finite.size.correction
+    finite_size_correction = finite.size.correction
   )
 }
 

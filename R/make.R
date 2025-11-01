@@ -2996,7 +2996,7 @@ realize_bipartite_degseq <- function(
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
-    allowed.edge_types = allowed.edge.types,
+    allowed_edge_types = allowed.edge.types,
     method = method
   )
 

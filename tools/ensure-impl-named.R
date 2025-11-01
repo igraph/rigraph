@@ -58,15 +58,17 @@ for (file in all_files) {
       }
     )
 
+    # Convert dots to underscores in parameter names
+    names_idx <- which(names(matched_call) != "...")[-1]
+    names(matched_call)[names_idx] <- gsub(
+      ".",
+      "_",
+      names(matched_call)[names_idx],
+      fixed = TRUE
+    )
+
     deparsed <- deparse(matched_call, width.cutoff = 500)
     deparsed[[1]] <- sub("(", "(\n    ", deparsed[[1]], fixed = TRUE)
-    # Convert dots to underscores in parameter names
-    deparsed <- gsub(
-      "\\b([a-z]+)\\.([a-z]+)\\s*=",
-      "\\1_\\2 =",
-      deparsed,
-      perl = TRUE
-    )
     print(deparsed)
 
     # Splice
