@@ -1943,8 +1943,11 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- constraint_impl(
+    graph = graph,
+    vids = nodes,
+    weights = weights
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
   }
@@ -2259,12 +2262,12 @@ make_neighborhood_graph <- make_ego_graph
 #' coreness(g) # small core triangle in a ring
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
+  res <- coreness_impl(
+    graph = graph,
+    mode = mode
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
@@ -2302,18 +2305,12 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' topo_sort(g)
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-
-  res
+  topological_sorting_impl(
+    graph = graph,
+    mode = mode
+  )
 }
 
 #' Finding a feedback arc set in a graph
