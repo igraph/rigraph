@@ -888,6 +888,25 @@
       Error in `preference_game_impl()`:
       ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must be non-negative. Invalid value
 
+# asymmetric_preference_game_impl basic
+
+    Code
+      asymmetric_preference_game_impl(nodes = 5, out_types = 2, in_types = 2,
+        type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2), pref_matrix = matrix(
+          c(0.5, 0.5, 0.5, 0.5), 2, 2))
+    Output
+      $graph
+      IGRAPH D--- 5 9 -- 
+      + edges:
+      [1] 2->4 4->2 5->2 1->3 4->3 4->5 3->1 1->4 1->5
+      
+      $node_type_out_vec
+      [1] 1 0 1 1 1
+      
+      $node_type_in_vec
+      [1] 1 0 0 1 1
+      
+
 # asymmetric_preference_game_impl errors
 
     Code
@@ -896,7 +915,7 @@
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
       Error in `asymmetric_preference_game_impl()`:
-      ! unused argument (type.dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
+      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must not be negative. Invalid value
 
 # rewire_edges_impl basic
 
@@ -992,13 +1011,57 @@
       x Problematic argument:
       * ... = pairlist(out_weights = -1)
 
+# static_fitness_game_impl basic
+
+    Code
+      static_fitness_game_impl(no_of_edges = 3, fitness_out = c(1, 2, 3))
+    Output
+      IGRAPH U--- 3 3 -- Static fitness model
+      + attr: name (g/c), loops (g/l), multiple (g/l)
+      + edges:
+      [1] 1--2 1--3 2--3
+
+---
+
+    Code
+      static_fitness_game_impl(no_of_edges = 3, fitness_out = c(1, 2, 3), fitness_in = c(
+        1, 2, 3), loops = TRUE, multiple = TRUE)
+    Output
+      IGRAPH D--- 3 3 -- Static fitness model
+      + attr: name (g/c), loops (g/l), multiple (g/l)
+      + edges:
+      [1] 1->2 2->3 1->3
+
 # static_fitness_game_impl errors
 
     Code
       static_fitness_game_impl(no.of.edges = -1, fitness.out = c(1, 2, 3))
     Condition
       Error in `static_fitness_game_impl()`:
-      ! unused argument (no.of_edges = -1)
+      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
+
+# static_power_law_game_impl basic
+
+    Code
+      static_power_law_game_impl(no_of_nodes = 5, no_of_edges = 4, exponent_out = 2.5)
+    Output
+      IGRAPH U--- 5 4 -- Static power law model
+      + attr: name (g/c), exponent_out (g/n), exponent_in (g/n), loops (g/l),
+      | multiple (g/l), finite_size_correction (g/l)
+      + edges:
+      [1] 1--5 2--4 3--5 4--5
+
+---
+
+    Code
+      static_power_law_game_impl(no_of_nodes = 5, no_of_edges = 4, exponent_out = 2.5,
+        exponent_in = 2, loops = TRUE, multiple = TRUE, finite_size_correction = FALSE)
+    Output
+      IGRAPH D--- 5 4 -- Static power law model
+      + attr: name (g/c), exponent_out (g/n), exponent_in (g/n), loops (g/l),
+      | multiple (g/l), finite_size_correction (g/l)
+      + edges:
+      [1] 1->1 3->5 1->4 5->1
 
 # static_power_law_game_impl errors
 
@@ -1006,7 +1069,27 @@
       static_power_law_game_impl(no.of.nodes = -1, no.of.edges = 4, exponent.out = 2.5)
     Condition
       Error in `static_power_law_game_impl()`:
-      ! unused arguments (no.of_nodes = -1, no.of_edges = 4)
+      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of nodes cannot be negative, got -1. Invalid value
+
+# k_regular_game_impl basic
+
+    Code
+      k_regular_game_impl(no_of_nodes = 5, k = 2)
+    Output
+      IGRAPH U--- 5 5 -- k-regular graph
+      + attr: name (g/c), k (g/n)
+      + edges:
+      [1] 1--3 1--5 2--3 2--4 4--5
+
+---
+
+    Code
+      k_regular_game_impl(no_of_nodes = 5, k = 2, directed = TRUE, multiple = TRUE)
+    Output
+      IGRAPH D--- 5 10 -- k-regular graph
+      + attr: name (g/c), k (g/n)
+      + edges:
+       [1] 3->4 3->3 2->1 5->5 1->5 4->3 5->2 4->1 1->2 2->4
 
 # k_regular_game_impl errors
 
@@ -1014,7 +1097,7 @@
       k_regular_game_impl(no.of.nodes = -1, k = 2)
     Condition
       Error in `k_regular_game_impl()`:
-      ! unused argument (no.of_nodes = -1)
+      ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
 
 # sbm_game_impl basic
 
@@ -10147,21 +10230,24 @@
     Code
       incident_impl(graph = g, vid = 2, mode = "out")
     Output
-      [1] 2
+      + 1/3 edge:
+      [1] 2->3
 
 ---
 
     Code
       incident_impl(graph = g, vid = 2, mode = "in")
     Output
-      [1] 1
+      + 1/3 edge:
+      [1] 1->2
 
 ---
 
     Code
       incident_impl(graph = g, vid = 2, mode = "all")
     Output
-      [1] 1 2
+      + 2/3 edges:
+      [1] 1->2 2->3
 
 # incident_impl errors
 
