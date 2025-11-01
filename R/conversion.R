@@ -1671,9 +1671,10 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
 }
 
 #' @rdname graph_from_data_frame
-#' @param ... Passed to `graph_from_data_frame()`.
 #' @export
-from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
+from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
+  constructor_spec(graph_from_data_frame, d, directed = directed, vertices = vertices)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1726,6 +1727,7 @@ graph_from_edgelist <- function(el, directed = TRUE) {
 }
 
 #' @rdname graph_from_edgelist
-#' @param ... Passed to `graph_from_edgelist()`.
 #' @export
-from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)
+from_edgelist <- function(el, directed = TRUE) {
+  constructor_spec(graph_from_edgelist, el, directed = directed)
+}

@@ -388,11 +388,10 @@ is_symmetric <- function(x) {
 }
 
 #' @rdname graph_from_adjacency_matrix
-#' @param ... Passed to `graph_from_adjacency_matrix()`.
 #' @family adjacency
 #' @export
-from_adjacency <- function(...) {
-  constructor_spec(graph_from_adjacency_matrix, ...)
+from_adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA) {
+  constructor_spec(graph_from_adjacency_matrix, adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
 }
 
 graph.adjacency.dense <- function(

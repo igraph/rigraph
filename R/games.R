@@ -976,9 +976,10 @@ sample_pa <- function(
 }
 
 #' @rdname sample_pa
-#' @param ... Passed to `sample_pa()`.
 #' @export
-pa <- function(...) constructor_spec(sample_pa, ...)
+pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL, out.pref = FALSE, zero.appeal = 1, directed = TRUE, algorithm = c("psumtree", "psumtree-multiple", "bag"), start.graph = NULL) {
+  constructor_spec(sample_pa, n, power = power, m = m, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, zero.appeal = zero.appeal, directed = directed, algorithm = algorithm, start.graph = start.graph)
+}
 
 
 ## -----------------------------------------------------------------
@@ -1039,9 +1040,10 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
-#' @param ... Passed to `sample_gnp()`.
 #' @export
-gnp <- function(...) constructor_spec(sample_gnp, ...)
+gnp <- function(n, p, directed = FALSE, loops = FALSE) {
+  constructor_spec(sample_gnp, n, p, directed = directed, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1092,9 +1094,10 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
-#' @param ... Passed to `sample_gnm()`.
 #' @export
-gnm <- function(...) constructor_spec(sample_gnm, ...)
+gnm <- function(n, m, directed = FALSE, loops = FALSE) {
+  constructor_spec(sample_gnm, n, m, directed = directed, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1473,9 +1476,10 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 }
 
 #' @rdname sample_growing
-#' @param ... Passed to `sample_growing()`.
 #' @export
-growing <- function(...) constructor_spec(sample_growing, ...)
+growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
+  constructor_spec(sample_growing, n, m = m, ..., directed = directed, citation = citation)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1704,9 +1708,10 @@ sample_pa_age <- function(
 }
 
 #' @rdname sample_pa_age
-#' @param ... Passed to `sample_pa_age()`.
 #' @export
-pa_age <- function(...) constructor_spec(sample_pa_age, ...)
+pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300, out.dist = NULL, out.seq = NULL, out.pref = FALSE, directed = TRUE, zero.deg.appeal = 1, zero.age.appeal = 0, deg.coef = 1, age.coef = 1, time.window = NULL) {
+  constructor_spec(sample_pa_age, n, pa.exp, aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1784,7 +1789,9 @@ sample_traits_callaway <- function(
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
 #' @export
-traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
+traits_callaway <- function(nodes, types, edge.per.step = 1, type.dist = rep(1, types), pref.matrix = matrix(1, types, types), directed = FALSE) {
+  constructor_spec(sample_traits_callaway, nodes, types, edge.per.step = edge.per.step, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
+}
 
 #' @rdname sample_traits_callaway
 #' @export
@@ -1818,7 +1825,9 @@ sample_traits <- function(
 
 #' @rdname sample_traits_callaway
 #' @export
-traits <- function(...) constructor_spec(sample_traits, ...)
+traits <- function(nodes, types, k = 1, type.dist = rep(1, types), pref.matrix = matrix(1, types, types), directed = FALSE) {
+  constructor_spec(sample_traits, nodes, types, k = k, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1873,9 +1882,10 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 }
 
 #' @rdname sample_grg
-#' @param ... Passed to `sample_grg()`.
 #' @export
-grg <- function(...) constructor_spec(sample_grg, ...)
+grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
+  constructor_spec(sample_grg, nodes, radius, torus = torus, coords = coords)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1980,7 +1990,9 @@ sample_pref <- function(
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
 #' @export
-pref <- function(...) constructor_spec(sample_pref, ...)
+pref <- function(nodes, types, type.dist = rep(1, types), fixed.sizes = FALSE, pref.matrix = matrix(1, types, types), directed = FALSE, loops = FALSE) {
+  constructor_spec(sample_pref, nodes, types, type.dist = type.dist, fixed.sizes = fixed.sizes, pref.matrix = pref.matrix, directed = directed, loops = loops)
+}
 
 #' @rdname sample_pref
 #' @export
@@ -2029,7 +2041,9 @@ sample_asym_pref <- function(
 
 #' @rdname sample_pref
 #' @export
-asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
+asym_pref <- function(nodes, types, type.dist.matrix = matrix(1, types, types), pref.matrix = matrix(1, types, types), loops = FALSE) {
+  constructor_spec(sample_asym_pref, nodes, types, type.dist.matrix = type.dist.matrix, pref.matrix = pref.matrix, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2127,9 +2141,10 @@ sample_smallworld <- function(
 }
 
 #' @rdname sample_smallworld
-#' @param ... Passed to `sample_smallworld()`.
 #' @export
-smallworld <- function(...) constructor_spec(sample_smallworld, ...)
+smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
+  constructor_spec(sample_smallworld, dim, size, nei, p, loops = loops, multiple = multiple)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2187,9 +2202,10 @@ sample_last_cit <- function(
 }
 
 #' @rdname sample_last_cit
-#' @param ... Passed to the actual constructor.
 #' @export
-last_cit <- function(...) constructor_spec(sample_last_cit, ...)
+last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins + 1))^-3, directed = TRUE) {
+  constructor_spec(sample_last_cit, n, edges = edges, agebins = agebins, pref = pref, directed = directed)
+}
 
 #' @rdname sample_last_cit
 #' @export
@@ -2222,7 +2238,9 @@ sample_cit_types <- function(
 
 #' @rdname sample_last_cit
 #' @export
-cit_types <- function(...) constructor_spec(sample_cit_types, ...)
+cit_types <- function(n, edges = 1, types = rep(0, n), pref = rep(1, length(types)), directed = TRUE, attr = TRUE) {
+  constructor_spec(sample_cit_types, n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
+}
 
 #' @rdname sample_last_cit
 #' @export
@@ -2256,7 +2274,9 @@ sample_cit_cit_types <- function(
 
 #' @rdname sample_last_cit
 #' @export
-cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
+cit_cit_types <- function(n, edges = 1, types = rep(0, n), pref = matrix(1, nrow = length(types), ncol = length(types)), directed = TRUE, attr = TRUE) {
+  constructor_spec(sample_cit_cit_types, n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2359,14 +2379,16 @@ bipartite <- function(..., type = NULL) {
 }
 
 #' @rdname sample_bipartite_gnm
-#' @param ... Passed to `sample_bipartite_gnm()`.
 #' @export
-bipartite_gnm <- function(...) constructor_spec(sample_bipartite_gnm, ...)
+bipartite_gnm <- function(n1, n2, m, ..., directed = FALSE, mode = c("out", "in", "all")) {
+  constructor_spec(sample_bipartite_gnm, n1, n2, m, ..., directed = directed, mode = mode)
+}
 
 #' @rdname sample_bipartite_gnm
-#' @param ... Passed to `sample_bipartite_gnp()`.
 #' @export
-bipartite_gnp <- function(...) constructor_spec(sample_bipartite_gnp, ...)
+bipartite_gnp <- function(n1, n2, p, ..., directed = FALSE, mode = c("out", "in", "all")) {
+  constructor_spec(sample_bipartite_gnp, n1, n2, p, ..., directed = directed, mode = mode)
+}
 
 #' Bipartite random graphs
 #'
@@ -2517,9 +2539,10 @@ sample_sbm <- function(
 }
 
 #' @rdname sample_sbm
-#' @param ... Passed to `sample_sbm()`.
 #' @export
-sbm <- function(...) constructor_spec(sample_sbm, ...)
+sbm <- function(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE) {
+  constructor_spec(sample_sbm, n, pref.matrix, block.sizes, directed = directed, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2607,10 +2630,9 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 }
 
 #' @rdname sample_hierarchical_sbm
-#' @param ... Passed to `sample_hierarchical_sbm()`.
 #' @export
-hierarchical_sbm <- function(...) {
-  constructor_spec(sample_hierarchical_sbm, ...)
+hierarchical_sbm <- function(n, m, rho, C, p) {
+  constructor_spec(sample_hierarchical_sbm, n, m, rho, C, p)
 }
 
 ## -----------------------------------------------------------------
@@ -2663,9 +2685,10 @@ sample_dot_product <- function(vecs, directed = FALSE) {
 }
 
 #' @rdname sample_dot_product
-#' @param ... Passed to `sample_dot_product()`.
 #' @export
-dot_product <- function(...) constructor_spec(sample_dot_product, ...)
+dot_product <- function(vecs, directed = FALSE) {
+  constructor_spec(sample_dot_product, vecs, directed = directed)
+}
 
 
 #' A graph with subgraphs that are each a random graph.
