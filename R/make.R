@@ -2026,8 +2026,27 @@ make_lattice <- function(
 
 #' @rdname make_lattice
 #' @export
-lattice <- function(dimvector = NULL, length = NULL, dim = NULL, nei = 1, directed = FALSE, mutual = FALSE, periodic = FALSE, circular = deprecated()) {
-  constructor_spec(make_lattice, dimvector = dimvector, length = length, dim = dim, nei = nei, directed = directed, mutual = mutual, periodic = periodic, circular = circular)
+lattice <- function(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+) {
+  constructor_spec(
+    make_lattice,
+    dimvector = dimvector,
+    length = length,
+    dim = dim,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic,
+    circular = circular
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2071,7 +2090,13 @@ make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 #' @rdname make_ring
 #' @export
 ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
-  constructor_spec(make_ring, n, directed = directed, mutual = mutual, circular = circular)
+  constructor_spec(
+    make_ring,
+    n,
+    directed = directed,
+    mutual = mutual,
+    circular = circular
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2135,7 +2160,12 @@ make_wheel <- function(
 
 #' @rdname make_wheel
 #' @export
-wheel <- function(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1) {
+wheel <- function(
+  n,
+  ...,
+  mode = c("in", "out", "mutual", "undirected"),
+  center = 1
+) {
   constructor_spec(make_wheel, n, ..., mode = mode, center = center)
 }
 
@@ -2611,8 +2641,19 @@ make_full_bipartite_graph <- function(
 
 #' @rdname make_full_bipartite_graph
 #' @export
-full_bipartite_graph <- function(n1, n2, directed = FALSE, mode = c("all", "out", "in")) {
-  constructor_spec(make_full_bipartite_graph, n1, n2, directed = directed, mode = mode)
+full_bipartite_graph <- function(
+  n1,
+  n2,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  constructor_spec(
+    make_full_bipartite_graph,
+    n1,
+    n2,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2753,7 +2794,11 @@ make_full_multipartite <- function(
 
 #' @rdname make_full_multipartite
 #' @export
-full_multipartite <- function(n, directed = FALSE, mode = c("all", "out", "in")) {
+full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
   constructor_spec(make_full_multipartite, n, directed = directed, mode = mode)
 }
 

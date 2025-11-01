@@ -1673,7 +1673,12 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
 #' @rdname graph_from_data_frame
 #' @export
 from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
-  constructor_spec(graph_from_data_frame, d, directed = directed, vertices = vertices)
+  constructor_spec(
+    graph_from_data_frame,
+    d,
+    directed = directed,
+    vertices = vertices
+  )
 }
 
 ## -----------------------------------------------------------------

@@ -7,12 +7,10 @@
 \usage{
 graph_from_atlas(n)
 
-atlas(...)
+atlas(n)
 }
 \arguments{
 \item{n}{The id of the graph to create.}
-
-\item{...}{Passed to \code{graph_from_atlas()}.}
 }
 \value{
 An igraph graph.

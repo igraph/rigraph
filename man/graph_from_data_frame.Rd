@@ -10,7 +10,7 @@ as_data_frame(x, what = c("edges", "vertices", "both"))
 
 graph_from_data_frame(d, directed = TRUE, vertices = NULL)
 
-from_data_frame(...)
+from_data_frame(d, directed = TRUE, vertices = NULL)
 }
 \arguments{
 \item{x}{An igraph object.}
@@ -28,8 +28,6 @@ version 0.7 this argument is coerced to a data frame with
 \item{vertices}{A data frame with vertex metadata, or \code{NULL}. See
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
-
-\item{...}{Passed to \code{graph_from_data_frame()}.}
 }
 \value{
 An igraph graph object for \code{graph_from_data_frame()}, and either a
