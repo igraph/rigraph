@@ -147,11 +147,10 @@ graphlet_basis <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  ## Function call
-  res <- .Call(Rx_igraph_graphlets_candidate_basis, graph, weights)
-
-  res
+  graphlets_candidate_basis_impl(
+    graph = graph,
+    weights = weights
+  )
 }
 
 #' @rdname graphlet_basis
@@ -176,11 +175,13 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(Rx_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
-
-  res
+  graphlets_project_impl(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    mu = Mu,
+    niter = niter
+  )
 }
 
 #################

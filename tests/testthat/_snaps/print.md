@@ -4,7 +4,7 @@
       E(g)
     Output
       + 1/1 edge (vertex names):
-      [1] A->B
+      [1] A->A
 
 # vs printing
 
@@ -72,22 +72,6 @@
       [1] 1 2 3 4
       
       
-
-# es printing
-
-    Code
-      E(g)[[1]]
-    Output
-      + 1/3 edge (vertex names):
-        tail head tid hid color weight
-      1    A    B   1   2   red     10
-    Code
-      E(g)[[2:3]]
-    Output
-      + 2/3 edges (vertex names):
-        tail head tid hid color weight
-      2    A    C   1   3   red      9
-      3    B    C   2   3   red      3
 
 # es printing, complex attributes
 

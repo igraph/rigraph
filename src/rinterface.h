@@ -146,6 +146,7 @@ void R_check_int_scalar(SEXP value);
 void R_check_real_scalar(SEXP value);
 void R_check_bool_scalar(SEXP value);
 FILE* R_igraph_fopen_read(SEXP instream);
+FILE* R_igraph_fopen_write(SEXP outstream);
 
 igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res);
 igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);

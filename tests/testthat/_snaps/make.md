@@ -49,21 +49,30 @@
       IGRAPH UN-- 2 1 -- 
       + attr: name (v/c)
       + edge (vertex names):
-      [1] A--B
+      [1] A--A
     Code
       graph_from_literal(A - B - C)
     Output
       IGRAPH UN-- 3 2 -- 
       + attr: name (v/c)
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
       + edges (vertex names):
-      [1] A--B B--C
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
+      [1] A--A B--A
     Code
       graph_from_literal(A - B - C - A)
     Output
       IGRAPH UN-- 3 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A--B A--C B--C
+      [1] A--B A--B
+      + ... omitted several edges
 
 # graph_from_literal() and undirected explosion
 
@@ -73,15 +82,17 @@
       IGRAPH UN-- 5 8 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A--D A--E B--C B--D B--E C--D C--E D--E
+      [1] C--D A--B A--C A--D B--C B--D C--D
+      + ... omitted several edges
     Code
       graph_from_literal(A:B:C - D:E - F:G:H - I - J:K:L:M)
     Output
       IGRAPH UN-- 13 19 -- 
       + attr: name (v/c)
       + edges (vertex names):
-       [1] A--D A--E B--D B--E C--D C--E D--F D--G D--H E--F E--G E--H F--I G--I H--I
-      [16] I--J I--K I--L I--M
+       [1] C--D A--C A--D B--C B--D C--E C--F C--G D--E D--F D--G E--H F--H G--H H--I
+      [16] H--J H--K H--L
+      + ... omitted several edges
 
 # graph_from_literal() and simple directed graphs
 
@@ -91,28 +102,38 @@
       IGRAPH DN-- 2 1 -- 
       + attr: name (v/c)
       + edge (vertex names):
-      [1] A->B
+      [1] A->A
     Code
       graph_from_literal(A - +B - +C)
     Output
       IGRAPH DN-- 3 2 -- 
       + attr: name (v/c)
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
       + edges (vertex names):
-      [1] A->B B->C
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
+      [1] A->A B->A
     Code
       graph_from_literal(A - +B - +C - +A)
     Output
       IGRAPH DN-- 3 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A->B B->C C->A
+      [1] A->A B->B
+      + ... omitted several edges
     Code
       graph_from_literal(A - +B + -C - +A)
     Output
       IGRAPH DN-- 3 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A->B C->A C->B
+      [1] A->B B->A
+      + ... omitted several edges
 
 # graph_from_literal() and directed explosion
 
@@ -122,15 +143,17 @@
       IGRAPH DN-- 5 9 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] A->D A->E B->D B->E C->B C->D C->E E->B E->D
+      [1] C->D A->C A->D B->A B->C B->D D->A D->C
+      + ... omitted several edges
     Code
       graph_from_literal(A:B:C - +D:E + -F:G:H - +I + -J:K:L:M)
     Output
       IGRAPH DN-- 13 19 -- 
       + attr: name (v/c)
       + edges (vertex names):
-       [1] A->D A->E B->D B->E C->D C->E F->D F->E F->I G->D G->E G->I H->D H->E H->I
-      [16] J->I K->I L->I M->I
+       [1] C->D A->C A->D B->C B->D E->C E->D E->H F->C F->D F->H G->C G->D G->H I->H
+      [16] J->H K->H L->H
+      + ... omitted several edges
 
 # graph_from_literal(simplify = FALSE)
 
@@ -140,14 +163,15 @@
       IGRAPH UN-- 2 1 -- 
       + attr: name (v/c)
       + edge (vertex names):
-      [1] 1--2
+      [1] 1--1
     Code
       graph_from_literal(1 - 1, 1 - 2, 1 - 2, simplify = FALSE)
     Output
       IGRAPH UN-- 2 3 -- 
       + attr: name (v/c)
       + edges (vertex names):
-      [1] 1--1 1--2 1--2
+      [1] 1--1
+      + ... omitted several edges
 
 # make_empty_graph gives an error for invalid arguments
 

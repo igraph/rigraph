@@ -9,7 +9,7 @@
       es
     Output
       + 10/10 edges:
-       [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
+       [1] 0--1 1--2 2--3 3--4 4--5 5--6 6--7 7--8 8--9 0--9
     Code
       vs[1:5]
     Output
@@ -19,7 +19,7 @@
       es[1:5]
     Output
       + 5/10 edges:
-      [1] 1--2 2--3 3--4 4--5 5--6
+      [1] 0--1 1--2 2--3 3--4 4--5
     Code
       vs[numeric()]
     Output
@@ -43,7 +43,8 @@
       es
     Output
       + 10/10 edges (vertex names):
-       [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
+      [1] a--a b--b c--c d--d e--e f--f g--g h--h i--i
+      + ... omitted several edges
     Code
       vs[1:5]
     Output
@@ -53,7 +54,11 @@
       es[1:5]
     Output
       + 5/10 edges (vertex names):
-      [1] a--b b--c c--d d--e e--f
+    Condition
+      Warning in `matrix()`:
+      data length [9] is not a sub-multiple or multiple of the number of rows [5]
+    Output
+      [1] a--a b--b c--c d--d e--a
     Code
       vs[numeric()]
     Output
@@ -90,7 +95,7 @@
       es
     Output
       + 10/? edges (deleted) (vertex names):
-       [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j
+      [1] a|a b|b c|c d|d e|e f|f g|g h|h i|i
 
 # logical indices are not recycled
 

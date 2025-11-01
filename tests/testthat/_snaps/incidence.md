@@ -6,7 +6,8 @@
       IGRAPH UN-B 8 7 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-      [1] A--c A--d B--b B--c B--e C--b C--d
+      [1] b--c A--a A--b A--d B--a B--c
+      + ... omitted several edges
 
 ---
 
@@ -16,7 +17,8 @@
       IGRAPH UNWB 8 7 -- 
       + attr: type (v/l), name (v/c), weight (e/n)
       + edges (vertex names):
-      [1] B--b C--b A--c B--c A--d C--d B--e
+      [1] A--a B--a b--A b--c B--c A--d
+      + ... omitted several edges
 
 # graph_from_biadjacency_matrix() works -- dense + multiple
 
@@ -26,7 +28,8 @@
       IGRAPH UN-B 8 10 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-       [1] A--c A--d A--d A--e B--b B--e C--b C--c C--c C--e
+      [1] b--c c--d A--a A--d B--a B--b B--b B--d
+      + ... omitted several edges
 
 # graph_from_biadjacency_matrix() works -- sparse
 
@@ -36,7 +39,8 @@
       IGRAPH UN-B 8 7 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-      [1] B--b C--b A--c B--c A--d C--d B--e
+      [1] A--a B--a b--A b--c B--c A--d
+      + ... omitted several edges
 
 ---
 
@@ -46,7 +50,8 @@
       IGRAPH UNWB 8 7 -- 
       + attr: type (v/l), name (v/c), weight (e/n)
       + edges (vertex names):
-      [1] B--b C--b A--c B--c A--d C--d B--e
+      [1] A--a B--a b--A b--c B--c A--d
+      + ... omitted several edges
 
 # graph_from_biadjacency_matrix() works -- sparse + multiple
 
@@ -56,7 +61,8 @@
       IGRAPH UN-B 8 10 -- 
       + attr: type (v/l), name (v/c)
       + edges (vertex names):
-       [1] B--b C--b A--c C--c C--c A--d A--d A--e B--e C--e
+      [1] A--a B--a b--B b--B b--c c--d A--d B--d
+      + ... omitted several edges
 
 # graph_from_biadjacency_matrix() errors well
 
