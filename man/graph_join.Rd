@@ -18,10 +18,12 @@ x \%j\% y
 A new graph object.
 }
 \description{
-The join of two graphs is created by connecting all vertices from
-the first graph to all vertices in the second graph.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
+The join of two graphs is created by connecting all vertices from
+the first graph to all vertices in the second graph.
+
 \code{graph_join()} creates the join of two graphs. The graphs must be disjoint,
 i.e., have distinct vertex sets. First the vertices of the second graph will
 be relabeled with new vertex IDs, then the union of the two graphs is formed.
@@ -85,6 +87,7 @@ Other functions for manipulating graph structure:
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{functions for manipulating graph structure}
+\concept{graph_operators}
 \keyword{graphs}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_join}{\code{join()}}.}
 

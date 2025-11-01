@@ -304,6 +304,8 @@ disjoint_union <- function(...) {
 
 #' Join of two graphs
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' The join of two graphs is created by connecting all vertices from
 #' the first graph to all vertices in the second graph.
 #'
@@ -338,6 +340,7 @@ disjoint_union <- function(...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
+#' @concept graph_operators
 #' @family functions for manipulating graph structure
 #' @examples
 #'
