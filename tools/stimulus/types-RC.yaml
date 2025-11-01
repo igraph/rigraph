@@ -574,6 +574,11 @@ ASTAR_HEURISTIC_FUNC:
     CTYPE: ~
     HEADER: {}
 
+MOTIFS_HANDLER_FUNC:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 ATTRIBUTES:
     CALL: '0'
     CTYPE: ~

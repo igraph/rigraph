@@ -177,3 +177,77 @@ test_that("dyad_census works with celegansneural", {
   )
   expect_equal(sum(unlist(dc)), vcount(ce) * (vcount(ce) - 1) / 2)
 })
+
+test_that("motifs_randesu_callback works", {
+  withr::local_seed(123)
+  
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+  
+  # Count motifs using callback
+  count <- 0
+  isoclasses <- integer(0)
+  
+  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+    count <<- count + 1
+    isoclasses <<- c(isoclasses, isoclass)
+    TRUE  # continue search
+  })
+  
+  expect_true(count > 0)
+  expect_true(all(isoclasses >= 1))
+  expect_true(all(isoclasses <= 16))  # max isoclass for size 3
+})
+
+test_that("motifs_randesu_callback can stop early", {
+  withr::local_seed(123)
+  
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+  
+  # Stop after finding 3 motifs
+  count <- 0
+  
+  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+    count <<- count + 1
+    if (count >= 3) {
+      FALSE  # stop after 3 motifs
+    } else {
+      TRUE   # continue
+    }
+  })
+  
+  expect_equal(count, 3)
+})
+
+test_that("motifs_randesu_callback passes extra argument", {
+  withr::local_seed(123)
+  
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+  
+  # Use extra argument
+  my_data <- list(prefix = "Motif: ")
+  received_extra <- NULL
+  
+  motifs_randesu_callback(g, 3, extra = my_data,
+                         callback = function(graph, vids, isoclass, extra) {
+    received_extra <<- extra
+    FALSE  # stop immediately
+  })
+  
+  expect_equal(received_extra, my_data)
+})
+
+test_that("motifs_randesu_callback receives correct arguments", {
+  withr::local_seed(123)
+  
+  g <- make_graph(~ A - B - C - A)
+  
+  # Check argument types
+  motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+    expect_true(is_igraph(graph))
+    expect_true(is.integer(vids))
+    expect_equal(length(vids), 3)
+    expect_true(is.integer(isoclass))
+    expect_equal(length(isoclass), 1)
+    FALSE  # stop after first motif
+  })
+})

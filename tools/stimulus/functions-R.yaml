@@ -950,6 +950,13 @@ igraph_simple_cycles_callback:
     IGNORE: RR, RC
 
 #######################################
+# Motifs
+#######################################
+
+igraph_motifs_randesu_callback:
+    IGNORE: RR, RC, RInit
+
+#######################################
 # Eulerian functions
 #######################################
 

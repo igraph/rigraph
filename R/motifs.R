@@ -402,3 +402,70 @@ triad_census <- function(graph) {
     graph = graph
   )
 }
+
+
+#' Find motifs with a callback function
+#'
+#' This function searches for motifs in a graph and calls a user-provided
+#' callback function for each motif found.
+#'
+#' @param graph Graph object, the input graph.
+#' @param size The size of the motif, currently sizes 3 and 4 are supported in
+#'   directed graphs and sizes 3-6 in undirected graphs.
+#' @param cut.prob Numeric vector giving the probabilities that the search
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the `size` argument).
+#'   If `NULL`, the default, no cuts are made.
+#' @param callback A function to call for each motif found. The function should
+#'   accept four arguments: `graph` (the graph object), `vids` (integer vector
+#'   of vertex IDs in the motif), `isoclass` (the isomorphism class of the motif),
+#'   and `extra` (the value of the `extra` parameter). The function should return
+#'   `TRUE` to continue the search or `FALSE` to stop it.
+#' @param extra An extra argument to pass to the callback function.
+#' @return `NULL`, invisibly. This function is called for its side effects (calling
+#'   the callback function for each motif).
+#' @seealso [motifs()], [count_motifs()], [isomorphism_class()]
+#'
+#' @export
+#' @family graph motifs
+#' @cdocs igraph_motifs_randesu_callback
+#'
+#' @examples
+#' g <- sample_pa(100)
+#' count <- 0
+#' motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+#'   count <<- count + 1
+#'   TRUE  # continue search
+#' })
+#' cat("Found", count, "motifs\n")
+motifs_randesu_callback <- function(graph, size = 3, cut.prob = NULL,
+                                    callback = NULL, extra = NULL) {
+  ensure_igraph(graph)
+  
+  if (!is.null(cut.prob) && length(cut.prob) != size) {
+    cli::cli_abort("{.arg cut.prob} must be the same length as {.arg size}")
+  }
+  
+  if (is.null(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  
+  on.exit(.Call(R_igraph_finalizer))
+  
+  # Call the C function
+  .Call(
+    R_igraph_motifs_randesu_callback,
+    graph,
+    as.numeric(size),
+    if (!is.null(cut.prob)) as.numeric(cut.prob) else NULL,
+    callback,
+    extra,
+    environment()
+  )
+  
+  invisible(NULL)
+}
