@@ -1704,7 +1704,8 @@ cluster_leiden <- function(
     res <- community_leiden_impl(
       graph = graph,
       weights = weights,
-      vertex_weights = vertex_weights,
+      vertex_out_weights = vertex_weights,
+      vertex_in_weights = vertex_weights,
       resolution = resolution,
       beta = beta,
       start = !is.null(membership),
@@ -1721,7 +1722,8 @@ cluster_leiden <- function(
       res <- community_leiden_impl(
         graph = graph,
         weights = weights,
-        vertex_weights = vertex_weights,
+        vertex_out_weights = vertex_weights,
+        vertex_in_weights = vertex_weights,
         resolution = resolution,
         beta = beta,
         start = !is.null(membership),
@@ -2429,7 +2431,7 @@ cluster_label_prop0 <- function(
     weights = weights,
     initial = initial,
     fixed = fixed,
-    lpa.variant = lpa_variant
+    lpa_variant = lpa_variant
   )
 
   res <- list()
@@ -2694,8 +2696,8 @@ cluster_infomap <- function(
 ) {
   res <- community_infomap_impl(
     graph = graph,
-    e_weights = e.weights,
-    v_weights = v.weights,
+    edge_weights = e.weights,
+    vertex_weights = v.weights,
     nb_trials = nb.trials
   )
 

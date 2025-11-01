@@ -2502,11 +2502,10 @@ sample_sbm <- function(
   loops = FALSE
 ) {
   sbm_game_impl(
-    n = n,
     pref_matrix = pref.matrix,
     block_sizes = block.sizes,
     directed = directed,
-    loops = loops
+    allowed_edge_types = if (loops) "loops" else "simple"
   )
 }
 

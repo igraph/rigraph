@@ -1427,6 +1427,15 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# get_all_simple_paths_impl basic
+
+    Code
+      get_all_simple_paths_impl(graph = g, from = 1, to = 3)
+    Output
+      [[1]]
+      [1] 1 2 3
+      
+
 # get_all_simple_paths_impl errors
 
     Code
@@ -1720,6 +1729,81 @@
       personalized_pagerank_vs_impl(graph = g, reset_vids = 1)
     Output
       [1] 0.3452703 0.4594595 0.1952703
+
+---
+
+    Code
+      personalized_pagerank_vs_impl(graph = g, reset_vids = 1, algo = "arpack",
+        details = TRUE)
+    Output
+      $vector
+      [1] 0.3452703 0.4594595 0.1952703
+      
+      $value
+      [1] 1
+      
+      $options
+      $options$bmat
+      [1] "I"
+      
+      $options$n
+      [1] 3
+      
+      $options$which
+      [1] "LR"
+      
+      $options$nev
+      [1] 1
+      
+      $options$tol
+      [1] 0
+      
+      $options$ncv
+      [1] 0
+      
+      $options$ldv
+      [1] 0
+      
+      $options$ishift
+      [1] 1
+      
+      $options$maxiter
+      [1] 3000
+      
+      $options$nb
+      [1] 1
+      
+      $options$mode
+      [1] 1
+      
+      $options$start
+      [1] 1
+      
+      $options$sigma
+      [1] 0
+      
+      $options$sigmai
+      [1] 0
+      
+      $options$info
+      [1] 0
+      
+      $options$iter
+      [1] 1
+      
+      $options$nconv
+      [1] 1
+      
+      $options$numop
+      [1] 3
+      
+      $options$numopb
+      [1] 0
+      
+      $options$numreo
+      [1] 3
+      
+      
 
 # personalized_pagerank_vs_impl errors
 
@@ -3029,6 +3113,24 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# joint_degree_matrix_impl basic
+
+    Code
+      joint_degree_matrix_impl(graph = g)
+    Output
+           [,1] [,2]
+      [1,]    0    2
+      [2,]    2    0
+
+---
+
+    Code
+      joint_degree_matrix_impl(graph = g, max_out_degree = 2, max_in_degree = 2)
+    Output
+           [,1] [,2]
+      [1,]    0    2
+      [2,]    2    0
+
 # joint_degree_matrix_impl errors
 
     Code
@@ -3036,6 +3138,28 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# joint_degree_distribution_impl basic
+
+    Code
+      joint_degree_distribution_impl(graph = g)
+    Output
+           [,1] [,2] [,3]
+      [1,]    0  0.0  0.0
+      [2,]    0  0.0  0.5
+      [3,]    0  0.5  0.0
+
+---
+
+    Code
+      joint_degree_distribution_impl(graph = g, from_mode = "in", to_mode = "out",
+        directed_neighbors = FALSE, normalized = FALSE, max_from_degree = 2,
+        max_to_degree = 2)
+    Output
+           [,1] [,2] [,3]
+      [1,]    0    0    0
+      [2,]    0    0    2
+      [3,]    0    2    0
 
 # joint_degree_distribution_impl errors
 
@@ -3853,6 +3977,39 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# cliques_impl basic
+
+    Code
+      cliques_impl(graph = g)
+    Output
+      [[1]]
+      [1] 2
+      
+      [[2]]
+      [1] 3
+      
+      [[3]]
+      [1] 2 3
+      
+      [[4]]
+      [1] 1
+      
+      [[5]]
+      [1] 1 2
+      
+
+---
+
+    Code
+      cliques_impl(graph = g, min = 2, max = 2)
+    Output
+      [[1]]
+      [1] 2 3
+      
+      [[2]]
+      [1] 1 2
+      
+
 # cliques_impl errors
 
     Code
@@ -3939,6 +4096,27 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# weighted_cliques_impl basic
+
+    Code
+      weighted_cliques_impl(graph = g)
+    Output
+      [[1]]
+      [1] 2
+      
+      [[2]]
+      [1] 3
+      
+      [[3]]
+      [1] 2 3
+      
+      [[4]]
+      [1] 1
+      
+      [[5]]
+      [1] 1 2
+      
 
 # weighted_cliques_impl errors
 
@@ -4453,6 +4631,15 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# similarity_dice_impl basic
+
+    Code
+      similarity_dice_impl(g, from = 1:2, mode = "in", loops = TRUE)
+    Output
+           [,1]      [,2] [,3]
+      [1,]  1.0 0.6666667  0.5
+      [2,]  0.8 1.0000000  0.5
+
 # similarity_dice_impl errors
 
     Code
@@ -4532,6 +4719,15 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# similarity_jaccard_impl basic
+
+    Code
+      similarity_jaccard_impl(g, from = 1:2, mode = "in", loops = TRUE)
+    Output
+                [,1] [,2]      [,3]
+      [1,] 1.0000000  0.5 0.3333333
+      [2,] 0.6666667  1.0 0.3333333
 
 # similarity_jaccard_impl errors
 
@@ -6738,9 +6934,9 @@
     Output
       $X
                  [,1]       [,2]
-      [1,]  0.7071068  0.7071068
-      [2,] -1.4142136  0.0000000
-      [3,]  0.7071068 -0.7071068
+      [1,] -0.7071068  0.7071068
+      [2,]  1.4142136  0.0000000
+      [3,] -0.7071068 -0.7071068
       
       $Y
       NULL
@@ -8487,6 +8683,31 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# simple_cycles_impl basic
+
+    Code
+      simple_cycles_impl(graph = g)
+    Output
+      $vertices
+      list()
+      
+      $edges
+      list()
+      
+
+---
+
+    Code
+      simple_cycles_impl(graph = g, mode = "in", min_cycle_length = 2,
+        max_cycle_length = 3)
+    Output
+      $vertices
+      list()
+      
+      $edges
+      list()
+      
+
 # simple_cycles_impl errors
 
     Code
@@ -8567,6 +8788,13 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# fundamental_cycles_impl basic
+
+    Code
+      fundamental_cycles_impl(graph = g, start = 1)
+    Output
+      list()
+
 # fundamental_cycles_impl errors
 
     Code
@@ -8574,6 +8802,13 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# minimum_cycle_basis_impl basic
+
+    Code
+      minimum_cycle_basis_impl(graph = g)
+    Output
+      list()
 
 # minimum_cycle_basis_impl errors
 

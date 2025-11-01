@@ -4738,15 +4738,6 @@
       [2,]    0    1    0
       [3,]    1    0    1
 
----
-
-    Code
-      similarity_dice_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-           [,1] [,2]
-      [1,]  1.0  0.8
-      [2,]  0.8  1.0
-
 # similarity_dice_impl errors
 
     Code
@@ -4836,15 +4827,6 @@
       [1,]    1    0    1
       [2,]    0    1    0
       [3,]    1    0    1
-
----
-
-    Code
-      similarity_jaccard_impl(g, vit.from = 1:2, mode = "in", loops = TRUE)
-    Output
-                [,1]      [,2]
-      [1,] 1.0000000 0.6666667
-      [2,] 0.6666667 1.0000000
 
 # similarity_jaccard_impl errors
 

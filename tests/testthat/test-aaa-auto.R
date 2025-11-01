@@ -2241,7 +2241,7 @@ test_that("personalized_pagerank_vs_impl basic", {
   ))
   expect_snapshot(personalized_pagerank_vs_impl(
     graph = g,
-    reset.vids = 1,
+    reset_vids = 1,
     algo = "arpack",
     details = TRUE
   ))
@@ -5702,7 +5702,7 @@ test_that("similarity_dice_impl basic", {
 
   expect_snapshot(similarity_dice_impl(
     g,
-    vit.from = 1:2,
+    from = 1:2,
     mode = "in",
     loops = TRUE
   ))
@@ -5839,7 +5839,7 @@ test_that("similarity_jaccard_impl basic", {
 
   expect_snapshot(similarity_jaccard_impl(
     g,
-    vit.from = 1:2,
+    from = 1:2,
     mode = "in",
     loops = TRUE
   ))
