@@ -765,15 +765,15 @@ full_multipartite_impl <- function(
 }
 
 realize_degree_sequence_impl <- function(
-  out.deg,
-  in.deg = NULL,
-  allowed.edge.types = c("simple", "loops", "multi", "all"),
+  out_deg,
+  in_deg = NULL,
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 ) {
   # Argument checks
-  out.deg <- as.numeric(out.deg)
-  if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
-  allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
+  out_deg <- as.numeric(out_deg)
+  if (!is.null(in_deg)) in_deg <- as.numeric(in_deg)
+  allowed_edge_types <- switch_igraph_arg(allowed_edge_types,
     "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
   method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
@@ -781,17 +781,17 @@ realize_degree_sequence_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_realize_degree_sequence,
-    out.deg,
-    in.deg,
-    allowed.edge.types,
+    out_deg,
+    in_deg,
+    allowed_edge_types,
     method
   )
 
   if (igraph_opt("add.params")) {
     res$name <- 'Graph from degree sequence'
-    res$out.deg <- out.deg
-    res$in.deg <- in.deg
-    res$allowed.edge.types <- allowed.edge.types
+    res$out_deg <- out_deg
+    res$in_deg <- in_deg
+    res$allowed_edge_types <- allowed_edge_types
     res$method <- method
   }
 
@@ -801,13 +801,13 @@ realize_degree_sequence_impl <- function(
 realize_bipartite_degree_sequence_impl <- function(
   degrees1,
   degrees2,
-  allowed.edge.types = c("simple", "loops", "multi", "all"),
+  allowed_edge_types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 ) {
   # Argument checks
   degrees1 <- as.numeric(degrees1)
   degrees2 <- as.numeric(degrees2)
-  allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
+  allowed_edge_types <- switch_igraph_arg(allowed_edge_types,
     "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
   method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
@@ -817,7 +817,7 @@ realize_bipartite_degree_sequence_impl <- function(
     R_igraph_realize_bipartite_degree_sequence,
     degrees1,
     degrees2,
-    allowed.edge.types,
+    allowed_edge_types,
     method
   )
 
@@ -825,7 +825,7 @@ realize_bipartite_degree_sequence_impl <- function(
     res$name <- 'Bipartite graph from degree sequence'
     res$degrees1 <- degrees1
     res$degrees2 <- degrees2
-    res$allowed.edge.types <- allowed.edge.types
+    res$allowed_edge_types <- allowed_edge_types
     res$method <- method
   }
 
@@ -989,18 +989,18 @@ growing_random_game_impl <- function(
 preference_game_impl <- function(
   nodes,
   types,
-  type.dist,
-  fixed.sizes = FALSE,
-  pref.matrix,
+  type_dist,
+  fixed_sizes = FALSE,
+  pref_matrix,
   directed = FALSE,
   loops = FALSE
 ) {
   # Argument checks
   nodes <- as.numeric(nodes)
   types <- as.numeric(types)
-  type.dist <- as.numeric(type.dist)
-  fixed.sizes <- as.logical(fixed.sizes)
-  pref.matrix[] <- as.numeric(pref.matrix)
+  type_dist <- as.numeric(type_dist)
+  fixed_sizes <- as.logical(fixed_sizes)
+  pref_matrix[] <- as.numeric(pref_matrix)
   directed <- as.logical(directed)
   loops <- as.logical(loops)
 
@@ -1010,9 +1010,9 @@ preference_game_impl <- function(
     R_igraph_preference_game,
     nodes,
     types,
-    type.dist,
-    fixed.sizes,
-    pref.matrix,
+    type_dist,
+    fixed_sizes,
+    pref_matrix,
     directed,
     loops
   )
@@ -1022,18 +1022,18 @@ preference_game_impl <- function(
 
 asymmetric_preference_game_impl <- function(
   nodes,
-  out.types,
-  in.types,
-  type.dist.matrix,
-  pref.matrix,
+  out_types,
+  in_types,
+  type_dist_matrix,
+  pref_matrix,
   loops = FALSE
 ) {
   # Argument checks
   nodes <- as.numeric(nodes)
-  out.types <- as.numeric(out.types)
-  in.types <- as.numeric(in.types)
-  type.dist.matrix[] <- as.numeric(type.dist.matrix)
-  pref.matrix[] <- as.numeric(pref.matrix)
+  out_types <- as.numeric(out_types)
+  in_types <- as.numeric(in_types)
+  type_dist_matrix[] <- as.numeric(type_dist_matrix)
+  pref_matrix[] <- as.numeric(pref_matrix)
   loops <- as.logical(loops)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1041,10 +1041,10 @@ asymmetric_preference_game_impl <- function(
   res <- .Call(
     R_igraph_asymmetric_preference_game,
     nodes,
-    out.types,
-    in.types,
-    type.dist.matrix,
-    pref.matrix,
+    out_types,
+    in_types,
+    type_dist_matrix,
+    pref_matrix,
     loops
   )
 
@@ -1103,15 +1103,15 @@ rewire_directed_edges_impl <- function(
 
 forest_fire_game_impl <- function(
   nodes,
-  fw.prob,
-  bw.factor = 1,
+  fw_prob,
+  bw_factor = 1,
   ambs = 1,
   directed = TRUE
 ) {
   # Argument checks
   nodes <- as.numeric(nodes)
-  fw.prob <- as.numeric(fw.prob)
-  bw.factor <- as.numeric(bw.factor)
+  fw_prob <- as.numeric(fw_prob)
+  bw_factor <- as.numeric(bw_factor)
   ambs <- as.numeric(ambs)
   directed <- as.logical(directed)
 
@@ -1120,16 +1120,16 @@ forest_fire_game_impl <- function(
   res <- .Call(
     R_igraph_forest_fire_game,
     nodes,
-    fw.prob,
-    bw.factor,
+    fw_prob,
+    bw_factor,
     ambs,
     directed
   )
 
   if (igraph_opt("add.params")) {
     res$name <- 'Forest fire model'
-    res$fw.prob <- fw.prob
-    res$bw.factor <- bw.factor
+    res$fw_prob <- fw_prob
+    res$bw_factor <- bw_factor
     res$ambs <- ambs
   }
 
@@ -1137,49 +1137,49 @@ forest_fire_game_impl <- function(
 }
 
 simple_interconnected_islands_game_impl <- function(
-  islands.n,
-  islands.size,
-  islands.pin,
-  n.inter
+  islands_n,
+  islands_size,
+  islands_pin,
+  n_inter
 ) {
   # Argument checks
-  islands.n <- as.numeric(islands.n)
-  islands.size <- as.numeric(islands.size)
-  islands.pin <- as.numeric(islands.pin)
-  n.inter <- as.numeric(n.inter)
+  islands_n <- as.numeric(islands_n)
+  islands_size <- as.numeric(islands_size)
+  islands_pin <- as.numeric(islands_pin)
+  n_inter <- as.numeric(n_inter)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_simple_interconnected_islands_game,
-    islands.n,
-    islands.size,
-    islands.pin,
-    n.inter
+    islands_n,
+    islands_size,
+    islands_pin,
+    n_inter
   )
 
   if (igraph_opt("add.params")) {
     res$name <- 'Interconnected islands model'
-    res$islands.n <- islands.n
-    res$islands.size <- islands.size
-    res$islands.pin <- islands.pin
-    res$n.inter <- n.inter
+    res$islands_n <- islands_n
+    res$islands_size <- islands_size
+    res$islands_pin <- islands_pin
+    res$n_inter <- n_inter
   }
 
   res
 }
 
 chung_lu_game_impl <- function(
-  out.weights,
-  in.weights = NULL,
+  out_weights,
+  in_weights = NULL,
   ...,
   loops = TRUE,
   variant = c("original", "maxent", "nr")
 ) {
   # Argument checks
   check_dots_empty()
-  out.weights <- as.numeric(out.weights)
-  if (!is.null(in.weights)) in.weights <- as.numeric(in.weights)
+  out_weights <- as.numeric(out_weights)
+  if (!is.null(in_weights)) in_weights <- as.numeric(in_weights)
   loops <- as.logical(loops)
   variant <- switch_igraph_arg(variant, "original" = 0L, "maxent" = 1L, "nr" = 2L)
 
@@ -1187,8 +1187,8 @@ chung_lu_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_chung_lu_game,
-    out.weights,
-    in.weights,
+    out_weights,
+    in_weights,
     loops,
     variant
   )
@@ -1202,16 +1202,16 @@ chung_lu_game_impl <- function(
 }
 
 static_fitness_game_impl <- function(
-  no.of.edges,
-  fitness.out,
-  fitness.in = NULL,
+  no_of_edges,
+  fitness_out,
+  fitness_in = NULL,
   loops = FALSE,
   multiple = FALSE
 ) {
   # Argument checks
-  no.of.edges <- as.numeric(no.of.edges)
-  fitness.out <- as.numeric(fitness.out)
-  if (!is.null(fitness.in)) fitness.in <- as.numeric(fitness.in)
+  no_of_edges <- as.numeric(no_of_edges)
+  fitness_out <- as.numeric(fitness_out)
+  if (!is.null(fitness_in)) fitness_in <- as.numeric(fitness_in)
   loops <- as.logical(loops)
   multiple <- as.logical(multiple)
 
@@ -1219,9 +1219,9 @@ static_fitness_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_static_fitness_game,
-    no.of.edges,
-    fitness.out,
-    fitness.in,
+    no_of_edges,
+    fitness_out,
+    fitness_in,
     loops,
     multiple
   )
@@ -1236,56 +1236,56 @@ static_fitness_game_impl <- function(
 }
 
 static_power_law_game_impl <- function(
-  no.of.nodes,
-  no.of.edges,
-  exponent.out,
-  exponent.in = -1,
+  no_of_nodes,
+  no_of_edges,
+  exponent_out,
+  exponent_in = -1,
   loops = FALSE,
   multiple = FALSE,
-  finite.size.correction = TRUE
+  finite_size_correction = TRUE
 ) {
   # Argument checks
-  no.of.nodes <- as.numeric(no.of.nodes)
-  no.of.edges <- as.numeric(no.of.edges)
-  exponent.out <- as.numeric(exponent.out)
-  exponent.in <- as.numeric(exponent.in)
+  no_of_nodes <- as.numeric(no_of_nodes)
+  no_of_edges <- as.numeric(no_of_edges)
+  exponent_out <- as.numeric(exponent_out)
+  exponent_in <- as.numeric(exponent_in)
   loops <- as.logical(loops)
   multiple <- as.logical(multiple)
-  finite.size.correction <- as.logical(finite.size.correction)
+  finite_size_correction <- as.logical(finite_size_correction)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_static_power_law_game,
-    no.of.nodes,
-    no.of.edges,
-    exponent.out,
-    exponent.in,
+    no_of_nodes,
+    no_of_edges,
+    exponent_out,
+    exponent_in,
     loops,
     multiple,
-    finite.size.correction
+    finite_size_correction
   )
 
   if (igraph_opt("add.params")) {
     res$name <- 'Static power law model'
-    res$exponent.out <- exponent.out
-    res$exponent.in <- exponent.in
+    res$exponent_out <- exponent_out
+    res$exponent_in <- exponent_in
     res$loops <- loops
     res$multiple <- multiple
-    res$finite.size.correction <- finite.size.correction
+    res$finite_size_correction <- finite_size_correction
   }
 
   res
 }
 
 k_regular_game_impl <- function(
-  no.of.nodes,
+  no_of_nodes,
   k,
   directed = FALSE,
   multiple = FALSE
 ) {
   # Argument checks
-  no.of.nodes <- as.numeric(no.of.nodes)
+  no_of_nodes <- as.numeric(no_of_nodes)
   k <- as.numeric(k)
   directed <- as.logical(directed)
   multiple <- as.logical(multiple)
@@ -1294,7 +1294,7 @@ k_regular_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_k_regular_game,
-    no.of.nodes,
+    no_of_nodes,
     k,
     directed,
     multiple
@@ -1310,15 +1310,15 @@ k_regular_game_impl <- function(
 
 sbm_game_impl <- function(
   n,
-  pref.matrix,
-  block.sizes,
+  pref_matrix,
+  block_sizes,
   directed = FALSE,
   loops = FALSE
 ) {
   # Argument checks
   n <- as.numeric(n)
-  pref.matrix[] <- as.numeric(pref.matrix)
-  block.sizes <- as.numeric(block.sizes)
+  pref_matrix[] <- as.numeric(pref_matrix)
+  block_sizes <- as.numeric(block_sizes)
   directed <- as.logical(directed)
   loops <- as.logical(loops)
 
@@ -1327,8 +1327,8 @@ sbm_game_impl <- function(
   res <- .Call(
     R_igraph_sbm_game,
     n,
-    pref.matrix,
-    block.sizes,
+    pref_matrix,
+    block_sizes,
     directed,
     loops
   )
@@ -1409,13 +1409,13 @@ hsbm_list_game_impl <- function(
 }
 
 correlated_game_impl <- function(
-  old.graph,
+  old_graph,
   corr,
-  p = edge_density(old.graph),
+  p = edge_density(old_graph),
   permutation = NULL
 ) {
   # Argument checks
-  ensure_igraph(old.graph)
+  ensure_igraph(old_graph)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   if (!is.null(permutation)) permutation <- as.numeric(permutation)-1
@@ -1424,7 +1424,7 @@ correlated_game_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_correlated_game,
-    old.graph,
+    old_graph,
     corr,
     p,
     permutation
@@ -2499,7 +2499,7 @@ personalized_pagerank_vs_impl <- function(
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
-  reset.vids,
+  reset_vids,
   weights = NULL,
   options = NULL,
   details = FALSE
@@ -2510,7 +2510,7 @@ personalized_pagerank_vs_impl <- function(
   vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   damping <- as.numeric(damping)
-  reset.vids <- as_igraph_vs(graph, reset.vids)
+  reset_vids <- as_igraph_vs(graph, reset_vids)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2538,7 +2538,7 @@ personalized_pagerank_vs_impl <- function(
     vids - 1,
     directed,
     damping,
-    reset.vids - 1,
+    reset_vids - 1,
     weights,
     options
   )
@@ -2598,12 +2598,12 @@ induced_subgraph_impl <- function(
 subgraph_from_edges_impl <- function(
   graph,
   eids,
-  delete.vertices = TRUE
+  delete_vertices = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
-  delete.vertices <- as.logical(delete.vertices)
+  delete_vertices <- as.logical(delete_vertices)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2611,7 +2611,7 @@ subgraph_from_edges_impl <- function(
     R_igraph_subgraph_from_edges,
     graph,
     eids - 1,
-    delete.vertices
+    delete_vertices
   )
 
   res
@@ -2692,24 +2692,24 @@ path_length_hist_impl <- function(
 
 simplify_impl <- function(
   graph,
-  remove.multiple = TRUE,
-  remove.loops = TRUE,
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  remove_multiple = TRUE,
+  remove_loops = TRUE,
+  edge_attr_comb = igraph_opt("edge.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)
-  remove.multiple <- as.logical(remove.multiple)
-  remove.loops <- as.logical(remove.loops)
-  edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
+  remove_multiple <- as.logical(remove_multiple)
+  remove_loops <- as.logical(remove_loops)
+  edge_attr_comb <- igraph.i.attribute.combination(edge_attr_comb)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_simplify,
     graph,
-    remove.multiple,
-    remove.loops,
-    edge.attr.comb
+    remove_multiple,
+    remove_loops,
+    edge_attr_comb
   )
 
   res
@@ -2837,12 +2837,12 @@ ecc_impl <- function(
 
 reciprocity_impl <- function(
   graph,
-  ignore.loops = TRUE,
+  ignore_loops = TRUE,
   mode = c("default", "ratio")
 ) {
   # Argument checks
   ensure_igraph(graph)
-  ignore.loops <- as.logical(ignore.loops)
+  ignore_loops <- as.logical(ignore_loops)
   mode <- switch_igraph_arg(mode, "default" = 0L, "ratio" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2850,7 +2850,7 @@ reciprocity_impl <- function(
   res <- .Call(
     R_igraph_reciprocity,
     graph,
-    ignore.loops,
+    ignore_loops,
     mode
   )
 
@@ -3378,14 +3378,14 @@ avg_nearest_neighbor_degree_impl <- function(
   graph,
   vids = V(graph),
   mode = c("all", "out", "in", "total"),
-  neighbor.degree.mode = c("all", "out", "in", "total"),
+  neighbor_degree_mode = c("all", "out", "in", "total"),
   weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  neighbor.degree.mode <- switch_igraph_arg(neighbor.degree.mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  neighbor_degree_mode <- switch_igraph_arg(neighbor_degree_mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3402,7 +3402,7 @@ avg_nearest_neighbor_degree_impl <- function(
     graph,
     vids - 1,
     mode,
-    neighbor.degree.mode,
+    neighbor_degree_mode,
     weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -3414,9 +3414,9 @@ avg_nearest_neighbor_degree_impl <- function(
 degree_correlation_vector_impl <- function(
   graph,
   weights = NULL,
-  from.mode = c("out", "in", "all", "total"),
-  to.mode = c("in", "out", "all", "total"),
-  directed.neighbors = TRUE
+  from_mode = c("out", "in", "all", "total"),
+  to_mode = c("in", "out", "all", "total"),
+  directed_neighbors = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -3428,9 +3428,9 @@ degree_correlation_vector_impl <- function(
   } else {
     weights <- NULL
   }
-  from.mode <- switch_igraph_arg(from.mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  to.mode <- switch_igraph_arg(to.mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  directed.neighbors <- as.logical(directed.neighbors)
+  from_mode <- switch_igraph_arg(from_mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  to_mode <- switch_igraph_arg(to_mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  directed_neighbors <- as.logical(directed_neighbors)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -3438,9 +3438,9 @@ degree_correlation_vector_impl <- function(
     R_igraph_degree_correlation_vector,
     graph,
     weights,
-    from.mode,
-    to.mode,
-    directed.neighbors
+    from_mode,
+    to_mode,
+    directed_neighbors
   )
 
   res
@@ -3449,7 +3449,7 @@ degree_correlation_vector_impl <- function(
 rich_club_sequence_impl <- function(
   graph,
   weights = NULL,
-  vertex.order,
+  vertex_order,
   normalized = TRUE,
   loops = FALSE,
   directed = TRUE
@@ -3464,7 +3464,7 @@ rich_club_sequence_impl <- function(
   } else {
     weights <- NULL
   }
-  vertex.order <- as.numeric(vertex.order)-1
+  vertex_order <- as.numeric(vertex_order)-1
   normalized <- as.logical(normalized)
   loops <- as.logical(loops)
   directed <- as.logical(directed)
@@ -3475,7 +3475,7 @@ rich_club_sequence_impl <- function(
     R_igraph_rich_club_sequence,
     graph,
     weights,
-    vertex.order,
+    vertex_order,
     normalized,
     loops,
     directed
@@ -3523,12 +3523,12 @@ strength_impl <- function(
 
 centralization_impl <- function(
   scores,
-  theoretical.max = 0,
+  theoretical_max = 0,
   normalized = TRUE
 ) {
   # Argument checks
   scores <- as.numeric(scores)
-  theoretical.max <- as.numeric(theoretical.max)
+  theoretical_max <- as.numeric(theoretical_max)
   normalized <- as.logical(normalized)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -3536,7 +3536,7 @@ centralization_impl <- function(
   res <- .Call(
     R_igraph_centralization,
     scores,
-    theoretical.max,
+    theoretical_max,
     normalized
   )
 
@@ -3762,14 +3762,14 @@ assortativity_nominal_impl <- function(
 assortativity_impl <- function(
   graph,
   values,
-  values.in = NULL,
+  values_in = NULL,
   directed = TRUE,
   normalized = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
   values <- as.numeric(values)
-  if (!is.null(values.in)) values.in <- as.numeric(values.in)
+  if (!is.null(values_in)) values_in <- as.numeric(values_in)
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -3779,7 +3779,7 @@ assortativity_impl <- function(
     R_igraph_assortativity,
     graph,
     values,
-    values.in,
+    values_in,
     directed,
     normalized
   )
@@ -3809,8 +3809,8 @@ assortativity_degree_impl <- function(
 joint_degree_matrix_impl <- function(
   graph,
   weights = NULL,
-  max.out.degree = -1,
-  max.in.degree = -1
+  max_out_degree = -1,
+  max_in_degree = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -3822,8 +3822,8 @@ joint_degree_matrix_impl <- function(
   } else {
     weights <- NULL
   }
-  max.out.degree <- as.numeric(max.out.degree)
-  max.in.degree <- as.numeric(max.in.degree)
+  max_out_degree <- as.numeric(max_out_degree)
+  max_in_degree <- as.numeric(max_in_degree)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -3831,8 +3831,8 @@ joint_degree_matrix_impl <- function(
     R_igraph_joint_degree_matrix,
     graph,
     weights,
-    max.out.degree,
-    max.in.degree
+    max_out_degree,
+    max_in_degree
   )
 
   res
@@ -3841,12 +3841,12 @@ joint_degree_matrix_impl <- function(
 joint_degree_distribution_impl <- function(
   graph,
   weights = NULL,
-  from.mode = c("out", "in", "all", "total"),
-  to.mode = c("in", "out", "all", "total"),
-  directed.neighbors = TRUE,
+  from_mode = c("out", "in", "all", "total"),
+  to_mode = c("in", "out", "all", "total"),
+  directed_neighbors = TRUE,
   normalized = TRUE,
-  max.from.degree = -1,
-  max.to.degree = -1
+  max_from_degree = -1,
+  max_to_degree = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -3858,12 +3858,12 @@ joint_degree_distribution_impl <- function(
   } else {
     weights <- NULL
   }
-  from.mode <- switch_igraph_arg(from.mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  to.mode <- switch_igraph_arg(to.mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  directed.neighbors <- as.logical(directed.neighbors)
+  from_mode <- switch_igraph_arg(from_mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  to_mode <- switch_igraph_arg(to_mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
+  directed_neighbors <- as.logical(directed_neighbors)
   normalized <- as.logical(normalized)
-  max.from.degree <- as.numeric(max.from.degree)
-  max.to.degree <- as.numeric(max.to.degree)
+  max_from_degree <- as.numeric(max_from_degree)
+  max_to_degree <- as.numeric(max_to_degree)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -3871,12 +3871,12 @@ joint_degree_distribution_impl <- function(
     R_igraph_joint_degree_distribution,
     graph,
     weights,
-    from.mode,
-    to.mode,
-    directed.neighbors,
+    from_mode,
+    to_mode,
+    directed_neighbors,
     normalized,
-    max.from.degree,
-    max.to.degree
+    max_from_degree,
+    max_to_degree
   )
 
   res
@@ -3885,8 +3885,8 @@ joint_degree_distribution_impl <- function(
 joint_type_distribution_impl <- function(
   graph,
   weights = NULL,
-  from.types,
-  to.types = NULL,
+  from_types,
+  to_types = NULL,
   directed = TRUE,
   normalized = TRUE
 ) {
@@ -3900,8 +3900,8 @@ joint_type_distribution_impl <- function(
   } else {
     weights <- NULL
   }
-  from.types <- as.numeric(from.types)-1
-  if (!is.null(to.types)) to.types <- as.numeric(to.types)-1
+  from_types <- as.numeric(from_types)-1
+  if (!is.null(to_types)) to_types <- as.numeric(to_types)-1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -3911,8 +3911,8 @@ joint_type_distribution_impl <- function(
     R_igraph_joint_type_distribution,
     graph,
     weights,
-    from.types,
-    to.types,
+    from_types,
+    to_types,
     directed,
     normalized
   )
@@ -3923,12 +3923,12 @@ joint_type_distribution_impl <- function(
 contract_vertices_impl <- function(
   graph,
   mapping,
-  vertex.attr.comb = igraph_opt("vertex.attr.comb")
+  vertex_attr_comb = igraph_opt("vertex.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)
   mapping <- as.numeric(mapping)-1
-  vertex.attr.comb <- igraph.i.attribute.combination(vertex.attr.comb)
+  vertex_attr_comb <- igraph.i.attribute.combination(vertex_attr_comb)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -3936,7 +3936,7 @@ contract_vertices_impl <- function(
     R_igraph_contract_vertices,
     graph,
     mapping,
-    vertex.attr.comb
+    vertex_attr_comb
   )
 
   res
@@ -4044,16 +4044,16 @@ radius_dijkstra_impl <- function(
 
 pseudo_diameter_impl <- function(
   graph,
-  start.vid,
+  start_vid,
   directed = TRUE,
   unconnected = TRUE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  start.vid <- as_igraph_vs(graph, start.vid)
-  if (length(start.vid) == 0) {
+  start_vid <- as_igraph_vs(graph, start_vid)
+  if (length(start_vid) == 0) {
     cli::cli_abort(
-      "{.arg start.vid} must specify at least one vertex",
+      "{.arg start_vid} must specify at least one vertex",
       call = rlang::caller_env()
     )
   }
@@ -4065,7 +4065,7 @@ pseudo_diameter_impl <- function(
   res <- .Call(
     R_igraph_pseudo_diameter,
     graph,
-    start.vid - 1,
+    start_vid - 1,
     directed,
     unconnected
   )
@@ -4076,7 +4076,7 @@ pseudo_diameter_impl <- function(
 pseudo_diameter_dijkstra_impl <- function(
   graph,
   weights = NULL,
-  start.vid,
+  start_vid,
   directed = TRUE,
   unconnected = TRUE
 ) {
@@ -4090,10 +4090,10 @@ pseudo_diameter_dijkstra_impl <- function(
   } else {
     weights <- NULL
   }
-  start.vid <- as_igraph_vs(graph, start.vid)
-  if (length(start.vid) == 0) {
+  start_vid <- as_igraph_vs(graph, start_vid)
+  if (length(start_vid) == 0) {
     cli::cli_abort(
-      "{.arg start.vid} must specify at least one vertex",
+      "{.arg start_vid} must specify at least one vertex",
       call = rlang::caller_env()
     )
   }
@@ -4106,7 +4106,7 @@ pseudo_diameter_dijkstra_impl <- function(
     R_igraph_pseudo_diameter_dijkstra,
     graph,
     weights,
-    start.vid - 1,
+    start_vid - 1,
     directed,
     unconnected
   )
@@ -4341,23 +4341,23 @@ trussness_impl <- function(
 }
 
 is_graphical_impl <- function(
-  out.deg,
-  in.deg = NULL,
-  allowed.edge.types = c("simple", "loops", "multi", "all")
+  out_deg,
+  in_deg = NULL,
+  allowed_edge_types = c("simple", "loops", "multi", "all")
 ) {
   # Argument checks
-  out.deg <- as.numeric(out.deg)
-  if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
-  allowed.edge.types <- switch_igraph_arg(allowed.edge.types,
+  out_deg <- as.numeric(out_deg)
+  if (!is.null(in_deg)) in_deg <- as.numeric(in_deg)
+  allowed_edge_types <- switch_igraph_arg(allowed_edge_types,
     "simple" = 0L, "loop" = 1L, "loops" = 1L, "multi" = 6L, "multiple" = 6L, "all" = 7L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_is_graphical,
-    out.deg,
-    in.deg,
-    allowed.edge.types
+    out_deg,
+    in_deg,
+    allowed_edge_types
   )
 
   res
@@ -4668,16 +4668,16 @@ biconnected_components_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res$tree.edges <- lapply(res$tree.edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$component.edges <- lapply(res$component.edges, unsafe_create_es, graph = graph, es = E(graph))
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
     res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$articulation.points <- create_vs(graph, res$articulation.points)
+    res$articulation_points <- create_vs(graph, res$articulation_points)
   }
   res
 }
@@ -4737,18 +4737,18 @@ count_reachable_impl <- function(
 
 bond_percolation_impl <- function(
   graph,
-  edge.order = NULL
+  edge_order = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(edge.order)) edge.order <- as_igraph_es(graph, edge.order)
+  if (!is.null(edge_order)) edge_order <- as_igraph_es(graph, edge_order)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_bond_percolation,
     graph,
-    edge.order - 1
+    edge_order - 1
   )
 
   res
@@ -4756,18 +4756,18 @@ bond_percolation_impl <- function(
 
 site_percolation_impl <- function(
   graph,
-  vertex.order = NULL
+  vertex_order = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(vertex.order)) vertex.order <- as_igraph_vs(graph, vertex.order)
+  if (!is.null(vertex_order)) vertex_order <- as_igraph_vs(graph, vertex_order)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_site_percolation,
     graph,
-    vertex.order - 1
+    vertex_order - 1
   )
 
   res
@@ -4837,21 +4837,21 @@ cliques_impl <- function(
 
 clique_size_hist_impl <- function(
   graph,
-  min.size = 0,
-  max.size = 0
+  min_size = 0,
+  max_size = 0
 ) {
   # Argument checks
   ensure_igraph(graph)
-  min.size <- as.numeric(min.size)
-  max.size <- as.numeric(max.size)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_clique_size_hist,
     graph,
-    min.size,
-    max.size
+    min_size,
+    max_size
   )
 
   res
@@ -4877,21 +4877,21 @@ largest_cliques_impl <- function(
 
 maximal_cliques_count_impl <- function(
   graph,
-  min.size = 0,
-  max.size = 0
+  min_size = 0,
+  max_size = 0
 ) {
   # Argument checks
   ensure_igraph(graph)
-  min.size <- as.numeric(min.size)
-  max.size <- as.numeric(max.size)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_maximal_cliques_count,
     graph,
-    min.size,
-    max.size
+    min_size,
+    max_size
   )
 
   res
@@ -4899,21 +4899,21 @@ maximal_cliques_count_impl <- function(
 
 maximal_cliques_hist_impl <- function(
   graph,
-  min.size = 0,
-  max.size = 0
+  min_size = 0,
+  max_size = 0
 ) {
   # Argument checks
   ensure_igraph(graph)
-  min.size <- as.numeric(min.size)
-  max.size <- as.numeric(max.size)
+  min_size <- as.numeric(min_size)
+  max_size <- as.numeric(max_size)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_maximal_cliques_hist,
     graph,
-    min.size,
-    max.size
+    min_size,
+    max_size
   )
 
   res
@@ -4937,23 +4937,23 @@ clique_number_impl <- function(
 
 weighted_cliques_impl <- function(
   graph,
-  vertex.weights = NULL,
-  min.weight = 0,
-  max.weight = 0,
+  vertex_weights = NULL,
+  min_weight = 0,
+  max_weight = 0,
   maximal = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex.weights <- V(graph)$weight
+  if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex_weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
-    vertex.weights <- as.numeric(vertex.weights)
+  if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
+    vertex_weights <- as.numeric(vertex_weights)
   } else {
-    vertex.weights <- NULL
+    vertex_weights <- NULL
   }
-  min.weight <- as.numeric(min.weight)
-  max.weight <- as.numeric(max.weight)
+  min_weight <- as.numeric(min_weight)
+  max_weight <- as.numeric(max_weight)
   maximal <- as.logical(maximal)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -4961,9 +4961,9 @@ weighted_cliques_impl <- function(
   res <- .Call(
     R_igraph_weighted_cliques,
     graph,
-    vertex.weights,
-    min.weight,
-    max.weight,
+    vertex_weights,
+    min_weight,
+    max_weight,
     maximal
   )
   if (igraph_opt("return.vs.es")) {
@@ -4974,17 +4974,17 @@ weighted_cliques_impl <- function(
 
 largest_weighted_cliques_impl <- function(
   graph,
-  vertex.weights = NULL
+  vertex_weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex.weights <- V(graph)$weight
+  if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex_weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
-    vertex.weights <- as.numeric(vertex.weights)
+  if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
+    vertex_weights <- as.numeric(vertex_weights)
   } else {
-    vertex.weights <- NULL
+    vertex_weights <- NULL
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -4992,7 +4992,7 @@ largest_weighted_cliques_impl <- function(
   res <- .Call(
     R_igraph_largest_weighted_cliques,
     graph,
-    vertex.weights
+    vertex_weights
   )
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -5002,17 +5002,17 @@ largest_weighted_cliques_impl <- function(
 
 weighted_clique_number_impl <- function(
   graph,
-  vertex.weights = NULL
+  vertex_weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex.weights <- V(graph)$weight
+  if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex_weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
-    vertex.weights <- as.numeric(vertex.weights)
+  if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
+    vertex_weights <- as.numeric(vertex_weights)
   } else {
-    vertex.weights <- NULL
+    vertex_weights <- NULL
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -5020,7 +5020,7 @@ weighted_clique_number_impl <- function(
   res <- .Call(
     R_igraph_weighted_clique_number,
     graph,
-    vertex.weights
+    vertex_weights
   )
 
   res
@@ -5347,20 +5347,20 @@ layout_bipartite_impl <- function(
 layout_gem_impl <- function(
   graph,
   res = matrix(),
-  use.seed = FALSE,
+  use_seed = FALSE,
   maxiter = 40*vcount(graph)^2,
-  temp.max = vcount(graph),
-  temp.min = 1/10,
-  temp.init = sqrt(vcount(graph))
+  temp_max = vcount(graph),
+  temp_min = 1/10,
+  temp_init = sqrt(vcount(graph))
 ) {
   # Argument checks
   ensure_igraph(graph)
   res[] <- as.numeric(res)
-  use.seed <- as.logical(use.seed)
+  use_seed <- as.logical(use_seed)
   maxiter <- as.numeric(maxiter)
-  temp.max <- as.numeric(temp.max)
-  temp.min <- as.numeric(temp.min)
-  temp.init <- as.numeric(temp.init)
+  temp_max <- as.numeric(temp_max)
+  temp_min <- as.numeric(temp_min)
+  temp_init <- as.numeric(temp_init)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -5368,11 +5368,11 @@ layout_gem_impl <- function(
     R_igraph_layout_gem,
     graph,
     res,
-    use.seed,
+    use_seed,
     maxiter,
-    temp.max,
-    temp.min,
-    temp.init
+    temp_max,
+    temp_min,
+    temp_init
   )
 
   res
@@ -5381,28 +5381,28 @@ layout_gem_impl <- function(
 layout_davidson_harel_impl <- function(
   graph,
   res = matrix(),
-  use.seed = FALSE,
+  use_seed = FALSE,
   maxiter = 10,
   fineiter = max(10, log2(vcount(graph))),
-  cool.fact = 0.75,
-  weight.node.dist = 1.0,
-  weight.border = 0.0,
-  weight.edge.lengths = edge_density(graph) / 10,
-  weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
-  weight.node.edge.dist = 0.2 * (1-edge_density(graph))
+  cool_fact = 0.75,
+  weight_node_dist = 1.0,
+  weight_border = 0.0,
+  weight_edge_lengths = edge_density(graph) / 10,
+  weight_edge_crossings = 1.0 - sqrt(edge_density(graph)),
+  weight_node_edge_dist = 0.2 * (1-edge_density(graph))
 ) {
   # Argument checks
   ensure_igraph(graph)
   res[] <- as.numeric(res)
-  use.seed <- as.logical(use.seed)
+  use_seed <- as.logical(use_seed)
   maxiter <- as.numeric(maxiter)
   fineiter <- as.numeric(fineiter)
-  cool.fact <- as.numeric(cool.fact)
-  weight.node.dist <- as.numeric(weight.node.dist)
-  weight.border <- as.numeric(weight.border)
-  weight.edge.lengths <- as.numeric(weight.edge.lengths)
-  weight.edge.crossings <- as.numeric(weight.edge.crossings)
-  weight.node.edge.dist <- as.numeric(weight.node.edge.dist)
+  cool_fact <- as.numeric(cool_fact)
+  weight_node_dist <- as.numeric(weight_node_dist)
+  weight_border <- as.numeric(weight_border)
+  weight_edge_lengths <- as.numeric(weight_edge_lengths)
+  weight_edge_crossings <- as.numeric(weight_edge_crossings)
+  weight_node_edge_dist <- as.numeric(weight_node_edge_dist)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -5410,15 +5410,15 @@ layout_davidson_harel_impl <- function(
     R_igraph_layout_davidson_harel,
     graph,
     res,
-    use.seed,
+    use_seed,
     maxiter,
     fineiter,
-    cool.fact,
-    weight.node.dist,
-    weight.border,
-    weight.edge.lengths,
-    weight.edge.crossings,
-    weight.node.edge.dist
+    cool_fact,
+    weight_node_dist,
+    weight_border,
+    weight_edge_lengths,
+    weight_edge_crossings,
+    weight_node_edge_dist
   )
 
   res
@@ -5427,20 +5427,20 @@ layout_davidson_harel_impl <- function(
 layout_umap_impl <- function(
   graph,
   res,
-  use.seed = FALSE,
+  use_seed = FALSE,
   distances = NULL,
-  min.dist = 0.0,
+  min_dist = 0.0,
   epochs = 200,
-  distances.are.weights = FALSE
+  distances_are_weights = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
   res[] <- as.numeric(res)
-  use.seed <- as.logical(use.seed)
+  use_seed <- as.logical(use_seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
-  min.dist <- as.numeric(min.dist)
+  min_dist <- as.numeric(min_dist)
   epochs <- as.numeric(epochs)
-  distances.are.weights <- as.logical(distances.are.weights)
+  distances_are_weights <- as.logical(distances_are_weights)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -5448,11 +5448,11 @@ layout_umap_impl <- function(
     R_igraph_layout_umap,
     graph,
     res,
-    use.seed,
+    use_seed,
     distances,
-    min.dist,
+    min_dist,
     epochs,
-    distances.are.weights
+    distances_are_weights
   )
 
   res
@@ -5461,20 +5461,20 @@ layout_umap_impl <- function(
 layout_umap_3d_impl <- function(
   graph,
   res,
-  use.seed = FALSE,
+  use_seed = FALSE,
   distances = NULL,
-  min.dist = 0.0,
+  min_dist = 0.0,
   epochs = 200,
-  distances.are.weights = FALSE
+  distances_are_weights = FALSE
 ) {
   # Argument checks
   ensure_igraph(graph)
   res[] <- as.numeric(res)
-  use.seed <- as.logical(use.seed)
+  use_seed <- as.logical(use_seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
-  min.dist <- as.numeric(min.dist)
+  min_dist <- as.numeric(min_dist)
   epochs <- as.numeric(epochs)
-  distances.are.weights <- as.logical(distances.are.weights)
+  distances_are_weights <- as.logical(distances_are_weights)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -5482,11 +5482,11 @@ layout_umap_3d_impl <- function(
     R_igraph_layout_umap_3d,
     graph,
     res,
-    use.seed,
+    use_seed,
     distances,
-    min.dist,
+    min_dist,
     epochs,
-    distances.are.weights
+    distances_are_weights
   )
 
   res
@@ -5832,18 +5832,18 @@ modularity_matrix_impl <- function(
 
 community_fluid_communities_impl <- function(
   graph,
-  no.of.communities
+  no_of_communities
 ) {
   # Argument checks
   ensure_igraph(graph)
-  no.of.communities <- as.numeric(no.of.communities)
+  no_of_communities <- as.numeric(no_of_communities)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_community_fluid_communities,
     graph,
-    no.of.communities
+    no_of_communities
   )
 
   res
@@ -5942,11 +5942,11 @@ community_optimal_modularity_impl <- function(
 community_leiden_impl <- function(
   graph,
   weights = NULL,
-  vertex.weights = NULL,
+  vertex_weights = NULL,
   resolution,
   beta = 0.01,
   start,
-  n.iterations = 2,
+  n_iterations = 2,
   membership = NULL
 ) {
   # Argument checks
@@ -5959,18 +5959,18 @@ community_leiden_impl <- function(
   } else {
     weights <- NULL
   }
-  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
-    vertex.weights <- V(graph)$weight
+  if (is.null(vertex_weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex_weights <- V(graph)$weight
   }
-  if (!is.null(vertex.weights) && !all(is.na(vertex.weights))) {
-    vertex.weights <- as.numeric(vertex.weights)
+  if (!is.null(vertex_weights) && !all(is.na(vertex_weights))) {
+    vertex_weights <- as.numeric(vertex_weights)
   } else {
-    vertex.weights <- NULL
+    vertex_weights <- NULL
   }
   resolution <- as.numeric(resolution)
   beta <- as.numeric(beta)
   start <- as.logical(start)
-  n.iterations <- as.numeric(n.iterations)
+  n_iterations <- as.numeric(n_iterations)
   if (!is.null(membership)) membership <- as.numeric(membership)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -5979,11 +5979,11 @@ community_leiden_impl <- function(
     R_igraph_community_leiden,
     graph,
     weights,
-    vertex.weights,
+    vertex_weights,
     resolution,
     beta,
     start,
-    n.iterations,
+    n_iterations,
     membership
   )
 
@@ -6011,38 +6011,38 @@ split_join_distance_impl <- function(
 
 community_infomap_impl <- function(
   graph,
-  e.weights = NULL,
-  v.weights = NULL,
-  nb.trials = 10
+  e_weights = NULL,
+  v_weights = NULL,
+  nb_trials = 10
 ) {
   # Argument checks
   ensure_igraph(graph)
-  if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
-    e.weights <- E(graph)$weight
+  if (is.null(e_weights) && "weight" %in% edge_attr_names(graph)) {
+    e_weights <- E(graph)$weight
   }
-  if (!is.null(e.weights) && !all(is.na(e.weights))) {
-    e.weights <- as.numeric(e.weights)
+  if (!is.null(e_weights) && !all(is.na(e_weights))) {
+    e_weights <- as.numeric(e_weights)
   } else {
-    e.weights <- NULL
+    e_weights <- NULL
   }
-  if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) {
-    v.weights <- V(graph)$weight
+  if (is.null(v_weights) && "weight" %in% vertex_attr_names(graph)) {
+    v_weights <- V(graph)$weight
   }
-  if (!is.null(v.weights) && !all(is.na(v.weights))) {
-    v.weights <- as.numeric(v.weights)
+  if (!is.null(v_weights) && !all(is.na(v_weights))) {
+    v_weights <- as.numeric(v_weights)
   } else {
-    v.weights <- NULL
+    v_weights <- NULL
   }
-  nb.trials <- as.numeric(nb.trials)
+  nb_trials <- as.numeric(nb_trials)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_community_infomap,
     graph,
-    e.weights,
-    v.weights,
-    nb.trials
+    e_weights,
+    v_weights,
+    nb_trials
   )
 
   res
@@ -6194,21 +6194,21 @@ hrg_sample_impl <- function(
 
 hrg_sample_many_impl <- function(
   hrg,
-  num.samples
+  num_samples
 ) {
   # Argument checks
   if (is.null(hrg)) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
-  num.samples <- as.numeric(num.samples)
+  num_samples <- as.numeric(num_samples)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_hrg_sample_many,
     hrg,
-    num.samples
+    num_samples
   )
 
   res
@@ -6241,7 +6241,7 @@ hrg_consensus_impl <- function(
   graph,
   hrg = NULL,
   start = FALSE,
-  num.samples = 10000
+  num_samples = 10000
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -6250,7 +6250,7 @@ hrg_consensus_impl <- function(
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
-  num.samples <- as.numeric(num.samples)
+  num_samples <- as.numeric(num_samples)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6259,7 +6259,7 @@ hrg_consensus_impl <- function(
     graph,
     hrg,
     start,
-    num.samples
+    num_samples
   )
 
   res
@@ -6269,8 +6269,8 @@ hrg_predict_impl <- function(
   graph,
   hrg = NULL,
   start = FALSE,
-  num.samples = 10000,
-  num.bins = 25
+  num_samples = 10000,
+  num_bins = 25
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -6279,8 +6279,8 @@ hrg_predict_impl <- function(
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
-  num.samples <- as.numeric(num.samples)
-  num.bins <- as.numeric(num.bins)
+  num_samples <- as.numeric(num_samples)
+  num_bins <- as.numeric(num_bins)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6289,8 +6289,8 @@ hrg_predict_impl <- function(
     graph,
     hrg,
     start,
-    num.samples,
-    num.bins
+    num_samples,
+    num_bins
   )
   if (igraph_opt("return.vs.es")) {
     res$edges <- create_vs(graph, res$edges)
@@ -6431,12 +6431,12 @@ get_edgelist_impl <- function(
 
 get_stochastic_impl <- function(
   graph,
-  column.wise = FALSE,
+  column_wise = FALSE,
   weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  column.wise <- as.logical(column.wise)
+  column_wise <- as.logical(column_wise)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -6451,7 +6451,7 @@ get_stochastic_impl <- function(
   res <- .Call(
     R_igraph_get_stochastic,
     graph,
-    column.wise,
+    column_wise,
     weights
   )
 
@@ -6460,12 +6460,12 @@ get_stochastic_impl <- function(
 
 get_stochastic_sparse_impl <- function(
   graph,
-  column.wise = FALSE,
+  column_wise = FALSE,
   weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  column.wise <- as.logical(column.wise)
+  column_wise <- as.logical(column_wise)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -6480,7 +6480,7 @@ get_stochastic_sparse_impl <- function(
   res <- .Call(
     R_igraph_get_stochastic_sparse,
     graph,
-    column.wise,
+    column_wise,
     weights
   )
 
@@ -6509,12 +6509,12 @@ to_directed_impl <- function(
 to_undirected_impl <- function(
   graph,
   mode = c("collapse", "each", "mutual"),
-  edge.attr.comb = igraph_opt("edge.attr.comb")
+  edge_attr_comb = igraph_opt("edge.attr.comb")
 ) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch_igraph_arg(mode, "collapse" = 1L, "each" = 0L, "mutual" = 2L)
-  edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
+  edge_attr_comb <- igraph.i.attribute.combination(edge_attr_comb)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6522,7 +6522,7 @@ to_undirected_impl <- function(
     R_igraph_to_undirected,
     graph,
     mode,
-    edge.attr.comb
+    edge_attr_comb
   )
 
   res
@@ -6748,12 +6748,12 @@ write_graph_dot_impl <- function(
 motifs_randesu_impl <- function(
   graph,
   size = 3,
-  cut.prob = NULL
+  cut_prob = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   size <- as.numeric(size)
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6761,7 +6761,7 @@ motifs_randesu_impl <- function(
     R_igraph_motifs_randesu,
     graph,
     size,
-    cut.prob
+    cut_prob
   )
 
   res
@@ -6770,15 +6770,15 @@ motifs_randesu_impl <- function(
 motifs_randesu_estimate_impl <- function(
   graph,
   size = 3,
-  cut.prob = NULL,
-  sample.size,
+  cut_prob = NULL,
+  sample_size,
   sample = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   size <- as.numeric(size)
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
-  sample.size <- as.numeric(sample.size)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
+  sample_size <- as.numeric(sample_size)
   if (!is.null(sample)) sample <- as.numeric(sample)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6787,8 +6787,8 @@ motifs_randesu_estimate_impl <- function(
     R_igraph_motifs_randesu_estimate,
     graph,
     size,
-    cut.prob,
-    sample.size,
+    cut_prob,
+    sample_size,
     sample
   )
 
@@ -6798,12 +6798,12 @@ motifs_randesu_estimate_impl <- function(
 motifs_randesu_no_impl <- function(
   graph,
   size = 3,
-  cut.prob = NULL
+  cut_prob = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
   size <- as.numeric(size)
-  if (!is.null(cut.prob)) cut.prob <- as.numeric(cut.prob)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6811,7 +6811,7 @@ motifs_randesu_no_impl <- function(
     R_igraph_motifs_randesu_no,
     graph,
     size,
-    cut.prob
+    cut_prob
   )
 
   res
@@ -6916,19 +6916,19 @@ local_scan_0_impl <- function(
 local_scan_0_them_impl <- function(
   us,
   them,
-  weights.them = NULL,
+  weights_them = NULL,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(us)
   ensure_igraph(them)
-  if (is.null(weights.them) && "weight" %in% edge_attr_names(them)) {
-    weights.them <- E(them)$weight
+  if (is.null(weights_them) && "weight" %in% edge_attr_names(them)) {
+    weights_them <- E(them)$weight
   }
-  if (!is.null(weights.them) && !all(is.na(weights.them))) {
-    weights.them <- as.numeric(weights.them)
+  if (!is.null(weights_them) && !all(is.na(weights_them))) {
+    weights_them <- as.numeric(weights_them)
   } else {
-    weights.them <- NULL
+    weights_them <- NULL
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -6938,7 +6938,7 @@ local_scan_0_them_impl <- function(
     R_igraph_local_scan_0_them,
     us,
     them,
-    weights.them,
+    weights_them,
     mode
   )
 
@@ -6977,19 +6977,19 @@ local_scan_1_ecount_impl <- function(
 local_scan_1_ecount_them_impl <- function(
   us,
   them,
-  weights.them = NULL,
+  weights_them = NULL,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(us)
   ensure_igraph(them)
-  if (is.null(weights.them) && "weight" %in% edge_attr_names(them)) {
-    weights.them <- E(them)$weight
+  if (is.null(weights_them) && "weight" %in% edge_attr_names(them)) {
+    weights_them <- E(them)$weight
   }
-  if (!is.null(weights.them) && !all(is.na(weights.them))) {
-    weights.them <- as.numeric(weights.them)
+  if (!is.null(weights_them) && !all(is.na(weights_them))) {
+    weights_them <- as.numeric(weights_them)
   } else {
-    weights.them <- NULL
+    weights_them <- NULL
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -6999,7 +6999,7 @@ local_scan_1_ecount_them_impl <- function(
     R_igraph_local_scan_1_ecount_them,
     us,
     them,
-    weights.them,
+    weights_them,
     mode
   )
 
@@ -7042,20 +7042,20 @@ local_scan_k_ecount_them_impl <- function(
   us,
   them,
   k,
-  weights.them = NULL,
+  weights_them = NULL,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
   ensure_igraph(us)
   ensure_igraph(them)
   k <- as.numeric(k)
-  if (is.null(weights.them) && "weight" %in% edge_attr_names(them)) {
-    weights.them <- E(them)$weight
+  if (is.null(weights_them) && "weight" %in% edge_attr_names(them)) {
+    weights_them <- E(them)$weight
   }
-  if (!is.null(weights.them) && !all(is.na(weights.them))) {
-    weights.them <- as.numeric(weights.them)
+  if (!is.null(weights_them) && !all(is.na(weights_them))) {
+    weights_them <- as.numeric(weights_them)
   } else {
-    weights.them <- NULL
+    weights_them <- NULL
   }
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -7066,7 +7066,7 @@ local_scan_k_ecount_them_impl <- function(
     us,
     them,
     k,
-    weights.them,
+    weights_them,
     mode
   )
 
@@ -8020,53 +8020,53 @@ isoclass_create_impl <- function(
 isomorphic_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8075,10 +8075,10 @@ isomorphic_vf2_impl <- function(
     R_igraph_isomorphic_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8087,53 +8087,53 @@ isomorphic_vf2_impl <- function(
 get_isomorphisms_vf2_callback_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8142,10 +8142,10 @@ get_isomorphisms_vf2_callback_impl <- function(
     R_igraph_get_isomorphisms_vf2_callback,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8154,53 +8154,53 @@ get_isomorphisms_vf2_callback_impl <- function(
 count_isomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8209,10 +8209,10 @@ count_isomorphisms_vf2_impl <- function(
     R_igraph_count_isomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8221,53 +8221,53 @@ count_isomorphisms_vf2_impl <- function(
 get_isomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8276,10 +8276,10 @@ get_isomorphisms_vf2_impl <- function(
     R_igraph_get_isomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8307,53 +8307,53 @@ subisomorphic_impl <- function(
 subisomorphic_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8362,10 +8362,10 @@ subisomorphic_vf2_impl <- function(
     R_igraph_subisomorphic_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8374,53 +8374,53 @@ subisomorphic_vf2_impl <- function(
 count_subisomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8429,10 +8429,10 @@ count_subisomorphisms_vf2_impl <- function(
     R_igraph_count_subisomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8441,53 +8441,53 @@ count_subisomorphisms_vf2_impl <- function(
 get_subisomorphisms_vf2_impl <- function(
   graph1,
   graph2,
-  vertex.color1 = NULL,
-  vertex.color2 = NULL,
-  edge.color1 = NULL,
-  edge.color2 = NULL
+  vertex_color1 = NULL,
+  vertex_color2 = NULL,
+  edge_color1 = NULL,
+  edge_color2 = NULL
 ) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  if (is_missing(vertex.color1)) {
+  if (is_missing(vertex_color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
+      vertex_color1 <- V(graph1)$color
     } else {
-      vertex.color1 <- NULL
+      vertex_color1 <- NULL
     }
   }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1
+  if (!is.null(vertex_color1)) {
+    vertex_color1 <- as.numeric(vertex_color1)-1
   }
-  if (is_missing(vertex.color2)) {
+  if (is_missing(vertex_color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
+      vertex_color2 <- V(graph2)$color
     } else {
-      vertex.color2 <- NULL
+      vertex_color2 <- NULL
     }
   }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1
+  if (!is.null(vertex_color2)) {
+    vertex_color2 <- as.numeric(vertex_color2)-1
   }
-  if (is_missing(edge.color1)) {
+  if (is_missing(edge_color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
+      edge_color1 <- E(graph1)$color
     } else {
-      edge.color1 <- NULL
+      edge_color1 <- NULL
     }
   }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1)-1
+  if (!is.null(edge_color1)) {
+    edge_color1 <- as.numeric(edge_color1)-1
   }
-  if (is_missing(edge.color2)) {
+  if (is_missing(edge_color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
+      edge_color2 <- E(graph2)$color
     } else {
-      edge.color2 <- NULL
+      edge_color2 <- NULL
     }
   }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2)-1
+  if (!is.null(edge_color2)) {
+    edge_color2 <- as.numeric(edge_color2)-1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8496,10 +8496,10 @@ get_subisomorphisms_vf2_impl <- function(
     R_igraph_get_subisomorphisms_vf2,
     graph1,
     graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+    vertex_color1,
+    vertex_color2,
+    edge_color1,
+    edge_color2
   )
 
   res
@@ -8896,12 +8896,12 @@ eigen_adjacency_impl <- function(
 power_law_fit_impl <- function(
   data,
   xmin = -1,
-  force.continuous = FALSE
+  force_continuous = FALSE
 ) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
-  force.continuous <- as.logical(force.continuous)
+  force_continuous <- as.logical(force_continuous)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -8909,7 +8909,7 @@ power_law_fit_impl <- function(
     R_igraph_power_law_fit,
     data,
     xmin,
-    force.continuous
+    force_continuous
   )
 
   res
@@ -8919,13 +8919,13 @@ sir_impl <- function(
   graph,
   beta,
   gamma,
-  no.sim = 100
+  no_sim = 100
 ) {
   # Argument checks
   ensure_igraph(graph)
   beta <- as.numeric(beta)
   gamma <- as.numeric(gamma)
-  no.sim <- as.numeric(no.sim)
+  no_sim <- as.numeric(no_sim)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -8934,7 +8934,7 @@ sir_impl <- function(
     graph,
     beta,
     gamma,
-    no.sim
+    no_sim
   )
 
   class(res) <- "sir"
@@ -9038,14 +9038,14 @@ find_cycle_impl <- function(
 simple_cycles_impl <- function(
   graph,
   mode = c("out", "in", "all", "total"),
-  min.cycle.length = -1,
-  max.cycle.length = -1
+  min_cycle_length = -1,
+  max_cycle_length = -1
 ) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
-  min.cycle.length <- as.numeric(min.cycle.length)
-  max.cycle.length <- as.numeric(max.cycle.length)
+  min_cycle_length <- as.numeric(min_cycle_length)
+  max_cycle_length <- as.numeric(max_cycle_length)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -9053,8 +9053,8 @@ simple_cycles_impl <- function(
     R_igraph_simple_cycles,
     graph,
     mode,
-    min.cycle.length,
-    max.cycle.length
+    min_cycle_length,
+    max_cycle_length
   )
   if (igraph_opt("return.vs.es")) {
     res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -9126,7 +9126,7 @@ eulerian_cycle_impl <- function(
 fundamental_cycles_impl <- function(
   graph,
   start = NULL,
-  bfs.cutoff = -1,
+  bfs_cutoff = -1,
   weights = NULL
 ) {
   # Argument checks
@@ -9138,7 +9138,7 @@ fundamental_cycles_impl <- function(
       call = rlang::caller_env()
     )
   }
-  bfs.cutoff <- as.numeric(bfs.cutoff)
+  bfs_cutoff <- as.numeric(bfs_cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -9154,7 +9154,7 @@ fundamental_cycles_impl <- function(
     R_igraph_fundamental_cycles,
     graph,
     start - 1,
-    bfs.cutoff,
+    bfs_cutoff,
     weights
   )
   if (igraph_opt("return.vs.es")) {
@@ -9165,16 +9165,16 @@ fundamental_cycles_impl <- function(
 
 minimum_cycle_basis_impl <- function(
   graph,
-  bfs.cutoff = -1,
+  bfs_cutoff = -1,
   complete = TRUE,
-  use.cycle.order = TRUE,
+  use_cycle_order = TRUE,
   weights = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
-  bfs.cutoff <- as.numeric(bfs.cutoff)
+  bfs_cutoff <- as.numeric(bfs_cutoff)
   complete <- as.logical(complete)
-  use.cycle.order <- as.logical(use.cycle.order)
+  use_cycle_order <- as.logical(use_cycle_order)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -9189,9 +9189,9 @@ minimum_cycle_basis_impl <- function(
   res <- .Call(
     R_igraph_minimum_cycle_basis,
     graph,
-    bfs.cutoff,
+    bfs_cutoff,
     complete,
-    use.cycle.order,
+    use_cycle_order,
     weights
   )
   if (igraph_opt("return.vs.es")) {
@@ -9585,7 +9585,7 @@ moran_process_impl <- function(
 roulette_wheel_imitation_impl <- function(
   graph,
   vid,
-  is.local,
+  is_local,
   quantities,
   strategies,
   mode = c("out", "in", "all", "total")
@@ -9599,7 +9599,7 @@ roulette_wheel_imitation_impl <- function(
       call = rlang::caller_env()
     )
   }
-  is.local <- as.logical(is.local)
+  is_local <- as.logical(is_local)
   strategies <- as.numeric(strategies)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
@@ -9609,7 +9609,7 @@ roulette_wheel_imitation_impl <- function(
     R_igraph_roulette_wheel_imitation,
     graph,
     vid - 1,
-    is.local,
+    is_local,
     quantities,
     strategies,
     mode
@@ -9672,7 +9672,7 @@ invalidate_cache_impl <- function(
 vertex_path_from_edge_path_impl <- function(
   graph,
   start = NULL,
-  edge.path,
+  edge_path,
   mode = c("out", "in", "all", "total")
 ) {
   # Argument checks
@@ -9684,7 +9684,7 @@ vertex_path_from_edge_path_impl <- function(
       call = rlang::caller_env()
     )
   }
-  edge.path <- as_igraph_es(graph, edge.path)
+  edge_path <- as_igraph_es(graph, edge_path)
   mode <- switch_igraph_arg(mode, "out" = 1L, "in" = 2L, "all" = 3L, "total" = 3L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -9693,7 +9693,7 @@ vertex_path_from_edge_path_impl <- function(
     R_igraph_vertex_path_from_edge_path,
     graph,
     start - 1,
-    edge.path - 1,
+    edge_path - 1,
     mode
   )
   if (igraph_opt("return.vs.es")) {

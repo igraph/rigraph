@@ -146,8 +146,8 @@ is_graphical <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all")
 ) {
   is_graphical_impl(
-    out.deg = out.deg,
-    in.deg = in.deg,
-    allowed.edge.types = allowed.edge.types
+    out_deg = out.deg,
+    in_deg = in.deg,
+    allowed_edge_types = allowed.edge.types
   )
 }

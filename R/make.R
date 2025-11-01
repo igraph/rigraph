@@ -2071,6 +2071,70 @@ ring <- function(...) constructor_spec(make_ring, ...)
 
 ## -----------------------------------------------------------------
 
+#' Create a wheel graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' A wheel graph is created by connecting a center vertex to all vertices of a
+#' cycle graph.
+#' A wheel graph on `n` vertices can be thought of as a wheel with `n - 1`
+#' spokes.
+#' The cycle graph part makes up the rim, while the star graph part adds the
+#' spokes.
+#'
+#' Note that the two and three-vertex wheel graphs are non-simple: The
+#' two-vertex wheel graph contains a self-loop, while the three-vertex wheel
+#' graph contains parallel edges (a 1-cycle and a 2-cycle, respectively).
+#'
+#' @concept Wheel graph
+#' @param n Number of vertices.
+#' @inheritParams rlang::args_dots_empty
+#' @param mode It defines the direction of the edges.
+#'   `in`: the edges point *to* the center, `out`: the edges point *from* the
+#'   center, `mutual`: a directed wheel is created with mutual edges,
+#'   `undirected`: the edges are undirected.
+#' @param center ID of the center vertex.
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' make_wheel(10, mode = "out")
+#' make_wheel(5, mode = "undirected")
+#' @cdocs igraph_wheel
+make_wheel <- function(
+  n,
+  ...,
+  mode = c("in", "out", "mutual", "undirected"),
+  center = 1
+) {
+  check_dots_empty()
+  res <- wheel_impl(
+    n = n,
+    mode = mode,
+    center = center - 1
+  )
+  if (igraph_opt("add.params")) {
+    res$name <- switch(
+      igraph_match_arg(mode),
+      "in" = "In-wheel",
+      "out" = "Out-wheel",
+      "Wheel"
+    )
+    res$mode <- mode
+    res$center <- center
+  }
+  res
+}
+
+#' @rdname make_wheel
+#' @param ... Passed to `make_wheel()`.
+#' @export
+wheel <- function(...) constructor_spec(make_wheel, ...)
+
+## -----------------------------------------------------------------
+
 #' Create tree graphs
 #'
 #' Create a k-ary tree graph, where almost all vertices other than the leaves
@@ -2311,7 +2375,11 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' g2 <- make_circulant(10, c(1, 3), directed = TRUE)
 #' plot(g2, layout = layout_in_circle)
 make_circulant <- function(n, shifts, directed = FALSE) {
-  circulant_impl(n = n, shifts = shifts, directed = directed)
+  circulant_impl(
+    n = n,
+    shifts = shifts,
+    directed = directed
+  )
 }
 
 #' @rdname make_circulant
@@ -2654,7 +2722,11 @@ make_full_multipartite <- function(
   directed <- as.logical(directed)
   mode <- igraph_match_arg(mode)
 
-  res <- full_multipartite_impl(n = n, directed = directed, mode = mode)
+  res <- full_multipartite_impl(
+    n = n,
+    directed = directed,
+    mode = mode
+  )
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   # Transfer graph attributes from res to graph if add.params is enabled
@@ -2707,7 +2779,10 @@ make_turan <- function(n, r) {
   n <- as.numeric(n)
   r <- as.numeric(r)
 
-  res <- turan_impl(n = n, r = r)
+  res <- turan_impl(
+    n = n,
+    r = r
+  )
   graph <- set_vertex_attr(res$graph, "type", value = res$types)
 
   # Transfer graph attributes from res to graph if add.params is enabled
@@ -2922,12 +2997,21 @@ realize_degseq <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 ) {
-  realize_degree_sequence_impl(
-    out.deg = out.deg,
-    in.deg = in.deg,
-    allowed.edge.types = allowed.edge.types,
+  res <- realize_degree_sequence_impl(
+    out_deg = out.deg,
+    in_deg = in.deg,
+    allowed_edge_types = allowed.edge.types,
     method = method
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$out.deg <- res$out_deg
+    res$in.deg <- res$in_deg
+    res$allowed.edge.types <- res$allowed_edge_types
+  }
+
+  res
 }
 
 
@@ -2985,9 +3069,14 @@ realize_bipartite_degseq <- function(
   g <- realize_bipartite_degree_sequence_impl(
     degrees1 = degrees1,
     degrees2 = degrees2,
-    allowed.edge.types = allowed.edge.types,
+    allowed_edge_types = allowed.edge.types,
     method = method
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    g$allowed.edge.types <- g$allowed_edge_types
+  }
 
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g

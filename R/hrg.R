@@ -315,7 +315,7 @@ consensus_tree <- function(
     graph = graph,
     hrg = hrg,
     start = start,
-    num.samples = num.samples
+    num_samples = num.samples
   )
 }
 
