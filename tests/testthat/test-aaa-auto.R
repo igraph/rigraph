@@ -901,7 +901,7 @@ test_that("erdos_renyi_game_gnp_impl basic", {
     n = 5,
     p = 0.5,
     directed = TRUE,
-    loops = TRUE
+    allowed_edge_types = "loops"
   ))
 
   # Structured tests
@@ -932,7 +932,7 @@ test_that("erdos_renyi_game_gnm_impl basic", {
     n = 5,
     m = 3,
     directed = TRUE,
-    loops = TRUE
+    allowed_edge_types = "loops"
   ))
 
   # Structured tests
@@ -1218,8 +1218,7 @@ test_that("static_fitness_game_impl basic", {
     no_of_edges = 3,
     fitness_out = c(1, 2, 3),
     fitness_in = c(1, 2, 3),
-    loops = TRUE,
-    multiple = TRUE
+    allowed_edge_types = "all"
   ))
 
   # Structured tests
@@ -1252,8 +1251,7 @@ test_that("static_power_law_game_impl basic", {
     no_of_edges = 4,
     exponent_out = 2.5,
     exponent_in = 2,
-    loops = TRUE,
-    multiple = TRUE,
+    allowed_edge_types = "all",
     finite_size_correction = FALSE
   ))
 

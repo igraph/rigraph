@@ -90,22 +90,22 @@ similarity <- function(
     method,
     jaccard = similarity_jaccard_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      from = vids_from,
+      to = vids_to,
       mode = mode,
       loops = loops
     ),
     dice = similarity_dice_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      from = vids_from,
+      to = vids_to,
       mode = mode,
       loops = loops
     ),
     invlogweighted = similarity_inverse_log_weighted_impl(
       graph,
-      vit.from = vids_from,
-      vit.to = vids_to,
+      from = vids_from,
+      to = vids_to,
       mode = mode
     )
   )

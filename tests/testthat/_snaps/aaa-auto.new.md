@@ -748,6 +748,15 @@
       + edges:
       [1] 1--2 1--3 2--3 1--4 2--4 1--5 4--5
 
+---
+
+    Code
+      erdos_renyi_game_gnp_impl(n = 5, p = 0.5, directed = TRUE, allowed_edge_types = "loops")
+    Output
+      IGRAPH D--- 5 12 -- 
+      + edges:
+       [1] 2->1 3->1 4->1 2->2 1->3 2->3 4->3 1->4 2->4 5->4 3->5 4->5
+
 # erdos_renyi_game_gnp_impl errors
 
     Code
@@ -764,6 +773,15 @@
       IGRAPH U--- 5 3 -- 
       + edges:
       [1] 3--4 2--5 4--5
+
+---
+
+    Code
+      erdos_renyi_game_gnm_impl(n = 5, m = 3, directed = TRUE, allowed_edge_types = "loops")
+    Output
+      IGRAPH D--- 5 3 -- 
+      + edges:
+      [1] 4->3 5->3 3->5
 
 # erdos_renyi_game_gnm_impl errors
 
@@ -6720,9 +6738,9 @@
     Output
       $X
                  [,1]       [,2]
-      [1,] -0.7071068  0.7071068
-      [2,]  1.4142136  0.0000000
-      [3,] -0.7071068 -0.7071068
+      [1,]  0.7071068  0.7071068
+      [2,] -1.4142136  0.0000000
+      [3,]  0.7071068 -0.7071068
       
       $Y
       NULL
@@ -6789,7 +6807,7 @@
       [1] 0
       
       $options$numreo
-      [1] 2
+      [1] 3
       
       
 
