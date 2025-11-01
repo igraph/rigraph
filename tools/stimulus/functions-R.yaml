@@ -855,6 +855,12 @@ igraph_adhesion:
 
 igraph_cohesion:
 
+igraph_biconnected_components:
+    PARAM_NAMES:
+        tree_edges: tree_edges
+        component_edges: component_edges
+        articulation_points: articulation_points
+
 #######################################
 # Listing s-t cuts, separators
 #######################################
