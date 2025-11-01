@@ -171,6 +171,15 @@ FILE* R_igraph_fopen_read(SEXP instream) {
   return file;
 }
 
+FILE* R_igraph_fopen_write(SEXP outstream) {
+  FILE *file;
+
+  file=fopen(CHAR(STRING_ELT(outstream, 0)), "w");
+  if (file==0) { igraph_error("Cannot open file for writing", __FILE__, __LINE__,
+                              IGRAPH_EFILE); }
+  return file;
+}
+
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
     PROTECT(s);
