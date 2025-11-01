@@ -2693,12 +2693,20 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @export
 #' @cdocs igraph_simple_interconnected_islands_game
 sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
-  simple_interconnected_islands_game_impl(
+  res <- simple_interconnected_islands_game_impl(
     islands_n = islands.n,
     islands_size = islands.size,
     islands_pin = islands.pin,
     n_inter = n.inter
   )
+  
+  # Add backward-compatible dotted names
+  if (!is.null(res$islands_n)) res$islands.n <- res$islands_n
+  if (!is.null(res$islands_size)) res$islands.size <- res$islands_size
+  if (!is.null(res$islands_pin)) res$islands.pin <- res$islands_pin
+  if (!is.null(res$n_inter)) res$n.inter <- res$n_inter
+  
+  res
 }
 
 
@@ -3001,13 +3009,20 @@ sample_fitness <- function(
   loops = FALSE,
   multiple = FALSE
 ) {
-  static_fitness_game_impl(
+  res <- static_fitness_game_impl(
     no_of_edges = no.of.edges,
     fitness_out = fitness.out,
     fitness_in = fitness.in,
     loops = loops,
     multiple = multiple
   )
+  
+  # Add backward-compatible dotted names
+  if (!is.null(res$exponent_out)) res$exponent.out <- res$exponent_out
+  if (!is.null(res$exponent_in)) res$exponent.in <- res$exponent_in
+  if (!is.null(res$finite_size_correction)) res$finite.size.correction <- res$finite_size_correction
+  
+  res
 }
 
 
@@ -3163,13 +3178,19 @@ sample_forestfire <- function(
   ambs = 1,
   directed = TRUE
 ) {
-  forest_fire_game_impl(
+  res <- forest_fire_game_impl(
     nodes = nodes,
     fw_prob = fw.prob,
     bw_factor = bw.factor,
     ambs = ambs,
     directed = directed
   )
+  
+  # Add backward-compatible dotted names
+  if (!is.null(res$fw_prob)) res$fw.prob <- res$fw_prob
+  if (!is.null(res$bw_factor)) res$bw.factor <- res$bw_factor
+  
+  res
 }
 
 

@@ -2933,12 +2933,19 @@ realize_degseq <- function(
   allowed.edge.types = c("simple", "loops", "multi", "all"),
   method = c("smallest", "largest", "index")
 ) {
-  realize_degree_sequence_impl(
+  res <- realize_degree_sequence_impl(
     out_deg = out.deg,
     in_deg = in.deg,
     allowed_edge_types = allowed.edge.types,
     method = method
   )
+  
+  # Add backward-compatible dotted names
+  if (!is.null(res$out_deg)) res$out.deg <- res$out_deg
+  if (!is.null(res$in_deg)) res$in.deg <- res$in_deg
+  if (!is.null(res$allowed_edge_types)) res$allowed.edge.types <- res$allowed_edge_types
+  
+  res
 }
 
 
@@ -2999,6 +3006,9 @@ realize_bipartite_degseq <- function(
     allowed_edge_types = allowed.edge.types,
     method = method
   )
+  
+  # Add backward-compatible dotted names
+  if (!is.null(g$allowed_edge_types)) g$allowed.edge.types <- g$allowed_edge_types
 
   V(g)$type <- c(rep(TRUE, length(degrees1)), rep(FALSE, length(degrees2)))
   g
