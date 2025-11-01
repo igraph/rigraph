@@ -33,16 +33,19 @@ when computing neighbor relationships in directed graphs. If \code{FALSE},
 edges are treated as undirected (i.e., reciprocal). Ignored for undirected graphs.}
 }
 \value{
-A numeric vector. Element i contains the mean degree of neighbors
-of vertices with degree i-1. Note that degree 0 is included at index 1.
+A numeric vector.
+Element \eqn{i} contains the mean degree of neighbors of vertices with degree \eqn{i-1}.
+Note that degree 0 is included at index 1.
 The length of the vector is one more than the maximum degree in the graph.
 }
 \description{
-Computes the k_nn(k) degree correlation function, which gives the mean degree
-of neighbors of vertices with degree k.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-The k_nn(k) function characterizes degree correlations in networks.
+Computes the \eqn{k_{nn}(k)} degree correlation function, which gives the mean degree
+of neighbors of vertices with degree \eqn{k}.
+
+The \eqn{k_{nn}(k)} function characterizes degree correlations in networks.
 It provides the average degree of neighbors as a function of vertex degree.
 This is one of the primary ways to measure degree assortativity in networks.
 
@@ -56,11 +59,11 @@ The weighted version computes a weighted average as:
 
 \deqn{k_{nn}(k) = \frac{\sum_{i: k_i=k} \sum_j w_{ij} k_j}{\sum_{i: k_i=k} \sum_j w_{ij}}}{k_nn(k) = sum_(i: k_i=k) sum_j w_ij k_j / sum_(i: k_i=k) sum_j w_ij}
 
-where the first sum runs over vertices of degree k, the second sum runs
-over their neighbors j, w_ij is the edge weight, and k_j is the neighbor's degree.
+where the first sum runs over vertices of degree \eqn{k}, the second sum runs
+over their neighbors \eqn{j}, \eqn{w_{ij}} is the edge weight, and \eqn{k_j} is the neighbor's degree.
 }
 \examples{
-# Ring graph - all vertices have degree 2, so k_nn(2) = 2
+# Ring graph - all vertices have degree 2
 g <- make_ring(10)
 knnk(g)
 
@@ -71,7 +74,7 @@ knnk(g2)
 # Scale-free graph - typically shows degree anti-correlation
 g3 <- sample_pa(1000, m = 5)
 result <- knnk(g3)
-plot(result, xlab = "k", ylab = "k_nn(k)", type = "l")
+plot(result, xlab = "k", ylab = expression(k[nn](k)), type = "l")
 
 # Directed graph with different degree modes
 g4 <- sample_pa(100, directed = TRUE)

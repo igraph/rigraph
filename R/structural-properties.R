@@ -3608,10 +3608,12 @@ knn <- function(
 
 #' Degree correlation function
 #'
-#' Computes the k_nn(k) degree correlation function, which gives the mean degree
-#' of neighbors of vertices with degree k.
+#' `r lifecycle::badge("experimental")`
 #'
-#' The k_nn(k) function characterizes degree correlations in networks.
+#' Computes the \eqn{k_{nn}(k)} degree correlation function, which gives the mean degree
+#' of neighbors of vertices with degree \eqn{k}.
+#'
+#' The \eqn{k_{nn}(k)} function characterizes degree correlations in networks.
 #' It provides the average degree of neighbors as a function of vertex degree.
 #' This is one of the primary ways to measure degree assortativity in networks.
 #'
@@ -3625,8 +3627,8 @@ knn <- function(
 #'
 #' \deqn{k_{nn}(k) = \frac{\sum_{i: k_i=k} \sum_j w_{ij} k_j}{\sum_{i: k_i=k} \sum_j w_{ij}}}{k_nn(k) = sum_(i: k_i=k) sum_j w_ij k_j / sum_(i: k_i=k) sum_j w_ij}
 #'
-#' where the first sum runs over vertices of degree k, the second sum runs
-#' over their neighbors j, w_ij is the edge weight, and k_j is the neighbor's degree.
+#' where the first sum runs over vertices of degree \eqn{k}, the second sum runs
+#' over their neighbors \eqn{j}, \eqn{w_{ij}} is the edge weight, and \eqn{k_j} is the neighbor's degree.
 #'
 #' @param graph The input graph. It may be directed.
 #' @param weights Optional edge weights. If the graph has a `weight` edge
@@ -3642,8 +3644,9 @@ knn <- function(
 #' @param directed.neighbors Logical scalar. Whether to consider edges as directed
 #'   when computing neighbor relationships in directed graphs. If `FALSE`,
 #'   edges are treated as undirected (i.e., reciprocal). Ignored for undirected graphs.
-#' @return A numeric vector. Element i contains the mean degree of neighbors
-#'   of vertices with degree i-1. Note that degree 0 is included at index 1.
+#' @return A numeric vector.
+#'   Element \eqn{i} contains the mean degree of neighbors of vertices with degree \eqn{i-1}.
+#'   Note that degree 0 is included at index 1.
 #'   The length of the vector is one more than the maximum degree in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references
@@ -3667,7 +3670,7 @@ knn <- function(
 #' @seealso [knn()] for computing average nearest neighbor degree for specific vertices
 #' @keywords graphs
 #' @examples
-#' # Ring graph - all vertices have degree 2, so k_nn(2) = 2
+#' # Ring graph - all vertices have degree 2
 #' g <- make_ring(10)
 #' knnk(g)
 #'
@@ -3678,7 +3681,7 @@ knn <- function(
 #' # Scale-free graph - typically shows degree anti-correlation
 #' g3 <- sample_pa(1000, m = 5)
 #' result <- knnk(g3)
-#' plot(result, xlab = "k", ylab = "k_nn(k)", type = "l")
+#' plot(result, xlab = "k", ylab = expression(k[nn](k)), type = "l")
 #'
 #' # Directed graph with different degree modes
 #' g4 <- sample_pa(100, directed = TRUE)
