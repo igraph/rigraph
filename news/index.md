@@ -1,5 +1,55 @@
 # Changelog
 
+## igraph 2.2.1.9003
+
+### Bug fixes
+
+- Fix
+  [`alpha_centrality()`](https://r.igraph.org/reference/alpha_centrality.md)
+  crash when `weights` is a custom attribute name
+  ([\#915](https://github.com/igraph/rigraph/issues/915),
+  [\#2403](https://github.com/igraph/rigraph/issues/2403)).
+
+### Features
+
+- Add
+  [`make_full_multipartite()`](https://r.igraph.org/reference/make_full_multipartite.md)
+  and [`make_turan()`](https://r.igraph.org/reference/make_turan.md)
+  graph constructors
+  ([\#1562](https://github.com/igraph/rigraph/issues/1562),
+  [\#2406](https://github.com/igraph/rigraph/issues/2406)).
+
+- Add
+  [`count_loops()`](https://r.igraph.org/reference/which_multiple.md) to
+  R interface ([\#1379](https://github.com/igraph/rigraph/issues/1379),
+  [\#2414](https://github.com/igraph/rigraph/issues/2414)).
+
+- Add
+  [`make_circulant()`](https://r.igraph.org/reference/make_circulant.md)
+  to expose `igraph_circulant()`
+  ([\#1563](https://github.com/igraph/rigraph/issues/1563),
+  [\#2407](https://github.com/igraph/rigraph/issues/2407)).
+
+- Add [`mean_degree()`](https://r.igraph.org/reference/degree.md) to R
+  ([\#1380](https://github.com/igraph/rigraph/issues/1380),
+  [\#2415](https://github.com/igraph/rigraph/issues/2415)).
+
+- [`vertices()`](https://r.igraph.org/reference/vertex.md) errors on
+  duplicate attribute names
+  ([\#1248](https://github.com/igraph/rigraph/issues/1248),
+  [\#2430](https://github.com/igraph/rigraph/issues/2430)).
+
+- Add
+  [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md)
+  function to R
+  ([\#1349](https://github.com/igraph/rigraph/issues/1349),
+  [\#2412](https://github.com/igraph/rigraph/issues/2412)).
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#2454](https://github.com/igraph/rigraph/issues/2454)).
+
 ## igraph 2.2.1.9002
 
 ### Bug fixes

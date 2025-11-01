@@ -78,8 +78,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> IGRAPH e1e7733 U--B 10 5 -- 
+#> IGRAPH 4484907 U--B 10 5 -- 
 #> + attr: type (v/l)
-#> + edges from e1e7733:
+#> + edges from 4484907:
 #> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```

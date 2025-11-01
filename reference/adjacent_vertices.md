@@ -52,11 +52,11 @@ Other structural queries:
 g <- make_graph("Zachary")
 adjacent_vertices(g, c(1, 34))
 #> [[1]]
-#> + 16/34 vertices, from 30b012f:
+#> + 16/34 vertices, from e1a82ac:
 #>  [1]  2  3  4  5  6  7  8  9 11 12 13 14 18 20 22 32
 #> 
 #> [[2]]
-#> + 17/34 vertices, from 30b012f:
+#> + 17/34 vertices, from e1a82ac:
 #>  [1]  9 10 14 15 16 19 20 21 23 24 27 28 29 30 31 32 33
 #> 
 ```
