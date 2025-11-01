@@ -2070,7 +2070,6 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' plot(g3)
 #' @cdocs igraph_hexagonal_lattice
 make_hex_lattice <- function(dims, directed = FALSE, mutual = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
   res <- hexagonal_lattice_impl(
     dimvector = dims,
     directed = directed,
