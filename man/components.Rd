@@ -97,6 +97,7 @@ largest_component(g)
 Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
+\code{\link{count_reachable}()},
 \code{\link{decompose}()},
 \code{\link{is_biconnected}()}
 

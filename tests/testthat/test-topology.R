@@ -361,3 +361,70 @@ test_that("subgraph_isomorphisms, vf2", {
   g3 <- graph_from_literal(X - Y - Z - X)
   expect_equal(subgraph_isomorphisms(g3, g1, method = "vf2"), list())
 })
+
+test_that("transitive_closure works for directed graphs", {
+  # Simple directed path
+  g <- make_graph(c(1, 2, 2, 3, 3, 4))
+  tc <- transitive_closure(g)
+
+  # Should have edges for all reachable pairs
+  expect_equal(vcount(tc), 4)
+  expect_equal(ecount(tc), 6) # 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
+  expect_true(are_adjacent(tc, 1, 2))
+  expect_true(are_adjacent(tc, 1, 3))
+  expect_true(are_adjacent(tc, 1, 4))
+  expect_true(are_adjacent(tc, 2, 3))
+  expect_true(are_adjacent(tc, 2, 4))
+  expect_true(are_adjacent(tc, 3, 4))
+
+  # Check that reverse edges don't exist
+  expect_false(are_adjacent(tc, 2, 1))
+  expect_false(are_adjacent(tc, 3, 1))
+})
+
+test_that("transitive_closure works for undirected graphs", {
+  # Two disconnected components with 2 vertices each
+  g <- make_graph(c(1, 2, 3, 4), directed = FALSE)
+  tc <- transitive_closure(g)
+
+  # Each 2-vertex component already forms a complete graph,
+  # so transitive closure doesn't add new edges
+  expect_equal(vcount(tc), 4)
+  expect_equal(ecount(tc), 2) # Same as input: one edge per 2-vertex component
+  expect_true(are_adjacent(tc, 1, 2))
+  expect_true(are_adjacent(tc, 3, 4))
+  expect_false(are_adjacent(tc, 1, 3))
+  expect_false(are_adjacent(tc, 1, 4))
+
+  # Test with a path that needs closure
+  g2 <- make_graph(c(1, 2, 2, 3), directed = FALSE)
+  tc2 <- transitive_closure(g2)
+
+  # Should create a complete graph (triangle)
+  expect_equal(vcount(tc2), 3)
+  expect_equal(ecount(tc2), 3) # Complete graph on 3 vertices
+  expect_true(are_adjacent(tc2, 1, 2))
+  expect_true(are_adjacent(tc2, 2, 3))
+  expect_true(are_adjacent(tc2, 1, 3)) # This edge is added by closure
+})
+
+test_that("transitive_closure handles graphs with cycles", {
+  # Directed cycle
+  g <- make_graph(c(1, 2, 2, 3, 3, 1))
+  tc <- transitive_closure(g)
+
+  # Should be fully connected
+  expect_equal(vcount(tc), 3)
+  expect_equal(ecount(tc), 6) # Complete directed graph on 3 vertices
+})
+
+test_that("transitive_closure preserves isolated vertices", {
+  # Graph with isolated vertex
+  g <- make_graph(c(1, 2, 2, 3), n = 5)
+  tc <- transitive_closure(g)
+
+  # Isolated vertices should remain
+  expect_equal(vcount(tc), 5)
+  expect_equal(degree(tc, 4, mode = "all"), 0)
+  expect_equal(degree(tc, 5, mode = "all"), 0)
+})

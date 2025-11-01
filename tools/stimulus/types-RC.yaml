@@ -69,10 +69,19 @@ CSTRING:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            %C% = Rf_translateCharUTF8(%I%);
+            %C% = Rf_translateCharUTF8(STRING_ELT(%I%, 0));
     OUTCONV:
         OUT: |-
             PROTECT(%I% = Rf_ScalarString(Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8)));
+
+INFILE:
+    CTYPE: FILE*
+    CALL:
+        IN: '%C%'
+    INCONV:
+        IN: |-
+            %C% = R_igraph_fopen_read(%I%);
+            IGRAPH_FINALLY(fclose, %C%);
 
 REAL:
     CTYPE: igraph_real_t
@@ -103,9 +112,6 @@ BOOLEAN:
         OUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
-
-ERROR:
-    CTYPE: igraph_error_t
 
 INDEX_VECTOR:
     CALL: '&%C%'
