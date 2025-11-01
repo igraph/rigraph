@@ -3550,27 +3550,11 @@ max_bipartite_match <- function(
   weights = NULL,
   eps = .Machine$double.eps
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  eps <- as.numeric(eps)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_maximum_bipartite_matching,
-    graph,
-    types,
-    weights,
-    eps
+  res <- maximum_bipartite_matching_impl(
+    graph = graph,
+    types = types,
+    weights = weights,
+    eps = eps
   )
 
   res$matching[res$matching == 0] <- NA

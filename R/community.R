@@ -916,6 +916,12 @@ modularity.igraph <- function(
   ) {
     cli::cli_abort("Membership is not a numerical vector")
   }
+  # Pre-process weights to match old behavior
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
   modularity_impl(
     graph = x,
     membership = membership,
