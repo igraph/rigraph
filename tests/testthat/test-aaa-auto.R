@@ -7417,10 +7417,13 @@ test_that("local_scan_0_them_impl basic", {
 test_that("local_scan_0_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_0_them_impl(
       us = NULL,
-      them = path_graph_impl(3)
+      them = them
     )
   )
 })
@@ -7493,10 +7496,13 @@ test_that("local_scan_1_ecount_them_impl basic", {
 test_that("local_scan_1_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_1_ecount_them_impl(
       us = NULL,
-      them = path_graph_impl(3)
+      them = them
     )
   )
 })
@@ -7576,10 +7582,13 @@ test_that("local_scan_k_ecount_them_impl basic", {
 test_that("local_scan_k_ecount_them_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  them <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     local_scan_k_ecount_them_impl(
       us = NULL,
-      them = path_graph_impl(3),
+      them = them,
       k = 1
     )
   )
@@ -7722,9 +7731,12 @@ test_that("join_impl basic", {
 test_that("join_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  right <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(join_impl(
     left = NULL,
-    right = path_graph_impl(3)
+    right = right
   ))
 })
 
@@ -7835,9 +7847,12 @@ test_that("product_impl basic", {
 test_that("product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  g2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(product_impl(
     g1 = NULL,
-    g2 = path_graph_impl(3)
+    g2 = g2
   ))
 })
 
@@ -7872,10 +7887,13 @@ test_that("rooted_product_impl basic", {
 test_that("rooted_product_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  g2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     rooted_product_impl(
       g1 = NULL,
-      g2 = path_graph_impl(3),
+      g2 = g2,
       root = 1
     )
   )
@@ -8383,9 +8401,12 @@ test_that("isomorphic_impl basic", {
 test_that("isomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8489,9 +8510,12 @@ test_that("isomorphic_vf2_impl basic", {
 test_that("isomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_vf2_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8535,6 +8559,9 @@ test_that("count_isomorphisms_vf2_impl basic", {
 test_that("count_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     count_isomorphisms_vf2_impl(
       graph1 = NULL,
@@ -8580,10 +8607,13 @@ test_that("get_isomorphisms_vf2_impl basic", {
 test_that("get_isomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     get_isomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8617,9 +8647,12 @@ test_that("subisomorphic_impl basic", {
 test_that("subisomorphic_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(subisomorphic_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
@@ -8660,10 +8693,13 @@ test_that("subisomorphic_vf2_impl basic", {
 test_that("subisomorphic_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     subisomorphic_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8705,10 +8741,13 @@ test_that("count_subisomorphisms_vf2_impl basic", {
 test_that("count_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     count_subisomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8750,10 +8789,13 @@ test_that("get_subisomorphisms_vf2_impl basic", {
 test_that("get_subisomorphisms_vf2_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(
     get_subisomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
@@ -8858,9 +8900,12 @@ test_that("isomorphic_bliss_impl basic", {
 test_that("isomorphic_bliss_impl errors", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
+  graph2 <- path_graph_impl(
+    n = 3
+  )
   expect_snapshot_igraph_error(isomorphic_bliss_impl(
     graph1 = NULL,
-    graph2 = path_graph_impl(3)
+    graph2 = graph2
   ))
 })
 
