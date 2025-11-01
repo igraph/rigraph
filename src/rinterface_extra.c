@@ -7581,6 +7581,36 @@ SEXP Rx_igraph_cohesive_blocks(SEXP graph) {
   return result;
 }
 
+igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
+                                       igraph_vector_int_t *vids,
+                                       igraph_integer_t isoclass,
+                                       void *extra) {
+
+  SEXP callback = (SEXP)extra;
+  SEXP vids_r, isoclass_r, R_fcall, result;
+  igraph_bool_t cres;
+
+  /* Create R vector for vertex IDs (add 1 for R's 1-based indexing) */
+  PROTECT(vids_r = NEW_INTEGER(igraph_vector_int_size(vids)));
+  for (igraph_integer_t i = 0; i < igraph_vector_int_size(vids); i++) {
+    INTEGER(vids_r)[i] = VECTOR(*vids)[i] + 1;
+  }
+
+  /* Create R integer for isoclass (add 1 for R's 1-based indexing) */
+  PROTECT(isoclass_r = NEW_INTEGER(1));
+  INTEGER(isoclass_r)[0] = isoclass + 1;
+
+  /* Call the R function: callback(vids, isoclass) */
+  PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
+  PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  cres = Rf_asLogical(result);
+
+  UNPROTECT(4);
+  /* R callback returns TRUE to continue, FALSE to stop */
+  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+}
+
+
 typedef struct {
   igraph_arpack_function_t *fun;
 } R_igraph_i_function_container_t;

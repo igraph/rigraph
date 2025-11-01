@@ -287,6 +287,9 @@ EXTRA:
     CALL: {}
     HEADER: ~
 
+MOTIFS_HANDLER_FUNC:
+    CALL: '%I%'
+
 ISOCOMPAT_FUNC:
     CALL: {}
     HEADER: ~

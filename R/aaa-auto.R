@@ -6767,6 +6767,30 @@ motifs_randesu_impl <- function(
   res
 }
 
+motifs_randesu_callback_impl <- function(
+  graph,
+  size,
+  cut_prob = NULL,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  size <- as.numeric(size)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_motifs_randesu_callback,
+    graph,
+    size,
+    cut_prob,
+    callback
+  )
+
+  res
+}
+
 motifs_randesu_estimate_impl <- function(
   graph,
   size = 3,

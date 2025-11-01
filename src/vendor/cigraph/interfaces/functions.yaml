@@ -2006,6 +2006,11 @@ igraph_write_graph_dot:
 igraph_motifs_randesu:
     PARAMS: GRAPH graph, OUT VECTOR hist, INTEGER size=3, OPTIONAL VECTOR cut_prob
 
+igraph_motifs_randesu_callback:
+    PARAMS: |-
+        GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
+        MOTIFS_HANDLER_FUNC callback, OPTIONAL EXTRA extra
+
 igraph_motifs_randesu_estimate:
     PARAMS: |-
         GRAPH graph, OUT INTEGER est, INTEGER size=3, OPTIONAL VECTOR cut_prob,
