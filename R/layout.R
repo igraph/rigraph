@@ -518,6 +518,45 @@ print.igraph_layout_spec <- function(x, ...) {
 }
 
 
+#' Create a layout modifier
+#'
+#' This is a constructor function for creating custom layout modifiers.
+#' Layout modifiers can be used with [layout_()] to modify how layouts
+#' are calculated or to transform the resulting coordinates.
+#'
+#' @param ... Named arguments that define the modifier. Must include:
+#'   \describe{
+#'     \item{id}{A unique identifier string for the modifier}
+#'     \item{type}{Either `"pre"` for pre-layout or `"post"` for post-layout}
+#'     \item{args}{A list of arguments to pass to the apply function}
+#'     \item{apply}{A function with signature
+#'       `function(graph, layout, modifier_args)` that performs the modification}
+#'   }
+#'
+#' @return An object of class `igraph_layout_modifier`.
+#'
+#' @seealso [layout_()] for using modifiers, [component_wise()], [normalize()]
+#'   for examples of built-in modifiers.
+#'
+#' @family layout modifiers
+#' @export
+#' @examples
+#' # Create a custom post-layout modifier that scales coordinates
+#' scale_by <- function(factor) {
+#'   layout_modifier(
+#'     id = "scale_by",
+#'     type = "post",
+#'     args = list(factor = factor),
+#'     apply = function(graph, layout, modifier_args) {
+#'       layout * modifier_args$factor
+#'     }
+#'   )
+#' }
+#'
+#' # Use the custom modifier
+#' g <- make_ring(10)
+#' coords <- layout_(g, in_circle(), scale_by(2))
+#' plot(g, layout = coords)
 layout_modifier <- function(...) {
   structure(
     list(...),
