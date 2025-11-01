@@ -236,6 +236,36 @@
       Error in `triangular_lattice_impl()`:
       ! At vendor/cigraph/src/constructors/lattices.c:xx : Invalid dimension vector. Invalid value
 
+# hexagonal_lattice_impl basic
+
+    Code
+      hexagonal_lattice_impl(dimvector = c(2, 2))
+    Output
+      IGRAPH U--- 16 19 -- 
+      + edges:
+       [1]  1-- 2  1-- 7  2-- 3  3-- 4  3-- 9  4-- 5  5--11  6-- 7  6--12  7-- 8
+      [11]  8-- 9  8--14  9--10 10--11 10--16 12--13 13--14 14--15 15--16
+
+---
+
+    Code
+      hexagonal_lattice_impl(dimvector = c(2, 2), directed = TRUE, mutual = TRUE)
+    Output
+      IGRAPH D--- 16 38 -- 
+      + edges:
+       [1]  1-> 2  2-> 1  1-> 7  7-> 1  2-> 3  3-> 2  3-> 4  4-> 3  3-> 9  9-> 3
+      [11]  4-> 5  5-> 4  5->11 11-> 5  6-> 7  7-> 6  6->12 12-> 6  7-> 8  8-> 7
+      [21]  8-> 9  9-> 8  8->14 14-> 8  9->10 10-> 9 10->11 11->10 10->16 16->10
+      [31] 12->13 13->12 13->14 14->13 14->15 15->14 15->16 16->15
+
+# hexagonal_lattice_impl errors
+
+    Code
+      hexagonal_lattice_impl(dimvector = -1)
+    Condition
+      Error in `hexagonal_lattice_impl()`:
+      ! At vendor/cigraph/src/constructors/lattices.c:xx : Invalid dimension vector. Invalid value
+
 # path_graph_impl basic
 
     Code

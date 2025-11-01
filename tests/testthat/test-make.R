@@ -509,6 +509,48 @@ test_that("graph_from_lcf() works", {
   expect_isomorphic(g1, g2)
 })
 
+test_that("make_hex_lattice works", {
+  # Test triangular shape (1D)
+  g1 <- make_hex_lattice(3)
+  expect_equal(vcount(g1), 22)
+  expect_equal(ecount(g1), 27)
+  expect_false(is_directed(g1))
+
+  # Test rectangular shape (2D)
+  g2 <- make_hex_lattice(c(3, 4))
+  expect_equal(vcount(g2), 38)
+  expect_equal(ecount(g2), 49)
+
+  # Test hexagonal shape (3D)
+  g3 <- make_hex_lattice(c(2, 2, 2))
+  expect_equal(vcount(g3), 24)
+  expect_equal(ecount(g3), 30)
+
+  # Test directed graph
+  g4 <- make_hex_lattice(3, directed = TRUE, mutual = FALSE)
+  expect_true(is_directed(g4))
+
+  # Test mutual edges
+  g5 <- make_hex_lattice(3, directed = TRUE, mutual = TRUE)
+  expect_true(is_directed(g5))
+  # Check that edges come in pairs (mutual)
+  expect_equal(ecount(g5), 54) # Should have double the edges
+})
+
+test_that("hex_lattice works with make_()", {
+  # Test basic usage with make_()
+  g1 <- make_(hex_lattice(3))
+  expect_equal(vcount(g1), 22)
+  expect_equal(ecount(g1), 27)
+
+  # Test with different dimensions
+  g2 <- make_(hex_lattice(c(3, 4)))
+  expect_equal(vcount(g2), 38)
+
+  g3 <- make_(hex_lattice(c(2, 2, 2)))
+  expect_equal(vcount(g3), 24)
+})
+
 test_that("make_full_multipartite() works", {
   # Test basic multipartite graph
   g <- make_full_multipartite(c(2, 3, 4))
