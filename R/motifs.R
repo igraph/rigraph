@@ -158,7 +158,7 @@ motifs <- function(graph, size = 3, cut.prob = NULL) {
   res <- motifs_randesu_impl(
     graph = graph,
     size = size,
-    cut.prob = cut.prob
+    cut_prob = cut.prob
   )
 
   res[is.nan(res)] <- NA
@@ -200,7 +200,7 @@ count_motifs <- function(graph, size = 3, cut.prob = NULL) {
   motifs_randesu_no_impl(
     graph = graph,
     size = size,
-    cut.prob = cut.prob
+    cut_prob = cut.prob
   )
 }
 
@@ -261,8 +261,8 @@ sample_motifs <- function(
   motifs_randesu_estimate_impl(
     graph = graph,
     size = size,
-    cut.prob = cut.prob,
-    sample.size = sample.size,
+    cut_prob = cut.prob,
+    sample_size = sample.size,
     sample = sample
   )
 }

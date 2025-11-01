@@ -49,7 +49,8 @@ Other deterministic constructors:
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_tree}()},
-\code{\link{make_turan}()}
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{Star graph}
 \concept{deterministic constructors}

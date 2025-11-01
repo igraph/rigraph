@@ -98,14 +98,14 @@ stochastic_matrix <- function(
   if (sparse) {
     res <- get_stochastic_sparse_impl(
       graph = graph,
-      column.wise = column.wise,
+      column_wise = column.wise,
       weights = NULL
     )
     res <- igraph.i.spMatrix(res)
   } else {
     res <- get_stochastic_impl(
       graph = graph,
-      column.wise = column.wise,
+      column_wise = column.wise,
       weights = NULL
     )
   }

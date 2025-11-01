@@ -318,7 +318,7 @@ NULL
 centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
   centralization_impl(
     scores = scores,
-    theoretical.max = theoretical.max,
+    theoretical_max = theoretical.max,
     normalized = normalized
   )
 }

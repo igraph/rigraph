@@ -1625,7 +1625,7 @@ subgraph_from_edges <- function(graph, eids, delete.vertices = TRUE) {
   res <- subgraph_from_edges_impl(
     graph = graph,
     eids = eids,
-    delete.vertices = delete.vertices
+    delete_vertices = delete.vertices
   )
 
   res
@@ -1993,7 +1993,7 @@ reciprocity <- function(
 ) {
   reciprocity_impl(
     graph = graph,
-    ignore.loops = ignore.loops,
+    ignore_loops = ignore.loops,
     mode = mode
   )
 }
@@ -3709,7 +3709,7 @@ knn <- function(
     graph = graph,
     vids = vids,
     mode = mode,
-    neighbor.degree.mode = neighbor.degree.mode,
+    neighbor_degree_mode = neighbor.degree.mode,
     weights = weights
   )
 }
