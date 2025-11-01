@@ -2086,7 +2086,7 @@ make_hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
   
   if (igraph_opt("add.params")) {
     graph <- set_graph_attr(graph, "name", "Hexagonal lattice")
-    graph <- set_graph_attr(graph, "dims", dims)
+    graph <- set_graph_attr(graph, "dimvector", dims)
     graph <- set_graph_attr(graph, "directed", directed)
     graph <- set_graph_attr(graph, "mutual", mutual)
   }
@@ -2096,6 +2096,7 @@ make_hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
 #' @rdname make_hex_lattice
 #' @export
 hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
   constructor_spec(make_hex_lattice, dims = dims, directed = directed, mutual = mutual)
 }
 
