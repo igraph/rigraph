@@ -4,17 +4,17 @@
 \alias{edge_density}
 \title{Graph density}
 \usage{
-edge_density(graph, weights = NULL, loops = FALSE)
+edge_density(graph, loops = FALSE)
 }
 \arguments{
 \item{graph}{The input graph.}
-
-\item{weights}{FIXME}
 
 \item{loops}{Logical constant, whether loop edges may exist in the graph.
 This affects the calculation of the largest possible number of edges in the
 graph. If this parameter is set to FALSE yet the graph contains self-loops,
 the result will not be meaningful.}
+
+\item{weights}{FIXME}
 }
 \value{
 A real constant. This function returns \code{NaN} (=0.0/0.0) for an

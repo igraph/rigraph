@@ -17,13 +17,7 @@ assortativity(
   types2 = NULL
 )
 
-assortativity_nominal(
-  graph,
-  weights = NULL,
-  types,
-  directed = TRUE,
-  normalized = TRUE
-)
+assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 assortativity_degree(graph, directed = TRUE)
 }
@@ -58,11 +52,11 @@ values at the two ends of edges.}
 \item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Deprecated aliases for \code{values} and \code{values.in}, respectively.}
 
-\item{weights}{FIXME}
-
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
 with \code{\link[=as.integer]{as.integer()}}.}
+
+\item{weights}{FIXME}
 }
 \value{
 A single real number.

@@ -12,7 +12,7 @@
 \alias{is_clique}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
-cliques(graph, min = UNLIMITED, max = UNLIMITED, max.results = UNLIMITED)
+cliques(graph, min = 0, max = 0)
 
 largest_cliques(graph)
 
@@ -39,8 +39,6 @@ is_clique(graph, candidate, directed = FALSE)
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
 
-\item{max.results}{FIXME}
-
 \item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
 numeric or symbolic if the graph is named. The algorithm is run from these
 vertices only, so only a subset of all maximal cliques is returned. See the
@@ -65,6 +63,8 @@ or only the maximal ones (\code{TRUE}).}
 \item{candidate}{The vertex set to test for being a clique.}
 
 \item{directed}{Whether to consider edge directions.}
+
+\item{max.results}{FIXME}
 
 \item{weights}{FIXME}
 }

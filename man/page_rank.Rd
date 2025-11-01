@@ -6,17 +6,33 @@
 \usage{
 page_rank(
   graph,
-  weights = NULL,
-  reset = NULL,
-  damping = 0.85,
-  directed = TRUE,
-  vids = V(graph),
   algo = c("prpack", "arpack"),
+  vids = V(graph),
+  directed = TRUE,
+  damping = 0.85,
+  personalized = NULL,
+  weights = NULL,
   options = NULL
 )
 }
 \arguments{
 \item{graph}{The graph object.}
+
+\item{algo}{Character scalar, which implementation to use to carry out the
+calculation. The default is \code{"prpack"}, which uses the PRPACK library
+(\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
+by solving a set of linear equations. This is a new implementation in igraph
+version 0.7, and the suggested one, as it is the most stable and the fastest
+for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
+default implementation from igraph version 0.5 until version 0.7. It computes
+PageRank scores by solving an eingevalue problem.}
+
+\item{vids}{The vertices of interest.}
+
+\item{directed}{Logical, if true directed paths will be considered for
+directed graphs. It is ignored for undirected graphs.}
+
+\item{damping}{The damping factor (\sQuote{d} in the original paper).}
 
 \item{weights}{A numerical vector or \code{NULL}. This argument can be used
 to give edge weights for calculating the weighted PageRank of vertices. If
@@ -28,27 +44,11 @@ This function interprets edge weights as connection strengths. In the
 random surfer model, an edge with a larger weight is more likely to be
 selected by the surfer.}
 
-\item{reset}{FIXME}
-
-\item{damping}{The damping factor (\sQuote{d} in the original paper).}
-
-\item{directed}{Logical, if true directed paths will be considered for
-directed graphs. It is ignored for undirected graphs.}
-
-\item{vids}{The vertices of interest.}
-
-\item{algo}{Character scalar, which implementation to use to carry out the
-calculation. The default is \code{"prpack"}, which uses the PRPACK library
-(\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
-by solving a set of linear equations. This is a new implementation in igraph
-version 0.7, and the suggested one, as it is the most stable and the fastest
-for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
-default implementation from igraph version 0.5 until version 0.7. It computes
-PageRank scores by solving an eingevalue problem.}
-
 \item{options}{A named list, to override some ARPACK options. See
 \code{\link[=arpack]{arpack()}} for details. This argument is ignored if the PRPACK
 implementation is used.}
+
+\item{reset}{FIXME}
 }
 \value{
 A named list with entries:

@@ -7,7 +7,7 @@
 centr_degree(
   graph,
   mode = c("all", "out", "in", "total"),
-  loops = c("twice", "none", "once"),
+  loops = TRUE,
   normalized = TRUE
 )
 }

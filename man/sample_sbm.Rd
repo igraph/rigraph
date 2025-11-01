@@ -5,12 +5,7 @@
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{
-sample_sbm(
-  pref.matrix,
-  block.sizes,
-  directed = FALSE,
-  allowed.edge.types = c("simple", "loops", "multi", "all")
-)
+sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
 sbm(...)
 }
@@ -26,15 +21,15 @@ group. The sum of the vector must match the total number of vertices.}
 
 \item{directed}{Logical scalar, whether to generate a directed graph.}
 
+\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
+
+\item{...}{Passed to \code{sample_sbm()}.}
+
 \item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
 Possible values are: \code{"simple"} (no self-loops, no multiple edges),
 \code{"loops"} (self-loops allowed, no multiple edges),
 \code{"multi"} (no self-loops, multiple edges allowed),
 \code{"all"} (both self-loops and multiple edges allowed).}
-
-\item{...}{Passed to \code{sample_sbm()}.}
-
-\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
 \value{
 An igraph graph.

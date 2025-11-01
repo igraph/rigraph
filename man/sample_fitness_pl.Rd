@@ -9,7 +9,8 @@ sample_fitness_pl(
   no.of.edges,
   exponent.out,
   exponent.in = -1,
-  allowed.edge.types = c("simple", "loops", "multi", "all"),
+  loops = FALSE,
+  multiple = FALSE,
   finite.size.correction = TRUE
 )
 }
@@ -28,17 +29,17 @@ undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
 
+\item{loops}{Logical scalar, whether to allow loop edges in the generated
+graph.}
+
+\item{finite.size.correction}{Logical scalar, whether to use the proposed
+finite size correction of Cho et al., see references below.}
+
 \item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
 Possible values are: \code{"simple"} (no self-loops, no multiple edges),
 \code{"loops"} (self-loops allowed, no multiple edges),
 \code{"multi"} (no self-loops, multiple edges allowed),
 \code{"all"} (both self-loops and multiple edges allowed).}
-
-\item{finite.size.correction}{Logical scalar, whether to use the proposed
-finite size correction of Cho et al., see references below.}
-
-\item{loops}{Logical scalar, whether to allow loop edges in the generated
-graph.}
 }
 \value{
 An igraph graph, directed or undirected.

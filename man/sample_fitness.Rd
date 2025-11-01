@@ -8,7 +8,8 @@ sample_fitness(
   no.of.edges,
   fitness.out,
   fitness.in = NULL,
-  allowed.edge.types = c("simple", "loops", "multi", "all")
+  loops = FALSE,
+  multiple = FALSE
 )
 }
 \arguments{
@@ -24,13 +25,13 @@ specifies the in-fitness of each vertex.
 If this argument is not \code{NULL}, then a directed graph is generated,
 otherwise an undirected one.}
 
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
+
 \item{allowed.edge.types}{Character scalar, specifying the types of allowed edges.
 Possible values are: \code{"simple"} (no self-loops, no multiple edges),
 \code{"loops"} (self-loops allowed, no multiple edges),
 \code{"multi"} (no self-loops, multiple edges allowed),
 \code{"all"} (both self-loops and multiple edges allowed).}
-
-\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 }
 \value{
 An igraph graph, directed or undirected.
