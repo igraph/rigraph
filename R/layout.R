@@ -1293,7 +1293,7 @@ layout_with_dh <- function(
   } else {
     use.seed <- TRUE
   }
-  
+
   layout_davidson_harel_impl(
     graph = graph,
     res = coords,
