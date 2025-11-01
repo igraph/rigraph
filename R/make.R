@@ -2089,6 +2089,7 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #'
 #' @concept Wheel graph
 #' @param n Number of vertices.
+#' @inheritParams rlang::args_dots_empty
 #' @param mode It defines the direction of the edges.
 #'   `in`: the edges point *to* the center, `out`: the edges point *from* the
 #'   center, `mutual`: a directed wheel is created with mutual edges,
@@ -2104,9 +2105,11 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' @cdocs igraph_wheel
 make_wheel <- function(
   n,
+  ...,
   mode = c("in", "out", "mutual", "undirected"),
   center = 1
 ) {
+  check_dots_empty()
   res <- wheel_impl(
     n = n,
     mode = mode,
@@ -2114,7 +2117,7 @@ make_wheel <- function(
   )
   if (igraph_opt("add.params")) {
     res$name <- switch(
-      igraph.match.arg(mode),
+      igraph_match_arg(mode),
       "in" = "In-wheel",
       "out" = "Out-wheel",
       "Wheel"

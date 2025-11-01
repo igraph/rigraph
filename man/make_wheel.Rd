@@ -5,12 +5,14 @@
 \alias{wheel}
 \title{Create a wheel graph}
 \usage{
-make_wheel(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
 wheel(...)
 }
 \arguments{
 \item{n}{Number of vertices.}
+
+\item{...}{Passed to \code{make_wheel()}.}
 
 \item{mode}{It defines the direction of the edges.
 \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the
@@ -18,8 +20,6 @@ center, \code{mutual}: a directed wheel is created with mutual edges,
 \code{undirected}: the edges are undirected.}
 
 \item{center}{ID of the center vertex.}
-
-\item{...}{Passed to \code{make_wheel()}.}
 }
 \value{
 An igraph graph.
