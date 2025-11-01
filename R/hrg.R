@@ -251,9 +251,13 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   start <- as.logical(start)
   steps <- as.numeric(steps)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_hrg_fit, graph, hrg, start, steps)
+  res <- hrg_fit_impl(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    steps = steps
+  )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -357,7 +361,9 @@ hrg_tree <- function(hrg) {
     )
   }
 
-  out <- from_hrg_dendrogram_impl(hrg)
+  out <- from_hrg_dendrogram_impl(
+    hrg = hrg
+  )
 
   g <- out$graph
   set_vertex_attr(g, "probability", value = out$prob)
@@ -382,7 +388,9 @@ sample_hrg <- function(hrg) {
     )
   }
 
-  hrg_game_impl(hrg)
+  hrg_game_impl(
+    hrg = hrg
+  )
 }
 #' Predict edges based on a hierarchical random graph model
 #'
@@ -903,7 +911,7 @@ print.igraphHRG <- function(
   level = 3,
   ...
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
   if (type == "auto") {
     is_graph_small <- (length(x$left) <= 100)
     type <- if (is_graph_small) "tree" else "plain"

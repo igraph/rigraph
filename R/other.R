@@ -96,7 +96,7 @@ running_mean <- function(v, binwidth) {
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_running_mean, v, binwidth)
+  .Call(Rx_igraph_running_mean, v, binwidth)
 }
 
 
@@ -224,5 +224,7 @@ igraph.i.spMatrix <- function(M) {
 #' @export
 #' @cdocs igraph_convex_hull
 convex_hull <- function(data) {
-  convex_hull_2d_impl(data = data)
+  convex_hull_2d_impl(
+    data = data
+  )
 }

@@ -942,7 +942,7 @@ sample_pa <- function(
     out.seq <- numeric()
   }
 
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm1 <- switch(
     algorithm,
     "psumtree" = 1,
@@ -1022,13 +1022,11 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
   type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnp,
-    as.numeric(n),
-    as.numeric(p),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnp_impl(
+    n = n,
+    p = p,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1142,7 +1140,7 @@ erdos.renyi.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
@@ -1162,7 +1160,7 @@ random.graph.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
@@ -1360,7 +1358,7 @@ sample_degseq <- function(
   if (missing(method)) {
     method <- method[1]
   }
-  method <- igraph.match.arg(
+  method <- igraph_match_arg(
     method,
     values = c(
       "configuration",
@@ -1469,7 +1467,6 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
   growing_random_game_impl(
     n = n,
     m = m,
-    ...,
     directed = directed,
     citation = citation
   )
@@ -2041,7 +2038,7 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 #' @family functions for manipulating graph structure
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2313,8 +2310,8 @@ sample_bipartite <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  type <- igraph.match.arg(type)
-  mode <- igraph.match.arg(mode)
+  type <- igraph_match_arg(type)
+  mode <- igraph_match_arg(mode)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft(
@@ -2420,7 +2417,7 @@ sample_bipartite_gnm <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   m <- as.numeric(m)
 
   res <- bipartite_game_gnm_impl(
@@ -2449,7 +2446,7 @@ sample_bipartite_gnp <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   p <- as.numeric(p)
 
   res <- bipartite_game_gnp_impl(
@@ -2576,7 +2573,13 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   commonlen <- unique(c(mlen, rholen, Clen))
 
   if (length(commonlen) == 1 && commonlen == 1) {
-    hsbm_game_impl(n, m, rho, C, p)
+    hsbm_game_impl(
+      n = n,
+      m = m,
+      rho = rho,
+      C = C,
+      p = p
+    )
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
@@ -2593,7 +2596,13 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     } else {
       rep(list(C), length.out = commonlen)
     }
-    hsbm_list_game_impl(n, m, rho, C, p)
+    hsbm_list_game_impl(
+      n = n,
+      mlist = m,
+      rholist = rho,
+      Clist = C,
+      p = p
+    )
   }
 }
 
@@ -2900,7 +2909,6 @@ sample_chung_lu <- function(
   chung_lu_game_impl(
     out.weights = out.weights,
     in.weights = in.weights,
-    ...,
     loops = loops,
     variant = variant
   )

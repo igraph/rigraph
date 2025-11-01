@@ -5,7 +5,7 @@
 \alias{tri_lattice}
 \title{Create a triangular lattice graph}
 \usage{
-make_tri_lattice(dims, directed = FALSE, mutual = FALSE)
+make_tri_lattice(dims, ..., directed = FALSE, mutual = FALSE)
 
 tri_lattice(...)
 }
@@ -22,19 +22,22 @@ vertices.
 All dimensions must be non-negative.
 }}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{directed}{Logical scalar, whether to create a directed graph.
 If the \code{mutual} argument is not set to \code{TRUE}, edges will be directed
 from lower-index vertices towards higher-index ones.}
 
 \item{mutual}{Logical scalar, if the graph is directed, this gives whether
 to create all connections as mutual.}
-
-\item{...}{Passed to \code{make_tri_lattice()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\details{
 \code{make_tri_lattice()} creates a triangular lattice with a specified shape.
 The shape can be triangular (1 dimension), quasi-rectangular (2 dimensions),
 or hexagonal (3 dimensions).
@@ -62,14 +65,17 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()}
 }
 \concept{Lattice}
 \concept{deterministic constructors}

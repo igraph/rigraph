@@ -66,13 +66,27 @@ similarity <- function(
     "invlogweighted"
   )
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
   if (method == "jaccard") {
-    similarity_jaccard_impl(graph, vids, mode, loops)
+    similarity_jaccard_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode,
+      loops = loops
+    )
   } else if (method == "dice") {
-    similarity_dice_impl(graph, vids, mode, loops)
+    similarity_dice_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode,
+      loops = loops
+    )
   } else if (method == "invlogweighted") {
-    similarity_inverse_log_weighted_impl(graph, vids, mode)
+    similarity_inverse_log_weighted_impl(
+      graph = graph,
+      vids = vids,
+      mode = mode
+    )
   }
 }
 
