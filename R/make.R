@@ -2030,18 +2030,21 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 
 #' Create a hypercube graph
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' The n-dimensional hypercube graph has \eqn{2^n} vertices and
 #' \eqn{2^{n-1} n} edges.
 #' Two vertices are connected if the binary representations of their vertex
 #' IDs (minus one, to make them zero-based) differ in precisely one bit.
 #'
-#' @param n The dimension of the hypercube graph. Must be non-negative and
-#'   not greater than 57.
+#' @param n The dimension of the hypercube graph.
+#'   Must be non-negative and not greater than 57.
 #' @param directed Logical scalar, whether the graph should be directed.
 #'   If `TRUE`, edges point from vertices with lower IDs toward vertices
 #'   with higher IDs.
 #' @return An igraph graph.
 #'
+#' @concept hypercube
 #' @family deterministic constructors
 #' @export
 #' @examples
@@ -2051,13 +2054,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' print_all(make_hypercube(4))
 #' @cdocs igraph_hypercube
 make_hypercube <- function(n, directed = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- hypercube_impl(n, directed)
-  if (igraph_opt("add.params")) {
-    res$name <- "Hypercube graph"
-    res$n <- n
-  }
-  res
+  hypercube_impl(n = n, directed = directed)
 }
 
 #' @rdname make_hypercube

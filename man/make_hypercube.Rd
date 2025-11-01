@@ -10,8 +10,8 @@ make_hypercube(n, directed = FALSE)
 hypercube(...)
 }
 \arguments{
-\item{n}{The dimension of the hypercube graph. Must be non-negative and
-not greater than 57.}
+\item{n}{The dimension of the hypercube graph.
+Must be non-negative and not greater than 57.}
 
 \item{directed}{Logical scalar, whether the graph should be directed.
 If \code{TRUE}, edges point from vertices with lower IDs toward vertices
@@ -23,6 +23,9 @@ with higher IDs.}
 An igraph graph.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\details{
 The n-dimensional hypercube graph has \eqn{2^n} vertices and
 \eqn{2^{n-1} n} edges.
 Two vertices are connected if the binary representations of their vertex
@@ -41,15 +44,19 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()}
 }
 \concept{deterministic constructors}
+\concept{hypercube}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hypercube}{\code{hypercube()}}.}
 
