@@ -29,11 +29,10 @@ undirected. If greater than or equal to 2, this argument specifies the
 exponent of the in-degree distribution. If non-negative but less than 2, an
 error will be generated.}
 
-\item{loops}{Logical scalar, whether to allow loop edges in the generated
-graph.}
+\item{loops}{Logical scalar, whether to allow loop edges in the graph.}
 
 \item{multiple}{Logical scalar, whether to allow multiple edges in the
-generated graph.}
+graph.}
 
 \item{finite.size.correction}{Logical scalar, whether to use the proposed
 finite size correction of Cho et al., see references below.}
