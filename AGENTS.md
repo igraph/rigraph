@@ -66,6 +66,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Use meaningful variable names that reflect context
 - Run `air format .` before committing changes to ensure consistent formatting
 - Never change deprecated functions
+- Avoid `.Call()` outside `*_impl()` in `aaa-auto.R`
 
 ### Documentation
 
