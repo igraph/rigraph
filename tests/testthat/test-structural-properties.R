@@ -259,6 +259,52 @@ test_that("bfs() does not pad order", {
   expect_equal(as.numeric(bfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
 })
 
+test_that("bfs() parent is numeric vector with NA, not igraph.vs", {
+  # Verify fix for https://github.com/igraph/rigraph/issues/1576
+  g <- sample_gnm(10, 20)
+  res <- bfs(g, 1, parent = TRUE)$parent
+  
+  # parent should be a numeric vector, not igraph.vs
+  expect_true(is.numeric(res))
+  expect_false(inherits(res, "igraph.vs"))
+  
+  # str() should work without error
+  expect_no_error(str(res))
+  
+  # Indexing should work without error
+  expect_no_error(res[1])
+  
+  # Root vertex should have NA parent
+  expect_true(is.na(res[1]))
+  
+  # Other vertices should have numeric parents (or -1 for unreachable)
+  non_root <- res[-1]
+  expect_true(all(is.na(non_root) | non_root > 0 | non_root == -1))
+})
+
+test_that("dfs() parent is numeric vector with NA, not igraph.vs", {
+  # Verify fix for https://github.com/igraph/rigraph/issues/1576
+  g <- sample_gnm(10, 20)
+  res <- dfs(g, 1, parent = TRUE)$parent
+  
+  # parent should be a numeric vector, not igraph.vs
+  expect_true(is.numeric(res))
+  expect_false(inherits(res, "igraph.vs"))
+  
+  # str() should work without error
+  expect_no_error(str(res))
+  
+  # Indexing should work without error
+  expect_no_error(res[1])
+  
+  # Root vertex should have NA parent
+  expect_true(is.na(res[1]))
+  
+  # Other vertices should have numeric parents (or -1 for unreachable)
+  non_root <- res[-1]
+  expect_true(all(is.na(non_root) | non_root > 0 | non_root == -1))
+})
+
 test_that("diameter() works -- undirected", {
   g <- largest_component(sample_gnp(30, 3 / 30))
   sp <- distances(g)

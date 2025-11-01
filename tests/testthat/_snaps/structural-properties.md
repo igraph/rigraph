@@ -29,9 +29,8 @@
       0 1 2 0 0 
       
       $parent
-      + 5/5 vertices, named:
-         a    b    c    z    d 
-      <NA> <NA>    b <NA> <NA> 
+       a  b  c  z  d 
+      -1 NA  2 -1 -1 
       
       $pred
       + 5/5 vertices, named:
@@ -51,9 +50,8 @@
       [1] "out"
       
       $father
-      + 5/5 vertices, named:
-         a    b    c    z    d 
-      <NA> <NA>    b <NA> <NA> 
+       a  b  c  z  d 
+      -1 NA  2 -1 -1 
       
 
 # bfs() deprecated arguments
