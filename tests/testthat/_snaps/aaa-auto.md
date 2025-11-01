@@ -7059,7 +7059,7 @@
 # count_isomorphisms_vf2_impl errors
 
     Code
-      count_isomorphisms_vf2_impl(graph1 = NULL, graph2 = path_graph_impl(3))
+      count_isomorphisms_vf2_impl(graph1 = NULL, graph2 = graph2)
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).

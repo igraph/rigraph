@@ -8565,7 +8565,7 @@ test_that("count_isomorphisms_vf2_impl errors", {
   expect_snapshot_igraph_error(
     count_isomorphisms_vf2_impl(
       graph1 = NULL,
-      graph2 = path_graph_impl(3)
+      graph2 = graph2
     )
   )
 })
