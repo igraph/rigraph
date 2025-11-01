@@ -5,8 +5,16 @@
     Output
       IGRAPH UN-- 3 2 -- 
       + attr: name (v/c)
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
       + edges (vertex names):
-      [1] 0--1 1--2
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
+      [1] 0--0 1--0
 
 # reading graph in LGL format
 
@@ -15,8 +23,16 @@
     Output
       IGRAPH UN-- 3 2 -- 
       + attr: name (v/c)
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
       + edges (vertex names):
-      [1] 0--1 1--2
+    Condition
+      Warning in `matrix()`:
+      data length [3] is not a sub-multiple or multiple of the number of rows [2]
+    Output
+      [1] 0--0 1--0
 
 # reading graph, unused argument
 

@@ -16,7 +16,7 @@
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
-      [1] 2->1 2->1
+      [1] 1->0 1->0
     Code
       graph_from_adjacency_matrix(m, mode = "undirected")
     Condition
@@ -26,27 +26,27 @@
     Output
       IGRAPH U--- 2 2 -- 
       + edges:
-      [1] 1--2 1--2
+      [1] 0--1 0--1
     Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
       IGRAPH U--- 2 2 -- 
       + edges:
-      [1] 1--2 1--2
+      [1] 0--1 0--1
     Code
       graph_from_adjacency_matrix(m, weighted = TRUE)
     Output
       IGRAPH D-W- 2 1 -- 
       + attr: weight (e/n)
       + edge:
-      [1] 2->1
+      [1] 1->0
     Code
       graph_from_adjacency_matrix(m, weighted = "w")
     Output
       IGRAPH D--- 2 1 -- 
       + attr: w (e/n)
       + edge:
-      [1] 2->1
+      [1] 1->0
     Code
       m2 <- structure(c(0, 0.00211360121966095, 0.00211360121966098, 0), dim = c(2L,
         2L))
@@ -66,7 +66,7 @@
     Output
       IGRAPH D--- 1 1 -- 
       + edge:
-      [1] 1->1
+      [1] 0->0
     Code
       graph_from_adjacency_matrix(1, mode = "undirected")
     Condition
@@ -75,7 +75,7 @@
     Output
       IGRAPH U--- 1 1 -- 
       + edge:
-      [1] 1--1
+      [1] 0--0
 
 # graph_from_adjacency_matrix() snapshot for sparse matrices
 
@@ -96,7 +96,7 @@
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
-      [1] 2->1 2->1
+      [1] 1->0 1->0
     Code
       graph_from_adjacency_matrix(m, mode = "undirected")
     Condition
@@ -106,27 +106,27 @@
     Output
       IGRAPH U--- 2 2 -- 
       + edges:
-      [1] 1--2 1--2
+      [1] 0--1 0--1
     Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
       IGRAPH U--- 2 2 -- 
       + edges:
-      [1] 1--2 1--2
+      [1] 0--1 0--1
     Code
       graph_from_adjacency_matrix(m, weighted = TRUE)
     Output
       IGRAPH D-W- 2 1 -- 
       + attr: weight (e/n)
       + edge:
-      [1] 2->1
+      [1] 1->0
     Code
       graph_from_adjacency_matrix(m, weighted = "w")
     Output
       IGRAPH D--- 2 1 -- 
       + attr: w (e/n)
       + edge:
-      [1] 2->1
+      [1] 1->0
     Code
       m2 <- Matrix::sparseMatrix(2:1, 1:2, x = c(0.00211360121966095,
         0.00211360121966098))
