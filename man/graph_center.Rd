@@ -54,7 +54,8 @@ Other paths:
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
-\code{\link{radius}()}
+\code{\link{radius}()},
+\code{\link{widest_path_widths}()}
 }
 \concept{paths}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_graph_center_dijkstra}{\code{graph_center_dijkstra()}}.}
