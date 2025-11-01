@@ -58,7 +58,7 @@ for (file in all_files) {
       }
     )
 
-    deparsed <- deparse(matched_call, width.cutoff = 20)
+    deparsed <- deparse(matched_call, width.cutoff = 500)
     deparsed[[1]] <- sub("(", "(\n    ", deparsed[[1]], fixed = TRUE)
     # Convert dots to underscores in parameter names
     deparsed <- gsub(
