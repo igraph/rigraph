@@ -57,7 +57,8 @@ Other deterministic constructors:
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
 \code{\link{make_tree}()},
-\code{\link{make_turan}()}
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}.}
