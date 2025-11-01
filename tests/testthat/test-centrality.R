@@ -600,29 +600,29 @@ test_that("eigen_centrality() works", {
 })
 
 test_that("dense alpha_centrality() works", {
-  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5), directed = TRUE)
   ac1 <- alpha_centrality(g.1, sparse = FALSE)
   expect_equal(ac1, c(1, 1, 3, 4, 5))
 
-  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1), directed = TRUE)
   ac2 <- alpha_centrality(g.2, sparse = FALSE)
   expect_equal(ac2, c(5, 1, 1, 1, 1))
 
-  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
+  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1), directed = TRUE)
   ac3 <- alpha_centrality(g.3, alpha = 0.5, sparse = FALSE)
   expect_equal(ac3, c(76, 68, 64, 62, 30) / 30)
 })
 
 test_that("sparse alpha_centrality() works", {
-  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+  g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5), directed = TRUE)
   ac1 <- alpha_centrality(g.1, sparse = TRUE)
   expect_equal(ac1, c(1, 1, 3, 4, 5))
 
-  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+  g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1), directed = TRUE)
   ac2 <- alpha_centrality(g.2, sparse = TRUE)
   expect_equal(ac2, c(5, 1, 1, 1, 1))
 
-  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
+  g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1), directed = TRUE)
   ac3 <- alpha_centrality(g.3, alpha = 0.5, sparse = TRUE)
   expect_equal(ac3, c(76, 68, 64, 62, 30) / 30)
 })
@@ -631,7 +631,7 @@ test_that("sparse alpha_centrality() works", {
 ## weighted version
 
 test_that("weighted dense alpha_centrality() works", {
-  star <- make_star(10)
+  star <- make_star(10, mode = "in")
   E(star)$weight <- sample(ecount(star))
 
   ac1 <- alpha_centrality(star, sparse = FALSE)
@@ -645,7 +645,7 @@ test_that("weighted dense alpha_centrality() works", {
 })
 
 test_that("weighted sparse alpha_centrality() works", {
-  star <- make_star(10)
+  star <- make_star(10, mode = "in")
   E(star)$weight <- sample(ecount(star))
 
   ac1 <- alpha_centrality(star, sparse = TRUE)
@@ -659,7 +659,7 @@ test_that("weighted sparse alpha_centrality() works", {
 })
 
 test_that("alpha_centrality() works with custom weight attribute names", {
-  star <- make_star(10)
+  star <- make_star(10, mode = "in")
   E(star)$myweight <- sample(ecount(star))
 
   # Test sparse version with custom attribute name

@@ -9,7 +9,7 @@ graph(
   ...,
   n = max(edges),
   isolates = NULL,
-  directed = TRUE,
+  directed = FALSE,
   dir = directed,
   simplify = TRUE
 )

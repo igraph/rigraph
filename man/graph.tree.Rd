@@ -4,7 +4,7 @@
 \alias{graph.tree}
 \title{Create tree graphs}
 \usage{
-graph.tree(n, children = 2, mode = c("out", "in", "undirected"))
+graph.tree(n, children = 2, mode = c("undirected", "out", "in"))
 }
 \arguments{
 \item{n}{Number of vertices.}

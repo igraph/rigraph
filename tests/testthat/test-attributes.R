@@ -205,7 +205,7 @@ test_that("cannot use vs/es from another graph", {
 })
 
 test_that("attribute combinations handle errors correctly", {
-  g <- make_graph(c(1, 2, 2, 1))
+  g <- make_graph(c(1, 2, 2, 1), directed = TRUE)
   E(g)$weight <- c("a", "b")
   expect_error(
     as_undirected(g, edge.attr.comb = list(weight = "sum")),

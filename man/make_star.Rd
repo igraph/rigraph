@@ -5,7 +5,7 @@
 \alias{star}
 \title{Create a star graph, a tree with n vertices and n - 1 leaves}
 \usage{
-make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
+make_star(n, mode = c("undirected", "in", "out", "mutual"), center = 1)
 
 star(...)
 }

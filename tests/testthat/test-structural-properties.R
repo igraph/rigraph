@@ -4,7 +4,7 @@ test_that("dfs() uses 1-based root vertex index", {
 })
 
 test_that("dfs() does not pad order", {
-  g <- make_star(3)
+  g <- make_star(3, mode = "in")
   expect_equal(as.numeric(dfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
 
   local_igraph_options(return.vs.es = FALSE)
@@ -18,7 +18,7 @@ test_that("dfs() does not pad order", {
 })
 
 test_that("dfs() deprecated arguments", {
-  g <- make_star(3)
+  g <- make_star(3, mode = "in")
 
   expect_snapshot(error = TRUE, {
     d <- dfs(
@@ -252,7 +252,7 @@ test_that("bfs() deprecated arguments", {
 })
 
 test_that("bfs() does not pad order", {
-  g <- make_star(3)
+  g <- make_star(3, mode = "in")
   expect_equal(as.numeric(bfs(g, root = 2, unreachable = FALSE)$order), c(2, 1))
 
   local_igraph_options(return.vs.es = FALSE)
@@ -449,7 +449,7 @@ test_that("shortest_paths() works", {
 })
 
 test_that("shortest_paths() can handle negative weights", {
-  g <- make_tree(7)
+  g <- make_tree(7, mode = "out")
   E(g)$weight <- -1
   sps <- shortest_paths(g, 2)$vpath
 
@@ -731,14 +731,14 @@ test_that("max_bipartite_match() handles missing types gracefully", {
 })
 
 test_that("unfold_tree() works", {
-  g <- make_tree(7, 2)
+  g <- make_tree(7, 2, mode = "out")
   g <- add_edges(g, c(2, 7, 1, 4))
   g2 <- unfold_tree(g, roots = 1)
   expect_isomorphic(
     g2$tree,
     make_graph(c(
       1, 2, 1, 3, 2, 8, 2, 5, 3, 6, 3, 9, 2, 7, 1, 4
-    ))
+    ), directed = TRUE)
   )
   expect_equal(g2$vertex_index, c(1, 2, 3, 4, 5, 6, 7, 4, 7))
 })
@@ -940,8 +940,8 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   )
 
   ## Direction of the edge is important
-  expect_false(any_multiple(make_graph(c(1, 2, 2, 1))))
-  expect_equal(which_multiple(make_graph(c(1, 2, 2, 1))), c(FALSE, FALSE))
+  expect_false(any_multiple(make_graph(c(1, 2, 2, 1), directed = TRUE)))
+  expect_equal(which_multiple(make_graph(c(1, 2, 2, 1), directed = TRUE)), c(FALSE, FALSE))
   expect_equal(
     which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE)),
     c(FALSE, TRUE)

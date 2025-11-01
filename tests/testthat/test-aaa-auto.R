@@ -6840,7 +6840,7 @@ test_that("hrg_predict_impl errors", {
 test_that("hrg_create_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- make_tree(5)
+  g <- make_tree(5, mode = "out")
   expect_snapshot(hrg_create_impl(
     graph = g,
     prob = rep(0.5, 2)
@@ -10542,8 +10542,8 @@ test_that("coreness_impl errors", {
 test_that("union_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g1 <- make_graph(c(1, 2, 2, 3), n = 3)
-  g2 <- make_graph(c(1, 3, 3, 4), n = 4)
+  g1 <- make_graph(c(1, 2, 2, 3), n = 3, directed = TRUE)
+  g2 <- make_graph(c(1, 3, 3, 4), n = 4, directed = TRUE)
   expect_snapshot(union_impl(
     left = g1,
     right = g2
@@ -10564,8 +10564,8 @@ test_that("union_impl errors", {
 test_that("intersection_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g1 <- make_graph(c(1, 2, 2, 3, 1, 3), n = 3)
-  g2 <- make_graph(c(1, 2, 2, 3), n = 3)
+  g1 <- make_graph(c(1, 2, 2, 3, 1, 3), n = 3, directed = TRUE)
+  g2 <- make_graph(c(1, 2, 2, 3), n = 3, directed = TRUE)
   expect_snapshot(intersection_impl(
     left = g1,
     right = g2

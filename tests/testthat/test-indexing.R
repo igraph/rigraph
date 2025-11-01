@@ -1,6 +1,6 @@
 test_that("[ indexing works", {
   skip_if_not_installed("Matrix", minimum_version = "1.6.0")
-  g <- make_tree(20)
+  g <- make_tree(20, mode = "out")
 
   expect_equal(g[1, 2], 1)
   expect_equal(

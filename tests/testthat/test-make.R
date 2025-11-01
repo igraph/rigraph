@@ -207,13 +207,13 @@ test_that("make_lattice prints a warning for fractional length)", {
 
 test_that("make_graph works", {
   graph_make <- make_graph(1:10)
-  graph_elist <- make_empty_graph(n = 10) + edges(1:10)
+  graph_elist <- make_empty_graph(n = 10, directed = FALSE) + edges(1:10)
   expect_identical_graphs(graph_make, graph_elist)
 })
 
 test_that("make_graph accepts an empty vector or NULL", {
   graph_make <- make_graph(c())
-  graph_empty <- make_empty_graph(n = 0)
+  graph_empty <- make_empty_graph(n = 0, directed = FALSE)
   expect_identical_graphs(graph_make, graph_empty)
 
   graph_make_null <- make_graph(NULL, n = 0)
@@ -225,13 +225,13 @@ test_that("make_graph accepts an empty vector or NULL", {
 
 test_that("make_graph works for numeric edges and isolates", {
   graph_make <- make_graph(1:10, n = 20)
-  graph_elist <- make_empty_graph(n = 20) + edges(1:10)
+  graph_elist <- make_empty_graph(n = 20, directed = FALSE) + edges(1:10)
   expect_identical_graphs(graph_make, graph_elist)
 })
 
 test_that("make_graph handles names", {
   graph_make_names <- make_graph(letters[1:10])
-  graph_elist_names <- make_empty_graph() +
+  graph_elist_names <- make_empty_graph(directed = FALSE) +
     vertices(letters[1:10]) +
     edges(letters[1:10])
   expect_identical_graphs(graph_make_names, graph_elist_names)
@@ -239,7 +239,7 @@ test_that("make_graph handles names", {
 
 test_that("make_graph handles names and isolates", {
   graph_make_iso <- make_graph(letters[1:10], isolates = letters[11:20])
-  graph_elist_iso <- make_empty_graph() +
+  graph_elist_iso <- make_empty_graph(directed = FALSE) +
     vertices(letters[1:20]) +
     edges(letters[1:10])
   expect_identical_graphs(graph_make_iso, graph_elist_iso)
@@ -260,7 +260,7 @@ test_that("compatibility when arguments are not named", {
   # Commit: eb46e5bb252e80780cf3c7f02ca44a57e7469752
   elist <- cbind(1, 3)
   nodes <- 3
-  graph_unnamed_args <- make_graph(as.vector(t(elist)), nodes, FALSE)
+  graph_unnamed_args <- make_graph(as.vector(t(elist)), n = nodes, directed = FALSE)
 
   expect_vcount(graph_unnamed_args, 3)
   expect_ecount(graph_unnamed_args, 1)
@@ -341,7 +341,7 @@ test_that("make_de_bruijn_graph works", {
     make_graph(c(
     1, 1, 3, 1, 1, 2, 3, 2, 2, 3,
     4, 3, 2, 4, 4, 4
-  ))
+  ), directed = TRUE)
   )
   expect_isomorphic(de_bruijn22, de_bruijn21_line)
 })
@@ -539,4 +539,37 @@ test_that("make_turan() works", {
   # Test constructor spec form
   g5 <- make_(turan(10, 2))
   expect_vcount(g5, 10)
+})
+
+test_that("make_tree() defaults to undirected", {
+  g <- make_tree(10)
+  expect_false(is_directed(g))
+  
+  # Can still create directed trees
+  g_out <- make_tree(10, mode = "out")
+  expect_true(is_directed(g_out))
+  
+  g_in <- make_tree(10, mode = "in")
+  expect_true(is_directed(g_in))
+})
+
+test_that("make_star() defaults to undirected", {
+  g <- make_star(10)
+  expect_false(is_directed(g))
+  
+  # Can still create directed stars
+  g_in <- make_star(10, mode = "in")
+  expect_true(is_directed(g_in))
+  
+  g_out <- make_star(10, mode = "out")
+  expect_true(is_directed(g_out))
+})
+
+test_that("make_graph() defaults to undirected", {
+  g <- make_graph(c(1, 2, 2, 3, 3, 4))
+  expect_false(is_directed(g))
+  
+  # Can still create directed graphs
+  g_dir <- make_graph(c(1, 2, 2, 3, 3, 4), directed = TRUE)
+  expect_true(is_directed(g_dir))
 })
