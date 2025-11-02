@@ -1044,7 +1044,6 @@ pa <- function(
 #' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
   res <- erdos_renyi_game_gnp_impl(
     n = n,
@@ -1096,7 +1095,6 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #' degree_distribution(g)
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
   type <- "gnm"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
   res <- erdos_renyi_game_gnm_impl(
     n = n,
