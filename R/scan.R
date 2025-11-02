@@ -182,21 +182,17 @@ local_scan <- function(
       as.numeric(E(graph.us)$weight)
     }
   } else {
-    NULL
+    # Use numeric(0) instead of NULL to prevent _impl from auto-fetching weights
+    numeric(0)
   }
 
   res <- if (is.null(graph.them)) {
     if (!is.null(neighborhoods)) {
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        neighborhoods <- lapply(neighborhoods, function(x) {
-          as.numeric(x) - 1
-        })
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_neighborhood_ecount,
-          graph.us,
-          edge_weights,
-          neighborhoods
+        local_scan_neighborhood_ecount_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          neighborhoods = neighborhoods
         )
       } else {
         sapply(
@@ -208,35 +204,29 @@ local_scan <- function(
     } else {
       ## scan-0
       if (k == 0) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_0,
-          graph.us,
-          edge_weights,
-          cmode
+        local_scan_0_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## scan-1, ecount
       } else if (
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_1_ecount,
-          graph.us,
-          edge_weights,
-          cmode
+        local_scan_1_ecount_impl(
+          graph = graph.us,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_k_ecount,
-          graph.us,
-          as.numeric(k),
-          edge_weights,
-          cmode
+        local_scan_k_ecount_impl(
+          graph = graph.us,
+          k = k,
+          weights = edge_weights,
+          mode = mode
         )
 
         ## General
@@ -252,15 +242,10 @@ local_scan <- function(
     if (!is.null(neighborhoods)) {
       neighborhoods <- lapply(neighborhoods, as.vector)
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        neighborhoods <- lapply(neighborhoods, function(x) {
-          as.numeric(x) - 1
-        })
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_neighborhood_ecount,
-          graph.them,
-          edge_weights,
-          neighborhoods
+        local_scan_neighborhood_ecount_impl(
+          graph = graph.them,
+          weights = edge_weights,
+          neighborhoods = neighborhoods
         )
       } else {
         sapply(
@@ -272,38 +257,32 @@ local_scan <- function(
     } else {
       ## scan-0
       if (k == 0) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_0_them,
-          graph.us,
-          graph.them,
-          edge_weights,
-          cmode
+        local_scan_0_them_impl(
+          us = graph.us,
+          them = graph.them,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## scan-1, ecount
       } else if (
         k == 1 && is.character(FUN) && FUN %in% c("ecount", "sumweights")
       ) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_1_ecount_them,
-          graph.us,
-          graph.them,
-          edge_weights,
-          cmode
+        local_scan_1_ecount_them_impl(
+          us = graph.us,
+          them = graph.them,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## scan-k, ecount
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
-        on.exit(.Call(R_igraph_finalizer))
-        .Call(
-          R_igraph_local_scan_k_ecount_them,
-          graph.us,
-          graph.them,
-          as.numeric(k),
-          edge_weights,
-          cmode
+        local_scan_k_ecount_them_impl(
+          us = graph.us,
+          them = graph.them,
+          k = k,
+          weights_them = edge_weights,
+          mode = mode
         )
 
         ## General

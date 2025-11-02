@@ -133,15 +133,9 @@ each_edge <- function(
   multiple = FALSE,
   mode = c("all", "out", "in", "total")
 ) {
-  mode <- switch(
-    igraph_match_arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- igraph_match_arg(mode)
   multiple <- as.logical(multiple)
-  if (mode != 3) {
+  if (mode != "all" && mode != "total") {
     if (!multiple) {
       cli::cli_abort(
         '{.code multiple = FALSE} is not supported
@@ -171,14 +165,10 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_rewire_directed_edges,
-    graph,
-    as.numeric(prob),
-    as.logical(loops),
-    as.numeric(mode)
+  rewire_directed_edges_impl(
+    graph = graph,
+    prob = prob,
+    loops = loops,
+    mode = mode
   )
 }

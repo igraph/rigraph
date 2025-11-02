@@ -1287,42 +1287,26 @@ layout_with_dh <- function(
   weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
   weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords[] <- as.numeric(coords)
-    use.seed <- TRUE
-  } else {
+  if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
+  } else {
+    use.seed <- TRUE
   }
-  maxiter <- as.numeric(maxiter)
-  fineiter <- as.numeric(fineiter)
-  cool.fact <- as.numeric(cool.fact)
-  weight.node.dist <- as.numeric(weight.node.dist)
-  weight.border <- as.numeric(weight.border)
-  weight.edge.lengths <- as.numeric(weight.edge.lengths)
-  weight.edge.crossings <- as.numeric(weight.edge.crossings)
-  weight.node.edge.dist <- as.numeric(weight.node.edge.dist)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_davidson_harel,
-    graph,
-    coords,
-    use.seed,
-    maxiter,
-    fineiter,
-    cool.fact,
-    weight.node.dist,
-    weight.border,
-    weight.edge.lengths,
-    weight.edge.crossings,
-    weight.node.edge.dist
+  layout_davidson_harel_impl(
+    graph = graph,
+    res = coords,
+    use_seed = use.seed,
+    maxiter = maxiter,
+    fineiter = fineiter,
+    cool_fact = cool.fact,
+    weight_node_dist = weight.node.dist,
+    weight_border = weight.border,
+    weight_edge_lengths = weight.edge.lengths,
+    weight_edge_crossings = weight.edge.crossings,
+    weight_node_edge_dist = weight.node.edge.dist
   )
-
-  res
 }
 
 
@@ -1596,35 +1580,22 @@ layout_with_gem <- function(
   temp.min = 1 / 10,
   temp.init = sqrt(max(vcount(graph), 1))
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords[] <- as.numeric(coords)
-    use.seed <- TRUE
-  } else {
+  if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
+  } else {
+    use.seed <- TRUE
   }
 
-  maxiter <- as.numeric(maxiter)
-  temp.max <- as.numeric(temp.max)
-  temp.min <- as.numeric(temp.min)
-  temp.init <- as.numeric(temp.init)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_gem,
-    graph,
-    coords,
-    use.seed,
-    maxiter,
-    temp.max,
-    temp.min,
-    temp.init
+  layout_gem_impl(
+    graph = graph,
+    res = coords,
+    use_seed = use.seed,
+    maxiter = maxiter,
+    temp_max = temp.max,
+    temp_min = temp.min,
+    temp_init = temp.init
   )
-
-  res
 }
 
 
@@ -2304,34 +2275,15 @@ layout_with_sugiyama <- function(
   weights = NULL,
   attributes = c("default", "all", "none")
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(layers)) {
-    layers <- as.numeric(layers) - 1
-  }
-  hgap <- as.numeric(hgap)
-  vgap <- as.numeric(vgap)
-  maxiter <- as.numeric(maxiter)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
   attributes <- igraph_match_arg(attributes)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_sugiyama,
-    graph,
-    layers,
-    hgap,
-    vgap,
-    maxiter,
-    weights
+  res <- layout_sugiyama_impl(
+    graph = graph,
+    layers = layers,
+    hgap = hgap,
+    vgap = vgap,
+    maxiter = maxiter,
+    weights = weights
   )
 
   # Flip the y coordinates, more natural this way

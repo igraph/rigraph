@@ -911,36 +911,18 @@ modularity.igraph <- function(
   directed = TRUE,
   ...
 ) {
-  # Argument checks
-  ensure_igraph(x)
   if (
     is.null(membership) || (!is.numeric(membership) && !is.factor(membership))
   ) {
     cli::cli_abort("Membership is not a numerical vector")
   }
-  membership <- as.numeric(membership)
-  if (is.null(weights) && "weight" %in% edge_attr_names(x)) {
-    weights <- E(x)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  resolution <- as.numeric(resolution)
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_modularity,
-    x,
-    membership - 1,
-    weights,
-    resolution,
-    directed
+  modularity_impl(
+    graph = x,
+    membership = membership,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
   )
-  res
 }
 
 #' @rdname communities
@@ -1784,17 +1766,9 @@ cluster_leiden <- function(
 #' g <- make_graph("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
 cluster_fluid_communities <- function(graph, no.of.communities) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  no.of.communities <- as.numeric(no.of.communities)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  membership <- .Call(
-    R_igraph_community_fluid_communities,
-    graph,
-    no.of.communities
+  membership <- community_fluid_communities_impl(
+    graph = graph,
+    no_of_communities = no.of.communities
   )
 
   res <- list()
