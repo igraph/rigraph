@@ -290,10 +290,10 @@ delete_edges <- function(graph, edges) {
 #' g2
 #' V(g2)
 delete_vertices <- function(graph, v) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
+  delete_vertices_impl(
+    graph = graph,
+    vertices = v
+  )
 }
 
 ###################################################################
