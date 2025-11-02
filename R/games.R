@@ -1016,7 +1016,6 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
   res <- erdos_renyi_game_gnp_impl(
     n = n,
@@ -1067,16 +1066,12 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' degree_distribution(g)
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
   type <- "gnm"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnm,
-    as.numeric(n),
-    as.numeric(m),
-    as.logical(directed),
-    as.logical(loops),
-    FALSE
+  res <- erdos_renyi_game_gnm_impl(
+    n = n,
+    m = m,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1950,16 +1945,14 @@ sample_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.double(type.dist),
-    as.logical(fixed.sizes),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(directed),
-    as.logical(loops)
+  res <- preference_game_impl(
+    nodes = nodes,
+    types = types,
+    type_dist = type.dist,
+    fixed_sizes = fixed.sizes,
+    pref_matrix = pref.matrix,
+    directed = directed,
+    loops = loops
   )
   V(res[[1]])$type <- res[[2]] + 1
   if (igraph_opt("add.params")) {
@@ -2001,15 +1994,13 @@ sample_asym_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_asymmetric_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.numeric(types),
-    matrix(as.double(type.dist.matrix), types, types),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(loops)
+  res <- asymmetric_preference_game_impl(
+    nodes = nodes,
+    out_types = types,
+    in_types = types,
+    type_dist_matrix = type.dist.matrix,
+    pref_matrix = pref.matrix,
+    loops = loops
   )
   V(res[[1]])$outtype <- res[[2]] + 1
   V(res[[1]])$intype <- res[[3]] + 1
