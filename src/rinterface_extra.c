@@ -5519,23 +5519,6 @@ SEXP R_igraph_st_vertex_connectivity(SEXP graph, SEXP psource,
   return result;
 }
 
-SEXP Rx_igraph_vertex_connectivity(SEXP graph, SEXP pchecks) {
-
-  igraph_t g;
-  igraph_integer_t res;
-  igraph_bool_t checks=LOGICAL(pchecks)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_vertex_connectivity(&g, &res, checks));
-
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_st_edge_connectivity(SEXP graph, SEXP psource, SEXP ptarget) {
 
   igraph_t g;
