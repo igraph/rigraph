@@ -5818,24 +5818,6 @@ SEXP R_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
   return result;
 }
 
-SEXP Rx_igraph_coreness(SEXP graph, SEXP pmode) {
-
-  igraph_t g;
-  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
-  igraph_vector_int_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_coreness(&g, &res, mode));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
                               SEXP pminsize, SEXP pmaxsize) {
 
