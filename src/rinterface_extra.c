@@ -8671,3 +8671,16 @@ SEXP Rx_igraph_add_env(SEXP graph) {
 SEXP Rx_igraph_get_graph_id(SEXP graph) {
   return Rf_findVar(Rf_install("myid"), R_igraph_graph_env(graph));
 }
+
+// Wrapper functions for functions not in aaa-auto.R
+SEXP Rx_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
+  return R_igraph_adjacency(adjmatrix, mode, loops);
+}
+
+SEXP Rx_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
+  return R_igraph_weighted_adjacency(adjmatrix, mode, loops);
+}
+
+SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
+  return R_igraph_create_bipartite(types, edges, directed);
+}

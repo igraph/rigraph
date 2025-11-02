@@ -722,7 +722,7 @@ graph.bipartite <- function(types, edges, directed = FALSE) {
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_create_bipartite, types, edges, directed)
+  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
@@ -2662,7 +2662,7 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_create_bipartite, types, edges, directed)
+  res <- .Call(Rx_igraph_create_bipartite, types, edges, directed)
   res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {

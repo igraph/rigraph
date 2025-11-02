@@ -26,7 +26,6 @@ extern SEXP R_igraph_add_edges(SEXP, SEXP);
 extern SEXP R_igraph_add_edges_manual(SEXP, SEXP);
 extern SEXP R_igraph_add_vertices(SEXP, SEXP);
 extern SEXP R_igraph_adhesion(SEXP, SEXP);
-extern SEXP R_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjlist(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_all_minimal_st_separators(SEXP);
@@ -111,7 +110,6 @@ extern SEXP R_igraph_count_reachable(SEXP, SEXP);
 extern SEXP R_igraph_count_subisomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_count_triangles(SEXP);
 extern SEXP R_igraph_create(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_create_bipartite(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_cycle_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_de_bruijn(SEXP, SEXP);
 extern SEXP R_igraph_decompose(SEXP, SEXP, SEXP, SEXP);
@@ -448,7 +446,6 @@ extern SEXP R_igraph_vs_adj(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_vs_nei(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_walktrap_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_watts_strogatz_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_clique_number(SEXP, SEXP);
 extern SEXP R_igraph_weighted_cliques(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_wheel(SEXP, SEXP, SEXP);
@@ -469,6 +466,7 @@ extern SEXP Rx_igraph_add_version_to_env(SEXP);
 extern SEXP Rx_igraph_add_vertices(SEXP, SEXP);
 extern SEXP Rx_igraph_address(SEXP);
 extern SEXP Rx_igraph_adhesion(SEXP, SEXP);
+extern SEXP Rx_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_adjacent_vertices(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack_unpack_complex(SEXP, SEXP, SEXP);
@@ -484,6 +482,7 @@ extern SEXP Rx_igraph_copy_env(SEXP);
 extern SEXP Rx_igraph_copy_from(SEXP);
 extern SEXP Rx_igraph_copy_to(SEXP);
 extern SEXP Rx_igraph_coreness(SEXP, SEXP);
+extern SEXP Rx_igraph_create_bipartite(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_delete_edges(SEXP, SEXP);
 extern SEXP Rx_igraph_delete_vertices(SEXP, SEXP);
 extern SEXP Rx_igraph_difference(SEXP, SEXP);
@@ -539,6 +538,7 @@ extern SEXP Rx_igraph_vertex_connectivity(SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
 extern SEXP Rx_igraph_weak_ref_run_finalizer(SEXP);
 extern SEXP Rx_igraph_weak_ref_value(SEXP);
+extern SEXP Rx_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_dot(SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_edgelist(SEXP, SEXP);
 extern SEXP Rx_igraph_write_graph_gml(SEXP, SEXP, SEXP, SEXP);
@@ -552,7 +552,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges_manual",                           (DL_FUNC) &R_igraph_add_edges_manual,                            2},
     {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_adhesion",                                   (DL_FUNC) &R_igraph_adhesion,                                    2},
-    {"R_igraph_adjacency",                                  (DL_FUNC) &R_igraph_adjacency,                                   3},
     {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
     {"R_igraph_adjlist",                                    (DL_FUNC) &R_igraph_adjlist,                                     3},
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
@@ -637,7 +636,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_count_subisomorphisms_vf2",                  (DL_FUNC) &R_igraph_count_subisomorphisms_vf2,                   6},
     {"R_igraph_count_triangles",                            (DL_FUNC) &R_igraph_count_triangles,                             1},
     {"R_igraph_create",                                     (DL_FUNC) &R_igraph_create,                                      3},
-    {"R_igraph_create_bipartite",                           (DL_FUNC) &R_igraph_create_bipartite,                            3},
     {"R_igraph_cycle_graph",                                (DL_FUNC) &R_igraph_cycle_graph,                                 3},
     {"R_igraph_de_bruijn",                                  (DL_FUNC) &R_igraph_de_bruijn,                                   2},
     {"R_igraph_decompose",                                  (DL_FUNC) &R_igraph_decompose,                                   4},
@@ -974,7 +972,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_vs_nei",                                     (DL_FUNC) &R_igraph_vs_nei,                                      4},
     {"R_igraph_walktrap_community",                         (DL_FUNC) &R_igraph_walktrap_community,                          6},
     {"R_igraph_watts_strogatz_game",                        (DL_FUNC) &R_igraph_watts_strogatz_game,                         6},
-    {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          3},
     {"R_igraph_weighted_clique_number",                     (DL_FUNC) &R_igraph_weighted_clique_number,                      2},
     {"R_igraph_weighted_cliques",                           (DL_FUNC) &R_igraph_weighted_cliques,                            5},
     {"R_igraph_wheel",                                      (DL_FUNC) &R_igraph_wheel,                                       3},
@@ -995,6 +992,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_add_vertices",                              (DL_FUNC) &Rx_igraph_add_vertices,                               2},
     {"Rx_igraph_address",                                   (DL_FUNC) &Rx_igraph_address,                                    1},
     {"Rx_igraph_adhesion",                                  (DL_FUNC) &Rx_igraph_adhesion,                                   2},
+    {"Rx_igraph_adjacency",                                 (DL_FUNC) &Rx_igraph_adjacency,                                  3},
     {"Rx_igraph_adjacent_vertices",                         (DL_FUNC) &Rx_igraph_adjacent_vertices,                          3},
     {"Rx_igraph_arpack",                                    (DL_FUNC) &Rx_igraph_arpack,                                     5},
     {"Rx_igraph_arpack_unpack_complex",                     (DL_FUNC) &Rx_igraph_arpack_unpack_complex,                      3},
@@ -1010,6 +1008,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_copy_from",                                 (DL_FUNC) &Rx_igraph_copy_from,                                  1},
     {"Rx_igraph_copy_to",                                   (DL_FUNC) &Rx_igraph_copy_to,                                    1},
     {"Rx_igraph_coreness",                                  (DL_FUNC) &Rx_igraph_coreness,                                   2},
+    {"Rx_igraph_create_bipartite",                          (DL_FUNC) &Rx_igraph_create_bipartite,                           3},
     {"Rx_igraph_delete_edges",                              (DL_FUNC) &Rx_igraph_delete_edges,                               2},
     {"Rx_igraph_delete_vertices",                           (DL_FUNC) &Rx_igraph_delete_vertices,                            2},
     {"Rx_igraph_difference",                                (DL_FUNC) &Rx_igraph_difference,                                 2},
@@ -1065,6 +1064,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_weak_ref_key",                              (DL_FUNC) &Rx_igraph_weak_ref_key,                               1},
     {"Rx_igraph_weak_ref_run_finalizer",                    (DL_FUNC) &Rx_igraph_weak_ref_run_finalizer,                     1},
     {"Rx_igraph_weak_ref_value",                            (DL_FUNC) &Rx_igraph_weak_ref_value,                             1},
+    {"Rx_igraph_weighted_adjacency",                        (DL_FUNC) &Rx_igraph_weighted_adjacency,                         3},
     {"Rx_igraph_write_graph_dot",                           (DL_FUNC) &Rx_igraph_write_graph_dot,                            2},
     {"Rx_igraph_write_graph_edgelist",                      (DL_FUNC) &Rx_igraph_write_graph_edgelist,                       2},
     {"Rx_igraph_write_graph_gml",                           (DL_FUNC) &Rx_igraph_write_graph_gml,                            4},
