@@ -1549,8 +1549,9 @@ make_famous_graph <- function(name) {
   check_string(name)
   name <- gsub("\\s", "_", name)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_famous, name)
+  res <- famous_impl(
+    name = name
+  )
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
   }

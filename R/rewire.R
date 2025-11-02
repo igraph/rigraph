@@ -83,13 +83,14 @@ keeping_degseq <- function(loops = FALSE, niter = 100) {
 }
 
 rewire_keeping_degseq <- function(graph, loops, niter) {
-  ensure_igraph(graph)
-
   loops <- as.logical(loops)
-  mode <- if (loops) 1 else 0
+  mode <- if (loops) "simple_loops" else "simple"
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
+  rewire_impl(
+    rewire = graph,
+    n = niter,
+    mode = mode
+  )
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex

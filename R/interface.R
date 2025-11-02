@@ -217,8 +217,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(Rx_igraph_finalizer))
-  graph <- .Call(Rx_igraph_add_vertices, graph, as.numeric(nv))
+  graph <- add_vertices_impl(
+    graph = graph,
+    nv = nv
+  )
   vertices.new <- vcount(graph)
 
   if (vertices.new - vertices.orig != 0) {
@@ -262,10 +264,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
+  delete_edges_impl(
+    graph = graph,
+    edges = edges
+  )
 }
 
 #' Delete vertices from a graph
@@ -288,10 +290,10 @@ delete_edges <- function(graph, edges) {
 #' g2
 #' V(g2)
 delete_vertices <- function(graph, v) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
+  delete_vertices_impl(
+    graph = graph,
+    vertices = v
+  )
 }
 
 ###################################################################
@@ -318,10 +320,9 @@ delete_vertices <- function(graph, v) {
 #'   vapply(gsize, 0) %>%
 #'   hist()
 gsize <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_ecount, graph)
+  ecount_impl(
+    graph = graph
+  )
 }
 #' @rdname gsize
 #' @export
@@ -381,25 +382,18 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' incident(g, 1)
 #' incident(g, 34)
 incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
-  ensure_igraph(graph)
-  if (is_directed(graph)) {
-    mode <- igraph_match_arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  # For undirected graphs, mode doesn't matter, use "all"
+  if (!is_directed(graph)) {
+    mode <- "all"
   } else {
-    mode <- 1
-  }
-  v <- as_igraph_vs(graph, v)
-  if (length(v) == 0) {
-    stop("No vertex was specified")
-  }
-  on.exit(.Call(Rx_igraph_finalizer))
-  res <- .Call(Rx_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
+    mode <- igraph_match_arg(mode)
   }
 
-  res
+  incident_impl(
+    graph = graph,
+    vid = v,
+    mode = mode
+  )
 }
 
 #' Check whether a graph is directed
@@ -417,10 +411,9 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' g2 <- make_ring(10, directed = TRUE)
 #' is_directed(g2)
 is_directed <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(Rx_igraph_is_directed, graph)
+  is_directed_impl(
+    graph = graph
+  )
 }
 
 #' Incident vertices of some graph edges
@@ -442,15 +435,14 @@ is_directed <- function(graph) {
 ends <- function(graph, es, names = TRUE) {
   ensure_igraph(graph)
 
-  es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(Rx_igraph_finalizer))
-
-  if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(Rx_igraph_get_edge, graph, es2) + 1
-  } else {
-    res[, !is.na(es)] <- .Call(Rx_igraph_edges, graph, es2) + 1
+  if (length(es) > 0) {
+    edge_data <- edges_impl(
+      graph = graph,
+      eids = es
+    )
+    res[, !is.na(es)] <- edge_data
   }
 
   if (names && is_named(graph)) {
