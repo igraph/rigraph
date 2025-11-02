@@ -40,6 +40,7 @@ Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
+\code{\link{count_reachable}()},
 \code{\link{decompose}()}
 }
 \concept{components}

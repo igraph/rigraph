@@ -67,8 +67,8 @@ igraph_edge:
     PARAMS: GRAPH graph, INTEGER eid, OUT INTEGER from, OUT INTEGER to
 
 igraph_edges:
-    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VECTOR_INT edges
-    DEPS: eids ON graph
+    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VERTEX_INDICES edges
+    DEPS: eids ON graph, edges ON graph
 
 igraph_get_eid:
     PARAMS: |-
@@ -402,7 +402,7 @@ igraph_hsbm_list_game:
 igraph_correlated_game:
     PARAMS: |-
         GRAPH old_graph, OUT GRAPH new_graph,
-        REAL corr, REAL p=edge_density(old.graph), OPTIONAL INDEX_VECTOR permutation
+        REAL corr, REAL p=edge_density(old_graph), OPTIONAL INDEX_VECTOR permutation
 
 igraph_correlated_pair_game:
     PARAMS: |-
@@ -847,7 +847,8 @@ igraph_neighborhood_graphs:
     DEPS: vids ON graph
 
 igraph_topological_sorting:
-    PARAMS: GRAPH graph, OUT VECTOR_INT res, NEIMODE mode=OUT
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES res, NEIMODE mode=OUT
+    DEPS: res ON graph
 
 igraph_feedback_arc_set:
     # Default algorithm is the approximate method because it is faster and the

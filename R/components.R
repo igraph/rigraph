@@ -203,7 +203,7 @@ decompose <- function(
   min.vertices = 0
 ) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
   if (is.na(max.comps)) {
@@ -327,9 +327,6 @@ biconnected_components <- function(graph) {
     graph = graph
   )
 
-  # TODO: Clean up after fixing "." / "_" problem.
-  # See https://github.com/igraph/rigraph/issues/1203
-
   if (igraph_opt("return.vs.es")) {
     res$tree_edges <- lapply(
       res$tree_edges,
@@ -337,7 +334,8 @@ biconnected_components <- function(graph) {
       graph = graph,
       es = E(graph)
     )
-    res$tree.edges <- NULL
+    # Add backward-compatible dotted name
+    res$tree.edges <- res$tree_edges
   }
 
   if (igraph_opt("return.vs.es")) {
@@ -347,7 +345,8 @@ biconnected_components <- function(graph) {
       graph = graph,
       es = E(graph)
     )
-    res$component.edges <- NULL
+    # Add backward-compatible dotted name
+    res$component.edges <- res$component_edges
   }
   if (igraph_opt("return.vs.es")) {
     res$components <- lapply(
@@ -359,7 +358,8 @@ biconnected_components <- function(graph) {
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)
-    res$articulation.points <- NULL
+    # Add backward-compatible dotted name
+    res$articulation.points <- res$articulation_points
   }
   res
 }

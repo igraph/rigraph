@@ -318,7 +318,7 @@ NULL
 centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
   centralization_impl(
     scores = scores,
-    theoretical.max = theoretical.max,
+    theoretical_max = theoretical.max,
     normalized = normalized
   )
 }
@@ -478,9 +478,12 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_centralization_betweenness, graph, directed, normalized)
+  res <- centralization_betweenness_impl(
+    graph = graph,
+    directed = directed,
+    normalized = normalized
+  )
 
   res
 }

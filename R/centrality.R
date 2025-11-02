@@ -444,27 +444,12 @@ betweenness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  ensure_igraph(graph)
-
-  v <- as_igraph_vs(graph, v)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_betweenness_cutoff,
-    graph,
-    v - 1,
-    directed,
-    weights,
-    cutoff
+  res <- betweenness_cutoff_impl(
+    graph = graph,
+    vids = v,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
   )
   if (normalized) {
     vc <- as.numeric(vcount(graph))
@@ -473,9 +458,6 @@ betweenness <- function(
     } else {
       res <- 2 * res / (vc * vc - 3 * vc + 2)
     }
-  }
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[v]
   }
   res
 }
@@ -490,29 +472,12 @@ edge_betweenness <- function(
   weights = NULL,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
   e <- as_igraph_es(graph, e)
-  directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_edge_betweenness_cutoff,
-    graph,
-    directed,
-    weights,
-    cutoff
+  res <- edge_betweenness_cutoff_impl(
+    graph = graph,
+    directed = directed,
+    weights = weights,
+    cutoff = cutoff
   )
   res[as.numeric(e)]
 }
@@ -619,43 +584,14 @@ closeness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  normalized <- as.logical(normalized)
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_closeness_cutoff,
-    graph,
-    vids - 1,
-    mode,
-    weights,
-    normalized,
-    cutoff
+  closeness_cutoff_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )$res
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[vids]
-  }
-  res
 }
 
 #' Deprecated version of `closeness()`
@@ -1056,7 +992,7 @@ arpack <- function(
   }
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_arpack, func, extra, options, env, sym)
+  res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -1094,7 +1030,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
 
   res
 }
@@ -2053,7 +1989,7 @@ alpha.centrality.dense <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
@@ -2100,7 +2036,7 @@ alpha.centrality.sparse <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))

@@ -942,7 +942,7 @@ sample_pa <- function(
     out.seq <- numeric()
   }
 
-  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- igraph_match_arg(algorithm)
   algorithm1 <- switch(
     algorithm,
     "psumtree" = 1,
@@ -1020,15 +1020,12 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnp,
-    as.numeric(n),
-    as.numeric(p),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnp_impl(
+    n = n,
+    p = p,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1073,15 +1070,12 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' degree_distribution(g)
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
   type <- "gnm"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnm,
-    as.numeric(n),
-    as.numeric(m),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnm_impl(
+    n = n,
+    m = m,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1142,7 +1136,7 @@ erdos.renyi.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "erdos.renyi.game()", "sample_gnp()")
@@ -1162,7 +1156,7 @@ random.graph.game <- function(
   directed = FALSE,
   loops = FALSE
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft("0.8.0", "random.graph.game()", "sample_gnp()")
@@ -1360,7 +1354,7 @@ sample_degseq <- function(
   if (missing(method)) {
     method <- method[1]
   }
-  method <- igraph.match.arg(
+  method <- igraph_match_arg(
     method,
     values = c(
       "configuration",
@@ -1955,16 +1949,14 @@ sample_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.double(type.dist),
-    as.logical(fixed.sizes),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(directed),
-    as.logical(loops)
+  res <- preference_game_impl(
+    nodes = nodes,
+    types = types,
+    type_dist = type.dist,
+    fixed_sizes = fixed.sizes,
+    pref_matrix = pref.matrix,
+    directed = directed,
+    loops = loops
   )
   V(res[[1]])$type <- res[[2]] + 1
   if (igraph_opt("add.params")) {
@@ -2006,15 +1998,13 @@ sample_asym_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_asymmetric_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.numeric(types),
-    matrix(as.double(type.dist.matrix), types, types),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(loops)
+  res <- asymmetric_preference_game_impl(
+    nodes = nodes,
+    out_types = types,
+    in_types = types,
+    type_dist_matrix = type.dist.matrix,
+    pref_matrix = pref.matrix,
+    loops = loops
   )
   V(res[[1]])$outtype <- res[[2]] + 1
   V(res[[1]])$intype <- res[[3]] + 1
@@ -2040,7 +2030,7 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 #' @family functions for manipulating graph structure
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2312,8 +2302,8 @@ sample_bipartite <- function(
   directed = FALSE,
   mode = c("out", "in", "all")
 ) {
-  type <- igraph.match.arg(type)
-  mode <- igraph.match.arg(mode)
+  type <- igraph_match_arg(type)
+  mode <- igraph_match_arg(mode)
 
   if (type == "gnp") {
     lifecycle::deprecate_soft(
@@ -2419,7 +2409,7 @@ sample_bipartite_gnm <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   m <- as.numeric(m)
 
   res <- bipartite_game_gnm_impl(
@@ -2448,7 +2438,7 @@ sample_bipartite_gnp <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
   p <- as.numeric(p)
 
   res <- bipartite_game_gnp_impl(
@@ -2511,8 +2501,8 @@ sample_sbm <- function(
 ) {
   sbm_game_impl(
     n = n,
-    pref.matrix = pref.matrix,
-    block.sizes = block.sizes,
+    pref_matrix = pref.matrix,
+    block_sizes = block.sizes,
     directed = directed,
     loops = loops
   )
@@ -2695,12 +2685,22 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @export
 #' @cdocs igraph_simple_interconnected_islands_game
 sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
-  simple_interconnected_islands_game_impl(
-    islands.n = islands.n,
-    islands.size = islands.size,
-    islands.pin = islands.pin,
-    n.inter = n.inter
+  res <- simple_interconnected_islands_game_impl(
+    islands_n = islands.n,
+    islands_size = islands.size,
+    islands_pin = islands.pin,
+    n_inter = n.inter
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$islands.n <- res$islands_n
+    res$islands.size <- res$islands_size
+    res$islands.pin <- res$islands_pin
+    res$n.inter <- res$n_inter
+  }
+
+  res
 }
 
 
@@ -2747,7 +2747,7 @@ sample_k_regular <- function(
   multiple = FALSE
 ) {
   k_regular_game_impl(
-    no.of.nodes = no.of.nodes,
+    no_of_nodes = no.of.nodes,
     k = k,
     directed = directed,
     multiple = multiple
@@ -2909,8 +2909,8 @@ sample_chung_lu <- function(
   variant = c("original", "maxent", "nr")
 ) {
   chung_lu_game_impl(
-    out.weights = out.weights,
-    in.weights = in.weights,
+    out_weights = out.weights,
+    in_weights = in.weights,
     loops = loops,
     variant = variant
   )
@@ -3004,9 +3004,9 @@ sample_fitness <- function(
   multiple = FALSE
 ) {
   static_fitness_game_impl(
-    no.of.edges = no.of.edges,
-    fitness.out = fitness.out,
-    fitness.in = fitness.in,
+    no_of_edges = no.of.edges,
+    fitness_out = fitness.out,
+    fitness_in = fitness.in,
     loops = loops,
     multiple = multiple
   )
@@ -3086,15 +3086,24 @@ sample_fitness_pl <- function(
   multiple = FALSE,
   finite.size.correction = TRUE
 ) {
-  static_power_law_game_impl(
-    no.of.nodes = no.of.nodes,
-    no.of.edges = no.of.edges,
-    exponent.out = exponent.out,
-    exponent.in = exponent.in,
+  res <- static_power_law_game_impl(
+    no_of_nodes = no.of.nodes,
+    no_of_edges = no.of.edges,
+    exponent_out = exponent.out,
+    exponent_in = exponent.in,
     loops = loops,
     multiple = multiple,
-    finite.size.correction = finite.size.correction
+    finite_size_correction = finite.size.correction
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$exponent.out <- res$exponent_out
+    res$exponent.in <- res$exponent_in
+    res$finite.size.correction <- res$finite_size_correction
+  }
+
+  res
 }
 
 
@@ -3165,13 +3174,21 @@ sample_forestfire <- function(
   ambs = 1,
   directed = TRUE
 ) {
-  forest_fire_game_impl(
+  res <- forest_fire_game_impl(
     nodes = nodes,
-    fw.prob = fw.prob,
-    bw.factor = bw.factor,
+    fw_prob = fw.prob,
+    bw_factor = bw.factor,
     ambs = ambs,
     directed = directed
   )
+
+  # Add backward-compatible dotted names
+  if (igraph_opt("add.params")) {
+    res$fw.prob <- res$fw_prob
+    res$bw.factor <- res$bw_factor
+  }
+
+  res
 }
 
 
@@ -3219,7 +3236,7 @@ sample_correlated_gnp <- function(
   permutation = NULL
 ) {
   correlated_game_impl(
-    old.graph = old.graph,
+    old_graph = old.graph,
     corr = corr,
     p = p,
     permutation = permutation

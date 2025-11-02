@@ -95,12 +95,19 @@ stochastic_matrix <- function(
     )
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   if (sparse) {
-    res <- .Call(R_igraph_get_stochastic_sparse, graph, column.wise, NULL)
+    res <- get_stochastic_sparse_impl(
+      graph = graph,
+      column_wise = column.wise,
+      weights = NULL
+    )
     res <- igraph.i.spMatrix(res)
   } else {
-    res <- .Call(R_igraph_get_stochastic, graph, column.wise, NULL)
+    res <- get_stochastic_impl(
+      graph = graph,
+      column_wise = column.wise,
+      weights = NULL
+    )
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

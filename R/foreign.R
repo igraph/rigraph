@@ -331,7 +331,7 @@ read_graph <- function(
     write.graph.fromraw(buffer, file)
   }
 
-  format <- igraph.match.arg(format)
+  format <- igraph_match_arg(format)
   res <- switch(
     format,
     "pajek" = read.graph.pajek(file, ...),
@@ -497,7 +497,7 @@ write_graph <- function(
     tmpfile <- FALSE
   }
 
-  format <- igraph.match.arg(format)
+  format <- igraph_match_arg(format)
   res <- switch(
     format,
     "pajek" = write.graph.pajek(graph, file, ...),
@@ -534,8 +534,10 @@ read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
 }
 
 write.graph.edgelist <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_edgelist, graph, file)
+  write_graph_edgelist_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 ################################################################
@@ -550,7 +552,7 @@ read.graph.ncol <- function(
   directed = FALSE
 ) {
   weights <- switch(
-    igraph.match.arg(weights),
+    igraph_match_arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
@@ -598,7 +600,7 @@ read.graph.lgl <- function(
   directed = FALSE
 ) {
   weights <- switch(
-    igraph.match.arg(weights),
+    igraph_match_arg(weights),
     "no" = 0L,
     "yes" = 1L,
     "auto" = 2L
@@ -641,8 +643,9 @@ write.graph.lgl <- function(
 }
 
 read.graph.pajek <- function(file) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_read_graph_pajek, file)
+  res <- read_graph_pajek_impl(
+    instream = file
+  )
   if ("type" %in% vertex_attr_names(res)) {
     type <- as.logical(V(res)$type)
     res <- delete_vertex_attr(res, "type")
@@ -652,12 +655,14 @@ read.graph.pajek <- function(file) {
 }
 
 write.graph.pajek <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_pajek, graph, file)
+  write_graph_pajek_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 read.graph.dimacs <- function(file, directed = TRUE) {
-  res <- .Call(R_igraph_read_graph_dimacs, file, as.logical(directed))
+  res <- .Call(Rx_igraph_read_graph_dimacs, file, as.logical(directed))
   if (res[[1]][1] == "max") {
     graph <- res[[2]]
     graph <- set_graph_attr(graph, "problem", res[[1]])
@@ -706,13 +711,18 @@ write.graph.dimacs <- function(
 ################################################################
 
 read.graph.graphml <- function(file, index = 0) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_read_graph_graphml, file, as.numeric(index))
+  read_graph_graphml_impl(
+    instream = file,
+    index = index
+  )
 }
 
 write.graph.graphml <- function(graph, file, prefixAttr = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_graphml, graph, file, as.logical(prefixAttr))
+  write_graph_graphml_impl(
+    graph = graph,
+    outstream = file,
+    prefixattr = prefixAttr
+  )
 }
 
 ################################################################
@@ -720,8 +730,9 @@ write.graph.graphml <- function(graph, file, prefixAttr = TRUE) {
 ################################################################
 
 read.graph.gml <- function(file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_read_graph_gml, file)
+  read_graph_gml_impl(
+    instream = file
+  )
 }
 
 write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
@@ -731,8 +742,13 @@ write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
   if (!is.null(creator)) {
     creator <- as.character(creator)
   }
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_gml, graph, file, id, creator)
+  write_graph_gml_impl(
+    graph = graph,
+    outstream = file,
+    options = "default",
+    id = id,
+    creator = creator
+  )
 }
 
 ################################################################
@@ -740,8 +756,10 @@ write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
 ################################################################
 
 read.graph.dl <- function(file, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_read_graph_dl, file, as.logical(directed))
+  read_graph_dl_impl(
+    instream = file,
+    directed = directed
+  )
 }
 
 ################################################################
@@ -749,8 +767,10 @@ read.graph.dl <- function(file, directed = TRUE) {
 ################################################################
 
 write.graph.dot <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_dot, graph, file)
+  write_graph_dot_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 ################################################################
@@ -914,12 +934,17 @@ graph_from_graphdb <- function(
   f <- tempfile()
   write.graph.fromraw(buffer, f)
 
-  .Call(R_igraph_read_graph_graphdb, f, as.logical(directed))
+  read_graph_graphdb_impl(
+    instream = f,
+    directed = directed
+  )
 }
 
 read.graph.graphdb <- function(file, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_read_graph_graphdb, file, as.logical(directed))
+  read_graph_graphdb_impl(
+    instream = file,
+    directed = directed
+  )
 }
 
 write.graph.leda <- function(
@@ -930,10 +955,18 @@ write.graph.leda <- function(
 ) {
   if (!is.null(vertex.attr)) {
     vertex.attr <- as.character(vertex.attr)
+  } else {
+    vertex.attr <- "name"
   }
   if (!is.null(edge.attr)) {
     edge.attr <- as.character(edge.attr)
+  } else {
+    edge.attr <- "weight"
   }
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_write_graph_leda, graph, file, vertex.attr, edge.attr)
+  write_graph_leda_impl(
+    graph = graph,
+    outstream = file,
+    names = vertex.attr,
+    weights = edge.attr
+  )
 }

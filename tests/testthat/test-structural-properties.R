@@ -72,6 +72,34 @@ test_that("max_degree() works", {
   expect_equal(max_degree(make_empty_graph()), 0)
 })
 
+test_that("mean_degree() works", {
+  # Undirected graph: formula is 2 * edges / vertices
+  g_undirected <- make_ring(10)
+  expect_equal(mean_degree(g_undirected), 2)
+
+  # Directed graph: formula is edges / vertices
+  # This graph has edges 1->2, 2->2 (loop), 2->3, so 3 edges / 3 vertices = 1
+  g_directed <- make_graph(c(1, 2, 2, 2, 2, 3), directed = TRUE)
+  expect_equal(mean_degree(g_directed), 1)
+
+  # Test loops parameter: excluding the self-loop (2->2)
+  # Without loops: (3 edges - 1 loop) / 3 vertices = 2/3
+  expect_equal(mean_degree(g_directed, loops = FALSE), 2 / 3)
+
+  # Empty graph
+  expect_true(is.nan(mean_degree(make_empty_graph())))
+
+  # Compare with manual calculation for undirected graph
+  g_random <- sample_gnp(100, 0.05)
+  manual_mean <- 2 * ecount(g_random) / vcount(g_random)
+  expect_equal(mean_degree(g_random), manual_mean)
+
+  # For directed graph
+  g_directed_random <- sample_gnp(100, 0.05, directed = TRUE)
+  manual_mean_dir <- ecount(g_directed_random) / vcount(g_directed_random)
+  expect_equal(mean_degree(g_directed_random), manual_mean_dir)
+})
+
 test_that("BFS uses 1-based root vertex index", {
   g <- make_ring(3)
   expect_equal(bfs(g, root = 1)$root, 1)
@@ -730,6 +758,50 @@ test_that("a null graph has zero components", {
   expect_equal(count_components(g), 0L)
 })
 
+test_that("count_reachable() works for directed graphs", {
+  # Directed path graph: 1 -> 2 -> 3 -> 4 -> 5
+  g <- make_graph(~ 1 -+ 2 -+ 3 -+ 4 -+ 5)
+
+  # Out mode: count vertices reachable via outgoing edges
+  out_counts <- count_reachable(g, mode = "out")
+  expect_equal(out_counts, c(5, 4, 3, 2, 1))
+
+  # In mode: count vertices from which current vertex is reachable
+  in_counts <- count_reachable(g, mode = "in")
+  expect_equal(in_counts, c(1, 2, 3, 4, 5))
+
+  # All mode: treat as undirected
+  all_counts <- count_reachable(g, mode = "all")
+  expect_equal(all_counts, rep(5, 5))
+})
+
+test_that("count_reachable() works for undirected graphs", {
+  # Undirected path graph
+  g <- make_graph(~ 1 - 2 - 3 - 4 - 5)
+
+  # All vertices are reachable from each other in an undirected path
+  counts <- count_reachable(g, mode = "out")
+  expect_equal(counts, rep(5, 5))
+})
+
+test_that("count_reachable() works for graphs with multiple components", {
+  # Graph with three components: 1-2-3, 4-5, 6
+  g <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
+
+  counts <- count_reachable(g, mode = "all")
+  expect_equal(counts, c(3, 3, 3, 2, 2, 1))
+})
+
+test_that("count_reachable() works for empty and single-vertex graphs", {
+  # Empty graph
+  g0 <- make_empty_graph(0)
+  expect_equal(count_reachable(g0, mode = "out"), integer(0))
+
+  # Single vertex
+  g1 <- make_empty_graph(1)
+  expect_equal(count_reachable(g1, mode = "out"), 1L)
+})
+
 test_that("girth() works", {
   ## No circle in a tree
   g <- make_tree(1000, 3)
@@ -889,6 +961,31 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
     E(g)$weight,
     c(3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1)
   )
+})
+
+test_that("any_loop(), which_loop(), count_loops() works", {
+  # Graph with loops
+  g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
+  expect_true(any_loop(g))
+  expect_equal(which_loop(g), c(TRUE, TRUE, TRUE, FALSE))
+  expect_equal(count_loops(g), 3)
+
+  # Graph without loops
+  g2 <- make_graph(c(1, 2, 2, 3, 3, 4))
+  expect_false(any_loop(g2))
+  expect_equal(which_loop(g2), c(FALSE, FALSE, FALSE))
+  expect_equal(count_loops(g2), 0)
+
+  # Empty graph
+  g3 <- make_empty_graph(n = 5)
+  expect_false(any_loop(g3))
+  expect_equal(count_loops(g3), 0)
+
+  # Graph with only loops
+  g4 <- make_graph(c(1, 1, 2, 2, 3, 3))
+  expect_true(any_loop(g4))
+  expect_equal(which_loop(g4), c(TRUE, TRUE, TRUE))
+  expect_equal(count_loops(g4), 3)
 })
 
 test_that("edge_density works", {

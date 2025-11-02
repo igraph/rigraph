@@ -11,7 +11,8 @@ all_files <- c(source_files, test_file)
 # all_files <- all_files[1:10]
 
 pkgload::load_all()
-library(tidyverse)
+library(dplyr)
+library(stringr)
 
 for (file in all_files) {
   cat(sprintf("Processing %s...\n", file))
@@ -57,18 +58,28 @@ for (file in all_files) {
       }
     )
 
-    deparsed <- deparse(matched_call, width.cutoff = 20)
+    # Convert dots to underscores in parameter names
+    names_idx <- which(names(matched_call) != "...")[-1]
+    names(matched_call)[names_idx] <- gsub(
+      ".",
+      "_",
+      names(matched_call)[names_idx],
+      fixed = TRUE
+    )
+
+    deparsed <- deparse(matched_call, width.cutoff = 500)
     deparsed[[1]] <- sub("(", "(\n    ", deparsed[[1]], fixed = TRUE)
     print(deparsed)
 
     # Splice
     text <- c(
       text[seq2(1, repl_line$line1 - 1)],
-      paste0(str_sub(text[repl_line$line1], 1, repl_line$col1 - 1), paste(deparsed, collapse = "\n")),
-      str_sub(text[repl_line$line2], repl_line$col2 + 1),
+      paste0(str_sub(text[repl_line$line1], 1, repl_line$col1 - 1), paste(deparsed, collapse = "\n"), str_sub(text[repl_line$line2], repl_line$col2 + 1)),
       text[seq2(repl_line$line2 + 1, length(text))]
     )
   }
 
   writeLines(text, con = file)
 }
+
+system("air format .")

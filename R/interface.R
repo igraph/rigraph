@@ -217,8 +217,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(R_igraph_add_vertices, graph, as.numeric(nv))
+  graph <- add_vertices_impl(
+    graph = graph,
+    nv = nv
+  )
   vertices.new <- vcount(graph)
 
   if (vertices.new - vertices.orig != 0) {
@@ -262,10 +264,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
+  delete_edges_impl(
+    graph = graph,
+    edges = edges
+  )
 }
 
 #' Delete vertices from a graph
@@ -288,10 +290,10 @@ delete_edges <- function(graph, edges) {
 #' g2
 #' V(g2)
 delete_vertices <- function(graph, v) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
+  delete_vertices_impl(
+    graph = graph,
+    vertices = v
+  )
 }
 
 ###################################################################
@@ -318,10 +320,9 @@ delete_vertices <- function(graph, v) {
 #'   vapply(gsize, 0) %>%
 #'   hist()
 gsize <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_ecount, graph)
+  ecount_impl(
+    graph = graph
+  )
 }
 #' @rdname gsize
 #' @export
@@ -349,7 +350,7 @@ ecount <- gsize
 #' intersection(n1, n34)
 neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   ensure_igraph(graph)
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   v <- as_igraph_vs(graph, v)
   if (length(v) == 0) {
@@ -381,25 +382,18 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' incident(g, 1)
 #' incident(g, 34)
 incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
-  ensure_igraph(graph)
-  if (is_directed(graph)) {
-    mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  # For undirected graphs, mode doesn't matter, use "all"
+  if (!is_directed(graph)) {
+    mode <- "all"
   } else {
-    mode <- 1
-  }
-  v <- as_igraph_vs(graph, v)
-  if (length(v) == 0) {
-    stop("No vertex was specified")
-  }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
+    mode <- igraph_match_arg(mode)
   }
 
-  res
+  incident_impl(
+    graph = graph,
+    vid = v,
+    mode = mode
+  )
 }
 
 #' Check whether a graph is directed
@@ -417,10 +411,9 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' g2 <- make_ring(10, directed = TRUE)
 #' is_directed(g2)
 is_directed <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_is_directed, graph)
+  is_directed_impl(
+    graph = graph
+  )
 }
 
 #' Incident vertices of some graph edges
@@ -442,15 +435,14 @@ is_directed <- function(graph) {
 ends <- function(graph, es, names = TRUE) {
   ensure_igraph(graph)
 
-  es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(R_igraph_finalizer))
-
-  if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(R_igraph_get_edge, graph, es2) + 1
-  } else {
-    res[, !is.na(es)] <- .Call(R_igraph_edges, graph, es2) + 1
+  if (length(es) > 0) {
+    edge_data <- edges_impl(
+      graph = graph,
+      eids = es
+    )
+    res[, !is.na(es)] <- edge_data
   }
 
   if (names && is_named(graph)) {
@@ -651,7 +643,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(R_igraph_finalizer))
 
-  res <- .Call(R_igraph_adjacent_vertices, graph, vv, mode)
+  res <- .Call(Rx_igraph_adjacent_vertices, graph, vv, mode)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -690,7 +682,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
 
   on.exit(.Call(R_igraph_finalizer))
 
-  res <- .Call(R_igraph_incident_edges, graph, vv, mode)
+  res <- .Call(Rx_igraph_incident_edges, graph, vv, mode)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -702,4 +694,38 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   }
 
   res
+}
+
+#' Invalidate the cache of a graph
+#'
+#' igraph graphs cache some basic properties (such as whether the graph is a
+#' DAG or whether it is simple) in an internal data structure for faster
+#' repeated queries. This function invalidates the cache, forcing a
+#' recalculation of the cached properties the next time they are needed.
+#'
+#' You should not need to call this function during normal usage; however, it
+#' may be useful for debugging cache-related issues. A tell-tale sign of an
+#' invalid cache entry is when the result of a cached function (such as
+#' \code{\link{is_dag}()} or \code{\link{is_simple}()}) changes after calling
+#' this function.
+#'
+#' @param graph The graph whose cache is to be invalidated.
+#' @return The graph with its cache invalidated. Since the graph is modified
+#'   in place in R as well, you can also ignore the return value.
+#'
+#' @family low-level operations
+#'
+#' @export
+#' @examples
+#' g <- make_ring(10)
+#' # Cache is populated when calling is_simple()
+#' is_simple(g)
+#' # Invalidate cache (for debugging purposes)
+#' invalidate_cache(g)
+#' # Result should be the same
+#' is_simple(g)
+invalidate_cache <- function(graph) {
+  invalidate_cache_impl(
+    graph = graph
+  )
 }
