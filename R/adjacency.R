@@ -400,7 +400,7 @@ from_adjacency <- function(
 ) {
   constructor_spec(
     graph_from_adjacency_matrix,
-    adjmatrix,
+    adjmatrix = adjmatrix,
     mode = mode,
     weighted = weighted,
     diag = diag,

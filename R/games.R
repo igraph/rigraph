@@ -1065,7 +1065,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @rdname sample_gnp
 #' @export
 gnp <- function(n, p, directed = FALSE, loops = FALSE) {
-  constructor_spec(sample_gnp, n, p, directed = directed, loops = loops)
+  constructor_spec(sample_gnp, n = n, p = p, directed = directed, loops = loops)
 }
 
 ## -----------------------------------------------------------------
@@ -1119,7 +1119,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @rdname sample_gnm
 #' @export
 gnm <- function(n, m, directed = FALSE, loops = FALSE) {
-  constructor_spec(sample_gnm, n, m, directed = directed, loops = loops)
+  constructor_spec(sample_gnm, n = n, m = m, directed = directed, loops = loops)
 }
 
 ## -----------------------------------------------------------------
@@ -1491,6 +1491,7 @@ degseq <- function(..., deterministic = FALSE) {
 #'
 #' @cdocs igraph_growing_random_game
 sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
+  check_dots_empty()
   growing_random_game_impl(
     n = n,
     m = m,
@@ -1503,7 +1504,7 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @export
 growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
   check_dots_empty()
-  constructor_spec(sample_growing, n, m = m, directed = directed, citation = citation)
+  constructor_spec(sample_growing, n = n, m = m, directed = directed, citation = citation)
 }
 
 ## -----------------------------------------------------------------
@@ -1968,7 +1969,7 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @rdname sample_grg
 #' @export
 grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
-  constructor_spec(sample_grg, nodes, radius, torus = torus, coords = coords)
+  constructor_spec(sample_grg, nodes = nodes, radius = radius, torus = torus, coords = coords)
 }
 
 ## -----------------------------------------------------------------
@@ -2257,10 +2258,10 @@ sample_smallworld <- function(
 smallworld <- function(dim, size, nei, p, loops = FALSE, multiple = FALSE) {
   constructor_spec(
     sample_smallworld,
-    dim,
-    size,
-    nei,
-    p,
+    dim = dim,
+    size = size,
+    nei = nei,
+    p = p,
     loops = loops,
     multiple = multiple
   )
@@ -2332,7 +2333,7 @@ last_cit <- function(
 ) {
   constructor_spec(
     sample_last_cit,
-    n,
+    n = n,
     edges = edges,
     agebins = agebins,
     pref = pref,
@@ -2381,7 +2382,7 @@ cit_types <- function(
 ) {
   constructor_spec(
     sample_cit_types,
-    n,
+    n = n,
     edges = edges,
     types = types,
     pref = pref,
@@ -2432,7 +2433,7 @@ cit_cit_types <- function(
 ) {
   constructor_spec(
     sample_cit_cit_types,
-    n,
+    n = n,
     edges = edges,
     types = types,
     pref = pref,
@@ -2552,7 +2553,7 @@ bipartite_gnm <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  constructor_spec(sample_bipartite_gnm, n1, n2, m, directed = directed, mode = mode)
+  constructor_spec(sample_bipartite_gnm, n1 = n1, n2 = n2, m = m, directed = directed, mode = mode)
 }
 
 #' @rdname sample_bipartite_gnm
@@ -2566,7 +2567,7 @@ bipartite_gnp <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  constructor_spec(sample_bipartite_gnp, n1, n2, p, directed = directed, mode = mode)
+  constructor_spec(sample_bipartite_gnp, n1 = n1, n2 = n2, p = p, directed = directed, mode = mode)
 }
 
 #' Bipartite random graphs
@@ -2819,7 +2820,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 #' @rdname sample_hierarchical_sbm
 #' @export
 hierarchical_sbm <- function(n, m, rho, C, p) {
-  constructor_spec(sample_hierarchical_sbm, n, m, rho, C, p)
+  constructor_spec(sample_hierarchical_sbm, n = n, m = m, rho = rho, C = C, p = p)
 }
 
 ## -----------------------------------------------------------------
@@ -2874,7 +2875,7 @@ sample_dot_product <- function(vecs, directed = FALSE) {
 #' @rdname sample_dot_product
 #' @export
 dot_product <- function(vecs, directed = FALSE) {
-  constructor_spec(sample_dot_product, vecs, directed = directed)
+  constructor_spec(sample_dot_product, vecs = vecs, directed = directed)
 }
 
 
