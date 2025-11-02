@@ -4376,39 +4376,6 @@ SEXP R_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
   return result;
 }
 
-SEXP Rx_igraph_minimum_spanning_tree_unweighted(SEXP graph) {
-
-  igraph_t g;
-  igraph_t mst;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree_unweighted(&g, &mst));
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_minimum_spanning_tree_prim(SEXP graph, SEXP pweights) {
-
-  igraph_t g;
-  igraph_t mst;
-  igraph_vector_t weights;
-  SEXP result;
-
-  R_SEXP_to_vector(pweights, &weights);
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_minimum_spanning_tree_prim(&g, &mst, &weights));
-  PROTECT(result=R_igraph_to_SEXP(&mst));
-  IGRAPH_I_DESTROY(&mst);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
                                  SEXP pmode, SEXP pno, SEXP weights,
                                  SEXP output, SEXP ppred, SEXP pinbound,
