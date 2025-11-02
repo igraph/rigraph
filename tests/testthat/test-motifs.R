@@ -177,3 +177,103 @@ test_that("dyad_census works with celegansneural", {
   )
   expect_equal(sum(unlist(dc)), vcount(ce) * (vcount(ce) - 1) / 2)
 })
+
+test_that("motifs_randesu_callback works", {
+  withr::local_seed(20041103)
+
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+
+  # Test 1: Callback receives correct parameters
+  motif_count <- 0
+  motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+    # Check that graph parameter is the same graph
+    expect_s3_class(graph, "igraph")
+    expect_identical(graph, g)
+
+    # Check motif structure
+    expect_named(motif, c("vids", "isoclass"))
+    expect_type(motif$vids, "double")
+    expect_length(motif$vids, 3)
+    expect_type(motif$isoclass, "double")
+
+    motif_count <<- motif_count + 1
+    TRUE
+  }, extra = NULL)
+
+  # We should find some motifs
+  expect_gt(motif_count, 0)
+
+  # Test 2: Callback can stop iteration
+  motif_count <- 0
+  motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+    motif_count <<- motif_count + 1
+    motif_count < 5  # stop after finding 5 motifs
+  }, extra = NULL)
+
+  expect_equal(motif_count, 5)
+
+  # Test 3: Callback can collect motifs using environment
+  motif_list <- list()
+  motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+    idx <- length(motif_list) + 1
+    motif_list[[idx]] <<- motif
+    TRUE
+  }, extra = NULL)
+
+  expect_gt(length(motif_list), 0)
+  # Check that all collected motifs have the right structure
+  for (m in motif_list) {
+    expect_named(m, c("vids", "isoclass"))
+    expect_length(m$vids, 3)
+  }
+
+  # Test 4: cut.prob parameter works
+  motif_count_no_cut <- 0
+  motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+    motif_count_no_cut <<- motif_count_no_cut + 1
+    TRUE
+  }, extra = NULL)
+
+  motif_count_with_cut <- 0
+  motifs_randesu_callback(g, 3, cut.prob = c(0.5, 0, 0),
+    callback = function(graph, motif, extra) {
+      motif_count_with_cut <<- motif_count_with_cut + 1
+      TRUE
+    }, extra = NULL)
+
+  # With cut probability, we should find fewer or equal motifs
+  expect_lte(motif_count_with_cut, motif_count_no_cut)
+
+  # Test 5: Extra parameter is passed correctly
+  test_value <- list(a = 1, b = "test")
+  extra_received <- NULL
+  motifs_randesu_callback(g, 3, callback = function(graph, motif, extra) {
+    extra_received <<- extra
+    FALSE  # stop immediately
+  }, extra = test_value)
+
+  expect_identical(extra_received, test_value)
+})
+
+test_that("motifs_randesu_callback validates arguments", {
+  g <- make_graph(~ A - B - C - A)
+
+  # callback must be provided
+  expect_error(
+    motifs_randesu_callback(g, 3, callback = NULL),
+    "must be a function"
+  )
+
+  # callback must be a function
+  expect_error(
+    motifs_randesu_callback(g, 3, callback = "not_a_function"),
+    "must be a function"
+  )
+
+  # cut.prob must have the same length as size
+  expect_error(
+    motifs_randesu_callback(g, 3, cut.prob = c(0.5, 0.5),
+      callback = function(graph, motif, extra) TRUE),
+    "must be the same length"
+  )
+})

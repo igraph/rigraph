@@ -6905,6 +6905,88 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   return(result);
 }
 
+/*-------------------------------------------/
+/ igraph_motifs_randesu_callback             /
+/-------------------------------------------*/
+
+typedef struct {
+  SEXP graph, fun, extra, rho;
+} R_igraph_i_motifs_randesu_data_t;
+
+igraph_error_t R_igraph_motifs_randesu_handler(const igraph_t *graph,
+                                                igraph_vector_int_t *vids,
+                                                igraph_integer_t isoclass,
+                                                void *extra) {
+  R_igraph_i_motifs_randesu_data_t *data = extra;
+  SEXP args, R_fcall, result, names;
+  SEXP vids_sexp, isoclass_sexp;
+  igraph_bool_t cres;
+
+  PROTECT(args = NEW_LIST(2));
+  PROTECT(names = NEW_CHARACTER(2));
+
+  SET_STRING_ELT(names, 0, Rf_mkChar("vids"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("isoclass"));
+
+  // Convert vids to R vector (1-based indexing)
+  PROTECT(vids_sexp = R_igraph_vector_int_to_SEXPp1(vids));
+  SET_VECTOR_ELT(args, 0, vids_sexp);
+
+  // Convert isoclass to R scalar
+  PROTECT(isoclass_sexp = NEW_NUMERIC(1));
+  REAL(isoclass_sexp)[0] = (double)isoclass;
+  SET_VECTOR_ELT(args, 1, isoclass_sexp);
+
+  SET_NAMES(args, names);
+
+  PROTECT(R_fcall = Rf_lang4(data->fun, data->graph, args, data->extra));
+  PROTECT(result = R_igraph_safe_eval_in_env(R_fcall, data->rho, NULL));
+  cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
+
+  UNPROTECT(6);
+  return cres ? IGRAPH_SUCCESS : IGRAPH_STOP;
+}
+
+attribute_visible
+SEXP R_igraph_motifs_randesu_callback(SEXP graph, SEXP size, SEXP cut_prob,
+                                      SEXP callback, SEXP extra, SEXP rho) {
+  igraph_t c_graph;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+  R_igraph_i_motifs_randesu_data_t cb_data, *p_cb_data = 0;
+  igraph_motifs_handler_t *p_callback = 0;
+
+  // Convert input
+  R_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t)REAL(size)[0];
+
+  if (!Rf_isNull(cut_prob)) {
+    R_SEXP_to_vector(cut_prob, &c_cut_prob);
+  }
+
+  // Setup callback if provided
+  if (!Rf_isNull(callback)) {
+    cb_data.graph = graph;
+    cb_data.fun = callback;
+    cb_data.extra = extra;
+    cb_data.rho = rho;
+    p_callback = R_igraph_motifs_randesu_handler;
+    p_cb_data = &cb_data;
+  }
+
+  // Call igraph
+  IGRAPH_R_CHECK(igraph_motifs_randesu_callback(
+    &c_graph,
+    c_size,
+    Rf_isNull(cut_prob) ? 0 : &c_cut_prob,
+    p_callback,
+    p_cb_data
+  ));
+
+  return R_NilValue;
+}
+
 SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
                        SEXP perror) {
   igraph_t g;

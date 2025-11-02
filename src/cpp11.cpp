@@ -331,6 +331,7 @@ extern SEXP R_igraph_modularity(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_modularity_matrix(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_moran_process(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_motifs_randesu_callback(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_estimate(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_no(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket3_set(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -816,6 +817,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_modularity_matrix",                          (DL_FUNC) &R_igraph_modularity_matrix,                           4},
     {"R_igraph_moran_process",                              (DL_FUNC) &R_igraph_moran_process,                               5},
     {"R_igraph_motifs_randesu",                             (DL_FUNC) &R_igraph_motifs_randesu,                              3},
+    {"R_igraph_motifs_randesu_callback",                    (DL_FUNC) &R_igraph_motifs_randesu_callback,                     6},
     {"R_igraph_motifs_randesu_estimate",                    (DL_FUNC) &R_igraph_motifs_randesu_estimate,                     5},
     {"R_igraph_motifs_randesu_no",                          (DL_FUNC) &R_igraph_motifs_randesu_no,                           3},
     {"R_igraph_mybracket3_set",                             (DL_FUNC) &R_igraph_mybracket3_set,                              5},
