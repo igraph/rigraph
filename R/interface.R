@@ -411,10 +411,9 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' g2 <- make_ring(10, directed = TRUE)
 #' is_directed(g2)
 is_directed <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_is_directed, graph)
+  is_directed_impl(
+    graph = graph
+  )
 }
 
 #' Incident vertices of some graph edges
