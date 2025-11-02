@@ -2725,7 +2725,12 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 #' @rdname make_bipartite_graph
 #' @export
 bipartite_graph <- function(types, edges, directed = FALSE) {
-  constructor_spec(make_bipartite_graph, types = types, edges = edges, directed = directed)
+  constructor_spec(
+    make_bipartite_graph,
+    types = types,
+    edges = edges,
+    directed = directed
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2790,7 +2795,12 @@ full_multipartite <- function(
   directed = FALSE,
   mode = c("all", "out", "in")
 ) {
-  constructor_spec(make_full_multipartite, n = n, directed = directed, mode = mode)
+  constructor_spec(
+    make_full_multipartite,
+    n = n,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------

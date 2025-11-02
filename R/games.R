@@ -1500,7 +1500,13 @@ sample_growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
 #' @export
 growing <- function(n, m = 1, ..., directed = TRUE, citation = FALSE) {
   check_dots_empty()
-  constructor_spec(sample_growing, n = n, m = m, directed = directed, citation = citation)
+  constructor_spec(
+    sample_growing,
+    n = n,
+    m = m,
+    directed = directed,
+    citation = citation
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -1965,7 +1971,13 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @rdname sample_grg
 #' @export
 grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
-  constructor_spec(sample_grg, nodes = nodes, radius = radius, torus = torus, coords = coords)
+  constructor_spec(
+    sample_grg,
+    nodes = nodes,
+    radius = radius,
+    torus = torus,
+    coords = coords
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2545,7 +2557,14 @@ bipartite_gnm <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  constructor_spec(sample_bipartite_gnm, n1 = n1, n2 = n2, m = m, directed = directed, mode = mode)
+  constructor_spec(
+    sample_bipartite_gnm,
+    n1 = n1,
+    n2 = n2,
+    m = m,
+    directed = directed,
+    mode = mode
+  )
 }
 
 #' @rdname sample_bipartite_gnm
@@ -2559,7 +2578,14 @@ bipartite_gnp <- function(
   mode = c("out", "in", "all")
 ) {
   check_dots_empty()
-  constructor_spec(sample_bipartite_gnp, n1 = n1, n2 = n2, p = p, directed = directed, mode = mode)
+  constructor_spec(
+    sample_bipartite_gnp,
+    n1 = n1,
+    n2 = n2,
+    p = p,
+    directed = directed,
+    mode = mode
+  )
 }
 
 #' Bipartite random graphs
@@ -2812,7 +2838,14 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 #' @rdname sample_hierarchical_sbm
 #' @export
 hierarchical_sbm <- function(n, m, rho, C, p) {
-  constructor_spec(sample_hierarchical_sbm, n = n, m = m, rho = rho, C = C, p = p)
+  constructor_spec(
+    sample_hierarchical_sbm,
+    n = n,
+    m = m,
+    rho = rho,
+    C = C,
+    p = p
+  )
 }
 
 ## -----------------------------------------------------------------
