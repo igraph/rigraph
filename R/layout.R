@@ -364,11 +364,34 @@ layout.auto <- function(graph, dim = 2, ...) {
 #' @aliases layout
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
-#' Currently implemented modifiers: \itemize{
-#'   \item `component_wise()` calculates the layout separately
-#'     for each component of the graph, and then merges
-#'     them.
-#'   \item `normalize()` scales the layout to a square.
+#' Modifiers are applied in the order they are specified as arguments to
+#' `layout_()`.
+#'
+#' There are two types of modifiers:
+#' \itemize{
+#'   \item **Pre-layout modifiers** affect how the layout is calculated.
+#'     Only one pre-layout modifier can be used at a time.
+#'   \item **Post-layout modifiers** transform the resulting coordinates.
+#'     Multiple post-layout modifiers can be chained together.
+#' }
+#'
+#' Currently implemented modifiers:
+#' \itemize{
+#'   \item `component_wise()` (pre-layout) calculates the layout separately
+#'     for each component of the graph, and then merges them.
+#'   \item `normalize()` (post-layout) scales the layout to a square.
+#' }
+#'
+#' Custom modifiers can be created using the `layout_modifier()` function.
+#' A custom modifier must specify:
+#' \itemize{
+#'   \item `id`: A unique identifier string for the modifier
+#'   \item `type`: Either `"pre"` for pre-layout or `"post"` for post-layout
+#'   \item `args`: A list of arguments to pass to the apply function
+#'   \item `apply`: A function with signature
+#'     `function(graph, layout, modifier_args)` that performs the modification.
+#'     For pre-layout modifiers, `layout` is the layout specification.
+#'     For post-layout modifiers, `layout` is the coordinate matrix to transform.
 #' }
 #'
 #' @param graph The input graph.
@@ -387,41 +410,56 @@ layout.auto <- function(graph, dim = 2, ...) {
 #' g <- make_ring(10) + make_full_graph(5)
 #' coords <- layout_(g, as_star())
 #' plot(g, layout = coords)
+#'
+#' # Using modifiers
+#' g <- make_ring(10) + make_ring(5)
+#' coords <- layout_(g, in_circle(), component_wise(), normalize())
+#' plot(g, layout = coords)
+#'
+#' # Creating a custom post-layout modifier
+#' scale_by <- function(factor) {
+#'   layout_modifier(
+#'     id = "scale_by",
+#'     type = "post",
+#'     args = list(factor = factor),
+#'     apply = function(graph, layout, modifier_args) {
+#'       layout * modifier_args$factor
+#'     }
+#'   )
+#' }
+#' coords <- layout_(make_ring(10), in_circle(), scale_by(3))
+#' plot(make_ring(10), layout = coords)
 layout_ <- function(graph, layout, ...) {
   modifiers <- list(...)
   stopifnot(all(sapply(modifiers, inherits, what = "igraph_layout_modifier")))
 
   ids <- sapply(modifiers, "[[", "id")
-  stopifnot(all(ids %in% c("component_wise", "normalize")))
   if (anyDuplicated(ids)) {
     cli::cli_abort("Duplicate modifiers.")
   }
   names(modifiers) <- ids
 
-  ## TODO: better, generic mechanism for modifiers
-  if ("component_wise" %in% ids) {
-    graph$id <- seq(vcount(graph))
-    comps <- decompose(graph)
-    coords <- lapply(comps, function(comp) {
-      do_call(layout$fun, list(graph = comp), layout$args)
-    })
-    all_coords <- merge_coords(
-      comps,
-      coords,
-      method = modifiers[["component_wise"]]$args$merge_method
-    )
-    all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
-    result <- all_coords
+  # Separate modifiers by type
+  is_pre <- vapply(modifiers, function(m) isTRUE(m$type == "pre"), logical(1))
+  pre_modifiers <- modifiers[is_pre]
+  post_modifiers <- modifiers[!is_pre]
+
+  # Apply pre-layout modifiers
+  if (length(pre_modifiers) > 0) {
+    # Enforce single pre-layout modifier restriction
+    if (length(pre_modifiers) > 1) {
+      cli::cli_abort("Multiple pre-layout modifiers are not supported.")
+    }
+    modifier <- pre_modifiers[[1]]
+    result <- modifier$apply(graph, layout, modifier$args)
   } else {
+    # No pre-layout modifiers, do standard layout
     result <- do_call(layout$fun, list(graph = graph), layout$args)
   }
 
-  if ("normalize" %in% ids) {
-    result <- do_call(
-      norm_coords,
-      list(result),
-      modifiers[["normalize"]]$args
-    )
+  # Apply post-layout modifiers in order
+  for (modifier in post_modifiers) {
+    result <- modifier$apply(graph, result, modifier$args)
   }
 
   result
@@ -480,6 +518,45 @@ print.igraph_layout_spec <- function(x, ...) {
 }
 
 
+#' Create a layout modifier
+#'
+#' This is a constructor function for creating custom layout modifiers.
+#' Layout modifiers can be used with [layout_()] to modify how layouts
+#' are calculated or to transform the resulting coordinates.
+#'
+#' @param ... Named arguments that define the modifier. Must include:
+#'   \describe{
+#'     \item{id}{A unique identifier string for the modifier}
+#'     \item{type}{Either `"pre"` for pre-layout or `"post"` for post-layout}
+#'     \item{args}{A list of arguments to pass to the apply function}
+#'     \item{apply}{A function with signature
+#'       `function(graph, layout, modifier_args)` that performs the modification}
+#'   }
+#'
+#' @return An object of class `igraph_layout_modifier`.
+#'
+#' @seealso [layout_()] for using modifiers, [component_wise()], [normalize()]
+#'   for examples of built-in modifiers.
+#'
+#' @family layout modifiers
+#' @export
+#' @examples
+#' # Create a custom post-layout modifier that scales coordinates
+#' scale_by <- function(factor) {
+#'   layout_modifier(
+#'     id = "scale_by",
+#'     type = "post",
+#'     args = list(factor = factor),
+#'     apply = function(graph, layout, modifier_args) {
+#'       layout * modifier_args$factor
+#'     }
+#'   )
+#' }
+#'
+#' # Use the custom modifier
+#' g <- make_ring(10)
+#' coords <- layout_(g, in_circle(), scale_by(2))
+#' plot(g, layout = coords)
 layout_modifier <- function(...) {
   structure(
     list(...),
@@ -518,7 +595,22 @@ component_wise <- function(merge_method = "dla") {
 
   layout_modifier(
     id = "component_wise",
-    args = args
+    type = "pre",
+    args = args,
+    apply = function(graph, layout, modifier_args) {
+      graph$id <- seq(vcount(graph))
+      comps <- decompose(graph)
+      coords <- lapply(comps, function(comp) {
+        do_call(layout$fun, list(graph = comp), layout$args)
+      })
+      all_coords <- merge_coords(
+        comps,
+        coords,
+        method = modifier_args$merge_method
+      )
+      all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
+      all_coords
+    }
   )
 }
 
@@ -548,7 +640,15 @@ normalize <- function(
 
   layout_modifier(
     id = "normalize",
-    args = args
+    type = "post",
+    args = args,
+    apply = function(graph, layout, modifier_args) {
+      do_call(
+        norm_coords,
+        list(layout),
+        modifier_args
+      )
+    }
   )
 }
 

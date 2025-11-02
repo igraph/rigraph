@@ -375,3 +375,105 @@ test_that("layout normalization handles all-NaN coordinates correctly", {
   normalized_3d <- norm_coords(layout_3d_nan, 0, 1, 0, 1, 0, 1)
   expect_equal(normalized_3d, matrix(rep(0.5, 9), ncol = 3))
 })
+
+test_that("generic modifier mechanism works with existing modifiers", {
+  # Test that component_wise modifier still works
+  g <- make_ring(10) + make_ring(5)
+  l1 <- layout_(g, in_circle(), component_wise())
+  expect_equal(nrow(l1), vcount(g))
+  expect_equal(ncol(l1), 2)
+  expect_true(all(is.finite(l1)))
+
+  # Test that normalize modifier still works
+  g <- make_ring(10)
+  l2 <- layout_(g, with_fr(), normalize())
+  expect_equal(nrow(l2), vcount(g))
+  expect_equal(ncol(l2), 2)
+  expect_true(all(l2 >= -1 & l2 <= 1))
+
+  # Test that both modifiers work together
+  g <- make_ring(10) + make_ring(5)
+  l3 <- layout_(g, in_circle(), component_wise(), normalize())
+  expect_equal(nrow(l3), vcount(g))
+  expect_equal(ncol(l3), 2)
+  expect_true(all(is.finite(l3)))
+  expect_true(all(l3 >= -1 & l3 <= 1))
+})
+
+test_that("custom post-layout modifiers can be created", {
+  # Create a custom modifier that scales coordinates by a factor
+  scale_by <- function(factor = 2) {
+    layout_modifier(
+      id = "scale_by",
+      type = "post",
+      args = list(factor = factor),
+      apply = function(graph, layout, modifier_args) {
+        layout * modifier_args$factor
+      }
+    )
+  }
+
+  g <- make_ring(5)
+  l1 <- layout_(g, in_circle())
+  l2 <- layout_(g, in_circle(), scale_by(factor = 3))
+
+  # l2 should be 3x l1
+  expect_equal(l2, l1 * 3)
+})
+
+test_that("multiple post-layout modifiers are applied in order", {
+  # Create test modifiers
+  add_offset <- function(offset = 1) {
+    layout_modifier(
+      id = "add_offset",
+      type = "post",
+      args = list(offset = offset),
+      apply = function(graph, layout, modifier_args) {
+        layout + modifier_args$offset
+      }
+    )
+  }
+
+  multiply_by <- function(factor = 2) {
+    layout_modifier(
+      id = "multiply_by",
+      type = "post",
+      args = list(factor = factor),
+      apply = function(graph, layout, modifier_args) {
+        layout * modifier_args$factor
+      }
+    )
+  }
+
+  g <- make_ring(5)
+  base_layout <- layout_(g, in_circle())
+
+  # Apply add first, then multiply: (layout + 1) * 2
+  l1 <- layout_(g, in_circle(), add_offset(1), multiply_by(2))
+  expect_equal(l1, (base_layout + 1) * 2)
+
+  # Apply multiply first, then add: (layout * 2) + 1
+  l2 <- layout_(g, in_circle(), multiply_by(2), add_offset(1))
+  expect_equal(l2, (base_layout * 2) + 1)
+
+  # Results should be different
+  expect_false(isTRUE(all.equal(l1, l2)))
+})
+
+test_that("duplicate modifiers are rejected", {
+  g <- make_ring(5)
+  expect_error(
+    layout_(g, in_circle(), normalize(), normalize()),
+    "Duplicate modifiers"
+  )
+})
+
+test_that("modifier types are correctly identified", {
+  cw <- component_wise()
+  expect_equal(cw$type, "pre")
+  expect_true(is.function(cw$apply))
+
+  norm <- normalize()
+  expect_equal(norm$type, "post")
+  expect_true(is.function(norm$apply))
+})
