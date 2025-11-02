@@ -5593,38 +5593,6 @@ SEXP R_igraph_vertex_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
   return result;
 }
 
-SEXP Rx_igraph_adhesion(SEXP graph, SEXP pchecks) {
-
-  igraph_t g;
-  igraph_integer_t res;
-  igraph_bool_t checks=LOGICAL(pchecks)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_adhesion(&g, &res, checks));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_cohesion(SEXP graph, SEXP pchecks) {
-
-  igraph_t g;
-  igraph_integer_t res;
-  igraph_bool_t checks=LOGICAL(pchecks)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_cohesion(&g, &res, checks));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_spinglass_community(SEXP graph, SEXP weights,
                                   SEXP pspins, SEXP pparupdate,
                                   SEXP pstarttemp, SEXP pstoptemp,
