@@ -97,7 +97,7 @@ net1 <- graph_from_literal(
 )
 net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 %s% net2)
-#> IGRAPH e2d7f0f UN-- 13 4 -- 
+#> IGRAPH 5f81a61 UN-- 13 4 -- 
 #> + attr: name (v/c)
 #> + vertex attributes:
 #> |      name
@@ -114,6 +114,6 @@ print_all(net1 %s% net2)
 #> | [11]    Y
 #> | [12]    X
 #> | [13]    Z
-#> + edges from e2d7f0f (vertex names):
+#> + edges from 5f81a61 (vertex names):
 #> [1] F--H A--B D--F D--A
 ```
