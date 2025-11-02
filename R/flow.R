@@ -524,8 +524,7 @@ vertex_connectivity <- function(
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(Rx_igraph_vertex_connectivity, graph, as.logical(checks))
+    vertex_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(
@@ -630,8 +629,7 @@ edge_connectivity <- function(
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(Rx_igraph_edge_connectivity, graph, as.logical(checks))
+    edge_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(
@@ -684,20 +682,20 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 #' @rdname edge_connectivity
 #' @export
 adhesion <- function(graph, checks = TRUE) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_adhesion, graph, as.logical(checks))
+  adhesion_impl(
+    graph = graph,
+    checks = checks
+  )
 }
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
-  ensure_igraph(x)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_cohesion, x, as.logical(checks))
+  cohesion_impl(
+    graph = x,
+    checks = checks
+  )
 }
 
 #' List all (s,t)-cuts of a graph
