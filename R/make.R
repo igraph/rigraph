@@ -442,7 +442,6 @@ graph.lattice <- function(
     periodic <- rep(periodic, length(dimvector))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   res <- square_lattice_impl(
     dimvector = dimvector,
     nei = nei,
@@ -2002,7 +2001,6 @@ make_lattice <- function(
     periodic <- rep(periodic, length(dimvector))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   res <- square_lattice_impl(
     dimvector = dimvector,
     nei = nei,

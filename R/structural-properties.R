@@ -3385,7 +3385,6 @@ laplacian_matrix <- function(
   }
   sparse <- as.logical(sparse)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (sparse) {
     res <- get_laplacian_sparse_impl(
