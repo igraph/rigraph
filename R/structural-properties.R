@@ -2262,12 +2262,12 @@ make_neighborhood_graph <- make_ego_graph
 #' coreness(g) # small core triangle in a ring
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
+  res <- coreness_impl(
+    graph = graph,
+    mode = mode
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
