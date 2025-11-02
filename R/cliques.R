@@ -354,7 +354,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_maximal_cliques_count, graph, subset, min, max)
+  res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
 
   res
 }
@@ -428,9 +428,9 @@ weighted_cliques <- function(
 ) {
   weighted_cliques_impl(
     graph = graph,
-    vertex.weights = vertex.weights,
-    min.weight = min.weight,
-    max.weight = max.weight,
+    vertex_weights = vertex.weights,
+    min_weight = min.weight,
+    max_weight = max.weight,
     maximal = maximal
   )
 }
@@ -440,7 +440,7 @@ weighted_cliques <- function(
 largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
   largest_weighted_cliques_impl(
     graph = graph,
-    vertex.weights = vertex.weights
+    vertex_weights = vertex.weights
   )
 }
 #' @export
@@ -449,7 +449,7 @@ largest_weighted_cliques <- function(graph, vertex.weights = NULL) {
 weighted_clique_num <- function(graph, vertex.weights = NULL) {
   weighted_clique_number_impl(
     graph = graph,
-    vertex.weights = vertex.weights
+    vertex_weights = vertex.weights
   )
 }
 
@@ -551,7 +551,7 @@ largest_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
+  res <- .Call(Rx_igraph_largest_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -567,7 +567,7 @@ max_ivs <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
+  res <- .Call(Rx_igraph_maximal_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -598,7 +598,7 @@ ivs_size <- function(graph) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_independence_number, graph)
+  .Call(Rx_igraph_independence_number, graph)
 }
 
 #' @rdname ivs
@@ -613,14 +613,14 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
     maximal_cliques_hist_impl(
       graph = graph,
-      min.size = min,
-      max.size = max
+      min_size = min,
+      max_size = max
     )
   } else {
     clique_size_hist_impl(
       graph = graph,
-      min.size = min,
-      max.size = max
+      min_size = min,
+      max_size = max
     )
   }
 }

@@ -919,6 +919,9 @@ modularity.igraph <- function(
     cli::cli_abort("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
+  if (is.null(weights) && "weight" %in% edge_attr_names(x)) {
+    weights <- E(x)$weight
+  }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
@@ -984,9 +987,13 @@ modularity_matrix <- function(
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_modularity_matrix, graph, weights, resolution, directed)
+  res <- modularity_matrix_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
+  )
 
   res
 }
@@ -1326,7 +1333,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
   on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_community_to_membership2, merges - 1, vcount, steps)
+  res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
 
@@ -1481,10 +1488,10 @@ cluster_spinglass <- function(
     weights <- NULL
   }
 
-  update.rule <- igraph.match.arg(update.rule)
+  update.rule <- igraph_match_arg(update.rule)
   update.rule <- switch(update.rule, "simple" = 0, "random" = 0, "config" = 1)
   implementation <- switch(
-    igraph.match.arg(implementation),
+    igraph_match_arg(implementation),
     "orig" = 0,
     "neg" = 1
   )
@@ -1658,7 +1665,7 @@ cluster_leiden <- function(
   ensure_igraph(graph)
 
   # Parse objective function argument
-  objective_function <- igraph.match.arg(objective_function)
+  objective_function <- igraph_match_arg(objective_function)
   objective_function <- switch(objective_function, "cpm" = 0, "modularity" = 1)
 
   # Parse edge weights argument
@@ -1700,11 +1707,11 @@ cluster_leiden <- function(
     res <- community_leiden_impl(
       graph = graph,
       weights = weights,
-      vertex.weights = vertex_weights,
+      vertex_weights = vertex_weights,
       resolution = resolution,
       beta = beta,
       start = !is.null(membership),
-      n.iterations = n_iterations,
+      n_iterations = n_iterations,
       membership = membership
     )
 
@@ -1717,11 +1724,11 @@ cluster_leiden <- function(
       res <- community_leiden_impl(
         graph = graph,
         weights = weights,
-        vertex.weights = vertex_weights,
+        vertex_weights = vertex_weights,
         resolution = resolution,
         beta = beta,
         start = !is.null(membership),
-        n.iterations = 1,
+        n_iterations = 1,
         membership = membership
       )
 
@@ -2119,7 +2126,7 @@ cluster_fast_greedy <- function(
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(R_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(Rx_igraph_i_levc_arp, externalP, externalE, v)
   }
   f
 }
@@ -2409,7 +2416,7 @@ cluster_label_prop0 <- function(
   ensure_igraph(graph)
 
   # Necessary because evaluated later
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   # Function call
   membership <- community_label_propagation_impl(
@@ -2516,9 +2523,12 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   }
   resolution <- as.numeric(resolution)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_multilevel, graph, weights, resolution)
+  res <- community_multilevel_impl(
+    graph = graph,
+    weights = weights,
+    resolution = resolution
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -2679,9 +2689,9 @@ cluster_infomap <- function(
 ) {
   res <- community_infomap_impl(
     graph = graph,
-    e.weights = e.weights,
-    v.weights = v.weights,
-    nb.trials = nb.trials
+    e_weights = e.weights,
+    v_weights = v.weights,
+    nb_trials = nb.trials
   )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -2813,7 +2823,7 @@ plot_dendrogram.communities <- function(
   use.modularity = FALSE,
   palette = categorical_pal(8)
 ) {
-  mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
+  mode <- igraph_match_arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
   on.exit(palette(old_palette), add = TRUE)
@@ -3047,16 +3057,12 @@ i_compare <- function(
   } else {
     as.numeric(as.factor(comm2))
   }
-  method <- switch(
-    igraph.match.arg(method),
-    vi = 0L,
-    nmi = 1L,
-    split.join = 2L,
-    rand = 3L,
-    adjusted.rand = 4L
+  method <- igraph_match_arg(method)
+  res <- compare_communities_impl(
+    comm1 = comm1,
+    comm2 = comm2,
+    method = method
   )
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_compare_communities, comm1, comm2, method)
   res
 }
 
@@ -3104,8 +3110,10 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_split_join_distance, comm1, comm2)
+  res <- split_join_distance_impl(
+    comm1 = comm1,
+    comm2 = comm2
+  )
   unlist(res)
 }
 
@@ -3223,7 +3231,7 @@ contract <- function(
   contract_vertices_impl(
     graph = graph,
     mapping = mapping,
-    vertex.attr.comb = vertex.attr.comb
+    vertex_attr_comb = vertex.attr.comb
   )
 }
 

@@ -251,9 +251,13 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   start <- as.logical(start)
   steps <- as.numeric(steps)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_hrg_fit, graph, hrg, start, steps)
+  res <- hrg_fit_impl(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    steps = steps
+  )
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -311,7 +315,7 @@ consensus_tree <- function(
     graph = graph,
     hrg = hrg,
     start = start,
-    num.samples = num.samples
+    num_samples = num.samples
   )
 }
 
@@ -907,7 +911,7 @@ print.igraphHRG <- function(
   level = 3,
   ...
 ) {
-  type <- igraph.match.arg(type)
+  type <- igraph_match_arg(type)
   if (type == "auto") {
     is_graph_small <- (length(x$left) <= 100)
     type <- if (is_graph_small) "tree" else "plain"

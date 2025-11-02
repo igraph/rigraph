@@ -658,6 +658,22 @@ test_that("weighted sparse alpha_centrality() works", {
   expect_equal(ac3, c(vcount(star), 1, 1, 1, 1, 1, 1, 1, 1, 1))
 })
 
+test_that("alpha_centrality() works with custom weight attribute names", {
+  star <- make_star(10)
+  E(star)$myweight <- sample(ecount(star))
+
+  # Test sparse version with custom attribute name
+  ac_sparse <- alpha_centrality(star, weights = "myweight", sparse = TRUE)
+  expect_equal(ac_sparse, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  # Test dense version with custom attribute name
+  ac_dense <- alpha_centrality(star, weights = "myweight", sparse = FALSE)
+  expect_equal(ac_dense, c(46, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+
+  # Ensure both versions give the same result
+  expect_equal(ac_sparse, ac_dense)
+})
+
 test_that("undirected alpha_centrality() works, #653", {
   g <- make_ring(10)
 
