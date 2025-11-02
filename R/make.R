@@ -575,7 +575,7 @@ graph.full <- function(n, directed = FALSE, loops = FALSE) {
   lifecycle::deprecate_soft("2.1.0", "graph.full()", "make_full_graph()")
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_full,
+    Rx_igraph_full,
     as.numeric(n),
     as.logical(directed),
     as.logical(loops)
@@ -1918,7 +1918,7 @@ star <- function(...) constructor_spec(make_star, ...)
 make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_full,
+    Rx_igraph_full,
     as.numeric(n),
     as.logical(directed),
     as.logical(loops)

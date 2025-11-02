@@ -43,14 +43,12 @@ extern SEXP R_igraph_average_path_length_dijkstra(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_avg_nearest_neighbor_degree(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_betweenness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_betweenness_subset(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_bfs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bfs_simple(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_biadjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bibcoupling(SEXP, SEXP);
 extern SEXP R_igraph_biconnected_components(SEXP);
 extern SEXP R_igraph_bipartite_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_game_gnp(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_bipartite_projection(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_projection_size(SEXP, SEXP);
 extern SEXP R_igraph_bond_percolation(SEXP, SEXP);
 extern SEXP R_igraph_bridges(SEXP);
@@ -141,13 +139,11 @@ extern SEXP R_igraph_find_cycle(SEXP, SEXP);
 extern SEXP R_igraph_forest_fire_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_from_hrg_dendrogram(SEXP);
 extern SEXP R_igraph_from_prufer(SEXP);
-extern SEXP R_igraph_full(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_full_bipartite(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_full_citation(SEXP, SEXP);
 extern SEXP R_igraph_full_multipartite(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_fundamental_cycles(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_generalized_petersen(SEXP, SEXP);
-extern SEXP R_igraph_get_adjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_adjacency_sparse(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_eids_between(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_shortest_paths(SEXP, SEXP, SEXP, SEXP);
@@ -272,7 +268,6 @@ extern SEXP R_igraph_local_scan_neighborhood_ecount(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_local_scan_subset_ecount(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maxdegree(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maxflow(SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_count(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_cliques_hist(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_maximal_independent_vertex_sets(SEXP);
@@ -403,6 +398,8 @@ extern SEXP Rx_igraph_arpack(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack_unpack_complex(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_barabasi_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_barabasi_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_bfs(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_bipartite_projection(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_callaway_traits_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_citing_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -431,6 +428,8 @@ extern SEXP Rx_igraph_es_path(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_establishment_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_farthest_points(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_finalizer(void);
+extern SEXP Rx_igraph_full(SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_get_adjacency(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_adjedgelist(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_adjlist(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_all_simple_paths_pp(SEXP);
@@ -462,6 +461,7 @@ extern SEXP Rx_igraph_layout_lgl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP)
 extern SEXP Rx_igraph_layout_merge_dla(SEXP, SEXP);
 extern SEXP Rx_igraph_layout_reingold_tilford(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_make_weak_ref(SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_maximal_cliques(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques_count(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_maximal_cliques_file(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_mybracket2(SEXP, SEXP, SEXP);
@@ -530,14 +530,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_avg_nearest_neighbor_degree",                (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                 5},
     {"R_igraph_betweenness_cutoff",                         (DL_FUNC) &R_igraph_betweenness_cutoff,                          5},
     {"R_igraph_betweenness_subset",                         (DL_FUNC) &R_igraph_betweenness_subset,                          6},
-    {"R_igraph_bfs",                                        (DL_FUNC) &R_igraph_bfs,                                        15},
     {"R_igraph_bfs_simple",                                 (DL_FUNC) &R_igraph_bfs_simple,                                  3},
     {"R_igraph_biadjacency",                                (DL_FUNC) &R_igraph_biadjacency,                                 4},
     {"R_igraph_bibcoupling",                                (DL_FUNC) &R_igraph_bibcoupling,                                 2},
     {"R_igraph_biconnected_components",                     (DL_FUNC) &R_igraph_biconnected_components,                      1},
     {"R_igraph_bipartite_game_gnm",                         (DL_FUNC) &R_igraph_bipartite_game_gnm,                          5},
     {"R_igraph_bipartite_game_gnp",                         (DL_FUNC) &R_igraph_bipartite_game_gnp,                          5},
-    {"R_igraph_bipartite_projection",                       (DL_FUNC) &R_igraph_bipartite_projection,                        4},
     {"R_igraph_bipartite_projection_size",                  (DL_FUNC) &R_igraph_bipartite_projection_size,                   2},
     {"R_igraph_bond_percolation",                           (DL_FUNC) &R_igraph_bond_percolation,                            2},
     {"R_igraph_bridges",                                    (DL_FUNC) &R_igraph_bridges,                                     1},
@@ -628,13 +626,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_forest_fire_game",                           (DL_FUNC) &R_igraph_forest_fire_game,                            5},
     {"R_igraph_from_hrg_dendrogram",                        (DL_FUNC) &R_igraph_from_hrg_dendrogram,                         1},
     {"R_igraph_from_prufer",                                (DL_FUNC) &R_igraph_from_prufer,                                 1},
-    {"R_igraph_full",                                       (DL_FUNC) &R_igraph_full,                                        3},
     {"R_igraph_full_bipartite",                             (DL_FUNC) &R_igraph_full_bipartite,                              4},
     {"R_igraph_full_citation",                              (DL_FUNC) &R_igraph_full_citation,                               2},
     {"R_igraph_full_multipartite",                          (DL_FUNC) &R_igraph_full_multipartite,                           3},
     {"R_igraph_fundamental_cycles",                         (DL_FUNC) &R_igraph_fundamental_cycles,                          4},
     {"R_igraph_generalized_petersen",                       (DL_FUNC) &R_igraph_generalized_petersen,                        2},
-    {"R_igraph_get_adjacency",                              (DL_FUNC) &R_igraph_get_adjacency,                               4},
     {"R_igraph_get_adjacency_sparse",                       (DL_FUNC) &R_igraph_get_adjacency_sparse,                        4},
     {"R_igraph_get_all_eids_between",                       (DL_FUNC) &R_igraph_get_all_eids_between,                        4},
     {"R_igraph_get_all_shortest_paths",                     (DL_FUNC) &R_igraph_get_all_shortest_paths,                      4},
@@ -759,7 +755,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_local_scan_subset_ecount",                   (DL_FUNC) &R_igraph_local_scan_subset_ecount,                    3},
     {"R_igraph_maxdegree",                                  (DL_FUNC) &R_igraph_maxdegree,                                   4},
     {"R_igraph_maxflow",                                    (DL_FUNC) &R_igraph_maxflow,                                     4},
-    {"R_igraph_maximal_cliques",                            (DL_FUNC) &R_igraph_maximal_cliques,                             4},
     {"R_igraph_maximal_cliques_count",                      (DL_FUNC) &R_igraph_maximal_cliques_count,                       3},
     {"R_igraph_maximal_cliques_hist",                       (DL_FUNC) &R_igraph_maximal_cliques_hist,                        3},
     {"R_igraph_maximal_independent_vertex_sets",            (DL_FUNC) &R_igraph_maximal_independent_vertex_sets,             1},
@@ -890,6 +885,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_arpack_unpack_complex",                     (DL_FUNC) &Rx_igraph_arpack_unpack_complex,                      3},
     {"Rx_igraph_barabasi_aging_game",                       (DL_FUNC) &Rx_igraph_barabasi_aging_game,                       12},
     {"Rx_igraph_barabasi_game",                             (DL_FUNC) &Rx_igraph_barabasi_game,                              9},
+    {"Rx_igraph_bfs",                                       (DL_FUNC) &Rx_igraph_bfs,                                       15},
+    {"Rx_igraph_bipartite_projection",                      (DL_FUNC) &Rx_igraph_bipartite_projection,                       4},
     {"Rx_igraph_callaway_traits_game",                      (DL_FUNC) &Rx_igraph_callaway_traits_game,                       6},
     {"Rx_igraph_cited_type_game",                           (DL_FUNC) &Rx_igraph_cited_type_game,                            5},
     {"Rx_igraph_citing_cited_type_game",                    (DL_FUNC) &Rx_igraph_citing_cited_type_game,                     5},
@@ -918,6 +915,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_establishment_game",                        (DL_FUNC) &Rx_igraph_establishment_game,                         6},
     {"Rx_igraph_farthest_points",                           (DL_FUNC) &Rx_igraph_farthest_points,                            4},
     {"Rx_igraph_finalizer",                                 (DL_FUNC) &Rx_igraph_finalizer,                                  0},
+    {"Rx_igraph_full",                                      (DL_FUNC) &Rx_igraph_full,                                       3},
+    {"Rx_igraph_get_adjacency",                             (DL_FUNC) &Rx_igraph_get_adjacency,                              4},
     {"Rx_igraph_get_adjedgelist",                           (DL_FUNC) &Rx_igraph_get_adjedgelist,                            3},
     {"Rx_igraph_get_adjlist",                               (DL_FUNC) &Rx_igraph_get_adjlist,                                4},
     {"Rx_igraph_get_all_simple_paths_pp",                   (DL_FUNC) &Rx_igraph_get_all_simple_paths_pp,                    1},
@@ -949,6 +948,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_layout_merge_dla",                          (DL_FUNC) &Rx_igraph_layout_merge_dla,                           2},
     {"Rx_igraph_layout_reingold_tilford",                   (DL_FUNC) &Rx_igraph_layout_reingold_tilford,                    5},
     {"Rx_igraph_make_weak_ref",                             (DL_FUNC) &Rx_igraph_make_weak_ref,                              3},
+    {"Rx_igraph_maximal_cliques",                           (DL_FUNC) &Rx_igraph_maximal_cliques,                            4},
     {"Rx_igraph_maximal_cliques_count",                     (DL_FUNC) &Rx_igraph_maximal_cliques_count,                      4},
     {"Rx_igraph_maximal_cliques_file",                      (DL_FUNC) &Rx_igraph_maximal_cliques_file,                       5},
     {"Rx_igraph_mybracket2",                                (DL_FUNC) &Rx_igraph_mybracket2,                                 3},

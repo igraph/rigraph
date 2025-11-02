@@ -191,7 +191,7 @@ bipartite_projection <- function(
   on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_bipartite_projection,
+    Rx_igraph_bipartite_projection,
     graph,
     types,
     as.numeric(probe1),

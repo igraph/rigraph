@@ -253,7 +253,7 @@ get.adjacency.dense <- function(
     on.exit(.Call(Rx_igraph_finalizer))
     type <- switch(type, "upper" = 0, "lower" = 1, "both" = 2)
     res <- .Call(
-      R_igraph_get_adjacency,
+      Rx_igraph_get_adjacency,
       graph,
       as.numeric(type),
       weights,

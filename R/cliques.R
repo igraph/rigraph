@@ -317,7 +317,7 @@ max_cliques <- function(
   } else {
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques,
+      Rx_igraph_maximal_cliques,
       graph,
       subset,
       as.numeric(min),
