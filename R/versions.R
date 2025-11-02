@@ -110,7 +110,7 @@ upgrade_graph <- function(graph) {
     graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
     class(graph) <- "igraph"
 
-    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # Calling for side effect: error if Rz_SEXP_to_igraph() fails, create native igraph,
     # update "me" element of environment
     V(graph)
 
@@ -125,7 +125,7 @@ upgrade_graph <- function(graph) {
 ## Check that the version is the latest
 
 warn_version <- function(graph) {
-  # Calling for side effect: error if R_SEXP_to_igraph() fails
+  # Calling for side effect: error if Rz_SEXP_to_igraph() fails
   # Don't call vcount_impl() to avoid recursion
   .Call(Rx_igraph_vcount, graph)
 
