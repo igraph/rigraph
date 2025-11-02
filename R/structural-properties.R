@@ -1943,8 +1943,11 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- constraint_impl(
+    graph = graph,
+    vids = nodes,
+    weights = weights
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
   }
