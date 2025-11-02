@@ -217,8 +217,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(R_igraph_finalizer))
-  graph <- .Call(Rx_igraph_add_vertices, graph, as.numeric(nv))
+  graph <- add_vertices_impl(
+    graph = graph,
+    nv = nv
+  )
   vertices.new <- vcount(graph)
 
   if (vertices.new - vertices.orig != 0) {
