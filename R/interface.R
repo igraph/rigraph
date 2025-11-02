@@ -320,10 +320,9 @@ delete_vertices <- function(graph, v) {
 #'   vapply(gsize, 0) %>%
 #'   hist()
 gsize <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_ecount, graph)
+  ecount_impl(
+    graph = graph
+  )
 }
 #' @rdname gsize
 #' @export
