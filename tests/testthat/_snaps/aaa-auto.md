@@ -10192,14 +10192,16 @@
     Code
       edges_impl(graph = g, eids = E(g))
     Output
-      [1] 0 1 1 2 2 3
+      + 6/4 vertices:
+      [1] 1 2 2 3 3 4
 
 ---
 
     Code
       edges_impl(graph = g, eids = c(1, 3))
     Output
-      [1] 0 1 2 3
+      + 4/4 vertices:
+      [1] 1 2 3 4
 
 # edges_impl errors
 
