@@ -5176,55 +5176,6 @@ SEXP Rx_igraph_get_edge(SEXP graph, SEXP peid) {
   return result;
 }
 
-SEXP Rx_igraph_edges(SEXP graph, SEXP eids) {
-  igraph_t g;
-  igraph_es_t es;
-  igraph_vector_int_t es_data;
-  igraph_vector_int_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_es(eids, &g, &es, &es_data);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_edges(&g, es, &res));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-  igraph_vector_int_destroy(&es_data);
-  igraph_es_destroy(&es);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_constraint(SEXP graph, SEXP vids, SEXP pweights) {
-
-  igraph_t g;
-  igraph_vs_t vs;
-  igraph_vector_int_t vs_data;
-  igraph_vector_t weights, *wptr=0;
-  igraph_vector_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_vs(vids, &g, &vs, &vs_data);
-  if (Rf_xlength(pweights) != 0) {
-    R_SEXP_to_vector(pweights, &weights);
-    wptr=&weights;
-  }
-  igraph_vector_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_constraint(&g, &res, vs, wptr));
-
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
-  igraph_vector_int_destroy(&vs_data);
-  igraph_vs_destroy(&vs);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_es_path(SEXP graph, SEXP pp, SEXP pdir) {
 
   igraph_t g;
