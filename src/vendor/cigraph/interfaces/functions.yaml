@@ -847,7 +847,8 @@ igraph_neighborhood_graphs:
     DEPS: vids ON graph
 
 igraph_topological_sorting:
-    PARAMS: GRAPH graph, OUT VECTOR_INT res, NEIMODE mode=OUT
+    PARAMS: GRAPH graph, OUT VERTEX_INDICES res, NEIMODE mode=OUT
+    DEPS: res ON graph
 
 igraph_feedback_arc_set:
     # Default algorithm is the approximate method because it is faster and the

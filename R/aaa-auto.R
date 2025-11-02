@@ -2968,7 +2968,9 @@ topological_sorting_impl <- function(
     graph,
     mode
   )
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 

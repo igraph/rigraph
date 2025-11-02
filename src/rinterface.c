@@ -4115,7 +4115,7 @@ SEXP R_igraph_topological_sorting(SEXP graph, SEXP mode) {
   IGRAPH_R_CHECK(igraph_topological_sorting(&c_graph, &c_res, c_mode));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_to_SEXPp1(&c_res));
   igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;

@@ -2305,18 +2305,12 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' topo_sort(g)
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-
-  res
+  topological_sorting_impl(
+    graph = graph,
+    mode = mode
+  )
 }
 
 #' Finding a feedback arc set in a graph
