@@ -2768,7 +2768,7 @@ bfs <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_bfs,
+    Rx_igraph_bfs,
     graph,
     root,
     roots,

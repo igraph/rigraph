@@ -8,12 +8,12 @@ GRAPH:
             IGRAPH_FINALLY(igraph_destroy, &%C%);
     OUTCONV:
         INOUT: |-
-            PROTECT(%I%=R_igraph_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_to_SEXP(&%C%));
             IGRAPH_I_DESTROY(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             IGRAPH_FINALLY(igraph_destroy, &%C%);
-            PROTECT(%I%=R_igraph_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_to_SEXP(&%C%));
             IGRAPH_I_DESTROY(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -26,7 +26,7 @@ GRAPH_LIST:
             IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_graphlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_graphlist_to_SEXP(&%C%));
             IGRAPH_FREE(%C%.stor_begin);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -80,7 +80,7 @@ INFILE:
         IN: '%C%'
     INCONV:
         IN: |-
-            %C% = R_igraph_fopen_read(%I%);
+            %C% = Rx_igraph_fopen_read(%I%);
             IGRAPH_FINALLY(fclose, %C%);
 
 OUTFILE:
@@ -89,7 +89,7 @@ OUTFILE:
         IN: '%C%'
     INCONV:
         IN: |-
-            %C% = R_igraph_fopen_write(%I%);
+            %C% = Rx_igraph_fopen_write(%I%);
             IGRAPH_FINALLY(fclose, %C%);
 
 REAL:
@@ -137,7 +137,7 @@ INDEX_VECTOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -154,7 +154,7 @@ VECTOR:
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -171,7 +171,7 @@ VECTOR_BOOL:
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -190,7 +190,7 @@ VECTOR_INT:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -199,13 +199,13 @@ MATRIX_LIST:
     CTYPE: igraph_matrix_list_t
     INCONV:
         IN: |-
-            R_igraph_SEXP_to_matrixlist(%I%, &%C%);
+            Rx_igraph_SEXP_to_matrixlist(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_matrix_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_matrix_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_matrixlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_matrixlist_to_SEXP(&%C%));
             igraph_matrix_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -213,13 +213,13 @@ VECTOR_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_list_t
     INCONV:
-        IN: R_igraph_SEXP_to_vector_list(%I%, &%C%);
+        IN: Rx_igraph_SEXP_to_vector_list(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vectorlist_to_SEXP(&%C%));
             igraph_vector_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -227,13 +227,13 @@ VECTOR_INT_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_list_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
+        IN: if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(Rx_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_list_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_list_to_SEXP(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -242,7 +242,7 @@ VERTEXSET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%));
+            IGRAPH_R_CHECK(Rx_igraph_SEXP_to_vector_int_list(%I%, &%C%));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
@@ -252,7 +252,7 @@ VERTEXSET_LIST:
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_list_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -261,13 +261,13 @@ EDGESET_LIST:
     CTYPE: igraph_vector_int_list_t
     INCONV:
         IN: |-
-            if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(R_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
+            if (!Rf_isNull(%I%)) { IGRAPH_R_CHECK(Rx_igraph_SEXP_to_vector_int_list(%I%, &%C%)); }
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_int_list_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_list_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_list_to_SEXPp1(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -290,7 +290,7 @@ EDGE_SELECTOR:
             igraph_vector_int_destroy(&%C%_data);
             igraph_es_destroy(&%C%);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -314,7 +314,7 @@ EDGEWEIGHTS:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -329,7 +329,7 @@ VERTEXWEIGHTS:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -344,7 +344,7 @@ EDGE_CAPACITY:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -361,7 +361,7 @@ MATRIX:
             IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_matrix_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_matrix_to_SEXP(&%C%));
             igraph_matrix_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -383,7 +383,7 @@ MATRIX_INT:
             igraph_matrix_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_matrix_int_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_matrix_int_to_SEXP(&%C%));
             igraph_matrix_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -430,7 +430,7 @@ VERTEX_QTY:
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -447,7 +447,7 @@ ALL_VERTEX_QTY:
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -476,7 +476,7 @@ VERTEX_SELECTOR:
             igraph_vector_int_destroy(&%C%_data);
             igraph_vs_destroy(&%C%);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -495,7 +495,7 @@ VERTEX_INDICES:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -516,7 +516,7 @@ VERTEX_INDICES_PV:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -535,7 +535,7 @@ VERTEX_INDEX_PAIRS:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -554,7 +554,7 @@ EDGE_INDICES:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -614,20 +614,20 @@ BLISSINFO:
     CALL: '&%C%'
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_bliss_info_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_bliss_info_to_SEXP(&%C%));
             if (%C%.group_size) { free(%C%.group_size); }
 
 VECTOR_STR:
     CALL: '&%C%'
     CTYPE: igraph_strvector_t
     INCONV:
-        IN: R_igraph_SEXP_to_strvector(%I%, &%C%);
+        IN: Rx_igraph_SEXP_to_strvector(%I%, &%C%);
         OUT: |-
             IGRAPH_R_CHECK(igraph_strvector_init(&%C%, 0));
             IGRAPH_FINALLY(igraph_strvector_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_strvector_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_strvector_to_SEXP(&%C%));
             igraph_strvector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -643,7 +643,7 @@ BIPARTITE_TYPES:
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -659,7 +659,7 @@ ALL_BIPARTITE_TYPES:
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -673,7 +673,7 @@ BIPARTITE_TYPES_UNNAMED:
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -698,7 +698,7 @@ VERTEX_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -723,7 +723,7 @@ EDGE_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -768,11 +768,11 @@ HRG:
             igraph_hrg_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         INOUT: |-
-            PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -786,7 +786,7 @@ SPARSEMAT:
             IGRAPH_FINALLY(igraph_sparsemat_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_sparsemat_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_sparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -798,7 +798,7 @@ SPARSEMATPTR:
         OUT: /* Don't need to init. */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_sparsemat_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_sparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
 
 SPARSEMAT_OR_0:
@@ -812,7 +812,7 @@ SPARSEMAT_OR_0:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0orsparsemat_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0orsparsemat_to_SEXP(&%C%));
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -835,7 +835,7 @@ VECTOR_COMPLEX:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0orvector_complex_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0orvector_complex_to_SEXP(&%C%));
             igraph_vector_complex_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -858,20 +858,20 @@ MATRIX_COMPLEX:
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_0ormatrix_complex_to_SEXP(&%C%));
+            PROTECT(%I%=Rx_igraph_0ormatrix_complex_to_SEXP(&%C%));
             igraph_matrix_complex_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 PLFIT:
     CALL: '&%C%'
     OUTCONV:
-        OUT: PROTECT(%I%=R_igraph_plfit_result_to_SEXP(&%C%));
+        OUT: PROTECT(%I%=Rx_igraph_plfit_result_to_SEXP(&%C%));
 
 MAXFLOW_STATS:
     CALL: '&%C%'
     HEADER: {}
     OUTCONV:
-        OUT: PROTECT(%I%=R_igraph_maxflow_stats_to_SEXP(&%C%));
+        OUT: PROTECT(%I%=Rx_igraph_maxflow_stats_to_SEXP(&%C%));
 
 EIGENWHICH:
     CALL: '&%C%'
@@ -888,11 +888,11 @@ SIR_LIST:
     INCONV:
         OUT: |-
             IGRAPH_R_CHECK(igraph_vector_ptr_init(&%C%, 0));
-            IGRAPH_FINALLY(R_igraph_sirlist_destroy, &%C%);
+            IGRAPH_FINALLY(Rx_igraph_sirlist_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_sirlist_to_SEXP(&%C%));
-            R_igraph_sirlist_destroy(&%C%);
+            PROTECT(%I%=Rx_igraph_sirlist_to_SEXP(&%C%));
+            Rx_igraph_sirlist_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 PAGERANKOPT:
