@@ -250,7 +250,7 @@ get.adjacency.dense <- function(
   }
 
   if (is.null(attr)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     type <- switch(type, "upper" = 0, "lower" = 1, "both" = 2)
     res <- .Call(
       R_igraph_get_adjacency,
@@ -488,7 +488,7 @@ as_adj <- function(
 #' @export
 as_edgelist <- function(graph, names = TRUE) {
   ensure_igraph(graph)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- matrix(.Call(Rx_igraph_get_edgelist, graph, TRUE), ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
@@ -695,7 +695,7 @@ as_adj_list <- function(
   }
 
   multiple <- if (multiple) 1 else 0
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
@@ -725,7 +725,7 @@ as_adj_edge_list <- function(
     loops <- 2
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) {

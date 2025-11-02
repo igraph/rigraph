@@ -407,7 +407,7 @@ min_cut <- function(
   }
 
   value.only <- as.logical(value.only)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   if (is.null(target) && is.null(source)) {
     if (value.only) {
@@ -418,7 +418,7 @@ min_cut <- function(
   } else {
     if (value.only) {
       res <- .Call(
-        R_igraph_st_mincut_value,
+        Rx_igraph_st_mincut_value,
         graph,
         as_igraph_vs(graph, source) - 1,
         as_igraph_vs(graph, target) - 1,
@@ -526,9 +526,9 @@ vertex_connectivity <- function(
   if (is.null(source) && is.null(target)) {
     vertex_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
-      R_igraph_st_vertex_connectivity,
+      Rx_igraph_st_vertex_connectivity,
       graph,
       as_igraph_vs(graph, source) - 1,
       as_igraph_vs(graph, target) - 1
@@ -631,9 +631,9 @@ edge_connectivity <- function(
   if (is.null(source) && is.null(target)) {
     edge_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
-      R_igraph_st_edge_connectivity,
+      Rx_igraph_st_edge_connectivity,
       graph,
       as_igraph_vs(graph, source) - 1,
       as_igraph_vs(graph, target) - 1
@@ -653,9 +653,9 @@ edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   if (is.null(source) || is.null(target)) {
     cli::cli_abort("Both source and target must be given")
   }
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_edge_disjoint_paths,
+    Rx_igraph_edge_disjoint_paths,
     graph,
     as_igraph_vs(graph, source) - 1,
     as_igraph_vs(graph, target) - 1
@@ -670,9 +670,9 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
     cli::cli_abort("Both source and target must be given")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_vertex_disjoint_paths,
+    Rx_igraph_vertex_disjoint_paths,
     graph,
     as_igraph_vs(graph, source) - 1,
     as_igraph_vs(graph, target) - 1

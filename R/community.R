@@ -1314,7 +1314,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(merges) <- "numeric"
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
@@ -1478,10 +1478,10 @@ cluster_spinglass <- function(
     "neg" = 1
   )
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(
-      R_igraph_spinglass_community,
+      Rx_igraph_spinglass_community,
       graph,
       weights,
       as.numeric(spins),
@@ -1503,7 +1503,7 @@ cluster_spinglass <- function(
     class(res) <- "communities"
   } else {
     res <- .Call(
-      R_igraph_spinglass_my_community,
+      Rx_igraph_spinglass_my_community,
       graph,
       weights,
       as_igraph_vs(graph, vertex) - 1,
@@ -1857,9 +1857,9 @@ cluster_walktrap <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_walktrap_community,
+    Rx_igraph_walktrap_community,
     graph,
     weights,
     as.numeric(steps),
@@ -1985,9 +1985,9 @@ cluster_edge_betweenness <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_edge_betweenness,
+    Rx_igraph_community_edge_betweenness,
     graph,
     weights,
     as.logical(directed),
@@ -2077,9 +2077,9 @@ cluster_fast_greedy <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_fastgreedy,
+    Rx_igraph_community_fastgreedy,
     graph,
     as.logical(merges),
     as.logical(modularity),
@@ -2257,10 +2257,10 @@ cluster_leading_eigen <- function(
 
   options <- modify_list(arpack_defaults(), options)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_community_leading_eigenvector,
+    Rx_igraph_community_leading_eigenvector,
     graph,
     steps,
     weights,

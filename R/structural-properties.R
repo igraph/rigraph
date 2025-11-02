@@ -767,9 +767,9 @@ diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_diameter,
+    Rx_igraph_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -796,9 +796,9 @@ get_diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_diameter,
+    Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -832,9 +832,9 @@ farthest_vertices <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_farthest_points,
+    Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -1244,9 +1244,9 @@ distances <- function(
     cli::cli_warn("Unweighted algorithm chosen, {.arg weights} ignored.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_shortest_paths,
+    Rx_igraph_shortest_paths,
     graph,
     v - 1,
     to - 1,
@@ -1328,9 +1328,9 @@ shortest_paths <- function(
   }
 
   to <- as_igraph_vs(graph, to) - 1
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_shortest_paths,
+    Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
     to,
@@ -1526,9 +1526,9 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_subcomponent,
+    Rx_igraph_subcomponent,
     graph,
     as_igraph_vs(graph, v) - 1,
     as.numeric(mode)
@@ -2061,9 +2061,9 @@ ego_size <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_neighborhood_size,
+    Rx_igraph_neighborhood_size,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2175,9 +2175,9 @@ ego <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood,
+    Rx_igraph_neighborhood,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2210,9 +2210,9 @@ make_ego_graph <- function(
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood_graphs,
+    Rx_igraph_neighborhood_graphs,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2451,7 +2451,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
   if (res$girth == 0) {
     res$girth <- Inf
@@ -2766,7 +2766,7 @@ bfs <- function(
     callback <- as.function(callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_bfs,
     graph,
@@ -3022,9 +3022,9 @@ dfs <- function(
     out.callback <- as.function(out.callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_dfs,
+    Rx_igraph_dfs,
     graph,
     root,
     mode,
@@ -3181,7 +3181,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_no_components, graph, mode)
 }
 

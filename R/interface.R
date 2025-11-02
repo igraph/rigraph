@@ -150,9 +150,9 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   edges.orig <- ecount(graph)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   graph <- .Call(
-    R_igraph_add_edges_manual,
+    Rx_igraph_add_edges_manual,
     graph,
     as_igraph_vs(graph, edges) - 1
   )
@@ -551,9 +551,9 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_get_eids,
+    Rx_igraph_get_eids,
     graph,
     as_igraph_vs(graph, vp) - 1,
     as.logical(directed),
@@ -641,7 +641,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
   vv <- as_igraph_vs(graph, v) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   res <- .Call(Rx_igraph_adjacent_vertices, graph, vv, mode)
   res <- lapply(res, `+`, 1)
@@ -680,7 +680,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   vv <- as_igraph_vs(graph, v) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   res <- .Call(Rx_igraph_incident_edges, graph, vv, mode)
   res <- lapply(res, `+`, 1)

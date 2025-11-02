@@ -430,11 +430,11 @@ graph.adjacency.dense <- function(
     weighted <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(weighted)) {
-    res <- .Call(R_igraph_adjacency, adjmatrix, mode, diag)
+    res <- .Call(Rx_igraph_adjacency, adjmatrix, mode, diag)
   } else {
-    res <- .Call(R_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- .Call(Rx_igraph_weighted_adjacency, adjmatrix, mode, diag)
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 

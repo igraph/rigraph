@@ -757,9 +757,9 @@ layout_as_tree <- function(
   )
   flip.y <- as.logical(flip.y)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_layout_reingold_tilford,
+    Rx_igraph_layout_reingold_tilford,
     graph,
     root,
     mode,
@@ -1473,10 +1473,10 @@ layout_with_fr <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_fr(repulserad = )")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold,
+      Rx_igraph_layout_fruchterman_reingold,
       graph,
       coords,
       niter,
@@ -1490,7 +1490,7 @@ layout_with_fr <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold_3d,
+      Rx_igraph_layout_fruchterman_reingold_3d,
       graph,
       coords,
       niter,
@@ -1666,9 +1666,9 @@ layout_with_graphopt <- function(
   spring.constant <- as.double(spring.constant)
   max.sa.movement <- as.double(max.sa.movement)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_graphopt,
+    Rx_igraph_layout_graphopt,
     graph,
     niter,
     charge,
@@ -1827,11 +1827,11 @@ layout_with_kk <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_kk(coolexp = )")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_kamada_kawai,
+      Rx_igraph_layout_kamada_kawai,
       graph,
       coords,
       maxiter,
@@ -1845,7 +1845,7 @@ layout_with_kk <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_kamada_kawai_3d,
+      Rx_igraph_layout_kamada_kawai_3d,
       graph,
       coords,
       maxiter,
@@ -1937,9 +1937,9 @@ layout_with_lgl <- function(
     root <- as_igraph_vs(graph, root) - 1
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_lgl,
+    Rx_igraph_layout_lgl,
     graph,
     as.double(maxiter),
     as.double(maxdelta),
@@ -2449,9 +2449,9 @@ merge_coords <- function(graphs, layouts, method = "dla") {
     cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_merge_dla,
+    Rx_igraph_layout_merge_dla,
     graphs,
     layouts
   )
@@ -2791,10 +2791,10 @@ layout_with_drl <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_drl,
+      Rx_igraph_layout_drl,
       graph,
       seed,
       use.seed,
@@ -2803,7 +2803,7 @@ layout_with_drl <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_drl_3d,
+      Rx_igraph_layout_drl_3d,
       graph,
       seed,
       use.seed,
