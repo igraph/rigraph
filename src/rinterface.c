@@ -409,7 +409,7 @@ SEXP R_igraph_edges(SEXP graph, SEXP eids) {
                                         /* Convert output */
   igraph_vector_int_destroy(&c_eids_data);
   igraph_es_destroy(&c_eids);
-  PROTECT(edges=R_igraph_vector_int_to_SEXP(&c_edges));
+  PROTECT(edges=R_igraph_vector_int_to_SEXPp1(&c_edges));
   igraph_vector_int_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = edges;

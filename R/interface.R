@@ -435,15 +435,14 @@ is_directed <- function(graph) {
 ends <- function(graph, es, names = TRUE) {
   ensure_igraph(graph)
 
-  es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(R_igraph_finalizer))
-
-  if (length(es) == 1) {
-    res[, !is.na(es)] <- .Call(Rx_igraph_get_edge, graph, es2) + 1
-  } else {
-    res[, !is.na(es)] <- .Call(Rx_igraph_edges, graph, es2) + 1
+  if (length(es) > 0) {
+    edge_data <- edges_impl(
+      graph = graph,
+      eids = es
+    )
+    res[, !is.na(es)] <- edge_data
   }
 
   if (names && is_named(graph)) {

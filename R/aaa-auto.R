@@ -248,7 +248,9 @@ edges_impl <- function(
     graph,
     eids - 1
   )
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
