@@ -67,8 +67,8 @@ igraph_edge:
     PARAMS: GRAPH graph, INTEGER eid, OUT INTEGER from, OUT INTEGER to
 
 igraph_edges:
-    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VECTOR_INT edges
-    DEPS: eids ON graph
+    PARAMS: GRAPH graph, EDGE_SELECTOR eids, OUT VERTEX_INDICES edges
+    DEPS: eids ON graph, edges ON graph
 
 igraph_get_eid:
     PARAMS: |-
