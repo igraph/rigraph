@@ -264,10 +264,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g <- delete_edges(g, get_edge_ids(g, c(1, 5, 4, 5)))
 #' g
 delete_edges <- function(graph, edges) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
+  delete_edges_impl(
+    graph = graph,
+    edges = edges
+  )
 }
 
 #' Delete vertices from a graph
