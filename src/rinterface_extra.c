@@ -5949,50 +5949,6 @@ SEXP R_igraph_independent_vertex_sets(SEXP graph,
   return result;
 }
 
-SEXP Rx_igraph_largest_independent_vertex_sets(SEXP graph) {
-  igraph_t g;
-  igraph_vector_int_list_t list;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_list_init(&list,0);
-  IGRAPH_R_CHECK(igraph_largest_independent_vertex_sets(&g, &list));
-  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
-  igraph_vector_int_list_destroy(&list);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_maximal_independent_vertex_sets(SEXP graph) {
-  igraph_t g;
-  igraph_vector_int_list_t list;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_list_init(&list,0);
-  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &list));
-  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
-  igraph_vector_int_list_destroy(&list);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_independence_number(SEXP graph) {
-  igraph_t g;
-  igraph_integer_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_independence_number(&g, &res));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_lastcit_game(SEXP pnodes, SEXP pedges, SEXP pagebins,
                            SEXP ppreference, SEXP pdirected) {
 
