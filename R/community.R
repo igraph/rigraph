@@ -1314,7 +1314,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(merges) <- "numeric"
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
@@ -1478,7 +1478,7 @@ cluster_spinglass <- function(
     "neg" = 1
   )
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(
       R_igraph_spinglass_community,
@@ -1857,7 +1857,7 @@ cluster_walktrap <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_walktrap_community,
     graph,
@@ -1985,7 +1985,7 @@ cluster_edge_betweenness <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_community_edge_betweenness,
     graph,
@@ -2077,7 +2077,7 @@ cluster_fast_greedy <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_community_fastgreedy,
     graph,
@@ -2257,7 +2257,7 @@ cluster_leading_eigen <- function(
 
   options <- modify_list(arpack_defaults(), options)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_community_leading_eigenvector,

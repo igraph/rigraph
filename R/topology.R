@@ -218,7 +218,7 @@ graph.subisomorphic.lad <- function(
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_subisomorphic_lad,

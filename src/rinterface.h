@@ -155,3 +155,5 @@ igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed);
+SEXP R_igraph_finalizer(void);
+SEXP R_igraph_vcount(SEXP graph);

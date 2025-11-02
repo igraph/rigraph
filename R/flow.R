@@ -407,7 +407,7 @@ min_cut <- function(
   }
 
   value.only <- as.logical(value.only)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   if (is.null(target) && is.null(source)) {
     if (value.only) {
@@ -533,10 +533,10 @@ vertex_connectivity <- function(
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(Rx_igraph_vertex_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
       R_igraph_st_vertex_connectivity,
       graph,
@@ -639,10 +639,10 @@ edge_connectivity <- function(
   ensure_igraph(graph)
 
   if (is.null(source) && is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(Rx_igraph_edge_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(
       R_igraph_st_edge_connectivity,
       graph,
@@ -664,7 +664,7 @@ edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   if (is.null(source) || is.null(target)) {
     cli::cli_abort("Both source and target must be given")
   }
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
     R_igraph_edge_disjoint_paths,
     graph,
@@ -681,7 +681,7 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
     cli::cli_abort("Both source and target must be given")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
     R_igraph_vertex_disjoint_paths,
     graph,
@@ -695,7 +695,7 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 adhesion <- function(graph, checks = TRUE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_adhesion, graph, as.logical(checks))
 }
 
@@ -705,7 +705,7 @@ adhesion <- function(graph, checks = TRUE) {
 cohesion.igraph <- function(x, checks = TRUE, ...) {
   ensure_igraph(x)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_cohesion, x, as.logical(checks))
 }
 

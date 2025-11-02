@@ -91,7 +91,7 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
   }
 
   if (algorithm == "unweighted") {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(Rx_igraph_minimum_spanning_tree_unweighted, graph)
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
@@ -99,7 +99,7 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(Rx_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
   } else {
     cli::cli_abort("Invalid {.arg algorithm}.")

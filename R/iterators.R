@@ -361,7 +361,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
     res <- seq_len(ec)
     res <- set_complete_iterator(res)
   } else if (!is.null(P)) {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
       R_igraph_es_pairs,
       graph,
@@ -370,7 +370,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
     ) +
       1
   } else {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
       R_igraph_es_path,
       graph,
@@ -589,7 +589,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(v)) {
       v <- which(v)
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_nei,
       graph,
@@ -620,7 +620,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj,
       graph,
@@ -641,7 +641,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj,
       graph,
@@ -659,7 +659,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_vs_adj,
       graph,
@@ -982,7 +982,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
   .inc <- function(v) {
     ## TRUE iff the edge is incident to at least one vertex in v
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj,
       graph,
@@ -1000,7 +1000,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj,
       graph,
@@ -1015,7 +1015,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
       R_igraph_es_adj,
       graph,

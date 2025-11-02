@@ -150,7 +150,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   edges.orig <- ecount(graph)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   graph <- .Call(
     R_igraph_add_edges_manual,
     graph,
@@ -217,7 +217,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   graph <- .Call(Rx_igraph_add_vertices, graph, as.numeric(nv))
   vertices.new <- vcount(graph)
 
@@ -264,7 +264,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
 }
 
@@ -290,7 +290,7 @@ delete_edges <- function(graph, edges) {
 delete_vertices <- function(graph, v) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
 }
 
@@ -320,7 +320,7 @@ delete_vertices <- function(graph, v) {
 gsize <- function(graph) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_ecount, graph)
 }
 #' @rdname gsize
@@ -392,7 +392,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) {
@@ -419,7 +419,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 is_directed <- function(graph) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_is_directed, graph)
 }
 
@@ -445,7 +445,7 @@ ends <- function(graph, es, names = TRUE) {
   es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   if (length(es) == 1) {
     res[, !is.na(es)] <- .Call(Rx_igraph_get_edge, graph, es2) + 1
@@ -559,7 +559,7 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
 
   vp <- el_to_vec(vp, call = rlang::caller_env())
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
     R_igraph_get_eids,
     graph,
@@ -649,7 +649,7 @@ adjacent_vertices <- function(graph, v, mode = c("out", "in", "all", "total")) {
   vv <- as_igraph_vs(graph, v) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   res <- .Call(Rx_igraph_adjacent_vertices, graph, vv, mode)
   res <- lapply(res, `+`, 1)
@@ -688,7 +688,7 @@ incident_edges <- function(graph, v, mode = c("out", "in", "all", "total")) {
   vv <- as_igraph_vs(graph, v) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
 
   res <- .Call(Rx_igraph_incident_edges, graph, vv, mode)
   res <- lapply(res, `+`, 1)

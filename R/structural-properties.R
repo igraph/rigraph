@@ -767,7 +767,7 @@ diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
     R_igraph_diameter,
     graph,
@@ -796,7 +796,7 @@ get_diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_get_diameter,
     graph,
@@ -832,7 +832,7 @@ farthest_vertices <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_farthest_points,
     graph,
@@ -1244,7 +1244,7 @@ distances <- function(
     cli::cli_warn("Unweighted algorithm chosen, {.arg weights} ignored.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_shortest_paths,
     graph,
@@ -1328,7 +1328,7 @@ shortest_paths <- function(
   }
 
   to <- as_igraph_vs(graph, to) - 1
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_get_shortest_paths,
     graph,
@@ -1526,7 +1526,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_subcomponent,
     graph,
@@ -1943,7 +1943,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
@@ -2058,7 +2058,7 @@ ego_size <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
     R_igraph_neighborhood_size,
     graph,
@@ -2172,7 +2172,7 @@ ego <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood,
     graph,
@@ -2207,7 +2207,7 @@ make_ego_graph <- function(
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood_graphs,
     graph,
@@ -2263,7 +2263,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
@@ -2306,7 +2306,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) {
@@ -2454,7 +2454,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
   if (res$girth == 0) {
     res$girth <- Inf
@@ -2769,7 +2769,7 @@ bfs <- function(
     callback <- as.function(callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_bfs,
     graph,
@@ -3025,7 +3025,7 @@ dfs <- function(
     out.callback <- as.function(out.callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_dfs,
     graph,
@@ -3184,7 +3184,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_no_components, graph, mode)
 }
 

@@ -88,7 +88,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
   loops <- as.logical(loops)
   mode <- if (loops) 1 else 0
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
 }
 

@@ -264,7 +264,7 @@ power.law.fit.new <- function(
   xmin <- as.numeric(xmin)
   force.continuous <- as.logical(force.continuous)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
     R_igraph_power_law_fit_new,

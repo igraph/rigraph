@@ -491,6 +491,7 @@ extern SEXP Rx_igraph_ecount(SEXP);
 extern SEXP Rx_igraph_edge_connectivity(SEXP, SEXP);
 extern SEXP Rx_igraph_edges(SEXP, SEXP);
 extern SEXP Rx_igraph_famous(SEXP);
+extern SEXP Rx_igraph_finalizer(void);
 extern SEXP Rx_igraph_get_adjedgelist(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_adjlist(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_all_simple_paths_pp(SEXP);
@@ -534,6 +535,7 @@ extern SEXP Rx_igraph_set_verbose(SEXP);
 extern SEXP Rx_igraph_topological_sorting(SEXP, SEXP);
 extern SEXP Rx_igraph_transitivity_local_undirected_all(SEXP, SEXP);
 extern SEXP Rx_igraph_union(SEXP, SEXP);
+extern SEXP Rx_igraph_vcount(SEXP);
 extern SEXP Rx_igraph_vertex_connectivity(SEXP, SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
 extern SEXP Rx_igraph_weak_ref_run_finalizer(SEXP);
@@ -1017,6 +1019,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_edge_connectivity",                         (DL_FUNC) &Rx_igraph_edge_connectivity,                          2},
     {"Rx_igraph_edges",                                     (DL_FUNC) &Rx_igraph_edges,                                      2},
     {"Rx_igraph_famous",                                    (DL_FUNC) &Rx_igraph_famous,                                     1},
+    {"Rx_igraph_finalizer",                                 (DL_FUNC) &Rx_igraph_finalizer,                                  0},
     {"Rx_igraph_get_adjedgelist",                           (DL_FUNC) &Rx_igraph_get_adjedgelist,                            3},
     {"Rx_igraph_get_adjlist",                               (DL_FUNC) &Rx_igraph_get_adjlist,                                4},
     {"Rx_igraph_get_all_simple_paths_pp",                   (DL_FUNC) &Rx_igraph_get_all_simple_paths_pp,                    1},
@@ -1060,6 +1063,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_topological_sorting",                       (DL_FUNC) &Rx_igraph_topological_sorting,                        2},
     {"Rx_igraph_transitivity_local_undirected_all",         (DL_FUNC) &Rx_igraph_transitivity_local_undirected_all,          2},
     {"Rx_igraph_union",                                     (DL_FUNC) &Rx_igraph_union,                                      2},
+    {"Rx_igraph_vcount",                                    (DL_FUNC) &Rx_igraph_vcount,                                     1},
     {"Rx_igraph_vertex_connectivity",                       (DL_FUNC) &Rx_igraph_vertex_connectivity,                        2},
     {"Rx_igraph_weak_ref_key",                              (DL_FUNC) &Rx_igraph_weak_ref_key,                               1},
     {"Rx_igraph_weak_ref_run_finalizer",                    (DL_FUNC) &Rx_igraph_weak_ref_run_finalizer,                     1},

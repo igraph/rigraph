@@ -132,7 +132,7 @@ is_chordal <- function(
   }
   fillin <- as.logical(fillin)
   newgraph <- as.logical(newgraph)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
     R_igraph_is_chordal,
     graph,

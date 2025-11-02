@@ -355,7 +355,7 @@ cohesive_blocks <- function(graph, labels = TRUE) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(Rx_igraph_cohesive_blocks, graph)
   class(res) <- "cohesiveBlocks"

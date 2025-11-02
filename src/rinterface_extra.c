@@ -8684,3 +8684,11 @@ SEXP Rx_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
 SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
   return R_igraph_create_bipartite(types, edges, directed);
 }
+
+SEXP Rx_igraph_finalizer(void) {
+  return R_igraph_finalizer();
+}
+
+SEXP Rx_igraph_vcount(SEXP graph) {
+  return R_igraph_vcount(graph);
+}
