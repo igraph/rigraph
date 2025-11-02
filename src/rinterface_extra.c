@@ -6744,64 +6744,6 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
   return result;
 }
 
-SEXP Rx_igraph_cohesive_blocks(SEXP graph) {
-  igraph_vector_int_list_t c_blocks;
-  igraph_vector_int_t c_cohesion;
-  igraph_vector_int_t c_parent;
-  igraph_t c_blockTree;
-  igraph_t c_graph;
-  SEXP blocks;
-  SEXP cohesion;
-  SEXP parent;
-  SEXP blockTree;
-  SEXP result;
-  SEXP names;
-
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_int_list_init(&c_blocks, 0)) {
-  igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_blocks);
-  if (0 != igraph_vector_int_init(&c_cohesion, 0)) {
-  igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &c_cohesion);
-  if (0 != igraph_vector_int_init(&c_parent, 0)) {
-  igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_destroy, &c_parent);
-
-  IGRAPH_R_CHECK(igraph_cohesive_blocks(&c_graph, &c_blocks, &c_cohesion, &c_parent, &c_blockTree));
-
-  PROTECT(result=NEW_LIST(4));
-  PROTECT(names=NEW_CHARACTER(4));
-  PROTECT(blocks=R_igraph_vector_int_list_to_SEXPp1(&c_blocks));
-  igraph_vector_int_list_destroy(&c_blocks);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(cohesion=R_igraph_vector_int_to_SEXP(&c_cohesion));
-  igraph_vector_int_destroy(&c_cohesion);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(parent=R_igraph_vector_int_to_SEXPp1(&c_parent));
-  igraph_vector_int_destroy(&c_parent);
-  IGRAPH_FINALLY_CLEAN(1);
-  IGRAPH_FINALLY_PV(igraph_destroy, &c_blockTree);
-  PROTECT(blockTree=R_igraph_to_SEXP(&c_blockTree));
-  IGRAPH_I_DESTROY(&c_blockTree);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(result, 0, blocks);
-  SET_VECTOR_ELT(result, 1, cohesion);
-  SET_VECTOR_ELT(result, 2, parent);
-  SET_VECTOR_ELT(result, 3, blockTree);
-  SET_STRING_ELT(names, 0, Rf_mkChar("blocks"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("cohesion"));
-  SET_STRING_ELT(names, 2, Rf_mkChar("parent"));
-  SET_STRING_ELT(names, 3, Rf_mkChar("blockTree"));
-  SET_NAMES(result, names);
-
-  UNPROTECT(6);
-  return result;
-}
-
 typedef struct {
   igraph_arpack_function_t *fun;
 } R_igraph_i_function_container_t;
