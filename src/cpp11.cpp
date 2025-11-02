@@ -26,7 +26,6 @@ extern SEXP R_igraph_add_edges(SEXP, SEXP);
 extern SEXP R_igraph_add_edges_manual(SEXP, SEXP);
 extern SEXP R_igraph_add_vertices(SEXP, SEXP);
 extern SEXP R_igraph_adhesion(SEXP, SEXP);
-extern SEXP R_igraph_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjlist(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_all_minimal_st_separators(SEXP);
@@ -111,7 +110,6 @@ extern SEXP R_igraph_count_reachable(SEXP, SEXP);
 extern SEXP R_igraph_count_subisomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_count_triangles(SEXP);
 extern SEXP R_igraph_create(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_create_bipartite(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_cycle_graph(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_de_bruijn(SEXP, SEXP);
 extern SEXP R_igraph_decompose(SEXP, SEXP, SEXP, SEXP);
@@ -448,7 +446,6 @@ extern SEXP R_igraph_vs_adj(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_vs_nei(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_walktrap_community(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_watts_strogatz_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_weighted_clique_number(SEXP, SEXP);
 extern SEXP R_igraph_weighted_cliques(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_wheel(SEXP, SEXP, SEXP);
@@ -480,6 +477,7 @@ extern SEXP Rx_igraph_copy_to(SEXP);
 extern SEXP Rx_igraph_create_bipartite(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_difference(SEXP, SEXP);
 extern SEXP Rx_igraph_disjoint_union(SEXP);
+extern SEXP Rx_igraph_finalizer(void);
 extern SEXP Rx_igraph_get_adjedgelist(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_adjlist(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_get_all_simple_paths_pp(SEXP);
@@ -503,12 +501,11 @@ extern SEXP Rx_igraph_read_graph_dimacs(SEXP, SEXP);
 extern SEXP Rx_igraph_set_verbose(SEXP);
 extern SEXP Rx_igraph_transitivity_local_undirected_all(SEXP, SEXP);
 extern SEXP Rx_igraph_union(SEXP, SEXP);
+extern SEXP Rx_igraph_vcount(SEXP);
 extern SEXP Rx_igraph_weak_ref_key(SEXP);
 extern SEXP Rx_igraph_weak_ref_run_finalizer(SEXP);
 extern SEXP Rx_igraph_weak_ref_value(SEXP);
 extern SEXP Rx_igraph_weighted_adjacency(SEXP, SEXP, SEXP);
-extern SEXP Rx_igraph_finalizer(void);
-extern SEXP Rx_igraph_vcount(SEXP);
 extern SEXP UUID_gen(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
@@ -516,7 +513,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges_manual",                           (DL_FUNC) &R_igraph_add_edges_manual,                            2},
     {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_adhesion",                                   (DL_FUNC) &R_igraph_adhesion,                                    2},
-    {"R_igraph_adjacency",                                  (DL_FUNC) &R_igraph_adjacency,                                   3},
     {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
     {"R_igraph_adjlist",                                    (DL_FUNC) &R_igraph_adjlist,                                     3},
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
@@ -601,7 +597,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_count_subisomorphisms_vf2",                  (DL_FUNC) &R_igraph_count_subisomorphisms_vf2,                   6},
     {"R_igraph_count_triangles",                            (DL_FUNC) &R_igraph_count_triangles,                             1},
     {"R_igraph_create",                                     (DL_FUNC) &R_igraph_create,                                      3},
-    {"R_igraph_create_bipartite",                           (DL_FUNC) &R_igraph_create_bipartite,                            3},
     {"R_igraph_cycle_graph",                                (DL_FUNC) &R_igraph_cycle_graph,                                 3},
     {"R_igraph_de_bruijn",                                  (DL_FUNC) &R_igraph_de_bruijn,                                   2},
     {"R_igraph_decompose",                                  (DL_FUNC) &R_igraph_decompose,                                   4},
@@ -938,7 +933,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_vs_nei",                                     (DL_FUNC) &R_igraph_vs_nei,                                      4},
     {"R_igraph_walktrap_community",                         (DL_FUNC) &R_igraph_walktrap_community,                          6},
     {"R_igraph_watts_strogatz_game",                        (DL_FUNC) &R_igraph_watts_strogatz_game,                         6},
-    {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          3},
     {"R_igraph_weighted_clique_number",                     (DL_FUNC) &R_igraph_weighted_clique_number,                      2},
     {"R_igraph_weighted_cliques",                           (DL_FUNC) &R_igraph_weighted_cliques,                            5},
     {"R_igraph_wheel",                                      (DL_FUNC) &R_igraph_wheel,                                       3},
@@ -970,6 +964,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_create_bipartite",                          (DL_FUNC) &Rx_igraph_create_bipartite,                           3},
     {"Rx_igraph_difference",                                (DL_FUNC) &Rx_igraph_difference,                                 2},
     {"Rx_igraph_disjoint_union",                            (DL_FUNC) &Rx_igraph_disjoint_union,                             1},
+    {"Rx_igraph_finalizer",                                 (DL_FUNC) &Rx_igraph_finalizer,                                  0},
     {"Rx_igraph_get_adjedgelist",                           (DL_FUNC) &Rx_igraph_get_adjedgelist,                            3},
     {"Rx_igraph_get_adjlist",                               (DL_FUNC) &Rx_igraph_get_adjlist,                                4},
     {"Rx_igraph_get_all_simple_paths_pp",                   (DL_FUNC) &Rx_igraph_get_all_simple_paths_pp,                    1},
@@ -993,12 +988,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_set_verbose",                               (DL_FUNC) &Rx_igraph_set_verbose,                                1},
     {"Rx_igraph_transitivity_local_undirected_all",         (DL_FUNC) &Rx_igraph_transitivity_local_undirected_all,          2},
     {"Rx_igraph_union",                                     (DL_FUNC) &Rx_igraph_union,                                      2},
+    {"Rx_igraph_vcount",                                    (DL_FUNC) &Rx_igraph_vcount,                                     1},
     {"Rx_igraph_weak_ref_key",                              (DL_FUNC) &Rx_igraph_weak_ref_key,                               1},
     {"Rx_igraph_weak_ref_run_finalizer",                    (DL_FUNC) &Rx_igraph_weak_ref_run_finalizer,                     1},
     {"Rx_igraph_weak_ref_value",                            (DL_FUNC) &Rx_igraph_weak_ref_value,                             1},
     {"Rx_igraph_weighted_adjacency",                        (DL_FUNC) &Rx_igraph_weighted_adjacency,                         3},
-    {"Rx_igraph_finalizer",                                 (DL_FUNC) &Rx_igraph_finalizer,                                  0},
-    {"Rx_igraph_vcount",                                    (DL_FUNC) &Rx_igraph_vcount,                                     1},
     {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
     {"_igraph_getsphere",                                   (DL_FUNC) &_igraph_getsphere,                                    7},
     {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
