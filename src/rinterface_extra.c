@@ -6063,23 +6063,6 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
   return result;
 }
 
-SEXP Rx_igraph_topological_sorting(SEXP graph, SEXP pmode) {
-  igraph_t g;
-  igraph_vector_int_t res;
-  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_topological_sorting(&g, &res, mode));
-
-  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
                                          SEXP pdirected,
                                          SEXP peb, SEXP pmerges, SEXP pbridges,
