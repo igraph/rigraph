@@ -428,10 +428,10 @@ weighted_cliques <- function(
 ) {
   weighted_cliques_impl(
     graph = graph,
-    vertex.weights = vertex.weights,
+    vertex_weights = vertex.weights,
     maximal = maximal,
-    min.weight = min.weight,
-    max.weight = max.weight
+    min_weight = min.weight,
+    max_weight = max.weight
   )
 }
 #' @export

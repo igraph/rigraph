@@ -265,10 +265,6 @@ graph.get.subisomorphisms.vf2 <- function(
 
 #' @export
 graph.isoclass.subgraph <- function(graph, vids) {
-  # Argument checks
-  ensure_igraph(graph)
-  vids <- as_igraph_vs(graph, vids) - 1
-
   # Function call
   res <- isoclass_subgraph_impl(
     graph = graph,
@@ -1348,11 +1344,10 @@ automorphism_group <- function(
   sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
   details = FALSE
 ) {
+  # sh and details parameters are deprecated and ignored
   automorphism_group_impl(
     graph = graph,
-    colors = if (missing(colors)) missing_arg() else colors,
-    sh = sh,
-    details = details
+    colors = if (missing(colors)) missing_arg() else colors
   )
 }
 

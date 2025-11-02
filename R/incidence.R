@@ -81,7 +81,7 @@ graph_incidence_build <- function(
   # Handle dense unweighted matrices first
   if (!inherits(incidence, "Matrix") && is.null(weighted)) {
     res <- biadjacency_impl(
-      incidence = incidence,
+      biadjmatrix = incidence,
       directed = directed,
       mode = mode,
       multiple = multiple

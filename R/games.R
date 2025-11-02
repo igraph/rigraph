@@ -1022,7 +1022,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
     n = n,
     p = p,
     directed = directed,
-    loops = loops
+    allowed_edge_types = if (loops) "loops" else "simple"
   )
 
   if (igraph_opt("add.params")) {
@@ -1069,14 +1069,11 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
   type <- "gnm"
   type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnm,
-    as.numeric(n),
-    as.numeric(m),
-    as.logical(directed),
-    as.logical(loops),
-    FALSE
+  res <- erdos_renyi_game_gnm_impl(
+    n = n,
+    m = m,
+    directed = directed,
+    allowed_edge_types = if (loops) "loops" else "simple"
   )
 
   if (igraph_opt("add.params")) {
@@ -2504,12 +2501,13 @@ sample_sbm <- function(
   directed = FALSE,
   loops = FALSE
 ) {
+  # Force evaluation of loops parameter
+  loops <- isTRUE(loops)
   sbm_game_impl(
-    n = n,
     pref_matrix = pref.matrix,
     block_sizes = block.sizes,
     directed = directed,
-    loops = loops
+    allowed_edge_types = if (loops) "loops" else "simple"
   )
 }
 

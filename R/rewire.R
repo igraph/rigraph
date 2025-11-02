@@ -162,11 +162,19 @@ each_edge <- function(
 }
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
+  allowed_edge_types <- if (loops && multiple) {
+    "all"
+  } else if (loops) {
+    "loops"
+  } else if (multiple) {
+    "multi"
+  } else {
+    "simple"
+  }
   rewire_edges_impl(
     graph = graph,
     prob = prob,
-    loops = loops,
-    multiple = multiple
+    allowed_edge_types = allowed_edge_types
   )
 }
 
