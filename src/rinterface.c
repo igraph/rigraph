@@ -409,7 +409,7 @@ SEXP R_igraph_edges(SEXP graph, SEXP eids) {
                                         /* Convert output */
   igraph_vector_int_destroy(&c_eids_data);
   igraph_es_destroy(&c_eids);
-  PROTECT(edges=R_igraph_vector_int_to_SEXP(&c_edges));
+  PROTECT(edges=R_igraph_vector_int_to_SEXPp1(&c_edges));
   igraph_vector_int_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = edges;
@@ -4115,7 +4115,7 @@ SEXP R_igraph_topological_sorting(SEXP graph, SEXP mode) {
   IGRAPH_R_CHECK(igraph_topological_sorting(&c_graph, &c_res, c_mode));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_to_SEXPp1(&c_res));
   igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
@@ -9615,6 +9615,8 @@ SEXP R_igraph_write_graph_edgelist(SEXP graph, SEXP outstream) {
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_write_graph_edgelist(&c_graph, c_outstream));
 
@@ -9637,6 +9639,8 @@ SEXP R_igraph_write_graph_leda(SEXP graph, SEXP outstream, SEXP names, SEXP weig
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
   c_names = Rf_translateCharUTF8(STRING_ELT(names, 0));
   c_weights = Rf_translateCharUTF8(STRING_ELT(weights, 0));
                                         /* Call igraph */
@@ -9660,6 +9664,8 @@ SEXP R_igraph_write_graph_graphml(SEXP graph, SEXP outstream, SEXP prefixattr) {
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
   IGRAPH_R_CHECK_BOOL(prefixattr);
   c_prefixattr = LOGICAL(prefixattr)[0];
                                         /* Call igraph */
@@ -9682,6 +9688,8 @@ SEXP R_igraph_write_graph_pajek(SEXP graph, SEXP outstream) {
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_write_graph_pajek(&c_graph, c_outstream));
 
@@ -9705,6 +9713,8 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP outstream, SEXP options, SEXP id,
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
   c_options = (igraph_write_gml_sw_t) Rf_asInteger(options);
   R_SEXP_to_vector(id, &c_id);
   if (!Rf_isNull(creator)) {
@@ -9730,6 +9740,8 @@ SEXP R_igraph_write_graph_dot(SEXP graph, SEXP outstream) {
 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  c_outstream = R_igraph_fopen_write(outstream);
+  IGRAPH_FINALLY(fclose, c_outstream);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_write_graph_dot(&c_graph, c_outstream));
 

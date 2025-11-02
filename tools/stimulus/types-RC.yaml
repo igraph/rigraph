@@ -83,6 +83,15 @@ INFILE:
             %C% = R_igraph_fopen_read(%I%);
             IGRAPH_FINALLY(fclose, %C%);
 
+OUTFILE:
+    CTYPE: FILE*
+    CALL:
+        IN: '%C%'
+    INCONV:
+        IN: |-
+            %C% = R_igraph_fopen_write(%I%);
+            IGRAPH_FINALLY(fclose, %C%);
+
 REAL:
     CTYPE: igraph_real_t
     CALL:

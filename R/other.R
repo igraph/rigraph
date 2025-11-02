@@ -95,8 +95,10 @@ running_mean <- function(v, binwidth) {
     cli::cli_abort("Vector too short for this binwidth.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_running_mean, v, binwidth)
+  running_mean_impl(
+    data = v,
+    binwidth = binwidth
+  )
 }
 
 
