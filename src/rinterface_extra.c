@@ -4827,27 +4827,6 @@ SEXP R_igraph_write_graph_lgl(SEXP graph, SEXP file, SEXP pnames,
   return result;
 }
 
-SEXP Rx_igraph_read_graph_pajek(SEXP pvfile) {
-  igraph_t g;
-  FILE *file;
-  SEXP result;
-
-#if HAVE_FMEMOPEN == 1
-  file=fmemopen(RAW(pvfile), Rf_xlength(pvfile), "r");
-#else
-  file=fopen(CHAR(STRING_ELT(pvfile, 0)), "r");
-#endif
-  if (file==0) { igraph_error("Cannot read Pajek file", __FILE__, __LINE__,
-                              IGRAPH_EFILE); }
-  IGRAPH_R_CHECK(igraph_read_graph_pajek(&g, file));
-  fclose(file);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
                         SEXP pminelements) {
 
