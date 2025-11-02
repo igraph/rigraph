@@ -211,7 +211,7 @@ decompose <- function(
   }
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_decompose,
+    Rx_igraph_decompose,
     graph,
     as.numeric(mode),
     as.numeric(max.comps),

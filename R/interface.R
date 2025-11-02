@@ -152,7 +152,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   edges.orig <- ecount(graph)
   on.exit(.Call(Rx_igraph_finalizer))
   graph <- .Call(
-    R_igraph_add_edges_manual,
+    Rx_igraph_add_edges_manual,
     graph,
     as_igraph_vs(graph, edges) - 1
   )
@@ -553,7 +553,7 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_get_eids,
+    Rx_igraph_get_eids,
     graph,
     as_igraph_vs(graph, vp) - 1,
     as.logical(directed),

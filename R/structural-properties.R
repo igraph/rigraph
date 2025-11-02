@@ -769,7 +769,7 @@ diameter <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_diameter,
+    Rx_igraph_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -798,7 +798,7 @@ get_diameter <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_diameter,
+    Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -834,7 +834,7 @@ farthest_vertices <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_farthest_points,
+    Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -1246,7 +1246,7 @@ distances <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_shortest_paths,
+    Rx_igraph_shortest_paths,
     graph,
     v - 1,
     to - 1,
@@ -1330,7 +1330,7 @@ shortest_paths <- function(
   to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_shortest_paths,
+    Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
     to,
@@ -1528,7 +1528,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_subcomponent,
+    Rx_igraph_subcomponent,
     graph,
     as_igraph_vs(graph, v) - 1,
     as.numeric(mode)
@@ -2063,7 +2063,7 @@ ego_size <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_neighborhood_size,
+    Rx_igraph_neighborhood_size,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2177,7 +2177,7 @@ ego <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood,
+    Rx_igraph_neighborhood,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2212,7 +2212,7 @@ make_ego_graph <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood_graphs,
+    Rx_igraph_neighborhood_graphs,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -3024,7 +3024,7 @@ dfs <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_dfs,
+    Rx_igraph_dfs,
     graph,
     root,
     mode,

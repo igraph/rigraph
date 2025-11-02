@@ -134,7 +134,7 @@ sample_seq <- function(low, high, length) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_random_sample,
+    Rx_igraph_random_sample,
     as.numeric(low),
     as.numeric(high),
     as.numeric(length)

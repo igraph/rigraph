@@ -363,7 +363,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else if (!is.null(P)) {
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_pairs,
+      Rx_igraph_es_pairs,
       graph,
       as_igraph_vs(graph, P) - 1,
       as.logical(directed)
@@ -372,7 +372,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else {
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_path,
+      Rx_igraph_es_path,
       graph,
       as_igraph_vs(graph, path) - 1,
       as.logical(directed)
@@ -591,7 +591,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_nei,
+      Rx_igraph_vs_nei,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
@@ -622,7 +622,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj,
+      Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
@@ -643,7 +643,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj,
+      Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
@@ -661,7 +661,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj,
+      Rx_igraph_vs_adj,
       graph,
       x,
       as_igraph_es(graph, e) - 1,
@@ -984,7 +984,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj,
+      Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
@@ -1002,7 +1002,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj,
+      Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,
@@ -1017,7 +1017,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(Rx_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj,
+      Rx_igraph_es_adj,
       graph,
       x,
       as_igraph_vs(graph, v) - 1,

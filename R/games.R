@@ -952,7 +952,7 @@ sample_pa <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_barabasi_game,
+    Rx_igraph_barabasi_game,
     n,
     power,
     m,
@@ -1407,7 +1407,7 @@ sample_degseq <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_degree_sequence_game,
+    Rx_igraph_degree_sequence_game,
     as.numeric(out.deg),
     in.deg,
     as.numeric(method1)
@@ -1654,7 +1654,7 @@ sample_pa_age <- function(
   on.exit(.Call(Rx_igraph_finalizer))
   res <- if (is.null(time.window)) {
     .Call(
-      R_igraph_barabasi_aging_game,
+      Rx_igraph_barabasi_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1670,7 +1670,7 @@ sample_pa_age <- function(
     )
   } else {
     .Call(
-      R_igraph_recent_degree_aging_game,
+      Rx_igraph_recent_degree_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1754,7 +1754,7 @@ sample_traits_callaway <- function(
 ) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_callaway_traits_game,
+    Rx_igraph_callaway_traits_game,
     as.double(nodes),
     as.double(types),
     as.double(edge.per.step),
@@ -1794,7 +1794,7 @@ sample_traits <- function(
 ) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_establishment_game,
+    Rx_igraph_establishment_game,
     as.double(nodes),
     as.double(types),
     as.double(k),
@@ -1850,7 +1850,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_grg_game,
+    Rx_igraph_grg_game,
     as.double(nodes),
     as.double(radius),
     as.logical(torus),
@@ -2035,7 +2035,7 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_connect_neighborhood,
+    Rx_igraph_connect_neighborhood,
     graph,
     as.numeric(order),
     as.numeric(mode)
@@ -2098,7 +2098,7 @@ sample_smallworld <- function(
 ) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_watts_strogatz_game,
+    Rx_igraph_watts_strogatz_game,
     as.numeric(dim),
     as.numeric(size),
     as.numeric(nei),
@@ -2163,7 +2163,7 @@ sample_last_cit <- function(
 ) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_lastcit_game,
+    Rx_igraph_lastcit_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(agebins),
@@ -2195,7 +2195,7 @@ sample_cit_types <- function(
 ) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_cited_type_game,
+    Rx_igraph_cited_type_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(types),
@@ -2229,7 +2229,7 @@ sample_cit_cit_types <- function(
   pref[] <- as.numeric(pref)
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_citing_cited_type_game,
+    Rx_igraph_citing_cited_type_game,
     as.numeric(n),
     as.numeric(types),
     pref,

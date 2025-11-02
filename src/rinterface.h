@@ -158,3 +158,5 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
 SEXP R_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed);
 SEXP R_igraph_finalizer(void);
 SEXP R_igraph_vcount(SEXP graph);
+SEXP R_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights);
+SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights);

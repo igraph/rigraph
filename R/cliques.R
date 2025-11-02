@@ -302,7 +302,7 @@ max_cliques <- function(
     }
     on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques_file,
+      Rx_igraph_maximal_cliques_file,
       graph,
       subset,
       file,
@@ -531,7 +531,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_independent_vertex_sets,
+    Rx_igraph_independent_vertex_sets,
     graph,
     as.numeric(min),
     as.numeric(max)

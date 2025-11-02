@@ -3801,7 +3801,7 @@ SEXP Rx_igraph_mybracket2_set(SEXP graph, SEXP pidx1, SEXP pidx2,
   return newgraph;
 }
 
-SEXP Rx_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
+SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
                              SEXP pname, SEXP value) {
   SEXP newgraph;
   int idx1=INTEGER(pidx1)[0]-1;
@@ -3842,7 +3842,7 @@ SEXP Rx_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
   return newgraph;
 }
 
-SEXP Rx_igraph_add_edges_manual(SEXP graph, SEXP edges) {
+SEXP R_igraph_add_edges_manual(SEXP graph, SEXP edges) {
 
   igraph_vector_int_t v;                    /* do NOT destroy! */
   igraph_t g;
@@ -3863,7 +3863,7 @@ SEXP Rx_igraph_add_edges_manual(SEXP graph, SEXP edges) {
   return result;
 }
 
-SEXP Rx_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
+SEXP R_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
 
   igraph_t g;
   igraph_vector_int_t v;
@@ -3887,7 +3887,7 @@ SEXP Rx_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
   return result;
 }
 
-SEXP Rx_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
+SEXP R_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
                        SEXP pweights) {
 
   igraph_t g;
@@ -3910,7 +3910,7 @@ SEXP Rx_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
   return result;
 }
 
-SEXP Rx_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
+SEXP R_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
                            SEXP pweights) {
 
   igraph_t g;
@@ -3935,7 +3935,7 @@ SEXP Rx_igraph_get_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
   return result;
 }
 
-SEXP Rx_igraph_farthest_points(SEXP graph, SEXP pdirected, SEXP punconnected,
+SEXP R_igraph_farthest_points(SEXP graph, SEXP pdirected, SEXP punconnected,
                               SEXP pweights) {
 
   igraph_t g;
@@ -3965,7 +3965,7 @@ SEXP Rx_igraph_farthest_points(SEXP graph, SEXP pdirected, SEXP punconnected,
   return result;
 }
 
-SEXP Rx_igraph_subcomponent(SEXP graph, SEXP pvertex, SEXP pmode) {
+SEXP R_igraph_subcomponent(SEXP graph, SEXP pvertex, SEXP pmode) {
 
   igraph_t g;
   igraph_real_t vertex=REAL(pvertex)[0];
@@ -4014,7 +4014,7 @@ static igraph_error_t distances_johnson(const igraph_t *graph,
   return IGRAPH_SUCCESS;
 }
 
-SEXP Rx_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
+SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
                              SEXP pmode, SEXP weights,
                              SEXP palgo) {
 
@@ -4075,7 +4075,7 @@ SEXP Rx_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   return result;
 }
 
-SEXP Rx_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
+SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
                             SEXP poutpref, SEXP pA, SEXP pdirected,
                             SEXP palgo, SEXP pstart) {
 
@@ -4119,7 +4119,7 @@ SEXP Rx_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   return result;
 }
 
-SEXP Rx_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
+SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
                                           SEXP niter, SEXP start_temp,
                                           SEXP weights,
                                           SEXP minx, SEXP maxx,
@@ -4167,7 +4167,7 @@ SEXP Rx_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
   return(result);
 }
 
-SEXP Rx_igraph_layout_fruchterman_reingold_3d(SEXP graph, SEXP coords,
+SEXP R_igraph_layout_fruchterman_reingold_3d(SEXP graph, SEXP coords,
                                              SEXP niter, SEXP start_temp,
                                              SEXP weights,
                                              SEXP minx, SEXP maxx,
@@ -4219,7 +4219,7 @@ SEXP Rx_igraph_layout_fruchterman_reingold_3d(SEXP graph, SEXP coords,
   return(result);
 }
 
-SEXP Rx_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
+SEXP R_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
                                   SEXP epsilon, SEXP kkconst, SEXP weights,
                                   SEXP minx, SEXP maxx,
                                   SEXP miny, SEXP maxy) {
@@ -4268,7 +4268,7 @@ SEXP Rx_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
   return(result);
 }
 
-SEXP Rx_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
+SEXP R_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
                                      SEXP epsilon, SEXP kkconst,
                                      SEXP weights,
                                      SEXP minx, SEXP maxx,
@@ -4323,7 +4323,7 @@ SEXP Rx_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
   return(result);
 }
 
-SEXP Rx_igraph_layout_graphopt(SEXP graph, SEXP pniter, SEXP pcharge,
+SEXP R_igraph_layout_graphopt(SEXP graph, SEXP pniter, SEXP pcharge,
                               SEXP pmass, SEXP pspring_length,
                               SEXP pspring_constant, SEXP pmax_sa_movement,
                               SEXP start) {
@@ -4351,7 +4351,7 @@ SEXP Rx_igraph_layout_graphopt(SEXP graph, SEXP pniter, SEXP pcharge,
   return result;
 }
 
-SEXP Rx_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
+SEXP R_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
                          SEXP parea, SEXP pcoolexp, SEXP prepulserad,
                          SEXP pcellsize, SEXP proot) {
 
@@ -4376,7 +4376,7 @@ SEXP Rx_igraph_layout_lgl(SEXP graph, SEXP pmaxiter, SEXP pmaxdelta,
   return result;
 }
 
-SEXP Rx_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
+SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
                                  SEXP pmode, SEXP pno, SEXP weights,
                                  SEXP output, SEXP ppred, SEXP pinbound,
                                  SEXP palgo) {
@@ -4488,7 +4488,7 @@ SEXP Rx_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   return result;
 }
 
-SEXP Rx_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
+SEXP R_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
 
   igraph_t g;
   igraph_integer_t n;
@@ -4507,7 +4507,7 @@ SEXP Rx_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
   return result;
 }
 
-SEXP Rx_igraph_ring(SEXP pn, SEXP pdirected, SEXP pmutual, SEXP pcircular) {
+SEXP R_igraph_ring(SEXP pn, SEXP pdirected, SEXP pmutual, SEXP pcircular) {
 
   igraph_t g;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
@@ -4524,7 +4524,7 @@ SEXP Rx_igraph_ring(SEXP pn, SEXP pdirected, SEXP pmutual, SEXP pcircular) {
   return result;
 }
 
-SEXP Rx_igraph_kary_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
+SEXP R_igraph_kary_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
 
   igraph_t g;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
@@ -4559,7 +4559,7 @@ SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
   return result;
 }
 
-SEXP Rx_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
+SEXP R_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
 
   igraph_vector_int_t res;
   igraph_integer_t low=(igraph_integer_t) REAL(plow)[0];
@@ -4613,7 +4613,7 @@ SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) 
   return result;
 }
 
-SEXP Rx_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
+SEXP R_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
                                    SEXP pmethod) {
   igraph_t g;
   igraph_vector_int_t outseq;
@@ -4662,7 +4662,7 @@ SEXP Rx_igraph_transitivity_local_undirected_all(SEXP graph, SEXP mode) {
   return result;
 }
 
-SEXP Rx_igraph_read_graph_edgelist(SEXP pvfile, SEXP pn, SEXP pdirected) {
+SEXP R_igraph_read_graph_edgelist(SEXP pvfile, SEXP pn, SEXP pdirected) {
   igraph_t g;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
@@ -4685,7 +4685,7 @@ SEXP Rx_igraph_read_graph_edgelist(SEXP pvfile, SEXP pn, SEXP pdirected) {
   return result;
 }
 
-SEXP Rx_igraph_read_graph_ncol(SEXP pvfile, SEXP ppredef,
+SEXP R_igraph_read_graph_ncol(SEXP pvfile, SEXP ppredef,
                               SEXP pnames, SEXP pweights,
                               SEXP pdirected) {
   igraph_t g;
@@ -4716,7 +4716,7 @@ SEXP Rx_igraph_read_graph_ncol(SEXP pvfile, SEXP ppredef,
   return result;
 }
 
-SEXP Rx_igraph_write_graph_ncol(SEXP graph, SEXP file, SEXP pnames,
+SEXP R_igraph_write_graph_ncol(SEXP graph, SEXP file, SEXP pnames,
                                SEXP pweights) {
   igraph_t g;
   FILE *stream;
@@ -4760,7 +4760,7 @@ SEXP Rx_igraph_write_graph_ncol(SEXP graph, SEXP file, SEXP pnames,
   return result;
 }
 
-SEXP Rx_igraph_read_graph_lgl(SEXP pvfile, SEXP pnames, SEXP pweights, SEXP pdirected) {
+SEXP R_igraph_read_graph_lgl(SEXP pvfile, SEXP pnames, SEXP pweights, SEXP pdirected) {
   igraph_t g;
   igraph_bool_t names=LOGICAL(pnames)[0];
   igraph_add_weights_t weights=INTEGER(pweights)[0];
@@ -4784,7 +4784,7 @@ SEXP Rx_igraph_read_graph_lgl(SEXP pvfile, SEXP pnames, SEXP pweights, SEXP pdir
   return result;
 }
 
-SEXP Rx_igraph_write_graph_lgl(SEXP graph, SEXP file, SEXP pnames,
+SEXP R_igraph_write_graph_lgl(SEXP graph, SEXP file, SEXP pnames,
                               SEXP pweights, SEXP pisolates) {
   igraph_t g;
   FILE *stream;
@@ -4827,7 +4827,7 @@ SEXP Rx_igraph_write_graph_lgl(SEXP graph, SEXP file, SEXP pnames,
   return result;
 }
 
-SEXP Rx_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
+SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
                         SEXP pminelements) {
 
   igraph_t g;
@@ -4850,7 +4850,7 @@ SEXP Rx_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   return result;
 }
 
-SEXP Rx_igraph_callaway_traits_game(SEXP pnodes, SEXP ptypes,
+SEXP R_igraph_callaway_traits_game(SEXP pnodes, SEXP ptypes,
                                   SEXP pepers, SEXP ptype_dist,
                                   SEXP pmatrix, SEXP pdirected) {
 
@@ -4873,7 +4873,7 @@ SEXP Rx_igraph_callaway_traits_game(SEXP pnodes, SEXP ptypes,
   return result;
 }
 
-SEXP Rx_igraph_establishment_game(SEXP pnodes, SEXP ptypes, SEXP pk,
+SEXP R_igraph_establishment_game(SEXP pnodes, SEXP ptypes, SEXP pk,
                                  SEXP ptype_dist, SEXP pmatrix,
                                  SEXP pdirected) {
   igraph_t g;
@@ -4895,7 +4895,7 @@ SEXP Rx_igraph_establishment_game(SEXP pnodes, SEXP ptypes, SEXP pk,
   return result;
 }
 
-SEXP Rx_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
+SEXP R_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
 
   igraph_vector_ptr_t graphvec;
   igraph_matrix_list_t matrixlist;
@@ -5098,7 +5098,7 @@ SEXP Rx_igraph_compose(SEXP pleft, SEXP pright, SEXP pedgemaps) {
   return result;
 }
 
-SEXP Rx_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
+SEXP R_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
                                   SEXP paging_bin, SEXP pm, SEXP pout_seq,
                                   SEXP pout_pref, SEXP pzero_deg_appeal,
                                   SEXP pzero_age_appeal, SEXP pdeg_coef,
@@ -5130,7 +5130,7 @@ SEXP Rx_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
   return result;
 }
 
-SEXP Rx_igraph_recent_degree_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
+SEXP R_igraph_recent_degree_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
                                        SEXP paging_bin, SEXP pm, SEXP pout_seq,
                                        SEXP pout_pref, SEXP pzero_appeal,
                                        SEXP pdirected,
@@ -5176,7 +5176,7 @@ SEXP Rx_igraph_get_edge(SEXP graph, SEXP peid) {
   return result;
 }
 
-SEXP Rx_igraph_es_path(SEXP graph, SEXP pp, SEXP pdir) {
+SEXP R_igraph_es_path(SEXP graph, SEXP pp, SEXP pdir) {
 
   igraph_t g;
   igraph_vector_int_t p;
@@ -5199,7 +5199,7 @@ SEXP Rx_igraph_es_path(SEXP graph, SEXP pp, SEXP pdir) {
   return result;
 }
 
-SEXP Rx_igraph_es_pairs(SEXP graph, SEXP pp, SEXP pdir) {
+SEXP R_igraph_es_pairs(SEXP graph, SEXP pp, SEXP pdir) {
 
   igraph_t g;
   igraph_vector_int_t p;
@@ -5222,7 +5222,7 @@ SEXP Rx_igraph_es_pairs(SEXP graph, SEXP pp, SEXP pdir) {
   return result;
 }
 
-SEXP Rx_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
+SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
                                       SEXP pmode, SEXP prootlevel, SEXP pcirc) {
 
   igraph_t g;
@@ -5251,7 +5251,7 @@ SEXP Rx_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
   return result;
 }
 
-SEXP Rx_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
+SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
 
   igraph_t g;
   igraph_vs_t v;
@@ -5294,7 +5294,7 @@ SEXP Rx_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
+SEXP R_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
 
   igraph_t g;
   igraph_es_t e;
@@ -5332,7 +5332,7 @@ SEXP Rx_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
+SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
 
   igraph_t g;
   igraph_vs_t v;
@@ -5374,7 +5374,7 @@ SEXP Rx_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_grg_game(SEXP pn, SEXP pradius, SEXP ptorus,
+SEXP R_igraph_grg_game(SEXP pn, SEXP pradius, SEXP ptorus,
                        SEXP pcoords) {
 
   igraph_t g;
@@ -5461,7 +5461,7 @@ SEXP Rx_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   return result;
 }
 
-SEXP Rx_igraph_write_graph_dimacs(SEXP graph, SEXP file,
+SEXP R_igraph_write_graph_dimacs(SEXP graph, SEXP file,
                                  SEXP psource, SEXP ptarget,
                                  SEXP pcap) {
 
@@ -5500,7 +5500,7 @@ SEXP Rx_igraph_write_graph_dimacs(SEXP graph, SEXP file,
   return result;
 }
 
-SEXP Rx_igraph_st_vertex_connectivity(SEXP graph, SEXP psource,
+SEXP R_igraph_st_vertex_connectivity(SEXP graph, SEXP psource,
                                      SEXP ptarget) {
 
   igraph_t g;
@@ -5519,7 +5519,7 @@ SEXP Rx_igraph_st_vertex_connectivity(SEXP graph, SEXP psource,
   return result;
 }
 
-SEXP Rx_igraph_st_edge_connectivity(SEXP graph, SEXP psource, SEXP ptarget) {
+SEXP R_igraph_st_edge_connectivity(SEXP graph, SEXP psource, SEXP ptarget) {
 
   igraph_t g;
   igraph_integer_t source=(igraph_integer_t) REAL(psource)[0],
@@ -5537,7 +5537,7 @@ SEXP Rx_igraph_st_edge_connectivity(SEXP graph, SEXP psource, SEXP ptarget) {
   return result;
 }
 
-SEXP Rx_igraph_st_mincut_value(SEXP graph, SEXP psource, SEXP ptarget,
+SEXP R_igraph_st_mincut_value(SEXP graph, SEXP psource, SEXP ptarget,
                               SEXP pcapacity) {
   igraph_t g;
   igraph_integer_t source=(igraph_integer_t) REAL(psource)[0];
@@ -5559,7 +5559,7 @@ SEXP Rx_igraph_st_mincut_value(SEXP graph, SEXP psource, SEXP ptarget,
   return result;
 }
 
-SEXP Rx_igraph_edge_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
+SEXP R_igraph_edge_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
 
   igraph_t g;
   igraph_integer_t source=(igraph_integer_t) REAL(psource)[0];
@@ -5576,7 +5576,7 @@ SEXP Rx_igraph_edge_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
   return result;
 }
 
-SEXP Rx_igraph_vertex_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
+SEXP R_igraph_vertex_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
 
   igraph_t g;
   igraph_integer_t source=(igraph_integer_t) REAL(psource)[0];
@@ -5593,7 +5593,7 @@ SEXP Rx_igraph_vertex_disjoint_paths(SEXP graph, SEXP psource, SEXP ptarget) {
   return result;
 }
 
-SEXP Rx_igraph_spinglass_community(SEXP graph, SEXP weights,
+SEXP R_igraph_spinglass_community(SEXP graph, SEXP weights,
                                   SEXP pspins, SEXP pparupdate,
                                   SEXP pstarttemp, SEXP pstoptemp,
                                   SEXP pcoolfact, SEXP pupdate_rule,
@@ -5645,7 +5645,7 @@ SEXP Rx_igraph_spinglass_community(SEXP graph, SEXP weights,
   return result;
 }
 
-SEXP Rx_igraph_spinglass_my_community(SEXP graph, SEXP weights,
+SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
                                      SEXP pvertex, SEXP pspins,
                                      SEXP pupdate_rule, SEXP pgamma) {
   igraph_t g;
@@ -5709,7 +5709,7 @@ SEXP Rx_igraph_no_components(SEXP graph, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
+SEXP R_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
                                 SEXP pmode, SEXP pmindist) {
   igraph_t g;
   igraph_vs_t vids;
@@ -5733,7 +5733,7 @@ SEXP Rx_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
   return result;
 }
 
-SEXP Rx_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
+SEXP R_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
                            SEXP pmode, SEXP pmindist) {
   igraph_t g;
   igraph_vs_t vids;
@@ -5757,7 +5757,7 @@ SEXP Rx_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
   return result;
 }
 
-SEXP Rx_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
+SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
                                   SEXP pmode, SEXP pmindist) {
   igraph_t g;
   igraph_vs_t vids;
@@ -5782,7 +5782,7 @@ SEXP Rx_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   return result;
 }
 
-SEXP Rx_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
+SEXP R_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
 
   igraph_t g;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
@@ -5798,7 +5798,7 @@ SEXP Rx_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
+SEXP R_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
                                   SEXP ploops, SEXP pmultiple) {
 
   igraph_t g;
@@ -5849,7 +5849,7 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   return result;
 }
 
-SEXP Rx_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
+SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                    SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
   igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
@@ -5931,7 +5931,7 @@ SEXP Rx_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   return(result);
 }
 
-SEXP Rx_igraph_independent_vertex_sets(SEXP graph,
+SEXP R_igraph_independent_vertex_sets(SEXP graph,
                                       SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
   igraph_vector_int_list_t list;
@@ -5949,7 +5949,7 @@ SEXP Rx_igraph_independent_vertex_sets(SEXP graph,
   return result;
 }
 
-SEXP Rx_igraph_lastcit_game(SEXP pnodes, SEXP pedges, SEXP pagebins,
+SEXP R_igraph_lastcit_game(SEXP pnodes, SEXP pedges, SEXP pagebins,
                            SEXP ppreference, SEXP pdirected) {
 
   igraph_t g;
@@ -5969,7 +5969,7 @@ SEXP Rx_igraph_lastcit_game(SEXP pnodes, SEXP pedges, SEXP pagebins,
   return result;
 }
 
-SEXP Rx_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
+SEXP R_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
                               SEXP ppref, SEXP pdirected) {
   igraph_t g;
   igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
@@ -5990,7 +5990,7 @@ SEXP Rx_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
   return result;
 }
 
-SEXP Rx_igraph_citing_cited_type_game(SEXP pnodes, SEXP ptypes, SEXP ppref,
+SEXP R_igraph_citing_cited_type_game(SEXP pnodes, SEXP ptypes, SEXP ppref,
                                      SEXP pedges, SEXP pdirected) {
   igraph_t g;
   igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
@@ -6011,7 +6011,7 @@ SEXP Rx_igraph_citing_cited_type_game(SEXP pnodes, SEXP ptypes, SEXP ppref,
   return result;
 }
 
-SEXP Rx_igraph_walktrap_community(SEXP graph, SEXP pweights,
+SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
                                  SEXP psteps, SEXP pmerges,
                                  SEXP pmodularity, SEXP pmembership) {
   igraph_t g;
@@ -6063,7 +6063,7 @@ SEXP Rx_igraph_walktrap_community(SEXP graph, SEXP pweights,
   return result;
 }
 
-SEXP Rx_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
+SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
                                          SEXP pdirected,
                                          SEXP peb, SEXP pmerges, SEXP pbridges,
                                          SEXP pmodularity, SEXP pmembership) {
@@ -6132,7 +6132,7 @@ SEXP Rx_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
   return result;
 }
 
-SEXP Rx_igraph_community_fastgreedy(SEXP graph, SEXP pmerges, SEXP pmodularity,
+SEXP R_igraph_community_fastgreedy(SEXP graph, SEXP pmerges, SEXP pmodularity,
                                    SEXP pmembership, SEXP pweights) {
 
   igraph_t g;
@@ -6399,7 +6399,7 @@ SEXP Rx_igraph_arpack(SEXP function, SEXP extra, SEXP options, SEXP rho,
   return result;
 }
 
-SEXP Rx_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
+SEXP R_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
                          SEXP pfillin, SEXP pnewgraph) {
                                         /* Declarations */
   igraph_t c_graph;
@@ -6664,7 +6664,7 @@ igraph_error_t R_igraph_dfshandler_out(const igraph_t *graph,
   return R_igraph_dfshandler(graph, vid, dist, extra, 1);
 }
 
-SEXP Rx_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
+SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
                   SEXP porder, SEXP porder_out, SEXP pparent, SEXP pdist,
                   SEXP pin_callback, SEXP pout_callback,
                   SEXP pextra, SEXP prho) {
@@ -6804,7 +6804,7 @@ igraph_error_t R_igraph_i_levc_callback(const igraph_vector_int_t *membership,
   return result;
 }
 
-SEXP Rx_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
+SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
                                             SEXP weights,
                                             SEXP options, SEXP pstart,
                                             SEXP callback,
@@ -6905,7 +6905,7 @@ SEXP Rx_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   return(result);
 }
 
-SEXP Rx_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
+SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
                        SEXP perror) {
   igraph_t g;
   igraph_vector_int_t vp;
@@ -6928,7 +6928,7 @@ SEXP Rx_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
   return result;
 }
 
-SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
+SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
                                 SEXP induced, SEXP time_limit,
                                 SEXP pqmap, SEXP pqall_maps) {
                                         /* Declarations */
@@ -7394,7 +7394,7 @@ SEXP Rx_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   return result;
 }
 
-SEXP Rx_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue, SEXP precision)
+SEXP R_igraph_power_law_fit_new(SEXP data, SEXP xmin, SEXP force_continuous, SEXP compute_pvalue, SEXP precision)
 {
   igraph_vector_t c_data;
   igraph_plfit_result_t c_res;
@@ -7750,12 +7750,4 @@ SEXP Rx_igraph_finalizer(void) {
 
 SEXP Rx_igraph_vcount(SEXP graph) {
   return R_igraph_vcount(graph);
-}
-
-SEXP Rx_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights) {
-  return R_igraph_layout_drl(graph, res, use_seed, options, weights);
-}
-
-SEXP Rx_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights) {
-  return R_igraph_layout_drl_3d(graph, res, use_seed, options, weights);
 }

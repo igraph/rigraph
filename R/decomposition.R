@@ -134,7 +134,7 @@ is_chordal <- function(
   newgraph <- as.logical(newgraph)
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_is_chordal,
+    Rx_igraph_is_chordal,
     graph,
     alpha,
     alpham1,

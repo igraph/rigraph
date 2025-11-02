@@ -88,7 +88,7 @@ graph <- function(
           n <- 0
         }
         .Call(
-          R_igraph_create,
+          Rx_igraph_create,
           as.numeric(edges) - 1,
           as.numeric(n),
           as.logical(directed)
@@ -215,7 +215,7 @@ graph.famous <- function(
           n <- 0
         }
         .Call(
-          R_igraph_create,
+          Rx_igraph_create,
           as.numeric(edges) - 1,
           as.numeric(n),
           as.logical(directed)
@@ -291,7 +291,7 @@ graph.ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   lifecycle::deprecate_soft("2.1.0", "graph.ring()", "make_ring()")
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_ring,
+    Rx_igraph_ring,
     as.numeric(n),
     as.logical(directed),
     as.logical(mutual),
@@ -323,7 +323,7 @@ graph.tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_kary_tree,
+    Rx_igraph_kary_tree,
     as.numeric(n),
     as.numeric(children),
     as.numeric(mode1)
@@ -358,7 +358,7 @@ graph.star <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_star,
+    Rx_igraph_star,
     as.numeric(n),
     as.numeric(mode1),
     as.numeric(center) - 1
@@ -1508,7 +1508,7 @@ make_graph <- function(
           n <- 0
         }
         .Call(
-          R_igraph_create,
+          Rx_igraph_create,
           as.numeric(edges) - 1,
           as.numeric(n),
           as.logical(directed)
@@ -1882,7 +1882,7 @@ make_star <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_star,
+    Rx_igraph_star,
     as.numeric(n),
     as.numeric(mode1),
     as.numeric(center) - 1
@@ -2047,7 +2047,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_ring,
+    Rx_igraph_ring,
     as.numeric(n),
     as.logical(directed),
     as.logical(mutual),
@@ -2159,7 +2159,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_kary_tree,
+    Rx_igraph_kary_tree,
     as.numeric(n),
     as.numeric(children),
     as.numeric(mode1)

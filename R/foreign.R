@@ -526,7 +526,7 @@ write_graph <- function(
 read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_edgelist,
+    Rx_igraph_read_graph_edgelist,
     file,
     as.numeric(n),
     as.logical(directed)
@@ -559,7 +559,7 @@ read.graph.ncol <- function(
   )
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_ncol,
+    Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
     as.logical(names),
@@ -585,7 +585,7 @@ write.graph.ncol <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_ncol,
+    Rx_igraph_write_graph_ncol,
     graph,
     file,
     names,
@@ -607,7 +607,7 @@ read.graph.lgl <- function(
   )
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_lgl,
+    Rx_igraph_read_graph_lgl,
     file,
     as.logical(names),
     weights,
@@ -633,7 +633,7 @@ write.graph.lgl <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_lgl,
+    Rx_igraph_write_graph_lgl,
     graph,
     file,
     names,
@@ -697,7 +697,7 @@ write.graph.dimacs <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_dimacs,
+    Rx_igraph_write_graph_dimacs,
     graph,
     file,
     as.numeric(source),

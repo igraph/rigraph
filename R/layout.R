@@ -759,7 +759,7 @@ layout_as_tree <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_layout_reingold_tilford,
+    Rx_igraph_layout_reingold_tilford,
     graph,
     root,
     mode,
@@ -1476,7 +1476,7 @@ layout_with_fr <- function(
   on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold,
+      Rx_igraph_layout_fruchterman_reingold,
       graph,
       coords,
       niter,
@@ -1490,7 +1490,7 @@ layout_with_fr <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold_3d,
+      Rx_igraph_layout_fruchterman_reingold_3d,
       graph,
       coords,
       niter,
@@ -1668,7 +1668,7 @@ layout_with_graphopt <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_graphopt,
+    Rx_igraph_layout_graphopt,
     graph,
     niter,
     charge,
@@ -1831,7 +1831,7 @@ layout_with_kk <- function(
   # Function call
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_kamada_kawai,
+      Rx_igraph_layout_kamada_kawai,
       graph,
       coords,
       maxiter,
@@ -1845,7 +1845,7 @@ layout_with_kk <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_kamada_kawai_3d,
+      Rx_igraph_layout_kamada_kawai_3d,
       graph,
       coords,
       maxiter,
@@ -1939,7 +1939,7 @@ layout_with_lgl <- function(
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_lgl,
+    Rx_igraph_layout_lgl,
     graph,
     as.double(maxiter),
     as.double(maxdelta),
@@ -2451,7 +2451,7 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 
   on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_merge_dla,
+    Rx_igraph_layout_merge_dla,
     graphs,
     layouts
   )
@@ -2794,7 +2794,7 @@ layout_with_drl <- function(
   on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_drl,
+      Rx_igraph_layout_drl,
       graph,
       seed,
       use.seed,
@@ -2803,7 +2803,7 @@ layout_with_drl <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_drl_3d,
+      Rx_igraph_layout_drl_3d,
       graph,
       seed,
       use.seed,
