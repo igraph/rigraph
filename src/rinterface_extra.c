@@ -7068,54 +7068,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   return(result);
 }
 
-/*-------------------------------------------/
-/ igraph_graphlets_candidate_basis           /
-/-------------------------------------------*/
-SEXP Rx_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
-  /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_weights;
-  igraph_vector_int_list_t c_cliques;
-  igraph_vector_t c_thresholds;
-  SEXP cliques;
-  SEXP thresholds;
-
-  SEXP result, names;
-
-  /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (0 != igraph_vector_int_list_init(&c_cliques, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_cliques);
-  if (0 != igraph_vector_init(&c_thresholds, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_destroy, &c_thresholds);
-  /* Call igraph */
-  IGRAPH_R_CHECK(igraph_graphlets_candidate_basis(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_thresholds));
-
-  /* Convert output */
-  PROTECT(result=NEW_LIST(2));
-  PROTECT(names=NEW_CHARACTER(2));
-  PROTECT(cliques=R_igraph_vector_int_list_to_SEXPp1(&c_cliques));
-  igraph_vector_int_list_destroy(&c_cliques);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(thresholds=R_igraph_vector_to_SEXP(&c_thresholds));
-  igraph_vector_destroy(&c_thresholds);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(result, 0, cliques);
-  SET_VECTOR_ELT(result, 1, thresholds);
-  SET_STRING_ELT(names, 0, Rf_mkChar("cliques"));
-  SET_STRING_ELT(names, 1, Rf_mkChar("thresholds"));
-  SET_NAMES(result, names);
-
-  UNPROTECT(4);
-
-  return(result);
-}
-
 igraph_error_t igraph_i_graphlets_project(
             const igraph_t *graph, const igraph_vector_t *weights,
             const igraph_vector_int_list_t *cliques, igraph_vector_t *Mu, igraph_bool_t startMu,
