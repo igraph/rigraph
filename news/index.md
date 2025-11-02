@@ -1,5 +1,59 @@
 # Changelog
 
+## igraph 2.2.1.9004
+
+### Bug fixes
+
+- Use `"weights"` edge attribute in
+  [`modularity()`](https://r.igraph.org/reference/modularity.igraph.md)
+  if available.
+
+- Safer `.dd` generation.
+
+### Features
+
+- Use snake_case in arguments to `_impl` functions
+  ([\#2461](https://github.com/igraph/rigraph/issues/2461),
+  [\#2462](https://github.com/igraph/rigraph/issues/2462)).
+
+- Add [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md) to
+  expose `igraph_wheel()`
+  ([\#1561](https://github.com/igraph/rigraph/issues/1561),
+  [\#2409](https://github.com/igraph/rigraph/issues/2409)).
+
+- Add
+  [`transitive_closure()`](https://r.igraph.org/reference/transitive_closure.md)
+  function ([\#1350](https://github.com/igraph/rigraph/issues/1350),
+  [\#2413](https://github.com/igraph/rigraph/issues/2413)).
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#2473](https://github.com/igraph/rigraph/issues/2473)).
+
+- Document [`.Call()`](https://rdrr.io/r/base/CallExternal.html) usage
+  \[ci skip\].
+
+- Rename to `igraph_arg_match()`, instructions.
+
+- Fix autogeneration for writing functions.
+
+- Sync autogen.
+
+### Testing
+
+- Fix snapshots.
+
+- Fix snapshots for `expect_snapshot_igraph_error()`.
+
+### ai
+
+- Merge \[ci skip\].
+
+- Tags \[ci skip\].
+
+- Prefer `GATTR` \[ci skip\].
+
 ## igraph 2.2.1.9003
 
 ### Bug fixes

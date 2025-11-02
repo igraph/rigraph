@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,39 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.2.1.9004" id="igraph-2219004">igraph 2.2.1.9004<a class="anchor" aria-label="anchor" href="#igraph-2219004"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-2-2-1-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-2-2-1-9004"></a></h3>
+<ul><li><p>Use <code>"weights"</code> edge attribute in <code><a href="../reference/modularity.igraph.html">modularity()</a></code> if available.</p></li>
+<li><p>Safer <code>.dd</code> generation.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-2-2-1-9004">Features<a class="anchor" aria-label="anchor" href="#features-2-2-1-9004"></a></h3>
+<ul><li><p>Use snake_case in arguments to <code>_impl</code> functions (<a href="https://github.com/igraph/rigraph/issues/2461" class="external-link">#2461</a>, <a href="https://github.com/igraph/rigraph/issues/2462" class="external-link">#2462</a>).</p></li>
+<li><p>Add <code><a href="../reference/make_wheel.html">make_wheel()</a></code> to expose <code>igraph_wheel()</code> (<a href="https://github.com/igraph/rigraph/issues/1561" class="external-link">#1561</a>, <a href="https://github.com/igraph/rigraph/issues/2409" class="external-link">#2409</a>).</p></li>
+<li><p>Add <code><a href="../reference/transitive_closure.html">transitive_closure()</a></code> function (<a href="https://github.com/igraph/rigraph/issues/1350" class="external-link">#1350</a>, <a href="https://github.com/igraph/rigraph/issues/2413" class="external-link">#2413</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-2-2-1-9004">Chore<a class="anchor" aria-label="anchor" href="#chore-2-2-1-9004"></a></h3>
+<ul><li><p>Auto-update from GitHub Actions (<a href="https://github.com/igraph/rigraph/issues/2473" class="external-link">#2473</a>).</p></li>
+<li><p>Document <code><a href="https://rdrr.io/r/base/CallExternal.html" class="external-link">.Call()</a></code> usage [ci skip].</p></li>
+<li><p>Rename to <code>igraph_arg_match()</code>, instructions.</p></li>
+<li><p>Fix autogeneration for writing functions.</p></li>
+<li><p>Sync autogen.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-2-2-1-9004">Testing<a class="anchor" aria-label="anchor" href="#testing-2-2-1-9004"></a></h3>
+<ul><li><p>Fix snapshots.</p></li>
+<li><p>Fix snapshots for <code>expect_snapshot_igraph_error()</code>.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="ai-2-2-1-9004">ai<a class="anchor" aria-label="anchor" href="#ai-2-2-1-9004"></a></h3>
+<ul><li><p>Merge [ci skip].</p></li>
+<li><p>Tags [ci skip].</p></li>
+<li><p>Prefer <code>GATTR</code> [ci skip].</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1.9003" id="igraph-2219003">igraph 2.2.1.9003<a class="anchor" aria-label="anchor" href="#igraph-2219003"></a></h2>
 <div class="section level3">
