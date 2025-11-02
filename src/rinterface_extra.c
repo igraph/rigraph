@@ -132,7 +132,7 @@ void igraph_vector_int_list_destroy_pv(void *pv_ptr)
   igraph_vector_int_list_destroy((igraph_vector_int_list_t*) pv_ptr);
 }
 
-igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res)
+igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res)
 {
   if (Rf_xlength(sexp) <= index)
   {
@@ -142,7 +142,7 @@ igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res
   return IGRAPH_SUCCESS;
 }
 
-igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res)
+igraph_error_t Rw_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res)
 {
   if (Rf_xlength(sexp) <= index)
   {
@@ -152,7 +152,7 @@ igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res)
   return IGRAPH_SUCCESS;
 }
 
-igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res)
+igraph_error_t Rw_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res)
 {
   if (Rf_xlength(sexp) <= index)
   {
@@ -4383,7 +4383,7 @@ SEXP Rx_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
 
   igraph_t g;
   igraph_integer_t from;
-  IGRAPH_R_CHECK(R_get_int_scalar(pfrom, 0, &from));
+  IGRAPH_R_CHECK(Rw_get_int_scalar(pfrom, 0, &from));
   igraph_vs_t to;
   igraph_vector_int_t to_data;
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
@@ -4492,11 +4492,11 @@ SEXP Rx_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
 
   igraph_t g;
   igraph_integer_t n;
-  IGRAPH_R_CHECK(R_get_int_scalar(pn, 0, &n));
+  IGRAPH_R_CHECK(Rw_get_int_scalar(pn, 0, &n));
   igraph_integer_t mode;
-  IGRAPH_R_CHECK(R_get_int_scalar(pmode, 0, &mode));
+  IGRAPH_R_CHECK(Rw_get_int_scalar(pmode, 0, &mode));
   igraph_integer_t center;
-  IGRAPH_R_CHECK(R_get_int_scalar(pcenter, 0, &center));
+  IGRAPH_R_CHECK(Rw_get_int_scalar(pcenter, 0, &center));
   SEXP result;
 
   IGRAPH_R_CHECK(igraph_star(&g, n, (igraph_star_mode_t) mode, center));
@@ -5380,11 +5380,11 @@ SEXP Rx_igraph_grg_game(SEXP pn, SEXP pradius, SEXP ptorus,
   igraph_t g;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
   igraph_real_t radius;
-  IGRAPH_R_CHECK(R_get_real_scalar(pradius, 0, &radius));
+  IGRAPH_R_CHECK(Rw_get_real_scalar(pradius, 0, &radius));
   igraph_bool_t torus;
-  IGRAPH_R_CHECK(R_get_bool_scalar(ptorus, 0, &torus));
+  IGRAPH_R_CHECK(Rw_get_bool_scalar(ptorus, 0, &torus));
   igraph_bool_t coords;
-  IGRAPH_R_CHECK(R_get_bool_scalar(pcoords, 0, &coords));
+  IGRAPH_R_CHECK(Rw_get_bool_scalar(pcoords, 0, &coords));
   igraph_vector_t x, y, *px=0, *py=0;
   SEXP result;
 

@@ -148,9 +148,9 @@ void R_check_bool_scalar(SEXP value);
 FILE* Ry_igraph_fopen_read(SEXP instream);
 FILE* Ry_igraph_fopen_write(SEXP outstream);
 
-igraph_error_t R_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res);
-igraph_error_t R_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
-igraph_error_t R_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
+igraph_error_t Rw_get_int_scalar(SEXP sexp, R_xlen_t index, igraph_integer_t *res);
+igraph_error_t Rw_get_real_scalar(SEXP sexp, R_xlen_t index, igraph_real_t *res);
+igraph_error_t Rw_get_bool_scalar(SEXP sexp, R_xlen_t index, igraph_bool_t *res);
 
 /* Declarations for functions from rinterface.c needed by wrappers in rinterface_extra.c */
 SEXP R_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops);
