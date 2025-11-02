@@ -442,7 +442,6 @@ graph.lattice <- function(
     periodic <- rep(periodic, length(dimvector))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   res <- square_lattice_impl(
     dimvector = dimvector,
     nei = nei,
@@ -622,12 +621,10 @@ graph.extended.chordal.ring <- function(n, w, directed = FALSE) {
     "graph.extended.chordal.ring()",
     "make_chordal_ring()"
   )
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_extended_chordal_ring,
-    as.numeric(n),
-    as.matrix(w),
-    as.logical(directed)
+  res <- extended_chordal_ring_impl(
+    nodes = n,
+    W = as.matrix(w),
+    directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Extended chordal ring"
@@ -2001,7 +1998,6 @@ make_lattice <- function(
     periodic <- rep(periodic, length(dimvector))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
   res <- square_lattice_impl(
     dimvector = dimvector,
     nei = nei,
@@ -2364,12 +2360,10 @@ atlas <- function(n) {
 #'   matrix(c(3, 12, 4, 7, 8, 11), nr = 2)
 #' )
 make_chordal_ring <- function(n, w, directed = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_extended_chordal_ring,
-    as.numeric(n),
-    as.matrix(w),
-    as.logical(directed)
+  res <- extended_chordal_ring_impl(
+    nodes = n,
+    W = as.matrix(w),
+    directed = directed
   )
   if (igraph_opt("add.params")) {
     res$name <- "Extended chordal ring"
