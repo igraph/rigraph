@@ -176,11 +176,13 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(Rx_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
-
-  res
+  graphlets_project_impl(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    Muc = Mu,
+    niter = niter
+  )
 }
 
 #################
