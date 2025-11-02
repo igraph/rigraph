@@ -7068,62 +7068,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   return(result);
 }
 
-igraph_error_t igraph_i_graphlets_project(
-            const igraph_t *graph, const igraph_vector_t *weights,
-            const igraph_vector_int_list_t *cliques, igraph_vector_t *Mu, igraph_bool_t startMu,
-            igraph_integer_t niter, igraph_integer_t vid1);
-
-/*-------------------------------------------/
-/ igraph_graphlets_project                   /
-/-------------------------------------------*/
-
-SEXP Rx_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
-                                SEXP Mu, SEXP niter) {
-  /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_t c_weights;
-  igraph_vector_int_list_t c_cliques;
-  igraph_vector_t c_Mu;
-  igraph_integer_t c_niter;
-
-  SEXP result;
-
-  /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(cliques)) {
-    R_igraph_SEXP_to_vector_int_list(cliques, &c_cliques);
-  } else {
-    igraph_vector_int_list_init(&c_cliques, 0);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_int_list_destroy, &c_cliques);
-  if (0 != R_SEXP_to_vector_copy(Mu, &c_Mu)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY_PV(igraph_vector_destroy, &c_Mu);
-  c_niter=(igraph_integer_t) REAL(niter)[0];
-
-  /* TODO: Change igraph_i_graphlets_project to igraph_graphlets_project, because
-   * we should not depend on non-public functions from igraph.
-   */
-  /* Call igraph */
-  igraph_i_graphlets_project(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights),
-                             &c_cliques, &c_Mu, /*startMu=*/ 1, c_niter,
-                             /*vid1=*/ 1);
-
-  /* Convert output */
-  PROTECT(Mu=R_igraph_vector_to_SEXP(&c_Mu));
-  igraph_vector_int_list_destroy(&c_cliques);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_destroy(&c_Mu);
-  IGRAPH_FINALLY_CLEAN(1);
-  result=Mu;
-
-  UNPROTECT(1);
-  return(result);
-}
-
-
 SEXP R_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
                                            SEXP pweights, SEXP pwhich,
                                            SEXP scaled, SEXP cvec,
