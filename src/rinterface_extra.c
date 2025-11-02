@@ -6266,19 +6266,6 @@ SEXP Rx_igraph_girth(SEXP graph, SEXP pcircle) {
   return result;
 }
 
-SEXP Rx_igraph_famous(SEXP name) {
-
-  igraph_t g;
-  SEXP result;
-
-  IGRAPH_R_CHECK(igraph_famous(&g, CHAR(STRING_ELT(name, 0))));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP Rx_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) {
 
   igraph_t g;
