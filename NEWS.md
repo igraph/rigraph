@@ -1,5 +1,48 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9004
+
+## Bug fixes
+
+- Use `"weights"` edge attribute in `modularity()` if available.
+
+- Safer `.dd` generation.
+
+## Features
+
+- Use snake_case in arguments to `_impl` functions (#2461, #2462).
+
+- Add `make_wheel()` to expose `igraph_wheel()` (#1561, #2409).
+
+- Add `transitive_closure()` function (#1350, #2413).
+
+## Chore
+
+- Auto-update from GitHub Actions (#2473).
+
+- Document `.Call()` usage \[ci skip\].
+
+- Rename to `igraph_arg_match()`, instructions.
+
+- Fix autogeneration for writing functions.
+
+- Sync autogen.
+
+## Testing
+
+- Fix snapshots.
+
+- Fix snapshots for `expect_snapshot_igraph_error()`.
+
+## ai
+
+- Merge \[ci skip\].
+
+- Tags \[ci skip\].
+
+- Prefer `GATTR` \[ci skip\].
+
+
 # igraph 2.2.1.9003
 
 ## Bug fixes
