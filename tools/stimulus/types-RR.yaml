@@ -20,7 +20,7 @@ REAL:
     DEFAULT:
         ECROSSW: 1.0 - sqrt(edge_density(graph))
         ELENW: edge_density(graph) / 10
-        NEDISTW: 0.2 * (1-edge_density(graph))
+        NEDISTW: 0.2 * (1 - edge_density(graph))
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
@@ -37,7 +37,7 @@ INDEX_VECTOR:
 
 VECTOR:
     DEFAULT:
-        AsmDefaultCvec: strength(%I1%, weights = weights)/(vcount(%I1%)-1)
+        AsmDefaultCvec: strength(%I1%, weights = weights) / (vcount(%I1%) - 1)
     INCONV: '%I% <- as.numeric(%I%)'
 
 VERTEX_QTY:
@@ -262,7 +262,7 @@ VERTEX_COLOR:
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1
+            %I% <- %I% + 1
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
               names(%I%) <- vertex_attr(%I1%, "name")
             }
@@ -281,7 +281,7 @@ EDGE_COLOR:
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1
+            %I% <- %I% + 1
 
 'NULL':
     CALL: {}
@@ -422,8 +422,9 @@ EIGENWHICH:
     DEFAULT:
         Default: list()
     INCONV: |-
-        %I%.tmp <- eigen_defaults();
-        %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp
+        %I%.tmp <- eigen_defaults()
+        %I%.tmp[names(%I%)] <- %I%
+        %I% <- %I%.tmp
 
 EIGENWHICHPOS:
     DEFAULT:
@@ -452,7 +453,7 @@ PAGERANKOPT:
     INCONV: |-
         if (is.null(%I%)) {
           if (%I1% == 0L) {
-            %I% <- list(niter=1000, eps=0.001)
+            %I% <- list(niter = 1000, eps = 0.001)
           } else if (%I1% == 1L) {
             %I% <- arpack_defaults()
           } else {

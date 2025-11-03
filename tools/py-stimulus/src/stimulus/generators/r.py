@@ -50,7 +50,7 @@ def optional_wrapper_r(conv: str) -> str:
     if "is.null" in conv:
         return conv
 
-    return f"if (!is.null(%I%)) {conv}"
+    return f"if (!is.null(%I%)) {{\n{indent(conv)}\n}}"
 
 
 def format_switch_statement(code: str) -> str:

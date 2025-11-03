@@ -659,6 +659,7 @@ famous_impl <- function(
 ) {
   # Argument checks
 
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -826,12 +827,7 @@ realize_degree_sequence_impl <- function(
     "multiple" = 6L,
     "all" = 7L
   )
-  method <- switch_igraph_arg(
-    method,
-    "smallest" = 0L,
-    "largest" = 1L,
-    "index" = 2L
-  )
+  method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -872,12 +868,7 @@ realize_bipartite_degree_sequence_impl <- function(
     "multiple" = 6L,
     "all" = 7L
   )
-  method <- switch_igraph_arg(
-    method,
-    "smallest" = 0L,
-    "largest" = 1L,
-    "index" = 2L
-  )
+  method <- switch_igraph_arg(method, "smallest" = 0L, "largest" = 1L, "index" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -1257,12 +1248,7 @@ chung_lu_game_impl <- function(
     in_weights <- as.numeric(in_weights)
   }
   loops <- as.logical(loops)
-  variant <- switch_igraph_arg(
-    variant,
-    "original" = 0L,
-    "maxent" = 1L,
-    "nr" = 2L
-  )
+  variant <- switch_igraph_arg(variant, "original" = 0L, "maxent" = 1L, "nr" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -1963,20 +1949,10 @@ get_all_shortest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(
-      res$vpaths,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$epaths <- lapply(
-      res$epaths,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -2025,20 +2001,10 @@ get_all_shortest_paths_dijkstra_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(
-      res$vpaths,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$epaths <- lapply(
-      res$epaths,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -2070,12 +2036,7 @@ voronoi_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
-  tiebreaker <- switch_igraph_arg(
-    tiebreaker,
-    "first" = 0L,
-    "last" = 1L,
-    "random" = 2L
-  )
+  tiebreaker <- switch_igraph_arg(tiebreaker, "first" = 0L, "last" = 1L, "random" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2188,20 +2149,10 @@ get_k_shortest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vpaths <- lapply(
-      res$vpaths,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$epaths <- lapply(
-      res$epaths,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -2308,20 +2259,10 @@ get_widest_paths_impl <- function(
     mode
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(
-      res$vertices,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$edges <- lapply(
-      res$edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -5088,28 +5029,13 @@ biconnected_components_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res$tree_edges <- lapply(
-      res$tree_edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$tree_edges <- lapply(res$tree_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$component_edges <- lapply(
-      res$component_edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$component_edges <- lapply(res$component_edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$components <- lapply(
-      res$components,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$components <- lapply(res$components, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
     res$articulation_points <- create_vs(graph, res$articulation_points)
@@ -5222,6 +5148,7 @@ edgelist_percolation_impl <- function(
   edges
 ) {
   # Argument checks
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -5804,9 +5731,9 @@ layout_gem_impl <- function(
   graph,
   res = matrix(),
   use_seed = FALSE,
-  maxiter = 40 * vcount(graph)^2,
+  maxiter = 40,
   temp_max = vcount(graph),
-  temp_min = 1 / 10,
+  temp_min = 1,
   temp_init = sqrt(vcount(graph))
 ) {
   # Argument checks
@@ -6595,12 +6522,7 @@ graphlets_impl <- function(
     niter
   )
   if (igraph_opt("return.vs.es")) {
-    res$cliques <- lapply(
-      res$cliques,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
 }
@@ -6628,12 +6550,7 @@ graphlets_candidate_basis_impl <- function(
     weights
   )
   if (igraph_opt("return.vs.es")) {
-    res$cliques <- lapply(
-      res$cliques,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$cliques <- lapply(res$cliques, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
 }
@@ -6685,13 +6602,7 @@ hrg_fit_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -6715,13 +6626,7 @@ hrg_sample_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -6741,13 +6646,7 @@ hrg_sample_many_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   num_samples <- as.numeric(num_samples)
@@ -6768,13 +6667,7 @@ hrg_game_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -6801,13 +6694,7 @@ hrg_consensus_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -6836,13 +6723,7 @@ hrg_predict_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
@@ -6891,13 +6772,7 @@ hrg_resize_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   newsize <- as.numeric(newsize)
@@ -6918,13 +6793,7 @@ hrg_size_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -6943,13 +6812,7 @@ from_hrg_dendrogram_impl <- function(
 ) {
   # Argument checks
   if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
+    hrg <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -7125,6 +6988,7 @@ read_graph_pajek_impl <- function(
   # Argument checks
   check_string(instream)
 
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -7181,6 +7045,7 @@ read_graph_gml_impl <- function(
   # Argument checks
   check_string(instream)
 
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -7219,6 +7084,7 @@ write_graph_edgelist_impl <- function(
   ensure_igraph(graph)
   check_string(outstream)
 
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
@@ -7239,6 +7105,7 @@ write_graph_leda_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -7283,6 +7150,7 @@ write_graph_pajek_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -7330,6 +7198,7 @@ write_graph_dot_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -8418,12 +8287,7 @@ all_st_cuts_impl <- function(
     res$cuts <- lapply(res$cuts, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$partition1s <- lapply(
-      res$partition1s,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$partition1s <- lapply(res$partition1s, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
 }
@@ -8472,12 +8336,7 @@ all_st_mincuts_impl <- function(
     res$cuts <- lapply(res$cuts, unsafe_create_es, graph = graph, es = E(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$partition1s <- lapply(
-      res$partition1s,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$partition1s <- lapply(res$partition1s, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
 }
@@ -8585,12 +8444,7 @@ cohesive_blocks_impl <- function(
     graph
   )
   if (igraph_opt("return.vs.es")) {
-    res$blocks <- lapply(
-      res$blocks,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$blocks <- lapply(res$blocks, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   class(res) <- "cohesiveBlocks"
   res
@@ -9373,12 +9227,7 @@ automorphism_group_impl <- function(
     sh
   )
   if (igraph_opt("return.vs.es")) {
-    res$generators <- lapply(
-      res$generators,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$generators <- lapply(res$generators, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (!details) {
     res <- res$generators
@@ -9563,16 +9412,9 @@ laplacian_spectral_embedding_impl <- function(
     weights <- NULL
   }
   which <- switch_igraph_arg(which, "lm" = 0L, "la" = 2L, "sa" = 3L)
-  type <- switch_igraph_arg(
-    type,
-    "default" = if (is_directed(graph)) 3L else 0L,
-    "da" = 0L,
-    "d-a" = 0L,
-    "idad" = 1L,
-    "i-dad" = 1L,
-    "dad" = 2L,
-    "oap" = 3L
-  )
+  type <- switch_igraph_arg(type, "default" = if (is_directed(graph)) 3L else 0L,
+    "da" = 0L, "d-a" = 0L, "idad" = 1L, "i-dad" = 1L, "dad" = 2L,
+    "oap" = 3L)
   scaled <- as.logical(scaled)
   options <- modify_list(arpack_defaults(), options)
 
@@ -9803,20 +9645,10 @@ simple_cycles_impl <- function(
     max_cycle_length
   )
   if (igraph_opt("return.vs.es")) {
-    res$vertices <- lapply(
-      res$vertices,
-      unsafe_create_vs,
-      graph = graph,
-      verts = V(graph)
-    )
+    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$edges <- lapply(
-      res$edges,
-      unsafe_create_es,
-      graph = graph,
-      es = E(graph)
-    )
+    res$edges <- lapply(res$edges, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -9889,12 +9721,12 @@ fundamental_cycles_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) {
     start <- as_igraph_vs(graph, start)
-  }
-  if (length(start) == 0) {
-    cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+    if (length(start) == 0) {
+      cli::cli_abort(
+        "{.arg start} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
   bfs_cutoff <- as.numeric(bfs_cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -10142,12 +9974,12 @@ random_spanning_tree_impl <- function(
   ensure_igraph(graph)
   if (!is.null(vid)) {
     vid <- as_igraph_vs(graph, vid)
-  }
-  if (length(vid) == 0) {
-    cli::cli_abort(
-      "{.arg vid} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+    if (length(vid) == 0) {
+      cli::cli_abort(
+        "{.arg vid} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -10191,11 +10023,7 @@ vertex_coloring_greedy_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
-  heuristic <- switch_igraph_arg(
-    heuristic,
-    "colored_neighbors" = 0L,
-    "dsatur" = 1L
-  )
+  heuristic <- switch_igraph_arg(heuristic, "colored_neighbors" = 0L, "dsatur" = 1L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -10479,12 +10307,12 @@ vertex_path_from_edge_path_impl <- function(
   ensure_igraph(graph)
   if (!is.null(start)) {
     start <- as_igraph_vs(graph, start)
-  }
-  if (length(start) == 0) {
-    cli::cli_abort(
-      "{.arg start} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
+    if (length(start) == 0) {
+      cli::cli_abort(
+        "{.arg start} must specify at least one vertex",
+        call = rlang::caller_env()
+      )
+    }
   }
   edge_path <- as_igraph_es(graph, edge_path)
   mode <- switch_igraph_arg(
@@ -10510,8 +10338,10 @@ vertex_path_from_edge_path_impl <- function(
   res
 }
 
-version_impl <- function() {
+version_impl <- function(
+) {
   # Argument checks
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -10521,3 +10351,4 @@ version_impl <- function() {
 
   res
 }
+
