@@ -25,7 +25,6 @@ extern "C" {
 extern SEXP R_igraph_add_edges(SEXP, SEXP);
 extern SEXP R_igraph_add_vertices(SEXP, SEXP);
 extern SEXP R_igraph_adhesion(SEXP, SEXP);
-extern SEXP R_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_adjlist(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_all_minimal_st_separators(SEXP);
 extern SEXP R_igraph_all_st_cuts(SEXP, SEXP, SEXP);
@@ -170,7 +169,6 @@ extern SEXP R_igraph_gomory_hu_tree(SEXP, SEXP);
 extern SEXP R_igraph_graph_center_dijkstra(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_graph_count(SEXP, SEXP);
 extern SEXP R_igraph_graph_power(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_graphlets(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_graphlets_candidate_basis(SEXP, SEXP);
 extern SEXP R_igraph_graphlets_project(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_growing_random_game(SEXP, SEXP, SEXP, SEXP);
@@ -234,7 +232,6 @@ extern SEXP R_igraph_joint_degree_matrix(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_joint_type_distribution(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_k_regular_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_kautz(SEXP, SEXP);
-extern SEXP R_igraph_laplacian_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_largest_cliques(SEXP);
 extern SEXP R_igraph_largest_independent_vertex_sets(SEXP);
 extern SEXP R_igraph_largest_weighted_cliques(SEXP, SEXP);
@@ -394,6 +391,7 @@ extern SEXP Rx_igraph_add_myid_to_env(SEXP);
 extern SEXP Rx_igraph_add_version_to_env(SEXP);
 extern SEXP Rx_igraph_address(SEXP);
 extern SEXP Rx_igraph_adjacency(SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_adjacency_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_adjacent_vertices(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_arpack_unpack_complex(SEXP, SEXP, SEXP);
@@ -442,6 +440,7 @@ extern SEXP Rx_igraph_get_graph_id(SEXP);
 extern SEXP Rx_igraph_get_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_girth(SEXP, SEXP);
 extern SEXP Rx_igraph_graph_version(SEXP);
+extern SEXP Rx_igraph_graphlets(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_grg_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_i_levc_arp(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_identical_graphs(SEXP, SEXP, SEXP);
@@ -450,6 +449,7 @@ extern SEXP Rx_igraph_independent_vertex_sets(SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_intersection(SEXP, SEXP);
 extern SEXP Rx_igraph_is_chordal(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_kary_tree(SEXP, SEXP, SEXP);
+extern SEXP Rx_igraph_laplacian_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_lastcit_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_layout_drl(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Rx_igraph_layout_drl_3d(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -513,7 +513,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
     {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_adhesion",                                   (DL_FUNC) &R_igraph_adhesion,                                    2},
-    {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
     {"R_igraph_adjlist",                                    (DL_FUNC) &R_igraph_adjlist,                                     3},
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
     {"R_igraph_all_st_cuts",                                (DL_FUNC) &R_igraph_all_st_cuts,                                 3},
@@ -658,7 +657,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_graph_center_dijkstra",                      (DL_FUNC) &R_igraph_graph_center_dijkstra,                       3},
     {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
     {"R_igraph_graph_power",                                (DL_FUNC) &R_igraph_graph_power,                                 3},
-    {"R_igraph_graphlets",                                  (DL_FUNC) &R_igraph_graphlets,                                   3},
     {"R_igraph_graphlets_candidate_basis",                  (DL_FUNC) &R_igraph_graphlets_candidate_basis,                   2},
     {"R_igraph_graphlets_project",                          (DL_FUNC) &R_igraph_graphlets_project,                           6},
     {"R_igraph_growing_random_game",                        (DL_FUNC) &R_igraph_growing_random_game,                         4},
@@ -722,7 +720,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_joint_type_distribution",                    (DL_FUNC) &R_igraph_joint_type_distribution,                     6},
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
-    {"R_igraph_laplacian_spectral_embedding",               (DL_FUNC) &R_igraph_laplacian_spectral_embedding,                7},
     {"R_igraph_largest_cliques",                            (DL_FUNC) &R_igraph_largest_cliques,                             1},
     {"R_igraph_largest_independent_vertex_sets",            (DL_FUNC) &R_igraph_largest_independent_vertex_sets,             1},
     {"R_igraph_largest_weighted_cliques",                   (DL_FUNC) &R_igraph_largest_weighted_cliques,                    2},
@@ -882,6 +879,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_add_version_to_env",                        (DL_FUNC) &Rx_igraph_add_version_to_env,                         1},
     {"Rx_igraph_address",                                   (DL_FUNC) &Rx_igraph_address,                                    1},
     {"Rx_igraph_adjacency",                                 (DL_FUNC) &Rx_igraph_adjacency,                                  3},
+    {"Rx_igraph_adjacency_spectral_embedding",              (DL_FUNC) &Rx_igraph_adjacency_spectral_embedding,               7},
     {"Rx_igraph_adjacent_vertices",                         (DL_FUNC) &Rx_igraph_adjacent_vertices,                          3},
     {"Rx_igraph_arpack",                                    (DL_FUNC) &Rx_igraph_arpack,                                     5},
     {"Rx_igraph_arpack_unpack_complex",                     (DL_FUNC) &Rx_igraph_arpack_unpack_complex,                      3},
@@ -930,6 +928,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_get_shortest_paths",                        (DL_FUNC) &Rx_igraph_get_shortest_paths,                        10},
     {"Rx_igraph_girth",                                     (DL_FUNC) &Rx_igraph_girth,                                      2},
     {"Rx_igraph_graph_version",                             (DL_FUNC) &Rx_igraph_graph_version,                              1},
+    {"Rx_igraph_graphlets",                                 (DL_FUNC) &Rx_igraph_graphlets,                                  3},
     {"Rx_igraph_grg_game",                                  (DL_FUNC) &Rx_igraph_grg_game,                                   4},
     {"Rx_igraph_i_levc_arp",                                (DL_FUNC) &Rx_igraph_i_levc_arp,                                 3},
     {"Rx_igraph_identical_graphs",                          (DL_FUNC) &Rx_igraph_identical_graphs,                           3},
@@ -938,6 +937,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Rx_igraph_intersection",                              (DL_FUNC) &Rx_igraph_intersection,                               2},
     {"Rx_igraph_is_chordal",                                (DL_FUNC) &Rx_igraph_is_chordal,                                 5},
     {"Rx_igraph_kary_tree",                                 (DL_FUNC) &Rx_igraph_kary_tree,                                  3},
+    {"Rx_igraph_laplacian_spectral_embedding",              (DL_FUNC) &Rx_igraph_laplacian_spectral_embedding,               7},
     {"Rx_igraph_lastcit_game",                              (DL_FUNC) &Rx_igraph_lastcit_game,                               5},
     {"Rx_igraph_layout_drl",                                (DL_FUNC) &Rx_igraph_layout_drl,                                 5},
     {"Rx_igraph_layout_drl_3d",                             (DL_FUNC) &Rx_igraph_layout_drl_3d,                              5},

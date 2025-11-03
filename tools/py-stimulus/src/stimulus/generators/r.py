@@ -286,7 +286,10 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
         out.write("  on.exit(.Call(R_igraph_finalizer))\n")
         out.write("  # Function call\n")
         out.write("  res <- .Call(\n")
-        out.write("    R_" + function)
+        if "RC" in spec.ignored_by:
+            out.write("    Rx_" + function)
+        else:
+            out.write("    R_" + function)
 
         parts = []
         for param in spec.iter_input_parameters():

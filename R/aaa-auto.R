@@ -6072,7 +6072,7 @@ graphlets_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_graphlets,
+    Rx_igraph_graphlets,
     graph,
     weights,
     niter
@@ -8848,7 +8848,7 @@ adjacency_spectral_embedding_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_adjacency_spectral_embedding,
+    Rx_igraph_adjacency_spectral_embedding,
     graph,
     no,
     weights,
@@ -8892,7 +8892,7 @@ laplacian_spectral_embedding_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_laplacian_spectral_embedding,
+    Rx_igraph_laplacian_spectral_embedding,
     graph,
     no,
     weights,
