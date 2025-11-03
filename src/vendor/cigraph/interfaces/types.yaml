@@ -635,6 +635,11 @@ EXTRA:
     CTYPE: void
     FLAGS: BY_REF
 
+CLOSURE:
+    # R closure (SEXP) used for callback functions
+    # This type is specific to the R interface and represents an R function
+    CTYPE: SEXP
+
 HRG:
     # Structure storing a fitted hierarchical random graph model
     CTYPE: igraph_hrg_t

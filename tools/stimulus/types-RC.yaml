@@ -568,6 +568,11 @@ EXTRA:
     CTYPE: ~
     HEADER: {}
 
+CLOSURE:
+    CALL: '%I%'
+    CTYPE: SEXP
+    HEADER: '%I%'
+
 ISOCOMPAT_FUNC:
     CALL: '0'
     CTYPE: ~

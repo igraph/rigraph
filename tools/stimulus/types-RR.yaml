@@ -291,6 +291,9 @@ EXTRA:
     CALL: {}
     HEADER: ~
 
+CLOSURE:
+    CALL: '%I%'
+
 MOTIFS_HANDLER_FUNC:
     CALL: '%I%'
 

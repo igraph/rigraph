@@ -6783,7 +6783,7 @@ motifs_randesu_impl <- function(
   res
 }
 
-motifs_randesu_callback_impl <- function(
+motifs_randesu_callback_closure_impl <- function(
   graph,
   size,
   cut_prob = NULL,
@@ -6797,7 +6797,7 @@ motifs_randesu_callback_impl <- function(
   on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_motifs_randesu_callback,
+    R_igraph_motifs_randesu_callback_closure,
     graph,
     size,
     cut_prob,
