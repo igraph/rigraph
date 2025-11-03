@@ -2012,11 +2012,6 @@ igraph_motifs_randesu_callback:
         GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
         MOTIFS_HANDLER_FUNC callback, OPTIONAL EXTRA extra
 
-igraph_motifs_randesu_callback_closure:
-    PARAMS: |-
-        GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
-        CLOSURE callback
-
 igraph_motifs_randesu_estimate:
     PARAMS: |-
         GRAPH graph, OUT INTEGER est, INTEGER size=3, OPTIONAL VECTOR cut_prob,

@@ -6783,34 +6783,6 @@ motifs_randesu_impl <- function(
   res
 }
 
-motifs_randesu_callback_closure_impl <- function(
-  graph,
-  size,
-  cut_prob = NULL,
-  callback
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  size <- as.numeric(size)
-  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
-  if (!is.function(callback)) {
-    cli::cli_abort("{.arg callback} must be a function")
-  }
-
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_motifs_randesu_callback_closure,
-    graph,
-    size,
-    cut_prob,
-    callback
-  )
-
-  res
-}
-
 motifs_randesu_estimate_impl <- function(
   graph,
   size = 3,
@@ -9755,6 +9727,34 @@ version_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_version
+  )
+
+  res
+}
+
+motifs_randesu_callback_closure_impl <- function(
+  graph,
+  size,
+  cut_prob = NULL,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  size <- as.numeric(size)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_motifs_randesu_callback_closure,
+    graph,
+    size,
+    cut_prob,
+    callback
   )
 
   res

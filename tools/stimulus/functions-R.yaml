@@ -959,6 +959,9 @@ igraph_motifs_randesu_callback:
     IGNORE: RR, RC, RInit
 
 igraph_motifs_randesu_callback_closure:
+    PARAMS: |-
+        GRAPH graph, INTEGER size, OPTIONAL VECTOR cut_prob,
+        CLOSURE callback
 
 #######################################
 # Eulerian functions
