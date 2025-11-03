@@ -7022,7 +7022,7 @@ SEXP Rx_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
 /*-------------------------------------------/
   / igraph_graphlets                           /
   /-------------------------------------------*/
-SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
+SEXP Rx_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
@@ -7068,7 +7068,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   return(result);
 }
 
-SEXP R_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
+SEXP Rx_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
                                            SEXP pweights, SEXP pwhich,
                                            SEXP scaled, SEXP cvec,
                                            SEXP options) {
@@ -7151,7 +7151,7 @@ SEXP R_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
   return(result);
 }
 
-SEXP R_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
+SEXP Rx_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
                                           SEXP weights, SEXP which,
                                           SEXP type,
                                           SEXP scaled, SEXP options) {
