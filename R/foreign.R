@@ -524,9 +524,9 @@ write_graph <- function(
 ################################################################
 
 read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_edgelist,
+    Rx_igraph_read_graph_edgelist,
     file,
     as.numeric(n),
     as.logical(directed)
@@ -557,9 +557,9 @@ read.graph.ncol <- function(
     "yes" = 1L,
     "auto" = 2L
   )
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_ncol,
+    Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
     as.logical(names),
@@ -583,9 +583,9 @@ write.graph.ncol <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_ncol,
+    Rx_igraph_write_graph_ncol,
     graph,
     file,
     names,
@@ -605,9 +605,9 @@ read.graph.lgl <- function(
     "yes" = 1L,
     "auto" = 2L
   )
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_lgl,
+    Rx_igraph_read_graph_lgl,
     file,
     as.logical(names),
     weights,
@@ -631,9 +631,9 @@ write.graph.lgl <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_lgl,
+    Rx_igraph_write_graph_lgl,
     graph,
     file,
     names,
@@ -695,9 +695,9 @@ write.graph.dimacs <- function(
     capacity <- E(graph)$capacity
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_dimacs,
+    Rx_igraph_write_graph_dimacs,
     graph,
     file,
     as.numeric(source),

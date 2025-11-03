@@ -228,7 +228,7 @@ disjoint_union <- function(...) {
   )
   lapply(graphs, ensure_igraph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_disjoint_union, graphs)
 
   ## Graph attributes
@@ -348,7 +348,7 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
       res <- .Call(Rx_igraph_union, newgraphs, edgemaps)
     } else {
@@ -388,7 +388,7 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     if (call == "union") {
       res <- .Call(Rx_igraph_union, graphs, edgemaps)
     } else {
@@ -695,11 +695,11 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
     }
     big <- permute(big, perm)
 
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(Rx_igraph_difference, big, small)
     permute(res, match(V(res)$name, bnames))
   } else {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     .Call(Rx_igraph_difference, big, small)
   }
 }
@@ -746,7 +746,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 complementer <- function(graph, loops = FALSE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_complementer, graph, as.logical(loops))
 }
 
@@ -850,7 +850,7 @@ compose <- function(g1, g2, byname = "auto") {
   edgemaps <- (length(edge_attr_names(g1)) != 0 ||
     length(edge_attr_names(g2)) != 0)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
