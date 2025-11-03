@@ -9745,6 +9745,12 @@ motifs_randesu_callback_closure_impl <- function(
   if (!is.function(callback)) {
     cli::cli_abort("{.arg callback} must be a function")
   }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
 
 
   on.exit(.Call(R_igraph_finalizer))
@@ -9754,7 +9760,7 @@ motifs_randesu_callback_closure_impl <- function(
     graph,
     size,
     cut_prob,
-    callback
+    callback_wrapped
   )
 
   res

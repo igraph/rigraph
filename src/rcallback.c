@@ -57,6 +57,14 @@ igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
   /* Call the R function: callback(vids, isoclass) */
   PROTECT(R_fcall = Rf_lang3(callback, vids_r, isoclass_r));
   PROTECT(result = Rf_eval(R_fcall, R_GlobalEnv));
+  
+  /* Check if result is an error condition (from tryCatch) */
+  if (Rf_inherits(result, "error")) {
+    UNPROTECT(4);
+    igraph_error("Error in R callback function", __FILE__, __LINE__, IGRAPH_FAILURE);
+    return IGRAPH_FAILURE;
+  }
+  
   cres = Rf_asLogical(result);
 
   UNPROTECT(4);

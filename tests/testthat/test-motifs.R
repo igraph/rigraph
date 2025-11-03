@@ -234,3 +234,17 @@ test_that("motifs_randesu_callback receives correct arguments", {
     FALSE  # stop after first motif
   })
 })
+
+test_that("motifs_randesu_callback handles errors in callback", {
+  withr::local_seed(123)
+  
+  g <- make_graph(~ A - B - C - A - D - E - F - D - C - F)
+  
+  # Callback that throws an error
+  expect_error(
+    motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+      stop("Intentional error in callback")
+    }),
+    "Error in R callback function"
+  )
+})
