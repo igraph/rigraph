@@ -33,7 +33,7 @@ BOOLEAN:
 
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
-    INCONV: '%I% <- as.numeric(%I%)-1'
+    INCONV: '%I% <- as.numeric(%I%) - 1'
 
 VECTOR:
     DEFAULT:
@@ -107,7 +107,7 @@ INT:
     INCONV: '%I% <- as.integer(%I%)'
 
 VERTEX:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
@@ -123,7 +123,7 @@ VERTEX:
             }
 
 VERTEX_ROOT:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
@@ -139,7 +139,7 @@ VERTEX_ROOT:
             }
 
 VERTEX_SELECTOR:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -150,7 +150,7 @@ VERTEX_SELECTOR:
             }
 
 VERTEX_INDICES:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -163,7 +163,7 @@ VERTEX_INDICES:
 # Temporary, for https://github.com/igraph/rigraph/pull/1630
 # We should call the `_PV` versions for all types in the future.
 VERTEX_INDICES_PV:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -174,7 +174,7 @@ VERTEX_INDICES_PV:
             }
 
 EDGE_INDICES:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: E(%I1%)
     INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
@@ -185,7 +185,7 @@ EDGE_INDICES:
             }
 
 EDGE_SELECTOR:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: E(%I1%)
     INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
@@ -258,7 +258,7 @@ VERTEX_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.numeric(%I%)-1
+          %I% <- as.numeric(%I%) - 1
         }
     OUTCONV:
         OUT: |-
@@ -277,7 +277,7 @@ EDGE_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.numeric(%I%)-1
+          %I% <- as.numeric(%I%) - 1
         }
     OUTCONV:
         OUT: |-
@@ -300,7 +300,7 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: lapply(%I%, function(.x) .x-1)
+    CALL: lapply(%I%, function(.x) .x - 1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -308,7 +308,7 @@ VERTEXSET_LIST:
             }
 
 EDGESET_LIST:
-    CALL: lapply(%I%, function(.x) .x-1)
+    CALL: lapply(%I%, function(.x) .x - 1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -342,7 +342,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x)-1)'
+    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x) - 1)'
 
 COMMCMP:
     DEFAULT:
