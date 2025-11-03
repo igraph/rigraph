@@ -248,7 +248,9 @@ edges_impl <- function(
     graph,
     eids - 1
   )
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2966,7 +2968,9 @@ topological_sorting_impl <- function(
     graph,
     mode
   )
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -6628,6 +6632,8 @@ write_graph_edgelist_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6648,6 +6654,8 @@ write_graph_leda_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6669,6 +6677,8 @@ write_graph_graphml_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
   prefixattr <- as.logical(prefixattr)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -6689,6 +6699,8 @@ write_graph_pajek_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6710,6 +6722,8 @@ write_graph_gml_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
   options <- switch_igraph_arg(options, "default" = 0L, "encode_only_quot" = 1L)
   id <- as.numeric(id)
 
@@ -6733,6 +6747,8 @@ write_graph_dot_impl <- function(
 ) {
   # Argument checks
   ensure_igraph(graph)
+  check_string(outstream)
+
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

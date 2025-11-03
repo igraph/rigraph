@@ -136,60 +136,13 @@ graph.get.isomorphisms.vf2 <- function(
   edge.color1,
   edge.color2
 ) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+  res <- get_isomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph2)[.x + 1])
@@ -204,60 +157,13 @@ graph.get.subisomorphisms.vf2 <- function(
   edge.color1,
   edge.color2
 ) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_subisomorphisms_vf2,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+  res <- get_subisomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph1)[.x + 1])
@@ -312,10 +218,10 @@ graph.subisomorphic.lad <- function(
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_subisomorphic_lad,
+    Rx_igraph_subisomorphic_lad,
     pattern,
     target,
     domains,

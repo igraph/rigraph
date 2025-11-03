@@ -136,22 +136,10 @@ graphlets.candidate.basis <- function(graph, weights = NULL) {
 #' @family glet
 #' @export
 graphlet_basis <- function(graph, weights = NULL) {
-  ## Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  ## Function call
-  res <- .Call(Rx_igraph_graphlets_candidate_basis, graph, weights)
-
-  res
+  graphlets_candidate_basis_impl(
+    graph = graph,
+    weights = weights
+  )
 }
 
 #' @rdname graphlet_basis
@@ -176,11 +164,13 @@ graphlet_proj <- function(
   Mu <- as.numeric(Mu)
   niter <- as.numeric(niter)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(Rx_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
-
-  res
+  graphlets_project_impl(
+    graph = graph,
+    weights = weights,
+    cliques = cliques,
+    Muc = Mu,
+    niter = niter
+  )
 }
 
 #################

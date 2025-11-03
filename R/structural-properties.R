@@ -767,9 +767,9 @@ diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_diameter,
+    Rx_igraph_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -796,9 +796,9 @@ get_diameter <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_diameter,
+    Rx_igraph_get_diameter,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -832,9 +832,9 @@ farthest_vertices <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_farthest_points,
+    Rx_igraph_farthest_points,
     graph,
     as.logical(directed),
     as.logical(unconnected),
@@ -1244,9 +1244,9 @@ distances <- function(
     cli::cli_warn("Unweighted algorithm chosen, {.arg weights} ignored.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_shortest_paths,
+    Rx_igraph_shortest_paths,
     graph,
     v - 1,
     to - 1,
@@ -1328,9 +1328,9 @@ shortest_paths <- function(
   }
 
   to <- as_igraph_vs(graph, to) - 1
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_get_shortest_paths,
+    Rx_igraph_get_shortest_paths,
     graph,
     as_igraph_vs(graph, from) - 1,
     to,
@@ -1526,9 +1526,9 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_subcomponent,
+    Rx_igraph_subcomponent,
     graph,
     as_igraph_vs(graph, v) - 1,
     as.numeric(mode)
@@ -1943,8 +1943,11 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
     }
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_constraint, graph, nodes - 1, as.numeric(weights))
+  res <- constraint_impl(
+    graph = graph,
+    vids = nodes,
+    weights = weights
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[nodes]
   }
@@ -2058,9 +2061,9 @@ ego_size <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_neighborhood_size,
+    Rx_igraph_neighborhood_size,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2172,9 +2175,9 @@ ego <- function(
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood,
+    Rx_igraph_neighborhood,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2207,9 +2210,9 @@ make_ego_graph <- function(
   mode <- switch(mode, "out" = 1L, "in" = 2L, "all" = 3L)
   mindist <- as.numeric(mindist)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_neighborhood_graphs,
+    Rx_igraph_neighborhood_graphs,
     graph,
     as_igraph_vs(graph, nodes) - 1,
     as.numeric(order),
@@ -2259,12 +2262,12 @@ make_neighborhood_graph <- make_ego_graph
 #' coreness(g) # small core triangle in a ring
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_coreness, graph, as.numeric(mode))
+  res <- coreness_impl(
+    graph = graph,
+    mode = mode
+  )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
@@ -2302,18 +2305,12 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' topo_sort(g)
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
-  ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
-
-  if (igraph_opt("return.vs.es")) {
-    res <- create_vs(graph, res)
-  }
-
-  res
+  topological_sorting_impl(
+    graph = graph,
+    mode = mode
+  )
 }
 
 #' Finding a feedback arc set in a graph
@@ -2454,7 +2451,7 @@ feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
 girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_girth, graph, as.logical(circle))
   if (res$girth == 0) {
     res$girth <- Inf
@@ -2769,9 +2766,9 @@ bfs <- function(
     callback <- as.function(callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_bfs,
+    Rx_igraph_bfs,
     graph,
     root,
     roots,
@@ -3025,9 +3022,9 @@ dfs <- function(
     out.callback <- as.function(out.callback)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_dfs,
+    Rx_igraph_dfs,
     graph,
     root,
     mode,
@@ -3184,7 +3181,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "weak" = 1L, "strong" = 2L)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(Rx_igraph_no_components, graph, mode)
 }
 
@@ -3385,7 +3382,6 @@ laplacian_matrix <- function(
   }
   sparse <- as.logical(sparse)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (sparse) {
     res <- get_laplacian_sparse_impl(
@@ -3550,27 +3546,11 @@ max_bipartite_match <- function(
   weights = NULL,
   eps = .Machine$double.eps
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  types <- handle_vertex_type_arg(types, graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  eps <- as.numeric(eps)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_maximum_bipartite_matching,
-    graph,
-    types,
-    weights,
-    eps
+  res <- maximum_bipartite_matching_impl(
+    graph = graph,
+    types = types,
+    weights = weights,
+    eps = eps
   )
 
   res$matching[res$matching == 0] <- NA

@@ -950,9 +950,9 @@ sample_pa <- function(
     "bag" = 0
   )
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_barabasi_game,
+    Rx_igraph_barabasi_game,
     n,
     power,
     m,
@@ -1020,7 +1020,6 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' plot(sample_gnp(6, 0.5))
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
   type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
   res <- erdos_renyi_game_gnp_impl(
     n = n,
@@ -1071,15 +1070,12 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' degree_distribution(g)
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
   type <- "gnm"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_erdos_renyi_game_gnm,
-    as.numeric(n),
-    as.numeric(m),
-    as.logical(directed),
-    as.logical(loops)
+  res <- erdos_renyi_game_gnm_impl(
+    n = n,
+    m = m,
+    directed = directed,
+    loops = loops
   )
 
   if (igraph_opt("add.params")) {
@@ -1409,9 +1405,9 @@ sample_degseq <- function(
     in.deg <- as.numeric(in.deg)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_degree_sequence_game,
+    Rx_igraph_degree_sequence_game,
     as.numeric(out.deg),
     in.deg,
     as.numeric(method1)
@@ -1655,10 +1651,10 @@ sample_pa_age <- function(
     out.seq <- numeric()
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- if (is.null(time.window)) {
     .Call(
-      R_igraph_barabasi_aging_game,
+      Rx_igraph_barabasi_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1674,7 +1670,7 @@ sample_pa_age <- function(
     )
   } else {
     .Call(
-      R_igraph_recent_degree_aging_game,
+      Rx_igraph_recent_degree_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1756,9 +1752,9 @@ sample_traits_callaway <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_callaway_traits_game,
+    Rx_igraph_callaway_traits_game,
     as.double(nodes),
     as.double(types),
     as.double(edge.per.step),
@@ -1796,9 +1792,9 @@ sample_traits <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_establishment_game,
+    Rx_igraph_establishment_game,
     as.double(nodes),
     as.double(types),
     as.double(k),
@@ -1852,9 +1848,9 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
 sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_grg_game,
+    Rx_igraph_grg_game,
     as.double(nodes),
     as.double(radius),
     as.logical(torus),
@@ -1953,16 +1949,14 @@ sample_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.double(type.dist),
-    as.logical(fixed.sizes),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(directed),
-    as.logical(loops)
+  res <- preference_game_impl(
+    nodes = nodes,
+    types = types,
+    type_dist = type.dist,
+    fixed_sizes = fixed.sizes,
+    pref_matrix = pref.matrix,
+    directed = directed,
+    loops = loops
   )
   V(res[[1]])$type <- res[[2]] + 1
   if (igraph_opt("add.params")) {
@@ -2004,15 +1998,13 @@ sample_asym_pref <- function(
     ))
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(
-    R_igraph_asymmetric_preference_game,
-    as.numeric(nodes),
-    as.numeric(types),
-    as.numeric(types),
-    matrix(as.double(type.dist.matrix), types, types),
-    matrix(as.double(pref.matrix), types, types),
-    as.logical(loops)
+  res <- asymmetric_preference_game_impl(
+    nodes = nodes,
+    out_types = types,
+    in_types = types,
+    type_dist_matrix = type.dist.matrix,
+    pref_matrix = pref.matrix,
+    loops = loops
   )
   V(res[[1]])$outtype <- res[[2]] + 1
   V(res[[1]])$intype <- res[[3]] + 1
@@ -2041,9 +2033,9 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_connect_neighborhood,
+    Rx_igraph_connect_neighborhood,
     graph,
     as.numeric(order),
     as.numeric(mode)
@@ -2104,9 +2096,9 @@ sample_smallworld <- function(
   loops = FALSE,
   multiple = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_watts_strogatz_game,
+    Rx_igraph_watts_strogatz_game,
     as.numeric(dim),
     as.numeric(size),
     as.numeric(nei),
@@ -2169,9 +2161,9 @@ sample_last_cit <- function(
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_lastcit_game,
+    Rx_igraph_lastcit_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(agebins),
@@ -2201,9 +2193,9 @@ sample_cit_types <- function(
   directed = TRUE,
   attr = TRUE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_cited_type_game,
+    Rx_igraph_cited_type_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(types),
@@ -2235,9 +2227,9 @@ sample_cit_cit_types <- function(
   attr = TRUE
 ) {
   pref[] <- as.numeric(pref)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_citing_cited_type_game,
+    Rx_igraph_citing_cited_type_game,
     as.numeric(n),
     as.numeric(types),
     pref,
