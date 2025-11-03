@@ -61,7 +61,7 @@ pak::pak(dependencies = "Config/Needs/build")
 ### R Code Conventions
 
 - Follow the [tidyverse style guide](https://style.tidyverse.org) and the [tidyverse design guide](https://design.tidyverse.org)
-- Use `snake_case` for new functions
+- Use `snake_case` for new functions and all arguments
 - Use explicit package prefixes (e.g., `withr::local_db_connection()`) for clarity
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context
