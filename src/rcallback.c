@@ -28,13 +28,19 @@
 #include <R.h>
 #include <Rinternals.h>
 
+/* Structure to hold callback data */
+typedef struct {
+  SEXP callback;
+} R_igraph_motifs_data_t;
+
 /* Handler function for motifs callback - converts C types to R types */
 igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
                                        igraph_vector_int_t *vids,
                                        igraph_integer_t isoclass,
                                        void *extra) {
 
-  SEXP callback = (SEXP)extra;
+  R_igraph_motifs_data_t *data = (R_igraph_motifs_data_t *)extra;
+  SEXP callback = data->callback;
   SEXP vids_r, isoclass_r, R_fcall, result;
   igraph_bool_t cres;
 
@@ -66,7 +72,9 @@ igraph_error_t igraph_motifs_randesu_callback_closure(
     const igraph_vector_t *cut_prob,
     SEXP callback) {
   
+  R_igraph_motifs_data_t data = { .callback = callback };
+  
   return igraph_motifs_randesu_callback(
       graph, size, cut_prob,
-      R_igraph_motifs_handler, (void*)callback);
+      R_igraph_motifs_handler, &data);
 }

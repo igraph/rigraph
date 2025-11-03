@@ -589,9 +589,9 @@ ASTAR_HEURISTIC_FUNC:
     HEADER: {}
 
 MOTIFS_HANDLER_FUNC:
-    CALL: 'R_igraph_motifs_handler, (void*)%I%'
+    CALL: '0'
     CTYPE: ~
-    HEADER: '%I%'
+    HEADER: {}
 
 ATTRIBUTES:
     CALL: '0'

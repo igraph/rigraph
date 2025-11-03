@@ -293,9 +293,10 @@ EXTRA:
 
 CLOSURE:
     CALL: '%I%'
-
-MOTIFS_HANDLER_FUNC:
-    CALL: '%I%'
+    INCONV: |
+        if (!is.function(%I%)) {
+          cli::cli_abort("{.arg callback} must be a function")
+        }
 
 ISOCOMPAT_FUNC:
     CALL: {}

@@ -953,6 +953,8 @@ igraph_simple_cycles_callback:
 # Motifs
 #######################################
 
+# We ignore the callback function for autogeneration and provide our own _closure function
+# that calls the underlying C implementation
 igraph_motifs_randesu_callback:
     IGNORE: RR, RC, RInit
 
