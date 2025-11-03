@@ -50,13 +50,13 @@ def optional_wrapper_r(conv: str) -> str:
     if "is.null" in conv:
         return conv
 
-    return f"if (!is.null(%I%)) {conv}"
+    return f"if (!is.null(%I%)) {{\n{indent(conv)}\n}}"
 
 
 def format_switch_statement(code: str) -> str:
     """Format switch statements with proper spacing and line breaks."""
-    # Match switch(...) patterns
-    switch_pattern = r'(switch\([^,]+)(,\s*)([^)]+)(\))'
+    # Match switch(...) or switch_igraph_arg(...) patterns
+    switch_pattern = r'(switch(?:_igraph_arg)?\([^,]+)(,\s*)([^)]+)(\))'
 
     def format_switch_args(match):
         prefix = match.group(1)  # "switch(igraph_match_arg(mode)"
@@ -98,13 +98,15 @@ def format_switch_statement(code: str) -> str:
                 formatted_parts.append(part)
 
             # Create multiline format: put the first argument on its own
-            # line after the opening 'switch(' and indent the remaining
+            # line after the opening 'switch(' or 'switch_igraph_arg(' and indent the remaining
             # key/value parts further.
             indent_str = '    '
-            # prefix currently holds 'switch(some_expr' — we want
-            # to emit 'switch(\n    some_expr,\n' (use indent_str)
-            first_arg = prefix[prefix.find('(') + 1 :].strip()
-            result = 'switch(\n' + indent_str + first_arg + ',\n'
+            # prefix currently holds 'switch(some_expr' or 'switch_igraph_arg(some_expr' — we want
+            # to emit 'switch(\n    some_expr,\n' or 'switch_igraph_arg(\n    some_expr,\n' (use indent_str)
+            paren_pos = prefix.find('(')
+            func_name = prefix[:paren_pos]
+            first_arg = prefix[paren_pos + 1:].strip()
+            result = func_name + '(\n' + indent_str + first_arg + ',\n'
             for i, part in enumerate(formatted_parts):
                 result += indent_str + part
                 if i < len(formatted_parts) - 1:
