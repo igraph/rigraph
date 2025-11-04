@@ -46,9 +46,9 @@ vertices with the different labels) in this case.}
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric.}
 
-\item{directed}{Logical constant, whether to create a directed graph.}
+\item{directed}{Logical scalar, whether to create a directed graph.}
 
-\item{loops}{Logical constant, whether self-loops are allowed in the graph.}
+\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 
 \item{...}{Passed to the constructor, \code{sample_pref()} or
 \code{sample_asym_pref()}.}

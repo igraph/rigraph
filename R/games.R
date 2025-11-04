@@ -1054,9 +1054,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #'
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1113,9 +1111,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #'   the graph (for \eqn{G(n,m)} graphs).
 #' @param type The type of the random graph to create, either `gnp()`
 #'   (\eqn{G(n,p)} graph) or `gnm()` (\eqn{G(n,m)} graph).
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1910,8 +1906,8 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric.
-#' @param directed Logical constant, whether to create a directed graph.
-#' @param loops Logical constant, whether self-loops are allowed in the graph.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param loops Logical scalar, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -2476,8 +2472,7 @@ sample_bipartite_gnp <- function(
 #'   must be symmetric.
 #' @param block.sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
-#' @param directed Logical scalar, whether to generate a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @inheritParams sample_pref
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -3051,10 +3046,7 @@ sample_fitness <- function(
 #'   undirected. If greater than or equal to 2, this argument specifies the
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
-#' @param loops Logical scalar, whether to allow loop edges in the generated
-#'   graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
-#'   generated graph.
+#' @inheritParams sample_fitness
 #' @param finite.size.correction Logical scalar, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
@@ -3136,7 +3128,7 @@ sample_fitness_pl <- function(
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
-#' @param directed Logical scalar, whether to create a directed graph.
+#' @inheritParams sample_k_regular
 #' @return A simple graph, possibly directed if the `directed` argument is
 #'   `TRUE`.
 #' @note The version of the model in the published paper is incorrect in the
