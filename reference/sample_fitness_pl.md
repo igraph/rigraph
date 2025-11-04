@@ -43,12 +43,11 @@ sample_fitness_pl(
 
 - loops:
 
-  Logical scalar, whether to allow loop edges in the generated graph.
+  Logical scalar, whether to allow loop edges in the graph.
 
 - multiple:
 
-  Logical scalar, whether to allow multiple edges in the generated
-  graph.
+  Logical scalar, whether to allow multiple edges in the graph.
 
 - finite.size.correction:
 

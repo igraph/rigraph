@@ -50,8 +50,8 @@ preference.game(
 
 - directed:
 
-  Logical constant, whether to create a directed graph.
+  Logical scalar, whether to create a directed graph.
 
 - loops:
 
-  Logical constant, whether self-loops are allowed in the graph.
+  Logical scalar, whether self-loops are allowed in the graph.

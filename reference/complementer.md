@@ -70,9 +70,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ## Complementer of a ring
 g <- make_ring(10)
 complementer(g)
-#> IGRAPH 1a2dce8 U--- 10 35 -- Ring graph
+#> IGRAPH aef0a1f U--- 10 35 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 1a2dce8:
+#> + edges from aef0a1f:
 #>  [1] 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 2--10 2-- 9 2-- 8 2-- 7 2-- 6
 #> [13] 2-- 5 2-- 4 3--10 3-- 9 3-- 8 3-- 7 3-- 6 3-- 5 4--10 4-- 9 4-- 8 4-- 7
 #> [25] 4-- 6 5--10 5-- 9 5-- 8 5-- 7 6--10 6-- 9 6-- 8 7--10 7-- 9 8--10
@@ -82,10 +82,10 @@ g <- make_ring(10)
 gc <- complementer(g)
 gu <- union(g, gc)
 gu
-#> IGRAPH 02ffbfd U--- 10 45 -- 
+#> IGRAPH 6f6ecc3 U--- 10 45 -- 
 #> + attr: name_1 (g/c), name_2 (g/c), mutual_1 (g/l), mutual_2 (g/l),
 #> | circular_1 (g/l), circular_2 (g/l)
-#> + edges from 02ffbfd:
+#> + edges from 6f6ecc3:
 #>  [1] 9--10 8--10 8-- 9 7--10 7-- 9 7-- 8 6--10 6-- 9 6-- 8 6-- 7 5--10 5-- 9
 #> [13] 5-- 8 5-- 7 5-- 6 4--10 4-- 9 4-- 8 4-- 7 4-- 6 4-- 5 3--10 3-- 9 3-- 8
 #> [25] 3-- 7 3-- 6 3-- 5 3-- 4 2--10 2-- 9 2-- 8 2-- 7 2-- 6 2-- 5 2-- 4 2-- 3

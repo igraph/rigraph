@@ -355,43 +355,43 @@ distances(g)
 shortest_paths(g, 5)
 #> $vpath
 #> $vpath[[1]]
-#> + 5/10 vertices, from b48cba3:
+#> + 5/10 vertices, from 0ff6f33:
 #> [1] 5 4 3 2 1
 #> 
 #> $vpath[[2]]
-#> + 4/10 vertices, from b48cba3:
+#> + 4/10 vertices, from 0ff6f33:
 #> [1] 5 4 3 2
 #> 
 #> $vpath[[3]]
-#> + 3/10 vertices, from b48cba3:
+#> + 3/10 vertices, from 0ff6f33:
 #> [1] 5 4 3
 #> 
 #> $vpath[[4]]
-#> + 2/10 vertices, from b48cba3:
+#> + 2/10 vertices, from 0ff6f33:
 #> [1] 5 4
 #> 
 #> $vpath[[5]]
-#> + 1/10 vertex, from b48cba3:
+#> + 1/10 vertex, from 0ff6f33:
 #> [1] 5
 #> 
 #> $vpath[[6]]
-#> + 2/10 vertices, from b48cba3:
+#> + 2/10 vertices, from 0ff6f33:
 #> [1] 5 6
 #> 
 #> $vpath[[7]]
-#> + 3/10 vertices, from b48cba3:
+#> + 3/10 vertices, from 0ff6f33:
 #> [1] 5 6 7
 #> 
 #> $vpath[[8]]
-#> + 4/10 vertices, from b48cba3:
+#> + 4/10 vertices, from 0ff6f33:
 #> [1] 5 6 7 8
 #> 
 #> $vpath[[9]]
-#> + 5/10 vertices, from b48cba3:
+#> + 5/10 vertices, from 0ff6f33:
 #> [1] 5 6 7 8 9
 #> 
 #> $vpath[[10]]
-#> + 6/10 vertices, from b48cba3:
+#> + 6/10 vertices, from 0ff6f33:
 #> [1]  5  4  3  2  1 10
 #> 
 #> 
@@ -407,37 +407,37 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 #> $vpaths
 #> $vpaths[[1]]
-#> + 6/10 vertices, from b48cba3:
+#> + 6/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8  7  6
 #> 
 #> $vpaths[[2]]
-#> + 6/10 vertices, from b48cba3:
+#> + 6/10 vertices, from 0ff6f33:
 #> [1] 1 2 3 4 5 6
 #> 
 #> $vpaths[[3]]
-#> + 5/10 vertices, from b48cba3:
+#> + 5/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8  7
 #> 
 #> $vpaths[[4]]
-#> + 4/10 vertices, from b48cba3:
+#> + 4/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8
 #> 
 #> 
 #> $epaths
 #> $epaths[[1]]
-#> + 5/10 edges from b48cba3:
+#> + 5/10 edges from 0ff6f33:
 #> [1] 1--10 9--10 8-- 9 7-- 8 6-- 7
 #> 
 #> $epaths[[2]]
-#> + 5/10 edges from b48cba3:
+#> + 5/10 edges from 0ff6f33:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 #> 
 #> $epaths[[3]]
-#> + 4/10 edges from b48cba3:
+#> + 4/10 edges from 0ff6f33:
 #> [1] 1--10 9--10 8-- 9 7-- 8
 #> 
 #> $epaths[[4]]
-#> + 3/10 edges from b48cba3:
+#> + 3/10 edges from 0ff6f33:
 #> [1] 1--10 9--10 8-- 9
 #> 
 #> 
@@ -446,19 +446,19 @@ all_shortest_paths(g, 1, 6:8)
 #> 
 #> $res
 #> $res[[1]]
-#> + 6/10 vertices, from b48cba3:
+#> + 6/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8  7  6
 #> 
 #> $res[[2]]
-#> + 6/10 vertices, from b48cba3:
+#> + 6/10 vertices, from 0ff6f33:
 #> [1] 1 2 3 4 5 6
 #> 
 #> $res[[3]]
-#> + 5/10 vertices, from b48cba3:
+#> + 5/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8  7
 #> 
 #> $res[[4]]
-#> + 4/10 vertices, from b48cba3:
+#> + 4/10 vertices, from 0ff6f33:
 #> [1]  1 10  9  8
 #> 
 #> 

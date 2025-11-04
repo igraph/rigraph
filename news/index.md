@@ -1,5 +1,21 @@
 # Changelog
 
+## igraph 2.2.1.9006
+
+### Bug fixes
+
+- Generated code is much closer to air formatting
+  ([\#1410](https://github.com/igraph/rigraph/issues/1410),
+  [\#2433](https://github.com/igraph/rigraph/issues/2433)).
+
+### Chore
+
+- `Rx_` prefix also for RC-only ignored functions.
+
+### ai
+
+- Specify \[ci skip\].
+
 ## igraph 2.2.1.9005
 
 ### Features

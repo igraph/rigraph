@@ -73,12 +73,12 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
-#> + 1/100 vertex, from ed56c78:
+#> + 1/100 vertex, from f097c26:
 #> [1] 1
 subcomponent(g, 1, "out")
-#> + 1/100 vertex, from ed56c78:
+#> + 1/100 vertex, from f097c26:
 #> [1] 1
 subcomponent(g, 1, "all")
-#> + 1/100 vertex, from ed56c78:
+#> + 1/100 vertex, from f097c26:
 #> [1] 1
 ```
