@@ -9730,6 +9730,7 @@ fundamental_cycles_impl <- function(
         call = rlang::caller_env()
       )
     }
+    start <- start - 1
   }
   bfs_cutoff <- as.numeric(bfs_cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -9746,7 +9747,8 @@ fundamental_cycles_impl <- function(
   res <- .Call(
     R_igraph_fundamental_cycles,
     graph,
-    if (!is.null(start)) start - 1 else NULL,    bfs_cutoff,
+    start,
+    bfs_cutoff,
     weights
   )
   if (igraph_opt("return.vs.es")) {
@@ -9982,6 +9984,7 @@ random_spanning_tree_impl <- function(
         call = rlang::caller_env()
       )
     }
+    vid <- vid - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -9989,7 +9992,7 @@ random_spanning_tree_impl <- function(
   res <- .Call(
     R_igraph_random_spanning_tree,
     graph,
-    if (!is.null(vid)) vid - 1 else NULL
+    vid
   )
   if (igraph_opt("return.vs.es")) {
     res <- create_es(graph, res)
@@ -10315,6 +10318,7 @@ vertex_path_from_edge_path_impl <- function(
         call = rlang::caller_env()
       )
     }
+    start <- start - 1
   }
   edge_path <- as_igraph_es(graph, edge_path)
   mode <- switch_igraph_arg(
@@ -10330,7 +10334,8 @@ vertex_path_from_edge_path_impl <- function(
   res <- .Call(
     R_igraph_vertex_path_from_edge_path,
     graph,
-    if (!is.null(start)) start - 1 else NULL,    edge_path - 1,
+    start,
+    edge_path - 1,
     mode
   )
   if (igraph_opt("return.vs.es")) {
