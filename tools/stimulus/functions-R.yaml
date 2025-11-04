@@ -30,6 +30,8 @@ igraph_edge:
 igraph_edges:
 
 igraph_get_eid:
+    # Needs custom handling - OUT parameter eid should be scalar not vector
+    IGNORE: RR, RC, RInit
 
 igraph_get_eids:
     DEPS: pairs ON graph, eids ON graph
@@ -56,11 +58,13 @@ igraph_create:
 # TODO: temporarily disabled
 igraph_adjacency:
 
-# TODO: temporarily disabled
+# TODO: temporarily disabled - needs SPARSEMAT converter implementation
 igraph_sparse_adjacency:
+    IGNORE: RR, RC
 
-# TODO: temporarily disabled
+# TODO: temporarily disabled - needs SPARSEMAT converter implementation
 igraph_sparse_weighted_adjacency:
+    IGNORE: RR, RC
 
 # TODO: temporarily disabled
 igraph_weighted_adjacency:
@@ -119,6 +123,8 @@ igraph_turan:
 
 # TODO: temporarily disabled
 igraph_weighted_sparsemat:
+    # Needs SPARSEMAT converter implementation
+    IGNORE: RR, RC
 
 #######################################
 # Constructors, games
@@ -582,6 +588,8 @@ igraph_layout_drl_3d:
     DEPS: weights ON graph
 
 igraph_layout_merge_dla:
+    # Needs custom handling - GRAPH_PTR_LIST type not properly supported
+    IGNORE: RR, RC
 
 #######################################
 # Cocitation and other similarity measures
@@ -615,11 +623,14 @@ igraph_le_community_to_membership:
 igraph_reindex_membership:
 
 igraph_community_leading_eigenvector:
-    DEPS: weights ON graph
+    # Needs custom handling - has callback parameter (LEVCFUNC)
+    IGNORE: RR, RC, RInit
     R:
         CLASS: igraph.eigenc
 
 igraph_community_voronoi:
+    # Needs custom handling - optional pointer parameter generates incorrect conditional
+    IGNORE: RR, RC, RInit
 
 #######################################
 # Graphlets
@@ -713,14 +724,20 @@ igraph_write_graph_dot:
 igraph_disjoint_union:
 
 igraph_disjoint_union_many:
+    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
+    IGNORE: RR, RC, RInit
 
 igraph_union:
 
 igraph_union_many:
+    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
+    IGNORE: RR, RC, RInit
 
 igraph_intersection:
 
 igraph_intersection_many:
+    # Needs custom handling - GRAPH_PTR_LIST const pointer issue
+    IGNORE: RR, RC, RInit
 
 igraph_difference:
 
@@ -781,7 +798,8 @@ igraph_get_subisomorphisms_vf2_callback:
     IGNORE: RR, RC
 
 igraph_subisomorphic_lad:
-    # R function is hand-rolled
+    # R function is hand-rolled - C signature changed, needs manual update
+    IGNORE: RR, RC, RInit
     # Despite their names, vertex_color and edge_color are not really colors
     # but _multiplicities_, so we simply use VECTOR_INT there
     PARAMS: |-

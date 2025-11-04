@@ -304,46 +304,6 @@ edges_impl <- function(
   res
 }
 
-get_eid_impl <- function(
-  graph,
-  from,
-  to,
-  directed = TRUE,
-  error = TRUE
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  from <- as_igraph_vs(graph, from)
-  if (length(from) == 0) {
-    cli::cli_abort(
-      "{.arg from} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  to <- as_igraph_vs(graph, to)
-  if (length(to) == 0) {
-    cli::cli_abort(
-      "{.arg to} must specify at least one vertex",
-      call = rlang::caller_env()
-    )
-  }
-  directed <- as.logical(directed)
-  error <- as.logical(error)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_eid,
-    graph,
-    from - 1,
-    to - 1,
-    directed,
-    error
-  )
-
-  res
-}
-
 get_eids_impl <- function(
   graph,
   pairs,
@@ -499,48 +459,6 @@ adjacency_impl <- function(
   # Function call
   res <- .Call(
     R_igraph_adjacency,
-    adjmatrix,
-    mode,
-    loops
-  )
-
-  res
-}
-
-sparse_adjacency_impl <- function(
-  adjmatrix,
-  mode = DIRECTED,
-  loops = c("once", "none", "twice")
-) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_sparse_adjacency,
-    adjmatrix,
-    mode,
-    loops
-  )
-
-  res
-}
-
-sparse_weighted_adjacency_impl <- function(
-  adjmatrix,
-  mode = DIRECTED,
-  loops = c("once", "none", "twice")
-) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_sparse_weighted_adjacency,
     adjmatrix,
     mode,
     loops
@@ -1308,30 +1226,6 @@ turan_impl <- function(
     res$n <- n
     res$r <- r
   }
-
-  res
-}
-
-weighted_sparsemat_impl <- function(
-  A,
-  directed,
-  attr,
-  loops = FALSE
-) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  directed <- as.logical(directed)
-  loops <- as.logical(loops)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_weighted_sparsemat,
-    A,
-    directed,
-    attr,
-    loops
-  )
 
   res
 }
@@ -8347,24 +8241,6 @@ layout_drl_3d_impl <- function(
   res
 }
 
-layout_merge_dla_impl <- function(
-  graphs,
-  coords
-) {
-  # Argument checks
-
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_merge_dla,
-    graphs,
-    coords
-  )
-
-  res
-}
-
 layout_sugiyama_impl <- function(
   graph,
   layers = NULL,
@@ -9258,44 +9134,6 @@ reindex_membership_impl <- function(
   res
 }
 
-community_leading_eigenvector_impl <- function(
-  graph,
-  weights = NULL,
-  steps = -1,
-  options = arpack_defaults(),
-  start = FALSE,
-  callback = NULL
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  steps <- as.numeric(steps)
-  options <- modify_list(arpack_defaults(), options)
-  start <- as.logical(start)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_community_leading_eigenvector,
-    graph,
-    weights,
-    steps,
-    options,
-    start,
-    callback
-  )
-
-  class(res) <- "igraph.eigenc"
-  res
-}
-
 community_fluid_communities_impl <- function(
   graph,
   no_of_communities
@@ -9523,48 +9361,6 @@ community_infomap_impl <- function(
     nb_trials
   )
 
-  res
-}
-
-community_voronoi_impl <- function(
-  graph,
-  lengths = NULL,
-  weights = NULL,
-  mode = c("out", "in", "all", "total"),
-  radius = -1
-) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && !all(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  mode <- switch_igraph_arg(
-    mode,
-    "out" = 1L,
-    "in" = 2L,
-    "all" = 3L,
-    "total" = 3L
-  )
-  radius <- as.numeric(radius)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_community_voronoi,
-    graph,
-    lengths,
-    weights,
-    mode,
-    radius
-  )
-  if (igraph_opt("return.vs.es")) {
-    res$generators <- create_vs(graph, res$generators)
-  }
   res
 }
 
@@ -10969,22 +10765,6 @@ disjoint_union_impl <- function(
   res
 }
 
-disjoint_union_many_impl <- function(
-  graphs
-) {
-  # Argument checks
-
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_disjoint_union_many,
-    graphs
-  )
-
-  res
-}
-
 join_impl <- function(
   left,
   right
@@ -11023,22 +10803,6 @@ union_impl <- function(
   res
 }
 
-union_many_impl <- function(
-  graphs
-) {
-  # Argument checks
-
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_union_many,
-    graphs
-  )
-
-  res
-}
-
 intersection_impl <- function(
   left,
   right
@@ -11053,22 +10817,6 @@ intersection_impl <- function(
     R_igraph_intersection,
     left,
     right
-  )
-
-  res
-}
-
-intersection_many_impl <- function(
-  graphs
-) {
-  # Argument checks
-
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_intersection_many,
-    graphs
   )
 
   res
@@ -12799,22 +12547,6 @@ automorphism_group_impl <- function(
   if (!details) {
     res <- res$generators
   }
-  res
-}
-
-subisomorphic_lad_impl <- function(
-  graph
-) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_subisomorphic_lad,
-    graph
-  )
-
   res
 }
 
