@@ -31,9 +31,9 @@ vertices with the different labels) in this case.}
 types. The matrix has \sQuote{types} rows and columns. When generating
 an undirected graph, it must be symmetric.}
 
-\item{directed}{Logical constant, whether to create a directed graph.}
+\item{directed}{Logical scalar, whether to create a directed graph.}
 
-\item{loops}{Logical constant, whether self-loops are allowed in the graph.}
+\item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
