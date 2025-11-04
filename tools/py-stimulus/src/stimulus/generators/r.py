@@ -28,8 +28,7 @@ init_functions = {
 
 def get_r_parameter_name(param: ParamSpec) -> str:
     result = param.name_in_higher_level_interface
-    if result == param.name:
-        result = result.replace("_", ".")
+    # Keep snake_case for _impl functions
     return result
 
 
@@ -51,30 +50,16 @@ def optional_wrapper_r(conv: str) -> str:
     if "is.null" in conv:
         return conv
 
-    # Check if conv is a multi-line block
-    if "\n" in conv:
-        # Wrap multi-line block with if statement and proper indentation
-        lines = conv.split("\n")
-        wrapped_lines = [f"if (!is.null(%I%)) {{"]
-        for line in lines:
-            if line.strip():  # Only indent non-empty lines
-                wrapped_lines.append(f"  {line}")
-            else:
-                wrapped_lines.append(line)
-        wrapped_lines.append("}")
-        return "\n".join(wrapped_lines)
-    else:
-        # Single-line: wrap as before
-        return f"if (!is.null(%I%)) {conv}"
+    return f"if (!is.null(%I%)) {{\n{indent(conv)}\n}}"
 
 
 def format_switch_statement(code: str) -> str:
     """Format switch statements with proper spacing and line breaks."""
-    # Match switch(...) patterns
-    switch_pattern = r'(switch\([^,]+)(,\s*)([^)]+)(\))'
+    # Match switch(...) or switch_igraph_arg(...) patterns
+    switch_pattern = r'(switch(?:_igraph_arg)?\([^,]+)(,\s*)([^)]+)(\))'
 
     def format_switch_args(match):
-        prefix = match.group(1)  # "switch(igraph.match.arg(mode)"
+        prefix = match.group(1)  # "switch(igraph_match_arg(mode)"
         comma = match.group(2)   # ","
         args = match.group(3)    # the key-value pairs
         suffix = match.group(4)  # ")"
@@ -113,13 +98,15 @@ def format_switch_statement(code: str) -> str:
                 formatted_parts.append(part)
 
             # Create multiline format: put the first argument on its own
-            # line after the opening 'switch(' and indent the remaining
+            # line after the opening 'switch(' or 'switch_igraph_arg(' and indent the remaining
             # key/value parts further.
             indent_str = '    '
-            # prefix currently holds 'switch(some_expr' — we want
-            # to emit 'switch(\n    some_expr,\n' (use indent_str)
-            first_arg = prefix[prefix.find('(') + 1 :].strip()
-            result = 'switch(\n' + indent_str + first_arg + ',\n'
+            # prefix currently holds 'switch(some_expr' or 'switch_igraph_arg(some_expr' — we want
+            # to emit 'switch(\n    some_expr,\n' or 'switch_igraph_arg(\n    some_expr,\n' (use indent_str)
+            paren_pos = prefix.find('(')
+            func_name = prefix[:paren_pos]
+            first_arg = prefix[paren_pos + 1:].strip()
+            result = func_name + '(\n' + indent_str + first_arg + ',\n'
             for i, part in enumerate(formatted_parts):
                 result += indent_str + part
                 if i < len(formatted_parts) - 1:
@@ -301,7 +288,10 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
         out.write("  on.exit(.Call(R_igraph_finalizer))\n")
         out.write("  # Function call\n")
         out.write("  res <- .Call(\n")
-        out.write("    R_" + function)
+        if "RC" in spec.ignored_by:
+            out.write("    Rx_" + function)
+        else:
+            out.write("    R_" + function)
 
         parts = []
         for param in spec.iter_input_parameters():
@@ -432,7 +422,7 @@ class RRCodeGenerator(SingleBlockCodeGenerator):
                 if isinstance(pars, str):
                     pars = pars.split(",")
                 for par in pars:
-                    par = par.strip().replace("_", ".")
+                    par = par.strip()  # Keep snake_case for _impl functions
                     lines.append(f"res${par} <- {par}")
 
             if lines:
@@ -471,6 +461,7 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
         res["inconv"] = self.chunk_inconv(desc)
         res["call"] = self.chunk_call(desc)
         res["outconv"] = self.chunk_outconv(desc)
+        res["ret"] = self.chunk_ret(desc)
 
         # Replace into the template
         text = (
@@ -488,8 +479,7 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
                                         /* Convert output */
 %(outconv)s
 
-  UNPROTECT(1);
-  return(r_result);
+%(ret)s
 }\n"""
             % res
         )
@@ -515,6 +505,8 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
 
         inout = [do_par(spec) for spec in desc.iter_input_parameters()]
         inout = ["SEXP " + n for n in inout if n != ""]
+
+        # cpp11 requires an SEXP return value
         return "SEXP R_" + desc.name + "(" + (", ".join(inout) or "void") + ")"
 
     def chunk_declaration(self, desc: FunctionDescriptor) -> str:
@@ -545,9 +537,14 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
         retpars = [spec.name for spec in desc.iter_output_parameters()]
 
         return_type_desc = self.get_type_descriptor(desc.return_type)
-        retdecl = return_type_desc.declare_c_variable("c_result") if not retpars else ""
+        if retpars or return_type_desc.name in ("VOID", "ERROR"):
+            retdecl = ""
+        else:
+            retdecl = return_type_desc.declare_c_variable("c_result")
 
-        if len(retpars) <= 1:
+        if len(retpars) == 0 and desc.return_type == "ERROR":
+            res = "\n".join(inout + out + [retdecl])
+        elif len(retpars) <= 1:
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result;"])
         else:
             res = "\n".join(inout + out + [retdecl] + ["SEXP r_result, r_names;"])
@@ -614,10 +611,7 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
                     and not param.is_output
                     and call != "0"
                 ):
-                    # For VERTEX types, use -1 when NULL (indicates no vertex/all components)
-                    # For other types, use 0
-                    null_value = "-1" if param.type == "VERTEX" else "0"
-                    call = f"(Rf_isNull(%I%) ? {null_value} : {call})"
+                    call = f"(Rf_isNull(%I%) ? 0 : {call})"
                 call = call.replace("%C%", f"c_{param.name}").replace("%I%", param.name)
                 calls.append(call)
 
@@ -637,7 +631,7 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
 
         return res
 
-    def chunk_outconv(self, spec: FunctionDescriptor) -> str:
+    def chunk_outconv(self, desc: FunctionDescriptor) -> str:
         """The output conversions, this is quite difficult. A function
         may report its results in two ways: by returning it directly
         or by setting a variable to which a pointer was passed. igraph
@@ -672,20 +666,20 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
 
             return outconv.replace("%C%", cname).replace("%I%", param.name)
 
-        outconv = [do_par(param) for param in spec.iter_parameters()]
+        outconv = [do_par(param) for param in desc.iter_parameters()]
         outconv = [o for o in outconv if o != ""]
 
         # Consider only those parameters that have a corresponding declaration
         # in C.
         retpars = []
-        for param in spec.iter_output_parameters():
+        for param in desc.iter_output_parameters():
             type_desc = self.get_type_descriptor(param.type)
             if type_desc.get_c_type(param.mode) is not None:
                 retpars.append(param)
 
         if not retpars:
             # return the return value of the function
-            rt = self.get_type_descriptor(spec.return_type)
+            rt = self.get_type_descriptor(desc.return_type)
             retconv = indent(rt.get_output_conversion_template_for(ParamMode.OUT))
             retconv = retconv.replace("%C%", "c_result").replace("%I%", "r_result")
             ret = "\n".join(outconv) + "\n" + retconv
@@ -715,6 +709,16 @@ class RCCodeGenerator(SingleBlockCodeGenerator):
             )
 
         return ret
+
+    def chunk_ret(self, desc: FunctionDescriptor) -> str:
+        """Create the return statement. Only unprotect and return if one or more output arguments.
+        """
+
+        if len(list(desc.iter_output_parameters())) == 0 and desc.return_type == "ERROR":
+            # cpp11 requires an SEXP return value
+            return "  return(R_NilValue);"
+
+        return "  UNPROTECT(1);\n  return(r_result);"
 
 
 class RInitCodeGenerator(BlockBasedCodeGenerator):

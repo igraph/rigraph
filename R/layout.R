@@ -749,7 +749,7 @@ layout_as_tree <- function(
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
   mode <- switch(
-    igraph.match.arg(mode),
+    igraph_match_arg(mode),
     "out" = 1,
     "in" = 2,
     "all" = 3,
@@ -757,9 +757,9 @@ layout_as_tree <- function(
   )
   flip.y <- as.logical(flip.y)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_layout_reingold_tilford,
+    Rx_igraph_layout_reingold_tilford,
     graph,
     root,
     mode,
@@ -1129,7 +1129,7 @@ layout.sphere <- function(..., params = list()) {
 layout_randomly <- function(graph, dim = c(2, 3)) {
   ensure_igraph(graph)
 
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   if (dim == 2) {
     layout_random_impl(
@@ -1287,42 +1287,26 @@ layout_with_dh <- function(
   weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
   weight.node.edge.dist = 0.2 * (1 - edge_density(graph))
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords[] <- as.numeric(coords)
-    use.seed <- TRUE
-  } else {
+  if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
+  } else {
+    use.seed <- TRUE
   }
-  maxiter <- as.numeric(maxiter)
-  fineiter <- as.numeric(fineiter)
-  cool.fact <- as.numeric(cool.fact)
-  weight.node.dist <- as.numeric(weight.node.dist)
-  weight.border <- as.numeric(weight.border)
-  weight.edge.lengths <- as.numeric(weight.edge.lengths)
-  weight.edge.crossings <- as.numeric(weight.edge.crossings)
-  weight.node.edge.dist <- as.numeric(weight.node.edge.dist)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_davidson_harel,
-    graph,
-    coords,
-    use.seed,
-    maxiter,
-    fineiter,
-    cool.fact,
-    weight.node.dist,
-    weight.border,
-    weight.edge.lengths,
-    weight.edge.crossings,
-    weight.node.edge.dist
+  layout_davidson_harel_impl(
+    graph = graph,
+    res = coords,
+    use_seed = use.seed,
+    maxiter = maxiter,
+    fineiter = fineiter,
+    cool_fact = cool.fact,
+    weight_node_dist = weight.node.dist,
+    weight_border = weight.border,
+    weight_edge_lengths = weight.edge.lengths,
+    weight_edge_crossings = weight.edge.crossings,
+    weight_node_edge_dist = weight.node.edge.dist
   )
-
-  res
 }
 
 
@@ -1434,7 +1418,7 @@ layout_with_fr <- function(
   # Argument checks
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
   if (!missing(niter) && !missing(maxiter)) {
     cli::cli_abort(c(
       "{.arg niter} and {.arg maxiter} must not be specified at the same time.",
@@ -1447,7 +1431,7 @@ layout_with_fr <- function(
   niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
-  grid <- igraph.match.arg(grid)
+  grid <- igraph_match_arg(grid)
   grid <- switch(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1489,10 +1473,10 @@ layout_with_fr <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_fr(repulserad = )")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold,
+      Rx_igraph_layout_fruchterman_reingold,
       graph,
       coords,
       niter,
@@ -1506,7 +1490,7 @@ layout_with_fr <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_fruchterman_reingold_3d,
+      Rx_igraph_layout_fruchterman_reingold_3d,
       graph,
       coords,
       niter,
@@ -1596,35 +1580,22 @@ layout_with_gem <- function(
   temp.min = 1 / 10,
   temp.init = sqrt(max(vcount(graph), 1))
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords[] <- as.numeric(coords)
-    use.seed <- TRUE
-  } else {
+  if (is.null(coords)) {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
+  } else {
+    use.seed <- TRUE
   }
 
-  maxiter <- as.numeric(maxiter)
-  temp.max <- as.numeric(temp.max)
-  temp.min <- as.numeric(temp.min)
-  temp.init <- as.numeric(temp.init)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_gem,
-    graph,
-    coords,
-    use.seed,
-    maxiter,
-    temp.max,
-    temp.min,
-    temp.init
+  layout_gem_impl(
+    graph = graph,
+    res = coords,
+    use_seed = use.seed,
+    maxiter = maxiter,
+    temp_max = temp.max,
+    temp_min = temp.min,
+    temp_init = temp.init
   )
-
-  res
 }
 
 
@@ -1695,9 +1666,9 @@ layout_with_graphopt <- function(
   spring.constant <- as.double(spring.constant)
   max.sa.movement <- as.double(max.sa.movement)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_graphopt,
+    Rx_igraph_layout_graphopt,
     graph,
     niter,
     charge,
@@ -1811,7 +1782,7 @@ layout_with_kk <- function(
 
   ensure_igraph(graph)
   coords[] <- as.numeric(coords)
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
@@ -1856,11 +1827,11 @@ layout_with_kk <- function(
     lifecycle::deprecate_stop("0.8.0", "layout_with_kk(coolexp = )")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_kamada_kawai,
+      Rx_igraph_layout_kamada_kawai,
       graph,
       coords,
       maxiter,
@@ -1874,7 +1845,7 @@ layout_with_kk <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_kamada_kawai_3d,
+      Rx_igraph_layout_kamada_kawai_3d,
       graph,
       coords,
       maxiter,
@@ -1966,9 +1937,9 @@ layout_with_lgl <- function(
     root <- as_igraph_vs(graph, root) - 1
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_lgl,
+    Rx_igraph_layout_lgl,
     graph,
     as.double(maxiter),
     as.double(maxdelta),
@@ -2304,34 +2275,15 @@ layout_with_sugiyama <- function(
   weights = NULL,
   attributes = c("default", "all", "none")
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (!is.null(layers)) {
-    layers <- as.numeric(layers) - 1
-  }
-  hgap <- as.numeric(hgap)
-  vgap <- as.numeric(vgap)
-  maxiter <- as.numeric(maxiter)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  attributes <- igraph.match.arg(attributes)
+  attributes <- igraph_match_arg(attributes)
 
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_layout_sugiyama,
-    graph,
-    layers,
-    hgap,
-    vgap,
-    maxiter,
-    weights
+  res <- layout_sugiyama_impl(
+    graph = graph,
+    layers = layers,
+    hgap = hgap,
+    vgap = vgap,
+    maxiter = maxiter,
+    weights = weights
   )
 
   # Flip the y coordinates, more natural this way
@@ -2497,9 +2449,9 @@ merge_coords <- function(graphs, layouts, method = "dla") {
     cli::cli_abort("{.arg method} must be {.str dla}, not {.str {method}}.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_layout_merge_dla,
+    Rx_igraph_layout_merge_dla,
     graphs,
     layouts
   )
@@ -2823,7 +2775,7 @@ layout_with_drl <- function(
 ) {
   ensure_igraph(graph)
 
-  dim <- igraph.match.arg(dim)
+  dim <- igraph_match_arg(dim)
 
   use.seed <- as.logical(use.seed)
   seed <- as.matrix(seed)
@@ -2839,10 +2791,10 @@ layout_with_drl <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      R_igraph_layout_drl,
+      Rx_igraph_layout_drl,
       graph,
       seed,
       use.seed,
@@ -2851,7 +2803,7 @@ layout_with_drl <- function(
     )
   } else {
     res <- .Call(
-      R_igraph_layout_drl_3d,
+      Rx_igraph_layout_drl_3d,
       graph,
       seed,
       use.seed,

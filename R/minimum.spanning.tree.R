@@ -91,16 +91,19 @@ mst <- function(graph, weights = NULL, algorithm = NULL, ...) {
   }
 
   if (algorithm == "unweighted") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_unweighted, graph)
+    minimum_spanning_tree_unweighted_impl(
+      graph = graph
+    )
   } else if (algorithm == "prim") {
     if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
       cli::cli_abort("edges weights must be supplied for Prim's algorithm.")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
+    minimum_spanning_tree_prim_impl(
+      graph = graph,
+      weights = weights
+    )
   } else {
     cli::cli_abort("Invalid {.arg algorithm}.")
   }

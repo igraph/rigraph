@@ -136,60 +136,13 @@ graph.get.isomorphisms.vf2 <- function(
   edge.color1,
   edge.color2
 ) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_isomorphisms_vf2,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+  res <- get_isomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph2)[.x + 1])
@@ -204,60 +157,13 @@ graph.get.subisomorphisms.vf2 <- function(
   edge.color1,
   edge.color2
 ) {
-  # Argument checks
-  ensure_igraph(graph1)
-  ensure_igraph(graph2)
-  if (missing(vertex.color1)) {
-    if ("color" %in% vertex_attr_names(graph1)) {
-      vertex.color1 <- V(graph1)$color
-    } else {
-      vertex.color1 <- NULL
-    }
-  }
-  if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1) - 1
-  }
-  if (missing(vertex.color2)) {
-    if ("color" %in% vertex_attr_names(graph2)) {
-      vertex.color2 <- V(graph2)$color
-    } else {
-      vertex.color2 <- NULL
-    }
-  }
-  if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2) - 1
-  }
-  if (missing(edge.color1)) {
-    if ("color" %in% edge_attr_names(graph1)) {
-      edge.color1 <- E(graph1)$color
-    } else {
-      edge.color1 <- NULL
-    }
-  }
-  if (!is.null(edge.color1)) {
-    edge.color1 <- as.numeric(edge.color1) - 1
-  }
-  if (missing(edge.color2)) {
-    if ("color" %in% edge_attr_names(graph2)) {
-      edge.color2 <- E(graph2)$color
-    } else {
-      edge.color2 <- NULL
-    }
-  }
-  if (!is.null(edge.color2)) {
-    edge.color2 <- as.numeric(edge.color2) - 1
-  }
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_get_subisomorphisms_vf2,
-    graph1,
-    graph2,
-    vertex.color1,
-    vertex.color2,
-    edge.color1,
-    edge.color2
+  res <- get_subisomorphisms_vf2_impl(
+    graph1 = graph1,
+    graph2 = graph2,
+    vertex_color1 = vertex.color1,
+    vertex_color2 = vertex.color2,
+    edge_color1 = edge.color1,
+    edge_color2 = edge.color2
   )
 
   lapply(res, function(.x) V(graph1)[.x + 1])
@@ -269,9 +175,11 @@ graph.isoclass.subgraph <- function(graph, vids) {
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids) - 1
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_isoclass_subgraph, graph, vids)
+  res <- isoclass_subgraph_impl(
+    graph = graph,
+    vids = vids
+  )
   res
 }
 
@@ -310,10 +218,10 @@ graph.subisomorphic.lad <- function(
     domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_subisomorphic_lad,
+    Rx_igraph_subisomorphic_lad,
     pattern,
     target,
     domains,
@@ -455,14 +363,18 @@ isomorphic <- function(
 ) {
   ensure_igraph(graph1)
   ensure_igraph(graph2)
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "auto") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(
+      graph1 = graph1,
+      graph2 = graph2
+    )
   } else if (method == "direct") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
+    isomorphic_impl(
+      graph1 = graph1,
+      graph2 = graph2
+    )
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
@@ -500,18 +412,18 @@ graph.isomorphic.vf2 <- function(
   isomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 #' @export
@@ -527,18 +439,18 @@ graph.subisomorphic.vf2 <- function(
   subisomorphic_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -646,7 +558,7 @@ subgraph_isomorphic <- function(
   method = c("auto", "lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "auto") {
     method <- "lad"
@@ -705,7 +617,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #'   vertex.color2 = NULL
 #' )
 count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.count.isomorphisms.vf2(graph1, graph2, ...)
@@ -725,18 +637,18 @@ graph.count.isomorphisms.vf2 <- function(
   count_isomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -810,7 +722,7 @@ count_subgraph_isomorphisms <- function(
   method = c("lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     length(graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps)
@@ -832,18 +744,18 @@ graph.count.subisomorphisms.vf2 <- function(
   count_subisomorphisms_vf2_impl(
     graph1 = graph1,
     graph2 = graph2,
-    vertex.color1 = if (missing(vertex.color1)) {
+    vertex_color1 = if (missing(vertex.color1)) {
       missing_arg()
     } else {
       vertex.color1
     },
-    vertex.color2 = if (missing(vertex.color2)) {
+    vertex_color2 = if (missing(vertex.color2)) {
       missing_arg()
     } else {
       vertex.color2
     },
-    edge.color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
-    edge.color2 = if (missing(edge.color2)) missing_arg() else edge.color2
+    edge_color1 = if (missing(edge.color1)) missing_arg() else edge.color1,
+    edge_color2 = if (missing(edge.color2)) missing_arg() else edge.color2
   )
 }
 
@@ -862,7 +774,7 @@ graph.count.subisomorphisms.vf2 <- function(
 #' @export
 #' @family graph isomorphism
 isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "vf2") {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
@@ -933,7 +845,7 @@ subgraph_isomorphisms <- function(
   method = c("lad", "vf2"),
   ...
 ) {
-  method <- igraph.match.arg(method)
+  method <- igraph_match_arg(method)
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps
@@ -1365,5 +1277,51 @@ automorphism_group <- function(
     colors = if (missing(colors)) missing_arg() else colors,
     sh = sh,
     details = details
+  )
+}
+
+#' Transitive closure of a graph
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' Computes the transitive closure of a graph.
+#' The resulting graph will have an edge from vertex \eqn{i} to vertex \eqn{j}
+#' if \eqn{j} is reachable from \eqn{i} in the original graph.
+#'
+#' The transitive closure of a graph is a new graph where there is an edge
+#' between any two vertices if there is a path between them in the original
+#' graph.
+#' For directed graphs, an edge from \eqn{i} to \eqn{j} is added if there is
+#' a directed path from \eqn{i} to \eqn{j}.
+#' For undirected graphs, this is equivalent to connecting all vertices that
+#' are in the same connected component.
+#'
+#' @param graph The input graph.
+#'   It can be directed or undirected.
+#' @return A new graph object representing the transitive closure.
+#'   The returned graph will have the same directedness as the input.
+#' @author Fabio Zanini \email{fabio.zanini@@unsw.edu.au}
+#' @seealso [distances()], [are_adjacent()]
+#' @keywords graphs
+#' @examples
+#'
+#' # Directed graph
+#' g <- make_graph(c(1, 2, 2, 3, 3, 4))
+#' tc <- transitive_closure(g)
+#' # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
+#' print_all(tc)
+#'
+#' # Undirected graph - connects all vertices in same component
+#' g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
+#' tc2 <- transitive_closure(g2)
+#' # Full graph on vertices 1, 2 and full graph on vertices 3, 4
+#' print_all(tc2)
+#' @family functions for manipulating graph structure
+#' @export
+#' @cdocs igraph_transitive_closure
+transitive_closure <- function(graph) {
+  transitive_closure_impl(
+    graph = graph
   )
 }

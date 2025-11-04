@@ -290,7 +290,7 @@ graph_from_adjacency_matrix <- function(
   add.rownames = NA
 ) {
   ensure_no_na(adjmatrix, "adjacency matrix")
-  mode <- igraph.match.arg(mode)
+  mode <- igraph_match_arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
     lifecycle::deprecate_soft(
@@ -415,7 +415,7 @@ graph.adjacency.dense <- function(
   if (is.logical(diag)) {
     diag <- ifelse(diag, "once", "ignore")
   }
-  diag <- igraph.match.arg(diag)
+  diag <- igraph_match_arg(diag)
   diag <- switch(diag, "ignore" = 0L, "twice" = 1L, "once" = 2L)
 
   if (nrow(adjmatrix) != ncol(adjmatrix)) {
@@ -430,11 +430,11 @@ graph.adjacency.dense <- function(
     weighted <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(weighted)) {
-    res <- .Call(R_igraph_adjacency, adjmatrix, mode, diag)
+    res <- .Call(Rx_igraph_adjacency, adjmatrix, mode, diag)
   } else {
-    res <- .Call(R_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- .Call(Rx_igraph_weighted_adjacency, adjmatrix, mode, diag)
     res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 

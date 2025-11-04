@@ -114,6 +114,6 @@ sir <- function(graph, beta, gamma, no.sim = 100) {
     graph = graph,
     beta = beta,
     gamma = gamma,
-    no.sim = no.sim
+    no_sim = no.sim
   )
 }

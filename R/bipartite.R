@@ -179,7 +179,7 @@ bipartite_projection <- function(
     probe1 <- -1
   }
   which <- switch(
-    igraph.match.arg(which),
+    igraph_match_arg(which),
     "both" = 0L,
     "false" = 1L,
     "true" = 2L
@@ -188,10 +188,10 @@ bipartite_projection <- function(
     cli::cli_warn("{.arg probe1} ignored if only one projection is requested.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_bipartite_projection,
+    Rx_igraph_bipartite_projection,
     graph,
     types,
     as.numeric(probe1),
