@@ -449,11 +449,15 @@ igraph_is_bigraphical:
 #######################################
 
 igraph_bfs:
+    # Has callback parameter (BFS_FUNC)
+    IGNORE: RR, RC, RInit
 
 igraph_bfs_simple:
     DEPS: root ON graph, order ON graph
 
 igraph_dfs:
+    # Has callback parameter (DFS_FUNC)
+    IGNORE: RR, RC, RInit
 
 #######################################
 # Bipartite graphs
@@ -849,9 +853,12 @@ igraph_cmp_epsilon:
 
 # TODO: temporarily disabled
 igraph_eigen_matrix:
+    # TODO: temporarily disabled - missing SPARSEMAT converter
+    IGNORE: RR, RC
 
-# TODO: temporarily disabled
 igraph_eigen_matrix_symmetric:
+    # TODO: temporarily disabled - missing SPARSEMAT converter
+    IGNORE: RR, RC
 
 #######################################
 # Finding cycles
