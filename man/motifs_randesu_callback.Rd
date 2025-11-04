@@ -4,13 +4,7 @@
 \alias{motifs_randesu_callback}
 \title{Find motifs with a callback function}
 \usage{
-motifs_randesu_callback(
-  graph,
-  size = 3,
-  cut.prob = NULL,
-  callback = NULL,
-  extra = NULL
-)
+motifs_randesu_callback(graph, size = 3, cut_prob = NULL, callback)
 }
 \arguments{
 \item{graph}{Graph object, the input graph.}
@@ -18,18 +12,15 @@ motifs_randesu_callback(
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
 directed graphs and sizes 3-6 in undirected graphs.}
 
-\item{cut.prob}{Numeric vector giving the probabilities that the search
+\item{cut_prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}
 
 \item{callback}{A function to call for each motif found. The function should
-accept four arguments: \code{graph} (the graph object), \code{vids} (integer vector
-of vertex IDs in the motif), \code{isoclass} (the isomorphism class of the motif),
-and \code{extra} (the value of the \code{extra} parameter). The function should return
-\code{TRUE} to continue the search or \code{FALSE} to stop it.}
-
-\item{extra}{An extra argument to pass to the callback function.}
+accept two arguments: \code{vids} (integer vector of vertex IDs in the motif,
+1-based indexing) and \code{isoclass} (the isomorphism class of the motif, 1-based).
+The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.}
 }
 \value{
 \code{NULL}, invisibly. This function is called for its side effects (calling
@@ -42,7 +33,7 @@ callback function for each motif found.
 \examples{
 g <- sample_pa(100)
 count <- 0
-motifs_randesu_callback(g, 3, callback = function(graph, vids, isoclass, extra) {
+motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
   count <<- count + 1
   TRUE  # continue search
 })
