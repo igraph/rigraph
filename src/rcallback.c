@@ -20,13 +20,11 @@
 
 */
 
-#include "igraph_motifs.h"
-#include "igraph_error.h"
-
 #include "rinterface.h"
 
 #include <R.h>
 #include <Rinternals.h>
+#include <igraph.h>
 
 /* Structure to hold callback data */
 typedef struct {
