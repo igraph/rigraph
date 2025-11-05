@@ -490,11 +490,18 @@ weighted_adjacency_impl <- function(
 
 star_impl <- function(
   n,
-  mode = OUT,
+  mode = c("out", "in", "undirected", "mutual"),
   center = 0
 ) {
   # Argument checks
   n <- as.numeric(n)
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 0L,
+    "in" = 1L,
+    "undirected" = 2L,
+    "mutual" = 3L
+  )
   center <- as.numeric(center)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1238,7 +1245,7 @@ barabasi_game_impl <- function(
   outpref = FALSE,
   A = 1.0,
   directed = TRUE,
-  algo = BAG,
+  algo = c("bag", "psumtree", "psumtree_multiple"),
   start_from = NULL
 ) {
   # Argument checks
@@ -1251,6 +1258,7 @@ barabasi_game_impl <- function(
   outpref <- as.logical(outpref)
   A <- as.numeric(A)
   directed <- as.logical(directed)
+  algo <- switch_igraph_arg(algo, "bag" = 0L, "psumtree" = 1L, "psumtree_multiple" = 2L)
   if (!is.null(start_from)) {
     ensure_igraph(start_from)
   }
@@ -1326,13 +1334,21 @@ erdos_renyi_game_gnm_impl <- function(
 degree_sequence_game_impl <- function(
   out_deg,
   in_deg = NULL,
-  method = CONFIGURATION
+  method = c("configuration", "fast_heur_simple", "configuration_simple", "edge_switching_simple", "vl")
 ) {
   # Argument checks
   out_deg <- as.numeric(out_deg)
   if (!is.null(in_deg)) {
     in_deg <- as.numeric(in_deg)
   }
+  method <- switch_igraph_arg(
+    method,
+    "configuration" = 0L,
+    "vl" = 1L,
+    "fast_heur_simple" = 2L,
+    "configuration_simple" = 3L,
+    "edge_switching_simple" = 4L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -6724,6 +6740,7 @@ bipartite_game_impl <- function(
   mode = c("all", "out", "in", "total")
 ) {
   # Argument checks
+  type <- switch_igraph_arg(type, "gnp" = 0L, "gnm" = 1L)
   n1 <- as.numeric(n1)
   n2 <- as.numeric(n2)
   p <- as.numeric(p)

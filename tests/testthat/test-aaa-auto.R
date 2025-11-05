@@ -10629,8 +10629,9 @@ test_that("intersection_impl errors", {
 test_that("star_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  # star_impl needs STAR_MODE type constants - skipping for now
-  skip("star_impl requires STAR_MODE constants")
+  expect_snapshot(star_impl(n = 5, mode = "out", center = 0))
+  expect_snapshot(star_impl(n = 6, mode = "in", center = 1))
+  expect_snapshot(star_impl(n = 4, mode = "undirected", center = 0))
 })
 
 test_that("ring_impl basic", {
@@ -10659,8 +10660,8 @@ test_that("kary_tree_impl basic", {
 test_that("barabasi_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  # barabasi_game_impl needs BARABASI_ALGORITHM constants - skipping for now  
-  skip("barabasi_game_impl requires BARABASI_ALGORITHM constants")
+  expect_snapshot(barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag"))
+  expect_snapshot(barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree"))
 })
 
 test_that("growing_random_game_impl basic", {
@@ -10814,8 +10815,8 @@ test_that("create_bipartite_impl basic", {
 test_that("bipartite_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  # bipartite_game_impl needs ERDOS_RENYI_TYPE constants - skipping for now
-  skip("bipartite_game_impl requires ERDOS_RENYI_TYPE constants")
+  expect_snapshot(bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE))
+  expect_snapshot(bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE))
 })
 
 # Other structural functions
@@ -10846,9 +10847,10 @@ test_that("neighborhood_size_impl basic", {
 test_that("is_chordal_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  g <- make_ring(4)
-  # is_chordal requires additional parameters, skip for now
-  skip("is_chordal_impl requires alpha and alpham1 parameters")
+  # is_chordal_impl has a bug where optional INDEX_VECTOR parameters 
+  # cannot be NULL - they are always passed to C even when NULL
+  # This needs to be fixed in the generator or function spec
+  skip("is_chordal_impl has bug with optional INDEX_VECTOR parameters")
 })
 
 test_that("get_adjacency_impl basic", {
@@ -10895,8 +10897,8 @@ test_that("compare_communities_impl basic", {
 test_that("degree_sequence_game_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  # degree_sequence_game_impl needs DEGSEQ_MODE constants - skipping for now
-  skip("degree_sequence_game_impl requires DEGSEQ_MODE constants")
+  expect_snapshot(degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration"))
+  expect_snapshot(degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl"))
 })
 
 test_that("connect_neighborhood_impl basic", {

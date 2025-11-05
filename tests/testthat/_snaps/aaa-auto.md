@@ -10496,6 +10496,33 @@
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
 
+# star_impl basic
+
+    Code
+      star_impl(n = 5, mode = "out", center = 0)
+    Output
+      IGRAPH D--- 5 4 -- 
+      + edges:
+      [1] 1->2 1->3 1->4 1->5
+
+---
+
+    Code
+      star_impl(n = 6, mode = "in", center = 1)
+    Output
+      IGRAPH D--- 6 5 -- 
+      + edges:
+      [1] 1->2 3->2 4->2 5->2 6->2
+
+---
+
+    Code
+      star_impl(n = 4, mode = "undirected", center = 0)
+    Output
+      IGRAPH U--- 4 3 -- 
+      + edges:
+      [1] 1--2 1--3 1--4
+
 # ring_impl basic
 
     Code
@@ -10549,6 +10576,26 @@
       IGRAPH D--- 10 9 -- 
       + edges:
       [1]  2->1  3->1  4->1  5->2  6->2  7->2  8->3  9->3 10->3
+
+# barabasi_game_impl basic
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag")
+    Output
+      IGRAPH U--- 10 18 -- 
+      + edges:
+       [1] 1-- 2 1-- 2 2-- 3 1-- 3 2-- 4 2-- 4 2-- 5 2-- 5 4-- 6 2-- 6 2-- 7 1-- 7
+      [13] 3-- 8 2-- 8 8-- 9 5-- 9 6--10 5--10
+
+---
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree")
+    Output
+      IGRAPH U--- 10 17 -- 
+      + edges:
+       [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 4-- 5 1-- 6 3-- 6 6-- 7 3-- 7 6-- 8
+      [13] 2-- 8 3-- 9 5-- 9 2--10 6--10
 
 # grg_game_impl basic
 
@@ -10918,6 +10965,34 @@
       + edges:
       [1] 1--3 1--4 2--3 2--4
 
+# bipartite_game_impl basic
+
+    Code
+      bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
+---
+
+    Code
+      bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
 # decompose_impl basic
 
     Code
@@ -10996,6 +11071,24 @@
       IGRAPH U--- 3 3 -- 
       + edges:
       [1] 1--2 2--3 1--3
+
+# degree_sequence_game_impl basic
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 2--4 3--3 1--4 1--2
+
+---
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 1--4 2--3 3--4
 
 # connect_neighborhood_impl basic
 
