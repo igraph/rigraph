@@ -81,37 +81,37 @@ g <- graph_from_literal(a -+ b -+ c -+ d -+ e)
 st_cuts(g, source = "a", target = "e")
 #> $cuts
 #> $cuts[[1]]
-#> + 1/4 edge from f34ab17 (vertex names):
+#> + 1/4 edge from 8fe0e6f (vertex names):
 #> [1] a->b
 #> 
 #> $cuts[[2]]
-#> + 1/4 edge from f34ab17 (vertex names):
+#> + 1/4 edge from 8fe0e6f (vertex names):
 #> [1] b->c
 #> 
 #> $cuts[[3]]
-#> + 1/4 edge from f34ab17 (vertex names):
+#> + 1/4 edge from 8fe0e6f (vertex names):
 #> [1] c->d
 #> 
 #> $cuts[[4]]
-#> + 1/4 edge from f34ab17 (vertex names):
+#> + 1/4 edge from 8fe0e6f (vertex names):
 #> [1] d->e
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/5 vertex, named, from f34ab17:
+#> + 1/5 vertex, named, from 8fe0e6f:
 #> [1] a
 #> 
 #> $partition1s[[2]]
-#> + 2/5 vertices, named, from f34ab17:
+#> + 2/5 vertices, named, from 8fe0e6f:
 #> [1] a b
 #> 
 #> $partition1s[[3]]
-#> + 3/5 vertices, named, from f34ab17:
+#> + 3/5 vertices, named, from 8fe0e6f:
 #> [1] a b c
 #> 
 #> $partition1s[[4]]
-#> + 4/5 vertices, named, from f34ab17:
+#> + 4/5 vertices, named, from 8fe0e6f:
 #> [1] a b c d
 #> 
 #> 
@@ -124,93 +124,93 @@ g2 <- graph_from_literal(
 st_cuts(g2, source = "s", target = "t")
 #> $cuts
 #> $cuts[[1]]
-#> + 2/10 edges from 2e96648 (vertex names):
+#> + 2/10 edges from 1defcbd (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/10 edges from 2e96648 (vertex names):
+#> + 2/10 edges from 1defcbd (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->1 a->2 a->3
 #> 
 #> $cuts[[4]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->1 a->2 3->b
 #> 
 #> $cuts[[5]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->1 a->3 2->b
 #> 
 #> $cuts[[6]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->1 2->b 3->b
 #> 
 #> $cuts[[7]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->2 a->3 1->b
 #> 
 #> $cuts[[8]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->2 1->b 3->b
 #> 
 #> $cuts[[9]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t a->3 1->b 2->b
 #> 
 #> $cuts[[10]]
-#> + 5/10 edges from 2e96648 (vertex names):
+#> + 5/10 edges from 1defcbd (vertex names):
 #> [1] s->b a->t 1->b 2->b 3->b
 #> 
 #> $cuts[[11]]
-#> + 2/10 edges from 2e96648 (vertex names):
+#> + 2/10 edges from 1defcbd (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/7 vertex, named, from 2e96648:
+#> + 1/7 vertex, named, from 1defcbd:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/7 vertices, named, from 2e96648:
+#> + 2/7 vertices, named, from 1defcbd:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 2/7 vertices, named, from 2e96648:
+#> + 2/7 vertices, named, from 1defcbd:
 #> [1] s a
 #> 
 #> $partition1s[[4]]
-#> + 3/7 vertices, named, from 2e96648:
+#> + 3/7 vertices, named, from 1defcbd:
 #> [1] s a 3
 #> 
 #> $partition1s[[5]]
-#> + 3/7 vertices, named, from 2e96648:
+#> + 3/7 vertices, named, from 1defcbd:
 #> [1] s a 2
 #> 
 #> $partition1s[[6]]
-#> + 4/7 vertices, named, from 2e96648:
+#> + 4/7 vertices, named, from 1defcbd:
 #> [1] s a 2 3
 #> 
 #> $partition1s[[7]]
-#> + 3/7 vertices, named, from 2e96648:
+#> + 3/7 vertices, named, from 1defcbd:
 #> [1] s a 1
 #> 
 #> $partition1s[[8]]
-#> + 4/7 vertices, named, from 2e96648:
+#> + 4/7 vertices, named, from 1defcbd:
 #> [1] s a 1 3
 #> 
 #> $partition1s[[9]]
-#> + 4/7 vertices, named, from 2e96648:
+#> + 4/7 vertices, named, from 1defcbd:
 #> [1] s a 1 2
 #> 
 #> $partition1s[[10]]
-#> + 5/7 vertices, named, from 2e96648:
+#> + 5/7 vertices, named, from 1defcbd:
 #> [1] s a 1 2 3
 #> 
 #> $partition1s[[11]]
-#> + 6/7 vertices, named, from 2e96648:
+#> + 6/7 vertices, named, from 1defcbd:
 #> [1] s a 1 2 3 b
 #> 
 #> 

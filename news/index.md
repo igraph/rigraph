@@ -1,5 +1,11 @@
 # Changelog
 
+## igraph 2.2.1.9007
+
+### Continuous integration
+
+- Sync ([\#2488](https://github.com/igraph/rigraph/issues/2488)).
+
 ## igraph 2.2.1.9006
 
 ### Bug fixes

@@ -94,9 +94,9 @@ aristas:
 g
 ```
 
-    ## IGRAPH a4bc36a UN-- 10 2 -- 
+    ## IGRAPH ac0bc1b UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from a4bc36a (vertex names):
+    ## + edges from ac0bc1b (vertex names):
     ## [1] 1--2 1--5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
@@ -115,7 +115,7 @@ aristas:
 summary(g)
 ```
 
-    ## IGRAPH a4bc36a UN-- 10 2 -- 
+    ## IGRAPH ac0bc1b UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -234,9 +234,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH 0ee7030 U--- 40 86 -- Zachary
+    ## IGRAPH 2e57699 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from 0ee7030:
+    ## + edges from 2e57699:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -362,7 +362,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH 55e1947 U--- 5 3 -- Ring graph
+    ## IGRAPH 1ebbd77 U--- 5 3 -- Ring graph
     ## + attr: name (g/c), mutual (g/l), circular (g/l)
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
@@ -389,7 +389,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH 194339a U--- 100 499 -- Geometric random graph
+    ## IGRAPH bd28f89 U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
@@ -462,7 +462,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH 220f86a UN-- 7 9 -- 
+    ## IGRAPH d761d10 UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
@@ -535,7 +535,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from 220f86a:
+    ## + 7/7 vertices, named, from d761d10:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -705,7 +705,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from 1801570:
+    ## + 3/10 vertices, from 75c93dc:
     ## [1] 2 3 7
 
 ``` r
@@ -713,7 +713,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from 1801570:
+    ## + 2/10 vertices, from 75c93dc:
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -797,7 +797,7 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from 220f86a (vertex names):
+    ## + 4/9 edges from d761d10 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Por supuesto, también funciona con nombres de vértices:
@@ -806,7 +806,7 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from 220f86a (vertex names):
+    ## + 4/9 edges from d761d10 (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Al usar
@@ -831,7 +831,7 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from 220f86a (vertex names):
+    ## + 3/9 edges from d761d10 (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -863,7 +863,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from 220f86a (vertex names):
+    ## + 5/9 edges from d761d10 (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
@@ -1161,7 +1161,7 @@ sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] igraph_2.2.1.9006
+    ## [1] igraph_2.2.1.9007
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] crayon_1.5.3       vctrs_0.6.5        cli_3.6.5          knitr_1.50        
@@ -1172,4 +1172,4 @@ sessionInfo()
     ## [21] fs_1.6.6           htmlwidgets_1.6.4  pkgconfig_2.0.3    lattice_0.22-7    
     ## [25] systemfonts_1.3.1  digest_0.6.37      R6_2.6.1           pillar_1.11.1     
     ## [29] magrittr_2.0.4     Matrix_1.7-4       bslib_0.9.0        tools_4.5.2       
-    ## [33] pkgdown_2.1.3.9000 cachem_1.1.0       desc_1.4.3
+    ## [33] pkgdown_2.2.0.9000 cachem_1.1.0       desc_1.4.3
