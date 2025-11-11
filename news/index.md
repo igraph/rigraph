@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.2.1.9008
+
+### Continuous integration
+
+- Use workflows for fledge
+  ([\#2490](https://github.com/igraph/rigraph/issues/2490)).
+
 ## igraph 2.2.1.9007
 
 ### Continuous integration
