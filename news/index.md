@@ -1,5 +1,12 @@
 # Changelog
 
+## igraph 2.2.1.9009
+
+### Continuous integration
+
+- Fix reviewdog and add commenting workflow
+  ([\#2493](https://github.com/igraph/rigraph/issues/2493)).
+
 ## igraph 2.2.1.9008
 
 ### Continuous integration
