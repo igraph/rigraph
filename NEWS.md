@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9009
+
+## Continuous integration
+
+- Fix reviewdog and add commenting workflow (#2493).
+
+
 # igraph 2.2.1.9008
 
 ## Continuous integration
