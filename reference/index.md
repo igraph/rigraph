@@ -948,6 +948,8 @@
 - [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md) :
   Dyad census of a graph
 - [`motifs()`](https://r.igraph.org/reference/motifs.md) : Graph motifs
+- [`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md)
+  : Find motifs with a callback function
 - [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md) :
   Graph motifs
 - [`triad_census()`](https://r.igraph.org/reference/triad_census.md) :

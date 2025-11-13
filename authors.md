@@ -70,13 +70,13 @@ Csárdi G, Nepusz T, Traag V, Horvát Sz, Zanini F, Noom D, Müller K,
 Schoch D, Salmon M (2025). \_igraph: Network Analysis and Visualization
 in R\_. doi:10.5281/zenodo.7682609
 \<https://doi.org/10.5281/zenodo.7682609\>, R package version
-2.2.1.9009, \<https://CRAN.R-project.org/package=igraph\>.
+2.2.1.9010, \<https://CRAN.R-project.org/package=igraph\>.
 
     @Manual{,
       title = {{igraph}: Network Analysis and Visualization in R},
       author = {Gábor Csárdi and Tamás Nepusz and Vincent Traag and Szabolcs Horvát and Fabio Zanini and Daniel Noom and Kirill Müller and David Schoch and Maëlle Salmon},
       year = {2025},
-      note = {R package version 2.2.1.9009},
+      note = {R package version 2.2.1.9010},
       doi = {10.5281/zenodo.7682609},
       url = {https://CRAN.R-project.org/package=igraph},
     }

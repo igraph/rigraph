@@ -47,6 +47,7 @@ the motifs is defined by their isomorphism class, see
 Other graph motifs:
 [`count_motifs()`](https://r.igraph.org/reference/count_motifs.md),
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
+[`motifs_randesu_callback()`](https://r.igraph.org/reference/motifs_randesu_callback.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
 ## Examples
