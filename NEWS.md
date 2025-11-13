@@ -1,5 +1,33 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9010
+
+## Continuous integration
+
+- Skip failing Windows tests.
+
+
+# igraph 2.2.1.9009
+
+## Continuous integration
+
+- Fix reviewdog and add commenting workflow (#2493).
+
+
+# igraph 2.2.1.9008
+
+## Continuous integration
+
+- Use workflows for fledge (#2490).
+
+
+# igraph 2.2.1.9007
+
+## Continuous integration
+
+- Sync (#2488).
+
+
 # igraph 2.2.1.9006
 
 ## Bug fixes
