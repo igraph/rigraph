@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9010
+
+## Continuous integration
+
+- Skip failing Windows tests.
+
+
 # igraph 2.2.1.9009
 
 ## Continuous integration
