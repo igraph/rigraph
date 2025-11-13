@@ -10355,3 +10355,37 @@ version_impl <- function(
   res
 }
 
+motifs_randesu_callback_closure_impl <- function(
+  graph,
+  size,
+  cut_prob = NULL,
+  callback
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  size <- as.numeric(size)
+  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
+  if (!is.function(callback)) {
+    cli::cli_abort("{.arg callback} must be a function")
+  }
+  callback_wrapped <- function(...) {
+    tryCatch(
+      callback(...),
+      error = function(e) e
+    )
+  }
+
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_motifs_randesu_callback_closure,
+    graph,
+    size,
+    cut_prob,
+    callback_wrapped
+  )
+
+  res
+}
+

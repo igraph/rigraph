@@ -160,3 +160,15 @@ SEXP R_igraph_finalizer(void);
 SEXP R_igraph_vcount(SEXP graph);
 SEXP R_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights);
 SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP weights);
+
+/* Declarations for callback functions */
+igraph_error_t R_igraph_motifs_handler(const igraph_t *graph,
+                                       igraph_vector_int_t *vids,
+                                       igraph_integer_t isoclass,
+                                       void *extra);
+
+igraph_error_t igraph_motifs_randesu_callback_closure(
+    const igraph_t *graph,
+    igraph_integer_t size,
+    const igraph_vector_t *cut_prob,
+    SEXP callback);

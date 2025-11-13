@@ -13927,3 +13927,30 @@ SEXP R_igraph_version(void) {
   UNPROTECT(1);
   return(r_result);
 }
+
+/*-------------------------------------------/
+/ igraph_motifs_randesu_callback_closure     /
+/-------------------------------------------*/
+SEXP R_igraph_motifs_randesu_callback_closure(SEXP graph, SEXP size, SEXP cut_prob, SEXP callback) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_size;
+  igraph_vector_t c_cut_prob;
+  SEXP c_callback;
+
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  if (!Rf_isNull(cut_prob)) {
+    Rz_SEXP_to_vector(cut_prob, &c_cut_prob);
+  }
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_motifs_randesu_callback_closure(&c_graph, c_size, (Rf_isNull(cut_prob) ? 0 : &c_cut_prob), callback));
+
+                                        /* Convert output */
+
+
+
+  return(R_NilValue);
+}
