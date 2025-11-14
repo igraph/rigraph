@@ -52,6 +52,6 @@ g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)
 n34 <- neighbors(g, 34)
 intersection(n1, n34)
-#> + 4/34 vertices, from 47b74d6:
+#> + 4/34 vertices, from 37da9d5:
 #> [1]  9 14 20 32
 ```

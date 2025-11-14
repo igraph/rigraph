@@ -1,5 +1,13 @@
 # Changelog
 
+## igraph 2.2.1.9011
+
+### Features
+
+- Autogenerate `igraph_motifs_randesu_callback()` using closure approach
+  ([\#2464](https://github.com/igraph/rigraph/issues/2464),
+  [\#2465](https://github.com/igraph/rigraph/issues/2465)).
+
 ## igraph 2.2.1.9010
 
 ### Continuous integration

@@ -107,11 +107,11 @@ Nepusz <ntamas@gmail.com> for this manual page.
 g <- make_ring(10)
 automorphism_group(g)
 #> [[1]]
-#> + 10/10 vertices, from c1f8c26:
+#> + 10/10 vertices, from cc2c1fb:
 #>  [1]  1 10  9  8  7  6  5  4  3  2
 #> 
 #> [[2]]
-#> + 10/10 vertices, from c1f8c26:
+#> + 10/10 vertices, from cc2c1fb:
 #>  [1]  2  3  4  5  6  7  8  9 10  1
 #> 
 ```
