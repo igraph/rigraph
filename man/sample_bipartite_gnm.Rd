@@ -7,9 +7,9 @@
 \alias{sample_bipartite_gnp}
 \title{Bipartite random graphs}
 \usage{
-bipartite_gnm(...)
+bipartite_gnm(n1, n2, m, ..., directed = FALSE, mode = c("out", "in", "all"))
 
-bipartite_gnp(...)
+bipartite_gnp(n1, n2, p, ..., directed = FALSE, mode = c("out", "in", "all"))
 
 sample_bipartite_gnm(
   n1,
@@ -30,13 +30,13 @@ sample_bipartite_gnp(
 )
 }
 \arguments{
-\item{...}{Passed to \code{sample_bipartite_gnp()}.}
-
 \item{n1}{Integer scalar, the number of bottom vertices.}
 
 \item{n2}{Integer scalar, the number of top vertices.}
 
 \item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{directed}{Logical scalar, whether to create a directed graph. See also
 the \code{mode} argument.}

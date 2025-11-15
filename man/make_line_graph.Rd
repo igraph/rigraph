@@ -7,12 +7,10 @@
 \usage{
 make_line_graph(graph)
 
-line_graph(...)
+line_graph(graph)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
-
-\item{...}{Passed to \code{make_line_graph()}.}
 }
 \value{
 A new graph object.

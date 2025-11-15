@@ -14,7 +14,14 @@ graph_from_adjacency_matrix(
   add.rownames = NA
 )
 
-from_adjacency(...)
+from_adjacency(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+)
 }
 \arguments{
 \item{adjmatrix}{A square adjacency matrix. From igraph version 0.5.1 this
@@ -50,8 +57,6 @@ attributes. Possible values the same as the previous argument. By default
 row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
-
-\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.

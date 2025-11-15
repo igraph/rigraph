@@ -7,14 +7,12 @@
 \usage{
 make_kautz_graph(m, n)
 
-kautz_graph(...)
+kautz_graph(m, n)
 }
 \arguments{
 \item{m}{Integer scalar, the size of the alphabet. See details below.}
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
-
-\item{...}{Passed to \code{make_kautz_graph()}.}
 }
 \value{
 A graph object.

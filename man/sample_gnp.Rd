@@ -7,7 +7,7 @@
 \usage{
 sample_gnp(n, p, directed = FALSE, loops = FALSE)
 
-gnp(...)
+gnp(n, p, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices in the graph.}
@@ -19,8 +19,6 @@ arbitrary vertices (\eqn{G(n,p)} graph).}
 \code{FALSE}.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
-
-\item{...}{Passed to \code{sample_gnp()}.}
 }
 \value{
 A graph object.

@@ -12,7 +12,7 @@ make_full_bipartite_graph(
   mode = c("all", "out", "in")
 )
 
-full_bipartite_graph(...)
+full_bipartite_graph(n1, n2, directed = FALSE, mode = c("all", "out", "in"))
 }
 \arguments{
 \item{n1}{The number of vertices of the first kind.}
@@ -26,8 +26,6 @@ If this is \sQuote{\code{out}} then all vertices of the first kind are
 connected to the others; \sQuote{\verb{in}} specifies the opposite
 direction; \sQuote{\code{all}} creates mutual edges. This argument is
 ignored for undirected graphs.x}
-
-\item{...}{Passed to \code{make_full_bipartite_graph()}.}
 }
 \value{
 An igraph graph, with the \sQuote{\code{type}} vertex attribute set.

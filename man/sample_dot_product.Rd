@@ -7,7 +7,7 @@
 \usage{
 sample_dot_product(vecs, directed = FALSE)
 
-dot_product(...)
+dot_product(vecs, directed = FALSE)
 }
 \arguments{
 \item{vecs}{A numeric matrix in which each latent position vector is a
@@ -15,8 +15,6 @@ column.}
 
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
-
-\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product
