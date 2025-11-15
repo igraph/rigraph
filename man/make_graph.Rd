@@ -249,6 +249,7 @@ Other deterministic constructors:
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
 \code{\link{make_full_multipartite}()},
+\code{\link{make_hex_lattice}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
