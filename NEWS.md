@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9012
+
+## revdep
+
+- Results.
+
+
 # igraph 2.2.1.9011
 
 ## Features
