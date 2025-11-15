@@ -65,7 +65,8 @@ Other paths:
 \code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{graph_center}()},
-\code{\link{radius}()}
+\code{\link{radius}()},
+\code{\link{widest_path_widths}()}
 }
 \concept{paths}
 \section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_eccentricity_dijkstra}{\code{eccentricity_dijkstra()}}.}
