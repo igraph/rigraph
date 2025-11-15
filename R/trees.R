@@ -152,7 +152,7 @@ to_prufer <- function(graph) {
 #' @param graph The input graph to sample from. Edge directions are ignored if
 #'   the graph is directed.
 #' @param vid When the graph is disconnected, this argument specifies how to
-#'   handle the situation. When the argument is zero (the default), the sampling
+#'   handle the situation. When the argument is `NULL` (the default), the sampling
 #'   will be performed component-wise, and the result will be a spanning forest.
 #'   When the argument contains a vertex ID, only the component containing the
 #'   given vertex will be processed, and the result will be a spanning tree of the
@@ -171,7 +171,7 @@ to_prufer <- function(graph) {
 #' @family trees
 #' @export
 #' @cdocs igraph_random_spanning_tree
-sample_spanning_tree <- function(graph, vid = 0) {
+sample_spanning_tree <- function(graph, vid = NULL) {
   random_spanning_tree_impl(
     graph = graph,
     vid = vid
