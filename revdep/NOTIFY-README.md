@@ -38,35 +38,42 @@ The script will:
 
 1. Check if `gh` CLI is available
 2. For each package (Cascade, jewel, rSpectral):
-   - Create an issue template in `notifications/`
-   - If the GitHub repository is accessible:
-     - Attempt to create a GitHub issue using `gh issue create`
-   - Otherwise:
-     - Create an email draft template
+   - Check if the GitHub repository is accessible
+   - If accessible: Create a GitHub issue directly using `gh issue create`
+   - If not accessible: Create an email draft in `notifications/`
+
+The script determines upfront which action to take and only creates the appropriate output (either GitHub issue OR email draft, not both).
 
 ## Output
 
-All files are created in the `notifications/` directory:
+Files are created in the `notifications/` directory **only for packages that require email drafts**:
 
-- `{Package}-issue.md` - GitHub issue template / email body
-- `{Package}-email.txt` - Complete email draft (when applicable)
+- `{Package}-email.txt` - Complete email draft with subject and body
+
+For packages with accessible GitHub repositories, issues are created directly and no local files are saved.
 
 ## Manual Steps
 
 ### If GitHub Issues Fail
 
-If you see authentication or permission errors, you can manually create issues by:
+If you see authentication or permission errors when creating GitHub issues:
 
-1. Navigate to the package's GitHub repository
+1. Check GitHub authentication: `gh auth status`
+2. Authenticate if needed: `gh auth login`
+3. Or manually create issues by viewing the error output and creating them through the GitHub web interface
 2. Click "Issues" → "New Issue"
 3. Copy the content from `notifications/{Package}-issue.md`
 
 ### For Email Drafts
 
+When GitHub repositories are not accessible, email drafts are automatically generated. To send these emails:
+
 1. Review the email content in `notifications/{Package}-email.txt`
 2. Copy the content
 3. Create a new email in your email client
-4. Paste the content and send
+4. Update the "To:" field with the actual maintainer email (check CRAN package page)
+5. Paste the subject and body
+6. Send the email
 
 ## Package Information
 

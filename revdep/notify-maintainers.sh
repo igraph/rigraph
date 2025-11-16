@@ -32,26 +32,55 @@ check_github_repo() {
     fi
 }
 
-# Function to create a Gmail draft
-create_gmail_draft() {
+# Function to create a GitHub issue
+create_github_issue() {
     local package=$1
-    local email_file=$2
+    local owner_repo=$2
+    local title=$3
+    local body=$4
     
-    echo "Creating Gmail draft for $package..."
-    echo "Please manually create an email with the following content:"
-    echo "================================================"
-    cat "$email_file"
-    echo "================================================"
-    echo ""
-    echo "Email draft content saved to: $email_file"
+    echo "  Creating GitHub issue..."
+    
+    # Create temporary file for issue body
+    local temp_file=$(mktemp)
+    echo "$body" > "$temp_file"
+    
+    # Create the issue
+    if gh issue create \
+        --repo "$owner_repo" \
+        --title "$title" \
+        --body-file "$temp_file" \
+        --label "bug" 2>/dev/null; then
+        echo "  ✓ Issue created successfully"
+    else
+        echo "  ⚠ Failed to create issue (may need authentication or permissions)"
+    fi
+    
+    rm -f "$temp_file"
 }
 
-# Function to get maintainer email from CRAN
-get_maintainer_email() {
+# Function to create an email draft
+create_email_draft() {
     local package=$1
-    # This would need to scrape CRAN or use an API
-    # For now, return a placeholder
-    echo "maintainer@example.com"
+    local subject=$2
+    local body=$3
+    local email_file=$4
+    
+    echo "  Creating email draft..."
+    
+    cat > "$email_file" << EOF
+To: CRAN maintainer for $package
+Subject: $subject
+
+Dear $package Maintainer,
+
+$body
+
+Best regards,
+igraph Development Team
+EOF
+    
+    echo "  ✓ Email draft saved to: $email_file"
 }
 
 # Directory for output files
@@ -63,22 +92,17 @@ echo "=== Notifying Package Maintainers about Reverse Dependency Issues ==="
 echo ""
 
 # Package 1: Cascade
-# GitHub: https://github.com/fbertran/Cascade
 PACKAGE="Cascade"
 GITHUB_URL="https://github.com/fbertran/Cascade"
-VERSION="2.3"
-ISSUE_TYPE="Namespace Collision Warning"
-SEVERITY="Minor"
 
-cat > "$OUTPUT_DIR/${PACKAGE}-issue.md" << 'EOF'
-# Namespace collision warning with igraph 2.2.1.9003+
+ISSUE_BODY='# Namespace collision warning with igraph 2.2.1.9003+
 
 ## Summary
 
 When loading the Cascade package with igraph version 2.2.1.9003 or later, the following warning appears:
 
 ```
-Warning: replacing previous import 'igraph::circulant' by 'magic::circulant' when loading 'Cascade'
+Warning: replacing previous import '"'"'igraph::circulant'"'"' by '"'"'magic::circulant'"'"' when loading '"'"'Cascade'"'"'
 ```
 
 ## Root Cause
@@ -110,49 +134,23 @@ This issue was discovered during reverse dependency checking for igraph. For mor
 ## References
 
 - igraph change: Added `make_circulant()` to expose `igraph_circulant()` (#1563, #2407)
-- igraph repository: https://github.com/igraph/rigraph
-EOF
+- igraph repository: https://github.com/igraph/rigraph'
 
 echo "Package: $PACKAGE"
 if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository found: $owner_repo"
-    if [ $GH_AVAILABLE -eq 1 ]; then
-        echo "  Creating GitHub issue..."
-        # Create the issue
-        gh issue create \
-            --repo "$owner_repo" \
-            --title "Namespace collision warning with igraph 2.2.1.9003+" \
-            --body-file "$OUTPUT_DIR/${PACKAGE}-issue.md" \
-            --label "bug" \
-            || echo "  ⚠ Failed to create issue (may need authentication or permissions)"
-    fi
+    echo "  ✓ GitHub repository accessible: $owner_repo"
+    create_github_issue "$PACKAGE" "$owner_repo" "Namespace collision warning with igraph 2.2.1.9003+" "$ISSUE_BODY"
 else
-    echo "  ✗ GitHub repository not accessible, creating email draft..."
-    MAINTAINER_EMAIL=$(get_maintainer_email "$PACKAGE")
-    cat > "$OUTPUT_DIR/${PACKAGE}-email.txt" << EOF
-To: $MAINTAINER_EMAIL
-Subject: Namespace collision warning with igraph 2.2.1.9003+ in Cascade
-
-Dear Cascade Maintainer,
-
-$(cat "$OUTPUT_DIR/${PACKAGE}-issue.md")
-
-Best regards,
-igraph Development Team
-EOF
-    create_gmail_draft "$PACKAGE" "$OUTPUT_DIR/${PACKAGE}-email.txt"
+    echo "  ✗ GitHub repository not accessible"
+    create_email_draft "$PACKAGE" "Namespace collision warning with igraph 2.2.1.9003+ in Cascade" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
 fi
 echo ""
 
 # Package 2: jewel
 PACKAGE="jewel"
 GITHUB_URL="https://github.com/annaplaksienko/jewel"
-VERSION="2.0.2"
-ISSUE_TYPE="Integer Validation Error"
-SEVERITY="High"
 
-cat > "$OUTPUT_DIR/${PACKAGE}-issue.md" << 'EOF'
-# Integer validation error with igraph 2.2.1.9003+
+ISSUE_BODY='# Integer validation error with igraph 2.2.1.9003+
 
 ## Summary
 
@@ -165,7 +163,7 @@ Error in rewire_impl(rewire = graph, n = niter, mode = mode) :
 
 ## Root Cause
 
-The `generateData_rewire()` function (or similar code) passes non-integer values to igraph's `rewire()` function for the `niter` parameter. Previous versions of igraph silently truncated these values, but newer versions strictly validate that numeric values are representable as integers.
+The `generateData_rewire()` function (or similar code) passes non-integer values to igraph'"'"'s `rewire()` function for the `niter` parameter. Previous versions of igraph silently truncated these values, but newer versions strictly validate that numeric values are representable as integers.
 
 ## Minimal Reproducible Example
 
@@ -220,48 +218,23 @@ This issue was discovered during reverse dependency checking for igraph. For mor
 ## References
 
 - igraph repository: https://github.com/igraph/rigraph
-- Related to stricter integer validation in igraph C code
-EOF
+- Related to stricter integer validation in igraph C code'
 
 echo "Package: $PACKAGE"
 if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository found: $owner_repo"
-    if [ $GH_AVAILABLE -eq 1 ]; then
-        echo "  Creating GitHub issue..."
-        gh issue create \
-            --repo "$owner_repo" \
-            --title "Integer validation error with igraph 2.2.1.9003+" \
-            --body-file "$OUTPUT_DIR/${PACKAGE}-issue.md" \
-            --label "bug" \
-            || echo "  ⚠ Failed to create issue (may need authentication or permissions)"
-    fi
+    echo "  ✓ GitHub repository accessible: $owner_repo"
+    create_github_issue "$PACKAGE" "$owner_repo" "Integer validation error with igraph 2.2.1.9003+" "$ISSUE_BODY"
 else
-    echo "  ✗ GitHub repository not accessible, creating email draft..."
-    MAINTAINER_EMAIL=$(get_maintainer_email "$PACKAGE")
-    cat > "$OUTPUT_DIR/${PACKAGE}-email.txt" << EOF
-To: $MAINTAINER_EMAIL
-Subject: Integer validation error with igraph 2.2.1.9003+ in jewel
-
-Dear jewel Maintainer,
-
-$(cat "$OUTPUT_DIR/${PACKAGE}-issue.md")
-
-Best regards,
-igraph Development Team
-EOF
-    create_gmail_draft "$PACKAGE" "$OUTPUT_DIR/${PACKAGE}-email.txt"
+    echo "  ✗ GitHub repository not accessible"
+    create_email_draft "$PACKAGE" "Integer validation error with igraph 2.2.1.9003+ in jewel" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
 fi
 echo ""
 
 # Package 3: rSpectral
 PACKAGE="rSpectral"
 GITHUB_URL="https://github.com/cmclean5/rSpectral"
-VERSION="1.0.0.10"
-ISSUE_TYPE="Modularity Test Failures"
-SEVERITY="Medium"
 
-cat > "$OUTPUT_DIR/${PACKAGE}-issue.md" << 'EOF'
-# Modularity test failures with igraph 2.2.1.9004+
+ISSUE_BODY='# Modularity test failures with igraph 2.2.1.9004+
 
 ## Summary
 
@@ -312,7 +285,7 @@ Choose one of the following approaches:
 
 1. **Quick fix**: Use the workaround above in places where unweighted modularity is needed
 2. **Update graph objects**: Call `igraph::upgrade_graph()` on saved graph objects
-3. **Remove unintended weights**: If graphs shouldn't have weights, remove them:
+3. **Remove unintended weights**: If graphs shouldn'"'"'t have weights, remove them:
    ```r
    g <- delete_edge_attr(g, "weight")
    ```
@@ -330,43 +303,27 @@ This issue was discovered during reverse dependency checking for igraph. For mor
 ## References
 
 - igraph repository: https://github.com/igraph/rigraph
-- igraph change: "Use 'weights' edge attribute in modularity() if available"
-EOF
+- igraph change: "Use '"'"'weights'"'"' edge attribute in modularity() if available"'
 
 echo "Package: $PACKAGE"
 if owner_repo=$(check_github_repo "$GITHUB_URL"); then
-    echo "  ✓ GitHub repository found: $owner_repo"
-    if [ $GH_AVAILABLE -eq 1 ]; then
-        echo "  Creating GitHub issue..."
-        gh issue create \
-            --repo "$owner_repo" \
-            --title "Modularity test failures with igraph 2.2.1.9004+" \
-            --body-file "$OUTPUT_DIR/${PACKAGE}-issue.md" \
-            --label "bug" \
-            || echo "  ⚠ Failed to create issue (may need authentication or permissions)"
-    fi
+    echo "  ✓ GitHub repository accessible: $owner_repo"
+    create_github_issue "$PACKAGE" "$owner_repo" "Modularity test failures with igraph 2.2.1.9004+" "$ISSUE_BODY"
 else
-    echo "  ✗ GitHub repository not accessible, creating email draft..."
-    MAINTAINER_EMAIL=$(get_maintainer_email "$PACKAGE")
-    cat > "$OUTPUT_DIR/${PACKAGE}-email.txt" << EOF
-To: $MAINTAINER_EMAIL
-Subject: Modularity test failures with igraph 2.2.1.9004+ in rSpectral
-
-Dear rSpectral Maintainer,
-
-$(cat "$OUTPUT_DIR/${PACKAGE}-issue.md")
-
-Best regards,
-igraph Development Team
-EOF
-    create_gmail_draft "$PACKAGE" "$OUTPUT_DIR/${PACKAGE}-email.txt"
+    echo "  ✗ GitHub repository not accessible"
+    create_email_draft "$PACKAGE" "Modularity test failures with igraph 2.2.1.9004+ in rSpectral" "$ISSUE_BODY" "$OUTPUT_DIR/${PACKAGE}-email.txt"
 fi
 echo ""
 
 echo "=== Summary ==="
-echo "Issue templates created in: $OUTPUT_DIR"
+echo "Output directory: $OUTPUT_DIR"
 echo ""
-echo "Files created:"
-ls -1 "$OUTPUT_DIR"
+if [ -n "$(ls -A $OUTPUT_DIR 2>/dev/null)" ]; then
+    echo "Files created:"
+    ls -1 "$OUTPUT_DIR"
+else
+    echo "All notifications sent via GitHub issues (no local files created)"
+fi
 echo ""
-echo "To manually create issues or send emails, review the files in $OUTPUT_DIR"
+echo "Note: For GitHub issues created, check the repository issue trackers."
+echo "For email drafts, review and send the files in $OUTPUT_DIR"
