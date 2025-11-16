@@ -574,6 +574,10 @@ igraph_layout_fruchterman_reingold:
 igraph_layout_kamada_kawai:
 
 igraph_layout_lgl:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, INTEGER maxiter=150, REAL maxdelta=vcount(graph),
+        REAL area=vcount(graph)^2, REAL coolexp=1.5, REAL repulserad=vcount(graph)^3, REAL cellsize=vcount(graph),
+        INTEGER root=-1
 
 igraph_layout_reingold_tilford:
 
@@ -680,8 +684,13 @@ igraph_to_directed:
 igraph_read_graph_edgelist:
 
 igraph_read_graph_ncol:
+    PARAMS: |-
+        INFILE instream, OPTIONAL VECTOR_STR predefnames, BOOLEAN names=TRUE,
+        ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
 igraph_read_graph_lgl:
+    PARAMS: |-
+        INFILE instream, BOOLEAN names=TRUE, ADD_WEIGHTS weights=TRUE, BOOLEAN directed=TRUE
 
 igraph_read_graph_pajek:
 

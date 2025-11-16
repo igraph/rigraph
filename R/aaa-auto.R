@@ -448,11 +448,21 @@ create_impl <- function(
 
 adjacency_impl <- function(
   adjmatrix,
-  mode = DIRECTED,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
   loops = c("once", "none", "twice")
 ) {
   # Argument checks
   adjmatrix[] <- as.numeric(adjmatrix)
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -469,11 +479,21 @@ adjacency_impl <- function(
 
 weighted_adjacency_impl <- function(
   adjmatrix,
-  mode = DIRECTED,
+  mode = c("directed", "undirected", "upper", "lower", "min", "plus", "max"),
   loops = c("once", "none", "twice")
 ) {
   # Argument checks
   adjmatrix[] <- as.numeric(adjmatrix)
+  mode <- switch_igraph_arg(
+    mode,
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
+  )
   loops <- switch_igraph_arg(loops, "none" = 0L, "twice" = 1L, "once" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -3216,7 +3236,7 @@ distances_floyd_warshall_impl <- function(
   to = V(graph),
   weights = NULL,
   mode = c("out", "in", "all", "total"),
-  method = AUTOMATIC
+  method = c("automatic", "original", "tree")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -3237,6 +3257,7 @@ distances_floyd_warshall_impl <- function(
     "all" = 3L,
     "total" = 3L
   )
+  method <- switch_igraph_arg(method, "automatic" = 0L, "original" = 1L, "tree" = 2L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -7619,7 +7640,7 @@ layout_fruchterman_reingold_impl <- function(
   use_seed = FALSE,
   niter = 500,
   start_temp = sqrt(vcount(graph)),
-  grid = AUTO,
+  grid = c("auto", "grid", "nogrid"),
   weights = NULL,
   minx = NULL,
   maxx = NULL,
@@ -7634,6 +7655,7 @@ layout_fruchterman_reingold_impl <- function(
   use_seed <- as.logical(use_seed)
   niter <- as.numeric(niter)
   start_temp <- as.numeric(start_temp)
+  grid <- switch_igraph_arg(grid, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -7743,11 +7765,11 @@ layout_kamada_kawai_impl <- function(
 layout_lgl_impl <- function(
   graph,
   maxiter = 150,
-  maxdelta = VCOUNT(graph),
-  area = VCOUNT(graph)^2,
+  maxdelta = vcount(graph),
+  area = vcount(graph)^2,
   coolexp = 1.5,
-  repulserad = VCOUNT(graph)^3,
-  cellsize = VCOUNT(graph),
+  repulserad = vcount(graph)^3,
+  cellsize = vcount(graph),
   root = -1
 ) {
   # Argument checks
@@ -8735,9 +8757,9 @@ community_spinglass_impl <- function(
   starttemp = 1,
   stoptemp = 0.01,
   coolfact = 0.99,
-  update_rule = CONFIG,
+  update_rule = c("config", "simple"),
   gamma = 1.0,
-  implementation = ORIG,
+  implementation = c("orig", "neg"),
   lambda = 1.0
 ) {
   # Argument checks
@@ -8755,7 +8777,9 @@ community_spinglass_impl <- function(
   starttemp <- as.numeric(starttemp)
   stoptemp <- as.numeric(stoptemp)
   coolfact <- as.numeric(coolfact)
+  update_rule <- switch_igraph_arg(update_rule, "simple" = 0L, "config" = 1L)
   gamma <- as.numeric(gamma)
+  implementation <- switch_igraph_arg(implementation, "orig" = 0L, "neg" = 1L)
   lambda <- as.numeric(lambda)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -8783,7 +8807,7 @@ community_spinglass_single_impl <- function(
   weights = NULL,
   vertex,
   spins = 25,
-  update_rule = CONFIG,
+  update_rule = c("config", "simple"),
   gamma = 1.0
 ) {
   # Argument checks
@@ -8798,6 +8822,7 @@ community_spinglass_single_impl <- function(
   }
   vertex <- as.numeric(vertex)
   spins <- as.numeric(spins)
+  update_rule <- switch_igraph_arg(update_rule, "simple" = 0L, "config" = 1L)
   gamma <- as.numeric(gamma)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -9831,7 +9856,7 @@ read_graph_ncol_impl <- function(
   instream,
   predefnames = NULL,
   names = TRUE,
-  weights = True,
+  weights = TRUE,
   directed = TRUE
 ) {
   # Argument checks
@@ -9858,7 +9883,7 @@ read_graph_ncol_impl <- function(
 read_graph_lgl_impl <- function(
   instream,
   names = TRUE,
-  weights = True,
+  weights = TRUE,
   directed = TRUE
 ) {
   # Argument checks
@@ -11244,7 +11269,7 @@ st_vertex_connectivity_impl <- function(
   graph,
   source,
   target,
-  neighbors = NUMBER_OF_NODES
+  neighbors = c("number_of_nodes", "error", "ignore", "negative")
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -11262,6 +11287,13 @@ st_vertex_connectivity_impl <- function(
       call = rlang::caller_env()
     )
   }
+  neighbors <- switch_igraph_arg(
+    neighbors,
+    "error" = 0L,
+    "number_of_nodes" = 1L,
+    "ignore" = 2L,
+    "negative" = 3L
+  )
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -13786,7 +13818,9 @@ motifs_randesu_callback_closure_impl <- function(
   # Argument checks
   ensure_igraph(graph)
   size <- as.numeric(size)
-  if (!is.null(cut_prob)) cut_prob <- as.numeric(cut_prob)
+  if (!is.null(cut_prob)) {
+    cut_prob <- as.numeric(cut_prob)
+  }
   if (!is.function(callback)) {
     cli::cli_abort("{.arg callback} must be a function")
   }
