@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 2220 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 58 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 4 new problems
+ * We saw 3 new problems
  * We failed to check 54 packages
 
 Issues with CRAN packages are summarised below.
@@ -15,9 +15,6 @@ Issues with CRAN packages are summarised below.
 
 * jewel
   checking examples ... ERROR
-
-* RPANDA
-  checking installed package size ... NOTE
 
 * rSpectral
   checking tests ... ERROR

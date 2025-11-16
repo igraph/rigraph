@@ -59,12 +59,11 @@
 |TransProR          |?       |      |        |     |
 |tsissm             |1.0.2   |1     |        |     |
 
-## New problems (4)
+## New problems (3)
 
-|package   |version  |error  |warning |note   |
-|:---------|:--------|:------|:-------|:------|
-|[Cascade](problems.md#cascade)|2.3      |       |__+1__  |       |
-|[jewel](problems.md#jewel)|2.0.2    |__+1__ |        |       |
-|[RPANDA](problems.md#rpanda)|2.5      |       |        |__+1__ |
-|[rSpectral](problems.md#rspectral)|1.0.0.10 |__+1__ |        |1      |
+|package   |version  |error  |warning |note |
+|:---------|:--------|:------|:-------|:----|
+|[Cascade](problems.md#cascade)|2.3      |       |__+1__  |     |
+|[jewel](problems.md#jewel)|2.0.2    |__+1__ |        |     |
+|[rSpectral](problems.md#rspectral)|1.0.0.10 |__+1__ |        |1    |
 
