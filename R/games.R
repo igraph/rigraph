@@ -950,9 +950,9 @@ sample_pa <- function(
     "bag" = 0
   )
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_barabasi_game,
+    Rx_igraph_barabasi_game,
     n,
     power,
     m,
@@ -1079,9 +1079,7 @@ gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #'
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1139,9 +1137,7 @@ gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 #'   the graph (for \eqn{G(n,m)} graphs).
 #' @param type The type of the random graph to create, either `gnp()`
 #'   (\eqn{G(n,p)} graph) or `gnm()` (\eqn{G(n,m)} graph).
-#' @param directed Logical, whether the graph will be directed, defaults to
-#'   `FALSE`.
-#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
+#' @inheritParams sample_gnp
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
@@ -1431,9 +1427,9 @@ sample_degseq <- function(
     in.deg <- as.numeric(in.deg)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_degree_sequence_game,
+    Rx_igraph_degree_sequence_game,
     as.numeric(out.deg),
     in.deg,
     as.numeric(method1)
@@ -1687,10 +1683,10 @@ sample_pa_age <- function(
     out.seq <- numeric()
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- if (is.null(time.window)) {
     .Call(
-      R_igraph_barabasi_aging_game,
+      Rx_igraph_barabasi_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1706,7 +1702,7 @@ sample_pa_age <- function(
     )
   } else {
     .Call(
-      R_igraph_recent_degree_aging_game,
+      Rx_igraph_recent_degree_aging_game,
       as.numeric(n),
       as.numeric(pa.exp),
       as.numeric(aging.exp),
@@ -1820,9 +1816,9 @@ sample_traits_callaway <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_callaway_traits_game,
+    Rx_igraph_callaway_traits_game,
     as.double(nodes),
     as.double(types),
     as.double(edge.per.step),
@@ -1875,9 +1871,9 @@ sample_traits <- function(
   pref.matrix = matrix(1, types, types),
   directed = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_establishment_game,
+    Rx_igraph_establishment_game,
     as.double(nodes),
     as.double(types),
     as.double(k),
@@ -1948,9 +1944,9 @@ traits <- function(
 #' g2 <- sample_grg(1000, 0.05, torus = TRUE)
 #'
 sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_grg_game,
+    Rx_igraph_grg_game,
     as.double(nodes),
     as.double(radius),
     as.logical(torus),
@@ -2017,8 +2013,8 @@ grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 #' @param pref.matrix A square matrix giving the preferences of the vertex
 #'   types. The matrix has \sQuote{types} rows and columns. When generating
 #'   an undirected graph, it must be symmetric.
-#' @param directed Logical constant, whether to create a directed graph.
-#' @param loops Logical constant, whether self-loops are allowed in the graph.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param loops Logical scalar, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -2172,9 +2168,9 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   mode <- igraph_match_arg(mode)
   mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_connect_neighborhood,
+    Rx_igraph_connect_neighborhood,
     graph,
     as.numeric(order),
     as.numeric(mode)
@@ -2235,9 +2231,9 @@ sample_smallworld <- function(
   loops = FALSE,
   multiple = FALSE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_watts_strogatz_game,
+    Rx_igraph_watts_strogatz_game,
     as.numeric(dim),
     as.numeric(size),
     as.numeric(nei),
@@ -2309,9 +2305,9 @@ sample_last_cit <- function(
   pref = (1:(agebins + 1))^-3,
   directed = TRUE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_lastcit_game,
+    Rx_igraph_lastcit_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(agebins),
@@ -2355,9 +2351,9 @@ sample_cit_types <- function(
   directed = TRUE,
   attr = TRUE
 ) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_cited_type_game,
+    Rx_igraph_cited_type_game,
     as.numeric(n),
     as.numeric(edges),
     as.numeric(types),
@@ -2406,9 +2402,9 @@ sample_cit_cit_types <- function(
   attr = TRUE
 ) {
   pref[] <- as.numeric(pref)
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_citing_cited_type_game,
+    Rx_igraph_citing_cited_type_game,
     as.numeric(n),
     as.numeric(types),
     pref,
@@ -2705,8 +2701,7 @@ sample_bipartite_gnp <- function(
 #'   must be symmetric.
 #' @param block.sizes Numeric vector giving the number of vertices in each
 #'   group. The sum of the vector must match the number of vertices.
-#' @param directed Logical scalar, whether to generate a directed graph.
-#' @param loops Logical scalar, whether self-loops are allowed in the graph.
+#' @inheritParams sample_pref
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
@@ -3295,10 +3290,7 @@ sample_fitness <- function(
 #'   undirected. If greater than or equal to 2, this argument specifies the
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
 #'   error will be generated.
-#' @param loops Logical scalar, whether to allow loop edges in the generated
-#'   graph.
-#' @param multiple Logical scalar, whether to allow multiple edges in the
-#'   generated graph.
+#' @inheritParams sample_fitness
 #' @param finite.size.correction Logical scalar, whether to use the proposed
 #'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
@@ -3380,7 +3372,7 @@ sample_fitness_pl <- function(
 #' @param bw.factor The backward burning ratio. The backward burning
 #'   probability is calculated as `bw.factor*fw.prob`.
 #' @param ambs The number of ambassador vertices.
-#' @param directed Logical scalar, whether to create a directed graph.
+#' @inheritParams sample_k_regular
 #' @return A simple graph, possibly directed if the `directed` argument is
 #'   `TRUE`.
 #' @note The version of the model in the published paper is incorrect in the

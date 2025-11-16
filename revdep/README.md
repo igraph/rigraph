@@ -1,37 +1,70 @@
 # Revdeps
 
-## Failed to check (10)
+## Failed to check (54)
 
-|package         |version |error |warning |note |
-|:---------------|:-------|:-----|:-------|:----|
-|bnlearn         |5.1     |1     |        |     |
-|EGAnet          |?       |      |        |     |
-|FAfA            |?       |      |        |     |
-|lavaan.shiny    |?       |      |        |     |
-|multinma        |0.8.1   |1     |        |     |
-|randomForestSRC |?       |      |        |     |
-|RSP             |?       |      |        |     |
-|sphereML        |?       |      |        |     |
-|streamDAG       |?       |      |        |     |
-|TestAnaAPP      |?       |      |        |     |
+|package            |version |error |warning |note |
+|:------------------|:-------|:-----|:-------|:----|
+|admtools           |?       |      |        |     |
+|amberr             |1.2.0   |1     |        |     |
+|BGGM               |2.1.5   |1     |        |     |
+|bnlearn            |5.1     |1     |        |     |
+|bnpa               |?       |      |        |     |
+|cdmTools           |?       |      |        |     |
+|ClusterGVis        |?       |      |        |     |
+|CompositionalClust |1.2     |1     |        |     |
+|depCensoring       |0.1.8   |1     |        |1    |
+|DRviaSPCN          |?       |      |        |     |
+|dySEM              |?       |      |        |     |
+|easybgm            |0.2.1   |1     |        |     |
+|EGAnet             |?       |      |        |     |
+|FAfA               |?       |      |        |     |
+|fAssets            |4023.85 |1     |        |     |
+|fdm2id             |?       |      |        |     |
+|galvanizer         |0.5.3   |1     |        |     |
+|genekitr           |?       |      |        |     |
+|ggpicrust2         |?       |      |        |     |
+|ggsem              |?       |      |        |     |
+|immcp              |?       |      |        |     |
+|jmv                |?       |      |        |     |
+|kerastuneR         |0.1.0.7 |1     |        |     |
+|latentFactoR       |?       |      |        |     |
+|lavaan.shiny       |?       |      |        |     |
+|lcsm               |?       |      |        |     |
+|linkspotter        |1.3.0   |1     |        |     |
+|lvnet              |?       |      |        |     |
+|manymome           |?       |      |        |     |
+|MLCOPULA           |1.1.0   |1     |        |     |
+|numbat             |?       |      |        |     |
+|pctax              |?       |      |        |     |
+|phylosem           |?       |      |        |     |
+|psychonetrics      |?       |      |        |     |
+|pwSEM              |1.0.0   |1     |        |     |
+|randomForestSRC    |?       |      |        |     |
+|ReporterScore      |?       |      |        |     |
+|Revticulate        |?       |      |        |     |
+|scperturbR         |0.1.0   |1     |        |     |
+|semdrw             |?       |      |        |     |
+|semptools          |?       |      |        |     |
+|sphereML           |?       |      |        |     |
+|stoRy              |0.2.2   |1     |        |     |
+|streamDAG          |?       |      |        |     |
+|Surrogate          |?       |      |        |     |
+|TDAkit             |0.1.3   |1     |        |     |
+|TELP               |?       |      |        |     |
+|TestAnaAPP         |?       |      |        |     |
+|tidybins           |?       |      |        |     |
+|tidycomm           |?       |      |        |     |
+|tidyjson           |0.3.2   |1     |        |     |
+|tidySEM            |?       |      |        |     |
+|TransProR          |?       |      |        |     |
+|tsissm             |1.0.2   |1     |        |     |
 
-## New problems (15)
+## New problems (4)
 
-|package              |version  |error  |warning |note |
-|:--------------------|:--------|:------|:-------|:----|
-|[AnimalHabitatNetwork](problems.md#animalhabitatnetwork)|0.1.0    |__+1__ |        |     |
-|[CITMIC](problems.md#citmic)|0.1.2    |__+1__ |        |     |
-|[DrDimont](problems.md#drdimont)|0.1.4    |__+2__ |        |1    |
-|[egor](problems.md#egor)|1.24.2   |__+1__ |        |     |
-|[FCMapper](problems.md#fcmapper)|1.1      |__+1__ |        |     |
-|[GephiForR](problems.md#gephiforr)|0.1.0    |__+1__ |        |     |
-|[incidentally](problems.md#incidentally)|1.0.3    |__+1__ |        |     |
-|[IOHanalyzer](problems.md#iohanalyzer)|0.1.8.10 |__+1__ |        |2    |
-|[klassR](problems.md#klassr)|1.0.2    |__+1__ |        |1    |
-|[multinet](problems.md#multinet)|4.3.1    |__+1__ |        |1    |
-|[mwcsr](problems.md#mwcsr)|0.1.9    |__+2__ |        |1    |
-|[PopComm](problems.md#popcomm)|0.1.0.1  |__+1__ |        |     |
-|[rsetse](problems.md#rsetse)|0.5.0    |__+2__ |        |     |
-|[SEMID](problems.md#semid)|0.4.1    |__+2__ |        |     |
-|[timeordered](problems.md#timeordered)|1.0.2    |__+1__ |        |     |
+|package   |version  |error  |warning |note   |
+|:---------|:--------|:------|:-------|:------|
+|[Cascade](problems.md#cascade)|2.3      |       |__+1__  |       |
+|[jewel](problems.md#jewel)|2.0.2    |__+1__ |        |       |
+|[RPANDA](problems.md#rpanda)|2.5      |       |        |__+1__ |
+|[rSpectral](problems.md#rspectral)|1.0.0.10 |__+1__ |        |1      |
 

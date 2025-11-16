@@ -524,9 +524,9 @@ write_graph <- function(
 ################################################################
 
 read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_edgelist,
+    Rx_igraph_read_graph_edgelist,
     file,
     as.numeric(n),
     as.logical(directed)
@@ -534,8 +534,10 @@ read.graph.edgelist <- function(file, n = 0, directed = TRUE) {
 }
 
 write.graph.edgelist <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_edgelist, graph, file)
+  write_graph_edgelist_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 ################################################################
@@ -555,9 +557,9 @@ read.graph.ncol <- function(
     "yes" = 1L,
     "auto" = 2L
   )
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_ncol,
+    Rx_igraph_read_graph_ncol,
     file,
     as.character(predef),
     as.logical(names),
@@ -581,9 +583,9 @@ write.graph.ncol <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_ncol,
+    Rx_igraph_write_graph_ncol,
     graph,
     file,
     names,
@@ -603,9 +605,9 @@ read.graph.lgl <- function(
     "yes" = 1L,
     "auto" = 2L
   )
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_read_graph_lgl,
+    Rx_igraph_read_graph_lgl,
     file,
     as.logical(names),
     weights,
@@ -629,9 +631,9 @@ write.graph.lgl <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_lgl,
+    Rx_igraph_write_graph_lgl,
     graph,
     file,
     names,
@@ -641,8 +643,9 @@ write.graph.lgl <- function(
 }
 
 read.graph.pajek <- function(file) {
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_read_graph_pajek, file)
+  res <- read_graph_pajek_impl(
+    instream = file
+  )
   if ("type" %in% vertex_attr_names(res)) {
     type <- as.logical(V(res)$type)
     res <- delete_vertex_attr(res, "type")
@@ -652,8 +655,10 @@ read.graph.pajek <- function(file) {
 }
 
 write.graph.pajek <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_pajek, graph, file)
+  write_graph_pajek_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 read.graph.dimacs <- function(file, directed = TRUE) {
@@ -690,9 +695,9 @@ write.graph.dimacs <- function(
     capacity <- E(graph)$capacity
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   .Call(
-    R_igraph_write_graph_dimacs,
+    Rx_igraph_write_graph_dimacs,
     graph,
     file,
     as.numeric(source),
@@ -706,13 +711,18 @@ write.graph.dimacs <- function(
 ################################################################
 
 read.graph.graphml <- function(file, index = 0) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_read_graph_graphml, file, as.numeric(index))
+  read_graph_graphml_impl(
+    instream = file,
+    index = index
+  )
 }
 
 write.graph.graphml <- function(graph, file, prefixAttr = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_graphml, graph, file, as.logical(prefixAttr))
+  write_graph_graphml_impl(
+    graph = graph,
+    outstream = file,
+    prefixattr = prefixAttr
+  )
 }
 
 ################################################################
@@ -720,8 +730,9 @@ write.graph.graphml <- function(graph, file, prefixAttr = TRUE) {
 ################################################################
 
 read.graph.gml <- function(file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_read_graph_gml, file)
+  read_graph_gml_impl(
+    instream = file
+  )
 }
 
 write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
@@ -731,8 +742,13 @@ write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
   if (!is.null(creator)) {
     creator <- as.character(creator)
   }
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_gml, graph, file, id, creator)
+  write_graph_gml_impl(
+    graph = graph,
+    outstream = file,
+    options = "default",
+    id = id,
+    creator = creator
+  )
 }
 
 ################################################################
@@ -740,8 +756,10 @@ write.graph.gml <- function(graph, file, id = NULL, creator = NULL) {
 ################################################################
 
 read.graph.dl <- function(file, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_read_graph_dl, file, as.logical(directed))
+  read_graph_dl_impl(
+    instream = file,
+    directed = directed
+  )
 }
 
 ################################################################
@@ -749,8 +767,10 @@ read.graph.dl <- function(file, directed = TRUE) {
 ################################################################
 
 write.graph.dot <- function(graph, file) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_dot, graph, file)
+  write_graph_dot_impl(
+    graph = graph,
+    outstream = file
+  )
 }
 
 ################################################################
@@ -914,12 +934,17 @@ graph_from_graphdb <- function(
   f <- tempfile()
   write.graph.fromraw(buffer, f)
 
-  .Call(Rx_igraph_read_graph_graphdb, f, as.logical(directed))
+  read_graph_graphdb_impl(
+    instream = f,
+    directed = directed
+  )
 }
 
 read.graph.graphdb <- function(file, directed = TRUE) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_read_graph_graphdb, file, as.logical(directed))
+  read_graph_graphdb_impl(
+    instream = file,
+    directed = directed
+  )
 }
 
 write.graph.leda <- function(
@@ -930,10 +955,18 @@ write.graph.leda <- function(
 ) {
   if (!is.null(vertex.attr)) {
     vertex.attr <- as.character(vertex.attr)
+  } else {
+    vertex.attr <- "name"
   }
   if (!is.null(edge.attr)) {
     edge.attr <- as.character(edge.attr)
+  } else {
+    edge.attr <- "weight"
   }
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_write_graph_leda, graph, file, vertex.attr, edge.attr)
+  write_graph_leda_impl(
+    graph = graph,
+    outstream = file,
+    names = vertex.attr,
+    weights = edge.attr
+  )
 }

@@ -1,72 +1,80 @@
 ## revdepcheck results
 
-We checked 34 reverse dependencies (33 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2220 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 15 new problems
- * We failed to check 9 packages
+ * We saw 4 new problems
+ * We failed to check 54 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* AnimalHabitatNetwork
+* Cascade
+  checking whether package ‘Cascade’ can be installed ... WARNING
+
+* jewel
   checking examples ... ERROR
 
-* CITMIC
-  checking re-building of vignette outputs ... ERROR
+* RPANDA
+  checking installed package size ... NOTE
 
-* DrDimont
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* egor
-  checking re-building of vignette outputs ... ERROR
-
-* FCMapper
-  checking examples ... ERROR
-
-* GephiForR
-  checking examples ... ERROR
-
-* incidentally
-  checking re-building of vignette outputs ... ERROR
-
-* IOHanalyzer
-  checking examples ... ERROR
-
-* klassR
-  checking examples ... ERROR
-
-* multinet
-  checking examples ... ERROR
-
-* mwcsr
-  checking examples ... ERROR
+* rSpectral
   checking tests ... ERROR
-
-* PopComm
-  checking examples ... ERROR
-
-* rsetse
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* SEMID
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* timeordered
-  checking examples ... ERROR
 
 ### Failed to check
 
-* bnlearn         (NA)
-* EGAnet          (NA)
-* FAfA            (NA)
-* lavaan.shiny    (NA)
-* multinma        (NA)
-* randomForestSRC (NA)
-* sphereML        (NA)
-* streamDAG       (NA)
-* TestAnaAPP      (NA)
+* admtools           (NA)
+* amberr             (NA)
+* BGGM               (NA)
+* bnlearn            (NA)
+* bnpa               (NA)
+* cdmTools           (NA)
+* ClusterGVis        (NA)
+* CompositionalClust (NA)
+* depCensoring       (NA)
+* DRviaSPCN          (NA)
+* dySEM              (NA)
+* easybgm            (NA)
+* EGAnet             (NA)
+* FAfA               (NA)
+* fAssets            (NA)
+* fdm2id             (NA)
+* galvanizer         (NA)
+* genekitr           (NA)
+* ggpicrust2         (NA)
+* ggsem              (NA)
+* immcp              (NA)
+* jmv                (NA)
+* kerastuneR         (NA)
+* latentFactoR       (NA)
+* lavaan.shiny       (NA)
+* lcsm               (NA)
+* linkspotter        (NA)
+* lvnet              (NA)
+* manymome           (NA)
+* MLCOPULA           (NA)
+* numbat             (NA)
+* pctax              (NA)
+* phylosem           (NA)
+* psychonetrics      (NA)
+* pwSEM              (NA)
+* randomForestSRC    (NA)
+* ReporterScore      (NA)
+* Revticulate        (NA)
+* scperturbR         (NA)
+* semdrw             (NA)
+* semptools          (NA)
+* sphereML           (NA)
+* stoRy              (NA)
+* streamDAG          (NA)
+* Surrogate          (NA)
+* TDAkit             (NA)
+* TELP               (NA)
+* TestAnaAPP         (NA)
+* tidybins           (NA)
+* tidycomm           (NA)
+* tidyjson           (NA)
+* tidySEM            (NA)
+* TransProR          (NA)
+* tsissm             (NA)

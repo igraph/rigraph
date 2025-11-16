@@ -991,7 +991,7 @@ arpack <- function(
     cli::cli_warn("Symmetric matrix, setting {.arg complex} to {.code FALSE}.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
@@ -1028,7 +1028,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   values[] <- as.numeric(values)
   nev <- as.numeric(nev)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
 
@@ -1345,7 +1345,7 @@ eigen_centrality <- function(
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
-#' @param loops Logical; whether the loop edges are also counted.
+#' @inheritParams degree
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a

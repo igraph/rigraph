@@ -300,9 +300,9 @@ max_cliques <- function(
     } else {
       tmpfile <- FALSE
     }
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques_file,
+      Rx_igraph_maximal_cliques_file,
       graph,
       subset,
       file,
@@ -315,9 +315,9 @@ max_cliques <- function(
     }
     invisible(NULL)
   } else {
-    on.exit(.Call(R_igraph_finalizer))
+    on.exit(.Call(Rx_igraph_finalizer))
     res <- .Call(
-      R_igraph_maximal_cliques,
+      Rx_igraph_maximal_cliques,
       graph,
       subset,
       as.numeric(min),
@@ -352,7 +352,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL) {
     subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(Rx_igraph_maximal_cliques_count, graph, subset, min, max)
 
@@ -529,9 +529,9 @@ ivs <- function(graph, min = NULL, max = NULL) {
     max <- 0
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_independent_vertex_sets,
+    Rx_igraph_independent_vertex_sets,
     graph,
     as.numeric(min),
     as.numeric(max)
@@ -548,33 +548,17 @@ ivs <- function(graph, min = NULL, max = NULL) {
 #' @rdname ivs
 #' @export
 largest_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_largest_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  largest_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs
 #' @export
 max_ivs <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(Rx_igraph_maximal_independent_vertex_sets, graph)
-  res <- lapply(res, `+`, 1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-
-  res
+  maximal_independent_vertex_sets_impl(
+    graph = graph
+  )
 }
 
 #' Maximal independent vertex sets in the graph
@@ -595,10 +579,9 @@ maximal_ivs <- function(graph) {
 #' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(Rx_igraph_independence_number, graph)
+  independence_number_impl(
+    graph = graph
+  )
 }
 
 #' @rdname ivs

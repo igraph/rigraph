@@ -389,7 +389,7 @@ set_graph_attr <- function(graph, name, value) {
   ensure_igraph(graph)
 
   .Call(
-    R_igraph_mybracket3_set,
+    Rx_igraph_mybracket3_set,
     graph,
     igraph_t_idx_attr,
     igraph_attr_idx_graph,
