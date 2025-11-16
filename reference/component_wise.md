@@ -22,6 +22,7 @@ component_wise(merge_method = "dla")
 [`layout_()`](https://r.igraph.org/reference/layout_.md).
 
 Other layout modifiers:
+[`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md),
 [`normalize()`](https://r.igraph.org/reference/normalize.md)
 
 Other graph layouts:

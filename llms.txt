@@ -401,6 +401,9 @@ specification. Contributions of any kind are welcome!
 - [`normalize()`](https://r.igraph.org/reference/normalize.md) :
   Normalize layout
 
+- [`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
+  : Create a layout modifier
+
 - [`layout_with_drl()`](https://r.igraph.org/reference/layout_with_drl.md)
   [`with_drl()`](https://r.igraph.org/reference/layout_with_drl.md) :
   The DrL graph layout generator

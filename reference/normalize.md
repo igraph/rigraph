@@ -35,7 +35,8 @@ normalize(
 [`layout_()`](https://r.igraph.org/reference/layout_.md).
 
 Other layout modifiers:
-[`component_wise()`](https://r.igraph.org/reference/component_wise.md)
+[`component_wise()`](https://r.igraph.org/reference/component_wise.md),
+[`layout_modifier()`](https://r.igraph.org/reference/layout_modifier.md)
 
 Other graph layouts:
 [`add_layout_()`](https://r.igraph.org/reference/add_layout_.md),
