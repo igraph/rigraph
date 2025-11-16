@@ -66,30 +66,6 @@ Run `revdepcheck::cloud_details(, "jewel")` for more info
     Execution halted
     ```
 
-# RPANDA
-
-<details>
-
-* Version: 2.5
-* GitHub: https://github.com/hmorlon/PANDA
-* Source code: https://github.com/cran/RPANDA
-* Date/Publication: 2025-09-24 10:50:07 UTC
-* Number of recursive dependencies: 134
-
-Run `revdepcheck::cloud_details(, "RPANDA")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.8Mb
-      sub-directories of 1Mb or more:
-        R      3.5Mb
-        data   1.6Mb
-    ```
-
 # rSpectral
 
 <details>
@@ -143,22 +119,27 @@ Run `revdepcheck::cloud_details(, "rSpectral")` for more info
       This graph was created by an old(er) igraph version.
       i Call `igraph::upgrade_graph()` on it to use with the current igraph version.
       For now we convert it on the fly...
+      Saving _problems/test-igraph-19.R
+      Saving _problems/test-igraph-26.R
       [ FAIL 2 | WARN 4 | SKIP 0 | PASS 10 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
       ── Failure ('test-igraph.R:19:3'): membership fix_neig=0 is correct ────────────
-      c$modularity (`actual`) not equal to `exp_mod10` (`expected`).
-      
+      Expected `c$modularity` to equal `exp_mod10`.
+      Differences:
         `actual`: 0.432
       `expected`: 0.408
-      ── Failure ('test-igraph.R:26:3'): membership fix_neig=1 is correct ────────────
-      c$modularity (`actual`) not equal to `exp_mod11` (`expected`).
       
+      ── Failure ('test-igraph.R:26:3'): membership fix_neig=1 is correct ────────────
+      Expected `c$modularity` to equal `exp_mod11`.
+      Differences:
         `actual`: 0.3758
       `expected`: 0.3776
       
+      
       [ FAIL 2 | WARN 4 | SKIP 0 | PASS 10 ]
-      Error: Test failures
+      Error:
+      ! Test failures.
       Execution halted
     ```
 

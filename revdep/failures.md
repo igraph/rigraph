@@ -76,75 +76,9 @@ Package suggested but not available for checking: ‘FossilSim’
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘spelling.R’
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Complete output:
-  > # This file is part of the standard setup for testthat.
-  > # It is recommended that you do not modify it.
-  > #
-  > # Where should you do additional test configuration?
-  > # Learn more about the roles of various files in:
-  > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-  > # * https://testthat.r-lib.org/articles/special-files.html
-  > 
-  > library(testthat)
-  > library(admtools)
-  > 
-  > test_check("admtools")
-  [ FAIL 5 | WARN 0 | SKIP 0 | PASS 214 ]
-  
-  ══ Failed tests ════════════════════════════════════════════════════════════════
-  ── Error ('test_rev_dir.R:4:3'): double transformation returns original object ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_rev_dir.R:4:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_strat_to_time.R:28:3'): transformation for fossils objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_strat_to_time.R:28:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_strat_to_time.R:37:3'): transformation for taxonomy objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_strat_to_time.R:37:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_time_to_strat.R:29:3'): transformation for fossils objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_time_to_strat.R:29:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_time_to_strat.R:38:3'): transformation for taxonomy objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_time_to_strat.R:38:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  
-  [ FAIL 5 | WARN 0 | SKIP 0 | PASS 214 ]
-  Error: Test failures
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... ERROR
@@ -172,11 +106,11 @@ there is no package called 'FossilSim'
 --- re-building ‘adm_from_sedrate.Rmd’ using rmarkdown
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-10-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 15424 bytes
-Input file size = 15514 bytes
+Input IDAT size = 15940 bytes
+Input file size = 16030 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12921
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13482
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -186,18 +120,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12921
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13482
 
-Output IDAT size = 12921 bytes (2503 bytes decrease)
-Output file size = 12999 bytes (2515 bytes = 16.21% decrease)
+Output IDAT size = 13482 bytes (2458 bytes decrease)
+Output file size = 13560 bytes (2470 bytes = 15.41% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-12-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 8451 bytes
-Input file size = 8541 bytes
+Input IDAT size = 7401 bytes
+Input file size = 7479 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6856
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5982
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -207,18 +141,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6856
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5982
 
-Output IDAT size = 6856 bytes (1595 bytes decrease)
-Output file size = 6934 bytes (1607 bytes = 18.82% decrease)
+Output IDAT size = 5982 bytes (1419 bytes decrease)
+Output file size = 6060 bytes (1419 bytes = 18.97% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-13-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 7558 bytes
-Input file size = 7636 bytes
+Input IDAT size = 7518 bytes
+Input file size = 7596 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6178
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6180
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -228,18 +162,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6178
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6180
 
-Output IDAT size = 6178 bytes (1380 bytes decrease)
-Output file size = 6256 bytes (1380 bytes = 18.07% decrease)
+Output IDAT size = 6180 bytes (1338 bytes decrease)
+Output file size = 6258 bytes (1338 bytes = 17.61% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-17-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 12241 bytes
-Input file size = 12331 bytes
+Input IDAT size = 11970 bytes
+Input file size = 12060 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10001
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9903
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -249,18 +183,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10001
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9903
 
-Output IDAT size = 10001 bytes (2240 bytes decrease)
-Output file size = 10079 bytes (2252 bytes = 18.26% decrease)
+Output IDAT size = 9903 bytes (2067 bytes decrease)
+Output file size = 9981 bytes (2079 bytes = 17.24% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-17-2.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11584 bytes
-Input file size = 11674 bytes
+Input IDAT size = 11668 bytes
+Input file size = 11758 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9625
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9699
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -270,18 +204,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9625
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9699
 
-Output IDAT size = 9625 bytes (1959 bytes decrease)
-Output file size = 9703 bytes (1971 bytes = 16.88% decrease)
+Output IDAT size = 9699 bytes (1969 bytes decrease)
+Output file size = 9777 bytes (1981 bytes = 16.85% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-20-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11249 bytes
-Input file size = 11339 bytes
+Input IDAT size = 11152 bytes
+Input file size = 11242 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9629
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9526
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -291,21 +225,21 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9629
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9526
 
-Output IDAT size = 9629 bytes (1620 bytes decrease)
-Output file size = 9707 bytes (1632 bytes = 14.39% decrease)
+Output IDAT size = 9526 bytes (1626 bytes decrease)
+Output file size = 9604 bytes (1638 bytes = 14.57% decrease)
 
 --- finished re-building ‘adm_from_sedrate.Rmd’
 
 --- re-building ‘adm_from_trace_cont.Rmd’ using rmarkdown
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-8-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 14964 bytes
-Input file size = 15054 bytes
+Input IDAT size = 14687 bytes
+Input file size = 14777 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12817
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12547
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -315,18 +249,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12817
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12547
 
-Output IDAT size = 12817 bytes (2147 bytes decrease)
-Output file size = 12895 bytes (2159 bytes = 14.34% decrease)
+Output IDAT size = 12547 bytes (2140 bytes decrease)
+Output file size = 12625 bytes (2152 bytes = 14.56% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-10-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 13076 bytes
-Input file size = 13166 bytes
+Input IDAT size = 13133 bytes
+Input file size = 13223 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10807
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10854
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -336,18 +270,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10807
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10854
 
-Output IDAT size = 10807 bytes (2269 bytes decrease)
-Output file size = 10885 bytes (2281 bytes = 17.32% decrease)
+Output IDAT size = 10854 bytes (2279 bytes decrease)
+Output file size = 10932 bytes (2291 bytes = 17.33% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-11-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 6268 bytes
-Input file size = 6346 bytes
+Input IDAT size = 6260 bytes
+Input file size = 6338 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5170
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5182
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -357,18 +291,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5170
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5182
 
-Output IDAT size = 5170 bytes (1098 bytes decrease)
-Output file size = 5248 bytes (1098 bytes = 17.30% decrease)
+Output IDAT size = 5182 bytes (1078 bytes decrease)
+Output file size = 5260 bytes (1078 bytes = 17.01% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-15-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11796 bytes
-Input file size = 11886 bytes
+Input IDAT size = 9903 bytes
+Input file size = 9993 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9726
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8174
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -378,18 +312,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9726
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8174
 
-Output IDAT size = 9726 bytes (2070 bytes decrease)
-Output file size = 9804 bytes (2082 bytes = 17.52% decrease)
+Output IDAT size = 8174 bytes (1729 bytes decrease)
+Output file size = 8252 bytes (1741 bytes = 17.42% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-15-2.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11366 bytes
-Input file size = 11456 bytes
+Input IDAT size = 12000 bytes
+Input file size = 12090 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9393
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9992
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -399,10 +333,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9393
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9992
 
-Output IDAT size = 9393 bytes (1973 bytes decrease)
-Output file size = 9471 bytes (1985 bytes = 17.33% decrease)
+Output IDAT size = 9992 bytes (2008 bytes decrease)
+Output file size = 10070 bytes (2020 bytes = 16.71% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-17-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
@@ -427,11 +361,11 @@ Output file size = 9450 bytes (2172 bytes = 18.69% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-21-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 15694 bytes
-Input file size = 15784 bytes
+Input IDAT size = 15735 bytes
+Input file size = 15825 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12939
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13018
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -441,10 +375,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12939
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13018
 
-Output IDAT size = 12939 bytes (2755 bytes decrease)
-Output file size = 13017 bytes (2767 bytes = 17.53% decrease)
+Output IDAT size = 13018 bytes (2717 bytes decrease)
+Output file size = 13096 bytes (2729 bytes = 17.24% decrease)
 
 --- finished re-building ‘adm_from_trace_cont.Rmd’
 
@@ -601,11 +535,11 @@ Output file size = 16438 bytes (2783 bytes = 14.48% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/admtools_files/figure-html/unnamed-chunk-25-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 14761 bytes
-Input file size = 14851 bytes
+Input IDAT size = 14336 bytes
+Input file size = 14426 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12762
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12183
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -615,18 +549,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12762
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12183
 
-Output IDAT size = 12762 bytes (1999 bytes decrease)
-Output file size = 12840 bytes (2011 bytes = 13.54% decrease)
+Output IDAT size = 12183 bytes (2153 bytes decrease)
+Output file size = 12261 bytes (2165 bytes = 15.01% decrease)
 
 ** Processing: /tmp/workdir/admtools/new/admtools.Rcheck/vign_test/admtools/vignettes/admtools_files/figure-html/unnamed-chunk-26-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 17182 bytes
-Input file size = 17284 bytes
+Input IDAT size = 16903 bytes
+Input file size = 17005 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 14330
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13911
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -636,10 +570,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 14330
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13911
 
-Output IDAT size = 14330 bytes (2852 bytes decrease)
-Output file size = 14408 bytes (2876 bytes = 16.64% decrease)
+Output IDAT size = 13911 bytes (2992 bytes decrease)
+Output file size = 13989 bytes (3016 bytes = 17.74% decrease)
 
 --- finished re-building ‘admtools.Rmd’
 
@@ -719,7 +653,7 @@ Error: Vignette re-building failed.
 Execution halted
 
 * DONE
-Status: 2 ERRORs, 1 NOTE
+Status: 1 ERROR, 1 NOTE
 
 
 
@@ -788,75 +722,9 @@ Package suggested but not available for checking: ‘FossilSim’
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
 * checking for unstated dependencies in ‘tests’ ... OK
-* checking tests ... ERROR
+* checking tests ... OK
   Running ‘spelling.R’
   Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Complete output:
-  > # This file is part of the standard setup for testthat.
-  > # It is recommended that you do not modify it.
-  > #
-  > # Where should you do additional test configuration?
-  > # Learn more about the roles of various files in:
-  > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-  > # * https://testthat.r-lib.org/articles/special-files.html
-  > 
-  > library(testthat)
-  > library(admtools)
-  > 
-  > test_check("admtools")
-  [ FAIL 5 | WARN 0 | SKIP 0 | PASS 214 ]
-  
-  ══ Failed tests ════════════════════════════════════════════════════════════════
-  ── Error ('test_rev_dir.R:4:3'): double transformation returns original object ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_rev_dir.R:4:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_strat_to_time.R:28:3'): transformation for fossils objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_strat_to_time.R:28:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_strat_to_time.R:37:3'): transformation for taxonomy objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_strat_to_time.R:37:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_time_to_strat.R:29:3'): transformation for fossils objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_time_to_strat.R:29:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  ── Error ('test_time_to_strat.R:38:3'): transformation for taxonomy objects works ──
-  <packageNotFoundError/error/condition>
-  Error in `loadNamespace(x)`: there is no package called 'FossilSim'
-  Backtrace:
-      ▆
-   1. └─base::loadNamespace(x) at test_time_to_strat.R:38:3
-   2.   └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
-   3.     └─base (local) withOneRestart(expr, restarts[[1L]])
-   4.       └─base (local) doWithOneRestart(return(expr), restart)
-  
-  [ FAIL 5 | WARN 0 | SKIP 0 | PASS 214 ]
-  Error: Test failures
-  Execution halted
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
 * checking re-building of vignette outputs ... ERROR
@@ -884,11 +752,11 @@ there is no package called 'FossilSim'
 --- re-building ‘adm_from_sedrate.Rmd’ using rmarkdown
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-10-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 15488 bytes
-Input file size = 15578 bytes
+Input IDAT size = 15864 bytes
+Input file size = 15954 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13079
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13553
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -898,18 +766,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13079
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13553
 
-Output IDAT size = 13079 bytes (2409 bytes decrease)
-Output file size = 13157 bytes (2421 bytes = 15.54% decrease)
+Output IDAT size = 13553 bytes (2311 bytes decrease)
+Output file size = 13631 bytes (2323 bytes = 14.56% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-12-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 7827 bytes
-Input file size = 7905 bytes
+Input IDAT size = 9178 bytes
+Input file size = 9268 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6289
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 7567
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -919,18 +787,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6289
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 7567
 
-Output IDAT size = 6289 bytes (1538 bytes decrease)
-Output file size = 6367 bytes (1538 bytes = 19.46% decrease)
+Output IDAT size = 7567 bytes (1611 bytes decrease)
+Output file size = 7645 bytes (1623 bytes = 17.51% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-13-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 7547 bytes
-Input file size = 7625 bytes
+Input IDAT size = 7501 bytes
+Input file size = 7579 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6197
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6163
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -940,18 +808,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6197
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 6163
 
-Output IDAT size = 6197 bytes (1350 bytes decrease)
-Output file size = 6275 bytes (1350 bytes = 17.70% decrease)
+Output IDAT size = 6163 bytes (1338 bytes decrease)
+Output file size = 6241 bytes (1338 bytes = 17.65% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-17-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 9934 bytes
-Input file size = 10024 bytes
+Input IDAT size = 10947 bytes
+Input file size = 11037 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8184
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8984
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -961,18 +829,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8184
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8984
 
-Output IDAT size = 8184 bytes (1750 bytes decrease)
-Output file size = 8262 bytes (1762 bytes = 17.58% decrease)
+Output IDAT size = 8984 bytes (1963 bytes decrease)
+Output file size = 9062 bytes (1975 bytes = 17.89% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-17-2.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11096 bytes
-Input file size = 11186 bytes
+Input IDAT size = 11106 bytes
+Input file size = 11196 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9157
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9203
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -982,18 +850,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9157
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9203
 
-Output IDAT size = 9157 bytes (1939 bytes decrease)
-Output file size = 9235 bytes (1951 bytes = 17.44% decrease)
+Output IDAT size = 9203 bytes (1903 bytes decrease)
+Output file size = 9281 bytes (1915 bytes = 17.10% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_sedrate_files/figure-html/unnamed-chunk-20-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11270 bytes
-Input file size = 11360 bytes
+Input IDAT size = 11197 bytes
+Input file size = 11287 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9610
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9573
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1003,21 +871,21 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9610
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9573
 
-Output IDAT size = 9610 bytes (1660 bytes decrease)
-Output file size = 9688 bytes (1672 bytes = 14.72% decrease)
+Output IDAT size = 9573 bytes (1624 bytes decrease)
+Output file size = 9651 bytes (1636 bytes = 14.49% decrease)
 
 --- finished re-building ‘adm_from_sedrate.Rmd’
 
 --- re-building ‘adm_from_trace_cont.Rmd’ using rmarkdown
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-8-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 14145 bytes
-Input file size = 14235 bytes
+Input IDAT size = 14688 bytes
+Input file size = 14778 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12135
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12502
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1027,18 +895,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12135
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12502
 
-Output IDAT size = 12135 bytes (2010 bytes decrease)
-Output file size = 12213 bytes (2022 bytes = 14.20% decrease)
+Output IDAT size = 12502 bytes (2186 bytes decrease)
+Output file size = 12580 bytes (2198 bytes = 14.87% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-10-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 13121 bytes
-Input file size = 13211 bytes
+Input IDAT size = 13065 bytes
+Input file size = 13155 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10845
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10780
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1048,18 +916,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10845
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 10780
 
-Output IDAT size = 10845 bytes (2276 bytes decrease)
-Output file size = 10923 bytes (2288 bytes = 17.32% decrease)
+Output IDAT size = 10780 bytes (2285 bytes decrease)
+Output file size = 10858 bytes (2297 bytes = 17.46% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-11-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 6274 bytes
-Input file size = 6352 bytes
+Input IDAT size = 6266 bytes
+Input file size = 6344 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5177
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5171
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1069,18 +937,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5177
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 5171
 
-Output IDAT size = 5177 bytes (1097 bytes decrease)
-Output file size = 5255 bytes (1097 bytes = 17.27% decrease)
+Output IDAT size = 5171 bytes (1095 bytes decrease)
+Output file size = 5249 bytes (1095 bytes = 17.26% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-15-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 10757 bytes
-Input file size = 10847 bytes
+Input IDAT size = 10942 bytes
+Input file size = 11032 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8937
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8994
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1090,18 +958,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8937
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 8994
 
-Output IDAT size = 8937 bytes (1820 bytes decrease)
-Output file size = 9015 bytes (1832 bytes = 16.89% decrease)
+Output IDAT size = 8994 bytes (1948 bytes decrease)
+Output file size = 9072 bytes (1960 bytes = 17.77% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-15-2.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 11308 bytes
-Input file size = 11398 bytes
+Input IDAT size = 11570 bytes
+Input file size = 11660 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9362
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9653
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1111,10 +979,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9362
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 9653
 
-Output IDAT size = 9362 bytes (1946 bytes decrease)
-Output file size = 9440 bytes (1958 bytes = 17.18% decrease)
+Output IDAT size = 9653 bytes (1917 bytes decrease)
+Output file size = 9731 bytes (1929 bytes = 16.54% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-17-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
@@ -1139,11 +1007,11 @@ Output file size = 9450 bytes (2172 bytes = 18.69% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/adm_from_trace_cont_files/figure-html/unnamed-chunk-21-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 14909 bytes
-Input file size = 14999 bytes
+Input IDAT size = 15409 bytes
+Input file size = 15499 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12468
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12750
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1153,10 +1021,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12468
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 12750
 
-Output IDAT size = 12468 bytes (2441 bytes decrease)
-Output file size = 12546 bytes (2453 bytes = 16.35% decrease)
+Output IDAT size = 12750 bytes (2659 bytes decrease)
+Output file size = 12828 bytes (2671 bytes = 17.23% decrease)
 
 --- finished re-building ‘adm_from_trace_cont.Rmd’
 
@@ -1313,11 +1181,11 @@ Output file size = 16438 bytes (2783 bytes = 14.48% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/admtools_files/figure-html/unnamed-chunk-25-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 13936 bytes
-Input file size = 14026 bytes
+Input IDAT size = 14256 bytes
+Input file size = 14346 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 11586
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 11905
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1327,18 +1195,18 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 11586
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 11905
 
-Output IDAT size = 11586 bytes (2350 bytes decrease)
-Output file size = 11664 bytes (2362 bytes = 16.84% decrease)
+Output IDAT size = 11905 bytes (2351 bytes decrease)
+Output file size = 11983 bytes (2363 bytes = 16.47% decrease)
 
 ** Processing: /tmp/workdir/admtools/old/admtools.Rcheck/vign_test/admtools/vignettes/admtools_files/figure-html/unnamed-chunk-26-1.png
 288x288 pixels, 3x8 bits/pixel, RGB
-Input IDAT size = 16601 bytes
-Input file size = 16703 bytes
+Input IDAT size = 16851 bytes
+Input file size = 16953 bytes
 
 Trying:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13754
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13917
   zc = 9  zm = 8  zs = 1  f = 0
   zc = 1  zm = 8  zs = 2  f = 0
   zc = 9  zm = 8  zs = 3  f = 0
@@ -1348,10 +1216,10 @@ Trying:
   zc = 9  zm = 8  zs = 3  f = 5
                                
 Selecting parameters:
-  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13754
+  zc = 9  zm = 8  zs = 0  f = 0		IDAT size = 13917
 
-Output IDAT size = 13754 bytes (2847 bytes decrease)
-Output file size = 13832 bytes (2871 bytes = 17.19% decrease)
+Output IDAT size = 13917 bytes (2934 bytes decrease)
+Output file size = 13995 bytes (2958 bytes = 17.45% decrease)
 
 --- finished re-building ‘admtools.Rmd’
 
@@ -1431,7 +1299,7 @@ Error: Vignette re-building failed.
 Execution halted
 
 * DONE
-Status: 2 ERRORs, 1 NOTE
+Status: 1 ERROR, 1 NOTE
 
 
 
@@ -3634,9 +3502,9 @@ Package suggested but not available for checking: ‘semPlot’
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘jmv’ can be installed ... OK
 * checking installed package size ... NOTE
-  installed size is 11.9Mb
+  installed size is  8.9Mb
   sub-directories of 1Mb or more:
-    R      7.5Mb
+    R      4.5Mb
     i18n   4.1Mb
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -4876,9 +4744,9 @@ Package suggested but not available for checking: ‘semPlot’
 * checking whether package ‘psychonetrics’ can be installed ... OK
 * used C++ compiler: ‘g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0’
 * checking installed package size ... NOTE
-  installed size is 62.7Mb
+  installed size is 63.2Mb
   sub-directories of 1Mb or more:
-    R      1.0Mb
+    R      1.5Mb
     libs  61.3Mb
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
