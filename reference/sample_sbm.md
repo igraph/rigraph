@@ -102,9 +102,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> IGRAPH bfa227a U--- 1000 16911 -- Stochastic block model
+#> IGRAPH 0e77742 U--- 1000 16911 -- Stochastic block model
 #> + attr: name (g/c), loops (g/l)
-#> + edges from bfa227a:
+#> + edges from 0e77742:
 #>  [1]  3-- 4  1-- 6  3-- 7  4-- 8  6-- 8  7-- 8  5--10  8--11  2--12  3--12
 #> [11]  5--12  7--12  7--14  4--15 10--15  1--17  8--17 10--17 15--17  1--18
 #> [21] 15--18  7--19 10--19 12--19 17--19  1--20  4--20  9--20  9--21 15--21

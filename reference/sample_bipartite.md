@@ -112,15 +112,15 @@ Gabor Csardi <csardi.gabor@gmail.com>
 sample_bipartite(10, 5, p = 0)
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnp()` instead.
-#> IGRAPH 2e6dcca U--B 15 0 -- Bipartite Gnp random graph
+#> IGRAPH e36be29 U--B 15 0 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 2e6dcca:
+#> + edges from e36be29:
 
 ## full graph
 sample_bipartite(10, 5, p = 1)
-#> IGRAPH c09fb9b U--B 15 50 -- Bipartite Gnp random graph
+#> IGRAPH 3f855e8 U--B 15 50 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from c09fb9b:
+#> + edges from 3f855e8:
 #>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15
 #> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15
 #> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15
@@ -129,18 +129,18 @@ sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite(10, 5, p = .1)
-#> IGRAPH 85c84cf U--B 15 9 -- Bipartite Gnp random graph
+#> IGRAPH 34975ad U--B 15 9 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 85c84cf:
+#> + edges from 34975ad:
 #> [1]  3--12  5--12  6--13  6--14  8--14  3--15  4--15  6--15 10--15
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 #> Warning: `sample_bipartite()` was deprecated in igraph 2.2.0.
 #> ℹ Please use `sample_bipartite_gnm()` instead.
-#> IGRAPH b460d53 D--B 15 20 -- Bipartite Gnm random graph
+#> IGRAPH 510bc33 D--B 15 20 -- Bipartite Gnm random graph
 #> + attr: name (g/c), m (g/n), type (v/l)
-#> + edges from b460d53:
+#> + edges from 510bc33:
 #>  [1]  3->11  6->12  9->12  2->13  1->14  2->15 13-> 1 15-> 1 14-> 2 13-> 3
 #> [11] 13-> 4 14-> 4 11-> 5 13-> 7 14-> 7 15-> 7 12-> 8 14-> 8 13-> 9 14-> 9
 ```
