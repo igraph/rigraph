@@ -552,7 +552,6 @@ PAGERANKOPT:
 
 DEPRECATED:
     CALL: {}
-    HEADER: ~
     INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
 
 LSETYPE:

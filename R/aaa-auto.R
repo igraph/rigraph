@@ -7645,7 +7645,11 @@ layout_fruchterman_reingold_impl <- function(
   minx = NULL,
   maxx = NULL,
   miny = NULL,
-  maxy = NULL
+  maxy = NULL,
+  coolexp = NULL,
+  maxdelta = NULL,
+  area = NULL,
+  repulserad = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)
@@ -7942,7 +7946,11 @@ layout_fruchterman_reingold_3d_impl <- function(
   miny = NULL,
   maxy = NULL,
   minz = NULL,
-  maxz = NULL
+  maxz = NULL,
+  coolexp = NULL,
+  maxdelta = NULL,
+  area = NULL,
+  repulserad = NULL
 ) {
   # Argument checks
   ensure_igraph(graph)

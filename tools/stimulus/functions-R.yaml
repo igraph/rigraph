@@ -570,6 +570,16 @@ igraph_independence_number:
 #######################################
 
 igraph_layout_fruchterman_reingold:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL INOUT MATRIX coords,
+        BOOLEAN use_seed=FALSE, INTEGER niter=500,
+        REAL start_temp=sqrt(vcount(graph)),
+        LAYOUT_GRID grid=AUTO, OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
+        OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
+        DEPRECATED coolexp=NULL, DEPRECATED maxdelta=NULL, DEPRECATED area=NULL,
+        DEPRECATED repulserad=NULL
+    DEPS: weights ON graph
 
 igraph_layout_kamada_kawai:
 
@@ -584,6 +594,17 @@ igraph_layout_reingold_tilford:
 igraph_layout_reingold_tilford_circular:
 
 igraph_layout_fruchterman_reingold_3d:
+    PARAMS: |-
+        GRAPH graph, OPTIONAL INOUT MATRIX coords,
+        BOOLEAN use_seed=FALSE, INTEGER niter=500,
+        REAL start_temp=sqrt(vcount(graph)),
+        OPTIONAL EDGEWEIGHTS weights,
+        OPTIONAL VECTOR minx, OPTIONAL VECTOR maxx,
+        OPTIONAL VECTOR miny, OPTIONAL VECTOR maxy,
+        OPTIONAL VECTOR minz, OPTIONAL VECTOR maxz,
+        DEPRECATED coolexp=NULL, DEPRECATED maxdelta=NULL, DEPRECATED area=NULL,
+        DEPRECATED repulserad=NULL
+    DEPS: weights ON graph
 
 igraph_layout_kamada_kawai_3d:
 
