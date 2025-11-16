@@ -2,6 +2,8 @@
 
 This document provides minimal reproducible examples and analysis for the three packages that now fail their checks compared to the most recent CRAN version.
 
+**Note**: Runnable R scripts demonstrating each issue can be found in the `examples/` directory.
+
 ## Summary
 
 Three packages have newly broken checks:
