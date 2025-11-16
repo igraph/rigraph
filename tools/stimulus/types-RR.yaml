@@ -321,6 +321,19 @@ EXTRA:
     CALL: {}
     HEADER: ~
 
+CLOSURE:
+    CALL: '%I%_wrapped'
+    INCONV: |
+        if (!is.function(%I%)) {
+          cli::cli_abort("{.arg callback} must be a function")
+        }
+        %I%_wrapped <- function(...) {
+          tryCatch(
+            %I%(...),
+            error = function(e) e
+          )
+        }
+
 ISOCOMPAT_FUNC:
     CALL: {}
     HEADER: ~
