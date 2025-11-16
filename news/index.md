@@ -1,5 +1,11 @@
 # Changelog
 
+## igraph 2.2.1.9012
+
+### revdep
+
+- Results.
+
 ## igraph 2.2.1.9011
 
 ### Features
