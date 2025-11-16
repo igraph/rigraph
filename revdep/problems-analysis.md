@@ -154,7 +154,7 @@ For now we convert it on the fly...
 This suggests the test is using pre-existing graph objects that may have been created with an older version of igraph, and those graphs may have inadvertently gained or lost weight attributes during the upgrade process.
 
 ### Assessment
-**This is an inadvertent breaking change in igraph.**
+**This is an inadvertent breaking change in igraph, but a workaround exists.**
 
 The automatic use of weights in modularity calculations is a behavior change that:
 1. Affects existing code that doesn't expect weights to be used
@@ -163,29 +163,34 @@ The automatic use of weights in modularity calculations is a behavior change tha
 
 The modularity differences are small but significant for tests that check exact values.
 
+**However**, passing `weights = numeric()` provides a simple workaround to force unweighted calculations.
+
+### Workaround
+**A workaround exists**: Passing `weights = numeric()` (an empty numeric vector) effectively disables auto-detection and forces unweighted modularity calculation.
+
+```r
+# With weight attribute, but want unweighted modularity
+E(g)$weight <- runif(ecount(g))
+modularity(g, membership, weights = numeric())  # Unweighted result
+```
+
+This works because:
+1. `numeric()` is not `NULL`, so auto-detection is skipped
+2. The condition `!all(is.na(numeric()))` is `FALSE` (since `all()` of empty vector returns `TRUE`)
+3. This causes the code to set `weights <- NULL` internally
+
 ### Recommendation
-This requires a design decision by the igraph maintainers:
+**For rSpectral** (and other affected packages):
+1. Update saved graph objects using `upgrade_graph()`
+2. Review whether graphs should have weights or not
+3. If unweighted modularity is needed despite weight attribute, use `weights = numeric()`
+4. Alternatively, remove unintended weights: `g <- delete_edge_attr(g, "weight")`
+5. Update expected test values if the new weighted behavior is correct
 
-**Option 1: Keep the new behavior but allow disabling weights**
-- Change the logic so that explicitly passing `weights = NULL` means "don't use any weights"
-- Only auto-detect weights when the `weights` argument is missing (not provided at all)
-- This would require changing the function signature to distinguish between `weights = NULL` (explicit) and missing `weights` argument
-
-**Option 2: Revert to old behavior**
-- Don't automatically use the "weight" attribute
-- Require users to explicitly pass `weights = E(graph)$weight` if they want weighted modularity
-- This is more explicit but less convenient
-
-**Option 3: Document as breaking change**
-- Keep current behavior
-- Clearly document this breaking change in NEWS.md
-- Advise users to remove weight attributes if they don't want weighted modularity
-
-For rSpectral, they should:
-1. Update their saved graph objects using `upgrade_graph()`
-2. Review whether their graphs should have weights or not
-3. If weights are unintended, remove them: `g <- delete_edge_attr(g, "weight")`
-4. Update expected test values to match the new behavior if weighted modularity is correct
+**For igraph maintainers** (design decision):
+- **Option 1**: Document `weights = numeric()` as the official way to disable auto-detection
+- **Option 2**: Change logic so `weights = NULL` explicitly disables auto-detection (requires distinguishing missing argument from explicit `NULL`)
+- **Option 3**: Revert to old behavior (no auto-detection, require explicit `weights = E(graph)$weight`)
 
 ## Conclusion
 
@@ -193,7 +198,7 @@ For rSpectral, they should:
 |---------|-----------|------------|----------------|
 | Cascade | Namespace collision | New `circulant()` export | Consider unexported constructor or document as known issue |
 | jewel | Integer validation | Stricter type checking in C code | Add `as.integer()` conversion in igraph for backward compatibility |
-| rSpectral | Modularity changes | Automatic weight usage that cannot be disabled | Fix behavior so `weights = NULL` disables auto-detection, or document as breaking change |
+| rSpectral | Modularity changes | Automatic weight usage that cannot be overridden with `weights = NULL` | Use `weights = numeric()` workaround, or remove weight attributes |
 
 **Overall Assessment**: 
 - **1 inadvertent behavior change** (Cascade - namespace collision with minor impact)
@@ -222,19 +227,10 @@ For rSpectral, they should:
 
 #### For rSpectral (Modularity Changes)  
 - **Impact**: Medium - tests fail but core functionality may still work
-- **igraph action**: Fix the auto-detection logic so `weights = NULL` explicitly disables weights:
-  ```r
-  modularity.igraph <- function(x, membership, weights, ...) {
-    if (missing(weights)) {
-      # weights argument not provided - use auto-detection
-      if ("weight" %in% edge_attr_names(x)) {
-        weights <- E(x)$weight
-      } else {
-        weights <- NULL
-      }
-    }
-    # else: weights was explicitly provided (could be NULL to disable)
-    modularity_impl(graph = x, membership = membership, weights = weights, ...)
-  }
-  ```
-- **Package action**: Update saved graphs, check for unintended weight attributes, update test expectations
+- **Workaround available**: Use `weights = numeric()` to disable auto-detection
+- **Package action**: 
+  1. Update saved graphs with `upgrade_graph()`
+  2. Check for unintended weight attributes
+  3. Use `modularity(g, membership, weights = numeric())` for unweighted calculation
+  4. Or remove weights: `g <- delete_edge_attr(g, "weight")`
+  5. Update test expectations if weighted behavior is correct
