@@ -456,34 +456,12 @@ predict_edges <- function(
   num.samples = 10000,
   num.bins = 25
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-  if (is.null(hrg)) {
-    hrg <- list(
-      left = c(),
-      right = c(),
-      prob = c(),
-      edges = c(),
-      vertices = c()
-    )
-  }
-  hrg <- lapply(
-    hrg[c("left", "right", "prob", "edges", "vertices")],
-    as.numeric
-  )
-  start <- as.logical(start)
-  num.samples <- as.numeric(num.samples)
-  num.bins <- as.numeric(num.bins)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_hrg_predict,
-    graph,
-    hrg,
-    start,
-    num.samples,
-    num.bins
+  res <- hrg_predict_impl(
+    graph = graph,
+    hrg = hrg,
+    start = start,
+    num_samples = num.samples,
+    num_bins = num.bins
   )
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"

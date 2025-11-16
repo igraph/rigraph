@@ -911,33 +911,18 @@ modularity.igraph <- function(
   directed = TRUE,
   ...
 ) {
-  # Argument checks
-  ensure_igraph(x)
   if (
     is.null(membership) || (!is.numeric(membership) && !is.factor(membership))
   ) {
     cli::cli_abort("Membership is not a numerical vector")
   }
-  membership <- as.numeric(membership)
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  resolution <- as.numeric(resolution)
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_modularity,
-    x,
-    membership - 1,
-    weights,
-    resolution,
-    directed
+  modularity_impl(
+    graph = x,
+    membership = membership,
+    weights = weights,
+    resolution = resolution,
+    directed = directed
   )
-  res
 }
 
 #' @rdname communities
@@ -1329,7 +1314,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(merges) <- "numeric"
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(Rx_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
@@ -1493,10 +1478,10 @@ cluster_spinglass <- function(
     "neg" = 1
   )
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(
-      R_igraph_spinglass_community,
+      Rx_igraph_spinglass_community,
       graph,
       weights,
       as.numeric(spins),
@@ -1518,7 +1503,7 @@ cluster_spinglass <- function(
     class(res) <- "communities"
   } else {
     res <- .Call(
-      R_igraph_spinglass_my_community,
+      Rx_igraph_spinglass_my_community,
       graph,
       weights,
       as_igraph_vs(graph, vertex) - 1,
@@ -1781,17 +1766,9 @@ cluster_leiden <- function(
 #' g <- make_graph("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
 cluster_fluid_communities <- function(graph, no.of.communities) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  no.of.communities <- as.numeric(no.of.communities)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  membership <- .Call(
-    R_igraph_community_fluid_communities,
-    graph,
-    no.of.communities
+  membership <- community_fluid_communities_impl(
+    graph = graph,
+    no_of_communities = no.of.communities
   )
 
   res <- list()
@@ -1880,9 +1857,9 @@ cluster_walktrap <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_walktrap_community,
+    Rx_igraph_walktrap_community,
     graph,
     weights,
     as.numeric(steps),
@@ -2008,9 +1985,9 @@ cluster_edge_betweenness <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_edge_betweenness,
+    Rx_igraph_community_edge_betweenness,
     graph,
     weights,
     as.logical(directed),
@@ -2100,9 +2077,9 @@ cluster_fast_greedy <- function(
     weights <- NULL
   }
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   res <- .Call(
-    R_igraph_community_fastgreedy,
+    Rx_igraph_community_fastgreedy,
     graph,
     as.logical(merges),
     as.logical(modularity),
@@ -2280,10 +2257,10 @@ cluster_leading_eigen <- function(
 
   options <- modify_list(arpack_defaults(), options)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
   res <- .Call(
-    R_igraph_community_leading_eigenvector,
+    Rx_igraph_community_leading_eigenvector,
     graph,
     steps,
     weights,

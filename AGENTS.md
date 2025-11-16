@@ -49,6 +49,7 @@ pak::pak(dependencies = "Config/Needs/build")
 
 - IMPORTANT: PR titles end up in `NEWS.md` grouped by conventional commit label. PRs and commits use the conventional commit style with backticks for code references such as `function_call()`
 - PRs are generally squashed, a clean history within a PR is not necessary
+- Before resuming work on a PR, always merge the current base branch (typically `main`)
 
 ### Comment Style
 
@@ -60,7 +61,7 @@ pak::pak(dependencies = "Config/Needs/build")
 ### R Code Conventions
 
 - Follow the [tidyverse style guide](https://style.tidyverse.org) and the [tidyverse design guide](https://design.tidyverse.org)
-- Use `snake_case` for new functions
+- Use `snake_case` for new functions and all arguments
 - Use explicit package prefixes (e.g., `withr::local_db_connection()`) for clarity
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context

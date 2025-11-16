@@ -6,6 +6,10 @@ INFILE:
     INCONV: |
         check_string(%I%)
 
+OUTFILE:
+    INCONV: |
+        check_string(%I%)
+
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
@@ -16,7 +20,7 @@ REAL:
     DEFAULT:
         ECROSSW: 1.0 - sqrt(edge_density(graph))
         ELENW: edge_density(graph) / 10
-        NEDISTW: 0.2 * (1-edge_density(graph))
+        NEDISTW: 0.2 * (1 - edge_density(graph))
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
@@ -29,11 +33,11 @@ BOOLEAN:
 
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
-    INCONV: '%I% <- as.numeric(%I%)-1'
+    INCONV: '%I% <- as.numeric(%I%) - 1'
 
 VECTOR:
     DEFAULT:
-        AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
+        AsmDefaultCvec: strength(%I1%, weights = weights) / (vcount(%I1%) - 1)
     INCONV: '%I% <- as.numeric(%I%)'
 
 VERTEX_QTY:
@@ -103,7 +107,7 @@ INT:
     INCONV: '%I% <- as.integer(%I%)'
 
 VERTEX:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
@@ -119,7 +123,7 @@ VERTEX:
             }
 
 VERTEX_ROOT:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     INCONV: |-
         %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
@@ -135,7 +139,7 @@ VERTEX_ROOT:
             }
 
 VERTEX_SELECTOR:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -146,7 +150,7 @@ VERTEX_SELECTOR:
             }
 
 VERTEX_INDICES:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -159,7 +163,7 @@ VERTEX_INDICES:
 # Temporary, for https://github.com/igraph/rigraph/pull/1630
 # We should call the `_PV` versions for all types in the future.
 VERTEX_INDICES_PV:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: V(%I1%)
     INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
@@ -170,7 +174,7 @@ VERTEX_INDICES_PV:
             }
 
 EDGE_INDICES:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: E(%I1%)
     INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
@@ -181,7 +185,7 @@ EDGE_INDICES:
             }
 
 EDGE_SELECTOR:
-    CALL: '%I%-1'
+    CALL: '%I% - 1'
     DEFAULT:
         ALL: E(%I1%)
     INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
@@ -254,11 +258,11 @@ VERTEX_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.numeric(%I%)-1
+          %I% <- as.numeric(%I%) - 1
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1
+            %I% <- %I% + 1
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
               names(%I%) <- vertex_attr(%I1%, "name")
             }
@@ -273,11 +277,11 @@ EDGE_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.numeric(%I%)-1
+          %I% <- as.numeric(%I%) - 1
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1
+            %I% <- %I% + 1
 
 'NULL':
     CALL: {}
@@ -286,6 +290,19 @@ EDGE_COLOR:
 EXTRA:
     CALL: {}
     HEADER: ~
+
+CLOSURE:
+    CALL: '%I%_wrapped'
+    INCONV: |
+        if (!is.function(%I%)) {
+          cli::cli_abort("{.arg callback} must be a function")
+        }
+        %I%_wrapped <- function(...) {
+          tryCatch(
+            %I%(...),
+            error = function(e) e
+          )
+        }
 
 ISOCOMPAT_FUNC:
     CALL: {}
@@ -296,7 +313,7 @@ ISOMORPHISM_FUNC:
     HEADER: ~
 
 VERTEXSET_LIST:
-    CALL: lapply(%I%, function(.x) .x-1)
+    CALL: lapply(%I%, function(.x) .x - 1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -304,7 +321,7 @@ VERTEXSET_LIST:
             }
 
 EDGESET_LIST:
-    CALL: lapply(%I%, function(.x) .x-1)
+    CALL: lapply(%I%, function(.x) .x - 1)
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -338,7 +355,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x)-1)'
+    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x) - 1)'
 
 COMMCMP:
     DEFAULT:
@@ -369,7 +386,7 @@ HRG:
         Default: 'NULL'
     INCONV: |-
         if (is.null(%I%)) {
-          %I% <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+          %I% <- list(left = c(), right = c(), prob = c(), edges = c(), vertices = c())
         }
         %I% <- lapply(%I%[c("left","right","prob","edges","vertices")], as.numeric)
 
@@ -418,8 +435,9 @@ EIGENWHICH:
     DEFAULT:
         Default: list()
     INCONV: |-
-        %I%.tmp <- eigen_defaults();
-        %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp
+        %I%.tmp <- eigen_defaults()
+        %I%.tmp[names(%I%)] <- %I%
+        %I% <- %I%.tmp
 
 EIGENWHICHPOS:
     DEFAULT:
@@ -448,7 +466,7 @@ PAGERANKOPT:
     INCONV: |-
         if (is.null(%I%)) {
           if (%I1% == 0L) {
-            %I% <- list(niter=1000, eps=0.001)
+            %I% <- list(niter = 1000, eps = 0.001)
           } else if (%I1% == 1L) {
             %I% <- arpack_defaults()
           } else {
