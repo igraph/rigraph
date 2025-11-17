@@ -68,9 +68,9 @@ Other graph motifs:
 ``` r
 g <- sample_pa(100)
 motifs(g, 3)
-#>  [1]  NA  NA 252  NA  85   0   0   0   0   0   0   0   0   0   0   0
+#>  [1]  NA  NA 354  NA  89   0   0   0   0   0   0   0   0   0   0   0
 count_motifs(g, 3)
-#> [1] 337
+#> [1] 443
 sample_motifs(g, 3)
-#> [1] 410
+#> [1] 10
 ```

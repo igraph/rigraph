@@ -15,7 +15,7 @@ graphs from adjacency matrices."><meta property="og:image" content="https://r.ig
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,14 @@ graphs from adjacency matrices.</p>
 <span>  add.rownames <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">from_adjacency</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">from_adjacency</span><span class="op">(</span></span>
+<span>  <span class="va">adjmatrix</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"directed"</span>, <span class="st">"undirected"</span>, <span class="st">"max"</span>, <span class="st">"min"</span>, <span class="st">"upper"</span>, <span class="st">"lower"</span>, <span class="st">"plus"</span><span class="op">)</span>,</span>
+<span>  weighted <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  diag <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add.colnames <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add.rownames <span class="op">=</span> <span class="cn">NA</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -118,10 +125,6 @@ attributes. Possible values the same as the previous argument. By default
 row names are not added. If ‘<code>add.rownames</code>’ and
 ‘<code>add.colnames</code>’ specify the same vertex attribute, then the
 former is ignored.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>graph_from_adjacency_matrix()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -319,7 +322,7 @@ create graphs.</p></div>
 <span class="r-in"><span>  add.rownames <span class="op">=</span> <span class="st">"code"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">g10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 79c7ce8 DNW- 10 51 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ae2e01f DNW- 10 51 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), code (v/c), weight (e/n)</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

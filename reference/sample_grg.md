@@ -8,7 +8,7 @@ square
 ``` r
 sample_grg(nodes, radius, torus = FALSE, coords = FALSE)
 
-grg(...)
+grg(nodes, radius, torus = FALSE, coords = FALSE)
 ```
 
 ## Arguments
@@ -29,10 +29,6 @@ grg(...)
 
   Logical scalar, whether to add the positions of the vertices as vertex
   attributes called ‘`x`’ and ‘`y`’.
-
-- ...:
-
-  Passed to `sample_grg()`.
 
 ## Value
 

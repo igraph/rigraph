@@ -15,7 +15,7 @@ for Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 ``` r
 make_chordal_ring(n, w, directed = FALSE)
 
-chordal_ring(...)
+chordal_ring(n, w, directed = FALSE)
 ```
 
 ## Arguments
@@ -31,10 +31,6 @@ chordal_ring(...)
 - directed:
 
   Logical scalar, whether or not to create a directed graph.
-
-- ...:
-
-  Passed to `make_chordal_ring()`.
 
 ## Value
 

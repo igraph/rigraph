@@ -1,5 +1,23 @@
 # Changelog
 
+## igraph 2.2.1.9013
+
+### Features
+
+- Implement generic mechanism for
+  [`layout_()`](https://r.igraph.org/reference/layout_.md) modifiers
+  ([\#1473](https://github.com/igraph/rigraph/issues/1473),
+  [\#2435](https://github.com/igraph/rigraph/issues/2435)).
+
+### Continuous integration
+
+- Install binaries from r-universe for dev workflow
+  ([\#2498](https://github.com/igraph/rigraph/issues/2498)).
+
+### revdep
+
+- New problems.
+
 ## igraph 2.2.1.9012
 
 ### revdep

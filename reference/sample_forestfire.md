@@ -137,6 +137,6 @@ dd2 <- degree_distribution(g, mode = "out")
 # Note that some in- or out-degrees are zero which will be excluded from the logarithmic plot.
 plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #> Warning: 1 x value <= 0 omitted from logarithmic plot
-#> Warning: 536 y values <= 0 omitted from logarithmic plot
+#> Warning: 459 y values <= 0 omitted from logarithmic plot
 points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
 ```

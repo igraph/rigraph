@@ -15,7 +15,14 @@ graph_from_adjacency_matrix(
   add.rownames = NA
 )
 
-from_adjacency(...)
+from_adjacency(
+  adjmatrix,
+  mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"),
+  weighted = NULL,
+  diag = TRUE,
+  add.colnames = NULL,
+  add.rownames = NA
+)
 ```
 
 ## Arguments
@@ -62,10 +69,6 @@ from_adjacency(...)
   Possible values the same as the previous argument. By default row
   names are not added. If ‘`add.rownames`’ and ‘`add.colnames`’ specify
   the same vertex attribute, then the former is ignored.
-
-- ...:
-
-  Passed to `graph_from_adjacency_matrix()`.
 
 ## Value
 
@@ -281,6 +284,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH 79c7ce8 DNW- 10 51 -- 
+#> IGRAPH ae2e01f DNW- 10 51 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

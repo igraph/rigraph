@@ -19,7 +19,16 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(...)
+lattice(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+)
 ```
 
 ## Arguments
@@ -61,10 +70,6 @@ lattice(...)
 
   Deprecated, use `periodic` instead.
 
-- ...:
-
-  Passed to `make_lattice()`.
-
 ## Value
 
 An igraph graph.
@@ -97,10 +102,10 @@ Other deterministic constructors:
 
 ``` r
 make_lattice(c(5, 5, 5))
-#> IGRAPH fc5d885 U--- 125 300 -- Lattice graph
+#> IGRAPH 9e3e84c U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from fc5d885:
+#> + edges from 9e3e84c:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16
@@ -110,10 +115,10 @@ make_lattice(c(5, 5, 5))
 #> [61] 23--24 23--48 24--25 24--49 25--50 26--27 26--31 26--51 27--28 27--32
 #> + ... omitted several edges
 make_lattice(length = 5, dim = 3)
-#> IGRAPH e3b9264 U--- 125 300 -- Lattice graph
+#> IGRAPH 1bf5ebc U--- 125 300 -- Lattice graph
 #> + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 #> | (g/l)
-#> + edges from e3b9264:
+#> + edges from 1bf5ebc:
 #>  [1]  1-- 2  1-- 6  1--26  2-- 3  2-- 7  2--27  3-- 4  3-- 8  3--28  4-- 5
 #> [11]  4-- 9  4--29  5--10  5--30  6-- 7  6--11  6--31  7-- 8  7--12  7--32
 #> [21]  8-- 9  8--13  8--33  9--10  9--14  9--34 10--15 10--35 11--12 11--16

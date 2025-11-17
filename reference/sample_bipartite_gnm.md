@@ -5,9 +5,9 @@ Generate bipartite graphs using the Erdős-Rényi model
 ## Usage
 
 ``` r
-bipartite_gnm(...)
+bipartite_gnm(n1, n2, m, ..., directed = FALSE, mode = c("out", "in", "all"))
 
-bipartite_gnp(...)
+bipartite_gnp(n1, n2, p, ..., directed = FALSE, mode = c("out", "in", "all"))
 
 sample_bipartite_gnm(
   n1,
@@ -30,10 +30,6 @@ sample_bipartite_gnp(
 
 ## Arguments
 
-- ...:
-
-  Passed to `sample_bipartite_gnp()`.
-
 - n1:
 
   Integer scalar, the number of bottom vertices.
@@ -45,6 +41,10 @@ sample_bipartite_gnp(
 - m:
 
   Integer scalar, the number of edges for \\G(n,m)\\ graphs.
+
+- ...:
+
+  These dots are for future extensions and must be empty.
 
 - directed:
 
@@ -109,15 +109,15 @@ Random graph models (games)
 ``` r
 ## empty graph
 sample_bipartite_gnp(10, 5, p = 0)
-#> IGRAPH 94170a5 U--B 15 0 -- Bipartite Gnp random graph
+#> IGRAPH 4d0c52f U--B 15 0 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 94170a5:
+#> + edges from 4d0c52f:
 
 ## full graph
 sample_bipartite_gnp(10, 5, p = 1)
-#> IGRAPH 80e9e61 U--B 15 50 -- Bipartite Gnp random graph
+#> IGRAPH 01a86a6 U--B 15 50 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 80e9e61:
+#> + edges from 01a86a6:
 #>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15
 #> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15
 #> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15
@@ -126,16 +126,16 @@ sample_bipartite_gnp(10, 5, p = 1)
 
 ## random bipartite graph
 sample_bipartite_gnp(10, 5, p = .1)
-#> IGRAPH 5018a8f U--B 15 3 -- Bipartite Gnp random graph
+#> IGRAPH 86e042c U--B 15 2 -- Bipartite Gnp random graph
 #> + attr: name (g/c), p (g/n), type (v/l)
-#> + edges from 5018a8f:
-#> [1] 1--11 5--13 8--13
+#> + edges from 86e042c:
+#> [1] 2--11 6--11
 
 ## directed bipartite graph, G(n,m)
 sample_bipartite_gnm(10, 5, m = 20, directed = TRUE, mode = "all")
-#> IGRAPH fa75a40 D--B 15 20 -- Bipartite Gnm random graph
+#> IGRAPH 3e7f2ae D--B 15 20 -- Bipartite Gnm random graph
 #> + attr: name (g/c), m (g/n), type (v/l)
-#> + edges from fa75a40:
-#>  [1]  9->11  5->12  5->13  7->13  8->13 10->13  4->14  5->14  6->15  7->15
-#> [11] 11-> 1 12-> 1 15-> 1 13-> 2 14-> 2 11-> 3 14-> 5 11-> 6 13-> 8 12->10
+#> + edges from 3e7f2ae:
+#>  [1]  1->11  5->11  8->11 10->12  1->13  8->14  5->15  7->15 12-> 1 13-> 1
+#> [11] 14-> 3 15-> 3 11-> 4 13-> 4 11-> 5 13-> 5 14-> 6 15-> 7 13-> 8 12->10
 ```

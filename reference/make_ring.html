@@ -15,7 +15,7 @@ of make_lattice()."><meta property="og:image" content="https://r.igraph.org/logo
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@ of <code><a href="make_lattice.html">make_lattice()</a></code>.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_ring</span><span class="op">(</span><span class="va">n</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, mutual <span class="op">=</span> <span class="cn">FALSE</span>, circular <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ring</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ring</span><span class="op">(</span><span class="va">n</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, mutual <span class="op">=</span> <span class="cn">FALSE</span>, circular <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -84,10 +84,6 @@ undirected graphs.</p></dd>
 <dd><p>Whether to create a circular ring. A non-circular
 ring is essentially a “line”: a tree where every non-leaf
 vertex has one child.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>make_ring()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -118,7 +114,7 @@ vertex has one child.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 565544b U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH adc5b89 U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
@@ -127,10 +123,10 @@ vertex has one child.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 565544b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from adc5b89:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="fu">make_ring</span><span class="op">(</span><span class="fl">10</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mutual <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a25a79a D--- 10 20 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2aebc73 D--- 10 20 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + graph attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + name:</span>
@@ -139,7 +135,7 @@ vertex has one child.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | + circular:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a25a79a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2aebc73:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 2  2-&gt; 1  2-&gt; 3  3-&gt; 2  3-&gt; 4  4-&gt; 3  4-&gt; 5  5-&gt; 4  5-&gt; 6  6-&gt; 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  6-&gt; 7  7-&gt; 6  7-&gt; 8  8-&gt; 7  8-&gt; 9  9-&gt; 8  9-&gt;10 10-&gt; 9 10-&gt; 1  1-&gt;10</span>
 </code></pre></div>

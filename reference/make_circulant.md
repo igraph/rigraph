@@ -10,7 +10,7 @@ all \\j\\.
 ``` r
 make_circulant(n, shifts, directed = FALSE)
 
-circulant(...)
+circulant(n, shifts, directed = FALSE)
 ```
 
 ## Arguments
@@ -26,10 +26,6 @@ circulant(...)
 - directed:
 
   Boolean, whether to create a directed graph.
-
-- ...:
-
-  Passed to `make_circulant()`.
 
 ## Value
 

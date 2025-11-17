@@ -15,7 +15,14 @@ sample_traits_callaway(
   directed = FALSE
 )
 
-traits_callaway(...)
+traits_callaway(
+  nodes,
+  types,
+  edge.per.step = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 
 sample_traits(
   nodes,
@@ -26,7 +33,14 @@ sample_traits(
   directed = FALSE
 )
 
-traits(...)
+traits(
+  nodes,
+  types,
+  k = 1,
+  type.dist = rep(1, types),
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE
+)
 ```
 
 ## Arguments
@@ -56,11 +70,6 @@ traits(...)
 - directed:
 
   Logical constant, whether to generate directed graphs.
-
-- ...:
-
-  Passed to the constructor, `sample_traits()` or
-  `sample_traits_callaway()`.
 
 - k:
 

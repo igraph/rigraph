@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">sbm</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">sbm</span><span class="op">(</span><span class="va">n</span>, <span class="va">pref.matrix</span>, <span class="va">block.sizes</span>, directed <span class="op">=</span> <span class="cn">FALSE</span>, loops <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -87,10 +87,6 @@ group. The sum of the vector must match the number of vertices.</p></dd>
 
 <dt id="arg-loops">loops<a class="anchor" aria-label="anchor" href="#arg-loops"></a></dt>
 <dd><p>Logical scalar, whether self-loops are allowed in the graph.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to <code>sample_sbm()</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -156,17 +152,17 @@ and evaluation. <em>Social Networks</em>, 14, 5–61.</p>
 <span class="r-in"><span><span class="va">pm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="fl">.001</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.001</span>, <span class="fl">.05</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_sbm</span><span class="op">(</span><span class="fl">1000</span>, pref.matrix <span class="op">=</span> <span class="va">pm</span>, block.sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">700</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 37bf966 U--- 1000 16911 -- Stochastic block model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 68cd475 U--- 1000 17051 -- Stochastic block model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 37bf966:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  3-- 4  1-- 6  3-- 7  4-- 8  6-- 8  7-- 8  5--10  8--11  2--12  3--12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  5--12  7--12  7--14  4--15 10--15  1--17  8--17 10--17 15--17  1--18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 15--18  7--19 10--19 12--19 17--19  1--20  4--20  9--20  9--21 15--21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 19--21 20--21  1--22 13--22 15--22  9--23 10--23 11--23 15--23 16--23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41]  3--24  6--24  8--24 14--25 20--25 23--25 17--26 20--26 11--27 15--27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 21--27 14--28 24--28 27--28 11--29 21--29  8--30  9--30 11--30 19--30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 22--30 26--30  2--31 19--31 25--31 29--31  5--32 19--32 25--32 26--32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [71] 31--32 18--33 22--33 24--33  3--34 16--34 19--34  4--35 12--35 23--35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 68cd475:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 6  2-- 8  1-- 9  2--11  2--13 10--13 11--13  7--14 11--14  3--15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11]  5--15  6--16 12--17  7--18  5--19  8--19 11--19 14--19 16--19 16--20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21]  6--21  9--21 18--21  4--22  5--22  7--22  1--23  8--23 17--23 14--24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 18--24  3--25  4--25 15--25 21--26  4--27  8--27 20--28  3--29  6--29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41]  8--29 17--29  8--30 16--30  4--31  7--31 13--31 11--32 28--32  6--33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 13--33 25--33 28--34 11--35 15--35 16--36 26--36  4--37 19--37 23--37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 24--37 27--37  7--38  9--39 27--39 28--39 32--39  5--40 16--40 31--40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [71]  9--41 18--41 32--41 36--41  2--42  5--42  7--42 15--42 26--42 29--42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>

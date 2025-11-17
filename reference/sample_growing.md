@@ -8,7 +8,7 @@ evolution.
 ``` r
 sample_growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 
-growing(...)
+growing(n, m = 1, ..., directed = TRUE, citation = FALSE)
 ```
 
 ## Arguments
@@ -23,7 +23,7 @@ growing(...)
 
 - ...:
 
-  Passed to `sample_growing()`.
+  These dots are for future extensions and must be empty.
 
 - directed:
 

@@ -8,7 +8,7 @@ sizes of the partitions are as close to equal as possible.
 ``` r
 make_turan(n, r)
 
-turan(...)
+turan(n, r)
 ```
 
 ## Arguments
@@ -20,10 +20,6 @@ turan(...)
 - r:
 
   Integer, the number of partitions in the graph, must be positive.
-
-- ...:
-
-  Passed to `make_turan()`.
 
 ## Value
 

@@ -15,7 +15,7 @@ types."><meta property="og:image" content="https://r.igraph.org/logo.png"></head
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,14 @@ types.</p>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">traits_callaway</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">traits_callaway</span><span class="op">(</span></span>
+<span>  <span class="va">nodes</span>,</span>
+<span>  <span class="va">types</span>,</span>
+<span>  edge.per.step <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">sample_traits</span><span class="op">(</span></span>
 <span>  <span class="va">nodes</span>,</span>
@@ -78,7 +85,14 @@ types.</p>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">traits</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">traits</span><span class="op">(</span></span>
+<span>  <span class="va">nodes</span>,</span>
+<span>  <span class="va">types</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  type.dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  pref.matrix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">types</span>, <span class="va">types</span><span class="op">)</span>,</span>
+<span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -109,11 +123,6 @@ types. These should be probabilities, i.e. numbers between zero and one.</p></dd
 
 <dt id="arg-directed">directed<a class="anchor" aria-label="anchor" href="#arg-directed"></a></dt>
 <dd><p>Logical constant, whether to generate directed graphs.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Passed to the constructor, <code>sample_traits()</code> or
-<code>sample_traits_callaway()</code>.</p></dd>
 
 
 <dt id="arg-k">k<a class="anchor" aria-label="anchor" href="#arg-k"></a></dt>

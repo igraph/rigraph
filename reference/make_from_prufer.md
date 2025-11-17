@@ -8,7 +8,7 @@ sequence.
 ``` r
 make_from_prufer(prufer)
 
-from_prufer(...)
+from_prufer(prufer)
 ```
 
 ## Arguments
@@ -16,10 +16,6 @@ from_prufer(...)
 - prufer:
 
   The Prüfer sequence to convert into a graph
-
-- ...:
-
-  Passed to `make_from_prufer()`
 
 ## Value
 

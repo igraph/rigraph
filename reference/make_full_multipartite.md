@@ -10,7 +10,7 @@ different partitions are present.
 ``` r
 make_full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 
-full_multipartite(...)
+full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 ```
 
 ## Arguments
@@ -30,10 +30,6 @@ full_multipartite(...)
   indices to partitions with higher indices; if `"in"`, then the
   opposite direction is realized; `"all"` creates mutual edges. This
   parameter is ignored for undirected graphs.
-
-- ...:
-
-  Passed to `make_full_multipartite()`.
 
 ## Value
 

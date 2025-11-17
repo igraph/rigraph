@@ -7,7 +7,7 @@ A graph with no edges
 ``` r
 make_empty_graph(n = 0, directed = TRUE)
 
-empty_graph(...)
+empty_graph(n = 0, directed = TRUE)
 ```
 
 ## Arguments
@@ -19,10 +19,6 @@ empty_graph(...)
 - directed:
 
   Whether to create a directed graph.
-
-- ...:
-
-  Passed to `make_graph_empty`.
 
 ## Value
 
@@ -56,9 +52,9 @@ Other deterministic constructors:
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH 09151f9 D--- 10 0 -- 
-#> + edges from 09151f9:
+#> IGRAPH e82514a D--- 10 0 -- 
+#> + edges from e82514a:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH ea8230e U--- 5 0 -- 
-#> + edges from ea8230e:
+#> IGRAPH 808f521 U--- 5 0 -- 
+#> + edges from 808f521:
 ```

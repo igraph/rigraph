@@ -9,7 +9,7 @@ directed graph, where every `i->j` edge is present if and only if
 ``` r
 make_full_citation_graph(n, directed = TRUE)
 
-full_citation_graph(...)
+full_citation_graph(n, directed = TRUE)
 ```
 
 ## Arguments
@@ -21,10 +21,6 @@ full_citation_graph(...)
 - directed:
 
   Whether to create a directed graph.
-
-- ...:
-
-  Passed to `make_full_citation_graph()`.
 
 ## Value
 
@@ -54,7 +50,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> IGRAPH 90a9812 D--- 10 45 -- Full citation graph
+#> IGRAPH f7f1447 D--- 10 45 -- Full citation graph
 #> + attr: name (g/c)
 #> + graph attributes:
 #> | + name:

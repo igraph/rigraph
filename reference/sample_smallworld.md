@@ -11,7 +11,7 @@ multi-edges.
 ``` r
 sample_smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 
-smallworld(...)
+smallworld(dim, size, nei, p, loops = FALSE, multiple = FALSE)
 ```
 
 ## Arguments
@@ -42,10 +42,6 @@ smallworld(...)
 
   Logical scalar, whether multiple edges are allowed int the generated
   graph.
-
-- ...:
-
-  Passed to `sample_smallworld()`.
 
 ## Value
 
@@ -114,7 +110,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-#> [1] 2.797778
+#> [1] 2.829899
 transitivity(g, type = "average")
-#> [1] 0.5323701
+#> [1] 0.538868
 ```

@@ -7,7 +7,7 @@ Create a full graph
 ``` r
 make_full_graph(n, directed = FALSE, loops = FALSE)
 
-full_graph(...)
+full_graph(n, directed = FALSE, loops = FALSE)
 ```
 
 ## Arguments
@@ -23,10 +23,6 @@ full_graph(...)
 - loops:
 
   Whether to add self-loops to the graph.
-
-- ...:
-
-  Passed to `make_full_graph()`.
 
 ## Value
 
@@ -56,12 +52,12 @@ Other deterministic constructors:
 
 ``` r
 make_full_graph(5)
-#> IGRAPH 3ad70dd U--- 5 10 -- Full graph
+#> IGRAPH 0869502 U--- 5 10 -- Full graph
 #> + attr: name (g/c), loops (g/l)
-#> + edges from 3ad70dd:
+#> + edges from 0869502:
 #>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5
 print_all(make_full_graph(4, directed = TRUE))
-#> IGRAPH 503c979 D--- 4 12 -- Full graph
+#> IGRAPH cbd87f7 D--- 4 12 -- Full graph
 #> + attr: name (g/c), loops (g/l)
 #> + graph attributes:
 #> | + name:

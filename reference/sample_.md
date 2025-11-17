@@ -85,8 +85,4 @@ blocky <- sample_(sbm(
 
 blocky2 <- pref_matrix %>%
   sample_sbm(n = 20, block.sizes = c(10, 10))
-
-## Arguments are passed on from sample_ to sample_sbm
-blocky3 <- pref_matrix %>%
-  sample_(sbm(), n = 20, block.sizes = c(10, 10))
 ```
