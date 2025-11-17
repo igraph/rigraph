@@ -10729,7 +10729,7 @@
       hub_score_impl(graph = g, scale = TRUE, weights = NULL)
     Output
       $vector
-      [1] 1 0 0 0 0
+      [1] 1.0000000 0.2500078 0.2500078 0.2500078 0.2500078
       
       $value
       [1] 4
@@ -10803,7 +10803,7 @@
       authority_score_impl(graph = g, scale = TRUE, weights = NULL)
     Output
       $vector
-      [1] 0 1 1 1 1
+      [1] 1.0000000 0.9999686 0.9999686 0.9999686 0.9999686
       
       $value
       [1] 4
