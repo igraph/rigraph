@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9013
+
+## Features
+
+- Implement generic mechanism for `layout_()` modifiers (#1473, #2435).
+
+## Continuous integration
+
+- Install binaries from r-universe for dev workflow (#2498).
+
+## revdep
+
+- New problems.
+
+
 # igraph 2.2.1.9012
 
 ## revdep
