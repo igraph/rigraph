@@ -16,7 +16,16 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(...)
+lattice(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+)
 }
 \arguments{
 \item{dimvector}{A vector giving the size of the lattice in each
@@ -40,8 +49,6 @@ periodic along each dimension. This parameter may also be scalar boolen value wh
 be extended to boolean vector with dimvector length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
-
-\item{...}{Passed to \code{make_lattice()}.}
 }
 \value{
 An igraph graph.

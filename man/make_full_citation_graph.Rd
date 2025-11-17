@@ -7,14 +7,12 @@
 \usage{
 make_full_citation_graph(n, directed = TRUE)
 
-full_citation_graph(...)
+full_citation_graph(n, directed = TRUE)
 }
 \arguments{
 \item{n}{The number of vertices.}
 
 \item{directed}{Whether to create a directed graph.}
-
-\item{...}{Passed to \code{make_full_citation_graph()}.}
 }
 \value{
 An igraph graph.

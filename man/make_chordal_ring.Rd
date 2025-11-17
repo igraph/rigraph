@@ -7,7 +7,7 @@
 \usage{
 make_chordal_ring(n, w, directed = FALSE)
 
-chordal_ring(...)
+chordal_ring(n, w, directed = FALSE)
 }
 \arguments{
 \item{n}{The number of vertices.}
@@ -16,8 +16,6 @@ chordal_ring(...)
 details below.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
-
-\item{...}{Passed to \code{make_chordal_ring()}.}
 }
 \value{
 An igraph graph.

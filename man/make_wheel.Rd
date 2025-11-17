@@ -7,12 +7,12 @@
 \usage{
 make_wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-wheel(...)
+wheel(n, ..., mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
 
-\item{...}{Passed to \code{make_wheel()}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{mode}{It defines the direction of the edges.
 \verb{in}: the edges point \emph{to} the center, \code{out}: the edges point \emph{from} the
