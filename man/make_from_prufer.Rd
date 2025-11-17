@@ -7,12 +7,10 @@
 \usage{
 make_from_prufer(prufer)
 
-from_prufer(...)
+from_prufer(prufer)
 }
 \arguments{
 \item{prufer}{The Prüfer sequence to convert into a graph}
-
-\item{...}{Passed to \code{make_from_prufer()}}
 }
 \value{
 A graph object.

@@ -999,10 +999,6 @@ make_ <- function(...) {
 #'
 #' blocky2 <- pref_matrix %>%
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
-#'
-#' ## Arguments are passed on from sample_ to sample_sbm
-#' blocky3 <- pref_matrix %>%
-#'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 #' @family games
 #' @family constructor modifiers
 sample_ <- function(...) {
@@ -1617,9 +1613,10 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
 }
 
 #' @rdname make_empty_graph
-#' @param ... Passed to `make_graph_empty`.
 #' @export
-empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
+empty_graph <- function(n = 0, directed = TRUE) {
+  constructor_spec(make_empty_graph, n = n, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1896,9 +1893,10 @@ make_star <- function(
 }
 
 #' @rdname make_star
-#' @param ... Passed to `make_star()`.
 #' @export
-star <- function(...) constructor_spec(make_star, ...)
+star <- function(n, mode = c("in", "out", "mutual", "undirected"), center = 1) {
+  constructor_spec(make_star, n = n, mode = mode, center = center)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1931,9 +1929,10 @@ make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname make_full_graph
-#' @param ... Passed to `make_full_graph()`.
 #' @export
-full_graph <- function(...) constructor_spec(make_full_graph, ...)
+full_graph <- function(n, directed = FALSE, loops = FALSE) {
+  constructor_spec(make_full_graph, n = n, directed = directed, loops = loops)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2019,9 +2018,29 @@ make_lattice <- function(
 }
 
 #' @rdname make_lattice
-#' @param ... Passed to `make_lattice()`.
 #' @export
-lattice <- function(...) constructor_spec(make_lattice, ...)
+lattice <- function(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+) {
+  constructor_spec(
+    make_lattice,
+    dimvector = dimvector,
+    length = length,
+    dim = dim,
+    nei = nei,
+    directed = directed,
+    mutual = mutual,
+    periodic = periodic,
+    circular = circular
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2062,9 +2081,16 @@ make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 }
 
 #' @rdname make_ring
-#' @param ... Passed to `make_ring()`.
 #' @export
-ring <- function(...) constructor_spec(make_ring, ...)
+ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
+  constructor_spec(
+    make_ring,
+    n,
+    directed = directed,
+    mutual = mutual,
+    circular = circular
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2126,9 +2152,16 @@ make_wheel <- function(
 }
 
 #' @rdname make_wheel
-#' @param ... Passed to `make_wheel()`.
 #' @export
-wheel <- function(...) constructor_spec(make_wheel, ...)
+wheel <- function(
+  n,
+  ...,
+  mode = c("in", "out", "mutual", "undirected"),
+  center = 1
+) {
+  check_dots_empty()
+  constructor_spec(make_wheel, n, mode = mode, center = center)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2247,9 +2280,10 @@ make_from_prufer <- function(prufer) {
 }
 
 #' @rdname make_from_prufer
-#' @param ... Passed to `make_from_prufer()`
 #' @export
-from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
+from_prufer <- function(prufer) {
+  constructor_spec(make_from_prufer, prufer = prufer)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2292,9 +2326,10 @@ graph_from_atlas <- function(n) {
 }
 
 #' @rdname graph_from_atlas
-#' @param ... Passed to `graph_from_atlas()`.
 #' @export
-atlas <- function(...) constructor_spec(graph_from_atlas, ...)
+atlas <- function(n) {
+  constructor_spec(graph_from_atlas, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2339,9 +2374,10 @@ make_chordal_ring <- function(n, w, directed = FALSE) {
 }
 
 #' @rdname make_chordal_ring
-#' @param ... Passed to `make_chordal_ring()`.
 #' @export
-chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
+chordal_ring <- function(n, w, directed = FALSE) {
+  constructor_spec(make_chordal_ring, n = n, w = w, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2378,9 +2414,10 @@ make_circulant <- function(n, shifts, directed = FALSE) {
 }
 
 #' @rdname make_circulant
-#' @param ... Passed to `make_circulant()`.
 #' @export
-circulant <- function(...) constructor_spec(make_circulant, ...)
+circulant <- function(n, shifts, directed = FALSE) {
+  constructor_spec(make_circulant, n = n, shifts = shifts, directed = directed)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2426,9 +2463,10 @@ make_line_graph <- function(graph) {
 }
 
 #' @rdname make_line_graph
-#' @param ... Passed to `make_line_graph()`.
 #' @export
-line_graph <- function(...) constructor_spec(make_line_graph, ...)
+line_graph <- function(graph) {
+  constructor_spec(make_line_graph, graph = graph)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2477,9 +2515,10 @@ make_de_bruijn_graph <- function(m, n) {
 }
 
 #' @rdname make_de_bruijn_graph
-#' @param ... Passed to `make_de_bruijn_graph()`.
 #' @export
-de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
+de_bruijn_graph <- function(m, n) {
+  constructor_spec(make_de_bruijn_graph, m = m, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2524,9 +2563,10 @@ make_kautz_graph <- function(m, n) {
 }
 
 #' @rdname make_kautz_graph
-#' @param ... Passed to `make_kautz_graph()`.
 #' @export
-kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
+kautz_graph <- function(m, n) {
+  constructor_spec(make_kautz_graph, m = m, n = n)
+}
 
 ## -----------------------------------------------------------------
 
@@ -2592,10 +2632,20 @@ make_full_bipartite_graph <- function(
 }
 
 #' @rdname make_full_bipartite_graph
-#' @param ... Passed to `make_full_bipartite_graph()`.
 #' @export
-full_bipartite_graph <- function(...) {
-  constructor_spec(make_full_bipartite_graph, ...)
+full_bipartite_graph <- function(
+  n1,
+  n2,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  constructor_spec(
+    make_full_bipartite_graph,
+    n1 = n1,
+    n2 = n2,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2674,9 +2724,15 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 }
 
 #' @rdname make_bipartite_graph
-#' @param ... Passed to `make_bipartite_graph()`.
 #' @export
-bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
+bipartite_graph <- function(types, edges, directed = FALSE) {
+  constructor_spec(
+    make_bipartite_graph,
+    types = types,
+    edges = edges,
+    directed = directed
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -2734,10 +2790,18 @@ make_full_multipartite <- function(
 }
 
 #' @rdname make_full_multipartite
-#' @param ... Passed to `make_full_multipartite()`.
 #' @export
-full_multipartite <- function(...) {
-  constructor_spec(make_full_multipartite, ...)
+full_multipartite <- function(
+  n,
+  directed = FALSE,
+  mode = c("all", "out", "in")
+) {
+  constructor_spec(
+    make_full_multipartite,
+    n = n,
+    directed = directed,
+    mode = mode
+  )
 }
 
 ## -----------------------------------------------------------------
@@ -2790,10 +2854,9 @@ make_turan <- function(n, r) {
 }
 
 #' @rdname make_turan
-#' @param ... Passed to `make_turan()`.
 #' @export
-turan <- function(...) {
-  constructor_spec(make_turan, ...)
+turan <- function(n, r) {
+  constructor_spec(make_turan, n = n, r = r)
 }
 
 ## -----------------------------------------------------------------
@@ -2824,10 +2887,9 @@ make_full_citation_graph <- function(n, directed = TRUE) {
 }
 
 #' @rdname make_full_citation_graph
-#' @param ... Passed to `make_full_citation_graph()`.
 #' @export
-full_citation_graph <- function(...) {
-  constructor_spec(make_full_citation_graph, ...)
+full_citation_graph <- function(n, directed = TRUE) {
+  constructor_spec(make_full_citation_graph, n = n, directed = directed)
 }
 
 ## -----------------------------------------------------------------

@@ -7,7 +7,7 @@
 \usage{
 make_circulant(n, shifts, directed = FALSE)
 
-circulant(...)
+circulant(n, shifts, directed = FALSE)
 }
 \arguments{
 \item{n}{Integer, the number of vertices in the circulant graph.}
@@ -15,8 +15,6 @@ circulant(...)
 \item{shifts}{Integer vector, a list of the offsets within the circulant graph.}
 
 \item{directed}{Boolean, whether to create a directed graph.}
-
-\item{...}{Passed to \code{make_circulant()}.}
 }
 \value{
 An igraph graph.

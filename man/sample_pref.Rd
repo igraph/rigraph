@@ -17,7 +17,15 @@ sample_pref(
   loops = FALSE
 )
 
-pref(...)
+pref(
+  nodes,
+  types,
+  type.dist = rep(1, types),
+  fixed.sizes = FALSE,
+  pref.matrix = matrix(1, types, types),
+  directed = FALSE,
+  loops = FALSE
+)
 
 sample_asym_pref(
   nodes,
@@ -27,7 +35,13 @@ sample_asym_pref(
   loops = FALSE
 )
 
-asym_pref(...)
+asym_pref(
+  nodes,
+  types,
+  type.dist.matrix = matrix(1, types, types),
+  pref.matrix = matrix(1, types, types),
+  loops = FALSE
+)
 }
 \arguments{
 \item{nodes}{The number of vertices in the graphs.}
@@ -49,9 +63,6 @@ an undirected graph, it must be symmetric.}
 \item{directed}{Logical scalar, whether to create a directed graph.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
-
-\item{...}{Passed to the constructor, \code{sample_pref()} or
-\code{sample_asym_pref()}.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}
