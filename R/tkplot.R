@@ -326,6 +326,7 @@ assign(".next", 1, .tkplot.env)
 #'
 tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   # nocov start
+  lifecycle::deprecate_stop("3.0.0", "tkplot()")
   ensure_igraph(graph)
 
   # Libraries
