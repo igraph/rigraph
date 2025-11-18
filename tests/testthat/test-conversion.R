@@ -18,7 +18,8 @@ test_that("as_directed works", {
 })
 
 test_that("as_directed keeps attributes", {
-  g <- graph_from_literal(A - B - C, D - A, E)
+  el <- structure(c("A", "A", "B", "B", "D", "C"), dim = 3:2)
+  g <- graph_from_edgelist(el, directed = FALSE) + vertex("E")
   g$name <- "Small graph"
   g_mutual <- as_directed(g, mode = "mutual")
   expect_equal(g_mutual$name, g$name)
@@ -59,7 +60,11 @@ test_that("as.undirected() deprecation", {
 })
 
 test_that("as_undirected() keeps attributes", {
-  g <- graph_from_literal(A +-+ B, A --+ C, C +-+ D)
+  el <- structure(
+    c("A", "A", "B", "C", "D", "B", "C", "A", "D", "C"),
+    dim = c(5L, 2L)
+  )
+  g <- graph_from_edgelist(el, directed = TRUE)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))
 
