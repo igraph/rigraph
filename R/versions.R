@@ -57,7 +57,7 @@ graph_version <- function(graph) {
   # Don't call is_igraph() here to avoid recursion
   stopifnot(inherits(graph, "igraph"))
 
-  .Call(R_igraph_graph_version, graph)
+  .Call(Rx_igraph_graph_version, graph)
 }
 
 #' igraph data structure versions
@@ -99,18 +99,18 @@ upgrade_graph <- function(graph) {
 
   # g_ver < p_ver
   if (g_ver == ver_0_4) {
-    .Call(R_igraph_add_env, graph)
+    .Call(Rx_igraph_add_env, graph)
   } else if (g_ver == ver_0_7_999) {
     # Not observed in the wild
-    .Call(R_igraph_add_myid_to_env, graph)
-    .Call(R_igraph_add_version_to_env, graph)
+    .Call(Rx_igraph_add_myid_to_env, graph)
+    .Call(Rx_igraph_add_version_to_env, graph)
   } else if (g_ver == ver_0_8) {
-    .Call(R_igraph_add_version_to_env, graph)
+    .Call(Rx_igraph_add_version_to_env, graph)
     graph <- unclass(graph)
     graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
     class(graph) <- "igraph"
 
-    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # Calling for side effect: error if Rz_SEXP_to_igraph() fails, create native igraph,
     # update "me" element of environment
     V(graph)
 
@@ -125,12 +125,12 @@ upgrade_graph <- function(graph) {
 ## Check that the version is the latest
 
 warn_version <- function(graph) {
-  # Calling for side effect: error if R_SEXP_to_igraph() fails
+  # Calling for side effect: error if Rz_SEXP_to_igraph() fails
   # Don't call vcount_impl() to avoid recursion
-  .Call(R_igraph_vcount, graph)
+  .Call(Rx_igraph_vcount, graph)
 
   # graph_version() calls is_igraph(), but that function must call warn_version() for safety
-  their_version <- .Call(R_igraph_graph_version, graph)
+  their_version <- .Call(Rx_igraph_graph_version, graph)
 
   if (pkg_graph_version == their_version) {
     return(FALSE)
@@ -151,7 +151,7 @@ warn_version <- function(graph) {
     #   Users will have to call upgrade_graph(), but this is what the message
     #   is about.
     if (pkg_graph_version <= ver_1_5_0) {
-      .Call(R_igraph_add_version_to_env, graph)
+      .Call(Rx_igraph_add_version_to_env, graph)
     }
     return(TRUE)
   }

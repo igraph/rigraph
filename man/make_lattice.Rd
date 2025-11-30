@@ -16,7 +16,16 @@ make_lattice(
   circular = deprecated()
 )
 
-lattice(...)
+lattice(
+  dimvector = NULL,
+  length = NULL,
+  dim = NULL,
+  nei = 1,
+  directed = FALSE,
+  mutual = FALSE,
+  periodic = FALSE,
+  circular = deprecated()
+)
 }
 \arguments{
 \item{dimvector}{A vector giving the size of the lattice in each
@@ -40,8 +49,6 @@ periodic along each dimension. This parameter may also be scalar boolen value wh
 be extended to boolean vector with dimvector length.}
 
 \item{circular}{Deprecated, use \code{periodic} instead.}
-
-\item{...}{Passed to \code{make_lattice()}.}
 }
 \value{
 An igraph graph.
@@ -64,14 +71,18 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_mycielski_graph}()},
 \code{\link{make_ring}()},
 \code{\link{make_star}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{Lattice}
 \concept{deterministic constructors}

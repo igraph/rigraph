@@ -49,6 +49,7 @@ bridges(g)
 Connected components
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()},
+\code{\link{count_reachable}()},
 \code{\link{decompose}()},
 \code{\link{is_biconnected}()}
 }
