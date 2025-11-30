@@ -2,9 +2,12 @@
 % Please edit documentation in R/make.R
 \name{make_mycielski_graph}
 \alias{make_mycielski_graph}
+\alias{mycielski_graph}
 \title{Create a Mycielski graph}
 \usage{
 make_mycielski_graph(k, ...)
+
+mycielski_graph(k, ...)
 }
 \arguments{
 \item{k}{Integer, the order of the Mycielski graph (must be non-negative).}

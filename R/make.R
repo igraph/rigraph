@@ -2297,6 +2297,12 @@ make_mycielski_graph <- function(k, ...) {
   mycielski_graph_impl(k = k)
 }
 
+#' @rdname make_mycielski_graph
+#' @export
+mycielski_graph <- function(k, ...) {
+  constructor_spec(make_mycielski_graph, k = k)
+}
+
 ## -----------------------------------------------------------------
 
 #' Create an undirected tree graph from its Prüfer sequence
