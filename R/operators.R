@@ -1364,11 +1364,13 @@ t.igraph <- function(x) reverse_edges(x)
 
 #' Mycielski transformation of a graph
 #'
+#' @description
 #' `r lifecycle::badge("experimental")`
 #'
 #' The Mycielskian of a graph is a larger graph formed using a construction due to Jan Mycielski that increases the chromatic number by one while preserving the triangle-free property.
 #' The Mycielski construction can be used to create triangle-free graphs with an arbitrarily large chromatic number.
 #'
+#' @details
 #' Let the \eqn{n} vertices of the given graph \eqn{G} be \eqn{v_1, \ldots, v_n}.
 #' The Mycielskian of \eqn{G}, denoted \eqn{M(G)}, contains \eqn{G} itself as a subgraph, together with \eqn{n+1} additional vertices:
 #' * A vertex \eqn{u_i} corresponding to each vertex \eqn{v_i} of \eqn{G}.
@@ -1384,6 +1386,7 @@ t.igraph <- function(x) reverse_edges(x)
 #' The \eqn{k}-th iterated Mycielskian has \eqn{n_k = (n + 1) \cdot 2^k - 1} vertices and \eqn{m_k = ((2m + 2n + 1) \cdot 3^k - n_{k+1}) / 2} edges, where \eqn{n} and \eqn{m} are the vertex and edge count of the original graph, respectively.
 #'
 #' @param graph The input graph.
+#' @inheritParams rlang::args_dots_empty
 #' @param k Integer, the number of Mycielski iterations to perform (must be non-negative).
 #' @return An igraph graph object.
 #'
@@ -1404,9 +1407,7 @@ t.igraph <- function(x) reverse_edges(x)
 #' mg <- mycielskian(g, 2)
 #' vcount(mg)
 #' ecount(mg)
-mycielskian <- function(graph, k = 1) {
-  ensure_igraph(graph)
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_mycielskian, graph, as.numeric(k))
+mycielskian <- function(graph, ..., k = 1) {
+  check_dots_empty()
+  mycielskian_impl(graph = graph, k = k)
 }

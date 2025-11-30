@@ -4,21 +4,23 @@
 \alias{make_mycielski_graph}
 \title{Create a Mycielski graph}
 \usage{
-make_mycielski_graph(k)
+make_mycielski_graph(k, ...)
 }
 \arguments{
 \item{k}{Integer, the order of the Mycielski graph (must be non-negative).}
+
+\item{...}{These dots are for future extensions and must be empty.}
 }
 \value{
 An igraph graph object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
+
 The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with chromatic number \eqn{k}.
 It is constructed using the Mycielski transformation as described in \code{\link[=mycielskian]{mycielskian()}}.
-
+}
+\details{
 The Mycielski graph \eqn{M_k} is defined for all non-negative integers \eqn{k}.
 The first few Mycielski graphs are:
 \itemize{

@@ -1311,7 +1311,7 @@ test_that("unique on detached vs, names", {
 test_that("mycielskian() works", {
   # Test basic Mycielski transformation of a triangle
   g <- make_full_graph(3)
-  mg <- mycielskian(g, 1)
+  mg <- mycielskian(g, k = 1)
 
   # Check vertex and edge counts
   # For triangle: n=3, m=3
@@ -1321,12 +1321,12 @@ test_that("mycielskian() works", {
 
   # Test with k=0 (identity operation)
   g2 <- make_ring(5)
-  mg2 <- mycielskian(g2, 0)
+  mg2 <- mycielskian(g2, k = 0)
   expect_isomorphic(g2, mg2)
 
   # Test multiple iterations
   g3 <- make_ring(5)
-  mg3 <- mycielskian(g3, 2)
+  mg3 <- mycielskian(g3, k = 2)
   # After 2 iterations: vertices = (5+1)*2^2 - 1 = 23
   expect_vcount(mg3, 23)
 })

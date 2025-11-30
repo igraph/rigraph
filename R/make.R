@@ -2252,11 +2252,13 @@ tree <- function(...) {
 
 #' Create a Mycielski graph
 #'
+#' @description
 #' `r lifecycle::badge("experimental")`
 #'
 #' The Mycielski graph of order \eqn{k}, denoted \eqn{M_k}, is a triangle-free graph with chromatic number \eqn{k}.
 #' It is constructed using the Mycielski transformation as described in [mycielskian()].
 #'
+#' @details
 #' The Mycielski graph \eqn{M_k} is defined for all non-negative integers \eqn{k}.
 #' The first few Mycielski graphs are:
 #' * \eqn{M_0}: Null graph (no vertices)
@@ -2269,6 +2271,7 @@ tree <- function(...) {
 #' The edge count is \eqn{(7 \cdot 3^{k-2} + 1) / 2 - 3 \cdot 2^{k - 2}} for \eqn{k > 1} and 0 otherwise.
 #'
 #' @param k Integer, the order of the Mycielski graph (must be non-negative).
+#' @inheritParams rlang::args_dots_empty
 #' @return An igraph graph object.
 #'
 #' @concept Mycielski graph
@@ -2289,9 +2292,9 @@ tree <- function(...) {
 #' g4 <- make_mycielski_graph(4)
 #' vcount(g4)
 #' ecount(g4)
-make_mycielski_graph <- function(k) {
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_mycielski_graph, as.numeric(k))
+make_mycielski_graph <- function(k, ...) {
+  check_dots_empty()
+  mycielski_graph_impl(k = k)
 }
 
 ## -----------------------------------------------------------------

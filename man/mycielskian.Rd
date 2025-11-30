@@ -4,10 +4,12 @@
 \alias{mycielskian}
 \title{Mycielski transformation of a graph}
 \usage{
-mycielskian(graph, k = 1)
+mycielskian(graph, ..., k = 1)
 }
 \arguments{
 \item{graph}{The input graph.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{k}{Integer, the number of Mycielski iterations to perform (must be non-negative).}
 }
@@ -16,11 +18,11 @@ An igraph graph object.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
+
 The Mycielskian of a graph is a larger graph formed using a construction due to Jan Mycielski that increases the chromatic number by one while preserving the triangle-free property.
 The Mycielski construction can be used to create triangle-free graphs with an arbitrarily large chromatic number.
-
+}
+\details{
 Let the \eqn{n} vertices of the given graph \eqn{G} be \eqn{v_1, \ldots, v_n}.
 The Mycielskian of \eqn{G}, denoted \eqn{M(G)}, contains \eqn{G} itself as a subgraph, together with \eqn{n+1} additional vertices:
 \itemize{
