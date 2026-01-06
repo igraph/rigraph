@@ -2282,14 +2282,35 @@ void Rx_igraph_set_in_r_check(bool set) {
 
 void Rx_igraph_error(void) {
   Rx_igraph_errors_count = 0;
-  Rf_error("%s", Rx_igraph_error_reason);
+
+  SEXP get_ns_fn = PROTECT(Rf_install("getNamespace"));
+  SEXP ns_name = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
+  SEXP get_ns_call = PROTECT(Rf_lang2(get_ns_fn, ns_name));
+  SEXP igraph_ns = PROTECT(Rf_eval(get_ns_call, R_BaseEnv));
+
+  SEXP error_fn = PROTECT(Rf_install(".igraph_error"));
+  SEXP error_msg = PROTECT(Rf_mkString(Rx_igraph_error_reason));
+  SEXP error_call = PROTECT(Rf_lang2(error_fn, error_msg));
+  Rf_eval(error_call, igraph_ns);
+
+  UNPROTECT(8);
 }
 
 void Rx_igraph_warning(void) {
   if (Rx_igraph_warnings_count > 0) {
     Rx_igraph_warnings_count = 0;
 
-    Rf_warning("%s", Rx_igraph_warning_reason);
+    SEXP get_ns_fn = PROTECT(Rf_install("getNamespace"));
+    SEXP ns_name = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
+    SEXP get_ns_call = PROTECT(Rf_lang2(get_ns_fn, ns_name));
+    SEXP igraph_ns = PROTECT(Rf_eval(get_ns_call, R_BaseEnv));
+
+    SEXP warning_fn = PROTECT(Rf_install(".igraph_warning"));
+    SEXP warning_msg = PROTECT(Rf_mkString(Rx_igraph_warning_reason));
+    SEXP warning_call = PROTECT(Rf_lang2(warning_fn, warning_msg));
+    Rf_eval(warning_call, igraph_ns);
+
+    UNPROTECT(8);
   }
 }
 

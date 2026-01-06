@@ -94,3 +94,60 @@ modify_list <- function(x, y) {
 
   utils::modifyList(x, y)
 }
+
+# Parse igraph C error/warning messages in "At file:line : message" format
+.parse_igraph_message <- function(msg) {
+  # Parse "At file:line : message" format
+  pattern <- "^At ([^:]+):(\\d+) : (.+)$"
+  matches <- regexec(pattern, msg)
+
+  if (matches[[1]][1] == -1) {
+    # Fallback if parsing fails
+    return(list(file = "", line = 0, message = msg))
+  }
+
+  captured <- regmatches(msg, matches)[[1]]
+  list(
+    file = captured[2],
+    line = as.integer(captured[3]),
+    message = captured[4]
+  )
+}
+
+# Format igraph message with sentences on separate lines and source at the end
+.format_igraph_message <- function(file, line, message) {
+  # Remove vendor/cigraph/src/ prefix
+  file <- sub("^vendor/cigraph/src/", "", file)
+
+  # Split message into sentences (split on ". " but preserve the period)
+  sentences <- strsplit(message, "(?<=\\.) ", perl = TRUE)[[1]]
+
+  # Build formatted message
+  if (length(sentences) > 0) {
+    formatted <- paste0("x ", sentences[1])
+    if (length(sentences) > 1) {
+      for (i in 2:length(sentences)) {
+        formatted <- paste0(formatted, "\n", sentences[i])
+      }
+    }
+  } else {
+    formatted <- paste0("x ", message)
+  }
+
+  # Add source line
+  paste0(formatted, "\nSource: ", file, ":", line)
+}
+
+# Called from C to emit warnings with reformatted messages
+.igraph_warning <- function(msg) {
+  parsed <- .parse_igraph_message(msg)
+  formatted <- .format_igraph_message(parsed$file, parsed$line, parsed$message)
+  warning(formatted, call. = FALSE)
+}
+
+# Called from C to emit errors with reformatted messages
+.igraph_error <- function(msg) {
+  parsed <- .parse_igraph_message(msg)
+  formatted <- .format_igraph_message(parsed$file, parsed$line, parsed$message)
+  stop(formatted, call. = FALSE)
+}
