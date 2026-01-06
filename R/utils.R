@@ -124,12 +124,8 @@ modify_list <- function(x, y) {
 
   # Build formatted message
   if (length(sentences) > 0) {
-    formatted <- paste0("x ", sentences[1])
-    if (length(sentences) > 1) {
-      for (i in 2:length(sentences)) {
-        formatted <- paste0(formatted, "\n", sentences[i])
-      }
-    }
+    sentences[1] <- paste0("x ", sentences[1])
+    formatted <- paste(sentences, collapse = "\n")
   } else {
     formatted <- paste0("x ", message)
   }
