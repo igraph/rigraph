@@ -47,8 +47,9 @@
     Code
       arpack(f, options = list(nev = 2, ncv = 4), sym = TRUE)
     Condition
-      Error in `arpack()`:
-      ! At vendor/cigraph/src/linalg/arpack.c:1102 : ARPACK error, N must be positive
+      Error in `.igraph_error()`:
+      x ARPACK error, N must be positive
+      i Source: linalg/arpack.c:1102
 
 ---
 
