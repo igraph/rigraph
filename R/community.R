@@ -3196,7 +3196,6 @@ communities <- groups.communities
 #'
 #' @export
 #' @family functions for manipulating graph structure
-#' @cdocs igraph_contract_vertices
 contract <- function(
   graph,
   mapping,
@@ -3252,7 +3251,6 @@ contract <- function(
 #'
 #' @export
 #' @family community
-#' @cdocs igraph_voronoi
 voronoi_cells <- function(
   graph,
   generators,

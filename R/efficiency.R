@@ -66,7 +66,6 @@
 #' g <- make_graph("zachary")
 #' global_efficiency(g)
 #' average_local_efficiency(g)
-#' @cdocs igraph_global_efficiency
 global_efficiency <- function(graph, weights = NULL, directed = TRUE) {
   global_efficiency_impl(
     graph = graph,
@@ -77,7 +76,6 @@ global_efficiency <- function(graph, weights = NULL, directed = TRUE) {
 
 #' @rdname global_efficiency
 #' @export
-#' @cdocs igraph_local_efficiency
 local_efficiency <- function(
   graph,
   vids = V(graph),
@@ -96,7 +94,6 @@ local_efficiency <- function(
 
 #' @rdname global_efficiency
 #' @export
-#' @cdocs igraph_average_local_efficiency
 average_local_efficiency <- function(
   graph,
   weights = NULL,

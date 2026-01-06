@@ -66,7 +66,6 @@
 #'
 #' @family cycles
 #' @export
-#' @cdocs igraph_is_eulerian
 has_eulerian_path <- function(graph) {
   res <- is_eulerian_impl(
     graph = graph
@@ -76,7 +75,6 @@ has_eulerian_path <- function(graph) {
 
 #' @rdname has_eulerian_path
 #' @export
-#' @cdocs igraph_is_eulerian
 has_eulerian_cycle <- function(graph) {
   res <- is_eulerian_impl(
     graph = graph
@@ -86,7 +84,6 @@ has_eulerian_cycle <- function(graph) {
 
 #' @rdname has_eulerian_path
 #' @export
-#' @cdocs igraph_eulerian_path
 eulerian_path <- function(graph) {
   eulerian_path_impl(
     graph = graph
@@ -95,7 +92,6 @@ eulerian_path <- function(graph) {
 
 #' @rdname has_eulerian_path
 #' @export
-#' @cdocs igraph_eulerian_cycle
 eulerian_cycle <- function(graph) {
   eulerian_cycle_impl(
     graph = graph

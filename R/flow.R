@@ -741,7 +741,6 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
 #' @export
-#' @cdocs igraph_all_st_cuts
 st_cuts <- function(graph, source, target) {
   all_st_cuts_impl(
     graph = graph,
@@ -805,7 +804,6 @@ st_cuts <- function(graph, source, target) {
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
 #' @export
-#' @cdocs igraph_all_st_mincuts
 st_min_cuts <- function(graph, source, target, capacity = NULL) {
   all_st_mincuts_impl(
     graph = graph,
@@ -954,7 +952,6 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' min_st_separators(g)
 #' ```
 #' @family flow
-#' @cdocs igraph_all_minimal_st_separators
 min_st_separators <- function(graph) {
   all_minimal_st_separators_impl(
     graph = graph
@@ -1026,7 +1023,6 @@ min_st_separators <- function(graph) {
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #' @family flow
 #' @export
-#' @cdocs igraph_maxflow
 max_flow <- function(graph, source, target, capacity = NULL) {
   maxflow_impl(
     graph = graph,
@@ -1062,7 +1058,6 @@ max_flow <- function(graph, source, target, capacity = NULL) {
 #' is_separator(ring, c(2, 3))
 #'
 #' @export
-#' @cdocs igraph_is_separator
 is_separator <- function(graph, candidate) {
   is_separator_impl(
     graph = graph,
@@ -1116,7 +1111,6 @@ is_separator <- function(graph, candidate) {
 #'
 #' @family flow
 #' @export
-#' @cdocs igraph_is_minimal_separator
 is_min_separator <- function(graph, candidate) {
   is_minimal_separator_impl(
     graph = graph,
@@ -1192,7 +1186,6 @@ is_min_separator <- function(graph, candidate) {
 #'   John - Gery:Russ:Michael
 #' )
 #' min_separators(camp)
-#' @cdocs igraph_minimum_size_separators
 min_separators <- function(graph) {
   minimum_size_separators_impl(
     graph = graph

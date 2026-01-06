@@ -851,7 +851,6 @@ farthest_vertices <- function(
 
 #' @export
 #' @rdname distances
-#' @cdocs igraph_average_path_length_dijkstra
 mean_distance <- function(
   graph,
   weights = NULL,
@@ -940,7 +939,6 @@ degree <- function(
 
 #' @rdname degree
 #' @export
-#' @cdocs igraph_maxdegree
 max_degree <- function(
   graph,
   ...,
@@ -958,7 +956,6 @@ max_degree <- function(
 
 #' @rdname degree
 #' @export
-#' @cdocs igraph_mean_degree
 mean_degree <- function(graph, loops = TRUE) {
   mean_degree_impl(
     graph = graph,
@@ -1474,7 +1471,6 @@ all_shortest_paths <- function(
 #' @family structural.properties
 #' @seealso [shortest_paths()], [all_shortest_paths()]
 #' @keywords graphs
-#' @cdocs igraph_get_k_shortest_paths
 k_shortest_paths <- function(
   graph,
   from,
@@ -1988,7 +1984,6 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' reciprocity(g)
 #'
-#' @cdocs igraph_reciprocity
 reciprocity <- function(
   graph,
   ignore.loops = TRUE,
@@ -2039,7 +2034,6 @@ reciprocity <- function(
 #' edge_density(g, loops = TRUE) # this is right!!!
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
-#' @cdocs igraph_density
 edge_density <- function(graph, loops = FALSE) {
   density_impl(
     graph = graph,
@@ -2351,7 +2345,6 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo = "approx_eades")
-#' @cdocs igraph_feedback_arc_set
 feedback_arc_set <- function(
   graph,
   weights = NULL,
@@ -2392,7 +2385,6 @@ feedback_arc_set <- function(
 #'
 #' g <- make_lattice(c(3,3))
 #' feedback_vertex_set(g)
-#' @cdocs igraph_feedback_vertex_set
 feedback_vertex_set <- function(graph, weights = NULL, algo = c("exact_ip")) {
   feedback_vertex_set_impl(
     graph = graph,
@@ -2529,7 +2521,6 @@ girth <- function(graph, circle = TRUE) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
-#' @cdocs igraph_is_multiple
 which_multiple <- function(graph, eids = E(graph)) {
   is_multiple_impl(
     graph = graph,
@@ -2538,7 +2529,6 @@ which_multiple <- function(graph, eids = E(graph)) {
 }
 #' @rdname which_multiple
 #' @export
-#' @cdocs igraph_has_multiple
 any_multiple <- function(graph) {
   has_multiple_impl(
     graph = graph
@@ -2546,7 +2536,6 @@ any_multiple <- function(graph) {
 }
 #' @rdname which_multiple
 #' @export
-#' @cdocs igraph_count_multiple
 count_multiple <- function(graph, eids = E(graph)) {
   count_multiple_impl(
     graph = graph,
@@ -2555,7 +2544,6 @@ count_multiple <- function(graph, eids = E(graph)) {
 }
 #' @rdname which_multiple
 #' @export
-#' @cdocs igraph_is_loop
 which_loop <- function(graph, eids = E(graph)) {
   is_loop_impl(
     graph = graph,
@@ -2564,7 +2552,6 @@ which_loop <- function(graph, eids = E(graph)) {
 }
 #' @rdname which_multiple
 #' @export
-#' @cdocs igraph_has_loop
 any_loop <- function(graph) {
   has_loop_impl(
     graph = graph
@@ -2572,7 +2559,6 @@ any_loop <- function(graph) {
 }
 #' @rdname which_multiple
 #' @export
-#' @cdocs igraph_count_loops
 count_loops <- function(graph) {
   count_loops_impl(
     graph = graph
@@ -3166,7 +3152,6 @@ components <- function(graph, mode = c("weak", "strong")) {
 
 #' @rdname components
 #' @export
-#' @cdocs igraph_is_connected
 is_connected <- function(graph, mode = c("weak", "strong")) {
   is_connected_impl(
     graph = graph,
@@ -3228,7 +3213,6 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' g3 <- make_graph(~ 1 - 2 - 3, 4 - 5, 6)
 #' count_reachable(g3, mode = "all")
 #'
-#' @cdocs igraph_count_reachable
 count_reachable <- function(graph, mode = c("out", "in", "all", "total")) {
   count_reachable_impl(
     graph = graph,
@@ -3342,8 +3326,6 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' laplacian_matrix(g, normalization = "unnormalized")
 #' laplacian_matrix(g, normalization = "unnormalized", sparse = FALSE)
 #'
-#' @cdocs igraph_get_laplacian
-#' @cdocs igraph_get_laplacian_sparse
 laplacian_matrix <- function(
   graph,
   weights = NULL,
@@ -3593,7 +3575,6 @@ max_bipartite_match <- function(
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_is_mutual
 which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
   is_mutual_impl(
     graph = graph,
@@ -3677,7 +3658,6 @@ which_mutual <- function(graph, eids = E(graph), loops = TRUE) {
 #' knn(g5)
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_avg_nearest_neighbor_degree
 knn <- function(
   graph,
   vids = V(graph),

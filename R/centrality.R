@@ -1291,7 +1291,6 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-#' @cdocs igraph_eigenvector_centrality
 eigen_centrality <- function(
   graph,
   directed = FALSE,
@@ -1371,7 +1370,6 @@ eigen_centrality <- function(
 #' strength(g)
 #' @family centrality
 #' @export
-#' @cdocs igraph_strength
 strength <- function(
   graph,
   vids = V(graph),
@@ -1429,7 +1427,6 @@ strength <- function(
 #' diversity(g3)
 #' @family centrality
 #' @export
-#' @cdocs igraph_diversity
 diversity <- function(graph, weights = NULL, vids = V(graph)) {
   diversity_impl(
     graph = graph,
@@ -1497,7 +1494,6 @@ diversity <- function(graph, weights = NULL, vids = V(graph)) {
 #' g2 <- make_ring(10)
 #' hits_scores(g2)
 #' @family centrality
-#' @cdocs igraph_hub_and_authority_scores
 hits_scores <- function(
   graph,
   ...,
@@ -1681,7 +1677,6 @@ hub_score <- function(
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-#' @cdocs igraph_personalized_pagerank
 page_rank <- function(
   graph,
   algo = c("prpack", "arpack"),
@@ -1749,7 +1744,6 @@ page_rank <- function(
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-#' @cdocs igraph_harmonic_centrality_cutoff
 harmonic_centrality <- function(
   graph,
   vids = V(graph),

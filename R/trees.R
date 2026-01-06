@@ -40,7 +40,6 @@
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_is_tree
 is_tree <- function(
   graph,
   mode = c("out", "in", "all", "total"),
@@ -100,7 +99,6 @@ is_tree <- function(
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_is_forest
 is_forest <- function(
   graph,
   mode = c("out", "in", "all", "total"),
@@ -137,7 +135,6 @@ is_forest <- function(
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_to_prufer
 to_prufer <- function(graph) {
   to_prufer_impl(
     graph = graph
@@ -170,7 +167,6 @@ to_prufer <- function(graph) {
 #'
 #' @family trees
 #' @export
-#' @cdocs igraph_random_spanning_tree
 sample_spanning_tree <- function(graph, vid = 0) {
   random_spanning_tree_impl(
     graph = graph,

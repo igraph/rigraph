@@ -599,7 +599,6 @@ as_edgelist <- function(graph, names = TRUE) {
 #' )
 #' print(ug4, e = TRUE)
 #'
-#' @cdocs igraph_to_directed
 as_directed <- function(
   graph,
   mode = c("mutual", "arbitrary", "random", "acyclic")
@@ -1274,7 +1273,6 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' which_multiple(g3)
 #' @family conversion
 #' @export
-#' @cdocs igraph_adjlist
 graph_from_adj_list <- function(
   adjlist,
   mode = c("out", "in", "all", "total"),

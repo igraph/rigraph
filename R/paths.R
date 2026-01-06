@@ -159,7 +159,6 @@ all_simple_paths <- function(
 #' @family cycles
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_is_dag
 is_dag <- function(graph) {
   is_dag_impl(
     graph = graph
@@ -186,7 +185,6 @@ is_dag <- function(graph) {
 #' @family cycles
 #' @family structural.properties
 #' @export
-#' @cdocs igraph_is_acyclic
 is_acyclic <- function(graph) {
   is_acyclic_impl(
     graph = graph
@@ -247,7 +245,6 @@ is_acyclic <- function(graph) {
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
-#' @cdocs igraph_maximum_cardinality_search
 max_cardinality <- function(graph) {
   maximum_cardinality_search_impl(
     graph = graph
@@ -282,7 +279,6 @@ max_cardinality <- function(graph) {
 #' eccentricity(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_eccentricity_dijkstra
 eccentricity <- function(
   graph,
   vids = V(graph),
@@ -342,7 +338,6 @@ eccentricity <- function(
 #' radius(g)
 #' @family paths
 #' @export
-#' @cdocs igraph_radius_dijkstra
 radius <- function(
   graph,
   ...,
@@ -398,7 +393,6 @@ radius <- function(
 #' graph_center(ring)
 #'
 #' @export
-#' @cdocs igraph_graph_center_dijkstra
 graph_center <- function(
   graph,
   ...,
@@ -416,7 +410,6 @@ graph_center <- function(
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-#' @cdocs igraph_path_length_hist
 distance_table <- function(graph, directed = TRUE) {
   path_length_hist_impl(
     graph = graph,
