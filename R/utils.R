@@ -114,7 +114,7 @@ modify_list <- function(x, y) {
   )
 }
 
-# Format igraph message with sentences on separate lines and source at the end
+# Format igraph message as cli-compatible character vector
 .format_igraph_message <- function(file, line, message) {
   # Remove vendor/cigraph/src/ prefix
   file <- sub("^vendor/cigraph/src/", "", file)
@@ -122,28 +122,32 @@ modify_list <- function(x, y) {
   # Split message into sentences (split on ". " but preserve the period)
   sentences <- strsplit(message, "(?<=\\.) ", perl = TRUE)[[1]]
 
-  # Build formatted message
-  if (length(sentences) > 0) {
-    sentences[1] <- paste0("x ", sentences[1])
-    formatted <- paste(sentences, collapse = "\n")
-  } else {
-    formatted <- paste0("x ", message)
+  if (length(sentences) == 0) {
+    sentences <- message
   }
 
-  # Add source line
-  paste0(formatted, "\nSource: ", file, ":", line)
+  # Build formatted message as named vector for cli
+  # First sentence gets "x" bullet, rest get continuation (no bullet)
+  # Source gets "i" (info) bullet
+  msg_vec <- c(
+    setNames(sentences[1], "x"),
+    if (length(sentences) > 1) setNames(sentences[-1], rep(" ", length(sentences) - 1)),
+    setNames(paste0("Source: ", file, ":", line), "i")
+  )
+
+  msg_vec
 }
 
 # Called from C to emit warnings with reformatted messages
 .igraph_warning <- function(msg) {
   parsed <- .parse_igraph_message(msg)
   formatted <- .format_igraph_message(parsed$file, parsed$line, parsed$message)
-  warning(formatted, call. = FALSE)
+  cli::cli_warn(formatted)
 }
 
 # Called from C to emit errors with reformatted messages
 .igraph_error <- function(msg) {
   parsed <- .parse_igraph_message(msg)
   formatted <- .format_igraph_message(parsed$file, parsed$line, parsed$message)
-  stop(formatted, call. = FALSE)
+  cli::cli_abort(formatted)
 }
