@@ -19,8 +19,10 @@
     Code
       empty_impl(n = -1)
     Condition
-      Error in `empty_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: graph/type_indexededgelist.c:xx
 
 # add_edges_impl basic
 
@@ -154,8 +156,10 @@
     Code
       wheel_impl(n = -1)
     Condition
-      Error in `wheel_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Invalid number of vertices. Invalid vertex ID
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid vertex ID
+      i Source: constructors/regular.c:xx
 
 # hypercube_impl basic
 
@@ -180,8 +184,11 @@
     Code
       hypercube_impl(n = 10000)
     Condition
-      Error in `hypercube_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
+      Error in `.igraph_error()`:
+      x The requested hypercube graph dimension (10000) is too high.
+        It must be no greater than 57.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # square_lattice_impl basic
 
@@ -207,8 +214,10 @@
     Code
       square_lattice_impl(dimvector = -1)
     Condition
-      Error in `square_lattice_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Invalid dimension vector. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid dimension vector.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # triangular_lattice_impl basic
 
@@ -233,8 +242,10 @@
     Code
       triangular_lattice_impl(dimvector = -1)
     Condition
-      Error in `triangular_lattice_impl()`:
-      ! At vendor/cigraph/src/constructors/lattices.c:xx : Invalid dimension vector. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid dimension vector.
+        Invalid value
+      i Source: constructors/lattices.c:xx
 
 # path_graph_impl basic
 
@@ -259,8 +270,10 @@
     Code
       path_graph_impl(n = -1)
     Condition
-      Error in `path_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of vertices must be non-negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x The number of vertices must be non-negative, got -1.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # cycle_graph_impl basic
 
@@ -285,8 +298,10 @@
     Code
       cycle_graph_impl(n = -1)
     Condition
-      Error in `cycle_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of vertices must be non-negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x The number of vertices must be non-negative, got -1.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # symmetric_tree_impl basic
 
@@ -311,8 +326,10 @@
     Code
       symmetric_tree_impl(branches = -1)
     Condition
-      Error in `symmetric_tree_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : The number of branches must be positive at each level. Invalid value
+      Error in `.igraph_error()`:
+      x The number of branches must be positive at each level.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # regular_tree_impl basic
 
@@ -338,8 +355,10 @@
     Code
       regular_tree_impl(h = -1)
     Condition
-      Error in `regular_tree_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : Height of regular tree must be positive, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Height of regular tree must be positive, got -1.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # full_citation_impl basic
 
@@ -364,8 +383,10 @@
     Code
       full_citation_impl(n = -1)
     Condition
-      Error in `full_citation_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Invalid number of vertices. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid value
+      i Source: constructors/full.c:xx
 
 # atlas_impl basic
 
@@ -389,8 +410,11 @@
     Code
       atlas_impl(number = -1)
     Condition
-      Error in `atlas_impl()`:
-      ! At vendor/cigraph/src/constructors/atlas.c:xx : No such graph in atlas. The graph index must be less than 1253. Invalid value
+      Error in `.igraph_error()`:
+      x No such graph in atlas.
+        The graph index must be less than 1253.
+        Invalid value
+      i Source: constructors/atlas.c:xx
 
 # extended_chordal_ring_impl basic
 
@@ -415,8 +439,10 @@
     Code
       extended_chordal_ring_impl(nodes = -1, W = matrix(c(1, 2)))
     Condition
-      Error in `extended_chordal_ring_impl()`:
-      ! At vendor/cigraph/src/constructors/regular.c:xx : An extended chordal ring has at least 3 nodes. Invalid value
+      Error in `.igraph_error()`:
+      x An extended chordal ring has at least 3 nodes.
+        Invalid value
+      i Source: constructors/regular.c:xx
 
 # graph_power_impl basic
 
@@ -476,8 +502,9 @@
     Code
       de_bruijn_impl(m = -1, n = 3)
     Condition
-      Error in `de_bruijn_impl()`:
-      ! At vendor/cigraph/src/constructors/de_bruijn.c:xx : `m' and `n' should be non-negative in a de Bruijn graph, Invalid value
+      Error in `.igraph_error()`:
+      x `m' and `n' should be non-negative in a de Bruijn graph, Invalid value
+      i Source: constructors/de_bruijn.c:xx
 
 # kautz_impl basic
 
@@ -497,8 +524,9 @@
     Code
       kautz_impl(m = -1, n = 3)
     Condition
-      Error in `kautz_impl()`:
-      ! At vendor/cigraph/src/constructors/kautz.c:xx : `m' and `n' should be non-negative in a Kautz graph, Invalid value
+      Error in `.igraph_error()`:
+      x `m' and `n' should be non-negative in a Kautz graph, Invalid value
+      i Source: constructors/kautz.c:xx
 
 # lcf_vector_impl basic
 
@@ -516,8 +544,10 @@
     Code
       lcf_vector_impl(n = -1, shifts = c(3, -3, 4), repeats = 2)
     Condition
-      Error in `lcf_vector_impl()`:
-      ! At vendor/cigraph/src/graph/type_indexededgelist.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: graph/type_indexededgelist.c:xx
 
 # mycielski_graph_impl basic
 
@@ -533,8 +563,10 @@
     Code
       mycielski_graph_impl(k = -1)
     Condition
-      Error in `mycielski_graph_impl()`:
-      ! At vendor/cigraph/src/constructors/mycielskian.c:xx : The Mycielski graph order must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x The Mycielski graph order must not be negative.
+        Invalid value
+      i Source: constructors/mycielskian.c:xx
 
 # adjlist_impl basic
 
@@ -550,8 +582,10 @@
     Code
       adjlist_impl(adjlist = -1, mode = "out")
     Condition
-      Error in `adjlist_impl()`:
-      ! At vendor/cigraph/src/constructors/basic_constructors.c:xx : Invalid (negative or too large) vertex ID. Invalid vertex ID
+      Error in `.igraph_error()`:
+      x Invalid (negative or too large) vertex ID.
+        Invalid vertex ID
+      i Source: constructors/basic_constructors.c:xx
 
 # full_bipartite_impl basic
 
@@ -586,8 +620,10 @@
     Code
       full_bipartite_impl(n1 = -1, n2 = 3)
     Condition
-      Error in `full_bipartite_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices for bipartite graph.
+        Invalid value
+      i Source: misc/bipartite.c:xx
 
 # full_multipartite_impl basic
 
@@ -642,8 +678,10 @@
     Code
       full_multipartite_impl(n = -1)
     Condition
-      Error in `full_multipartite_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Number of vertices must not be negative in any partition. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative in any partition.
+        Invalid value
+      i Source: constructors/full.c:xx
 
 # realize_degree_sequence_impl basic
 
@@ -673,8 +711,10 @@
     Code
       realize_degree_sequence_impl(out_deg = -1)
     Condition
-      Error in `realize_degree_sequence_impl()`:
-      ! At vendor/cigraph/src/misc/degree_sequence.cpp:xx : The sum of degrees must be even for an undirected graph. Invalid value
+      Error in `.igraph_error()`:
+      x The sum of degrees must be even for an undirected graph.
+        Invalid value
+      i Source: misc/degree_sequence.cpp:xx
 
 # realize_bipartite_degree_sequence_impl basic
 
@@ -704,8 +744,10 @@
     Code
       realize_bipartite_degree_sequence_impl(degrees1 = -1, degrees2 = c(2, 2))
     Condition
-      Error in `realize_bipartite_degree_sequence_impl()`:
-      ! At vendor/cigraph/src/misc/degree_sequence.cpp:xx : The given bidegree sequence cannot be realized as a bipartite simple graph. Invalid value
+      Error in `.igraph_error()`:
+      x The given bidegree sequence cannot be realized as a bipartite simple graph.
+        Invalid value
+      i Source: misc/degree_sequence.cpp:xx
 
 # circulant_impl basic
 
@@ -732,8 +774,10 @@
     Code
       circulant_impl(n = -1, shifts = c(1, 2))
     Condition
-      Error in `circulant_impl()`:
-      ! At vendor/cigraph/src/constructors/circulant.c:xx : Number of nodes = -1 must be non-negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of nodes = -1 must be non-negative.
+        Invalid value
+      i Source: constructors/circulant.c:xx
 
 # generalized_petersen_impl basic
 
@@ -750,8 +794,10 @@
     Code
       generalized_petersen_impl(n = -1, k = 2)
     Condition
-      Error in `generalized_petersen_impl()`:
-      ! At vendor/cigraph/src/constructors/generalized_petersen.c:xx : n = -1 must be at least 3. Invalid value
+      Error in `.igraph_error()`:
+      x n = -1 must be at least 3.
+        Invalid value
+      i Source: constructors/generalized_petersen.c:xx
 
 # turan_impl basic
 
@@ -781,8 +827,10 @@
     Code
       turan_impl(n = -1, r = 2)
     Condition
-      Error in `turan_impl()`:
-      ! At vendor/cigraph/src/constructors/full.c:xx : Number of vertices must not be negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative, got -1.
+        Invalid value
+      i Source: constructors/full.c:xx
 
 # erdos_renyi_game_gnp_impl basic
 
@@ -807,8 +855,10 @@
     Code
       erdos_renyi_game_gnp_impl(n = -1, p = 0.5)
     Condition
-      Error in `erdos_renyi_game_gnp_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid value
+      i Source: games/erdos_renyi.c:xx
 
 # erdos_renyi_game_gnm_impl basic
 
@@ -833,8 +883,10 @@
     Code
       erdos_renyi_game_gnm_impl(n = -1, m = 3)
     Condition
-      Error in `erdos_renyi_game_gnm_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid value
+      i Source: games/erdos_renyi.c:xx
 
 # growing_random_game_impl basic
 
@@ -861,8 +913,10 @@
     Code
       growing_random_game_impl(n = -1, m = 2)
     Condition
-      Error in `growing_random_game_impl()`:
-      ! At vendor/cigraph/src/games/growing_random.c:xx : Invalid number of vertices. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid value
+      i Source: games/growing_random.c:xx
 
 # preference_game_impl basic
 
@@ -885,8 +939,10 @@
       preference_game_impl(nodes = -1, types = 2, type_dist = c(0.5, 0.5),
       fixed_sizes = FALSE, pref_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
-      Error in `preference_game_impl()`:
-      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must be non-negative. Invalid value
+      Error in `.igraph_error()`:
+      x The number of vertices must be non-negative.
+        Invalid value
+      i Source: games/preference.c:xx
 
 # asymmetric_preference_game_impl basic
 
@@ -914,8 +970,10 @@
         type_dist_matrix = matrix(c(0.5, 0.5, 0.5, 0.5), 2, 2), pref_matrix = matrix(
           c(0.5, 0.5, 0.5, 0.5), 2, 2))
     Condition
-      Error in `asymmetric_preference_game_impl()`:
-      ! At vendor/cigraph/src/games/preference.c:xx : The number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x The number of vertices must not be negative.
+        Invalid value
+      i Source: games/preference.c:xx
 
 # rewire_edges_impl basic
 
@@ -977,8 +1035,10 @@
     Code
       forest_fire_game_impl(nodes = -1, fw_prob = 0.5)
     Condition
-      Error in `forest_fire_game_impl()`:
-      ! At vendor/cigraph/src/games/forestfire.c:xx : Insufficient memory for forest fire model. Out of memory
+      Error in `.igraph_error()`:
+      x Insufficient memory for forest fire model.
+        Out of memory
+      i Source: games/forestfire.c:xx
 
 # simple_interconnected_islands_game_impl basic
 
@@ -998,8 +1058,10 @@
       simple_interconnected_islands_game_impl(islands_n = -1, islands_size = 3,
         islands_pin = 0.5, n_inter = 1)
     Condition
-      Error in `simple_interconnected_islands_game_impl()`:
-      ! At vendor/cigraph/src/games/islands.c:xx : Number of islands cannot be negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Number of islands cannot be negative, got -1.
+        Invalid value
+      i Source: games/islands.c:xx
 
 # chung_lu_game_impl basic
 
@@ -1027,8 +1089,10 @@
     Code
       chung_lu_game_impl(out_weights = -1)
     Condition
-      Error in `chung_lu_game_impl()`:
-      ! At vendor/cigraph/src/games/chung_lu.c:xx : Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Vertex weights must not be negative in Chung-Lu model, got -1.
+        Invalid value
+      i Source: games/chung_lu.c:xx
 
 # static_fitness_game_impl basic
 
@@ -1056,8 +1120,10 @@
     Code
       static_fitness_game_impl(no_of_edges = -1, fitness_out = c(1, 2, 3))
     Condition
-      Error in `static_fitness_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of edges cannot be negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Number of edges cannot be negative, got -1.
+        Invalid value
+      i Source: games/static_fitness.c:xx
 
 # static_power_law_game_impl basic
 
@@ -1087,8 +1153,10 @@
     Code
       static_power_law_game_impl(no_of_nodes = -1, no_of_edges = 4, exponent_out = 2.5)
     Condition
-      Error in `static_power_law_game_impl()`:
-      ! At vendor/cigraph/src/games/static_fitness.c:xx : Number of nodes cannot be negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Number of nodes cannot be negative, got -1.
+        Invalid value
+      i Source: games/static_fitness.c:xx
 
 # k_regular_game_impl basic
 
@@ -1115,8 +1183,10 @@
     Code
       k_regular_game_impl(no_of_nodes = -1, k = 2)
     Condition
-      Error in `k_regular_game_impl()`:
-      ! At vendor/cigraph/src/games/k_regular.c:xx : Number of nodes must be non-negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of nodes must be non-negative.
+        Invalid value
+      i Source: games/k_regular.c:xx
 
 # sbm_game_impl basic
 
@@ -1144,8 +1214,10 @@
     Code
       sbm_game_impl(n = -1, pref_matrix = matrix(0.5, 2, 2), block_sizes = c(2, 3))
     Condition
-      Error in `sbm_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
+      Error in `.igraph_error()`:
+      x Sum of the block sizes (5) must equal the number of vertices (-1).
+        Invalid value
+      i Source: games/sbm.c:xx
 
 # hsbm_game_impl basic
 
@@ -1162,8 +1234,9 @@
     Code
       hsbm_game_impl(n = -1, m = 2, rho = 0.5, C = matrix(1, 2, 2), p = 0.5)
     Condition
-      Error in `hsbm_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM, Invalid value
+      Error in `.igraph_error()`:
+      x `n' must be positive for HSBM, Invalid value
+      i Source: games/sbm.c:xx
 
 # hsbm_list_game_impl basic
 
@@ -1190,8 +1263,10 @@
       hsbm_list_game_impl(n = -1, mlist = c(2, 3), rholist = list(0.5, 0.5), Clist = list(
         matrix(1, 2, 2), matrix(1, 2, 2)), p = 0.5)
     Condition
-      Error in `hsbm_list_game_impl()`:
-      ! At vendor/cigraph/src/games/sbm.c:xx : `n' must be positive for HSBM. Invalid value
+      Error in `.igraph_error()`:
+      x `n' must be positive for HSBM.
+        Invalid value
+      i Source: games/sbm.c:xx
 
 # correlated_game_impl basic
 
@@ -1248,16 +1323,19 @@
     Code
       correlated_pair_game_impl(n = -1, corr = 0.5, p = 0.5)
     Condition
-      Error in `correlated_pair_game_impl()`:
-      ! At vendor/cigraph/src/games/erdos_renyi.c:xx : Invalid number of vertices. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices.
+        Invalid value
+      i Source: games/erdos_renyi.c:xx
 
 # dot_product_game_impl basic
 
     Code
       dot_product_game_impl(vecs = matrix(0.5, 5, 2))
     Condition
-      Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      Warning:
+      x Greater than 1 connection probability in dot-product graph.
+      i Source: games/dotproduct.c:90
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1268,8 +1346,9 @@
     Code
       dot_product_game_impl(vecs = matrix(0.5, 5, 2), directed = TRUE)
     Condition
-      Warning in `dot_product_game_impl()`:
-      At vendor/cigraph/src/games/dotproduct.c:90 : Greater than 1 connection probability in dot-product graph.
+      Warning:
+      x Greater than 1 connection probability in dot-product graph.
+      i Source: games/dotproduct.c:90
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -1308,8 +1387,10 @@
     Code
       sample_sphere_surface_impl(dim = -1, n = 5)
     Condition
-      Error in `sample_sphere_surface_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
+      Error in `.igraph_error()`:
+      x Sphere must be at least two dimensional to sample from surface.
+        Invalid value
+      i Source: games/dotproduct.c:xx
 
 # sample_sphere_volume_impl basic
 
@@ -1336,8 +1417,10 @@
     Code
       sample_sphere_volume_impl(dim = -1, n = 5)
     Condition
-      Error in `sample_sphere_volume_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Sphere must be at least two dimensional to sample from surface. Invalid value
+      Error in `.igraph_error()`:
+      x Sphere must be at least two dimensional to sample from surface.
+        Invalid value
+      i Source: games/dotproduct.c:xx
 
 # sample_dirichlet_impl basic
 
@@ -1354,8 +1437,10 @@
     Code
       sample_dirichlet_impl(n = -1, alpha = c(1, 1, 1))
     Condition
-      Error in `sample_dirichlet_impl()`:
-      ! At vendor/cigraph/src/games/dotproduct.c:xx : Number of samples should be non-negative, got -1. Invalid value
+      Error in `.igraph_error()`:
+      x Number of samples should be non-negative, got -1.
+        Invalid value
+      i Source: games/dotproduct.c:xx
 
 # are_adjacent_impl basic
 
@@ -2173,8 +2258,9 @@
     Code
       transitivity_barrat_impl(graph = g)
     Condition
-      Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      Warning:
+      x No weights given for Barrat's transitivity, unweighted version is used.
+      i Source: properties/triangles.c:913
     Output
       [1] NaN   0 NaN
 
@@ -2183,8 +2269,9 @@
     Code
       transitivity_barrat_impl(graph = g, mode = "zero")
     Condition
-      Warning in `transitivity_barrat_impl()`:
-      At vendor/cigraph/src/properties/triangles.c:913 : No weights given for Barrat's transitivity, unweighted version is used.
+      Warning:
+      x No weights given for Barrat's transitivity, unweighted version is used.
+      i Source: properties/triangles.c:913
     Output
       [1] 0 0 0
 
@@ -3091,8 +3178,10 @@
     Code
       centralization_degree_tmax_impl(nodes = -1, loops = TRUE)
     Condition
-      Error in `centralization_degree_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: centrality/centralization.c:xx
 
 # centralization_betweenness_impl basic
 
@@ -3151,8 +3240,10 @@
     Code
       centralization_betweenness_tmax_impl(nodes = -1, directed = TRUE)
     Condition
-      Error in `centralization_betweenness_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: centrality/centralization.c:xx
 
 # centralization_closeness_impl basic
 
@@ -3211,8 +3302,10 @@
     Code
       centralization_closeness_tmax_impl(nodes = -1)
     Condition
-      Error in `centralization_closeness_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: centrality/centralization.c:xx
 
 # centralization_eigenvector_centrality_impl basic
 
@@ -3402,8 +3495,10 @@
     Code
       centralization_eigenvector_centrality_tmax_impl(nodes = -1)
     Condition
-      Error in `centralization_eigenvector_centrality_tmax_impl()`:
-      ! At vendor/cigraph/src/centrality/centralization.c:xx : Number of vertices must not be negative. Invalid value
+      Error in `.igraph_error()`:
+      x Number of vertices must not be negative.
+        Invalid value
+      i Source: centrality/centralization.c:xx
 
 # assortativity_nominal_impl basic
 
@@ -3906,8 +4001,10 @@
     Condition
       Warning in `is_graphical_impl()`:
       NAs introduced by coercion
-      Error in `is_graphical_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # bfs_simple_impl basic
 
@@ -4090,8 +4187,10 @@
     Code
       bipartite_game_gnp_impl(n1 = -1, n2 = 2, p = 0.5)
     Condition
-      Error in `bipartite_game_gnp_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices for bipartite graph.
+        Invalid value
+      i Source: misc/bipartite.c:xx
 
 # bipartite_game_gnm_impl basic
 
@@ -4126,8 +4225,10 @@
     Code
       bipartite_game_gnm_impl(n1 = -1, n2 = 2, m = 1)
     Condition
-      Error in `bipartite_game_gnm_impl()`:
-      ! At vendor/cigraph/src/misc/bipartite.c:xx : Invalid number of vertices for bipartite graph. Invalid value
+      Error in `.igraph_error()`:
+      x Invalid number of vertices for bipartite graph.
+        Invalid value
+      i Source: misc/bipartite.c:xx
 
 # get_laplacian_impl basic
 
@@ -5341,8 +5442,10 @@
     Condition
       Warning in `compare_communities_impl()`:
       NAs introduced by coercion
-      Error in `compare_communities_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # modularity_impl basic
 
@@ -5549,8 +5652,10 @@
     Condition
       Warning in `split_join_distance_impl()`:
       NAs introduced by coercion
-      Error in `split_join_distance_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # community_infomap_impl basic
 
@@ -5764,8 +5869,10 @@
     Code
       hrg_create_impl(graph = g, prob = 0.5)
     Condition
-      Error in `hrg_create_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg.cc:xx : HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
+      Error in `.igraph_error()`:
+      x HRG probability vector size (1) should be equal to the number of internal nodes (2).
+        Invalid value
+      i Source: hrg/hrg.cc:xx
 
 # hrg_resize_impl basic
 
@@ -5793,8 +5900,10 @@
     Code
       hrg_resize_impl(hrg = -1, newsize = 2)
     Condition
-      Error in `hrg_resize_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # hrg_size_impl basic
 
@@ -5808,8 +5917,10 @@
     Code
       hrg_size_impl(hrg = -1)
     Condition
-      Error in `hrg_size_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # from_hrg_dendrogram_impl basic
 
@@ -5831,8 +5942,10 @@
     Code
       from_hrg_dendrogram_impl(hrg = -1)
     Condition
-      Error in `from_hrg_dendrogram_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # get_adjacency_sparse_impl basic
 
@@ -6086,8 +6199,10 @@
     Code
       motifs_randesu_no_impl(graph = g, size = 3, cut_prob = c(0.1))
     Condition
-      Error in `motifs_randesu_no_impl()`:
-      ! At vendor/cigraph/src/misc/motifs.c:xx : Cut probability vector size (1) must agree with motif size (3). Invalid value
+      Error in `.igraph_error()`:
+      x Cut probability vector size (1) must agree with motif size (3).
+        Invalid value
+      i Source: misc/motifs.c:xx
 
 # dyad_census_impl basic
 
@@ -6117,8 +6232,10 @@
     Code
       triad_census_impl(graph = g)
     Condition
-      Warning in `triad_census_impl()`:
-      At vendor/cigraph/src/misc/motifs.c:1157 : Triad census called on an undirected graph. All connections will be treated as mutual.
+      Warning:
+      x Triad census called on an undirected graph.
+        All connections will be treated as mutual.
+      i Source: misc/motifs.c:1157
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -6999,8 +7116,10 @@
     Condition
       Warning in `isoclass_create_impl()`:
       NAs introduced by coercion
-      Error in `isoclass_create_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # isomorphic_vf2_impl basic
 
@@ -7552,8 +7671,10 @@
     Condition
       Warning in `graph_count_impl()`:
       NAs introduced by coercion
-      Error in `graph_count_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # is_matching_impl basic
 
@@ -7985,8 +8106,9 @@
       eigen_adjacency_impl(graph = g, algorithm = "lapack", which = list(which = "LA"),
       options = list(maxiter = 10))
     Condition
-      Error in `eigen_adjacency_impl()`:
-      ! At vendor/cigraph/src/linalg/eigen.c:xx : 'LAPACK' algorithm not implemented yet, Unimplemented function call
+      Error in `.igraph_error()`:
+      x 'LAPACK' algorithm not implemented yet, Unimplemented function call
+      i Source: linalg/eigen.c:xx
 
 # eigen_adjacency_impl errors
 
@@ -8045,8 +8167,9 @@
     Condition
       Warning in `power_law_fit_impl()`:
       NAs introduced by coercion
-      Error in `power_law_fit_impl()`:
-      ! At vendor/cigraph/src/misc/power_law_fit.c:xx : xmin must be greater than zero, Invalid value
+      Error in `.igraph_error()`:
+      x xmin must be greater than zero, Invalid value
+      i Source: misc/power_law_fit.c:xx
 
 # sir_impl basic
 
@@ -9536,8 +9659,9 @@
     Code
       dim_select_impl(sv = NULL)
     Condition
-      Error in `dim_select_impl()`:
-      ! At vendor/cigraph/src/misc/embedding.c:xx : Need at least one singular value for dimensionality selection, Invalid value
+      Error in `.igraph_error()`:
+      x Need at least one singular value for dimensionality selection, Invalid value
+      i Source: misc/embedding.c:xx
 
 # solve_lsap_impl basic
 
@@ -9668,8 +9792,10 @@
     Code
       eulerian_cycle_impl(graph = g1)
     Condition
-      Error in `eulerian_cycle_impl()`:
-      ! At vendor/cigraph/src/paths/eulerian.c:xx : The graph does not have an Eulerian cycle. Input problem has no solution
+      Error in `.igraph_error()`:
+      x The graph does not have an Eulerian cycle.
+        Input problem has no solution
+      i Source: paths/eulerian.c:xx
 
 ---
 
@@ -9811,8 +9937,10 @@
     Condition
       Warning in `from_prufer_impl()`:
       NAs introduced by coercion
-      Error in `from_prufer_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # to_prufer_impl basic
 
@@ -9854,8 +9982,10 @@
     Condition
       Warning in `tree_from_parent_vector_impl()`:
       NAs introduced by coercion
-      Error in `tree_from_parent_vector_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # is_complete_impl basic
 
@@ -9913,8 +10043,10 @@
     Condition
       Warning in `tree_game_impl()`:
       NAs introduced by coercion
-      Error in `tree_game_impl()`:
-      ! At rinterface_extra.c:xx : The value nan is not representable as an integer. Invalid value
+      Error in `.igraph_error()`:
+      x The value nan is not representable as an integer.
+        Invalid value
+      i Source: rinterface_extra.c:xx
 
 # vertex_coloring_greedy_impl basic
 
@@ -10309,8 +10441,11 @@
     Code
       famous_impl(name = "NonexistentGraph")
     Condition
-      Error in `famous_impl()`:
-      ! At vendor/cigraph/src/constructors/famous.c:xx : NonexistentGraph is not a known graph. See the documentation for valid graph names. Invalid value
+      Error in `.igraph_error()`:
+      x NonexistentGraph is not a known graph.
+        See the documentation for valid graph names.
+        Invalid value
+      i Source: constructors/famous.c:xx
 
 # constraint_impl errors
 
