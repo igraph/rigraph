@@ -21,7 +21,7 @@
     Condition
       Error in `empty_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: graph/type_indexededgelist.c:xx
+      Source: vendor/cigraph/src/graph/type_indexededgelist.c:xx
 
 # add_edges_impl basic
 
@@ -157,7 +157,7 @@
     Condition
       Error in `wheel_impl()`:
       ! Invalid number of vertices. Invalid vertex ID
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # hypercube_impl basic
 
@@ -184,7 +184,7 @@
     Condition
       Error in `hypercube_impl()`:
       ! The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # square_lattice_impl basic
 
@@ -212,7 +212,7 @@
     Condition
       Error in `square_lattice_impl()`:
       ! Invalid dimension vector. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # triangular_lattice_impl basic
 
@@ -239,7 +239,7 @@
     Condition
       Error in `triangular_lattice_impl()`:
       ! Invalid dimension vector. Invalid value
-      Source: constructors/lattices.c:xx
+      Source: vendor/cigraph/src/constructors/lattices.c:xx
 
 # path_graph_impl basic
 
@@ -266,7 +266,7 @@
     Condition
       Error in `path_graph_impl()`:
       ! The number of vertices must be non-negative, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # cycle_graph_impl basic
 
@@ -293,7 +293,7 @@
     Condition
       Error in `cycle_graph_impl()`:
       ! The number of vertices must be non-negative, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # symmetric_tree_impl basic
 
@@ -320,7 +320,7 @@
     Condition
       Error in `symmetric_tree_impl()`:
       ! The number of branches must be positive at each level. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # regular_tree_impl basic
 
@@ -348,7 +348,7 @@
     Condition
       Error in `regular_tree_impl()`:
       ! Height of regular tree must be positive, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # full_citation_impl basic
 
@@ -375,7 +375,7 @@
     Condition
       Error in `full_citation_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: constructors/full.c:xx
+      Source: vendor/cigraph/src/constructors/full.c:xx
 
 # atlas_impl basic
 
@@ -401,7 +401,7 @@
     Condition
       Error in `atlas_impl()`:
       ! No such graph in atlas. The graph index must be less than 1253. Invalid value
-      Source: constructors/atlas.c:xx
+      Source: vendor/cigraph/src/constructors/atlas.c:xx
 
 # extended_chordal_ring_impl basic
 
@@ -428,7 +428,7 @@
     Condition
       Error in `extended_chordal_ring_impl()`:
       ! An extended chordal ring has at least 3 nodes. Invalid value
-      Source: constructors/regular.c:xx
+      Source: vendor/cigraph/src/constructors/regular.c:xx
 
 # graph_power_impl basic
 
@@ -490,7 +490,7 @@
     Condition
       Error in `de_bruijn_impl()`:
       ! `m' and `n' should be non-negative in a de Bruijn graph. Invalid value
-      Source: constructors/de_bruijn.c:xx
+      Source: vendor/cigraph/src/constructors/de_bruijn.c:xx
 
 # kautz_impl basic
 
@@ -512,7 +512,7 @@
     Condition
       Error in `kautz_impl()`:
       ! `m' and `n' should be non-negative in a Kautz graph. Invalid value
-      Source: constructors/kautz.c:xx
+      Source: vendor/cigraph/src/constructors/kautz.c:xx
 
 # lcf_vector_impl basic
 
@@ -532,7 +532,7 @@
     Condition
       Error in `lcf_vector_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: graph/type_indexededgelist.c:xx
+      Source: vendor/cigraph/src/graph/type_indexededgelist.c:xx
 
 # mycielski_graph_impl basic
 
@@ -550,7 +550,7 @@
     Condition
       Error in `mycielski_graph_impl()`:
       ! The Mycielski graph order must not be negative. Invalid value
-      Source: constructors/mycielskian.c:xx
+      Source: vendor/cigraph/src/constructors/mycielskian.c:xx
 
 # adjlist_impl basic
 
@@ -568,7 +568,7 @@
     Condition
       Error in `adjlist_impl()`:
       ! Invalid (negative or too large) vertex ID. Invalid vertex ID
-      Source: constructors/basic_constructors.c:xx
+      Source: vendor/cigraph/src/constructors/basic_constructors.c:xx
 
 # full_bipartite_impl basic
 
@@ -605,7 +605,7 @@
     Condition
       Error in `full_bipartite_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: vendor/cigraph/src/misc/bipartite.c:xx
 
 # full_multipartite_impl basic
 
@@ -662,7 +662,7 @@
     Condition
       Error in `full_multipartite_impl()`:
       ! Number of vertices must not be negative in any partition. Invalid value
-      Source: constructors/full.c:xx
+      Source: vendor/cigraph/src/constructors/full.c:xx
 
 # realize_degree_sequence_impl basic
 
@@ -694,7 +694,7 @@
     Condition
       Error in `realize_degree_sequence_impl()`:
       ! The sum of degrees must be even for an undirected graph. Invalid value
-      Source: misc/degree_sequence.cpp:xx
+      Source: vendor/cigraph/src/misc/degree_sequence.cpp:xx
 
 # realize_bipartite_degree_sequence_impl basic
 
@@ -726,7 +726,7 @@
     Condition
       Error in `realize_bipartite_degree_sequence_impl()`:
       ! The given bidegree sequence cannot be realized as a bipartite simple graph. Invalid value
-      Source: misc/degree_sequence.cpp:xx
+      Source: vendor/cigraph/src/misc/degree_sequence.cpp:xx
 
 # circulant_impl basic
 
@@ -755,7 +755,7 @@
     Condition
       Error in `circulant_impl()`:
       ! Number of nodes = -1 must be non-negative. Invalid value
-      Source: constructors/circulant.c:xx
+      Source: vendor/cigraph/src/constructors/circulant.c:xx
 
 # generalized_petersen_impl basic
 
@@ -774,7 +774,7 @@
     Condition
       Error in `generalized_petersen_impl()`:
       ! n = -1 must be at least 3. Invalid value
-      Source: constructors/generalized_petersen.c:xx
+      Source: vendor/cigraph/src/constructors/generalized_petersen.c:xx
 
 # turan_impl basic
 
@@ -806,7 +806,7 @@
     Condition
       Error in `turan_impl()`:
       ! Number of vertices must not be negative, got -1. Invalid value
-      Source: constructors/full.c:xx
+      Source: vendor/cigraph/src/constructors/full.c:xx
 
 # erdos_renyi_game_gnp_impl basic
 
@@ -833,7 +833,7 @@
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: vendor/cigraph/src/games/erdos_renyi.c:xx
 
 # erdos_renyi_game_gnm_impl basic
 
@@ -860,7 +860,7 @@
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: vendor/cigraph/src/games/erdos_renyi.c:xx
 
 # growing_random_game_impl basic
 
@@ -889,7 +889,7 @@
     Condition
       Error in `growing_random_game_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/growing_random.c:xx
+      Source: vendor/cigraph/src/games/growing_random.c:xx
 
 # preference_game_impl basic
 
@@ -914,7 +914,7 @@
     Condition
       Error in `preference_game_impl()`:
       ! The number of vertices must be non-negative. Invalid value
-      Source: games/preference.c:xx
+      Source: vendor/cigraph/src/games/preference.c:xx
 
 # asymmetric_preference_game_impl basic
 
@@ -944,7 +944,7 @@
     Condition
       Error in `asymmetric_preference_game_impl()`:
       ! The number of vertices must not be negative. Invalid value
-      Source: games/preference.c:xx
+      Source: vendor/cigraph/src/games/preference.c:xx
 
 # rewire_edges_impl basic
 
@@ -1008,7 +1008,7 @@
     Condition
       Error in `forest_fire_game_impl()`:
       ! Insufficient memory for forest fire model. Out of memory
-      Source: games/forestfire.c:xx
+      Source: vendor/cigraph/src/games/forestfire.c:xx
 
 # simple_interconnected_islands_game_impl basic
 
@@ -1030,7 +1030,7 @@
     Condition
       Error in `simple_interconnected_islands_game_impl()`:
       ! Number of islands cannot be negative, got -1. Invalid value
-      Source: games/islands.c:xx
+      Source: vendor/cigraph/src/games/islands.c:xx
 
 # chung_lu_game_impl basic
 
@@ -1060,7 +1060,7 @@
     Condition
       Error in `chung_lu_game_impl()`:
       ! Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
-      Source: games/chung_lu.c:xx
+      Source: vendor/cigraph/src/games/chung_lu.c:xx
 
 # static_fitness_game_impl basic
 
@@ -1090,7 +1090,7 @@
     Condition
       Error in `static_fitness_game_impl()`:
       ! Number of edges cannot be negative, got -1. Invalid value
-      Source: games/static_fitness.c:xx
+      Source: vendor/cigraph/src/games/static_fitness.c:xx
 
 # static_power_law_game_impl basic
 
@@ -1122,7 +1122,7 @@
     Condition
       Error in `static_power_law_game_impl()`:
       ! Number of nodes cannot be negative, got -1. Invalid value
-      Source: games/static_fitness.c:xx
+      Source: vendor/cigraph/src/games/static_fitness.c:xx
 
 # k_regular_game_impl basic
 
@@ -1151,7 +1151,7 @@
     Condition
       Error in `k_regular_game_impl()`:
       ! Number of nodes must be non-negative. Invalid value
-      Source: games/k_regular.c:xx
+      Source: vendor/cigraph/src/games/k_regular.c:xx
 
 # sbm_game_impl basic
 
@@ -1181,7 +1181,7 @@
     Condition
       Error in `sbm_game_impl()`:
       ! Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
-      Source: games/sbm.c:xx
+      Source: vendor/cigraph/src/games/sbm.c:xx
 
 # hsbm_game_impl basic
 
@@ -1200,7 +1200,7 @@
     Condition
       Error in `hsbm_game_impl()`:
       ! `n' must be positive for HSBM. Invalid value
-      Source: games/sbm.c:xx
+      Source: vendor/cigraph/src/games/sbm.c:xx
 
 # hsbm_list_game_impl basic
 
@@ -1229,7 +1229,7 @@
     Condition
       Error in `hsbm_list_game_impl()`:
       ! `n' must be positive for HSBM. Invalid value
-      Source: games/sbm.c:xx
+      Source: vendor/cigraph/src/games/sbm.c:xx
 
 # correlated_game_impl basic
 
@@ -1288,7 +1288,7 @@
     Condition
       Error in `correlated_pair_game_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: vendor/cigraph/src/games/erdos_renyi.c:xx
 
 # dot_product_game_impl basic
 
@@ -1297,7 +1297,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: vendor/cigraph/src/games/dotproduct.c:90
     Output
       IGRAPH U--- 2 1 -- 
       + edge:
@@ -1310,7 +1310,7 @@
     Condition
       Warning in `dot_product_game_impl()`:
       Greater than 1 connection probability in dot-product graph.
-      Source: games/dotproduct.c:90
+      Source: vendor/cigraph/src/games/dotproduct.c:90
     Output
       IGRAPH D--- 2 2 -- 
       + edges:
@@ -1351,7 +1351,7 @@
     Condition
       Error in `sample_sphere_surface_impl()`:
       ! Sphere must be at least two dimensional to sample from surface. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: vendor/cigraph/src/games/dotproduct.c:xx
 
 # sample_sphere_volume_impl basic
 
@@ -1380,7 +1380,7 @@
     Condition
       Error in `sample_sphere_volume_impl()`:
       ! Sphere must be at least two dimensional to sample from surface. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: vendor/cigraph/src/games/dotproduct.c:xx
 
 # sample_dirichlet_impl basic
 
@@ -1399,7 +1399,7 @@
     Condition
       Error in `sample_dirichlet_impl()`:
       ! Number of samples should be non-negative, got -1. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: vendor/cigraph/src/games/dotproduct.c:xx
 
 # are_adjacent_impl basic
 
@@ -2219,7 +2219,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: vendor/cigraph/src/properties/triangles.c:913
     Output
       [1] NaN   0 NaN
 
@@ -2230,7 +2230,7 @@
     Condition
       Warning in `transitivity_barrat_impl()`:
       No weights given for Barrat's transitivity, unweighted version is used.
-      Source: properties/triangles.c:913
+      Source: vendor/cigraph/src/properties/triangles.c:913
     Output
       [1] 0 0 0
 
@@ -3139,7 +3139,7 @@
     Condition
       Error in `centralization_degree_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: vendor/cigraph/src/centrality/centralization.c:xx
 
 # centralization_betweenness_impl basic
 
@@ -3200,7 +3200,7 @@
     Condition
       Error in `centralization_betweenness_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: vendor/cigraph/src/centrality/centralization.c:xx
 
 # centralization_closeness_impl basic
 
@@ -3261,7 +3261,7 @@
     Condition
       Error in `centralization_closeness_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: vendor/cigraph/src/centrality/centralization.c:xx
 
 # centralization_eigenvector_centrality_impl basic
 
@@ -3453,7 +3453,7 @@
     Condition
       Error in `centralization_eigenvector_centrality_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: vendor/cigraph/src/centrality/centralization.c:xx
 
 # assortativity_nominal_impl basic
 
@@ -4143,7 +4143,7 @@
     Condition
       Error in `bipartite_game_gnp_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: vendor/cigraph/src/misc/bipartite.c:xx
 
 # bipartite_game_gnm_impl basic
 
@@ -4180,7 +4180,7 @@
     Condition
       Error in `bipartite_game_gnm_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: vendor/cigraph/src/misc/bipartite.c:xx
 
 # get_laplacian_impl basic
 
@@ -5821,7 +5821,7 @@
     Condition
       Error in `hrg_create_impl()`:
       ! HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
-      Source: hrg/hrg.cc:xx
+      Source: vendor/cigraph/src/hrg/hrg.cc:xx
 
 # hrg_resize_impl basic
 
@@ -6147,7 +6147,7 @@
     Condition
       Error in `motifs_randesu_no_impl()`:
       ! Cut probability vector size (1) must agree with motif size (3). Invalid value
-      Source: misc/motifs.c:xx
+      Source: vendor/cigraph/src/misc/motifs.c:xx
 
 # dyad_census_impl basic
 
@@ -6179,7 +6179,7 @@
     Condition
       Warning in `triad_census_impl()`:
       Triad census called on an undirected graph. All connections will be treated as mutual.
-      Source: misc/motifs.c:1157
+      Source: vendor/cigraph/src/misc/motifs.c:1157
     Output
        [1] 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
 
@@ -8050,7 +8050,7 @@
     Condition
       Error in `eigen_adjacency_impl()`:
       ! 'LAPACK' algorithm not implemented yet. Unimplemented function call
-      Source: linalg/eigen.c:xx
+      Source: vendor/cigraph/src/linalg/eigen.c:xx
 
 # eigen_adjacency_impl errors
 
@@ -8111,7 +8111,7 @@
       NAs introduced by coercion
       Error in `power_law_fit_impl()`:
       ! xmin must be greater than zero. Invalid value
-      Source: misc/power_law_fit.c:xx
+      Source: vendor/cigraph/src/misc/power_law_fit.c:xx
 
 # sir_impl basic
 
@@ -9603,7 +9603,7 @@
     Condition
       Error in `dim_select_impl()`:
       ! Need at least one singular value for dimensionality selection. Invalid value
-      Source: misc/embedding.c:xx
+      Source: vendor/cigraph/src/misc/embedding.c:xx
 
 # solve_lsap_impl basic
 
@@ -9736,7 +9736,7 @@
     Condition
       Error in `eulerian_cycle_impl()`:
       ! The graph does not have an Eulerian cycle. Input problem has no solution
-      Source: paths/eulerian.c:xx
+      Source: vendor/cigraph/src/paths/eulerian.c:xx
 
 ---
 
@@ -10381,7 +10381,7 @@
     Condition
       Error in `famous_impl()`:
       ! NonexistentGraph is not a known graph. See the documentation for valid graph names. Invalid value
-      Source: constructors/famous.c:xx
+      Source: vendor/cigraph/src/constructors/famous.c:xx
 
 # constraint_impl errors
 
