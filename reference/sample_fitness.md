@@ -80,6 +80,10 @@ power-law distribution. Alternatively, you may use
 [`sample_fitness_pl()`](https://r.igraph.org/reference/sample_fitness_pl.md)
 which generates the fitnesses for you with a given exponent.
 
+## Related documentation in the C library
+
+[`static_fitness_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game)
+
 ## References
 
 Goh K-I, Kahng B, Kim D: Universal behaviour of load distribution in
@@ -118,10 +122,6 @@ Random graph models (games)
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>
-
-## Related documentation in the C library
-
-[`static_fitness_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game).
 
 ## Examples
 

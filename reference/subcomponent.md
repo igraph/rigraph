@@ -34,6 +34,10 @@ Numeric vector, the ids of the vertices in the same component as `v`.
 
 A breadth-first search is conducted starting from vertex `v`.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 [`components()`](https://r.igraph.org/reference/components.md)
@@ -73,12 +77,12 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
-#> + 1/100 vertex, from 2124042:
+#> + 1/100 vertex, from a2c32a5:
 #> [1] 1
 subcomponent(g, 1, "out")
-#> + 1/100 vertex, from 2124042:
+#> + 1/100 vertex, from a2c32a5:
 #> [1] 1
 subcomponent(g, 1, "all")
-#> + 1/100 vertex, from 2124042:
+#> + 1/100 vertex, from a2c32a5:
 #> [1] 1
 ```

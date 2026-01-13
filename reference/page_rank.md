@@ -117,6 +117,12 @@ only some of the vertices, all of them must be calculated. Requesting
 the PageRank for only some of the vertices does not result in any
 performance increase at all.
 
+## Related documentation in the C library
+
+[`personalized_pagerank()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual
@@ -148,10 +154,6 @@ Centrality measures
 
 Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`personalized_pagerank()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank).
 
 ## Examples
 

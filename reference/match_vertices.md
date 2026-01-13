@@ -60,6 +60,8 @@ optimization algorithm based on the Frank-Wolfe algorithm.
 
 See references for further details.
 
+## Related documentation in the C library
+
 ## References
 
 Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S. G.,

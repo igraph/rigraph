@@ -81,6 +81,12 @@ second.
 
 `bipartite_projection()` keeps vertex attributes.
 
+## Related documentation in the C library
+
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`bipartite_projection_size()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size)
+
 ## See also
 
 Bipartite graphs
@@ -91,10 +97,6 @@ Bipartite graphs
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`bipartite_projection_size()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size).
 
 ## Examples
 
@@ -123,13 +125,13 @@ g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
-#> IGRAPH 2e3c324 UNW- 5 5 -- Event network
+#> IGRAPH 2dc8f0e UNW- 5 5 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from 2e3c324 (vertex names):
+#> + edges from 2dc8f0e (vertex names):
 #> [1] Alice--Bob   Alice--Dan   Bob  --Dan   Bob  --Ethel Dan  --Ethel
 print(proj2[[2]], g = TRUE, e = TRUE)
-#> IGRAPH a8e1535 UNW- 3 2 -- Event network
+#> IGRAPH 53414c5 UNW- 3 2 -- Event network
 #> + attr: name (g/c), name (v/c), weight (e/n)
-#> + edges from a8e1535 (vertex names):
+#> + edges from 53414c5 (vertex names):
 #> [1] Party --Skiing    Skiing--Badminton
 ```

@@ -53,3 +53,7 @@ cited.type.game(
 
   Logical scalar, whether to add the vertex types to the generated graph
   as a vertex attribute called ‘`type`’.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

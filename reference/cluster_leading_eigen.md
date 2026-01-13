@@ -146,6 +146,11 @@ to this function:
 The callback function should return a scalar number. If this number is
 non-zero, then the clustering is terminated.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 MEJ Newman: Finding community structure using the eigenvectors of

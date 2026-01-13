@@ -34,6 +34,11 @@ add_vertices(graph, nv, ..., attr = list())
 
 The graph, with the vertices (and attributes) added.
 
+## Related documentation in the C library
+
+[`add_vertices()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_add_vertices),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -75,12 +80,12 @@ g <- make_empty_graph() %>%
     4, 5
   ))
 g
-#> IGRAPH c3c110c D--- 5 4 -- 
+#> IGRAPH e92024d D--- 5 4 -- 
 #> + attr: color (v/c)
-#> + edges from c3c110c:
+#> + edges from e92024d:
 #> [1] 1->2 2->3 3->4 4->5
 V(g)[[]]
-#> + 5/5 vertices, from c3c110c:
+#> + 5/5 vertices, from e92024d:
 #>   color
 #> 1   red
 #> 2   red

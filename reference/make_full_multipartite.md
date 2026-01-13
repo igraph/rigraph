@@ -36,6 +36,11 @@ full_multipartite(n, directed = FALSE, mode = c("all", "out", "in"))
 An igraph graph with a vertex attribute `type` storing the partition
 index of each vertex. Partition indices start from 1.
 
+## Related documentation in the C library
+
+[`full_multipartite()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other deterministic constructors:
@@ -55,10 +60,6 @@ Other deterministic constructors:
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
 [`make_turan()`](https://r.igraph.org/reference/make_turan.md),
 [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
-
-## Related documentation in the C library
-
-[`full_multipartite()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite).
 
 ## Examples
 

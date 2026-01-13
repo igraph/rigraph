@@ -27,3 +27,7 @@ graph.adhesion(graph, checks = TRUE)
   good idea to perform these checks, as they can be done quickly
   compared to the connectivity calculation itself. They were suggested
   by Peter McMahan, thanks Peter.
+
+## Related documentation in the C library
+
+[[`adhesion()`](https://r.igraph.org/reference/edge_connectivity.md)](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_adhesion)

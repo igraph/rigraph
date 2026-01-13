@@ -49,7 +49,7 @@ the igraph and the graphNEL objects."><meta property="og:image" content="https:/
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Convert igraph graphs to graphNEL objects from the graph package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/conversion.R" class="external-link"><code>R/conversion.R</code></a></small>
       <div class="d-none name"><code>as_graphnel.Rd</code></div>
     </div>
 
@@ -85,6 +85,10 @@ vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 will be used for this purpose.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed" class="external-link"><code><a href="is_directed.html">is_directed()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple" class="external-link"><code>has_multiple()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="graph_from_graphnel.html">graph_from_graphnel()</a></code> for the other direction,
 <code><a href="as_adjacency_matrix.html">as_adjacency_matrix()</a></code>, <code><a href="graph_from_adjacency_matrix.html">graph_from_adjacency_matrix()</a></code>,
@@ -111,10 +115,10 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8a0a330 UNW- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a717330 UNW- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8a0a330 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a717330 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a--b a--j b--c c--d d--e e--f f--g g--h h--i i--j</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Directed</span></span></span>
@@ -123,9 +127,9 @@ other graph representations.</p>
 <span class="r-in"><span><span class="va">GNEL2</span> <span class="op">&lt;-</span> <span class="fu">as_graphnel</span><span class="op">(</span><span class="va">g3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_graphnel.html">graph_from_graphnel</a></span><span class="op">(</span><span class="va">GNEL2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g4</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 509a6fd DNW- 10 9 -- In-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b388931 DNW- 10 9 -- In-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 509a6fd (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b388931 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] b-&gt;a c-&gt;a d-&gt;a e-&gt;a f-&gt;a g-&gt;a h-&gt;a i-&gt;a j-&gt;a</span>
 </code></pre></div>
     </div>

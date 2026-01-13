@@ -18,3 +18,7 @@ is.dag(graph)
 
   The input graph. It may be undirected, in which case `FALSE` is
   reported.
+
+## Related documentation in the C library
+
+[[`is_dag()`](https://r.igraph.org/reference/is_dag.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag)

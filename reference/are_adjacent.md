@@ -27,6 +27,11 @@ are_adjacent(graph, v1, v2)
 
 A logical scalar, `TRUE` if edge `(v1, v2)` exists in the graph.
 
+## Related documentation in the C library
+
+[`are_adjacent()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -44,18 +49,14 @@ Other structural queries:
 [`neighbors()`](https://r.igraph.org/reference/neighbors.md),
 [`tail_of()`](https://r.igraph.org/reference/tail_of.md)
 
-## Related documentation in the C library
-
-[`are_adjacent()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent).
-
 ## Examples
 
 ``` r
 ug <- make_ring(10)
 ug
-#> IGRAPH 4bf9a89 U--- 10 10 -- Ring graph
+#> IGRAPH 4aa272e U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 4bf9a89:
+#> + edges from 4aa272e:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 are_adjacent(ug, 1, 2)
 #> [1] TRUE
@@ -64,9 +65,9 @@ are_adjacent(ug, 2, 1)
 
 dg <- make_ring(10, directed = TRUE)
 dg
-#> IGRAPH 908bb2d D--- 10 10 -- Ring graph
+#> IGRAPH 1eae850 D--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 908bb2d:
+#> + edges from 1eae850:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 are_adjacent(ug, 1, 2)
 #> [1] TRUE

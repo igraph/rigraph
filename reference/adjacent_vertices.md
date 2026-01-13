@@ -29,6 +29,10 @@ adjacent_vertices(graph, v, mode = c("out", "in", "all", "total"))
 
 A list of vertex sequences.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -52,11 +56,11 @@ Other structural queries:
 g <- make_graph("Zachary")
 adjacent_vertices(g, c(1, 34))
 #> [[1]]
-#> + 16/34 vertices, from 05d9810:
+#> + 16/34 vertices, from 8d74475:
 #>  [1]  2  3  4  5  6  7  8  9 11 12 13 14 18 20 22 32
 #> 
 #> [[2]]
-#> + 17/34 vertices, from 05d9810:
+#> + 17/34 vertices, from 8d74475:
 #>  [1]  9 10 14 15 16 19 20 21 23 24 27 28 29 30 31 32 33
 #> 
 ```

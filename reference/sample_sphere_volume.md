@@ -40,6 +40,10 @@ times `n` matrix, whose columns are the sample vectors.
 (the `(dim-1)`-sphere) i.e. the Euclidean norm of the samples is smaller
 or equal to `radius`.
 
+## Related documentation in the C library
+
+[`sample_sphere_volume()`](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_sample_sphere_volume)
+
 ## See also
 
 Other latent position vector samplers:

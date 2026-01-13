@@ -94,6 +94,11 @@ Conversion algorithms for `as_undirected()`:
   there are more than one mutual edge pairs between the same pair of
   vertices.
 
+## Related documentation in the C library
+
+[`to_directed()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_directed),
+[`to_undirected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_undirected)
+
 ## See also
 
 [`simplify()`](https://r.igraph.org/reference/simplify.md) for removing
@@ -115,25 +120,21 @@ Other conversion:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`to_directed()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_directed).
-
 ## Examples
 
 ``` r
 g <- make_ring(10)
 as_directed(g, "mutual")
-#> IGRAPH b748f83 D--- 10 20 -- Ring graph
+#> IGRAPH 555e2a6 D--- 10 20 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from b748f83:
+#> + edges from 555e2a6:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10  1->10
 #> [11]  2-> 1  3-> 2  4-> 3  5-> 4  6-> 5  7-> 6  8-> 7  9-> 8 10-> 9 10-> 1
 g2 <- make_star(10)
 as_undirected(g)
-#> IGRAPH f3a6872 U--- 10 10 -- Ring graph
+#> IGRAPH 2e8d20c U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from f3a6872:
+#> + edges from 2e8d20c:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 
 # Combining edge attributes
@@ -141,9 +142,9 @@ g3 <- make_ring(10, directed = TRUE, mutual = TRUE)
 E(g3)$weight <- seq_len(ecount(g3))
 ug3 <- as_undirected(g3)
 print(ug3, e = TRUE)
-#> IGRAPH 03b3db2 U-W- 10 10 -- Ring graph
+#> IGRAPH 30584c7 U-W- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n)
-#> + edges from 03b3db2:
+#> + edges from 30584c7:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 1--10 9--10
 if (FALSE) { # rlang::is_interactive()
 x11(width = 10, height = 5)
@@ -163,8 +164,8 @@ ug4 <- as_undirected(g4,
   edge.attr.comb = list(weight = length)
 )
 print(ug4, e = TRUE)
-#> IGRAPH 49c67b8 U-W- 10 7 -- 
+#> IGRAPH 1538fc0 U-W- 10 7 -- 
 #> + attr: weight (e/n)
-#> + edges from 49c67b8:
+#> + edges from 1538fc0:
 #> [1]  6-- 7  7-- 8  8-- 9  8-- 9  9-- 9 10--10 10--10
 ```

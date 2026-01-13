@@ -30,3 +30,8 @@ dominator.tree(graph, root, mode = c("out", "in", "all", "total"))
   Constant, must be ‘`in`’ or ‘`out`’. If it is ‘`in`’, then all
   directions are considered as opposite to the original one in the input
   graph.
+
+## Related documentation in the C library
+
+[[`dominator_tree()`](https://r.igraph.org/reference/dominator_tree.md)](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_dominator_tree),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

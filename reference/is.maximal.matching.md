@@ -29,3 +29,8 @@ is.maximal.matching(graph, matching, types = NULL)
 
   Vertex types, if the graph is bipartite. By default they are taken
   from the ‘`type`’ vertex attribute, if present.
+
+## Related documentation in the C library
+
+[`is_maximal_matching()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_maximal_matching),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

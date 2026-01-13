@@ -44,6 +44,10 @@ A named list with the following components:
   `normalized` argument was `TRUE`, then the result was divided by this
   number.
 
+## Related documentation in the C library
+
+[`centralization_betweenness()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_betweenness)
+
 ## See also
 
 Other centralization related:

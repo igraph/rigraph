@@ -25,6 +25,10 @@ A logical vector of length one.
 `is_dag()` checks whether there is a directed cycle in the graph. If
 not, the graph is a DAG.
 
+## Related documentation in the C library
+
+[`is_dag()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag)
+
 ## See also
 
 Graph cycles
@@ -66,10 +70,6 @@ Other structural.properties:
 
 Tamas Nepusz <ntamas@gmail.com> for the C code, Gabor Csardi
 <csardi.gabor@gmail.com> for the R interface.
-
-## Related documentation in the C library
-
-[`is_dag()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag).
 
 ## Examples
 

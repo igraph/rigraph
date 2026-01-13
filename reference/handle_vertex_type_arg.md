@@ -35,6 +35,10 @@ vertex attribute, then the value of this vertex attribute will be used
 as vertex types. Non-logical vertex type vectors are coerced into
 logical vectors after printing a warning.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>

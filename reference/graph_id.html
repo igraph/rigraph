@@ -51,7 +51,7 @@ Changing the attributes will not change the id."><meta property="og:image" conte
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get the id of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/iterators.R" class="external-link"><code>R/iterators.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/iterators.R" class="external-link"><code>R/iterators.R</code></a></small>
       <div class="d-none name"><code>graph_id.Rd</code></div>
     </div>
 
@@ -89,15 +89,15 @@ vertex and edge sequences the id of the graph they were created from.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">graph_id</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d5a62249-6821-4f4e-b49d-8bc0ed2a02f0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "e3a340e6-eb35-4b77-8ca9-579f59faeb23"</span>
 <span class="r-in"><span><span class="fu">graph_id</span><span class="op">(</span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d5a62249-6821-4f4e-b49d-8bc0ed2a02f0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "e3a340e6-eb35-4b77-8ca9-579f59faeb23"</span>
 <span class="r-in"><span><span class="fu">graph_id</span><span class="op">(</span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d5a62249-6821-4f4e-b49d-8bc0ed2a02f0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "e3a340e6-eb35-4b77-8ca9-579f59faeb23"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="fu">graph_id</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6f8bf001-1579-4d38-a852-01929a4d5bab"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b3eb2ac9-5ad5-4916-a476-f9ebd98b9849"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

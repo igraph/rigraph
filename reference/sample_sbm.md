@@ -48,6 +48,10 @@ probabilities given by the Bernoulli rate matrix, `pref.matrix`. The
 order of the vertices in the generated graph corresponds to the
 `block.sizes` argument.
 
+## Related documentation in the C library
+
+[`sbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game)
+
 ## References
 
 Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation and
@@ -87,10 +91,6 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`sbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_sbm_game).
-
 ## Examples
 
 ``` r
@@ -98,9 +98,9 @@ Gabor Csardi <csardi.gabor@gmail.com>
 pm <- cbind(c(.1, .001), c(.001, .05))
 g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 g
-#> IGRAPH ceeca85 U--- 1000 17051 -- Stochastic block model
+#> IGRAPH ff34b7c U--- 1000 17051 -- Stochastic block model
 #> + attr: name (g/c), loops (g/l)
-#> + edges from ceeca85:
+#> + edges from ff34b7c:
 #>  [1]  1-- 6  2-- 8  1-- 9  2--11  2--13 10--13 11--13  7--14 11--14  3--15
 #> [11]  5--15  6--16 12--17  7--18  5--19  8--19 11--19 14--19 16--19 16--20
 #> [21]  6--21  9--21 18--21  4--22  5--22  7--22  1--23  8--23 17--23 14--24

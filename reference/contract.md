@@ -39,6 +39,10 @@ The attributes of the graph are kept. Graph and edge attributes are
 unchanged, vertex attributes are combined, according to the
 `vertex.attr.comb` parameter.
 
+## Related documentation in the C library
+
+[`contract_vertices()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -71,10 +75,6 @@ Other functions for manipulating graph structure:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`contract_vertices()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices).
-
 ## Examples
 
 ``` r
@@ -90,10 +90,10 @@ g2 <- contract(g, rep(1:5, each = 2),
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
 print(g2, g = TRUE, v = TRUE, e = TRUE)
-#> IGRAPH 79ecca8 UNW- 5 10 -- Ring
+#> IGRAPH b9f1d86 UNW- 5 10 -- Ring
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight
 #> | (e/n)
-#> + edges from 79ecca8 (vertex names):
+#> + edges from b9f1d86 (vertex names):
 #>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h
 #>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j
 ```

@@ -39,6 +39,8 @@ motifs_randesu_callback(graph, size = 3, cut_prob = NULL, callback)
 `NULL`, invisibly. This function is called for its side effects (calling
 the callback function for each motif).
 
+## Related documentation in the C library
+
 ## See also
 
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
@@ -50,10 +52,6 @@ Other graph motifs:
 [`dyad_census()`](https://r.igraph.org/reference/dyad_census.md),
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
-
-## Related documentation in the C library
-
-[`motifs_randesu_callback()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_callback).
 
 ## Examples
 

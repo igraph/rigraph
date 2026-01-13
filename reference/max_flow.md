@@ -84,6 +84,13 @@ and the target the incoming flow is the same as the outgoing flow. The
 value of the flow is the incoming flow of the `target` vertex. The
 maximum flow is the flow of maximum value.
 
+## Related documentation in the C library
+
+[`maxflow()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum Flow
@@ -103,10 +110,6 @@ Other flow:
 [`st_min_cuts()`](https://r.igraph.org/reference/st_min_cuts.md),
 [`vertex_connectivity()`](https://r.igraph.org/reference/vertex_connectivity.md)
 
-## Related documentation in the C library
-
-[`maxflow()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow).
-
 ## Examples
 
 ``` r
@@ -121,15 +124,15 @@ max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #> [1] 1 1 1 1 1 1
 #> 
 #> $cut
-#> + 2/6 edges from f1de566 (vertex names):
+#> + 2/6 edges from 0ea346d (vertex names):
 #> [1] 3->4 1->5
 #> 
 #> $partition1
-#> + 2/6 vertices, named, from f1de566:
+#> + 2/6 vertices, named, from 0ea346d:
 #> [1] 1 3
 #> 
 #> $partition2
-#> + 4/6 vertices, named, from f1de566:
+#> + 4/6 vertices, named, from 0ea346d:
 #> [1] 4 5 6 2
 #> 
 #> $stats

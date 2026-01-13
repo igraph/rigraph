@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Diameter of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>diameter.Rd</code></div>
     </div>
 
@@ -111,6 +111,10 @@ one found.</p>
 connected by the diameter path.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="distances.html">distances()</a></code></p>
 <p>Other paths:
@@ -142,12 +146,12 @@ connected by the diameter path.</p>
 <span class="r-in"><span><span class="fu">diameter</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 27</span>
 <span class="r-in"><span><span class="fu">get_diameter</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from dd9b528:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f843b14:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-in"><span><span class="fu">diameter</span><span class="op">(</span><span class="va">g</span>, weights <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-in"><span><span class="fu">get_diameter</span><span class="op">(</span><span class="va">g</span>, weights <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from dd9b528:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from f843b14:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

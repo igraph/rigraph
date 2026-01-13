@@ -79,6 +79,11 @@ If you need the automorphisms themselves, use
 [`automorphism_group()`](https://r.igraph.org/reference/automorphism_group.md)
 to obtain a compact representation of the automorphism group.
 
+## Related documentation in the C library
+
+[`count_automorphisms()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -101,10 +106,6 @@ Other graph automorphism:
 Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS and
 Gabor Csardi <csardi.gabor@gmail.com> for the igraph glue code and this
 manual page.
-
-## Related documentation in the C library
-
-[`count_automorphisms()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms).
 
 ## Examples
 

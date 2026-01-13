@@ -18,6 +18,12 @@ graph_(...)
 
 TODO
 
+## Related documentation in the C library
+
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## Examples
 
 ``` r
@@ -26,11 +32,11 @@ graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
 #> Warning: `graph_()` was deprecated in igraph 2.1.0.
 #> ℹ Please use constructors directly, for instance graph_from_edgelist().
 #> ℹ graph_() will be removed in a future version of igraph.
-#> IGRAPH 0f433ba U--- 6 5 -- 
-#> + edges from 0f433ba:
+#> IGRAPH accd06c U--- 6 5 -- 
+#> + edges from accd06c:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
-#> IGRAPH 0224875 U--- 6 5 -- 
-#> + edges from 0224875:
+#> IGRAPH 978016f U--- 6 5 -- 
+#> + edges from 978016f:
 #> [1] 1--2 2--3 3--4 4--5 5--6
 ```

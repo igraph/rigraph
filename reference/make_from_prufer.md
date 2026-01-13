@@ -30,6 +30,10 @@ tree and add the label of the vertex that it was connected to to the
 sequence. Repeat until there are only two vertices in the remaining
 graph.
 
+## Related documentation in the C library
+
+[`from_prufer()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer)
+
 ## See also
 
 [`to_prufer()`](https://r.igraph.org/reference/to_prufer.md) to convert
@@ -40,10 +44,6 @@ Other trees:
 [`is_tree()`](https://r.igraph.org/reference/is_tree.md),
 [`sample_spanning_tree()`](https://r.igraph.org/reference/sample_spanning_tree.md),
 [`to_prufer()`](https://r.igraph.org/reference/to_prufer.md)
-
-## Related documentation in the C library
-
-[`from_prufer()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_from_prufer).
 
 ## Examples
 

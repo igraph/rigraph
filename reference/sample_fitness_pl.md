@@ -86,6 +86,10 @@ maximum degree is less than the square root of the number of edges times
 the average degree; see the paper of Chung and Lu, and Cho et al for
 more details.
 
+## Related documentation in the C library
+
+[`static_power_law_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game)
+
 ## References
 
 Goh K-I, Kahng B, Kim D: Universal behaviour of load distribution in
@@ -131,10 +135,6 @@ Random graph models (games)
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>
-
-## Related documentation in the C library
-
-[`static_power_law_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game).
 
 ## Examples
 

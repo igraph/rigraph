@@ -126,6 +126,11 @@ See the referenced paper below for the details of the algorithm.
 
 This function was rewritten from scratch in igraph version 0.8.0.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by

@@ -26,6 +26,8 @@ align_layout(graph, layout)
 
 modified layout matrix
 
+## Related documentation in the C library
+
 ## Examples
 
 ``` r

@@ -38,3 +38,11 @@ graph.laplacian(
 
   Logical scalar, whether to return the result as a sparse matrix. The
   `Matrix` package is required for sparse matrices.
+
+## Related documentation in the C library
+
+[`get_laplacian()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian),
+[`get_laplacian_sparse()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_laplacian_sparse),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

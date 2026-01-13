@@ -17,3 +17,7 @@ line.graph(graph)
 - graph:
 
   The input graph, it can be directed or undirected.
+
+## Related documentation in the C library
+
+[`linegraph()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_linegraph)

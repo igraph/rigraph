@@ -43,6 +43,10 @@ not-connected, (2) non-reciprocally connected, (3) reciprocally
 connected. The result is the size of group (3), divided by the sum of
 group sizes (2)+(3). This measure is calculated if `mode` is `ratio`.
 
+## Related documentation in the C library
+
+[`reciprocity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity)
+
 ## See also
 
 Other structural.properties:
@@ -75,10 +79,6 @@ Other structural.properties:
 
 Tamas Nepusz <ntamas@gmail.com> and Gabor Csardi
 <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`reciprocity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity).
 
 ## Examples
 

@@ -33,6 +33,14 @@ removal of a single articulation point or a single bridge makes it
 disconnected. If a graph contains no articulation points, then its
 vertex connectivity is at least two.
 
+## Related documentation in the C library
+
+[`articulation_points()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_articulation_points),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`bridges()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_bridges),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 [`biconnected_components()`](https://r.igraph.org/reference/biconnected_components.md),
@@ -52,11 +60,6 @@ Connected components
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`articulation_points()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_articulation_points),
-[`bridges()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_bridges).
-
 ## Examples
 
 ``` r
@@ -64,11 +67,11 @@ g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)))
 articulation_points(g)
-#> + 2/10 vertices, from 9eec013:
+#> + 2/10 vertices, from c049b80:
 #> [1] 6 1
 
 g <- make_graph("krackhardt_kite")
 bridges(g)
-#> + 2/18 edges from 28c0e1a:
+#> + 2/18 edges from 677e804:
 #> [1] 9--10 8-- 9
 ```

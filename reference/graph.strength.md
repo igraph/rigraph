@@ -46,3 +46,9 @@ graph.strength(
   [`degree()`](https://r.igraph.org/reference/degree.md) is called. If
   this is `NA`, then no edge weights are used (even if the graph has a
   `weight` edge attribute).
+
+## Related documentation in the C library
+
+[[`strength()`](https://r.igraph.org/reference/strength.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

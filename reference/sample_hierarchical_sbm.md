@@ -50,6 +50,11 @@ An igraph graph.
 The function generates a random graph according to the hierarchical
 stochastic block model.
 
+## Related documentation in the C library
+
+[`hsbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game),
+[`hsbm_list_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game)
+
 ## See also
 
 Random graph models (games)
@@ -84,11 +89,6 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
-## Related documentation in the C library
-
-[`hsbm_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_game),
-[`hsbm_list_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_hsbm_list_game).
-
 ## Examples
 
 ``` r
@@ -100,9 +100,9 @@ C <- matrix(c(
 ), nrow = 3)
 g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-#> IGRAPH 0393590 U--- 100 458 -- Hierarchical stochastic block model
+#> IGRAPH 9acd8c9 U--- 100 458 -- Hierarchical stochastic block model
 #> + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)
-#> + edges from 0393590:
+#> + edges from 9acd8c9:
 #>  [1]  1-- 2  1-- 3  2-- 3  3-- 4  1-- 5  3-- 5  1-- 6  2-- 6  6-- 7  4-- 8
 #> [11]  5-- 8  6-- 8  4-- 9  5-- 9  6-- 9  4--10  5--10  6--10  7-- 8  7-- 9
 #> [21]  8-- 9  7--10  8--10  9--10 11--12 11--13 12--13 11--14 12--14 12--15

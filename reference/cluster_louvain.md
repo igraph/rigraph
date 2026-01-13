@@ -62,6 +62,12 @@ in a step. Since igraph 1.3, vertices are processed in a random order.
 
 This function was contributed by Tom Gregorovic.
 
+## Related documentation in the C library
+
+[`community_multilevel()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_multilevel),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte, Etienne

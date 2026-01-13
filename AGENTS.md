@@ -46,12 +46,9 @@ pak::pak(dependencies = "Config/Needs/build")
 - Run tests: `testthat::test_local(reporter = "check")`
 - Run tests for a single file `test-foo.R`:
   `testthat::test_local(filter = "foo", reporter = "check")`
-- Build package:
-  [`devtools::build()`](https://devtools.r-lib.org/reference/build.html)
-- Check package:
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-- Update `.Rd` documentation:
-  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+- Build package: `devtools::build()`
+- Check package: `devtools::check()`
+- Update `.Rd` documentation: `devtools::document()`
 - Format code: `air format .`
 
 ## Code Style and Documentation
@@ -104,9 +101,7 @@ pak::pak(dependencies = "Config/Needs/build")
 - Document internal functions using devtag (work in progress)
 - Link to C documentation using `@cdocs` tag:
   `#' @cdocs igraph_function_name`
-- Always run
-  [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
-  after updating documentation
+- Always run `devtools::document()` after updating documentation
 
 ### Naming Conventions
 
@@ -181,6 +176,4 @@ change.
 - When testing error behavior, prefer snapshot tests.
 - Run tests frequently during development and at the end:
   `testthat::test_local(reporter = "check")`
-- Run
-  [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
-  as a final step to ensure all checks pass.
+- Run `devtools::check()` as a final step to ensure all checks pass.

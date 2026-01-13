@@ -62,3 +62,10 @@ layout.sugiyama(
   vertex attributes and the ‘arrow.mode’ and ‘arrow.size’ edge
   attributes. ‘all’ keep all graph, vertex and edge attributes, ‘none’
   keeps none of them.
+
+## Related documentation in the C library
+
+[`layout_sugiyama()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_sugiyama),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

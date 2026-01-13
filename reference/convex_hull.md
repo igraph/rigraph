@@ -27,6 +27,8 @@ A named list with components:
 
   The coordinates of the corners of the convex hull.
 
+## Related documentation in the C library
+
 ## References
 
 Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford
@@ -43,10 +45,6 @@ Other other:
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>
-
-## Related documentation in the C library
-
-[`convex_hull()`](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_convex_hull).
 
 ## Examples
 

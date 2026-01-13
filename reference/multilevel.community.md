@@ -35,3 +35,9 @@ multilevel.community(graph, weights = NULL, resolution = 1)
   uses internally. Lower values typically yield fewer, larger clusters.
   The original definition of modularity is recovered when the resolution
   parameter is set to 1.
+
+## Related documentation in the C library
+
+[`community_multilevel()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_multilevel),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

@@ -24,6 +24,10 @@ empty_graph(n = 0, directed = TRUE)
 
 An igraph graph.
 
+## Related documentation in the C library
+
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty)
+
 ## See also
 
 Other deterministic constructors:
@@ -44,17 +48,13 @@ Other deterministic constructors:
 [`make_turan()`](https://r.igraph.org/reference/make_turan.md),
 [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
 
-## Related documentation in the C library
-
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty).
-
 ## Examples
 
 ``` r
 make_empty_graph(n = 10)
-#> IGRAPH dbb4b7c D--- 10 0 -- 
-#> + edges from dbb4b7c:
+#> IGRAPH 0afc366 D--- 10 0 -- 
+#> + edges from 0afc366:
 make_empty_graph(n = 5, directed = FALSE)
-#> IGRAPH 4cd4665 U--- 5 0 -- 
-#> + edges from 4cd4665:
+#> IGRAPH 5415256 U--- 5 0 -- 
+#> + edges from 5415256:
 ```

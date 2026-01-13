@@ -78,6 +78,10 @@ children. For the exact algorithm, the reference below.
 If the given graph is not a tree, a breadth-first search is executed
 first to obtain a possible spanning tree.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 Reingold, E and Tilford, J (1981). Tidier drawing of trees. *IEEE Trans.

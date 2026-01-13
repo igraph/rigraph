@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>A graph with no edges</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_empty_graph.Rd</code></div>
     </div>
 
@@ -77,6 +77,10 @@
     <p>An igraph graph.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other deterministic constructors:
 <code><a href="graph_from_atlas.html">graph_from_atlas()</a></code>,
@@ -96,19 +100,15 @@
 <code><a href="make_turan.html">make_turan()</a></code>,
 <code><a href="make_wheel.html">make_wheel()</a></code></p></div>
     </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty" class="external-link"><code>empty()</code></a>.</p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_empty_graph</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dbb4b7c D--- 10 0 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dbb4b7c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0afc366 D--- 10 0 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0afc366:</span>
 <span class="r-in"><span><span class="fu">make_empty_graph</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4cd4665 U--- 5 0 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4cd4665:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5415256 U--- 5 0 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5415256:</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

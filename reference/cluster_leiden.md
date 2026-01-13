@@ -131,6 +131,13 @@ any `vertex_weights`, the correct vertex weights and scaling of
 \\\gamma\\ is determined automatically by the `objective_function`
 argument.
 
+## Related documentation in the C library
+
+[`community_leiden()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_leiden),
+[[`strength()`](https://r.igraph.org/reference/strength.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain to
