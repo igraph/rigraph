@@ -20,4 +20,8 @@ graph has no \sQuote{\code{type}} vertex attribute.}
 \code{bipartite.projection.size()} was renamed to \code{\link[=bipartite_projection_size]{bipartite_projection_size()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

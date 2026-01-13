@@ -61,6 +61,10 @@ In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
 with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
 uniformly choose \eqn{m} edges to realize.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}
+}
+
 \examples{
 
 ## empty graph

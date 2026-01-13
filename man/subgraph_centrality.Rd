@@ -29,6 +29,10 @@ Currently the calculation is performed by explicitly calculating all
 eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 effectively means that the measure can only be calculated for small graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- sample_pa(100, m = 4, dir = FALSE)

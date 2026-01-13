@@ -96,6 +96,10 @@ graph is growing.
 but the probability of an edge depends on the (potentially) cited
 vertex only.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \seealso{
 Random graph models (games)
 \code{\link{bipartite_gnm}()},

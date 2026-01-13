@@ -107,6 +107,10 @@ and calls \code{assortativity()}.
 Undirected graphs are effectively treated as directed ones with all-reciprocal edges.
 Thus, self-loops are taken into account twice in undirected graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
+}
+
 \examples{
 
 # random network, close to zero
@@ -126,5 +130,3 @@ M. E. J. Newman: Assortative mixing in networks, \emph{Phys. Rev. Lett.} 89,
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity}{\code{assortativity()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}.}
-

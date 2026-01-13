@@ -53,4 +53,8 @@ suffix is added to the filename.}
 \code{graph.graphdb()} was renamed to \code{\link[=graph_from_graphdb]{graph_from_graphdb()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}
+}
+
 \keyword{internal}

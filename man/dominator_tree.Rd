@@ -55,6 +55,10 @@ ancestor of \eqn{w} in the dominator tree.
 This function implements the Lengauer-Tarjan algorithm to construct the
 dominator tree of a directed graph. For details see the reference below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_dominator_tree}{\code{dominator_tree()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## The example from the paper

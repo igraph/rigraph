@@ -14,6 +14,10 @@ A character scalar, the igraph version string, with an attribute
 Returns the R package version,
 prints the R package version and C library version.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_version}{\code{version()}}
+}
+
 \examples{
 igraph_version()
 

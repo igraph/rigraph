@@ -29,4 +29,8 @@ returned for the non-existant edge(s).}
 \code{get.edge.ids()} was renamed to \code{\link[=get_edge_ids]{get_edge_ids()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

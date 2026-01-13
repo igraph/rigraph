@@ -35,6 +35,10 @@ A numeric vector giving the strength of the vertices.
 \description{
 Summing up the edge weights of the adjacent edges for each vertex.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength}{\code{strength()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- make_star(10)
@@ -74,5 +78,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{centrality}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength}{\code{strength()}}.}
-

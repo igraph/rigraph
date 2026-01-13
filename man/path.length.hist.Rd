@@ -18,4 +18,8 @@ this argument is ignored for undirected graphs.}
 \code{path.length.hist()} was renamed to \code{\link[=distance_table]{distance_table()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist}{\code{path_length_hist()}}
+}
+
 \keyword{internal}

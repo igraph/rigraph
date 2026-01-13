@@ -41,6 +41,10 @@ of minimum spanning trees of all of its components.
 
 If the graph is not connected a minimum spanning forest is returned.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted}{\code{minimum_spanning_tree_unweighted()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_prim}{\code{minimum_spanning_tree_prim()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_gnp(100, 3 / 100)

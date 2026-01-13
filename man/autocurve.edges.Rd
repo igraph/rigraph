@@ -18,4 +18,8 @@ curvature between \code{-start} and \code{start}, spaced equally.}
 \code{autocurve.edges()} was renamed to \code{\link[=curve_multiple]{curve_multiple()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

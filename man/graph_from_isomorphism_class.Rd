@@ -24,6 +24,10 @@ class are isomorphic and isomorphic graphs always have the same
 isomorphism class. Currently it can handle directed graphs with 3 or 4
 vertices and undirected graphd with 3 to 6 vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}
+}
+
 \seealso{
 Other graph isomorphism: 
 \code{\link{canonical_permutation}()},
@@ -36,5 +40,3 @@ Other graph isomorphism:
 \code{\link{subgraph_isomorphisms}()}
 }
 \concept{graph isomorphism}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}.}
-

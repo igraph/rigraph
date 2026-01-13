@@ -30,4 +30,8 @@ the corresponding eigenvector is calculated.}
 \code{graph.eigen()} was renamed to \code{\link[=spectrum]{spectrum()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+
+}
+
 \keyword{internal}

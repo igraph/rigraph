@@ -12,4 +12,8 @@ igraph.version()
 \code{igraph.version()} was renamed to \code{\link[=igraph_version]{igraph_version()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_version}{\code{version()}}
+}
+
 \keyword{internal}

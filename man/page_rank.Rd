@@ -89,6 +89,10 @@ some of the vertices, all of them must be calculated. Requesting the
 PageRank for only some of the vertices does not result in any performance
 increase at all.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank}{\code{personalized_pagerank()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
@@ -132,5 +136,3 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{centrality}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank}{\code{personalized_pagerank()}}.}
-

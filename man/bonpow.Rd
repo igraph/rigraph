@@ -43,4 +43,8 @@ support}
 \code{bonpow()} was renamed to \code{\link[=power_centrality]{power_centrality()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_degree}{\code{degree()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

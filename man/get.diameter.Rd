@@ -28,4 +28,8 @@ used by default.}
 \code{get.diameter()} was renamed to \code{\link[=get_diameter]{get_diameter()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

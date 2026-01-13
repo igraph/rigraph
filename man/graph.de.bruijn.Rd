@@ -17,4 +17,8 @@ graph.de.bruijn(m, n)
 \code{graph.de.bruijn()} was renamed to \code{\link[=make_de_bruijn_graph]{make_de_bruijn_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_de_bruijn}{\code{de_bruijn()}}
+}
+
 \keyword{internal}

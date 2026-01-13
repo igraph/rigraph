@@ -53,6 +53,10 @@ corrected version is available from
 \url{https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf}, our
 implementation is based on this.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}
+}
+
 \examples{
 
 fire <- sample_forestfire(50, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
@@ -109,5 +113,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game}{\code{forest_fire_game()}}.}
-

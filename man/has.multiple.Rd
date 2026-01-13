@@ -15,4 +15,8 @@ has.multiple(graph)
 \code{has.multiple()} was renamed to \code{\link[=any_multiple]{any_multiple()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}
+}
+
 \keyword{internal}

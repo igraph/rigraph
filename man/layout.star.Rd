@@ -21,4 +21,8 @@ The default ordering is given by the vertex ids.}
 \code{layout.star()} was renamed to \code{\link[=layout_as_star]{layout_as_star()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_star}{\code{layout_star()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_circle}{\code{layout_circle()}}
+}
+
 \keyword{internal}

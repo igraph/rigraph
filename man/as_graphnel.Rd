@@ -24,6 +24,10 @@ vertex attribute \sQuote{\code{name}}, then it will be used to assign
 vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 will be used for this purpose.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple}{\code{has_multiple()}}
+}
+
 \examples{
 \dontshow{if (rlang::is_installed("graph")) withAutoprint(\{ # examplesIf}
 ## Undirected

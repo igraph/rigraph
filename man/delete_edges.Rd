@@ -20,6 +20,10 @@ The graph, with the edges removed.
 \description{
 Delete edges from a graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_delete_edges}{\code{delete_edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10) \%>\%
   delete_edges(seq(1, 9, by = 2))

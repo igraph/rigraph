@@ -24,6 +24,10 @@ The coordinates of the corners of the convex hull.
 Calculate the convex hull of a set of points, i.e. the covering polygon that
 has the smallest area.
 }
+\section{Related documentation in the C library}{
+
+}
+
 \examples{
 
 M <- cbind(runif(100), runif(100))
@@ -45,5 +49,3 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{other}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_convex_hull}{\code{convex_hull()}}.}
-

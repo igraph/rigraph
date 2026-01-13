@@ -30,4 +30,8 @@ insensitive.}
 \code{read.graph()} was renamed to \code{\link[=read_graph]{read_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek}{\code{read_graph_pajek()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml}{\code{read_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml}{\code{read_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl}{\code{read_graph_dl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

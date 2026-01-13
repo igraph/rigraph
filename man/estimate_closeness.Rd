@@ -42,4 +42,8 @@ all reachable vertices.}
 
 Use \code{\link[=closeness]{closeness()}} with the \code{cutoff} argument instead.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_closeness_cutoff}{\code{closeness_cutoff()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

@@ -36,6 +36,10 @@ minimum circuit in a graph \emph{Proceedings of the ninth annual ACM
 symposium on Theory of computing}, 1-10, 1977. The first implementation of
 this function was done by Keith Briggs, thanks Keith.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 # No circle in a tree

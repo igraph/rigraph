@@ -48,4 +48,8 @@ default it will be removed.}
 \code{bipartite.projection()} was renamed to \code{\link[=bipartite_projection]{bipartite_projection()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

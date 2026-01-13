@@ -35,6 +35,10 @@ for \code{m} and \code{n}.
 De Bruijn graphs have some interesting properties, please see another
 source, e.g. Wikipedia for details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_de_bruijn}{\code{de_bruijn()}}
+}
+
 \examples{
 
 # de Bruijn graphs can be created recursively by line graphs as well

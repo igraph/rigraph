@@ -38,6 +38,10 @@ Because graphNEL graphs poorly support multiple edges, the edge
 attributes of the multiple edges are lost: they are all replaced by the
 attributes of the first of the multiple edges.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_adjlist}{\code{adjlist()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 \dontshow{if (rlang::is_installed("graph")) withAutoprint(\{ # examplesIf}
 ## Undirected

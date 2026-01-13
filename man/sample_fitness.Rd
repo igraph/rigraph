@@ -65,6 +65,10 @@ achieve this, you have to draw the fitness scores from the desired power-law
 distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_fitness_pl()}}
 which generates the fitnesses for you with a given exponent.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}
+}
+
 \examples{
 
 N <- 10000
@@ -111,5 +115,3 @@ Tamas Nepusz \email{ntamas@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}.}
-

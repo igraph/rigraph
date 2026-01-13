@@ -44,6 +44,10 @@ This is done by calculating the local scan statistics for
 each graph and each vertex, and then normalizing across the
 vertices and across the time steps.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_0}{\code{local_scan_0()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_0_them}{\code{local_scan_0_them()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_1_ecount}{\code{local_scan_1_ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_1_ecount_them}{\code{local_scan_1_ecount_them()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_k_ecount}{\code{local_scan_k_ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_k_ecount_them}{\code{local_scan_k_ecount_them()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_neighborhood_ecount}{\code{local_scan_neighborhood_ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 ## Generate a bunch of SBMs, with the last one being different
 num_t <- 20

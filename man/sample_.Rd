@@ -30,6 +30,10 @@ to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
 blocky <- sample_(sbm(

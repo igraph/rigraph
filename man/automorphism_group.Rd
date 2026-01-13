@@ -71,6 +71,10 @@ a graph using the BLISS algorithm. See also the BLISS homepage at
 generating set is not necessarily minimal, and it may depend on the splitting
 heuristics used by BLISS.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group}{\code{automorphism_group()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## A ring has n*2 automorphisms, and a possible generating set is one that
@@ -98,5 +102,3 @@ Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group}{\code{automorphism_group()}}.}
-

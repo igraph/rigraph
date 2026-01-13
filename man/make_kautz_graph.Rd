@@ -31,6 +31,10 @@ removing the first letter and appending a letter to it.
 Kautz graphs have some interesting properties, see e.g. Wikipedia for
 details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_kautz}{\code{kautz()}}
+}
+
 \examples{
 
 make_line_graph(make_kautz_graph(2, 1))

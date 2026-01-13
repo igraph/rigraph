@@ -84,6 +84,10 @@ The weakly connected components are found by a simple breadth-first search.
 The strongly connected components are implemented by two consecutive
 depth-first searches.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_connected_components}{\code{connected_components()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_induced_subgraph}{\code{induced_subgraph()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected}{\code{is_connected()}}
+}
+
 \examples{
 
 g <- sample_gnp(20, 1 / 20)
@@ -133,5 +137,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \concept{components}
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected}{\code{is_connected()}}.}
-

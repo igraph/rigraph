@@ -30,6 +30,10 @@ random dot product graphs
 (the \code{(dim-1)}-sphere) i.e. the Euclidean norm of the samples is
 smaller or equal to \code{radius}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_sample_sphere_volume}{\code{sample_sphere_volume()}}
+}
+
 \examples{
 lpvs.sph.vol <- sample_sphere_volume(dim = 10, n = 20, radius = 1)
 RDP.graph.4 <- sample_dot_product(lpvs.sph.vol)

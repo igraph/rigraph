@@ -121,6 +121,10 @@ of adjacent edges not initiated by the vertex itself and not the total
 (in- + out-) degree of the vertex, unless the \code{out.pref} argument is set to
 \code{TRUE}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_pa(10000)

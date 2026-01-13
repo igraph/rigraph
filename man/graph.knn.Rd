@@ -42,4 +42,8 @@ Weights are are used to calculate a weighted degree (also called
 \code{graph.knn()} was renamed to \code{\link[=knn]{knn()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_avg_nearest_neighbor_degree}{\code{avg_nearest_neighbor_degree()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

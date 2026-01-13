@@ -52,4 +52,8 @@ the energy function.}
 \code{layout.davidson.harel()} was renamed to \code{\link[=layout_with_dh]{layout_with_dh()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_davidson_harel}{\code{layout_davidson_harel()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density}{\code{density()}}
+}
+
 \keyword{internal}

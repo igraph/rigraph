@@ -25,4 +25,8 @@ sum up to one; otherwise it is the columns.}
 \code{get.stochastic()} was renamed to \code{\link[=stochastic_matrix]{stochastic_matrix()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic}{\code{get_stochastic()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic_sparse}{\code{get_stochastic_sparse()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

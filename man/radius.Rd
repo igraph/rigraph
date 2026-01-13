@@ -39,6 +39,10 @@ graph, and taking the maximum.
 This implementation ignores vertex pairs that are in different
 components. Isolated vertices have eccentricity zero.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_radius_dijkstra}{\code{radius_dijkstra()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_star(10, mode = "undirected")
 eccentricity(g)
@@ -61,5 +65,3 @@ Other paths:
 \code{\link{graph_center}()}
 }
 \concept{paths}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_radius_dijkstra}{\code{radius_dijkstra()}}.}
-

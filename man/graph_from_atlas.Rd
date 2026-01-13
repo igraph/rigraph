@@ -31,6 +31,10 @@ the degree sequence, for example 111223 < 112222;
 automorphisms.
 }
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_atlas}{\code{atlas()}}
+}
+
 \examples{
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))

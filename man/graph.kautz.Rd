@@ -17,4 +17,8 @@ graph.kautz(m, n)
 \code{graph.kautz()} was renamed to \code{\link[=make_kautz_graph]{make_kautz_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_kautz}{\code{kautz()}}
+}
+
 \keyword{internal}

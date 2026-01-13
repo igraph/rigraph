@@ -22,4 +22,8 @@ If \code{NULL}, the default, no cuts are made.}
 \code{graph.motifs.no()} was renamed to \code{\link[=count_motifs]{count_motifs()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_no}{\code{motifs_randesu_no()}}
+}
+
 \keyword{internal}

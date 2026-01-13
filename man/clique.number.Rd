@@ -15,4 +15,8 @@ clique.number(graph)
 \code{clique.number()} was renamed to \code{\link[=clique_num]{clique_num()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}
+}
+
 \keyword{internal}

@@ -32,4 +32,8 @@ an undirected graph, it must be symmetric.}
 \code{asymmetric.preference.game()} was renamed to \code{\link[=sample_asym_pref]{sample_asym_pref()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_asymmetric_preference_game}{\code{asymmetric_preference_game()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

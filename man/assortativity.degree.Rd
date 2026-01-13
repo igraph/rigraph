@@ -23,4 +23,8 @@ graphs.}
 \code{assortativity.degree()} was renamed to \code{\link[=assortativity_degree]{assortativity_degree()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree}{\code{assortativity_degree()}}
+}
+
 \keyword{internal}

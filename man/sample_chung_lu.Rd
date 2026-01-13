@@ -126,6 +126,10 @@ introduced by Norros and Reittu (2006). For a discussion of these three model
 variants, see Section 16.4 of Bollobás, Janson, Riordan (2007), as well as
 Van Der Hofstad (2013).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}
+}
+
 \examples{
 
 g <- sample_chung_lu(c(3, 3, 2, 2, 2, 1, 1))
@@ -202,5 +206,3 @@ Random graph models (games)
 \code{\link{sample_tree}()}
 }
 \concept{games}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_chung_lu_game}{\code{chung_lu_game()}}.}
-

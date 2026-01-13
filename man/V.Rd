@@ -51,6 +51,10 @@ Vertex sequences can be used to query or set attributes for the
 vertices in the sequence. See \code{\link[=$.igraph.vs]{$.igraph.vs()}} for details.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Vertex ids of an unnamed graph
 g <- make_ring(10)

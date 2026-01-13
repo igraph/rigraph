@@ -22,6 +22,10 @@ The first two columns are always named \code{from} and \code{to} and
 they contain the numeric ids of the incident vertices. The rows are
 listed in the order of numeric vertex ids.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_(
   ring(10),

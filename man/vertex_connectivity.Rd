@@ -75,6 +75,10 @@ These three functions essentially calculate the same measure(s), more
 precisely \code{vertex_connectivity()} is the most general, the other two are
 included only for the ease of using more descriptive function names.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_vertex_connectivity}{\code{vertex_connectivity()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_cohesion}{\code{cohesion()}}
+}
+
 \examples{
 
 g <- sample_pa(100, m = 1)

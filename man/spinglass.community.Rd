@@ -90,4 +90,8 @@ is ignored if the \sQuote{orig} implementation is chosen.}
 \code{spinglass.community()} was renamed to \code{\link[=cluster_spinglass]{cluster_spinglass()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

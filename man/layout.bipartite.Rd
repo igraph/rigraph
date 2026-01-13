@@ -30,4 +30,8 @@ you have too many edge crossings, increase this.}
 \code{layout.bipartite()} was renamed to \code{\link[=layout_as_bipartite]{layout_as_bipartite()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_bipartite}{\code{layout_bipartite()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

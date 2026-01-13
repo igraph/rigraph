@@ -40,6 +40,10 @@ Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
 
 \code{random.graph.game()} is an (also deprecated) alias to this function.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnp}{\code{erdos_renyi_game_gnp()}}, \href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnm}{\code{erdos_renyi_game_gnm()}}
+}
+
 \examples{
 
 g <- erdos.renyi.game(1000, 1 / 1000)

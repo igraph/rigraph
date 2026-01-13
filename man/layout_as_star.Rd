@@ -32,6 +32,10 @@ and the rest of the vertices equidistantly on the perimeter.
 It is possible to choose the vertex that will be in the center, and the
 order of the vertices can be also given.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_star}{\code{layout_star()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_circle}{\code{layout_circle()}}
+}
+
 \examples{
 
 g <- make_star(10)

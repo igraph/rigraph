@@ -111,6 +111,10 @@ of clique sizes, between the given minimum and maximum clique size.
 
 \code{is_clique()} tests whether all pairs within a vertex set are connected.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}
+}
+
 \examples{
 
 # this usually contains cliques of size six
@@ -143,5 +147,3 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_cliques}{\code{cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_cliques}{\code{largest_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_number}{\code{clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_largest_weighted_cliques}{\code{largest_weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_clique_number}{\code{weighted_clique_number()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_maximal_cliques_hist}{\code{maximal_cliques_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_clique_size_hist}{\code{clique_size_hist()}}, \href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_clique}{\code{is_clique()}}.}
-

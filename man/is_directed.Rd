@@ -15,6 +15,10 @@ Logical scalar, whether the graph is directed.
 \description{
 Check whether a graph is directed
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
+}
+
 \examples{
 g <- make_ring(10)
 is_directed(g)

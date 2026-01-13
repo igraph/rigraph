@@ -29,6 +29,10 @@ Randomly places vertices on a [-1,1] square (in 2d) or in a cube (in 3d). It
 is probably a useless layout, but it can use as a starting point for other
 layout generators.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_random}{\code{layout_random()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_random_3d}{\code{layout_random_3d()}}
+}
+
 \seealso{
 Other graph layouts: 
 \code{\link{add_layout_}()},

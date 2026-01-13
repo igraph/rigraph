@@ -19,4 +19,8 @@ can be \code{NULL}, see details below.}
 \code{vertex.disjoint.paths()} was renamed to \code{\link[=vertex_disjoint_paths]{vertex_disjoint_paths()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

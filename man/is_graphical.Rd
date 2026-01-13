@@ -36,6 +36,10 @@ The classical concept of graphicality assumes simple graphs. This function
 can perform the check also when self-loops, multi-edges, or both are allowed
 in the graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+}
+
 \examples{
 g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))
@@ -58,5 +62,3 @@ Tamás Nepusz \email{ntamas@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}.}
-

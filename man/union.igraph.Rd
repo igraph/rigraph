@@ -44,6 +44,10 @@ present in all graphs, and it is not renamed in the result graph.
 An error is generated if some input graphs are directed and others are
 undirected.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices}{\code{permute_vertices()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 ## Union of two social networks with overlapping sets of actors

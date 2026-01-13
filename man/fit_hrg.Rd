@@ -57,6 +57,10 @@ from a given HRG, if this is given in the \code{hrg()} argument and the
 \code{start} argument is \code{TRUE}. It can be converted to the \code{hclust} class using
 \code{as.hclust()} provided in this package.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_fit}{\code{hrg_fit()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 \dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 

@@ -23,4 +23,8 @@ thanks Peter.}
 \code{graph.adhesion()} was renamed to \code{\link[=adhesion]{adhesion()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_adhesion}{\code{adhesion()}}
+}
+
 \keyword{internal}

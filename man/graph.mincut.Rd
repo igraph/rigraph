@@ -32,4 +32,8 @@ partitions are also returned.}
 \code{graph.mincut()} was renamed to \code{\link[=min_cut]{min_cut()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_mincut}{\code{mincut()}}, \href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_mincut_value}{\code{mincut_value()}}, \href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_st_mincut}{\code{st_mincut()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

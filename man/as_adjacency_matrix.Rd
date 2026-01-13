@@ -60,6 +60,10 @@ regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
 defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 \code{TRUE}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- sample_gnp(10, 2 / 10)

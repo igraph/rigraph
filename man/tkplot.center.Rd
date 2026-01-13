@@ -15,4 +15,8 @@ tkplot.center(tkp.id)
 \code{tkplot.center()} was renamed to \code{\link[=tk_center]{tk_center()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

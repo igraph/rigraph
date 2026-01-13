@@ -30,6 +30,10 @@ subgraph of the k-core.
 
 This function calculates the coreness for each vertex.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_coreness}{\code{coreness()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_ring(10)

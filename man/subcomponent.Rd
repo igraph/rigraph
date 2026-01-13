@@ -28,6 +28,10 @@ vertices from which a given vertex is reachable via a directed path.
 \details{
 A breadth-first search is conducted starting from vertex \code{v}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- sample_gnp(100, 1 / 200)

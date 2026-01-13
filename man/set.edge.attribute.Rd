@@ -24,4 +24,8 @@ If \code{NULL}, the input is returned unchanged.}
 \code{set.edge.attribute()} was renamed to \code{\link[=set_edge_attr]{set_edge_attr()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

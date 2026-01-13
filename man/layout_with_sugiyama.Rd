@@ -91,6 +91,10 @@ the dummy nodes.
 
 For more details, see the reference below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_sugiyama}{\code{layout_sugiyama()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 ## Data taken from http://tehnick-8.narod.ru/dc_clients/

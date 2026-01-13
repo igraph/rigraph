@@ -66,6 +66,10 @@ does a better job at this, anyway.  }
 Note that ARPACK might be unstable for graphs with multiple components, e.g.
 graphs with isolate vertices.
 }
+\section{Related documentation in the C library}{
+
+}
+
 \examples{
 
 ## Small example graph, leading eigenvector by default

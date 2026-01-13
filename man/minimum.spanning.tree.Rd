@@ -29,4 +29,8 @@ algorithm is chosen, otherwise the unweighted algorithm is used.}
 \code{minimum.spanning.tree()} was renamed to \code{\link[=mst]{mst()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted}{\code{minimum_spanning_tree_unweighted()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_prim}{\code{minimum_spanning_tree_prim()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

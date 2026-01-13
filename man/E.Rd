@@ -58,6 +58,10 @@ Edge sequences can be used to query or set attributes for the
 edges in the sequence. See \code{\link[=$.igraph.es]{$.igraph.es()}} for details.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Edges of an unnamed graph
 g <- make_ring(10)

@@ -20,4 +20,8 @@ not have any adjacent edges in \code{eids}.}
 \code{subgraph.edges()} was renamed to \code{\link[=subgraph_from_edges]{subgraph_from_edges()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_subgraph_from_edges}{\code{subgraph_from_edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

@@ -41,4 +41,8 @@ an undirected graph, it must be symmetric.}
 \code{preference.game()} was renamed to \code{\link[=sample_pref]{sample_pref()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_preference_game}{\code{preference_game()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

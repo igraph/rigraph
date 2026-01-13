@@ -28,4 +28,8 @@ calculating the degree.}
 \code{centralization.degree.tmax()} was renamed to \code{\link[=centr_degree_tmax]{centr_degree_tmax()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_degree_tmax}{\code{centralization_degree_tmax()}}
+}
+
 \keyword{internal}

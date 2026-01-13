@@ -23,6 +23,10 @@ find a vertex with degree one, remove it from the tree and add the label of
 the vertex that it was connected to to the sequence. Repeat until there are
 only two vertices in the remaining graph.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer}{\code{to_prufer()}}
+}
+
 \examples{
 
 g <- make_tree(13, 3)
@@ -41,5 +45,3 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer}{\code{to_prufer()}}.}
-
