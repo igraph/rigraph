@@ -5,7 +5,7 @@
     Condition
       Error in `sample_degseq()`:
       ! Cannot make a connected graph from the given degree sequence. Invalid value
-      Source: vendor/cigraph/src/games/degree_sequence_vl/gengraph_mr-connected.cpp:<linenumber>
+      Source: games/degree_sequence_vl/gengraph_mr-connected.cpp:<linenumber>
 
 # sample_degseq() works -- Power-law degree error
 
@@ -14,5 +14,5 @@
     Condition
       Error in `sample_degseq()`:
       ! Cannot realize the given degree sequence as an undirected, simple graph. Invalid value
-      Source: vendor/cigraph/src/games/degree_sequence_vl/gengraph_mr-connected.cpp:<linenumber>
+      Source: games/degree_sequence_vl/gengraph_mr-connected.cpp:<linenumber>
 

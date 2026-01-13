@@ -49,7 +49,7 @@
     Condition
       Error in `arpack()`:
       ! ARPACK error. N must be positive
-      Source: vendor/cigraph/src/linalg/arpack.c:<linenumber>
+      Source: linalg/arpack.c:<linenumber>
 
 ---
 
