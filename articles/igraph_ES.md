@@ -94,9 +94,9 @@ aristas:
 g
 ```
 
-    ## IGRAPH 1c011e6 UN-- 10 2 -- 
+    ## IGRAPH 281290a UN-- 10 2 -- 
     ## + attr: name (v/c)
-    ## + edges from 1c011e6 (vertex names):
+    ## + edges from 281290a (vertex names):
     ## [1] 1--2 1--5
 
 Esto significa: grafo no dirigido (**U**ndirected) con **10** vértices y
@@ -115,7 +115,7 @@ aristas:
 summary(g)
 ```
 
-    ## IGRAPH 1c011e6 UN-- 10 2 -- 
+    ## IGRAPH 281290a UN-- 10 2 -- 
     ## + attr: name (v/c)
 
 También [`make_graph()`](https://r.igraph.org/reference/make_graph.md)
@@ -235,9 +235,9 @@ g <- g %>%
 g
 ```
 
-    ## IGRAPH aa23081 U--- 40 86 -- Zachary
+    ## IGRAPH 0a8a607 U--- 40 86 -- Zachary
     ## + attr: name (g/c)
-    ## + edges from aa23081:
+    ## + edges from 0a8a607:
     ##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 7  1-- 8  1-- 9  1--11  1--12
     ## [11]  1--13  1--14  1--18  1--20  1--22  1--32  2-- 3  2-- 4  2-- 8  2--14
     ## [21]  2--18  2--20  2--22  2--31  3-- 4  3-- 8  3--28  3--29  3--33  3--10
@@ -363,7 +363,7 @@ graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-    ## IGRAPH 3763783 U--- 5 3 -- Ring graph
+    ## IGRAPH 81d2336 U--- 5 3 -- Ring graph
     ## + attr: name (g/c), mutual (g/l), circular (g/l)
 
 Esto genera un grafo regular en forma de árbol con 127 vértices, cada
@@ -390,7 +390,7 @@ graph1 <- sample_grg(100, 0.2)
 summary(graph1)
 ```
 
-    ## IGRAPH 5bd4e2f U--- 100 499 -- Geometric random graph
+    ## IGRAPH 3f2bc99 U--- 100 499 -- Geometric random graph
     ## + attr: name (g/c), radius (g/n), torus (g/l)
 
 Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma
@@ -463,7 +463,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-    ## IGRAPH 5d410c6 UN-- 7 9 -- 
+    ## IGRAPH 9237c0f UN-- 7 9 -- 
     ## + attr: name (v/c), age (v/n), gender (v/c), is_formal (e/l)
 
 `V` y `E` son la forma estándar de obtener una secuencia de todos los
@@ -536,7 +536,7 @@ V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
 V(g)
 ```
 
-    ## + 7/7 vertices, named, from 5d410c6:
+    ## + 7/7 vertices, named, from 9237c0f:
     ## [1] Alejandra Bruno     Carmina   Moshe     Nang      Samira    Ibrahim
 
 Para eliminar atributos:
@@ -706,7 +706,7 @@ seq <- V(graph)[2, 3, 7]
 seq
 ```
 
-    ## + 3/10 vertices, from d43bb05:
+    ## + 3/10 vertices, from 85e57cd:
     ## [1] 2 3 7
 
 ``` r
@@ -714,7 +714,7 @@ seq <- seq[1, 3]    # filtrar un conjunto de vértices existente
 seq
 ```
 
-    ## + 2/10 vertices, from d43bb05:
+    ## + 2/10 vertices, from 85e57cd:
     ## [1] 2 7
 
 Al seleccionar un vértice que no existe se produce un error:
@@ -798,7 +798,7 @@ Carmina (cuyo ID de vértice es el 3):
 E(g)[.from(3)]
 ```
 
-    ## + 4/9 edges from 5d410c6 (vertex names):
+    ## + 4/9 edges from 9237c0f (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Por supuesto, también funciona con nombres de vértices:
@@ -807,7 +807,7 @@ Por supuesto, también funciona con nombres de vértices:
 E(g)[.from("Carmina")]
 ```
 
-    ## + 4/9 edges from 5d410c6 (vertex names):
+    ## + 4/9 edges from 9237c0f (vertex names):
     ## [1] Alejandra--Carmina Carmina  --Moshe   Carmina  --Nang    Carmina  --Samira
 
 Al usar
@@ -832,7 +832,7 @@ vértice es el 6):
 E(g) [ 3:5 %--% 5:6 ]
 ```
 
-    ## + 3/9 edges from 5d410c6 (vertex names):
+    ## + 3/9 edges from 9237c0f (vertex names):
     ## [1] Carmina--Nang   Carmina--Samira Nang   --Samira
 
 Para que el operador `%--%` funcione con nombres, puedes construir
@@ -864,7 +864,7 @@ women
 E(g)[men %--% women]
 ```
 
-    ## + 5/9 edges from 5d410c6 (vertex names):
+    ## + 5/9 edges from 9237c0f (vertex names):
     ## [1] Alejandra--Bruno  Alejandra--Moshe  Carmina  --Moshe  Carmina  --Nang  
     ## [5] Nang     --Samira
 
