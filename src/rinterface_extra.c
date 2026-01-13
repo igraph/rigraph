@@ -2319,7 +2319,7 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
  * build procedure, namely on the directory that the compiler is invoked from. */
 static inline const char* simplify_file_path(const char *file) {
   const char prefix[] = "vendor/cigraph/src/";
-  const size_t prefix_len = sizeof(prefix) / sizeof(prefix[0]);
+  const size_t prefix_len = sizeof(prefix) - 1;
 
   if (strncmp(file, prefix, prefix_len) == 0) {
     return file + prefix_len;
