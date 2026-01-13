@@ -1,5 +1,13 @@
 # Changelog
 
+## igraph 2.2.1.9014
+
+### Features
+
+- Change constructors to use explicit arguments
+  ([\#2466](https://github.com/igraph/rigraph/issues/2466),
+  [\#2467](https://github.com/igraph/rigraph/issues/2467)).
+
 ## igraph 2.2.1.9013
 
 ### Features
