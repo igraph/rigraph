@@ -17,5 +17,3 @@ convex.hull(data)
 - data:
 
   The data points, a numeric matrix with two columns.
-
-## Related documentation in the C library

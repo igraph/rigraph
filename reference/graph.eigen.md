@@ -39,5 +39,3 @@ graph.eigen(
 
   Options for the ARPACK solver. See
   [`arpack_defaults()`](https://r.igraph.org/reference/arpack.md).
-
-## Related documentation in the C library

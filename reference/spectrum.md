@@ -88,8 +88,6 @@ corresponding eigenvectors to calculate: There are eight options:
 Note that ARPACK might be unstable for graphs with multiple components,
 e.g. graphs with isolate vertices.
 
-## Related documentation in the C library
-
 ## See also
 
 [`as_adjacency_matrix()`](https://r.igraph.org/reference/as_adjacency_matrix.md)
