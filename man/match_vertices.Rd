@@ -50,10 +50,6 @@ Frank-Wolfe algorithm.
 
 See references for further details.
 }
-\section{Related documentation in the C library}{
-
-}
-
 \examples{
 
 # require(Matrix)

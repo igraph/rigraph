@@ -30,10 +30,6 @@ the callback function for each motif).
 This function searches for motifs in a graph and calls a user-provided
 callback function for each motif found.
 }
-\section{Related documentation in the C library}{
-
-}
-
 \examples{
 g <- sample_pa(100)
 count <- 0

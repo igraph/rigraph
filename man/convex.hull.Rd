@@ -15,8 +15,4 @@ convex.hull(data)
 \code{convex.hull()} was renamed to \code{\link[=convex_hull]{convex_hull()}} to create a more
 consistent API.
 }
-\section{Related documentation in the C library}{
-
-}
-
 \keyword{internal}
