@@ -41,6 +41,10 @@ Note that the mapping is not necessarily unique, e.g. if the graph has at
 least two components, then the vertices in the separate components can be
 mapped independently.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_is_bipartite}{\code{is_bipartite()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## Rings with an even number of vertices are bipartite
@@ -67,5 +71,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{bipartite}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_is_bipartite}{\code{is_bipartite()}}.}
-

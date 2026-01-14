@@ -304,7 +304,6 @@ sample_motifs <- function(
 #' dyad_census(g)
 #' @family graph motifs
 #' @export
-#' @cdocs igraph_dyad_census
 dyad_census <- function(graph) {
   if (!is_directed(graph)) {
     warn("`dyad_census()` requires a directed graph.")
@@ -396,7 +395,6 @@ dyad_census <- function(graph) {
 #' triad_census(g)
 #' @family motifs
 #' @export
-#' @cdocs igraph_triad_census
 triad_census <- function(graph) {
   triad_census_impl(
     graph = graph
@@ -426,7 +424,6 @@ triad_census <- function(graph) {
 #'
 #' @export
 #' @family graph motifs
-#' @cdocs igraph_motifs_randesu_callback
 #'
 #' @examples
 #' g <- sample_pa(100)

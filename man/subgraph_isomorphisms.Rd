@@ -71,6 +71,10 @@ If you want to ignore these attributes, then supply \code{NULL} for both of thes
 }
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_get_subisomorphisms_vf2}{\code{get_subisomorphisms_vf2()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \seealso{
 Other graph isomorphism: 
 \code{\link{canonical_permutation}()},

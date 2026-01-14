@@ -26,4 +26,8 @@ MCMC procedure is performed until convergence.}
 \code{hrg.fit()} was renamed to \code{\link[=fit_hrg]{fit_hrg()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_fit}{\code{hrg_fit()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

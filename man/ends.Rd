@@ -21,6 +21,10 @@ A two column matrix of vertex names or vertex ids.
 \description{
 Incident vertices of some graph edges
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(5)
 ends(g, E(g))

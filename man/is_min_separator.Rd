@@ -25,6 +25,10 @@ Check whether a given set of vertices is a minimal vertex separator.
 vertex separator. A minimal vertex separator is a vertex separator, such
 that none of its proper subsets are a vertex separator.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_minimal_separator}{\code{is_minimal_separator()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # The graph from the Moody-White paper
 mw <- graph_from_literal(
@@ -69,5 +73,3 @@ Other flow:
 \code{\link{vertex_connectivity}()}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_is_minimal_separator}{\code{is_minimal_separator()}}.}
-

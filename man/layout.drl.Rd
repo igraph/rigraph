@@ -44,4 +44,8 @@ significantly longer to compute.}
 \code{layout.drl()} was renamed to \code{\link[=layout_with_drl]{layout_with_drl()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

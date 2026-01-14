@@ -29,6 +29,10 @@ Vertex sequence created with the double bracket operator are
 printed differently, together with all attributes of the vertices
 in the sequence, as a table.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Unnamed graphs
 g <- make_ring(10)

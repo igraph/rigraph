@@ -36,4 +36,8 @@ graph as a vertex attribute called \sQuote{\code{type}}.}
 \code{cited.type.game()} was renamed to \code{\link[=sample_cit_types]{sample_cit_types()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

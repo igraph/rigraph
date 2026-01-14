@@ -35,6 +35,10 @@ partition from the first. This makes it easier to detect whether a
 partition is a subpartition of the other, since in this case, the
 corresponding distance will be zero.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_split_join_distance}{\code{split_join_distance()}}
+}
+
 \references{
 van Dongen S: Performance criteria for graph clustering and Markov
 cluster experiments. Technical Report INS-R0012, National Research

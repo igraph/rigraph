@@ -58,4 +58,8 @@ Do not give both of them.}
 \code{graph.famous()} was renamed to \code{\link[=make_graph]{make_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

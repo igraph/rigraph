@@ -20,4 +20,8 @@ the result will not be meaningful.}
 \code{graph.density()} was renamed to \code{\link[=edge_density]{edge_density()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density}{\code{density()}}
+}
+
 \keyword{internal}

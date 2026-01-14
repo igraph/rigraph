@@ -38,6 +38,10 @@ A forest is a graph, whose components are trees.
 The \code{roots} vector can be calculated by simply doing a topological sort
 in all components of the graph, see the examples below.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_unfold_tree}{\code{unfold_tree()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_tree(10) \%du\% make_tree(10)

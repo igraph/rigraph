@@ -47,7 +47,6 @@
 #' find_cycle(sample_tree(5))
 #'
 #' @family cycles
-#' @cdocs igraph_find_cycle
 #' @export
 
 find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
@@ -85,7 +84,6 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #' simple_cycles(g, mode = "all", min = 2, max = 3) # limit cycle lengths
 #'
 #' @family cycles
-#' @cdocs igraph_simple_cycles
 #' @export
 
 simple_cycles <- function(

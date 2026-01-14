@@ -26,6 +26,10 @@ details.
 In the special case of a fully connected input graph with \eqn{n} vertices,
 all subsets of size \eqn{n-1} are listed as the result.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_minimum_size_separators}{\code{minimum_size_separators()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # The graph from the Moody-White paper
 mw <- graph_from_literal(
@@ -92,5 +96,3 @@ Other flow:
 \code{\link{vertex_connectivity}()}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Separators.html#igraph_minimum_size_separators}{\code{minimum_size_separators()}}.}
-

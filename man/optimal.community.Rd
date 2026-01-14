@@ -23,4 +23,8 @@ edge weight means a stronger connection for this function.}
 \code{optimal.community()} was renamed to \code{\link[=cluster_optimal]{cluster_optimal()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_optimal_modularity}{\code{community_optimal_modularity()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

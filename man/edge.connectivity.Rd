@@ -29,4 +29,8 @@ thanks Peter.}
 \code{edge.connectivity()} was renamed to \code{\link[=edge_connectivity]{edge_connectivity()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_edge_connectivity}{\code{edge_connectivity()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

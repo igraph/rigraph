@@ -22,6 +22,10 @@ A list of edge sequences.
 This function is similar to \code{\link[=incident]{incident()}}, but it
 queries multiple vertices at once.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 incident_edges(g, c(1, 34))

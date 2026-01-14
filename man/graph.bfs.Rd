@@ -73,4 +73,8 @@ from igraph 1.3.0; use \code{mode} instead.}
 \code{graph.bfs()} was renamed to \code{\link[=bfs]{bfs()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

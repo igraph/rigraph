@@ -60,4 +60,8 @@ implementation is used.}
 \code{page.rank()} was renamed to \code{\link[=page_rank]{page_rank()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_personalized_pagerank}{\code{personalized_pagerank()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

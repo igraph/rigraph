@@ -28,6 +28,10 @@ A circulant graph \eqn{C_n^{\textrm{shifts}}} consists of \eqn{n} vertices
 The function can generate either directed or undirected graphs.
 It does not generate multi-edges or self-loops.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_circulant}{\code{circulant()}}
+}
+
 \examples{
 # Create a circulant graph with 10 vertices and shifts 1 and 3
 g <- make_circulant(10, c(1, 3))

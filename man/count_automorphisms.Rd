@@ -75,6 +75,10 @@ BLISS algorithm. See also the BLISS homepage at
 automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain
 a compact representation of the automorphism group.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
@@ -108,5 +112,3 @@ and this manual page.
 }
 \concept{graph automorphism}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_count_automorphisms}{\code{count_automorphisms()}}.}
-

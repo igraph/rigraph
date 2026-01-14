@@ -26,4 +26,8 @@ the new graph. Please see \code{\link[=attribute.combination]{attribute.combinat
 \code{contract.vertices()} was renamed to \code{\link[=contract]{contract()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices}{\code{contract_vertices()}}
+}
+
 \keyword{internal}

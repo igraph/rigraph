@@ -20,4 +20,8 @@ named graphs.}
 \code{adjacent.triangles()} was renamed to \code{\link[=count_triangles]{count_triangles()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

@@ -36,4 +36,8 @@ argument is ignored for undirected graphs.}
 \code{graph.neighborhood()} was renamed to \code{\link[=make_ego_graph]{make_ego_graph()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

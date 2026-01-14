@@ -30,6 +30,10 @@ vertices in \code{L(G)} are connected by a directed edge if the target of
 the first vertex's corresponding edge is the same as the source of the
 second vertex's corresponding edge.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_linegraph}{\code{linegraph()}}
+}
+
 \examples{
 
 # generate the first De-Bruijn graphs

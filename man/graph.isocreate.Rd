@@ -19,4 +19,8 @@ graph.isocreate(size, number, directed = TRUE)
 \code{graph.isocreate()} was renamed to \code{\link[=graph_from_isomorphism_class]{graph_from_isomorphism_class()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isoclass_create}{\code{isoclass_create()}}
+}
+
 \keyword{internal}

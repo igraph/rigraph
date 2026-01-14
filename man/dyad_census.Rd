@@ -28,6 +28,10 @@ Classify dyads in a directed graphs. The relationship between each pair of
 vertices is measured. It can be in three states: mutual, asymmetric or
 non-existent.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed}{\code{is_directed()}}
+}
+
 \examples{
 
 g <- sample_pa(100)
@@ -56,5 +60,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{graph motifs}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_dyad_census}{\code{dyad_census()}}.}
-

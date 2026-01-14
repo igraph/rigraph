@@ -140,6 +140,10 @@ This format is meant solely for interoperability with Graphviz. It is not recomm
 data exchange or archival.
 }
 
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_ring(10)
@@ -167,5 +171,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{foreign}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dimacs_flow}{\code{write_graph_dimacs_flow()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot}{\code{write_graph_dot()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist}{\code{write_graph_edgelist()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml}{\code{write_graph_gml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml}{\code{write_graph_graphml()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda}{\code{write_graph_leda()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_lgl}{\code{write_graph_lgl()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_ncol}{\code{write_graph_ncol()}}, \href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek}{\code{write_graph_pajek()}}.}
-

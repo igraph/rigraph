@@ -23,6 +23,10 @@ edge attributes if \code{name} is missing.
 \description{
 Query edge attributes of a graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10) \%>\%
   set_edge_attr("weight", value = 1:10) \%>\%

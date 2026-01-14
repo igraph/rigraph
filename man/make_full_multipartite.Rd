@@ -30,6 +30,10 @@ are only possible between vertices of different types. This function
 creates a complete multipartite graph where all possible edges between
 different partitions are present.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 # Create a multipartite graph with partitions of size 2, 3, and 4
 g <- make_full_multipartite(c(2, 3, 4))
@@ -59,5 +63,3 @@ Other deterministic constructors:
 \code{\link{make_wheel}()}
 }
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_multipartite}{\code{full_multipartite()}}.}
-

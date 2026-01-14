@@ -32,4 +32,8 @@ values at the two ends of edges.}
 \code{assortativity.nominal()} was renamed to \code{\link[=assortativity_nominal]{assortativity_nominal()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal}{\code{assortativity_nominal()}}
+}
+
 \keyword{internal}

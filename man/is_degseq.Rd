@@ -25,6 +25,10 @@ For directed graphs, the function checks whether the lengths of the two
 degree vectors are equal and whether their sums are also equal. These are
 known sufficient and necessary conditions for a degree sequence to be valid.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical}{\code{is_graphical()}}
+}
+
 \examples{
 g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))

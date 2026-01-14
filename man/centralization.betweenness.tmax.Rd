@@ -23,4 +23,8 @@ given.}
 \code{centralization.betweenness.tmax()} was renamed to \code{\link[=centr_betw_tmax]{centr_betw_tmax()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_betweenness_tmax}{\code{centralization_betweenness_tmax()}}
+}
+
 \keyword{internal}

@@ -20,6 +20,10 @@ A logical scalar, \code{TRUE} if edge \verb{(v1, v2)} exists in the graph.
 The order of the vertices only matters in directed graphs,
 where the existence of a directed \verb{(v1, v2)} edge is queried.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent}{\code{are_adjacent()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 ug <- make_ring(10)
 ug
@@ -48,5 +52,3 @@ Other structural queries:
 \code{\link{tail_of}()}
 }
 \concept{structural queries}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_are_adjacent}{\code{are_adjacent()}}.}
-

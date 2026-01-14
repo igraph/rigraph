@@ -20,4 +20,8 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 \code{as.directed()} was renamed to \code{\link[=as_directed]{as_directed()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_directed}{\code{to_directed()}}
+}
+
 \keyword{internal}

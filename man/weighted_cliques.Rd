@@ -54,6 +54,10 @@ weight is larger than the weight of this clique.
 
 \code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_cliques}{\code{weighted_cliques()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_graph("zachary")
@@ -76,5 +80,3 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{cliques}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_weighted_cliques}{\code{weighted_cliques()}}.}
-

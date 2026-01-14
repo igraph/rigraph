@@ -48,6 +48,10 @@ multidimensional scaling may assign the same coordinates to these vertices.
 This function generates the layout separately for each graph component and
 then merges them via \code{\link[=merge_coords]{merge_coords()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_mds}{\code{layout_mds()}}
+}
+
 \examples{
 
 g <- sample_gnp(100, 2 / 100)

@@ -47,6 +47,10 @@ for finding community structure, see A Clauset, MEJ Newman, C Moore: Finding
 community structure in very large networks,
 http://www.arxiv.org/abs/cond-mat/0408187 for the details.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)

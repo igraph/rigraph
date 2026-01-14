@@ -35,6 +35,10 @@ The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,}
 where it is assumed that \eqn{D} is non-singular.  Column stochastic
 matrices are defined in a symmetric way.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic}{\code{get_stochastic()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic_sparse}{\code{get_stochastic_sparse()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 library(Matrix)

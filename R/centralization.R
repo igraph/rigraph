@@ -314,7 +314,6 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-#' @cdocs igraph_centralization
 centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
   centralization_impl(
     scores = scores,
@@ -362,7 +361,6 @@ centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-#' @cdocs igraph_centralization_degree
 centr_degree <- function(
   graph,
   mode = c("all", "out", "in", "total"),
@@ -511,7 +509,6 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_betweenness_tmax
 centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
   centralization_betweenness_tmax_impl(
     graph = graph,
@@ -556,7 +553,6 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-#' @cdocs igraph_centralization_closeness
 centr_clo <- function(
   graph,
   mode = c("out", "in", "all", "total"),
@@ -593,7 +589,6 @@ centr_clo <- function(
 #' centr_clo(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_closeness_tmax
 centr_clo_tmax <- function(
   graph = NULL,
   nodes = 0,
@@ -655,7 +650,6 @@ centr_clo_tmax <- function(
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-#' @cdocs igraph_centralization_eigenvector_centrality
 centr_eigen <- function(
   graph,
   directed = FALSE,
@@ -707,7 +701,6 @@ centr_eigen <- function(
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
-#' @cdocs igraph_centralization_eigenvector_centrality_tmax
 centr_eigen_tmax <- function(
   graph = NULL,
   nodes = 0,

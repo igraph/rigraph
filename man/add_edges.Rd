@@ -33,6 +33,10 @@ to \code{edges[4]}, etc.
 If attributes are supplied, and they are not present in the graph,
 their values for the original edges of the graph are set to \code{NA}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_empty_graph(n = 5) \%>\%
   add_edges(c(

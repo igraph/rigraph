@@ -24,6 +24,10 @@ several fluids interacting in a non-homogeneous environment
 (the graph topology), expanding and contracting based on their
 interaction and density.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_fluid_communities}{\code{community_fluid_communities()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 comms <- cluster_fluid_communities(g, 2)

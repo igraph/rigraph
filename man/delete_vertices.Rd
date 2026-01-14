@@ -17,6 +17,10 @@ The graph, with the vertices removed.
 \description{
 Delete vertices from a graph
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_delete_vertices}{\code{delete_vertices()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 g <- make_ring(10) \%>\%
   set_vertex_attr("name", value = LETTERS[1:10])

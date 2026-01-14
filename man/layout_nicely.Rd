@@ -58,6 +58,10 @@ end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
 forward the weights to these functions and issue a warning about this. You
 can use \code{weights = NA} to silence the warning.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest}{\code{is_forest()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \seealso{
 \code{\link[=plot.igraph]{plot.igraph()}}
 

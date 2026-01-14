@@ -60,6 +60,10 @@ forms. In the first form you only supply \code{dimvector}, but not
 \code{length} and \code{dim}. In the second form you omit
 \code{dimvector} and supply \code{length} and \code{dim}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}
+}
+
 \examples{
 make_lattice(c(5, 5, 5))
 make_lattice(length = 5, dim = 3)
@@ -85,5 +89,3 @@ Other deterministic constructors:
 }
 \concept{Lattice}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice}{\code{square_lattice()}}.}
-

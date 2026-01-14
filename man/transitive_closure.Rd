@@ -29,6 +29,10 @@ a directed path from \eqn{i} to \eqn{j}.
 For undirected graphs, this is equivalent to connecting all vertices that
 are in the same connected component.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure}{\code{transitive_closure()}}
+}
+
 \examples{
 
 # Directed graph
@@ -77,5 +81,3 @@ Fabio Zanini \email{fabio.zanini@unsw.edu.au}
 }
 \concept{functions for manipulating graph structure}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure}{\code{transitive_closure()}}.}
-

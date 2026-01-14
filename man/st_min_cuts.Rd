@@ -53,6 +53,10 @@ simply the number of edges.
 
 An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 # A difficult graph, from the Provan-Shier paper
@@ -84,5 +88,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{flow}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts}{\code{all_st_mincuts()}}.}
-

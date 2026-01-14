@@ -33,6 +33,10 @@ numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
 \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu}{\code{motifs_randesu()}}
+}
+
 \examples{
 g <- sample_pa(100)
 motifs(g, 3)

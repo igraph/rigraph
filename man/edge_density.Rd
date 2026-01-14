@@ -28,6 +28,10 @@ The concept of density is ill-defined for multigraphs. Note that this function
 does not check whether the graph has multi-edges and will return meaningless
 results for such graphs.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density}{\code{density()}}
+}
+
 \examples{
 
 edge_density(make_empty_graph(n = 10)) # empty graphs have density 0
@@ -80,5 +84,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density}{\code{density()}}.}
-

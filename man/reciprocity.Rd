@@ -35,6 +35,10 @@ not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
 The result is the size of group (3), divided by the sum of group sizes
 (2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}
+}
+
 \examples{
 
 g <- sample_gnp(20, 5 / 20, directed = TRUE)
@@ -74,5 +78,3 @@ Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 }
 \concept{structural.properties}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_reciprocity}{\code{reciprocity()}}.}
-

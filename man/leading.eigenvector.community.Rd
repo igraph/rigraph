@@ -49,4 +49,8 @@ the modularity matrix. See details below.}
 \code{leading.eigenvector.community()} was renamed to \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

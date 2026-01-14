@@ -67,6 +67,10 @@ the target the incoming flow is the same as the outgoing flow. The value of
 the flow is the incoming flow of the \code{target} vertex. The maximum flow
 is the flow of maximum value.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount}{\code{ecount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 E <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
@@ -92,5 +96,3 @@ Other flow:
 \code{\link{vertex_connectivity}()}
 }
 \concept{flow}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Flows.html#igraph_maxflow}{\code{maxflow()}}.}
-

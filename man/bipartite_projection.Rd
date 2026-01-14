@@ -68,6 +68,10 @@ the second.
 
 \code{bipartite_projection()} keeps vertex attributes.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}
+}
+
 \examples{
 
 ## Projection of a full bipartite graph is a full graph
@@ -100,5 +104,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{bipartite}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_projection_size}{\code{bipartite_projection_size()}}.}
-

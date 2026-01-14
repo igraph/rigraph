@@ -21,6 +21,10 @@ a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
 vertices. The \code{prob} argument contains the HRG probability labels
 for each vertex; these are ignored for leaf vertices.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}
+}
+
 \seealso{
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
@@ -33,5 +37,3 @@ Other hierarchical random graph functions:
 \code{\link{sample_hrg}()}
 }
 \concept{hierarchical random graph functions}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_create}{\code{hrg_create()}}.}
-

@@ -20,6 +20,10 @@ An igraph graph.
 \description{
 A graph with no edges
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}
+}
+
 \examples{
 make_empty_graph(n = 10)
 make_empty_graph(n = 5, directed = FALSE)
@@ -45,5 +49,3 @@ Other deterministic constructors:
 }
 \concept{Empty graph.}
 \concept{deterministic constructors}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}.}
-

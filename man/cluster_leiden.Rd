@@ -105,6 +105,10 @@ specify any \code{vertex_weights}, the correct vertex weights and scaling of
 \eqn{\gamma}{gamma} is determined automatically by the
 \code{objective_function} argument.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_leiden}{\code{community_leiden()}}, \href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_strength}{\code{strength()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 g <- make_graph("Zachary")
 # By default CPM is used

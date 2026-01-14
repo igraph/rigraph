@@ -88,7 +88,6 @@ is.simple <- function(graph) {
 #' @family functions for manipulating graph structure
 #' @family isomorphism
 #' @export
-#' @cdocs igraph_simplify
 simplify <- function(
   graph,
   remove.multiple = TRUE,
@@ -105,7 +104,6 @@ simplify <- function(
 
 #' @export
 #' @rdname simplify
-#' @cdocs igraph_is_simple
 is_simple <- function(graph) {
   is_simple_impl(
     graph = graph

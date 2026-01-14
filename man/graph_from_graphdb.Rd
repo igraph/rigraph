@@ -71,6 +71,10 @@ its old version at
 \url{https://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
 for the actual format of a graph database file and other information.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb}{\code{read_graph_graphdb()}}
+}
+
 \references{
 M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 of graphs and its use for benchmarking graph isomorphism algorithms,

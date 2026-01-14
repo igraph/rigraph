@@ -116,6 +116,10 @@ the vertex, edge and graph attributes.
 \code{connect()} creates a new graph by connecting each vertex to
 all other vertices in its neighborhood.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_ring(10)

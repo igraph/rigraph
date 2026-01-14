@@ -18,4 +18,8 @@ edges, or both. The default is \sQuote{edges}.}
 \code{get.data.frame()} was renamed to \code{\link[=as_data_frame]{as_data_frame()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

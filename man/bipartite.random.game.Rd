@@ -45,4 +45,8 @@ is ignored for undirected graphs.}
 \code{bipartite.random.game()} was renamed to \code{\link[=sample_bipartite]{sample_bipartite()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_game_gnm}{\code{bipartite_game_gnm()}}, \href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_bipartite_game_gnp}{\code{bipartite_game_gnp()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

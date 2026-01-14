@@ -16,4 +16,8 @@ is.dag(graph)
 \code{is.dag()} was renamed to \code{\link[=is_dag]{is_dag()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_dag}{\code{is_dag()}}
+}
+
 \keyword{internal}

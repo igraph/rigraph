@@ -52,6 +52,10 @@ This function is the implementation of the Walktrap community finding
 algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
 networks using random walks, https://arxiv.org/abs/physics/0512106
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)

@@ -82,6 +82,10 @@ the edge IDs in order of the edges' removal; \code{edge.betweenness} contains
 the betweenness of each of these at the time of their removal; and
 \code{bridges} contains the IDs of edges whose removal caused a split.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- sample_pa(100, m = 2, directed = FALSE)

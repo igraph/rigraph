@@ -37,6 +37,10 @@ The function places the vertices on a simple rectangular grid, one after the
 other. If you want to change the order of the vertices, then see the
 \code{\link[=permute]{permute()}} function.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid}{\code{layout_grid()}}, \href{https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid_3d}{\code{layout_grid_3d()}}
+}
+
 \examples{
 
 g <- make_lattice(c(3, 3))

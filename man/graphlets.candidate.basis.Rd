@@ -20,4 +20,8 @@ attribute is used.}
 \code{graphlets.candidate.basis()} was renamed to \code{\link[=graphlet_basis]{graphlet_basis()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Graphlets.html#igraph_graphlets_candidate_basis}{\code{graphlets_candidate_basis()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

@@ -138,6 +138,10 @@ The callback must return \code{FALSE}
 to continue the search or \code{TRUE} to terminate it. See examples below on how to
 use the callback function.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 ## Two rings

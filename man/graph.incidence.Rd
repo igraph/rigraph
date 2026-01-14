@@ -53,4 +53,8 @@ type) will be added.}
 \code{graph.incidence()} was renamed to \code{\link[=graph_from_biadjacency_matrix]{graph_from_biadjacency_matrix()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_biadjacency}{\code{biadjacency()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty}{\code{empty()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous}{\code{famous()}}, \href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify}{\code{simplify()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \keyword{internal}

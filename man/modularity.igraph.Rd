@@ -83,6 +83,10 @@ weighted) adjacency matrix, \eqn{d_i}{d[i]} is the degree of vertex \eqn{i},
 and \eqn{m} is the number of edges (or the total weights in the graph, if it
 is weighed).
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity}{\code{modularity()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity_matrix}{\code{modularity_matrix()}}
+}
+
 \examples{
 
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)

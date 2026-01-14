@@ -16,6 +16,10 @@ An igraph graph.
 \code{sample_hrg()} samples a graph from a given hierarchical random graph
 model.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_game}{\code{hrg_game()}}
+}
+
 \seealso{
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
@@ -28,5 +32,3 @@ Other hierarchical random graph functions:
 \code{\link{print.igraphHRGConsensus}()}
 }
 \concept{hierarchical random graph functions}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_game}{\code{hrg_game()}}.}
-

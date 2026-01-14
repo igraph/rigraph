@@ -68,6 +68,10 @@ that most of its neighbors currently have. In this iterative process densely
 connected groups of nodes form a consensus on a unique label to form
 communities.}
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_label_propagation}{\code{community_label_propagation()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- sample_gnp(10, 5 / 10) \%du\% sample_gnp(9, 5 / 9)

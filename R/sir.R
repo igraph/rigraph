@@ -108,7 +108,6 @@
 #' plot(sm)
 #' @family processes
 #' @export
-#' @cdocs igraph_sir
 sir <- function(graph, beta, gamma, no.sim = 100) {
   sir_impl(
     graph = graph,

@@ -36,4 +36,8 @@ graph.}
 \code{static.fitness.game()} was renamed to \code{\link[=sample_fitness]{sample_fitness()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_fitness_game}{\code{static_fitness_game()}}
+}
+
 \keyword{internal}

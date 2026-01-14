@@ -34,6 +34,10 @@ A vertex is reachable from another if there is a directed path between them.
 For undirected graphs, two vertices are reachable from each other if they
 are in the same connected component.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}
+}
+
 \examples{
 
 # In a directed path graph, the reachability depends on direction
@@ -65,5 +69,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{components}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable}{\code{count_reachable()}}.}
-

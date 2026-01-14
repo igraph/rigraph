@@ -21,4 +21,8 @@ nodes from which it receives edges. Nodes with no outgoing edges go first.}
 \code{topological.sort()} was renamed to \code{\link[=topo_sort]{topo_sort()}} to create a more
 consistent API.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_topological_sorting}{\code{topological_sorting()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \keyword{internal}

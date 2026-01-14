@@ -26,6 +26,10 @@ the original graph, except that the direction of the edges selected by
 their edge IDs in the \code{eids} argument will be reversed. When reversing
 all edges, this operation is also known as graph transpose.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}
+}
+
 \examples{
 
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
@@ -59,5 +63,3 @@ Other functions for manipulating graph structure:
 \code{\link{vertex}()}
 }
 \concept{functions for manipulating graph structure}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges}{\code{reverse_edges()}}.}
-

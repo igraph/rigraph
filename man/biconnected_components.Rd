@@ -45,6 +45,10 @@ edges: every edge is a member of exactly one biconnected component. Note
 that this is not true for vertices: the same vertex can be part of many
 biconnected components.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_biconnected_components}{\code{biconnected_components()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount}{\code{vcount()}}, \href{https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges}{\code{edges()}}
+}
+
 \examples{
 
 g <- disjoint_union(make_full_graph(5), make_full_graph(5))
@@ -68,5 +72,3 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{components}
 \keyword{graphs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Structural.html#igraph_biconnected_components}{\code{biconnected_components()}}.}
-

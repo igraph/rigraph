@@ -25,6 +25,10 @@ The running mean of \code{v} is a \code{w} vector of length
 the first \code{binwidth} elements of \code{v}, the second element of
 \code{w} is the average of elements \code{2:(binwidth+1)}, etc.
 }
+\section{Related documentation in the C library}{
+\href{https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_running_mean}{\code{running_mean()}}
+}
+
 \examples{
 
 running_mean(1:100, 10)
