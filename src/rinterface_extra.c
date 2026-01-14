@@ -2315,6 +2315,18 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
   return is_punctuated(msg) ? "" : punctuation;
 }
 
+/* Strip vendor/cigraph/src/ prefix from file path. This prefix depends on the
+ * build procedure, namely on the directory that the compiler is invoked from. */
+static inline const char* simplify_file_path(const char *file) {
+  const char prefix[] = "vendor/cigraph/src/";
+  const size_t prefix_len = sizeof(prefix) - 1;
+
+  if (strncmp(file, prefix, prefix_len) == 0) {
+    return file + prefix_len;
+  }
+  return file;
+}
+
 void Rx_igraph_fatal_handler(const char *reason, const char *file, int line) {
 #ifdef IGRAPH_SANITIZER_AVAILABLE
     __sanitizer_print_stack_trace();
@@ -2336,10 +2348,12 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
   if (Rx_igraph_errors_count == 0 || !Rx_igraph_in_r_check) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_error_reason, sizeof(Rx_igraph_error_reason),
-      "At %s:%i : %s%s %s", file, line, reason,
-      maybe_add_punctuation(reason, ","),
-      igraph_strerror(igraph_errno));
+      "%s%s %s\nSource: %s:%i", reason,
+      maybe_add_punctuation(reason, "."),
+      igraph_strerror(igraph_errno),
+      simplified_path, line);
     Rx_igraph_error_reason[sizeof(Rx_igraph_error_reason) - 1] = 0;
 
     // FIXME: This is a hack, we should replace all memory allocations in the
@@ -2356,8 +2370,10 @@ void Rx_igraph_error_handler(const char *reason, const char *file,
 
 void Rx_igraph_warning_handler(const char *reason, const char *file, int line) {
   if (Rx_igraph_warnings_count == 0) {
+    const char* simplified_path = simplify_file_path(file);
     snprintf(Rx_igraph_warning_reason, sizeof(Rx_igraph_warning_reason),
-      "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+      "%s%s\nSource: %s:%i", reason, maybe_add_punctuation(reason, "."),
+      simplified_path, line);
     Rx_igraph_warning_reason[sizeof(Rx_igraph_warning_reason) - 1] = 0;
   }
   Rx_igraph_warnings_count++;
