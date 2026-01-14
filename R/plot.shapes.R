@@ -493,7 +493,7 @@ add_shape <- function(
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- vctrs::vec_recycle(vertex.size, nrow(coords))
 
   # Handle vertex.frame.width <= 0 by hiding the border
   vertex.frame.color[vertex.frame.width <= 0] <- NA
@@ -648,7 +648,7 @@ add_shape <- function(
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- vctrs::vec_recycle(vertex.size, nrow(coords))
 
   # Handle vertex.frame.width <= 0 by hiding the border
   vertex.frame.color[vertex.frame.width <= 0] <- NA
@@ -891,7 +891,7 @@ add_shape <- function(
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length.out = nrow(coords))
+  vertex.size <- vctrs::vec_recycle(vertex.size, nrow(coords))
   vertex.size2 <- params("vertex", "size2")
 
   if (length(vertex.size2) != 1 && !is.null(v)) {
@@ -1146,11 +1146,11 @@ mypie <- function(
       par("fg")
     }
   }
-  col <- rep(col, length.out = nx)
-  border <- rep(border, length.out = nx)
-  lty <- rep(lty, length.out = nx)
-  angle <- rep(angle, length.out = nx)
-  density <- rep(density, length.out = nx)
+  col <- vctrs::vec_recycle(col, nx)
+  border <- vctrs::vec_recycle(border, nx)
+  lty <- vctrs::vec_recycle(lty, nx)
+  angle <- vctrs::vec_recycle(angle, nx)
+  density <- vctrs::vec_recycle(density, nx)
   t2xy <- function(t) {
     t2p <- twopi * t + init.angle * pi / 180
     list(x = radius * cos(t2p), y = radius * sin(t2p))
