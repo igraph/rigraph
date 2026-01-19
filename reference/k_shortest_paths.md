@@ -70,12 +70,6 @@ A named list with two components is returned:
 
   The list of \\k\\ shortest paths in terms of edges
 
-## Related documentation in the C library
-
-[`get_k_shortest_paths()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_k_shortest_paths),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## References
 
 Yen, Jin Y.: An algorithm for finding shortest routes from all source
@@ -113,3 +107,7 @@ Other structural.properties:
 [`unfold_tree()`](https://r.igraph.org/reference/unfold_tree.md),
 [`which_multiple()`](https://r.igraph.org/reference/which_multiple.md),
 [`which_mutual()`](https://r.igraph.org/reference/which_mutual.md)
+
+## Related documentation in the C library
+
+[`get_k_shortest_paths()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_k_shortest_paths).

@@ -47,11 +47,6 @@ Bipartite graphs have a ‘`type`’ vertex attribute in igraph, this is
 boolean and `FALSE` for the vertices of the first kind and `TRUE` for
 vertices of the second kind.
 
-## Related documentation in the C library
-
-[`full_bipartite()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_full_bipartite),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md)

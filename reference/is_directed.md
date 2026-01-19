@@ -18,10 +18,6 @@ is_directed(graph)
 
 Logical scalar, whether the graph is directed.
 
-## Related documentation in the C library
-
-[`is_directed()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed)
-
 ## See also
 
 Other structural queries:

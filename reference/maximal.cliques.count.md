@@ -35,7 +35,3 @@ maximal.cliques.count(graph, min = NULL, max = NULL, subset = NULL)
   vertices only, so only a subset of all maximal cliques is returned.
   See the Eppstein paper for details. This argument makes it possible to
   easily parallelize the finding of maximal cliques.
-
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

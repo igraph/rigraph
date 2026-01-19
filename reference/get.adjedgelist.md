@@ -35,9 +35,3 @@ get.adjedgelist(
   include loop edges twice) and `"once"` (to include them once).
   `"twice"` is not allowed for directed graphs and will be replaced with
   `"once"`.
-
-## Related documentation in the C library
-
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

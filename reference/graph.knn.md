@@ -53,9 +53,3 @@ graph.knn(
   calculate a weighted degree (also called
   [`strength()`](https://r.igraph.org/reference/strength.md)) instead of
   the degree.
-
-## Related documentation in the C library
-
-[`avg_nearest_neighbor_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_avg_nearest_neighbor_degree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

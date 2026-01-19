@@ -191,16 +191,6 @@ testing. For more information, see
 
   Logical, whether to create a directed graph. Default is TRUE.
 
-## Related documentation in the C library
-
-[`read_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek),
-[`read_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml),
-[`read_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml),
-[`read_graph_dl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl),
-[`read_graph_graphdb()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## See also
 
 [`write_graph()`](https://r.igraph.org/reference/write_graph.md)
@@ -212,3 +202,15 @@ Foreign format readers
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`read_graph_dimacs_flow()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dimacs_flow),
+[`read_graph_dl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_dl),
+[`read_graph_edgelist()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_edgelist),
+[`read_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_gml),
+[`read_graph_graphdb()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphdb),
+[`read_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_graphml),
+[`read_graph_lgl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_lgl),
+[`read_graph_ncol()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_ncol),
+[`read_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_read_graph_pajek).

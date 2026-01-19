@@ -28,10 +28,6 @@ tree and add the label of the vertex that it was connected to to the
 sequence. Repeat until there are only two vertices in the remaining
 graph.
 
-## Related documentation in the C library
-
-[`to_prufer()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer)
-
 ## See also
 
 [`make_from_prufer()`](https://r.igraph.org/reference/make_from_prufer.md)
@@ -42,6 +38,10 @@ Other trees:
 [`is_tree()`](https://r.igraph.org/reference/is_tree.md),
 [`make_from_prufer()`](https://r.igraph.org/reference/make_from_prufer.md),
 [`sample_spanning_tree()`](https://r.igraph.org/reference/sample_spanning_tree.md)
+
+## Related documentation in the C library
+
+[`to_prufer()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_prufer).
 
 ## Examples
 

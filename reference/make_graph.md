@@ -261,13 +261,6 @@ are specified.)
   model for conflict and fission in small groups, Journal of
   Anthropological Research 33, 452-473 (1977).
 
-## Related documentation in the C library
-
-[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other deterministic constructors:
@@ -292,13 +285,13 @@ Other deterministic constructors:
 
 ``` r
 make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
-#> IGRAPH 127f105 U--- 6 4 -- 
-#> + edges from 127f105:
+#> IGRAPH 97eb977 U--- 6 4 -- 
+#> + edges from 97eb977:
 #> [1] 1--2 2--3 3--4 5--6
 make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
-#> IGRAPH 54395aa UN-- 4 3 -- 
+#> IGRAPH ce4a478 UN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 54395aa (vertex names):
+#> + edges from ce4a478 (vertex names):
 #> [1] A--B B--C C--D
 
 solids <- list(

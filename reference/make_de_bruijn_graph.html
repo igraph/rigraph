@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>De Bruijn graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/make.R" class="external-link"><code>R/make.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/make.R" class="external-link"><code>R/make.R</code></a></small>
       <div class="d-none name"><code>make_de_bruijn_graph.Rd</code></div>
     </div>
 
@@ -91,10 +91,6 @@ for <code>m</code> and <code>n</code>.</p>
 source, e.g. Wikipedia for details.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Generators.html#igraph_de_bruijn" class="external-link"><code>de_bruijn()</code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="make_kautz_graph.html">make_kautz_graph()</a></code>, <code><a href="make_line_graph.html">make_line_graph()</a></code></p></div>
     </div>
@@ -109,14 +105,14 @@ source, e.g. Wikipedia for details.</p>
 <span class="r-in"><span><span class="co"># de Bruijn graphs can be created recursively by line graphs as well</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_de_bruijn_graph</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">make_de_bruijn_graph</span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6b51799 D--- 4 8 -- De-Bruijn graph 2-2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9980ee7 D--- 4 8 -- De-Bruijn graph 2-2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), n (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6b51799:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9980ee7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;1 1-&gt;2 2-&gt;3 2-&gt;4 3-&gt;1 3-&gt;2 4-&gt;3 4-&gt;4</span>
 <span class="r-in"><span><span class="fu"><a href="make_line_graph.html">make_line_graph</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 81fd40a D--- 4 8 -- Line graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 573f484 D--- 4 8 -- Line graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 81fd40a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 573f484:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;1 3-&gt;1 1-&gt;2 3-&gt;2 2-&gt;3 4-&gt;3 2-&gt;4 4-&gt;4</span>
 </code></pre></div>
     </div>

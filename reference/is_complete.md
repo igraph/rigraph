@@ -20,10 +20,6 @@ is_complete(graph)
 
 True if the graph is complete.
 
-## Related documentation in the C library
-
-[`is_complete()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_complete)
-
 ## See also
 
 [`make_full_graph()`](https://r.igraph.org/reference/make_full_graph.md)
@@ -31,6 +27,10 @@ True if the graph is complete.
 Other cliques: [`cliques()`](https://r.igraph.org/reference/cliques.md),
 [`ivs()`](https://r.igraph.org/reference/ivs.md),
 [`weighted_cliques()`](https://r.igraph.org/reference/weighted_cliques.md)
+
+## Related documentation in the C library
+
+[`is_complete()`](https://igraph.org/c/html/latest/igraph-Cliques.html#igraph_is_complete).
 
 ## Examples
 

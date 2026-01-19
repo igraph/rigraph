@@ -37,7 +37,3 @@ assortativity.nominal(graph, types, directed = TRUE, normalized = TRUE)
   non-normalized nominal assortativity is identical to modularity. The
   non-normalized value-based assortativity is simply the covariance of
   the values at the two ends of edges.
-
-## Related documentation in the C library
-
-[[`assortativity_nominal()`](https://r.igraph.org/reference/assortativity.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal)

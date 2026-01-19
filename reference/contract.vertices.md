@@ -34,7 +34,3 @@ contract.vertices(
   Please see
   [`attribute.combination()`](https://r.igraph.org/reference/igraph-attribute-combination.md)
   for details.
-
-## Related documentation in the C library
-
-[`contract_vertices()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices)

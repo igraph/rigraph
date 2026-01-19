@@ -37,10 +37,6 @@ from another if there is a directed path between them. For undirected
 graphs, two vertices are reachable from each other if they are in the
 same connected component.
 
-## Related documentation in the C library
-
-[`count_reachable()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable)
-
 ## See also
 
 [`components()`](https://r.igraph.org/reference/components.md),
@@ -57,6 +53,10 @@ Connected components
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`count_reachable()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_count_reachable).
 
 ## Examples
 

@@ -36,7 +36,3 @@ layout.mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 
   This is currently ignored, as ARPACK is not used any more for solving
   the eigenproblem
-
-## Related documentation in the C library
-
-[`layout_mds()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_mds)

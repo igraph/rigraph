@@ -50,9 +50,3 @@ infomap.community(
 
   Logical scalar, whether to calculate the modularity score of the
   detected community structure.
-
-## Related documentation in the C library
-
-[`community_infomap()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_infomap),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

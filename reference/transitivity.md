@@ -120,15 +120,6 @@ and/or loop edges. If you want to calculate it for a directed graph,
 call [`as_undirected()`](https://r.igraph.org/reference/as_directed.md)
 with the `collapse` mode first.
 
-## Related documentation in the C library
-
-[`transitivity_undirected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitivity_undirected),
-[`transitivity_local_undirected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitivity_local_undirected),
-[`transitivity_avglocal_undirected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitivity_avglocal_undirected),
-[`transitivity_barrat()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitivity_barrat),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## References
 
 Wasserman, S., and Faust, K. (1994). *Social Network Analysis: Methods

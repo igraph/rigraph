@@ -39,12 +39,6 @@ edge(s) between vertices \\i\\ and \\j\\.
 
 For vertices with degree less than two the function returns `NaN`.
 
-## Related documentation in the C library
-
-[`diversity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_diversity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## References
 
 Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity and
@@ -69,6 +63,10 @@ Centrality measures
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`diversity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_diversity).
 
 ## Examples
 

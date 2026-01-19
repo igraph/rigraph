@@ -77,13 +77,6 @@ this is the smallest possible degree.
 For `mean_degree()`, the average degree in the graph as a single number.
 For graphs with no vertices, `NaN` is returned. **\[experimental\]**
 
-## Related documentation in the C library
-
-[`degree()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_degree),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`maxdegree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maxdegree),
-[`mean_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_mean_degree)
-
 ## See also
 
 Other structural.properties:
@@ -115,6 +108,11 @@ Other structural.properties:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`maxdegree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_maxdegree),
+[`mean_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_mean_degree).
 
 ## Examples
 

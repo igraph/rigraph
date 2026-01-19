@@ -17,7 +17,3 @@ has.multiple(graph)
 - graph:
 
   The input graph.
-
-## Related documentation in the C library
-
-[`has_multiple()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_has_multiple)

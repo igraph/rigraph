@@ -31,10 +31,6 @@ The running mean of `v` is a `w` vector of length
 first `binwidth` elements of `v`, the second element of `w` is the
 average of elements `2:(binwidth+1)`, etc.
 
-## Related documentation in the C library
-
-[`running_mean()`](https://igraph.org/c/html/latest/igraph-Nongraph.html#igraph_running_mean)
-
 ## See also
 
 Other other:

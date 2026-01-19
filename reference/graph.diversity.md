@@ -27,9 +27,3 @@ graph.diversity(graph, weights = NULL, vids = V(graph))
 - vids:
 
   The vertex ids for which to calculate the measure.
-
-## Related documentation in the C library
-
-[[`diversity()`](https://r.igraph.org/reference/diversity.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_diversity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

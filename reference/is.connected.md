@@ -23,7 +23,3 @@ is.connected(graph, mode = c("weak", "strong"))
   Character string, either “weak” or “strong”. For directed graphs
   “weak” implies weakly, “strong” strongly connected components to
   search. It is ignored for undirected graphs.
-
-## Related documentation in the C library
-
-[[`is_connected()`](https://r.igraph.org/reference/components.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_connected)

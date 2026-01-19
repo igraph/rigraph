@@ -66,13 +66,6 @@ The `subgraph()` function currently does the same as
 this behaviour is deprecated. In the next major version, `subgraph()`
 will overtake the functionality of `subgraph_from_edges()`.
 
-## Related documentation in the C library
-
-[`induced_subgraph()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_induced_subgraph),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`subgraph_from_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_subgraph_from_edges),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## See also
 
 Other structural.properties:

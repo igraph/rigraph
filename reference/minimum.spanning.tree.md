@@ -36,10 +36,3 @@ minimum.spanning.tree(graph, weights = NULL, algorithm = NULL, ...)
 - ...:
 
   Additional arguments, unused.
-
-## Related documentation in the C library
-
-[`minimum_spanning_tree_unweighted()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_unweighted),
-[`minimum_spanning_tree_prim()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_minimum_spanning_tree_prim),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

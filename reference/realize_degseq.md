@@ -70,10 +70,6 @@ assortativity, and is often disconnected.
 
 The “index” method selects the vertices in order of their index.
 
-## Related documentation in the C library
-
-[`realize_degree_sequence()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_degree_sequence)
-
 ## References
 
 V. Havel, Poznámka o existenci konečných grafů (A remark on the
@@ -98,6 +94,10 @@ exact random sampling of connected networks (2021).
 [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md) for
 a randomized variant that samples from graphs with the given degree
 sequence.
+
+## Related documentation in the C library
+
+[`realize_degree_sequence()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_realize_degree_sequence).
 
 ## Examples
 

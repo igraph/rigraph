@@ -28,9 +28,3 @@ graph.compose(g1, g2, byname = "auto")
   the operation based on symbolic vertex names. If it is `auto`, that
   means `TRUE` if both graphs are named and `FALSE` otherwise. A warning
   is generated if `auto` and one graph, but not both graphs are named.
-
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

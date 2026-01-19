@@ -19,7 +19,7 @@ recalculation of the cached properties the next time they are needed."><meta pro
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@ recalculation of the cached properties the next time they are needed."><meta pro
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Invalidate the cache of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/interface.R" class="external-link"><code>R/interface.R</code></a></small>
       <div class="d-none name"><code>invalidate_cache.Rd</code></div>
     </div>
 
@@ -88,10 +88,6 @@ invalid cache entry is when the result of a cached function (such as
 <code><a href="is_dag.html">is_dag()</a></code> or <code><a href="simplify.html">is_simple()</a></code>) changes after calling
 this function.</p>
     </div>
-    <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_invalidate_cache" class="external-link"><code>invalidate_cache()</code></a></p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -101,9 +97,9 @@ this function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="co"># Invalidate cache (for debugging purposes)</span></span></span>
 <span class="r-in"><span><span class="fu">invalidate_cache</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 821c8dc U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 80d809a U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 821c8dc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 80d809a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="co"># Result should be the same</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">is_simple</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>

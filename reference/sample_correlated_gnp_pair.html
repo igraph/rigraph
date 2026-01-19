@@ -15,7 +15,7 @@ shuffling its vertices."><meta property="og:image" content="https://r.igraph.org
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ shuffling its vertices."><meta property="og:image" content="https://r.igraph.org
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Sample a pair of correlated \(G(n,p)\) random graphs</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/games.R" class="external-link"><code>R/games.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/games.R" class="external-link"><code>R/games.R</code></a></small>
       <div class="d-none name"><code>sample_correlated_gnp_pair.Rd</code></div>
     </div>
 
@@ -101,10 +101,6 @@ correlated with <code>corr</code>.</p>
     <p>Please see the reference given below.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game" class="external-link"><code>correlated_pair_game()</code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 graph matching for correlated Erdős-Rényi graphs.
@@ -140,6 +136,10 @@ graph matching for correlated Erdős-Rényi graphs.
 <code><a href="sample_traits_callaway.html">sample_traits_callaway()</a></code>,
 <code><a href="sample_tree.html">sample_tree()</a></code></p></div>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Generators.html#igraph_correlated_pair_game" class="external-link"><code>correlated_pair_game()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -149,14 +149,14 @@ graph matching for correlated Erdős-Rényi graphs.
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gg</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $graph1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 01b2719 U--- 10 22 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 01b2719:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 54af808 U--- 10 22 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 54af808:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 1-- 4 2-- 4 3-- 5 4-- 5 2-- 6 3-- 6 5-- 6 2-- 7 5-- 8 1-- 9 4-- 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 5-- 9 6-- 9 7-- 9 2--10 3--10 4--10 5--10 6--10 7--10 8--10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $graph2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH efd60c6 U--- 10 21 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from efd60c6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 70be69f U--- 10 21 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 70be69f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 4 2-- 4 3-- 5 4-- 5 2-- 6 3-- 6 5-- 6 1-- 7 2-- 7 5-- 8 1-- 9 5-- 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 6-- 9 7-- 9 2--10 3--10 4--10 5--10 6--10 7--10 8--10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

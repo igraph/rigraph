@@ -53,11 +53,6 @@ erdos.renyi.game(
 
 A graph object.
 
-## Related documentation in the C library
-
-[`erdos_renyi_game_gnp()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnp),
-[`erdos_renyi_game_gnm()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnm)
-
 ## References
 
 Erdős, P. and Rényi, A., On random graphs, *Publicationes Mathematicae*

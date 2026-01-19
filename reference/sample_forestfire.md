@@ -75,10 +75,6 @@ corrected version is available from
 <https://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
 implementation is based on this.
 
-## Related documentation in the C library
-
-[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game)
-
 ## References
 
 Jure Leskovec, Jon Kleinberg and Christos Faloutsos. Graphs over time:
@@ -122,6 +118,10 @@ Random graph models (games)
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`forest_fire_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_forest_fire_game).
 
 ## Examples
 

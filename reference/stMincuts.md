@@ -32,9 +32,3 @@ stMincuts(graph, source, target, capacity = NULL)
   graph has a `weight` edge attribute, then this attribute defines the
   edge capacities. For forcing unit edge capacities, even for graphs
   that have a `weight` edge attribute, supply `NA` here.
-
-## Related documentation in the C library
-
-[`all_st_mincuts()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

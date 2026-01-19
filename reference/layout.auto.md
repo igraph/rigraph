@@ -30,9 +30,3 @@ layout.auto(graph, dim = 2, ...)
   [`nicely()`](https://r.igraph.org/reference/layout_nicely.md) all
   argument are passed to
   [`layout_nicely()`](https://r.igraph.org/reference/layout_nicely.md).
-
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`is_forest()`](https://r.igraph.org/reference/is_forest.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

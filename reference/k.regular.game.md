@@ -30,7 +30,3 @@ k.regular.game(no.of.nodes, k, directed = FALSE, multiple = FALSE)
 - multiple:
 
   Logical scalar, whether multiple edges are allowed.
-
-## Related documentation in the C library
-
-[`k_regular_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game)

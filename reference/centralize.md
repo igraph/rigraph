@@ -53,10 +53,6 @@ with a single edge (and potentially many isolates).
 `centralize()` implements general centralization formula to calculate a
 graph-level score from vertex-level scores.
 
-## Related documentation in the C library
-
-[`centralization()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization)
-
 ## References
 
 Freeman, L.C. (1979). Centrality in Social Networks I: Conceptual
@@ -76,6 +72,10 @@ Other centralization related:
 [`centr_degree_tmax()`](https://r.igraph.org/reference/centr_degree_tmax.md),
 [`centr_eigen()`](https://r.igraph.org/reference/centr_eigen.md),
 [`centr_eigen_tmax()`](https://r.igraph.org/reference/centr_eigen_tmax.md)
+
+## Related documentation in the C library
+
+[`centralization()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization).
 
 ## Examples
 

@@ -38,10 +38,6 @@ The graph has `n` vertices and `m` edges. The edges are chosen uniformly
 at random from the set of all vertex pairs. This set includes potential
 self-connections as well if the `loops` parameter is `TRUE`.
 
-## Related documentation in the C library
-
-[`erdos_renyi_game_gnm()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_erdos_renyi_game_gnm)
-
 ## References
 
 Erdős, P. and Rényi, A., On random graphs, *Publicationes Mathematicae*

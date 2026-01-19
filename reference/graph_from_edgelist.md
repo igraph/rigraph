@@ -33,13 +33,6 @@ from_edgelist(...)
 
 An igraph graph.
 
-## Related documentation in the C library
-
-[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
-[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify)
-
 ## See also
 
 Other deterministic constructors:
@@ -65,14 +58,14 @@ Other deterministic constructors:
 ``` r
 el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
-#> IGRAPH eed8f07 DN-- 3 2 -- 
+#> IGRAPH b0a31ff DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from eed8f07 (vertex names):
+#> + edges from b0a31ff (vertex names):
 #> [1] foo->bar    bar->foobar
 
 # Create a ring by hand
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-#> IGRAPH 65057bc D--- 10 10 -- 
-#> + edges from 65057bc:
+#> IGRAPH ed09f82 D--- 10 10 -- 
+#> + edges from ed09f82:
 #>  [1]  1-> 2  2-> 3  3-> 4  4-> 5  5-> 6  6-> 7  7-> 8  8-> 9  9->10 10-> 1
 ```

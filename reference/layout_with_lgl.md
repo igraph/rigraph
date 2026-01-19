@@ -73,10 +73,6 @@ A numeric matrix with two columns and as many rows as vertices.
 layout generator of the Large Graph Layout software
 (<https://lgl.sourceforge.net/>).
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other graph layouts:

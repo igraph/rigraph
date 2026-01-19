@@ -25,7 +25,3 @@ as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
   can be `mutual` or `arbitrary`. For
   [`as_undirected()`](https://r.igraph.org/reference/as_directed.md) it
   can be `each`, `collapse` or `mutual`. See details below.
-
-## Related documentation in the C library
-
-[`to_directed()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_to_directed)

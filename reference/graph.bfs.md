@@ -100,7 +100,3 @@ graph.bfs(
 
   **\[deprecated\]** This argument is deprecated from igraph 1.3.0; use
   `mode` instead.
-
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

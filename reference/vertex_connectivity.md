@@ -84,12 +84,6 @@ These three functions essentially calculate the same measure(s), more
 precisely `vertex_connectivity()` is the most general, the other two are
 included only for the ease of using more descriptive function names.
 
-## Related documentation in the C library
-
-[`vertex_connectivity()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_vertex_connectivity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`cohesion()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_cohesion)
-
 ## References
 
 White, Douglas R and Frank Harary 2001. The Cohesiveness of Blocks In
