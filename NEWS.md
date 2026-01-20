@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 2.2.1.9016
+
+## Chore
+
+- No roclet needed to share the tag code (#2520).
+
+
 # igraph 2.2.1.9015
 
 ## Continuous integration
