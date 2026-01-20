@@ -131,6 +131,12 @@ igraph_turan:
         name: Turan graph
       GATTR-PARAM: n, r
 
+igraph_hexagonal_lattice:
+    R:
+      GATTR:
+        name: Hexagonal lattice
+      GATTR-PARAM: dimvector, directed, mutual
+
 # TODO: temporarily disabled
 igraph_weighted_sparsemat:
     IGNORE: RR, RC

@@ -2044,6 +2044,80 @@ lattice <- function(
 
 ## -----------------------------------------------------------------
 
+#' Create a hexagonal lattice graph
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' `make_hex_lattice()` creates a hexagonal lattice where each interior vertex
+#' has degree 3. The hexagonal lattice and triangular lattice are different
+#' structures; they are planar duals of each other. See `igraph_triangular_lattice()`
+#' in the C library for the triangular lattice.
+#'
+#' @details
+#' A hexagonal lattice is a lattice structure where each interior vertex
+#' (not on the boundary) has degree 3. The function supports creating lattices
+#' with different boundary shapes.
+#'
+#' The `dims` parameter determines the boundary shape of the lattice:
+#' \itemize{
+#'   \item If `dims` is a single number, the lattice has a triangular boundary
+#'     where each side contains `dims` vertices.
+#'   \item If `dims` is a vector of length 2, the lattice has a rectangular
+#'     boundary with sides containing `dims[1]` and `dims[2]` vertices.
+#'   \item If `dims` is a vector of length 3, the lattice has a hexagonal
+#'     boundary where the sides contain `dims[1]`, `dims[2]`, and `dims[3]`
+#'     vertices.
+#' }
+#'
+#' @param dims Integer vector, defines the shape of the lattice. See details below.
+#' @param ... These dots are for future extensions and must be empty.
+#' @param directed Logical scalar, whether to create a directed graph.
+#' @param mutual Logical scalar, if the graph is directed this parameter
+#'   controls whether edges are mutual (bidirectional).
+#' @return An igraph graph.
+#'
+#' @family deterministic constructors
+#' @export
+#' @examples
+#' # Triangular shape with 5 vertices on each side
+#' g1 <- make_hex_lattice(5)
+#' plot(g1)
+#'
+#' # Rectangular shape
+#' g2 <- make_hex_lattice(c(3, 4))
+#' plot(g2)
+#'
+#' # Hexagonal shape
+#' g3 <- make_hex_lattice(c(3, 3, 3))
+#' plot(g3)
+#' @cdocs igraph_hexagonal_lattice
+make_hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  
+  graph <- hexagonal_lattice_impl(
+    dimvector = dims,
+    directed = directed,
+    mutual = mutual
+  )
+  
+  if (igraph_opt("add.params")) {
+    graph <- set_graph_attr(graph, "name", "Hexagonal lattice")
+    graph <- set_graph_attr(graph, "dimvector", dims)
+    graph <- set_graph_attr(graph, "directed", directed)
+    graph <- set_graph_attr(graph, "mutual", mutual)
+  }
+  graph
+}
+
+#' @rdname make_hex_lattice
+#' @export
+hex_lattice <- function(dims, ..., directed = FALSE, mutual = FALSE) {
+  check_dots_empty()
+  constructor_spec(make_hex_lattice, dims = dims, directed = directed, mutual = mutual)
+}
+
+## -----------------------------------------------------------------
+
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case

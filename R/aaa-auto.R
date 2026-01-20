@@ -440,6 +440,28 @@ triangular_lattice_impl <- function(
   res
 }
 
+hexagonal_lattice_impl <- function(
+  dimvector,
+  directed = FALSE,
+  mutual = FALSE
+) {
+  # Argument checks
+  dimvector <- as.numeric(dimvector)
+  directed <- as.logical(directed)
+  mutual <- as.logical(mutual)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_hexagonal_lattice,
+    dimvector,
+    directed,
+    mutual
+  )
+
+  res
+}
+
 path_graph_impl <- function(
   n,
   directed = FALSE,
