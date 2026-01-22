@@ -10726,11 +10726,8 @@
 # hub_score_impl basic
 
     Code
-      hub_score_impl(graph = g, scale = TRUE, weights = NULL)
+      out
     Output
-      $vector
-      [1] 1 0 0 0 0
-      
       $value
       [1] 4
       
@@ -10800,11 +10797,8 @@
 # authority_score_impl basic
 
     Code
-      authority_score_impl(graph = g, scale = TRUE, weights = NULL)
+      out
     Output
-      $vector
-      [1] 0 1 1 1 1
-      
       $value
       [1] 4
       

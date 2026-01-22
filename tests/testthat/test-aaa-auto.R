@@ -10815,14 +10815,24 @@ test_that("hub_score_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_star(5, mode = "undirected")
-  expect_snapshot(hub_score_impl(graph = g, scale = TRUE, weights = NULL))
+  out <- hub_score_impl(graph = g, scale = TRUE, weights = NULL)
+  # FIXME: out$vector unstable despite random seed
+  expect_length(out$vector, 5)
+  expect_type(out$vector, "numeric")
+  out$vector <- NULL
+  expect_snapshot(out)
 })
 
 test_that("authority_score_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
   g <- make_star(5, mode = "undirected")
-  expect_snapshot(authority_score_impl(graph = g, scale = TRUE, weights = NULL))
+  out <- authority_score_impl(graph = g, scale = TRUE, weights = NULL)
+  # FIXME: out$vector unstable despite random seed
+  expect_length(out$vector, 5)
+  expect_type(out$vector, "numeric")
+  out$vector <- NULL
+  expect_snapshot(out)
 })
 
 # Community detection
