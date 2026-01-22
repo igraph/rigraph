@@ -23,3 +23,7 @@ is.degree.sequence(out.deg, in.deg = NULL)
 
   `NULL` or an integer vector. For undirected graphs, it should be
   `NULL`. For directed graphs it specifies the in-degrees.
+
+## Related documentation in the C library
+
+[[`is_graphical()`](https://r.igraph.org/reference/is_graphical.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical)

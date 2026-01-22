@@ -19,6 +19,11 @@ hrg_tree(hrg)
 
 An igraph graph with a vertex attribute called `"probability"`.
 
+## Related documentation in the C library
+
+[`from_hrg_dendrogram()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_from_hrg_dendrogram),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other hierarchical random graph functions:
@@ -30,7 +35,3 @@ Other hierarchical random graph functions:
 [`print.igraphHRG()`](https://r.igraph.org/reference/print.igraphHRG.md),
 [`print.igraphHRGConsensus()`](https://r.igraph.org/reference/print.igraphHRGConsensus.md),
 [`sample_hrg()`](https://r.igraph.org/reference/sample_hrg.md)
-
-## Related documentation in the C library
-
-[`from_hrg_dendrogram()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_from_hrg_dendrogram).

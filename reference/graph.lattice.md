@@ -62,4 +62,4 @@ graph.lattice(
 
 ## Related documentation in the C library
 
-[`square_lattice()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice).
+[`square_lattice()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_square_lattice)

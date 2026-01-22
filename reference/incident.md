@@ -27,6 +27,14 @@ incident(graph, v, mode = c("all", "out", "in", "total"))
 
 An edge sequence containing the incident edges of the input vertex.
 
+## Related documentation in the C library
+
+[`incident()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_incident),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -49,11 +57,11 @@ Other structural queries:
 ``` r
 g <- make_graph("Zachary")
 incident(g, 1)
-#> + 16/78 edges from 4e4c2d4:
+#> + 16/78 edges from 1986b8d:
 #>  [1] 1-- 2 1-- 3 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--11 1--12 1--13 1--14
 #> [13] 1--18 1--20 1--22 1--32
 incident(g, 34)
-#> + 17/78 edges from 4e4c2d4:
+#> + 17/78 edges from 1986b8d:
 #>  [1]  9--34 10--34 14--34 15--34 16--34 19--34 20--34 21--34 23--34 24--34
 #> [11] 27--34 28--34 29--34 30--34 31--34 32--34 33--34
 ```

@@ -25,3 +25,8 @@ topological.sort(graph, mode = c("out", "all", "in"))
   it has edges, so nodes with no incoming edges go first. For “`in`”, it
   is quite the opposite: each node comes before all nodes from which it
   receives edges. Nodes with no outgoing edges go first.
+
+## Related documentation in the C library
+
+[`topological_sorting()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_topological_sorting),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

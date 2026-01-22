@@ -95,6 +95,10 @@ This functions uses the RANDESU motif finder algorithm to find and count
 the subgraphs, see
 [`motifs()`](https://r.igraph.org/reference/motifs.md).
 
+## Related documentation in the C library
+
+[`triad_census()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_triad_census)
+
 ## References
 
 See also Davis, J.A. and Leinhardt, S. (1972). The Structure of Positive
@@ -112,10 +116,6 @@ underlying implementation.
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`triad_census()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_triad_census).
 
 ## Examples
 

@@ -73,6 +73,11 @@ of a graph using the BLISS algorithm. See also the BLISS homepage at
 The calculated generating set is not necessarily minimal, and it may
 depend on the splitting heuristics used by BLISS.
 
+## Related documentation in the C library
+
+[`automorphism_group()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -95,10 +100,6 @@ Tommi Junttila (<https://users.ics.aalto.fi/tjunttil/>) for BLISS, Gabor
 Csardi <csardi.gabor@gmail.com> for the igraph glue code and Tamas
 Nepusz <ntamas@gmail.com> for this manual page.
 
-## Related documentation in the C library
-
-[`automorphism_group()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group).
-
 ## Examples
 
 ``` r
@@ -107,11 +108,11 @@ Nepusz <ntamas@gmail.com> for this manual page.
 g <- make_ring(10)
 automorphism_group(g)
 #> [[1]]
-#> + 10/10 vertices, from 203a390:
+#> + 10/10 vertices, from c617235:
 #>  [1]  1 10  9  8  7  6  5  4  3  2
 #> 
 #> [[2]]
-#> + 10/10 vertices, from 203a390:
+#> + 10/10 vertices, from c617235:
 #>  [1]  2  3  4  5  6  7  8  9 10  1
 #> 
 ```

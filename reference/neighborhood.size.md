@@ -46,3 +46,7 @@ neighborhood.size(
 - mindist:
 
   The minimum distance to include the vertex in the result.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

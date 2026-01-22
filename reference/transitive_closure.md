@@ -30,6 +30,10 @@ transitive_closure(graph)
 A new graph object representing the transitive closure. The returned
 graph will have the same directedness as the input.
 
+## Related documentation in the C library
+
+[`transitive_closure()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure)
+
 ## See also
 
 [`distances()`](https://r.igraph.org/reference/distances.md),
@@ -65,10 +69,6 @@ Other functions for manipulating graph structure:
 
 Fabio Zanini <fabio.zanini@unsw.edu.au>
 
-## Related documentation in the C library
-
-[`transitive_closure()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_transitive_closure).
-
 ## Examples
 
 ``` r
@@ -77,8 +77,8 @@ g <- make_graph(c(1, 2, 2, 3, 3, 4))
 tc <- transitive_closure(g)
 # The closure has edges 1->2, 1->3, 1->4, 2->3, 2->4, 3->4
 print_all(tc)
-#> IGRAPH 25c8812 D--- 4 6 -- 
-#> + edges from 25c8812:
+#> IGRAPH 39236e8 D--- 4 6 -- 
+#> + edges from 39236e8:
 #> [1] 1->2 1->3 1->4 2->3 2->4 3->4
 
 # Undirected graph - connects all vertices in same component
@@ -86,7 +86,7 @@ g2 <- make_graph(c(1, 2, 3, 4), directed = FALSE)
 tc2 <- transitive_closure(g2)
 # Full graph on vertices 1, 2 and full graph on vertices 3, 4
 print_all(tc2)
-#> IGRAPH 8d97399 U--- 4 2 -- 
-#> + edges from 8d97399:
+#> IGRAPH c826ecc U--- 4 2 -- 
+#> + edges from c826ecc:
 #> [1] 1--2 3--4
 ```

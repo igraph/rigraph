@@ -40,6 +40,10 @@ numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md).
 
+## Related documentation in the C library
+
+[`motifs_randesu()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu)
+
 ## See also
 
 [`isomorphism_class()`](https://r.igraph.org/reference/isomorphism_class.md)

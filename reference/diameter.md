@@ -60,6 +60,11 @@ first one found.
 `farthest_vertices()` returns two vertex ids, the vertices which are
 connected by the diameter path.
 
+## Related documentation in the C library
+
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 [`distances()`](https://r.igraph.org/reference/distances.md)
@@ -92,11 +97,11 @@ E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 #> [1] 27
 get_diameter(g)
-#> + 5/10 vertices, from 0956aa0:
+#> + 5/10 vertices, from ed0f448:
 #> [1]  1 10  9  8  7
 diameter(g, weights = NA)
 #> [1] 5
 get_diameter(g, weights = NA)
-#> + 6/10 vertices, from 0956aa0:
+#> + 6/10 vertices, from ed0f448:
 #> [1] 1 2 3 4 5 6
 ```

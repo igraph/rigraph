@@ -51,10 +51,6 @@ Other graph motifs:
 [`motifs()`](https://r.igraph.org/reference/motifs.md),
 [`sample_motifs()`](https://r.igraph.org/reference/sample_motifs.md)
 
-## Related documentation in the C library
-
-[`motifs_randesu_callback()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_callback).
-
 ## Examples
 
 ``` r

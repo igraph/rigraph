@@ -30,3 +30,7 @@ growing.random.game(n, m = 1, directed = TRUE, citation = FALSE)
 
   Logical. If `TRUE` a citation graph is created, i.e. in each time step
   the added edges are originating from the new vertex.
+
+## Related documentation in the C library
+
+[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game)

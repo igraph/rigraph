@@ -29,3 +29,10 @@ graph.data.frame(d, directed = TRUE, vertices = NULL)
   A data frame with vertex metadata, or `NULL`. See details below. Since
   version 0.7 this argument is coerced to a data frame with
   `as.data.frame`, if not `NULL`.
+
+## Related documentation in the C library
+
+[[`add_vertices()`](https://r.igraph.org/reference/add_vertices.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_add_vertices),
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

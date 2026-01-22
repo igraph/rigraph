@@ -63,3 +63,9 @@ label.propagation.community(
   sense only if you provided an initial state, otherwise this element
   will be ignored. Also note that vertices without labels cannot be
   fixed.
+
+## Related documentation in the C library
+
+[`community_label_propagation()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_label_propagation),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

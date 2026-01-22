@@ -103,6 +103,12 @@ Our implementation tries to follow the original publication, as much as
 possible. The only major difference is that coordinates are explicitly
 kept within the bounds of the rectangle of the layout.
 
+## Related documentation in the C library
+
+[`layout_davidson_harel()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_davidson_harel),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density)
+
 ## References
 
 Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated

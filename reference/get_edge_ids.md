@@ -49,6 +49,10 @@ one, up to the number of edges.
 This function allows finding the edges of the graph, via their incident
 vertices.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -76,7 +80,7 @@ Gabor Csardi <csardi.gabor@gmail.com>
 g <- make_ring(10)
 ei <- get_edge_ids(g, c(1, 2, 4, 5))
 E(g)[ei]
-#> + 2/10 edges from 05fe09c:
+#> + 2/10 edges from 179b259:
 #> [1] 1--2 4--5
 
 ## non-existant edge
@@ -90,6 +94,6 @@ eis <- get_edge_ids(g, c(1, 2, 1, 2))
 eis
 #> [1] 5 5
 E(g)[eis]
-#> + 2/5 edges from ba868ee:
+#> + 2/5 edges from af74b97:
 #> [1] 1->2 1->2
 ```

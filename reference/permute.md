@@ -34,6 +34,10 @@ to create the canonical form of a graph.
 
 `permute()` keeps all graph, vertex and edge attributes of the graph.
 
+## Related documentation in the C library
+
+[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices)
+
 ## See also
 
 [`canonical_permutation()`](https://r.igraph.org/reference/canonical_permutation.md)
@@ -67,10 +71,6 @@ Other functions for manipulating graph structure:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices).
 
 ## Examples
 

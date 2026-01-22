@@ -46,6 +46,10 @@ added to the graph and `m` new edges are created. If `citation` is
 vertices, otherwise the edges are connecting new vertex to uniformly
 randomly chosen old vertices.
 
+## Related documentation in the C library
+
+[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game)
+
 ## See also
 
 Random graph models (games)
@@ -79,10 +83,6 @@ Random graph models (games)
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`growing_random_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_growing_random_game).
 
 ## Examples
 

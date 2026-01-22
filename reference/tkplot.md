@@ -196,6 +196,12 @@ tkplot.center tkplot.rotate
              justify="center", font=tcltk::tkfont.create(family="helvetica",
              size=20,weight="bold"))
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md),

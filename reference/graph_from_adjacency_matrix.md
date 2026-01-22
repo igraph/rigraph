@@ -162,6 +162,14 @@ on the value of the `mode` argument:
   An undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
   weights.
 
+## Related documentation in the C library
+
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
+[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify)
+
 ## See also
 
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md) and
@@ -284,6 +292,6 @@ g10 <- graph_from_adjacency_matrix(
   add.rownames = "code"
 )
 summary(g10)
-#> IGRAPH 5643b77 DNW- 10 51 -- 
+#> IGRAPH f1cb851 DNW- 10 51 -- 
 #> + attr: name (v/c), code (v/c), weight (e/n)
 ```

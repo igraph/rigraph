@@ -103,6 +103,19 @@ object and the ‘them’ variant is computed using `graph.us` to extract
 the neighborhood information, and applying `FUN` on these neighborhoods
 in `graph.them`.
 
+## Related documentation in the C library
+
+[`local_scan_0()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_0),
+[`local_scan_0_them()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_0_them),
+[`local_scan_1_ecount()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_1_ecount),
+[`local_scan_1_ecount_them()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_1_ecount_them),
+[`local_scan_k_ecount()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_k_ecount),
+[`local_scan_k_ecount_them()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_k_ecount_them),
+[`local_scan_neighborhood_ecount()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_local_scan_neighborhood_ecount),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`induced_subgraph()`](https://r.igraph.org/reference/subgraph.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_induced_subgraph),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## References
 
 Priebe, C. E., Conroy, J. M., Marchette, D. J., Park, Y. (2005). Scan

@@ -22,6 +22,11 @@ delete_vertices(graph, v)
 
 The graph, with the vertices removed.
 
+## Related documentation in the C library
+
+[`delete_vertices()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_delete_vertices),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -56,22 +61,22 @@ Other functions for manipulating graph structure:
 g <- make_ring(10) %>%
   set_vertex_attr("name", value = LETTERS[1:10])
 g
-#> IGRAPH 465c321 UN-- 10 10 -- Ring graph
+#> IGRAPH 229c631 UN-- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 465c321 (vertex names):
+#> + edges from 229c631 (vertex names):
 #>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J
 V(g)
-#> + 10/10 vertices, named, from 465c321:
+#> + 10/10 vertices, named, from 229c631:
 #>  [1] A B C D E F G H I J
 
 g2 <- delete_vertices(g, c(1, 5)) %>%
   delete_vertices("B")
 g2
-#> IGRAPH 74758e0 UN-- 7 5 -- Ring graph
+#> IGRAPH 4ce773f UN-- 7 5 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)
-#> + edges from 74758e0 (vertex names):
+#> + edges from 4ce773f (vertex names):
 #> [1] C--D F--G G--H H--I I--J
 V(g2)
-#> + 7/7 vertices, named, from 74758e0:
+#> + 7/7 vertices, named, from 4ce773f:
 #> [1] C D F G H I J
 ```

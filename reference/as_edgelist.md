@@ -28,6 +28,10 @@ A `ecount(graph)` by 2 numeric matrix.
 
 `as_edgelist()` returns the list of edges in a graph.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 [`graph_from_adjacency_matrix()`](https://r.igraph.org/reference/graph_from_adjacency_matrix.md),

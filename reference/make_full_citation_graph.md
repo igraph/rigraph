@@ -26,6 +26,10 @@ full_citation_graph(n, directed = TRUE)
 
 An igraph graph.
 
+## Related documentation in the C library
+
+[`full_citation()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_full_citation)
+
 ## See also
 
 Other deterministic constructors:
@@ -50,7 +54,7 @@ Other deterministic constructors:
 
 ``` r
 print_all(make_full_citation_graph(10))
-#> IGRAPH f66320a D--- 10 45 -- Full citation graph
+#> IGRAPH d1ce3b6 D--- 10 45 -- Full citation graph
 #> + attr: name (g/c)
 #> + graph attributes:
 #> | + name:

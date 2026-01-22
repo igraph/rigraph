@@ -85,6 +85,15 @@ Some authors refer to the bipartite adjacency matrix as the "bipartite
 incidence matrix". igraph 1.6.0 and later does not use this naming to
 avoid confusion with the edge-vertex incidence matrix.
 
+## Related documentation in the C library
+
+[`biadjacency()`](https://igraph.org/c/html/latest/igraph-Bipartite.html#igraph_biadjacency),
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 [`make_bipartite_graph()`](https://r.igraph.org/reference/make_bipartite_graph.md)
@@ -104,8 +113,8 @@ inc <- matrix(sample(0:1, 15, repl = TRUE), 3, 5)
 colnames(inc) <- letters[1:5]
 rownames(inc) <- LETTERS[1:3]
 graph_from_biadjacency_matrix(inc)
-#> IGRAPH b0a6e32 UN-B 8 8 -- 
+#> IGRAPH bcc67cd UN-B 8 8 -- 
 #> + attr: type (v/l), name (v/c)
-#> + edges from b0a6e32 (vertex names):
+#> + edges from bcc67cd (vertex names):
 #> [1] A--a A--b A--c A--d A--e B--d C--b C--d
 ```

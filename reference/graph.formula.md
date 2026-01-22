@@ -29,3 +29,10 @@ graph.formula(..., simplify = TRUE)
   [`simplify()`](https://r.igraph.org/reference/simplify.md) on the
   created graph. By default the graph is simplified, loop and multiple
   edges are removed.
+
+## Related documentation in the C library
+
+[[`simplify()`](https://r.igraph.org/reference/simplify.md)](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_simplify),
+[`famous()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_famous),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[`empty()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_empty)

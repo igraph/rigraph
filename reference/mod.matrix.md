@@ -32,3 +32,9 @@ mod.matrix(graph, membership, weights = NULL, resolution = 1, directed = TRUE)
 
   Whether to use the directed or undirected version of modularity.
   Ignored for undirected graphs.
+
+## Related documentation in the C library
+
+[[`modularity_matrix()`](https://r.igraph.org/reference/modularity.igraph.md)](https://igraph.org/c/html/latest/igraph-Community.html#igraph_modularity_matrix),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

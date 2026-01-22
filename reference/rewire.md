@@ -37,7 +37,7 @@ g %>%
   plot(layout = layout_in_circle)
 
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-#> IGRAPH b41038e U--- 10 10 -- Ring graph
+#> IGRAPH c64b45e U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
 #> + graph attributes:
 #> | + name:
@@ -46,6 +46,6 @@ print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 #> |   [1] FALSE
 #> | + circular:
 #> |   [1] TRUE
-#> + edges from b41038e:
+#> + edges from c64b45e:
 #>  [1] 1-- 8 4-- 9 1-- 9 2-- 5 5--10 4-- 6 6-- 7 3--10 2-- 8 3-- 7
 ```

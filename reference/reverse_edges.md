@@ -33,6 +33,12 @@ t(x)
 The result graph where the direction of the edges with the given IDs are
 reversed
 
+## Related documentation in the C library
+
+[`reverse_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other functions for manipulating graph structure:
@@ -61,17 +67,13 @@ Other functions for manipulating graph structure:
 [`union.igraph()`](https://r.igraph.org/reference/union.igraph.md),
 [`vertex()`](https://r.igraph.org/reference/vertex.md)
 
-## Related documentation in the C library
-
-[`reverse_edges()`](https://igraph.org/c/html/latest/igraph-Operators.html#igraph_reverse_edges).
-
 ## Examples
 
 ``` r
 g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
-#> IGRAPH 4011d87 DN-- 4 3 -- 
+#> IGRAPH 3f69560 DN-- 4 3 -- 
 #> + attr: name (v/c)
-#> + edges from 4011d87 (vertex names):
+#> + edges from 3f69560 (vertex names):
 #> [1] 1->2 3->2 3->4
 ```

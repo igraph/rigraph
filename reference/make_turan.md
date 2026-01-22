@@ -35,6 +35,11 @@ This function generates undirected graphs. The null graph is returned
 when the number of vertices is zero. A complete graph is returned if the
 number of partitions is greater than the number of vertices.
 
+## Related documentation in the C library
+
+[`turan()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_turan),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other deterministic constructors:
@@ -54,10 +59,6 @@ Other deterministic constructors:
 [`make_star()`](https://r.igraph.org/reference/make_star.md),
 [`make_tree()`](https://r.igraph.org/reference/make_tree.md),
 [`make_wheel()`](https://r.igraph.org/reference/make_wheel.md)
-
-## Related documentation in the C library
-
-[`turan()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_turan).
 
 ## Examples
 

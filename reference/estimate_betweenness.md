@@ -44,3 +44,10 @@ estimate_betweenness(
   If the graph has a `weight` edge attribute, then this is used by
   default. Weights are used to calculate weighted shortest paths, so
   they are interpreted as distances.
+
+## Related documentation in the C library
+
+[`betweenness_cutoff()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_betweenness_cutoff),
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

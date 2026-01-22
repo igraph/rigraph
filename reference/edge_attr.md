@@ -29,6 +29,11 @@ edge_attr(graph, name, index = E(graph))
 The value of the edge attribute, or the list of all edge attributes if
 `name` is missing.
 
+## Related documentation in the C library
+
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Vertex, edge and graph attributes
@@ -58,10 +63,10 @@ g <- make_ring(10) %>%
   set_edge_attr("weight", value = 1:10) %>%
   set_edge_attr("color", value = "red")
 g
-#> IGRAPH 3747263 U-W- 10 10 -- Ring graph
+#> IGRAPH 84d4dbe U-W- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l), weight (e/n), color
 #> | (e/c)
-#> + edges from 3747263:
+#> + edges from 84d4dbe:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 plot(g, edge.width = E(g)$weight)
 ```

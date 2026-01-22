@@ -71,6 +71,12 @@ A `vcount(graph)` by `vcount(graph)` (usually) numeric matrix.
 regular matrix if `sparse` is `FALSE`, or a sparse matrix, as defined in
 the ‘`Matrix`’ package, if `sparse` if `TRUE`.
 
+## Related documentation in the C library
+
+[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
+
 ## See also
 
 [`graph_from_adjacency_matrix()`](https://r.igraph.org/reference/graph_from_adjacency_matrix.md),

@@ -56,3 +56,7 @@ static.power.law.game(
 
   Logical scalar, whether to use the proposed finite size correction of
   Cho et al., see references below.
+
+## Related documentation in the C library
+
+[`static_power_law_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_static_power_law_game)

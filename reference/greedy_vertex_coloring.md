@@ -41,7 +41,8 @@ it can be calculated in linear time.
 
 ## Related documentation in the C library
 
-[`vertex_coloring_greedy()`](https://igraph.org/c/html/latest/igraph-Coloring.html#igraph_vertex_coloring_greedy).
+[`vertex_coloring_greedy()`](https://igraph.org/c/html/latest/igraph-Coloring.html#igraph_vertex_coloring_greedy),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
 
 ## Examples
 

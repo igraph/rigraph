@@ -72,6 +72,11 @@ following members:
   The number of vertices in the subtree below the given internal vertex,
   including itself.
 
+## Related documentation in the C library
+
+[`hrg_fit()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_fit),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure and the

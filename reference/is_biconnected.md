@@ -30,6 +30,10 @@ igraph does not consider single-vertex graphs biconnected.
 Note that some authors do not consider the graph consisting of two
 connected vertices as biconnected, however, igraph does.
 
+## Related documentation in the C library
+
+[`is_biconnected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_biconnected)
+
 ## See also
 
 [`articulation_points()`](https://r.igraph.org/reference/articulation_points.md),
@@ -43,10 +47,6 @@ Connected components
 [`component_distribution()`](https://r.igraph.org/reference/components.md),
 [`count_reachable()`](https://r.igraph.org/reference/count_reachable.md),
 [`decompose()`](https://r.igraph.org/reference/decompose.md)
-
-## Related documentation in the C library
-
-[`is_biconnected()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_biconnected).
 
 ## Examples
 

@@ -22,3 +22,7 @@ get.data.frame(x, what = c("edges", "vertices", "both"))
 
   Character constant, whether to return info about vertices, edges, or
   both. The default is ‘edges’.
+
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

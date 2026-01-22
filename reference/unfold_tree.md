@@ -47,6 +47,11 @@ A forest is a graph, whose components are trees.
 The `roots` vector can be calculated by simply doing a topological sort
 in all components of the graph, see the examples below.
 
+## Related documentation in the C library
+
+[`unfold_tree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_unfold_tree),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural.properties:

@@ -173,6 +173,17 @@ is only a preliminary implementation, no visualization information is
 written. This format is meant solely for interoperability with Graphviz.
 It is not recommended for data exchange or archival.
 
+## Related documentation in the C library
+
+[`write_graph_edgelist()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist),
+[`write_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek),
+[`write_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml),
+[`write_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml),
+[`write_graph_dot()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot),
+[`write_graph_leda()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda),
+[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## References
 
 Adai AT, Date SV, Wieland S, Marcotte EM. LGL: creating a map of protein
@@ -190,18 +201,6 @@ Foreign format readers
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
-
-## Related documentation in the C library
-
-[`write_graph_dimacs_flow()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dimacs_flow),
-[`write_graph_dot()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_dot),
-[`write_graph_edgelist()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_edgelist),
-[`write_graph_gml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_gml),
-[`write_graph_graphml()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_graphml),
-[`write_graph_leda()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_leda),
-[`write_graph_lgl()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_lgl),
-[`write_graph_ncol()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_ncol),
-[`write_graph_pajek()`](https://igraph.org/c/html/latest/igraph-Foreign.html#igraph_write_graph_pajek).
 
 ## Examples
 

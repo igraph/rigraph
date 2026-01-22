@@ -28,6 +28,11 @@ neighbors(graph, v, mode = c("out", "in", "all", "total"))
 
 A vertex sequence containing the neighbors of the input vertex.
 
+## Related documentation in the C library
+
+[`neighbors()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_neighbors),
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Other structural queries:
@@ -52,6 +57,6 @@ g <- make_graph("Zachary")
 n1 <- neighbors(g, 1)
 n34 <- neighbors(g, 34)
 intersection(n1, n34)
-#> + 4/34 vertices, from 49a6c8a:
+#> + 4/34 vertices, from fd0afda:
 #> [1]  9 14 20 32
 ```

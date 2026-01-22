@@ -15,7 +15,7 @@ vertices from which a given vertex is reachable via a directed path."><meta prop
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertices from which a given vertex is reachable via a directed path."><meta prop
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>In- or out- component of a vertex</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>subcomponent.Rd</code></div>
     </div>
 
@@ -91,6 +91,10 @@ undirected graphs.</p></dd>
     <p>A breadth-first search is conducted starting from vertex <code>v</code>.</p>
     </div>
     <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="components.html">components()</a></code></p>
 <p>Other structural.properties:
@@ -129,13 +133,13 @@ undirected graphs.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span> <span class="op">/</span> <span class="fl">200</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"in"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b5bfea0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from f27d011:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"out"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b5bfea0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from f27d011:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu">subcomponent</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from b5bfea0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/100 vertex, from f27d011:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 </code></pre></div>
     </div>

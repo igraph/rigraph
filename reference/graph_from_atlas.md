@@ -33,6 +33,10 @@ atlas(n)
 
 An igraph graph.
 
+## Related documentation in the C library
+
+[`atlas()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_atlas)
+
 ## See also
 
 Other deterministic constructors:
@@ -58,13 +62,13 @@ Other deterministic constructors:
 ``` r
 ## Some randomly picked graphs from the atlas
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH c716505 U--- 7 6 -- Graph from the Atlas #282
+#> IGRAPH 7829d58 U--- 7 6 -- Graph from the Atlas #282
 #> + attr: name (g/c), n (g/n)
-#> + edges from c716505:
+#> + edges from 7829d58:
 #> [1] 1--5 1--4 2--3 3--6 6--7 3--7
 graph_from_atlas(sample(0:1252, 1))
-#> IGRAPH c18d3e1 U--- 7 13 -- Graph from the Atlas #1073
+#> IGRAPH 6c26256 U--- 7 13 -- Graph from the Atlas #1073
 #> + attr: name (g/c), n (g/n)
-#> + edges from c18d3e1:
+#> + edges from 6c26256:
 #>  [1] 1--2 1--7 2--5 2--6 3--4 3--5 3--6 3--7 4--5 4--6 4--7 5--7 6--7
 ```

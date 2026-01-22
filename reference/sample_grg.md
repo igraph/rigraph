@@ -43,6 +43,10 @@ connected with an undirected edge if they are closer to each other in
 Euclidean norm than a given radius. If the `torus` argument is `TRUE`
 then a unit area torus is used instead of a square.
 
+## Related documentation in the C library
+
+[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
+
 ## See also
 
 Random graph models (games)

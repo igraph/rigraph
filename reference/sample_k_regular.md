@@ -41,6 +41,10 @@ The game simply uses
 [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md)
 with appropriately constructed degree sequences.
 
+## Related documentation in the C library
+
+[`k_regular_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game)
+
 ## See also
 
 [`sample_degseq()`](https://r.igraph.org/reference/sample_degseq.md) for
@@ -77,10 +81,6 @@ Random graph models (games)
 ## Author
 
 Tamas Nepusz <ntamas@gmail.com>
-
-## Related documentation in the C library
-
-[`k_regular_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_k_regular_game).
 
 ## Examples
 
