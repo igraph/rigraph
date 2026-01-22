@@ -10948,13 +10948,21 @@ test_that("is_chordal_impl basic", {
   # alpha is a permutation vector, alpham1 is its inverse
   alpha_vec <- seq_len(vcount(g))
   alpham1_vec <- seq_len(vcount(g))
-  expect_snapshot(is_chordal_impl(graph = g, alpha = alpha_vec, alpham1 = alpham1_vec))
-  
+  expect_snapshot(is_chordal_impl(
+    graph = g,
+    alpha = alpha_vec,
+    alpham1 = alpham1_vec
+  ))
+
   # Test with a non-chordal graph (4-cycle is not chordal)
   g2 <- make_ring(4)
   alpha_vec2 <- seq_len(vcount(g2))
   alpham1_vec2 <- seq_len(vcount(g2))
-  expect_snapshot(is_chordal_impl(graph = g2, alpha = alpha_vec2, alpham1 = alpham1_vec2))
+  expect_snapshot(is_chordal_impl(
+    graph = g2,
+    alpha = alpha_vec2,
+    alpham1 = alpham1_vec2
+  ))
 })
 
 test_that("get_adjacency_impl basic", {
