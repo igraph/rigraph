@@ -7762,7 +7762,7 @@ SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
 
 /* Test function to verify error formatting with file and line information */
 attribute_visible SEXP Rx_igraph_test_error_with_source(void) {
-  igraph_errorf("Test error message for verifying source location formatting.",
+  igraph_errorf("Test error message for verifying source location formatting",
                 __FILE__, __LINE__, IGRAPH_EINVAL);
   return R_NilValue;
 }
