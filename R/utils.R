@@ -94,3 +94,23 @@ modify_list <- function(x, y) {
 
   utils::modifyList(x, y)
 }
+
+#' Test function to verify error formatting with file and line information
+#'
+#' @description
+#' This is a test function that throws an error from C code with file and line
+#' information.
+#' The error message should include the source file and line number where the
+#' error occurred.
+#'
+#' @return This function never returns; it always throws an error.
+#' @export
+#' @keywords internal
+#' @examples
+#' \dontrun{
+#' # This will throw an error with source location information
+#' test_error_with_source()
+#' }
+test_error_with_source <- function() {
+  .Call(Rx_igraph_test_error_with_source)
+}
