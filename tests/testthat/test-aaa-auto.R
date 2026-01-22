@@ -10942,10 +10942,19 @@ test_that("neighborhood_size_impl basic", {
 test_that("is_chordal_impl basic", {
   withr::local_seed(20250909)
   local_igraph_options(print.id = FALSE)
-  # is_chordal_impl has a bug where optional INDEX_VECTOR parameters
-  # cannot be NULL - they are always passed to C even when NULL
-  # This needs to be fixed in the generator or function spec
-  skip("is_chordal_impl has bug with optional INDEX_VECTOR parameters")
+  # Test with a chordal graph (complete graph is chordal)
+  g <- make_full_graph(4)
+  # alpha and alpham1 parameters must be provided as vectors matching vertex count
+  # alpha is a permutation vector, alpham1 is its inverse
+  alpha_vec <- seq_len(vcount(g))
+  alpham1_vec <- seq_len(vcount(g))
+  expect_snapshot(is_chordal_impl(graph = g, alpha = alpha_vec, alpham1 = alpham1_vec))
+  
+  # Test with a non-chordal graph (4-cycle is not chordal)
+  g2 <- make_ring(4)
+  alpha_vec2 <- seq_len(vcount(g2))
+  alpham1_vec2 <- seq_len(vcount(g2))
+  expect_snapshot(is_chordal_impl(graph = g2, alpha = alpha_vec2, alpham1 = alpham1_vec2))
 })
 
 test_that("get_adjacency_impl basic", {

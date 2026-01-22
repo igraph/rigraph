@@ -10729,7 +10729,7 @@
       hub_score_impl(graph = g, scale = TRUE, weights = NULL)
     Output
       $vector
-      [1] 1.0000000 0.2500078 0.2500078 0.2500078 0.2500078
+      [1] 1 0 0 0 0
       
       $value
       [1] 4
@@ -10803,7 +10803,7 @@
       authority_score_impl(graph = g, scale = TRUE, weights = NULL)
     Output
       $vector
-      [1] 1.0000000 0.9999686 0.9999686 0.9999686 0.9999686
+      [1] 0 1 1 1 1
       
       $value
       [1] 4
@@ -11045,6 +11045,42 @@
         "in"))
     Output
       [1] 3 3 3 3 3
+
+# is_chordal_impl basic
+
+    Code
+      is_chordal_impl(graph = g, alpha = alpha_vec, alpham1 = alpham1_vec)
+    Output
+      $chordal
+      [1] TRUE
+      
+      $fillin
+      numeric(0)
+      
+      $newgraph
+      IGRAPH U--- 4 6 -- Full graph
+      + attr: name (g/c), loops (g/l)
+      + edges:
+      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+      
+
+---
+
+    Code
+      is_chordal_impl(graph = g2, alpha = alpha_vec2, alpham1 = alpham1_vec2)
+    Output
+      $chordal
+      [1] FALSE
+      
+      $fillin
+      [1] 1 3
+      
+      $newgraph
+      IGRAPH U--- 4 5 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l)
+      + edges:
+      [1] 1--2 2--3 3--4 1--4 2--4
+      
 
 # get_adjacency_impl basic
 
