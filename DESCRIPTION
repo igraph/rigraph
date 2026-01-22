@@ -80,7 +80,7 @@ Config/testthat/parallel: true
 Config/testthat/start-first: aaa-auto, vs-es, scan, vs-operators, weakref,
     watts.strogatz.game
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("collate", "rd", "namespace",
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace",
     "igraph.r2cdocs::docs_rd", "devtag::dev_roclet"), packages =
     "igraph.r2cdocs")
 RoxygenNote: 7.3.3.9000
