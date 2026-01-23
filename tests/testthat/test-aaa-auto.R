@@ -10818,7 +10818,7 @@ test_that("hub_score_impl basic", {
   out <- hub_score_impl(graph = g, scale = TRUE, weights = NULL)
   # FIXME: out$vector unstable despite random seed
   expect_length(out$vector, 5)
-  expect_type(out$vector, "numeric")
+  expect_type(out$vector, "double")
   out$vector <- NULL
   expect_snapshot(out)
 })
@@ -10830,7 +10830,7 @@ test_that("authority_score_impl basic", {
   out <- authority_score_impl(graph = g, scale = TRUE, weights = NULL)
   # FIXME: out$vector unstable despite random seed
   expect_length(out$vector, 5)
-  expect_type(out$vector, "numeric")
+  expect_type(out$vector, "double")
   out$vector <- NULL
   expect_snapshot(out)
 })
