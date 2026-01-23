@@ -17,8 +17,3 @@ hrg.dendrogram(hrg)
 - hrg:
 
   A hierarchical random graph model.
-
-## Related documentation in the C library
-
-[`from_hrg_dendrogram()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_from_hrg_dendrogram),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

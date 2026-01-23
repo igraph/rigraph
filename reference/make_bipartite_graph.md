@@ -55,10 +55,6 @@ vertex attribute called `type`. `edges` may contain strings as vertex
 names; in this case, `types` must be a named vector that specifies the
 type for each vertex name that occurs in `edges`.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [`make_graph()`](https://r.igraph.org/reference/make_graph.md) to create
@@ -78,8 +74,8 @@ Gabor Csardi <csardi.gabor@gmail.com>
 ``` r
 g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 print(g, v = TRUE)
-#> IGRAPH 3414c7b U--B 10 5 -- 
+#> IGRAPH 70867a5 U--B 10 5 -- 
 #> + attr: type (v/l)
-#> + edges from 3414c7b:
+#> + edges from 70867a5:
 #> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10
 ```

@@ -106,12 +106,6 @@ The types of the generated vertices can be retrieved from the `type`
 vertex attribute for `sample_pref()` and from the `intype` and `outtype`
 vertex attribute for `sample_asym_pref()`.
 
-## Related documentation in the C library
-
-[`preference_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_preference_game),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`asymmetric_preference_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_asymmetric_preference_game)
-
 ## See also
 
 Random graph models (games)

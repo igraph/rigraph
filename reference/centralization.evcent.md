@@ -44,7 +44,3 @@ centralization.evcent(
 
   Logical scalar. Whether to normalize the graph level centrality score
   by dividing by the theoretical maximum.
-
-## Related documentation in the C library
-
-[`centralization_eigenvector_centrality()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_eigenvector_centrality)

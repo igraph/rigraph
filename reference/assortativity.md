@@ -113,12 +113,6 @@ Undirected graphs are effectively treated as directed ones with
 all-reciprocal edges. Thus, self-loops are taken into account twice in
 undirected graphs.
 
-## Related documentation in the C library
-
-[`assortativity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity),
-[`assortativity_nominal()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal),
-[`assortativity_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree)
-
 ## References
 
 M. E. J. Newman: Mixing patterns in networks, *Phys. Rev. E* 67, 026126
@@ -130,6 +124,12 @@ M. E. J. Newman: Assortative mixing in networks, *Phys. Rev. Lett.* 89,
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[`assortativity()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity),
+[`assortativity_nominal()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_nominal),
+[`assortativity_degree()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_assortativity_degree).
 
 ## Examples
 

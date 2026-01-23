@@ -56,11 +56,6 @@ function, if your graph is lattice-like.
 
 This function ignores multiple and loop edges.
 
-## Related documentation in the C library
-
-[`get_all_simple_paths()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_all_simple_paths),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
@@ -75,28 +70,28 @@ Other paths: [`diameter()`](https://r.igraph.org/reference/diameter.md),
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
 #> [[1]]
-#> + 5/10 vertices, from 82207b7:
+#> + 5/10 vertices, from 816514e:
 #> [1] 1 2 3 4 5
 #> 
 #> [[2]]
-#> + 7/10 vertices, from 82207b7:
+#> + 7/10 vertices, from 816514e:
 #> [1]  1 10  9  8  7  6  5
 #> 
 all_simple_paths(g, 1, c(3, 5))
 #> [[1]]
-#> + 3/10 vertices, from 82207b7:
+#> + 3/10 vertices, from 816514e:
 #> [1] 1 2 3
 #> 
 #> [[2]]
-#> + 5/10 vertices, from 82207b7:
+#> + 5/10 vertices, from 816514e:
 #> [1] 1 2 3 4 5
 #> 
 #> [[3]]
-#> + 7/10 vertices, from 82207b7:
+#> + 7/10 vertices, from 816514e:
 #> [1]  1 10  9  8  7  6  5
 #> 
 #> [[4]]
-#> + 9/10 vertices, from 82207b7:
+#> + 9/10 vertices, from 816514e:
 #> [1]  1 10  9  8  7  6  5  4  3
 #> 
 ```

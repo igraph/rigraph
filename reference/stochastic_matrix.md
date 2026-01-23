@@ -43,13 +43,6 @@ The (row) stochastic matrix is defined as \$\$W = D^{-1}M,\$\$ where it
 is assumed that \\D\\ is non-singular. Column stochastic matrices are
 defined in a symmetric way.
 
-## Related documentation in the C library
-
-[`get_stochastic()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic),
-[`get_stochastic_sparse()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_get_stochastic_sparse),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## See also
 
 [`as_adjacency_matrix()`](https://r.igraph.org/reference/as_adjacency_matrix.md)

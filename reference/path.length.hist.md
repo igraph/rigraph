@@ -22,7 +22,3 @@ path.length.hist(graph, directed = TRUE)
 
   Whether to consider directed paths in directed graphs, this argument
   is ignored for undirected graphs.
-
-## Related documentation in the C library
-
-[`path_length_hist()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_path_length_hist)

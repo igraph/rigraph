@@ -25,7 +25,3 @@ graph.isocreate(size, number, directed = TRUE)
 - directed:
 
   Whether to create a directed graph (the default).
-
-## Related documentation in the C library
-
-[`isoclass_create()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_isoclass_create)

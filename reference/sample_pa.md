@@ -141,10 +141,6 @@ graph is generated \\k_i\\ denotes the number of adjacent edges not
 initiated by the vertex itself and not the total (in- + out-) degree of
 the vertex, unless the `out.pref` argument is set to `TRUE`.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## References
 
 Barabási, A.-L. and Albert R. 1999. Emergence of scaling in random

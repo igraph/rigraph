@@ -75,12 +75,6 @@ or
 we do not forward the weights to these functions and issue a warning
 about this. You can use `weights = NA` to silence the warning.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`is_forest()`](https://r.igraph.org/reference/is_forest.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## See also
 
 [`plot.igraph()`](https://r.igraph.org/reference/plot.igraph.md)

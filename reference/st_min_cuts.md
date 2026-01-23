@@ -64,12 +64,6 @@ simply the number of edges.
 
 An \\(s,t)\\-cut is minimum if it is of the smallest possible size.
 
-## Related documentation in the C library
-
-[`all_st_mincuts()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## References
 
 JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in graphs,
@@ -93,6 +87,10 @@ Other flow:
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
+## Related documentation in the C library
+
+[`all_st_mincuts()`](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_all_st_mincuts).
+
 ## Examples
 
 ``` r
@@ -107,29 +105,29 @@ st_min_cuts(g, source = "s", target = "t")
 #> 
 #> $cuts
 #> $cuts[[1]]
-#> + 2/14 edges from 47c14df (vertex names):
+#> + 2/14 edges from c03da33 (vertex names):
 #> [1] s->a s->b
 #> 
 #> $cuts[[2]]
-#> + 2/14 edges from 47c14df (vertex names):
+#> + 2/14 edges from c03da33 (vertex names):
 #> [1] s->a b->t
 #> 
 #> $cuts[[3]]
-#> + 2/14 edges from 47c14df (vertex names):
+#> + 2/14 edges from c03da33 (vertex names):
 #> [1] a->t b->t
 #> 
 #> 
 #> $partition1s
 #> $partition1s[[1]]
-#> + 1/9 vertex, named, from 47c14df:
+#> + 1/9 vertex, named, from c03da33:
 #> [1] s
 #> 
 #> $partition1s[[2]]
-#> + 2/9 vertices, named, from 47c14df:
+#> + 2/9 vertices, named, from c03da33:
 #> [1] s b
 #> 
 #> $partition1s[[3]]
-#> + 8/9 vertices, named, from 47c14df:
+#> + 8/9 vertices, named, from c03da33:
 #> [1] s b a 5 4 3 2 1
 #> 
 #> 

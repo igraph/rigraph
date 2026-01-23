@@ -39,8 +39,3 @@ edge.disjoint.paths(graph, source = NULL, target = NULL, checks = TRUE)
   good idea to perform these checks, as they can be done quickly
   compared to the connectivity calculation itself. They were suggested
   by Peter McMahan, thanks Peter.
-
-## Related documentation in the C library
-
-[[`edge_connectivity()`](https://r.igraph.org/reference/edge_connectivity.md)](https://igraph.org/c/html/latest/igraph-Flows.html#igraph_edge_connectivity),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

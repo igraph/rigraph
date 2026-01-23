@@ -31,7 +31,3 @@ centralization.closeness.tmax(
   This is the same as the `mode` argument of
   [`closeness()`](https://r.igraph.org/reference/closeness.md). Ignored
   if an undirected graph is given.
-
-## Related documentation in the C library
-
-[`centralization_closeness_tmax()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_centralization_closeness_tmax)

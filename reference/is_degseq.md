@@ -31,10 +31,6 @@ is_degseq(out.deg, in.deg = NULL)
 
 A logical scalar.
 
-## Related documentation in the C library
-
-[[`is_graphical()`](https://r.igraph.org/reference/is_graphical.md)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_graphical)
-
 ## References
 
 Z Király, Recognizing graphic degree sequences and generating all

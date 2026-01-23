@@ -1,5 +1,21 @@
 # Changelog
 
+## igraph 2.2.1.9016
+
+### Chore
+
+- No roclet needed to share the tag code
+  ([\#2520](https://github.com/igraph/rigraph/issues/2520)).
+
+## igraph 2.2.1.9015
+
+### Continuous integration
+
+- Tweaks ([\#2517](https://github.com/igraph/rigraph/issues/2517)).
+
+- Test all R versions on branches that start with cran-
+  ([\#2516](https://github.com/igraph/rigraph/issues/2516)).
+
 ## igraph 2.2.1.9014
 
 ### Features

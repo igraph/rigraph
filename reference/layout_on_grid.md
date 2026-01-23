@@ -48,11 +48,6 @@ The function places the vertices on a simple rectangular grid, one after
 the other. If you want to change the order of the vertices, then see the
 [`permute()`](https://r.igraph.org/reference/permute.md) function.
 
-## Related documentation in the C library
-
-[`layout_grid()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid),
-[`layout_grid_3d()`](https://igraph.org/c/html/latest/igraph-Layout.html#igraph_layout_grid_3d)
-
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for other layout

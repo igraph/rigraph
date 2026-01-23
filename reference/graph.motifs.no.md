@@ -27,7 +27,3 @@ graph.motifs.no(graph, size = 3, cut.prob = rep(0, size))
   Numeric vector giving the probabilities that the search graph is cut
   at a certain level. Its length should be the same as the size of the
   motif (the `size` argument). If `NULL`, the default, no cuts are made.
-
-## Related documentation in the C library
-
-[`motifs_randesu_no()`](https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_no)

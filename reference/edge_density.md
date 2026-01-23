@@ -34,10 +34,6 @@ The concept of density is ill-defined for multigraphs. Note that this
 function does not check whether the graph has multi-edges and will
 return meaningless results for such graphs.
 
-## Related documentation in the C library
-
-[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density)
-
 ## References
 
 Wasserman, S., and Faust, K. (1994). Social Network Analysis: Methods
@@ -79,6 +75,10 @@ Other structural.properties:
 ## Author
 
 Gabor Csardi <csardi.gabor@gmail.com>
+
+## Related documentation in the C library
+
+[[`density()`](https://rdrr.io/r/stats/density.html)](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_density).
 
 ## Examples
 

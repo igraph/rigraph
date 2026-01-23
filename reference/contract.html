@@ -15,7 +15,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ vertices in the new graph correspond to sets of vertices in the input graph."><m
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Contract several vertices into a single one</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/community.R" class="external-link"><code>R/community.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/community.R" class="external-link"><code>R/community.R</code></a></small>
       <div class="d-none name"><code>contract.Rd</code></div>
     </div>
 
@@ -91,10 +91,6 @@ unchanged, vertex attributes are combined, according to the
 <code>vertex.attr.comb</code> parameter.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices" class="external-link"><code>contract_vertices()</code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other functions for manipulating graph structure:
 <code><a href="plus-.igraph.html">+.igraph()</a></code>,
@@ -126,6 +122,10 @@ unchanged, vertex attributes are combined, according to the
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a></p>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Operators.html#igraph_contract_vertices" class="external-link"><code>contract_vertices()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -142,10 +142,10 @@ unchanged, vertex attributes are combined, according to the
 <span class="r-in"><span><span class="co">## graph and edge attributes are kept, vertex attributes are</span></span></span>
 <span class="r-in"><span><span class="co">## combined using the 'toString' function.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g2</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f4054d1 UNW- 5 10 -- Ring</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d139f41 UNW- 5 10 -- Ring</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f4054d1 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d139f41 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j</span>
 <span class="r-in"><span></span></span>

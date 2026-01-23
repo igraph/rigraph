@@ -15,7 +15,7 @@ cycles in the graph."><meta property="og:image" content="https://r.igraph.org/lo
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@ cycles in the graph."><meta property="og:image" content="https://r.igraph.org/lo
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Finding a feedback arc set in a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/structural-properties.R" class="external-link"><code>R/structural-properties.R</code></a></small>
       <div class="d-none name"><code>feedback_arc_set.Rd</code></div>
     </div>
 
@@ -101,10 +101,6 @@ arc set ensures that the remaining graph is a forest (i.e. every connected
 component is a tree).</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_arc_set" class="external-link"><code>feedback_arc_set()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges" class="external-link"><code><a href="edge.html">edges()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount" class="external-link"><code><a href="gsize.html">ecount()</a></code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
 heuristic for the feedback arc set problem. <em>Information Processing Letters</em>
@@ -146,16 +142,20 @@ heuristic for the feedback arc set problem. <em>Information Processing Letters</
 <code><a href="is_dag.html">is_dag()</a></code>,
 <code><a href="simple_cycles.html">simple_cycles()</a></code></p></div>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Structural.html#igraph_feedback_arc_set" class="external-link"><code>feedback_arc_set()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnm.html">sample_gnm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">40</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">feedback_arc_set</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/40 edges from 738834c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/40 edges from 0316614:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  9-&gt; 8 15-&gt; 9 15-&gt;10 16-&gt; 3 16-&gt;12</span>
 <span class="r-in"><span><span class="fu">feedback_arc_set</span><span class="op">(</span><span class="va">g</span>, algo <span class="op">=</span> <span class="st">"approx_eades"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/40 edges from 738834c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/40 edges from 0316614:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  9-&gt; 8 15-&gt; 9 15-&gt;10 16-&gt; 3 16-&gt;12</span>
 </code></pre></div>
     </div>

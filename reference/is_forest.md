@@ -51,17 +51,16 @@ test can be controlled using the mode parameter.
 By convention, the null graph (i.e. the graph with no vertices) is
 considered to be a forest.
 
-## Related documentation in the C library
-
-[`is_forest()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Other trees: [`is_tree()`](https://r.igraph.org/reference/is_tree.md),
 [`make_from_prufer()`](https://r.igraph.org/reference/make_from_prufer.md),
 [`sample_spanning_tree()`](https://r.igraph.org/reference/sample_spanning_tree.md),
 [`to_prufer()`](https://r.igraph.org/reference/to_prufer.md)
+
+## Related documentation in the C library
+
+[`is_forest()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_forest).
 
 ## Examples
 
@@ -74,7 +73,7 @@ is_forest(g, details = TRUE)
 #> [1] TRUE
 #> 
 #> $roots
-#> + 2/8 vertices, from 5dac887:
+#> + 2/8 vertices, from 58bab61:
 #> [1] 1 4
 #> 
 ```

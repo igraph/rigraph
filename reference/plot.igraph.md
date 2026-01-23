@@ -115,15 +115,6 @@ the placement of the vertices, query the coordinates by the
 use them with [`plot()`](https://rdrr.io/r/graphics/plot.default.html)
 to plot the graph to any R device.
 
-## Related documentation in the C library
-
-[[`incident()`](https://r.igraph.org/reference/incident.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_incident),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[`is_loop()`](https://igraph.org/c/html/latest/igraph-Structural.html#igraph_is_loop),
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[[`ecount()`](https://r.igraph.org/reference/gsize.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_ecount)
-
 ## See also
 
 [`layout()`](https://r.igraph.org/reference/layout_.md) for different

@@ -33,10 +33,6 @@ interval, otherwise a warning is given. For negative dot products, no
 edges are added; dot products that are larger than one always add an
 edge.
 
-## Related documentation in the C library
-
-[`dot_product_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_dot_product_game)
-
 ## References
 
 Christine Leigh Myers Nickel: Random dot product graphs, a model for
@@ -83,6 +79,10 @@ Random graph models (games)
 
 Gabor Csardi <csardi.gabor@gmail.com>
 
+## Related documentation in the C library
+
+[`dot_product_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_dot_product_game).
+
 ## Examples
 
 ``` r
@@ -93,8 +93,8 @@ lpvs <- apply(lpvs, 2, function(x) {
 })
 g <- sample_dot_product(lpvs)
 g
-#> IGRAPH 819ab97 U--- 10 22 -- 
-#> + edges from 819ab97:
+#> IGRAPH dd5b2b8 U--- 10 22 -- 
+#> + edges from dd5b2b8:
 #>  [1] 1-- 2 1-- 3 1-- 5 2-- 3 2-- 5 2-- 7 2--10 3-- 4 3-- 6 3-- 9 3--10 4-- 5
 #> [13] 4-- 6 4-- 7 4-- 8 5-- 6 5-- 7 5-- 8 5-- 9 6--10 7-- 8 7--10
 
@@ -102,8 +102,8 @@ g
 lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
-#> IGRAPH 3b2b7ba U--- 20 135 -- 
-#> + edges from 3b2b7ba:
+#> IGRAPH 7948f50 U--- 20 135 -- 
+#> + edges from 7948f50:
 #>  [1]  1-- 2  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--10  1--11  1--12  1--13
 #> [11]  1--15  1--16  1--17  1--18  1--19  1--20  2-- 3  2-- 4  2-- 5  2--11
 #> [21]  2--12  2--13  2--14  2--15  2--17  2--19  2--20  3-- 5  3-- 7  3-- 8

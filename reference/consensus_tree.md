@@ -54,10 +54,6 @@ consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
   in the generated network samples, for each internal vertices. The
   order is the same as in the `parents` vector.
 
-## Related documentation in the C library
-
-[`hrg_consensus()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_consensus)
-
 ## See also
 
 Other hierarchical random graph functions:
@@ -69,3 +65,7 @@ Other hierarchical random graph functions:
 [`print.igraphHRG()`](https://r.igraph.org/reference/print.igraphHRG.md),
 [`print.igraphHRGConsensus()`](https://r.igraph.org/reference/print.igraphHRGConsensus.md),
 [`sample_hrg()`](https://r.igraph.org/reference/sample_hrg.md)
+
+## Related documentation in the C library
+
+[`hrg_consensus()`](https://igraph.org/c/html/latest/igraph-HRG.html#igraph_hrg_consensus).

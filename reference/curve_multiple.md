@@ -31,10 +31,6 @@ A numeric vector, its length is the number of edges in the graph.
 `curve_multiple()` calculates the optimal `edge.curved` vector for
 plotting a graph with multiple edges, so that all edges are visible.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 [igraph.plotting](https://r.igraph.org/reference/plot.common.md) for all

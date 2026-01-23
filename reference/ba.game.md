@@ -89,7 +89,3 @@ ba.game(
   graph should have at least one vertex. If a graph is supplied here and
   the `out.seq` argument is not `NULL`, then it should contain the out
   degrees of the new vertices only, not the ones in the `start.graph`.
-
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)

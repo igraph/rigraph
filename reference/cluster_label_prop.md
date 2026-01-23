@@ -86,12 +86,6 @@ label that most of its neighbors currently have. In this iterative
 process densely connected groups of nodes form a consensus on a unique
 label to form communities.”
 
-## Related documentation in the C library
-
-[`community_label_propagation()`](https://igraph.org/c/html/latest/igraph-Community.html#igraph_community_label_propagation),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## References
 
 Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time algorithm

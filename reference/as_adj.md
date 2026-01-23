@@ -64,9 +64,3 @@ as_adj(
 
   Logical scalar, whether to create a sparse matrix. The ‘`Matrix`’
   package must be installed for creating sparse matrices.
-
-## Related documentation in the C library
-
-[[`is_directed()`](https://r.igraph.org/reference/is_directed.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_is_directed),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)

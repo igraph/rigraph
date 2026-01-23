@@ -38,10 +38,6 @@ A graph object.
 In other words, the function generates each possible labelled tree with
 the given number of nodes with the same probability.
 
-## Related documentation in the C library
-
-[`tree_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_tree_game)
-
 ## See also
 
 Random graph models (games)
@@ -71,6 +67,10 @@ Random graph models (games)
 [`sample_sbm()`](https://r.igraph.org/reference/sample_sbm.md),
 [`sample_smallworld()`](https://r.igraph.org/reference/sample_smallworld.md),
 [`sample_traits_callaway()`](https://r.igraph.org/reference/sample_traits_callaway.md)
+
+## Related documentation in the C library
+
+[`tree_game()`](https://igraph.org/c/html/latest/igraph-Generators.html#igraph_tree_game).
 
 ## Examples
 

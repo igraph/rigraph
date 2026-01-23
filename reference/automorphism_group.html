@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Generating set of the automorphism group of a graph</h1>
-      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/docs2025/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/igraph/rigraph/blob/main/R/topology.R" class="external-link"><code>R/topology.R</code></a></small>
       <div class="d-none name"><code>automorphism_group.Rd</code></div>
     </div>
 
@@ -131,10 +131,6 @@ generating set is not necessarily minimal, and it may depend on the splitting
 heuristics used by BLISS.</p>
     </div>
     <div class="section level2">
-    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
-    <p><a href="https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group" class="external-link"><code>automorphism_group()</code></a>, <a href="https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount" class="external-link"><code><a href="gorder.html">vcount()</a></code></a></p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Tommi Junttila and Petteri Kaski: Engineering an Efficient
 Canonical Labeling Tool for Large and Sparse Graphs, <em>Proceedings of
@@ -154,6 +150,10 @@ Workshop on Analytic Algorithms and Combinatorics.</em> 2007.</p>
 Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.com</a> for the igraph glue code and
 Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> for this manual page.</p>
     </div>
+    <div class="section level2">
+    <h2 id="related-documentation-in-the-c-library">Related documentation in the C library<a class="anchor" aria-label="anchor" href="#related-documentation-in-the-c-library"></a></h2>
+    <p><a href="https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_automorphism_group" class="external-link"><code>automorphism_group()</code></a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -163,11 +163,11 @@ Tamas Nepusz <a href="mailto:ntamas@gmail.com">ntamas@gmail.com</a> for this man
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">automorphism_group</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from c617235:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from d9c3eab:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1 10  9  8  7  6  5  4  3  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from c617235:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, from d9c3eab:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2  3  4  5  6  7  8  9 10  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

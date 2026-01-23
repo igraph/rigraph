@@ -106,10 +106,6 @@ growing.
 the probability of an edge depends on the (potentially) cited vertex
 only.
 
-## Related documentation in the C library
-
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount)
-
 ## See also
 
 Random graph models (games)

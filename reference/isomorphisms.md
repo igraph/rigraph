@@ -33,12 +33,6 @@ isomorphisms(graph1, graph2, method = "vf2", ...)
 A list of vertex sequences, corresponding to all mappings from the first
 graph to the second.
 
-## Related documentation in the C library
-
-[`get_isomorphisms_vf2()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_get_isomorphisms_vf2),
-[[`vcount()`](https://r.igraph.org/reference/gorder.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_vcount),
-[[`edges()`](https://r.igraph.org/reference/edge.md)](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_edges)
-
 ## See also
 
 Other graph isomorphism:

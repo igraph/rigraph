@@ -23,7 +23,3 @@ permute.vertices(graph, permutation)
   A numeric vector giving the permutation to apply. The first element is
   the new id of vertex 1, etc. Every number between one and
   `vcount(graph)` must appear exactly once.
-
-## Related documentation in the C library
-
-[`permute_vertices()`](https://igraph.org/c/html/latest/igraph-Isomorphism.html#igraph_permute_vertices)

@@ -31,10 +31,6 @@ an invalid cache entry is when the result of a cached function (such as
 [`is_simple()`](https://r.igraph.org/reference/simplify.md)) changes
 after calling this function.
 
-## Related documentation in the C library
-
-[`invalidate_cache()`](https://igraph.org/c/html/latest/igraph-Basic.html#igraph_invalidate_cache)
-
 ## Examples
 
 ``` r
@@ -44,9 +40,9 @@ is_simple(g)
 #> [1] TRUE
 # Invalidate cache (for debugging purposes)
 invalidate_cache(g)
-#> IGRAPH 76de9d2 U--- 10 10 -- Ring graph
+#> IGRAPH 4ac6540 U--- 10 10 -- Ring graph
 #> + attr: name (g/c), mutual (g/l), circular (g/l)
-#> + edges from 76de9d2:
+#> + edges from 4ac6540:
 #>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
 # Result should be the same
 is_simple(g)
