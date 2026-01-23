@@ -856,6 +856,16 @@
       + edges:
       [1] 1--2 1--2 2--3 1--3 1--4 2--4 1--5 4--5
 
+---
+
+    Code
+      growing_random_game_impl(n = 10, m = 1, directed = TRUE, citation = FALSE)
+    Output
+      IGRAPH D--- 10 9 -- Growing random graph
+      + attr: name (g/c), m (g/n), citation (g/l)
+      + edges:
+      [1] 2->2 2->3 4->4 4->4 3->2 1->3 1->8 5->6 5->4
+
 # growing_random_game_impl errors
 
     Code
@@ -1402,6 +1412,21 @@
       [1] TRUE
       
 
+---
+
+    Code
+      closeness_impl(graph = g, vids = V(g), mode = c("out", "in", "all", "total"))
+    Output
+      $res
+      [1] 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667
+      
+      $reachable_count
+      [1] 4 4 4 4 4
+      
+      $all_reachable
+      [1] TRUE
+      
+
 # closeness_impl errors
 
     Code
@@ -1596,6 +1621,18 @@
       [1] 0 1 2
       
 
+---
+
+    Code
+      voronoi_impl(graph = g, generators = c(1, 5), mode = c("out", "in", "all"))
+    Output
+      $membership
+       [1] 0 0 0 1 1 1 1 1 0 0
+      
+      $distances
+       [1] 0 1 2 1 0 1 2 3 2 1
+      
+
 # voronoi_impl errors
 
     Code
@@ -1708,6 +1745,14 @@
       + 2/2 edges:
       [1] 1--2 2--3
 
+---
+
+    Code
+      spanner_impl(graph = g, stretch = 2)
+    Output
+      + 5/5 edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
 # spanner_impl errors
 
     Code
@@ -1752,6 +1797,13 @@
       edge_betweenness_impl(graph = g)
     Output
       [1] 2 2
+
+---
+
+    Code
+      edge_betweenness_impl(graph = g, directed = FALSE)
+    Output
+      [1] 4 4 4 4
 
 # edge_betweenness_impl errors
 
@@ -4884,6 +4936,18 @@
       [2,] -0.4861377 0.8738822    0
       [3,]  0.0000000 0.0000000    1
 
+---
+
+    Code
+      layout_sphere_impl(graph = g)
+    Output
+                 [,1]       [,2] [,3]
+      [1,]  0.0000000  0.0000000 -1.0
+      [2,] -0.2461774  0.8302992 -0.5
+      [3,] -0.9468790 -0.3215901  0.0
+      [4,]  0.5001161 -0.7070246  0.5
+      [5,]  0.0000000  0.0000000  1.0
+
 # layout_sphere_impl errors
 
     Code
@@ -5333,6 +5397,13 @@
       compare_communities_impl(comm1 = c(1, 2, 1), comm2 = c(2, 1, 2), method = "nmi")
     Output
       [1] 1
+
+---
+
+    Code
+      compare_communities_impl(comm1 = comm1, comm2 = comm2, method = "vi")
+    Output
+      [1] 0.5493061
 
 # compare_communities_impl errors
 
@@ -7651,7 +7722,10 @@
       [3,] 0.6718598 -0.4487712
       
       $Y
-      NULL
+                [,1]       [,2]
+      [1,] 0.6718598 -0.4487712
+      [2,] 1.1328501  0.5323058
+      [3,] 0.6718598 -0.4487712
       
       $D
       [1]  2.1861407 -0.6861407
@@ -7732,7 +7806,10 @@
       [3,] 0.7563200  0.4912963
       
       $Y
-      NULL
+                [,1]       [,2]
+      [1,] 0.1720265 -0.7864357
+      [2,] 0.6311790 -0.3743620
+      [3,] 0.7563200  0.4912963
       
       $D
       [1] 4.669079 1.476024
@@ -7820,7 +7897,10 @@
       [3,] -0.7071068  0.7071068
       
       $Y
-      NULL
+                 [,1]       [,2]
+      [1,] -0.7071068 -0.7071068
+      [2,]  1.4142136  0.0000000
+      [3,] -0.7071068  0.7071068
       
       $D
       [1] 3 1
@@ -10415,4 +10495,719 @@
     Condition
       Error in `ensure_igraph()`:
       ! Must provide a graph object (provided `NULL`).
+
+# star_impl basic
+
+    Code
+      star_impl(n = 5, mode = "out", center = 0)
+    Output
+      IGRAPH D--- 5 4 -- 
+      + edges:
+      [1] 1->2 1->3 1->4 1->5
+
+---
+
+    Code
+      star_impl(n = 6, mode = "in", center = 1)
+    Output
+      IGRAPH D--- 6 5 -- 
+      + edges:
+      [1] 1->2 3->2 4->2 5->2 6->2
+
+---
+
+    Code
+      star_impl(n = 4, mode = "undirected", center = 0)
+    Output
+      IGRAPH U--- 4 3 -- 
+      + edges:
+      [1] 1--2 1--3 1--4
+
+# ring_impl basic
+
+    Code
+      ring_impl(n = 5, directed = FALSE, mutual = FALSE, circular = TRUE)
+    Output
+      IGRAPH U--- 5 5 -- 
+      + edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
+---
+
+    Code
+      ring_impl(n = 4, directed = TRUE, mutual = FALSE, circular = FALSE)
+    Output
+      IGRAPH D--- 4 3 -- 
+      + edges:
+      [1] 1->2 2->3 3->4
+
+# full_impl basic
+
+    Code
+      full_impl(n = 4, directed = FALSE, loops = FALSE)
+    Output
+      IGRAPH U--- 4 6 -- 
+      + edges:
+      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+
+---
+
+    Code
+      full_impl(n = 3, directed = TRUE, loops = FALSE)
+    Output
+      IGRAPH D--- 3 6 -- 
+      + edges:
+      [1] 1->2 1->3 2->1 2->3 3->1 3->2
+
+# kary_tree_impl basic
+
+    Code
+      kary_tree_impl(n = 7, children = 2, type = c("out", "in", "undirected"))
+    Output
+      IGRAPH D--- 7 6 -- 
+      + edges:
+      [1] 1->2 1->3 2->4 2->5 3->6 3->7
+
+---
+
+    Code
+      kary_tree_impl(n = 10, children = 3, type = c("in", "out", "undirected"))
+    Output
+      IGRAPH D--- 10 9 -- 
+      + edges:
+      [1]  2->1  3->1  4->1  5->2  6->2  7->2  8->3  9->3 10->3
+
+# barabasi_game_impl basic
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "bag")
+    Output
+      IGRAPH U--- 10 18 -- 
+      + edges:
+       [1] 1-- 2 1-- 2 2-- 3 1-- 3 2-- 4 2-- 4 2-- 5 2-- 5 4-- 6 2-- 6 2-- 7 1-- 7
+      [13] 3-- 8 2-- 8 8-- 9 5-- 9 6--10 5--10
+
+---
+
+    Code
+      barabasi_game_impl(n = 10, power = 1, m = 2, directed = FALSE, algo = "psumtree")
+    Output
+      IGRAPH U--- 10 17 -- 
+      + edges:
+       [1] 1-- 2 1-- 3 2-- 3 1-- 4 2-- 4 2-- 5 4-- 5 1-- 6 3-- 6 6-- 7 3-- 7 6-- 8
+      [13] 2-- 8 3-- 9 5-- 9 2--10 6--10
+
+# grg_game_impl basic
+
+    Code
+      grg_game_impl(nodes = 10, radius = 0.3, torus = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 12 -- 
+      + edges:
+       [1] 3-- 5 3-- 6 5-- 6 5-- 7 5-- 8 6-- 8 7-- 8 7-- 9 7--10 8-- 9 8--10 9--10
+      
+      $x
+       [1] 0.08565451 0.15145413 0.45222514 0.45939554 0.55956278 0.61872370
+       [7] 0.76201957 0.82545284 0.86690370 0.95857358
+      
+      $y
+       [1] 0.07820721 0.85018913 0.08700766 0.73223568 0.33212277 0.14562638
+       [7] 0.53326474 0.32235478 0.49679861 0.31410636
+      
+
+# watts_strogatz_game_impl basic
+
+    Code
+      watts_strogatz_game_impl(dim = 1, size = 10, nei = 2, p = 0.1)
+    Output
+      IGRAPH U--- 10 20 -- 
+      + edges:
+       [1] 1-- 2 2-- 6 2-- 3 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10 1-- 8 1-- 9
+      [13] 2--10 2-- 4 3-- 5 4-- 6 5-- 7 6-- 8 7-- 9 8--10
+
+# distances_impl basic
+
+    Code
+      distances_impl(graph = g, from = V(g), to = V(g), mode = c("out", "in", "all",
+        "total"))
+    Output
+           [,1] [,2] [,3] [,4] [,5]
+      [1,]    0    1    2    2    1
+      [2,]    1    0    1    2    2
+      [3,]    2    1    0    1    2
+      [4,]    2    2    1    0    1
+      [5,]    1    2    2    1    0
+
+# diameter_impl basic
+
+    Code
+      diameter_impl(graph = g, directed = FALSE, unconnected = TRUE)
+    Output
+      $res
+      [1] 5
+      
+      $from
+      [1] 0
+      
+      $to
+      [1] 5
+      
+      $vertex_path
+      [1] 0 1 2 3 4 5
+      
+      $edge_path
+      [1] 0 1 2 3 4
+      
+
+# get_shortest_paths_impl basic
+
+    Code
+      get_shortest_paths_impl(graph = g, from = 1, to = 3, mode = c("out", "in",
+        "all", "total"))
+    Output
+      $vertices
+      $vertices[[1]]
+      + 3/5 vertices:
+      [1] 1 2 3
+      
+      
+      $edges
+      $edges[[1]]
+      + 2/5 edges:
+      [1] 1--2 2--3
+      
+      
+      $parents
+      [1] -1  0  1 -2  0
+      
+      $inbound_edges
+      [1] -1  0  1 -1  4
+      
+
+# subcomponent_impl basic
+
+    Code
+      subcomponent_impl(graph = g, v = 1, mode = c("all", "out", "in"))
+    Output
+      + 3/6 vertices, named:
+      [1] A B C
+
+# betweenness_impl basic
+
+    Code
+      betweenness_impl(graph = g, vids = V(g), directed = FALSE)
+    Output
+      [1] 6 0 0 0 0
+
+# harmonic_centrality_impl basic
+
+    Code
+      harmonic_centrality_impl(graph = g, vids = V(g), mode = c("out", "in", "all",
+        "total"))
+    Output
+      [1] 4.0 2.5 2.5 2.5 2.5
+
+# pagerank_impl basic
+
+    Code
+      pagerank_impl(graph = g, vids = V(g), directed = TRUE, damping = 0.85)
+    Output
+      $vector
+      [1] 0.2 0.2 0.2 0.2 0.2
+      
+      $value
+      [1] 1
+      
+      $options
+      NULL
+      
+
+# hub_score_impl basic
+
+    Code
+      out
+    Output
+      $value
+      [1] 4
+      
+      $options
+      $options$bmat
+      [1] "I"
+      
+      $options$n
+      [1] 5
+      
+      $options$which
+      [1] "LA"
+      
+      $options$nev
+      [1] 1
+      
+      $options$tol
+      [1] 0
+      
+      $options$ncv
+      [1] 0
+      
+      $options$ldv
+      [1] 0
+      
+      $options$ishift
+      [1] 1
+      
+      $options$maxiter
+      [1] 3000
+      
+      $options$nb
+      [1] 1
+      
+      $options$mode
+      [1] 1
+      
+      $options$start
+      [1] 1
+      
+      $options$sigma
+      [1] 0
+      
+      $options$sigmai
+      [1] 0
+      
+      $options$info
+      [1] 0
+      
+      $options$iter
+      [1] 1
+      
+      $options$nconv
+      [1] 1
+      
+      $options$numop
+      [1] 4
+      
+      $options$numopb
+      [1] 0
+      
+      $options$numreo
+      [1] 4
+      
+      
+
+# authority_score_impl basic
+
+    Code
+      out
+    Output
+      $value
+      [1] 4
+      
+      $options
+      $options$bmat
+      [1] "I"
+      
+      $options$n
+      [1] 5
+      
+      $options$which
+      [1] "LA"
+      
+      $options$nev
+      [1] 1
+      
+      $options$tol
+      [1] 0
+      
+      $options$ncv
+      [1] 0
+      
+      $options$ldv
+      [1] 0
+      
+      $options$ishift
+      [1] 1
+      
+      $options$maxiter
+      [1] 3000
+      
+      $options$nb
+      [1] 1
+      
+      $options$mode
+      [1] 1
+      
+      $options$start
+      [1] 1
+      
+      $options$sigma
+      [1] 0
+      
+      $options$sigmai
+      [1] 0
+      
+      $options$info
+      [1] 0
+      
+      $options$iter
+      [1] 1
+      
+      $options$nconv
+      [1] 1
+      
+      $options$numop
+      [1] 4
+      
+      $options$numopb
+      [1] 0
+      
+      $options$numreo
+      [1] 4
+      
+      
+
+# community_walktrap_impl basic
+
+    Code
+      community_walktrap_impl(graph = g, steps = 4)
+    Output
+      $merges
+           [,1] [,2]
+      [1,]    4    5
+      [2,]    1    2
+      [3,]    3    6
+      [4,]    0    7
+      [5,]    8    9
+      
+      $modularity
+      [1] -0.17346939 -0.07142857  0.03061224  0.19387755  0.35714286  0.00000000
+      
+      $membership
+      [1] 0 0 0 1 1 1
+      
+
+# community_fastgreedy_impl basic
+
+    Code
+      community_fastgreedy_impl(graph = g)
+    Output
+      $merges
+           [,1] [,2]
+      [1,]    2    1
+      [2,]    0    6
+      [3,]    5    4
+      [4,]    3    8
+      [5,]    9    7
+      
+      $modularity
+      [1] -1.734694e-01 -7.142857e-02  9.183673e-02  1.938776e-01  3.571429e-01
+      [6]  5.551115e-17
+      
+      $membership
+      [1] 1 1 1 0 0 0
+      
+
+# community_edge_betweenness_impl basic
+
+    Code
+      community_edge_betweenness_impl(graph = g, directed = FALSE)
+    Output
+      $removed_edges
+      [1] 2 0 1 3 4 5 6
+      
+      $edge_betweenness
+      [1] 9 1 2 1 1 2 1
+      
+      $merges
+           [,1] [,2]
+      [1,]    5    4
+      [2,]    6    3
+      [3,]    2    1
+      [4,]    8    0
+      [5,]    7    9
+      
+      $bridges
+      [1] 7 6 4 3 1
+      
+      $modularity
+      [1] -0.17346939 -0.07142857  0.09183673  0.19387755  0.35714286  0.00000000
+      
+      $membership
+      [1] 0 0 0 1 1 1
+      
+
+# edge_connectivity_impl basic
+
+    Code
+      edge_connectivity_impl(graph = g)
+    Output
+      [1] 2
+
+# vertex_connectivity_impl basic
+
+    Code
+      vertex_connectivity_impl(graph = g)
+    Output
+      [1] 2
+
+# create_bipartite_impl basic
+
+    Code
+      create_bipartite_impl(types = c(FALSE, FALSE, TRUE, TRUE), edges = c(0, 2, 0, 3,
+        1, 2, 1, 3), directed = FALSE)
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--3 1--4 2--3 2--4
+
+# bipartite_game_impl basic
+
+    Code
+      bipartite_game_impl(type = "gnp", n1 = 5, n2 = 5, p = 0.3, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 2-- 6 4-- 6 5-- 6 1-- 7 4-- 7 4-- 8 3-- 9 3--10 4--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
+---
+
+    Code
+      bipartite_game_impl(type = "gnm", n1 = 5, n2 = 5, m = 10, directed = FALSE)
+    Output
+      $graph
+      IGRAPH U--- 10 10 -- 
+      + edges:
+       [1] 1-- 6 3-- 7 5-- 7 1-- 8 3-- 8 4-- 8 2-- 9 5-- 9 2--10 3--10
+      
+      $types
+       [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+      
+
+# decompose_impl basic
+
+    Code
+      decompose_impl(graph = g, mode = c("weak", "strong"))
+    Output
+      [[1]]
+      IGRAPH UN-- 3 2 -- 
+      + attr: name (v/c)
+      + edges (vertex names):
+      [1] A--B B--C
+      
+      [[2]]
+      IGRAPH UN-- 2 1 -- 
+      + attr: name (v/c)
+      + edge (vertex names):
+      [1] D--E
+      
+
+# neighborhood_impl basic
+
+    Code
+      neighborhood_impl(graph = g, order = 1, vids = V(g), mode = c("all", "out",
+        "in"))
+    Output
+      [[1]]
+      + 3/5 vertices:
+      [1] 1 2 5
+      
+      [[2]]
+      + 3/5 vertices:
+      [1] 2 1 3
+      
+      [[3]]
+      + 3/5 vertices:
+      [1] 3 2 4
+      
+      [[4]]
+      + 3/5 vertices:
+      [1] 4 3 5
+      
+      [[5]]
+      + 3/5 vertices:
+      [1] 5 1 4
+      
+
+# neighborhood_size_impl basic
+
+    Code
+      neighborhood_size_impl(graph = g, order = 1, vids = V(g), mode = c("all", "out",
+        "in"))
+    Output
+      [1] 3 3 3 3 3
+
+# is_chordal_impl basic
+
+    Code
+      is_chordal_impl(graph = g, alpha = alpha_vec, alpham1 = alpham1_vec)
+    Output
+      $chordal
+      [1] TRUE
+      
+      $fillin
+      numeric(0)
+      
+      $newgraph
+      IGRAPH U--- 4 6 -- Full graph
+      + attr: name (g/c), loops (g/l)
+      + edges:
+      [1] 1--2 1--3 1--4 2--3 2--4 3--4
+      
+
+---
+
+    Code
+      is_chordal_impl(graph = g2, alpha = alpha_vec2, alpham1 = alpham1_vec2)
+    Output
+      $chordal
+      [1] FALSE
+      
+      $fillin
+      [1] 1 3
+      
+      $newgraph
+      IGRAPH U--- 4 5 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l)
+      + edges:
+      [1] 1--2 2--3 3--4 1--4 2--4
+      
+
+# get_adjacency_impl basic
+
+    Code
+      get_adjacency_impl(graph = g, type = c("both", "upper", "lower"))
+    Output
+           [,1] [,2] [,3]
+      [1,]    0    1    1
+      [2,]    1    0    1
+      [3,]    1    1    0
+
+# write_graph_edgelist_impl basic
+
+    Code
+      content
+    Output
+      [1] "0 1" "0 2" "1 2"
+
+# read_graph_edgelist_impl basic
+
+    Code
+      read_graph_edgelist_impl(instream = tmp, n = 3, directed = FALSE)
+    Output
+      IGRAPH U--- 3 3 -- 
+      + edges:
+      [1] 1--2 2--3 1--3
+
+# degree_sequence_game_impl basic
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "configuration")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 2--4 3--3 1--4 1--2
+
+---
+
+    Code
+      degree_sequence_game_impl(out_deg = c(2, 2, 2, 2), method = "vl")
+    Output
+      IGRAPH U--- 4 4 -- 
+      + edges:
+      [1] 1--2 1--4 2--3 3--4
+
+# connect_neighborhood_impl basic
+
+    Code
+      connect_neighborhood_impl(graph = g, order = 1, mode = c("all", "out", "in"))
+    Condition
+      Warning in `connect_neighborhood_impl()`:
+      At vendor/cigraph/src/operators/connect_neighborhood.c:85 : Order smaller than two, graph will be unchanged.
+    Output
+      IGRAPH U--- 5 5 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l)
+      + edges:
+      [1] 1--2 2--3 3--4 4--5 1--5
+
+# eccentricity_impl basic
+
+    Code
+      eccentricity_impl(graph = g, vids = V(g), mode = c("out", "in", "all"))
+    Output
+      [1] 2 2 2 2 2
+
+# radius_impl basic
+
+    Code
+      radius_impl(graph = g, mode = c("out", "in", "all"))
+    Output
+      [1] 2
+
+# graph_center_impl basic
+
+    Code
+      graph_center_impl(graph = g, mode = c("out", "in", "all"))
+    Output
+      + 1/5 vertex:
+      [1] 1
+
+# maximal_cliques_impl basic
+
+    Code
+      maximal_cliques_impl(graph = g, min_size = 1, max_size = 0)
+    Output
+      [[1]]
+      + 4/4 vertices:
+      [1] 1 2 4 3
+      
+
+# independent_vertex_sets_impl basic
+
+    Code
+      independent_vertex_sets_impl(graph = g, min_size = 1, max_size = 0)
+    Output
+      [[1]]
+      + 1/5 vertex:
+      [1] 1
+      
+      [[2]]
+      + 1/5 vertex:
+      [1] 2
+      
+      [[3]]
+      + 1/5 vertex:
+      [1] 3
+      
+      [[4]]
+      + 1/5 vertex:
+      [1] 4
+      
+      [[5]]
+      + 1/5 vertex:
+      [1] 5
+      
+      [[6]]
+      + 2/5 vertices:
+      [1] 1 3
+      
+      [[7]]
+      + 2/5 vertices:
+      [1] 1 4
+      
+      [[8]]
+      + 2/5 vertices:
+      [1] 2 4
+      
+      [[9]]
+      + 2/5 vertices:
+      [1] 2 5
+      
+      [[10]]
+      + 2/5 vertices:
+      [1] 3 5
+      
 

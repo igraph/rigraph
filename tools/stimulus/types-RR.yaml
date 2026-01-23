@@ -21,6 +21,7 @@ REAL:
         ECROSSW: 1.0 - sqrt(edge_density(graph))
         ELENW: edge_density(graph) / 10
         NEDISTW: 0.2 * (1 - edge_density(graph))
+        VCOUNT: vcount
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
 
@@ -102,6 +103,81 @@ TRANSITIVITY_MODE:
     DEFAULT:
         NAN: c("nan", "zero")
     INCONV: '%I% <- switch_igraph_arg(%I%, "nan" = 0L, "zero" = 1L)'
+
+STAR_MODE:
+    DEFAULT:
+        OUT: c("out", "in", "undirected", "mutual")
+        IN: c("in", "out", "undirected", "mutual")
+        UNDIRECTED: c("undirected", "out", "in", "mutual")
+        MUTUAL: c("mutual", "out", "in", "undirected")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "out" = 0L, "in" = 1L, "undirected" = 2L, "mutual" = 3L)'
+
+BARABASI_ALGORITHM:
+    DEFAULT:
+        BAG: c("bag", "psumtree", "psumtree_multiple")
+        PSUMTREE: c("psumtree", "bag", "psumtree_multiple")
+        PSUMTREE_MULTIPLE: c("psumtree_multiple", "bag", "psumtree")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "bag" = 0L, "psumtree" = 1L, "psumtree_multiple" = 2L)'
+
+ERDOS_RENYI_TYPE:
+    DEFAULT:
+        GNP: c("gnp", "gnm")
+        GNM: c("gnm", "gnp")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "gnp" = 0L, "gnm" = 1L)'
+
+DEGSEQ_MODE:
+    DEFAULT:
+        CONFIGURATION: c("configuration", "fast_heur_simple", "configuration_simple", "edge_switching_simple", "vl")
+        VL: c("vl", "configuration", "fast_heur_simple", "configuration_simple", "edge_switching_simple")
+        FAST_HEUR_SIMPLE: c("fast_heur_simple", "configuration", "configuration_simple", "edge_switching_simple", "vl")
+        CONFIGURATION_SIMPLE: c("configuration_simple", "configuration", "fast_heur_simple", "edge_switching_simple", "vl")
+        EDGE_SWITCHING_SIMPLE: c("edge_switching_simple", "configuration", "fast_heur_simple", "configuration_simple", "vl")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "configuration" = 0L, "vl" = 1L, "fast_heur_simple" = 2L, "configuration_simple" = 3L, "edge_switching_simple" = 4L)'
+
+ADJACENCY_MODE:
+    DEFAULT:
+        DIRECTED: c("directed", "undirected", "upper", "lower", "min", "plus", "max")
+        UNDIRECTED: c("undirected", "directed", "upper", "lower", "min", "plus", "max")
+        UPPER: c("upper", "lower", "directed", "undirected", "min", "plus", "max")
+        LOWER: c("lower", "upper", "directed", "undirected", "min", "plus", "max")
+        MIN: c("min", "max", "plus", "directed", "undirected", "upper", "lower")
+        PLUS: c("plus", "min", "max", "directed", "undirected", "upper", "lower")
+        MAX: c("max", "min", "plus", "directed", "undirected", "upper", "lower")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "directed" = 0L, "undirected" = 1L, "upper" = 2L, "lower" = 3L, "min" = 4L, "plus" = 5L, "max" = 6L)'
+
+SPINCOMMUPDATE:
+    DEFAULT:
+        SIMPLE: c("simple", "config")
+        CONFIG: c("config", "simple")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "config" = 1L)'
+
+SPINGLASS_IMPLEMENTATION:
+    DEFAULT:
+        ORIG: c("orig", "neg")
+        NEG: c("neg", "orig")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "orig" = 0L, "neg" = 1L)'
+
+FWALGORITHM:
+    DEFAULT:
+        AUTOMATIC: c("automatic", "original", "tree")
+        ORIGINAL: c("original", "automatic", "tree")
+        TREE: c("tree", "automatic", "original")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "automatic" = 0L, "original" = 1L, "tree" = 2L)'
+
+LAYOUT_GRID:
+    DEFAULT:
+        GRID: c("grid", "nogrid", "auto")
+        NOGRID: c("nogrid", "grid", "auto")
+        AUTO: c("auto", "grid", "nogrid")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "grid" = 0L, "nogrid" = 1L, "auto" = 2L)'
+
+VCONNNEI:
+    DEFAULT:
+        ERROR: c("error", "number_of_nodes", "ignore", "negative")
+        NUMBER_OF_NODES: c("number_of_nodes", "error", "ignore", "negative")
+        IGNORE: c("ignore", "error", "number_of_nodes", "negative")
+        NEGATIVE: c("negative", "error", "number_of_nodes", "ignore")
+    INCONV: '%I% <- switch_igraph_arg(%I%, "error" = 0L, "number_of_nodes" = 1L, "ignore" = 2L, "negative" = 3L)'
 
 INT:
     INCONV: '%I% <- as.integer(%I%)'
@@ -476,7 +552,6 @@ PAGERANKOPT:
 
 DEPRECATED:
     CALL: {}
-    HEADER: ~
     INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
 
 LSETYPE:
