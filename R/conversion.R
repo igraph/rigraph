@@ -243,6 +243,10 @@ get.adjacency.dense <- function(
     )
   }
   loops <- igraph_match_arg(loops)
+  # Map "ignore" to "none" for get_adjacency_impl
+  if (loops == "ignore") {
+    loops <- "none"
+  }
 
   if (!is.null(weights)) {
     weights <- as.numeric(weights)

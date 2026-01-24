@@ -2155,7 +2155,6 @@ asym_pref <- function(
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   ensure_igraph(graph)
   mode <- igraph_match_arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   connect_neighborhood_impl(
     graph = graph,
