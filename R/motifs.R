@@ -473,8 +473,12 @@ motifs_randesu_callback <- function(
   callback
 ) {
   # nocov start
-  lifecycle::deprecate_soft("2.1.0", "motifs_randesu_callback()", "motifs(callback)")
-  
+  lifecycle::deprecate_soft(
+    "2.1.0",
+    "motifs_randesu_callback()",
+    "motifs(callback)"
+  )
+
   motifs(
     graph = graph,
     size = size,
