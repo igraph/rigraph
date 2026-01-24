@@ -9319,6 +9319,48 @@ community_infomap_impl <- function(
   res
 }
 
+community_voronoi_impl <- function(
+  graph,
+  lengths = NULL,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
+  radius = -1
+) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && !all(is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  mode <- switch_igraph_arg(
+    mode,
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L,
+    "total" = 3L
+  )
+  radius <- as.numeric(radius)
+
+  on.exit(.Call(R_igraph_finalizer))
+  # Function call
+  res <- .Call(
+    R_igraph_community_voronoi,
+    graph,
+    lengths,
+    weights,
+    mode,
+    radius
+  )
+  if (igraph_opt("return.vs.es")) {
+    res$generators <- create_vs(graph, res$generators)
+  }
+  res
+}
+
 graphlets_impl <- function(
   graph,
   weights = NULL,

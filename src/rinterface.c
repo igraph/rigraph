@@ -12512,6 +12512,63 @@ SEXP R_igraph_community_infomap(SEXP graph, SEXP e_weights, SEXP v_weights, SEXP
 }
 
 /*-------------------------------------------/
+/ igraph_community_voronoi                   /
+/-------------------------------------------*/
+SEXP R_igraph_community_voronoi(SEXP graph, SEXP lengths, SEXP weights, SEXP mode, SEXP radius) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_membership;
+  igraph_vector_int_t c_generators;
+  igraph_real_t c_modularity;
+  igraph_vector_t c_lengths;
+  igraph_vector_t c_weights;
+  igraph_neimode_t c_mode;
+  igraph_real_t c_radius;
+  SEXP membership;
+  SEXP generators;
+  SEXP modularity;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  Rz_SEXP_to_igraph(graph, &c_graph);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_membership, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  IGRAPH_R_CHECK(igraph_vector_int_init(&c_generators, 0));
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_generators);
+  if (!Rf_isNull(weights)) {
+    Rz_SEXP_to_vector(weights, &c_weights);
+  }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_community_voronoi(&c_graph, &c_membership, &c_generators, &c_modularity, (Rf_isNull(lengths) ? 0 : c_lengths), (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_radius));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(membership=Ry_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(generators=Ry_igraph_vector_int_to_SEXPp1(&c_generators));
+  igraph_vector_int_destroy(&c_generators);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(modularity=NEW_NUMERIC(1));
+  REAL(modularity)[0]=c_modularity;
+  SET_VECTOR_ELT(r_result, 0, membership);
+  SET_VECTOR_ELT(r_result, 1, generators);
+  SET_VECTOR_ELT(r_result, 2, modularity);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("generators"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("modularity"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_graphlets                           /
 /-------------------------------------------*/
 SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {

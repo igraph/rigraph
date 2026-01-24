@@ -661,7 +661,7 @@ igraph_community_leading_eigenvector:
 
 igraph_community_voronoi:
     # Needs custom handling - optional pointer parameter generates incorrect conditional
-    IGNORE: RR, RC, RInit
+    # IGNORE: RR, RC, RInit
 
 #######################################
 # Graphlets
