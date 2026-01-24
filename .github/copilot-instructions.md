@@ -9,8 +9,8 @@ igraph/rigraph is an R package for network analysis and graph theory with a C/C+
 ## Common Commands for Copilot Chat
 
 - Load for development: `pkgload::load_all()`
-- Run tests: `testthat::test_local()`
-- Run tests for a single file: `testthat::test_local(filter = "foo")`
+- Run tests: `testthat::test_local(reporter = "check")`
+- Run tests for a single file: `testthat::test_local(filter = "foo", reporter = "check")`
 - Format code: `air format .`
 - Update documentation: `devtools::document()`
 - Build package: `devtools::build()`
