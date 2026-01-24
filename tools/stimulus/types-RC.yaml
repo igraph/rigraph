@@ -107,6 +107,36 @@ REAL:
             PROTECT(%I%=NEW_NUMERIC(1));
             REAL(%I%)[0]=%C%;
 
+DOUBLE:
+    CTYPE: double
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_REAL(%I%);
+            %C% = REAL(%I%)[0];
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=NEW_NUMERIC(1));
+            REAL(%I%)[0]=%C%;
+
+ERROR:
+    CTYPE: igraph_error_t
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = (igraph_error_t) INTEGER(%I%)[0];
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=NEW_INTEGER(1));
+            INTEGER(%I%)[0]=(int) %C%;
+
 BOOLEAN:
     CTYPE: igraph_bool_t
     CALL:
