@@ -21,7 +21,7 @@
     Condition
       Error in `empty_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: graph/type_indexededgelist.c:xx
+      Source: <file>:<line>
 
 # add_edges_impl basic
 
@@ -157,7 +157,7 @@
     Condition
       Error in `wheel_impl()`:
       ! Invalid number of vertices. Invalid vertex ID
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # hypercube_impl basic
 
@@ -184,7 +184,7 @@
     Condition
       Error in `hypercube_impl()`:
       ! The requested hypercube graph dimension (10000) is too high. It must be no greater than 57. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # square_lattice_impl basic
 
@@ -212,7 +212,7 @@
     Condition
       Error in `square_lattice_impl()`:
       ! Invalid dimension vector. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # triangular_lattice_impl basic
 
@@ -239,7 +239,7 @@
     Condition
       Error in `triangular_lattice_impl()`:
       ! Invalid dimension vector. Invalid value
-      Source: constructors/lattices.c:xx
+      Source: <file>:<line>
 
 # path_graph_impl basic
 
@@ -266,7 +266,7 @@
     Condition
       Error in `path_graph_impl()`:
       ! The number of vertices must be non-negative, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # cycle_graph_impl basic
 
@@ -293,7 +293,7 @@
     Condition
       Error in `cycle_graph_impl()`:
       ! The number of vertices must be non-negative, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # symmetric_tree_impl basic
 
@@ -320,7 +320,7 @@
     Condition
       Error in `symmetric_tree_impl()`:
       ! The number of branches must be positive at each level. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # regular_tree_impl basic
 
@@ -348,7 +348,7 @@
     Condition
       Error in `regular_tree_impl()`:
       ! Height of regular tree must be positive, got -1. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # full_citation_impl basic
 
@@ -375,7 +375,7 @@
     Condition
       Error in `full_citation_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: constructors/full.c:xx
+      Source: <file>:<line>
 
 # atlas_impl basic
 
@@ -401,7 +401,7 @@
     Condition
       Error in `atlas_impl()`:
       ! No such graph in atlas. The graph index must be less than 1253. Invalid value
-      Source: constructors/atlas.c:xx
+      Source: <file>:<line>
 
 # extended_chordal_ring_impl basic
 
@@ -428,7 +428,7 @@
     Condition
       Error in `extended_chordal_ring_impl()`:
       ! An extended chordal ring has at least 3 nodes. Invalid value
-      Source: constructors/regular.c:xx
+      Source: <file>:<line>
 
 # graph_power_impl basic
 
@@ -490,7 +490,7 @@
     Condition
       Error in `de_bruijn_impl()`:
       ! `m' and `n' should be non-negative in a de Bruijn graph. Invalid value
-      Source: constructors/de_bruijn.c:xx
+      Source: <file>:<line>
 
 # kautz_impl basic
 
@@ -512,7 +512,7 @@
     Condition
       Error in `kautz_impl()`:
       ! `m' and `n' should be non-negative in a Kautz graph. Invalid value
-      Source: constructors/kautz.c:xx
+      Source: <file>:<line>
 
 # lcf_vector_impl basic
 
@@ -532,7 +532,7 @@
     Condition
       Error in `lcf_vector_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: graph/type_indexededgelist.c:xx
+      Source: <file>:<line>
 
 # mycielski_graph_impl basic
 
@@ -550,7 +550,7 @@
     Condition
       Error in `mycielski_graph_impl()`:
       ! The Mycielski graph order must not be negative. Invalid value
-      Source: constructors/mycielskian.c:xx
+      Source: <file>:<line>
 
 # adjlist_impl basic
 
@@ -568,7 +568,7 @@
     Condition
       Error in `adjlist_impl()`:
       ! Invalid (negative or too large) vertex ID. Invalid vertex ID
-      Source: constructors/basic_constructors.c:xx
+      Source: <file>:<line>
 
 # full_bipartite_impl basic
 
@@ -605,7 +605,7 @@
     Condition
       Error in `full_bipartite_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: <file>:<line>
 
 # full_multipartite_impl basic
 
@@ -662,7 +662,7 @@
     Condition
       Error in `full_multipartite_impl()`:
       ! Number of vertices must not be negative in any partition. Invalid value
-      Source: constructors/full.c:xx
+      Source: <file>:<line>
 
 # realize_degree_sequence_impl basic
 
@@ -694,7 +694,7 @@
     Condition
       Error in `realize_degree_sequence_impl()`:
       ! The sum of degrees must be even for an undirected graph. Invalid value
-      Source: misc/degree_sequence.cpp:xx
+      Source: <file>:<line>
 
 # realize_bipartite_degree_sequence_impl basic
 
@@ -726,7 +726,7 @@
     Condition
       Error in `realize_bipartite_degree_sequence_impl()`:
       ! The given bidegree sequence cannot be realized as a bipartite simple graph. Invalid value
-      Source: misc/degree_sequence.cpp:xx
+      Source: <file>:<line>
 
 # circulant_impl basic
 
@@ -755,7 +755,7 @@
     Condition
       Error in `circulant_impl()`:
       ! Number of nodes = -1 must be non-negative. Invalid value
-      Source: constructors/circulant.c:xx
+      Source: <file>:<line>
 
 # generalized_petersen_impl basic
 
@@ -774,7 +774,7 @@
     Condition
       Error in `generalized_petersen_impl()`:
       ! n = -1 must be at least 3. Invalid value
-      Source: constructors/generalized_petersen.c:xx
+      Source: <file>:<line>
 
 # turan_impl basic
 
@@ -806,7 +806,7 @@
     Condition
       Error in `turan_impl()`:
       ! Number of vertices must not be negative, got -1. Invalid value
-      Source: constructors/full.c:xx
+      Source: <file>:<line>
 
 # erdos_renyi_game_gnp_impl basic
 
@@ -833,7 +833,7 @@
     Condition
       Error in `erdos_renyi_game_gnp_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: <file>:<line>
 
 # erdos_renyi_game_gnm_impl basic
 
@@ -860,7 +860,7 @@
     Condition
       Error in `erdos_renyi_game_gnm_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: <file>:<line>
 
 # growing_random_game_impl basic
 
@@ -899,7 +899,7 @@
     Condition
       Error in `growing_random_game_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/growing_random.c:xx
+      Source: <file>:<line>
 
 # preference_game_impl basic
 
@@ -924,7 +924,7 @@
     Condition
       Error in `preference_game_impl()`:
       ! The number of vertices must be non-negative. Invalid value
-      Source: games/preference.c:xx
+      Source: <file>:<line>
 
 # asymmetric_preference_game_impl basic
 
@@ -954,7 +954,7 @@
     Condition
       Error in `asymmetric_preference_game_impl()`:
       ! The number of vertices must not be negative. Invalid value
-      Source: games/preference.c:xx
+      Source: <file>:<line>
 
 # rewire_edges_impl basic
 
@@ -1018,7 +1018,7 @@
     Condition
       Error in `forest_fire_game_impl()`:
       ! Insufficient memory for forest fire model. Out of memory
-      Source: games/forestfire.c:xx
+      Source: <file>:<line>
 
 # simple_interconnected_islands_game_impl basic
 
@@ -1040,7 +1040,7 @@
     Condition
       Error in `simple_interconnected_islands_game_impl()`:
       ! Number of islands cannot be negative, got -1. Invalid value
-      Source: games/islands.c:xx
+      Source: <file>:<line>
 
 # chung_lu_game_impl basic
 
@@ -1070,7 +1070,7 @@
     Condition
       Error in `chung_lu_game_impl()`:
       ! Vertex weights must not be negative in Chung-Lu model, got -1. Invalid value
-      Source: games/chung_lu.c:xx
+      Source: <file>:<line>
 
 # static_fitness_game_impl basic
 
@@ -1100,7 +1100,7 @@
     Condition
       Error in `static_fitness_game_impl()`:
       ! Number of edges cannot be negative, got -1. Invalid value
-      Source: games/static_fitness.c:xx
+      Source: <file>:<line>
 
 # static_power_law_game_impl basic
 
@@ -1132,7 +1132,7 @@
     Condition
       Error in `static_power_law_game_impl()`:
       ! Number of nodes cannot be negative, got -1. Invalid value
-      Source: games/static_fitness.c:xx
+      Source: <file>:<line>
 
 # k_regular_game_impl basic
 
@@ -1161,7 +1161,7 @@
     Condition
       Error in `k_regular_game_impl()`:
       ! Number of nodes must be non-negative. Invalid value
-      Source: games/k_regular.c:xx
+      Source: <file>:<line>
 
 # sbm_game_impl basic
 
@@ -1191,7 +1191,7 @@
     Condition
       Error in `sbm_game_impl()`:
       ! Sum of the block sizes (5) must equal the number of vertices (-1). Invalid value
-      Source: games/sbm.c:xx
+      Source: <file>:<line>
 
 # hsbm_game_impl basic
 
@@ -1210,7 +1210,7 @@
     Condition
       Error in `hsbm_game_impl()`:
       ! `n' must be positive for HSBM. Invalid value
-      Source: games/sbm.c:xx
+      Source: <file>:<line>
 
 # hsbm_list_game_impl basic
 
@@ -1239,7 +1239,7 @@
     Condition
       Error in `hsbm_list_game_impl()`:
       ! `n' must be positive for HSBM. Invalid value
-      Source: games/sbm.c:xx
+      Source: <file>:<line>
 
 # correlated_game_impl basic
 
@@ -1298,7 +1298,7 @@
     Condition
       Error in `correlated_pair_game_impl()`:
       ! Invalid number of vertices. Invalid value
-      Source: games/erdos_renyi.c:xx
+      Source: <file>:<line>
 
 # dot_product_game_impl basic
 
@@ -1361,7 +1361,7 @@
     Condition
       Error in `sample_sphere_surface_impl()`:
       ! Sphere must be at least two dimensional to sample from surface. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: <file>:<line>
 
 # sample_sphere_volume_impl basic
 
@@ -1390,7 +1390,7 @@
     Condition
       Error in `sample_sphere_volume_impl()`:
       ! Sphere must be at least two dimensional to sample from surface. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: <file>:<line>
 
 # sample_dirichlet_impl basic
 
@@ -1409,7 +1409,7 @@
     Condition
       Error in `sample_dirichlet_impl()`:
       ! Number of samples should be non-negative, got -1. Invalid value
-      Source: games/dotproduct.c:xx
+      Source: <file>:<line>
 
 # are_adjacent_impl basic
 
@@ -3191,7 +3191,7 @@
     Condition
       Error in `centralization_degree_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: <file>:<line>
 
 # centralization_betweenness_impl basic
 
@@ -3252,7 +3252,7 @@
     Condition
       Error in `centralization_betweenness_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: <file>:<line>
 
 # centralization_closeness_impl basic
 
@@ -3313,7 +3313,7 @@
     Condition
       Error in `centralization_closeness_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: <file>:<line>
 
 # centralization_eigenvector_centrality_impl basic
 
@@ -3505,7 +3505,7 @@
     Condition
       Error in `centralization_eigenvector_centrality_tmax_impl()`:
       ! Number of vertices must not be negative. Invalid value
-      Source: centrality/centralization.c:xx
+      Source: <file>:<line>
 
 # assortativity_nominal_impl basic
 
@@ -4010,7 +4010,7 @@
       NAs introduced by coercion
       Error in `is_graphical_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # bfs_simple_impl basic
 
@@ -4195,7 +4195,7 @@
     Condition
       Error in `bipartite_game_gnp_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: <file>:<line>
 
 # bipartite_game_gnm_impl basic
 
@@ -4232,7 +4232,7 @@
     Condition
       Error in `bipartite_game_gnm_impl()`:
       ! Invalid number of vertices for bipartite graph. Invalid value
-      Source: misc/bipartite.c:xx
+      Source: <file>:<line>
 
 # get_laplacian_impl basic
 
@@ -5467,7 +5467,7 @@
       NAs introduced by coercion
       Error in `compare_communities_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # modularity_impl basic
 
@@ -5676,7 +5676,7 @@
       NAs introduced by coercion
       Error in `split_join_distance_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # community_infomap_impl basic
 
@@ -5804,7 +5804,7 @@
       hrg_sample_impl(hrg = NULL)
     Condition
       Error in `hrg_sample_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_sample_many_impl basic
@@ -5835,7 +5835,7 @@
       hrg_sample_many_impl(hrg = NULL, num_samples = 2)
     Condition
       Error in `hrg_sample_many_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_game_impl basic
@@ -5857,7 +5857,7 @@
       hrg_game_impl(hrg = NULL)
     Condition
       Error in `hrg_game_impl()`:
-      ! At vendor/cigraph/src/hrg/hrg_types.cc:xx : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
+      ! At vendor/cigraph/src/hrg/hrg_types.cc:2561 : Assertion failed: n >= 0. This is an unexpected igraph error; please report this as a bug, along with the steps to reproduce it.
       Please restart your R session to avoid crashes or other surprising behavior.
 
 # hrg_consensus_impl errors
@@ -5892,7 +5892,7 @@
     Condition
       Error in `hrg_create_impl()`:
       ! HRG probability vector size (1) should be equal to the number of internal nodes (2). Invalid value
-      Source: hrg/hrg.cc:xx
+      Source: <file>:<line>
 
 # hrg_resize_impl basic
 
@@ -5922,7 +5922,7 @@
     Condition
       Error in `hrg_resize_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # hrg_size_impl basic
 
@@ -5938,7 +5938,7 @@
     Condition
       Error in `hrg_size_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # from_hrg_dendrogram_impl basic
 
@@ -5962,7 +5962,7 @@
     Condition
       Error in `from_hrg_dendrogram_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # get_adjacency_sparse_impl basic
 
@@ -6218,7 +6218,7 @@
     Condition
       Error in `motifs_randesu_no_impl()`:
       ! Cut probability vector size (1) must agree with motif size (3). Invalid value
-      Source: misc/motifs.c:xx
+      Source: <file>:<line>
 
 # dyad_census_impl basic
 
@@ -7133,7 +7133,7 @@
       NAs introduced by coercion
       Error in `isoclass_create_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # isomorphic_vf2_impl basic
 
@@ -7687,7 +7687,7 @@
       NAs introduced by coercion
       Error in `graph_count_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # is_matching_impl basic
 
@@ -8130,7 +8130,7 @@
     Condition
       Error in `eigen_adjacency_impl()`:
       ! 'LAPACK' algorithm not implemented yet. Unimplemented function call
-      Source: linalg/eigen.c:xx
+      Source: <file>:<line>
 
 # eigen_adjacency_impl errors
 
@@ -8191,7 +8191,7 @@
       NAs introduced by coercion
       Error in `power_law_fit_impl()`:
       ! xmin must be greater than zero. Invalid value
-      Source: misc/power_law_fit.c:xx
+      Source: <file>:<line>
 
 # sir_impl basic
 
@@ -9683,7 +9683,7 @@
     Condition
       Error in `dim_select_impl()`:
       ! Need at least one singular value for dimensionality selection. Invalid value
-      Source: misc/embedding.c:xx
+      Source: <file>:<line>
 
 # solve_lsap_impl basic
 
@@ -9816,7 +9816,7 @@
     Condition
       Error in `eulerian_cycle_impl()`:
       ! The graph does not have an Eulerian cycle. Input problem has no solution
-      Source: paths/eulerian.c:xx
+      Source: <file>:<line>
 
 ---
 
@@ -9960,7 +9960,7 @@
       NAs introduced by coercion
       Error in `from_prufer_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # to_prufer_impl basic
 
@@ -10004,7 +10004,7 @@
       NAs introduced by coercion
       Error in `tree_from_parent_vector_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # is_complete_impl basic
 
@@ -10064,7 +10064,7 @@
       NAs introduced by coercion
       Error in `tree_game_impl()`:
       ! The value nan is not representable as an integer. Invalid value
-      Source: rinterface_extra.c:xx
+      Source: <file>:<line>
 
 # vertex_coloring_greedy_impl basic
 
@@ -10461,7 +10461,7 @@
     Condition
       Error in `famous_impl()`:
       ! NonexistentGraph is not a known graph. See the documentation for valid graph names. Invalid value
-      Source: constructors/famous.c:xx
+      Source: <file>:<line>
 
 # constraint_impl errors
 

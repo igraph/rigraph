@@ -49,7 +49,8 @@ expect_snapshot_igraph_error <- function(x, ...) {
     {{ x }},
     error = TRUE,
     transform = function(y) {
-      gsub(":(\\d+)", ":xx", y)
+      # Scrub file name and line number from "Source: filename:linenumber"
+      gsub("Source: [^:]+:(\\d+|xx|<linenumber>)", "Source: <file>:<line>", y)
     },
     ...
   ))
