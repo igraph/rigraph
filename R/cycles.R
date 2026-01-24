@@ -86,52 +86,24 @@ find_cycle <- function(graph, mode = c("out", "in", "all", "total")) {
 #'
 #' @family cycles
 #' @cdocs igraph_simple_cycles
+#' @param ... These dots are for future extensions and must be empty.
+#' @param callback Optional function to call for each cycle found. If provided,
+#'   the function should accept two arguments: `vertices` (integer vector of vertex
+#'   IDs in the cycle, 1-based indexing) and `edges` (integer vector of edge IDs
+#'   in the cycle, 1-based indexing). The function should return `TRUE` to continue
+#'   the search or `FALSE` to stop it. If `NULL` (the default), all cycles are
+#'   collected and returned as a list.
+#' @return If `callback` is `NULL`, returns a list with two elements: `vertices`
+#'   (list of integer vectors with vertex IDs) and `edges` (list of integer vectors
+#'   with edge IDs). If `callback` is provided, returns `NULL` invisibly.
 #' @export
+#' @cdocs igraph_simple_cycles igraph_simple_cycles_callback
 
 simple_cycles <- function(
   graph,
+  ...,
   mode = c("out", "in", "all", "total"),
   min = NULL,
-  max = NULL
-) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  simple_cycles_impl(
-    graph = graph,
-    mode = mode,
-    min_cycle_length = min %||% -1,
-    max_cycle_length = max %||% -1
-  )
-}
-
-#' Find simple cycles with a callback function
-#'
-#' @description
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function searches for simple cycles in a graph and calls a user-provided
-#' callback function for each cycle found. A cycle is called simple if it has no
-#' repeated vertices.
-#'
-#' @inheritParams simple_cycles
-#' @param callback A function to call for each cycle found. The function should
-#'   accept two arguments: `vertices` (integer vector of vertex IDs in the cycle,
-#'   1-based indexing) and `edges` (integer vector of edge IDs in the cycle,
-#'   1-based indexing). The function should return `TRUE` to continue the search
-#'   or `FALSE` to stop it.
-#' @return `NULL`, invisibly. This function is called for its side effects
-#'   (calling the callback function for each cycle).
-#' @seealso [simple_cycles()], [find_cycle()]
-#'
-#' @export
-#' @family cycles
-#' @cdocs igraph_simple_cycles_callback
-#'
-#' @examples
-#' g <- graph_from_literal(A -+ B -+ C -+ A -+ D -+ E +- F -+ A)
-#' count <- 0
-#' simple_cycles_callback(g, callback = function(vertices, edges) {
 #'   count <<- count + 1
 #'   TRUE  # continue search
 #' })
