@@ -137,7 +137,7 @@ ERROR:
     INCONV:
         IN: |-
             IGRAPH_R_CHECK_INT(%I%);
-            %C% = (igraph_error_t) INTEGER(%I%)[0];
+            %C% = (igraph_error_t) REAL(%I%)[0];
 
 BOOLEAN:
     CTYPE: igraph_bool_t

@@ -18413,7 +18413,7 @@ SEXP R_igraph_strerror(SEXP igraph_errno) {
   SEXP r_result;
                                         /* Convert input */
   IGRAPH_R_CHECK_INT(igraph_errno);
-  c_igraph_errno = (igraph_error_t) INTEGER(igraph_errno)[0];
+  c_igraph_errno = (igraph_error_t) REAL(igraph_errno)[0];
                                         /* Call igraph */
   c_result=igraph_strerror(c_igraph_errno);
 
