@@ -4548,7 +4548,8 @@
       edgelist_percolation_impl(edges = "a")
     Condition
       Error in `edgelist_percolation_impl()`:
-      ! REAL() can only be applied to a 'numeric', not a 'character'
+      ! Expected numeric or integer vector, got type 16. Invalid value
+      Source: <file>:<line>
 
 # is_clique_impl basic
 
