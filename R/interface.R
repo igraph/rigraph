@@ -553,7 +553,7 @@ get_edge_ids <- function(graph, vp, directed = TRUE, error = FALSE) {
     list(return.vs.es = FALSE),
     get_eids_impl(
       graph,
-      as_igraph_vs(graph, vp) - 1,
+      as_igraph_vs(graph, vp),
       directed,
       error
     )
