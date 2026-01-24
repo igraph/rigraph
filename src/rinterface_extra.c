@@ -3056,23 +3056,23 @@ SEXP Ry_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
 }
 
 /* Convert SEXP list of graphs to igraph_vector_ptr_t */
-igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *ptr, 
+igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *ptr,
                                           igraph_t **storage) {
   igraph_integer_t n = Rf_xlength(graphlist);
-  
+
   /* Allocate storage for the graphs */
   *storage = (igraph_t*) R_alloc(n, sizeof(igraph_t));
-  
+
   /* Initialize the vector_ptr */
   IGRAPH_R_CHECK(igraph_vector_ptr_init(ptr, n));
-  
+
   /* Convert each graph - use non-copying version to avoid memory leaks */
   for (igraph_integer_t i = 0; i < n; i++) {
     SEXP item = VECTOR_ELT(graphlist, i);
     IGRAPH_R_CHECK(Rz_SEXP_to_igraph(item, &(*storage)[i]));
     VECTOR(*ptr)[i] = &(*storage)[i];
   }
-  
+
   return IGRAPH_SUCCESS;
 }
 
@@ -3080,7 +3080,7 @@ igraph_error_t Rz_SEXP_to_graph_ptr_list(SEXP graphlist, igraph_vector_ptr_t *pt
 SEXP Ry_igraph_graph_ptr_list_to_SEXP(const igraph_vector_ptr_t *ptr) {
   SEXP result;
   igraph_integer_t n = igraph_vector_ptr_size(ptr);
-  
+
   PROTECT(result = NEW_LIST(n));
   for (igraph_integer_t i = 0; i < n; i++) {
     igraph_t *g = (igraph_t*) VECTOR(*ptr)[i];
@@ -4627,23 +4627,6 @@ SEXP Rx_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
   return result;
 }
 
-SEXP Rx_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
-
-  igraph_t g;
-  igraph_vector_int_t res;
-  igraph_bool_t bycol=LOGICAL(pbycol)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(graph, &g);
-  igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_get_edgelist(&g, &res, bycol));
-  PROTECT(result=Ry_igraph_vector_int_to_SEXP(&res));
-  igraph_vector_int_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP Rx_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) {
 
   igraph_t g;
@@ -5072,38 +5055,6 @@ SEXP Rx_igraph_intersection(SEXP pgraphs, SEXP pedgemaps) {
   }
 
   UNPROTECT(2);
-  return result;
-}
-
-SEXP Rx_igraph_difference(SEXP pleft, SEXP pright) {
-
-  igraph_t left, right;
-  igraph_t res;
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pleft, &left);
-  Rz_SEXP_to_igraph(pright, &right);
-  IGRAPH_R_CHECK(igraph_difference(&res, &left, &right));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP Rx_igraph_complementer(SEXP pgraph, SEXP ploops) {
-
-  igraph_t g;
-  igraph_t res;
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  Rz_SEXP_to_igraph(pgraph, &g);
-  IGRAPH_R_CHECK(igraph_complementer(&res, &g, loops));
-  PROTECT(result=Ry_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-
-  UNPROTECT(1);
   return result;
 }
 
@@ -7783,18 +7734,6 @@ SEXP Rx_igraph_get_graph_id(SEXP graph) {
 }
 
 // Wrapper functions for functions not in aaa-auto.R
-SEXP Rx_igraph_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_weighted_adjacency(SEXP adjmatrix, SEXP mode, SEXP loops) {
-  return R_igraph_weighted_adjacency(adjmatrix, mode, loops);
-}
-
-SEXP Rx_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
-  return R_igraph_create_bipartite(types, edges, directed);
-}
-
 SEXP Rx_igraph_finalizer(void) {
   return R_igraph_finalizer();
 }
