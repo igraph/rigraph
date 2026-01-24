@@ -417,12 +417,11 @@ min_cut <- function(
     }
   } else {
     if (value.only) {
-      res <- .Call(
-        Rx_igraph_st_mincut_value,
-        graph,
-        as_igraph_vs(graph, source) - 1,
-        as_igraph_vs(graph, target) - 1,
-        capacity
+      res <- st_mincut_value_impl(
+        graph = graph,
+        source = source,
+        target = target,
+        capacity = capacity
       )
     } else {
       res <- st_mincut_impl(
@@ -526,12 +525,10 @@ vertex_connectivity <- function(
   if (is.null(source) && is.null(target)) {
     vertex_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(Rx_igraph_finalizer))
-    .Call(
-      Rx_igraph_st_vertex_connectivity,
-      graph,
-      as_igraph_vs(graph, source) - 1,
-      as_igraph_vs(graph, target) - 1
+    st_vertex_connectivity_impl(
+      graph = graph,
+      source = source,
+      target = target
     )
   } else {
     cli::cli_abort(c(
@@ -631,12 +628,10 @@ edge_connectivity <- function(
   if (is.null(source) && is.null(target)) {
     edge_connectivity_impl(graph = graph, checks = checks)
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit(.Call(Rx_igraph_finalizer))
-    .Call(
-      Rx_igraph_st_edge_connectivity,
-      graph,
-      as_igraph_vs(graph, source) - 1,
-      as_igraph_vs(graph, target) - 1
+    st_edge_connectivity_impl(
+      graph = graph,
+      source = source,
+      target = target
     )
   } else {
     cli::cli_abort(c(
@@ -653,12 +648,10 @@ edge_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   if (is.null(source) || is.null(target)) {
     cli::cli_abort("Both source and target must be given")
   }
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_edge_disjoint_paths,
-    graph,
-    as_igraph_vs(graph, source) - 1,
-    as_igraph_vs(graph, target) - 1
+  edge_disjoint_paths_impl(
+    graph = graph,
+    source = source,
+    target = target
   )
 }
 
@@ -670,12 +663,10 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
     cli::cli_abort("Both source and target must be given")
   }
 
-  on.exit(.Call(Rx_igraph_finalizer))
-  .Call(
-    Rx_igraph_vertex_disjoint_paths,
-    graph,
-    as_igraph_vs(graph, source) - 1,
-    as_igraph_vs(graph, target) - 1
+  vertex_disjoint_paths_impl(
+    graph = graph,
+    source = source,
+    target = target
   )
 }
 
