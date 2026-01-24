@@ -3496,6 +3496,54 @@ igraph_error_t Rz_SEXP_to_matrix_complex_copy(SEXP pakl, igraph_matrix_complex_t
   return IGRAPH_SUCCESS;
 }
 
+void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *res) {
+  /* Assumes sm is a dgCMatrix from Matrix package (column-compressed sparse matrix).
+   * dgCMatrix structure has slots: i (row indices), p (column pointers), x (values), Dim (dimensions).
+   * We convert this to igraph's triplet format and let igraph handle the internal representation.
+   */
+  SEXP slot_i, slot_p, slot_x, slot_dim;
+  int *i_ptr, *p_ptr;
+  double *x_ptr;
+  int *dim_ptr;
+  igraph_integer_t nrow, ncol, nzmax;
+  int col, idx;
+  
+  /* Get the slots from the S4 object */
+  slot_i = GET_SLOT(sm, Rf_install("i"));
+  slot_p = GET_SLOT(sm, Rf_install("p"));
+  slot_x = GET_SLOT(sm, Rf_install("x"));
+  slot_dim = GET_SLOT(sm, Rf_install("Dim"));
+  
+  /* Extract dimensions */
+  dim_ptr = INTEGER(slot_dim);
+  nrow = (igraph_integer_t) dim_ptr[0];
+  ncol = (igraph_integer_t) dim_ptr[1];
+  
+  /* Get number of non-zero elements */
+  nzmax = (igraph_integer_t) Rf_xlength(slot_i);
+  
+  /* Initialize the sparse matrix in triplet format */
+  if (igraph_sparsemat_init(res, nrow, ncol, nzmax) != IGRAPH_SUCCESS) {
+    igraph_error("Failed to initialize sparse matrix", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  
+  /* Get pointers to the data */
+  i_ptr = INTEGER(slot_i);
+  p_ptr = INTEGER(slot_p);
+  x_ptr = REAL(slot_x);
+  
+  /* Convert from column-compressed to triplet format by iterating through columns */
+  for (col = 0; col < ncol; col++) {
+    for (idx = p_ptr[col]; idx < p_ptr[col + 1]; idx++) {
+      /* Add entry (row, col, value) */
+      if (igraph_sparsemat_entry(res, i_ptr[idx], col, x_ptr[idx]) != IGRAPH_SUCCESS) {
+        igraph_sparsemat_destroy(res);
+        igraph_error("Failed to add entry to sparse matrix", __FILE__, __LINE__, IGRAPH_FAILURE);
+      }
+    }
+  }
+}
+
 igraph_error_t Rz_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   *res = *Rx_igraph_get_pointer(graph);
 

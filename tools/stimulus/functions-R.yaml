@@ -58,13 +58,9 @@ igraph_create:
 # TODO: temporarily disabled
 igraph_adjacency:
 
-# TODO: temporarily disabled - needs SPARSEMAT converter implementation
 igraph_sparse_adjacency:
-    IGNORE: RR, RC
 
-# TODO: temporarily disabled - needs SPARSEMAT converter implementation
 igraph_sparse_weighted_adjacency:
-    IGNORE: RR, RC
 
 # TODO: temporarily disabled
 igraph_weighted_adjacency:
@@ -121,10 +117,7 @@ igraph_turan:
         name: Turan graph
       GATTR-PARAM: n, r
 
-# TODO: temporarily disabled
 igraph_weighted_sparsemat:
-    # Needs SPARSEMAT converter implementation
-    IGNORE: RR, RC
 
 #######################################
 # Constructors, games
