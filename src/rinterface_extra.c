@@ -3324,6 +3324,15 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
   
   int *p = INTEGER(p_slot);
   int *i = INTEGER(i_slot);
+  
+  /* Handle both numeric and integer x values */
+  int need_unprotect = 0;
+  if (TYPEOF(x_slot) == INTSXP) {
+    /* Convert integers to reals */
+    x_slot = PROTECT(Rf_coerceVector(x_slot, REALSXP));
+    need_unprotect = 1;
+  }
+  
   double *x = REAL(x_slot);
   
   /* Initialize sparse matrix in triplet format */
@@ -3334,6 +3343,17 @@ void Rz_SEXP_to_sparsemat(SEXP sm, igraph_sparsemat_t *sp) {
     for (igraph_integer_t j = p[col]; j < p[col + 1]; j++) {
       igraph_sparsemat_entry(sp, i[j], col, x[j]);
     }
+  }
+  
+  /* Compress the sparse matrix to column-compressed format */
+  igraph_sparsemat_t tmp;
+  igraph_sparsemat_compress(sp, &tmp);
+  igraph_sparsemat_destroy(sp);
+  *sp = tmp;
+  
+  /* Clean up if we converted */
+  if (need_unprotect) {
+    UNPROTECT(1);
   }
 }
 
