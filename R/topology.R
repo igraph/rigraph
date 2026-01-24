@@ -1326,7 +1326,6 @@ transitive_closure <- function(graph) {
   )
 }
 
-#' Find isomorphisms with a callback function
 #' Find isomorphisms between two graphs using VF2 algorithm
 #'
 #' @description
@@ -1423,7 +1422,7 @@ isomorphisms_vf2 <- function(
         TRUE
       }
     )
-    return(list(map12 = map12_list, map21 = map21_list))
+    list(map12 = map12_list, map21 = map21_list)
   } else {
     # Callback mode: call user function
     get_isomorphisms_vf2_callback_closure_impl(
@@ -1438,4 +1437,3 @@ isomorphisms_vf2 <- function(
     invisible(NULL)
   }
 }
-

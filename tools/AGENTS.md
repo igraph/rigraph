@@ -116,8 +116,7 @@ In `tools/stimulus/functions-R.yaml`, mark the original callback function as ign
 
 ```yaml
 igraph_cliques_callback:
-    # Has callback parameter
-    IGNORE: RR, RC, RInit
+    IGNORE: RR, RC, RInit  # Has callback parameter
 
 igraph_cliques_callback_closure:
     PARAMS: |-
@@ -126,6 +125,7 @@ igraph_cliques_callback_closure:
 ```
 
 The `CLOSURE` type is already defined in `tools/stimulus/types-RC.yaml` and `types-RR.yaml`. It automatically:
+
 - Validates that the argument is a function
 - Wraps the callback in `tryCatch()` for error handling
 
@@ -138,12 +138,13 @@ make -f Makefile-cigraph src/rinterface.c R/aaa-auto.R
 ```
 
 This creates:
+
 - `*_callback_closure_impl()` function in `R/aaa-auto.R`
 - `R_igraph_*_callback_closure()` function in `src/rinterface.c`
 
 #### 7. Register in cpp11.cpp
 
-Add extern declaration and registration entry in `src/cpp11.cpp`:
+Run `cpp11::cpp_register()` . This adds an extern declaration and registration entry in `src/cpp11.cpp`:
 
 ```c
 // In extern declarations section:
@@ -155,7 +156,7 @@ extern SEXP R_igraph_cliques_callback_closure(SEXP, SEXP, SEXP, SEXP);
 
 #### 8. Create R Wrapper Function
 
-In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper:
+In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper. Ensure `callback = NULL` as default and provide sensible behavior (collect and return as list). Search for existing non-callback variants.
 
 ```r
 #' Find cliques with a callback function
@@ -187,7 +188,7 @@ In the appropriate R file (e.g., `R/cliques.R`), create a user-facing wrapper:
 #'   count <<- count + 1
 #'   TRUE  # continue search
 #' }, min = 3, max = 4)
-cliques_callback <- function(graph, callback, ..., min = NULL, max = NULL) {
+cliques_callback <- function(graph, ..., min = NULL, max = NULL, callback = NULL) {
   ensure_igraph(graph)
   check_dots_empty()
   
@@ -206,6 +207,7 @@ cliques_callback <- function(graph, callback, ..., min = NULL, max = NULL) {
 ```
 
 **Key points:**
+
 - Mark as experimental with lifecycle badge
 - **Use `...` with `check_dots_empty()` to separate mandatory and optional arguments**
 - Document callback signature clearly
@@ -322,4 +324,3 @@ test_that("cliques_callback handles errors in callback", {
 - Original implementation: PR #2465 (motifs_randesu_callback)
 - Complete implementation: PR #2534 (all callback functions)
 - Stimulus documentation: `tools/py-stimulus/README.md`
-

@@ -248,7 +248,7 @@ clique.number <- function(graph) {
 #'   containing the vertex IDs of a clique. If `callback` is provided, returns
 #'   `NULL` invisibly (the function is called for its side effects).
 #' @cdocs igraph_cliques igraph_cliques_callback
-cliques <- function(graph, ..., min = NULL, max = NULL, callback = NULL) {
+cliques <- function(graph, min = NULL, max = NULL, ..., callback = NULL) {
   ensure_igraph(graph)
   check_dots_empty()
 
@@ -264,7 +264,7 @@ cliques <- function(graph, ..., min = NULL, max = NULL, callback = NULL) {
         TRUE
       }
     )
-    return(cliques_list)
+    cliques_list
   } else {
     # Callback mode: call user function
     cliques_callback_closure_impl(
@@ -300,11 +300,11 @@ largest_cliques <- function(graph) {
 #' @export
 max_cliques <- function(
   graph,
-  ...,
   min = NULL,
   max = NULL,
   subset = NULL,
   file = NULL,
+  ...,
   callback = NULL
 ) {
   ensure_igraph(graph)
@@ -362,7 +362,7 @@ max_cliques <- function(
       cliques_list <- lapply(cliques_list, unsafe_create_vs, graph = graph, verts = V(graph))
     }
     
-    return(cliques_list)
+    cliques_list
   } else {
     # Callback mode: call user function
     if (!is.null(subset)) {
@@ -718,4 +718,3 @@ is_ivs <- function(graph, candidate) {
     candidate = candidate
   )
 }
-

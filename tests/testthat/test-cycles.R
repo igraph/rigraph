@@ -108,5 +108,3 @@ test_that("simple_cycles_callback handles errors in callback", {
     "Error in R callback function"
   )
 })
-
-

@@ -98,9 +98,8 @@ All new functions must include:
 - Argument validation using built-in `check_*()` functions or `igraph_arg_match()`
 
 **For callback functions:**
-- Place callback parameter immediately after the graph parameter
-- Use `...` with `check_dots_empty()` after callback to separate from optional parameters
-- Use `%||%` operator for NULL defaults instead of `if (is.null(...))` statements
+
+- The callback is optional, `callback = NULL` uses a sensible built-in callback or an existing function
 - See [`tools/AGENTS.md`](tools/AGENTS.md) for detailed implementation guide
 
 If exporting a new function from the C library:
