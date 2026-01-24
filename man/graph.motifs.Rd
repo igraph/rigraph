@@ -10,7 +10,7 @@ graph.motifs(graph, size = 3, cut.prob = rep(0, size))
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
-directed graphs and sizes 3-6 in undirected graphs.}
+directed graphs and sizes 3 to 6 in undirected graphs.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size

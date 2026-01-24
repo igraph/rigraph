@@ -1,4 +1,4 @@
-# motifs_randesu_callback output matches expected
+# motifs with callback output matches expected
 
     Code
       cat("Number of motifs found:", length(motif_data), "\n")

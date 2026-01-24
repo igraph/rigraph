@@ -10,7 +10,7 @@ motifs_randesu_callback(graph, size = 3, cut_prob = NULL, callback)
 \item{graph}{Graph object, the input graph.}
 
 \item{size}{The size of the motif, currently sizes 3 and 4 are supported in
-directed graphs and sizes 3-6 in undirected graphs.}
+directed graphs and sizes 3 to 6 in undirected graphs.}
 
 \item{cut_prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size
@@ -18,8 +18,8 @@ of the motif (the \code{size} argument).
 If \code{NULL}, the default, no cuts are made.}
 
 \item{callback}{A function to call for each motif found. The function should
-accept two arguments: \code{vids} (integer vector of vertex IDs in the motif,
-1-based indexing) and \code{isoclass} (the isomorphism class of the motif, 1-based).
+accept two arguments: \code{vids} (integer vector of vertex IDs in the motif)
+and \code{isoclass} (the isomorphism class of the motif).
 The function should return \code{TRUE} to continue the search or \code{FALSE} to stop it.}
 }
 \value{
@@ -27,13 +27,15 @@ The function should return \code{TRUE} to continue the search or \code{FALSE} to
 the callback function for each motif).
 }
 \description{
-This function searches for motifs in a graph and calls a user-provided
-callback function for each motif found.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{motifs_randesu_callback()} is deprecated. Use \code{\link[=motifs]{motifs()}} with the \code{callback}
+argument instead.
 }
 \examples{
 g <- sample_pa(100)
 count <- 0
-motifs_randesu_callback(g, 3, callback = function(vids, isoclass) {
+motifs(g, 3, callback = function(vids, isoclass) {
   count <<- count + 1
   TRUE  # continue search
 })
@@ -49,5 +51,4 @@ Other graph motifs:
 \code{\link{sample_motifs}()}
 }
 \concept{graph motifs}
-\section{Related documentation in the C library}{\href{https://igraph.org/c/html/latest/igraph-Motifs.html#igraph_motifs_randesu_callback}{\code{motifs_randesu_callback()}}.}
-
+\keyword{internal}
