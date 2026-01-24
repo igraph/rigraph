@@ -25,6 +25,7 @@ g \%>\%
 \code{\link[=merge_coords]{merge_coords()}}, \code{\link[=layout_]{layout_()}}.
 
 Other layout modifiers: 
+\code{\link{layout_modifier}()},
 \code{\link{normalize}()}
 
 Other graph layouts: 

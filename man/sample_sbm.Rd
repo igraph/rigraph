@@ -7,7 +7,7 @@
 \usage{
 sample_sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 
-sbm(...)
+sbm(n, pref.matrix, block.sizes, directed = FALSE, loops = FALSE)
 }
 \arguments{
 \item{n}{Number of vertices in the graph.}
@@ -21,11 +21,9 @@ must be symmetric.}
 \item{block.sizes}{Numeric vector giving the number of vertices in each
 group. The sum of the vector must match the number of vertices.}
 
-\item{directed}{Logical scalar, whether to generate a directed graph.}
+\item{directed}{Logical scalar, whether to create a directed graph.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
-
-\item{...}{Passed to \code{sample_sbm()}.}
 }
 \value{
 An igraph graph.

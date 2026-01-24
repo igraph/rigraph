@@ -215,7 +215,7 @@ assortativity <- function(
   assortativity_impl(
     graph = graph,
     values = values,
-    values.in = values.in,
+    values_in = values.in,
     directed = directed,
     normalized = normalized
   )
@@ -230,7 +230,7 @@ assortativity_legacy <- function(
   assortativity_impl(
     graph = graph,
     values = types1,
-    values.in = types2,
+    values_in = types2,
     directed = directed
   )
 }

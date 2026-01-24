@@ -584,43 +584,14 @@ closeness <- function(
   normalized = FALSE,
   cutoff = -1
 ) {
-  # Argument checks
-  ensure_igraph(graph)
-
-  vids <- as_igraph_vs(graph, vids)
-  mode <- switch(
-    igraph.match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  normalized <- as.logical(normalized)
-  cutoff <- as.numeric(cutoff)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(
-    R_igraph_closeness_cutoff,
-    graph,
-    vids - 1,
-    mode,
-    weights,
-    normalized,
-    cutoff
+  closeness_cutoff_impl(
+    graph = graph,
+    vids = vids,
+    mode = mode,
+    weights = weights,
+    normalized = normalized,
+    cutoff = cutoff
   )$res
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- V(graph)$name[vids]
-  }
-  res
 }
 
 #' Deprecated version of `closeness()`
@@ -1020,8 +991,8 @@ arpack <- function(
     cli::cli_warn("Symmetric matrix, setting {.arg complex} to {.code FALSE}.")
   }
 
-  on.exit(.Call(R_igraph_finalizer))
-  res <- .Call(R_igraph_arpack, func, extra, options, env, sym)
+  on.exit(.Call(Rx_igraph_finalizer))
+  res <- .Call(Rx_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -1057,9 +1028,9 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   values[] <- as.numeric(values)
   nev <- as.numeric(nev)
 
-  on.exit(.Call(R_igraph_finalizer))
+  on.exit(.Call(Rx_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(Rx_igraph_arpack_unpack_complex, vectors, values, nev)
 
   res
 }
@@ -1374,7 +1345,7 @@ eigen_centrality <- function(
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
 #'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
 #'   argument is ignored.
-#' @param loops Logical; whether the loop edges are also counted.
+#' @inheritParams degree
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a
@@ -2018,7 +1989,7 @@ alpha.centrality.dense <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
@@ -2065,7 +2036,7 @@ alpha.centrality.sparse <- function(
     attr <- NULL
   } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
-    attr <- "weight"
+    attr <- weights
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
     graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))

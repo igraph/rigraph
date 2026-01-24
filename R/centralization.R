@@ -318,7 +318,7 @@ NULL
 centralize <- function(scores, theoretical.max = 0, normalized = TRUE) {
   centralization_impl(
     scores = scores,
-    theoretical.max = theoretical.max,
+    theoretical_max = theoretical.max,
     normalized = normalized
   )
 }
@@ -385,8 +385,7 @@ centr_degree <- function(
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the `mode` argument of `degree()`. Ignored
 #'   if `graph` is given and the graph is undirected.
-#' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#' @inheritParams centr_degree
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -441,8 +440,7 @@ centr_degree_tmax <- function(
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -478,9 +476,12 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
-  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_centralization_betweenness, graph, directed, normalized)
+  res <- centralization_betweenness_impl(
+    graph = graph,
+    directed = directed,
+    normalized = normalized
+  )
 
   res
 }
@@ -526,8 +527,7 @@ centr_betw_tmax <- function(graph = NULL, nodes = 0, directed = TRUE) {
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
 #'   `closeness()`.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{res}{
@@ -617,8 +617,7 @@ centr_clo_tmax <- function(
 #' eigenvector centralization requires normalized eigenvector centrality scores.
 #' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
-#' @param normalized Logical scalar. Whether to normalize the graph level
-#'   centrality score by dividing by the theoretical maximum.
+#' @inheritParams centr_degree
 #' @return A named list with the following components:
 #'   \describe{
 #'     \item{vector}{

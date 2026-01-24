@@ -7,7 +7,7 @@
 \usage{
 sample_hierarchical_sbm(n, m, rho, C, p)
 
-hierarchical_sbm(...)
+hierarchical_sbm(n, m, rho, C, p)
 }
 \arguments{
 \item{n}{Integer scalar, the number of vertices.}
@@ -28,8 +28,6 @@ differ in different blocks.}
 
 \item{p}{Numeric scalar, the Bernoulli rate of connections between vertices
 in different blocks.}
-
-\item{...}{Passed to \code{sample_hierarchical_sbm()}.}
 }
 \value{
 An igraph graph.

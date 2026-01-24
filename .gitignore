@@ -25,3 +25,5 @@ cran
 /tests/testthat/testthat-problems.rds
 /covr
 /.vscode/launch.json
+/Rplots.pdf
+/_codeql_detected_source_root

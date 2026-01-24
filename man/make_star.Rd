@@ -7,7 +7,7 @@
 \usage{
 make_star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 
-star(...)
+star(n, mode = c("in", "out", "mutual", "undirected"), center = 1)
 }
 \arguments{
 \item{n}{Number of vertices.}
@@ -19,8 +19,6 @@ star is created with mutual edges, \code{undirected}: the edges
 are undirected.}
 
 \item{center}{ID of the center vertex.}
-
-\item{...}{Passed to \code{make_star()}.}
 }
 \value{
 An igraph graph.
@@ -40,13 +38,17 @@ Other deterministic constructors:
 \code{\link{graph_from_literal}()},
 \code{\link{make_}()},
 \code{\link{make_chordal_ring}()},
+\code{\link{make_circulant}()},
 \code{\link{make_empty_graph}()},
 \code{\link{make_full_citation_graph}()},
 \code{\link{make_full_graph}()},
+\code{\link{make_full_multipartite}()},
 \code{\link{make_graph}()},
 \code{\link{make_lattice}()},
 \code{\link{make_ring}()},
-\code{\link{make_tree}()}
+\code{\link{make_tree}()},
+\code{\link{make_turan}()},
+\code{\link{make_wheel}()}
 }
 \concept{Star graph}
 \concept{deterministic constructors}
