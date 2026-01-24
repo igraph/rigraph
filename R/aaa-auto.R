@@ -483,7 +483,8 @@ sparse_adjacency_impl <- function(
   loops = c("once", "none", "twice")
 ) {
   # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE)
+  adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   mode <- switch_igraph_arg(
     mode,
     "directed" = 0L,
@@ -514,7 +515,8 @@ sparse_weighted_adjacency_impl <- function(
   loops = c("once", "none", "twice")
 ) {
   # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE)
+  adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   mode <- switch_igraph_arg(
     mode,
     "directed" = 0L,
@@ -1326,7 +1328,8 @@ weighted_sparsemat_impl <- function(
   loops = FALSE
 ) {
   # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE)
+  A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   directed <- as.logical(directed)
   loops <- as.logical(loops)
 

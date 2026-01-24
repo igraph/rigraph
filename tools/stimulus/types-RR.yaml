@@ -487,7 +487,9 @@ REWIRING_MODE:
     INCONV: '%I% <- switch_igraph_arg(%I%, "simple" = 0L, "simple_loops" = 1L)'
 
 SPARSEMAT:
-    INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+    INCONV: |-
+        requireNamespace("Matrix", quietly = TRUE)
+        %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
 VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
